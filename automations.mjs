@@ -1,0 +1,166 @@
+import {
+  clearApiCache,
+  invokeFetch
+} from "./chunk-3YE7EI7I.mjs";
+import "./chunk-WM7FQU2U.mjs";
+
+// src/public/rest/automations.ts
+var getAutomations = async (query, options) => invokeFetch("automations", {
+  method: "get",
+  pathTemplate: "/api/v1/automations",
+  query,
+  options
+});
+var createAutomation = async (body, options) => invokeFetch("automations", {
+  method: "post",
+  pathTemplate: "/api/v1/automations",
+  body,
+  options
+});
+var getAutomationSettings = async (options) => invokeFetch("automations", {
+  method: "get",
+  pathTemplate: "/api/v1/automations/settings",
+  options
+});
+var updateAutomationSettings = async (body, options) => invokeFetch("automations", {
+  method: "put",
+  pathTemplate: "/api/v1/automations/settings",
+  body,
+  options
+});
+var getAutomationUsageMetrics = async (query, options) => invokeFetch("automations", {
+  method: "get",
+  pathTemplate: "/api/v1/automations/usage",
+  query,
+  options
+});
+var deleteAutomation = async (id, options) => invokeFetch("automations", {
+  method: "delete",
+  pathTemplate: "/api/v1/automations/{id}",
+  pathVariables: { id },
+  options
+});
+var getAutomation = async (id, options) => invokeFetch("automations", {
+  method: "get",
+  pathTemplate: "/api/v1/automations/{id}",
+  pathVariables: { id },
+  options
+});
+var updateAutomation = async (id, body, options) => invokeFetch("automations", {
+  method: "put",
+  pathTemplate: "/api/v1/automations/{id}",
+  pathVariables: { id },
+  body,
+  options
+});
+var copyAutomation = async (id, body, options) => invokeFetch("automations", {
+  method: "post",
+  pathTemplate: "/api/v1/automations/{id}/actions/copy",
+  pathVariables: { id },
+  body,
+  options
+});
+var disableAutomation = async (id, options) => invokeFetch("automations", {
+  method: "post",
+  pathTemplate: "/api/v1/automations/{id}/actions/disable",
+  pathVariables: { id },
+  options
+});
+var enableAutomation = async (id, options) => invokeFetch("automations", {
+  method: "post",
+  pathTemplate: "/api/v1/automations/{id}/actions/enable",
+  pathVariables: { id },
+  options
+});
+var moveAutomation = async (id, body, options) => invokeFetch("automations", {
+  method: "post",
+  pathTemplate: "/api/v1/automations/{id}/actions/move",
+  pathVariables: { id },
+  body,
+  options
+});
+var getAutomationRuns = async (id, query, options) => invokeFetch("automations", {
+  method: "get",
+  pathTemplate: "/api/v1/automations/{id}/runs",
+  pathVariables: { id },
+  query,
+  options
+});
+var queueAutomationRun = async (id, body, options) => invokeFetch("automations", {
+  method: "post",
+  pathTemplate: "/api/v1/automations/{id}/runs",
+  pathVariables: { id },
+  body,
+  options
+});
+var getAutomationRun = async (id, runId, options) => invokeFetch("automations", {
+  method: "get",
+  pathTemplate: "/api/v1/automations/{id}/runs/{runId}",
+  pathVariables: { id, runId },
+  options
+});
+var getAutomationRunDetails = async (id, runId, options) => invokeFetch("automations", {
+  method: "post",
+  pathTemplate: "/api/v1/automations/{id}/runs/{runId}/actions/export",
+  pathVariables: { id, runId },
+  options
+});
+var retryAutomationRun = async (id, runId, options) => invokeFetch("automations", {
+  method: "post",
+  pathTemplate: "/api/v1/automations/{id}/runs/{runId}/actions/retry",
+  pathVariables: { id, runId },
+  options
+});
+var stopAutomationRun = async (id, runId, options) => invokeFetch("automations", {
+  method: "post",
+  pathTemplate: "/api/v1/automations/{id}/runs/{runId}/actions/stop",
+  pathVariables: { id, runId },
+  options
+});
+function clearCache() {
+  return clearApiCache("automations");
+}
+var automationsExport = {
+  getAutomations,
+  createAutomation,
+  getAutomationSettings,
+  updateAutomationSettings,
+  getAutomationUsageMetrics,
+  deleteAutomation,
+  getAutomation,
+  updateAutomation,
+  copyAutomation,
+  disableAutomation,
+  enableAutomation,
+  moveAutomation,
+  getAutomationRuns,
+  queueAutomationRun,
+  getAutomationRun,
+  getAutomationRunDetails,
+  retryAutomationRun,
+  stopAutomationRun,
+  clearCache
+};
+var automations_default = automationsExport;
+export {
+  clearCache,
+  copyAutomation,
+  createAutomation,
+  automations_default as default,
+  deleteAutomation,
+  disableAutomation,
+  enableAutomation,
+  getAutomation,
+  getAutomationRun,
+  getAutomationRunDetails,
+  getAutomationRuns,
+  getAutomationSettings,
+  getAutomationUsageMetrics,
+  getAutomations,
+  moveAutomation,
+  queueAutomationRun,
+  retryAutomationRun,
+  stopAutomationRun,
+  updateAutomation,
+  updateAutomationSettings
+};

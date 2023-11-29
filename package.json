@@ -1,0 +1,264 @@
+{
+  "name": "@qlik/api",
+  "version": "0.0.1",
+  "description": "Exposes functions for interacting with Qlik apis",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qlik-oss/qlik-api-ts.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "ISC",
+  "files": [
+    "docs",
+    "*.js",
+    "*.mjs",
+    "*.d.ts",
+    "*.d.mts"
+  ],
+  "dependencies": {
+    "@qlik/embed-runtime": "^0.5.10",
+    "@qlik/runtime-module-loader": "^0.1.15",
+    "bufferutil": "^4.0.8",
+    "enigma.js": "^2.12.0",
+    "lodash": "^4.17.21",
+    "ws": "^8.14.2"
+  },
+  "engines": {
+    "node": ">=16",
+    "pnpm": ">=8"
+  },
+  "main": "index.js",
+  "module": "index.mjs",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js"
+    },
+    "./api-keys": {
+      "import": "./api-keys.mjs",
+      "require": "./api-keys.js"
+    },
+    "./api-keys.mjs": {
+      "import": "./api-keys.mjs"
+    },
+    "./apps": {
+      "import": "./apps.mjs",
+      "require": "./apps.js"
+    },
+    "./apps.mjs": {
+      "import": "./apps.mjs"
+    },
+    "./audits": {
+      "import": "./audits.mjs",
+      "require": "./audits.js"
+    },
+    "./audits.mjs": {
+      "import": "./audits.mjs"
+    },
+    "./automations": {
+      "import": "./automations.mjs",
+      "require": "./automations.js"
+    },
+    "./automations.mjs": {
+      "import": "./automations.mjs"
+    },
+    "./brands": {
+      "import": "./brands.mjs",
+      "require": "./brands.js"
+    },
+    "./brands.mjs": {
+      "import": "./brands.mjs"
+    },
+    "./collections": {
+      "import": "./collections.mjs",
+      "require": "./collections.js"
+    },
+    "./collections.mjs": {
+      "import": "./collections.mjs"
+    },
+    "./csp-origins": {
+      "import": "./csp-origins.mjs",
+      "require": "./csp-origins.js"
+    },
+    "./csp-origins.mjs": {
+      "import": "./csp-origins.mjs"
+    },
+    "./data-assets": {
+      "import": "./data-assets.mjs",
+      "require": "./data-assets.js"
+    },
+    "./data-assets.mjs": {
+      "import": "./data-assets.mjs"
+    },
+    "./data-connections": {
+      "import": "./data-connections.mjs",
+      "require": "./data-connections.js"
+    },
+    "./data-connections.mjs": {
+      "import": "./data-connections.mjs"
+    },
+    "./data-credentials": {
+      "import": "./data-credentials.mjs",
+      "require": "./data-credentials.js"
+    },
+    "./data-credentials.mjs": {
+      "import": "./data-credentials.mjs"
+    },
+    "./data-files": {
+      "import": "./data-files.mjs",
+      "require": "./data-files.js"
+    },
+    "./data-files.mjs": {
+      "import": "./data-files.mjs"
+    },
+    "./extensions": {
+      "import": "./extensions.mjs",
+      "require": "./extensions.js"
+    },
+    "./extensions.mjs": {
+      "import": "./extensions.mjs"
+    },
+    "./glossaries": {
+      "import": "./glossaries.mjs",
+      "require": "./glossaries.js"
+    },
+    "./glossaries.mjs": {
+      "import": "./glossaries.mjs"
+    },
+    "./groups": {
+      "import": "./groups.mjs",
+      "require": "./groups.js"
+    },
+    "./groups.mjs": {
+      "import": "./groups.mjs"
+    },
+    "./identity-providers": {
+      "import": "./identity-providers.mjs",
+      "require": "./identity-providers.js"
+    },
+    "./identity-providers.mjs": {
+      "import": "./identity-providers.mjs"
+    },
+    "./items": {
+      "import": "./items.mjs",
+      "require": "./items.js"
+    },
+    "./items.mjs": {
+      "import": "./items.mjs"
+    },
+    "./licenses": {
+      "import": "./licenses.mjs",
+      "require": "./licenses.js"
+    },
+    "./licenses.mjs": {
+      "import": "./licenses.mjs"
+    },
+    "./quotas": {
+      "import": "./quotas.mjs",
+      "require": "./quotas.js"
+    },
+    "./quotas.mjs": {
+      "import": "./quotas.mjs"
+    },
+    "./reload-tasks": {
+      "import": "./reload-tasks.mjs",
+      "require": "./reload-tasks.js"
+    },
+    "./reload-tasks.mjs": {
+      "import": "./reload-tasks.mjs"
+    },
+    "./reloads": {
+      "import": "./reloads.mjs",
+      "require": "./reloads.js"
+    },
+    "./reloads.mjs": {
+      "import": "./reloads.mjs"
+    },
+    "./roles": {
+      "import": "./roles.mjs",
+      "require": "./roles.js"
+    },
+    "./roles.mjs": {
+      "import": "./roles.mjs"
+    },
+    "./spaces": {
+      "import": "./spaces.mjs",
+      "require": "./spaces.js"
+    },
+    "./spaces.mjs": {
+      "import": "./spaces.mjs"
+    },
+    "./temp-contents": {
+      "import": "./temp-contents.mjs",
+      "require": "./temp-contents.js"
+    },
+    "./temp-contents.mjs": {
+      "import": "./temp-contents.mjs"
+    },
+    "./tenants": {
+      "import": "./tenants.mjs",
+      "require": "./tenants.js"
+    },
+    "./tenants.mjs": {
+      "import": "./tenants.mjs"
+    },
+    "./themes": {
+      "import": "./themes.mjs",
+      "require": "./themes.js"
+    },
+    "./themes.mjs": {
+      "import": "./themes.mjs"
+    },
+    "./transports": {
+      "import": "./transports.mjs",
+      "require": "./transports.js"
+    },
+    "./transports.mjs": {
+      "import": "./transports.mjs"
+    },
+    "./users": {
+      "import": "./users.mjs",
+      "require": "./users.js"
+    },
+    "./users.mjs": {
+      "import": "./users.mjs"
+    },
+    "./web-integrations": {
+      "import": "./web-integrations.mjs",
+      "require": "./web-integrations.js"
+    },
+    "./web-integrations.mjs": {
+      "import": "./web-integrations.mjs"
+    },
+    "./web-notifications": {
+      "import": "./web-notifications.mjs",
+      "require": "./web-notifications.js"
+    },
+    "./web-notifications.mjs": {
+      "import": "./web-notifications.mjs"
+    },
+    "./webhooks": {
+      "import": "./webhooks.mjs",
+      "require": "./webhooks.js"
+    },
+    "./webhooks.mjs": {
+      "import": "./webhooks.mjs"
+    },
+    "./qix": {
+      "import": "./qix.mjs",
+      "require": "./qix.js"
+    },
+    "./qix.mjs": {
+      "import": "./qix.mjs"
+    },
+    "./auth": {
+      "import": "./auth.mjs",
+      "require": "./auth.js"
+    },
+    "./auth.mjs": {
+      "import": "./auth.mjs"
+    }
+  }
+}
