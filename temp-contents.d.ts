@@ -66,49 +66,6 @@ type UploadTempFileHttpError = {
     status: number;
 };
 /**
- * Request used to create a new upload resource.
- * See [tus.io](http://tus.io) for details.
- *
- * @throws CreateTusHttpError
- */
-declare const createTus: (options?: ApiCallOptions) => Promise<CreateTusHttpResponse>;
-type CreateTusHttpResponse = {
-    data: void;
-    headers: Headers;
-    status: number;
-};
-type CreateTusHttpError = {
-    data: Errors;
-    headers: Headers;
-    status: number;
-};
-/**
- * Request used to apply the bytes contained in the message at a given offset. Note that the tus server only
- * accepts that the Content-Type response header is set to "application/offset+octet-stream".
- * See [tus.io](http://tus.io) for details.
- *
- * Note that the server may return `423 Locked` on this request. This happens if the client attempts to perform
- * concurrent access to the resource, for example, if attempting to do a `HEAD` request during an ongoing `PATCH` request.
- * It can also occur in situations where the connection is unexpectedly dropped between the client and the server
- * and the client attempts to make a new request when the server is still busy processing the upload. When this
- * happens, the client shall, after some period of time, try to resume the upload again.
- *
- * @param id The ID used to uniquely identify the upload.
- * @param body an object with the body content
- * @throws PatchTusHttpError
- */
-declare const patchTus: (id: string, body: unknown, options?: ApiCallOptions) => Promise<PatchTusHttpResponse>;
-type PatchTusHttpResponse = {
-    data: void;
-    headers: Headers;
-    status: number;
-};
-type PatchTusHttpError = {
-    data: Errors;
-    headers: Headers;
-    status: number;
-};
-/**
  * This endpoint is used to retrieve a temporary content file. It returns a valid (`200 OK`) in case the file exists and the user is authorized to view the contents. It returns a `410 Gone` if the file has expired and `404 Not Found` if the criteria is not met.
  * @param id The temporary contents ID.
  * @param query an object with query parameters
@@ -174,29 +131,6 @@ interface TempContentsAPI {
      */
     uploadTempFile: typeof uploadTempFile;
     /**
-     * Request used to create a new upload resource.
-     * See [tus.io](http://tus.io) for details.
-     *
-     * @throws CreateTusHttpError
-     */
-    createTus: typeof createTus;
-    /**
-     * Request used to apply the bytes contained in the message at a given offset. Note that the tus server only
-     * accepts that the Content-Type response header is set to "application/offset+octet-stream".
-     * See [tus.io](http://tus.io) for details.
-     *
-     * Note that the server may return `423 Locked` on this request. This happens if the client attempts to perform
-     * concurrent access to the resource, for example, if attempting to do a `HEAD` request during an ongoing `PATCH` request.
-     * It can also occur in situations where the connection is unexpectedly dropped between the client and the server
-     * and the client attempts to make a new request when the server is still busy processing the upload. When this
-     * happens, the client shall, after some period of time, try to resume the upload again.
-     *
-     * @param id The ID used to uniquely identify the upload.
-     * @param body an object with the body content
-     * @throws PatchTusHttpError
-     */
-    patchTus: typeof patchTus;
-    /**
      * This endpoint is used to retrieve a temporary content file. It returns a valid (`200 OK`) in case the file exists and the user is authorized to view the contents. It returns a `410 Gone` if the file has expired and `404 Not Found` if the criteria is not met.
      * @param id The temporary contents ID.
      * @param query an object with query parameters
@@ -219,4 +153,4 @@ interface TempContentsAPI {
  */
 declare const tempContentsExport: TempContentsAPI;
 
-export { type CreateTusHttpError, type CreateTusHttpResponse, type DetailResponse, type DownloadTempFile200HttpResponse, type DownloadTempFile204HttpResponse, type DownloadTempFile206HttpResponse, type DownloadTempFileHttpError, type DownloadTempFileHttpResponse, type Error, type Errors, type GetTempFileDetails200HttpResponse, type GetTempFileDetails204HttpResponse, type GetTempFileDetailsHttpError, type GetTempFileDetailsHttpResponse, type PatchTusHttpError, type PatchTusHttpResponse, type TempContentsAPI, type UploadTempFileHttpError, type UploadTempFileHttpResponse, clearCache, createTus, tempContentsExport as default, downloadTempFile, getTempFileDetails, patchTus, uploadTempFile };
+export { type DetailResponse, type DownloadTempFile200HttpResponse, type DownloadTempFile204HttpResponse, type DownloadTempFile206HttpResponse, type DownloadTempFileHttpError, type DownloadTempFileHttpResponse, type Error, type Errors, type GetTempFileDetails200HttpResponse, type GetTempFileDetails204HttpResponse, type GetTempFileDetailsHttpError, type GetTempFileDetailsHttpResponse, type TempContentsAPI, type UploadTempFileHttpError, type UploadTempFileHttpResponse, clearCache, tempContentsExport as default, downloadTempFile, getTempFileDetails, uploadTempFile };

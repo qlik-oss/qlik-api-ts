@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-3YE7EI7I.mjs";
-import "./chunk-WM7FQU2U.mjs";
+} from "./chunk-W4J34XGA.mjs";
+import "./chunk-7REWEWCX.mjs";
 
 // src/public/rest/data-files.ts
 var getDataFiles = async (query, options) => invokeFetch("data-files", {
@@ -29,7 +29,7 @@ var deleteDataFiles = async (body, options) => invokeFetch("data-files", {
   body,
   options
 });
-var getDataFileConnections = async (query, options) => invokeFetch("data-files", {
+var getDataFilesConnections = async (query, options) => invokeFetch("data-files", {
   method: "get",
   pathTemplate: "/api/v1/data-files/connections",
   query,
@@ -41,7 +41,7 @@ var getDataFileConnection = async (id, options) => invokeFetch("data-files", {
   pathVariables: { id },
   options
 });
-var getDataFileQuotas = async (options) => invokeFetch("data-files", {
+var getDataFilesQuotas = async (options) => invokeFetch("data-files", {
   method: "get",
   pathTemplate: "/api/v1/data-files/quotas",
   options
@@ -87,9 +87,9 @@ var dataFilesExport = {
   uploadDataFile,
   moveDataFiles,
   deleteDataFiles,
-  getDataFileConnections,
+  getDataFilesConnections,
   getDataFileConnection,
-  getDataFileQuotas,
+  getDataFilesQuotas,
   deleteDataFile,
   getDataFile,
   reuploadDataFile,
@@ -106,9 +106,9 @@ export {
   deleteDataFiles,
   getDataFile,
   getDataFileConnection,
-  getDataFileConnections,
-  getDataFileQuotas,
   getDataFiles,
+  getDataFilesConnections,
+  getDataFilesQuotas,
   moveDataFile,
   moveDataFiles,
   reuploadDataFile,

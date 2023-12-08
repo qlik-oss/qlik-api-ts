@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-3YE7EI7I.mjs";
-import "./chunk-WM7FQU2U.mjs";
+} from "./chunk-W4J34XGA.mjs";
+import "./chunk-7REWEWCX.mjs";
 
 // src/public/rest/api-keys.ts
 var getApiKeys = async (query, options) => invokeFetch("api-keys", {
@@ -17,13 +17,13 @@ var createApiKey = async (body, options) => invokeFetch("api-keys", {
   body,
   options
 });
-var getApiKeyConfig = async (tenantId, options) => invokeFetch("api-keys", {
+var getApiKeysConfig = async (tenantId, options) => invokeFetch("api-keys", {
   method: "get",
   pathTemplate: "/api/v1/api-keys/configs/{tenantId}",
   pathVariables: { tenantId },
   options
 });
-var patchApiKeyConfig = async (tenantId, body, options) => invokeFetch("api-keys", {
+var patchApiKeysConfig = async (tenantId, body, options) => invokeFetch("api-keys", {
   method: "patch",
   pathTemplate: "/api/v1/api-keys/configs/{tenantId}",
   pathVariables: { tenantId },
@@ -55,8 +55,8 @@ function clearCache() {
 var apiKeysExport = {
   getApiKeys,
   createApiKey,
-  getApiKeyConfig,
-  patchApiKeyConfig,
+  getApiKeysConfig,
+  patchApiKeysConfig,
   deleteApiKey,
   getApiKey,
   patchApiKey,
@@ -69,8 +69,8 @@ export {
   api_keys_default as default,
   deleteApiKey,
   getApiKey,
-  getApiKeyConfig,
   getApiKeys,
+  getApiKeysConfig,
   patchApiKey,
-  patchApiKeyConfig
+  patchApiKeysConfig
 };
