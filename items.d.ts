@@ -173,7 +173,7 @@ type ItemTagResponseBody = {
 type ItemViewsResponseBody = {
     /** Total number of views the resource got during the last 28 days. */
     total?: number;
-    /** Trend in views over the last 4 weeks. */
+    /** Trend in views over the last 4 weeks. The trend value is a float number representing a linear regression slope (the x-coefficient) calculated from the weekly unique users views in the preceding 4 weeks. */
     trend?: number;
     /** Number of unique users who viewed the resource during the last 28 days. */
     unique?: number;
@@ -215,6 +215,7 @@ type Meta = {
     /** Is the error a timeout? */
     timeout?: boolean;
 };
+type SpaceTypeEnum = "shared" | "managed" | "personal" | "data";
 /**
  * Finds and returns items that the user has access to.
  *
@@ -263,6 +264,8 @@ declare const getItems: (query: {
     sort?: "+name" | "+createdAt" | "+updatedAt" | "-name" | "-createdAt" | "-updatedAt" | undefined;
     /** The space's unique identifier (supports \'personal\' as spaceId). */
     spaceId?: string | undefined;
+    /** The case-sensitive string used to filter items on space type(s). For example '?spaceType=shared,personal'. */
+    spaceType?: SpaceTypeEnum | undefined;
 }, options?: ApiCallOptions) => Promise<GetItemsHttpResponse>;
 type GetItemsHttpResponse = {
     data: ItemsListItemsResponseBody;
@@ -279,15 +282,15 @@ type GetItemsHttpError = {
 /**
  * Finds and returns the settings for the current tenant.
  *
- * @throws GetItemSettingsHttpError
+ * @throws GetItemsSettingsHttpError
  */
-declare const getItemSettings: (options?: ApiCallOptions) => Promise<GetItemSettingsHttpResponse>;
-type GetItemSettingsHttpResponse = {
+declare const getItemsSettings: (options?: ApiCallOptions) => Promise<GetItemsSettingsHttpResponse>;
+type GetItemsSettingsHttpResponse = {
     data: ItemsSettingsResponseBody;
     headers: Headers;
     status: number;
 };
-type GetItemSettingsHttpError = {
+type GetItemsSettingsHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
     status: number;
@@ -295,15 +298,15 @@ type GetItemSettingsHttpError = {
 /**
  * Updates the settings provided in the patch body.
  * @param body an object with the body content
- * @throws PatchItemSettingsHttpError
+ * @throws PatchItemsSettingsHttpError
  */
-declare const patchItemSettings: (body: ItemsSettingsPatch, options?: ApiCallOptions) => Promise<PatchItemSettingsHttpResponse>;
-type PatchItemSettingsHttpResponse = {
+declare const patchItemsSettings: (body: ItemsSettingsPatch, options?: ApiCallOptions) => Promise<PatchItemsSettingsHttpResponse>;
+type PatchItemsSettingsHttpResponse = {
     data: ItemsSettingsResponseBody;
     headers: Headers;
     status: number;
 };
-type PatchItemSettingsHttpError = {
+type PatchItemsSettingsHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
     status: number;
@@ -396,7 +399,7 @@ type GetItemCollectionsHttpError = {
     status: number;
 };
 /**
- * Finds and returns the published items for a given item.
+ * Finds and returns the published items for a given item. This endpoint is particularly useful for finding the published copies of an app or a qvapp when you want to replace the content of a published copy with new information from the source item.
  *
  * @param itemId The item's unique identifier
  * @param query an object with query parameters
@@ -441,15 +444,15 @@ interface ItemsAPI {
     /**
      * Finds and returns the settings for the current tenant.
      *
-     * @throws GetItemSettingsHttpError
+     * @throws GetItemsSettingsHttpError
      */
-    getItemSettings: typeof getItemSettings;
+    getItemsSettings: typeof getItemsSettings;
     /**
      * Updates the settings provided in the patch body.
      * @param body an object with the body content
-     * @throws PatchItemSettingsHttpError
+     * @throws PatchItemsSettingsHttpError
      */
-    patchItemSettings: typeof patchItemSettings;
+    patchItemsSettings: typeof patchItemsSettings;
     /**
      * Deletes an item and removes the item from all collections.
      *
@@ -481,7 +484,7 @@ interface ItemsAPI {
      */
     getItemCollections: typeof getItemCollections;
     /**
-     * Finds and returns the published items for a given item.
+     * Finds and returns the published items for a given item. This endpoint is particularly useful for finding the published copies of an app or a qvapp when you want to replace the content of a published copy with new information from the source item.
      *
      * @param itemId The item's unique identifier
      * @param query an object with query parameters
@@ -498,4 +501,4 @@ interface ItemsAPI {
  */
 declare const itemsExport: ItemsAPI;
 
-export { type CollectionLinksResponseBody, type CollectionMetaResponseBody, type CollectionResultResponseBody, type CollectionTypes, type CollectionsLinksResponseBody, type DeleteItemHttpError, type DeleteItemHttpResponse, type ErrorResponseBody, type GetItemCollectionsHttpError, type GetItemCollectionsHttpResponse, type GetItemHttpError, type GetItemHttpResponse, type GetItemSettingsHttpError, type GetItemSettingsHttpResponse, type GetItemsHttpError, type GetItemsHttpResponse, type GetPublishedItemsHttpError, type GetPublishedItemsHttpResponse, type ItemLinksResponseBody, type ItemMetaResponseBody, type ItemResourceTypeEnum, type ItemResultResponseBody, type ItemTagResponseBody, type ItemViewsResponseBody, type ItemViewsWeeksResponseBody, type ItemsAPI, type ItemsLinksResponseBody, type ItemsListItemCollectionsResponseBody, type ItemsListItemsResponseBody, type ItemsResourceSizeResponseBody, type ItemsResultResponseBody, type ItemsSettingsPatch, type ItemsSettingsResponseBody, type ItemsUpdateItemRequestBody, type Link, type Meta, type PatchItemSettingsHttpError, type PatchItemSettingsHttpResponse, type ServiceError, type UpdateItemHttpError, type UpdateItemHttpResponse, clearCache, itemsExport as default, deleteItem, getItem, getItemCollections, getItemSettings, getItems, getPublishedItems, patchItemSettings, updateItem };
+export { type CollectionLinksResponseBody, type CollectionMetaResponseBody, type CollectionResultResponseBody, type CollectionTypes, type CollectionsLinksResponseBody, type DeleteItemHttpError, type DeleteItemHttpResponse, type ErrorResponseBody, type GetItemCollectionsHttpError, type GetItemCollectionsHttpResponse, type GetItemHttpError, type GetItemHttpResponse, type GetItemsHttpError, type GetItemsHttpResponse, type GetItemsSettingsHttpError, type GetItemsSettingsHttpResponse, type GetPublishedItemsHttpError, type GetPublishedItemsHttpResponse, type ItemLinksResponseBody, type ItemMetaResponseBody, type ItemResourceTypeEnum, type ItemResultResponseBody, type ItemTagResponseBody, type ItemViewsResponseBody, type ItemViewsWeeksResponseBody, type ItemsAPI, type ItemsLinksResponseBody, type ItemsListItemCollectionsResponseBody, type ItemsListItemsResponseBody, type ItemsResourceSizeResponseBody, type ItemsResultResponseBody, type ItemsSettingsPatch, type ItemsSettingsResponseBody, type ItemsUpdateItemRequestBody, type Link, type Meta, type PatchItemsSettingsHttpError, type PatchItemsSettingsHttpResponse, type ServiceError, type SpaceTypeEnum, type UpdateItemHttpError, type UpdateItemHttpResponse, clearCache, itemsExport as default, deleteItem, getItem, getItemCollections, getItems, getItemsSettings, getPublishedItems, patchItemsSettings, updateItem };

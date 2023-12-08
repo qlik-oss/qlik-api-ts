@@ -20,7 +20,8 @@ type Assignment = {
     readonly spaceId: string;
     /** The unique identifier for the tenant. */
     readonly tenantId: string;
-    type: "user" | "group";
+    /** The type of assignment such as user or group */
+    type: AssignmentType;
     /** The date and time when the space was updated. */
     readonly updatedAt?: string;
     /** The ID of the user who updated the assignment. */
@@ -32,8 +33,9 @@ type AssignmentCreate = {
     /** The roles assigned to the assigneeId. */
     roles: RoleType[];
     /** The type of assignment such as user or group */
-    type: "user" | "group";
+    type: AssignmentType;
 };
+type AssignmentType = "user" | "group";
 type AssignmentUpdate = {
     /** The roles assigned to the assigneeId. */
     roles?: RoleType[];
@@ -324,6 +326,8 @@ declare const getSpaceAssignments: (spaceId: string, query: {
     next?: string;
     /** The previous page cursor. Previous links make use of this. */
     prev?: string;
+    /** The type of assignment. */
+    type?: AssignmentType;
 }, options?: ApiCallOptions) => Promise<GetSpaceAssignmentsHttpResponse>;
 type GetSpaceAssignmentsHttpResponse = {
     data: Assignments;
@@ -349,32 +353,11 @@ type CreateSpaceAssignmentHttpResponse = {
     headers: Headers;
     status: number;
 };
-type CreateSpaceAssignment401HttpError = {
+type CreateSpaceAssignmentHttpError = {
     data: Errors;
     headers: Headers;
-    status: 401;
+    status: number;
 };
-type CreateSpaceAssignment403HttpError = {
-    data: Errors;
-    headers: Headers;
-    status: 403;
-};
-type CreateSpaceAssignment404HttpError = {
-    data: Errors;
-    headers: Headers;
-    status: 404;
-};
-type CreateSpaceAssignment409HttpError = {
-    data: Space;
-    headers: Headers;
-    status: 409;
-};
-type CreateSpaceAssignment500HttpError = {
-    data: Errors;
-    headers: Headers;
-    status: 500;
-};
-type CreateSpaceAssignmentHttpError = CreateSpaceAssignment401HttpError | CreateSpaceAssignment403HttpError | CreateSpaceAssignment404HttpError | CreateSpaceAssignment409HttpError | CreateSpaceAssignment500HttpError;
 /**
  * Deletes an assignment.
  * @param spaceId The ID of the space of the assignment.
@@ -521,4 +504,4 @@ interface SpacesAPI {
  */
 declare const spacesExport: SpacesAPI;
 
-export { type ActionName, type Assignment, type AssignmentCreate, type AssignmentUpdate, type Assignments, type CreateSpaceAssignment401HttpError, type CreateSpaceAssignment403HttpError, type CreateSpaceAssignment404HttpError, type CreateSpaceAssignment409HttpError, type CreateSpaceAssignment500HttpError, type CreateSpaceAssignmentHttpError, type CreateSpaceAssignmentHttpResponse, type CreateSpaceHttpError, type CreateSpaceHttpResponse, type DeleteSpaceAssignmentHttpError, type DeleteSpaceAssignmentHttpResponse, type DeleteSpaceHttpError, type DeleteSpaceHttpResponse, type Error, type Errors, type GetSpaceAssignmentHttpError, type GetSpaceAssignmentHttpResponse, type GetSpaceAssignmentsHttpError, type GetSpaceAssignmentsHttpResponse, type GetSpaceHttpError, type GetSpaceHttpResponse, type GetSpaceTypesHttpError, type GetSpaceTypesHttpResponse, type GetSpacesHttpError, type GetSpacesHttpResponse, type Link, type PatchSpaceHttpError, type PatchSpaceHttpResponse, type RoleType, type SharedSpaceRoleType, type Space, type SpaceCreate, type SpacePatch, type SpaceType, type SpaceTypes, type SpaceUpdate, type Spaces, type SpacesAPI, type UpdateSpaceAssignmentHttpError, type UpdateSpaceAssignmentHttpResponse, type UpdateSpaceHttpError, type UpdateSpaceHttpResponse, clearCache, createSpace, createSpaceAssignment, spacesExport as default, deleteSpace, deleteSpaceAssignment, getSpace, getSpaceAssignment, getSpaceAssignments, getSpaceTypes, getSpaces, patchSpace, updateSpace, updateSpaceAssignment };
+export { type ActionName, type Assignment, type AssignmentCreate, type AssignmentType, type AssignmentUpdate, type Assignments, type CreateSpaceAssignmentHttpError, type CreateSpaceAssignmentHttpResponse, type CreateSpaceHttpError, type CreateSpaceHttpResponse, type DeleteSpaceAssignmentHttpError, type DeleteSpaceAssignmentHttpResponse, type DeleteSpaceHttpError, type DeleteSpaceHttpResponse, type Error, type Errors, type GetSpaceAssignmentHttpError, type GetSpaceAssignmentHttpResponse, type GetSpaceAssignmentsHttpError, type GetSpaceAssignmentsHttpResponse, type GetSpaceHttpError, type GetSpaceHttpResponse, type GetSpaceTypesHttpError, type GetSpaceTypesHttpResponse, type GetSpacesHttpError, type GetSpacesHttpResponse, type Link, type PatchSpaceHttpError, type PatchSpaceHttpResponse, type RoleType, type SharedSpaceRoleType, type Space, type SpaceCreate, type SpacePatch, type SpaceType, type SpaceTypes, type SpaceUpdate, type Spaces, type SpacesAPI, type UpdateSpaceAssignmentHttpError, type UpdateSpaceAssignmentHttpResponse, type UpdateSpaceHttpError, type UpdateSpaceHttpResponse, clearCache, createSpace, createSpaceAssignment, spacesExport as default, deleteSpace, deleteSpaceAssignment, getSpace, getSpaceAssignment, getSpaceAssignments, getSpaceTypes, getSpaces, patchSpace, updateSpace, updateSpaceAssignment };

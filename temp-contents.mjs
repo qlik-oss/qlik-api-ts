@@ -1,26 +1,14 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-3YE7EI7I.mjs";
-import "./chunk-WM7FQU2U.mjs";
+} from "./chunk-W4J34XGA.mjs";
+import "./chunk-7REWEWCX.mjs";
 
 // src/public/rest/temp-contents.ts
 var uploadTempFile = async (query, body, options) => invokeFetch("temp-contents", {
   method: "post",
   pathTemplate: "/api/v1/temp-contents",
   query,
-  body,
-  options
-});
-var createTus = async (options) => invokeFetch("temp-contents", {
-  method: "post",
-  pathTemplate: "/api/v1/temp-contents/files",
-  options
-});
-var patchTus = async (id, body, options) => invokeFetch("temp-contents", {
-  method: "patch",
-  pathTemplate: "/api/v1/temp-contents/files/{id}",
-  pathVariables: { id },
   body,
   options
 });
@@ -40,21 +28,12 @@ var getTempFileDetails = async (id, options) => invokeFetch("temp-contents", {
 function clearCache() {
   return clearApiCache("temp-contents");
 }
-var tempContentsExport = {
-  uploadTempFile,
-  createTus,
-  patchTus,
-  downloadTempFile,
-  getTempFileDetails,
-  clearCache
-};
+var tempContentsExport = { uploadTempFile, downloadTempFile, getTempFileDetails, clearCache };
 var temp_contents_default = tempContentsExport;
 export {
   clearCache,
-  createTus,
   temp_contents_default as default,
   downloadTempFile,
   getTempFileDetails,
-  patchTus,
   uploadTempFile
 };

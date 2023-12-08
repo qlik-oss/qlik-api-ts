@@ -37,7 +37,7 @@ type Reload = {
     /** The ID of the tenant who owns the reload. */
     tenantId: string;
     /** What initiated the reload: hub = one-time reload manually triggered in hub, chronos = time based scheduled reload triggered by chronos, external = reload triggered via external API request, automations = reload triggered in automation, data-refresh = reload triggered by refresh of data. */
-    type: "hub" | "chronos" | "external" | "automations" | "data-refresh";
+    type: Type;
     /** The ID of the user who created the reload. */
     userId: string;
 };
@@ -59,6 +59,7 @@ type ReloadsLinks = ReloadLinks & {
     prev?: Href;
 };
 type Status = "QUEUED" | "RELOADING" | "CANCELING" | "SUCCEEDED" | "FAILED" | "CANCELED" | "EXCEEDED_LIMIT";
+type Type = "hub" | "external" | "chronos" | "automations" | "data-refresh";
 /**
  * Finds and returns the reloads that the user has access to.
  * @param query an object with query parameters
@@ -73,6 +74,7 @@ declare const getReloads: (query: {
     // Supported attributes:
     // - status: see #schemas/Status
     // - partial: see #schemas/Partial
+    // - type: see #schemas/Type
     //
     // Supported operators:
     // - eq
@@ -186,4 +188,4 @@ interface ReloadsAPI {
  */
 declare const reloadsExport: ReloadsAPI;
 
-export { type CancelReloadHttpError, type CancelReloadHttpResponse, type Error, type Errors, type GetReloadHttpError, type GetReloadHttpResponse, type GetReloadsHttpError, type GetReloadsHttpResponse, type Href, type Partial, type QueueReloadHttpError, type QueueReloadHttpResponse, type Reload, type ReloadLinks, type ReloadRequest, type Reloads, type ReloadsAPI, type ReloadsLinks, type Status, cancelReload, clearCache, reloadsExport as default, getReload, getReloads, queueReload };
+export { type CancelReloadHttpError, type CancelReloadHttpResponse, type Error, type Errors, type GetReloadHttpError, type GetReloadHttpResponse, type GetReloadsHttpError, type GetReloadsHttpResponse, type Href, type Partial, type QueueReloadHttpError, type QueueReloadHttpResponse, type Reload, type ReloadLinks, type ReloadRequest, type Reloads, type ReloadsAPI, type ReloadsLinks, type Status, type Type, cancelReload, clearCache, reloadsExport as default, getReload, getReloads, queueReload };
