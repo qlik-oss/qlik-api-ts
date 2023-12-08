@@ -366,15 +366,15 @@ type GetMyIdpMetaHttpError = {
 };
 /**
  * This endpoint retrieves the status of IdP configurations. Requires TenantAdmin role.
- * @throws GetIdpStatusHttpError
+ * @throws GetIdpStatusesHttpError
  */
-declare const getIdpStatus: (options?: ApiCallOptions) => Promise<GetIdpStatusHttpResponse>;
-type GetIdpStatusHttpResponse = {
+declare const getIdpStatuses: (options?: ApiCallOptions) => Promise<GetIdpStatusesHttpResponse>;
+type GetIdpStatusesHttpResponse = {
     data: IDPsStatus;
     headers: Headers;
     status: number;
 };
-type GetIdpStatusHttpError = {
+type GetIdpStatusesHttpError = {
     data: Errors;
     headers: Headers;
     status: number;
@@ -457,9 +457,9 @@ interface IdentityProvidersAPI {
     getMyIdpMeta: typeof getMyIdpMeta;
     /**
      * This endpoint retrieves the status of IdP configurations. Requires TenantAdmin role.
-     * @throws GetIdpStatusHttpError
+     * @throws GetIdpStatusesHttpError
      */
-    getIdpStatus: typeof getIdpStatus;
+    getIdpStatuses: typeof getIdpStatuses;
     /**
      * This endpoint deletes an identity provider from the service. It returns a valid 204 when the IdP is deleted. Only a user with the role of TenantAdmin and tenant access can delete an associated IdP. Edge-auth service can also delete.
      * @param id The identity provider ID.
@@ -489,4 +489,4 @@ interface IdentityProvidersAPI {
  */
 declare const identityProvidersExport: IdentityProvidersAPI;
 
-export { type BaseIDP, type ClaimsMappingInteractive, type ClaimsMappingNonInteractive, type CreateIdpHttpError, type CreateIdpHttpResponse, type CreateJWTAuthPayload, type CreateOIDCPayload, type DeleteIdpHttpError, type DeleteIdpHttpResponse, type Error, type Errors, type GetIdpHttpError, type GetIdpHttpResponse, type GetIdpStatusHttpError, type GetIdpStatusHttpResponse, type GetIdpWellKnownMetaDataHttpError, type GetIdpWellKnownMetaDataHttpResponse, type GetIdpsHttpError, type GetIdpsHttpResponse, type GetMyIdpMetaHttpError, type GetMyIdpMetaHttpResponse, type IDP, type IDPArray, type IDPJWTAuth, type IDPMeta, type IDPOIDC, type IDPOptions, type IDPPatchSchema, type IDPPostSchema, type IDPProtocol, type IDPProvider, type IDPsStatus, type IdentityProvidersAPI, type Links, type OpenIDConfiguration, type PatchIdpHttpError, type PatchIdpHttpResponse, type PatchJWTAuthPayload, type PatchOIDCPayload, type PendingResult, clearCache, createIdp, identityProvidersExport as default, deleteIdp, getIdp, getIdpStatus, getIdpWellKnownMetaData, getIdps, getMyIdpMeta, patchIdp };
+export { type BaseIDP, type ClaimsMappingInteractive, type ClaimsMappingNonInteractive, type CreateIdpHttpError, type CreateIdpHttpResponse, type CreateJWTAuthPayload, type CreateOIDCPayload, type DeleteIdpHttpError, type DeleteIdpHttpResponse, type Error, type Errors, type GetIdpHttpError, type GetIdpHttpResponse, type GetIdpStatusesHttpError, type GetIdpStatusesHttpResponse, type GetIdpWellKnownMetaDataHttpError, type GetIdpWellKnownMetaDataHttpResponse, type GetIdpsHttpError, type GetIdpsHttpResponse, type GetMyIdpMetaHttpError, type GetMyIdpMetaHttpResponse, type IDP, type IDPArray, type IDPJWTAuth, type IDPMeta, type IDPOIDC, type IDPOptions, type IDPPatchSchema, type IDPPostSchema, type IDPProtocol, type IDPProvider, type IDPsStatus, type IdentityProvidersAPI, type Links, type OpenIDConfiguration, type PatchIdpHttpError, type PatchIdpHttpResponse, type PatchJWTAuthPayload, type PatchOIDCPayload, type PendingResult, clearCache, createIdp, identityProvidersExport as default, deleteIdp, getIdp, getIdpStatuses, getIdpWellKnownMetaData, getIdps, getMyIdpMeta, patchIdp };

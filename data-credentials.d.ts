@@ -35,6 +35,8 @@ type Error = {
     code?: string;
     /** More concrete details */
     detail?: string;
+    /** HTTP status code */
+    status?: number;
     /** A summary in english explaining what went wrong */
     title?: string;
 };

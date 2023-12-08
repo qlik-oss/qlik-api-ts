@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-3YE7EI7I.mjs";
-import "./chunk-WM7FQU2U.mjs";
+} from "./chunk-W4J34XGA.mjs";
+import "./chunk-7REWEWCX.mjs";
 
 // src/public/rest/items.ts
 var getItems = async (query, options) => invokeFetch("items", {
@@ -11,12 +11,12 @@ var getItems = async (query, options) => invokeFetch("items", {
   query,
   options
 });
-var getItemSettings = async (options) => invokeFetch("items", {
+var getItemsSettings = async (options) => invokeFetch("items", {
   method: "get",
   pathTemplate: "/api/v1/items/settings",
   options
 });
-var patchItemSettings = async (body, options) => invokeFetch("items", {
+var patchItemsSettings = async (body, options) => invokeFetch("items", {
   method: "patch",
   pathTemplate: "/api/v1/items/settings",
   body,
@@ -60,8 +60,8 @@ function clearCache() {
 }
 var itemsExport = {
   getItems,
-  getItemSettings,
-  patchItemSettings,
+  getItemsSettings,
+  patchItemsSettings,
   deleteItem,
   getItem,
   updateItem,
@@ -76,9 +76,9 @@ export {
   deleteItem,
   getItem,
   getItemCollections,
-  getItemSettings,
   getItems,
+  getItemsSettings,
   getPublishedItems,
-  patchItemSettings,
+  patchItemsSettings,
   updateItem
 };

@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-3YE7EI7I.mjs";
-import "./chunk-WM7FQU2U.mjs";
+} from "./chunk-W4J34XGA.mjs";
+import "./chunk-7REWEWCX.mjs";
 
 // src/public/rest/groups.ts
 var getGroups = async (query, options) => invokeFetch("groups", {
@@ -24,12 +24,12 @@ var filterGroups = async (query, body, options) => invokeFetch("groups", {
   body,
   options
 });
-var getGroupSettings = async (options) => invokeFetch("groups", {
+var getGroupsSettings = async (options) => invokeFetch("groups", {
   method: "get",
   pathTemplate: "/api/v1/groups/settings",
   options
 });
-var patchGroupSettings = async (body, options) => invokeFetch("groups", {
+var patchGroupsSettings = async (body, options) => invokeFetch("groups", {
   method: "patch",
   pathTemplate: "/api/v1/groups/settings",
   body,
@@ -61,8 +61,8 @@ var groupsExport = {
   getGroups,
   createGroup,
   filterGroups,
-  getGroupSettings,
-  patchGroupSettings,
+  getGroupsSettings,
+  patchGroupsSettings,
   deleteGroup,
   getGroup,
   patchGroup,
@@ -76,8 +76,8 @@ export {
   deleteGroup,
   filterGroups,
   getGroup,
-  getGroupSettings,
   getGroups,
+  getGroupsSettings,
   patchGroup,
-  patchGroupSettings
+  patchGroupsSettings
 };

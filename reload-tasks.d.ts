@@ -29,6 +29,8 @@ type SelfLink = {
     self: Href;
 };
 type Task = TaskBase & {
+    /** The reason why the task was disabled. */
+    disabledCode?: "MANUALLY" | "CONSECUTIVE-FAILURES" | "OWNER-DELETED" | "OWNER-DISABLED";
     /** The fortress ID of the application */
     fortressId?: string;
     /** The ID of the task. */

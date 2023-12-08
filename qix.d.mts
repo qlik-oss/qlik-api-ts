@@ -1,16 +1,16 @@
 import './global.types-Eto4uYwy.mjs';
 import { H as HostConfig } from './auth-types-nnUcWhuU.mjs';
 
-declare const QIX_SCHEMA_VERSION = "12.1875.0";
+declare const QIX_SCHEMA_VERSION = "12.1921.0";
 type AlfaNumString = {
     /**
      * Calculated value.
      */
-    qString: string;
+    qString?: string;
     /**
      * Is set to true if the value is a numeric.
      */
-    qIsNum: boolean;
+    qIsNum?: boolean;
 };
 type AlternateStateData = {
     /**
@@ -21,42 +21,42 @@ type AlternateStateData = {
     /**
      * List of the selections.
      */
-    qFieldItems: BookmarkFieldItem[];
+    qFieldItems?: BookmarkFieldItem[];
 };
 type AppEntry = {
     /**
      * Identifier of the app.
      */
-    qID: string;
+    qID?: string;
     /**
      * Title of the app.
      */
-    qTitle: string;
+    qTitle?: string;
     /**
      * Path of the app.
      */
-    qPath: string;
+    qPath?: string;
     /**
      * Last reload time of the app.
      */
-    qLastReloadTime: string;
+    qLastReloadTime?: string;
     /**
      * Is set to true if the app is read-only.
      */
-    qReadOnly: boolean;
+    qReadOnly?: boolean;
     /**
      * Meta data.
      */
-    qMeta: NxMeta;
+    qMeta?: NxMeta;
     /**
      * App thumbnail.
      */
-    qThumbnail: StaticContentUrl;
-    qFileSize: number;
+    qThumbnail?: StaticContentUrl;
+    qFileSize?: number;
     /**
      * If true the app has section access configured.
      */
-    qHasSectionAccess: boolean;
+    qHasSectionAccess?: boolean;
 };
 /**
  * Lists the app objects. Is the layout for _AppObjectListDef_.
@@ -66,7 +66,7 @@ type AppObjectList<QData> = {
     /**
      * Information about the list of dimensions.
      */
-    qItems: NxContainerEntry<QData>[];
+    qItems?: NxContainerEntry<QData>[];
 };
 /**
  * Defines the list of objects in an app.
@@ -76,18 +76,18 @@ type AppObjectListDef = {
     /**
      * Type of the app list.
      */
-    qType: string;
+    qType?: string;
     /**
      * Data that you want to include in the app list definition.
      * You need to enter the paths to the information you want to retrieve.
      */
-    qData: Record<string, string>;
+    qData?: Record<string, string>;
 };
 type AppScript = {
     /**
      * Script text.
      */
-    qScript: string;
+    qScript?: string;
     /**
      * Information about publishing and permissions.
      * This parameter is optional.
@@ -96,7 +96,7 @@ type AppScript = {
     /**
      * True if user is temporarily locked from modifying the script. Meta contains the ID of the last modifier. Only applicable to QCS.
      */
-    qIsLocked: boolean;
+    qIsLocked?: boolean;
 };
 type AppScriptMeta = {
     /**
@@ -107,7 +107,7 @@ type AppScriptMeta = {
     /**
      * True if user is temporarily locked from modifying the script. Meta contains the ID of the last modifier. Only applicable to QCS.
      */
-    qIsLocked: boolean;
+    qIsLocked?: boolean;
 };
 type ArrayOfNxValuePoint = NxPivotValuePoint[];
 type AssociationScore = {
@@ -119,7 +119,7 @@ type AssociationScore = {
      * &lt; _FieldName2_ &gt; is a field in the table 2 (defined in _qTable2_ )
      * If the field is a synthetic key, the name of the field is preceded by _[Synthetic key]:_ .
      */
-    qFieldPairName: string;
+    qFieldPairName?: string;
     /**
      * Flag used to interpret calculated scores.
      * One of the following values or sum of values that apply:
@@ -133,35 +133,35 @@ type AssociationScore = {
      * Example:
      * The number of rows of the field _FieldName1_ is zero, and the number of distinct values of the field _FieldName2_ is zero, then _qScoreSummary_ is -18.
      */
-    qScoreSummary: number;
+    qScoreSummary?: number;
     /**
      * Association information about the field _FieldName1_ defined in _qFieldPairName_ .
      */
-    qField1Scores: FieldScores;
+    qField1Scores?: FieldScores;
     /**
      * Association information about the field _FieldName2_ defined in _qFieldPairName_ .
      */
-    qField2Scores: FieldScores;
+    qField2Scores?: FieldScores;
 };
 type BNFDef = {
     /**
      * Array of token references that all together build up the definition of the current token.
      * Generally, if the array is not empty, the definition is a BNF rule (_qIsBnfRule_ is set to true). However, some BNF  rules do have an empty array (_qIsBnfRule_ is set to true, but _qBnf_ is empty).
      */
-    qBnf: number[];
+    qBnf?: number[];
     /**
      * Number of the current token definition.
      */
-    qNbr: number;
+    qNbr?: number;
     /**
      * Number of the parent rule definition.
      */
-    qPNbr: number;
+    qPNbr?: number;
     /**
      * Reference identifier to a function described in the documentation. The identifier is stored in the definition of the token containing the function name.
      * Is not used in Qlik Sense.
      */
-    qHelpId: number;
+    qHelpId?: number;
     /**
      * Token name.
      * One of:
@@ -169,12 +169,12 @@ type BNFDef = {
      * * An identifier
      * * A literal value
      */
-    qName: string;
+    qName?: string;
     /**
      * Literal string of the token.
      * Examples: 'Round' and '('.
      */
-    qStr: string;
+    qStr?: string;
     /**
      * If set to true, a list of related rule tokens is assigned to _qBnf_ .
      * This parameter is optional. The default value is false.
@@ -241,7 +241,7 @@ type BNFDef = {
      * * LEG or FUNC_GROUP_LEGACY
      * * DB or FUNC_GROUP_DB_NATIVE
      */
-    qFG: string;
+    qFG?: FunctionGroup;
     /**
      * If set to true, the definition is related to a field.
      * This parameter is optional. The default value is false.
@@ -256,7 +256,7 @@ type BNFDef = {
      * * R or META_RET_TYPE
      * * V or META_DEFAULT_VALUE
      */
-    qMT: string;
+    qMT?: BNFDefMetaType;
     /**
      * Indicates whether a script statement, a chart or a script function is deprecated (not recommended for use).
      * If set to true, the script statement or the function is not recommended for use in Qlik Sense.
@@ -266,49 +266,52 @@ type BNFDef = {
     /**
      * List of groups the function belongs to.
      */
-    qFGList: string[];
+    qFGList?: FunctionGroup[];
 };
+type BNFDefMetaType = "N" | "NOT_META" | "D" | "META_DOC_NAME" | "R" | "META_RET_TYPE" | "V" | "META_DEFAULT_VALUE";
+type BNFType = "S" | "SCRIPT_TEXT_SCRIPT" | "E" | "SCRIPT_TEXT_EXPRESSION";
+type Blob = string;
 type Bookmark = {
-    qId: string;
-    qName: string;
-    qUtcModifyTime: number;
-    qUtcRecallTime: number;
-    qRecallCount: number;
-    qApplyAdditive: boolean;
-    qFieldItems: BookmarkFieldItem[];
-    qVariableItems: BookmarkVariableItem[];
-    qSheetId: string;
-    qObjects: LayoutBookmarkData[];
+    qId?: string;
+    qName?: string;
+    qUtcModifyTime?: number;
+    qUtcRecallTime?: number;
+    qRecallCount?: number;
+    qApplyAdditive?: boolean;
+    qFieldItems?: BookmarkFieldItem[];
+    qVariableItems?: BookmarkVariableItem[];
+    qSheetId?: string;
+    qObjects?: LayoutBookmarkData[];
     qApplyLayoutState?: boolean;
     qShowPopupInfo?: boolean;
-    qInfoText: string;
-    qOwner: string;
-    qGroups: GroupBookmarkData[];
-    qShow: CondDef;
+    qInfoText?: string;
+    qOwner?: string;
+    qGroups?: GroupBookmarkData[];
+    qShow?: CondDef;
     qApplyInputFieldValues?: boolean;
-    qInputFieldItems: InputFieldItem[];
-    qObjectsLayout: ExtendedLayoutBookmarkData[];
+    qInputFieldItems?: InputFieldItem[];
+    qObjectsLayout?: ExtendedLayoutBookmarkData[];
     qIncludeSelectionState?: boolean;
-    qIncludeScrollPosition: boolean;
-    qAlternateStateData: AlternateStateData[];
-    qForAnnotations: boolean;
+    qIncludeScrollPosition?: boolean;
+    qAlternateStateData?: AlternateStateData[];
+    qForAnnotations?: boolean;
     qIncludeAllVariables?: boolean;
 };
 type BookmarkApplyAndVerifyResult = {
     /**
      * Apply successfully or not *
      */
-    qApplySuccess: boolean;
+    qApplySuccess?: boolean;
     /**
      * Field values verfication result *
      */
-    qWarnings: BookmarkFieldVerifyWarning[];
+    qWarnings?: BookmarkFieldVerifyWarning[];
 };
 type BookmarkFieldItem = {
     /**
      * Name and type of the field.
      */
-    qDef: FieldDefEx;
+    qDef?: FieldDefEx;
     /**
      * Indicates if the field is locked.
      * Default is false.
@@ -317,13 +320,13 @@ type BookmarkFieldItem = {
     /**
      * Information on the selections criteria.
      */
-    qSelectInfo: SelectInfo;
-    qValues: FieldValue[];
+    qSelectInfo?: SelectInfo;
+    qValues?: FieldValue[];
     /**
      * List of excluded values.
      * Either the list of selected values or the list of excluded values is displayed.
      */
-    qExcludedValues: FieldValue[];
+    qExcludedValues?: FieldValue[];
     /**
      * If set to true, selections within a list object are made in AND mode; If you have a list object that lists all customers, by selecting Customer 1 and Customer 2 while in and-mode, all records that are associated with Customer 1 **and** Customer 2 are selected.
      * The default value is false; selections within a list object are made in OR mode. If you have a list object that lists all customers, by selecting Customer 1 and Customer 2 while in or-mode, all records that are associated with either Customer 1 **or** Customer 2 are selected.
@@ -343,21 +346,22 @@ type BookmarkFieldPage = {
     /**
      * The start value of the range.
      */
-    qStartIndex: number;
+    qStartIndex?: number;
     /**
      * The end value of the range.
      */
-    qEndIndex: number;
+    qEndIndex?: number;
 };
+type BookmarkFieldVerifyResultState = "NOT_VERIFIED" | "FIELD_VALUE_MATCH_ALL" | "FIELD_MISSING" | "FIELD_VALUE_MISSING" | "STATE_MISSING";
 type BookmarkFieldVerifyWarning = {
     /**
      * Alternate State *
      */
-    qState: string;
+    qState?: string;
     /**
      * Field Name *
      */
-    qField: string;
+    qField?: string;
     /**
      * Field/values verfication result *
      * Defines result of ApplyAndVerify.
@@ -368,8 +372,8 @@ type BookmarkFieldVerifyWarning = {
      * * FIELD_VALUE_MISSING
      * * STATE_MISSING
      */
-    qVerifyResult?: string;
-    qMissingValues: string[];
+    qVerifyResult?: BookmarkFieldVerifyResultState;
+    qMissingValues?: string[];
 };
 /**
  * Lists the bookmarks. Is the layout for _BookmarkListDef_.
@@ -378,7 +382,7 @@ type BookmarkList<QData> = {
     /**
      * Information about the list of bookmarks.
      */
-    qItems: NxContainerEntry<QData>[];
+    qItems?: NxContainerEntry<QData>[];
 };
 /**
  * Defines the list of bookmarks.
@@ -387,57 +391,58 @@ type BookmarkListDef = {
     /**
      * Type of the list.
      */
-    qType: string;
+    qType?: string;
     /**
      * Data
      */
-    qData: Record<string, string>;
+    qData?: Record<string, string>;
     /**
      * Include the bookmark patches. Patches can be very large and may make the list result unmanageable.
      */
-    qIncludePatches: boolean;
+    qIncludePatches?: boolean;
 };
 type BookmarkVariableItem = {
     /**
      * Name of the variable.
      */
-    qName: string;
+    qName?: string;
     /**
      * Value of the variable.
      */
-    qValue: FieldValue;
+    qValue?: FieldValue;
     /**
      * The Reporting mode definition of the variable.
      */
-    qDefinition: string;
+    qDefinition?: string;
 };
 type CalendarStrings = {
     /**
      * List of short day names.
      */
-    qDayNames: string[];
+    qDayNames?: string[];
     /**
      * List of short month names.
      */
-    qMonthNames: string[];
+    qMonthNames?: string[];
     /**
      * List of long day names.
      */
-    qLongDayNames: string[];
+    qLongDayNames?: string[];
     /**
      * List of long month names.
      */
-    qLongMonthNames: string[];
+    qLongMonthNames?: string[];
 };
+type CharEncodingType = "Utf8" | "CHAR_ENCODING_UTF8" | "Utf16" | "CHAR_ENCODING_UTF16";
 type CharRange = {
     /**
      * Position of the first search occurrence.
      */
-    qCharPos: number;
+    qCharPos?: number;
     /**
      * Number of occurrences found.
      */
-    qCharCount: number;
+    qCharCount?: number;
 };
 /**
  * Lists the children of a generic object. Is the layout for _ChildListDef_.
@@ -447,7 +452,7 @@ type ChildList<QData> = {
     /**
      * Information about the items in the app object.
      */
-    qItems: NxContainerEntry<QData>[];
+    qItems?: NxContainerEntry<QData>[];
 };
 /**
  * Defines the list of children of a generic object.
@@ -458,37 +463,37 @@ type ChildListDef = {
      * Data that you want to include in the child list definition.
      * You need to enter the paths to the information you want to retrieve.
      */
-    qData: Record<string, string>;
+    qData?: Record<string, string>;
 };
 type CodePage = {
     /**
      * Number of the code page.
      */
-    qNumber: number;
+    qNumber?: number;
     /**
      * Name of the code page.
      */
-    qName: string;
+    qName?: string;
     /**
      * Description of the code page.
      */
-    qDescription: string;
+    qDescription?: string;
 };
 type CondDef = {
     qAlways?: boolean;
-    qExpression: ValueExpr;
+    qExpression?: ValueExpr;
 };
 type Connection = {
     /**
      * Identifier of the connection.
      * Is generated by the engine and is unique.
      */
-    qId: string;
+    qId?: string;
     /**
      * Name of the connection.
      * This parameter is mandatory and must be set when creating or modifying a connection.
      */
-    qName: string;
+    qName?: string;
     /**
      * One of:
      * * ODBC CONNECT TO [&lt;provider name&gt;]
@@ -500,7 +505,7 @@ type Connection = {
      * Connection string.
      * This parameter is mandatory and must be set when creating or modifying a connection.
      */
-    qConnectionString: string;
+    qConnectionString?: string;
     /**
      * One of:
      * * ODBC
@@ -514,7 +519,7 @@ type Connection = {
      * For ODBC, OLEDB and custom connections, the engine checks that the connection type matches the connection string.
      * The type is not case sensitive.
      */
-    qType: string;
+    qType?: string;
     /**
      * Name of the user who creates the connection.
      * This parameter is optional; it is only used for OLEDB, ODBC and CUSTOM connections.
@@ -531,11 +536,11 @@ type Connection = {
      * Is generated by the engine.
      * Creation date of the connection or last modification date of the connection.
      */
-    qModifiedDate: string;
+    qModifiedDate?: string;
     /**
      * Information about the connection.
      */
-    qMeta: NxMeta;
+    qMeta?: NxMeta;
     /**
      * Select which user credentials to use to connect to the source.
      * * LOG_ON_SERVICE_USER: Disables
@@ -545,41 +550,41 @@ type Connection = {
      * * LOG_ON_SERVICE_USER
      * * LOG_ON_CURRENT_USER
      */
-    qLogOn: string;
+    qLogOn?: LogOnType;
 };
 type ContentLibraryList = {
     /**
      * Information about the content library.
      */
-    qItems: ContentLibraryListItem[];
+    qItems?: ContentLibraryListItem[];
 };
 type ContentLibraryListItem = {
     /**
      * Name of the library.
      */
-    qName: string;
+    qName?: string;
     /**
      * Is set to true if the library is specific to the app (not a global content library).
      */
-    qAppSpecific: boolean;
+    qAppSpecific?: boolean;
     /**
      * Information about publishing and permissions.
      */
-    qMeta: NxMeta;
+    qMeta?: NxMeta;
 };
 type CustomConnector = {
     /**
      * Name of the custom connector file.
      */
-    qProvider: string;
+    qProvider?: string;
     /**
      * Name of the parent folder that contains the custom connector file.
      */
-    qParent: string;
+    qParent?: string;
     /**
      * Name of the custom connector as displayed in the Qlik interface.
      */
-    qDisplayName: string;
+    qDisplayName?: string;
     /**
      * Mode of the machine (64 or 32 bits).
      *
@@ -588,14 +593,14 @@ type CustomConnector = {
      * * CONNECT_64
      * * CONNECT_32
      */
-    qMachineMode: string;
-    qSupportFileStreaming: boolean;
+    qMachineMode?: GenericConnectMachine;
+    qSupportFileStreaming?: boolean;
 };
 type DataField = {
     /**
      * Name of the field.
      */
-    qName: string;
+    qName?: string;
     /**
      * Is set to true if the field is a primary key.
      */
@@ -605,7 +610,7 @@ type DataField = {
      * _qOriginalFieldName_ and _qName_ are identical if no field names are used in the file.
      * _qOriginalFieldName_ differs from _qName_ if embedded file names are used in the file.
      */
-    qOriginalFieldName: string;
+    qOriginalFieldName?: string;
 };
 type DataRecord = {
     /**
@@ -613,28 +618,28 @@ type DataRecord = {
      * The first values (in _result/qPreview/0/qValues_ ) correspond to the field names in the table.
      * The following values (from _result/qPreview/1/qValues_ ) are the values of the fields in the table.
      */
-    qValues: string[];
+    qValues?: string[];
 };
 type DataTable = {
     /**
      * Name of the table.
      */
-    qName: string;
+    qName?: string;
     /**
      * Type of the table.
      * For example: Table or View.
      */
-    qType: string;
+    qType?: string;
 };
 type DataTableEx = {
     /**
      * Name of the table.
      */
-    qName: string;
+    qName?: string;
     /**
      * List of the fields in the table.
      */
-    qFields: DataField[];
+    qFields?: DataField[];
     /**
      * List of format specification items, within brackets.
      * Examples of specification items:
@@ -642,31 +647,31 @@ type DataTableEx = {
      * * embedded labels, no labels
      * * table is &lt;table name&gt;
      */
-    qFormatSpec: string;
+    qFormatSpec?: string;
 };
 type Database = {
     /**
      * Name of the database.
      */
-    qName: string;
+    qName?: string;
     /**
      * Is set to true if the database is set by default.
      */
-    qIsDefault: boolean;
+    qIsDefault?: boolean;
 };
 type DatabaseInfo = {
     /**
      * Name of the product accessed by the provider.
      */
-    qDBMSName: string;
+    qDBMSName?: string;
     /**
      * If set to true, it means that the data source contains some databases.
      */
-    qDBUsage: boolean;
+    qDBUsage?: boolean;
     /**
      * If set to true, it means that the data source contains some owners.
      */
-    qOwnerUsage: boolean;
+    qOwnerUsage?: boolean;
     /**
      * Character string used after the database name.
      * Example with separator " **.** ":
@@ -676,7 +681,7 @@ type DatabaseInfo = {
      * * **dbo** is the owner name
      * * **Months** is the table name
      */
-    qDBSeparator: string;
+    qDBSeparator?: string;
     /**
      * Character string used after the owner name.
      * Example with separator " **.** ":
@@ -686,37 +691,37 @@ type DatabaseInfo = {
      * * **dbo** is the owner name
      * * **Months** is the table name
      */
-    qOwnerSeparator: string;
+    qOwnerSeparator?: string;
     /**
      * If set to true, it means that the database is displayed first, before the owners and tables.
      */
-    qDBFirst: boolean;
+    qDBFirst?: boolean;
     /**
      * Prefix used with field, database or owner names that contain special characters or keywords.
      */
-    qQuotePreffix: string;
+    qQuotePreffix?: string;
     /**
      * Suffix used with field, database or owner names that contain special characters or keywords.
      */
-    qQuoteSuffix: string;
+    qQuoteSuffix?: string;
     /**
      * List of the special characters.
      */
-    qSpecialChars: string;
+    qSpecialChars?: string;
     /**
      * Name of the default database.
      */
-    qDefaultDatabase: string;
+    qDefaultDatabase?: string;
     /**
      * List of the script keywords.
      */
-    qKeywords: string[];
+    qKeywords?: string[];
 };
 type DatabaseOwner = {
     /**
      * Name of the owner.
      */
-    qName: string;
+    qName?: string;
 };
 type DelimiterInfo = {
     /**
@@ -724,35 +729,35 @@ type DelimiterInfo = {
      * Example:
      * "Tab_DELIMITER"
      */
-    qName: string;
+    qName?: string;
     /**
      * Representation of the delimiter value that is used in the script.
      * Example:
      * "'\t'"
      */
-    qScriptCode: string;
+    qScriptCode?: string;
     /**
      * Delimiter character number used by the engine to determine how to separate the values.
      */
-    qNumber: number;
+    qNumber?: number;
     /**
      * Is set to true if multiple spaces are used to separate the values.
      */
-    qIsMultiple: boolean;
+    qIsMultiple?: boolean;
 };
 type DerivedFieldsInTableData = {
     /**
      * Name of the derived definition.
      */
-    qDefinitionName: string;
+    qDefinitionName?: string;
     /**
      * List of tags.
      */
-    qTags: string[];
+    qTags?: string[];
     /**
      * Is set to true is the derived field is in use.
      */
-    qActive: boolean;
+    qActive?: boolean;
 };
 /**
  * Lists the dimensions. Is the layout for _DimensionListDef_.
@@ -761,7 +766,7 @@ type DimensionList<QData> = {
     /**
      * Information about the list of dimensions.
      */
-    qItems: NxContainerEntry<QData>[];
+    qItems?: NxContainerEntry<QData>[];
 };
 /**
  * Defines the lists of dimensions.
@@ -770,11 +775,11 @@ type DimensionListDef = {
     /**
      * Type of the list.
      */
-    qType: string;
+    qType?: string;
     /**
      * Data
      */
-    qData: Record<string, string>;
+    qData?: Record<string, string>;
 };
 /**
  * Parameters for a reload.
@@ -818,78 +823,78 @@ type DoReloadExResult = {
     /**
      * The reload is successful if True.
      */
-    qSuccess: boolean;
+    qSuccess?: boolean;
     /**
      * Path to the script log file.
      */
-    qScriptLogFile: string;
+    qScriptLogFile?: string;
     /**
      * true if memory limits were exhausted during reload.
      */
-    qEndedWithMemoryConstraint: boolean;
+    qEndedWithMemoryConstraint?: boolean;
 };
 type DocListEntry = {
     /**
      * Name of the app.
      */
-    qDocName: string;
+    qDocName?: string;
     /**
      * Not used.
      */
-    qConnectedUsers: number;
+    qConnectedUsers?: number;
     /**
      * Last modified time stamp of the app.
      * This property is used only with Qlik Sense Desktop.
      * It is set to 0 for Qlik Sense Enterprise.
      */
-    qFileTime: number;
+    qFileTime?: number;
     /**
      * Size of remote app.
      * This property is used only with Qlik Sense Desktop.
      * It is set to 0 for Qlik Sense Enterprise.
      */
-    qFileSize: number;
+    qFileSize?: number;
     /**
      * Identifier of the app.
      * * In Qlik Sense Desktop, the identifier is the path and name of the app.
      * * In Qlik Sense Enterprise, the identifier is the app's GUID.
      */
-    qDocId: string;
+    qDocId?: string;
     /**
      * Meta data related to the app.
      */
-    qMeta: NxMeta;
+    qMeta?: NxMeta;
     /**
      * Last reload time of the app.
      */
-    qLastReloadTime: string;
+    qLastReloadTime?: string;
     /**
      * If set to true, the app is read-only.
      */
-    qReadOnly: boolean;
+    qReadOnly?: boolean;
     /**
      * Title of the app.
      */
-    qTitle: string;
+    qTitle?: string;
     /**
      * Thumbnail of the app.
      */
-    qThumbnail: StaticContentUrl;
+    qThumbnail?: StaticContentUrl;
     /**
      * If true the app has section access configured.
      */
-    qHasSectionAccess: boolean;
+    qHasSectionAccess?: boolean;
     /**
      * Is the app a Direct Query app?
      */
-    qIsDirectQueryMode: boolean;
+    qIsDirectQueryMode?: boolean;
     /**
      *
      * One of:
      * * ANALYTICS
      * * DATA_PREPARATION
      */
-    qUsage: string;
+    qUsage?: UsageEnum;
 };
 type DriveInfo = {
     /**
@@ -897,16 +902,16 @@ type DriveInfo = {
      * Examples:
      * C:\\\, E:\\\
      */
-    qDrive: string;
+    qDrive?: string;
     /**
      * Type of the drive.
      * _Fixed_ means physical drive.
      */
-    qType: string;
+    qType?: string;
     /**
      * Name of the drive.
      */
-    qName: string;
+    qName?: string;
     /**
      * Information about the drive type.
      *
@@ -918,22 +923,23 @@ type DriveInfo = {
      * * RAM
      * * UNKNOWN_TYPE
      */
-    qTypeIdentifier: string;
-    qUnnamedDrive: boolean;
+    qTypeIdentifier?: DriveType;
+    qUnnamedDrive?: boolean;
 };
+type DriveType = "REMOVABLE" | "FIXED" | "NETWORK" | "CD_ROM" | "RAM" | "UNKNOWN_TYPE";
 type EditorBreakpoint = {
     /**
      * Name of the breakpoint.
      */
-    qbufferName: string;
+    qbufferName?: string;
     /**
      * Line number in the script where the breakpoint is set.
      */
-    qlineIx: number;
+    qlineIx?: number;
     /**
      * If set to true then the breakpoint is enabled (in use).
      */
-    qEnabled: boolean;
+    qEnabled?: boolean;
 };
 /**
  * Renders the embedded snapshot in an object.
@@ -944,27 +950,27 @@ type EditorBreakpoint = {
  * ### Properties
  * "qEmbeddedSnapshot": {}
  */
-type EmbeddedSnapshot = {};
+type EmbeddedSnapshot = object;
 /**
  * Defines the embedded snapshot in a generic object.
  *
  * ### Properties
  * "EmbeddedSnapshotDef": {}
  */
-type EmbeddedSnapshotDef = {};
+type EmbeddedSnapshotDef = object;
 type ErrorData = {
     /**
      * Detailed information about the error message.
      */
-    qErrorString: string;
+    qErrorString?: string;
     /**
      * Line termination characters.
      */
-    qLineEnd: string;
+    qLineEnd?: string;
     /**
      * Script statement where the error occurs.
      */
-    qLine: string;
+    qLine?: string;
     /**
      * Type of the error messages.
      *
@@ -973,25 +979,26 @@ type ErrorData = {
      * * EDC_WARNING
      * * EDC_CIRCULAR_REFERENCE
      */
-    qErrorDataCode: string;
-    qMessage: ProgressMessage;
+    qErrorDataCode?: ErrorDataCode;
+    qMessage?: ProgressMessage;
 };
+type ErrorDataCode = "EDC_ERROR" | "EDC_WARNING" | "EDC_CIRCULAR_REFERENCE";
 type ExpansionData = {
-    qExcludeList: boolean;
-    qPos: PositionMark;
+    qExcludeList?: boolean;
+    qPos?: PositionMark;
 };
 type ExtendedLayoutBookmarkData = {
-    qId: string;
-    qActive: boolean;
-    qShowMode: number;
-    qScrollPos: ScrollPosition;
-    qExpansionInfo: ExpansionData[];
-    qLeftCollapsed: boolean;
-    qTopCollapsed: boolean;
-    qSortData: InterFieldSortData[];
-    qDimensionGroupPos: GroupStateInfo[];
-    qExpressionGroupPos: GroupStateInfo[];
-    qUseGraphMode: boolean;
+    qId?: string;
+    qActive?: boolean;
+    qShowMode?: number;
+    qScrollPos?: ScrollPosition;
+    qExpansionInfo?: ExpansionData[];
+    qLeftCollapsed?: boolean;
+    qTopCollapsed?: boolean;
+    qSortData?: InterFieldSortData[];
+    qDimensionGroupPos?: GroupStateInfo[];
+    qExpressionGroupPos?: GroupStateInfo[];
+    qUseGraphMode?: boolean;
     /**
      *
      * One of:
@@ -1010,26 +1017,27 @@ type ExtendedLayoutBookmarkData = {
      * * GRAPH_MODE_MEKKO
      * * GRAPH_MODE_LAST
      */
-    qGraphMode: string;
-    qActiveContainerChildObjectId: string;
-    qExtendedPivotState: ExtendedPivotStateData;
+    qGraphMode?: GraphMode;
+    qActiveContainerChildObjectId?: string;
+    qExtendedPivotState?: ExtendedPivotStateData;
 };
 type ExtendedPivotStateData = {
-    qExpressionPosition: number;
-    qNumberOfLeftDimensions: number;
-    qDimensionNames: string[];
-    qEnableConditions: string[];
+    qExpressionPosition?: number;
+    qNumberOfLeftDimensions?: number;
+    qDimensionNames?: string[];
+    qEnableConditions?: string[];
 };
 /**
  * Obsolete, use qrs API's to fetch extensions.
  */
 type ExtensionList = {
-    qItems: string[];
+    qItems?: string[];
 };
 /**
  * Obsolete, use qrs API's to fetch extensions.
  */
-type ExtensionListDef = {};
+type ExtensionListDef = object;
+type FieldAttrType = "U" | "UNKNOWN" | "A" | "ASCII" | "I" | "INTEGER" | "R" | "REAL" | "F" | "FIX" | "M" | "MONEY" | "D" | "DATE" | "T" | "TIME" | "TS" | "TIMESTAMP" | "IV" | "INTERVAL";
 /**
  * Sets the formatting of a field.
  * The properties of _qFieldAttributes_ and the formatting mechanism are described below.
@@ -1086,7 +1094,7 @@ type FieldAttributes = {
      * * TS or TIMESTAMP
      * * IV or INTERVAL
      */
-    qType?: string;
+    qType?: FieldAttrType;
     /**
      * Number of decimals.
      * Default is 10.
@@ -1103,24 +1111,24 @@ type FieldAttributes = {
      * For more information, see _Formatting mechanism_.
      * Example: _YYYY-MM-DD_ for a date.
      */
-    qFmt: string;
+    qFmt?: string;
     /**
      * Defines the decimal separator.
      * Example: **.**
      */
-    qDec: string;
+    qDec?: string;
     /**
      * Defines the thousand separator (if any).
      * Is used if **qUseThou** is set to 1.
      * Example: **,**
      */
-    qThou: string;
+    qThou?: string;
 };
 type FieldDefEx = {
     /**
      * Name of the field.
      */
-    qName: string;
+    qName?: string;
     /**
      * Type of data entity.
      *
@@ -1134,21 +1142,21 @@ type FieldDefEx = {
      * * IS_IMPLICIT
      * * IS_DETAIL
      */
-    qType: string;
+    qType?: FieldType;
 };
 type FieldDescription = {
     /**
      * Internal number of the field.
      */
-    qInternalNumber: number;
+    qInternalNumber?: number;
     /**
      * Name of the field.
      */
-    qName: string;
+    qName?: string;
     /**
      * List of table names.
      */
-    qSrcTables: string[];
+    qSrcTables?: string[];
     /**
      * If set to true, it means that the field is a system field.
      * The default value is false.
@@ -1172,13 +1180,13 @@ type FieldDescription = {
     /**
      * Number of distinct field values.
      */
-    qCardinal: number;
+    qCardinal?: number;
     /**
      * Total number of field values.
      */
-    qTotalCount: number;
-    qPossibleCount_OBSOLETE: number;
-    qHasInfo_OBSOLETE: boolean;
+    qTotalCount?: number;
+    qPossibleCount_OBSOLETE?: number;
+    qHasInfo_OBSOLETE?: boolean;
     /**
      * If set to true, it means that the field is locked.
      * The default value is false.
@@ -1203,12 +1211,12 @@ type FieldDescription = {
     /**
      * Field comment.
      */
-    qComment: string;
+    qComment?: string;
     /**
      * Gives information on a field. For example, it can return the type of the field.
      * Examples: key, text, ASCII.
      */
-    qTags: string[];
+    qTags?: string[];
     /**
      * If set to true, it means that the field is a field on the fly.
      * The default value is false.
@@ -1217,54 +1225,54 @@ type FieldDescription = {
     /**
      * Static RAM memory used in bytes.
      */
-    qByteSize: number;
+    qByteSize?: number;
 };
 type FieldInTableData = {
     /**
      * Name of the field.
      */
-    qName: string;
+    qName?: string;
     /**
      * Is shown for fixed records.
      * _qOriginalFieldName_ and _qName_ are identical if no field names are used in the file.
      * _qOriginalFieldName_ differs from _qName_ if embedded file names are used in the file.
      */
-    qOriginalFields: string[];
-    qPresent: boolean;
+    qOriginalFields?: string[];
+    qPresent?: boolean;
     /**
      * This property is set to true if the field contains some Null values.
      */
-    qHasNull: boolean;
-    qHasWild: boolean;
+    qHasNull?: boolean;
+    qHasWild?: boolean;
     /**
      * This property is set to true if the field contains some duplicate values.
      */
-    qHasDuplicates: boolean;
+    qHasDuplicates?: boolean;
     /**
      * This property is set to true if the field contains a synthetic key.
      */
-    qIsSynthetic: boolean;
+    qIsSynthetic?: boolean;
     /**
      * Number of records that have values (for example, not NULL) in the field as compared to the total number of records in the table.
      */
-    qInformationDensity: number;
+    qInformationDensity?: number;
     /**
      * Number of values that are non Null.
      */
-    qnNonNulls: number;
+    qnNonNulls?: number;
     /**
      * Number of rows in the field.
      */
-    qnRows: number;
+    qnRows?: number;
     /**
      * Number of distinct values in the field (in the current table) as compared to the total number of distinct values of this field (in all tables).
      */
-    qSubsetRatio: number;
+    qSubsetRatio?: number;
     /**
      * Number of distinct values in the field.
      */
-    qnTotalDistinctValues: number;
-    qnPresentDistinctValues: number;
+    qnTotalDistinctValues?: number;
+    qnPresentDistinctValues?: number;
     /**
      * Tells if the field is a key field.
      *
@@ -1274,144 +1282,144 @@ type FieldInTableData = {
      * * PRIMARY_KEY
      * * PERFECT_KEY
      */
-    qKeyType: string;
+    qKeyType?: KeyType;
     /**
      * Comment related to the field.
      */
-    qComment: string;
+    qComment?: string;
     /**
      * List of tags related to the field.
      */
-    qTags: string[];
+    qTags?: string[];
     /**
      * List of the derived fields.
      */
-    qDerivedFields: DerivedFieldsInTableData[];
+    qDerivedFields?: DerivedFieldsInTableData[];
     qIsFieldOnTheFly?: boolean;
-    qReadableName: string;
+    qReadableName?: string;
 };
 type FieldInTableProfilingData = {
     /**
      * Name of the field.
      */
-    qName: string;
+    qName?: string;
     /**
      * List of tags related to the field.
      */
-    qFieldTags: string[];
-    qNumberFormat: FieldAttributes;
+    qFieldTags?: string[];
+    qNumberFormat?: FieldAttributes;
     /**
      * Number of distinct values
      */
-    qDistinctValues: number;
+    qDistinctValues?: number;
     /**
      * Number of distinct numeric values
      */
-    qDistinctNumericValues: number;
+    qDistinctNumericValues?: number;
     /**
      * Number of distinct text values
      */
-    qDistinctTextValues: number;
+    qDistinctTextValues?: number;
     /**
      * Number of numeric values
      */
-    qNumericValues: number;
+    qNumericValues?: number;
     /**
      * Number of null values
      */
-    qNullValues: number;
+    qNullValues?: number;
     /**
      * Number of textual values
      */
-    qTextValues: number;
+    qTextValues?: number;
     /**
      * Number of negative values
      */
-    qNegValues: number;
+    qNegValues?: number;
     /**
      * Number of positive values
      */
-    qPosValues: number;
+    qPosValues?: number;
     /**
      * Number of zero values for numerical values
      */
-    qZeroValues: number;
+    qZeroValues?: number;
     /**
      * Sum of all numerical values. NaN otherwise.
      */
-    qSum: number;
+    qSum?: number;
     /**
      * Squared sum of all numerical values. NaN otherwise.
      */
-    qSum2: number;
+    qSum2?: number;
     /**
      * Average of all numerical values. NaN otherwise.
      */
-    qAverage: number;
+    qAverage?: number;
     /**
      * Median of all numerical values. NaN otherwise.
      */
-    qMedian: number;
+    qMedian?: number;
     /**
      * Standard deviation of numerical values. NaN otherwise.
      */
-    qStd: number;
+    qStd?: number;
     /**
      * Minimum value of numerical values. NaN otherwise.
      */
-    qMin: number;
+    qMin?: number;
     /**
      * Maximum value of numerical values. NaN otherwise.
      */
-    qMax: number;
+    qMax?: number;
     /**
      * Skewness of the numerical values. NaN otherwise.
      */
-    qSkewness: number;
+    qSkewness?: number;
     /**
      * Kurtosis of the numerical values. NaN otherwise.
      */
-    qKurtosis: number;
+    qKurtosis?: number;
     /**
      * The .01, .05, .1, .25, .5, .75, .9, .95, .99 fractiles. Array of NaN otherwise.
      */
-    qFractiles: number[];
+    qFractiles?: number[];
     /**
      * Number of empty strings
      */
-    qEmptyStrings: number;
+    qEmptyStrings?: number;
     /**
      * Maximum string length of textual values. 0 otherwise.
      */
-    qMaxStringLen: number;
+    qMaxStringLen?: number;
     /**
      * Minimum string length of textual values. 0 otherwise.
      */
-    qMinStringLen: number;
+    qMinStringLen?: number;
     /**
      * Sum of all characters in strings in the field
      */
-    qSumStringLen: number;
+    qSumStringLen?: number;
     /**
      * Average string length of textual values. 0 otherwise.
      */
-    qAvgStringLen: number;
+    qAvgStringLen?: number;
     /**
      * For textual values the first sorted string.
      */
-    qFirstSorted: string;
+    qFirstSorted?: string;
     /**
      * For textual values the last sorted string.
      */
-    qLastSorted: string;
+    qLastSorted?: string;
     /**
      * Three most frequent values and their frequencies
      */
-    qMostFrequent: SymbolFrequency[];
+    qMostFrequent?: SymbolFrequency[];
     /**
      * Frequency Distribution for numeric fields.
      */
-    qFrequencyDistribution: FrequencyDistributionData;
+    qFrequencyDistribution?: FrequencyDistributionData;
 };
 /**
  * Lists the fields present in the data model viewer. Is the layout for _FieldListDef_.
@@ -1420,7 +1428,7 @@ type FieldList = {
     /**
      * Array of items.
      */
-    qItems: NxFieldDescription[];
+    qItems?: NxFieldDescription[];
 };
 /**
  * Defines the fields to show.
@@ -1466,7 +1474,7 @@ type FieldOrColumn = {
     /**
      * Name of the field or column to be matched.
      */
-    qFieldName: string;
+    qFieldName?: string;
     /**
      * Name of the table to be matched on. This parameter is optional. If TableName is set, FieldName represent the Table column with that name. If TableName is not set, FieldName represents the the field with that name.
      */
@@ -1477,24 +1485,25 @@ type FieldScores = {
      * Field name.
      * One of the field names defined in _qFieldPairName._
      */
-    qFieldName: string;
-    qReadableName: string;
+    qFieldName?: string;
+    qReadableName?: string;
     /**
      * Cardinality of a column/field divided by the number of rows in the table.
      * If the cardinal ratio is 1, it means that the column is a candidate/primary key.
      */
-    qCardinalRatio: number;
+    qCardinalRatio?: number;
     /**
      * Number of distinct matches between the two fields defined in _qFieldPairName_ divided by the number of distinct values in the field _qFieldName_ .
      * If 0, it means that there are no common values between the two fields defined in _qFieldPairName_ .
      */
-    qSymbolScore: number;
+    qSymbolScore?: number;
     /**
      * Number of matches between the two fields defined in _qFieldPairName_ divided by the number of values in the field _qFieldName_ .
      * If 0, it means that there are no common values between the two fields defined in _qFieldPairName_ .
      */
-    qRowScore: number;
+    qRowScore?: number;
 };
+type FieldType = "NOT_PRESENT" | "PRESENT" | "IS_CYCLIC_GROUP" | "IS_DRILL_GROUP" | "IS_VAR" | "IS_EXPR" | "IS_IMPLICIT" | "IS_DETAIL";
 type FieldValue = {
     /**
      * Text related to the field value.
@@ -1547,14 +1556,14 @@ type FileDataFormat = {
      * * KML or FILE_TYPE_KML
      * * PARQUET or FILE_TYPE_PARQUET
      */
-    qType: string;
+    qType?: FileType;
     /**
      * One of:
      * * Embedded labels (field names are present in the file)
      * * No labels
      * * Explicit labels (for DIFfiles)
      */
-    qLabel: string;
+    qLabel?: string;
     /**
      * One of:
      * * None (no quotes)
@@ -1563,50 +1572,51 @@ type FileDataFormat = {
      *
      * This property is used for delimited files.
      */
-    qQuote: string;
+    qQuote?: string;
     /**
      * String that marks the beginning of the comment line.
      * Example: “#” or “//”
      * The engine ignores the commented lines during the data load.
      * This property is only used for delimited files.
      */
-    qComment: string;
+    qComment?: string;
     /**
      * Information about the delimiter.
      * This property is used for delimited files.
      */
-    qDelimiter: DelimiterInfo;
+    qDelimiter?: DelimiterInfo;
     /**
      * Character set used in the file.
      */
-    qCodePage: number;
+    qCodePage?: number;
     /**
      * Size of the header.
      * Example: If the header size is 2, the first two rows in the file are considered as header and not as data. The header can contain the field names.
      */
-    qHeaderSize: number;
+    qHeaderSize?: number;
     /**
      * Record length.
      * Each record (row of data) contains a number of columns with a fixed field size.
      * This property is used for fixed record data files.
      */
-    qRecordSize: number;
+    qRecordSize?: number;
     /**
      * Number of spaces that one tab character represents in the table file.
      * This property is used for fixed record data files.
      */
-    qTabSize: number;
+    qTabSize?: number;
     /**
      * Is set to true, the end-of-file character is not taken into account during reload.
      * This property is used for delimited files and fixed record data files.
      */
-    qIgnoreEOF: boolean;
+    qIgnoreEOF?: boolean;
     /**
      * Positions of the field breaks in the table.
      * This property is used for fixed record data files.
      */
-    qFixedWidthDelimiters: string;
+    qFixedWidthDelimiters?: string;
 };
+type FileType = "CSV" | "FILE_TYPE_CSV" | "FIX" | "FILE_TYPE_FIX" | "DIF" | "FILE_TYPE_DIF" | "EXCEL_BIFF" | "FILE_TYPE_EXCEL_BIFF" | "EXCEL_OOXML" | "FILE_TYPE_EXCEL_OOXML" | "HTML" | "FILE_TYPE_HTML" | "QVD" | "FILE_TYPE_QVD" | "XML" | "FILE_TYPE_XML" | "QVX" | "FILE_TYPE_QVX" | "JSON" | "FILE_TYPE_JSON" | "KML" | "FILE_TYPE_KML" | "PARQUET" | "FILE_TYPE_PARQUET";
 type FilterInfo = {
     /**
      *
@@ -1614,14 +1624,15 @@ type FilterInfo = {
      * * NONE or FILTER_TYPE_NONE
      * * RAW or FILTER_TYPE_RAW
      */
-    qType: string;
-    qWherePredicate: string;
+    qType?: FilterType;
+    qWherePredicate?: string;
 };
+type FilterType = "NONE" | "FILTER_TYPE_NONE" | "RAW" | "FILTER_TYPE_RAW";
 type FolderItem = {
     /**
      * Name of the folder item.
      */
-    qName: string;
+    qName?: string;
     /**
      * Type of the folder item.
      *
@@ -1630,27 +1641,28 @@ type FolderItem = {
      * * FILE or FOLDER_ITEM_FILE
      * * OTHER or FOLDER_ITEM_OTHER
      */
-    qType: string;
+    qType?: FolderItemType;
 };
+type FolderItemType = "FOLDER" | "FOLDER_ITEM_FOLDER" | "FILE" | "FOLDER_ITEM_FILE" | "OTHER" | "FOLDER_ITEM_OTHER";
 type FrequencyDistributionData = {
     /**
      * Number of bins.
      */
-    qNumberOfBins: number;
+    qNumberOfBins?: number;
     /**
      * Bins edges.
      */
-    qBinsEdges: number[];
+    qBinsEdges?: number[];
     /**
      * Bins frequencies.
      */
-    qFrequencies: number[];
+    qFrequencies?: number[];
 };
 type QFunction = {
     /**
      * Name of the script function.
      */
-    qName: string;
+    qName?: string;
     /**
      * Group of the script function.
      *
@@ -1687,30 +1699,31 @@ type QFunction = {
      * * LEG or FUNC_GROUP_LEGACY
      * * DB or FUNC_GROUP_DB_NATIVE
      */
-    qGroup: string;
+    qGroup?: FunctionGroup;
     /**
      * Signature of the script function.
      * Gives general information about the function.
      */
-    qSignature: string;
+    qSignature?: string;
 };
+type FunctionGroup = "ALL" | "FUNC_GROUP_ALL" | "U" | "FUNC_GROUP_UNKNOWN" | "NONE" | "FUNC_GROUP_NONE" | "AGGR" | "FUNC_GROUP_AGGR" | "NUM" | "FUNC_GROUP_NUMERIC" | "RNG" | "FUNC_GROUP_RANGE" | "EXP" | "FUNC_GROUP_EXPONENTIAL_AND_LOGARITHMIC" | "TRIG" | "FUNC_GROUP_TRIGONOMETRIC_AND_HYPERBOLIC" | "FIN" | "FUNC_GROUP_FINANCIAL" | "MATH" | "FUNC_GROUP_MATH_CONSTANT_AND_PARAM_FREE" | "COUNT" | "FUNC_GROUP_COUNTER" | "STR" | "FUNC_GROUP_STRING" | "MAPP" | "FUNC_GROUP_MAPPING" | "RCRD" | "FUNC_GROUP_INTER_RECORD" | "CND" | "FUNC_GROUP_CONDITIONAL" | "LOG" | "FUNC_GROUP_LOGICAL" | "NULL" | "FUNC_GROUP_NULL" | "SYS" | "FUNC_GROUP_SYSTEM" | "FILE" | "FUNC_GROUP_FILE" | "TBL" | "FUNC_GROUP_TABLE" | "DATE" | "FUNC_GROUP_DATE_AND_TIME" | "NUMI" | "FUNC_GROUP_NUMBER_INTERPRET" | "FRMT" | "FUNC_GROUP_FORMATTING" | "CLR" | "FUNC_GROUP_COLOR" | "RNK" | "FUNC_GROUP_RANKING" | "GEO" | "FUNC_GROUP_GEO" | "EXT" | "FUNC_GROUP_EXTERNAL" | "PROB" | "FUNC_GROUP_PROBABILITY" | "ARRAY" | "FUNC_GROUP_ARRAY" | "LEG" | "FUNC_GROUP_LEGACY" | "DB" | "FUNC_GROUP_DB_NATIVE";
 type GenericBookmarkEntry = {
     /**
      * Information about the properties of the bookmark.
      */
-    qProperties: GenericBookmarkProperties;
+    qProperties?: GenericBookmarkProperties;
     /**
      * Information about the bookmark.
      */
-    qBookmark: NxBookmark;
+    qBookmark?: NxBookmark;
     /**
      * Information about the Classic bookmark.
      */
-    qClassicBookmark: Bookmark;
+    qClassicBookmark?: Bookmark;
     /**
      * Information about the Classic bookmark metadata.
      */
-    qClassicMetadata: MetaData;
+    qClassicMetadata?: MetaData;
 };
 /**
  * Is the layout for _GenericBookmarkProperties_.
@@ -1719,26 +1732,26 @@ type GenericBookmarkLayout = {
     /**
      * Information about the object.
      */
-    qInfo: NxInfo;
+    qInfo?: NxInfo;
     /**
      * Information on publishing and permissions.
      */
-    qMeta: NxMeta;
+    qMeta?: NxMeta;
     /**
      * Information about the bookmark.
      */
-    qBookmark: NxBookmark;
+    qBookmark?: NxBookmark;
     /**
      * Information about the field selections associated with the bookmark.
      */
-    qFieldInfos: LayoutFieldInfo[];
+    qFieldInfos?: LayoutFieldInfo[];
 };
 type GenericBookmarkProperties = {
     /**
      * Information about the bookmark.
      * This parameter is mandatory.
      */
-    qInfo: NxInfo;
+    qInfo?: NxInfo;
     /**
      * Definition of the dynamic properties.
      */
@@ -1756,24 +1769,25 @@ type GenericBookmarkProperties = {
      */
     qDistinctValues?: boolean;
 };
+type GenericConnectMachine = "CONNECT_DEFAULT" | "CONNECT_64" | "CONNECT_32";
 type GenericDimensionInfo = {
     /**
      * Length of the longest value in the field.
      */
-    qApprMaxGlyphCount: number;
+    qApprMaxGlyphCount?: number;
     /**
      * Number of distinct field values
      */
-    qCardinal: number;
+    qCardinal?: number;
     /**
      * Gives information on a field. For example, it can return the type of the field.
      * Examples: key, text, ASCII
      */
-    qTags: string[];
+    qTags?: string[];
     /**
      * If set to true, it means that the field is a semantic.
      */
-    qIsSemantic: boolean;
+    qIsSemantic?: boolean;
     /**
      * If set to true a logical AND (instead of a logical OR) is used when making selections in a field.
      * The default value is false.
@@ -1787,32 +1801,32 @@ type GenericDimensionLayout = {
     /**
      * Identifier and type of the dimension.
      */
-    qInfo: NxInfo;
+    qInfo?: NxInfo;
     /**
      * Information about publishing and permissions.
      */
-    qMeta: NxMeta;
+    qMeta?: NxMeta;
     /**
      * Name and label of the dimension, information about grouping.
      */
-    qDim: NxLibraryDimension;
+    qDim?: NxLibraryDimension;
     /**
      * Cardinal and tags related to the dimension.
      * Length of the longest value in the field.
      */
-    qDimInfos: GenericDimensionInfo[];
+    qDimInfos?: GenericDimensionInfo[];
 };
 type GenericDimensionProperties = {
     /**
      * Identifier and type of the dimension.
      * This parameter is mandatory.
      */
-    qInfo: NxInfo;
+    qInfo?: NxInfo;
     /**
      * Definition of the dimension.
      * This parameter is mandatory.
      */
-    qDim: NxLibraryDimensionDef;
+    qDim?: NxLibraryDimensionDef;
     /**
      * Definition of the dynamic properties.
      */
@@ -1825,27 +1839,27 @@ type GenericMeasureLayout = {
     /**
      * Information about the object.
      */
-    qInfo: NxInfo;
+    qInfo?: NxInfo;
     /**
      * Information about the measure.
      */
-    qMeasure: NxLibraryMeasure;
+    qMeasure?: NxLibraryMeasure;
     /**
      * Information on publishing and permissions.
      */
-    qMeta: NxMeta;
+    qMeta?: NxMeta;
 };
 type GenericMeasureProperties = {
     /**
      * Information about the measure.
      * This parameter is mandatory.
      */
-    qInfo: NxInfo;
+    qInfo?: NxInfo;
     /**
      * Definition of the measure.
      * This parameter is mandatory.
      */
-    qMeasure: NxLibraryMeasureDef;
+    qMeasure?: NxLibraryMeasureDef;
     /**
      * Definition of the dynamic properties.
      */
@@ -1855,15 +1869,15 @@ type GenericObjectEntry = {
     /**
      * Information about the generic object properties.
      */
-    qProperty: GenericObjectProperties;
+    qProperty?: GenericObjectProperties;
     /**
      * Information about the children of the generic object.
      */
-    qChildren: GenericObjectEntry[];
+    qChildren?: GenericObjectEntry[];
     /**
      * Reference to a bookmark/snapshot that is embedded in the generic object.
      */
-    qEmbeddedSnapshotRef: GenericBookmarkEntry;
+    qEmbeddedSnapshotRef?: GenericBookmarkEntry;
 };
 /**
  * Is the layout for _GenericObjectProperties_.
@@ -1872,7 +1886,7 @@ type GenericObjectLayout = {
     /**
      * Identifier and type of the generic object.
      */
-    qInfo: NxInfo;
+    qInfo?: NxInfo;
     /**
      * Information about publishing and permissions.
      * This parameter is optional.
@@ -1886,7 +1900,7 @@ type GenericObjectLayout = {
     /**
      * Is set to true if the generic object contains some properties that are not persistent (a soft patch was applied).
      */
-    qHasSoftPatches: boolean;
+    qHasSoftPatches?: boolean;
     /**
      * Gives information on the error.
      * This parameter is optional.
@@ -1895,7 +1909,7 @@ type GenericObjectLayout = {
     /**
      * Information about the selections.
      */
-    qSelectionInfo: NxSelectionInfo;
+    qSelectionInfo?: NxSelectionInfo;
     /**
      * Name of the alternate state.
      * Default is current selections _$_ .
@@ -1927,7 +1941,7 @@ type GenericObjectProperties = {
      * Identifier and type of the object.
      * This parameter is mandatory.
      */
-    qInfo: NxInfo;
+    qInfo?: NxInfo;
     /**
      * Should be set to create an object that is linked to another object. Enter the identifier of the linking object (i.e the object you want to link to).
      * If you do not want to link your object, set this parameter to an empty string.
@@ -1974,7 +1988,7 @@ type GenericVariableLayout = {
      * Identifier and type of the object.
      * This parameter is mandatory.
      */
-    qInfo: NxInfo;
+    qInfo?: NxInfo;
     /**
      * Information about publishing and permissions.
      * This parameter is optional.
@@ -1983,22 +1997,22 @@ type GenericVariableLayout = {
     /**
      * Some text.
      */
-    qText: string;
+    qText?: string;
     /**
      * A value.
      */
-    qNum: number;
+    qNum?: number;
     /**
      * If set to true, it means that the variable was defined via script.
      */
-    qIsScriptCreated: boolean;
+    qIsScriptCreated?: boolean;
 };
 type GenericVariableProperties = {
     /**
      * Identifier and type of the object.
      * This parameter is mandatory.
      */
-    qInfo: NxInfo;
+    qInfo?: NxInfo;
     /**
      * Meta data.
      */
@@ -2008,7 +2022,7 @@ type GenericVariableProperties = {
      * The name must be unique.
      * This parameter is mandatory.
      */
-    qName: string;
+    qName?: string;
     /**
      * Comment related to the variable.
      * This parameter is optional.
@@ -2029,15 +2043,16 @@ type GenericVariableProperties = {
     /**
      * Definition of the variable.
      */
-    qDefinition: string;
+    qDefinition?: string;
 };
+type GraphMode = "GRAPH_MODE_BAR" | "GRAPH_MODE_PIE" | "GRAPH_MODE_PIVOTTABLE" | "GRAPH_MODE_SCATTER" | "GRAPH_MODE_LINE" | "GRAPH_MODE_STRAIGHTTABLE" | "GRAPH_MODE_COMBO" | "GRAPH_MODE_RADAR" | "GRAPH_MODE_GAUGE" | "GRAPH_MODE_GRID" | "GRAPH_MODE_BLOCK" | "GRAPH_MODE_FUNNEL" | "GRAPH_MODE_MEKKO" | "GRAPH_MODE_LAST";
 type GroupBookmarkData = {
-    qId: string;
-    qCyclePos: number;
+    qId?: string;
+    qCyclePos?: number;
 };
 type GroupStateInfo = {
-    qGroupName: string;
-    qCurrentItemName: string;
+    qGroupName?: string;
+    qCurrentItemName?: string;
 };
 /**
  * Renders the properties of a hypercube. Is the layout for _HyperCubeDef_.
@@ -2053,7 +2068,7 @@ type HyperCube = {
     /**
      * Defines the size of the hypercube.
      */
-    qSize: Size;
+    qSize?: Size;
     /**
      * This parameter is optional and is displayed in case of error.
      */
@@ -2061,37 +2076,37 @@ type HyperCube = {
     /**
      * Information on the dimension.
      */
-    qDimensionInfo: NxDimensionInfo[];
+    qDimensionInfo?: NxDimensionInfo[];
     /**
      * Information on the measure.
      */
-    qMeasureInfo: NxMeasureInfo[];
+    qMeasureInfo?: NxMeasureInfo[];
     /**
      * Sort order of the columns in the hypercube.
      * Column numbers are separated by a comma.
      * Example: [1,0,2] means that the first column to be sorted was the column 1, followed by the column 0 and the column 2.
      */
-    qEffectiveInterColumnSortOrder: number[];
+    qEffectiveInterColumnSortOrder?: number[];
     /**
      * Aggregate for measures of all values in the field.
      * The result value depends on the _qAggrFunc_ defined in _HyperCubeDef_.
      */
-    qGrandTotalRow: NxCell[];
+    qGrandTotalRow?: NxCell[];
     /**
      * Set of data.
      * Is empty if nothing has been defined in **qInitialDataFetch** in _HyperCubeDef_.
      */
-    qDataPages: NxDataPage[];
+    qDataPages?: NxDataPage[];
     /**
      * Set of data for pivot tables.
      * Is empty if nothing has been defined in **qInitialDataFetch** in _HyperCubeDef_.
      */
-    qPivotDataPages: NxPivotPage[];
+    qPivotDataPages?: NxPivotPage[];
     /**
      * Set of data for stacked tables.
      * Is empty if nothing has been defined in **qInitialDataFetch** in _HyperCubeDef_.
      */
-    qStackedDataPages: NxStackPage[];
+    qStackedDataPages?: NxStackPage[];
     /**
      * Information about the mode of the visualization.
      *
@@ -2102,7 +2117,7 @@ type HyperCube = {
      * * T or DATA_MODE_TREE
      * * D or DATA_MODE_DYNAMIC
      */
-    qMode: string;
+    qMode?: NxHypercubeMode;
     /**
      * Number of left dimensions.
      * Default value is -1.
@@ -2146,23 +2161,23 @@ type HyperCube = {
     /**
      * True if other row exists.
      */
-    qHasOtherValues: boolean;
+    qHasOtherValues?: boolean;
     /**
      * Title of the hypercube, for example the title of a chart.
      */
-    qTitle: string;
+    qTitle?: string;
     /**
      * The total number of nodes on each dimension (only applicable when _qMode = T_ ).
      */
-    qTreeNodesOnDim: number[];
+    qTreeNodesOnDim?: number[];
     /**
      * The message displayed if calculation condition is not fulfilled.
      */
-    qCalcCondMsg: string;
+    qCalcCondMsg?: string;
     /**
      * The order of the columns.
      */
-    qColumnOrder: number[];
+    qColumnOrder?: number[];
 };
 /**
  * Defines the properties of a hypercube.
@@ -2177,11 +2192,11 @@ type HyperCubeDef = {
     /**
      * Array of dimensions.
      */
-    qDimensions: NxDimension[];
+    qDimensions?: NxDimension[];
     /**
      * Array of measures.
      */
-    qMeasures: NxMeasure[];
+    qMeasures?: NxMeasure[];
     /**
      * Defines the sort order of the columns in the hypercube.
      * Column numbers are separated by a comma.
@@ -2204,7 +2219,7 @@ type HyperCubeDef = {
     /**
      * Initial data set.
      */
-    qInitialDataFetch: NxPage[];
+    qInitialDataFetch?: NxPage[];
     /**
      *
      * One of:
@@ -2214,7 +2229,7 @@ type HyperCubeDef = {
      * * C or DATA_REDUCTION_CLUSTERED
      * * ST or DATA_REDUCTION_STACKED
      */
-    qReductionMode: string;
+    qReductionMode?: NxDataReductionMode;
     /**
      * Defines the way the data are handled internally by the engine.
      * Default value is _DATA_MODE_STRAIGHT_ .
@@ -2227,7 +2242,7 @@ type HyperCubeDef = {
      * * T or DATA_MODE_TREE
      * * D or DATA_MODE_DYNAMIC
      */
-    qMode?: string;
+    qMode?: NxHypercubeMode;
     qPseudoDimPos?: number;
     /**
      * Number of left dimensions.
@@ -2300,7 +2315,7 @@ type HyperCubeDef = {
     /**
      * Title of the hypercube, for example the title of a chart.
      */
-    qTitle: StringExpr;
+    qTitle?: StringExpr;
     /**
      * Specifies a calculation condition object.
      * If CalcCondition.Cond is not fulfilled, the hypercube is not calculated and CalcCondition.Msg is evaluated.
@@ -2311,36 +2326,36 @@ type HyperCubeDef = {
     /**
      * The order of the columns.
      */
-    qColumnOrder: number[];
+    qColumnOrder?: number[];
     /**
      * Expansion state per dimension for pivot mode ( _qMode_ is P).
      *
      * Stability: *experimental*
      */
-    qExpansionState: ExpansionData[];
+    qExpansionState?: ExpansionData[];
     /**
      * Hypercube Modifier Dynamic script string
      *
      * Stability: *experimental*
      */
-    qDynamicScript: string[];
+    qDynamicScript?: string[];
     /**
      * Set Expression valid for the whole cube. Used to limit computations to the set specified.
      */
-    qContextSetExpression: string;
+    qContextSetExpression?: string;
     /**
      * If set to true, suppress any measure grand totals, ignoring any AggrFunc.
      */
-    qSuppressMeasureTotals: boolean;
+    qSuppressMeasureTotals?: boolean;
 };
 type InputFieldItem = {
-    qFieldName: string;
-    qValues: FieldValue[];
-    qPackedHashKeys: number[];
+    qFieldName?: string;
+    qValues?: FieldValue[];
+    qPackedHashKeys?: number[];
 };
 type InterFieldSortData = {
-    qName: string;
-    qReversed: boolean;
+    qName?: string;
+    qReversed?: boolean;
 };
 type InteractDef = {
     /**
@@ -2355,17 +2370,17 @@ type InteractDef = {
      * * IT_PASSWD
      * * IT_USERNAME
      */
-    qType: string;
+    qType?: InteractType;
     /**
      * Title used in the message box dialog.
      * This property is relevant if _qType_ is *IT_MSGBOX*.
      */
-    qTitle: string;
+    qTitle?: string;
     /**
      * Message used in the message box dialog.
      * This property is relevant if _qType_ is *IT_MSGBOX*.
      */
-    qMsg: string;
+    qMsg?: string;
     /**
      * Buttons displayed in the message box dialog.
      * This property is relevant if _qType_ is *IT_MSGBOX*.
@@ -2373,52 +2388,54 @@ type InteractDef = {
      * * 0 means that the _qButtons_ property is not relevant.
      * * 17 means that the message box contains the **OK** and **Cancel** buttons or the **stop** -sign icon.
      */
-    qButtons: number;
+    qButtons?: number;
     /**
      * Next script statement to be executed.
      * This property is used if the type of interaction is *IT_SCRIPTLINE*.
      */
-    qLine: string;
+    qLine?: string;
     /**
      * First line number of the previously executed statement.
      * This property is used if the type of interaction is *IT_SCRIPTLINE*.
      */
-    qOldLineNr: number;
+    qOldLineNr?: number;
     /**
      * First line number of the next statement to be executed.
      * This property is used if the type of interaction is *IT_SCRIPTLINE*.
      */
-    qNewLineNr: number;
+    qNewLineNr?: number;
     /**
      * Path specified by the **Include** script variable.
      * This property is used if the type of interaction is *IT_SCRIPTLINE*.
      * Example of an **Include** variable:
      * _$(Include=lib:\\\MyDataFiles\abc.txt);_
      */
-    qPath: string;
+    qPath?: string;
     /**
      * This property is set to true if the returned statement is an hidden script statement.
      */
-    qHidden: boolean;
+    qHidden?: boolean;
     /**
      * Not relevant for describing the requested user interaction.
      */
-    qResult: number;
+    qResult?: number;
     /**
      * Is not used in Qlik Sense.
      */
-    qInput: string;
+    qInput?: string;
 };
+type InteractType = "IT_MSGBOX" | "IT_SCRIPTLINE" | "IT_BREAK" | "IT_INPUT" | "IT_END" | "IT_PASSWD" | "IT_USERNAME";
+type KeyType = "NOT_KEY" | "ANY_KEY" | "PRIMARY_KEY" | "PERFECT_KEY";
 type LayoutBookmarkData = {
-    qId: string;
-    qActive: boolean;
-    qShowMode: number;
-    qScrollPos: ScrollPosition;
+    qId?: string;
+    qActive?: boolean;
+    qShowMode?: number;
+    qScrollPos?: ScrollPosition;
 };
 /**
  * Contains JSON to be excluded from validation.
  */
-type LayoutExclude = {};
+type LayoutExclude = object;
 /**
  * Meta data about the selection in a field.
  */
@@ -2426,15 +2443,15 @@ type LayoutFieldInfo = {
     /**
      * The name of the field.
      */
-    qFieldName: string;
+    qFieldName?: string;
     /**
      * Number of selected values in the field.
      */
-    qValuesCount: number;
+    qValuesCount?: number;
     /**
      * Number of excluded values in the field.
      */
-    qExcludedValuesCount: number;
+    qExcludedValuesCount?: number;
 };
 type LineageInfo = {
     /**
@@ -2448,11 +2465,11 @@ type LineageInfo = {
      * * STORE: path to QVD or TXT file where data is stored.
      * * EXTENSION: the data comes from a Server Side Extension (SSE).
      */
-    qDiscriminator: string;
+    qDiscriminator?: string;
     /**
      * The LOAD and SELECT script statements from the data load script.
      */
-    qStatement: string;
+    qStatement?: string;
 };
 /**
  * Renders the properties of a list object. Is the layout for _ListObjectDef_.
@@ -2468,7 +2485,7 @@ type ListObject = {
     /**
      * Defines the size of a list object.
      */
-    qSize: Size;
+    qSize?: Size;
     /**
      * This parameter is optional and is displayed in case of error.
      */
@@ -2476,16 +2493,16 @@ type ListObject = {
     /**
      * Information about the dimension.
      */
-    qDimensionInfo: NxDimensionInfo;
+    qDimensionInfo?: NxDimensionInfo;
     /**
      * Lists the expressions in the list object.
      */
-    qExpressions: NxListObjectExpression[];
+    qExpressions?: NxListObjectExpression[];
     /**
      * Set of data.
      * Is empty if nothing has been defined in **qInitialDataFetch** in _ListObjectDef_.
      */
-    qDataPages: NxDataPage[];
+    qDataPages?: NxDataPage[];
 };
 /**
  * Defines the properties of a list object.
@@ -2500,15 +2517,15 @@ type ListObjectDef = {
     /**
      * Refers to a dimension stored in the library.
      */
-    qLibraryId: string;
+    qLibraryId?: string;
     /**
      * Refers to a dimension stored in the list object.
      */
-    qDef: NxInlineDimensionDef;
+    qDef?: NxInlineDimensionDef;
     /**
      * Defines the sorting by state.
      */
-    qAutoSortByState: NxAutoSortByStateDef;
+    qAutoSortByState?: NxAutoSortByStateDef;
     /**
      * Defines the frequency mode. The frequency mode is used to calculate the frequency of a value in a list object.
      * Default is _NX_FREQUENCY_NONE_ .
@@ -2520,7 +2537,7 @@ type ListObjectDef = {
      * * P or NX_FREQUENCY_PERCENT
      * * R or NX_FREQUENCY_RELATIVE
      */
-    qFrequencyMode?: string;
+    qFrequencyMode?: NxFrequencyMode;
     /**
      * If set to true, alternative values are allowed in _qData_ .
      * If set to false, no alternative values are displayed in _qData_ . Values are excluded instead.
@@ -2532,7 +2549,7 @@ type ListObjectDef = {
     /**
      * Fetches an initial data set.
      */
-    qInitialDataFetch: NxPage[];
+    qInitialDataFetch?: NxPage[];
     /**
      * Lists the expressions in the list object.
      * This parameter is optional.
@@ -2551,51 +2568,51 @@ type LocaleInfo = {
     /**
      * Decimal separator.
      */
-    qDecimalSep: string;
+    qDecimalSep?: string;
     /**
      * Thousand separator.
      */
-    qThousandSep: string;
+    qThousandSep?: string;
     /**
      * List separator.
      */
-    qListSep: string;
+    qListSep?: string;
     /**
      * Money decimal separator.
      */
-    qMoneyDecimalSep: string;
+    qMoneyDecimalSep?: string;
     /**
      * Money thousand separator.
      */
-    qMoneyThousandSep: string;
+    qMoneyThousandSep?: string;
     /**
      * Current year.
      */
-    qCurrentYear: number;
+    qCurrentYear?: number;
     /**
      * Money format.
      * Example: _#.##0,00 kr;-#.##0,00 kr_
      */
-    qMoneyFmt: string;
+    qMoneyFmt?: string;
     /**
      * Time format.
      * Example: _hh:mm:ss_
      */
-    qTimeFmt: string;
+    qTimeFmt?: string;
     /**
      * Date format.
      * Example: _YYYY-MM-DD_
      */
-    qDateFmt: string;
+    qDateFmt?: string;
     /**
      * Time stamp format.
      * Example: _YYYY-MM-DD hh:mm:ss[.fff]_
      */
-    qTimestampFmt: string;
+    qTimestampFmt?: string;
     /**
      * Information about the calendar.
      */
-    qCalendarStrings: CalendarStrings;
+    qCalendarStrings?: CalendarStrings;
     /**
      * First day of the week, starting from 0.
      * According to ISO 8601, _Monday_ is the first day of the week.
@@ -2606,7 +2623,7 @@ type LocaleInfo = {
      *
      * If this property has not been set in a script, the returned value comes from the Windows operating system.
      */
-    qFirstWeekDay: number;
+    qFirstWeekDay?: number;
     /**
      * Is set to true if broken weeks are allowed in a year.
      * According to ISO 8601, no broken weeks should be allowed.
@@ -2614,7 +2631,7 @@ type LocaleInfo = {
      * If _qBrokenWeeks_ is set to true, _qReferenceDay_ is irrelevant.
      * If this property has not been set in a script, the returned value comes from the Windows operating system.
      */
-    qBrokenWeeks: boolean;
+    qBrokenWeeks?: boolean;
     /**
      * Day in the year that is always in week 1.
      * According to ISO 8601, January 4th should always be part of the first week of the year ( _qReferenceDay_ =4).
@@ -2622,7 +2639,7 @@ type LocaleInfo = {
      * If this property has not been set in a script, the returned value comes from the Windows operating system.
      * This property is not relevant if there are broken weeks in the year.
      */
-    qReferenceDay: number;
+    qReferenceDay?: number;
     /**
      * First month of the year, starting from 1.
      * According to ISO 8601, _January_ is the first month of the year.
@@ -2632,7 +2649,7 @@ type LocaleInfo = {
      *
      * If this property has not been set in a script, the returned value comes from the Windows operating system.
      */
-    qFirstMonthOfYear: number;
+    qFirstMonthOfYear?: number;
     /**
      * Locale name (following language tagging convention RFC 4646):
      * _&lt; language&gt;-&lt;REGION&gt;_
@@ -2642,13 +2659,14 @@ type LocaleInfo = {
      *
      * If this property has not been set in a script, the returned value comes from the Windows operating system.
      */
-    qCollation: string;
+    qCollation?: string;
     /**
      * Number format.
      * Example: 3:k;6:M;9:G;12:T;15:P;18:E;21:Z;24:Y;-3:m;-6:μ;-9:n;-12:p;-15:f;-18:a;-21:z;-24:y
      */
-    qNumericalAbbreviation: string;
+    qNumericalAbbreviation?: string;
 };
+type LogOnType = "LOG_ON_SERVICE_USER" | "LOG_ON_CURRENT_USER";
 /**
  * Lists the measures. Is the layout for _MeasureListDef_.
  */
@@ -2656,7 +2674,7 @@ type MeasureList<QData> = {
     /**
      * Information about the list of measures.
      */
-    qItems: NxContainerEntry<QData>[];
+    qItems?: NxContainerEntry<QData>[];
 };
 /**
  * Defines the list of measures.
@@ -2665,11 +2683,11 @@ type MeasureListDef = {
     /**
      * Type of the list.
      */
-    qType: string;
+    qType?: string;
     /**
      * Data
      */
-    qData: Record<string, string>;
+    qData?: Record<string, string>;
 };
 /**
  * Lists the media files. Is the layout for _MediaListDef_.
@@ -2684,7 +2702,7 @@ type QMediaList = {
      * &lt;installation_directory&gt;\Qlik\Sense\Repository\Content\Default
      * The default installation directory is _ProgramData_ .
      */
-    qItems: MediaListItem[];
+    qItems?: MediaListItem[];
 };
 /**
  * Defines the list of media files.
@@ -2694,7 +2712,7 @@ type QMediaList = {
  * "qMediaListDef": {}
  * _qMediaListDef_ has an empty structure. No properties need to be set.
  */
-type MediaListDef = {};
+type MediaListDef = object;
 /**
  * <div class=note>In addition, this structure can return dynamic properties.</div>
  */
@@ -2705,25 +2723,25 @@ type MediaListItem = {
      * * in the _/content/default/_ folder are outside the qvf file.
      * * in the _/media/ folder_ are embedded in the qvf file.
      */
-    qUrlDef: string;
+    qUrlDef?: string;
     /**
      * Relative path to the media file.
      * Media files located:
      * * in the _/content/default/_ folder are outside the qvf file.
      * * in the _/media/ folder_ are embedded in the qvf file.
      */
-    qUrl: string;
+    qUrl?: string;
 };
 type MetaData = {
-    qShared: boolean;
-    qUtcModifyTime: number;
-    qSheetId: string;
-    qTemporary: boolean;
-    qRestrictedAccess: boolean;
-    qAccessList: string[];
-    qPersonalEditionHash_OBSOLETE: string;
+    qShared?: boolean;
+    qUtcModifyTime?: number;
+    qSheetId?: string;
+    qTemporary?: boolean;
+    qRestrictedAccess?: boolean;
+    qAccessList?: string[];
+    qPersonalEditionHash_OBSOLETE?: string;
     qHidden?: boolean;
-    qLinkedTo: string[];
+    qLinkedTo?: string[];
 };
 /**
  * ### Qlik Sense Desktop
@@ -2743,79 +2761,79 @@ type NxAppLayout = {
     /**
      * Title of the app.
      */
-    qTitle: string;
+    qTitle?: string;
     /**
      * In Qlik Sense Enterprise, this property corresponds to the app identifier (GUID).
      * In Qlik Sense Desktop, this property corresponds to the full path of the app.
      */
-    qFileName: string;
+    qFileName?: string;
     /**
      * Date and time of the last reload of the app in ISO format.
      */
-    qLastReloadTime: string;
+    qLastReloadTime?: string;
     /**
      * Is set to true if the app has been updated since the last save.
      */
-    qModified: boolean;
+    qModified?: boolean;
     /**
      * Is set to true if a script is defined in the app.
      */
-    qHasScript: boolean;
+    qHasScript?: boolean;
     /**
      * Array of alternate states.
      */
-    qStateNames: string[];
+    qStateNames?: string[];
     /**
      * Information on publishing and permissions.
      */
-    qMeta: NxMeta;
+    qMeta?: NxMeta;
     /**
      * Information about the locale.
      */
-    qLocaleInfo: LocaleInfo;
+    qLocaleInfo?: LocaleInfo;
     /**
      * Is set to true if the app contains data following a script reload.
      */
-    qHasData: boolean;
+    qHasData?: boolean;
     /**
      * If set to true, it means that the app is read-only.
      */
-    qReadOnly: boolean;
+    qReadOnly?: boolean;
     /**
      * If set to true, it means that the app was opened without loading its data.
      */
-    qIsOpenedWithoutData: boolean;
+    qIsOpenedWithoutData?: boolean;
     /**
      * If set to true, the app is a Session App, i.e. not persistent.
      */
-    qIsSessionApp: boolean;
+    qIsSessionApp?: boolean;
     /**
      * If set to true, the persisted app cannot be used in a Binary load statement in Qlik load script.
      */
-    qProhibitBinaryLoad: boolean;
+    qProhibitBinaryLoad?: boolean;
     /**
      * App thumbnail.
      */
-    qThumbnail: StaticContentUrl;
+    qThumbnail?: StaticContentUrl;
     /**
      * If set to true, the app is in BDI Direct Query Mode.
      */
-    qIsBDILiveMode: boolean;
+    qIsBDILiveMode?: boolean;
     /**
      * If set to true, the app is in Direct Query Mode.
      */
-    qIsDirectQueryMode: boolean;
+    qIsDirectQueryMode?: boolean;
     /**
      * Array of features not supported by the app.
      */
-    qUnsupportedFeatures: string[];
+    qUnsupportedFeatures?: NxFeature[];
     /**
      *
      * One of:
      * * ANALYTICS
      * * DATA_PREPARATION
      */
-    qUsage: string;
+    qUsage?: UsageEnum;
 };
 /**
  * ### Qlik Sense Desktop
@@ -2835,31 +2853,31 @@ type NxAppProperties = {
     /**
      * App title.
      */
-    qTitle: string;
+    qTitle?: string;
     /**
      * Last reload time of the app.
      */
-    qLastReloadTime: string;
+    qLastReloadTime?: string;
     /**
      * Internal property reserved for app migration.
      * Patch version of the app.
      * Do not update.
      */
-    qMigrationHash: string;
+    qMigrationHash?: string;
     /**
      * Internal property reserved for app migration.
      * The app is saved in this version of the product.
      * Do not update.
      */
-    qSavedInProductVersion: string;
+    qSavedInProductVersion?: string;
     /**
      * App thumbnail.
      */
-    qThumbnail: StaticContentUrlDef;
+    qThumbnail?: StaticContentUrlDef;
     /**
      * If true the app has section access configured.
      */
-    qHasSectionAccess: boolean;
+    qHasSectionAccess?: boolean;
     /**
      * Indicates whether the app is used for Analytics or DataPreparation
      *
@@ -2867,7 +2885,7 @@ type NxAppProperties = {
      * * ANALYTICS
      * * DATA_PREPARATION
      */
-    qUsage: string;
+    qUsage?: UsageEnum;
 };
 /**
  * Layout for _NxAttrDimDef_.
@@ -2876,19 +2894,19 @@ type NxAttrDimDef = {
     /**
      * Expression or field name.
      */
-    qDef: string;
+    qDef?: string;
     /**
      * LibraryId for dimension.
      */
-    qLibraryId: string;
+    qLibraryId?: string;
     /**
      * Sorting.
      */
-    qSortBy: SortCriteria;
+    qSortBy?: SortCriteria;
     /**
      * If set to true, this attribute will not affect the number of rows in the cube.
      */
-    qAttribute: boolean;
+    qAttribute?: boolean;
 };
 /**
  * Layout for _NxAttrDimDef_.
@@ -2897,23 +2915,23 @@ type NxAttrDimInfo = {
     /**
      * Cardinality of the attribute expression.
      */
-    qCardinal: number;
+    qCardinal?: number;
     /**
      * Number of rows.
      */
-    qSize: Size;
+    qSize?: Size;
     /**
      * The title for the attribute dimension.
      */
-    qFallbackTitle: string;
+    qFallbackTitle?: string;
     /**
      * The Locked value of the dimension.
      */
-    qLocked: boolean;
+    qLocked?: boolean;
     /**
      * Validation error.
      */
-    qError: NxValidationError;
+    qError?: NxValidationError;
     /**
      * True if this is a calculated dimension.
      */
@@ -2924,16 +2942,16 @@ type NxAttrExprDef = {
      * Definition of the attribute expression.
      * Example: _"Max(OrderID)"_
      */
-    qExpression: string;
+    qExpression?: string;
     /**
      * Definition of the attribute expression stored in the library.
      * Example: _"MyGenericMeasure"_
      */
-    qLibraryId: string;
+    qLibraryId?: string;
     /**
      * If set to true, this measure will not affect the number of rows in the cube.
      */
-    qAttribute: boolean;
+    qAttribute?: boolean;
     /**
      * Format of the field.
      * This parameter is optional.
@@ -2942,7 +2960,7 @@ type NxAttrExprDef = {
     /**
      * Label of the attribute expression.
      */
-    qLabel: string;
+    qLabel?: string;
     /**
      * Optional expression used for dynamic label.
      */
@@ -2955,20 +2973,20 @@ type NxAttrExprInfo = {
     /**
      * Minimum value.
      */
-    qMin: number;
+    qMin?: number;
     /**
      * Maximum value.
      */
-    qMax: number;
-    qFallbackTitle: string;
+    qMax?: number;
+    qFallbackTitle?: string;
     /**
      * String version of the minimum Value.
      */
-    qMinText: string;
+    qMinText?: string;
     /**
      * String version of the maximum Value.
      */
-    qMaxText: string;
+    qMaxText?: string;
     /**
      * Format of the field.
      * This parameter is optional.
@@ -2977,19 +2995,19 @@ type NxAttrExprInfo = {
     /**
      * This parameter is set to true if _qNumFormat_ is set to _U_ (unknown). The engine guesses the type of the field based on the field's expression.
      */
-    qIsAutoFormat: boolean;
+    qIsAutoFormat?: boolean;
 };
 type NxAttributeDimValues = {
     /**
      * List of values.
      */
-    qValues: NxSimpleDimValue[];
+    qValues?: NxSimpleDimValue[];
 };
 type NxAttributeExpressionValues = {
     /**
      * List of attribute expressions values.
      */
-    qValues: NxSimpleValue[];
+    qValues?: NxSimpleValue[];
 };
 type NxAutoSortByStateDef = {
     /**
@@ -2997,65 +3015,65 @@ type NxAutoSortByStateDef = {
      * If the total number of values in the list object is greater than the value set in _qDisplayNumberOfRows_ , the selected lines are promoted at the top of the list object.
      * If _qDisplayNumberOfRows_ is set to a negative value or to 0, the sort by state is disabled.
      */
-    qDisplayNumberOfRows: number;
+    qDisplayNumberOfRows?: number;
 };
 type NxAxisData = {
     /**
      * List of axis data.
      */
-    qAxis: NxAxisTicks[];
+    qAxis?: NxAxisTicks[];
 };
 type NxAxisTicks = {
     /**
      * Name of the derived definition.
      */
-    qName: string;
+    qName?: string;
     /**
      * List of tags.
      */
-    qTags: string[];
+    qTags?: string[];
     /**
      * List of ticks.
      */
-    qTicks: NxTickCell[];
+    qTicks?: NxTickCell[];
 };
 type NxBookmark = {
     /**
      * List of selections for each state.
      */
-    qStateData: AlternateStateData[];
+    qStateData?: AlternateStateData[];
     /**
      * Time when the bookmark was created.
      */
-    qUtcModifyTime: number;
+    qUtcModifyTime?: number;
     /**
      * List of the variables in the app at the time the bookmark was created.
      */
-    qVariableItems: BookmarkVariableItem[];
+    qVariableItems?: BookmarkVariableItem[];
     /**
      * Softpatches to be applied with this bookmark.
      */
-    qPatches: NxPatches[];
+    qPatches?: NxPatches[];
 };
 type NxCalcCond = {
     /**
      * Condition for calculating an hypercube, dimension or measure.
      */
-    qCond: ValueExpr;
+    qCond?: ValueExpr;
     /**
      * Evaluated if Cond is not fullfilled.
      */
-    qMsg: StringExpr;
+    qMsg?: StringExpr;
 };
 type NxCardinalities = {
     /**
      * Number of distinct field values.
      */
-    qCardinal: number;
+    qCardinal?: number;
     /**
      * Number of distinct hypercube values.
      */
-    qHypercubeCardinal: number;
+    qHypercubeCardinal?: number;
     /**
      * Number of distinct values when paging for AllValues in a Tree Structure.
      * Default is -1 if not part of a Tree structure.
@@ -3082,7 +3100,7 @@ type NxCell = {
      * * -3: the cell belongs to the group _Others_ .
      * * -4: the cell is empty. Applies to pivot tables.
      */
-    qElemNumber: number;
+    qElemNumber?: number;
     /**
      * State of the value.
      * The default state for a measure is L.
@@ -3098,7 +3116,7 @@ type NxCell = {
      * * XL or EXCL_LOCKED
      * * NSTATES
      */
-    qState?: string;
+    qState?: StateEnumType;
     /**
      * Is set to _true_ , if **qText** and **qNum** are empty.
      * This parameter is optional. The default value is _false_ .
@@ -3131,80 +3149,81 @@ type NxCell = {
     /**
      * Attribute expression values.
      */
-    qAttrExps: NxAttributeExpressionValues;
+    qAttrExps?: NxAttributeExpressionValues;
     /**
      * Attribute dimensions values.
      */
-    qAttrDims: NxAttributeDimValues;
+    qAttrDims?: NxAttributeDimValues;
     /**
      * Is set to _true_ if the value is Null.
      */
-    qIsNull: boolean;
-    qMiniChart: NxMiniChartData;
-    qInExtRow: boolean;
+    qIsNull?: boolean;
+    qMiniChart?: NxMiniChartData;
+    qInExtRow?: boolean;
 };
 type NxCellPosition = {
     /**
      * Position of the cell on the x-axis.
      */
-    qx: number;
+    qx?: number;
     /**
      * Position of the cell on the y-axis.
      */
-    qy: number;
+    qy?: number;
 };
 type NxCellRows = NxCell[];
 type NxContainerEntry<QData> = {
     /**
      * Information about the object.
      */
-    qInfo: NxInfo;
+    qInfo?: NxInfo;
     /**
      * Information on publishing and permissions.
      */
-    qMeta: NxMeta;
+    qMeta?: NxMeta;
     /**
      * Set of data.
      */
-    qData: QData;
+    qData?: QData;
 };
 type NxContinuousDataOptions = {
     /**
      * Start value.
      */
-    qStart: number;
+    qStart?: number;
     /**
      * End value.
      */
-    qEnd: number;
+    qEnd?: number;
     /**
      * Number of bins for binning.
      */
-    qNbrPoints: number;
+    qNbrPoints?: number;
     /**
      * Maximum number of ticks.
      */
-    qMaxNbrTicks: number;
+    qMaxNbrTicks?: number;
     /**
      * Maximum number of lines.
      */
     qMaxNumberLines?: number;
 };
+type NxContinuousMode = "Never" | "CONTINUOUS_NEVER" | "Possible" | "CONTINUOUS_IF_POSSIBLE" | "Time" | "CONTINUOUS_IF_TIME";
 type NxContinuousRangeSelectInfo = {
     /**
      * Range information.
      */
-    qRange: QRange;
+    qRange?: QRange;
     /**
      * Dimension index.
      */
-    qDimIx: number;
+    qDimIx?: number;
 };
 type NxCurrentSelectionItem = {
     /**
      * Number of values in the field.
      */
-    qTotal: number;
+    qTotal?: number;
     /**
      * This parameter is displayed if its value is true.
      * Is set to true if the field is a numeric.
@@ -3214,7 +3233,7 @@ type NxCurrentSelectionItem = {
     /**
      * Name of the field that is selected.
      */
-    qField: string;
+    qField?: string;
     /**
      * This parameter is displayed if its value is true.
      * Is set to true if the field is locked.
@@ -3235,32 +3254,32 @@ type NxCurrentSelectionItem = {
     /**
      * Number of values that are selected.
      */
-    qSelectedCount: number;
+    qSelectedCount?: number;
     /**
      * Values that are selected.
      */
-    qSelected: string;
+    qSelected?: string;
     /**
      * Information about the range of selected values.
      * Is empty if there is no range of selected values.
      */
-    qRangeInfo: RangeSelectInfo[];
+    qRangeInfo?: RangeSelectInfo[];
     /**
      * Sort index of the field. Indexing starts from 0.
      */
-    qSortIndex: number;
+    qSortIndex?: number;
     /**
      * Number of values in a particular state.
      */
-    qStateCounts: NxStateCounts;
+    qStateCounts?: NxStateCounts;
     /**
      * Information about the fields that are selected.
      */
-    qSelectedFieldSelectionInfo: NxFieldSelectionInfo[];
+    qSelectedFieldSelectionInfo?: NxFieldSelectionInfo[];
     /**
      * Information about the fields that are not selected.
      */
-    qNotSelectedFieldSelectionInfo: NxFieldSelectionInfo[];
+    qNotSelectedFieldSelectionInfo?: NxFieldSelectionInfo[];
     /**
      * Maximum values to show in the current selections.
      * The default value is 6.
@@ -3269,7 +3288,7 @@ type NxCurrentSelectionItem = {
     /**
      * Label that, if defined, is displayed in current selections instead of the actual expression.
      */
-    qReadableName: string;
+    qReadableName?: string;
     /**
      * Optional parameter. Indicates if the selection is to be hidden in the Selections bar.
      * Is set to true if the current selection is hidden.
@@ -3281,105 +3300,106 @@ type NxDataAreaPage = {
      * Position from the left.
      * Corresponds to the lowest possible value of the first measure (the measure on the x-axis).
      */
-    qLeft: number;
+    qLeft?: number;
     /**
      * Position from the top.
      * Corresponds to the highest possible value of the second measure (the measure on the y-axis).
      */
-    qTop: number;
+    qTop?: number;
     /**
      * Width of the page.
      * Corresponds to the highest possible value of the first measure (the measure on the x-axis).
      */
-    qWidth: number;
+    qWidth?: number;
     /**
      * Height of the page.
      * The difference between _qTop_ and _qHeight_ gives the lowest possible value of the second measure (the measure on the y-axis).
      */
-    qHeight: number;
+    qHeight?: number;
 };
 type NxDataPage = {
     /**
      * Array of data.
      */
-    qMatrix: NxCellRows[];
+    qMatrix?: NxCellRows[];
     /**
      * Array of tails.
      * Is used for hypercube objects with multiple dimensions. It might happen that due to the window size some elements in a group cannot be displayed in the same page as the other elements of the group. Elements of a group of dimensions can be part of the previous or the next tail.
      * If there is no tail, the array is empty _[ ]_ .
      */
-    qTails: NxGroupTail[];
+    qTails?: NxGroupTail[];
     /**
      * Size and offset of the data in the matrix.
      */
-    qArea: Rect;
+    qArea?: Rect;
     /**
      * Is set to true, if the data have been reduced.
      * The default value is false.
      */
     qIsReduced?: boolean;
 };
+type NxDataReductionMode = "N" | "DATA_REDUCTION_NONE" | "D1" | "DATA_REDUCTION_ONEDIM" | "S" | "DATA_REDUCTION_SCATTERED" | "C" | "DATA_REDUCTION_CLUSTERED" | "ST" | "DATA_REDUCTION_STACKED";
 type NxDerivedField = {
     /**
      * Identifier of the derived field.
      * The identifier is unique.
      */
-    qId: string;
+    qId?: string;
     /**
      * Combination of field name, definition and method.
      * Example:
      * _OrderDate.MyDefinition.Year_
      */
-    qName: string;
+    qName?: string;
     /**
      * Method name associated to the derived field.
      */
-    qMethod: string;
+    qMethod?: string;
     /**
      * Expression of the derived field.
      * Example:
      * If _qName_ is _OrderDate.MyDefinition.Year_ , the expression is as follows:
      * _=${Mydefinition(OrderDate).Year}_
      */
-    qExpr: string;
+    qExpr?: string;
     /**
      * List of tags.
      */
-    qTags: string[];
+    qTags?: string[];
 };
 type NxDerivedFieldDescriptionList = {
     /**
      * Information about the derived fields.
      */
-    qDerivedFieldLists: NxDerivedFieldsData[];
+    qDerivedFieldLists?: NxDerivedFieldsData[];
 };
 type NxDerivedFieldsData = {
     /**
      * Name of the derived definition.
      */
-    qDerivedDefinitionName: string;
+    qDerivedDefinitionName?: string;
     /**
      * List of the derived fields.
      */
-    qFieldDefs: NxDerivedField[];
+    qFieldDefs?: NxDerivedField[];
     /**
      * List of the derived groups.
      */
-    qGroupDefs: NxDerivedGroup[];
+    qGroupDefs?: NxDerivedGroup[];
     /**
      * List of tags on the derived fields.
      */
-    qTags: string[];
+    qTags?: string[];
 };
 type NxDerivedGroup = {
     /**
      * Identifier of the group.
      */
-    qId: string;
+    qId?: string;
     /**
      * Name of the derived group.
      */
-    qName: string;
+    qName?: string;
     /**
      * Grouping type.
      * The grouping should be either H or C (Grouping is mandatory for derived definitions).
@@ -3390,12 +3410,13 @@ type NxDerivedGroup = {
      * * H or GRP_NX_HIEARCHY
      * * C or GRP_NX_COLLECTION
      */
-    qGrouping: string;
+    qGrouping?: NxGrpType;
     /**
      * List of the derived fields in the group.
      */
-    qFieldDefs: string[];
+    qFieldDefs?: string[];
 };
+type NxDimCellType = "V" | "NX_DIM_CELL_VALUE" | "E" | "NX_DIM_CELL_EMPTY" | "N" | "NX_DIM_CELL_NORMAL" | "T" | "NX_DIM_CELL_TOTAL" | "O" | "NX_DIM_CELL_OTHER" | "A" | "NX_DIM_CELL_AGGR" | "P" | "NX_DIM_CELL_PSEUDO" | "R" | "NX_DIM_CELL_ROOT" | "U" | "NX_DIM_CELL_NULL" | "G" | "NX_DIM_CELL_GENERATED";
 /**
  * <div class=note>Either **qDef** or **qLibraryId** must be set, but not both. </div> <div class=note>If the dimension is set in the hypercube and not in the library, this dimension cannot be shared with other objects.</div> <div class=note>A dimension that is set in the library can be used by many objects.</div>
  */
@@ -3403,27 +3424,27 @@ type NxDimension = {
     /**
      * Refers to a dimension stored in the library.
      */
-    qLibraryId: string;
+    qLibraryId?: string;
     /**
      * Refers to a dimension stored in the hypercube.
      */
-    qDef: NxInlineDimensionDef;
+    qDef?: NxInlineDimensionDef;
     /**
      * If set to true, no null values are returned.
      */
-    qNullSuppression: boolean;
-    qIncludeElemValue: boolean;
+    qNullSuppression?: boolean;
+    qIncludeElemValue?: boolean;
     /**
      * Sets the dimension limits. Each dimension of a hypercube is configured separately.
      * Defines if some values (grouped as _Others_ ) should be grouped together in the visualization.
      * For example in a pie chart all values lower than 200 could be grouped together.
      */
-    qOtherTotalSpec: OtherTotalSpecProp;
-    qShowTotal: boolean;
+    qOtherTotalSpec?: OtherTotalSpecProp;
+    qShowTotal?: boolean;
     /**
      * If set to true, all dimension values are shown.
      */
-    qShowAll: boolean;
+    qShowAll?: boolean;
     /**
      * This property is used when some dimension limits are set.
      * Label of the _Others_ group. The default label is _Others_ .
@@ -3456,11 +3477,11 @@ type NxDimension = {
     /**
      * List of attribute expressions.
      */
-    qAttributeExpressions: NxAttrExprDef[];
+    qAttributeExpressions?: NxAttrExprDef[];
     /**
      * List of attribute dimensions.
      */
-    qAttributeDimensions: NxAttrDimDef[];
+    qAttributeDimensions?: NxAttrDimDef[];
     /**
      * Specifies a calculation condition object.
      * If CalcCondition.Cond is not fulfilled, the dimension is excluded from the calculation and CalcCondition.Msg is evaluated.
@@ -3474,21 +3495,21 @@ type NxDimensionInfo = {
      * Corresponds to the label of the dimension that is selected.
      * If the label is not defined then the field name is used.
      */
-    qFallbackTitle: string;
+    qFallbackTitle?: string;
     /**
      * Length of the longest value in the field.
      */
-    qApprMaxGlyphCount: number;
+    qApprMaxGlyphCount?: number;
     /**
      * Number of distinct field values.
      *
      * @deprecated: This will be removed in a future version
      */
-    qCardinal: number;
+    qCardinal?: number;
     /**
      * Is set to true if the field is locked.
      */
-    qLocked: boolean;
+    qLocked?: boolean;
     /**
      * Sort indicator.
      * The default value is no sorting.
@@ -3499,26 +3520,26 @@ type NxDimensionInfo = {
      * * A or NX_SORT_INDICATE_ASC
      * * D or NX_SORT_INDICATE_DESC
      */
-    qSortIndicator?: string;
+    qSortIndicator?: NxSortIndicatorType;
     /**
      * Array of dimension labels.
      * Contains the labels of all dimensions in a hierarchy group (for example the labels of all dimensions in a drill down group).
      */
-    qGroupFallbackTitles: string[];
+    qGroupFallbackTitles?: string[];
     /**
      * Index of the dimension that is currently in use.
      * _qGroupPos_ is set to 0 if there are no hierarchical groups (drill-down groups) or cycle groups.
      */
-    qGroupPos: number;
+    qGroupPos?: number;
     /**
      * Number of values in a particular state.
      */
-    qStateCounts: NxStateCounts;
+    qStateCounts?: NxStateCounts;
     /**
      * Gives information on a field. For example, it can return the type of the field.
      * Examples: key, text, ASCII
      */
-    qTags: string[];
+    qTags?: string[];
     /**
      * This parameter is optional.
      * Gives information on the error.
@@ -3532,11 +3553,11 @@ type NxDimensionInfo = {
      * * N or NX_DIMENSION_TYPE_NUMERIC
      * * T or NX_DIMENSION_TYPE_TIME
      */
-    qDimensionType: string;
+    qDimensionType?: NxDimensionType;
     /**
      * If set to true, it inverts the sort criteria in the field.
      */
-    qReverseSort: boolean;
+    qReverseSort?: boolean;
     /**
      * Defines the grouping.
      *
@@ -3545,11 +3566,11 @@ type NxDimensionInfo = {
      * * H or GRP_NX_HIEARCHY
      * * C or GRP_NX_COLLECTION
      */
-    qGrouping: string;
+    qGrouping?: NxGrpType;
     /**
      * If set to true, it means that the field is a semantic.
      */
-    qIsSemantic: boolean;
+    qIsSemantic?: boolean;
     /**
      * Format of the field.
      * This parameter is optional.
@@ -3558,43 +3579,43 @@ type NxDimensionInfo = {
     /**
      * This parameter is set to true if _qNumFormat_ is set to _U_ (unknown). The engine guesses the type of the field based on the field's definition.
      */
-    qIsAutoFormat: boolean;
+    qIsAutoFormat?: boolean;
     /**
      * Array of field names.
      */
-    qGroupFieldDefs: string[];
+    qGroupFieldDefs?: string[];
     /**
      * Minimum value.
      */
-    qMin: number;
+    qMin?: number;
     /**
      * Maximum value.
      */
-    qMax: number;
+    qMax?: number;
     /**
      * Is continuous axis used.
      */
-    qContinuousAxes: boolean;
+    qContinuousAxes?: boolean;
     /**
      * Is a cyclic dimension used.
      */
-    qIsCyclic: boolean;
+    qIsCyclic?: boolean;
     /**
      * Is derived field is used as a dimension.
      */
-    qDerivedField: boolean;
+    qDerivedField?: boolean;
     /**
      * Array of attribute expressions.
      */
-    qAttrExprInfo: NxAttrExprInfo[];
+    qAttrExprInfo?: NxAttrExprInfo[];
     /**
      * Array of attribute dimensions.
      */
-    qAttrDimInfo: NxAttrDimInfo[];
+    qAttrDimInfo?: NxAttrDimInfo[];
     /**
      * The message displayed if calculation condition is not fulfilled.
      */
-    qCalcCondMsg: string;
+    qCalcCondMsg?: string;
     /**
      * True if this is a calculated dimension.
      */
@@ -3602,21 +3623,22 @@ type NxDimensionInfo = {
     /**
      * If set to true, it means that the field always has one and only one selected value.
      */
-    qIsOneAndOnlyOne: boolean;
+    qIsOneAndOnlyOne?: boolean;
     /**
      * Dimension Cardinalities
      */
-    qCardinalities: NxCardinalities;
+    qCardinalities?: NxCardinalities;
     /**
      * Refers to a dimension stored in the library.
      */
-    qLibraryId: string;
+    qLibraryId?: string;
 };
+type NxDimensionType = "D" | "NX_DIMENSION_TYPE_DISCRETE" | "N" | "NX_DIMENSION_TYPE_NUMERIC" | "T" | "NX_DIMENSION_TYPE_TIME";
 type NxDownloadInfo = {
     /**
      * URL to download the reduced app on.
      */
-    qUrl: string;
+    qUrl?: string;
     /**
      * The filesize of the reduced app.
      */
@@ -3626,7 +3648,7 @@ type NxDownloadOptions = {
     /**
      * Bookmark Id to apply before reducing the application.
      */
-    qBookmarkId: string;
+    qBookmarkId?: string;
     /**
      * Time in seconds for how long the download link is valid.
      */
@@ -3637,8 +3659,11 @@ type NxEngineVersion = {
     /**
      * Version number of the Qlik engine component.
      */
-    qComponentVersion: string;
+    qComponentVersion?: string;
 };
+type NxExportFileType = "CSV_C" | "EXPORT_CSV_C" | "CSV_T" | "EXPORT_CSV_T" | "OOXML" | "EXPORT_OOXML" | "PARQUET" | "EXPORT_PARQUET";
+type NxExportState = "P" | "EXPORT_POSSIBLE" | "A" | "EXPORT_ALL";
+type NxFeature = "binningData" | "FEATURE_BINNING_DATA" | "bookmarks" | "FEATURE_BOOKMARKS" | "calculatedFields" | "FEATURE_CALCULATED_FIELDS" | "continuousData" | "FEATURE_CONTINUOUS_DATA" | "invertedSelections" | "FEATURE_INVERTED_SELECTIONS" | "rangeSelections" | "FEATURE_RANGE_SELECTIONS" | "reducingData" | "FEATURE_REDUCING_DATA" | "search" | "FEATURE_SEARCH" | "selectionCount" | "FEATURE_SELECTION_COUNT" | "selectionInsights" | "FEATURE_SELECTION_INSIGHTS" | "tableMiniChart" | "FEATURE_TABLE_MINI_CHART" | "trendlines" | "FEATURE_TRENDLINES" | "calculatedDimensions" | "FEATURE_CALCULATED_DIMENSIONS" | "includeZeroValues" | "FEATURE_INCLUDE_ZERO_VALUES" | "includeNullValues" | "FEATURE_INCLUDE_NULL_VALUES" | "filterPanePaging" | "FEATURE_FILTER_PANE_PAGING" | "filterPaneCustomSorting" | "FEATURE_FILTER_PANE_CUSTOM_SORTING" | "showFrequency" | "FEATURE_SHOW_FREQUENCY" | "limitation" | "FEATURE_LIMITATION" | "totals" | "FEATURE_TOTALS";
 /**
  * ### NxDerivedFieldsdata
  * <table>
@@ -3675,15 +3700,15 @@ type NxFieldDescription = {
     /**
      * If set to true, it means that the field is a semantic.
      */
-    qIsSemantic: boolean;
+    qIsSemantic?: boolean;
     /**
      * If set to true, it means that the field is hidden.
      */
-    qIsHidden: boolean;
+    qIsHidden?: boolean;
     /**
      * If set to true, it means that the field is a system field.
      */
-    qIsSystem: boolean;
+    qIsSystem?: boolean;
     /**
      * If set to true a logical AND (instead of a logical OR) is used when making selections in a field.
      * The default value is false.
@@ -3692,35 +3717,35 @@ type NxFieldDescription = {
     /**
      * Name of the field
      */
-    qName: string;
+    qName?: string;
     /**
      * Number of distinct field values
      */
-    qCardinal: number;
+    qCardinal?: number;
     /**
      * Gives information on a field. For example, it can return the type of the field.
      * Examples: key, text, ASCII
      */
-    qTags: string[];
+    qTags?: string[];
     /**
      * If set to true, it means that the field is a field on the fly.
      */
-    qIsDefinitionOnly: boolean;
+    qIsDefinitionOnly?: boolean;
     /**
      * Lists the derived fields if any.
      */
-    qDerivedFieldData: NxDerivedFieldDescriptionList;
+    qDerivedFieldData?: NxDerivedFieldDescriptionList;
     /**
      * Is used for Direct Discovery.
      * If set to true, it means that the type of the field is detail.
      */
-    qIsDetail: boolean;
+    qIsDetail?: boolean;
     /**
      * Is used for Direct Discovery.
      * If set to true, it means that the type of the field is measure.
      */
-    qIsImplicit: boolean;
-    qReadableName: string;
+    qIsImplicit?: boolean;
+    qReadableName?: string;
 };
 type NxFieldProperties = {
     /**
@@ -3728,23 +3753,23 @@ type NxFieldProperties = {
      * If this property is set to true, the field cannot be cleared anymore and no more selections can be performed in that field.
      * <div class=note>The property _OneAndOnlyOne_ can be set to true if one and only value has been selected in the field prior to setting the property. </div>
      */
-    qOneAndOnlyOne: boolean;
+    qOneAndOnlyOne?: boolean;
 };
 type NxFieldResourceId = {
     /**
      * Name of the field to get the resource id for.
      */
-    qName: string;
+    qName?: string;
     /**
      * Field level resource Id per table that the field is part of
      */
-    qResourceIds: NxFieldTableResourceId[];
+    qResourceIds?: NxFieldTableResourceId[];
 };
 type NxFieldSelectionInfo = {
     /**
      * Name of the field.
      */
-    qName: string;
+    qName?: string;
     /**
      * Selection mode.
      * ### Properties
@@ -3757,37 +3782,39 @@ type NxFieldSelectionInfo = {
      * * AND or SELECTION_MODE_AND
      * * NOT or SELECTION_MODE_NOT
      */
-    qFieldSelectionMode: string;
+    qFieldSelectionMode?: NxFieldSelectionMode;
 };
+type NxFieldSelectionMode = "NORMAL" | "SELECTION_MODE_NORMAL" | "AND" | "SELECTION_MODE_AND" | "NOT" | "SELECTION_MODE_NOT";
 type NxFieldTableResourceId = {
     /**
      * Name of the table that the field belongs to get the resource id for
      */
-    qTable: string;
+    qTable?: string;
     /**
      * Resource identifier for the field
      */
-    qResourceId: string;
+    qResourceId?: string;
 };
+type NxFrequencyMode = "N" | "NX_FREQUENCY_NONE" | "V" | "NX_FREQUENCY_VALUE" | "P" | "NX_FREQUENCY_PERCENT" | "R" | "NX_FREQUENCY_RELATIVE";
 type NxGetBookmarkOptions = {
     /**
      * List of object types.
      */
-    qTypes: string[];
+    qTypes?: string[];
     /**
      * Set of data.
      */
-    qData: Record<string, string>;
+    qData?: Record<string, string>;
     /**
      * Include the bookmark patches. Patches can be very large and may make the list result unmanageable.
      */
-    qIncludePatches: boolean;
+    qIncludePatches?: boolean;
 };
 type NxGetObjectOptions = {
     /**
      * List of object types.
      */
-    qTypes: string[];
+    qTypes?: string[];
     /**
      * Set to true to include session objects.
      * The default value is false.
@@ -3796,7 +3823,7 @@ type NxGetObjectOptions = {
     /**
      * Set of data.
      */
-    qData: Record<string, string>;
+    qData?: Record<string, string>;
 };
 type NxGroupTail = {
     /**
@@ -3814,12 +3841,14 @@ type NxGroupTail = {
      */
     qDown?: number;
 };
+type NxGrpType = "N" | "GRP_NX_NONE" | "H" | "GRP_NX_HIEARCHY" | "C" | "GRP_NX_COLLECTION";
 type NxHighlightRanges = {
     /**
      * Ranges of highlighted values.
      */
-    qRanges: CharRange[];
+    qRanges?: CharRange[];
 };
+type NxHypercubeMode = "S" | "DATA_MODE_STRAIGHT" | "P" | "DATA_MODE_PIVOT" | "K" | "DATA_MODE_PIVOT_STACK" | "T" | "DATA_MODE_TREE" | "D" | "DATA_MODE_DYNAMIC";
 type NxInfo = {
     /**
      * Identifier of the object.
@@ -3832,7 +3861,7 @@ type NxInfo = {
      * Type of the object.
      * This parameter is mandatory.
      */
-    qType: string;
+    qType?: string;
 };
 type NxInlineDimensionDef = {
     /**
@@ -3845,7 +3874,7 @@ type NxInlineDimensionDef = {
      * * H or GRP_NX_HIEARCHY
      * * C or GRP_NX_COLLECTION
      */
-    qGrouping?: string;
+    qGrouping?: NxGrpType;
     /**
      * Array of field names.
      * When creating a grouped dimension, more than one field name is defined.
@@ -3871,7 +3900,7 @@ type NxInlineDimensionDef = {
     /**
      * If set to true, it inverts the sort criteria in the field.
      */
-    qReverseSort: boolean;
+    qReverseSort?: boolean;
     /**
      * Index of the active field in a cyclic dimension.
      * This parameter is optional. The default value is 0.
@@ -3912,13 +3941,13 @@ type NxInlineMeasureDef = {
      * * H or GRP_NX_HIEARCHY
      * * C or GRP_NX_COLLECTION
      */
-    qGrouping?: string;
+    qGrouping?: NxGrpType;
     /**
      * Definition of the expression in the measure.
      * Example: _Sum (OrderTotal)_
      * This parameter is mandatory.
      */
-    qDef: string;
+    qDef?: string;
     /**
      * Format of the field.
      * This parameter is optional.
@@ -3956,7 +3985,7 @@ type NxInlineMeasureDef = {
     /**
      * If set to true, it inverts the sort criteria in the field.
      */
-    qReverseSort: boolean;
+    qReverseSort?: boolean;
     /**
      * Index of the active expression in a cyclic measure. The indexing starts from 0.
      * The default value is 0.
@@ -3966,18 +3995,19 @@ type NxInlineMeasureDef = {
     /**
      * Array of expressions. This parameter is used in case of cyclic measures ( _qGrouping_ is C). List of the expressions in the cyclic group.
      */
-    qExpressions: string[];
+    qExpressions?: string[];
     /**
      * Label expression.
      * This parameter is optional.
      */
     qLabelExpression?: string;
 };
+type NxLTrendlineType = "AVERAGE" | "Average" | "LINEAR" | "Linear" | "POLYNOMIAL2" | "Polynomial2" | "POLYNOMIAL3" | "Polynomial3" | "POLYNOMIAL4" | "Polynomial4" | "EXPONENTIAL" | "Exponential" | "POWER" | "Power" | "LOG" | "Logarithmic";
 type NxLayoutErrors = {
     /**
      * Error code.
      */
-    qErrorCode: number;
+    qErrorCode?: number;
 };
 type NxLibraryDimension = {
     /**
@@ -3988,16 +4018,16 @@ type NxLibraryDimension = {
      * * H or GRP_NX_HIEARCHY
      * * C or GRP_NX_COLLECTION
      */
-    qGrouping: string;
+    qGrouping?: NxGrpType;
     /**
      * Array of dimension names.
      */
-    qFieldDefs: string[];
+    qFieldDefs?: string[];
     /**
      * Array of dimension labels.
      */
-    qFieldLabels: string[];
-    qLabelExpression: string;
+    qFieldLabels?: string[];
+    qLabelExpression?: string;
 };
 type NxLibraryDimensionDef = {
     /**
@@ -4008,23 +4038,23 @@ type NxLibraryDimensionDef = {
      * * H or GRP_NX_HIEARCHY
      * * C or GRP_NX_COLLECTION
      */
-    qGrouping: string;
+    qGrouping?: NxGrpType;
     /**
      * Array of dimension names.
      */
-    qFieldDefs: string[];
+    qFieldDefs?: string[];
     /**
      * Array of dimension labels.
      */
-    qFieldLabels: string[];
-    qLabelExpression: string;
+    qFieldLabels?: string[];
+    qLabelExpression?: string;
 };
 /**
  * Information about the library measure. Is the layout for _NxLibraryMeasureDef_.
  */
 type NxLibraryMeasure = {
-    qLabel: string;
-    qDef: string;
+    qLabel?: string;
+    qDef?: string;
     /**
      *
      * One of:
@@ -4032,10 +4062,10 @@ type NxLibraryMeasure = {
      * * H or GRP_NX_HIEARCHY
      * * C or GRP_NX_COLLECTION
      */
-    qGrouping: string;
-    qExpressions: string[];
-    qActiveExpression: number;
-    qLabelExpression: string;
+    qGrouping?: NxGrpType;
+    qExpressions?: string[];
+    qActiveExpression?: number;
+    qLabelExpression?: string;
     /**
      * Format of the field.
      * This parameter is optional.
@@ -4046,11 +4076,11 @@ type NxLibraryMeasureDef = {
     /**
      * Label of the measure.
      */
-    qLabel: string;
+    qLabel?: string;
     /**
      * Definition of the measure.
      */
-    qDef: string;
+    qDef?: string;
     /**
      * Used to define a cyclic group or drill-down group.
      * Default value is no grouping.
@@ -4061,15 +4091,15 @@ type NxLibraryMeasureDef = {
      * * H or GRP_NX_HIEARCHY
      * * C or GRP_NX_COLLECTION
      */
-    qGrouping?: string;
+    qGrouping?: NxGrpType;
     /**
      * Array of expressions.
      */
-    qExpressions: string[];
+    qExpressions?: string[];
     /**
      * Index to the active expression in a measure.
      */
-    qActiveExpression: number;
+    qActiveExpression?: number;
     /**
      * Optional expression used for dynamic label.
      */
@@ -4086,17 +4116,17 @@ type NxLinkedObjectInfo = {
      * If the linked object is a child, the root identifier is the identifier of the parent.
      * If the linked object is an app object, the root identifier is the same than the identifier of the linked object since the linked object is a root object.
      */
-    qRootId: string;
+    qRootId?: string;
     /**
      * Information about the linked object.
      */
-    qInfo: NxInfo;
+    qInfo?: NxInfo;
 };
 type NxListObjectExpression = {
     /**
      * Value of the expression.
      */
-    qExpr: string;
+    qExpr?: string;
     /**
      * Gives information on the error.
      * This parameter is optional.
@@ -4107,22 +4137,25 @@ type NxListObjectExpressionDef = {
     /**
      * Value of the expression.
      */
-    qExpr: string;
+    qExpr?: string;
     /**
      * Refers to an expression stored in the library.
      */
-    qLibraryId: string;
+    qLibraryId?: string;
 };
+type NxLocalizedErrorCode = "LOCERR_INTERNAL_ERROR" | "LOCERR_GENERIC_UNKNOWN" | "LOCERR_GENERIC_OK" | "LOCERR_GENERIC_NOT_SET" | "LOCERR_GENERIC_NOT_FOUND" | "LOCERR_GENERIC_ALREADY_EXISTS" | "LOCERR_GENERIC_INVALID_PATH" | "LOCERR_GENERIC_ACCESS_DENIED" | "LOCERR_GENERIC_OUT_OF_MEMORY" | "LOCERR_GENERIC_NOT_INITIALIZED" | "LOCERR_GENERIC_INVALID_PARAMETERS" | "LOCERR_GENERIC_EMPTY_PARAMETERS" | "LOCERR_GENERIC_INTERNAL_ERROR" | "LOCERR_GENERIC_CORRUPT_DATA" | "LOCERR_GENERIC_MEMORY_INCONSISTENCY" | "LOCERR_GENERIC_INVISIBLE_OWNER_ABORT" | "LOCERR_GENERIC_PROHIBIT_VALIDATE" | "LOCERR_GENERIC_ABORTED" | "LOCERR_GENERIC_CONNECTION_LOST" | "LOCERR_GENERIC_UNSUPPORTED_IN_PRODUCT_VERSION" | "LOCERR_GENERIC_REST_CONNECTION_FAILURE" | "LOCERR_GENERIC_MEMORY_LIMIT_REACHED" | "LOCERR_GENERIC_NOT_IMPLEMENTED" | "LOCERR_HTTP_400" | "LOCERR_HTTP_401" | "LOCERR_HTTP_402" | "LOCERR_HTTP_403" | "LOCERR_HTTP_404" | "LOCERR_HTTP_405" | "LOCERR_HTTP_406" | "LOCERR_HTTP_407" | "LOCERR_HTTP_408" | "LOCERR_HTTP_409" | "LOCERR_HTTP_410" | "LOCERR_HTTP_411" | "LOCERR_HTTP_412" | "LOCERR_HTTP_413" | "LOCERR_HTTP_414" | "LOCERR_HTTP_415" | "LOCERR_HTTP_416" | "LOCERR_HTTP_417" | "LOCERR_HTTP_422" | "LOCERR_HTTP_423" | "LOCERR_HTTP_429" | "LOCERR_HTTP_500" | "LOCERR_HTTP_501" | "LOCERR_HTTP_502" | "LOCERR_HTTP_503" | "LOCERR_HTTP_504" | "LOCERR_HTTP_505" | "LOCERR_HTTP_509" | "LOCERR_HTTP_COULD_NOT_RESOLVE_HOST" | "LOCERR_APP_ALREADY_EXISTS" | "LOCERR_APP_INVALID_NAME" | "LOCERR_APP_ALREADY_OPEN" | "LOCERR_APP_NOT_FOUND" | "LOCERR_APP_IMPORT_FAILED" | "LOCERR_APP_SAVE_FAILED" | "LOCERR_APP_CREATE_FAILED" | "LOCERR_APP_INVALID" | "LOCERR_APP_CONNECT_FAILED" | "LOCERR_APP_ALREADY_OPEN_IN_DIFFERENT_MODE" | "LOCERR_APP_MIGRATION_COULD_NOT_CONTACT_MIGRATION_SERVICE" | "LOCERR_APP_MIGRATION_COULD_NOT_START_MIGRATION" | "LOCERR_APP_MIGRATION_FAILURE" | "LOCERR_APP_SCRIPT_MISSING" | "LOCERR_APP_EXPORT_FAILED" | "LOCERR_APP_SIZE_EXCEEDED" | "LOCERR_APP_DIRECT_QUERY_WORKLOAD_NOT_SUPPORTED" | "LOCERR_APP_NOT_OPEN" | "LOCERR_APP_EVENT_SOURCE_TIMEOUT" | "LOCERR_CONNECTION_ALREADY_EXISTS" | "LOCERR_CONNECTION_NOT_FOUND" | "LOCERR_CONNECTION_FAILED_TO_LOAD" | "LOCERR_CONNECTION_FAILED_TO_IMPORT" | "LOCERR_CONNECTION_NAME_IS_INVALID" | "LOCERR_CONNECTION_MISSING_CREDENTIALS" | "LOCERR_CONNECTOR_NO_FILE_STREAMING_SUPPORT" | "LOCERR_CONNECTOR_FILESIZE_EXCEEDED_BUFFER_SIZE" | "LOCERR_FILE_ACCESS_DENIED" | "LOCERR_FILE_NAME_INVALID" | "LOCERR_FILE_CORRUPT" | "LOCERR_FILE_NOT_FOUND" | "LOCERR_FILE_FORMAT_UNSUPPORTED" | "LOCERR_FILE_OPENED_IN_UNSUPPORTED_MODE" | "LOCERR_FILE_TABLE_NOT_FOUND" | "LOCERR_USER_ACCESS_DENIED" | "LOCERR_USER_IMPERSONATION_FAILED" | "LOCERR_SERVER_OUT_OF_SESSION_AND_USER_CALS" | "LOCERR_SERVER_OUT_OF_SESSION_CALS" | "LOCERR_SERVER_OUT_OF_USAGE_CALS" | "LOCERR_SERVER_OUT_OF_CALS" | "LOCERR_SERVER_OUT_OF_NAMED_CALS" | "LOCERR_SERVER_OFF_DUTY" | "LOCERR_SERVER_BUSY" | "LOCERR_SERVER_LICENSE_EXPIRED" | "LOCERR_SERVER_AJAX_DISABLED" | "LOCERR_SERVER_NO_TOKEN" | "LOCERR_HC_INVALID_OBJECT" | "LOCERR_HC_RESULT_TOO_LARGE" | "LOCERR_HC_INVALID_OBJECT_STATE" | "LOCERR_HC_MODAL_OBJECT_ERROR" | "LOCERR_CALC_INVALID_DEF" | "LOCERR_CALC_NOT_IN_LIB" | "LOCERR_CALC_HEAP_ERROR" | "LOCERR_CALC_TOO_LARGE" | "LOCERR_CALC_TIMEOUT" | "LOCERR_CALC_EVAL_CONDITION_FAILED" | "LOCERR_CALC_MIXED_LINKED_AGGREGATION" | "LOCERR_CALC_MISSING_LINKED" | "LOCERR_CALC_INVALID_COL_SORT" | "LOCERR_CALC_PAGES_TOO_LARGE" | "LOCERR_CALC_SEMANTIC_FIELD_NOT_ALLOWED" | "LOCERR_CALC_VALIDATION_STATE_INVALID" | "LOCERR_CALC_PIVOT_DIMENSIONS_ALREADY_EXISTS" | "LOCERR_CALC_MISSING_LINKED_FIELD" | "LOCERR_CALC_NOT_CALCULATED" | "LOCERR_LAYOUT_EXTENDS_INVALID_ID" | "LOCERR_LAYOUT_LINKED_OBJECT_NOT_FOUND" | "LOCERR_LAYOUT_LINKED_OBJECT_INVALID" | "LOCERR_PERSISTENCE_WRITE_FAILED" | "LOCERR_PERSISTENCE_READ_FAILED" | "LOCERR_PERSISTENCE_DELETE_FAILED" | "LOCERR_PERSISTENCE_NOT_FOUND" | "LOCERR_PERSISTENCE_UNSUPPORTED_VERSION" | "LOCERR_PERSISTENCE_MIGRATION_FAILED_READ_ONLY" | "LOCERR_PERSISTENCE_MIGRATION_CANCELLED" | "LOCERR_PERSISTENCE_MIGRATION_BACKUP_FAILED" | "LOCERR_PERSISTENCE_DISK_FULL" | "LOCERR_PERSISTENCE_NOT_SUPPORTED_FOR_SESSION_APP" | "LOCERR_PERSISTENCE_MOVE_FAILED" | "LOCERR_PERSISTENCE_OBJECT_LOCKED" | "LOCERR_PERSISTENCE_ENCRYPTION_KEY_MIGRATION_ONGOING" | "LOCERR_PERSISTENCE_SYNC_SET_CHUNK_INVALID_PARAMETERS" | "LOCERR_PERSISTENCE_SYNC_GET_CHUNK_INVALID_PARAMETERS" | "LOCERR_SCRIPT_DATASOURCE_ACCESS_DENIED" | "LOCERR_RELOAD_IN_PROGRESS" | "LOCERR_RELOAD_TABLE_X_NOT_FOUND" | "LOCERR_RELOAD_UNKNOWN_STATEMENT" | "LOCERR_RELOAD_EXPECTED_SOMETHING_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_NOTHING_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_1_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_2_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_3_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_4_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_5_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_6_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_7_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_8_OR_MORE_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_FIELD_X_NOT_FOUND" | "LOCERR_RELOAD_MAPPING_TABLE_X_NOT_FOUND" | "LOCERR_RELOAD_LIB_CONNECTION_X_NOT_FOUND" | "LOCERR_RELOAD_NAME_ALREADY_TAKEN" | "LOCERR_RELOAD_WRONG_FILE_FORMAT_DIF" | "LOCERR_RELOAD_WRONG_FILE_FORMAT_BIFF" | "LOCERR_RELOAD_WRONG_FILE_FORMAT_ENCRYPTED" | "LOCERR_RELOAD_OPEN_FILE_ERROR" | "LOCERR_RELOAD_AUTO_GENERATE_COUNT" | "LOCERR_RELOAD_PE_ILLEGAL_PREFIX_COMB" | "LOCERR_RELOAD_MATCHING_CONTROL_STATEMENT_ERROR" | "LOCERR_RELOAD_MATCHING_LIBPATH_X_NOT_FOUND" | "LOCERR_RELOAD_MATCHING_LIBPATH_X_INVALID" | "LOCERR_RELOAD_MATCHING_LIBPATH_X_OUTSIDE" | "LOCERR_RELOAD_NO_QUALIFIED_PATH_FOR_FILE" | "LOCERR_RELOAD_MODE_STATEMENT_ONLY_FOR_LIB_PATHS" | "LOCERR_RELOAD_INCONSISTENT_USE_OF_SEMANTIC_FIELDS" | "LOCERR_RELOAD_NO_OPEN_DATABASE" | "LOCERR_RELOAD_AGGREGATION_REQUIRED_BY_GROUP_BY" | "LOCERR_RELOAD_CONNECT_MUST_USE_LIB_PREFIX_IN_THIS_MODE" | "LOCERR_RELOAD_ODBC_CONNECT_FAILED" | "LOCERR_RELOAD_OLEDB_CONNECT_FAILED" | "LOCERR_RELOAD_CUSTOM_CONNECT_FAILED" | "LOCERR_RELOAD_ODBC_READ_FAILED" | "LOCERR_RELOAD_OLEDB_READ_FAILED" | "LOCERR_RELOAD_CUSTOM_READ_FAILED" | "LOCERR_RELOAD_BINARY_LOAD_PROHIBITED" | "LOCERR_RELOAD_CONNECTOR_START_FAILED" | "LOCERR_RELOAD_CONNECTOR_NOT_RESPONDING" | "LOCERR_RELOAD_CONNECTOR_REPLY_ERROR" | "LOCERR_RELOAD_CONNECTOR_CONNECT_ERROR" | "LOCERR_RELOAD_CONNECTOR_NOT_FOUND_ERROR" | "LOCERR_RELOAD_INPUT_FIELD_WITH_DUPLICATE_KEYS" | "LOCERR_RELOAD_CONCATENATE_LOAD_NO_PREVIOUS_TABLE" | "LOCERR_RELOAD_WRONG_FILE_FORMAT_QVD" | "LOCERR_RELOAD_ACTION_BLOCKED_ENTITLEMENT" | "LOCERR_PERSONAL_NEW_VERSION_AVAILABLE" | "LOCERR_PERSONAL_VERSION_EXPIRED" | "LOCERR_PERSONAL_SECTION_ACCESS_DETECTED" | "LOCERR_PERSONAL_APP_DELETION_FAILED" | "LOCERR_USER_AUTHENTICATION_FAILURE" | "LOCERR_EXPORT_OUT_OF_MEMORY" | "LOCERR_EXPORT_NO_DATA" | "LOCERR_SYNC_INVALID_OFFSET" | "LOCERR_SEARCH_TIMEOUT" | "LOCERR_DIRECT_DISCOVERY_LINKED_EXPRESSION_FAIL" | "LOCERR_DIRECT_DISCOVERY_ROWCOUNT_OVERFLOW" | "LOCERR_DIRECT_DISCOVERY_EMPTY_RESULT" | "LOCERR_DIRECT_DISCOVERY_DB_CONNECTION_FAILED" | "LOCERR_DIRECT_DISCOVERY_MEASURE_NOT_ALLOWED" | "LOCERR_DIRECT_DISCOVERY_DETAIL_NOT_ALLOWED" | "LOCERR_DIRECT_DISCOVERY_NOT_SYNTH_CIRCULAR_ALLOWED" | "LOCERR_DIRECT_DISCOVERY_ONLY_ONE_DD_TABLE_ALLOWED" | "LOCERR_DIRECT_DISCOVERY_DB_AUTHORIZATION_FAILED" | "LOCERR_SMART_LOAD_TABLE_NOT_FOUND" | "LOCERR_SMART_LOAD_TABLE_DUPLICATED" | "LOCERR_VARIABLE_NO_NAME" | "LOCERR_VARIABLE_DUPLICATE_NAME" | "LOCERR_VARIABLE_INCONSISTENCY" | "LOCERR_MEDIA_LIBRARY_LIST_FAILED" | "LOCERR_MEDIA_LIBRARY_CONTENT_FAILED" | "LOCERR_MEDIA_BUNDLING_FAILED" | "LOCERR_MEDIA_UNBUNDLING_FAILED" | "LOCERR_MEDIA_LIBRARY_NOT_FOUND" | "LOCERR_FEATURE_DISABLED" | "LOCERR_JSON_RPC_INVALID_REQUEST" | "LOCERR_JSON_RPC_METHOD_NOT_FOUND" | "LOCERR_JSON_RPC_INVALID_PARAMETERS" | "LOCERR_JSON_RPC_INTERNAL_ERROR" | "LOCERR_JSON_RPC_PARSE_ERROR" | "LOCERR_MQ_SOCKET_CONNECT_FAILURE" | "LOCERR_MQ_SOCKET_OPEN_FAILURE" | "LOCERR_MQ_PROTOCOL_NO_RESPONE" | "LOCERR_MQ_PROTOCOL_LIBRARY_EXCEPTION" | "LOCERR_MQ_PROTOCOL_CONNECTION_CLOSED" | "LOCERR_MQ_PROTOCOL_CHANNEL_CLOSED" | "LOCERR_MQ_PROTOCOL_UNKNOWN_ERROR" | "LOCERR_MQ_PROTOCOL_INVALID_STATUS" | "LOCERR_EXTENGINE_GRPC_STATUS_OK" | "LOCERR_EXTENGINE_GRPC_STATUS_CANCELLED" | "LOCERR_EXTENGINE_GRPC_STATUS_UNKNOWN" | "LOCERR_EXTENGINE_GRPC_STATUS_INVALID_ARGUMENT" | "LOCERR_EXTENGINE_GRPC_STATUS_DEADLINE_EXCEEDED" | "LOCERR_EXTENGINE_GRPC_STATUS_NOT_FOUND" | "LOCERR_EXTENGINE_GRPC_STATUS_ALREADY_EXISTS" | "LOCERR_EXTENGINE_GRPC_STATUS_PERMISSION_DENIED" | "LOCERR_EXTENGINE_GRPC_STATUS_RESOURCE_EXHAUSTED" | "LOCERR_EXTENGINE_GRPC_STATUS_FAILED_PRECONDITION" | "LOCERR_EXTENGINE_GRPC_STATUS_ABORTED" | "LOCERR_EXTENGINE_GRPC_STATUS_OUT_OF_RANGE" | "LOCERR_EXTENGINE_GRPC_STATUS_UNIMPLEMENTED" | "LOCERR_EXTENGINE_GRPC_STATUS_INTERNAL" | "LOCERR_EXTENGINE_GRPC_STATUS_UNAVAILABLE" | "LOCERR_EXTENGINE_GRPC_STATUS_DATA_LOSS" | "LOCERR_EXTENGINE_GRPC_STATUS_UNAUTHENTICATED" | "LOCERR_LXW_INVALID_OBJ" | "LOCERR_LXW_INVALID_FILE" | "LOCERR_LXW_INVALID_SHEET" | "LOCERR_LXW_INVALID_EXPORT_RANGE" | "LOCERR_LXW_ERROR" | "LOCERR_LXW_ERROR_MEMORY_MALLOC_FAILED" | "LOCERR_LXW_ERROR_CREATING_XLSX_FILE" | "LOCERR_LXW_ERROR_CREATING_TMPFILE" | "LOCERR_LXW_ERROR_ZIP_FILE_OPERATION" | "LOCERR_LXW_ERROR_ZIP_FILE_ADD" | "LOCERR_LXW_ERROR_ZIP_CLOSE" | "LOCERR_LXW_ERROR_NULL_PARAMETER_IGNORED" | "LOCERR_LXW_ERROR_MAX_STRING_LENGTH_EXCEEDED" | "LOCERR_LXW_ERROR_255_STRING_LENGTH_EXCEEDED" | "LOCERR_LXW_ERROR_SHARED_STRING_INDEX_NOT_FOUND" | "LOCERR_LXW_ERROR_WORKSHEET_INDEX_OUT_OF_RANGE" | "LOCERR_LXW_ERROR_WORKSHEET_MAX_NUMBER_URLS_EXCEEDED" | "LOCERR_BDI_STATUS_OK" | "LOCERR_BDI_GENERIC_ERROR_NOT_TRANSLATED" | "LOCERR_TRENDLINE_INVALID_DEF" | "LOCERR_TRENDLINE_INVALID_MATH_ERROR" | "LOCERR_CURL_UNSUPPORTED_PROTOCOL" | "LOCERR_CURL_COULDNT_RESOLVE_PROXY" | "LOCERR_CURL_COULDNT_CONNECT" | "LOCERR_CURL_REMOTE_ACCESS_DENIED" | "LOCERR_CURL_FTP_ACCEPT_FAILED" | "LOCERR_CURL_FTP_ACCEPT_TIMEOUT" | "LOCERR_CURL_FTP_CANT_GET_HOST" | "LOCERR_CURL_PARTIAL_FILE" | "LOCERR_CURL_QUOTE_ERROR" | "LOCERR_CURL_WRITE_ERROR" | "LOCERR_CURL_UPLOAD_FAILED" | "LOCERR_CURL_OUT_OF_MEMORY" | "LOCERR_CURL_OPERATION_TIMEDOUT" | "LOCERR_CURL_FTP_COULDNT_USE_REST" | "LOCERR_CURL_HTTP_POST_ERROR" | "LOCERR_CURL_SSL_CONNECT_ERROR" | "LOCERR_CURL_FILE_COULDNT_READ_FILE" | "LOCERR_CURL_LDAP_CANNOT_BIND" | "LOCERR_CURL_LDAP_SEARCH_FAILED" | "LOCERR_CURL_TOO_MANY_REDIRECTS" | "LOCERR_CURL_PEER_FAILED_VERIFICATION" | "LOCERR_CURL_GOT_NOTHING" | "LOCERR_CURL_SSL_ENGINE_NOTFOUND" | "LOCERR_CURL_SSL_ENGINE_SETFAILED" | "LOCERR_CURL_SSL_CERTPROBLEM" | "LOCERR_CURL_SSL_CIPHER" | "LOCERR_CURL_SSL_CACERT" | "LOCERR_CURL_BAD_CONTENT_ENCODING" | "LOCERR_CURL_LDAP_INVALID_URL" | "LOCERR_CURL_USE_SSL_FAILED" | "LOCERR_CURL_SSL_ENGINE_INITFAILED" | "LOCERR_CURL_LOGIN_DENIED" | "LOCERR_CURL_TFTP_NOTFOUND" | "LOCERR_CURL_TFTP_ILLEGAL" | "LOCERR_CURL_SSH" | "LOCERR_SETEXPRESSION_TOO_LARGE" | "LOCERR_RELOAD_MERGE_LOAD_ERROR" | "LOCERR_WIN_FTP_DROPPED" | "LOCERR_WIN_FTP_NO_PASSIVE_MODE" | "LOCERR_WIN_HTTP_DOWNLEVEL_SERVER" | "LOCERR_WIN_HTTP_INVALID_SERVER_RESPONSE" | "LOCERR_WIN_HTTP_REDIRECT_NEEDS_CONFIRMATION" | "LOCERR_WIN_INTERNET_FORCE_RETRY" | "LOCERR_WIN_INTERNET_CANNOT_CONNECT" | "LOCERR_WIN_INTERNET_CONNECTION_ABORTED" | "LOCERR_WIN_INTERNET_CONNECTION_RESET" | "LOCERR_WIN_INTERNET_DISCONNECTED" | "LOCERR_WIN_INTERNET_INCORRECT_FORMAT" | "LOCERR_WIN_INTERNET_INVALID_CA" | "LOCERR_WIN_INTERNET_INVALID_OPERATION" | "LOCERR_WIN_INTERNET_INVALID_URL" | "LOCERR_WIN_INTERNET_ITEM_NOT_FOUND" | "LOCERR_WIN_INTERNET_LOGIN_FAILURE" | "LOCERR_WIN_INTERNET_NAME_NOT_RESOLVED" | "LOCERR_WIN_INTERNET_NEED_UI" | "LOCERR_WIN_INTERNET_SEC_CERT_CN_INVALID" | "LOCERR_WIN_INTERNET_SEC_CERT_DATE_INVALID" | "LOCERR_WIN_INTERNET_SEC_CERT_ERRORS" | "LOCERR_WIN_INTERNET_SEC_INVALID_CERT" | "LOCERR_WIN_INTERNET_SERVER_UNREACHABLE";
+type NxLocalizedWarningCode = "LOCWARN_PERSONAL_RELOAD_REQUIRED" | "LOCWARN_PERSONAL_VERSION_EXPIRES_SOON" | "LOCWARN_EXPORT_DATA_TRUNCATED" | "LOCWARN_COULD_NOT_OPEN_ALL_OBJECTS" | "LOCWARN_SEARCH_INVALID_SEARCHFIELD_DETECTED";
 type NxMatchingFieldInfo = {
     /**
      * Name of the field.
      */
-    qName: string;
+    qName?: string;
     /**
      * List of tags.
      */
-    qTags: string[];
+    qTags?: string[];
 };
+type NxMatchingFieldMode = "MATCHINGFIELDMODE_MATCH_ALL" | "MATCHINGFIELDMODE_MATCH_ONE";
 /**
  * <div class=note>Either **qDef** or **qLibraryId** must be set, but not both. </div> <div class=note>If the measure is set in the hypercube and not in the library, this measure cannot be shared with other objects.</div> <div class=note>A measure that is set in the library can be used by many objects.</div> <div class=note>
  * expressions are complementary expressions associated to a measure. For example, you can decide to change the background color of a visualization depending on the values of the measure.
@@ -4133,11 +4166,11 @@ type NxMeasure = {
     /**
      * Refers to a measure stored in the library.
      */
-    qLibraryId: string;
+    qLibraryId?: string;
     /**
      * Refers to a measure stored in the hypercube.
      */
-    qDef: NxInlineMeasureDef;
+    qDef?: NxInlineMeasureDef;
     /**
      * Defines the sort criteria.
      * The default value is sort by ascending alphabetic order.
@@ -4147,11 +4180,11 @@ type NxMeasure = {
     /**
      * List of attribute expressions.
      */
-    qAttributeExpressions: NxAttrExprDef[];
+    qAttributeExpressions?: NxAttrExprDef[];
     /**
      * List of attribute dimensions.
      */
-    qAttributeDimensions: NxAttrDimDef[];
+    qAttributeDimensions?: NxAttrDimDef[];
     /**
      * Specifies a calculation condition, which must be fulfilled for the measure to be calculated.
      * If the calculation condition is not met, the measure is excluded from the calculation.
@@ -4169,8 +4202,8 @@ type NxMeasure = {
     /**
      * Specifies trendlines for this measure.
      */
-    qTrendLines: NxTrendlineDef[];
-    qMiniChartDef: NxMiniChartDef;
+    qTrendLines?: NxTrendlineDef[];
+    qMiniChartDef?: NxMiniChartDef;
 };
 /**
  * Layout for _NxInlineMeasureDef_.
@@ -4180,15 +4213,15 @@ type NxMeasureInfo = {
      * Corresponds to the label of the measure.
      * If the label is not defined then the measure name is used.
      */
-    qFallbackTitle: string;
+    qFallbackTitle?: string;
     /**
      * Length of the longest value in the field.
      */
-    qApprMaxGlyphCount: number;
+    qApprMaxGlyphCount?: number;
     /**
      * Number of distinct field values.
      */
-    qCardinal: number;
+    qCardinal?: number;
     /**
      * Sort indicator.
      * The default value is no sorting.
@@ -4199,7 +4232,7 @@ type NxMeasureInfo = {
      * * A or NX_SORT_INDICATE_ASC
      * * D or NX_SORT_INDICATE_DESC
      */
-    qSortIndicator?: string;
+    qSortIndicator?: NxSortIndicatorType;
     /**
      * Format of the field.
      * This parameter is optional.
@@ -4208,11 +4241,11 @@ type NxMeasureInfo = {
     /**
      * Lowest value in the range.
      */
-    qMin: number;
+    qMin?: number;
     /**
      * Highest value in the range.
      */
-    qMax: number;
+    qMax?: number;
     /**
      * This parameter is optional.
      * Gives information on the error.
@@ -4221,32 +4254,32 @@ type NxMeasureInfo = {
     /**
      * If set to true, it inverts the sort criteria in the field.
      */
-    qReverseSort: boolean;
+    qReverseSort?: boolean;
     /**
      * This parameter is set to true if _qNumFormat_ is set to _U_ (unknown). The engine guesses the type of the field based on the field's expression.
      */
-    qIsAutoFormat: boolean;
+    qIsAutoFormat?: boolean;
     /**
      * List of attribute expressions.
      */
-    qAttrExprInfo: NxAttrExprInfo[];
+    qAttrExprInfo?: NxAttrExprInfo[];
     /**
      * List of attribute dimensions.
      */
-    qAttrDimInfo: NxAttrDimInfo[];
+    qAttrDimInfo?: NxAttrDimInfo[];
     /**
      * The message displayed if calculation condition is not fulfilled.
      */
-    qCalcCondMsg: string;
+    qCalcCondMsg?: string;
     /**
      * Refers to a dimension stored in the library.
      */
-    qLibraryId: string;
+    qLibraryId?: string;
     /**
      * Calculated trendlines
      */
-    qTrendLines: NxTrendline[];
-    qMiniChart: NxMiniChart;
+    qTrendLines?: NxTrendline[];
+    qMiniChart?: NxMiniChart;
 };
 /**
  * Layout for _NxMetaDef_.
@@ -4264,16 +4297,16 @@ type NxMeta = {
  * ### Properties
  * Semantic type with an empty structure.
  */
-type NxMetaDef = {};
+type NxMetaDef = object;
 type NxMiniChart = {
-    qYMin: number;
-    qYMax: number;
-    qXMin: number;
-    qXMax: number;
+    qYMin?: number;
+    qYMax?: number;
+    qXMin?: number;
+    qXMax?: number;
     /**
      * List of attribute expressions.
      */
-    qAttrExprInfo: NxAttrExprInfo[];
+    qAttrExprInfo?: NxAttrExprInfo[];
     /**
      * This parameter is optional and is displayed in case of error.
      */
@@ -4283,7 +4316,7 @@ type NxMiniChartCell = {
     /**
      * Some text.
      */
-    qText: string;
+    qText?: string;
     /**
      * A value.
      * This parameter is optional.
@@ -4298,19 +4331,19 @@ type NxMiniChartCell = {
      * * -3: the cell belongs to the group _Others_ .
      * * -4: the cell is empty. Applies to pivot tables.
      */
-    qElemNumber: number;
+    qElemNumber?: number;
     /**
      * Attribute expressions values.
      */
-    qAttrExps: NxAttributeExpressionValues;
+    qAttrExps?: NxAttributeExpressionValues;
 };
 type NxMiniChartData = {
     /**
      * Array of data.
      */
-    qMatrix: NxMiniChartRows[];
-    qMin: number;
-    qMax: number;
+    qMatrix?: NxMiniChartRows[];
+    qMin?: number;
+    qMax?: number;
     /**
      * This parameter is optional and is displayed in case of error.
      */
@@ -4320,56 +4353,56 @@ type NxMiniChartDef = {
     /**
      * Expression or field name.
      */
-    qDef: string;
+    qDef?: string;
     /**
      * LibraryId for dimension.
      */
-    qLibraryId: string;
+    qLibraryId?: string;
     /**
      * Sorting.
      */
-    qSortBy: SortCriteria;
-    qOtherTotalSpec: OtherTotalSpecProp;
+    qSortBy?: SortCriteria;
+    qOtherTotalSpec?: OtherTotalSpecProp;
     qMaxNumberPoints?: number;
     /**
      * List of attribute expressions.
      */
-    qAttributeExpressions: NxAttrExprDef[];
+    qAttributeExpressions?: NxAttrExprDef[];
     /**
      * If set to true, no null values are returned.
      */
-    qNullSuppression: boolean;
+    qNullSuppression?: boolean;
 };
 type NxMiniChartRows = NxMiniChartCell[];
 type NxMultiRangeSelectInfo = {
-    qRanges: NxRangeSelectInfo[];
-    qColumnsToSelect: number[];
+    qRanges?: NxRangeSelectInfo[];
+    qColumnsToSelect?: number[];
 };
 type NxPage = {
     /**
      * Position from the left.
      * Corresponds to the first column.
      */
-    qLeft: number;
+    qLeft?: number;
     /**
      * Position from the top.
      * Corresponds to the first row.
      */
-    qTop: number;
+    qTop?: number;
     /**
      * Number of columns in the page. The indexing of the columns may vary depending on whether the cells are expanded or not (parameter _qAlwaysFullyExpanded_ in _HyperCubeDef_ ).
      */
-    qWidth: number;
+    qWidth?: number;
     /**
      * Number of rows or elements in the page. The indexing of the rows may vary depending on whether the cells are expanded or not (parameter _qAlwaysFullyExpanded_ in _HyperCubeDef_ ).
      */
-    qHeight: number;
+    qHeight?: number;
 };
 type NxPageTreeLevel = {
     /**
      * The first dimension that is to be part of the tree, counted from the left. For example, if qLeft is equal to 1, omit nodes from the first dimension in the current sort order.
      */
-    qLeft: number;
+    qLeft?: number;
     /**
      * Number of dimensions to include in the tree.
      */
@@ -4384,11 +4417,11 @@ type NxPageTreeNode = {
     /**
      * The area of the tree to be fetched. If no area is defined on a dimension, all existing nodes are included.
      */
-    qArea: Rect;
+    qArea?: Rect;
     /**
      * When set to true, generated nodes (based on current selection) will be inserted into the returned tree even when there is no actual value. For example, suppose you are looking for hybrid car sales at all car dealerships. Normally, only dealerships where hybrid cars are sold would be part of the returned tree but with qAllValues set to true, all available dealerships will be included regardless if they sold any hybrid cars or not.
      */
-    qAllValues: boolean;
+    qAllValues?: boolean;
 };
 type NxPatch = {
     /**
@@ -4399,58 +4432,59 @@ type NxPatch = {
      * * remove or Remove
      * * replace or Replace
      */
-    qOp: string;
+    qOp?: NxPatchOperationType;
     /**
      * Path to the property to add, remove or replace.
      */
-    qPath: string;
+    qPath?: string;
     /**
      * This parameter is not used in a remove operation.
      * Corresponds to the value of the property to add or to the new value of the property to update.
      * Examples:
      * "false", "2", "\"New title\""
      */
-    qValue: string;
+    qValue?: string;
 };
+type NxPatchOperationType = "add" | "Add" | "remove" | "Remove" | "replace" | "Replace";
 type NxPatches = {
     /**
      * Identifier and type of the object.
      */
-    qInfo: NxInfo;
+    qInfo?: NxInfo;
     /**
      * Array with patches.
      */
-    qPatches: NxPatch[];
+    qPatches?: NxPatch[];
     /**
      * Array with child objects and their patches.
      */
-    qChildren: NxPatches[];
+    qChildren?: NxPatches[];
 };
 type NxPivotDimensionCell = {
     /**
      * Some text.
      */
-    qText: string;
+    qText?: string;
     /**
      * Rank number of the value.
      * If set to -1, it means that the value is not an element number.
      */
-    qElemNo: number;
+    qElemNo?: number;
     /**
      * Value of the cell.
      * Is set to _NaN_ , if the value is not a number.
      */
-    qValue: number;
+    qValue?: number;
     /**
      * If set to true, it means that the cell can be expanded.
      * This parameter is not returned if it is set to false.
      */
-    qCanExpand: boolean;
+    qCanExpand?: boolean;
     /**
      * If set to true, it means that the cell can be collapsed.
      * This parameter is not returned if it is set to false.
      */
-    qCanCollapse: boolean;
+    qCanCollapse?: boolean;
     /**
      * Type of the cell.
      *
@@ -4466,49 +4500,49 @@ type NxPivotDimensionCell = {
      * * U or NX_DIM_CELL_NULL
      * * G or NX_DIM_CELL_GENERATED
      */
-    qType: string;
+    qType?: NxDimCellType;
     /**
      * Number of elements that are part of the previous tail.
      * This number depends on the paging, more particularly it depends on the values defined in _qTop_ and _qHeight_ .
      */
-    qUp: number;
+    qUp?: number;
     /**
      * Number of elements that are part of the next tail.
      * This number depends on the paging, more particularly it depends on the values defined in _qTop_ and _qHeight_ .
      */
-    qDown: number;
+    qDown?: number;
     /**
      * Information about sub nodes (or sub cells).
      * The array is empty _[ ]_ when there is no sub nodes.
      */
-    qSubNodes: NxPivotDimensionCell[];
+    qSubNodes?: NxPivotDimensionCell[];
     /**
      * Information about attribute expressions.
      * The array is empty _[ ]_ when there is no attribute expressions.
      */
-    qAttrExps: NxAttributeExpressionValues;
+    qAttrExps?: NxAttributeExpressionValues;
     /**
      * Information about attribute dimensions.
      */
-    qAttrDims: NxAttributeDimValues;
+    qAttrDims?: NxAttributeDimValues;
 };
 type NxPivotPage = {
     /**
      * Information about the left dimension values of a pivot table.
      */
-    qLeft: NxPivotDimensionCell[];
+    qLeft?: NxPivotDimensionCell[];
     /**
      * Information about the top dimension values of a pivot table. If there is no top dimension in the pivot table, information about the measures are given.
      */
-    qTop: NxPivotDimensionCell[];
+    qTop?: NxPivotDimensionCell[];
     /**
      * Array of data.
      */
-    qData: ArrayOfNxValuePoint[];
+    qData?: ArrayOfNxValuePoint[];
     /**
      * Size and offset of the data in the matrix.
      */
-    qArea: Rect;
+    qArea?: Rect;
 };
 type NxPivotValuePoint = {
     /**
@@ -4519,11 +4553,11 @@ type NxPivotValuePoint = {
     /**
      * Some text related to the cell.
      */
-    qText: string;
+    qText?: string;
     /**
      * Value of the cell.
      */
-    qNum: number;
+    qNum?: number;
     /**
      * Type of the cell.
      *
@@ -4539,33 +4573,33 @@ type NxPivotValuePoint = {
      * * U or NX_DIM_CELL_NULL
      * * G or NX_DIM_CELL_GENERATED
      */
-    qType: string;
+    qType?: NxDimCellType;
     /**
      * Attribute expressions values.
      */
-    qAttrExps: NxAttributeExpressionValues;
-    qAttrDims: NxAttributeDimValues;
+    qAttrExps?: NxAttributeExpressionValues;
+    qAttrDims?: NxAttributeDimValues;
 };
 type NxRange = {
     /**
      * Position in the expression of the first character of the field name.
      */
-    qFrom: number;
+    qFrom?: number;
     /**
      * Number of characters in the field name.
      */
-    qCount: number;
+    qCount?: number;
 };
 type NxRangeSelectInfo = {
     /**
      * Range of values.
      */
-    qRange: QRange;
+    qRange?: QRange;
     /**
      * Number of the measure to select.
      * Numbering starts from 0.
      */
-    qMeasureIx: number;
+    qMeasureIx?: number;
 };
 type NxSelectionCell = {
     /**
@@ -4576,7 +4610,7 @@ type NxSelectionCell = {
      * * T or NX_CELL_TOP
      * * L or NX_CELL_LEFT
      */
-    qType: string;
+    qType?: NxSelectionCellType;
     /**
      * Column index to select.
      * Indexing starts from 0.
@@ -4585,7 +4619,7 @@ type NxSelectionCell = {
      * * T, the index is based on the data matrix.
      * * L, the index is based on the left dimensions indexes.
      */
-    qCol: number;
+    qCol?: number;
     /**
      * Row index to select.
      * Indexing starts from 0.
@@ -4594,19 +4628,20 @@ type NxSelectionCell = {
      * * T, the index is based on the top dimensions indexes.
      * * L, the index is based on the data matrix.
      */
-    qRow: number;
+    qRow?: number;
 };
+type NxSelectionCellType = "D" | "NX_CELL_DATA" | "T" | "NX_CELL_TOP" | "L" | "NX_CELL_LEFT";
 type NxSelectionInfo = {
     /**
      * Is set to true if the visualization is in selection mode.
      * For more information about the selection mode, see _BeginSelections Method_.
      */
-    qInSelections: boolean;
+    qInSelections?: boolean;
     /**
      * Is set to true if the visualization is in selection mode and if some selections have been made while in selection mode.
      * For more information about the selection mode, see _BeginSelections Method_.
      */
-    qMadeSelections: boolean;
+    qMadeSelections?: boolean;
 };
 type NxSimpleDimValue = {
     /**
@@ -4617,54 +4652,55 @@ type NxSimpleDimValue = {
     /**
      * Element number.
      */
-    qElemNo: number;
+    qElemNo?: number;
 };
 type NxSimpleValue = {
     /**
      * Text related to the attribute expression value.
      */
-    qText: string;
+    qText?: string;
     /**
      * Numeric value of the attribute expression.
      * Set to NaN (Not a Number) if the attribute expression value is not numeric.
      */
-    qNum: number;
+    qNum?: number;
 };
+type NxSortIndicatorType = "N" | "NX_SORT_INDICATE_NONE" | "A" | "NX_SORT_INDICATE_ASC" | "D" | "NX_SORT_INDICATE_DESC";
 type NxStackPage = {
     /**
      * Array of data.
      */
-    qData: NxStackedPivotCell[];
+    qData?: NxStackedPivotCell[];
     /**
      * Size and offset of the data in the matrix.
      */
-    qArea: Rect;
+    qArea?: Rect;
 };
 type NxStackedPivotCell = {
     /**
      * Some text.
      */
-    qText: string;
+    qText?: string;
     /**
      * Rank number of the value.
      * If set to -1, it means that the value is not an element number.
      */
-    qElemNo: number;
+    qElemNo?: number;
     /**
      * Value of the cell.
      * Is set to _NaN_ , if the value is not a number.
      */
-    qValue: number;
+    qValue?: number;
     /**
      * If set to true, it means that the cell can be expanded.
      * This parameter is not returned if it is set to false.
      */
-    qCanExpand: boolean;
+    qCanExpand?: boolean;
     /**
      * If set to true, it means that the cell can be collapsed.
      * This parameter is not returned if it is set to false.
      */
-    qCanCollapse: boolean;
+    qCanCollapse?: boolean;
     /**
      * Type of the cell.
      *
@@ -4680,75 +4716,75 @@ type NxStackedPivotCell = {
      * * U or NX_DIM_CELL_NULL
      * * G or NX_DIM_CELL_GENERATED
      */
-    qType: string;
+    qType?: NxDimCellType;
     /**
      * Total of the positive values in the current group of cells.
      */
-    qMaxPos: number;
+    qMaxPos?: number;
     /**
      * Total of the negative values in the current group of cells.
      */
-    qMinNeg: number;
+    qMinNeg?: number;
     /**
      * Number of elements that are part of the previous tail.
      */
-    qUp: number;
+    qUp?: number;
     /**
      * Number of elements that are part of the next tail.
      */
-    qDown: number;
+    qDown?: number;
     /**
      * Row index in the data matrix.
      * The indexing starts from 0.
      */
-    qRow: number;
+    qRow?: number;
     /**
      * Information about sub nodes (or sub cells).
      * The array is empty _[ ]_ when there are no sub nodes.
      */
-    qSubNodes: NxStackedPivotCell[];
+    qSubNodes?: NxStackedPivotCell[];
     /**
      * Attribute expressions values.
      */
-    qAttrExps: NxAttributeExpressionValues;
+    qAttrExps?: NxAttributeExpressionValues;
     /**
      * Attribute dimensions values.
      */
-    qAttrDims: NxAttributeDimValues;
+    qAttrDims?: NxAttributeDimValues;
 };
 type NxStateCounts = {
     /**
      * Number of values in locked state.
      */
-    qLocked: number;
+    qLocked?: number;
     /**
      * Number of values in selected state.
      */
-    qSelected: number;
+    qSelected?: number;
     /**
      * Number of values in optional state.
      */
-    qOption: number;
+    qOption?: number;
     /**
      * Number of values in deselected state.
      */
-    qDeselected: number;
+    qDeselected?: number;
     /**
      * Number of values in alternative state.
      */
-    qAlternative: number;
+    qAlternative?: number;
     /**
      * Number of values in excluded state.
      */
-    qExcluded: number;
+    qExcluded?: number;
     /**
      * Number of values in selected excluded state.
      */
-    qSelectedExcluded: number;
+    qSelectedExcluded?: number;
     /**
      * Number of values in locked excluded state.
      */
-    qLockedExcluded: number;
+    qLockedExcluded?: number;
 };
 /**
  * <div class=warning>This struct is deprecated (not recommended to use).</div>
@@ -4759,35 +4795,35 @@ type NxStreamListEntry = {
     /**
      * Name of the stream.
      */
-    qName: string;
+    qName?: string;
     /**
      * Identifier of the stream.
      */
-    qId: string;
+    qId?: string;
 };
 type NxTempBookmarkOptions = {
     /**
      * IncludeVariables If true all variables will be stored in the temporary bookmark
      */
-    qIncludeVariables: boolean;
+    qIncludeVariables?: boolean;
     /**
      * IncludeAllPatches If true all patches will be stored in the temporary bookmark, if false ObjectIdsToPatch will determine what patches to include
      */
-    qIncludeAllPatches: boolean;
+    qIncludeAllPatches?: boolean;
 };
 type NxTickCell = {
     /**
      * Tick's label.
      */
-    qText: string;
+    qText?: string;
     /**
      * Start value.
      */
-    qStart: number;
+    qStart?: number;
     /**
      * End value.
      */
-    qEnd: number;
+    qEnd?: number;
 };
 /**
  * Specifies all the paging filters needed to define the tree to be fetched.
@@ -4798,43 +4834,43 @@ type NxTreeDataOption = {
     /**
      * Maximum number of nodes in the tree. If this limit is exceeded, no nodes are returned. All nodes are counted.
      */
-    qMaxNbrOfNodes: number;
+    qMaxNbrOfNodes?: number;
     /**
      * Defines areas of the tree to be fetched. Areas must be defined left to right.
      */
-    qTreeNodes: NxPageTreeNode[];
+    qTreeNodes?: NxPageTreeNode[];
     /**
      * Filters out complete dimensions from the fetched tree.
      */
-    qTreeLevels: NxPageTreeLevel;
+    qTreeLevels?: NxPageTreeLevel;
 };
 type NxTreeDimensionDef = {
     /**
      * Refers to a dimension stored in the library.
      */
-    qLibraryId: string;
+    qLibraryId?: string;
     /**
      * Refers to a dimension.
      */
-    qDef: NxInlineDimensionDef;
+    qDef?: NxInlineDimensionDef;
     /**
      * List of measures.
      */
-    qValueExprs: NxMeasure[];
+    qValueExprs?: NxMeasure[];
     /**
      * If set to true, no null values are returned.
      */
-    qNullSuppression: boolean;
+    qNullSuppression?: boolean;
     /**
      * Sets the dimension limits. Each dimension of a hypercube is configured separately.
      * Defines if some values (grouped as _Others_ ) should be grouped together in the visualization.
      * For example in a pie chart all values lower than 200 could be grouped together.
      */
-    qOtherTotalSpec: OtherTotalSpecProp;
+    qOtherTotalSpec?: OtherTotalSpecProp;
     /**
      * If set to true, all dimension values are shown.
      */
-    qShowAll: boolean;
+    qShowAll?: boolean;
     /**
      * This property is used when some dimension limits are set.
      * Label of the _Others_ group. The default label is _Others_ .
@@ -4867,32 +4903,32 @@ type NxTreeDimensionDef = {
     /**
      * List of attribute expressions.
      */
-    qAttributeExpressions: NxAttrExprDef[];
+    qAttributeExpressions?: NxAttrExprDef[];
     /**
      * List of attribute dimensions.
      */
-    qAttributeDimensions: NxAttrDimDef[];
+    qAttributeDimensions?: NxAttrDimDef[];
 };
 type NxTreeDimensionInfo = {
     /**
      * Corresponds to the label of the dimension that is selected.
      * If the label is not defined then the field name is used.
      */
-    qFallbackTitle: string;
+    qFallbackTitle?: string;
     /**
      * Length of the longest value in the field.
      */
-    qApprMaxGlyphCount: number;
+    qApprMaxGlyphCount?: number;
     /**
      * Number of distinct field values.
      *
      * @deprecated: This will be removed in a future version
      */
-    qCardinal: number;
+    qCardinal?: number;
     /**
      * Is set to true if the field is locked.
      */
-    qLocked: boolean;
+    qLocked?: boolean;
     /**
      * Sort indicator.
      * The default value is no sorting.
@@ -4903,26 +4939,26 @@ type NxTreeDimensionInfo = {
      * * A or NX_SORT_INDICATE_ASC
      * * D or NX_SORT_INDICATE_DESC
      */
-    qSortIndicator?: string;
+    qSortIndicator?: NxSortIndicatorType;
     /**
      * Array of dimension labels.
      * Contains the labels of all dimensions in a hierarchy group (for example the labels of all dimensions in a drill down group).
      */
-    qGroupFallbackTitles: string[];
+    qGroupFallbackTitles?: string[];
     /**
      * Index of the dimension that is currently in use.
      * _qGroupPos_ is set to 0 if there are no hierarchical groups (drill-down groups) or cycle groups.
      */
-    qGroupPos: number;
+    qGroupPos?: number;
     /**
      * Number of values in a particular state.
      */
-    qStateCounts: NxStateCounts;
+    qStateCounts?: NxStateCounts;
     /**
      * Gives information on a field. For example, it can return the type of the field.
      * Examples: key, text, ASCII
      */
-    qTags: string[];
+    qTags?: string[];
     /**
      * This parameter is optional.
      * Gives information on the error.
@@ -4936,11 +4972,11 @@ type NxTreeDimensionInfo = {
      * * N or NX_DIMENSION_TYPE_NUMERIC
      * * T or NX_DIMENSION_TYPE_TIME
      */
-    qDimensionType: string;
+    qDimensionType?: NxDimensionType;
     /**
      * If set to true, it inverts the sort criteria in the field.
      */
-    qReverseSort: boolean;
+    qReverseSort?: boolean;
     /**
      * Defines the grouping.
      *
@@ -4949,11 +4985,11 @@ type NxTreeDimensionInfo = {
      * * H or GRP_NX_HIEARCHY
      * * C or GRP_NX_COLLECTION
      */
-    qGrouping: string;
+    qGrouping?: NxGrpType;
     /**
      * If set to true, it means that the field is a semantic.
      */
-    qIsSemantic: boolean;
+    qIsSemantic?: boolean;
     /**
      * Format of the field.
      * This parameter is optional.
@@ -4962,47 +4998,47 @@ type NxTreeDimensionInfo = {
     /**
      * This parameter is set to true if _qNumFormat_ is set to _U_ (unknown). The engine guesses the type of the field based on the field's definition.
      */
-    qIsAutoFormat: boolean;
+    qIsAutoFormat?: boolean;
     /**
      * Array of field names.
      */
-    qGroupFieldDefs: string[];
+    qGroupFieldDefs?: string[];
     /**
      * Minimum value.
      */
-    qMin: number;
+    qMin?: number;
     /**
      * Maximum value.
      */
-    qMax: number;
+    qMax?: number;
     /**
      * Is continuous axis used.
      */
-    qContinuousAxes: boolean;
+    qContinuousAxes?: boolean;
     /**
      * Is a cyclic dimension used.
      */
-    qIsCyclic: boolean;
+    qIsCyclic?: boolean;
     /**
      * Is derived field is used as a dimension.
      */
-    qDerivedField: boolean;
+    qDerivedField?: boolean;
     /**
      * A List of measures to be calculated on this TreeDimension.
      */
-    qMeasureInfo: NxMeasureInfo[];
+    qMeasureInfo?: NxMeasureInfo[];
     /**
      * List of attribute expressions.
      */
-    qAttrExprInfo: NxAttrExprInfo[];
+    qAttrExprInfo?: NxAttrExprInfo[];
     /**
      * List of attribute dimensions.
      */
-    qAttrDimInfo: NxAttrDimInfo[];
+    qAttrDimInfo?: NxAttrDimInfo[];
     /**
      * The message displayed if calculation condition is not fulfilled.
      */
-    qCalcCondMsg: string;
+    qCalcCondMsg?: string;
     /**
      * True if this is a calculated dimension.
      */
@@ -5010,21 +5046,21 @@ type NxTreeDimensionInfo = {
     /**
      * If set to true, it means that the field always has one and only one selected value.
      */
-    qIsOneAndOnlyOne: boolean;
+    qIsOneAndOnlyOne?: boolean;
     /**
      * Dimension Cardinalities
      */
-    qCardinalities: NxCardinalities;
+    qCardinalities?: NxCardinalities;
     /**
      * Refers to a dimension stored in the library.
      */
-    qLibraryId: string;
+    qLibraryId?: string;
 };
 type NxTreeMultiRangeSelectInfo = {
     /**
      * An array of Ranges.
      */
-    qRanges: NxTreeRangeSelectInfo[];
+    qRanges?: NxTreeRangeSelectInfo[];
 };
 /**
  * Represents a dimension in the tree.
@@ -5035,29 +5071,29 @@ type NxTreeNode = {
     /**
      * The text version of the value, if available.
      */
-    qText: string;
+    qText?: string;
     /**
      * Value of the cell.
      * Is set to _NaN_ , if the value is not a number.
      */
-    qValue: number;
+    qValue?: number;
     /**
      * Element number.
      */
-    qElemNo: number;
+    qElemNo?: number;
     /**
      * The position of this node inside it's group in the complete tree, i.e. Not dependant om what part is fetched.
      */
-    qGroupPos: number;
+    qGroupPos?: number;
     /**
      * Nbr of nodes connected to this node on the next level of the tree. Not dependant on what part is fetched.
      */
-    qGroupSize: number;
+    qGroupSize?: number;
     /**
      * Row index in the data matrix.
      * The indexing starts from 0.
      */
-    qRow: number;
+    qRow?: number;
     /**
      * Type of the cell.
      *
@@ -5073,41 +5109,41 @@ type NxTreeNode = {
      * * U or NX_DIM_CELL_NULL
      * * G or NX_DIM_CELL_GENERATED
      */
-    qType: string;
+    qType?: NxDimCellType;
     /**
      * The measures for this node.
      */
-    qValues: NxTreeValue[];
+    qValues?: NxTreeValue[];
     /**
      * The children of this node in the fetched tree structure.
      */
-    qNodes: NxTreeNode[];
+    qNodes?: NxTreeNode[];
     /**
      * Attribute expression values.
      */
-    qAttrExps: NxAttributeExpressionValues;
+    qAttrExps?: NxAttributeExpressionValues;
     /**
      * Attribute dimension values.
      */
-    qAttrDims: NxAttributeDimValues;
+    qAttrDims?: NxAttributeDimValues;
     /**
      * Total of the positive values in the current group of cells.
      */
-    qMaxPos: number[];
+    qMaxPos?: number[];
     /**
      * Total of the negative values in the current group of cells.
      */
-    qMinNeg: number[];
+    qMinNeg?: number[];
     /**
      * If set to true, it means that the cell can be expanded.
      * This parameter is not returned if it is set to false.
      */
-    qCanExpand: boolean;
+    qCanExpand?: boolean;
     /**
      * If set to true, it means that the cell can be collapsed.
      * This parameter is not returned if it is set to false.
      */
-    qCanCollapse: boolean;
+    qCanCollapse?: boolean;
     /**
      * Selection State of the value.
      * The default state for a measure is L(Locked).
@@ -5123,28 +5159,28 @@ type NxTreeNode = {
      * * XL or EXCL_LOCKED
      * * NSTATES
      */
-    qState?: string;
+    qState?: StateEnumType;
     /**
      * The GroupPos of all prior nodes connected to this one, one position for each level of the tree.
      * If this node is attached directly to the root, this array is empty.
      */
-    qTreePath: number[];
+    qTreePath?: number[];
 };
 type NxTreeRangeSelectInfo = {
     /**
      * Range of values.
      */
-    qRange: QRange;
+    qRange?: QRange;
     /**
      * Number of the measure to select.
      * Numbering starts from 0.
      */
-    qMeasureIx: number;
+    qMeasureIx?: number;
     /**
      * Number of the dimension to select
      * measure from.  Numbering starts from 0.
      */
-    qDimensionIx: number;
+    qDimensionIx?: number;
 };
 /**
  * Represents a measure.
@@ -5155,20 +5191,20 @@ type NxTreeValue = {
     /**
      * The text version of the value, if available.
      */
-    qText: string;
+    qText?: string;
     /**
      * Value of the cell.
      * Is set to _NaN_ , if the value is not a number.
      */
-    qValue: number;
+    qValue?: number;
     /**
      * Attribute expression values.
      */
-    qAttrExps: NxAttributeExpressionValues;
+    qAttrExps?: NxAttributeExpressionValues;
     /**
      * Attribute dimension values.
      */
-    qAttrDims: NxAttributeDimValues;
+    qAttrDims?: NxAttributeDimValues;
 };
 /**
  * Information about the calculated trendline.
@@ -5189,7 +5225,7 @@ type NxTrendline = {
      * * POWER or Power
      * * LOG or Logarithmic
      */
-    qType: string;
+    qType?: NxLTrendlineType;
     /**
      * This parameter is optional and is displayed in case of error.
      */
@@ -5197,19 +5233,19 @@ type NxTrendline = {
     /**
      * Coefficent c0..cN depending on the trendline type.
      */
-    qCoeff: number[];
+    qCoeff?: number[];
     /**
      * R2 score. Value between 0..1 that shows the correlation between the trendline and the data. Higher value means higher correlation.
      */
-    qR2: number;
+    qR2?: number;
     /**
      * Trendline expression
      */
-    qExpression: string;
+    qExpression?: string;
     /**
      * Inner Dim elem no
      */
-    qElemNo: number;
+    qElemNo?: number;
 };
 /**
  * Trendline input definition
@@ -5230,7 +5266,7 @@ type NxTrendlineDef = {
      * * POWER or Power
      * * LOG or Logarithmic
      */
-    qType: string;
+    qType?: NxLTrendlineType;
     /**
      * The column in the hypercube to be used as x axis. Can point to either a dimension (numeric or text) or a measure
      */
@@ -5247,7 +5283,7 @@ type NxTrendlineDef = {
      * * Possible or CONTINUOUS_IF_POSSIBLE
      * * Time or CONTINUOUS_IF_TIME
      */
-    qContinuousXAxis?: string;
+    qContinuousXAxis?: NxContinuousMode;
     /**
      * If you have a hypercube with two dimensions and qXColIx refers to a dimension
      * This determines if you get one trendline of each value in the other dimension or
@@ -5258,14 +5294,15 @@ type NxTrendlineDef = {
      * * Multi or TRENDLINE_MULTILINE
      * * Sum or TRENDLINE_SUM
      */
-    qMultiDimMode?: string;
+    qMultiDimMode?: NxTrendlineMode;
 };
+type NxTrendlineMode = "Multi" | "TRENDLINE_MULTILINE" | "Sum" | "TRENDLINE_SUM";
 type NxValidationError = {
     /**
      * Error code.
      * This parameter is always displayed in case of error.
      */
-    qErrorCode: number;
+    qErrorCode?: number;
     /**
      * Context related to the error, from the user app domain.
      * It can be the identifier of an object, a field name, a table name.
@@ -5282,15 +5319,15 @@ type NxVariableListItem<QData> = {
     /**
      * Name of the variable.
      */
-    qName: string;
+    qName?: string;
     /**
      * Description of the variable.
      */
-    qDescription: string;
+    qDescription?: string;
     /**
      * Definition of the variable. It can be a value or an expression.
      */
-    qDefinition: string;
+    qDefinition?: string;
     /**
      * If set to true, it means that the variable is a system variable.
      * A system variable provides information about the system and is set by the engine. The content cannot be changed by the user.
@@ -5316,25 +5353,25 @@ type NxVariableListItem<QData> = {
      * Identifier and type of the object.
      * This parameter is mandatory.
      */
-    qInfo: NxInfo;
+    qInfo?: NxInfo;
     /**
      * Data.
      */
-    qData: QData;
+    qData?: QData;
     /**
      * If set to true, it means that the variable was defined via script.
      */
-    qIsScriptCreated: boolean;
+    qIsScriptCreated?: boolean;
 };
 type NxVariableProperties = {
     /**
      * Name of the variable.
      */
-    qName: string;
+    qName?: string;
     /**
      * Defines the format of the value of a variable.
      */
-    qNumberPresentation: FieldAttributes;
+    qNumberPresentation?: FieldAttributes;
     /**
      * Set this property to true to update the variable when applying a bookmark.
      * The value of a variable can affect the state of the selections.
@@ -5345,54 +5382,54 @@ type NxVariableProperties = {
      * The value of a variable can be an enumeration.
      * Set this property to true to reflect the predefined values in an enumeration.
      */
-    qUsePredefListedValues: boolean;
+    qUsePredefListedValues?: boolean;
     /**
      * List of enumerations.
      * This property is used if _qUsePredefListedValues_ is set to true.
      */
-    qPreDefinedList: string[];
+    qPreDefinedList?: string[];
 };
 type NxViewPort = {
     /**
      * Width of the canvas in pixels.
      */
-    qWidth: number;
+    qWidth?: number;
     /**
      * Height of the canvas in pixels.
      */
-    qHeight: number;
+    qHeight?: number;
     /**
      * Zoom level.
      */
-    qZoomLevel: number;
+    qZoomLevel?: number;
 };
 type ObjectInterface = {
     /**
      * The native type of the object.
      */
-    qType: string;
+    qType?: string;
     /**
      * The handle used to connect to object.
      */
-    qHandle: number;
+    qHandle?: number;
     /**
      * The type of the object.
      */
-    qGenericType: string;
+    qGenericType?: string;
     /**
      * Object ID.
      */
-    qGenericId: string;
+    qGenericId?: string;
 };
 type OdbcDsn = {
     /**
      * Name of the ODBC connection.
      */
-    qName: string;
+    qName?: string;
     /**
      * Description of the ODBC connection.
      */
-    qDescription: string;
+    qDescription?: string;
     /**
      * Is set to true if the version of ODBC is 32-bit.
      * This parameter is optional. Default is false.
@@ -5409,11 +5446,11 @@ type OleDbProvider = {
     /**
      * Name of the OLEDB provider.
      */
-    qName: string;
+    qName?: string;
     /**
      * Description of the OLEDB provider.
      */
-    qDescription: string;
+    qDescription?: string;
     /**
      * Is set to true if the version of the OLEDB provider is 32-bit.
      * Default is false.
@@ -5421,6 +5458,9 @@ type OleDbProvider = {
      */
     qBit32?: boolean;
 };
+type OtherLimitMode = "OTHER_GE_LIMIT" | "OTHER_LE_LIMIT" | "OTHER_GT_LIMIT" | "OTHER_LT_LIMIT";
+type OtherMode = "OTHER_OFF" | "OTHER_COUNTED" | "OTHER_ABS_LIMITED" | "OTHER_ABS_ACC_TARGET" | "OTHER_REL_LIMITED" | "OTHER_REL_ACC_TARGET";
+type OtherSortMode = "OTHER_SORT_DEFAULT" | "OTHER_SORT_DESCENDING" | "OTHER_SORT_ASCENDING";
 type OtherTotalSpecProp = {
     /**
      * Determines how many dimension values are displayed.
@@ -5434,12 +5474,12 @@ type OtherTotalSpecProp = {
      * * OTHER_REL_LIMITED
      * * OTHER_REL_ACC_TARGET
      */
-    qOtherMode?: string;
+    qOtherMode?: OtherMode;
     /**
      * Number of values to display. The number of values can be entered as a calculated formula.
      * This parameter is used when _qOtherMode_ is set to _OTHER_COUNTED_ .
      */
-    qOtherCounted: ValueExpr;
+    qOtherCounted?: ValueExpr;
     /**
      * Value used to limit the dimension values. The limit can be entered as a calculated formula.
      * This parameter is used when _qOtherMode_ is set to:
@@ -5448,7 +5488,7 @@ type OtherTotalSpecProp = {
      * * OTHER_ABS_ACC_TARGET
      * OTHER_REL_ACC_TARGET
      */
-    qOtherLimit: ValueExpr;
+    qOtherLimit?: ValueExpr;
     /**
      * Sets the limit for the _Others_ mode.
      * This parameter is used when _qOtherMode_ is set to:
@@ -5463,7 +5503,7 @@ type OtherTotalSpecProp = {
      * * OTHER_GT_LIMIT
      * * OTHER_LT_LIMIT
      */
-    qOtherLimitMode?: string;
+    qOtherLimitMode?: OtherLimitMode;
     /**
      * If set to true, the group _Others_ is not displayed as a dimension value.
      * The default value is false.
@@ -5507,7 +5547,7 @@ type OtherTotalSpecProp = {
      * * OTHER_SORT_DESCENDING
      * * OTHER_SORT_ASCENDING
      */
-    qOtherSortMode?: string;
+    qOtherSortMode?: OtherSortMode;
     /**
      * If set to _TOTAL_EXPR_ , the total of the dimension values is returned.
      * The default value is _TOTAL_OFF_ .
@@ -5516,111 +5556,111 @@ type OtherTotalSpecProp = {
      * * TOTAL_OFF
      * * TOTAL_EXPR
      */
-    qTotalMode?: string;
+    qTotalMode?: TotalMode;
     /**
      * This parameter applies when there are several measures.
      * Name of the measure to use for the calculation of _Others_ for a specific dimension.
      */
-    qReferencedExpression: StringExpr;
+    qReferencedExpression?: StringExpr;
 };
 type Point = {
     /**
      * x-coordinate in pixels.
      * The origin is the top left of the screen.
      */
-    qx: number;
+    qx?: number;
     /**
      * y-coordinate in pixels.
      * The origin is the top left of the screen.
      */
-    qy: number;
+    qy?: number;
 };
 type PositionMark = {
-    qDimName: string;
-    qElemNo: number[];
-    qElemValues: string[];
+    qDimName?: string;
+    qElemNo?: number[];
+    qElemValues?: string[];
 };
 type ProgressData = {
     /**
      * True if the request is started.
      */
-    qStarted: boolean;
+    qStarted?: boolean;
     /**
      * True if the request is finished.
      */
-    qFinished: boolean;
+    qFinished?: boolean;
     /**
      * This property is not used.
      */
-    qCompleted: number;
+    qCompleted?: number;
     /**
      * This property is not used.
      */
-    qTotal: number;
+    qTotal?: number;
     /**
      * This property is not used.
      */
-    qKB: number;
+    qKB?: number;
     /**
      * Request duration in milliseconds.
      */
-    qMillisecs: number;
+    qMillisecs?: number;
     /**
      * True when the engine pauses the script execution and waits for a user interaction.
      */
-    qUserInteractionWanted: boolean;
+    qUserInteractionWanted?: boolean;
     /**
      * A progress message is persistent when it informs about the start or end of a statement. For example, it can inform about the total number of lines fetched from a data source or tell that the app was saved. All persistent progress messages between two *GetProgress* calls are summarized in this string. Contrarily to *qPersistentProgressMessages*, the content of the localized message string is displayed (not its message code).
      */
-    qPersistentProgress: string;
+    qPersistentProgress?: string;
     /**
      * A progress message is transient when it informs about the progress of an ongoing statement. For example, it can tell how many lines are currently fetched from a data source. All transient progress messages between two *GetProgress* calls are summarized in this string. Contrarily to *qTransientProgressMessage*, the content of the localized message string is displayed (not its message code).
      */
-    qTransientProgress: string;
+    qTransientProgress?: string;
     /**
      * Information about the error messages that occur during the script execution.
      */
-    qErrorData: ErrorData[];
+    qErrorData?: ErrorData[];
     /**
      * List of persistent progress messages.
      */
-    qPersistentProgressMessages: ProgressMessage[];
+    qPersistentProgressMessages?: ProgressMessage[];
     /**
      * Transient progress message.
      */
-    qTransientProgressMessage: ProgressMessage;
+    qTransientProgressMessage?: ProgressMessage;
 };
 type ProgressMessage = {
     /**
      * Code number to the corresponding localized message string.
      */
-    qMessageCode: number;
+    qMessageCode?: number;
     /**
      * Parameters to be inserted in the localized message string.
      */
-    qMessageParameters: string[];
+    qMessageParameters?: string[];
 };
 type QRange = {
     /**
      * Lowest value in the range
      */
-    qMin: number;
+    qMin?: number;
     /**
      * Highest value in the range
      */
-    qMax: number;
+    qMax?: number;
     /**
      * If set to true, the range includes the lowest value in the range of selections (Equals to ). [bn(50500)]
      * Example:
      * The range is [1,10]. If _qMinInclEq_ is set to true it means that 1 is included in the range of selections.
      */
-    qMinInclEq: boolean;
+    qMinInclEq?: boolean;
     /**
      * If set to true, the range includes the highest value in the range of selections (Equals to ). [bn(50500)]
      * Example:
      * The range is [1,10]. If _qMinInclEq_ is set to true it means that 10 is included in the range of selections.
      */
-    qMaxInclEq: boolean;
+    qMaxInclEq?: boolean;
 };
 type RangeSelectInfo = {
     /**
@@ -5634,37 +5674,37 @@ type RangeSelectInfo = {
     /**
      * Label of the measure.
      */
-    qMeasure: string;
+    qMeasure?: string;
 };
 type Rect = {
     /**
      * Position from the left.
      * Corresponds to the first column.
      */
-    qLeft: number;
+    qLeft?: number;
     /**
      * Position from the top.
      * Corresponds to the first row.
      */
-    qTop: number;
+    qTop?: number;
     /**
      * Number of columns in the page. The indexing of the columns may vary depending on whether the cells are expanded or not (parameter _qAlwaysFullyExpanded_ in _HyperCubeDef_ ).
      */
-    qWidth: number;
+    qWidth?: number;
     /**
      * Number of rows or elements in the page. The indexing of the rows may vary depending on whether the cells are expanded or not (parameter _qAlwaysFullyExpanded_ in _HyperCubeDef_ ).
      */
-    qHeight: number;
+    qHeight?: number;
 };
 type SampleResult = {
     /**
      * Name of field or column.
      */
-    qFieldOrColumn: FieldOrColumn;
+    qFieldOrColumn?: FieldOrColumn;
     /**
      * Matched values part of the sample.
      */
-    qValues: FieldValue[];
+    qValues?: FieldValue[];
 };
 type ScriptSyntaxError = {
     /**
@@ -5693,63 +5733,63 @@ type ScriptSyntaxError = {
     qSecondaryFailure?: boolean;
 };
 type ScrollPosition = {
-    qUsePosition: boolean;
-    qPos: Point;
+    qUsePosition?: boolean;
+    qPos?: Point;
 };
 type SearchAssociationResult = {
     /**
      * List of the fields that contains search associations.
      */
-    qFieldNames: string[];
+    qFieldNames?: string[];
     /**
      * List of the search terms.
      */
-    qSearchTerms: string[];
+    qSearchTerms?: string[];
     /**
      * Information about the fields containing search hits.
      */
-    qFieldDictionaries: SearchFieldDictionary[];
+    qFieldDictionaries?: SearchFieldDictionary[];
     /**
      * List of search results.
      * The maximum number of search results in this list is set by _qPage/qCount_ .
      */
-    qSearchTermsMatched: SearchMatchCombinations[];
+    qSearchTermsMatched?: SearchMatchCombinations[];
     /**
      * Total number of search results.
      * This number is not limited by _qPage/qCount_ .
      */
-    qTotalSearchResults: number;
+    qTotalSearchResults?: number;
 };
 type SearchAttribute = {
     /**
      * String corresponding to _SearchObjectOptions.qAttributes_. It will be _qProperty_ for _SearchObjectOptions_.
      */
-    qKey: string;
+    qKey?: string;
     /**
      * String corresponding to _qKey_ for the current _SearchGroupItemMatch_. For example, if the match is _Make by Price_ found in the title of a generic object, _qValue_ will be _qMetaDef/title_.
      */
-    qValue: string;
+    qValue?: string;
 };
 type SearchCharRange = {
     /**
      * Starting position of the match in the search result, starting from 0.
      */
-    qCharPos: number;
+    qCharPos?: number;
     /**
      * Length of the match in the search result.
      */
-    qCharCount: number;
+    qCharCount?: number;
     /**
      * Position of the term in the list of search terms, starting from 0.
      */
-    qTerm: number;
+    qTerm?: number;
 };
 type SearchCombinationOptions = {
     /**
      * List of the search fields.
      * If empty, the search is performed in all fields of the app.
      */
-    qSearchFields: string[];
+    qSearchFields?: string[];
     /**
      * Search context.
      * The default value is _LockedFieldsOnly_ .
@@ -5759,7 +5799,7 @@ type SearchCombinationOptions = {
      * * LockedFieldsOnly or CONTEXT_LOCKED_FIELDS_ONLY
      * * CurrentSelections or CONTEXT_CURRENT_SELECTIONS
      */
-    qContext?: string;
+    qContext?: SearchContextType;
     /**
      * Encoding used to compute qRanges of type SearchCharRange.
      * <div class=note>Only affects the computation of the ranges. It does not impact the encoding of the text.</div>
@@ -5768,7 +5808,7 @@ type SearchCombinationOptions = {
      * * Utf8 or CHAR_ENCODING_UTF8
      * * Utf16 or CHAR_ENCODING_UTF16
      */
-    qCharEncoding?: string;
+    qCharEncoding?: CharEncodingType;
     /**
      * Optional.
      * * For SearchSuggest method, this array is empty.
@@ -5777,59 +5817,62 @@ type SearchCombinationOptions = {
      */
     qAttributes?: string[];
 };
+type SearchContextType = "Cleared" | "CONTEXT_CLEARED" | "LockedFieldsOnly" | "CONTEXT_LOCKED_FIELDS_ONLY" | "CurrentSelections" | "CONTEXT_CURRENT_SELECTIONS";
 type SearchFieldDictionary = {
     /**
      * Position of the field in the list of fields, starting from 0.
      * The list of fields is defined in _qResults/qFieldNames_ and contains the search associations.
      */
-    qField: number;
+    qField?: number;
     /**
      * List of the matching values.
      * The maximum number of values in this list is set by _qMaxNbrFieldMatches_ .
      */
-    qResult: SearchTermResult[];
+    qResult?: SearchTermResult[];
 };
 type SearchFieldMatch = {
     /**
      * Position of the field in the list of fields, starting from 0.
      * The list of fields is defined in _qResults/qFieldNames_ and contains the search associations.
      */
-    qField: number;
+    qField?: number;
     /**
      * Positions of the matching values in the search results.
      * The maximum number of values in this list is defined by _qMaxNbrFieldMatches_ .
      */
-    qValues: number[];
+    qValues?: number[];
     /**
      * Positions of the search terms, starting from 0.
      */
-    qTerms: number[];
+    qTerms?: number[];
     /**
      * Number of search hits in the field.
      * The number of values in _qValues_ and the value of _qNoOfMatches_ are equal if _qMaxNbrFieldMatches_ is -1.
      */
-    qNoOfMatches: number;
+    qNoOfMatches?: number;
 };
+type SearchFieldMatchType = "FieldMatchNone" | "FM_NONE" | "FieldMatchSubString" | "FM_SUBSTRING" | "FieldMatchWord" | "FM_WORD" | "FieldMatchExact" | "FM_EXACT" | "FieldMatchLast" | "FM_LAST";
 type SearchFieldMatchesItem = {
-    qText: string;
-    qElemNo: number;
-    qSearchTermsMatched: number[];
+    qText?: string;
+    qElemNo?: number;
+    qSearchTermsMatched?: number[];
 };
+type SearchFieldSelectionMode = "OneAndOnlyOne" | "ONE_AND_ONLY_ONE";
 type SearchFieldValueItem = {
     /**
      * Field name of matches.
      */
-    qFieldName: string;
+    qFieldName?: string;
     /**
      * List of search matches.
      */
-    qValues: SearchFieldMatchesItem[];
+    qValues?: SearchFieldMatchesItem[];
 };
 type SearchGroup = {
     /**
      * Identifier of the search group.
      */
-    qId: number;
+    qId?: number;
     /**
      * Type of the search group.
      *
@@ -5837,20 +5880,20 @@ type SearchGroup = {
      * * DatasetType or DATASET_GROUP
      * * GenericObjectsType or GENERIC_OBJECTS_GROUP
      */
-    qGroupType: string;
+    qGroupType?: SearchGroupType;
     /**
      * Indexes of the search terms that are included in the group. These search terms are related to the list of terms defined in _SearchResult.qSearchTerms_ .
      */
-    qSearchTermsMatched: number[];
+    qSearchTermsMatched?: number[];
     /**
      * Total number of distinct items in the search group.
      */
-    qTotalNumberOfItems: number;
+    qTotalNumberOfItems?: number;
     /**
      * List of items in the search group.
      * The group items are numbered from the value of _SearchGroupOptions.qOffset_ to the value of _SearchGroupOptions.qOffset_ \+ _SearchGroupOptions.qCount_
      */
-    qItems: SearchGroupItem[];
+    qItems?: SearchGroupItem[];
 };
 type SearchGroupItem = {
     /**
@@ -5860,27 +5903,27 @@ type SearchGroupItem = {
      * * Field or FIELD
      * * GenericObject or GENERIC_OBJECT
      */
-    qItemType: string;
+    qItemType?: SearchGroupItemType;
     /**
      * Total number of distinct matches in the search group item.
      */
-    qTotalNumberOfMatches: number;
+    qTotalNumberOfMatches?: number;
     /**
      * Identifier of the item.
      * It corresponds to:
      * * The name of the field, if the type of the search group is data set.
      * * The id of the generic object if the type of the search group is generic object.
      */
-    qIdentifier: string;
+    qIdentifier?: string;
     /**
      * List of matches in the search group item.
      * The group item matches are numbered from the value of _SearchGroupItemOptions.qOffset_ to the value of _SearchGroupItemOptions.qOffset_ \+ _SearchGroupItemOptions.qCount_ .
      */
-    qItemMatches: SearchGroupItemMatch[];
+    qItemMatches?: SearchGroupItemMatch[];
     /**
      * Indexes of the search terms that are included in the group item. These search terms are related to the list of terms defined in _SearchResult.qSearchTerms_ .
      */
-    qSearchTermsMatched: number[];
+    qSearchTermsMatched?: number[];
     /**
      * Match type applied in this result group.
      *
@@ -5891,7 +5934,7 @@ type SearchGroupItem = {
      * * FieldMatchExact or FM_EXACT
      * * FieldMatchLast or FM_LAST
      */
-    qMatchType: string;
+    qMatchType?: SearchFieldMatchType;
 };
 type SearchGroupItemMatch = {
     /**
@@ -5900,17 +5943,17 @@ type SearchGroupItemMatch = {
      * If the match is found in a field, it corresponds to the value of the field.
      * If the match is found in a generic object property, it corresponds to the property value.
      */
-    qText: string;
+    qText?: string;
     /**
      * Selection mode of a field.
      * Suppressed by default. One and always one field value is selected when set to _OneAndOnlyOne_.
      */
-    qFieldSelectionMode?: string;
+    qFieldSelectionMode?: SearchFieldSelectionMode;
     /**
      * List of ranges.
      * For example, if the search terms are Price and Make, and the search group item value is Make by Price vs Mileage, then there are two ranges: one for Price and one for Make.
      */
-    qRanges: SearchCharRange[];
+    qRanges?: SearchCharRange[];
     /**
      * Provides detail of the match as requested by the user in _SearchObjectsOptions.qAttributes_ or _SearchCombinationOptions.qAttributes_
      * If the user requests _SearchObjects_ or _SearchResults_ with an empty _qAttributes_ option, the outputted _qAttributes_ is returned empty.
@@ -5918,7 +5961,7 @@ type SearchGroupItemMatch = {
      * For _SearchResults_ requested with _qNum_ , the _SearchGroupItemMatch.qAttributes_ return value contains _["qNum", N]_ where _N_ is the numeric value of the element or _NaN_ if the value is not numeric.
      * For _SearchResults_ requested with _qElemNum_ , the _SearchGroupItemMatch.qAttributes_ return value contains _["qElemNum", N]_ where _N_ is the value index of the element.
      */
-    qAttributes: SearchAttribute[];
+    qAttributes?: SearchAttribute[];
 };
 type SearchGroupItemOptions = {
     /**
@@ -5930,7 +5973,7 @@ type SearchGroupItemOptions = {
      * * Field or FIELD
      * * GenericObject or GENERIC_OBJECT
      */
-    qGroupItemType: string;
+    qGroupItemType?: SearchGroupItemType;
     /**
      * Position starting from 0.
      * The default value is 0.
@@ -5942,6 +5985,7 @@ type SearchGroupItemOptions = {
      */
     qCount?: number;
 };
+type SearchGroupItemType = "Field" | "FIELD" | "GenericObject" | "GENERIC_OBJECT";
 type SearchGroupOptions = {
     /**
      * Type of the group. Can be:
@@ -5952,7 +5996,7 @@ type SearchGroupOptions = {
      * * DatasetType or DATASET_GROUP
      * * GenericObjectsType or GENERIC_OBJECTS_GROUP
      */
-    qGroupType: string;
+    qGroupType?: SearchGroupType;
     /**
      * Position starting from 0.
      * The default value is 0.
@@ -5964,22 +6008,23 @@ type SearchGroupOptions = {
      */
     qCount?: number;
 };
+type SearchGroupType = "DatasetType" | "DATASET_GROUP" | "GenericObjectsType" | "GENERIC_OBJECTS_GROUP";
 type SearchMatchCombination = {
     /**
      * Index of the search result, starting from 0.
      */
-    qId: number;
+    qId?: number;
     /**
      * Information about the search matches.
      */
-    qFieldMatches: SearchFieldMatch[];
+    qFieldMatches?: SearchFieldMatch[];
 };
 type SearchMatchCombinations = SearchMatchCombination[];
 type SearchObjectOptions = {
     /**
      * This array is either empty or contains _qProperty_ .
      */
-    qAttributes: string[];
+    qAttributes?: string[];
     /**
      * Encoding used to compute qRanges of type SearchCharRange.
      * <div class=note>Only affects the computation of the ranges. It does not impact the encoding of the text.</div>
@@ -5988,18 +6033,18 @@ type SearchObjectOptions = {
      * * Utf8 or CHAR_ENCODING_UTF8
      * * Utf16 or CHAR_ENCODING_UTF16
      */
-    qCharEncoding?: string;
+    qCharEncoding?: CharEncodingType;
 };
 type SearchPage = {
     /**
      * Position from the top, starting from 0.
      * If the offset is set to 0, the first search result to be returned is at position 0.
      */
-    qOffset: number;
+    qOffset?: number;
     /**
      * Number of search groups to return (in _qSearchGroupArray_ ).
      */
-    qCount: number;
+    qCount?: number;
     /**
      * Maximum number of matching values to return per search result.
      * The default value is -1; all values are returned.
@@ -6011,82 +6056,82 @@ type SearchPage = {
      * If this property is not set, all values are returned.
      * This property is to be used with the _SearchResults method_ or the _SearchObjects method_.
      */
-    qGroupOptions: SearchGroupOptions[];
+    qGroupOptions?: SearchGroupOptions[];
     /**
      * Options of the search group items.
      * If this property is not set, all values are returned.
      * This property is to be used with the _SearchResults method_ or the _SearchObjects method_.
      */
-    qGroupItemOptions: SearchGroupItemOptions[];
+    qGroupItemOptions?: SearchGroupItemOptions[];
 };
 type SearchResult = {
     /**
      * List of the search terms.
      */
-    qSearchTerms: string[];
+    qSearchTerms?: string[];
     /**
      * Total number of groups.
      */
-    qTotalNumberOfGroups: number;
+    qTotalNumberOfGroups?: number;
     /**
      * List of search groups.
      * The groups are numbered from the value of _SearchPage.qOffset_ to the value of _SearchPage.qOffset + SearchPage.qCount_ .
      */
-    qSearchGroupArray: SearchGroup[];
+    qSearchGroupArray?: SearchGroup[];
 };
 type SearchSuggestItem = {
     /**
      * Value of the suggestion.
      */
-    qValue: string;
+    qValue?: string;
     /**
      * Index of the suggestion value.
      * The indexing starts from 0 and from the left.
      */
-    qTerm: number;
+    qTerm?: number;
 };
 type SearchSuggestionResult = {
     /**
      * List of suggestions.
      */
-    qSuggestions: SearchSuggestItem[];
+    qSuggestions?: SearchSuggestItem[];
     /**
      * List of field names that contain search hits.
      */
-    qFieldNames: string[];
+    qFieldNames?: string[];
 };
 type SearchTermResult = {
     /**
      * Text of the associated value.
      */
-    qText: string;
+    qText?: string;
     /**
      * Element number of the associated value.
      */
-    qElemNumber: number;
+    qElemNumber?: number;
     /**
      * List of ranges.
      * For example, if the user searches the term _read_ and the associative value is _Reading_ , then the corresponding range would be _Read_ in _Reading_ .
      */
-    qRanges: SearchCharRange[];
+    qRanges?: SearchCharRange[];
 };
 type SearchValueOptions = {
     /**
      * List of the search fields.
      * If empty, the search is performed in all fields of the app.
      */
-    qSearchFields: string[];
+    qSearchFields?: string[];
 };
 type SearchValuePage = {
     /**
      * Position from the top, starting from 0.
      * If the offset is set to 0, the first search result to be returned is at position 0.
      */
-    qOffset: number;
+    qOffset?: number;
     /**
      * Number of search fields to return
      */
-    qCount: number;
+    qCount?: number;
     /**
      * Maximum number of matching values to return per search result.
      */
@@ -6096,12 +6141,12 @@ type SearchValueResult = {
     /**
      * List of the search terms.
      */
-    qSearchTerms: string[];
+    qSearchTerms?: string[];
     /**
      * List of search groups.
      * The groups are numbered from the value of _SearchPage.qOffset_ to the value of _SearchPage.qOffset + SearchPage.qCount_ .
      */
-    qFieldMatches: SearchFieldValueItem[];
+    qFieldMatches?: SearchFieldValueItem[];
 };
 type SelectInfo = {
     /**
@@ -6126,12 +6171,12 @@ type SelectInfo = {
      * Gives information about the formatting of the range.
      * This parameter is used when performing range selections or text searches in dimensions.
      */
-    qNumberFormat: FieldAttributes;
+    qNumberFormat?: FieldAttributes;
     /**
      * This parameter is used when performing range selections or text searches in measures.
      * Gives information about the range of selections.
      */
-    qRangeInfo: RangeSelectInfo[];
+    qRangeInfo?: RangeSelectInfo[];
     /**
      * Set to true to ignore locks; in that case, locked fields can be selected.
      * The default value is false.
@@ -6140,7 +6185,7 @@ type SelectInfo = {
     /**
      * List of information about ranges for selections.
      */
-    qContinuousRangeInfo: QRange[];
+    qContinuousRangeInfo?: QRange[];
     /**
      * This parameter is true if the TextSearch is a result of a Select Field operation.
      */
@@ -6153,15 +6198,15 @@ type SelectionObject = {
     /**
      * Number of steps back.
      */
-    qBackCount: number;
+    qBackCount?: number;
     /**
      * Number of steps forward.
      */
-    qForwardCount: number;
+    qForwardCount?: number;
     /**
      * Lists the fields that are selected.
      */
-    qSelections: NxCurrentSelectionItem[];
+    qSelections?: NxCurrentSelectionItem[];
     /**
      * Name of the alternate state.
      * Default is current selections _$_ .
@@ -6186,58 +6231,59 @@ type Size = {
     /**
      * Number of pixels on the _x_ axis.
      */
-    qcx: number;
+    qcx?: number;
     /**
      * Number of pixels on the _y_ axis.
      */
-    qcy: number;
+    qcy?: number;
 };
 type SortCriteria = {
     /**
      * Sorts the field values according to their logical state (selected, optional, alternative or excluded).
      */
-    qSortByState: number;
+    qSortByState?: number;
     /**
      * Sorts the field values by frequency (number of occurrences in the field).
      */
-    qSortByFrequency: number;
+    qSortByFrequency?: number;
     /**
      * Sorts the field values by numeric value.
      */
-    qSortByNumeric: number;
+    qSortByNumeric?: number;
     /**
      * Sorts the field by alphabetical order.
      */
-    qSortByAscii: number;
+    qSortByAscii?: number;
     /**
      * Sorts the field values by the initial load order.
      */
-    qSortByLoadOrder: number;
+    qSortByLoadOrder?: number;
     /**
      * Sorts the field by expression.
      */
-    qSortByExpression: number;
+    qSortByExpression?: number;
     /**
      * Sort by expression.
      */
-    qExpression: ValueExpr;
-    qSortByGreyness: number;
+    qExpression?: ValueExpr;
+    qSortByGreyness?: number;
 };
 type SourceKeyRecord = {
     /**
      * Name of the key field.
      */
-    qKeyFields: string[];
+    qKeyFields?: string[];
     /**
      * Table the key belongs to.
      */
-    qTables: string[];
+    qTables?: string[];
 };
+type StateEnumType = "L" | "LOCKED" | "S" | "SELECTED" | "O" | "OPTION" | "D" | "DESELECTED" | "A" | "ALTERNATIVE" | "X" | "EXCLUDED" | "XS" | "EXCL_SELECTED" | "XL" | "EXCL_LOCKED" | "NSTATES";
 type StaticContentList = {
     /**
      * Information about the list of content files.
      */
-    qItems: StaticContentListItem[];
+    qItems?: StaticContentListItem[];
 };
 /**
  * <div class=note>In addition, this structure can return dynamic properties.</div>
@@ -6253,7 +6299,7 @@ type StaticContentListItem = {
      * * In the _/content/default/_ folder are outside the qvf file.
      * * In the _/media/ folder_ are embedded in the qvf file.
      */
-    qUrlDef: string;
+    qUrlDef?: string;
     /**
      * Relative path to the content file. The URL is static.
      * In Qlik Sense Enterprise, content files located:
@@ -6264,7 +6310,7 @@ type StaticContentListItem = {
      * * In the _/content/default/_ folder are outside the qvf file.
      * * In the _/media/ folder_ are embedded in the qvf file.
      */
-    qUrl: string;
+    qUrl?: string;
 };
 /**
  * <div class=note>In addition, this structure can return dynamic properties.</div>
@@ -6273,7 +6319,7 @@ type StaticContentUrl = {
     /**
      * Relative path of the thumbnail.
      */
-    qUrl: string;
+    qUrl?: string;
 };
 /**
  * <div class=note>In addition, this structure can contain dynamic properties.</div>
@@ -6282,13 +6328,13 @@ type StaticContentUrlDef = {
     /**
      * Relative path of the thumbnail.
      */
-    qUrl: string;
+    qUrl?: string;
 };
 type StringExpr = {
     /**
      * Expression evaluated to string.
      */
-    qv: string;
+    qv?: string;
 };
 /**
  * ### Properties
@@ -6303,17 +6349,17 @@ type StringExpr = {
  * The result of the evaluation of the expression can be of any type, as it is returned as a JSON (quoted) string.
  */
 type StringExpression = {
-    qExpr: string;
+    qExpr?: string;
 };
 type SymbolFrequency = {
     /**
      * Symbol. Either string and NaN or number alone
      */
-    qSymbol: SymbolValue;
+    qSymbol?: SymbolValue;
     /**
      * Frequency of the above symbol in the field
      */
-    qFrequency: number;
+    qFrequency?: number;
 };
 type SymbolValue = {
     /**
@@ -6323,134 +6369,134 @@ type SymbolValue = {
     /**
      * Numeric value of the symbol. NaN otherwise.
      */
-    qNumber: number;
+    qNumber?: number;
 };
 type TableProfilingData = {
     /**
      * Number of rows in the table.
      */
-    qNoOfRows: number;
+    qNoOfRows?: number;
     /**
      * Field values profiling info
      */
-    qFieldProfiling: FieldInTableProfilingData[];
+    qFieldProfiling?: FieldInTableProfilingData[];
 };
 type TableRecord = {
     /**
      * Name of the table.
      */
-    qName: string;
+    qName?: string;
     /**
      * This property is set to true if the table is loose.
      */
-    qLoose: boolean;
+    qLoose?: boolean;
     /**
      * Number of rows in the table.
      */
-    qNoOfRows: number;
+    qNoOfRows?: number;
     /**
      * Information about the fields in the table.
      */
-    qFields: FieldInTableData[];
+    qFields?: FieldInTableData[];
     /**
      * Information about the position of the table.
      */
-    qPos: Point;
+    qPos?: Point;
     /**
      * Comment related to the table.
      */
-    qComment: string;
+    qComment?: string;
     /**
      * If set to true, Direct Discovery is used.
      * Direct Discovery fields are not loaded into memory and remain in the external database.
      */
-    qIsDirectDiscovery: boolean;
+    qIsDirectDiscovery?: boolean;
     /**
      * This property is set to true if the table contains a synthetic key.
      */
-    qIsSynthetic: boolean;
+    qIsSynthetic?: boolean;
     /**
      * List of tags related to the table.
      */
-    qTableTags: string[];
+    qTableTags?: string[];
     /**
      * Profiling information of the table.
      */
-    qProfilingData: TableProfilingData;
+    qProfilingData?: TableProfilingData;
 };
 type TableRow = {
     /**
      * Array of field values.
      */
-    qValue: FieldValue[];
+    qValue?: FieldValue[];
 };
 type TableViewBroomPointSaveInfo = {
     /**
      * Information about the position of the broom point.
      */
-    qPos: Point;
+    qPos?: Point;
     /**
      * Name of the table.
      */
-    qTable: string;
+    qTable?: string;
     /**
      * List of fields in the table.
      */
-    qFields: string[];
+    qFields?: string[];
 };
 type TableViewConnectionPointSaveInfo = {
     /**
      * Information about the position of the connection point.
      */
-    qPos: Point;
+    qPos?: Point;
     /**
      * List of the fields in the table.
      */
-    qFields: string[];
+    qFields?: string[];
 };
 type TableViewCtlSaveInfo = {
     /**
      * Internal view mode.
      */
-    qInternalView: TableViewSaveInfo;
+    qInternalView?: TableViewSaveInfo;
     /**
      * Source view mode.
      */
-    qSourceView: TableViewSaveInfo;
+    qSourceView?: TableViewSaveInfo;
 };
 type TableViewDlgSaveInfo = {
     /**
      * Information about the position of the dialog window.
      * Not used in Qlik Sense.
      */
-    qPos: Rect;
+    qPos?: Rect;
     /**
      * Set of data for internal and source view modes.
      */
-    qCtlInfo: TableViewCtlSaveInfo;
+    qCtlInfo?: TableViewCtlSaveInfo;
     /**
      * View mode to display when opening Qlik Sense data model viewer.
      * One of:
      * * 0 for internal view mode.
      * * 1 for source view mode.
      */
-    qMode: number;
+    qMode?: number;
 };
 type TableViewSaveInfo = {
     /**
      * List of the tables in the database model viewer.
      */
-    qTables: TableViewTableWinSaveInfo[];
+    qTables?: TableViewTableWinSaveInfo[];
     /**
      * List of the broom points in the database model viewer.
      * Not used in Qlik Sense.
      */
-    qBroomPoints: TableViewBroomPointSaveInfo[];
+    qBroomPoints?: TableViewBroomPointSaveInfo[];
     /**
      * List of connection points in the database model viewer.
      * Not used in Qlik Sense.
      */
-    qConnectionPoints: TableViewConnectionPointSaveInfo[];
+    qConnectionPoints?: TableViewConnectionPointSaveInfo[];
     /**
      * Zoom factor in the database model viewer.
      * The default value is 1.0.
@@ -6461,31 +6507,31 @@ type TableViewTableWinSaveInfo = {
     /**
      * Information about the position of the table.
      */
-    qPos: Rect;
+    qPos?: Rect;
     /**
      * Table name.
      */
-    qCaption: string;
+    qCaption?: string;
 };
 type TextMacro = {
     /**
      * Name of the variable.
      */
-    qTag: string;
+    qTag?: string;
     /**
      * Order in which the variable was referenced during the script execution.
      * The same number sequence is used for both _qRefSeqNo_ and _qSetSeqNo_ .
      */
-    qRefSeqNo: number;
+    qRefSeqNo?: number;
     /**
      * Order in which the variable was updated during the script execution.
      * The same number sequence is used for both _qRefSeqNo_ and _qSetSeqNo_ .
      */
-    qSetSeqNo: number;
+    qSetSeqNo?: number;
     /**
      * Variable value.
      */
-    qDisplayString: string;
+    qDisplayString?: string;
     /**
      * Is set to true if the variable is a system variable.
      */
@@ -6495,25 +6541,26 @@ type TextMacro = {
      */
     qIsReserved?: boolean;
 };
+type TotalMode = "TOTAL_OFF" | "TOTAL_EXPR";
 type TransformAppParameters = {
     /**
      * The name (title) of the application
      */
-    qName: string;
+    qName?: string;
     /**
      * ID of the space where the app is to be created. Empty value implies Personal space
      */
-    qSpaceId: string;
+    qSpaceId?: string;
     /**
      * Prefix to be used on inserted ScriptParameters, only applicable for template apps
      */
-    qScriptParameterPrefix: string;
+    qScriptParameterPrefix?: string;
 };
 type TransformAppResult = {
     /**
      * ID of created App
      */
-    qAppId: string;
+    qAppId?: string;
 };
 /**
  * Renders the properties of a TreeData object. Is the layout for TreeDataDef.
@@ -6531,7 +6578,7 @@ type TreeData = {
     /**
      * The total number of nodes on each dimension.
      */
-    qNodesOnDim: number[];
+    qNodesOnDim?: number[];
     /**
      * This parameter is optional and is displayed in case of error.
      */
@@ -6539,21 +6586,21 @@ type TreeData = {
     /**
      * Information on the dimension.
      */
-    qDimensionInfo: NxTreeDimensionInfo[];
+    qDimensionInfo?: NxTreeDimensionInfo[];
     /**
      * Defines the order of the dimenion levels/columns in the TreeData object.
      * Column numbers are separated by a comma.
      * Example: [1,0,2] means that the first level in the tree structure is dimension 1, followed by dimension 0 and dimension 2.
      */
-    qEffectiveInterColumnSortOrder: number[];
+    qEffectiveInterColumnSortOrder?: number[];
     /**
      * True if other row exists.
      */
-    qHasOtherValues: boolean;
+    qHasOtherValues?: boolean;
     /**
      * Title of the TreeData object, for example the title of a chart.
      */
-    qTitle: string;
+    qTitle?: string;
     /**
      * Position of the last expended cell.
      * This property is optional.
@@ -6562,16 +6609,16 @@ type TreeData = {
     /**
      * The message displayed if calculation condition is not fulfilled.
      */
-    qCalcCondMsg: string;
+    qCalcCondMsg?: string;
     /**
      * Set of data.
      * Is empty if nothing has been defined in **qInitialDataFetch** in _TreeDataDef_.
      */
-    qTreeDataPages: NxTreeNode[];
+    qTreeDataPages?: NxTreeNode[];
     /**
      * Information on the measures calculated on the whole tree.
      */
-    qMeasureInfo: NxMeasureInfo[];
+    qMeasureInfo?: NxMeasureInfo[];
 };
 /**
  * Defines the properties of a TreeData object.
@@ -6588,7 +6635,7 @@ type TreeDataDef = {
     /**
      * Array of dimensions.
      */
-    qDimensions: NxTreeDimensionDef[];
+    qDimensions?: NxTreeDimensionDef[];
     /**
      * Defines the order of the dimension levels/columns in the TreeData object.
      * Column numbers are separated by a comma.
@@ -6623,7 +6670,7 @@ type TreeDataDef = {
     /**
      * Title of the TreeData object, for example the title of a chart.
      */
-    qTitle: StringExpr;
+    qTitle?: StringExpr;
     /**
      * Initial data set.
      * This property is optional.
@@ -6634,15 +6681,15 @@ type TreeDataDef = {
      *
      * Stability: *experimental*
      */
-    qExpansionState: ExpansionData[];
+    qExpansionState?: ExpansionData[];
     /**
      * List of measures to calculate on the whole tree.
      */
-    qValueExprs: NxMeasure[];
+    qValueExprs?: NxMeasure[];
     /**
      * Set Expression valid for the whole cube. Used to limit computations to the set specified.
      */
-    qContextSetExpression: string;
+    qContextSetExpression?: string;
 };
 /**
  * Displays information about the number of possible undos and redos. Is the layout for _UndoInfoDef_.
@@ -6651,11 +6698,11 @@ type UndoInfo = {
     /**
      * Number of possible undos.
      */
-    qUndoCount: number;
+    qUndoCount?: number;
     /**
      * Number of possible redos.
      */
-    qRedoCount: number;
+    qRedoCount?: number;
 };
 /**
  * Defines if an object should contain information on the number of possible undo and redo.
@@ -6664,12 +6711,13 @@ type UndoInfo = {
  * "qUndoInfoDef": {}
  * The numbers of undos and redos are empty when an object is created. The number of possible undos is increased every time an action (for example, create a child, set some properties) on the object is performed. The number of possible redos is increased every time an undo action is performed.
  */
-type UndoInfoDef = {};
+type UndoInfoDef = object;
+type UsageEnum = "ANALYTICS" | "DATA_PREPARATION";
 type ValueExpr = {
     /**
      * Expression evaluated to dual.
      */
-    qv: string;
+    qv?: string;
 };
 /**
  * ### Properties
@@ -6684,7 +6732,7 @@ type ValueExpr = {
  * The expression is evaluated as a numeric.
  */
 type ValueExpression = {
-    qExpr: string;
+    qExpr?: string;
 };
 /**
  * Lists the variables in an app. Is the layout for _VariableListDef_.
@@ -6693,7 +6741,7 @@ type VariableList<QData> = {
     /**
      * List of the variables.
      */
-    qItems: NxVariableListItem<QData>[];
+    qItems?: NxVariableListItem<QData>[];
 };
 /**
  * Defines the list of variables in an app.
@@ -6702,23 +6750,23 @@ type VariableListDef = {
     /**
      * Type of variables to include in the list.
      */
-    qType: string;
+    qType?: string;
     /**
      * Shows the reserved variables if set to true.
      */
-    qShowReserved: boolean;
+    qShowReserved?: boolean;
     /**
      * Shows the system variables if set to true.
      */
-    qShowConfig: boolean;
+    qShowConfig?: boolean;
     /**
      * Data
      */
-    qData: Record<string, string>;
+    qData?: Record<string, string>;
     /**
      * Shows the session variables if set to true.
      */
-    qShowSession: boolean;
+    qShowSession?: boolean;
 };
 type NativeDocFunctions<FieldRpcObject, GenericBookmarkRpcObject, GenericDimensionRpcObject, GenericMeasureRpcObject, GenericObjectRpcObject, GenericVariableRpcObject, DefaultGenericObjectProperties> = {
     /**
@@ -7135,7 +7183,8 @@ type NativeDocFunctions<FieldRpcObject, GenericBookmarkRpcObject, GenericDimensi
      * Parameters:
      *
      * - `options`            -   Options for the temporary bookmark
-     * - `objectIdsToPatch`   -   Add softpatches for this objects if available. If empty all softpatches are added to the bookmark. This is ignored if IncludePatches is false.
+     * - `objectIdsToPatch`   -   Add softpatches for these objects to the bookmark if available. If IncludePatches is true, softpatches are included for all objects.
+     * Any session objects included are also added to the bookmark. IncludePatches has no effect on the patching of session objects.
      *
      * Stability: *locked*
      */
@@ -11089,7 +11138,7 @@ type NativeVariableFunctions = {
 
 type ListItem<QData = Record<string, unknown>> = NxContainerEntry<QData>;
 type ListBoxProperties = {
-    qInfo: NxInfo;
+    qInfo?: NxInfo;
     qListBoxDef?: ListObjectDef;
     qAppObjectListDef?: AppObjectListDef;
 };
@@ -11540,4 +11589,4 @@ declare const _default: {
     openAppSession: typeof openAppSession;
 };
 
-export { type AlfaNumString, type AlternateStateData, type AnyGenericObjectLayout, type AnyGenericObjectProperties, type AppEntry, type AppObjectList, type AppObjectListDef, type AppScript, type AppScriptMeta, type AppSession, type ArrayOfNxValuePoint, type AssociationScore, type BNFDef, type Bookmark, type BookmarkApplyAndVerifyResult, type BookmarkFieldItem, type BookmarkFieldPage, type BookmarkFieldVerifyWarning, type BookmarkList, type BookmarkListData, type BookmarkListDef, type BookmarkListItem, type BookmarkVariableItem, type CalendarStrings, type CharRange, type ChildList, type ChildListDef, type CloseProps, type CodePage, type CombinedWebSocketStateEvent, type CondDef, type Connection, type ContentLibraryList, type ContentLibraryListItem, type CurrentSelections, type CustomConnector, type DataField, type DataRecord, type DataTable, type DataTableEx, type Database, type DatabaseInfo, type DatabaseOwner, type DelimiterInfo, type DerivedFieldsInTableData, type DimensionList, type DimensionListData, type DimensionListDef, type DimensionListItem, type DoReloadExParams, type DoReloadExResult, type Doc, type DocAction, type DocListEntry, type DriveInfo, type DynamicAppViewListData, type DynamicAppViewListItem, type EditorBreakpoint, type EmbeddedSnapshot, type EmbeddedSnapshotDef, type ErrorData, type ExpandedFieldListItem, type ExpansionData, type ExtendedLayoutBookmarkData, type ExtendedPivotStateData, type ExtensionList, type ExtensionListDef, type Field, type FieldAttributes, type FieldDefEx, type FieldDescription, type FieldInTableData, type FieldInTableProfilingData, type FieldList, type FieldListDef, type FieldListObject, type FieldOrColumn, type FieldScores, type FieldValue, type FileDataFormat, type FilterInfo, type FolderItem, type FrequencyDistributionData, type GenericBookmark, type GenericBookmarkEntry, type GenericBookmarkLayout, type GenericBookmarkProperties, type GenericDimension, type GenericDimensionInfo, type GenericDimensionLayout, type GenericDimensionProperties, type GenericListObject, type GenericMeasure, type GenericMeasureLayout, type GenericMeasureProperties, type GenericObject, type GenericObjectEntry, type GenericObjectLayout, type GenericObjectLayoutAdditionalProperties, type GenericObjectLayoutNode, type GenericObjectLayoutNodeLevel2, type GenericObjectLayoutNodeLevel3, type GenericObjectLayoutNodeLevel4, type GenericObjectLayoutNodeLevel5, type GenericObjectLayoutNodeRec, type GenericObjectProperties, type GenericObjectPropertiesAdditionalProperties, type GenericObjectPropertiesNode, type GenericObjectPropertiesNodeLevel2, type GenericObjectPropertiesNodeLevel3, type GenericObjectPropertiesNodeLevel4, type GenericObjectPropertiesNodeLevel5, type GenericObjectPropertiesNodeRec, type GenericVariable, type GenericVariableLayout, type GenericVariableProperties, type Global, type GroupBookmarkData, type GroupStateInfo, type HyperCube, type HyperCubeDef, type InputFieldItem, type InterFieldSortData, type InteractDef, type LayoutBookmarkData, type LayoutExclude, type LayoutFieldInfo, type LineageInfo, type ListBoxProperties, type ListFunctions, type ListItem, type ListObject, type ListObjectDef, type LocaleInfo, type MasterObjectListData, type MasterObjectListItem, type MeasureList, type MeasureListData, type MeasureListDef, type MeasureListItem, type MediaListDef, type MediaListItem, type MetaData, type ModalFunctions, type NativeDocFunctions, type NativeFieldFunctions, type NativeGenericBookmarkFunctions, type NativeGenericDimensionFunctions, type NativeGenericMeasureFunctions, type NativeGenericObjectFunctions, type NativeGenericVariableFunctions, type NativeGlobalFunctions, type NativeReactHooks, type NativeVariableFunctions, type NxAppLayout, type NxAppProperties, type NxAttrDimDef, type NxAttrDimInfo, type NxAttrExprDef, type NxAttrExprInfo, type NxAttributeDimValues, type NxAttributeExpressionValues, type NxAutoSortByStateDef, type NxAxisData, type NxAxisTicks, type NxBookmark, type NxCalcCond, type NxCardinalities, type NxCell, type NxCellPosition, type NxCellRows, type NxContainerEntry, type NxContinuousDataOptions, type NxContinuousRangeSelectInfo, type NxCurrentSelectionItem, type NxDataAreaPage, type NxDataPage, type NxDerivedField, type NxDerivedFieldDescriptionList, type NxDerivedFieldsData, type NxDerivedGroup, type NxDimension, type NxDimensionInfo, type NxDownloadInfo, type NxDownloadOptions, type NxEngineVersion, type NxFieldDescription, type NxFieldProperties, type NxFieldResourceId, type NxFieldSelectionInfo, type NxFieldTableResourceId, type NxGetBookmarkOptions, type NxGetObjectOptions, type NxGroupTail, type NxHighlightRanges, type NxInfo, type NxInlineDimensionDef, type NxInlineMeasureDef, type NxLayoutErrors, type NxLibraryDimension, type NxLibraryDimensionDef, type NxLibraryMeasure, type NxLibraryMeasureDef, type NxLinkedObjectInfo, type NxListObjectExpression, type NxListObjectExpressionDef, type NxMatchingFieldInfo, type NxMeasure, type NxMeasureInfo, type NxMeta, type NxMetaDef, type NxMiniChart, type NxMiniChartCell, type NxMiniChartData, type NxMiniChartDef, type NxMiniChartRows, type NxMultiRangeSelectInfo, type NxPage, type NxPageTreeLevel, type NxPageTreeNode, type NxPatch, type NxPatches, type NxPivotDimensionCell, type NxPivotPage, type NxPivotValuePoint, type NxRange, type NxRangeSelectInfo, type NxSelectionCell, type NxSelectionInfo, type NxSimpleDimValue, type NxSimpleValue, type NxStackPage, type NxStackedPivotCell, type NxStateCounts, type NxStreamListEntry, type NxTempBookmarkOptions, type NxTickCell, type NxTreeDataOption, type NxTreeDimensionDef, type NxTreeDimensionInfo, type NxTreeMultiRangeSelectInfo, type NxTreeNode, type NxTreeRangeSelectInfo, type NxTreeValue, type NxTrendline, type NxTrendlineDef, type NxValidationError, type NxVariableListItem, type NxVariableProperties, type NxViewPort, type ODAGAppLinkListData, type ODAGAppLinkListItem, type ObjectHelperFunctions, type ObjectInterface, type OdbcDsn, type OleDbProvider, type OpenAppSessionProps, type OtherTotalSpecProp, type Point, type PositionMark, type ProgressData, type ProgressMessage, type QFunction, QIX_SCHEMA_VERSION, type QMediaList, type QRange, type RangeSelectInfo, type Rect, type RpcObject, type SampleResult, type ScriptSyntaxError, type ScrollPosition, type SearchAssociationResult, type SearchAttribute, type SearchCharRange, type SearchCombinationOptions, type SearchFieldDictionary, type SearchFieldMatch, type SearchFieldMatchesItem, type SearchFieldValueItem, type SearchGroup, type SearchGroupItem, type SearchGroupItemMatch, type SearchGroupItemOptions, type SearchGroupOptions, type SearchMatchCombination, type SearchMatchCombinations, type SearchObjectOptions, type SearchPage, type SearchResult, type SearchSuggestItem, type SearchSuggestionResult, type SearchTermResult, type SearchValueOptions, type SearchValuePage, type SearchValueResult, type SelectInfo, type SelectionObject, type SelectionObjectDef, type SheetListData, type SheetListDataCell, type SheetListDataCellBounds, type SheetListItem, type Size, type SortCriteria, type SourceKeyRecord, type SpecialObjectFunctions, type StandardFunctions, type StaticContentList, type StaticContentListItem, type StaticContentUrl, type StaticContentUrlDef, type StoryListData, type StoryListItem, type StringExpr, type StringExpression, type SymbolFrequency, type SymbolValue, type TableProfilingData, type TableRecord, type TableRow, type TableViewBroomPointSaveInfo, type TableViewConnectionPointSaveInfo, type TableViewCtlSaveInfo, type TableViewDlgSaveInfo, type TableViewSaveInfo, type TableViewTableWinSaveInfo, type TextMacro, type TransformAppParameters, type TransformAppResult, type TreeData, type TreeDataDef, type UndoInfo, type UndoInfoDef, type UndoInfoObject, type UseAppHook, type ValueExpr, type ValueExpression, type VariableList, type VariableListData, type VariableListDef, type VariableListItem, type WebSocketEvent, _default as default, openAppSession };
+export { type AlfaNumString, type AlternateStateData, type AnyGenericObjectLayout, type AnyGenericObjectProperties, type AppEntry, type AppObjectList, type AppObjectListDef, type AppScript, type AppScriptMeta, type AppSession, type ArrayOfNxValuePoint, type AssociationScore, type BNFDef, type BNFDefMetaType, type BNFType, type Blob, type Bookmark, type BookmarkApplyAndVerifyResult, type BookmarkFieldItem, type BookmarkFieldPage, type BookmarkFieldVerifyResultState, type BookmarkFieldVerifyWarning, type BookmarkList, type BookmarkListData, type BookmarkListDef, type BookmarkListItem, type BookmarkVariableItem, type CalendarStrings, type CharEncodingType, type CharRange, type ChildList, type ChildListDef, type CloseProps, type CodePage, type CombinedWebSocketStateEvent, type CondDef, type Connection, type ContentLibraryList, type ContentLibraryListItem, type CurrentSelections, type CustomConnector, type DataField, type DataRecord, type DataTable, type DataTableEx, type Database, type DatabaseInfo, type DatabaseOwner, type DelimiterInfo, type DerivedFieldsInTableData, type DimensionList, type DimensionListData, type DimensionListDef, type DimensionListItem, type DoReloadExParams, type DoReloadExResult, type Doc, type DocAction, type DocListEntry, type DriveInfo, type DriveType, type DynamicAppViewListData, type DynamicAppViewListItem, type EditorBreakpoint, type EmbeddedSnapshot, type EmbeddedSnapshotDef, type ErrorData, type ErrorDataCode, type ExpandedFieldListItem, type ExpansionData, type ExtendedLayoutBookmarkData, type ExtendedPivotStateData, type ExtensionList, type ExtensionListDef, type Field, type FieldAttrType, type FieldAttributes, type FieldDefEx, type FieldDescription, type FieldInTableData, type FieldInTableProfilingData, type FieldList, type FieldListDef, type FieldListObject, type FieldOrColumn, type FieldScores, type FieldType, type FieldValue, type FileDataFormat, type FileType, type FilterInfo, type FilterType, type FolderItem, type FolderItemType, type FrequencyDistributionData, type FunctionGroup, type GenericBookmark, type GenericBookmarkEntry, type GenericBookmarkLayout, type GenericBookmarkProperties, type GenericConnectMachine, type GenericDimension, type GenericDimensionInfo, type GenericDimensionLayout, type GenericDimensionProperties, type GenericListObject, type GenericMeasure, type GenericMeasureLayout, type GenericMeasureProperties, type GenericObject, type GenericObjectEntry, type GenericObjectLayout, type GenericObjectLayoutAdditionalProperties, type GenericObjectLayoutNode, type GenericObjectLayoutNodeLevel2, type GenericObjectLayoutNodeLevel3, type GenericObjectLayoutNodeLevel4, type GenericObjectLayoutNodeLevel5, type GenericObjectLayoutNodeRec, type GenericObjectProperties, type GenericObjectPropertiesAdditionalProperties, type GenericObjectPropertiesNode, type GenericObjectPropertiesNodeLevel2, type GenericObjectPropertiesNodeLevel3, type GenericObjectPropertiesNodeLevel4, type GenericObjectPropertiesNodeLevel5, type GenericObjectPropertiesNodeRec, type GenericVariable, type GenericVariableLayout, type GenericVariableProperties, type Global, type GraphMode, type GroupBookmarkData, type GroupStateInfo, type HyperCube, type HyperCubeDef, type InputFieldItem, type InterFieldSortData, type InteractDef, type InteractType, type KeyType, type LayoutBookmarkData, type LayoutExclude, type LayoutFieldInfo, type LineageInfo, type ListBoxProperties, type ListFunctions, type ListItem, type ListObject, type ListObjectDef, type LocaleInfo, type LogOnType, type MasterObjectListData, type MasterObjectListItem, type MeasureList, type MeasureListData, type MeasureListDef, type MeasureListItem, type MediaListDef, type MediaListItem, type MetaData, type ModalFunctions, type NativeDocFunctions, type NativeFieldFunctions, type NativeGenericBookmarkFunctions, type NativeGenericDimensionFunctions, type NativeGenericMeasureFunctions, type NativeGenericObjectFunctions, type NativeGenericVariableFunctions, type NativeGlobalFunctions, type NativeReactHooks, type NativeVariableFunctions, type NxAppLayout, type NxAppProperties, type NxAttrDimDef, type NxAttrDimInfo, type NxAttrExprDef, type NxAttrExprInfo, type NxAttributeDimValues, type NxAttributeExpressionValues, type NxAutoSortByStateDef, type NxAxisData, type NxAxisTicks, type NxBookmark, type NxCalcCond, type NxCardinalities, type NxCell, type NxCellPosition, type NxCellRows, type NxContainerEntry, type NxContinuousDataOptions, type NxContinuousMode, type NxContinuousRangeSelectInfo, type NxCurrentSelectionItem, type NxDataAreaPage, type NxDataPage, type NxDataReductionMode, type NxDerivedField, type NxDerivedFieldDescriptionList, type NxDerivedFieldsData, type NxDerivedGroup, type NxDimCellType, type NxDimension, type NxDimensionInfo, type NxDimensionType, type NxDownloadInfo, type NxDownloadOptions, type NxEngineVersion, type NxExportFileType, type NxExportState, type NxFeature, type NxFieldDescription, type NxFieldProperties, type NxFieldResourceId, type NxFieldSelectionInfo, type NxFieldSelectionMode, type NxFieldTableResourceId, type NxFrequencyMode, type NxGetBookmarkOptions, type NxGetObjectOptions, type NxGroupTail, type NxGrpType, type NxHighlightRanges, type NxHypercubeMode, type NxInfo, type NxInlineDimensionDef, type NxInlineMeasureDef, type NxLTrendlineType, type NxLayoutErrors, type NxLibraryDimension, type NxLibraryDimensionDef, type NxLibraryMeasure, type NxLibraryMeasureDef, type NxLinkedObjectInfo, type NxListObjectExpression, type NxListObjectExpressionDef, type NxLocalizedErrorCode, type NxLocalizedWarningCode, type NxMatchingFieldInfo, type NxMatchingFieldMode, type NxMeasure, type NxMeasureInfo, type NxMeta, type NxMetaDef, type NxMiniChart, type NxMiniChartCell, type NxMiniChartData, type NxMiniChartDef, type NxMiniChartRows, type NxMultiRangeSelectInfo, type NxPage, type NxPageTreeLevel, type NxPageTreeNode, type NxPatch, type NxPatchOperationType, type NxPatches, type NxPivotDimensionCell, type NxPivotPage, type NxPivotValuePoint, type NxRange, type NxRangeSelectInfo, type NxSelectionCell, type NxSelectionCellType, type NxSelectionInfo, type NxSimpleDimValue, type NxSimpleValue, type NxSortIndicatorType, type NxStackPage, type NxStackedPivotCell, type NxStateCounts, type NxStreamListEntry, type NxTempBookmarkOptions, type NxTickCell, type NxTreeDataOption, type NxTreeDimensionDef, type NxTreeDimensionInfo, type NxTreeMultiRangeSelectInfo, type NxTreeNode, type NxTreeRangeSelectInfo, type NxTreeValue, type NxTrendline, type NxTrendlineDef, type NxTrendlineMode, type NxValidationError, type NxVariableListItem, type NxVariableProperties, type NxViewPort, type ODAGAppLinkListData, type ODAGAppLinkListItem, type ObjectHelperFunctions, type ObjectInterface, type OdbcDsn, type OleDbProvider, type OpenAppSessionProps, type OtherLimitMode, type OtherMode, type OtherSortMode, type OtherTotalSpecProp, type Point, type PositionMark, type ProgressData, type ProgressMessage, type QFunction, QIX_SCHEMA_VERSION, type QMediaList, type QRange, type RangeSelectInfo, type Rect, type RpcObject, type SampleResult, type ScriptSyntaxError, type ScrollPosition, type SearchAssociationResult, type SearchAttribute, type SearchCharRange, type SearchCombinationOptions, type SearchContextType, type SearchFieldDictionary, type SearchFieldMatch, type SearchFieldMatchType, type SearchFieldMatchesItem, type SearchFieldSelectionMode, type SearchFieldValueItem, type SearchGroup, type SearchGroupItem, type SearchGroupItemMatch, type SearchGroupItemOptions, type SearchGroupItemType, type SearchGroupOptions, type SearchGroupType, type SearchMatchCombination, type SearchMatchCombinations, type SearchObjectOptions, type SearchPage, type SearchResult, type SearchSuggestItem, type SearchSuggestionResult, type SearchTermResult, type SearchValueOptions, type SearchValuePage, type SearchValueResult, type SelectInfo, type SelectionObject, type SelectionObjectDef, type SheetListData, type SheetListDataCell, type SheetListDataCellBounds, type SheetListItem, type Size, type SortCriteria, type SourceKeyRecord, type SpecialObjectFunctions, type StandardFunctions, type StateEnumType, type StaticContentList, type StaticContentListItem, type StaticContentUrl, type StaticContentUrlDef, type StoryListData, type StoryListItem, type StringExpr, type StringExpression, type SymbolFrequency, type SymbolValue, type TableProfilingData, type TableRecord, type TableRow, type TableViewBroomPointSaveInfo, type TableViewConnectionPointSaveInfo, type TableViewCtlSaveInfo, type TableViewDlgSaveInfo, type TableViewSaveInfo, type TableViewTableWinSaveInfo, type TextMacro, type TotalMode, type TransformAppParameters, type TransformAppResult, type TreeData, type TreeDataDef, type UndoInfo, type UndoInfoDef, type UndoInfoObject, type UsageEnum, type UseAppHook, type ValueExpr, type ValueExpression, type VariableList, type VariableListData, type VariableListDef, type VariableListItem, type WebSocketEvent, _default as default, openAppSession };

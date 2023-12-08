@@ -600,6 +600,58 @@ type RecommendedAnalysisCore = {
     /** percentage of selected items in the analysis to the overall items passed to the endpoint */
     relevance?: number;
 };
+type ReloadListMetadata = {
+    /** Array of ReloadMeta. */
+    data?: ReloadMeta[];
+};
+type ReloadMeta = {
+    /** Duration of reload (ms). */
+    duration?: number;
+    /** Time when reload ended. */
+    endTime?: string;
+    /** True if the reload is a partial reload. */
+    isPartialReload?: boolean;
+    loadDataFilesBytes?: number;
+    loadExternalBytes?: number;
+    loadFilesBytes?: number;
+    /** Reload identifier. */
+    reloadId?: string;
+    /** If greater than or equal 0, defines max number of rows loaded from a data source. */
+    rowLimit?: number;
+    /** Set to true to skip Store statements.
+    // The default value is false. */
+    skipStore?: boolean;
+    /** List of external loaded or stored statements. */
+    statements?: ReloadStatements[];
+    storeDataFilesBytes?: number;
+    storeFilesBytes?: number;
+    /** true if the reload was successful. */
+    success?: boolean;
+};
+type ReloadStatements = {
+    /** The connecton name. */
+    connection?: string;
+    /** Connection ID. */
+    connectionId?: string;
+    /** Data loaded from the network (bytes). */
+    dataSize?: number;
+    /** Duration of data generation (ms). */
+    duration?: number;
+    /** Label of the resource level node in lineage. */
+    label?: string;
+    /** Number of fields loaded. */
+    nbrOfFields?: number;
+    /** Number of rows loaded. */
+    nbrOfRows?: number;
+    /** Partial load operation. e.g. add/replace/update/merge. n/a when not in partial load mode. */
+    partialReloadOperation?: string;
+    /** Resource Identifier. */
+    qri?: string;
+    /** Name of the source table in lineage. */
+    tableName?: string;
+    /** Type of statement, e.g. Store/Load. */
+    type?: string;
+};
 type RepublishApp = {
     attributes?: AppUpdateAttributes;
     /** Validate that source app is same as originally published. */
@@ -967,15 +1019,15 @@ type GetAppEvaluationComparisonHttpError = {
  *
  * @param baseid Id of the baseline evaluation
  * @param comparisonid Id of the comparison evaluation
- * @throws GetAppEvaluationComparisonXMLHttpError
+ * @throws GetAppEvaluationComparisonXmlHttpError
  */
-declare const getAppEvaluationComparisonXML: (baseid: string, comparisonid: string, options?: ApiCallOptions) => Promise<GetAppEvaluationComparisonXMLHttpResponse>;
-type GetAppEvaluationComparisonXMLHttpResponse = {
+declare const getAppEvaluationComparisonXml: (baseid: string, comparisonid: string, options?: ApiCallOptions) => Promise<GetAppEvaluationComparisonXmlHttpResponse>;
+type GetAppEvaluationComparisonXmlHttpResponse = {
     data: Comparison;
     headers: Headers;
     status: number;
 };
-type GetAppEvaluationComparisonXMLHttpError = {
+type GetAppEvaluationComparisonXmlHttpError = {
     data: EvaluatorError;
     headers: Headers;
     status: number;
@@ -1007,15 +1059,15 @@ type GetAppEvaluationHttpError = {
  * Find and download an evaluation log by a specific evaluation id.
  *
  * @param id Id of the desired evaluation.
- * @throws GetAppEvaluationXMLHttpError
+ * @throws GetAppEvaluationXmlHttpError
  */
-declare const getAppEvaluationXML: (id: string, options?: ApiCallOptions) => Promise<GetAppEvaluationXMLHttpResponse>;
-type GetAppEvaluationXMLHttpResponse = {
+declare const getAppEvaluationXml: (id: string, options?: ApiCallOptions) => Promise<GetAppEvaluationXmlHttpResponse>;
+type GetAppEvaluationXmlHttpResponse = {
     data: Evaluation;
     headers: Headers;
     status: number;
 };
-type GetAppEvaluationXMLHttpError = {
+type GetAppEvaluationXmlHttpError = {
     data: EvaluatorError;
     headers: Headers;
     status: number;
@@ -1058,15 +1110,15 @@ type ImportAppHttpError = {
 };
 /**
  * Gets the app privileges for the current user, such as create app and import app. Empty means that the current user has no app privileges.
- * @throws GetAppPrivilegesHttpError
+ * @throws GetAppsPrivilegesHttpError
  */
-declare const getAppPrivileges: (options?: ApiCallOptions) => Promise<GetAppPrivilegesHttpResponse>;
-type GetAppPrivilegesHttpResponse = {
+declare const getAppsPrivileges: (options?: ApiCallOptions) => Promise<GetAppsPrivilegesHttpResponse>;
+type GetAppsPrivilegesHttpResponse = {
     data: string[];
     headers: Headers;
     status: number;
 };
-type GetAppPrivilegesHttpError = {
+type GetAppsPrivilegesHttpError = {
     data: unknown;
     headers: Headers;
     status: number;
@@ -1344,6 +1396,7 @@ type GetAppThumbnailHttpError = {
 };
 /**
  * Sets owner on an app object.
+ * The user must be the owner of the object.
  * @param appId Identifier of the app.
  * @param objectId Identifier of the object.
  * @param body an object with the body content
@@ -1442,6 +1495,28 @@ type GetAppReloadLogHttpResponse = {
     status: number;
 };
 type GetAppReloadLogHttpError = {
+    data: unknown;
+    headers: Headers;
+    status: number;
+};
+/**
+ * Retrieves the app reload metadata list.
+ * Reload metadata contains reload information, including reload id, duration, endtime and lineage load info.
+ * @param appId Identifier of the app
+ * @param reloadId Identifier of the reload. Use empty reloadId to get all reloads.
+ * @param query an object with query parameters
+ * @throws GetAppReloadMetadataHttpError
+ */
+declare const getAppReloadMetadata: (appId: string, reloadId: string, query: {
+    /** Maximum number of records to return from this request. Default: 100 */
+    limit?: string;
+}, options?: ApiCallOptions) => Promise<GetAppReloadMetadataHttpResponse>;
+type GetAppReloadMetadataHttpResponse = {
+    data: ReloadListMetadata;
+    headers: Headers;
+    status: number;
+};
+type GetAppReloadMetadataHttpError = {
     data: unknown;
     headers: Headers;
     status: number;
@@ -1658,9 +1733,9 @@ interface AppsAPI {
      *
      * @param baseid Id of the baseline evaluation
      * @param comparisonid Id of the comparison evaluation
-     * @throws GetAppEvaluationComparisonXMLHttpError
+     * @throws GetAppEvaluationComparisonXmlHttpError
      */
-    getAppEvaluationComparisonXML: typeof getAppEvaluationComparisonXML;
+    getAppEvaluationComparisonXml: typeof getAppEvaluationComparisonXml;
     /**
      * Find an evaluation by a specific id.
      *
@@ -1673,9 +1748,9 @@ interface AppsAPI {
      * Find and download an evaluation log by a specific evaluation id.
      *
      * @param id Id of the desired evaluation.
-     * @throws GetAppEvaluationXMLHttpError
+     * @throws GetAppEvaluationXmlHttpError
      */
-    getAppEvaluationXML: typeof getAppEvaluationXML;
+    getAppEvaluationXml: typeof getAppEvaluationXml;
     /**
      * Imports an app into the system.
      * @param query an object with query parameters
@@ -1685,9 +1760,9 @@ interface AppsAPI {
     importApp: typeof importApp;
     /**
      * Gets the app privileges for the current user, such as create app and import app. Empty means that the current user has no app privileges.
-     * @throws GetAppPrivilegesHttpError
+     * @throws GetAppsPrivilegesHttpError
      */
-    getAppPrivileges: typeof getAppPrivileges;
+    getAppsPrivileges: typeof getAppsPrivileges;
     /**
      * Deletes a specific app.
      * @param appId Identifier of the app.
@@ -1798,6 +1873,7 @@ interface AppsAPI {
     getAppThumbnail: typeof getAppThumbnail;
     /**
      * Sets owner on an app object.
+     * The user must be the owner of the object.
      * @param appId Identifier of the app.
      * @param objectId Identifier of the object.
      * @param body an object with the body content
@@ -1840,6 +1916,15 @@ interface AppsAPI {
      * @throws GetAppReloadLogHttpError
      */
     getAppReloadLog: typeof getAppReloadLog;
+    /**
+     * Retrieves the app reload metadata list.
+     * Reload metadata contains reload information, including reload id, duration, endtime and lineage load info.
+     * @param appId Identifier of the app
+     * @param reloadId Identifier of the reload. Use empty reloadId to get all reloads.
+     * @param query an object with query parameters
+     * @throws GetAppReloadMetadataHttpError
+     */
+    getAppReloadMetadata: typeof getAppReloadMetadata;
     /**
      * Retrieves the script history for an app.
      * Returns information about the saved versions of the script.
@@ -1918,4 +2003,4 @@ interface AppsAPI {
  */
 declare const appsExport: AppsAPI;
 
-export { type Analysis, type AnalysisComposition, type AnalysisDescriptor, type AnalysisDescriptorResponse, type AnalysisDetails, type AnalysisGroup, type AnalysisModelItemField, type AnalysisModelItemMasterItem, type AnalysisModelResponse, type AnalysisModelResponseDetail, type AnalysisRecommendRequest, type AnalysisRecommendationResponse, type AnalysisRecommendationResponseDetail, type AppAttributes, type AppContentList, type AppContentListItem, type AppUpdateAttributes, type AppsAPI, type ChartType, type Classification, type Classifications, type Cmpbool, type Cmpfloat, type Cmpint, type Comparison, type Comparisonfields, type Comparisonobjresponsetime, type Comparisonoobjheavy, type Comparisontables, type CompositionMinMax, type CopyAppHttpError, type CopyAppHttpResponse, type CreateApp, type CreateAppHttpError, type CreateAppHttpResponse, type DataModelMetadata, type DeleteAppHttpError, type DeleteAppHttpResponse, type DeleteAppMediaHttpError, type DeleteAppMediaHttpResponse, type DeleteAppScriptHttpError, type DeleteAppScriptHttpResponse, type Error, type Errors, type Evaluation, type Evaluations, type EvaluatorError, type Event, type ExportAppHttpError, type ExportAppHttpResponse, type FieldAttributes, type FieldInTableProfilingData, type FieldMetadata, type FieldOverride, type FileData, type FrequencyDistributionData, type GetAppDataLineageHttpError, type GetAppDataLineageHttpResponse, type GetAppDataMetadataHttpError, type GetAppDataMetadataHttpResponse, type GetAppEvaluationComparisonHttpError, type GetAppEvaluationComparisonHttpResponse, type GetAppEvaluationComparisonXMLHttpError, type GetAppEvaluationComparisonXMLHttpResponse, type GetAppEvaluationHttpError, type GetAppEvaluationHttpResponse, type GetAppEvaluationXMLHttpError, type GetAppEvaluationXMLHttpResponse, type GetAppEvaluationsHttpError, type GetAppEvaluationsHttpResponse, type GetAppInfoHttpError, type GetAppInfoHttpResponse, type GetAppInsightAnalysesHttpError, type GetAppInsightAnalysesHttpResponse, type GetAppInsightAnalysisModelHttpError, type GetAppInsightAnalysisModelHttpResponse, type GetAppInsightAnalysisRecommendationsHttpError, type GetAppInsightAnalysisRecommendationsHttpResponse, type GetAppMediaHttpError, type GetAppMediaHttpResponse, type GetAppMediaListHttpError, type GetAppMediaListHttpResponse, type GetAppPrivilegesHttpError, type GetAppPrivilegesHttpResponse, type GetAppReloadLogHttpError, type GetAppReloadLogHttpResponse, type GetAppReloadLogsHttpError, type GetAppReloadLogsHttpResponse, type GetAppScriptHistoryHttpError, type GetAppScriptHistoryHttpResponse, type GetAppScriptHttpError, type GetAppScriptHttpResponse, type GetAppThumbnailHttpError, type GetAppThumbnailHttpResponse, type HardwareMeta, type Href, type ImportAppHttpError, type ImportAppHttpResponse, type JsonObject, type LastReloadMetadata, type LineageInfoRest, type Links, type Log, type Metadata, type MoveAppToSpaceHttpError, type MoveAppToSpaceHttpResponse, type NavigationLink, type NavigationLinks, type NumberFormat, type NxApp, type NxAppCreatePrivileges, type NxAppObject, type NxAttributes, type NxObjectAttributes, type NxPatch, type Objectmetrics, type Objectspec, type Objecttopspec, type PartialNluInfo, type PatchAppScriptHttpError, type PatchAppScriptHttpResponse, type PublishApp, type PublishAppHttpError, type PublishAppHttpResponse, type QueueAppEvaluationHttpError, type QueueAppEvaluationHttpResponse, type RecommendFieldItem, type RecommendItems, type RecommendMasterItem, type RecommendNaturalLangQuery, type RecommendedAnalysis, type RecommendedAnalysisCore, type RemoveAppFromSpaceHttpError, type RemoveAppFromSpaceHttpResponse, type RepublishApp, type RepublishAppHttpError, type RepublishAppHttpResponse, type Result, type Resultentry, type Resultmetadatatopfields, type Resultmetadatatoptables, type Resultobjresponsetime, type Resultobjsheet, type Resultobjsinglethreaded, type Resultsingle, type ScriptLogList, type ScriptLogMeta, type ScriptMeta, type ScriptMetaList, type ScriptVersion, type SimplifiedClassifications, type Sortedcomparisonfields, type Sortedcomparisonobjresponsetime, type Sortedcomparisonoobjheavy, type Sortedcomparisontables, type SymbolFrequency, type SymbolValue, type TableMetadata, type TableProfilingData, type UpdateApp, type UpdateAppInfoHttpError, type UpdateAppInfoHttpResponse, type UpdateAppObjectOwnerHttpError, type UpdateAppObjectOwnerHttpResponse, type UpdateAppOwnerHttpError, type UpdateAppOwnerHttpResponse, type UpdateAppScriptHttpError, type UpdateAppScriptHttpResponse, type UpdateOwner, type UpdateSpace, type UploadAppMediaHttpError, type UploadAppMediaHttpResponse, clearCache, copyApp, createApp, appsExport as default, deleteApp, deleteAppMedia, deleteAppScript, exportApp, getAppDataLineage, getAppDataMetadata, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXML, getAppEvaluationXML, getAppEvaluations, getAppInfo, getAppInsightAnalyses, getAppInsightAnalysisModel, getAppInsightAnalysisRecommendations, getAppMedia, getAppMediaList, getAppPrivileges, getAppReloadLog, getAppReloadLogs, getAppScript, getAppScriptHistory, getAppThumbnail, importApp, moveAppToSpace, patchAppScript, publishApp, queueAppEvaluation, removeAppFromSpace, republishApp, updateAppInfo, updateAppObjectOwner, updateAppOwner, updateAppScript, uploadAppMedia };
+export { type Analysis, type AnalysisComposition, type AnalysisDescriptor, type AnalysisDescriptorResponse, type AnalysisDetails, type AnalysisGroup, type AnalysisModelItemField, type AnalysisModelItemMasterItem, type AnalysisModelResponse, type AnalysisModelResponseDetail, type AnalysisRecommendRequest, type AnalysisRecommendationResponse, type AnalysisRecommendationResponseDetail, type AppAttributes, type AppContentList, type AppContentListItem, type AppUpdateAttributes, type AppsAPI, type ChartType, type Classification, type Classifications, type Cmpbool, type Cmpfloat, type Cmpint, type Comparison, type Comparisonfields, type Comparisonobjresponsetime, type Comparisonoobjheavy, type Comparisontables, type CompositionMinMax, type CopyAppHttpError, type CopyAppHttpResponse, type CreateApp, type CreateAppHttpError, type CreateAppHttpResponse, type DataModelMetadata, type DeleteAppHttpError, type DeleteAppHttpResponse, type DeleteAppMediaHttpError, type DeleteAppMediaHttpResponse, type DeleteAppScriptHttpError, type DeleteAppScriptHttpResponse, type Error, type Errors, type Evaluation, type Evaluations, type EvaluatorError, type Event, type ExportAppHttpError, type ExportAppHttpResponse, type FieldAttributes, type FieldInTableProfilingData, type FieldMetadata, type FieldOverride, type FileData, type FrequencyDistributionData, type GetAppDataLineageHttpError, type GetAppDataLineageHttpResponse, type GetAppDataMetadataHttpError, type GetAppDataMetadataHttpResponse, type GetAppEvaluationComparisonHttpError, type GetAppEvaluationComparisonHttpResponse, type GetAppEvaluationComparisonXmlHttpError, type GetAppEvaluationComparisonXmlHttpResponse, type GetAppEvaluationHttpError, type GetAppEvaluationHttpResponse, type GetAppEvaluationXmlHttpError, type GetAppEvaluationXmlHttpResponse, type GetAppEvaluationsHttpError, type GetAppEvaluationsHttpResponse, type GetAppInfoHttpError, type GetAppInfoHttpResponse, type GetAppInsightAnalysesHttpError, type GetAppInsightAnalysesHttpResponse, type GetAppInsightAnalysisModelHttpError, type GetAppInsightAnalysisModelHttpResponse, type GetAppInsightAnalysisRecommendationsHttpError, type GetAppInsightAnalysisRecommendationsHttpResponse, type GetAppMediaHttpError, type GetAppMediaHttpResponse, type GetAppMediaListHttpError, type GetAppMediaListHttpResponse, type GetAppReloadLogHttpError, type GetAppReloadLogHttpResponse, type GetAppReloadLogsHttpError, type GetAppReloadLogsHttpResponse, type GetAppReloadMetadataHttpError, type GetAppReloadMetadataHttpResponse, type GetAppScriptHistoryHttpError, type GetAppScriptHistoryHttpResponse, type GetAppScriptHttpError, type GetAppScriptHttpResponse, type GetAppThumbnailHttpError, type GetAppThumbnailHttpResponse, type GetAppsPrivilegesHttpError, type GetAppsPrivilegesHttpResponse, type HardwareMeta, type Href, type ImportAppHttpError, type ImportAppHttpResponse, type JsonObject, type LastReloadMetadata, type LineageInfoRest, type Links, type Log, type Metadata, type MoveAppToSpaceHttpError, type MoveAppToSpaceHttpResponse, type NavigationLink, type NavigationLinks, type NumberFormat, type NxApp, type NxAppCreatePrivileges, type NxAppObject, type NxAttributes, type NxObjectAttributes, type NxPatch, type Objectmetrics, type Objectspec, type Objecttopspec, type PartialNluInfo, type PatchAppScriptHttpError, type PatchAppScriptHttpResponse, type PublishApp, type PublishAppHttpError, type PublishAppHttpResponse, type QueueAppEvaluationHttpError, type QueueAppEvaluationHttpResponse, type RecommendFieldItem, type RecommendItems, type RecommendMasterItem, type RecommendNaturalLangQuery, type RecommendedAnalysis, type RecommendedAnalysisCore, type ReloadListMetadata, type ReloadMeta, type ReloadStatements, type RemoveAppFromSpaceHttpError, type RemoveAppFromSpaceHttpResponse, type RepublishApp, type RepublishAppHttpError, type RepublishAppHttpResponse, type Result, type Resultentry, type Resultmetadatatopfields, type Resultmetadatatoptables, type Resultobjresponsetime, type Resultobjsheet, type Resultobjsinglethreaded, type Resultsingle, type ScriptLogList, type ScriptLogMeta, type ScriptMeta, type ScriptMetaList, type ScriptVersion, type SimplifiedClassifications, type Sortedcomparisonfields, type Sortedcomparisonobjresponsetime, type Sortedcomparisonoobjheavy, type Sortedcomparisontables, type SymbolFrequency, type SymbolValue, type TableMetadata, type TableProfilingData, type UpdateApp, type UpdateAppInfoHttpError, type UpdateAppInfoHttpResponse, type UpdateAppObjectOwnerHttpError, type UpdateAppObjectOwnerHttpResponse, type UpdateAppOwnerHttpError, type UpdateAppOwnerHttpResponse, type UpdateAppScriptHttpError, type UpdateAppScriptHttpResponse, type UpdateOwner, type UpdateSpace, type UploadAppMediaHttpError, type UploadAppMediaHttpResponse, clearCache, copyApp, createApp, appsExport as default, deleteApp, deleteAppMedia, deleteAppScript, exportApp, getAppDataLineage, getAppDataMetadata, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXml, getAppEvaluationXml, getAppEvaluations, getAppInfo, getAppInsightAnalyses, getAppInsightAnalysisModel, getAppInsightAnalysisRecommendations, getAppMedia, getAppMediaList, getAppReloadLog, getAppReloadLogs, getAppReloadMetadata, getAppScript, getAppScriptHistory, getAppThumbnail, getAppsPrivileges, importApp, moveAppToSpace, patchAppScript, publishApp, queueAppEvaluation, removeAppFromSpace, republishApp, updateAppInfo, updateAppObjectOwner, updateAppOwner, updateAppScript, uploadAppMedia };

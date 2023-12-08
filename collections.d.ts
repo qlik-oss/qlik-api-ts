@@ -152,7 +152,7 @@ type ItemTagResponseBody = {
 type ItemViewsResponseBody = {
     /** Total number of views the resource got during the last 28 days. */
     total?: number;
-    /** Trend in views over the last 4 weeks. */
+    /** Trend in views over the last 4 weeks. The trend value is a float number representing a linear regression slope (the x-coefficient) calculated from the weekly unique users views in the preceding 4 weeks. */
     trend?: number;
     /** Number of unique users who viewed the resource during the last 28 days. */
     unique?: number;

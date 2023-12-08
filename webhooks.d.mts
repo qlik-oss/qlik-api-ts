@@ -127,11 +127,11 @@ type WebhookPatch = {
     value?: boolean | number | unknown | string;
 };
 type WebhookPost = WebhookBase & {
-    /** String that indicates from where the webhook was created and its purpose */
+    /** Indicates from where the webhook was created and its purpose */
     origin?: "api" | "automations" | "management-console";
 };
 type WebhookResponse = WebhookBase & {
-    /** String that indicates from where the webhook was created and its purpose */
+    /** Indicates from where the webhook was created and its purpose */
     readonly origin?: "api" | "automations" | "management-console";
 };
 /**
