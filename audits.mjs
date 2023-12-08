@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-3YE7EI7I.mjs";
-import "./chunk-WM7FQU2U.mjs";
+} from "./chunk-W4J34XGA.mjs";
+import "./chunk-7REWEWCX.mjs";
 
 // src/public/rest/audits.ts
 var getAudits = async (query, options) => invokeFetch("audits", {
@@ -17,7 +17,7 @@ var getArchivedAudits = async (query, options) => invokeFetch("audits", {
   query,
   options
 });
-var getAuditSettings = async (options) => invokeFetch("audits", {
+var getAuditsSettings = async (options) => invokeFetch("audits", {
   method: "get",
   pathTemplate: "/api/v1/audits/settings",
   options
@@ -44,7 +44,7 @@ function clearCache() {
 var auditsExport = {
   getAudits,
   getArchivedAudits,
-  getAuditSettings,
+  getAuditsSettings,
   getAuditSources,
   getAuditTypes,
   getAudit,
@@ -56,8 +56,8 @@ export {
   audits_default as default,
   getArchivedAudits,
   getAudit,
-  getAuditSettings,
   getAuditSources,
   getAuditTypes,
-  getAudits
+  getAudits,
+  getAuditsSettings
 };

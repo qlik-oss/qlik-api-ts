@@ -102,7 +102,7 @@ declare const getAudits: (query: {
     eventType?: string;
     /** The comma separated list of audit unique identifiers. */
     id?: string;
-    /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
+    /** The maximum number of resources to return for a request. */
     limit?: number;
     /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
     next?: string;
@@ -148,15 +148,15 @@ type GetArchivedAuditsHttpError = {
 };
 /**
  * It includes options that represent the server configuration state and parameters that were used to run the server with certain functionality.
- * @throws GetAuditSettingsHttpError
+ * @throws GetAuditsSettingsHttpError
  */
-declare const getAuditSettings: (options?: ApiCallOptions) => Promise<GetAuditSettingsHttpResponse>;
-type GetAuditSettingsHttpResponse = {
+declare const getAuditsSettings: (options?: ApiCallOptions) => Promise<GetAuditsSettingsHttpResponse>;
+type GetAuditsSettingsHttpResponse = {
     data: GetSettingsResult;
     headers: Headers;
     status: number;
 };
-type GetAuditSettingsHttpError = {
+type GetAuditsSettingsHttpError = {
     data: ErrorResponse;
     headers: Headers;
     status: number;
@@ -230,9 +230,9 @@ interface AuditsAPI {
     getArchivedAudits: typeof getArchivedAudits;
     /**
      * It includes options that represent the server configuration state and parameters that were used to run the server with certain functionality.
-     * @throws GetAuditSettingsHttpError
+     * @throws GetAuditsSettingsHttpError
      */
-    getAuditSettings: typeof getAuditSettings;
+    getAuditsSettings: typeof getAuditsSettings;
     /**
      * Finds and returns the distinct list of unique event sources.
      * @throws GetAuditSourcesHttpError
@@ -259,4 +259,4 @@ interface AuditsAPI {
  */
 declare const auditsExport: AuditsAPI;
 
-export { type AuditsAPI, type ErrorResponse, type EventExtensions, type GetArchiveResult, type GetArchivedAuditsHttpError, type GetArchivedAuditsHttpResponse, type GetAuditHttpError, type GetAuditHttpResponse, type GetAuditSettingsHttpError, type GetAuditSettingsHttpResponse, type GetAuditSourcesHttpError, type GetAuditSourcesHttpResponse, type GetAuditTypesHttpError, type GetAuditTypesHttpResponse, type GetAuditsHttpError, type GetAuditsHttpResponse, type GetByIDResult, type GetLinks, type GetObjectsResult, type GetResult, type GetSettingsResult, type Href, type ListLinks, clearCache, auditsExport as default, getArchivedAudits, getAudit, getAuditSettings, getAuditSources, getAuditTypes, getAudits };
+export { type AuditsAPI, type ErrorResponse, type EventExtensions, type GetArchiveResult, type GetArchivedAuditsHttpError, type GetArchivedAuditsHttpResponse, type GetAuditHttpError, type GetAuditHttpResponse, type GetAuditSourcesHttpError, type GetAuditSourcesHttpResponse, type GetAuditTypesHttpError, type GetAuditTypesHttpResponse, type GetAuditsHttpError, type GetAuditsHttpResponse, type GetAuditsSettingsHttpError, type GetAuditsSettingsHttpResponse, type GetByIDResult, type GetLinks, type GetObjectsResult, type GetResult, type GetSettingsResult, type Href, type ListLinks, clearCache, auditsExport as default, getArchivedAudits, getAudit, getAuditSources, getAuditTypes, getAudits, getAuditsSettings };

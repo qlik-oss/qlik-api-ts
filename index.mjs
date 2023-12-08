@@ -1,14 +1,14 @@
 import {
   auth_default
-} from "./chunk-GUQBHY3H.mjs";
+} from "./chunk-KMMWJZHM.mjs";
 import {
   qix_default
-} from "./chunk-CKPJE4IA.mjs";
+} from "./chunk-E42WUFCK.mjs";
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-3YE7EI7I.mjs";
-import "./chunk-WM7FQU2U.mjs";
+} from "./chunk-W4J34XGA.mjs";
+import "./chunk-7REWEWCX.mjs";
 
 // src/public/public-runtime-api-generator/public-runtime-api-generator.ts
 var methodAbbreviations = {
@@ -127,7 +127,9 @@ function createClassicApiFn(namespace, operationName, pathTemplate, method, argN
       argPos++;
     }
     const options = args.length > argPos ? args[argPos] : void 0;
-    console.warn(`${namespace}.${operationName} is deprecated, use ${useInstead}.${operationName} instead`);
+    if (useInstead) {
+      console.warn(`${namespace}.${operationName} is deprecated, use ${useInstead} instead`);
+    }
     return invokeFetch(namespace, {
       method,
       pathTemplate,
@@ -145,7 +147,7 @@ var apiKeys = apiDefToApi("api-keys", {
     v1: {
       "api-keys": {
         "": ["getApiKeys:GQ:", "createApiKey:PB:"],
-        configs: { "{tenantId}": ["getApiKeyConfig:G:", "patchApiKeyConfig:AB:"] },
+        configs: { "{tenantId}": ["getApiKeysConfig:G:", "patchApiKeysConfig:AB:"] },
         "{id}": ["deleteApiKey:D:", "getApiKey:G:", "patchApiKey:AB:"]
       }
     }
@@ -162,15 +164,15 @@ var apps = apiDefToApi("apps", {
               compare: {
                 "{comparisonid}": {
                   "": ["getAppEvaluationComparison:GQ:"],
-                  actions: { download: ["getAppEvaluationComparisonXML:G:"] }
+                  actions: { download: ["getAppEvaluationComparisonXml:G:"] }
                 }
               }
             }
           },
-          "{id}": { "": ["getAppEvaluation:GQ:"], actions: { download: ["getAppEvaluationXML:G:"] } }
+          "{id}": { "": ["getAppEvaluation:GQ:"], actions: { download: ["getAppEvaluationXml:G:"] } }
         },
         import: ["importApp:PQB:"],
-        privileges: ["getAppPrivileges:G:"],
+        privileges: ["getAppsPrivileges:G:"],
         "{appId}": {
           "": ["deleteApp:D:", "getAppInfo:G:", "updateAppInfo:UB:"],
           copy: ["copyApp:PB:"],
@@ -189,7 +191,10 @@ var apps = apiDefToApi("apps", {
           objects: { "{objectId}": { actions: { "change-owner": ["updateAppObjectOwner:PB:"] } } },
           owner: ["updateAppOwner:UB:"],
           publish: ["publishApp:PB:", "republishApp:UB:"],
-          reloads: { logs: { "": ["getAppReloadLogs:G:"], "{reloadId}": ["getAppReloadLog:G:"] } },
+          reloads: {
+            logs: { "": ["getAppReloadLogs:G:"], "{reloadId}": ["getAppReloadLog:G:"] },
+            metadata: { "{reloadId}": ["getAppReloadMetadata:GQ:"] }
+          },
           scripts: {
             "": ["getAppScriptHistory:GQ:", "updateAppScript:PB:"],
             "{version}": ["deleteAppScript:D:", "getAppScript:G:", "patchAppScript:AB:"]
@@ -207,7 +212,7 @@ var audits = apiDefToApi("audits", {
       audits: {
         "": ["getAudits:GQ:"],
         archive: ["getArchivedAudits:GQ:"],
-        settings: ["getAuditSettings:G:"],
+        settings: ["getAuditsSettings:G:"],
         sources: ["getAuditSources:G:"],
         types: ["getAuditTypes:G:"],
         "{id}": ["getAudit:G:"]
@@ -221,8 +226,8 @@ var automations = apiDefToApi("automations", {
     v1: {
       automations: {
         "": ["getAutomations:GQ:", "createAutomation:PB:"],
-        settings: ["getAutomationSettings:G:", "updateAutomationSettings:UB:"],
-        usage: ["getAutomationUsageMetrics:GQ:"],
+        settings: ["getAutomationsSettings:G:", "updateAutomationsSettings:UB:"],
+        usage: ["getAutomationsUsageMetrics:GQ:"],
         "{id}": {
           "": ["deleteAutomation:D:", "getAutomation:G:", "updateAutomation:UB:"],
           actions: {
@@ -342,8 +347,8 @@ var dataFiles = apiDefToApi("data-files", {
       "data-files": {
         "": ["getDataFiles:GQ:", "uploadDataFile:PB:"],
         actions: { "change-space": ["moveDataFiles:PB:"], delete: ["deleteDataFiles:PB:"] },
-        connections: { "": ["getDataFileConnections:GQ:"], "{id}": ["getDataFileConnection:G:"] },
-        quotas: ["getDataFileQuotas:G:"],
+        connections: { "": ["getDataFilesConnections:GQ:"], "{id}": ["getDataFileConnection:G:"] },
+        quotas: ["getDataFilesQuotas:G:"],
         "{id}": {
           "": ["deleteDataFile:D:", "getDataFile:G:", "reuploadDataFile:UB:"],
           actions: { "change-owner": ["changeDataFileOwner:PB:"], "change-space": ["moveDataFile:PB:"] }
@@ -403,7 +408,7 @@ var groups = apiDefToApi("groups", {
       groups: {
         "": ["getGroups:GQ:", "createGroup:PB:"],
         actions: { filter: ["filterGroups:PQB:"] },
-        settings: ["getGroupSettings:G:", "patchGroupSettings:AB:"],
+        settings: ["getGroupsSettings:G:", "patchGroupsSettings:AB:"],
         "{groupId}": ["deleteGroup:D:", "getGroup:G:", "patchGroup:AB:"]
       }
     }
@@ -416,7 +421,7 @@ var identityProviders = apiDefToApi("identity-providers", {
         "": ["getIdps:GQ:", "createIdp:PB:"],
         ".well-known": { "metadata.json": ["getIdpWellKnownMetaData:G:"] },
         me: { meta: ["getMyIdpMeta:G:"] },
-        status: ["getIdpStatus:G:"],
+        status: ["getIdpStatuses:G:"],
         "{id}": ["deleteIdp:D:", "getIdp:G:", "patchIdp:AB:"]
       }
     }
@@ -427,7 +432,7 @@ var items = apiDefToApi("items", {
     v1: {
       items: {
         "": ["getItems:GQ:"],
-        settings: ["getItemSettings:G:", "patchItemSettings:AB:"],
+        settings: ["getItemsSettings:G:", "patchItemsSettings:AB:"],
         "{itemId}": {
           "": ["deleteItem:D:", "getItem:G:", "updateItem:UB:"],
           collections: ["getItemCollections:GQ:"],
@@ -506,7 +511,6 @@ var tempContents = apiDefToApi("temp-contents", {
     v1: {
       "temp-contents": {
         "": ["uploadTempFile:PQB:"],
-        files: { "": ["createTus:P:"], "{id}": ["patchTus:AB:"] },
         "{id}": { "": ["downloadTempFile:GQ:"], details: ["getTempFileDetails:G:"] }
       }
     }

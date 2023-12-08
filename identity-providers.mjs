@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-3YE7EI7I.mjs";
-import "./chunk-WM7FQU2U.mjs";
+} from "./chunk-W4J34XGA.mjs";
+import "./chunk-7REWEWCX.mjs";
 
 // src/public/rest/identity-providers.ts
 var getIdps = async (query, options) => invokeFetch("identity-providers", {
@@ -27,7 +27,7 @@ var getMyIdpMeta = async (options) => invokeFetch("identity-providers", {
   pathTemplate: "/api/v1/identity-providers/me/meta",
   options
 });
-var getIdpStatus = async (options) => invokeFetch("identity-providers", {
+var getIdpStatuses = async (options) => invokeFetch("identity-providers", {
   method: "get",
   pathTemplate: "/api/v1/identity-providers/status",
   options
@@ -59,7 +59,7 @@ var identityProvidersExport = {
   createIdp,
   getIdpWellKnownMetaData,
   getMyIdpMeta,
-  getIdpStatus,
+  getIdpStatuses,
   deleteIdp,
   getIdp,
   patchIdp,
@@ -72,7 +72,7 @@ export {
   identity_providers_default as default,
   deleteIdp,
   getIdp,
-  getIdpStatus,
+  getIdpStatuses,
   getIdpWellKnownMetaData,
   getIdps,
   getMyIdpMeta,
