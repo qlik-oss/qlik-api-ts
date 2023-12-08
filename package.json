@@ -1,25 +1,14 @@
 {
   "name": "@qlik/api",
-  "version": "0.0.1",
+  "version": "2.98.0",
   "description": "Exposes functions for interacting with Qlik apis",
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/qlik-oss/qlik-api-ts.git"
+    "type": "git"
   },
-  "publishConfig": {
-    "access": "public"
-  },
-  "license": "ISC",
-  "files": [
-    "docs",
-    "*.js",
-    "*.mjs",
-    "*.d.ts",
-    "*.d.mts"
-  ],
+  "license": "UNLICENSED",
   "dependencies": {
-    "@qlik/embed-runtime": "^0.5.10",
-    "@qlik/runtime-module-loader": "^0.1.15",
+    "@qlik/embed-runtime": "^0.6.1",
+    "@qlik/runtime-module-loader": "^0.2.2",
     "bufferutil": "^4.0.8",
     "enigma.js": "^2.12.0",
     "lodash": "^4.17.21",
@@ -28,6 +17,10 @@
   "engines": {
     "node": ">=16",
     "pnpm": ">=8"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
   },
   "main": "index.js",
   "module": "index.mjs",

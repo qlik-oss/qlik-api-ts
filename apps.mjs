@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-3YE7EI7I.mjs";
-import "./chunk-WM7FQU2U.mjs";
+} from "./chunk-W4J34XGA.mjs";
+import "./chunk-7REWEWCX.mjs";
 
 // src/public/rest/apps.ts
 var createApp = async (body, options) => invokeFetch("apps", {
@@ -18,7 +18,7 @@ var getAppEvaluationComparison = async (baseid, comparisonid, query, options) =>
   query,
   options
 });
-var getAppEvaluationComparisonXML = async (baseid, comparisonid, options) => invokeFetch("apps", {
+var getAppEvaluationComparisonXml = async (baseid, comparisonid, options) => invokeFetch("apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/evaluations/{baseid}/actions/compare/{comparisonid}/actions/download",
   pathVariables: { baseid, comparisonid },
@@ -31,7 +31,7 @@ var getAppEvaluation = async (id, query, options) => invokeFetch("apps", {
   query,
   options
 });
-var getAppEvaluationXML = async (id, options) => invokeFetch("apps", {
+var getAppEvaluationXml = async (id, options) => invokeFetch("apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/evaluations/{id}/actions/download",
   pathVariables: { id },
@@ -44,7 +44,7 @@ var importApp = async (query, body, options) => invokeFetch("apps", {
   body,
   options
 });
-var getAppPrivileges = async (options) => invokeFetch("apps", {
+var getAppsPrivileges = async (options) => invokeFetch("apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/privileges",
   options
@@ -185,6 +185,13 @@ var getAppReloadLog = async (appId, reloadId, options) => invokeFetch("apps", {
   pathVariables: { appId, reloadId },
   options
 });
+var getAppReloadMetadata = async (appId, reloadId, query, options) => invokeFetch("apps", {
+  method: "get",
+  pathTemplate: "/api/v1/apps/{appId}/reloads/metadata/{reloadId}",
+  pathVariables: { appId, reloadId },
+  query,
+  options
+});
 var getAppScriptHistory = async (appId, query, options) => invokeFetch("apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{appId}/scripts",
@@ -250,11 +257,11 @@ function clearCache() {
 var appsExport = {
   createApp,
   getAppEvaluationComparison,
-  getAppEvaluationComparisonXML,
+  getAppEvaluationComparisonXml,
   getAppEvaluation,
-  getAppEvaluationXML,
+  getAppEvaluationXml,
   importApp,
-  getAppPrivileges,
+  getAppsPrivileges,
   deleteApp,
   getAppInfo,
   updateAppInfo,
@@ -276,6 +283,7 @@ var appsExport = {
   republishApp,
   getAppReloadLogs,
   getAppReloadLog,
+  getAppReloadMetadata,
   getAppScriptHistory,
   updateAppScript,
   deleteAppScript,
@@ -301,8 +309,8 @@ export {
   getAppDataMetadata,
   getAppEvaluation,
   getAppEvaluationComparison,
-  getAppEvaluationComparisonXML,
-  getAppEvaluationXML,
+  getAppEvaluationComparisonXml,
+  getAppEvaluationXml,
   getAppEvaluations,
   getAppInfo,
   getAppInsightAnalyses,
@@ -310,12 +318,13 @@ export {
   getAppInsightAnalysisRecommendations,
   getAppMedia,
   getAppMediaList,
-  getAppPrivileges,
   getAppReloadLog,
   getAppReloadLogs,
+  getAppReloadMetadata,
   getAppScript,
   getAppScriptHistory,
   getAppThumbnail,
+  getAppsPrivileges,
   importApp,
   moveAppToSpace,
   patchAppScript,

@@ -220,9 +220,9 @@ type DeleteDataFilesHttpError = {
  * The non-filtered list contains a set of hardcoded connections, along with one connection per team space that
  * the given user has access to.
  * @param query an object with query parameters
- * @throws GetDataFileConnectionsHttpError
+ * @throws GetDataFilesConnectionsHttpError
  */
-declare const getDataFileConnections: (query: {
+declare const getDataFilesConnections: (query: {
     /** If present, get connections with connection strings that are scoped to the given app ID. */
     appId?: string;
     /** If present, the maximum number of data file connection records to return. */
@@ -238,15 +238,15 @@ declare const getDataFileConnections: (query: {
     sort?: GetConnectionsSortField;
     /** If present, only return the connection that accesses data files in the specified space. */
     spaceId?: string;
-}, options?: ApiCallOptions) => Promise<GetDataFileConnectionsHttpResponse>;
-type GetDataFileConnectionsHttpResponse = {
+}, options?: ApiCallOptions) => Promise<GetDataFilesConnectionsHttpResponse>;
+type GetDataFilesConnectionsHttpResponse = {
     data: GetConnectionsResponse;
     headers: Headers;
     status: number;
-    prev?: (options?: ApiCallOptions) => Promise<GetDataFileConnectionsHttpResponse>;
-    next?: (options?: ApiCallOptions) => Promise<GetDataFileConnectionsHttpResponse>;
+    prev?: (options?: ApiCallOptions) => Promise<GetDataFilesConnectionsHttpResponse>;
+    next?: (options?: ApiCallOptions) => Promise<GetDataFilesConnectionsHttpResponse>;
 };
-type GetDataFileConnectionsHttpError = {
+type GetDataFilesConnectionsHttpError = {
     data: ErrorResponse;
     headers: Headers;
     status: number;
@@ -269,15 +269,15 @@ type GetDataFileConnectionHttpError = {
 };
 /**
  * Get quota information for the calling user.
- * @throws GetDataFileQuotasHttpError
+ * @throws GetDataFilesQuotasHttpError
  */
-declare const getDataFileQuotas: (options?: ApiCallOptions) => Promise<GetDataFileQuotasHttpResponse>;
-type GetDataFileQuotasHttpResponse = {
+declare const getDataFilesQuotas: (options?: ApiCallOptions) => Promise<GetDataFilesQuotasHttpResponse>;
+type GetDataFilesQuotasHttpResponse = {
     data: QuotaResponse;
     headers: Headers;
     status: number;
 };
-type GetDataFileQuotasHttpError = {
+type GetDataFilesQuotasHttpError = {
     data: ErrorResponse;
     headers: Headers;
     status: number;
@@ -406,9 +406,9 @@ interface DataFilesAPI {
      * The non-filtered list contains a set of hardcoded connections, along with one connection per team space that
      * the given user has access to.
      * @param query an object with query parameters
-     * @throws GetDataFileConnectionsHttpError
+     * @throws GetDataFilesConnectionsHttpError
      */
-    getDataFileConnections: typeof getDataFileConnections;
+    getDataFilesConnections: typeof getDataFilesConnections;
     /**
      * Get the built-in connection used by the engine to load/write data files given a connection ID.
      * @param id The ID of the connection.
@@ -417,9 +417,9 @@ interface DataFilesAPI {
     getDataFileConnection: typeof getDataFileConnection;
     /**
      * Get quota information for the calling user.
-     * @throws GetDataFileQuotasHttpError
+     * @throws GetDataFilesQuotasHttpError
      */
-    getDataFileQuotas: typeof getDataFileQuotas;
+    getDataFilesQuotas: typeof getDataFilesQuotas;
     /**
      * Delete the specified data file.
      * @param id The ID of the data file to delete.
@@ -468,4 +468,4 @@ interface DataFilesAPI {
  */
 declare const dataFilesExport: DataFilesAPI;
 
-export { type BatchChangeSpaceItem, type BatchDeleteItem, type ChangeDataFileOwnerHttpError, type ChangeDataFileOwnerHttpResponse, type ChangeDataFileOwnerRequest, type ChangeDataFileSpaceRequest, type ConnectionsResponse, type DataFileBatchChangeSpaceRequest, type DataFileBatchDeleteRequest, type DataFileUploadResponse, type DataFilesAPI, type DeleteDataFileHttpError, type DeleteDataFileHttpResponse, type DeleteDataFilesHttpError, type DeleteDataFilesHttpResponse, type ErrorResponse, type ErrorResponseItem, type GetConnectionsResponse, type GetConnectionsSortField, type GetDataFileConnectionHttpError, type GetDataFileConnectionHttpResponse, type GetDataFileConnectionsHttpError, type GetDataFileConnectionsHttpResponse, type GetDataFileHttpError, type GetDataFileHttpResponse, type GetDataFileInfosResponse, type GetDataFileInfosSortField, type GetDataFileQuotasHttpError, type GetDataFileQuotasHttpResponse, type GetDataFilesHttpError, type GetDataFilesHttpResponse, type LinkResponse, type LinksResponse, type MoveDataFileHttpError, type MoveDataFileHttpResponse, type MoveDataFilesHttpError, type MoveDataFilesHttpResponse, type MultiStatusResponse, type MultiStatusResponseItem, type QuotaResponse, type ReuploadDataFileHttpError, type ReuploadDataFileHttpResponse, type UploadDataFileHttpError, type UploadDataFileHttpResponse, changeDataFileOwner, clearCache, dataFilesExport as default, deleteDataFile, deleteDataFiles, getDataFile, getDataFileConnection, getDataFileConnections, getDataFileQuotas, getDataFiles, moveDataFile, moveDataFiles, reuploadDataFile, uploadDataFile };
+export { type BatchChangeSpaceItem, type BatchDeleteItem, type ChangeDataFileOwnerHttpError, type ChangeDataFileOwnerHttpResponse, type ChangeDataFileOwnerRequest, type ChangeDataFileSpaceRequest, type ConnectionsResponse, type DataFileBatchChangeSpaceRequest, type DataFileBatchDeleteRequest, type DataFileUploadResponse, type DataFilesAPI, type DeleteDataFileHttpError, type DeleteDataFileHttpResponse, type DeleteDataFilesHttpError, type DeleteDataFilesHttpResponse, type ErrorResponse, type ErrorResponseItem, type GetConnectionsResponse, type GetConnectionsSortField, type GetDataFileConnectionHttpError, type GetDataFileConnectionHttpResponse, type GetDataFileHttpError, type GetDataFileHttpResponse, type GetDataFileInfosResponse, type GetDataFileInfosSortField, type GetDataFilesConnectionsHttpError, type GetDataFilesConnectionsHttpResponse, type GetDataFilesHttpError, type GetDataFilesHttpResponse, type GetDataFilesQuotasHttpError, type GetDataFilesQuotasHttpResponse, type LinkResponse, type LinksResponse, type MoveDataFileHttpError, type MoveDataFileHttpResponse, type MoveDataFilesHttpError, type MoveDataFilesHttpResponse, type MultiStatusResponse, type MultiStatusResponseItem, type QuotaResponse, type ReuploadDataFileHttpError, type ReuploadDataFileHttpResponse, type UploadDataFileHttpError, type UploadDataFileHttpResponse, changeDataFileOwner, clearCache, dataFilesExport as default, deleteDataFile, deleteDataFiles, getDataFile, getDataFileConnection, getDataFiles, getDataFilesConnections, getDataFilesQuotas, moveDataFile, moveDataFiles, reuploadDataFile, uploadDataFile };

@@ -216,15 +216,15 @@ type CreateAutomationHttpError = {
 };
 /**
  * Retrieves the automation settings.
- * @throws GetAutomationSettingsHttpError
+ * @throws GetAutomationsSettingsHttpError
  */
-declare const getAutomationSettings: (options?: ApiCallOptions) => Promise<GetAutomationSettingsHttpResponse>;
-type GetAutomationSettingsHttpResponse = {
+declare const getAutomationsSettings: (options?: ApiCallOptions) => Promise<GetAutomationsSettingsHttpResponse>;
+type GetAutomationsSettingsHttpResponse = {
     data: SettingsObject;
     headers: Headers;
     status: number;
 };
-type GetAutomationSettingsHttpError = {
+type GetAutomationsSettingsHttpError = {
     data: ErrorResponse;
     headers: Headers;
     status: number;
@@ -232,15 +232,15 @@ type GetAutomationSettingsHttpError = {
 /**
  * Update the automation settings.
  * @param body an object with the body content
- * @throws UpdateAutomationSettingsHttpError
+ * @throws UpdateAutomationsSettingsHttpError
  */
-declare const updateAutomationSettings: (body: SettingsObject, options?: ApiCallOptions) => Promise<UpdateAutomationSettingsHttpResponse>;
-type UpdateAutomationSettingsHttpResponse = {
+declare const updateAutomationsSettings: (body: SettingsObject, options?: ApiCallOptions) => Promise<UpdateAutomationsSettingsHttpResponse>;
+type UpdateAutomationsSettingsHttpResponse = {
     data: SettingsObject;
     headers: Headers;
     status: number;
 };
-type UpdateAutomationSettingsHttpError = {
+type UpdateAutomationsSettingsHttpError = {
     data: ErrorResponse;
     headers: Headers;
     status: number;
@@ -249,20 +249,20 @@ type UpdateAutomationSettingsHttpError = {
  * **Limitations:**
  *  * **Maximum 1000 metrics per API call**
  * @param query an object with query parameters
- * @throws GetAutomationUsageMetricsHttpError
+ * @throws GetAutomationsUsageMetricsHttpError
  */
-declare const getAutomationUsageMetrics: (query: {
+declare const getAutomationsUsageMetrics: (query: {
     /** If specified, result will be broken apart for each automation */
     breakdownBy?: string;
     /** Indicates how the metrics should be filtered */
     filter?: string;
-}, options?: ApiCallOptions) => Promise<GetAutomationUsageMetricsHttpResponse>;
-type GetAutomationUsageMetricsHttpResponse = {
+}, options?: ApiCallOptions) => Promise<GetAutomationsUsageMetricsHttpResponse>;
+type GetAutomationsUsageMetricsHttpResponse = {
     data: UsageList;
     headers: Headers;
     status: number;
 };
-type GetAutomationUsageMetricsHttpError = {
+type GetAutomationsUsageMetricsHttpError = {
     data: ErrorResponse;
     headers: Headers;
     status: number;
@@ -522,22 +522,22 @@ interface AutomationsAPI {
     createAutomation: typeof createAutomation;
     /**
      * Retrieves the automation settings.
-     * @throws GetAutomationSettingsHttpError
+     * @throws GetAutomationsSettingsHttpError
      */
-    getAutomationSettings: typeof getAutomationSettings;
+    getAutomationsSettings: typeof getAutomationsSettings;
     /**
      * Update the automation settings.
      * @param body an object with the body content
-     * @throws UpdateAutomationSettingsHttpError
+     * @throws UpdateAutomationsSettingsHttpError
      */
-    updateAutomationSettings: typeof updateAutomationSettings;
+    updateAutomationsSettings: typeof updateAutomationsSettings;
     /**
      * **Limitations:**
      *  * **Maximum 1000 metrics per API call**
      * @param query an object with query parameters
-     * @throws GetAutomationUsageMetricsHttpError
+     * @throws GetAutomationsUsageMetricsHttpError
      */
-    getAutomationUsageMetrics: typeof getAutomationUsageMetrics;
+    getAutomationsUsageMetrics: typeof getAutomationsUsageMetrics;
     /**
      * Delete an automation
      * @param id The unique identifier for the automation.
@@ -635,4 +635,4 @@ interface AutomationsAPI {
  */
 declare const automationsExport: AutomationsAPI;
 
-export { type AutomationDetailRequestObject, type AutomationDetailResponseObject, type AutomationList, type AutomationListObject, type AutomationUsageObject, type AutomationsAPI, type CopyAutomationHttpError, type CopyAutomationHttpResponse, type CreateAutomationHttpError, type CreateAutomationHttpResponse, type DeleteAutomationHttpError, type DeleteAutomationHttpResponse, type DisableAutomationHttpError, type DisableAutomationHttpResponse, type EnableAutomationHttpError, type EnableAutomationHttpResponse, type Error, type ErrorResponse, type GetAutomationHttpError, type GetAutomationHttpResponse, type GetAutomationRunDetailsHttpError, type GetAutomationRunDetailsHttpResponse, type GetAutomationRunHttpError, type GetAutomationRunHttpResponse, type GetAutomationRunsHttpError, type GetAutomationRunsHttpResponse, type GetAutomationSettingsHttpError, type GetAutomationSettingsHttpResponse, type GetAutomationUsageMetricsHttpError, type GetAutomationUsageMetricsHttpResponse, type GetAutomationsHttpError, type GetAutomationsHttpResponse, type Links, type MoveAutomationHttpError, type MoveAutomationHttpResponse, type PaginationLink, type QueueAutomationRunHttpError, type QueueAutomationRunHttpResponse, type RetryAutomationRunHttpError, type RetryAutomationRunHttpResponse, type RunDetailRequestObject, type RunDetailResponseObject, type RunList, type RunListObject, type ScheduleRequestObject, type ScheduleResponseObject, type SettingsObject, type StopAutomationRunHttpError, type StopAutomationRunHttpResponse, type UpdateAutomationHttpError, type UpdateAutomationHttpResponse, type UpdateAutomationSettingsHttpError, type UpdateAutomationSettingsHttpResponse, type UsageList, type UsageObject, clearCache, copyAutomation, createAutomation, automationsExport as default, deleteAutomation, disableAutomation, enableAutomation, getAutomation, getAutomationRun, getAutomationRunDetails, getAutomationRuns, getAutomationSettings, getAutomationUsageMetrics, getAutomations, moveAutomation, queueAutomationRun, retryAutomationRun, stopAutomationRun, updateAutomation, updateAutomationSettings };
+export { type AutomationDetailRequestObject, type AutomationDetailResponseObject, type AutomationList, type AutomationListObject, type AutomationUsageObject, type AutomationsAPI, type CopyAutomationHttpError, type CopyAutomationHttpResponse, type CreateAutomationHttpError, type CreateAutomationHttpResponse, type DeleteAutomationHttpError, type DeleteAutomationHttpResponse, type DisableAutomationHttpError, type DisableAutomationHttpResponse, type EnableAutomationHttpError, type EnableAutomationHttpResponse, type Error, type ErrorResponse, type GetAutomationHttpError, type GetAutomationHttpResponse, type GetAutomationRunDetailsHttpError, type GetAutomationRunDetailsHttpResponse, type GetAutomationRunHttpError, type GetAutomationRunHttpResponse, type GetAutomationRunsHttpError, type GetAutomationRunsHttpResponse, type GetAutomationsHttpError, type GetAutomationsHttpResponse, type GetAutomationsSettingsHttpError, type GetAutomationsSettingsHttpResponse, type GetAutomationsUsageMetricsHttpError, type GetAutomationsUsageMetricsHttpResponse, type Links, type MoveAutomationHttpError, type MoveAutomationHttpResponse, type PaginationLink, type QueueAutomationRunHttpError, type QueueAutomationRunHttpResponse, type RetryAutomationRunHttpError, type RetryAutomationRunHttpResponse, type RunDetailRequestObject, type RunDetailResponseObject, type RunList, type RunListObject, type ScheduleRequestObject, type ScheduleResponseObject, type SettingsObject, type StopAutomationRunHttpError, type StopAutomationRunHttpResponse, type UpdateAutomationHttpError, type UpdateAutomationHttpResponse, type UpdateAutomationsSettingsHttpError, type UpdateAutomationsSettingsHttpResponse, type UsageList, type UsageObject, clearCache, copyAutomation, createAutomation, automationsExport as default, deleteAutomation, disableAutomation, enableAutomation, getAutomation, getAutomationRun, getAutomationRunDetails, getAutomationRuns, getAutomations, getAutomationsSettings, getAutomationsUsageMetrics, moveAutomation, queueAutomationRun, retryAutomationRun, stopAutomationRun, updateAutomation, updateAutomationsSettings };

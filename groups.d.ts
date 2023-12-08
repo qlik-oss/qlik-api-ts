@@ -234,15 +234,15 @@ type FilterGroupsHttpError = {
 };
 /**
  * Returns the active tenant's group settings.
- * @throws GetGroupSettingsHttpError
+ * @throws GetGroupsSettingsHttpError
  */
-declare const getGroupSettings: (options?: ApiCallOptions) => Promise<GetGroupSettingsHttpResponse>;
-type GetGroupSettingsHttpResponse = {
+declare const getGroupsSettings: (options?: ApiCallOptions) => Promise<GetGroupsSettingsHttpResponse>;
+type GetGroupsSettingsHttpResponse = {
     data: GroupSettings;
     headers: Headers;
     status: number;
 };
-type GetGroupSettingsHttpError = {
+type GetGroupsSettingsHttpError = {
     data: Errors;
     headers: Headers;
     status: number;
@@ -250,15 +250,15 @@ type GetGroupSettingsHttpError = {
 /**
  * Update group settings
  * @param body an object with the body content
- * @throws PatchGroupSettingsHttpError
+ * @throws PatchGroupsSettingsHttpError
  */
-declare const patchGroupSettings: (body: SettingsPatchSchema, options?: ApiCallOptions) => Promise<PatchGroupSettingsHttpResponse>;
-type PatchGroupSettingsHttpResponse = {
+declare const patchGroupsSettings: (body: SettingsPatchSchema, options?: ApiCallOptions) => Promise<PatchGroupsSettingsHttpResponse>;
+type PatchGroupsSettingsHttpResponse = {
     data: void;
     headers: Headers;
     status: number;
 };
-type PatchGroupSettingsHttpError = {
+type PatchGroupsSettingsHttpError = {
     data: Errors;
     headers: Headers;
     status: number;
@@ -338,15 +338,15 @@ interface GroupsAPI {
     filterGroups: typeof filterGroups;
     /**
      * Returns the active tenant's group settings.
-     * @throws GetGroupSettingsHttpError
+     * @throws GetGroupsSettingsHttpError
      */
-    getGroupSettings: typeof getGroupSettings;
+    getGroupsSettings: typeof getGroupsSettings;
     /**
      * Update group settings
      * @param body an object with the body content
-     * @throws PatchGroupSettingsHttpError
+     * @throws PatchGroupsSettingsHttpError
      */
-    patchGroupSettings: typeof patchGroupSettings;
+    patchGroupsSettings: typeof patchGroupsSettings;
     /**
      * Delete group by id
      * @param groupId The ID of the group to delete.
@@ -376,4 +376,4 @@ interface GroupsAPI {
  */
 declare const groupsExport: GroupsAPI;
 
-export { type AssignedRoles, type AssignedRolesRefIDs, type AssignedRolesRefNames, type CreateGroupHttpError, type CreateGroupHttpResponse, type DeleteGroupHttpError, type DeleteGroupHttpResponse, type Error, type Errors, type Filter, type FilterGroupsHttpError, type FilterGroupsHttpResponse, type GetGroupHttpError, type GetGroupHttpResponse, type GetGroupSettingsHttpError, type GetGroupSettingsHttpResponse, type GetGroupsHttpError, type GetGroupsHttpResponse, type Group, type GroupPatch, type GroupPatchSchema, type GroupPostSchema, type GroupSettings, type Groups, type GroupsAPI, type PatchGroupHttpError, type PatchGroupHttpResponse, type PatchGroupSettingsHttpError, type PatchGroupSettingsHttpResponse, type SettingsPatch, type SettingsPatchSchema, clearCache, createGroup, groupsExport as default, deleteGroup, filterGroups, getGroup, getGroupSettings, getGroups, patchGroup, patchGroupSettings };
+export { type AssignedRoles, type AssignedRolesRefIDs, type AssignedRolesRefNames, type CreateGroupHttpError, type CreateGroupHttpResponse, type DeleteGroupHttpError, type DeleteGroupHttpResponse, type Error, type Errors, type Filter, type FilterGroupsHttpError, type FilterGroupsHttpResponse, type GetGroupHttpError, type GetGroupHttpResponse, type GetGroupsHttpError, type GetGroupsHttpResponse, type GetGroupsSettingsHttpError, type GetGroupsSettingsHttpResponse, type Group, type GroupPatch, type GroupPatchSchema, type GroupPostSchema, type GroupSettings, type Groups, type GroupsAPI, type PatchGroupHttpError, type PatchGroupHttpResponse, type PatchGroupsSettingsHttpError, type PatchGroupsSettingsHttpResponse, type SettingsPatch, type SettingsPatchSchema, clearCache, createGroup, groupsExport as default, deleteGroup, filterGroups, getGroup, getGroups, getGroupsSettings, patchGroup, patchGroupsSettings };

@@ -172,15 +172,15 @@ type CreateApiKeyHttpError = {
 /**
  * Gets the API keys configuration for a given tenant ID.
  * @param tenantId The tenant ID of the API keys configuration to be retrieved.
- * @throws GetApiKeyConfigHttpError
+ * @throws GetApiKeysConfigHttpError
  */
-declare const getApiKeyConfig: (tenantId: string, options?: ApiCallOptions) => Promise<GetApiKeyConfigHttpResponse>;
-type GetApiKeyConfigHttpResponse = {
+declare const getApiKeysConfig: (tenantId: string, options?: ApiCallOptions) => Promise<GetApiKeysConfigHttpResponse>;
+type GetApiKeysConfigHttpResponse = {
     data: ApiKeysConfig;
     headers: Headers;
     status: number;
 };
-type GetApiKeyConfigHttpError = {
+type GetApiKeysConfigHttpError = {
     data: Errors;
     headers: Headers;
     status: number;
@@ -189,15 +189,15 @@ type GetApiKeyConfigHttpError = {
  * Updates the API keys configuration for a given tenant ID.
  * @param tenantId The tenant ID of the API keys configuration to be retrieved.
  * @param body an object with the body content
- * @throws PatchApiKeyConfigHttpError
+ * @throws PatchApiKeysConfigHttpError
  */
-declare const patchApiKeyConfig: (tenantId: string, body: ApiKeysConfigPatchSchema, options?: ApiCallOptions) => Promise<PatchApiKeyConfigHttpResponse>;
-type PatchApiKeyConfigHttpResponse = {
+declare const patchApiKeysConfig: (tenantId: string, body: ApiKeysConfigPatchSchema, options?: ApiCallOptions) => Promise<PatchApiKeysConfigHttpResponse>;
+type PatchApiKeysConfigHttpResponse = {
     data: void;
     headers: Headers;
     status: number;
 };
-type PatchApiKeyConfigHttpError = {
+type PatchApiKeysConfigHttpError = {
     data: Errors;
     headers: Headers;
     status: number;
@@ -271,16 +271,16 @@ interface ApiKeysAPI {
     /**
      * Gets the API keys configuration for a given tenant ID.
      * @param tenantId The tenant ID of the API keys configuration to be retrieved.
-     * @throws GetApiKeyConfigHttpError
+     * @throws GetApiKeysConfigHttpError
      */
-    getApiKeyConfig: typeof getApiKeyConfig;
+    getApiKeysConfig: typeof getApiKeysConfig;
     /**
      * Updates the API keys configuration for a given tenant ID.
      * @param tenantId The tenant ID of the API keys configuration to be retrieved.
      * @param body an object with the body content
-     * @throws PatchApiKeyConfigHttpError
+     * @throws PatchApiKeysConfigHttpError
      */
-    patchApiKeyConfig: typeof patchApiKeyConfig;
+    patchApiKeysConfig: typeof patchApiKeysConfig;
     /**
      * When the owner of the API key sends the request, the key will be removed. When a TenantAdmin sends the request, the key will be revoked.
      * @param id The ID of the API key resource to be retrieved.
@@ -310,4 +310,4 @@ interface ApiKeysAPI {
  */
 declare const apiKeysExport: ApiKeysAPI;
 
-export { type ApiKey, type ApiKeyBody, type ApiKeyConfigPatch, type ApiKeyPage, type ApiKeyPatch, type ApiKeyWithToken, type ApiKeysAPI, type ApiKeysConfig, type ApiKeysConfigPatchSchema, type ApiKeysPatchSchema, type CreateApiKeyHttpError, type CreateApiKeyHttpResponse, type DeleteApiKeyHttpError, type DeleteApiKeyHttpResponse, type Error, type Errors, type GetApiKeyConfigHttpError, type GetApiKeyConfigHttpResponse, type GetApiKeyHttpError, type GetApiKeyHttpResponse, type GetApiKeysHttpError, type GetApiKeysHttpResponse, type Link, type PatchApiKeyConfigHttpError, type PatchApiKeyConfigHttpResponse, type PatchApiKeyHttpError, type PatchApiKeyHttpResponse, clearCache, createApiKey, apiKeysExport as default, deleteApiKey, getApiKey, getApiKeyConfig, getApiKeys, patchApiKey, patchApiKeyConfig };
+export { type ApiKey, type ApiKeyBody, type ApiKeyConfigPatch, type ApiKeyPage, type ApiKeyPatch, type ApiKeyWithToken, type ApiKeysAPI, type ApiKeysConfig, type ApiKeysConfigPatchSchema, type ApiKeysPatchSchema, type CreateApiKeyHttpError, type CreateApiKeyHttpResponse, type DeleteApiKeyHttpError, type DeleteApiKeyHttpResponse, type Error, type Errors, type GetApiKeyHttpError, type GetApiKeyHttpResponse, type GetApiKeysConfigHttpError, type GetApiKeysConfigHttpResponse, type GetApiKeysHttpError, type GetApiKeysHttpResponse, type Link, type PatchApiKeyHttpError, type PatchApiKeyHttpResponse, type PatchApiKeysConfigHttpError, type PatchApiKeysConfigHttpResponse, clearCache, createApiKey, apiKeysExport as default, deleteApiKey, getApiKey, getApiKeys, getApiKeysConfig, patchApiKey, patchApiKeysConfig };

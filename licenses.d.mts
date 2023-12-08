@@ -214,6 +214,8 @@ declare const getLicenseAssignments: (query: {
     filter?: string;
     /** The preferred number of entries to return. */
     limit?: number;
+    /** Only return assignments which are 'orphans' in the current tenant. */
+    orphans?: boolean;
     /** The requested page. */
     page?: string;
     /** The field to sort on; can be prefixed with +/- for ascending/descending sort order. */
