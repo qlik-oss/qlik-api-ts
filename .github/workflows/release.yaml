@@ -17,14 +17,13 @@ jobs:
         with:
           node-version: '18'
           registry-url: 'https://registry.npmjs.org'
-      
-      # - name: Install dependencies
-      #   run: npm install
 
-      # - name: Build
-      #   run: npm run build # Replace with your build script if different
+      - name: Set NPM Token
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_CI_TOKEN }}" > .npmrc
 
-      - name: Publish to NPM
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
+      - name: Set version and publish
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/}
+          VERSION=${VERSION#v}
+          jq '.version = env.VERSION' package.json > temp.json && mv temp.json package.json
+          npm publish
