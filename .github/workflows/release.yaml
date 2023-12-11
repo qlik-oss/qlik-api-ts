@@ -29,7 +29,7 @@ jobs:
           VERSION=$(git describe --tags --abbrev=7 --match "v*")
           VERSION=${VERSION#v}
           echo "version is $VERSION"
-          jq '.version = env.VERSION' package.json > temp.json && mv temp.json package.json
+          jq --arg version "$VERSION" '.version = $version' package.json >temp.json && mv temp.json package.json
           cat package.json
           npm publish --dry-run
         env:
