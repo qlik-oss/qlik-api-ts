@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -24,7 +26,7 @@ jobs:
 
       - name: Set version and publish
         run: |
-          VERSION=${GITHUB_REF#refs/tags/}
+          VERSION=$(git describe --tags --abbrev=7 --match "v*")
           VERSION=${VERSION#v}
           echo "version is $VERSION"
           jq '.version = env.VERSION' package.json > temp.json && mv temp.json package.json
