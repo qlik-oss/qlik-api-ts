@@ -3,7 +3,7 @@
   "description": "Exposes functions for interacting with Qlik apis",
   "repository": {
     "type": "git",
-    "url": "https://github.com/qlik-oss/qlik-api-ts"
+    "url": "git+https://github.com/qlik-oss/qlik-api-ts.git"
   },
   "license": "ISC",
   "dependencies": {
