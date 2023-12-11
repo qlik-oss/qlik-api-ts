@@ -26,5 +26,9 @@ jobs:
         run: |
           VERSION=${GITHUB_REF#refs/tags/}
           VERSION=${VERSION#v}
+          echo "version is $VERSION"
           jq '.version = env.VERSION' package.json > temp.json && mv temp.json package.json
-          npm publish
+          cat package.json
+          npm publish --dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
