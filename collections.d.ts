@@ -1,6 +1,18 @@
 import { A as ApiCallOptions } from './global.types-hIvp-WdX.js';
 import './auth-types-nnUcWhuU.js';
 
+type CollectionByIdPatch = {
+    /** The operation to be performed. */
+    op: "replace";
+    /** Field of collection to be patched. */
+    path: "/name" | "/description" | "/type";
+    /** The value to be used within the operations.
+    // - name: The name of the collection. Must not be "".
+    // - description: The description of the collection. Empty string "" is allowed.
+    // - type: The type of the collection. Via this path the collection type can be toggled between "private" and "publicgoverned".
+    //  */
+    value: string;
+}[];
 type CollectionTypes = "private" | "public" | "publicgoverned";
 type CollectionsAddCollectionItemRequestBody = {
     /** The item's unique identifier. */
@@ -326,6 +338,23 @@ type GetCollectionHttpError = {
     status: number;
 };
 /**
+ * Updates the collection fields provided in the patch body.
+ * @param collectionId The collection's unique identifier.
+ * @param body an object with the body content
+ * @throws PatchCollectionHttpError
+ */
+declare const patchCollection: (collectionId: string, body: CollectionByIdPatch, options?: ApiCallOptions) => Promise<PatchCollectionHttpResponse>;
+type PatchCollectionHttpResponse = {
+    data: CollectionResultResponseBody;
+    headers: Headers;
+    status: number;
+};
+type PatchCollectionHttpError = {
+    data: ErrorResponseBody;
+    headers: Headers;
+    status: number;
+};
+/**
  * Updates a collection and returns the new collection. Omitted and unsupported fields are ignored. To unset a field, provide the field's zero value.
  *
  * @param collectionId The collection's unique identifier.
@@ -482,6 +511,13 @@ interface CollectionsAPI {
      */
     getCollection: typeof getCollection;
     /**
+     * Updates the collection fields provided in the patch body.
+     * @param collectionId The collection's unique identifier.
+     * @param body an object with the body content
+     * @throws PatchCollectionHttpError
+     */
+    patchCollection: typeof patchCollection;
+    /**
      * Updates a collection and returns the new collection. Omitted and unsupported fields are ignored. To unset a field, provide the field's zero value.
      *
      * @param collectionId The collection's unique identifier.
@@ -532,4 +568,4 @@ interface CollectionsAPI {
  */
 declare const collectionsExport: CollectionsAPI;
 
-export { type AddCollectionItemHttpError, type AddCollectionItemHttpResponse, type CollectionLinksResponseBody, type CollectionMetaResponseBody, type CollectionResultResponseBody, type CollectionTypes, type CollectionsAPI, type CollectionsAddCollectionItemRequestBody, type CollectionsCreateCollectionRequestBody, type CollectionsLinksResponseBody, type CollectionsListCollectionItemsResponseBody, type CollectionsListCollectionsResponseBody, type CollectionsUpdateCollectionRequestBody, type CreateCollectionHttpError, type CreateCollectionHttpResponse, type DeleteCollectionHttpError, type DeleteCollectionHttpResponse, type DeleteCollectionItemHttpError, type DeleteCollectionItemHttpResponse, type ErrorResponseBody, type GetCollectionHttpError, type GetCollectionHttpResponse, type GetCollectionItemHttpError, type GetCollectionItemHttpResponse, type GetCollectionItemsHttpError, type GetCollectionItemsHttpResponse, type GetCollectionsHttpError, type GetCollectionsHttpResponse, type GetFavoritesCollection302HttpError, type GetFavoritesCollection401HttpError, type GetFavoritesCollection404HttpError, type GetFavoritesCollection500HttpError, type GetFavoritesCollectionHttpError, type GetFavoritesCollectionHttpResponse, type ItemLinksResponseBody, type ItemMetaResponseBody, type ItemResourceTypeEnum, type ItemResultResponseBody, type ItemTagResponseBody, type ItemViewsResponseBody, type ItemViewsWeeksResponseBody, type ItemsLinksResponseBody, type ItemsResourceSizeResponseBody, type ItemsResultResponseBody, type Link, type Meta, type ServiceError, type UpdateCollectionHttpError, type UpdateCollectionHttpResponse, addCollectionItem, clearCache, createCollection, collectionsExport as default, deleteCollection, deleteCollectionItem, getCollection, getCollectionItem, getCollectionItems, getCollections, getFavoritesCollection, updateCollection };
+export { type AddCollectionItemHttpError, type AddCollectionItemHttpResponse, type CollectionByIdPatch, type CollectionLinksResponseBody, type CollectionMetaResponseBody, type CollectionResultResponseBody, type CollectionTypes, type CollectionsAPI, type CollectionsAddCollectionItemRequestBody, type CollectionsCreateCollectionRequestBody, type CollectionsLinksResponseBody, type CollectionsListCollectionItemsResponseBody, type CollectionsListCollectionsResponseBody, type CollectionsUpdateCollectionRequestBody, type CreateCollectionHttpError, type CreateCollectionHttpResponse, type DeleteCollectionHttpError, type DeleteCollectionHttpResponse, type DeleteCollectionItemHttpError, type DeleteCollectionItemHttpResponse, type ErrorResponseBody, type GetCollectionHttpError, type GetCollectionHttpResponse, type GetCollectionItemHttpError, type GetCollectionItemHttpResponse, type GetCollectionItemsHttpError, type GetCollectionItemsHttpResponse, type GetCollectionsHttpError, type GetCollectionsHttpResponse, type GetFavoritesCollection302HttpError, type GetFavoritesCollection401HttpError, type GetFavoritesCollection404HttpError, type GetFavoritesCollection500HttpError, type GetFavoritesCollectionHttpError, type GetFavoritesCollectionHttpResponse, type ItemLinksResponseBody, type ItemMetaResponseBody, type ItemResourceTypeEnum, type ItemResultResponseBody, type ItemTagResponseBody, type ItemViewsResponseBody, type ItemViewsWeeksResponseBody, type ItemsLinksResponseBody, type ItemsResourceSizeResponseBody, type ItemsResultResponseBody, type Link, type Meta, type PatchCollectionHttpError, type PatchCollectionHttpResponse, type ServiceError, type UpdateCollectionHttpError, type UpdateCollectionHttpResponse, addCollectionItem, clearCache, createCollection, collectionsExport as default, deleteCollection, deleteCollectionItem, getCollection, getCollectionItem, getCollectionItems, getCollections, getFavoritesCollection, patchCollection, updateCollection };

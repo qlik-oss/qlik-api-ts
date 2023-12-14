@@ -1,40 +1,40 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunk6JERR27Kjs = require('./chunk-6JERR27K.js');
-require('./chunk-H7SAZYEE.js');
+var _chunkWA4O4PMUjs = require('./chunk-WA4O4PMU.js');
+require('./chunk-L4SFSITJ.js');
 
 // src/public/rest/web-notifications.ts
-var getNotifications = async (query, options) => _chunk6JERR27Kjs.invokeFetch.call(void 0, "web-notifications", {
+var getNotifications = async (query, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "web-notifications", {
   method: "get",
   pathTemplate: "/api/v1/web-notifications",
   query,
   options
 });
-var deleteNotifications = async (options) => _chunk6JERR27Kjs.invokeFetch.call(void 0, "web-notifications", {
+var deleteNotifications = async (options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "web-notifications", {
   method: "delete",
   pathTemplate: "/api/v1/web-notifications/all",
   options
 });
-var patchNotifications = async (body, options) => _chunk6JERR27Kjs.invokeFetch.call(void 0, "web-notifications", {
+var patchNotifications = async (body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "web-notifications", {
   method: "patch",
   pathTemplate: "/api/v1/web-notifications/all",
   body,
   options
 });
-var deleteNotification = async (notificationId, options) => _chunk6JERR27Kjs.invokeFetch.call(void 0, "web-notifications", {
+var deleteNotification = async (notificationId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "web-notifications", {
   method: "delete",
   pathTemplate: "/api/v1/web-notifications/{notificationId}",
   pathVariables: { notificationId },
   options
 });
-var getNotification = async (notificationId, options) => _chunk6JERR27Kjs.invokeFetch.call(void 0, "web-notifications", {
+var getNotification = async (notificationId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "web-notifications", {
   method: "get",
   pathTemplate: "/api/v1/web-notifications/{notificationId}",
   pathVariables: { notificationId },
   options
 });
-var patchNotification = async (notificationId, body, options) => _chunk6JERR27Kjs.invokeFetch.call(void 0, "web-notifications", {
+var patchNotification = async (notificationId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "web-notifications", {
   method: "patch",
   pathTemplate: "/api/v1/web-notifications/{notificationId}",
   pathVariables: { notificationId },
@@ -42,7 +42,7 @@ var patchNotification = async (notificationId, body, options) => _chunk6JERR27Kj
   options
 });
 function clearCache() {
-  return _chunk6JERR27Kjs.clearApiCache.call(void 0, "web-notifications");
+  return _chunkWA4O4PMUjs.clearApiCache.call(void 0, "web-notifications");
 }
 var webNotificationsExport = {
   getNotifications,

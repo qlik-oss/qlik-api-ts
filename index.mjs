@@ -1,14 +1,14 @@
 import {
   auth_default
-} from "./chunk-KMMWJZHM.mjs";
+} from "./chunk-TA4YALFK.mjs";
 import {
   qix_default
-} from "./chunk-E42WUFCK.mjs";
+} from "./chunk-WP76WGBE.mjs";
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-W4J34XGA.mjs";
-import "./chunk-7REWEWCX.mjs";
+} from "./chunk-MP2QZCTY.mjs";
+import "./chunk-2OXQN2IV.mjs";
 
 // src/public/public-runtime-api-generator/public-runtime-api-generator.ts
 var methodAbbreviations = {
@@ -276,7 +276,7 @@ var collections = apiDefToApi("collections", {
         "": ["getCollections:GQ:", "createCollection:PB:"],
         favorites: ["getFavoritesCollection:G:"],
         "{collectionId}": {
-          "": ["deleteCollection:D:", "getCollection:G:", "updateCollection:UB:"],
+          "": ["deleteCollection:D:", "getCollection:G:", "patchCollection:AB:", "updateCollection:UB:"],
           items: {
             "": ["getCollectionItems:GQ:", "addCollectionItem:PB:"],
             "{itemId}": ["deleteCollectionItem:D:", "getCollectionItem:G:"]
