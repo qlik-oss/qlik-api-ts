@@ -105,6 +105,7 @@ type WebIntegrations = {
 };
 /**
  * Retrieves web integrations matching the query.
+ *
  * @param query an object with query parameters
  * @throws GetWebIntegrationsHttpError
  */
@@ -134,6 +135,7 @@ type GetWebIntegrationsHttpError = {
 };
 /**
  * Creates a web integration.
+ *
  * @param body an object with the body content
  * @throws CreateWebIntegrationHttpError
  */
@@ -150,6 +152,7 @@ type CreateWebIntegrationHttpError = {
 };
 /**
  * Deletes a single web integration by ID.
+ *
  * @param id The ID of the web integration to delete.
  * @throws DeleteWebIntegrationHttpError
  */
@@ -166,6 +169,7 @@ type DeleteWebIntegrationHttpError = {
 };
 /**
  * Retrieves a single web integration by ID.
+ *
  * @param id The ID of the web integration to retrieve.
  * @throws GetWebIntegrationHttpError
  */
@@ -182,6 +186,7 @@ type GetWebIntegrationHttpError = {
 };
 /**
  * Updates a single web integration by ID.
+ *
  * @param id The ID of the web integration to update.
  * @param body an object with the body content
  * @throws PatchWebIntegrationHttpError
@@ -204,30 +209,35 @@ declare function clearCache(): void;
 interface WebIntegrationsAPI {
     /**
      * Retrieves web integrations matching the query.
+     *
      * @param query an object with query parameters
      * @throws GetWebIntegrationsHttpError
      */
     getWebIntegrations: typeof getWebIntegrations;
     /**
      * Creates a web integration.
+     *
      * @param body an object with the body content
      * @throws CreateWebIntegrationHttpError
      */
     createWebIntegration: typeof createWebIntegration;
     /**
      * Deletes a single web integration by ID.
+     *
      * @param id The ID of the web integration to delete.
      * @throws DeleteWebIntegrationHttpError
      */
     deleteWebIntegration: typeof deleteWebIntegration;
     /**
      * Retrieves a single web integration by ID.
+     *
      * @param id The ID of the web integration to retrieve.
      * @throws GetWebIntegrationHttpError
      */
     getWebIntegration: typeof getWebIntegration;
     /**
      * Updates a single web integration by ID.
+     *
      * @param id The ID of the web integration to update.
      * @param body an object with the body content
      * @throws PatchWebIntegrationHttpError

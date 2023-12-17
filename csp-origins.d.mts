@@ -69,6 +69,7 @@ type Link = {
 };
 /**
  * Retrieves all CSP entries for a tenant
+ *
  * @param query an object with query parameters
  * @throws GetCSPEntriesHttpError
  */
@@ -126,6 +127,7 @@ type GetCSPEntriesHttpError = {
 };
 /**
  * Creates a new CSP entry
+ *
  * @param body an object with the body content
  * @throws CreateCSPEntryHttpError
  */
@@ -142,6 +144,7 @@ type CreateCSPEntryHttpError = {
 };
 /**
  * Retrieves the CSP header for a tenant
+ *
  * @throws GetCSPHeaderHttpError
  */
 declare const getCSPHeader: (options?: ApiCallOptions) => Promise<GetCSPHeaderHttpResponse>;
@@ -157,6 +160,7 @@ type GetCSPHeaderHttpError = {
 };
 /**
  * Deletes a specific CSP entry
+ *
  * @param id The CSP entry's unique identifier.
  * @throws DeleteCSPEntryHttpError
  */
@@ -173,6 +177,7 @@ type DeleteCSPEntryHttpError = {
 };
 /**
  * Returns details for a specific CSP entry
+ *
  * @param id The CSP entry's unique identifier.
  * @throws GetCSPEntryHttpError
  */
@@ -189,6 +194,7 @@ type GetCSPEntryHttpError = {
 };
 /**
  * Updates a CSP entry
+ *
  * @param id The CSP entry's unique identifier.
  * @param body an object with the body content
  * @throws UpdateCSPEntryHttpError
@@ -211,35 +217,41 @@ declare function clearCache(): void;
 interface CspOriginsAPI {
     /**
      * Retrieves all CSP entries for a tenant
+     *
      * @param query an object with query parameters
      * @throws GetCSPEntriesHttpError
      */
     getCSPEntries: typeof getCSPEntries;
     /**
      * Creates a new CSP entry
+     *
      * @param body an object with the body content
      * @throws CreateCSPEntryHttpError
      */
     createCSPEntry: typeof createCSPEntry;
     /**
      * Retrieves the CSP header for a tenant
+     *
      * @throws GetCSPHeaderHttpError
      */
     getCSPHeader: typeof getCSPHeader;
     /**
      * Deletes a specific CSP entry
+     *
      * @param id The CSP entry's unique identifier.
      * @throws DeleteCSPEntryHttpError
      */
     deleteCSPEntry: typeof deleteCSPEntry;
     /**
      * Returns details for a specific CSP entry
+     *
      * @param id The CSP entry's unique identifier.
      * @throws GetCSPEntryHttpError
      */
     getCSPEntry: typeof getCSPEntry;
     /**
      * Updates a CSP entry
+     *
      * @param id The CSP entry's unique identifier.
      * @param body an object with the body content
      * @throws UpdateCSPEntryHttpError

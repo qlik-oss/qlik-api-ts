@@ -103,6 +103,7 @@ type TenantPatchSchema = {
 }[];
 /**
  * Creates a Tenant
+ *
  * @param body an object with the body content
  * @throws CreateTenantHttpError
  */
@@ -119,6 +120,7 @@ type CreateTenantHttpError = {
 };
 /**
  * Redirects to current tenant.
+ *
  * @throws GetMyTenantHttpError
  */
 declare const getMyTenant: (options?: ApiCallOptions) => Promise<GetMyTenantHttpResponse>;
@@ -134,6 +136,7 @@ type GetMyTenantHttpError = {
 };
 /**
  * Retrieve a single tenant by id.
+ *
  * @param tenantId The id of the tenant to retrieve
  * @throws GetTenantHttpError
  */
@@ -150,6 +153,7 @@ type GetTenantHttpError = {
 };
 /**
  * Update a tenant by id.
+ *
  * @param tenantId The id of the tenant to update
  * @param body an object with the body content
  * @throws PatchTenantHttpError
@@ -188,6 +192,7 @@ type PatchTenantdefaultHttpError = {
 type PatchTenantHttpError = PatchTenant400HttpError | PatchTenant403HttpError | PatchTenant404HttpError | PatchTenant429HttpError | PatchTenantdefaultHttpError;
 /**
  * Deactivates a tenant.
+ *
  * @param tenantId The id of the tenant to deactivate
  * @param body an object with the body content
  * @throws DeactivateTenantHttpError
@@ -205,6 +210,7 @@ type DeactivateTenantHttpError = {
 };
 /**
  * Reactivates a disabled tenant.
+ *
  * @param tenantId The id of the tenant to reactivate
  * @param body an object with the body content
  * @throws ReactivateTenantHttpError
@@ -227,23 +233,27 @@ declare function clearCache(): void;
 interface TenantsAPI {
     /**
      * Creates a Tenant
+     *
      * @param body an object with the body content
      * @throws CreateTenantHttpError
      */
     createTenant: typeof createTenant;
     /**
      * Redirects to current tenant.
+     *
      * @throws GetMyTenantHttpError
      */
     getMyTenant: typeof getMyTenant;
     /**
      * Retrieve a single tenant by id.
+     *
      * @param tenantId The id of the tenant to retrieve
      * @throws GetTenantHttpError
      */
     getTenant: typeof getTenant;
     /**
      * Update a tenant by id.
+     *
      * @param tenantId The id of the tenant to update
      * @param body an object with the body content
      * @throws PatchTenantHttpError
@@ -251,6 +261,7 @@ interface TenantsAPI {
     patchTenant: typeof patchTenant;
     /**
      * Deactivates a tenant.
+     *
      * @param tenantId The id of the tenant to deactivate
      * @param body an object with the body content
      * @throws DeactivateTenantHttpError
@@ -258,6 +269,7 @@ interface TenantsAPI {
     deactivateTenant: typeof deactivateTenant;
     /**
      * Reactivates a disabled tenant.
+     *
      * @param tenantId The id of the tenant to reactivate
      * @param body an object with the body content
      * @throws ReactivateTenantHttpError

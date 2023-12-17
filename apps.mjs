@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-W4J34XGA.mjs";
-import "./chunk-7REWEWCX.mjs";
+} from "./chunk-MP2QZCTY.mjs";
+import "./chunk-2OXQN2IV.mjs";
 
 // src/public/rest/apps.ts
 var createApp = async (body, options) => invokeFetch("apps", {
@@ -192,6 +192,39 @@ var getAppReloadMetadata = async (appId, reloadId, query, options) => invokeFetc
   query,
   options
 });
+var getAppReportFilters = async (appId, query, options) => invokeFetch("apps", {
+  method: "get",
+  pathTemplate: "/api/v1/apps/{appId}/report-filters",
+  pathVariables: { appId },
+  query,
+  options
+});
+var createAppReportFilter = async (appId, body, options) => invokeFetch("apps", {
+  method: "post",
+  pathTemplate: "/api/v1/apps/{appId}/report-filters",
+  pathVariables: { appId },
+  body,
+  options
+});
+var countAppReportFilters = async (appId, query, options) => invokeFetch("apps", {
+  method: "get",
+  pathTemplate: "/api/v1/apps/{appId}/report-filters/actions/count",
+  pathVariables: { appId },
+  query,
+  options
+});
+var deleteAppReportFilter = async (appId, id, options) => invokeFetch("apps", {
+  method: "delete",
+  pathTemplate: "/api/v1/apps/{appId}/report-filters/{id}",
+  pathVariables: { appId, id },
+  options
+});
+var getAppReportFilter = async (appId, id, options) => invokeFetch("apps", {
+  method: "get",
+  pathTemplate: "/api/v1/apps/{appId}/report-filters/{id}",
+  pathVariables: { appId, id },
+  options
+});
 var getAppScriptHistory = async (appId, query, options) => invokeFetch("apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{appId}/scripts",
@@ -284,6 +317,11 @@ var appsExport = {
   getAppReloadLogs,
   getAppReloadLog,
   getAppReloadMetadata,
+  getAppReportFilters,
+  createAppReportFilter,
+  countAppReportFilters,
+  deleteAppReportFilter,
+  getAppReportFilter,
   getAppScriptHistory,
   updateAppScript,
   deleteAppScript,
@@ -299,10 +337,13 @@ var apps_default = appsExport;
 export {
   clearCache,
   copyApp,
+  countAppReportFilters,
   createApp,
+  createAppReportFilter,
   apps_default as default,
   deleteApp,
   deleteAppMedia,
+  deleteAppReportFilter,
   deleteAppScript,
   exportApp,
   getAppDataLineage,
@@ -321,6 +362,8 @@ export {
   getAppReloadLog,
   getAppReloadLogs,
   getAppReloadMetadata,
+  getAppReportFilter,
+  getAppReportFilters,
   getAppScript,
   getAppScriptHistory,
   getAppThumbnail,

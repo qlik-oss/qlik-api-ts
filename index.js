@@ -1,14 +1,14 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
-var _chunkQN23TPIEjs = require('./chunk-QN23TPIE.js');
+var _chunkNO4RCUJYjs = require('./chunk-NO4RCUJY.js');
 
 
-var _chunkM7F4JFOBjs = require('./chunk-M7F4JFOB.js');
+var _chunkUT6IPB4Ajs = require('./chunk-UT6IPB4A.js');
 
 
 
-var _chunk6JERR27Kjs = require('./chunk-6JERR27K.js');
-require('./chunk-H7SAZYEE.js');
+var _chunkWA4O4PMUjs = require('./chunk-WA4O4PMU.js');
+require('./chunk-L4SFSITJ.js');
 
 // src/public/public-runtime-api-generator/public-runtime-api-generator.ts
 var methodAbbreviations = {
@@ -69,7 +69,7 @@ function apiDefToApi(namespace, def, newFormat = false) {
     return runtimeApiCache[namespace];
   }
   const api2 = {
-    clearCache: () => _chunk6JERR27Kjs.clearApiCache.call(void 0, namespace)
+    clearCache: () => _chunkWA4O4PMUjs.clearApiCache.call(void 0, namespace)
   };
   const initFunc = () => {
     traverse(namespace, "", def, api2);
@@ -130,7 +130,7 @@ function createClassicApiFn(namespace, operationName, pathTemplate, method, argN
     if (useInstead) {
       console.warn(`${namespace}.${operationName} is deprecated, use ${useInstead} instead`);
     }
-    return _chunk6JERR27Kjs.invokeFetch.call(void 0, namespace, {
+    return _chunkWA4O4PMUjs.invokeFetch.call(void 0, namespace, {
       method,
       pathTemplate,
       pathVariables,
@@ -195,6 +195,11 @@ var apps = apiDefToApi("apps", {
             logs: { "": ["getAppReloadLogs:G:"], "{reloadId}": ["getAppReloadLog:G:"] },
             metadata: { "{reloadId}": ["getAppReloadMetadata:GQ:"] }
           },
+          "report-filters": {
+            "": ["getAppReportFilters:GQ:", "createAppReportFilter:PB:"],
+            actions: { count: ["countAppReportFilters:GQ:"] },
+            "{id}": ["deleteAppReportFilter:D:", "getAppReportFilter:G:"]
+          },
           scripts: {
             "": ["getAppScriptHistory:GQ:", "updateAppScript:PB:"],
             "{version}": ["deleteAppScript:D:", "getAppScript:G:", "patchAppScript:AB:"]
@@ -220,7 +225,7 @@ var audits = apiDefToApi("audits", {
     }
   }
 });
-var auth = _chunkQN23TPIEjs.auth_default;
+var auth = _chunkNO4RCUJYjs.auth_default;
 var automations = apiDefToApi("automations", {
   api: {
     v1: {
@@ -276,7 +281,7 @@ var collections = apiDefToApi("collections", {
         "": ["getCollections:GQ:", "createCollection:PB:"],
         favorites: ["getFavoritesCollection:G:"],
         "{collectionId}": {
-          "": ["deleteCollection:D:", "getCollection:G:", "updateCollection:UB:"],
+          "": ["deleteCollection:D:", "getCollection:G:", "patchCollection:AB:", "updateCollection:UB:"],
           items: {
             "": ["getCollectionItems:GQ:", "addCollectionItem:PB:"],
             "{itemId}": ["deleteCollectionItem:D:", "getCollectionItem:G:"]
@@ -462,7 +467,7 @@ var licenses = apiDefToApi("licenses", {
     }
   }
 });
-var qix = _chunkM7F4JFOBjs.qix_default;
+var qix = _chunkUT6IPB4Ajs.qix_default;
 var quotas = apiDefToApi("quotas", {
   api: { v1: { quotas: { "": ["getQuotas:GQ:"], "{id}": ["getQuota:GQ:"] } } }
 });

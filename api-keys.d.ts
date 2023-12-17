@@ -122,6 +122,7 @@ type ApiKeyPage = {
 };
 /**
  * Lists API keys for a given tenant ID.
+ *
  * @param query an object with query parameters
  * @throws GetApiKeysHttpError
  */
@@ -155,6 +156,7 @@ type GetApiKeysHttpError = {
 };
 /**
  * Creates an API key resource.
+ *
  * @param body an object with the body content
  * @throws CreateApiKeyHttpError
  */
@@ -171,6 +173,7 @@ type CreateApiKeyHttpError = {
 };
 /**
  * Gets the API keys configuration for a given tenant ID.
+ *
  * @param tenantId The tenant ID of the API keys configuration to be retrieved.
  * @throws GetApiKeysConfigHttpError
  */
@@ -187,6 +190,7 @@ type GetApiKeysConfigHttpError = {
 };
 /**
  * Updates the API keys configuration for a given tenant ID.
+ *
  * @param tenantId The tenant ID of the API keys configuration to be retrieved.
  * @param body an object with the body content
  * @throws PatchApiKeysConfigHttpError
@@ -204,6 +208,7 @@ type PatchApiKeysConfigHttpError = {
 };
 /**
  * When the owner of the API key sends the request, the key will be removed. When a TenantAdmin sends the request, the key will be revoked.
+ *
  * @param id The ID of the API key resource to be retrieved.
  * @throws DeleteApiKeyHttpError
  */
@@ -220,6 +225,7 @@ type DeleteApiKeyHttpError = {
 };
 /**
  * Gets the API key for a given ID.
+ *
  * @param id The ID of the API key resource to be retrieved.
  * @throws GetApiKeyHttpError
  */
@@ -236,6 +242,7 @@ type GetApiKeyHttpError = {
 };
 /**
  * Updates an API key for a given ID.
+ *
  * @param id The ID of the API key resource to be updated.
  * @param body an object with the body content
  * @throws PatchApiKeyHttpError
@@ -258,24 +265,28 @@ declare function clearCache(): void;
 interface ApiKeysAPI {
     /**
      * Lists API keys for a given tenant ID.
+     *
      * @param query an object with query parameters
      * @throws GetApiKeysHttpError
      */
     getApiKeys: typeof getApiKeys;
     /**
      * Creates an API key resource.
+     *
      * @param body an object with the body content
      * @throws CreateApiKeyHttpError
      */
     createApiKey: typeof createApiKey;
     /**
      * Gets the API keys configuration for a given tenant ID.
+     *
      * @param tenantId The tenant ID of the API keys configuration to be retrieved.
      * @throws GetApiKeysConfigHttpError
      */
     getApiKeysConfig: typeof getApiKeysConfig;
     /**
      * Updates the API keys configuration for a given tenant ID.
+     *
      * @param tenantId The tenant ID of the API keys configuration to be retrieved.
      * @param body an object with the body content
      * @throws PatchApiKeysConfigHttpError
@@ -283,18 +294,21 @@ interface ApiKeysAPI {
     patchApiKeysConfig: typeof patchApiKeysConfig;
     /**
      * When the owner of the API key sends the request, the key will be removed. When a TenantAdmin sends the request, the key will be revoked.
+     *
      * @param id The ID of the API key resource to be retrieved.
      * @throws DeleteApiKeyHttpError
      */
     deleteApiKey: typeof deleteApiKey;
     /**
      * Gets the API key for a given ID.
+     *
      * @param id The ID of the API key resource to be retrieved.
      * @throws GetApiKeyHttpError
      */
     getApiKey: typeof getApiKey;
     /**
      * Updates an API key for a given ID.
+     *
      * @param id The ID of the API key resource to be updated.
      * @param body an object with the body content
      * @throws PatchApiKeyHttpError

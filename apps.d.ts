@@ -89,10 +89,10 @@ type AppAttributes = {
     /** The space ID of the application */
     spaceId?: string;
     /** Indicates whether the app is used for Analytics or DataPreparation
-    //
-    // One of:
-    // * ANALYTICS
-    // * DATA_PREPARATION */
+     *
+     * One of:
+     * * ANALYTICS
+     * * DATA_PREPARATION */
     usage?: "ANALYTICS" | "DATA_PREPARATION";
 };
 type AppContentList = {
@@ -142,9 +142,9 @@ type DataModelMetadata = {
     /** Profiling data of the tables in the app. */
     tables_profiling_data?: TableProfilingData[];
     /**
-    // One of:
-    // * ANALYTICS
-    // * DATA_PREPARATION */
+     * One of:
+     * * ANALYTICS
+     * * DATA_PREPARATION */
     usage?: "ANALYTICS" | "DATA_PREPARATION";
 };
 type Error = {
@@ -176,37 +176,37 @@ type EvaluatorError = {
 };
 type FieldAttributes = {
     /** Defines the decimal separator.
-    // Example: **.** */
+     * Example: **.** */
     Dec?: string;
     /** Defines the format pattern that applies to _qText_ .
-    // Is used in connection to the type of the field (parameter **qType** ).
-    // For more information, see _Formatting mechanism_.
-    // Example: _YYYY-MM-DD_ for a date. */
+     * Is used in connection to the type of the field (parameter **qType** ).
+     * For more information, see _Formatting mechanism_.
+     * Example: _YYYY-MM-DD_ for a date. */
     Fmt?: string;
     /** Defines the thousand separator (if any).
-    // Is used if **qUseThou** is set to 1.
-    // Example: **,** */
+     * Is used if **qUseThou** is set to 1.
+     * Example: **,** */
     Thou?: string;
     /** Type of the field.
-    // Default is U.
-    //
-    // One of:
-    // * U or UNKNOWN
-    // * A or ASCII
-    // * I or INTEGER
-    // * R or REAL
-    // * F or FIX
-    // * M or MONEY
-    // * D or DATE
-    // * T or TIME
-    // * TS or TIMESTAMP
-    // * IV or INTERVAL */
+     * Default is U.
+     *
+     * One of:
+     * * U or UNKNOWN
+     * * A or ASCII
+     * * I or INTEGER
+     * * R or REAL
+     * * F or FIX
+     * * M or MONEY
+     * * D or DATE
+     * * T or TIME
+     * * TS or TIMESTAMP
+     * * IV or INTERVAL */
     Type?: "UNKNOWN" | "ASCII" | "INTEGER" | "REAL" | "FIX" | "MONEY" | "DATE" | "TIME" | "TIMESTAMP" | "INTERVAL";
     /** Defines whether or not a thousands separator must be used.
-    // Default is 0. */
+     * Default is 0. */
     UseThou?: number;
     /** Number of decimals.
-    // Default is 10. */
+     * Default is 10. */
     nDec?: number;
 };
 type FieldInTableProfilingData = {
@@ -252,42 +252,42 @@ type FieldInTableProfilingData = {
     /** Number of null values */
     NullValues?: number;
     /** Sets the formatting of a field.
-    // The properties of _qFieldAttributes_ and the formatting mechanism are described below.
-    //
-    // ### Formatting mechanism
-    // The formatting mechanism depends on the type set in _qType,_ as shown below:
-    // <div class=note>In case of inconsistencies between the type and the format pattern, the format pattern takes precedence over the type.</div>
-    //
-    // ### Type is DATE, TIME, TIMESTAMP or INTERVAL
-    // The following applies:
-    // * If a format pattern is defined in _qFmt_ , the formatting is as defined in _qFmt_ .
-    // * If _qFmt_ is empty, the formatting is defined by the number interpretation variables included at the top of the script ( _TimeFormat_ , _DateFormat_ , _TimeStampFormat_ ).
-    // * The properties _qDec_ , _qThou_ , _qnDec_ , _qUseThou_ are not used.
-    //
-    // ### Type is INTEGER
-    // The following applies:
-    // * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the formatting mechanism uses the number interpretation variables included at the top of the script ( _DecimalSep_ and _ThousandSep_ ).
-    // * If no format pattern is defined in _qFmt_ , no formatting is applied. The properties _qDec_ , _qThou_ , _qnDec_ , _qUseThou_ and the number interpretation variables defined in the script are not used .
-    //
-    // ### Type is REAL
-    // The following applies:
-    // * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the engine uses the number interpretation variables included at the top of the script ( _DecimalSep_ and _ThousandSep_ ).
-    // * If no format pattern is defined in _qFmt_ , and if the value is almost an integer value (for example, 14,000012), the value is formatted as an integer. The properties _qDec_ , _qThou_ , _qnDec_ , _qUseThou_ are not used.
-    // * If no format pattern is defined in _qFmt_ , and if _qnDec_ is defined and not 0, the property _qDec_ is used. If _qDec_ is not defined, the variable _DecimalSep_ defined at the top of the script is used.
-    // * If no format pattern is defined in _qFmt_ , and if _qnDec_ is 0, the number of decimals is 14 and the property _qDec_ is used. If _qDec_ is not defined, the variable _DecimalSep_ defined at the top of the script is used.
-    //
-    // ### Type is FIX
-    // The following applies:
-    // * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the engine uses the number interpretation variables included at the top of the script ( _DecimalSep_ and _ThousandSep_ ).
-    // * If no format pattern is defined in _qFmt_ , the properties _qDec_ and _qnDec_ are used. If _qDec_ is not defined, the variable _DecimalSep_ defined at the top of the script is used.
-    //
-    // ### Type is MONEY
-    // The following applies:
-    // * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the engine uses the number interpretation variables included at the top of any script ( _MoneyDecimalSep_ and _MoneyThousandSep_ ).
-    // * If no format pattern is defined in _qFmt_ , the engine uses the number interpretation variables included at the top of the script ( _MoneyDecimalSep_ and _MoneyThousandSep_ ).
-    //
-    // ### Type is ASCII
-    // No formatting, _qFmt_ is ignored. */
+     * The properties of _qFieldAttributes_ and the formatting mechanism are described below.
+     *
+     * ### Formatting mechanism
+     * The formatting mechanism depends on the type set in _qType,_ as shown below:
+     * <div class=note>In case of inconsistencies between the type and the format pattern, the format pattern takes precedence over the type.</div>
+     *
+     * ### Type is DATE, TIME, TIMESTAMP or INTERVAL
+     * The following applies:
+     * * If a format pattern is defined in _qFmt_ , the formatting is as defined in _qFmt_ .
+     * * If _qFmt_ is empty, the formatting is defined by the number interpretation variables included at the top of the script ( _TimeFormat_ , _DateFormat_ , _TimeStampFormat_ ).
+     * * The properties _qDec_ , _qThou_ , _qnDec_ , _qUseThou_ are not used.
+     *
+     * ### Type is INTEGER
+     * The following applies:
+     * * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the formatting mechanism uses the number interpretation variables included at the top of the script ( _DecimalSep_ and _ThousandSep_ ).
+     * * If no format pattern is defined in _qFmt_ , no formatting is applied. The properties _qDec_ , _qThou_ , _qnDec_ , _qUseThou_ and the number interpretation variables defined in the script are not used .
+     *
+     * ### Type is REAL
+     * The following applies:
+     * * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the engine uses the number interpretation variables included at the top of the script ( _DecimalSep_ and _ThousandSep_ ).
+     * * If no format pattern is defined in _qFmt_ , and if the value is almost an integer value (for example, 14,000012), the value is formatted as an integer. The properties _qDec_ , _qThou_ , _qnDec_ , _qUseThou_ are not used.
+     * * If no format pattern is defined in _qFmt_ , and if _qnDec_ is defined and not 0, the property _qDec_ is used. If _qDec_ is not defined, the variable _DecimalSep_ defined at the top of the script is used.
+     * * If no format pattern is defined in _qFmt_ , and if _qnDec_ is 0, the number of decimals is 14 and the property _qDec_ is used. If _qDec_ is not defined, the variable _DecimalSep_ defined at the top of the script is used.
+     *
+     * ### Type is FIX
+     * The following applies:
+     * * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the engine uses the number interpretation variables included at the top of the script ( _DecimalSep_ and _ThousandSep_ ).
+     * * If no format pattern is defined in _qFmt_ , the properties _qDec_ and _qnDec_ are used. If _qDec_ is not defined, the variable _DecimalSep_ defined at the top of the script is used.
+     *
+     * ### Type is MONEY
+     * The following applies:
+     * * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the engine uses the number interpretation variables included at the top of any script ( _MoneyDecimalSep_ and _MoneyThousandSep_ ).
+     * * If no format pattern is defined in _qFmt_ , the engine uses the number interpretation variables included at the top of the script ( _MoneyDecimalSep_ and _MoneyThousandSep_ ).
+     *
+     * ### Type is ASCII
+     * No formatting, _qFmt_ is ignored. */
     NumberFormat?: FieldAttributes;
     /** Number of numeric values */
     NumericValues?: number;
@@ -310,8 +310,8 @@ type FieldInTableProfilingData = {
 };
 type FieldMetadata = {
     /** If set to true, the field has one and only one selection (not 0 and not more than 1).
-    // If this property is set to true, the field cannot be cleared anymore and no more selections can be performed in that field.
-    // The default value is false. */
+     * If this property is set to true, the field cannot be cleared anymore and no more selections can be performed in that field.
+     * The default value is false. */
     always_one_selected?: boolean;
     /** Static RAM memory used in bytes. */
     byte_size?: number;
@@ -320,31 +320,31 @@ type FieldMetadata = {
     /** Field comment. */
     comment?: string;
     /** If set to true, only distinct field values are shown.
-    // The default value is false. */
+     * The default value is false. */
     distinct_only?: boolean;
     /** Hash of the data in the field. If the data in a reload is the same, the hash will be consistent. */
     hash?: string;
     /** If set to true, the field is hidden.
-    // The default value is false. */
+     * The default value is false. */
     is_hidden?: boolean;
     /** If set to true, the field is locked.
-    // The default value is false. */
+     * The default value is false. */
     is_locked?: boolean;
     /** Is set to true if the value is a numeric.
-    // The default value is false. */
+     * The default value is false. */
     is_numeric?: boolean;
     /** If set to true, the field is semantic.
-    // The default value is false. */
+     * The default value is false. */
     is_semantic?: boolean;
     /** If set to true, the field is a system field.
-    // The default value is false. */
+     * The default value is false. */
     is_system?: boolean;
     /** Name of the field. */
     name?: string;
     /** List of table names. */
     src_tables?: string[];
     /** Gives information on a field. For example, it can return the type of the field.
-    // Examples: key, text, ASCII. */
+     * Examples: key, text, ASCII. */
     tags?: string[];
     /** Total number of field values. */
     total_count?: number;
@@ -354,6 +354,112 @@ type FieldOverride = {
     defaultAggregation?: string;
 };
 type FileData = string;
+type Filter = {
+    readonly createdAt?: string;
+    /** The filter description. */
+    description?: string;
+    filterType?: FilterType;
+    filterV1_0?: FilterV10;
+    filterVersion?: "filter-1.0";
+    /** The filter ID (bookmarkId). */
+    readonly id?: string;
+    /** The filter name. */
+    name?: string;
+    /** The user that owns the filter, if missing the same as the request user. */
+    ownerId?: string;
+    readonly updatedAt?: string;
+};
+type FilterError = {
+    /** The unique code for the error
+     *
+     * - "REP-400000" Bad request. The server could not understand the request due to invalid syntax.
+     * - "REP-400008" Selections error.
+     * - "REP-400015" Bad request in enigma request. The patch value has invalid JSON format.
+     * - "REP-401000" Unauthorized. The client must authenticate itself to get the requested response.
+     * - "REP-401001" Unauthorized, bad JWT.
+     * - "REP-403000" Forbidden. The client does not have access rights to the content.
+     * - "REP-403001" App forbidden, the user does not have read permission on the app.
+     * - "REP-403002" Chart type not supported.
+     * - "REP-404000" Not found. The server can not find the requested resource.
+     * - "REP-409043" Filter name conflict. The filter name must be unique.
+     * - "REP-429000" Too many request. The user has sent too many requests in a given amount of time ("rate limiting").
+     * - "REP-429012" Exceeded max session tenant quota. A tenant has opened too many different sessions at the same time.
+     * - "REP-429016" Exceeded max session tenant quota per day.
+     * - "REP-500000" Fail to resolve resource.
+     * - "REP-503005" Engine unavailable, qix-sessions error no engines available.
+     * - "REP-503013" Session unavailable. The engine session used to create the report is unavailable.
+     * - "REP-504042" Context deadline exceeded applying selections of the Filter. */
+    code: string;
+    /** A summary in english explaining what went wrong. */
+    title: string;
+};
+type FilterErrors = {
+    errors: FilterError[];
+};
+type FilterField = {
+    /** Gets the resource description. */
+    description?: string;
+    name: string;
+    overrideValues?: boolean;
+    selectExcluded?: boolean;
+    /** The filter values. */
+    values?: FilterFieldValue[];
+};
+type FilterFieldValue = {
+    valueAsNumber?: Float64;
+    valueAsText?: string;
+    valueType?: "string" | "number" | "evaluate" | "search";
+};
+type FilterList = {
+    /** a list of filters containing all the filters properties (like name,description...) except the filter definition (like FilterV1_0) */
+    data: FilterListItem[];
+    links: LinksResponse;
+};
+type FilterListItem = {
+    readonly createdAt?: string;
+    /** The filter description. */
+    readonly description?: string;
+    filterType?: FilterType;
+    filterV1_0?: FilterV10;
+    readonly filterVersion?: "filter-1.0";
+    /** The filter ID (bookmarkId) */
+    readonly id?: string;
+    /** The filter name. */
+    readonly name?: string;
+    /** The user that owns the filter, if missing the same as the request user. */
+    readonly ownerId?: string;
+    readonly updatedAt?: string;
+};
+type FilterRequest = {
+    /** The App ID. */
+    appId?: string;
+    /** The filter description. */
+    description?: string;
+    filterType: FilterType;
+    filterV1_0?: FilterV10;
+    filterVersion: "filter-1.0";
+    /** The filter name. */
+    name: string;
+    /** The user that owns the filter, if missing the same as the request user. */
+    ownerId?: string;
+};
+type FilterType = "REP" | "SUB";
+type FilterV10 = {
+    /** Map of fields to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and maximum number of overall field values allowed is 150000. */
+    fieldsByState?: unknown;
+    /** The filter variables. */
+    variables?: FilterVariable[];
+};
+type FilterVariable = {
+    evaluate?: boolean;
+    name: string;
+    value?: string;
+};
+type FiltersCount = {
+    /** The total number of filters. */
+    readonly total?: number;
+};
+type Float64 = number;
 type FrequencyDistributionData = {
     /** Bins edges. */
     BinsEdges?: number[];
@@ -381,22 +487,30 @@ type LastReloadMetadata = {
 };
 type LineageInfoRest = {
     /** A string indicating the origin of the data:
-    // * [filename]: the data comes from a local file.
-    // * INLINE: the data is entered inline in the load script.
-    // * RESIDENT: the data comes from a resident table. The table name is listed.
-    // * AUTOGENERATE: the data is generated from the load script (no external table of data source).
-    // * Provider: the data comes from a data connection. The connector source name is listed.
-    // * [webfile]: the data comes from a web-based file.
-    // * STORE: path to QVD or TXT file where data is stored.
-    // * EXTENSION: the data comes from a Server Side Extension (SSE). */
+     * * [filename]: the data comes from a local file.
+     * * INLINE: the data is entered inline in the load script.
+     * * RESIDENT: the data comes from a resident table. The table name is listed.
+     * * AUTOGENERATE: the data is generated from the load script (no external table of data source).
+     * * Provider: the data comes from a data connection. The connector source name is listed.
+     * * [webfile]: the data comes from a web-based file.
+     * * STORE: path to QVD or TXT file where data is stored.
+     * * EXTENSION: the data comes from a Server Side Extension (SSE). */
     discriminator?: string;
     /** The LOAD and SELECT script statements from the data load script. */
     statement?: string;
+};
+type LinkResponse = {
+    href?: string;
 };
 type Links = {
     next?: Href;
     prev?: Href;
     self?: Href;
+};
+type LinksResponse = {
+    next: LinkResponse;
+    prev: LinkResponse;
+    self: LinkResponse;
 };
 type Log = {
     /** Provides a link to download the log file. */
@@ -415,20 +529,20 @@ type NxApp = {
     /** Object create privileges. Hints to the client what type of objects the user is allowed to create. */
     create?: NxAppCreatePrivileges[];
     /** Application privileges.
-    // Hints to the client what actions the user is allowed to perform.
-    // Could be any of:
-    // * read
-    // * create
-    // * update
-    // * delete
-    // * reload
-    // * import
-    // * publish
-    // * duplicate
-    // * export
-    // * exportdata
-    // * change_owner
-    // * change_space */
+     * Hints to the client what actions the user is allowed to perform.
+     * Could be any of:
+     * * read
+     * * create
+     * * update
+     * * delete
+     * * reload
+     * * import
+     * * publish
+     * * duplicate
+     * * export
+     * * exportdata
+     * * change_owner
+     * * change_space */
     privileges?: string[];
 };
 type NxAppCreatePrivileges = {
@@ -441,15 +555,15 @@ type NxAppObject = {
     /** App object attributes. This structure can also contain extra user-defined attributes. */
     attributes?: NxObjectAttributes;
     /** Application object privileges.
-    // Hints to the client what actions the user is allowed to perform.
-    // Could be any of:
-    // * read
-    // * create
-    // * update
-    // * delete
-    // * publish
-    // * exportdata
-    // * change_owner */
+     * Hints to the client what actions the user is allowed to perform.
+     * Could be any of:
+     * * read
+     * * create
+     * * update
+     * * delete
+     * * publish
+     * * exportdata
+     * * change_owner */
     privileges?: string[];
 };
 type NxAttributes = {
@@ -488,9 +602,9 @@ type NxAttributes = {
     /** App thumbnail. */
     thumbnail?: string;
     /**
-    // One of:
-    // * ANALYTICS
-    // * DATA_PREPARATION */
+     * One of:
+     * * ANALYTICS
+     * * DATA_PREPARATION */
     usage?: "ANALYTICS" | "DATA_PREPARATION";
 };
 type NxObjectAttributes = {
@@ -501,13 +615,13 @@ type NxObjectAttributes = {
     /** Object description. */
     description?: string;
     /** The generic type of the object.
-    //
-    // One of:
-    // * genericObject
-    // * genericBookmark
-    // * genericMeasure
-    // * genericDimension
-    // * genericVariable */
+     *
+     * One of:
+     * * genericObject
+     * * genericBookmark
+     * * genericMeasure
+     * * genericDimension
+     * * genericVariable */
     genericType?: "genericObject" | "genericBookmark" | "genericMeasure" | "genericDimension" | "genericVariable";
     /** The object Id. */
     id?: string;
@@ -524,18 +638,18 @@ type NxObjectAttributes = {
 };
 type NxPatch = {
     /** Operation to perform.
-    //
-    // One of:
-    // * add or Add
-    // * remove or Remove
-    // * replace or Replace */
+     *
+     * One of:
+     * * add or Add
+     * * remove or Remove
+     * * replace or Replace */
     Op?: "Add" | "Remove" | "Replace";
     /** Path to the property to add, remove or replace. */
     Path?: string;
     /** This parameter is not used in a remove operation.
-    // Corresponds to the value of the property to add or to the new value of the property to update.
-    // Examples:
-    // "false", "2", "\"New title\"" */
+     * Corresponds to the value of the property to add or to the new value of the property to update.
+     * Examples:
+     * "false", "2", "\"New title\"" */
     Value?: string;
 };
 type PartialNluInfo = {
@@ -553,10 +667,10 @@ type PartialNluInfo = {
 type PublishApp = {
     attributes?: AppUpdateAttributes;
     /** The published app will have data from source or target app.
-    // The default is source.
-    //
-    // * source: Publish with source data
-    // * target: Publish with target data */
+     * The default is source.
+     *
+     * * source: Publish with source data
+     * * target: Publish with target data */
     data?: "source" | "target";
     /** The original is moved instead of copied. The current published state of all objects is kept. */
     moveApp?: boolean;
@@ -619,7 +733,7 @@ type ReloadMeta = {
     /** If greater than or equal 0, defines max number of rows loaded from a data source. */
     rowLimit?: number;
     /** Set to true to skip Store statements.
-    // The default value is false. */
+     * The default value is false. */
     skipStore?: boolean;
     /** List of external loaded or stored statements. */
     statements?: ReloadStatements[];
@@ -657,10 +771,10 @@ type RepublishApp = {
     /** Validate that source app is same as originally published. */
     checkOriginAppId?: boolean;
     /** The republished app will have data from source or target app.
-    // The default is source.
-    //
-    // * source: Publish with source data
-    // * target: Publish with target data */
+     * The default is source.
+     *
+     * * source: Publish with source data
+     * * target: Publish with target data */
     data?: "source" | "target";
     /** The target ID to be republished. */
     targetId?: string;
@@ -721,13 +835,13 @@ type TableMetadata = {
     /** Table comment. */
     comment?: string;
     /** If set to true, the table is loose due to circular connection.
-    // The default value is false. */
+     * The default value is false. */
     is_loose?: boolean;
     /** If set to true, the table is semantic.
-    // The default value is false. */
+     * The default value is false. */
     is_semantic?: boolean;
     /** If set to true, the table is a system table.
-    // The default value is false. */
+     * The default value is false. */
     is_system?: boolean;
     /** Name of the table. */
     name?: string;
@@ -976,6 +1090,7 @@ type Sortedcomparisontables = {
 };
 /**
  * Creates a new app.
+ *
  * @param body an object with the body content
  * @throws CreateAppHttpError
  */
@@ -1074,6 +1189,7 @@ type GetAppEvaluationXmlHttpError = {
 };
 /**
  * Imports an app into the system.
+ *
  * @param query an object with query parameters
  * @param body an object with the body content
  * @throws ImportAppHttpError
@@ -1088,10 +1204,10 @@ declare const importApp: (query: {
     /** The file ID to be downloaded from Temporary Content Service (TCS) and used during import. */
     fileId?: string;
     /** The import mode. In `new` mode (default), the source app will be imported as a new app.<div class=note>The `autoreplace` mode is an internal mode only and is not permitted for external use.</div>
-    //
-    // One of:
-    // * NEW
-    // * AUTOREPLACE */
+     *
+     * One of:
+     * * NEW
+     * * AUTOREPLACE */
     mode?: string;
     /** The name of the target app. */
     name?: string;
@@ -1110,6 +1226,7 @@ type ImportAppHttpError = {
 };
 /**
  * Gets the app privileges for the current user, such as create app and import app. Empty means that the current user has no app privileges.
+ *
  * @throws GetAppsPrivilegesHttpError
  */
 declare const getAppsPrivileges: (options?: ApiCallOptions) => Promise<GetAppsPrivilegesHttpResponse>;
@@ -1125,6 +1242,7 @@ type GetAppsPrivilegesHttpError = {
 };
 /**
  * Deletes a specific app.
+ *
  * @param appId Identifier of the app.
  * @throws DeleteAppHttpError
  */
@@ -1141,6 +1259,7 @@ type DeleteAppHttpError = {
 };
 /**
  * Retrieves information for a specific app.
+ *
  * @param appId Identifier of the app.
  * @throws GetAppInfoHttpError
  */
@@ -1157,6 +1276,7 @@ type GetAppInfoHttpError = {
 };
 /**
  * Updates the information for a specific app.
+ *
  * @param appId Identifier of the app.
  * @param body an object with the body content
  * @throws UpdateAppInfoHttpError
@@ -1174,6 +1294,7 @@ type UpdateAppInfoHttpError = {
 };
 /**
  * Copies a specific app.
+ *
  * @param appId Identifier of the app.
  * @param body an object with the body content
  * @throws CopyAppHttpError
@@ -1192,6 +1313,7 @@ type CopyAppHttpError = {
 /**
  * Retrieves the lineage for an app.
  * Returns a JSON-formatted array of strings describing the lineage of the app.
+ *
  * @param appId Identifier of the app.
  * @throws GetAppDataLineageHttpError
  */
@@ -1209,6 +1331,7 @@ type GetAppDataLineageHttpError = {
 /**
  * Retrieves the data model and reload statistics metadata of an app.
  * An empty metadata structure is returned if the metadata is not available in the app.
+ *
  * @param appId Identifier of the app.
  * @throws GetAppDataMetadataHttpError
  */
@@ -1225,6 +1348,7 @@ type GetAppDataMetadataHttpError = {
 };
 /**
  * Exports a specific app.
+ *
  * @param appId Identifier of the app.
  * @param query an object with query parameters
  * @throws ExportAppHttpError
@@ -1245,6 +1369,7 @@ type ExportAppHttpError = {
 };
 /**
  * Returns information about supported analyses for the app's data model. Lists available analysis types, along with minimum and maximum number of dimensions, measures, and fields.
+ *
  * @param appId Qlik Sense app identifier
  * @throws GetAppInsightAnalysesHttpError
  */
@@ -1263,6 +1388,7 @@ type GetAppInsightAnalysesHttpError = {
 };
 /**
  * Returns analysis recommendations in response to a natural language question, a set of fields and master items, or a set of fields and master items with an optional target analysis.
+ *
  * @param appId Qlik Sense app identifier
  * @param body an object with the body content
  * @throws GetAppInsightAnalysisRecommendationsHttpError
@@ -1280,6 +1406,7 @@ type GetAppInsightAnalysisRecommendationsHttpError = {
 };
 /**
  * Returns information about model used to make analysis recommendations. Lists all fields and master items in the logical model, along with an indication of the validity of the logical model if the default is not used.
+ *
  * @param appId Qlik Sense app identifier
  * @throws GetAppInsightAnalysisModelHttpError
  */
@@ -1299,6 +1426,7 @@ type GetAppInsightAnalysisModelHttpError = {
 /**
  * Deletes a media content file or complete directory.
  * Returns OK if the bytes containing the media file (or the complete content of a directory) were successfully deleted, or error in case of failure or lack of permission.
+ *
  * @param appId Unique application identifier.
  * @param path Path to file content.
  * @throws DeleteAppMediaHttpError
@@ -1317,6 +1445,7 @@ type DeleteAppMediaHttpError = {
 /**
  * Gets media content from file.
  * Returns a stream of bytes containing the media file content on success, or error if file is not found.
+ *
  * @param appId Unique application identifier.
  * @param path Path to file content.
  * @throws GetAppMediaHttpError
@@ -1335,6 +1464,7 @@ type GetAppMediaHttpError = {
 /**
  * Stores the media content file.
  * Returns OK if the bytes containing the media file content were successfully stored, or error in case of failure, lack of permission or file already exists on the supplied path.
+ *
  * @param appId Unique application identifier.
  * @param path Path to file content.
  * @param body an object with the body content
@@ -1354,6 +1484,7 @@ type UploadAppMediaHttpError = {
 /**
  * Lists media content.
  * Returns a JSON formatted array of strings describing the available media content or error if the optional path supplied is not found.
+ *
  * @param appId Unique application identifier.
  * @param path The path to sub folder with static content relative to the root folder. Use empty path to access the root folder.
  * @param query an object with query parameters
@@ -1361,9 +1492,9 @@ type UploadAppMediaHttpError = {
  */
 declare const getAppMediaList: (appId: string, path: string, query: {
     /** Optional. List output can include files and folders in different ways:
-    // * Not recursive, default if show option is not supplied or incorrectly specified, results in output with files and empty directories for the path specified only.
-    // * Recursive(r), use ?show=r or ?show=recursive, results in a recursive output with files, all empty folders are excluded.
-    // * All(a), use ?show=a or ?show=all, results in a recursive output with files and empty directories. */
+     * * Not recursive, default if show option is not supplied or incorrectly specified, results in output with files and empty directories for the path specified only.
+     * * Recursive(r), use ?show=r or ?show=recursive, results in a recursive output with files, all empty folders are excluded.
+     * * All(a), use ?show=a or ?show=all, results in a recursive output with files and empty directories. */
     show?: string;
 }, options?: ApiCallOptions) => Promise<GetAppMediaListHttpResponse>;
 type GetAppMediaListHttpResponse = {
@@ -1380,6 +1511,7 @@ type GetAppMediaListHttpError = {
  * Gets media content from file currently used as application thumbnail.
  * Returns a stream of bytes containing the media file content on success, or error if file is not found.
  * The image selected as thumbnail is only updated when application is saved.
+ *
  * @param appId Unique application identifier.
  * @throws GetAppThumbnailHttpError
  */
@@ -1397,6 +1529,7 @@ type GetAppThumbnailHttpError = {
 /**
  * Sets owner on an app object.
  * The user must be the owner of the object.
+ *
  * @param appId Identifier of the app.
  * @param objectId Identifier of the object.
  * @param body an object with the body content
@@ -1415,6 +1548,7 @@ type UpdateAppObjectOwnerHttpError = {
 };
 /**
  * Changes owner of the app.
+ *
  * @param appId Identifier of the app.
  * @param body an object with the body content
  * @throws UpdateAppOwnerHttpError
@@ -1432,6 +1566,7 @@ type UpdateAppOwnerHttpError = {
 };
 /**
  * Publishes a specific app to a managed space.
+ *
  * @param appId Identifier of the app.
  * @param body an object with the body content
  * @throws PublishAppHttpError
@@ -1449,6 +1584,7 @@ type PublishAppHttpError = {
 };
 /**
  * Republishes a published app to a managed space.
+ *
  * @param appId Identifier of the app.
  * @param body an object with the body content
  * @throws RepublishAppHttpError
@@ -1467,6 +1603,7 @@ type RepublishAppHttpError = {
 /**
  * Retrieves the metadata about all script logs stored for an app.
  * Returns an array of ScriptLogMeta objects.
+ *
  * @param appId Identifier of the app.
  * @throws GetAppReloadLogsHttpError
  */
@@ -1484,6 +1621,7 @@ type GetAppReloadLogsHttpError = {
 /**
  * Retrieves the log of a specific reload.
  * Returns the log as "text/plain; charset=UTF-8".
+ *
  * @param appId Identifier of the app.
  * @param reloadId Identifier of the reload.
  * @throws GetAppReloadLogHttpError
@@ -1502,6 +1640,7 @@ type GetAppReloadLogHttpError = {
 /**
  * Retrieves the app reload metadata list.
  * Reload metadata contains reload information, including reload id, duration, endtime and lineage load info.
+ *
  * @param appId Identifier of the app
  * @param reloadId Identifier of the reload. Use empty reloadId to get all reloads.
  * @param query an object with query parameters
@@ -1522,17 +1661,130 @@ type GetAppReloadMetadataHttpError = {
     status: number;
 };
 /**
+ * List all filters that are present in the given app. Filters allow to reduce the app data visible in a report output. Each filter can contain definitions on one or multiple fields.
+ *
+ * @param appId Qlik Sense app identifier
+ * @param query an object with query parameters
+ * @throws GetAppReportFiltersHttpError
+ */
+declare const getAppReportFilters: (appId: string, query: {
+    /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax. Cannot be combined with any of the fields marked as deprecated. All conditional statements within this query parameter are case insensitive.
+     * The following fields support the `co` (contains) operator: `name` , `description`
+     * The following fields support the `eq` (equals) operator: `ownerId`
+     * ```
+     * Example:
+     * ```
+     * (name co "query1" or description co "query2") and ownerId eq "123"
+     * ``` */
+    filter?: string;
+    /** The filter type (REP, SUB). REP stands for report bookmark, SUB for subscription bookmark. */
+    filterTypes?: ("REP" | "SUB")[];
+    /** Limit the returned result set */
+    limit?: number;
+    /** If present, the cursor that starts the page of data that is returned. */
+    page?: string;
+    sort?: ("+ownerId" | "-ownerId" | "-name" | "+name" | "+description" | "-description" | "+createdAt" | "-createdAt" | "+updatedAt" | "-updatedAt")[];
+}, options?: ApiCallOptions) => Promise<GetAppReportFiltersHttpResponse>;
+type GetAppReportFiltersHttpResponse = {
+    data: FilterList;
+    headers: Headers;
+    status: number;
+    prev?: (options?: ApiCallOptions) => Promise<GetAppReportFiltersHttpResponse>;
+    next?: (options?: ApiCallOptions) => Promise<GetAppReportFiltersHttpResponse>;
+};
+type GetAppReportFiltersHttpError = {
+    data: FilterErrors;
+    headers: Headers;
+    status: number;
+};
+/**
+ * Creates a new report filter which is used to re-apply selections, variables, patches to an engine session.
+ *
+ * @param appId Qlik Sense app identifier
+ * @param body an object with the body content
+ * @throws CreateAppReportFilterHttpError
+ */
+declare const createAppReportFilter: (appId: string, body: FilterRequest, options?: ApiCallOptions) => Promise<CreateAppReportFilterHttpResponse>;
+type CreateAppReportFilterHttpResponse = {
+    data: Filter;
+    headers: Headers;
+    status: number;
+};
+type CreateAppReportFilterHttpError = {
+    data: FilterErrors;
+    headers: Headers;
+    status: number;
+};
+/**
+ * Get the number of filters for the given app and filter types
+ *
+ * @param appId Qlik Sense app identifier
+ * @param query an object with query parameters
+ * @throws CountAppReportFiltersHttpError
+ */
+declare const countAppReportFilters: (appId: string, query: {
+    /** The filter type (REP, SUB). REP stands for report bookmark, SUB for subscription bookmark. */
+    filterTypes?: ("REP" | "SUB")[];
+}, options?: ApiCallOptions) => Promise<CountAppReportFiltersHttpResponse>;
+type CountAppReportFiltersHttpResponse = {
+    data: FiltersCount;
+    headers: Headers;
+    status: number;
+};
+type CountAppReportFiltersHttpError = {
+    data: FilterErrors;
+    headers: Headers;
+    status: number;
+};
+/**
+ * Delete a filter
+ *
+ * @param appId Qlik Sense app identifier
+ * @param id The filter id identifier (bookmarkId).
+ * @throws DeleteAppReportFilterHttpError
+ */
+declare const deleteAppReportFilter: (appId: string, id: string, options?: ApiCallOptions) => Promise<DeleteAppReportFilterHttpResponse>;
+type DeleteAppReportFilterHttpResponse = {
+    data: void;
+    headers: Headers;
+    status: number;
+};
+type DeleteAppReportFilterHttpError = {
+    data: FilterErrors;
+    headers: Headers;
+    status: number;
+};
+/**
+ * Get a filter
+ *
+ * @param appId Qlik Sense app identifier
+ * @param id The filter id identifier (bookmarkId).
+ * @throws GetAppReportFilterHttpError
+ */
+declare const getAppReportFilter: (appId: string, id: string, options?: ApiCallOptions) => Promise<GetAppReportFilterHttpResponse>;
+type GetAppReportFilterHttpResponse = {
+    data: Filter;
+    headers: Headers;
+    status: number;
+};
+type GetAppReportFilterHttpError = {
+    data: FilterErrors;
+    headers: Headers;
+    status: number;
+};
+/**
  * Retrieves the script history for an app.
  * Returns information about the saved versions of the script.
+ *
  * @param appId Identifier of the app.
  * @param query an object with query parameters
  * @throws GetAppScriptHistoryHttpError
  */
 declare const getAppScriptHistory: (appId: string, query: {
     /** A scim filter expression defining which script versions should be retrieved. Filterable fields are:
-    // * ScriptId
-    // * ModifiedTime
-    // * ModifierId */
+     * * ScriptId
+     * * ModifiedTime
+     * * ModifierId */
     filter?: string;
     /** Maximum number of records to return from this request. */
     limit?: string;
@@ -1553,6 +1805,7 @@ type GetAppScriptHistoryHttpError = {
 };
 /**
  * Sets script for an app.
+ *
  * @param appId Identifier of the app.
  * @param body an object with the body content
  * @throws UpdateAppScriptHttpError
@@ -1571,6 +1824,7 @@ type UpdateAppScriptHttpError = {
 /**
  * Deletes a specific version of the script for an app.
  * Fails if the version to delete is the current version.
+ *
  * @param appId Identifier of the app.
  * @param version Identifier of the script version
  * @throws DeleteAppScriptHttpError
@@ -1589,6 +1843,7 @@ type DeleteAppScriptHttpError = {
 /**
  * Retrieves a version of the script for an app.
  * Returns the script text.
+ *
  * @param appId Identifier of the app.
  * @param version Identifier of the script version, or 'current' for retrieving the current version.
  * @throws GetAppScriptHttpError
@@ -1606,6 +1861,7 @@ type GetAppScriptHttpError = {
 };
 /**
  * Updates a specific version of the script for an app.
+ *
  * @param appId Identifier of the app.
  * @param version Identifier of the script version.
  * @param body an object with the body content
@@ -1624,6 +1880,7 @@ type PatchAppScriptHttpError = {
 };
 /**
  * Removes space from a specific app.
+ *
  * @param appId Identifier of the app.
  * @throws RemoveAppFromSpaceHttpError
  */
@@ -1640,6 +1897,7 @@ type RemoveAppFromSpaceHttpError = {
 };
 /**
  * Sets space on a specific app.
+ *
  * @param appId Identifier of the app.
  * @param body an object with the body content
  * @throws MoveAppToSpaceHttpError
@@ -1715,6 +1973,7 @@ declare function clearCache(): void;
 interface AppsAPI {
     /**
      * Creates a new app.
+     *
      * @param body an object with the body content
      * @throws CreateAppHttpError
      */
@@ -1753,6 +2012,7 @@ interface AppsAPI {
     getAppEvaluationXml: typeof getAppEvaluationXml;
     /**
      * Imports an app into the system.
+     *
      * @param query an object with query parameters
      * @param body an object with the body content
      * @throws ImportAppHttpError
@@ -1760,23 +2020,27 @@ interface AppsAPI {
     importApp: typeof importApp;
     /**
      * Gets the app privileges for the current user, such as create app and import app. Empty means that the current user has no app privileges.
+     *
      * @throws GetAppsPrivilegesHttpError
      */
     getAppsPrivileges: typeof getAppsPrivileges;
     /**
      * Deletes a specific app.
+     *
      * @param appId Identifier of the app.
      * @throws DeleteAppHttpError
      */
     deleteApp: typeof deleteApp;
     /**
      * Retrieves information for a specific app.
+     *
      * @param appId Identifier of the app.
      * @throws GetAppInfoHttpError
      */
     getAppInfo: typeof getAppInfo;
     /**
      * Updates the information for a specific app.
+     *
      * @param appId Identifier of the app.
      * @param body an object with the body content
      * @throws UpdateAppInfoHttpError
@@ -1784,6 +2048,7 @@ interface AppsAPI {
     updateAppInfo: typeof updateAppInfo;
     /**
      * Copies a specific app.
+     *
      * @param appId Identifier of the app.
      * @param body an object with the body content
      * @throws CopyAppHttpError
@@ -1792,6 +2057,7 @@ interface AppsAPI {
     /**
      * Retrieves the lineage for an app.
      * Returns a JSON-formatted array of strings describing the lineage of the app.
+     *
      * @param appId Identifier of the app.
      * @throws GetAppDataLineageHttpError
      */
@@ -1799,12 +2065,14 @@ interface AppsAPI {
     /**
      * Retrieves the data model and reload statistics metadata of an app.
      * An empty metadata structure is returned if the metadata is not available in the app.
+     *
      * @param appId Identifier of the app.
      * @throws GetAppDataMetadataHttpError
      */
     getAppDataMetadata: typeof getAppDataMetadata;
     /**
      * Exports a specific app.
+     *
      * @param appId Identifier of the app.
      * @param query an object with query parameters
      * @throws ExportAppHttpError
@@ -1812,12 +2080,14 @@ interface AppsAPI {
     exportApp: typeof exportApp;
     /**
      * Returns information about supported analyses for the app's data model. Lists available analysis types, along with minimum and maximum number of dimensions, measures, and fields.
+     *
      * @param appId Qlik Sense app identifier
      * @throws GetAppInsightAnalysesHttpError
      */
     getAppInsightAnalyses: typeof getAppInsightAnalyses;
     /**
      * Returns analysis recommendations in response to a natural language question, a set of fields and master items, or a set of fields and master items with an optional target analysis.
+     *
      * @param appId Qlik Sense app identifier
      * @param body an object with the body content
      * @throws GetAppInsightAnalysisRecommendationsHttpError
@@ -1825,6 +2095,7 @@ interface AppsAPI {
     getAppInsightAnalysisRecommendations: typeof getAppInsightAnalysisRecommendations;
     /**
      * Returns information about model used to make analysis recommendations. Lists all fields and master items in the logical model, along with an indication of the validity of the logical model if the default is not used.
+     *
      * @param appId Qlik Sense app identifier
      * @throws GetAppInsightAnalysisModelHttpError
      */
@@ -1832,6 +2103,7 @@ interface AppsAPI {
     /**
      * Deletes a media content file or complete directory.
      * Returns OK if the bytes containing the media file (or the complete content of a directory) were successfully deleted, or error in case of failure or lack of permission.
+     *
      * @param appId Unique application identifier.
      * @param path Path to file content.
      * @throws DeleteAppMediaHttpError
@@ -1840,6 +2112,7 @@ interface AppsAPI {
     /**
      * Gets media content from file.
      * Returns a stream of bytes containing the media file content on success, or error if file is not found.
+     *
      * @param appId Unique application identifier.
      * @param path Path to file content.
      * @throws GetAppMediaHttpError
@@ -1848,6 +2121,7 @@ interface AppsAPI {
     /**
      * Stores the media content file.
      * Returns OK if the bytes containing the media file content were successfully stored, or error in case of failure, lack of permission or file already exists on the supplied path.
+     *
      * @param appId Unique application identifier.
      * @param path Path to file content.
      * @param body an object with the body content
@@ -1857,6 +2131,7 @@ interface AppsAPI {
     /**
      * Lists media content.
      * Returns a JSON formatted array of strings describing the available media content or error if the optional path supplied is not found.
+     *
      * @param appId Unique application identifier.
      * @param path The path to sub folder with static content relative to the root folder. Use empty path to access the root folder.
      * @param query an object with query parameters
@@ -1867,6 +2142,7 @@ interface AppsAPI {
      * Gets media content from file currently used as application thumbnail.
      * Returns a stream of bytes containing the media file content on success, or error if file is not found.
      * The image selected as thumbnail is only updated when application is saved.
+     *
      * @param appId Unique application identifier.
      * @throws GetAppThumbnailHttpError
      */
@@ -1874,6 +2150,7 @@ interface AppsAPI {
     /**
      * Sets owner on an app object.
      * The user must be the owner of the object.
+     *
      * @param appId Identifier of the app.
      * @param objectId Identifier of the object.
      * @param body an object with the body content
@@ -1882,6 +2159,7 @@ interface AppsAPI {
     updateAppObjectOwner: typeof updateAppObjectOwner;
     /**
      * Changes owner of the app.
+     *
      * @param appId Identifier of the app.
      * @param body an object with the body content
      * @throws UpdateAppOwnerHttpError
@@ -1889,6 +2167,7 @@ interface AppsAPI {
     updateAppOwner: typeof updateAppOwner;
     /**
      * Publishes a specific app to a managed space.
+     *
      * @param appId Identifier of the app.
      * @param body an object with the body content
      * @throws PublishAppHttpError
@@ -1896,6 +2175,7 @@ interface AppsAPI {
     publishApp: typeof publishApp;
     /**
      * Republishes a published app to a managed space.
+     *
      * @param appId Identifier of the app.
      * @param body an object with the body content
      * @throws RepublishAppHttpError
@@ -1904,6 +2184,7 @@ interface AppsAPI {
     /**
      * Retrieves the metadata about all script logs stored for an app.
      * Returns an array of ScriptLogMeta objects.
+     *
      * @param appId Identifier of the app.
      * @throws GetAppReloadLogsHttpError
      */
@@ -1911,6 +2192,7 @@ interface AppsAPI {
     /**
      * Retrieves the log of a specific reload.
      * Returns the log as "text/plain; charset=UTF-8".
+     *
      * @param appId Identifier of the app.
      * @param reloadId Identifier of the reload.
      * @throws GetAppReloadLogHttpError
@@ -1919,6 +2201,7 @@ interface AppsAPI {
     /**
      * Retrieves the app reload metadata list.
      * Reload metadata contains reload information, including reload id, duration, endtime and lineage load info.
+     *
      * @param appId Identifier of the app
      * @param reloadId Identifier of the reload. Use empty reloadId to get all reloads.
      * @param query an object with query parameters
@@ -1926,8 +2209,49 @@ interface AppsAPI {
      */
     getAppReloadMetadata: typeof getAppReloadMetadata;
     /**
+     * List all filters that are present in the given app. Filters allow to reduce the app data visible in a report output. Each filter can contain definitions on one or multiple fields.
+     *
+     * @param appId Qlik Sense app identifier
+     * @param query an object with query parameters
+     * @throws GetAppReportFiltersHttpError
+     */
+    getAppReportFilters: typeof getAppReportFilters;
+    /**
+     * Creates a new report filter which is used to re-apply selections, variables, patches to an engine session.
+     *
+     * @param appId Qlik Sense app identifier
+     * @param body an object with the body content
+     * @throws CreateAppReportFilterHttpError
+     */
+    createAppReportFilter: typeof createAppReportFilter;
+    /**
+     * Get the number of filters for the given app and filter types
+     *
+     * @param appId Qlik Sense app identifier
+     * @param query an object with query parameters
+     * @throws CountAppReportFiltersHttpError
+     */
+    countAppReportFilters: typeof countAppReportFilters;
+    /**
+     * Delete a filter
+     *
+     * @param appId Qlik Sense app identifier
+     * @param id The filter id identifier (bookmarkId).
+     * @throws DeleteAppReportFilterHttpError
+     */
+    deleteAppReportFilter: typeof deleteAppReportFilter;
+    /**
+     * Get a filter
+     *
+     * @param appId Qlik Sense app identifier
+     * @param id The filter id identifier (bookmarkId).
+     * @throws GetAppReportFilterHttpError
+     */
+    getAppReportFilter: typeof getAppReportFilter;
+    /**
      * Retrieves the script history for an app.
      * Returns information about the saved versions of the script.
+     *
      * @param appId Identifier of the app.
      * @param query an object with query parameters
      * @throws GetAppScriptHistoryHttpError
@@ -1935,6 +2259,7 @@ interface AppsAPI {
     getAppScriptHistory: typeof getAppScriptHistory;
     /**
      * Sets script for an app.
+     *
      * @param appId Identifier of the app.
      * @param body an object with the body content
      * @throws UpdateAppScriptHttpError
@@ -1943,6 +2268,7 @@ interface AppsAPI {
     /**
      * Deletes a specific version of the script for an app.
      * Fails if the version to delete is the current version.
+     *
      * @param appId Identifier of the app.
      * @param version Identifier of the script version
      * @throws DeleteAppScriptHttpError
@@ -1951,6 +2277,7 @@ interface AppsAPI {
     /**
      * Retrieves a version of the script for an app.
      * Returns the script text.
+     *
      * @param appId Identifier of the app.
      * @param version Identifier of the script version, or 'current' for retrieving the current version.
      * @throws GetAppScriptHttpError
@@ -1958,6 +2285,7 @@ interface AppsAPI {
     getAppScript: typeof getAppScript;
     /**
      * Updates a specific version of the script for an app.
+     *
      * @param appId Identifier of the app.
      * @param version Identifier of the script version.
      * @param body an object with the body content
@@ -1966,12 +2294,14 @@ interface AppsAPI {
     patchAppScript: typeof patchAppScript;
     /**
      * Removes space from a specific app.
+     *
      * @param appId Identifier of the app.
      * @throws RemoveAppFromSpaceHttpError
      */
     removeAppFromSpace: typeof removeAppFromSpace;
     /**
      * Sets space on a specific app.
+     *
      * @param appId Identifier of the app.
      * @param body an object with the body content
      * @throws MoveAppToSpaceHttpError
@@ -2003,4 +2333,4 @@ interface AppsAPI {
  */
 declare const appsExport: AppsAPI;
 
-export { type Analysis, type AnalysisComposition, type AnalysisDescriptor, type AnalysisDescriptorResponse, type AnalysisDetails, type AnalysisGroup, type AnalysisModelItemField, type AnalysisModelItemMasterItem, type AnalysisModelResponse, type AnalysisModelResponseDetail, type AnalysisRecommendRequest, type AnalysisRecommendationResponse, type AnalysisRecommendationResponseDetail, type AppAttributes, type AppContentList, type AppContentListItem, type AppUpdateAttributes, type AppsAPI, type ChartType, type Classification, type Classifications, type Cmpbool, type Cmpfloat, type Cmpint, type Comparison, type Comparisonfields, type Comparisonobjresponsetime, type Comparisonoobjheavy, type Comparisontables, type CompositionMinMax, type CopyAppHttpError, type CopyAppHttpResponse, type CreateApp, type CreateAppHttpError, type CreateAppHttpResponse, type DataModelMetadata, type DeleteAppHttpError, type DeleteAppHttpResponse, type DeleteAppMediaHttpError, type DeleteAppMediaHttpResponse, type DeleteAppScriptHttpError, type DeleteAppScriptHttpResponse, type Error, type Errors, type Evaluation, type Evaluations, type EvaluatorError, type Event, type ExportAppHttpError, type ExportAppHttpResponse, type FieldAttributes, type FieldInTableProfilingData, type FieldMetadata, type FieldOverride, type FileData, type FrequencyDistributionData, type GetAppDataLineageHttpError, type GetAppDataLineageHttpResponse, type GetAppDataMetadataHttpError, type GetAppDataMetadataHttpResponse, type GetAppEvaluationComparisonHttpError, type GetAppEvaluationComparisonHttpResponse, type GetAppEvaluationComparisonXmlHttpError, type GetAppEvaluationComparisonXmlHttpResponse, type GetAppEvaluationHttpError, type GetAppEvaluationHttpResponse, type GetAppEvaluationXmlHttpError, type GetAppEvaluationXmlHttpResponse, type GetAppEvaluationsHttpError, type GetAppEvaluationsHttpResponse, type GetAppInfoHttpError, type GetAppInfoHttpResponse, type GetAppInsightAnalysesHttpError, type GetAppInsightAnalysesHttpResponse, type GetAppInsightAnalysisModelHttpError, type GetAppInsightAnalysisModelHttpResponse, type GetAppInsightAnalysisRecommendationsHttpError, type GetAppInsightAnalysisRecommendationsHttpResponse, type GetAppMediaHttpError, type GetAppMediaHttpResponse, type GetAppMediaListHttpError, type GetAppMediaListHttpResponse, type GetAppReloadLogHttpError, type GetAppReloadLogHttpResponse, type GetAppReloadLogsHttpError, type GetAppReloadLogsHttpResponse, type GetAppReloadMetadataHttpError, type GetAppReloadMetadataHttpResponse, type GetAppScriptHistoryHttpError, type GetAppScriptHistoryHttpResponse, type GetAppScriptHttpError, type GetAppScriptHttpResponse, type GetAppThumbnailHttpError, type GetAppThumbnailHttpResponse, type GetAppsPrivilegesHttpError, type GetAppsPrivilegesHttpResponse, type HardwareMeta, type Href, type ImportAppHttpError, type ImportAppHttpResponse, type JsonObject, type LastReloadMetadata, type LineageInfoRest, type Links, type Log, type Metadata, type MoveAppToSpaceHttpError, type MoveAppToSpaceHttpResponse, type NavigationLink, type NavigationLinks, type NumberFormat, type NxApp, type NxAppCreatePrivileges, type NxAppObject, type NxAttributes, type NxObjectAttributes, type NxPatch, type Objectmetrics, type Objectspec, type Objecttopspec, type PartialNluInfo, type PatchAppScriptHttpError, type PatchAppScriptHttpResponse, type PublishApp, type PublishAppHttpError, type PublishAppHttpResponse, type QueueAppEvaluationHttpError, type QueueAppEvaluationHttpResponse, type RecommendFieldItem, type RecommendItems, type RecommendMasterItem, type RecommendNaturalLangQuery, type RecommendedAnalysis, type RecommendedAnalysisCore, type ReloadListMetadata, type ReloadMeta, type ReloadStatements, type RemoveAppFromSpaceHttpError, type RemoveAppFromSpaceHttpResponse, type RepublishApp, type RepublishAppHttpError, type RepublishAppHttpResponse, type Result, type Resultentry, type Resultmetadatatopfields, type Resultmetadatatoptables, type Resultobjresponsetime, type Resultobjsheet, type Resultobjsinglethreaded, type Resultsingle, type ScriptLogList, type ScriptLogMeta, type ScriptMeta, type ScriptMetaList, type ScriptVersion, type SimplifiedClassifications, type Sortedcomparisonfields, type Sortedcomparisonobjresponsetime, type Sortedcomparisonoobjheavy, type Sortedcomparisontables, type SymbolFrequency, type SymbolValue, type TableMetadata, type TableProfilingData, type UpdateApp, type UpdateAppInfoHttpError, type UpdateAppInfoHttpResponse, type UpdateAppObjectOwnerHttpError, type UpdateAppObjectOwnerHttpResponse, type UpdateAppOwnerHttpError, type UpdateAppOwnerHttpResponse, type UpdateAppScriptHttpError, type UpdateAppScriptHttpResponse, type UpdateOwner, type UpdateSpace, type UploadAppMediaHttpError, type UploadAppMediaHttpResponse, clearCache, copyApp, createApp, appsExport as default, deleteApp, deleteAppMedia, deleteAppScript, exportApp, getAppDataLineage, getAppDataMetadata, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXml, getAppEvaluationXml, getAppEvaluations, getAppInfo, getAppInsightAnalyses, getAppInsightAnalysisModel, getAppInsightAnalysisRecommendations, getAppMedia, getAppMediaList, getAppReloadLog, getAppReloadLogs, getAppReloadMetadata, getAppScript, getAppScriptHistory, getAppThumbnail, getAppsPrivileges, importApp, moveAppToSpace, patchAppScript, publishApp, queueAppEvaluation, removeAppFromSpace, republishApp, updateAppInfo, updateAppObjectOwner, updateAppOwner, updateAppScript, uploadAppMedia };
+export { type Analysis, type AnalysisComposition, type AnalysisDescriptor, type AnalysisDescriptorResponse, type AnalysisDetails, type AnalysisGroup, type AnalysisModelItemField, type AnalysisModelItemMasterItem, type AnalysisModelResponse, type AnalysisModelResponseDetail, type AnalysisRecommendRequest, type AnalysisRecommendationResponse, type AnalysisRecommendationResponseDetail, type AppAttributes, type AppContentList, type AppContentListItem, type AppUpdateAttributes, type AppsAPI, type ChartType, type Classification, type Classifications, type Cmpbool, type Cmpfloat, type Cmpint, type Comparison, type Comparisonfields, type Comparisonobjresponsetime, type Comparisonoobjheavy, type Comparisontables, type CompositionMinMax, type CopyAppHttpError, type CopyAppHttpResponse, type CountAppReportFiltersHttpError, type CountAppReportFiltersHttpResponse, type CreateApp, type CreateAppHttpError, type CreateAppHttpResponse, type CreateAppReportFilterHttpError, type CreateAppReportFilterHttpResponse, type DataModelMetadata, type DeleteAppHttpError, type DeleteAppHttpResponse, type DeleteAppMediaHttpError, type DeleteAppMediaHttpResponse, type DeleteAppReportFilterHttpError, type DeleteAppReportFilterHttpResponse, type DeleteAppScriptHttpError, type DeleteAppScriptHttpResponse, type Error, type Errors, type Evaluation, type Evaluations, type EvaluatorError, type Event, type ExportAppHttpError, type ExportAppHttpResponse, type FieldAttributes, type FieldInTableProfilingData, type FieldMetadata, type FieldOverride, type FileData, type Filter, type FilterError, type FilterErrors, type FilterField, type FilterFieldValue, type FilterList, type FilterListItem, type FilterRequest, type FilterType, type FilterV10, type FilterVariable, type FiltersCount, type Float64, type FrequencyDistributionData, type GetAppDataLineageHttpError, type GetAppDataLineageHttpResponse, type GetAppDataMetadataHttpError, type GetAppDataMetadataHttpResponse, type GetAppEvaluationComparisonHttpError, type GetAppEvaluationComparisonHttpResponse, type GetAppEvaluationComparisonXmlHttpError, type GetAppEvaluationComparisonXmlHttpResponse, type GetAppEvaluationHttpError, type GetAppEvaluationHttpResponse, type GetAppEvaluationXmlHttpError, type GetAppEvaluationXmlHttpResponse, type GetAppEvaluationsHttpError, type GetAppEvaluationsHttpResponse, type GetAppInfoHttpError, type GetAppInfoHttpResponse, type GetAppInsightAnalysesHttpError, type GetAppInsightAnalysesHttpResponse, type GetAppInsightAnalysisModelHttpError, type GetAppInsightAnalysisModelHttpResponse, type GetAppInsightAnalysisRecommendationsHttpError, type GetAppInsightAnalysisRecommendationsHttpResponse, type GetAppMediaHttpError, type GetAppMediaHttpResponse, type GetAppMediaListHttpError, type GetAppMediaListHttpResponse, type GetAppReloadLogHttpError, type GetAppReloadLogHttpResponse, type GetAppReloadLogsHttpError, type GetAppReloadLogsHttpResponse, type GetAppReloadMetadataHttpError, type GetAppReloadMetadataHttpResponse, type GetAppReportFilterHttpError, type GetAppReportFilterHttpResponse, type GetAppReportFiltersHttpError, type GetAppReportFiltersHttpResponse, type GetAppScriptHistoryHttpError, type GetAppScriptHistoryHttpResponse, type GetAppScriptHttpError, type GetAppScriptHttpResponse, type GetAppThumbnailHttpError, type GetAppThumbnailHttpResponse, type GetAppsPrivilegesHttpError, type GetAppsPrivilegesHttpResponse, type HardwareMeta, type Href, type ImportAppHttpError, type ImportAppHttpResponse, type JsonObject, type LastReloadMetadata, type LineageInfoRest, type LinkResponse, type Links, type LinksResponse, type Log, type Metadata, type MoveAppToSpaceHttpError, type MoveAppToSpaceHttpResponse, type NavigationLink, type NavigationLinks, type NumberFormat, type NxApp, type NxAppCreatePrivileges, type NxAppObject, type NxAttributes, type NxObjectAttributes, type NxPatch, type Objectmetrics, type Objectspec, type Objecttopspec, type PartialNluInfo, type PatchAppScriptHttpError, type PatchAppScriptHttpResponse, type PublishApp, type PublishAppHttpError, type PublishAppHttpResponse, type QueueAppEvaluationHttpError, type QueueAppEvaluationHttpResponse, type RecommendFieldItem, type RecommendItems, type RecommendMasterItem, type RecommendNaturalLangQuery, type RecommendedAnalysis, type RecommendedAnalysisCore, type ReloadListMetadata, type ReloadMeta, type ReloadStatements, type RemoveAppFromSpaceHttpError, type RemoveAppFromSpaceHttpResponse, type RepublishApp, type RepublishAppHttpError, type RepublishAppHttpResponse, type Result, type Resultentry, type Resultmetadatatopfields, type Resultmetadatatoptables, type Resultobjresponsetime, type Resultobjsheet, type Resultobjsinglethreaded, type Resultsingle, type ScriptLogList, type ScriptLogMeta, type ScriptMeta, type ScriptMetaList, type ScriptVersion, type SimplifiedClassifications, type Sortedcomparisonfields, type Sortedcomparisonobjresponsetime, type Sortedcomparisonoobjheavy, type Sortedcomparisontables, type SymbolFrequency, type SymbolValue, type TableMetadata, type TableProfilingData, type UpdateApp, type UpdateAppInfoHttpError, type UpdateAppInfoHttpResponse, type UpdateAppObjectOwnerHttpError, type UpdateAppObjectOwnerHttpResponse, type UpdateAppOwnerHttpError, type UpdateAppOwnerHttpResponse, type UpdateAppScriptHttpError, type UpdateAppScriptHttpResponse, type UpdateOwner, type UpdateSpace, type UploadAppMediaHttpError, type UploadAppMediaHttpResponse, clearCache, copyApp, countAppReportFilters, createApp, createAppReportFilter, appsExport as default, deleteApp, deleteAppMedia, deleteAppReportFilter, deleteAppScript, exportApp, getAppDataLineage, getAppDataMetadata, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXml, getAppEvaluationXml, getAppEvaluations, getAppInfo, getAppInsightAnalyses, getAppInsightAnalysisModel, getAppInsightAnalysisRecommendations, getAppMedia, getAppMediaList, getAppReloadLog, getAppReloadLogs, getAppReloadMetadata, getAppReportFilter, getAppReportFilters, getAppScript, getAppScriptHistory, getAppThumbnail, getAppsPrivileges, importApp, moveAppToSpace, patchAppScript, publishApp, queueAppEvaluation, removeAppFromSpace, republishApp, updateAppInfo, updateAppObjectOwner, updateAppOwner, updateAppScript, uploadAppMedia };

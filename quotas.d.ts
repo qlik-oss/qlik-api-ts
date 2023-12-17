@@ -37,6 +37,7 @@ type Quota = {
 };
 /**
  * Returns all quota items for the tenant (provided in JWT).
+ *
  * @param query an object with query parameters
  * @throws GetQuotasHttpError
  */
@@ -56,6 +57,7 @@ type GetQuotasHttpError = {
 };
 /**
  * Returns a specific quota item for the tenant (provided in JWT).
+ *
  * @param id The unique identifier of the quota item. For example, "app_mem_size", "app_upload_disk_size", or "shared_spaces".
  * @param query an object with query parameters
  * @throws GetQuotaHttpError
@@ -81,12 +83,14 @@ declare function clearCache(): void;
 interface QuotasAPI {
     /**
      * Returns all quota items for the tenant (provided in JWT).
+     *
      * @param query an object with query parameters
      * @throws GetQuotasHttpError
      */
     getQuotas: typeof getQuotas;
     /**
      * Returns a specific quota item for the tenant (provided in JWT).
+     *
      * @param id The unique identifier of the quota item. For example, "app_mem_size", "app_upload_disk_size", or "shared_spaces".
      * @param query an object with query parameters
      * @throws GetQuotaHttpError

@@ -142,10 +142,9 @@ type SpacePatch = {
     /** Field of space to be patched (updated). */
     path: "/name" | "/ownerId" | "/description";
     /** The value to be used within the operations.
-    // - name: The name (string) of space of maxLength 256 of pattern: ^[^\"\*\?\<\>\/\|\\\:]+$
-    // - description: The description (string) of the space. Personal spaces do not have a description.
-    // - ownerId: The user ID in uid format (string) of the space owner.
-    //  */
+     * - name: The name (string) of space of maxLength 256 of pattern: ^[^\"\*\?\<\>\/\|\\\:]+$
+     * - description: The description (string) of the space. Personal spaces do not have a description.
+     * - ownerId: The user ID in uid format (string) of the space owner. */
     value: string;
 }[];
 type SpaceType = "shared" | "managed" | "data";
@@ -181,6 +180,7 @@ type Spaces = {
 };
 /**
  * Retrieves spaces that the current user has access to and match the query.
+ *
  * @param query an object with query parameters
  * @throws GetSpacesHttpError
  */
@@ -218,6 +218,7 @@ type GetSpacesHttpError = {
 };
 /**
  * Creates a space.
+ *
  * @param body an object with the body content
  * @throws CreateSpaceHttpError
  */
@@ -234,6 +235,7 @@ type CreateSpaceHttpError = {
 };
 /**
  * Gets a list of distinct space types.
+ *
  * @throws GetSpaceTypesHttpError
  */
 declare const getSpaceTypes: (options?: ApiCallOptions) => Promise<GetSpaceTypesHttpResponse>;
@@ -249,6 +251,7 @@ type GetSpaceTypesHttpError = {
 };
 /**
  * Deletes a space.
+ *
  * @param spaceId The ID of the space to delete.
  * @throws DeleteSpaceHttpError
  */
@@ -265,6 +268,7 @@ type DeleteSpaceHttpError = {
 };
 /**
  * Retrieves a single space by ID.
+ *
  * @param spaceId The ID of the space to retrieve.
  * @throws GetSpaceHttpError
  */
@@ -281,6 +285,7 @@ type GetSpaceHttpError = {
 };
 /**
  * Patches (updates) a space (partially).
+ *
  * @param spaceId The ID of the space to update.
  * @param body an object with the body content
  * @throws PatchSpaceHttpError
@@ -298,6 +303,7 @@ type PatchSpaceHttpError = {
 };
 /**
  * Updates a space.
+ *
  * @param spaceId The ID of the space to update.
  * @param body an object with the body content
  * @throws UpdateSpaceHttpError
@@ -315,6 +321,7 @@ type UpdateSpaceHttpError = {
 };
 /**
  * Retrieves the assignments of the space matching the query.
+ *
  * @param spaceId The ID of the space of the assignment.
  * @param query an object with query parameters
  * @throws GetSpaceAssignmentsHttpError
@@ -343,6 +350,7 @@ type GetSpaceAssignmentsHttpError = {
 };
 /**
  * Creates an assignment.
+ *
  * @param spaceId The ID of the space of the assignment.
  * @param body an object with the body content
  * @throws CreateSpaceAssignmentHttpError
@@ -360,6 +368,7 @@ type CreateSpaceAssignmentHttpError = {
 };
 /**
  * Deletes an assignment.
+ *
  * @param spaceId The ID of the space of the assignment.
  * @param assignmentId The ID of the assignment to delete.
  * @throws DeleteSpaceAssignmentHttpError
@@ -377,6 +386,7 @@ type DeleteSpaceAssignmentHttpError = {
 };
 /**
  * Retrieves a single assignment by ID.
+ *
  * @param spaceId The ID of the space of the assignment.
  * @param assignmentId The ID of the assignment to retrieve.
  * @throws GetSpaceAssignmentHttpError
@@ -394,6 +404,7 @@ type GetSpaceAssignmentHttpError = {
 };
 /**
  * Updates a single assignment by ID. The complete list of roles must be provided.
+ *
  * @param spaceId The ID of the space of the assignment.
  * @param assignmentId The ID of the assignment to update.
  * @param body an object with the body content
@@ -417,35 +428,41 @@ declare function clearCache(): void;
 interface SpacesAPI {
     /**
      * Retrieves spaces that the current user has access to and match the query.
+     *
      * @param query an object with query parameters
      * @throws GetSpacesHttpError
      */
     getSpaces: typeof getSpaces;
     /**
      * Creates a space.
+     *
      * @param body an object with the body content
      * @throws CreateSpaceHttpError
      */
     createSpace: typeof createSpace;
     /**
      * Gets a list of distinct space types.
+     *
      * @throws GetSpaceTypesHttpError
      */
     getSpaceTypes: typeof getSpaceTypes;
     /**
      * Deletes a space.
+     *
      * @param spaceId The ID of the space to delete.
      * @throws DeleteSpaceHttpError
      */
     deleteSpace: typeof deleteSpace;
     /**
      * Retrieves a single space by ID.
+     *
      * @param spaceId The ID of the space to retrieve.
      * @throws GetSpaceHttpError
      */
     getSpace: typeof getSpace;
     /**
      * Patches (updates) a space (partially).
+     *
      * @param spaceId The ID of the space to update.
      * @param body an object with the body content
      * @throws PatchSpaceHttpError
@@ -453,6 +470,7 @@ interface SpacesAPI {
     patchSpace: typeof patchSpace;
     /**
      * Updates a space.
+     *
      * @param spaceId The ID of the space to update.
      * @param body an object with the body content
      * @throws UpdateSpaceHttpError
@@ -460,6 +478,7 @@ interface SpacesAPI {
     updateSpace: typeof updateSpace;
     /**
      * Retrieves the assignments of the space matching the query.
+     *
      * @param spaceId The ID of the space of the assignment.
      * @param query an object with query parameters
      * @throws GetSpaceAssignmentsHttpError
@@ -467,6 +486,7 @@ interface SpacesAPI {
     getSpaceAssignments: typeof getSpaceAssignments;
     /**
      * Creates an assignment.
+     *
      * @param spaceId The ID of the space of the assignment.
      * @param body an object with the body content
      * @throws CreateSpaceAssignmentHttpError
@@ -474,6 +494,7 @@ interface SpacesAPI {
     createSpaceAssignment: typeof createSpaceAssignment;
     /**
      * Deletes an assignment.
+     *
      * @param spaceId The ID of the space of the assignment.
      * @param assignmentId The ID of the assignment to delete.
      * @throws DeleteSpaceAssignmentHttpError
@@ -481,6 +502,7 @@ interface SpacesAPI {
     deleteSpaceAssignment: typeof deleteSpaceAssignment;
     /**
      * Retrieves a single assignment by ID.
+     *
      * @param spaceId The ID of the space of the assignment.
      * @param assignmentId The ID of the assignment to retrieve.
      * @throws GetSpaceAssignmentHttpError
@@ -488,6 +510,7 @@ interface SpacesAPI {
     getSpaceAssignment: typeof getSpaceAssignment;
     /**
      * Updates a single assignment by ID. The complete list of roles must be provided.
+     *
      * @param spaceId The ID of the space of the assignment.
      * @param assignmentId The ID of the assignment to update.
      * @param body an object with the body content

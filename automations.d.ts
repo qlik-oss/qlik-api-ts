@@ -175,6 +175,7 @@ type UsageObject = {
 };
 /**
  * Retrieves a list of automations
+ *
  * @param query an object with query parameters
  * @throws GetAutomationsHttpError
  */
@@ -200,6 +201,7 @@ type GetAutomationsHttpError = {
 };
 /**
  * Create an automation
+ *
  * @param body an object with the body content
  * @throws CreateAutomationHttpError
  */
@@ -216,6 +218,7 @@ type CreateAutomationHttpError = {
 };
 /**
  * Retrieves the automation settings.
+ *
  * @throws GetAutomationsSettingsHttpError
  */
 declare const getAutomationsSettings: (options?: ApiCallOptions) => Promise<GetAutomationsSettingsHttpResponse>;
@@ -231,6 +234,7 @@ type GetAutomationsSettingsHttpError = {
 };
 /**
  * Update the automation settings.
+ *
  * @param body an object with the body content
  * @throws UpdateAutomationsSettingsHttpError
  */
@@ -248,6 +252,7 @@ type UpdateAutomationsSettingsHttpError = {
 /**
  * **Limitations:**
  *  * **Maximum 1000 metrics per API call**
+ *
  * @param query an object with query parameters
  * @throws GetAutomationsUsageMetricsHttpError
  */
@@ -269,6 +274,7 @@ type GetAutomationsUsageMetricsHttpError = {
 };
 /**
  * Delete an automation
+ *
  * @param id The unique identifier for the automation.
  * @throws DeleteAutomationHttpError
  */
@@ -285,6 +291,7 @@ type DeleteAutomationHttpError = {
 };
 /**
  * Retrieves an automation
+ *
  * @param id The unique identifier for the automation.
  * @throws GetAutomationHttpError
  */
@@ -301,6 +308,7 @@ type GetAutomationHttpError = {
 };
 /**
  * Update an automation
+ *
  * @param id The unique identifier for the automation.
  * @param body an object with the body content
  * @throws UpdateAutomationHttpError
@@ -318,6 +326,7 @@ type UpdateAutomationHttpError = {
 };
 /**
  * Copy an automation.
+ *
  * @param id The unique identifier for the automation.
  * @param body an object with the body content
  * @throws CopyAutomationHttpError
@@ -341,6 +350,7 @@ type CopyAutomationHttpError = {
 };
 /**
  * Disables an automation.
+ *
  * @param id The unique identifier for the automation.
  * @throws DisableAutomationHttpError
  */
@@ -357,6 +367,7 @@ type DisableAutomationHttpError = {
 };
 /**
  * Enable an automation.
+ *
  * @param id The unique identifier for the automation.
  * @throws EnableAutomationHttpError
  */
@@ -373,6 +384,7 @@ type EnableAutomationHttpError = {
 };
 /**
  * This step will remove the history and change logs of this automation. All linked connections used inside an automation will be detached.
+ *
  * @param id The unique identifier for the automation.
  * @param body an object with the body content
  * @throws MoveAutomationHttpError
@@ -392,6 +404,7 @@ type MoveAutomationHttpError = {
 };
 /**
  * Retrieves a list of runs for a specific automation.
+ *
  * @param id The unique identifier for the automation.
  * @param query an object with query parameters
  * @throws GetAutomationRunsHttpError
@@ -418,6 +431,7 @@ type GetAutomationRunsHttpError = {
 };
 /**
  * Create a run
+ *
  * @param id The unique identifier for the automation.
  * @param body an object with the body content
  * @throws QueueAutomationRunHttpError
@@ -435,6 +449,7 @@ type QueueAutomationRunHttpError = {
 };
 /**
  * Retrieves a run
+ *
  * @param id The unique identifier for the automation.
  * @param runId The unique identifier for the run.
  * @throws GetAutomationRunHttpError
@@ -452,6 +467,7 @@ type GetAutomationRunHttpError = {
 };
 /**
  * Creates a temporary pre-signed AWS S3 URL to download the raw logs of a completed run. This URL is valid for 5 minutes.
+ *
  * @param id The unique identifier for the automation.
  * @param runId The unique identifier for the run.
  * @throws GetAutomationRunDetailsHttpError
@@ -471,6 +487,7 @@ type GetAutomationRunDetailsHttpError = {
 };
 /**
  * This action allows you to retry a specific run by creating a new run using the same inputs.
+ *
  * @param id The unique identifier for the automation.
  * @param runId The unique identifier for the run.
  * @throws RetryAutomationRunHttpError
@@ -488,6 +505,7 @@ type RetryAutomationRunHttpError = {
 };
 /**
  * Force a run to be stopped immediately.
+ *
  * @param id The unique identifier for the automation.
  * @param runId The unique identifier for the run.
  * @throws StopAutomationRunHttpError
@@ -510,23 +528,27 @@ declare function clearCache(): void;
 interface AutomationsAPI {
     /**
      * Retrieves a list of automations
+     *
      * @param query an object with query parameters
      * @throws GetAutomationsHttpError
      */
     getAutomations: typeof getAutomations;
     /**
      * Create an automation
+     *
      * @param body an object with the body content
      * @throws CreateAutomationHttpError
      */
     createAutomation: typeof createAutomation;
     /**
      * Retrieves the automation settings.
+     *
      * @throws GetAutomationsSettingsHttpError
      */
     getAutomationsSettings: typeof getAutomationsSettings;
     /**
      * Update the automation settings.
+     *
      * @param body an object with the body content
      * @throws UpdateAutomationsSettingsHttpError
      */
@@ -534,24 +556,28 @@ interface AutomationsAPI {
     /**
      * **Limitations:**
      *  * **Maximum 1000 metrics per API call**
+     *
      * @param query an object with query parameters
      * @throws GetAutomationsUsageMetricsHttpError
      */
     getAutomationsUsageMetrics: typeof getAutomationsUsageMetrics;
     /**
      * Delete an automation
+     *
      * @param id The unique identifier for the automation.
      * @throws DeleteAutomationHttpError
      */
     deleteAutomation: typeof deleteAutomation;
     /**
      * Retrieves an automation
+     *
      * @param id The unique identifier for the automation.
      * @throws GetAutomationHttpError
      */
     getAutomation: typeof getAutomation;
     /**
      * Update an automation
+     *
      * @param id The unique identifier for the automation.
      * @param body an object with the body content
      * @throws UpdateAutomationHttpError
@@ -559,6 +585,7 @@ interface AutomationsAPI {
     updateAutomation: typeof updateAutomation;
     /**
      * Copy an automation.
+     *
      * @param id The unique identifier for the automation.
      * @param body an object with the body content
      * @throws CopyAutomationHttpError
@@ -566,18 +593,21 @@ interface AutomationsAPI {
     copyAutomation: typeof copyAutomation;
     /**
      * Disables an automation.
+     *
      * @param id The unique identifier for the automation.
      * @throws DisableAutomationHttpError
      */
     disableAutomation: typeof disableAutomation;
     /**
      * Enable an automation.
+     *
      * @param id The unique identifier for the automation.
      * @throws EnableAutomationHttpError
      */
     enableAutomation: typeof enableAutomation;
     /**
      * This step will remove the history and change logs of this automation. All linked connections used inside an automation will be detached.
+     *
      * @param id The unique identifier for the automation.
      * @param body an object with the body content
      * @throws MoveAutomationHttpError
@@ -585,6 +615,7 @@ interface AutomationsAPI {
     moveAutomation: typeof moveAutomation;
     /**
      * Retrieves a list of runs for a specific automation.
+     *
      * @param id The unique identifier for the automation.
      * @param query an object with query parameters
      * @throws GetAutomationRunsHttpError
@@ -592,6 +623,7 @@ interface AutomationsAPI {
     getAutomationRuns: typeof getAutomationRuns;
     /**
      * Create a run
+     *
      * @param id The unique identifier for the automation.
      * @param body an object with the body content
      * @throws QueueAutomationRunHttpError
@@ -599,6 +631,7 @@ interface AutomationsAPI {
     queueAutomationRun: typeof queueAutomationRun;
     /**
      * Retrieves a run
+     *
      * @param id The unique identifier for the automation.
      * @param runId The unique identifier for the run.
      * @throws GetAutomationRunHttpError
@@ -606,6 +639,7 @@ interface AutomationsAPI {
     getAutomationRun: typeof getAutomationRun;
     /**
      * Creates a temporary pre-signed AWS S3 URL to download the raw logs of a completed run. This URL is valid for 5 minutes.
+     *
      * @param id The unique identifier for the automation.
      * @param runId The unique identifier for the run.
      * @throws GetAutomationRunDetailsHttpError
@@ -613,6 +647,7 @@ interface AutomationsAPI {
     getAutomationRunDetails: typeof getAutomationRunDetails;
     /**
      * This action allows you to retry a specific run by creating a new run using the same inputs.
+     *
      * @param id The unique identifier for the automation.
      * @param runId The unique identifier for the run.
      * @throws RetryAutomationRunHttpError
@@ -620,6 +655,7 @@ interface AutomationsAPI {
     retryAutomationRun: typeof retryAutomationRun;
     /**
      * Force a run to be stopped immediately.
+     *
      * @param id The unique identifier for the automation.
      * @param runId The unique identifier for the run.
      * @throws StopAutomationRunHttpError

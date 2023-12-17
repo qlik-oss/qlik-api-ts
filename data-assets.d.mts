@@ -60,6 +60,7 @@ type JsonPatch = {
 };
 /**
  * Batch delete data assets by IDs.
+ *
  * @param body an object with the body content
  * @throws DeleteDataAssetsHttpError
  */
@@ -76,6 +77,7 @@ type DeleteDataAssetsHttpError = {
 };
 /**
  * Save new data asset.
+ *
  * @param body an object with the body content
  * @throws CreateDataAssetHttpError
  */
@@ -92,6 +94,7 @@ type CreateDataAssetHttpError = {
 };
 /**
  * Get data asset by ID.
+ *
  * @param dataAssetId
  * @param query an object with query parameters
  * @throws GetDataAssetHttpError
@@ -112,6 +115,7 @@ type GetDataAssetHttpError = {
 };
 /**
  * Patch data asset.
+ *
  * @param dataAssetId
  * @param body an object with the body content
  * @throws PatchDataAssetHttpError
@@ -129,6 +133,7 @@ type PatchDataAssetHttpError = {
 };
 /**
  * Update data asset.
+ *
  * @param dataAssetId
  * @param body an object with the body content
  * @throws UpdateDataAssetHttpError
@@ -151,18 +156,21 @@ declare function clearCache(): void;
 interface DataAssetsAPI {
     /**
      * Batch delete data assets by IDs.
+     *
      * @param body an object with the body content
      * @throws DeleteDataAssetsHttpError
      */
     deleteDataAssets: typeof deleteDataAssets;
     /**
      * Save new data asset.
+     *
      * @param body an object with the body content
      * @throws CreateDataAssetHttpError
      */
     createDataAsset: typeof createDataAsset;
     /**
      * Get data asset by ID.
+     *
      * @param dataAssetId
      * @param query an object with query parameters
      * @throws GetDataAssetHttpError
@@ -170,6 +178,7 @@ interface DataAssetsAPI {
     getDataAsset: typeof getDataAsset;
     /**
      * Patch data asset.
+     *
      * @param dataAssetId
      * @param body an object with the body content
      * @throws PatchDataAssetHttpError
@@ -177,6 +186,7 @@ interface DataAssetsAPI {
     patchDataAsset: typeof patchDataAsset;
     /**
      * Update data asset.
+     *
      * @param dataAssetId
      * @param body an object with the body content
      * @throws UpdateDataAssetHttpError

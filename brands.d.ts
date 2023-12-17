@@ -86,6 +86,7 @@ type Link = {
 type NoActiveBrand = unknown;
 /**
  * Lists all brand entries for a tenant
+ *
  * @param query an object with query parameters
  * @throws GetBrandsHttpError
  */
@@ -129,6 +130,7 @@ type GetBrands500HttpError = {
 type GetBrandsHttpError = GetBrands400HttpError | GetBrands401HttpError | GetBrands403HttpError | GetBrands500HttpError;
 /**
  * Creates a new brand
+ *
  * @param body an object with the body content
  * @throws CreateBrandHttpError
  */
@@ -161,6 +163,7 @@ type CreateBrand500HttpError = {
 type CreateBrandHttpError = CreateBrand400HttpError | CreateBrand401HttpError | CreateBrand403HttpError | CreateBrand500HttpError;
 /**
  * Retrieves the current active brand
+ *
  * @throws GetActiveBrandHttpError
  */
 declare const getActiveBrand: (options?: ApiCallOptions) => Promise<GetActiveBrandHttpResponse>;
@@ -176,6 +179,7 @@ type GetActiveBrandHttpError = {
 };
 /**
  * Deletes a specific brand
+ *
  * @param brandId The brand's unique identifier.
  * @throws DeleteBrandHttpError
  */
@@ -213,6 +217,7 @@ type DeleteBrand500HttpError = {
 type DeleteBrandHttpError = DeleteBrand400HttpError | DeleteBrand401HttpError | DeleteBrand403HttpError | DeleteBrand404HttpError | DeleteBrand500HttpError;
 /**
  * Retrieves a specific brand
+ *
  * @param brandId The brand's unique identifier.
  * @throws GetBrandHttpError
  */
@@ -250,6 +255,7 @@ type GetBrand500HttpError = {
 type GetBrandHttpError = GetBrand400HttpError | GetBrand401HttpError | GetBrand403HttpError | GetBrand404HttpError | GetBrand500HttpError;
 /**
  * Patches a brand
+ *
  * @param brandId The brand's unique identifier.
  * @param body an object with the body content
  * @throws PatchBrandHttpError
@@ -288,6 +294,7 @@ type PatchBrand500HttpError = {
 type PatchBrandHttpError = PatchBrand400HttpError | PatchBrand401HttpError | PatchBrand403HttpError | PatchBrand404HttpError | PatchBrand500HttpError;
 /**
  * Sets the brand active and de-activates any other active brand. If the brand is already active, no action is taken.
+ *
  * @param brandId The brand's unique identifier.
  * @param body an object with the body content
  * @throws ActivateBrandHttpError
@@ -326,6 +333,7 @@ type ActivateBrand500HttpError = {
 type ActivateBrandHttpError = ActivateBrand400HttpError | ActivateBrand401HttpError | ActivateBrand403HttpError | ActivateBrand404HttpError | ActivateBrand500HttpError;
 /**
  * Sets the brand so it is no longer active. If the brand is already inactive, no action is taken.
+ *
  * @param brandId The brand's unique identifier.
  * @param body an object with the body content
  * @throws DeactivateBrandHttpError
@@ -364,6 +372,7 @@ type DeactivateBrand500HttpError = {
 type DeactivateBrandHttpError = DeactivateBrand400HttpError | DeactivateBrand401HttpError | DeactivateBrand403HttpError | DeactivateBrand404HttpError | DeactivateBrand500HttpError;
 /**
  * Deletes a specific brand file
+ *
  * @param brandId The brand's unique identifier.
  * @param brandFileId The unique identifier of a file within a brand.
  * @throws DeleteBrandFileHttpError
@@ -402,6 +411,7 @@ type DeleteBrandFile500HttpError = {
 type DeleteBrandFileHttpError = DeleteBrandFile400HttpError | DeleteBrandFile401HttpError | DeleteBrandFile403HttpError | DeleteBrandFile404HttpError | DeleteBrandFile500HttpError;
 /**
  * Downloads the brand file
+ *
  * @param brandId The brand's unique identifier.
  * @param brandFileId The unique identifier of a file within a brand.
  * @throws GetBrandFileHttpError
@@ -440,6 +450,7 @@ type GetBrandFile500HttpError = {
 type GetBrandFileHttpError = GetBrandFile400HttpError | GetBrandFile401HttpError | GetBrandFile403HttpError | GetBrandFile404HttpError | GetBrandFile500HttpError;
 /**
  * Creates a brand file
+ *
  * @param brandId The brand's unique identifier.
  * @param brandFileId The unique identifier of a file within a brand.
  * @param body an object with the body content
@@ -479,6 +490,7 @@ type CreateBrandFile500HttpError = {
 type CreateBrandFileHttpError = CreateBrandFile400HttpError | CreateBrandFile401HttpError | CreateBrandFile403HttpError | CreateBrandFile404HttpError | CreateBrandFile500HttpError;
 /**
  * Updates existing file
+ *
  * @param brandId The brand's unique identifier.
  * @param brandFileId The unique identifier of a file within a brand.
  * @param body an object with the body content
@@ -523,35 +535,41 @@ declare function clearCache(): void;
 interface BrandsAPI {
     /**
      * Lists all brand entries for a tenant
+     *
      * @param query an object with query parameters
      * @throws GetBrandsHttpError
      */
     getBrands: typeof getBrands;
     /**
      * Creates a new brand
+     *
      * @param body an object with the body content
      * @throws CreateBrandHttpError
      */
     createBrand: typeof createBrand;
     /**
      * Retrieves the current active brand
+     *
      * @throws GetActiveBrandHttpError
      */
     getActiveBrand: typeof getActiveBrand;
     /**
      * Deletes a specific brand
+     *
      * @param brandId The brand's unique identifier.
      * @throws DeleteBrandHttpError
      */
     deleteBrand: typeof deleteBrand;
     /**
      * Retrieves a specific brand
+     *
      * @param brandId The brand's unique identifier.
      * @throws GetBrandHttpError
      */
     getBrand: typeof getBrand;
     /**
      * Patches a brand
+     *
      * @param brandId The brand's unique identifier.
      * @param body an object with the body content
      * @throws PatchBrandHttpError
@@ -559,6 +577,7 @@ interface BrandsAPI {
     patchBrand: typeof patchBrand;
     /**
      * Sets the brand active and de-activates any other active brand. If the brand is already active, no action is taken.
+     *
      * @param brandId The brand's unique identifier.
      * @param body an object with the body content
      * @throws ActivateBrandHttpError
@@ -566,6 +585,7 @@ interface BrandsAPI {
     activateBrand: typeof activateBrand;
     /**
      * Sets the brand so it is no longer active. If the brand is already inactive, no action is taken.
+     *
      * @param brandId The brand's unique identifier.
      * @param body an object with the body content
      * @throws DeactivateBrandHttpError
@@ -573,6 +593,7 @@ interface BrandsAPI {
     deactivateBrand: typeof deactivateBrand;
     /**
      * Deletes a specific brand file
+     *
      * @param brandId The brand's unique identifier.
      * @param brandFileId The unique identifier of a file within a brand.
      * @throws DeleteBrandFileHttpError
@@ -580,6 +601,7 @@ interface BrandsAPI {
     deleteBrandFile: typeof deleteBrandFile;
     /**
      * Downloads the brand file
+     *
      * @param brandId The brand's unique identifier.
      * @param brandFileId The unique identifier of a file within a brand.
      * @throws GetBrandFileHttpError
@@ -587,6 +609,7 @@ interface BrandsAPI {
     getBrandFile: typeof getBrandFile;
     /**
      * Creates a brand file
+     *
      * @param brandId The brand's unique identifier.
      * @param brandFileId The unique identifier of a file within a brand.
      * @param body an object with the body content
@@ -595,6 +618,7 @@ interface BrandsAPI {
     createBrandFile: typeof createBrandFile;
     /**
      * Updates existing file
+     *
      * @param brandId The brand's unique identifier.
      * @param brandFileId The unique identifier of a file within a brand.
      * @param body an object with the body content

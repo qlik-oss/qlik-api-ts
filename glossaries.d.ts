@@ -113,11 +113,9 @@ type Category = {
 type CreateCategory = {
     description?: string;
     /** The id for resolving updates in future imports/updates.
-    // Opposed to the id of terms, id on category are not resolved by backend. Any category referred in the category array in terms will have to be identical to the id property of the category. If not, the category reference will be discarded.
-    //  */
+     * Opposed to the id of terms, id on category are not resolved by backend. Any category referred in the category array in terms will have to be identical to the id property of the category. If not, the category reference will be discarded. */
     id?: string;
-    /** The name of the category. May not be identical to another category belonging to the same parent.
-    //  */
+    /** The name of the category. May not be identical to another category belonging to the same parent. */
     name?: string;
     parentId?: string;
     /** This list contains the uuids of the stewards of the category. */
@@ -224,12 +222,10 @@ type ImportOwner = {
 };
 type ImportTerm = {
     abbreviation?: string;
-    /** Categories that the term belongs to. Refers to the `id` property of the category object
-    //  */
+    /** Categories that the term belongs to. Refers to the `id` property of the category object */
     categories?: string[];
     description?: string;
-    /** The id of the term. Used to identify the term in future updates. If not provided, will use the leading 30 chars of the term name and an incremental index
-    //  */
+    /** The id of the term. Used to identify the term in future updates. If not provided, will use the leading 30 chars of the term name and an incremental index */
     id?: string;
     linksTo?: TermCreateLinksTo[];
     name?: string;
@@ -335,6 +331,7 @@ type TermsResult = {
 };
 /**
  * Returns all glossaries.
+ *
  * @param query an object with query parameters
  * @throws GetGlossariesHttpError
  */
@@ -414,6 +411,7 @@ type ImportGlossary404HttpError = {
 type ImportGlossaryHttpError = ImportGlossary400HttpError | ImportGlossary403HttpError | ImportGlossary404HttpError;
 /**
  * Deletes a glossary and all of its terms.
+ *
  * @param id The id of the glossary to delete.
  * @throws DeleteGlossaryHttpError
  */
@@ -430,6 +428,7 @@ type DeleteGlossaryHttpError = {
 };
 /**
  * Retrieves a glossary.
+ *
  * @param id The id of the glossary to retrieve.
  * @throws GetGlossaryHttpError
  */
@@ -446,6 +445,7 @@ type GetGlossaryHttpError = {
 };
 /**
  * Updates glossary properties with json-patch formated data
+ *
  * @param id The glossary id.
  * @param body an object with the body content
  * @throws PatchGlossaryHttpError
@@ -463,6 +463,7 @@ type PatchGlossaryHttpError = {
 };
 /**
  * Updates a glossary.
+ *
  * @param id The id of the glossary to update.
  * @param body an object with the body content
  * @throws UpdateGlossaryHttpError
@@ -480,6 +481,7 @@ type UpdateGlossaryHttpError = {
 };
 /**
  * Exports a glossary.
+ *
  * @param id The glossary id.
  * @throws ExportGlossaryHttpError
  */
@@ -496,6 +498,7 @@ type ExportGlossaryHttpError = {
 };
 /**
  * Returns a list of categories for a glossary.
+ *
  * @param id The glossary id.
  * @param query an object with query parameters
  * @throws GetGlossaryCategoriesHttpError
@@ -544,6 +547,7 @@ type CreateGlossaryCategoryHttpError = {
 };
 /**
  * Deletes a category.
+ *
  * @param id The id of the glossary.
  * @param categoryId The id for the category to delete. All subcategories are also deleted
  * @throws DeleteGlossaryCategoryHttpError
@@ -561,6 +565,7 @@ type DeleteGlossaryCategoryHttpError = {
 };
 /**
  * Retrieves a category.
+ *
  * @param id The glossary id.
  * @param categoryId The category id.
  * @throws GetGlossaryCategoryHttpError
@@ -578,6 +583,7 @@ type GetGlossaryCategoryHttpError = {
 };
 /**
  * Updates category properties with json-patch formated data
+ *
  * @param id The glossary id.
  * @param categoryId The category id.
  * @param body an object with the body content
@@ -596,6 +602,7 @@ type PatchGlossaryCategoryHttpError = {
 };
 /**
  * Updates a category.
+ *
  * @param id The glossary id.
  * @param categoryId The category id.
  * @param body an object with the body content
@@ -614,6 +621,7 @@ type UpdateGlossaryCategoryHttpError = {
 };
 /**
  * Returns a list of terms for a glossary.
+ *
  * @param id The glossary id.
  * @param query an object with query parameters
  * @throws GetGlossaryTermsHttpError
@@ -622,18 +630,17 @@ declare const getGlossaryTerms: (id: string, query: {
     /** Optional parameter to request total count for query */
     countTotal?: boolean;
     /** Optional SCIM filter to be used to filter terms
-    // Usable fields are
-    //
-    // - id
-    // - name
-    // - relatedInformation
-    // - description
-    // - abbreviation
-    // - tags
-    // - stewards
-    // - status
-    // - categories
-    //  */
+     * Usable fields are
+     *
+     * - id
+     * - name
+     * - relatedInformation
+     * - description
+     * - abbreviation
+     * - tags
+     * - stewards
+     * - status
+     * - categories */
     filter?: string;
     /** The number of terms to get. */
     limit?: number;
@@ -676,6 +683,7 @@ type CreateGlossaryTermHttpError = {
 };
 /**
  * Deletes a term.
+ *
  * @param id The glossary id.
  * @param termId The term id.
  * @throws DeleteGlossaryTermHttpError
@@ -693,6 +701,7 @@ type DeleteGlossaryTermHttpError = {
 };
 /**
  * Retrieves a term.
+ *
  * @param id The glossary id.
  * @param termId The term id.
  * @throws GetGlossaryTermHttpError
@@ -710,6 +719,7 @@ type GetGlossaryTermHttpError = {
 };
 /**
  * Updates term properties with json-patch formated data
+ *
  * @param id The glossary id.
  * @param termId The term id.
  * @param body an object with the body content
@@ -728,6 +738,7 @@ type PatchGlossaryTermHttpError = {
 };
 /**
  * Updates a term.
+ *
  * @param id The glossary id.
  * @param termId The term id.
  * @param body an object with the body content
@@ -746,6 +757,7 @@ type UpdateGlossaryTermHttpError = {
 };
 /**
  * Changes the status of the term. Only a steward can verify a term. Once the term is verified only a steward can modify the term.
+ *
  * @param id The glossary id.
  * @param termId The term id.
  * @param query an object with query parameters
@@ -767,6 +779,7 @@ type ChangeGlossaryTermStatusHttpError = {
 };
 /**
  * Returns a list of links assigned to a term.
+ *
  * @param id The glossary id.
  * @param termId The term id.
  * @param query an object with query parameters
@@ -800,6 +813,7 @@ type GetGlossaryTermLinksHttpError = {
 };
 /**
  * Creates a new link to a term.
+ *
  * @param id The glossary id.
  * @param termId The term id.
  * @param body an object with the body content
@@ -818,6 +832,7 @@ type CreateGlossaryTermLinkHttpError = {
 };
 /**
  * Retrieves previous revisions of a term.
+ *
  * @param id The glossary id.
  * @param termId The term id.
  * @param query an object with query parameters
@@ -854,6 +869,7 @@ declare function clearCache(): void;
 interface GlossariesAPI {
     /**
      * Returns all glossaries.
+     *
      * @param query an object with query parameters
      * @throws GetGlossariesHttpError
      */
@@ -876,18 +892,21 @@ interface GlossariesAPI {
     importGlossary: typeof importGlossary;
     /**
      * Deletes a glossary and all of its terms.
+     *
      * @param id The id of the glossary to delete.
      * @throws DeleteGlossaryHttpError
      */
     deleteGlossary: typeof deleteGlossary;
     /**
      * Retrieves a glossary.
+     *
      * @param id The id of the glossary to retrieve.
      * @throws GetGlossaryHttpError
      */
     getGlossary: typeof getGlossary;
     /**
      * Updates glossary properties with json-patch formated data
+     *
      * @param id The glossary id.
      * @param body an object with the body content
      * @throws PatchGlossaryHttpError
@@ -895,6 +914,7 @@ interface GlossariesAPI {
     patchGlossary: typeof patchGlossary;
     /**
      * Updates a glossary.
+     *
      * @param id The id of the glossary to update.
      * @param body an object with the body content
      * @throws UpdateGlossaryHttpError
@@ -902,12 +922,14 @@ interface GlossariesAPI {
     updateGlossary: typeof updateGlossary;
     /**
      * Exports a glossary.
+     *
      * @param id The glossary id.
      * @throws ExportGlossaryHttpError
      */
     exportGlossary: typeof exportGlossary;
     /**
      * Returns a list of categories for a glossary.
+     *
      * @param id The glossary id.
      * @param query an object with query parameters
      * @throws GetGlossaryCategoriesHttpError
@@ -923,6 +945,7 @@ interface GlossariesAPI {
     createGlossaryCategory: typeof createGlossaryCategory;
     /**
      * Deletes a category.
+     *
      * @param id The id of the glossary.
      * @param categoryId The id for the category to delete. All subcategories are also deleted
      * @throws DeleteGlossaryCategoryHttpError
@@ -930,6 +953,7 @@ interface GlossariesAPI {
     deleteGlossaryCategory: typeof deleteGlossaryCategory;
     /**
      * Retrieves a category.
+     *
      * @param id The glossary id.
      * @param categoryId The category id.
      * @throws GetGlossaryCategoryHttpError
@@ -937,6 +961,7 @@ interface GlossariesAPI {
     getGlossaryCategory: typeof getGlossaryCategory;
     /**
      * Updates category properties with json-patch formated data
+     *
      * @param id The glossary id.
      * @param categoryId The category id.
      * @param body an object with the body content
@@ -945,6 +970,7 @@ interface GlossariesAPI {
     patchGlossaryCategory: typeof patchGlossaryCategory;
     /**
      * Updates a category.
+     *
      * @param id The glossary id.
      * @param categoryId The category id.
      * @param body an object with the body content
@@ -953,6 +979,7 @@ interface GlossariesAPI {
     updateGlossaryCategory: typeof updateGlossaryCategory;
     /**
      * Returns a list of terms for a glossary.
+     *
      * @param id The glossary id.
      * @param query an object with query parameters
      * @throws GetGlossaryTermsHttpError
@@ -968,6 +995,7 @@ interface GlossariesAPI {
     createGlossaryTerm: typeof createGlossaryTerm;
     /**
      * Deletes a term.
+     *
      * @param id The glossary id.
      * @param termId The term id.
      * @throws DeleteGlossaryTermHttpError
@@ -975,6 +1003,7 @@ interface GlossariesAPI {
     deleteGlossaryTerm: typeof deleteGlossaryTerm;
     /**
      * Retrieves a term.
+     *
      * @param id The glossary id.
      * @param termId The term id.
      * @throws GetGlossaryTermHttpError
@@ -982,6 +1011,7 @@ interface GlossariesAPI {
     getGlossaryTerm: typeof getGlossaryTerm;
     /**
      * Updates term properties with json-patch formated data
+     *
      * @param id The glossary id.
      * @param termId The term id.
      * @param body an object with the body content
@@ -990,6 +1020,7 @@ interface GlossariesAPI {
     patchGlossaryTerm: typeof patchGlossaryTerm;
     /**
      * Updates a term.
+     *
      * @param id The glossary id.
      * @param termId The term id.
      * @param body an object with the body content
@@ -998,6 +1029,7 @@ interface GlossariesAPI {
     updateGlossaryTerm: typeof updateGlossaryTerm;
     /**
      * Changes the status of the term. Only a steward can verify a term. Once the term is verified only a steward can modify the term.
+     *
      * @param id The glossary id.
      * @param termId The term id.
      * @param query an object with query parameters
@@ -1006,6 +1038,7 @@ interface GlossariesAPI {
     changeGlossaryTermStatus: typeof changeGlossaryTermStatus;
     /**
      * Returns a list of links assigned to a term.
+     *
      * @param id The glossary id.
      * @param termId The term id.
      * @param query an object with query parameters
@@ -1014,6 +1047,7 @@ interface GlossariesAPI {
     getGlossaryTermLinks: typeof getGlossaryTermLinks;
     /**
      * Creates a new link to a term.
+     *
      * @param id The glossary id.
      * @param termId The term id.
      * @param body an object with the body content
@@ -1022,6 +1056,7 @@ interface GlossariesAPI {
     createGlossaryTermLink: typeof createGlossaryTermLink;
     /**
      * Retrieves previous revisions of a term.
+     *
      * @param id The glossary id.
      * @param termId The term id.
      * @param query an object with query parameters

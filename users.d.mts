@@ -211,6 +211,7 @@ type Users = {
 };
 /**
  * Returns a list of users using cursor-based pagination.
+ *
  * @param query an object with query parameters
  * @throws GetUsersHttpError
  */
@@ -222,35 +223,34 @@ declare const getUsers: (query: {
     /** A comma-delimited string of the requested fields per entity. If the 'links' value is omitted, then the entity HATEOAS link will also be omitted. */
     fields?: string;
     /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax. Cannot be combined with any of the fields marked as deprecated. All conditional statements within this query parameter are case insensitive.
-    //
-    // The following fields support the `eq` operator: `id`, `subject`, `name`, `email`, `status`, `clientId`, `assignedRoles.id` `assignedRoles.name`, `assignedGroups.id`, `assignedGroupsAssignedRoles.name`
-    //
-    // Additionally, the following fields support the `co` operator: `name`, `email`, `subject`
-    //
-    // Queries may be rate limited if they differ greatly from these examples:
-    //
-    // ```
-    // (id eq "62716ab404a7bd8626af9bd6" or id eq "62716ac4c7e500e13ff5fa22") and (status eq "active" or status eq "disabled")
-    // ```
-    //
-    // ```
-    // name co "query" or email co "query" or subject co "query" or id eq "query" or assignedRoles.name eq "query"
-    // ```
-    //
-    // Any filters for status must be grouped together and applied to the whole query.
-    //
-    // Valid:
-    //
-    // ```
-    // (name eq "Bob" or name eq "Alice") and (status eq "active" or status eq "disabled")
-    // ```
-    //
-    // Invalid:
-    //
-    // ```
-    // name eq "Bob" or name eq "Alice" and (status eq "active" or status eq "disabled")
-    // ```
-    //  */
+     *
+     * The following fields support the `eq` operator: `id`, `subject`, `name`, `email`, `status`, `clientId`, `assignedRoles.id` `assignedRoles.name`, `assignedGroups.id`, `assignedGroupsAssignedRoles.name`
+     *
+     * Additionally, the following fields support the `co` operator: `name`, `email`, `subject`
+     *
+     * Queries may be rate limited if they differ greatly from these examples:
+     *
+     * ```
+     * (id eq "62716ab404a7bd8626af9bd6" or id eq "62716ac4c7e500e13ff5fa22") and (status eq "active" or status eq "disabled")
+     * ```
+     *
+     * ```
+     * name co "query" or email co "query" or subject co "query" or id eq "query" or assignedRoles.name eq "query"
+     * ```
+     *
+     * Any filters for status must be grouped together and applied to the whole query.
+     *
+     * Valid:
+     *
+     * ```
+     * (name eq "Bob" or name eq "Alice") and (status eq "active" or status eq "disabled")
+     * ```
+     *
+     * Invalid:
+     *
+     * ```
+     * name eq "Bob" or name eq "Alice" and (status eq "active" or status eq "disabled")
+     * ``` */
     filter?: string;
     /** The number of user entries to retrieve. */
     limit?: number;
@@ -291,6 +291,7 @@ type GetUsersHttpError = {
 };
 /**
  * Creates an invited user.
+ *
  * @param body an object with the body content
  * @throws CreateUserHttpError
  */
@@ -307,6 +308,7 @@ type CreateUserHttpError = {
 };
 /**
  * Returns the number of users in a given tenant
+ *
  * @param query an object with query parameters
  * @throws CountUsersHttpError
  */
@@ -326,6 +328,7 @@ type CountUsersHttpError = {
 };
 /**
  * Retrieves a list of users matching the filter using an advanced query string.
+ *
  * @param query an object with query parameters
  * @param body an object with the body content
  * @throws FilterUsersHttpError
@@ -356,6 +359,7 @@ type FilterUsersHttpError = {
 };
 /**
  * Invite one or more users by email address.
+ *
  * @param body an object with the body content
  * @throws InviteUsersHttpError
  */
@@ -372,6 +376,7 @@ type InviteUsersHttpError = {
 };
 /**
  * Redirects to retrieve the user resource associated with the JWT claims.
+ *
  * @throws GetMyUserHttpError
  */
 declare const getMyUser: (options?: ApiCallOptions) => Promise<GetMyUserHttpResponse>;
@@ -393,6 +398,7 @@ type GetMyUser429HttpError = {
 type GetMyUserHttpError = GetMyUser301HttpError | GetMyUser429HttpError;
 /**
  * Returns the metadata with regard to the user configuration. Deprecated, use GET /v1/roles instead.
+ *
  * @throws GetUsersMetadataHttpError
  */
 declare const getUsersMetadata: (options?: ApiCallOptions) => Promise<GetUsersMetadataHttpResponse>;
@@ -408,6 +414,7 @@ type GetUsersMetadataHttpError = {
 };
 /**
  * Deletes the requested user.
+ *
  * @param userId The ID of the user to delete.
  * @throws DeleteUserHttpError
  */
@@ -424,6 +431,7 @@ type DeleteUserHttpError = {
 };
 /**
  * Returns the requested user.
+ *
  * @param userId The user's unique identifier
  * @param query an object with query parameters
  * @throws GetUserHttpError
@@ -444,6 +452,7 @@ type GetUserHttpError = {
 };
 /**
  * Updates fields for a user resource
+ *
  * @param userId The ID of the user to update.
  * @param body an object with the body content
  * @throws PatchUserHttpError
@@ -472,24 +481,28 @@ declare function clearCache(): void;
 interface UsersAPI {
     /**
      * Returns a list of users using cursor-based pagination.
+     *
      * @param query an object with query parameters
      * @throws GetUsersHttpError
      */
     getUsers: typeof getUsers;
     /**
      * Creates an invited user.
+     *
      * @param body an object with the body content
      * @throws CreateUserHttpError
      */
     createUser: typeof createUser;
     /**
      * Returns the number of users in a given tenant
+     *
      * @param query an object with query parameters
      * @throws CountUsersHttpError
      */
     countUsers: typeof countUsers;
     /**
      * Retrieves a list of users matching the filter using an advanced query string.
+     *
      * @param query an object with query parameters
      * @param body an object with the body content
      * @throws FilterUsersHttpError
@@ -497,28 +510,33 @@ interface UsersAPI {
     filterUsers: typeof filterUsers;
     /**
      * Invite one or more users by email address.
+     *
      * @param body an object with the body content
      * @throws InviteUsersHttpError
      */
     inviteUsers: typeof inviteUsers;
     /**
      * Redirects to retrieve the user resource associated with the JWT claims.
+     *
      * @throws GetMyUserHttpError
      */
     getMyUser: typeof getMyUser;
     /**
      * Returns the metadata with regard to the user configuration. Deprecated, use GET /v1/roles instead.
+     *
      * @throws GetUsersMetadataHttpError
      */
     getUsersMetadata: typeof getUsersMetadata;
     /**
      * Deletes the requested user.
+     *
      * @param userId The ID of the user to delete.
      * @throws DeleteUserHttpError
      */
     deleteUser: typeof deleteUser;
     /**
      * Returns the requested user.
+     *
      * @param userId The user's unique identifier
      * @param query an object with query parameters
      * @throws GetUserHttpError
@@ -526,6 +544,7 @@ interface UsersAPI {
     getUser: typeof getUser;
     /**
      * Updates fields for a user resource
+     *
      * @param userId The ID of the user to update.
      * @param body an object with the body content
      * @throws PatchUserHttpError

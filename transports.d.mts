@@ -113,6 +113,7 @@ type SmtpResult = {
 };
 /**
  * Deletes email configuration for a given tenant id (retrieved from JWT).
+ *
  * @throws DeleteEmailConfigHttpError
  */
 declare const deleteEmailConfig: (options?: ApiCallOptions) => Promise<DeleteEmailConfigHttpResponse>;
@@ -139,6 +140,7 @@ type DeleteEmailConfigdefaultHttpError = {
 type DeleteEmailConfigHttpError = DeleteEmailConfig403HttpError | DeleteEmailConfig404HttpError | DeleteEmailConfigdefaultHttpError;
 /**
  * Returns the email configuration for a given tenant id (retrieved from JWT).
+ *
  * @throws GetEmailConfigHttpError
  */
 declare const getEmailConfig: (options?: ApiCallOptions) => Promise<GetEmailConfigHttpResponse>;
@@ -160,6 +162,7 @@ type GetEmailConfigdefaultHttpError = {
 type GetEmailConfigHttpError = GetEmailConfig403HttpError | GetEmailConfigdefaultHttpError;
 /**
  * Patch the email configuration for a given tenant id (retrieved from JWT).
+ *
  * @param body an object with the body content
  * @throws PatchEmailConfigHttpError
  */
@@ -187,6 +190,7 @@ type PatchEmailConfigdefaultHttpError = {
 type PatchEmailConfigHttpError = PatchEmailConfig400HttpError | PatchEmailConfig403HttpError | PatchEmailConfigdefaultHttpError;
 /**
  * Send a test mail with the supplied email info (subject, body, recipient). Email config from database is used for the connection.
+ *
  * @param body an object with the body content
  * @throws SendTestEmailHttpError
  */
@@ -214,6 +218,7 @@ type SendTestEmaildefaultHttpError = {
 type SendTestEmailHttpError = SendTestEmail403HttpError | SendTestEmail404HttpError | SendTestEmaildefaultHttpError;
 /**
  * Returns the isValid value for the email configuration for the tenant. Will return false if no email configuration exists.
+ *
  * @throws ValidateEmailConfigHttpError
  */
 declare const validateEmailConfig: (options?: ApiCallOptions) => Promise<ValidateEmailConfigHttpResponse>;
@@ -229,6 +234,7 @@ type ValidateEmailConfigHttpError = {
 };
 /**
  * Verifies connection to email server for tenant provided via JWT
+ *
  * @throws VerifyEmailConfigConnectionHttpError
  */
 declare const verifyEmailConfigConnection: (options?: ApiCallOptions) => Promise<VerifyEmailConfigConnectionHttpResponse>;
@@ -255,33 +261,39 @@ declare function clearCache(): void;
 interface TransportsAPI {
     /**
      * Deletes email configuration for a given tenant id (retrieved from JWT).
+     *
      * @throws DeleteEmailConfigHttpError
      */
     deleteEmailConfig: typeof deleteEmailConfig;
     /**
      * Returns the email configuration for a given tenant id (retrieved from JWT).
+     *
      * @throws GetEmailConfigHttpError
      */
     getEmailConfig: typeof getEmailConfig;
     /**
      * Patch the email configuration for a given tenant id (retrieved from JWT).
+     *
      * @param body an object with the body content
      * @throws PatchEmailConfigHttpError
      */
     patchEmailConfig: typeof patchEmailConfig;
     /**
      * Send a test mail with the supplied email info (subject, body, recipient). Email config from database is used for the connection.
+     *
      * @param body an object with the body content
      * @throws SendTestEmailHttpError
      */
     sendTestEmail: typeof sendTestEmail;
     /**
      * Returns the isValid value for the email configuration for the tenant. Will return false if no email configuration exists.
+     *
      * @throws ValidateEmailConfigHttpError
      */
     validateEmailConfig: typeof validateEmailConfig;
     /**
      * Verifies connection to email server for tenant provided via JWT
+     *
      * @throws VerifyEmailConfigConnectionHttpError
      */
     verifyEmailConfigConnection: typeof verifyEmailConfigConnection;

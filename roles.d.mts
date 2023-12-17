@@ -75,6 +75,7 @@ type Role = {
 };
 /**
  * Returns a list of roles using cursor-based pagination.
+ *
  * @param query an object with query parameters
  * @throws GetRolesHttpError
  */
@@ -106,6 +107,7 @@ type GetRolesHttpError = {
 };
 /**
  * Returns the requested role.
+ *
  * @param id The role's unique identifier
  * @throws GetRoleHttpError
  */
@@ -127,12 +129,14 @@ declare function clearCache(): void;
 interface RolesAPI {
     /**
      * Returns a list of roles using cursor-based pagination.
+     *
      * @param query an object with query parameters
      * @throws GetRolesHttpError
      */
     getRoles: typeof getRoles;
     /**
      * Returns the requested role.
+     *
      * @param id The role's unique identifier
      * @throws GetRoleHttpError
      */

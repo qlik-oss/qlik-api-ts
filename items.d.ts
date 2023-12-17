@@ -18,8 +18,7 @@ type ItemsSettingsPatch = {
     op: "replace";
     /** Field of Settings to be patched (updated). */
     path: "/usageMetricsEnabled";
-    /** The value to be used within the operations.
-    //  */
+    /** The value to be used within the operations. */
     value: boolean;
 }[];
 type ItemsSettingsResponseBody = {
@@ -235,8 +234,7 @@ declare const getItems: (query: {
     name?: string | undefined;
     /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
     next?: string | undefined;
-    /** If set to true, the user's available actions for each item will not be evaluated meaning the actions-array will be omitted from the response (reduces response time).
-    //  */
+    /** If set to true, the user's available actions for each item will not be evaluated meaning the actions-array will be omitted from the response (reduces response time). */
     noActions?: boolean | undefined;
     /** User's unique identifier. */
     notCreatedByUserId?: string | undefined;
@@ -261,7 +259,7 @@ declare const getItems: (query: {
     /** Whether or not to return items in a shared space. */
     shared?: boolean | undefined;
     /** The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively. */
-    sort?: "+name" | "+createdAt" | "+updatedAt" | "-name" | "-createdAt" | "-updatedAt" | undefined;
+    sort?: "-name" | "+name" | "+createdAt" | "-createdAt" | "+updatedAt" | "-updatedAt" | undefined;
     /** The space's unique identifier (supports \'personal\' as spaceId). */
     spaceId?: string | undefined;
     /** The case-sensitive string used to filter items on space type(s). For example '?spaceType=shared,personal'. */
@@ -297,6 +295,7 @@ type GetItemsSettingsHttpError = {
 };
 /**
  * Updates the settings provided in the patch body.
+ *
  * @param body an object with the body content
  * @throws PatchItemsSettingsHttpError
  */
@@ -382,7 +381,7 @@ declare const getItemCollections: (itemId: string, query: {
     /** The case-insensitive string used to search for a resource by name or description. */
     query?: string | undefined;
     /** The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively. */
-    sort?: "+name" | "+createdAt" | "+updatedAt" | "-name" | "-createdAt" | "-updatedAt" | undefined;
+    sort?: "-name" | "+name" | "+createdAt" | "-createdAt" | "+updatedAt" | "-updatedAt" | undefined;
     /** The case-sensitive string used to search for a collection by type. */
     type?: CollectionTypes | undefined;
 }, options?: ApiCallOptions) => Promise<GetItemCollectionsHttpResponse>;
@@ -449,6 +448,7 @@ interface ItemsAPI {
     getItemsSettings: typeof getItemsSettings;
     /**
      * Updates the settings provided in the patch body.
+     *
      * @param body an object with the body content
      * @throws PatchItemsSettingsHttpError
      */

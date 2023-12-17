@@ -85,6 +85,7 @@ type Meta = {
 };
 /**
  * Lists all extensions.
+ *
  * @throws GetExtensionsHttpError
  */
 declare const getExtensions: (options?: ApiCallOptions) => Promise<GetExtensionsHttpResponse>;
@@ -100,6 +101,7 @@ type GetExtensionsHttpError = {
 };
 /**
  * Creates a new extension. If a file is provided, the data field is not required.
+ *
  * @param body an object with the body content
  * @throws UploadExtensionHttpError
  */
@@ -116,6 +118,7 @@ type UploadExtensionHttpError = {
 };
 /**
  * Deletes a specific extension.
+ *
  * @param id Extension identifier or its qextFilename.
  * @throws DeleteExtensionHttpError
  */
@@ -132,6 +135,7 @@ type DeleteExtensionHttpError = {
 };
 /**
  * Returns a specific extension.
+ *
  * @param id Extension identifier or its qextFilename.
  * @throws GetExtensionHttpError
  */
@@ -148,6 +152,7 @@ type GetExtensionHttpError = {
 };
 /**
  * Updates a specific extension with provided data. If a file is provided, the data field is not required.
+ *
  * @param id Extension identifier or its qextFilename.
  * @param body an object with the body content
  * @throws PatchExtensionHttpError
@@ -165,6 +170,7 @@ type PatchExtensionHttpError = {
 };
 /**
  * Downloads the extension as an archive.
+ *
  * @param id Extension identifier or its qextFilename.
  * @throws DownloadExtensionHttpError
  */
@@ -181,6 +187,7 @@ type DownloadExtensionHttpError = {
 };
 /**
  * Downloads a file from the extension archive.
+ *
  * @param id Extension identifier or its qextFilename.
  * @param filepath Path to the file archive for the specified extension archive. Folders separated with forward slashes.
  * @throws DownloadFileFromExtensionHttpError
@@ -203,29 +210,34 @@ declare function clearCache(): void;
 interface ExtensionsAPI {
     /**
      * Lists all extensions.
+     *
      * @throws GetExtensionsHttpError
      */
     getExtensions: typeof getExtensions;
     /**
      * Creates a new extension. If a file is provided, the data field is not required.
+     *
      * @param body an object with the body content
      * @throws UploadExtensionHttpError
      */
     uploadExtension: typeof uploadExtension;
     /**
      * Deletes a specific extension.
+     *
      * @param id Extension identifier or its qextFilename.
      * @throws DeleteExtensionHttpError
      */
     deleteExtension: typeof deleteExtension;
     /**
      * Returns a specific extension.
+     *
      * @param id Extension identifier or its qextFilename.
      * @throws GetExtensionHttpError
      */
     getExtension: typeof getExtension;
     /**
      * Updates a specific extension with provided data. If a file is provided, the data field is not required.
+     *
      * @param id Extension identifier or its qextFilename.
      * @param body an object with the body content
      * @throws PatchExtensionHttpError
@@ -233,12 +245,14 @@ interface ExtensionsAPI {
     patchExtension: typeof patchExtension;
     /**
      * Downloads the extension as an archive.
+     *
      * @param id Extension identifier or its qextFilename.
      * @throws DownloadExtensionHttpError
      */
     downloadExtension: typeof downloadExtension;
     /**
      * Downloads a file from the extension archive.
+     *
      * @param id Extension identifier or its qextFilename.
      * @param filepath Path to the file archive for the specified extension archive. Folders separated with forward slashes.
      * @throws DownloadFileFromExtensionHttpError
