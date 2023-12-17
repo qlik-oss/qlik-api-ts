@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-W4J34XGA.mjs";
-import "./chunk-7REWEWCX.mjs";
+} from "./chunk-MP2QZCTY.mjs";
+import "./chunk-2OXQN2IV.mjs";
 
 // src/public/rest/glossaries.ts
 var getGlossaries = async (query, options) => invokeFetch("glossaries", {

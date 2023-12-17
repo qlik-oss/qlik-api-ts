@@ -1,78 +1,78 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunk6JERR27Kjs = require('./chunk-6JERR27K.js');
-require('./chunk-H7SAZYEE.js');
+var _chunkWA4O4PMUjs = require('./chunk-WA4O4PMU.js');
+require('./chunk-L4SFSITJ.js');
 
 // src/public/rest/data-files.ts
-var getDataFiles = async (query, options) => _chunk6JERR27Kjs.invokeFetch.call(void 0, "data-files", {
+var getDataFiles = async (query, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "data-files", {
   method: "get",
   pathTemplate: "/api/v1/data-files",
   query,
   options
 });
-var uploadDataFile = async (body, options) => _chunk6JERR27Kjs.invokeFetch.call(void 0, "data-files", {
+var uploadDataFile = async (body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "data-files", {
   method: "post",
   pathTemplate: "/api/v1/data-files",
   body,
   options
 });
-var moveDataFiles = async (body, options) => _chunk6JERR27Kjs.invokeFetch.call(void 0, "data-files", {
+var moveDataFiles = async (body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "data-files", {
   method: "post",
   pathTemplate: "/api/v1/data-files/actions/change-space",
   body,
   options
 });
-var deleteDataFiles = async (body, options) => _chunk6JERR27Kjs.invokeFetch.call(void 0, "data-files", {
+var deleteDataFiles = async (body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "data-files", {
   method: "post",
   pathTemplate: "/api/v1/data-files/actions/delete",
   body,
   options
 });
-var getDataFilesConnections = async (query, options) => _chunk6JERR27Kjs.invokeFetch.call(void 0, "data-files", {
+var getDataFilesConnections = async (query, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "data-files", {
   method: "get",
   pathTemplate: "/api/v1/data-files/connections",
   query,
   options
 });
-var getDataFileConnection = async (id, options) => _chunk6JERR27Kjs.invokeFetch.call(void 0, "data-files", {
+var getDataFileConnection = async (id, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "data-files", {
   method: "get",
   pathTemplate: "/api/v1/data-files/connections/{id}",
   pathVariables: { id },
   options
 });
-var getDataFilesQuotas = async (options) => _chunk6JERR27Kjs.invokeFetch.call(void 0, "data-files", {
+var getDataFilesQuotas = async (options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "data-files", {
   method: "get",
   pathTemplate: "/api/v1/data-files/quotas",
   options
 });
-var deleteDataFile = async (id, options) => _chunk6JERR27Kjs.invokeFetch.call(void 0, "data-files", {
+var deleteDataFile = async (id, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "data-files", {
   method: "delete",
   pathTemplate: "/api/v1/data-files/{id}",
   pathVariables: { id },
   options
 });
-var getDataFile = async (id, options) => _chunk6JERR27Kjs.invokeFetch.call(void 0, "data-files", {
+var getDataFile = async (id, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "data-files", {
   method: "get",
   pathTemplate: "/api/v1/data-files/{id}",
   pathVariables: { id },
   options
 });
-var reuploadDataFile = async (id, body, options) => _chunk6JERR27Kjs.invokeFetch.call(void 0, "data-files", {
+var reuploadDataFile = async (id, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "data-files", {
   method: "put",
   pathTemplate: "/api/v1/data-files/{id}",
   pathVariables: { id },
   body,
   options
 });
-var changeDataFileOwner = async (id, body, options) => _chunk6JERR27Kjs.invokeFetch.call(void 0, "data-files", {
+var changeDataFileOwner = async (id, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "data-files", {
   method: "post",
   pathTemplate: "/api/v1/data-files/{id}/actions/change-owner",
   pathVariables: { id },
   body,
   options
 });
-var moveDataFile = async (id, body, options) => _chunk6JERR27Kjs.invokeFetch.call(void 0, "data-files", {
+var moveDataFile = async (id, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "data-files", {
   method: "post",
   pathTemplate: "/api/v1/data-files/{id}/actions/change-space",
   pathVariables: { id },
@@ -80,7 +80,7 @@ var moveDataFile = async (id, body, options) => _chunk6JERR27Kjs.invokeFetch.cal
   options
 });
 function clearCache() {
-  return _chunk6JERR27Kjs.clearApiCache.call(void 0, "data-files");
+  return _chunkWA4O4PMUjs.clearApiCache.call(void 0, "data-files");
 }
 var dataFilesExport = {
   getDataFiles,

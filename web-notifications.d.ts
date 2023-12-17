@@ -61,6 +61,7 @@ type Notifications = {
 };
 /**
  * Retrieve notifications matching the query.
+ *
  * @param query an object with query parameters
  * @throws GetNotificationsHttpError
  */
@@ -88,6 +89,7 @@ type GetNotificationsHttpError = {
 };
 /**
  * Delete all notifications.
+ *
  * @throws DeleteNotificationsHttpError
  */
 declare const deleteNotifications: (options?: ApiCallOptions) => Promise<DeleteNotificationsHttpResponse>;
@@ -103,6 +105,7 @@ type DeleteNotificationsHttpError = {
 };
 /**
  * Patch all notifications.
+ *
  * @param body an object with the body content
  * @throws PatchNotificationsHttpError
  */
@@ -119,6 +122,7 @@ type PatchNotificationsHttpError = {
 };
 /**
  * Delete a notification.
+ *
  * @param notificationId The id of the notification to delete.
  * @throws DeleteNotificationHttpError
  */
@@ -135,6 +139,7 @@ type DeleteNotificationHttpError = {
 };
 /**
  * Retrieve a single notification by Id.
+ *
  * @param notificationId The id of the notification to retrieve.
  * @throws GetNotificationHttpError
  */
@@ -151,6 +156,7 @@ type GetNotificationHttpError = {
 };
 /**
  * Patch a notification.
+ *
  * @param notificationId The id of the notification to update.
  * @param body an object with the body content
  * @throws PatchNotificationHttpError
@@ -173,35 +179,41 @@ declare function clearCache(): void;
 interface WebNotificationsAPI {
     /**
      * Retrieve notifications matching the query.
+     *
      * @param query an object with query parameters
      * @throws GetNotificationsHttpError
      */
     getNotifications: typeof getNotifications;
     /**
      * Delete all notifications.
+     *
      * @throws DeleteNotificationsHttpError
      */
     deleteNotifications: typeof deleteNotifications;
     /**
      * Patch all notifications.
+     *
      * @param body an object with the body content
      * @throws PatchNotificationsHttpError
      */
     patchNotifications: typeof patchNotifications;
     /**
      * Delete a notification.
+     *
      * @param notificationId The id of the notification to delete.
      * @throws DeleteNotificationHttpError
      */
     deleteNotification: typeof deleteNotification;
     /**
      * Retrieve a single notification by Id.
+     *
      * @param notificationId The id of the notification to retrieve.
      * @throws GetNotificationHttpError
      */
     getNotification: typeof getNotification;
     /**
      * Patch a notification.
+     *
      * @param notificationId The id of the notification to update.
      * @param body an object with the body content
      * @throws PatchNotificationHttpError

@@ -85,11 +85,11 @@ type WebhookBase = {
     /** Types of events for which the webhook should trigger. */
     eventTypes?: string[];
     /** Filter that should match for a webhook to be triggered.
-    // Supported common attribute names are 'id', 'spaceId' and 'topLevelResourceId', beside the common attributes the "com.qlik.v1.app.reload.finished" event also supports "data.status" that could be either "ok" or "error" but can't be used together with other event types.
-    // Supported attribute operators are 'eq' and 'ne'.
-    // Supported logical operators are 'and' and 'or'.
-    // Note that attribute values must be valid JSON strings, hence they're enclosed with double quotes
-    // For more detailed information regarding the SCIM filter syntax (RFC7644) used please follow the link to external documentation. */
+     * Supported common attribute names are 'id', 'spaceId' and 'topLevelResourceId', beside the common attributes the "com.qlik.v1.app.reload.finished" event also supports "data.status" that could be either "ok" or "error" but can't be used together with other event types.
+     * Supported attribute operators are 'eq' and 'ne'.
+     * Supported logical operators are 'and' and 'or'.
+     * Note that attribute values must be valid JSON strings, hence they're enclosed with double quotes
+     * For more detailed information regarding the SCIM filter syntax (RFC7644) used please follow the link to external documentation. */
     filter?: string;
     /** Additional headers in the post request */
     headers?: unknown;
@@ -136,6 +136,7 @@ type WebhookResponse = WebhookBase & {
 };
 /**
  * Retrieves all webhooks entries for a tenant
+ *
  * @param query an object with query parameters
  * @throws GetWebhooksHttpError
  */
@@ -179,6 +180,7 @@ type GetWebhooksHttpError = {
 };
 /**
  * Creates a new webhook
+ *
  * @param body an object with the body content
  * @throws CreateWebhookHttpError
  */
@@ -195,6 +197,7 @@ type CreateWebhookHttpError = {
 };
 /**
  * List of event-types that are possible to subscribe to.
+ *
  * @throws GetWebhookEventTypesHttpError
  */
 declare const getWebhookEventTypes: (options?: ApiCallOptions) => Promise<GetWebhookEventTypesHttpResponse>;
@@ -210,6 +213,7 @@ type GetWebhookEventTypesHttpError = {
 };
 /**
  * Deletes a specific webhook
+ *
  * @param id The webhook's unique identifier.
  * @throws DeleteWebhookHttpError
  */
@@ -226,6 +230,7 @@ type DeleteWebhookHttpError = {
 };
 /**
  * Returns details for a specific webhook
+ *
  * @param id The webhook's unique identifier.
  * @throws GetWebhookHttpError
  */
@@ -242,6 +247,7 @@ type GetWebhookHttpError = {
 };
 /**
  * Patches a webhook
+ *
  * @param id The webhook's unique identifier.
  * @param body an object with the body content
  * @throws PatchWebhookHttpError
@@ -259,6 +265,7 @@ type PatchWebhookHttpError = {
 };
 /**
  * Updates a webhook
+ *
  * @param id The webhook's unique identifier.
  * @param body an object with the body content
  * @throws UpdateWebhookHttpError
@@ -276,6 +283,7 @@ type UpdateWebhookHttpError = {
 };
 /**
  * Returns deliveries for a specific webhook
+ *
  * @param id The webhook's unique identifier.
  * @param query an object with query parameters
  * @throws GetWebhookDeliveriesHttpError
@@ -308,6 +316,7 @@ type GetWebhookDeliveriesHttpError = {
 };
 /**
  * Returns details for a specific delivery
+ *
  * @param id The webhook's unique identifier.
  * @param deliveryId The delivery's unique identifier.
  * @throws GetWebhookDeliveryHttpError
@@ -325,6 +334,7 @@ type GetWebhookDeliveryHttpError = {
 };
 /**
  * Resend the delivery with the same payload
+ *
  * @param id The webhook's unique identifier.
  * @param deliveryId The delivery's unique identifier.
  * @throws ResendWebhookDeliveryHttpError
@@ -347,35 +357,41 @@ declare function clearCache(): void;
 interface WebhooksAPI {
     /**
      * Retrieves all webhooks entries for a tenant
+     *
      * @param query an object with query parameters
      * @throws GetWebhooksHttpError
      */
     getWebhooks: typeof getWebhooks;
     /**
      * Creates a new webhook
+     *
      * @param body an object with the body content
      * @throws CreateWebhookHttpError
      */
     createWebhook: typeof createWebhook;
     /**
      * List of event-types that are possible to subscribe to.
+     *
      * @throws GetWebhookEventTypesHttpError
      */
     getWebhookEventTypes: typeof getWebhookEventTypes;
     /**
      * Deletes a specific webhook
+     *
      * @param id The webhook's unique identifier.
      * @throws DeleteWebhookHttpError
      */
     deleteWebhook: typeof deleteWebhook;
     /**
      * Returns details for a specific webhook
+     *
      * @param id The webhook's unique identifier.
      * @throws GetWebhookHttpError
      */
     getWebhook: typeof getWebhook;
     /**
      * Patches a webhook
+     *
      * @param id The webhook's unique identifier.
      * @param body an object with the body content
      * @throws PatchWebhookHttpError
@@ -383,6 +399,7 @@ interface WebhooksAPI {
     patchWebhook: typeof patchWebhook;
     /**
      * Updates a webhook
+     *
      * @param id The webhook's unique identifier.
      * @param body an object with the body content
      * @throws UpdateWebhookHttpError
@@ -390,6 +407,7 @@ interface WebhooksAPI {
     updateWebhook: typeof updateWebhook;
     /**
      * Returns deliveries for a specific webhook
+     *
      * @param id The webhook's unique identifier.
      * @param query an object with query parameters
      * @throws GetWebhookDeliveriesHttpError
@@ -397,6 +415,7 @@ interface WebhooksAPI {
     getWebhookDeliveries: typeof getWebhookDeliveries;
     /**
      * Returns details for a specific delivery
+     *
      * @param id The webhook's unique identifier.
      * @param deliveryId The delivery's unique identifier.
      * @throws GetWebhookDeliveryHttpError
@@ -404,6 +423,7 @@ interface WebhooksAPI {
     getWebhookDelivery: typeof getWebhookDelivery;
     /**
      * Resend the delivery with the same payload
+     *
      * @param id The webhook's unique identifier.
      * @param deliveryId The delivery's unique identifier.
      * @throws ResendWebhookDeliveryHttpError

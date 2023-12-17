@@ -1,13 +1,13 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }// node_modules/.pnpm/@qlik+runtime-module-loader@0.1.15/node_modules/@qlik/runtime-module-loader/dist/esm/index.js
-var resolveMainJsUrl;
-var mainUrlPromise = new Promise((resolve) => {
-  resolveMainJsUrl = (value) => resolve(value);
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }// node_modules/.pnpm/@qlik+runtime-module-loader@0.2.3/node_modules/@qlik/runtime-module-loader/dist/esm/index.js
+window.__qlikMainPrivateResolvers = window.__qlikMainPrivateResolvers || {};
+window.__qlikMainPrivateResolvers.mainUrlPromise = window.__qlikMainPrivateResolvers.mainUrlPromise || new Promise((resolve) => {
+  window.__qlikMainPrivateResolvers.resolveMainJsUrl = (value) => resolve(value);
 });
-window.qlikMainPromise = window.qlikMainPromise || (async () => {
+window.__qlikMainPrivateResolvers.qlikMainPromise = window.__qlikMainPrivateResolvers.qlikMainPromise || (async () => {
   if (window.QlikMain) {
     return window.QlikMain;
   }
-  const url = await mainUrlPromise;
+  const url = await window.__qlikMainPrivateResolvers.mainUrlPromise;
   return new Promise((resolve, reject) => {
     if (window.QlikMain) {
       resolve(window.QlikMain);
@@ -18,7 +18,9 @@ window.qlikMainPromise = window.qlikMainPromise || (async () => {
       reject(err);
     });
     script.addEventListener("load", () => {
-      resolve(window.QlikMain);
+      if (window.QlikMain) {
+        resolve(window.QlikMain);
+      }
     });
     window.document.head.appendChild(script);
   });
@@ -41,7 +43,7 @@ function provideHostConfigForMainJsUrl(hostConfig) {
   }
   const potentialMainJsUrl = toMainJsUrl(hostConfig);
   if (potentialMainJsUrl) {
-    resolveMainJsUrl(potentialMainJsUrl);
+    window.__qlikMainPrivateResolvers.resolveMainJsUrl(potentialMainJsUrl);
   }
 }
 async function importRuntimeModule(name, hostConfig) {
@@ -55,7 +57,7 @@ async function importUnsupportedAndUnstableRuntimeModule(name) {
   return importFromCdn(name);
 }
 async function importFromCdn(name) {
-  return (await window.qlikMainPromise).import(name);
+  return (await window.__qlikMainPrivateResolvers.qlikMainPromise).import(name);
 }
 
 

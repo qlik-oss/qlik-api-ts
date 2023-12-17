@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-W4J34XGA.mjs";
-import "./chunk-7REWEWCX.mjs";
+} from "./chunk-MP2QZCTY.mjs";
+import "./chunk-2OXQN2IV.mjs";
 
 // src/public/rest/collections.ts
 var getCollections = async (query, options) => invokeFetch("collections", {
@@ -32,6 +32,13 @@ var getCollection = async (collectionId, options) => invokeFetch("collections", 
   method: "get",
   pathTemplate: "/api/v1/collections/{collectionId}",
   pathVariables: { collectionId },
+  options
+});
+var patchCollection = async (collectionId, body, options) => invokeFetch("collections", {
+  method: "patch",
+  pathTemplate: "/api/v1/collections/{collectionId}",
+  pathVariables: { collectionId },
+  body,
   options
 });
 var updateCollection = async (collectionId, body, options) => invokeFetch("collections", {
@@ -76,6 +83,7 @@ var collectionsExport = {
   getFavoritesCollection,
   deleteCollection,
   getCollection,
+  patchCollection,
   updateCollection,
   getCollectionItems,
   addCollectionItem,
@@ -96,5 +104,6 @@ export {
   getCollectionItems,
   getCollections,
   getFavoritesCollection,
+  patchCollection,
   updateCollection
 };

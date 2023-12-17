@@ -293,6 +293,7 @@ type ClaimsMappingNonInteractive = {
 };
 /**
  * This endpoint retrieves one or more identity providers from the service. The tenantID in the JWT will be used to fetch the identity provider.
+ *
  * @param query an object with query parameters
  * @throws GetIdpsHttpError
  */
@@ -320,6 +321,7 @@ type GetIdpsHttpError = {
 };
 /**
  * This endpoint creates an identity provider resource. It returns a 201 Created when creation is successful with a header "QLIK-IDP-POPTS" (A unique string representing a hash of the current configuration being tested), returns a 403 Forbidden for a non TenantAdmin user JWT or if the tenantID in the JWT does not match with any of the tenantIDs in the payload. An IdP can be created with Pending Options or options depending whether the IdP is interactive or not.
+ *
  * @param body an object with the body content
  * @throws CreateIdpHttpError
  */
@@ -336,6 +338,7 @@ type CreateIdpHttpError = {
 };
 /**
  * This endpoint retrieves identity providers' metadata.
+ *
  * @throws GetIdpWellKnownMetaDataHttpError
  */
 declare const getIdpWellKnownMetaData: (options?: ApiCallOptions) => Promise<GetIdpWellKnownMetaDataHttpResponse>;
@@ -351,6 +354,7 @@ type GetIdpWellKnownMetaDataHttpError = {
 };
 /**
  * Returns the active interactive IdP metadata
+ *
  * @throws GetMyIdpMetaHttpError
  */
 declare const getMyIdpMeta: (options?: ApiCallOptions) => Promise<GetMyIdpMetaHttpResponse>;
@@ -366,6 +370,7 @@ type GetMyIdpMetaHttpError = {
 };
 /**
  * This endpoint retrieves the status of IdP configurations. Requires TenantAdmin role.
+ *
  * @throws GetIdpStatusesHttpError
  */
 declare const getIdpStatuses: (options?: ApiCallOptions) => Promise<GetIdpStatusesHttpResponse>;
@@ -381,6 +386,7 @@ type GetIdpStatusesHttpError = {
 };
 /**
  * This endpoint deletes an identity provider from the service. It returns a valid 204 when the IdP is deleted. Only a user with the role of TenantAdmin and tenant access can delete an associated IdP. Edge-auth service can also delete.
+ *
  * @param id The identity provider ID.
  * @throws DeleteIdpHttpError
  */
@@ -397,6 +403,7 @@ type DeleteIdpHttpError = {
 };
 /**
  * This endpoint is used to retrieve an identity provider from the service. It returns a valid 200 OK response when the IdP exists and the user (TenantAdmin) or service (edge-auth) is authorized to view the contents. Additionally, returns a header "QLIK-IDP-POPTS" (A unique string representing a hash of the current configuration being tested). It returns a 404 Not Found if the criteria is not met.
+ *
  * @param id The identity provider ID.
  * @throws GetIdpHttpError
  */
@@ -413,6 +420,7 @@ type GetIdpHttpError = {
 };
 /**
  * This endpoint patches an identity provider from the service. It returns a valid 204 when the IdP is patched. Only an edge-auth service request or a user with the role of TenantAdmin can patch an associated IdP. Partial failure is treated as complete failure and returns an error.
+ *
  * @param id The identity provider ID.
  * @param body an object with the body content
  * @throws PatchIdpHttpError
@@ -435,45 +443,53 @@ declare function clearCache(): void;
 interface IdentityProvidersAPI {
     /**
      * This endpoint retrieves one or more identity providers from the service. The tenantID in the JWT will be used to fetch the identity provider.
+     *
      * @param query an object with query parameters
      * @throws GetIdpsHttpError
      */
     getIdps: typeof getIdps;
     /**
      * This endpoint creates an identity provider resource. It returns a 201 Created when creation is successful with a header "QLIK-IDP-POPTS" (A unique string representing a hash of the current configuration being tested), returns a 403 Forbidden for a non TenantAdmin user JWT or if the tenantID in the JWT does not match with any of the tenantIDs in the payload. An IdP can be created with Pending Options or options depending whether the IdP is interactive or not.
+     *
      * @param body an object with the body content
      * @throws CreateIdpHttpError
      */
     createIdp: typeof createIdp;
     /**
      * This endpoint retrieves identity providers' metadata.
+     *
      * @throws GetIdpWellKnownMetaDataHttpError
      */
     getIdpWellKnownMetaData: typeof getIdpWellKnownMetaData;
     /**
      * Returns the active interactive IdP metadata
+     *
      * @throws GetMyIdpMetaHttpError
      */
     getMyIdpMeta: typeof getMyIdpMeta;
     /**
      * This endpoint retrieves the status of IdP configurations. Requires TenantAdmin role.
+     *
      * @throws GetIdpStatusesHttpError
      */
     getIdpStatuses: typeof getIdpStatuses;
     /**
      * This endpoint deletes an identity provider from the service. It returns a valid 204 when the IdP is deleted. Only a user with the role of TenantAdmin and tenant access can delete an associated IdP. Edge-auth service can also delete.
+     *
      * @param id The identity provider ID.
      * @throws DeleteIdpHttpError
      */
     deleteIdp: typeof deleteIdp;
     /**
      * This endpoint is used to retrieve an identity provider from the service. It returns a valid 200 OK response when the IdP exists and the user (TenantAdmin) or service (edge-auth) is authorized to view the contents. Additionally, returns a header "QLIK-IDP-POPTS" (A unique string representing a hash of the current configuration being tested). It returns a 404 Not Found if the criteria is not met.
+     *
      * @param id The identity provider ID.
      * @throws GetIdpHttpError
      */
     getIdp: typeof getIdp;
     /**
      * This endpoint patches an identity provider from the service. It returns a valid 204 when the IdP is patched. Only an edge-auth service request or a user with the role of TenantAdmin can patch an associated IdP. Partial failure is treated as complete failure and returns an error.
+     *
      * @param id The identity provider ID.
      * @param body an object with the body content
      * @throws PatchIdpHttpError

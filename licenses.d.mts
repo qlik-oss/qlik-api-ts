@@ -206,6 +206,7 @@ type SettingsBody = {
 };
 /**
  * Retrieves assignments for the current tenant
+ *
  * @param query an object with query parameters
  * @throws GetLicenseAssignmentsHttpError
  */
@@ -235,6 +236,7 @@ type GetLicenseAssignmentsHttpError = {
 };
 /**
  * Assigns license access to the given users
+ *
  * @param body an object with the body content
  * @throws AddLicenseAssignmentsHttpError
  */
@@ -251,6 +253,7 @@ type AddLicenseAssignmentsHttpError = {
 };
 /**
  * Removes license access for the given users
+ *
  * @param body an object with the body content
  * @throws DeleteLicenseAssignmentsHttpError
  */
@@ -267,6 +270,7 @@ type DeleteLicenseAssignmentsHttpError = {
 };
 /**
  * Updates license access for the given users
+ *
  * @param body an object with the body content
  * @throws UpdateLicenseAssignmentsHttpError
  */
@@ -283,6 +287,7 @@ type UpdateLicenseAssignmentsHttpError = {
 };
 /**
  * Retrieves license consumption for the current tenant
+ *
  * @param query an object with query parameters
  * @throws GetLicenseConsumptionHttpError
  */
@@ -310,6 +315,7 @@ type GetLicenseConsumptionHttpError = {
 };
 /**
  * Gets the general information of the license applied to the current tenant
+ *
  * @throws GetLicenseOverviewHttpError
  */
 declare const getLicenseOverview: (options?: ApiCallOptions) => Promise<GetLicenseOverviewHttpResponse>;
@@ -325,6 +331,7 @@ type GetLicenseOverviewHttpError = {
 };
 /**
  * Get auto assign settings for tenant.
+ *
  * @throws GetLicenseSettingsHttpError
  */
 declare const getLicenseSettings: (options?: ApiCallOptions) => Promise<GetLicenseSettingsHttpResponse>;
@@ -340,6 +347,7 @@ type GetLicenseSettingsHttpError = {
 };
 /**
  * Set auto assign settings for tenant
+ *
  * @param body an object with the body content
  * @throws UpdateLicenseSettingsHttpError
  */
@@ -356,6 +364,7 @@ type UpdateLicenseSettingsHttpError = {
 };
 /**
  * Gets the license status information of the current tenant
+ *
  * @throws GetLicenseStatusHttpError
  */
 declare const getLicenseStatus: (options?: ApiCallOptions) => Promise<GetLicenseStatusHttpResponse>;
@@ -376,52 +385,61 @@ declare function clearCache(): void;
 interface LicensesAPI {
     /**
      * Retrieves assignments for the current tenant
+     *
      * @param query an object with query parameters
      * @throws GetLicenseAssignmentsHttpError
      */
     getLicenseAssignments: typeof getLicenseAssignments;
     /**
      * Assigns license access to the given users
+     *
      * @param body an object with the body content
      * @throws AddLicenseAssignmentsHttpError
      */
     addLicenseAssignments: typeof addLicenseAssignments;
     /**
      * Removes license access for the given users
+     *
      * @param body an object with the body content
      * @throws DeleteLicenseAssignmentsHttpError
      */
     deleteLicenseAssignments: typeof deleteLicenseAssignments;
     /**
      * Updates license access for the given users
+     *
      * @param body an object with the body content
      * @throws UpdateLicenseAssignmentsHttpError
      */
     updateLicenseAssignments: typeof updateLicenseAssignments;
     /**
      * Retrieves license consumption for the current tenant
+     *
      * @param query an object with query parameters
      * @throws GetLicenseConsumptionHttpError
      */
     getLicenseConsumption: typeof getLicenseConsumption;
     /**
      * Gets the general information of the license applied to the current tenant
+     *
      * @throws GetLicenseOverviewHttpError
      */
     getLicenseOverview: typeof getLicenseOverview;
     /**
      * Get auto assign settings for tenant.
+     *
      * @throws GetLicenseSettingsHttpError
      */
     getLicenseSettings: typeof getLicenseSettings;
     /**
      * Set auto assign settings for tenant
+     *
      * @param body an object with the body content
      * @throws UpdateLicenseSettingsHttpError
      */
     updateLicenseSettings: typeof updateLicenseSettings;
     /**
      * Gets the license status information of the current tenant
+     *
      * @throws GetLicenseStatusHttpError
      */
     getLicenseStatus: typeof getLicenseStatus;

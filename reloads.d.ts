@@ -62,6 +62,7 @@ type Status = "QUEUED" | "RELOADING" | "CANCELING" | "SUCCEEDED" | "FAILED" | "C
 type Type = "hub" | "external" | "chronos" | "automations" | "data-refresh";
 /**
  * Finds and returns the reloads that the user has access to.
+ *
  * @param query an object with query parameters
  * @throws GetReloadsHttpError
  */
@@ -69,16 +70,15 @@ declare const getReloads: (query: {
     /** The UUID formatted string used to search for an app's reload history entries. TenantAdmin users may omit this parameter to list all reload history in the tenant. */
     appId?: string;
     /** SCIM filter expression used to search for reloads.
-    // The filter syntax is defined in RFC 7644 section 3.4.2.2
-    //
-    // Supported attributes:
-    // - status: see #schemas/Status
-    // - partial: see #schemas/Partial
-    // - type: see #schemas/Type
-    //
-    // Supported operators:
-    // - eq
-    //  */
+     * The filter syntax is defined in RFC 7644 section 3.4.2.2
+     *
+     * Supported attributes:
+     * - status: see #schemas/Status
+     * - partial: see #schemas/Partial
+     * - type: see #schemas/Type
+     *
+     * Supported operators:
+     * - eq */
     filter?: string;
     /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
     limit?: number;
@@ -103,6 +103,7 @@ type GetReloadsHttpError = {
 };
 /**
  * Reloads an app specified by an app ID.
+ *
  * @param body an object with the body content
  * @throws QueueReloadHttpError
  */
@@ -119,6 +120,7 @@ type QueueReloadHttpError = {
 };
 /**
  * Finds and returns a reload record
+ *
  * @param reloadId The unique identifier of the reload.
  * @throws GetReloadHttpError
  */
@@ -135,6 +137,7 @@ type GetReloadHttpError = {
 };
 /**
  * Cancels a reload that is in progress or has been queued
+ *
  * @param reloadId The unique identifier of the reload.
  * @throws CancelReloadHttpError
  */
@@ -156,24 +159,28 @@ declare function clearCache(): void;
 interface ReloadsAPI {
     /**
      * Finds and returns the reloads that the user has access to.
+     *
      * @param query an object with query parameters
      * @throws GetReloadsHttpError
      */
     getReloads: typeof getReloads;
     /**
      * Reloads an app specified by an app ID.
+     *
      * @param body an object with the body content
      * @throws QueueReloadHttpError
      */
     queueReload: typeof queueReload;
     /**
      * Finds and returns a reload record
+     *
      * @param reloadId The unique identifier of the reload.
      * @throws GetReloadHttpError
      */
     getReload: typeof getReload;
     /**
      * Cancels a reload that is in progress or has been queued
+     *
      * @param reloadId The unique identifier of the reload.
      * @throws CancelReloadHttpError
      */

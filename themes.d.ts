@@ -63,6 +63,7 @@ type Themes = {
 };
 /**
  * Lists all themes.
+ *
  * @throws GetThemesHttpError
  */
 declare const getThemes: (options?: ApiCallOptions) => Promise<GetThemesHttpResponse>;
@@ -78,6 +79,7 @@ type GetThemesHttpError = {
 };
 /**
  * Creates a new theme. If a file is provided, the data field is not required.
+ *
  * @param body an object with the body content
  * @throws UploadThemeHttpError
  */
@@ -94,6 +96,7 @@ type UploadThemeHttpError = {
 };
 /**
  * Deletes a specific theme.
+ *
  * @param id Theme identifier or its qextFilename.
  * @throws DeleteThemeHttpError
  */
@@ -110,6 +113,7 @@ type DeleteThemeHttpError = {
 };
 /**
  * Returns a specific theme.
+ *
  * @param id Theme identifier or its qextFilename
  * @throws GetThemeHttpError
  */
@@ -126,6 +130,7 @@ type GetThemeHttpError = {
 };
 /**
  * Updates a specific theme with provided data. If a file is provided, the data field is not required.
+ *
  * @param id Theme identifier or its qextFilename.
  * @param body an object with the body content
  * @throws PatchThemeHttpError
@@ -143,6 +148,7 @@ type PatchThemeHttpError = {
 };
 /**
  * Downloads the theme as an archive.
+ *
  * @param id Theme identifier or its qextFilename
  * @throws DownloadThemeHttpError
  */
@@ -159,6 +165,7 @@ type DownloadThemeHttpError = {
 };
 /**
  * Downloads a file from the theme archive.
+ *
  * @param id Theme identifier or its qextFilename.
  * @param filepath Path to the file archive for the specified theme archive. Folders separated with forward slashes.
  * @throws DownloadFileFromThemeHttpError
@@ -181,29 +188,34 @@ declare function clearCache(): void;
 interface ThemesAPI {
     /**
      * Lists all themes.
+     *
      * @throws GetThemesHttpError
      */
     getThemes: typeof getThemes;
     /**
      * Creates a new theme. If a file is provided, the data field is not required.
+     *
      * @param body an object with the body content
      * @throws UploadThemeHttpError
      */
     uploadTheme: typeof uploadTheme;
     /**
      * Deletes a specific theme.
+     *
      * @param id Theme identifier or its qextFilename.
      * @throws DeleteThemeHttpError
      */
     deleteTheme: typeof deleteTheme;
     /**
      * Returns a specific theme.
+     *
      * @param id Theme identifier or its qextFilename
      * @throws GetThemeHttpError
      */
     getTheme: typeof getTheme;
     /**
      * Updates a specific theme with provided data. If a file is provided, the data field is not required.
+     *
      * @param id Theme identifier or its qextFilename.
      * @param body an object with the body content
      * @throws PatchThemeHttpError
@@ -211,12 +223,14 @@ interface ThemesAPI {
     patchTheme: typeof patchTheme;
     /**
      * Downloads the theme as an archive.
+     *
      * @param id Theme identifier or its qextFilename
      * @throws DownloadThemeHttpError
      */
     downloadTheme: typeof downloadTheme;
     /**
      * Downloads a file from the theme archive.
+     *
      * @param id Theme identifier or its qextFilename.
      * @param filepath Path to the file archive for the specified theme archive. Folders separated with forward slashes.
      * @throws DownloadFileFromThemeHttpError

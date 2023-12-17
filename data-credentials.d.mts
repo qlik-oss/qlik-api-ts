@@ -62,6 +62,7 @@ type ResponseErrors = {
 };
 /**
  * Deletes the specified credential by ID (or by name when type=credentialname is set in query)
+ *
  * @param qID Credential ID
  * @param query an object with query parameters
  * @throws DeleteDataCredentialHttpError
@@ -82,6 +83,7 @@ type DeleteDataCredentialHttpError = {
 };
 /**
  * Gets a credential by ID (or by name when bycredentialname=true is set in query)
+ *
  * @param qID Credential ID
  * @param query an object with query parameters
  * @throws GetDataCredentialHttpError
@@ -102,6 +104,7 @@ type GetDataCredentialHttpError = {
 };
 /**
  * Patches a credential specified by ID (or by name when bycredentialname=true is set in query)
+ *
  * @param qID Credential ID
  * @param query an object with query parameters
  * @param body an object with the body content
@@ -123,6 +126,7 @@ type PatchDataCredentialHttpError = {
 };
 /**
  * Updates a credential specified by ID (or by name when bycredentialname=true is set in query)
+ *
  * @param qID Credential ID
  * @param query an object with query parameters
  * @param body an object with the body content
@@ -149,6 +153,7 @@ declare function clearCache(): void;
 interface DataCredentialsAPI {
     /**
      * Deletes the specified credential by ID (or by name when type=credentialname is set in query)
+     *
      * @param qID Credential ID
      * @param query an object with query parameters
      * @throws DeleteDataCredentialHttpError
@@ -156,6 +161,7 @@ interface DataCredentialsAPI {
     deleteDataCredential: typeof deleteDataCredential;
     /**
      * Gets a credential by ID (or by name when bycredentialname=true is set in query)
+     *
      * @param qID Credential ID
      * @param query an object with query parameters
      * @throws GetDataCredentialHttpError
@@ -163,6 +169,7 @@ interface DataCredentialsAPI {
     getDataCredential: typeof getDataCredential;
     /**
      * Patches a credential specified by ID (or by name when bycredentialname=true is set in query)
+     *
      * @param qID Credential ID
      * @param query an object with query parameters
      * @param body an object with the body content
@@ -171,6 +178,7 @@ interface DataCredentialsAPI {
     patchDataCredential: typeof patchDataCredential;
     /**
      * Updates a credential specified by ID (or by name when bycredentialname=true is set in query)
+     *
      * @param qID Credential ID
      * @param query an object with query parameters
      * @param body an object with the body content

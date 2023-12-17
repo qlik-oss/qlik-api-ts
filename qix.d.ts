@@ -1,7 +1,7 @@
 import './global.types-hIvp-WdX.js';
 import { H as HostConfig } from './auth-types-nnUcWhuU.js';
 
-declare const QIX_SCHEMA_VERSION = "12.1923.0";
+declare const QIX_SCHEMA_VERSION = "12.1930.0";
 type AlfaNumString = {
     /**
      * Calculated value.

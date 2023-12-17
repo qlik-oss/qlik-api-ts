@@ -246,6 +246,7 @@ type TopLevelLink = {
 };
 /**
  * Gets a list of connections
+ *
  * @param query an object with query parameters
  * @throws GetDataConnectionsHttpError
  */
@@ -293,6 +294,7 @@ type GetDataConnectionsHttpError = {
 };
 /**
  * Creates a connection. Depends on the fields defined in the request body, credentials embedded (or associated) in the connection can be updated or created.
+ *
  * @param body an object with the body content
  * @throws CreateDataConnectionHttpError
  */
@@ -309,6 +311,7 @@ type CreateDataConnectionHttpError = {
 };
 /**
  * Delete multiple connections, only available to Admin
+ *
  * @param body an object with the body content
  * @throws DeleteDataConnectionsHttpError
  */
@@ -325,6 +328,7 @@ type DeleteDataConnectionsHttpError = {
 };
 /**
  * Duplicate a connection
+ *
  * @param body an object with the body content
  * @throws DuplicateDataAConnectionHttpError
  */
@@ -341,6 +345,7 @@ type DuplicateDataAConnectionHttpError = {
 };
 /**
  * Update multiple connections, only available to Admin
+ *
  * @param body an object with the body content
  * @throws UpdateDataConnectionsHttpError
  */
@@ -357,6 +362,7 @@ type UpdateDataConnectionsHttpError = {
 };
 /**
  * Deletes the specified data connection by ID (or by name when type=connectionname is set in query)
+ *
  * @param qID Connection ID
  * @param query an object with query parameters
  * @throws DeleteDataConnectionHttpError
@@ -379,6 +385,7 @@ type DeleteDataConnectionHttpError = {
 };
 /**
  * Gets a connection by connection ID (or by name when type=connectionname is set in query)
+ *
  * @param qID Connection ID
  * @param query an object with query parameters
  * @throws GetDataConnectionHttpError
@@ -409,6 +416,7 @@ type GetDataConnectionHttpError = {
 };
 /**
  * Patches a connection specified by connection ID (or by name when type=connectionname is set in query).
+ *
  * @param qID Connection ID
  * @param query an object with query parameters
  * @param body an object with the body content
@@ -430,6 +438,7 @@ type PatchDataConnectionHttpError = {
 };
 /**
  * Updates a connection specified by connection ID (or by name when type=connectionname is set in query). Depends on the fields defined in the request body, credentials embedded (or associated) in the connection can be updated or created.
+ *
  * @param qID Connection ID
  * @param query an object with query parameters
  * @param body an object with the body content
@@ -458,36 +467,42 @@ declare function clearCache(): void;
 interface DataConnectionsAPI {
     /**
      * Gets a list of connections
+     *
      * @param query an object with query parameters
      * @throws GetDataConnectionsHttpError
      */
     getDataConnections: typeof getDataConnections;
     /**
      * Creates a connection. Depends on the fields defined in the request body, credentials embedded (or associated) in the connection can be updated or created.
+     *
      * @param body an object with the body content
      * @throws CreateDataConnectionHttpError
      */
     createDataConnection: typeof createDataConnection;
     /**
      * Delete multiple connections, only available to Admin
+     *
      * @param body an object with the body content
      * @throws DeleteDataConnectionsHttpError
      */
     deleteDataConnections: typeof deleteDataConnections;
     /**
      * Duplicate a connection
+     *
      * @param body an object with the body content
      * @throws DuplicateDataAConnectionHttpError
      */
     duplicateDataAConnection: typeof duplicateDataAConnection;
     /**
      * Update multiple connections, only available to Admin
+     *
      * @param body an object with the body content
      * @throws UpdateDataConnectionsHttpError
      */
     updateDataConnections: typeof updateDataConnections;
     /**
      * Deletes the specified data connection by ID (or by name when type=connectionname is set in query)
+     *
      * @param qID Connection ID
      * @param query an object with query parameters
      * @throws DeleteDataConnectionHttpError
@@ -495,6 +510,7 @@ interface DataConnectionsAPI {
     deleteDataConnection: typeof deleteDataConnection;
     /**
      * Gets a connection by connection ID (or by name when type=connectionname is set in query)
+     *
      * @param qID Connection ID
      * @param query an object with query parameters
      * @throws GetDataConnectionHttpError
@@ -502,6 +518,7 @@ interface DataConnectionsAPI {
     getDataConnection: typeof getDataConnection;
     /**
      * Patches a connection specified by connection ID (or by name when type=connectionname is set in query).
+     *
      * @param qID Connection ID
      * @param query an object with query parameters
      * @param body an object with the body content
@@ -510,6 +527,7 @@ interface DataConnectionsAPI {
     patchDataConnection: typeof patchDataConnection;
     /**
      * Updates a connection specified by connection ID (or by name when type=connectionname is set in query). Depends on the fields defined in the request body, credentials embedded (or associated) in the connection can be updated or created.
+     *
      * @param qID Connection ID
      * @param query an object with query parameters
      * @param body an object with the body content

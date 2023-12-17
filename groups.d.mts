@@ -157,6 +157,7 @@ type SettingsPatch = {
 type SettingsPatchSchema = SettingsPatch[];
 /**
  * Returns a list of groups with cursor-based pagination.
+ *
  * @param query an object with query parameters
  * @throws GetGroupsHttpError
  */
@@ -190,6 +191,7 @@ type GetGroupsHttpError = {
 };
 /**
  * Creates a group. The maximum number of groups a tenant can have is 10,000.
+ *
  * @param body an object with the body content
  * @throws CreateGroupHttpError
  */
@@ -206,6 +208,7 @@ type CreateGroupHttpError = {
 };
 /**
  * Retrieves a list of groups matching the filter using advanced query string.
+ *
  * @param query an object with query parameters
  * @param body an object with the body content
  * @throws FilterGroupsHttpError
@@ -234,6 +237,7 @@ type FilterGroupsHttpError = {
 };
 /**
  * Returns the active tenant's group settings.
+ *
  * @throws GetGroupsSettingsHttpError
  */
 declare const getGroupsSettings: (options?: ApiCallOptions) => Promise<GetGroupsSettingsHttpResponse>;
@@ -249,6 +253,7 @@ type GetGroupsSettingsHttpError = {
 };
 /**
  * Update group settings
+ *
  * @param body an object with the body content
  * @throws PatchGroupsSettingsHttpError
  */
@@ -265,6 +270,7 @@ type PatchGroupsSettingsHttpError = {
 };
 /**
  * Delete group by id
+ *
  * @param groupId The ID of the group to delete.
  * @throws DeleteGroupHttpError
  */
@@ -281,6 +287,7 @@ type DeleteGroupHttpError = {
 };
 /**
  * Returns the requested group.
+ *
  * @param groupId The group's unique identifier
  * @throws GetGroupHttpError
  */
@@ -297,6 +304,7 @@ type GetGroupHttpError = {
 };
 /**
  * Update group by id
+ *
  * @param groupId The ID of the group to update.
  * @param body an object with the body content
  * @throws PatchGroupHttpError
@@ -319,18 +327,21 @@ declare function clearCache(): void;
 interface GroupsAPI {
     /**
      * Returns a list of groups with cursor-based pagination.
+     *
      * @param query an object with query parameters
      * @throws GetGroupsHttpError
      */
     getGroups: typeof getGroups;
     /**
      * Creates a group. The maximum number of groups a tenant can have is 10,000.
+     *
      * @param body an object with the body content
      * @throws CreateGroupHttpError
      */
     createGroup: typeof createGroup;
     /**
      * Retrieves a list of groups matching the filter using advanced query string.
+     *
      * @param query an object with query parameters
      * @param body an object with the body content
      * @throws FilterGroupsHttpError
@@ -338,29 +349,34 @@ interface GroupsAPI {
     filterGroups: typeof filterGroups;
     /**
      * Returns the active tenant's group settings.
+     *
      * @throws GetGroupsSettingsHttpError
      */
     getGroupsSettings: typeof getGroupsSettings;
     /**
      * Update group settings
+     *
      * @param body an object with the body content
      * @throws PatchGroupsSettingsHttpError
      */
     patchGroupsSettings: typeof patchGroupsSettings;
     /**
      * Delete group by id
+     *
      * @param groupId The ID of the group to delete.
      * @throws DeleteGroupHttpError
      */
     deleteGroup: typeof deleteGroup;
     /**
      * Returns the requested group.
+     *
      * @param groupId The group's unique identifier
      * @throws GetGroupHttpError
      */
     getGroup: typeof getGroup;
     /**
      * Update group by id
+     *
      * @param groupId The ID of the group to update.
      * @param body an object with the body content
      * @throws PatchGroupHttpError

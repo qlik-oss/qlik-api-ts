@@ -43,6 +43,7 @@ type DetailResponse = {
 };
 /**
  * This endpoint is used to upload a file as a temporary content resource. It returns a `201 Created` with a location header that contains the location of the created resource. If filename or TTL is not properly set, a `400 Bad request` is returned. For internal issues, a `500 Internal Server Error` is returned.
+ *
  * @param query an object with query parameters
  * @param body an object with the body content
  * @throws UploadTempFileHttpError
@@ -51,8 +52,7 @@ declare const uploadTempFile: (query: {
     /** The name of the file to upload. */
     filename?: string;
     /** The TTL parameter is used to define the time-to-live for the content resource in seconds.
-    // It defaults to one hour (3600) if no input is provided. Max TTL is 259200 (3 days).'
-    //  */
+     * It defaults to one hour (3600) if no input is provided. Max TTL is 259200 (3 days).' */
     ttl?: number;
 }, body: unknown, options?: ApiCallOptions) => Promise<UploadTempFileHttpResponse>;
 type UploadTempFileHttpResponse = {
@@ -67,6 +67,7 @@ type UploadTempFileHttpError = {
 };
 /**
  * This endpoint is used to retrieve a temporary content file. It returns a valid (`200 OK`) in case the file exists and the user is authorized to view the contents. It returns a `410 Gone` if the file has expired and `404 Not Found` if the criteria is not met.
+ *
  * @param id The temporary contents ID.
  * @param query an object with query parameters
  * @throws DownloadTempFileHttpError
@@ -98,6 +99,7 @@ type DownloadTempFileHttpError = {
 };
 /**
  * This endpoint is used to retrieve a summary of the metadata associated with a temporary content resource. It returns a `200 OK` with a model if the temporary resource is valid. It returns a `410 Gone` if the file has expired and `404 Not Found` if the criteria is not met.
+ *
  * @param id The temporary contents ID.
  * @throws GetTempFileDetailsHttpError
  */
@@ -125,6 +127,7 @@ declare function clearCache(): void;
 interface TempContentsAPI {
     /**
      * This endpoint is used to upload a file as a temporary content resource. It returns a `201 Created` with a location header that contains the location of the created resource. If filename or TTL is not properly set, a `400 Bad request` is returned. For internal issues, a `500 Internal Server Error` is returned.
+     *
      * @param query an object with query parameters
      * @param body an object with the body content
      * @throws UploadTempFileHttpError
@@ -132,6 +135,7 @@ interface TempContentsAPI {
     uploadTempFile: typeof uploadTempFile;
     /**
      * This endpoint is used to retrieve a temporary content file. It returns a valid (`200 OK`) in case the file exists and the user is authorized to view the contents. It returns a `410 Gone` if the file has expired and `404 Not Found` if the criteria is not met.
+     *
      * @param id The temporary contents ID.
      * @param query an object with query parameters
      * @throws DownloadTempFileHttpError
@@ -139,6 +143,7 @@ interface TempContentsAPI {
     downloadTempFile: typeof downloadTempFile;
     /**
      * This endpoint is used to retrieve a summary of the metadata associated with a temporary content resource. It returns a `200 OK` with a model if the temporary resource is valid. It returns a `410 Gone` if the file has expired and `404 Not Found` if the criteria is not met.
+     *
      * @param id The temporary contents ID.
      * @throws GetTempFileDetailsHttpError
      */

@@ -92,6 +92,7 @@ type ListLinks = {
 };
 /**
  * Finds and returns the persisted audit events for the given tenant.
+ *
  * @param query an object with query parameters
  * @throws GetAuditsHttpError
  */
@@ -129,6 +130,7 @@ type GetAuditsHttpError = {
 };
 /**
  * Finds and returns audit events from the archive, formatted as a JSON array, for the given date and tenant (in JWT).
+ *
  * @param query an object with query parameters
  * @throws GetArchivedAuditsHttpError
  */
@@ -148,6 +150,7 @@ type GetArchivedAuditsHttpError = {
 };
 /**
  * It includes options that represent the server configuration state and parameters that were used to run the server with certain functionality.
+ *
  * @throws GetAuditsSettingsHttpError
  */
 declare const getAuditsSettings: (options?: ApiCallOptions) => Promise<GetAuditsSettingsHttpResponse>;
@@ -163,6 +166,7 @@ type GetAuditsSettingsHttpError = {
 };
 /**
  * Finds and returns the distinct list of unique event sources.
+ *
  * @throws GetAuditSourcesHttpError
  */
 declare const getAuditSources: (options?: ApiCallOptions) => Promise<GetAuditSourcesHttpResponse>;
@@ -180,6 +184,7 @@ type GetAuditSourcesHttpError = {
 };
 /**
  * Finds and returns the distinct list of unique event types.
+ *
  * @throws GetAuditTypesHttpError
  */
 declare const getAuditTypes: (options?: ApiCallOptions) => Promise<GetAuditTypesHttpResponse>;
@@ -197,6 +202,7 @@ type GetAuditTypesHttpError = {
 };
 /**
  * Finds and returns the persisted audit events for the given tenant.
+ *
  * @param id The audit item's unique identifier.
  * @throws GetAuditHttpError
  */
@@ -218,33 +224,39 @@ declare function clearCache(): void;
 interface AuditsAPI {
     /**
      * Finds and returns the persisted audit events for the given tenant.
+     *
      * @param query an object with query parameters
      * @throws GetAuditsHttpError
      */
     getAudits: typeof getAudits;
     /**
      * Finds and returns audit events from the archive, formatted as a JSON array, for the given date and tenant (in JWT).
+     *
      * @param query an object with query parameters
      * @throws GetArchivedAuditsHttpError
      */
     getArchivedAudits: typeof getArchivedAudits;
     /**
      * It includes options that represent the server configuration state and parameters that were used to run the server with certain functionality.
+     *
      * @throws GetAuditsSettingsHttpError
      */
     getAuditsSettings: typeof getAuditsSettings;
     /**
      * Finds and returns the distinct list of unique event sources.
+     *
      * @throws GetAuditSourcesHttpError
      */
     getAuditSources: typeof getAuditSources;
     /**
      * Finds and returns the distinct list of unique event types.
+     *
      * @throws GetAuditTypesHttpError
      */
     getAuditTypes: typeof getAuditTypes;
     /**
      * Finds and returns the persisted audit events for the given tenant.
+     *
      * @param id The audit item's unique identifier.
      * @throws GetAuditHttpError
      */
