@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/spaces.ts
 var getSpaces = async (query, options) => invokeFetch("spaces", {
@@ -15,6 +16,7 @@ var createSpace = async (body, options) => invokeFetch("spaces", {
   method: "post",
   pathTemplate: "/api/v1/spaces",
   body,
+  contentType: "application/json",
   options
 });
 var getSpaceTypes = async (options) => invokeFetch("spaces", {
@@ -39,6 +41,7 @@ var patchSpace = async (spaceId, body, options) => invokeFetch("spaces", {
   pathTemplate: "/api/v1/spaces/{spaceId}",
   pathVariables: { spaceId },
   body,
+  contentType: "application/json",
   options
 });
 var updateSpace = async (spaceId, body, options) => invokeFetch("spaces", {
@@ -46,6 +49,7 @@ var updateSpace = async (spaceId, body, options) => invokeFetch("spaces", {
   pathTemplate: "/api/v1/spaces/{spaceId}",
   pathVariables: { spaceId },
   body,
+  contentType: "application/json",
   options
 });
 var getSpaceAssignments = async (spaceId, query, options) => invokeFetch("spaces", {
@@ -60,6 +64,7 @@ var createSpaceAssignment = async (spaceId, body, options) => invokeFetch("space
   pathTemplate: "/api/v1/spaces/{spaceId}/assignments",
   pathVariables: { spaceId },
   body,
+  contentType: "application/json",
   options
 });
 var deleteSpaceAssignment = async (spaceId, assignmentId, options) => invokeFetch("spaces", {
@@ -79,6 +84,7 @@ var updateSpaceAssignment = async (spaceId, assignmentId, body, options) => invo
   pathTemplate: "/api/v1/spaces/{spaceId}/assignments/{assignmentId}",
   pathVariables: { spaceId, assignmentId },
   body,
+  contentType: "application/json",
   options
 });
 function clearCache() {

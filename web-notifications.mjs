@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/web-notifications.ts
 var getNotifications = async (query, options) => invokeFetch("web-notifications", {
@@ -20,6 +21,7 @@ var patchNotifications = async (body, options) => invokeFetch("web-notifications
   method: "patch",
   pathTemplate: "/api/v1/web-notifications/all",
   body,
+  contentType: "application/json",
   options
 });
 var deleteNotification = async (notificationId, options) => invokeFetch("web-notifications", {
@@ -39,6 +41,7 @@ var patchNotification = async (notificationId, body, options) => invokeFetch("we
   pathTemplate: "/api/v1/web-notifications/{notificationId}",
   pathVariables: { notificationId },
   body,
+  contentType: "application/json",
   options
 });
 function clearCache() {

@@ -1,88 +1,94 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunkWA4O4PMUjs = require('./chunk-WA4O4PMU.js');
-require('./chunk-L4SFSITJ.js');
+var _chunkJNGURO23js = require('./chunk-JNGURO23.js');
+require('./chunk-2STFUQKQ.js');
+require('./chunk-P57PW2II.js');
 
 // src/public/rest/spaces.ts
-var getSpaces = async (query, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "spaces", {
+var getSpaces = async (query, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "spaces", {
   method: "get",
   pathTemplate: "/api/v1/spaces",
   query,
   options
 });
-var createSpace = async (body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "spaces", {
+var createSpace = async (body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "spaces", {
   method: "post",
   pathTemplate: "/api/v1/spaces",
   body,
+  contentType: "application/json",
   options
 });
-var getSpaceTypes = async (options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "spaces", {
+var getSpaceTypes = async (options) => _chunkJNGURO23js.invokeFetch.call(void 0, "spaces", {
   method: "get",
   pathTemplate: "/api/v1/spaces/types",
   options
 });
-var deleteSpace = async (spaceId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "spaces", {
+var deleteSpace = async (spaceId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "spaces", {
   method: "delete",
   pathTemplate: "/api/v1/spaces/{spaceId}",
   pathVariables: { spaceId },
   options
 });
-var getSpace = async (spaceId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "spaces", {
+var getSpace = async (spaceId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "spaces", {
   method: "get",
   pathTemplate: "/api/v1/spaces/{spaceId}",
   pathVariables: { spaceId },
   options
 });
-var patchSpace = async (spaceId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "spaces", {
+var patchSpace = async (spaceId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "spaces", {
   method: "patch",
   pathTemplate: "/api/v1/spaces/{spaceId}",
   pathVariables: { spaceId },
   body,
+  contentType: "application/json",
   options
 });
-var updateSpace = async (spaceId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "spaces", {
+var updateSpace = async (spaceId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "spaces", {
   method: "put",
   pathTemplate: "/api/v1/spaces/{spaceId}",
   pathVariables: { spaceId },
   body,
+  contentType: "application/json",
   options
 });
-var getSpaceAssignments = async (spaceId, query, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "spaces", {
+var getSpaceAssignments = async (spaceId, query, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "spaces", {
   method: "get",
   pathTemplate: "/api/v1/spaces/{spaceId}/assignments",
   pathVariables: { spaceId },
   query,
   options
 });
-var createSpaceAssignment = async (spaceId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "spaces", {
+var createSpaceAssignment = async (spaceId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "spaces", {
   method: "post",
   pathTemplate: "/api/v1/spaces/{spaceId}/assignments",
   pathVariables: { spaceId },
   body,
+  contentType: "application/json",
   options
 });
-var deleteSpaceAssignment = async (spaceId, assignmentId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "spaces", {
+var deleteSpaceAssignment = async (spaceId, assignmentId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "spaces", {
   method: "delete",
   pathTemplate: "/api/v1/spaces/{spaceId}/assignments/{assignmentId}",
   pathVariables: { spaceId, assignmentId },
   options
 });
-var getSpaceAssignment = async (spaceId, assignmentId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "spaces", {
+var getSpaceAssignment = async (spaceId, assignmentId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "spaces", {
   method: "get",
   pathTemplate: "/api/v1/spaces/{spaceId}/assignments/{assignmentId}",
   pathVariables: { spaceId, assignmentId },
   options
 });
-var updateSpaceAssignment = async (spaceId, assignmentId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "spaces", {
+var updateSpaceAssignment = async (spaceId, assignmentId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "spaces", {
   method: "put",
   pathTemplate: "/api/v1/spaces/{spaceId}/assignments/{assignmentId}",
   pathVariables: { spaceId, assignmentId },
   body,
+  contentType: "application/json",
   options
 });
 function clearCache() {
-  return _chunkWA4O4PMUjs.clearApiCache.call(void 0, "spaces");
+  return _chunkJNGURO23js.clearApiCache.call(void 0, "spaces");
 }
 var spacesExport = {
   getSpaces,

@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/glossaries.ts
 var getGlossaries = async (query, options) => invokeFetch("glossaries", {
@@ -15,6 +16,7 @@ var createGlossary = async (body, options) => invokeFetch("glossaries", {
   method: "post",
   pathTemplate: "/api/v1/glossaries",
   body,
+  contentType: "application/json",
   options
 });
 var importGlossary = async (query, body, options) => invokeFetch("glossaries", {
@@ -22,6 +24,7 @@ var importGlossary = async (query, body, options) => invokeFetch("glossaries", {
   pathTemplate: "/api/v1/glossaries/actions/import",
   query,
   body,
+  contentType: "application/json",
   options
 });
 var deleteGlossary = async (id, options) => invokeFetch("glossaries", {
@@ -41,6 +44,7 @@ var patchGlossary = async (id, body, options) => invokeFetch("glossaries", {
   pathTemplate: "/api/v1/glossaries/{id}",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
 var updateGlossary = async (id, body, options) => invokeFetch("glossaries", {
@@ -48,6 +52,7 @@ var updateGlossary = async (id, body, options) => invokeFetch("glossaries", {
   pathTemplate: "/api/v1/glossaries/{id}",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
 var exportGlossary = async (id, options) => invokeFetch("glossaries", {
@@ -68,6 +73,7 @@ var createGlossaryCategory = async (id, body, options) => invokeFetch("glossarie
   pathTemplate: "/api/v1/glossaries/{id}/categories",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
 var deleteGlossaryCategory = async (id, categoryId, options) => invokeFetch("glossaries", {
@@ -87,6 +93,7 @@ var patchGlossaryCategory = async (id, categoryId, body, options) => invokeFetch
   pathTemplate: "/api/v1/glossaries/{id}/categories/{categoryId}",
   pathVariables: { id, categoryId },
   body,
+  contentType: "application/json",
   options
 });
 var updateGlossaryCategory = async (id, categoryId, body, options) => invokeFetch("glossaries", {
@@ -94,6 +101,7 @@ var updateGlossaryCategory = async (id, categoryId, body, options) => invokeFetc
   pathTemplate: "/api/v1/glossaries/{id}/categories/{categoryId}",
   pathVariables: { id, categoryId },
   body,
+  contentType: "application/json",
   options
 });
 var getGlossaryTerms = async (id, query, options) => invokeFetch("glossaries", {
@@ -108,6 +116,7 @@ var createGlossaryTerm = async (id, body, options) => invokeFetch("glossaries", 
   pathTemplate: "/api/v1/glossaries/{id}/terms",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
 var deleteGlossaryTerm = async (id, termId, options) => invokeFetch("glossaries", {
@@ -127,6 +136,7 @@ var patchGlossaryTerm = async (id, termId, body, options) => invokeFetch("glossa
   pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}",
   pathVariables: { id, termId },
   body,
+  contentType: "application/json",
   options
 });
 var updateGlossaryTerm = async (id, termId, body, options) => invokeFetch("glossaries", {
@@ -134,6 +144,7 @@ var updateGlossaryTerm = async (id, termId, body, options) => invokeFetch("gloss
   pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}",
   pathVariables: { id, termId },
   body,
+  contentType: "application/json",
   options
 });
 var changeGlossaryTermStatus = async (id, termId, query, options) => invokeFetch("glossaries", {
@@ -155,6 +166,7 @@ var createGlossaryTermLink = async (id, termId, body, options) => invokeFetch("g
   pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}/links",
   pathVariables: { id, termId },
   body,
+  contentType: "application/json",
   options
 });
 var getGlossaryTermRevisions = async (id, termId, query, options) => invokeFetch("glossaries", {

@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/extensions.ts
 var getExtensions = async (options) => invokeFetch("extensions", {
@@ -14,6 +15,7 @@ var uploadExtension = async (body, options) => invokeFetch("extensions", {
   method: "post",
   pathTemplate: "/api/v1/extensions",
   body,
+  contentType: "multipart/form-data",
   options
 });
 var deleteExtension = async (id, options) => invokeFetch("extensions", {
@@ -33,6 +35,7 @@ var patchExtension = async (id, body, options) => invokeFetch("extensions", {
   pathTemplate: "/api/v1/extensions/{id}",
   pathVariables: { id },
   body,
+  contentType: "multipart/form-data",
   options
 });
 var downloadExtension = async (id, options) => invokeFetch("extensions", {

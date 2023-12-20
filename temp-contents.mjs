@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/temp-contents.ts
 var uploadTempFile = async (query, body, options) => invokeFetch("temp-contents", {
@@ -10,6 +11,7 @@ var uploadTempFile = async (query, body, options) => invokeFetch("temp-contents"
   pathTemplate: "/api/v1/temp-contents",
   query,
   body,
+  contentType: "application/octet-stream",
   options
 });
 var downloadTempFile = async (id, query, options) => invokeFetch("temp-contents", {

@@ -1,4 +1,5 @@
 import {
+  AuthorizationError,
   InvalidAuthTypeError,
   InvalidHostConfigError,
   UnexpectedAuthTypeError,
@@ -16,8 +17,10 @@ import {
   toValidEnigmaLocationUrl,
   toValidLocationUrl,
   toValidWebsocketLocationUrl
-} from "./chunk-NALKLKZS.mjs";
+} from "./chunk-CYRLVHU3.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 export {
+  AuthorizationError,
   InvalidAuthTypeError,
   InvalidHostConfigError,
   UnexpectedAuthTypeError,

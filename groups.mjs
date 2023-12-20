@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/groups.ts
 var getGroups = async (query, options) => invokeFetch("groups", {
@@ -15,6 +16,7 @@ var createGroup = async (body, options) => invokeFetch("groups", {
   method: "post",
   pathTemplate: "/api/v1/groups",
   body,
+  contentType: "application/json",
   options
 });
 var filterGroups = async (query, body, options) => invokeFetch("groups", {
@@ -22,6 +24,7 @@ var filterGroups = async (query, body, options) => invokeFetch("groups", {
   pathTemplate: "/api/v1/groups/actions/filter",
   query,
   body,
+  contentType: "application/json",
   options
 });
 var getGroupsSettings = async (options) => invokeFetch("groups", {
@@ -33,6 +36,7 @@ var patchGroupsSettings = async (body, options) => invokeFetch("groups", {
   method: "patch",
   pathTemplate: "/api/v1/groups/settings",
   body,
+  contentType: "application/json",
   options
 });
 var deleteGroup = async (groupId, options) => invokeFetch("groups", {
@@ -52,6 +56,7 @@ var patchGroup = async (groupId, body, options) => invokeFetch("groups", {
   pathTemplate: "/api/v1/groups/{groupId}",
   pathVariables: { groupId },
   body,
+  contentType: "application/json",
   options
 });
 function clearCache() {

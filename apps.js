@@ -1,291 +1,306 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunkWA4O4PMUjs = require('./chunk-WA4O4PMU.js');
-require('./chunk-L4SFSITJ.js');
+var _chunkJNGURO23js = require('./chunk-JNGURO23.js');
+require('./chunk-2STFUQKQ.js');
+require('./chunk-P57PW2II.js');
 
 // src/public/rest/apps.ts
-var createApp = async (body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var createApp = async (body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "post",
   pathTemplate: "/api/v1/apps",
   body,
+  contentType: "application/json",
   options
 });
-var getAppEvaluationComparison = async (baseid, comparisonid, query, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppEvaluationComparison = async (baseid, comparisonid, query, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/evaluations/{baseid}/actions/compare/{comparisonid}",
   pathVariables: { baseid, comparisonid },
   query,
   options
 });
-var getAppEvaluationComparisonXml = async (baseid, comparisonid, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppEvaluationComparisonXml = async (baseid, comparisonid, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/evaluations/{baseid}/actions/compare/{comparisonid}/actions/download",
   pathVariables: { baseid, comparisonid },
   options
 });
-var getAppEvaluation = async (id, query, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppEvaluation = async (id, query, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/evaluations/{id}",
   pathVariables: { id },
   query,
   options
 });
-var getAppEvaluationXml = async (id, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppEvaluationXml = async (id, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/evaluations/{id}/actions/download",
   pathVariables: { id },
   options
 });
-var importApp = async (query, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var importApp = async (query, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "post",
   pathTemplate: "/api/v1/apps/import",
   query,
   body,
+  contentType: "application/octet-stream",
   options
 });
-var getAppsPrivileges = async (options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppsPrivileges = async (options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/privileges",
   options
 });
-var deleteApp = async (appId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var deleteApp = async (appId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "delete",
   pathTemplate: "/api/v1/apps/{appId}",
   pathVariables: { appId },
   options
 });
-var getAppInfo = async (appId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppInfo = async (appId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{appId}",
   pathVariables: { appId },
   options
 });
-var updateAppInfo = async (appId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var updateAppInfo = async (appId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "put",
   pathTemplate: "/api/v1/apps/{appId}",
   pathVariables: { appId },
   body,
+  contentType: "application/json",
   options
 });
-var copyApp = async (appId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var copyApp = async (appId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "post",
   pathTemplate: "/api/v1/apps/{appId}/copy",
   pathVariables: { appId },
   body,
+  contentType: "application/json",
   options
 });
-var getAppDataLineage = async (appId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppDataLineage = async (appId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{appId}/data/lineage",
   pathVariables: { appId },
   options
 });
-var getAppDataMetadata = async (appId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppDataMetadata = async (appId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{appId}/data/metadata",
   pathVariables: { appId },
   options
 });
-var exportApp = async (appId, query, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var exportApp = async (appId, query, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "post",
   pathTemplate: "/api/v1/apps/{appId}/export",
   pathVariables: { appId },
   query,
   options
 });
-var getAppInsightAnalyses = async (appId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppInsightAnalyses = async (appId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{appId}/insight-analyses",
   pathVariables: { appId },
   options
 });
-var getAppInsightAnalysisRecommendations = async (appId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppInsightAnalysisRecommendations = async (appId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "post",
   pathTemplate: "/api/v1/apps/{appId}/insight-analyses/actions/recommend",
   pathVariables: { appId },
   body,
+  contentType: "application/json",
   options
 });
-var getAppInsightAnalysisModel = async (appId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppInsightAnalysisModel = async (appId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{appId}/insight-analyses/model",
   pathVariables: { appId },
   options
 });
-var deleteAppMedia = async (appId, path, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var deleteAppMedia = async (appId, path, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "delete",
   pathTemplate: "/api/v1/apps/{appId}/media/files/{path}",
   pathVariables: { appId, path },
   options
 });
-var getAppMedia = async (appId, path, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppMedia = async (appId, path, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{appId}/media/files/{path}",
   pathVariables: { appId, path },
   options
 });
-var uploadAppMedia = async (appId, path, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var uploadAppMedia = async (appId, path, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "put",
   pathTemplate: "/api/v1/apps/{appId}/media/files/{path}",
   pathVariables: { appId, path },
   body,
+  contentType: "application/octet-stream",
   options
 });
-var getAppMediaList = async (appId, path, query, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppMediaList = async (appId, path, query, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{appId}/media/list/{path}",
   pathVariables: { appId, path },
   query,
   options
 });
-var getAppThumbnail = async (appId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppThumbnail = async (appId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{appId}/media/thumbnail",
   pathVariables: { appId },
   options
 });
-var updateAppObjectOwner = async (appId, objectId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var updateAppObjectOwner = async (appId, objectId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "post",
   pathTemplate: "/api/v1/apps/{appId}/objects/{objectId}/actions/change-owner",
   pathVariables: { appId, objectId },
   body,
+  contentType: "application/json",
   options
 });
-var updateAppOwner = async (appId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var updateAppOwner = async (appId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "put",
   pathTemplate: "/api/v1/apps/{appId}/owner",
   pathVariables: { appId },
   body,
+  contentType: "application/json",
   options
 });
-var publishApp = async (appId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var publishApp = async (appId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "post",
   pathTemplate: "/api/v1/apps/{appId}/publish",
   pathVariables: { appId },
   body,
+  contentType: "application/json",
   options
 });
-var republishApp = async (appId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var republishApp = async (appId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "put",
   pathTemplate: "/api/v1/apps/{appId}/publish",
   pathVariables: { appId },
   body,
+  contentType: "application/json",
   options
 });
-var getAppReloadLogs = async (appId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppReloadLogs = async (appId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{appId}/reloads/logs",
   pathVariables: { appId },
   options
 });
-var getAppReloadLog = async (appId, reloadId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppReloadLog = async (appId, reloadId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{appId}/reloads/logs/{reloadId}",
   pathVariables: { appId, reloadId },
   options
 });
-var getAppReloadMetadata = async (appId, reloadId, query, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppReloadMetadata = async (appId, reloadId, query, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{appId}/reloads/metadata/{reloadId}",
   pathVariables: { appId, reloadId },
   query,
   options
 });
-var getAppReportFilters = async (appId, query, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppReportFilters = async (appId, query, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{appId}/report-filters",
   pathVariables: { appId },
   query,
   options
 });
-var createAppReportFilter = async (appId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var createAppReportFilter = async (appId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "post",
   pathTemplate: "/api/v1/apps/{appId}/report-filters",
   pathVariables: { appId },
   body,
+  contentType: "application/json",
   options
 });
-var countAppReportFilters = async (appId, query, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var countAppReportFilters = async (appId, query, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{appId}/report-filters/actions/count",
   pathVariables: { appId },
   query,
   options
 });
-var deleteAppReportFilter = async (appId, id, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var deleteAppReportFilter = async (appId, id, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "delete",
   pathTemplate: "/api/v1/apps/{appId}/report-filters/{id}",
   pathVariables: { appId, id },
   options
 });
-var getAppReportFilter = async (appId, id, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppReportFilter = async (appId, id, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{appId}/report-filters/{id}",
   pathVariables: { appId, id },
   options
 });
-var getAppScriptHistory = async (appId, query, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppScriptHistory = async (appId, query, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{appId}/scripts",
   pathVariables: { appId },
   query,
   options
 });
-var updateAppScript = async (appId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var updateAppScript = async (appId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "post",
   pathTemplate: "/api/v1/apps/{appId}/scripts",
   pathVariables: { appId },
   body,
+  contentType: "application/json",
   options
 });
-var deleteAppScript = async (appId, version, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var deleteAppScript = async (appId, version, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "delete",
   pathTemplate: "/api/v1/apps/{appId}/scripts/{version}",
   pathVariables: { appId, version },
   options
 });
-var getAppScript = async (appId, version, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppScript = async (appId, version, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{appId}/scripts/{version}",
   pathVariables: { appId, version },
   options
 });
-var patchAppScript = async (appId, version, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var patchAppScript = async (appId, version, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "patch",
   pathTemplate: "/api/v1/apps/{appId}/scripts/{version}",
   pathVariables: { appId, version },
   body,
+  contentType: "application/json",
   options
 });
-var removeAppFromSpace = async (appId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var removeAppFromSpace = async (appId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "delete",
   pathTemplate: "/api/v1/apps/{appId}/space",
   pathVariables: { appId },
   options
 });
-var moveAppToSpace = async (appId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var moveAppToSpace = async (appId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "put",
   pathTemplate: "/api/v1/apps/{appId}/space",
   pathVariables: { appId },
   body,
+  contentType: "application/json",
   options
 });
-var getAppEvaluations = async (guid, query, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var getAppEvaluations = async (guid, query, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{guid}/evaluations",
   pathVariables: { guid },
   query,
   options
 });
-var queueAppEvaluation = async (guid, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "apps", {
+var queueAppEvaluation = async (guid, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "apps", {
   method: "post",
   pathTemplate: "/api/v1/apps/{guid}/evaluations",
   pathVariables: { guid },
   options
 });
 function clearCache() {
-  return _chunkWA4O4PMUjs.clearApiCache.call(void 0, "apps");
+  return _chunkJNGURO23js.clearApiCache.call(void 0, "apps");
 }
 var appsExport = {
   createApp,

@@ -134,7 +134,18 @@ type GetBrandsHttpError = GetBrands400HttpError | GetBrands401HttpError | GetBra
  * @param body an object with the body content
  * @throws CreateBrandHttpError
  */
-declare const createBrand: (body: unknown, options?: ApiCallOptions) => Promise<CreateBrandHttpResponse>;
+declare const createBrand: (body: {
+    /** Description of the brand. */
+    description?: string;
+    /** The path and name of a properly formatted ICO file. Maximum size is 100 KB. */
+    favIcon?: BodyInit;
+    /** The path and name of a JPG or PNG file that will be adjusted to fit in a 'box' measuring 109px in width and 62 px in height while maintaining aspect ratio. Maximum size of 300 KB, but smaller is recommended. */
+    logo?: BodyInit;
+    /** Name of the brand. */
+    name: string;
+    /** The path and name of a JSON file to define brand style settings. Maximum size is 100 KB. This property is not currently operational. */
+    styles?: BodyInit;
+}, options?: ApiCallOptions) => Promise<CreateBrandHttpResponse>;
 type CreateBrandHttpResponse = {
     data: Brand;
     headers: Headers;
@@ -418,7 +429,7 @@ type DeleteBrandFileHttpError = DeleteBrandFile400HttpError | DeleteBrandFile401
  */
 declare const getBrandFile: (brandId: string, brandFileId: string, options?: ApiCallOptions) => Promise<GetBrandFileHttpResponse>;
 type GetBrandFileHttpResponse = {
-    data: string;
+    data: BodyInit;
     headers: Headers;
     status: number;
 };
@@ -456,7 +467,10 @@ type GetBrandFileHttpError = GetBrandFile400HttpError | GetBrandFile401HttpError
  * @param body an object with the body content
  * @throws CreateBrandFileHttpError
  */
-declare const createBrandFile: (brandId: string, brandFileId: string, body: unknown, options?: ApiCallOptions) => Promise<CreateBrandFileHttpResponse>;
+declare const createBrandFile: (brandId: string, brandFileId: string, body: {
+    /** The path and name of a file to upload. */
+    file?: BodyInit;
+}, options?: ApiCallOptions) => Promise<CreateBrandFileHttpResponse>;
 type CreateBrandFileHttpResponse = {
     data: BrandFile;
     headers: Headers;
@@ -496,7 +510,10 @@ type CreateBrandFileHttpError = CreateBrandFile400HttpError | CreateBrandFile401
  * @param body an object with the body content
  * @throws UpdateBrandFileHttpError
  */
-declare const updateBrandFile: (brandId: string, brandFileId: string, body: unknown, options?: ApiCallOptions) => Promise<UpdateBrandFileHttpResponse>;
+declare const updateBrandFile: (brandId: string, brandFileId: string, body: {
+    /** A file to upload. */
+    file?: BodyInit;
+}, options?: ApiCallOptions) => Promise<UpdateBrandFileHttpResponse>;
 type UpdateBrandFileHttpResponse = {
     data: BrandFile;
     headers: Headers;

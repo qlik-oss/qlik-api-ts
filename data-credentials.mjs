@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/data-credentials.ts
 var deleteDataCredential = async (qID, query, options) => invokeFetch("data-credentials", {
@@ -25,6 +26,7 @@ var patchDataCredential = async (qID, query, body, options) => invokeFetch("data
   pathVariables: { qID },
   query,
   body,
+  contentType: "application/json",
   options
 });
 var updateDataCredential = async (qID, query, body, options) => invokeFetch("data-credentials", {
@@ -33,6 +35,7 @@ var updateDataCredential = async (qID, query, body, options) => invokeFetch("dat
   pathVariables: { qID },
   query,
   body,
+  contentType: "application/json",
   options
 });
 function clearCache() {

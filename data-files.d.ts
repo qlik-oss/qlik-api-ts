@@ -172,7 +172,37 @@ type GetDataFilesHttpError = {
  * @param body an object with the body content
  * @throws UploadDataFileHttpError
  */
-declare const uploadDataFile: (body: unknown, options?: ApiCallOptions) => Promise<UploadDataFileHttpResponse>;
+declare const uploadDataFile: (body: {
+    /** IFormFile form multipart/form-data */
+    File?: BodyInit;
+    /** See PostDataFileRequest schema which defines request structure.
+     *  See  model. */
+    Json?: {
+        /** If this file should be bound to the lifecycle of a specific app, this is the ID of this app. */
+        appId?: string;
+        /** If present, this is the DataFiles connection that the upload should occur in the context of.  If absent,
+         * the default is that the upload will occur in the context of the MyDataFiles connection.  If the DataFiles
+         * connection is different from the one specified when the file was last POSTed or PUT, this will result in
+         * a logical move of this file into the new space. */
+        connectionId?: string;
+        /** Name that will be given to the uploaded file.  It should be noted that the '/' character
+         * in a data file name indicates a 'path' separator in a logical folder hierarchy for the name.  Names that
+         * contain '/'s should be used with the assumption that a logical 'folder hierarchy' is being defined for the
+         * full pathname of that file.  '/' is a significant character in the data file name, and may impact the
+         * behavior of future APIs which take this folder hierarchy into account. */
+        name: string;
+        /** If a SourceId is specified, this is the ID of the existing data file whose content should be copied into
+         * the specified data file.  That is, instead of the file content being specified in the Data element,
+         * it is effectively copied from an existing, previously uploaded file. */
+        sourceId?: string;
+        /** If a TempContentFileId is specified, this is the ID of a previously uploaded temporary content file whose
+         * content should be copied into the specified data file.  That is, instead of the file content being specified
+         * in the Data element, it is effectively copied from an existing, previously uploaded file.  The expectation
+         * is that this file was previously uploaded to the temporary content service, and the ID specified here is
+         * the one returned from the temp content upload request. */
+        tempContentFileId?: string;
+    };
+}, options?: ApiCallOptions) => Promise<UploadDataFileHttpResponse>;
 type UploadDataFileHttpResponse = {
     data: DataFileUploadResponse;
     headers: Headers;
@@ -330,7 +360,38 @@ type GetDataFileHttpError = {
  * @param body an object with the body content
  * @throws ReuploadDataFileHttpError
  */
-declare const reuploadDataFile: (id: string, body: unknown, options?: ApiCallOptions) => Promise<ReuploadDataFileHttpResponse>;
+declare const reuploadDataFile: (id: string, body: {
+    /** IFormFile form multipart/form-data */
+    File?: BodyInit;
+    /** See PutDataFileRequest schema which defines request structure.
+     *  See  model. */
+    Json?: {
+        /** If this file should be bound to the lifecycle of a specific app, this is the ID of this app. */
+        appId?: string;
+        /** If present, this is the DataFiles connection that the upload should occur in the context of.  If absent,
+         * the default is that the upload will occur in the context of the MyDataFiles connection.  If the DataFiles
+         * connection is different from the one specified when the file was last POSTed or PUT, this will result in
+         * a logical move of this file into the new space. */
+        connectionId?: string;
+        /** Name that will be given to the uploaded file.  If this name is different than the name used when the file
+         * was last POSTed or PUT, this will result in a rename of the file.  It should be noted that the '/' character
+         * in a data file name indicates a 'path' separator in a logical folder hierarchy for the name.  Names that
+         * contain '/'s should be used with the assumption that a logical 'folder hierarchy' is being defined for the
+         * full pathname of that file.  '/' is a significant character in the data file name, and may impact the
+         * behavior of future APIs that take this folder hierarchy into account. */
+        name?: string;
+        /** If a SourceId is specified, this is the ID of the existing data file whose content should be copied into
+         * the specified data file.  That is, instead of the file content being specified in the Data element,
+         * it is effectively copied from an existing, previously uploaded file. */
+        sourceId?: string;
+        /** If a TempContentFileId is specified, this is the ID of a previously uploaded temporary content file whose
+         * content should be copied into the specified data file.  That is, instead of the file content being specified
+         * in the Data element, it is effectively copied from an existing, previously uploaded file.  The expectation
+         * is that this file was previously uploaded to the temporary content service, and the ID specified here is
+         * the one returned from the temp content upload request. */
+        tempContentFileId?: string;
+    };
+}, options?: ApiCallOptions) => Promise<ReuploadDataFileHttpResponse>;
 type ReuploadDataFileHttpResponse = {
     data: DataFileUploadResponse;
     headers: Headers;

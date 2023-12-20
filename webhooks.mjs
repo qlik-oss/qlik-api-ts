@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/webhooks.ts
 var getWebhooks = async (query, options) => invokeFetch("webhooks", {
@@ -15,6 +16,7 @@ var createWebhook = async (body, options) => invokeFetch("webhooks", {
   method: "post",
   pathTemplate: "/api/v1/webhooks",
   body,
+  contentType: "application/json",
   options
 });
 var getWebhookEventTypes = async (options) => invokeFetch("webhooks", {
@@ -39,6 +41,7 @@ var patchWebhook = async (id, body, options) => invokeFetch("webhooks", {
   pathTemplate: "/api/v1/webhooks/{id}",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
 var updateWebhook = async (id, body, options) => invokeFetch("webhooks", {
@@ -46,6 +49,7 @@ var updateWebhook = async (id, body, options) => invokeFetch("webhooks", {
   pathTemplate: "/api/v1/webhooks/{id}",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
 var getWebhookDeliveries = async (id, query, options) => invokeFetch("webhooks", {

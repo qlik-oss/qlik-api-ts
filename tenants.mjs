@@ -1,14 +1,16 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/tenants.ts
 var createTenant = async (body, options) => invokeFetch("tenants", {
   method: "post",
   pathTemplate: "/api/v1/tenants",
   body,
+  contentType: "application/json",
   options
 });
 var getMyTenant = async (options) => invokeFetch("tenants", {
@@ -27,6 +29,7 @@ var patchTenant = async (tenantId, body, options) => invokeFetch("tenants", {
   pathTemplate: "/api/v1/tenants/{tenantId}",
   pathVariables: { tenantId },
   body,
+  contentType: "application/json",
   options
 });
 var deactivateTenant = async (tenantId, body, options) => invokeFetch("tenants", {
@@ -34,6 +37,7 @@ var deactivateTenant = async (tenantId, body, options) => invokeFetch("tenants",
   pathTemplate: "/api/v1/tenants/{tenantId}/actions/deactivate",
   pathVariables: { tenantId },
   body,
+  contentType: "application/json",
   options
 });
 var reactivateTenant = async (tenantId, body, options) => invokeFetch("tenants", {
@@ -41,6 +45,7 @@ var reactivateTenant = async (tenantId, body, options) => invokeFetch("tenants",
   pathTemplate: "/api/v1/tenants/{tenantId}/actions/reactivate",
   pathVariables: { tenantId },
   body,
+  contentType: "application/json",
   options
 });
 function clearCache() {

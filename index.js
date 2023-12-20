@@ -1,14 +1,15 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
-var _chunkNO4RCUJYjs = require('./chunk-NO4RCUJY.js');
+var _chunkGV5SRHY2js = require('./chunk-GV5SRHY2.js');
 
 
-var _chunkUT6IPB4Ajs = require('./chunk-UT6IPB4A.js');
+var _chunk7RY3NO6Njs = require('./chunk-7RY3NO6N.js');
 
 
 
-var _chunkWA4O4PMUjs = require('./chunk-WA4O4PMU.js');
-require('./chunk-L4SFSITJ.js');
+var _chunkJNGURO23js = require('./chunk-JNGURO23.js');
+require('./chunk-2STFUQKQ.js');
+require('./chunk-P57PW2II.js');
 
 // src/public/public-runtime-api-generator/public-runtime-api-generator.ts
 var methodAbbreviations = {
@@ -27,6 +28,20 @@ function methodCharToMethodName(method) {
     return methodAbbreviations[method];
   } catch (e) {
     throw new Error(`Unknown short hand method:${method}`);
+  }
+}
+var contentTypeAbbreviations = {
+  "": "",
+  J: "application/json",
+  M: "multipart/form-data",
+  O: "application/octet-stream",
+  T: "text/plain"
+};
+function contentTypeCharToContentType(typeChar) {
+  try {
+    return contentTypeAbbreviations[typeChar];
+  } catch (e2) {
+    throw new Error(`Unknown short hand content-type: ${typeChar}`);
   }
 }
 var ignoredProps = /* @__PURE__ */ new Set(["$$typeof", "then", "__esmodule"]);
@@ -64,12 +79,12 @@ function createLazyApi(api2, initFunc) {
   return new Proxy(api2, lazyApi);
 }
 var runtimeApiCache = {};
-function apiDefToApi(namespace, def, newFormat = false) {
+function apiDefToApi(namespace, def) {
   if (namespace in runtimeApiCache) {
     return runtimeApiCache[namespace];
   }
   const api2 = {
-    clearCache: () => _chunkWA4O4PMUjs.clearApiCache.call(void 0, namespace)
+    clearCache: () => _chunkJNGURO23js.clearApiCache.call(void 0, namespace)
   };
   const initFunc = () => {
     traverse(namespace, "", def, api2);
@@ -88,7 +103,14 @@ function traverse(namespace, parentPath, node, resultingApi) {
         const method = methodCharToMethodName(options[0]);
         const [operationName, ...oldOperationNames] = operationNames.split(",");
         const hasQuery = options.indexOf("Q") >= 0;
-        const hasBody = options.indexOf("B") >= 0;
+        const bodyIndex = options.indexOf("B");
+        const hasBody = bodyIndex >= 0;
+        let contentType = "";
+        if (bodyIndex >= 0) {
+          if (options.length > bodyIndex) {
+            contentType = contentTypeCharToContentType(options[bodyIndex + 1]);
+          }
+        }
         const apiFunction = createClassicApiFn(
           namespace,
           operationName,
@@ -97,6 +119,7 @@ function traverse(namespace, parentPath, node, resultingApi) {
           argNames,
           hasQuery,
           hasBody,
+          contentType,
           useInstead
         );
         resultingApi[operationName] = apiFunction;
@@ -109,7 +132,7 @@ function traverse(namespace, parentPath, node, resultingApi) {
     }
   });
 }
-function createClassicApiFn(namespace, operationName, pathTemplate, method, argNames, hasQuery, hasBody, useInstead) {
+function createClassicApiFn(namespace, operationName, pathTemplate, method, argNames, hasQuery, hasBody, contentType, useInstead) {
   return (...args) => {
     const pathVariables = {};
     argNames.forEach((argName, index) => {
@@ -130,12 +153,13 @@ function createClassicApiFn(namespace, operationName, pathTemplate, method, argN
     if (useInstead) {
       console.warn(`${namespace}.${operationName} is deprecated, use ${useInstead} instead`);
     }
-    return _chunkWA4O4PMUjs.invokeFetch.call(void 0, namespace, {
+    return _chunkJNGURO23js.invokeFetch.call(void 0, namespace, {
       method,
       pathTemplate,
       pathVariables,
       query,
       body,
+      ...contentType ? { contentType } : {},
       options
     });
   };
@@ -146,9 +170,9 @@ var apiKeys = apiDefToApi("api-keys", {
   api: {
     v1: {
       "api-keys": {
-        "": ["getApiKeys:GQ:", "createApiKey:PB:"],
-        configs: { "{tenantId}": ["getApiKeysConfig:G:", "patchApiKeysConfig:AB:"] },
-        "{id}": ["deleteApiKey:D:", "getApiKey:G:", "patchApiKey:AB:"]
+        "": ["getApiKeys:GQ:", "createApiKey:PBJ:"],
+        configs: { "{tenantId}": ["getApiKeysConfig:G:", "patchApiKeysConfig:ABJ:"] },
+        "{id}": ["deleteApiKey:D:", "getApiKey:G:", "patchApiKey:ABJ:"]
       }
     }
   }
@@ -157,7 +181,7 @@ var apps = apiDefToApi("apps", {
   api: {
     v1: {
       apps: {
-        "": ["createApp:PB:"],
+        "": ["createApp:PBJ:"],
         evaluations: {
           "{baseid}": {
             actions: {
@@ -171,40 +195,40 @@ var apps = apiDefToApi("apps", {
           },
           "{id}": { "": ["getAppEvaluation:GQ:"], actions: { download: ["getAppEvaluationXml:G:"] } }
         },
-        import: ["importApp:PQB:"],
+        import: ["importApp:PQBO:"],
         privileges: ["getAppsPrivileges:G:"],
         "{appId}": {
-          "": ["deleteApp:D:", "getAppInfo:G:", "updateAppInfo:UB:"],
-          copy: ["copyApp:PB:"],
+          "": ["deleteApp:D:", "getAppInfo:G:", "updateAppInfo:UBJ:"],
+          copy: ["copyApp:PBJ:"],
           data: { lineage: ["getAppDataLineage:G:"], metadata: ["getAppDataMetadata:G:"] },
           export: ["exportApp:PQ:"],
           "insight-analyses": {
             "": ["getAppInsightAnalyses:G:"],
-            actions: { recommend: ["getAppInsightAnalysisRecommendations:PB:"] },
+            actions: { recommend: ["getAppInsightAnalysisRecommendations:PBJ:"] },
             model: ["getAppInsightAnalysisModel:G:"]
           },
           media: {
-            files: { "{path}": ["deleteAppMedia:D:", "getAppMedia:G:", "uploadAppMedia:UB:"] },
+            files: { "{path}": ["deleteAppMedia:D:", "getAppMedia:G:", "uploadAppMedia:UBO:"] },
             list: { "{path}": ["getAppMediaList:GQ:"] },
             thumbnail: ["getAppThumbnail:G:"]
           },
-          objects: { "{objectId}": { actions: { "change-owner": ["updateAppObjectOwner:PB:"] } } },
-          owner: ["updateAppOwner:UB:"],
-          publish: ["publishApp:PB:", "republishApp:UB:"],
+          objects: { "{objectId}": { actions: { "change-owner": ["updateAppObjectOwner:PBJ:"] } } },
+          owner: ["updateAppOwner:UBJ:"],
+          publish: ["publishApp:PBJ:", "republishApp:UBJ:"],
           reloads: {
             logs: { "": ["getAppReloadLogs:G:"], "{reloadId}": ["getAppReloadLog:G:"] },
             metadata: { "{reloadId}": ["getAppReloadMetadata:GQ:"] }
           },
           "report-filters": {
-            "": ["getAppReportFilters:GQ:", "createAppReportFilter:PB:"],
+            "": ["getAppReportFilters:GQ:", "createAppReportFilter:PBJ:"],
             actions: { count: ["countAppReportFilters:GQ:"] },
             "{id}": ["deleteAppReportFilter:D:", "getAppReportFilter:G:"]
           },
           scripts: {
-            "": ["getAppScriptHistory:GQ:", "updateAppScript:PB:"],
-            "{version}": ["deleteAppScript:D:", "getAppScript:G:", "patchAppScript:AB:"]
+            "": ["getAppScriptHistory:GQ:", "updateAppScript:PBJ:"],
+            "{version}": ["deleteAppScript:D:", "getAppScript:G:", "patchAppScript:ABJ:"]
           },
-          space: ["removeAppFromSpace:D:", "moveAppToSpace:UB:"]
+          space: ["removeAppFromSpace:D:", "moveAppToSpace:UBJ:"]
         },
         "{guid}": { evaluations: ["getAppEvaluations:GQ:", "queueAppEvaluation:P:"] }
       }
@@ -225,24 +249,24 @@ var audits = apiDefToApi("audits", {
     }
   }
 });
-var auth = _chunkNO4RCUJYjs.auth_default;
+var auth = _chunkGV5SRHY2js.auth_default;
 var automations = apiDefToApi("automations", {
   api: {
     v1: {
       automations: {
-        "": ["getAutomations:GQ:", "createAutomation:PB:"],
-        settings: ["getAutomationsSettings:G:", "updateAutomationsSettings:UB:"],
+        "": ["getAutomations:GQ:", "createAutomation:PBJ:"],
+        settings: ["getAutomationsSettings:G:", "updateAutomationsSettings:UBJ:"],
         usage: ["getAutomationsUsageMetrics:GQ:"],
         "{id}": {
-          "": ["deleteAutomation:D:", "getAutomation:G:", "updateAutomation:UB:"],
+          "": ["deleteAutomation:D:", "getAutomation:G:", "updateAutomation:UBJ:"],
           actions: {
-            copy: ["copyAutomation:PB:"],
+            copy: ["copyAutomation:PBJ:"],
             disable: ["disableAutomation:P:"],
             enable: ["enableAutomation:P:"],
-            move: ["moveAutomation:PB:"]
+            move: ["moveAutomation:PBJ:"]
           },
           runs: {
-            "": ["getAutomationRuns:GQ:", "queueAutomationRun:PB:"],
+            "": ["getAutomationRuns:GQ:", "queueAutomationRun:PBJ:"],
             "{runId}": {
               "": ["getAutomationRun:G:"],
               actions: {
@@ -261,13 +285,18 @@ var brands = apiDefToApi("brands", {
   api: {
     v1: {
       brands: {
-        "": ["getBrands:GQ:", "createBrand:PB:"],
+        "": ["getBrands:GQ:", "createBrand:PBM:"],
         active: ["getActiveBrand:G:"],
         "{brand-id}": {
-          "": ["deleteBrand:D:", "getBrand:G:", "patchBrand:AB:"],
+          "": ["deleteBrand:D:", "getBrand:G:", "patchBrand:ABJ:"],
           actions: { activate: ["activateBrand:PB:"], deactivate: ["deactivateBrand:PB:"] },
           files: {
-            "{brand-file-id}": ["deleteBrandFile:D:", "getBrandFile:G:", "createBrandFile:PB:", "updateBrandFile:UB:"]
+            "{brand-file-id}": [
+              "deleteBrandFile:D:",
+              "getBrandFile:G:",
+              "createBrandFile:PBM:",
+              "updateBrandFile:UBM:"
+            ]
           }
         }
       }
@@ -278,12 +307,12 @@ var collections = apiDefToApi("collections", {
   api: {
     v1: {
       collections: {
-        "": ["getCollections:GQ:", "createCollection:PB:"],
+        "": ["getCollections:GQ:", "createCollection:PBJ:"],
         favorites: ["getFavoritesCollection:G:"],
         "{collectionId}": {
-          "": ["deleteCollection:D:", "getCollection:G:", "patchCollection:AB:", "updateCollection:UB:"],
+          "": ["deleteCollection:D:", "getCollection:G:", "patchCollection:ABJ:", "updateCollection:UBJ:"],
           items: {
-            "": ["getCollectionItems:GQ:", "addCollectionItem:PB:"],
+            "": ["getCollectionItems:GQ:", "addCollectionItem:PBJ:"],
             "{itemId}": ["deleteCollectionItem:D:", "getCollectionItem:G:"]
           }
         }
@@ -295,9 +324,9 @@ var cspOrigins = apiDefToApi("csp-origins", {
   api: {
     v1: {
       "csp-origins": {
-        "": ["getCSPEntries:GQ:", "createCSPEntry:PB:"],
+        "": ["getCSPEntries:GQ:", "createCSPEntry:PBJ:"],
         actions: { "generate-header": ["getCSPHeader:G:"] },
-        "{id}": ["deleteCSPEntry:D:", "getCSPEntry:G:", "updateCSPEntry:UB:"]
+        "{id}": ["deleteCSPEntry:D:", "getCSPEntry:G:", "updateCSPEntry:UBJ:"]
       }
     }
   }
@@ -306,8 +335,8 @@ var dataAssets = apiDefToApi("data-assets", {
   api: {
     v1: {
       "data-assets": {
-        "": ["deleteDataAssets:DB:", "createDataAsset:PB:"],
-        "{data-asset-id}": ["getDataAsset:GQ:", "patchDataAsset:AB:", "updateDataAsset:UB:"]
+        "": ["deleteDataAssets:DBJ:", "createDataAsset:PBJ:"],
+        "{data-asset-id}": ["getDataAsset:GQ:", "patchDataAsset:ABJ:", "updateDataAsset:UBJ:"]
       }
     }
   }
@@ -316,17 +345,17 @@ var dataConnections = apiDefToApi("data-connections", {
   api: {
     v1: {
       "data-connections": {
-        "": ["getDataConnections:GQ:", "createDataConnection:PB:"],
+        "": ["getDataConnections:GQ:", "createDataConnection:PBJ:"],
         actions: {
-          delete: ["deleteDataConnections:PB:"],
-          duplicate: ["duplicateDataAConnection:PB:"],
-          update: ["updateDataConnections:PB:"]
+          delete: ["deleteDataConnections:PBJ:"],
+          duplicate: ["duplicateDataAConnection:PBJ:"],
+          update: ["updateDataConnections:PBJ:"]
         },
         "{qID}": [
           "deleteDataConnection:DQ:",
           "getDataConnection:GQ:",
-          "patchDataConnection:AQB:",
-          "updateDataConnection:UQB:"
+          "patchDataConnection:AQBJ:",
+          "updateDataConnection:UQBJ:"
         ]
       }
     }
@@ -339,8 +368,8 @@ var dataCredentials = apiDefToApi("data-credentials", {
         "{qID}": [
           "deleteDataCredential:DQ:",
           "getDataCredential:GQ:",
-          "patchDataCredential:AQB:",
-          "updateDataCredential:UQB:"
+          "patchDataCredential:AQBJ:",
+          "updateDataCredential:UQBJ:"
         ]
       }
     }
@@ -350,13 +379,13 @@ var dataFiles = apiDefToApi("data-files", {
   api: {
     v1: {
       "data-files": {
-        "": ["getDataFiles:GQ:", "uploadDataFile:PB:"],
-        actions: { "change-space": ["moveDataFiles:PB:"], delete: ["deleteDataFiles:PB:"] },
+        "": ["getDataFiles:GQ:", "uploadDataFile:PBM:"],
+        actions: { "change-space": ["moveDataFiles:PBJ:"], delete: ["deleteDataFiles:PBJ:"] },
         connections: { "": ["getDataFilesConnections:GQ:"], "{id}": ["getDataFileConnection:G:"] },
         quotas: ["getDataFilesQuotas:G:"],
         "{id}": {
-          "": ["deleteDataFile:D:", "getDataFile:G:", "reuploadDataFile:UB:"],
-          actions: { "change-owner": ["changeDataFileOwner:PB:"], "change-space": ["moveDataFile:PB:"] }
+          "": ["deleteDataFile:D:", "getDataFile:G:", "reuploadDataFile:UBM:"],
+          actions: { "change-owner": ["changeDataFileOwner:PBJ:"], "change-space": ["moveDataFile:PBJ:"] }
         }
       }
     }
@@ -366,9 +395,9 @@ var extensions = apiDefToApi("extensions", {
   api: {
     v1: {
       extensions: {
-        "": ["getExtensions:G:", "uploadExtension:PB:"],
+        "": ["getExtensions:G:", "uploadExtension:PBM:"],
         "{id}": {
-          "": ["deleteExtension:D:", "getExtension:G:", "patchExtension:AB:"],
+          "": ["deleteExtension:D:", "getExtension:G:", "patchExtension:ABM:"],
           file: { "": ["downloadExtension:G:"], "{filepath}": ["downloadFileFromExtension:G:"] }
         }
       }
@@ -379,26 +408,26 @@ var glossaries = apiDefToApi("glossaries", {
   api: {
     v1: {
       glossaries: {
-        "": ["getGlossaries:GQ:", "createGlossary:PB:"],
-        actions: { import: ["importGlossary:PQB:"] },
+        "": ["getGlossaries:GQ:", "createGlossary:PBJ:"],
+        actions: { import: ["importGlossary:PQBJ:"] },
         "{id}": {
-          "": ["deleteGlossary:D:", "getGlossary:G:", "patchGlossary:AB:", "updateGlossary:UB:"],
+          "": ["deleteGlossary:D:", "getGlossary:G:", "patchGlossary:ABJ:", "updateGlossary:UBJ:"],
           actions: { export: ["exportGlossary:G:"] },
           categories: {
-            "": ["getGlossaryCategories:GQ:", "createGlossaryCategory:PB:"],
+            "": ["getGlossaryCategories:GQ:", "createGlossaryCategory:PBJ:"],
             "{categoryId}": [
               "deleteGlossaryCategory:D:",
               "getGlossaryCategory:G:",
-              "patchGlossaryCategory:AB:",
-              "updateGlossaryCategory:UB:"
+              "patchGlossaryCategory:ABJ:",
+              "updateGlossaryCategory:UBJ:"
             ]
           },
           terms: {
-            "": ["getGlossaryTerms:GQ:", "createGlossaryTerm:PB:"],
+            "": ["getGlossaryTerms:GQ:", "createGlossaryTerm:PBJ:"],
             "{termId}": {
-              "": ["deleteGlossaryTerm:D:", "getGlossaryTerm:G:", "patchGlossaryTerm:AB:", "updateGlossaryTerm:UB:"],
+              "": ["deleteGlossaryTerm:D:", "getGlossaryTerm:G:", "patchGlossaryTerm:ABJ:", "updateGlossaryTerm:UBJ:"],
               actions: { "change-status": ["changeGlossaryTermStatus:PQ:"] },
-              links: ["getGlossaryTermLinks:GQ:", "createGlossaryTermLink:PB:"],
+              links: ["getGlossaryTermLinks:GQ:", "createGlossaryTermLink:PBJ:"],
               revisions: ["getGlossaryTermRevisions:GQ:"]
             }
           }
@@ -411,10 +440,10 @@ var groups = apiDefToApi("groups", {
   api: {
     v1: {
       groups: {
-        "": ["getGroups:GQ:", "createGroup:PB:"],
-        actions: { filter: ["filterGroups:PQB:"] },
-        settings: ["getGroupsSettings:G:", "patchGroupsSettings:AB:"],
-        "{groupId}": ["deleteGroup:D:", "getGroup:G:", "patchGroup:AB:"]
+        "": ["getGroups:GQ:", "createGroup:PBJ:"],
+        actions: { filter: ["filterGroups:PQBJ:"] },
+        settings: ["getGroupsSettings:G:", "patchGroupsSettings:ABJ:"],
+        "{groupId}": ["deleteGroup:D:", "getGroup:G:", "patchGroup:ABJ:"]
       }
     }
   }
@@ -423,11 +452,11 @@ var identityProviders = apiDefToApi("identity-providers", {
   api: {
     v1: {
       "identity-providers": {
-        "": ["getIdps:GQ:", "createIdp:PB:"],
+        "": ["getIdps:GQ:", "createIdp:PBJ:"],
         ".well-known": { "metadata.json": ["getIdpWellKnownMetaData:G:"] },
         me: { meta: ["getMyIdpMeta:G:"] },
         status: ["getIdpStatuses:G:"],
-        "{id}": ["deleteIdp:D:", "getIdp:G:", "patchIdp:AB:"]
+        "{id}": ["deleteIdp:D:", "getIdp:G:", "patchIdp:ABJ:"]
       }
     }
   }
@@ -437,9 +466,9 @@ var items = apiDefToApi("items", {
     v1: {
       items: {
         "": ["getItems:GQ:"],
-        settings: ["getItemsSettings:G:", "patchItemsSettings:AB:"],
+        settings: ["getItemsSettings:G:", "patchItemsSettings:ABJ:"],
         "{itemId}": {
-          "": ["deleteItem:D:", "getItem:G:", "updateItem:UB:"],
+          "": ["deleteItem:D:", "getItem:G:", "updateItem:UBJ:"],
           collections: ["getItemCollections:GQ:"],
           publisheditems: ["getPublishedItems:GQ:"]
         }
@@ -454,20 +483,20 @@ var licenses = apiDefToApi("licenses", {
         assignments: {
           "": ["getLicenseAssignments:GQ:"],
           actions: {
-            add: ["addLicenseAssignments:PB:"],
-            delete: ["deleteLicenseAssignments:PB:"],
-            update: ["updateLicenseAssignments:PB:"]
+            add: ["addLicenseAssignments:PBJ:"],
+            delete: ["deleteLicenseAssignments:PBJ:"],
+            update: ["updateLicenseAssignments:PBJ:"]
           }
         },
         consumption: ["getLicenseConsumption:GQ:"],
         overview: ["getLicenseOverview:G:"],
-        settings: ["getLicenseSettings:G:", "updateLicenseSettings:UB:"],
+        settings: ["getLicenseSettings:G:", "updateLicenseSettings:UBJ:"],
         status: ["getLicenseStatus:G:"]
       }
     }
   }
 });
-var qix = _chunkUT6IPB4Ajs.qix_default;
+var qix = _chunk7RY3NO6Njs.qix_default;
 var quotas = apiDefToApi("quotas", {
   api: { v1: { quotas: { "": ["getQuotas:GQ:"], "{id}": ["getQuota:GQ:"] } } }
 });
@@ -475,8 +504,8 @@ var reloadTasks = apiDefToApi("reload-tasks", {
   api: {
     v1: {
       "reload-tasks": {
-        "": ["getReloadTasks:GQ:", "createReloadTask:PB:"],
-        "{taskId}": ["deleteReloadTask:D:", "getReloadTask:G:", "updateReloadTask:UB:"]
+        "": ["getReloadTasks:GQ:", "createReloadTask:PBJ:"],
+        "{taskId}": ["deleteReloadTask:D:", "getReloadTask:G:", "updateReloadTask:UBJ:"]
       }
     }
   }
@@ -485,7 +514,7 @@ var reloads = apiDefToApi("reloads", {
   api: {
     v1: {
       reloads: {
-        "": ["getReloads:GQ:", "queueReload:PB:"],
+        "": ["getReloads:GQ:", "queueReload:PBJ:"],
         "{reloadId}": { "": ["getReload:G:"], actions: { cancel: ["cancelReload:P:"] } }
       }
     }
@@ -498,13 +527,13 @@ var spaces = apiDefToApi("spaces", {
   api: {
     v1: {
       spaces: {
-        "": ["getSpaces:GQ:", "createSpace:PB:"],
+        "": ["getSpaces:GQ:", "createSpace:PBJ:"],
         types: ["getSpaceTypes:G:"],
         "{spaceId}": {
-          "": ["deleteSpace:D:", "getSpace:G:", "patchSpace:AB:", "updateSpace:UB:"],
+          "": ["deleteSpace:D:", "getSpace:G:", "patchSpace:ABJ:", "updateSpace:UBJ:"],
           assignments: {
-            "": ["getSpaceAssignments:GQ:", "createSpaceAssignment:PB:"],
-            "{assignmentId}": ["deleteSpaceAssignment:D:", "getSpaceAssignment:G:", "updateSpaceAssignment:UB:"]
+            "": ["getSpaceAssignments:GQ:", "createSpaceAssignment:PBJ:"],
+            "{assignmentId}": ["deleteSpaceAssignment:D:", "getSpaceAssignment:G:", "updateSpaceAssignment:UBJ:"]
           }
         }
       }
@@ -515,7 +544,7 @@ var tempContents = apiDefToApi("temp-contents", {
   api: {
     v1: {
       "temp-contents": {
-        "": ["uploadTempFile:PQB:"],
+        "": ["uploadTempFile:PQBO:"],
         "{id}": { "": ["downloadTempFile:GQ:"], details: ["getTempFileDetails:G:"] }
       }
     }
@@ -525,11 +554,11 @@ var tenants = apiDefToApi("tenants", {
   api: {
     v1: {
       tenants: {
-        "": ["createTenant:PB:"],
+        "": ["createTenant:PBJ:"],
         me: ["getMyTenant:G:"],
         "{tenantId}": {
-          "": ["getTenant:G:", "patchTenant:AB:"],
-          actions: { deactivate: ["deactivateTenant:PB:"], reactivate: ["reactivateTenant:PB:"] }
+          "": ["getTenant:G:", "patchTenant:ABJ:"],
+          actions: { deactivate: ["deactivateTenant:PBJ:"], reactivate: ["reactivateTenant:PBJ:"] }
         }
       }
     }
@@ -539,9 +568,9 @@ var themes = apiDefToApi("themes", {
   api: {
     v1: {
       themes: {
-        "": ["getThemes:G:", "uploadTheme:PB:"],
+        "": ["getThemes:G:", "uploadTheme:PBM:"],
         "{id}": {
-          "": ["deleteTheme:D:", "getTheme:G:", "patchTheme:AB:"],
+          "": ["deleteTheme:D:", "getTheme:G:", "patchTheme:ABM:"],
           file: { "": ["downloadTheme:G:"], "{filepath}": ["downloadFileFromTheme:G:"] }
         }
       }
@@ -553,9 +582,9 @@ var transports = apiDefToApi("transports", {
     v1: {
       transports: {
         "email-config": {
-          "": ["deleteEmailConfig:D:", "getEmailConfig:G:", "patchEmailConfig:AB:"],
+          "": ["deleteEmailConfig:D:", "getEmailConfig:G:", "patchEmailConfig:ABJ:"],
           actions: {
-            "send-test-email": ["sendTestEmail:PB:"],
+            "send-test-email": ["sendTestEmail:PBJ:"],
             validate: ["validateEmailConfig:P:"],
             "verify-connection": ["verifyEmailConfigConnection:P:"]
           }
@@ -568,11 +597,11 @@ var users = apiDefToApi("users", {
   api: {
     v1: {
       users: {
-        "": ["getUsers:GQ:", "createUser:PB:"],
-        actions: { count: ["countUsers:GQ:"], filter: ["filterUsers:PQB:"], invite: ["inviteUsers:PB:"] },
+        "": ["getUsers:GQ:", "createUser:PBJ:"],
+        actions: { count: ["countUsers:GQ:"], filter: ["filterUsers:PQBJ:"], invite: ["inviteUsers:PBJ:"] },
         me: ["getMyUser:G:"],
         metadata: ["getUsersMetadata:G:"],
-        "{userId}": ["deleteUser:D:", "getUser:GQ:", "patchUser:AB:"]
+        "{userId}": ["deleteUser:D:", "getUser:GQ:", "patchUser:ABJ:"]
       }
     }
   }
@@ -581,8 +610,8 @@ var webIntegrations = apiDefToApi("web-integrations", {
   api: {
     v1: {
       "web-integrations": {
-        "": ["getWebIntegrations:GQ:", "createWebIntegration:PB:"],
-        "{id}": ["deleteWebIntegration:D:", "getWebIntegration:G:", "patchWebIntegration:AB:"]
+        "": ["getWebIntegrations:GQ:", "createWebIntegration:PBJ:"],
+        "{id}": ["deleteWebIntegration:D:", "getWebIntegration:G:", "patchWebIntegration:ABJ:"]
       }
     }
   }
@@ -592,8 +621,8 @@ var webNotifications = apiDefToApi("web-notifications", {
     v1: {
       "web-notifications": {
         "": ["getNotifications:GQ:"],
-        all: ["deleteNotifications:D:", "patchNotifications:AB:"],
-        "{notificationId}": ["deleteNotification:D:", "getNotification:G:", "patchNotification:AB:"]
+        all: ["deleteNotifications:D:", "patchNotifications:ABJ:"],
+        "{notificationId}": ["deleteNotification:D:", "getNotification:G:", "patchNotification:ABJ:"]
       }
     }
   }
@@ -602,10 +631,10 @@ var webhooks = apiDefToApi("webhooks", {
   api: {
     v1: {
       webhooks: {
-        "": ["getWebhooks:GQ:", "createWebhook:PB:"],
+        "": ["getWebhooks:GQ:", "createWebhook:PBJ:"],
         "event-types": ["getWebhookEventTypes:G:"],
         "{id}": {
-          "": ["deleteWebhook:D:", "getWebhook:G:", "patchWebhook:AB:", "updateWebhook:UB:"],
+          "": ["deleteWebhook:D:", "getWebhook:G:", "patchWebhook:ABJ:", "updateWebhook:UBJ:"],
           deliveries: {
             "": ["getWebhookDeliveries:GQ:"],
             "{deliveryId}": { "": ["getWebhookDelivery:G:"], actions: { resend: ["resendWebhookDelivery:P:"] } }

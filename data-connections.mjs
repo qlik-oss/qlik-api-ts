@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/data-connections.ts
 var getDataConnections = async (query, options) => invokeFetch("data-connections", {
@@ -15,24 +16,28 @@ var createDataConnection = async (body, options) => invokeFetch("data-connection
   method: "post",
   pathTemplate: "/api/v1/data-connections",
   body,
+  contentType: "application/json",
   options
 });
 var deleteDataConnections = async (body, options) => invokeFetch("data-connections", {
   method: "post",
   pathTemplate: "/api/v1/data-connections/actions/delete",
   body,
+  contentType: "application/json",
   options
 });
 var duplicateDataAConnection = async (body, options) => invokeFetch("data-connections", {
   method: "post",
   pathTemplate: "/api/v1/data-connections/actions/duplicate",
   body,
+  contentType: "application/json",
   options
 });
 var updateDataConnections = async (body, options) => invokeFetch("data-connections", {
   method: "post",
   pathTemplate: "/api/v1/data-connections/actions/update",
   body,
+  contentType: "application/json",
   options
 });
 var deleteDataConnection = async (qID, query, options) => invokeFetch("data-connections", {
@@ -55,6 +60,7 @@ var patchDataConnection = async (qID, query, body, options) => invokeFetch("data
   pathVariables: { qID },
   query,
   body,
+  contentType: "application/json",
   options
 });
 var updateDataConnection = async (qID, query, body, options) => invokeFetch("data-connections", {
@@ -63,6 +69,7 @@ var updateDataConnection = async (qID, query, body, options) => invokeFetch("dat
   pathVariables: { qID },
   query,
   body,
+  contentType: "application/json",
   options
 });
 function clearCache() {

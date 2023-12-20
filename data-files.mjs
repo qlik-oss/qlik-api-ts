@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/data-files.ts
 var getDataFiles = async (query, options) => invokeFetch("data-files", {
@@ -15,18 +16,21 @@ var uploadDataFile = async (body, options) => invokeFetch("data-files", {
   method: "post",
   pathTemplate: "/api/v1/data-files",
   body,
+  contentType: "multipart/form-data",
   options
 });
 var moveDataFiles = async (body, options) => invokeFetch("data-files", {
   method: "post",
   pathTemplate: "/api/v1/data-files/actions/change-space",
   body,
+  contentType: "application/json",
   options
 });
 var deleteDataFiles = async (body, options) => invokeFetch("data-files", {
   method: "post",
   pathTemplate: "/api/v1/data-files/actions/delete",
   body,
+  contentType: "application/json",
   options
 });
 var getDataFilesConnections = async (query, options) => invokeFetch("data-files", {
@@ -63,6 +67,7 @@ var reuploadDataFile = async (id, body, options) => invokeFetch("data-files", {
   pathTemplate: "/api/v1/data-files/{id}",
   pathVariables: { id },
   body,
+  contentType: "multipart/form-data",
   options
 });
 var changeDataFileOwner = async (id, body, options) => invokeFetch("data-files", {
@@ -70,6 +75,7 @@ var changeDataFileOwner = async (id, body, options) => invokeFetch("data-files",
   pathTemplate: "/api/v1/data-files/{id}/actions/change-owner",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
 var moveDataFile = async (id, body, options) => invokeFetch("data-files", {
@@ -77,6 +83,7 @@ var moveDataFile = async (id, body, options) => invokeFetch("data-files", {
   pathTemplate: "/api/v1/data-files/{id}/actions/change-space",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
 function clearCache() {

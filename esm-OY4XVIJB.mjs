@@ -1,3 +1,5 @@
+import "./chunk-ZFXKCRJC.mjs";
+
 // node_modules/.pnpm/@qlik+runtime-module-loader@0.2.3/node_modules/@qlik/runtime-module-loader/dist/esm/index.js
 window.__qlikMainPrivateResolvers = window.__qlikMainPrivateResolvers || {};
 window.__qlikMainPrivateResolvers.mainUrlPromise = window.__qlikMainPrivateResolvers.mainUrlPromise || new Promise((resolve) => {

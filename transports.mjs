@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/transports.ts
 var deleteEmailConfig = async (options) => invokeFetch("transports", {
@@ -19,12 +20,14 @@ var patchEmailConfig = async (body, options) => invokeFetch("transports", {
   method: "patch",
   pathTemplate: "/api/v1/transports/email-config",
   body,
+  contentType: "application/json",
   options
 });
 var sendTestEmail = async (body, options) => invokeFetch("transports", {
   method: "post",
   pathTemplate: "/api/v1/transports/email-config/actions/send-test-email",
   body,
+  contentType: "application/json",
   options
 });
 var validateEmailConfig = async (options) => invokeFetch("transports", {
