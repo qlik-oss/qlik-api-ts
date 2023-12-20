@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/automations.ts
 var getAutomations = async (query, options) => invokeFetch("automations", {
@@ -15,6 +16,7 @@ var createAutomation = async (body, options) => invokeFetch("automations", {
   method: "post",
   pathTemplate: "/api/v1/automations",
   body,
+  contentType: "application/json",
   options
 });
 var getAutomationsSettings = async (options) => invokeFetch("automations", {
@@ -26,6 +28,7 @@ var updateAutomationsSettings = async (body, options) => invokeFetch("automation
   method: "put",
   pathTemplate: "/api/v1/automations/settings",
   body,
+  contentType: "application/json",
   options
 });
 var getAutomationsUsageMetrics = async (query, options) => invokeFetch("automations", {
@@ -51,6 +54,7 @@ var updateAutomation = async (id, body, options) => invokeFetch("automations", {
   pathTemplate: "/api/v1/automations/{id}",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
 var copyAutomation = async (id, body, options) => invokeFetch("automations", {
@@ -58,6 +62,7 @@ var copyAutomation = async (id, body, options) => invokeFetch("automations", {
   pathTemplate: "/api/v1/automations/{id}/actions/copy",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
 var disableAutomation = async (id, options) => invokeFetch("automations", {
@@ -77,6 +82,7 @@ var moveAutomation = async (id, body, options) => invokeFetch("automations", {
   pathTemplate: "/api/v1/automations/{id}/actions/move",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
 var getAutomationRuns = async (id, query, options) => invokeFetch("automations", {
@@ -91,6 +97,7 @@ var queueAutomationRun = async (id, body, options) => invokeFetch("automations",
   pathTemplate: "/api/v1/automations/{id}/runs",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
 var getAutomationRun = async (id, runId, options) => invokeFetch("automations", {

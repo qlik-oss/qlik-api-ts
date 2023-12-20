@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/reload-tasks.ts
 var getReloadTasks = async (query, options) => invokeFetch("reload-tasks", {
@@ -15,6 +16,7 @@ var createReloadTask = async (body, options) => invokeFetch("reload-tasks", {
   method: "post",
   pathTemplate: "/api/v1/reload-tasks",
   body,
+  contentType: "application/json",
   options
 });
 var deleteReloadTask = async (taskId, options) => invokeFetch("reload-tasks", {
@@ -34,6 +36,7 @@ var updateReloadTask = async (taskId, body, options) => invokeFetch("reload-task
   pathTemplate: "/api/v1/reload-tasks/{taskId}",
   pathVariables: { taskId },
   body,
+  contentType: "application/json",
   options
 });
 function clearCache() {

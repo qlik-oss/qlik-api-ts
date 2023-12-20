@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/csp-origins.ts
 var getCSPEntries = async (query, options) => invokeFetch("csp-origins", {
@@ -15,6 +16,7 @@ var createCSPEntry = async (body, options) => invokeFetch("csp-origins", {
   method: "post",
   pathTemplate: "/api/v1/csp-origins",
   body,
+  contentType: "application/json",
   options
 });
 var getCSPHeader = async (options) => invokeFetch("csp-origins", {
@@ -39,6 +41,7 @@ var updateCSPEntry = async (id, body, options) => invokeFetch("csp-origins", {
   pathTemplate: "/api/v1/csp-origins/{id}",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
 function clearCache() {

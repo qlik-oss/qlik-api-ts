@@ -1,45 +1,50 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunkWA4O4PMUjs = require('./chunk-WA4O4PMU.js');
-require('./chunk-L4SFSITJ.js');
+var _chunkJNGURO23js = require('./chunk-JNGURO23.js');
+require('./chunk-2STFUQKQ.js');
+require('./chunk-P57PW2II.js');
 
 // src/public/rest/data-assets.ts
-var deleteDataAssets = async (body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "data-assets", {
+var deleteDataAssets = async (body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "data-assets", {
   method: "delete",
   pathTemplate: "/api/v1/data-assets",
   body,
+  contentType: "application/json",
   options
 });
-var createDataAsset = async (body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "data-assets", {
+var createDataAsset = async (body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "data-assets", {
   method: "post",
   pathTemplate: "/api/v1/data-assets",
   body,
+  contentType: "application/json",
   options
 });
-var getDataAsset = async (dataAssetId, query, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "data-assets", {
+var getDataAsset = async (dataAssetId, query, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "data-assets", {
   method: "get",
   pathTemplate: "/api/v1/data-assets/{data-asset-id}",
   pathVariables: { "data-asset-id": dataAssetId },
   query,
   options
 });
-var patchDataAsset = async (dataAssetId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "data-assets", {
+var patchDataAsset = async (dataAssetId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "data-assets", {
   method: "patch",
   pathTemplate: "/api/v1/data-assets/{data-asset-id}",
   pathVariables: { "data-asset-id": dataAssetId },
   body,
+  contentType: "application/json",
   options
 });
-var updateDataAsset = async (dataAssetId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "data-assets", {
+var updateDataAsset = async (dataAssetId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "data-assets", {
   method: "put",
   pathTemplate: "/api/v1/data-assets/{data-asset-id}",
   pathVariables: { "data-asset-id": dataAssetId },
   body,
+  contentType: "application/json",
   options
 });
 function clearCache() {
-  return _chunkWA4O4PMUjs.clearApiCache.call(void 0, "data-assets");
+  return _chunkJNGURO23js.clearApiCache.call(void 0, "data-assets");
 }
 var dataAssetsExport = {
   deleteDataAssets,

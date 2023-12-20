@@ -1,124 +1,131 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunkWA4O4PMUjs = require('./chunk-WA4O4PMU.js');
-require('./chunk-L4SFSITJ.js');
+var _chunkJNGURO23js = require('./chunk-JNGURO23.js');
+require('./chunk-2STFUQKQ.js');
+require('./chunk-P57PW2II.js');
 
 // src/public/rest/automations.ts
-var getAutomations = async (query, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "automations", {
+var getAutomations = async (query, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "automations", {
   method: "get",
   pathTemplate: "/api/v1/automations",
   query,
   options
 });
-var createAutomation = async (body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "automations", {
+var createAutomation = async (body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "automations", {
   method: "post",
   pathTemplate: "/api/v1/automations",
   body,
+  contentType: "application/json",
   options
 });
-var getAutomationsSettings = async (options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "automations", {
+var getAutomationsSettings = async (options) => _chunkJNGURO23js.invokeFetch.call(void 0, "automations", {
   method: "get",
   pathTemplate: "/api/v1/automations/settings",
   options
 });
-var updateAutomationsSettings = async (body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "automations", {
+var updateAutomationsSettings = async (body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "automations", {
   method: "put",
   pathTemplate: "/api/v1/automations/settings",
   body,
+  contentType: "application/json",
   options
 });
-var getAutomationsUsageMetrics = async (query, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "automations", {
+var getAutomationsUsageMetrics = async (query, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "automations", {
   method: "get",
   pathTemplate: "/api/v1/automations/usage",
   query,
   options
 });
-var deleteAutomation = async (id, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "automations", {
+var deleteAutomation = async (id, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "automations", {
   method: "delete",
   pathTemplate: "/api/v1/automations/{id}",
   pathVariables: { id },
   options
 });
-var getAutomation = async (id, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "automations", {
+var getAutomation = async (id, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "automations", {
   method: "get",
   pathTemplate: "/api/v1/automations/{id}",
   pathVariables: { id },
   options
 });
-var updateAutomation = async (id, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "automations", {
+var updateAutomation = async (id, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "automations", {
   method: "put",
   pathTemplate: "/api/v1/automations/{id}",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
-var copyAutomation = async (id, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "automations", {
+var copyAutomation = async (id, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "automations", {
   method: "post",
   pathTemplate: "/api/v1/automations/{id}/actions/copy",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
-var disableAutomation = async (id, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "automations", {
+var disableAutomation = async (id, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "automations", {
   method: "post",
   pathTemplate: "/api/v1/automations/{id}/actions/disable",
   pathVariables: { id },
   options
 });
-var enableAutomation = async (id, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "automations", {
+var enableAutomation = async (id, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "automations", {
   method: "post",
   pathTemplate: "/api/v1/automations/{id}/actions/enable",
   pathVariables: { id },
   options
 });
-var moveAutomation = async (id, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "automations", {
+var moveAutomation = async (id, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "automations", {
   method: "post",
   pathTemplate: "/api/v1/automations/{id}/actions/move",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
-var getAutomationRuns = async (id, query, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "automations", {
+var getAutomationRuns = async (id, query, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "automations", {
   method: "get",
   pathTemplate: "/api/v1/automations/{id}/runs",
   pathVariables: { id },
   query,
   options
 });
-var queueAutomationRun = async (id, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "automations", {
+var queueAutomationRun = async (id, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "automations", {
   method: "post",
   pathTemplate: "/api/v1/automations/{id}/runs",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
-var getAutomationRun = async (id, runId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "automations", {
+var getAutomationRun = async (id, runId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "automations", {
   method: "get",
   pathTemplate: "/api/v1/automations/{id}/runs/{runId}",
   pathVariables: { id, runId },
   options
 });
-var getAutomationRunDetails = async (id, runId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "automations", {
+var getAutomationRunDetails = async (id, runId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "automations", {
   method: "post",
   pathTemplate: "/api/v1/automations/{id}/runs/{runId}/actions/export",
   pathVariables: { id, runId },
   options
 });
-var retryAutomationRun = async (id, runId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "automations", {
+var retryAutomationRun = async (id, runId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "automations", {
   method: "post",
   pathTemplate: "/api/v1/automations/{id}/runs/{runId}/actions/retry",
   pathVariables: { id, runId },
   options
 });
-var stopAutomationRun = async (id, runId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "automations", {
+var stopAutomationRun = async (id, runId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "automations", {
   method: "post",
   pathTemplate: "/api/v1/automations/{id}/runs/{runId}/actions/stop",
   pathVariables: { id, runId },
   options
 });
 function clearCache() {
-  return _chunkWA4O4PMUjs.clearApiCache.call(void 0, "automations");
+  return _chunkJNGURO23js.clearApiCache.call(void 0, "automations");
 }
 var automationsExport = {
   getAutomations,

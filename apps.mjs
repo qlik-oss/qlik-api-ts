@@ -1,14 +1,16 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/apps.ts
 var createApp = async (body, options) => invokeFetch("apps", {
   method: "post",
   pathTemplate: "/api/v1/apps",
   body,
+  contentType: "application/json",
   options
 });
 var getAppEvaluationComparison = async (baseid, comparisonid, query, options) => invokeFetch("apps", {
@@ -42,6 +44,7 @@ var importApp = async (query, body, options) => invokeFetch("apps", {
   pathTemplate: "/api/v1/apps/import",
   query,
   body,
+  contentType: "application/octet-stream",
   options
 });
 var getAppsPrivileges = async (options) => invokeFetch("apps", {
@@ -66,6 +69,7 @@ var updateAppInfo = async (appId, body, options) => invokeFetch("apps", {
   pathTemplate: "/api/v1/apps/{appId}",
   pathVariables: { appId },
   body,
+  contentType: "application/json",
   options
 });
 var copyApp = async (appId, body, options) => invokeFetch("apps", {
@@ -73,6 +77,7 @@ var copyApp = async (appId, body, options) => invokeFetch("apps", {
   pathTemplate: "/api/v1/apps/{appId}/copy",
   pathVariables: { appId },
   body,
+  contentType: "application/json",
   options
 });
 var getAppDataLineage = async (appId, options) => invokeFetch("apps", {
@@ -105,6 +110,7 @@ var getAppInsightAnalysisRecommendations = async (appId, body, options) => invok
   pathTemplate: "/api/v1/apps/{appId}/insight-analyses/actions/recommend",
   pathVariables: { appId },
   body,
+  contentType: "application/json",
   options
 });
 var getAppInsightAnalysisModel = async (appId, options) => invokeFetch("apps", {
@@ -130,6 +136,7 @@ var uploadAppMedia = async (appId, path, body, options) => invokeFetch("apps", {
   pathTemplate: "/api/v1/apps/{appId}/media/files/{path}",
   pathVariables: { appId, path },
   body,
+  contentType: "application/octet-stream",
   options
 });
 var getAppMediaList = async (appId, path, query, options) => invokeFetch("apps", {
@@ -150,6 +157,7 @@ var updateAppObjectOwner = async (appId, objectId, body, options) => invokeFetch
   pathTemplate: "/api/v1/apps/{appId}/objects/{objectId}/actions/change-owner",
   pathVariables: { appId, objectId },
   body,
+  contentType: "application/json",
   options
 });
 var updateAppOwner = async (appId, body, options) => invokeFetch("apps", {
@@ -157,6 +165,7 @@ var updateAppOwner = async (appId, body, options) => invokeFetch("apps", {
   pathTemplate: "/api/v1/apps/{appId}/owner",
   pathVariables: { appId },
   body,
+  contentType: "application/json",
   options
 });
 var publishApp = async (appId, body, options) => invokeFetch("apps", {
@@ -164,6 +173,7 @@ var publishApp = async (appId, body, options) => invokeFetch("apps", {
   pathTemplate: "/api/v1/apps/{appId}/publish",
   pathVariables: { appId },
   body,
+  contentType: "application/json",
   options
 });
 var republishApp = async (appId, body, options) => invokeFetch("apps", {
@@ -171,6 +181,7 @@ var republishApp = async (appId, body, options) => invokeFetch("apps", {
   pathTemplate: "/api/v1/apps/{appId}/publish",
   pathVariables: { appId },
   body,
+  contentType: "application/json",
   options
 });
 var getAppReloadLogs = async (appId, options) => invokeFetch("apps", {
@@ -204,6 +215,7 @@ var createAppReportFilter = async (appId, body, options) => invokeFetch("apps", 
   pathTemplate: "/api/v1/apps/{appId}/report-filters",
   pathVariables: { appId },
   body,
+  contentType: "application/json",
   options
 });
 var countAppReportFilters = async (appId, query, options) => invokeFetch("apps", {
@@ -237,6 +249,7 @@ var updateAppScript = async (appId, body, options) => invokeFetch("apps", {
   pathTemplate: "/api/v1/apps/{appId}/scripts",
   pathVariables: { appId },
   body,
+  contentType: "application/json",
   options
 });
 var deleteAppScript = async (appId, version, options) => invokeFetch("apps", {
@@ -256,6 +269,7 @@ var patchAppScript = async (appId, version, body, options) => invokeFetch("apps"
   pathTemplate: "/api/v1/apps/{appId}/scripts/{version}",
   pathVariables: { appId, version },
   body,
+  contentType: "application/json",
   options
 });
 var removeAppFromSpace = async (appId, options) => invokeFetch("apps", {
@@ -269,6 +283,7 @@ var moveAppToSpace = async (appId, body, options) => invokeFetch("apps", {
   pathTemplate: "/api/v1/apps/{appId}/space",
   pathVariables: { appId },
   body,
+  contentType: "application/json",
   options
 });
 var getAppEvaluations = async (guid, query, options) => invokeFetch("apps", {

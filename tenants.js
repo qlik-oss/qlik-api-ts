@@ -1,50 +1,55 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunkWA4O4PMUjs = require('./chunk-WA4O4PMU.js');
-require('./chunk-L4SFSITJ.js');
+var _chunkJNGURO23js = require('./chunk-JNGURO23.js');
+require('./chunk-2STFUQKQ.js');
+require('./chunk-P57PW2II.js');
 
 // src/public/rest/tenants.ts
-var createTenant = async (body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "tenants", {
+var createTenant = async (body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "tenants", {
   method: "post",
   pathTemplate: "/api/v1/tenants",
   body,
+  contentType: "application/json",
   options
 });
-var getMyTenant = async (options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "tenants", {
+var getMyTenant = async (options) => _chunkJNGURO23js.invokeFetch.call(void 0, "tenants", {
   method: "get",
   pathTemplate: "/api/v1/tenants/me",
   options
 });
-var getTenant = async (tenantId, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "tenants", {
+var getTenant = async (tenantId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "tenants", {
   method: "get",
   pathTemplate: "/api/v1/tenants/{tenantId}",
   pathVariables: { tenantId },
   options
 });
-var patchTenant = async (tenantId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "tenants", {
+var patchTenant = async (tenantId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "tenants", {
   method: "patch",
   pathTemplate: "/api/v1/tenants/{tenantId}",
   pathVariables: { tenantId },
   body,
+  contentType: "application/json",
   options
 });
-var deactivateTenant = async (tenantId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "tenants", {
+var deactivateTenant = async (tenantId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "tenants", {
   method: "post",
   pathTemplate: "/api/v1/tenants/{tenantId}/actions/deactivate",
   pathVariables: { tenantId },
   body,
+  contentType: "application/json",
   options
 });
-var reactivateTenant = async (tenantId, body, options) => _chunkWA4O4PMUjs.invokeFetch.call(void 0, "tenants", {
+var reactivateTenant = async (tenantId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "tenants", {
   method: "post",
   pathTemplate: "/api/v1/tenants/{tenantId}/actions/reactivate",
   pathVariables: { tenantId },
   body,
+  contentType: "application/json",
   options
 });
 function clearCache() {
-  return _chunkWA4O4PMUjs.clearApiCache.call(void 0, "tenants");
+  return _chunkJNGURO23js.clearApiCache.call(void 0, "tenants");
 }
 var tenantsExport = {
   createTenant,

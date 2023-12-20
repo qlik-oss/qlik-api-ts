@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/api-keys.ts
 var getApiKeys = async (query, options) => invokeFetch("api-keys", {
@@ -15,6 +16,7 @@ var createApiKey = async (body, options) => invokeFetch("api-keys", {
   method: "post",
   pathTemplate: "/api/v1/api-keys",
   body,
+  contentType: "application/json",
   options
 });
 var getApiKeysConfig = async (tenantId, options) => invokeFetch("api-keys", {
@@ -28,6 +30,7 @@ var patchApiKeysConfig = async (tenantId, body, options) => invokeFetch("api-key
   pathTemplate: "/api/v1/api-keys/configs/{tenantId}",
   pathVariables: { tenantId },
   body,
+  contentType: "application/json",
   options
 });
 var deleteApiKey = async (id, options) => invokeFetch("api-keys", {
@@ -47,6 +50,7 @@ var patchApiKey = async (id, body, options) => invokeFetch("api-keys", {
   pathTemplate: "/api/v1/api-keys/{id}",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
 function clearCache() {

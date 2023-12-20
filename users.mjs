@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/users.ts
 var getUsers = async (query, options) => invokeFetch("users", {
@@ -15,6 +16,7 @@ var createUser = async (body, options) => invokeFetch("users", {
   method: "post",
   pathTemplate: "/api/v1/users",
   body,
+  contentType: "application/json",
   options
 });
 var countUsers = async (query, options) => invokeFetch("users", {
@@ -28,12 +30,14 @@ var filterUsers = async (query, body, options) => invokeFetch("users", {
   pathTemplate: "/api/v1/users/actions/filter",
   query,
   body,
+  contentType: "application/json",
   options
 });
 var inviteUsers = async (body, options) => invokeFetch("users", {
   method: "post",
   pathTemplate: "/api/v1/users/actions/invite",
   body,
+  contentType: "application/json",
   options
 });
 var getMyUser = async (options) => invokeFetch("users", {
@@ -64,6 +68,7 @@ var patchUser = async (userId, body, options) => invokeFetch("users", {
   pathTemplate: "/api/v1/users/{userId}",
   pathVariables: { userId },
   body,
+  contentType: "application/json",
   options
 });
 function clearCache() {

@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/licenses.ts
 var getLicenseAssignments = async (query, options) => invokeFetch("licenses", {
@@ -15,18 +16,21 @@ var addLicenseAssignments = async (body, options) => invokeFetch("licenses", {
   method: "post",
   pathTemplate: "/api/v1/licenses/assignments/actions/add",
   body,
+  contentType: "application/json",
   options
 });
 var deleteLicenseAssignments = async (body, options) => invokeFetch("licenses", {
   method: "post",
   pathTemplate: "/api/v1/licenses/assignments/actions/delete",
   body,
+  contentType: "application/json",
   options
 });
 var updateLicenseAssignments = async (body, options) => invokeFetch("licenses", {
   method: "post",
   pathTemplate: "/api/v1/licenses/assignments/actions/update",
   body,
+  contentType: "application/json",
   options
 });
 var getLicenseConsumption = async (query, options) => invokeFetch("licenses", {
@@ -49,6 +53,7 @@ var updateLicenseSettings = async (body, options) => invokeFetch("licenses", {
   method: "put",
   pathTemplate: "/api/v1/licenses/settings",
   body,
+  contentType: "application/json",
   options
 });
 var getLicenseStatus = async (options) => invokeFetch("licenses", {

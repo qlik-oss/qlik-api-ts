@@ -1,4 +1,8 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; } async function _asyncOptionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = await fn(value); } else if (op === 'call' || op === 'optionalCall') { value = await fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }// src/platform/platform-functions.ts
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _nullishCoalesce(lhs, rhsFn) { if (lhs != null) { return lhs; } else { return rhsFn(); } } function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; } async function _asyncOptionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = await fn(value); } else if (op === 'call' || op === 'optionalCall') { value = await fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
+
+var _chunkP57PW2IIjs = require('./chunk-P57PW2II.js');
+
+// src/platform/platform-functions.ts
 var getPlatform = async (options = {}) => {
   const isNodeEnvironment = typeof window === "undefined";
   if (isNodeEnvironment) {
@@ -173,6 +177,21 @@ var InvalidAuthTypeError = class extends Error {
       `Not a valid auth type: ${authType}, valid auth types are; '${validAuthModules.filter((name) => name !== "QmfeEmbedFramerAuthModule").join("', '")}'`
     );
     this.name = "InvalidAuthTypeError";
+  }
+};
+var AuthorizationError = class extends Error {
+  constructor(errors) {
+    const errorArray = Array.isArray(errors) ? errors : [errors];
+    super(
+      errorArray.map(
+        (error) => `
+Code: ${error.code}
+Status: ${error.status}
+${error.title}:
+${error.detail}
+`
+      ).join(",\n")
+    );
   }
 };
 
@@ -465,9 +484,17 @@ var none_default = {
   validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, { requiredProps: [], optionalProps: [] })
 };
 
+// src/utils/utils.ts
+function isBrowser() {
+  return typeof window === "object" && typeof window.document === "object";
+}
+function isNode() {
+  return typeof process === "object" && typeof _chunkP57PW2IIjs.__require === "function";
+}
+
 // src/auth/internal/default-auth-modules/oauth/storage-helpers.ts
 var storagePrefix = "qlik-qmfe-api";
-var tokens = {};
+var cachedTokens = {};
 function saveInLocalStorage(scope, name, value) {
   localStorage.setItem(`${storagePrefix}-${scope}-${name}`, value);
 }
@@ -480,11 +507,11 @@ function loadFromLocalStorage(scope, name) {
 function loadFromSessionStorage(scope, name) {
   return sessionStorage.getItem(`${storagePrefix}-${scope}-${name}`) || void 0;
 }
-function deleteFromLocalStorage(scope, name) {
-  localStorage.removeItem(`${storagePrefix}-${scope}-${name}`);
+function deleteFromLocalStorage(scope, names) {
+  names.forEach((name) => localStorage.removeItem(`${storagePrefix}-${scope}-${name}`));
 }
-function deleteFromSessionStorage(scope, name) {
-  sessionStorage.removeItem(`${storagePrefix}-${scope}-${name}`);
+function deleteFromSessionStorage(scope, names) {
+  names.forEach((name) => sessionStorage.removeItem(`${storagePrefix}-${scope}-${name}`));
 }
 function loadAndDeleteFromSessionStorage(scope, name) {
   const id = `${storagePrefix}-${scope}-${name}`;
@@ -492,43 +519,70 @@ function loadAndDeleteFromSessionStorage(scope, name) {
   sessionStorage.removeItem(id);
   return result2;
 }
-function loadAccessTokenFromStorage(hostConfig) {
+function loadOauthTokensFromStorage(hostConfig) {
   if (!hostConfig.clientId) {
     return void 0;
   }
+  let accessToken;
+  let refreshToken;
   if (hostConfig.accessTokenStorage === "local") {
-    return loadFromLocalStorage(hostConfig.clientId, "access-token");
+    accessToken = loadFromLocalStorage(hostConfig.clientId, "access-token");
+    refreshToken = loadFromLocalStorage(hostConfig.clientId, "refresh-token");
+  } else if (hostConfig.accessTokenStorage === "session") {
+    accessToken = loadFromSessionStorage(hostConfig.clientId, "access-token");
+    refreshToken = loadFromSessionStorage(hostConfig.clientId, "refresh-token");
   }
-  if (hostConfig.accessTokenStorage === "session") {
-    return loadFromSessionStorage(hostConfig.clientId, "access-token");
+  if (accessToken) {
+    return {
+      accessToken,
+      refreshToken
+    };
   }
   return void 0;
 }
-async function loadOrAcquireAccessToken(hostConfig, acquireToken) {
-  if (!hostConfig.clientId) {
-    throw new InvalidHostConfigError('A host config with authType set to "oauth2" has to also provide a clientId');
-  }
-  const storedToken = hostConfig.clientId ? tokens[hostConfig.clientId] || loadAccessTokenFromStorage(hostConfig) : void 0;
-  if (storedToken) {
-    return Promise.resolve(storedToken);
-  }
-  const token = acquireToken();
-  tokens[hostConfig.clientId] = token;
-  const awaitedToken = await token;
-  if (hostConfig.accessTokenStorage === "local" && awaitedToken) {
-    saveInLocalStorage(hostConfig.clientId, "access-token", awaitedToken);
-  } else if (hostConfig.accessTokenStorage === "session" && awaitedToken) {
-    saveInSessionStorage(hostConfig.clientId, "access-token", awaitedToken);
-  }
-  return token;
+async function loadCachedOauthTokens(hostConfig) {
+  return cachedTokens[hostConfig.clientId];
 }
-function clearStoredAccessToken(hostConfig) {
+async function loadOrAcquireAccessToken(hostConfig, acquireTokens) {
   if (!hostConfig.clientId) {
     throw new InvalidHostConfigError('A host config with authType set to "oauth2" has to also provide a clientId');
   }
-  delete tokens[hostConfig.clientId];
-  deleteFromLocalStorage(hostConfig.clientId, "access-token");
-  deleteFromSessionStorage(hostConfig.clientId, "access-token");
+  const mayUseStorage = isBrowser();
+  const storedOauthTokens = cachedTokens[hostConfig.clientId] || (mayUseStorage ? loadOauthTokensFromStorage(hostConfig) : void 0);
+  if (storedOauthTokens) {
+    return Promise.resolve(storedOauthTokens);
+  }
+  const tokensPromise = acquireTokens();
+  cachedTokens[hostConfig.clientId] = tokensPromise;
+  if (mayUseStorage) {
+    const tokens = await tokensPromise;
+    if (hostConfig.accessTokenStorage === "local" && tokens) {
+      if (tokens.accessToken) {
+        saveInLocalStorage(hostConfig.clientId, "access-token", tokens.accessToken);
+      }
+      if (tokens.refreshToken) {
+        saveInLocalStorage(hostConfig.clientId, "refresh-token", tokens.refreshToken);
+      }
+    } else if (hostConfig.accessTokenStorage === "session" && tokens) {
+      if (tokens.accessToken) {
+        saveInSessionStorage(hostConfig.clientId, "access-token", tokens.accessToken);
+      }
+      if (tokens.refreshToken) {
+        saveInSessionStorage(hostConfig.clientId, "refresh-token", tokens.refreshToken);
+      }
+    }
+  }
+  return tokensPromise;
+}
+function clearStoredOauthTokens(hostConfig) {
+  if (!hostConfig.clientId) {
+    throw new InvalidHostConfigError('A host config with authType set to "oauth2" has to also provide a clientId');
+  }
+  delete cachedTokens[hostConfig.clientId];
+  if (isBrowser()) {
+    deleteFromLocalStorage(hostConfig.clientId, ["access-token", "refresh-token"]);
+    deleteFromSessionStorage(hostConfig.clientId, ["access-token", "refresh-token"]);
+  }
 }
 
 // src/auth/internal/default-auth-modules/oauth/callback.ts
@@ -575,15 +629,20 @@ function toBase64Url(uint8Array) {
 }
 function byteArrayToBase64(hashArray) {
   let result2 = "";
-  if (typeof globalThis.Buffer !== "undefined") {
-    result2 = Buffer.from(hashArray).toString("base64");
-  } else if (typeof window !== "undefined" && typeof window.btoa === "function") {
+  if (isBrowser()) {
     const byteArrayToString = String.fromCharCode.apply(null, hashArray);
-    result2 = window.btoa(byteArrayToString);
+    result2 = btoa(byteArrayToString);
+  } else if (isNode()) {
+    result2 = Buffer.from(hashArray).toString("base64");
   } else {
-    throw new Error("Environment not supported");
+    throw new Error("Environment not supported for oauth2 authentication");
   }
   return result2;
+}
+function handlePossibleErrors(data) {
+  if (data.errors) {
+    throw new AuthorizationError(data.errors);
+  }
 }
 async function sha256(message) {
   const msgBuffer = new TextEncoder().encode(message);
@@ -606,7 +665,7 @@ async function startFullPageLoginFlow(hostConfig) {
   const codeChallenge = await sha256(verifier);
   const redirectUri = hostConfig.redirectUri || globalThis.location.href;
   const scopes = ["user_default"];
-  clearStoredAccessToken(hostConfig);
+  clearStoredOauthTokens(hostConfig);
   saveInSessionStorage(clientId, "state", state);
   saveInSessionStorage(clientId, "verifier", verifier);
   saveInSessionStorage(clientId, "href", globalThis.location.href);
@@ -641,9 +700,11 @@ async function exchangeCodeAndVerifierForAccessTokenData(hostConfig, code, verif
       })
     });
     const data = await result2.json();
+    handlePossibleErrors(data);
     return {
       accessToken: data.access_token,
-      refreshToken: data.refresh_token
+      refreshToken: data.refresh_token,
+      errors: data.errors
     };
   } catch (err) {
     console.error(err);
@@ -651,29 +712,85 @@ async function exchangeCodeAndVerifierForAccessTokenData(hostConfig, code, verif
     });
   }
 }
-async function getOAuthAccessTokenInternal(hostConfig) {
+async function getOauthTokensWithCredentials(baseUrl, clientId, clientSecret, scope = "user_default") {
+  const result2 = await fetch(`${baseUrl}/oauth/token`, {
+    method: "POST",
+    mode: "cors",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      grant_type: "client_credentials",
+      client_id: clientId,
+      client_secret: clientSecret,
+      scope
+    })
+  });
+  const data = await result2.json();
+  return {
+    accessToken: data.access_token,
+    refreshToken: data.refresh_token,
+    errors: data.errors
+  };
+}
+async function getOauthTokensWithRefreshToken(baseUrl, refreshToken, clientSecret) {
+  const result2 = await fetch(`${baseUrl}/oauth/token`, {
+    method: "POST",
+    mode: "cors",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      grant_type: "refresh_token",
+      refresh_token: refreshToken,
+      client_secret: clientSecret
+    })
+  });
+  const data = await result2.json();
+  return {
+    accessToken: data.access_token,
+    refreshToken: data.refresh_token,
+    errors: data.errors
+  };
+}
+async function getOAuthTokensForNode(hostConfig) {
+  const { clientId, clientSecret } = hostConfig;
+  if (!clientId || !clientSecret) {
+    throw new InvalidHostConfigError(
+      'A host config with authType set to "oauth2" has to provide a clientId and a clientSecret'
+    );
+  }
+  const oauthTokens = await loadOrAcquireAccessToken(
+    hostConfig,
+    async () => getOauthTokensWithCredentials(
+      toValidLocationUrl(hostConfig),
+      hostConfig.clientId,
+      // @ts-expect-error clientSecret is not yet in HostConfig type
+      hostConfig.clientSecret,
+      hostConfig.scope
+    )
+  );
+  return oauthTokens;
+}
+async function getOAuthTokensForBrowser(hostConfig) {
   const { clientId } = hostConfig;
   if (!clientId) {
     throw new InvalidHostConfigError('A host config with authType set to "oauth2" has to also provide a clientId');
   }
-  const accessToken = await loadOrAcquireAccessToken(hostConfig, async () => {
+  const oauthTokens = await loadOrAcquireAccessToken(hostConfig, async () => {
     const code = loadAndDeleteFromSessionStorage(clientId, "code");
     const verifier = loadAndDeleteFromSessionStorage(clientId, "verifier");
     if (code && verifier) {
-      const tokensResponse = await exchangeCodeAndVerifierForAccessTokenData(
+      const tokenResponse = await exchangeCodeAndVerifierForAccessTokenData(
         hostConfig,
         code,
         verifier,
         hostConfig.redirectUri
       );
-      if (tokensResponse) {
-        return tokensResponse.accessToken;
+      if (tokenResponse) {
+        return tokenResponse;
       }
     }
     return void 0;
   });
-  if (accessToken) {
-    return accessToken;
+  if (oauthTokens) {
+    return oauthTokens;
   }
   if (hostConfig.authRedirectUserConfirmation) {
     await hostConfig.authRedirectUserConfirmation();
@@ -682,10 +799,41 @@ async function getOAuthAccessTokenInternal(hostConfig) {
   return new Promise(() => {
   });
 }
-var lastOauthAccessTokenCall = Promise.resolve("");
+var lastOauthTokensCall = Promise.resolve("");
 async function getOAuthAccessToken(hostConfig) {
-  lastOauthAccessTokenCall = lastOauthAccessTokenCall.then(async () => getOAuthAccessTokenInternal(hostConfig));
-  return lastOauthAccessTokenCall;
+  let getOauthTokensCall;
+  if (isNode()) {
+    getOauthTokensCall = getOAuthTokensForNode;
+  } else {
+    getOauthTokensCall = getOAuthTokensForBrowser;
+  }
+  lastOauthTokensCall = lastOauthTokensCall.then(async () => {
+    const tokens = await getOauthTokensCall(hostConfig);
+    if (tokens) {
+      handlePossibleErrors(tokens);
+      return tokens.accessToken || "";
+    }
+    return "";
+  });
+  return lastOauthTokensCall;
+}
+async function refreshAccessToken(hostConfig) {
+  const tokens = await loadCachedOauthTokens(hostConfig);
+  clearStoredOauthTokens(hostConfig);
+  if (tokens && tokens.refreshToken) {
+    const refreshedTokens = await loadOrAcquireAccessToken(
+      hostConfig,
+      async () => getOauthTokensWithRefreshToken(
+        toValidLocationUrl(hostConfig),
+        tokens.refreshToken,
+        // @ts-expect-error clientSecret is not yet in HostConfig type
+        hostConfig.clientSecret
+      )
+    );
+    if (refreshedTokens) {
+      handlePossibleErrors(refreshedTokens);
+    }
+  }
 }
 
 // src/auth/internal/default-auth-modules/oauth/temporary-token.ts
@@ -718,7 +866,7 @@ async function exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, pur
 }
 
 // src/auth/internal/default-auth-modules/oauth.ts
-if (typeof window !== "undefined") {
+if (isBrowser()) {
   handleOAuthCallback();
 }
 async function getRestCallAuthParams5({
@@ -757,12 +905,19 @@ async function getWebResourceAuthParams2({
 async function handleAuthenticationError5({
   hostConfig
 }) {
-  if (hostConfig.authRedirectUserConfirmation) {
-    await hostConfig.authRedirectUserConfirmation();
+  if (isBrowser()) {
+    if (hostConfig.authRedirectUserConfirmation) {
+      await hostConfig.authRedirectUserConfirmation();
+    }
+    startFullPageLoginFlow(hostConfig);
+    return {
+      preventDefault: true
+    };
   }
-  startFullPageLoginFlow(hostConfig);
+  await refreshAccessToken(hostConfig);
   return {
-    preventDefault: true
+    preventDefault: false,
+    retry: true
   };
 }
 var oauth_default = {
@@ -772,7 +927,7 @@ var oauth_default = {
   handleAuthenticationError: handleAuthenticationError5,
   validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, {
     requiredProps: ["clientId"],
-    optionalProps: ["redirectUri", "accessTokenStorage"]
+    optionalProps: ["clientSecret", "redirectUri", "accessTokenStorage"]
   })
 };
 
@@ -1017,9 +1172,10 @@ async function fetchAndTransformExceptions(input, init) {
     return Promise.reject(new InvokeFetchError(getErrorMessage(e), 0, new Headers(), {}));
   }
 }
-async function performActualHttpFetch(method, completeUrl, body, options, interceptors, authHeaders, credentials) {
+async function performActualHttpFetch(method, completeUrl, unencodedBody, contentType, options, interceptors, authHeaders, credentials) {
+  const { body, contentTypeHeader, requestOptions } = encodeBody(unencodedBody, _nullishCoalesce(contentType, () => ( "")));
   const headers = {
-    "Content-Type": "application/json",
+    ...contentTypeHeader,
     ...authHeaders,
     ..._optionalChain([options, 'optionalAccess', _22 => _22.headers])
   };
@@ -1030,8 +1186,10 @@ async function performActualHttpFetch(method, completeUrl, body, options, interc
     mode: isCrossOrigin ? "cors" : "same-origin",
     headers,
     redirect: await isWindows(_optionalChain([options, 'optionalAccess', _24 => _24.hostConfig])) ? "manual" : "follow",
-    body: body ? JSON.stringify(body) : null
+    body,
     // body data type must match "Content-Type" header
+    ...requestOptions
+    // This adds 'duplex: "half"' if we're sending application/octet-stream, needed in node only.
   };
   let fetchTimeoutId;
   if (_optionalChain([options, 'optionalAccess', _25 => _25.timeoutMs]) && options.timeoutMs > 0) {
@@ -1053,6 +1211,98 @@ async function performActualHttpFetch(method, completeUrl, body, options, interc
     invokeFetchResponse = await interceptors.response.apply(invokeFetchResponse);
   }
   return invokeFetchResponse;
+}
+function encodeBody(unencodedBody, contentType) {
+  if (!unencodedBody) {
+    return { body: null, contentTypeHeader: {}, requestOptions: {} };
+  }
+  const contentTypeHeader = {};
+  const requestOptions = {};
+  let body = null;
+  switch (contentType) {
+    case "":
+    case "application/json":
+      contentTypeHeader["Content-Type"] = "application/json";
+      body = JSON.stringify(unencodedBody);
+      break;
+    case "multipart/form-data":
+      body = encodeMultipartBody(unencodedBody);
+      break;
+    case "application/octet-stream":
+      contentTypeHeader["Content-Type"] = contentType;
+      requestOptions["duplex"] = "half";
+      body = unencodedBody;
+      break;
+    case "text/plain":
+      if (typeof unencodedBody === "string") {
+        contentTypeHeader["Content-Type"] = contentType;
+        body = unencodedBody;
+      } else {
+        throw new EncodingError(
+          `Cannot send ${typeof unencodedBody} as ${contentType}, body should be a string.`,
+          contentType,
+          unencodedBody
+        );
+      }
+      break;
+    default:
+      throw new EncodingError(
+        `Unsupported content-type "${contentType}", supported are: application/json, multipart/form-data, application/octet-stream and text/plain`,
+        contentType,
+        unencodedBody
+      );
+  }
+  return { body, contentTypeHeader, requestOptions };
+}
+function encodeMultipartBody(unencodedBody) {
+  const contentType = "multipart/form-data";
+  if (typeof unencodedBody !== "object") {
+    throw new EncodingError(
+      `Cannot encode ${typeof unencodedBody} as ${contentType}, body should be an object.`,
+      contentType,
+      unencodedBody
+    );
+  }
+  if (Array.isArray(unencodedBody)) {
+    throw new EncodingError(
+      `Cannot encode ${typeof unencodedBody} as ${contentType}, body should be an object.`,
+      contentType,
+      unencodedBody
+    );
+  }
+  if (unencodedBody instanceof FormData) {
+    return unencodedBody;
+  }
+  const form = new FormData();
+  Object.entries(unencodedBody).forEach((entry) => {
+    const [key, value] = entry;
+    switch (typeof value) {
+      case "boolean":
+      case "number":
+      case "string":
+        form.set(key, `${value}`);
+        break;
+      case "object":
+        if (value instanceof Blob) {
+          form.set(key, value);
+        } else if (value instanceof Uint8Array) {
+          const data = new Blob([value], { type: "application/octet-stream" });
+          form.set(key, data);
+        } else {
+          const json = JSON.stringify(value);
+          const data = new Blob([json], { type: "application/json" });
+          form.set(key, data, "");
+        }
+        break;
+      default:
+        throw new EncodingError(
+          `Cannot encode multipart-field "${key}" with value of type ${typeof value}, values must be objects, strings, numbers or boolean.`,
+          contentType,
+          unencodedBody
+        );
+    }
+  });
+  return form;
 }
 async function getInvokeFetchUrlParams({
   method,
@@ -1093,7 +1343,7 @@ function invokeFetchWithUrl(api, props, interceptors) {
     interceptors
   );
 }
-function invokeFetchWithUrlAndRetry(api, { method, completeUrl, cacheKey, body, options, authHeaders, credentials }, performRetry, interceptors) {
+function invokeFetchWithUrlAndRetry(api, { method, completeUrl, cacheKey, body, options, authHeaders, credentials, contentType }, performRetry, interceptors) {
   if (!cache[api]) {
     cache[api] = {};
   }
@@ -1111,6 +1361,7 @@ function invokeFetchWithUrlAndRetry(api, { method, completeUrl, cacheKey, body, 
     method,
     completeUrl,
     body,
+    contentType,
     options,
     interceptors,
     authHeaders,
@@ -1250,6 +1501,16 @@ var InvokeFetchError = class extends Error {
     this.stack = cleanStack(this.stack);
   }
 };
+var EncodingError = class extends Error {
+  
+  
+  constructor(errorMessage, contentType, data) {
+    super(errorMessage);
+    this.contentType = contentType;
+    this.data = data;
+    this.stack = cleanStack(this.stack);
+  }
+};
 var regex = /^.+\/qmfe-api(?:\.js)?:(\d+)(?::\d+)?$/gim;
 var isFromQmfeApi = (line) => {
   const matches = line.match(regex);
@@ -1339,4 +1600,6 @@ var invoke_fetch_default = invokeFetchExp;
 
 
 
-exports.getPlatform = getPlatform; exports.InvalidHostConfigError = InvalidHostConfigError; exports.UnexpectedAuthTypeError = UnexpectedAuthTypeError; exports.InvalidAuthTypeError = InvalidAuthTypeError; exports.isHostCrossOrigin = isHostCrossOrigin; exports.isWindows = isWindows; exports.toValidLocationUrl = toValidLocationUrl; exports.toValidEnigmaLocationUrl = toValidEnigmaLocationUrl; exports.toValidWebsocketLocationUrl = toValidWebsocketLocationUrl; exports.getWebSocketAuthParams = getWebSocketAuthParams; exports.getWebResourceAuthParams = getWebResourceAuthParams; exports.handleAuthenticationError = handleAuthenticationError; exports.getRestCallAuthParams = getRestCallAuthParams; exports.registerAuthModule = registerAuthModule2; exports.setDefaultHostConfig = setDefaultHostConfig2; exports.checkForCrossDomainRequest = checkForCrossDomainRequest; exports.logout = logout; exports.InvokeFetchError = InvokeFetchError; exports.invokeFetch = invokeFetch; exports.clearApiCache = clearApiCache; exports.parseFetchResponse = parseFetchResponse; exports.invoke_fetch_default = invoke_fetch_default; exports.auth_default = auth_default;
+
+
+exports.getPlatform = getPlatform; exports.InvalidHostConfigError = InvalidHostConfigError; exports.UnexpectedAuthTypeError = UnexpectedAuthTypeError; exports.InvalidAuthTypeError = InvalidAuthTypeError; exports.AuthorizationError = AuthorizationError; exports.isHostCrossOrigin = isHostCrossOrigin; exports.isWindows = isWindows; exports.toValidLocationUrl = toValidLocationUrl; exports.toValidEnigmaLocationUrl = toValidEnigmaLocationUrl; exports.toValidWebsocketLocationUrl = toValidWebsocketLocationUrl; exports.getWebSocketAuthParams = getWebSocketAuthParams; exports.getWebResourceAuthParams = getWebResourceAuthParams; exports.handleAuthenticationError = handleAuthenticationError; exports.getRestCallAuthParams = getRestCallAuthParams; exports.registerAuthModule = registerAuthModule2; exports.setDefaultHostConfig = setDefaultHostConfig2; exports.checkForCrossDomainRequest = checkForCrossDomainRequest; exports.logout = logout; exports.InvokeFetchError = InvokeFetchError; exports.EncodingError = EncodingError; exports.invokeFetch = invokeFetch; exports.clearApiCache = clearApiCache; exports.parseFetchResponse = parseFetchResponse; exports.invoke_fetch_default = invoke_fetch_default; exports.auth_default = auth_default;

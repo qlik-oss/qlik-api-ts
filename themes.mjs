@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/themes.ts
 var getThemes = async (options) => invokeFetch("themes", {
@@ -14,6 +15,7 @@ var uploadTheme = async (body, options) => invokeFetch("themes", {
   method: "post",
   pathTemplate: "/api/v1/themes",
   body,
+  contentType: "multipart/form-data",
   options
 });
 var deleteTheme = async (id, options) => invokeFetch("themes", {
@@ -33,6 +35,7 @@ var patchTheme = async (id, body, options) => invokeFetch("themes", {
   pathTemplate: "/api/v1/themes/{id}",
   pathVariables: { id },
   body,
+  contentType: "multipart/form-data",
   options
 });
 var downloadTheme = async (id, options) => invokeFetch("themes", {

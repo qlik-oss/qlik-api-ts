@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/reloads.ts
 var getReloads = async (query, options) => invokeFetch("reloads", {
@@ -15,6 +16,7 @@ var queueReload = async (body, options) => invokeFetch("reloads", {
   method: "post",
   pathTemplate: "/api/v1/reloads",
   body,
+  contentType: "application/json",
   options
 });
 var getReload = async (reloadId, options) => invokeFetch("reloads", {

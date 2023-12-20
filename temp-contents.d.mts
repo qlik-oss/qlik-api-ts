@@ -54,7 +54,7 @@ declare const uploadTempFile: (query: {
     /** The TTL parameter is used to define the time-to-live for the content resource in seconds.
      * It defaults to one hour (3600) if no input is provided. Max TTL is 259200 (3 days).' */
     ttl?: number;
-}, body: unknown, options?: ApiCallOptions) => Promise<UploadTempFileHttpResponse>;
+}, body: BodyInit, options?: ApiCallOptions) => Promise<UploadTempFileHttpResponse>;
 type UploadTempFileHttpResponse = {
     data: void;
     headers: Headers;

@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/brands.ts
 var getBrands = async (query, options) => invokeFetch("brands", {
@@ -15,6 +16,7 @@ var createBrand = async (body, options) => invokeFetch("brands", {
   method: "post",
   pathTemplate: "/api/v1/brands",
   body,
+  contentType: "multipart/form-data",
   options
 });
 var getActiveBrand = async (options) => invokeFetch("brands", {
@@ -39,6 +41,7 @@ var patchBrand = async (brandId, body, options) => invokeFetch("brands", {
   pathTemplate: "/api/v1/brands/{brand-id}",
   pathVariables: { "brand-id": brandId },
   body,
+  contentType: "application/json",
   options
 });
 var activateBrand = async (brandId, body, options) => invokeFetch("brands", {
@@ -72,6 +75,7 @@ var createBrandFile = async (brandId, brandFileId, body, options) => invokeFetch
   pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
   pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
   body,
+  contentType: "multipart/form-data",
   options
 });
 var updateBrandFile = async (brandId, brandFileId, body, options) => invokeFetch("brands", {
@@ -79,6 +83,7 @@ var updateBrandFile = async (brandId, brandFileId, body, options) => invokeFetch
   pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
   pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
   body,
+  contentType: "multipart/form-data",
   options
 });
 function clearCache() {

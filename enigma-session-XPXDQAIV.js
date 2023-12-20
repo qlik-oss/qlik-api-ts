@@ -2,7 +2,8 @@
 
 
 
-var _chunkRMKP2BDXjs = require('./chunk-RMKP2BDX.js');
+var _chunkD52VW5UNjs = require('./chunk-D52VW5UN.js');
+require('./chunk-P57PW2II.js');
 
 // src/qix/session/enigma-session.ts
 var _enigmajs = require('enigma.js'); var _enigmajs2 = _interopRequireDefault(_enigmajs);
@@ -10159,14 +10160,14 @@ async function createEnigmaSession({
   identity,
   hostConfig
 }) {
-  const locationUrl = _chunkRMKP2BDXjs.toValidWebsocketLocationUrl.call(void 0, hostConfig);
+  const locationUrl = _chunkD52VW5UNjs.toValidWebsocketLocationUrl.call(void 0, hostConfig);
   const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
   const identityPart = identity ? `/identity/${identity}` : "";
   let url = `${locationUrl}/app/${appId}${identityPart}?reloadUri=${reloadUri}`.replace(/^http/, "ws");
   const isNodeEnvironment = typeof window === "undefined";
   let createSocketMethod;
   if (isNodeEnvironment) {
-    const { headers, queryParams } = await _chunkRMKP2BDXjs.getRestCallAuthParams.call(void 0, { hostConfig, method: "POST" });
+    const { headers, queryParams } = await _chunkD52VW5UNjs.getRestCallAuthParams.call(void 0, { hostConfig, method: "POST" });
     const WS = (await Promise.resolve().then(() => _interopRequireWildcard(require("ws")))).default;
     Object.entries(queryParams).forEach(([key, value]) => {
       url = `${url}&${key}=${value}`;
@@ -10175,7 +10176,7 @@ async function createEnigmaSession({
       headers
     });
   } else {
-    const { queryParams } = await _chunkRMKP2BDXjs.getWebSocketAuthParams.call(void 0, { hostConfig });
+    const { queryParams } = await _chunkD52VW5UNjs.getWebSocketAuthParams.call(void 0, { hostConfig });
     Object.entries(queryParams).forEach(([key, value]) => {
       url = `${url}&${key}=${value}`;
     });

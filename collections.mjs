@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/collections.ts
 var getCollections = async (query, options) => invokeFetch("collections", {
@@ -15,6 +16,7 @@ var createCollection = async (body, options) => invokeFetch("collections", {
   method: "post",
   pathTemplate: "/api/v1/collections",
   body,
+  contentType: "application/json",
   options
 });
 var getFavoritesCollection = async (options) => invokeFetch("collections", {
@@ -39,6 +41,7 @@ var patchCollection = async (collectionId, body, options) => invokeFetch("collec
   pathTemplate: "/api/v1/collections/{collectionId}",
   pathVariables: { collectionId },
   body,
+  contentType: "application/json",
   options
 });
 var updateCollection = async (collectionId, body, options) => invokeFetch("collections", {
@@ -46,6 +49,7 @@ var updateCollection = async (collectionId, body, options) => invokeFetch("colle
   pathTemplate: "/api/v1/collections/{collectionId}",
   pathVariables: { collectionId },
   body,
+  contentType: "application/json",
   options
 });
 var getCollectionItems = async (collectionId, query, options) => invokeFetch("collections", {
@@ -60,6 +64,7 @@ var addCollectionItem = async (collectionId, body, options) => invokeFetch("coll
   pathTemplate: "/api/v1/collections/{collectionId}/items",
   pathVariables: { collectionId },
   body,
+  contentType: "application/json",
   options
 });
 var deleteCollectionItem = async (collectionId, itemId, options) => invokeFetch("collections", {

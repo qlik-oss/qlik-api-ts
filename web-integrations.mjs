@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/web-integrations.ts
 var getWebIntegrations = async (query, options) => invokeFetch("web-integrations", {
@@ -15,6 +16,7 @@ var createWebIntegration = async (body, options) => invokeFetch("web-integration
   method: "post",
   pathTemplate: "/api/v1/web-integrations",
   body,
+  contentType: "application/json",
   options
 });
 var deleteWebIntegration = async (id, options) => invokeFetch("web-integrations", {
@@ -34,6 +36,7 @@ var patchWebIntegration = async (id, body, options) => invokeFetch("web-integrat
   pathTemplate: "/api/v1/web-integrations/{id}",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
 function clearCache() {

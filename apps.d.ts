@@ -353,7 +353,7 @@ type FieldOverride = {
     classifications?: string[];
     defaultAggregation?: string;
 };
-type FileData = string;
+type FileData = BodyInit;
 type Filter = {
     readonly createdAt?: string;
     /** The filter description. */
@@ -1213,7 +1213,7 @@ declare const importApp: (query: {
     name?: string;
     /** The space ID of the target app. */
     spaceId?: string;
-}, body: unknown, options?: ApiCallOptions) => Promise<ImportAppHttpResponse>;
+}, body: FileData, options?: ApiCallOptions) => Promise<ImportAppHttpResponse>;
 type ImportAppHttpResponse = {
     data: NxApp;
     headers: Headers;
@@ -1470,7 +1470,7 @@ type GetAppMediaHttpError = {
  * @param body an object with the body content
  * @throws UploadAppMediaHttpError
  */
-declare const uploadAppMedia: (appId: string, path: string, body: unknown, options?: ApiCallOptions) => Promise<UploadAppMediaHttpResponse>;
+declare const uploadAppMedia: (appId: string, path: string, body: FileData, options?: ApiCallOptions) => Promise<UploadAppMediaHttpResponse>;
 type UploadAppMediaHttpResponse = {
     data: void;
     headers: Headers;

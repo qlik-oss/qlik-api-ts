@@ -83,7 +83,12 @@ type GetThemesHttpError = {
  * @param body an object with the body content
  * @throws UploadThemeHttpError
  */
-declare const uploadTheme: (body: unknown, options?: ApiCallOptions) => Promise<UploadThemeHttpResponse>;
+declare const uploadTheme: (body: {
+    /** The theme model. */
+    data?: Theme;
+    /** Theme archive. */
+    file?: BodyInit;
+}, options?: ApiCallOptions) => Promise<UploadThemeHttpResponse>;
 type UploadThemeHttpResponse = {
     data: Theme;
     headers: Headers;
@@ -135,7 +140,12 @@ type GetThemeHttpError = {
  * @param body an object with the body content
  * @throws PatchThemeHttpError
  */
-declare const patchTheme: (id: string, body: unknown, options?: ApiCallOptions) => Promise<PatchThemeHttpResponse>;
+declare const patchTheme: (id: string, body: {
+    /** The theme model. */
+    data?: Theme;
+    /** Theme archive. */
+    file?: BodyInit;
+}, options?: ApiCallOptions) => Promise<PatchThemeHttpResponse>;
 type PatchThemeHttpResponse = {
     data: Themes;
     headers: Headers;

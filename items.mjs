@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/items.ts
 var getItems = async (query, options) => invokeFetch("items", {
@@ -20,6 +21,7 @@ var patchItemsSettings = async (body, options) => invokeFetch("items", {
   method: "patch",
   pathTemplate: "/api/v1/items/settings",
   body,
+  contentType: "application/json",
   options
 });
 var deleteItem = async (itemId, options) => invokeFetch("items", {
@@ -39,6 +41,7 @@ var updateItem = async (itemId, body, options) => invokeFetch("items", {
   pathTemplate: "/api/v1/items/{itemId}",
   pathVariables: { itemId },
   body,
+  contentType: "application/json",
   options
 });
 var getItemCollections = async (itemId, query, options) => invokeFetch("items", {

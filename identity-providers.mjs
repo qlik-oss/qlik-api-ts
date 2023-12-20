@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-MP2QZCTY.mjs";
-import "./chunk-2OXQN2IV.mjs";
+} from "./chunk-TE7XMBT5.mjs";
+import "./chunk-3SVRHJII.mjs";
+import "./chunk-ZFXKCRJC.mjs";
 
 // src/public/rest/identity-providers.ts
 var getIdps = async (query, options) => invokeFetch("identity-providers", {
@@ -15,6 +16,7 @@ var createIdp = async (body, options) => invokeFetch("identity-providers", {
   method: "post",
   pathTemplate: "/api/v1/identity-providers",
   body,
+  contentType: "application/json",
   options
 });
 var getIdpWellKnownMetaData = async (options) => invokeFetch("identity-providers", {
@@ -49,6 +51,7 @@ var patchIdp = async (id, body, options) => invokeFetch("identity-providers", {
   pathTemplate: "/api/v1/identity-providers/{id}",
   pathVariables: { id },
   body,
+  contentType: "application/json",
   options
 });
 function clearCache() {

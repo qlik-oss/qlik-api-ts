@@ -105,7 +105,12 @@ type GetExtensionsHttpError = {
  * @param body an object with the body content
  * @throws UploadExtensionHttpError
  */
-declare const uploadExtension: (body: unknown, options?: ApiCallOptions) => Promise<UploadExtensionHttpResponse>;
+declare const uploadExtension: (body: {
+    /** The extension model. */
+    data?: Extension;
+    /** Extension archive. */
+    file?: BodyInit;
+}, options?: ApiCallOptions) => Promise<UploadExtensionHttpResponse>;
 type UploadExtensionHttpResponse = {
     data: Extension;
     headers: Headers;
@@ -157,7 +162,12 @@ type GetExtensionHttpError = {
  * @param body an object with the body content
  * @throws PatchExtensionHttpError
  */
-declare const patchExtension: (id: string, body: unknown, options?: ApiCallOptions) => Promise<PatchExtensionHttpResponse>;
+declare const patchExtension: (id: string, body: {
+    /** The extension model. */
+    data?: Extension;
+    /** Extension archive. */
+    file?: BodyInit;
+}, options?: ApiCallOptions) => Promise<PatchExtensionHttpResponse>;
 type PatchExtensionHttpResponse = {
     data: Extension;
     headers: Headers;
