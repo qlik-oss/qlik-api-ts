@@ -71,7 +71,7 @@ type AnalysisModelResponseDetail = {
     isLogicalModelEnabled?: boolean;
     masterItems?: AnalysisModelItemMasterItem[];
 };
-type AnalysisRecommendRequest = unknown;
+type AnalysisRecommendRequest = RecommendNaturalLangQuery | RecommendItems;
 type AnalysisRecommendationResponse = {
     data?: AnalysisRecommendationResponseDetail[];
 };

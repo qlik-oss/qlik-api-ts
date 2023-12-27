@@ -1,7 +1,10 @@
 import { A as ApiCallOptions } from './global.types-Eto4uYwy.mjs';
 import './auth-types-nnUcWhuU.mjs';
 
-type CSPEntry = CSPEntryContent;
+type CSPEntry = {
+    /** The CSP entry's unique identifier. */
+    id?: string;
+} & CSPEntryContent;
 type CSPEntryContent = {
     /** Defines the valid sources for loading web workers and nested browsing contexts using elements such as frame and iFrame. */
     childSrc?: boolean;
