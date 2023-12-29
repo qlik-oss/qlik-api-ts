@@ -1,36 +1,36 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunkJNGURO23js = require('./chunk-JNGURO23.js');
-require('./chunk-2STFUQKQ.js');
+var _chunkXJKF347Cjs = require('./chunk-XJKF347C.js');
+require('./chunk-JZAPZIPR.js');
 require('./chunk-P57PW2II.js');
 
 // src/public/rest/extensions.ts
-var getExtensions = async (options) => _chunkJNGURO23js.invokeFetch.call(void 0, "extensions", {
+var getExtensions = async (options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "extensions", {
   method: "get",
   pathTemplate: "/api/v1/extensions",
   options
 });
-var uploadExtension = async (body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "extensions", {
+var uploadExtension = async (body, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "extensions", {
   method: "post",
   pathTemplate: "/api/v1/extensions",
   body,
   contentType: "multipart/form-data",
   options
 });
-var deleteExtension = async (id, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "extensions", {
+var deleteExtension = async (id, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "extensions", {
   method: "delete",
   pathTemplate: "/api/v1/extensions/{id}",
   pathVariables: { id },
   options
 });
-var getExtension = async (id, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "extensions", {
+var getExtension = async (id, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "extensions", {
   method: "get",
   pathTemplate: "/api/v1/extensions/{id}",
   pathVariables: { id },
   options
 });
-var patchExtension = async (id, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "extensions", {
+var patchExtension = async (id, body, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "extensions", {
   method: "patch",
   pathTemplate: "/api/v1/extensions/{id}",
   pathVariables: { id },
@@ -38,20 +38,20 @@ var patchExtension = async (id, body, options) => _chunkJNGURO23js.invokeFetch.c
   contentType: "multipart/form-data",
   options
 });
-var downloadExtension = async (id, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "extensions", {
+var downloadExtension = async (id, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "extensions", {
   method: "get",
   pathTemplate: "/api/v1/extensions/{id}/file",
   pathVariables: { id },
   options
 });
-var downloadFileFromExtension = async (id, filepath, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "extensions", {
+var downloadFileFromExtension = async (id, filepath, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "extensions", {
   method: "get",
   pathTemplate: "/api/v1/extensions/{id}/file/{filepath}",
   pathVariables: { id, filepath },
   options
 });
 function clearCache() {
-  return _chunkJNGURO23js.clearApiCache.call(void 0, "extensions");
+  return _chunkXJKF347Cjs.clearApiCache.call(void 0, "extensions");
 }
 var extensionsExport = {
   getExtensions,

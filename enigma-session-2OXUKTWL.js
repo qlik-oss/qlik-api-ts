@@ -1,12 +1,12 @@
-import {
-  getRestCallAuthParams,
-  getWebSocketAuthParams,
-  toValidWebsocketLocationUrl
-} from "./chunk-CYRLVHU3.mjs";
-import "./chunk-ZFXKCRJC.mjs";
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { newObj[key] = obj[key]; } } } newObj.default = obj; return newObj; } } function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; } function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
+
+
+
+var _chunk2II4JNZOjs = require('./chunk-2II4JNZO.js');
+require('./chunk-P57PW2II.js');
 
 // src/qix/session/enigma-session.ts
-import enigma from "enigma.js";
+var _enigmajs = require('enigma.js'); var _enigmajs2 = _interopRequireDefault(_enigmajs);
 
 // src/qix/session/schema/engine-api.js
 var engine_api_default = {
@@ -8660,11 +8660,11 @@ var migration_default = {
 };
 
 // src/qix/session/mixins/utils/json-patch.js
-import isPlainObject from "lodash/isPlainObject.js";
-import merge from "lodash/merge.js";
+var _isPlainObjectjs = require('lodash/isPlainObject.js'); var _isPlainObjectjs2 = _interopRequireDefault(_isPlainObjectjs);
+var _mergejs = require('lodash/merge.js'); var _mergejs2 = _interopRequireDefault(_mergejs);
 var JSONPatch = {};
-var extend = merge;
-var isObject = isPlainObject;
+var extend = _mergejs2.default;
+var isObject = _isPlainObjectjs2.default;
 var isArray = Array.isArray;
 var isUndef = function(v) {
   return typeof v === "undefined";
@@ -9505,7 +9505,7 @@ var mixin4 = {
   extend: {
     getOrCreateSessionObject(props) {
       const app = this;
-      const id = props.qInfo?.qId;
+      const id = _optionalChain([props, 'access', _ => _.qInfo, 'optionalAccess', _2 => _2.qId]);
       if (!id)
         throw new Error("Invalid list definition. No qId defined");
       if (!app._listCache[id]) {
@@ -9532,7 +9532,7 @@ var mixin4 = {
       if (outKey) {
         outKey = outKey.replace(/Def$/g, "");
       }
-      const id = listDef.qInfo?.qId;
+      const id = _optionalChain([listDef, 'access', _3 => _3.qInfo, 'optionalAccess', _4 => _4.qId]);
       if (!id)
         throw new Error("Invalid list definition. No qId defined");
       if (!app._listCache[id]) {
@@ -10160,15 +10160,15 @@ async function createEnigmaSession({
   identity,
   hostConfig
 }) {
-  const locationUrl = toValidWebsocketLocationUrl(hostConfig);
+  const locationUrl = _chunk2II4JNZOjs.toValidWebsocketLocationUrl.call(void 0, hostConfig);
   const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
   const identityPart = identity ? `/identity/${identity}` : "";
   let url = `${locationUrl}/app/${appId}${identityPart}?reloadUri=${reloadUri}`.replace(/^http/, "ws");
   const isNodeEnvironment = typeof window === "undefined";
   let createSocketMethod;
   if (isNodeEnvironment) {
-    const { headers, queryParams } = await getRestCallAuthParams({ hostConfig, method: "POST" });
-    const WS = (await import("ws")).default;
+    const { headers, queryParams } = await _chunk2II4JNZOjs.getRestCallAuthParams.call(void 0, { hostConfig, method: "POST" });
+    const WS = (await Promise.resolve().then(() => _interopRequireWildcard(require("ws")))).default;
     Object.entries(queryParams).forEach(([key, value]) => {
       url = `${url}&${key}=${value}`;
     });
@@ -10176,13 +10176,13 @@ async function createEnigmaSession({
       headers
     });
   } else {
-    const { queryParams } = await getWebSocketAuthParams({ hostConfig });
+    const { queryParams } = await _chunk2II4JNZOjs.getWebSocketAuthParams.call(void 0, { hostConfig });
     Object.entries(queryParams).forEach(([key, value]) => {
       url = `${url}&${key}=${value}`;
     });
     createSocketMethod = (socketUrl) => new WebSocket(socketUrl);
   }
-  return enigma.create({
+  return _enigmajs2.default.create({
     schema: engine_api_default,
     mixins: mixins5,
     url,
@@ -10196,6 +10196,6 @@ async function createEnigmaSession({
     ]
   });
 }
-export {
-  createEnigmaSession
-};
+
+
+exports.createEnigmaSession = createEnigmaSession;

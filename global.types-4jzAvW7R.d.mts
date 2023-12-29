@@ -38,21 +38,30 @@ type ApiCallOptions = {
 
 /** ApiKey Auth Configuration for a HostConfig */
 type ApiKeyAuthConfig = {
+    /** api key created by a developer role on a tenant */
     apiKey: string;
 };
 /** Cookie Auth Configuration for a HostConfig */
 type CookieAuthConfig = {
+    /** Web Integration Id created by tenant admin */
     webIntegrationId?: string;
+    /** If set to false the `credentials` property will be set to same-origin  */
     crossSiteCookies?: boolean;
 };
 /** WindowsCookie Auth Configuration for a HostConfig */
 type WindowsCookieAuthConfig = {
+    /** location of the login page, auth module will redirect to this page when an unauthenticated api call is made */
     loginUri?: string;
+    /** If set to false the `credentials` property will be set to same-origin  */
     crossSiteCookies?: boolean;
 };
 /** OAuth2 Auth Configuration for a HostConfig */
 type Oauth2AuthConfig = {
+    /** client id of oauth client created by tenant admin */
     clientId: string;
+    /** client id of oauth client created by tenant admin */
+    clientSecret?: string;
+    /** location of where the client should be redirected after getting hold of the access token */
     redirectUri?: string;
     /** If set, store the access token in either local or session storage, otherwise not stored */
     accessTokenStorage?: "session" | "local";

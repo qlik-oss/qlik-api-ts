@@ -1,60 +1,60 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunkJNGURO23js = require('./chunk-JNGURO23.js');
-require('./chunk-2STFUQKQ.js');
+var _chunkXJKF347Cjs = require('./chunk-XJKF347C.js');
+require('./chunk-JZAPZIPR.js');
 require('./chunk-P57PW2II.js');
 
 // src/public/rest/data-connections.ts
-var getDataConnections = async (query, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "data-connections", {
+var getDataConnections = async (query, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "data-connections", {
   method: "get",
   pathTemplate: "/api/v1/data-connections",
   query,
   options
 });
-var createDataConnection = async (body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "data-connections", {
+var createDataConnection = async (body, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "data-connections", {
   method: "post",
   pathTemplate: "/api/v1/data-connections",
   body,
   contentType: "application/json",
   options
 });
-var deleteDataConnections = async (body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "data-connections", {
+var deleteDataConnections = async (body, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "data-connections", {
   method: "post",
   pathTemplate: "/api/v1/data-connections/actions/delete",
   body,
   contentType: "application/json",
   options
 });
-var duplicateDataAConnection = async (body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "data-connections", {
+var duplicateDataAConnection = async (body, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "data-connections", {
   method: "post",
   pathTemplate: "/api/v1/data-connections/actions/duplicate",
   body,
   contentType: "application/json",
   options
 });
-var updateDataConnections = async (body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "data-connections", {
+var updateDataConnections = async (body, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "data-connections", {
   method: "post",
   pathTemplate: "/api/v1/data-connections/actions/update",
   body,
   contentType: "application/json",
   options
 });
-var deleteDataConnection = async (qID, query, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "data-connections", {
+var deleteDataConnection = async (qID, query, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "data-connections", {
   method: "delete",
   pathTemplate: "/api/v1/data-connections/{qID}",
   pathVariables: { qID },
   query,
   options
 });
-var getDataConnection = async (qID, query, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "data-connections", {
+var getDataConnection = async (qID, query, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "data-connections", {
   method: "get",
   pathTemplate: "/api/v1/data-connections/{qID}",
   pathVariables: { qID },
   query,
   options
 });
-var patchDataConnection = async (qID, query, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "data-connections", {
+var patchDataConnection = async (qID, query, body, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "data-connections", {
   method: "patch",
   pathTemplate: "/api/v1/data-connections/{qID}",
   pathVariables: { qID },
@@ -63,7 +63,7 @@ var patchDataConnection = async (qID, query, body, options) => _chunkJNGURO23js.
   contentType: "application/json",
   options
 });
-var updateDataConnection = async (qID, query, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "data-connections", {
+var updateDataConnection = async (qID, query, body, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "data-connections", {
   method: "put",
   pathTemplate: "/api/v1/data-connections/{qID}",
   pathVariables: { qID },
@@ -73,7 +73,7 @@ var updateDataConnection = async (qID, query, body, options) => _chunkJNGURO23js
   options
 });
 function clearCache() {
-  return _chunkJNGURO23js.clearApiCache.call(void 0, "data-connections");
+  return _chunkXJKF347Cjs.clearApiCache.call(void 0, "data-connections");
 }
 var dataConnectionsExport = {
   getDataConnections,

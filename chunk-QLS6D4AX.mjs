@@ -1,6 +1,6 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _nullishCoalesce(lhs, rhsFn) { if (lhs != null) { return lhs; } else { return rhsFn(); } } function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; } async function _asyncOptionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = await fn(value); } else if (op === 'call' || op === 'optionalCall') { value = await fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
-
-var _chunkP57PW2IIjs = require('./chunk-P57PW2II.js');
+import {
+  __require
+} from "./chunk-ZFXKCRJC.mjs";
 
 // src/platform/platform-functions.ts
 var getPlatform = async (options = {}) => {
@@ -15,14 +15,14 @@ var getPlatform = async (options = {}) => {
   if (!productInfo || status <= 399 && status >= 300) {
     return result({ isQSE: true, isWindows: true });
   }
-  const deploymentType = (_optionalChain([productInfo, 'access', _ => _.composition, 'optionalAccess', _2 => _2.deploymentType]) || "").toLowerCase();
+  const deploymentType = (productInfo.composition?.deploymentType || "").toLowerCase();
   if (deploymentType === "qliksenseserver") {
     return result({ isQSE: true, isWindows: true });
   }
   if (deploymentType === "qliksensedesktop") {
     return result({ isQSD: true, isWindows: true });
   }
-  if (_optionalChain([productInfo, 'access', _3 => _3.composition, 'optionalAccess', _4 => _4.provider]) === "fedramp") {
+  if (productInfo.composition?.provider === "fedramp") {
     return result({ isCloud: true, isQCG: true });
   }
   return result({ isCloud: true, isQCS: true });
@@ -197,7 +197,7 @@ ${error.detail}
 
 // src/auth/auth-functions.ts
 function isHostCrossOrigin(hostConfig) {
-  if (!_optionalChain([globalThis, 'access', _5 => _5.location, 'optionalAccess', _6 => _6.origin])) {
+  if (!globalThis.location?.origin) {
     return true;
   }
   const hostConfigToUse = withDefaultHostConfig(hostConfig);
@@ -218,7 +218,7 @@ async function isWindows(hostConfig) {
   return (await getPlatform({ hostConfig })).isWindows;
 }
 function toValidLocationUrl(hostConfig) {
-  const url = _optionalChain([withDefaultHostConfig, 'call', _7 => _7(hostConfig), 'optionalAccess', _8 => _8.host]);
+  const url = withDefaultHostConfig(hostConfig)?.host;
   let locationUrl;
   if (!url) {
     locationUrl = "";
@@ -236,7 +236,7 @@ function toValidEnigmaLocationUrl(hostConfig) {
   return toValidWebsocketLocationUrl(hostConfig);
 }
 function toValidWebsocketLocationUrl(hostConfig) {
-  const url = _optionalChain([withDefaultHostConfig, 'call', _9 => _9(hostConfig), 'optionalAccess', _10 => _10.host]);
+  const url = withDefaultHostConfig(hostConfig)?.host;
   let locationUrl;
   if (!url) {
     locationUrl = globalThis.location.origin;
@@ -259,10 +259,10 @@ async function getWebSocketAuthParams(props) {
 }
 async function getWebResourceAuthParams(props) {
   const hostConfigToUse = withDefaultHostConfig(props.hostConfig);
-  return await _asyncOptionalChain([(await getAuthModule(hostConfigToUse)), 'access', async _11 => _11.getWebResourceAuthParams, 'optionalCall', async _12 => _12({
+  return (await getAuthModule(hostConfigToUse)).getWebResourceAuthParams?.({
     ...props,
     hostConfig: hostConfigToUse
-  })]) || { queryParams: {} };
+  }) || { queryParams: {} };
 }
 async function handleAuthenticationError(props) {
   const hostConfigToUse = withDefaultHostConfig(props.hostConfig);
@@ -348,7 +348,7 @@ function internalValidateHostConfig(hostConfig, options) {
 function getRestCallAuthParams2({ hostConfig }) {
   return Promise.resolve({
     headers: {
-      Authorization: `Bearer ${_optionalChain([hostConfig, 'optionalAccess', _13 => _13.apiKey])}`
+      Authorization: `Bearer ${hostConfig?.apiKey}`
     },
     queryParams: {},
     credentials: "omit"
@@ -442,10 +442,10 @@ async function handleAuthenticationError3({
     return {
       preventDefault: false,
       // Only retry if the csrf token has expired
-      retry: _optionalChain([errorBody, 'optionalAccess', _14 => _14.code]) === "CSRF-TOKEN-2"
+      retry: errorBody?.code === "CSRF-TOKEN-2"
     };
   }
-  const webIntegrationParam = hostConfig.webIntegrationId ? `qlik-web-integration-id=${_optionalChain([hostConfig, 'optionalAccess', _15 => _15.webIntegrationId])}&` : "";
+  const webIntegrationParam = hostConfig.webIntegrationId ? `qlik-web-integration-id=${hostConfig?.webIntegrationId}&` : "";
   const locationUrl = toValidLocationUrl(hostConfig);
   if (hostConfig.authRedirectUserConfirmation) {
     await hostConfig.authRedirectUserConfirmation();
@@ -489,7 +489,7 @@ function isBrowser() {
   return typeof window === "object" && typeof window.document === "object";
 }
 function isNode() {
-  return typeof process === "object" && typeof _chunkP57PW2IIjs.__require === "function";
+  return typeof process === "object" && typeof __require === "function";
 }
 
 // src/auth/internal/default-auth-modules/oauth/storage-helpers.ts
@@ -756,16 +756,19 @@ async function getOAuthTokensForNode(hostConfig) {
       'A host config with authType set to "oauth2" has to provide a clientId and a clientSecret'
     );
   }
-  const oauthTokens = await loadOrAcquireAccessToken(
-    hostConfig,
-    async () => getOauthTokensWithCredentials(
+  const oauthTokens = await loadOrAcquireAccessToken(hostConfig, async () => {
+    if (!hostConfig.clientId || !hostConfig.clientSecret) {
+      throw new InvalidHostConfigError(
+        'A host config with authType set to "oauth2" has to provide a clientId and a clientSecret'
+      );
+    }
+    return getOauthTokensWithCredentials(
       toValidLocationUrl(hostConfig),
       hostConfig.clientId,
-      // @ts-expect-error clientSecret is not yet in HostConfig type
       hostConfig.clientSecret,
       hostConfig.scope
-    )
-  );
+    );
+  });
   return oauthTokens;
 }
 async function getOAuthTokensForBrowser(hostConfig) {
@@ -820,16 +823,17 @@ async function getOAuthAccessToken(hostConfig) {
 async function refreshAccessToken(hostConfig) {
   const tokens = await loadCachedOauthTokens(hostConfig);
   clearStoredOauthTokens(hostConfig);
-  if (tokens && tokens.refreshToken) {
-    const refreshedTokens = await loadOrAcquireAccessToken(
-      hostConfig,
-      async () => getOauthTokensWithRefreshToken(
+  if (tokens && tokens.refreshToken && hostConfig.clientSecret) {
+    const refreshedTokens = await loadOrAcquireAccessToken(hostConfig, async () => {
+      if (!tokens || !tokens.refreshToken || !hostConfig.clientSecret) {
+        throw new Error("Trying to refresh tokens without refreshToken or clientSecret");
+      }
+      return getOauthTokensWithRefreshToken(
         toValidLocationUrl(hostConfig),
         tokens.refreshToken,
-        // @ts-expect-error clientSecret is not yet in HostConfig type
         hostConfig.clientSecret
-      )
-    );
+      );
+    });
     if (refreshedTokens) {
       handlePossibleErrors(refreshedTokens);
     }
@@ -849,7 +853,7 @@ async function exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, pur
       subject_token_type: "urn:ietf:params:oauth:token-type:access_token",
       grant_type: "urn:ietf:params:oauth:grant-type:token-exchange",
       purpose,
-      redirect_uri: _optionalChain([globalThis, 'access', _16 => _16.location, 'optionalAccess', _17 => _17.href]),
+      redirect_uri: globalThis.location?.href,
       client_id: hostConfig.clientId
     })
   });
@@ -1081,15 +1085,15 @@ function shouldUseCachedResult(options, cacheEntry, defaultMaxCacheTime) {
   if (!cacheEntry || typeof cacheEntry.value === void 0) {
     return false;
   }
-  if (_optionalChain([options, 'optionalAccess', _18 => _18.noCache])) {
+  if (options?.noCache) {
     return false;
   }
-  if (_optionalChain([options, 'optionalAccess', _19 => _19.useCacheIfAfter])) {
+  if (options?.useCacheIfAfter) {
     return options.useCacheIfAfter.getTime() <= cacheEntry.lastPulled;
   }
   const age = Date.now() - cacheEntry.lastPulled;
-  if (_optionalChain([options, 'optionalAccess', _20 => _20.maxCacheAge])) {
-    return age <= _optionalChain([options, 'optionalAccess', _21 => _21.maxCacheAge]);
+  if (options?.maxCacheAge) {
+    return age <= options?.maxCacheAge;
   }
   return age < defaultMaxCacheTime;
 }
@@ -1173,33 +1177,33 @@ async function fetchAndTransformExceptions(input, init) {
   }
 }
 async function performActualHttpFetch(method, completeUrl, unencodedBody, contentType, options, interceptors, authHeaders, credentials) {
-  const { body, contentTypeHeader, requestOptions } = encodeBody(unencodedBody, _nullishCoalesce(contentType, () => ( "")));
+  const { body, contentTypeHeader, requestOptions } = encodeBody(unencodedBody, contentType ?? "");
   const headers = {
     ...contentTypeHeader,
     ...authHeaders,
-    ..._optionalChain([options, 'optionalAccess', _22 => _22.headers])
+    ...options?.headers
   };
-  const isCrossOrigin = isHostCrossOrigin(_optionalChain([options, 'optionalAccess', _23 => _23.hostConfig]));
+  const isCrossOrigin = isHostCrossOrigin(options?.hostConfig);
   let request = {
     method,
     credentials,
     mode: isCrossOrigin ? "cors" : "same-origin",
     headers,
-    redirect: await isWindows(_optionalChain([options, 'optionalAccess', _24 => _24.hostConfig])) ? "manual" : "follow",
+    redirect: await isWindows(options?.hostConfig) ? "manual" : "follow",
     body,
     // body data type must match "Content-Type" header
     ...requestOptions
     // This adds 'duplex: "half"' if we're sending application/octet-stream, needed in node only.
   };
   let fetchTimeoutId;
-  if (_optionalChain([options, 'optionalAccess', _25 => _25.timeoutMs]) && options.timeoutMs > 0) {
+  if (options?.timeoutMs && options.timeoutMs > 0) {
     const controller = new AbortController();
     fetchTimeoutId = setTimeout(() => {
       controller.abort();
     }, options.timeoutMs);
     request.signal = controller.signal;
   }
-  if (_optionalChain([interceptors, 'optionalAccess', _26 => _26.request, 'access', _27 => _27.hasInterceptors, 'call', _28 => _28()])) {
+  if (interceptors?.request.hasInterceptors()) {
     request = await interceptors.request.apply(completeUrl, request);
   }
   const fetchResponse = await fetchAndTransformExceptions(completeUrl, request);
@@ -1207,7 +1211,7 @@ async function performActualHttpFetch(method, completeUrl, unencodedBody, conten
     clearTimeout(fetchTimeoutId);
   }
   let invokeFetchResponse = await parseFetchResponse2(fetchResponse, completeUrl);
-  if (_optionalChain([interceptors, 'optionalAccess', _29 => _29.response, 'access', _30 => _30.hasInterceptors, 'call', _31 => _31()])) {
+  if (interceptors?.response.hasInterceptors()) {
     invokeFetchResponse = await interceptors.response.apply(invokeFetchResponse);
   }
   return invokeFetchResponse;
@@ -1311,19 +1315,19 @@ async function getInvokeFetchUrlParams({
   query,
   options
 }) {
-  const locationUrl = toValidLocationUrl(_optionalChain([options, 'optionalAccess', _32 => _32.hostConfig]));
+  const locationUrl = toValidLocationUrl(options?.hostConfig);
   const {
     headers: authHeaders,
     queryParams: authQueryParams,
     credentials
   } = await getRestCallAuthParams({
-    hostConfig: _optionalChain([options, 'optionalAccess', _33 => _33.hostConfig]),
+    hostConfig: options?.hostConfig,
     method
   });
   const url = locationUrl + applyPathVariables(pathTemplate, pathVariables);
   const queryString = encodeQueryParams({ ...query, ...authQueryParams });
   const completeUrl = toCompleteUrl(url, queryString);
-  const cacheKey = toCacheKey(url, queryString, _optionalChain([options, 'optionalAccess', _34 => _34.headers]));
+  const cacheKey = toCacheKey(url, queryString, options?.headers);
   return { completeUrl, cacheKey, authHeaders, credentials };
 }
 function invokeFetchWithUrl(api, props, interceptors) {
@@ -1368,7 +1372,7 @@ function invokeFetchWithUrlAndRetry(api, { method, completeUrl, cacheKey, body, 
     credentials
   );
   const resultAfterAuthenticationCheck = interceptAuthenticationErrors(
-    _optionalChain([options, 'optionalAccess', _35 => _35.hostConfig]),
+    options?.hostConfig,
     resultPromiseFromBackend,
     performRetry
   );
@@ -1400,8 +1404,8 @@ function invokeFetchWithUrlAndRetry(api, { method, completeUrl, cacheKey, body, 
 function addPagingFunctions(api, value, method, body, options, interceptors, authHeaders, credentials) {
   return value.then((resp) => {
     const dataWithPotentialLinks = resp.data;
-    const prevUrl = _optionalChain([dataWithPotentialLinks, 'access', _36 => _36.links, 'optionalAccess', _37 => _37.prev, 'optionalAccess', _38 => _38.href]);
-    const nextUrl = _optionalChain([dataWithPotentialLinks, 'access', _39 => _39.links, 'optionalAccess', _40 => _40.next, 'optionalAccess', _41 => _41.href]);
+    const prevUrl = dataWithPotentialLinks.links?.prev?.href;
+    const nextUrl = dataWithPotentialLinks.links?.next?.href;
     if (prevUrl) {
       resp.prev = (prevOptions) => invokeFetchWithUrl(
         api,
@@ -1410,7 +1414,7 @@ function addPagingFunctions(api, value, method, body, options, interceptors, aut
           completeUrl: prevUrl,
           body,
           options: prevOptions || options,
-          cacheKey: toCacheKey(prevUrl, "", _optionalChain([options, 'optionalAccess', _42 => _42.headers])),
+          cacheKey: toCacheKey(prevUrl, "", options?.headers),
           authHeaders,
           credentials
         },
@@ -1425,7 +1429,7 @@ function addPagingFunctions(api, value, method, body, options, interceptors, aut
           completeUrl: nextUrl,
           body,
           options: nextOptions || options,
-          cacheKey: toCacheKey(nextUrl, "", _optionalChain([options, 'optionalAccess', _43 => _43.headers])),
+          cacheKey: toCacheKey(nextUrl, "", options?.headers),
           authHeaders,
           credentials
         },
@@ -1470,7 +1474,7 @@ async function parseFetchResponse2(fetchResponse, url) {
   try {
     resultData = await fetchResponse.text();
     resultData = JSON.parse(resultData);
-  } catch (e2) {
+  } catch {
   }
   const { status, statusText, headers } = fetchResponse;
   const errorMsg = `request to '${url}' failed with status ${status} ${statusText}.`;
@@ -1490,9 +1494,9 @@ async function parseFetchResponse2(fetchResponse, url) {
 
 // src/invoke-fetch/invoke-fetch-error.ts
 var InvokeFetchError = class extends Error {
-  
-  
-  
+  status;
+  headers;
+  data;
   constructor(errorMessage, status, headers, data) {
     super(errorMessage);
     this.status = status;
@@ -1502,8 +1506,8 @@ var InvokeFetchError = class extends Error {
   }
 };
 var EncodingError = class extends Error {
-  
-  
+  contentType;
+  data;
   constructor(errorMessage, contentType, data) {
     super(errorMessage);
     this.contentType = contentType;
@@ -1534,7 +1538,7 @@ function cleanStack(stack) {
 
 // src/invoke-fetch/invoke-fetch-functions.ts
 async function invokeFetch(api, props, interceptors) {
-  checkForCrossDomainRequest(_optionalChain([props, 'access', _44 => _44.options, 'optionalAccess', _45 => _45.hostConfig]));
+  checkForCrossDomainRequest(props.options?.hostConfig);
   const { completeUrl, cacheKey, authHeaders, credentials } = await getInvokeFetchUrlParams(props);
   return invokeFetchWithUrl(
     api,
@@ -1550,7 +1554,7 @@ async function parseFetchResponse(fetchResponse, url) {
   try {
     resultData = await fetchResponse.text();
     resultData = JSON.parse(resultData);
-  } catch (e3) {
+  } catch {
   }
   const { status, statusText, headers } = fetchResponse;
   const errorMsg = `request to '${url}' failed with status ${status} ${statusText}.`;
@@ -1576,30 +1580,30 @@ var invokeFetchExp = {
 };
 var invoke_fetch_default = invokeFetchExp;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-exports.getPlatform = getPlatform; exports.InvalidHostConfigError = InvalidHostConfigError; exports.UnexpectedAuthTypeError = UnexpectedAuthTypeError; exports.InvalidAuthTypeError = InvalidAuthTypeError; exports.AuthorizationError = AuthorizationError; exports.isHostCrossOrigin = isHostCrossOrigin; exports.isWindows = isWindows; exports.toValidLocationUrl = toValidLocationUrl; exports.toValidEnigmaLocationUrl = toValidEnigmaLocationUrl; exports.toValidWebsocketLocationUrl = toValidWebsocketLocationUrl; exports.getWebSocketAuthParams = getWebSocketAuthParams; exports.getWebResourceAuthParams = getWebResourceAuthParams; exports.handleAuthenticationError = handleAuthenticationError; exports.getRestCallAuthParams = getRestCallAuthParams; exports.registerAuthModule = registerAuthModule2; exports.setDefaultHostConfig = setDefaultHostConfig2; exports.checkForCrossDomainRequest = checkForCrossDomainRequest; exports.logout = logout; exports.InvokeFetchError = InvokeFetchError; exports.EncodingError = EncodingError; exports.invokeFetch = invokeFetch; exports.clearApiCache = clearApiCache; exports.parseFetchResponse = parseFetchResponse; exports.invoke_fetch_default = invoke_fetch_default; exports.auth_default = auth_default;
+export {
+  getPlatform,
+  InvalidHostConfigError,
+  UnexpectedAuthTypeError,
+  InvalidAuthTypeError,
+  AuthorizationError,
+  isHostCrossOrigin,
+  isWindows,
+  toValidLocationUrl,
+  toValidEnigmaLocationUrl,
+  toValidWebsocketLocationUrl,
+  getWebSocketAuthParams,
+  getWebResourceAuthParams,
+  handleAuthenticationError,
+  getRestCallAuthParams,
+  registerAuthModule2 as registerAuthModule,
+  setDefaultHostConfig2 as setDefaultHostConfig,
+  checkForCrossDomainRequest,
+  logout,
+  InvokeFetchError,
+  EncodingError,
+  invokeFetch,
+  clearApiCache,
+  parseFetchResponse,
+  invoke_fetch_default,
+  auth_default
+};
