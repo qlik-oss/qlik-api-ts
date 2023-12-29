@@ -1,42 +1,42 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunkJNGURO23js = require('./chunk-JNGURO23.js');
-require('./chunk-2STFUQKQ.js');
+var _chunkXJKF347Cjs = require('./chunk-XJKF347C.js');
+require('./chunk-JZAPZIPR.js');
 require('./chunk-P57PW2II.js');
 
 // src/public/rest/brands.ts
-var getBrands = async (query, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "brands", {
+var getBrands = async (query, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "brands", {
   method: "get",
   pathTemplate: "/api/v1/brands",
   query,
   options
 });
-var createBrand = async (body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "brands", {
+var createBrand = async (body, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "brands", {
   method: "post",
   pathTemplate: "/api/v1/brands",
   body,
   contentType: "multipart/form-data",
   options
 });
-var getActiveBrand = async (options) => _chunkJNGURO23js.invokeFetch.call(void 0, "brands", {
+var getActiveBrand = async (options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "brands", {
   method: "get",
   pathTemplate: "/api/v1/brands/active",
   options
 });
-var deleteBrand = async (brandId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "brands", {
+var deleteBrand = async (brandId, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "brands", {
   method: "delete",
   pathTemplate: "/api/v1/brands/{brand-id}",
   pathVariables: { "brand-id": brandId },
   options
 });
-var getBrand = async (brandId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "brands", {
+var getBrand = async (brandId, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "brands", {
   method: "get",
   pathTemplate: "/api/v1/brands/{brand-id}",
   pathVariables: { "brand-id": brandId },
   options
 });
-var patchBrand = async (brandId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "brands", {
+var patchBrand = async (brandId, body, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "brands", {
   method: "patch",
   pathTemplate: "/api/v1/brands/{brand-id}",
   pathVariables: { "brand-id": brandId },
@@ -44,33 +44,33 @@ var patchBrand = async (brandId, body, options) => _chunkJNGURO23js.invokeFetch.
   contentType: "application/json",
   options
 });
-var activateBrand = async (brandId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "brands", {
+var activateBrand = async (brandId, body, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "brands", {
   method: "post",
   pathTemplate: "/api/v1/brands/{brand-id}/actions/activate",
   pathVariables: { "brand-id": brandId },
   body,
   options
 });
-var deactivateBrand = async (brandId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "brands", {
+var deactivateBrand = async (brandId, body, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "brands", {
   method: "post",
   pathTemplate: "/api/v1/brands/{brand-id}/actions/deactivate",
   pathVariables: { "brand-id": brandId },
   body,
   options
 });
-var deleteBrandFile = async (brandId, brandFileId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "brands", {
+var deleteBrandFile = async (brandId, brandFileId, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "brands", {
   method: "delete",
   pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
   pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
   options
 });
-var getBrandFile = async (brandId, brandFileId, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "brands", {
+var getBrandFile = async (brandId, brandFileId, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "brands", {
   method: "get",
   pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
   pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
   options
 });
-var createBrandFile = async (brandId, brandFileId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "brands", {
+var createBrandFile = async (brandId, brandFileId, body, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "brands", {
   method: "post",
   pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
   pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
@@ -78,7 +78,7 @@ var createBrandFile = async (brandId, brandFileId, body, options) => _chunkJNGUR
   contentType: "multipart/form-data",
   options
 });
-var updateBrandFile = async (brandId, brandFileId, body, options) => _chunkJNGURO23js.invokeFetch.call(void 0, "brands", {
+var updateBrandFile = async (brandId, brandFileId, body, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "brands", {
   method: "put",
   pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
   pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
@@ -87,7 +87,7 @@ var updateBrandFile = async (brandId, brandFileId, body, options) => _chunkJNGUR
   options
 });
 function clearCache() {
-  return _chunkJNGURO23js.clearApiCache.call(void 0, "brands");
+  return _chunkXJKF347Cjs.clearApiCache.call(void 0, "brands");
 }
 var brandsExport = {
   getBrands,

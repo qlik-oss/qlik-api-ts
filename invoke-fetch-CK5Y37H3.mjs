@@ -5,7 +5,7 @@ import {
   invokeFetch,
   invoke_fetch_default,
   parseFetchResponse
-} from "./chunk-CYRLVHU3.mjs";
+} from "./chunk-QLS6D4AX.mjs";
 import "./chunk-ZFXKCRJC.mjs";
 export {
   EncodingError,

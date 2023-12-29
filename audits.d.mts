@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types-Eto4uYwy.mjs';
+import { A as ApiCallOptions } from './global.types-4jzAvW7R.mjs';
 import './auth-types-nnUcWhuU.mjs';
 
 type ErrorResponse = {
