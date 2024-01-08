@@ -8,7 +8,7 @@ The `@qlik/api/qix` module gives you a fully typed API to the QIX engine and to 
 
 [enigma.js](https://github.com/qlik-oss/enigma.js) is a library that can be used to set up a websocket connection to a Qlik Sense Engine and get programmatic interfaces to Qlik Sense App's object models. The library provide events to data updates and has some handy features such as suspending and resuming sessions.
 
-`@qlik/api` provides the same features, but with a lot simpler interface. It also comes with types for the QIX api including GenericObjects, HyperCubes etc etc. So in most cases `@qlik/api` can be used instead of `enigma.js`. Only when you have very specific configuration needs and don't want to use the "sense mixins" `enigma.js`` should be used.
+`@qlik/api` provides the same features, but with a lot simpler interface. It also comes with types for the QIX api including GenericObjects, HyperCubes etc etc. So in most cases `@qlik/api` can be used instead of `enigma.js`. Only when you have very specific configuration needs and don't want to use the "sense mixins" `enigma.js` can be used.
 
 ## Features
 
