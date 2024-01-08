@@ -1,7 +1,7 @@
 import './global.types-4jzAvW7R.mjs';
 import { H as HostConfig } from './auth-types-nnUcWhuU.mjs';
 
-declare const QIX_SCHEMA_VERSION = "12.1934.0";
+declare const QIX_SCHEMA_VERSION = "12.1936.0";
 type AlfaNumString = {
     /**
      * Calculated value.

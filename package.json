@@ -14,9 +14,6 @@
     "lodash": "^4.17.21",
     "ws": "^8.16.0"
   },
-  "optionalDependencies": {
-    "@qlik/api": "file:./npm-public"
-  },
   "engines": {
     "node": ">=16"
   },
