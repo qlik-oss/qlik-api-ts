@@ -3,8 +3,8 @@ import {
   logout,
   registerAuthModule,
   setDefaultHostConfig
-} from "./chunk-EDRFS7GY.mjs";
-import "./chunk-GLWHVX4M.mjs";
+} from "./chunk-CO7VPLMT.mjs";
+import "./chunk-DJA2XJBU.mjs";
 import "./chunk-ZFXKCRJC.mjs";
 export {
   auth_default as default,

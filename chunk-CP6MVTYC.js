@@ -1,10 +1,10 @@
-import {
-  getQixRuntimeModule
-} from "./chunk-GLWHVX4M.mjs";
+"use strict";Object.defineProperty(exports, "__esModule", {value: true});
+
+var _chunkERGV34M7js = require('./chunk-ERGV34M7.js');
 
 // src/public/qix.ts
 function openAppSession(appSessionProps) {
-  const appSessionPromise = getQixRuntimeModule(appSessionProps.hostConfig).then(
+  const appSessionPromise = _chunkERGV34M7js.getQixRuntimeModule.call(void 0, appSessionProps.hostConfig).then(
     (impl) => impl.openAppSession(appSessionProps)
   );
   const appSessionProxy = {
@@ -51,7 +51,7 @@ var qix_default = {
   openAppSession
 };
 
-export {
-  openAppSession,
-  qix_default
-};
+
+
+
+exports.openAppSession = openAppSession; exports.qix_default = qix_default;

@@ -1,46 +1,46 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunkXJKF347Cjs = require('./chunk-XJKF347C.js');
-require('./chunk-JZAPZIPR.js');
+var _chunkQQDHWGJXjs = require('./chunk-QQDHWGJX.js');
+require('./chunk-ERGV34M7.js');
 require('./chunk-P57PW2II.js');
 
 // src/public/rest/audits.ts
-var getAudits = async (query, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "audits", {
+var getAudits = async (query, options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "audits", {
   method: "get",
   pathTemplate: "/api/v1/audits",
   query,
   options
 });
-var getArchivedAudits = async (query, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "audits", {
+var getArchivedAudits = async (query, options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "audits", {
   method: "get",
   pathTemplate: "/api/v1/audits/archive",
   query,
   options
 });
-var getAuditsSettings = async (options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "audits", {
+var getAuditsSettings = async (options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "audits", {
   method: "get",
   pathTemplate: "/api/v1/audits/settings",
   options
 });
-var getAuditSources = async (options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "audits", {
+var getAuditSources = async (options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "audits", {
   method: "get",
   pathTemplate: "/api/v1/audits/sources",
   options
 });
-var getAuditTypes = async (options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "audits", {
+var getAuditTypes = async (options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "audits", {
   method: "get",
   pathTemplate: "/api/v1/audits/types",
   options
 });
-var getAudit = async (id, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "audits", {
+var getAudit = async (id, options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "audits", {
   method: "get",
   pathTemplate: "/api/v1/audits/{id}",
   pathVariables: { id },
   options
 });
 function clearCache() {
-  return _chunkXJKF347Cjs.clearApiCache.call(void 0, "audits");
+  return _chunkQQDHWGJXjs.clearApiCache.call(void 0, "audits");
 }
 var auditsExport = {
   getAudits,

@@ -1,37 +1,37 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunkXJKF347Cjs = require('./chunk-XJKF347C.js');
-require('./chunk-JZAPZIPR.js');
+var _chunkQQDHWGJXjs = require('./chunk-QQDHWGJX.js');
+require('./chunk-ERGV34M7.js');
 require('./chunk-P57PW2II.js');
 
 // src/public/rest/web-integrations.ts
-var getWebIntegrations = async (query, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "web-integrations", {
+var getWebIntegrations = async (query, options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "web-integrations", {
   method: "get",
   pathTemplate: "/api/v1/web-integrations",
   query,
   options
 });
-var createWebIntegration = async (body, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "web-integrations", {
+var createWebIntegration = async (body, options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "web-integrations", {
   method: "post",
   pathTemplate: "/api/v1/web-integrations",
   body,
   contentType: "application/json",
   options
 });
-var deleteWebIntegration = async (id, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "web-integrations", {
+var deleteWebIntegration = async (id, options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "web-integrations", {
   method: "delete",
   pathTemplate: "/api/v1/web-integrations/{id}",
   pathVariables: { id },
   options
 });
-var getWebIntegration = async (id, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "web-integrations", {
+var getWebIntegration = async (id, options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "web-integrations", {
   method: "get",
   pathTemplate: "/api/v1/web-integrations/{id}",
   pathVariables: { id },
   options
 });
-var patchWebIntegration = async (id, body, options) => _chunkXJKF347Cjs.invokeFetch.call(void 0, "web-integrations", {
+var patchWebIntegration = async (id, body, options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "web-integrations", {
   method: "patch",
   pathTemplate: "/api/v1/web-integrations/{id}",
   pathVariables: { id },
@@ -40,7 +40,7 @@ var patchWebIntegration = async (id, body, options) => _chunkXJKF347Cjs.invokeFe
   options
 });
 function clearCache() {
-  return _chunkXJKF347Cjs.clearApiCache.call(void 0, "web-integrations");
+  return _chunkQQDHWGJXjs.clearApiCache.call(void 0, "web-integrations");
 }
 var webIntegrationsExport = {
   getWebIntegrations,
