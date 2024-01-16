@@ -1,10 +1,10 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
-var _chunkERGV34M7js = require('./chunk-ERGV34M7.js');
+var _chunkZXQHFWQHjs = require('./chunk-ZXQHFWQH.js');
 
 // src/public/qix.ts
 function openAppSession(appSessionProps) {
-  const appSessionPromise = _chunkERGV34M7js.getQixRuntimeModule.call(void 0, appSessionProps.hostConfig).then(
+  const appSessionPromise = _chunkZXQHFWQHjs.getQixRuntimeModule.call(void 0, appSessionProps.hostConfig).then(
     (impl) => impl.openAppSession(appSessionProps)
   );
   const appSessionProxy = {
