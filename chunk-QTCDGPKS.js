@@ -1408,6 +1408,9 @@ function invokeFetchWithUrlAndRetry(api, { method, completeUrl, cacheKey, body, 
 function addPagingFunctions(api, value, method, body, options, interceptors, authHeaders, credentials) {
   return value.then((resp) => {
     const dataWithPotentialLinks = resp.data;
+    if (!dataWithPotentialLinks) {
+      return resp;
+    }
     const prevUrl = _optionalChain([dataWithPotentialLinks, 'access', _36 => _36.links, 'optionalAccess', _37 => _37.prev, 'optionalAccess', _38 => _38.href]);
     const nextUrl = _optionalChain([dataWithPotentialLinks, 'access', _39 => _39.links, 'optionalAccess', _40 => _40.next, 'optionalAccess', _41 => _41.href]);
     if (prevUrl) {

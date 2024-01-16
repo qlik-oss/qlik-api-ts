@@ -2,7 +2,7 @@ import {
   getRestCallAuthParams,
   getWebSocketAuthParams,
   toValidWebsocketLocationUrl
-} from "./chunk-AHWPRCGA.mjs";
+} from "./chunk-F24SLAYP.mjs";
 import "./chunk-ZFXKCRJC.mjs";
 
 // src/qix/session/enigma-session.ts
