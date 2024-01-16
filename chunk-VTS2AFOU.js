@@ -1,16 +1,16 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
-var _chunkERGV34M7js = require('./chunk-ERGV34M7.js');
+var _chunkZXQHFWQHjs = require('./chunk-ZXQHFWQH.js');
 
 // src/public/auth.ts
 function registerAuthModule(name, authModule) {
-  void _chunkERGV34M7js.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.registerAuthModule(name, authModule));
+  void _chunkZXQHFWQHjs.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.registerAuthModule(name, authModule));
 }
 function logout() {
-  void _chunkERGV34M7js.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.logout());
+  void _chunkZXQHFWQHjs.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.logout());
 }
 function setDefaultHostConfig(hostConfig) {
-  void _chunkERGV34M7js.getAuthRuntimeModule.call(void 0, hostConfig).then((impl) => impl.setDefaultHostConfig(hostConfig));
+  void _chunkZXQHFWQHjs.getAuthRuntimeModule.call(void 0, hostConfig).then((impl) => impl.setDefaultHostConfig(hostConfig));
 }
 var auth_default = {
   registerAuthModule,

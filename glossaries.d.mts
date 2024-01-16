@@ -168,8 +168,18 @@ type ErrorResponseNotFound = {
     errors?: ErrorResponseCode[];
     traceId?: string;
 };
+type ExportCategory = {
+    description?: string;
+    /** The id for resolving updates in future imports/updates.
+     * Opposed to the id of terms, id on category are not resolved by backend. Any category referred in the category array in terms will have to be identical to the id property of the category. If not, the category reference will be discarded. */
+    id?: string;
+    /** The name of the category. May not be identical to another category belonging to the same parent. */
+    name?: string;
+    parentId?: string;
+    stewardDetails?: StewardDetail[];
+};
 type ExportGlossary = {
-    categories?: Category[];
+    categories?: ExportCategory[];
     readonly createdAt?: string;
     readonly createdBy?: string;
     description?: string;
@@ -180,10 +190,25 @@ type ExportGlossary = {
     spaceId?: string;
     tags?: string[];
     termTemplate?: TermTemplate;
-    terms?: Term[];
+    terms?: ExportTerm[];
     readonly updatedAt?: string;
     /** The uuid of the user who last updated the glossary */
     readonly updatedBy?: string;
+};
+type ExportTerm = {
+    abbreviation?: string;
+    /** Categories that the term belongs to. Refers to the `id` property of the category object */
+    categories?: string[];
+    description?: string;
+    /** The id of the term. Used to identify the term in future updates. If not provided, will use the leading 30 chars of the term name and an incremental index */
+    id?: string;
+    linksTo?: TermCreateLinksTo[];
+    name?: string;
+    owner?: ImportOwner[];
+    relatesTo?: TermRelatesTo[];
+    stewardDetails?: StewardDetail[];
+    stewards?: StewardDetail[];
+    tags?: string[];
 };
 type GlossariesResult = {
     data?: Glossary[];
@@ -215,6 +240,17 @@ type Glossary = {
     /** The unique identifier of the user who last updated the glossary */
     readonly updatedBy: string;
 };
+type ImportCategory = {
+    description?: string;
+    /** The id for resolving updates in future imports/updates.
+     * Opposed to the id of terms, id on category are not resolved by backend. Any category referred in the category array in terms will have to be identical to the id property of the category. If not, the category reference will be discarded. */
+    id?: string;
+    /** The name of the category. May not be identical to another category belonging to the same parent. */
+    name?: string;
+    parentId?: string;
+    stewardDetails?: StewardDetail[];
+    stewards?: string[];
+};
 type ImportOwner = {
     email?: string;
     name?: string;
@@ -231,6 +267,8 @@ type ImportTerm = {
     name?: string;
     owner?: ImportOwner[];
     relatesTo?: TermRelatesTo[];
+    stewardDetails?: StewardDetail[];
+    stewards?: StewardDetail[];
     tags?: string[];
 };
 type LinksResult = {
@@ -247,7 +285,7 @@ type PageLinks = {
     self?: PageLink;
 };
 type QlikGlossary = {
-    categories?: CreateCategory[];
+    categories?: ImportCategory[];
     description?: string;
     name?: string;
     overview?: string;
@@ -258,6 +296,11 @@ type QlikGlossary = {
 };
 type ResultMeta = {
     countTotal?: number;
+};
+type StewardDetail = {
+    email?: string;
+    name?: string;
+    userId?: string;
 };
 type Term = {
     abbreviation?: string;
@@ -385,6 +428,10 @@ type CreateGlossaryHttpError = {
  * @throws ImportGlossaryHttpError
  */
 declare const importGlossary: (query: {
+    /** Appending the current importer user as steward to categories/terms where no steward is defined/not match the identity service. */
+    importerAsFallbackSteward?: boolean;
+    /** Using email in the steward fields to lookup userIds in the identity service */
+    lookupUserOnEmail?: boolean;
     /** The spaceId (leave blank or omit for personal) */
     spaceId?: string;
 }, body: QlikGlossary, options?: ApiCallOptions) => Promise<ImportGlossaryHttpResponse>;
@@ -1073,4 +1120,4 @@ interface GlossariesAPI {
  */
 declare const glossariesExport: GlossariesAPI;
 
-export { type AtlanEntity, type AtlanEntityAttributes, type AtlanGlossary, type AtlanRelationEntity, type AtlanRelationshipAttributes, type AtlanResourceLink, type AtlanTermHeader, type AtlasCategory, type AtlasGlossary, type AtlasTerm, type CategoriesResult, type Category, type ChangeGlossaryTermStatusHttpError, type ChangeGlossaryTermStatusHttpResponse, type CreateCategory, type CreateGlossary, type CreateGlossaryCategoryHttpError, type CreateGlossaryCategoryHttpResponse, type CreateGlossaryHttpError, type CreateGlossaryHttpResponse, type CreateGlossaryTermHttpError, type CreateGlossaryTermHttpResponse, type CreateGlossaryTermLinkHttpError, type CreateGlossaryTermLinkHttpResponse, type CreateTerm, type DeleteGlossaryCategoryHttpError, type DeleteGlossaryCategoryHttpResponse, type DeleteGlossaryHttpError, type DeleteGlossaryHttpResponse, type DeleteGlossaryTermHttpError, type DeleteGlossaryTermHttpResponse, type ErrorResponse, type ErrorResponseBadRequest, type ErrorResponseCode, type ErrorResponseForbidden, type ErrorResponseNotFound, type ExportGlossary, type ExportGlossaryHttpError, type ExportGlossaryHttpResponse, type GetGlossariesHttpError, type GetGlossariesHttpResponse, type GetGlossaryCategoriesHttpError, type GetGlossaryCategoriesHttpResponse, type GetGlossaryCategoryHttpError, type GetGlossaryCategoryHttpResponse, type GetGlossaryHttpError, type GetGlossaryHttpResponse, type GetGlossaryTermHttpError, type GetGlossaryTermHttpResponse, type GetGlossaryTermLinksHttpError, type GetGlossaryTermLinksHttpResponse, type GetGlossaryTermRevisionsHttpError, type GetGlossaryTermRevisionsHttpResponse, type GetGlossaryTermsHttpError, type GetGlossaryTermsHttpResponse, type GlossariesAPI, type GlossariesResult, type Glossary, type ImportGlossary400HttpError, type ImportGlossary403HttpError, type ImportGlossary404HttpError, type ImportGlossaryHttpError, type ImportGlossaryHttpResponse, type ImportOwner, type ImportTerm, type JSONPatch, type JSONPatchArray, type LinksResult, type PageLink, type PageLinks, type PatchGlossaryCategoryHttpError, type PatchGlossaryCategoryHttpResponse, type PatchGlossaryHttpError, type PatchGlossaryHttpResponse, type PatchGlossaryTermHttpError, type PatchGlossaryTermHttpResponse, type QlikGlossary, type ResultMeta, type Term, type TermCreateLinksTo, type TermLinksTo, type TermRelatesTo, type TermStatus, type TermTemplate, type TermsResult, type UpdateGlossaryCategoryHttpError, type UpdateGlossaryCategoryHttpResponse, type UpdateGlossaryHttpError, type UpdateGlossaryHttpResponse, type UpdateGlossaryTermHttpError, type UpdateGlossaryTermHttpResponse, changeGlossaryTermStatus, clearCache, createGlossary, createGlossaryCategory, createGlossaryTerm, createGlossaryTermLink, glossariesExport as default, deleteGlossary, deleteGlossaryCategory, deleteGlossaryTerm, exportGlossary, getGlossaries, getGlossary, getGlossaryCategories, getGlossaryCategory, getGlossaryTerm, getGlossaryTermLinks, getGlossaryTermRevisions, getGlossaryTerms, importGlossary, patchGlossary, patchGlossaryCategory, patchGlossaryTerm, updateGlossary, updateGlossaryCategory, updateGlossaryTerm };
+export { type AtlanEntity, type AtlanEntityAttributes, type AtlanGlossary, type AtlanRelationEntity, type AtlanRelationshipAttributes, type AtlanResourceLink, type AtlanTermHeader, type AtlasCategory, type AtlasGlossary, type AtlasTerm, type CategoriesResult, type Category, type ChangeGlossaryTermStatusHttpError, type ChangeGlossaryTermStatusHttpResponse, type CreateCategory, type CreateGlossary, type CreateGlossaryCategoryHttpError, type CreateGlossaryCategoryHttpResponse, type CreateGlossaryHttpError, type CreateGlossaryHttpResponse, type CreateGlossaryTermHttpError, type CreateGlossaryTermHttpResponse, type CreateGlossaryTermLinkHttpError, type CreateGlossaryTermLinkHttpResponse, type CreateTerm, type DeleteGlossaryCategoryHttpError, type DeleteGlossaryCategoryHttpResponse, type DeleteGlossaryHttpError, type DeleteGlossaryHttpResponse, type DeleteGlossaryTermHttpError, type DeleteGlossaryTermHttpResponse, type ErrorResponse, type ErrorResponseBadRequest, type ErrorResponseCode, type ErrorResponseForbidden, type ErrorResponseNotFound, type ExportCategory, type ExportGlossary, type ExportGlossaryHttpError, type ExportGlossaryHttpResponse, type ExportTerm, type GetGlossariesHttpError, type GetGlossariesHttpResponse, type GetGlossaryCategoriesHttpError, type GetGlossaryCategoriesHttpResponse, type GetGlossaryCategoryHttpError, type GetGlossaryCategoryHttpResponse, type GetGlossaryHttpError, type GetGlossaryHttpResponse, type GetGlossaryTermHttpError, type GetGlossaryTermHttpResponse, type GetGlossaryTermLinksHttpError, type GetGlossaryTermLinksHttpResponse, type GetGlossaryTermRevisionsHttpError, type GetGlossaryTermRevisionsHttpResponse, type GetGlossaryTermsHttpError, type GetGlossaryTermsHttpResponse, type GlossariesAPI, type GlossariesResult, type Glossary, type ImportCategory, type ImportGlossary400HttpError, type ImportGlossary403HttpError, type ImportGlossary404HttpError, type ImportGlossaryHttpError, type ImportGlossaryHttpResponse, type ImportOwner, type ImportTerm, type JSONPatch, type JSONPatchArray, type LinksResult, type PageLink, type PageLinks, type PatchGlossaryCategoryHttpError, type PatchGlossaryCategoryHttpResponse, type PatchGlossaryHttpError, type PatchGlossaryHttpResponse, type PatchGlossaryTermHttpError, type PatchGlossaryTermHttpResponse, type QlikGlossary, type ResultMeta, type StewardDetail, type Term, type TermCreateLinksTo, type TermLinksTo, type TermRelatesTo, type TermStatus, type TermTemplate, type TermsResult, type UpdateGlossaryCategoryHttpError, type UpdateGlossaryCategoryHttpResponse, type UpdateGlossaryHttpError, type UpdateGlossaryHttpResponse, type UpdateGlossaryTermHttpError, type UpdateGlossaryTermHttpResponse, changeGlossaryTermStatus, clearCache, createGlossary, createGlossaryCategory, createGlossaryTerm, createGlossaryTermLink, glossariesExport as default, deleteGlossary, deleteGlossaryCategory, deleteGlossaryTerm, exportGlossary, getGlossaries, getGlossary, getGlossaryCategories, getGlossaryCategory, getGlossaryTerm, getGlossaryTermLinks, getGlossaryTermRevisions, getGlossaryTerms, importGlossary, patchGlossary, patchGlossaryCategory, patchGlossaryTerm, updateGlossary, updateGlossaryCategory, updateGlossaryTerm };

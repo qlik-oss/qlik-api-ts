@@ -47,10 +47,20 @@ type ListRolesResult = {
     totalResults?: number;
 };
 type Role = {
+    /** Selection of scopes added to this Role */
+    assignedScopes?: string[];
+    /** Indicate if role can be deleted */
+    readonly canDelete?: boolean;
+    /** Indicate if role can be edited by tenant (Shown as Profile in MC) */
+    readonly canEdit?: boolean;
     /** The timestamp for when the role was created. */
     createdAt: string;
+    /** Id of user that created role */
+    readonly createdBy?: string;
     /** Descriptive text for the role. */
     description: string;
+    /** Indicate if this role will trigger promotion to full user in STP */
+    readonly fullUser?: boolean;
     /** The unique identifier for the role. */
     readonly id: string;
     /** The timestamp for when the role was last updated. */
@@ -72,6 +82,8 @@ type Role = {
     tenantId: string;
     /** The type of role. */
     type: "default";
+    /** Id of user that last updated`` role */
+    readonly updatedBy?: string;
 };
 /**
  * Returns a list of roles using cursor-based pagination.

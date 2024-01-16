@@ -29,6 +29,7 @@ type AssignedRolesRefNames = {
     /** The name of the role */
     name: string;
 }[];
+type AssignedScopes = string[];
 type Error = {
     /** The error code. */
     code: string;
@@ -122,6 +123,8 @@ type User = {
     assignedGroups?: AssignedGroups;
     /** An array of role references. */
     assignedRoles?: AssignedRoles;
+    /** An array of scopes assigned to user */
+    readonly assignedScopes?: AssignedScopes;
     /** Deprecated. Use `createdAt` instead. */
     readonly created?: string;
     /** The timestamp for when the user record was created. */
@@ -560,4 +563,4 @@ interface UsersAPI {
  */
 declare const usersExport: UsersAPI;
 
-export { type AssignedGroups, type AssignedRoles, type AssignedRolesRefIDs, type AssignedRolesRefNames, type CountUsersHttpError, type CountUsersHttpResponse, type CreateUserHttpError, type CreateUserHttpResponse, type DeleteUserHttpError, type DeleteUserHttpResponse, type Error, type ErrorItem, type Errors, type ErrorsResponse, type Filter, type FilterUsersHttpError, type FilterUsersHttpResponse, type GetMyUser301HttpError, type GetMyUser429HttpError, type GetMyUserHttpError, type GetMyUserHttpResponse, type GetUserHttpError, type GetUserHttpResponse, type GetUsersHttpError, type GetUsersHttpResponse, type GetUsersMetadataHttpError, type GetUsersMetadataHttpResponse, type InviteDataResponse, type InviteErrorItem, type InviteItem, type InviteRequestData, type InviteUsersHttpError, type InviteUsersHttpResponse, type JSONPatch, type JSONPatchArray, type Metadata, type PatchUser204HttpResponse, type PatchUser207HttpResponse, type PatchUserHttpError, type PatchUserHttpResponse, type ResultItem, type User, type UserCount, type UserPostSchema, type Users, type UsersAPI, clearCache, countUsers, createUser, usersExport as default, deleteUser, filterUsers, getMyUser, getUser, getUsers, getUsersMetadata, inviteUsers, patchUser };
+export { type AssignedGroups, type AssignedRoles, type AssignedRolesRefIDs, type AssignedRolesRefNames, type AssignedScopes, type CountUsersHttpError, type CountUsersHttpResponse, type CreateUserHttpError, type CreateUserHttpResponse, type DeleteUserHttpError, type DeleteUserHttpResponse, type Error, type ErrorItem, type Errors, type ErrorsResponse, type Filter, type FilterUsersHttpError, type FilterUsersHttpResponse, type GetMyUser301HttpError, type GetMyUser429HttpError, type GetMyUserHttpError, type GetMyUserHttpResponse, type GetUserHttpError, type GetUserHttpResponse, type GetUsersHttpError, type GetUsersHttpResponse, type GetUsersMetadataHttpError, type GetUsersMetadataHttpResponse, type InviteDataResponse, type InviteErrorItem, type InviteItem, type InviteRequestData, type InviteUsersHttpError, type InviteUsersHttpResponse, type JSONPatch, type JSONPatchArray, type Metadata, type PatchUser204HttpResponse, type PatchUser207HttpResponse, type PatchUserHttpError, type PatchUserHttpResponse, type ResultItem, type User, type UserCount, type UserPostSchema, type Users, type UsersAPI, clearCache, countUsers, createUser, usersExport as default, deleteUser, filterUsers, getMyUser, getUser, getUsers, getUsersMetadata, inviteUsers, patchUser };

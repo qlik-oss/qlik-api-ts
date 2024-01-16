@@ -1,31 +1,31 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunkQQDHWGJXjs = require('./chunk-QQDHWGJX.js');
-require('./chunk-ERGV34M7.js');
+var _chunkKPCXSJ7Bjs = require('./chunk-KPCXSJ7B.js');
+require('./chunk-ZXQHFWQH.js');
 require('./chunk-P57PW2II.js');
 
 // src/public/rest/users.ts
-var getUsers = async (query, options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "users", {
+var getUsers = async (query, options) => _chunkKPCXSJ7Bjs.invokeFetch.call(void 0, "users", {
   method: "get",
   pathTemplate: "/api/v1/users",
   query,
   options
 });
-var createUser = async (body, options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "users", {
+var createUser = async (body, options) => _chunkKPCXSJ7Bjs.invokeFetch.call(void 0, "users", {
   method: "post",
   pathTemplate: "/api/v1/users",
   body,
   contentType: "application/json",
   options
 });
-var countUsers = async (query, options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "users", {
+var countUsers = async (query, options) => _chunkKPCXSJ7Bjs.invokeFetch.call(void 0, "users", {
   method: "get",
   pathTemplate: "/api/v1/users/actions/count",
   query,
   options
 });
-var filterUsers = async (query, body, options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "users", {
+var filterUsers = async (query, body, options) => _chunkKPCXSJ7Bjs.invokeFetch.call(void 0, "users", {
   method: "post",
   pathTemplate: "/api/v1/users/actions/filter",
   query,
@@ -33,37 +33,37 @@ var filterUsers = async (query, body, options) => _chunkQQDHWGJXjs.invokeFetch.c
   contentType: "application/json",
   options
 });
-var inviteUsers = async (body, options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "users", {
+var inviteUsers = async (body, options) => _chunkKPCXSJ7Bjs.invokeFetch.call(void 0, "users", {
   method: "post",
   pathTemplate: "/api/v1/users/actions/invite",
   body,
   contentType: "application/json",
   options
 });
-var getMyUser = async (options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "users", {
+var getMyUser = async (options) => _chunkKPCXSJ7Bjs.invokeFetch.call(void 0, "users", {
   method: "get",
   pathTemplate: "/api/v1/users/me",
   options
 });
-var getUsersMetadata = async (options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "users", {
+var getUsersMetadata = async (options) => _chunkKPCXSJ7Bjs.invokeFetch.call(void 0, "users", {
   method: "get",
   pathTemplate: "/api/v1/users/metadata",
   options
 });
-var deleteUser = async (userId, options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "users", {
+var deleteUser = async (userId, options) => _chunkKPCXSJ7Bjs.invokeFetch.call(void 0, "users", {
   method: "delete",
   pathTemplate: "/api/v1/users/{userId}",
   pathVariables: { userId },
   options
 });
-var getUser = async (userId, query, options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "users", {
+var getUser = async (userId, query, options) => _chunkKPCXSJ7Bjs.invokeFetch.call(void 0, "users", {
   method: "get",
   pathTemplate: "/api/v1/users/{userId}",
   pathVariables: { userId },
   query,
   options
 });
-var patchUser = async (userId, body, options) => _chunkQQDHWGJXjs.invokeFetch.call(void 0, "users", {
+var patchUser = async (userId, body, options) => _chunkKPCXSJ7Bjs.invokeFetch.call(void 0, "users", {
   method: "patch",
   pathTemplate: "/api/v1/users/{userId}",
   pathVariables: { userId },
@@ -72,7 +72,7 @@ var patchUser = async (userId, body, options) => _chunkQQDHWGJXjs.invokeFetch.ca
   options
 });
 function clearCache() {
-  return _chunkQQDHWGJXjs.clearApiCache.call(void 0, "users");
+  return _chunkKPCXSJ7Bjs.clearApiCache.call(void 0, "users");
 }
 var usersExport = {
   getUsers,

@@ -204,8 +204,12 @@ function isHostCrossOrigin(hostConfig) {
   if (Object.keys(hostConfigToUse).length === 0) {
     return false;
   }
-  const locationUrl = toValidLocationUrl(hostConfigToUse);
-  return !(locationUrl === "" || globalThis.location.origin.startsWith(locationUrl));
+  try {
+    const locationUrl = new URL(toValidLocationUrl(hostConfigToUse));
+    return locationUrl.origin !== globalThis.location.origin;
+  } catch (e2) {
+  }
+  return false;
 }
 async function isWindows(hostConfig) {
   const hostConfigToUse = withDefaultHostConfig(hostConfig);
@@ -1474,7 +1478,7 @@ async function parseFetchResponse2(fetchResponse, url) {
   try {
     resultData = await fetchResponse.text();
     resultData = JSON.parse(resultData);
-  } catch (e2) {
+  } catch (e3) {
   }
   const { status, statusText, headers } = fetchResponse;
   const errorMsg = `request to '${url}' failed with status ${status} ${statusText}.`;
@@ -1554,7 +1558,7 @@ async function parseFetchResponse(fetchResponse, url) {
   try {
     resultData = await fetchResponse.text();
     resultData = JSON.parse(resultData);
-  } catch (e3) {
+  } catch (e4) {
   }
   const { status, statusText, headers } = fetchResponse;
   const errorMsg = `request to '${url}' failed with status ${status} ${statusText}.`;

@@ -204,8 +204,12 @@ function isHostCrossOrigin(hostConfig) {
   if (Object.keys(hostConfigToUse).length === 0) {
     return false;
   }
-  const locationUrl = toValidLocationUrl(hostConfigToUse);
-  return !(locationUrl === "" || globalThis.location.origin.startsWith(locationUrl));
+  try {
+    const locationUrl = new URL(toValidLocationUrl(hostConfigToUse));
+    return locationUrl.origin !== globalThis.location.origin;
+  } catch {
+  }
+  return false;
 }
 async function isWindows(hostConfig) {
   const hostConfigToUse = withDefaultHostConfig(hostConfig);

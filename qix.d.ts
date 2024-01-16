@@ -1,7 +1,7 @@
 import './global.types-1rNhDH7j.js';
 import { H as HostConfig } from './auth-types-nnUcWhuU.js';
 
-declare const QIX_SCHEMA_VERSION = "12.1936.0";
+declare const QIX_SCHEMA_VERSION = "12.1951.0";
 type AlfaNumString = {
     /**
      * Calculated value.
@@ -240,6 +240,7 @@ type BNFDef = {
      * * ARRAY or FUNC_GROUP_ARRAY
      * * LEG or FUNC_GROUP_LEGACY
      * * DB or FUNC_GROUP_DB_NATIVE
+     * * WINDOW or FUNC_GROUP_WINDOW
      */
     qFG?: FunctionGroup;
     /**
@@ -1698,6 +1699,7 @@ type QFunction = {
      * * ARRAY or FUNC_GROUP_ARRAY
      * * LEG or FUNC_GROUP_LEGACY
      * * DB or FUNC_GROUP_DB_NATIVE
+     * * WINDOW or FUNC_GROUP_WINDOW
      */
     qGroup?: FunctionGroup;
     /**
@@ -1706,7 +1708,7 @@ type QFunction = {
      */
     qSignature?: string;
 };
-type FunctionGroup = "ALL" | "FUNC_GROUP_ALL" | "U" | "FUNC_GROUP_UNKNOWN" | "NONE" | "FUNC_GROUP_NONE" | "AGGR" | "FUNC_GROUP_AGGR" | "NUM" | "FUNC_GROUP_NUMERIC" | "RNG" | "FUNC_GROUP_RANGE" | "EXP" | "FUNC_GROUP_EXPONENTIAL_AND_LOGARITHMIC" | "TRIG" | "FUNC_GROUP_TRIGONOMETRIC_AND_HYPERBOLIC" | "FIN" | "FUNC_GROUP_FINANCIAL" | "MATH" | "FUNC_GROUP_MATH_CONSTANT_AND_PARAM_FREE" | "COUNT" | "FUNC_GROUP_COUNTER" | "STR" | "FUNC_GROUP_STRING" | "MAPP" | "FUNC_GROUP_MAPPING" | "RCRD" | "FUNC_GROUP_INTER_RECORD" | "CND" | "FUNC_GROUP_CONDITIONAL" | "LOG" | "FUNC_GROUP_LOGICAL" | "NULL" | "FUNC_GROUP_NULL" | "SYS" | "FUNC_GROUP_SYSTEM" | "FILE" | "FUNC_GROUP_FILE" | "TBL" | "FUNC_GROUP_TABLE" | "DATE" | "FUNC_GROUP_DATE_AND_TIME" | "NUMI" | "FUNC_GROUP_NUMBER_INTERPRET" | "FRMT" | "FUNC_GROUP_FORMATTING" | "CLR" | "FUNC_GROUP_COLOR" | "RNK" | "FUNC_GROUP_RANKING" | "GEO" | "FUNC_GROUP_GEO" | "EXT" | "FUNC_GROUP_EXTERNAL" | "PROB" | "FUNC_GROUP_PROBABILITY" | "ARRAY" | "FUNC_GROUP_ARRAY" | "LEG" | "FUNC_GROUP_LEGACY" | "DB" | "FUNC_GROUP_DB_NATIVE";
+type FunctionGroup = "ALL" | "FUNC_GROUP_ALL" | "U" | "FUNC_GROUP_UNKNOWN" | "NONE" | "FUNC_GROUP_NONE" | "AGGR" | "FUNC_GROUP_AGGR" | "NUM" | "FUNC_GROUP_NUMERIC" | "RNG" | "FUNC_GROUP_RANGE" | "EXP" | "FUNC_GROUP_EXPONENTIAL_AND_LOGARITHMIC" | "TRIG" | "FUNC_GROUP_TRIGONOMETRIC_AND_HYPERBOLIC" | "FIN" | "FUNC_GROUP_FINANCIAL" | "MATH" | "FUNC_GROUP_MATH_CONSTANT_AND_PARAM_FREE" | "COUNT" | "FUNC_GROUP_COUNTER" | "STR" | "FUNC_GROUP_STRING" | "MAPP" | "FUNC_GROUP_MAPPING" | "RCRD" | "FUNC_GROUP_INTER_RECORD" | "CND" | "FUNC_GROUP_CONDITIONAL" | "LOG" | "FUNC_GROUP_LOGICAL" | "NULL" | "FUNC_GROUP_NULL" | "SYS" | "FUNC_GROUP_SYSTEM" | "FILE" | "FUNC_GROUP_FILE" | "TBL" | "FUNC_GROUP_TABLE" | "DATE" | "FUNC_GROUP_DATE_AND_TIME" | "NUMI" | "FUNC_GROUP_NUMBER_INTERPRET" | "FRMT" | "FUNC_GROUP_FORMATTING" | "CLR" | "FUNC_GROUP_COLOR" | "RNK" | "FUNC_GROUP_RANKING" | "GEO" | "FUNC_GROUP_GEO" | "EXT" | "FUNC_GROUP_EXTERNAL" | "PROB" | "FUNC_GROUP_PROBABILITY" | "ARRAY" | "FUNC_GROUP_ARRAY" | "LEG" | "FUNC_GROUP_LEGACY" | "DB" | "FUNC_GROUP_DB_NATIVE" | "WINDOW" | "FUNC_GROUP_WINDOW";
 type GenericBookmarkEntry = {
     /**
      * Information about the properties of the bookmark.
@@ -9088,6 +9090,17 @@ type NativeGenericDimensionFunctions = {
      */
     setProperties: (prop: GenericDimensionProperties) => Promise<void>;
     /**
+     * Step active field in a cyclic dimension.
+     * <div class=tip>This operation is only possible for cyclic dimensions.</div>
+     *
+     * Parameters:
+     *
+     * - `step`   -   The number of steps made through the dimension. Positive values step forward and negative values step backward.
+     *
+     * Stability: *experimental*
+     */
+    stepCycle: (step: number) => Promise<void>;
+    /**
      * Removes the generic dimension from the list of approved objects
      * <div class=note>This operation is possible only in Qlik Sense Enterprise.</div>
      *
@@ -10835,6 +10848,7 @@ type NativeGlobalFunctions<DocRpcObject> = {
      * * ARRAY or FUNC_GROUP_ARRAY
      * * LEG or FUNC_GROUP_LEGACY
      * * DB or FUNC_GROUP_DB_NATIVE
+     * * WINDOW or FUNC_GROUP_WINDOW
      *
      * Stability: *locked*
      */
