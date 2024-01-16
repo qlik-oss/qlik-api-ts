@@ -1,10 +1,10 @@
-import {
-  getQixRuntimeModule
-} from "./chunk-7HKUAHVA.mjs";
+"use strict";Object.defineProperty(exports, "__esModule", {value: true});
+
+var _chunkBRDPNGQ7js = require('./chunk-BRDPNGQ7.js');
 
 // src/public/qix.ts
 function openAppSession(appSessionProps) {
-  const appSessionPromise = getQixRuntimeModule(appSessionProps.hostConfig).then(
+  const appSessionPromise = _chunkBRDPNGQ7js.getQixRuntimeModule.call(void 0, appSessionProps.hostConfig).then(
     (impl) => impl.openAppSession(appSessionProps)
   );
   const appSessionProxy = {
@@ -51,7 +51,7 @@ var qix_default = {
   openAppSession
 };
 
-export {
-  openAppSession,
-  qix_default
-};
+
+
+
+exports.openAppSession = openAppSession; exports.qix_default = qix_default;

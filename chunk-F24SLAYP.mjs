@@ -1408,6 +1408,9 @@ function invokeFetchWithUrlAndRetry(api, { method, completeUrl, cacheKey, body, 
 function addPagingFunctions(api, value, method, body, options, interceptors, authHeaders, credentials) {
   return value.then((resp) => {
     const dataWithPotentialLinks = resp.data;
+    if (!dataWithPotentialLinks) {
+      return resp;
+    }
     const prevUrl = dataWithPotentialLinks.links?.prev?.href;
     const nextUrl = dataWithPotentialLinks.links?.next?.href;
     if (prevUrl) {

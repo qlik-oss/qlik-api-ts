@@ -1,33 +1,33 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunkKPCXSJ7Bjs = require('./chunk-KPCXSJ7B.js');
-require('./chunk-ZXQHFWQH.js');
+var _chunkEALMXU6Sjs = require('./chunk-EALMXU6S.js');
+require('./chunk-BRDPNGQ7.js');
 require('./chunk-P57PW2II.js');
 
 // src/public/rest/data-assets.ts
-var deleteDataAssets = async (body, options) => _chunkKPCXSJ7Bjs.invokeFetch.call(void 0, "data-assets", {
+var deleteDataAssets = async (body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "data-assets", {
   method: "delete",
   pathTemplate: "/api/v1/data-assets",
   body,
   contentType: "application/json",
   options
 });
-var createDataAsset = async (body, options) => _chunkKPCXSJ7Bjs.invokeFetch.call(void 0, "data-assets", {
+var createDataAsset = async (body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "data-assets", {
   method: "post",
   pathTemplate: "/api/v1/data-assets",
   body,
   contentType: "application/json",
   options
 });
-var getDataAsset = async (dataAssetId, query, options) => _chunkKPCXSJ7Bjs.invokeFetch.call(void 0, "data-assets", {
+var getDataAsset = async (dataAssetId, query, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "data-assets", {
   method: "get",
   pathTemplate: "/api/v1/data-assets/{data-asset-id}",
   pathVariables: { "data-asset-id": dataAssetId },
   query,
   options
 });
-var patchDataAsset = async (dataAssetId, body, options) => _chunkKPCXSJ7Bjs.invokeFetch.call(void 0, "data-assets", {
+var patchDataAsset = async (dataAssetId, body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "data-assets", {
   method: "patch",
   pathTemplate: "/api/v1/data-assets/{data-asset-id}",
   pathVariables: { "data-asset-id": dataAssetId },
@@ -35,7 +35,7 @@ var patchDataAsset = async (dataAssetId, body, options) => _chunkKPCXSJ7Bjs.invo
   contentType: "application/json",
   options
 });
-var updateDataAsset = async (dataAssetId, body, options) => _chunkKPCXSJ7Bjs.invokeFetch.call(void 0, "data-assets", {
+var updateDataAsset = async (dataAssetId, body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "data-assets", {
   method: "put",
   pathTemplate: "/api/v1/data-assets/{data-asset-id}",
   pathVariables: { "data-asset-id": dataAssetId },
@@ -44,7 +44,7 @@ var updateDataAsset = async (dataAssetId, body, options) => _chunkKPCXSJ7Bjs.inv
   options
 });
 function clearCache() {
-  return _chunkKPCXSJ7Bjs.clearApiCache.call(void 0, "data-assets");
+  return _chunkEALMXU6Sjs.clearApiCache.call(void 0, "data-assets");
 }
 var dataAssetsExport = {
   deleteDataAssets,
