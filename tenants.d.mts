@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types-4jzAvW7R.mjs';
+import { A as ApiCallOptions } from './global.types-5iFvFJvX.mjs';
 import './auth-types-nnUcWhuU.mjs';
 
 type Error = {
@@ -125,12 +125,12 @@ type CreateTenantHttpError = {
  */
 declare const getMyTenant: (options?: ApiCallOptions) => Promise<GetMyTenantHttpResponse>;
 type GetMyTenantHttpResponse = {
-    data: void;
+    data: Tenant;
     headers: Headers;
     status: number;
 };
 type GetMyTenantHttpError = {
-    data: void;
+    data: unknown;
     headers: Headers;
     status: number;
 };
@@ -184,12 +184,12 @@ type PatchTenant429HttpError = {
     headers: Headers;
     status: 429;
 };
-type PatchTenantdefaultHttpError = {
+type PatchTenantDefaultHttpError = {
     data: Errors;
     headers: Headers;
     status: "default";
 };
-type PatchTenantHttpError = PatchTenant400HttpError | PatchTenant403HttpError | PatchTenant404HttpError | PatchTenant429HttpError | PatchTenantdefaultHttpError;
+type PatchTenantHttpError = PatchTenant400HttpError | PatchTenant403HttpError | PatchTenant404HttpError | PatchTenant429HttpError | PatchTenantDefaultHttpError;
 /**
  * Deactivates a tenant.
  *
@@ -285,4 +285,4 @@ interface TenantsAPI {
  */
 declare const tenantsExport: TenantsAPI;
 
-export { type CreateTenantHttpError, type CreateTenantHttpResponse, type DeactivateTenantHttpError, type DeactivateTenantHttpResponse, type Error, type Errors, type GetMyTenantHttpError, type GetMyTenantHttpResponse, type GetTenantHttpError, type GetTenantHttpResponse, type PatchTenant400HttpError, type PatchTenant403HttpError, type PatchTenant404HttpError, type PatchTenant429HttpError, type PatchTenantHttpError, type PatchTenantHttpResponse, type PatchTenantdefaultHttpError, type ReactivateTenantHttpError, type ReactivateTenantHttpResponse, type Tenant, type TenantCreationRequest, type TenantDeactivateRequest, type TenantDeactivateResponse, type TenantPatchErrors, type TenantPatchSchema, type TenantsAPI, clearCache, createTenant, deactivateTenant, tenantsExport as default, getMyTenant, getTenant, patchTenant, reactivateTenant };
+export { type CreateTenantHttpError, type CreateTenantHttpResponse, type DeactivateTenantHttpError, type DeactivateTenantHttpResponse, type Error, type Errors, type GetMyTenantHttpError, type GetMyTenantHttpResponse, type GetTenantHttpError, type GetTenantHttpResponse, type PatchTenant400HttpError, type PatchTenant403HttpError, type PatchTenant404HttpError, type PatchTenant429HttpError, type PatchTenantDefaultHttpError, type PatchTenantHttpError, type PatchTenantHttpResponse, type ReactivateTenantHttpError, type ReactivateTenantHttpResponse, type Tenant, type TenantCreationRequest, type TenantDeactivateRequest, type TenantDeactivateResponse, type TenantPatchErrors, type TenantPatchSchema, type TenantsAPI, clearCache, createTenant, deactivateTenant, tenantsExport as default, getMyTenant, getTenant, patchTenant, reactivateTenant };

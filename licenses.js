@@ -1,68 +1,68 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunkEALMXU6Sjs = require('./chunk-EALMXU6S.js');
-require('./chunk-BRDPNGQ7.js');
-require('./chunk-P57PW2II.js');
+var _EL2GSPZZjs = require('./chunks/EL2GSPZZ.js');
+require('./chunks/W2I5OQA5.js');
+require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/licenses.ts
-var getLicenseAssignments = async (query, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "licenses", {
+var getLicenseAssignments = async (query, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "licenses", {
   method: "get",
   pathTemplate: "/api/v1/licenses/assignments",
   query,
   options
 });
-var addLicenseAssignments = async (body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "licenses", {
+var addLicenseAssignments = async (body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "licenses", {
   method: "post",
   pathTemplate: "/api/v1/licenses/assignments/actions/add",
   body,
   contentType: "application/json",
   options
 });
-var deleteLicenseAssignments = async (body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "licenses", {
+var deleteLicenseAssignments = async (body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "licenses", {
   method: "post",
   pathTemplate: "/api/v1/licenses/assignments/actions/delete",
   body,
   contentType: "application/json",
   options
 });
-var updateLicenseAssignments = async (body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "licenses", {
+var updateLicenseAssignments = async (body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "licenses", {
   method: "post",
   pathTemplate: "/api/v1/licenses/assignments/actions/update",
   body,
   contentType: "application/json",
   options
 });
-var getLicenseConsumption = async (query, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "licenses", {
+var getLicenseConsumption = async (query, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "licenses", {
   method: "get",
   pathTemplate: "/api/v1/licenses/consumption",
   query,
   options
 });
-var getLicenseOverview = async (options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "licenses", {
+var getLicenseOverview = async (options) => _EL2GSPZZjs.invokeFetch.call(void 0, "licenses", {
   method: "get",
   pathTemplate: "/api/v1/licenses/overview",
   options
 });
-var getLicenseSettings = async (options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "licenses", {
+var getLicenseSettings = async (options) => _EL2GSPZZjs.invokeFetch.call(void 0, "licenses", {
   method: "get",
   pathTemplate: "/api/v1/licenses/settings",
   options
 });
-var updateLicenseSettings = async (body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "licenses", {
+var updateLicenseSettings = async (body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "licenses", {
   method: "put",
   pathTemplate: "/api/v1/licenses/settings",
   body,
   contentType: "application/json",
   options
 });
-var getLicenseStatus = async (options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "licenses", {
+var getLicenseStatus = async (options) => _EL2GSPZZjs.invokeFetch.call(void 0, "licenses", {
   method: "get",
   pathTemplate: "/api/v1/licenses/status",
   options
 });
 function clearCache() {
-  return _chunkEALMXU6Sjs.clearApiCache.call(void 0, "licenses");
+  return _EL2GSPZZjs.clearApiCache.call(void 0, "licenses");
 }
 var licensesExport = {
   getLicenseAssignments,

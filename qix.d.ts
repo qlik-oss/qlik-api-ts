@@ -1,7 +1,7 @@
-import './global.types-1rNhDH7j.js';
+import './global.types-TzVhFPid.js';
 import { H as HostConfig } from './auth-types-nnUcWhuU.js';
 
-declare const QIX_SCHEMA_VERSION = "12.1951.0";
+declare const QIX_SCHEMA_VERSION = "12.1954.0";
 type AlfaNumString = {
     /**
      * Calculated value.
@@ -9039,6 +9039,13 @@ type NativeGenericDimensionFunctions = {
      */
     approve: () => Promise<void>;
     /**
+     * Get a cyclic dimension's active field.
+     * <div class=tip>This operation is only possible for cyclic dimensions.</div>
+     *
+     * Stability: *experimental*
+     */
+    getActiveField: () => Promise<number>;
+    /**
      * Returns the definition of a dimension.
      *
      * The definition of the dimension is returned.
@@ -9079,6 +9086,17 @@ type NativeGenericDimensionFunctions = {
      * Stability: *locked*
      */
     publish: () => Promise<void>;
+    /**
+     * Set a cyclic dimension's active field directly.
+     * <div class=tip>This operation is only possible for cyclic dimensions.</div>
+     *
+     * Parameters:
+     *
+     * - `ix`   -   Index of the new active field.
+     *
+     * Stability: *experimental*
+     */
+    setActiveField: (ix: number) => Promise<void>;
     /**
      * Sets some properties for a dimension.
      *

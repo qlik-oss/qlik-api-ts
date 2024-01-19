@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types-4jzAvW7R.mjs';
+import { A as ApiCallOptions } from './global.types-5iFvFJvX.mjs';
 import './auth-types-nnUcWhuU.mjs';
 
 type AssignedGroups = {
@@ -384,21 +384,15 @@ type InviteUsersHttpError = {
  */
 declare const getMyUser: (options?: ApiCallOptions) => Promise<GetMyUserHttpResponse>;
 type GetMyUserHttpResponse = {
-    data: void;
+    data: User;
     headers: Headers;
     status: number;
 };
-type GetMyUser301HttpError = {
-    data: void;
-    headers: Headers;
-    status: 301;
-};
-type GetMyUser429HttpError = {
+type GetMyUserHttpError = {
     data: Errors;
     headers: Headers;
-    status: 429;
+    status: number;
 };
-type GetMyUserHttpError = GetMyUser301HttpError | GetMyUser429HttpError;
 /**
  * Returns the metadata with regard to the user configuration. Deprecated, use GET /v1/roles instead.
  *
@@ -563,4 +557,4 @@ interface UsersAPI {
  */
 declare const usersExport: UsersAPI;
 
-export { type AssignedGroups, type AssignedRoles, type AssignedRolesRefIDs, type AssignedRolesRefNames, type AssignedScopes, type CountUsersHttpError, type CountUsersHttpResponse, type CreateUserHttpError, type CreateUserHttpResponse, type DeleteUserHttpError, type DeleteUserHttpResponse, type Error, type ErrorItem, type Errors, type ErrorsResponse, type Filter, type FilterUsersHttpError, type FilterUsersHttpResponse, type GetMyUser301HttpError, type GetMyUser429HttpError, type GetMyUserHttpError, type GetMyUserHttpResponse, type GetUserHttpError, type GetUserHttpResponse, type GetUsersHttpError, type GetUsersHttpResponse, type GetUsersMetadataHttpError, type GetUsersMetadataHttpResponse, type InviteDataResponse, type InviteErrorItem, type InviteItem, type InviteRequestData, type InviteUsersHttpError, type InviteUsersHttpResponse, type JSONPatch, type JSONPatchArray, type Metadata, type PatchUser204HttpResponse, type PatchUser207HttpResponse, type PatchUserHttpError, type PatchUserHttpResponse, type ResultItem, type User, type UserCount, type UserPostSchema, type Users, type UsersAPI, clearCache, countUsers, createUser, usersExport as default, deleteUser, filterUsers, getMyUser, getUser, getUsers, getUsersMetadata, inviteUsers, patchUser };
+export { type AssignedGroups, type AssignedRoles, type AssignedRolesRefIDs, type AssignedRolesRefNames, type AssignedScopes, type CountUsersHttpError, type CountUsersHttpResponse, type CreateUserHttpError, type CreateUserHttpResponse, type DeleteUserHttpError, type DeleteUserHttpResponse, type Error, type ErrorItem, type Errors, type ErrorsResponse, type Filter, type FilterUsersHttpError, type FilterUsersHttpResponse, type GetMyUserHttpError, type GetMyUserHttpResponse, type GetUserHttpError, type GetUserHttpResponse, type GetUsersHttpError, type GetUsersHttpResponse, type GetUsersMetadataHttpError, type GetUsersMetadataHttpResponse, type InviteDataResponse, type InviteErrorItem, type InviteItem, type InviteRequestData, type InviteUsersHttpError, type InviteUsersHttpResponse, type JSONPatch, type JSONPatchArray, type Metadata, type PatchUser204HttpResponse, type PatchUser207HttpResponse, type PatchUserHttpError, type PatchUserHttpResponse, type ResultItem, type User, type UserCount, type UserPostSchema, type Users, type UsersAPI, clearCache, countUsers, createUser, usersExport as default, deleteUser, filterUsers, getMyUser, getUser, getUsers, getUsersMetadata, inviteUsers, patchUser };

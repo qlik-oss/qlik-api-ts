@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types-4jzAvW7R.mjs';
+import { A as ApiCallOptions, D as DownloadableBlob } from './global.types-5iFvFJvX.mjs';
 import './auth-types-nnUcWhuU.mjs';
 
 type Brand = {
@@ -179,12 +179,12 @@ type CreateBrandHttpError = CreateBrand400HttpError | CreateBrand401HttpError | 
  */
 declare const getActiveBrand: (options?: ApiCallOptions) => Promise<GetActiveBrandHttpResponse>;
 type GetActiveBrandHttpResponse = {
-    data: NoActiveBrand;
+    data: Brand | NoActiveBrand;
     headers: Headers;
     status: number;
 };
 type GetActiveBrandHttpError = {
-    data: void;
+    data: unknown;
     headers: Headers;
     status: number;
 };
@@ -429,7 +429,7 @@ type DeleteBrandFileHttpError = DeleteBrandFile400HttpError | DeleteBrandFile401
  */
 declare const getBrandFile: (brandId: string, brandFileId: string, options?: ApiCallOptions) => Promise<GetBrandFileHttpResponse>;
 type GetBrandFileHttpResponse = {
-    data: BodyInit;
+    data: DownloadableBlob;
     headers: Headers;
     status: number;
 };

@@ -1,42 +1,42 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunkEALMXU6Sjs = require('./chunk-EALMXU6S.js');
-require('./chunk-BRDPNGQ7.js');
-require('./chunk-P57PW2II.js');
+var _EL2GSPZZjs = require('./chunks/EL2GSPZZ.js');
+require('./chunks/W2I5OQA5.js');
+require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/items.ts
-var getItems = async (query, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "items", {
+var getItems = async (query, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "items", {
   method: "get",
   pathTemplate: "/api/v1/items",
   query,
   options
 });
-var getItemsSettings = async (options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "items", {
+var getItemsSettings = async (options) => _EL2GSPZZjs.invokeFetch.call(void 0, "items", {
   method: "get",
   pathTemplate: "/api/v1/items/settings",
   options
 });
-var patchItemsSettings = async (body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "items", {
+var patchItemsSettings = async (body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "items", {
   method: "patch",
   pathTemplate: "/api/v1/items/settings",
   body,
   contentType: "application/json",
   options
 });
-var deleteItem = async (itemId, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "items", {
+var deleteItem = async (itemId, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "items", {
   method: "delete",
   pathTemplate: "/api/v1/items/{itemId}",
   pathVariables: { itemId },
   options
 });
-var getItem = async (itemId, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "items", {
+var getItem = async (itemId, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "items", {
   method: "get",
   pathTemplate: "/api/v1/items/{itemId}",
   pathVariables: { itemId },
   options
 });
-var updateItem = async (itemId, body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "items", {
+var updateItem = async (itemId, body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "items", {
   method: "put",
   pathTemplate: "/api/v1/items/{itemId}",
   pathVariables: { itemId },
@@ -44,14 +44,14 @@ var updateItem = async (itemId, body, options) => _chunkEALMXU6Sjs.invokeFetch.c
   contentType: "application/json",
   options
 });
-var getItemCollections = async (itemId, query, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "items", {
+var getItemCollections = async (itemId, query, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "items", {
   method: "get",
   pathTemplate: "/api/v1/items/{itemId}/collections",
   pathVariables: { itemId },
   query,
   options
 });
-var getPublishedItems = async (itemId, query, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "items", {
+var getPublishedItems = async (itemId, query, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "items", {
   method: "get",
   pathTemplate: "/api/v1/items/{itemId}/publisheditems",
   pathVariables: { itemId },
@@ -59,7 +59,7 @@ var getPublishedItems = async (itemId, query, options) => _chunkEALMXU6Sjs.invok
   options
 });
 function clearCache() {
-  return _chunkEALMXU6Sjs.clearApiCache.call(void 0, "items");
+  return _EL2GSPZZjs.clearApiCache.call(void 0, "items");
 }
 var itemsExport = {
   getItems,

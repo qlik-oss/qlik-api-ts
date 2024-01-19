@@ -6,6 +6,9 @@
     "url": "git+https://github.com/qlik-oss/qlik-api-ts.git"
   },
   "license": "ISC",
+  "browser": {
+    "fs": false
+  },
   "dependencies": {
     "@qlik/embed-runtime": "^0.6.3",
     "@qlik/runtime-module-loader": "^0.2.4",

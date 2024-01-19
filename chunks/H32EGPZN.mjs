@@ -1,4 +1,4 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }require('./chunk-P57PW2II.js');
+import "./VSY5YIQY.mjs";
 
 // node_modules/.pnpm/@qlik+runtime-module-loader@0.2.4/node_modules/@qlik/runtime-module-loader/dist/esm/index.js
 window.__qlikMainPrivateResolvers = window.__qlikMainPrivateResolvers || {};
@@ -30,7 +30,7 @@ window.__qlikMainPrivateResolvers.qlikMainPromise = window.__qlikMainPrivateReso
 function provideHostConfigForMainJsUrl(hostConfig) {
   const trailingSlashes = /\/+$/;
   function toMainJsUrl(hc) {
-    const url = _optionalChain([hc, 'optionalAccess', _ => _.embedRuntimeUrl]) || _optionalChain([hc, 'optionalAccess', _2 => _2.url]) || _optionalChain([hc, 'optionalAccess', _3 => _3.host]);
+    const url = hc?.embedRuntimeUrl || hc?.url || hc?.host;
     if (!url) {
       return void 0;
     }
@@ -49,8 +49,8 @@ function provideHostConfigForMainJsUrl(hostConfig) {
   }
 }
 async function importRuntimeModule(name, hostConfig) {
-  if (_optionalChain([hostConfig, 'optionalAccess', _4 => _4.runtimeModuleMocks, 'optionalAccess', _5 => _5[name]])) {
-    return _optionalChain([hostConfig, 'optionalAccess', _6 => _6.runtimeModuleMocks, 'optionalAccess', _7 => _7[name]]);
+  if (hostConfig?.runtimeModuleMocks?.[name]) {
+    return hostConfig?.runtimeModuleMocks?.[name];
   }
   provideHostConfigForMainJsUrl(hostConfig);
   return importFromCdn(name);
@@ -61,7 +61,7 @@ async function importUnsupportedAndUnstableRuntimeModule(name) {
 async function importFromCdn(name) {
   return (await window.__qlikMainPrivateResolvers.qlikMainPromise).import(name);
 }
-
-
-
-exports.importRuntimeModule = importRuntimeModule; exports.importUnsupportedAndUnstableRuntimeModule = importUnsupportedAndUnstableRuntimeModule;
+export {
+  importRuntimeModule,
+  importUnsupportedAndUnstableRuntimeModule
+};

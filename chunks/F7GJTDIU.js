@@ -4,8 +4,8 @@
 
 
 
-var _chunkQTCDGPKSjs = require('./chunk-QTCDGPKS.js');
-require('./chunk-P57PW2II.js');
+var _PQ4OWSWXjs = require('./PQ4OWSWX.js');
+require('./4HB3TAEO.js');
 
 // src/qix/session/shared-sessions.ts
 var globalEventListeners = /* @__PURE__ */ new Set();
@@ -36,7 +36,7 @@ async function resumeAll() {
 var initialActions = {};
 var sharedSessions = {};
 function toGlobalAppSessionId({ appId, identity, hostConfig }) {
-  const locationUrl = _chunkQTCDGPKSjs.toValidWebsocketLocationUrl.call(void 0, hostConfig);
+  const locationUrl = _PQ4OWSWXjs.toValidWebsocketLocationUrl.call(void 0, hostConfig);
   return identity ? locationUrl + "/" + appId + "/" + identity : locationUrl + "/" + appId;
 }
 async function runPendingInitialActions(initialActionsForApp, sharedSession, doc) {
@@ -83,16 +83,16 @@ function listenForWindowsAuthenticationInformation(session) {
   return authSuggestedInWebsocket;
 }
 async function createAndSetupEnigmaSession(props, canRetry) {
-  const { createEnigmaSession } = await Promise.resolve().then(() => _interopRequireWildcard(require("./enigma-session-VTHT4O6N.js")));
+  const { createEnigmaSession } = await Promise.resolve().then(() => _interopRequireWildcard(require("./AGASWXYW.js")));
   const session = await createEnigmaSession(props);
   setupSessionListeners(session, props);
   let global;
-  if (await _chunkQTCDGPKSjs.isWindows.call(void 0, props.hostConfig)) {
+  if (await _PQ4OWSWXjs.isWindows.call(void 0, props.hostConfig)) {
     const loginInfoPromise = listenForWindowsAuthenticationInformation(session);
     global = await session.open();
     const loginInfo = await loginInfoPromise;
     if (_optionalChain([loginInfo, 'optionalAccess', _ => _.mustAuthenticate])) {
-      const action = await _chunkQTCDGPKSjs.handleAuthenticationError.call(void 0, {
+      const action = await _PQ4OWSWXjs.handleAuthenticationError.call(void 0, {
         headers: new Headers(),
         status: 101,
         canRetry,
@@ -389,8 +389,8 @@ async function checkConnectivity(hostConfig) {
     timeoutMs: 2e3,
     noCache: true
   };
-  const fetchRoot = _chunkQTCDGPKSjs.invokeFetch.call(void 0, "", { method, pathTemplate: "", options }).catch(catchFunc);
-  const fetchMe = _chunkQTCDGPKSjs.invokeFetch.call(void 0, "", { method, pathTemplate: "/api/v1/users/me", options }).catch(catchFunc);
+  const fetchRoot = _PQ4OWSWXjs.invokeFetch.call(void 0, "", { method, pathTemplate: "", options }).catch(catchFunc);
+  const fetchMe = _PQ4OWSWXjs.invokeFetch.call(void 0, "", { method, pathTemplate: "/api/v1/users/me", options }).catch(catchFunc);
   await Promise.all([fetchRoot, fetchMe]);
   return Promise.resolve(status);
 }
@@ -435,7 +435,7 @@ function getOrCreateSharedSession(props) {
 // src/qix/qix-functions.ts
 async function createSessionApp() {
   let sharedSession;
-  if ((await _chunkQTCDGPKSjs.getPlatform.call(void 0, )).isCloud) {
+  if ((await _PQ4OWSWXjs.getPlatform.call(void 0, )).isCloud) {
     sharedSession = await getOrCreateSharedSession({ appId: `SessionApp_${Date.now()}` });
   } else {
     sharedSession = await getOrCreateSharedSession({
