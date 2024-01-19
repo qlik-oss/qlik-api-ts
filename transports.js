@@ -1,47 +1,47 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunkEALMXU6Sjs = require('./chunk-EALMXU6S.js');
-require('./chunk-BRDPNGQ7.js');
-require('./chunk-P57PW2II.js');
+var _EL2GSPZZjs = require('./chunks/EL2GSPZZ.js');
+require('./chunks/W2I5OQA5.js');
+require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/transports.ts
-var deleteEmailConfig = async (options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "transports", {
+var deleteEmailConfig = async (options) => _EL2GSPZZjs.invokeFetch.call(void 0, "transports", {
   method: "delete",
   pathTemplate: "/api/v1/transports/email-config",
   options
 });
-var getEmailConfig = async (options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "transports", {
+var getEmailConfig = async (options) => _EL2GSPZZjs.invokeFetch.call(void 0, "transports", {
   method: "get",
   pathTemplate: "/api/v1/transports/email-config",
   options
 });
-var patchEmailConfig = async (body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "transports", {
+var patchEmailConfig = async (body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "transports", {
   method: "patch",
   pathTemplate: "/api/v1/transports/email-config",
   body,
   contentType: "application/json",
   options
 });
-var sendTestEmail = async (body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "transports", {
+var sendTestEmail = async (body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "transports", {
   method: "post",
   pathTemplate: "/api/v1/transports/email-config/actions/send-test-email",
   body,
   contentType: "application/json",
   options
 });
-var validateEmailConfig = async (options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "transports", {
+var validateEmailConfig = async (options) => _EL2GSPZZjs.invokeFetch.call(void 0, "transports", {
   method: "post",
   pathTemplate: "/api/v1/transports/email-config/actions/validate",
   options
 });
-var verifyEmailConfigConnection = async (options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "transports", {
+var verifyEmailConfigConnection = async (options) => _EL2GSPZZjs.invokeFetch.call(void 0, "transports", {
   method: "post",
   pathTemplate: "/api/v1/transports/email-config/actions/verify-connection",
   options
 });
 function clearCache() {
-  return _chunkEALMXU6Sjs.clearApiCache.call(void 0, "transports");
+  return _EL2GSPZZjs.clearApiCache.call(void 0, "transports");
 }
 var transportsExport = {
   deleteEmailConfig,

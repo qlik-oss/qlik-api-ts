@@ -1,30 +1,30 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunkEALMXU6Sjs = require('./chunk-EALMXU6S.js');
-require('./chunk-BRDPNGQ7.js');
-require('./chunk-P57PW2II.js');
+var _EL2GSPZZjs = require('./chunks/EL2GSPZZ.js');
+require('./chunks/W2I5OQA5.js');
+require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/tenants.ts
-var createTenant = async (body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "tenants", {
+var createTenant = async (body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "tenants", {
   method: "post",
   pathTemplate: "/api/v1/tenants",
   body,
   contentType: "application/json",
   options
 });
-var getMyTenant = async (options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "tenants", {
+var getMyTenant = async (options) => _EL2GSPZZjs.invokeFetch.call(void 0, "tenants", {
   method: "get",
   pathTemplate: "/api/v1/tenants/me",
   options
 });
-var getTenant = async (tenantId, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "tenants", {
+var getTenant = async (tenantId, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "tenants", {
   method: "get",
   pathTemplate: "/api/v1/tenants/{tenantId}",
   pathVariables: { tenantId },
   options
 });
-var patchTenant = async (tenantId, body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "tenants", {
+var patchTenant = async (tenantId, body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "tenants", {
   method: "patch",
   pathTemplate: "/api/v1/tenants/{tenantId}",
   pathVariables: { tenantId },
@@ -32,7 +32,7 @@ var patchTenant = async (tenantId, body, options) => _chunkEALMXU6Sjs.invokeFetc
   contentType: "application/json",
   options
 });
-var deactivateTenant = async (tenantId, body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "tenants", {
+var deactivateTenant = async (tenantId, body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "tenants", {
   method: "post",
   pathTemplate: "/api/v1/tenants/{tenantId}/actions/deactivate",
   pathVariables: { tenantId },
@@ -40,7 +40,7 @@ var deactivateTenant = async (tenantId, body, options) => _chunkEALMXU6Sjs.invok
   contentType: "application/json",
   options
 });
-var reactivateTenant = async (tenantId, body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "tenants", {
+var reactivateTenant = async (tenantId, body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "tenants", {
   method: "post",
   pathTemplate: "/api/v1/tenants/{tenantId}/actions/reactivate",
   pathVariables: { tenantId },
@@ -49,7 +49,7 @@ var reactivateTenant = async (tenantId, body, options) => _chunkEALMXU6Sjs.invok
   options
 });
 function clearCache() {
-  return _chunkEALMXU6Sjs.clearApiCache.call(void 0, "tenants");
+  return _EL2GSPZZjs.clearApiCache.call(void 0, "tenants");
 }
 var tenantsExport = {
   createTenant,

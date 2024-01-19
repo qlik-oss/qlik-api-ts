@@ -1,15 +1,15 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
-var _chunkRYBRKLOYjs = require('./chunk-RYBRKLOY.js');
+var _XY3AC335js = require('./chunks/XY3AC335.js');
 
 
-var _chunkGY2TAYQHjs = require('./chunk-GY2TAYQH.js');
+var _AULTUQC4js = require('./chunks/AULTUQC4.js');
 
 
 
-var _chunkEALMXU6Sjs = require('./chunk-EALMXU6S.js');
-require('./chunk-BRDPNGQ7.js');
-require('./chunk-P57PW2II.js');
+var _EL2GSPZZjs = require('./chunks/EL2GSPZZ.js');
+require('./chunks/W2I5OQA5.js');
+require('./chunks/4HB3TAEO.js');
 
 // src/public/public-runtime-api-generator/public-runtime-api-generator.ts
 var methodAbbreviations = {
@@ -84,7 +84,7 @@ function apiDefToApi(namespace, def) {
     return runtimeApiCache[namespace];
   }
   const api2 = {
-    clearCache: () => _chunkEALMXU6Sjs.clearApiCache.call(void 0, namespace)
+    clearCache: () => _EL2GSPZZjs.clearApiCache.call(void 0, namespace)
   };
   const initFunc = () => {
     traverse(namespace, "", def, api2);
@@ -153,7 +153,7 @@ function createClassicApiFn(namespace, operationName, pathTemplate, method, argN
     if (useInstead) {
       console.warn(`${namespace}.${operationName} is deprecated, use ${useInstead} instead`);
     }
-    return _chunkEALMXU6Sjs.invokeFetch.call(void 0, namespace, {
+    return _EL2GSPZZjs.invokeFetch.call(void 0, namespace, {
       method,
       pathTemplate,
       pathVariables,
@@ -249,7 +249,7 @@ var audits = apiDefToApi("audits", {
     }
   }
 });
-var auth = _chunkRYBRKLOYjs.auth_default;
+var auth = _XY3AC335js.auth_default;
 var automations = apiDefToApi("automations", {
   api: {
     v1: {
@@ -496,7 +496,7 @@ var licenses = apiDefToApi("licenses", {
     }
   }
 });
-var qix = _chunkGY2TAYQHjs.qix_default;
+var qix = _AULTUQC4js.qix_default;
 var quotas = apiDefToApi("quotas", {
   api: { v1: { quotas: { "": ["getQuotas:GQ:"], "{id}": ["getQuota:GQ:"] } } }
 });

@@ -1,6 +1,6 @@
 import {
   __require
-} from "./chunk-ZFXKCRJC.mjs";
+} from "./VSY5YIQY.mjs";
 
 // src/platform/platform-functions.ts
 var getPlatform = async (options = {}) => {
@@ -1103,6 +1103,12 @@ function shouldUseCachedResult(options, cacheEntry, defaultMaxCacheTime) {
 }
 var shouldPopulateCache = (method) => method === "get" || method === "GET";
 function clone(value) {
+  if (value && (value instanceof Blob || value instanceof Object && value.toString() === "[object Blob]")) {
+    return value;
+  }
+  if (typeof value === "string") {
+    return value;
+  }
   return JSON.parse(JSON.stringify(value));
 }
 function isModifyingVerb2(verb) {
@@ -1210,11 +1216,33 @@ async function performActualHttpFetch(method, completeUrl, unencodedBody, conten
   if (interceptors?.request.hasInterceptors()) {
     request = await interceptors.request.apply(completeUrl, request);
   }
-  const fetchResponse = await fetchAndTransformExceptions(completeUrl, request);
+  let fetchResponse = await fetchAndTransformExceptions(completeUrl, request);
+  const location = fetchResponse.headers.get("location");
+  if (location && request.redirect === "follow" && fetchResponse.status === 201) {
+    const followRequest = {
+      method: "get",
+      credentials,
+      mode: request.mode,
+      headers,
+      redirect: request.redirect
+    };
+    let followUrl;
+    try {
+      followUrl = new URL(location).toString();
+    } catch {
+      try {
+        const { origin } = new URL(completeUrl);
+        followUrl = `${origin}/${location}`;
+      } catch {
+        followUrl = location;
+      }
+    }
+    fetchResponse = await fetchAndTransformExceptions(followUrl, followRequest);
+  }
   if (fetchTimeoutId) {
     clearTimeout(fetchTimeoutId);
   }
-  let invokeFetchResponse = await parseFetchResponse2(fetchResponse, completeUrl);
+  let invokeFetchResponse = await parseFetchResponse(fetchResponse, completeUrl);
   if (interceptors?.response.hasInterceptors()) {
     invokeFetchResponse = await interceptors.response.apply(invokeFetchResponse);
   }
@@ -1476,27 +1504,21 @@ async function interceptAuthenticationErrors(hostConfig, resultPromise, performR
     throw error;
   }
 }
-async function parseFetchResponse2(fetchResponse, url) {
-  let resultData;
-  try {
-    resultData = await fetchResponse.text();
-    resultData = JSON.parse(resultData);
-  } catch {
+function toDownloadableBlob(blob) {
+  const result2 = blob;
+  result2.download = (filename) => download(blob, filename);
+  return result2;
+}
+async function download(blob, filename) {
+  if (isBrowser()) {
+    const a = document.createElement("a");
+    a.href = window.URL.createObjectURL(blob);
+    a.download = filename;
+    a.click();
+  } else {
+    const { writeFileSync } = await import("fs");
+    writeFileSync(filename, Buffer.from(await blob.arrayBuffer()));
   }
-  const { status, statusText, headers } = fetchResponse;
-  const errorMsg = `request to '${url}' failed with status ${status} ${statusText}.`;
-  if (status >= 300) {
-    throw new InvokeFetchError(errorMsg, status, headers, resultData);
-  }
-  if (status === 0) {
-    throw new InvokeFetchError(errorMsg, 302, headers, resultData);
-  }
-  const invokeFetchResponse = {
-    status,
-    headers,
-    data: resultData
-  };
-  return invokeFetchResponse;
 }
 
 // src/invoke-fetch/invoke-fetch-error.ts
@@ -1558,10 +1580,22 @@ function clearApiCache(api) {
 }
 async function parseFetchResponse(fetchResponse, url) {
   let resultData;
-  try {
-    resultData = await fetchResponse.text();
-    resultData = JSON.parse(resultData);
-  } catch {
+  const contentType = fetchResponse.headers.get("content-type")?.split(";")[0];
+  switch (contentType) {
+    case "image/png":
+    case "image/jpeg":
+    case "image/x-icon":
+    case "application/offset+octet-stream":
+    case "application/octet-stream":
+      resultData = toDownloadableBlob(await fetchResponse.blob());
+      break;
+    default:
+      try {
+        resultData = await fetchResponse.text();
+        resultData = JSON.parse(resultData);
+      } catch {
+      }
+      break;
   }
   const { status, statusText, headers } = fetchResponse;
   const errorMsg = `request to '${url}' failed with status ${status} ${statusText}.`;

@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types-4jzAvW7R.mjs';
+import { A as ApiCallOptions } from './global.types-5iFvFJvX.mjs';
 import './auth-types-nnUcWhuU.mjs';
 
 type Delivery = {

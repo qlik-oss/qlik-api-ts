@@ -1,42 +1,42 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunkEALMXU6Sjs = require('./chunk-EALMXU6S.js');
-require('./chunk-BRDPNGQ7.js');
-require('./chunk-P57PW2II.js');
+var _EL2GSPZZjs = require('./chunks/EL2GSPZZ.js');
+require('./chunks/W2I5OQA5.js');
+require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/webhooks.ts
-var getWebhooks = async (query, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "webhooks", {
+var getWebhooks = async (query, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "webhooks", {
   method: "get",
   pathTemplate: "/api/v1/webhooks",
   query,
   options
 });
-var createWebhook = async (body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "webhooks", {
+var createWebhook = async (body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "webhooks", {
   method: "post",
   pathTemplate: "/api/v1/webhooks",
   body,
   contentType: "application/json",
   options
 });
-var getWebhookEventTypes = async (options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "webhooks", {
+var getWebhookEventTypes = async (options) => _EL2GSPZZjs.invokeFetch.call(void 0, "webhooks", {
   method: "get",
   pathTemplate: "/api/v1/webhooks/event-types",
   options
 });
-var deleteWebhook = async (id, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "webhooks", {
+var deleteWebhook = async (id, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "webhooks", {
   method: "delete",
   pathTemplate: "/api/v1/webhooks/{id}",
   pathVariables: { id },
   options
 });
-var getWebhook = async (id, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "webhooks", {
+var getWebhook = async (id, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "webhooks", {
   method: "get",
   pathTemplate: "/api/v1/webhooks/{id}",
   pathVariables: { id },
   options
 });
-var patchWebhook = async (id, body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "webhooks", {
+var patchWebhook = async (id, body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "webhooks", {
   method: "patch",
   pathTemplate: "/api/v1/webhooks/{id}",
   pathVariables: { id },
@@ -44,7 +44,7 @@ var patchWebhook = async (id, body, options) => _chunkEALMXU6Sjs.invokeFetch.cal
   contentType: "application/json",
   options
 });
-var updateWebhook = async (id, body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "webhooks", {
+var updateWebhook = async (id, body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "webhooks", {
   method: "put",
   pathTemplate: "/api/v1/webhooks/{id}",
   pathVariables: { id },
@@ -52,27 +52,27 @@ var updateWebhook = async (id, body, options) => _chunkEALMXU6Sjs.invokeFetch.ca
   contentType: "application/json",
   options
 });
-var getWebhookDeliveries = async (id, query, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "webhooks", {
+var getWebhookDeliveries = async (id, query, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "webhooks", {
   method: "get",
   pathTemplate: "/api/v1/webhooks/{id}/deliveries",
   pathVariables: { id },
   query,
   options
 });
-var getWebhookDelivery = async (id, deliveryId, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "webhooks", {
+var getWebhookDelivery = async (id, deliveryId, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "webhooks", {
   method: "get",
   pathTemplate: "/api/v1/webhooks/{id}/deliveries/{deliveryId}",
   pathVariables: { id, deliveryId },
   options
 });
-var resendWebhookDelivery = async (id, deliveryId, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "webhooks", {
+var resendWebhookDelivery = async (id, deliveryId, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "webhooks", {
   method: "post",
   pathTemplate: "/api/v1/webhooks/{id}/deliveries/{deliveryId}/actions/resend",
   pathVariables: { id, deliveryId },
   options
 });
 function clearCache() {
-  return _chunkEALMXU6Sjs.clearApiCache.call(void 0, "webhooks");
+  return _EL2GSPZZjs.clearApiCache.call(void 0, "webhooks");
 }
 var webhooksExport = {
   getWebhooks,

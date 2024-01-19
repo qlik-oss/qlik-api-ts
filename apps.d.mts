@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types-4jzAvW7R.mjs';
+import { A as ApiCallOptions, D as DownloadableBlob } from './global.types-5iFvFJvX.mjs';
 import './auth-types-nnUcWhuU.mjs';
 
 type Analysis = "breakdown" | "changePoint" | "comparison" | "contribution" | "correlation" | "fact" | "mutualInfo" | "rank" | "spike" | "trend" | "values";
@@ -701,6 +701,8 @@ type ReloadMeta = {
     statements?: ReloadStatements[];
     storeDataFilesBytes?: number;
     storeFilesBytes?: number;
+    /** A Base64-encoded hash value of all fields stored via the store statements. */
+    storeHash?: string;
     /** true if the reload was successful. */
     success?: boolean;
 };
@@ -1172,7 +1174,7 @@ declare const importApp: (query: {
     name?: string;
     /** The space ID of the target app. */
     spaceId?: string;
-}, body: FileData, options?: ApiCallOptions) => Promise<ImportAppHttpResponse>;
+}, body: BodyInit, options?: ApiCallOptions) => Promise<ImportAppHttpResponse>;
 type ImportAppHttpResponse = {
     data: NxApp;
     headers: Headers;
@@ -1317,7 +1319,7 @@ declare const exportApp: (appId: string, query: {
     NoData?: boolean;
 }, options?: ApiCallOptions) => Promise<ExportAppHttpResponse>;
 type ExportAppHttpResponse = {
-    data: void;
+    data: DownloadableBlob;
     headers: Headers;
     status: number;
 };
@@ -1411,7 +1413,7 @@ type DeleteAppMediaHttpError = {
  */
 declare const getAppMedia: (appId: string, path: string, options?: ApiCallOptions) => Promise<GetAppMediaHttpResponse>;
 type GetAppMediaHttpResponse = {
-    data: void;
+    data: DownloadableBlob;
     headers: Headers;
     status: number;
 };
@@ -1429,7 +1431,7 @@ type GetAppMediaHttpError = {
  * @param body an object with the body content
  * @throws UploadAppMediaHttpError
  */
-declare const uploadAppMedia: (appId: string, path: string, body: FileData, options?: ApiCallOptions) => Promise<UploadAppMediaHttpResponse>;
+declare const uploadAppMedia: (appId: string, path: string, body: BodyInit, options?: ApiCallOptions) => Promise<UploadAppMediaHttpResponse>;
 type UploadAppMediaHttpResponse = {
     data: void;
     headers: Headers;
@@ -1476,7 +1478,7 @@ type GetAppMediaListHttpError = {
  */
 declare const getAppThumbnail: (appId: string, options?: ApiCallOptions) => Promise<GetAppThumbnailHttpResponse>;
 type GetAppThumbnailHttpResponse = {
-    data: void;
+    data: DownloadableBlob;
     headers: Headers;
     status: number;
 };
@@ -1587,7 +1589,7 @@ type GetAppReloadLogsHttpError = {
  */
 declare const getAppReloadLog: (appId: string, reloadId: string, options?: ApiCallOptions) => Promise<GetAppReloadLogHttpResponse>;
 type GetAppReloadLogHttpResponse = {
-    data: void;
+    data: DownloadableBlob;
     headers: Headers;
     status: number;
 };

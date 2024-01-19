@@ -1,12 +1,12 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _chunkEALMXU6Sjs = require('./chunk-EALMXU6S.js');
-require('./chunk-BRDPNGQ7.js');
-require('./chunk-P57PW2II.js');
+var _EL2GSPZZjs = require('./chunks/EL2GSPZZ.js');
+require('./chunks/W2I5OQA5.js');
+require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/temp-contents.ts
-var uploadTempFile = async (query, body, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "temp-contents", {
+var uploadTempFile = async (query, body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "temp-contents", {
   method: "post",
   pathTemplate: "/api/v1/temp-contents",
   query,
@@ -14,21 +14,21 @@ var uploadTempFile = async (query, body, options) => _chunkEALMXU6Sjs.invokeFetc
   contentType: "application/octet-stream",
   options
 });
-var downloadTempFile = async (id, query, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "temp-contents", {
+var downloadTempFile = async (id, query, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "temp-contents", {
   method: "get",
   pathTemplate: "/api/v1/temp-contents/{id}",
   pathVariables: { id },
   query,
   options
 });
-var getTempFileDetails = async (id, options) => _chunkEALMXU6Sjs.invokeFetch.call(void 0, "temp-contents", {
+var getTempFileDetails = async (id, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "temp-contents", {
   method: "get",
   pathTemplate: "/api/v1/temp-contents/{id}/details",
   pathVariables: { id },
   options
 });
 function clearCache() {
-  return _chunkEALMXU6Sjs.clearApiCache.call(void 0, "temp-contents");
+  return _EL2GSPZZjs.clearApiCache.call(void 0, "temp-contents");
 }
 var tempContentsExport = { uploadTempFile, downloadTempFile, getTempFileDetails, clearCache };
 var temp_contents_default = tempContentsExport;

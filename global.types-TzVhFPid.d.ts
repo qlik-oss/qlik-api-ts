@@ -35,6 +35,10 @@ type ApiCallOptions = {
      */
     timeoutMs?: number;
 };
+type DownloadableBlob = Blob & {
+    /** download the blob in a using the specified filename */
+    download: (filename: string) => Promise<void>;
+};
 
 /** ApiKey Auth Configuration for a HostConfig */
 type ApiKeyAuthConfig = {
@@ -108,4 +112,4 @@ declare global {
     } | undefined;
 }
 
-export type { ApiCallOptions as A };
+export type { ApiCallOptions as A, DownloadableBlob as D };

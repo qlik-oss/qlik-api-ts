@@ -1,6 +1,6 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _nullishCoalesce(lhs, rhsFn) { if (lhs != null) { return lhs; } else { return rhsFn(); } } function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; } async function _asyncOptionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = await fn(value); } else if (op === 'call' || op === 'optionalCall') { value = await fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { newObj[key] = obj[key]; } } } newObj.default = obj; return newObj; } } function _nullishCoalesce(lhs, rhsFn) { if (lhs != null) { return lhs; } else { return rhsFn(); } } function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; } async function _asyncOptionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = await fn(value); } else if (op === 'call' || op === 'optionalCall') { value = await fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
 
-var _chunkP57PW2IIjs = require('./chunk-P57PW2II.js');
+var _4HB3TAEOjs = require('./4HB3TAEO.js');
 
 // src/platform/platform-functions.ts
 var getPlatform = async (options = {}) => {
@@ -493,7 +493,7 @@ function isBrowser() {
   return typeof window === "object" && typeof window.document === "object";
 }
 function isNode() {
-  return typeof process === "object" && typeof _chunkP57PW2IIjs.__require === "function";
+  return typeof process === "object" && typeof _4HB3TAEOjs.__require === "function";
 }
 
 // src/auth/internal/default-auth-modules/oauth/storage-helpers.ts
@@ -1103,6 +1103,12 @@ function shouldUseCachedResult(options, cacheEntry, defaultMaxCacheTime) {
 }
 var shouldPopulateCache = (method) => method === "get" || method === "GET";
 function clone(value) {
+  if (value && (value instanceof Blob || value instanceof Object && value.toString() === "[object Blob]")) {
+    return value;
+  }
+  if (typeof value === "string") {
+    return value;
+  }
   return JSON.parse(JSON.stringify(value));
 }
 function isModifyingVerb2(verb) {
@@ -1210,11 +1216,33 @@ async function performActualHttpFetch(method, completeUrl, unencodedBody, conten
   if (_optionalChain([interceptors, 'optionalAccess', _26 => _26.request, 'access', _27 => _27.hasInterceptors, 'call', _28 => _28()])) {
     request = await interceptors.request.apply(completeUrl, request);
   }
-  const fetchResponse = await fetchAndTransformExceptions(completeUrl, request);
+  let fetchResponse = await fetchAndTransformExceptions(completeUrl, request);
+  const location = fetchResponse.headers.get("location");
+  if (location && request.redirect === "follow" && fetchResponse.status === 201) {
+    const followRequest = {
+      method: "get",
+      credentials,
+      mode: request.mode,
+      headers,
+      redirect: request.redirect
+    };
+    let followUrl;
+    try {
+      followUrl = new URL(location).toString();
+    } catch (e3) {
+      try {
+        const { origin } = new URL(completeUrl);
+        followUrl = `${origin}/${location}`;
+      } catch (e4) {
+        followUrl = location;
+      }
+    }
+    fetchResponse = await fetchAndTransformExceptions(followUrl, followRequest);
+  }
   if (fetchTimeoutId) {
     clearTimeout(fetchTimeoutId);
   }
-  let invokeFetchResponse = await parseFetchResponse2(fetchResponse, completeUrl);
+  let invokeFetchResponse = await parseFetchResponse(fetchResponse, completeUrl);
   if (_optionalChain([interceptors, 'optionalAccess', _29 => _29.response, 'access', _30 => _30.hasInterceptors, 'call', _31 => _31()])) {
     invokeFetchResponse = await interceptors.response.apply(invokeFetchResponse);
   }
@@ -1476,27 +1504,21 @@ async function interceptAuthenticationErrors(hostConfig, resultPromise, performR
     throw error;
   }
 }
-async function parseFetchResponse2(fetchResponse, url) {
-  let resultData;
-  try {
-    resultData = await fetchResponse.text();
-    resultData = JSON.parse(resultData);
-  } catch (e3) {
+function toDownloadableBlob(blob) {
+  const result2 = blob;
+  result2.download = (filename) => download(blob, filename);
+  return result2;
+}
+async function download(blob, filename) {
+  if (isBrowser()) {
+    const a = document.createElement("a");
+    a.href = window.URL.createObjectURL(blob);
+    a.download = filename;
+    a.click();
+  } else {
+    const { writeFileSync } = await Promise.resolve().then(() => _interopRequireWildcard(require("fs")));
+    writeFileSync(filename, Buffer.from(await blob.arrayBuffer()));
   }
-  const { status, statusText, headers } = fetchResponse;
-  const errorMsg = `request to '${url}' failed with status ${status} ${statusText}.`;
-  if (status >= 300) {
-    throw new InvokeFetchError(errorMsg, status, headers, resultData);
-  }
-  if (status === 0) {
-    throw new InvokeFetchError(errorMsg, 302, headers, resultData);
-  }
-  const invokeFetchResponse = {
-    status,
-    headers,
-    data: resultData
-  };
-  return invokeFetchResponse;
 }
 
 // src/invoke-fetch/invoke-fetch-error.ts
@@ -1558,10 +1580,22 @@ function clearApiCache(api) {
 }
 async function parseFetchResponse(fetchResponse, url) {
   let resultData;
-  try {
-    resultData = await fetchResponse.text();
-    resultData = JSON.parse(resultData);
-  } catch (e4) {
+  const contentType = _optionalChain([fetchResponse, 'access', _46 => _46.headers, 'access', _47 => _47.get, 'call', _48 => _48("content-type"), 'optionalAccess', _49 => _49.split, 'call', _50 => _50(";"), 'access', _51 => _51[0]]);
+  switch (contentType) {
+    case "image/png":
+    case "image/jpeg":
+    case "image/x-icon":
+    case "application/offset+octet-stream":
+    case "application/octet-stream":
+      resultData = toDownloadableBlob(await fetchResponse.blob());
+      break;
+    default:
+      try {
+        resultData = await fetchResponse.text();
+        resultData = JSON.parse(resultData);
+      } catch (e5) {
+      }
+      break;
   }
   const { status, statusText, headers } = fetchResponse;
   const errorMsg = `request to '${url}' failed with status ${status} ${statusText}.`;

@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types-4jzAvW7R.mjs';
+import { A as ApiCallOptions } from './global.types-5iFvFJvX.mjs';
 import './auth-types-nnUcWhuU.mjs';
 
 type CollectionByIdPatch = {
@@ -275,31 +275,15 @@ type CreateCollectionHttpError = {
  */
 declare const getFavoritesCollection: (options?: ApiCallOptions) => Promise<GetFavoritesCollectionHttpResponse>;
 type GetFavoritesCollectionHttpResponse = {
-    data: void;
+    data: CollectionResultResponseBody;
     headers: Headers;
     status: number;
 };
-type GetFavoritesCollection302HttpError = {
-    data: unknown;
-    headers: Headers;
-    status: 302;
-};
-type GetFavoritesCollection401HttpError = {
+type GetFavoritesCollectionHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: 401;
+    status: number;
 };
-type GetFavoritesCollection404HttpError = {
-    data: ErrorResponseBody;
-    headers: Headers;
-    status: 404;
-};
-type GetFavoritesCollection500HttpError = {
-    data: ErrorResponseBody;
-    headers: Headers;
-    status: 500;
-};
-type GetFavoritesCollectionHttpError = GetFavoritesCollection302HttpError | GetFavoritesCollection401HttpError | GetFavoritesCollection404HttpError | GetFavoritesCollection500HttpError;
 /**
  * Deletes a collection and removes all items from the collection.
  *
@@ -566,4 +550,4 @@ interface CollectionsAPI {
  */
 declare const collectionsExport: CollectionsAPI;
 
-export { type AddCollectionItemHttpError, type AddCollectionItemHttpResponse, type CollectionByIdPatch, type CollectionLinksResponseBody, type CollectionMetaResponseBody, type CollectionResultResponseBody, type CollectionTypes, type CollectionsAPI, type CollectionsAddCollectionItemRequestBody, type CollectionsCreateCollectionRequestBody, type CollectionsLinksResponseBody, type CollectionsListCollectionItemsResponseBody, type CollectionsListCollectionsResponseBody, type CollectionsUpdateCollectionRequestBody, type CreateCollectionHttpError, type CreateCollectionHttpResponse, type DeleteCollectionHttpError, type DeleteCollectionHttpResponse, type DeleteCollectionItemHttpError, type DeleteCollectionItemHttpResponse, type ErrorResponseBody, type GetCollectionHttpError, type GetCollectionHttpResponse, type GetCollectionItemHttpError, type GetCollectionItemHttpResponse, type GetCollectionItemsHttpError, type GetCollectionItemsHttpResponse, type GetCollectionsHttpError, type GetCollectionsHttpResponse, type GetFavoritesCollection302HttpError, type GetFavoritesCollection401HttpError, type GetFavoritesCollection404HttpError, type GetFavoritesCollection500HttpError, type GetFavoritesCollectionHttpError, type GetFavoritesCollectionHttpResponse, type ItemLinksResponseBody, type ItemMetaResponseBody, type ItemResourceTypeEnum, type ItemResultResponseBody, type ItemTagResponseBody, type ItemViewsResponseBody, type ItemViewsWeeksResponseBody, type ItemsLinksResponseBody, type ItemsResourceSizeResponseBody, type ItemsResultResponseBody, type Link, type Meta, type PatchCollectionHttpError, type PatchCollectionHttpResponse, type ServiceError, type UpdateCollectionHttpError, type UpdateCollectionHttpResponse, addCollectionItem, clearCache, createCollection, collectionsExport as default, deleteCollection, deleteCollectionItem, getCollection, getCollectionItem, getCollectionItems, getCollections, getFavoritesCollection, patchCollection, updateCollection };
+export { type AddCollectionItemHttpError, type AddCollectionItemHttpResponse, type CollectionByIdPatch, type CollectionLinksResponseBody, type CollectionMetaResponseBody, type CollectionResultResponseBody, type CollectionTypes, type CollectionsAPI, type CollectionsAddCollectionItemRequestBody, type CollectionsCreateCollectionRequestBody, type CollectionsLinksResponseBody, type CollectionsListCollectionItemsResponseBody, type CollectionsListCollectionsResponseBody, type CollectionsUpdateCollectionRequestBody, type CreateCollectionHttpError, type CreateCollectionHttpResponse, type DeleteCollectionHttpError, type DeleteCollectionHttpResponse, type DeleteCollectionItemHttpError, type DeleteCollectionItemHttpResponse, type ErrorResponseBody, type GetCollectionHttpError, type GetCollectionHttpResponse, type GetCollectionItemHttpError, type GetCollectionItemHttpResponse, type GetCollectionItemsHttpError, type GetCollectionItemsHttpResponse, type GetCollectionsHttpError, type GetCollectionsHttpResponse, type GetFavoritesCollectionHttpError, type GetFavoritesCollectionHttpResponse, type ItemLinksResponseBody, type ItemMetaResponseBody, type ItemResourceTypeEnum, type ItemResultResponseBody, type ItemTagResponseBody, type ItemViewsResponseBody, type ItemViewsWeeksResponseBody, type ItemsLinksResponseBody, type ItemsResourceSizeResponseBody, type ItemsResultResponseBody, type Link, type Meta, type PatchCollectionHttpError, type PatchCollectionHttpResponse, type ServiceError, type UpdateCollectionHttpError, type UpdateCollectionHttpResponse, addCollectionItem, clearCache, createCollection, collectionsExport as default, deleteCollection, deleteCollectionItem, getCollection, getCollectionItem, getCollectionItems, getCollections, getFavoritesCollection, patchCollection, updateCollection };

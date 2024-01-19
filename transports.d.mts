@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types-4jzAvW7R.mjs';
+import { A as ApiCallOptions } from './global.types-5iFvFJvX.mjs';
 import './auth-types-nnUcWhuU.mjs';
 
 type DeleteConfigNotFoundError = {
@@ -132,12 +132,12 @@ type DeleteEmailConfig404HttpError = {
     headers: Headers;
     status: 404;
 };
-type DeleteEmailConfigdefaultHttpError = {
+type DeleteEmailConfigDefaultHttpError = {
     data: ErrorsPublic;
     headers: Headers;
     status: "default";
 };
-type DeleteEmailConfigHttpError = DeleteEmailConfig403HttpError | DeleteEmailConfig404HttpError | DeleteEmailConfigdefaultHttpError;
+type DeleteEmailConfigHttpError = DeleteEmailConfig403HttpError | DeleteEmailConfig404HttpError | DeleteEmailConfigDefaultHttpError;
 /**
  * Returns the email configuration for a given tenant id (retrieved from JWT).
  *
@@ -154,12 +154,12 @@ type GetEmailConfig403HttpError = {
     headers: Headers;
     status: 403;
 };
-type GetEmailConfigdefaultHttpError = {
+type GetEmailConfigDefaultHttpError = {
     data: ErrorsPublic;
     headers: Headers;
     status: "default";
 };
-type GetEmailConfigHttpError = GetEmailConfig403HttpError | GetEmailConfigdefaultHttpError;
+type GetEmailConfigHttpError = GetEmailConfig403HttpError | GetEmailConfigDefaultHttpError;
 /**
  * Patch the email configuration for a given tenant id (retrieved from JWT).
  *
@@ -182,12 +182,12 @@ type PatchEmailConfig403HttpError = {
     headers: Headers;
     status: 403;
 };
-type PatchEmailConfigdefaultHttpError = {
+type PatchEmailConfigDefaultHttpError = {
     data: ErrorsPublic;
     headers: Headers;
     status: "default";
 };
-type PatchEmailConfigHttpError = PatchEmailConfig400HttpError | PatchEmailConfig403HttpError | PatchEmailConfigdefaultHttpError;
+type PatchEmailConfigHttpError = PatchEmailConfig400HttpError | PatchEmailConfig403HttpError | PatchEmailConfigDefaultHttpError;
 /**
  * Send a test mail with the supplied email info (subject, body, recipient). Email config from database is used for the connection.
  *
@@ -210,12 +210,12 @@ type SendTestEmail404HttpError = {
     headers: Headers;
     status: 404;
 };
-type SendTestEmaildefaultHttpError = {
+type SendTestEmailDefaultHttpError = {
     data: ErrorsPublic;
     headers: Headers;
     status: "default";
 };
-type SendTestEmailHttpError = SendTestEmail403HttpError | SendTestEmail404HttpError | SendTestEmaildefaultHttpError;
+type SendTestEmailHttpError = SendTestEmail403HttpError | SendTestEmail404HttpError | SendTestEmailDefaultHttpError;
 /**
  * Returns the isValid value for the email configuration for the tenant. Will return false if no email configuration exists.
  *
@@ -248,12 +248,12 @@ type VerifyEmailConfigConnection404HttpError = {
     headers: Headers;
     status: 404;
 };
-type VerifyEmailConfigConnectiondefaultHttpError = {
+type VerifyEmailConfigConnectionDefaultHttpError = {
     data: ErrorsPublic;
     headers: Headers;
     status: "default";
 };
-type VerifyEmailConfigConnectionHttpError = VerifyEmailConfigConnection404HttpError | VerifyEmailConfigConnectiondefaultHttpError;
+type VerifyEmailConfigConnectionHttpError = VerifyEmailConfigConnection404HttpError | VerifyEmailConfigConnectionDefaultHttpError;
 /**
  * Clears the cache for transports api requests.
  */
@@ -307,4 +307,4 @@ interface TransportsAPI {
  */
 declare const transportsExport: TransportsAPI;
 
-export { type DeleteConfigNotFoundError, type DeleteEmailConfig403HttpError, type DeleteEmailConfig404HttpError, type DeleteEmailConfigHttpError, type DeleteEmailConfigHttpResponse, type DeleteEmailConfigdefaultHttpError, type Email, type EmailConfigFieldPatch, type EmailConfigGet, type EmailConfigPatch, type ErrorPublic, type ErrorsPublic, type GetEmailConfig403HttpError, type GetEmailConfigHttpError, type GetEmailConfigHttpResponse, type GetEmailConfigdefaultHttpError, type PatchEmailConfig400HttpError, type PatchEmailConfig403HttpError, type PatchEmailConfigError, type PatchEmailConfigHttpError, type PatchEmailConfigHttpResponse, type PatchEmailConfigdefaultHttpError, type SendTestEmail403HttpError, type SendTestEmail404HttpError, type SendTestEmailHttpError, type SendTestEmailHttpResponse, type SendTestEmaildefaultHttpError, type SendTestMailConfigNotFoundError, type SmtpCheck, type SmtpConfigStatus, type SmtpResult, type TenantAdminError, type TransportsAPI, type ValidateEmailConfigHttpError, type ValidateEmailConfigHttpResponse, type VerifyConnectionConfigNotFoundError, type VerifyEmailConfigConnection404HttpError, type VerifyEmailConfigConnectionHttpError, type VerifyEmailConfigConnectionHttpResponse, type VerifyEmailConfigConnectiondefaultHttpError, clearCache, transportsExport as default, deleteEmailConfig, getEmailConfig, patchEmailConfig, sendTestEmail, validateEmailConfig, verifyEmailConfigConnection };
+export { type DeleteConfigNotFoundError, type DeleteEmailConfig403HttpError, type DeleteEmailConfig404HttpError, type DeleteEmailConfigDefaultHttpError, type DeleteEmailConfigHttpError, type DeleteEmailConfigHttpResponse, type Email, type EmailConfigFieldPatch, type EmailConfigGet, type EmailConfigPatch, type ErrorPublic, type ErrorsPublic, type GetEmailConfig403HttpError, type GetEmailConfigDefaultHttpError, type GetEmailConfigHttpError, type GetEmailConfigHttpResponse, type PatchEmailConfig400HttpError, type PatchEmailConfig403HttpError, type PatchEmailConfigDefaultHttpError, type PatchEmailConfigError, type PatchEmailConfigHttpError, type PatchEmailConfigHttpResponse, type SendTestEmail403HttpError, type SendTestEmail404HttpError, type SendTestEmailDefaultHttpError, type SendTestEmailHttpError, type SendTestEmailHttpResponse, type SendTestMailConfigNotFoundError, type SmtpCheck, type SmtpConfigStatus, type SmtpResult, type TenantAdminError, type TransportsAPI, type ValidateEmailConfigHttpError, type ValidateEmailConfigHttpResponse, type VerifyConnectionConfigNotFoundError, type VerifyEmailConfigConnection404HttpError, type VerifyEmailConfigConnectionDefaultHttpError, type VerifyEmailConfigConnectionHttpError, type VerifyEmailConfigConnectionHttpResponse, clearCache, transportsExport as default, deleteEmailConfig, getEmailConfig, patchEmailConfig, sendTestEmail, validateEmailConfig, verifyEmailConfigConnection };

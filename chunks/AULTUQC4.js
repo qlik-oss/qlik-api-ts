@@ -1,10 +1,10 @@
-import {
-  getQixRuntimeModule
-} from "./chunk-LLLEO6K6.mjs";
+"use strict";Object.defineProperty(exports, "__esModule", {value: true});
+
+var _W2I5OQA5js = require('./W2I5OQA5.js');
 
 // src/public/qix.ts
 function openAppSession(appSessionProps) {
-  const appSessionPromise = getQixRuntimeModule(appSessionProps.hostConfig).then(
+  const appSessionPromise = _W2I5OQA5js.getQixRuntimeModule.call(void 0, appSessionProps.hostConfig).then(
     (impl) => impl.openAppSession(appSessionProps)
   );
   const appSessionProxy = {
@@ -51,7 +51,7 @@ var qix_default = {
   openAppSession
 };
 
-export {
-  openAppSession,
-  qix_default
-};
+
+
+
+exports.openAppSession = openAppSession; exports.qix_default = qix_default;

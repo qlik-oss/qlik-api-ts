@@ -1,9 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunk-4MWB2T3C.mjs";
-import "./chunk-LLLEO6K6.mjs";
-import "./chunk-ZFXKCRJC.mjs";
+} from "./chunks/POR3DZIU.mjs";
+import "./chunks/VLLTA4EY.mjs";
+import "./chunks/VSY5YIQY.mjs";
 
 // src/public/rest/spaces.ts
 var getSpaces = async (query, options) => invokeFetch("spaces", {
