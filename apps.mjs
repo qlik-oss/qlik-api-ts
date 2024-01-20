@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/POR3DZIU.mjs";
-import "./chunks/VLLTA4EY.mjs";
+} from "./chunks/SCVPVNNI.mjs";
+import "./chunks/LRHYLFQX.mjs";
 import "./chunks/VSY5YIQY.mjs";
 
 // src/public/rest/apps.ts

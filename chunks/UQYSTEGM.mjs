@@ -2,7 +2,7 @@ import {
   getRestCallAuthParams,
   getWebSocketAuthParams,
   toValidWebsocketLocationUrl
-} from "./KDW6ZD2R.mjs";
+} from "./AWAXQ2WG.mjs";
 import "./VSY5YIQY.mjs";
 
 // src/qix/session/enigma-session.ts

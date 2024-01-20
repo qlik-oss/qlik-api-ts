@@ -1,14 +1,14 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
-var _XY3AC335js = require('./chunks/XY3AC335.js');
+var _46XPPLVJjs = require('./chunks/46XPPLVJ.js');
 
 
-var _AULTUQC4js = require('./chunks/AULTUQC4.js');
+var _MZIYRPC7js = require('./chunks/MZIYRPC7.js');
 
 
 
-var _EL2GSPZZjs = require('./chunks/EL2GSPZZ.js');
-require('./chunks/W2I5OQA5.js');
+var _DMU5PHUVjs = require('./chunks/DMU5PHUV.js');
+require('./chunks/MBVF2FVP.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/public-runtime-api-generator/public-runtime-api-generator.ts
@@ -84,7 +84,7 @@ function apiDefToApi(namespace, def) {
     return runtimeApiCache[namespace];
   }
   const api2 = {
-    clearCache: () => _EL2GSPZZjs.clearApiCache.call(void 0, namespace)
+    clearCache: () => _DMU5PHUVjs.clearApiCache.call(void 0, namespace)
   };
   const initFunc = () => {
     traverse(namespace, "", def, api2);
@@ -153,7 +153,7 @@ function createClassicApiFn(namespace, operationName, pathTemplate, method, argN
     if (useInstead) {
       console.warn(`${namespace}.${operationName} is deprecated, use ${useInstead} instead`);
     }
-    return _EL2GSPZZjs.invokeFetch.call(void 0, namespace, {
+    return _DMU5PHUVjs.invokeFetch.call(void 0, namespace, {
       method,
       pathTemplate,
       pathVariables,
@@ -249,7 +249,7 @@ var audits = apiDefToApi("audits", {
     }
   }
 });
-var auth = _XY3AC335js.auth_default;
+var auth = _46XPPLVJjs.auth_default;
 var automations = apiDefToApi("automations", {
   api: {
     v1: {
@@ -496,7 +496,7 @@ var licenses = apiDefToApi("licenses", {
     }
   }
 });
-var qix = _AULTUQC4js.qix_default;
+var qix = _MZIYRPC7js.qix_default;
 var quotas = apiDefToApi("quotas", {
   api: { v1: { quotas: { "": ["getQuotas:GQ:"], "{id}": ["getQuota:GQ:"] } } }
 });

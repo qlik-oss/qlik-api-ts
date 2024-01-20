@@ -1,68 +1,68 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _EL2GSPZZjs = require('./chunks/EL2GSPZZ.js');
-require('./chunks/W2I5OQA5.js');
+var _DMU5PHUVjs = require('./chunks/DMU5PHUV.js');
+require('./chunks/MBVF2FVP.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/data-files.ts
-var getDataFiles = async (query, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "data-files", {
+var getDataFiles = async (query, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "data-files", {
   method: "get",
   pathTemplate: "/api/v1/data-files",
   query,
   options
 });
-var uploadDataFile = async (body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "data-files", {
+var uploadDataFile = async (body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "data-files", {
   method: "post",
   pathTemplate: "/api/v1/data-files",
   body,
   contentType: "multipart/form-data",
   options
 });
-var moveDataFiles = async (body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "data-files", {
+var moveDataFiles = async (body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "data-files", {
   method: "post",
   pathTemplate: "/api/v1/data-files/actions/change-space",
   body,
   contentType: "application/json",
   options
 });
-var deleteDataFiles = async (body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "data-files", {
+var deleteDataFiles = async (body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "data-files", {
   method: "post",
   pathTemplate: "/api/v1/data-files/actions/delete",
   body,
   contentType: "application/json",
   options
 });
-var getDataFilesConnections = async (query, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "data-files", {
+var getDataFilesConnections = async (query, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "data-files", {
   method: "get",
   pathTemplate: "/api/v1/data-files/connections",
   query,
   options
 });
-var getDataFileConnection = async (id, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "data-files", {
+var getDataFileConnection = async (id, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "data-files", {
   method: "get",
   pathTemplate: "/api/v1/data-files/connections/{id}",
   pathVariables: { id },
   options
 });
-var getDataFilesQuotas = async (options) => _EL2GSPZZjs.invokeFetch.call(void 0, "data-files", {
+var getDataFilesQuotas = async (options) => _DMU5PHUVjs.invokeFetch.call(void 0, "data-files", {
   method: "get",
   pathTemplate: "/api/v1/data-files/quotas",
   options
 });
-var deleteDataFile = async (id, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "data-files", {
+var deleteDataFile = async (id, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "data-files", {
   method: "delete",
   pathTemplate: "/api/v1/data-files/{id}",
   pathVariables: { id },
   options
 });
-var getDataFile = async (id, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "data-files", {
+var getDataFile = async (id, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "data-files", {
   method: "get",
   pathTemplate: "/api/v1/data-files/{id}",
   pathVariables: { id },
   options
 });
-var reuploadDataFile = async (id, body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "data-files", {
+var reuploadDataFile = async (id, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "data-files", {
   method: "put",
   pathTemplate: "/api/v1/data-files/{id}",
   pathVariables: { id },
@@ -70,7 +70,7 @@ var reuploadDataFile = async (id, body, options) => _EL2GSPZZjs.invokeFetch.call
   contentType: "multipart/form-data",
   options
 });
-var changeDataFileOwner = async (id, body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "data-files", {
+var changeDataFileOwner = async (id, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "data-files", {
   method: "post",
   pathTemplate: "/api/v1/data-files/{id}/actions/change-owner",
   pathVariables: { id },
@@ -78,7 +78,7 @@ var changeDataFileOwner = async (id, body, options) => _EL2GSPZZjs.invokeFetch.c
   contentType: "application/json",
   options
 });
-var moveDataFile = async (id, body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "data-files", {
+var moveDataFile = async (id, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "data-files", {
   method: "post",
   pathTemplate: "/api/v1/data-files/{id}/actions/change-space",
   pathVariables: { id },
@@ -87,7 +87,7 @@ var moveDataFile = async (id, body, options) => _EL2GSPZZjs.invokeFetch.call(voi
   options
 });
 function clearCache() {
-  return _EL2GSPZZjs.clearApiCache.call(void 0, "data-files");
+  return _DMU5PHUVjs.clearApiCache.call(void 0, "data-files");
 }
 var dataFilesExport = {
   getDataFiles,

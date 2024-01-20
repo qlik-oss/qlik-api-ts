@@ -1,52 +1,52 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _EL2GSPZZjs = require('./chunks/EL2GSPZZ.js');
-require('./chunks/W2I5OQA5.js');
+var _DMU5PHUVjs = require('./chunks/DMU5PHUV.js');
+require('./chunks/MBVF2FVP.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/identity-providers.ts
-var getIdps = async (query, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "identity-providers", {
+var getIdps = async (query, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "identity-providers", {
   method: "get",
   pathTemplate: "/api/v1/identity-providers",
   query,
   options
 });
-var createIdp = async (body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "identity-providers", {
+var createIdp = async (body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "identity-providers", {
   method: "post",
   pathTemplate: "/api/v1/identity-providers",
   body,
   contentType: "application/json",
   options
 });
-var getIdpWellKnownMetaData = async (options) => _EL2GSPZZjs.invokeFetch.call(void 0, "identity-providers", {
+var getIdpWellKnownMetaData = async (options) => _DMU5PHUVjs.invokeFetch.call(void 0, "identity-providers", {
   method: "get",
   pathTemplate: "/api/v1/identity-providers/.well-known/metadata.json",
   options
 });
-var getMyIdpMeta = async (options) => _EL2GSPZZjs.invokeFetch.call(void 0, "identity-providers", {
+var getMyIdpMeta = async (options) => _DMU5PHUVjs.invokeFetch.call(void 0, "identity-providers", {
   method: "get",
   pathTemplate: "/api/v1/identity-providers/me/meta",
   options
 });
-var getIdpStatuses = async (options) => _EL2GSPZZjs.invokeFetch.call(void 0, "identity-providers", {
+var getIdpStatuses = async (options) => _DMU5PHUVjs.invokeFetch.call(void 0, "identity-providers", {
   method: "get",
   pathTemplate: "/api/v1/identity-providers/status",
   options
 });
-var deleteIdp = async (id, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "identity-providers", {
+var deleteIdp = async (id, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "identity-providers", {
   method: "delete",
   pathTemplate: "/api/v1/identity-providers/{id}",
   pathVariables: { id },
   options
 });
-var getIdp = async (id, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "identity-providers", {
+var getIdp = async (id, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "identity-providers", {
   method: "get",
   pathTemplate: "/api/v1/identity-providers/{id}",
   pathVariables: { id },
   options
 });
-var patchIdp = async (id, body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "identity-providers", {
+var patchIdp = async (id, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "identity-providers", {
   method: "patch",
   pathTemplate: "/api/v1/identity-providers/{id}",
   pathVariables: { id },
@@ -55,7 +55,7 @@ var patchIdp = async (id, body, options) => _EL2GSPZZjs.invokeFetch.call(void 0,
   options
 });
 function clearCache() {
-  return _EL2GSPZZjs.clearApiCache.call(void 0, "identity-providers");
+  return _DMU5PHUVjs.clearApiCache.call(void 0, "identity-providers");
 }
 var identityProvidersExport = {
   getIdps,
