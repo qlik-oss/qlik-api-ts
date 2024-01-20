@@ -1,36 +1,36 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _EL2GSPZZjs = require('./chunks/EL2GSPZZ.js');
-require('./chunks/W2I5OQA5.js');
+var _DMU5PHUVjs = require('./chunks/DMU5PHUV.js');
+require('./chunks/MBVF2FVP.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/themes.ts
-var getThemes = async (options) => _EL2GSPZZjs.invokeFetch.call(void 0, "themes", {
+var getThemes = async (options) => _DMU5PHUVjs.invokeFetch.call(void 0, "themes", {
   method: "get",
   pathTemplate: "/api/v1/themes",
   options
 });
-var uploadTheme = async (body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "themes", {
+var uploadTheme = async (body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "themes", {
   method: "post",
   pathTemplate: "/api/v1/themes",
   body,
   contentType: "multipart/form-data",
   options
 });
-var deleteTheme = async (id, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "themes", {
+var deleteTheme = async (id, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "themes", {
   method: "delete",
   pathTemplate: "/api/v1/themes/{id}",
   pathVariables: { id },
   options
 });
-var getTheme = async (id, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "themes", {
+var getTheme = async (id, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "themes", {
   method: "get",
   pathTemplate: "/api/v1/themes/{id}",
   pathVariables: { id },
   options
 });
-var patchTheme = async (id, body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "themes", {
+var patchTheme = async (id, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "themes", {
   method: "patch",
   pathTemplate: "/api/v1/themes/{id}",
   pathVariables: { id },
@@ -38,20 +38,20 @@ var patchTheme = async (id, body, options) => _EL2GSPZZjs.invokeFetch.call(void 
   contentType: "multipart/form-data",
   options
 });
-var downloadTheme = async (id, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "themes", {
+var downloadTheme = async (id, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "themes", {
   method: "get",
   pathTemplate: "/api/v1/themes/{id}/file",
   pathVariables: { id },
   options
 });
-var downloadFileFromTheme = async (id, filepath, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "themes", {
+var downloadFileFromTheme = async (id, filepath, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "themes", {
   method: "get",
   pathTemplate: "/api/v1/themes/{id}/file/{filepath}",
   pathVariables: { id, filepath },
   options
 });
 function clearCache() {
-  return _EL2GSPZZjs.clearApiCache.call(void 0, "themes");
+  return _DMU5PHUVjs.clearApiCache.call(void 0, "themes");
 }
 var themesExport = {
   getThemes,

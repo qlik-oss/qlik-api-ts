@@ -1216,29 +1216,7 @@ async function performActualHttpFetch(method, completeUrl, unencodedBody, conten
   if (_optionalChain([interceptors, 'optionalAccess', _26 => _26.request, 'access', _27 => _27.hasInterceptors, 'call', _28 => _28()])) {
     request = await interceptors.request.apply(completeUrl, request);
   }
-  let fetchResponse = await fetchAndTransformExceptions(completeUrl, request);
-  const location = fetchResponse.headers.get("location");
-  if (location && request.redirect === "follow" && fetchResponse.status === 201) {
-    const followRequest = {
-      method: "get",
-      credentials,
-      mode: request.mode,
-      headers,
-      redirect: request.redirect
-    };
-    let followUrl;
-    try {
-      followUrl = new URL(location).toString();
-    } catch (e3) {
-      try {
-        const { origin } = new URL(completeUrl);
-        followUrl = `${origin}/${location}`;
-      } catch (e4) {
-        followUrl = location;
-      }
-    }
-    fetchResponse = await fetchAndTransformExceptions(followUrl, followRequest);
-  }
+  const fetchResponse = await fetchAndTransformExceptions(completeUrl, request);
   if (fetchTimeoutId) {
     clearTimeout(fetchTimeoutId);
   }
@@ -1593,7 +1571,7 @@ async function parseFetchResponse(fetchResponse, url) {
       try {
         resultData = await fetchResponse.text();
         resultData = JSON.parse(resultData);
-      } catch (e5) {
+      } catch (e3) {
       }
       break;
   }

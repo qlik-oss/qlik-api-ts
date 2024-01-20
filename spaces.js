@@ -1,42 +1,42 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _EL2GSPZZjs = require('./chunks/EL2GSPZZ.js');
-require('./chunks/W2I5OQA5.js');
+var _DMU5PHUVjs = require('./chunks/DMU5PHUV.js');
+require('./chunks/MBVF2FVP.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/spaces.ts
-var getSpaces = async (query, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "spaces", {
+var getSpaces = async (query, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "spaces", {
   method: "get",
   pathTemplate: "/api/v1/spaces",
   query,
   options
 });
-var createSpace = async (body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "spaces", {
+var createSpace = async (body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "spaces", {
   method: "post",
   pathTemplate: "/api/v1/spaces",
   body,
   contentType: "application/json",
   options
 });
-var getSpaceTypes = async (options) => _EL2GSPZZjs.invokeFetch.call(void 0, "spaces", {
+var getSpaceTypes = async (options) => _DMU5PHUVjs.invokeFetch.call(void 0, "spaces", {
   method: "get",
   pathTemplate: "/api/v1/spaces/types",
   options
 });
-var deleteSpace = async (spaceId, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "spaces", {
+var deleteSpace = async (spaceId, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "spaces", {
   method: "delete",
   pathTemplate: "/api/v1/spaces/{spaceId}",
   pathVariables: { spaceId },
   options
 });
-var getSpace = async (spaceId, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "spaces", {
+var getSpace = async (spaceId, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "spaces", {
   method: "get",
   pathTemplate: "/api/v1/spaces/{spaceId}",
   pathVariables: { spaceId },
   options
 });
-var patchSpace = async (spaceId, body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "spaces", {
+var patchSpace = async (spaceId, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "spaces", {
   method: "patch",
   pathTemplate: "/api/v1/spaces/{spaceId}",
   pathVariables: { spaceId },
@@ -44,7 +44,7 @@ var patchSpace = async (spaceId, body, options) => _EL2GSPZZjs.invokeFetch.call(
   contentType: "application/json",
   options
 });
-var updateSpace = async (spaceId, body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "spaces", {
+var updateSpace = async (spaceId, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "spaces", {
   method: "put",
   pathTemplate: "/api/v1/spaces/{spaceId}",
   pathVariables: { spaceId },
@@ -52,14 +52,14 @@ var updateSpace = async (spaceId, body, options) => _EL2GSPZZjs.invokeFetch.call
   contentType: "application/json",
   options
 });
-var getSpaceAssignments = async (spaceId, query, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "spaces", {
+var getSpaceAssignments = async (spaceId, query, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "spaces", {
   method: "get",
   pathTemplate: "/api/v1/spaces/{spaceId}/assignments",
   pathVariables: { spaceId },
   query,
   options
 });
-var createSpaceAssignment = async (spaceId, body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "spaces", {
+var createSpaceAssignment = async (spaceId, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "spaces", {
   method: "post",
   pathTemplate: "/api/v1/spaces/{spaceId}/assignments",
   pathVariables: { spaceId },
@@ -67,19 +67,19 @@ var createSpaceAssignment = async (spaceId, body, options) => _EL2GSPZZjs.invoke
   contentType: "application/json",
   options
 });
-var deleteSpaceAssignment = async (spaceId, assignmentId, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "spaces", {
+var deleteSpaceAssignment = async (spaceId, assignmentId, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "spaces", {
   method: "delete",
   pathTemplate: "/api/v1/spaces/{spaceId}/assignments/{assignmentId}",
   pathVariables: { spaceId, assignmentId },
   options
 });
-var getSpaceAssignment = async (spaceId, assignmentId, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "spaces", {
+var getSpaceAssignment = async (spaceId, assignmentId, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "spaces", {
   method: "get",
   pathTemplate: "/api/v1/spaces/{spaceId}/assignments/{assignmentId}",
   pathVariables: { spaceId, assignmentId },
   options
 });
-var updateSpaceAssignment = async (spaceId, assignmentId, body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "spaces", {
+var updateSpaceAssignment = async (spaceId, assignmentId, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "spaces", {
   method: "put",
   pathTemplate: "/api/v1/spaces/{spaceId}/assignments/{assignmentId}",
   pathVariables: { spaceId, assignmentId },
@@ -88,7 +88,7 @@ var updateSpaceAssignment = async (spaceId, assignmentId, body, options) => _EL2
   options
 });
 function clearCache() {
-  return _EL2GSPZZjs.clearApiCache.call(void 0, "spaces");
+  return _DMU5PHUVjs.clearApiCache.call(void 0, "spaces");
 }
 var spacesExport = {
   getSpaces,

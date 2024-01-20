@@ -1,42 +1,42 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _EL2GSPZZjs = require('./chunks/EL2GSPZZ.js');
-require('./chunks/W2I5OQA5.js');
+var _DMU5PHUVjs = require('./chunks/DMU5PHUV.js');
+require('./chunks/MBVF2FVP.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/csp-origins.ts
-var getCSPEntries = async (query, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "csp-origins", {
+var getCSPEntries = async (query, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "csp-origins", {
   method: "get",
   pathTemplate: "/api/v1/csp-origins",
   query,
   options
 });
-var createCSPEntry = async (body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "csp-origins", {
+var createCSPEntry = async (body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "csp-origins", {
   method: "post",
   pathTemplate: "/api/v1/csp-origins",
   body,
   contentType: "application/json",
   options
 });
-var getCSPHeader = async (options) => _EL2GSPZZjs.invokeFetch.call(void 0, "csp-origins", {
+var getCSPHeader = async (options) => _DMU5PHUVjs.invokeFetch.call(void 0, "csp-origins", {
   method: "get",
   pathTemplate: "/api/v1/csp-origins/actions/generate-header",
   options
 });
-var deleteCSPEntry = async (id, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "csp-origins", {
+var deleteCSPEntry = async (id, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "csp-origins", {
   method: "delete",
   pathTemplate: "/api/v1/csp-origins/{id}",
   pathVariables: { id },
   options
 });
-var getCSPEntry = async (id, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "csp-origins", {
+var getCSPEntry = async (id, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "csp-origins", {
   method: "get",
   pathTemplate: "/api/v1/csp-origins/{id}",
   pathVariables: { id },
   options
 });
-var updateCSPEntry = async (id, body, options) => _EL2GSPZZjs.invokeFetch.call(void 0, "csp-origins", {
+var updateCSPEntry = async (id, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "csp-origins", {
   method: "put",
   pathTemplate: "/api/v1/csp-origins/{id}",
   pathVariables: { id },
@@ -45,7 +45,7 @@ var updateCSPEntry = async (id, body, options) => _EL2GSPZZjs.invokeFetch.call(v
   options
 });
 function clearCache() {
-  return _EL2GSPZZjs.clearApiCache.call(void 0, "csp-origins");
+  return _DMU5PHUVjs.clearApiCache.call(void 0, "csp-origins");
 }
 var cspOriginsExport = {
   getCSPEntries,

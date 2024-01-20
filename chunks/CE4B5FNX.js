@@ -1,11 +1,11 @@
-import {
-  getPlatform,
-  handleAuthenticationError,
-  invokeFetch,
-  isWindows,
-  toValidWebsocketLocationUrl
-} from "./KDW6ZD2R.mjs";
-import "./VSY5YIQY.mjs";
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { newObj[key] = obj[key]; } } } newObj.default = obj; return newObj; } } function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
+
+
+
+
+
+var _TFE7CAEAjs = require('./TFE7CAEA.js');
+require('./4HB3TAEO.js');
 
 // src/qix/session/shared-sessions.ts
 var globalEventListeners = /* @__PURE__ */ new Set();
@@ -36,7 +36,7 @@ async function resumeAll() {
 var initialActions = {};
 var sharedSessions = {};
 function toGlobalAppSessionId({ appId, identity, hostConfig }) {
-  const locationUrl = toValidWebsocketLocationUrl(hostConfig);
+  const locationUrl = _TFE7CAEAjs.toValidWebsocketLocationUrl.call(void 0, hostConfig);
   return identity ? locationUrl + "/" + appId + "/" + identity : locationUrl + "/" + appId;
 }
 async function runPendingInitialActions(initialActionsForApp, sharedSession, doc) {
@@ -83,16 +83,16 @@ function listenForWindowsAuthenticationInformation(session) {
   return authSuggestedInWebsocket;
 }
 async function createAndSetupEnigmaSession(props, canRetry) {
-  const { createEnigmaSession } = await import("./YDB23Q56.mjs");
+  const { createEnigmaSession } = await Promise.resolve().then(() => _interopRequireWildcard(require("./WFYCIHUQ.js")));
   const session = await createEnigmaSession(props);
   setupSessionListeners(session, props);
   let global;
-  if (await isWindows(props.hostConfig)) {
+  if (await _TFE7CAEAjs.isWindows.call(void 0, props.hostConfig)) {
     const loginInfoPromise = listenForWindowsAuthenticationInformation(session);
     global = await session.open();
     const loginInfo = await loginInfoPromise;
-    if (loginInfo?.mustAuthenticate) {
-      const action = await handleAuthenticationError({
+    if (_optionalChain([loginInfo, 'optionalAccess', _ => _.mustAuthenticate])) {
+      const action = await _TFE7CAEAjs.handleAuthenticationError.call(void 0, {
         headers: new Headers(),
         status: 101,
         canRetry,
@@ -389,8 +389,8 @@ async function checkConnectivity(hostConfig) {
     timeoutMs: 2e3,
     noCache: true
   };
-  const fetchRoot = invokeFetch("", { method, pathTemplate: "", options }).catch(catchFunc);
-  const fetchMe = invokeFetch("", { method, pathTemplate: "/api/v1/users/me", options }).catch(catchFunc);
+  const fetchRoot = _TFE7CAEAjs.invokeFetch.call(void 0, "", { method, pathTemplate: "", options }).catch(catchFunc);
+  const fetchMe = _TFE7CAEAjs.invokeFetch.call(void 0, "", { method, pathTemplate: "/api/v1/users/me", options }).catch(catchFunc);
   await Promise.all([fetchRoot, fetchMe]);
   return Promise.resolve(status);
 }
@@ -435,7 +435,7 @@ function getOrCreateSharedSession(props) {
 // src/qix/qix-functions.ts
 async function createSessionApp() {
   let sharedSession;
-  if ((await getPlatform()).isCloud) {
+  if ((await _TFE7CAEAjs.getPlatform.call(void 0, )).isCloud) {
     sharedSession = await getOrCreateSharedSession({ appId: `SessionApp_${Date.now()}` });
   } else {
     sharedSession = await getOrCreateSharedSession({
@@ -461,7 +461,7 @@ async function createSessionApp() {
       if (!alreadyClosed) {
         alreadyClosed = true;
         const defaultDelay = isBrowserEnvironment ? 5e3 : -1;
-        return sharedSession.removeClient(qixSessionAppSession, props?.websocketCloseDelay || defaultDelay);
+        return sharedSession.removeClient(qixSessionAppSession, _optionalChain([props, 'optionalAccess', _2 => _2.websocketCloseDelay]) || defaultDelay);
       }
       return Promise.resolve();
     }
@@ -500,7 +500,7 @@ function openAppSession(appIdOrProps) {
       if (!alreadyClosed) {
         alreadyClosed = true;
         const defaultDelay = isBrowserEnvironment ? 5e3 : -1;
-        return sharedSession.removeClient(qixAppSession, props?.websocketCloseDelay || defaultDelay);
+        return sharedSession.removeClient(qixAppSession, _optionalChain([props, 'optionalAccess', _3 => _3.websocketCloseDelay]) || defaultDelay);
       }
       return Promise.resolve();
     }
@@ -560,15 +560,15 @@ var qix = {
   resumeOnlyOnReattach
 };
 var qix_default = qix;
-export {
-  addInitialAppAction,
-  createSessionApp,
-  qix_default as default,
-  onCombinedWebSocketStateChange,
-  onWebSocketEvent,
-  openAppSession,
-  registerExternalAppSession,
-  resumeOnlyOnReattach,
-  resumeSuspendedSessions,
-  useAppHook
-};
+
+
+
+
+
+
+
+
+
+
+
+exports.addInitialAppAction = addInitialAppAction; exports.createSessionApp = createSessionApp; exports.default = qix_default; exports.onCombinedWebSocketStateChange = onCombinedWebSocketStateChange; exports.onWebSocketEvent = onWebSocketEvent; exports.openAppSession = openAppSession; exports.registerExternalAppSession = registerExternalAppSession; exports.resumeOnlyOnReattach = resumeOnlyOnReattach; exports.resumeSuspendedSessions = resumeSuspendedSessions; exports.useAppHook = useAppHook;
