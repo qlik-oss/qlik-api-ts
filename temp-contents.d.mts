@@ -1,6 +1,9 @@
 import { A as ApiCallOptions } from './global.types-5iFvFJvX.mjs';
 import './auth-types-nnUcWhuU.mjs';
 
+/**
+ * An Error object.
+ */
 type Error = {
     /** The API error code. */
     code: string;
@@ -18,6 +21,9 @@ type Error = {
     /** Title of the type of API Error. */
     title: string;
 };
+/**
+ * An array of Error objects.
+ */
 type Errors = {
     errors?: Error[];
     /** A way to trace the source of the error. */

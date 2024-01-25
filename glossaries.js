@@ -1,25 +1,25 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _DMU5PHUVjs = require('./chunks/DMU5PHUV.js');
-require('./chunks/MBVF2FVP.js');
+var _QMWU5E4Djs = require('./chunks/QMWU5E4D.js');
+require('./chunks/FG5GDUSZ.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/glossaries.ts
-var getGlossaries = async (query, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var getGlossaries = async (query, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "get",
   pathTemplate: "/api/v1/glossaries",
   query,
   options
 });
-var createGlossary = async (body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var createGlossary = async (body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "post",
   pathTemplate: "/api/v1/glossaries",
   body,
   contentType: "application/json",
   options
 });
-var importGlossary = async (query, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var importGlossary = async (query, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "post",
   pathTemplate: "/api/v1/glossaries/actions/import",
   query,
@@ -27,19 +27,19 @@ var importGlossary = async (query, body, options) => _DMU5PHUVjs.invokeFetch.cal
   contentType: "application/json",
   options
 });
-var deleteGlossary = async (id, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var deleteGlossary = async (id, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "delete",
   pathTemplate: "/api/v1/glossaries/{id}",
   pathVariables: { id },
   options
 });
-var getGlossary = async (id, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var getGlossary = async (id, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "get",
   pathTemplate: "/api/v1/glossaries/{id}",
   pathVariables: { id },
   options
 });
-var patchGlossary = async (id, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var patchGlossary = async (id, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "patch",
   pathTemplate: "/api/v1/glossaries/{id}",
   pathVariables: { id },
@@ -47,7 +47,7 @@ var patchGlossary = async (id, body, options) => _DMU5PHUVjs.invokeFetch.call(vo
   contentType: "application/json",
   options
 });
-var updateGlossary = async (id, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var updateGlossary = async (id, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "put",
   pathTemplate: "/api/v1/glossaries/{id}",
   pathVariables: { id },
@@ -55,20 +55,20 @@ var updateGlossary = async (id, body, options) => _DMU5PHUVjs.invokeFetch.call(v
   contentType: "application/json",
   options
 });
-var exportGlossary = async (id, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var exportGlossary = async (id, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "get",
   pathTemplate: "/api/v1/glossaries/{id}/actions/export",
   pathVariables: { id },
   options
 });
-var getGlossaryCategories = async (id, query, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var getGlossaryCategories = async (id, query, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "get",
   pathTemplate: "/api/v1/glossaries/{id}/categories",
   pathVariables: { id },
   query,
   options
 });
-var createGlossaryCategory = async (id, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var createGlossaryCategory = async (id, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "post",
   pathTemplate: "/api/v1/glossaries/{id}/categories",
   pathVariables: { id },
@@ -76,19 +76,19 @@ var createGlossaryCategory = async (id, body, options) => _DMU5PHUVjs.invokeFetc
   contentType: "application/json",
   options
 });
-var deleteGlossaryCategory = async (id, categoryId, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var deleteGlossaryCategory = async (id, categoryId, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "delete",
   pathTemplate: "/api/v1/glossaries/{id}/categories/{categoryId}",
   pathVariables: { id, categoryId },
   options
 });
-var getGlossaryCategory = async (id, categoryId, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var getGlossaryCategory = async (id, categoryId, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "get",
   pathTemplate: "/api/v1/glossaries/{id}/categories/{categoryId}",
   pathVariables: { id, categoryId },
   options
 });
-var patchGlossaryCategory = async (id, categoryId, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var patchGlossaryCategory = async (id, categoryId, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "patch",
   pathTemplate: "/api/v1/glossaries/{id}/categories/{categoryId}",
   pathVariables: { id, categoryId },
@@ -96,7 +96,7 @@ var patchGlossaryCategory = async (id, categoryId, body, options) => _DMU5PHUVjs
   contentType: "application/json",
   options
 });
-var updateGlossaryCategory = async (id, categoryId, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var updateGlossaryCategory = async (id, categoryId, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "put",
   pathTemplate: "/api/v1/glossaries/{id}/categories/{categoryId}",
   pathVariables: { id, categoryId },
@@ -104,14 +104,14 @@ var updateGlossaryCategory = async (id, categoryId, body, options) => _DMU5PHUVj
   contentType: "application/json",
   options
 });
-var getGlossaryTerms = async (id, query, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var getGlossaryTerms = async (id, query, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "get",
   pathTemplate: "/api/v1/glossaries/{id}/terms",
   pathVariables: { id },
   query,
   options
 });
-var createGlossaryTerm = async (id, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var createGlossaryTerm = async (id, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "post",
   pathTemplate: "/api/v1/glossaries/{id}/terms",
   pathVariables: { id },
@@ -119,19 +119,19 @@ var createGlossaryTerm = async (id, body, options) => _DMU5PHUVjs.invokeFetch.ca
   contentType: "application/json",
   options
 });
-var deleteGlossaryTerm = async (id, termId, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var deleteGlossaryTerm = async (id, termId, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "delete",
   pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}",
   pathVariables: { id, termId },
   options
 });
-var getGlossaryTerm = async (id, termId, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var getGlossaryTerm = async (id, termId, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "get",
   pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}",
   pathVariables: { id, termId },
   options
 });
-var patchGlossaryTerm = async (id, termId, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var patchGlossaryTerm = async (id, termId, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "patch",
   pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}",
   pathVariables: { id, termId },
@@ -139,7 +139,7 @@ var patchGlossaryTerm = async (id, termId, body, options) => _DMU5PHUVjs.invokeF
   contentType: "application/json",
   options
 });
-var updateGlossaryTerm = async (id, termId, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var updateGlossaryTerm = async (id, termId, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "put",
   pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}",
   pathVariables: { id, termId },
@@ -147,21 +147,21 @@ var updateGlossaryTerm = async (id, termId, body, options) => _DMU5PHUVjs.invoke
   contentType: "application/json",
   options
 });
-var changeGlossaryTermStatus = async (id, termId, query, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var changeGlossaryTermStatus = async (id, termId, query, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "post",
   pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}/actions/change-status",
   pathVariables: { id, termId },
   query,
   options
 });
-var getGlossaryTermLinks = async (id, termId, query, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var getGlossaryTermLinks = async (id, termId, query, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "get",
   pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}/links",
   pathVariables: { id, termId },
   query,
   options
 });
-var createGlossaryTermLink = async (id, termId, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var createGlossaryTermLink = async (id, termId, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "post",
   pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}/links",
   pathVariables: { id, termId },
@@ -169,7 +169,7 @@ var createGlossaryTermLink = async (id, termId, body, options) => _DMU5PHUVjs.in
   contentType: "application/json",
   options
 });
-var getGlossaryTermRevisions = async (id, termId, query, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "glossaries", {
+var getGlossaryTermRevisions = async (id, termId, query, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "glossaries", {
   method: "get",
   pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}/revisions",
   pathVariables: { id, termId },
@@ -177,7 +177,7 @@ var getGlossaryTermRevisions = async (id, termId, query, options) => _DMU5PHUVjs
   options
 });
 function clearCache() {
-  return _DMU5PHUVjs.clearApiCache.call(void 0, "glossaries");
+  return _QMWU5E4Djs.clearApiCache.call(void 0, "glossaries");
 }
 var glossariesExport = {
   getGlossaries,

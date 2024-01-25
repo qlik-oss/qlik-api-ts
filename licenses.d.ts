@@ -85,7 +85,8 @@ type AssignmentsResponse = {
         subject: string;
         /** Allotment type */
         type: string;
-        /** User ID */
+        /** @deprecated
+         * User ID */
         userId?: string;
     }[];
     links: {
@@ -122,7 +123,8 @@ type ConsumptionEventsResponse = {
     };
 };
 type ErrorResponse = {
-    /** Error type */
+    /** @deprecated
+     * Error type */
     error: string;
     errors: {
         /** Error code */
@@ -132,7 +134,8 @@ type ErrorResponse = {
         /** Error title */
         title: string;
     }[];
-    /** Error message */
+    /** @deprecated
+     * Error message */
     message: string;
 };
 type Href = {
@@ -292,7 +295,7 @@ type UpdateLicenseAssignmentsHttpError = {
  * @throws GetLicenseConsumptionHttpError
  */
 declare const getLicenseConsumption: (query: {
-    /** The filter for finding entries. */
+    /** The SCIM filter for the query. Filterable property is "endTime". */
     filter?: string;
     /** The preferred number of entries to return. */
     limit?: number;

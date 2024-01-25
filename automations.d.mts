@@ -217,6 +217,8 @@ type CreateAutomationHttpError = {
     status: number;
 };
 /**
+ * @deprecated
+ *
  * Retrieves the automation settings.
  *
  * @throws GetAutomationsSettingsHttpError
@@ -233,6 +235,8 @@ type GetAutomationsSettingsHttpError = {
     status: number;
 };
 /**
+ * @deprecated
+ *
  * Update the automation settings.
  *
  * @param body an object with the body content
@@ -541,12 +545,16 @@ interface AutomationsAPI {
      */
     createAutomation: typeof createAutomation;
     /**
+     * @deprecated
+     *
      * Retrieves the automation settings.
      *
      * @throws GetAutomationsSettingsHttpError
      */
     getAutomationsSettings: typeof getAutomationsSettings;
     /**
+     * @deprecated
+     *
      * Update the automation settings.
      *
      * @param body an object with the body content

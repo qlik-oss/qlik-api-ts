@@ -1,42 +1,42 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _DMU5PHUVjs = require('./chunks/DMU5PHUV.js');
-require('./chunks/MBVF2FVP.js');
+var _QMWU5E4Djs = require('./chunks/QMWU5E4D.js');
+require('./chunks/FG5GDUSZ.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/web-notifications.ts
-var getNotifications = async (query, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "web-notifications", {
+var getNotifications = async (query, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "web-notifications", {
   method: "get",
   pathTemplate: "/api/v1/web-notifications",
   query,
   options
 });
-var deleteNotifications = async (options) => _DMU5PHUVjs.invokeFetch.call(void 0, "web-notifications", {
+var deleteNotifications = async (options) => _QMWU5E4Djs.invokeFetch.call(void 0, "web-notifications", {
   method: "delete",
   pathTemplate: "/api/v1/web-notifications/all",
   options
 });
-var patchNotifications = async (body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "web-notifications", {
+var patchNotifications = async (body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "web-notifications", {
   method: "patch",
   pathTemplate: "/api/v1/web-notifications/all",
   body,
   contentType: "application/json",
   options
 });
-var deleteNotification = async (notificationId, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "web-notifications", {
+var deleteNotification = async (notificationId, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "web-notifications", {
   method: "delete",
   pathTemplate: "/api/v1/web-notifications/{notificationId}",
   pathVariables: { notificationId },
   options
 });
-var getNotification = async (notificationId, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "web-notifications", {
+var getNotification = async (notificationId, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "web-notifications", {
   method: "get",
   pathTemplate: "/api/v1/web-notifications/{notificationId}",
   pathVariables: { notificationId },
   options
 });
-var patchNotification = async (notificationId, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "web-notifications", {
+var patchNotification = async (notificationId, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "web-notifications", {
   method: "patch",
   pathTemplate: "/api/v1/web-notifications/{notificationId}",
   pathVariables: { notificationId },
@@ -45,7 +45,7 @@ var patchNotification = async (notificationId, body, options) => _DMU5PHUVjs.inv
   options
 });
 function clearCache() {
-  return _DMU5PHUVjs.clearApiCache.call(void 0, "web-notifications");
+  return _QMWU5E4Djs.clearApiCache.call(void 0, "web-notifications");
 }
 var webNotificationsExport = {
   getNotifications,

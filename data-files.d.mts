@@ -33,10 +33,16 @@ type ConnectionsResponse = {
     /** The type of the connection. */
     type: string;
 };
+/**
+ * Specifies the list of data file change space operations in a single batch.
+ */
 type DataFileBatchChangeSpaceRequest = {
     /** The list of data files to delete. */
     "change-space": BatchChangeSpaceItem[];
 };
+/**
+ * Specifies the list of data files to be deleted in a single batch.
+ */
 type DataFileBatchDeleteRequest = {
     /** The list of data files to delete. */
     delete: BatchDeleteItem[];

@@ -1,10 +1,10 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
-var _MBVF2FVPjs = require('./MBVF2FVP.js');
+var _FG5GDUSZjs = require('./FG5GDUSZ.js');
 
 // src/public/qix.ts
 function openAppSession(appSessionProps) {
-  const appSessionPromise = _MBVF2FVPjs.getQixRuntimeModule.call(void 0, appSessionProps.hostConfig).then(
+  const appSessionPromise = _FG5GDUSZjs.getQixRuntimeModule.call(void 0, appSessionProps.hostConfig).then(
     (impl) => impl.openAppSession(appSessionProps)
   );
   const appSessionProxy = {

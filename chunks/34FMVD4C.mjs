@@ -1,12 +1,13 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { newObj[key] = obj[key]; } } } newObj.default = obj; return newObj; } } function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; } function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
-
-
-
-var _TFE7CAEAjs = require('./TFE7CAEA.js');
-require('./4HB3TAEO.js');
+import {
+  generateRandomString,
+  getRestCallAuthParams,
+  getWebSocketAuthParams,
+  toValidWebsocketLocationUrl
+} from "./VMS4MOCI.mjs";
+import "./VSY5YIQY.mjs";
 
 // src/qix/session/enigma-session.ts
-var _enigmajs = require('enigma.js'); var _enigmajs2 = _interopRequireDefault(_enigmajs);
+import enigma from "enigma.js";
 
 // src/qix/session/schema/engine-api.js
 var engine_api_default = {
@@ -8660,11 +8661,11 @@ var migration_default = {
 };
 
 // src/qix/session/mixins/utils/json-patch.js
-var _isPlainObjectjs = require('lodash/isPlainObject.js'); var _isPlainObjectjs2 = _interopRequireDefault(_isPlainObjectjs);
-var _mergejs = require('lodash/merge.js'); var _mergejs2 = _interopRequireDefault(_mergejs);
+import isPlainObject from "lodash/isPlainObject.js";
+import merge from "lodash/merge.js";
 var JSONPatch = {};
-var extend = _mergejs2.default;
-var isObject = _isPlainObjectjs2.default;
+var extend = merge;
+var isObject = isPlainObject;
 var isArray = Array.isArray;
 var isUndef = function(v) {
   return typeof v === "undefined";
@@ -9505,7 +9506,7 @@ var mixin4 = {
   extend: {
     getOrCreateSessionObject(props) {
       const app = this;
-      const id = _optionalChain([props, 'access', _ => _.qInfo, 'optionalAccess', _2 => _2.qId]);
+      const id = props.qInfo?.qId;
       if (!id)
         throw new Error("Invalid list definition. No qId defined");
       if (!app._listCache[id]) {
@@ -9532,7 +9533,7 @@ var mixin4 = {
       if (outKey) {
         outKey = outKey.replace(/Def$/g, "");
       }
-      const id = _optionalChain([listDef, 'access', _3 => _3.qInfo, 'optionalAccess', _4 => _4.qId]);
+      const id = listDef.qInfo?.qId;
       if (!id)
         throw new Error("Invalid list definition. No qId defined");
       if (!app._listCache[id]) {
@@ -9675,6 +9676,148 @@ var mixin5 = {
   }
 };
 
+// src/qix/session/mixins/doc/create-client-objects.js
+import merge2 from "lodash/merge.js";
+var mixin6 = {
+  types: "Doc",
+  override: {
+    createBookmark(_createBookmark, props) {
+      return _createBookmark(
+        merge2(
+          {},
+          {
+            qInfo: {
+              qType: "bookmark"
+            },
+            qMetaDef: {
+              title: "",
+              description: ""
+            },
+            creationDate: (/* @__PURE__ */ new Date()).toISOString()
+          },
+          props
+        )
+      );
+    },
+    createBookmarkEx(_createBookmarkEx, props, patchObjs) {
+      return _createBookmarkEx(
+        merge2(
+          true,
+          {
+            qInfo: {
+              qType: "bookmark"
+            },
+            qMetaDef: {
+              title: "",
+              description: ""
+            },
+            creationDate: (/* @__PURE__ */ new Date()).toISOString()
+          },
+          props
+        ),
+        patchObjs
+      );
+    }
+  },
+  extend: {
+    /**
+     * Creates a Qlik Sense Sheet
+     * @param {Object} [props] The sheet properties to override
+     * @param {String} [props.title] - The new sheet's title
+     * @param {String} [props.description] - The new sheet's description
+     * @param {String} [props.thumbnail] - URL to a thumbnail image
+     * @param {String} [props.rank] - Sorting rank
+     * @param {Number} [props.rows] - number of grid rows
+     * @param {Number} [props.columns] - number of grid columns
+     * @param {Number} [props.customRowBase] - number of rows for grid resolution
+     * @param {String} [props.gridResolution] - number of grid cells: small|medium|large
+     * @param {Object} [props.layoutOptions] - layout options for the sheet
+     *
+     * @returns {Promise<Object,Error>} A Promise that returns an api to the new sheet if resolved or an Error if rejected
+     */
+    createSheet(props) {
+      return this.createObject({
+        qInfo: {
+          // generating id on client side to support multiple undo create operations
+          // raised an engine bug to solve this, when resolved can be changed
+          // TODO: update the jira id for engine bug once created
+          qId: generateRandomString(43),
+          qType: "sheet"
+        },
+        qMetaDef: {
+          title: props.title || "",
+          description: props.description || ""
+        },
+        rank: typeof props.rank !== "undefined" ? props.rank : -1,
+        thumbnail: { qStaticContentUrlDef: props.thumbnail || null },
+        columns: props.columns || 24,
+        rows: props.rows || 12,
+        cells: [],
+        customRowBase: props.rows || void 0,
+        gridResolution: props.gridResolution || void 0,
+        layoutOptions: props.layoutOptions || void 0,
+        qChildListDef: {
+          qData: {
+            title: "/title"
+          }
+        }
+      });
+    },
+    /**
+     * Creates a Qlik Sense Story
+     * @param {Object} [props] The story properties to override
+     * @param {String} [props.title] - The new story's title
+     * @param {String} [props.description] - The new story's description
+     * @param {String} [props.thumbnail] - URL to a thumbnail image
+     * @param {String} [props.rank] - Sorting rank
+     * @returns {Promise<Object,Error>} A Promise that returns an api to the new story if resolved or an Error if rejected
+     */
+    createStory(props) {
+      return this.createObject({
+        qInfo: {
+          // generating id on client side to support multiple undo create operations
+          // raised an engine bug to solve this, when resolved can be changed
+          qId: util.generateId(),
+          qType: "story"
+        },
+        qMetaDef: {
+          title: props.title || "",
+          description: ""
+        },
+        rank: typeof props.rank !== "undefined" ? props.rank : -1,
+        thumbnail: { qStaticContentUrlDef: props.thumbnail || null },
+        qChildListDef: {
+          qData: {
+            title: "/title",
+            rank: "/rank"
+          }
+        }
+      });
+    },
+    /**
+     * Creates a Qlik Sense Master Object
+     * @param {Object} [props] The properties to override
+     * @param {String} [props.title] - The master object title
+     * @param {String} [props.description] - The master object description
+     * @param {String} [props.tags] - The list of tags
+     * @returns {Promise<Object,Error>} A Promise that returns an api to the new master object if resolved or an Error if rejected
+     */
+    createMasterObject(props) {
+      props = props || {};
+      return this.createObject({
+        qInfo: {
+          qType: "masterobject"
+        },
+        qMetaDef: {
+          title: props.title || "",
+          description: props.description || "",
+          tags: props.tags || ""
+        }
+      });
+    }
+  }
+};
+
 // src/qix/session/mixins/doc/current-selections.ts
 var currentSelectionProps = {
   qInfo: {
@@ -9683,7 +9826,7 @@ var currentSelectionProps = {
   },
   qSelectionObjectDef: {}
 };
-var mixin6 = {
+var mixin7 = {
   types: ["Doc"],
   extend: {
     getCurrentSelectionObject() {
@@ -9710,7 +9853,7 @@ var dimensionListProps = {
     }
   }
 };
-var mixin7 = {
+var mixin8 = {
   types: "Doc",
   extend: {
     getDimensionList() {
@@ -9736,7 +9879,7 @@ var listProps = {
     }
   }
 };
-var mixin8 = {
+var mixin9 = {
   types: "Doc",
   extend: {
     getDynamicAppViewList() {
@@ -9790,7 +9933,7 @@ var onTheFlyWithHiddenListProps = {
     qShowDefinitionOnly: true
   }
 };
-var mixin9 = {
+var mixin10 = {
   types: "Doc",
   extend: {
     getFieldList() {
@@ -9824,7 +9967,7 @@ var masterObjectListProps = {
     }
   }
 };
-var mixin10 = {
+var mixin11 = {
   types: "Doc",
   extend: {
     getMasterObjectList() {
@@ -9851,7 +9994,7 @@ var measureListProps = {
     }
   }
 };
-var mixin11 = {
+var mixin12 = {
   types: "Doc",
   extend: {
     getMeasureList() {
@@ -9877,7 +10020,7 @@ var sheetListProps = {
     }
   }
 };
-var mixin12 = {
+var mixin13 = {
   types: "Doc",
   extend: {
     getODAGAppLinkList() {
@@ -9915,7 +10058,7 @@ var sheetListProps2 = {
     }
   }
 };
-var mixin13 = {
+var mixin14 = {
   types: "Doc",
   extend: {
     /**
@@ -9950,7 +10093,7 @@ var snapshotListProps = {
     }
   }
 };
-var mixin14 = {
+var mixin15 = {
   types: "Doc",
   extend: {
     getSnapshotListObject() {
@@ -9978,7 +10121,7 @@ var storyListProps = {
     }
   }
 };
-var mixin15 = {
+var mixin16 = {
   types: "Doc",
   extend: {
     getStoryList() {
@@ -9999,7 +10142,7 @@ var undoInfoProps = {
   qUndoInfoDef: {},
   markers: []
 };
-var mixin16 = {
+var mixin17 = {
   types: ["Doc"],
   extend: {
     getUndoInfoObject() {
@@ -10024,7 +10167,7 @@ var variableListProps = {
     }
   }
 };
-var mixin17 = {
+var mixin18 = {
   types: "Doc",
   extend: {
     getVariableList() {
@@ -10044,16 +10187,17 @@ var mixins3 = [
   mixin5,
   mixin6,
   mixin7,
-  mixin9,
+  mixin8,
   mixin10,
   mixin11,
   mixin12,
-  mixin8,
   mixin13,
+  mixin9,
   mixin14,
   mixin15,
   mixin16,
-  mixin17
+  mixin17,
+  mixin18
 ];
 
 // src/qix/session/mixins/genericobject/effective-properties.js
@@ -10070,7 +10214,7 @@ function updateQAttribute(properties) {
     });
   }
 }
-var mixin18 = {
+var mixin19 = {
   types: ["GenericObject"],
   override: {
     setProperties(_setProperties, properties) {
@@ -10089,7 +10233,7 @@ var mixin18 = {
 };
 
 // src/qix/session/mixins/genericobject/export-data.js
-var mixin19 = {
+var mixin20 = {
   types: "GenericObject",
   override: {
     /**
@@ -10116,7 +10260,7 @@ var mixin19 = {
 };
 
 // src/qix/session/mixins/genericobject/publishing.js
-var mixin20 = {
+var mixin21 = {
   types: ["GenericObject"],
   override: {
     /**
@@ -10149,7 +10293,7 @@ var mixin20 = {
 };
 
 // src/qix/session/mixins/genericobject/index.ts
-var mixins4 = [mixin19, mixin18, mixin20];
+var mixins4 = [mixin20, mixin19, mixin21];
 
 // src/qix/session/mixins/index.ts
 var mixins5 = [...mixins3, ...mixins, ...mixins4, ...mixins2];
@@ -10160,15 +10304,15 @@ async function createEnigmaSession({
   identity,
   hostConfig
 }) {
-  const locationUrl = _TFE7CAEAjs.toValidWebsocketLocationUrl.call(void 0, hostConfig);
+  const locationUrl = toValidWebsocketLocationUrl(hostConfig);
   const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
   const identityPart = identity ? `/identity/${identity}` : "";
   let url = `${locationUrl}/app/${appId}${identityPart}?reloadUri=${reloadUri}`.replace(/^http/, "ws");
   const isNodeEnvironment = typeof window === "undefined";
   let createSocketMethod;
   if (isNodeEnvironment) {
-    const { headers, queryParams } = await _TFE7CAEAjs.getRestCallAuthParams.call(void 0, { hostConfig, method: "POST" });
-    const WS = (await Promise.resolve().then(() => _interopRequireWildcard(require("ws")))).default;
+    const { headers, queryParams } = await getRestCallAuthParams({ hostConfig, method: "POST" });
+    const WS = (await import("ws")).default;
     Object.entries(queryParams).forEach(([key, value]) => {
       url = `${url}&${key}=${value}`;
     });
@@ -10176,13 +10320,13 @@ async function createEnigmaSession({
       headers
     });
   } else {
-    const { queryParams } = await _TFE7CAEAjs.getWebSocketAuthParams.call(void 0, { hostConfig });
+    const { queryParams } = await getWebSocketAuthParams({ hostConfig });
     Object.entries(queryParams).forEach(([key, value]) => {
       url = `${url}&${key}=${value}`;
     });
     createSocketMethod = (socketUrl) => new WebSocket(socketUrl);
   }
-  return _enigmajs2.default.create({
+  return enigma.create({
     schema: engine_api_default,
     mixins: mixins5,
     url,
@@ -10196,6 +10340,6 @@ async function createEnigmaSession({
     ]
   });
 }
-
-
-exports.createEnigmaSession = createEnigmaSession;
+export {
+  createEnigmaSession
+};

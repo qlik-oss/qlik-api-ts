@@ -1,6 +1,9 @@
 import { A as ApiCallOptions } from './global.types-TzVhFPid.js';
 import './auth-types-nnUcWhuU.js';
 
+/**
+ * An array of group references.
+ */
 type AssignedGroups = {
     /** An array of role references. */
     assignedRoles?: AssignedRoles;
@@ -9,6 +12,9 @@ type AssignedGroups = {
     /** The group name */
     readonly name: string;
 }[];
+/**
+ * An array of role references.
+ */
 type AssignedRoles = {
     /** The unique role identitier */
     id: string;
@@ -21,15 +27,27 @@ type AssignedRoles = {
     /** The type of role */
     readonly type: "default";
 }[];
+/**
+ * An array of role reference identifiers.
+ */
 type AssignedRolesRefIDs = {
     /** The unique role identitier */
     id: string;
 }[];
+/**
+ * An array of role reference names.
+ */
 type AssignedRolesRefNames = {
     /** The name of the role */
     name: string;
 }[];
+/**
+ * An array of scopes assigned to user
+ */
 type AssignedScopes = string[];
+/**
+ * An error object describing the error.
+ */
 type Error = {
     /** The error code. */
     code: string;
@@ -49,6 +67,9 @@ type Error = {
     /** Summary of the problem. */
     title: string;
 };
+/**
+ * Error object.
+ */
 type ErrorItem = {
     /** Error code */
     code: number;
@@ -57,6 +78,9 @@ type ErrorItem = {
     /** Summary of the problem */
     title: string;
 };
+/**
+ * The error response object describing the error from the handling of an HTTP request.
+ */
 type Errors = {
     /** An array of errors related to the operation. */
     errors?: Error[];
@@ -66,13 +90,22 @@ type Errors = {
 type ErrorsResponse = {
     errors?: ErrorItem[];
 };
+/**
+ * An advanced query filter to be used for complex user querying in the tenant.
+ */
 type Filter = {
     /** The advanced filtering to be applied the query. All conditional statements within this query parameter are case insensitive. */
     filter?: string;
 };
+/**
+ * Data list - ResultItem or ErrorItem for each InviteeItem.
+ */
 type InviteDataResponse = {
     data?: (ResultItem | InviteErrorItem)[];
 };
+/**
+ * Error object.
+ */
 type InviteErrorItem = ErrorItem & {
     /** Error code - | HTTP Status code | 1001 - Active User | 1002 - Disabled User | 1003 - Default External Dependency Error | */
     code?: string;
@@ -95,6 +128,9 @@ type InviteRequestData = {
     /** List of invitees who should receive an invite email. */
     invitees?: InviteItem[];
 };
+/**
+ * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
+ */
 type JSONPatch = {
     /** The operation to be performed. */
     op: "replace" | "set (Deprecated)" | "unset (Deprecated)" | "add (Deprecated)" | "renew";
@@ -103,11 +139,22 @@ type JSONPatch = {
     /** The value to be used for this operation. */
     value: string | boolean | unknown[] | AssignedRolesRefIDs | AssignedRolesRefNames;
 };
+/**
+ * An array of JSON Patch documents
+ */
 type JSONPatchArray = JSONPatch[];
+/**
+ * @deprecated
+ *
+ * An object containing the metadata for the user configuration.
+ */
 type Metadata = {
     /** List of system roles to which the user can be assigned. */
     valid_roles?: string[];
 };
+/**
+ * Invitee result item
+ */
 type ResultItem = {
     /** Email specified for this invitee */
     email: string;
@@ -118,6 +165,9 @@ type ResultItem = {
     /** UserId for this invitee */
     userId: string;
 };
+/**
+ * A user object.
+ */
 type User = {
     /** An array of group references. */
     assignedGroups?: AssignedGroups;
@@ -125,7 +175,8 @@ type User = {
     assignedRoles?: AssignedRoles;
     /** An array of scopes assigned to user */
     readonly assignedScopes?: AssignedScopes;
-    /** Deprecated. Use `createdAt` instead. */
+    /** @deprecated
+     * Deprecated. Use `createdAt` instead. */
     readonly created?: string;
     /** The timestamp for when the user record was created. */
     readonly createdAt?: string;
@@ -135,7 +186,8 @@ type User = {
     readonly id: string;
     /** The number of seconds until the user invitation will expire. */
     readonly inviteExpiry?: number;
-    /** Deprecated. Use `lastUpdatedAt` instead. */
+    /** @deprecated
+     * Deprecated. Use `lastUpdatedAt` instead. */
     readonly lastUpdated?: string;
     /** The timestamp for when the user record was last updated. */
     readonly lastUpdatedAt?: string;
@@ -157,7 +209,8 @@ type User = {
     preferredLocale?: string;
     /** Represents the end-user's preferred time zone. */
     preferredZoneinfo?: string;
-    /** List of system roles to which the user has been assigned. Only returned when permitted by access control. Deprecated. Use `assignedRoles` instead. */
+    /** @deprecated
+     * List of system roles to which the user has been assigned. Only returned when permitted by access control. Deprecated. Use `assignedRoles` instead. */
     roles?: ("TenantAdmin" | "Developer" | "AnalyticsAdmin" | "DataAdmin" | "DataSpaceCreator" | "ManagedSpaceCreator" | "SharedSpaceCreator")[];
     /** The status of the user within the tenant. */
     status?: "active" | "invited" | "disabled" | "deleted";
@@ -168,6 +221,9 @@ type User = {
     /** Represents the end-user's time zone. */
     zoneinfo?: string;
 };
+/**
+ * The result object for the user count.
+ */
 type UserCount = {
     /** The total number of users in the tenant. */
     total: number;
@@ -181,7 +237,8 @@ type UserPostSchema = {
     name?: string;
     /** A static url linking to the avatar of the user. */
     picture?: string;
-    /** List of system roles to which the user has been assigned. Only returned when permitted by access control. */
+    /** @deprecated
+     * List of system roles to which the user has been assigned. Only returned when permitted by access control. */
     roles?: ("TenantAdmin" | "Developer" | "AnalyticsAdmin" | "DataAdmin" | "DataSpaceCreator" | "ManagedSpaceCreator" | "SharedSpaceCreator")[];
     /** The status of the created user within the tenant. */
     status?: "invited";
@@ -219,9 +276,11 @@ type Users = {
  * @throws GetUsersHttpError
  */
 declare const getUsers: (query: {
-    /** The email to filter by. Deprecated. Use the new `filter` parameter to provide an advanced query filter. */
+    /** @deprecated
+     * The email to filter by. Deprecated. Use the new `filter` parameter to provide an advanced query filter. */
     email?: string;
-    /** Get users with IDs that are lower than the target user ID. Cannot be used in conjunction with startingAfter. Deprecated. Use `prev` instead. */
+    /** @deprecated
+     * Get users with IDs that are lower than the target user ID. Cannot be used in conjunction with startingAfter. Deprecated. Use `prev` instead. */
     endingBefore?: string;
     /** A comma-delimited string of the requested fields per entity. If the 'links' value is omitted, then the entity HATEOAS link will also be omitted. */
     fields?: string;
@@ -261,21 +320,28 @@ declare const getUsers: (query: {
     next?: string;
     /** Get users that come before this cursor value when sorted. Cannot be used in conjunction with `next`. */
     prev?: string;
-    /** The role to filter by. Deprecated. */
+    /** @deprecated
+     * The role to filter by. Deprecated. */
     role?: string;
     /** The field to sort by, with +/- prefix indicating sort order */
     sort?: "name" | "+name" | "-name";
-    /** The user parameter to sort by. Deprecated. Use `sort` instead. */
+    /** @deprecated
+     * The user parameter to sort by. Deprecated. Use `sort` instead. */
     sortBy?: "name";
-    /** The sort order, either ascending or descending. Deprecated. Use `sort` instead. */
+    /** @deprecated
+     * The sort order, either ascending or descending. Deprecated. Use `sort` instead. */
     sortOrder?: "asc" | "desc";
-    /** Get users with IDs that are higher than the target user ID. Cannot be used in conjunction with endingBefore. Deprecated. Use `next` instead. */
+    /** @deprecated
+     * Get users with IDs that are higher than the target user ID. Cannot be used in conjunction with endingBefore. Deprecated. Use `next` instead. */
     startingAfter?: string;
-    /** The status to filter by. Supports multiple values delimited by commas. Deprecated. Use the new `filter` parameter to provide an advanced query filter. */
+    /** @deprecated
+     * The status to filter by. Supports multiple values delimited by commas. Deprecated. Use the new `filter` parameter to provide an advanced query filter. */
     status?: "active" | "invited" | "disabled" | "deleted";
-    /** The subject to filter by. Deprecated. Use the new `filter` parameter to provide an advanced query filter. */
+    /** @deprecated
+     * The subject to filter by. Deprecated. Use the new `filter` parameter to provide an advanced query filter. */
     subject?: string;
-    /** The tenant ID to filter by. Deprecated. */
+    /** @deprecated
+     * The tenant ID to filter by. Deprecated. */
     tenantId?: string;
     /** Whether to return a total match count in the result. Defaults to false. It will trigger an extra DB query to count, reducing the efficiency of the endpoint. */
     totalResults?: boolean;
@@ -316,7 +382,8 @@ type CreateUserHttpError = {
  * @throws CountUsersHttpError
  */
 declare const countUsers: (query: {
-    /** The tenant ID to filter by. */
+    /** @deprecated
+     * The tenant ID to filter by. */
     tenantId?: string;
 }, options?: ApiCallOptions) => Promise<CountUsersHttpResponse>;
 type CountUsersHttpResponse = {
@@ -394,6 +461,8 @@ type GetMyUserHttpError = {
     status: number;
 };
 /**
+ * @deprecated
+ *
  * Returns the metadata with regard to the user configuration. Deprecated, use GET /v1/roles instead.
  *
  * @throws GetUsersMetadataHttpError
@@ -519,6 +588,8 @@ interface UsersAPI {
      */
     getMyUser: typeof getMyUser;
     /**
+     * @deprecated
+     *
      * Returns the metadata with regard to the user configuration. Deprecated, use GET /v1/roles instead.
      *
      * @throws GetUsersMetadataHttpError

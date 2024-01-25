@@ -118,6 +118,9 @@ type WebhookList = {
         self?: Link;
     };
 };
+/**
+ * A JSON Patch document as defined in https://datatracker.ietf.org/doc/html/rfc6902
+ */
 type WebhookPatch = {
     /** The operation to be performed */
     op: "add" | "remove" | "replace";

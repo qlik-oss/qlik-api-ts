@@ -1,37 +1,37 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _DMU5PHUVjs = require('./chunks/DMU5PHUV.js');
-require('./chunks/MBVF2FVP.js');
+var _QMWU5E4Djs = require('./chunks/QMWU5E4D.js');
+require('./chunks/FG5GDUSZ.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/reload-tasks.ts
-var getReloadTasks = async (query, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "reload-tasks", {
+var getReloadTasks = async (query, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "reload-tasks", {
   method: "get",
   pathTemplate: "/api/v1/reload-tasks",
   query,
   options
 });
-var createReloadTask = async (body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "reload-tasks", {
+var createReloadTask = async (body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "reload-tasks", {
   method: "post",
   pathTemplate: "/api/v1/reload-tasks",
   body,
   contentType: "application/json",
   options
 });
-var deleteReloadTask = async (taskId, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "reload-tasks", {
+var deleteReloadTask = async (taskId, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "reload-tasks", {
   method: "delete",
   pathTemplate: "/api/v1/reload-tasks/{taskId}",
   pathVariables: { taskId },
   options
 });
-var getReloadTask = async (taskId, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "reload-tasks", {
+var getReloadTask = async (taskId, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "reload-tasks", {
   method: "get",
   pathTemplate: "/api/v1/reload-tasks/{taskId}",
   pathVariables: { taskId },
   options
 });
-var updateReloadTask = async (taskId, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "reload-tasks", {
+var updateReloadTask = async (taskId, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "reload-tasks", {
   method: "put",
   pathTemplate: "/api/v1/reload-tasks/{taskId}",
   pathVariables: { taskId },
@@ -40,7 +40,7 @@ var updateReloadTask = async (taskId, body, options) => _DMU5PHUVjs.invokeFetch.
   options
 });
 function clearCache() {
-  return _DMU5PHUVjs.clearApiCache.call(void 0, "reload-tasks");
+  return _QMWU5E4Djs.clearApiCache.call(void 0, "reload-tasks");
 }
 var reloadTasksExport = {
   getReloadTasks,

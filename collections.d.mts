@@ -22,9 +22,15 @@ type CollectionsCreateCollectionRequestBody = {
     name: string;
     type: CollectionTypes;
 };
+/**
+ * ListCollectionItemsResponseBody result type
+ */
 type CollectionsListCollectionItemsResponseBody = {
     data: ItemResultResponseBody[];
 };
+/**
+ * ListCollectionsResponseBody result type
+ */
 type CollectionsListCollectionsResponseBody = {
     data: CollectionResultResponseBody[];
     links: CollectionsLinksResponseBody;
@@ -52,10 +58,16 @@ type CollectionLinksResponseBody = {
     items?: Link;
     self?: Link;
 };
+/**
+ * Collection metadata and computed fields.
+ */
 type CollectionMetaResponseBody = {
     /** Multiple items. */
     items?: ItemsResultResponseBody;
 };
+/**
+ * A collection.
+ */
 type CollectionResultResponseBody = {
     /** The RFC3339 datetime when the collection was created. */
     createdAt: string;
@@ -92,6 +104,9 @@ type ItemLinksResponseBody = {
     self?: Link;
     thumbnail?: Link;
 };
+/**
+ * Item metadata and computed fields.
+ */
 type ItemMetaResponseBody = {
     /** The actions that the user can perform on the item. */
     actions: string[];
@@ -102,7 +117,13 @@ type ItemMetaResponseBody = {
     /** An array of tags that the item is part of. */
     tags: ItemTagResponseBody[];
 };
+/**
+ * The case-sensitive string defining the item's type.
+ */
 type ItemResourceTypeEnum = "app" | "collection" | "qlikview" | "insight" | "qvapp" | "genericlink" | "sharingservicetask" | "note" | "dataasset" | "dataset" | "automation" | "automl-experiment" | "automl-deployment";
+/**
+ * An item.
+ */
 type ItemResultResponseBody = {
     /** The actions that the user can perform on the item. */
     actions: string[];
@@ -154,6 +175,9 @@ type ItemResultResponseBody = {
     /** ID of the user who last updated the item. This is only populated if the JWT contains a userId. */
     updaterId?: string;
 };
+/**
+ * Holds basic information about a tag or collection.
+ */
 type ItemTagResponseBody = {
     /** The ID of the tag/collection. */
     id: string;
@@ -191,6 +215,9 @@ type ItemsResourceSizeResponseBody = {
     /** Size of the app in memory in bytes. */
     appMemory?: number;
 };
+/**
+ * Multiple items.
+ */
 type ItemsResultResponseBody = {
     data: ItemResultResponseBody[];
     links: ItemsLinksResponseBody;
@@ -381,7 +408,8 @@ declare const getCollectionItems: (collectionId: string, query: {
     resourceLink?: string | undefined;
     /** The case-sensitive string used to search for an item by resourceType. */
     resourceType?: ItemResourceTypeEnum | undefined;
-    /** Whether or not to return items in a shared space. */
+    /** @deprecated
+     * Whether or not to return items in a shared space. */
     shared?: boolean | undefined;
     /** The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively. */
     sort?: "-name" | "+name" | "+createdAt" | "-createdAt" | "+updatedAt" | "-updatedAt" | undefined;

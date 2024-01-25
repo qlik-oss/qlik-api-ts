@@ -1,6 +1,9 @@
 import { A as ApiCallOptions } from './global.types-TzVhFPid.js';
 import './auth-types-nnUcWhuU.js';
 
+/**
+ * An error object describing the error.
+ */
 type Error = {
     /** The error code. */
     code: string;
@@ -20,12 +23,18 @@ type Error = {
     /** Summary of the problem. */
     title: string;
 };
+/**
+ * The error response object describing the error from the handling of an HTTP request.
+ */
 type Errors = {
     /** An array of errors related to the operation. */
     errors?: Error[];
     /** A unique identifier for tracing the error. */
     traceId?: string;
 };
+/**
+ * A web integration object.
+ */
 type WebIntegration = {
     /** The time the web integration was created. */
     readonly created?: string;
@@ -42,6 +51,9 @@ type WebIntegration = {
     /** The origins that are allowed to make requests to the tenant. */
     validOrigins?: string[];
 };
+/**
+ * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
+ */
 type WebIntegrationPatch = {
     /** The operation to be performed. */
     op: "replace";
@@ -51,6 +63,9 @@ type WebIntegrationPatch = {
     value: string;
 };
 type WebIntegrationPatchSchema = WebIntegrationPatch[];
+/**
+ * The creation of a web integration response.
+ */
 type WebIntegrationPost = {
     /** The time the web integration was created. */
     readonly created?: string;
@@ -81,6 +96,9 @@ type WebIntegrationPostSchema = {
     /** The origins that are allowed to make requests to the tenant. */
     validOrigins?: string[];
 };
+/**
+ * An array of web integration objects.
+ */
 type WebIntegrations = {
     /** Properties of web integrations in a given tenant. */
     data?: WebIntegration[];

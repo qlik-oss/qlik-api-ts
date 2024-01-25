@@ -1,6 +1,9 @@
 import { A as ApiCallOptions } from './global.types-TzVhFPid.js';
 import './auth-types-nnUcWhuU.js';
 
+/**
+ * An error object.
+ */
 type Error = {
     /** The error code. */
     code: string;
@@ -11,9 +14,15 @@ type Error = {
     /** Summary of the problem. */
     title: string;
 };
+/**
+ * A representation of the errors encountered from the HTTP request.
+ */
 type Errors = {
     errors?: Error[];
 };
+/**
+ * Notifications links
+ */
 type Links = {
     next?: {
         href?: string;
@@ -25,6 +34,9 @@ type Links = {
         href?: string;
     };
 };
+/**
+ * Notifications meta data
+ */
 type Meta = {
     /** The total number of unread notification. */
     unreadCount?: number;
@@ -43,6 +55,9 @@ type Notification = {
     readonly updatedAt: string;
     readonly userId: string;
 };
+/**
+ * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
+ */
 type NotificationPatch = {
     /** The operation to be performed. */
     op: "replace";
@@ -51,6 +66,9 @@ type NotificationPatch = {
     /** The value to be used for this operation. */
     value: string;
 };
+/**
+ * An array of JSON Patch documents
+ */
 type NotificationPatchSchema = NotificationPatch[];
 type Notifications = {
     data?: Notification[];

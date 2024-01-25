@@ -1,6 +1,9 @@
 import { A as ApiCallOptions } from './global.types-5iFvFJvX.mjs';
 import './auth-types-nnUcWhuU.mjs';
 
+/**
+ * An error object describing the error.
+ */
 type Error = {
     /** The error code. */
     code: string;
@@ -18,12 +21,18 @@ type Error = {
     /** Summary of the problem. */
     title: string;
 };
+/**
+ * The error response object describing the error from the handling of an HTTP request.
+ */
 type Errors = {
     /** An array of errors related to the operation. */
     errors?: Error[];
     /** A unique identifier for tracing the error. */
     traceId?: string;
 };
+/**
+ * Contains pagination links
+ */
 type Links = {
     /** Link to the next page of items */
     next?: {
@@ -59,7 +68,7 @@ type Role = {
     readonly createdBy?: string;
     /** Descriptive text for the role. */
     description: string;
-    /** Indicate if this role will trigger promotion to full user in STP */
+    /** Indicate whether this role will trigger promotion of a user from a basic to a full user on tenants with a capacity-based subscription. Does not apply to tenants with a user-based subscription. */
     readonly fullUser?: boolean;
     /** The unique identifier for the role. */
     readonly id: string;

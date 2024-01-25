@@ -1,6 +1,9 @@
 import { A as ApiCallOptions } from './global.types-TzVhFPid.js';
 import './auth-types-nnUcWhuU.js';
 
+/**
+ * The supported actions for user-created spaces like Shared or Managed spaces.
+ */
 type ActionName = "create" | "read" | "update" | "delete" | "publish";
 type Assignment = {
     /** The userId or groupId based on the type. */
@@ -35,6 +38,9 @@ type AssignmentCreate = {
     /** The type of assignment such as user or group */
     type: AssignmentType;
 };
+/**
+ * The type of assignment such as user or group
+ */
 type AssignmentType = "user" | "group";
 type AssignmentUpdate = {
     /** The roles assigned to the assigneeId. */
@@ -52,6 +58,9 @@ type Assignments = {
         count: number;
     };
 };
+/**
+ * An error object.
+ */
 type Error = {
     /** The error code. */
     code: string;
@@ -71,21 +80,26 @@ type Error = {
     title: string;
 };
 type Errors = {
-    /** The error code. */
+    /** @deprecated
+     * The error code. */
     code?: string;
-    /** A human-readable explanation specific to the occurrence of this problem. */
+    /** @deprecated
+     * A human-readable explanation specific to the occurrence of this problem. */
     detail?: string;
     errors?: Error[];
-    /** Additional properties relating to the error. */
+    /** @deprecated
+     * Additional properties relating to the error. */
     meta?: unknown;
-    /** References to the source of the error. */
+    /** @deprecated
+     * References to the source of the error. */
     source?: {
         /** The URI query parameter that caused the error. */
         parameter?: string;
         /** A JSON pointer to the property that caused the error. */
         pointer?: string;
     };
-    /** Summary of the problem. */
+    /** @deprecated
+     * Summary of the problem. */
     title?: string;
     traceId?: string;
 };
@@ -93,8 +107,20 @@ type Link = {
     /** URL that defines the resource. */
     href: string;
 };
+/**
+ * Supported roles by space type:
+ * - Shared: codeveloper, consumer, dataconsumer, facilitator, producer
+ * - Managed: consumer, contributor, dataconsumer, facilitator, publisher, basicconsumer
+ * - Data: consumer, dataconsumer, facilitator, operator, producer, publisher
+ */
 type RoleType = "consumer" | "contributor" | "dataconsumer" | "facilitator" | "operator" | "producer" | "publisher" | "basicconsumer" | "codeveloper";
+/**
+ * The supported roles for Shared spaces.
+ */
 type SharedSpaceRoleType = "facilitator" | "consumer" | "producer" | "dataconsumer" | "codeveloper";
+/**
+ * A space is a security context simplifying the management of access control by allowing users to control it on the containers instead of on the resources themselves.
+ */
 type Space = {
     /** The date and time when the space was created. */
     readonly createdAt?: string;
@@ -147,7 +173,13 @@ type SpacePatch = {
      * - ownerId: The user ID in uid format (string) of the space owner. */
     value: string;
 }[];
+/**
+ * The name of the type.
+ */
 type SpaceType = "shared" | "managed" | "data";
+/**
+ * The distinct types of spaces (shared, managed, and so on).
+ */
 type SpaceTypes = {
     readonly data?: SpaceType[];
 };
