@@ -1,6 +1,9 @@
 import { A as ApiCallOptions } from './global.types-TzVhFPid.js';
 import './auth-types-nnUcWhuU.js';
 
+/**
+ * An error object describing the error.
+ */
 type Error = {
     /** The error code. */
     code: string;
@@ -20,6 +23,9 @@ type Error = {
     /** Summary of the problem. */
     title: string;
 };
+/**
+ * The error response object describing the error from the handling of an HTTP request.
+ */
 type Errors = {
     /** An array of errors related to the operation. */
     errors?: Error[];
@@ -59,10 +65,16 @@ type TenantCreationRequest = {
     /** The signed license key of the license that will be associated with the created tenant. */
     licenseKey?: string;
 };
+/**
+ * A request to deactivate a tenant.
+ */
 type TenantDeactivateRequest = {
     /** Sets the number of days to purge the tenant after deactivation. Only available to OEMs. */
     purgeAfterDays?: number;
 };
+/**
+ * The result of tenant deactivation.
+ */
 type TenantDeactivateResponse = {
     /** The estimated date time of when tenant will be purged. */
     estimatedPurgeDate?: string;

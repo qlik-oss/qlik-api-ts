@@ -1,6 +1,9 @@
 import { A as ApiCallOptions } from './global.types-5iFvFJvX.mjs';
 import './auth-types-nnUcWhuU.mjs';
 
+/**
+ * An array of role references.
+ */
 type AssignedRoles = {
     /** The unique role identitier */
     id: string;
@@ -13,14 +16,23 @@ type AssignedRoles = {
     /** The type of role */
     readonly type: "default";
 }[];
+/**
+ * An array of role reference identifiers.
+ */
 type AssignedRolesRefIDs = {
     /** The unique role identitier */
     id: string;
 }[];
+/**
+ * An array of role reference names.
+ */
 type AssignedRolesRefNames = {
     /** The name of the role */
     name: string;
 }[];
+/**
+ * An error object describing the error.
+ */
 type Error = {
     /** The error code. */
     code: string;
@@ -40,16 +52,25 @@ type Error = {
     /** Summary of the problem. */
     title: string;
 };
+/**
+ * The error response object describing the error from the handling of an HTTP request.
+ */
 type Errors = {
     /** An array of errors related to the operation. */
     errors?: Error[];
     /** A unique identifier for tracing the error. */
     traceId?: string;
 };
+/**
+ * An advanced query filter to be used for complex user querying in the tenant.
+ */
 type Filter = {
     /** The advanced filtering to be applied the query. All conditional statements within this query parameter are case insensitive. */
     filter?: string;
 };
+/**
+ * represents a Group document
+ */
 type Group = {
     assignedRoles?: {
         id: string;
@@ -78,6 +99,9 @@ type Group = {
     /** The tenant identifier associated with the given group */
     tenantId: string;
 };
+/**
+ * A JSON Patch document.
+ */
 type GroupPatch = {
     /** The operation to be performed. Currently "replace" is the only supported operation. */
     op: "replace";
@@ -86,6 +110,9 @@ type GroupPatch = {
     /** The roles to assign to the group (limit of 100 roles per group). */
     value: AssignedRolesRefIDs | AssignedRolesRefNames;
 };
+/**
+ * An array of JSON Patches for a group.
+ */
 type GroupPatchSchema = GroupPatch[];
 type GroupPostSchema = {
     /** The roles to assign to the group (limit of 100 roles per group). */
@@ -95,6 +122,9 @@ type GroupPostSchema = {
     /** The status of the created group within the tenant. Defaults to active if empty. */
     status?: "active";
 };
+/**
+ * represents a GroupSetting document
+ */
 type GroupSettings = {
     /** Determines if groups should be created on login. */
     autoCreateGroups: boolean;
@@ -126,6 +156,9 @@ type GroupSettings = {
     /** The unique tenant identifier. */
     tenantId: string;
 };
+/**
+ * A result object when listing groups.
+ */
 type Groups = {
     /** An array of groups. */
     data?: Group[];
@@ -146,6 +179,9 @@ type Groups = {
     /** Indicates the total number of matching documents. Will only be returned if the query parameter "totalResults" is true. */
     totalResults?: number;
 };
+/**
+ * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
+ */
 type SettingsPatch = {
     /** The operation to be performed. */
     op: "replace";
@@ -154,6 +190,9 @@ type SettingsPatch = {
     /** The value to be used for this operation. */
     value: boolean | AssignedRolesRefIDs | AssignedRolesRefNames;
 };
+/**
+ * An array of JSON Patches for the groups settings.
+ */
 type SettingsPatchSchema = SettingsPatch[];
 /**
  * Returns a list of groups with cursor-based pagination.

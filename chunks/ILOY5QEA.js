@@ -1,16 +1,16 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
-var _MBVF2FVPjs = require('./MBVF2FVP.js');
+var _FG5GDUSZjs = require('./FG5GDUSZ.js');
 
 // src/public/auth.ts
 function registerAuthModule(name, authModule) {
-  void _MBVF2FVPjs.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.registerAuthModule(name, authModule));
+  void _FG5GDUSZjs.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.registerAuthModule(name, authModule));
 }
 function logout() {
-  void _MBVF2FVPjs.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.logout());
+  void _FG5GDUSZjs.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.logout());
 }
 function setDefaultHostConfig(hostConfig) {
-  void _MBVF2FVPjs.getAuthRuntimeModule.call(void 0, hostConfig).then((impl) => impl.setDefaultHostConfig(hostConfig));
+  void _FG5GDUSZjs.getAuthRuntimeModule.call(void 0, hostConfig).then((impl) => impl.setDefaultHostConfig(hostConfig));
 }
 var auth_default = {
   registerAuthModule,

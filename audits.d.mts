@@ -2,6 +2,7 @@ import { A as ApiCallOptions } from './global.types-5iFvFJvX.mjs';
 import './auth-types-nnUcWhuU.mjs';
 
 type ErrorResponse = {
+    /** @deprecated */
     error?: string;
     errors?: {
         code?: string;
@@ -10,6 +11,9 @@ type ErrorResponse = {
     }[];
     traceId?: string;
 };
+/**
+ * The availability of the properties depends on the event and the context it was triggered in.
+ */
 type EventExtensions = {
     /** Specifies the entity performing the action on behalf of another party listed as triggering the action. */
     actor?: {
@@ -57,6 +61,7 @@ type GetByIDResult = {
     userId?: string;
 };
 type GetLinks = {
+    /** @deprecated */
     Self?: Href;
     self?: Href;
 };
@@ -79,12 +84,20 @@ type GetSettingsResult = {
         EventTTL?: number;
     };
 };
+/**
+ * @deprecated
+ *
+ */
 type Href = {
+    /** @deprecated */
     Href?: string;
 };
 type ListLinks = {
+    /** @deprecated */
     Next?: Href;
+    /** @deprecated */
     Prev?: Href;
+    /** @deprecated */
     Self?: Href;
     next?: Href;
     prev?: Href;

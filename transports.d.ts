@@ -9,6 +9,9 @@ type DeleteConfigNotFoundError = {
         title: string;
     }[];
 };
+/**
+ * An error object.
+ */
 type ErrorPublic = {
     /** The error code. */
     code: string;
@@ -58,6 +61,9 @@ type Email = {
     /** email subject */
     subject?: string;
 };
+/**
+ * A JSON Patch document as defined in https://datatracker.ietf.org/doc/html/rfc6902.
+ */
 type EmailConfigFieldPatch = {
     /** The operation to be performed. */
     op: "replace, remove, add";
@@ -95,6 +101,9 @@ type SmtpCheck = {
     /** true if smtp config is correct and complete. Will return false if smtp-config does not exist at all */
     isValid?: boolean;
 };
+/**
+ * Contains statusCode and statusReason
+ */
 type SmtpConfigStatus = {
     /** Status code */
     statusCode?: number;

@@ -26,6 +26,9 @@ type BaseIDP = {
     /** The tenant identifiers associated with the given IdP. */
     tenantIds?: string[];
 };
+/**
+ * Payload for creating an identity provider using JWT authentication.
+ */
 type CreateJWTAuthPayload = {
     /** There can be clock skew between the IdP and Qlik's login server, in these cases a tolerance can be set, decimals will be rounded off. */
     clockToleranceSec?: number;
@@ -49,6 +52,9 @@ type CreateJWTAuthPayload = {
     /** The tenant identifiers that map to the given IdP. */
     tenantIds?: string[];
 };
+/**
+ * Payload for creating an OIDC-compatible identity provider.
+ */
 type CreateOIDCPayload = {
     /** There can be clock skew between the IdP and Qlik's login server. In these cases, a tolerance can be set, decimals will be rounded off. */
     clockToleranceSec?: number;
@@ -106,6 +112,9 @@ type CreateOIDCPayload = {
     /** The tenant identifiers that map to the given IdP. */
     tenantIds?: string[];
 };
+/**
+ * An error object.
+ */
 type Error = {
     /** The error code. */
     code: string;
@@ -125,6 +134,9 @@ type Error = {
     /** Summary of the problem. */
     title: string;
 };
+/**
+ * A representation of the errors encountered from the HTTP request.
+ */
 type Errors = {
     errors?: Error[];
 };
@@ -135,6 +147,9 @@ type IDPArray = {
     /** Contains pagination links. */
     links?: Links;
 };
+/**
+ * An identity provider for JWT authentication.
+ */
 type IDPJWTAuth = BaseIDP & {
     options?: {
         /** The expected JWT issuer */
@@ -153,6 +168,9 @@ type IDPMeta = {
     /** A link to direct you to where you can manage your Qlik account. Only available if the default identity provider is used (no custom interactive identity providers are active). */
     userPortalLink?: string;
 };
+/**
+ * An OIDC-compliant identity provider.
+ */
 type IDPOIDC = BaseIDP & {
     options?: IDPOptions;
     pendingOptions?: IDPOptions;
@@ -184,7 +202,13 @@ type IDPOptions = {
 };
 type IDPPatchSchema = PatchOIDCPayload[] | PatchJWTAuthPayload[];
 type IDPPostSchema = CreateOIDCPayload | CreateJWTAuthPayload;
+/**
+ * The protocol to be used for communicating with the identity provider. Valid values are `OIDC`, `jwtAuth`, and `qsefw-local-bearer-token`.
+ */
 type IDPProtocol = "OIDC" | "jwtAuth" | "qsefw-local-bearer-token";
+/**
+ * The identity provider to be used. If protocol is `OIDC`, the valid values are `auth0`, `okta`, `generic`, `salesforce`, `keycloak`, `adfs`, and `azureAD`. If protocol is `jwtAuth`, the valid value is `external`.
+ */
 type IDPProvider = "auth0" | "okta" | "qlik" | "generic" | "salesforce" | "keycloak" | "adfs" | "external" | "azureAD";
 type IDPsStatus = {
     /** The number of active interactive IdPs. */
@@ -199,6 +223,9 @@ type IDPsStatus = {
         provider?: IDPProvider;
     }[];
 };
+/**
+ * Contains pagination links.
+ */
 type Links = {
     next?: {
         /** Link to the next page of items. */
@@ -213,6 +240,9 @@ type Links = {
         href?: string;
     };
 };
+/**
+ * OpenID configuration
+ */
 type OpenIDConfiguration = {
     /** OAuth 2.0 Authorization Endpoint */
     authorization_endpoint: string;
@@ -229,6 +259,9 @@ type OpenIDConfiguration = {
     /** URL of the OP's UserInfo Endpoint */
     userinfo_endpoint?: string;
 };
+/**
+ * A patch request for an identity provider using the `jwtAuth` protocol.
+ */
 type PatchJWTAuthPayload = {
     /** The "operation" to be performed on a given IdP. */
     op: "replace";
@@ -237,6 +270,9 @@ type PatchJWTAuthPayload = {
     /** The "value" data type is dependent on the path value being used. */
     value?: unknown;
 };
+/**
+ * A patch request for an identity provider using the `OIDC` protocol.
+ */
 type PatchOIDCPayload = {
     /** The "operation" to be performed on a given IdP. Currently supports a custom operation value called "promote-options" that allows the test configuration to be promoted to the current configuration used for login. */
     op: "replace" | "promote-options";
@@ -265,6 +301,9 @@ type PendingResult = {
     /** The status of the IdP configuration being tested. */
     status: "success" | "pending" | "error" | "claimsError" | "callbackError" | "tokenError" | "protocolError" | "networkError" | "configChangedDuringTestError";
 };
+/**
+ * Mappings from claim name to an array of JSON pointers that point to locations in the claims from the IdP to retrieve the value from.
+ */
 type ClaimsMappingInteractive = {
     /** A list of JSON pointers used to map the user's client ID. */
     client_id?: string[];
@@ -285,6 +324,9 @@ type ClaimsMappingInteractive = {
     /** A list of JSON pointers used to map the user's zoneinfo. */
     zoneinfo?: string[];
 };
+/**
+ * Mappings from claim name to an array of JSON pointers that point to locations in the claims from the IdP to retrieve the value from.
+ */
 type ClaimsMappingNonInteractive = {
     /** A list of JSON pointers used to map the user's client ID. */
     client_id?: string[];

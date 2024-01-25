@@ -44,6 +44,9 @@ type BulkResponse = {
         status: number;
     }[];
 };
+/**
+ * Essential fields of a connection
+ */
 type Connection = {
     /** Datetime when the connection was created */
     created: string;
@@ -56,7 +59,7 @@ type Connection = {
     qArchitecture: 0 | 1;
     /** Connection string for the data connection */
     qConnectStatement: string;
-    /** String that contains connection specific secret (or password). This field will not be included in response of GET /data-connections, will only be included in the response of GET /data0connections/{qID} */
+    /** String that contains connection specific secret (or password). This field will not be included in response of GET /data-connections, will only be included in the response of GET /data-connections/{qID} */
     qConnectionSecret?: string;
     /** ID of the credential associated with the connection */
     qCredentialsID?: string;
@@ -123,6 +126,9 @@ type ConnectionCreate = {
     /** ID of the space to which the connection belongs */
     space?: string;
 };
+/**
+ * Essential fields of a connection
+ */
 type ConnectionCreateResponse = {
     /** Datetime when the connection was created */
     created?: string;
@@ -226,6 +232,9 @@ type PatchRequest = {
         value?: string;
     }[];
 };
+/**
+ * Access type allowed on associated data connection
+ */
 type Privilege = "list" | "update" | "delete" | "read";
 type ResponseErrors = {
     errors?: Errors;
@@ -257,6 +266,8 @@ declare const getDataConnections: (query: {
     dataName?: string;
     /** Returns extended list of properties when set to true. */
     extended?: boolean;
+    /** Filtering resources by properties (filterable properties only) using SCIM filter string. Note the filter string only applies to connections managed by data-connections service, i.e. filtering doesn't apply to DataFile connections. */
+    filter?: string;
     /** Base Qri (encrypted) will be returned when the query is set to true, default is false */
     includeQris?: boolean;
     /** Number of resources to be returned */

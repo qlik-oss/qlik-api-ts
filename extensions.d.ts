@@ -1,6 +1,9 @@
 import { A as ApiCallOptions } from './global.types-TzVhFPid.js';
 import './auth-types-nnUcWhuU.js';
 
+/**
+ * Object containing meta data regarding the bundle the extension belongs to. If it does not belong to a bundle, this object is not defined.
+ */
 type BundleMeta = {
     /** Description of the bundle. */
     description?: string;
@@ -9,6 +12,9 @@ type BundleMeta = {
     /** Name of the bundle. */
     name?: string;
 };
+/**
+ * An error object.
+ */
 type Error = {
     /** Object containing meta data regarding an error. It does not necessarily contain all the properties. */
     meta?: Meta;
@@ -19,6 +25,9 @@ type Error = {
     /** Title of the HTTP status code. */
     title: string;
 };
+/**
+ * The extension model.
+ */
 type Extension = {
     /** Author of the extension. */
     author?: string;
@@ -75,6 +84,9 @@ type Extension = {
 type Extensions = {
     data: Extension[];
 };
+/**
+ * Object containing meta data regarding an error. It does not necessarily contain all the properties.
+ */
 type Meta = {
     /** A more detailed message explaining the error. */
     message?: string;

@@ -5,10 +5,16 @@ type CollectionTypes = "private" | "public" | "publicgoverned";
 type ErrorResponseBody = {
     errors?: ServiceError[];
 };
+/**
+ * ListItemCollectionsResponseBody result type
+ */
 type ItemsListItemCollectionsResponseBody = {
     data: CollectionResultResponseBody[];
     links: CollectionsLinksResponseBody;
 };
+/**
+ * ListItemsResponseBody result type
+ */
 type ItemsListItemsResponseBody = {
     data: ItemResultResponseBody[];
     links: ItemsLinksResponseBody;
@@ -61,10 +67,16 @@ type CollectionLinksResponseBody = {
     items?: Link;
     self?: Link;
 };
+/**
+ * Collection metadata and computed fields.
+ */
 type CollectionMetaResponseBody = {
     /** Multiple items. */
     items?: ItemsResultResponseBody;
 };
+/**
+ * A collection.
+ */
 type CollectionResultResponseBody = {
     /** The RFC3339 datetime when the collection was created. */
     createdAt: string;
@@ -101,6 +113,9 @@ type ItemLinksResponseBody = {
     self?: Link;
     thumbnail?: Link;
 };
+/**
+ * Item metadata and computed fields.
+ */
 type ItemMetaResponseBody = {
     /** The actions that the user can perform on the item. */
     actions: string[];
@@ -111,7 +126,13 @@ type ItemMetaResponseBody = {
     /** An array of tags that the item is part of. */
     tags: ItemTagResponseBody[];
 };
+/**
+ * The case-sensitive string defining the item's type.
+ */
 type ItemResourceTypeEnum = "app" | "collection" | "qlikview" | "insight" | "qvapp" | "genericlink" | "sharingservicetask" | "note" | "dataasset" | "dataset" | "automation" | "automl-experiment" | "automl-deployment";
+/**
+ * An item.
+ */
 type ItemResultResponseBody = {
     /** The actions that the user can perform on the item. */
     actions: string[];
@@ -163,6 +184,9 @@ type ItemResultResponseBody = {
     /** ID of the user who last updated the item. This is only populated if the JWT contains a userId. */
     updaterId?: string;
 };
+/**
+ * Holds basic information about a tag or collection.
+ */
 type ItemTagResponseBody = {
     /** The ID of the tag/collection. */
     id: string;
@@ -200,6 +224,9 @@ type ItemsResourceSizeResponseBody = {
     /** Size of the app in memory in bytes. */
     appMemory?: number;
 };
+/**
+ * Multiple items.
+ */
 type ItemsResultResponseBody = {
     data: ItemResultResponseBody[];
     links: ItemsLinksResponseBody;
@@ -214,6 +241,9 @@ type Meta = {
     /** Is the error a timeout? */
     timeout?: boolean;
 };
+/**
+ * The case-sensitive string defining the space type.
+ */
 type SpaceTypeEnum = "shared" | "managed" | "personal" | "data";
 /**
  * Finds and returns items that the user has access to.
@@ -256,7 +286,8 @@ declare const getItems: (query: {
     resourceSubType?: string | undefined;
     /** The case-sensitive string used to filter items by resourceType(s). For example '?resourceType=app,qvapp'. Additionally, a optional resourceSubType filter can be added to each resourceType. For example '?resourceType=app[qvd,chart-monitoring],qvapp'. An trailing comma can be used to include the empty resourceSubType, e.g. '?resourceType=app[qvd,chart-monitoring,]', or, to include only empty resourceSubTypes, '?resourceType=app[]' This syntax replaces the 'resourceSubType' query param, and using both in the same query will result in a 400 error. */
     resourceType?: ItemResourceTypeEnum | undefined;
-    /** Whether or not to return items in a shared space. */
+    /** @deprecated
+     * Whether or not to return items in a shared space. */
     shared?: boolean | undefined;
     /** The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively. */
     sort?: "-name" | "+name" | "+createdAt" | "-createdAt" | "+updatedAt" | "-updatedAt" | undefined;

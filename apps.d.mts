@@ -71,6 +71,48 @@ type AnalysisModelResponseDetail = {
     isLogicalModelEnabled?: boolean;
     masterItems?: AnalysisModelItemMasterItem[];
 };
+/**
+ * Request payload can be of two types, using natural language query or consist of fields or master items and optional target analysis.
+ * In below examples, consider sales as a master item and product as field, so to get recommendations using sales and product,
+ * you can utilize below three approaches, also you can set language parameter in headers as part of accept-language.
+ * Examples:
+ * ```
+ * {
+ *   'text': 'show me sales by product'
+ * }
+ * ```
+ * ```
+ * {
+ *   'fields': [
+ *     {
+ *       'name': 'product'
+ *     }
+ *   ],
+ *   'libItems': [
+ *     {
+ *       libId: 'NwQfJ'
+ *     }
+ *   ]
+ * }
+ * ```
+ * ```
+ * {
+ *   'fields': [
+ *     {
+ *       'name': 'product'
+ *     }
+ *   ],
+ *   'libItems': [
+ *     {
+ *       'libId': 'NwQfJ'
+ *     }
+ *   ],
+ *   'targetAnalysis': {
+ *     'id': 'rank-rank'
+ *   }
+ * }
+ * ```
+ */
 type AnalysisRecommendRequest = RecommendNaturalLangQuery | RecommendItems;
 type AnalysisRecommendationResponse = {
     data?: AnalysisRecommendationResponseDetail[];
@@ -115,8 +157,17 @@ type AppUpdateAttributes = {
     /** The name (title) of the application. */
     name?: string;
 };
+/**
+ * Chart type given to current recommendation
+ */
 type ChartType = "barchart" | "combochart" | "distributionplot" | "kpi" | "linechart" | "map" | "scatterplot" | "table";
+/**
+ * classification defines the default role that attribute can play in an analysis
+ */
 type Classifications = ("dimension" | "measure" | "temporal" | "city" | "address" | "boolean" | "country" | "date" | "email" | "geographical" | "geoPoint" | "geoPolygon" | "hour" | "latitude" | "monetary" | "ordinal" | "percentage" | "postalCode" | "quarter" | "stateProvince" | "timestamp" | "week" | "weekDay" | "year" | "yearDay")[];
+/**
+ * Upper and lower bounds for items of specific classification types
+ */
 type CompositionMinMax = {
     max?: number;
     min?: number;
@@ -139,6 +190,9 @@ type DataModelMetadata = {
     tables_profiling_data?: TableProfilingData[];
     usage?: UsageEnum;
 };
+/**
+ * An error object.
+ */
 type Error = {
     /** The error code. */
     code: string;
@@ -167,6 +221,45 @@ type EvaluatorError = {
     }[];
 };
 type FieldAttrType = "U" | "A" | "I" | "R" | "F" | "M" | "D" | "T" | "TS" | "IV";
+/**
+ * Sets the formatting of a field.
+ * The properties of _qFieldAttributes_ and the formatting mechanism are described below.
+ *
+ * ### Formatting mechanism
+ * The formatting mechanism depends on the type set in _qType,_ as shown below:
+ * <div class=note>In case of inconsistencies between the type and the format pattern, the format pattern takes precedence over the type.</div>
+ *
+ * ### Type is DATE, TIME, TIMESTAMP or INTERVAL
+ * The following applies:
+ * * If a format pattern is defined in _qFmt_ , the formatting is as defined in _qFmt_ .
+ * * If _qFmt_ is empty, the formatting is defined by the number interpretation variables included at the top of the script ( _TimeFormat_ , _DateFormat_ , _TimeStampFormat_ ).
+ * * The properties _qDec_ , _qThou_ , _qnDec_ , _qUseThou_ are not used.
+ *
+ * ### Type is INTEGER
+ * The following applies:
+ * * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the formatting mechanism uses the number interpretation variables included at the top of the script ( _DecimalSep_ and _ThousandSep_ ).
+ * * If no format pattern is defined in _qFmt_ , no formatting is applied. The properties _qDec_ , _qThou_ , _qnDec_ , _qUseThou_ and the number interpretation variables defined in the script are not used .
+ *
+ * ### Type is REAL
+ * The following applies:
+ * * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the engine uses the number interpretation variables included at the top of the script ( _DecimalSep_ and _ThousandSep_ ).
+ * * If no format pattern is defined in _qFmt_ , and if the value is almost an integer value (for example, 14,000012), the value is formatted as an integer. The properties _qDec_ , _qThou_ , _qnDec_ , _qUseThou_ are not used.
+ * * If no format pattern is defined in _qFmt_ , and if _qnDec_ is defined and not 0, the property _qDec_ is used. If _qDec_ is not defined, the variable _DecimalSep_ defined at the top of the script is used.
+ * * If no format pattern is defined in _qFmt_ , and if _qnDec_ is 0, the number of decimals is 14 and the property _qDec_ is used. If _qDec_ is not defined, the variable _DecimalSep_ defined at the top of the script is used.
+ *
+ * ### Type is FIX
+ * The following applies:
+ * * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the engine uses the number interpretation variables included at the top of the script ( _DecimalSep_ and _ThousandSep_ ).
+ * * If no format pattern is defined in _qFmt_ , the properties _qDec_ and _qnDec_ are used. If _qDec_ is not defined, the variable _DecimalSep_ defined at the top of the script is used.
+ *
+ * ### Type is MONEY
+ * The following applies:
+ * * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the engine uses the number interpretation variables included at the top of any script ( _MoneyDecimalSep_ and _MoneyThousandSep_ ).
+ * * If no format pattern is defined in _qFmt_ , the engine uses the number interpretation variables included at the top of the script ( _MoneyDecimalSep_ and _MoneyThousandSep_ ).
+ *
+ * ### Type is ASCII
+ * No formatting, _qFmt_ is ignored.
+ */
 type FieldAttributes = {
     /** Defines the decimal separator.
      * Example: **.** */
@@ -348,6 +441,9 @@ type Filter = {
     ownerId?: string;
     readonly updatedAt?: string;
 };
+/**
+ * Error occured during the Filter creation.
+ */
 type FilterError = {
     /** The unique code for the error
      *
@@ -372,6 +468,9 @@ type FilterError = {
     /** A summary in english explaining what went wrong. */
     title: string;
 };
+/**
+ * Errors occured during the Filter creation.
+ */
 type FilterErrors = {
     errors: FilterError[];
 };
@@ -456,6 +555,9 @@ type HardwareMeta = {
 type Href = {
     href?: string;
 };
+/**
+ * Contains dynamic JSON data specified by the client.
+ */
 type JsonObject = unknown;
 type LastReloadMetadata = {
     /** Number of CPU milliseconds it took to reload the app. */
@@ -502,6 +604,9 @@ type NavigationLinks = {
     next?: NavigationLink;
     prev?: NavigationLink;
 };
+/**
+ * Application attributes and user privileges.
+ */
 type NxApp = {
     /** App attributes. This structure can also contain extra user-defined attributes. */
     attributes?: NxAttributes;
@@ -530,6 +635,9 @@ type NxAppCreatePrivileges = {
     /** Type of resource. For example, sheet, story, bookmark, etc. */
     resource?: string;
 };
+/**
+ * Application object attributes and user privileges.
+ */
 type NxAppObject = {
     /** App object attributes. This structure can also contain extra user-defined attributes. */
     attributes?: NxObjectAttributes;
@@ -545,6 +653,9 @@ type NxAppObject = {
      * * change_owner */
     privileges?: string[];
 };
+/**
+ * App attributes. This structure can also contain extra user-defined attributes.
+ */
 type NxAttributes = {
     /** The date and time when the app was created. */
     createdDate?: string;
@@ -570,7 +681,8 @@ type NxAttributes = {
     name?: string;
     /** The Origin App ID for published apps. */
     originAppId?: string;
-    /** Deprecated. Use user api to fetch user metadata. */
+    /** @deprecated
+     * Deprecated. Use user api to fetch user metadata. */
     owner?: string;
     /** Identifier of the app owner. */
     ownerId?: string;
@@ -582,6 +694,9 @@ type NxAttributes = {
     thumbnail?: string;
     usage?: UsageEnum;
 };
+/**
+ * App object attributes. This structure can also contain extra user-defined attributes.
+ */
 type NxObjectAttributes = {
     /** True if the object is approved. */
     approved?: boolean;
@@ -614,6 +729,9 @@ type NxPatch = {
     Value?: string;
 };
 type NxPatchOperationType = "add" | "remove" | "replace";
+/**
+ * Contains break down of the asked question in the form of tokens with their classification.
+ */
 type PartialNluInfo = {
     /** Qlik sense application field selected for given token or phrase */
     fieldName?: string;
@@ -637,6 +755,9 @@ type PublishApp = {
     spaceId?: string;
 };
 type PublishData = "source" | "target";
+/**
+ * structure for providing fields in recommendation request, user can retrieve the fields using insight-analyses/model endpoint
+ */
 type RecommendFieldItem = {
     name?: string;
     overrides?: FieldOverride;
@@ -649,6 +770,9 @@ type RecommendItems = {
         id?: string;
     };
 };
+/**
+ * structure for providing master items in recommendation request, user can retrieve the libId of master item using insight-analyses/model endpoint
+ */
 type RecommendMasterItem = {
     libId?: string;
     overrides?: {

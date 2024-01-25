@@ -1,6 +1,9 @@
 import { A as ApiCallOptions, D as DownloadableBlob } from './global.types-TzVhFPid.js';
 import './auth-types-nnUcWhuU.js';
 
+/**
+ * A brand is a collection of assets for applying custom branding. Only a single brand can be active in a tenant.
+ */
 type Brand = {
     readonly active?: boolean;
     /** The UTC timestamp when the brand was created. */
@@ -17,12 +20,18 @@ type Brand = {
     /** ID of a user that last updated the brand. */
     readonly updatedBy?: string;
 };
+/**
+ * Represents one of the assets used as part of the brand. These include logos, favicons, and some styles.
+ */
 type BrandFile = {
     contentType?: string;
     eTag?: string;
     id?: "logo" | "favIcon" | "styles";
     path?: string;
 };
+/**
+ * A JSON Patch document as defined in https://datatracker.ietf.org/doc/html/rfc6902.
+ */
 type BrandPatch = {
     /** The operation to be performed. */
     op: "add" | "remove" | "replace";
@@ -31,6 +40,9 @@ type BrandPatch = {
     /** The value to be used for this operation. */
     value?: string;
 };
+/**
+ * A collection of brands.
+ */
 type BrandsList = {
     data?: Brand[];
     links?: {
@@ -83,6 +95,9 @@ type Link = {
     /** URL of a resource request. */
     href: string;
 };
+/**
+ * Empty object inferring lack of active branding.
+ */
 type NoActiveBrand = unknown;
 /**
  * Lists all brand entries for a tenant

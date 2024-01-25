@@ -33,6 +33,9 @@ type ApiKeyBody = {
     /** Type of the subject. */
     subType?: string;
 };
+/**
+ * A JSON Patch document as defined in https://datatracker.ietf.org/doc/html/rfc6902.
+ */
 type ApiKeyConfigPatch = {
     /** The operation to be performed. */
     op: "replace";
@@ -41,6 +44,9 @@ type ApiKeyConfigPatch = {
     /** The value to be used for this operation. */
     value: unknown;
 };
+/**
+ * A JSON Patch document as defined in https://datatracker.ietf.org/doc/html/rfc6902.
+ */
 type ApiKeyPatch = {
     /** The operation to be performed. */
     op: "replace";
@@ -83,6 +89,9 @@ type ApiKeysConfig = {
 };
 type ApiKeysConfigPatchSchema = ApiKeyConfigPatch[];
 type ApiKeysPatchSchema = ApiKeyPatch[];
+/**
+ * An error object.
+ */
 type Error = {
     /** The error code. */
     code: string;

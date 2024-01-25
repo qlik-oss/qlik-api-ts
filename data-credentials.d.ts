@@ -2,6 +2,8 @@ import { A as ApiCallOptions } from './global.types-TzVhFPid.js';
 import './auth-types-nnUcWhuU.js';
 
 type Credential = {
+    /** ID datasource that the credential is created for */
+    datasourceID?: string;
     links?: Link;
     /** Number of linked connections */
     qConnCount: number;
@@ -14,6 +16,9 @@ type Credential = {
     /** Type of credential */
     qType: string;
 };
+/**
+ * Credential
+ */
 type CredentialCreate = {
     /** ID of connection that will be associated with the credential */
     connectionId?: string;

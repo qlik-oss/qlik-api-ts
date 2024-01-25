@@ -1,6 +1,9 @@
 import { A as ApiCallOptions } from './global.types-5iFvFJvX.mjs';
 import './auth-types-nnUcWhuU.mjs';
 
+/**
+ * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
+ */
 type JSONPatch = {
     /** The operation to be performed. */
     op: "replace";
@@ -9,6 +12,9 @@ type JSONPatch = {
     /** The value to be used for this operation. */
     value: string | number;
 };
+/**
+ * An array of JSON Patch documents
+ */
 type JSONPatchArray = JSONPatch[];
 type AtlanEntity = {
     attributes?: AtlanEntityAttributes;
@@ -30,6 +36,9 @@ type AtlanEntityAttributes = {
     usage?: string;
     userDescription?: string;
 };
+/**
+ * Atlan glossary format. See https://apidocs.atlan.com/
+ */
 type AtlanGlossary = {
     entity?: AtlanEntity;
     referredEntities?: AtlanEntity[];
@@ -151,6 +160,28 @@ type ErrorResponse = {
     errors?: ErrorResponseCode[];
     traceId?: string;
 };
+/**
+ * ### Custom error codes
+ * * BG-1 - Context JWT is missing tenantId.
+ * * BG-2 - Context JWT is missing userId.
+ * * BG-4 - Invalid or unsupported Content Type. Valid types are: application/json, application/json+qlik, application/json+atlan, application/json+atlas
+ * * BG-5 - Failed to decode JSON payload.
+ * * BG-6 - A glossary name is required.
+ * * BG-7 - Two categories with the same name cannot have the same parent.
+ * * BG-11 - Glossary validation failed - A value or parameter is invalid or not set
+ * * BG-12 - Category validation failed - A value or parameter is invalid or not set
+ * * BG-13 - Term validation failed - A value or parameter is invalid or not set
+ * * BG-14 - Two or more categories share Id
+ * * BG-15 - Two or more terms share Id
+ * * BG-16 - Not detecting proper Atlas format
+ * * BG-17 - Not detecting proper Atlan format
+ * * BG-18 - Not detecting proper Qlik format
+ * * BG-19 - Invalid format in term
+ * * BG-20 - Duplicate link definition
+ * * BG-21 - Rich text validation failed
+ * * BG-22 - Import cancelled
+ * * BG-23 - Duplicate link related
+ */
 type ErrorResponseBadRequest = {
     errors?: ErrorResponseCode[];
     traceId?: string;
@@ -160,10 +191,20 @@ type ErrorResponseCode = {
     detail?: string;
     title?: string;
 };
+/**
+ * ### Custom error codes
+ * * BG-3 - Access denied, no read access
+ */
 type ErrorResponseForbidden = {
     errors?: ErrorResponseCode[];
     traceId?: string;
 };
+/**
+ * ### Custom error codes
+ * * BG-8 - Glossary not found
+ * * BG-9 - Category not found
+ * * BG-10 - Term not found
+ */
 type ErrorResponseNotFound = {
     errors?: ErrorResponseCode[];
     traceId?: string;
@@ -324,6 +365,9 @@ type Term = {
     /** The uuid of the user who last updated the term */
     readonly updatedBy: string;
 };
+/**
+ * Describes links to other data assets such as analytics applications or dataset.
+ */
 type TermCreateLinksTo = {
     resourceId: string;
     resourceType: "app" | "dataset";
@@ -332,6 +376,9 @@ type TermCreateLinksTo = {
     subResourceType?: "master_dimension" | "master_measure";
     type?: "definition" | "related";
 };
+/**
+ * Describes links to other entities such as qlik charts, dataset columns etc.
+ */
 type TermLinksTo = {
     readonly createdAt?: string;
     createdBy?: string;
@@ -356,6 +403,9 @@ type TermRelatesTo = {
     /** How the term related to the other object */
     type: "isA" | "hasA" | "seeAlso" | "synonym" | "antonym" | "classifies" | "other";
 };
+/**
+ * Terms status is used determine the status of a term
+ */
 type TermStatus = {
     type: "draft" | "verified" | "deprecated";
     /** Time when the state was changed */

@@ -1,6 +1,9 @@
 import { A as ApiCallOptions } from './global.types-TzVhFPid.js';
 import './auth-types-nnUcWhuU.js';
 
+/**
+ * A specific error.
+ */
 type Error = {
     /** The error code. */
     code: string;

@@ -13,6 +13,9 @@ type Errors = {
 type Href = {
     href?: string;
 };
+/**
+ * The boolean value used to present the reload is partial or not.
+ */
 type Partial = boolean;
 type Reload = {
     /** The ID of the app. */
@@ -58,7 +61,13 @@ type ReloadsLinks = ReloadLinks & {
     next?: Href;
     prev?: Href;
 };
+/**
+ * The status of the reload. There are seven statuses. `QUEUED`, `RELOADING`, `CANCELING` are the active statuses. `SUCCEEDED`, `FAILED`, `CANCELED`, `EXCEEDED_LIMIT` are the end statuses.
+ */
 type Status = "QUEUED" | "RELOADING" | "CANCELING" | "SUCCEEDED" | "FAILED" | "CANCELED" | "EXCEEDED_LIMIT";
+/**
+ * What initiated the reload: hub = one-time reload manually triggered in hub, chronos = time based scheduled reload triggered by chronos, external = reload triggered via external API request, automations = reload triggered in automation, data-refresh = reload triggered by refresh of data.
+ */
 type Type = "hub" | "external" | "chronos" | "automations" | "data-refresh";
 /**
  * Finds and returns the reloads that the user has access to.

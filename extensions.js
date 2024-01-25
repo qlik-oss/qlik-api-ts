@@ -1,36 +1,36 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _DMU5PHUVjs = require('./chunks/DMU5PHUV.js');
-require('./chunks/MBVF2FVP.js');
+var _QMWU5E4Djs = require('./chunks/QMWU5E4D.js');
+require('./chunks/FG5GDUSZ.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/extensions.ts
-var getExtensions = async (options) => _DMU5PHUVjs.invokeFetch.call(void 0, "extensions", {
+var getExtensions = async (options) => _QMWU5E4Djs.invokeFetch.call(void 0, "extensions", {
   method: "get",
   pathTemplate: "/api/v1/extensions",
   options
 });
-var uploadExtension = async (body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "extensions", {
+var uploadExtension = async (body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "extensions", {
   method: "post",
   pathTemplate: "/api/v1/extensions",
   body,
   contentType: "multipart/form-data",
   options
 });
-var deleteExtension = async (id, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "extensions", {
+var deleteExtension = async (id, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "extensions", {
   method: "delete",
   pathTemplate: "/api/v1/extensions/{id}",
   pathVariables: { id },
   options
 });
-var getExtension = async (id, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "extensions", {
+var getExtension = async (id, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "extensions", {
   method: "get",
   pathTemplate: "/api/v1/extensions/{id}",
   pathVariables: { id },
   options
 });
-var patchExtension = async (id, body, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "extensions", {
+var patchExtension = async (id, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "extensions", {
   method: "patch",
   pathTemplate: "/api/v1/extensions/{id}",
   pathVariables: { id },
@@ -38,20 +38,20 @@ var patchExtension = async (id, body, options) => _DMU5PHUVjs.invokeFetch.call(v
   contentType: "multipart/form-data",
   options
 });
-var downloadExtension = async (id, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "extensions", {
+var downloadExtension = async (id, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "extensions", {
   method: "get",
   pathTemplate: "/api/v1/extensions/{id}/file",
   pathVariables: { id },
   options
 });
-var downloadFileFromExtension = async (id, filepath, options) => _DMU5PHUVjs.invokeFetch.call(void 0, "extensions", {
+var downloadFileFromExtension = async (id, filepath, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "extensions", {
   method: "get",
   pathTemplate: "/api/v1/extensions/{id}/file/{filepath}",
   pathVariables: { id, filepath },
   options
 });
 function clearCache() {
-  return _DMU5PHUVjs.clearApiCache.call(void 0, "extensions");
+  return _QMWU5E4Djs.clearApiCache.call(void 0, "extensions");
 }
 var extensionsExport = {
   getExtensions,

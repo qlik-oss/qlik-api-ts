@@ -18,7 +18,8 @@ type PaginationLinks = SelfLink & {
     prev?: Href;
 };
 type PostTaskBody = TaskBase & {
-    /** Type of task being created - only contains the "scheduled_reload" value. Type value is not used for creating a schedule reload. It has been deprecated since 2022-04-05. */
+    /** @deprecated
+     * Type of task being created - only contains the "scheduled_reload" value. Type value is not used for creating a schedule reload. It has been deprecated since 2022-04-05. */
     type?: "scheduled_reload";
 };
 type PutTaskBody = TaskBase & {
@@ -31,14 +32,16 @@ type SelfLink = {
 type Task = TaskBase & {
     /** The reason why the task was disabled. */
     disabledCode?: "MANUALLY" | "CONSECUTIVE-FAILURES" | "OWNER-DELETED" | "OWNER-DISABLED";
-    /** The fortress ID of the application */
+    /** @deprecated
+     * The fortress ID of the application */
     fortressId?: string;
     /** The ID of the task. */
     id: string;
     /** The last time the task executed. */
     lastExecutionTime?: string;
     links: SelfLink;
-    /** The reason why the task was disabled. */
+    /** @deprecated
+     * The reason why the task was disabled. */
     log?: string;
     /** The next time the task will execute. */
     nextExecutionTime?: string;

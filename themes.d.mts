@@ -1,6 +1,9 @@
 import { A as ApiCallOptions } from './global.types-5iFvFJvX.mjs';
 import './auth-types-nnUcWhuU.mjs';
 
+/**
+ * An error object.
+ */
 type Error = {
     /** Object containing meta data regarding an error. It does not necessarily contain all the properties. */
     meta?: Meta;
@@ -11,6 +14,9 @@ type Error = {
     /** Title of the HTTP status code. */
     title: string;
 };
+/**
+ * Object containing meta data regarding an error. It does not necessarily contain all the properties.
+ */
 type Meta = {
     /** A more detailed message explaining the error. */
     message?: string;
@@ -19,6 +25,9 @@ type Meta = {
     /** Full stack trace of the error that was raised. */
     stack?: string;
 };
+/**
+ * The theme model.
+ */
 type Theme = {
     /** Author of the theme. */
     author?: string;
