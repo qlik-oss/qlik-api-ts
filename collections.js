@@ -1,42 +1,42 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _QMWU5E4Djs = require('./chunks/QMWU5E4D.js');
-require('./chunks/FG5GDUSZ.js');
+var _NZ6E5ZHOjs = require('./chunks/NZ6E5ZHO.js');
+require('./chunks/NBNOAZT5.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/collections.ts
-var getCollections = async (query, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "collections", {
+var getCollections = async (query, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "collections", {
   method: "get",
   pathTemplate: "/api/v1/collections",
   query,
   options
 });
-var createCollection = async (body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "collections", {
+var createCollection = async (body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "collections", {
   method: "post",
   pathTemplate: "/api/v1/collections",
   body,
   contentType: "application/json",
   options
 });
-var getFavoritesCollection = async (options) => _QMWU5E4Djs.invokeFetch.call(void 0, "collections", {
+var getFavoritesCollection = async (options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "collections", {
   method: "get",
   pathTemplate: "/api/v1/collections/favorites",
   options
 });
-var deleteCollection = async (collectionId, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "collections", {
+var deleteCollection = async (collectionId, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "collections", {
   method: "delete",
   pathTemplate: "/api/v1/collections/{collectionId}",
   pathVariables: { collectionId },
   options
 });
-var getCollection = async (collectionId, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "collections", {
+var getCollection = async (collectionId, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "collections", {
   method: "get",
   pathTemplate: "/api/v1/collections/{collectionId}",
   pathVariables: { collectionId },
   options
 });
-var patchCollection = async (collectionId, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "collections", {
+var patchCollection = async (collectionId, body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "collections", {
   method: "patch",
   pathTemplate: "/api/v1/collections/{collectionId}",
   pathVariables: { collectionId },
@@ -44,7 +44,7 @@ var patchCollection = async (collectionId, body, options) => _QMWU5E4Djs.invokeF
   contentType: "application/json",
   options
 });
-var updateCollection = async (collectionId, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "collections", {
+var updateCollection = async (collectionId, body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "collections", {
   method: "put",
   pathTemplate: "/api/v1/collections/{collectionId}",
   pathVariables: { collectionId },
@@ -52,14 +52,14 @@ var updateCollection = async (collectionId, body, options) => _QMWU5E4Djs.invoke
   contentType: "application/json",
   options
 });
-var getCollectionItems = async (collectionId, query, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "collections", {
+var getCollectionItems = async (collectionId, query, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "collections", {
   method: "get",
   pathTemplate: "/api/v1/collections/{collectionId}/items",
   pathVariables: { collectionId },
   query,
   options
 });
-var addCollectionItem = async (collectionId, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "collections", {
+var addCollectionItem = async (collectionId, body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "collections", {
   method: "post",
   pathTemplate: "/api/v1/collections/{collectionId}/items",
   pathVariables: { collectionId },
@@ -67,20 +67,20 @@ var addCollectionItem = async (collectionId, body, options) => _QMWU5E4Djs.invok
   contentType: "application/json",
   options
 });
-var deleteCollectionItem = async (collectionId, itemId, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "collections", {
+var deleteCollectionItem = async (collectionId, itemId, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "collections", {
   method: "delete",
   pathTemplate: "/api/v1/collections/{collectionId}/items/{itemId}",
   pathVariables: { collectionId, itemId },
   options
 });
-var getCollectionItem = async (collectionId, itemId, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "collections", {
+var getCollectionItem = async (collectionId, itemId, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "collections", {
   method: "get",
   pathTemplate: "/api/v1/collections/{collectionId}/items/{itemId}",
   pathVariables: { collectionId, itemId },
   options
 });
 function clearCache() {
-  return _QMWU5E4Djs.clearApiCache.call(void 0, "collections");
+  return _NZ6E5ZHOjs.clearApiCache.call(void 0, "collections");
 }
 var collectionsExport = {
   getCollections,
