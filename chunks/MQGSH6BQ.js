@@ -3,7 +3,7 @@
 
 
 
-var _37PLWNANjs = require('./37PLWNAN.js');
+var _FT7SZRB6js = require('./FT7SZRB6.js');
 require('./4HB3TAEO.js');
 
 // src/qix/session/enigma-session.ts
@@ -9741,7 +9741,7 @@ var mixin6 = {
           // generating id on client side to support multiple undo create operations
           // raised an engine bug to solve this, when resolved can be changed
           // TODO: update the jira id for engine bug once created
-          qId: _37PLWNANjs.generateRandomString.call(void 0, 43),
+          qId: _FT7SZRB6js.generateRandomString.call(void 0, 43),
           qType: "sheet"
         },
         qMetaDef: {
@@ -10304,14 +10304,14 @@ async function createEnigmaSession({
   identity,
   hostConfig
 }) {
-  const locationUrl = _37PLWNANjs.toValidWebsocketLocationUrl.call(void 0, hostConfig);
+  const locationUrl = _FT7SZRB6js.toValidWebsocketLocationUrl.call(void 0, hostConfig);
   const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
   const identityPart = identity ? `/identity/${identity}` : "";
   let url = `${locationUrl}/app/${appId}${identityPart}?reloadUri=${reloadUri}`.replace(/^http/, "ws");
   const isNodeEnvironment = typeof window === "undefined";
   let createSocketMethod;
   if (isNodeEnvironment) {
-    const { headers, queryParams } = await _37PLWNANjs.getRestCallAuthParams.call(void 0, { hostConfig, method: "POST" });
+    const { headers, queryParams } = await _FT7SZRB6js.getRestCallAuthParams.call(void 0, { hostConfig, method: "POST" });
     const WS = (await Promise.resolve().then(() => _interopRequireWildcard(require("ws")))).default;
     Object.entries(queryParams).forEach(([key, value]) => {
       url = `${url}&${key}=${value}`;
@@ -10320,7 +10320,7 @@ async function createEnigmaSession({
       headers
     });
   } else {
-    const { queryParams } = await _37PLWNANjs.getWebSocketAuthParams.call(void 0, { hostConfig });
+    const { queryParams } = await _FT7SZRB6js.getWebSocketAuthParams.call(void 0, { hostConfig });
     Object.entries(queryParams).forEach(([key, value]) => {
       url = `${url}&${key}=${value}`;
     });

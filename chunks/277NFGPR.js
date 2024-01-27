@@ -1,16 +1,16 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
-var _FG5GDUSZjs = require('./FG5GDUSZ.js');
+var _NBNOAZT5js = require('./NBNOAZT5.js');
 
 // src/public/auth.ts
 function registerAuthModule(name, authModule) {
-  void _FG5GDUSZjs.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.registerAuthModule(name, authModule));
+  void _NBNOAZT5js.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.registerAuthModule(name, authModule));
 }
 function logout() {
-  void _FG5GDUSZjs.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.logout());
+  void _NBNOAZT5js.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.logout());
 }
 function setDefaultHostConfig(hostConfig) {
-  void _FG5GDUSZjs.getAuthRuntimeModule.call(void 0, hostConfig).then((impl) => impl.setDefaultHostConfig(hostConfig));
+  void _NBNOAZT5js.getAuthRuntimeModule.call(void 0, hostConfig).then((impl) => impl.setDefaultHostConfig(hostConfig));
 }
 var auth_default = {
   registerAuthModule,

@@ -1,18 +1,18 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _QMWU5E4Djs = require('./chunks/QMWU5E4D.js');
-require('./chunks/FG5GDUSZ.js');
+var _NZ6E5ZHOjs = require('./chunks/NZ6E5ZHO.js');
+require('./chunks/NBNOAZT5.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/quotas.ts
-var getQuotas = async (query, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "quotas", {
+var getQuotas = async (query, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "quotas", {
   method: "get",
   pathTemplate: "/api/v1/quotas",
   query,
   options
 });
-var getQuota = async (id, query, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "quotas", {
+var getQuota = async (id, query, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "quotas", {
   method: "get",
   pathTemplate: "/api/v1/quotas/{id}",
   pathVariables: { id },
@@ -20,7 +20,7 @@ var getQuota = async (id, query, options) => _QMWU5E4Djs.invokeFetch.call(void 0
   options
 });
 function clearCache() {
-  return _QMWU5E4Djs.clearApiCache.call(void 0, "quotas");
+  return _NZ6E5ZHOjs.clearApiCache.call(void 0, "quotas");
 }
 var quotasExport = { getQuotas, getQuota, clearCache };
 var quotas_default = quotasExport;

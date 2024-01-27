@@ -1,30 +1,30 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _QMWU5E4Djs = require('./chunks/QMWU5E4D.js');
-require('./chunks/FG5GDUSZ.js');
+var _NZ6E5ZHOjs = require('./chunks/NZ6E5ZHO.js');
+require('./chunks/NBNOAZT5.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/tenants.ts
-var createTenant = async (body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "tenants", {
+var createTenant = async (body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "tenants", {
   method: "post",
   pathTemplate: "/api/v1/tenants",
   body,
   contentType: "application/json",
   options
 });
-var getMyTenant = async (options) => _QMWU5E4Djs.invokeFetch.call(void 0, "tenants", {
+var getMyTenant = async (options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "tenants", {
   method: "get",
   pathTemplate: "/api/v1/tenants/me",
   options
 });
-var getTenant = async (tenantId, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "tenants", {
+var getTenant = async (tenantId, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "tenants", {
   method: "get",
   pathTemplate: "/api/v1/tenants/{tenantId}",
   pathVariables: { tenantId },
   options
 });
-var patchTenant = async (tenantId, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "tenants", {
+var patchTenant = async (tenantId, body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "tenants", {
   method: "patch",
   pathTemplate: "/api/v1/tenants/{tenantId}",
   pathVariables: { tenantId },
@@ -32,7 +32,7 @@ var patchTenant = async (tenantId, body, options) => _QMWU5E4Djs.invokeFetch.cal
   contentType: "application/json",
   options
 });
-var deactivateTenant = async (tenantId, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "tenants", {
+var deactivateTenant = async (tenantId, body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "tenants", {
   method: "post",
   pathTemplate: "/api/v1/tenants/{tenantId}/actions/deactivate",
   pathVariables: { tenantId },
@@ -40,7 +40,7 @@ var deactivateTenant = async (tenantId, body, options) => _QMWU5E4Djs.invokeFetc
   contentType: "application/json",
   options
 });
-var reactivateTenant = async (tenantId, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "tenants", {
+var reactivateTenant = async (tenantId, body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "tenants", {
   method: "post",
   pathTemplate: "/api/v1/tenants/{tenantId}/actions/reactivate",
   pathVariables: { tenantId },
@@ -49,7 +49,7 @@ var reactivateTenant = async (tenantId, body, options) => _QMWU5E4Djs.invokeFetc
   options
 });
 function clearCache() {
-  return _QMWU5E4Djs.clearApiCache.call(void 0, "tenants");
+  return _NZ6E5ZHOjs.clearApiCache.call(void 0, "tenants");
 }
 var tenantsExport = {
   createTenant,

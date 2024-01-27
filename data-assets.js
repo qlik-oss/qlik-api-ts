@@ -1,33 +1,33 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _QMWU5E4Djs = require('./chunks/QMWU5E4D.js');
-require('./chunks/FG5GDUSZ.js');
+var _NZ6E5ZHOjs = require('./chunks/NZ6E5ZHO.js');
+require('./chunks/NBNOAZT5.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/data-assets.ts
-var deleteDataAssets = async (body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "data-assets", {
+var deleteDataAssets = async (body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "data-assets", {
   method: "delete",
   pathTemplate: "/api/v1/data-assets",
   body,
   contentType: "application/json",
   options
 });
-var createDataAsset = async (body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "data-assets", {
+var createDataAsset = async (body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "data-assets", {
   method: "post",
   pathTemplate: "/api/v1/data-assets",
   body,
   contentType: "application/json",
   options
 });
-var getDataAsset = async (dataAssetId, query, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "data-assets", {
+var getDataAsset = async (dataAssetId, query, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "data-assets", {
   method: "get",
   pathTemplate: "/api/v1/data-assets/{data-asset-id}",
   pathVariables: { "data-asset-id": dataAssetId },
   query,
   options
 });
-var patchDataAsset = async (dataAssetId, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "data-assets", {
+var patchDataAsset = async (dataAssetId, body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "data-assets", {
   method: "patch",
   pathTemplate: "/api/v1/data-assets/{data-asset-id}",
   pathVariables: { "data-asset-id": dataAssetId },
@@ -35,7 +35,7 @@ var patchDataAsset = async (dataAssetId, body, options) => _QMWU5E4Djs.invokeFet
   contentType: "application/json",
   options
 });
-var updateDataAsset = async (dataAssetId, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "data-assets", {
+var updateDataAsset = async (dataAssetId, body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "data-assets", {
   method: "put",
   pathTemplate: "/api/v1/data-assets/{data-asset-id}",
   pathVariables: { "data-asset-id": dataAssetId },
@@ -44,7 +44,7 @@ var updateDataAsset = async (dataAssetId, body, options) => _QMWU5E4Djs.invokeFe
   options
 });
 function clearCache() {
-  return _QMWU5E4Djs.clearApiCache.call(void 0, "data-assets");
+  return _NZ6E5ZHOjs.clearApiCache.call(void 0, "data-assets");
 }
 var dataAssetsExport = {
   deleteDataAssets,

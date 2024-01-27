@@ -1,42 +1,42 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _QMWU5E4Djs = require('./chunks/QMWU5E4D.js');
-require('./chunks/FG5GDUSZ.js');
+var _NZ6E5ZHOjs = require('./chunks/NZ6E5ZHO.js');
+require('./chunks/NBNOAZT5.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/items.ts
-var getItems = async (query, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "items", {
+var getItems = async (query, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "items", {
   method: "get",
   pathTemplate: "/api/v1/items",
   query,
   options
 });
-var getItemsSettings = async (options) => _QMWU5E4Djs.invokeFetch.call(void 0, "items", {
+var getItemsSettings = async (options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "items", {
   method: "get",
   pathTemplate: "/api/v1/items/settings",
   options
 });
-var patchItemsSettings = async (body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "items", {
+var patchItemsSettings = async (body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "items", {
   method: "patch",
   pathTemplate: "/api/v1/items/settings",
   body,
   contentType: "application/json",
   options
 });
-var deleteItem = async (itemId, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "items", {
+var deleteItem = async (itemId, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "items", {
   method: "delete",
   pathTemplate: "/api/v1/items/{itemId}",
   pathVariables: { itemId },
   options
 });
-var getItem = async (itemId, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "items", {
+var getItem = async (itemId, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "items", {
   method: "get",
   pathTemplate: "/api/v1/items/{itemId}",
   pathVariables: { itemId },
   options
 });
-var updateItem = async (itemId, body, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "items", {
+var updateItem = async (itemId, body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "items", {
   method: "put",
   pathTemplate: "/api/v1/items/{itemId}",
   pathVariables: { itemId },
@@ -44,14 +44,14 @@ var updateItem = async (itemId, body, options) => _QMWU5E4Djs.invokeFetch.call(v
   contentType: "application/json",
   options
 });
-var getItemCollections = async (itemId, query, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "items", {
+var getItemCollections = async (itemId, query, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "items", {
   method: "get",
   pathTemplate: "/api/v1/items/{itemId}/collections",
   pathVariables: { itemId },
   query,
   options
 });
-var getPublishedItems = async (itemId, query, options) => _QMWU5E4Djs.invokeFetch.call(void 0, "items", {
+var getPublishedItems = async (itemId, query, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "items", {
   method: "get",
   pathTemplate: "/api/v1/items/{itemId}/publisheditems",
   pathVariables: { itemId },
@@ -59,7 +59,7 @@ var getPublishedItems = async (itemId, query, options) => _QMWU5E4Djs.invokeFetc
   options
 });
 function clearCache() {
-  return _QMWU5E4Djs.clearApiCache.call(void 0, "items");
+  return _NZ6E5ZHOjs.clearApiCache.call(void 0, "items");
 }
 var itemsExport = {
   getItems,
