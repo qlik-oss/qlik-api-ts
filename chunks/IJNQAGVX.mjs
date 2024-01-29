@@ -1,13 +1,13 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { newObj[key] = obj[key]; } } } newObj.default = obj; return newObj; } } function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; } function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }
-
-
-
-
-var _WQOWTWQOjs = require('./WQOWTWQO.js');
-require('./4HB3TAEO.js');
+import {
+  generateRandomString,
+  getRestCallAuthParams,
+  getWebSocketAuthParams,
+  toValidWebsocketLocationUrl
+} from "./JZOX7DKF.mjs";
+import "./VSY5YIQY.mjs";
 
 // src/qix/session/enigma-session.ts
-var _enigmajs = require('enigma.js'); var _enigmajs2 = _interopRequireDefault(_enigmajs);
+import enigma from "enigma.js";
 
 // src/qix/session/schema/engine-api.js
 var engine_api_default = {
@@ -8661,11 +8661,11 @@ var migration_default = {
 };
 
 // src/qix/session/mixins/utils/json-patch.js
-var _isPlainObjectjs = require('lodash/isPlainObject.js'); var _isPlainObjectjs2 = _interopRequireDefault(_isPlainObjectjs);
-var _mergejs = require('lodash/merge.js'); var _mergejs2 = _interopRequireDefault(_mergejs);
+import isPlainObject from "lodash/isPlainObject.js";
+import merge from "lodash/merge.js";
 var JSONPatch = {};
-var extend = _mergejs2.default;
-var isObject = _isPlainObjectjs2.default;
+var extend = merge;
+var isObject = isPlainObject;
 var isArray = Array.isArray;
 var isUndef = function(v) {
   return typeof v === "undefined";
@@ -9506,7 +9506,7 @@ var mixin4 = {
   extend: {
     getOrCreateSessionObject(props) {
       const app = this;
-      const id = _optionalChain([props, 'access', _ => _.qInfo, 'optionalAccess', _2 => _2.qId]);
+      const id = props.qInfo?.qId;
       if (!id)
         throw new Error("Invalid list definition. No qId defined");
       if (!app._listCache[id]) {
@@ -9533,7 +9533,7 @@ var mixin4 = {
       if (outKey) {
         outKey = outKey.replace(/Def$/g, "");
       }
-      const id = _optionalChain([listDef, 'access', _3 => _3.qInfo, 'optionalAccess', _4 => _4.qId]);
+      const id = listDef.qInfo?.qId;
       if (!id)
         throw new Error("Invalid list definition. No qId defined");
       if (!app._listCache[id]) {
@@ -9677,13 +9677,13 @@ var mixin5 = {
 };
 
 // src/qix/session/mixins/doc/create-client-objects.js
-
+import merge2 from "lodash/merge.js";
 var mixin6 = {
   types: "Doc",
   override: {
     createBookmark(_createBookmark, props) {
       return _createBookmark(
-        _mergejs2.default.call(void 0, 
+        merge2(
           {},
           {
             qInfo: {
@@ -9701,7 +9701,7 @@ var mixin6 = {
     },
     createBookmarkEx(_createBookmarkEx, props, patchObjs) {
       return _createBookmarkEx(
-        _mergejs2.default.call(void 0, 
+        merge2(
           true,
           {
             qInfo: {
@@ -9741,7 +9741,7 @@ var mixin6 = {
           // generating id on client side to support multiple undo create operations
           // raised an engine bug to solve this, when resolved can be changed
           // TODO: update the jira id for engine bug once created
-          qId: await _WQOWTWQOjs.generateRandomString.call(void 0, 43),
+          qId: generateRandomString(43),
           qType: "sheet"
         },
         qMetaDef: {
@@ -9777,7 +9777,7 @@ var mixin6 = {
         qInfo: {
           // generating id on client side to support multiple undo create operations
           // raised an engine bug to solve this, when resolved can be changed
-          qId: await _WQOWTWQOjs.generateRandomString.call(void 0, 43),
+          qId: generateRandomString(43),
           qType: "story"
         },
         qMetaDef: {
@@ -10304,15 +10304,15 @@ async function createEnigmaSession({
   identity,
   hostConfig
 }) {
-  const locationUrl = _WQOWTWQOjs.toValidWebsocketLocationUrl.call(void 0, hostConfig);
+  const locationUrl = toValidWebsocketLocationUrl(hostConfig);
   const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
   const identityPart = identity ? `/identity/${identity}` : "";
   let url = `${locationUrl}/app/${appId}${identityPart}?reloadUri=${reloadUri}`.replace(/^http/, "ws");
   const isNodeEnvironment = typeof window === "undefined";
   let createSocketMethod;
   if (isNodeEnvironment) {
-    const { headers, queryParams } = await _WQOWTWQOjs.getRestCallAuthParams.call(void 0, { hostConfig, method: "POST" });
-    const WS = (await Promise.resolve().then(() => _interopRequireWildcard(require("ws")))).default;
+    const { headers, queryParams } = await getRestCallAuthParams({ hostConfig, method: "POST" });
+    const WS = (await import("ws")).default;
     Object.entries(queryParams).forEach(([key, value]) => {
       url = `${url}&${key}=${value}`;
     });
@@ -10320,13 +10320,13 @@ async function createEnigmaSession({
       headers
     });
   } else {
-    const { queryParams } = await _WQOWTWQOjs.getWebSocketAuthParams.call(void 0, { hostConfig });
+    const { queryParams } = await getWebSocketAuthParams({ hostConfig });
     Object.entries(queryParams).forEach(([key, value]) => {
       url = `${url}&${key}=${value}`;
     });
     createSocketMethod = (socketUrl) => new WebSocket(socketUrl);
   }
-  return _enigmajs2.default.create({
+  return enigma.create({
     schema: engine_api_default,
     mixins: mixins5,
     url,
@@ -10340,6 +10340,6 @@ async function createEnigmaSession({
     ]
   });
 }
-
-
-exports.createEnigmaSession = createEnigmaSession;
+export {
+  createEnigmaSession
+};

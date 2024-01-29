@@ -4,7 +4,7 @@
 
 
 
-var _WQOWTWQOjs = require('./WQOWTWQO.js');
+var _6KX2ETIKjs = require('./6KX2ETIK.js');
 require('./4HB3TAEO.js');
 
 // src/qix/session/shared-sessions.ts
@@ -36,7 +36,7 @@ async function resumeAll() {
 var initialActions = {};
 var sharedSessions = {};
 function toGlobalAppSessionId({ appId, identity, hostConfig }) {
-  const locationUrl = _WQOWTWQOjs.toValidWebsocketLocationUrl.call(void 0, hostConfig);
+  const locationUrl = _6KX2ETIKjs.toValidWebsocketLocationUrl.call(void 0, hostConfig);
   return identity ? locationUrl + "/" + appId + "/" + identity : locationUrl + "/" + appId;
 }
 async function runPendingInitialActions(initialActionsForApp, sharedSession, doc) {
@@ -83,16 +83,16 @@ function listenForWindowsAuthenticationInformation(session) {
   return authSuggestedInWebsocket;
 }
 async function createAndSetupEnigmaSession(props, canRetry) {
-  const { createEnigmaSession } = await Promise.resolve().then(() => _interopRequireWildcard(require("./55OD3EOU.js")));
+  const { createEnigmaSession } = await Promise.resolve().then(() => _interopRequireWildcard(require("./HHMKNG2O.js")));
   const session = await createEnigmaSession(props);
   setupSessionListeners(session, props);
   let global;
-  if (await _WQOWTWQOjs.isWindows.call(void 0, props.hostConfig)) {
+  if (await _6KX2ETIKjs.isWindows.call(void 0, props.hostConfig)) {
     const loginInfoPromise = listenForWindowsAuthenticationInformation(session);
     global = await session.open();
     const loginInfo = await loginInfoPromise;
     if (_optionalChain([loginInfo, 'optionalAccess', _ => _.mustAuthenticate])) {
-      const action = await _WQOWTWQOjs.handleAuthenticationError.call(void 0, {
+      const action = await _6KX2ETIKjs.handleAuthenticationError.call(void 0, {
         headers: new Headers(),
         status: 101,
         canRetry,
@@ -389,8 +389,8 @@ async function checkConnectivity(hostConfig) {
     timeoutMs: 2e3,
     noCache: true
   };
-  const fetchRoot = _WQOWTWQOjs.invokeFetch.call(void 0, "", { method, pathTemplate: "", options }).catch(catchFunc);
-  const fetchMe = _WQOWTWQOjs.invokeFetch.call(void 0, "", { method, pathTemplate: "/api/v1/users/me", options }).catch(catchFunc);
+  const fetchRoot = _6KX2ETIKjs.invokeFetch.call(void 0, "", { method, pathTemplate: "", options }).catch(catchFunc);
+  const fetchMe = _6KX2ETIKjs.invokeFetch.call(void 0, "", { method, pathTemplate: "/api/v1/users/me", options }).catch(catchFunc);
   await Promise.all([fetchRoot, fetchMe]);
   return Promise.resolve(status);
 }
@@ -435,7 +435,7 @@ function getOrCreateSharedSession(props) {
 // src/qix/qix-functions.ts
 async function createSessionApp() {
   let sharedSession;
-  if ((await _WQOWTWQOjs.getPlatform.call(void 0, )).isCloud) {
+  if ((await _6KX2ETIKjs.getPlatform.call(void 0, )).isCloud) {
     sharedSession = await getOrCreateSharedSession({ appId: `SessionApp_${Date.now()}` });
   } else {
     sharedSession = await getOrCreateSharedSession({

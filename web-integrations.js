@@ -1,37 +1,37 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _PTU5VIWSjs = require('./chunks/PTU5VIWS.js');
-require('./chunks/ECGUIOPI.js');
+var _TH75GYUYjs = require('./chunks/TH75GYUY.js');
+require('./chunks/SEXEAWEC.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/web-integrations.ts
-var getWebIntegrations = async (query, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "web-integrations", {
+var getWebIntegrations = async (query, options) => _TH75GYUYjs.invokeFetch.call(void 0, "web-integrations", {
   method: "get",
   pathTemplate: "/api/v1/web-integrations",
   query,
   options
 });
-var createWebIntegration = async (body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "web-integrations", {
+var createWebIntegration = async (body, options) => _TH75GYUYjs.invokeFetch.call(void 0, "web-integrations", {
   method: "post",
   pathTemplate: "/api/v1/web-integrations",
   body,
   contentType: "application/json",
   options
 });
-var deleteWebIntegration = async (id, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "web-integrations", {
+var deleteWebIntegration = async (id, options) => _TH75GYUYjs.invokeFetch.call(void 0, "web-integrations", {
   method: "delete",
   pathTemplate: "/api/v1/web-integrations/{id}",
   pathVariables: { id },
   options
 });
-var getWebIntegration = async (id, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "web-integrations", {
+var getWebIntegration = async (id, options) => _TH75GYUYjs.invokeFetch.call(void 0, "web-integrations", {
   method: "get",
   pathTemplate: "/api/v1/web-integrations/{id}",
   pathVariables: { id },
   options
 });
-var patchWebIntegration = async (id, body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "web-integrations", {
+var patchWebIntegration = async (id, body, options) => _TH75GYUYjs.invokeFetch.call(void 0, "web-integrations", {
   method: "patch",
   pathTemplate: "/api/v1/web-integrations/{id}",
   pathVariables: { id },
@@ -40,7 +40,7 @@ var patchWebIntegration = async (id, body, options) => _PTU5VIWSjs.invokeFetch.c
   options
 });
 function clearCache() {
-  return _PTU5VIWSjs.clearApiCache.call(void 0, "web-integrations");
+  return _TH75GYUYjs.clearApiCache.call(void 0, "web-integrations");
 }
 var webIntegrationsExport = {
   getWebIntegrations,

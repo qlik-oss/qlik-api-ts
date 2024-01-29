@@ -5,7 +5,7 @@ import {
   invokeFetch,
   invoke_fetch_default,
   parseFetchResponse
-} from "./QX32SETN.mjs";
+} from "./JZOX7DKF.mjs";
 import "./VSY5YIQY.mjs";
 export {
   EncodingError,

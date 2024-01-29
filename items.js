@@ -1,42 +1,42 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _PTU5VIWSjs = require('./chunks/PTU5VIWS.js');
-require('./chunks/ECGUIOPI.js');
+var _TH75GYUYjs = require('./chunks/TH75GYUY.js');
+require('./chunks/SEXEAWEC.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/items.ts
-var getItems = async (query, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "items", {
+var getItems = async (query, options) => _TH75GYUYjs.invokeFetch.call(void 0, "items", {
   method: "get",
   pathTemplate: "/api/v1/items",
   query,
   options
 });
-var getItemsSettings = async (options) => _PTU5VIWSjs.invokeFetch.call(void 0, "items", {
+var getItemsSettings = async (options) => _TH75GYUYjs.invokeFetch.call(void 0, "items", {
   method: "get",
   pathTemplate: "/api/v1/items/settings",
   options
 });
-var patchItemsSettings = async (body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "items", {
+var patchItemsSettings = async (body, options) => _TH75GYUYjs.invokeFetch.call(void 0, "items", {
   method: "patch",
   pathTemplate: "/api/v1/items/settings",
   body,
   contentType: "application/json",
   options
 });
-var deleteItem = async (itemId, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "items", {
+var deleteItem = async (itemId, options) => _TH75GYUYjs.invokeFetch.call(void 0, "items", {
   method: "delete",
   pathTemplate: "/api/v1/items/{itemId}",
   pathVariables: { itemId },
   options
 });
-var getItem = async (itemId, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "items", {
+var getItem = async (itemId, options) => _TH75GYUYjs.invokeFetch.call(void 0, "items", {
   method: "get",
   pathTemplate: "/api/v1/items/{itemId}",
   pathVariables: { itemId },
   options
 });
-var updateItem = async (itemId, body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "items", {
+var updateItem = async (itemId, body, options) => _TH75GYUYjs.invokeFetch.call(void 0, "items", {
   method: "put",
   pathTemplate: "/api/v1/items/{itemId}",
   pathVariables: { itemId },
@@ -44,14 +44,14 @@ var updateItem = async (itemId, body, options) => _PTU5VIWSjs.invokeFetch.call(v
   contentType: "application/json",
   options
 });
-var getItemCollections = async (itemId, query, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "items", {
+var getItemCollections = async (itemId, query, options) => _TH75GYUYjs.invokeFetch.call(void 0, "items", {
   method: "get",
   pathTemplate: "/api/v1/items/{itemId}/collections",
   pathVariables: { itemId },
   query,
   options
 });
-var getPublishedItems = async (itemId, query, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "items", {
+var getPublishedItems = async (itemId, query, options) => _TH75GYUYjs.invokeFetch.call(void 0, "items", {
   method: "get",
   pathTemplate: "/api/v1/items/{itemId}/publisheditems",
   pathVariables: { itemId },
@@ -59,7 +59,7 @@ var getPublishedItems = async (itemId, query, options) => _PTU5VIWSjs.invokeFetc
   options
 });
 function clearCache() {
-  return _PTU5VIWSjs.clearApiCache.call(void 0, "items");
+  return _TH75GYUYjs.clearApiCache.call(void 0, "items");
 }
 var itemsExport = {
   getItems,

@@ -1,38 +1,38 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _PTU5VIWSjs = require('./chunks/PTU5VIWS.js');
-require('./chunks/ECGUIOPI.js');
+var _TH75GYUYjs = require('./chunks/TH75GYUY.js');
+require('./chunks/SEXEAWEC.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/reloads.ts
-var getReloads = async (query, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "reloads", {
+var getReloads = async (query, options) => _TH75GYUYjs.invokeFetch.call(void 0, "reloads", {
   method: "get",
   pathTemplate: "/api/v1/reloads",
   query,
   options
 });
-var queueReload = async (body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "reloads", {
+var queueReload = async (body, options) => _TH75GYUYjs.invokeFetch.call(void 0, "reloads", {
   method: "post",
   pathTemplate: "/api/v1/reloads",
   body,
   contentType: "application/json",
   options
 });
-var getReload = async (reloadId, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "reloads", {
+var getReload = async (reloadId, options) => _TH75GYUYjs.invokeFetch.call(void 0, "reloads", {
   method: "get",
   pathTemplate: "/api/v1/reloads/{reloadId}",
   pathVariables: { reloadId },
   options
 });
-var cancelReload = async (reloadId, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "reloads", {
+var cancelReload = async (reloadId, options) => _TH75GYUYjs.invokeFetch.call(void 0, "reloads", {
   method: "post",
   pathTemplate: "/api/v1/reloads/{reloadId}/actions/cancel",
   pathVariables: { reloadId },
   options
 });
 function clearCache() {
-  return _PTU5VIWSjs.clearApiCache.call(void 0, "reloads");
+  return _TH75GYUYjs.clearApiCache.call(void 0, "reloads");
 }
 var reloadsExport = { getReloads, queueReload, getReload, cancelReload, clearCache };
 var reloads_default = reloadsExport;
