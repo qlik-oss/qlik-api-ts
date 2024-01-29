@@ -3,7 +3,7 @@ import {
   getRestCallAuthParams,
   getWebSocketAuthParams,
   toValidWebsocketLocationUrl
-} from "./MHLTST5J.mjs";
+} from "./QX32SETN.mjs";
 import "./VSY5YIQY.mjs";
 
 // src/qix/session/enigma-session.ts
@@ -9735,13 +9735,13 @@ var mixin6 = {
      *
      * @returns {Promise<Object,Error>} A Promise that returns an api to the new sheet if resolved or an Error if rejected
      */
-    createSheet(props) {
+    async createSheet(props) {
       return this.createObject({
         qInfo: {
           // generating id on client side to support multiple undo create operations
           // raised an engine bug to solve this, when resolved can be changed
           // TODO: update the jira id for engine bug once created
-          qId: generateRandomString(43),
+          qId: await generateRandomString(43),
           qType: "sheet"
         },
         qMetaDef: {
@@ -9772,12 +9772,12 @@ var mixin6 = {
      * @param {String} [props.rank] - Sorting rank
      * @returns {Promise<Object,Error>} A Promise that returns an api to the new story if resolved or an Error if rejected
      */
-    createStory(props) {
+    async createStory(props) {
       return this.createObject({
         qInfo: {
           // generating id on client side to support multiple undo create operations
           // raised an engine bug to solve this, when resolved can be changed
-          qId: util.generateId(),
+          qId: await generateRandomString(43),
           qType: "story"
         },
         qMetaDef: {

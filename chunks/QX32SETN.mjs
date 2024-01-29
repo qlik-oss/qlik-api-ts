@@ -495,9 +495,21 @@ function isBrowser() {
 function isNode() {
   return typeof process === "object" && typeof __require === "function";
 }
-function generateRandomString(targetLength) {
+async function addCryptoToGlobal() {
+  if (isNode() && !globalThis.crypto) {
+    const crypto = await import(
+      /* webpackIgnore: true */
+      /* webpackExclude: /node:crypto/ */
+      /* webpackMode: "weak" */
+      "node:crypto"
+    );
+    globalThis.crypto = crypto;
+  }
+}
+async function generateRandomString(targetLength) {
   const byteArrayLength = Math.ceil(targetLength * 3 / 4);
   const array = new Uint8Array(byteArrayLength);
+  await addCryptoToGlobal();
   globalThis.crypto.getRandomValues(array);
   const base64UrlString = toBase64Url(array);
   return base64UrlString.substring(0, targetLength);
@@ -521,20 +533,12 @@ function byteArrayToBase64(hashArray) {
 }
 async function sha256(message) {
   const msgBuffer = new TextEncoder().encode(message);
+  await addCryptoToGlobal();
   const hashBuffer = await globalThis.crypto.subtle.digest("SHA-256", msgBuffer);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   const hashBase64 = byteArrayToBase64(hashArray);
   return hashBase64.replaceAll(/\+/g, "-").replaceAll(/\//g, "_").replace(/=+$/, "");
 }
-async function polyfillMissingGlobals() {
-  if (isNode() && !globalThis.crypto) {
-    globalThis.crypto = await import(
-      /* webpackIgnore: true */
-      "node:crypto"
-    );
-  }
-}
-await polyfillMissingGlobals();
 
 // src/auth/internal/default-auth-modules/oauth/storage-helpers.ts
 var storagePrefix = "qlik-qmfe-api";
@@ -673,8 +677,8 @@ function toQueryString(queryParams) {
 async function startFullPageLoginFlow(hostConfig) {
   const clientId = hostConfig.clientId || "";
   const locationUrl = toValidLocationUrl(hostConfig);
-  const verifier = generateRandomString(128);
-  const state = generateRandomString(43);
+  const verifier = await generateRandomString(128);
+  const state = await generateRandomString(43);
   const codeChallenge = await sha256(verifier);
   const redirectUri = hostConfig.redirectUri || globalThis.location.href;
   const scopes = ["user_default"];

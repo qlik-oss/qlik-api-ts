@@ -1,10 +1,10 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true});
-
-var _NBNOAZT5js = require('./NBNOAZT5.js');
+import {
+  getQixRuntimeModule
+} from "./HJGTOAVG.mjs";
 
 // src/public/qix.ts
 function openAppSession(appSessionProps) {
-  const appSessionPromise = _NBNOAZT5js.getQixRuntimeModule.call(void 0, appSessionProps.hostConfig).then(
+  const appSessionPromise = getQixRuntimeModule(appSessionProps.hostConfig).then(
     (impl) => impl.openAppSession(appSessionProps)
   );
   const appSessionProxy = {
@@ -51,7 +51,7 @@ var qix_default = {
   openAppSession
 };
 
-
-
-
-exports.openAppSession = openAppSession; exports.qix_default = qix_default;
+export {
+  openAppSession,
+  qix_default
+};
