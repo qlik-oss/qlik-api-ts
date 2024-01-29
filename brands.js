@@ -1,42 +1,42 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _NZ6E5ZHOjs = require('./chunks/NZ6E5ZHO.js');
-require('./chunks/NBNOAZT5.js');
+var _PTU5VIWSjs = require('./chunks/PTU5VIWS.js');
+require('./chunks/ECGUIOPI.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/brands.ts
-var getBrands = async (query, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "brands", {
+var getBrands = async (query, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "brands", {
   method: "get",
   pathTemplate: "/api/v1/brands",
   query,
   options
 });
-var createBrand = async (body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "brands", {
+var createBrand = async (body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "brands", {
   method: "post",
   pathTemplate: "/api/v1/brands",
   body,
   contentType: "multipart/form-data",
   options
 });
-var getActiveBrand = async (options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "brands", {
+var getActiveBrand = async (options) => _PTU5VIWSjs.invokeFetch.call(void 0, "brands", {
   method: "get",
   pathTemplate: "/api/v1/brands/active",
   options
 });
-var deleteBrand = async (brandId, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "brands", {
+var deleteBrand = async (brandId, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "brands", {
   method: "delete",
   pathTemplate: "/api/v1/brands/{brand-id}",
   pathVariables: { "brand-id": brandId },
   options
 });
-var getBrand = async (brandId, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "brands", {
+var getBrand = async (brandId, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "brands", {
   method: "get",
   pathTemplate: "/api/v1/brands/{brand-id}",
   pathVariables: { "brand-id": brandId },
   options
 });
-var patchBrand = async (brandId, body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "brands", {
+var patchBrand = async (brandId, body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "brands", {
   method: "patch",
   pathTemplate: "/api/v1/brands/{brand-id}",
   pathVariables: { "brand-id": brandId },
@@ -44,33 +44,33 @@ var patchBrand = async (brandId, body, options) => _NZ6E5ZHOjs.invokeFetch.call(
   contentType: "application/json",
   options
 });
-var activateBrand = async (brandId, body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "brands", {
+var activateBrand = async (brandId, body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "brands", {
   method: "post",
   pathTemplate: "/api/v1/brands/{brand-id}/actions/activate",
   pathVariables: { "brand-id": brandId },
   body,
   options
 });
-var deactivateBrand = async (brandId, body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "brands", {
+var deactivateBrand = async (brandId, body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "brands", {
   method: "post",
   pathTemplate: "/api/v1/brands/{brand-id}/actions/deactivate",
   pathVariables: { "brand-id": brandId },
   body,
   options
 });
-var deleteBrandFile = async (brandId, brandFileId, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "brands", {
+var deleteBrandFile = async (brandId, brandFileId, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "brands", {
   method: "delete",
   pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
   pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
   options
 });
-var getBrandFile = async (brandId, brandFileId, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "brands", {
+var getBrandFile = async (brandId, brandFileId, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "brands", {
   method: "get",
   pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
   pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
   options
 });
-var createBrandFile = async (brandId, brandFileId, body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "brands", {
+var createBrandFile = async (brandId, brandFileId, body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "brands", {
   method: "post",
   pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
   pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
@@ -78,7 +78,7 @@ var createBrandFile = async (brandId, brandFileId, body, options) => _NZ6E5ZHOjs
   contentType: "multipart/form-data",
   options
 });
-var updateBrandFile = async (brandId, brandFileId, body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "brands", {
+var updateBrandFile = async (brandId, brandFileId, body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "brands", {
   method: "put",
   pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
   pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
@@ -87,7 +87,7 @@ var updateBrandFile = async (brandId, brandFileId, body, options) => _NZ6E5ZHOjs
   options
 });
 function clearCache() {
-  return _NZ6E5ZHOjs.clearApiCache.call(void 0, "brands");
+  return _PTU5VIWSjs.clearApiCache.call(void 0, "brands");
 }
 var brandsExport = {
   getBrands,

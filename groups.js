@@ -1,25 +1,25 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _NZ6E5ZHOjs = require('./chunks/NZ6E5ZHO.js');
-require('./chunks/NBNOAZT5.js');
+var _PTU5VIWSjs = require('./chunks/PTU5VIWS.js');
+require('./chunks/ECGUIOPI.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/groups.ts
-var getGroups = async (query, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "groups", {
+var getGroups = async (query, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "groups", {
   method: "get",
   pathTemplate: "/api/v1/groups",
   query,
   options
 });
-var createGroup = async (body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "groups", {
+var createGroup = async (body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "groups", {
   method: "post",
   pathTemplate: "/api/v1/groups",
   body,
   contentType: "application/json",
   options
 });
-var filterGroups = async (query, body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "groups", {
+var filterGroups = async (query, body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "groups", {
   method: "post",
   pathTemplate: "/api/v1/groups/actions/filter",
   query,
@@ -27,31 +27,31 @@ var filterGroups = async (query, body, options) => _NZ6E5ZHOjs.invokeFetch.call(
   contentType: "application/json",
   options
 });
-var getGroupsSettings = async (options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "groups", {
+var getGroupsSettings = async (options) => _PTU5VIWSjs.invokeFetch.call(void 0, "groups", {
   method: "get",
   pathTemplate: "/api/v1/groups/settings",
   options
 });
-var patchGroupsSettings = async (body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "groups", {
+var patchGroupsSettings = async (body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "groups", {
   method: "patch",
   pathTemplate: "/api/v1/groups/settings",
   body,
   contentType: "application/json",
   options
 });
-var deleteGroup = async (groupId, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "groups", {
+var deleteGroup = async (groupId, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "groups", {
   method: "delete",
   pathTemplate: "/api/v1/groups/{groupId}",
   pathVariables: { groupId },
   options
 });
-var getGroup = async (groupId, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "groups", {
+var getGroup = async (groupId, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "groups", {
   method: "get",
   pathTemplate: "/api/v1/groups/{groupId}",
   pathVariables: { groupId },
   options
 });
-var patchGroup = async (groupId, body, options) => _NZ6E5ZHOjs.invokeFetch.call(void 0, "groups", {
+var patchGroup = async (groupId, body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "groups", {
   method: "patch",
   pathTemplate: "/api/v1/groups/{groupId}",
   pathVariables: { groupId },
@@ -60,7 +60,7 @@ var patchGroup = async (groupId, body, options) => _NZ6E5ZHOjs.invokeFetch.call(
   options
 });
 function clearCache() {
-  return _NZ6E5ZHOjs.clearApiCache.call(void 0, "groups");
+  return _PTU5VIWSjs.clearApiCache.call(void 0, "groups");
 }
 var groupsExport = {
   getGroups,

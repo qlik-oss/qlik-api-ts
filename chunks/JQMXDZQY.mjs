@@ -17,7 +17,7 @@ import {
   toValidEnigmaLocationUrl,
   toValidLocationUrl,
   toValidWebsocketLocationUrl
-} from "./MHLTST5J.mjs";
+} from "./QX32SETN.mjs";
 import "./VSY5YIQY.mjs";
 export {
   AuthorizationError,

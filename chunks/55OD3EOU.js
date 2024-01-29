@@ -3,7 +3,7 @@
 
 
 
-var _FT7SZRB6js = require('./FT7SZRB6.js');
+var _WQOWTWQOjs = require('./WQOWTWQO.js');
 require('./4HB3TAEO.js');
 
 // src/qix/session/enigma-session.ts
@@ -9735,13 +9735,13 @@ var mixin6 = {
      *
      * @returns {Promise<Object,Error>} A Promise that returns an api to the new sheet if resolved or an Error if rejected
      */
-    createSheet(props) {
+    async createSheet(props) {
       return this.createObject({
         qInfo: {
           // generating id on client side to support multiple undo create operations
           // raised an engine bug to solve this, when resolved can be changed
           // TODO: update the jira id for engine bug once created
-          qId: _FT7SZRB6js.generateRandomString.call(void 0, 43),
+          qId: await _WQOWTWQOjs.generateRandomString.call(void 0, 43),
           qType: "sheet"
         },
         qMetaDef: {
@@ -9772,12 +9772,12 @@ var mixin6 = {
      * @param {String} [props.rank] - Sorting rank
      * @returns {Promise<Object,Error>} A Promise that returns an api to the new story if resolved or an Error if rejected
      */
-    createStory(props) {
+    async createStory(props) {
       return this.createObject({
         qInfo: {
           // generating id on client side to support multiple undo create operations
           // raised an engine bug to solve this, when resolved can be changed
-          qId: util.generateId(),
+          qId: await _WQOWTWQOjs.generateRandomString.call(void 0, 43),
           qType: "story"
         },
         qMetaDef: {
@@ -10304,14 +10304,14 @@ async function createEnigmaSession({
   identity,
   hostConfig
 }) {
-  const locationUrl = _FT7SZRB6js.toValidWebsocketLocationUrl.call(void 0, hostConfig);
+  const locationUrl = _WQOWTWQOjs.toValidWebsocketLocationUrl.call(void 0, hostConfig);
   const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
   const identityPart = identity ? `/identity/${identity}` : "";
   let url = `${locationUrl}/app/${appId}${identityPart}?reloadUri=${reloadUri}`.replace(/^http/, "ws");
   const isNodeEnvironment = typeof window === "undefined";
   let createSocketMethod;
   if (isNodeEnvironment) {
-    const { headers, queryParams } = await _FT7SZRB6js.getRestCallAuthParams.call(void 0, { hostConfig, method: "POST" });
+    const { headers, queryParams } = await _WQOWTWQOjs.getRestCallAuthParams.call(void 0, { hostConfig, method: "POST" });
     const WS = (await Promise.resolve().then(() => _interopRequireWildcard(require("ws")))).default;
     Object.entries(queryParams).forEach(([key, value]) => {
       url = `${url}&${key}=${value}`;
@@ -10320,7 +10320,7 @@ async function createEnigmaSession({
       headers
     });
   } else {
-    const { queryParams } = await _FT7SZRB6js.getWebSocketAuthParams.call(void 0, { hostConfig });
+    const { queryParams } = await _WQOWTWQOjs.getWebSocketAuthParams.call(void 0, { hostConfig });
     Object.entries(queryParams).forEach(([key, value]) => {
       url = `${url}&${key}=${value}`;
     });

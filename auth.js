@@ -3,12 +3,12 @@
 
 
 
-var _277NFGPRjs = require('./chunks/277NFGPR.js');
-require('./chunks/NBNOAZT5.js');
+var _A6R47NQVjs = require('./chunks/A6R47NQV.js');
+require('./chunks/ECGUIOPI.js');
 require('./chunks/4HB3TAEO.js');
 
 
 
 
 
-exports.default = _277NFGPRjs.auth_default; exports.logout = _277NFGPRjs.logout; exports.registerAuthModule = _277NFGPRjs.registerAuthModule; exports.setDefaultHostConfig = _277NFGPRjs.setDefaultHostConfig;
+exports.default = _A6R47NQVjs.auth_default; exports.logout = _A6R47NQVjs.logout; exports.registerAuthModule = _A6R47NQVjs.registerAuthModule; exports.setDefaultHostConfig = _A6R47NQVjs.setDefaultHostConfig;
