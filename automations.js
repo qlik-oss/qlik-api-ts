@@ -1,55 +1,55 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _PTU5VIWSjs = require('./chunks/PTU5VIWS.js');
-require('./chunks/ECGUIOPI.js');
+var _TH75GYUYjs = require('./chunks/TH75GYUY.js');
+require('./chunks/SEXEAWEC.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/automations.ts
-var getAutomations = async (query, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "automations", {
+var getAutomations = async (query, options) => _TH75GYUYjs.invokeFetch.call(void 0, "automations", {
   method: "get",
   pathTemplate: "/api/v1/automations",
   query,
   options
 });
-var createAutomation = async (body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "automations", {
+var createAutomation = async (body, options) => _TH75GYUYjs.invokeFetch.call(void 0, "automations", {
   method: "post",
   pathTemplate: "/api/v1/automations",
   body,
   contentType: "application/json",
   options
 });
-var getAutomationsSettings = async (options) => _PTU5VIWSjs.invokeFetch.call(void 0, "automations", {
+var getAutomationsSettings = async (options) => _TH75GYUYjs.invokeFetch.call(void 0, "automations", {
   method: "get",
   pathTemplate: "/api/v1/automations/settings",
   options
 });
-var updateAutomationsSettings = async (body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "automations", {
+var updateAutomationsSettings = async (body, options) => _TH75GYUYjs.invokeFetch.call(void 0, "automations", {
   method: "put",
   pathTemplate: "/api/v1/automations/settings",
   body,
   contentType: "application/json",
   options
 });
-var getAutomationsUsageMetrics = async (query, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "automations", {
+var getAutomationsUsageMetrics = async (query, options) => _TH75GYUYjs.invokeFetch.call(void 0, "automations", {
   method: "get",
   pathTemplate: "/api/v1/automations/usage",
   query,
   options
 });
-var deleteAutomation = async (id, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "automations", {
+var deleteAutomation = async (id, options) => _TH75GYUYjs.invokeFetch.call(void 0, "automations", {
   method: "delete",
   pathTemplate: "/api/v1/automations/{id}",
   pathVariables: { id },
   options
 });
-var getAutomation = async (id, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "automations", {
+var getAutomation = async (id, options) => _TH75GYUYjs.invokeFetch.call(void 0, "automations", {
   method: "get",
   pathTemplate: "/api/v1/automations/{id}",
   pathVariables: { id },
   options
 });
-var updateAutomation = async (id, body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "automations", {
+var updateAutomation = async (id, body, options) => _TH75GYUYjs.invokeFetch.call(void 0, "automations", {
   method: "put",
   pathTemplate: "/api/v1/automations/{id}",
   pathVariables: { id },
@@ -57,7 +57,7 @@ var updateAutomation = async (id, body, options) => _PTU5VIWSjs.invokeFetch.call
   contentType: "application/json",
   options
 });
-var copyAutomation = async (id, body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "automations", {
+var copyAutomation = async (id, body, options) => _TH75GYUYjs.invokeFetch.call(void 0, "automations", {
   method: "post",
   pathTemplate: "/api/v1/automations/{id}/actions/copy",
   pathVariables: { id },
@@ -65,19 +65,19 @@ var copyAutomation = async (id, body, options) => _PTU5VIWSjs.invokeFetch.call(v
   contentType: "application/json",
   options
 });
-var disableAutomation = async (id, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "automations", {
+var disableAutomation = async (id, options) => _TH75GYUYjs.invokeFetch.call(void 0, "automations", {
   method: "post",
   pathTemplate: "/api/v1/automations/{id}/actions/disable",
   pathVariables: { id },
   options
 });
-var enableAutomation = async (id, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "automations", {
+var enableAutomation = async (id, options) => _TH75GYUYjs.invokeFetch.call(void 0, "automations", {
   method: "post",
   pathTemplate: "/api/v1/automations/{id}/actions/enable",
   pathVariables: { id },
   options
 });
-var moveAutomation = async (id, body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "automations", {
+var moveAutomation = async (id, body, options) => _TH75GYUYjs.invokeFetch.call(void 0, "automations", {
   method: "post",
   pathTemplate: "/api/v1/automations/{id}/actions/move",
   pathVariables: { id },
@@ -85,14 +85,14 @@ var moveAutomation = async (id, body, options) => _PTU5VIWSjs.invokeFetch.call(v
   contentType: "application/json",
   options
 });
-var getAutomationRuns = async (id, query, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "automations", {
+var getAutomationRuns = async (id, query, options) => _TH75GYUYjs.invokeFetch.call(void 0, "automations", {
   method: "get",
   pathTemplate: "/api/v1/automations/{id}/runs",
   pathVariables: { id },
   query,
   options
 });
-var queueAutomationRun = async (id, body, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "automations", {
+var queueAutomationRun = async (id, body, options) => _TH75GYUYjs.invokeFetch.call(void 0, "automations", {
   method: "post",
   pathTemplate: "/api/v1/automations/{id}/runs",
   pathVariables: { id },
@@ -100,32 +100,32 @@ var queueAutomationRun = async (id, body, options) => _PTU5VIWSjs.invokeFetch.ca
   contentType: "application/json",
   options
 });
-var getAutomationRun = async (id, runId, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "automations", {
+var getAutomationRun = async (id, runId, options) => _TH75GYUYjs.invokeFetch.call(void 0, "automations", {
   method: "get",
   pathTemplate: "/api/v1/automations/{id}/runs/{runId}",
   pathVariables: { id, runId },
   options
 });
-var getAutomationRunDetails = async (id, runId, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "automations", {
+var getAutomationRunDetails = async (id, runId, options) => _TH75GYUYjs.invokeFetch.call(void 0, "automations", {
   method: "post",
   pathTemplate: "/api/v1/automations/{id}/runs/{runId}/actions/export",
   pathVariables: { id, runId },
   options
 });
-var retryAutomationRun = async (id, runId, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "automations", {
+var retryAutomationRun = async (id, runId, options) => _TH75GYUYjs.invokeFetch.call(void 0, "automations", {
   method: "post",
   pathTemplate: "/api/v1/automations/{id}/runs/{runId}/actions/retry",
   pathVariables: { id, runId },
   options
 });
-var stopAutomationRun = async (id, runId, options) => _PTU5VIWSjs.invokeFetch.call(void 0, "automations", {
+var stopAutomationRun = async (id, runId, options) => _TH75GYUYjs.invokeFetch.call(void 0, "automations", {
   method: "post",
   pathTemplate: "/api/v1/automations/{id}/runs/{runId}/actions/stop",
   pathVariables: { id, runId },
   options
 });
 function clearCache() {
-  return _PTU5VIWSjs.clearApiCache.call(void 0, "automations");
+  return _TH75GYUYjs.clearApiCache.call(void 0, "automations");
 }
 var automationsExport = {
   getAutomations,
