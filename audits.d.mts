@@ -86,7 +86,6 @@ type GetSettingsResult = {
 };
 /**
  * @deprecated
- *
  */
 type Href = {
     /** @deprecated */
