@@ -10,3 +10,4 @@ The code in the examples use ES Module Syntax. It is possible to use CommonJS fo
 - [Show Sheet List in an app](./examples/show-sheet-list.md)
 - [Create an app](./examples/create-app.md)
 - [Create session app](./examples/create-session-app.md)
+- [Open app without data](./examples/open-without-data.md)

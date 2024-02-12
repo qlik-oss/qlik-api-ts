@@ -3,7 +3,7 @@
 
 
 
-var _6KX2ETIKjs = require('./6KX2ETIK.js');
+var _WOYJLK4Yjs = require('./WOYJLK4Y.js');
 require('./4HB3TAEO.js');
 
 // src/qix/session/enigma-session.ts
@@ -8626,6 +8626,68 @@ var mixin = {
 mixin.override.getField = fieldGet;
 var get_object_cache_default = mixin;
 
+// src/qix/session/mixins/all/layout-observable.js
+function Observable(api) {
+  this.getLayout = function(api2) {
+    this.requestPromise = api2.getLayout().then((layout) => {
+      this.requestPromise = null;
+      if (api2.isCancelled) {
+        return;
+      }
+      this.fn(layout);
+    }).catch((err) => {
+      if (process.env.NODE_ENV === "development") {
+        if (typeof err !== "undefined") {
+          console.error(err);
+        }
+      }
+    });
+  }.bind(this, api);
+  this.onInvalidated = function() {
+    this.getLayout();
+  }.bind(this);
+  this.api = api;
+  this.fn = null;
+}
+Observable.prototype.subscribe = function(fn) {
+  if (typeof fn !== "function") {
+    throw new Error("Observer must be a function");
+  }
+  if (typeof this.fn === "function") {
+    return;
+  }
+  this.fn = fn;
+  this.api.Invalidated.bind(this.onInvalidated);
+  this.getLayout();
+};
+Observable.prototype.dispose = function() {
+  this.api.Invalidated.unbind(this.onInvalidated);
+};
+Observable.prototype.cancel = function() {
+  if (this.requestPromise) {
+    this.api.app.global.cancelRequest(this.requestPromise.requestId);
+    this.api.markAsCancelled();
+    this.requestPromise = null;
+    return true;
+  }
+  return false;
+};
+Observable.prototype.retry = function() {
+  if (this.api.isCancelled) {
+    this.getLayout();
+  }
+};
+var layout_observable_default = {
+  types: ["Doc", "GenericObject", "GenericDimension", "GenericMeasure", "GenericBookmark", "GenericVariable"],
+  extend: {
+    layoutSubscribe(fn) {
+      const observable = new Observable(this);
+      observable.subscribe(fn);
+      return observable;
+    }
+  }
+};
+
 // src/qix/session/mixins/all/migration.ts
 function isSnapshotData(data) {
   return data && !!data.sourceObjectId;
@@ -9279,7 +9341,7 @@ var state_default = {
 };
 
 // src/qix/session/mixins/all/index.ts
-var mixins = [base_default, get_object_cache_default, migration_default, state_default];
+var mixins = [base_default, get_object_cache_default, migration_default, state_default, layout_observable_default];
 
 // src/qix/session/mixins/custom/currentselections/current-selections-mixins.ts
 var mixin2 = {
@@ -9643,7 +9705,7 @@ var normalize_default = {
   init(args) {
     this.Promise = args.config.Promise;
     const { api } = args;
-    api.waitForOpen = Promise.resolve();
+    api.waitForOpen = { promise: Promise.resolve() };
   }
 };
 
@@ -9741,7 +9803,7 @@ var mixin6 = {
           // generating id on client side to support multiple undo create operations
           // raised an engine bug to solve this, when resolved can be changed
           // TODO: update the jira id for engine bug once created
-          qId: _6KX2ETIKjs.generateRandomString.call(void 0, 43),
+          qId: _WOYJLK4Yjs.generateRandomString.call(void 0, 43),
           qType: "sheet"
         },
         qMetaDef: {
@@ -9777,7 +9839,7 @@ var mixin6 = {
         qInfo: {
           // generating id on client side to support multiple undo create operations
           // raised an engine bug to solve this, when resolved can be changed
-          qId: _6KX2ETIKjs.generateRandomString.call(void 0, 43),
+          qId: _WOYJLK4Yjs.generateRandomString.call(void 0, 43),
           qType: "story"
         },
         qMetaDef: {
@@ -10302,16 +10364,20 @@ var mixins5 = [...mixins3, ...mixins, ...mixins4, ...mixins2];
 async function createEnigmaSession({
   appId,
   identity,
-  hostConfig
+  hostConfig,
+  withoutData = false
 }) {
-  const locationUrl = _6KX2ETIKjs.toValidWebsocketLocationUrl.call(void 0, hostConfig);
+  const locationUrl = _WOYJLK4Yjs.toValidWebsocketLocationUrl.call(void 0, hostConfig);
   const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
+  if (!identity && withoutData) {
+    identity = "no_data";
+  }
   const identityPart = identity ? `/identity/${identity}` : "";
   let url = `${locationUrl}/app/${appId}${identityPart}?reloadUri=${reloadUri}`.replace(/^http/, "ws");
   const isNodeEnvironment = typeof window === "undefined";
   let createSocketMethod;
   if (isNodeEnvironment) {
-    const { headers, queryParams } = await _6KX2ETIKjs.getRestCallAuthParams.call(void 0, { hostConfig, method: "POST" });
+    const { headers, queryParams } = await _WOYJLK4Yjs.getRestCallAuthParams.call(void 0, { hostConfig, method: "POST" });
     const WS = (await Promise.resolve().then(() => _interopRequireWildcard(require("ws")))).default;
     Object.entries(queryParams).forEach(([key, value]) => {
       url = `${url}&${key}=${value}`;
@@ -10320,7 +10386,7 @@ async function createEnigmaSession({
       headers
     });
   } else {
-    const { queryParams } = await _6KX2ETIKjs.getWebSocketAuthParams.call(void 0, { hostConfig });
+    const { queryParams } = await _WOYJLK4Yjs.getWebSocketAuthParams.call(void 0, { hostConfig });
     Object.entries(queryParams).forEach(([key, value]) => {
       url = `${url}&${key}=${value}`;
     });

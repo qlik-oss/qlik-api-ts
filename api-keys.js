@@ -1,31 +1,31 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _TH75GYUYjs = require('./chunks/TH75GYUY.js');
-require('./chunks/SEXEAWEC.js');
+var _URIW2U5Mjs = require('./chunks/URIW2U5M.js');
+require('./chunks/2YWCEGTS.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/api-keys.ts
-var getApiKeys = async (query, options) => _TH75GYUYjs.invokeFetch.call(void 0, "api-keys", {
+var getApiKeys = async (query, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "api-keys", {
   method: "get",
   pathTemplate: "/api/v1/api-keys",
   query,
   options
 });
-var createApiKey = async (body, options) => _TH75GYUYjs.invokeFetch.call(void 0, "api-keys", {
+var createApiKey = async (body, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "api-keys", {
   method: "post",
   pathTemplate: "/api/v1/api-keys",
   body,
   contentType: "application/json",
   options
 });
-var getApiKeysConfig = async (tenantId, options) => _TH75GYUYjs.invokeFetch.call(void 0, "api-keys", {
+var getApiKeysConfig = async (tenantId, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "api-keys", {
   method: "get",
   pathTemplate: "/api/v1/api-keys/configs/{tenantId}",
   pathVariables: { tenantId },
   options
 });
-var patchApiKeysConfig = async (tenantId, body, options) => _TH75GYUYjs.invokeFetch.call(void 0, "api-keys", {
+var patchApiKeysConfig = async (tenantId, body, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "api-keys", {
   method: "patch",
   pathTemplate: "/api/v1/api-keys/configs/{tenantId}",
   pathVariables: { tenantId },
@@ -33,19 +33,19 @@ var patchApiKeysConfig = async (tenantId, body, options) => _TH75GYUYjs.invokeFe
   contentType: "application/json",
   options
 });
-var deleteApiKey = async (id, options) => _TH75GYUYjs.invokeFetch.call(void 0, "api-keys", {
+var deleteApiKey = async (id, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "api-keys", {
   method: "delete",
   pathTemplate: "/api/v1/api-keys/{id}",
   pathVariables: { id },
   options
 });
-var getApiKey = async (id, options) => _TH75GYUYjs.invokeFetch.call(void 0, "api-keys", {
+var getApiKey = async (id, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "api-keys", {
   method: "get",
   pathTemplate: "/api/v1/api-keys/{id}",
   pathVariables: { id },
   options
 });
-var patchApiKey = async (id, body, options) => _TH75GYUYjs.invokeFetch.call(void 0, "api-keys", {
+var patchApiKey = async (id, body, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "api-keys", {
   method: "patch",
   pathTemplate: "/api/v1/api-keys/{id}",
   pathVariables: { id },
@@ -54,7 +54,7 @@ var patchApiKey = async (id, body, options) => _TH75GYUYjs.invokeFetch.call(void
   options
 });
 function clearCache() {
-  return _TH75GYUYjs.clearApiCache.call(void 0, "api-keys");
+  return _URIW2U5Mjs.clearApiCache.call(void 0, "api-keys");
 }
 var apiKeysExport = {
   getApiKeys,

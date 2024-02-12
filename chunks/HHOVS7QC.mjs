@@ -4,7 +4,7 @@ import {
   invokeFetch,
   isWindows,
   toValidWebsocketLocationUrl
-} from "./JZOX7DKF.mjs";
+} from "./BYD63JCG.mjs";
 import "./VSY5YIQY.mjs";
 
 // src/qix/session/shared-sessions.ts
@@ -35,9 +35,9 @@ async function resumeAll() {
 }
 var initialActions = {};
 var sharedSessions = {};
-function toGlobalAppSessionId({ appId, identity, hostConfig }) {
+function toGlobalAppSessionId({ appId, identity, hostConfig, withoutData }) {
   const locationUrl = toValidWebsocketLocationUrl(hostConfig);
-  return identity ? locationUrl + "/" + appId + "/" + identity : locationUrl + "/" + appId;
+  return (identity ? locationUrl + "/" + appId + "/" + identity : locationUrl + "/" + appId) + (withoutData ? "/withoutData" : "");
 }
 async function runPendingInitialActions(initialActionsForApp, sharedSession, doc) {
   for (const initialAction of initialActionsForApp) {
@@ -83,7 +83,7 @@ function listenForWindowsAuthenticationInformation(session) {
   return authSuggestedInWebsocket;
 }
 async function createAndSetupEnigmaSession(props, canRetry) {
-  const { createEnigmaSession } = await import("./IJNQAGVX.mjs");
+  const { createEnigmaSession } = await import("./HOCTJESP.mjs");
   const session = await createEnigmaSession(props);
   setupSessionListeners(session, props);
   let global;
@@ -296,7 +296,7 @@ function createSharedSession(props) {
       const global2 = await sharedSession.globalPromise;
       return global2.createSessionApp();
     } else {
-      return global.openDoc(props.appId, "", "", "", false).then((doc) => {
+      return global.openDoc(props.appId, "", "", "", !!props.withoutData).then((doc) => {
         if (!doc) {
           return Promise.reject(new Error("Doc could not be opened"));
         }

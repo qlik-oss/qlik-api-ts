@@ -1,16 +1,16 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
-var _SEXEAWECjs = require('./SEXEAWEC.js');
+var _2YWCEGTSjs = require('./2YWCEGTS.js');
 
 // src/public/auth.ts
 function registerAuthModule(name, authModule) {
-  void _SEXEAWECjs.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.registerAuthModule(name, authModule));
+  void _2YWCEGTSjs.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.registerAuthModule(name, authModule));
 }
 function logout() {
-  void _SEXEAWECjs.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.logout());
+  void _2YWCEGTSjs.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.logout());
 }
 function setDefaultHostConfig(hostConfig) {
-  void _SEXEAWECjs.getAuthRuntimeModule.call(void 0, hostConfig).then((impl) => impl.setDefaultHostConfig(hostConfig));
+  void _2YWCEGTSjs.getAuthRuntimeModule.call(void 0, hostConfig).then((impl) => impl.setDefaultHostConfig(hostConfig));
 }
 var auth_default = {
   registerAuthModule,

@@ -3,12 +3,12 @@
 
 
 
-var _SMKHFJJFjs = require('./chunks/SMKHFJJF.js');
-require('./chunks/SEXEAWEC.js');
+var _PLOSYUG2js = require('./chunks/PLOSYUG2.js');
+require('./chunks/2YWCEGTS.js');
 require('./chunks/4HB3TAEO.js');
 
 
 
 
 
-exports.default = _SMKHFJJFjs.auth_default; exports.logout = _SMKHFJJFjs.logout; exports.registerAuthModule = _SMKHFJJFjs.registerAuthModule; exports.setDefaultHostConfig = _SMKHFJJFjs.setDefaultHostConfig;
+exports.default = _PLOSYUG2js.auth_default; exports.logout = _PLOSYUG2js.logout; exports.registerAuthModule = _PLOSYUG2js.registerAuthModule; exports.setDefaultHostConfig = _PLOSYUG2js.setDefaultHostConfig;

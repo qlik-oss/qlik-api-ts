@@ -20,6 +20,23 @@ The `@qlik/api/qix` module gives you a fully typed API to the QIX engine and to 
 
 When a session gets a suspend event `@qlik/api` will automatically handle the suspend/resume logic and attempt to re-connect to the same engine session. Hopefully a user will never even notice that the websocket was closed for a little while.
 
+## The App session
+
+An app session in qix means a websocket connected to one app by one user in qix engine.
+
+```js
+qix.openAppSession({ ...appSessionProps });
+```
+
+The app sesssion settings have the following properties.
+
+- `appId` - Required string to open an App
+- `identity` - Optional string to open an individual session to the same app that is different from the default. Useful if different selection states are needed simultaneously.
+- `hostConfig` - Optional Hostconfig to connect to a URL and authenticate an app session. Only needed if default HostConfig has not been set, or if connection should be different from the default.
+- `withoutData` - Optional boolean, set to true if app should be opened without loading the data blob
+
+**_note_** - when using `withoutData: true` and no `identity` the websocket url will include `/identity/no_data` to prevent that engine throws error "App is opened in a different mode".
+
 ## Usage example
 
 ```ts
@@ -28,8 +45,10 @@ import { setDefaultHostConfig } from "@qlik/api/auth";
 
 setDefaultHostConfig({ ... });
 
-// sets up a websocket to engine
-appSession = openAppSession({ appId: "<app-id>" });
+// sets up a session to a Qix Engine App
+appSession = openAppSession({ appId: <app-id>, identity: <empty-or-anystring>, hostConfig: <only-if-different-from-default>, withoutData: <default to false>" });
+// or use the shorthand
+// appSession = openAppSession(<app-id>);
 
 // get the "qix document (qlik app)"
 const app = await appSession.getDoc();

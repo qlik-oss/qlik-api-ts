@@ -1,6 +1,6 @@
 import "./VSY5YIQY.mjs";
 
-// node_modules/.pnpm/@qlik+runtime-module-loader@0.2.4/node_modules/@qlik/runtime-module-loader/dist/esm/index.js
+// node_modules/.pnpm/@qlik+runtime-module-loader@0.2.5/node_modules/@qlik/runtime-module-loader/dist/esm/index.js
 window.__qlikMainPrivateResolvers = window.__qlikMainPrivateResolvers || {};
 window.__qlikMainPrivateResolvers.mainUrlPromise = window.__qlikMainPrivateResolvers.mainUrlPromise || new Promise((resolve) => {
   window.__qlikMainPrivateResolvers.resolveMainJsUrl = (value) => resolve(value);
