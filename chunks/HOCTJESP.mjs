@@ -3,7 +3,7 @@ import {
   getRestCallAuthParams,
   getWebSocketAuthParams,
   toValidWebsocketLocationUrl
-} from "./JZOX7DKF.mjs";
+} from "./BYD63JCG.mjs";
 import "./VSY5YIQY.mjs";
 
 // src/qix/session/enigma-session.ts
@@ -8626,6 +8626,68 @@ var mixin = {
 mixin.override.getField = fieldGet;
 var get_object_cache_default = mixin;
 
+// src/qix/session/mixins/all/layout-observable.js
+function Observable(api) {
+  this.getLayout = function(api2) {
+    this.requestPromise = api2.getLayout().then((layout) => {
+      this.requestPromise = null;
+      if (api2.isCancelled) {
+        return;
+      }
+      this.fn(layout);
+    }).catch((err) => {
+      if (process.env.NODE_ENV === "development") {
+        if (typeof err !== "undefined") {
+          console.error(err);
+        }
+      }
+    });
+  }.bind(this, api);
+  this.onInvalidated = function() {
+    this.getLayout();
+  }.bind(this);
+  this.api = api;
+  this.fn = null;
+}
+Observable.prototype.subscribe = function(fn) {
+  if (typeof fn !== "function") {
+    throw new Error("Observer must be a function");
+  }
+  if (typeof this.fn === "function") {
+    return;
+  }
+  this.fn = fn;
+  this.api.Invalidated.bind(this.onInvalidated);
+  this.getLayout();
+};
+Observable.prototype.dispose = function() {
+  this.api.Invalidated.unbind(this.onInvalidated);
+};
+Observable.prototype.cancel = function() {
+  if (this.requestPromise) {
+    this.api.app.global.cancelRequest(this.requestPromise.requestId);
+    this.api.markAsCancelled();
+    this.requestPromise = null;
+    return true;
+  }
+  return false;
+};
+Observable.prototype.retry = function() {
+  if (this.api.isCancelled) {
+    this.getLayout();
+  }
+};
+var layout_observable_default = {
+  types: ["Doc", "GenericObject", "GenericDimension", "GenericMeasure", "GenericBookmark", "GenericVariable"],
+  extend: {
+    layoutSubscribe(fn) {
+      const observable = new Observable(this);
+      observable.subscribe(fn);
+      return observable;
+    }
+  }
+};
+
 // src/qix/session/mixins/all/migration.ts
 function isSnapshotData(data) {
   return data && !!data.sourceObjectId;
@@ -9279,7 +9341,7 @@ var state_default = {
 };
 
 // src/qix/session/mixins/all/index.ts
-var mixins = [base_default, get_object_cache_default, migration_default, state_default];
+var mixins = [base_default, get_object_cache_default, migration_default, state_default, layout_observable_default];
 
 // src/qix/session/mixins/custom/currentselections/current-selections-mixins.ts
 var mixin2 = {
@@ -9643,7 +9705,7 @@ var normalize_default = {
   init(args) {
     this.Promise = args.config.Promise;
     const { api } = args;
-    api.waitForOpen = Promise.resolve();
+    api.waitForOpen = { promise: Promise.resolve() };
   }
 };
 
@@ -10302,10 +10364,14 @@ var mixins5 = [...mixins3, ...mixins, ...mixins4, ...mixins2];
 async function createEnigmaSession({
   appId,
   identity,
-  hostConfig
+  hostConfig,
+  withoutData = false
 }) {
   const locationUrl = toValidWebsocketLocationUrl(hostConfig);
   const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
+  if (!identity && withoutData) {
+    identity = "no_data";
+  }
   const identityPart = identity ? `/identity/${identity}` : "";
   let url = `${locationUrl}/app/${appId}${identityPart}?reloadUri=${reloadUri}`.replace(/^http/, "ws");
   const isNodeEnvironment = typeof window === "undefined";

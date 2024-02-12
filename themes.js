@@ -1,36 +1,36 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _TH75GYUYjs = require('./chunks/TH75GYUY.js');
-require('./chunks/SEXEAWEC.js');
+var _URIW2U5Mjs = require('./chunks/URIW2U5M.js');
+require('./chunks/2YWCEGTS.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/themes.ts
-var getThemes = async (options) => _TH75GYUYjs.invokeFetch.call(void 0, "themes", {
+var getThemes = async (options) => _URIW2U5Mjs.invokeFetch.call(void 0, "themes", {
   method: "get",
   pathTemplate: "/api/v1/themes",
   options
 });
-var uploadTheme = async (body, options) => _TH75GYUYjs.invokeFetch.call(void 0, "themes", {
+var uploadTheme = async (body, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "themes", {
   method: "post",
   pathTemplate: "/api/v1/themes",
   body,
   contentType: "multipart/form-data",
   options
 });
-var deleteTheme = async (id, options) => _TH75GYUYjs.invokeFetch.call(void 0, "themes", {
+var deleteTheme = async (id, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "themes", {
   method: "delete",
   pathTemplate: "/api/v1/themes/{id}",
   pathVariables: { id },
   options
 });
-var getTheme = async (id, options) => _TH75GYUYjs.invokeFetch.call(void 0, "themes", {
+var getTheme = async (id, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "themes", {
   method: "get",
   pathTemplate: "/api/v1/themes/{id}",
   pathVariables: { id },
   options
 });
-var patchTheme = async (id, body, options) => _TH75GYUYjs.invokeFetch.call(void 0, "themes", {
+var patchTheme = async (id, body, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "themes", {
   method: "patch",
   pathTemplate: "/api/v1/themes/{id}",
   pathVariables: { id },
@@ -38,20 +38,20 @@ var patchTheme = async (id, body, options) => _TH75GYUYjs.invokeFetch.call(void 
   contentType: "multipart/form-data",
   options
 });
-var downloadTheme = async (id, options) => _TH75GYUYjs.invokeFetch.call(void 0, "themes", {
+var downloadTheme = async (id, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "themes", {
   method: "get",
   pathTemplate: "/api/v1/themes/{id}/file",
   pathVariables: { id },
   options
 });
-var downloadFileFromTheme = async (id, filepath, options) => _TH75GYUYjs.invokeFetch.call(void 0, "themes", {
+var downloadFileFromTheme = async (id, filepath, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "themes", {
   method: "get",
   pathTemplate: "/api/v1/themes/{id}/file/{filepath}",
   pathVariables: { id, filepath },
   options
 });
 function clearCache() {
-  return _TH75GYUYjs.clearApiCache.call(void 0, "themes");
+  return _URIW2U5Mjs.clearApiCache.call(void 0, "themes");
 }
 var themesExport = {
   getThemes,

@@ -1,7 +1,7 @@
 import './global.types-TzVhFPid.js';
 import { H as HostConfig } from './auth-types-nnUcWhuU.js';
 
-declare const QIX_SCHEMA_VERSION = "12.1972.0";
+declare const QIX_SCHEMA_VERSION = "12.1976.0";
 type AlfaNumString = {
     /**
      * Calculated value.
@@ -11523,9 +11523,14 @@ type StateEvent = {
 };
 
 type OpenAppSessionProps = {
+    /** App ID to open */
     appId: string;
+    /** Set a value to open an individual session to the same app that is different from the default */
     identity?: string;
+    /** Hostconfig to connect to a URL and authenticate an app session */
     hostConfig?: HostConfig;
+    /** Set to true if app should be opened without loading the data blob */
+    withoutData?: boolean;
 };
 type DocAction = (doc: Doc) => Promise<unknown>;
 type CloseProps = {

@@ -10,8 +10,8 @@
     "fs": false
   },
   "dependencies": {
-    "@qlik/embed-runtime": "^0.6.3",
-    "@qlik/runtime-module-loader": "^0.2.4",
+    "@qlik/embed-runtime": "^0.6.4",
+    "@qlik/runtime-module-loader": "^0.2.5",
     "bufferutil": "^4.0.8",
     "enigma.js": "^2.12.0",
     "lodash": "^4.17.21",
