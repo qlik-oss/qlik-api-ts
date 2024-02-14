@@ -26,11 +26,11 @@ type CredentialCreate = {
     datasourceID?: string;
     /** UUID of the credential */
     qID?: string;
-    /** UName of the credential */
+    /** Name of the credential */
     qName: string;
     /** Password */
     qPassword: string;
-    /** Type of credential */
+    /** Type of credential (i.e. connector provider of the corresponding connection) */
     qType: string;
     /** User name */
     qUsername: string;
@@ -49,6 +49,7 @@ type Errors = Error[];
 type Link = {
     /** Link to cirrent query */
     self: {
+        /** URL pointing to the resource */
         href: string;
     };
 };

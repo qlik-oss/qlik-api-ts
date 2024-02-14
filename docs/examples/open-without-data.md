@@ -1,4 +1,4 @@
-# Create an app and add some data
+# Open app without data
 
 ◁ [Back to examples](../examples.md)
 
