@@ -45,55 +45,12 @@ type BulkResponse = {
     }[];
 };
 /**
- * Essential fields of a connection
+ * Schema used to create a connection with given connection string (i.e. qConnectStatement) along with other metadata
  */
-type Connection = {
-    /** Datetime when the connection was created */
-    created: string;
-    /** Data source ID */
-    datasourceID?: string;
-    links?: Link;
-    /** Array of string (i.e. update, delete, read) indicating the user's privileges on the associated connection */
-    privileges: Privilege[];
-    /** 0 or 1 value indicating whether the data connector is 64-bit (0) or 32-bit (1). Defaults to 0 if not specified. */
-    qArchitecture: 0 | 1;
-    /** Connection string for the data connection */
-    qConnectStatement: string;
-    /** String that contains connection specific secret (or password). This field will not be included in response of GET /data-connections, will only be included in the response of GET /data-connections/{qID} */
-    qConnectionSecret?: string;
-    /** ID of the credential associated with the connection */
-    qCredentialsID?: string;
-    /** Name of the credential associated with the connection */
-    qCredentialsName?: string;
-    /** Unique identifier (UUID) for the data connection, must be same as qID */
-    qEngineObjectID: string;
-    /** Unique identifier (UUID) for the data connection, must be same as qEngineObjectID */
-    qID: string;
-    /** Indicates the type of user associated with the data connection */
-    qLogOn: "0" | "1" | "LOG_ON_SERVICE_USER" | "LOG_ON_CURRENT_USER";
-    /** Descriptive name of the data connection */
-    qName: string;
-    /** Reference key of credential in redis */
-    qReferenceKey?: string;
-    /** Indicates whether or not this is a credential-less connection */
-    qSeparateCredentials: boolean;
-    /** Type of connection - indicates connection provider type */
-    qType: string;
-    /** Encrypted base Qri string */
-    qri?: string;
-    /** ID of the space to which the connection belongs */
-    space?: string;
-    /** Tenant ID of the connection's creator (Only when extended=true in query) */
-    tenant?: string;
-    /** Datetime when the connection was last updated */
-    updated: string;
-    /** User ID of the connection's creator */
-    user: string;
-};
 type ConnectionCreate = {
     /** ID of the datasource associated with this connection */
     datasourceID: string;
-    /** ID of the cloud app that owns this connection */
+    /** App ID */
     owner?: string;
     /** 0 or 1 value indicating whether the data connector is 64-bit (0) or 32-bit (1). Defaults to 0 if not specified. */
     qArchitecture?: 0 | 1;
@@ -113,7 +70,7 @@ type ConnectionCreate = {
     qLogOn?: "0" | "1" | "LOG_ON_SERVICE_USER" | "LOG_ON_CURRENT_USER";
     /** Descriptive name of the data connection */
     qName: string;
-    /** Any logon password associated with the data connection */
+    /** Any logon password associated with the data connection (connector encoded) */
     qPassword?: string;
     /** Indicates whether or not to create a credential-less connection */
     qSeparateCredentials?: boolean;
@@ -125,6 +82,8 @@ type ConnectionCreate = {
     qriInRequest?: string;
     /** ID of the space to which the connection belongs */
     space?: string;
+    /** List of tags attached to the connection (allow max 32 tags) */
+    tags?: string[];
 };
 /**
  * Essential fields of a connection
@@ -133,6 +92,7 @@ type ConnectionCreateResponse = {
     /** Datetime when the connection was created */
     created?: string;
     links?: Link;
+    /** Array of string (i.e. update, delete, read) indicating the user's privileges on the associated connection */
     privileges: Privilege[];
     /** 0 or 1 value indicating whether the data connector is 64-bit (0) or 32-bit (1). Defaults to 0 if not specified. */
     qArchitecture: 0 | 1;
@@ -162,6 +122,52 @@ type ConnectionCreateResponse = {
     updated?: string;
     /** User ID of the connection's creator */
     user?: string;
+};
+/**
+ * Essential fields of a connection
+ */
+type ConnectionGet = {
+    /** List of connection parsed from connection string (only available when query parseConnection=true is set) */
+    connectionProperties?: unknown;
+    /** Datetime when the connection was created */
+    created: string;
+    /** Data source ID */
+    datasourceID?: string;
+    links?: Link;
+    /** Array of string (i.e. update, delete, read) indicating the user's privileges on the associated connection */
+    privileges: Privilege[];
+    /** 0 or 1 value indicating whether the data connector is 64-bit (0) or 32-bit (1). Defaults to 0 if not specified. */
+    qArchitecture: 0 | 1;
+    /** Connection string for the data connection */
+    qConnectStatement: string;
+    /** String that contains connection specific secret (or password). This field will not be included in response of GET /data-connections, will only be included in the response of GET /data-connections/{qID} */
+    qConnectionSecret?: string;
+    /** ID of the credential associated with the connection */
+    qCredentialsID?: string;
+    /** Unique identifier (UUID) for the data connection, must be same as qID */
+    qEngineObjectID: string;
+    /** Unique identifier (UUID) for the data connection, must be same as qEngineObjectID */
+    qID: string;
+    /** Indicates the type of user associated with the data connection */
+    qLogOn: 0 | 1;
+    /** Descriptive name of the data connection */
+    qName: string;
+    /** Indicates whether or not this is a credential-less connection */
+    qSeparateCredentials: boolean;
+    /** Type of connection, i.e. provider type of underlying connector */
+    qType: string;
+    /** Encrypted base Qri string */
+    qri?: string;
+    /** ID of the space to which the connection belongs */
+    space?: string;
+    /** List of tags attached to the connection */
+    tags?: string[];
+    /** Tenant ID of the connection's creator */
+    tenant: string;
+    /** Datetime when the connection was last updated */
+    updated: string;
+    /** User ID of the connection's creator */
+    user: string;
 };
 type ConnectionUpdate = {
     /** ID of the datasource associated with this connection */
@@ -196,10 +202,34 @@ type ConnectionUpdate = {
     space?: string;
 };
 type Connections = {
-    data?: Connection[];
+    data?: ConnectionGet[];
     errors?: Errors;
     links?: TopLevelLink;
     meta?: Meta;
+};
+/**
+ * Schema used to create a connection using a list of connection properties for given datasource
+ */
+type DcaasConnectionCreate = {
+    /** When set to true, only authentication URL will be returned (i.e. no connection will be created) if datasource supports OAuth, and other properties set in the request will ignored. This property will be ignored if the request is not OAuth or datasource doesn't support OAuth */
+    authUrlOnly?: boolean;
+    /** Connection properties required to create dataconnection for the given datasource, which is defined by the response of 'GET /v1/data-sources/:{datasourceId}/api-specs' */
+    connectionProperties: unknown;
+    /** ID of the datasource of the connection */
+    datasourceID: string;
+    /** Descriptive name of the data connection */
+    qName: string;
+    /** ID of the space in which the connection shall be created. Connection will be created in user's personal space if undefined */
+    space?: string;
+    /** List of tags attached to the connection (allow max 31 tags) */
+    tags?: string[];
+};
+/**
+ * Authentication URL response for OAuth datasources (when authUrlOnly is set to true in request)
+ */
+type DcaasConnectionCreateAuthResponse = {
+    /** Authentication URL used to generate authentication code for datasources supporting OAuth */
+    authUrl: string;
 };
 type Error = {
     /** Unique internal error code */
@@ -215,6 +245,7 @@ type Errors = Error[];
 type Link = {
     /** Link to cirrent query */
     self: {
+        /** URL pointing to the resource */
         href: string;
     };
 };
@@ -235,21 +266,24 @@ type PatchRequest = {
 /**
  * Access type allowed on associated data connection
  */
-type Privilege = "list" | "update" | "delete" | "read";
+type Privilege = "list" | "update" | "delete" | "read" | "change_owner" | "change_space";
 type ResponseErrors = {
     errors?: Errors;
 };
 type TopLevelLink = {
     /** URL link to next page of requested resources (available to paged request only) */
     next?: {
+        /** URL pointing to the next page of resources */
         href: string;
     };
     /** URL link to previous page of requested resources (available to paged request only) */
     prev?: {
+        /** URL pointing to the previous page of resources */
         href: string;
     };
     /** Link to cirrent query */
     self: {
+        /** URL pointing to the resource */
         href: string;
     };
 };
@@ -264,25 +298,25 @@ declare const getDataConnections: (query: {
     caseinsensitive?: boolean;
     /** Provides an alternate name to be used for data[] element in GET response. */
     dataName?: string;
-    /** Returns extended list of properties when set to true. */
+    /** Returns extended list of properties (e.g. encrypted credential string) when set to true. */
     extended?: boolean;
     /** Filtering resources by properties (filterable properties only) using SCIM filter string. Note the filter string only applies to connections managed by data-connections service, i.e. filtering doesn't apply to DataFile connections. */
     filter?: string;
     /** Base Qri (encrypted) will be returned when the query is set to true, default is false */
     includeQris?: boolean;
-    /** Number of resources to be returned */
+    /** Number of resources to be returned (between 1 and 100) */
     limit?: number;
     /** ICU locale ID, used only when caseinsensitive is set to true, default to 'en' if undefined */
     locale?: string;
     /** Datafiles connections will not be returned if set to true */
     noDatafiles?: boolean;
-    /** Filtering on conneections, return connections owned by the caller if set to true (doesn't apply to datafiles connectionos) */
+    /** Filtering on connections, return connections owned by the caller if set to true (doesn't apply to datafiles connections) */
     ownedByMe?: boolean;
     /** Filtering on datafile connections by owner (i.e. app) ID. */
     owner?: string;
     /** Pagination sursor string, which is generated auotmatically in previous pagination query. */
     page?: string;
-    /** Filtering on connections, connections in personal space will be returned if set to true */
+    /** Filtering on personal connections, ignored if spaceId is defined in same request */
     personal?: boolean;
     /** Name of field sort on for pagination, with prefix with + or - indicating ascending or descending order. When used for data-connections, sort field only applies to non-datafiles connections. Whatever sorting order is, datafiles connections will be returned after all regular connections being returned. */
     sort?: string;
@@ -304,14 +338,14 @@ type GetDataConnectionsHttpError = {
     status: number;
 };
 /**
- * Creates a connection. Depends on the fields defined in the request body, credentials embedded (or associated) in the connection can be updated or created.
+ * Creates a new connection. Depending on the fields defined in the request body, credentials embedded (or associated) in the connection can be updated or created.
  *
  * @param body an object with the body content
  * @throws CreateDataConnectionHttpError
  */
-declare const createDataConnection: (body: ConnectionCreate, options?: ApiCallOptions) => Promise<CreateDataConnectionHttpResponse>;
+declare const createDataConnection: (body: ConnectionCreate | DcaasConnectionCreate, options?: ApiCallOptions) => Promise<CreateDataConnectionHttpResponse>;
 type CreateDataConnectionHttpResponse = {
-    data: ConnectionCreateResponse;
+    data: ConnectionCreateResponse | DcaasConnectionCreateAuthResponse;
     headers: Headers;
     status: number;
 };
@@ -395,7 +429,7 @@ type DeleteDataConnectionHttpError = {
     status: number;
 };
 /**
- * Gets a connection by connection ID (or by name when type=connectionname is set in query)
+ * Retrieves a connection by connection ID, or by name when the query parameter "type" is set to "connectionname."
  *
  * @param qID Connection ID
  * @param query an object with query parameters
@@ -406,17 +440,19 @@ declare const getDataConnection: (qID: string, query: {
     byCredentialName?: boolean;
     /** Credential ID */
     credentialId?: string;
-    /** Returns extended list of properties when set to true. */
+    /** Returns extended list of properties (e.g. encrypted credential string) when set to true. */
     extended?: boolean;
     /** datafiles connections will be returned from cache by default (if data-connections is configured to use cache), this query parameter is used disable this default behavior, e.g. return an update-to-date datafiles connection if the query is set to true */
     noCache?: boolean;
+    /** List of connection properties shall be returned when the query is set to true, default is false */
+    parseConnection?: boolean;
     /** Filtering on connections by space ID */
     spaceId?: string;
     /** Connection / credential ID defined in path become connection / credential name when this query parameter is set */
     type?: "connectionname" | "credentialname";
 }, options?: ApiCallOptions) => Promise<GetDataConnectionHttpResponse>;
 type GetDataConnectionHttpResponse = {
-    data: Connection;
+    data: ConnectionGet;
     headers: Headers;
     status: number;
 };
@@ -484,7 +520,7 @@ interface DataConnectionsAPI {
      */
     getDataConnections: typeof getDataConnections;
     /**
-     * Creates a connection. Depends on the fields defined in the request body, credentials embedded (or associated) in the connection can be updated or created.
+     * Creates a new connection. Depending on the fields defined in the request body, credentials embedded (or associated) in the connection can be updated or created.
      *
      * @param body an object with the body content
      * @throws CreateDataConnectionHttpError
@@ -520,7 +556,7 @@ interface DataConnectionsAPI {
      */
     deleteDataConnection: typeof deleteDataConnection;
     /**
-     * Gets a connection by connection ID (or by name when type=connectionname is set in query)
+     * Retrieves a connection by connection ID, or by name when the query parameter "type" is set to "connectionname."
      *
      * @param qID Connection ID
      * @param query an object with query parameters
@@ -555,4 +591,4 @@ interface DataConnectionsAPI {
  */
 declare const dataConnectionsExport: DataConnectionsAPI;
 
-export { type ActionDeleteRequest, type ActionDuplicateRequest, type ActionUpdateRequest, type BulkResponse, type Connection, type ConnectionCreate, type ConnectionCreateResponse, type ConnectionUpdate, type Connections, type CreateDataConnectionHttpError, type CreateDataConnectionHttpResponse, type DataConnectionsAPI, type DeleteDataConnectionHttpError, type DeleteDataConnectionHttpResponse, type DeleteDataConnectionsHttpError, type DeleteDataConnectionsHttpResponse, type DuplicateDataAConnectionHttpError, type DuplicateDataAConnectionHttpResponse, type Error, type Errors, type GetDataConnectionHttpError, type GetDataConnectionHttpResponse, type GetDataConnectionsHttpError, type GetDataConnectionsHttpResponse, type Link, type Meta, type PatchDataConnectionHttpError, type PatchDataConnectionHttpResponse, type PatchRequest, type Privilege, type ResponseErrors, type TopLevelLink, type UpdateDataConnectionHttpError, type UpdateDataConnectionHttpResponse, type UpdateDataConnectionsHttpError, type UpdateDataConnectionsHttpResponse, clearCache, createDataConnection, dataConnectionsExport as default, deleteDataConnection, deleteDataConnections, duplicateDataAConnection, getDataConnection, getDataConnections, patchDataConnection, updateDataConnection, updateDataConnections };
+export { type ActionDeleteRequest, type ActionDuplicateRequest, type ActionUpdateRequest, type BulkResponse, type ConnectionCreate, type ConnectionCreateResponse, type ConnectionGet, type ConnectionUpdate, type Connections, type CreateDataConnectionHttpError, type CreateDataConnectionHttpResponse, type DataConnectionsAPI, type DcaasConnectionCreate, type DcaasConnectionCreateAuthResponse, type DeleteDataConnectionHttpError, type DeleteDataConnectionHttpResponse, type DeleteDataConnectionsHttpError, type DeleteDataConnectionsHttpResponse, type DuplicateDataAConnectionHttpError, type DuplicateDataAConnectionHttpResponse, type Error, type Errors, type GetDataConnectionHttpError, type GetDataConnectionHttpResponse, type GetDataConnectionsHttpError, type GetDataConnectionsHttpResponse, type Link, type Meta, type PatchDataConnectionHttpError, type PatchDataConnectionHttpResponse, type PatchRequest, type Privilege, type ResponseErrors, type TopLevelLink, type UpdateDataConnectionHttpError, type UpdateDataConnectionHttpResponse, type UpdateDataConnectionsHttpError, type UpdateDataConnectionsHttpResponse, clearCache, createDataConnection, dataConnectionsExport as default, deleteDataConnection, deleteDataConnections, duplicateDataAConnection, getDataConnection, getDataConnections, patchDataConnection, updateDataConnection, updateDataConnections };
