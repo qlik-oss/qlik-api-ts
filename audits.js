@@ -1,46 +1,46 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _URIW2U5Mjs = require('./chunks/URIW2U5M.js');
-require('./chunks/2YWCEGTS.js');
+var _LHCJKIEOjs = require('./chunks/LHCJKIEO.js');
+require('./chunks/4V5AAWUI.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/audits.ts
-var getAudits = async (query, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "audits", {
+var getAudits = async (query, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "audits", {
   method: "get",
   pathTemplate: "/api/v1/audits",
   query,
   options
 });
-var getArchivedAudits = async (query, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "audits", {
+var getArchivedAudits = async (query, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "audits", {
   method: "get",
   pathTemplate: "/api/v1/audits/archive",
   query,
   options
 });
-var getAuditsSettings = async (options) => _URIW2U5Mjs.invokeFetch.call(void 0, "audits", {
+var getAuditsSettings = async (options) => _LHCJKIEOjs.invokeFetch.call(void 0, "audits", {
   method: "get",
   pathTemplate: "/api/v1/audits/settings",
   options
 });
-var getAuditSources = async (options) => _URIW2U5Mjs.invokeFetch.call(void 0, "audits", {
+var getAuditSources = async (options) => _LHCJKIEOjs.invokeFetch.call(void 0, "audits", {
   method: "get",
   pathTemplate: "/api/v1/audits/sources",
   options
 });
-var getAuditTypes = async (options) => _URIW2U5Mjs.invokeFetch.call(void 0, "audits", {
+var getAuditTypes = async (options) => _LHCJKIEOjs.invokeFetch.call(void 0, "audits", {
   method: "get",
   pathTemplate: "/api/v1/audits/types",
   options
 });
-var getAudit = async (id, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "audits", {
+var getAudit = async (id, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "audits", {
   method: "get",
   pathTemplate: "/api/v1/audits/{id}",
   pathVariables: { id },
   options
 });
 function clearCache() {
-  return _URIW2U5Mjs.clearApiCache.call(void 0, "audits");
+  return _LHCJKIEOjs.clearApiCache.call(void 0, "audits");
 }
 var auditsExport = {
   getAudits,

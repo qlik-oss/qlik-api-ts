@@ -3,7 +3,7 @@
 
 
 
-var _WOYJLK4Yjs = require('./WOYJLK4Y.js');
+var _SIU6HO6Bjs = require('./SIU6HO6B.js');
 require('./4HB3TAEO.js');
 
 // src/qix/session/enigma-session.ts
@@ -9803,7 +9803,7 @@ var mixin6 = {
           // generating id on client side to support multiple undo create operations
           // raised an engine bug to solve this, when resolved can be changed
           // TODO: update the jira id for engine bug once created
-          qId: _WOYJLK4Yjs.generateRandomString.call(void 0, 43),
+          qId: _SIU6HO6Bjs.generateRandomString.call(void 0, 43),
           qType: "sheet"
         },
         qMetaDef: {
@@ -9839,7 +9839,7 @@ var mixin6 = {
         qInfo: {
           // generating id on client side to support multiple undo create operations
           // raised an engine bug to solve this, when resolved can be changed
-          qId: _WOYJLK4Yjs.generateRandomString.call(void 0, 43),
+          qId: _SIU6HO6Bjs.generateRandomString.call(void 0, 43),
           qType: "story"
         },
         qMetaDef: {
@@ -10367,7 +10367,7 @@ async function createEnigmaSession({
   hostConfig,
   withoutData = false
 }) {
-  const locationUrl = _WOYJLK4Yjs.toValidWebsocketLocationUrl.call(void 0, hostConfig);
+  const locationUrl = _SIU6HO6Bjs.toValidWebsocketLocationUrl.call(void 0, hostConfig);
   const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
   if (!identity && withoutData) {
     identity = "no_data";
@@ -10377,7 +10377,7 @@ async function createEnigmaSession({
   const isNodeEnvironment = typeof window === "undefined";
   let createSocketMethod;
   if (isNodeEnvironment) {
-    const { headers, queryParams } = await _WOYJLK4Yjs.getRestCallAuthParams.call(void 0, { hostConfig, method: "POST" });
+    const { headers, queryParams } = await _SIU6HO6Bjs.getRestCallAuthParams.call(void 0, { hostConfig, method: "POST" });
     const WS = (await Promise.resolve().then(() => _interopRequireWildcard(require("ws")))).default;
     Object.entries(queryParams).forEach(([key, value]) => {
       url = `${url}&${key}=${value}`;
@@ -10386,7 +10386,7 @@ async function createEnigmaSession({
       headers
     });
   } else {
-    const { queryParams } = await _WOYJLK4Yjs.getWebSocketAuthParams.call(void 0, { hostConfig });
+    const { queryParams } = await _SIU6HO6Bjs.getWebSocketAuthParams.call(void 0, { hostConfig });
     Object.entries(queryParams).forEach(([key, value]) => {
       url = `${url}&${key}=${value}`;
     });

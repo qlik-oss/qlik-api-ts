@@ -1,31 +1,31 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _URIW2U5Mjs = require('./chunks/URIW2U5M.js');
-require('./chunks/2YWCEGTS.js');
+var _LHCJKIEOjs = require('./chunks/LHCJKIEO.js');
+require('./chunks/4V5AAWUI.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/api-keys.ts
-var getApiKeys = async (query, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "api-keys", {
+var getApiKeys = async (query, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "api-keys", {
   method: "get",
   pathTemplate: "/api/v1/api-keys",
   query,
   options
 });
-var createApiKey = async (body, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "api-keys", {
+var createApiKey = async (body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "api-keys", {
   method: "post",
   pathTemplate: "/api/v1/api-keys",
   body,
   contentType: "application/json",
   options
 });
-var getApiKeysConfig = async (tenantId, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "api-keys", {
+var getApiKeysConfig = async (tenantId, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "api-keys", {
   method: "get",
   pathTemplate: "/api/v1/api-keys/configs/{tenantId}",
   pathVariables: { tenantId },
   options
 });
-var patchApiKeysConfig = async (tenantId, body, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "api-keys", {
+var patchApiKeysConfig = async (tenantId, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "api-keys", {
   method: "patch",
   pathTemplate: "/api/v1/api-keys/configs/{tenantId}",
   pathVariables: { tenantId },
@@ -33,19 +33,19 @@ var patchApiKeysConfig = async (tenantId, body, options) => _URIW2U5Mjs.invokeFe
   contentType: "application/json",
   options
 });
-var deleteApiKey = async (id, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "api-keys", {
+var deleteApiKey = async (id, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "api-keys", {
   method: "delete",
   pathTemplate: "/api/v1/api-keys/{id}",
   pathVariables: { id },
   options
 });
-var getApiKey = async (id, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "api-keys", {
+var getApiKey = async (id, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "api-keys", {
   method: "get",
   pathTemplate: "/api/v1/api-keys/{id}",
   pathVariables: { id },
   options
 });
-var patchApiKey = async (id, body, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "api-keys", {
+var patchApiKey = async (id, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "api-keys", {
   method: "patch",
   pathTemplate: "/api/v1/api-keys/{id}",
   pathVariables: { id },
@@ -54,7 +54,7 @@ var patchApiKey = async (id, body, options) => _URIW2U5Mjs.invokeFetch.call(void
   options
 });
 function clearCache() {
-  return _URIW2U5Mjs.clearApiCache.call(void 0, "api-keys");
+  return _LHCJKIEOjs.clearApiCache.call(void 0, "api-keys");
 }
 var apiKeysExport = {
   getApiKeys,
