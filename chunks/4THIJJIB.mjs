@@ -16,6 +16,7 @@ var getPlatform = async (options = {}) => {
     return result({ isQSE: true, isWindows: true });
   }
   const deploymentType = (productInfo.composition?.deploymentType || "").toLowerCase();
+  const isControlCenter = deploymentType === "controlcenter";
   if (deploymentType === "qliksenseserver") {
     return result({ isQSE: true, isWindows: true });
   }
@@ -23,9 +24,9 @@ var getPlatform = async (options = {}) => {
     return result({ isQSD: true, isWindows: true });
   }
   if (productInfo.composition?.provider === "fedramp") {
-    return result({ isCloud: true, isQCG: true });
+    return result({ isCloud: true, isQCG: true, isControlCenter });
   }
-  return result({ isCloud: true, isQCS: true });
+  return result({ isCloud: true, isQCS: true, isControlCenter });
 };
 var productInfoPromises = {};
 function templateUrl(baseUrl) {
@@ -67,6 +68,7 @@ var result = (data) => ({
   isCloud: false,
   isQCS: false,
   isQCG: false,
+  isControlCenter: false,
   isWindows: false,
   isQSE: false,
   isQSD: false,

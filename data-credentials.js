@@ -1,26 +1,26 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
 
-var _URIW2U5Mjs = require('./chunks/URIW2U5M.js');
-require('./chunks/2YWCEGTS.js');
+var _LHCJKIEOjs = require('./chunks/LHCJKIEO.js');
+require('./chunks/4V5AAWUI.js');
 require('./chunks/4HB3TAEO.js');
 
 // src/public/rest/data-credentials.ts
-var deleteDataCredential = async (qID, query, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "data-credentials", {
+var deleteDataCredential = async (qID, query, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "data-credentials", {
   method: "delete",
   pathTemplate: "/api/v1/data-credentials/{qID}",
   pathVariables: { qID },
   query,
   options
 });
-var getDataCredential = async (qID, query, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "data-credentials", {
+var getDataCredential = async (qID, query, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "data-credentials", {
   method: "get",
   pathTemplate: "/api/v1/data-credentials/{qID}",
   pathVariables: { qID },
   query,
   options
 });
-var patchDataCredential = async (qID, query, body, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "data-credentials", {
+var patchDataCredential = async (qID, query, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "data-credentials", {
   method: "patch",
   pathTemplate: "/api/v1/data-credentials/{qID}",
   pathVariables: { qID },
@@ -29,7 +29,7 @@ var patchDataCredential = async (qID, query, body, options) => _URIW2U5Mjs.invok
   contentType: "application/json",
   options
 });
-var updateDataCredential = async (qID, query, body, options) => _URIW2U5Mjs.invokeFetch.call(void 0, "data-credentials", {
+var updateDataCredential = async (qID, query, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "data-credentials", {
   method: "put",
   pathTemplate: "/api/v1/data-credentials/{qID}",
   pathVariables: { qID },
@@ -39,7 +39,7 @@ var updateDataCredential = async (qID, query, body, options) => _URIW2U5Mjs.invo
   options
 });
 function clearCache() {
-  return _URIW2U5Mjs.clearApiCache.call(void 0, "data-credentials");
+  return _LHCJKIEOjs.clearApiCache.call(void 0, "data-credentials");
 }
 var dataCredentialsExport = {
   deleteDataCredential,

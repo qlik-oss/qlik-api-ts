@@ -16,6 +16,7 @@ var getPlatform = async (options = {}) => {
     return result({ isQSE: true, isWindows: true });
   }
   const deploymentType = (_optionalChain([productInfo, 'access', _ => _.composition, 'optionalAccess', _2 => _2.deploymentType]) || "").toLowerCase();
+  const isControlCenter = deploymentType === "controlcenter";
   if (deploymentType === "qliksenseserver") {
     return result({ isQSE: true, isWindows: true });
   }
@@ -23,9 +24,9 @@ var getPlatform = async (options = {}) => {
     return result({ isQSD: true, isWindows: true });
   }
   if (_optionalChain([productInfo, 'access', _3 => _3.composition, 'optionalAccess', _4 => _4.provider]) === "fedramp") {
-    return result({ isCloud: true, isQCG: true });
+    return result({ isCloud: true, isQCG: true, isControlCenter });
   }
-  return result({ isCloud: true, isQCS: true });
+  return result({ isCloud: true, isQCS: true, isControlCenter });
 };
 var productInfoPromises = {};
 function templateUrl(baseUrl) {
@@ -67,6 +68,7 @@ var result = (data) => ({
   isCloud: false,
   isQCS: false,
   isQCG: false,
+  isControlCenter: false,
   isWindows: false,
   isQSE: false,
   isQSD: false,

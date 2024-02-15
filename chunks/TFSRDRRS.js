@@ -1,16 +1,16 @@
 "use strict";Object.defineProperty(exports, "__esModule", {value: true});
 
-var _2YWCEGTSjs = require('./2YWCEGTS.js');
+var _4V5AAWUIjs = require('./4V5AAWUI.js');
 
 // src/public/auth.ts
 function registerAuthModule(name, authModule) {
-  void _2YWCEGTSjs.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.registerAuthModule(name, authModule));
+  void _4V5AAWUIjs.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.registerAuthModule(name, authModule));
 }
 function logout() {
-  void _2YWCEGTSjs.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.logout());
+  void _4V5AAWUIjs.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.logout());
 }
 function setDefaultHostConfig(hostConfig) {
-  void _2YWCEGTSjs.getAuthRuntimeModule.call(void 0, hostConfig).then((impl) => impl.setDefaultHostConfig(hostConfig));
+  void _4V5AAWUIjs.getAuthRuntimeModule.call(void 0, hostConfig).then((impl) => impl.setDefaultHostConfig(hostConfig));
 }
 var auth_default = {
   registerAuthModule,
