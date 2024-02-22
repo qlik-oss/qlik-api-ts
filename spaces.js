@@ -1,42 +1,42 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true});
-
-
-var _LHCJKIEOjs = require('./chunks/LHCJKIEO.js');
-require('./chunks/4V5AAWUI.js');
-require('./chunks/4HB3TAEO.js');
+import {
+  clearApiCache,
+  invokeFetch
+} from "./chunks/LHCJKIEO.js";
+import "./chunks/4V5AAWUI.js";
+import "./chunks/4HB3TAEO.js";
 
 // src/public/rest/spaces.ts
-var getSpaces = async (query, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "spaces", {
+var getSpaces = async (query, options) => invokeFetch("spaces", {
   method: "get",
   pathTemplate: "/api/v1/spaces",
   query,
   options
 });
-var createSpace = async (body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "spaces", {
+var createSpace = async (body, options) => invokeFetch("spaces", {
   method: "post",
   pathTemplate: "/api/v1/spaces",
   body,
   contentType: "application/json",
   options
 });
-var getSpaceTypes = async (options) => _LHCJKIEOjs.invokeFetch.call(void 0, "spaces", {
+var getSpaceTypes = async (options) => invokeFetch("spaces", {
   method: "get",
   pathTemplate: "/api/v1/spaces/types",
   options
 });
-var deleteSpace = async (spaceId, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "spaces", {
+var deleteSpace = async (spaceId, options) => invokeFetch("spaces", {
   method: "delete",
   pathTemplate: "/api/v1/spaces/{spaceId}",
   pathVariables: { spaceId },
   options
 });
-var getSpace = async (spaceId, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "spaces", {
+var getSpace = async (spaceId, options) => invokeFetch("spaces", {
   method: "get",
   pathTemplate: "/api/v1/spaces/{spaceId}",
   pathVariables: { spaceId },
   options
 });
-var patchSpace = async (spaceId, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "spaces", {
+var patchSpace = async (spaceId, body, options) => invokeFetch("spaces", {
   method: "patch",
   pathTemplate: "/api/v1/spaces/{spaceId}",
   pathVariables: { spaceId },
@@ -44,7 +44,7 @@ var patchSpace = async (spaceId, body, options) => _LHCJKIEOjs.invokeFetch.call(
   contentType: "application/json",
   options
 });
-var updateSpace = async (spaceId, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "spaces", {
+var updateSpace = async (spaceId, body, options) => invokeFetch("spaces", {
   method: "put",
   pathTemplate: "/api/v1/spaces/{spaceId}",
   pathVariables: { spaceId },
@@ -52,14 +52,14 @@ var updateSpace = async (spaceId, body, options) => _LHCJKIEOjs.invokeFetch.call
   contentType: "application/json",
   options
 });
-var getSpaceAssignments = async (spaceId, query, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "spaces", {
+var getSpaceAssignments = async (spaceId, query, options) => invokeFetch("spaces", {
   method: "get",
   pathTemplate: "/api/v1/spaces/{spaceId}/assignments",
   pathVariables: { spaceId },
   query,
   options
 });
-var createSpaceAssignment = async (spaceId, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "spaces", {
+var createSpaceAssignment = async (spaceId, body, options) => invokeFetch("spaces", {
   method: "post",
   pathTemplate: "/api/v1/spaces/{spaceId}/assignments",
   pathVariables: { spaceId },
@@ -67,19 +67,19 @@ var createSpaceAssignment = async (spaceId, body, options) => _LHCJKIEOjs.invoke
   contentType: "application/json",
   options
 });
-var deleteSpaceAssignment = async (spaceId, assignmentId, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "spaces", {
+var deleteSpaceAssignment = async (spaceId, assignmentId, options) => invokeFetch("spaces", {
   method: "delete",
   pathTemplate: "/api/v1/spaces/{spaceId}/assignments/{assignmentId}",
   pathVariables: { spaceId, assignmentId },
   options
 });
-var getSpaceAssignment = async (spaceId, assignmentId, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "spaces", {
+var getSpaceAssignment = async (spaceId, assignmentId, options) => invokeFetch("spaces", {
   method: "get",
   pathTemplate: "/api/v1/spaces/{spaceId}/assignments/{assignmentId}",
   pathVariables: { spaceId, assignmentId },
   options
 });
-var updateSpaceAssignment = async (spaceId, assignmentId, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "spaces", {
+var updateSpaceAssignment = async (spaceId, assignmentId, body, options) => invokeFetch("spaces", {
   method: "put",
   pathTemplate: "/api/v1/spaces/{spaceId}/assignments/{assignmentId}",
   pathVariables: { spaceId, assignmentId },
@@ -88,7 +88,7 @@ var updateSpaceAssignment = async (spaceId, assignmentId, body, options) => _LHC
   options
 });
 function clearCache() {
-  return _LHCJKIEOjs.clearApiCache.call(void 0, "spaces");
+  return clearApiCache("spaces");
 }
 var spacesExport = {
   getSpaces,
@@ -106,19 +106,19 @@ var spacesExport = {
   clearCache
 };
 var spaces_default = spacesExport;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-exports.clearCache = clearCache; exports.createSpace = createSpace; exports.createSpaceAssignment = createSpaceAssignment; exports.default = spaces_default; exports.deleteSpace = deleteSpace; exports.deleteSpaceAssignment = deleteSpaceAssignment; exports.getSpace = getSpace; exports.getSpaceAssignment = getSpaceAssignment; exports.getSpaceAssignments = getSpaceAssignments; exports.getSpaceTypes = getSpaceTypes; exports.getSpaces = getSpaces; exports.patchSpace = patchSpace; exports.updateSpace = updateSpace; exports.updateSpaceAssignment = updateSpaceAssignment;
+export {
+  clearCache,
+  createSpace,
+  createSpaceAssignment,
+  spaces_default as default,
+  deleteSpace,
+  deleteSpaceAssignment,
+  getSpace,
+  getSpaceAssignment,
+  getSpaceAssignments,
+  getSpaceTypes,
+  getSpaces,
+  patchSpace,
+  updateSpace,
+  updateSpaceAssignment
+};

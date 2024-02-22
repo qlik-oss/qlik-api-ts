@@ -2,7 +2,7 @@
 
 ◁ [Back to overview](../README.md)
 
-When integrating a 3rd-party solution with Qlik Cloud Services users always have to authenticate with Qlik's backend services to interact with them. Authentication with `@qlik/api` works seamlessly and uses the same authentication mechanisms as those in the `@qlik/embed` libraries. The general idea is to provide a capable yet simple-to-use authentication api that works out of the box for most users. There are a few authentication options so that users can use what suits them best.
+When integrating a third-party solution with Qlik Cloud Services users always have to authenticate with Qlik's backend services to interact with them. Authentication with `@qlik/api` works seamlessly and uses the same authentication mechanisms as those in the `@qlik/embed` libraries. The general idea is to provide a capable yet simple-to-use authentication api that works out of the box for most users. There are a few authentication options so that users can use what suits them best.
 
 ## The Host Config
 
@@ -95,7 +95,7 @@ const authModule = {
 
 ### Oauth2
 
-Uses a `clientId` from an oauth client created by a Qlik tenant admin. And optionally a `clientSecret`. A user will go through a login flow in order to get hold of an access token that is valid for 6 hours. This token will be used as query parameters for api requests. If a `clientSecret` is used a refresh token will also be received. This can be used to refresh the access token and is valid for 30 days. The user can select where these tokens should be stored (only in a browser). Either in local storate or session storage (default).
+Uses a `clientId` from an oauth client created by a Qlik tenant administrator. And optionally a `clientSecret`. A user will go through a login flow to get hold of an access token that is valid for 6 hours. This token will be used as query parameters for api requests. If a `clientSecret` is used a refresh token will also be received. This can be used to refresh the access token and is valid for 30 days. The user can select where these tokens should be stored (only in a browser). Either in local storage or session storage (default).
 
 ```ts
 type Oauth2AuthConfig = {
@@ -114,7 +114,7 @@ type Oauth2AuthConfig = {
 };
 ```
 
-When using OAuth2 in a browser we recommend setting up a "redirect page" which is handy to use for pointing the redirection of an oauth login flow when fetching the access tokens. An oauth server will ask the client to redirect back to the hosting application after login is completed. In a single page application context this can potentially be any URL, so we recommend using this html template and use it for redirections.
+When using OAuth2 in a browser it is recommended to set up a "redirect page" which is handy to use for pointing the redirection of an oauth login flow when fetching the access tokens. An oauth server will ask the client to redirect back to the hosting application after login is completed. In a single page application context this can potentially be any URL, so use this html template and use it for redirections.
 
 ```html
 <!doctype html>
@@ -133,7 +133,7 @@ When using OAuth2 in a browser we recommend setting up a "redirect page" which i
 
 ### Cookie
 
-Uses a `webIntegrationId` created by a tenant admin. Will get the a CSRF token and append to api calls when necessary. To use this method in an integration scenario it is required that 3d party cookies are allowed.
+Uses a `webIntegrationId` created by a tenant administrator. Will get the a CSRF token and append to api calls when necessary. To use this method in an integration scenario it is required that third-party cookies are allowed.
 
 ```ts
 type CookieAuthConfig = {
@@ -148,7 +148,7 @@ type CookieAuthConfig = {
 
 ### Windows Cookie
 
-Will do the necessary actions in order to communication with a Qlik Sense Enterprise for Windows server. This includes fetching an XrfKey from the Qlik Sense Server Repository Service. To use this method in an integration scenario it is required that 3d party cookies are allowed.
+Will do the necessary actions to communicate with a Qlik Sense Enterprise for Windows server. This includes fetching an XrfKey from the Qlik Sense Server Repository Service. To use this method in an integration scenario it is required that third-party cookies are allowed.
 
 ```ts
 type WindowsCookieAuthConfig = {

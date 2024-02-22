@@ -1,33 +1,33 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true});
-
-
-var _LHCJKIEOjs = require('./chunks/LHCJKIEO.js');
-require('./chunks/4V5AAWUI.js');
-require('./chunks/4HB3TAEO.js');
+import {
+  clearApiCache,
+  invokeFetch
+} from "./chunks/LHCJKIEO.js";
+import "./chunks/4V5AAWUI.js";
+import "./chunks/4HB3TAEO.js";
 
 // src/public/rest/data-assets.ts
-var deleteDataAssets = async (body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "data-assets", {
+var deleteDataAssets = async (body, options) => invokeFetch("data-assets", {
   method: "delete",
   pathTemplate: "/api/v1/data-assets",
   body,
   contentType: "application/json",
   options
 });
-var createDataAsset = async (body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "data-assets", {
+var createDataAsset = async (body, options) => invokeFetch("data-assets", {
   method: "post",
   pathTemplate: "/api/v1/data-assets",
   body,
   contentType: "application/json",
   options
 });
-var getDataAsset = async (dataAssetId, query, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "data-assets", {
+var getDataAsset = async (dataAssetId, query, options) => invokeFetch("data-assets", {
   method: "get",
   pathTemplate: "/api/v1/data-assets/{data-asset-id}",
   pathVariables: { "data-asset-id": dataAssetId },
   query,
   options
 });
-var patchDataAsset = async (dataAssetId, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "data-assets", {
+var patchDataAsset = async (dataAssetId, body, options) => invokeFetch("data-assets", {
   method: "patch",
   pathTemplate: "/api/v1/data-assets/{data-asset-id}",
   pathVariables: { "data-asset-id": dataAssetId },
@@ -35,7 +35,7 @@ var patchDataAsset = async (dataAssetId, body, options) => _LHCJKIEOjs.invokeFet
   contentType: "application/json",
   options
 });
-var updateDataAsset = async (dataAssetId, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "data-assets", {
+var updateDataAsset = async (dataAssetId, body, options) => invokeFetch("data-assets", {
   method: "put",
   pathTemplate: "/api/v1/data-assets/{data-asset-id}",
   pathVariables: { "data-asset-id": dataAssetId },
@@ -44,7 +44,7 @@ var updateDataAsset = async (dataAssetId, body, options) => _LHCJKIEOjs.invokeFe
   options
 });
 function clearCache() {
-  return _LHCJKIEOjs.clearApiCache.call(void 0, "data-assets");
+  return clearApiCache("data-assets");
 }
 var dataAssetsExport = {
   deleteDataAssets,
@@ -55,12 +55,12 @@ var dataAssetsExport = {
   clearCache
 };
 var data_assets_default = dataAssetsExport;
-
-
-
-
-
-
-
-
-exports.clearCache = clearCache; exports.createDataAsset = createDataAsset; exports.default = data_assets_default; exports.deleteDataAssets = deleteDataAssets; exports.getDataAsset = getDataAsset; exports.patchDataAsset = patchDataAsset; exports.updateDataAsset = updateDataAsset;
+export {
+  clearCache,
+  createDataAsset,
+  data_assets_default as default,
+  deleteDataAssets,
+  getDataAsset,
+  patchDataAsset,
+  updateDataAsset
+};

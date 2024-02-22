@@ -1,37 +1,37 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true});
-
-
-var _LHCJKIEOjs = require('./chunks/LHCJKIEO.js');
-require('./chunks/4V5AAWUI.js');
-require('./chunks/4HB3TAEO.js');
+import {
+  clearApiCache,
+  invokeFetch
+} from "./chunks/LHCJKIEO.js";
+import "./chunks/4V5AAWUI.js";
+import "./chunks/4HB3TAEO.js";
 
 // src/public/rest/web-integrations.ts
-var getWebIntegrations = async (query, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "web-integrations", {
+var getWebIntegrations = async (query, options) => invokeFetch("web-integrations", {
   method: "get",
   pathTemplate: "/api/v1/web-integrations",
   query,
   options
 });
-var createWebIntegration = async (body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "web-integrations", {
+var createWebIntegration = async (body, options) => invokeFetch("web-integrations", {
   method: "post",
   pathTemplate: "/api/v1/web-integrations",
   body,
   contentType: "application/json",
   options
 });
-var deleteWebIntegration = async (id, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "web-integrations", {
+var deleteWebIntegration = async (id, options) => invokeFetch("web-integrations", {
   method: "delete",
   pathTemplate: "/api/v1/web-integrations/{id}",
   pathVariables: { id },
   options
 });
-var getWebIntegration = async (id, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "web-integrations", {
+var getWebIntegration = async (id, options) => invokeFetch("web-integrations", {
   method: "get",
   pathTemplate: "/api/v1/web-integrations/{id}",
   pathVariables: { id },
   options
 });
-var patchWebIntegration = async (id, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "web-integrations", {
+var patchWebIntegration = async (id, body, options) => invokeFetch("web-integrations", {
   method: "patch",
   pathTemplate: "/api/v1/web-integrations/{id}",
   pathVariables: { id },
@@ -40,7 +40,7 @@ var patchWebIntegration = async (id, body, options) => _LHCJKIEOjs.invokeFetch.c
   options
 });
 function clearCache() {
-  return _LHCJKIEOjs.clearApiCache.call(void 0, "web-integrations");
+  return clearApiCache("web-integrations");
 }
 var webIntegrationsExport = {
   getWebIntegrations,
@@ -51,12 +51,12 @@ var webIntegrationsExport = {
   clearCache
 };
 var web_integrations_default = webIntegrationsExport;
-
-
-
-
-
-
-
-
-exports.clearCache = clearCache; exports.createWebIntegration = createWebIntegration; exports.default = web_integrations_default; exports.deleteWebIntegration = deleteWebIntegration; exports.getWebIntegration = getWebIntegration; exports.getWebIntegrations = getWebIntegrations; exports.patchWebIntegration = patchWebIntegration;
+export {
+  clearCache,
+  createWebIntegration,
+  web_integrations_default as default,
+  deleteWebIntegration,
+  getWebIntegration,
+  getWebIntegrations,
+  patchWebIntegration
+};

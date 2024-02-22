@@ -11,8 +11,6 @@ type AssignedRoles = {
     readonly level: "admin" | "user";
     /** The role name */
     readonly name: string;
-    /** An array of permissions associated to a given role. */
-    readonly permissions: string[];
     /** The type of role */
     readonly type: "default";
 }[];
@@ -76,7 +74,6 @@ type Group = {
         id: string;
         readonly level: "admin" | "user";
         readonly name: string;
-        readonly permissions: string[];
         readonly type: "default";
     }[];
     /** The timestamp for when the group record was created. */

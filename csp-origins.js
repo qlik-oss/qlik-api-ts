@@ -1,42 +1,42 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true});
-
-
-var _LHCJKIEOjs = require('./chunks/LHCJKIEO.js');
-require('./chunks/4V5AAWUI.js');
-require('./chunks/4HB3TAEO.js');
+import {
+  clearApiCache,
+  invokeFetch
+} from "./chunks/LHCJKIEO.js";
+import "./chunks/4V5AAWUI.js";
+import "./chunks/4HB3TAEO.js";
 
 // src/public/rest/csp-origins.ts
-var getCSPEntries = async (query, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "csp-origins", {
+var getCSPEntries = async (query, options) => invokeFetch("csp-origins", {
   method: "get",
   pathTemplate: "/api/v1/csp-origins",
   query,
   options
 });
-var createCSPEntry = async (body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "csp-origins", {
+var createCSPEntry = async (body, options) => invokeFetch("csp-origins", {
   method: "post",
   pathTemplate: "/api/v1/csp-origins",
   body,
   contentType: "application/json",
   options
 });
-var getCSPHeader = async (options) => _LHCJKIEOjs.invokeFetch.call(void 0, "csp-origins", {
+var getCSPHeader = async (options) => invokeFetch("csp-origins", {
   method: "get",
   pathTemplate: "/api/v1/csp-origins/actions/generate-header",
   options
 });
-var deleteCSPEntry = async (id, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "csp-origins", {
+var deleteCSPEntry = async (id, options) => invokeFetch("csp-origins", {
   method: "delete",
   pathTemplate: "/api/v1/csp-origins/{id}",
   pathVariables: { id },
   options
 });
-var getCSPEntry = async (id, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "csp-origins", {
+var getCSPEntry = async (id, options) => invokeFetch("csp-origins", {
   method: "get",
   pathTemplate: "/api/v1/csp-origins/{id}",
   pathVariables: { id },
   options
 });
-var updateCSPEntry = async (id, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "csp-origins", {
+var updateCSPEntry = async (id, body, options) => invokeFetch("csp-origins", {
   method: "put",
   pathTemplate: "/api/v1/csp-origins/{id}",
   pathVariables: { id },
@@ -45,7 +45,7 @@ var updateCSPEntry = async (id, body, options) => _LHCJKIEOjs.invokeFetch.call(v
   options
 });
 function clearCache() {
-  return _LHCJKIEOjs.clearApiCache.call(void 0, "csp-origins");
+  return clearApiCache("csp-origins");
 }
 var cspOriginsExport = {
   getCSPEntries,
@@ -57,13 +57,13 @@ var cspOriginsExport = {
   clearCache
 };
 var csp_origins_default = cspOriginsExport;
-
-
-
-
-
-
-
-
-
-exports.clearCache = clearCache; exports.createCSPEntry = createCSPEntry; exports.default = csp_origins_default; exports.deleteCSPEntry = deleteCSPEntry; exports.getCSPEntries = getCSPEntries; exports.getCSPEntry = getCSPEntry; exports.getCSPHeader = getCSPHeader; exports.updateCSPEntry = updateCSPEntry;
+export {
+  clearCache,
+  createCSPEntry,
+  csp_origins_default as default,
+  deleteCSPEntry,
+  getCSPEntries,
+  getCSPEntry,
+  getCSPHeader,
+  updateCSPEntry
+};

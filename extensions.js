@@ -1,36 +1,36 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true});
-
-
-var _LHCJKIEOjs = require('./chunks/LHCJKIEO.js');
-require('./chunks/4V5AAWUI.js');
-require('./chunks/4HB3TAEO.js');
+import {
+  clearApiCache,
+  invokeFetch
+} from "./chunks/LHCJKIEO.js";
+import "./chunks/4V5AAWUI.js";
+import "./chunks/4HB3TAEO.js";
 
 // src/public/rest/extensions.ts
-var getExtensions = async (options) => _LHCJKIEOjs.invokeFetch.call(void 0, "extensions", {
+var getExtensions = async (options) => invokeFetch("extensions", {
   method: "get",
   pathTemplate: "/api/v1/extensions",
   options
 });
-var uploadExtension = async (body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "extensions", {
+var uploadExtension = async (body, options) => invokeFetch("extensions", {
   method: "post",
   pathTemplate: "/api/v1/extensions",
   body,
   contentType: "multipart/form-data",
   options
 });
-var deleteExtension = async (id, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "extensions", {
+var deleteExtension = async (id, options) => invokeFetch("extensions", {
   method: "delete",
   pathTemplate: "/api/v1/extensions/{id}",
   pathVariables: { id },
   options
 });
-var getExtension = async (id, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "extensions", {
+var getExtension = async (id, options) => invokeFetch("extensions", {
   method: "get",
   pathTemplate: "/api/v1/extensions/{id}",
   pathVariables: { id },
   options
 });
-var patchExtension = async (id, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "extensions", {
+var patchExtension = async (id, body, options) => invokeFetch("extensions", {
   method: "patch",
   pathTemplate: "/api/v1/extensions/{id}",
   pathVariables: { id },
@@ -38,20 +38,20 @@ var patchExtension = async (id, body, options) => _LHCJKIEOjs.invokeFetch.call(v
   contentType: "multipart/form-data",
   options
 });
-var downloadExtension = async (id, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "extensions", {
+var downloadExtension = async (id, options) => invokeFetch("extensions", {
   method: "get",
   pathTemplate: "/api/v1/extensions/{id}/file",
   pathVariables: { id },
   options
 });
-var downloadFileFromExtension = async (id, filepath, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "extensions", {
+var downloadFileFromExtension = async (id, filepath, options) => invokeFetch("extensions", {
   method: "get",
   pathTemplate: "/api/v1/extensions/{id}/file/{filepath}",
   pathVariables: { id, filepath },
   options
 });
 function clearCache() {
-  return _LHCJKIEOjs.clearApiCache.call(void 0, "extensions");
+  return clearApiCache("extensions");
 }
 var extensionsExport = {
   getExtensions,
@@ -64,14 +64,14 @@ var extensionsExport = {
   clearCache
 };
 var extensions_default = extensionsExport;
-
-
-
-
-
-
-
-
-
-
-exports.clearCache = clearCache; exports.default = extensions_default; exports.deleteExtension = deleteExtension; exports.downloadExtension = downloadExtension; exports.downloadFileFromExtension = downloadFileFromExtension; exports.getExtension = getExtension; exports.getExtensions = getExtensions; exports.patchExtension = patchExtension; exports.uploadExtension = uploadExtension;
+export {
+  clearCache,
+  extensions_default as default,
+  deleteExtension,
+  downloadExtension,
+  downloadFileFromExtension,
+  getExtension,
+  getExtensions,
+  patchExtension,
+  uploadExtension
+};

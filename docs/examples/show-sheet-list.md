@@ -52,7 +52,7 @@ When using a browser you can load the library files from a CDN provider. It is a
       <!-- Sheets will be addeed here -->
     </div>
     <script type="module">
-      import { auth, qix } from "https://cdn.jsdelivr.net/npm/@qlik/api/index.mjs";
+      import { auth, qix } from "https://cdn.jsdelivr.net/npm/@qlik/api/index.js";
       auth.setDefaultHostConfig({
         host: "your-tenant.region.qlikcloud.com",
         authType: "cookie",

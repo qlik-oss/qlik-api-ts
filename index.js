@@ -1,15 +1,15 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true});
-
-var _TFSRDRRSjs = require('./chunks/TFSRDRRS.js');
-
-
-var _D62LI5YUjs = require('./chunks/D62LI5YU.js');
-
-
-
-var _LHCJKIEOjs = require('./chunks/LHCJKIEO.js');
-require('./chunks/4V5AAWUI.js');
-require('./chunks/4HB3TAEO.js');
+import {
+  auth_default
+} from "./chunks/TFSRDRRS.js";
+import {
+  qix_default
+} from "./chunks/D62LI5YU.js";
+import {
+  clearApiCache,
+  invokeFetch
+} from "./chunks/LHCJKIEO.js";
+import "./chunks/4V5AAWUI.js";
+import "./chunks/4HB3TAEO.js";
 
 // src/public/public-runtime-api-generator/public-runtime-api-generator.ts
 var methodAbbreviations = {
@@ -26,7 +26,7 @@ var methodAbbreviations = {
 function methodCharToMethodName(method) {
   try {
     return methodAbbreviations[method];
-  } catch (e) {
+  } catch {
     throw new Error(`Unknown short hand method:${method}`);
   }
 }
@@ -40,7 +40,7 @@ var contentTypeAbbreviations = {
 function contentTypeCharToContentType(typeChar) {
   try {
     return contentTypeAbbreviations[typeChar];
-  } catch (e2) {
+  } catch {
     throw new Error(`Unknown short hand content-type: ${typeChar}`);
   }
 }
@@ -84,7 +84,7 @@ function apiDefToApi(namespace, def) {
     return runtimeApiCache[namespace];
   }
   const api2 = {
-    clearCache: () => _LHCJKIEOjs.clearApiCache.call(void 0, namespace)
+    clearCache: () => clearApiCache(namespace)
   };
   const initFunc = () => {
     traverse(namespace, "", def, api2);
@@ -153,7 +153,7 @@ function createClassicApiFn(namespace, operationName, pathTemplate, method, argN
     if (useInstead) {
       console.warn(`${namespace}.${operationName} is deprecated, use ${useInstead} instead`);
     }
-    return _LHCJKIEOjs.invokeFetch.call(void 0, namespace, {
+    return invokeFetch(namespace, {
       method,
       pathTemplate,
       pathVariables,
@@ -249,7 +249,7 @@ var audits = apiDefToApi("audits", {
     }
   }
 });
-var auth = _TFSRDRRSjs.auth_default;
+var auth = auth_default;
 var automations = apiDefToApi("automations", {
   api: {
     v1: {
@@ -496,7 +496,7 @@ var licenses = apiDefToApi("licenses", {
     }
   }
 });
-var qix = _D62LI5YUjs.qix_default;
+var qix = qix_default;
 var quotas = apiDefToApi("quotas", {
   api: { v1: { quotas: { "": ["getQuotas:GQ:"], "{id}": ["getQuota:GQ:"] } } }
 });
@@ -679,38 +679,38 @@ var api = {
   webhooks
 };
 var public_default = api;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-exports.apiKeys = apiKeys; exports.apps = apps; exports.audits = audits; exports.auth = auth; exports.automations = automations; exports.brands = brands; exports.collections = collections; exports.cspOrigins = cspOrigins; exports.dataAssets = dataAssets; exports.dataConnections = dataConnections; exports.dataCredentials = dataCredentials; exports.dataFiles = dataFiles; exports.default = public_default; exports.extensions = extensions; exports.glossaries = glossaries; exports.groups = groups; exports.identityProviders = identityProviders; exports.items = items; exports.licenses = licenses; exports.qix = qix; exports.quotas = quotas; exports.reloadTasks = reloadTasks; exports.reloads = reloads; exports.roles = roles; exports.spaces = spaces; exports.tempContents = tempContents; exports.tenants = tenants; exports.themes = themes; exports.transports = transports; exports.users = users; exports.webIntegrations = webIntegrations; exports.webNotifications = webNotifications; exports.webhooks = webhooks;
+export {
+  apiKeys,
+  apps,
+  audits,
+  auth,
+  automations,
+  brands,
+  collections,
+  cspOrigins,
+  dataAssets,
+  dataConnections,
+  dataCredentials,
+  dataFiles,
+  public_default as default,
+  extensions,
+  glossaries,
+  groups,
+  identityProviders,
+  items,
+  licenses,
+  qix,
+  quotas,
+  reloadTasks,
+  reloads,
+  roles,
+  spaces,
+  tempContents,
+  tenants,
+  themes,
+  transports,
+  users,
+  webIntegrations,
+  webNotifications,
+  webhooks
+};
