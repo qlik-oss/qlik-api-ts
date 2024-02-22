@@ -1,42 +1,42 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true});
-
-
-var _LHCJKIEOjs = require('./chunks/LHCJKIEO.js');
-require('./chunks/4V5AAWUI.js');
-require('./chunks/4HB3TAEO.js');
+import {
+  clearApiCache,
+  invokeFetch
+} from "./chunks/LHCJKIEO.js";
+import "./chunks/4V5AAWUI.js";
+import "./chunks/4HB3TAEO.js";
 
 // src/public/rest/brands.ts
-var getBrands = async (query, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "brands", {
+var getBrands = async (query, options) => invokeFetch("brands", {
   method: "get",
   pathTemplate: "/api/v1/brands",
   query,
   options
 });
-var createBrand = async (body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "brands", {
+var createBrand = async (body, options) => invokeFetch("brands", {
   method: "post",
   pathTemplate: "/api/v1/brands",
   body,
   contentType: "multipart/form-data",
   options
 });
-var getActiveBrand = async (options) => _LHCJKIEOjs.invokeFetch.call(void 0, "brands", {
+var getActiveBrand = async (options) => invokeFetch("brands", {
   method: "get",
   pathTemplate: "/api/v1/brands/active",
   options
 });
-var deleteBrand = async (brandId, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "brands", {
+var deleteBrand = async (brandId, options) => invokeFetch("brands", {
   method: "delete",
   pathTemplate: "/api/v1/brands/{brand-id}",
   pathVariables: { "brand-id": brandId },
   options
 });
-var getBrand = async (brandId, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "brands", {
+var getBrand = async (brandId, options) => invokeFetch("brands", {
   method: "get",
   pathTemplate: "/api/v1/brands/{brand-id}",
   pathVariables: { "brand-id": brandId },
   options
 });
-var patchBrand = async (brandId, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "brands", {
+var patchBrand = async (brandId, body, options) => invokeFetch("brands", {
   method: "patch",
   pathTemplate: "/api/v1/brands/{brand-id}",
   pathVariables: { "brand-id": brandId },
@@ -44,33 +44,33 @@ var patchBrand = async (brandId, body, options) => _LHCJKIEOjs.invokeFetch.call(
   contentType: "application/json",
   options
 });
-var activateBrand = async (brandId, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "brands", {
+var activateBrand = async (brandId, body, options) => invokeFetch("brands", {
   method: "post",
   pathTemplate: "/api/v1/brands/{brand-id}/actions/activate",
   pathVariables: { "brand-id": brandId },
   body,
   options
 });
-var deactivateBrand = async (brandId, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "brands", {
+var deactivateBrand = async (brandId, body, options) => invokeFetch("brands", {
   method: "post",
   pathTemplate: "/api/v1/brands/{brand-id}/actions/deactivate",
   pathVariables: { "brand-id": brandId },
   body,
   options
 });
-var deleteBrandFile = async (brandId, brandFileId, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "brands", {
+var deleteBrandFile = async (brandId, brandFileId, options) => invokeFetch("brands", {
   method: "delete",
   pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
   pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
   options
 });
-var getBrandFile = async (brandId, brandFileId, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "brands", {
+var getBrandFile = async (brandId, brandFileId, options) => invokeFetch("brands", {
   method: "get",
   pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
   pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
   options
 });
-var createBrandFile = async (brandId, brandFileId, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "brands", {
+var createBrandFile = async (brandId, brandFileId, body, options) => invokeFetch("brands", {
   method: "post",
   pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
   pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
@@ -78,7 +78,7 @@ var createBrandFile = async (brandId, brandFileId, body, options) => _LHCJKIEOjs
   contentType: "multipart/form-data",
   options
 });
-var updateBrandFile = async (brandId, brandFileId, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "brands", {
+var updateBrandFile = async (brandId, brandFileId, body, options) => invokeFetch("brands", {
   method: "put",
   pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
   pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
@@ -87,7 +87,7 @@ var updateBrandFile = async (brandId, brandFileId, body, options) => _LHCJKIEOjs
   options
 });
 function clearCache() {
-  return _LHCJKIEOjs.clearApiCache.call(void 0, "brands");
+  return clearApiCache("brands");
 }
 var brandsExport = {
   getBrands,
@@ -105,19 +105,19 @@ var brandsExport = {
   clearCache
 };
 var brands_default = brandsExport;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-exports.activateBrand = activateBrand; exports.clearCache = clearCache; exports.createBrand = createBrand; exports.createBrandFile = createBrandFile; exports.deactivateBrand = deactivateBrand; exports.default = brands_default; exports.deleteBrand = deleteBrand; exports.deleteBrandFile = deleteBrandFile; exports.getActiveBrand = getActiveBrand; exports.getBrand = getBrand; exports.getBrandFile = getBrandFile; exports.getBrands = getBrands; exports.patchBrand = patchBrand; exports.updateBrandFile = updateBrandFile;
+export {
+  activateBrand,
+  clearCache,
+  createBrand,
+  createBrandFile,
+  deactivateBrand,
+  brands_default as default,
+  deleteBrand,
+  deleteBrandFile,
+  getActiveBrand,
+  getBrand,
+  getBrandFile,
+  getBrands,
+  patchBrand,
+  updateBrandFile
+};

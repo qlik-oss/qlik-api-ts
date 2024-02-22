@@ -1,25 +1,25 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true});
-
-var _4V5AAWUIjs = require('./4V5AAWUI.js');
+import {
+  getAuthRuntimeModule
+} from "./4V5AAWUI.js";
 
 // src/public/auth.ts
 function registerAuthModule(name, authModule) {
-  void _4V5AAWUIjs.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.registerAuthModule(name, authModule));
+  void getAuthRuntimeModule().then((impl) => impl.registerAuthModule(name, authModule));
 }
 function logout() {
-  void _4V5AAWUIjs.getAuthRuntimeModule.call(void 0, ).then((impl) => impl.logout());
+  void getAuthRuntimeModule().then((impl) => impl.logout());
 }
 function setDefaultHostConfig(hostConfig) {
-  void _4V5AAWUIjs.getAuthRuntimeModule.call(void 0, hostConfig).then((impl) => impl.setDefaultHostConfig(hostConfig));
+  void getAuthRuntimeModule(hostConfig).then((impl) => impl.setDefaultHostConfig(hostConfig));
 }
 var auth_default = {
   registerAuthModule,
   setDefaultHostConfig
 };
 
-
-
-
-
-
-exports.registerAuthModule = registerAuthModule; exports.logout = logout; exports.setDefaultHostConfig = setDefaultHostConfig; exports.auth_default = auth_default;
+export {
+  registerAuthModule,
+  logout,
+  setDefaultHostConfig,
+  auth_default
+};

@@ -1,26 +1,26 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true});
-
-
-var _LHCJKIEOjs = require('./chunks/LHCJKIEO.js');
-require('./chunks/4V5AAWUI.js');
-require('./chunks/4HB3TAEO.js');
+import {
+  clearApiCache,
+  invokeFetch
+} from "./chunks/LHCJKIEO.js";
+import "./chunks/4V5AAWUI.js";
+import "./chunks/4HB3TAEO.js";
 
 // src/public/rest/data-credentials.ts
-var deleteDataCredential = async (qID, query, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "data-credentials", {
+var deleteDataCredential = async (qID, query, options) => invokeFetch("data-credentials", {
   method: "delete",
   pathTemplate: "/api/v1/data-credentials/{qID}",
   pathVariables: { qID },
   query,
   options
 });
-var getDataCredential = async (qID, query, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "data-credentials", {
+var getDataCredential = async (qID, query, options) => invokeFetch("data-credentials", {
   method: "get",
   pathTemplate: "/api/v1/data-credentials/{qID}",
   pathVariables: { qID },
   query,
   options
 });
-var patchDataCredential = async (qID, query, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "data-credentials", {
+var patchDataCredential = async (qID, query, body, options) => invokeFetch("data-credentials", {
   method: "patch",
   pathTemplate: "/api/v1/data-credentials/{qID}",
   pathVariables: { qID },
@@ -29,7 +29,7 @@ var patchDataCredential = async (qID, query, body, options) => _LHCJKIEOjs.invok
   contentType: "application/json",
   options
 });
-var updateDataCredential = async (qID, query, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "data-credentials", {
+var updateDataCredential = async (qID, query, body, options) => invokeFetch("data-credentials", {
   method: "put",
   pathTemplate: "/api/v1/data-credentials/{qID}",
   pathVariables: { qID },
@@ -39,7 +39,7 @@ var updateDataCredential = async (qID, query, body, options) => _LHCJKIEOjs.invo
   options
 });
 function clearCache() {
-  return _LHCJKIEOjs.clearApiCache.call(void 0, "data-credentials");
+  return clearApiCache("data-credentials");
 }
 var dataCredentialsExport = {
   deleteDataCredential,
@@ -49,11 +49,11 @@ var dataCredentialsExport = {
   clearCache
 };
 var data_credentials_default = dataCredentialsExport;
-
-
-
-
-
-
-
-exports.clearCache = clearCache; exports.default = data_credentials_default; exports.deleteDataCredential = deleteDataCredential; exports.getDataCredential = getDataCredential; exports.patchDataCredential = patchDataCredential; exports.updateDataCredential = updateDataCredential;
+export {
+  clearCache,
+  data_credentials_default as default,
+  deleteDataCredential,
+  getDataCredential,
+  patchDataCredential,
+  updateDataCredential
+};

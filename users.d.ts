@@ -22,8 +22,6 @@ type AssignedRoles = {
     readonly level: "admin" | "user";
     /** The role name */
     readonly name: string;
-    /** An array of permissions associated to a given role. */
-    readonly permissions: string[];
     /** The type of role */
     readonly type: "default";
 }[];
@@ -507,7 +505,7 @@ declare const getUser: (userId: string, query: {
     fields?: string;
 }, options?: ApiCallOptions) => Promise<GetUserHttpResponse>;
 type GetUserHttpResponse = {
-    data: User;
+    data: User & unknown;
     headers: Headers;
     status: number;
 };

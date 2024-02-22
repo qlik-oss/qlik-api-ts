@@ -30,7 +30,7 @@ If code will run directly in a browser it is recommended to load the code direct
 
 ```html
 <script type="module">
-  import qlikApi from "https://cdn.jsdelivr.net/npm/@qlik/api/index.mjs";
+  import qlikApi from "https://cdn.jsdelivr.net/npm/@qlik/api/index.js";
   ...
 </script>
 ```

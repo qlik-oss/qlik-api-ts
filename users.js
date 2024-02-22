@@ -1,31 +1,31 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true});
-
-
-var _LHCJKIEOjs = require('./chunks/LHCJKIEO.js');
-require('./chunks/4V5AAWUI.js');
-require('./chunks/4HB3TAEO.js');
+import {
+  clearApiCache,
+  invokeFetch
+} from "./chunks/LHCJKIEO.js";
+import "./chunks/4V5AAWUI.js";
+import "./chunks/4HB3TAEO.js";
 
 // src/public/rest/users.ts
-var getUsers = async (query, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "users", {
+var getUsers = async (query, options) => invokeFetch("users", {
   method: "get",
   pathTemplate: "/api/v1/users",
   query,
   options
 });
-var createUser = async (body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "users", {
+var createUser = async (body, options) => invokeFetch("users", {
   method: "post",
   pathTemplate: "/api/v1/users",
   body,
   contentType: "application/json",
   options
 });
-var countUsers = async (query, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "users", {
+var countUsers = async (query, options) => invokeFetch("users", {
   method: "get",
   pathTemplate: "/api/v1/users/actions/count",
   query,
   options
 });
-var filterUsers = async (query, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "users", {
+var filterUsers = async (query, body, options) => invokeFetch("users", {
   method: "post",
   pathTemplate: "/api/v1/users/actions/filter",
   query,
@@ -33,37 +33,37 @@ var filterUsers = async (query, body, options) => _LHCJKIEOjs.invokeFetch.call(v
   contentType: "application/json",
   options
 });
-var inviteUsers = async (body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "users", {
+var inviteUsers = async (body, options) => invokeFetch("users", {
   method: "post",
   pathTemplate: "/api/v1/users/actions/invite",
   body,
   contentType: "application/json",
   options
 });
-var getMyUser = async (options) => _LHCJKIEOjs.invokeFetch.call(void 0, "users", {
+var getMyUser = async (options) => invokeFetch("users", {
   method: "get",
   pathTemplate: "/api/v1/users/me",
   options
 });
-var getUsersMetadata = async (options) => _LHCJKIEOjs.invokeFetch.call(void 0, "users", {
+var getUsersMetadata = async (options) => invokeFetch("users", {
   method: "get",
   pathTemplate: "/api/v1/users/metadata",
   options
 });
-var deleteUser = async (userId, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "users", {
+var deleteUser = async (userId, options) => invokeFetch("users", {
   method: "delete",
   pathTemplate: "/api/v1/users/{userId}",
   pathVariables: { userId },
   options
 });
-var getUser = async (userId, query, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "users", {
+var getUser = async (userId, query, options) => invokeFetch("users", {
   method: "get",
   pathTemplate: "/api/v1/users/{userId}",
   pathVariables: { userId },
   query,
   options
 });
-var patchUser = async (userId, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "users", {
+var patchUser = async (userId, body, options) => invokeFetch("users", {
   method: "patch",
   pathTemplate: "/api/v1/users/{userId}",
   pathVariables: { userId },
@@ -72,7 +72,7 @@ var patchUser = async (userId, body, options) => _LHCJKIEOjs.invokeFetch.call(vo
   options
 });
 function clearCache() {
-  return _LHCJKIEOjs.clearApiCache.call(void 0, "users");
+  return clearApiCache("users");
 }
 var usersExport = {
   getUsers,
@@ -88,17 +88,17 @@ var usersExport = {
   clearCache
 };
 var users_default = usersExport;
-
-
-
-
-
-
-
-
-
-
-
-
-
-exports.clearCache = clearCache; exports.countUsers = countUsers; exports.createUser = createUser; exports.default = users_default; exports.deleteUser = deleteUser; exports.filterUsers = filterUsers; exports.getMyUser = getMyUser; exports.getUser = getUser; exports.getUsers = getUsers; exports.getUsersMetadata = getUsersMetadata; exports.inviteUsers = inviteUsers; exports.patchUser = patchUser;
+export {
+  clearCache,
+  countUsers,
+  createUser,
+  users_default as default,
+  deleteUser,
+  filterUsers,
+  getMyUser,
+  getUser,
+  getUsers,
+  getUsersMetadata,
+  inviteUsers,
+  patchUser
+};

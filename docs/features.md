@@ -9,7 +9,7 @@
 
 ## Typed API Calls
 
-Each API comes with full typescript support which will greatly help the developer experience. Use the types to understand how the API works by going into the type definition. In most editors (e.g. vscode) you can CMD+click (mac) or CTRL+click (windows) on an api-call to see the type definition of parameters, return structures etc etc.
+Each API comes with full typescript support which will greatly help the developer experience. Use the types to understand how the API works by going into the type definition. In most editors (for example vscode) you can CMD+click (mac) or CTRL+click (windows) on an api-call to see the type definition of parameters, return structures etc etc.
 
 ## Caching
 

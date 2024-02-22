@@ -1,68 +1,68 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true});
-
-
-var _LHCJKIEOjs = require('./chunks/LHCJKIEO.js');
-require('./chunks/4V5AAWUI.js');
-require('./chunks/4HB3TAEO.js');
+import {
+  clearApiCache,
+  invokeFetch
+} from "./chunks/LHCJKIEO.js";
+import "./chunks/4V5AAWUI.js";
+import "./chunks/4HB3TAEO.js";
 
 // src/public/rest/licenses.ts
-var getLicenseAssignments = async (query, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "licenses", {
+var getLicenseAssignments = async (query, options) => invokeFetch("licenses", {
   method: "get",
   pathTemplate: "/api/v1/licenses/assignments",
   query,
   options
 });
-var addLicenseAssignments = async (body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "licenses", {
+var addLicenseAssignments = async (body, options) => invokeFetch("licenses", {
   method: "post",
   pathTemplate: "/api/v1/licenses/assignments/actions/add",
   body,
   contentType: "application/json",
   options
 });
-var deleteLicenseAssignments = async (body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "licenses", {
+var deleteLicenseAssignments = async (body, options) => invokeFetch("licenses", {
   method: "post",
   pathTemplate: "/api/v1/licenses/assignments/actions/delete",
   body,
   contentType: "application/json",
   options
 });
-var updateLicenseAssignments = async (body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "licenses", {
+var updateLicenseAssignments = async (body, options) => invokeFetch("licenses", {
   method: "post",
   pathTemplate: "/api/v1/licenses/assignments/actions/update",
   body,
   contentType: "application/json",
   options
 });
-var getLicenseConsumption = async (query, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "licenses", {
+var getLicenseConsumption = async (query, options) => invokeFetch("licenses", {
   method: "get",
   pathTemplate: "/api/v1/licenses/consumption",
   query,
   options
 });
-var getLicenseOverview = async (options) => _LHCJKIEOjs.invokeFetch.call(void 0, "licenses", {
+var getLicenseOverview = async (options) => invokeFetch("licenses", {
   method: "get",
   pathTemplate: "/api/v1/licenses/overview",
   options
 });
-var getLicenseSettings = async (options) => _LHCJKIEOjs.invokeFetch.call(void 0, "licenses", {
+var getLicenseSettings = async (options) => invokeFetch("licenses", {
   method: "get",
   pathTemplate: "/api/v1/licenses/settings",
   options
 });
-var updateLicenseSettings = async (body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "licenses", {
+var updateLicenseSettings = async (body, options) => invokeFetch("licenses", {
   method: "put",
   pathTemplate: "/api/v1/licenses/settings",
   body,
   contentType: "application/json",
   options
 });
-var getLicenseStatus = async (options) => _LHCJKIEOjs.invokeFetch.call(void 0, "licenses", {
+var getLicenseStatus = async (options) => invokeFetch("licenses", {
   method: "get",
   pathTemplate: "/api/v1/licenses/status",
   options
 });
 function clearCache() {
-  return _LHCJKIEOjs.clearApiCache.call(void 0, "licenses");
+  return clearApiCache("licenses");
 }
 var licensesExport = {
   getLicenseAssignments,
@@ -77,16 +77,16 @@ var licensesExport = {
   clearCache
 };
 var licenses_default = licensesExport;
-
-
-
-
-
-
-
-
-
-
-
-
-exports.addLicenseAssignments = addLicenseAssignments; exports.clearCache = clearCache; exports.default = licenses_default; exports.deleteLicenseAssignments = deleteLicenseAssignments; exports.getLicenseAssignments = getLicenseAssignments; exports.getLicenseConsumption = getLicenseConsumption; exports.getLicenseOverview = getLicenseOverview; exports.getLicenseSettings = getLicenseSettings; exports.getLicenseStatus = getLicenseStatus; exports.updateLicenseAssignments = updateLicenseAssignments; exports.updateLicenseSettings = updateLicenseSettings;
+export {
+  addLicenseAssignments,
+  clearCache,
+  licenses_default as default,
+  deleteLicenseAssignments,
+  getLicenseAssignments,
+  getLicenseConsumption,
+  getLicenseOverview,
+  getLicenseSettings,
+  getLicenseStatus,
+  updateLicenseAssignments,
+  updateLicenseSettings
+};

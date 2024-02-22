@@ -25,15 +25,7 @@ async function main() {
 await main();
 ```
 
-Run the code with
-
-```shell
-node fetch-spaces.mjs
-```
-
 ## NodeJS using Oauth2
-
-Create a file `fetch-spaces.mjs` and add the following:
 
 ```typescript
 import { auth, spaces } from "@qlik/api";
@@ -55,12 +47,6 @@ async function main() {
 await main();
 ```
 
-Run the code with
-
-```shell
-node fetch-spaces.mjs
-```
-
 ## Browser using cookies
 
 When using a browser you can load the library files from a CDN provider. It is also possible to use npm and a bundler to get the code into your application. In the html below we are making an api call to fetch the spaces from a tenant and we add the names of the spaces as div elements in the dom.
@@ -77,7 +63,7 @@ When using a browser you can load the library files from a CDN provider. It is a
       <!-- Spaces will be addeed here -->
     </div>
     <script type="module">
-      import { auth, spaces } from "https://cdn.jsdelivr.net/npm/@qlik/api/index.mjs";
+      import { auth, spaces } from "https://cdn.jsdelivr.net/npm/@qlik/api/index.js";
 
       auth.setDefaultHostConfig({
         host: "your-tenant.region.qlikcloud.com",

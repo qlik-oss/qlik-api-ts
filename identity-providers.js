@@ -1,52 +1,52 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true});
-
-
-var _LHCJKIEOjs = require('./chunks/LHCJKIEO.js');
-require('./chunks/4V5AAWUI.js');
-require('./chunks/4HB3TAEO.js');
+import {
+  clearApiCache,
+  invokeFetch
+} from "./chunks/LHCJKIEO.js";
+import "./chunks/4V5AAWUI.js";
+import "./chunks/4HB3TAEO.js";
 
 // src/public/rest/identity-providers.ts
-var getIdps = async (query, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "identity-providers", {
+var getIdps = async (query, options) => invokeFetch("identity-providers", {
   method: "get",
   pathTemplate: "/api/v1/identity-providers",
   query,
   options
 });
-var createIdp = async (body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "identity-providers", {
+var createIdp = async (body, options) => invokeFetch("identity-providers", {
   method: "post",
   pathTemplate: "/api/v1/identity-providers",
   body,
   contentType: "application/json",
   options
 });
-var getIdpWellKnownMetaData = async (options) => _LHCJKIEOjs.invokeFetch.call(void 0, "identity-providers", {
+var getIdpWellKnownMetaData = async (options) => invokeFetch("identity-providers", {
   method: "get",
   pathTemplate: "/api/v1/identity-providers/.well-known/metadata.json",
   options
 });
-var getMyIdpMeta = async (options) => _LHCJKIEOjs.invokeFetch.call(void 0, "identity-providers", {
+var getMyIdpMeta = async (options) => invokeFetch("identity-providers", {
   method: "get",
   pathTemplate: "/api/v1/identity-providers/me/meta",
   options
 });
-var getIdpStatuses = async (options) => _LHCJKIEOjs.invokeFetch.call(void 0, "identity-providers", {
+var getIdpStatuses = async (options) => invokeFetch("identity-providers", {
   method: "get",
   pathTemplate: "/api/v1/identity-providers/status",
   options
 });
-var deleteIdp = async (id, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "identity-providers", {
+var deleteIdp = async (id, options) => invokeFetch("identity-providers", {
   method: "delete",
   pathTemplate: "/api/v1/identity-providers/{id}",
   pathVariables: { id },
   options
 });
-var getIdp = async (id, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "identity-providers", {
+var getIdp = async (id, options) => invokeFetch("identity-providers", {
   method: "get",
   pathTemplate: "/api/v1/identity-providers/{id}",
   pathVariables: { id },
   options
 });
-var patchIdp = async (id, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0, "identity-providers", {
+var patchIdp = async (id, body, options) => invokeFetch("identity-providers", {
   method: "patch",
   pathTemplate: "/api/v1/identity-providers/{id}",
   pathVariables: { id },
@@ -55,7 +55,7 @@ var patchIdp = async (id, body, options) => _LHCJKIEOjs.invokeFetch.call(void 0,
   options
 });
 function clearCache() {
-  return _LHCJKIEOjs.clearApiCache.call(void 0, "identity-providers");
+  return clearApiCache("identity-providers");
 }
 var identityProvidersExport = {
   getIdps,
@@ -69,15 +69,15 @@ var identityProvidersExport = {
   clearCache
 };
 var identity_providers_default = identityProvidersExport;
-
-
-
-
-
-
-
-
-
-
-
-exports.clearCache = clearCache; exports.createIdp = createIdp; exports.default = identity_providers_default; exports.deleteIdp = deleteIdp; exports.getIdp = getIdp; exports.getIdpStatuses = getIdpStatuses; exports.getIdpWellKnownMetaData = getIdpWellKnownMetaData; exports.getIdps = getIdps; exports.getMyIdpMeta = getMyIdpMeta; exports.patchIdp = patchIdp;
+export {
+  clearCache,
+  createIdp,
+  identity_providers_default as default,
+  deleteIdp,
+  getIdp,
+  getIdpStatuses,
+  getIdpWellKnownMetaData,
+  getIdps,
+  getMyIdpMeta,
+  patchIdp
+};
