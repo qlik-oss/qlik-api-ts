@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types-TzVhFPid.js';
+import { A as ApiCallOptions } from './global.types-oglBSD7D.js';
 import './auth-types-nnUcWhuU.js';
 
 type BatchChangeSpaceItem = {
