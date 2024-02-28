@@ -9093,7 +9093,7 @@ var CREATABLE_RESOURCES = [
   { resource: "masterobject", canCreate: true },
   { resource: "snapshot", canCreate: true }
 ];
-var forceReadOnly = true;
+var forceReadOnly = false;
 function parse(privileges, mapToObj) {
   if (!privileges.length) {
     privileges = ["update", "publish", "export", "exportdata", "changeowner", "delete"];

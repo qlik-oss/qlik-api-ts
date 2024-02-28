@@ -6,7 +6,7 @@ function getAuthRuntimeModule(hostConfig) {
 async function getQixRuntimeModule(hostConfig) {
   await getAuthRuntimeModule(hostConfig);
   const isNode = !!globalThis.process?.argv;
-  return isNode ? import("./RNLZBOJU.js") : import("./OPRGGO4C.js").then((mod) => mod.importRuntimeModule("qix@v1", hostConfig));
+  return isNode ? import("./CHNBNLXY.js") : import("./OPRGGO4C.js").then((mod) => mod.importRuntimeModule("qix@v1", hostConfig));
 }
 async function getInvokeFetchRuntimeModule(hostConfig) {
   await getAuthRuntimeModule(hostConfig);

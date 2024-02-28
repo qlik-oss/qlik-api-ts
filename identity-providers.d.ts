@@ -19,12 +19,22 @@ type BaseIDP = {
     meta?: unknown;
     /** Direct the user on logout to a specific URI. */
     postLogoutRedirectUri?: string;
-    /** The protocol to be used for communicating with the identity provider. Valid values are `OIDC`, `jwtAuth`, and `qsefw-local-bearer-token`. */
+    /** The protocol to be used for communicating with the identity provider. Valid values are `OIDC`, `SAML`, `jwtAuth`, and `qsefw-local-bearer-token`. */
     protocol?: IDPProtocol;
     /** The identity provider to be used. If protocol is `OIDC`, the valid values are `auth0`, `okta`, `generic`, `salesforce`, `keycloak`, `adfs`, and `azureAD`. If protocol is `jwtAuth`, the valid value is `external`. */
     provider?: IDPProvider;
     /** The tenant identifiers associated with the given IdP. */
     tenantIds?: string[];
+};
+type CertificateInfo = {
+    /** The X.509 certificate for validating signed SAML responses. */
+    certificate: string;
+    /** Indicates whether the certificate is used for encryption. */
+    encryption?: boolean;
+    /** Given name for this certificate. */
+    name?: string;
+    /** Indicates whether the certificate is used for the signature. */
+    signature?: boolean;
 };
 /**
  * Payload for creating an identity provider using JWT authentication.
@@ -113,6 +123,68 @@ type CreateOIDCPayload = {
     tenantIds?: string[];
 };
 /**
+ * Payload for creating a SAML compatible identity provider.
+ */
+type CreateSAMLPayload = {
+    /** There can be clock skew between the IdP and Qlik's login server. In these cases, a tolerance can be set, decimals will be rounded off. */
+    clockToleranceSec?: number;
+    /** Tells the consumer of the IdP that new users should be created on login if they don't exist. */
+    createNewUsersOnLogin?: boolean;
+    description?: string;
+    /** Indicates whether the IdP is meant for interactive login. Must be true for SAML IdPs. */
+    interactive: boolean;
+    /** Required SAML configurations for IdPs with `skipVerify` flag enabled. */
+    options?: {
+        /** Toggle to allow IdP initated login by the SAML IdP. */
+        allowIdpInitiatedLogin?: boolean;
+        /** The certificates used for validating signed responses. Required if metadata is not provided. */
+        certificates?: CertificateInfo[];
+        /** Mappings from claim name to an array of SAML attribute names that point to locations in the claims from the IdP to retrieve the value from. */
+        claimsMapping: ClaimsMappingSAML;
+        /** The entity ID for the SAML IdP. Required if metadata is not provided. */
+        entityId?: string;
+        /** Metadata for the SAML IdP. Required if individual SAML parameters are not provided. */
+        metadata?: {
+            /** The IDP metadata XML in base64-encoded format. */
+            raw: string;
+        };
+        /** The name identifier format that will be requested from the identity provider. */
+        nameIdFormat?: "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress" | "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent" | "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified";
+        /** The sign on URL for the SAML IdP. Required if metadata is not provided. */
+        signOnUrl?: string;
+    };
+    /** Required configurations for SAML IdPs that require verification. */
+    pendingOptions?: {
+        /** Toggle to allow IdP initated login by the SAML IdP. */
+        allowIdpInitiatedLogin?: boolean;
+        /** The certificates used for validating signed responses. Required if metadata is not provided. */
+        certificates?: CertificateInfo[];
+        /** Mappings from claim name to an array of SAML attribute names that point to locations in the claims from the IdP to retrieve the value from. */
+        claimsMapping: ClaimsMappingSAML;
+        /** The entity ID for the SAML IdP. Required if metadata is not provided. */
+        entityId?: string;
+        /** Metadata for the SAML IdP. Required if individual SAML parameters are not provided. */
+        metadata?: {
+            /** The IDP metadata XML in base64-encoded format. */
+            raw: string;
+        };
+        /** The name identifier format that will be requested from the identity provider. */
+        nameIdFormat?: "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress" | "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent" | "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified";
+        /** The sign on URL for the SAML IdP. Required if metadata is not provided. */
+        signOnUrl?: string;
+    };
+    /** Direct the user on logout to a specific URI. */
+    postLogoutRedirectUri?: string;
+    /** The protocol to be used for communicating with the identity provider. */
+    protocol: "SAML";
+    /** The identity provider to be used. */
+    provider: "okta" | "generic" | "adfs" | "azureAD";
+    /** If set to `true`, skips IdP verification process and assumes the IdP is verified. */
+    skipVerify?: boolean;
+    /** The tenant identifiers that map to the given IdP. */
+    tenantIds?: string[];
+};
+/**
  * An error object.
  */
 type Error = {
@@ -140,7 +212,7 @@ type Error = {
 type Errors = {
     errors?: Error[];
 };
-type IDP = IDPOIDC | IDPJWTAuth;
+type IDP = IDPOIDC | IDPSAML | IDPJWTAuth;
 type IDPArray = {
     /** An array of IdPs. */
     data?: IDP[];
@@ -172,13 +244,13 @@ type IDPMeta = {
  * An OIDC-compliant identity provider.
  */
 type IDPOIDC = BaseIDP & {
-    options?: IDPOptions;
-    pendingOptions?: IDPOptions;
+    options?: IDPOIDCOptions;
+    pendingOptions?: IDPOIDCOptions;
     pendingResult?: PendingResult;
     /** The state of pendingOptions. This represents the latest IdP test result. */
     pendingState?: "verified" | "pending" | "error";
 };
-type IDPOptions = {
+type IDPOIDCOptions = {
     /** If true, the `offline_access` scope will not be requested from the IdP, where applicable. */
     blockOfflineAccessScope?: boolean;
     /** Mappings from claim name to an array of JSON pointers that point to locations in the claims from the IdP to retrieve the value from. */
@@ -200,16 +272,44 @@ type IDPOptions = {
     /** Scope that will be sent along with token requests to the IdP. */
     scope?: string;
 };
-type IDPPatchSchema = PatchOIDCPayload[] | PatchJWTAuthPayload[];
-type IDPPostSchema = CreateOIDCPayload | CreateJWTAuthPayload;
+type IDPPatchSchema = PatchOIDCPayload[] | PatchSAMLPayload[] | PatchJWTAuthPayload[];
+type IDPPostSchema = CreateOIDCPayload | CreateJWTAuthPayload | CreateSAMLPayload;
 /**
- * The protocol to be used for communicating with the identity provider. Valid values are `OIDC`, `jwtAuth`, and `qsefw-local-bearer-token`.
+ * The protocol to be used for communicating with the identity provider. Valid values are `OIDC`, `SAML`, `jwtAuth`, and `qsefw-local-bearer-token`.
  */
-type IDPProtocol = "OIDC" | "jwtAuth" | "qsefw-local-bearer-token";
+type IDPProtocol = "OIDC" | "SAML" | "jwtAuth" | "qsefw-local-bearer-token";
 /**
  * The identity provider to be used. If protocol is `OIDC`, the valid values are `auth0`, `okta`, `generic`, `salesforce`, `keycloak`, `adfs`, and `azureAD`. If protocol is `jwtAuth`, the valid value is `external`.
  */
 type IDPProvider = "auth0" | "okta" | "qlik" | "generic" | "salesforce" | "keycloak" | "adfs" | "external" | "azureAD";
+/**
+ * A SAML-compliant identity provider.
+ */
+type IDPSAML = BaseIDP & {
+    options?: IDPSAMLOptions;
+    pendingOptions?: IDPSAMLOptions;
+    pendingResult?: PendingResult;
+    /** The state of pendingOptions. This represents the latest IdP test result. */
+    pendingState?: "verified" | "pending" | "error";
+};
+type IDPSAMLOptions = {
+    /** Toggle to allow IdP initated login by the SAML IdP. */
+    allowIdpInitiatedLogin?: boolean;
+    /** The certificates used for validating signed responses. */
+    certificates?: CertificateInfo[];
+    /** Mappings from claim name to an array of SAML attribute names that point to locations in the claims from the IdP to retrieve the value from. */
+    claimsMapping?: ClaimsMappingSAML;
+    /** The entity URL for the SAML IdP. */
+    entityId?: string;
+    /** The name identifier format that will be requested from the identity provider. */
+    nameIdFormat?: "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress" | "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent" | "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified";
+    /** The sign on URL for the SAML IdP. */
+    signOnUrl?: string;
+    /** The reference ID of the chosen signing key pair. */
+    signingKeySelectedRefId?: string;
+    /** Set of certificates used to sign SAMLRequest payloads. Not present in `pendingOptions`. */
+    signingKeys?: SigningKey[];
+};
 type IDPsStatus = {
     /** The number of active interactive IdPs. */
     active_interactive_idps_count?: number;
@@ -281,6 +381,17 @@ type PatchOIDCPayload = {
     /** The "value" data type is dependent on the path value being used. */
     value?: unknown;
 };
+/**
+ * A patch request for an identity provider using the `SAML` protocol. Supports a custom operation value called `promote-options` that allows the test configuration (`pendingOptions`) to be promoted to the live configuration (`options`) used for login.'
+ */
+type PatchSAMLPayload = {
+    /** The "operation" to be performed on a given IdP. */
+    op: "replace" | "promote-options";
+    /** The "path" to the part of the IdP document. */
+    path?: "/active" | "/description" | "/pendingOptions" | "/pendingOptions/nameIdFormat" | "/pendingOptions/allowIdpInitiatedLogin" | "/pendingOptions/entityId" | "/pendingOptions/signOnUrl" | "/pendingOptions/metadata" | "/pendingOptions/certificates" | "/pendingOptions/claimsMapping" | "/postLogoutRedirectUri" | "/clockToleranceSec";
+    /** The "value" data type is dependent on the path value being used. */
+    value?: unknown;
+};
 type PendingResult = {
     /** A unique readable error message based on the error that has occurred. */
     error?: string;
@@ -294,12 +405,20 @@ type PendingResult = {
         /** An optional URI that includes additional information about the given error. */
         errorURI?: string;
     };
+    /** The protocol used to communicate with the IdP during the test flow. */
+    protocol?: "OIDC" | "SAML";
     /** The resultant claims based on the claims received from the external IdP. */
     resultantClaims?: unknown;
     /** The timestamp for when the test was started for an IdP configuration. This field is only available during lifespan of the test. */
     started?: string;
     /** The status of the IdP configuration being tested. */
     status: "success" | "pending" | "error" | "claimsError" | "callbackError" | "tokenError" | "protocolError" | "networkError" | "configChangedDuringTestError";
+};
+type SigningKey = {
+    /** The certificate to be uploaded to the identity provider for verifying SAML requests. */
+    certificate?: string;
+    /** The reference ID for choosing this key pair. */
+    refId?: string;
 };
 /**
  * Mappings from claim name to an array of JSON pointers that point to locations in the claims from the IdP to retrieve the value from.
@@ -332,6 +451,21 @@ type ClaimsMappingNonInteractive = {
     client_id?: string[];
     /** A list of JSON pointers used to map the user's subject. */
     sub?: string[];
+};
+/**
+ * Mappings from claim name to an array of SAML attribute names that point to locations in the claims from the IdP to retrieve the value from.
+ */
+type ClaimsMappingSAML = {
+    /** A list of SAML attributes used to map the user's email. */
+    email: string[];
+    /** A list of SAML attributes used to map the user's groups. */
+    groups: string[];
+    /** A list of SAML attributes used to map the user's name. */
+    name: string[];
+    /** A list of SAML attributes used to map the user's picture. */
+    picture: string[];
+    /** A list of SAML attributes used to map the user's subject. */
+    sub: string[];
 };
 /**
  * This endpoint retrieves one or more identity providers from the service. The tenantID in the JWT will be used to fetch the identity provider.
@@ -547,4 +681,4 @@ interface IdentityProvidersAPI {
  */
 declare const identityProvidersExport: IdentityProvidersAPI;
 
-export { type BaseIDP, type ClaimsMappingInteractive, type ClaimsMappingNonInteractive, type CreateIdpHttpError, type CreateIdpHttpResponse, type CreateJWTAuthPayload, type CreateOIDCPayload, type DeleteIdpHttpError, type DeleteIdpHttpResponse, type Error, type Errors, type GetIdpHttpError, type GetIdpHttpResponse, type GetIdpStatusesHttpError, type GetIdpStatusesHttpResponse, type GetIdpWellKnownMetaDataHttpError, type GetIdpWellKnownMetaDataHttpResponse, type GetIdpsHttpError, type GetIdpsHttpResponse, type GetMyIdpMetaHttpError, type GetMyIdpMetaHttpResponse, type IDP, type IDPArray, type IDPJWTAuth, type IDPMeta, type IDPOIDC, type IDPOptions, type IDPPatchSchema, type IDPPostSchema, type IDPProtocol, type IDPProvider, type IDPsStatus, type IdentityProvidersAPI, type Links, type OpenIDConfiguration, type PatchIdpHttpError, type PatchIdpHttpResponse, type PatchJWTAuthPayload, type PatchOIDCPayload, type PendingResult, clearCache, createIdp, identityProvidersExport as default, deleteIdp, getIdp, getIdpStatuses, getIdpWellKnownMetaData, getIdps, getMyIdpMeta, patchIdp };
+export { type BaseIDP, type CertificateInfo, type ClaimsMappingInteractive, type ClaimsMappingNonInteractive, type ClaimsMappingSAML, type CreateIdpHttpError, type CreateIdpHttpResponse, type CreateJWTAuthPayload, type CreateOIDCPayload, type CreateSAMLPayload, type DeleteIdpHttpError, type DeleteIdpHttpResponse, type Error, type Errors, type GetIdpHttpError, type GetIdpHttpResponse, type GetIdpStatusesHttpError, type GetIdpStatusesHttpResponse, type GetIdpWellKnownMetaDataHttpError, type GetIdpWellKnownMetaDataHttpResponse, type GetIdpsHttpError, type GetIdpsHttpResponse, type GetMyIdpMetaHttpError, type GetMyIdpMetaHttpResponse, type IDP, type IDPArray, type IDPJWTAuth, type IDPMeta, type IDPOIDC, type IDPOIDCOptions, type IDPPatchSchema, type IDPPostSchema, type IDPProtocol, type IDPProvider, type IDPSAML, type IDPSAMLOptions, type IDPsStatus, type IdentityProvidersAPI, type Links, type OpenIDConfiguration, type PatchIdpHttpError, type PatchIdpHttpResponse, type PatchJWTAuthPayload, type PatchOIDCPayload, type PatchSAMLPayload, type PendingResult, type SigningKey, clearCache, createIdp, identityProvidersExport as default, deleteIdp, getIdp, getIdpStatuses, getIdpWellKnownMetaData, getIdps, getMyIdpMeta, patchIdp };
