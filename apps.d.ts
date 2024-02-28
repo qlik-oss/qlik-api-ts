@@ -1,4 +1,4 @@
-import { A as ApiCallOptions, D as DownloadableBlob } from './global.types-TzVhFPid.js';
+import { A as ApiCallOptions, D as DownloadableBlob } from './global.types-oglBSD7D.js';
 import './auth-types-nnUcWhuU.js';
 
 type Analysis = "breakdown" | "changePoint" | "comparison" | "contribution" | "correlation" | "fact" | "mutualInfo" | "rank" | "spike" | "trend" | "values";

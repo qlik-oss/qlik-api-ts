@@ -1,4 +1,4 @@
-import './global.types-TzVhFPid.js';
+import './global.types-oglBSD7D.js';
 import { H as HostConfig } from './auth-types-nnUcWhuU.js';
 
 declare const QIX_SCHEMA_VERSION = "12.1999.0";

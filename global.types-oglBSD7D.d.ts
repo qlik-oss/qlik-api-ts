@@ -109,6 +109,7 @@ declare global {
      */
     var QlikMain: {
         resourceNeedsCredentials: (resourcesUrl: string) => boolean;
+        applyFeatureOverrides: (featureFlags: Record<string, boolean>) => Promise<void>;
     } | undefined;
 }
 
