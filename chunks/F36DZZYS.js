@@ -1,6 +1,6 @@
 import {
   getAuthRuntimeModule
-} from "./TT66UJZY.js";
+} from "./TDKU6D4Z.js";
 
 // src/public/auth.ts
 function registerAuthModule(name, authModule) {
@@ -12,14 +12,19 @@ function logout() {
 function setDefaultHostConfig(hostConfig) {
   void getAuthRuntimeModule(hostConfig).then((impl) => impl.setDefaultHostConfig(hostConfig));
 }
+async function getAccessToken({ hostConfig }) {
+  return getAuthRuntimeModule(hostConfig).then((impl) => impl.getAccessToken({ hostConfig }));
+}
 var auth_default = {
   registerAuthModule,
-  setDefaultHostConfig
+  setDefaultHostConfig,
+  getAccessToken
 };
 
 export {
   registerAuthModule,
   logout,
   setDefaultHostConfig,
+  getAccessToken,
   auth_default
 };

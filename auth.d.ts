@@ -1,5 +1,5 @@
-import { A as AuthType, a as AuthModule, H as HostConfig } from './auth-types-nnUcWhuU.js';
-export { f as AuthenticationErrorAction, C as Credentials, G as GetRestCallAuthParamsProps, c as GetWebResourceAuthParamsProps, b as GetWebSocketAuthParamsProps, e as HandleAuthenticationErrorProps, R as RestCallAuthParams, d as WebResourceAuthParams, W as WebSocketAuthParams } from './auth-types-nnUcWhuU.js';
+import { A as AuthType, a as AuthModule, H as HostConfig } from './auth-types-1P4wuncR.js';
+export { g as AuthenticationErrorAction, C as Credentials, e as GetRemoteAuthDataProps, G as GetRestCallAuthParamsProps, c as GetWebResourceAuthParamsProps, b as GetWebSocketAuthParamsProps, f as HandleAuthenticationErrorProps, R as RestCallAuthParams, d as WebResourceAuthParams, W as WebSocketAuthParams } from './auth-types-1P4wuncR.js';
 
 /**
  * Registers an auth module that can handle authentication. An auth module is used by specifying its name as authType in the HostConfig passed in to api calls.
@@ -18,9 +18,13 @@ declare function logout(): void;
  * @param hostConfig the default HostConfig to use
  */
 declare function setDefaultHostConfig(hostConfig: HostConfig | undefined): void;
+declare function getAccessToken({ hostConfig }: {
+    hostConfig?: HostConfig;
+}): Promise<string>;
 declare const _default: {
     registerAuthModule: typeof registerAuthModule;
     setDefaultHostConfig: typeof setDefaultHostConfig;
+    getAccessToken: typeof getAccessToken;
 };
 
-export { AuthModule, AuthType, HostConfig, _default as default, logout, registerAuthModule, setDefaultHostConfig };
+export { AuthModule, AuthType, HostConfig, _default as default, getAccessToken, logout, registerAuthModule, setDefaultHostConfig };

@@ -1,5 +1,5 @@
-import { A as ApiCallOptions, D as DownloadableBlob } from './global.types-oglBSD7D.js';
-import './auth-types-nnUcWhuU.js';
+import { A as ApiCallOptions, D as DownloadableBlob } from './global.types-B14bb3X9.js';
+import './auth-types-1P4wuncR.js';
 
 type Analysis = "breakdown" | "changePoint" | "comparison" | "contribution" | "correlation" | "fact" | "mutualInfo" | "rank" | "spike" | "trend" | "values";
 type AnalysisComposition = {
@@ -801,6 +801,8 @@ type ReloadIncludeFile = {
     connection?: string;
     /** File location within the connection. */
     path?: string;
+    /** File QRI resource identifier. */
+    qri?: string;
 };
 type ReloadListMetadata = {
     /** Array of ReloadMeta. */

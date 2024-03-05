@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-oglBSD7D.js';
-import './auth-types-nnUcWhuU.js';
+import { A as ApiCallOptions } from './global.types-B14bb3X9.js';
+import './auth-types-1P4wuncR.js';
 
 /**
  * Object containing meta data regarding the bundle the extension belongs to. If it does not belong to a bundle, this object is not defined.

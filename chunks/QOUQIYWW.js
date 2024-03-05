@@ -1,6 +1,6 @@
 import {
   getInvokeFetchRuntimeModule
-} from "./TT66UJZY.js";
+} from "./TDKU6D4Z.js";
 
 // src/public/invoke-fetch.ts
 async function invokeFetch(api, props) {

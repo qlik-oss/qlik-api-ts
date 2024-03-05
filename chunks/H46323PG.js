@@ -5,6 +5,7 @@ import {
   UnexpectedAuthTypeError,
   auth_default,
   checkForCrossDomainRequest,
+  getAccessToken,
   getRestCallAuthParams,
   getWebResourceAuthParams,
   getWebSocketAuthParams,
@@ -17,7 +18,7 @@ import {
   toValidEnigmaLocationUrl,
   toValidLocationUrl,
   toValidWebsocketLocationUrl
-} from "./SIU6HO6B.js";
+} from "./LJNLYKW3.js";
 import "./4HB3TAEO.js";
 export {
   AuthorizationError,
@@ -26,6 +27,7 @@ export {
   UnexpectedAuthTypeError,
   checkForCrossDomainRequest,
   auth_default as default,
+  getAccessToken,
   getRestCallAuthParams,
   getWebResourceAuthParams,
   getWebSocketAuthParams,

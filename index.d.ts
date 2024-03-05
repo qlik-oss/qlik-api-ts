@@ -1,5 +1,5 @@
 import { openAppSession } from './qix.js';
-import { registerAuthModule, setDefaultHostConfig } from './auth.js';
+import { registerAuthModule, setDefaultHostConfig, getAccessToken } from './auth.js';
 import { ApiKeysAPI } from './api-keys.js';
 import { AppsAPI } from './apps.js';
 import { AuditsAPI } from './audits.js';
@@ -30,8 +30,8 @@ import { UsersAPI } from './users.js';
 import { WebIntegrationsAPI } from './web-integrations.js';
 import { WebNotificationsAPI } from './web-notifications.js';
 import { WebhooksAPI } from './webhooks.js';
-import './global.types-oglBSD7D.js';
-import './auth-types-nnUcWhuU.js';
+import './global.types-B14bb3X9.js';
+import './auth-types-1P4wuncR.js';
 
 declare const apiKeys: ApiKeysAPI;
 declare const apps: AppsAPI;
@@ -39,6 +39,7 @@ declare const audits: AuditsAPI;
 declare const auth: {
     registerAuthModule: typeof registerAuthModule;
     setDefaultHostConfig: typeof setDefaultHostConfig;
+    getAccessToken: typeof getAccessToken;
 };
 declare const automations: AutomationsAPI;
 declare const brands: BrandsAPI;

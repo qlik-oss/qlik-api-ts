@@ -82,7 +82,10 @@ function setDefaultHostConfig(hostConfig) {
   defaultHostConfig = hostConfig || {};
 }
 function withDefaultHostConfig(hostConfig) {
-  return hostConfig || defaultHostConfig;
+  if (hostConfig && Object.keys(hostConfig).length > 0) {
+    return hostConfig;
+  }
+  return defaultHostConfig;
 }
 
 // src/auth/internal/auth-module-registry.ts
@@ -283,6 +286,14 @@ async function getRestCallAuthParams(props) {
     ...props,
     hostConfig: hostConfigToUse
   });
+}
+async function getAccessToken(props) {
+  const res = await getRestCallAuthParams({ method: "GET", ...props });
+  const authorizationHeader = res.headers?.Authorization;
+  if (authorizationHeader.indexOf("Bearer ") === 0) {
+    return authorizationHeader.substring(7);
+  }
+  throw new Error("Unknown format of authorization header returned by remote auth module");
 }
 function registerAuthModule2(name, authModule) {
   registerAuthModule(name, authModule);
@@ -492,10 +503,17 @@ var none_default = {
 
 // src/utils/utils.ts
 import { nanoid } from "nanoid";
+var forcedEnvironmentForTest;
 function isBrowser() {
+  if (forcedEnvironmentForTest) {
+    return forcedEnvironmentForTest === "browser";
+  }
   return typeof window === "object" && typeof window.document === "object";
 }
 function isNode() {
+  if (forcedEnvironmentForTest) {
+    return forcedEnvironmentForTest === "node";
+  }
   return typeof process === "object" && typeof __require === "function";
 }
 function generateRandomString(targetLength) {
@@ -505,7 +523,14 @@ function generateRandomString(targetLength) {
 // src/auth/internal/default-auth-modules/oauth/storage-helpers.ts
 var storagePrefix = "qlik-qmfe-api";
 function getTopicFromHostConfig(hostConfig) {
-  return hostConfig.clientId + (hostConfig.scope ? `_${hostConfig.scope}` : "_user_default");
+  let topic = `${hostConfig.clientId + (hostConfig.scope ? `_${hostConfig.scope}` : "_user_default")}`;
+  if (hostConfig.subject) {
+    topic += `_${hostConfig.subject}`;
+  }
+  if (hostConfig.userId) {
+    topic += `_${hostConfig.userId}`;
+  }
+  return topic;
 }
 var cachedTokens = {};
 function saveInLocalStorage(topic, name, value) {
@@ -559,6 +584,9 @@ async function loadCachedOauthTokens(hostConfig) {
 async function loadOrAcquireAccessToken(hostConfig, acquireTokens) {
   if (!hostConfig.clientId) {
     throw new InvalidHostConfigError('A host config with authType set to "oauth2" has to also provide a clientId');
+  }
+  if (hostConfig.noCache) {
+    return acquireTokens();
   }
   const mayUseStorage = isBrowser();
   const storedOauthTokens = cachedTokens[getTopicFromHostConfig(hostConfig)] || (mayUseStorage ? loadOauthTokensFromStorage(hostConfig) : void 0);
@@ -628,6 +656,9 @@ function handleOAuthCallback() {
 }
 
 // src/auth/internal/default-auth-modules/oauth/oauth-utils.ts
+function lookupGetAccessFn(getAccessToken2) {
+  return globalThis[getAccessToken2];
+}
 function handlePossibleErrors(data) {
   if (data.errors) {
     throw new AuthorizationError(data.errors);
@@ -712,17 +743,43 @@ async function exchangeCodeAndVerifierForAccessTokenData(hostConfig, code, verif
     });
   }
 }
-async function getOauthTokensWithCredentials(baseUrl, clientId, clientSecret, scope = "user_default") {
+function createBodyWithCredentialsEtc(clientId, clientSecret, scope, subject, userId) {
+  const commonProps = {
+    client_id: clientId,
+    client_secret: clientSecret,
+    scope
+  };
+  if (subject) {
+    return {
+      ...commonProps,
+      grant_type: "urn:qlik:oauth:user-impersonation",
+      user_lookup: {
+        field: "subject",
+        value: subject
+      }
+    };
+  }
+  if (userId) {
+    return {
+      ...commonProps,
+      grant_type: "urn:qlik:oauth:user-impersonation",
+      user_lookup: {
+        field: "userId",
+        value: userId
+      }
+    };
+  }
+  return {
+    ...commonProps,
+    grant_type: "client_credentials"
+  };
+}
+async function getOauthTokensWithCredentials(baseUrl, clientId, clientSecret, scope = "user_default", subject, userId) {
   const result2 = await fetch(`${baseUrl}/oauth/token`, {
     method: "POST",
     mode: "cors",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify({
-      grant_type: "client_credentials",
-      client_id: clientId,
-      client_secret: clientSecret,
-      scope
-    })
+    body: JSON.stringify(createBodyWithCredentialsEtc(clientId, clientSecret, scope, subject, userId))
   });
   const data = await result2.json();
   return {
@@ -766,7 +823,9 @@ async function getOAuthTokensForNode(hostConfig) {
       toValidLocationUrl(hostConfig),
       hostConfig.clientId,
       hostConfig.clientSecret,
-      hostConfig.scope
+      hostConfig.scope,
+      hostConfig.subject,
+      hostConfig.userId
     );
   });
   return oauthTokens;
@@ -777,6 +836,30 @@ async function getOAuthTokensForBrowser(hostConfig) {
     throw new InvalidHostConfigError('A host config with authType set to "oauth2" has to also provide a clientId');
   }
   const oauthTokens = await loadOrAcquireAccessToken(hostConfig, async () => {
+    if (hostConfig.getAccessToken) {
+      try {
+        const tokenFetchedFromRemote = typeof hostConfig.getAccessToken === "string" ? await lookupGetAccessFn(hostConfig.getAccessToken)() : await hostConfig.getAccessToken();
+        return {
+          accessToken: tokenFetchedFromRemote,
+          refreshToken: void 0,
+          errors: void 0
+        };
+      } catch (error) {
+        return {
+          accessToken: void 0,
+          refreshToken: void 0,
+          errors: [
+            {
+              code: "",
+              status: 401,
+              title: "Could not fetch access token using custom function",
+              // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+              detail: `${error}`
+            }
+          ]
+        };
+      }
+    }
     const code = loadAndDeleteFromSessionStorage(getTopicFromHostConfig(hostConfig), "code");
     const verifier = loadAndDeleteFromSessionStorage(getTopicFromHostConfig(hostConfig), "verifier");
     if (code && verifier) {
@@ -804,14 +887,16 @@ async function getOAuthTokensForBrowser(hostConfig) {
 }
 var lastOauthTokensCall = Promise.resolve("");
 async function getOAuthAccessToken(hostConfig) {
-  let getOauthTokensCall;
   if (isNode()) {
-    getOauthTokensCall = getOAuthTokensForNode;
-  } else {
-    getOauthTokensCall = getOAuthTokensForBrowser;
+    const tokens = await getOAuthTokensForNode(hostConfig);
+    if (tokens) {
+      handlePossibleErrors(tokens);
+      return tokens.accessToken || "";
+    }
+    return "";
   }
   lastOauthTokensCall = lastOauthTokensCall.then(async () => {
-    const tokens = await getOauthTokensCall(hostConfig);
+    const tokens = await getOAuthTokensForBrowser(hostConfig);
     if (tokens) {
       handlePossibleErrors(tokens);
       return tokens.accessToken || "";
@@ -842,7 +927,7 @@ async function refreshAccessToken(hostConfig) {
 
 // src/auth/internal/default-auth-modules/oauth/temporary-token.ts
 async function exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, purpose) {
-  const result2 = await fetch(`${toValidLocationUrl(hostConfig)}/oauth/token`, {
+  const response = await fetch(`${toValidLocationUrl(hostConfig)}/oauth/token`, {
     method: "POST",
     credentials: "include",
     mode: "cors",
@@ -857,21 +942,46 @@ async function exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, pur
       client_id: hostConfig.clientId
     })
   });
-  if (result2.status === 401) {
-    if (hostConfig.authRedirectUserConfirmation) {
-      await hostConfig.authRedirectUserConfirmation();
-    }
-    startFullPageLoginFlow(hostConfig);
-    return new Promise(() => {
-    });
+  if (response.status !== 200) {
+    throw await toError(response);
   }
-  const data = await result2.json();
+  const data = await response.json();
   return data.access_token;
+}
+async function toError(response) {
+  const body = await response.text();
+  try {
+    const data = JSON.parse(body);
+    return new AuthorizationError(data.errors);
+  } catch (err) {
+    return new AuthorizationError([
+      {
+        code: "unknown",
+        status: response.status,
+        detail: body,
+        title: "Unknown authentication error"
+      }
+    ]);
+  }
 }
 
 // src/auth/internal/default-auth-modules/oauth.ts
 if (isBrowser()) {
   handleOAuthCallback();
+}
+async function handlePotentialAuthenticationErrorAndRetry(hostConfig, fn) {
+  try {
+    return await fn();
+  } catch (err) {
+    const { retry } = await handleAuthenticationError5({
+      hostConfig,
+      canRetry: true
+    });
+    if (retry) {
+      return await fn();
+    }
+    throw err;
+  }
 }
 async function getRestCallAuthParams5({
   hostConfig
@@ -887,8 +997,10 @@ async function getRestCallAuthParams5({
 async function getWebSocketAuthParams5({
   hostConfig
 }) {
-  const accessToken = await getOAuthAccessToken(hostConfig);
-  const websocketAccessToken = await exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, "websocket");
+  const websocketAccessToken = await handlePotentialAuthenticationErrorAndRetry(hostConfig, async () => {
+    const accessToken = await getOAuthAccessToken(hostConfig);
+    return exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, "websocket");
+  });
   return {
     queryParams: {
       accessToken: websocketAccessToken
@@ -898,8 +1010,10 @@ async function getWebSocketAuthParams5({
 async function getWebResourceAuthParams2({
   hostConfig
 }) {
-  const accessToken = await getOAuthAccessToken(hostConfig);
-  const webResourceAccessToken = await exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, "webresource");
+  const webResourceAccessToken = await handlePotentialAuthenticationErrorAndRetry(hostConfig, async () => {
+    const accessToken = await getOAuthAccessToken(hostConfig);
+    return exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, "webresource");
+  });
   return {
     queryParams: {
       accessToken: webResourceAccessToken
@@ -909,6 +1023,13 @@ async function getWebResourceAuthParams2({
 async function handleAuthenticationError5({
   hostConfig
 }) {
+  if (hostConfig.getAccessToken) {
+    clearStoredOauthTokens(hostConfig);
+    return {
+      preventDefault: false,
+      retry: true
+    };
+  }
   if (isBrowser()) {
     if (hostConfig.authRedirectUserConfirmation) {
       await hostConfig.authRedirectUserConfirmation();
@@ -931,7 +1052,16 @@ var oauth_default = {
   handleAuthenticationError: handleAuthenticationError5,
   validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, {
     requiredProps: ["clientId"],
-    optionalProps: ["clientSecret", "redirectUri", "accessTokenStorage", "scope"]
+    optionalProps: [
+      "clientSecret",
+      "redirectUri",
+      "accessTokenStorage",
+      "scope",
+      "subject",
+      "userId",
+      "noCache",
+      "getAccessToken"
+    ]
   })
 };
 
@@ -1610,6 +1740,7 @@ export {
   getWebResourceAuthParams,
   handleAuthenticationError,
   getRestCallAuthParams,
+  getAccessToken,
   registerAuthModule2 as registerAuthModule,
   setDefaultHostConfig2 as setDefaultHostConfig,
   checkForCrossDomainRequest,

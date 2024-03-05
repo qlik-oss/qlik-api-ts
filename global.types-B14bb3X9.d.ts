@@ -1,4 +1,4 @@
-import { H as HostConfig } from './auth-types-nnUcWhuU.js';
+import { H as HostConfig } from './auth-types-1P4wuncR.js';
 
 /** An entry in the cache for one specific cacheKey */
 type CacheEntry = {
@@ -71,6 +71,27 @@ type Oauth2AuthConfig = {
     accessTokenStorage?: "session" | "local";
     /** A string with comma separated values of oauth2 scopes https://oauth.net/2/scope defaults to "user_default" */
     scope?: string;
+    /**
+     * A custom function that can be used on the client side to fetch an oauth access token from a custom backend.
+     * Typically used in oauth impersonation.
+     */
+    getAccessToken?: string | (() => Promise<string>);
+    /**
+     * If set to true no caching or storing of the access token is done.
+     * This is typically used on the serverside with impersonation so that a client always gets a fresh token.
+     * Caching is in that case handled on the client side.
+     */
+    noCache?: boolean;
+    /**
+     * Can be used on the serverside to impersonate a specific user when authenticating using a client secret.
+     * Typically used together with the `noCache` since caching is done on the browser side.
+     */
+    subject?: string;
+    /**
+     * Can be used on the serverside to impersonate a specific user when authenticating using a client secret.
+     * Typically used together with the `noCache` since caching is done on the browser side.
+     */
+    userId?: string;
 };
 declare global {
     /**
