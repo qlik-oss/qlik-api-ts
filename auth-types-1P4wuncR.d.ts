@@ -28,6 +28,10 @@ type GetWebResourceAuthParamsProps<A extends AuthType = AuthType> = {
 type WebResourceAuthParams = {
     queryParams: Record<string, string>;
 };
+type GetRemoteAuthDataProps<A extends AuthType = AuthType> = {
+    hostConfig: HostConfig<A>;
+    queryParams?: Record<string, string>;
+};
 /** Props for function handleAuthenticationError */
 type HandleAuthenticationErrorProps<A extends AuthType = AuthType> = {
     /** host conifg for connecting to a host */
@@ -95,4 +99,4 @@ type HostConfigCommon = {
     embedRuntimeUrl?: string;
 };
 
-export type { AuthType as A, Credentials as C, GetRestCallAuthParamsProps as G, HostConfig as H, RestCallAuthParams as R, WebSocketAuthParams as W, AuthModule as a, GetWebSocketAuthParamsProps as b, GetWebResourceAuthParamsProps as c, WebResourceAuthParams as d, HandleAuthenticationErrorProps as e, AuthenticationErrorAction as f };
+export type { AuthType as A, Credentials as C, GetRestCallAuthParamsProps as G, HostConfig as H, RestCallAuthParams as R, WebSocketAuthParams as W, AuthModule as a, GetWebSocketAuthParamsProps as b, GetWebResourceAuthParamsProps as c, WebResourceAuthParams as d, GetRemoteAuthDataProps as e, HandleAuthenticationErrorProps as f, AuthenticationErrorAction as g };

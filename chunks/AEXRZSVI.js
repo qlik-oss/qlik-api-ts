@@ -3,7 +3,7 @@ import {
   getRestCallAuthParams,
   getWebSocketAuthParams,
   toValidWebsocketLocationUrl
-} from "./SIU6HO6B.js";
+} from "./LJNLYKW3.js";
 import "./4HB3TAEO.js";
 
 // src/qix/session/enigma-session.ts
@@ -9073,10 +9073,10 @@ NotificationMixin = {
   }
 };
 if (process.env.NODE_ENV === "development") {
-  global.getNotifications = function() {
+  globalThis.getNotifications = function() {
     return notifications.filter((notification) => notification.observers && notification.observers.length);
   };
-  global.trackNotifications = function() {
+  globalThis.trackNotifications = function() {
     trackNotifications = true;
   };
 }
