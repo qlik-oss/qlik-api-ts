@@ -562,7 +562,11 @@ type JsonObject = unknown;
 type LastReloadMetadata = {
     /** Number of CPU milliseconds it took to reload the app. */
     cpu_time_spent_ms?: number;
+    /** Maximum number of bytes used during full reload of the app. */
+    fullReloadPeakMemoryBytes?: number;
     hardware?: HardwareMeta;
+    /** Maximum number of bytes used during partial reload of the app. */
+    partialReloadPeakMemoryBytes?: number;
     /** Maximum number of bytes used during reload of the app. */
     peak_memory_bytes?: number;
 };

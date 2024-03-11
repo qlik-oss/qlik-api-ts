@@ -9,7 +9,8 @@ type AssignmentsActionsAddRequest = {
         subject: string;
         /** Allotment type */
         type: string;
-        /** User ID */
+        /** @deprecated
+         * User ID */
         userId?: string;
     }[];
 };
@@ -85,9 +86,6 @@ type AssignmentsResponse = {
         subject: string;
         /** Allotment type */
         type: string;
-        /** @deprecated
-         * User ID */
-        userId?: string;
     }[];
     links: {
         next?: Href;
