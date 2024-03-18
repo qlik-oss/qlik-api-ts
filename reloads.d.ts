@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-B14bb3X9.js';
-import './auth-types-1P4wuncR.js';
+import { A as ApiCallOptions } from './global.types-CMQsAHYd.js';
+import './auth-types-Bqw3vbLs.js';
 
 type Error = {
     /** The error code is in form of 'RELOADS-xxx'. ranges from 'RELOADS-001' to 'RELOADS-013'.  */

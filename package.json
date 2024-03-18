@@ -13,10 +13,11 @@
   "dependencies": {
     "@qlik/embed-runtime": "^0.7.0",
     "@qlik/runtime-module-loader": "^0.2.6",
+    "ajv": "^8.12.0",
     "bufferutil": "^4.0.8",
-    "enigma.js": "^2.13.0",
+    "enigma.js": "^2.14.0",
     "lodash": "^4.17.21",
-    "nanoid": "^3.3.7",
+    "nanoid": "^5.0.6",
     "ws": "^8.16.0"
   },
   "engines": {

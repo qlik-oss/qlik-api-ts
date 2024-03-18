@@ -1,5 +1,5 @@
-import './global.types-B14bb3X9.js';
-import { H as HostConfig } from './auth-types-1P4wuncR.js';
+import './global.types-CMQsAHYd.js';
+import { H as HostConfig } from './auth-types-Bqw3vbLs.js';
 
 declare const QIX_SCHEMA_VERSION = "12.2009.0";
 type AlfaNumString = {

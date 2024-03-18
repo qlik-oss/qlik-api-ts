@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-B14bb3X9.js';
-import './auth-types-1P4wuncR.js';
+import { A as ApiCallOptions } from './global.types-CMQsAHYd.js';
+import './auth-types-Bqw3vbLs.js';
 
 type AutomationDetailRequestObject = {
     description?: string;
