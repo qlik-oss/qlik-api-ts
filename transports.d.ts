@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-B14bb3X9.js';
-import './auth-types-1P4wuncR.js';
+import { A as ApiCallOptions } from './global.types-CMQsAHYd.js';
+import './auth-types-Bqw3vbLs.js';
 
 type DeleteConfigNotFoundError = {
     errors?: {
@@ -21,14 +21,6 @@ type ErrorPublic = {
 type ErrorsPublic = {
     errors?: ErrorPublic[];
 };
-type PatchEmailConfigError = {
-    errors?: {
-        /** The error code. */
-        code: string;
-        /** Summary of the problem */
-        title: string;
-    }[];
-};
 type SendTestMailConfigNotFoundError = {
     errors?: {
         /** The error code. */
@@ -38,6 +30,14 @@ type SendTestMailConfigNotFoundError = {
     }[];
 };
 type TenantAdminError = {
+    errors?: {
+        /** The error code. */
+        code: string;
+        /** Summary of the problem */
+        title: string;
+    }[];
+};
+type UpdateEmailConfigError = {
     errors?: {
         /** The error code. */
         code: string;
@@ -72,23 +72,40 @@ type EmailConfigFieldPatch = {
     /** The value to be used for this operation. */
     value: string;
 };
-type EmailConfigGet = {
+type EmailConfigPatch = EmailConfigFieldPatch[];
+type GetBasicAuthConfig = {
+    /** The email address that should appear in From field when sending emails with this account */
+    emailAddress?: string;
+    /** The selected SMTP security mechanism. Could be either 'none', 'StartTLS' or 'SSL/TLS' */
+    securityType?: string;
+    /** domain name or IP address of SMTP server */
+    serverAddress?: string;
+    /** smtp server port */
+    serverPort?: number;
+    /** user name used for SMTP login */
+    username?: string;
+};
+type GetEmailConfig = {
     /** Number of authentication failures */
     authFailures?: number;
     /** used for SMTP authentication */
     emailAddress?: string;
     /** Is the configuration valid */
     isValid?: boolean;
+    lastUpdated?: string;
     /** Last modification time. Formatted as a ISO 8601 string. */
     modificationTime?: string;
     /** Indicates if password is defined for this smtp config. The password itself is not returned! */
     passwordExists?: boolean;
+    providerConfig?: GetMicrosoft365Config | GetBasicAuthConfig;
     /** one of none, StartTLS or SSL/TLS */
     securityType?: string;
     /** domain name or IP address of SMTP server */
     serverAddress?: string;
     /** smtp server listening port */
     serverPort?: number;
+    /** Name of the service provider for authentication */
+    serviceProvider?: "Microsoft365" | "BasicAuth";
     /** Contains statusCode and statusReason */
     status?: SmtpConfigStatus;
     /** The tenant Id */
@@ -96,7 +113,14 @@ type EmailConfigGet = {
     /** user name */
     username?: string;
 };
-type EmailConfigPatch = EmailConfigFieldPatch[];
+type GetMicrosoft365Config = {
+    /** Microsoft365 client identifier */
+    clientId?: string;
+    /** The email address that should appear in From field when sending emails with this account */
+    emailAddress?: string;
+    /** Microsoft365 tenant identifier */
+    providerTenantId?: string;
+};
 type SmtpCheck = {
     /** true if smtp config is correct and complete. Will return false if smtp-config does not exist at all */
     isValid?: boolean;
@@ -154,7 +178,7 @@ type DeleteEmailConfigHttpError = DeleteEmailConfig403HttpError | DeleteEmailCon
  */
 declare const getEmailConfig: (options?: ApiCallOptions) => Promise<GetEmailConfigHttpResponse>;
 type GetEmailConfigHttpResponse = {
-    data: EmailConfigGet;
+    data: GetEmailConfig;
     headers: Headers;
     status: number;
 };
@@ -182,7 +206,7 @@ type PatchEmailConfigHttpResponse = {
     status: number;
 };
 type PatchEmailConfig400HttpError = {
-    data: PatchEmailConfigError;
+    data: UpdateEmailConfigError;
     headers: Headers;
     status: 400;
 };
@@ -316,4 +340,4 @@ interface TransportsAPI {
  */
 declare const transportsExport: TransportsAPI;
 
-export { type DeleteConfigNotFoundError, type DeleteEmailConfig403HttpError, type DeleteEmailConfig404HttpError, type DeleteEmailConfigDefaultHttpError, type DeleteEmailConfigHttpError, type DeleteEmailConfigHttpResponse, type Email, type EmailConfigFieldPatch, type EmailConfigGet, type EmailConfigPatch, type ErrorPublic, type ErrorsPublic, type GetEmailConfig403HttpError, type GetEmailConfigDefaultHttpError, type GetEmailConfigHttpError, type GetEmailConfigHttpResponse, type PatchEmailConfig400HttpError, type PatchEmailConfig403HttpError, type PatchEmailConfigDefaultHttpError, type PatchEmailConfigError, type PatchEmailConfigHttpError, type PatchEmailConfigHttpResponse, type SendTestEmail403HttpError, type SendTestEmail404HttpError, type SendTestEmailDefaultHttpError, type SendTestEmailHttpError, type SendTestEmailHttpResponse, type SendTestMailConfigNotFoundError, type SmtpCheck, type SmtpConfigStatus, type SmtpResult, type TenantAdminError, type TransportsAPI, type ValidateEmailConfigHttpError, type ValidateEmailConfigHttpResponse, type VerifyConnectionConfigNotFoundError, type VerifyEmailConfigConnection404HttpError, type VerifyEmailConfigConnectionDefaultHttpError, type VerifyEmailConfigConnectionHttpError, type VerifyEmailConfigConnectionHttpResponse, clearCache, transportsExport as default, deleteEmailConfig, getEmailConfig, patchEmailConfig, sendTestEmail, validateEmailConfig, verifyEmailConfigConnection };
+export { type DeleteConfigNotFoundError, type DeleteEmailConfig403HttpError, type DeleteEmailConfig404HttpError, type DeleteEmailConfigDefaultHttpError, type DeleteEmailConfigHttpError, type DeleteEmailConfigHttpResponse, type Email, type EmailConfigFieldPatch, type EmailConfigPatch, type ErrorPublic, type ErrorsPublic, type GetBasicAuthConfig, type GetEmailConfig, type GetEmailConfig403HttpError, type GetEmailConfigDefaultHttpError, type GetEmailConfigHttpError, type GetEmailConfigHttpResponse, type GetMicrosoft365Config, type PatchEmailConfig400HttpError, type PatchEmailConfig403HttpError, type PatchEmailConfigDefaultHttpError, type PatchEmailConfigHttpError, type PatchEmailConfigHttpResponse, type SendTestEmail403HttpError, type SendTestEmail404HttpError, type SendTestEmailDefaultHttpError, type SendTestEmailHttpError, type SendTestEmailHttpResponse, type SendTestMailConfigNotFoundError, type SmtpCheck, type SmtpConfigStatus, type SmtpResult, type TenantAdminError, type TransportsAPI, type UpdateEmailConfigError, type ValidateEmailConfigHttpError, type ValidateEmailConfigHttpResponse, type VerifyConnectionConfigNotFoundError, type VerifyEmailConfigConnection404HttpError, type VerifyEmailConfigConnectionDefaultHttpError, type VerifyEmailConfigConnectionHttpError, type VerifyEmailConfigConnectionHttpResponse, clearCache, transportsExport as default, deleteEmailConfig, getEmailConfig, patchEmailConfig, sendTestEmail, validateEmailConfig, verifyEmailConfigConnection };
