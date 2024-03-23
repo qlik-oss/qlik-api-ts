@@ -1,9 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/OYCPZDC3.js";
-import "./chunks/A4LOH2NH.js";
-import "./chunks/4HB3TAEO.js";
+} from "./chunks/AANKGPDX.js";
+import "./chunks/7PI3VAVE.js";
 
 // src/public/rest/apps.ts
 var createApp = async (body, options) => invokeFetch("apps", {

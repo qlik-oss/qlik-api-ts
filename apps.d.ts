@@ -1756,6 +1756,8 @@ type GetAppReloadLogHttpError = {
  * @throws GetAppReloadMetadataHttpError
  */
 declare const getAppReloadMetadata: (appId: string, reloadId: string, query: {
+    /** Include metadata for reloads ran with SkipStore flag set to true. Default: false */
+    includeSkipStoreReloads?: boolean;
     /** Maximum number of records to return from this request. Default: 100 */
     limit?: string;
 }, options?: ApiCallOptions) => Promise<GetAppReloadMetadataHttpResponse>;

@@ -2,10 +2,10 @@ import {
   getPlatform,
   handleAuthenticationError,
   invokeFetch,
+  isBrowser,
   isWindows,
   toValidWebsocketLocationUrl
-} from "./LJNLYKW3.js";
-import "./4HB3TAEO.js";
+} from "./SG2HWQOC.js";
 
 // src/qix/session/shared-sessions.ts
 var globalEventListeners = /* @__PURE__ */ new Set();
@@ -83,7 +83,7 @@ function listenForWindowsAuthenticationInformation(session) {
   return authSuggestedInWebsocket;
 }
 async function createAndSetupEnigmaSession(props, canRetry) {
-  const { createEnigmaSession } = await import("./AEXRZSVI.js");
+  const { createEnigmaSession } = await import("./J47F33WT.js");
   const session = await createEnigmaSession(props);
   setupSessionListeners(session, props);
   let global;
@@ -545,7 +545,7 @@ function resumeOnlyOnReattach(bool) {
   resumeShouldRejectPromiseIfNotReattached(bool);
 }
 var externalApps = {};
-var isBrowserEnvironment = typeof window !== "undefined";
+var isBrowserEnvironment = isBrowser();
 
 // src/qix/qix.ts
 var qix = {

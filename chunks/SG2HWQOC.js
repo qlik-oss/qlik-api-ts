@@ -1,7 +1,3 @@
-import {
-  __require
-} from "./4HB3TAEO.js";
-
 // src/platform/platform-functions.ts
 var getPlatform = async (options = {}) => {
   const isNodeEnvironment = typeof window === "undefined";
@@ -503,18 +499,32 @@ var none_default = {
 
 // src/utils/utils.ts
 import { nanoid } from "nanoid";
-var forcedEnvironmentForTest;
-function isBrowser() {
-  if (forcedEnvironmentForTest) {
-    return forcedEnvironmentForTest === "browser";
+function isBrowserInternal() {
+  if (typeof window !== "undefined" && typeof window.document !== "undefined" && typeof self !== "undefined") {
+    return true;
   }
-  return typeof window === "object" && typeof window.document === "object";
+  return false;
+}
+function isNodeInternal() {
+  if (typeof process !== "undefined" && process.version && process.versions.node) {
+    return true;
+  }
+  return false;
+}
+function getEnvironment() {
+  if (isNodeInternal()) {
+    return "node";
+  }
+  if (isBrowserInternal()) {
+    return "browser";
+  }
+  throw new Error("Environment detection failed. Supported environments are either a browser or in a node environment");
+}
+function isBrowser() {
+  return getEnvironment() === "browser";
 }
 function isNode() {
-  if (forcedEnvironmentForTest) {
-    return forcedEnvironmentForTest === "node";
-  }
-  return typeof process === "object" && typeof __require === "function";
+  return getEnvironment() === "node";
 }
 function generateRandomString(targetLength) {
   return nanoid(targetLength);
@@ -895,14 +905,16 @@ async function getOAuthAccessToken(hostConfig) {
     }
     return "";
   }
-  lastOauthTokensCall = lastOauthTokensCall.then(async () => {
-    const tokens = await getOAuthTokensForBrowser(hostConfig);
-    if (tokens) {
-      handlePossibleErrors(tokens);
-      return tokens.accessToken || "";
-    }
-    return "";
-  });
+  if (isBrowser()) {
+    lastOauthTokensCall = lastOauthTokensCall.then(async () => {
+      const tokens = await getOAuthTokensForBrowser(hostConfig);
+      if (tokens) {
+        handlePossibleErrors(tokens);
+        return tokens.accessToken || "";
+      }
+      return "";
+    });
+  }
   return lastOauthTokensCall;
 }
 async function refreshAccessToken(hostConfig) {
@@ -1317,7 +1329,8 @@ async function performActualHttpFetch(method, completeUrl, unencodedBody, conten
   const headers = {
     ...contentTypeHeader,
     ...authHeaders,
-    ...options?.headers
+    ...options?.headers,
+    ...getServiceOverrideHeaderFromLocalStorage()
   };
   const isCrossOrigin = isHostCrossOrigin(options?.hostConfig);
   let request = {
@@ -1608,6 +1621,16 @@ async function interceptAuthenticationErrors(hostConfig, resultPromise, performR
     throw error;
   }
 }
+function getServiceOverrideHeaderFromLocalStorage() {
+  if (!isBrowser()) {
+    return {};
+  }
+  const header = localStorage.getItem("qmfe-api-service-overrides-header");
+  if (!header) {
+    return {};
+  }
+  return { "X-Qlik-Overrides": header };
+}
 function toDownloadableBlob(blob) {
   const result2 = blob;
   result2.download = (filename) => download(blob, filename);
@@ -1616,9 +1639,11 @@ function toDownloadableBlob(blob) {
 async function download(blob, filename) {
   if (isBrowser()) {
     const a = document.createElement("a");
-    a.href = window.URL.createObjectURL(blob);
+    const blobUrl = window.URL.createObjectURL(blob);
+    a.href = blobUrl;
     a.download = filename;
     a.click();
+    window.URL.revokeObjectURL(blobUrl);
   } else {
     const { writeFileSync } = await import("fs");
     writeFileSync(filename, Buffer.from(await blob.arrayBuffer()));
@@ -1691,6 +1716,7 @@ async function parseFetchResponse(fetchResponse, url) {
     case "image/x-icon":
     case "application/offset+octet-stream":
     case "application/octet-stream":
+    case "application/zip":
       resultData = toDownloadableBlob(await fetchResponse.blob());
       break;
     default:
@@ -1745,6 +1771,7 @@ export {
   setDefaultHostConfig2 as setDefaultHostConfig,
   checkForCrossDomainRequest,
   logout,
+  isBrowser,
   generateRandomString,
   InvokeFetchError,
   EncodingError,
