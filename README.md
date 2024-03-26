@@ -6,7 +6,7 @@
 > **Warning**
 > This package is currently in pre-release mode and will likely change and break until the version number 1.0.0 is released.
 
-This package provides a JavaScript API for interacting with Qlik Sense REST APIs includin the QIX Engine from a single package that can be used in both Node.js and browser contexts.
+This package provides a JavaScript API for interacting with Qlik Sense REST APIs including the QIX Engine from a single package that can be used in both Node.js and browser contexts.
 
 ## Table of Contents
 
@@ -26,7 +26,7 @@ For NodeJS applications or in the case of building a web app with a bundler use:
 npm install --save @qlik/api
 ```
 
-If code will run directly in a browser it is recommended to load the code directly from a CDN.
+If code will run in a browser it is recommended to load the code from a CDN.
 
 ```html
 <script type="module">
