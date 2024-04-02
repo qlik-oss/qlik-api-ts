@@ -1,7 +1,7 @@
 import './global.types-CMQsAHYd.js';
 import { H as HostConfig } from './auth-types-Bqw3vbLs.js';
 
-declare const QIX_SCHEMA_VERSION = "12.2028.0";
+declare const QIX_SCHEMA_VERSION = "12.2030.0";
 type AlfaNumString = {
     /**
      * Calculated value.
@@ -3949,6 +3949,10 @@ type NxInlineDimensionDef = {
      * This parameter is optional.
      */
     qLabelExpression?: string;
+    /**
+     * Alias of the dimension.
+     */
+    qAlias?: string;
 };
 type NxInlineMeasureDef = {
     /**
@@ -4065,6 +4069,10 @@ type NxLibraryDimension = {
      */
     qFieldLabels?: string[];
     qLabelExpression?: string;
+    /**
+     * Alias of the dimension.
+     */
+    qAlias?: string;
 };
 type NxLibraryDimensionDef = {
     /**
@@ -4085,6 +4093,10 @@ type NxLibraryDimensionDef = {
      */
     qFieldLabels?: string[];
     qLabelExpression?: string;
+    /**
+     * Alias of the dimension.
+     */
+    qAlias?: string;
 };
 /**
  * Information about the library measure. Is the layout for _NxLibraryMeasureDef_.
@@ -11568,6 +11580,8 @@ type OpenAppSessionProps = {
     hostConfig?: HostConfig;
     /** Set to true if app should be opened without loading the data blob */
     withoutData?: boolean;
+    /** Use a separate reload engine to perform a reload */
+    useReloadEngine?: boolean;
 };
 type DocAction = (doc: Doc) => Promise<unknown>;
 type CloseProps = {

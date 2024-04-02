@@ -35,9 +35,25 @@ async function resumeAll() {
 }
 var initialActions = {};
 var sharedSessions = {};
-function toGlobalAppSessionId({ appId, identity, hostConfig, withoutData }) {
+function toGlobalAppSessionId({
+  appId,
+  identity,
+  hostConfig,
+  withoutData,
+  useReloadEngine
+}) {
   const locationUrl = toValidWebsocketLocationUrl(hostConfig);
-  return (identity ? locationUrl + "/" + appId + "/" + identity : locationUrl + "/" + appId) + (withoutData ? "/withoutData" : "");
+  let url = `${locationUrl}/${appId}`;
+  if (identity) {
+    url += `/${identity}`;
+  }
+  if (useReloadEngine) {
+    url += "/useReloadEngine";
+  }
+  if (withoutData) {
+    url += "/withoutData";
+  }
+  return url;
 }
 async function runPendingInitialActions(initialActionsForApp, sharedSession, doc) {
   for (const initialAction of initialActionsForApp) {
@@ -83,7 +99,7 @@ function listenForWindowsAuthenticationInformation(session) {
   return authSuggestedInWebsocket;
 }
 async function createAndSetupEnigmaSession(props, canRetry) {
-  const { createEnigmaSession } = await import("./J47F33WT.js");
+  const { createEnigmaSession } = await import("./243PYOJH.js");
   const session = await createEnigmaSession(props);
   setupSessionListeners(session, props);
   let global;
