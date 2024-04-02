@@ -46,10 +46,12 @@ type Notification = {
     readonly body: string;
     readonly createdAt: string;
     readonly id: string;
+    meta: unknown;
     read: boolean;
     readonly resourceId?: string;
     resourceType?: string;
     readonly spaceId?: string;
+    spaceType?: string;
     subResourceType?: string;
     readonly tenantId?: string;
     readonly updatedAt: string;
@@ -62,7 +64,7 @@ type NotificationPatch = {
     /** The operation to be performed. */
     op: "replace";
     /** The path for the given resource field to patch. */
-    path: "/description";
+    path: "/read";
     /** The value to be used for this operation. */
     value: string;
 };

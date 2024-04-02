@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@qlik+runtime-module-loader@0.2.6/node_modules/@qlik/runtime-module-loader/dist/esm/index.js
+// node_modules/.pnpm/@qlik+runtime-module-loader@0.2.7/node_modules/@qlik/runtime-module-loader/dist/esm/index.js
 window.__qlikMainPrivateResolvers = window.__qlikMainPrivateResolvers || {};
 window.__qlikMainPrivateResolvers.mainUrlPromise = window.__qlikMainPrivateResolvers.mainUrlPromise || new Promise((resolve) => {
   window.__qlikMainPrivateResolvers.resolveMainJsUrl = (value) => resolve(value);
@@ -39,7 +39,7 @@ function provideHostConfigForMainJsUrl(hostConfig) {
       locationUrl = `https://${url}`;
     }
     locationUrl = locationUrl.replace(trailingSlashes, "");
-    return `${locationUrl}/main.js`;
+    return `${locationUrl}/qlik-embed/main.js`;
   }
   const potentialMainJsUrl = toMainJsUrl(hostConfig);
   if (potentialMainJsUrl) {

@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/AANKGPDX.js";
-import "./chunks/7PI3VAVE.js";
+} from "./chunks/664FMSNJ.js";
+import "./chunks/2ZXOEI4D.js";
 
 // src/public/rest/web-integrations.ts
 var getWebIntegrations = async (query, options) => invokeFetch("web-integrations", {

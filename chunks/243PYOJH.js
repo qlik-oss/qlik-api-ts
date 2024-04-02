@@ -10364,7 +10364,8 @@ async function createEnigmaSession({
   appId,
   identity,
   hostConfig,
-  withoutData = false
+  withoutData = false,
+  useReloadEngine = false
 }) {
   const locationUrl = toValidWebsocketLocationUrl(hostConfig);
   const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
@@ -10372,7 +10373,11 @@ async function createEnigmaSession({
     identity = "no_data";
   }
   const identityPart = identity ? `/identity/${identity}` : "";
-  let url = `${locationUrl}/app/${appId}${identityPart}?reloadUri=${reloadUri}`.replace(/^http/, "ws");
+  const reloadEnginePart = useReloadEngine ? "&workloadType=interactive-reload" : "";
+  let url = `${locationUrl}/app/${appId}${identityPart}?reloadUri=${reloadUri}${reloadEnginePart}`.replace(
+    /^http/,
+    "ws"
+  );
   const isNodeEnvironment = typeof window === "undefined";
   let createSocketMethod;
   if (isNodeEnvironment) {
@@ -10395,7 +10400,7 @@ async function createEnigmaSession({
     schema: engine_api_default,
     mixins: mixins5,
     url,
-    suspendOnClose: true,
+    suspendOnClose: !useReloadEngine,
     createSocket: createSocketMethod,
     requestInterceptors: [somethingWithEmptyMethodsRequestInterceptor],
     responseInterceptors: [

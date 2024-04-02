@@ -90,6 +90,8 @@ type GetEmailConfig = {
     authFailures?: number;
     /** used for SMTP authentication */
     emailAddress?: string;
+    /** Indicates error with this email configuration. OK means that no error is indicated. Possible values are OK, CONFIG_NOT_SET, INCOMPLETE_CONFIG, INVALID_CREDENTIALS, PROVIDER_ERROR */
+    errorCode?: string;
     /** Is the configuration valid */
     isValid?: boolean;
     lastUpdated?: string;
@@ -122,6 +124,8 @@ type GetMicrosoft365Config = {
     providerTenantId?: string;
 };
 type SmtpCheck = {
+    /** Indicates error with this email configuration. OK means that no error is indicated. Possible values are OK, CONFIG_NOT_SET, INCOMPLETE_CONFIG, INVALID_CREDENTIALS, PROVIDER_ERROR */
+    errorCode?: string;
     /** true if smtp config is correct and complete. Will return false if smtp-config does not exist at all */
     isValid?: boolean;
 };
