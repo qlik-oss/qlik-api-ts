@@ -365,7 +365,7 @@ declare const getSpaceAssignments: (spaceId: string, query: {
     next?: string;
     /** The previous page cursor. Previous links make use of this. */
     prev?: string;
-    /** The type of assignment. */
+    /** The type of assignment. Supported values are user or group. */
     type?: AssignmentType;
 }, options?: ApiCallOptions) => Promise<GetSpaceAssignmentsHttpResponse>;
 type GetSpaceAssignmentsHttpResponse = {

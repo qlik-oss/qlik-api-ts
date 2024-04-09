@@ -240,31 +240,31 @@ type Meta = {
  */
 declare const getCollections: (query: {
     /** The case-sensitive string used to search for a resource by creatorId. */
-    creatorId?: string | undefined;
+    creatorId?: string;
     /** The collection's unique identifier. */
-    id?: string | undefined;
+    id?: string;
     /** Includes the list of items belonging to the collections. Supported parameters are 'limit', 'sort' and 'resourceType'. Supported formats are json formatted string or deep object style using square brackets. */
-    includeItems?: string | undefined;
+    includeItems?: string;
     /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
-    limit?: number | undefined;
+    limit?: number;
     /** The case-sensitive string used to search for a collection by name. */
-    name?: string | undefined;
+    name?: string;
     /** The cursor to the next page of resources. Provide either the
      * next or prev cursor, but not both. */
-    next?: string | undefined;
+    next?: string;
     /** The cursor to the previous page of resources. Provide either the next or prev cursor, but not both. */
-    prev?: string | undefined;
+    prev?: string;
     /** The case-insensitive string used to search for a resource by name or description. */
-    query?: string | undefined;
+    query?: string;
     /** The property of a resource to sort on (default sort is +createdAt).
      * The supported properties are createdAt, updatedAt, and name. A property
      * must be prefixed by + or - to indicate ascending or descending sort order
      * respectively. */
-    sort?: "-name" | "+name" | "+createdAt" | "-createdAt" | "+updatedAt" | "-updatedAt" | undefined;
+    sort?: "+createdAt" | "-createdAt" | "+name" | "-name" | "+updatedAt" | "-updatedAt";
     /** The case-sensitive string used to filter for a collection by type. */
-    type?: CollectionTypes | undefined;
+    type?: CollectionTypes;
     /** A commaseparated case-sensitive string used to filter by multiple types. */
-    types?: CollectionTypes[] | undefined;
+    types?: CollectionTypes[];
 }, options?: ApiCallOptions) => Promise<GetCollectionsHttpResponse>;
 type GetCollectionsHttpResponse = {
     data: CollectionsListCollectionsResponseBody;
@@ -391,30 +391,30 @@ type UpdateCollectionHttpError = {
  */
 declare const getCollectionItems: (collectionId: string, query: {
     /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
-    limit?: number | undefined;
+    limit?: number;
     /** The case-insensitive string used to search for a resource by name. */
-    name?: string | undefined;
+    name?: string;
     /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
-    next?: string | undefined;
+    next?: string;
     /** If set to true, the user's available actions for each item will not be evaluated meaning the actions-array will be omitted from the response (reduces response time). */
-    noActions?: boolean | undefined;
+    noActions?: boolean;
     /** The cursor to the previous page of resources. Provide either the next or prev cursor, but not both. */
-    prev?: string | undefined;
+    prev?: string;
     /** The case-insensitive string used to search for a resource by name or description. */
-    query?: string | undefined;
+    query?: string;
     /** The case-sensitive string used to search for an item by resourceId. If resourceId is provided, then resourceType must be provided. Provide either the resourceId or resourceLink, but not both. */
-    resourceId?: string | undefined;
+    resourceId?: string;
     /** The case-sensitive string used to search for an item by resourceLink. If resourceLink is provided, then resourceType must be provided. Provide either the resourceId or resourceLink, but not both. */
-    resourceLink?: string | undefined;
+    resourceLink?: string;
     /** The case-sensitive string used to search for an item by resourceType. */
-    resourceType?: ItemResourceTypeEnum | undefined;
+    resourceType?: ItemResourceTypeEnum;
     /** @deprecated
      * Whether or not to return items in a shared space. */
-    shared?: boolean | undefined;
+    shared?: boolean;
     /** The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively. */
-    sort?: "-name" | "+name" | "+createdAt" | "-createdAt" | "+updatedAt" | "-updatedAt" | undefined;
+    sort?: "+createdAt" | "-createdAt" | "+name" | "-name" | "+updatedAt" | "-updatedAt";
     /** The space's unique identifier (supports \'personal\' as spaceId). */
-    spaceId?: string | undefined;
+    spaceId?: string;
 }, options?: ApiCallOptions) => Promise<GetCollectionItemsHttpResponse>;
 type GetCollectionItemsHttpResponse = {
     data: CollectionsListCollectionItemsResponseBody;

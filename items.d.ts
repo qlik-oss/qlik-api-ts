@@ -253,48 +253,48 @@ type SpaceTypeEnum = "shared" | "managed" | "personal" | "data";
  */
 declare const getItems: (query: {
     /** The collection's unique identifier. */
-    collectionId?: string | undefined;
+    collectionId?: string;
     /** User's unique identifier. */
-    createdByUserId?: string | undefined;
+    createdByUserId?: string;
     /** The item's unique identifier. */
-    id?: string | undefined;
+    id?: string;
     /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
-    limit?: number | undefined;
+    limit?: number;
     /** The case-insensitive string used to search for a resource by name. */
-    name?: string | undefined;
+    name?: string;
     /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
-    next?: string | undefined;
+    next?: string;
     /** If set to true, the user's available actions for each item will not be evaluated meaning the actions-array will be omitted from the response (reduces response time). */
-    noActions?: boolean | undefined;
+    noActions?: boolean;
     /** User's unique identifier. */
-    notCreatedByUserId?: string | undefined;
+    notCreatedByUserId?: string;
     /** Owner identifier. */
-    notOwnerId?: string | undefined;
+    notOwnerId?: string;
     /** Owner identifier. */
-    ownerId?: string | undefined;
+    ownerId?: string;
     /** The cursor to the previous page of resources. Provide either the next or prev cursor, but not both. */
-    prev?: string | undefined;
+    prev?: string;
     /** The case-insensitive string used to search for a resource by name or description. */
-    query?: string | undefined;
+    query?: string;
     /** The case-sensitive string used to search for an item by resourceId. If resourceId is provided, then resourceType must be provided. Provide either the resourceId or resourceLink, but not both. */
-    resourceId?: string | undefined;
+    resourceId?: string;
     /** The case-sensitive strings used to search for an item by resourceIds. The maximum number of resourceIds it supports is 100. If resourceIds is provided, then resourceType must be provided. For example '?resourceIds=appId1,appId2' */
-    resourceIds?: string | undefined;
+    resourceIds?: string;
     /** The case-sensitive string used to search for an item by resourceLink. If resourceLink is provided, then resourceType must be provided. Provide either the resourceId or resourceLink, but not both. */
-    resourceLink?: string | undefined;
+    resourceLink?: string;
     /** the case-sensitive string used to filter items by resourceSubType(s). For example '?resourceSubType=chart-monitoring,qix-df,qvd'. Will return a 400 error if used in conjuction with the square bracket syntax for resourceSubType filtering in the 'resourceType' query parameter. */
-    resourceSubType?: string | undefined;
+    resourceSubType?: string;
     /** The case-sensitive string used to filter items by resourceType(s). For example '?resourceType=app,qvapp'. Additionally, a optional resourceSubType filter can be added to each resourceType. For example '?resourceType=app[qvd,chart-monitoring],qvapp'. An trailing comma can be used to include the empty resourceSubType, e.g. '?resourceType=app[qvd,chart-monitoring,]', or, to include only empty resourceSubTypes, '?resourceType=app[]' This syntax replaces the 'resourceSubType' query param, and using both in the same query will result in a 400 error. */
-    resourceType?: ItemResourceTypeEnum | undefined;
+    resourceType?: ItemResourceTypeEnum;
     /** @deprecated
      * Whether or not to return items in a shared space. */
-    shared?: boolean | undefined;
+    shared?: boolean;
     /** The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively. */
-    sort?: "-name" | "+name" | "+createdAt" | "-createdAt" | "+updatedAt" | "-updatedAt" | undefined;
+    sort?: "+createdAt" | "-createdAt" | "+name" | "-name" | "+updatedAt" | "-updatedAt";
     /** The space's unique identifier (supports \'personal\' as spaceId). */
-    spaceId?: string | undefined;
+    spaceId?: string;
     /** The case-sensitive string used to filter items on space type(s). For example '?spaceType=shared,personal'. */
-    spaceType?: SpaceTypeEnum | undefined;
+    spaceType?: SpaceTypeEnum;
 }, options?: ApiCallOptions) => Promise<GetItemsHttpResponse>;
 type GetItemsHttpResponse = {
     data: ItemsListItemsResponseBody;
@@ -402,19 +402,19 @@ type UpdateItemHttpError = {
  */
 declare const getItemCollections: (itemId: string, query: {
     /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
-    limit?: number | undefined;
+    limit?: number;
     /** The case-sensitive string used to search for a collection by name. */
-    name?: string | undefined;
+    name?: string;
     /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
-    next?: string | undefined;
+    next?: string;
     /** The cursor to the previous page of resources. Provide either the next or prev cursor, but not both. */
-    prev?: string | undefined;
+    prev?: string;
     /** The case-insensitive string used to search for a resource by name or description. */
-    query?: string | undefined;
+    query?: string;
     /** The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively. */
-    sort?: "-name" | "+name" | "+createdAt" | "-createdAt" | "+updatedAt" | "-updatedAt" | undefined;
+    sort?: "+createdAt" | "-createdAt" | "+name" | "-name" | "+updatedAt" | "-updatedAt";
     /** The case-sensitive string used to search for a collection by type. */
-    type?: CollectionTypes | undefined;
+    type?: CollectionTypes;
 }, options?: ApiCallOptions) => Promise<GetItemCollectionsHttpResponse>;
 type GetItemCollectionsHttpResponse = {
     data: ItemsListItemCollectionsResponseBody;
