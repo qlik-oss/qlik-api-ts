@@ -70,6 +70,8 @@ type Link = {
     href: string;
 };
 type WebhookBase = {
+    /** If enabled the certificate chain of the configured URL will be checked for revocation before sending the webhook. */
+    checkCertificateRevocation?: boolean;
     /** The UTC timestamp when the webhook was created */
     readonly createdAt?: string;
     /** The id of the user that created the webhook */

@@ -16,10 +16,10 @@ type ApiKey = {
     readonly lastUpdated?: string;
     /** The status of the API key. */
     status: "active" | "expired" | "revoked";
-    /** The ID of the subject for the API key. */
+    /** The ID of the subject for the API key. For SCIM the format is `SCIM\\{{IDP-ID}}`, where `{{IDP-ID}}` is the ID of the IDP in Qlik. */
     sub: string;
-    /** Type of the subject. */
-    subType: "user";
+    /** Type of the subject. For SCIM, it should be `externalClient`. */
+    subType: "user" | "externalClient";
     /** The tenant ID. */
     tenantId: string;
 };
@@ -28,10 +28,10 @@ type ApiKeyBody = {
     description: string;
     /** The expiry of the API key, in ISO8601 duration format. */
     expiry?: string;
-    /** The ID of the subject for the API key. */
+    /** The ID of the subject for the API key. For SCIM the format is `SCIM\\{{IDP-ID}}`, where `{{IDP-ID}}` is the ID of the IDP in Qlik. */
     sub?: string;
-    /** Type of the subject. */
-    subType?: string;
+    /** Type of the subject. For SCIM, it should be `externalClient`. */
+    subType?: "user" | "externalClient";
 };
 /**
  * A JSON Patch document as defined in https://datatracker.ietf.org/doc/html/rfc6902.

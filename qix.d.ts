@@ -1,7 +1,7 @@
 import './global.types-CMQsAHYd.js';
 import { H as HostConfig } from './auth-types-Bqw3vbLs.js';
 
-declare const QIX_SCHEMA_VERSION = "12.2030.0";
+declare const QIX_SCHEMA_VERSION = "12.2038.0";
 type AlfaNumString = {
     /**
      * Calculated value.
@@ -3088,9 +3088,13 @@ type NxBookmark = {
      */
     qPatches?: NxPatches[];
     /**
-     * Information about cyclic groups.
+     * Information about cyclic groups by zero-based index. This field is unused.
      */
     qCyclicGroupStates?: CyclicGroupPosition[];
+    /**
+     * Information about cyclic groups indexed by field definition.
+     */
+    qGroupStates?: GroupState[];
 };
 type NxCalcCond = {
     /**
