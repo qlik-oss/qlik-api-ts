@@ -1244,6 +1244,9 @@ function clone(value) {
   if (value && (value instanceof Blob || value instanceof Object && value.toString() === "[object Blob]")) {
     return value;
   }
+  if (value && value instanceof ReadableStream) {
+    return value;
+  }
   if (typeof value === "string") {
     return value;
   }
@@ -1718,6 +1721,9 @@ async function parseFetchResponse(fetchResponse, url) {
     case "application/octet-stream":
     case "application/zip":
       resultData = toDownloadableBlob(await fetchResponse.blob());
+      break;
+    case "text/event-stream":
+      resultData = fetchResponse.body;
       break;
     default:
       try {

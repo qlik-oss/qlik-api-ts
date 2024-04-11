@@ -3,7 +3,7 @@ import {
   getRestCallAuthParams,
   getWebSocketAuthParams,
   toValidWebsocketLocationUrl
-} from "./SG2HWQOC.js";
+} from "./5GE4XPP3.js";
 
 // src/qix/session/enigma-session.ts
 import enigma from "enigma.js";
