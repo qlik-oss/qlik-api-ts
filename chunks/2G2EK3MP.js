@@ -18,7 +18,7 @@ import {
   toValidEnigmaLocationUrl,
   toValidLocationUrl,
   toValidWebsocketLocationUrl
-} from "./SG2HWQOC.js";
+} from "./5GE4XPP3.js";
 export {
   AuthorizationError,
   InvalidAuthTypeError,
