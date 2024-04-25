@@ -26,6 +26,10 @@ type Reload = {
     endTime?: string;
     /** The timestamp returned from the Sense engine upon successful reload. */
     engineTime?: string;
+    /** The error code when the status is FAILED. */
+    errorCode?: string;
+    /** The error message when the status is FAILED. */
+    errorMessage?: string;
     /** The ID of the reload. */
     id: string;
     links?: ReloadLinks;
