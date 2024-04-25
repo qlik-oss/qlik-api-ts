@@ -10115,7 +10115,8 @@ var sheetListProps2 = {
       cells: "/cells",
       rank: "/rank",
       columns: "/columns",
-      rows: "/rows"
+      rows: "/rows",
+      groupId: "/groupId"
     }
   }
 };

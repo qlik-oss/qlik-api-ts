@@ -432,7 +432,7 @@ type Filter = {
     description?: string;
     filterType?: FilterType;
     filterV1_0?: FilterV10;
-    filterVersion?: "filter-1.0";
+    filterVersion?: "filter-1.0" | "filter-2.0";
     /** The filter ID (bookmarkId). */
     readonly id?: string;
     /** The filter name. */
@@ -499,7 +499,7 @@ type FilterListItem = {
     readonly description?: string;
     filterType?: FilterType;
     filterV1_0?: FilterV10;
-    readonly filterVersion?: "filter-1.0";
+    readonly filterVersion?: "filter-1.0" | "filter-2.0";
     /** The filter ID (bookmarkId) */
     readonly id?: string;
     /** The filter name. */
@@ -515,7 +515,7 @@ type FilterRequest = {
     description?: string;
     filterType: FilterType;
     filterV1_0?: FilterV10;
-    filterVersion: "filter-1.0";
+    filterVersion: "filter-1.0" | "filter-2.0";
     /** The filter name. */
     name: string;
     /** The user that owns the filter, if missing the same as the request user. */
