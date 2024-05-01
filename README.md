@@ -3,9 +3,6 @@
 [![npm version](https://img.shields.io/npm/v/@qlik/api.svg)](https://www.npmjs.com/package/@qlik/api)
 [![License](https://img.shields.io/badge/license-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 
-> **Warning**
-> This package is currently in pre-release mode and will likely change and break until the version number 1.0.0 is released.
-
 This package provides a JavaScript API for interacting with Qlik Sense REST APIs including the QIX Engine from a single package that can be used in both Node.js and browser contexts.
 
 ## Table of Contents
