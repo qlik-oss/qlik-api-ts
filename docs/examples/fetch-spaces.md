@@ -34,7 +34,7 @@ const hostConfig = {
   host: "your-tenant.region.qlikcloud.com",
   authType: "oauth2",
   clientId: "<client-id>",
-  clientSecret "<client-secret>",
+  clientSecret: "<client-secret>",
 };
 
 auth.setDefaultHostConfig(hostConfig);
