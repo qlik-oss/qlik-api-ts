@@ -5,7 +5,7 @@ import {
   isBrowser,
   isWindows,
   toValidWebsocketLocationUrl
-} from "./5GE4XPP3.js";
+} from "./BO3K2ZRA.js";
 
 // src/qix/session/shared-sessions.ts
 var globalEventListeners = /* @__PURE__ */ new Set();
@@ -99,7 +99,7 @@ function listenForWindowsAuthenticationInformation(session) {
   return authSuggestedInWebsocket;
 }
 async function createAndSetupEnigmaSession(props, canRetry) {
-  const { createEnigmaSession } = await import("./QGXPKKG2.js");
+  const { createEnigmaSession } = await import("./SYJZK7I6.js");
   const session = await createEnigmaSession(props);
   setupSessionListeners(session, props);
   let global;

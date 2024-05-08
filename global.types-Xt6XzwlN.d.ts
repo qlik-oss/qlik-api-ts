@@ -32,8 +32,15 @@ type ApiCallOptions = {
     /**
      * Set the amount of time to wait for a response.
      * If the timeout is exceeded the request is aborted.
+     * If both timeoutMs and signal is present, timeoutMs will have no effect, as
+     * there is already an abort-signal specified.
      */
     timeoutMs?: number;
+    /**
+     * An abort-signal lets you abort an ongoing fetch request. The abort-signal is created
+     * by taking the .signal property of an AbortController.
+     */
+    signal?: AbortSignal;
 };
 type DownloadableBlob = Blob & {
     /** download the blob in a using the specified filename */

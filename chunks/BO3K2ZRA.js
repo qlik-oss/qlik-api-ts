@@ -1348,7 +1348,9 @@ async function performActualHttpFetch(method, completeUrl, unencodedBody, conten
     // This adds 'duplex: "half"' if we're sending application/octet-stream, needed in node only.
   };
   let fetchTimeoutId;
-  if (options?.timeoutMs && options.timeoutMs > 0) {
+  if (options?.signal) {
+    request.signal = options.signal;
+  } else if (options?.timeoutMs && options.timeoutMs > 0) {
     const controller = new AbortController();
     fetchTimeoutId = setTimeout(() => {
       controller.abort();

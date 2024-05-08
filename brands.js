@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/W3BAQSQ7.js";
-import "./chunks/54UDXFVD.js";
+} from "./chunks/BBELLAVB.js";
+import "./chunks/T7RJE3IN.js";
 
 // src/public/rest/brands.ts
 var getBrands = async (query, options) => invokeFetch("brands", {

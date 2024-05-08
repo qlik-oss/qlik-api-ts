@@ -30,7 +30,7 @@ import { UsersAPI } from './users.js';
 import { WebIntegrationsAPI } from './web-integrations.js';
 import { WebNotificationsAPI } from './web-notifications.js';
 import { WebhooksAPI } from './webhooks.js';
-import './global.types-CMQsAHYd.js';
+import './global.types-Xt6XzwlN.js';
 import './auth-types-Bqw3vbLs.js';
 
 declare const apiKeys: ApiKeysAPI;
