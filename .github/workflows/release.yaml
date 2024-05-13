@@ -28,8 +28,10 @@ jobs:
           VERSION=$(git describe --tags --abbrev=7 --match "v*")
           VERSION=${VERSION#v}
           echo "version is $VERSION"
-          jq --arg version "$VERSION" '.version = $version' package.json >temp.json && mv temp.json package.json
+          jq --arg version "$VERSION" '.version = $version' package.json > temp.json && mv temp.json package.json
           cat package.json
+          # Set the default user-agent.
+          find ./npm-public/chunks -type f -exec sed -i "s;\"qlik-api/latest\";\"qlik-api/$VERSION\";g" -- {} +
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
