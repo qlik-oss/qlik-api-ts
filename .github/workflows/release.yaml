@@ -31,8 +31,8 @@ jobs:
           jq --arg version "$VERSION" '.version = $version' package.json > temp.json && mv temp.json package.json
           cat package.json
           # Set the default user-agent.
-          ls ./npm-public/chunks > /dev/null || echo "Missing chunks directory!" && exit 1
-          find ./npm-public/chunks -type f -exec sed -i "s;defaultUserAgent = \"qlik-api/latest\";defaultUserAgent = \"qlik-api/$VERSION\";g" -- {} +
+          ls ./chunks > /dev/null || echo "Missing chunks directory!" && exit 1
+          find ./chunks -type f -exec sed -i "s;defaultUserAgent = \"qlik-api/latest\";defaultUserAgent = \"qlik-api/$VERSION\";g" -- {} +
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
