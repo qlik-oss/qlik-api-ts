@@ -1,8 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/BBELLAVB.js";
-import "./chunks/T7RJE3IN.js";
+} from "./chunks/SYGKZE7X.js";
+import "./chunks/BGRBTH7Y.js";
+import "./chunks/S2BIIZLQ.js";
 
 // src/public/rest/automations.ts
 var getAutomations = async (query, options) => invokeFetch("automations", {
@@ -40,6 +41,13 @@ var deleteAutomation = async (id, options) => invokeFetch("automations", {
   method: "delete",
   pathTemplate: "/api/v1/automations/{id}",
   pathVariables: { id },
+  options
+});
+var getAutomationWithQuery = async (id, query, options) => invokeFetch("automations", {
+  method: "get",
+  pathTemplate: "/api/v1/automations/{id}",
+  pathVariables: { id },
+  query,
   options
 });
 var getAutomation = async (id, options) => invokeFetch("automations", {
@@ -99,6 +107,13 @@ var queueAutomationRun = async (id, body, options) => invokeFetch("automations",
   contentType: "application/json",
   options
 });
+var getAutomationRunWithQuery = async (id, runId, query, options) => invokeFetch("automations", {
+  method: "get",
+  pathTemplate: "/api/v1/automations/{id}/runs/{runId}",
+  pathVariables: { id, runId },
+  query,
+  options
+});
 var getAutomationRun = async (id, runId, options) => invokeFetch("automations", {
   method: "get",
   pathTemplate: "/api/v1/automations/{id}/runs/{runId}",
@@ -133,6 +148,7 @@ var automationsExport = {
   updateAutomationsSettings,
   getAutomationsUsageMetrics,
   deleteAutomation,
+  getAutomationWithQuery,
   getAutomation,
   updateAutomation,
   copyAutomation,
@@ -141,6 +157,7 @@ var automationsExport = {
   moveAutomation,
   getAutomationRuns,
   queueAutomationRun,
+  getAutomationRunWithQuery,
   getAutomationRun,
   getAutomationRunDetails,
   retryAutomationRun,
@@ -159,7 +176,9 @@ export {
   getAutomation,
   getAutomationRun,
   getAutomationRunDetails,
+  getAutomationRunWithQuery,
   getAutomationRuns,
+  getAutomationWithQuery,
   getAutomations,
   getAutomationsSettings,
   getAutomationsUsageMetrics,

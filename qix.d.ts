@@ -1,7 +1,7 @@
 import './global.types-Xt6XzwlN.js';
 import { H as HostConfig } from './auth-types-Bqw3vbLs.js';
 
-declare const QIX_SCHEMA_VERSION = "12.2064.0";
+declare const QIX_SCHEMA_VERSION = "12.2073.0";
 type AlfaNumString = {
     /**
      * Calculated value.
@@ -3483,7 +3483,7 @@ type NxDerivedGroup = {
 };
 type NxDimCellType = "V" | "NX_DIM_CELL_VALUE" | "E" | "NX_DIM_CELL_EMPTY" | "N" | "NX_DIM_CELL_NORMAL" | "T" | "NX_DIM_CELL_TOTAL" | "O" | "NX_DIM_CELL_OTHER" | "A" | "NX_DIM_CELL_AGGR" | "P" | "NX_DIM_CELL_PSEUDO" | "R" | "NX_DIM_CELL_ROOT" | "U" | "NX_DIM_CELL_NULL" | "G" | "NX_DIM_CELL_GENERATED";
 /**
- * <div class=note>Either **qDef** or **qLibraryId** must be set, but not both. </div> <div class=note>If the dimension is set in the hypercube and not in the library, this dimension cannot be shared with other objects.</div> <div class=note>A dimension that is set in the library can be used by many objects.</div>
+ * <div class=note>The fields or expressions in the dimension are either defined in **qDef** or in the master dimension referred to by **qLibraryId**. If **qLibraryId** is set then the qFieldDefs, qFieldLabels, qGrouping, qLabelExpression and qAlias of the master dimension will be used. </div> <div class=note>If the dimension is set in the hypercube and not in the library, this dimension cannot be shared with other objects.</div> <div class=note>A dimension that is set in the library can be used by many objects.</div>
  */
 type NxDimension = {
     /**
@@ -4234,7 +4234,7 @@ type NxMatchingFieldInfo = {
 };
 type NxMatchingFieldMode = "MATCHINGFIELDMODE_MATCH_ALL" | "MATCHINGFIELDMODE_MATCH_ONE";
 /**
- * <div class=note>Either **qDef** or **qLibraryId** must be set, but not both. </div> <div class=note>If the measure is set in the hypercube and not in the library, this measure cannot be shared with other objects.</div> <div class=note>A measure that is set in the library can be used by many objects.</div> <div class=note>
+ * <div class=note>Either **qDef** or **qLibraryId** must be set, but not both. If both are set, the library measure's qDef and qLabel will be used. </div> <div class=note>If the measure is set in the hypercube and not in the library, this measure cannot be shared with other objects.</div> <div class=note>A measure that is set in the library can be used by many objects.</div> <div class=note>
  * expressions are complementary expressions associated to a measure. For example, you can decide to change the background color of a visualization depending on the values of the measure.
  * Attribute expressions do not affect the layout of an object. The sorting order is unchanged.
  * </div>

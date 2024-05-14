@@ -113,10 +113,10 @@ type Category = {
     id: string;
     name: string;
     parentId?: string;
-    /** This list contains the uuids of the stewards of the category. */
+    /** This list contains the uids of the stewards of the category. */
     stewards?: string[];
     readonly updatedAt: string;
-    /** The uuid of the user who last updated the category */
+    /** The uid of the user who last updated the category */
     readonly updatedBy: string;
 };
 type CreateCategory = {
@@ -127,7 +127,7 @@ type CreateCategory = {
     /** The name of the category. May not be identical to another category belonging to the same parent. */
     name?: string;
     parentId?: string;
-    /** This list contains the uuids of the stewards of the category. */
+    /** This list contains the uids of the stewards of the category. */
     stewards?: string[];
 };
 type CreateGlossary = {
@@ -152,7 +152,7 @@ type CreateTerm = {
     name: string;
     relatedInformation?: string;
     relatesTo?: TermRelatesTo[];
-    /** This list contain the uuids for the terms stewards */
+    /** This list contain the uids for the term's stewards */
     stewards?: string[];
     tags?: string[];
 };
@@ -233,7 +233,7 @@ type ExportGlossary = {
     termTemplate?: TermTemplate;
     terms?: ExportTerm[];
     readonly updatedAt?: string;
-    /** The uuid of the user who last updated the glossary */
+    /** The uid of the user who last updated the glossary */
     readonly updatedBy?: string;
 };
 type ExportTerm = {
@@ -358,11 +358,11 @@ type Term = {
     revision: number;
     /** Terms status is used determine the status of a term */
     status: TermStatus;
-    /** This list contains the uuids of the terms data stewards. */
+    /** This list contains the uids of the terms data stewards. */
     stewards: string[];
     tags: string[];
     readonly updatedAt: string;
-    /** The uuid of the user who last updated the term */
+    /** The uid of the user who last updated the term */
     readonly updatedBy: string;
 };
 /**
@@ -385,11 +385,13 @@ type TermLinksTo = {
     id?: string;
     name?: string;
     openUrl?: string;
+    /** Different formats based on resource type. Could be e.g. OID or UUID. */
     resourceId?: string;
     resourceSpaceId?: string;
     resourceType?: "app" | "dataset";
     /** Http status code for item during batch operation. */
     status?: number;
+    /** Different formats based on subresource type. Could be e.g. OID or UUID. */
     subResourceId?: string;
     subResourceName?: string;
     subResourceType?: "master_dimension" | "master_measure";

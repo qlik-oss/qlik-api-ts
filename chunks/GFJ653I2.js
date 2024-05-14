@@ -1,3 +1,9 @@
+import {
+  generateRandomString,
+  isBrowser,
+  isNode
+} from "./BGRBTH7Y.js";
+
 // src/platform/platform-functions.ts
 var getPlatform = async (options = {}) => {
   const isNodeEnvironment = typeof window === "undefined";
@@ -496,39 +502,6 @@ var none_default = {
   handleAuthenticationError: handleAuthenticationError4,
   validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, { requiredProps: [], optionalProps: [] })
 };
-
-// src/utils/utils.ts
-import { nanoid } from "nanoid";
-function isBrowserInternal() {
-  if (typeof window !== "undefined" && typeof window.document !== "undefined" && typeof self !== "undefined") {
-    return true;
-  }
-  return false;
-}
-function isNodeInternal() {
-  if (typeof process !== "undefined" && process.version && process.versions.node) {
-    return true;
-  }
-  return false;
-}
-function getEnvironment() {
-  if (isNodeInternal()) {
-    return "node";
-  }
-  if (isBrowserInternal()) {
-    return "browser";
-  }
-  throw new Error("Environment detection failed. Supported environments are either a browser or in a node environment");
-}
-function isBrowser() {
-  return getEnvironment() === "browser";
-}
-function isNode() {
-  return getEnvironment() === "node";
-}
-function generateRandomString(targetLength) {
-  return nanoid(targetLength);
-}
 
 // src/auth/internal/default-auth-modules/oauth/storage-helpers.ts
 var storagePrefix = "qlik-qmfe-api";
@@ -1327,7 +1300,7 @@ async function fetchAndTransformExceptions(input, init) {
     return Promise.reject(new InvokeFetchError(getErrorMessage(e), 0, new Headers(), {}));
   }
 }
-async function performActualHttpFetch(method, completeUrl, unencodedBody, contentType, options, interceptors, authHeaders, credentials) {
+async function performActualHttpFetch(method, completeUrl, unencodedBody, contentType, options, interceptors, authHeaders, credentials, userAgent) {
   const { body, contentTypeHeader, requestOptions } = encodeBody(unencodedBody, contentType ?? "");
   const headers = {
     ...contentTypeHeader,
@@ -1335,6 +1308,9 @@ async function performActualHttpFetch(method, completeUrl, unencodedBody, conten
     ...options?.headers,
     ...getServiceOverrideHeaderFromLocalStorage()
   };
+  if (!headers["User-Agent"] && userAgent) {
+    headers["User-Agent"] = userAgent;
+  }
   const isCrossOrigin = isHostCrossOrigin(options?.hostConfig);
   let request = {
     method,
@@ -1501,7 +1477,17 @@ function invokeFetchWithUrl(api, props, interceptors) {
     interceptors
   );
 }
-function invokeFetchWithUrlAndRetry(api, { method, completeUrl, cacheKey, body, options, authHeaders, credentials, contentType }, performRetry, interceptors) {
+function invokeFetchWithUrlAndRetry(api, {
+  method,
+  completeUrl,
+  cacheKey,
+  body,
+  options,
+  authHeaders,
+  credentials,
+  contentType,
+  userAgent
+}, performRetry, interceptors) {
   if (!cache[api]) {
     cache[api] = {};
   }
@@ -1523,7 +1509,8 @@ function invokeFetchWithUrlAndRetry(api, { method, completeUrl, cacheKey, body, 
     options,
     interceptors,
     authHeaders,
-    credentials
+    credentials,
+    userAgent
   );
   const resultAfterAuthenticationCheck = interceptAuthenticationErrors(
     options?.hostConfig,
@@ -1700,12 +1687,21 @@ function cleanStack(stack) {
 }
 
 // src/invoke-fetch/invoke-fetch-functions.ts
+var defaultUserAgent = "qmfe-api/latest";
 async function invokeFetch(api, props, interceptors) {
   checkForCrossDomainRequest(props.options?.hostConfig);
+  let userAgent;
+  if (props?.userAgent) {
+    userAgent = props.userAgent;
+  } else if (isBrowser()) {
+    userAgent = `${window.navigator.userAgent} ${defaultUserAgent}`;
+  } else {
+    userAgent = defaultUserAgent;
+  }
   const { completeUrl, cacheKey, authHeaders, credentials } = await getInvokeFetchUrlParams(props);
   return invokeFetchWithUrl(
     api,
-    { ...props, method: props.method.toUpperCase(), completeUrl, cacheKey, authHeaders, credentials },
+    { ...props, method: props.method.toUpperCase(), completeUrl, cacheKey, authHeaders, credentials, userAgent },
     interceptors
   );
 }
@@ -1779,8 +1775,6 @@ export {
   setDefaultHostConfig2 as setDefaultHostConfig,
   checkForCrossDomainRequest,
   logout,
-  isBrowser,
-  generateRandomString,
   InvokeFetchError,
   EncodingError,
   invokeFetch,
