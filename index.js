@@ -1,14 +1,15 @@
 import {
   auth_default
-} from "./chunks/ETP2N4NZ.js";
+} from "./chunks/BMB4CQGB.js";
 import {
   qix_default
-} from "./chunks/FBNR32LK.js";
+} from "./chunks/UY5PBIVC.js";
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/BBELLAVB.js";
-import "./chunks/T7RJE3IN.js";
+} from "./chunks/SYGKZE7X.js";
+import "./chunks/BGRBTH7Y.js";
+import "./chunks/S2BIIZLQ.js";
 
 // src/public/public-runtime-api-generator/public-runtime-api-generator.ts
 var methodAbbreviations = {
@@ -257,7 +258,7 @@ var automations = apiDefToApi("automations", {
         settings: ["getAutomationsSettings:G:", "updateAutomationsSettings:UBJ:"],
         usage: ["getAutomationsUsageMetrics:GQ:"],
         "{id}": {
-          "": ["deleteAutomation:D:", "getAutomation:G:", "updateAutomation:UBJ:"],
+          "": ["deleteAutomation:D:", "getAutomationWithQuery:GQ:", "getAutomation:G:", "updateAutomation:UBJ:"],
           actions: {
             copy: ["copyAutomation:PBJ:"],
             disable: ["disableAutomation:P:"],
@@ -267,7 +268,7 @@ var automations = apiDefToApi("automations", {
           runs: {
             "": ["getAutomationRuns:GQ:", "queueAutomationRun:PBJ:"],
             "{runId}": {
-              "": ["getAutomationRun:G:"],
+              "": ["getAutomationRunWithQuery:GQ:", "getAutomationRun:G:"],
               actions: {
                 export: ["getAutomationRunDetails:P:"],
                 retry: ["retryAutomationRun:P:"],

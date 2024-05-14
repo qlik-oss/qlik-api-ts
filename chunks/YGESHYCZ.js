@@ -2,10 +2,12 @@ import {
   getPlatform,
   handleAuthenticationError,
   invokeFetch,
-  isBrowser,
   isWindows,
   toValidWebsocketLocationUrl
-} from "./BO3K2ZRA.js";
+} from "./GFJ653I2.js";
+import {
+  isBrowser
+} from "./BGRBTH7Y.js";
 
 // src/qix/session/shared-sessions.ts
 var globalEventListeners = /* @__PURE__ */ new Set();
@@ -99,7 +101,7 @@ function listenForWindowsAuthenticationInformation(session) {
   return authSuggestedInWebsocket;
 }
 async function createAndSetupEnigmaSession(props, canRetry) {
-  const { createEnigmaSession } = await import("./SYJZK7I6.js");
+  const { createEnigmaSession } = await import("./YNDOPW5S.js");
   const session = await createEnigmaSession(props);
   setupSessionListeners(session, props);
   let global;
@@ -477,7 +479,10 @@ async function createSessionApp() {
       if (!alreadyClosed) {
         alreadyClosed = true;
         const defaultDelay = isBrowserEnvironment ? 5e3 : -1;
-        return sharedSession.removeClient(qixSessionAppSession, props?.websocketCloseDelay || defaultDelay);
+        return sharedSession.removeClient(
+          qixSessionAppSession,
+          props?.websocketCloseDelay !== void 0 ? props.websocketCloseDelay : defaultDelay
+        );
       }
       return Promise.resolve();
     }
@@ -516,7 +521,10 @@ function openAppSession(appIdOrProps) {
       if (!alreadyClosed) {
         alreadyClosed = true;
         const defaultDelay = isBrowserEnvironment ? 5e3 : -1;
-        return sharedSession.removeClient(qixAppSession, props?.websocketCloseDelay || defaultDelay);
+        return sharedSession.removeClient(
+          qixAppSession,
+          props?.websocketCloseDelay !== void 0 ? props.websocketCloseDelay : defaultDelay
+        );
       }
       return Promise.resolve();
     }

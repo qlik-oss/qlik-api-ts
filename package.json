@@ -11,10 +11,6 @@
     "fs": false
   },
   "dependencies": {
-    "@qlik/embed-runtime": "^1.0.0",
-    "@qlik/runtime-module-loader": "^1.0.0",
-    "ajv": "^8.13.0",
-    "bufferutil": "^4.0.8",
     "enigma.js": "^2.14.0",
     "lodash": "^4.17.21",
     "nanoid": "^5.0.6",
