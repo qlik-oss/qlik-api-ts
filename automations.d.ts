@@ -10,11 +10,11 @@ type AutomationDetailRequestObject = {
     workspace?: unknown;
 };
 type AutomationDetailResponseObject = {
-    /** A list of connectors used inside the workspace. */
+    /** A list of connectors that were detected the workspace. This includes Connectors present in blocks which are not connected to other blocks. Order of guids is not guaranteed. */
     readonly connectorIds?: string[];
     readonly createdAt?: string;
     description?: string;
-    /** A list of endpoints used inside the workspace. */
+    /** A list of endpoints that were detected inside the workspace. This includes Endpoints present in blocks which are not connected to other blocks. Order of guids is not guaranteed. */
     readonly endpointIds?: string[];
     readonly executionToken?: string;
     readonly id?: string;
@@ -25,7 +25,7 @@ type AutomationDetailResponseObject = {
     readonly ownerId?: string;
     readonly runMode?: "manual" | "scheduled" | "triggered" | "webhook";
     schedules?: ScheduleResponseObject[];
-    /** A list of snippets used inside the workspace. */
+    /** A list of snippets that were detected inside the workspace. This includes snippet blocks that are not connected to other blocks. Order of guids is not guaranteed. */
     readonly snippetIds?: string[];
     state?: "available" | "unavailable" | "disabled";
     readonly updatedAt?: string;
@@ -37,13 +37,13 @@ type AutomationList = {
     links?: Links;
 };
 type AutomationListObject = {
-    /** A list of connectors used inside the workspace. */
+    /** A list of connectors that were detected the workspace. This includes Connectors present in blocks which are not connected to other blocks. Order of guids is not guaranteed. */
     readonly connectorIds?: string[];
     readonly createdAt?: string;
     description?: string;
     /** Duration of the last run, indicated in seconds. Calculated from start and stop times */
     readonly duration?: number;
-    /** A list of endpoints used inside the workspace. */
+    /** A list of endpoints that were detected inside the workspace. This includes Endpoints present in blocks which are not connected to other blocks. Order of guids is not guaranteed. */
     readonly endpointIds?: string[];
     readonly executionToken?: string;
     readonly id?: string;
@@ -53,7 +53,7 @@ type AutomationListObject = {
     name?: string;
     readonly ownerId?: string;
     readonly runMode?: "manual" | "scheduled" | "triggered" | "webhook";
-    /** A list of snippets used inside the workspace. */
+    /** A list of snippets that were detected inside the workspace. This includes snippet blocks that are not connected to other blocks. Order of guids is not guaranteed. */
     readonly snippetIds?: string[];
     state?: "available" | "unavailable" | "disabled";
     readonly updatedAt?: string;

@@ -1,6 +1,6 @@
 import {
   getQixRuntimeModule
-} from "./S2BIIZLQ.js";
+} from "./I5CSZHWM.js";
 
 // src/public/qix.ts
 function openAppSession(appSessionProps) {
@@ -41,15 +41,16 @@ function openAppSession(appSessionProps) {
      * this is basically a no op, but if this is the last/only usage
      * of the underlying enigma websocket that websocket will be closed.
      */
-    async close() {
-      return (await appSessionPromise).close();
+    async close(props) {
+      return (await appSessionPromise).close(props);
     }
   };
   return appSessionProxy;
 }
-var qix_default = {
+var qix = {
   openAppSession
 };
+var qix_default = qix;
 
 export {
   openAppSession,

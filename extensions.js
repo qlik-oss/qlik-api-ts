@@ -1,9 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/SYGKZE7X.js";
-import "./chunks/BGRBTH7Y.js";
-import "./chunks/S2BIIZLQ.js";
+} from "./chunks/S3X62FNR.js";
+import "./chunks/2ZQ3ZX7F.js";
+import "./chunks/I5CSZHWM.js";
 
 // src/public/rest/extensions.ts
 var getExtensions = async (options) => invokeFetch("extensions", {
