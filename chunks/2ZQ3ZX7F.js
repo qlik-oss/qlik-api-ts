@@ -1,5 +1,4 @@
 // src/utils/utils.ts
-import { nanoid } from "nanoid";
 function isBrowserInternal() {
   if (typeof window !== "undefined" && typeof window.document !== "undefined" && typeof self !== "undefined") {
     return true;
@@ -27,12 +26,8 @@ function isBrowser() {
 function isNode() {
   return getEnvironment() === "node";
 }
-function generateRandomString(targetLength) {
-  return nanoid(targetLength);
-}
 
 export {
   isBrowser,
-  isNode,
-  generateRandomString
+  isNode
 };

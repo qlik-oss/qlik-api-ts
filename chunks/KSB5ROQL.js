@@ -1,8 +1,7 @@
 import {
-  generateRandomString,
   isBrowser,
   isNode
-} from "./BGRBTH7Y.js";
+} from "./2ZQ3ZX7F.js";
 
 // src/platform/platform-functions.ts
 var getPlatform = async (options = {}) => {
@@ -636,6 +635,12 @@ function handleOAuthCallback() {
       }
     }
   }
+}
+
+// src/random/random.ts
+import { nanoid } from "nanoid";
+function generateRandomString(targetLength) {
+  return nanoid(targetLength);
 }
 
 // src/auth/internal/default-auth-modules/oauth/oauth-utils.ts
@@ -1781,5 +1786,6 @@ export {
   clearApiCache,
   parseFetchResponse,
   invoke_fetch_default,
+  generateRandomString,
   auth_default
 };
