@@ -722,17 +722,6 @@ type NxObjectAttributes = {
     /** The date and time when the object was modified. */
     updatedAt?: string;
 };
-type NxPatch = {
-    Op?: NxPatchOperationType;
-    /** Path to the property to add, remove or replace. */
-    Path?: string;
-    /** This parameter is not used in a remove operation.
-     * Corresponds to the value of the property to add or to the new value of the property to update.
-     * Examples:
-     * "false", "2", "\"New title\"" */
-    Value?: string;
-};
-type NxPatchOperationType = "add" | "remove" | "replace";
 /**
  * Contains break down of the asked question in the form of tokens with their classification.
  */
@@ -1883,7 +1872,7 @@ type GetAppReportFilterHttpError = {
 };
 /**
  * Retrieves the script history for an app.
- * Returns information about the saved versions of the script.
+ * Returns information about the saved versions of the script in a list sorted with latest first.
  *
  * @param appId Identifier of the app.
  * @param query an object with query parameters
@@ -1926,63 +1915,6 @@ type UpdateAppScriptHttpResponse = {
     status: number;
 };
 type UpdateAppScriptHttpError = {
-    data: unknown;
-    headers: Headers;
-    status: number;
-};
-/**
- * Deletes a specific version of the script for an app.
- * Fails if the version to delete is the current version.
- *
- * @param appId Identifier of the app.
- * @param version Identifier of the script version
- * @throws DeleteAppScriptHttpError
- */
-declare const deleteAppScript: (appId: string, version: string, options?: ApiCallOptions) => Promise<DeleteAppScriptHttpResponse>;
-type DeleteAppScriptHttpResponse = {
-    data: void;
-    headers: Headers;
-    status: number;
-};
-type DeleteAppScriptHttpError = {
-    data: unknown;
-    headers: Headers;
-    status: number;
-};
-/**
- * Retrieves a version of the script for an app.
- * Returns the script text.
- *
- * @param appId Identifier of the app.
- * @param version Identifier of the script version, or 'current' for retrieving the current version.
- * @throws GetAppScriptHttpError
- */
-declare const getAppScript: (appId: string, version: string, options?: ApiCallOptions) => Promise<GetAppScriptHttpResponse>;
-type GetAppScriptHttpResponse = {
-    data: ScriptVersion;
-    headers: Headers;
-    status: number;
-};
-type GetAppScriptHttpError = {
-    data: unknown;
-    headers: Headers;
-    status: number;
-};
-/**
- * Updates a specific version of the script for an app.
- *
- * @param appId Identifier of the app.
- * @param version Identifier of the script version.
- * @param body an object with the body content
- * @throws PatchAppScriptHttpError
- */
-declare const patchAppScript: (appId: string, version: string, body: NxPatch, options?: ApiCallOptions) => Promise<PatchAppScriptHttpResponse>;
-type PatchAppScriptHttpResponse = {
-    data: void;
-    headers: Headers;
-    status: number;
-};
-type PatchAppScriptHttpError = {
     data: unknown;
     headers: Headers;
     status: number;
@@ -2359,7 +2291,7 @@ interface AppsAPI {
     getAppReportFilter: typeof getAppReportFilter;
     /**
      * Retrieves the script history for an app.
-     * Returns information about the saved versions of the script.
+     * Returns information about the saved versions of the script in a list sorted with latest first.
      *
      * @param appId Identifier of the app.
      * @param query an object with query parameters
@@ -2374,33 +2306,6 @@ interface AppsAPI {
      * @throws UpdateAppScriptHttpError
      */
     updateAppScript: typeof updateAppScript;
-    /**
-     * Deletes a specific version of the script for an app.
-     * Fails if the version to delete is the current version.
-     *
-     * @param appId Identifier of the app.
-     * @param version Identifier of the script version
-     * @throws DeleteAppScriptHttpError
-     */
-    deleteAppScript: typeof deleteAppScript;
-    /**
-     * Retrieves a version of the script for an app.
-     * Returns the script text.
-     *
-     * @param appId Identifier of the app.
-     * @param version Identifier of the script version, or 'current' for retrieving the current version.
-     * @throws GetAppScriptHttpError
-     */
-    getAppScript: typeof getAppScript;
-    /**
-     * Updates a specific version of the script for an app.
-     *
-     * @param appId Identifier of the app.
-     * @param version Identifier of the script version.
-     * @param body an object with the body content
-     * @throws PatchAppScriptHttpError
-     */
-    patchAppScript: typeof patchAppScript;
     /**
      * Removes space from a specific app.
      *
@@ -2442,4 +2347,4 @@ interface AppsAPI {
  */
 declare const appsExport: AppsAPI;
 
-export { type Analysis, type AnalysisComposition, type AnalysisDescriptor, type AnalysisDescriptorResponse, type AnalysisDetails, type AnalysisGroup, type AnalysisModelItemField, type AnalysisModelItemMasterItem, type AnalysisModelResponse, type AnalysisModelResponseDetail, type AnalysisRecommendRequest, type AnalysisRecommendationResponse, type AnalysisRecommendationResponseDetail, type AppAttributes, type AppContentList, type AppContentListItem, type AppObjectGenericType, type AppUpdateAttributes, type AppsAPI, type ChartType, type Classification, type Classifications, type Cmpbool, type Cmpfloat, type CmpfloatWithTimeout, type Cmpint, type Comparison, type Comparisonfields, type ComparisonobjMemoryLimit, type Comparisonobjresponsetime, type Comparisonoobjheavy, type Comparisontables, type CompositionMinMax, type CopyAppHttpError, type CopyAppHttpResponse, type CountAppReportFiltersHttpError, type CountAppReportFiltersHttpResponse, type CreateApp, type CreateAppHttpError, type CreateAppHttpResponse, type CreateAppReportFilterHttpError, type CreateAppReportFilterHttpResponse, type DataModelMetadata, type DeleteAppHttpError, type DeleteAppHttpResponse, type DeleteAppMediaHttpError, type DeleteAppMediaHttpResponse, type DeleteAppReportFilterHttpError, type DeleteAppReportFilterHttpResponse, type DeleteAppScriptHttpError, type DeleteAppScriptHttpResponse, type Error, type Errors, type Evaluation, type Evaluations, type EvaluatorError, type Event, type ExportAppHttpError, type ExportAppHttpResponse, type FieldAttrType, type FieldAttributes, type FieldInTableProfilingData, type FieldMetadata, type FieldOverride, type FileData, type Filter, type FilterError, type FilterErrors, type FilterField, type FilterFieldValue, type FilterList, type FilterListItem, type FilterRequest, type FilterType, type FilterV10, type FilterVariable, type FiltersCount, type Float64, type FrequencyDistributionData, type GetAppDataLineageHttpError, type GetAppDataLineageHttpResponse, type GetAppDataMetadataHttpError, type GetAppDataMetadataHttpResponse, type GetAppEvaluationComparisonHttpError, type GetAppEvaluationComparisonHttpResponse, type GetAppEvaluationComparisonXmlHttpError, type GetAppEvaluationComparisonXmlHttpResponse, type GetAppEvaluationHttpError, type GetAppEvaluationHttpResponse, type GetAppEvaluationXmlHttpError, type GetAppEvaluationXmlHttpResponse, type GetAppEvaluationsHttpError, type GetAppEvaluationsHttpResponse, type GetAppInfoHttpError, type GetAppInfoHttpResponse, type GetAppInsightAnalysesHttpError, type GetAppInsightAnalysesHttpResponse, type GetAppInsightAnalysisModelHttpError, type GetAppInsightAnalysisModelHttpResponse, type GetAppInsightAnalysisRecommendationsHttpError, type GetAppInsightAnalysisRecommendationsHttpResponse, type GetAppMediaHttpError, type GetAppMediaHttpResponse, type GetAppMediaListHttpError, type GetAppMediaListHttpResponse, type GetAppReloadLogHttpError, type GetAppReloadLogHttpResponse, type GetAppReloadLogsHttpError, type GetAppReloadLogsHttpResponse, type GetAppReloadMetadataHttpError, type GetAppReloadMetadataHttpResponse, type GetAppReportFilterHttpError, type GetAppReportFilterHttpResponse, type GetAppReportFiltersHttpError, type GetAppReportFiltersHttpResponse, type GetAppScriptHistoryHttpError, type GetAppScriptHistoryHttpResponse, type GetAppScriptHttpError, type GetAppScriptHttpResponse, type GetAppThumbnailHttpError, type GetAppThumbnailHttpResponse, type GetAppsPrivilegesHttpError, type GetAppsPrivilegesHttpResponse, type HardwareMeta, type Href, type ImportAppHttpError, type ImportAppHttpResponse, type JsonObject, type LastReloadMetadata, type LineageInfoRest, type LinkResponse, type Links, type LinksResponse, type Log, type Metadata, type MoveAppToSpaceHttpError, type MoveAppToSpaceHttpResponse, type NavigationLink, type NavigationLinks, type NumberFormat, type NxApp, type NxAppCreatePrivileges, type NxAppObject, type NxAttributes, type NxObjectAttributes, type NxPatch, type NxPatchOperationType, type Objectmetrics, type Objectspec, type Objecttopspec, type PartialNluInfo, type PatchAppScriptHttpError, type PatchAppScriptHttpResponse, type PublishApp, type PublishAppHttpError, type PublishAppHttpResponse, type PublishData, type QueueAppEvaluationHttpError, type QueueAppEvaluationHttpResponse, type RecommendFieldItem, type RecommendItems, type RecommendMasterItem, type RecommendNaturalLangQuery, type RecommendedAnalysis, type RecommendedAnalysisCore, type ReloadIncludeFile, type ReloadListMetadata, type ReloadMeta, type ReloadStatements, type RemoveAppFromSpaceHttpError, type RemoveAppFromSpaceHttpResponse, type RepublishApp, type RepublishAppHttpError, type RepublishAppHttpResponse, type Result, type Resultentry, type Resultmetadatatopfields, type Resultmetadatatoptables, type ResultobjMemoryLimit, type Resultobjresponsetime, type Resultobjsheet, type Resultsingle, type ScriptLogList, type ScriptLogMeta, type ScriptMeta, type ScriptMetaList, type ScriptVersion, type SimplifiedClassifications, type Sortedcomparisonfields, type Sortedcomparisonobjresponsetime, type Sortedcomparisonoobjheavy, type Sortedcomparisontables, type SymbolFrequency, type SymbolValue, type TableMetadata, type TableProfilingData, type UpdateApp, type UpdateAppInfoHttpError, type UpdateAppInfoHttpResponse, type UpdateAppObjectOwnerHttpError, type UpdateAppObjectOwnerHttpResponse, type UpdateAppOwnerHttpError, type UpdateAppOwnerHttpResponse, type UpdateAppScriptHttpError, type UpdateAppScriptHttpResponse, type UpdateOwner, type UpdateSpace, type UploadAppMediaHttpError, type UploadAppMediaHttpResponse, type UsageEnum, type UserPrivileges, clearCache, copyApp, countAppReportFilters, createApp, createAppReportFilter, appsExport as default, deleteApp, deleteAppMedia, deleteAppReportFilter, deleteAppScript, exportApp, getAppDataLineage, getAppDataMetadata, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXml, getAppEvaluationXml, getAppEvaluations, getAppInfo, getAppInsightAnalyses, getAppInsightAnalysisModel, getAppInsightAnalysisRecommendations, getAppMedia, getAppMediaList, getAppReloadLog, getAppReloadLogs, getAppReloadMetadata, getAppReportFilter, getAppReportFilters, getAppScript, getAppScriptHistory, getAppThumbnail, getAppsPrivileges, importApp, moveAppToSpace, patchAppScript, publishApp, queueAppEvaluation, removeAppFromSpace, republishApp, updateAppInfo, updateAppObjectOwner, updateAppOwner, updateAppScript, uploadAppMedia };
+export { type Analysis, type AnalysisComposition, type AnalysisDescriptor, type AnalysisDescriptorResponse, type AnalysisDetails, type AnalysisGroup, type AnalysisModelItemField, type AnalysisModelItemMasterItem, type AnalysisModelResponse, type AnalysisModelResponseDetail, type AnalysisRecommendRequest, type AnalysisRecommendationResponse, type AnalysisRecommendationResponseDetail, type AppAttributes, type AppContentList, type AppContentListItem, type AppObjectGenericType, type AppUpdateAttributes, type AppsAPI, type ChartType, type Classification, type Classifications, type Cmpbool, type Cmpfloat, type CmpfloatWithTimeout, type Cmpint, type Comparison, type Comparisonfields, type ComparisonobjMemoryLimit, type Comparisonobjresponsetime, type Comparisonoobjheavy, type Comparisontables, type CompositionMinMax, type CopyAppHttpError, type CopyAppHttpResponse, type CountAppReportFiltersHttpError, type CountAppReportFiltersHttpResponse, type CreateApp, type CreateAppHttpError, type CreateAppHttpResponse, type CreateAppReportFilterHttpError, type CreateAppReportFilterHttpResponse, type DataModelMetadata, type DeleteAppHttpError, type DeleteAppHttpResponse, type DeleteAppMediaHttpError, type DeleteAppMediaHttpResponse, type DeleteAppReportFilterHttpError, type DeleteAppReportFilterHttpResponse, type Error, type Errors, type Evaluation, type Evaluations, type EvaluatorError, type Event, type ExportAppHttpError, type ExportAppHttpResponse, type FieldAttrType, type FieldAttributes, type FieldInTableProfilingData, type FieldMetadata, type FieldOverride, type FileData, type Filter, type FilterError, type FilterErrors, type FilterField, type FilterFieldValue, type FilterList, type FilterListItem, type FilterRequest, type FilterType, type FilterV10, type FilterVariable, type FiltersCount, type Float64, type FrequencyDistributionData, type GetAppDataLineageHttpError, type GetAppDataLineageHttpResponse, type GetAppDataMetadataHttpError, type GetAppDataMetadataHttpResponse, type GetAppEvaluationComparisonHttpError, type GetAppEvaluationComparisonHttpResponse, type GetAppEvaluationComparisonXmlHttpError, type GetAppEvaluationComparisonXmlHttpResponse, type GetAppEvaluationHttpError, type GetAppEvaluationHttpResponse, type GetAppEvaluationXmlHttpError, type GetAppEvaluationXmlHttpResponse, type GetAppEvaluationsHttpError, type GetAppEvaluationsHttpResponse, type GetAppInfoHttpError, type GetAppInfoHttpResponse, type GetAppInsightAnalysesHttpError, type GetAppInsightAnalysesHttpResponse, type GetAppInsightAnalysisModelHttpError, type GetAppInsightAnalysisModelHttpResponse, type GetAppInsightAnalysisRecommendationsHttpError, type GetAppInsightAnalysisRecommendationsHttpResponse, type GetAppMediaHttpError, type GetAppMediaHttpResponse, type GetAppMediaListHttpError, type GetAppMediaListHttpResponse, type GetAppReloadLogHttpError, type GetAppReloadLogHttpResponse, type GetAppReloadLogsHttpError, type GetAppReloadLogsHttpResponse, type GetAppReloadMetadataHttpError, type GetAppReloadMetadataHttpResponse, type GetAppReportFilterHttpError, type GetAppReportFilterHttpResponse, type GetAppReportFiltersHttpError, type GetAppReportFiltersHttpResponse, type GetAppScriptHistoryHttpError, type GetAppScriptHistoryHttpResponse, type GetAppThumbnailHttpError, type GetAppThumbnailHttpResponse, type GetAppsPrivilegesHttpError, type GetAppsPrivilegesHttpResponse, type HardwareMeta, type Href, type ImportAppHttpError, type ImportAppHttpResponse, type JsonObject, type LastReloadMetadata, type LineageInfoRest, type LinkResponse, type Links, type LinksResponse, type Log, type Metadata, type MoveAppToSpaceHttpError, type MoveAppToSpaceHttpResponse, type NavigationLink, type NavigationLinks, type NumberFormat, type NxApp, type NxAppCreatePrivileges, type NxAppObject, type NxAttributes, type NxObjectAttributes, type Objectmetrics, type Objectspec, type Objecttopspec, type PartialNluInfo, type PublishApp, type PublishAppHttpError, type PublishAppHttpResponse, type PublishData, type QueueAppEvaluationHttpError, type QueueAppEvaluationHttpResponse, type RecommendFieldItem, type RecommendItems, type RecommendMasterItem, type RecommendNaturalLangQuery, type RecommendedAnalysis, type RecommendedAnalysisCore, type ReloadIncludeFile, type ReloadListMetadata, type ReloadMeta, type ReloadStatements, type RemoveAppFromSpaceHttpError, type RemoveAppFromSpaceHttpResponse, type RepublishApp, type RepublishAppHttpError, type RepublishAppHttpResponse, type Result, type Resultentry, type Resultmetadatatopfields, type Resultmetadatatoptables, type ResultobjMemoryLimit, type Resultobjresponsetime, type Resultobjsheet, type Resultsingle, type ScriptLogList, type ScriptLogMeta, type ScriptMeta, type ScriptMetaList, type ScriptVersion, type SimplifiedClassifications, type Sortedcomparisonfields, type Sortedcomparisonobjresponsetime, type Sortedcomparisonoobjheavy, type Sortedcomparisontables, type SymbolFrequency, type SymbolValue, type TableMetadata, type TableProfilingData, type UpdateApp, type UpdateAppInfoHttpError, type UpdateAppInfoHttpResponse, type UpdateAppObjectOwnerHttpError, type UpdateAppObjectOwnerHttpResponse, type UpdateAppOwnerHttpError, type UpdateAppOwnerHttpResponse, type UpdateAppScriptHttpError, type UpdateAppScriptHttpResponse, type UpdateOwner, type UpdateSpace, type UploadAppMediaHttpError, type UploadAppMediaHttpResponse, type UsageEnum, type UserPrivileges, clearCache, copyApp, countAppReportFilters, createApp, createAppReportFilter, appsExport as default, deleteApp, deleteAppMedia, deleteAppReportFilter, exportApp, getAppDataLineage, getAppDataMetadata, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXml, getAppEvaluationXml, getAppEvaluations, getAppInfo, getAppInsightAnalyses, getAppInsightAnalysisModel, getAppInsightAnalysisRecommendations, getAppMedia, getAppMediaList, getAppReloadLog, getAppReloadLogs, getAppReloadMetadata, getAppReportFilter, getAppReportFilters, getAppScriptHistory, getAppThumbnail, getAppsPrivileges, importApp, moveAppToSpace, publishApp, queueAppEvaluation, removeAppFromSpace, republishApp, updateAppInfo, updateAppObjectOwner, updateAppOwner, updateAppScript, uploadAppMedia };

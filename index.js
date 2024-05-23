@@ -224,10 +224,7 @@ var apps = apiDefToApi("apps", {
             actions: { count: ["countAppReportFilters:GQ:"] },
             "{id}": ["deleteAppReportFilter:D:", "getAppReportFilter:G:"]
           },
-          scripts: {
-            "": ["getAppScriptHistory:GQ:", "updateAppScript:PBJ:"],
-            "{version}": ["deleteAppScript:D:", "getAppScript:G:", "patchAppScript:ABJ:"]
-          },
+          scripts: ["getAppScriptHistory:GQ:", "updateAppScript:PBJ:"],
           space: ["removeAppFromSpace:D:", "moveAppToSpace:UBJ:"]
         },
         "{guid}": { evaluations: ["getAppEvaluations:GQ:", "queueAppEvaluation:P:"] }

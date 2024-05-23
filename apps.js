@@ -252,26 +252,6 @@ var updateAppScript = async (appId, body, options) => invokeFetch("apps", {
   contentType: "application/json",
   options
 });
-var deleteAppScript = async (appId, version, options) => invokeFetch("apps", {
-  method: "delete",
-  pathTemplate: "/api/v1/apps/{appId}/scripts/{version}",
-  pathVariables: { appId, version },
-  options
-});
-var getAppScript = async (appId, version, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/{appId}/scripts/{version}",
-  pathVariables: { appId, version },
-  options
-});
-var patchAppScript = async (appId, version, body, options) => invokeFetch("apps", {
-  method: "patch",
-  pathTemplate: "/api/v1/apps/{appId}/scripts/{version}",
-  pathVariables: { appId, version },
-  body,
-  contentType: "application/json",
-  options
-});
 var removeAppFromSpace = async (appId, options) => invokeFetch("apps", {
   method: "delete",
   pathTemplate: "/api/v1/apps/{appId}/space",
@@ -339,9 +319,6 @@ var appsExport = {
   getAppReportFilter,
   getAppScriptHistory,
   updateAppScript,
-  deleteAppScript,
-  getAppScript,
-  patchAppScript,
   removeAppFromSpace,
   moveAppToSpace,
   getAppEvaluations,
@@ -359,7 +336,6 @@ export {
   deleteApp,
   deleteAppMedia,
   deleteAppReportFilter,
-  deleteAppScript,
   exportApp,
   getAppDataLineage,
   getAppDataMetadata,
@@ -379,13 +355,11 @@ export {
   getAppReloadMetadata,
   getAppReportFilter,
   getAppReportFilters,
-  getAppScript,
   getAppScriptHistory,
   getAppThumbnail,
   getAppsPrivileges,
   importApp,
   moveAppToSpace,
-  patchAppScript,
   publishApp,
   queueAppEvaluation,
   removeAppFromSpace,
