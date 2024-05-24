@@ -2,8 +2,6 @@ import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
 import './auth-types-Bqw3vbLs.js';
 
 type ErrorResponse = {
-    /** @deprecated */
-    error?: string;
     errors?: {
         code?: string;
         detail?: string;

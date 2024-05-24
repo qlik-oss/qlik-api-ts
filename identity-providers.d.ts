@@ -40,7 +40,7 @@ type CertificateInfo = {
  * Payload for creating an identity provider using JWT authentication.
  */
 type CreateJWTAuthPayload = {
-    /** There can be clock skew between the IdP and Qlik's login server, in these cases a tolerance can be set, decimals will be rounded off. */
+    /** There can be clock skew between the IdP and Qlik's login server. In these cases, a tolerance can be set. */
     clockToleranceSec?: number;
     description?: string;
     /** Required IdP configurations. */
@@ -66,7 +66,7 @@ type CreateJWTAuthPayload = {
  * Payload for creating an OIDC-compatible identity provider.
  */
 type CreateOIDCPayload = {
-    /** There can be clock skew between the IdP and Qlik's login server. In these cases, a tolerance can be set, decimals will be rounded off. */
+    /** There can be clock skew between the IdP and Qlik's login server. In these cases, a tolerance can be set. */
     clockToleranceSec?: number;
     /** Tells the consumer of the IdP that new users should be created on login if they don't exist. */
     createNewUsersOnLogin?: boolean;
@@ -126,7 +126,7 @@ type CreateOIDCPayload = {
  * Payload for creating a SAML compatible identity provider.
  */
 type CreateSAMLPayload = {
-    /** There can be clock skew between the IdP and Qlik's login server. In these cases, a tolerance can be set, decimals will be rounded off. */
+    /** There can be clock skew between the IdP and Qlik's login server. In these cases, a tolerance can be set. */
     clockToleranceSec?: number;
     /** Tells the consumer of the IdP that new users should be created on login if they don't exist. */
     createNewUsersOnLogin?: boolean;
