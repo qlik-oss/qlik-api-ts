@@ -68,7 +68,8 @@ type Role = {
     readonly createdBy?: string;
     /** Descriptive text for the role. */
     description: string;
-    /** Indicate whether this role will trigger promotion of a user from a basic to a full user on tenants with a capacity-based subscription. Does not apply to tenants with a user-based subscription. */
+    /** @deprecated
+     * DEPRECATED. does not work. */
     readonly fullUser?: boolean;
     /** The unique identifier for the role. */
     readonly id: string;
@@ -93,6 +94,8 @@ type Role = {
     type: "default";
     /** Id of user that last updated`` role */
     readonly updatedBy?: string;
+    /** Indicate whether this role will trigger promotion of a user from a basic to a full user on tenants with a capacity-based subscription. Does not apply to tenants with a user-based subscription. */
+    readonly userEntitlementType?: string;
 };
 /**
  * Returns a list of roles using cursor-based pagination.
