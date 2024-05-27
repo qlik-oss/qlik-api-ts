@@ -1,15 +1,15 @@
 import {
-  auth_default
-} from "./chunks/BPM4DLZK.js";
-import {
   qix_default
-} from "./chunks/NR2F7MAJ.js";
+} from "./chunks/IEB2MTJ3.js";
+import {
+  auth_default
+} from "./chunks/JR4AYAEK.js";
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/S3X62FNR.js";
+} from "./chunks/QXDBGF7B.js";
+import "./chunks/7C6WMELW.js";
 import "./chunks/2ZQ3ZX7F.js";
-import "./chunks/I5CSZHWM.js";
 
 // src/public/public-runtime-api-generator/public-runtime-api-generator.ts
 var methodAbbreviations = {
@@ -226,7 +226,7 @@ var apps = apiDefToApi("apps", {
           },
           scripts: {
             "": ["getAppScriptHistory:GQ:", "updateAppScript:PBJ:"],
-            "{version}": ["deleteAppScript:D:", "getAppScript:G:", "patchAppScript:ABJ:"]
+            "{id}": ["deleteAppScript:D:", "getAppScript:G:", "patchAppScript:ABJ:"]
           },
           space: ["removeAppFromSpace:D:", "moveAppToSpace:UBJ:"]
         },
@@ -520,6 +520,9 @@ var reloads = apiDefToApi("reloads", {
     }
   }
 });
+var reports = apiDefToApi("reports", {
+  api: { v1: { reports: { "": ["createReport:PBJ:"], "{id}": { status: ["getReportStatus:G:"] } } } }
+});
 var roles = apiDefToApi("roles", {
   api: { v1: { roles: { "": ["getRoles:GQ:"], "{id}": ["getRole:G:"] } } }
 });
@@ -667,6 +670,7 @@ var api = {
   quotas,
   reloadTasks,
   reloads,
+  reports,
   roles,
   spaces,
   tempContents,
@@ -703,6 +707,7 @@ export {
   quotas,
   reloadTasks,
   reloads,
+  reports,
   roles,
   spaces,
   tempContents,

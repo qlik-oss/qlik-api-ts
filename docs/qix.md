@@ -35,7 +35,7 @@ The app sesssion settings have the following properties.
 - `hostConfig` - Optional Hostconfig to connect to a URL and authenticate an app session. Only needed if default HostConfig has not been set, or if connection should be different from the default.
 - `withoutData` - Optional boolean, set to true if app should be opened without loading the data blob
 
-**_note_** - when using `withoutData: true` and no `identity` the websocket url will include `/identity/no_data` to prevent that engine throws error "App is opened in a different mode".
+**_note_** - when using `withoutData: true` and no `identity` it is likely that engine throws error "App is opened in a different mode" if the app has already been opened with data or if the app is opened in `Qlik Sense` after script has been run without data. So it is _strongly recommended_ to use the `identity` parameter when opening the app without data. E.g `qix.openAppSession({ appId: "app-id", identity: "no-data", withoutData: true, ... })`
 
 ## Usage example
 

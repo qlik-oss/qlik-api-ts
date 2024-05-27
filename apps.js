@@ -1,9 +1,9 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/S3X62FNR.js";
+} from "./chunks/QXDBGF7B.js";
+import "./chunks/7C6WMELW.js";
 import "./chunks/2ZQ3ZX7F.js";
-import "./chunks/I5CSZHWM.js";
 
 // src/public/rest/apps.ts
 var createApp = async (body, options) => invokeFetch("apps", {
@@ -252,22 +252,22 @@ var updateAppScript = async (appId, body, options) => invokeFetch("apps", {
   contentType: "application/json",
   options
 });
-var deleteAppScript = async (appId, version, options) => invokeFetch("apps", {
+var deleteAppScript = async (appId, id, options) => invokeFetch("apps", {
   method: "delete",
-  pathTemplate: "/api/v1/apps/{appId}/scripts/{version}",
-  pathVariables: { appId, version },
+  pathTemplate: "/api/v1/apps/{appId}/scripts/{id}",
+  pathVariables: { appId, id },
   options
 });
-var getAppScript = async (appId, version, options) => invokeFetch("apps", {
+var getAppScript = async (appId, id, options) => invokeFetch("apps", {
   method: "get",
-  pathTemplate: "/api/v1/apps/{appId}/scripts/{version}",
-  pathVariables: { appId, version },
+  pathTemplate: "/api/v1/apps/{appId}/scripts/{id}",
+  pathVariables: { appId, id },
   options
 });
-var patchAppScript = async (appId, version, body, options) => invokeFetch("apps", {
+var patchAppScript = async (appId, id, body, options) => invokeFetch("apps", {
   method: "patch",
-  pathTemplate: "/api/v1/apps/{appId}/scripts/{version}",
-  pathVariables: { appId, version },
+  pathTemplate: "/api/v1/apps/{appId}/scripts/{id}",
+  pathVariables: { appId, id },
   body,
   contentType: "application/json",
   options

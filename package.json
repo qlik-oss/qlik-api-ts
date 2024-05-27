@@ -41,6 +41,7 @@
     "./quotas": "./quotas.js",
     "./reload-tasks": "./reload-tasks.js",
     "./reloads": "./reloads.js",
+    "./reports": "./reports.js",
     "./roles": "./roles.js",
     "./spaces": "./spaces.js",
     "./temp-contents": "./temp-contents.js",
