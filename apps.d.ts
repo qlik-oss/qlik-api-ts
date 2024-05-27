@@ -1883,7 +1883,7 @@ type GetAppReportFilterHttpError = {
 };
 /**
  * Retrieves the script history for an app.
- * Returns information about the saved versions of the script.
+ * Returns information about the saved versions of the script in a list sorted with latest first.
  *
  * @param appId Identifier of the app.
  * @param query an object with query parameters
@@ -1932,13 +1932,13 @@ type UpdateAppScriptHttpError = {
 };
 /**
  * Deletes a specific version of the script for an app.
- * Fails if the version to delete is the current version.
+ * Fails if the supplied id is the current version.
  *
  * @param appId Identifier of the app.
- * @param version Identifier of the script version
+ * @param id Identifier of the script version
  * @throws DeleteAppScriptHttpError
  */
-declare const deleteAppScript: (appId: string, version: string, options?: ApiCallOptions) => Promise<DeleteAppScriptHttpResponse>;
+declare const deleteAppScript: (appId: string, id: string, options?: ApiCallOptions) => Promise<DeleteAppScriptHttpResponse>;
 type DeleteAppScriptHttpResponse = {
     data: void;
     headers: Headers;
@@ -1954,10 +1954,10 @@ type DeleteAppScriptHttpError = {
  * Returns the script text.
  *
  * @param appId Identifier of the app.
- * @param version Identifier of the script version, or 'current' for retrieving the current version.
+ * @param id Identifier of the script version, or 'current' for retrieving the current version.
  * @throws GetAppScriptHttpError
  */
-declare const getAppScript: (appId: string, version: string, options?: ApiCallOptions) => Promise<GetAppScriptHttpResponse>;
+declare const getAppScript: (appId: string, id: string, options?: ApiCallOptions) => Promise<GetAppScriptHttpResponse>;
 type GetAppScriptHttpResponse = {
     data: ScriptVersion;
     headers: Headers;
@@ -1972,11 +1972,11 @@ type GetAppScriptHttpError = {
  * Updates a specific version of the script for an app.
  *
  * @param appId Identifier of the app.
- * @param version Identifier of the script version.
+ * @param id Identifier of the script version.
  * @param body an object with the body content
  * @throws PatchAppScriptHttpError
  */
-declare const patchAppScript: (appId: string, version: string, body: NxPatch, options?: ApiCallOptions) => Promise<PatchAppScriptHttpResponse>;
+declare const patchAppScript: (appId: string, id: string, body: NxPatch[], options?: ApiCallOptions) => Promise<PatchAppScriptHttpResponse>;
 type PatchAppScriptHttpResponse = {
     data: void;
     headers: Headers;
@@ -2359,7 +2359,7 @@ interface AppsAPI {
     getAppReportFilter: typeof getAppReportFilter;
     /**
      * Retrieves the script history for an app.
-     * Returns information about the saved versions of the script.
+     * Returns information about the saved versions of the script in a list sorted with latest first.
      *
      * @param appId Identifier of the app.
      * @param query an object with query parameters
@@ -2376,10 +2376,10 @@ interface AppsAPI {
     updateAppScript: typeof updateAppScript;
     /**
      * Deletes a specific version of the script for an app.
-     * Fails if the version to delete is the current version.
+     * Fails if the supplied id is the current version.
      *
      * @param appId Identifier of the app.
-     * @param version Identifier of the script version
+     * @param id Identifier of the script version
      * @throws DeleteAppScriptHttpError
      */
     deleteAppScript: typeof deleteAppScript;
@@ -2388,7 +2388,7 @@ interface AppsAPI {
      * Returns the script text.
      *
      * @param appId Identifier of the app.
-     * @param version Identifier of the script version, or 'current' for retrieving the current version.
+     * @param id Identifier of the script version, or 'current' for retrieving the current version.
      * @throws GetAppScriptHttpError
      */
     getAppScript: typeof getAppScript;
@@ -2396,7 +2396,7 @@ interface AppsAPI {
      * Updates a specific version of the script for an app.
      *
      * @param appId Identifier of the app.
-     * @param version Identifier of the script version.
+     * @param id Identifier of the script version.
      * @param body an object with the body content
      * @throws PatchAppScriptHttpError
      */

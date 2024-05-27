@@ -10371,9 +10371,6 @@ async function createEnigmaSession({
 }) {
   const locationUrl = toValidWebsocketLocationUrl(hostConfig);
   const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
-  if (!identity && withoutData) {
-    identity = "no_data";
-  }
   const identityPart = identity ? `/identity/${identity}` : "";
   const reloadEnginePart = useReloadEngine ? "&workloadType=interactive-reload" : "";
   let url = `${locationUrl}/app/${appId}${identityPart}?reloadUri=${reloadUri}${reloadEnginePart}`.replace(

@@ -20,6 +20,7 @@ import { LicensesAPI } from './licenses.js';
 import { QuotasAPI } from './quotas.js';
 import { ReloadTasksAPI } from './reload-tasks.js';
 import { ReloadsAPI } from './reloads.js';
+import { ReportsAPI } from './reports.js';
 import { RolesAPI } from './roles.js';
 import { SpacesAPI } from './spaces.js';
 import { TempContentsAPI } from './temp-contents.js';
@@ -61,6 +62,7 @@ declare const qix: {
 declare const quotas: QuotasAPI;
 declare const reloadTasks: ReloadTasksAPI;
 declare const reloads: ReloadsAPI;
+declare const reports: ReportsAPI;
 declare const roles: RolesAPI;
 declare const spaces: SpacesAPI;
 declare const tempContents: TempContentsAPI;
@@ -116,6 +118,8 @@ interface QlikAPI {
     reloadTasks: typeof reloadTasks;
     /** Functions for the reloads api */
     reloads: typeof reloads;
+    /** Functions for the reports api */
+    reports: typeof reports;
     /** Functions for the roles api */
     roles: typeof roles;
     /** Functions for the spaces api */
@@ -140,4 +144,4 @@ interface QlikAPI {
 /** Javascript/Typescript bindings to Qlik's platform API's */
 declare const api: QlikAPI;
 
-export { type QlikAPI, apiKeys, apps, audits, auth, automations, brands, collections, cspOrigins, dataAssets, dataConnections, dataCredentials, dataFiles, api as default, extensions, glossaries, groups, identityProviders, items, licenses, qix, quotas, reloadTasks, reloads, roles, spaces, tempContents, tenants, themes, transports, users, webIntegrations, webNotifications, webhooks };
+export { type QlikAPI, apiKeys, apps, audits, auth, automations, brands, collections, cspOrigins, dataAssets, dataConnections, dataCredentials, dataFiles, api as default, extensions, glossaries, groups, identityProviders, items, licenses, qix, quotas, reloadTasks, reloads, reports, roles, spaces, tempContents, tenants, themes, transports, users, webIntegrations, webNotifications, webhooks };
