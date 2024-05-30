@@ -5,7 +5,6 @@
 - [Typed API calls](#typed-api-calls)
 - [Caching](#caching)
 - [Paging](#paging)
-- [Request/response interceptors](#interceptors)
 
 ## Typed API Calls
 
@@ -78,52 +77,5 @@ try {
 ## Paging
 
 Many "list" APIs return links to the next and previous page in the list GET response body. If the API follows the conventions and declares this in the OpenAPI spec next and prev functions will be available in the API response type. Note that the next and prev functions are only defined when there actually is a next and prev page.
-
-## Interceptors
-
-Consumer of `@qlik/api` can inject an interceptor in every api method. There are two interception points, before request and after response. The request interceptor can also be an async function.
-
-**NOTE:** to add headers to the request, use a regular object instead of `new Headers()`. It causes a loss of all the original headers. See the example below.
-
-```ts
-import { getItems, interceptors } from "@qlik/api/items";
-
-// intercept requests
-interceptors.getItems.request.use((url, request) => {
-  const headers = {
-    ...request.headers,
-    "x-qlik-custom-header": "value",
-  };
-
-  // modify fetch request
-  request.headers = headers;
-
-  return request;
-});
-
-// intercept responses
-interceptors.getItems.response.use((response) => {
-  response.data.YOU_ARE_INTERCEPTED = true;
-  return response;
-});
-
-try {
-  const { status, data: items } = await getItems();
-
-  if (items.YOU_ARE_INTERCEPTED) {
-    // ok!
-  }
-}
-```
-
-when adding an interceptor you get an interceptor ID that can be used to eject the interceptor later.
-
-```ts
-const interceptorId = interceptors.getItems.response.use(...);
-// now interceptor will execute on response
-
-interceptors.getItems.response.eject(interceptorId);
-// now interceptor will NOT execute on response
-```
 
 ◁ [Back to overview](../README.md)
