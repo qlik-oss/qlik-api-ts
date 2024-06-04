@@ -10369,31 +10369,52 @@ async function createEnigmaSession({
   withoutData = false,
   useReloadEngine = false
 }) {
-  const locationUrl = toValidWebsocketLocationUrl(hostConfig);
-  const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
-  const identityPart = identity ? `/identity/${identity}` : "";
-  const reloadEnginePart = useReloadEngine ? "&workloadType=interactive-reload" : "";
-  let url = `${locationUrl}/app/${appId}${identityPart}?reloadUri=${reloadUri}${reloadEnginePart}`.replace(
-    /^http/,
-    "ws"
-  );
-  const isNodeEnvironment = typeof window === "undefined";
   let createSocketMethod;
-  if (isNodeEnvironment) {
-    const { headers, queryParams } = await getRestCallAuthParams({ hostConfig, method: "POST" });
-    const WS = (await import("ws")).default;
-    Object.entries(queryParams).forEach(([key, value]) => {
-      url = `${url}&${key}=${value}`;
-    });
-    createSocketMethod = (socketUrl) => new WS(socketUrl, void 0, {
-      headers
-    });
-  } else {
-    const { queryParams } = await getWebSocketAuthParams({ hostConfig });
-    Object.entries(queryParams).forEach(([key, value]) => {
-      url = `${url}&${key}=${value}`;
-    });
-    createSocketMethod = (socketUrl) => new WebSocket(socketUrl);
+  let url;
+  const locationUrl = toValidWebsocketLocationUrl(hostConfig);
+  const WS = (await import("ws")).default;
+  const isNodeEnvironment = typeof window === "undefined";
+  if (hostConfig.pfx == null) {
+    const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
+    const identityPart = identity ? `/identity/${identity}` : "";
+    const reloadEnginePart = useReloadEngine ? "&workloadType=interactive-reload" : "";
+    url = `${locationUrl}/app/${appId}${identityPart}?reloadUri=${reloadUri}${reloadEnginePart}`.replace(
+        /^http/,
+        "ws"
+    );
+    if (isNodeEnvironment) {
+      const {headers, queryParams} = await getRestCallAuthParams({hostConfig, method: "POST"});
+      Object.entries(queryParams).forEach(([key, value]) => {
+        url = `${url}&${key}=${value}`;
+      });
+      createSocketMethod = (socketUrl) => new WS(socketUrl, void 0, {
+        headers
+      });
+    } else {
+      const {queryParams} = await getWebSocketAuthParams({hostConfig});
+      Object.entries(queryParams).forEach(([key, value]) => {
+        url = `${url}&${key}=${value}`;
+      });
+      createSocketMethod = (socketUrl) => new WebSocket(socketUrl);
+    }
+  } else if (isNodeEnvironment){
+      const locationUrl = toValidWebsocketLocationUrl(hostConfig);
+      const pfx = hostConfig.pfx;
+      const passphrase = hostConfig.passphrase;
+      const {headers, queryParams} = await getRestCallAuthParams({hostConfig});
+      url = `${locationUrl}/app/engineData/${appId}`;
+      Object.entries(queryParams).forEach(([key, value], index) => {
+          if (index === 0) {
+              url = `${url}?${key}=${value}`;
+          } else {
+              url = `${url}&${key}=${value}`;
+          }
+      });
+      createSocketMethod = (socketUrl) => new WS(socketUrl, void 0, {
+          headers,
+          pfx,
+          passphrase,
+      });
   }
   return enigma.create({
     schema: engine_api_default,
