@@ -27,7 +27,7 @@ type AtlanEntity = {
 type AtlanEntityAttributes = {
     abbreviation?: string;
     displayText?: string;
-    examples?: string[];
+    examples?: unknown;
     guid?: string;
     name?: string;
     parentCategory?: string;
@@ -373,7 +373,7 @@ type TermCreateLinksTo = {
     resourceType: "app" | "dataset";
     subResourceId?: string;
     subResourceName?: string;
-    subResourceType?: "master_dimension" | "master_measure";
+    subResourceType?: "master_dimension" | "master_measure" | "field";
     type?: "definition" | "related";
 };
 /**
@@ -394,7 +394,7 @@ type TermLinksTo = {
     /** Different formats based on subresource type. Could be e.g. OID or UUID. */
     subResourceId?: string;
     subResourceName?: string;
-    subResourceType?: "master_dimension" | "master_measure";
+    subResourceType?: "master_dimension" | "master_measure" | "field";
     /** Describes reason for item status during batch operation. E.g. why an error occurs during creation. */
     title?: string;
     type?: "definition" | "related";

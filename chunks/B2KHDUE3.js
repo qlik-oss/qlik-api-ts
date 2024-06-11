@@ -101,7 +101,7 @@ function listenForWindowsAuthenticationInformation(session) {
   return authSuggestedInWebsocket;
 }
 async function createAndSetupEnigmaSession(props, canRetry) {
-  const { createEnigmaSession } = await import("./6UGE6PR7.js");
+  const { createEnigmaSession } = await import("./AOO7YWBX.js");
   const session = await createEnigmaSession(props);
   setupSessionListeners(session, props);
   let global;

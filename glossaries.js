@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/QXDBGF7B.js";
-import "./chunks/7C6WMELW.js";
+} from "./chunks/7OFKSIFV.js";
+import "./chunks/Q4YZPSU3.js";
 import "./chunks/2ZQ3ZX7F.js";
 
 // src/public/rest/glossaries.ts
