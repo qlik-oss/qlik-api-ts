@@ -9569,8 +9569,7 @@ var mixin4 = {
     getOrCreateSessionObject(props) {
       const app = this;
       const id = props.qInfo?.qId;
-      if (!id)
-        throw new Error("Invalid list definition. No qId defined");
+      if (!id) throw new Error("Invalid list definition. No qId defined");
       if (!app._listCache[id]) {
         if (app.session.sessionState === "SESSION_ATTACHED") {
           app._listCache[id] = app.getObject(id).catch(() => app.createSessionObject(props));
@@ -9596,8 +9595,7 @@ var mixin4 = {
         outKey = outKey.replace(/Def$/g, "");
       }
       const id = listDef.qInfo?.qId;
-      if (!id)
-        throw new Error("Invalid list definition. No qId defined");
+      if (!id) throw new Error("Invalid list definition. No qId defined");
       if (!app._listCache[id]) {
         app.getOrCreateSessionObject(listDef).then((obj) => {
           const getLayout = obj.getLayout.bind(obj);

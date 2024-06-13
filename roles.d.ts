@@ -69,7 +69,7 @@ type Role = {
     /** Descriptive text for the role. */
     description: string;
     /** @deprecated
-     * DEPRECATED. does not work. */
+     * DEPRECATED. Use userEntitlementType instead for impact of roles on user entitlements with a capacity-based subscription. */
     readonly fullUser?: boolean;
     /** The unique identifier for the role. */
     readonly id: string;
@@ -91,10 +91,10 @@ type Role = {
     /** The tenant unique identifier associated with the given Role. */
     tenantId: string;
     /** The type of role. */
-    type: "default";
-    /** Id of user that last updated`` role */
+    type: "default" | "custom";
+    /** Id of user that last updated this role */
     readonly updatedBy?: string;
-    /** Indicate whether this role will trigger promotion of a user from a basic to a full user on tenants with a capacity-based subscription. Does not apply to tenants with a user-based subscription. */
+    /** Indicate whether this role will trigger promotion of a user from a basic to a full user on tenants with a capacity-based subscription. Does not apply to tenants with a user-based subscription. Returns fullUser if it will trigger promotion. */
     readonly userEntitlementType?: string;
 };
 /**
