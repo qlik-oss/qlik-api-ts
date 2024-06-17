@@ -964,7 +964,7 @@ type UpdateOwner = {
 type UpdateSpace = {
     spaceId?: string;
 };
-type UsageEnum = "ANALYTICS" | "DATA_PREPARATION";
+type UsageEnum = "ANALYTICS" | "DATA_PREPARATION" | "DATAFLOW_PREP";
 type UserPrivileges = "can_create_app" | "can_import_app" | "can_create_session_app";
 type Classification = {
     absoluteDiff?: number;
