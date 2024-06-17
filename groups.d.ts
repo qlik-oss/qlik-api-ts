@@ -12,7 +12,7 @@ type AssignedRoles = {
     /** The role name */
     readonly name: string;
     /** The type of role */
-    readonly type: "default";
+    readonly type: "default" | "custom";
 }[];
 /**
  * An array of role reference identifiers.
