@@ -1,7 +1,7 @@
 import './global.types-Xt6XzwlN.js';
 import { H as HostConfig } from './auth-types-Bqw3vbLs.js';
 
-declare const QIX_SCHEMA_VERSION = "12.2089.0";
+declare const QIX_SCHEMA_VERSION = "12.2107.0";
 type AlfaNumString = {
     /**
      * Calculated value.
@@ -939,6 +939,7 @@ type DocListEntry = {
      * One of:
      * * ANALYTICS
      * * DATA_PREPARATION
+     * * DATAFLOW_PREP
      */
     qUsage?: UsageEnum;
 };
@@ -2889,6 +2890,7 @@ type NxAppLayout = {
      * One of:
      * * ANALYTICS
      * * DATA_PREPARATION
+     * * DATAFLOW_PREP
      */
     qUsage?: UsageEnum;
 };
@@ -2941,6 +2943,7 @@ type NxAppProperties = {
      * One of:
      * * ANALYTICS
      * * DATA_PREPARATION
+     * * DATAFLOW_PREP
      */
     qUsage?: UsageEnum;
 };
