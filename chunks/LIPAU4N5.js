@@ -1,10 +1,14 @@
 import {
   generateRandomString,
+  getCsrfToken,
   getRestCallAuthParams,
   getWebSocketAuthParams,
   toValidWebsocketLocationUrl
-} from "./KSB5ROQL.js";
-import "./2ZQ3ZX7F.js";
+} from "./RN5AUIPP.js";
+import {
+  isBrowser,
+  isNode
+} from "./2ZQ3ZX7F.js";
 
 // src/qix/session/enigma-session.ts
 import enigma from "enigma.js";
@@ -10364,18 +10368,25 @@ async function createEnigmaSession({
   appId,
   identity,
   hostConfig,
-  withoutData = false,
   useReloadEngine = false
 }) {
   const locationUrl = toValidWebsocketLocationUrl(hostConfig);
   const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
   const identityPart = identity ? `/identity/${identity}` : "";
   const reloadEnginePart = useReloadEngine ? "&workloadType=interactive-reload" : "";
-  let url = `${locationUrl}/app/${appId}${identityPart}?reloadUri=${reloadUri}${reloadEnginePart}`.replace(
+  let csrfToken = "";
+  if (isBrowser() && (!hostConfig || hostConfig.authType === "cookie" || hostConfig.authType === "windowscookie")) {
+    try {
+      csrfToken = await getCsrfToken(hostConfig);
+    } catch {
+    }
+  }
+  const csrfPart = csrfToken ? `&qlik-csrf-token=${csrfToken}` : "";
+  let url = `${locationUrl}/app/${appId}${identityPart}?reloadUri=${reloadUri}${reloadEnginePart}${csrfPart}`.replace(
     /^http/,
     "ws"
   );
-  const isNodeEnvironment = typeof window === "undefined";
+  const isNodeEnvironment = isNode();
   let createSocketMethod;
   if (isNodeEnvironment) {
     const { headers, queryParams } = await getRestCallAuthParams({ hostConfig, method: "POST" });

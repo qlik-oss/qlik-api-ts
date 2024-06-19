@@ -1,14 +1,14 @@
 import {
   qix_default
-} from "./chunks/GC6TSJ3N.js";
+} from "./chunks/NWOESCMR.js";
 import {
   auth_default
-} from "./chunks/A6PUXM6W.js";
+} from "./chunks/IOUD76RB.js";
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/ZP6EOOXB.js";
-import "./chunks/XUWECIND.js";
+} from "./chunks/5V4BMSM2.js";
+import "./chunks/5T2SBCJG.js";
 import "./chunks/2ZQ3ZX7F.js";
 
 // src/public/public-runtime-api-generator/public-runtime-api-generator.ts
@@ -222,7 +222,7 @@ var apps = apiDefToApi("apps", {
           "report-filters": {
             "": ["getAppReportFilters:GQ:", "createAppReportFilter:PBJ:"],
             actions: { count: ["countAppReportFilters:GQ:"] },
-            "{id}": ["deleteAppReportFilter:D:", "getAppReportFilter:G:"]
+            "{id}": ["deleteAppReportFilter:D:", "getAppReportFilter:G:", "patchAppReportFilter:ABJ:"]
           },
           scripts: {
             "": ["getAppScriptHistory:GQ:", "updateAppScript:PBJ:"],

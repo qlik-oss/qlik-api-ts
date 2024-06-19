@@ -397,10 +397,16 @@ function clearCsrfToken(hostConfig) {
 }
 async function getCsrfToken(hostConfig, noCache) {
   const locationUrl = toValidLocationUrl(hostConfig);
+  let pathTemplate;
+  if (await isWindows(hostConfig)) {
+    pathTemplate = "/qps/csrftoken";
+  } else {
+    pathTemplate = "/api/v1/csrf-token";
+  }
   const fetchCsrfToken = async () => {
     const res = await invokeFetch("csrf-token", {
       method: "get",
-      pathTemplate: "/api/v1/csrf-token",
+      pathTemplate,
       options: {
         hostConfig,
         noCache: true
@@ -1786,6 +1792,7 @@ export {
   clearApiCache,
   parseFetchResponse,
   invoke_fetch_default,
+  getCsrfToken,
   generateRandomString,
   auth_default
 };

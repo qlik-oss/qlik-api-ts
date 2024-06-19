@@ -313,14 +313,13 @@ type ReportRequest = {
      *   - sense-excel-template-1.0 requires senseExcelTemplate to be set
      *   - sense-image-1.0 requires senseImageTemplate to be set
      *   - sense-sheet-1.0 requires senseSheetTemplate to be set
-     *   - cycle-1.0 requires cycleTemplate to be set
      *
      * Each template type supports specific output types:
      *   - composition-1.0 supports pdfcomposition and pptxComposition output type
      *   - sense-excel-template-1.0 supports excel and pdf output type
      *   - sense-image-1.0 supports pdf, pptx and png output types
      *   - sense-sheet-1.0 supports pdf, pptx output type */
-    type: "composition-1.0" | "sense-image-1.0" | "sense-data-1.0" | "sense-sheet-1.0" | "sense-story-1.0" | "qv-data-1.0" | "qv-data-2.0" | "sense-excel-template-1.0" | "cycle-template-1.0";
+    type: "composition-1.0" | "sense-image-1.0" | "sense-data-1.0" | "sense-sheet-1.0" | "sense-story-1.0" | "qv-data-1.0" | "qv-data-2.0" | "sense-excel-template-1.0";
 };
 type ReportStatus = {
     /** Present when status is failed. */

@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/ZP6EOOXB.js";
-import "./chunks/XUWECIND.js";
+} from "./chunks/5V4BMSM2.js";
+import "./chunks/5T2SBCJG.js";
 import "./chunks/2ZQ3ZX7F.js";
 
 // src/public/rest/apps.ts
@@ -237,6 +237,14 @@ var getAppReportFilter = async (appId, id, options) => invokeFetch("apps", {
   pathVariables: { appId, id },
   options
 });
+var patchAppReportFilter = async (appId, id, body, options) => invokeFetch("apps", {
+  method: "patch",
+  pathTemplate: "/api/v1/apps/{appId}/report-filters/{id}",
+  pathVariables: { appId, id },
+  body,
+  contentType: "application/json",
+  options
+});
 var getAppScriptHistory = async (appId, query, options) => invokeFetch("apps", {
   method: "get",
   pathTemplate: "/api/v1/apps/{appId}/scripts",
@@ -337,6 +345,7 @@ var appsExport = {
   countAppReportFilters,
   deleteAppReportFilter,
   getAppReportFilter,
+  patchAppReportFilter,
   getAppScriptHistory,
   updateAppScript,
   deleteAppScript,
@@ -385,6 +394,7 @@ export {
   getAppsPrivileges,
   importApp,
   moveAppToSpace,
+  patchAppReportFilter,
   patchAppScript,
   publishApp,
   queueAppEvaluation,
