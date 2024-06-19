@@ -1,8 +1,8 @@
 import {
   openAppSession,
   qix_default
-} from "./chunks/GC6TSJ3N.js";
-import "./chunks/XUWECIND.js";
+} from "./chunks/NWOESCMR.js";
+import "./chunks/5T2SBCJG.js";
 export {
   qix_default as default,
   openAppSession

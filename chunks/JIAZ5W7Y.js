@@ -18,7 +18,7 @@ import {
   toValidEnigmaLocationUrl,
   toValidLocationUrl,
   toValidWebsocketLocationUrl
-} from "./KSB5ROQL.js";
+} from "./RN5AUIPP.js";
 import "./2ZQ3ZX7F.js";
 export {
   AuthorizationError,
