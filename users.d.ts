@@ -5,7 +5,7 @@ import './auth-types-Bqw3vbLs.js';
  * An array of group references.
  */
 type AssignedGroups = {
-    /** An array of role references. */
+    /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */
     assignedRoles?: AssignedRoles;
     /** The unique group identitier */
     id: string;
@@ -13,7 +13,7 @@ type AssignedGroups = {
     readonly name: string;
 }[];
 /**
- * An array of role references.
+ * An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles.
  */
 type AssignedRoles = {
     /** The unique role identitier */
@@ -169,7 +169,7 @@ type ResultItem = {
 type User = {
     /** An array of group references. */
     assignedGroups?: AssignedGroups;
-    /** An array of role references. */
+    /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */
     assignedRoles?: AssignedRoles;
     /** An array of scopes assigned to user */
     readonly assignedScopes?: AssignedScopes;

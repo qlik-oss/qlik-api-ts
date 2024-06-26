@@ -299,14 +299,16 @@ type ReportRequest = {
     /** Define the request metadata. It includes priority, deadline and future settings on execution policy of the request. */
     meta?: Meta;
     output: OutputItem;
-    /** Used to export an excel template. */
-    senseExcelTemplate?: SenseExcelTemplate;
+    /** Used to produce reports from a template file. */
+    senseExcelTemplate?: SenseFileTemplate;
     /** Used to export a single visualization as pdf, pptx or png. */
     senseImageTemplate?: SenseImageTemplate;
+    /** Used to produce reports from a template file. */
+    sensePixelPerfectTemplate?: SenseFileTemplate;
     /** Used to export a sheet as pdf or pptx. */
     senseSheetTemplate?: SenseSheetTemplate;
     /** Template type and version using semantic versioning. It must have the following name convention: dashed-separated-template-name-MAJOR.MINOR.
-     * Please note that sense-story-x.0, sense-data-x.0 and qv-data-x.0 are only for internal use.
+     * Please note that sense-pixel-perfect-template-1.0, sense-story-x.0, sense-data-x.0 and qv-data-x.0 are only for internal use.
      *
      * Each type requires a specific template to be provided:
      *   - composition-1.0 requires compositionTemplates to be set
@@ -319,7 +321,7 @@ type ReportRequest = {
      *   - sense-excel-template-1.0 supports excel and pdf output type
      *   - sense-image-1.0 supports pdf, pptx and png output types
      *   - sense-sheet-1.0 supports pdf, pptx output type */
-    type: "composition-1.0" | "sense-image-1.0" | "sense-data-1.0" | "sense-sheet-1.0" | "sense-story-1.0" | "qv-data-1.0" | "qv-data-2.0" | "sense-excel-template-1.0";
+    type: "composition-1.0" | "sense-image-1.0" | "sense-data-1.0" | "sense-sheet-1.0" | "sense-story-1.0" | "qv-data-1.0" | "qv-data-2.0" | "sense-excel-template-1.0" | "sense-pixel-perfect-template-1.0";
 };
 type ReportStatus = {
     /** Present when status is failed. */
@@ -377,9 +379,9 @@ type SelectionFilter = {
 };
 type SelectionStrategy = "failOnErrors" | "ignoreErrorsReturnDetails" | "ignoreErrorsNoDetails";
 /**
- * Used to export an excel template.
+ * Used to produce reports from a template file.
  */
-type SenseExcelTemplate = {
+type SenseFileTemplate = {
     /** A JSON object that is passed as-is to the mashup page while rendering, this will be applied to all charts within the sheet. It includes properties of the whole sheet such as theme, gradient etc. Currently only the "theme" property is supported. */
     jsOpts?: unknown;
     /** Choose the reloadTimestamp constraint to apply. An empty value leads to the default noCheck. */
@@ -541,4 +543,4 @@ interface ReportsAPI {
  */
 declare const reportsExport: ReportsAPI;
 
-export { type AppError, type AppErrors, type CallBackAction, type ChainableSelection, type ChainableSelectionType, type ComposableTemplate, type CreateReportHttpError, type CreateReportHttpResponse, type Definitions, type DocProperties, type Error, type ExcelOutput, type ExportError, type ExportErrors, type Float64, type GetReportStatusHttpError, type GetReportStatusHttpResponse, type HttpRequest, type ImageOutput, type Meta, type MetaExportError, type NxPatch, type OutputItem, type PdfCompositionOutput, type PdfOutput, type PptxCompositionOutput, type PptxOutput, type QFieldValue, type QSelection, type Reason, type ReloadTimestampMatchType, type ReportRequest, type ReportStatus, type ReportsAPI, type Result, type SelectionChain, type SelectionError, type SelectionErrors, type SelectionFilter, type SelectionStrategy, type SenseExcelTemplate, type SenseImageTemplate, type SensePersistentBookmark, type SenseSheetTemplate, type SenseTemporaryBookmarkV2, type Sheet, type TemplateLocation, type Visualization, clearCache, createReport, reportsExport as default, getReportStatus };
+export { type AppError, type AppErrors, type CallBackAction, type ChainableSelection, type ChainableSelectionType, type ComposableTemplate, type CreateReportHttpError, type CreateReportHttpResponse, type Definitions, type DocProperties, type Error, type ExcelOutput, type ExportError, type ExportErrors, type Float64, type GetReportStatusHttpError, type GetReportStatusHttpResponse, type HttpRequest, type ImageOutput, type Meta, type MetaExportError, type NxPatch, type OutputItem, type PdfCompositionOutput, type PdfOutput, type PptxCompositionOutput, type PptxOutput, type QFieldValue, type QSelection, type Reason, type ReloadTimestampMatchType, type ReportRequest, type ReportStatus, type ReportsAPI, type Result, type SelectionChain, type SelectionError, type SelectionErrors, type SelectionFilter, type SelectionStrategy, type SenseFileTemplate, type SenseImageTemplate, type SensePersistentBookmark, type SenseSheetTemplate, type SenseTemporaryBookmarkV2, type Sheet, type TemplateLocation, type Visualization, clearCache, createReport, reportsExport as default, getReportStatus };
