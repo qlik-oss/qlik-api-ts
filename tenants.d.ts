@@ -45,6 +45,8 @@ type Tenant = {
     enableAnalyticCreation?: boolean;
     /** List of case insensitive hostnames that are mapped to the tenant. The first record maps to the display name and the subsequent entries are aliases. */
     hostnames?: string[];
+    /** The unique tenant identifier. */
+    readonly id: string;
     /** The timestamp for when the tenant record was last updated (1970-01-01T00:00:00.001Z for static tenants). */
     readonly lastUpdated?: string;
     readonly links?: {

@@ -52,23 +52,27 @@ type AssignmentsActionsDeleteResponse = {
 };
 type AssignmentsActionsUpdateRequest = {
     update: {
+        /** The current user subject, in case that should be patched. */
+        sourceSubject?: string;
         /** Current assignment type. */
-        sourceType: string;
-        /** User subject */
+        sourceType?: string;
+        /** User subject, the current or the desired after the patch. */
         subject: string;
         /** Target assignment type. */
-        type: string;
+        type?: string;
     }[];
 };
 type AssignmentsActionsUpdateResponse = {
     data: {
         /** Error code */
         code?: string;
+        /** Current subject. */
+        sourceSubject?: string;
         /** Current allotment type. */
         sourceType?: string;
         /** Response status */
         status: number;
-        /** Subject */
+        /** Target subject. */
         subject?: string;
         /** Error title */
         title?: string;

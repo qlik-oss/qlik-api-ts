@@ -2,7 +2,7 @@ import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
 import './auth-types-Bqw3vbLs.js';
 
 /**
- * An array of role references.
+ * An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles.
  */
 type AssignedRoles = {
     /** The unique role identitier */
@@ -70,12 +70,8 @@ type Filter = {
  * represents a Group document
  */
 type Group = {
-    assignedRoles?: {
-        id: string;
-        readonly level: "admin" | "user";
-        readonly name: string;
-        readonly type: "default";
-    }[];
+    /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */
+    assignedRoles?: AssignedRoles;
     /** The timestamp for when the group record was created. */
     createdAt: string;
     /** The unique identifier for the group */
@@ -136,7 +132,7 @@ type GroupSettings = {
     syncIdpGroups: boolean;
     systemGroups?: {
         "000000000000000000000001"?: {
-            /** An array of role references. */
+            /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */
             assignedRoles?: AssignedRoles;
             /** The timestamp for when the Everyone group was created. */
             createdAt?: string;
