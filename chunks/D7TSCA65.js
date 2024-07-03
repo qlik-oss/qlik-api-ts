@@ -974,7 +974,7 @@ async function handlePotentialAuthenticationErrorAndRetry(hostConfig, fn) {
       canRetry: true
     });
     if (retry) {
-      return await fn();
+      return fn();
     }
     throw err;
   }
@@ -1605,7 +1605,7 @@ async function interceptAuthenticationErrors(hostConfig, resultPromise, performR
     const err = error;
     if (err.status === 401 || err.status === 403 || (err.status === 301 || err.status === 302) && await isWindows(hostConfig)) {
       if (globalThis.loggingOut) {
-        return await neverResolvingPromise();
+        return neverResolvingPromise();
       }
       const { retry, preventDefault } = await handleAuthenticationError({
         hostConfig,
@@ -1615,7 +1615,7 @@ async function interceptAuthenticationErrors(hostConfig, resultPromise, performR
         canRetry: !!performRetry
       });
       if (retry && performRetry) {
-        return await performRetry();
+        return performRetry();
       }
       if (preventDefault) {
         return neverResolvingPromise();
@@ -1634,9 +1634,13 @@ function getServiceOverrideHeaderFromLocalStorage() {
   }
   return { "X-Qlik-Overrides": header };
 }
-function toDownloadableBlob(blob) {
+function toDownloadableBlob(blob, name) {
   const result2 = blob;
-  result2.download = (filename) => download(blob, filename);
+  if (name) {
+    result2.download = (filename = name) => download(blob, filename);
+  } else {
+    result2.download = (filename) => download(blob, filename);
+  }
   return result2;
 }
 async function download(blob, filename) {
@@ -1722,25 +1726,39 @@ function clearApiCache(api) {
 async function parseFetchResponse(fetchResponse, url) {
   let resultData;
   const contentType = fetchResponse.headers.get("content-type")?.split(";")[0];
-  switch (contentType) {
-    case "image/png":
-    case "image/jpeg":
-    case "image/x-icon":
-    case "application/offset+octet-stream":
-    case "application/octet-stream":
-    case "application/zip":
-      resultData = toDownloadableBlob(await fetchResponse.blob());
-      break;
-    case "text/event-stream":
-      resultData = fetchResponse.body;
-      break;
-    default:
-      try {
-        resultData = await fetchResponse.text();
-        resultData = JSON.parse(resultData);
-      } catch {
+  const contentDisposition = fetchResponse.headers.get("content-disposition")?.split(";");
+  if (contentDisposition && contentDisposition[0] === "attachment") {
+    let filename = "";
+    for (let i = 1; i < contentDisposition.length; i++) {
+      const attr = contentDisposition[i].trim();
+      if (attr.indexOf("filename") === 0) {
+        const start = attr.indexOf('"');
+        const end = attr.lastIndexOf('"');
+        filename = attr.slice(start + 1, end);
       }
-      break;
+    }
+    resultData = toDownloadableBlob(await fetchResponse.blob(), filename);
+  } else {
+    switch (contentType) {
+      case "image/png":
+      case "image/jpeg":
+      case "image/x-icon":
+      case "application/offset+octet-stream":
+      case "application/octet-stream":
+      case "application/zip":
+        resultData = toDownloadableBlob(await fetchResponse.blob());
+        break;
+      case "text/event-stream":
+        resultData = fetchResponse.body;
+        break;
+      default:
+        try {
+          resultData = await fetchResponse.text();
+          resultData = JSON.parse(resultData);
+        } catch {
+        }
+        break;
+    }
   }
   const { status, statusText, headers } = fetchResponse;
   const errorMsg = `request to '${url}' failed with status ${status} ${statusText}.`;
