@@ -393,6 +393,8 @@ type TermLinksTo = {
     status?: number;
     /** Different formats based on subresource type. Could be e.g. OID or UUID. */
     subResourceId?: string;
+    /** Populated and true if no matching subresource is found on parent resource. E.g. if a dataset field no longer exist but a link to that field exists. */
+    subResourceInvalid?: boolean;
     subResourceName?: string;
     subResourceType?: "master_dimension" | "master_measure" | "field";
     /** Describes reason for item status during batch operation. E.g. why an error occurs during creation. */

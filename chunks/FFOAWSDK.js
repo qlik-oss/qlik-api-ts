@@ -4,7 +4,7 @@ import {
   getRestCallAuthParams,
   getWebSocketAuthParams,
   toValidWebsocketLocationUrl
-} from "./RN5AUIPP.js";
+} from "./D7TSCA65.js";
 import {
   isBrowser,
   isNode
@@ -9748,7 +9748,6 @@ var mixin6 = {
     createBookmark(_createBookmark, props) {
       return _createBookmark(
         merge2(
-          {},
           {
             qInfo: {
               qType: "bookmark"
@@ -9766,7 +9765,6 @@ var mixin6 = {
     createBookmarkEx(_createBookmarkEx, props, patchObjs) {
       return _createBookmarkEx(
         merge2(
-          true,
           {
             qInfo: {
               qType: "bookmark"

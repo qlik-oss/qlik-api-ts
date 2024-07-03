@@ -189,9 +189,10 @@ type OutputItem = {
      *
      * Each template type supports specific output types:
      *    - composition-1.0 supports only pdfcomposition and pptxcomposition output types
-     *    - excel-1.0 supports only excel and pdf output type
+     *    - sense-excel-template-1.0 supports only excel and pdf output type
      *    - sense-image-1.0 supports pdf, pptx and image output types
      *    - sense-sheet-1.0 supports pdf and pptx output type
+     *    - sense-data-1.0 supports xlsx output type
      *
      * Each output type requires a specific output to be provided:
      *    - excel requires excelOutput to be set
@@ -200,7 +201,8 @@ type OutputItem = {
      *    - pdf requires pdfOuput to be set
      *    - pptx requires pptxOuput to be set
      *    - image requires imageOutput to be set
-     *    - csv doesn't have csv output. */
+     *    - csv doesn't have csv output
+     *    - xlsx requires xlsxOutput to be set */
     type: "image" | "pdf" | "xlsx" | "jsondata" | "pdfcomposition" | "excel" | "pptx" | "pptxcomposition" | "csv" | "cycle";
 };
 /**
@@ -299,6 +301,7 @@ type ReportRequest = {
     /** Define the request metadata. It includes priority, deadline and future settings on execution policy of the request. */
     meta?: Meta;
     output: OutputItem;
+    senseDataTemplate?: SenseDataTemplate;
     /** Used to produce reports from a template file. */
     senseExcelTemplate?: SenseFileTemplate;
     /** Used to export a single visualization as pdf, pptx or png. */
@@ -308,19 +311,21 @@ type ReportRequest = {
     /** Used to export a sheet as pdf or pptx. */
     senseSheetTemplate?: SenseSheetTemplate;
     /** Template type and version using semantic versioning. It must have the following name convention: dashed-separated-template-name-MAJOR.MINOR.
-     * Please note that sense-pixel-perfect-template-1.0, sense-story-x.0, sense-data-x.0 and qv-data-x.0 are only for internal use.
+     * Please note that sense-pixel-perfect-template-1.0, sense-story-x.0 and qv-data-x.0 are only for internal use.
      *
      * Each type requires a specific template to be provided:
      *   - composition-1.0 requires compositionTemplates to be set
      *   - sense-excel-template-1.0 requires senseExcelTemplate to be set
      *   - sense-image-1.0 requires senseImageTemplate to be set
      *   - sense-sheet-1.0 requires senseSheetTemplate to be set
+     *   - sense-data-1.0 requires senseDataTemplate to be set
      *
      * Each template type supports specific output types:
      *   - composition-1.0 supports pdfcomposition and pptxComposition output type
      *   - sense-excel-template-1.0 supports excel and pdf output type
      *   - sense-image-1.0 supports pdf, pptx and png output types
-     *   - sense-sheet-1.0 supports pdf, pptx output type */
+     *   - sense-sheet-1.0 supports pdf, pptx output type
+     *   - sense-data-1.0 supports xlsx output type */
     type: "composition-1.0" | "sense-image-1.0" | "sense-data-1.0" | "sense-sheet-1.0" | "sense-story-1.0" | "qv-data-1.0" | "qv-data-2.0" | "sense-excel-template-1.0" | "sense-pixel-perfect-template-1.0";
 };
 type ReportStatus = {
@@ -378,6 +383,21 @@ type SelectionFilter = {
     variables?: unknown[];
 };
 type SelectionStrategy = "failOnErrors" | "ignoreErrorsReturnDetails" | "ignoreErrorsNoDetails";
+type SenseDataTemplate = {
+    appId: string;
+    /** Sense visualization id. Visualizations created "on the fly" are not supported. */
+    id: string;
+    patches?: NxPatch[];
+    persistentBookmark?: SensePersistentBookmark;
+    /** Choose the reloadTimestamp constraint to apply. An empty value leads to the default noCheck. */
+    reloadTimestampMatchType?: ReloadTimestampMatchType;
+    selectionStrategy?: SelectionStrategy;
+    /** Map of selections to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and maximum number of overall field values allowed is 150000. */
+    selectionsByState?: unknown;
+    /** The temporary bookmark to apply. Patches and Variables are ignored if passed to the API, because they already are applied in the backend. */
+    temporaryBookmarkV2?: SenseTemporaryBookmarkV2;
+    variables?: unknown[];
+};
 /**
  * Used to produce reports from a template file.
  */
@@ -543,4 +563,4 @@ interface ReportsAPI {
  */
 declare const reportsExport: ReportsAPI;
 
-export { type AppError, type AppErrors, type CallBackAction, type ChainableSelection, type ChainableSelectionType, type ComposableTemplate, type CreateReportHttpError, type CreateReportHttpResponse, type Definitions, type DocProperties, type Error, type ExcelOutput, type ExportError, type ExportErrors, type Float64, type GetReportStatusHttpError, type GetReportStatusHttpResponse, type HttpRequest, type ImageOutput, type Meta, type MetaExportError, type NxPatch, type OutputItem, type PdfCompositionOutput, type PdfOutput, type PptxCompositionOutput, type PptxOutput, type QFieldValue, type QSelection, type Reason, type ReloadTimestampMatchType, type ReportRequest, type ReportStatus, type ReportsAPI, type Result, type SelectionChain, type SelectionError, type SelectionErrors, type SelectionFilter, type SelectionStrategy, type SenseFileTemplate, type SenseImageTemplate, type SensePersistentBookmark, type SenseSheetTemplate, type SenseTemporaryBookmarkV2, type Sheet, type TemplateLocation, type Visualization, clearCache, createReport, reportsExport as default, getReportStatus };
+export { type AppError, type AppErrors, type CallBackAction, type ChainableSelection, type ChainableSelectionType, type ComposableTemplate, type CreateReportHttpError, type CreateReportHttpResponse, type Definitions, type DocProperties, type Error, type ExcelOutput, type ExportError, type ExportErrors, type Float64, type GetReportStatusHttpError, type GetReportStatusHttpResponse, type HttpRequest, type ImageOutput, type Meta, type MetaExportError, type NxPatch, type OutputItem, type PdfCompositionOutput, type PdfOutput, type PptxCompositionOutput, type PptxOutput, type QFieldValue, type QSelection, type Reason, type ReloadTimestampMatchType, type ReportRequest, type ReportStatus, type ReportsAPI, type Result, type SelectionChain, type SelectionError, type SelectionErrors, type SelectionFilter, type SelectionStrategy, type SenseDataTemplate, type SenseFileTemplate, type SenseImageTemplate, type SensePersistentBookmark, type SenseSheetTemplate, type SenseTemporaryBookmarkV2, type Sheet, type TemplateLocation, type Visualization, clearCache, createReport, reportsExport as default, getReportStatus };
