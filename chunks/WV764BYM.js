@@ -1,6 +1,6 @@
 import {
   getQixRuntimeModule
-} from "./7TFYIWPM.js";
+} from "./QUZEXTAI.js";
 
 // src/public/qix.ts
 function openAppSession(appSessionProps) {
