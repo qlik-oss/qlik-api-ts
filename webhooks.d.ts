@@ -150,8 +150,8 @@ declare const getWebhooks: (query: {
     createdByUserId?: string;
     /** Filter resources by enabled true/false */
     enabled?: boolean;
-    /** Filter resources by event-type */
-    eventType?: string;
+    /** Filter resources by event-type/types, a single webhook item can have multiple event-types */
+    eventTypes?: string;
     /** Filter resources by level that user has access to (either user or level) */
     level?: string;
     /** Maximum number of webhooks to retrieve */
@@ -160,6 +160,8 @@ declare const getWebhooks: (query: {
     name?: string;
     /** Cursor to the next page */
     next?: string;
+    /** Filter resources by origins, supports multiorigin */
+    origins?: "api" | "automations" | "management-console";
     /** Filter resources by user that owns it, only applicable for user level webhooks */
     ownerId?: string;
     /** Cursor to previous next page */
