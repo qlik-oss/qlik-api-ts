@@ -389,7 +389,7 @@ type DuplicateDataAConnectionHttpError = {
     status: number;
 };
 /**
- * Update multiple connections, only available to Admin
+ * Update multiple connections, only available to Admin. When update is to change ownership of a connection, note that the credentials associated with the connection will NOT be transfored to the new owner, and new owner is expected to provide their own crednetials for the connection.
  *
  * @param body an object with the body content
  * @throws UpdateDataConnectionsHttpError
@@ -541,7 +541,7 @@ interface DataConnectionsAPI {
      */
     duplicateDataAConnection: typeof duplicateDataAConnection;
     /**
-     * Update multiple connections, only available to Admin
+     * Update multiple connections, only available to Admin. When update is to change ownership of a connection, note that the credentials associated with the connection will NOT be transfored to the new owner, and new owner is expected to provide their own crednetials for the connection.
      *
      * @param body an object with the body content
      * @throws UpdateDataConnectionsHttpError
