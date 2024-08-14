@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './global.types-z1p6A9D-.js';
+import './auth-types-BU5EGt_9.js';
 
 type BatchIdDto = {
     ids?: string[];
@@ -11,6 +11,8 @@ type DataAsset = {
     readonly createdBy?: string;
     /** The value is automatically set by the application. User defined value is ignored. */
     readonly createdTime?: string;
+    /** The date-time when the source data was last changed */
+    dataFreshness?: string;
     dataStoreInfo?: DataStoreInfo;
     description?: string;
     /** Only required when updating the resource. Must be null for new resources. */

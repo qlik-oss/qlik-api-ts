@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './global.types-z1p6A9D-.js';
+import './auth-types-BU5EGt_9.js';
 
 type Credential = {
     /** ID datasource that the credential is created for */
@@ -47,7 +47,7 @@ type Error = {
 };
 type Errors = Error[];
 type Link = {
-    /** Link to cirrent query */
+    /** Link to current query */
     self: {
         /** URL pointing to the resource */
         href: string;
@@ -74,7 +74,7 @@ type ResponseErrors = {
  * @throws DeleteDataCredentialHttpError
  */
 declare const deleteDataCredential: (qID: string, query: {
-    /** If set to true, credentialId in the query will be intepreted as credential's name */
+    /** If set to true, credentialId in the query will be interpreted as credential's name */
     byCredentialName?: boolean;
 }, options?: ApiCallOptions) => Promise<DeleteDataCredentialHttpResponse>;
 type DeleteDataCredentialHttpResponse = {
@@ -95,7 +95,7 @@ type DeleteDataCredentialHttpError = {
  * @throws GetDataCredentialHttpError
  */
 declare const getDataCredential: (qID: string, query: {
-    /** If set to true, credentialId in the query will be intepreted as credential's name */
+    /** If set to true, credentialId in the query will be interpreted as credential's name */
     byCredentialName?: boolean;
 }, options?: ApiCallOptions) => Promise<GetDataCredentialHttpResponse>;
 type GetDataCredentialHttpResponse = {
@@ -117,7 +117,7 @@ type GetDataCredentialHttpError = {
  * @throws PatchDataCredentialHttpError
  */
 declare const patchDataCredential: (qID: string, query: {
-    /** If set to true, credentialId in the query will be intepreted as credential's name */
+    /** If set to true, credentialId in the query will be interpreted as credential's name */
     byCredentialName?: boolean;
 }, body: PatchRequest, options?: ApiCallOptions) => Promise<PatchDataCredentialHttpResponse>;
 type PatchDataCredentialHttpResponse = {
@@ -139,7 +139,7 @@ type PatchDataCredentialHttpError = {
  * @throws UpdateDataCredentialHttpError
  */
 declare const updateDataCredential: (qID: string, query: {
-    /** If set to true, credentialId in the query will be intepreted as credential's name */
+    /** If set to true, credentialId in the query will be interpreted as credential's name */
     byCredentialName?: boolean;
 }, body: CredentialCreate, options?: ApiCallOptions) => Promise<UpdateDataCredentialHttpResponse>;
 type UpdateDataCredentialHttpResponse = {

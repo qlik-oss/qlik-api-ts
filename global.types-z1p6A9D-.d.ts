@@ -1,4 +1,4 @@
-import { H as HostConfig } from './auth-types-Bqw3vbLs.js';
+import { H as HostConfig } from './auth-types-BU5EGt_9.js';
 
 /** An entry in the cache for one specific cacheKey */
 type CacheEntry = {
@@ -100,6 +100,14 @@ type Oauth2AuthConfig = {
      */
     userId?: string;
 };
+type AnonymousAuthConfig = {
+    /**
+     * Experimental and unsupported
+     */
+    accessCode: string;
+    /** client id of oauth client created by tenant admin */
+    clientId: string;
+};
 declare global {
     /**
      * QlikAuthModules is a global interface that can be extended to add custom auth modules.
@@ -113,6 +121,9 @@ declare global {
         };
         cookie: {
             config: CookieAuthConfig;
+        };
+        anonymous: {
+            config: AnonymousAuthConfig;
         };
         windowscookie: {
             config: WindowsCookieAuthConfig;
