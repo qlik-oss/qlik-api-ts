@@ -132,6 +132,9 @@ async function guessAuthTypeIfMissing(hostConfig) {
   if (hostConfig.apiKey) {
     return "apikey";
   }
+  if (hostConfig.accessCode) {
+    return "anonymous";
+  }
   if (hostConfig.clientId) {
     return "oauth2";
   }
@@ -319,6 +322,15 @@ var logout = () => {
 };
 var leadingHttp = /^http/;
 
+// src/random/random.ts
+import { customAlphabet, nanoid } from "nanoid";
+function generateRandomString(targetLength) {
+  return nanoid(targetLength);
+}
+function generateRandomHexString(targetLength) {
+  return customAlphabet("1234567890abcdef", targetLength)();
+}
+
 // src/auth/internal/auth-functions.ts
 function getCredentialsForCookieAuth(hostConfig) {
   if (hostConfig.crossSiteCookies === false) {
@@ -362,155 +374,9 @@ function internalValidateHostConfig(hostConfig, options) {
   return true;
 }
 
-// src/auth/internal/default-auth-modules/apikey.ts
-function getRestCallAuthParams2({ hostConfig }) {
-  return Promise.resolve({
-    headers: {
-      Authorization: `Bearer ${hostConfig?.apiKey}`
-    },
-    queryParams: {},
-    credentials: "omit"
-  });
-}
-async function getWebSocketAuthParams2() {
-  return {
-    queryParams: {
-      // accessToken: hostConfig.apiKey,
-    }
-  };
-}
-function handleAuthenticationError2() {
-  return Promise.resolve({});
-}
-var apikey_default = {
-  getRestCallAuthParams: getRestCallAuthParams2,
-  getWebSocketAuthParams: getWebSocketAuthParams2,
-  handleAuthenticationError: handleAuthenticationError2,
-  validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, { requiredProps: ["apiKey"], optionalProps: [] })
-};
-
-// src/http/http-functions.ts
-var QLIK_CSRF_TOKEN = "qlik-csrf-token";
-function clearCsrfToken(hostConfig) {
-  const locationUrl = toValidLocationUrl(hostConfig);
-  delete csrfTokens[locationUrl];
-}
-async function getCsrfToken(hostConfig, noCache) {
-  const locationUrl = toValidLocationUrl(hostConfig);
-  let pathTemplate;
-  if (await isWindows(hostConfig)) {
-    pathTemplate = "/qps/csrftoken";
-  } else {
-    pathTemplate = "/api/v1/csrf-token";
-  }
-  const fetchCsrfToken = async () => {
-    const res = await invokeFetch("csrf-token", {
-      method: "get",
-      pathTemplate,
-      options: {
-        hostConfig,
-        noCache: true
-      }
-    });
-    const csrfToken = res.headers.get(QLIK_CSRF_TOKEN);
-    if (!csrfToken) {
-      return "";
-    }
-    return csrfToken;
-  };
-  if (noCache) {
-    csrfTokens[locationUrl] = fetchCsrfToken();
-    return csrfTokens[locationUrl];
-  }
-  csrfTokens[locationUrl] = csrfTokens[locationUrl] || fetchCsrfToken();
-  return csrfTokens[locationUrl];
-}
-var csrfTokens = {};
-
-// src/auth/internal/default-auth-modules/cookie.ts
-function isModifyingVerb(verb) {
-  return !(verb === "get" || verb === "GET");
-}
-async function getRestCallAuthParams3({
-  hostConfig,
-  method
-}) {
-  const headers = {};
-  if (isModifyingVerb(method)) {
-    headers["qlik-csrf-token"] = await getCsrfToken(hostConfig);
-  }
-  if (hostConfig.webIntegrationId) {
-    headers["qlik-web-integration-id"] = hostConfig.webIntegrationId;
-  }
-  return { headers, queryParams: {}, credentials: getCredentialsForCookieAuth(hostConfig) };
-}
-async function getWebSocketAuthParams3({
-  hostConfig
-}) {
-  const params = {
-    // Bypass the cache to get one rest call out the door that can catch a 401 since the websocket only returns a general error
-    "qlik-csrf-token": await getCsrfToken(hostConfig, true)
-  };
-  if (hostConfig.webIntegrationId) {
-    params["qlik-web-integration-id"] = hostConfig.webIntegrationId;
-  }
-  return { queryParams: params };
-}
-async function handleAuthenticationError3({
-  hostConfig,
-  status,
-  errorBody = {}
-}) {
-  clearCsrfToken(hostConfig);
-  if (status === 403) {
-    return {
-      preventDefault: false,
-      // Only retry if the csrf token has expired
-      retry: errorBody?.code === "CSRF-TOKEN-2"
-    };
-  }
-  const webIntegrationParam = hostConfig.webIntegrationId ? `qlik-web-integration-id=${hostConfig?.webIntegrationId}&` : "";
-  const locationUrl = toValidLocationUrl(hostConfig);
-  if (hostConfig.authRedirectUserConfirmation) {
-    await hostConfig.authRedirectUserConfirmation();
-  }
-  globalThis.location.replace(
-    `${locationUrl}/login?${webIntegrationParam}returnto=${encodeURIComponent(globalThis.location.href)}`
-  );
-  return {
-    preventDefault: true
-  };
-}
-var cookie_default = {
-  getRestCallAuthParams: getRestCallAuthParams3,
-  getWebSocketAuthParams: getWebSocketAuthParams3,
-  handleAuthenticationError: handleAuthenticationError3,
-  validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, {
-    requiredProps: [],
-    optionalProps: ["webIntegrationId", "crossSiteCookies"]
-  })
-};
-
-// src/auth/internal/default-auth-modules/none.ts
-function getRestCallAuthParams4() {
-  return Promise.resolve({ headers: {}, queryParams: {}, credentials: "same-origin" });
-}
-function getWebSocketAuthParams4() {
-  return Promise.resolve({ queryParams: {} });
-}
-function handleAuthenticationError4() {
-  return Promise.resolve({});
-}
-var none_default = {
-  getRestCallAuthParams: getRestCallAuthParams4,
-  getWebSocketAuthParams: getWebSocketAuthParams4,
-  handleAuthenticationError: handleAuthenticationError4,
-  validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, { requiredProps: [], optionalProps: [] })
-};
-
 // src/auth/internal/default-auth-modules/oauth/storage-helpers.ts
 var storagePrefix = "qlik-qmfe-api";
-function getTopicFromHostConfig(hostConfig) {
+function getTopicFromOauthHostConfig(hostConfig) {
   let topic = `${hostConfig.clientId + (hostConfig.scope ? `_${hostConfig.scope}` : "_user_default")}`;
   if (hostConfig.subject) {
     topic += `_${hostConfig.subject}`;
@@ -519,6 +385,9 @@ function getTopicFromHostConfig(hostConfig) {
     topic += `_${hostConfig.userId}`;
   }
   return topic;
+}
+function getTopicFromAnonHostConfig(hostConfig) {
+  return `${hostConfig.accessCode}_${hostConfig.clientId}`;
 }
 var cachedTokens = {};
 function saveInLocalStorage(topic, name, value) {
@@ -545,18 +414,15 @@ function loadAndDeleteFromSessionStorage(topic, name) {
   sessionStorage.removeItem(id);
   return result2;
 }
-function loadOauthTokensFromStorage(hostConfig) {
-  if (!hostConfig.clientId) {
-    return void 0;
-  }
+function loadOauthTokensFromStorage(topic, accessTokenStorage) {
   let accessToken;
   let refreshToken;
-  if (hostConfig.accessTokenStorage === "local") {
-    accessToken = loadFromLocalStorage(getTopicFromHostConfig(hostConfig), "access-token");
-    refreshToken = loadFromLocalStorage(getTopicFromHostConfig(hostConfig), "refresh-token");
-  } else if (hostConfig.accessTokenStorage === "session") {
-    accessToken = loadFromSessionStorage(getTopicFromHostConfig(hostConfig), "access-token");
-    refreshToken = loadFromSessionStorage(getTopicFromHostConfig(hostConfig), "refresh-token");
+  if (accessTokenStorage === "local") {
+    accessToken = loadFromLocalStorage(topic, "access-token");
+    refreshToken = loadFromLocalStorage(topic, "refresh-token");
+  } else if (accessTokenStorage === "session") {
+    accessToken = loadFromSessionStorage(topic, "access-token");
+    refreshToken = loadFromSessionStorage(topic, "refresh-token");
   }
   if (accessToken) {
     return {
@@ -567,86 +433,70 @@ function loadOauthTokensFromStorage(hostConfig) {
   return void 0;
 }
 async function loadCachedOauthTokens(hostConfig) {
-  return cachedTokens[getTopicFromHostConfig(hostConfig)];
+  return cachedTokens[getTopicFromOauthHostConfig(hostConfig)];
 }
-async function loadOrAcquireAccessToken(hostConfig, acquireTokens) {
+async function loadOrAcquireAccessTokenOauth(hostConfig, acquireTokens) {
   if (!hostConfig.clientId) {
     throw new InvalidHostConfigError('A host config with authType set to "oauth2" has to also provide a clientId');
   }
-  if (hostConfig.noCache) {
+  const topic = getTopicFromOauthHostConfig(hostConfig);
+  return loadOrAcquireAccessToken(topic, acquireTokens, hostConfig.noCache, hostConfig.accessTokenStorage);
+}
+async function loadOrAcquireAccessTokenAnon(hostConfig, acquireTokens) {
+  if (!hostConfig.accessCode) {
+    throw new InvalidHostConfigError(
+      'A host config with authType set to "anonymous" has to also provide an accessCode'
+    );
+  }
+  const topic = getTopicFromAnonHostConfig(hostConfig);
+  return loadOrAcquireAccessToken(topic, acquireTokens, false, void 0);
+}
+async function loadOrAcquireAccessToken(topic, acquireTokens, noCache, accessTokenStorage) {
+  if (noCache) {
     return acquireTokens();
   }
   const mayUseStorage = isBrowser();
-  const storedOauthTokens = cachedTokens[getTopicFromHostConfig(hostConfig)] || (mayUseStorage ? loadOauthTokensFromStorage(hostConfig) : void 0);
+  const storedOauthTokens = cachedTokens[topic] || (mayUseStorage ? loadOauthTokensFromStorage(topic, accessTokenStorage) : void 0);
   if (storedOauthTokens) {
     return Promise.resolve(storedOauthTokens);
   }
   const tokensPromise = acquireTokens();
-  cachedTokens[getTopicFromHostConfig(hostConfig)] = tokensPromise;
+  cachedTokens[topic] = tokensPromise;
   if (mayUseStorage) {
     const tokens = await tokensPromise;
-    if (hostConfig.accessTokenStorage === "local" && tokens) {
+    if (accessTokenStorage === "local" && tokens) {
       if (tokens.accessToken) {
-        saveInLocalStorage(getTopicFromHostConfig(hostConfig), "access-token", tokens.accessToken);
+        saveInLocalStorage(topic, "access-token", tokens.accessToken);
       }
       if (tokens.refreshToken) {
-        saveInLocalStorage(getTopicFromHostConfig(hostConfig), "refresh-token", tokens.refreshToken);
+        saveInLocalStorage(topic, "refresh-token", tokens.refreshToken);
       }
-    } else if (hostConfig.accessTokenStorage === "session" && tokens) {
+    } else if (accessTokenStorage === "session" && tokens) {
       if (tokens.accessToken) {
-        saveInSessionStorage(getTopicFromHostConfig(hostConfig), "access-token", tokens.accessToken);
+        saveInSessionStorage(topic, "access-token", tokens.accessToken);
       }
       if (tokens.refreshToken) {
-        saveInSessionStorage(getTopicFromHostConfig(hostConfig), "refresh-token", tokens.refreshToken);
+        saveInSessionStorage(topic, "refresh-token", tokens.refreshToken);
       }
     }
   }
   return tokensPromise;
 }
 function clearStoredOauthTokens(hostConfig) {
-  if (!hostConfig.clientId) {
-    throw new InvalidHostConfigError('A host config with authType set to "oauth2" has to also provide a clientId');
-  }
-  delete cachedTokens[getTopicFromHostConfig(hostConfig)];
+  const topic = getTopicFromOauthHostConfig(hostConfig);
+  delete cachedTokens[topic];
   if (isBrowser()) {
-    deleteFromLocalStorage(getTopicFromHostConfig(hostConfig), ["access-token", "refresh-token"]);
-    deleteFromSessionStorage(getTopicFromHostConfig(hostConfig), ["access-token", "refresh-token"]);
+    deleteFromLocalStorage(topic, ["access-token", "refresh-token"]);
+    deleteFromSessionStorage(topic, ["access-token", "refresh-token"]);
   }
 }
-
-// src/auth/internal/default-auth-modules/oauth/callback.ts
-function handleOAuthCallback() {
-  const urlParams = new URLSearchParams(globalThis.location.search);
-  const callbackCode = urlParams.get("code") || void 0;
-  const callbackState = urlParams.get("state") || void 0;
-  if (urlParams.get("error")) {
-    const element = document.createElement("pre");
-    element.innerText = `<code>${JSON.stringify({
-      error: urlParams.get("error"),
-      error_code: urlParams.get("error_code"),
-      error_description: urlParams.get("error_description"),
-      error_detail: urlParams.get("error_detail"),
-      error_uri: urlParams.get("error_uri")
-    })}</code>`;
-    document.body.prepend(element);
+function clearStoredAnonymousTokens(hostConfig) {
+  const topic = getTopicFromAnonHostConfig(hostConfig);
+  delete cachedTokens[topic];
+  if (isBrowser()) {
+    deleteFromLocalStorage(topic, ["access-token", "refresh-token"]);
+    deleteFromSessionStorage(topic, ["access-token", "refresh-token"]);
   }
-  const topic = loadAndDeleteFromSessionStorage("", "client-in-progress");
-  if (topic && callbackCode && callbackState) {
-    const stateFromLocalStorage = loadAndDeleteFromSessionStorage(topic, "state");
-    const finalRedirectUri = loadAndDeleteFromSessionStorage(topic, "href");
-    if (stateFromLocalStorage && stateFromLocalStorage === callbackState && finalRedirectUri) {
-      saveInSessionStorage(topic, "code", callbackCode);
-      if (finalRedirectUri !== globalThis.location.href) {
-        globalThis.location.replace(finalRedirectUri);
-      }
-    }
-  }
-}
-
-// src/random/random.ts
-import { nanoid } from "nanoid";
-function generateRandomString(targetLength) {
-  return nanoid(targetLength);
 }
 
 // src/auth/internal/default-auth-modules/oauth/oauth-utils.ts
@@ -690,11 +540,12 @@ async function startFullPageLoginFlow(hostConfig) {
   const state = generateRandomString(43);
   const codeChallenge = await sha256(verifier);
   const redirectUri = hostConfig.redirectUri || globalThis.location.href;
+  const topic = getTopicFromOauthHostConfig(hostConfig);
   clearStoredOauthTokens(hostConfig);
-  saveInSessionStorage(getTopicFromHostConfig(hostConfig), "state", state);
-  saveInSessionStorage(getTopicFromHostConfig(hostConfig), "verifier", verifier);
-  saveInSessionStorage(getTopicFromHostConfig(hostConfig), "href", globalThis.location.href);
-  saveInSessionStorage("", "client-in-progress", getTopicFromHostConfig(hostConfig));
+  saveInSessionStorage(topic, "state", state);
+  saveInSessionStorage(topic, "verifier", verifier);
+  saveInSessionStorage(topic, "href", globalThis.location.href);
+  saveInSessionStorage("", "client-in-progress", topic);
   const queryParams = {
     response_type: "code",
     client_id: clientId,
@@ -800,6 +651,25 @@ async function getOauthTokensWithRefreshToken(baseUrl, refreshToken, clientSecre
     errors: data.errors
   };
 }
+async function getAnonymousOauthAccessToken(baseUrl, accessCode, clientId, trackingCode) {
+  const result2 = await fetch(`${baseUrl}/oauth/token`, {
+    method: "POST",
+    mode: "cors",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      eac: accessCode,
+      client_id: clientId,
+      grant_type: "urn:qlik:oauth:anonymous-embed",
+      tracking_code: trackingCode
+    })
+  });
+  const data = await result2.json();
+  return {
+    accessToken: data.access_token,
+    refreshToken: data.refresh_token,
+    errors: data.errors
+  };
+}
 async function getOAuthTokensForNode(hostConfig) {
   const { clientId, clientSecret } = hostConfig;
   if (!clientId || !clientSecret) {
@@ -807,7 +677,7 @@ async function getOAuthTokensForNode(hostConfig) {
       'A host config with authType set to "oauth2" has to provide a clientId and a clientSecret'
     );
   }
-  const oauthTokens = await loadOrAcquireAccessToken(hostConfig, async () => {
+  const oauthTokens = await loadOrAcquireAccessTokenOauth(hostConfig, async () => {
     if (!hostConfig.clientId || !hostConfig.clientSecret) {
       throw new InvalidHostConfigError(
         'A host config with authType set to "oauth2" has to provide a clientId and a clientSecret'
@@ -829,7 +699,7 @@ async function getOAuthTokensForBrowser(hostConfig) {
   if (!clientId) {
     throw new InvalidHostConfigError('A host config with authType set to "oauth2" has to also provide a clientId');
   }
-  const oauthTokens = await loadOrAcquireAccessToken(hostConfig, async () => {
+  const oauthTokens = await loadOrAcquireAccessTokenOauth(hostConfig, async () => {
     if (hostConfig.getAccessToken) {
       try {
         const tokenFetchedFromRemote = typeof hostConfig.getAccessToken === "string" ? await lookupGetAccessFn(hostConfig.getAccessToken)() : await hostConfig.getAccessToken();
@@ -854,8 +724,9 @@ async function getOAuthTokensForBrowser(hostConfig) {
         };
       }
     }
-    const code = loadAndDeleteFromSessionStorage(getTopicFromHostConfig(hostConfig), "code");
-    const verifier = loadAndDeleteFromSessionStorage(getTopicFromHostConfig(hostConfig), "verifier");
+    const topic = getTopicFromOauthHostConfig(hostConfig);
+    const code = loadAndDeleteFromSessionStorage(topic, "code");
+    const verifier = loadAndDeleteFromSessionStorage(topic, "verifier");
     if (code && verifier) {
       const tokenResponse = await exchangeCodeAndVerifierForAccessTokenData(
         hostConfig,
@@ -905,7 +776,7 @@ async function refreshAccessToken(hostConfig) {
   const tokens = await loadCachedOauthTokens(hostConfig);
   clearStoredOauthTokens(hostConfig);
   if (tokens && tokens.refreshToken && hostConfig.clientSecret) {
-    const refreshedTokens = await loadOrAcquireAccessToken(hostConfig, async () => {
+    const refreshedTokens = await loadOrAcquireAccessTokenOauth(hostConfig, async () => {
       if (!tokens || !tokens.refreshToken || !hostConfig.clientSecret) {
         throw new Error("Trying to refresh tokens without refreshToken or clientSecret");
       }
@@ -917,6 +788,273 @@ async function refreshAccessToken(hostConfig) {
     });
     if (refreshedTokens) {
       handlePossibleErrors(refreshedTokens);
+    }
+  }
+}
+
+// src/auth/internal/default-auth-modules/anonymous.ts
+async function getOrCreateTrackingCode(hostConfig) {
+  let trackingCode;
+  if (isBrowser()) {
+    const topic = getTopicFromAnonHostConfig(hostConfig);
+    trackingCode = loadFromLocalStorage(topic, "tracking-code");
+    if (!trackingCode) {
+      trackingCode = createTrackingCode();
+    }
+    saveInLocalStorage(topic, "tracking-code", trackingCode);
+  } else {
+    trackingCode = createTrackingCode();
+  }
+  return trackingCode;
+}
+function createTrackingCode() {
+  const timeStamp = Math.floor(Date.now() / 1e3).toString(16);
+  const randomString = generateRandomHexString(20);
+  return `${timeStamp}${randomString}`;
+}
+async function getAnonymousAccessToken(hostConfig) {
+  const { accessCode, clientId } = hostConfig;
+  if (!accessCode || !clientId) {
+    throw new InvalidHostConfigError(
+      'A host config with authType set to "anonymous" has to provide both an accessCode and clientId'
+    );
+  }
+  const tokens = await loadOrAcquireAccessTokenAnon(hostConfig, async () => {
+    const baseUrl = toValidLocationUrl(hostConfig);
+    const trackingCode = await getOrCreateTrackingCode(hostConfig);
+    return getAnonymousOauthAccessToken(baseUrl, accessCode, clientId, trackingCode);
+  });
+  if (!tokens) {
+    return "";
+  }
+  if (tokens.errors) {
+    throw new AuthorizationError(tokens.errors);
+  }
+  if (tokens.accessToken) {
+    return tokens.accessToken;
+  }
+  return "";
+}
+async function getRestCallAuthParams2({
+  hostConfig
+}) {
+  return {
+    headers: {
+      Authorization: `Bearer ${await getAnonymousAccessToken(hostConfig)}`
+    },
+    queryParams: {},
+    credentials: "omit"
+  };
+}
+async function getWebSocketAuthParams2({
+  hostConfig
+}) {
+  const accessToken = await getAnonymousAccessToken(hostConfig);
+  return {
+    queryParams: {
+      accessToken
+    }
+  };
+}
+async function getWebResourceAuthParams2({
+  hostConfig
+}) {
+  const accessToken = await getAnonymousAccessToken(hostConfig);
+  return {
+    queryParams: {
+      accessToken
+    }
+  };
+}
+async function handleAuthenticationError2({
+  hostConfig
+}) {
+  clearStoredAnonymousTokens(hostConfig);
+  return {
+    preventDefault: false,
+    retry: true
+  };
+}
+var anonymous_default = {
+  getRestCallAuthParams: getRestCallAuthParams2,
+  getWebSocketAuthParams: getWebSocketAuthParams2,
+  getWebResourceAuthParams: getWebResourceAuthParams2,
+  handleAuthenticationError: handleAuthenticationError2,
+  validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, {
+    requiredProps: ["clientId", "accessCode"],
+    optionalProps: []
+  })
+};
+
+// src/auth/internal/default-auth-modules/apikey.ts
+function getRestCallAuthParams3({ hostConfig }) {
+  return Promise.resolve({
+    headers: {
+      Authorization: `Bearer ${hostConfig?.apiKey}`
+    },
+    queryParams: {},
+    credentials: "omit"
+  });
+}
+async function getWebSocketAuthParams3() {
+  return {
+    queryParams: {
+      // accessToken: hostConfig.apiKey,
+    }
+  };
+}
+function handleAuthenticationError3() {
+  return Promise.resolve({});
+}
+var apikey_default = {
+  getRestCallAuthParams: getRestCallAuthParams3,
+  getWebSocketAuthParams: getWebSocketAuthParams3,
+  handleAuthenticationError: handleAuthenticationError3,
+  validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, { requiredProps: ["apiKey"], optionalProps: [] })
+};
+
+// src/http/http-functions.ts
+var QLIK_CSRF_TOKEN = "qlik-csrf-token";
+function clearCsrfToken(hostConfig) {
+  const locationUrl = toValidLocationUrl(hostConfig);
+  delete csrfTokens[locationUrl];
+}
+async function getCsrfToken(hostConfig, noCache) {
+  const locationUrl = toValidLocationUrl(hostConfig);
+  let pathTemplate;
+  if (await isWindows(hostConfig)) {
+    pathTemplate = "/qps/csrftoken";
+  } else {
+    pathTemplate = "/api/v1/csrf-token";
+  }
+  const fetchCsrfToken = async () => {
+    const res = await invokeFetch("csrf-token", {
+      method: "get",
+      pathTemplate,
+      options: {
+        hostConfig,
+        noCache: true
+      }
+    });
+    const csrfToken = res.headers.get(QLIK_CSRF_TOKEN);
+    if (!csrfToken) {
+      return "";
+    }
+    return csrfToken;
+  };
+  if (noCache) {
+    csrfTokens[locationUrl] = fetchCsrfToken();
+    return csrfTokens[locationUrl];
+  }
+  csrfTokens[locationUrl] = csrfTokens[locationUrl] || fetchCsrfToken();
+  return csrfTokens[locationUrl];
+}
+var csrfTokens = {};
+
+// src/auth/internal/default-auth-modules/cookie.ts
+function isModifyingVerb(verb) {
+  return !(verb === "get" || verb === "GET");
+}
+async function getRestCallAuthParams4({
+  hostConfig,
+  method
+}) {
+  const headers = {};
+  if (isModifyingVerb(method)) {
+    headers["qlik-csrf-token"] = await getCsrfToken(hostConfig);
+  }
+  if (hostConfig.webIntegrationId) {
+    headers["qlik-web-integration-id"] = hostConfig.webIntegrationId;
+  }
+  return { headers, queryParams: {}, credentials: getCredentialsForCookieAuth(hostConfig) };
+}
+async function getWebSocketAuthParams4({
+  hostConfig
+}) {
+  const params = {
+    // Bypass the cache to get one rest call out the door that can catch a 401 since the websocket only returns a general error
+    "qlik-csrf-token": await getCsrfToken(hostConfig, true)
+  };
+  if (hostConfig.webIntegrationId) {
+    params["qlik-web-integration-id"] = hostConfig.webIntegrationId;
+  }
+  return { queryParams: params };
+}
+async function handleAuthenticationError4({
+  hostConfig,
+  status
+}) {
+  clearCsrfToken(hostConfig);
+  if (status === 403) {
+    return {
+      preventDefault: false,
+      retry: true
+    };
+  }
+  const webIntegrationParam = hostConfig.webIntegrationId ? `qlik-web-integration-id=${hostConfig?.webIntegrationId}&` : "";
+  const locationUrl = toValidLocationUrl(hostConfig);
+  if (hostConfig.authRedirectUserConfirmation) {
+    await hostConfig.authRedirectUserConfirmation();
+  }
+  globalThis.location.replace(
+    `${locationUrl}/login?${webIntegrationParam}returnto=${encodeURIComponent(globalThis.location.href)}`
+  );
+  return {
+    preventDefault: true
+  };
+}
+var cookie_default = {
+  getRestCallAuthParams: getRestCallAuthParams4,
+  getWebSocketAuthParams: getWebSocketAuthParams4,
+  handleAuthenticationError: handleAuthenticationError4,
+  validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, {
+    requiredProps: [],
+    optionalProps: ["webIntegrationId", "crossSiteCookies"]
+  })
+};
+
+// src/auth/internal/default-auth-modules/none.ts
+function getRestCallAuthParams5() {
+  return Promise.resolve({ headers: {}, queryParams: {}, credentials: "same-origin" });
+}
+function getWebSocketAuthParams5() {
+  return Promise.resolve({ queryParams: {} });
+}
+function handleAuthenticationError5() {
+  return Promise.resolve({});
+}
+var none_default = {
+  getRestCallAuthParams: getRestCallAuthParams5,
+  getWebSocketAuthParams: getWebSocketAuthParams5,
+  handleAuthenticationError: handleAuthenticationError5,
+  validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, { requiredProps: [], optionalProps: [] })
+};
+
+// src/auth/internal/default-auth-modules/oauth/callback.ts
+function handleOAuthCallback() {
+  const urlParams = new URLSearchParams(globalThis.location.search);
+  const callbackCode = urlParams.get("code") || void 0;
+  const callbackState = urlParams.get("state") || void 0;
+  if (urlParams.get("error")) {
+    const element = document.createElement("pre");
+    element.innerText = `<code>${JSON.stringify({
+      error: urlParams.get("error"),
+      error_code: urlParams.get("error_code"),
+      error_description: urlParams.get("error_description"),
+      error_detail: urlParams.get("error_detail"),
+      error_uri: urlParams.get("error_uri")
+    })}</code>`;
+    document.body.prepend(element);
+  }
+  const topic = loadAndDeleteFromSessionStorage("", "client-in-progress");
+  if (topic && callbackCode && callbackState) {
+    const stateFromLocalStorage = loadAndDeleteFromSessionStorage(topic, "state");
+    const finalRedirectUri = loadAndDeleteFromSessionStorage(topic, "href");
+    if (stateFromLocalStorage && stateFromLocalStorage === callbackState && finalRedirectUri) {
+      saveInSessionStorage(topic, "code", callbackCode);
+      if (finalRedirectUri !== globalThis.location.href) {
+        globalThis.location.replace(finalRedirectUri);
+      }
     }
   }
 }
@@ -969,7 +1107,7 @@ async function handlePotentialAuthenticationErrorAndRetry(hostConfig, fn) {
   try {
     return await fn();
   } catch (err) {
-    const { retry } = await handleAuthenticationError5({
+    const { retry } = await handleAuthenticationError6({
       hostConfig,
       canRetry: true
     });
@@ -979,7 +1117,7 @@ async function handlePotentialAuthenticationErrorAndRetry(hostConfig, fn) {
     throw err;
   }
 }
-async function getRestCallAuthParams5({
+async function getRestCallAuthParams6({
   hostConfig
 }) {
   return {
@@ -990,7 +1128,7 @@ async function getRestCallAuthParams5({
     credentials: "omit"
   };
 }
-async function getWebSocketAuthParams5({
+async function getWebSocketAuthParams6({
   hostConfig
 }) {
   const websocketAccessToken = await handlePotentialAuthenticationErrorAndRetry(hostConfig, async () => {
@@ -1003,7 +1141,7 @@ async function getWebSocketAuthParams5({
     }
   };
 }
-async function getWebResourceAuthParams2({
+async function getWebResourceAuthParams3({
   hostConfig
 }) {
   const webResourceAccessToken = await handlePotentialAuthenticationErrorAndRetry(hostConfig, async () => {
@@ -1016,7 +1154,7 @@ async function getWebResourceAuthParams2({
     }
   };
 }
-async function handleAuthenticationError5({
+async function handleAuthenticationError6({
   hostConfig
 }) {
   if (hostConfig.getAccessToken) {
@@ -1042,10 +1180,10 @@ async function handleAuthenticationError5({
   };
 }
 var oauth_default = {
-  getRestCallAuthParams: getRestCallAuthParams5,
-  getWebSocketAuthParams: getWebSocketAuthParams5,
-  getWebResourceAuthParams: getWebResourceAuthParams2,
-  handleAuthenticationError: handleAuthenticationError5,
+  getRestCallAuthParams: getRestCallAuthParams6,
+  getWebSocketAuthParams: getWebSocketAuthParams6,
+  getWebResourceAuthParams: getWebResourceAuthParams3,
+  handleAuthenticationError: handleAuthenticationError6,
   validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, {
     requiredProps: ["clientId"],
     optionalProps: [
@@ -1084,7 +1222,7 @@ function getXrfKey(hostConfig) {
 }
 
 // src/auth/internal/default-auth-modules/windows-cookie.ts
-function getRestCallAuthParams6({
+function getRestCallAuthParams7({
   hostConfig
 }) {
   return Promise.resolve({
@@ -1097,7 +1235,7 @@ function getRestCallAuthParams6({
     credentials: getCredentialsForCookieAuth(hostConfig)
   });
 }
-function getWebSocketAuthParams6({
+function getWebSocketAuthParams7({
   hostConfig
 }) {
   return Promise.resolve({
@@ -1106,7 +1244,7 @@ function getWebSocketAuthParams6({
     }
   });
 }
-async function handleAuthenticationError6({
+async function handleAuthenticationError7({
   hostConfig
 }) {
   if (hostConfig.loginUri) {
@@ -1125,9 +1263,9 @@ async function handleAuthenticationError6({
   };
 }
 var windows_cookie_default = {
-  getRestCallAuthParams: getRestCallAuthParams6,
-  getWebSocketAuthParams: getWebSocketAuthParams6,
-  handleAuthenticationError: handleAuthenticationError6,
+  getRestCallAuthParams: getRestCallAuthParams7,
+  getWebSocketAuthParams: getWebSocketAuthParams7,
+  handleAuthenticationError: handleAuthenticationError7,
   validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, {
     requiredProps: [],
     optionalProps: ["loginUri", "crossSiteCookies"]
@@ -1143,6 +1281,7 @@ function registerDefaultAuthModules() {
     registerAuthModule("cookie", cookie_default);
     registerAuthModule("none", none_default);
     registerAuthModule("oauth2", oauth_default);
+    registerAuthModule("anonymous", anonymous_default);
     registerAuthModule("windowscookie", windows_cookie_default);
     authModulesRegistered = true;
   }
@@ -1603,7 +1742,8 @@ async function interceptAuthenticationErrors(hostConfig, resultPromise, performR
     return await resultPromise;
   } catch (error) {
     const err = error;
-    if (err.status === 401 || err.status === 403 || (err.status === 301 || err.status === 302) && await isWindows(hostConfig)) {
+    const errorBody = err.data;
+    if (err.status === 401 || err.status === 403 && errorBody?.code === "CSRF-TOKEN-2" || (err.status === 301 || err.status === 302) && await isWindows(hostConfig)) {
       if (globalThis.loggingOut) {
         return neverResolvingPromise();
       }
@@ -1611,7 +1751,7 @@ async function interceptAuthenticationErrors(hostConfig, resultPromise, performR
         hostConfig,
         status: err.status,
         headers: err.headers,
-        errorBody: err.data,
+        errorBody,
         canRetry: !!performRetry
       });
       if (retry && performRetry) {
@@ -1804,6 +1944,7 @@ export {
   setDefaultHostConfig2 as setDefaultHostConfig,
   checkForCrossDomainRequest,
   logout,
+  generateRandomString,
   InvokeFetchError,
   EncodingError,
   invokeFetch,
@@ -1811,6 +1952,5 @@ export {
   parseFetchResponse,
   invoke_fetch_default,
   getCsrfToken,
-  generateRandomString,
   auth_default
 };

@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './global.types-z1p6A9D-.js';
+import './auth-types-BU5EGt_9.js';
 
 /**
  * Error in resource handling
@@ -89,7 +89,7 @@ type ExportError = {
      * - "REP-404004" Story not found, the story does not exist or it has been deleted or it is unavailable.
      * - "REP-429000" Too many request. The user has sent too many requests in a given amount of time ("rate limiting").
      * - "REP-429012" Exceeded max session tenant quota. A tenant has opened too many different sessions at the same time.
-     * - "REP-429014" Reporting service was not able to return inside of request export deadline. Too many request at the same time for the same tenant.
+     * - "REP-429014" The export could not be completed within the requested deadline.
      * - "REP-429016" Exceeded max session tenant quota per day.
      * - "REP-500000" Fail to resolve resource.
      * - "REP-500006" Fail to get report session parameters.
@@ -392,6 +392,7 @@ type SenseDataTemplate = {
     /** Choose the reloadTimestamp constraint to apply. An empty value leads to the default noCheck. */
     reloadTimestampMatchType?: ReloadTimestampMatchType;
     selectionStrategy?: SelectionStrategy;
+    selectionType?: SenseSelectionType;
     /** Map of selections to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and maximum number of overall field values allowed is 150000. */
     selectionsByState?: unknown;
     /** The temporary bookmark to apply. Patches and Variables are ignored if passed to the API, because they already are applied in the backend. */
@@ -420,6 +421,7 @@ type SenseImageTemplate = {
     /** Choose the reloadTimestamp constraint to apply. An empty value leads to the default noCheck. */
     reloadTimestampMatchType?: ReloadTimestampMatchType;
     selectionStrategy?: SelectionStrategy;
+    selectionType?: SenseSelectionType;
     /** Map of selections to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and maximum number of overall field values allowed is 150000. */
     selectionsByState?: unknown;
     /** The definition ID referring to a selectionsByState definition declared in definitions. */
@@ -432,6 +434,7 @@ type SensePersistentBookmark = {
     /** Sense Persistence Bookmark id. */
     id: string;
 };
+type SenseSelectionType = "selectionsByState" | "temporaryBookmark" | "persistentBookmark" | "temporaryBookmarkV2";
 /**
  * Used to export a sheet as pdf or pptx.
  */
@@ -441,6 +444,7 @@ type SenseSheetTemplate = {
     /** Choose the reloadTimestamp constraint to apply. An empty value leads to the default noCheck. */
     reloadTimestampMatchType?: ReloadTimestampMatchType;
     selectionStrategy?: SelectionStrategy;
+    selectionType?: SenseSelectionType;
     /** Map of selections to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and maximum number of overall field values allowed is 150000. */
     selectionsByState?: unknown;
     /** The definition ID referring to a selectionsByState definition declared in definitions. */
@@ -563,4 +567,4 @@ interface ReportsAPI {
  */
 declare const reportsExport: ReportsAPI;
 
-export { type AppError, type AppErrors, type CallBackAction, type ChainableSelection, type ChainableSelectionType, type ComposableTemplate, type CreateReportHttpError, type CreateReportHttpResponse, type Definitions, type DocProperties, type Error, type ExcelOutput, type ExportError, type ExportErrors, type Float64, type GetReportStatusHttpError, type GetReportStatusHttpResponse, type HttpRequest, type ImageOutput, type Meta, type MetaExportError, type NxPatch, type OutputItem, type PdfCompositionOutput, type PdfOutput, type PptxCompositionOutput, type PptxOutput, type QFieldValue, type QSelection, type Reason, type ReloadTimestampMatchType, type ReportRequest, type ReportStatus, type ReportsAPI, type Result, type SelectionChain, type SelectionError, type SelectionErrors, type SelectionFilter, type SelectionStrategy, type SenseDataTemplate, type SenseFileTemplate, type SenseImageTemplate, type SensePersistentBookmark, type SenseSheetTemplate, type SenseTemporaryBookmarkV2, type Sheet, type TemplateLocation, type Visualization, clearCache, createReport, reportsExport as default, getReportStatus };
+export { type AppError, type AppErrors, type CallBackAction, type ChainableSelection, type ChainableSelectionType, type ComposableTemplate, type CreateReportHttpError, type CreateReportHttpResponse, type Definitions, type DocProperties, type Error, type ExcelOutput, type ExportError, type ExportErrors, type Float64, type GetReportStatusHttpError, type GetReportStatusHttpResponse, type HttpRequest, type ImageOutput, type Meta, type MetaExportError, type NxPatch, type OutputItem, type PdfCompositionOutput, type PdfOutput, type PptxCompositionOutput, type PptxOutput, type QFieldValue, type QSelection, type Reason, type ReloadTimestampMatchType, type ReportRequest, type ReportStatus, type ReportsAPI, type Result, type SelectionChain, type SelectionError, type SelectionErrors, type SelectionFilter, type SelectionStrategy, type SenseDataTemplate, type SenseFileTemplate, type SenseImageTemplate, type SensePersistentBookmark, type SenseSelectionType, type SenseSheetTemplate, type SenseTemporaryBookmarkV2, type Sheet, type TemplateLocation, type Visualization, clearCache, createReport, reportsExport as default, getReportStatus };

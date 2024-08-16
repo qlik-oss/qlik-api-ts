@@ -82,6 +82,7 @@ interface ImplicitQlikAuthModules {
     apikey: object;
     oauth2: object;
     cookie: object;
+    anonymous: object;
 }
 type QlikAuthModuleConfigUnion<K extends keyof QlikAuthModules> = (K extends keyof ImplicitQlikAuthModules ? {
     authType?: K;
