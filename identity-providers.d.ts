@@ -102,6 +102,8 @@ type CreateOIDCPayload = {
         discoveryUrl?: string;
         /** Only ADFS and AzureAD IdPs can set this property. For ADFS and AzureAD, it defaults to false. For other IdPs, it defaults to undefined. */
         emailVerifiedAlwaysTrue?: boolean;
+        /** The algorithm used to sign the ID token. The default algorithm is RS256. */
+        idTokenSignatureAlg?: "RS256" | "RS512";
         /** OpenID configuration */
         openid_configuration?: OpenIDConfiguration;
         /** The realm identifier for the IdP. */
@@ -377,7 +379,7 @@ type PatchOIDCPayload = {
     /** The "operation" to be performed on a given IdP. Currently supports a custom operation value called "promote-options" that allows the test configuration to be promoted to the current configuration used for login. */
     op: "replace" | "promote-options";
     /** The "path" to the part of the IdP document. */
-    path?: "/active" | "/description" | "/meta" | "/options" | "/options/realm" | "/options/discoveryUrl" | "/options/claimsMapping" | "/pendingOptions" | "/pendingOptions/realm" | "/pendingOptions/discoveryUrl" | "/pendingOptions/clientId" | "/pendingOptions/clientSecret" | "/pendingOptions/emailVerifiedAlwaysTrue" | "/pendingOptions/claimsMapping" | "/postLogoutRedirectUri" | "/clockToleranceSec";
+    path?: "/active" | "/description" | "/meta" | "/options" | "/options/realm" | "/options/discoveryUrl" | "/options/claimsMapping" | "/pendingOptions" | "/pendingOptions/realm" | "/pendingOptions/discoveryUrl" | "/pendingOptions/clientId" | "/pendingOptions/clientSecret" | "/pendingOptions/emailVerifiedAlwaysTrue" | "/pendingOptions/claimsMapping" | "/postLogoutRedirectUri" | "/clockToleranceSec" | "/pendingOptions/idTokenSignatureAlg";
     /** The "value" data type is dependent on the path value being used. */
     value?: unknown;
 };

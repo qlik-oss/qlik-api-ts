@@ -1886,6 +1886,7 @@ async function parseFetchResponse(fetchResponse, url) {
       case "application/offset+octet-stream":
       case "application/octet-stream":
       case "application/zip":
+      case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
         resultData = toDownloadableBlob(await fetchResponse.blob());
         break;
       case "text/event-stream":

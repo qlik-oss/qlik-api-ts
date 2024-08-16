@@ -4,7 +4,7 @@ import {
   invokeFetch,
   isWindows,
   toValidWebsocketLocationUrl
-} from "./N6IB3ZM5.js";
+} from "./3XRP5N4L.js";
 import {
   isBrowser
 } from "./2ZQ3ZX7F.js";
@@ -101,7 +101,7 @@ function listenForWindowsAuthenticationInformation(session) {
   return authSuggestedInWebsocket;
 }
 async function createAndSetupEnigmaSession(props, canRetry) {
-  const { createEnigmaSession } = await import("./OQWVV26L.js");
+  const { createEnigmaSession } = await import("./O3XVX7VQ.js");
   const session = await createEnigmaSession(props);
   setupSessionListeners(session, props);
   let global;
