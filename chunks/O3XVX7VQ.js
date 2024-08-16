@@ -4,7 +4,7 @@ import {
   getRestCallAuthParams,
   getWebSocketAuthParams,
   toValidWebsocketLocationUrl
-} from "./N6IB3ZM5.js";
+} from "./3XRP5N4L.js";
 import {
   isBrowser,
   isNode

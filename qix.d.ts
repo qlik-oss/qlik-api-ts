@@ -1,7 +1,7 @@
 import './global.types-z1p6A9D-.js';
 import { H as HostConfig } from './auth-types-BU5EGt_9.js';
 
-declare const QIX_SCHEMA_VERSION = "12.2143.0";
+declare const QIX_SCHEMA_VERSION = "12.2154.0";
 type AlfaNumString = {
     /**
      * Calculated value.
@@ -9907,6 +9907,10 @@ type NativeGenericObjectFunctions<CustomProperties, CustomLayout, GenericObjectR
      * <div class=note>This method works for a hypercube in DATA_MODE_STRAIGHT.</div>
      * A data set is returned.
      *
+     * ### Default limitations on the number of cells
+     * The default maximum for the combined total of cells across all pages is:
+     * * 10,000 cells. If this limit is exceeded, a calc-pages-too-large error with code 7009 is returned.
+     *
      * Parameters:
      *
      * - `path`    -   Path to the definition of the object to be selected.
@@ -10037,6 +10041,10 @@ type NativeGenericObjectFunctions<CustomProperties, CustomLayout, GenericObjectR
     /**
      * Retrieves the values of a list object.
      * A data set is returned.
+     *
+     * ### Default limitations on the number of cells
+     * The default maximum for the combined total of cells across all pages is:
+     * * 10,000 cells. If this limit is exceeded, a calc-pages-too-large error with code 7009 is returned.
      *
      * Parameters:
      *
