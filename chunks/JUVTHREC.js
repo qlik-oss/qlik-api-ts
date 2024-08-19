@@ -449,6 +449,72 @@ function getOrCreateSharedSession(props) {
   sharedSessions[key] = sharedSessions[key] || createSharedSession(props);
   return sharedSessions[key];
 }
+function getExternalSession(externalApp, appSessionProps) {
+  const listeners = /* @__PURE__ */ new Set();
+  const appSession = {
+    _listeners: listeners,
+    getDoc: () => externalApp,
+    onWebSocketEvent: (fn) => () => {
+      appSession._listeners.add(fn);
+      return () => {
+        appSession._listeners.delete(fn);
+      };
+    },
+    resume: () => Promise.resolve(),
+    close: () => Promise.resolve()
+  };
+  const triggerEventListeners = (event) => {
+    for (const fn of globalEventListeners) {
+      fn(event);
+    }
+    for (const fn of appSession._listeners) {
+      fn(event);
+    }
+  };
+  externalApp.then((app) => {
+    app.session.on("opened", (event) => {
+      const wsEvent = {
+        eventType: "opened",
+        ...appSessionProps,
+        ...event
+      };
+      triggerEventListeners(wsEvent);
+    });
+    app.session.on("closed", (event) => {
+      const wsEvent = {
+        eventType: "closed",
+        ...appSessionProps,
+        ...event
+      };
+      triggerEventListeners(wsEvent);
+    });
+    app.session.on("suspended", (event) => {
+      const wsEvent = {
+        eventType: "suspended",
+        ...appSessionProps,
+        ...event
+      };
+      triggerEventListeners(wsEvent);
+    });
+    app.session.on("resuming", (event) => {
+      const wsEvent = {
+        eventType: "resuming",
+        ...appSessionProps,
+        ...event
+      };
+      triggerEventListeners(wsEvent);
+    });
+    app.session.on("resumed", (event) => {
+      const wsEvent = {
+        eventType: "resumed",
+        ...appSessionProps,
+        ...event
+      };
+      triggerEventListeners(wsEvent);
+    });
+  });
+  return appSession;
+}
 
 // src/qix/qix-functions.ts
 async function createSessionApp() {
@@ -491,13 +557,7 @@ function openAppSession(appIdOrProps) {
   const appSessionId = toGlobalAppSessionId(appSessionProps);
   const externalApp = externalApps[appSessionId];
   if (externalApp) {
-    return {
-      getDoc: () => externalApp,
-      onWebSocketEvent: (fn) => () => {
-      },
-      resume: () => Promise.resolve(),
-      close: () => Promise.resolve()
-    };
+    return getExternalSession(externalApp, appSessionProps);
   }
   const sharedSession = getOrCreateSharedSession(appSessionProps);
   const listeners = /* @__PURE__ */ new Set();
