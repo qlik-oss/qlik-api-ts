@@ -792,7 +792,61 @@ async function refreshAccessToken(hostConfig) {
   }
 }
 
+// src/auth/internal/default-auth-modules/oauth/temporary-token.ts
+async function exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, purpose) {
+  const response = await fetch(`${toValidLocationUrl(hostConfig)}/oauth/token`, {
+    method: "POST",
+    credentials: "include",
+    mode: "cors",
+    headers: { "content-type": "application/json" },
+    redirect: "follow",
+    body: JSON.stringify({
+      subject_token: accessToken,
+      subject_token_type: "urn:ietf:params:oauth:token-type:access_token",
+      grant_type: "urn:ietf:params:oauth:grant-type:token-exchange",
+      purpose,
+      redirect_uri: globalThis.location?.href,
+      client_id: hostConfig.clientId
+    })
+  });
+  if (response.status !== 200) {
+    throw await toError(response);
+  }
+  const data = await response.json();
+  return data.access_token;
+}
+async function toError(response) {
+  const body = await response.text();
+  try {
+    const data = JSON.parse(body);
+    return new AuthorizationError(data.errors);
+  } catch (err) {
+    return new AuthorizationError([
+      {
+        code: "unknown",
+        status: response.status,
+        detail: body,
+        title: "Unknown authentication error"
+      }
+    ]);
+  }
+}
+
 // src/auth/internal/default-auth-modules/anonymous.ts
+async function handlePotentialAuthenticationErrorAndRetry(hostConfig, fn) {
+  try {
+    return await fn();
+  } catch (err) {
+    const { retry } = await handleAuthenticationError2({
+      hostConfig,
+      canRetry: true
+    });
+    if (retry) {
+      return fn();
+    }
+    throw err;
+  }
+}
 async function getOrCreateTrackingCode(hostConfig) {
   let trackingCode;
   if (isBrowser()) {
@@ -809,7 +863,7 @@ async function getOrCreateTrackingCode(hostConfig) {
 }
 function createTrackingCode() {
   const timeStamp = Math.floor(Date.now() / 1e3).toString(16);
-  const randomString = generateRandomHexString(20);
+  const randomString = generateRandomHexString(40 - timeStamp.length);
   return `${timeStamp}${randomString}`;
 }
 async function getAnonymousAccessToken(hostConfig) {
@@ -849,20 +903,26 @@ async function getRestCallAuthParams2({
 async function getWebSocketAuthParams2({
   hostConfig
 }) {
-  const accessToken = await getAnonymousAccessToken(hostConfig);
+  const websocketAccessToken = await handlePotentialAuthenticationErrorAndRetry(hostConfig, async () => {
+    const accessToken = await getAnonymousAccessToken(hostConfig);
+    return exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, "websocket");
+  });
   return {
     queryParams: {
-      accessToken
+      accessToken: websocketAccessToken
     }
   };
 }
 async function getWebResourceAuthParams2({
   hostConfig
 }) {
-  const accessToken = await getAnonymousAccessToken(hostConfig);
+  const websocketResourceAccessToken = await handlePotentialAuthenticationErrorAndRetry(hostConfig, async () => {
+    const accessToken = await getAnonymousAccessToken(hostConfig);
+    return exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, "websocket");
+  });
   return {
     queryParams: {
-      accessToken
+      accessToken: websocketResourceAccessToken
     }
   };
 }
@@ -1059,51 +1119,11 @@ function handleOAuthCallback() {
   }
 }
 
-// src/auth/internal/default-auth-modules/oauth/temporary-token.ts
-async function exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, purpose) {
-  const response = await fetch(`${toValidLocationUrl(hostConfig)}/oauth/token`, {
-    method: "POST",
-    credentials: "include",
-    mode: "cors",
-    headers: { "content-type": "application/json" },
-    redirect: "follow",
-    body: JSON.stringify({
-      subject_token: accessToken,
-      subject_token_type: "urn:ietf:params:oauth:token-type:access_token",
-      grant_type: "urn:ietf:params:oauth:grant-type:token-exchange",
-      purpose,
-      redirect_uri: globalThis.location?.href,
-      client_id: hostConfig.clientId
-    })
-  });
-  if (response.status !== 200) {
-    throw await toError(response);
-  }
-  const data = await response.json();
-  return data.access_token;
-}
-async function toError(response) {
-  const body = await response.text();
-  try {
-    const data = JSON.parse(body);
-    return new AuthorizationError(data.errors);
-  } catch (err) {
-    return new AuthorizationError([
-      {
-        code: "unknown",
-        status: response.status,
-        detail: body,
-        title: "Unknown authentication error"
-      }
-    ]);
-  }
-}
-
 // src/auth/internal/default-auth-modules/oauth.ts
 if (isBrowser()) {
   handleOAuthCallback();
 }
-async function handlePotentialAuthenticationErrorAndRetry(hostConfig, fn) {
+async function handlePotentialAuthenticationErrorAndRetry2(hostConfig, fn) {
   try {
     return await fn();
   } catch (err) {
@@ -1131,7 +1151,7 @@ async function getRestCallAuthParams6({
 async function getWebSocketAuthParams6({
   hostConfig
 }) {
-  const websocketAccessToken = await handlePotentialAuthenticationErrorAndRetry(hostConfig, async () => {
+  const websocketAccessToken = await handlePotentialAuthenticationErrorAndRetry2(hostConfig, async () => {
     const accessToken = await getOAuthAccessToken(hostConfig);
     return exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, "websocket");
   });
@@ -1144,7 +1164,7 @@ async function getWebSocketAuthParams6({
 async function getWebResourceAuthParams3({
   hostConfig
 }) {
-  const webResourceAccessToken = await handlePotentialAuthenticationErrorAndRetry(hostConfig, async () => {
+  const webResourceAccessToken = await handlePotentialAuthenticationErrorAndRetry2(hostConfig, async () => {
     const accessToken = await getOAuthAccessToken(hostConfig);
     return exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, "webresource");
   });
