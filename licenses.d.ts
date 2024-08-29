@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types-z1p6A9D-.js';
+import { A as ApiCallOptions } from './global.types-BU2Yugjm.js';
 import './auth-types-BU5EGt_9.js';
 
 type AssignmentsActionsAddRequest = {

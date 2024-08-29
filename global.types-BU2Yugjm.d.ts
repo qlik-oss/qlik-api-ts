@@ -58,6 +58,8 @@ type CookieAuthConfig = {
     webIntegrationId?: string;
     /** If set to false the `credentials` property will be set to same-origin  */
     crossSiteCookies?: boolean;
+    /** Set to true if browser is running in anonymous mode, which is detected if there's a eac token in the url */
+    anonymousMode?: boolean;
 };
 /** WindowsCookie Auth Configuration for a HostConfig */
 type WindowsCookieAuthConfig = {
@@ -100,6 +102,7 @@ type Oauth2AuthConfig = {
      */
     userId?: string;
 };
+/** Anonymous Auth Configuration for a HostConfig - used when embedding UI's linked to an anonymous tenant/app */
 type AnonymousAuthConfig = {
     /**
      * Experimental and unsupported
