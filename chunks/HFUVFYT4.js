@@ -1069,7 +1069,7 @@ var cookie_default = {
   handleAuthenticationError: handleAuthenticationError4,
   validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, {
     requiredProps: [],
-    optionalProps: ["webIntegrationId", "crossSiteCookies"]
+    optionalProps: ["webIntegrationId", "crossSiteCookies", "anonymousMode"]
   })
 };
 

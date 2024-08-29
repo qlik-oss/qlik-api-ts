@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types-z1p6A9D-.js';
+import { A as ApiCallOptions } from './global.types-BU2Yugjm.js';
 import './auth-types-BU5EGt_9.js';
 
 type Error = {
@@ -77,7 +77,7 @@ type Tasks = {
     links: PaginationLinks;
 };
 /**
- * Find and return the tasks that the user can access.
+ * Finds and returns the tasks that the user has access to.
  *
  * @param query an object with query parameters
  * @throws GetReloadTasksHttpError
@@ -105,7 +105,7 @@ type GetReloadTasksHttpError = {
     status: number;
 };
 /**
- * Create a task for a specified app.
+ * Creates a task for a specified app.
  *
  * @param body an object with the body content
  * @throws CreateReloadTaskHttpError
@@ -122,7 +122,7 @@ type CreateReloadTaskHttpError = {
     status: number;
 };
 /**
- * Delete a task.
+ * Deletes a task
  *
  * @param taskId The unique identifier of the task.
  * @throws DeleteReloadTaskHttpError
@@ -139,7 +139,7 @@ type DeleteReloadTaskHttpError = {
     status: number;
 };
 /**
- * Find and return a task.
+ * Finds and returns a task.
  *
  * @param taskId The unique identifier of the task.
  * @throws GetReloadTaskHttpError
@@ -156,7 +156,7 @@ type GetReloadTaskHttpError = {
     status: number;
 };
 /**
- * Update an existing task.
+ * Updates an existing task
  *
  * @param taskId The unique identifier of the task.
  * @param body an object with the body content
@@ -179,35 +179,35 @@ type UpdateReloadTaskHttpError = {
 declare function clearCache(): void;
 interface ReloadTasksAPI {
     /**
-     * Find and return the tasks that the user can access.
+     * Finds and returns the tasks that the user has access to.
      *
      * @param query an object with query parameters
      * @throws GetReloadTasksHttpError
      */
     getReloadTasks: typeof getReloadTasks;
     /**
-     * Create a task for a specified app.
+     * Creates a task for a specified app.
      *
      * @param body an object with the body content
      * @throws CreateReloadTaskHttpError
      */
     createReloadTask: typeof createReloadTask;
     /**
-     * Delete a task.
+     * Deletes a task
      *
      * @param taskId The unique identifier of the task.
      * @throws DeleteReloadTaskHttpError
      */
     deleteReloadTask: typeof deleteReloadTask;
     /**
-     * Find and return a task.
+     * Finds and returns a task.
      *
      * @param taskId The unique identifier of the task.
      * @throws GetReloadTaskHttpError
      */
     getReloadTask: typeof getReloadTask;
     /**
-     * Update an existing task.
+     * Updates an existing task
      *
      * @param taskId The unique identifier of the task.
      * @param body an object with the body content

@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types-z1p6A9D-.js';
+import { A as ApiCallOptions } from './global.types-BU2Yugjm.js';
 import './auth-types-BU5EGt_9.js';
 
 /**
@@ -108,7 +108,9 @@ type ExportError = {
      * - "REP-400029" Reload Entitlement Limit Reached.
      * - "REP-409046" Report aborted due to app reload.
      * - "REP-500047" Error setting GroupState.
-     * - "REP-403048" Forbidden. User does not have permission to export the report (access control usePermission) */
+     * - "REP-403048" Forbidden. User does not have permission to export the report (access control usePermission)
+     * - "REP-422051" There is no report to produce due to empty dataset or missing fields (the measure/dimension was removed or omitted in Section Access)
+     * - "REP-500014" The app did not open within 5 minutes. */
     code: string;
     /** Optional. MAY be used to provide more concrete details. */
     detail?: string;
