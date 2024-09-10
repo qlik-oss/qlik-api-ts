@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-BU2Yugjm.js';
-import './auth-types-BU5EGt_9.js';
+import { A as ApiCallOptions } from './global.types--37uwGji.js';
+import './auth-types-PkN9CAF_.js';
 
 /**
  * Object containing meta data regarding the bundle the extension belongs to. If it does not belong to a bundle, this object is not defined.
@@ -96,7 +96,7 @@ type Meta = {
     stack?: string;
 };
 /**
- * Lists all extensions.
+ * Lists all imported extensions in the tenant.
  *
  * @throws GetExtensionsHttpError
  */
@@ -112,7 +112,7 @@ type GetExtensionsHttpError = {
     status: number;
 };
 /**
- * Creates a new extension. If a file is provided, the data field is not required.
+ * Creates a new extension. Accepts either provided file or data object. The name of the new extension must be different to any existing extensions.
  *
  * @param body an object with the body content
  * @throws UploadExtensionHttpError
@@ -134,7 +134,7 @@ type UploadExtensionHttpError = {
     status: number;
 };
 /**
- * Deletes a specific extension.
+ * Deletes a specific extension matching either extension ID or extension name.
  *
  * @param id Extension identifier or its qextFilename.
  * @throws DeleteExtensionHttpError
@@ -151,7 +151,7 @@ type DeleteExtensionHttpError = {
     status: number;
 };
 /**
- * Returns a specific extension.
+ * Returns a specific extension matching either extension ID or extension name.
  *
  * @param id Extension identifier or its qextFilename.
  * @throws GetExtensionHttpError
@@ -168,7 +168,7 @@ type GetExtensionHttpError = {
     status: number;
 };
 /**
- * Updates a specific extension with provided data. If a file is provided, the data field is not required.
+ * Updates a specific extension matching either extension ID or extension name. Accepts either provided file or data object.
  *
  * @param id Extension identifier or its qextFilename.
  * @param body an object with the body content
@@ -191,7 +191,7 @@ type PatchExtensionHttpError = {
     status: number;
 };
 /**
- * Downloads the extension as an archive.
+ * Downloads all files in the extension matching either extension ID or extension name as a `.zip` archive.
  *
  * @param id Extension identifier or its qextFilename.
  * @throws DownloadExtensionHttpError
@@ -208,10 +208,10 @@ type DownloadExtensionHttpError = {
     status: number;
 };
 /**
- * Downloads a file from the extension archive.
+ * Downloads a specific file from the extension matching either extension ID or extension name, identified by the file path within the imported extension.
  *
  * @param id Extension identifier or its qextFilename.
- * @param filepath Path to the file archive for the specified extension archive. Folders separated with forward slashes.
+ * @param filepath Path to the file location within the specified extension archive. Folders separated with forward slashes.
  * @throws DownloadFileFromExtensionHttpError
  */
 declare const downloadFileFromExtension: (id: string, filepath: string, options?: ApiCallOptions) => Promise<DownloadFileFromExtensionHttpResponse>;
@@ -231,34 +231,34 @@ type DownloadFileFromExtensionHttpError = {
 declare function clearCache(): void;
 interface ExtensionsAPI {
     /**
-     * Lists all extensions.
+     * Lists all imported extensions in the tenant.
      *
      * @throws GetExtensionsHttpError
      */
     getExtensions: typeof getExtensions;
     /**
-     * Creates a new extension. If a file is provided, the data field is not required.
+     * Creates a new extension. Accepts either provided file or data object. The name of the new extension must be different to any existing extensions.
      *
      * @param body an object with the body content
      * @throws UploadExtensionHttpError
      */
     uploadExtension: typeof uploadExtension;
     /**
-     * Deletes a specific extension.
+     * Deletes a specific extension matching either extension ID or extension name.
      *
      * @param id Extension identifier or its qextFilename.
      * @throws DeleteExtensionHttpError
      */
     deleteExtension: typeof deleteExtension;
     /**
-     * Returns a specific extension.
+     * Returns a specific extension matching either extension ID or extension name.
      *
      * @param id Extension identifier or its qextFilename.
      * @throws GetExtensionHttpError
      */
     getExtension: typeof getExtension;
     /**
-     * Updates a specific extension with provided data. If a file is provided, the data field is not required.
+     * Updates a specific extension matching either extension ID or extension name. Accepts either provided file or data object.
      *
      * @param id Extension identifier or its qextFilename.
      * @param body an object with the body content
@@ -266,17 +266,17 @@ interface ExtensionsAPI {
      */
     patchExtension: typeof patchExtension;
     /**
-     * Downloads the extension as an archive.
+     * Downloads all files in the extension matching either extension ID or extension name as a `.zip` archive.
      *
      * @param id Extension identifier or its qextFilename.
      * @throws DownloadExtensionHttpError
      */
     downloadExtension: typeof downloadExtension;
     /**
-     * Downloads a file from the extension archive.
+     * Downloads a specific file from the extension matching either extension ID or extension name, identified by the file path within the imported extension.
      *
      * @param id Extension identifier or its qextFilename.
-     * @param filepath Path to the file archive for the specified extension archive. Folders separated with forward slashes.
+     * @param filepath Path to the file location within the specified extension archive. Folders separated with forward slashes.
      * @throws DownloadFileFromExtensionHttpError
      */
     downloadFileFromExtension: typeof downloadFileFromExtension;

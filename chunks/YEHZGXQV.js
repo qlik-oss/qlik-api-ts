@@ -188,23 +188,33 @@ var InvalidAuthTypeError = class extends Error {
     this.name = "InvalidAuthTypeError";
   }
 };
+function errorToString({ title, detail, code, status }) {
+  if (detail) {
+    return `${title} - ${detail} (Status: ${status}, Code: ${code})`;
+  }
+  return `${title} (Status: ${status}, Code: ${code})`;
+}
 var AuthorizationError = class extends Error {
+  errors;
   constructor(errors) {
+    if (typeof errors !== "object") {
+      super("Unknown error");
+      return;
+    }
     const errorArray = Array.isArray(errors) ? errors : [errors];
-    super(
-      errorArray.map(
-        (error) => `
-Code: ${error.code}
-Status: ${error.status}
-${error.title}:
-${error.detail}
-`
-      ).join(",\n")
-    );
+    super(errorArray.map(errorToString).join(", "));
+    this.errors = errorArray;
   }
 };
 
 // src/auth/auth-functions.ts
+var lastErrorMessage = "";
+function logToConsole({ message }) {
+  if (message !== lastErrorMessage) {
+    lastErrorMessage = message;
+    console.error(message);
+  }
+}
 function isHostCrossOrigin(hostConfig) {
   if (!globalThis.location?.origin) {
     return true;
@@ -265,31 +275,57 @@ function toValidWebsocketLocationUrl(hostConfig) {
 }
 async function getWebSocketAuthParams(props) {
   const hostConfigToUse = withDefaultHostConfig(props.hostConfig);
-  return (await getAuthModule(hostConfigToUse)).getWebSocketAuthParams({
-    ...props,
-    hostConfig: hostConfigToUse
-  });
+  try {
+    const authModule = await getAuthModule(hostConfigToUse);
+    return await authModule.getWebSocketAuthParams({
+      ...props,
+      hostConfig: hostConfigToUse
+    });
+  } catch (err) {
+    (hostConfigToUse.onAuthFailed || logToConsole)(normalizeAuthModuleError(err));
+    throw err;
+  }
 }
 async function getWebResourceAuthParams(props) {
   const hostConfigToUse = withDefaultHostConfig(props.hostConfig);
-  return (await getAuthModule(hostConfigToUse)).getWebResourceAuthParams?.({
-    ...props,
-    hostConfig: hostConfigToUse
-  }) || { queryParams: {} };
+  try {
+    const authModule = await getAuthModule(hostConfigToUse);
+    return await authModule.getWebResourceAuthParams?.({
+      ...props,
+      hostConfig: hostConfigToUse
+    }) || { queryParams: {} };
+  } catch (err) {
+    (hostConfigToUse.onAuthFailed || logToConsole)(normalizeAuthModuleError(err));
+    throw err;
+  }
 }
 async function handleAuthenticationError(props) {
   const hostConfigToUse = withDefaultHostConfig(props.hostConfig);
-  return (await getAuthModule(hostConfigToUse)).handleAuthenticationError({
+  const authModule = await getAuthModule(hostConfigToUse);
+  const result2 = await authModule.handleAuthenticationError({
     ...props,
     hostConfig: hostConfigToUse
   });
+  const willRetry = props.canRetry && result2.retry;
+  const willHangUntilANewPageIsLoaded = result2.preventDefault;
+  if (!willRetry && !willHangUntilANewPageIsLoaded) {
+    const { status, errorBody } = props;
+    (hostConfigToUse.onAuthFailed || logToConsole)(normalizeInbandAuthError({ status, errorBody }));
+  }
+  return result2;
 }
 async function getRestCallAuthParams(props) {
   const hostConfigToUse = withDefaultHostConfig(props.hostConfig);
-  return (await getAuthModule(hostConfigToUse)).getRestCallAuthParams({
-    ...props,
-    hostConfig: hostConfigToUse
-  });
+  try {
+    const authModule = await getAuthModule(hostConfigToUse);
+    return await authModule.getRestCallAuthParams({
+      ...props,
+      hostConfig: hostConfigToUse
+    });
+  } catch (err) {
+    (hostConfigToUse.onAuthFailed || logToConsole)(normalizeAuthModuleError(err));
+    throw err;
+  }
 }
 async function getAccessToken(props) {
   const res = await getRestCallAuthParams({ method: "GET", ...props });
@@ -321,6 +357,17 @@ var logout = () => {
   globalThis.location.href = "/logout";
 };
 var leadingHttp = /^http/;
+function normalizeInbandAuthError({ errorBody, status }) {
+  const authError = errorBody;
+  if (typeof authError?.errors === "object") {
+    const err = new AuthorizationError(authError?.errors);
+    return { message: err.message };
+  }
+  return { message: `HTTP ${status}` };
+}
+function normalizeAuthModuleError(err) {
+  return { message: err.message || "Unknown error" };
+}
 
 // src/random/random.ts
 import { customAlphabet, nanoid } from "nanoid";
@@ -359,6 +406,7 @@ function internalValidateHostConfig(hostConfig, options) {
     "authRedirectUserConfirmation",
     "embedRuntimeUrl",
     "host",
+    "onAuthFailed",
     ...options.requiredProps,
     ...options.optionalProps
   ];
@@ -652,7 +700,7 @@ async function getOauthTokensWithRefreshToken(baseUrl, refreshToken, clientSecre
   };
 }
 async function getAnonymousOauthAccessToken(baseUrl, accessCode, clientId, trackingCode) {
-  const result2 = await fetch(`${baseUrl}/oauth/token`, {
+  const result2 = await fetch(`${baseUrl}/oauth/token/anonymous-embed`, {
     method: "POST",
     mode: "cors",
     headers: { "content-type": "application/json" },

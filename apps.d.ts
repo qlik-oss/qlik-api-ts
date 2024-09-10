@@ -1,5 +1,5 @@
-import { A as ApiCallOptions, D as DownloadableBlob } from './global.types-BU2Yugjm.js';
-import './auth-types-BU5EGt_9.js';
+import { A as ApiCallOptions, D as DownloadableBlob } from './global.types--37uwGji.js';
+import './auth-types-PkN9CAF_.js';
 
 type Analysis = "breakdown" | "changePoint" | "comparison" | "contribution" | "correlation" | "fact" | "mutualInfo" | "rank" | "spike" | "trend" | "values";
 type AnalysisComposition = {
@@ -696,7 +696,7 @@ type NxAttributes = {
     /** The Origin App ID for published apps. */
     originAppId?: string;
     /** @deprecated
-     * Deprecated. Use user api to fetch user metadata. */
+     * Deprecated. Use the Users API to fetch user metadata. */
     owner?: string;
     /** Identifier of the app owner. */
     ownerId?: string;
@@ -985,7 +985,7 @@ type UpdateOwner = {
 type UpdateSpace = {
     spaceId?: string;
 };
-type UsageEnum = "ANALYTICS" | "DATA_PREPARATION" | "DATAFLOW_PREP";
+type UsageEnum = "ANALYTICS" | "DATA_PREPARATION" | "DATAFLOW_PREP" | "SINGLE_TABLE_PREP";
 type UserPrivileges = "can_create_app" | "can_import_app" | "can_create_session_app";
 type Classification = {
     absoluteDiff?: number;

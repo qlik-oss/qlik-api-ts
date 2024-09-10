@@ -31,8 +31,8 @@ import { UsersAPI } from './users.js';
 import { WebIntegrationsAPI } from './web-integrations.js';
 import { WebNotificationsAPI } from './web-notifications.js';
 import { WebhooksAPI } from './webhooks.js';
-import './global.types-BU2Yugjm.js';
-import './auth-types-BU5EGt_9.js';
+import './global.types--37uwGji.js';
+import './auth-types-PkN9CAF_.js';
 
 declare const apiKeys: ApiKeysAPI;
 declare const apps: AppsAPI;
