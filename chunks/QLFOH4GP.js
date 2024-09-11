@@ -4,10 +4,54 @@ import {
   invokeFetch,
   isWindows,
   toValidWebsocketLocationUrl
-} from "./HFUVFYT4.js";
+} from "./YEHZGXQV.js";
 import {
   isBrowser
 } from "./2ZQ3ZX7F.js";
+
+// src/qix/session/websocket-errors.ts
+var closeCodeEngineTerminating = 4003;
+var closeCodeEngineAbnormalClosure = 1006;
+var closeCodeEngineProxyGeneric = 4200;
+var closeCodeClientTimeout = 4201;
+var closeCodeBadRequest = 4202;
+var closeCodePermissions = 4203;
+var closeCodeNotFound = 4204;
+var closeCodeTooManyRequests = 4205;
+var closeCodeNetwork = 4206;
+var closeCodeDependencyGeneric = 4210;
+var closeCodeDependencyUnavailable = 4211;
+var closeCodeEngineGeneric = 4220;
+var closeCodeEntitlement = 4230;
+var closeCodeNoEnginesAvailable = 4240;
+var CloseCodeSessionReservationMissing = 4222;
+var closeCodeMessages = {
+  [closeCodeEngineTerminating]: "The engine is in terminating state",
+  [closeCodeEngineAbnormalClosure]: "The engine is abnormally closed",
+  [closeCodeEngineProxyGeneric]: "A problem occurred in engine-proxy",
+  [closeCodeClientTimeout]: "The client has closed the connection",
+  [closeCodeBadRequest]: "The provided request is invalid and/or malformed",
+  [closeCodePermissions]: "No permission to open the app",
+  [closeCodeNotFound]: "App not found",
+  [closeCodeTooManyRequests]: "Too many requests have been sent in a given amount of time",
+  [closeCodeNetwork]: "Networking issues",
+  [closeCodeDependencyGeneric]: "A problem occurred in a dependency of engine-proxy",
+  [closeCodeDependencyUnavailable]: "A dependency is unavailable and not serving any requests",
+  [closeCodeEngineGeneric]: "A problem occurred in an engine",
+  [closeCodeEntitlement]: "You are not entitled to perform that operation",
+  [closeCodeNoEnginesAvailable]: "There are currently no engines available",
+  [CloseCodeSessionReservationMissing]: "The reserved session is missing"
+};
+var uknownCloseErrorMessage = "websocket closed for unknown reason";
+function getHumanReadableSocketClosedErrorMessage(err, { appId, hostConfig }) {
+  const closeCode = err?.original?.code;
+  const closeMessage = closeCode ? closeCodeMessages[closeCode] || uknownCloseErrorMessage : err.message;
+  if (hostConfig?.host) {
+    return `Failed to open app ${appId} on ${hostConfig?.host}: ${closeMessage}`;
+  } else {
+    return `Failed to open app ${appId}: ${closeMessage}`;
+  }
+}
 
 // src/qix/session/shared-sessions.ts
 var globalEventListeners = /* @__PURE__ */ new Set();
@@ -101,7 +145,7 @@ function listenForWindowsAuthenticationInformation(session) {
   return authSuggestedInWebsocket;
 }
 async function createAndSetupEnigmaSession(props, canRetry) {
-  const { createEnigmaSession } = await import("./6MPNTVLD.js");
+  const { createEnigmaSession } = await import("./4FZ45I6G.js");
   const session = await createEnigmaSession(props);
   setupSessionListeners(session, props);
   let global;
@@ -327,7 +371,8 @@ function createSharedSession(props) {
   const clients = [];
   function closeEnigmaSession() {
     delete sharedSessions[key];
-    return sharedSession.sessionPromise.then((session) => session.close());
+    return sharedSession.sessionPromise.then((session) => session.close()).catch(() => {
+    });
   }
   const sharedSession = {
     sessionPromise,
@@ -380,7 +425,11 @@ function createSharedSession(props) {
   });
   sharedSession.docPromise = sharedSession.docPromise.catch((err) => {
     closeEnigmaSession();
-    return Promise.reject(err);
+    const errorWithReadableMessage = new Error(getHumanReadableSocketClosedErrorMessage(err, props));
+    Object.entries(err).forEach(([key2, value]) => {
+      errorWithReadableMessage[key2] = value;
+    });
+    return Promise.reject(errorWithReadableMessage);
   });
   return sharedSession;
 }

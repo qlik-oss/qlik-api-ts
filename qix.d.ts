@@ -1,7 +1,7 @@
-import './global.types-BU2Yugjm.js';
-import { H as HostConfig } from './auth-types-BU5EGt_9.js';
+import './global.types--37uwGji.js';
+import { H as HostConfig } from './auth-types-PkN9CAF_.js';
 
-declare const QIX_SCHEMA_VERSION = "12.2165.0";
+declare const QIX_SCHEMA_VERSION = "12.2180.0";
 type AlfaNumString = {
     /**
      * Calculated value.
@@ -975,6 +975,7 @@ type DocListEntry = {
      * * ANALYTICS
      * * DATA_PREPARATION
      * * DATAFLOW_PREP
+     * * SINGLE_TABLE_PREP
      */
     qUsage?: UsageEnum;
 };
@@ -2926,6 +2927,7 @@ type NxAppLayout = {
      * * ANALYTICS
      * * DATA_PREPARATION
      * * DATAFLOW_PREP
+     * * SINGLE_TABLE_PREP
      */
     qUsage?: UsageEnum;
 };
@@ -2979,6 +2981,7 @@ type NxAppProperties = {
      * * ANALYTICS
      * * DATA_PREPARATION
      * * DATAFLOW_PREP
+     * * SINGLE_TABLE_PREP
      */
     qUsage?: UsageEnum;
 };
@@ -6843,7 +6846,7 @@ type UndoInfo = {
  * The numbers of undos and redos are empty when an object is created. The number of possible undos is increased every time an action (for example, create a child, set some properties) on the object is performed. The number of possible redos is increased every time an undo action is performed.
  */
 type UndoInfoDef = object;
-type UsageEnum = "ANALYTICS" | "DATA_PREPARATION" | "DATAFLOW_PREP";
+type UsageEnum = "ANALYTICS" | "DATA_PREPARATION" | "DATAFLOW_PREP" | "SINGLE_TABLE_PREP";
 type ValueExpr = {
     /**
      * Expression evaluated to dual.
