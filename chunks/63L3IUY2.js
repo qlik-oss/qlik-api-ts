@@ -1686,7 +1686,8 @@ function invokeFetchWithUrl(api, props, interceptors) {
       const { cacheKey, authHeaders, credentials } = await getInvokeFetchUrlParams(props);
       return invokeFetchWithUrlAndRetry(
         api,
-        { ...props, cacheKey, authHeaders, credentials },
+        { ...props, cacheKey, authHeaders, credentials, options: { ...props.options, noCache: true } },
+        // don't cache the retry
         void 0,
         // only retry once
         interceptors

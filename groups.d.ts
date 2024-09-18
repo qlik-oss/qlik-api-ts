@@ -268,7 +268,7 @@ type FilterGroupsHttpError = {
     status: number;
 };
 /**
- * Returns the active tenant's group settings.
+ * Returns the tenant's group settings, such as whether automatic group creation and IdP group synchronization are enabled or disabled, and roles assigned to system groups.
  *
  * @throws GetGroupsSettingsHttpError
  */
@@ -284,7 +284,7 @@ type GetGroupsSettingsHttpError = {
     status: number;
 };
 /**
- * Update group settings
+ * Updates the tenant's group settings, such as whether automatic group creation and IdP group synchronization are enabled or disabled, and roles assigned to system groups.
  *
  * @param body an object with the body content
  * @throws PatchGroupsSettingsHttpError
@@ -301,7 +301,7 @@ type PatchGroupsSettingsHttpError = {
     status: number;
 };
 /**
- * Delete group by id
+ * Deletes the requested group.
  *
  * @param groupId The ID of the group to delete.
  * @throws DeleteGroupHttpError
@@ -335,7 +335,7 @@ type GetGroupHttpError = {
     status: number;
 };
 /**
- * Update group by id
+ * Updates the requested group.
  *
  * @param groupId The ID of the group to update.
  * @param body an object with the body content
@@ -380,20 +380,20 @@ interface GroupsAPI {
      */
     filterGroups: typeof filterGroups;
     /**
-     * Returns the active tenant's group settings.
+     * Returns the tenant's group settings, such as whether automatic group creation and IdP group synchronization are enabled or disabled, and roles assigned to system groups.
      *
      * @throws GetGroupsSettingsHttpError
      */
     getGroupsSettings: typeof getGroupsSettings;
     /**
-     * Update group settings
+     * Updates the tenant's group settings, such as whether automatic group creation and IdP group synchronization are enabled or disabled, and roles assigned to system groups.
      *
      * @param body an object with the body content
      * @throws PatchGroupsSettingsHttpError
      */
     patchGroupsSettings: typeof patchGroupsSettings;
     /**
-     * Delete group by id
+     * Deletes the requested group.
      *
      * @param groupId The ID of the group to delete.
      * @throws DeleteGroupHttpError
@@ -407,7 +407,7 @@ interface GroupsAPI {
      */
     getGroup: typeof getGroup;
     /**
-     * Update group by id
+     * Updates the requested group.
      *
      * @param groupId The ID of the group to update.
      * @param body an object with the body content
