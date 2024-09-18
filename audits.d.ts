@@ -101,7 +101,7 @@ type ListLinks = {
     self?: Href;
 };
 /**
- * Finds and returns the persisted audit events for the given tenant.
+ * Retrieves list of events for subscribed services for your tenant. Stores events for 90 days, after which they can be accessed via `/v1/audits/archive`.
  *
  * @param query an object with query parameters
  * @throws GetAuditsHttpError
@@ -109,7 +109,7 @@ type ListLinks = {
 declare const getAudits: (query: {
     /** The start/end time interval formatted in ISO 8601 to search by eventTime. For example, "?eventTime=2021-07-14T18:41:15.00Z/2021-07-14T18:41:15.99Z". */
     eventTime?: string;
-    /** The case-sensitive string used to search by eventType. */
+    /** The case-sensitive string used to search by eventType. Retrieve a list of possible eventTypes with `/v1/audits/types`. */
     eventType?: string;
     /** The comma separated list of audit unique identifiers. */
     id?: string;
@@ -121,7 +121,7 @@ declare const getAudits: (query: {
     prev?: string;
     /** The property of a resource to sort on (default sort is -eventTime). The supported properties are source, eventType, and eventTime. A property must be prefixed by + or - to indicate ascending or descending sort order respectively. */
     sort?: string;
-    /** The case-sensitive string used to search by source. */
+    /** The case-sensitive string used to search by source. Retrieve a list of possible sources with `/v1/audits/sources`. */
     source?: string;
     /** The case-sensitive string used to search by userId. */
     userId?: string;
@@ -139,7 +139,7 @@ type GetAuditsHttpError = {
     status: number;
 };
 /**
- * Finds and returns audit events from the archive, formatted as a JSON array, for the given date and tenant (in JWT).
+ * Retrieves audit events from long term storage. Finds and returns audit events from the archive, formatted as a JSON array, for the given date and tenant (in JWT). Archived events are not removed.
  *
  * @param query an object with query parameters
  * @throws GetArchivedAuditsHttpError
@@ -159,7 +159,7 @@ type GetArchivedAuditsHttpError = {
     status: number;
 };
 /**
- * It includes options that represent the server configuration state and parameters that were used to run the server with certain functionality.
+ * Returns the server configuration options. It includes options that represent the server configuration state and parameters that were used to run the server with certain functionality.
  *
  * @throws GetAuditsSettingsHttpError
  */
@@ -175,7 +175,7 @@ type GetAuditsSettingsHttpError = {
     status: number;
 };
 /**
- * Finds and returns the distinct list of unique event sources.
+ * Finds and returns the list of possible event sources for this tenant.
  *
  * @throws GetAuditSourcesHttpError
  */
@@ -193,7 +193,7 @@ type GetAuditSourcesHttpError = {
     status: number;
 };
 /**
- * Finds and returns the distinct list of unique event types.
+ * Finds and returns the list of possible event types for this tenant.
  *
  * @throws GetAuditTypesHttpError
  */
@@ -211,7 +211,7 @@ type GetAuditTypesHttpError = {
     status: number;
 };
 /**
- * Finds and returns the persisted audit events for the given tenant.
+ * Finds and returns a specific audit events for the given event ID.
  *
  * @param id The audit item's unique identifier.
  * @throws GetAuditHttpError
@@ -233,39 +233,39 @@ type GetAuditHttpError = {
 declare function clearCache(): void;
 interface AuditsAPI {
     /**
-     * Finds and returns the persisted audit events for the given tenant.
+     * Retrieves list of events for subscribed services for your tenant. Stores events for 90 days, after which they can be accessed via `/v1/audits/archive`.
      *
      * @param query an object with query parameters
      * @throws GetAuditsHttpError
      */
     getAudits: typeof getAudits;
     /**
-     * Finds and returns audit events from the archive, formatted as a JSON array, for the given date and tenant (in JWT).
+     * Retrieves audit events from long term storage. Finds and returns audit events from the archive, formatted as a JSON array, for the given date and tenant (in JWT). Archived events are not removed.
      *
      * @param query an object with query parameters
      * @throws GetArchivedAuditsHttpError
      */
     getArchivedAudits: typeof getArchivedAudits;
     /**
-     * It includes options that represent the server configuration state and parameters that were used to run the server with certain functionality.
+     * Returns the server configuration options. It includes options that represent the server configuration state and parameters that were used to run the server with certain functionality.
      *
      * @throws GetAuditsSettingsHttpError
      */
     getAuditsSettings: typeof getAuditsSettings;
     /**
-     * Finds and returns the distinct list of unique event sources.
+     * Finds and returns the list of possible event sources for this tenant.
      *
      * @throws GetAuditSourcesHttpError
      */
     getAuditSources: typeof getAuditSources;
     /**
-     * Finds and returns the distinct list of unique event types.
+     * Finds and returns the list of possible event types for this tenant.
      *
      * @throws GetAuditTypesHttpError
      */
     getAuditTypes: typeof getAuditTypes;
     /**
-     * Finds and returns the persisted audit events for the given tenant.
+     * Finds and returns a specific audit events for the given event ID.
      *
      * @param id The audit item's unique identifier.
      * @throws GetAuditHttpError
