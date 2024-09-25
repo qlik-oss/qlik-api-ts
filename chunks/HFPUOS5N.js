@@ -1862,7 +1862,9 @@ async function download(blob, filename) {
     window.URL.revokeObjectURL(blobUrl);
   } else {
     const { writeFileSync } = await import("fs");
-    writeFileSync(filename, Buffer.from(await blob.arrayBuffer()));
+    const arrayBuffer = await blob.arrayBuffer();
+    const uint8Array = new Uint8Array(arrayBuffer);
+    writeFileSync(filename, uint8Array);
   }
 }
 

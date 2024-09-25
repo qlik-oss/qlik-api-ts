@@ -333,6 +333,8 @@ type ReportRequest = {
 type ReportStatus = {
     /** Present when status is failed. */
     reasons?: Reason[];
+    /** Errors occured during report generation. */
+    requestErrors?: ExportErrors;
     /** Count how many times the resolution of this report was attempted. */
     resolutionAttempts?: number;
     /** Present when the status is "done". */
