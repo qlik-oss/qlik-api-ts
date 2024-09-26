@@ -11,6 +11,8 @@ type AssignedGroups = {
     id: string;
     /** The group name */
     readonly name: string;
+    /** The provider type of the group */
+    providerType?: "idp" | "custom";
 }[];
 /**
  * An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles.
