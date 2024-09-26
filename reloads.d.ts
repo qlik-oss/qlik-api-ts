@@ -95,7 +95,7 @@ declare const getReloads: (query: {
     filter?: string;
     /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
     limit?: number;
-    /** The boolean value used to include the log field or not, default is included, set log=false to exclude the log field. */
+    /** The boolean value used to include the log field or not, set log=true to include the log field. */
     log?: boolean;
     /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
     next?: string;
