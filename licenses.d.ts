@@ -70,7 +70,7 @@ type AssignmentsActionsUpdateResponse = {
         sourceSubject?: string;
         /** Current allotment type. */
         sourceType?: string;
-        /** Response status */
+        /** HTTP status code indicating the result of the individual assignment operation. A value of 200 represents a successful update, while 201 indicates a new resource was created due to a subject update. Any 400-level status codes indicate an error. */
         status: number;
         /** Target subject. */
         subject?: string;
