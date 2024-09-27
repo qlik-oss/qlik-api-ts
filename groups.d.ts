@@ -74,6 +74,10 @@ type Group = {
     assignedRoles?: AssignedRoles;
     /** The timestamp for when the group record was created. */
     createdAt: string;
+    /** Id of user that created role. */
+    readonly createdBy?: string;
+    /** A description of a custom group. */
+    description?: string;
     /** The unique identifier for the group */
     readonly id: string;
     /** The timestamp for when the group record was last updated. */
@@ -93,6 +97,8 @@ type Group = {
     status: "active" | "disabled";
     /** The tenant identifier associated with the given group */
     tenantId: string;
+    /** Id of user that last updated this role. */
+    readonly updatedBy?: string;
 };
 /**
  * A JSON Patch document.
@@ -100,8 +106,8 @@ type Group = {
 type GroupPatch = {
     /** The operation to be performed. Currently "replace" is the only supported operation. */
     op: "replace";
-    /** Attribute name of a field of the Groups entity. */
-    path: "assignedRoles";
+    /** Attribute name of a field of the Groups entity. "Name" and "description" is only available for custom groups. */
+    path: "assignedRoles" | "name" | "description";
     /** The roles to assign to the group (limit of 100 roles per group). */
     value: AssignedRolesRefIDs | AssignedRolesRefNames;
 };
@@ -112,6 +118,8 @@ type GroupPatchSchema = GroupPatch[];
 type GroupPostSchema = {
     /** The roles to assign to the group (limit of 100 roles per group). */
     assignedRoles?: AssignedRolesRefIDs | AssignedRolesRefNames;
+    /** The description of the group. */
+    description?: string;
     /** The name of the group (maximum length of 256 characters). */
     name: string;
     /** The type of group provider. Must be "idp" or "custom". Defaults to "idp" if not provided. */
