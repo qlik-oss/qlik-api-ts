@@ -87,6 +87,8 @@ type Group = {
     };
     /** The name of the group. */
     name: string;
+    /** The type of provider for the group. */
+    providerType?: "idp" | "custom";
     /** The state of the group. */
     status: "active" | "disabled";
     /** The tenant identifier associated with the given group */
@@ -112,6 +114,8 @@ type GroupPostSchema = {
     assignedRoles?: AssignedRolesRefIDs | AssignedRolesRefNames;
     /** The name of the group (maximum length of 256 characters). */
     name: string;
+    /** The type of group provider. Must be "idp" or "custom". Defaults to "idp" if not provided. */
+    providerType?: "idp" | "custom";
     /** The status of the created group within the tenant. Defaults to active if empty. */
     status?: "active";
 };
@@ -222,7 +226,7 @@ type GetGroupsHttpError = {
     status: number;
 };
 /**
- * Creates a group. The maximum number of groups a tenant can have is 10,000.
+ * Creates a new group. The maximum number of groups a tenant can have is 10,000. Group names are case-sensitive, and must be unique.
  *
  * @param body an object with the body content
  * @throws CreateGroupHttpError
@@ -365,7 +369,7 @@ interface GroupsAPI {
      */
     getGroups: typeof getGroups;
     /**
-     * Creates a group. The maximum number of groups a tenant can have is 10,000.
+     * Creates a new group. The maximum number of groups a tenant can have is 10,000. Group names are case-sensitive, and must be unique.
      *
      * @param body an object with the body content
      * @throws CreateGroupHttpError

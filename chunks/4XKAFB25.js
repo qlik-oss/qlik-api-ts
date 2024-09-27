@@ -4,7 +4,7 @@ import {
   invokeFetch,
   isWindows,
   toValidWebsocketLocationUrl
-} from "./HFPUOS5N.js";
+} from "./OQWY73NC.js";
 import {
   isBrowser
 } from "./2ZQ3ZX7F.js";
@@ -145,7 +145,7 @@ function listenForWindowsAuthenticationInformation(session) {
   return authSuggestedInWebsocket;
 }
 async function createAndSetupEnigmaSession(props, canRetry) {
-  const { createEnigmaSession } = await import("./AF7REKR3.js");
+  const { createEnigmaSession } = await import("./Z37XXMYQ.js");
   const session = await createEnigmaSession(props);
   setupSessionListeners(session, props);
   let global;
@@ -684,7 +684,23 @@ var qix = {
   onWebSocketEvent,
   onCombinedWebSocketStateChange,
   resumeSuspendedSessions,
-  resumeOnlyOnReattach
+  resumeOnlyOnReattach,
+  withHostConfig: (hostConfig) => ({
+    addInitialAppAction: (openAppSessionProps, action) => addInitialAppAction(
+      typeof openAppSessionProps === "string" ? { hostConfig, appId: openAppSessionProps } : { hostConfig, ...openAppSessionProps },
+      action
+    ),
+    createSessionApp,
+    openAppSession: (openAppSessionProps) => openAppSession(
+      typeof openAppSessionProps === "string" ? { hostConfig, appId: openAppSessionProps } : { hostConfig, ...openAppSessionProps }
+    ),
+    registerExternalAppSession,
+    useAppHook,
+    onWebSocketEvent,
+    onCombinedWebSocketStateChange,
+    resumeSuspendedSessions,
+    resumeOnlyOnReattach
+  })
 };
 var qix_default = qix;
 export {

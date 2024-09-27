@@ -341,6 +341,10 @@ function registerAuthModule2(name, authModule) {
 function setDefaultHostConfig2(hostConfig) {
   setDefaultHostConfig(hostConfig);
 }
+function serializeHostConfig(hostConfig) {
+  const hostConfigToUse = withDefaultHostConfig(hostConfig);
+  return JSON.stringify(hostConfigToUse, hostConfigPropertyIgnorer);
+}
 function checkForCrossDomainRequest(hostConfig) {
   const hostConfigToUse = withDefaultHostConfig(hostConfig);
   if (isHostCrossOrigin(hostConfigToUse)) {
@@ -367,6 +371,19 @@ function normalizeInbandAuthError({ errorBody, status }) {
 }
 function normalizeAuthModuleError(err) {
   return { message: err.message || "Unknown error" };
+}
+function hostConfigPropertyIgnorer(key, value) {
+  if (key === "") {
+    return value;
+  }
+  if (key === "authType") {
+    return void 0;
+  }
+  const vtype = typeof value;
+  if (vtype === "object" || vtype === "function") {
+    return void 0;
+  }
+  return value;
 }
 
 // src/random/random.ts
@@ -1398,13 +1415,16 @@ function applyPathVariables(pathTemplate, pathVariables) {
   }
   return result2;
 }
-function toCacheKey(url, query, headers) {
+function toCacheKey(url, query, serializedHostConfig, headers) {
   let cacheKey = url;
   if (query !== "") {
     cacheKey = cacheKey.concat(`?${query}`);
   }
   if (headers) {
     cacheKey = cacheKey.concat(`+headers=${JSON.stringify(headers)}`);
+  }
+  if (serializedHostConfig) {
+    cacheKey = cacheKey.concat(`+host-config=${serializedHostConfig}`);
   }
   return cacheKey;
 }
@@ -1675,7 +1695,7 @@ async function getInvokeFetchUrlParams({
   const url = locationUrl + applyPathVariables(pathTemplate, pathVariables);
   const queryString = encodeQueryParams({ ...query, ...authQueryParams });
   const completeUrl = toCompleteUrl(url, queryString);
-  const cacheKey = toCacheKey(url, queryString, options?.headers);
+  const cacheKey = toCacheKey(url, queryString, serializeHostConfig(options?.hostConfig), options?.headers);
   return { completeUrl, cacheKey, authHeaders, credentials };
 }
 function invokeFetchWithUrl(api, props, interceptors) {
@@ -1762,6 +1782,7 @@ function invokeFetchWithUrlAndRetry(api, {
   return cloneResultPromise(resultPromiseAfterCacheClearing);
 }
 function addPagingFunctions(api, value, method, body, options, interceptors, authHeaders, credentials) {
+  const serializedHostConfig = serializeHostConfig(options?.hostConfig);
   return value.then((resp) => {
     const dataWithPotentialLinks = resp.data;
     if (!dataWithPotentialLinks) {
@@ -1777,7 +1798,7 @@ function addPagingFunctions(api, value, method, body, options, interceptors, aut
           completeUrl: prevUrl,
           body,
           options: prevOptions || options,
-          cacheKey: toCacheKey(prevUrl, "", options?.headers),
+          cacheKey: toCacheKey(prevUrl, "", serializedHostConfig, options?.headers),
           authHeaders,
           credentials
         },
@@ -1792,7 +1813,7 @@ function addPagingFunctions(api, value, method, body, options, interceptors, aut
           completeUrl: nextUrl,
           body,
           options: nextOptions || options,
-          cacheKey: toCacheKey(nextUrl, "", options?.headers),
+          cacheKey: toCacheKey(nextUrl, "", serializedHostConfig, options?.headers),
           authHeaders,
           credentials
         },
@@ -2014,6 +2035,7 @@ export {
   getAccessToken,
   registerAuthModule2 as registerAuthModule,
   setDefaultHostConfig2 as setDefaultHostConfig,
+  serializeHostConfig,
   checkForCrossDomainRequest,
   logout,
   generateRandomString,
