@@ -1475,6 +1475,10 @@ function cacheKeyToUrl(cachedUrl) {
   if (headersIdx >= 0) {
     return cachedUrl.substring(0, headersIdx);
   }
+  const hostConfigIdx = cachedUrl.indexOf("+host-config=");
+  if (hostConfigIdx >= 0) {
+    return cachedUrl.substring(0, hostConfigIdx);
+  }
   return cachedUrl;
 }
 function clearRelatedCacheEntries(cache2, cacheKey) {
