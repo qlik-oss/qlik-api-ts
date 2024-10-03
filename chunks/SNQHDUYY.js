@@ -8,7 +8,7 @@ function getAuthRuntimeModule(hostConfig) {
 async function getQixRuntimeModule(hostConfig) {
   await getAuthRuntimeModule(hostConfig);
   const isNode = !!globalThis.process?.argv;
-  return isNode ? import("./64K3GSMQ.js") : import("./EUWNVVK5.js").then(
+  return isNode ? import("./KBR7JBWC.js") : import("./EUWNVVK5.js").then(
     (mod) => mod.importRuntimeModule("qix@v1", hostConfig)
   );
 }

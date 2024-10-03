@@ -1,6 +1,6 @@
 import {
   getAuthRuntimeModule
-} from "./Q6IKFQRW.js";
+} from "./SNQHDUYY.js";
 
 // src/public/auth.ts
 function registerAuthModule(name, authModule) {

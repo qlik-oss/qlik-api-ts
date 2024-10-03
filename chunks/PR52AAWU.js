@@ -10372,7 +10372,7 @@ async function createEnigmaSession({
 }) {
   const locationUrl = toValidWebsocketLocationUrl(hostConfig);
   const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
-  const ttlPart = ttlSeconds !== void 0 && ttlSeconds >= 0 ? `/ttl/${0}` : "";
+  const ttlPart = ttlSeconds !== void 0 && ttlSeconds >= 0 ? `/ttl/${ttlSeconds}` : "";
   const identityPart = identity ? `/identity/${identity}` : "";
   const reloadEnginePart = useReloadEngine ? "&workloadType=interactive-reload" : "";
   let csrfToken = "";
