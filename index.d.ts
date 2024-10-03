@@ -32,7 +32,7 @@ import { WebIntegrationsAPI } from './web-integrations.js';
 import { WebNotificationsAPI } from './web-notifications.js';
 import { WebhooksAPI } from './webhooks.js';
 import { H as HostConfig } from './auth-types-PkN9CAF_.js';
-import './global.types--37uwGji.js';
+import './global.types-qsBNouXJ.js';
 
 declare const apiKeys: ApiKeysAPI;
 declare const apps: AppsAPI;

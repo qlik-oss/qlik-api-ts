@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types--37uwGji.js';
+import { A as ApiCallOptions } from './global.types-qsBNouXJ.js';
 import './auth-types-PkN9CAF_.js';
 
 type Error = {

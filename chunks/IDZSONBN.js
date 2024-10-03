@@ -4,7 +4,8 @@ import {
   getRestCallAuthParams,
   getWebSocketAuthParams,
   toValidWebsocketLocationUrl
-} from "./BUSRKHDX.js";
+} from "./OEVNZ5IQ.js";
+import "./7RHSSS4W.js";
 import {
   isBrowser,
   isNode
@@ -10366,10 +10367,12 @@ async function createEnigmaSession({
   appId,
   identity,
   hostConfig,
-  useReloadEngine = false
+  useReloadEngine = false,
+  ttlSeconds
 }) {
   const locationUrl = toValidWebsocketLocationUrl(hostConfig);
   const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
+  const ttlPart = ttlSeconds !== void 0 && ttlSeconds >= 0 ? `/ttl/${0}` : "";
   const identityPart = identity ? `/identity/${identity}` : "";
   const reloadEnginePart = useReloadEngine ? "&workloadType=interactive-reload" : "";
   let csrfToken = "";
@@ -10380,7 +10383,7 @@ async function createEnigmaSession({
     }
   }
   const csrfPart = csrfToken ? `&qlik-csrf-token=${csrfToken}` : "";
-  let url = `${locationUrl}/app/${appId}${identityPart}?reloadUri=${reloadUri}${reloadEnginePart}${csrfPart}`.replace(
+  let url = `${locationUrl}/app/${appId}${identityPart}${ttlPart}?reloadUri=${reloadUri}${reloadEnginePart}${csrfPart}`.replace(
     /^http/,
     "ws"
   );

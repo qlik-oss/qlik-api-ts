@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types--37uwGji.js';
+import { A as ApiCallOptions } from './global.types-qsBNouXJ.js';
 import './auth-types-PkN9CAF_.js';
 
 type Error = {
@@ -43,7 +43,7 @@ type Reload = {
     status: Status;
     /** The ID of the tenant who owns the reload. */
     tenantId: string;
-    /** What initiated the reload: hub = one-time reload manually triggered in hub, chronos = time based scheduled reload triggered by chronos, external = reload triggered via external API request, automations = reload triggered in automation, data-refresh = reload triggered by refresh of data. */
+    /** What initiated the reload: hub = one-time reload manually triggered in hub, chronos = time based scheduled reload triggered by chronos, external = reload triggered via external API request, automations = reload triggered in automation, data-refresh = reload triggered by refresh of data, choreographer = reload triggered by choreographer. */
     type: Type;
     /** The ID of the user who created the reload. */
     userId: string;
@@ -70,9 +70,9 @@ type ReloadsLinks = ReloadLinks & {
  */
 type Status = "QUEUED" | "RELOADING" | "CANCELING" | "SUCCEEDED" | "FAILED" | "CANCELED" | "EXCEEDED_LIMIT";
 /**
- * What initiated the reload: hub = one-time reload manually triggered in hub, chronos = time based scheduled reload triggered by chronos, external = reload triggered via external API request, automations = reload triggered in automation, data-refresh = reload triggered by refresh of data.
+ * What initiated the reload: hub = one-time reload manually triggered in hub, chronos = time based scheduled reload triggered by chronos, external = reload triggered via external API request, automations = reload triggered in automation, data-refresh = reload triggered by refresh of data, choreographer = reload triggered by choreographer.
  */
-type Type = "hub" | "external" | "chronos" | "automations" | "data-refresh";
+type Type = "hub" | "external" | "chronos" | "automations" | "data-refresh" | "choreographer";
 /**
  * Finds and returns the reloads that the user has access to.
  *

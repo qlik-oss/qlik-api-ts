@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types--37uwGji.js';
+import { A as ApiCallOptions } from './global.types-qsBNouXJ.js';
 import './auth-types-PkN9CAF_.js';
 
 /**
@@ -146,7 +146,7 @@ type ImageOutput = {
  * Define the request metadata. It includes priority, deadline and future settings on execution policy of the request.
  */
 type Meta = {
-    /** The maximum interval, starting from the time the API request is received, within which a report must be produced, past this interval the report generation fails. The default value is 10 minutes, the maximum allowed value is 2 hours. */
+    /** The maximum interval, starting from the time the API request is received, within which a report must be produced, past this interval the report generation fails. The default value is 10 minutes, the maximum allowed value is 4 hours. */
     exportDeadline?: string;
     /** Time to live of the final result artifacts in ISO8601 duration format. After that duration the request and underlying output files will not be guaranteed to be available. Default is 1 hour. */
     outputTtl?: string;
