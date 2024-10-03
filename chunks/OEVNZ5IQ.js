@@ -565,8 +565,21 @@ function clearStoredAnonymousTokens(hostConfig) {
 }
 
 // src/auth/internal/default-auth-modules/oauth/oauth-utils.ts
+function toPerformInteractiveLoginFunction(performInteractiveLogin) {
+  if (typeof performInteractiveLogin === "string") {
+    const fn = lookupInteractiveLoginFn(performInteractiveLogin);
+    if (!fn) {
+      throw new Error(`No such function: ${performInteractiveLogin}`);
+    }
+    return fn;
+  }
+  return performInteractiveLogin;
+}
 function lookupGetAccessFn(getAccessToken2) {
   return globalThis[getAccessToken2];
+}
+function lookupInteractiveLoginFn(name) {
+  return globalThis[name];
 }
 function handlePossibleErrors(data) {
   if (data.errors) {
@@ -597,6 +610,21 @@ async function sha256(message) {
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   const hashBase64 = byteArrayToBase64(hashArray);
   return hashBase64.replaceAll(/\+/g, "-").replaceAll(/\//g, "_").replace(/=+$/, "");
+}
+async function createInteractiveLoginUrl(hostConfig, redirectUri, state, verifier) {
+  const clientId = hostConfig.clientId || "";
+  const locationUrl = toValidLocationUrl(hostConfig);
+  const codeChallenge = await sha256(verifier);
+  const queryParams = {
+    response_type: "code",
+    client_id: clientId,
+    redirect_uri: redirectUri,
+    scope: hostConfig.scope || "user_default",
+    state,
+    code_challenge: codeChallenge,
+    code_challenge_method: "S256"
+  };
+  return `${locationUrl}/oauth/authorize?${toQueryString(queryParams)}`;
 }
 async function startFullPageLoginFlow(hostConfig) {
   const clientId = hostConfig.clientId || "";
@@ -774,6 +802,39 @@ async function getOAuthTokensForBrowser(hostConfig) {
           errors: void 0
         };
       } catch (error) {
+        return errorMessageToAuthData("Could not fetch access token using custom function");
+      }
+    }
+    if (hostConfig.performInteractiveLogin) {
+      let usedRedirectUri;
+      try {
+        const verifier2 = generateRandomString(128);
+        const originalState = generateRandomString(43);
+        const { code: code2, state } = extractCodeAndState(
+          await toPerformInteractiveLoginFunction(hostConfig.performInteractiveLogin)({
+            getLoginUrl: async ({ redirectUri }) => {
+              usedRedirectUri = redirectUri;
+              return createInteractiveLoginUrl(hostConfig, redirectUri, originalState, verifier2);
+            }
+          })
+        );
+        if (!usedRedirectUri) {
+          return errorMessageToAuthData("No redirect uri provided");
+        }
+        if (originalState !== state) {
+          return errorMessageToAuthData("State returned by custom interactive login function does not match original");
+        }
+        if (!code2) {
+          return errorMessageToAuthData("No code found in response from custom interactive login function");
+        }
+        const tokenResponse = await exchangeCodeAndVerifierForAccessTokenData(
+          hostConfig,
+          code2,
+          verifier2,
+          usedRedirectUri
+        );
+        return tokenResponse;
+      } catch (error) {
         return {
           accessToken: void 0,
           refreshToken: void 0,
@@ -781,7 +842,7 @@ async function getOAuthTokensForBrowser(hostConfig) {
             {
               code: "",
               status: 401,
-              title: "Could not fetch access token using custom function",
+              title: "Could not perform custom interactive login",
               // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
               detail: `${error}`
             }
@@ -807,6 +868,10 @@ async function getOAuthTokensForBrowser(hostConfig) {
   });
   if (oauthTokens) {
     return oauthTokens;
+  }
+  if (hostConfig.performInteractiveLogin) {
+    return new Promise(() => {
+    });
   }
   if (hostConfig.authRedirectUserConfirmation) {
     await hostConfig.authRedirectUserConfirmation();
@@ -855,6 +920,30 @@ async function refreshAccessToken(hostConfig) {
       handlePossibleErrors(refreshedTokens);
     }
   }
+}
+function extractCodeAndState(input) {
+  if (typeof input === "string") {
+    const queryParams = new URLSearchParams(new URL(input).search);
+    return {
+      code: queryParams.get("code") || "",
+      state: queryParams.get("state") || ""
+    };
+  }
+  return input;
+}
+function errorMessageToAuthData(message) {
+  return {
+    accessToken: void 0,
+    refreshToken: void 0,
+    errors: [
+      {
+        code: "",
+        status: 401,
+        title: message,
+        detail: ""
+      }
+    ]
+  };
 }
 
 // src/auth/internal/default-auth-modules/oauth/temporary-token.ts
@@ -1250,6 +1339,12 @@ async function handleAuthenticationError6({
     };
   }
   if (isBrowser()) {
+    if (hostConfig.performInteractiveLogin) {
+      clearStoredOauthTokens(hostConfig);
+      return {
+        retry: true
+      };
+    }
     if (hostConfig.authRedirectUserConfirmation) {
       await hostConfig.authRedirectUserConfirmation();
     }
@@ -1279,7 +1374,8 @@ var oauth_default = {
       "subject",
       "userId",
       "noCache",
-      "getAccessToken"
+      "getAccessToken",
+      "performInteractiveLogin"
     ]
   })
 };

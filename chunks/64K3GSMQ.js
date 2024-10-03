@@ -4,7 +4,8 @@ import {
   invokeFetch,
   isWindows,
   toValidWebsocketLocationUrl
-} from "./BUSRKHDX.js";
+} from "./OEVNZ5IQ.js";
+import "./7RHSSS4W.js";
 import {
   isBrowser
 } from "./2ZQ3ZX7F.js";
@@ -86,12 +87,16 @@ function toGlobalAppSessionId({
   identity,
   hostConfig,
   withoutData,
-  useReloadEngine
+  useReloadEngine,
+  ttlSeconds
 }) {
   const locationUrl = toValidWebsocketLocationUrl(hostConfig);
   let url = `${locationUrl}/${appId}`;
   if (identity) {
     url += `/${identity}`;
+  }
+  if (ttlSeconds !== void 0 && ttlSeconds >= 0) {
+    url += `/ttl/${ttlSeconds}`;
   }
   if (useReloadEngine) {
     url += "/useReloadEngine";
@@ -145,7 +150,7 @@ function listenForWindowsAuthenticationInformation(session) {
   return authSuggestedInWebsocket;
 }
 async function createAndSetupEnigmaSession(props, canRetry) {
-  const { createEnigmaSession } = await import("./3FHEUGST.js");
+  const { createEnigmaSession } = await import("./IDZSONBN.js");
   const session = await createEnigmaSession(props);
   setupSessionListeners(session, props);
   let global;
@@ -566,14 +571,15 @@ function getExternalSession(externalApp, appSessionProps) {
 }
 
 // src/qix/qix-functions.ts
-async function createSessionApp() {
+async function createSessionApp(ttlSeconds) {
   let sharedSession;
   if ((await getPlatform()).isCloud) {
-    sharedSession = await getOrCreateSharedSession({ appId: `SessionApp_${Date.now()}` });
+    sharedSession = await getOrCreateSharedSession({ appId: `SessionApp_${Date.now()}`, ttlSeconds });
   } else {
     sharedSession = await getOrCreateSharedSession({
       appId: `%3Ftransient%3D/identity/${Date.now()}`,
-      useSessionApp: true
+      useSessionApp: true,
+      ttlSeconds
     });
   }
   let alreadyClosed = false;

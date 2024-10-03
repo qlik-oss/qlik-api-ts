@@ -1,5 +1,5 @@
 import { H as HostConfig } from './auth-types-PkN9CAF_.js';
-import './global.types--37uwGji.js';
+import './global.types-qsBNouXJ.js';
 
 declare const QIX_SCHEMA_VERSION = "12.2202.0";
 type AlfaNumString = {
@@ -11679,6 +11679,8 @@ type OpenAppSessionProps = {
     withoutData?: boolean;
     /** Use a separate reload engine to perform a reload */
     useReloadEngine?: boolean;
+    /** Time-to-live in seconds. */
+    ttlSeconds?: number;
 };
 type DocAction = (doc: Doc) => Promise<unknown>;
 type CloseProps = {

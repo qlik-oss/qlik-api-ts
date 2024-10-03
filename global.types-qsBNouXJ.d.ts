@@ -68,6 +68,18 @@ type WindowsCookieAuthConfig = {
     /** If set to false the `credentials` property will be set to same-origin  */
     crossSiteCookies?: boolean;
 };
+type PerformInteractiveLoginFn = (props: {
+    /**
+     * Returns the url to the login page. The redirectUri parameter property is used to tell the login page where to redirect the browser after the login has succeeded.
+     * Note that the redirectUri needs to be registered in the oauth configuration.
+     */
+    getLoginUrl: (props: {
+        redirectUri: string;
+    }) => Promise<string>;
+}) => Promise<{
+    code: string;
+    state: string;
+} | string>;
 /** OAuth2 Auth Configuration for a HostConfig */
 type Oauth2AuthConfig = {
     /** client id of oauth client created by tenant admin */
@@ -101,6 +113,12 @@ type Oauth2AuthConfig = {
      * Typically used together with the `noCache` since caching is done on the browser side.
      */
     userId?: string;
+    /**
+     * Can be used to customize the login flow, for instance if the login page should be shown in another browser tab/window.
+     * The function is asynchronous and when the loging flow is finished it should return the code and state provided in the
+     * query of the oauth redirect callback. The code and state can either be provided as an object or as the entire callback url.
+     */
+    performInteractiveLogin?: PerformInteractiveLoginFn;
 };
 /** Anonymous Auth Configuration for a HostConfig - used when embedding UI's linked to an anonymous tenant/app */
 type AnonymousAuthConfig = {
