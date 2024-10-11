@@ -463,7 +463,15 @@ type FilterError = {
      * - "REP-500000" Fail to resolve resource.
      * - "REP-503005" Engine unavailable, qix-sessions error no engines available.
      * - "REP-503013" Session unavailable. The engine session used to create the report is unavailable.
-     * - "REP-504042" Context deadline exceeded applying selections of the Filter. */
+     * - "REP-504042" Context deadline exceeded applying selections of the Filter.
+     * - "REP-500031" Error creating bookmark.
+     * - "REP-404032" Bookmark not found after creating the bookmark.
+     * - "REP-500033" Error destroying bookmark.
+     * - "REP-404033" Bookmark not found destroying the bookmark.
+     * - "REP-409043" Dupliacate bookmark name.
+     * - "REP-429034" Filters quota exceeded.
+     * - "REP-400044" Missing or renamed field.
+     * - "REP-403049" Report filter access not allowed. */
     code: string;
     /** A summary in english explaining what went wrong. */
     title: string;

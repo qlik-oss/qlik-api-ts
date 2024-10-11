@@ -62,7 +62,16 @@ type Tenant = {
     status?: "active" | "disabled" | "deleted";
 };
 type TenantCreationRequest = {
-    /** The datacenter where the tenant is located. */
+    /** The datacenter where the tenant is located.
+     *
+     * Supported locations for commercial licenses:
+     * - `ap-northeast-1`: Japan (jp)
+     * - `ap-southeast-1`: Australia (ap)
+     * - `ap-southeast-2`: Singapore (sg)
+     * - `eu-central-1`: Germany (de)
+     * - `eu-west-1`: Ireland (eu)
+     * - `eu-west-2`: United Kingdom (uk)
+     * - `us-east-1`: United States of America (us) */
     datacenter?: string;
     /** The signed license key of the license that will be associated with the created tenant. */
     licenseKey?: string;
@@ -116,7 +125,7 @@ type TenantPatchSchema = {
     value: string | boolean;
 }[];
 /**
- * Creates a Tenant
+ * Creates a tenant in the requested region, linked to the provided license key. You must use a regional OAuth client generated via the [My Qlik portal](https://account.myqlik.qlik.com/account) to call this endpoint. Tenant creation, deactivation, and reactivation requests must be sent to the register endpoint in the relevant Qlik Cloud region, e.g. `https://register.us.qlikcloud.com/api/v1/tenants` if interacting with tenants in the `us` region.
  *
  * @param body an object with the body content
  * @throws CreateTenantHttpError
@@ -149,9 +158,9 @@ type GetMyTenantHttpError = {
     status: number;
 };
 /**
- * Retrieve a single tenant by id.
+ * Retrieves a specific tenant by ID.
  *
- * @param tenantId The id of the tenant to retrieve
+ * @param tenantId The ID of the tenant to retrieve
  * @throws GetTenantHttpError
  */
 declare const getTenant: (tenantId: string, options?: ApiCallOptions) => Promise<GetTenantHttpResponse>;
@@ -166,9 +175,9 @@ type GetTenantHttpError = {
     status: number;
 };
 /**
- * Update a tenant by id.
+ * Updates properties of a specific tenant by ID.
  *
- * @param tenantId The id of the tenant to update
+ * @param tenantId The ID of the tenant to update
  * @param body an object with the body content
  * @throws PatchTenantHttpError
  */
@@ -205,7 +214,7 @@ type PatchTenantDefaultHttpError = {
 };
 type PatchTenantHttpError = PatchTenant400HttpError | PatchTenant403HttpError | PatchTenant404HttpError | PatchTenant429HttpError | PatchTenantDefaultHttpError;
 /**
- * Deactivates a tenant.
+ * Deactivates a specific tenant. Once deactivated, tenant will be deleted on or after `estimatedPurgeDate`. Tenant can be reactivated using `/v1/tenants/{tenantId}/actions/reactivate` until this date. You must use a regional OAuth client generated via the [My Qlik portal](https://account.myqlik.qlik.com/account) to call this endpoint. Tenant creation, deactivation, and reactivation requests must be sent to the register endpoint in the relevant Qlik Cloud region, e.g. `https://register.us.qlikcloud.com/api/v1/tenants/{tenantId}/actions/deactivate` if interacting with tenants in the `us` region.
  *
  * @param tenantId The id of the tenant to deactivate
  * @param body an object with the body content
@@ -223,7 +232,7 @@ type DeactivateTenantHttpError = {
     status: number;
 };
 /**
- * Reactivates a disabled tenant.
+ * Reactivates a deactivated tenant. Tenants can be reactivated until the `estimatedPurgeDate` provided at time of deactivation. You must use a regional OAuth client generated via the [My Qlik portal](https://account.myqlik.qlik.com/account) to call this endpoint. Tenant creation, deactivation, and reactivation requests must be sent to the register endpoint in the relevant Qlik Cloud region, e.g. `https://register.us.qlikcloud.com/api/v1/tenants/{tenantId}/actions/reactivate` if interacting with tenants in the `us` region.
  *
  * @param tenantId The id of the tenant to reactivate
  * @param body an object with the body content
@@ -246,7 +255,7 @@ type ReactivateTenantHttpError = {
 declare function clearCache(): void;
 interface TenantsAPI {
     /**
-     * Creates a Tenant
+     * Creates a tenant in the requested region, linked to the provided license key. You must use a regional OAuth client generated via the [My Qlik portal](https://account.myqlik.qlik.com/account) to call this endpoint. Tenant creation, deactivation, and reactivation requests must be sent to the register endpoint in the relevant Qlik Cloud region, e.g. `https://register.us.qlikcloud.com/api/v1/tenants` if interacting with tenants in the `us` region.
      *
      * @param body an object with the body content
      * @throws CreateTenantHttpError
@@ -259,22 +268,22 @@ interface TenantsAPI {
      */
     getMyTenant: typeof getMyTenant;
     /**
-     * Retrieve a single tenant by id.
+     * Retrieves a specific tenant by ID.
      *
-     * @param tenantId The id of the tenant to retrieve
+     * @param tenantId The ID of the tenant to retrieve
      * @throws GetTenantHttpError
      */
     getTenant: typeof getTenant;
     /**
-     * Update a tenant by id.
+     * Updates properties of a specific tenant by ID.
      *
-     * @param tenantId The id of the tenant to update
+     * @param tenantId The ID of the tenant to update
      * @param body an object with the body content
      * @throws PatchTenantHttpError
      */
     patchTenant: typeof patchTenant;
     /**
-     * Deactivates a tenant.
+     * Deactivates a specific tenant. Once deactivated, tenant will be deleted on or after `estimatedPurgeDate`. Tenant can be reactivated using `/v1/tenants/{tenantId}/actions/reactivate` until this date. You must use a regional OAuth client generated via the [My Qlik portal](https://account.myqlik.qlik.com/account) to call this endpoint. Tenant creation, deactivation, and reactivation requests must be sent to the register endpoint in the relevant Qlik Cloud region, e.g. `https://register.us.qlikcloud.com/api/v1/tenants/{tenantId}/actions/deactivate` if interacting with tenants in the `us` region.
      *
      * @param tenantId The id of the tenant to deactivate
      * @param body an object with the body content
@@ -282,7 +291,7 @@ interface TenantsAPI {
      */
     deactivateTenant: typeof deactivateTenant;
     /**
-     * Reactivates a disabled tenant.
+     * Reactivates a deactivated tenant. Tenants can be reactivated until the `estimatedPurgeDate` provided at time of deactivation. You must use a regional OAuth client generated via the [My Qlik portal](https://account.myqlik.qlik.com/account) to call this endpoint. Tenant creation, deactivation, and reactivation requests must be sent to the register endpoint in the relevant Qlik Cloud region, e.g. `https://register.us.qlikcloud.com/api/v1/tenants/{tenantId}/actions/reactivate` if interacting with tenants in the `us` region.
      *
      * @param tenantId The id of the tenant to reactivate
      * @param body an object with the body content
