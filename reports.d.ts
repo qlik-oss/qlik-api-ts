@@ -110,7 +110,41 @@ type ExportError = {
      * - "REP-500047" Error setting GroupState.
      * - "REP-403048" Forbidden. User does not have permission to export the report (access control usePermission)
      * - "REP-422051" There is no report to produce due to empty dataset or missing fields (the measure/dimension was removed or omitted in Section Access)
-     * - "REP-500014" The app did not open within 5 minutes. */
+     * - "REP-500014" The app did not open within 10 minutes.
+     * - "REP-400017" Static App size exceeded.
+     * - "REP-400018" Excel string length exceeded.
+     * - "REP-403019" Export is not available for app with enabled directQuery feature.
+     * - "REP-409001" App conflict.
+     * - "REP-503001" Rest Engine Error.
+     * - "REP-400020" Invalid Issuer.
+     * - "REP-400028" Invalid Tags.
+     * - "REP-409021" Reload timestamp constraint not met.
+     * - "REP-429022" Enigma generic abort.
+     * - "REP-500023" Validate Report Request Tags failure.
+     * - "REP-400024" Cannot extract claims from JWT.
+     * - "REP-403025" No entitlement to perform the operation.
+     * - "REP-403026" No entitlement to perform the operation. Export capability is off.
+     * - "REP-403027" Object without Hypercube or unsupported object type.
+     * - "REP-422030" Apply variables error.
+     * - "REP-500200" Report Generator error.
+     * - "REP-400035" Multiple selections detected in a field having OneAndOnlyone attribute.
+     * - "REP-400036" No selection detected in a field having OneAndOnlyone attribute.
+     * - "REP-400037" Max number of images exceeded in a report.
+     * - "REP-400038" Max number of nested levels exceeded in report.
+     * - "REP-400039" Max number of objects exceeded in a report.
+     * - "REP-400040" Max number of templates exceeded in a report.
+     * - "REP-400041" Unsupported dimension type for level tag.
+     * - "REP-500240" Engine Global generic closure error.
+     * - "REP-500260" Engine Websocket generic closure error.
+     * - "REP-500280" Engine proxy generic closure error.
+     * - "REP-400240" Engine Client Global generic closure error
+     * - "REP-400260" Engine Client generic closure error.
+     * - "REP-400280" Engine Client proxy generic closure error.
+     * - "REP-500045" Failure setting Bookmark timestamp.
+     * - "REP-400050" Error retrieving outputs.
+     * - "REP-400052" Report Request Aborted from internal error.
+     * - "REP-500053" Unexpected number of generated cycle reports.
+     * - "REP-400054" The number of generated cycle reports exceeds the maximum allowed. */
     code: string;
     /** Optional. MAY be used to provide more concrete details. */
     detail?: string;
@@ -303,6 +337,8 @@ type ReportRequest = {
     /** Define the request metadata. It includes priority, deadline and future settings on execution policy of the request. */
     meta?: Meta;
     output: OutputItem;
+    /** The callback to be performed once the report is done. */
+    requestCallBackAction?: CallBackAction;
     senseDataTemplate?: SenseDataTemplate;
     /** Used to produce reports from a template file. */
     senseExcelTemplate?: SenseFileTemplate;
