@@ -88,7 +88,8 @@ function toGlobalAppSessionId({
   hostConfig,
   withoutData,
   useReloadEngine,
-  ttlSeconds
+  ttlSeconds,
+  workloadType
 }) {
   const locationUrl = toValidWebsocketLocationUrl(hostConfig);
   let url = `${locationUrl}/${appId}`;
@@ -103,6 +104,9 @@ function toGlobalAppSessionId({
   }
   if (withoutData) {
     url += "/withoutData";
+  }
+  if (workloadType) {
+    url += `?workloadType=${workloadType}`;
   }
   return url;
 }
@@ -150,7 +154,7 @@ function listenForWindowsAuthenticationInformation(session) {
   return authSuggestedInWebsocket;
 }
 async function createAndSetupEnigmaSession(props, canRetry) {
-  const { createEnigmaSession } = await import("./37HACJCY.js");
+  const { createEnigmaSession } = await import("./LFLIIDGI.js");
   const session = await createEnigmaSession(props);
   setupSessionListeners(session, props);
   let global;
@@ -444,7 +448,18 @@ function resumeShouldRejectPromiseIfNotReattached(bool) {
 }
 async function checkConnectivity(hostConfig) {
   let status = "online";
-  const catchFunc = (err) => {
+  const method = "get";
+  const options = {
+    hostConfig,
+    timeoutMs: 4e3,
+    noCache: true
+  };
+  try {
+    const result = await invokeFetch("", { method, pathTemplate: "/api/v1/user-locale", options });
+    if (!result.headers.get("content-type")?.includes("application/json")) {
+      status = "unauthorized";
+    }
+  } catch (err) {
     const fetchErr = err;
     switch (fetchErr.status) {
       case 0:
@@ -454,16 +469,7 @@ async function checkConnectivity(hostConfig) {
         status = "unauthorized";
         break;
     }
-  };
-  const method = "get";
-  const options = {
-    hostConfig,
-    timeoutMs: 2e3,
-    noCache: true
-  };
-  const fetchRoot = invokeFetch("", { method, pathTemplate: "", options }).catch(catchFunc);
-  const fetchMe = invokeFetch("", { method, pathTemplate: "/api/v1/users/me", options }).catch(catchFunc);
-  await Promise.all([fetchRoot, fetchMe]);
+  }
   return Promise.resolve(status);
 }
 async function sessionResumeWithRetry(session, hostConfig) {
@@ -571,15 +577,16 @@ function getExternalSession(externalApp, appSessionProps) {
 }
 
 // src/qix/qix-functions.ts
-async function createSessionApp(ttlSeconds) {
+async function createSessionApp(ttlSeconds, workloadType) {
   let sharedSession;
   if ((await getPlatform()).isCloud) {
-    sharedSession = await getOrCreateSharedSession({ appId: `SessionApp_${Date.now()}`, ttlSeconds });
+    sharedSession = await getOrCreateSharedSession({ appId: `SessionApp_${Date.now()}`, ttlSeconds, workloadType });
   } else {
     sharedSession = await getOrCreateSharedSession({
       appId: `%3Ftransient%3D/identity/${Date.now()}`,
       useSessionApp: true,
-      ttlSeconds
+      ttlSeconds,
+      workloadType
     });
   }
   let alreadyClosed = false;
