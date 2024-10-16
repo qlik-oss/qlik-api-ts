@@ -10368,13 +10368,14 @@ async function createEnigmaSession({
   identity,
   hostConfig,
   useReloadEngine = false,
-  ttlSeconds
+  ttlSeconds,
+  workloadType
 }) {
   const locationUrl = toValidWebsocketLocationUrl(hostConfig);
   const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
   const ttlPart = ttlSeconds !== void 0 && ttlSeconds >= 0 ? `/ttl/${ttlSeconds}` : "";
   const identityPart = identity ? `/identity/${identity}` : "";
-  const reloadEnginePart = useReloadEngine ? "&workloadType=interactive-reload" : "";
+  const workloadTypePart = useReloadEngine ? "&workloadType=interactive-reload" : workloadType ? `&workloadType=${workloadType}` : "";
   let csrfToken = "";
   if (isBrowser() && (!hostConfig || hostConfig.authType === "cookie" || hostConfig.authType === "windowscookie")) {
     try {
@@ -10383,7 +10384,7 @@ async function createEnigmaSession({
     }
   }
   const csrfPart = csrfToken ? `&qlik-csrf-token=${csrfToken}` : "";
-  let url = `${locationUrl}/app/${appId}${identityPart}${ttlPart}?reloadUri=${reloadUri}${reloadEnginePart}${csrfPart}`.replace(
+  let url = `${locationUrl}/app/${appId}${identityPart}${ttlPart}?reloadUri=${reloadUri}${workloadTypePart}${csrfPart}`.replace(
     /^http/,
     "ws"
   );
