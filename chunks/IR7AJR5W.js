@@ -88,7 +88,8 @@ function toGlobalAppSessionId({
   hostConfig,
   withoutData,
   useReloadEngine,
-  ttlSeconds
+  ttlSeconds,
+  workloadType
 }) {
   const locationUrl = toValidWebsocketLocationUrl(hostConfig);
   let url = `${locationUrl}/${appId}`;
@@ -104,6 +105,9 @@ function toGlobalAppSessionId({
   if (withoutData) {
     url += "/withoutData";
   }
+  if (workloadType) {
+    url += `?workloadType=${workloadType}`;
+  }
   return url;
 }
 async function runPendingInitialActions(initialActionsForApp, sharedSession, doc) {
@@ -114,7 +118,7 @@ async function runPendingInitialActions(initialActionsForApp, sharedSession, doc
     }
   }
 }
-async function addInitialSharedSessionCreationAction(openAppSessionProps, action) {
+function addInitialSharedSessionCreationAction(openAppSessionProps, action) {
   const key = toGlobalAppSessionId(openAppSessionProps);
   let initialActionArray = initialActions[key];
   if (!initialActionArray) {
@@ -123,11 +127,18 @@ async function addInitialSharedSessionCreationAction(openAppSessionProps, action
   initialActionArray.push(action);
   const existingSharedSession = sharedSessions[key];
   if (existingSharedSession) {
-    const doc = await existingSharedSession.docPromise;
-    if (doc) {
-      runPendingInitialActions(initialActionArray, existingSharedSession, doc);
-    }
+    existingSharedSession.docPromise.then((doc) => {
+      if (doc) {
+        runPendingInitialActions(initialActionArray, existingSharedSession, doc);
+      }
+    });
   }
+  return () => {
+    const index = initialActionArray.indexOf(action);
+    if (index > -1) {
+      initialActionArray.splice(index, 1);
+    }
+  };
 }
 function listenForWindowsAuthenticationInformation(session) {
   let resolveAuthSuggestedInWebsocket;
@@ -150,7 +161,7 @@ function listenForWindowsAuthenticationInformation(session) {
   return authSuggestedInWebsocket;
 }
 async function createAndSetupEnigmaSession(props, canRetry) {
-  const { createEnigmaSession } = await import("./37HACJCY.js");
+  const { createEnigmaSession } = await import("./LFLIIDGI.js");
   const session = await createEnigmaSession(props);
   setupSessionListeners(session, props);
   let global;
@@ -444,7 +455,18 @@ function resumeShouldRejectPromiseIfNotReattached(bool) {
 }
 async function checkConnectivity(hostConfig) {
   let status = "online";
-  const catchFunc = (err) => {
+  const method = "get";
+  const options = {
+    hostConfig,
+    timeoutMs: 4e3,
+    noCache: true
+  };
+  try {
+    const result = await invokeFetch("", { method, pathTemplate: "/api/v1/user-locale", options });
+    if (!result.headers.get("content-type")?.includes("application/json")) {
+      status = "unauthorized";
+    }
+  } catch (err) {
     const fetchErr = err;
     switch (fetchErr.status) {
       case 0:
@@ -454,16 +476,7 @@ async function checkConnectivity(hostConfig) {
         status = "unauthorized";
         break;
     }
-  };
-  const method = "get";
-  const options = {
-    hostConfig,
-    timeoutMs: 2e3,
-    noCache: true
-  };
-  const fetchRoot = invokeFetch("", { method, pathTemplate: "", options }).catch(catchFunc);
-  const fetchMe = invokeFetch("", { method, pathTemplate: "/api/v1/users/me", options }).catch(catchFunc);
-  await Promise.all([fetchRoot, fetchMe]);
+  }
   return Promise.resolve(status);
 }
 async function sessionResumeWithRetry(session, hostConfig) {
@@ -571,15 +584,16 @@ function getExternalSession(externalApp, appSessionProps) {
 }
 
 // src/qix/qix-functions.ts
-async function createSessionApp(ttlSeconds) {
+async function createSessionApp(ttlSeconds, workloadType) {
   let sharedSession;
   if ((await getPlatform()).isCloud) {
-    sharedSession = await getOrCreateSharedSession({ appId: `SessionApp_${Date.now()}`, ttlSeconds });
+    sharedSession = await getOrCreateSharedSession({ appId: `SessionApp_${Date.now()}`, ttlSeconds, workloadType });
   } else {
     sharedSession = await getOrCreateSharedSession({
       appId: `%3Ftransient%3D/identity/${Date.now()}`,
       useSessionApp: true,
-      ttlSeconds
+      ttlSeconds,
+      workloadType
     });
   }
   let alreadyClosed = false;
@@ -663,7 +677,7 @@ function useAppHook(react) {
   };
 }
 function addInitialAppAction(openAppSessionProps, action) {
-  addInitialSharedSessionCreationAction(openAppSessionProps, action);
+  return addInitialSharedSessionCreationAction(openAppSessionProps, action);
 }
 function onWebSocketEvent(fn) {
   return globalOnWebSocketEvent(fn);
