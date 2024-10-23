@@ -135,7 +135,7 @@ type JSONPatch = {
     /** The operation to be performed. */
     op: "replace" | "set (Deprecated)" | "unset (Deprecated)" | "add (Deprecated)" | "renew";
     /** A JSON Pointer. */
-    path: "/name" | "/roles (Deprecated)" | "/assignedRoles" | "/inviteExpiry" | "/preferredZoneinfo" | "/preferredLocale" | "/status";
+    path: "/name" | "/roles (Deprecated)" | "/assignedRoles" | "/inviteExpiry" | "/preferredZoneinfo" | "/preferredLocale" | "/status" | "/assignedGroups";
     /** The value to be used for this operation. */
     value: string | boolean | unknown[] | AssignedRolesRefIDs | AssignedRolesRefNames;
 };
