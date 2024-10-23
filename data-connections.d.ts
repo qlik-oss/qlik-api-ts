@@ -300,7 +300,7 @@ declare const getDataConnections: (query: {
     dataName?: string;
     /** Returns extended list of properties (e.g. encrypted credential string) when set to true. */
     extended?: boolean;
-    /** Filtering resources by properties (filterable properties only) using SCIM filter string. Note the filter string only applies to connections managed by data-connections service, i.e. filtering doesn't apply to DataFile connections. */
+    /** Filtering resources by properties (filterable properties only) using SCIM filter string. Note the filter string only applies to connections managed by data-connections service, i.e. filtering doesn't apply to DataFile connections. When filtering on datetime property (e.g. created, updated), datetime should be in RFC3339 format. */
     filter?: string;
     /** Base Qri (encrypted) will be returned when the query is set to true, default is false */
     includeQris?: boolean;

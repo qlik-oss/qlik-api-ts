@@ -1403,10 +1403,10 @@ function getXrfKey(hostConfig) {
 }
 
 // src/auth/internal/default-auth-modules/windows-cookie.ts
-function getRestCallAuthParams7({
+async function getRestCallAuthParams7({
   hostConfig
 }) {
-  return Promise.resolve({
+  return {
     headers: {
       "X-Qlik-XrfKey": getXrfKey(hostConfig)
     },
@@ -1414,16 +1414,17 @@ function getRestCallAuthParams7({
       xrfkey: getXrfKey(hostConfig)
     },
     credentials: getCredentialsForCookieAuth(hostConfig)
-  });
+  };
 }
-function getWebSocketAuthParams7({
+async function getWebSocketAuthParams7({
   hostConfig
 }) {
-  return Promise.resolve({
+  return {
     queryParams: {
-      xrfkey: getXrfKey(hostConfig)
+      xrfkey: getXrfKey(hostConfig),
+      "qlik-csrf-token": await getCsrfToken(hostConfig, true)
     }
-  });
+  };
 }
 async function handleAuthenticationError7({
   hostConfig
@@ -2146,6 +2147,5 @@ export {
   clearApiCache,
   parseFetchResponse,
   invoke_fetch_default,
-  getCsrfToken,
   auth_default
 };

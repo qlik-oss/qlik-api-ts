@@ -1,15 +1,15 @@
 import {
   qix_default
-} from "./chunks/HPX2VBF4.js";
+} from "./chunks/VXEOAWM6.js";
 import {
   auth_default
-} from "./chunks/APL5KJXS.js";
+} from "./chunks/3W4PFUMC.js";
 import "./chunks/7RHSSS4W.js";
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/TL5KLSB6.js";
-import "./chunks/ACBHOLKM.js";
+} from "./chunks/SMQGR3VM.js";
+import "./chunks/3KD5W26Z.js";
 import "./chunks/2ZQ3ZX7F.js";
 
 // src/runtime-api-generator/runtime-api-generator-common.ts
@@ -401,6 +401,7 @@ var dataCredentialsMiniModule = apiDefToApiPublic("data-credentials", {
   api: {
     v1: {
       "data-credentials": {
+        actions: { "filter-orphan": ["filterOrphanedDataCredentials:PBJ:"] },
         "{qID}": [
           "deleteDataCredential:DQ:",
           "getDataCredential:GQ:",

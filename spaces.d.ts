@@ -359,6 +359,8 @@ type UpdateSpaceHttpError = {
  * @throws GetSpaceAssignmentsHttpError
  */
 declare const getSpaceAssignments: (spaceId: string, query: {
+    /** Filters assignment for a specific assigneeid. */
+    assigneeId?: string;
     /** Maximum number of assignments to return. */
     limit?: number;
     /** The next page cursor. Next links make use of this. */

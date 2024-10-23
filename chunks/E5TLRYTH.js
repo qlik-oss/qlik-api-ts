@@ -5,7 +5,7 @@ import {
   invokeFetch,
   invoke_fetch_default,
   parseFetchResponse
-} from "./27XOYFEK.js";
+} from "./OCV75U5H.js";
 import "./7RHSSS4W.js";
 import "./2ZQ3ZX7F.js";
 export {

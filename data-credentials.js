@@ -1,11 +1,18 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/TL5KLSB6.js";
-import "./chunks/ACBHOLKM.js";
+} from "./chunks/SMQGR3VM.js";
+import "./chunks/3KD5W26Z.js";
 import "./chunks/2ZQ3ZX7F.js";
 
 // src/public/rest/data-credentials.ts
+var filterOrphanedDataCredentials = async (body, options) => invokeFetch("data-credentials", {
+  method: "post",
+  pathTemplate: "/api/v1/data-credentials/actions/filter-orphan",
+  body,
+  contentType: "application/json",
+  options
+});
 var deleteDataCredential = async (qID, query, options) => invokeFetch("data-credentials", {
   method: "delete",
   pathTemplate: "/api/v1/data-credentials/{qID}",
@@ -42,6 +49,7 @@ function clearCache() {
   return clearApiCache("data-credentials");
 }
 var dataCredentialsExport = {
+  filterOrphanedDataCredentials,
   deleteDataCredential,
   getDataCredential,
   patchDataCredential,
@@ -53,6 +61,7 @@ export {
   clearCache,
   data_credentials_default as default,
   deleteDataCredential,
+  filterOrphanedDataCredentials,
   getDataCredential,
   patchDataCredential,
   updateDataCredential

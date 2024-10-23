@@ -1,7 +1,22 @@
 import { A as ApiCallOptions } from './global.types-qsBNouXJ.js';
 import './auth-types-PkN9CAF_.js';
 
+type ActionFilterOrphanRequest = {
+    /** Filtering on datasource ID of credentials */
+    datasourceID?: string;
+    /** Filtering on separate status of credentials: * 0 - embedded credential * 1 - separated credential */
+    qSeparated?: 0 | 1;
+    /** Filtering on type of credentials */
+    qType?: string;
+};
+type ActionFilterOrphanResponse = {
+    /** Number of orphan credentials found */
+    count: number;
+    data: OrphanCredentialResItem[];
+};
 type Credential = {
+    /** Datetime when the credential was created */
+    created?: string;
     /** ID datasource that the credential is created for */
     datasourceID?: string;
     links?: Link;
@@ -15,6 +30,8 @@ type Credential = {
     qReferenceKey?: string;
     /** Type of credential */
     qType: string;
+    /** Datetime when the credential was last updated */
+    updated?: string;
 };
 /**
  * Credential
@@ -53,6 +70,27 @@ type Link = {
         href: string;
     };
 };
+/**
+ * Orphan credential
+ */
+type OrphanCredentialResItem = {
+    /** Datetime when the credential was created */
+    created: string;
+    /** ID datasource that the credential is created for */
+    datasourceID?: string;
+    /** UUID of the credential */
+    qID: string;
+    /** Name of the credential */
+    qName: string;
+    /** Type of credential (i.e. connector provider of the corresponding connection) */
+    qType: string;
+    /** Tenant ID of the credential's owner */
+    tenant?: string;
+    /** Datetime when the credential was last updated */
+    updated: string;
+    /** User ID of the credential's owner */
+    user?: string;
+};
 type PatchRequest = {
     patchData: {
         /** Operation type */
@@ -65,6 +103,23 @@ type PatchRequest = {
 };
 type ResponseErrors = {
     errors?: Errors;
+};
+/**
+ * Gets list of orphan data credentials (i.e. credentials that are not associated to any data connection) filtering on properties defined in request body
+ *
+ * @param body an object with the body content
+ * @throws FilterOrphanedDataCredentialsHttpError
+ */
+declare const filterOrphanedDataCredentials: (body: ActionFilterOrphanRequest, options?: ApiCallOptions) => Promise<FilterOrphanedDataCredentialsHttpResponse>;
+type FilterOrphanedDataCredentialsHttpResponse = {
+    data: ActionFilterOrphanResponse;
+    headers: Headers;
+    status: number;
+};
+type FilterOrphanedDataCredentialsHttpError = {
+    data: ResponseErrors;
+    headers: Headers;
+    status: number;
 };
 /**
  * Deletes the specified credential by ID (or by name when type=credentialname is set in query)
@@ -158,6 +213,13 @@ type UpdateDataCredentialHttpError = {
 declare function clearCache(): void;
 interface DataCredentialsAPI {
     /**
+     * Gets list of orphan data credentials (i.e. credentials that are not associated to any data connection) filtering on properties defined in request body
+     *
+     * @param body an object with the body content
+     * @throws FilterOrphanedDataCredentialsHttpError
+     */
+    filterOrphanedDataCredentials: typeof filterOrphanedDataCredentials;
+    /**
      * Deletes the specified credential by ID (or by name when type=credentialname is set in query)
      *
      * @param qID Credential ID
@@ -201,4 +263,4 @@ interface DataCredentialsAPI {
  */
 declare const dataCredentialsExport: DataCredentialsAPI;
 
-export { type Credential, type CredentialCreate, type DataCredentialsAPI, type DeleteDataCredentialHttpError, type DeleteDataCredentialHttpResponse, type Error, type Errors, type GetDataCredentialHttpError, type GetDataCredentialHttpResponse, type Link, type PatchDataCredentialHttpError, type PatchDataCredentialHttpResponse, type PatchRequest, type ResponseErrors, type UpdateDataCredentialHttpError, type UpdateDataCredentialHttpResponse, clearCache, dataCredentialsExport as default, deleteDataCredential, getDataCredential, patchDataCredential, updateDataCredential };
+export { type ActionFilterOrphanRequest, type ActionFilterOrphanResponse, type Credential, type CredentialCreate, type DataCredentialsAPI, type DeleteDataCredentialHttpError, type DeleteDataCredentialHttpResponse, type Error, type Errors, type FilterOrphanedDataCredentialsHttpError, type FilterOrphanedDataCredentialsHttpResponse, type GetDataCredentialHttpError, type GetDataCredentialHttpResponse, type Link, type OrphanCredentialResItem, type PatchDataCredentialHttpError, type PatchDataCredentialHttpResponse, type PatchRequest, type ResponseErrors, type UpdateDataCredentialHttpError, type UpdateDataCredentialHttpResponse, clearCache, dataCredentialsExport as default, deleteDataCredential, filterOrphanedDataCredentials, getDataCredential, patchDataCredential, updateDataCredential };

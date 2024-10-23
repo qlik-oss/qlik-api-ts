@@ -1,13 +1,11 @@
 import {
   generateRandomString,
-  getCsrfToken,
   getRestCallAuthParams,
   getWebSocketAuthParams,
   toValidWebsocketLocationUrl
-} from "./27XOYFEK.js";
+} from "./OCV75U5H.js";
 import "./7RHSSS4W.js";
 import {
-  isBrowser,
   isNode
 } from "./2ZQ3ZX7F.js";
 
@@ -10371,47 +10369,45 @@ async function createEnigmaSession({
   ttlSeconds,
   workloadType
 }) {
+  const isNodeEnvironment = isNode();
   const locationUrl = toValidWebsocketLocationUrl(hostConfig);
   const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
   const ttlPart = ttlSeconds !== void 0 && ttlSeconds >= 0 ? `/ttl/${ttlSeconds}` : "";
   const identityPart = identity ? `/identity/${identity}` : "";
   const workloadTypePart = useReloadEngine ? "&workloadType=interactive-reload" : workloadType ? `&workloadType=${workloadType}` : "";
-  let csrfToken = "";
-  if (isBrowser() && (!hostConfig || hostConfig.authType === "cookie" || hostConfig.authType === "windowscookie")) {
-    try {
-      csrfToken = await getCsrfToken(hostConfig);
-    } catch {
-    }
-  }
-  const csrfPart = csrfToken ? `&qlik-csrf-token=${csrfToken}` : "";
-  let url = `${locationUrl}/app/${appId}${identityPart}${ttlPart}?reloadUri=${reloadUri}${workloadTypePart}${csrfPart}`.replace(
+  const baseUrl = `${locationUrl}/app/${appId}${identityPart}${ttlPart}?reloadUri=${reloadUri}${workloadTypePart}`.replace(
     /^http/,
     "ws"
   );
-  const isNodeEnvironment = isNode();
-  let createSocketMethod;
+  let createSocketBuilder;
   if (isNodeEnvironment) {
-    const { headers, queryParams } = await getRestCallAuthParams({ hostConfig, method: "POST" });
     const WS = (await import("ws")).default;
-    Object.entries(queryParams).forEach(([key, value]) => {
-      url = `${url}&${key}=${value}`;
-    });
-    createSocketMethod = (socketUrl) => new WS(socketUrl, void 0, {
-      headers
-    });
+    createSocketBuilder = async () => {
+      let url = baseUrl;
+      const { headers, queryParams } = await getRestCallAuthParams({ hostConfig, method: "POST" });
+      Object.entries(queryParams).forEach(([key, value]) => {
+        url = `${url}&${key}=${value}`;
+      });
+      return (socketUrl) => new WS(url, void 0, {
+        headers
+      });
+    };
   } else {
-    const { queryParams } = await getWebSocketAuthParams({ hostConfig });
-    Object.entries(queryParams).forEach(([key, value]) => {
-      url = `${url}&${key}=${value}`;
-    });
-    createSocketMethod = (socketUrl) => new WebSocket(socketUrl);
+    createSocketBuilder = async () => {
+      let url = baseUrl;
+      const { queryParams } = await getWebSocketAuthParams({ hostConfig });
+      Object.entries(queryParams).forEach(([key, value]) => {
+        url = `${url}&${key}=${value}`;
+      });
+      return (socketUrl) => new WebSocket(url);
+    };
   }
-  return enigma.create({
+  const session = enigma.create({
     schema: engine_api_default,
     mixins: mixins5,
-    url,
+    url: baseUrl,
     suspendOnClose: !useReloadEngine,
-    createSocket: createSocketMethod,
+    createSocket: await createSocketBuilder(),
     requestInterceptors: [somethingWithEmptyMethodsRequestInterceptor],
     responseInterceptors: [
       retryAbortedErrorResponseInterceptor,
@@ -10419,6 +10415,13 @@ async function createEnigmaSession({
       somethingWithErrorPopupsResponnseInterceptor
     ]
   });
+  const originalResume = session.resume.bind(session);
+  const resume = async (onlyIfAttached) => {
+    session.rpc.createSocket = await createSocketBuilder();
+    await originalResume(onlyIfAttached);
+  };
+  session.resume = resume;
+  return session;
 }
 export {
   createEnigmaSession
