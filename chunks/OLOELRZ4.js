@@ -1,4 +1,7 @@
 import {
+  getInterceptors
+} from "./TJWN2R6D.js";
+import {
   isBrowser,
   isNode
 } from "./2ZQ3ZX7F.js";
@@ -1639,7 +1642,7 @@ async function fetchAndTransformExceptions(input, init) {
     return Promise.reject(new InvokeFetchError(getErrorMessage(e), 0, new Headers(), {}));
   }
 }
-async function performActualHttpFetch(method, completeUrl, unencodedBody, contentType, options, interceptors, authHeaders, credentials, userAgent) {
+async function performActualHttpFetch(method, completeUrl, unencodedBody, contentType, options, authHeaders, credentials, userAgent) {
   const { body, contentTypeHeader, requestOptions } = encodeBody(unencodedBody, contentType ?? "");
   const headers = {
     ...contentTypeHeader,
@@ -1651,7 +1654,7 @@ async function performActualHttpFetch(method, completeUrl, unencodedBody, conten
     headers["User-Agent"] = userAgent;
   }
   const isCrossOrigin = isHostCrossOrigin(options?.hostConfig);
-  let request = {
+  const request = {
     method,
     credentials,
     mode: isCrossOrigin ? "cors" : "same-origin",
@@ -1672,17 +1675,11 @@ async function performActualHttpFetch(method, completeUrl, unencodedBody, conten
     }, options.timeoutMs);
     request.signal = controller.signal;
   }
-  if (interceptors?.request.hasInterceptors()) {
-    request = await interceptors.request.apply(completeUrl, request);
-  }
   const fetchResponse = await fetchAndTransformExceptions(completeUrl, request);
   if (fetchTimeoutId) {
     clearTimeout(fetchTimeoutId);
   }
-  let invokeFetchResponse = await parseFetchResponse(fetchResponse, completeUrl);
-  if (interceptors?.response.hasInterceptors()) {
-    invokeFetchResponse = await interceptors.response.apply(invokeFetchResponse);
-  }
+  const invokeFetchResponse = await parseFetchResponse(fetchResponse, completeUrl);
   return invokeFetchResponse;
 }
 function encodeBody(unencodedBody, contentType) {
@@ -1799,23 +1796,17 @@ async function getInvokeFetchUrlParams({
   const cacheKey = toCacheKey(url, queryString, serializeHostConfig(options?.hostConfig), options?.headers);
   return { completeUrl, cacheKey, authHeaders, credentials };
 }
-function invokeFetchWithUrl(api, props, interceptors) {
-  return invokeFetchWithUrlAndRetry(
-    api,
-    props,
-    async () => {
-      const { cacheKey, authHeaders, credentials } = await getInvokeFetchUrlParams(props);
-      return invokeFetchWithUrlAndRetry(
-        api,
-        { ...props, cacheKey, authHeaders, credentials, options: { ...props.options, noCache: true } },
-        // don't cache the retry
-        void 0,
-        // only retry once
-        interceptors
-      );
-    },
-    interceptors
-  );
+function invokeFetchWithUrl(api, props) {
+  return invokeFetchWithUrlAndRetry(api, props, async () => {
+    const { cacheKey, authHeaders, credentials } = await getInvokeFetchUrlParams(props);
+    return invokeFetchWithUrlAndRetry(
+      api,
+      { ...props, cacheKey, authHeaders, credentials, options: { ...props.options, noCache: true } },
+      // don't cache the retry
+      void 0
+      // only retry once
+    );
+  });
 }
 function invokeFetchWithUrlAndRetry(api, {
   method,
@@ -1827,7 +1818,7 @@ function invokeFetchWithUrlAndRetry(api, {
   credentials,
   contentType,
   userAgent
-}, performRetry, interceptors) {
+}, performRetry) {
   if (!cache[api]) {
     cache[api] = {};
   }
@@ -1847,7 +1838,6 @@ function invokeFetchWithUrlAndRetry(api, {
     body,
     contentType,
     options,
-    interceptors,
     authHeaders,
     credentials,
     userAgent
@@ -1863,7 +1853,6 @@ function invokeFetchWithUrlAndRetry(api, {
     method,
     body,
     options,
-    interceptors,
     authHeaders,
     credentials
   );
@@ -1882,7 +1871,7 @@ function invokeFetchWithUrlAndRetry(api, {
   }
   return cloneResultPromise(resultPromiseAfterCacheClearing);
 }
-function addPagingFunctions(api, value, method, body, options, interceptors, authHeaders, credentials) {
+function addPagingFunctions(api, value, method, body, options, authHeaders, credentials) {
   const serializedHostConfig = serializeHostConfig(options?.hostConfig);
   return value.then((resp) => {
     const dataWithPotentialLinks = resp.data;
@@ -1892,34 +1881,26 @@ function addPagingFunctions(api, value, method, body, options, interceptors, aut
     const prevUrl = dataWithPotentialLinks.links?.prev?.href;
     const nextUrl = dataWithPotentialLinks.links?.next?.href;
     if (prevUrl) {
-      resp.prev = (prevOptions) => invokeFetchWithUrl(
-        api,
-        {
-          method,
-          completeUrl: prevUrl,
-          body,
-          options: prevOptions || options,
-          cacheKey: toCacheKey(prevUrl, "", serializedHostConfig, options?.headers),
-          authHeaders,
-          credentials
-        },
-        interceptors
-      );
+      resp.prev = (prevOptions) => invokeFetchWithUrl(api, {
+        method,
+        completeUrl: prevUrl,
+        body,
+        options: prevOptions || options,
+        cacheKey: toCacheKey(prevUrl, "", serializedHostConfig, options?.headers),
+        authHeaders,
+        credentials
+      });
     }
     if (nextUrl) {
-      resp.next = (nextOptions) => invokeFetchWithUrl(
-        api,
-        {
-          method,
-          completeUrl: nextUrl,
-          body,
-          options: nextOptions || options,
-          cacheKey: toCacheKey(nextUrl, "", serializedHostConfig, options?.headers),
-          authHeaders,
-          credentials
-        },
-        interceptors
-      );
+      resp.next = (nextOptions) => invokeFetchWithUrl(api, {
+        method,
+        completeUrl: nextUrl,
+        body,
+        options: nextOptions || options,
+        cacheKey: toCacheKey(nextUrl, "", serializedHostConfig, options?.headers),
+        authHeaders,
+        credentials
+      });
     }
     return resp;
   });
@@ -2037,6 +2018,15 @@ function cleanStack(stack) {
 // src/invoke-fetch/invoke-fetch-functions.ts
 var defaultUserAgent = "qmfe-api/latest";
 async function invokeFetch(api, props, interceptors) {
+  interceptors = interceptors || getInterceptors();
+  const invokeFetchFinal = (reqeust) => invokeFetchIntercepted(api, reqeust);
+  const withInterceptors = (interceptors || []).reduce(
+    (proceed, interceptor) => (request) => interceptor(request, proceed),
+    invokeFetchFinal
+  );
+  return withInterceptors(props);
+}
+async function invokeFetchIntercepted(api, props) {
   checkForCrossDomainRequest(props.options?.hostConfig);
   let userAgent;
   if (props?.userAgent) {
@@ -2047,11 +2037,15 @@ async function invokeFetch(api, props, interceptors) {
     userAgent = defaultUserAgent;
   }
   const { completeUrl, cacheKey, authHeaders, credentials } = await getInvokeFetchUrlParams(props);
-  return invokeFetchWithUrl(
-    api,
-    { ...props, method: props.method.toUpperCase(), completeUrl, cacheKey, authHeaders, credentials, userAgent },
-    interceptors
-  );
+  return invokeFetchWithUrl(api, {
+    ...props,
+    method: props.method.toUpperCase(),
+    completeUrl,
+    cacheKey,
+    authHeaders,
+    credentials,
+    userAgent
+  });
 }
 function clearApiCache(api) {
   clearApiCacheInternal(api);

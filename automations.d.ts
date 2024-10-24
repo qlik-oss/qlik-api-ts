@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types-qsBNouXJ.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BmgCFrhK.js';
 import './auth-types-PkN9CAF_.js';
 
 type AutomationDetailRequestObject = {
