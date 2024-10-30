@@ -1,3 +1,4 @@
+import { InterceptorsAPI, createInterceptors } from './interceptors.js';
 import { registerAuthModule, setDefaultHostConfig, getAccessToken, AuthAPI } from './auth.js';
 import { QixAPI } from './qix.js';
 import { ApiKeysAPI } from './api-keys.js';
@@ -32,7 +33,7 @@ import { WebIntegrationsAPI } from './web-integrations.js';
 import { WebNotificationsAPI } from './web-notifications.js';
 import { WebhooksAPI } from './webhooks.js';
 import { H as HostConfig } from './auth-types-PkN9CAF_.js';
-import './global.types-qsBNouXJ.js';
+import './invoke-fetch-types-BLrpeZOL.js';
 
 declare const apiKeys: ApiKeysAPI;
 declare const apps: AppsAPI;
@@ -54,6 +55,9 @@ declare const extensions: ExtensionsAPI;
 declare const glossaries: GlossariesAPI;
 declare const groups: GroupsAPI;
 declare const identityProviders: IdentityProvidersAPI;
+declare const interceptors: InterceptorsAPI & {
+    createInterceptors: typeof createInterceptors;
+};
 declare const items: ItemsAPI;
 declare const licenses: LicensesAPI;
 declare const qix: QixAPI & {
@@ -106,6 +110,8 @@ interface QlikAPI {
     groups: GroupsAPI;
     /** Functions for the identityProviders api */
     identityProviders: IdentityProvidersAPI;
+    /** Functions for the interceptors api */
+    interceptors: InterceptorsAPI;
     /** Functions for the items api */
     items: ItemsAPI;
     /** Functions for the licenses api */
@@ -141,9 +147,10 @@ interface QlikAPI {
     /** Functions for the webhooks api */
     webhooks: WebhooksAPI;
 }
-declare const createQlikApi: (props?: {
+type CreateQlikApiProps = {
     hostConfig?: HostConfig;
-}) => QlikAPI;
+};
+declare const createQlikApi: (props?: CreateQlikApiProps) => QlikAPI;
 /** Javascript/Typescript bindings to Qlik's platform API's */
 declare const api: QlikAPI & {
     createQlikApi: (props?: {
@@ -151,4 +158,4 @@ declare const api: QlikAPI & {
     }) => QlikAPI;
 };
 
-export { type QlikAPI, apiKeys, apps, audits, auth, automations, brands, collections, createQlikApi, cspOrigins, dataAssets, dataConnections, dataCredentials, dataFiles, api as default, extensions, glossaries, groups, identityProviders, items, licenses, qix, quotas, reloadTasks, reloads, reports, roles, spaces, tempContents, tenants, themes, transports, users, webIntegrations, webNotifications, webhooks };
+export { type CreateQlikApiProps, type QlikAPI, apiKeys, apps, audits, auth, automations, brands, collections, createQlikApi, cspOrigins, dataAssets, dataConnections, dataCredentials, dataFiles, api as default, extensions, glossaries, groups, identityProviders, interceptors, items, licenses, qix, quotas, reloadTasks, reloads, reports, roles, spaces, tempContents, tenants, themes, transports, users, webIntegrations, webNotifications, webhooks };

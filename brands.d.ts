@@ -1,4 +1,4 @@
-import { A as ApiCallOptions, D as DownloadableBlob } from './global.types-qsBNouXJ.js';
+import { A as ApiCallOptions, D as DownloadableBlob } from './invoke-fetch-types-BLrpeZOL.js';
 import './auth-types-PkN9CAF_.js';
 
 /**

@@ -1,52 +1,5 @@
 import { H as HostConfig } from './auth-types-PkN9CAF_.js';
 
-/** An entry in the cache for one specific cacheKey */
-type CacheEntry = {
-    lastPulled: number;
-    /** last time the cache was accessed and prevented an api call */
-    lastHit: Date | null;
-    /** number of times the cache has been hit by a client */
-    hitCount: number;
-    /** the url path of the cache hit. Useful to determine how many different qmfes are accessing the cache key */
-    accessedPaths: Set<string>;
-    value: Promise<unknown>;
-};
-/** Additional options for an api call done with invoke-fetch */
-type ApiCallOptions = {
-    /** Additional headers to pass on to the request. */
-    headers?: Record<string, string>;
-    /** if set to true the call will not use a cached result */
-    noCache?: boolean;
-    /**
-     * Only used cached results whose age in milliseconds are less than that or equal to `maxCacheAge`.
-     */
-    maxCacheAge?: number | undefined;
-    /**
-     * Only results cached on or after the `ifCachedSince` timestamp are used.
-     */
-    useCacheIfAfter?: Date;
-    /**
-     * Specify if another host than `globalThis.location` is to be used. Typically used in embedding and mashups
-     */
-    hostConfig?: HostConfig;
-    /**
-     * Set the amount of time to wait for a response.
-     * If the timeout is exceeded the request is aborted.
-     * If both timeoutMs and signal is present, timeoutMs will have no effect, as
-     * there is already an abort-signal specified.
-     */
-    timeoutMs?: number;
-    /**
-     * An abort-signal lets you abort an ongoing fetch request. The abort-signal is created
-     * by taking the .signal property of an AbortController.
-     */
-    signal?: AbortSignal;
-};
-type DownloadableBlob = Blob & {
-    /** download the blob in a using the specified filename */
-    download: (filename: string) => Promise<void>;
-};
-
 /** ApiKey Auth Configuration for a HostConfig */
 type ApiKeyAuthConfig = {
     /** api key created by a developer role on a tenant */
@@ -173,4 +126,84 @@ declare global {
     } | undefined;
 }
 
-export type { ApiCallOptions as A, DownloadableBlob as D };
+/** The typical base return type of a fetch call */
+type InvokeFetchResponse = {
+    status: number;
+    headers: Headers;
+    data: unknown;
+    prev?: () => Promise<InvokeFetchResponse>;
+    next?: () => Promise<InvokeFetchResponse>;
+};
+/** An entry in the cache for one specific cacheKey */
+type CacheEntry = {
+    lastPulled: number;
+    /** last time the cache was accessed and prevented an api call */
+    lastHit: Date | null;
+    /** number of times the cache has been hit by a client */
+    hitCount: number;
+    /** the url path of the cache hit. Useful to determine how many different qmfes are accessing the cache key */
+    accessedPaths: Set<string>;
+    value: Promise<unknown>;
+};
+/** Additional options for an api call done with invoke-fetch */
+type ApiCallOptions = {
+    /** Additional headers to pass on to the request. */
+    headers?: Record<string, string>;
+    /** if set to true the call will not use a cached result */
+    noCache?: boolean;
+    /**
+     * Only used cached results whose age in milliseconds are less than that or equal to `maxCacheAge`.
+     */
+    maxCacheAge?: number | undefined;
+    /**
+     * Only results cached on or after the `ifCachedSince` timestamp are used.
+     */
+    useCacheIfAfter?: Date;
+    /**
+     * Specify if another host than `globalThis.location` is to be used. Typically used in embedding and mashups
+     */
+    hostConfig?: HostConfig;
+    /**
+     * Set the amount of time to wait for a response.
+     * If the timeout is exceeded the request is aborted.
+     * If both timeoutMs and signal is present, timeoutMs will have no effect, as
+     * there is already an abort-signal specified.
+     */
+    timeoutMs?: number;
+    /**
+     * An abort-signal lets you abort an ongoing fetch request. The abort-signal is created
+     * by taking the .signal property of an AbortController.
+     */
+    signal?: AbortSignal;
+    /**
+     * Ensure that the request is kept alive even if the page that initiated it is unloaded
+     * before the request is completed.
+     */
+    keepalive?: boolean;
+};
+type InvokeFetchProperties = {
+    /** http method */
+    method: string;
+    /** data passed to api call */
+    body?: unknown;
+    /** additional api call options */
+    options?: ApiCallOptions;
+    /** override default RequestInit options */
+    requestInitOverrides?: RequestInit;
+    /** path to api endpoint, can be in a template format e.g. /api/v1/space/{spaceId} */
+    pathTemplate: string;
+    /** path variables to be used in the path template */
+    pathVariables?: Record<string, string>;
+    /** additional query to url */
+    query?: Record<string, unknown>;
+    /** specify what content-type to send, if omitted "application/json" is assumed */
+    contentType?: string;
+    /** override the default user-agent with this value. This will also override any browser's UA. */
+    userAgent?: string;
+};
+type DownloadableBlob = Blob & {
+    /** download the blob in a using the specified filename */
+    download: (filename: string) => Promise<void>;
+};
+
+export type { ApiCallOptions as A, DownloadableBlob as D, InvokeFetchResponse as I, InvokeFetchProperties as a };
