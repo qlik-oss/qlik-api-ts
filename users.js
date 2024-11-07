@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/SMQGR3VM.js";
-import "./chunks/3KD5W26Z.js";
+} from "./chunks/3HCIBFZO.js";
+import "./chunks/AFRSBZ7R.js";
 import "./chunks/2ZQ3ZX7F.js";
 
 // src/public/rest/users.ts
@@ -45,11 +45,6 @@ var getMyUser = async (options) => invokeFetch("users", {
   pathTemplate: "/api/v1/users/me",
   options
 });
-var getUsersMetadata = async (options) => invokeFetch("users", {
-  method: "get",
-  pathTemplate: "/api/v1/users/metadata",
-  options
-});
 var deleteUser = async (userId, options) => invokeFetch("users", {
   method: "delete",
   pathTemplate: "/api/v1/users/{userId}",
@@ -81,7 +76,6 @@ var usersExport = {
   filterUsers,
   inviteUsers,
   getMyUser,
-  getUsersMetadata,
   deleteUser,
   getUser,
   patchUser,
@@ -98,7 +92,6 @@ export {
   getMyUser,
   getUser,
   getUsers,
-  getUsersMetadata,
   inviteUsers,
   patchUser
 };

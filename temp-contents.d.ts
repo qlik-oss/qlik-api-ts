@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types-qsBNouXJ.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
 import './auth-types-PkN9CAF_.js';
 
 /**
@@ -48,7 +48,7 @@ type DetailResponse = {
     UpdatedAt?: string;
 };
 /**
- * This endpoint is used to upload a file as a temporary content resource. It returns a `201 Created` with a location header that contains the location of the created resource. If filename or TTL is not properly set, a `400 Bad request` is returned. For internal issues, a `500 Internal Server Error` is returned.
+ * Upload a file as a temporary content resource. It returns a `201 Created` with a location header that contains the location of the created resource. If filename or TTL is not properly set, a `400 Bad request` is returned. For internal issues, a `500 Internal Server Error` is returned.
  *
  * @param query an object with query parameters
  * @param body an object with the body content
@@ -104,7 +104,7 @@ type DownloadTempFileHttpError = {
     status: number;
 };
 /**
- * This endpoint is used to retrieve a summary of the metadata associated with a temporary content resource. It returns a `200 OK` with a model if the temporary resource is valid. It returns a `410 Gone` if the file has expired and `404 Not Found` if the criteria is not met.
+ * Retrieve a summary of the metadata associated with a temporary content resource. It returns a `200 OK` with a model if the temporary resource is valid. It returns a `410 Gone` if the file has expired and `404 Not Found` if the criteria is not met.
  *
  * @param id The temporary contents ID.
  * @throws GetTempFileDetailsHttpError
@@ -132,7 +132,7 @@ type GetTempFileDetailsHttpError = {
 declare function clearCache(): void;
 interface TempContentsAPI {
     /**
-     * This endpoint is used to upload a file as a temporary content resource. It returns a `201 Created` with a location header that contains the location of the created resource. If filename or TTL is not properly set, a `400 Bad request` is returned. For internal issues, a `500 Internal Server Error` is returned.
+     * Upload a file as a temporary content resource. It returns a `201 Created` with a location header that contains the location of the created resource. If filename or TTL is not properly set, a `400 Bad request` is returned. For internal issues, a `500 Internal Server Error` is returned.
      *
      * @param query an object with query parameters
      * @param body an object with the body content
@@ -148,7 +148,7 @@ interface TempContentsAPI {
      */
     downloadTempFile: typeof downloadTempFile;
     /**
-     * This endpoint is used to retrieve a summary of the metadata associated with a temporary content resource. It returns a `200 OK` with a model if the temporary resource is valid. It returns a `410 Gone` if the file has expired and `404 Not Found` if the criteria is not met.
+     * Retrieve a summary of the metadata associated with a temporary content resource. It returns a `200 OK` with a model if the temporary resource is valid. It returns a `410 Gone` if the file has expired and `404 Not Found` if the criteria is not met.
      *
      * @param id The temporary contents ID.
      * @throws GetTempFileDetailsHttpError

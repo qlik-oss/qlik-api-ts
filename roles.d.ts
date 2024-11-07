@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types-qsBNouXJ.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
 import './auth-types-PkN9CAF_.js';
 
 /**
@@ -132,7 +132,7 @@ type GetRolesHttpError = {
 /**
  * Returns the requested role.
  *
- * @param id The role's unique identifier
+ * @param id The unique identifier for the role.
  * @throws GetRoleHttpError
  */
 declare const getRole: (id: string, options?: ApiCallOptions) => Promise<GetRoleHttpResponse>;
@@ -161,7 +161,7 @@ interface RolesAPI {
     /**
      * Returns the requested role.
      *
-     * @param id The role's unique identifier
+     * @param id The unique identifier for the role.
      * @throws GetRoleHttpError
      */
     getRole: typeof getRole;

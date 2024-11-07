@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types-qsBNouXJ.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
 import './auth-types-PkN9CAF_.js';
 
 type ErrorResponse = {
@@ -59,8 +59,6 @@ type GetByIDResult = {
     userId?: string;
 };
 type GetLinks = {
-    /** @deprecated */
-    Self?: Href;
     self?: Href;
 };
 type GetObjectsResult = {
@@ -82,23 +80,13 @@ type GetSettingsResult = {
         EventTTL?: number;
     };
 };
-/**
- * @deprecated
- */
-type Href = {
-    /** @deprecated */
-    Href?: string;
-};
 type ListLinks = {
-    /** @deprecated */
-    Next?: Href;
-    /** @deprecated */
-    Prev?: Href;
-    /** @deprecated */
-    Self?: Href;
     next?: Href;
     prev?: Href;
     self?: Href;
+};
+type Href = {
+    href?: string;
 };
 /**
  * Retrieves list of events for subscribed services for your tenant. Stores events for 90 days, after which they can be accessed via `/v1/audits/archive`.

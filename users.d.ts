@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './global.types-qsBNouXJ.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
 import './auth-types-PkN9CAF_.js';
 
 /**
@@ -144,15 +144,6 @@ type JSONPatch = {
  */
 type JSONPatchArray = JSONPatch[];
 /**
- * @deprecated
- *
- * An object containing the metadata for the user configuration.
- */
-type Metadata = {
-    /** List of system roles to which the user can be assigned. */
-    valid_roles?: string[];
-};
-/**
  * Invitee result item
  */
 type ResultItem = {
@@ -184,7 +175,7 @@ type User = {
     email?: string;
     /** The unique user identifier. */
     readonly id: string;
-    /** The number of seconds until the user invitation will expire. */
+    /** The Unix timestamp indicating when the invite will expire. */
     readonly inviteExpiry?: number;
     /** @deprecated
      * Deprecated. Use `lastUpdatedAt` instead. */
@@ -461,24 +452,6 @@ type GetMyUserHttpError = {
     status: number;
 };
 /**
- * @deprecated
- *
- * Returns the metadata with regard to the user configuration. Deprecated, use GET /v1/roles instead.
- *
- * @throws GetUsersMetadataHttpError
- */
-declare const getUsersMetadata: (options?: ApiCallOptions) => Promise<GetUsersMetadataHttpResponse>;
-type GetUsersMetadataHttpResponse = {
-    data: Metadata;
-    headers: Headers;
-    status: number;
-};
-type GetUsersMetadataHttpError = {
-    data: Errors;
-    headers: Headers;
-    status: number;
-};
-/**
  * Deletes the requested user.
  *
  * @param userId The ID of the user to delete.
@@ -588,14 +561,6 @@ interface UsersAPI {
      */
     getMyUser: typeof getMyUser;
     /**
-     * @deprecated
-     *
-     * Returns the metadata with regard to the user configuration. Deprecated, use GET /v1/roles instead.
-     *
-     * @throws GetUsersMetadataHttpError
-     */
-    getUsersMetadata: typeof getUsersMetadata;
-    /**
      * Deletes the requested user.
      *
      * @param userId The ID of the user to delete.
@@ -628,4 +593,4 @@ interface UsersAPI {
  */
 declare const usersExport: UsersAPI;
 
-export { type AssignedGroups, type AssignedRoles, type AssignedRolesRefIDs, type AssignedRolesRefNames, type AssignedScopes, type CountUsersHttpError, type CountUsersHttpResponse, type CreateUserHttpError, type CreateUserHttpResponse, type DeleteUserHttpError, type DeleteUserHttpResponse, type Error, type ErrorItem, type Errors, type ErrorsResponse, type Filter, type FilterUsersHttpError, type FilterUsersHttpResponse, type GetMyUserHttpError, type GetMyUserHttpResponse, type GetUserHttpError, type GetUserHttpResponse, type GetUsersHttpError, type GetUsersHttpResponse, type GetUsersMetadataHttpError, type GetUsersMetadataHttpResponse, type InviteDataResponse, type InviteErrorItem, type InviteItem, type InviteRequestData, type InviteUsersHttpError, type InviteUsersHttpResponse, type JSONPatch, type JSONPatchArray, type Metadata, type PatchUser204HttpResponse, type PatchUser207HttpResponse, type PatchUserHttpError, type PatchUserHttpResponse, type ResultItem, type User, type UserCount, type UserPostSchema, type Users, type UsersAPI, clearCache, countUsers, createUser, usersExport as default, deleteUser, filterUsers, getMyUser, getUser, getUsers, getUsersMetadata, inviteUsers, patchUser };
+export { type AssignedGroups, type AssignedRoles, type AssignedRolesRefIDs, type AssignedRolesRefNames, type AssignedScopes, type CountUsersHttpError, type CountUsersHttpResponse, type CreateUserHttpError, type CreateUserHttpResponse, type DeleteUserHttpError, type DeleteUserHttpResponse, type Error, type ErrorItem, type Errors, type ErrorsResponse, type Filter, type FilterUsersHttpError, type FilterUsersHttpResponse, type GetMyUserHttpError, type GetMyUserHttpResponse, type GetUserHttpError, type GetUserHttpResponse, type GetUsersHttpError, type GetUsersHttpResponse, type InviteDataResponse, type InviteErrorItem, type InviteItem, type InviteRequestData, type InviteUsersHttpError, type InviteUsersHttpResponse, type JSONPatch, type JSONPatchArray, type PatchUser204HttpResponse, type PatchUser207HttpResponse, type PatchUserHttpError, type PatchUserHttpResponse, type ResultItem, type User, type UserCount, type UserPostSchema, type Users, type UsersAPI, clearCache, countUsers, createUser, usersExport as default, deleteUser, filterUsers, getMyUser, getUser, getUsers, inviteUsers, patchUser };

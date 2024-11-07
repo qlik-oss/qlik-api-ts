@@ -1,15 +1,17 @@
 import {
   qix_default
-} from "./chunks/VXEOAWM6.js";
+} from "./chunks/K4QENKPR.js";
 import {
   auth_default
-} from "./chunks/3W4PFUMC.js";
-import "./chunks/7RHSSS4W.js";
+} from "./chunks/6CH4KJQU.js";
+import {
+  interceptors_default
+} from "./chunks/7BDAXGID.js";
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/SMQGR3VM.js";
-import "./chunks/3KD5W26Z.js";
+} from "./chunks/3HCIBFZO.js";
+import "./chunks/AFRSBZ7R.js";
 import "./chunks/2ZQ3ZX7F.js";
 
 // src/runtime-api-generator/runtime-api-generator-common.ts
@@ -81,7 +83,6 @@ function createLazyApiProxy(api2, initFunc) {
 }
 function parseMiniApi(namespace, def) {
   const api2 = {
-    interceptors: {},
     operations: {}
   };
   traverse(namespace, "", def, api2.operations);
@@ -133,7 +134,7 @@ function createClassicApiFn({
   hasBody,
   contentType,
   useInstead
-}, operationInterceptors, hostConfig, enableConsoleWarnings, invokeFetchFnGetter) {
+}, hostConfig, interceptors2, enableConsoleWarnings, invokeFetchFnGetter) {
   return (...args) => {
     const pathVariables = {};
     argNames.forEach((argName, index) => {
@@ -175,7 +176,7 @@ function createClassicApiFn({
         ...contentType ? { contentType } : {},
         options: optionsIncludingDefaultHostConfig
       },
-      operationInterceptors
+      interceptors2?.getInterceptors()
     );
   };
 }
@@ -185,13 +186,13 @@ var parsedMiniApis = {};
 function apiDefToApiPublic(namespace, def) {
   parsedMiniApis[namespace] = parsedMiniApis[namespace] || parseMiniApi(namespace, def);
   const parsedMiniApi = parsedMiniApis[namespace];
-  return (hostConfig) => {
+  return (hostConfig, interceptors2) => {
     const lazyApi = {
       clearCache: () => clearApiCache(namespace)
     };
     const initFunc = () => {
       Object.entries(parsedMiniApi.operations).forEach(([operationName, operation]) => {
-        lazyApi[operationName] = createClassicApiFn(operation, void 0, hostConfig, true, () => invokeFetch);
+        lazyApi[operationName] = createClassicApiFn(operation, hostConfig, interceptors2, true, () => invokeFetch);
         operation.oldOperationNames.forEach((oldOperationName) => {
           lazyApi[oldOperationName] = lazyApi[operationName];
         });
@@ -291,7 +292,6 @@ var automationsMiniModule = apiDefToApiPublic("automations", {
     v1: {
       automations: {
         "": ["getAutomations:GQ:", "createAutomation:PBJ:"],
-        settings: ["getAutomationsSettings:G:", "updateAutomationsSettings:UBJ:"],
         usage: ["getAutomationsUsageMetrics:GQ:"],
         "{id}": {
           "": ["deleteAutomation:D:", "getAutomationWithQuery:GQ:", "getAutomation:G:", "updateAutomation:UBJ:"],
@@ -639,7 +639,6 @@ var usersMiniModule = apiDefToApiPublic("users", {
         "": ["getUsers:GQ:", "createUser:PBJ:"],
         actions: { count: ["countUsers:GQ:"], filter: ["filterUsers:PQBJ:"], invite: ["inviteUsers:PBJ:"] },
         me: ["getMyUser:G:"],
-        metadata: ["getUsersMetadata:G:"],
         "{userId}": ["deleteUser:D:", "getUser:GQ:", "patchUser:ABJ:"]
       }
     }
@@ -683,74 +682,79 @@ var webhooksMiniModule = apiDefToApiPublic("webhooks", {
     }
   }
 });
-var apiKeys = apiKeysMiniModule();
-var apps = appsMiniModule();
-var audits = auditsMiniModule();
+var apiKeys = apiKeysMiniModule(void 0, interceptors_default);
+var apps = appsMiniModule(void 0, interceptors_default);
+var audits = auditsMiniModule(void 0, interceptors_default);
 var auth = auth_default;
-var automations = automationsMiniModule();
-var brands = brandsMiniModule();
-var collections = collectionsMiniModule();
-var cspOrigins = cspOriginsMiniModule();
-var dataAssets = dataAssetsMiniModule();
-var dataConnections = dataConnectionsMiniModule();
-var dataCredentials = dataCredentialsMiniModule();
-var dataFiles = dataFilesMiniModule();
-var extensions = extensionsMiniModule();
-var glossaries = glossariesMiniModule();
-var groups = groupsMiniModule();
-var identityProviders = identityProvidersMiniModule();
-var items = itemsMiniModule();
-var licenses = licensesMiniModule();
+var automations = automationsMiniModule(void 0, interceptors_default);
+var brands = brandsMiniModule(void 0, interceptors_default);
+var collections = collectionsMiniModule(void 0, interceptors_default);
+var cspOrigins = cspOriginsMiniModule(void 0, interceptors_default);
+var dataAssets = dataAssetsMiniModule(void 0, interceptors_default);
+var dataConnections = dataConnectionsMiniModule(void 0, interceptors_default);
+var dataCredentials = dataCredentialsMiniModule(void 0, interceptors_default);
+var dataFiles = dataFilesMiniModule(void 0, interceptors_default);
+var extensions = extensionsMiniModule(void 0, interceptors_default);
+var glossaries = glossariesMiniModule(void 0, interceptors_default);
+var groups = groupsMiniModule(void 0, interceptors_default);
+var identityProviders = identityProvidersMiniModule(void 0, interceptors_default);
+var interceptors = interceptors_default;
+var items = itemsMiniModule(void 0, interceptors_default);
+var licenses = licensesMiniModule(void 0, interceptors_default);
 var qix = qix_default;
-var quotas = quotasMiniModule();
-var reloadTasks = reloadTasksMiniModule();
-var reloads = reloadsMiniModule();
-var reports = reportsMiniModule();
-var roles = rolesMiniModule();
-var spaces = spacesMiniModule();
-var tempContents = tempContentsMiniModule();
-var tenants = tenantsMiniModule();
-var themes = themesMiniModule();
-var transports = transportsMiniModule();
-var users = usersMiniModule();
-var webIntegrations = webIntegrationsMiniModule();
-var webNotifications = webNotificationsMiniModule();
-var webhooks = webhooksMiniModule();
-var createQlikApi = (props) => ({
-  apiKeys: apiKeysMiniModule(props?.hostConfig),
-  apps: appsMiniModule(props?.hostConfig),
-  audits: auditsMiniModule(props?.hostConfig),
-  auth: auth_default,
-  automations: automationsMiniModule(props?.hostConfig),
-  brands: brandsMiniModule(props?.hostConfig),
-  collections: collectionsMiniModule(props?.hostConfig),
-  cspOrigins: cspOriginsMiniModule(props?.hostConfig),
-  dataAssets: dataAssetsMiniModule(props?.hostConfig),
-  dataConnections: dataConnectionsMiniModule(props?.hostConfig),
-  dataCredentials: dataCredentialsMiniModule(props?.hostConfig),
-  dataFiles: dataFilesMiniModule(props?.hostConfig),
-  extensions: extensionsMiniModule(props?.hostConfig),
-  glossaries: glossariesMiniModule(props?.hostConfig),
-  groups: groupsMiniModule(props?.hostConfig),
-  identityProviders: identityProvidersMiniModule(props?.hostConfig),
-  items: itemsMiniModule(props?.hostConfig),
-  licenses: licensesMiniModule(props?.hostConfig),
-  qix: qix_default.withHostConfig(props?.hostConfig),
-  quotas: quotasMiniModule(props?.hostConfig),
-  reloadTasks: reloadTasksMiniModule(props?.hostConfig),
-  reloads: reloadsMiniModule(props?.hostConfig),
-  reports: reportsMiniModule(props?.hostConfig),
-  roles: rolesMiniModule(props?.hostConfig),
-  spaces: spacesMiniModule(props?.hostConfig),
-  tempContents: tempContentsMiniModule(props?.hostConfig),
-  tenants: tenantsMiniModule(props?.hostConfig),
-  themes: themesMiniModule(props?.hostConfig),
-  transports: transportsMiniModule(props?.hostConfig),
-  users: usersMiniModule(props?.hostConfig),
-  webIntegrations: webIntegrationsMiniModule(props?.hostConfig),
-  webNotifications: webNotificationsMiniModule(props?.hostConfig),
-  webhooks: webhooksMiniModule(props?.hostConfig)
-});
+var quotas = quotasMiniModule(void 0, interceptors_default);
+var reloadTasks = reloadTasksMiniModule(void 0, interceptors_default);
+var reloads = reloadsMiniModule(void 0, interceptors_default);
+var reports = reportsMiniModule(void 0, interceptors_default);
+var roles = rolesMiniModule(void 0, interceptors_default);
+var spaces = spacesMiniModule(void 0, interceptors_default);
+var tempContents = tempContentsMiniModule(void 0, interceptors_default);
+var tenants = tenantsMiniModule(void 0, interceptors_default);
+var themes = themesMiniModule(void 0, interceptors_default);
+var transports = transportsMiniModule(void 0, interceptors_default);
+var users = usersMiniModule(void 0, interceptors_default);
+var webIntegrations = webIntegrationsMiniModule(void 0, interceptors_default);
+var webNotifications = webNotificationsMiniModule(void 0, interceptors_default);
+var webhooks = webhooksMiniModule(void 0, interceptors_default);
+var createQlikApi = (props) => {
+  const scopedInterceptors = interceptors_default.createInterceptors();
+  return {
+    apiKeys: apiKeysMiniModule(props?.hostConfig, scopedInterceptors),
+    apps: appsMiniModule(props?.hostConfig, scopedInterceptors),
+    audits: auditsMiniModule(props?.hostConfig, scopedInterceptors),
+    auth: auth_default,
+    automations: automationsMiniModule(props?.hostConfig, scopedInterceptors),
+    brands: brandsMiniModule(props?.hostConfig, scopedInterceptors),
+    collections: collectionsMiniModule(props?.hostConfig, scopedInterceptors),
+    cspOrigins: cspOriginsMiniModule(props?.hostConfig, scopedInterceptors),
+    dataAssets: dataAssetsMiniModule(props?.hostConfig, scopedInterceptors),
+    dataConnections: dataConnectionsMiniModule(props?.hostConfig, scopedInterceptors),
+    dataCredentials: dataCredentialsMiniModule(props?.hostConfig, scopedInterceptors),
+    dataFiles: dataFilesMiniModule(props?.hostConfig, scopedInterceptors),
+    extensions: extensionsMiniModule(props?.hostConfig, scopedInterceptors),
+    glossaries: glossariesMiniModule(props?.hostConfig, scopedInterceptors),
+    groups: groupsMiniModule(props?.hostConfig, scopedInterceptors),
+    identityProviders: identityProvidersMiniModule(props?.hostConfig, scopedInterceptors),
+    interceptors: scopedInterceptors,
+    items: itemsMiniModule(props?.hostConfig, scopedInterceptors),
+    licenses: licensesMiniModule(props?.hostConfig, scopedInterceptors),
+    qix: qix_default.withHostConfig(props?.hostConfig),
+    quotas: quotasMiniModule(props?.hostConfig, scopedInterceptors),
+    reloadTasks: reloadTasksMiniModule(props?.hostConfig, scopedInterceptors),
+    reloads: reloadsMiniModule(props?.hostConfig, scopedInterceptors),
+    reports: reportsMiniModule(props?.hostConfig, scopedInterceptors),
+    roles: rolesMiniModule(props?.hostConfig, scopedInterceptors),
+    spaces: spacesMiniModule(props?.hostConfig, scopedInterceptors),
+    tempContents: tempContentsMiniModule(props?.hostConfig, scopedInterceptors),
+    tenants: tenantsMiniModule(props?.hostConfig, scopedInterceptors),
+    themes: themesMiniModule(props?.hostConfig, scopedInterceptors),
+    transports: transportsMiniModule(props?.hostConfig, scopedInterceptors),
+    users: usersMiniModule(props?.hostConfig, scopedInterceptors),
+    webIntegrations: webIntegrationsMiniModule(props?.hostConfig, scopedInterceptors),
+    webNotifications: webNotificationsMiniModule(props?.hostConfig, scopedInterceptors),
+    webhooks: webhooksMiniModule(props?.hostConfig, scopedInterceptors)
+  };
+};
 var api = {
   apiKeys,
   apps,
@@ -768,6 +772,7 @@ var api = {
   glossaries,
   groups,
   identityProviders,
+  interceptors,
   items,
   licenses,
   qix,
@@ -807,6 +812,7 @@ export {
   glossaries,
   groups,
   identityProviders,
+  interceptors,
   items,
   licenses,
   qix,
