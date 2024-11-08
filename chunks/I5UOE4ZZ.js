@@ -1145,19 +1145,27 @@ async function getCsrfToken(hostConfig, noCache) {
     pathTemplate = "/api/v1/csrf-token";
   }
   const fetchCsrfToken = async () => {
-    const res = await invokeFetch("csrf-token", {
-      method: "get",
-      pathTemplate,
-      options: {
-        hostConfig,
-        noCache: true
+    try {
+      const res = await invokeFetch("csrf-token", {
+        method: "get",
+        pathTemplate,
+        options: {
+          hostConfig,
+          noCache: true
+        }
+      });
+      const csrfToken = res.headers.get(QLIK_CSRF_TOKEN);
+      if (!csrfToken) {
+        return "";
       }
-    });
-    const csrfToken = res.headers.get(QLIK_CSRF_TOKEN);
-    if (!csrfToken) {
-      return "";
+      return csrfToken;
+    } catch (e) {
+      const error = e;
+      if (error.status === 404) {
+        return "";
+      }
+      throw e;
     }
-    return csrfToken;
   };
   if (noCache) {
     csrfTokens[locationUrl] = fetchCsrfToken();
@@ -1639,7 +1647,7 @@ async function fetchAndTransformExceptions(input, init) {
   try {
     return await fetch(input, init);
   } catch (e) {
-    return Promise.reject(new InvokeFetchError(getErrorMessage(e), 0, new Headers(), {}));
+    return Promise.reject(new InvokeFetchError2(getErrorMessage(e), 0, new Headers(), {}));
   }
 }
 async function performActualHttpFetch(method, completeUrl, unencodedBody, contentType, options, authHeaders, credentials, userAgent) {
@@ -1973,7 +1981,7 @@ async function download(blob, filename) {
 }
 
 // src/invoke-fetch/invoke-fetch-error.ts
-var InvokeFetchError = class extends Error {
+var InvokeFetchError2 = class extends Error {
   status;
   headers;
   data;
@@ -2094,10 +2102,10 @@ async function parseFetchResponse(fetchResponse, url) {
   const { status, statusText, headers } = fetchResponse;
   const errorMsg = `request to '${url}' failed with status ${status} ${statusText}.`;
   if (status >= 300) {
-    throw new InvokeFetchError(errorMsg, status, headers, resultData);
+    throw new InvokeFetchError2(errorMsg, status, headers, resultData);
   }
   if (status === 0) {
-    throw new InvokeFetchError(errorMsg, 302, headers, resultData);
+    throw new InvokeFetchError2(errorMsg, 302, headers, resultData);
   }
   const invokeFetchResponse = {
     status,
@@ -2137,7 +2145,7 @@ export {
   checkForCrossDomainRequest,
   logout,
   generateRandomString,
-  InvokeFetchError,
+  InvokeFetchError2 as InvokeFetchError,
   EncodingError,
   invokeFetch,
   clearApiCache,

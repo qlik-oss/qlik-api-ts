@@ -176,6 +176,8 @@ type LicenseOverview = {
         /** Parameter values */
         values?: unknown;
     }[];
+    /** the parent number of the license. can be shared by multiple license numbers */
+    parentLicenseNumber?: string;
     /** The product the license is valid for. */
     product: string;
     /** The secondary number of a definition. */

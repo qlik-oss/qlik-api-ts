@@ -1,17 +1,17 @@
 import {
   qix_default
-} from "./chunks/K4QENKPR.js";
+} from "./chunks/OIQ5ELGS.js";
 import {
   auth_default
-} from "./chunks/6CH4KJQU.js";
+} from "./chunks/BL5PJM4B.js";
 import {
   interceptors_default
 } from "./chunks/7BDAXGID.js";
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/3HCIBFZO.js";
-import "./chunks/AFRSBZ7R.js";
+} from "./chunks/UA6BE3VB.js";
+import "./chunks/CZC7KEJN.js";
 import "./chunks/2ZQ3ZX7F.js";
 
 // src/runtime-api-generator/runtime-api-generator-common.ts
@@ -560,7 +560,11 @@ var reportsMiniModule = apiDefToApiPublic("reports", {
   api: { v1: { reports: { "": ["createReport:PBJ:"], "{id}": { status: ["getReportStatus:G:"] } } } }
 });
 var rolesMiniModule = apiDefToApiPublic("roles", {
-  api: { v1: { roles: { "": ["getRoles:GQ:"], "{id}": ["getRole:G:"] } } }
+  api: {
+    v1: {
+      roles: { "": ["getRoles:GQ:", "createRole:PBJ:"], "{id}": ["deleteRole:D:", "getRole:G:", "patchRole:ABJ:"] }
+    }
+  }
 });
 var spacesMiniModule = apiDefToApiPublic("spaces", {
   api: {

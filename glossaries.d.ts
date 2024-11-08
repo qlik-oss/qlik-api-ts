@@ -110,6 +110,8 @@ type Category = {
     readonly createdBy: string;
     description: string;
     glossaryId: string;
+    /** The id for resolving updates in future imports/updates.
+     * Opposed to the id of terms, id on category are not resolved by backend. Any category referred in the category array in terms will have to be identical to the id property of the category. If not, the category reference will be discarded. */
     id: string;
     name: string;
     parentId?: string;
@@ -121,9 +123,6 @@ type Category = {
 };
 type CreateCategory = {
     description?: string;
-    /** The id for resolving updates in future imports/updates.
-     * Opposed to the id of terms, id on category are not resolved by backend. Any category referred in the category array in terms will have to be identical to the id property of the category. If not, the category reference will be discarded. */
-    id?: string;
     /** The name of the category. May not be identical to another category belonging to the same parent. */
     name?: string;
     parentId?: string;

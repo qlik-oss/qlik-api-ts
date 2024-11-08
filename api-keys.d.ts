@@ -121,6 +121,10 @@ type Link = {
     /** The URL for the link. */
     href: string;
 };
+type RetryAfterHeader = {
+    /** The amount of seconds to wait before retrying the request. */
+    "retry-after"?: number;
+};
 type ApiKeyPage = {
     /** Properties of API keys in a given tenant. */
     data: ApiKey[];
@@ -337,4 +341,4 @@ interface ApiKeysAPI {
  */
 declare const apiKeysExport: ApiKeysAPI;
 
-export { type ApiKey, type ApiKeyBody, type ApiKeyConfigPatch, type ApiKeyPage, type ApiKeyPatch, type ApiKeyWithToken, type ApiKeysAPI, type ApiKeysConfig, type ApiKeysConfigPatchSchema, type ApiKeysPatchSchema, type CreateApiKeyHttpError, type CreateApiKeyHttpResponse, type DeleteApiKeyHttpError, type DeleteApiKeyHttpResponse, type Error, type Errors, type GetApiKeyHttpError, type GetApiKeyHttpResponse, type GetApiKeysConfigHttpError, type GetApiKeysConfigHttpResponse, type GetApiKeysHttpError, type GetApiKeysHttpResponse, type Link, type PatchApiKeyHttpError, type PatchApiKeyHttpResponse, type PatchApiKeysConfigHttpError, type PatchApiKeysConfigHttpResponse, clearCache, createApiKey, apiKeysExport as default, deleteApiKey, getApiKey, getApiKeys, getApiKeysConfig, patchApiKey, patchApiKeysConfig };
+export { type ApiKey, type ApiKeyBody, type ApiKeyConfigPatch, type ApiKeyPage, type ApiKeyPatch, type ApiKeyWithToken, type ApiKeysAPI, type ApiKeysConfig, type ApiKeysConfigPatchSchema, type ApiKeysPatchSchema, type CreateApiKeyHttpError, type CreateApiKeyHttpResponse, type DeleteApiKeyHttpError, type DeleteApiKeyHttpResponse, type Error, type Errors, type GetApiKeyHttpError, type GetApiKeyHttpResponse, type GetApiKeysConfigHttpError, type GetApiKeysConfigHttpResponse, type GetApiKeysHttpError, type GetApiKeysHttpResponse, type Link, type PatchApiKeyHttpError, type PatchApiKeyHttpResponse, type PatchApiKeysConfigHttpError, type PatchApiKeysConfigHttpResponse, type RetryAfterHeader, clearCache, createApiKey, apiKeysExport as default, deleteApiKey, getApiKey, getApiKeys, getApiKeysConfig, patchApiKey, patchApiKeysConfig };
