@@ -367,13 +367,15 @@ type ReportRequest = {
     type: "composition-1.0" | "sense-image-1.0" | "sense-data-1.0" | "sense-sheet-1.0" | "sense-story-1.0" | "qv-data-1.0" | "qv-data-2.0" | "sense-excel-template-1.0" | "sense-pixel-perfect-template-1.0";
 };
 type ReportStatus = {
-    /** Present when status is failed. */
+    /** @deprecated
+     * Present when status is failed. Deprecated. Use /reports/{id}/outputs instead. */
     reasons?: Reason[];
     /** Errors occured during report generation. */
     requestErrors?: ExportErrors;
     /** Count how many times the resolution of this report was attempted. */
     resolutionAttempts?: number;
-    /** Present when the status is "done". */
+    /** @deprecated
+     * Present when the status is "done". Deprecated. Use /reports/{id}/outputs instead. */
     results?: Result[];
     /** Status of the requested report. */
     status: "queued" | "processing" | "done" | "failed" | "aborted" | "visiting" | "aborting";

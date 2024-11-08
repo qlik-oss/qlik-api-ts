@@ -63,7 +63,7 @@ try {
 
 Every GET request is cached so that subsequent calls to the same api will resolve immediately from the cache. Read more about caching [here](features.md#caching).
 
-### Rest Interceptors
+## Rest Interceptors
 
 Interceptors can be added to allow custom functionality to happen before or after an api call. They run globally always on every request. The format is:
 

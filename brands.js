@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/3HCIBFZO.js";
-import "./chunks/AFRSBZ7R.js";
+} from "./chunks/UA6BE3VB.js";
+import "./chunks/CZC7KEJN.js";
 import "./chunks/2ZQ3ZX7F.js";
 
 // src/public/rest/brands.ts
