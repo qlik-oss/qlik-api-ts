@@ -108,8 +108,8 @@ type GroupPatch = {
     op: "replace";
     /** Attribute name of a field of the Groups entity. "Name" and "description" is only available for custom groups. */
     path: "assignedRoles" | "name" | "description";
-    /** The roles to assign to the group (limit of 100 roles per group). */
-    value: AssignedRolesRefIDs | AssignedRolesRefNames;
+    /** The roles to assign to the group (limit of 100 roles per group) or the new custom group name or description. */
+    value: AssignedRolesRefIDs | AssignedRolesRefNames | string;
 };
 /**
  * An array of JSON Patches for a group.

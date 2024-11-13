@@ -1,7 +1,7 @@
 import { H as HostConfig } from './auth-types-PkN9CAF_.js';
 import './invoke-fetch-types-BLrpeZOL.js';
 
-declare const QIX_SCHEMA_VERSION = "12.2241.0";
+declare const QIX_SCHEMA_VERSION = "12.2246.0";
 type AlfaNumString = {
     /**
      * Calculated value.
@@ -10392,6 +10392,22 @@ type NativeGenericObjectFunctions<CustomProperties, CustomLayout, GenericObjectR
      */
     selectPivotCells: (path: string, selections: NxSelectionCell[], softLock?: boolean, deselectOnlyOneSelected?: boolean) => Promise<boolean>;
     /**
+     * You can use the SetActiveField method with any object that contains a cyclic group as a dimension.
+     * This method allows you to jump to a specific field in a cyclic dimension. If NewIndex is out-of-bounds of the dimension's fields then no action is taken.
+     * A hypercube will avoid field collisions with its other dimensions when setting the active field in this manner. If there are any collisions then no action is performed.
+     *
+     * Parameters:
+     *
+     * - `path`       -   Path to the definition of the object to be selected.
+     * For example, _/qHyperCubeDef_ .
+     * - `dimNo`      -   Dimension number or index starting from 0.
+     * The default value is 0.
+     * - `newIndex`   -   Index of the field to jump to.
+     *
+     * Stability: *experimental*
+     */
+    setActiveField: (path: string, dimNo: number, newIndex: number) => Promise<void>;
+    /**
      * Sets the order of the children in a generic object.
      * <div class=note>To change the order of the children in a generic object, the identifiers of all the children must be included in the list of the identifiers (in _qIds_ ). </div>
      *
@@ -10428,6 +10444,23 @@ type NativeGenericObjectFunctions<CustomProperties, CustomLayout, GenericObjectR
      * Stability: *locked*
      */
     setProperties: (prop: CustomProperties) => Promise<void>;
+    /**
+     * You can use the StepCycle method with any object that contains a cyclic group as a dimension.
+     * This method allows you to move between different fields in a cyclic dimension.
+     * A hypercube will avoid field collisions with its other dimensions when cycling in this manner. If all other fields cause collisions then no cycling is performed.
+     *
+     * Parameters:
+     *
+     * - `path`       -   Path to the definition of the object to be selected.
+     * For example, _/qHyperCubeDef_ .
+     * - `dimNo`      -   Dimension number or index starting from 0.
+     * The default value is 0.
+     * - `nbrSteps`   -   Number of steps you want to cycle.
+     * Positive values cycle forwards while negative values cycle backwards. A value of 0 leads to no action being taken.
+     *
+     * Stability: *experimental*
+     */
+    stepCycle: (path: string, dimNo: number, nbrSteps: number) => Promise<void>;
     /**
      * Removes the generic object from the list of approved objects
      * <div class=note>This operation is possible only in Qlik Sense Enterprise.</div>

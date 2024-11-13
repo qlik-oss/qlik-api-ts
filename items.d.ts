@@ -289,8 +289,8 @@ declare const getItems: (query: {
     /** @deprecated
      * Whether or not to return items in a shared space. */
     shared?: boolean;
-    /** The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively. */
-    sort?: "+createdAt" | "-createdAt" | "+name" | "-name" | "+updatedAt" | "-updatedAt";
+    /** The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, recentlyUsed and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively. */
+    sort?: "+createdAt" | "-createdAt" | "+name" | "-name" | "+updatedAt" | "-updatedAt" | "+recentlyUsed" | "-recentlyUsed";
     /** The space's unique identifier (supports \'personal\' as spaceId). */
     spaceId?: string;
     /** The case-sensitive string used to filter items on space type(s). For example '?spaceType=shared,personal'. */
