@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
+import './auth-types-PkN9CAF_.js';
 
 type CollectionByIdPatch = {
     /** The operation to be performed. */
@@ -19,6 +19,7 @@ type CollectionsAddCollectionItemRequestBody = {
 };
 type CollectionsCreateCollectionRequestBody = {
     description?: string;
+    /** For `public` collections (tags), if name already exists in the tenant as a `public` collection, this call will fail with a `409` response. */
     name: string;
     type: CollectionTypes;
 };
@@ -233,7 +234,7 @@ type Meta = {
     timeout?: boolean;
 };
 /**
- * Finds and returns the collections that the user can access. This endpoint does not return the user's favorites collection.
+ * Retrieves the collections that the user has access to. This endpoint does not return the user's favorites collection, which can be retrieved with `/v1/collections/favorites`.
  *
  * @param query an object with query parameters
  * @throws GetCollectionsHttpError
@@ -261,7 +262,7 @@ declare const getCollections: (query: {
      * must be prefixed by + or - to indicate ascending or descending sort order
      * respectively. */
     sort?: "+createdAt" | "-createdAt" | "+name" | "-name" | "+updatedAt" | "-updatedAt";
-    /** The case-sensitive string used to filter for a collection by type. */
+    /** The case-sensitive string used to filter for a collection by type. Retrieve private collections with `private`, public collections with `publicgoverned`, and tags with `public`. */
     type?: CollectionTypes;
     /** A commaseparated case-sensitive string used to filter by multiple types. */
     types?: CollectionTypes[];
@@ -279,7 +280,7 @@ type GetCollectionsHttpError = {
     status: number;
 };
 /**
- * Creates and returns a new collection. Collections can have the same name.
+ * Creates and returns a new collection. Collections of type `public` (shown as tags in the user interface) must have unique names. Other collection types can reuse names.
  *
  * @param body an object with the body content
  * @throws CreateCollectionHttpError
@@ -296,7 +297,7 @@ type CreateCollectionHttpError = {
     status: number;
 };
 /**
- * Finds and returns the user's favorites collection.
+ * Lists the user's favorites collection.
  *
  * @throws GetFavoritesCollectionHttpError
  */
@@ -346,7 +347,7 @@ type GetCollectionHttpError = {
     status: number;
 };
 /**
- * Updates the collection fields provided in the patch body.
+ * Updates the name, description, or type fields provided in the patch body. Can be used to publish a `private` collection as a `publicgoverned` collection by patching `/type` with `publicgoverned` once the collection contains at least 1 item. Can also be used to return a `publicgoverned` collection to `private`. Cannot be used to change between `public` (tag) and `private / publicgoverned` (collection).
  *
  * @param collectionId The collection's unique identifier.
  * @param body an object with the body content
@@ -364,7 +365,7 @@ type PatchCollectionHttpError = {
     status: number;
 };
 /**
- * Updates a collection and returns the new collection. Omitted and unsupported fields are ignored. To unset a field, provide the field's zero value.
+ * Updates a collection's name and description and returns the updated collection. Omitted and unsupported fields are ignored. To unset a field, provide the field's zero value.
  *
  * @param collectionId The collection's unique identifier.
  * @param body an object with the body content
@@ -382,7 +383,7 @@ type UpdateCollectionHttpError = {
     status: number;
 };
 /**
- * Finds and returns items from a collection that the user has access to.
+ * Retrieves items from a collection that the user has access to.
  *
  * @param collectionId The collection's unique identifier. (This query also supports 'favorites' as the collectionID).
 
@@ -463,7 +464,7 @@ type DeleteCollectionItemHttpError = {
     status: number;
 };
 /**
- * Finds and returns an item. See GET /items/{id}
+ * Finds and returns an item in a specific collection. See GET `/items/{id}`.
  *
  * @param collectionId The collection's unique identifier.
  * @param itemId The item's unique identifier.
@@ -486,21 +487,21 @@ type GetCollectionItemHttpError = {
 declare function clearCache(): void;
 interface CollectionsAPI {
     /**
-     * Finds and returns the collections that the user can access. This endpoint does not return the user's favorites collection.
+     * Retrieves the collections that the user has access to. This endpoint does not return the user's favorites collection, which can be retrieved with `/v1/collections/favorites`.
      *
      * @param query an object with query parameters
      * @throws GetCollectionsHttpError
      */
     getCollections: typeof getCollections;
     /**
-     * Creates and returns a new collection. Collections can have the same name.
+     * Creates and returns a new collection. Collections of type `public` (shown as tags in the user interface) must have unique names. Other collection types can reuse names.
      *
      * @param body an object with the body content
      * @throws CreateCollectionHttpError
      */
     createCollection: typeof createCollection;
     /**
-     * Finds and returns the user's favorites collection.
+     * Lists the user's favorites collection.
      *
      * @throws GetFavoritesCollectionHttpError
      */
@@ -520,7 +521,7 @@ interface CollectionsAPI {
      */
     getCollection: typeof getCollection;
     /**
-     * Updates the collection fields provided in the patch body.
+     * Updates the name, description, or type fields provided in the patch body. Can be used to publish a `private` collection as a `publicgoverned` collection by patching `/type` with `publicgoverned` once the collection contains at least 1 item. Can also be used to return a `publicgoverned` collection to `private`. Cannot be used to change between `public` (tag) and `private / publicgoverned` (collection).
      *
      * @param collectionId The collection's unique identifier.
      * @param body an object with the body content
@@ -528,7 +529,7 @@ interface CollectionsAPI {
      */
     patchCollection: typeof patchCollection;
     /**
-     * Updates a collection and returns the new collection. Omitted and unsupported fields are ignored. To unset a field, provide the field's zero value.
+     * Updates a collection's name and description and returns the updated collection. Omitted and unsupported fields are ignored. To unset a field, provide the field's zero value.
      *
      * @param collectionId The collection's unique identifier.
      * @param body an object with the body content
@@ -536,7 +537,7 @@ interface CollectionsAPI {
      */
     updateCollection: typeof updateCollection;
     /**
-     * Finds and returns items from a collection that the user has access to.
+     * Retrieves items from a collection that the user has access to.
      *
      * @param collectionId The collection's unique identifier. (This query also supports 'favorites' as the collectionID).
   
@@ -561,7 +562,7 @@ interface CollectionsAPI {
      */
     deleteCollectionItem: typeof deleteCollectionItem;
     /**
-     * Finds and returns an item. See GET /items/{id}
+     * Finds and returns an item in a specific collection. See GET `/items/{id}`.
      *
      * @param collectionId The collection's unique identifier.
      * @param itemId The item's unique identifier.

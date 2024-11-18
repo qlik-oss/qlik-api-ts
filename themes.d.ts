@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
+import './auth-types-PkN9CAF_.js';
 
 /**
  * An error object.
@@ -71,7 +71,7 @@ type Themes = {
     data: Theme[];
 };
 /**
- * Lists all themes.
+ * Lists all imported themes in the tenant.
  *
  * @throws GetThemesHttpError
  */
@@ -87,7 +87,7 @@ type GetThemesHttpError = {
     status: number;
 };
 /**
- * Creates a new theme. If a file is provided, the data field is not required.
+ * Creates a new theme. Accepts either provided file or data object. The name of the new theme must be different to any existing themes.
  *
  * @param body an object with the body content
  * @throws UploadThemeHttpError
@@ -109,7 +109,7 @@ type UploadThemeHttpError = {
     status: number;
 };
 /**
- * Deletes a specific theme.
+ * Deletes a specific theme matching either theme ID or theme name.
  *
  * @param id Theme identifier or its qextFilename.
  * @throws DeleteThemeHttpError
@@ -126,7 +126,7 @@ type DeleteThemeHttpError = {
     status: number;
 };
 /**
- * Returns a specific theme.
+ * Returns a specific theme matching either theme ID or theme name.
  *
  * @param id Theme identifier or its qextFilename
  * @throws GetThemeHttpError
@@ -143,7 +143,7 @@ type GetThemeHttpError = {
     status: number;
 };
 /**
- * Updates a specific theme with provided data. If a file is provided, the data field is not required.
+ * Updates a specific theme matching either theme ID or theme name. Accepts either provided file or data object.
  *
  * @param id Theme identifier or its qextFilename.
  * @param body an object with the body content
@@ -166,7 +166,7 @@ type PatchThemeHttpError = {
     status: number;
 };
 /**
- * Downloads the theme as an archive.
+ * Downloads all files in the theme matching either theme ID or theme name as a `.zip` archive.
  *
  * @param id Theme identifier or its qextFilename
  * @throws DownloadThemeHttpError
@@ -183,10 +183,10 @@ type DownloadThemeHttpError = {
     status: number;
 };
 /**
- * Downloads a file from the theme archive.
+ * Downloads a file from the theme matching either theme ID or theme name, identified by the file path within the imported extension.
  *
  * @param id Theme identifier or its qextFilename.
- * @param filepath Path to the file archive for the specified theme archive. Folders separated with forward slashes.
+ * @param filepath Path to the file location within the specified theme archive. Folders separated with forward slashes.
  * @throws DownloadFileFromThemeHttpError
  */
 declare const downloadFileFromTheme: (id: string, filepath: string, options?: ApiCallOptions) => Promise<DownloadFileFromThemeHttpResponse>;
@@ -206,34 +206,34 @@ type DownloadFileFromThemeHttpError = {
 declare function clearCache(): void;
 interface ThemesAPI {
     /**
-     * Lists all themes.
+     * Lists all imported themes in the tenant.
      *
      * @throws GetThemesHttpError
      */
     getThemes: typeof getThemes;
     /**
-     * Creates a new theme. If a file is provided, the data field is not required.
+     * Creates a new theme. Accepts either provided file or data object. The name of the new theme must be different to any existing themes.
      *
      * @param body an object with the body content
      * @throws UploadThemeHttpError
      */
     uploadTheme: typeof uploadTheme;
     /**
-     * Deletes a specific theme.
+     * Deletes a specific theme matching either theme ID or theme name.
      *
      * @param id Theme identifier or its qextFilename.
      * @throws DeleteThemeHttpError
      */
     deleteTheme: typeof deleteTheme;
     /**
-     * Returns a specific theme.
+     * Returns a specific theme matching either theme ID or theme name.
      *
      * @param id Theme identifier or its qextFilename
      * @throws GetThemeHttpError
      */
     getTheme: typeof getTheme;
     /**
-     * Updates a specific theme with provided data. If a file is provided, the data field is not required.
+     * Updates a specific theme matching either theme ID or theme name. Accepts either provided file or data object.
      *
      * @param id Theme identifier or its qextFilename.
      * @param body an object with the body content
@@ -241,17 +241,17 @@ interface ThemesAPI {
      */
     patchTheme: typeof patchTheme;
     /**
-     * Downloads the theme as an archive.
+     * Downloads all files in the theme matching either theme ID or theme name as a `.zip` archive.
      *
      * @param id Theme identifier or its qextFilename
      * @throws DownloadThemeHttpError
      */
     downloadTheme: typeof downloadTheme;
     /**
-     * Downloads a file from the theme archive.
+     * Downloads a file from the theme matching either theme ID or theme name, identified by the file path within the imported extension.
      *
      * @param id Theme identifier or its qextFilename.
-     * @param filepath Path to the file archive for the specified theme archive. Folders separated with forward slashes.
+     * @param filepath Path to the file location within the specified theme archive. Folders separated with forward slashes.
      * @throws DownloadFileFromThemeHttpError
      */
     downloadFileFromTheme: typeof downloadFileFromTheme;

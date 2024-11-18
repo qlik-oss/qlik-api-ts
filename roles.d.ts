@@ -1,6 +1,14 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
+import './auth-types-PkN9CAF_.js';
 
+type CreateRole = {
+    /** Selection of scopes to assign to role */
+    assignedScopes?: string[];
+    /** Role description */
+    description?: string;
+    /** Role name, needs to be unique */
+    name: string;
+};
 /**
  * An error object describing the error.
  */
@@ -55,6 +63,18 @@ type ListRolesResult = {
     /** Indicates the total number of matching documents. Will only be returned if the query parameter "totalResults" is true. */
     totalResults?: number;
 };
+/**
+ * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
+ */
+type PatchRole = {
+    op: "replace";
+    path: "/name" | "/description" | "/assignedScopes";
+    value: string | string[];
+};
+/**
+ * An array of JSON Patch documents
+ */
+type PatchRoles = PatchRole[];
 type Role = {
     /** Selection of scopes added to this Role */
     assignedScopes?: string[];
@@ -130,9 +150,43 @@ type GetRolesHttpError = {
     status: number;
 };
 /**
+ * Creates a custom role. Role names must be unique, and there is a maximum of 500 custom roles per tenant. Requestor must be assigned the `TenantAdmin` role.
+ *
+ * @param body an object with the body content
+ * @throws CreateRoleHttpError
+ */
+declare const createRole: (body: CreateRole, options?: ApiCallOptions) => Promise<CreateRoleHttpResponse>;
+type CreateRoleHttpResponse = {
+    data: Role;
+    headers: Headers;
+    status: number;
+};
+type CreateRoleHttpError = {
+    data: Errors;
+    headers: Headers;
+    status: number;
+};
+/**
+ * Deletes the requested role. Role can only be deleted if it has been unassigned from all users and groups. Only applicable to roles of type `custom`. Requestor must be assigned the `TenantAdmin` role.
+ *
+ * @param id The unique identifier for the role.
+ * @throws DeleteRoleHttpError
+ */
+declare const deleteRole: (id: string, options?: ApiCallOptions) => Promise<DeleteRoleHttpResponse>;
+type DeleteRoleHttpResponse = {
+    data: void;
+    headers: Headers;
+    status: number;
+};
+type DeleteRoleHttpError = {
+    data: Errors;
+    headers: Headers;
+    status: number;
+};
+/**
  * Returns the requested role.
  *
- * @param id The role's unique identifier
+ * @param id The unique identifier for the role.
  * @throws GetRoleHttpError
  */
 declare const getRole: (id: string, options?: ApiCallOptions) => Promise<GetRoleHttpResponse>;
@@ -142,6 +196,24 @@ type GetRoleHttpResponse = {
     status: number;
 };
 type GetRoleHttpError = {
+    data: Errors;
+    headers: Headers;
+    status: number;
+};
+/**
+ * Updates the requested role. Only applicable to roles of type `custom`. Requestor must be assigned the `TenantAdmin` role.
+ *
+ * @param id The unique identifier for the role.
+ * @param body an object with the body content
+ * @throws PatchRoleHttpError
+ */
+declare const patchRole: (id: string, body: PatchRoles[], options?: ApiCallOptions) => Promise<PatchRoleHttpResponse>;
+type PatchRoleHttpResponse = {
+    data: void;
+    headers: Headers;
+    status: number;
+};
+type PatchRoleHttpError = {
     data: Errors;
     headers: Headers;
     status: number;
@@ -159,12 +231,34 @@ interface RolesAPI {
      */
     getRoles: typeof getRoles;
     /**
+     * Creates a custom role. Role names must be unique, and there is a maximum of 500 custom roles per tenant. Requestor must be assigned the `TenantAdmin` role.
+     *
+     * @param body an object with the body content
+     * @throws CreateRoleHttpError
+     */
+    createRole: typeof createRole;
+    /**
+     * Deletes the requested role. Role can only be deleted if it has been unassigned from all users and groups. Only applicable to roles of type `custom`. Requestor must be assigned the `TenantAdmin` role.
+     *
+     * @param id The unique identifier for the role.
+     * @throws DeleteRoleHttpError
+     */
+    deleteRole: typeof deleteRole;
+    /**
      * Returns the requested role.
      *
-     * @param id The role's unique identifier
+     * @param id The unique identifier for the role.
      * @throws GetRoleHttpError
      */
     getRole: typeof getRole;
+    /**
+     * Updates the requested role. Only applicable to roles of type `custom`. Requestor must be assigned the `TenantAdmin` role.
+     *
+     * @param id The unique identifier for the role.
+     * @param body an object with the body content
+     * @throws PatchRoleHttpError
+     */
+    patchRole: typeof patchRole;
     /**
      * Clears the cache for roles api requests.
      */
@@ -175,4 +269,4 @@ interface RolesAPI {
  */
 declare const rolesExport: RolesAPI;
 
-export { type Error, type Errors, type GetRoleHttpError, type GetRoleHttpResponse, type GetRolesHttpError, type GetRolesHttpResponse, type Links, type ListRolesResult, type Role, type RolesAPI, clearCache, rolesExport as default, getRole, getRoles };
+export { type CreateRole, type CreateRoleHttpError, type CreateRoleHttpResponse, type DeleteRoleHttpError, type DeleteRoleHttpResponse, type Error, type Errors, type GetRoleHttpError, type GetRoleHttpResponse, type GetRolesHttpError, type GetRolesHttpResponse, type Links, type ListRolesResult, type PatchRole, type PatchRoleHttpError, type PatchRoleHttpResponse, type PatchRoles, type Role, type RolesAPI, clearCache, createRole, rolesExport as default, deleteRole, getRole, getRoles, patchRole };

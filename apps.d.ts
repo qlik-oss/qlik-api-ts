@@ -1,5 +1,5 @@
-import { A as ApiCallOptions, D as DownloadableBlob } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions, D as DownloadableBlob } from './invoke-fetch-types-BLrpeZOL.js';
+import './auth-types-PkN9CAF_.js';
 
 type Analysis = "breakdown" | "changePoint" | "comparison" | "contribution" | "correlation" | "fact" | "mutualInfo" | "rank" | "spike" | "trend" | "values";
 type AnalysisComposition = {
@@ -463,7 +463,15 @@ type FilterError = {
      * - "REP-500000" Fail to resolve resource.
      * - "REP-503005" Engine unavailable, qix-sessions error no engines available.
      * - "REP-503013" Session unavailable. The engine session used to create the report is unavailable.
-     * - "REP-504042" Context deadline exceeded applying selections of the Filter. */
+     * - "REP-504042" Context deadline exceeded applying selections of the Filter.
+     * - "REP-500031" Error creating bookmark.
+     * - "REP-404032" Bookmark not found after creating the bookmark.
+     * - "REP-500033" Error destroying bookmark.
+     * - "REP-404033" Bookmark not found destroying the bookmark.
+     * - "REP-409043" Dupliacate bookmark name.
+     * - "REP-429034" Filters quota exceeded.
+     * - "REP-400044" Missing or renamed field.
+     * - "REP-403049" Report filter access not allowed. */
     code: string;
     /** A summary in english explaining what went wrong. */
     title: string;
@@ -696,7 +704,7 @@ type NxAttributes = {
     /** The Origin App ID for published apps. */
     originAppId?: string;
     /** @deprecated
-     * Deprecated. Use user api to fetch user metadata. */
+     * Deprecated. Use the Users API to fetch user metadata. */
     owner?: string;
     /** Identifier of the app owner. */
     ownerId?: string;
@@ -985,7 +993,7 @@ type UpdateOwner = {
 type UpdateSpace = {
     spaceId?: string;
 };
-type UsageEnum = "ANALYTICS" | "DATA_PREPARATION" | "DATAFLOW_PREP";
+type UsageEnum = "ANALYTICS" | "DATA_PREPARATION" | "DATAFLOW_PREP" | "SINGLE_TABLE_PREP";
 type UserPrivileges = "can_create_app" | "can_import_app" | "can_create_session_app";
 type Classification = {
     absoluteDiff?: number;

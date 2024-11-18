@@ -1,6 +1,6 @@
 import {
   getQixRuntimeModule
-} from "./5T2SBCJG.js";
+} from "./CZC7KEJN.js";
 
 // src/public/qix.ts
 function openAppSession(appSessionProps) {
@@ -47,12 +47,21 @@ function openAppSession(appSessionProps) {
   };
   return appSessionProxy;
 }
+function withHostConfig(hostConfig) {
+  return {
+    openAppSession: (openAppSessionProps) => openAppSession(
+      typeof openAppSessionProps === "string" ? { hostConfig, appId: openAppSessionProps } : { hostConfig, ...openAppSessionProps }
+    )
+  };
+}
 var qix = {
-  openAppSession
+  openAppSession,
+  withHostConfig
 };
 var qix_default = qix;
 
 export {
   openAppSession,
+  withHostConfig,
   qix_default
 };

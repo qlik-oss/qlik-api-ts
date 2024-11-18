@@ -1,17 +1,20 @@
 import {
   qix_default
-} from "./chunks/NWOESCMR.js";
+} from "./chunks/OIQ5ELGS.js";
 import {
   auth_default
-} from "./chunks/IOUD76RB.js";
+} from "./chunks/BL5PJM4B.js";
+import {
+  interceptors_default
+} from "./chunks/7BDAXGID.js";
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/5V4BMSM2.js";
-import "./chunks/5T2SBCJG.js";
+} from "./chunks/UA6BE3VB.js";
+import "./chunks/CZC7KEJN.js";
 import "./chunks/2ZQ3ZX7F.js";
 
-// src/public/public-runtime-api-generator/public-runtime-api-generator.ts
+// src/runtime-api-generator/runtime-api-generator-common.ts
 var methodAbbreviations = {
   G: "GET",
   P: "POST",
@@ -45,18 +48,18 @@ function contentTypeCharToContentType(typeChar) {
   }
 }
 var ignoredProps = /* @__PURE__ */ new Set(["$$typeof", "then", "__esmodule"]);
-function createLazyApi(api2, initFunc) {
-  const lazyApi = {
+function createLazyApiProxy(api2, initFunc) {
+  const handler = {
     initiated: false,
     init: () => {
-      if (!lazyApi.initiated) {
+      if (!handler.initiated) {
         initFunc();
-        lazyApi.initiated = true;
+        handler.initiated = true;
       }
     },
     ownKeys(target) {
-      if (!lazyApi.initiated) {
-        lazyApi.init();
+      if (!handler.initiated) {
+        handler.init();
       }
       return Object.keys(target);
     },
@@ -64,36 +67,28 @@ function createLazyApi(api2, initFunc) {
       if (ignoredProps.has(key)) {
         return false;
       }
-      if (!lazyApi.initiated) {
-        lazyApi.init();
+      if (!handler.initiated) {
+        handler.init();
       }
       return !!target[key];
     },
     get(target, key) {
-      if (!ignoredProps.has(key) && !lazyApi.initiated) {
-        lazyApi.init();
+      if (!ignoredProps.has(key) && !handler.initiated) {
+        handler.init();
       }
       return target[key];
     }
   };
-  return new Proxy(api2, lazyApi);
+  return new Proxy(api2, handler);
 }
-var runtimeApiCache = {};
-function apiDefToApi(namespace, def) {
-  if (namespace in runtimeApiCache) {
-    return runtimeApiCache[namespace];
-  }
+function parseMiniApi(namespace, def) {
   const api2 = {
-    clearCache: () => clearApiCache(namespace)
+    operations: {}
   };
-  const initFunc = () => {
-    traverse(namespace, "", def, api2);
-  };
-  const lazyApi = createLazyApi(api2, initFunc);
-  runtimeApiCache[namespace] = lazyApi;
-  return lazyApi;
+  traverse(namespace, "", def, api2.operations);
+  return api2;
 }
-function traverse(namespace, parentPath, node, resultingApi) {
+function traverse(namespace, parentPath, node, operations) {
   Object.entries(node).forEach(([key, value]) => {
     const pathTemplate = key ? `${parentPath}/${key}` : parentPath;
     if (Array.isArray(value)) {
@@ -111,7 +106,7 @@ function traverse(namespace, parentPath, node, resultingApi) {
             contentType = contentTypeCharToContentType(options[bodyIndex + 1]);
           }
         }
-        const apiFunction = createClassicApiFn(
+        operations[operationName] = {
           namespace,
           operationName,
           pathTemplate,
@@ -120,19 +115,26 @@ function traverse(namespace, parentPath, node, resultingApi) {
           hasQuery,
           hasBody,
           contentType,
-          useInstead
-        );
-        resultingApi[operationName] = apiFunction;
-        oldOperationNames.forEach((oldOperationName) => {
-          resultingApi[oldOperationName] = resultingApi[operationName];
-        });
+          useInstead,
+          oldOperationNames
+        };
       });
     } else {
-      traverse(namespace, pathTemplate, value, resultingApi);
+      traverse(namespace, pathTemplate, value, operations);
     }
   });
 }
-function createClassicApiFn(namespace, operationName, pathTemplate, method, argNames, hasQuery, hasBody, contentType, useInstead) {
+function createClassicApiFn({
+  namespace,
+  operationName,
+  pathTemplate,
+  method,
+  argNames,
+  hasQuery,
+  hasBody,
+  contentType,
+  useInstead
+}, hostConfig, interceptors2, enableConsoleWarnings, invokeFetchFnGetter) {
   return (...args) => {
     const pathVariables = {};
     argNames.forEach((argName, index) => {
@@ -150,23 +152,59 @@ function createClassicApiFn(namespace, operationName, pathTemplate, method, argN
       argPos++;
     }
     const options = args.length > argPos ? args[argPos] : void 0;
-    if (useInstead) {
-      console.warn(`${namespace}.${operationName} is deprecated, use ${useInstead} instead`);
+    if (enableConsoleWarnings && useInstead) {
+      let fullUseInstead;
+      if (useInstead.includes(".")) {
+        fullUseInstead = useInstead;
+      } else {
+        fullUseInstead = `${useInstead}.${operationName}`;
+      }
+      console.warn(`${namespace}.${operationName} is deprecated, use ${fullUseInstead} instead`);
     }
-    return invokeFetch(namespace, {
-      method,
-      pathTemplate,
-      pathVariables,
-      query,
-      body,
-      ...contentType ? { contentType } : {},
-      options
-    });
+    const optionsIncludingDefaultHostConfig = hostConfig ? {
+      hostConfig,
+      ...options
+    } : options;
+    return invokeFetchFnGetter()(
+      namespace,
+      {
+        method,
+        pathTemplate,
+        pathVariables,
+        query,
+        body,
+        ...contentType ? { contentType } : {},
+        options: optionsIncludingDefaultHostConfig
+      },
+      interceptors2?.getInterceptors()
+    );
+  };
+}
+
+// src/runtime-api-generator/runtime-api-generator-public.ts
+var parsedMiniApis = {};
+function apiDefToApiPublic(namespace, def) {
+  parsedMiniApis[namespace] = parsedMiniApis[namespace] || parseMiniApi(namespace, def);
+  const parsedMiniApi = parsedMiniApis[namespace];
+  return (hostConfig, interceptors2) => {
+    const lazyApi = {
+      clearCache: () => clearApiCache(namespace)
+    };
+    const initFunc = () => {
+      Object.entries(parsedMiniApi.operations).forEach(([operationName, operation]) => {
+        lazyApi[operationName] = createClassicApiFn(operation, hostConfig, interceptors2, true, () => invokeFetch);
+        operation.oldOperationNames.forEach((oldOperationName) => {
+          lazyApi[oldOperationName] = lazyApi[operationName];
+        });
+      });
+    };
+    const proxy = createLazyApiProxy(lazyApi, initFunc);
+    return proxy;
   };
 }
 
 // src/public/index.ts
-var apiKeys = apiDefToApi("api-keys", {
+var apiKeysMiniModule = apiDefToApiPublic("api-keys", {
   api: {
     v1: {
       "api-keys": {
@@ -177,7 +215,7 @@ var apiKeys = apiDefToApi("api-keys", {
     }
   }
 });
-var apps = apiDefToApi("apps", {
+var appsMiniModule = apiDefToApiPublic("apps", {
   api: {
     v1: {
       apps: {
@@ -235,7 +273,7 @@ var apps = apiDefToApi("apps", {
     }
   }
 });
-var audits = apiDefToApi("audits", {
+var auditsMiniModule = apiDefToApiPublic("audits", {
   api: {
     v1: {
       audits: {
@@ -249,13 +287,11 @@ var audits = apiDefToApi("audits", {
     }
   }
 });
-var auth = auth_default;
-var automations = apiDefToApi("automations", {
+var automationsMiniModule = apiDefToApiPublic("automations", {
   api: {
     v1: {
       automations: {
         "": ["getAutomations:GQ:", "createAutomation:PBJ:"],
-        settings: ["getAutomationsSettings:G:", "updateAutomationsSettings:UBJ:"],
         usage: ["getAutomationsUsageMetrics:GQ:"],
         "{id}": {
           "": ["deleteAutomation:D:", "getAutomationWithQuery:GQ:", "getAutomation:G:", "updateAutomation:UBJ:"],
@@ -281,7 +317,7 @@ var automations = apiDefToApi("automations", {
     }
   }
 });
-var brands = apiDefToApi("brands", {
+var brandsMiniModule = apiDefToApiPublic("brands", {
   api: {
     v1: {
       brands: {
@@ -303,7 +339,7 @@ var brands = apiDefToApi("brands", {
     }
   }
 });
-var collections = apiDefToApi("collections", {
+var collectionsMiniModule = apiDefToApiPublic("collections", {
   api: {
     v1: {
       collections: {
@@ -320,7 +356,7 @@ var collections = apiDefToApi("collections", {
     }
   }
 });
-var cspOrigins = apiDefToApi("csp-origins", {
+var cspOriginsMiniModule = apiDefToApiPublic("csp-origins", {
   api: {
     v1: {
       "csp-origins": {
@@ -331,7 +367,7 @@ var cspOrigins = apiDefToApi("csp-origins", {
     }
   }
 });
-var dataAssets = apiDefToApi("data-assets", {
+var dataAssetsMiniModule = apiDefToApiPublic("data-assets", {
   api: {
     v1: {
       "data-assets": {
@@ -341,7 +377,7 @@ var dataAssets = apiDefToApi("data-assets", {
     }
   }
 });
-var dataConnections = apiDefToApi("data-connections", {
+var dataConnectionsMiniModule = apiDefToApiPublic("data-connections", {
   api: {
     v1: {
       "data-connections": {
@@ -361,10 +397,11 @@ var dataConnections = apiDefToApi("data-connections", {
     }
   }
 });
-var dataCredentials = apiDefToApi("data-credentials", {
+var dataCredentialsMiniModule = apiDefToApiPublic("data-credentials", {
   api: {
     v1: {
       "data-credentials": {
+        actions: { "filter-orphan": ["filterOrphanedDataCredentials:PBJ:"] },
         "{qID}": [
           "deleteDataCredential:DQ:",
           "getDataCredential:GQ:",
@@ -375,7 +412,7 @@ var dataCredentials = apiDefToApi("data-credentials", {
     }
   }
 });
-var dataFiles = apiDefToApi("data-files", {
+var dataFilesMiniModule = apiDefToApiPublic("data-files", {
   api: {
     v1: {
       "data-files": {
@@ -391,7 +428,7 @@ var dataFiles = apiDefToApi("data-files", {
     }
   }
 });
-var extensions = apiDefToApi("extensions", {
+var extensionsMiniModule = apiDefToApiPublic("extensions", {
   api: {
     v1: {
       extensions: {
@@ -404,7 +441,7 @@ var extensions = apiDefToApi("extensions", {
     }
   }
 });
-var glossaries = apiDefToApi("glossaries", {
+var glossariesMiniModule = apiDefToApiPublic("glossaries", {
   api: {
     v1: {
       glossaries: {
@@ -436,7 +473,7 @@ var glossaries = apiDefToApi("glossaries", {
     }
   }
 });
-var groups = apiDefToApi("groups", {
+var groupsMiniModule = apiDefToApiPublic("groups", {
   api: {
     v1: {
       groups: {
@@ -448,7 +485,7 @@ var groups = apiDefToApi("groups", {
     }
   }
 });
-var identityProviders = apiDefToApi("identity-providers", {
+var identityProvidersMiniModule = apiDefToApiPublic("identity-providers", {
   api: {
     v1: {
       "identity-providers": {
@@ -461,7 +498,7 @@ var identityProviders = apiDefToApi("identity-providers", {
     }
   }
 });
-var items = apiDefToApi("items", {
+var itemsMiniModule = apiDefToApiPublic("items", {
   api: {
     v1: {
       items: {
@@ -476,7 +513,7 @@ var items = apiDefToApi("items", {
     }
   }
 });
-var licenses = apiDefToApi("licenses", {
+var licensesMiniModule = apiDefToApiPublic("licenses", {
   api: {
     v1: {
       licenses: {
@@ -496,11 +533,10 @@ var licenses = apiDefToApi("licenses", {
     }
   }
 });
-var qix = qix_default;
-var quotas = apiDefToApi("quotas", {
+var quotasMiniModule = apiDefToApiPublic("quotas", {
   api: { v1: { quotas: { "": ["getQuotas:GQ:"], "{id}": ["getQuota:GQ:"] } } }
 });
-var reloadTasks = apiDefToApi("reload-tasks", {
+var reloadTasksMiniModule = apiDefToApiPublic("reload-tasks", {
   api: {
     v1: {
       "reload-tasks": {
@@ -510,7 +546,7 @@ var reloadTasks = apiDefToApi("reload-tasks", {
     }
   }
 });
-var reloads = apiDefToApi("reloads", {
+var reloadsMiniModule = apiDefToApiPublic("reloads", {
   api: {
     v1: {
       reloads: {
@@ -520,13 +556,17 @@ var reloads = apiDefToApi("reloads", {
     }
   }
 });
-var reports = apiDefToApi("reports", {
+var reportsMiniModule = apiDefToApiPublic("reports", {
   api: { v1: { reports: { "": ["createReport:PBJ:"], "{id}": { status: ["getReportStatus:G:"] } } } }
 });
-var roles = apiDefToApi("roles", {
-  api: { v1: { roles: { "": ["getRoles:GQ:"], "{id}": ["getRole:G:"] } } }
+var rolesMiniModule = apiDefToApiPublic("roles", {
+  api: {
+    v1: {
+      roles: { "": ["getRoles:GQ:", "createRole:PBJ:"], "{id}": ["deleteRole:D:", "getRole:G:", "patchRole:ABJ:"] }
+    }
+  }
 });
-var spaces = apiDefToApi("spaces", {
+var spacesMiniModule = apiDefToApiPublic("spaces", {
   api: {
     v1: {
       spaces: {
@@ -543,7 +583,7 @@ var spaces = apiDefToApi("spaces", {
     }
   }
 });
-var tempContents = apiDefToApi("temp-contents", {
+var tempContentsMiniModule = apiDefToApiPublic("temp-contents", {
   api: {
     v1: {
       "temp-contents": {
@@ -553,7 +593,7 @@ var tempContents = apiDefToApi("temp-contents", {
     }
   }
 });
-var tenants = apiDefToApi("tenants", {
+var tenantsMiniModule = apiDefToApiPublic("tenants", {
   api: {
     v1: {
       tenants: {
@@ -567,7 +607,7 @@ var tenants = apiDefToApi("tenants", {
     }
   }
 });
-var themes = apiDefToApi("themes", {
+var themesMiniModule = apiDefToApiPublic("themes", {
   api: {
     v1: {
       themes: {
@@ -580,7 +620,7 @@ var themes = apiDefToApi("themes", {
     }
   }
 });
-var transports = apiDefToApi("transports", {
+var transportsMiniModule = apiDefToApiPublic("transports", {
   api: {
     v1: {
       transports: {
@@ -596,20 +636,19 @@ var transports = apiDefToApi("transports", {
     }
   }
 });
-var users = apiDefToApi("users", {
+var usersMiniModule = apiDefToApiPublic("users", {
   api: {
     v1: {
       users: {
         "": ["getUsers:GQ:", "createUser:PBJ:"],
         actions: { count: ["countUsers:GQ:"], filter: ["filterUsers:PQBJ:"], invite: ["inviteUsers:PBJ:"] },
         me: ["getMyUser:G:"],
-        metadata: ["getUsersMetadata:G:"],
         "{userId}": ["deleteUser:D:", "getUser:GQ:", "patchUser:ABJ:"]
       }
     }
   }
 });
-var webIntegrations = apiDefToApi("web-integrations", {
+var webIntegrationsMiniModule = apiDefToApiPublic("web-integrations", {
   api: {
     v1: {
       "web-integrations": {
@@ -619,7 +658,7 @@ var webIntegrations = apiDefToApi("web-integrations", {
     }
   }
 });
-var webNotifications = apiDefToApi("web-notifications", {
+var webNotificationsMiniModule = apiDefToApiPublic("web-notifications", {
   api: {
     v1: {
       "web-notifications": {
@@ -630,7 +669,7 @@ var webNotifications = apiDefToApi("web-notifications", {
     }
   }
 });
-var webhooks = apiDefToApi("webhooks", {
+var webhooksMiniModule = apiDefToApiPublic("webhooks", {
   api: {
     v1: {
       webhooks: {
@@ -647,6 +686,79 @@ var webhooks = apiDefToApi("webhooks", {
     }
   }
 });
+var apiKeys = apiKeysMiniModule(void 0, interceptors_default);
+var apps = appsMiniModule(void 0, interceptors_default);
+var audits = auditsMiniModule(void 0, interceptors_default);
+var auth = auth_default;
+var automations = automationsMiniModule(void 0, interceptors_default);
+var brands = brandsMiniModule(void 0, interceptors_default);
+var collections = collectionsMiniModule(void 0, interceptors_default);
+var cspOrigins = cspOriginsMiniModule(void 0, interceptors_default);
+var dataAssets = dataAssetsMiniModule(void 0, interceptors_default);
+var dataConnections = dataConnectionsMiniModule(void 0, interceptors_default);
+var dataCredentials = dataCredentialsMiniModule(void 0, interceptors_default);
+var dataFiles = dataFilesMiniModule(void 0, interceptors_default);
+var extensions = extensionsMiniModule(void 0, interceptors_default);
+var glossaries = glossariesMiniModule(void 0, interceptors_default);
+var groups = groupsMiniModule(void 0, interceptors_default);
+var identityProviders = identityProvidersMiniModule(void 0, interceptors_default);
+var interceptors = interceptors_default;
+var items = itemsMiniModule(void 0, interceptors_default);
+var licenses = licensesMiniModule(void 0, interceptors_default);
+var qix = qix_default;
+var quotas = quotasMiniModule(void 0, interceptors_default);
+var reloadTasks = reloadTasksMiniModule(void 0, interceptors_default);
+var reloads = reloadsMiniModule(void 0, interceptors_default);
+var reports = reportsMiniModule(void 0, interceptors_default);
+var roles = rolesMiniModule(void 0, interceptors_default);
+var spaces = spacesMiniModule(void 0, interceptors_default);
+var tempContents = tempContentsMiniModule(void 0, interceptors_default);
+var tenants = tenantsMiniModule(void 0, interceptors_default);
+var themes = themesMiniModule(void 0, interceptors_default);
+var transports = transportsMiniModule(void 0, interceptors_default);
+var users = usersMiniModule(void 0, interceptors_default);
+var webIntegrations = webIntegrationsMiniModule(void 0, interceptors_default);
+var webNotifications = webNotificationsMiniModule(void 0, interceptors_default);
+var webhooks = webhooksMiniModule(void 0, interceptors_default);
+var createQlikApi = (props) => {
+  const scopedInterceptors = interceptors_default.createInterceptors();
+  return {
+    apiKeys: apiKeysMiniModule(props?.hostConfig, scopedInterceptors),
+    apps: appsMiniModule(props?.hostConfig, scopedInterceptors),
+    audits: auditsMiniModule(props?.hostConfig, scopedInterceptors),
+    auth: auth_default,
+    automations: automationsMiniModule(props?.hostConfig, scopedInterceptors),
+    brands: brandsMiniModule(props?.hostConfig, scopedInterceptors),
+    collections: collectionsMiniModule(props?.hostConfig, scopedInterceptors),
+    cspOrigins: cspOriginsMiniModule(props?.hostConfig, scopedInterceptors),
+    dataAssets: dataAssetsMiniModule(props?.hostConfig, scopedInterceptors),
+    dataConnections: dataConnectionsMiniModule(props?.hostConfig, scopedInterceptors),
+    dataCredentials: dataCredentialsMiniModule(props?.hostConfig, scopedInterceptors),
+    dataFiles: dataFilesMiniModule(props?.hostConfig, scopedInterceptors),
+    extensions: extensionsMiniModule(props?.hostConfig, scopedInterceptors),
+    glossaries: glossariesMiniModule(props?.hostConfig, scopedInterceptors),
+    groups: groupsMiniModule(props?.hostConfig, scopedInterceptors),
+    identityProviders: identityProvidersMiniModule(props?.hostConfig, scopedInterceptors),
+    interceptors: scopedInterceptors,
+    items: itemsMiniModule(props?.hostConfig, scopedInterceptors),
+    licenses: licensesMiniModule(props?.hostConfig, scopedInterceptors),
+    qix: qix_default.withHostConfig(props?.hostConfig),
+    quotas: quotasMiniModule(props?.hostConfig, scopedInterceptors),
+    reloadTasks: reloadTasksMiniModule(props?.hostConfig, scopedInterceptors),
+    reloads: reloadsMiniModule(props?.hostConfig, scopedInterceptors),
+    reports: reportsMiniModule(props?.hostConfig, scopedInterceptors),
+    roles: rolesMiniModule(props?.hostConfig, scopedInterceptors),
+    spaces: spacesMiniModule(props?.hostConfig, scopedInterceptors),
+    tempContents: tempContentsMiniModule(props?.hostConfig, scopedInterceptors),
+    tenants: tenantsMiniModule(props?.hostConfig, scopedInterceptors),
+    themes: themesMiniModule(props?.hostConfig, scopedInterceptors),
+    transports: transportsMiniModule(props?.hostConfig, scopedInterceptors),
+    users: usersMiniModule(props?.hostConfig, scopedInterceptors),
+    webIntegrations: webIntegrationsMiniModule(props?.hostConfig, scopedInterceptors),
+    webNotifications: webNotificationsMiniModule(props?.hostConfig, scopedInterceptors),
+    webhooks: webhooksMiniModule(props?.hostConfig, scopedInterceptors)
+  };
+};
 var api = {
   apiKeys,
   apps,
@@ -664,6 +776,7 @@ var api = {
   glossaries,
   groups,
   identityProviders,
+  interceptors,
   items,
   licenses,
   qix,
@@ -680,7 +793,8 @@ var api = {
   users,
   webIntegrations,
   webNotifications,
-  webhooks
+  webhooks,
+  createQlikApi
 };
 var public_default = api;
 export {
@@ -691,6 +805,7 @@ export {
   automations,
   brands,
   collections,
+  createQlikApi,
   cspOrigins,
   dataAssets,
   dataConnections,
@@ -701,6 +816,7 @@ export {
   glossaries,
   groups,
   identityProviders,
+  interceptors,
   items,
   licenses,
   qix,

@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
+import './auth-types-PkN9CAF_.js';
 
 /**
  * An error object.
@@ -92,6 +92,8 @@ declare const getNotifications: (query: {
     page?: number;
     /** Read status of the notification */
     read?: boolean;
+    /** Filter by resource types. If passing more than 1 resource type, use comma seperated string. */
+    resourceType?: string;
     /** The field to sort by, with +/- prefix indicating sort order */
     sort?: "+createdAt" | "-createdAt" | "+updatedAt" | "-updatedAt";
 }, options?: ApiCallOptions) => Promise<GetNotificationsHttpResponse>;

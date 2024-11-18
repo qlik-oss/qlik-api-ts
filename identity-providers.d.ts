@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
+import './auth-types-PkN9CAF_.js';
 
 type BaseIDP = {
     /** Indicates whether the IdP is available for use. */
@@ -102,6 +102,8 @@ type CreateOIDCPayload = {
         discoveryUrl?: string;
         /** Only ADFS and AzureAD IdPs can set this property. For ADFS and AzureAD, it defaults to false. For other IdPs, it defaults to undefined. */
         emailVerifiedAlwaysTrue?: boolean;
+        /** The algorithm used to sign the ID token. The default algorithm is RS256. */
+        idTokenSignatureAlg?: "RS256" | "RS512";
         /** OpenID configuration */
         openid_configuration?: OpenIDConfiguration;
         /** The realm identifier for the IdP. */
@@ -377,7 +379,7 @@ type PatchOIDCPayload = {
     /** The "operation" to be performed on a given IdP. Currently supports a custom operation value called "promote-options" that allows the test configuration to be promoted to the current configuration used for login. */
     op: "replace" | "promote-options";
     /** The "path" to the part of the IdP document. */
-    path?: "/active" | "/description" | "/meta" | "/options" | "/options/realm" | "/options/discoveryUrl" | "/options/claimsMapping" | "/pendingOptions" | "/pendingOptions/realm" | "/pendingOptions/discoveryUrl" | "/pendingOptions/clientId" | "/pendingOptions/clientSecret" | "/pendingOptions/emailVerifiedAlwaysTrue" | "/pendingOptions/claimsMapping" | "/postLogoutRedirectUri" | "/clockToleranceSec";
+    path?: "/active" | "/description" | "/meta" | "/options" | "/options/realm" | "/options/discoveryUrl" | "/options/claimsMapping" | "/pendingOptions" | "/pendingOptions/realm" | "/pendingOptions/discoveryUrl" | "/pendingOptions/clientId" | "/pendingOptions/clientSecret" | "/pendingOptions/emailVerifiedAlwaysTrue" | "/pendingOptions/claimsMapping" | "/postLogoutRedirectUri" | "/clockToleranceSec" | "/pendingOptions/idTokenSignatureAlg";
     /** The "value" data type is dependent on the path value being used. */
     value?: unknown;
 };
@@ -468,7 +470,7 @@ type ClaimsMappingSAML = {
     sub: string[];
 };
 /**
- * This endpoint retrieves one or more identity providers from the service. The tenantID in the JWT will be used to fetch the identity provider.
+ * This endpoint retrieves any IdPs registered on the tenant.
  *
  * @param query an object with query parameters
  * @throws GetIdpsHttpError
@@ -496,7 +498,7 @@ type GetIdpsHttpError = {
     status: number;
 };
 /**
- * This endpoint creates an identity provider resource. It returns a 201 Created when creation is successful with a header "QLIK-IDP-POPTS" (A unique string representing a hash of the current configuration being tested), returns a 403 Forbidden for a non TenantAdmin user JWT or if the tenantID in the JWT does not match with any of the tenantIDs in the payload. An IdP can be created with Pending Options or options depending whether the IdP is interactive or not.
+ * Creates a new IdP on a tenant. Requesting user must be assigned the `TenantAdmin` role. For non-interactive IdPs (e.g. JWT), IdP must be created by sending `options` payload. For interactive IdPs (e.g. SAML or OIDC), send `pendingOptions` payload to require the interactive verification step; or send `options` payload with `skipVerify` set to `true` to skip validation step and make IdP immediately available.
  *
  * @param body an object with the body content
  * @throws CreateIdpHttpError
@@ -513,7 +515,7 @@ type CreateIdpHttpError = {
     status: number;
 };
 /**
- * This endpoint retrieves identity providers' metadata.
+ * Returns IdP configuration metadata supported on the tenant. Clients can use this information to programmatically configure their interactions with Qlik Cloud.
  *
  * @throws GetIdpWellKnownMetaDataHttpError
  */
@@ -529,7 +531,7 @@ type GetIdpWellKnownMetaDataHttpError = {
     status: number;
 };
 /**
- * Returns the active interactive IdP metadata
+ * Retrieves default IdP metadata when no interactive IdP is enabled.
  *
  * @throws GetMyIdpMetaHttpError
  */
@@ -545,7 +547,7 @@ type GetMyIdpMetaHttpError = {
     status: number;
 };
 /**
- * This endpoint retrieves the status of IdP configurations. Requires TenantAdmin role.
+ * Retrieves the status of all IdP configurations. Requires `TenantAdmin` role.
  *
  * @throws GetIdpStatusesHttpError
  */
@@ -561,7 +563,7 @@ type GetIdpStatusesHttpError = {
     status: number;
 };
 /**
- * This endpoint deletes an identity provider from the service. It returns a valid 204 when the IdP is deleted. Only a user with the role of TenantAdmin and tenant access can delete an associated IdP. Edge-auth service can also delete.
+ * Deletes an identity provider. Requesting user must be assigned the `TenantAdmin` role.
  *
  * @param id The identity provider ID.
  * @throws DeleteIdpHttpError
@@ -578,7 +580,7 @@ type DeleteIdpHttpError = {
     status: number;
 };
 /**
- * This endpoint is used to retrieve an identity provider from the service. It returns a valid 200 OK response when the IdP exists and the user (TenantAdmin) or service (edge-auth) is authorized to view the contents. Additionally, returns a header "QLIK-IDP-POPTS" (A unique string representing a hash of the current configuration being tested). It returns a 404 Not Found if the criteria is not met.
+ * Retrieves a specific IdP. Requesting user must be assigned the `TenantAdmin` role.
  *
  * @param id The identity provider ID.
  * @throws GetIdpHttpError
@@ -595,7 +597,7 @@ type GetIdpHttpError = {
     status: number;
 };
 /**
- * This endpoint patches an identity provider from the service. It returns a valid 204 when the IdP is patched. Only an edge-auth service request or a user with the role of TenantAdmin can patch an associated IdP. Partial failure is treated as complete failure and returns an error.
+ * Updates the configuration of an IdP. Requesting user must be assigned the `TenantAdmin` role. Partial failure is treated as complete failure and returns an error.
  *
  * @param id The identity provider ID.
  * @param body an object with the body content
@@ -618,53 +620,53 @@ type PatchIdpHttpError = {
 declare function clearCache(): void;
 interface IdentityProvidersAPI {
     /**
-     * This endpoint retrieves one or more identity providers from the service. The tenantID in the JWT will be used to fetch the identity provider.
+     * This endpoint retrieves any IdPs registered on the tenant.
      *
      * @param query an object with query parameters
      * @throws GetIdpsHttpError
      */
     getIdps: typeof getIdps;
     /**
-     * This endpoint creates an identity provider resource. It returns a 201 Created when creation is successful with a header "QLIK-IDP-POPTS" (A unique string representing a hash of the current configuration being tested), returns a 403 Forbidden for a non TenantAdmin user JWT or if the tenantID in the JWT does not match with any of the tenantIDs in the payload. An IdP can be created with Pending Options or options depending whether the IdP is interactive or not.
+     * Creates a new IdP on a tenant. Requesting user must be assigned the `TenantAdmin` role. For non-interactive IdPs (e.g. JWT), IdP must be created by sending `options` payload. For interactive IdPs (e.g. SAML or OIDC), send `pendingOptions` payload to require the interactive verification step; or send `options` payload with `skipVerify` set to `true` to skip validation step and make IdP immediately available.
      *
      * @param body an object with the body content
      * @throws CreateIdpHttpError
      */
     createIdp: typeof createIdp;
     /**
-     * This endpoint retrieves identity providers' metadata.
+     * Returns IdP configuration metadata supported on the tenant. Clients can use this information to programmatically configure their interactions with Qlik Cloud.
      *
      * @throws GetIdpWellKnownMetaDataHttpError
      */
     getIdpWellKnownMetaData: typeof getIdpWellKnownMetaData;
     /**
-     * Returns the active interactive IdP metadata
+     * Retrieves default IdP metadata when no interactive IdP is enabled.
      *
      * @throws GetMyIdpMetaHttpError
      */
     getMyIdpMeta: typeof getMyIdpMeta;
     /**
-     * This endpoint retrieves the status of IdP configurations. Requires TenantAdmin role.
+     * Retrieves the status of all IdP configurations. Requires `TenantAdmin` role.
      *
      * @throws GetIdpStatusesHttpError
      */
     getIdpStatuses: typeof getIdpStatuses;
     /**
-     * This endpoint deletes an identity provider from the service. It returns a valid 204 when the IdP is deleted. Only a user with the role of TenantAdmin and tenant access can delete an associated IdP. Edge-auth service can also delete.
+     * Deletes an identity provider. Requesting user must be assigned the `TenantAdmin` role.
      *
      * @param id The identity provider ID.
      * @throws DeleteIdpHttpError
      */
     deleteIdp: typeof deleteIdp;
     /**
-     * This endpoint is used to retrieve an identity provider from the service. It returns a valid 200 OK response when the IdP exists and the user (TenantAdmin) or service (edge-auth) is authorized to view the contents. Additionally, returns a header "QLIK-IDP-POPTS" (A unique string representing a hash of the current configuration being tested). It returns a 404 Not Found if the criteria is not met.
+     * Retrieves a specific IdP. Requesting user must be assigned the `TenantAdmin` role.
      *
      * @param id The identity provider ID.
      * @throws GetIdpHttpError
      */
     getIdp: typeof getIdp;
     /**
-     * This endpoint patches an identity provider from the service. It returns a valid 204 when the IdP is patched. Only an edge-auth service request or a user with the role of TenantAdmin can patch an associated IdP. Partial failure is treated as complete failure and returns an error.
+     * Updates the configuration of an IdP. Requesting user must be assigned the `TenantAdmin` role. Partial failure is treated as complete failure and returns an error.
      *
      * @param id The identity provider ID.
      * @param body an object with the body content

@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
+import './auth-types-PkN9CAF_.js';
 
 /**
  * Error in resource handling
@@ -89,7 +89,7 @@ type ExportError = {
      * - "REP-404004" Story not found, the story does not exist or it has been deleted or it is unavailable.
      * - "REP-429000" Too many request. The user has sent too many requests in a given amount of time ("rate limiting").
      * - "REP-429012" Exceeded max session tenant quota. A tenant has opened too many different sessions at the same time.
-     * - "REP-429014" Reporting service was not able to return inside of request export deadline. Too many request at the same time for the same tenant.
+     * - "REP-429014" The export could not be completed within the requested deadline.
      * - "REP-429016" Exceeded max session tenant quota per day.
      * - "REP-500000" Fail to resolve resource.
      * - "REP-500006" Fail to get report session parameters.
@@ -108,7 +108,43 @@ type ExportError = {
      * - "REP-400029" Reload Entitlement Limit Reached.
      * - "REP-409046" Report aborted due to app reload.
      * - "REP-500047" Error setting GroupState.
-     * - "REP-403048" Forbidden. User does not have permission to export the report (access control usePermission) */
+     * - "REP-403048" Forbidden. User does not have permission to export the report (access control usePermission)
+     * - "REP-422051" There is no report to produce due to empty dataset or missing fields (the measure/dimension was removed or omitted in Section Access)
+     * - "REP-500014" The app did not open within 10 minutes.
+     * - "REP-400017" Static App size exceeded.
+     * - "REP-400018" Excel string length exceeded.
+     * - "REP-403019" Export is not available for app with enabled directQuery feature.
+     * - "REP-409001" App conflict.
+     * - "REP-503001" Rest Engine Error.
+     * - "REP-400020" Invalid Issuer.
+     * - "REP-400028" Invalid Tags.
+     * - "REP-409021" Reload timestamp constraint not met.
+     * - "REP-429022" Enigma generic abort.
+     * - "REP-500023" Validate Report Request Tags failure.
+     * - "REP-400024" Cannot extract claims from JWT.
+     * - "REP-403025" No entitlement to perform the operation.
+     * - "REP-403026" No entitlement to perform the operation. Export capability is off.
+     * - "REP-403027" Object without Hypercube or unsupported object type.
+     * - "REP-422030" Apply variables error.
+     * - "REP-500200" Report Generator error.
+     * - "REP-400035" Multiple selections detected in a field having OneAndOnlyone attribute.
+     * - "REP-400036" No selection detected in a field having OneAndOnlyone attribute.
+     * - "REP-400037" Max number of images exceeded in a report.
+     * - "REP-400038" Max number of nested levels exceeded in report.
+     * - "REP-400039" Max number of objects exceeded in a report.
+     * - "REP-400040" Max number of templates exceeded in a report.
+     * - "REP-400041" Unsupported dimension type for level tag.
+     * - "REP-500240" Engine Global generic closure error.
+     * - "REP-500260" Engine Websocket generic closure error.
+     * - "REP-500280" Engine proxy generic closure error.
+     * - "REP-400240" Engine Client Global generic closure error
+     * - "REP-400260" Engine Client generic closure error.
+     * - "REP-400280" Engine Client proxy generic closure error.
+     * - "REP-500045" Failure setting Bookmark timestamp.
+     * - "REP-400050" Error retrieving outputs.
+     * - "REP-400052" Report Request Aborted from internal error.
+     * - "REP-500053" Unexpected number of generated cycle reports.
+     * - "REP-400054" The number of generated cycle reports exceeds the maximum allowed. */
     code: string;
     /** Optional. MAY be used to provide more concrete details. */
     detail?: string;
@@ -144,7 +180,7 @@ type ImageOutput = {
  * Define the request metadata. It includes priority, deadline and future settings on execution policy of the request.
  */
 type Meta = {
-    /** The maximum interval, starting from the time the API request is received, within which a report must be produced, past this interval the report generation fails. The default value is 10 minutes, the maximum allowed value is 2 hours. */
+    /** The maximum interval, starting from the time the API request is received, within which a report must be produced, past this interval the report generation fails. The default value is 10 minutes, the maximum allowed value is 4 hours. */
     exportDeadline?: string;
     /** Time to live of the final result artifacts in ISO8601 duration format. After that duration the request and underlying output files will not be guaranteed to be available. Default is 1 hour. */
     outputTtl?: string;
@@ -189,9 +225,10 @@ type OutputItem = {
      *
      * Each template type supports specific output types:
      *    - composition-1.0 supports only pdfcomposition and pptxcomposition output types
-     *    - excel-1.0 supports only excel and pdf output type
+     *    - sense-excel-template-1.0 supports only excel and pdf output type
      *    - sense-image-1.0 supports pdf, pptx and image output types
      *    - sense-sheet-1.0 supports pdf and pptx output type
+     *    - sense-data-1.0 supports xlsx output type
      *
      * Each output type requires a specific output to be provided:
      *    - excel requires excelOutput to be set
@@ -200,7 +237,8 @@ type OutputItem = {
      *    - pdf requires pdfOuput to be set
      *    - pptx requires pptxOuput to be set
      *    - image requires imageOutput to be set
-     *    - csv doesn't have csv output. */
+     *    - csv doesn't have csv output
+     *    - xlsx requires xlsxOutput to be set */
     type: "image" | "pdf" | "xlsx" | "jsondata" | "pdfcomposition" | "excel" | "pptx" | "pptxcomposition" | "csv" | "cycle";
 };
 /**
@@ -299,34 +337,45 @@ type ReportRequest = {
     /** Define the request metadata. It includes priority, deadline and future settings on execution policy of the request. */
     meta?: Meta;
     output: OutputItem;
-    /** Used to export an excel template. */
-    senseExcelTemplate?: SenseExcelTemplate;
+    /** The callback to be performed once the report is done. */
+    requestCallBackAction?: CallBackAction;
+    senseDataTemplate?: SenseDataTemplate;
+    /** Used to produce reports from a template file. */
+    senseExcelTemplate?: SenseFileTemplate;
     /** Used to export a single visualization as pdf, pptx or png. */
     senseImageTemplate?: SenseImageTemplate;
+    /** Used to produce reports from a template file. */
+    sensePixelPerfectTemplate?: SenseFileTemplate;
     /** Used to export a sheet as pdf or pptx. */
     senseSheetTemplate?: SenseSheetTemplate;
     /** Template type and version using semantic versioning. It must have the following name convention: dashed-separated-template-name-MAJOR.MINOR.
-     * Please note that sense-story-x.0, sense-data-x.0 and qv-data-x.0 are only for internal use.
+     * Please note that sense-pixel-perfect-template-1.0, sense-story-x.0 and qv-data-x.0 are only for internal use.
      *
      * Each type requires a specific template to be provided:
      *   - composition-1.0 requires compositionTemplates to be set
      *   - sense-excel-template-1.0 requires senseExcelTemplate to be set
      *   - sense-image-1.0 requires senseImageTemplate to be set
      *   - sense-sheet-1.0 requires senseSheetTemplate to be set
+     *   - sense-data-1.0 requires senseDataTemplate to be set
      *
      * Each template type supports specific output types:
      *   - composition-1.0 supports pdfcomposition and pptxComposition output type
      *   - sense-excel-template-1.0 supports excel and pdf output type
      *   - sense-image-1.0 supports pdf, pptx and png output types
-     *   - sense-sheet-1.0 supports pdf, pptx output type */
-    type: "composition-1.0" | "sense-image-1.0" | "sense-data-1.0" | "sense-sheet-1.0" | "sense-story-1.0" | "qv-data-1.0" | "qv-data-2.0" | "sense-excel-template-1.0";
+     *   - sense-sheet-1.0 supports pdf, pptx output type
+     *   - sense-data-1.0 supports xlsx output type */
+    type: "composition-1.0" | "sense-image-1.0" | "sense-data-1.0" | "sense-sheet-1.0" | "sense-story-1.0" | "qv-data-1.0" | "qv-data-2.0" | "sense-excel-template-1.0" | "sense-pixel-perfect-template-1.0";
 };
 type ReportStatus = {
-    /** Present when status is failed. */
+    /** @deprecated
+     * Present when status is failed. Deprecated. Use /reports/{id}/outputs instead. */
     reasons?: Reason[];
+    /** Errors occured during report generation. */
+    requestErrors?: ExportErrors;
     /** Count how many times the resolution of this report was attempted. */
     resolutionAttempts?: number;
-    /** Present when the status is "done". */
+    /** @deprecated
+     * Present when the status is "done". Deprecated. Use /reports/{id}/outputs instead. */
     results?: Result[];
     /** Status of the requested report. */
     status: "queued" | "processing" | "done" | "failed" | "aborted" | "visiting" | "aborting";
@@ -376,10 +425,26 @@ type SelectionFilter = {
     variables?: unknown[];
 };
 type SelectionStrategy = "failOnErrors" | "ignoreErrorsReturnDetails" | "ignoreErrorsNoDetails";
+type SenseDataTemplate = {
+    appId: string;
+    /** Sense visualization id. Visualizations created "on the fly" are not supported. */
+    id: string;
+    patches?: NxPatch[];
+    persistentBookmark?: SensePersistentBookmark;
+    /** Choose the reloadTimestamp constraint to apply. An empty value leads to the default noCheck. */
+    reloadTimestampMatchType?: ReloadTimestampMatchType;
+    selectionStrategy?: SelectionStrategy;
+    selectionType?: SenseSelectionType;
+    /** Map of selections to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and maximum number of overall field values allowed is 150000. */
+    selectionsByState?: unknown;
+    /** The temporary bookmark to apply. Patches and Variables are ignored if passed to the API, because they already are applied in the backend. */
+    temporaryBookmarkV2?: SenseTemporaryBookmarkV2;
+    variables?: unknown[];
+};
 /**
- * Used to export an excel template.
+ * Used to produce reports from a template file.
  */
-type SenseExcelTemplate = {
+type SenseFileTemplate = {
     /** A JSON object that is passed as-is to the mashup page while rendering, this will be applied to all charts within the sheet. It includes properties of the whole sheet such as theme, gradient etc. Currently only the "theme" property is supported. */
     jsOpts?: unknown;
     /** Choose the reloadTimestamp constraint to apply. An empty value leads to the default noCheck. */
@@ -398,6 +463,7 @@ type SenseImageTemplate = {
     /** Choose the reloadTimestamp constraint to apply. An empty value leads to the default noCheck. */
     reloadTimestampMatchType?: ReloadTimestampMatchType;
     selectionStrategy?: SelectionStrategy;
+    selectionType?: SenseSelectionType;
     /** Map of selections to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and maximum number of overall field values allowed is 150000. */
     selectionsByState?: unknown;
     /** The definition ID referring to a selectionsByState definition declared in definitions. */
@@ -410,6 +476,7 @@ type SensePersistentBookmark = {
     /** Sense Persistence Bookmark id. */
     id: string;
 };
+type SenseSelectionType = "selectionsByState" | "temporaryBookmark" | "persistentBookmark" | "temporaryBookmarkV2";
 /**
  * Used to export a sheet as pdf or pptx.
  */
@@ -419,6 +486,7 @@ type SenseSheetTemplate = {
     /** Choose the reloadTimestamp constraint to apply. An empty value leads to the default noCheck. */
     reloadTimestampMatchType?: ReloadTimestampMatchType;
     selectionStrategy?: SelectionStrategy;
+    selectionType?: SenseSelectionType;
     /** Map of selections to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and maximum number of overall field values allowed is 150000. */
     selectionsByState?: unknown;
     /** The definition ID referring to a selectionsByState definition declared in definitions. */
@@ -541,4 +609,4 @@ interface ReportsAPI {
  */
 declare const reportsExport: ReportsAPI;
 
-export { type AppError, type AppErrors, type CallBackAction, type ChainableSelection, type ChainableSelectionType, type ComposableTemplate, type CreateReportHttpError, type CreateReportHttpResponse, type Definitions, type DocProperties, type Error, type ExcelOutput, type ExportError, type ExportErrors, type Float64, type GetReportStatusHttpError, type GetReportStatusHttpResponse, type HttpRequest, type ImageOutput, type Meta, type MetaExportError, type NxPatch, type OutputItem, type PdfCompositionOutput, type PdfOutput, type PptxCompositionOutput, type PptxOutput, type QFieldValue, type QSelection, type Reason, type ReloadTimestampMatchType, type ReportRequest, type ReportStatus, type ReportsAPI, type Result, type SelectionChain, type SelectionError, type SelectionErrors, type SelectionFilter, type SelectionStrategy, type SenseExcelTemplate, type SenseImageTemplate, type SensePersistentBookmark, type SenseSheetTemplate, type SenseTemporaryBookmarkV2, type Sheet, type TemplateLocation, type Visualization, clearCache, createReport, reportsExport as default, getReportStatus };
+export { type AppError, type AppErrors, type CallBackAction, type ChainableSelection, type ChainableSelectionType, type ComposableTemplate, type CreateReportHttpError, type CreateReportHttpResponse, type Definitions, type DocProperties, type Error, type ExcelOutput, type ExportError, type ExportErrors, type Float64, type GetReportStatusHttpError, type GetReportStatusHttpResponse, type HttpRequest, type ImageOutput, type Meta, type MetaExportError, type NxPatch, type OutputItem, type PdfCompositionOutput, type PdfOutput, type PptxCompositionOutput, type PptxOutput, type QFieldValue, type QSelection, type Reason, type ReloadTimestampMatchType, type ReportRequest, type ReportStatus, type ReportsAPI, type Result, type SelectionChain, type SelectionError, type SelectionErrors, type SelectionFilter, type SelectionStrategy, type SenseDataTemplate, type SenseFileTemplate, type SenseImageTemplate, type SensePersistentBookmark, type SenseSelectionType, type SenseSheetTemplate, type SenseTemporaryBookmarkV2, type Sheet, type TemplateLocation, type Visualization, clearCache, createReport, reportsExport as default, getReportStatus };

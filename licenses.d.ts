@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
+import './auth-types-PkN9CAF_.js';
 
 type AssignmentsActionsAddRequest = {
     add: {
@@ -52,23 +52,27 @@ type AssignmentsActionsDeleteResponse = {
 };
 type AssignmentsActionsUpdateRequest = {
     update: {
+        /** The current user subject, in case that should be patched. */
+        sourceSubject?: string;
         /** Current assignment type. */
-        sourceType: string;
-        /** User subject */
+        sourceType?: string;
+        /** User subject, the current or the desired after the patch. */
         subject: string;
         /** Target assignment type. */
-        type: string;
+        type?: string;
     }[];
 };
 type AssignmentsActionsUpdateResponse = {
     data: {
         /** Error code */
         code?: string;
+        /** Current subject. */
+        sourceSubject?: string;
         /** Current allotment type. */
         sourceType?: string;
-        /** Response status */
+        /** HTTP status code indicating the result of the individual assignment operation. A value of 200 represents a successful update, while 201 indicates a new resource was created due to a subject update. Any 400-level status codes indicate an error. */
         status: number;
-        /** Subject */
+        /** Target subject. */
         subject?: string;
         /** Error title */
         title?: string;
@@ -172,6 +176,8 @@ type LicenseOverview = {
         /** Parameter values */
         values?: unknown;
     }[];
+    /** the parent number of the license. can be shared by multiple license numbers */
+    parentLicenseNumber?: string;
     /** The product the license is valid for. */
     product: string;
     /** The secondary number of a definition. */

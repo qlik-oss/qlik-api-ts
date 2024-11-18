@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/5V4BMSM2.js";
-import "./chunks/5T2SBCJG.js";
+} from "./chunks/UA6BE3VB.js";
+import "./chunks/CZC7KEJN.js";
 import "./chunks/2ZQ3ZX7F.js";
 
 // src/public/rest/automations.ts
@@ -15,18 +15,6 @@ var getAutomations = async (query, options) => invokeFetch("automations", {
 var createAutomation = async (body, options) => invokeFetch("automations", {
   method: "post",
   pathTemplate: "/api/v1/automations",
-  body,
-  contentType: "application/json",
-  options
-});
-var getAutomationsSettings = async (options) => invokeFetch("automations", {
-  method: "get",
-  pathTemplate: "/api/v1/automations/settings",
-  options
-});
-var updateAutomationsSettings = async (body, options) => invokeFetch("automations", {
-  method: "put",
-  pathTemplate: "/api/v1/automations/settings",
   body,
   contentType: "application/json",
   options
@@ -144,8 +132,6 @@ function clearCache() {
 var automationsExport = {
   getAutomations,
   createAutomation,
-  getAutomationsSettings,
-  updateAutomationsSettings,
   getAutomationsUsageMetrics,
   deleteAutomation,
   getAutomationWithQuery,
@@ -180,12 +166,10 @@ export {
   getAutomationRuns,
   getAutomationWithQuery,
   getAutomations,
-  getAutomationsSettings,
   getAutomationsUsageMetrics,
   moveAutomation,
   queueAutomationRun,
   retryAutomationRun,
   stopAutomationRun,
-  updateAutomation,
-  updateAutomationsSettings
+  updateAutomation
 };

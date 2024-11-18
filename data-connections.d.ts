@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
+import './auth-types-PkN9CAF_.js';
 
 type ActionDeleteRequest = {
     connections: {
@@ -176,7 +176,7 @@ type ConnectionUpdate = {
     qArchitecture?: 0 | 1;
     /** Connection string for the data connection */
     qConnectStatement: string;
-    /** String that contains connection level secret (or password). If this field presents in request, then existing connection secret will be updated to its value. If is an empty string, then eixsting connection secret will be cleared. If this field is missing, existing secret will not be updated. */
+    /** String that contains connection level secret (or password). If this field presents in request, then existing connection secret will be updated to its value. If is an empty string, then existing connection secret will be cleared. If this field is missing, existing secret will not be updated. */
     qConnectionSecret?: string;
     /** ID of the credential associated with the connection */
     qCredentialsID?: string;
@@ -243,7 +243,7 @@ type Error = {
 };
 type Errors = Error[];
 type Link = {
-    /** Link to cirrent query */
+    /** Link to current query */
     self: {
         /** URL pointing to the resource */
         href: string;
@@ -281,7 +281,7 @@ type TopLevelLink = {
         /** URL pointing to the previous page of resources */
         href: string;
     };
-    /** Link to cirrent query */
+    /** Link to current query */
     self: {
         /** URL pointing to the resource */
         href: string;
@@ -300,7 +300,7 @@ declare const getDataConnections: (query: {
     dataName?: string;
     /** Returns extended list of properties (e.g. encrypted credential string) when set to true. */
     extended?: boolean;
-    /** Filtering resources by properties (filterable properties only) using SCIM filter string. Note the filter string only applies to connections managed by data-connections service, i.e. filtering doesn't apply to DataFile connections. */
+    /** Filtering resources by properties (filterable properties only) using SCIM filter string. Note the filter string only applies to connections managed by data-connections service, i.e. filtering doesn't apply to DataFile connections. When filtering on datetime property (e.g. created, updated), datetime should be in RFC3339 format. */
     filter?: string;
     /** Base Qri (encrypted) will be returned when the query is set to true, default is false */
     includeQris?: boolean;
@@ -314,7 +314,7 @@ declare const getDataConnections: (query: {
     ownedByMe?: boolean;
     /** Filtering on datafile connections by owner (i.e. app) ID. */
     owner?: string;
-    /** Pagination sursor string, which is generated auotmatically in previous pagination query. */
+    /** Pagination cursor string, which is generated automatically in previous pagination query. */
     page?: string;
     /** Filtering on personal connections, ignored if spaceId is defined in same request */
     personal?: boolean;
@@ -389,7 +389,7 @@ type DuplicateDataAConnectionHttpError = {
     status: number;
 };
 /**
- * Update multiple connections, only available to Admin
+ * Update multiple connections, only available to Admin. When update is to change ownership of a connection, the credentials associated with the connection will NOT be transferred to the new owner, and new owner is expected to provide their own credentials for the connection.
  *
  * @param body an object with the body content
  * @throws UpdateDataConnectionsHttpError
@@ -436,7 +436,7 @@ type DeleteDataConnectionHttpError = {
  * @throws GetDataConnectionHttpError
  */
 declare const getDataConnection: (qID: string, query: {
-    /** If set to true, credentialId in the query will be intepreted as credential's name */
+    /** If set to true, credentialId in the query will be interpreted as credential's name */
     byCredentialName?: boolean;
     /** Credential ID */
     credentialId?: string;
@@ -541,7 +541,7 @@ interface DataConnectionsAPI {
      */
     duplicateDataAConnection: typeof duplicateDataAConnection;
     /**
-     * Update multiple connections, only available to Admin
+     * Update multiple connections, only available to Admin. When update is to change ownership of a connection, the credentials associated with the connection will NOT be transferred to the new owner, and new owner is expected to provide their own credentials for the connection.
      *
      * @param body an object with the body content
      * @throws UpdateDataConnectionsHttpError

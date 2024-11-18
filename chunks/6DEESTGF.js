@@ -14,11 +14,13 @@ import {
   isWindows,
   logout,
   registerAuthModule,
+  serializeHostConfig,
   setDefaultHostConfig,
   toValidEnigmaLocationUrl,
   toValidLocationUrl,
   toValidWebsocketLocationUrl
-} from "./RN5AUIPP.js";
+} from "./I5UOE4ZZ.js";
+import "./7BDAXGID.js";
 import "./2ZQ3ZX7F.js";
 export {
   AuthorizationError,
@@ -36,6 +38,7 @@ export {
   isWindows,
   logout,
   registerAuthModule,
+  serializeHostConfig,
   setDefaultHostConfig,
   toValidEnigmaLocationUrl,
   toValidLocationUrl,

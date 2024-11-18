@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
+import './auth-types-PkN9CAF_.js';
 
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
@@ -110,6 +110,8 @@ type Category = {
     readonly createdBy: string;
     description: string;
     glossaryId: string;
+    /** The id for resolving updates in future imports/updates.
+     * Opposed to the id of terms, id on category are not resolved by backend. Any category referred in the category array in terms will have to be identical to the id property of the category. If not, the category reference will be discarded. */
     id: string;
     name: string;
     parentId?: string;
@@ -121,9 +123,6 @@ type Category = {
 };
 type CreateCategory = {
     description?: string;
-    /** The id for resolving updates in future imports/updates.
-     * Opposed to the id of terms, id on category are not resolved by backend. Any category referred in the category array in terms will have to be identical to the id property of the category. If not, the category reference will be discarded. */
-    id?: string;
     /** The name of the category. May not be identical to another category belonging to the same parent. */
     name?: string;
     parentId?: string;
@@ -393,6 +392,8 @@ type TermLinksTo = {
     status?: number;
     /** Different formats based on subresource type. Could be e.g. OID or UUID. */
     subResourceId?: string;
+    /** Populated and true if no matching subresource is found on parent resource. E.g. if a dataset field no longer exist but a link to that field exists. */
+    subResourceInvalid?: boolean;
     subResourceName?: string;
     subResourceType?: "master_dimension" | "master_measure" | "field";
     /** Describes reason for item status during batch operation. E.g. why an error occurs during creation. */

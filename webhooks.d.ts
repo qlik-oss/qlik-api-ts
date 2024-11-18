@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
+import './auth-types-PkN9CAF_.js';
 
 type Delivery = {
     /** The name of the triggering event-type */
@@ -84,7 +84,7 @@ type WebhookBase = {
     readonly disabledReasonCode?: string;
     /** Whether the webhook is active and sending requests */
     enabled?: boolean;
-    /** Types of events for which the webhook should trigger. */
+    /** Types of events for which the webhook should trigger. Retrieve available types from `/v1/webhooks/event-types`. */
     eventTypes?: string[];
     /** Filter that should match for a webhook to be triggered.
      * Supported common attribute names are 'id', 'spaceId' and 'topLevelResourceId', beside the common attributes the "com.qlik.v1.app.reload.finished" event also supports "data.status" that could be either "ok" or "error" but can't be used together with other event types.
@@ -140,7 +140,7 @@ type WebhookResponse = WebhookBase & {
     readonly origin?: "api" | "automations" | "management-console";
 };
 /**
- * Retrieves all webhooks entries for a tenant
+ * Retrieves all webhooks entries for a tenant that the user has access to. Users assigned the `TenantAdmin` role can retrieve all webhooks. A user can have up to 150 webhooks at one time.
  *
  * @param query an object with query parameters
  * @throws GetWebhooksHttpError
@@ -150,8 +150,8 @@ declare const getWebhooks: (query: {
     createdByUserId?: string;
     /** Filter resources by enabled true/false */
     enabled?: boolean;
-    /** Filter resources by event-type */
-    eventType?: string;
+    /** Filter resources by event-type/types, a single webhook item can have multiple event-types */
+    eventTypes?: string;
     /** Filter resources by level that user has access to (either user or level) */
     level?: string;
     /** Maximum number of webhooks to retrieve */
@@ -160,6 +160,8 @@ declare const getWebhooks: (query: {
     name?: string;
     /** Cursor to the next page */
     next?: string;
+    /** Filter resources by origins, supports multiorigin */
+    origins?: "api" | "automations" | "management-console";
     /** Filter resources by user that owns it, only applicable for user level webhooks */
     ownerId?: string;
     /** Cursor to previous next page */
@@ -184,7 +186,7 @@ type GetWebhooksHttpError = {
     status: number;
 };
 /**
- * Creates a new webhook
+ * Creates a new webhook. User must be assigned the `TenantAdmin` role to create `tenant` level webhooks.
  *
  * @param body an object with the body content
  * @throws CreateWebhookHttpError
@@ -201,7 +203,7 @@ type CreateWebhookHttpError = {
     status: number;
 };
 /**
- * List of event-types that are possible to subscribe to.
+ * Lists event-types that are possible to subscribe to.
  *
  * @throws GetWebhookEventTypesHttpError
  */
@@ -217,7 +219,7 @@ type GetWebhookEventTypesHttpError = {
     status: number;
 };
 /**
- * Deletes a specific webhook
+ * Deletes a specific webhook.
  *
  * @param id The webhook's unique identifier.
  * @throws DeleteWebhookHttpError
@@ -234,7 +236,7 @@ type DeleteWebhookHttpError = {
     status: number;
 };
 /**
- * Returns details for a specific webhook
+ * Returns details for a specific webhook.
  *
  * @param id The webhook's unique identifier.
  * @throws GetWebhookHttpError
@@ -251,7 +253,7 @@ type GetWebhookHttpError = {
     status: number;
 };
 /**
- * Patches a webhook
+ * Patches a webhook to update one or more properties.
  *
  * @param id The webhook's unique identifier.
  * @param body an object with the body content
@@ -269,7 +271,7 @@ type PatchWebhookHttpError = {
     status: number;
 };
 /**
- * Updates a webhook
+ * Updates a webhook, any omitted fields will be cleared, returns updated webhook.
  *
  * @param id The webhook's unique identifier.
  * @param body an object with the body content
@@ -287,7 +289,7 @@ type UpdateWebhookHttpError = {
     status: number;
 };
 /**
- * Returns deliveries for a specific webhook
+ * Returns deliveries for a specific webhook. Delivery history is stored for 1 week.
  *
  * @param id The webhook's unique identifier.
  * @param query an object with query parameters
@@ -320,7 +322,7 @@ type GetWebhookDeliveriesHttpError = {
     status: number;
 };
 /**
- * Returns details for a specific delivery
+ * Returns details for a specific delivery.
  *
  * @param id The webhook's unique identifier.
  * @param deliveryId The delivery's unique identifier.
@@ -338,7 +340,7 @@ type GetWebhookDeliveryHttpError = {
     status: number;
 };
 /**
- * Resend the delivery with the same payload
+ * Resends the delivery with the same payload.
  *
  * @param id The webhook's unique identifier.
  * @param deliveryId The delivery's unique identifier.
@@ -361,41 +363,41 @@ type ResendWebhookDeliveryHttpError = {
 declare function clearCache(): void;
 interface WebhooksAPI {
     /**
-     * Retrieves all webhooks entries for a tenant
+     * Retrieves all webhooks entries for a tenant that the user has access to. Users assigned the `TenantAdmin` role can retrieve all webhooks. A user can have up to 150 webhooks at one time.
      *
      * @param query an object with query parameters
      * @throws GetWebhooksHttpError
      */
     getWebhooks: typeof getWebhooks;
     /**
-     * Creates a new webhook
+     * Creates a new webhook. User must be assigned the `TenantAdmin` role to create `tenant` level webhooks.
      *
      * @param body an object with the body content
      * @throws CreateWebhookHttpError
      */
     createWebhook: typeof createWebhook;
     /**
-     * List of event-types that are possible to subscribe to.
+     * Lists event-types that are possible to subscribe to.
      *
      * @throws GetWebhookEventTypesHttpError
      */
     getWebhookEventTypes: typeof getWebhookEventTypes;
     /**
-     * Deletes a specific webhook
+     * Deletes a specific webhook.
      *
      * @param id The webhook's unique identifier.
      * @throws DeleteWebhookHttpError
      */
     deleteWebhook: typeof deleteWebhook;
     /**
-     * Returns details for a specific webhook
+     * Returns details for a specific webhook.
      *
      * @param id The webhook's unique identifier.
      * @throws GetWebhookHttpError
      */
     getWebhook: typeof getWebhook;
     /**
-     * Patches a webhook
+     * Patches a webhook to update one or more properties.
      *
      * @param id The webhook's unique identifier.
      * @param body an object with the body content
@@ -403,7 +405,7 @@ interface WebhooksAPI {
      */
     patchWebhook: typeof patchWebhook;
     /**
-     * Updates a webhook
+     * Updates a webhook, any omitted fields will be cleared, returns updated webhook.
      *
      * @param id The webhook's unique identifier.
      * @param body an object with the body content
@@ -411,7 +413,7 @@ interface WebhooksAPI {
      */
     updateWebhook: typeof updateWebhook;
     /**
-     * Returns deliveries for a specific webhook
+     * Returns deliveries for a specific webhook. Delivery history is stored for 1 week.
      *
      * @param id The webhook's unique identifier.
      * @param query an object with query parameters
@@ -419,7 +421,7 @@ interface WebhooksAPI {
      */
     getWebhookDeliveries: typeof getWebhookDeliveries;
     /**
-     * Returns details for a specific delivery
+     * Returns details for a specific delivery.
      *
      * @param id The webhook's unique identifier.
      * @param deliveryId The delivery's unique identifier.
@@ -427,7 +429,7 @@ interface WebhooksAPI {
      */
     getWebhookDelivery: typeof getWebhookDelivery;
     /**
-     * Resend the delivery with the same payload
+     * Resends the delivery with the same payload.
      *
      * @param id The webhook's unique identifier.
      * @param deliveryId The delivery's unique identifier.

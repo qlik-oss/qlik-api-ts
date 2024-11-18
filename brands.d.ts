@@ -1,5 +1,5 @@
-import { A as ApiCallOptions, D as DownloadableBlob } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions, D as DownloadableBlob } from './invoke-fetch-types-BLrpeZOL.js';
+import './auth-types-PkN9CAF_.js';
 
 /**
  * A brand is a collection of assets for applying custom branding. Only a single brand can be active in a tenant.
@@ -100,7 +100,7 @@ type Link = {
  */
 type NoActiveBrand = unknown;
 /**
- * Lists all brand entries for a tenant
+ * Lists all brand entries for a tenant.
  *
  * @param query an object with query parameters
  * @throws GetBrandsHttpError
@@ -144,7 +144,7 @@ type GetBrands500HttpError = {
 };
 type GetBrandsHttpError = GetBrands400HttpError | GetBrands401HttpError | GetBrands403HttpError | GetBrands500HttpError;
 /**
- * Creates a new brand
+ * Creates a new brand.
  *
  * @param body an object with the body content
  * @throws CreateBrandHttpError
@@ -188,7 +188,7 @@ type CreateBrand500HttpError = {
 };
 type CreateBrandHttpError = CreateBrand400HttpError | CreateBrand401HttpError | CreateBrand403HttpError | CreateBrand500HttpError;
 /**
- * Retrieves the current active brand
+ * Returns the current active brand. If using the Qlik default brand, no value is returned.
  *
  * @throws GetActiveBrandHttpError
  */
@@ -204,7 +204,7 @@ type GetActiveBrandHttpError = {
     status: number;
 };
 /**
- * Deletes a specific brand
+ * Deletes a specific brand. If the active brand is deleted, the tenant will return to the Qlik default.
  *
  * @param brandId The brand's unique identifier.
  * @throws DeleteBrandHttpError
@@ -242,7 +242,7 @@ type DeleteBrand500HttpError = {
 };
 type DeleteBrandHttpError = DeleteBrand400HttpError | DeleteBrand401HttpError | DeleteBrand403HttpError | DeleteBrand404HttpError | DeleteBrand500HttpError;
 /**
- * Retrieves a specific brand
+ * Returns a specific brand.
  *
  * @param brandId The brand's unique identifier.
  * @throws GetBrandHttpError
@@ -280,7 +280,7 @@ type GetBrand500HttpError = {
 };
 type GetBrandHttpError = GetBrand400HttpError | GetBrand401HttpError | GetBrand403HttpError | GetBrand404HttpError | GetBrand500HttpError;
 /**
- * Patches a brand
+ * Patches a brand.
  *
  * @param brandId The brand's unique identifier.
  * @param body an object with the body content
@@ -358,7 +358,7 @@ type ActivateBrand500HttpError = {
 };
 type ActivateBrandHttpError = ActivateBrand400HttpError | ActivateBrand401HttpError | ActivateBrand403HttpError | ActivateBrand404HttpError | ActivateBrand500HttpError;
 /**
- * Sets the brand so it is no longer active. If the brand is already inactive, no action is taken.
+ * Sets the brand so it is no longer active, returning the tenant the Qlik default brand. If the brand is already inactive, no action is taken.
  *
  * @param brandId The brand's unique identifier.
  * @param body an object with the body content
@@ -397,7 +397,7 @@ type DeactivateBrand500HttpError = {
 };
 type DeactivateBrandHttpError = DeactivateBrand400HttpError | DeactivateBrand401HttpError | DeactivateBrand403HttpError | DeactivateBrand404HttpError | DeactivateBrand500HttpError;
 /**
- * Deletes a specific brand file
+ * Deletes the specified brand file.
  *
  * @param brandId The brand's unique identifier.
  * @param brandFileId The unique identifier of a file within a brand.
@@ -436,7 +436,7 @@ type DeleteBrandFile500HttpError = {
 };
 type DeleteBrandFileHttpError = DeleteBrandFile400HttpError | DeleteBrandFile401HttpError | DeleteBrandFile403HttpError | DeleteBrandFile404HttpError | DeleteBrandFile500HttpError;
 /**
- * Downloads the brand file
+ * Downloads the specified brand file.
  *
  * @param brandId The brand's unique identifier.
  * @param brandFileId The unique identifier of a file within a brand.
@@ -475,7 +475,7 @@ type GetBrandFile500HttpError = {
 };
 type GetBrandFileHttpError = GetBrandFile400HttpError | GetBrandFile401HttpError | GetBrandFile403HttpError | GetBrandFile404HttpError | GetBrandFile500HttpError;
 /**
- * Creates a brand file
+ * Creates a brand file for the specified identifier.
  *
  * @param brandId The brand's unique identifier.
  * @param brandFileId The unique identifier of a file within a brand.
@@ -518,7 +518,7 @@ type CreateBrandFile500HttpError = {
 };
 type CreateBrandFileHttpError = CreateBrandFile400HttpError | CreateBrandFile401HttpError | CreateBrandFile403HttpError | CreateBrandFile404HttpError | CreateBrandFile500HttpError;
 /**
- * Updates existing file
+ * Updates the specified brand file.
  *
  * @param brandId The brand's unique identifier.
  * @param brandFileId The unique identifier of a file within a brand.
@@ -566,41 +566,41 @@ type UpdateBrandFileHttpError = UpdateBrandFile400HttpError | UpdateBrandFile401
 declare function clearCache(): void;
 interface BrandsAPI {
     /**
-     * Lists all brand entries for a tenant
+     * Lists all brand entries for a tenant.
      *
      * @param query an object with query parameters
      * @throws GetBrandsHttpError
      */
     getBrands: typeof getBrands;
     /**
-     * Creates a new brand
+     * Creates a new brand.
      *
      * @param body an object with the body content
      * @throws CreateBrandHttpError
      */
     createBrand: typeof createBrand;
     /**
-     * Retrieves the current active brand
+     * Returns the current active brand. If using the Qlik default brand, no value is returned.
      *
      * @throws GetActiveBrandHttpError
      */
     getActiveBrand: typeof getActiveBrand;
     /**
-     * Deletes a specific brand
+     * Deletes a specific brand. If the active brand is deleted, the tenant will return to the Qlik default.
      *
      * @param brandId The brand's unique identifier.
      * @throws DeleteBrandHttpError
      */
     deleteBrand: typeof deleteBrand;
     /**
-     * Retrieves a specific brand
+     * Returns a specific brand.
      *
      * @param brandId The brand's unique identifier.
      * @throws GetBrandHttpError
      */
     getBrand: typeof getBrand;
     /**
-     * Patches a brand
+     * Patches a brand.
      *
      * @param brandId The brand's unique identifier.
      * @param body an object with the body content
@@ -616,7 +616,7 @@ interface BrandsAPI {
      */
     activateBrand: typeof activateBrand;
     /**
-     * Sets the brand so it is no longer active. If the brand is already inactive, no action is taken.
+     * Sets the brand so it is no longer active, returning the tenant the Qlik default brand. If the brand is already inactive, no action is taken.
      *
      * @param brandId The brand's unique identifier.
      * @param body an object with the body content
@@ -624,7 +624,7 @@ interface BrandsAPI {
      */
     deactivateBrand: typeof deactivateBrand;
     /**
-     * Deletes a specific brand file
+     * Deletes the specified brand file.
      *
      * @param brandId The brand's unique identifier.
      * @param brandFileId The unique identifier of a file within a brand.
@@ -632,7 +632,7 @@ interface BrandsAPI {
      */
     deleteBrandFile: typeof deleteBrandFile;
     /**
-     * Downloads the brand file
+     * Downloads the specified brand file.
      *
      * @param brandId The brand's unique identifier.
      * @param brandFileId The unique identifier of a file within a brand.
@@ -640,7 +640,7 @@ interface BrandsAPI {
      */
     getBrandFile: typeof getBrandFile;
     /**
-     * Creates a brand file
+     * Creates a brand file for the specified identifier.
      *
      * @param brandId The brand's unique identifier.
      * @param brandFileId The unique identifier of a file within a brand.
@@ -649,7 +649,7 @@ interface BrandsAPI {
      */
     createBrandFile: typeof createBrandFile;
     /**
-     * Updates existing file
+     * Updates the specified brand file.
      *
      * @param brandId The brand's unique identifier.
      * @param brandFileId The unique identifier of a file within a brand.
