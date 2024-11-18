@@ -10405,7 +10405,7 @@ async function createEnigmaSession({
     }
   } else if (isNodeEnvironment) {
     const baseUrl = `${locationUrl}/app/engineData/${appId}${ttlPart}`;
-    createSocketBuilder async () => {
+    createSocketBuilder = async () => {
       const pfx = hostConfig.pfx;
       const passphrase = hostConfig.passphrase;
       const {headers, queryParams} = await getRestCallAuthParams({hostConfig});
