@@ -4,10 +4,55 @@ import {
   invokeFetch,
   isWindows,
   toValidWebsocketLocationUrl
-} from "./KSB5ROQL.js";
+} from "./I5UOE4ZZ.js";
+import "./7BDAXGID.js";
 import {
   isBrowser
 } from "./2ZQ3ZX7F.js";
+
+// src/qix/session/websocket-errors.ts
+var closeCodeEngineTerminating = 4003;
+var closeCodeEngineAbnormalClosure = 1006;
+var closeCodeEngineProxyGeneric = 4200;
+var closeCodeClientTimeout = 4201;
+var closeCodeBadRequest = 4202;
+var closeCodePermissions = 4203;
+var closeCodeNotFound = 4204;
+var closeCodeTooManyRequests = 4205;
+var closeCodeNetwork = 4206;
+var closeCodeDependencyGeneric = 4210;
+var closeCodeDependencyUnavailable = 4211;
+var closeCodeEngineGeneric = 4220;
+var closeCodeEntitlement = 4230;
+var closeCodeNoEnginesAvailable = 4240;
+var CloseCodeSessionReservationMissing = 4222;
+var closeCodeMessages = {
+  [closeCodeEngineTerminating]: "The engine is in terminating state",
+  [closeCodeEngineAbnormalClosure]: "The engine is abnormally closed",
+  [closeCodeEngineProxyGeneric]: "A problem occurred in engine-proxy",
+  [closeCodeClientTimeout]: "The client has closed the connection",
+  [closeCodeBadRequest]: "The provided request is invalid and/or malformed",
+  [closeCodePermissions]: "No permission to open the app",
+  [closeCodeNotFound]: "App not found",
+  [closeCodeTooManyRequests]: "Too many requests have been sent in a given amount of time",
+  [closeCodeNetwork]: "Networking issues",
+  [closeCodeDependencyGeneric]: "A problem occurred in a dependency of engine-proxy",
+  [closeCodeDependencyUnavailable]: "A dependency is unavailable and not serving any requests",
+  [closeCodeEngineGeneric]: "A problem occurred in an engine",
+  [closeCodeEntitlement]: "You are not entitled to perform that operation",
+  [closeCodeNoEnginesAvailable]: "There are currently no engines available",
+  [CloseCodeSessionReservationMissing]: "The reserved session is missing"
+};
+var uknownCloseErrorMessage = "websocket closed for unknown reason";
+function getHumanReadableSocketClosedErrorMessage(err, { appId, hostConfig }) {
+  const closeCode = err?.original?.code;
+  const closeMessage = closeCode ? closeCodeMessages[closeCode] || uknownCloseErrorMessage : err.message;
+  if (hostConfig?.host) {
+    return `Failed to open app ${appId} on ${hostConfig?.host}: ${closeMessage}`;
+  } else {
+    return `Failed to open app ${appId}: ${closeMessage}`;
+  }
+}
 
 // src/qix/session/shared-sessions.ts
 var globalEventListeners = /* @__PURE__ */ new Set();
@@ -42,18 +87,26 @@ function toGlobalAppSessionId({
   identity,
   hostConfig,
   withoutData,
-  useReloadEngine
+  useReloadEngine,
+  ttlSeconds,
+  workloadType
 }) {
   const locationUrl = toValidWebsocketLocationUrl(hostConfig);
   let url = `${locationUrl}/${appId}`;
   if (identity) {
     url += `/${identity}`;
   }
+  if (ttlSeconds !== void 0 && ttlSeconds >= 0) {
+    url += `/ttl/${ttlSeconds}`;
+  }
   if (useReloadEngine) {
     url += "/useReloadEngine";
   }
   if (withoutData) {
     url += "/withoutData";
+  }
+  if (workloadType) {
+    url += `?workloadType=${workloadType}`;
   }
   return url;
 }
@@ -65,7 +118,7 @@ async function runPendingInitialActions(initialActionsForApp, sharedSession, doc
     }
   }
 }
-async function addInitialSharedSessionCreationAction(openAppSessionProps, action) {
+function addInitialSharedSessionCreationAction(openAppSessionProps, action) {
   const key = toGlobalAppSessionId(openAppSessionProps);
   let initialActionArray = initialActions[key];
   if (!initialActionArray) {
@@ -74,11 +127,18 @@ async function addInitialSharedSessionCreationAction(openAppSessionProps, action
   initialActionArray.push(action);
   const existingSharedSession = sharedSessions[key];
   if (existingSharedSession) {
-    const doc = await existingSharedSession.docPromise;
-    if (doc) {
-      runPendingInitialActions(initialActionArray, existingSharedSession, doc);
-    }
+    existingSharedSession.docPromise.then((doc) => {
+      if (doc) {
+        runPendingInitialActions(initialActionArray, existingSharedSession, doc);
+      }
+    });
   }
+  return () => {
+    const index = initialActionArray.indexOf(action);
+    if (index > -1) {
+      initialActionArray.splice(index, 1);
+    }
+  };
 }
 function listenForWindowsAuthenticationInformation(session) {
   let resolveAuthSuggestedInWebsocket;
@@ -101,7 +161,7 @@ function listenForWindowsAuthenticationInformation(session) {
   return authSuggestedInWebsocket;
 }
 async function createAndSetupEnigmaSession(props, canRetry) {
-  const { createEnigmaSession } = await import("./6UGE6PR7.js");
+  const { createEnigmaSession } = await import("./6QRR5VUM.js");
   const session = await createEnigmaSession(props);
   setupSessionListeners(session, props);
   let global;
@@ -327,7 +387,8 @@ function createSharedSession(props) {
   const clients = [];
   function closeEnigmaSession() {
     delete sharedSessions[key];
-    return sharedSession.sessionPromise.then((session) => session.close());
+    return sharedSession.sessionPromise.then((session) => session.close()).catch(() => {
+    });
   }
   const sharedSession = {
     sessionPromise,
@@ -380,7 +441,11 @@ function createSharedSession(props) {
   });
   sharedSession.docPromise = sharedSession.docPromise.catch((err) => {
     closeEnigmaSession();
-    return Promise.reject(err);
+    const errorWithReadableMessage = new Error(getHumanReadableSocketClosedErrorMessage(err, props));
+    Object.entries(err).forEach(([key2, value]) => {
+      errorWithReadableMessage[key2] = value;
+    });
+    return Promise.reject(errorWithReadableMessage);
   });
   return sharedSession;
 }
@@ -390,7 +455,18 @@ function resumeShouldRejectPromiseIfNotReattached(bool) {
 }
 async function checkConnectivity(hostConfig) {
   let status = "online";
-  const catchFunc = (err) => {
+  const method = "get";
+  const options = {
+    hostConfig,
+    timeoutMs: 4e3,
+    noCache: true
+  };
+  try {
+    const result = await invokeFetch("", { method, pathTemplate: "/api/v1/user-locale", options });
+    if (!result.headers.get("content-type")?.includes("application/json")) {
+      status = "unauthorized";
+    }
+  } catch (err) {
     const fetchErr = err;
     switch (fetchErr.status) {
       case 0:
@@ -400,16 +476,7 @@ async function checkConnectivity(hostConfig) {
         status = "unauthorized";
         break;
     }
-  };
-  const method = "get";
-  const options = {
-    hostConfig,
-    timeoutMs: 2e3,
-    noCache: true
-  };
-  const fetchRoot = invokeFetch("", { method, pathTemplate: "", options }).catch(catchFunc);
-  const fetchMe = invokeFetch("", { method, pathTemplate: "/api/v1/users/me", options }).catch(catchFunc);
-  await Promise.all([fetchRoot, fetchMe]);
+  }
   return Promise.resolve(status);
 }
 async function sessionResumeWithRetry(session, hostConfig) {
@@ -449,16 +516,84 @@ function getOrCreateSharedSession(props) {
   sharedSessions[key] = sharedSessions[key] || createSharedSession(props);
   return sharedSessions[key];
 }
+function getExternalSession(externalApp, appSessionProps) {
+  const listeners = /* @__PURE__ */ new Set();
+  const appSession = {
+    _listeners: listeners,
+    getDoc: () => externalApp,
+    onWebSocketEvent: (fn) => () => {
+      appSession._listeners.add(fn);
+      return () => {
+        appSession._listeners.delete(fn);
+      };
+    },
+    resume: () => Promise.resolve(),
+    close: () => Promise.resolve()
+  };
+  const triggerEventListeners = (event) => {
+    for (const fn of globalEventListeners) {
+      fn(event);
+    }
+    for (const fn of appSession._listeners) {
+      fn(event);
+    }
+  };
+  externalApp.then((app) => {
+    app.session.on("opened", (event) => {
+      const wsEvent = {
+        eventType: "opened",
+        ...appSessionProps,
+        ...event
+      };
+      triggerEventListeners(wsEvent);
+    });
+    app.session.on("closed", (event) => {
+      const wsEvent = {
+        eventType: "closed",
+        ...appSessionProps,
+        ...event
+      };
+      triggerEventListeners(wsEvent);
+    });
+    app.session.on("suspended", (event) => {
+      const wsEvent = {
+        eventType: "suspended",
+        ...appSessionProps,
+        ...event
+      };
+      triggerEventListeners(wsEvent);
+    });
+    app.session.on("resuming", (event) => {
+      const wsEvent = {
+        eventType: "resuming",
+        ...appSessionProps,
+        ...event
+      };
+      triggerEventListeners(wsEvent);
+    });
+    app.session.on("resumed", (event) => {
+      const wsEvent = {
+        eventType: "resumed",
+        ...appSessionProps,
+        ...event
+      };
+      triggerEventListeners(wsEvent);
+    });
+  });
+  return appSession;
+}
 
 // src/qix/qix-functions.ts
-async function createSessionApp() {
+async function createSessionApp(ttlSeconds, workloadType) {
   let sharedSession;
   if ((await getPlatform()).isCloud) {
-    sharedSession = await getOrCreateSharedSession({ appId: `SessionApp_${Date.now()}` });
+    sharedSession = await getOrCreateSharedSession({ appId: `SessionApp_${Date.now()}`, ttlSeconds, workloadType });
   } else {
     sharedSession = await getOrCreateSharedSession({
       appId: `%3Ftransient%3D/identity/${Date.now()}`,
-      useSessionApp: true
+      useSessionApp: true,
+      ttlSeconds,
+      workloadType
     });
   }
   let alreadyClosed = false;
@@ -491,13 +626,7 @@ function openAppSession(appIdOrProps) {
   const appSessionId = toGlobalAppSessionId(appSessionProps);
   const externalApp = externalApps[appSessionId];
   if (externalApp) {
-    return {
-      getDoc: () => externalApp,
-      onWebSocketEvent: (fn) => () => {
-      },
-      resume: () => Promise.resolve(),
-      close: () => Promise.resolve()
-    };
+    return getExternalSession(externalApp, appSessionProps);
   }
   const sharedSession = getOrCreateSharedSession(appSessionProps);
   const listeners = /* @__PURE__ */ new Set();
@@ -548,7 +677,7 @@ function useAppHook(react) {
   };
 }
 function addInitialAppAction(openAppSessionProps, action) {
-  addInitialSharedSessionCreationAction(openAppSessionProps, action);
+  return addInitialSharedSessionCreationAction(openAppSessionProps, action);
 }
 function onWebSocketEvent(fn) {
   return globalOnWebSocketEvent(fn);
@@ -575,7 +704,23 @@ var qix = {
   onWebSocketEvent,
   onCombinedWebSocketStateChange,
   resumeSuspendedSessions,
-  resumeOnlyOnReattach
+  resumeOnlyOnReattach,
+  withHostConfig: (hostConfig) => ({
+    addInitialAppAction: (openAppSessionProps, action) => addInitialAppAction(
+      typeof openAppSessionProps === "string" ? { hostConfig, appId: openAppSessionProps } : { hostConfig, ...openAppSessionProps },
+      action
+    ),
+    createSessionApp,
+    openAppSession: (openAppSessionProps) => openAppSession(
+      typeof openAppSessionProps === "string" ? { hostConfig, appId: openAppSessionProps } : { hostConfig, ...openAppSessionProps }
+    ),
+    registerExternalAppSession,
+    useAppHook,
+    onWebSocketEvent,
+    onCombinedWebSocketStateChange,
+    resumeSuspendedSessions,
+    resumeOnlyOnReattach
+  })
 };
 var qix_default = qix;
 export {

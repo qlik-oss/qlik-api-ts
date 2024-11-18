@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
+import './auth-types-PkN9CAF_.js';
 
 type Error = {
     /** The error code is in form of 'RELOADS-xxx'. ranges from 'RELOADS-001' to 'RELOADS-013'.  */
@@ -43,7 +43,7 @@ type Reload = {
     status: Status;
     /** The ID of the tenant who owns the reload. */
     tenantId: string;
-    /** What initiated the reload: hub = one-time reload manually triggered in hub, chronos = time based scheduled reload triggered by chronos, external = reload triggered via external API request, automations = reload triggered in automation, data-refresh = reload triggered by refresh of data. */
+    /** What initiated the reload: hub = one-time reload manually triggered in hub, chronos = time based scheduled reload triggered by chronos, external = reload triggered via external API request, automations = reload triggered in automation, data-refresh = reload triggered by refresh of data, choreographer = reload triggered by choreographer. */
     type: Type;
     /** The ID of the user who created the reload. */
     userId: string;
@@ -70,9 +70,9 @@ type ReloadsLinks = ReloadLinks & {
  */
 type Status = "QUEUED" | "RELOADING" | "CANCELING" | "SUCCEEDED" | "FAILED" | "CANCELED" | "EXCEEDED_LIMIT";
 /**
- * What initiated the reload: hub = one-time reload manually triggered in hub, chronos = time based scheduled reload triggered by chronos, external = reload triggered via external API request, automations = reload triggered in automation, data-refresh = reload triggered by refresh of data.
+ * What initiated the reload: hub = one-time reload manually triggered in hub, chronos = time based scheduled reload triggered by chronos, external = reload triggered via external API request, automations = reload triggered in automation, data-refresh = reload triggered by refresh of data, choreographer = reload triggered by choreographer.
  */
-type Type = "hub" | "external" | "chronos" | "automations" | "data-refresh";
+type Type = "hub" | "external" | "chronos" | "automations" | "data-refresh" | "choreographer";
 /**
  * Finds and returns the reloads that the user has access to.
  *
@@ -95,7 +95,7 @@ declare const getReloads: (query: {
     filter?: string;
     /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
     limit?: number;
-    /** The boolean value used to include the log field or not, default is included, set log=false to exclude the log field. */
+    /** The boolean value used to include the log field or not, set log=true to include the log field. */
     log?: boolean;
     /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
     next?: string;
@@ -132,7 +132,7 @@ type QueueReloadHttpError = {
     status: number;
 };
 /**
- * Finds and returns a reload record
+ * Finds and returns a reload record.
  *
  * @param reloadId The unique identifier of the reload.
  * @throws GetReloadHttpError
@@ -185,7 +185,7 @@ interface ReloadsAPI {
      */
     queueReload: typeof queueReload;
     /**
-     * Finds and returns a reload record
+     * Finds and returns a reload record.
      *
      * @param reloadId The unique identifier of the reload.
      * @throws GetReloadHttpError

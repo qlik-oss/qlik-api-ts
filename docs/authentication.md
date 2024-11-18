@@ -27,7 +27,7 @@ const { data: mySpaces } = spaces.getSpaces();
 console.log(mySpaces);
 ```
 
-A host config can also be passed in to every single api request which then will override any default host config previously set.
+A host config can also be passed in to every single api request which then will override any default host config previously set. This way multiple host configs can be used if needed.
 
 ```ts
 import spaces from "@qlik/api/spaces";
@@ -43,6 +43,35 @@ const { data: mySpaces } = spaces.getSpaces({}, {
 });
 
 console.log(mySpaces);
+```
+
+### Binding an instance of `@qlik/api` to a specific host config
+
+As an alternative to the methods above it is also possible to create an instance of `@qlik/api` bound to a specific host config. This allows users to use several host configs in their solutions and easily separate them by having seperate `@qlik/api` instances.
+
+Example:
+
+```ts
+import { createQlikApi } from "@qlik-trial/qmfe-api";
+
+const api = createQlikApi({
+  authType: "apikey"
+  host: "my-org.region.qlikcloud.com", // a qlikcloud tenant
+  apiKey: "<api-key>",
+});
+
+// "api" now has the full @qlik/api bound to one specific hostconfig
+const { data: mySpaces } = api.spaces.getSpaces();
+
+// create another api with a different auth mechanism
+const apiToOtherTenant = createQlikApi({
+  authType: "oauth2"
+  host: "my-other-tenant.region.qlikcloud.com", // a qlikcloud tenant
+  clientId: "<client-id>",
+});
+
+// "apiToOtherTenant" is now bound to another hostconfig
+const { data: myOtherSpaces } = apiToOtherTenant.spaces.getSpaces();
 ```
 
 ## The Auth Module

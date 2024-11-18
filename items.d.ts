@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
+import './auth-types-PkN9CAF_.js';
 
 type CollectionTypes = "private" | "public" | "publicgoverned";
 type ErrorResponseBody = {
@@ -246,13 +246,13 @@ type Meta = {
  */
 type SpaceTypeEnum = "shared" | "managed" | "personal" | "data";
 /**
- * Finds and returns items that the user has access to.
+ * Lists items that the user has access to.
  *
  * @param query an object with query parameters
  * @throws GetItemsHttpError
  */
 declare const getItems: (query: {
-    /** The collection's unique identifier. */
+    /** The collection's unique identifier. Used to filter for items with a specific tag (collection type `public`), or collection. */
     collectionId?: string;
     /** User's unique identifier. */
     createdByUserId?: string;
@@ -289,8 +289,8 @@ declare const getItems: (query: {
     /** @deprecated
      * Whether or not to return items in a shared space. */
     shared?: boolean;
-    /** The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively. */
-    sort?: "+createdAt" | "-createdAt" | "+name" | "-name" | "+updatedAt" | "-updatedAt";
+    /** The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, recentlyUsed and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively. */
+    sort?: "+createdAt" | "-createdAt" | "+name" | "-name" | "+updatedAt" | "-updatedAt" | "+recentlyUsed" | "-recentlyUsed";
     /** The space's unique identifier (supports \'personal\' as spaceId). */
     spaceId?: string;
     /** The case-sensitive string used to filter items on space type(s). For example '?spaceType=shared,personal'. */
@@ -309,7 +309,7 @@ type GetItemsHttpError = {
     status: number;
 };
 /**
- * Finds and returns the settings for the current tenant.
+ * Finds and returns the items service settings for the current tenant. Currently used to enable or disable usage metrics in the tenant.
  *
  * @throws GetItemsSettingsHttpError
  */
@@ -325,7 +325,7 @@ type GetItemsSettingsHttpError = {
     status: number;
 };
 /**
- * Updates the settings provided in the patch body.
+ * Updates the settings provided in the patch body. Currently used to enable or disable usage metrics in the tenant.
  *
  * @param body an object with the body content
  * @throws PatchItemsSettingsHttpError
@@ -394,7 +394,7 @@ type UpdateItemHttpError = {
     status: number;
 };
 /**
- * Finds and returns the collections of an item. This endpoint does not return the user's favorites collection.
+ * Finds and returns the collections (and tags) of an item. This endpoint does not return the user's favorites collection.
  *
  * @param itemId The item's unique identifier.
  * @param query an object with query parameters
@@ -465,20 +465,20 @@ type GetPublishedItemsHttpError = {
 declare function clearCache(): void;
 interface ItemsAPI {
     /**
-     * Finds and returns items that the user has access to.
+     * Lists items that the user has access to.
      *
      * @param query an object with query parameters
      * @throws GetItemsHttpError
      */
     getItems: typeof getItems;
     /**
-     * Finds and returns the settings for the current tenant.
+     * Finds and returns the items service settings for the current tenant. Currently used to enable or disable usage metrics in the tenant.
      *
      * @throws GetItemsSettingsHttpError
      */
     getItemsSettings: typeof getItemsSettings;
     /**
-     * Updates the settings provided in the patch body.
+     * Updates the settings provided in the patch body. Currently used to enable or disable usage metrics in the tenant.
      *
      * @param body an object with the body content
      * @throws PatchItemsSettingsHttpError
@@ -507,7 +507,7 @@ interface ItemsAPI {
      */
     updateItem: typeof updateItem;
     /**
-     * Finds and returns the collections of an item. This endpoint does not return the user's favorites collection.
+     * Finds and returns the collections (and tags) of an item. This endpoint does not return the user's favorites collection.
      *
      * @param itemId The item's unique identifier.
      * @param query an object with query parameters

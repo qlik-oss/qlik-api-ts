@@ -1,8 +1,8 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
+import './auth-types-PkN9CAF_.js';
 
 /**
- * An array of role references.
+ * An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles.
  */
 type AssignedRoles = {
     /** The unique role identitier */
@@ -12,7 +12,7 @@ type AssignedRoles = {
     /** The role name */
     readonly name: string;
     /** The type of role */
-    readonly type: "default";
+    readonly type: "default" | "custom";
 }[];
 /**
  * An array of role reference identifiers.
@@ -70,14 +70,14 @@ type Filter = {
  * represents a Group document
  */
 type Group = {
-    assignedRoles?: {
-        id: string;
-        readonly level: "admin" | "user";
-        readonly name: string;
-        readonly type: "default";
-    }[];
+    /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */
+    assignedRoles?: AssignedRoles;
     /** The timestamp for when the group record was created. */
     createdAt: string;
+    /** Id of user that created role. */
+    readonly createdBy?: string;
+    /** A description of a custom group. */
+    description?: string;
     /** The unique identifier for the group */
     readonly id: string;
     /** The timestamp for when the group record was last updated. */
@@ -91,10 +91,14 @@ type Group = {
     };
     /** The name of the group. */
     name: string;
+    /** The type of provider for the group. */
+    providerType?: "idp" | "custom";
     /** The state of the group. */
     status: "active" | "disabled";
     /** The tenant identifier associated with the given group */
     tenantId: string;
+    /** Id of user that last updated this role. */
+    readonly updatedBy?: string;
 };
 /**
  * A JSON Patch document.
@@ -102,10 +106,10 @@ type Group = {
 type GroupPatch = {
     /** The operation to be performed. Currently "replace" is the only supported operation. */
     op: "replace";
-    /** Attribute name of a field of the Groups entity. */
-    path: "assignedRoles";
-    /** The roles to assign to the group (limit of 100 roles per group). */
-    value: AssignedRolesRefIDs | AssignedRolesRefNames;
+    /** Attribute name of a field of the Groups entity. "Name" and "description" is only available for custom groups. */
+    path: "assignedRoles" | "name" | "description";
+    /** The roles to assign to the group (limit of 100 roles per group) or the new custom group name or description. */
+    value: AssignedRolesRefIDs | AssignedRolesRefNames | string;
 };
 /**
  * An array of JSON Patches for a group.
@@ -114,8 +118,12 @@ type GroupPatchSchema = GroupPatch[];
 type GroupPostSchema = {
     /** The roles to assign to the group (limit of 100 roles per group). */
     assignedRoles?: AssignedRolesRefIDs | AssignedRolesRefNames;
+    /** The description of the group. */
+    description?: string;
     /** The name of the group (maximum length of 256 characters). */
     name: string;
+    /** The type of group provider. Must be "idp" or "custom". Defaults to "idp" if not provided. */
+    providerType?: "idp" | "custom";
     /** The status of the created group within the tenant. Defaults to active if empty. */
     status?: "active";
 };
@@ -136,7 +144,7 @@ type GroupSettings = {
     syncIdpGroups: boolean;
     systemGroups?: {
         "000000000000000000000001"?: {
-            /** An array of role references. */
+            /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */
             assignedRoles?: AssignedRoles;
             /** The timestamp for when the Everyone group was created. */
             createdAt?: string;
@@ -226,7 +234,7 @@ type GetGroupsHttpError = {
     status: number;
 };
 /**
- * Creates a group. The maximum number of groups a tenant can have is 10,000.
+ * Creates a new group. The maximum number of groups a tenant can have is 10,000. Group names are case-sensitive, and must be unique.
  *
  * @param body an object with the body content
  * @throws CreateGroupHttpError
@@ -272,7 +280,7 @@ type FilterGroupsHttpError = {
     status: number;
 };
 /**
- * Returns the active tenant's group settings.
+ * Returns the tenant's group settings, such as whether automatic group creation and IdP group synchronization are enabled or disabled, and roles assigned to system groups.
  *
  * @throws GetGroupsSettingsHttpError
  */
@@ -288,7 +296,7 @@ type GetGroupsSettingsHttpError = {
     status: number;
 };
 /**
- * Update group settings
+ * Updates the tenant's group settings, such as whether automatic group creation and IdP group synchronization are enabled or disabled, and roles assigned to system groups.
  *
  * @param body an object with the body content
  * @throws PatchGroupsSettingsHttpError
@@ -305,7 +313,7 @@ type PatchGroupsSettingsHttpError = {
     status: number;
 };
 /**
- * Delete group by id
+ * Deletes the requested group.
  *
  * @param groupId The ID of the group to delete.
  * @throws DeleteGroupHttpError
@@ -339,7 +347,7 @@ type GetGroupHttpError = {
     status: number;
 };
 /**
- * Update group by id
+ * Updates the requested group.
  *
  * @param groupId The ID of the group to update.
  * @param body an object with the body content
@@ -369,7 +377,7 @@ interface GroupsAPI {
      */
     getGroups: typeof getGroups;
     /**
-     * Creates a group. The maximum number of groups a tenant can have is 10,000.
+     * Creates a new group. The maximum number of groups a tenant can have is 10,000. Group names are case-sensitive, and must be unique.
      *
      * @param body an object with the body content
      * @throws CreateGroupHttpError
@@ -384,20 +392,20 @@ interface GroupsAPI {
      */
     filterGroups: typeof filterGroups;
     /**
-     * Returns the active tenant's group settings.
+     * Returns the tenant's group settings, such as whether automatic group creation and IdP group synchronization are enabled or disabled, and roles assigned to system groups.
      *
      * @throws GetGroupsSettingsHttpError
      */
     getGroupsSettings: typeof getGroupsSettings;
     /**
-     * Update group settings
+     * Updates the tenant's group settings, such as whether automatic group creation and IdP group synchronization are enabled or disabled, and roles assigned to system groups.
      *
      * @param body an object with the body content
      * @throws PatchGroupsSettingsHttpError
      */
     patchGroupsSettings: typeof patchGroupsSettings;
     /**
-     * Delete group by id
+     * Deletes the requested group.
      *
      * @param groupId The ID of the group to delete.
      * @throws DeleteGroupHttpError
@@ -411,7 +419,7 @@ interface GroupsAPI {
      */
     getGroup: typeof getGroup;
     /**
-     * Update group by id
+     * Updates the requested group.
      *
      * @param groupId The ID of the group to update.
      * @param body an object with the body content

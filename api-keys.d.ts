@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
+import './auth-types-PkN9CAF_.js';
 
 type ApiKey = {
     /** When the API key was created. */
@@ -16,7 +16,7 @@ type ApiKey = {
     readonly lastUpdated?: string;
     /** The status of the API key. */
     status: "active" | "expired" | "revoked";
-    /** The ID of the subject for the API key. For SCIM the format is `SCIM\\{{IDP-ID}}`, where `{{IDP-ID}}` is the ID of the IDP in Qlik. */
+    /** The ID of the subject for the API key. For SCIM the format is `SCIM\\{{IDP-ID}}`, where `{{IDP-ID}}` is the ID of the IDP in Qlik. For users, use their user ID, e.g. `64ef645a3b7009d55dee5a2b`. */
     sub: string;
     /** Type of the subject. For SCIM, it should be `externalClient`. */
     subType: "user" | "externalClient";
@@ -26,11 +26,11 @@ type ApiKey = {
 type ApiKeyBody = {
     /** Text that describes the API key. */
     description: string;
-    /** The expiry of the API key, in ISO8601 duration format. */
+    /** The expiry of the API key, in ISO8601 duration format. For example, `P7D` sets expiry after 7 days. If not provided, defaults to the maximum API key or SCIM key expiry configured in the tenant. */
     expiry?: string;
-    /** The ID of the subject for the API key. For SCIM the format is `SCIM\\{{IDP-ID}}`, where `{{IDP-ID}}` is the ID of the IDP in Qlik. */
+    /** The ID of the subject for the API key. For SCIM the format is `SCIM\\{{IDP-ID}}`, where `{{IDP-ID}}` is the ID of the IDP in Qlik. When creating an API key for a user, this is their user ID, e.g. `64ef645a3b7009d55dee5a2b`, and will default to the requesting user if not provided. User must be assigned the `Developer` role. */
     sub?: string;
-    /** Type of the subject. For SCIM, it should be `externalClient`. */
+    /** Type of the subject. For SCIM, it should be `externalClient`. If not specified, defaults to `user`. */
     subType?: "user" | "externalClient";
 };
 /**
@@ -40,7 +40,7 @@ type ApiKeyConfigPatch = {
     /** The operation to be performed. */
     op: "replace";
     /** The path for the given resource field to patch. */
-    path: "/api_keys_enabled" | "/max_api_key_expiry" | "/max_keys_per_user";
+    path: "/api_keys_enabled" | "/max_api_key_expiry" | "/max_keys_per_user" | "/scim_externalClient_expiry";
     /** The value to be used for this operation. */
     value: unknown;
 };
@@ -80,12 +80,14 @@ type ApiKeyWithToken = {
     token: string;
 };
 type ApiKeysConfig = {
-    /** Enables or disables API key functionality for the specified tenant. */
+    /** Enables or disables user API key functionality for the specified tenant. */
     api_keys_enabled?: boolean;
-    /** The maximum lifetime, in ISO8601 duration format, for which an API key can be issued for the specified tenant. */
+    /** The maximum lifetime, in ISO8601 duration format, for which an API key can be issued for the specified tenant, e.g. `P7D` for 7 days. */
     max_api_key_expiry?: string;
     /** The maximum number of active API keys that any user can create for the specified tenant. */
     max_keys_per_user?: number;
+    /** The expiry of the scim `externalClient` token in ISO8601 duration format, e.g. `P365D` for 365 days. Used during the creation of an `externalClient` API key for configuring a SCIM compatible Identity Provider. */
+    scim_externalClient_expiry?: string;
 };
 type ApiKeysConfigPatchSchema = ApiKeyConfigPatch[];
 type ApiKeysPatchSchema = ApiKeyPatch[];
@@ -119,6 +121,10 @@ type Link = {
     /** The URL for the link. */
     href: string;
 };
+type RetryAfterHeader = {
+    /** The amount of seconds to wait before retrying the request. */
+    "retry-after"?: number;
+};
 type ApiKeyPage = {
     /** Properties of API keys in a given tenant. */
     data: ApiKey[];
@@ -130,7 +136,7 @@ type ApiKeyPage = {
     };
 };
 /**
- * Lists API keys for a given tenant ID.
+ * Lists API keys for the tenant. To list API keys owned by other users, requesting user must be assigned the `TenantAdmin` role.
  *
  * @param query an object with query parameters
  * @throws GetApiKeysHttpError
@@ -148,7 +154,7 @@ declare const getApiKeys: (query: {
     startingAfter?: string;
     /** The status of the API key. */
     status?: "active" | "expired" | "revoked";
-    /** The ID of the subject. */
+    /** The ID of the subject. For SCIM the format is `SCIM\\{{IDP-ID}}`, where `{{IDP-ID}}` is the ID of the IDP in Qlik. For users, use their user ID, e.g. `64ef645a3b7009d55dee5a2b`. */
     sub?: string;
 }, options?: ApiCallOptions) => Promise<GetApiKeysHttpResponse>;
 type GetApiKeysHttpResponse = {
@@ -164,7 +170,8 @@ type GetApiKeysHttpError = {
     status: number;
 };
 /**
- * Creates an API key resource.
+ * Creates an API key, either for a user, or for configuring SCIM for a compatible Identity Provider.
+ * Sending `sub` and `subType` is required only for creating SCIM keys.
  *
  * @param body an object with the body content
  * @throws CreateApiKeyHttpError
@@ -181,9 +188,9 @@ type CreateApiKeyHttpError = {
     status: number;
 };
 /**
- * Gets the API keys configuration for a given tenant ID.
+ * Retrieves the API key configuration for a tenant.
  *
- * @param tenantId The tenant ID of the API keys configuration to be retrieved.
+ * @param tenantId The tenant ID from which you wish to retrieve the API key configuration.
  * @throws GetApiKeysConfigHttpError
  */
 declare const getApiKeysConfig: (tenantId: string, options?: ApiCallOptions) => Promise<GetApiKeysConfigHttpResponse>;
@@ -216,9 +223,9 @@ type PatchApiKeysConfigHttpError = {
     status: number;
 };
 /**
- * When the owner of the API key sends the request, the key will be removed. When a TenantAdmin sends the request, the key will be revoked.
+ * Deletes or revokes an API key for a given API key ID. When the owner of the API key sends the request, the key will be deleted and removed from the tenant. When a user assigned the `TenantAdmin` role sends the request, the key will be disabled and marked as revoked.
  *
- * @param id The ID of the API key resource to be retrieved.
+ * @param id The ID of the API key to be retrieved.
  * @throws DeleteApiKeyHttpError
  */
 declare const deleteApiKey: (id: string, options?: ApiCallOptions) => Promise<DeleteApiKeyHttpResponse>;
@@ -233,9 +240,9 @@ type DeleteApiKeyHttpError = {
     status: number;
 };
 /**
- * Gets the API key for a given ID.
+ * Returns the API key for a given API key ID.
  *
- * @param id The ID of the API key resource to be retrieved.
+ * @param id The ID of the API key to be retrieved.
  * @throws GetApiKeyHttpError
  */
 declare const getApiKey: (id: string, options?: ApiCallOptions) => Promise<GetApiKeyHttpResponse>;
@@ -250,7 +257,7 @@ type GetApiKeyHttpError = {
     status: number;
 };
 /**
- * Updates an API key for a given ID.
+ * Updates an API key description for a given API key ID.
  *
  * @param id The ID of the API key resource to be updated.
  * @param body an object with the body content
@@ -273,23 +280,24 @@ type PatchApiKeyHttpError = {
 declare function clearCache(): void;
 interface ApiKeysAPI {
     /**
-     * Lists API keys for a given tenant ID.
+     * Lists API keys for the tenant. To list API keys owned by other users, requesting user must be assigned the `TenantAdmin` role.
      *
      * @param query an object with query parameters
      * @throws GetApiKeysHttpError
      */
     getApiKeys: typeof getApiKeys;
     /**
-     * Creates an API key resource.
+     * Creates an API key, either for a user, or for configuring SCIM for a compatible Identity Provider.
+     * Sending `sub` and `subType` is required only for creating SCIM keys.
      *
      * @param body an object with the body content
      * @throws CreateApiKeyHttpError
      */
     createApiKey: typeof createApiKey;
     /**
-     * Gets the API keys configuration for a given tenant ID.
+     * Retrieves the API key configuration for a tenant.
      *
-     * @param tenantId The tenant ID of the API keys configuration to be retrieved.
+     * @param tenantId The tenant ID from which you wish to retrieve the API key configuration.
      * @throws GetApiKeysConfigHttpError
      */
     getApiKeysConfig: typeof getApiKeysConfig;
@@ -302,21 +310,21 @@ interface ApiKeysAPI {
      */
     patchApiKeysConfig: typeof patchApiKeysConfig;
     /**
-     * When the owner of the API key sends the request, the key will be removed. When a TenantAdmin sends the request, the key will be revoked.
+     * Deletes or revokes an API key for a given API key ID. When the owner of the API key sends the request, the key will be deleted and removed from the tenant. When a user assigned the `TenantAdmin` role sends the request, the key will be disabled and marked as revoked.
      *
-     * @param id The ID of the API key resource to be retrieved.
+     * @param id The ID of the API key to be retrieved.
      * @throws DeleteApiKeyHttpError
      */
     deleteApiKey: typeof deleteApiKey;
     /**
-     * Gets the API key for a given ID.
+     * Returns the API key for a given API key ID.
      *
-     * @param id The ID of the API key resource to be retrieved.
+     * @param id The ID of the API key to be retrieved.
      * @throws GetApiKeyHttpError
      */
     getApiKey: typeof getApiKey;
     /**
-     * Updates an API key for a given ID.
+     * Updates an API key description for a given API key ID.
      *
      * @param id The ID of the API key resource to be updated.
      * @param body an object with the body content
@@ -333,4 +341,4 @@ interface ApiKeysAPI {
  */
 declare const apiKeysExport: ApiKeysAPI;
 
-export { type ApiKey, type ApiKeyBody, type ApiKeyConfigPatch, type ApiKeyPage, type ApiKeyPatch, type ApiKeyWithToken, type ApiKeysAPI, type ApiKeysConfig, type ApiKeysConfigPatchSchema, type ApiKeysPatchSchema, type CreateApiKeyHttpError, type CreateApiKeyHttpResponse, type DeleteApiKeyHttpError, type DeleteApiKeyHttpResponse, type Error, type Errors, type GetApiKeyHttpError, type GetApiKeyHttpResponse, type GetApiKeysConfigHttpError, type GetApiKeysConfigHttpResponse, type GetApiKeysHttpError, type GetApiKeysHttpResponse, type Link, type PatchApiKeyHttpError, type PatchApiKeyHttpResponse, type PatchApiKeysConfigHttpError, type PatchApiKeysConfigHttpResponse, clearCache, createApiKey, apiKeysExport as default, deleteApiKey, getApiKey, getApiKeys, getApiKeysConfig, patchApiKey, patchApiKeysConfig };
+export { type ApiKey, type ApiKeyBody, type ApiKeyConfigPatch, type ApiKeyPage, type ApiKeyPatch, type ApiKeyWithToken, type ApiKeysAPI, type ApiKeysConfig, type ApiKeysConfigPatchSchema, type ApiKeysPatchSchema, type CreateApiKeyHttpError, type CreateApiKeyHttpResponse, type DeleteApiKeyHttpError, type DeleteApiKeyHttpResponse, type Error, type Errors, type GetApiKeyHttpError, type GetApiKeyHttpResponse, type GetApiKeysConfigHttpError, type GetApiKeysConfigHttpResponse, type GetApiKeysHttpError, type GetApiKeysHttpResponse, type Link, type PatchApiKeyHttpError, type PatchApiKeyHttpResponse, type PatchApiKeysConfigHttpError, type PatchApiKeysConfigHttpResponse, type RetryAfterHeader, clearCache, createApiKey, apiKeysExport as default, deleteApiKey, getApiKey, getApiKeys, getApiKeysConfig, patchApiKey, patchApiKeysConfig };

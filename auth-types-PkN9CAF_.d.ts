@@ -82,6 +82,7 @@ interface ImplicitQlikAuthModules {
     apikey: object;
     oauth2: object;
     cookie: object;
+    anonymous: object;
 }
 type QlikAuthModuleConfigUnion<K extends keyof QlikAuthModules> = (K extends keyof ImplicitQlikAuthModules ? {
     authType?: K;
@@ -97,6 +98,9 @@ type HostConfigCommon = {
      * Optional parameter that can be used to point to a Qlik Cloud tenant domain from which the embed runtime should be loaded. If omitted the host parameter will be used.
      */
     embedRuntimeUrl?: string;
+    onAuthFailed?: (props: {
+        message: string;
+    }) => unknown;
 };
 
 export type { AuthType as A, Credentials as C, GetRestCallAuthParamsProps as G, HostConfig as H, RestCallAuthParams as R, WebSocketAuthParams as W, AuthModule as a, GetWebSocketAuthParamsProps as b, GetWebResourceAuthParamsProps as c, WebResourceAuthParams as d, GetRemoteAuthDataProps as e, HandleAuthenticationErrorProps as f, AuthenticationErrorAction as g };

@@ -3,8 +3,11 @@ import {
   getRestCallAuthParams,
   getWebSocketAuthParams,
   toValidWebsocketLocationUrl
-} from "./KSB5ROQL.js";
-import "./2ZQ3ZX7F.js";
+} from "./I5UOE4ZZ.js";
+import "./7BDAXGID.js";
+import {
+  isNode
+} from "./2ZQ3ZX7F.js";
 
 // src/qix/session/enigma-session.ts
 import enigma from "enigma.js";
@@ -9569,8 +9572,7 @@ var mixin4 = {
     getOrCreateSessionObject(props) {
       const app = this;
       const id = props.qInfo?.qId;
-      if (!id)
-        throw new Error("Invalid list definition. No qId defined");
+      if (!id) throw new Error("Invalid list definition. No qId defined");
       if (!app._listCache[id]) {
         if (app.session.sessionState === "SESSION_ATTACHED") {
           app._listCache[id] = app.getObject(id).catch(() => app.createSessionObject(props));
@@ -9596,8 +9598,7 @@ var mixin4 = {
         outKey = outKey.replace(/Def$/g, "");
       }
       const id = listDef.qInfo?.qId;
-      if (!id)
-        throw new Error("Invalid list definition. No qId defined");
+      if (!id) throw new Error("Invalid list definition. No qId defined");
       if (!app._listCache[id]) {
         app.getOrCreateSessionObject(listDef).then((obj) => {
           const getLayout = obj.getLayout.bind(obj);
@@ -9746,7 +9747,6 @@ var mixin6 = {
     createBookmark(_createBookmark, props) {
       return _createBookmark(
         merge2(
-          {},
           {
             qInfo: {
               qType: "bookmark"
@@ -9764,7 +9764,6 @@ var mixin6 = {
     createBookmarkEx(_createBookmarkEx, props, patchObjs) {
       return _createBookmarkEx(
         merge2(
-          true,
           {
             qInfo: {
               qType: "bookmark"
@@ -10366,62 +10365,71 @@ async function createEnigmaSession({
   appId,
   identity,
   hostConfig,
-  withoutData = false,
-  useReloadEngine = false
+  useReloadEngine = false,
+  ttlSeconds,
+  workloadType
 }) {
-  let createSocketMethod;
-  let url;
+  let createSocketBuilder;
   const locationUrl = toValidWebsocketLocationUrl(hostConfig);
   const WS = (await import("ws")).default;
-  const isNodeEnvironment = typeof window === "undefined";
+  const isNodeEnvironment = isNode();
+  const ttlPart = ttlSeconds !== void 0 && ttlSeconds >= 0 ? `/ttl/${ttlSeconds}` : "";
   if (hostConfig.pfx == null) {
     const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
     const identityPart = identity ? `/identity/${identity}` : "";
-    const reloadEnginePart = useReloadEngine ? "&workloadType=interactive-reload" : "";
-    url = `${locationUrl}/app/${appId}${identityPart}?reloadUri=${reloadUri}${reloadEnginePart}`.replace(
+    const workloadTypePart = useReloadEngine ? "&workloadType=interactive-reload" : workloadType ? `&workloadType=${workloadType}` : "";
+    const baseUrl = `${locationUrl}/app/${appId}${identityPart}${ttlPart}?reloadUri=${reloadUri}${workloadTypePart}`.replace(
         /^http/,
         "ws"
     );
     if (isNodeEnvironment) {
-      const {headers, queryParams} = await getRestCallAuthParams({hostConfig, method: "POST"});
-      Object.entries(queryParams).forEach(([key, value]) => {
-        url = `${url}&${key}=${value}`;
-      });
-      createSocketMethod = (socketUrl) => new WS(socketUrl, void 0, {
-        headers
-      });
+      createSocketBuilder = async () => {
+        let url = baseUrl;
+        const {headers, queryParams} = await getRestCallAuthParams({hostConfig, method: "POST"});
+        Object.entries(queryParams).forEach(([key, value]) => {
+          url = `${url}&${key}=${value}`;
+        });
+        return (socketUrl) => new WS(socketUrl, void 0, {
+          headers
+        });
+      };
     } else {
-      const {queryParams} = await getWebSocketAuthParams({hostConfig});
-      Object.entries(queryParams).forEach(([key, value]) => {
-        url = `${url}&${key}=${value}`;
-      });
-      createSocketMethod = (socketUrl) => new WebSocket(socketUrl);
+      createSocketBuilder = async () => {
+        let url =baseUrl;
+        const { queryParams } = await getWebSocketAuthParams({ hostConfig });
+        Object.entries(queryParams).forEach(([key, value]) => {
+          url = `${url}&${key}=${value}`;
+        });
+        return (socketUrl) => new WebSocket(url);
+      };
     }
-  } else if (isNodeEnvironment){
-      const locationUrl = toValidWebsocketLocationUrl(hostConfig);
+  } else if (isNodeEnvironment) {
+    const baseUrl = `${locationUrl}/app/engineData/${appId}${ttlPart}`;
+    createSocketBuilder async () => {
       const pfx = hostConfig.pfx;
       const passphrase = hostConfig.passphrase;
       const {headers, queryParams} = await getRestCallAuthParams({hostConfig});
-      url = `${locationUrl}/app/engineData/${appId}`;
+      let url = baseUrl;
       Object.entries(queryParams).forEach(([key, value], index) => {
-          if (index === 0) {
-              url = `${url}?${key}=${value}`;
-          } else {
-              url = `${url}&${key}=${value}`;
-          }
+        if (index === 0) {
+          url = `${url}?${key}=${value}`;
+        } else {
+          url = `${url}&${key}=${value}`;
+        }
       });
-      createSocketMethod = (socketUrl) => new WS(socketUrl, void 0, {
-          headers,
-          pfx,
-          passphrase,
+      return (socketUrl) => new WS(socketUrl, void 0, {
+        headers,
+        pfx,
+        passphrase,
       });
+    };
   }
-  return enigma.create({
+  const session = enigma.create({
     schema: engine_api_default,
     mixins: mixins5,
-    url,
+    url: baseUrl,
     suspendOnClose: !useReloadEngine,
-    createSocket: createSocketMethod,
+    createSocket: await createSocketBuilder(),
     requestInterceptors: [somethingWithEmptyMethodsRequestInterceptor],
     responseInterceptors: [
       retryAbortedErrorResponseInterceptor,
@@ -10429,6 +10437,13 @@ async function createEnigmaSession({
       somethingWithErrorPopupsResponnseInterceptor
     ]
   });
+  const originalResume = session.resume.bind(session);
+  const resume = async (onlyIfAttached) => {
+    session.rpc.createSocket = await createSocketBuilder();
+    await originalResume(onlyIfAttached);
+  };
+  session.resume = resume;
+  return session;
 }
 export {
   createEnigmaSession

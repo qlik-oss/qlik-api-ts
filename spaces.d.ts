@@ -1,10 +1,10 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
+import './auth-types-PkN9CAF_.js';
 
 /**
- * The supported actions for user-created spaces like Shared or Managed spaces.
+ * The supported actions for user-created spaces.
  */
-type ActionName = "create" | "read" | "update" | "delete" | "publish";
+type ActionName = "change_owner" | "create" | "read" | "update" | "delete" | "publish";
 type Assignment = {
     /** The userId or groupId based on the type. */
     assigneeId: string;
@@ -33,7 +33,7 @@ type Assignment = {
 type AssignmentCreate = {
     /** The userId or groupId based on the type. */
     assigneeId: string;
-    /** The roles assigned to the assigneeId. */
+    /** The roles assigned to the assigneeId. For the full list of roles assignable in this space type, call `GET /spaces/{spaceId}` and inspect the `meta.assignableRoles` object. */
     roles: RoleType[];
     /** The type of assignment such as user or group */
     type: AssignmentType;
@@ -43,7 +43,7 @@ type AssignmentCreate = {
  */
 type AssignmentType = "user" | "group";
 type AssignmentUpdate = {
-    /** The roles assigned to the assigneeId. */
+    /** The roles assigned to the assigneeId. For the full list of roles assignable in this space type, call `GET /spaces/{spaceId}` and inspect the `meta.assignableRoles` object. */
     roles?: RoleType[];
 };
 type Assignments = {
@@ -111,9 +111,9 @@ type Link = {
  * Supported roles by space type:
  * - Shared: codeveloper, consumer, dataconsumer, facilitator, producer
  * - Managed: consumer, contributor, dataconsumer, facilitator, publisher, basicconsumer
- * - Data: consumer, dataconsumer, facilitator, operator, producer, publisher
+ * - Data: consumer, dataconsumer, datapreview, facilitator, operator, producer, publisher
  */
-type RoleType = "consumer" | "contributor" | "dataconsumer" | "facilitator" | "operator" | "producer" | "publisher" | "basicconsumer" | "codeveloper";
+type RoleType = "consumer" | "contributor" | "dataconsumer" | "datapreview" | "facilitator" | "operator" | "producer" | "publisher" | "basicconsumer" | "codeveloper";
 /**
  * The supported roles for Shared spaces.
  */
@@ -249,7 +249,7 @@ type GetSpacesHttpError = {
     status: number;
 };
 /**
- * Creates a space.
+ * Creates a space. Spaces names must be unique. Spaces of type `data` should only be used for Qlik Talend Data Integration projects.
  *
  * @param body an object with the body content
  * @throws CreateSpaceHttpError
@@ -266,7 +266,7 @@ type CreateSpaceHttpError = {
     status: number;
 };
 /**
- * Gets a list of distinct space types.
+ * Gets a list of distinct space types available for use in the tenant.
  *
  * @throws GetSpaceTypesHttpError
  */
@@ -316,7 +316,7 @@ type GetSpaceHttpError = {
     status: number;
 };
 /**
- * Patches (updates) a space (partially).
+ * Updates one or more properties of a space. To update all properties at once, use `PUT /spaces/{spaceId}`.
  *
  * @param spaceId The ID of the space to update.
  * @param body an object with the body content
@@ -334,7 +334,7 @@ type PatchSpaceHttpError = {
     status: number;
 };
 /**
- * Updates a space.
+ * Updates a space. To update specific properties, use `PATCH /spaces/{spaceId}`.
  *
  * @param spaceId The ID of the space to update.
  * @param body an object with the body content
@@ -352,13 +352,15 @@ type UpdateSpaceHttpError = {
     status: number;
 };
 /**
- * Retrieves the assignments of the space matching the query.
+ * Retrieves the assignments of the space matching the query. Each assignment represents one user or group and their corresponding roles in the space. Assignments are not shown for the owner of a space, who receive all `assignableRoles` by default.
  *
  * @param spaceId The ID of the space of the assignment.
  * @param query an object with query parameters
  * @throws GetSpaceAssignmentsHttpError
  */
 declare const getSpaceAssignments: (spaceId: string, query: {
+    /** Filters assignment for a specific assigneeid. */
+    assigneeId?: string;
     /** Maximum number of assignments to return. */
     limit?: number;
     /** The next page cursor. Next links make use of this. */
@@ -381,7 +383,7 @@ type GetSpaceAssignmentsHttpError = {
     status: number;
 };
 /**
- * Creates an assignment.
+ * Creates an assignment for a user or group (assignee) to a space with the specified roles. Assignments are not required for space owners, who receive all `assignableRoles` by default. Only one assignment can exist per space, per user or group.
  *
  * @param spaceId The ID of the space of the assignment.
  * @param body an object with the body content
@@ -417,7 +419,7 @@ type DeleteSpaceAssignmentHttpError = {
     status: number;
 };
 /**
- * Retrieves a single assignment by ID.
+ * Retrieves a single assignment by assignment ID. Use `GET /spaces/{spaceId}/assignments` to list all users and groups assigned to the space and their assignment ID.
  *
  * @param spaceId The ID of the space of the assignment.
  * @param assignmentId The ID of the assignment to retrieve.
@@ -435,7 +437,7 @@ type GetSpaceAssignmentHttpError = {
     status: number;
 };
 /**
- * Updates a single assignment by ID. The complete list of roles must be provided.
+ * Updates a single assignment by assignment ID. Use `GET /spaces/{spaceId}/assignments` to list all users and groups assigned to the space and their assignment ID. The complete list of roles must be provided.
  *
  * @param spaceId The ID of the space of the assignment.
  * @param assignmentId The ID of the assignment to update.
@@ -466,14 +468,14 @@ interface SpacesAPI {
      */
     getSpaces: typeof getSpaces;
     /**
-     * Creates a space.
+     * Creates a space. Spaces names must be unique. Spaces of type `data` should only be used for Qlik Talend Data Integration projects.
      *
      * @param body an object with the body content
      * @throws CreateSpaceHttpError
      */
     createSpace: typeof createSpace;
     /**
-     * Gets a list of distinct space types.
+     * Gets a list of distinct space types available for use in the tenant.
      *
      * @throws GetSpaceTypesHttpError
      */
@@ -493,7 +495,7 @@ interface SpacesAPI {
      */
     getSpace: typeof getSpace;
     /**
-     * Patches (updates) a space (partially).
+     * Updates one or more properties of a space. To update all properties at once, use `PUT /spaces/{spaceId}`.
      *
      * @param spaceId The ID of the space to update.
      * @param body an object with the body content
@@ -501,7 +503,7 @@ interface SpacesAPI {
      */
     patchSpace: typeof patchSpace;
     /**
-     * Updates a space.
+     * Updates a space. To update specific properties, use `PATCH /spaces/{spaceId}`.
      *
      * @param spaceId The ID of the space to update.
      * @param body an object with the body content
@@ -509,7 +511,7 @@ interface SpacesAPI {
      */
     updateSpace: typeof updateSpace;
     /**
-     * Retrieves the assignments of the space matching the query.
+     * Retrieves the assignments of the space matching the query. Each assignment represents one user or group and their corresponding roles in the space. Assignments are not shown for the owner of a space, who receive all `assignableRoles` by default.
      *
      * @param spaceId The ID of the space of the assignment.
      * @param query an object with query parameters
@@ -517,7 +519,7 @@ interface SpacesAPI {
      */
     getSpaceAssignments: typeof getSpaceAssignments;
     /**
-     * Creates an assignment.
+     * Creates an assignment for a user or group (assignee) to a space with the specified roles. Assignments are not required for space owners, who receive all `assignableRoles` by default. Only one assignment can exist per space, per user or group.
      *
      * @param spaceId The ID of the space of the assignment.
      * @param body an object with the body content
@@ -533,7 +535,7 @@ interface SpacesAPI {
      */
     deleteSpaceAssignment: typeof deleteSpaceAssignment;
     /**
-     * Retrieves a single assignment by ID.
+     * Retrieves a single assignment by assignment ID. Use `GET /spaces/{spaceId}/assignments` to list all users and groups assigned to the space and their assignment ID.
      *
      * @param spaceId The ID of the space of the assignment.
      * @param assignmentId The ID of the assignment to retrieve.
@@ -541,7 +543,7 @@ interface SpacesAPI {
      */
     getSpaceAssignment: typeof getSpaceAssignment;
     /**
-     * Updates a single assignment by ID. The complete list of roles must be provided.
+     * Updates a single assignment by assignment ID. Use `GET /spaces/{spaceId}/assignments` to list all users and groups assigned to the space and their assignment ID. The complete list of roles must be provided.
      *
      * @param spaceId The ID of the space of the assignment.
      * @param assignmentId The ID of the assignment to update.

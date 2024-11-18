@@ -1,5 +1,6 @@
-import { openAppSession } from './qix.js';
-import { registerAuthModule, setDefaultHostConfig, getAccessToken } from './auth.js';
+import { InterceptorsAPI, createInterceptors } from './interceptors.js';
+import { registerAuthModule, setDefaultHostConfig, getAccessToken, AuthAPI } from './auth.js';
+import { QixAPI } from './qix.js';
 import { ApiKeysAPI } from './api-keys.js';
 import { AppsAPI } from './apps.js';
 import { AuditsAPI } from './audits.js';
@@ -31,8 +32,8 @@ import { UsersAPI } from './users.js';
 import { WebIntegrationsAPI } from './web-integrations.js';
 import { WebNotificationsAPI } from './web-notifications.js';
 import { WebhooksAPI } from './webhooks.js';
-import './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { H as HostConfig } from './auth-types-PkN9CAF_.js';
+import './invoke-fetch-types-BLrpeZOL.js';
 
 declare const apiKeys: ApiKeysAPI;
 declare const apps: AppsAPI;
@@ -54,10 +55,13 @@ declare const extensions: ExtensionsAPI;
 declare const glossaries: GlossariesAPI;
 declare const groups: GroupsAPI;
 declare const identityProviders: IdentityProvidersAPI;
+declare const interceptors: InterceptorsAPI & {
+    createInterceptors: typeof createInterceptors;
+};
 declare const items: ItemsAPI;
 declare const licenses: LicensesAPI;
-declare const qix: {
-    openAppSession: typeof openAppSession;
+declare const qix: QixAPI & {
+    withHostConfig: (hostConfig: HostConfig | undefined) => QixAPI;
 };
 declare const quotas: QuotasAPI;
 declare const reloadTasks: ReloadTasksAPI;
@@ -75,73 +79,83 @@ declare const webNotifications: WebNotificationsAPI;
 declare const webhooks: WebhooksAPI;
 interface QlikAPI {
     /** Functions for the apiKeys api */
-    apiKeys: typeof apiKeys;
+    apiKeys: ApiKeysAPI;
     /** Functions for the apps api */
-    apps: typeof apps;
+    apps: AppsAPI;
     /** Functions for the audits api */
-    audits: typeof audits;
+    audits: AuditsAPI;
     /** Functions for the auth api */
-    auth: typeof auth;
+    auth: AuthAPI;
     /** Functions for the automations api */
-    automations: typeof automations;
+    automations: AutomationsAPI;
     /** Functions for the brands api */
-    brands: typeof brands;
+    brands: BrandsAPI;
     /** Functions for the collections api */
-    collections: typeof collections;
+    collections: CollectionsAPI;
     /** Functions for the cspOrigins api */
-    cspOrigins: typeof cspOrigins;
+    cspOrigins: CspOriginsAPI;
     /** Functions for the dataAssets api */
-    dataAssets: typeof dataAssets;
+    dataAssets: DataAssetsAPI;
     /** Functions for the dataConnections api */
-    dataConnections: typeof dataConnections;
+    dataConnections: DataConnectionsAPI;
     /** Functions for the dataCredentials api */
-    dataCredentials: typeof dataCredentials;
+    dataCredentials: DataCredentialsAPI;
     /** Functions for the dataFiles api */
-    dataFiles: typeof dataFiles;
+    dataFiles: DataFilesAPI;
     /** Functions for the extensions api */
-    extensions: typeof extensions;
+    extensions: ExtensionsAPI;
     /** Functions for the glossaries api */
-    glossaries: typeof glossaries;
+    glossaries: GlossariesAPI;
     /** Functions for the groups api */
-    groups: typeof groups;
+    groups: GroupsAPI;
     /** Functions for the identityProviders api */
-    identityProviders: typeof identityProviders;
+    identityProviders: IdentityProvidersAPI;
+    /** Functions for the interceptors api */
+    interceptors: InterceptorsAPI;
     /** Functions for the items api */
-    items: typeof items;
+    items: ItemsAPI;
     /** Functions for the licenses api */
-    licenses: typeof licenses;
+    licenses: LicensesAPI;
     /** Functions for the qix api */
-    qix: typeof qix;
+    qix: QixAPI;
     /** Functions for the quotas api */
-    quotas: typeof quotas;
+    quotas: QuotasAPI;
     /** Functions for the reloadTasks api */
-    reloadTasks: typeof reloadTasks;
+    reloadTasks: ReloadTasksAPI;
     /** Functions for the reloads api */
-    reloads: typeof reloads;
+    reloads: ReloadsAPI;
     /** Functions for the reports api */
-    reports: typeof reports;
+    reports: ReportsAPI;
     /** Functions for the roles api */
-    roles: typeof roles;
+    roles: RolesAPI;
     /** Functions for the spaces api */
-    spaces: typeof spaces;
+    spaces: SpacesAPI;
     /** Functions for the tempContents api */
-    tempContents: typeof tempContents;
+    tempContents: TempContentsAPI;
     /** Functions for the tenants api */
-    tenants: typeof tenants;
+    tenants: TenantsAPI;
     /** Functions for the themes api */
-    themes: typeof themes;
+    themes: ThemesAPI;
     /** Functions for the transports api */
-    transports: typeof transports;
+    transports: TransportsAPI;
     /** Functions for the users api */
-    users: typeof users;
+    users: UsersAPI;
     /** Functions for the webIntegrations api */
-    webIntegrations: typeof webIntegrations;
+    webIntegrations: WebIntegrationsAPI;
     /** Functions for the webNotifications api */
-    webNotifications: typeof webNotifications;
+    webNotifications: WebNotificationsAPI;
     /** Functions for the webhooks api */
-    webhooks: typeof webhooks;
+    webhooks: WebhooksAPI;
 }
+type CreateQlikApiProps = {
+    hostConfig?: HostConfig;
+};
+declare const createQlikApi: (props?: CreateQlikApiProps) => QlikAPI;
 /** Javascript/Typescript bindings to Qlik's platform API's */
-declare const api: QlikAPI;
+declare const api: QlikAPI & {
+    createQlikApi: (props?: {
+        hostConfig?: HostConfig;
+    }) => QlikAPI;
+};
 
-export { type QlikAPI, apiKeys, apps, audits, auth, automations, brands, collections, cspOrigins, dataAssets, dataConnections, dataCredentials, dataFiles, api as default, extensions, glossaries, groups, identityProviders, items, licenses, qix, quotas, reloadTasks, reloads, reports, roles, spaces, tempContents, tenants, themes, transports, users, webIntegrations, webNotifications, webhooks };
+export { type CreateQlikApiProps, type QlikAPI, apiKeys, apps, audits, auth, automations, brands, collections, createQlikApi, cspOrigins, dataAssets, dataConnections, dataCredentials, dataFiles, api as default, extensions, glossaries, groups, identityProviders, interceptors, items, licenses, qix, quotas, reloadTasks, reloads, reports, roles, spaces, tempContents, tenants, themes, transports, users, webIntegrations, webNotifications, webhooks };

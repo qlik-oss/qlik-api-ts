@@ -1,19 +1,30 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
+import './auth-types-PkN9CAF_.js';
 
 /**
  * An array of group references.
  */
 type AssignedGroups = {
-    /** An array of role references. */
+    /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */
     assignedRoles?: AssignedRoles;
     /** The unique group identitier */
     id: string;
     /** The group name */
     readonly name: string;
+    /** The provider type of the group */
+    providerType?: "idp" | "custom";
 }[];
 /**
- * An array of role references.
+ * An array of group reference names and provider type.
+ */
+type AssignedGroupsRefNames = {
+    /** The name of the group */
+    name: string;
+    /** The type of provider for the group. */
+    providerType: "idp" | "custom";
+}[];
+/**
+ * An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles.
  */
 type AssignedRoles = {
     /** The unique role identitier */
@@ -23,24 +34,10 @@ type AssignedRoles = {
     /** The role name */
     readonly name: string;
     /** The type of role */
-    readonly type: "default";
+    readonly type: "default" | "custom";
 }[];
 /**
- * An array of role reference identifiers.
- */
-type AssignedRolesRefIDs = {
-    /** The unique role identitier */
-    id: string;
-}[];
-/**
- * An array of role reference names.
- */
-type AssignedRolesRefNames = {
-    /** The name of the role */
-    name: string;
-}[];
-/**
- * An array of scopes assigned to user
+ * An array of scopes assigned to a user
  */
 type AssignedScopes = string[];
 /**
@@ -130,26 +127,31 @@ type InviteRequestData = {
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
  */
 type JSONPatch = {
-    /** The operation to be performed. */
-    op: "replace" | "set (Deprecated)" | "unset (Deprecated)" | "add (Deprecated)" | "renew";
-    /** A JSON Pointer. */
-    path: "/name" | "/roles (Deprecated)" | "/assignedRoles" | "/inviteExpiry" | "/preferredZoneinfo" | "/preferredLocale" | "/status";
+    /** The operation to be performed. The fields `set`, `unset`, and `add` are deprecated. */
+    op: "replace" | "set" | "unset" | "add" | "renew";
+    /** A JSON Pointer. The field `roles` is deprecated. */
+    path: "/name" | "/roles" | "/assignedRoles" | "/inviteExpiry" | "/preferredZoneinfo" | "/preferredLocale" | "/status" | "/assignedGroups";
     /** The value to be used for this operation. */
-    value: string | boolean | unknown[] | AssignedRolesRefIDs | AssignedRolesRefNames;
+    value: string | boolean | unknown[] | RefIDs | RefNames | AssignedGroupsRefNames;
 };
 /**
  * An array of JSON Patch documents
  */
 type JSONPatchArray = JSONPatch[];
 /**
- * @deprecated
- *
- * An object containing the metadata for the user configuration.
+ * An array of entity reference identifiers (e.g. roles, groups).
  */
-type Metadata = {
-    /** List of system roles to which the user can be assigned. */
-    valid_roles?: string[];
-};
+type RefIDs = {
+    /** The unique identitier */
+    id: string;
+}[];
+/**
+ * An array of reference names (e.g. roles).
+ */
+type RefNames = {
+    /** The name of the entity */
+    name: string;
+}[];
 /**
  * Invitee result item
  */
@@ -169,9 +171,9 @@ type ResultItem = {
 type User = {
     /** An array of group references. */
     assignedGroups?: AssignedGroups;
-    /** An array of role references. */
+    /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */
     assignedRoles?: AssignedRoles;
-    /** An array of scopes assigned to user */
+    /** An array of scopes assigned to a user */
     readonly assignedScopes?: AssignedScopes;
     /** @deprecated
      * Deprecated. Use `createdAt` instead. */
@@ -182,7 +184,7 @@ type User = {
     email?: string;
     /** The unique user identifier. */
     readonly id: string;
-    /** The number of seconds until the user invitation will expire. */
+    /** The Unix timestamp indicating when the invite will expire. */
     readonly inviteExpiry?: number;
     /** @deprecated
      * Deprecated. Use `lastUpdatedAt` instead. */
@@ -211,7 +213,7 @@ type User = {
      * List of system roles to which the user has been assigned. Only returned when permitted by access control. Deprecated. Use `assignedRoles` instead. */
     roles?: ("TenantAdmin" | "Developer" | "AnalyticsAdmin" | "DataAdmin" | "DataSpaceCreator" | "ManagedSpaceCreator" | "SharedSpaceCreator")[];
     /** The status of the user within the tenant. */
-    status?: "active" | "invited" | "disabled" | "deleted";
+    status?: "active" | "invited" | "disabled" | "deleted" | "provisioned";
     /** The unique user identitier from an identity provider. */
     subject: string;
     /** The tenant that the user belongs too. */
@@ -228,7 +230,7 @@ type UserCount = {
 };
 type UserPostSchema = {
     /** The roles to assign to the user. */
-    assignedRoles?: AssignedRolesRefIDs | AssignedRolesRefNames;
+    assignedRoles?: RefIDs | RefNames;
     /** The email address for the user. This is a required field when inviting a user. */
     email?: string;
     /** The name of the user. */
@@ -266,6 +268,8 @@ type Users = {
             href: string;
         };
     };
+    /** Indicates the total number of matching documents. Will only be returned if the query parameter "totalResults" is true. */
+    totalResults?: number;
 };
 /**
  * Returns a list of users using cursor-based pagination.
@@ -322,7 +326,7 @@ declare const getUsers: (query: {
      * The role to filter by. Deprecated. */
     role?: string;
     /** The field to sort by, with +/- prefix indicating sort order */
-    sort?: "name" | "+name" | "-name";
+    sort?: "name" | "+name" | "-name" | "_id" | "+_id" | "-_id" | "id" | "+id" | "-id" | "tenantId" | "+tenantId" | "-tenantId" | "clientId" | "+clientId" | "-clientId" | "status" | "+status" | "-status" | "subject" | "+subject" | "-subject" | "email" | "+email" | "-email" | "inviteExpiry" | "+inviteExpiry" | "-inviteExpiry" | "createdAt" | "+createdAt" | "-createdAt";
     /** @deprecated
      * The user parameter to sort by. Deprecated. Use `sort` instead. */
     sortBy?: "name";
@@ -334,7 +338,7 @@ declare const getUsers: (query: {
     startingAfter?: string;
     /** @deprecated
      * The status to filter by. Supports multiple values delimited by commas. Deprecated. Use the new `filter` parameter to provide an advanced query filter. */
-    status?: "active" | "invited" | "disabled" | "deleted";
+    status?: "active" | "invited" | "disabled" | "deleted" | "provisioned";
     /** @deprecated
      * The subject to filter by. Deprecated. Use the new `filter` parameter to provide an advanced query filter. */
     subject?: string;
@@ -459,24 +463,6 @@ type GetMyUserHttpError = {
     status: number;
 };
 /**
- * @deprecated
- *
- * Returns the metadata with regard to the user configuration. Deprecated, use GET /v1/roles instead.
- *
- * @throws GetUsersMetadataHttpError
- */
-declare const getUsersMetadata: (options?: ApiCallOptions) => Promise<GetUsersMetadataHttpResponse>;
-type GetUsersMetadataHttpResponse = {
-    data: Metadata;
-    headers: Headers;
-    status: number;
-};
-type GetUsersMetadataHttpError = {
-    data: Errors;
-    headers: Headers;
-    status: number;
-};
-/**
  * Deletes the requested user.
  *
  * @param userId The ID of the user to delete.
@@ -586,14 +572,6 @@ interface UsersAPI {
      */
     getMyUser: typeof getMyUser;
     /**
-     * @deprecated
-     *
-     * Returns the metadata with regard to the user configuration. Deprecated, use GET /v1/roles instead.
-     *
-     * @throws GetUsersMetadataHttpError
-     */
-    getUsersMetadata: typeof getUsersMetadata;
-    /**
      * Deletes the requested user.
      *
      * @param userId The ID of the user to delete.
@@ -626,4 +604,4 @@ interface UsersAPI {
  */
 declare const usersExport: UsersAPI;
 
-export { type AssignedGroups, type AssignedRoles, type AssignedRolesRefIDs, type AssignedRolesRefNames, type AssignedScopes, type CountUsersHttpError, type CountUsersHttpResponse, type CreateUserHttpError, type CreateUserHttpResponse, type DeleteUserHttpError, type DeleteUserHttpResponse, type Error, type ErrorItem, type Errors, type ErrorsResponse, type Filter, type FilterUsersHttpError, type FilterUsersHttpResponse, type GetMyUserHttpError, type GetMyUserHttpResponse, type GetUserHttpError, type GetUserHttpResponse, type GetUsersHttpError, type GetUsersHttpResponse, type GetUsersMetadataHttpError, type GetUsersMetadataHttpResponse, type InviteDataResponse, type InviteErrorItem, type InviteItem, type InviteRequestData, type InviteUsersHttpError, type InviteUsersHttpResponse, type JSONPatch, type JSONPatchArray, type Metadata, type PatchUser204HttpResponse, type PatchUser207HttpResponse, type PatchUserHttpError, type PatchUserHttpResponse, type ResultItem, type User, type UserCount, type UserPostSchema, type Users, type UsersAPI, clearCache, countUsers, createUser, usersExport as default, deleteUser, filterUsers, getMyUser, getUser, getUsers, getUsersMetadata, inviteUsers, patchUser };
+export { type AssignedGroups, type AssignedGroupsRefNames, type AssignedRoles, type AssignedScopes, type CountUsersHttpError, type CountUsersHttpResponse, type CreateUserHttpError, type CreateUserHttpResponse, type DeleteUserHttpError, type DeleteUserHttpResponse, type Error, type ErrorItem, type Errors, type ErrorsResponse, type Filter, type FilterUsersHttpError, type FilterUsersHttpResponse, type GetMyUserHttpError, type GetMyUserHttpResponse, type GetUserHttpError, type GetUserHttpResponse, type GetUsersHttpError, type GetUsersHttpResponse, type InviteDataResponse, type InviteErrorItem, type InviteItem, type InviteRequestData, type InviteUsersHttpError, type InviteUsersHttpResponse, type JSONPatch, type JSONPatchArray, type PatchUser204HttpResponse, type PatchUser207HttpResponse, type PatchUserHttpError, type PatchUserHttpResponse, type RefIDs, type RefNames, type ResultItem, type User, type UserCount, type UserPostSchema, type Users, type UsersAPI, clearCache, countUsers, createUser, usersExport as default, deleteUser, filterUsers, getMyUser, getUser, getUsers, inviteUsers, patchUser };

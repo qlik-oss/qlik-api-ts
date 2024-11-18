@@ -1,7 +1,7 @@
-import './global.types-Xt6XzwlN.js';
-import { H as HostConfig } from './auth-types-Bqw3vbLs.js';
+import { H as HostConfig } from './auth-types-PkN9CAF_.js';
+import './invoke-fetch-types-BLrpeZOL.js';
 
-declare const QIX_SCHEMA_VERSION = "12.2088.0";
+declare const QIX_SCHEMA_VERSION = "12.2246.0";
 type AlfaNumString = {
     /**
      * Calculated value.
@@ -388,6 +388,20 @@ type BookmarkFieldPage = {
      */
     qEndIndex?: number;
 };
+type BookmarkFieldPageEx = {
+    /**
+     * The name of the selected state.
+     */
+    qStateName?: string;
+    /**
+     * The start value of the range.
+     */
+    qStartIndex?: number;
+    /**
+     * The end value of the range.
+     */
+    qEndIndex?: number;
+};
 type BookmarkFieldVerifyResultState = "NOT_VERIFIED" | "FIELD_VALUE_MATCH_ALL" | "FIELD_MISSING" | "FIELD_VALUE_MISSING" | "STATE_MISSING";
 type BookmarkFieldVerifyWarning = {
     /**
@@ -436,6 +450,12 @@ type BookmarkListDef = {
      * Include the bookmark patches. Patches can be very large and may make the list result unmanageable.
      */
     qIncludePatches?: boolean;
+};
+type BookmarkStateFieldPages = {
+    /**
+     * Bookmark field pages for different states.
+     */
+    qStatePages?: BookmarkFieldPageEx[];
 };
 type BookmarkVariableItem = {
     /**
@@ -828,6 +848,21 @@ type DimensionListDef = {
     qData?: Record<string, string>;
 };
 /**
+ * The DimensionReference structure points to a GenericDimension.
+ *
+ * Stability: *experimental*
+ */
+type DimensionReference = {
+    /**
+     * Identifier of the associated dimension.
+     */
+    qId?: string;
+    /**
+     * Text label.
+     */
+    qLabel?: string;
+};
+/**
  * Parameters for a reload.
  */
 type DoReloadExParams = {
@@ -939,6 +974,8 @@ type DocListEntry = {
      * One of:
      * * ANALYTICS
      * * DATA_PREPARATION
+     * * DATAFLOW_PREP
+     * * SINGLE_TABLE_PREP
      */
     qUsage?: UsageEnum;
 };
@@ -2889,6 +2926,8 @@ type NxAppLayout = {
      * One of:
      * * ANALYTICS
      * * DATA_PREPARATION
+     * * DATAFLOW_PREP
+     * * SINGLE_TABLE_PREP
      */
     qUsage?: UsageEnum;
 };
@@ -2941,6 +2980,8 @@ type NxAppProperties = {
      * One of:
      * * ANALYTICS
      * * DATA_PREPARATION
+     * * DATAFLOW_PREP
+     * * SINGLE_TABLE_PREP
      */
     qUsage?: UsageEnum;
 };
@@ -3360,11 +3401,11 @@ type NxCurrentSelectionItem = {
      */
     qIsHidden?: boolean;
     /**
-     * Information about objects in the app that refer to the data model field of an NxCurrentSelectionItem, including labels.
+     * List of dimensions in the app that refer to the data model field of an NxCurrentSelectionItem.
      *
      * Stability: *experimental*
      */
-    qFieldReferenceInfo?: SelectionItemFieldReferenceInfo[];
+    qDimensionReferences?: DimensionReference[];
 };
 type NxDataAreaPage = {
     /**
@@ -4226,7 +4267,7 @@ type NxListObjectExpressionDef = {
      */
     qLibraryId?: string;
 };
-type NxLocalizedErrorCode = "LOCERR_INTERNAL_ERROR" | "LOCERR_GENERIC_UNKNOWN" | "LOCERR_GENERIC_OK" | "LOCERR_GENERIC_NOT_SET" | "LOCERR_GENERIC_NOT_FOUND" | "LOCERR_GENERIC_ALREADY_EXISTS" | "LOCERR_GENERIC_INVALID_PATH" | "LOCERR_GENERIC_ACCESS_DENIED" | "LOCERR_GENERIC_OUT_OF_MEMORY" | "LOCERR_GENERIC_NOT_INITIALIZED" | "LOCERR_GENERIC_INVALID_PARAMETERS" | "LOCERR_GENERIC_EMPTY_PARAMETERS" | "LOCERR_GENERIC_INTERNAL_ERROR" | "LOCERR_GENERIC_CORRUPT_DATA" | "LOCERR_GENERIC_MEMORY_INCONSISTENCY" | "LOCERR_GENERIC_INVISIBLE_OWNER_ABORT" | "LOCERR_GENERIC_PROHIBIT_VALIDATE" | "LOCERR_GENERIC_ABORTED" | "LOCERR_GENERIC_CONNECTION_LOST" | "LOCERR_GENERIC_UNSUPPORTED_IN_PRODUCT_VERSION" | "LOCERR_GENERIC_REST_CONNECTION_FAILURE" | "LOCERR_GENERIC_MEMORY_LIMIT_REACHED" | "LOCERR_GENERIC_NOT_IMPLEMENTED" | "LOCERR_HTTP_400" | "LOCERR_HTTP_401" | "LOCERR_HTTP_402" | "LOCERR_HTTP_403" | "LOCERR_HTTP_404" | "LOCERR_HTTP_405" | "LOCERR_HTTP_406" | "LOCERR_HTTP_407" | "LOCERR_HTTP_408" | "LOCERR_HTTP_409" | "LOCERR_HTTP_410" | "LOCERR_HTTP_411" | "LOCERR_HTTP_412" | "LOCERR_HTTP_413" | "LOCERR_HTTP_414" | "LOCERR_HTTP_415" | "LOCERR_HTTP_416" | "LOCERR_HTTP_417" | "LOCERR_HTTP_422" | "LOCERR_HTTP_423" | "LOCERR_HTTP_429" | "LOCERR_HTTP_500" | "LOCERR_HTTP_501" | "LOCERR_HTTP_502" | "LOCERR_HTTP_503" | "LOCERR_HTTP_504" | "LOCERR_HTTP_505" | "LOCERR_HTTP_509" | "LOCERR_HTTP_COULD_NOT_RESOLVE_HOST" | "LOCERR_APP_ALREADY_EXISTS" | "LOCERR_APP_INVALID_NAME" | "LOCERR_APP_ALREADY_OPEN" | "LOCERR_APP_NOT_FOUND" | "LOCERR_APP_IMPORT_FAILED" | "LOCERR_APP_SAVE_FAILED" | "LOCERR_APP_CREATE_FAILED" | "LOCERR_APP_INVALID" | "LOCERR_APP_CONNECT_FAILED" | "LOCERR_APP_ALREADY_OPEN_IN_DIFFERENT_MODE" | "LOCERR_APP_MIGRATION_COULD_NOT_CONTACT_MIGRATION_SERVICE" | "LOCERR_APP_MIGRATION_COULD_NOT_START_MIGRATION" | "LOCERR_APP_MIGRATION_FAILURE" | "LOCERR_APP_SCRIPT_MISSING" | "LOCERR_APP_EXPORT_FAILED" | "LOCERR_APP_SIZE_EXCEEDED" | "LOCERR_APP_DIRECT_QUERY_WORKLOAD_NOT_SUPPORTED" | "LOCERR_APP_NOT_OPEN" | "LOCERR_APP_EVENT_SOURCE_TIMEOUT" | "LOCERR_CONNECTION_ALREADY_EXISTS" | "LOCERR_CONNECTION_NOT_FOUND" | "LOCERR_CONNECTION_FAILED_TO_LOAD" | "LOCERR_CONNECTION_FAILED_TO_IMPORT" | "LOCERR_CONNECTION_NAME_IS_INVALID" | "LOCERR_CONNECTION_MISSING_CREDENTIALS" | "LOCERR_CONNECTOR_NO_FILE_STREAMING_SUPPORT" | "LOCERR_CONNECTOR_FILESIZE_EXCEEDED_BUFFER_SIZE" | "LOCERR_FILE_ACCESS_DENIED" | "LOCERR_FILE_NAME_INVALID" | "LOCERR_FILE_CORRUPT" | "LOCERR_FILE_NOT_FOUND" | "LOCERR_FILE_FORMAT_UNSUPPORTED" | "LOCERR_FILE_OPENED_IN_UNSUPPORTED_MODE" | "LOCERR_FILE_TABLE_NOT_FOUND" | "LOCERR_USER_ACCESS_DENIED" | "LOCERR_USER_IMPERSONATION_FAILED" | "LOCERR_SERVER_OUT_OF_SESSION_AND_USER_CALS" | "LOCERR_SERVER_OUT_OF_SESSION_CALS" | "LOCERR_SERVER_OUT_OF_USAGE_CALS" | "LOCERR_SERVER_OUT_OF_CALS" | "LOCERR_SERVER_OUT_OF_NAMED_CALS" | "LOCERR_SERVER_OFF_DUTY" | "LOCERR_SERVER_BUSY" | "LOCERR_SERVER_LICENSE_EXPIRED" | "LOCERR_SERVER_AJAX_DISABLED" | "LOCERR_SERVER_NO_TOKEN" | "LOCERR_HC_INVALID_OBJECT" | "LOCERR_HC_RESULT_TOO_LARGE" | "LOCERR_HC_INVALID_OBJECT_STATE" | "LOCERR_HC_MODAL_OBJECT_ERROR" | "LOCERR_CALC_INVALID_DEF" | "LOCERR_CALC_NOT_IN_LIB" | "LOCERR_CALC_HEAP_ERROR" | "LOCERR_CALC_TOO_LARGE" | "LOCERR_CALC_TIMEOUT" | "LOCERR_CALC_EVAL_CONDITION_FAILED" | "LOCERR_CALC_MIXED_LINKED_AGGREGATION" | "LOCERR_CALC_MISSING_LINKED" | "LOCERR_CALC_INVALID_COL_SORT" | "LOCERR_CALC_PAGES_TOO_LARGE" | "LOCERR_CALC_SEMANTIC_FIELD_NOT_ALLOWED" | "LOCERR_CALC_VALIDATION_STATE_INVALID" | "LOCERR_CALC_PIVOT_DIMENSIONS_ALREADY_EXISTS" | "LOCERR_CALC_MISSING_LINKED_FIELD" | "LOCERR_CALC_NOT_CALCULATED" | "LOCERR_LAYOUT_EXTENDS_INVALID_ID" | "LOCERR_LAYOUT_LINKED_OBJECT_NOT_FOUND" | "LOCERR_LAYOUT_LINKED_OBJECT_INVALID" | "LOCERR_PERSISTENCE_WRITE_FAILED" | "LOCERR_PERSISTENCE_READ_FAILED" | "LOCERR_PERSISTENCE_DELETE_FAILED" | "LOCERR_PERSISTENCE_NOT_FOUND" | "LOCERR_PERSISTENCE_UNSUPPORTED_VERSION" | "LOCERR_PERSISTENCE_MIGRATION_FAILED_READ_ONLY" | "LOCERR_PERSISTENCE_MIGRATION_CANCELLED" | "LOCERR_PERSISTENCE_MIGRATION_BACKUP_FAILED" | "LOCERR_PERSISTENCE_DISK_FULL" | "LOCERR_PERSISTENCE_NOT_SUPPORTED_FOR_SESSION_APP" | "LOCERR_PERSISTENCE_MOVE_FAILED" | "LOCERR_PERSISTENCE_OBJECT_LOCKED" | "LOCERR_PERSISTENCE_ENCRYPTION_KEY_MIGRATION_ONGOING" | "LOCERR_PERSISTENCE_SYNC_SET_CHUNK_INVALID_PARAMETERS" | "LOCERR_PERSISTENCE_SYNC_GET_CHUNK_INVALID_PARAMETERS" | "LOCERR_SCRIPT_DATASOURCE_ACCESS_DENIED" | "LOCERR_RELOAD_IN_PROGRESS" | "LOCERR_RELOAD_TABLE_X_NOT_FOUND" | "LOCERR_RELOAD_UNKNOWN_STATEMENT" | "LOCERR_RELOAD_EXPECTED_SOMETHING_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_NOTHING_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_1_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_2_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_3_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_4_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_5_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_6_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_7_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_8_OR_MORE_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_FIELD_X_NOT_FOUND" | "LOCERR_RELOAD_MAPPING_TABLE_X_NOT_FOUND" | "LOCERR_RELOAD_LIB_CONNECTION_X_NOT_FOUND" | "LOCERR_RELOAD_NAME_ALREADY_TAKEN" | "LOCERR_RELOAD_WRONG_FILE_FORMAT_DIF" | "LOCERR_RELOAD_WRONG_FILE_FORMAT_BIFF" | "LOCERR_RELOAD_WRONG_FILE_FORMAT_ENCRYPTED" | "LOCERR_RELOAD_OPEN_FILE_ERROR" | "LOCERR_RELOAD_AUTO_GENERATE_COUNT" | "LOCERR_RELOAD_PE_ILLEGAL_PREFIX_COMB" | "LOCERR_RELOAD_MATCHING_CONTROL_STATEMENT_ERROR" | "LOCERR_RELOAD_MATCHING_LIBPATH_X_NOT_FOUND" | "LOCERR_RELOAD_MATCHING_LIBPATH_X_INVALID" | "LOCERR_RELOAD_MATCHING_LIBPATH_X_OUTSIDE" | "LOCERR_RELOAD_NO_QUALIFIED_PATH_FOR_FILE" | "LOCERR_RELOAD_MODE_STATEMENT_ONLY_FOR_LIB_PATHS" | "LOCERR_RELOAD_INCONSISTENT_USE_OF_SEMANTIC_FIELDS" | "LOCERR_RELOAD_NO_OPEN_DATABASE" | "LOCERR_RELOAD_AGGREGATION_REQUIRED_BY_GROUP_BY" | "LOCERR_RELOAD_CONNECT_MUST_USE_LIB_PREFIX_IN_THIS_MODE" | "LOCERR_RELOAD_ODBC_CONNECT_FAILED" | "LOCERR_RELOAD_OLEDB_CONNECT_FAILED" | "LOCERR_RELOAD_CUSTOM_CONNECT_FAILED" | "LOCERR_RELOAD_ODBC_READ_FAILED" | "LOCERR_RELOAD_OLEDB_READ_FAILED" | "LOCERR_RELOAD_CUSTOM_READ_FAILED" | "LOCERR_RELOAD_BINARY_LOAD_PROHIBITED" | "LOCERR_RELOAD_CONNECTOR_START_FAILED" | "LOCERR_RELOAD_CONNECTOR_NOT_RESPONDING" | "LOCERR_RELOAD_CONNECTOR_REPLY_ERROR" | "LOCERR_RELOAD_CONNECTOR_CONNECT_ERROR" | "LOCERR_RELOAD_CONNECTOR_NOT_FOUND_ERROR" | "LOCERR_RELOAD_INPUT_FIELD_WITH_DUPLICATE_KEYS" | "LOCERR_RELOAD_CONCATENATE_LOAD_NO_PREVIOUS_TABLE" | "LOCERR_RELOAD_WRONG_FILE_FORMAT_QVD" | "LOCERR_RELOAD_ACTION_BLOCKED_ENTITLEMENT" | "LOCERR_PERSONAL_NEW_VERSION_AVAILABLE" | "LOCERR_PERSONAL_VERSION_EXPIRED" | "LOCERR_PERSONAL_SECTION_ACCESS_DETECTED" | "LOCERR_PERSONAL_APP_DELETION_FAILED" | "LOCERR_USER_AUTHENTICATION_FAILURE" | "LOCERR_EXPORT_OUT_OF_MEMORY" | "LOCERR_EXPORT_NO_DATA" | "LOCERR_SYNC_INVALID_OFFSET" | "LOCERR_SEARCH_TIMEOUT" | "LOCERR_DIRECT_DISCOVERY_LINKED_EXPRESSION_FAIL" | "LOCERR_DIRECT_DISCOVERY_ROWCOUNT_OVERFLOW" | "LOCERR_DIRECT_DISCOVERY_EMPTY_RESULT" | "LOCERR_DIRECT_DISCOVERY_DB_CONNECTION_FAILED" | "LOCERR_DIRECT_DISCOVERY_MEASURE_NOT_ALLOWED" | "LOCERR_DIRECT_DISCOVERY_DETAIL_NOT_ALLOWED" | "LOCERR_DIRECT_DISCOVERY_NOT_SYNTH_CIRCULAR_ALLOWED" | "LOCERR_DIRECT_DISCOVERY_ONLY_ONE_DD_TABLE_ALLOWED" | "LOCERR_DIRECT_DISCOVERY_DB_AUTHORIZATION_FAILED" | "LOCERR_SMART_LOAD_TABLE_NOT_FOUND" | "LOCERR_SMART_LOAD_TABLE_DUPLICATED" | "LOCERR_VARIABLE_NO_NAME" | "LOCERR_VARIABLE_DUPLICATE_NAME" | "LOCERR_VARIABLE_INCONSISTENCY" | "LOCERR_MEDIA_LIBRARY_LIST_FAILED" | "LOCERR_MEDIA_LIBRARY_CONTENT_FAILED" | "LOCERR_MEDIA_BUNDLING_FAILED" | "LOCERR_MEDIA_UNBUNDLING_FAILED" | "LOCERR_MEDIA_LIBRARY_NOT_FOUND" | "LOCERR_FEATURE_DISABLED" | "LOCERR_JSON_RPC_INVALID_REQUEST" | "LOCERR_JSON_RPC_METHOD_NOT_FOUND" | "LOCERR_JSON_RPC_INVALID_PARAMETERS" | "LOCERR_JSON_RPC_INTERNAL_ERROR" | "LOCERR_JSON_RPC_PARSE_ERROR" | "LOCERR_MQ_SOCKET_CONNECT_FAILURE" | "LOCERR_MQ_SOCKET_OPEN_FAILURE" | "LOCERR_MQ_PROTOCOL_NO_RESPONE" | "LOCERR_MQ_PROTOCOL_LIBRARY_EXCEPTION" | "LOCERR_MQ_PROTOCOL_CONNECTION_CLOSED" | "LOCERR_MQ_PROTOCOL_CHANNEL_CLOSED" | "LOCERR_MQ_PROTOCOL_UNKNOWN_ERROR" | "LOCERR_MQ_PROTOCOL_INVALID_STATUS" | "LOCERR_EXTENGINE_GRPC_STATUS_OK" | "LOCERR_EXTENGINE_GRPC_STATUS_CANCELLED" | "LOCERR_EXTENGINE_GRPC_STATUS_UNKNOWN" | "LOCERR_EXTENGINE_GRPC_STATUS_INVALID_ARGUMENT" | "LOCERR_EXTENGINE_GRPC_STATUS_DEADLINE_EXCEEDED" | "LOCERR_EXTENGINE_GRPC_STATUS_NOT_FOUND" | "LOCERR_EXTENGINE_GRPC_STATUS_ALREADY_EXISTS" | "LOCERR_EXTENGINE_GRPC_STATUS_PERMISSION_DENIED" | "LOCERR_EXTENGINE_GRPC_STATUS_RESOURCE_EXHAUSTED" | "LOCERR_EXTENGINE_GRPC_STATUS_FAILED_PRECONDITION" | "LOCERR_EXTENGINE_GRPC_STATUS_ABORTED" | "LOCERR_EXTENGINE_GRPC_STATUS_OUT_OF_RANGE" | "LOCERR_EXTENGINE_GRPC_STATUS_UNIMPLEMENTED" | "LOCERR_EXTENGINE_GRPC_STATUS_INTERNAL" | "LOCERR_EXTENGINE_GRPC_STATUS_UNAVAILABLE" | "LOCERR_EXTENGINE_GRPC_STATUS_DATA_LOSS" | "LOCERR_EXTENGINE_GRPC_STATUS_UNAUTHENTICATED" | "LOCERR_LXW_INVALID_OBJ" | "LOCERR_LXW_INVALID_FILE" | "LOCERR_LXW_INVALID_SHEET" | "LOCERR_LXW_INVALID_EXPORT_RANGE" | "LOCERR_LXW_ERROR" | "LOCERR_LXW_ERROR_MEMORY_MALLOC_FAILED" | "LOCERR_LXW_ERROR_CREATING_XLSX_FILE" | "LOCERR_LXW_ERROR_CREATING_TMPFILE" | "LOCERR_LXW_ERROR_ZIP_FILE_OPERATION" | "LOCERR_LXW_ERROR_ZIP_FILE_ADD" | "LOCERR_LXW_ERROR_ZIP_CLOSE" | "LOCERR_LXW_ERROR_NULL_PARAMETER_IGNORED" | "LOCERR_LXW_ERROR_MAX_STRING_LENGTH_EXCEEDED" | "LOCERR_LXW_ERROR_255_STRING_LENGTH_EXCEEDED" | "LOCERR_LXW_ERROR_SHARED_STRING_INDEX_NOT_FOUND" | "LOCERR_LXW_ERROR_WORKSHEET_INDEX_OUT_OF_RANGE" | "LOCERR_LXW_ERROR_WORKSHEET_MAX_NUMBER_URLS_EXCEEDED" | "LOCERR_BDI_STATUS_OK" | "LOCERR_BDI_GENERIC_ERROR_NOT_TRANSLATED" | "LOCERR_TRENDLINE_INVALID_DEF" | "LOCERR_TRENDLINE_INVALID_MATH_ERROR" | "LOCERR_CURL_UNSUPPORTED_PROTOCOL" | "LOCERR_CURL_COULDNT_RESOLVE_PROXY" | "LOCERR_CURL_COULDNT_CONNECT" | "LOCERR_CURL_REMOTE_ACCESS_DENIED" | "LOCERR_CURL_FTP_ACCEPT_FAILED" | "LOCERR_CURL_FTP_ACCEPT_TIMEOUT" | "LOCERR_CURL_FTP_CANT_GET_HOST" | "LOCERR_CURL_PARTIAL_FILE" | "LOCERR_CURL_QUOTE_ERROR" | "LOCERR_CURL_WRITE_ERROR" | "LOCERR_CURL_UPLOAD_FAILED" | "LOCERR_CURL_OUT_OF_MEMORY" | "LOCERR_CURL_OPERATION_TIMEDOUT" | "LOCERR_CURL_FTP_COULDNT_USE_REST" | "LOCERR_CURL_HTTP_POST_ERROR" | "LOCERR_CURL_SSL_CONNECT_ERROR" | "LOCERR_CURL_FILE_COULDNT_READ_FILE" | "LOCERR_CURL_LDAP_CANNOT_BIND" | "LOCERR_CURL_LDAP_SEARCH_FAILED" | "LOCERR_CURL_TOO_MANY_REDIRECTS" | "LOCERR_CURL_PEER_FAILED_VERIFICATION" | "LOCERR_CURL_GOT_NOTHING" | "LOCERR_CURL_SSL_ENGINE_NOTFOUND" | "LOCERR_CURL_SSL_ENGINE_SETFAILED" | "LOCERR_CURL_SSL_CERTPROBLEM" | "LOCERR_CURL_SSL_CIPHER" | "LOCERR_CURL_SSL_CACERT" | "LOCERR_CURL_BAD_CONTENT_ENCODING" | "LOCERR_CURL_LDAP_INVALID_URL" | "LOCERR_CURL_USE_SSL_FAILED" | "LOCERR_CURL_SSL_ENGINE_INITFAILED" | "LOCERR_CURL_LOGIN_DENIED" | "LOCERR_CURL_TFTP_NOTFOUND" | "LOCERR_CURL_TFTP_ILLEGAL" | "LOCERR_CURL_SSH" | "LOCERR_SETEXPRESSION_TOO_LARGE" | "LOCERR_RELOAD_MERGE_LOAD_ERROR" | "LOCERR_WIN_FTP_DROPPED" | "LOCERR_WIN_FTP_NO_PASSIVE_MODE" | "LOCERR_WIN_HTTP_DOWNLEVEL_SERVER" | "LOCERR_WIN_HTTP_INVALID_SERVER_RESPONSE" | "LOCERR_WIN_HTTP_REDIRECT_NEEDS_CONFIRMATION" | "LOCERR_WIN_INTERNET_FORCE_RETRY" | "LOCERR_WIN_INTERNET_CANNOT_CONNECT" | "LOCERR_WIN_INTERNET_CONNECTION_ABORTED" | "LOCERR_WIN_INTERNET_CONNECTION_RESET" | "LOCERR_WIN_INTERNET_DISCONNECTED" | "LOCERR_WIN_INTERNET_INCORRECT_FORMAT" | "LOCERR_WIN_INTERNET_INVALID_CA" | "LOCERR_WIN_INTERNET_INVALID_OPERATION" | "LOCERR_WIN_INTERNET_INVALID_URL" | "LOCERR_WIN_INTERNET_ITEM_NOT_FOUND" | "LOCERR_WIN_INTERNET_LOGIN_FAILURE" | "LOCERR_WIN_INTERNET_NAME_NOT_RESOLVED" | "LOCERR_WIN_INTERNET_NEED_UI" | "LOCERR_WIN_INTERNET_SEC_CERT_CN_INVALID" | "LOCERR_WIN_INTERNET_SEC_CERT_DATE_INVALID" | "LOCERR_WIN_INTERNET_SEC_CERT_ERRORS" | "LOCERR_WIN_INTERNET_SEC_INVALID_CERT" | "LOCERR_WIN_INTERNET_SERVER_UNREACHABLE";
+type NxLocalizedErrorCode = "LOCERR_INTERNAL_ERROR" | "LOCERR_GENERIC_UNKNOWN" | "LOCERR_GENERIC_OK" | "LOCERR_GENERIC_NOT_SET" | "LOCERR_GENERIC_NOT_FOUND" | "LOCERR_GENERIC_ALREADY_EXISTS" | "LOCERR_GENERIC_INVALID_PATH" | "LOCERR_GENERIC_ACCESS_DENIED" | "LOCERR_GENERIC_OUT_OF_MEMORY" | "LOCERR_GENERIC_NOT_INITIALIZED" | "LOCERR_GENERIC_INVALID_PARAMETERS" | "LOCERR_GENERIC_EMPTY_PARAMETERS" | "LOCERR_GENERIC_INTERNAL_ERROR" | "LOCERR_GENERIC_CORRUPT_DATA" | "LOCERR_GENERIC_MEMORY_INCONSISTENCY" | "LOCERR_GENERIC_INVISIBLE_OWNER_ABORT" | "LOCERR_GENERIC_PROHIBIT_VALIDATE" | "LOCERR_GENERIC_ABORTED" | "LOCERR_GENERIC_CONNECTION_LOST" | "LOCERR_GENERIC_UNSUPPORTED_IN_PRODUCT_VERSION" | "LOCERR_GENERIC_REST_CONNECTION_FAILURE" | "LOCERR_GENERIC_MEMORY_LIMIT_REACHED" | "LOCERR_GENERIC_NOT_IMPLEMENTED" | "LOCERR_HTTP_400" | "LOCERR_HTTP_401" | "LOCERR_HTTP_402" | "LOCERR_HTTP_403" | "LOCERR_HTTP_404" | "LOCERR_HTTP_405" | "LOCERR_HTTP_406" | "LOCERR_HTTP_407" | "LOCERR_HTTP_408" | "LOCERR_HTTP_409" | "LOCERR_HTTP_410" | "LOCERR_HTTP_411" | "LOCERR_HTTP_412" | "LOCERR_HTTP_413" | "LOCERR_HTTP_414" | "LOCERR_HTTP_415" | "LOCERR_HTTP_416" | "LOCERR_HTTP_417" | "LOCERR_HTTP_422" | "LOCERR_HTTP_423" | "LOCERR_HTTP_429" | "LOCERR_HTTP_500" | "LOCERR_HTTP_501" | "LOCERR_HTTP_502" | "LOCERR_HTTP_503" | "LOCERR_HTTP_504" | "LOCERR_HTTP_505" | "LOCERR_HTTP_509" | "LOCERR_HTTP_COULD_NOT_RESOLVE_HOST" | "LOCERR_APP_ALREADY_EXISTS" | "LOCERR_APP_INVALID_NAME" | "LOCERR_APP_ALREADY_OPEN" | "LOCERR_APP_NOT_FOUND" | "LOCERR_APP_IMPORT_FAILED" | "LOCERR_APP_SAVE_FAILED" | "LOCERR_APP_CREATE_FAILED" | "LOCERR_APP_INVALID" | "LOCERR_APP_CONNECT_FAILED" | "LOCERR_APP_ALREADY_OPEN_IN_DIFFERENT_MODE" | "LOCERR_APP_MIGRATION_COULD_NOT_CONTACT_MIGRATION_SERVICE" | "LOCERR_APP_MIGRATION_COULD_NOT_START_MIGRATION" | "LOCERR_APP_MIGRATION_FAILURE" | "LOCERR_APP_SCRIPT_MISSING" | "LOCERR_APP_EXPORT_FAILED" | "LOCERR_APP_SIZE_EXCEEDED" | "LOCERR_APP_DIRECT_QUERY_WORKLOAD_NOT_SUPPORTED" | "LOCERR_APP_NOT_OPEN" | "LOCERR_APP_EVENT_SOURCE_TIMEOUT" | "LOCERR_CONNECTION_ALREADY_EXISTS" | "LOCERR_CONNECTION_NOT_FOUND" | "LOCERR_CONNECTION_FAILED_TO_LOAD" | "LOCERR_CONNECTION_FAILED_TO_IMPORT" | "LOCERR_CONNECTION_NAME_IS_INVALID" | "LOCERR_CONNECTION_MISSING_CREDENTIALS" | "LOCERR_CONNECTOR_NO_FILE_STREAMING_SUPPORT" | "LOCERR_CONNECTOR_FILESIZE_EXCEEDED_BUFFER_SIZE" | "LOCERR_FILE_ACCESS_DENIED" | "LOCERR_FILE_NAME_INVALID" | "LOCERR_FILE_CORRUPT" | "LOCERR_FILE_NOT_FOUND" | "LOCERR_FILE_FORMAT_UNSUPPORTED" | "LOCERR_FILE_OPENED_IN_UNSUPPORTED_MODE" | "LOCERR_FILE_TABLE_NOT_FOUND" | "LOCERR_USER_ACCESS_DENIED" | "LOCERR_USER_IMPERSONATION_FAILED" | "LOCERR_SERVER_OUT_OF_SESSION_AND_USER_CALS" | "LOCERR_SERVER_OUT_OF_SESSION_CALS" | "LOCERR_SERVER_OUT_OF_USAGE_CALS" | "LOCERR_SERVER_OUT_OF_CALS" | "LOCERR_SERVER_OUT_OF_NAMED_CALS" | "LOCERR_SERVER_OFF_DUTY" | "LOCERR_SERVER_BUSY" | "LOCERR_SERVER_LICENSE_EXPIRED" | "LOCERR_SERVER_AJAX_DISABLED" | "LOCERR_SERVER_NO_TOKEN" | "LOCERR_HC_INVALID_OBJECT" | "LOCERR_HC_RESULT_TOO_LARGE" | "LOCERR_HC_INVALID_OBJECT_STATE" | "LOCERR_HC_MODAL_OBJECT_ERROR" | "LOCERR_CALC_INVALID_DEF" | "LOCERR_CALC_NOT_IN_LIB" | "LOCERR_CALC_HEAP_ERROR" | "LOCERR_CALC_TOO_LARGE" | "LOCERR_CALC_TIMEOUT" | "LOCERR_CALC_EVAL_CONDITION_FAILED" | "LOCERR_CALC_MIXED_LINKED_AGGREGATION" | "LOCERR_CALC_MISSING_LINKED" | "LOCERR_CALC_INVALID_COL_SORT" | "LOCERR_CALC_PAGES_TOO_LARGE" | "LOCERR_CALC_SEMANTIC_FIELD_NOT_ALLOWED" | "LOCERR_CALC_VALIDATION_STATE_INVALID" | "LOCERR_CALC_PIVOT_DIMENSIONS_ALREADY_EXISTS" | "LOCERR_CALC_MISSING_LINKED_FIELD" | "LOCERR_CALC_NOT_CALCULATED" | "LOCERR_LAYOUT_EXTENDS_INVALID_ID" | "LOCERR_LAYOUT_LINKED_OBJECT_NOT_FOUND" | "LOCERR_LAYOUT_LINKED_OBJECT_INVALID" | "LOCERR_PERSISTENCE_WRITE_FAILED" | "LOCERR_PERSISTENCE_READ_FAILED" | "LOCERR_PERSISTENCE_DELETE_FAILED" | "LOCERR_PERSISTENCE_NOT_FOUND" | "LOCERR_PERSISTENCE_UNSUPPORTED_VERSION" | "LOCERR_PERSISTENCE_MIGRATION_FAILED_READ_ONLY" | "LOCERR_PERSISTENCE_MIGRATION_CANCELLED" | "LOCERR_PERSISTENCE_MIGRATION_BACKUP_FAILED" | "LOCERR_PERSISTENCE_DISK_FULL" | "LOCERR_PERSISTENCE_NOT_SUPPORTED_FOR_SESSION_APP" | "LOCERR_PERSISTENCE_MOVE_FAILED" | "LOCERR_PERSISTENCE_OBJECT_LOCKED" | "LOCERR_PERSISTENCE_ENCRYPTION_KEY_MIGRATION_ONGOING" | "LOCERR_PERSISTENCE_SYNC_SET_CHUNK_INVALID_PARAMETERS" | "LOCERR_PERSISTENCE_SYNC_GET_CHUNK_INVALID_PARAMETERS" | "LOCERR_SCRIPT_DATASOURCE_ACCESS_DENIED" | "LOCERR_RELOAD_IN_PROGRESS" | "LOCERR_RELOAD_TABLE_X_NOT_FOUND" | "LOCERR_RELOAD_UNKNOWN_STATEMENT" | "LOCERR_RELOAD_EXPECTED_SOMETHING_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_NOTHING_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_1_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_2_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_3_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_4_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_5_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_6_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_7_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_EXPECTED_ONE_OF_8_OR_MORE_TOKENS_FOUND_UNKNOWN" | "LOCERR_RELOAD_FIELD_X_NOT_FOUND" | "LOCERR_RELOAD_MAPPING_TABLE_X_NOT_FOUND" | "LOCERR_RELOAD_LIB_CONNECTION_X_NOT_FOUND" | "LOCERR_RELOAD_NAME_ALREADY_TAKEN" | "LOCERR_RELOAD_WRONG_FILE_FORMAT_DIF" | "LOCERR_RELOAD_WRONG_FILE_FORMAT_BIFF" | "LOCERR_RELOAD_WRONG_FILE_FORMAT_ENCRYPTED" | "LOCERR_RELOAD_OPEN_FILE_ERROR" | "LOCERR_RELOAD_AUTO_GENERATE_COUNT" | "LOCERR_RELOAD_PE_ILLEGAL_PREFIX_COMB" | "LOCERR_RELOAD_MATCHING_CONTROL_STATEMENT_ERROR" | "LOCERR_RELOAD_MATCHING_LIBPATH_X_NOT_FOUND" | "LOCERR_RELOAD_MATCHING_LIBPATH_X_INVALID" | "LOCERR_RELOAD_MATCHING_LIBPATH_X_OUTSIDE" | "LOCERR_RELOAD_NO_QUALIFIED_PATH_FOR_FILE" | "LOCERR_RELOAD_MODE_STATEMENT_ONLY_FOR_LIB_PATHS" | "LOCERR_RELOAD_INCONSISTENT_USE_OF_SEMANTIC_FIELDS" | "LOCERR_RELOAD_NO_OPEN_DATABASE" | "LOCERR_RELOAD_AGGREGATION_REQUIRED_BY_GROUP_BY" | "LOCERR_RELOAD_CONNECT_MUST_USE_LIB_PREFIX_IN_THIS_MODE" | "LOCERR_RELOAD_ODBC_CONNECT_FAILED" | "LOCERR_RELOAD_OLEDB_CONNECT_FAILED" | "LOCERR_RELOAD_CUSTOM_CONNECT_FAILED" | "LOCERR_RELOAD_ODBC_READ_FAILED" | "LOCERR_RELOAD_OLEDB_READ_FAILED" | "LOCERR_RELOAD_CUSTOM_READ_FAILED" | "LOCERR_RELOAD_BINARY_LOAD_PROHIBITED" | "LOCERR_RELOAD_CONNECTOR_START_FAILED" | "LOCERR_RELOAD_CONNECTOR_NOT_RESPONDING" | "LOCERR_RELOAD_CONNECTOR_REPLY_ERROR" | "LOCERR_RELOAD_CONNECTOR_CONNECT_ERROR" | "LOCERR_RELOAD_CONNECTOR_NOT_FOUND_ERROR" | "LOCERR_RELOAD_INPUT_FIELD_WITH_DUPLICATE_KEYS" | "LOCERR_RELOAD_CONCATENATE_LOAD_NO_PREVIOUS_TABLE" | "LOCERR_RELOAD_WRONG_FILE_FORMAT_QVD" | "LOCERR_RELOAD_ACTION_BLOCKED_ENTITLEMENT" | "LOCERR_PERSONAL_NEW_VERSION_AVAILABLE" | "LOCERR_PERSONAL_VERSION_EXPIRED" | "LOCERR_PERSONAL_SECTION_ACCESS_DETECTED" | "LOCERR_PERSONAL_APP_DELETION_FAILED" | "LOCERR_USER_AUTHENTICATION_FAILURE" | "LOCERR_EXPORT_OUT_OF_MEMORY" | "LOCERR_EXPORT_NO_DATA" | "LOCERR_SYNC_INVALID_OFFSET" | "LOCERR_SEARCH_TIMEOUT" | "LOCERR_DIRECT_DISCOVERY_LINKED_EXPRESSION_FAIL" | "LOCERR_DIRECT_DISCOVERY_ROWCOUNT_OVERFLOW" | "LOCERR_DIRECT_DISCOVERY_EMPTY_RESULT" | "LOCERR_DIRECT_DISCOVERY_DB_CONNECTION_FAILED" | "LOCERR_DIRECT_DISCOVERY_MEASURE_NOT_ALLOWED" | "LOCERR_DIRECT_DISCOVERY_DETAIL_NOT_ALLOWED" | "LOCERR_DIRECT_DISCOVERY_NOT_SYNTH_CIRCULAR_ALLOWED" | "LOCERR_DIRECT_DISCOVERY_ONLY_ONE_DD_TABLE_ALLOWED" | "LOCERR_DIRECT_DISCOVERY_DB_AUTHORIZATION_FAILED" | "LOCERR_SMART_LOAD_TABLE_NOT_FOUND" | "LOCERR_SMART_LOAD_TABLE_DUPLICATED" | "LOCERR_VARIABLE_NO_NAME" | "LOCERR_VARIABLE_DUPLICATE_NAME" | "LOCERR_VARIABLE_INCONSISTENCY" | "LOCERR_MEDIA_LIBRARY_LIST_FAILED" | "LOCERR_MEDIA_LIBRARY_CONTENT_FAILED" | "LOCERR_MEDIA_BUNDLING_FAILED" | "LOCERR_MEDIA_UNBUNDLING_FAILED" | "LOCERR_MEDIA_LIBRARY_NOT_FOUND" | "LOCERR_FEATURE_DISABLED" | "LOCERR_JSON_RPC_INVALID_REQUEST" | "LOCERR_JSON_RPC_METHOD_NOT_FOUND" | "LOCERR_JSON_RPC_INVALID_PARAMETERS" | "LOCERR_JSON_RPC_INTERNAL_ERROR" | "LOCERR_JSON_RPC_PARSE_ERROR" | "LOCERR_MQ_SOCKET_CONNECT_FAILURE" | "LOCERR_MQ_SOCKET_OPEN_FAILURE" | "LOCERR_MQ_PROTOCOL_NO_RESPONE" | "LOCERR_MQ_PROTOCOL_LIBRARY_EXCEPTION" | "LOCERR_MQ_PROTOCOL_CONNECTION_CLOSED" | "LOCERR_MQ_PROTOCOL_CHANNEL_CLOSED" | "LOCERR_MQ_PROTOCOL_UNKNOWN_ERROR" | "LOCERR_MQ_PROTOCOL_INVALID_STATUS" | "LOCERR_EXTENGINE_GRPC_STATUS_OK" | "LOCERR_EXTENGINE_GRPC_STATUS_CANCELLED" | "LOCERR_EXTENGINE_GRPC_STATUS_UNKNOWN" | "LOCERR_EXTENGINE_GRPC_STATUS_INVALID_ARGUMENT" | "LOCERR_EXTENGINE_GRPC_STATUS_DEADLINE_EXCEEDED" | "LOCERR_EXTENGINE_GRPC_STATUS_NOT_FOUND" | "LOCERR_EXTENGINE_GRPC_STATUS_ALREADY_EXISTS" | "LOCERR_EXTENGINE_GRPC_STATUS_PERMISSION_DENIED" | "LOCERR_EXTENGINE_GRPC_STATUS_RESOURCE_EXHAUSTED" | "LOCERR_EXTENGINE_GRPC_STATUS_FAILED_PRECONDITION" | "LOCERR_EXTENGINE_GRPC_STATUS_ABORTED" | "LOCERR_EXTENGINE_GRPC_STATUS_OUT_OF_RANGE" | "LOCERR_EXTENGINE_GRPC_STATUS_UNIMPLEMENTED" | "LOCERR_EXTENGINE_GRPC_STATUS_INTERNAL" | "LOCERR_EXTENGINE_GRPC_STATUS_UNAVAILABLE" | "LOCERR_EXTENGINE_GRPC_STATUS_DATA_LOSS" | "LOCERR_EXTENGINE_GRPC_STATUS_UNAUTHENTICATED" | "LOCERR_LXW_INVALID_OBJ" | "LOCERR_LXW_INVALID_FILE" | "LOCERR_LXW_INVALID_SHEET" | "LOCERR_LXW_INVALID_EXPORT_RANGE" | "LOCERR_LXW_ERROR" | "LOCERR_LXW_ERROR_MEMORY_MALLOC_FAILED" | "LOCERR_LXW_ERROR_CREATING_XLSX_FILE" | "LOCERR_LXW_ERROR_CREATING_TMPFILE" | "LOCERR_LXW_ERROR_ZIP_FILE_OPERATION" | "LOCERR_LXW_ERROR_ZIP_FILE_ADD" | "LOCERR_LXW_ERROR_ZIP_CLOSE" | "LOCERR_LXW_ERROR_NULL_PARAMETER_IGNORED" | "LOCERR_LXW_ERROR_MAX_STRING_LENGTH_EXCEEDED" | "LOCERR_LXW_ERROR_255_STRING_LENGTH_EXCEEDED" | "LOCERR_LXW_ERROR_SHARED_STRING_INDEX_NOT_FOUND" | "LOCERR_LXW_ERROR_WORKSHEET_INDEX_OUT_OF_RANGE" | "LOCERR_LXW_ERROR_WORKSHEET_MAX_NUMBER_URLS_EXCEEDED" | "LOCERR_BDI_STATUS_OK" | "LOCERR_BDI_GENERIC_ERROR_NOT_TRANSLATED" | "LOCERR_TRENDLINE_INVALID_DEF" | "LOCERR_TRENDLINE_INVALID_MATH_ERROR" | "LOCERR_CURL_UNSUPPORTED_PROTOCOL" | "LOCERR_CURL_COULDNT_RESOLVE_PROXY" | "LOCERR_CURL_COULDNT_CONNECT" | "LOCERR_CURL_REMOTE_ACCESS_DENIED" | "LOCERR_CURL_FTP_ACCEPT_FAILED" | "LOCERR_CURL_FTP_ACCEPT_TIMEOUT" | "LOCERR_CURL_FTP_CANT_GET_HOST" | "LOCERR_CURL_PARTIAL_FILE" | "LOCERR_CURL_QUOTE_ERROR" | "LOCERR_CURL_WRITE_ERROR" | "LOCERR_CURL_UPLOAD_FAILED" | "LOCERR_CURL_OUT_OF_MEMORY" | "LOCERR_CURL_OPERATION_TIMEDOUT" | "LOCERR_CURL_FTP_COULDNT_USE_REST" | "LOCERR_CURL_HTTP_POST_ERROR" | "LOCERR_CURL_SSL_CONNECT_ERROR" | "LOCERR_CURL_FILE_COULDNT_READ_FILE" | "LOCERR_CURL_LDAP_CANNOT_BIND" | "LOCERR_CURL_LDAP_SEARCH_FAILED" | "LOCERR_CURL_TOO_MANY_REDIRECTS" | "LOCERR_CURL_PEER_FAILED_VERIFICATION" | "LOCERR_CURL_GOT_NOTHING" | "LOCERR_CURL_SSL_ENGINE_NOTFOUND" | "LOCERR_CURL_SSL_ENGINE_SETFAILED" | "LOCERR_CURL_SSL_CERTPROBLEM" | "LOCERR_CURL_SSL_CIPHER" | "LOCERR_CURL_SSL_CACERT" | "LOCERR_CURL_BAD_CONTENT_ENCODING" | "LOCERR_CURL_LDAP_INVALID_URL" | "LOCERR_CURL_USE_SSL_FAILED" | "LOCERR_CURL_SSL_ENGINE_INITFAILED" | "LOCERR_CURL_LOGIN_DENIED" | "LOCERR_CURL_TFTP_NOTFOUND" | "LOCERR_CURL_TFTP_ILLEGAL" | "LOCERR_CURL_SSH" | "LOCERR_SETEXPRESSION_TOO_LARGE" | "LOCERR_RELOAD_MERGE_LOAD_ERROR" | "LOCERR_WIN_FTP_DROPPED" | "LOCERR_WIN_FTP_NO_PASSIVE_MODE" | "LOCERR_WIN_HTTP_DOWNLEVEL_SERVER" | "LOCERR_WIN_HTTP_INVALID_SERVER_RESPONSE" | "LOCERR_WIN_HTTP_REDIRECT_NEEDS_CONFIRMATION" | "LOCERR_WIN_INTERNET_FORCE_RETRY" | "LOCERR_WIN_INTERNET_CANNOT_CONNECT" | "LOCERR_WIN_INTERNET_CONNECTION_ABORTED" | "LOCERR_WIN_INTERNET_CONNECTION_RESET" | "LOCERR_WIN_INTERNET_DISCONNECTED" | "LOCERR_WIN_INTERNET_INCORRECT_FORMAT" | "LOCERR_WIN_INTERNET_INVALID_CA" | "LOCERR_WIN_INTERNET_INVALID_OPERATION" | "LOCERR_WIN_INTERNET_INVALID_URL" | "LOCERR_WIN_INTERNET_ITEM_NOT_FOUND" | "LOCERR_WIN_INTERNET_LOGIN_FAILURE" | "LOCERR_WIN_INTERNET_NAME_NOT_RESOLVED" | "LOCERR_WIN_INTERNET_NEED_UI" | "LOCERR_WIN_INTERNET_SEC_CERT_CN_INVALID" | "LOCERR_WIN_INTERNET_SEC_CERT_DATE_INVALID" | "LOCERR_WIN_INTERNET_SEC_CERT_ERRORS" | "LOCERR_WIN_INTERNET_SEC_INVALID_CERT" | "LOCERR_WIN_INTERNET_SERVER_UNREACHABLE" | "LOCERR_BM_RESULT_TOO_LARGE";
 type NxLocalizedWarningCode = "LOCWARN_PERSONAL_RELOAD_REQUIRED" | "LOCWARN_PERSONAL_VERSION_EXPIRES_SOON" | "LOCWARN_EXPORT_DATA_TRUNCATED" | "LOCWARN_COULD_NOT_OPEN_ALL_OBJECTS" | "LOCWARN_SEARCH_INVALID_SEARCHFIELD_DETECTED";
 type NxMatchingFieldInfo = {
     /**
@@ -6275,26 +6316,6 @@ type SelectInfo = {
     qSelectFieldSearch?: boolean;
 };
 /**
- * Structure that holds information connecting an app object to a data model field represented by an NxCurrentSelectionItem in the SelectionObject.
- * The SelectionItemFieldReferenceInfo structure points to an app object, such as a GenericDimension, and also holds a label.
- *
- * Stability: *experimental*
- */
-type SelectionItemFieldReferenceInfo = {
-    /**
-     * Identifier of the associated object.
-     */
-    qId?: string;
-    /**
-     * Type of object.
-     */
-    qType?: string;
-    /**
-     * Text label.
-     */
-    qLabel?: string;
-};
-/**
  * Indicates which selections are currently applied. It gives the current selections. Is the layout for _SelectionObjectDef_.
  */
 type SelectionObject = {
@@ -6382,6 +6403,16 @@ type SourceKeyRecord = {
     qTables?: string[];
 };
 type StateEnumType = "L" | "LOCKED" | "S" | "SELECTED" | "O" | "OPTION" | "D" | "DESELECTED" | "A" | "ALTERNATIVE" | "X" | "EXCLUDED" | "XS" | "EXCL_SELECTED" | "XL" | "EXCL_LOCKED" | "NSTATES";
+type StateFieldValues = {
+    /**
+     * Name of the state.
+     */
+    qStateName?: string;
+    /**
+     * The field values associated with the state.
+     */
+    qFieldValues?: FieldValue[];
+};
 type StaticContentList = {
     /**
      * Information about the list of content files.
@@ -6815,7 +6846,7 @@ type UndoInfo = {
  * The numbers of undos and redos are empty when an object is created. The number of possible undos is increased every time an action (for example, create a child, set some properties) on the object is performed. The number of possible redos is increased every time an undo action is performed.
  */
 type UndoInfoDef = object;
-type UsageEnum = "ANALYTICS" | "DATA_PREPARATION";
+type UsageEnum = "ANALYTICS" | "DATA_PREPARATION" | "DATAFLOW_PREP" | "SINGLE_TABLE_PREP";
 type ValueExpr = {
     /**
      * Expression evaluated to dual.
@@ -8381,11 +8412,6 @@ type NativeDocFunctions<FieldRpcObject, GenericBookmarkRpcObject, GenericDimensi
      * Returns information about the position of the tables in the data model viewer.
      * <div class=note>The position of the broom points and the position of the connection points cannot be retrieved in Qlik Sense.</div>
      *
-     * ### Representation of tables, broom points and connection points
-     * ![](images/ui_gen_BroomConnectionPoints_dmv.png)<br>
-     * The green circles represent the broom points.
-     * The red circle represents a connection point.
-     *
      * Stability: *locked*
      */
     getViewDlgSaveInfo: () => Promise<TableViewDlgSaveInfo>;
@@ -8767,11 +8793,6 @@ type NativeDocFunctions<FieldRpcObject, GenericBookmarkRpcObject, GenericDimensi
      * Sets the positions of the tables in the data model viewer.
      * <div class=note>The position of the broom points and the position of the connection points cannot be set in Qlik Sense.</div>
      *
-     * ### Representation of tables, broom points and connection points
-     * ![](images/ui_gen_BroomConnectionPoints_dmv.png)<br>
-     * The green circles represent the broom points.
-     * The red circle represents a connection point.
-     *
      * Parameters:
      *
      * - `info`   -   Information about the table.
@@ -8885,6 +8906,8 @@ type NativeFieldFunctions = {
      *
      * - `match`                -   String to search for.
      * Can contain wild cards or numeric search criteria.
+     * The characters &lt;&gt;"~()='[] have pre-defined meanings when used at the start of the string.
+     * To use them, EnableSpecialCharacterEscapingInSearch needs to be enabled and the delimiter \ needs to precede the special character.
      * - `softLock`             -   Set to true to ignore locks; in that case, locked fields can be selected.
      * The default value is false.
      * - `excludedValuesMode`   -   Include excluded values in search.
@@ -9029,7 +9052,7 @@ type NativeGenericBookmarkFunctions = {
      */
     approve: () => Promise<void>;
     /**
-     * Retrieves the values of a field.
+     * Retrieves the values of a field for the default state.
      *
      * ### Fieldvalue
      * <table>
@@ -9060,12 +9083,50 @@ type NativeGenericBookmarkFunctions = {
      * Parameters:
      *
      * - `field`               -   Name of the field.
-     * - `getExcludedValues`   -   If set to true, only excluded values are returned.
+     * - `getExcludedValues`   -   If set to true, only NOT-selected values are returned.
      * - `dataPage`            -   Range of returned values.
      *
      * Stability: *locked*
      */
     getFieldValues: (field: string, getExcludedValues: boolean, dataPage: BookmarkFieldPage) => Promise<FieldValue[]>;
+    /**
+     * Retrieves the values of a field per state.
+     *
+     * ### Fieldvalue
+     * <table>
+     * <tbody>
+     * <tr>
+     * <th>Name</th>
+     * <th>Description</th>
+     * <th>Type</th>
+     * </tr>
+     * <tr>
+     * <td>qText</td>
+     * <td>Text related to the field value.</td>
+     * <td>String</td>
+     * </tr>
+     * <tr>
+     * <td>qIsNumeric</td>
+     * <td>Is set to true if the value is a numeric.<br>Default is false.</td>
+     * <td>Boolean</td>
+     * </tr>
+     * <tr>
+     * <td>qNumber</td>
+     * <td>Numeric value of the field.<br>This parameter is displayed if    qIsNumeric     is set to true.</td>
+     * <td>Double</td>
+     * </tr>
+     * </tbody>
+     * </table>
+     *
+     * Parameters:
+     *
+     * - `field`               -   Name of the field.
+     * - `getExcludedValues`   -   When to true, only NOT-selected values are returned.
+     * - `dataPages`           -   Range of returned values per state, an empty array will return the values of all states. Only one page without a state name returns the values for all states, using the start and end indices of the first page.
+     *
+     * Stability: *locked*
+     */
+    getFieldValuesEx: (field: string, getExcludedValues: boolean, dataPages: BookmarkStateFieldPages) => Promise<StateFieldValues[]>;
     /**
      * Returns:
      * * The type of the object.
@@ -9849,6 +9910,10 @@ type NativeGenericObjectFunctions<CustomProperties, CustomLayout, GenericObjectR
      * <div class=note>This method works for a hypercube in DATA_MODE_STRAIGHT.</div>
      * A data set is returned.
      *
+     * ### Limitations on the number of cells
+     * The maximum for the combined total number of cells across all pages is:
+     * * 10,000 cells. If this limit is exceeded, a calc-pages-too-large error with code 7009 is returned.
+     *
      * Parameters:
      *
      * - `path`    -   Path to the definition of the object to be selected.
@@ -9959,11 +10024,9 @@ type NativeGenericObjectFunctions<CustomProperties, CustomLayout, GenericObjectR
      *
      * ### Example:
      * _A_ is a generic object and is the parent of the objects B and C. _B_ is the parent of the objects D and E.
-     * <br>![](images/dr_gen_QVCPMethodGetLayoutHierarchy.png)<br>
      * A _GetLayout_ call on A returns information on the objects A, B and C.
      * A _GetLayout_ call on B returns information on the objects B, D and E.
      * A  _GetLayout_ call on C returns information on the object C.
-     *
      * <div class=note>
      * In addition to the parameters displayed above, the **GetLayout** method can return other properties according to what is defined in the generic object.
      * For example, if **qHyperCubeDef** is defined in the generic object, the **GetLayout** method returns the properties described in _HyperCube_.
@@ -9981,6 +10044,10 @@ type NativeGenericObjectFunctions<CustomProperties, CustomLayout, GenericObjectR
     /**
      * Retrieves the values of a list object.
      * A data set is returned.
+     *
+     * ### Limitations on the number of cells
+     * The maximum for the combined total number of cells across all pages is:
+     * * 10,000 cells. If this limit is exceeded, a calc-pages-too-large error with code 7009 is returned.
      *
      * Parameters:
      *
@@ -10306,30 +10373,6 @@ type NativeGenericObjectFunctions<CustomProperties, CustomLayout, GenericObjectR
      * Makes selections in the left dimension cells of a stacked table or in the data matrix.
      * <div class=note>There is no top dimensions in a stacked table. A stacked table can only contain one measure.</div>
      *
-     * ### Example of a pivot table
-     * ![](images/ui_gen_ExampleQVCPPivotTableDescription.png)<br>
-     * In the representation above:
-     * <table>
-     * <tbody>
-     * <tr>
-     * <td>Sum(OrderTotal)<br>Count(OrderTotal)</td>
-     * <td>Are pseudo dimensions.</td>
-     * </tr>
-     * <tr>
-     * <td>CategoryName</td>
-     * <td>Is a left dimension.<br>   Beverages     ,    Condiments     ... are left dimension values.</td>
-     * </tr>
-     * <tr>
-     * <td>ProductName</td>
-     * <td>Is a top dimension.<br>   Chef Anton's Cajun Seasoning     is a top dimension value. </td>
-     * </tr>
-     * <tr>
-     * <td>Numeric values</td>
-     * <td>Are calculated values in the data matrix.<br>   626291,832     is a calculated value.</td>
-     * </tr>
-     * </tbody>
-     * </table>
-     *
      * The member **Change** returns the handles of the objects that are updated following the selections.
      * _qSuccess_ is set to _true_ if the selections are successful and is set to _false_ in the following cases:
      * * The object contains some invalid fields (fields that are not in the data model).
@@ -10348,6 +10391,22 @@ type NativeGenericObjectFunctions<CustomProperties, CustomLayout, GenericObjectR
      * Stability: *locked*
      */
     selectPivotCells: (path: string, selections: NxSelectionCell[], softLock?: boolean, deselectOnlyOneSelected?: boolean) => Promise<boolean>;
+    /**
+     * You can use the SetActiveField method with any object that contains a cyclic group as a dimension.
+     * This method allows you to jump to a specific field in a cyclic dimension. If NewIndex is out-of-bounds of the dimension's fields then no action is taken.
+     * A hypercube will avoid field collisions with its other dimensions when setting the active field in this manner. If there are any collisions then no action is performed.
+     *
+     * Parameters:
+     *
+     * - `path`       -   Path to the definition of the object to be selected.
+     * For example, _/qHyperCubeDef_ .
+     * - `dimNo`      -   Dimension number or index starting from 0.
+     * The default value is 0.
+     * - `newIndex`   -   Index of the field to jump to.
+     *
+     * Stability: *experimental*
+     */
+    setActiveField: (path: string, dimNo: number, newIndex: number) => Promise<void>;
     /**
      * Sets the order of the children in a generic object.
      * <div class=note>To change the order of the children in a generic object, the identifiers of all the children must be included in the list of the identifiers (in _qIds_ ). </div>
@@ -10385,6 +10444,23 @@ type NativeGenericObjectFunctions<CustomProperties, CustomLayout, GenericObjectR
      * Stability: *locked*
      */
     setProperties: (prop: CustomProperties) => Promise<void>;
+    /**
+     * You can use the StepCycle method with any object that contains a cyclic group as a dimension.
+     * This method allows you to move between different fields in a cyclic dimension.
+     * A hypercube will avoid field collisions with its other dimensions when cycling in this manner. If all other fields cause collisions then no cycling is performed.
+     *
+     * Parameters:
+     *
+     * - `path`       -   Path to the definition of the object to be selected.
+     * For example, _/qHyperCubeDef_ .
+     * - `dimNo`      -   Dimension number or index starting from 0.
+     * The default value is 0.
+     * - `nbrSteps`   -   Number of steps you want to cycle.
+     * Positive values cycle forwards while negative values cycle backwards. A value of 0 leads to no action being taken.
+     *
+     * Stability: *experimental*
+     */
+    stepCycle: (path: string, dimNo: number, nbrSteps: number) => Promise<void>;
     /**
      * Removes the generic object from the list of approved objects
      * <div class=note>This operation is possible only in Qlik Sense Enterprise.</div>
@@ -11636,7 +11712,12 @@ type OpenAppSessionProps = {
     withoutData?: boolean;
     /** Use a separate reload engine to perform a reload */
     useReloadEngine?: boolean;
+    /** Time-to-live in seconds. */
+    ttlSeconds?: number;
+    /** Workload Type */
+    workloadType?: WorkloadType;
 };
+type WorkloadType = "interact" | "report" | "reload" | "prepare" | "analyse" | "odag" | "dataflows" | "dynamicviews" | "appgeneration" | "evaluate" | "profile" | "di-qvd-gen" | "alert-preview" | "alert-evaluations" | "reporting-analytic" | "reporting-batch" | "automation" | "insight-advisor" | "automl-load" | "discovery";
 type DocAction = (doc: Doc) => Promise<unknown>;
 type CloseProps = {
     /**
@@ -11727,8 +11808,19 @@ declare function openAppSession(appSessionProps: OpenAppSessionProps): {
      */
     close(props?: CloseProps): Promise<void>;
 };
-declare const qix: {
+interface QixAPI {
+    /**
+     * Open a qix session in engine on the current domain for the supplied appId. If the same app is opened multiple times
+     * only a single enigma websocket session is opened and shared.
+     * When all open sessions are closed again the shared enigma websocket session is also closed.
+     * @param appId The resource id of the app to open
+     * @param host Configuration of what host to connect to
+     */
     openAppSession: typeof openAppSession;
+}
+declare function withHostConfig(hostConfig: HostConfig | undefined): QixAPI;
+declare const qix: QixAPI & {
+    withHostConfig: (hostConfig: HostConfig | undefined) => QixAPI;
 };
 
-export { type AlfaNumString, type AlternateStateData, type AnyGenericObjectLayout, type AnyGenericObjectProperties, type AppEntry, type AppObjectList, type AppObjectListDef, type AppScript, type AppScriptMeta, type AppSession, type ApplyGroupStateWarning, type ApplyGroupStateWarningType, type ApplyGroupStatesResult, type ArrayOfNxValuePoint, type AssociationScore, type BNFDef, type BNFDefMetaType, type BNFType, type Blob, type Bookmark, type BookmarkApplyAndVerifyResult, type BookmarkFieldItem, type BookmarkFieldPage, type BookmarkFieldVerifyResultState, type BookmarkFieldVerifyWarning, type BookmarkList, type BookmarkListData, type BookmarkListDef, type BookmarkListItem, type BookmarkVariableItem, type CalendarStrings, type CharEncodingType, type CharRange, type ChildList, type ChildListDef, type CloseProps, type CodePage, type CombinedWebSocketStateEvent, type CondDef, type Connection, type ContentLibraryList, type ContentLibraryListItem, type CurrentSelections, type CustomConnector, type CyclicGroupPosition, type DataField, type DataRecord, type DataTable, type DataTableEx, type Database, type DatabaseInfo, type DatabaseOwner, type DelimiterInfo, type DerivedFieldsInTableData, type DimensionList, type DimensionListData, type DimensionListDef, type DimensionListItem, type DoReloadExParams, type DoReloadExResult, type Doc, type DocAction, type DocListEntry, type DriveInfo, type DriveType, type DynamicAppViewListData, type DynamicAppViewListItem, type EditorBreakpoint, type EmbeddedSnapshot, type EmbeddedSnapshotDef, type ErrorData, type ErrorDataCode, type ExpandedFieldListItem, type ExpansionData, type ExtendedLayoutBookmarkData, type ExtendedPivotStateData, type ExtensionList, type ExtensionListDef, type Field, type FieldAttrType, type FieldAttributes, type FieldDefEx, type FieldDescription, type FieldInTableData, type FieldInTableProfilingData, type FieldList, type FieldListDef, type FieldListObject, type FieldOrColumn, type FieldScores, type FieldType, type FieldValue, type FileDataFormat, type FileType, type FilterInfo, type FilterType, type FolderItem, type FolderItemType, type FrequencyDistributionData, type FunctionGroup, type GenericBookmark, type GenericBookmarkEntry, type GenericBookmarkLayout, type GenericBookmarkProperties, type GenericConnectMachine, type GenericDimension, type GenericDimensionInfo, type GenericDimensionLayout, type GenericDimensionProperties, type GenericListObject, type GenericMeasure, type GenericMeasureLayout, type GenericMeasureProperties, type GenericObject, type GenericObjectEntry, type GenericObjectLayout, type GenericObjectLayoutAdditionalProperties, type GenericObjectLayoutNode, type GenericObjectLayoutNodeLevel2, type GenericObjectLayoutNodeLevel3, type GenericObjectLayoutNodeLevel4, type GenericObjectLayoutNodeLevel5, type GenericObjectLayoutNodeRec, type GenericObjectProperties, type GenericObjectPropertiesAdditionalProperties, type GenericObjectPropertiesNode, type GenericObjectPropertiesNodeLevel2, type GenericObjectPropertiesNodeLevel3, type GenericObjectPropertiesNodeLevel4, type GenericObjectPropertiesNodeLevel5, type GenericObjectPropertiesNodeRec, type GenericVariable, type GenericVariableLayout, type GenericVariableProperties, type Global, type GraphMode, type GroupBookmarkData, type GroupState, type GroupStateInfo, type HyperCube, type HyperCubeDef, type InputFieldItem, type InterFieldSortData, type InteractDef, type InteractType, type KeyType, type LayoutBookmarkData, type LayoutExclude, type LayoutFieldInfo, type LineageInfo, type ListBoxProperties, type ListFunctions, type ListItem, type ListObject, type ListObjectDef, type LocaleInfo, type LogOnType, type MasterObjectListData, type MasterObjectListItem, type MeasureList, type MeasureListData, type MeasureListDef, type MeasureListItem, type MediaListDef, type MediaListItem, type MetaData, type ModalFunctions, type NativeDocFunctions, type NativeFieldFunctions, type NativeGenericBookmarkFunctions, type NativeGenericDimensionFunctions, type NativeGenericMeasureFunctions, type NativeGenericObjectFunctions, type NativeGenericVariableFunctions, type NativeGlobalFunctions, type NativeReactHooks, type NativeVariableFunctions, type NxAppLayout, type NxAppProperties, type NxAttrDimDef, type NxAttrDimInfo, type NxAttrExprDef, type NxAttrExprInfo, type NxAttributeDimValues, type NxAttributeExpressionValues, type NxAutoSortByStateDef, type NxAxisData, type NxAxisTicks, type NxBookmark, type NxCalcCond, type NxCardinalities, type NxCell, type NxCellPosition, type NxCellRows, type NxContainerEntry, type NxContinuousDataOptions, type NxContinuousMode, type NxContinuousRangeSelectInfo, type NxCurrentSelectionItem, type NxDataAreaPage, type NxDataPage, type NxDataReductionMode, type NxDerivedField, type NxDerivedFieldDescriptionList, type NxDerivedFieldsData, type NxDerivedGroup, type NxDimCellType, type NxDimension, type NxDimensionInfo, type NxDimensionType, type NxDownloadInfo, type NxDownloadOptions, type NxEngineVersion, type NxExportFileType, type NxExportState, type NxFeature, type NxFieldDescription, type NxFieldProperties, type NxFieldResourceId, type NxFieldSelectionInfo, type NxFieldSelectionMode, type NxFieldTableResourceId, type NxFrequencyMode, type NxGetBookmarkOptions, type NxGetObjectOptions, type NxGroupTail, type NxGrpType, type NxHighlightRanges, type NxHypercubeMode, type NxInfo, type NxInlineDimensionDef, type NxInlineMeasureDef, type NxLTrendlineType, type NxLayoutErrors, type NxLibraryDimension, type NxLibraryDimensionDef, type NxLibraryMeasure, type NxLibraryMeasureDef, type NxLinkedObjectInfo, type NxListObjectExpression, type NxListObjectExpressionDef, type NxLocalizedErrorCode, type NxLocalizedWarningCode, type NxMatchingFieldInfo, type NxMatchingFieldMode, type NxMeasure, type NxMeasureInfo, type NxMeta, type NxMetaDef, type NxMiniChart, type NxMiniChartCell, type NxMiniChartData, type NxMiniChartDef, type NxMiniChartRows, type NxMultiRangeSelectInfo, type NxPage, type NxPageTreeLevel, type NxPageTreeNode, type NxPatch, type NxPatchOperationType, type NxPatches, type NxPivotDimensionCell, type NxPivotPage, type NxPivotValuePoint, type NxRange, type NxRangeSelectInfo, type NxSelectionCell, type NxSelectionCellType, type NxSelectionInfo, type NxSimpleDimValue, type NxSimpleValue, type NxSortIndicatorType, type NxStackPage, type NxStackedPivotCell, type NxStateCounts, type NxStreamListEntry, type NxTempBookmarkOptions, type NxTickCell, type NxTreeDataOption, type NxTreeDimensionDef, type NxTreeDimensionInfo, type NxTreeMultiRangeSelectInfo, type NxTreeNode, type NxTreeRangeSelectInfo, type NxTreeValue, type NxTrendline, type NxTrendlineDef, type NxTrendlineMode, type NxValidationError, type NxVariableListItem, type NxVariableProperties, type NxViewPort, type ODAGAppLinkListData, type ODAGAppLinkListItem, type ObjectHelperFunctions, type ObjectInterface, type OdbcDsn, type OleDbProvider, type OpenAppSessionProps, type OtherLimitMode, type OtherMode, type OtherSortMode, type OtherTotalSpecProp, type Point, type PositionMark, type ProgressData, type ProgressMessage, type QFunction, QIX_SCHEMA_VERSION, type QMediaList, type QRange, type RangeSelectInfo, type Rect, type RpcObject, type SampleResult, type ScriptSyntaxError, type ScrollPosition, type SearchAssociationResult, type SearchAttribute, type SearchCharRange, type SearchCombinationOptions, type SearchContextType, type SearchFieldDictionary, type SearchFieldMatch, type SearchFieldMatchType, type SearchFieldMatchesItem, type SearchFieldSelectionMode, type SearchFieldValueItem, type SearchGroup, type SearchGroupItem, type SearchGroupItemMatch, type SearchGroupItemOptions, type SearchGroupItemType, type SearchGroupOptions, type SearchGroupType, type SearchMatchCombination, type SearchMatchCombinations, type SearchObjectOptions, type SearchPage, type SearchResult, type SearchSuggestItem, type SearchSuggestionResult, type SearchTermResult, type SearchValueOptions, type SearchValuePage, type SearchValueResult, type SelectInfo, type SelectionItemFieldReferenceInfo, type SelectionObject, type SelectionObjectDef, type SheetListData, type SheetListDataCell, type SheetListDataCellBounds, type SheetListItem, type Size, type SortCriteria, type SourceKeyRecord, type SpecialObjectFunctions, type StandardFunctions, type StateEnumType, type StaticContentList, type StaticContentListItem, type StaticContentUrl, type StaticContentUrlDef, type StoryListData, type StoryListItem, type StringExpr, type StringExpression, type SymbolFrequency, type SymbolValue, type TableProfilingData, type TableRecord, type TableRow, type TableViewBroomPointSaveInfo, type TableViewConnectionPointSaveInfo, type TableViewCtlSaveInfo, type TableViewDlgSaveInfo, type TableViewSaveInfo, type TableViewTableWinSaveInfo, type TextMacro, type TotalMode, type TransformAppParameters, type TransformAppResult, type TreeData, type TreeDataDef, type UndoInfo, type UndoInfoDef, type UndoInfoObject, type UsageEnum, type UseAppHook, type ValueExpr, type ValueExpression, type VariableList, type VariableListData, type VariableListDef, type VariableListItem, type WebSocketEvent, qix as default, openAppSession };
+export { type AlfaNumString, type AlternateStateData, type AnyGenericObjectLayout, type AnyGenericObjectProperties, type AppEntry, type AppObjectList, type AppObjectListDef, type AppScript, type AppScriptMeta, type AppSession, type ApplyGroupStateWarning, type ApplyGroupStateWarningType, type ApplyGroupStatesResult, type ArrayOfNxValuePoint, type AssociationScore, type BNFDef, type BNFDefMetaType, type BNFType, type Blob, type Bookmark, type BookmarkApplyAndVerifyResult, type BookmarkFieldItem, type BookmarkFieldPage, type BookmarkFieldPageEx, type BookmarkFieldVerifyResultState, type BookmarkFieldVerifyWarning, type BookmarkList, type BookmarkListData, type BookmarkListDef, type BookmarkListItem, type BookmarkStateFieldPages, type BookmarkVariableItem, type CalendarStrings, type CharEncodingType, type CharRange, type ChildList, type ChildListDef, type CloseProps, type CodePage, type CombinedWebSocketStateEvent, type CondDef, type Connection, type ContentLibraryList, type ContentLibraryListItem, type CurrentSelections, type CustomConnector, type CyclicGroupPosition, type DataField, type DataRecord, type DataTable, type DataTableEx, type Database, type DatabaseInfo, type DatabaseOwner, type DelimiterInfo, type DerivedFieldsInTableData, type DimensionList, type DimensionListData, type DimensionListDef, type DimensionListItem, type DimensionReference, type DoReloadExParams, type DoReloadExResult, type Doc, type DocAction, type DocListEntry, type DriveInfo, type DriveType, type DynamicAppViewListData, type DynamicAppViewListItem, type EditorBreakpoint, type EmbeddedSnapshot, type EmbeddedSnapshotDef, type ErrorData, type ErrorDataCode, type ExpandedFieldListItem, type ExpansionData, type ExtendedLayoutBookmarkData, type ExtendedPivotStateData, type ExtensionList, type ExtensionListDef, type Field, type FieldAttrType, type FieldAttributes, type FieldDefEx, type FieldDescription, type FieldInTableData, type FieldInTableProfilingData, type FieldList, type FieldListDef, type FieldListObject, type FieldOrColumn, type FieldScores, type FieldType, type FieldValue, type FileDataFormat, type FileType, type FilterInfo, type FilterType, type FolderItem, type FolderItemType, type FrequencyDistributionData, type FunctionGroup, type GenericBookmark, type GenericBookmarkEntry, type GenericBookmarkLayout, type GenericBookmarkProperties, type GenericConnectMachine, type GenericDimension, type GenericDimensionInfo, type GenericDimensionLayout, type GenericDimensionProperties, type GenericListObject, type GenericMeasure, type GenericMeasureLayout, type GenericMeasureProperties, type GenericObject, type GenericObjectEntry, type GenericObjectLayout, type GenericObjectLayoutAdditionalProperties, type GenericObjectLayoutNode, type GenericObjectLayoutNodeLevel2, type GenericObjectLayoutNodeLevel3, type GenericObjectLayoutNodeLevel4, type GenericObjectLayoutNodeLevel5, type GenericObjectLayoutNodeRec, type GenericObjectProperties, type GenericObjectPropertiesAdditionalProperties, type GenericObjectPropertiesNode, type GenericObjectPropertiesNodeLevel2, type GenericObjectPropertiesNodeLevel3, type GenericObjectPropertiesNodeLevel4, type GenericObjectPropertiesNodeLevel5, type GenericObjectPropertiesNodeRec, type GenericVariable, type GenericVariableLayout, type GenericVariableProperties, type Global, type GraphMode, type GroupBookmarkData, type GroupState, type GroupStateInfo, type HyperCube, type HyperCubeDef, type InputFieldItem, type InterFieldSortData, type InteractDef, type InteractType, type KeyType, type LayoutBookmarkData, type LayoutExclude, type LayoutFieldInfo, type LineageInfo, type ListBoxProperties, type ListFunctions, type ListItem, type ListObject, type ListObjectDef, type LocaleInfo, type LogOnType, type MasterObjectListData, type MasterObjectListItem, type MeasureList, type MeasureListData, type MeasureListDef, type MeasureListItem, type MediaListDef, type MediaListItem, type MetaData, type ModalFunctions, type NativeDocFunctions, type NativeFieldFunctions, type NativeGenericBookmarkFunctions, type NativeGenericDimensionFunctions, type NativeGenericMeasureFunctions, type NativeGenericObjectFunctions, type NativeGenericVariableFunctions, type NativeGlobalFunctions, type NativeReactHooks, type NativeVariableFunctions, type NxAppLayout, type NxAppProperties, type NxAttrDimDef, type NxAttrDimInfo, type NxAttrExprDef, type NxAttrExprInfo, type NxAttributeDimValues, type NxAttributeExpressionValues, type NxAutoSortByStateDef, type NxAxisData, type NxAxisTicks, type NxBookmark, type NxCalcCond, type NxCardinalities, type NxCell, type NxCellPosition, type NxCellRows, type NxContainerEntry, type NxContinuousDataOptions, type NxContinuousMode, type NxContinuousRangeSelectInfo, type NxCurrentSelectionItem, type NxDataAreaPage, type NxDataPage, type NxDataReductionMode, type NxDerivedField, type NxDerivedFieldDescriptionList, type NxDerivedFieldsData, type NxDerivedGroup, type NxDimCellType, type NxDimension, type NxDimensionInfo, type NxDimensionType, type NxDownloadInfo, type NxDownloadOptions, type NxEngineVersion, type NxExportFileType, type NxExportState, type NxFeature, type NxFieldDescription, type NxFieldProperties, type NxFieldResourceId, type NxFieldSelectionInfo, type NxFieldSelectionMode, type NxFieldTableResourceId, type NxFrequencyMode, type NxGetBookmarkOptions, type NxGetObjectOptions, type NxGroupTail, type NxGrpType, type NxHighlightRanges, type NxHypercubeMode, type NxInfo, type NxInlineDimensionDef, type NxInlineMeasureDef, type NxLTrendlineType, type NxLayoutErrors, type NxLibraryDimension, type NxLibraryDimensionDef, type NxLibraryMeasure, type NxLibraryMeasureDef, type NxLinkedObjectInfo, type NxListObjectExpression, type NxListObjectExpressionDef, type NxLocalizedErrorCode, type NxLocalizedWarningCode, type NxMatchingFieldInfo, type NxMatchingFieldMode, type NxMeasure, type NxMeasureInfo, type NxMeta, type NxMetaDef, type NxMiniChart, type NxMiniChartCell, type NxMiniChartData, type NxMiniChartDef, type NxMiniChartRows, type NxMultiRangeSelectInfo, type NxPage, type NxPageTreeLevel, type NxPageTreeNode, type NxPatch, type NxPatchOperationType, type NxPatches, type NxPivotDimensionCell, type NxPivotPage, type NxPivotValuePoint, type NxRange, type NxRangeSelectInfo, type NxSelectionCell, type NxSelectionCellType, type NxSelectionInfo, type NxSimpleDimValue, type NxSimpleValue, type NxSortIndicatorType, type NxStackPage, type NxStackedPivotCell, type NxStateCounts, type NxStreamListEntry, type NxTempBookmarkOptions, type NxTickCell, type NxTreeDataOption, type NxTreeDimensionDef, type NxTreeDimensionInfo, type NxTreeMultiRangeSelectInfo, type NxTreeNode, type NxTreeRangeSelectInfo, type NxTreeValue, type NxTrendline, type NxTrendlineDef, type NxTrendlineMode, type NxValidationError, type NxVariableListItem, type NxVariableProperties, type NxViewPort, type ODAGAppLinkListData, type ODAGAppLinkListItem, type ObjectHelperFunctions, type ObjectInterface, type OdbcDsn, type OleDbProvider, type OpenAppSessionProps, type OtherLimitMode, type OtherMode, type OtherSortMode, type OtherTotalSpecProp, type Point, type PositionMark, type ProgressData, type ProgressMessage, type QFunction, QIX_SCHEMA_VERSION, type QMediaList, type QRange, type QixAPI, type RangeSelectInfo, type Rect, type RpcObject, type SampleResult, type ScriptSyntaxError, type ScrollPosition, type SearchAssociationResult, type SearchAttribute, type SearchCharRange, type SearchCombinationOptions, type SearchContextType, type SearchFieldDictionary, type SearchFieldMatch, type SearchFieldMatchType, type SearchFieldMatchesItem, type SearchFieldSelectionMode, type SearchFieldValueItem, type SearchGroup, type SearchGroupItem, type SearchGroupItemMatch, type SearchGroupItemOptions, type SearchGroupItemType, type SearchGroupOptions, type SearchGroupType, type SearchMatchCombination, type SearchMatchCombinations, type SearchObjectOptions, type SearchPage, type SearchResult, type SearchSuggestItem, type SearchSuggestionResult, type SearchTermResult, type SearchValueOptions, type SearchValuePage, type SearchValueResult, type SelectInfo, type SelectionObject, type SelectionObjectDef, type SheetListData, type SheetListDataCell, type SheetListDataCellBounds, type SheetListItem, type Size, type SortCriteria, type SourceKeyRecord, type SpecialObjectFunctions, type StandardFunctions, type StateEnumType, type StateFieldValues, type StaticContentList, type StaticContentListItem, type StaticContentUrl, type StaticContentUrlDef, type StoryListData, type StoryListItem, type StringExpr, type StringExpression, type SymbolFrequency, type SymbolValue, type TableProfilingData, type TableRecord, type TableRow, type TableViewBroomPointSaveInfo, type TableViewConnectionPointSaveInfo, type TableViewCtlSaveInfo, type TableViewDlgSaveInfo, type TableViewSaveInfo, type TableViewTableWinSaveInfo, type TextMacro, type TotalMode, type TransformAppParameters, type TransformAppResult, type TreeData, type TreeDataDef, type UndoInfo, type UndoInfoDef, type UndoInfoObject, type UsageEnum, type UseAppHook, type ValueExpr, type ValueExpression, type VariableList, type VariableListData, type VariableListDef, type VariableListItem, type WebSocketEvent, type WorkloadType, qix as default, openAppSession, withHostConfig };

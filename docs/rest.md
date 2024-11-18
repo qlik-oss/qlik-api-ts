@@ -62,3 +62,50 @@ try {
 ## Caching
 
 Every GET request is cached so that subsequent calls to the same api will resolve immediately from the cache. Read more about caching [here](features.md#caching).
+
+## Rest Interceptors
+
+Interceptors can be added to allow custom functionality to happen before or after an api call. They run globally always on every request. The format is:
+
+```ts
+// the interceptor format
+const interceptor = async (request, proceed) => {
+  // do things before the request
+  const result = await proceed(request);
+  // do things after the request
+  return result;
+};
+```
+
+> [!WARNING]
+> Use Interceptors with caution. They affect every request made by the library and can introduce strange side effects that are hard to discover and debug.
+
+#### Examples
+
+```ts
+import { addInterceptor, removeInterceptor } from "@qlik/api/interceptors";
+
+// add a logging interceptor, which logs all requests, responses and errors
+addInterceptor(async (request, proceed) => {
+  try {
+    console.log("-->", request.method, request.pathTemplate, request.pathVariables, request.query, request.body);
+    const result = await proceed(request);
+    console.log("<--", result.data);
+    return result;
+  } catch (err) {
+    console.log("<-*", err);
+    throw err;
+  }
+});
+
+// add additional header to a request
+const headerInterceptor = addInterceptor(async (request, proceed) => {
+  // make sure headers object exists
+  (request.options = request.options || {}).headers = request.options.headers || {};
+  request.options.headers["x-another-header"] = "foobarvalue";
+  return proceed(request);
+});
+
+// remove an interceptor
+removeInterceptor(headerInterceptor);
+```

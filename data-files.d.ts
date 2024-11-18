@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './global.types-Xt6XzwlN.js';
-import './auth-types-Bqw3vbLs.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
+import './auth-types-PkN9CAF_.js';
 
 type BatchChangeSpaceItem = {
     /** The ID of the data file whose space will be changed. */
@@ -7,6 +7,10 @@ type BatchChangeSpaceItem = {
     /** The ID of the new space.  Passing in a null will result in the data file being moved to the user's
      * personal space. */
     spaceId?: string;
+};
+type BatchDeleteAllBySpaceItem = {
+    /** The ID of the space whose data files will be deleted. */
+    id: string;
 };
 type BatchDeleteItem = {
     /** The ID of the data file to delete. */
@@ -30,6 +34,7 @@ type ConnectionsResponse = {
     /** The team space that the given connection is associated with.  If null, the connection is not associated
      * with any specific team space. */
     spaceId?: string;
+    spaceStats?: SpaceStatsResponse;
     /** The type of the connection. */
     type: string;
 };
@@ -40,55 +45,123 @@ type DataFileBatchChangeSpaceRequest = {
     /** The list of data files to delete. */
     "change-space": BatchChangeSpaceItem[];
 };
-/**
- * Specifies the list of data files to be deleted in a single batch.
- */
 type DataFileBatchDeleteRequest = {
-    /** The list of data files to delete. */
+    /** If specified, the explicit list of data files to delete. */
     delete: BatchDeleteItem[];
+    /** If specified, attempt to delete all of the data files from the specified shared spaces. */
+    deleteAllBySpace?: BatchDeleteAllBySpaceItem[];
+    /** If specified, attempt to delete all of the datafiles from ther user's personal space. */
+    deleteAllFromPersonalSpace?: boolean;
 };
+/**
+ * <p>Members:</p><ul></ul>
+ */
+type DataFilePermission = "read" | "update" | "delete" | "list" | "change_owner" | "change_space";
 type DataFileUploadResponse = {
-    /** If this file is bound to the lifecycle of a specific app, this is the ID of this app. */
+    /** The CRUD actions that are allowed on the given data file. */
+    actions: DataFilePermission[];
+    /** If this file or folder is bound to the lifecycle of a specific app, this is the ID of this app. */
     appId?: string;
-    /** The date that the uploaded file was created. */
+    /** The name of the file or folder, not including any folder path prefix. */
+    baseName?: string;
+    /** The date that the file or folder was created. */
     createdDate: string;
-    /** The ID for the uploaded file. */
+    /** Whether or not this given item represents a folder or a file. */
+    folder?: boolean;
+    /** If the file or folder resides in a parent folder, this is the parent folder ID.  If the file or folder
+     * does not reside in a parent folder, this value is null. */
+    folderId?: string;
+    /** If the file or folder resides in a parent folder, this is the parent folder path.  If the file or folder
+     * does not reside in a parent folder, this value is null. */
+    folderPath?: string;
+    folderStats: FolderStatsResponse;
+    /** The ID for the file or folder. */
     id: string;
-    /** The date that the updated file was last modified. */
+    /** The date that the updated file or folder was last modified. */
     modifiedDate?: string;
-    /** The name of the uploaded file. */
+    /** The full name of the file or folder, including any folder path prefix. */
     name: string;
-    /** The 'owner' of a file is the user who last uploaded the file's content. */
+    /** The 'owner' of a file or folder is the user who last uploaded the item's content. */
     ownerId: string;
-    /** The size of the uploaded file, in bytes. */
+    /** The QRI generated from the datafile or folder's metadata. */
+    qri?: string;
+    /** The size of the uploaded file, in bytes.  0 if this item represents a folder */
     size: number;
-    /** If the file was uploaded to a team space, this is the ID of that space. */
+    /** If the file or folder was created in a team space, this is the ID of that space. */
     spaceId?: string;
 };
+/**
+ * Fine-grained error codes for data-files REST operations.  For operations which do not have a more fine-grained
+ * error code, the error code is set to the HTTP status code.<p>Members:</p><ul><li><i>DF-001</i> - The page cursor passed as a parameter to the GET operation is invalid.</li><li><i>DF-002</i> - The sort specification passed as a parameter to the GET operation is invalid.</li><li><i>DF-003</i> - FolderPath and FolderId are mutually exclusive, they cannot both be passed as parameters.</li><li><i>DF-004</i> - The provided FolderPath must be in canonical form.</li><li><i>DF-005</i> - The specified parent folder cannot be found.</li><li><i>DF-006</i> - The specified owner cannot be found.</li><li><i>DF-007</i> - A connection corresponding to the specified space cannot be found.</li><li><i>DF-008</i> - THe specified ID must correspond to a folder, not a file.</li><li><i>DF-009</i> - The specified space cannot be found.</li><li><i>DF-010</i> - The specified file name contains an invalid file extension.</li><li><i>DF-011</i> - The specified file name is missing a file extension.</li><li><i>DF-012</i> - The specified temporary content file could not be found.</li><li><i>DF-013</i> - Access to the specified space is forbidden.</li><li><i>DF-014</i> - The specified connection cannot be found.</li><li><i>DF-015</i> - The provided filename must be in canonical form.</li><li><i>DF-016</i> - The datafile size quota for the given personal space has been exceeded.</li><li><i>DF-017</i> - The specified source file or folder could not be found.</li><li><i>DF-018</i> - The source and target of a datafile operation must either both be folders or both be files, but they are
+ *             not.</li><li><i>DF-019</i> - The specified target folder is a child of the specified source folder, which is not allowed.</li><li><i>DF-020</i> - The specified folder does not exist in the specified space.</li><li><i>DF-021</i> - The specified source file or folder is already locked.</li><li><i>DF-022</i> - The automatic creation of a missing parent folder failed.</li><li><i>DF-023</i> - An attempt to lock a parent folder of a given data file item failed.</li><li><i>DF-024</i> - The attempt to copy a source file or folder to a target failed.</li><li><i>DF-025</i> - The specified target file or folder is already locked.</li><li><i>DF-026</i> - The request results in the creation of a folder hierarchy which is beyond the max allowed folder
+ *             hierarchy depth.</li></ul>
+ */
+type ErrorCode = "HTTP-200" | "HTTP-201" | "HTTP-204" | "HTTP-400" | "HTTP-403" | "HTTP-404" | "HTTP-409" | "HTTP-413" | "HTTP-423" | "HTTP-500" | "HTTP-501" | "HTTP-503" | "DF-001" | "DF-002" | "DF-003" | "DF-004" | "DF-005" | "DF-006" | "DF-007" | "DF-008" | "DF-009" | "DF-010" | "DF-011" | "DF-012" | "DF-013" | "DF-014" | "DF-015" | "DF-016" | "DF-017" | "DF-018" | "DF-019" | "DF-020" | "DF-021" | "DF-022" | "DF-023" | "DF-024" | "DF-025" | "DF-026";
 type ErrorResponse = {
     /** List of errors and their properties. */
     errors: ErrorResponseItem[];
 };
 type ErrorResponseItem = {
-    /** The error code. */
-    code: string;
+    /** Fine-grained error codes for data-files REST operations.  For operations which do not have a more fine-grained
+     * error code, the error code is set to the HTTP status code.<p>Members:</p><ul><li><i>DF-001</i> - The page cursor passed as a parameter to the GET operation is invalid.</li><li><i>DF-002</i> - The sort specification passed as a parameter to the GET operation is invalid.</li><li><i>DF-003</i> - FolderPath and FolderId are mutually exclusive, they cannot both be passed as parameters.</li><li><i>DF-004</i> - The provided FolderPath must be in canonical form.</li><li><i>DF-005</i> - The specified parent folder cannot be found.</li><li><i>DF-006</i> - The specified owner cannot be found.</li><li><i>DF-007</i> - A connection corresponding to the specified space cannot be found.</li><li><i>DF-008</i> - THe specified ID must correspond to a folder, not a file.</li><li><i>DF-009</i> - The specified space cannot be found.</li><li><i>DF-010</i> - The specified file name contains an invalid file extension.</li><li><i>DF-011</i> - The specified file name is missing a file extension.</li><li><i>DF-012</i> - The specified temporary content file could not be found.</li><li><i>DF-013</i> - Access to the specified space is forbidden.</li><li><i>DF-014</i> - The specified connection cannot be found.</li><li><i>DF-015</i> - The provided filename must be in canonical form.</li><li><i>DF-016</i> - The datafile size quota for the given personal space has been exceeded.</li><li><i>DF-017</i> - The specified source file or folder could not be found.</li><li><i>DF-018</i> - The source and target of a datafile operation must either both be folders or both be files, but they are
+     *             not.</li><li><i>DF-019</i> - The specified target folder is a child of the specified source folder, which is not allowed.</li><li><i>DF-020</i> - The specified folder does not exist in the specified space.</li><li><i>DF-021</i> - The specified source file or folder is already locked.</li><li><i>DF-022</i> - The automatic creation of a missing parent folder failed.</li><li><i>DF-023</i> - An attempt to lock a parent folder of a given data file item failed.</li><li><i>DF-024</i> - The attempt to copy a source file or folder to a target failed.</li><li><i>DF-025</i> - The specified target file or folder is already locked.</li><li><i>DF-026</i> - The request results in the creation of a folder hierarchy which is beyond the max allowed folder
+     *             hierarchy depth.</li></ul> */
+    code: ErrorCode;
     /** A human-readable explanation specific to this occurrence of the problem. */
     detail?: string;
     /** Summary of the problem. */
     title?: string;
+};
+type FolderStatsResponse = {
+    /** The sum of the file sizes, in bytes, of all app-scoped data files that reside as direct and indirect children of
+     * the given folder and it's sub-folder hierarchy. */
+    aggregateAppScopedFileSize: number;
+    /** The sum of the file sizes, in bytes, of all data files that reside as direct and indirect children of the given
+     * folder and it's sub-folder hierarchy. */
+    aggregateFileSize: number;
+    /** The sum of the file sizes, in bytes, of all internal data files that reside as direct and indirect children of
+     * the given folder and it's sub-folder hierarchy. */
+    aggregateInternalFileSize: number;
+    /** The number of app-scoped data files that reside as direct children of the given folder. */
+    directAppScopedFileCount: number;
+    /** The number of data files that reside as direct children of the given folder. */
+    directFileCount: number;
+    /** The number of sub-folders that reside as direct children of the given folder. */
+    directFolderCount: number;
+    /** The number of 'internal' data files (IE, those that are not visible to end users by default) that reside as
+     * direct children of the given folder. */
+    directInternalFileCount: number;
+    /** The number of app-scoped data files that reside as direct and indirect children of the given folder and it's
+     * sub-folder hierarchy. */
+    totalAppScopedFileCount: number;
+    /** The number of data files that reside as direct and indirect children of the given folder and it's sub-folder
+     * hierarchy. */
+    totalFileCount: number;
+    /** The number of folders that reside as direct and indirect children of the given folder and it's sub-folder
+     * hierarchy. */
+    totalFolderCount: number;
+    /** The number of 'internal' data files (IE, those that are not visible to end users by default) that reside as
+     * direct and indirect children of the given folder and it's sub-folder hierarchy. */
+    totalInternalFileCount: number;
 };
 type GetConnectionsResponse = {
     /** Properties of the connections to the tenant spaces. */
     data: ConnectionsResponse[];
     links: LinksResponse;
 };
+/**
+ * <p>Members:</p><ul></ul>
+ */
 type GetConnectionsSortField = "spaceId" | "+spaceId" | "-spaceId";
 type GetDataFileInfosResponse = {
     /** Properties of the uploaded data files. */
     data: DataFileUploadResponse[];
     links: LinksResponse;
 };
-type GetDataFileInfosSortField = "name" | "+name" | "-name" | "size" | "+size" | "-size" | "modifiedDate" | "+modifiedDate" | "-modifiedDate";
+/**
+ * <p>Members:</p><ul></ul>
+ */
+type GetDataFileInfosSortField = "name" | "+name" | "-name" | "size" | "+size" | "-size" | "modifiedDate" | "+modifiedDate" | "-modifiedDate" | "folder" | "+folder" | "-folder" | "baseName" | "+baseName" | "-baseName";
 type LinkResponse = {
     /** The URL for the link. */
     href?: string;
@@ -103,8 +176,11 @@ type MultiStatusResponse = {
     data: MultiStatusResponseItem[];
 };
 type MultiStatusResponseItem = {
-    /** The error code. */
-    code: string;
+    /** Fine-grained error codes for data-files REST operations.  For operations which do not have a more fine-grained
+     * error code, the error code is set to the HTTP status code.<p>Members:</p><ul><li><i>DF-001</i> - The page cursor passed as a parameter to the GET operation is invalid.</li><li><i>DF-002</i> - The sort specification passed as a parameter to the GET operation is invalid.</li><li><i>DF-003</i> - FolderPath and FolderId are mutually exclusive, they cannot both be passed as parameters.</li><li><i>DF-004</i> - The provided FolderPath must be in canonical form.</li><li><i>DF-005</i> - The specified parent folder cannot be found.</li><li><i>DF-006</i> - The specified owner cannot be found.</li><li><i>DF-007</i> - A connection corresponding to the specified space cannot be found.</li><li><i>DF-008</i> - THe specified ID must correspond to a folder, not a file.</li><li><i>DF-009</i> - The specified space cannot be found.</li><li><i>DF-010</i> - The specified file name contains an invalid file extension.</li><li><i>DF-011</i> - The specified file name is missing a file extension.</li><li><i>DF-012</i> - The specified temporary content file could not be found.</li><li><i>DF-013</i> - Access to the specified space is forbidden.</li><li><i>DF-014</i> - The specified connection cannot be found.</li><li><i>DF-015</i> - The provided filename must be in canonical form.</li><li><i>DF-016</i> - The datafile size quota for the given personal space has been exceeded.</li><li><i>DF-017</i> - The specified source file or folder could not be found.</li><li><i>DF-018</i> - The source and target of a datafile operation must either both be folders or both be files, but they are
+     *             not.</li><li><i>DF-019</i> - The specified target folder is a child of the specified source folder, which is not allowed.</li><li><i>DF-020</i> - The specified folder does not exist in the specified space.</li><li><i>DF-021</i> - The specified source file or folder is already locked.</li><li><i>DF-022</i> - The automatic creation of a missing parent folder failed.</li><li><i>DF-023</i> - An attempt to lock a parent folder of a given data file item failed.</li><li><i>DF-024</i> - The attempt to copy a source file or folder to a target failed.</li><li><i>DF-025</i> - The specified target file or folder is already locked.</li><li><i>DF-026</i> - The request results in the creation of a folder hierarchy which is beyond the max allowed folder
+     *             hierarchy depth.</li></ul> */
+    code: ErrorCode;
     /** A human-readable explanation specific to this occurrence of the problem. */
     detail?: string;
     /** The unique identifier of the file. */
@@ -114,6 +190,18 @@ type MultiStatusResponseItem = {
     /** Summary of the problem. */
     title?: string;
 };
+/**
+ * If a SourceId is specified, and a folder is being updated by this PUT operation, this specifies how the
+ * source folder contents should be applied to the target folder, if the target folder is not empty.  'merge'
+ * implies the contents of the source folder should be merged with the existing target contents.  That is, all
+ * existing direct or indirect child items in the target folder are replaced by the same items in the source folder.
+ * All existing items in the target folder that are not present in the source folder are left, as is, in the target.
+ * 'replace' implies the contents of the source folder should replace the contents of the target folder.  That is,
+ * all direct or indirect items in the target folder are removed before the items from the source folder are copied
+ * over.  The resulting target folder only contains the items from the source folder.  If not specified, the default
+ * behavior is 'merge'.<p>Members:</p><ul></ul>
+ */
+type PutDataFileFolderMergeBehavior = "merge" | "replace";
 type QuotaResponse = {
     /** The allowed file extensions on files that are uploaded. */
     allowedExtensions: string[];
@@ -131,6 +219,38 @@ type QuotaResponse = {
      * than the maximum aggregate size, this is a quota violation. */
     size: number;
 };
+type SpaceStatsResponse = {
+    /** The sum of the file sizes, in bytes, of all app-scoped data files that reside as direct and indirect children of
+     * the given folder and it's sub-folder hierarchy. */
+    aggregateAppScopedFileSize: number;
+    /** The sum of the file sizes, in bytes, of all data files that reside as direct and indirect children of the given
+     * folder and it's sub-folder hierarchy. */
+    aggregateFileSize: number;
+    /** The sum of the file sizes, in bytes, of all internal data files that reside as direct and indirect children of
+     * the given folder and it's sub-folder hierarchy. */
+    aggregateInternalFileSize: number;
+    /** The number of app-scoped data files that reside as direct children of the given folder. */
+    directAppScopedFileCount: number;
+    /** The number of data files that reside as direct children of the given folder. */
+    directFileCount: number;
+    /** The number of sub-folders that reside as direct children of the given folder. */
+    directFolderCount: number;
+    /** The number of 'internal' data files (IE, those that are not visible to end users by default) that reside as
+     * direct children of the given folder. */
+    directInternalFileCount: number;
+    /** The number of app-scoped data files that reside as direct and indirect children of the given folder and it's
+     * sub-folder hierarchy. */
+    totalAppScopedFileCount: number;
+    /** The number of data files that reside as direct and indirect children of the given folder and it's sub-folder
+     * hierarchy. */
+    totalFileCount: number;
+    /** The number of folders that reside as direct and indirect children of the given folder and it's sub-folder
+     * hierarchy. */
+    totalFolderCount: number;
+    /** The number of 'internal' data files (IE, those that are not visible to end users by default) that reside as
+     * direct and indirect children of the given folder and it's sub-folder hierarchy. */
+    totalInternalFileCount: number;
+};
 /**
  * Get descriptive info for the specified data files.
  *
@@ -143,13 +263,43 @@ declare const getDataFiles: (query: {
     /** Only return files scoped to the specified app.  If this parameter is not specified, only files that are not
      * scoped to any app are returned.  "*" implies all app-scoped files are returned. */
     appId?: string;
-    /** Return files that reside in the space referenced by the specified DataFiles connection.  If this parameter
-     * is not specified, the user's personal space is implied. */
+    /** If present, return only items whose base name matches the given wildcard.  Wildcards include '*' and '?'
+     * characters to allow for multiple matches.  The base name is the actual file or folder name without any
+     * folder pathing included. */
+    baseNameWildcard?: string;
+    /** Return files and folders that reside in the space referenced by the specified DataFiles connection.  If this
+     * parameter is not specified, the user's personal space is implied. */
     connectionId?: string;
+    /** If set to true, exclude files in the returned list (IE, only return folders).  If false, include files. */
+    excludeFiles?: boolean;
+    /** If set to true, exclude folders and files that reside in sub-folders of the root being searched.  If false,
+     * include all items in full folder hierarchy that recursively reside under the root.  That is, setting to
+     * true results in only the direct children of the root being returned. */
+    excludeSubFolders?: boolean;
+    /** If present, return only items which reside under the folder specified by the given ID.  If not present,
+     * items that live at the root of the space are returned.  This property is mutually exclusive with 'folderPath'. */
+    folderId?: string;
+    /** If present, return only items which reside under the specified folder path.  If not present, items that
+     * live at the root of the space are returned.  This property is mutually exclusive with 'folderId'. */
+    folderPath?: string;
+    /** If set to true, and connectionId is not specified, return files and folders from all spaces the given user
+     * has access to (including the personal space).  If connectionId is specified, this parameter is ignored. */
+    includeAllSpaces?: boolean;
+    /** If set to true, include computed folder statistics for folders in the returned list.  If false, this information
+     * is not returned. */
+    includeFolderStats?: boolean;
+    /** If set to true, include folders in the returned list.  If false, only return data files. */
+    includeFolders?: boolean;
     /** If present, the maximum number of data files to return. */
     limit?: number;
     /** Filter the list of files returned to the given file name. */
     name?: string;
+    /** If present, fetch the data files whose owner is not the specified owner.  If a connectionId is specified in
+     * this case, the returned list is constrained to the specified space.  If connectionId is not specified, then
+     * the returned list is constrained to the calling user's personal space.  If includeAllSpaces is set to true,
+     * and connectionId is not specified, the returned list is from all spaces the given user
+     * has access to (including the personal space). */
+    notOwnerId?: string;
     /** If present, fetch the data files for the specified owner.  If a connectionId is specified in this case, the
      * returned list is constrained to the specified space.  If connectionId is not specified, then all files owned
      * by the specified user are returned regardless of the personal space that a given file resides in. */
@@ -173,7 +323,7 @@ type GetDataFilesHttpError = {
     status: number;
 };
 /**
- * Upload a new data file.
+ * Upload a new data file or create a new folder.
  *
  * @param body an object with the body content
  * @throws UploadDataFileHttpError
@@ -184,28 +334,36 @@ declare const uploadDataFile: (body: {
     /** See PostDataFileRequest schema which defines request structure.
      *  See  model. */
     Json?: {
-        /** If this file should be bound to the lifecycle of a specific app, this is the ID of this app. */
+        /** If this file should be bound to the lifecycle of a specific app, this is the ID of this app.  If this
+         * request is creating a folder, the specification of an app ID is not allowed. */
         appId?: string;
         /** If present, this is the DataFiles connection that the upload should occur in the context of.  If absent,
-         * the default is that the upload will occur in the context of the MyDataFiles connection.  If the DataFiles
-         * connection is different from the one specified when the file was last POSTed or PUT, this will result in
-         * a logical move of this file into the new space. */
+         * the default is that the upload will occur in the context of the Personal Space DataFiles connection.  If the
+         * DataFiles connection is different from the one specified when the file or folder was last POSTed or PUT, this
+         * will result in a logical move of this file or folder into the new space. */
         connectionId?: string;
-        /** Name that will be given to the uploaded file.  It should be noted that the '/' character
-         * in a data file name indicates a 'path' separator in a logical folder hierarchy for the name.  Names that
+        /** If true, a folder will be created.  If false, a file is created. */
+        folder?: boolean;
+        /** If the specified file or folder should be moved to become a a sub-item of an existing folder, this is the ID
+         * of this parent folder.  Any additional folder path that is present on the Name property will be created
+         * as a subfolder hierarchy of this folder.  If the FolderID is null, the file or folder specified in the
+         * Name property (including any folder prefix on that name), will be created in the root of the space. */
+        folderId?: string;
+        /** Name that will be given to the file or folder.  It should be noted that the '/' character
+         * in the name indicates a 'path' separator in a logical folder hierarchy for the name.  Names that
          * contain '/'s should be used with the assumption that a logical 'folder hierarchy' is being defined for the
-         * full pathname of that file.  '/' is a significant character in the data file name, and may impact the
-         * behavior of future APIs which take this folder hierarchy into account. */
+         * full pathname of that file or folder.  IE, a '/' is a significant character in the name. */
         name: string;
-        /** If a SourceId is specified, this is the ID of the existing data file whose content should be copied into
-         * the specified data file.  That is, instead of the file content being specified in the Data element,
-         * it is effectively copied from an existing, previously uploaded file. */
+        /** If a SourceId is specified, this is the ID of the existing data file or folder whose content should be copied
+         * into the specified data file or folder.  That is, for a file instead of the file content being specified in
+         * the Data element, it is effectively copied from an existing, previously uploaded file.  For a folder, rather
+         * than the new folder being empty, it's contents are copied from an existing, previously created folder. */
         sourceId?: string;
         /** If a TempContentFileId is specified, this is the ID of a previously uploaded temporary content file whose
          * content should be copied into the specified data file.  That is, instead of the file content being specified
          * in the Data element, it is effectively copied from an existing, previously uploaded file.  The expectation
          * is that this file was previously uploaded to the temporary content service, and the ID specified here is
-         * the one returned from the temp content upload request. */
+         * the one returned from the temp content upload request.  This option does not apply when POSTing a folder. */
         tempContentFileId?: string;
     };
 }, options?: ApiCallOptions) => Promise<UploadDataFileHttpResponse>;
@@ -222,8 +380,8 @@ type UploadDataFileHttpError = {
 /**
  * This is to allow for a separate admin type of operation that is more global in terms of access in cases
  * where admin users may not explicitly have been granted full access to a given space within the declared
- * space-level permissions.  If the space ID is set to null, then the data file will end up residing in the
- * personal space of the user who is the owner of the file.
+ * space-level permissions.  If the space ID is set to null, then the data file or folder will end up residing
+ * in the personal space of the user who is the owner of the item.
  *
  * @param body an object with the body content
  * @throws MoveDataFilesHttpError
@@ -240,7 +398,7 @@ type MoveDataFilesHttpError = {
     status: number;
 };
 /**
- * Delete the specified set of data files as a single batch.
+ * Delete the specified set of data files and/or folders as a single batch.
  *
  * @param body an object with the body content
  * @throws DeleteDataFilesHttpError
@@ -266,6 +424,9 @@ type DeleteDataFilesHttpError = {
 declare const getDataFilesConnections: (query: {
     /** If present, get connections with connection strings that are scoped to the given app ID. */
     appId?: string;
+    /** If set to true, include computed space-level statistics for the spaces represented by the connections in the
+     * returned list.  If false, this information is not returned. */
+    includeSpaceStats?: boolean;
     /** If present, the maximum number of data file connection records to return. */
     limit?: number;
     /** If present, only return connections with the given name. */
@@ -326,9 +487,10 @@ type GetDataFilesQuotasHttpError = {
     status: number;
 };
 /**
- * Delete the specified data file.
+ * Delete the specified data file or folder.  Deleting a folder will also recursively delete all files and
+ * subfolders that reside within the specified folder.
  *
- * @param id The ID of the data file to delete.
+ * @param id The ID of the data file or folder to delete.
  * @throws DeleteDataFileHttpError
  */
 declare const deleteDataFile: (id: string, options?: ApiCallOptions) => Promise<DeleteDataFileHttpResponse>;
@@ -360,7 +522,7 @@ type GetDataFileHttpError = {
     status: number;
 };
 /**
- * Re-upload an existing data file.
+ * Re-upload an existing data file or update an existing folder.
  *
  * @param id The ID of the data file to update.
  * @param body an object with the body content
@@ -372,23 +534,42 @@ declare const reuploadDataFile: (id: string, body: {
     /** See PutDataFileRequest schema which defines request structure.
      *  See  model. */
     Json?: {
-        /** If this file should be bound to the lifecycle of a specific app, this is the ID of this app. */
+        /** If this file should be bound to the lifecycle of a specific app, this is the ID of this app.  If this
+         * request is creating a folder, the specification of an app ID is not allowed. */
         appId?: string;
-        /** If present, this is the DataFiles connection that the upload should occur in the context of.  If absent,
-         * the default is that the upload will occur in the context of the MyDataFiles connection.  If the DataFiles
-         * connection is different from the one specified when the file was last POSTed or PUT, this will result in
-         * a logical move of this file into the new space. */
+        /** If present, this is the DataFiles connection points to the space that the file or folder should reside in.
+         * If absent, the default is that the file or folder will reside in the Personal SPce.  If the DataFiles
+         * connection is different from the one specified when the file or folder was last POSTed or PUT, this will
+         * result in a logical move of this file or folder into the new space. */
         connectionId?: string;
-        /** Name that will be given to the uploaded file.  If this name is different than the name used when the file
-         * was last POSTed or PUT, this will result in a rename of the file.  It should be noted that the '/' character
-         * in a data file name indicates a 'path' separator in a logical folder hierarchy for the name.  Names that
-         * contain '/'s should be used with the assumption that a logical 'folder hierarchy' is being defined for the
-         * full pathname of that file.  '/' is a significant character in the data file name, and may impact the
-         * behavior of future APIs that take this folder hierarchy into account. */
+        /** If the specified file or folder should be created as a sub-item of an existing folder, this is the ID
+         * of this parent folder.  Any additional folder path that is present on the Name property will be created
+         * as a subfolder hierarchy of this folder.  If the FolderID is null, the file or folder specified in the
+         * Name property (including any folder prefix on that name), will be created in the root of the space. */
+        folderId?: string;
+        /** If a SourceId is specified, and a folder is being updated by this PUT operation, this specifies how the
+         * source folder contents should be applied to the target folder, if the target folder is not empty.  'merge'
+         * implies the contents of the source folder should be merged with the existing target contents.  That is, all
+         * existing direct or indirect child items in the target folder are replaced by the same items in the source folder.
+         * All existing items in the target folder that are not present in the source folder are left, as is, in the target.
+         * 'replace' implies the contents of the source folder should replace the contents of the target folder.  That is,
+         * all direct or indirect items in the target folder are removed before the items from the source folder are copied
+         * over.  The resulting target folder only contains the items from the source folder.  If not specified, the default
+         * behavior is 'merge'.<p>Members:</p><ul></ul> */
+        folderMergeBehavior?: PutDataFileFolderMergeBehavior;
+        /** Name that will be given to the file or folder.  If this name is different than the name used when the file
+         * or folder was last POSTed or PUT, this will result in a rename of the file or folder.  It should be noted
+         * that the '/' character in a data file name indicates a 'path' separator in a logical folder hierarchy for
+         * the name.  Names that contain '/'s should be used with the assumption that a logical 'folder hierarchy' is
+         * being defined for the full pathname of that file or folder..  '/' is a significant character in the data file
+         * or folder name. */
         name?: string;
-        /** If a SourceId is specified, this is the ID of the existing data file whose content should be copied into
-         * the specified data file.  That is, instead of the file content being specified in the Data element,
-         * it is effectively copied from an existing, previously uploaded file. */
+        /** If a SourceId is specified, this is the ID of the existing data file or folder whose content should be copied
+         * into the specified data file or folder.  That is, for a file instead of the file content being specified in
+         * the Data element, it is effectively copied from an existing, previously uploaded file.  For a folder, it's
+         * contents are copied from an existing, previously created folder.  If there it existing content in the target
+         * folder, then how the source and target folder contents are merged together is specified in the
+         * FolderMergeBehavior option. */
         sourceId?: string;
         /** If a TempContentFileId is specified, this is the ID of a previously uploaded temporary content file whose
          * content should be copied into the specified data file.  That is, instead of the file content being specified
@@ -409,11 +590,15 @@ type ReuploadDataFileHttpError = {
     status: number;
 };
 /**
- * This is primarily an admin type of operation.  In general, the owner of a data file is implicitly set as
- * part of a data file upload.  For data files that reside in a personal space, changing the owner has the
- * effect of moving the data file to the new owner's personal space.
+ * This is primarily an admin type of operation.  In general, the owner of a data file or folder is implicitly
+ * set as part of a create or update operation.  For data files or folders that reside in a personal space,
+ * changing the owner has the effect of moving the data file to the new owner's personal space.  Note that,
+ * If a given file or folder is not in the root of a personal space, this operation will not succeed, since
+ * the parent folder does not reside in the target owner's personal space.  If the owner of a folder in the
+ * root of a personal space is changed, the owner of all subfolders and files within those subfolders will
+ * also recursively change.
  *
- * @param id The ID of the data file whose owner will be updated.
+ * @param id The ID of the data file or folder whose owner will be updated.
  * @param body an object with the body content
  * @throws ChangeDataFileOwnerHttpError
  */
@@ -431,10 +616,14 @@ type ChangeDataFileOwnerHttpError = {
 /**
  * This is to allow for a separate admin type of operation that is more global in terms of access in cases
  * where admin users may not explicitly have been granted full access to a given space within the declared
- * space-level permissions.  If the space ID is set to null, then the datafile will end up residing in the
- * personal space of the user who is the owner of the file.
+ * space-level permissions.  If the space ID is set to null, then the datafile or folder will end up residing
+ * in the personal space of the user who is the owner of the item.  Note that, if a given file or folder is not
+ * in the root of a given space, this operation will not succeed, since the parent folder does not reside in
+ * the target space.  If the space of a folder in the root of the source space is changed, all subfolders and
+ * files within those subfolders will also recursively be moved to the new space.
  *
- * @param id The ID of the data file whose space will be updated.
+ * @param id The ID of the data file or folder whose
+            space will be updated.
  * @param body an object with the body content
  * @throws MoveDataFileHttpError
  */
@@ -462,7 +651,7 @@ interface DataFilesAPI {
      */
     getDataFiles: typeof getDataFiles;
     /**
-     * Upload a new data file.
+     * Upload a new data file or create a new folder.
      *
      * @param body an object with the body content
      * @throws UploadDataFileHttpError
@@ -471,15 +660,15 @@ interface DataFilesAPI {
     /**
      * This is to allow for a separate admin type of operation that is more global in terms of access in cases
      * where admin users may not explicitly have been granted full access to a given space within the declared
-     * space-level permissions.  If the space ID is set to null, then the data file will end up residing in the
-     * personal space of the user who is the owner of the file.
+     * space-level permissions.  If the space ID is set to null, then the data file or folder will end up residing
+     * in the personal space of the user who is the owner of the item.
      *
      * @param body an object with the body content
      * @throws MoveDataFilesHttpError
      */
     moveDataFiles: typeof moveDataFiles;
     /**
-     * Delete the specified set of data files as a single batch.
+     * Delete the specified set of data files and/or folders as a single batch.
      *
      * @param body an object with the body content
      * @throws DeleteDataFilesHttpError
@@ -507,9 +696,10 @@ interface DataFilesAPI {
      */
     getDataFilesQuotas: typeof getDataFilesQuotas;
     /**
-     * Delete the specified data file.
+     * Delete the specified data file or folder.  Deleting a folder will also recursively delete all files and
+     * subfolders that reside within the specified folder.
      *
-     * @param id The ID of the data file to delete.
+     * @param id The ID of the data file or folder to delete.
      * @throws DeleteDataFileHttpError
      */
     deleteDataFile: typeof deleteDataFile;
@@ -521,7 +711,7 @@ interface DataFilesAPI {
      */
     getDataFile: typeof getDataFile;
     /**
-     * Re-upload an existing data file.
+     * Re-upload an existing data file or update an existing folder.
      *
      * @param id The ID of the data file to update.
      * @param body an object with the body content
@@ -529,11 +719,15 @@ interface DataFilesAPI {
      */
     reuploadDataFile: typeof reuploadDataFile;
     /**
-     * This is primarily an admin type of operation.  In general, the owner of a data file is implicitly set as
-     * part of a data file upload.  For data files that reside in a personal space, changing the owner has the
-     * effect of moving the data file to the new owner's personal space.
+     * This is primarily an admin type of operation.  In general, the owner of a data file or folder is implicitly
+     * set as part of a create or update operation.  For data files or folders that reside in a personal space,
+     * changing the owner has the effect of moving the data file to the new owner's personal space.  Note that,
+     * If a given file or folder is not in the root of a personal space, this operation will not succeed, since
+     * the parent folder does not reside in the target owner's personal space.  If the owner of a folder in the
+     * root of a personal space is changed, the owner of all subfolders and files within those subfolders will
+     * also recursively change.
      *
-     * @param id The ID of the data file whose owner will be updated.
+     * @param id The ID of the data file or folder whose owner will be updated.
      * @param body an object with the body content
      * @throws ChangeDataFileOwnerHttpError
      */
@@ -541,10 +735,14 @@ interface DataFilesAPI {
     /**
      * This is to allow for a separate admin type of operation that is more global in terms of access in cases
      * where admin users may not explicitly have been granted full access to a given space within the declared
-     * space-level permissions.  If the space ID is set to null, then the datafile will end up residing in the
-     * personal space of the user who is the owner of the file.
+     * space-level permissions.  If the space ID is set to null, then the datafile or folder will end up residing
+     * in the personal space of the user who is the owner of the item.  Note that, if a given file or folder is not
+     * in the root of a given space, this operation will not succeed, since the parent folder does not reside in
+     * the target space.  If the space of a folder in the root of the source space is changed, all subfolders and
+     * files within those subfolders will also recursively be moved to the new space.
      *
-     * @param id The ID of the data file whose space will be updated.
+     * @param id The ID of the data file or folder whose
+              space will be updated.
      * @param body an object with the body content
      * @throws MoveDataFileHttpError
      */
@@ -559,4 +757,4 @@ interface DataFilesAPI {
  */
 declare const dataFilesExport: DataFilesAPI;
 
-export { type BatchChangeSpaceItem, type BatchDeleteItem, type ChangeDataFileOwnerHttpError, type ChangeDataFileOwnerHttpResponse, type ChangeDataFileOwnerRequest, type ChangeDataFileSpaceRequest, type ConnectionsResponse, type DataFileBatchChangeSpaceRequest, type DataFileBatchDeleteRequest, type DataFileUploadResponse, type DataFilesAPI, type DeleteDataFileHttpError, type DeleteDataFileHttpResponse, type DeleteDataFilesHttpError, type DeleteDataFilesHttpResponse, type ErrorResponse, type ErrorResponseItem, type GetConnectionsResponse, type GetConnectionsSortField, type GetDataFileConnectionHttpError, type GetDataFileConnectionHttpResponse, type GetDataFileHttpError, type GetDataFileHttpResponse, type GetDataFileInfosResponse, type GetDataFileInfosSortField, type GetDataFilesConnectionsHttpError, type GetDataFilesConnectionsHttpResponse, type GetDataFilesHttpError, type GetDataFilesHttpResponse, type GetDataFilesQuotasHttpError, type GetDataFilesQuotasHttpResponse, type LinkResponse, type LinksResponse, type MoveDataFileHttpError, type MoveDataFileHttpResponse, type MoveDataFilesHttpError, type MoveDataFilesHttpResponse, type MultiStatusResponse, type MultiStatusResponseItem, type QuotaResponse, type ReuploadDataFileHttpError, type ReuploadDataFileHttpResponse, type UploadDataFileHttpError, type UploadDataFileHttpResponse, changeDataFileOwner, clearCache, dataFilesExport as default, deleteDataFile, deleteDataFiles, getDataFile, getDataFileConnection, getDataFiles, getDataFilesConnections, getDataFilesQuotas, moveDataFile, moveDataFiles, reuploadDataFile, uploadDataFile };
+export { type BatchChangeSpaceItem, type BatchDeleteAllBySpaceItem, type BatchDeleteItem, type ChangeDataFileOwnerHttpError, type ChangeDataFileOwnerHttpResponse, type ChangeDataFileOwnerRequest, type ChangeDataFileSpaceRequest, type ConnectionsResponse, type DataFileBatchChangeSpaceRequest, type DataFileBatchDeleteRequest, type DataFilePermission, type DataFileUploadResponse, type DataFilesAPI, type DeleteDataFileHttpError, type DeleteDataFileHttpResponse, type DeleteDataFilesHttpError, type DeleteDataFilesHttpResponse, type ErrorCode, type ErrorResponse, type ErrorResponseItem, type FolderStatsResponse, type GetConnectionsResponse, type GetConnectionsSortField, type GetDataFileConnectionHttpError, type GetDataFileConnectionHttpResponse, type GetDataFileHttpError, type GetDataFileHttpResponse, type GetDataFileInfosResponse, type GetDataFileInfosSortField, type GetDataFilesConnectionsHttpError, type GetDataFilesConnectionsHttpResponse, type GetDataFilesHttpError, type GetDataFilesHttpResponse, type GetDataFilesQuotasHttpError, type GetDataFilesQuotasHttpResponse, type LinkResponse, type LinksResponse, type MoveDataFileHttpError, type MoveDataFileHttpResponse, type MoveDataFilesHttpError, type MoveDataFilesHttpResponse, type MultiStatusResponse, type MultiStatusResponseItem, type PutDataFileFolderMergeBehavior, type QuotaResponse, type ReuploadDataFileHttpError, type ReuploadDataFileHttpResponse, type SpaceStatsResponse, type UploadDataFileHttpError, type UploadDataFileHttpResponse, changeDataFileOwner, clearCache, dataFilesExport as default, deleteDataFile, deleteDataFiles, getDataFile, getDataFileConnection, getDataFiles, getDataFilesConnections, getDataFilesQuotas, moveDataFile, moveDataFiles, reuploadDataFile, uploadDataFile };
