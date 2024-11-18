@@ -10389,7 +10389,7 @@ async function createEnigmaSession({
         Object.entries(queryParams).forEach(([key, value]) => {
           url = `${url}&${key}=${value}`;
         });
-        return (socketUrl) => new WS(socketUrl, void 0, {
+        return (socketUrl) => new WS(url, void 0, {
           headers
         });
       };
@@ -10417,7 +10417,7 @@ async function createEnigmaSession({
           url = `${url}&${key}=${value}`;
         }
       });
-      return (socketUrl) => new WS(socketUrl, void 0, {
+      return (socketUrl) => new WS(url, void 0, {
         headers,
         pfx,
         passphrase,
