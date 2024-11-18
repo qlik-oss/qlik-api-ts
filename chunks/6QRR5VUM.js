@@ -10369,37 +10369,59 @@ async function createEnigmaSession({
   ttlSeconds,
   workloadType
 }) {
-  const isNodeEnvironment = isNode();
+  let createSocketBuilder, baseUrl;
   const locationUrl = toValidWebsocketLocationUrl(hostConfig);
-  const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
+  const WS = (await import("ws")).default;
+  const isNodeEnvironment = isNode();
   const ttlPart = ttlSeconds !== void 0 && ttlSeconds >= 0 ? `/ttl/${ttlSeconds}` : "";
-  const identityPart = identity ? `/identity/${identity}` : "";
-  const workloadTypePart = useReloadEngine ? "&workloadType=interactive-reload" : workloadType ? `&workloadType=${workloadType}` : "";
-  const baseUrl = `${locationUrl}/app/${appId}${identityPart}${ttlPart}?reloadUri=${reloadUri}${workloadTypePart}`.replace(
-    /^http/,
-    "ws"
-  );
-  let createSocketBuilder;
-  if (isNodeEnvironment) {
-    const WS = (await import("ws")).default;
+  if (hostConfig.pfx == null) {
+    const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
+    const identityPart = identity ? `/identity/${identity}` : "";
+    const workloadTypePart = useReloadEngine ? "&workloadType=interactive-reload" : workloadType ? `&workloadType=${workloadType}` : "";
+    baseUrl = `${locationUrl}/app/${appId}${identityPart}${ttlPart}?reloadUri=${reloadUri}${workloadTypePart}`.replace(
+        /^http/,
+        "ws"
+    );
+    if (isNodeEnvironment) {
+      createSocketBuilder = async () => {
+        let url = baseUrl;
+        const {headers, queryParams} = await getRestCallAuthParams({hostConfig, method: "POST"});
+        Object.entries(queryParams).forEach(([key, value]) => {
+          url = `${url}&${key}=${value}`;
+        });
+        return (socketUrl) => new WS(url, void 0, {
+          headers
+        });
+      };
+    } else {
+      createSocketBuilder = async () => {
+        let url =baseUrl;
+        const { queryParams } = await getWebSocketAuthParams({ hostConfig });
+        Object.entries(queryParams).forEach(([key, value]) => {
+          url = `${url}&${key}=${value}`;
+        });
+        return (socketUrl) => new WebSocket(url);
+      };
+    }
+  } else if (isNodeEnvironment) {
+    baseUrl = `${locationUrl}/app/engineData/${appId}${ttlPart}`;
     createSocketBuilder = async () => {
+      const pfx = hostConfig.pfx;
+      const passphrase = hostConfig.passphrase;
+      const {headers, queryParams} = await getRestCallAuthParams({hostConfig});
       let url = baseUrl;
-      const { headers, queryParams } = await getRestCallAuthParams({ hostConfig, method: "POST" });
-      Object.entries(queryParams).forEach(([key, value]) => {
-        url = `${url}&${key}=${value}`;
+      Object.entries(queryParams).forEach(([key, value], index) => {
+        if (index === 0) {
+          url = `${url}?${key}=${value}`;
+        } else {
+          url = `${url}&${key}=${value}`;
+        }
       });
       return (socketUrl) => new WS(url, void 0, {
-        headers
+        headers,
+        pfx,
+        passphrase,
       });
-    };
-  } else {
-    createSocketBuilder = async () => {
-      let url = baseUrl;
-      const { queryParams } = await getWebSocketAuthParams({ hostConfig });
-      Object.entries(queryParams).forEach(([key, value]) => {
-        url = `${url}&${key}=${value}`;
-      });
-      return (socketUrl) => new WebSocket(url);
     };
   }
   const session = enigma.create({
