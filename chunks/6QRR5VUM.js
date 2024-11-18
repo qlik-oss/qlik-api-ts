@@ -10369,7 +10369,7 @@ async function createEnigmaSession({
   ttlSeconds,
   workloadType
 }) {
-  let createSocketBuilder;
+  let createSocketBuilder, baseUrl;
   const locationUrl = toValidWebsocketLocationUrl(hostConfig);
   const WS = (await import("ws")).default;
   const isNodeEnvironment = isNode();
@@ -10378,7 +10378,7 @@ async function createEnigmaSession({
     const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
     const identityPart = identity ? `/identity/${identity}` : "";
     const workloadTypePart = useReloadEngine ? "&workloadType=interactive-reload" : workloadType ? `&workloadType=${workloadType}` : "";
-    const baseUrl = `${locationUrl}/app/${appId}${identityPart}${ttlPart}?reloadUri=${reloadUri}${workloadTypePart}`.replace(
+    baseUrl = `${locationUrl}/app/${appId}${identityPart}${ttlPart}?reloadUri=${reloadUri}${workloadTypePart}`.replace(
         /^http/,
         "ws"
     );
@@ -10404,7 +10404,7 @@ async function createEnigmaSession({
       };
     }
   } else if (isNodeEnvironment) {
-    const baseUrl = `${locationUrl}/app/engineData/${appId}${ttlPart}`;
+    baseUrl = `${locationUrl}/app/engineData/${appId}${ttlPart}`;
     createSocketBuilder = async () => {
       const pfx = hostConfig.pfx;
       const passphrase = hostConfig.passphrase;
