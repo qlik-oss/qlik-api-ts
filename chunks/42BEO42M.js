@@ -27,6 +27,9 @@ var getPlatform = async (options = {}) => {
   if (deploymentType === "qliksensedesktop") {
     return result({ isQSD: true, isWindows: true });
   }
+  if (deploymentType === "qliksensemobile") {
+    return result({ isQSE: true, isWindows: true });
+  }
   if (productInfo.composition?.provider === "fedramp") {
     return result({ isCloud: true, isQCG: true, isControlCenter });
   }
@@ -1624,6 +1627,84 @@ function clearCacheOnError(cacheEntry, cacheKey, value) {
   });
 }
 
+// src/invoke-fetch/internal/invoke-xhr.ts
+async function invokeXHR(completeUrl, {
+  method,
+  headers,
+  credentials,
+  mode,
+  keepalive,
+  body,
+  signal,
+  progress
+}) {
+  const xhr = new XMLHttpRequest();
+  let resolve;
+  let reject;
+  const promise = new Promise((res, rej) => {
+    resolve = res;
+    reject = rej;
+  });
+  xhr.open(method || "GET", completeUrl);
+  if (typeof headers === "object") {
+    for (const [key, value] of Object.entries(headers)) {
+      xhr.setRequestHeader(key, value);
+    }
+  } else {
+    throw Error("malformed headers", headers);
+  }
+  if (keepalive) {
+    xhr.setRequestHeader("Connection", "keep-alive");
+  }
+  if (signal) {
+    signal.addEventListener("abort", () => {
+      xhr.abort();
+      reject();
+    });
+  }
+  if (mode === "cors") {
+    if (credentials === "include") {
+      xhr.withCredentials = true;
+    } else {
+      xhr.withCredentials = false;
+    }
+  }
+  if (progress?.onUpload) {
+    xhr.upload.onprogress = (event) => {
+      const { loaded, total, lengthComputable } = event;
+      progress.onUpload({ loaded, total: lengthComputable ? total : void 0 });
+    };
+  }
+  if (progress?.onDownload) {
+    xhr.onprogress = (event) => {
+      const { loaded, total, lengthComputable } = event;
+      progress.onDownload({ loaded, total: lengthComputable ? total : void 0 });
+    };
+  }
+  xhr.onloadend = () => {
+    const { status } = xhr;
+    const responseHeaders = {};
+    for (const line of xhr.getAllResponseHeaders().split("\r\n")) {
+      const [key, value] = line.split(":", 2);
+      if (key && value) {
+        responseHeaders[key] = value;
+      }
+    }
+    if (xhr.response) {
+      resolve(new Response(xhr.response, { status, headers: responseHeaders }));
+    } else {
+      resolve(new Response(void 0, { status, headers: responseHeaders }));
+    }
+  };
+  try {
+    const bod = body;
+    xhr.send(bod);
+  } catch (e) {
+    return Promise.reject(new InvokeFetchError2(getErrorMessage(e), 0, new Headers(), {}));
+  }
+  return promise;
+}
+
 // src/invoke-fetch/internal/invoke-fetch-methods.ts
 var defaultCacheTime = 1e3 * 60 * 10;
 var cache = {};
@@ -1669,6 +1750,7 @@ async function performActualHttpFetch(method, completeUrl, unencodedBody, conten
     headers,
     redirect: await isWindows(options?.hostConfig) ? "manual" : "follow",
     keepalive: options?.keepalive,
+    progress: options?.progress,
     body,
     // body data type must match "Content-Type" header
     ...requestOptions
@@ -1684,11 +1766,16 @@ async function performActualHttpFetch(method, completeUrl, unencodedBody, conten
     }, options.timeoutMs);
     request.signal = controller.signal;
   }
-  const fetchResponse = await fetchAndTransformExceptions(completeUrl, request);
+  let response;
+  if (options?.progress) {
+    response = await invokeXHR(completeUrl, request);
+  } else {
+    response = await fetchAndTransformExceptions(completeUrl, request);
+  }
   if (fetchTimeoutId) {
     clearTimeout(fetchTimeoutId);
   }
-  const invokeFetchResponse = await parseFetchResponse(fetchResponse, completeUrl);
+  const invokeFetchResponse = await parseFetchResponse(response, completeUrl);
   return invokeFetchResponse;
 }
 function encodeBody(unencodedBody, contentType) {

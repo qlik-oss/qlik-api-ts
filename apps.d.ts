@@ -1,4 +1,4 @@
-import { A as ApiCallOptions, D as DownloadableBlob } from './invoke-fetch-types-BLrpeZOL.js';
+import { A as ApiCallOptions, D as DownloadableBlob } from './invoke-fetch-types-0Dw3a71T.js';
 import './auth-types-PkN9CAF_.js';
 
 type Analysis = "breakdown" | "changePoint" | "comparison" | "contribution" | "correlation" | "fact" | "mutualInfo" | "rank" | "spike" | "trend" | "values";
