@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-BLrpeZOL.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-0Dw3a71T.js';
 import './auth-types-PkN9CAF_.js';
 
 type BaseIDP = {
@@ -98,6 +98,8 @@ type CreateOIDCPayload = {
         clientId: string;
         /** The client secret used as part of authenticating an interactive identity provider. */
         clientSecret: string;
+        /** A decrypting key used to decrypt OIDC encrypted assertions */
+        decryptingKey?: DecryptingKey;
         /** The OpenID configuration endpoint. (Ex: https://<domain>/.well-known/openid-configuration). Required if openid_configuration is not given. */
         discoveryUrl?: string;
         /** Only ADFS and AzureAD IdPs can set this property. For ADFS and AzureAD, it defaults to false. For other IdPs, it defaults to undefined. */
@@ -261,6 +263,8 @@ type IDPOIDCOptions = {
     clientId?: string;
     /** The client secret used as part of authenticating an interactive identity provider. */
     clientSecret?: string;
+    /** A decrypting key used to decrypt OIDC encrypted assertions */
+    decryptingKey?: DecryptingKey;
     /** The OpenID configuration endpoint. (Ex: https://<domain>/.well-known/openid-configuration). */
     discoveryUrl?: string;
     /** Determines if email_verified should be always true. This field is only used in ADFS and AzureAD IdPs. */
@@ -379,7 +383,7 @@ type PatchOIDCPayload = {
     /** The "operation" to be performed on a given IdP. Currently supports a custom operation value called "promote-options" that allows the test configuration to be promoted to the current configuration used for login. */
     op: "replace" | "promote-options";
     /** The "path" to the part of the IdP document. */
-    path?: "/active" | "/description" | "/meta" | "/options" | "/options/realm" | "/options/discoveryUrl" | "/options/claimsMapping" | "/pendingOptions" | "/pendingOptions/realm" | "/pendingOptions/discoveryUrl" | "/pendingOptions/clientId" | "/pendingOptions/clientSecret" | "/pendingOptions/emailVerifiedAlwaysTrue" | "/pendingOptions/claimsMapping" | "/postLogoutRedirectUri" | "/clockToleranceSec" | "/pendingOptions/idTokenSignatureAlg";
+    path?: "/active" | "/description" | "/meta" | "/options" | "/options/realm" | "/options/discoveryUrl" | "/options/claimsMapping" | "/pendingOptions" | "/pendingOptions/realm" | "/pendingOptions/discoveryUrl" | "/pendingOptions/clientId" | "/pendingOptions/clientSecret" | "/pendingOptions/emailVerifiedAlwaysTrue" | "/pendingOptions/claimsMapping" | "/postLogoutRedirectUri" | "/clockToleranceSec" | "/pendingOptions/idTokenSignatureAlg" | "/pendingOptions/decryptingKey";
     /** The "value" data type is dependent on the path value being used. */
     value?: unknown;
 };
@@ -468,6 +472,27 @@ type ClaimsMappingSAML = {
     picture: string[];
     /** A list of SAML attributes used to map the user's subject. */
     sub: string[];
+};
+/**
+ * A decrypting key used to decrypt OIDC encrypted assertions
+ */
+type DecryptingKey = {
+    /** The key's certificate in pem format */
+    certificate?: string;
+    /** The timestamp for when the decrypting key was created. */
+    createdAt?: string;
+    /** The user id of the user who created the decrypting key */
+    createdBy?: string;
+    /** The public key in jwk format */
+    jwks?: string;
+    /** The id of the decrypting key */
+    keyId?: string;
+    /** The algorithm size of the decrypting key */
+    keySize: number;
+    /** The algorithm type of the decrypting key */
+    keyType: string;
+    /** The public key in pem format */
+    publicKey?: string;
 };
 /**
  * This endpoint retrieves any IdPs registered on the tenant.
@@ -683,4 +708,4 @@ interface IdentityProvidersAPI {
  */
 declare const identityProvidersExport: IdentityProvidersAPI;
 
-export { type BaseIDP, type CertificateInfo, type ClaimsMappingInteractive, type ClaimsMappingNonInteractive, type ClaimsMappingSAML, type CreateIdpHttpError, type CreateIdpHttpResponse, type CreateJWTAuthPayload, type CreateOIDCPayload, type CreateSAMLPayload, type DeleteIdpHttpError, type DeleteIdpHttpResponse, type Error, type Errors, type GetIdpHttpError, type GetIdpHttpResponse, type GetIdpStatusesHttpError, type GetIdpStatusesHttpResponse, type GetIdpWellKnownMetaDataHttpError, type GetIdpWellKnownMetaDataHttpResponse, type GetIdpsHttpError, type GetIdpsHttpResponse, type GetMyIdpMetaHttpError, type GetMyIdpMetaHttpResponse, type IDP, type IDPArray, type IDPJWTAuth, type IDPMeta, type IDPOIDC, type IDPOIDCOptions, type IDPPatchSchema, type IDPPostSchema, type IDPProtocol, type IDPProvider, type IDPSAML, type IDPSAMLOptions, type IDPsStatus, type IdentityProvidersAPI, type Links, type OpenIDConfiguration, type PatchIdpHttpError, type PatchIdpHttpResponse, type PatchJWTAuthPayload, type PatchOIDCPayload, type PatchSAMLPayload, type PendingResult, type SigningKey, clearCache, createIdp, identityProvidersExport as default, deleteIdp, getIdp, getIdpStatuses, getIdpWellKnownMetaData, getIdps, getMyIdpMeta, patchIdp };
+export { type BaseIDP, type CertificateInfo, type ClaimsMappingInteractive, type ClaimsMappingNonInteractive, type ClaimsMappingSAML, type CreateIdpHttpError, type CreateIdpHttpResponse, type CreateJWTAuthPayload, type CreateOIDCPayload, type CreateSAMLPayload, type DecryptingKey, type DeleteIdpHttpError, type DeleteIdpHttpResponse, type Error, type Errors, type GetIdpHttpError, type GetIdpHttpResponse, type GetIdpStatusesHttpError, type GetIdpStatusesHttpResponse, type GetIdpWellKnownMetaDataHttpError, type GetIdpWellKnownMetaDataHttpResponse, type GetIdpsHttpError, type GetIdpsHttpResponse, type GetMyIdpMetaHttpError, type GetMyIdpMetaHttpResponse, type IDP, type IDPArray, type IDPJWTAuth, type IDPMeta, type IDPOIDC, type IDPOIDCOptions, type IDPPatchSchema, type IDPPostSchema, type IDPProtocol, type IDPProvider, type IDPSAML, type IDPSAMLOptions, type IDPsStatus, type IdentityProvidersAPI, type Links, type OpenIDConfiguration, type PatchIdpHttpError, type PatchIdpHttpResponse, type PatchJWTAuthPayload, type PatchOIDCPayload, type PatchSAMLPayload, type PendingResult, type SigningKey, clearCache, createIdp, identityProvidersExport as default, deleteIdp, getIdp, getIdpStatuses, getIdpWellKnownMetaData, getIdps, getMyIdpMeta, patchIdp };

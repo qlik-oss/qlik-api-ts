@@ -33,7 +33,7 @@ import { WebIntegrationsAPI } from './web-integrations.js';
 import { WebNotificationsAPI } from './web-notifications.js';
 import { WebhooksAPI } from './webhooks.js';
 import { H as HostConfig } from './auth-types-PkN9CAF_.js';
-import './invoke-fetch-types-BLrpeZOL.js';
+import './invoke-fetch-types-0Dw3a71T.js';
 
 declare const apiKeys: ApiKeysAPI;
 declare const apps: AppsAPI;

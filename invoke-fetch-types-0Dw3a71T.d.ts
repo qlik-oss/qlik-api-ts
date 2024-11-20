@@ -180,6 +180,11 @@ type ApiCallOptions = {
      * before the request is completed.
      */
     keepalive?: boolean;
+    /**
+     * Options for progress-reporting. Specify any combination of the callbacks `onUpload`
+     * and `onDownload`. Progress will be reported continuously.
+     */
+    progress?: ProgressOptions;
 };
 type InvokeFetchProperties = {
     /** http method */
@@ -204,6 +209,27 @@ type InvokeFetchProperties = {
 type DownloadableBlob = Blob & {
     /** download the blob in a using the specified filename */
     download: (filename: string) => Promise<void>;
+};
+/** The callback options for reporting progress. */
+type ProgressOptions = {
+    /** upload callback, called repeatedly when upload-progress is available */
+    onUpload: (event: PartialProgressEvent) => void;
+    /** download callback, called repeatedly when upload-progress is available */
+    onDownload: (event: PartialProgressEvent) => void;
+};
+/** Represents the current upload or download progress a API-call.
+ *
+ * It contains the number of loaded bytes and, if computable, the total payload size.
+ * If the total size cannot be determined, `total` will be undefined.
+ *
+ *
+ * See MDN: {@link https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent}
+ */
+type PartialProgressEvent = {
+    /** Number of bytes currently loaded. */
+    loaded: ProgressEvent["loaded"];
+    /** The total size of the payload, if computable. */
+    total?: ProgressEvent["total"];
 };
 
 export type { ApiCallOptions as A, DownloadableBlob as D, InvokeFetchResponse as I, InvokeFetchProperties as a };
