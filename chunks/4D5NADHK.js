@@ -5,6 +5,7 @@ import {
   UnexpectedAuthTypeError,
   auth_default,
   checkForCrossDomainRequest,
+  determineAuthType,
   getAccessToken,
   getRestCallAuthParams,
   getWebResourceAuthParams,
@@ -16,11 +17,10 @@ import {
   registerAuthModule,
   serializeHostConfig,
   setDefaultHostConfig,
-  toValidEnigmaLocationUrl,
   toValidLocationUrl,
   toValidWebsocketLocationUrl
-} from "./42BEO42M.js";
-import "./7BDAXGID.js";
+} from "./NBW6PHZU.js";
+import "./3RGGGGAR.js";
 import "./2ZQ3ZX7F.js";
 export {
   AuthorizationError,
@@ -29,6 +29,7 @@ export {
   UnexpectedAuthTypeError,
   checkForCrossDomainRequest,
   auth_default as default,
+  determineAuthType,
   getAccessToken,
   getRestCallAuthParams,
   getWebResourceAuthParams,
@@ -40,7 +41,6 @@ export {
   registerAuthModule,
   serializeHostConfig,
   setDefaultHostConfig,
-  toValidEnigmaLocationUrl,
   toValidLocationUrl,
   toValidWebsocketLocationUrl
 };
