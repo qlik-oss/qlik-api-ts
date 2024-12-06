@@ -116,7 +116,7 @@ declare global {
      * Attaching cache to the window so it can be viewed from the devtool.
      * Do not use this for anything!
      */
-    var __API_CACHE__DO_NOT_USE_OR_YOU_WILL_BE_FIRED: Record<string, Record<string, CacheEntry>>;
+    var __API_CACHE__DO_NOT_USE_OR_YOU_WILL_BE_FIRED: Record<string, Record<string, CacheEntry> | undefined>;
     /**
      * QlikMain object defined in https://github.com/qlik-trial/main-web-container/blob/main/src/main.ts
      */
@@ -213,9 +213,9 @@ type DownloadableBlob = Blob & {
 /** The callback options for reporting progress. */
 type ProgressOptions = {
     /** upload callback, called repeatedly when upload-progress is available */
-    onUpload: (event: PartialProgressEvent) => void;
+    onUpload?: (event: PartialProgressEvent) => void;
     /** download callback, called repeatedly when upload-progress is available */
-    onDownload: (event: PartialProgressEvent) => void;
+    onDownload?: (event: PartialProgressEvent) => void;
 };
 /** Represents the current upload or download progress a API-call.
  *

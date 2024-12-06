@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-0Dw3a71T.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BXn-uSF5.js';
 import './auth-types-PkN9CAF_.js';
 
 type BatchChangeSpaceItem = {

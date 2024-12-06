@@ -51,15 +51,12 @@ function addDefaultInterceptors() {
         return {};
       }
       const features = featuresParam.split(",").map((item) => item.trim());
-      const urlFeatures = features.reduce(
-        (map, obj) => {
-          const value = !obj.startsWith("!");
-          const key = value ? obj : obj.substring(1);
-          map[key] = value;
-          return map;
-        },
-        {}
-      );
+      const urlFeatures = features.reduce((map, obj) => {
+        const value = !obj.startsWith("!");
+        const key = value ? obj : obj.substring(1);
+        map[key] = value;
+        return map;
+      }, {});
       return urlFeatures;
     };
     const readFlagsFromLocalStorage = () => {
