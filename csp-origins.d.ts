@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-0Dw3a71T.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BXn-uSF5.js';
 import './auth-types-PkN9CAF_.js';
 
 type CSPEntry = {
@@ -71,7 +71,7 @@ type Link = {
     href: string;
 };
 /**
- * Retrieves all CSP entries for a tenant
+ * Retrieves all content security policies for a tenant.
  *
  * @param query an object with query parameters
  * @throws GetCSPEntriesHttpError
@@ -129,7 +129,7 @@ type GetCSPEntriesHttpError = {
     status: number;
 };
 /**
- * Creates a new CSP entry
+ * Creates a new content security policy for an origin.
  *
  * @param body an object with the body content
  * @throws CreateCSPEntryHttpError
@@ -146,7 +146,7 @@ type CreateCSPEntryHttpError = {
     status: number;
 };
 /**
- * Retrieves the CSP header for a tenant
+ * Retrieves the full content security policy header (including all configured policies and origins) for the tenant.
  *
  * @throws GetCSPHeaderHttpError
  */
@@ -162,7 +162,7 @@ type GetCSPHeaderHttpError = {
     status: number;
 };
 /**
- * Deletes a specific CSP entry
+ * Deletes a specific content security policy.
  *
  * @param id The CSP entry's unique identifier.
  * @throws DeleteCSPEntryHttpError
@@ -179,7 +179,7 @@ type DeleteCSPEntryHttpError = {
     status: number;
 };
 /**
- * Returns details for a specific CSP entry
+ * Returns details for a specific content security policy.
  *
  * @param id The CSP entry's unique identifier.
  * @throws GetCSPEntryHttpError
@@ -196,7 +196,7 @@ type GetCSPEntryHttpError = {
     status: number;
 };
 /**
- * Updates a CSP entry
+ * Updates a content security policy.
  *
  * @param id The CSP entry's unique identifier.
  * @param body an object with the body content
@@ -219,41 +219,41 @@ type UpdateCSPEntryHttpError = {
 declare function clearCache(): void;
 interface CspOriginsAPI {
     /**
-     * Retrieves all CSP entries for a tenant
+     * Retrieves all content security policies for a tenant.
      *
      * @param query an object with query parameters
      * @throws GetCSPEntriesHttpError
      */
     getCSPEntries: typeof getCSPEntries;
     /**
-     * Creates a new CSP entry
+     * Creates a new content security policy for an origin.
      *
      * @param body an object with the body content
      * @throws CreateCSPEntryHttpError
      */
     createCSPEntry: typeof createCSPEntry;
     /**
-     * Retrieves the CSP header for a tenant
+     * Retrieves the full content security policy header (including all configured policies and origins) for the tenant.
      *
      * @throws GetCSPHeaderHttpError
      */
     getCSPHeader: typeof getCSPHeader;
     /**
-     * Deletes a specific CSP entry
+     * Deletes a specific content security policy.
      *
      * @param id The CSP entry's unique identifier.
      * @throws DeleteCSPEntryHttpError
      */
     deleteCSPEntry: typeof deleteCSPEntry;
     /**
-     * Returns details for a specific CSP entry
+     * Returns details for a specific content security policy.
      *
      * @param id The CSP entry's unique identifier.
      * @throws GetCSPEntryHttpError
      */
     getCSPEntry: typeof getCSPEntry;
     /**
-     * Updates a CSP entry
+     * Updates a content security policy.
      *
      * @param id The CSP entry's unique identifier.
      * @param body an object with the body content

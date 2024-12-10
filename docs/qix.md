@@ -62,15 +62,36 @@ const sheetlist = await app.getSheetList();
 React example of getting the sheet list from a Qlik Sense app.
 
 ```tsx
+import { type HostConfig } from "@qlik/api/auth";
+import { openAppSession, type Doc } from "@qlik/api/qix";
 import React from "react";
 import usePromise from "react-use-promise";
-import { useAppHook } from "@qlik/api/qix";
-import { setDefaultHostConfig } from "@qlik/api/auth";
 
-setDefaultHostConfig({ ... });
+const hostConfig: HostConfig = {
+  ..., // add host config values here
+};
 
-// send in the react instance (avoid unnecessary dependencies to react in @qlik/api)
-const useApp = useAppHook(React);
+
+/**
+ * Use App Hook
+ */
+function useApp(appId: string): Doc | undefined {
+  const [app, setApp] = React.useState<Doc | undefined>(undefined);
+  React.useEffect(() => {
+    // open a websocket using the specified hostConfig. If `setDefaultHostConfig` has been used,
+    //  passing host config here is not needed here.
+    const appSession = openAppSession({ appId, hostConfig });
+    appSession.getDoc().then((x) => {
+      setApp(x);
+    });
+    return () => {
+      if (appSession) {
+        appSession.close();
+      }
+    };
+  }, [appId]);
+  return app;
+}
 
 type SheetListProps = {
   appId: string;
@@ -79,10 +100,9 @@ type SheetListProps = {
 const SheetList = ({ appId }: SheetListProps): JSX.Element | null => {
   const app = useApp(appId);
 
-  // this could be nicely wrapped in your own local getSheetList hook
+  // this could be nicely wrapped in your own local getSheetList hook similar to the useApp hook above
   const [sheetList] = usePromise(async () => app && app.getSheetList(), [app]);
   // getSheetList above is coming from mixins, fully typed
-
   if (!sheetList) {
     return <div>Loading</div>;
   }
@@ -90,7 +110,7 @@ const SheetList = ({ appId }: SheetListProps): JSX.Element | null => {
     <div>
       <div>Sheets:</div>
       {sheetList.map((item) => (
-        <div key={item.qInfo?.qId}>{item.qData.title}</div>
+        <div key={item.qInfo?.qId}>{item.qData?.title}</div>
       ))}
     </div>
   );

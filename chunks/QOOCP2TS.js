@@ -3,8 +3,8 @@ import {
   getRestCallAuthParams,
   getWebSocketAuthParams,
   toValidWebsocketLocationUrl
-} from "./42BEO42M.js";
-import "./7BDAXGID.js";
+} from "./NBW6PHZU.js";
+import "./3RGGGGAR.js";
 import {
   isNode
 } from "./2ZQ3ZX7F.js";
@@ -9723,7 +9723,8 @@ var bookmarkListProps = {
       description: "/qMetaDef/description",
       sheetId: "/sheetId",
       selectionFields: "/selectionFields",
-      creationDate: "/creationDate"
+      creationDate: "/creationDate",
+      groupId: "/groupId"
     }
   }
 };
