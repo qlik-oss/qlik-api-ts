@@ -1,4 +1,4 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-0Dw3a71T.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BXn-uSF5.js';
 import './auth-types-PkN9CAF_.js';
 
 /**
@@ -59,10 +59,10 @@ type Error = {
     errors?: ExportErrors;
 };
 /**
- * Output to be used to export a excel template.
+ * Output to be used to export an excel template.
  */
 type ExcelOutput = {
-    /** The image format of the report to be produced. */
+    /** The output format of the report to be produced. */
     outFormat?: "xlsx";
 };
 /**
@@ -207,7 +207,7 @@ type NxPatch = {
 type OutputItem = {
     /** The callback to be performed once the report is done. */
     callBackAction?: CallBackAction;
-    /** Output to be used to export a excel template. */
+    /** Output to be used to export an excel template. */
     excelOutput?: ExcelOutput;
     /** Output to be used to export a single visualization as image. */
     imageOutput?: ImageOutput;
@@ -239,7 +239,7 @@ type OutputItem = {
      *    - image requires imageOutput to be set
      *    - csv doesn't have csv output
      *    - xlsx requires xlsxOutput to be set */
-    type: "image" | "pdf" | "xlsx" | "jsondata" | "pdfcomposition" | "excel" | "pptx" | "pptxcomposition" | "csv" | "cycle";
+    type: "image" | "pdf" | "xlsx" | "jsondata" | "pdfcomposition" | "excel" | "pptx" | "pptxcomposition" | "csv" | "cycle" | "html";
 };
 /**
  * Output to be used to export a composition of templates as pdf.
@@ -342,6 +342,8 @@ type ReportRequest = {
     senseDataTemplate?: SenseDataTemplate;
     /** Used to produce reports from a template file. */
     senseExcelTemplate?: SenseFileTemplate;
+    /** Used to produce reports from a template file. */
+    senseHtmlTemplate?: SenseFileTemplate;
     /** Used to export a single visualization as pdf, pptx or png. */
     senseImageTemplate?: SenseImageTemplate;
     /** Used to produce reports from a template file. */
@@ -349,7 +351,7 @@ type ReportRequest = {
     /** Used to export a sheet as pdf or pptx. */
     senseSheetTemplate?: SenseSheetTemplate;
     /** Template type and version using semantic versioning. It must have the following name convention: dashed-separated-template-name-MAJOR.MINOR.
-     * Please note that sense-pixel-perfect-template-1.0, sense-story-x.0 and qv-data-x.0 are only for internal use.
+     * Please note that sense-pixel-perfect-template-1.0, sense-html-template-1.0, sense-story-x.0 and qv-data-x.0 are only for internal use.
      *
      * Each type requires a specific template to be provided:
      *   - composition-1.0 requires compositionTemplates to be set
@@ -364,7 +366,7 @@ type ReportRequest = {
      *   - sense-image-1.0 supports pdf, pptx and png output types
      *   - sense-sheet-1.0 supports pdf, pptx output type
      *   - sense-data-1.0 supports xlsx output type */
-    type: "composition-1.0" | "sense-image-1.0" | "sense-data-1.0" | "sense-sheet-1.0" | "sense-story-1.0" | "qv-data-1.0" | "qv-data-2.0" | "sense-excel-template-1.0" | "sense-pixel-perfect-template-1.0";
+    type: "composition-1.0" | "sense-image-1.0" | "sense-data-1.0" | "sense-sheet-1.0" | "sense-story-1.0" | "qv-data-1.0" | "qv-data-2.0" | "sense-excel-template-1.0" | "sense-pixel-perfect-template-1.0" | "sense-html-template-1.0";
 };
 type ReportStatus = {
     /** @deprecated

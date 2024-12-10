@@ -1,6 +1,6 @@
 import {
   getInterceptors
-} from "./7BDAXGID.js";
+} from "./3RGGGGAR.js";
 import {
   isBrowser,
   isNode
@@ -29,6 +29,9 @@ var getPlatform = async (options = {}) => {
   }
   if (deploymentType === "qliksensemobile") {
     return result({ isQSE: true, isWindows: true });
+  }
+  if (deploymentType === "cloud-console") {
+    return result({ isCloud: true, isCloudConsole: true });
   }
   if (productInfo.composition?.provider === "fedramp") {
     return result({ isCloud: true, isQCG: true, isControlCenter });
@@ -61,7 +64,7 @@ var getProductInfo = async ({ hostConfig, noCache } = {}) => {
       delete productInfoPromises[completeUrl];
     }
     return response;
-  } catch (err) {
+  } catch {
     delete productInfoPromises[completeUrl];
     return { data: void 0, status: 500 };
   } finally {
@@ -75,6 +78,7 @@ var result = (data) => ({
   isCloud: false,
   isQCS: false,
   isQCG: false,
+  isCloudConsole: false,
   isControlCenter: false,
   isWindows: false,
   isQSE: false,
@@ -109,7 +113,7 @@ function getRegisteredAuthModule(authType) {
 }
 async function getAuthModule(hostConfig) {
   const hostConfigToUse = withDefaultHostConfig(hostConfig);
-  const authType = await guessAuthTypeIfMissing(hostConfigToUse);
+  const authType = await determineAuthType(hostConfigToUse);
   if (ongoingAuthModuleLoading) {
     await ongoingAuthModuleLoading;
   }
@@ -130,27 +134,6 @@ async function getAuthModule(hostConfig) {
     authModule.validateHostConfig({ authType, ...hostConfigToUse });
   }
   return authModule;
-}
-async function guessAuthTypeIfMissing(hostConfig) {
-  if (hostConfig.authType) {
-    return hostConfig.authType;
-  }
-  if (hostConfig.apiKey) {
-    return "apikey";
-  }
-  if (hostConfig.accessCode) {
-    return "anonymous";
-  }
-  if (hostConfig.clientId) {
-    return "oauth2";
-  }
-  if (hostConfig.webIntegrationId) {
-    return "cookie";
-  }
-  if (await isWindows(hostConfig)) {
-    return "windowscookie";
-  }
-  return "cookie";
 }
 async function resolveGloballyDefinedAuthModule(authType) {
   const globalWindow = globalThis;
@@ -261,9 +244,6 @@ function toValidLocationUrl(hostConfig) {
   }
   return locationUrl;
 }
-function toValidEnigmaLocationUrl(hostConfig) {
-  return toValidWebsocketLocationUrl(hostConfig);
-}
 function toValidWebsocketLocationUrl(hostConfig) {
   const url = withDefaultHostConfig(hostConfig)?.host;
   let locationUrl;
@@ -350,6 +330,27 @@ function setDefaultHostConfig2(hostConfig) {
 function serializeHostConfig(hostConfig) {
   const hostConfigToUse = withDefaultHostConfig(hostConfig);
   return JSON.stringify(hostConfigToUse, hostConfigPropertyIgnorer);
+}
+async function determineAuthType(hostConfig) {
+  if (hostConfig.authType) {
+    return hostConfig.authType;
+  }
+  if (hostConfig.apiKey) {
+    return "apikey";
+  }
+  if (hostConfig.accessCode) {
+    return "anonymous";
+  }
+  if (hostConfig.clientId) {
+    return "oauth2";
+  }
+  if (hostConfig.webIntegrationId) {
+    return "cookie";
+  }
+  if (await isWindows(hostConfig)) {
+    return "windowscookie";
+  }
+  return "cookie";
 }
 function checkForCrossDomainRequest(hostConfig) {
   const hostConfigToUse = withDefaultHostConfig(hostConfig);
@@ -448,7 +449,7 @@ function internalValidateHostConfig(hostConfig, options) {
 // src/auth/internal/default-auth-modules/oauth/storage-helpers.ts
 var storagePrefix = "qlik-qmfe-api";
 function getTopicFromOauthHostConfig(hostConfig) {
-  let topic = `${hostConfig.clientId + (hostConfig.scope ? `_${hostConfig.scope}` : "_user_default")}`;
+  let topic = hostConfig.clientId + (hostConfig.scope ? `_${hostConfig.scope}` : "_user_default");
   if (hostConfig.subject) {
     topic += `_${hostConfig.subject}`;
   }
@@ -807,7 +808,7 @@ async function getOAuthTokensForBrowser(hostConfig) {
           refreshToken: void 0,
           errors: void 0
         };
-      } catch (error) {
+      } catch {
         return errorMessageToAuthData("Could not fetch access token using custom function");
       }
     }
@@ -849,7 +850,6 @@ async function getOAuthTokensForBrowser(hostConfig) {
               code: "",
               status: 401,
               title: "Could not perform custom interactive login",
-              // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
               detail: `${error}`
             }
           ]
@@ -980,7 +980,7 @@ async function toError(response) {
   try {
     const data = JSON.parse(body);
     return new AuthorizationError(data.errors);
-  } catch (err) {
+  } catch {
     return new AuthorizationError([
       {
         code: "unknown",
@@ -1492,10 +1492,11 @@ var auth = {
   getWebResourceAuthParams,
   handleAuthenticationError,
   toValidLocationUrl,
-  toValidEnigmaLocationUrl,
   toValidWebsocketLocationUrl,
   isWindows,
-  isHostCrossOrigin
+  isHostCrossOrigin,
+  determineAuthType,
+  serializeHostConfig
 };
 var auth_default = auth;
 
@@ -1546,7 +1547,7 @@ function toCompleteUrl(url, query) {
   return url;
 }
 function shouldUseCachedResult(options, cacheEntry, defaultMaxCacheTime) {
-  if (!cacheEntry || typeof cacheEntry.value === void 0) {
+  if (!cacheEntry || typeof cacheEntry.value === "undefined") {
     return false;
   }
   if (options?.noCache) {
@@ -1628,16 +1629,7 @@ function clearCacheOnError(cacheEntry, cacheKey, value) {
 }
 
 // src/invoke-fetch/internal/invoke-xhr.ts
-async function invokeXHR(completeUrl, {
-  method,
-  headers,
-  credentials,
-  mode,
-  keepalive,
-  body,
-  signal,
-  progress
-}) {
+async function invokeXHR(completeUrl, { method, headers, credentials, keepalive, body, signal, progress }) {
   const xhr = new XMLHttpRequest();
   let resolve;
   let reject;
@@ -1662,23 +1654,21 @@ async function invokeXHR(completeUrl, {
       reject();
     });
   }
-  if (mode === "cors") {
-    if (credentials === "include") {
-      xhr.withCredentials = true;
-    } else {
-      xhr.withCredentials = false;
-    }
+  if (credentials === "include") {
+    xhr.withCredentials = true;
+  } else {
+    xhr.withCredentials = false;
   }
   if (progress?.onUpload) {
     xhr.upload.onprogress = (event) => {
       const { loaded, total, lengthComputable } = event;
-      progress.onUpload({ loaded, total: lengthComputable ? total : void 0 });
+      progress.onUpload?.({ loaded, total: lengthComputable ? total : void 0 });
     };
   }
   if (progress?.onDownload) {
     xhr.onprogress = (event) => {
       const { loaded, total, lengthComputable } = event;
-      progress.onDownload({ loaded, total: lengthComputable ? total : void 0 });
+      progress.onDownload?.({ loaded, total: lengthComputable ? total : void 0 });
     };
   }
   xhr.onloadend = () => {
@@ -1700,7 +1690,7 @@ async function invokeXHR(completeUrl, {
     const bod = body;
     xhr.send(bod);
   } catch (e) {
-    return Promise.reject(new InvokeFetchError2(getErrorMessage(e), 0, new Headers(), {}));
+    return Promise.reject(new InvokeFetchError(getErrorMessage(e), 0, new Headers(), {}));
   }
   return promise;
 }
@@ -1728,7 +1718,7 @@ async function fetchAndTransformExceptions(input, init) {
   try {
     return await fetch(input, init);
   } catch (e) {
-    return Promise.reject(new InvokeFetchError2(getErrorMessage(e), 0, new Headers(), {}));
+    return Promise.reject(new InvokeFetchError(getErrorMessage(e), 0, new Headers(), {}));
   }
 }
 async function performActualHttpFetch(method, completeUrl, unencodedBody, contentType, options, authHeaders, credentials, userAgent) {
@@ -1742,11 +1732,10 @@ async function performActualHttpFetch(method, completeUrl, unencodedBody, conten
   if (!headers["User-Agent"] && userAgent) {
     headers["User-Agent"] = userAgent;
   }
-  const isCrossOrigin = isHostCrossOrigin(options?.hostConfig);
   const request = {
     method,
     credentials,
-    mode: isCrossOrigin ? "cors" : "same-origin",
+    mode: "cors",
     headers,
     redirect: await isWindows(options?.hostConfig) ? "manual" : "follow",
     keepalive: options?.keepalive,
@@ -2068,7 +2057,7 @@ async function download(blob, filename) {
 }
 
 // src/invoke-fetch/invoke-fetch-error.ts
-var InvokeFetchError2 = class extends Error {
+var InvokeFetchError = class extends Error {
   status;
   headers;
   data;
@@ -2189,10 +2178,10 @@ async function parseFetchResponse(fetchResponse, url) {
   const { status, statusText, headers } = fetchResponse;
   const errorMsg = `request to '${url}' failed with status ${status} ${statusText}.`;
   if (status >= 300) {
-    throw new InvokeFetchError2(errorMsg, status, headers, resultData);
+    throw new InvokeFetchError(errorMsg, status, headers, resultData);
   }
   if (status === 0) {
-    throw new InvokeFetchError2(errorMsg, 302, headers, resultData);
+    throw new InvokeFetchError(errorMsg, 302, headers, resultData);
   }
   const invokeFetchResponse = {
     status,
@@ -2219,7 +2208,6 @@ export {
   isHostCrossOrigin,
   isWindows,
   toValidLocationUrl,
-  toValidEnigmaLocationUrl,
   toValidWebsocketLocationUrl,
   getWebSocketAuthParams,
   getWebResourceAuthParams,
@@ -2229,10 +2217,11 @@ export {
   registerAuthModule2 as registerAuthModule,
   setDefaultHostConfig2 as setDefaultHostConfig,
   serializeHostConfig,
+  determineAuthType,
   checkForCrossDomainRequest,
   logout,
   generateRandomString,
-  InvokeFetchError2 as InvokeFetchError,
+  InvokeFetchError,
   EncodingError,
   invokeFetch,
   clearApiCache,
