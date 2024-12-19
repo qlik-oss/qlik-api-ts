@@ -206,14 +206,14 @@ declare const getAutomations: (query: {
 type GetAutomationsHttpResponse = {
     data: AutomationList;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetAutomationsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetAutomationsHttpResponse>;
 };
 type GetAutomationsHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 500 | 503;
 };
 /**
  * Create an automation
@@ -225,12 +225,12 @@ declare const createAutomation: (body: AutomationDetailRequestObject, options?: 
 type CreateAutomationHttpResponse = {
     data: AutomationDetailResponseObject;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CreateAutomationHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 500 | 503;
 };
 /**
  * Retrieves all automation usage for a tenant
@@ -247,14 +247,14 @@ declare const getAutomationsUsageMetrics: (query: {
 type GetAutomationsUsageMetricsHttpResponse = {
     data: UsageList;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetAutomationsUsageMetricsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetAutomationsUsageMetricsHttpResponse>;
 };
 type GetAutomationsUsageMetricsHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 500 | 503;
 };
 /**
  * Delete an automation
@@ -266,12 +266,12 @@ declare const deleteAutomation: (id: string, options?: ApiCallOptions) => Promis
 type DeleteAutomationHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteAutomationHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Retrieves an automation
@@ -287,12 +287,12 @@ declare const getAutomationWithQuery: (id: string, query: {
 type GetAutomationWithQueryHttpResponse = {
     data: AutomationDetailResponseObject;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAutomationWithQueryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Retrieves an automation
@@ -304,12 +304,12 @@ declare const getAutomation: (id: string, options?: ApiCallOptions) => Promise<G
 type GetAutomationHttpResponse = {
     data: AutomationDetailResponseObject;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAutomationHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Update an automation
@@ -322,12 +322,12 @@ declare const updateAutomation: (id: string, body: AutomationDetailRequestObject
 type UpdateAutomationHttpResponse = {
     data: AutomationDetailResponseObject;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type UpdateAutomationHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Copy an automation.
@@ -346,12 +346,12 @@ type CopyAutomationHttpResponse = {
         id?: string;
     };
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CopyAutomationHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Disables an automation.
@@ -363,12 +363,12 @@ declare const disableAutomation: (id: string, options?: ApiCallOptions) => Promi
 type DisableAutomationHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DisableAutomationHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Enable an automation.
@@ -380,12 +380,12 @@ declare const enableAutomation: (id: string, options?: ApiCallOptions) => Promis
 type EnableAutomationHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type EnableAutomationHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * This step will remove the history and change logs of this automation. All linked connections used inside an automation will be detached.
@@ -400,12 +400,12 @@ declare const moveAutomation: (id: string, body: {
 type MoveAutomationHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type MoveAutomationHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Retrieves a list of runs for a specific automation.
@@ -427,14 +427,14 @@ declare const getAutomationRuns: (id: string, query: {
 type GetAutomationRunsHttpResponse = {
     data: RunList;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetAutomationRunsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetAutomationRunsHttpResponse>;
 };
 type GetAutomationRunsHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Create a run
@@ -447,12 +447,12 @@ declare const queueAutomationRun: (id: string, body: RunDetailRequestObject, opt
 type QueueAutomationRunHttpResponse = {
     data: RunDetailResponseObject;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type QueueAutomationRunHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Retrieves a run
@@ -469,12 +469,12 @@ declare const getAutomationRunWithQuery: (id: string, runId: string, query: {
 type GetAutomationRunWithQueryHttpResponse = {
     data: RunDetailResponseObject;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAutomationRunWithQueryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Retrieves a run
@@ -487,12 +487,12 @@ declare const getAutomationRun: (id: string, runId: string, options?: ApiCallOpt
 type GetAutomationRunHttpResponse = {
     data: RunDetailResponseObject;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAutomationRunHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Creates a temporary pre-signed AWS S3 URL to download the raw logs of a completed run. This URL is valid for 5 minutes.
@@ -507,12 +507,12 @@ type GetAutomationRunDetailsHttpResponse = {
         url?: string;
     };
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAutomationRunDetailsHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * This action allows you to retry a specific run by creating a new run using the same inputs.
@@ -525,12 +525,12 @@ declare const retryAutomationRun: (id: string, runId: string, options?: ApiCallO
 type RetryAutomationRunHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type RetryAutomationRunHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Force a run to be stopped immediately.
@@ -543,12 +543,12 @@ declare const stopAutomationRun: (id: string, runId: string, options?: ApiCallOp
 type StopAutomationRunHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type StopAutomationRunHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Clears the cache for automations api requests.

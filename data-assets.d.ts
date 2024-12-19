@@ -70,12 +70,12 @@ declare const deleteDataAssets: (body: BatchIdDto, options?: ApiCallOptions) => 
 type DeleteDataAssetsHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteDataAssetsHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
 };
 /**
  * Save new data asset.
@@ -87,12 +87,12 @@ declare const createDataAsset: (body: DataAsset, options?: ApiCallOptions) => Pr
 type CreateDataAssetHttpResponse = {
     data: DataAsset;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CreateDataAssetHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
 };
 /**
  * Get data asset by ID.
@@ -108,12 +108,12 @@ declare const getDataAsset: (dataAssetId: string, query: {
 type GetDataAssetHttpResponse = {
     data: DataAsset;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetDataAssetHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
 };
 /**
  * Patch data asset.
@@ -126,12 +126,12 @@ declare const patchDataAsset: (dataAssetId: string, body: JsonPatch[], options?:
 type PatchDataAssetHttpResponse = {
     data: DataAsset;
     headers: Headers;
-    status: number;
+    status: 200 | 204;
 };
 type PatchDataAssetHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
 };
 /**
  * Update data asset.
@@ -144,12 +144,12 @@ declare const updateDataAsset: (dataAssetId: string, body: DataAsset, options?: 
 type UpdateDataAssetHttpResponse = {
     data: DataAsset;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type UpdateDataAssetHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
 };
 /**
  * Clears the cache for data-assets api requests.

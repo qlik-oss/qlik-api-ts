@@ -107,12 +107,12 @@ declare const getReloads: (query: {
 type GetReloadsHttpResponse = {
     data: Reloads;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetReloadsHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 500;
 };
 /**
  * Reloads an app specified by an app ID.
@@ -124,12 +124,12 @@ declare const queueReload: (body: ReloadRequest, options?: ApiCallOptions) => Pr
 type QueueReloadHttpResponse = {
     data: Reload;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type QueueReloadHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 429 | 500;
 };
 /**
  * Finds and returns a reload record.
@@ -141,12 +141,12 @@ declare const getReload: (reloadId: string, options?: ApiCallOptions) => Promise
 type GetReloadHttpResponse = {
     data: Reload;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetReloadHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500;
 };
 /**
  * Cancels a reload that is in progress or has been queued
@@ -158,12 +158,12 @@ declare const cancelReload: (reloadId: string, options?: ApiCallOptions) => Prom
 type CancelReloadHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 202 | 204;
 };
 type CancelReloadHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 409 | 500;
 };
 /**
  * Clears the cache for reloads api requests.

@@ -446,14 +446,14 @@ declare const getGlossaries: (query: {
 type GetGlossariesHttpResponse = {
     data: GlossariesResult;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetGlossariesHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetGlossariesHttpResponse>;
 };
 type GetGlossariesHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403;
 };
 /**
  * Creates a new glossary. Only a steward can create a glossary.
@@ -465,12 +465,12 @@ declare const createGlossary: (body: CreateGlossary, options?: ApiCallOptions) =
 type CreateGlossaryHttpResponse = {
     data: Glossary;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CreateGlossaryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403;
 };
 /**
  * Creates a new glossary, including categories and terms, based on a glossary definition file.
@@ -491,8 +491,9 @@ declare const importGlossary: (query: {
 type ImportGlossaryHttpResponse = {
     data: Glossary;
     headers: Headers;
-    status: number;
+    status: 201;
 };
+type ImportGlossaryHttpError = ImportGlossary400HttpError | ImportGlossary403HttpError | ImportGlossary404HttpError;
 type ImportGlossary400HttpError = {
     data: ErrorResponseBadRequest;
     headers: Headers;
@@ -508,7 +509,6 @@ type ImportGlossary404HttpError = {
     headers: Headers;
     status: 404;
 };
-type ImportGlossaryHttpError = ImportGlossary400HttpError | ImportGlossary403HttpError | ImportGlossary404HttpError;
 /**
  * Deletes a glossary and all of its terms.
  *
@@ -519,12 +519,12 @@ declare const deleteGlossary: (id: string, options?: ApiCallOptions) => Promise<
 type DeleteGlossaryHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteGlossaryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404;
 };
 /**
  * Retrieves a glossary.
@@ -536,12 +536,12 @@ declare const getGlossary: (id: string, options?: ApiCallOptions) => Promise<Get
 type GetGlossaryHttpResponse = {
     data: Glossary;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetGlossaryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404;
 };
 /**
  * Updates glossary properties with json-patch formated data
@@ -554,12 +554,12 @@ declare const patchGlossary: (id: string, body: JSONPatchArray, options?: ApiCal
 type PatchGlossaryHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type PatchGlossaryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 429;
 };
 /**
  * Updates a glossary.
@@ -572,12 +572,12 @@ declare const updateGlossary: (id: string, body: CreateGlossary, options?: ApiCa
 type UpdateGlossaryHttpResponse = {
     data: Glossary;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type UpdateGlossaryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404;
 };
 /**
  * Exports a glossary.
@@ -589,12 +589,12 @@ declare const exportGlossary: (id: string, options?: ApiCallOptions) => Promise<
 type ExportGlossaryHttpResponse = {
     data: ExportGlossary;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type ExportGlossaryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404;
 };
 /**
  * Returns a list of categories for a glossary.
@@ -618,14 +618,14 @@ declare const getGlossaryCategories: (id: string, query: {
 type GetGlossaryCategoriesHttpResponse = {
     data: CategoriesResult;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetGlossaryCategoriesHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetGlossaryCategoriesHttpResponse>;
 };
 type GetGlossaryCategoriesHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404;
 };
 /**
  * Creates a new category.
@@ -638,12 +638,12 @@ declare const createGlossaryCategory: (id: string, body: CreateCategory, options
 type CreateGlossaryCategoryHttpResponse = {
     data: Category;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CreateGlossaryCategoryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404;
 };
 /**
  * Deletes a category.
@@ -656,12 +656,12 @@ declare const deleteGlossaryCategory: (id: string, categoryId: string, options?:
 type DeleteGlossaryCategoryHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteGlossaryCategoryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404;
 };
 /**
  * Retrieves a category.
@@ -674,12 +674,12 @@ declare const getGlossaryCategory: (id: string, categoryId: string, options?: Ap
 type GetGlossaryCategoryHttpResponse = {
     data: Category;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetGlossaryCategoryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404;
 };
 /**
  * Updates category properties with json-patch formated data
@@ -693,12 +693,12 @@ declare const patchGlossaryCategory: (id: string, categoryId: string, body: JSON
 type PatchGlossaryCategoryHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type PatchGlossaryCategoryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 429;
 };
 /**
  * Updates a category.
@@ -712,12 +712,12 @@ declare const updateGlossaryCategory: (id: string, categoryId: string, body: Cre
 type UpdateGlossaryCategoryHttpResponse = {
     data: Category;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type UpdateGlossaryCategoryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404;
 };
 /**
  * Returns a list of terms for a glossary.
@@ -754,14 +754,14 @@ declare const getGlossaryTerms: (id: string, query: {
 type GetGlossaryTermsHttpResponse = {
     data: TermsResult;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetGlossaryTermsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetGlossaryTermsHttpResponse>;
 };
 type GetGlossaryTermsHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404;
 };
 /**
  * Creates a new term.
@@ -774,12 +774,12 @@ declare const createGlossaryTerm: (id: string, body: CreateTerm, options?: ApiCa
 type CreateGlossaryTermHttpResponse = {
     data: Term;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CreateGlossaryTermHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404;
 };
 /**
  * Deletes a term.
@@ -792,12 +792,12 @@ declare const deleteGlossaryTerm: (id: string, termId: string, options?: ApiCall
 type DeleteGlossaryTermHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteGlossaryTermHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404;
 };
 /**
  * Retrieves a term.
@@ -810,12 +810,12 @@ declare const getGlossaryTerm: (id: string, termId: string, options?: ApiCallOpt
 type GetGlossaryTermHttpResponse = {
     data: Term;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetGlossaryTermHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404;
 };
 /**
  * Updates term properties with json-patch formated data
@@ -829,12 +829,12 @@ declare const patchGlossaryTerm: (id: string, termId: string, body: JSONPatchArr
 type PatchGlossaryTermHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type PatchGlossaryTermHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 412 | 429;
 };
 /**
  * Updates a term.
@@ -848,12 +848,12 @@ declare const updateGlossaryTerm: (id: string, termId: string, body: CreateTerm,
 type UpdateGlossaryTermHttpResponse = {
     data: Term;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type UpdateGlossaryTermHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404 | 412;
 };
 /**
  * Changes the status of the term. Only a steward can verify a term. Once the term is verified only a steward can modify the term.
@@ -870,12 +870,12 @@ declare const changeGlossaryTermStatus: (id: string, termId: string, query: {
 type ChangeGlossaryTermStatusHttpResponse = {
     data: Term;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type ChangeGlossaryTermStatusHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404 | 412;
 };
 /**
  * Returns a list of links assigned to a term.
@@ -902,14 +902,14 @@ declare const getGlossaryTermLinks: (id: string, termId: string, query: {
 type GetGlossaryTermLinksHttpResponse = {
     data: LinksResult;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetGlossaryTermLinksHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetGlossaryTermLinksHttpResponse>;
 };
 type GetGlossaryTermLinksHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404;
 };
 /**
  * Creates a new link to a term.
@@ -923,12 +923,12 @@ declare const createGlossaryTermLink: (id: string, termId: string, body: TermCre
 type CreateGlossaryTermLinkHttpResponse = {
     data: TermLinksTo;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CreateGlossaryTermLinkHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404 | 412;
 };
 /**
  * Retrieves previous revisions of a term.
@@ -953,14 +953,14 @@ declare const getGlossaryTermRevisions: (id: string, termId: string, query: {
 type GetGlossaryTermRevisionsHttpResponse = {
     data: TermsResult;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetGlossaryTermRevisionsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetGlossaryTermRevisionsHttpResponse>;
 };
 type GetGlossaryTermRevisionsHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404;
 };
 /**
  * Clears the cache for glossaries api requests.

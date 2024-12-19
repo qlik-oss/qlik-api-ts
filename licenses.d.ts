@@ -232,14 +232,14 @@ declare const getLicenseAssignments: (query: {
 type GetLicenseAssignmentsHttpResponse = {
     data: AssignmentsResponse;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetLicenseAssignmentsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetLicenseAssignmentsHttpResponse>;
 };
 type GetLicenseAssignmentsHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403;
 };
 /**
  * Assigns license access to the given users
@@ -251,12 +251,12 @@ declare const addLicenseAssignments: (body: AssignmentsActionsAddRequest, option
 type AddLicenseAssignmentsHttpResponse = {
     data: AssignmentsActionsAddResponse;
     headers: Headers;
-    status: number;
+    status: 207;
 };
 type AddLicenseAssignmentsHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403;
 };
 /**
  * Removes license access for the given users
@@ -268,12 +268,12 @@ declare const deleteLicenseAssignments: (body: AssignmentsActionsDeleteRequest, 
 type DeleteLicenseAssignmentsHttpResponse = {
     data: AssignmentsActionsDeleteResponse;
     headers: Headers;
-    status: number;
+    status: 207;
 };
 type DeleteLicenseAssignmentsHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403;
 };
 /**
  * Updates license access for the given users
@@ -285,12 +285,12 @@ declare const updateLicenseAssignments: (body: AssignmentsActionsUpdateRequest, 
 type UpdateLicenseAssignmentsHttpResponse = {
     data: AssignmentsActionsUpdateResponse;
     headers: Headers;
-    status: number;
+    status: 207;
 };
 type UpdateLicenseAssignmentsHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403;
 };
 /**
  * Retrieves license consumption for the current tenant
@@ -311,14 +311,14 @@ declare const getLicenseConsumption: (query: {
 type GetLicenseConsumptionHttpResponse = {
     data: ConsumptionEventsResponse;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetLicenseConsumptionHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetLicenseConsumptionHttpResponse>;
 };
 type GetLicenseConsumptionHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403;
 };
 /**
  * Gets the general information of the license applied to the current tenant
@@ -329,12 +329,12 @@ declare const getLicenseOverview: (options?: ApiCallOptions) => Promise<GetLicen
 type GetLicenseOverviewHttpResponse = {
     data: LicenseOverview;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetLicenseOverviewHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 404;
 };
 /**
  * Get auto assign settings for tenant.
@@ -345,12 +345,12 @@ declare const getLicenseSettings: (options?: ApiCallOptions) => Promise<GetLicen
 type GetLicenseSettingsHttpResponse = {
     data: SettingsBody;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetLicenseSettingsHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403;
 };
 /**
  * Set auto assign settings for tenant
@@ -362,12 +362,12 @@ declare const updateLicenseSettings: (body: SettingsBody, options?: ApiCallOptio
 type UpdateLicenseSettingsHttpResponse = {
     data: SettingsBody;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type UpdateLicenseSettingsHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403;
 };
 /**
  * Gets the license status information of the current tenant
@@ -378,12 +378,12 @@ declare const getLicenseStatus: (options?: ApiCallOptions) => Promise<GetLicense
 type GetLicenseStatusHttpResponse = {
     data: LicenseStatus;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetLicenseStatusHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401;
 };
 /**
  * Clears the cache for licenses api requests.

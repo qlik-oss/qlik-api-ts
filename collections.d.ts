@@ -270,14 +270,14 @@ declare const getCollections: (query: {
 type GetCollectionsHttpResponse = {
     data: CollectionsListCollectionsResponseBody;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetCollectionsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetCollectionsHttpResponse>;
 };
 type GetCollectionsHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 500;
 };
 /**
  * Creates and returns a new collection. Collections of type `public` (shown as tags in the user interface) must have unique names. Other collection types can reuse names.
@@ -289,12 +289,12 @@ declare const createCollection: (body: CollectionsCreateCollectionRequestBody, o
 type CreateCollectionHttpResponse = {
     data: CollectionResultResponseBody;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CreateCollectionHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 409 | 500;
 };
 /**
  * Lists the user's favorites collection.
@@ -305,12 +305,12 @@ declare const getFavoritesCollection: (options?: ApiCallOptions) => Promise<GetF
 type GetFavoritesCollectionHttpResponse = {
     data: CollectionResultResponseBody;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetFavoritesCollectionHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: number;
+    status: 401 | 404 | 500;
 };
 /**
  * Deletes a collection and removes all items from the collection.
@@ -322,12 +322,12 @@ declare const deleteCollection: (collectionId: string, options?: ApiCallOptions)
 type DeleteCollectionHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteCollectionHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: number;
+    status: 401 | 404 | 500;
 };
 /**
  * Finds and returns a collection.
@@ -339,12 +339,12 @@ declare const getCollection: (collectionId: string, options?: ApiCallOptions) =>
 type GetCollectionHttpResponse = {
     data: CollectionResultResponseBody;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetCollectionHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 404 | 500;
 };
 /**
  * Updates the name, description, or type fields provided in the patch body. Can be used to publish a `private` collection as a `publicgoverned` collection by patching `/type` with `publicgoverned` once the collection contains at least 1 item. Can also be used to return a `publicgoverned` collection to `private`. Cannot be used to change between `public` (tag) and `private / publicgoverned` (collection).
@@ -357,12 +357,12 @@ declare const patchCollection: (collectionId: string, body: CollectionByIdPatch,
 type PatchCollectionHttpResponse = {
     data: CollectionResultResponseBody;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type PatchCollectionHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 404 | 409 | 500;
 };
 /**
  * Updates a collection's name and description and returns the updated collection. Omitted and unsupported fields are ignored. To unset a field, provide the field's zero value.
@@ -375,12 +375,12 @@ declare const updateCollection: (collectionId: string, body: CollectionsUpdateCo
 type UpdateCollectionHttpResponse = {
     data: CollectionResultResponseBody;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type UpdateCollectionHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 404 | 409 | 500;
 };
 /**
  * Retrieves items from a collection that the user has access to.
@@ -420,12 +420,12 @@ declare const getCollectionItems: (collectionId: string, query: {
 type GetCollectionItemsHttpResponse = {
     data: CollectionsListCollectionItemsResponseBody;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetCollectionItemsHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 404 | 500;
 };
 /**
  * Adds an item to a collection and returns the item.
@@ -438,12 +438,12 @@ declare const addCollectionItem: (collectionId: string, body: CollectionsAddColl
 type AddCollectionItemHttpResponse = {
     data: ItemResultResponseBody;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type AddCollectionItemHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 409 | 500;
 };
 /**
  * Removes an item from a collection.
@@ -456,12 +456,12 @@ declare const deleteCollectionItem: (collectionId: string, itemId: string, optio
 type DeleteCollectionItemHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteCollectionItemHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 404 | 500;
 };
 /**
  * Finds and returns an item in a specific collection. See GET `/items/{id}`.
@@ -474,12 +474,12 @@ declare const getCollectionItem: (collectionId: string, itemId: string, options?
 type GetCollectionItemHttpResponse = {
     data: ItemResultResponseBody;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetCollectionItemHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 404 | 500;
 };
 /**
  * Clears the cache for collections api requests.
