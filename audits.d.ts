@@ -117,14 +117,14 @@ declare const getAudits: (query: {
 type GetAuditsHttpResponse = {
     data: GetResult;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetAuditsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetAuditsHttpResponse>;
 };
 type GetAuditsHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 500;
 };
 /**
  * Retrieves audit events from long term storage. Finds and returns audit events from the archive, formatted as a JSON array, for the given date and tenant (in JWT). Archived events are not removed.
@@ -139,12 +139,12 @@ declare const getArchivedAudits: (query: {
 type GetArchivedAuditsHttpResponse = {
     data: GetArchiveResult;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetArchivedAuditsHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 404 | 500;
 };
 /**
  * Returns the server configuration options. It includes options that represent the server configuration state and parameters that were used to run the server with certain functionality.
@@ -155,12 +155,12 @@ declare const getAuditsSettings: (options?: ApiCallOptions) => Promise<GetAudits
 type GetAuditsSettingsHttpResponse = {
     data: GetSettingsResult;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAuditsSettingsHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 401 | 500;
 };
 /**
  * Finds and returns the list of possible event sources for this tenant.
@@ -171,14 +171,14 @@ declare const getAuditSources: (options?: ApiCallOptions) => Promise<GetAuditSou
 type GetAuditSourcesHttpResponse = {
     data: GetObjectsResult;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetAuditSourcesHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetAuditSourcesHttpResponse>;
 };
 type GetAuditSourcesHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 401 | 500;
 };
 /**
  * Finds and returns the list of possible event types for this tenant.
@@ -189,14 +189,14 @@ declare const getAuditTypes: (options?: ApiCallOptions) => Promise<GetAuditTypes
 type GetAuditTypesHttpResponse = {
     data: GetObjectsResult;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetAuditTypesHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetAuditTypesHttpResponse>;
 };
 type GetAuditTypesHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 401 | 500;
 };
 /**
  * Finds and returns a specific audit events for the given event ID.
@@ -208,12 +208,12 @@ declare const getAudit: (id: string, options?: ApiCallOptions) => Promise<GetAud
 type GetAuditHttpResponse = {
     data: GetByIDResult;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAuditHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 404 | 500;
 };
 /**
  * Clears the cache for audits api requests.

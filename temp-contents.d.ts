@@ -64,12 +64,12 @@ declare const uploadTempFile: (query: {
 type UploadTempFileHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type UploadTempFileHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400;
 };
 /**
  * This endpoint is used to retrieve a temporary content file. It returns a valid (`200 OK`) in case the file exists and the user is authorized to view the contents. It returns a `410 Gone` if the file has expired and `404 Not Found` if the criteria is not met.
@@ -82,6 +82,7 @@ declare const downloadTempFile: (id: string, query: {
     /** Set to "1" to download the file in inline mode. Useful for displaying a preview of the file in a browser. */
     inline?: string;
 }, options?: ApiCallOptions) => Promise<DownloadTempFileHttpResponse>;
+type DownloadTempFileHttpResponse = DownloadTempFile200HttpResponse | DownloadTempFile204HttpResponse | DownloadTempFile206HttpResponse;
 type DownloadTempFile200HttpResponse = {
     data: unknown;
     headers: Headers;
@@ -97,11 +98,10 @@ type DownloadTempFile206HttpResponse = {
     headers: Headers;
     status: 206;
 };
-type DownloadTempFileHttpResponse = DownloadTempFile200HttpResponse | DownloadTempFile204HttpResponse | DownloadTempFile206HttpResponse;
 type DownloadTempFileHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 404 | 410 | 416;
 };
 /**
  * Retrieve a summary of the metadata associated with a temporary content resource. It returns a `200 OK` with a model if the temporary resource is valid. It returns a `410 Gone` if the file has expired and `404 Not Found` if the criteria is not met.
@@ -110,6 +110,7 @@ type DownloadTempFileHttpError = {
  * @throws GetTempFileDetailsHttpError
  */
 declare const getTempFileDetails: (id: string, options?: ApiCallOptions) => Promise<GetTempFileDetailsHttpResponse>;
+type GetTempFileDetailsHttpResponse = GetTempFileDetails200HttpResponse | GetTempFileDetails204HttpResponse;
 type GetTempFileDetails200HttpResponse = {
     data: DetailResponse;
     headers: Headers;
@@ -120,11 +121,10 @@ type GetTempFileDetails204HttpResponse = {
     headers: Headers;
     status: 204;
 };
-type GetTempFileDetailsHttpResponse = GetTempFileDetails200HttpResponse | GetTempFileDetails204HttpResponse;
 type GetTempFileDetailsHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 404 | 410;
 };
 /**
  * Clears the cache for temp-contents api requests.

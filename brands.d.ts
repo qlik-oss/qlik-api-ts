@@ -118,10 +118,11 @@ declare const getBrands: (query: {
 type GetBrandsHttpResponse = {
     data: BrandsList;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetBrandsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetBrandsHttpResponse>;
 };
+type GetBrandsHttpError = GetBrands400HttpError | GetBrands401HttpError | GetBrands403HttpError | GetBrands500HttpError;
 type GetBrands400HttpError = {
     data: ErrorResponse400;
     headers: Headers;
@@ -142,7 +143,6 @@ type GetBrands500HttpError = {
     headers: Headers;
     status: 500;
 };
-type GetBrandsHttpError = GetBrands400HttpError | GetBrands401HttpError | GetBrands403HttpError | GetBrands500HttpError;
 /**
  * Creates a new brand.
  *
@@ -164,8 +164,9 @@ declare const createBrand: (body: {
 type CreateBrandHttpResponse = {
     data: Brand;
     headers: Headers;
-    status: number;
+    status: 201;
 };
+type CreateBrandHttpError = CreateBrand400HttpError | CreateBrand401HttpError | CreateBrand403HttpError | CreateBrand500HttpError;
 type CreateBrand400HttpError = {
     data: ErrorResponse400;
     headers: Headers;
@@ -186,7 +187,6 @@ type CreateBrand500HttpError = {
     headers: Headers;
     status: 500;
 };
-type CreateBrandHttpError = CreateBrand400HttpError | CreateBrand401HttpError | CreateBrand403HttpError | CreateBrand500HttpError;
 /**
  * Returns the current active brand. If using the Qlik default brand, no value is returned.
  *
@@ -196,7 +196,7 @@ declare const getActiveBrand: (options?: ApiCallOptions) => Promise<GetActiveBra
 type GetActiveBrandHttpResponse = {
     data: Brand | NoActiveBrand;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetActiveBrandHttpError = {
     data: unknown;
@@ -213,8 +213,9 @@ declare const deleteBrand: (brandId: string, options?: ApiCallOptions) => Promis
 type DeleteBrandHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
+type DeleteBrandHttpError = DeleteBrand400HttpError | DeleteBrand401HttpError | DeleteBrand403HttpError | DeleteBrand404HttpError | DeleteBrand500HttpError;
 type DeleteBrand400HttpError = {
     data: ErrorResponse400;
     headers: Headers;
@@ -240,7 +241,6 @@ type DeleteBrand500HttpError = {
     headers: Headers;
     status: 500;
 };
-type DeleteBrandHttpError = DeleteBrand400HttpError | DeleteBrand401HttpError | DeleteBrand403HttpError | DeleteBrand404HttpError | DeleteBrand500HttpError;
 /**
  * Returns a specific brand.
  *
@@ -251,8 +251,9 @@ declare const getBrand: (brandId: string, options?: ApiCallOptions) => Promise<G
 type GetBrandHttpResponse = {
     data: Brand;
     headers: Headers;
-    status: number;
+    status: 200;
 };
+type GetBrandHttpError = GetBrand400HttpError | GetBrand401HttpError | GetBrand403HttpError | GetBrand404HttpError | GetBrand500HttpError;
 type GetBrand400HttpError = {
     data: ErrorResponse400;
     headers: Headers;
@@ -278,7 +279,6 @@ type GetBrand500HttpError = {
     headers: Headers;
     status: 500;
 };
-type GetBrandHttpError = GetBrand400HttpError | GetBrand401HttpError | GetBrand403HttpError | GetBrand404HttpError | GetBrand500HttpError;
 /**
  * Patches a brand.
  *
@@ -290,8 +290,9 @@ declare const patchBrand: (brandId: string, body: BrandPatch[], options?: ApiCal
 type PatchBrandHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
+type PatchBrandHttpError = PatchBrand400HttpError | PatchBrand401HttpError | PatchBrand403HttpError | PatchBrand404HttpError | PatchBrand500HttpError;
 type PatchBrand400HttpError = {
     data: ErrorResponse400;
     headers: Headers;
@@ -317,7 +318,6 @@ type PatchBrand500HttpError = {
     headers: Headers;
     status: 500;
 };
-type PatchBrandHttpError = PatchBrand400HttpError | PatchBrand401HttpError | PatchBrand403HttpError | PatchBrand404HttpError | PatchBrand500HttpError;
 /**
  * Sets the brand active and de-activates any other active brand. If the brand is already active, no action is taken.
  *
@@ -329,8 +329,9 @@ declare const activateBrand: (brandId: string, body: unknown, options?: ApiCallO
 type ActivateBrandHttpResponse = {
     data: Brand;
     headers: Headers;
-    status: number;
+    status: 200;
 };
+type ActivateBrandHttpError = ActivateBrand400HttpError | ActivateBrand401HttpError | ActivateBrand403HttpError | ActivateBrand404HttpError | ActivateBrand500HttpError;
 type ActivateBrand400HttpError = {
     data: ErrorResponse400;
     headers: Headers;
@@ -356,7 +357,6 @@ type ActivateBrand500HttpError = {
     headers: Headers;
     status: 500;
 };
-type ActivateBrandHttpError = ActivateBrand400HttpError | ActivateBrand401HttpError | ActivateBrand403HttpError | ActivateBrand404HttpError | ActivateBrand500HttpError;
 /**
  * Sets the brand so it is no longer active, returning the tenant the Qlik default brand. If the brand is already inactive, no action is taken.
  *
@@ -368,8 +368,9 @@ declare const deactivateBrand: (brandId: string, body: unknown, options?: ApiCal
 type DeactivateBrandHttpResponse = {
     data: Brand;
     headers: Headers;
-    status: number;
+    status: 200;
 };
+type DeactivateBrandHttpError = DeactivateBrand400HttpError | DeactivateBrand401HttpError | DeactivateBrand403HttpError | DeactivateBrand404HttpError | DeactivateBrand500HttpError;
 type DeactivateBrand400HttpError = {
     data: ErrorResponse400;
     headers: Headers;
@@ -395,7 +396,6 @@ type DeactivateBrand500HttpError = {
     headers: Headers;
     status: 500;
 };
-type DeactivateBrandHttpError = DeactivateBrand400HttpError | DeactivateBrand401HttpError | DeactivateBrand403HttpError | DeactivateBrand404HttpError | DeactivateBrand500HttpError;
 /**
  * Deletes the specified brand file.
  *
@@ -407,8 +407,9 @@ declare const deleteBrandFile: (brandId: string, brandFileId: string, options?: 
 type DeleteBrandFileHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
+type DeleteBrandFileHttpError = DeleteBrandFile400HttpError | DeleteBrandFile401HttpError | DeleteBrandFile403HttpError | DeleteBrandFile404HttpError | DeleteBrandFile500HttpError;
 type DeleteBrandFile400HttpError = {
     data: ErrorResponse400;
     headers: Headers;
@@ -434,7 +435,6 @@ type DeleteBrandFile500HttpError = {
     headers: Headers;
     status: 500;
 };
-type DeleteBrandFileHttpError = DeleteBrandFile400HttpError | DeleteBrandFile401HttpError | DeleteBrandFile403HttpError | DeleteBrandFile404HttpError | DeleteBrandFile500HttpError;
 /**
  * Downloads the specified brand file.
  *
@@ -446,8 +446,9 @@ declare const getBrandFile: (brandId: string, brandFileId: string, options?: Api
 type GetBrandFileHttpResponse = {
     data: DownloadableBlob;
     headers: Headers;
-    status: number;
+    status: 200;
 };
+type GetBrandFileHttpError = GetBrandFile400HttpError | GetBrandFile401HttpError | GetBrandFile403HttpError | GetBrandFile404HttpError | GetBrandFile500HttpError;
 type GetBrandFile400HttpError = {
     data: ErrorResponse400;
     headers: Headers;
@@ -473,7 +474,6 @@ type GetBrandFile500HttpError = {
     headers: Headers;
     status: 500;
 };
-type GetBrandFileHttpError = GetBrandFile400HttpError | GetBrandFile401HttpError | GetBrandFile403HttpError | GetBrandFile404HttpError | GetBrandFile500HttpError;
 /**
  * Creates a brand file for the specified identifier.
  *
@@ -489,8 +489,9 @@ declare const createBrandFile: (brandId: string, brandFileId: string, body: {
 type CreateBrandFileHttpResponse = {
     data: BrandFile;
     headers: Headers;
-    status: number;
+    status: 201;
 };
+type CreateBrandFileHttpError = CreateBrandFile400HttpError | CreateBrandFile401HttpError | CreateBrandFile403HttpError | CreateBrandFile404HttpError | CreateBrandFile500HttpError;
 type CreateBrandFile400HttpError = {
     data: ErrorResponse400;
     headers: Headers;
@@ -516,7 +517,6 @@ type CreateBrandFile500HttpError = {
     headers: Headers;
     status: 500;
 };
-type CreateBrandFileHttpError = CreateBrandFile400HttpError | CreateBrandFile401HttpError | CreateBrandFile403HttpError | CreateBrandFile404HttpError | CreateBrandFile500HttpError;
 /**
  * Updates the specified brand file.
  *
@@ -532,8 +532,9 @@ declare const updateBrandFile: (brandId: string, brandFileId: string, body: {
 type UpdateBrandFileHttpResponse = {
     data: BrandFile;
     headers: Headers;
-    status: number;
+    status: 200;
 };
+type UpdateBrandFileHttpError = UpdateBrandFile400HttpError | UpdateBrandFile401HttpError | UpdateBrandFile403HttpError | UpdateBrandFile404HttpError | UpdateBrandFile500HttpError;
 type UpdateBrandFile400HttpError = {
     data: ErrorResponse400;
     headers: Headers;
@@ -559,7 +560,6 @@ type UpdateBrandFile500HttpError = {
     headers: Headers;
     status: 500;
 };
-type UpdateBrandFileHttpError = UpdateBrandFile400HttpError | UpdateBrandFile401HttpError | UpdateBrandFile403HttpError | UpdateBrandFile404HttpError | UpdateBrandFile500HttpError;
 /**
  * Clears the cache for brands api requests.
  */

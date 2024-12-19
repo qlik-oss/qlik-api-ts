@@ -1236,7 +1236,7 @@ declare const createApp: (body: CreateApp, options?: ApiCallOptions) => Promise<
 type CreateAppHttpResponse = {
     data: NxApp;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type CreateAppHttpError = {
     data: unknown;
@@ -1260,12 +1260,12 @@ declare const getAppEvaluationComparison: (baseid: string, comparisonid: string,
 type GetAppEvaluationComparisonHttpResponse = {
     data: Comparison;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAppEvaluationComparisonHttpError = {
     data: EvaluatorError;
     headers: Headers;
-    status: number;
+    status: 404 | 500;
 };
 /**
  * Accepts two evaluation ids and downloads a log, in XML format, denoting the differences between the two.
@@ -1278,12 +1278,12 @@ declare const getAppEvaluationComparisonXml: (baseid: string, comparisonid: stri
 type GetAppEvaluationComparisonXmlHttpResponse = {
     data: Comparison;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAppEvaluationComparisonXmlHttpError = {
     data: EvaluatorError;
     headers: Headers;
-    status: number;
+    status: 404 | 500;
 };
 /**
  * Find an evaluation by a specific id.
@@ -1301,12 +1301,12 @@ declare const getAppEvaluation: (id: string, query: {
 type GetAppEvaluationHttpResponse = {
     data: Evaluation;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAppEvaluationHttpError = {
     data: EvaluatorError;
     headers: Headers;
-    status: number;
+    status: 404 | 500;
 };
 /**
  * Find and download an evaluation log by a specific evaluation id.
@@ -1318,12 +1318,12 @@ declare const getAppEvaluationXml: (id: string, options?: ApiCallOptions) => Pro
 type GetAppEvaluationXmlHttpResponse = {
     data: Evaluation;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAppEvaluationXmlHttpError = {
     data: EvaluatorError;
     headers: Headers;
-    status: number;
+    status: 404 | 500;
 };
 /**
  * Imports an app into the system.
@@ -1355,12 +1355,12 @@ declare const importApp: (query: {
 type ImportAppHttpResponse = {
     data: NxApp;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type ImportAppHttpError = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 404;
 };
 /**
  * Gets the app privileges for the current user, such as create app and import app. Empty means that the current user has no app privileges.
@@ -1371,7 +1371,7 @@ declare const getAppsPrivileges: (options?: ApiCallOptions) => Promise<GetAppsPr
 type GetAppsPrivilegesHttpResponse = {
     data: UserPrivileges[];
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAppsPrivilegesHttpError = {
     data: unknown;
@@ -1388,7 +1388,7 @@ declare const deleteApp: (appId: string, options?: ApiCallOptions) => Promise<De
 type DeleteAppHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type DeleteAppHttpError = {
     data: unknown;
@@ -1405,7 +1405,7 @@ declare const getAppInfo: (appId: string, options?: ApiCallOptions) => Promise<G
 type GetAppInfoHttpResponse = {
     data: NxApp;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAppInfoHttpError = {
     data: unknown;
@@ -1423,7 +1423,7 @@ declare const updateAppInfo: (appId: string, body: UpdateApp, options?: ApiCallO
 type UpdateAppInfoHttpResponse = {
     data: NxApp;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type UpdateAppInfoHttpError = {
     data: unknown;
@@ -1441,7 +1441,7 @@ declare const copyApp: (appId: string, body: CreateApp, options?: ApiCallOptions
 type CopyAppHttpResponse = {
     data: NxApp;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type CopyAppHttpError = {
     data: unknown;
@@ -1459,7 +1459,7 @@ declare const getAppDataLineage: (appId: string, options?: ApiCallOptions) => Pr
 type GetAppDataLineageHttpResponse = {
     data: LineageInfoRest[];
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAppDataLineageHttpError = {
     data: unknown;
@@ -1477,7 +1477,7 @@ declare const getAppDataMetadata: (appId: string, options?: ApiCallOptions) => P
 type GetAppDataMetadataHttpResponse = {
     data: DataModelMetadata;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAppDataMetadataHttpError = {
     data: unknown;
@@ -1498,12 +1498,12 @@ declare const exportApp: (appId: string, query: {
 type ExportAppHttpResponse = {
     data: DownloadableBlob;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type ExportAppHttpError = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404;
 };
 /**
  * Returns information about supported analyses for the app's data model. Lists available analysis types, along with minimum and maximum number of dimensions, measures, and fields.
@@ -1515,14 +1515,14 @@ declare const getAppInsightAnalyses: (appId: string, options?: ApiCallOptions) =
 type GetAppInsightAnalysesHttpResponse = {
     data: AnalysisDescriptorResponse;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetAppInsightAnalysesHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetAppInsightAnalysesHttpResponse>;
 };
 type GetAppInsightAnalysesHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 404 | 422 | 500;
 };
 /**
  * Returns analysis recommendations in response to a natural language question, a set of fields and master items, or a set of fields and master items with an optional target analysis.
@@ -1535,12 +1535,12 @@ declare const getAppInsightAnalysisRecommendations: (appId: string, body: Analys
 type GetAppInsightAnalysisRecommendationsHttpResponse = {
     data: AnalysisRecommendationResponse;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAppInsightAnalysisRecommendationsHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 404 | 409 | 422 | 500;
 };
 /**
  * Returns information about model used to make analysis recommendations. Lists all fields and master items in the logical model, along with an indication of the validity of the logical model if the default is not used.
@@ -1552,14 +1552,14 @@ declare const getAppInsightAnalysisModel: (appId: string, options?: ApiCallOptio
 type GetAppInsightAnalysisModelHttpResponse = {
     data: AnalysisModelResponse;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetAppInsightAnalysisModelHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetAppInsightAnalysisModelHttpResponse>;
 };
 type GetAppInsightAnalysisModelHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 404 | 409 | 422 | 500;
 };
 /**
  * Deletes a media content file or complete directory.
@@ -1573,12 +1573,12 @@ declare const deleteAppMedia: (appId: string, path: string, options?: ApiCallOpt
 type DeleteAppMediaHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type DeleteAppMediaHttpError = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 403 | 404;
 };
 /**
  * Gets media content from file.
@@ -1592,12 +1592,12 @@ declare const getAppMedia: (appId: string, path: string, options?: ApiCallOption
 type GetAppMediaHttpResponse = {
     data: DownloadableBlob;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAppMediaHttpError = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 403 | 404;
 };
 /**
  * Stores the media content file.
@@ -1612,12 +1612,12 @@ declare const uploadAppMedia: (appId: string, path: string, body: BodyInit, opti
 type UploadAppMediaHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type UploadAppMediaHttpError = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 403 | 404;
 };
 /**
  * Lists media content.
@@ -1638,12 +1638,12 @@ declare const getAppMediaList: (appId: string, path: string, query: {
 type GetAppMediaListHttpResponse = {
     data: AppContentList;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAppMediaListHttpError = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 403 | 404;
 };
 /**
  * Gets media content from file currently used as application thumbnail.
@@ -1657,12 +1657,12 @@ declare const getAppThumbnail: (appId: string, options?: ApiCallOptions) => Prom
 type GetAppThumbnailHttpResponse = {
     data: DownloadableBlob;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAppThumbnailHttpError = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 403 | 404;
 };
 /**
  * Sets owner on an app object.
@@ -1677,12 +1677,12 @@ declare const updateAppObjectOwner: (appId: string, objectId: string, body: Upda
 type UpdateAppObjectOwnerHttpResponse = {
     data: NxAppObject;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type UpdateAppObjectOwnerHttpError = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 400 | 404;
 };
 /**
  * Changes owner of the app.
@@ -1695,12 +1695,12 @@ declare const updateAppOwner: (appId: string, body: UpdateOwner, options?: ApiCa
 type UpdateAppOwnerHttpResponse = {
     data: NxApp;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type UpdateAppOwnerHttpError = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 403 | 404;
 };
 /**
  * Publishes a specific app to a managed space.
@@ -1713,7 +1713,7 @@ declare const publishApp: (appId: string, body: PublishApp, options?: ApiCallOpt
 type PublishAppHttpResponse = {
     data: NxApp;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type PublishAppHttpError = {
     data: unknown;
@@ -1731,7 +1731,7 @@ declare const republishApp: (appId: string, body: RepublishApp, options?: ApiCal
 type RepublishAppHttpResponse = {
     data: NxApp;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type RepublishAppHttpError = {
     data: unknown;
@@ -1749,7 +1749,7 @@ declare const getAppReloadLogs: (appId: string, options?: ApiCallOptions) => Pro
 type GetAppReloadLogsHttpResponse = {
     data: ScriptLogList;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAppReloadLogsHttpError = {
     data: unknown;
@@ -1768,7 +1768,7 @@ declare const getAppReloadLog: (appId: string, reloadId: string, options?: ApiCa
 type GetAppReloadLogHttpResponse = {
     data: DownloadableBlob;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAppReloadLogHttpError = {
     data: unknown;
@@ -1793,7 +1793,7 @@ declare const getAppReloadMetadata: (appId: string, reloadId: string, query: {
 type GetAppReloadMetadataHttpResponse = {
     data: ReloadListMetadata;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAppReloadMetadataHttpError = {
     data: unknown;
@@ -1826,14 +1826,14 @@ declare const getAppReportFilters: (appId: string, query: {
 type GetAppReportFiltersHttpResponse = {
     data: FilterList;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetAppReportFiltersHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetAppReportFiltersHttpResponse>;
 };
 type GetAppReportFiltersHttpError = {
     data: FilterErrors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 429 | 500;
 };
 /**
  * Creates a new report filter which is used to re-apply selections, variables, patches to an engine session.
@@ -1846,12 +1846,12 @@ declare const createAppReportFilter: (appId: string, body: FilterRequest, option
 type CreateAppReportFilterHttpResponse = {
     data: Filter;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CreateAppReportFilterHttpError = {
     data: FilterErrors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 409 | 429 | 500;
 };
 /**
  * Get the number of filters for the given app and filter types
@@ -1867,12 +1867,12 @@ declare const countAppReportFilters: (appId: string, query: {
 type CountAppReportFiltersHttpResponse = {
     data: FiltersCount;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type CountAppReportFiltersHttpError = {
     data: FilterErrors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 429 | 500;
 };
 /**
  * Delete a filter
@@ -1885,12 +1885,12 @@ declare const deleteAppReportFilter: (appId: string, id: string, options?: ApiCa
 type DeleteAppReportFilterHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteAppReportFilterHttpError = {
     data: FilterErrors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 429 | 500;
 };
 /**
  * Get a filter
@@ -1903,12 +1903,12 @@ declare const getAppReportFilter: (appId: string, id: string, options?: ApiCallO
 type GetAppReportFilterHttpResponse = {
     data: Filter;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAppReportFilterHttpError = {
     data: FilterErrors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 429 | 500;
 };
 /**
  * Update a filter
@@ -1922,12 +1922,12 @@ declare const patchAppReportFilter: (appId: string, id: string, body: PatchFilte
 type PatchAppReportFilterHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type PatchAppReportFilterHttpError = {
     data: FilterErrors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 409 | 429 | 500;
 };
 /**
  * Retrieves the script history for an app.
@@ -1951,7 +1951,7 @@ declare const getAppScriptHistory: (appId: string, query: {
 type GetAppScriptHistoryHttpResponse = {
     data: ScriptMetaList;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetAppScriptHistoryHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetAppScriptHistoryHttpResponse>;
 };
@@ -1971,7 +1971,7 @@ declare const updateAppScript: (appId: string, body: ScriptVersion, options?: Ap
 type UpdateAppScriptHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type UpdateAppScriptHttpError = {
     data: unknown;
@@ -1990,7 +1990,7 @@ declare const deleteAppScript: (appId: string, id: string, options?: ApiCallOpti
 type DeleteAppScriptHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type DeleteAppScriptHttpError = {
     data: unknown;
@@ -2009,7 +2009,7 @@ declare const getAppScript: (appId: string, id: string, options?: ApiCallOptions
 type GetAppScriptHttpResponse = {
     data: ScriptVersion;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetAppScriptHttpError = {
     data: unknown;
@@ -2028,7 +2028,7 @@ declare const patchAppScript: (appId: string, id: string, body: NxPatch[], optio
 type PatchAppScriptHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type PatchAppScriptHttpError = {
     data: unknown;
@@ -2045,7 +2045,7 @@ declare const removeAppFromSpace: (appId: string, options?: ApiCallOptions) => P
 type RemoveAppFromSpaceHttpResponse = {
     data: NxApp;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type RemoveAppFromSpaceHttpError = {
     data: unknown;
@@ -2063,7 +2063,7 @@ declare const moveAppToSpace: (appId: string, body: UpdateSpace, options?: ApiCa
 type MoveAppToSpaceHttpResponse = {
     data: NxApp;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type MoveAppToSpaceHttpError = {
     data: unknown;
@@ -2097,14 +2097,14 @@ declare const getAppEvaluations: (guid: string, query: {
 type GetAppEvaluationsHttpResponse = {
     data: Evaluations;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetAppEvaluationsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetAppEvaluationsHttpResponse>;
 };
 type GetAppEvaluationsHttpError = {
     data: EvaluatorError;
     headers: Headers;
-    status: number;
+    status: 400 | 404 | 500;
 };
 /**
  * Queue an app evaluation by its app guid.
@@ -2116,12 +2116,12 @@ declare const queueAppEvaluation: (guid: string, options?: ApiCallOptions) => Pr
 type QueueAppEvaluationHttpResponse = {
     data: Evaluation;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type QueueAppEvaluationHttpError = {
     data: EvaluatorError;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404 | 500;
 };
 /**
  * Clears the cache for apps api requests.

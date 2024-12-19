@@ -351,14 +351,14 @@ declare const getUsers: (query: {
 type GetUsersHttpResponse = {
     data: Users;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetUsersHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetUsersHttpResponse>;
 };
 type GetUsersHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 429 | 500;
 };
 /**
  * Creates an invited user.
@@ -370,12 +370,12 @@ declare const createUser: (body: UserPostSchema, options?: ApiCallOptions) => Pr
 type CreateUserHttpResponse = {
     data: User;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CreateUserHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 409 | 413 | 429 | 500;
 };
 /**
  * Returns the number of users in a given tenant
@@ -391,12 +391,12 @@ declare const countUsers: (query: {
 type CountUsersHttpResponse = {
     data: UserCount;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type CountUsersHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 403 | 404 | 429;
 };
 /**
  * Retrieves a list of users matching the filter using an advanced query string.
@@ -420,14 +420,14 @@ declare const filterUsers: (query: {
 type FilterUsersHttpResponse = {
     data: Users;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<FilterUsersHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<FilterUsersHttpResponse>;
 };
 type FilterUsersHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 429 | 500;
 };
 /**
  * Invite one or more users by email address.
@@ -439,7 +439,7 @@ declare const inviteUsers: (body: InviteRequestData, options?: ApiCallOptions) =
 type InviteUsersHttpResponse = {
     data: InviteDataResponse;
     headers: Headers;
-    status: number;
+    status: 207;
 };
 type InviteUsersHttpError = {
     data: ErrorsResponse;
@@ -455,12 +455,12 @@ declare const getMyUser: (options?: ApiCallOptions) => Promise<GetMyUserHttpResp
 type GetMyUserHttpResponse = {
     data: User;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetMyUserHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 429;
 };
 /**
  * Deletes the requested user.
@@ -472,12 +472,12 @@ declare const deleteUser: (userId: string, options?: ApiCallOptions) => Promise<
 type DeleteUserHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteUserHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404 | 429;
 };
 /**
  * Returns the requested user.
@@ -493,12 +493,12 @@ declare const getUser: (userId: string, query: {
 type GetUserHttpResponse = {
     data: User & unknown;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetUserHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 403 | 404 | 429 | 500;
 };
 /**
  * Updates fields for a user resource
@@ -508,6 +508,7 @@ type GetUserHttpError = {
  * @throws PatchUserHttpError
  */
 declare const patchUser: (userId: string, body: JSONPatchArray, options?: ApiCallOptions) => Promise<PatchUserHttpResponse>;
+type PatchUserHttpResponse = PatchUser204HttpResponse | PatchUser207HttpResponse;
 type PatchUser204HttpResponse = {
     data: void;
     headers: Headers;
@@ -518,11 +519,10 @@ type PatchUser207HttpResponse = {
     headers: Headers;
     status: 207;
 };
-type PatchUserHttpResponse = PatchUser204HttpResponse | PatchUser207HttpResponse;
 type PatchUserHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404 | 429;
 };
 /**
  * Clears the cache for users api requests.

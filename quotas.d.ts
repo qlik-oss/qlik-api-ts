@@ -51,12 +51,12 @@ declare const getQuotas: (query: {
 type GetQuotasHttpResponse = {
     data: GetQuotasResult;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetQuotasHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 401 | 500;
 };
 /**
  * Returns a specific quota item for the tenant (provided in JWT).
@@ -72,12 +72,12 @@ declare const getQuota: (id: string, query: {
 type GetQuotaHttpResponse = {
     data: GetQuotaByIdResult;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetQuotaHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 401 | 404 | 500;
 };
 /**
  * Clears the cache for quotas api requests.

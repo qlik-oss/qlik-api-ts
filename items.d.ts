@@ -299,14 +299,14 @@ declare const getItems: (query: {
 type GetItemsHttpResponse = {
     data: ItemsListItemsResponseBody;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetItemsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetItemsHttpResponse>;
 };
 type GetItemsHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 404 | 500;
 };
 /**
  * Finds and returns the items service settings for the current tenant. Currently used to enable or disable usage metrics in the tenant.
@@ -317,12 +317,12 @@ declare const getItemsSettings: (options?: ApiCallOptions) => Promise<GetItemsSe
 type GetItemsSettingsHttpResponse = {
     data: ItemsSettingsResponseBody;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetItemsSettingsHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 500;
 };
 /**
  * Updates the settings provided in the patch body. Currently used to enable or disable usage metrics in the tenant.
@@ -334,12 +334,12 @@ declare const patchItemsSettings: (body: ItemsSettingsPatch, options?: ApiCallOp
 type PatchItemsSettingsHttpResponse = {
     data: ItemsSettingsResponseBody;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type PatchItemsSettingsHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 500;
 };
 /**
  * Deletes an item and removes the item from all collections.
@@ -351,12 +351,12 @@ declare const deleteItem: (itemId: string, options?: ApiCallOptions) => Promise<
 type DeleteItemHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteItemHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: number;
+    status: 401 | 403 | 404 | 500;
 };
 /**
  * Finds and returns an item.
@@ -368,12 +368,12 @@ declare const getItem: (itemId: string, options?: ApiCallOptions) => Promise<Get
 type GetItemHttpResponse = {
     data: ItemResultResponseBody;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetItemHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 404 | 500;
 };
 /**
  * Updates an item. Omitted and unsupported fields are ignored. To unset a field, provide the field's zero value.
@@ -386,12 +386,12 @@ declare const updateItem: (itemId: string, body: ItemsUpdateItemRequestBody, opt
 type UpdateItemHttpResponse = {
     data: ItemResultResponseBody;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type UpdateItemHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 409 | 500;
 };
 /**
  * Finds and returns the collections (and tags) of an item. This endpoint does not return the user's favorites collection.
@@ -419,14 +419,14 @@ declare const getItemCollections: (itemId: string, query: {
 type GetItemCollectionsHttpResponse = {
     data: ItemsListItemCollectionsResponseBody;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetItemCollectionsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetItemCollectionsHttpResponse>;
 };
 type GetItemCollectionsHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 404 | 500;
 };
 /**
  * Finds and returns the published items for a given item. This endpoint is particularly useful for finding the published copies of an app or a qvapp when you want to replace the content of a published copy with new information from the source item.
@@ -450,14 +450,14 @@ declare const getPublishedItems: (itemId: string, query: {
 type GetPublishedItemsHttpResponse = {
     data: ItemsListItemCollectionsResponseBody;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetPublishedItemsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetPublishedItemsHttpResponse>;
 };
 type GetPublishedItemsHttpError = {
     data: ErrorResponseBody;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 404 | 500;
 };
 /**
  * Clears the cache for items api requests.
