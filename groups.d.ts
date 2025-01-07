@@ -224,14 +224,14 @@ declare const getGroups: (query: {
 type GetGroupsHttpResponse = {
     data: Groups;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetGroupsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetGroupsHttpResponse>;
 };
 type GetGroupsHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 429 | 500;
 };
 /**
  * Creates a new group. The maximum number of groups a tenant can have is 10,000. Group names are case-sensitive, and must be unique.
@@ -243,12 +243,12 @@ declare const createGroup: (body: GroupPostSchema, options?: ApiCallOptions) => 
 type CreateGroupHttpResponse = {
     data: Group;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CreateGroupHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 409 | 413 | 429 | 500;
 };
 /**
  * Retrieves a list of groups matching the filter using advanced query string.
@@ -270,14 +270,14 @@ declare const filterGroups: (query: {
 type FilterGroupsHttpResponse = {
     data: Groups;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<FilterGroupsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<FilterGroupsHttpResponse>;
 };
 type FilterGroupsHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 429 | 500;
 };
 /**
  * Returns the tenant's group settings, such as whether automatic group creation and IdP group synchronization are enabled or disabled, and roles assigned to system groups.
@@ -288,12 +288,12 @@ declare const getGroupsSettings: (options?: ApiCallOptions) => Promise<GetGroups
 type GetGroupsSettingsHttpResponse = {
     data: GroupSettings;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetGroupsSettingsHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 401 | 403 | 429 | 500;
 };
 /**
  * Updates the tenant's group settings, such as whether automatic group creation and IdP group synchronization are enabled or disabled, and roles assigned to system groups.
@@ -305,12 +305,12 @@ declare const patchGroupsSettings: (body: SettingsPatchSchema, options?: ApiCall
 type PatchGroupsSettingsHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type PatchGroupsSettingsHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 429 | 500;
 };
 /**
  * Deletes the requested group.
@@ -322,12 +322,12 @@ declare const deleteGroup: (groupId: string, options?: ApiCallOptions) => Promis
 type DeleteGroupHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteGroupHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 401 | 404 | 429;
 };
 /**
  * Returns the requested group.
@@ -339,12 +339,12 @@ declare const getGroup: (groupId: string, options?: ApiCallOptions) => Promise<G
 type GetGroupHttpResponse = {
     data: Group;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetGroupHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 403 | 404 | 429 | 500;
 };
 /**
  * Updates the requested group.
@@ -357,12 +357,12 @@ declare const patchGroup: (groupId: string, body: GroupPatchSchema, options?: Ap
 type PatchGroupHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type PatchGroupHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 429 | 500;
 };
 /**
  * Clears the cache for groups api requests.

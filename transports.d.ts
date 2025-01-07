@@ -157,8 +157,9 @@ declare const deleteEmailConfig: (options?: ApiCallOptions) => Promise<DeleteEma
 type DeleteEmailConfigHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
+type DeleteEmailConfigHttpError = DeleteEmailConfig403HttpError | DeleteEmailConfig404HttpError | DeleteEmailConfigdefaultHttpError;
 type DeleteEmailConfig403HttpError = {
     data: TenantAdminError;
     headers: Headers;
@@ -169,12 +170,11 @@ type DeleteEmailConfig404HttpError = {
     headers: Headers;
     status: 404;
 };
-type DeleteEmailConfigDefaultHttpError = {
+type DeleteEmailConfigdefaultHttpError = {
     data: ErrorsPublic;
     headers: Headers;
     status: "default";
 };
-type DeleteEmailConfigHttpError = DeleteEmailConfig403HttpError | DeleteEmailConfig404HttpError | DeleteEmailConfigDefaultHttpError;
 /**
  * Returns the email configuration for a given tenant id (retrieved from JWT).
  *
@@ -184,19 +184,19 @@ declare const getEmailConfig: (options?: ApiCallOptions) => Promise<GetEmailConf
 type GetEmailConfigHttpResponse = {
     data: GetEmailConfig;
     headers: Headers;
-    status: number;
+    status: 200;
 };
+type GetEmailConfigHttpError = GetEmailConfig403HttpError | GetEmailConfigdefaultHttpError;
 type GetEmailConfig403HttpError = {
     data: TenantAdminError;
     headers: Headers;
     status: 403;
 };
-type GetEmailConfigDefaultHttpError = {
+type GetEmailConfigdefaultHttpError = {
     data: ErrorsPublic;
     headers: Headers;
     status: "default";
 };
-type GetEmailConfigHttpError = GetEmailConfig403HttpError | GetEmailConfigDefaultHttpError;
 /**
  * Patch the email configuration for a given tenant id (retrieved from JWT).
  *
@@ -207,8 +207,9 @@ declare const patchEmailConfig: (body: EmailConfigPatch, options?: ApiCallOption
 type PatchEmailConfigHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
+type PatchEmailConfigHttpError = PatchEmailConfig400HttpError | PatchEmailConfig403HttpError | PatchEmailConfigdefaultHttpError;
 type PatchEmailConfig400HttpError = {
     data: UpdateEmailConfigError;
     headers: Headers;
@@ -219,12 +220,11 @@ type PatchEmailConfig403HttpError = {
     headers: Headers;
     status: 403;
 };
-type PatchEmailConfigDefaultHttpError = {
+type PatchEmailConfigdefaultHttpError = {
     data: ErrorsPublic;
     headers: Headers;
     status: "default";
 };
-type PatchEmailConfigHttpError = PatchEmailConfig400HttpError | PatchEmailConfig403HttpError | PatchEmailConfigDefaultHttpError;
 /**
  * Send a test mail with the supplied email info (subject, body, recipient). Email config from database is used for the connection.
  *
@@ -235,8 +235,9 @@ declare const sendTestEmail: (body: Email, options?: ApiCallOptions) => Promise<
 type SendTestEmailHttpResponse = {
     data: SmtpResult;
     headers: Headers;
-    status: number;
+    status: 200;
 };
+type SendTestEmailHttpError = SendTestEmail403HttpError | SendTestEmail404HttpError | SendTestEmaildefaultHttpError;
 type SendTestEmail403HttpError = {
     data: TenantAdminError;
     headers: Headers;
@@ -247,12 +248,11 @@ type SendTestEmail404HttpError = {
     headers: Headers;
     status: 404;
 };
-type SendTestEmailDefaultHttpError = {
+type SendTestEmaildefaultHttpError = {
     data: ErrorsPublic;
     headers: Headers;
     status: "default";
 };
-type SendTestEmailHttpError = SendTestEmail403HttpError | SendTestEmail404HttpError | SendTestEmailDefaultHttpError;
 /**
  * Returns the isValid value for the email configuration for the tenant. Will return false if no email configuration exists.
  *
@@ -262,7 +262,7 @@ declare const validateEmailConfig: (options?: ApiCallOptions) => Promise<Validat
 type ValidateEmailConfigHttpResponse = {
     data: SmtpCheck;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type ValidateEmailConfigHttpError = {
     data: ErrorsPublic;
@@ -278,19 +278,19 @@ declare const verifyEmailConfigConnection: (options?: ApiCallOptions) => Promise
 type VerifyEmailConfigConnectionHttpResponse = {
     data: SmtpResult;
     headers: Headers;
-    status: number;
+    status: 200;
 };
+type VerifyEmailConfigConnectionHttpError = VerifyEmailConfigConnection404HttpError | VerifyEmailConfigConnectiondefaultHttpError;
 type VerifyEmailConfigConnection404HttpError = {
     data: VerifyConnectionConfigNotFoundError;
     headers: Headers;
     status: 404;
 };
-type VerifyEmailConfigConnectionDefaultHttpError = {
+type VerifyEmailConfigConnectiondefaultHttpError = {
     data: ErrorsPublic;
     headers: Headers;
     status: "default";
 };
-type VerifyEmailConfigConnectionHttpError = VerifyEmailConfigConnection404HttpError | VerifyEmailConfigConnectionDefaultHttpError;
 /**
  * Clears the cache for transports api requests.
  */
@@ -344,4 +344,4 @@ interface TransportsAPI {
  */
 declare const transportsExport: TransportsAPI;
 
-export { type DeleteConfigNotFoundError, type DeleteEmailConfig403HttpError, type DeleteEmailConfig404HttpError, type DeleteEmailConfigDefaultHttpError, type DeleteEmailConfigHttpError, type DeleteEmailConfigHttpResponse, type Email, type EmailConfigFieldPatch, type EmailConfigPatch, type ErrorPublic, type ErrorsPublic, type GetBasicAuthConfig, type GetEmailConfig, type GetEmailConfig403HttpError, type GetEmailConfigDefaultHttpError, type GetEmailConfigHttpError, type GetEmailConfigHttpResponse, type GetMicrosoft365Config, type PatchEmailConfig400HttpError, type PatchEmailConfig403HttpError, type PatchEmailConfigDefaultHttpError, type PatchEmailConfigHttpError, type PatchEmailConfigHttpResponse, type SendTestEmail403HttpError, type SendTestEmail404HttpError, type SendTestEmailDefaultHttpError, type SendTestEmailHttpError, type SendTestEmailHttpResponse, type SendTestMailConfigNotFoundError, type SmtpCheck, type SmtpConfigStatus, type SmtpResult, type TenantAdminError, type TransportsAPI, type UpdateEmailConfigError, type ValidateEmailConfigHttpError, type ValidateEmailConfigHttpResponse, type VerifyConnectionConfigNotFoundError, type VerifyEmailConfigConnection404HttpError, type VerifyEmailConfigConnectionDefaultHttpError, type VerifyEmailConfigConnectionHttpError, type VerifyEmailConfigConnectionHttpResponse, clearCache, transportsExport as default, deleteEmailConfig, getEmailConfig, patchEmailConfig, sendTestEmail, validateEmailConfig, verifyEmailConfigConnection };
+export { type DeleteConfigNotFoundError, type DeleteEmailConfig403HttpError, type DeleteEmailConfig404HttpError, type DeleteEmailConfigHttpError, type DeleteEmailConfigHttpResponse, type DeleteEmailConfigdefaultHttpError, type Email, type EmailConfigFieldPatch, type EmailConfigPatch, type ErrorPublic, type ErrorsPublic, type GetBasicAuthConfig, type GetEmailConfig, type GetEmailConfig403HttpError, type GetEmailConfigHttpError, type GetEmailConfigHttpResponse, type GetEmailConfigdefaultHttpError, type GetMicrosoft365Config, type PatchEmailConfig400HttpError, type PatchEmailConfig403HttpError, type PatchEmailConfigHttpError, type PatchEmailConfigHttpResponse, type PatchEmailConfigdefaultHttpError, type SendTestEmail403HttpError, type SendTestEmail404HttpError, type SendTestEmailHttpError, type SendTestEmailHttpResponse, type SendTestEmaildefaultHttpError, type SendTestMailConfigNotFoundError, type SmtpCheck, type SmtpConfigStatus, type SmtpResult, type TenantAdminError, type TransportsAPI, type UpdateEmailConfigError, type ValidateEmailConfigHttpError, type ValidateEmailConfigHttpResponse, type VerifyConnectionConfigNotFoundError, type VerifyEmailConfigConnection404HttpError, type VerifyEmailConfigConnectionHttpError, type VerifyEmailConfigConnectionHttpResponse, type VerifyEmailConfigConnectiondefaultHttpError, clearCache, transportsExport as default, deleteEmailConfig, getEmailConfig, patchEmailConfig, sendTestEmail, validateEmailConfig, verifyEmailConfigConnection };

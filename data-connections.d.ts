@@ -328,14 +328,14 @@ declare const getDataConnections: (query: {
 type GetDataConnectionsHttpResponse = {
     data: Connections;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetDataConnectionsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetDataConnectionsHttpResponse>;
 };
 type GetDataConnectionsHttpError = {
     data: ResponseErrors;
     headers: Headers;
-    status: number;
+    status: 400 | 500 | 502;
 };
 /**
  * Creates a new connection. Depending on the fields defined in the request body, credentials embedded (or associated) in the connection can be updated or created.
@@ -347,12 +347,12 @@ declare const createDataConnection: (body: ConnectionCreate | DcaasConnectionCre
 type CreateDataConnectionHttpResponse = {
     data: ConnectionCreateResponse | DcaasConnectionCreateAuthResponse;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CreateDataConnectionHttpError = {
     data: ResponseErrors;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404 | 409;
 };
 /**
  * Delete multiple connections, only available to Admin
@@ -364,12 +364,12 @@ declare const deleteDataConnections: (body: ActionDeleteRequest, options?: ApiCa
 type DeleteDataConnectionsHttpResponse = {
     data: BulkResponse;
     headers: Headers;
-    status: number;
+    status: 207;
 };
 type DeleteDataConnectionsHttpError = {
     data: ResponseErrors;
     headers: Headers;
-    status: number;
+    status: 400 | 403;
 };
 /**
  * Duplicate a connection
@@ -381,12 +381,12 @@ declare const duplicateDataAConnection: (body: ActionDuplicateRequest, options?:
 type DuplicateDataAConnectionHttpResponse = {
     data: ConnectionCreateResponse;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type DuplicateDataAConnectionHttpError = {
     data: ResponseErrors;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404 | 409;
 };
 /**
  * Update multiple connections, only available to Admin. When update is to change ownership of a connection, the credentials associated with the connection will NOT be transferred to the new owner, and new owner is expected to provide their own credentials for the connection.
@@ -398,12 +398,12 @@ declare const updateDataConnections: (body: ActionUpdateRequest, options?: ApiCa
 type UpdateDataConnectionsHttpResponse = {
     data: BulkResponse;
     headers: Headers;
-    status: number;
+    status: 207;
 };
 type UpdateDataConnectionsHttpError = {
     data: ResponseErrors;
     headers: Headers;
-    status: number;
+    status: 400 | 403;
 };
 /**
  * Deletes the specified data connection by ID (or by name when type=connectionname is set in query)
@@ -421,12 +421,12 @@ declare const deleteDataConnection: (qID: string, query: {
 type DeleteDataConnectionHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteDataConnectionHttpError = {
     data: ResponseErrors;
     headers: Headers;
-    status: number;
+    status: 403 | 404;
 };
 /**
  * Retrieves a connection by connection ID, or by name when the query parameter "type" is set to "connectionname."
@@ -454,12 +454,12 @@ declare const getDataConnection: (qID: string, query: {
 type GetDataConnectionHttpResponse = {
     data: ConnectionGet;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetDataConnectionHttpError = {
     data: ResponseErrors;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404 | 500;
 };
 /**
  * Patches a connection specified by connection ID (or by name when type=connectionname is set in query).
@@ -476,12 +476,12 @@ declare const patchDataConnection: (qID: string, query: {
 type PatchDataConnectionHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type PatchDataConnectionHttpError = {
     data: ResponseErrors;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404 | 409;
 };
 /**
  * Updates a connection specified by connection ID (or by name when type=connectionname is set in query). Depends on the fields defined in the request body, credentials embedded (or associated) in the connection can be updated or created.
@@ -500,12 +500,12 @@ declare const updateDataConnection: (qID: string, query: {
 type UpdateDataConnectionHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type UpdateDataConnectionHttpError = {
     data: ResponseErrors;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404 | 409;
 };
 /**
  * Clears the cache for data-connections api requests.

@@ -119,14 +119,14 @@ declare const getCSPEntries: (query: {
 type GetCSPEntriesHttpResponse = {
     data: CSPEntryList;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetCSPEntriesHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetCSPEntriesHttpResponse>;
 };
 type GetCSPEntriesHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 500 | 503;
 };
 /**
  * Creates a new content security policy for an origin.
@@ -138,12 +138,12 @@ declare const createCSPEntry: (body: CSPEntryContent, options?: ApiCallOptions) 
 type CreateCSPEntryHttpResponse = {
     data: CSPEntry;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CreateCSPEntryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 500 | 503;
 };
 /**
  * Retrieves the full content security policy header (including all configured policies and origins) for the tenant.
@@ -154,12 +154,12 @@ declare const getCSPHeader: (options?: ApiCallOptions) => Promise<GetCSPHeaderHt
 type GetCSPHeaderHttpResponse = {
     data: CSPHeader;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetCSPHeaderHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 401 | 406 | 500 | 503;
 };
 /**
  * Deletes a specific content security policy.
@@ -171,12 +171,12 @@ declare const deleteCSPEntry: (id: string, options?: ApiCallOptions) => Promise<
 type DeleteCSPEntryHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteCSPEntryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Returns details for a specific content security policy.
@@ -188,12 +188,12 @@ declare const getCSPEntry: (id: string, options?: ApiCallOptions) => Promise<Get
 type GetCSPEntryHttpResponse = {
     data: CSPEntry;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetCSPEntryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Updates a content security policy.
@@ -206,12 +206,12 @@ declare const updateCSPEntry: (id: string, body: CSPEntryContent, options?: ApiC
 type UpdateCSPEntryHttpResponse = {
     data: CSPEntry;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type UpdateCSPEntryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Clears the cache for csp-origins api requests.

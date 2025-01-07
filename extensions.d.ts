@@ -104,7 +104,7 @@ declare const getExtensions: (options?: ApiCallOptions) => Promise<GetExtensions
 type GetExtensionsHttpResponse = {
     data: Extensions;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetExtensionsHttpError = {
     data: unknown;
@@ -126,7 +126,7 @@ declare const uploadExtension: (body: {
 type UploadExtensionHttpResponse = {
     data: Extension;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type UploadExtensionHttpError = {
     data: Error;
@@ -143,12 +143,12 @@ declare const deleteExtension: (id: string, options?: ApiCallOptions) => Promise
 type DeleteExtensionHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteExtensionHttpError = {
     data: Error;
     headers: Headers;
-    status: number;
+    status: 403 | 404 | 410;
 };
 /**
  * Returns a specific extension matching either extension ID or extension name.
@@ -160,12 +160,12 @@ declare const getExtension: (id: string, options?: ApiCallOptions) => Promise<Ge
 type GetExtensionHttpResponse = {
     data: Extension;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetExtensionHttpError = {
     data: Error;
     headers: Headers;
-    status: number;
+    status: 403 | 404 | 410;
 };
 /**
  * Updates a specific extension matching either extension ID or extension name. Accepts either provided file or data object.
@@ -183,7 +183,7 @@ declare const patchExtension: (id: string, body: {
 type PatchExtensionHttpResponse = {
     data: Extension;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type PatchExtensionHttpError = {
     data: Error;
@@ -200,12 +200,12 @@ declare const downloadExtension: (id: string, options?: ApiCallOptions) => Promi
 type DownloadExtensionHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type DownloadExtensionHttpError = {
     data: Error;
     headers: Headers;
-    status: number;
+    status: 403 | 404 | 410;
 };
 /**
  * Downloads a specific file from the extension matching either extension ID or extension name, identified by the file path within the imported extension.
@@ -218,12 +218,12 @@ declare const downloadFileFromExtension: (id: string, filepath: string, options?
 type DownloadFileFromExtensionHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type DownloadFileFromExtensionHttpError = {
     data: Error;
     headers: Headers;
-    status: number;
+    status: 403 | 404 | 410;
 };
 /**
  * Clears the cache for extensions api requests.

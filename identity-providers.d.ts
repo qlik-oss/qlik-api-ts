@@ -513,14 +513,14 @@ declare const getIdps: (query: {
 type GetIdpsHttpResponse = {
     data: IDPArray;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetIdpsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetIdpsHttpResponse>;
 };
 type GetIdpsHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 404;
 };
 /**
  * Creates a new IdP on a tenant. Requesting user must be assigned the `TenantAdmin` role. For non-interactive IdPs (e.g. JWT), IdP must be created by sending `options` payload. For interactive IdPs (e.g. SAML or OIDC), send `pendingOptions` payload to require the interactive verification step; or send `options` payload with `skipVerify` set to `true` to skip validation step and make IdP immediately available.
@@ -532,12 +532,12 @@ declare const createIdp: (body: IDPPostSchema, options?: ApiCallOptions) => Prom
 type CreateIdpHttpResponse = {
     data: IDP;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CreateIdpHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 403;
 };
 /**
  * Returns IdP configuration metadata supported on the tenant. Clients can use this information to programmatically configure their interactions with Qlik Cloud.
@@ -548,7 +548,7 @@ declare const getIdpWellKnownMetaData: (options?: ApiCallOptions) => Promise<Get
 type GetIdpWellKnownMetaDataHttpResponse = {
     data: unknown;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetIdpWellKnownMetaDataHttpError = {
     data: unknown;
@@ -564,12 +564,12 @@ declare const getMyIdpMeta: (options?: ApiCallOptions) => Promise<GetMyIdpMetaHt
 type GetMyIdpMetaHttpResponse = {
     data: IDPMeta;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetMyIdpMetaHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 403 | 404 | 500;
 };
 /**
  * Retrieves the status of all IdP configurations. Requires `TenantAdmin` role.
@@ -580,12 +580,12 @@ declare const getIdpStatuses: (options?: ApiCallOptions) => Promise<GetIdpStatus
 type GetIdpStatusesHttpResponse = {
     data: IDPsStatus;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetIdpStatusesHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 403 | 404 | 500;
 };
 /**
  * Deletes an identity provider. Requesting user must be assigned the `TenantAdmin` role.
@@ -597,12 +597,12 @@ declare const deleteIdp: (id: string, options?: ApiCallOptions) => Promise<Delet
 type DeleteIdpHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteIdpHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 404;
 };
 /**
  * Retrieves a specific IdP. Requesting user must be assigned the `TenantAdmin` role.
@@ -614,12 +614,12 @@ declare const getIdp: (id: string, options?: ApiCallOptions) => Promise<GetIdpHt
 type GetIdpHttpResponse = {
     data: IDP;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetIdpHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 401 | 404;
 };
 /**
  * Updates the configuration of an IdP. Requesting user must be assigned the `TenantAdmin` role. Partial failure is treated as complete failure and returns an error.
@@ -632,12 +632,12 @@ declare const patchIdp: (id: string, body: IDPPatchSchema, options?: ApiCallOpti
 type PatchIdpHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type PatchIdpHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 412 | 500;
 };
 /**
  * Clears the cache for identity-providers api requests.
