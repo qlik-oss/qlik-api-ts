@@ -2,8 +2,8 @@ import {
   openAppSession,
   qix_default,
   withHostConfig
-} from "./chunks/PEDWO7JX.js";
-import "./chunks/QPEGXH22.js";
+} from "./chunks/55SZVSAG.js";
+import "./chunks/V3TZ54UE.js";
 export {
   qix_default as default,
   openAppSession,

@@ -127,8 +127,8 @@ type InviteRequestData = {
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
  */
 type JSONPatch = {
-    /** The operation to be performed. The fields `set`, `unset`, and `add` are deprecated. */
-    op: "replace" | "set" | "unset" | "add" | "renew";
+    /** The operation to be performed. The fields `set` and `unset` are deprecated. */
+    op: "replace" | "set" | "unset" | "add" | "renew" | "remove-value";
     /** A JSON Pointer. The field `roles` is deprecated. */
     path: "/name" | "/roles" | "/assignedRoles" | "/inviteExpiry" | "/preferredZoneinfo" | "/preferredLocale" | "/status" | "/assignedGroups";
     /** The value to be used for this operation. */

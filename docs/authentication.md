@@ -52,7 +52,7 @@ As an alternative to the methods above it is also possible to create an instance
 Example:
 
 ```ts
-import { createQlikApi } from "@qlik-trial/qmfe-api";
+import { createQlikApi } from "@qlik/api";
 
 const api = createQlikApi({
   authType: "apikey"
