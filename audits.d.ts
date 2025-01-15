@@ -1,6 +1,28 @@
 import { A as ApiCallOptions } from './invoke-fetch-types-BXn-uSF5.js';
 import './auth-types-PkN9CAF_.js';
 
+type ArchiveItem = {
+    /** The type that content is encoded in, always "application/json". */
+    contentType?: string;
+    /** Additional information about the event's details. The structure depends on the type and version of the event. */
+    data?: unknown;
+    /** The event's unique identifier. */
+    eventId?: string;
+    /** The RFC3339 datetime when the event happened. */
+    eventTime?: string;
+    /** The type of event that describes committed action. */
+    eventType?: string;
+    /** The version of the event type. */
+    eventTypeVersion?: string;
+    /** The availability of the properties depends on the event and the context it was triggered in. */
+    extensions?: EventExtensions;
+    /** The source of the event message, usually the producing service. */
+    source?: string;
+    /** The ID of the tenant that owns the item. This is populated using the JWT. */
+    tenantId?: string;
+    /** The ID of the user who performed the action that triggered the event. */
+    userId?: string;
+};
 type ErrorResponse = {
     errors?: {
         code?: string;
@@ -31,7 +53,7 @@ type EventExtensions = {
 };
 type GetArchiveResult = {
     /** List of archived events. The structure of the events depend on their type and version. */
-    data?: unknown[];
+    data?: ArchiveItem[];
 };
 type GetByIDResult = {
     /** The type that content is encoded in, always "application/json". */
@@ -269,4 +291,4 @@ interface AuditsAPI {
  */
 declare const auditsExport: AuditsAPI;
 
-export { type AuditsAPI, type ErrorResponse, type EventExtensions, type GetArchiveResult, type GetArchivedAuditsHttpError, type GetArchivedAuditsHttpResponse, type GetAuditHttpError, type GetAuditHttpResponse, type GetAuditSourcesHttpError, type GetAuditSourcesHttpResponse, type GetAuditTypesHttpError, type GetAuditTypesHttpResponse, type GetAuditsHttpError, type GetAuditsHttpResponse, type GetAuditsSettingsHttpError, type GetAuditsSettingsHttpResponse, type GetByIDResult, type GetLinks, type GetObjectsResult, type GetResult, type GetSettingsResult, type Href, type ListLinks, clearCache, auditsExport as default, getArchivedAudits, getAudit, getAuditSources, getAuditTypes, getAudits, getAuditsSettings };
+export { type ArchiveItem, type AuditsAPI, type ErrorResponse, type EventExtensions, type GetArchiveResult, type GetArchivedAuditsHttpError, type GetArchivedAuditsHttpResponse, type GetAuditHttpError, type GetAuditHttpResponse, type GetAuditSourcesHttpError, type GetAuditSourcesHttpResponse, type GetAuditTypesHttpError, type GetAuditTypesHttpResponse, type GetAuditsHttpError, type GetAuditsHttpResponse, type GetAuditsSettingsHttpError, type GetAuditsSettingsHttpResponse, type GetByIDResult, type GetLinks, type GetObjectsResult, type GetResult, type GetSettingsResult, type Href, type ListLinks, clearCache, auditsExport as default, getArchivedAudits, getAudit, getAuditSources, getAuditTypes, getAudits, getAuditsSettings };
