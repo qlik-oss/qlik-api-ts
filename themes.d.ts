@@ -79,7 +79,7 @@ declare const getThemes: (options?: ApiCallOptions) => Promise<GetThemesHttpResp
 type GetThemesHttpResponse = {
     data: Themes;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetThemesHttpError = {
     data: unknown;
@@ -101,7 +101,7 @@ declare const uploadTheme: (body: {
 type UploadThemeHttpResponse = {
     data: Theme;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type UploadThemeHttpError = {
     data: Error;
@@ -118,12 +118,12 @@ declare const deleteTheme: (id: string, options?: ApiCallOptions) => Promise<Del
 type DeleteThemeHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteThemeHttpError = {
     data: Error;
     headers: Headers;
-    status: number;
+    status: 403 | 404 | 410;
 };
 /**
  * Returns a specific theme matching either theme ID or theme name.
@@ -135,12 +135,12 @@ declare const getTheme: (id: string, options?: ApiCallOptions) => Promise<GetThe
 type GetThemeHttpResponse = {
     data: Theme;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetThemeHttpError = {
     data: Error;
     headers: Headers;
-    status: number;
+    status: 403 | 404 | 410;
 };
 /**
  * Updates a specific theme matching either theme ID or theme name. Accepts either provided file or data object.
@@ -158,7 +158,7 @@ declare const patchTheme: (id: string, body: {
 type PatchThemeHttpResponse = {
     data: Themes;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type PatchThemeHttpError = {
     data: Error;
@@ -175,12 +175,12 @@ declare const downloadTheme: (id: string, options?: ApiCallOptions) => Promise<D
 type DownloadThemeHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type DownloadThemeHttpError = {
     data: Error;
     headers: Headers;
-    status: number;
+    status: 403 | 404 | 410;
 };
 /**
  * Downloads a file from the theme matching either theme ID or theme name, identified by the file path within the imported extension.
@@ -193,12 +193,12 @@ declare const downloadFileFromTheme: (id: string, filepath: string, options?: Ap
 type DownloadFileFromThemeHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type DownloadFileFromThemeHttpError = {
     data: Error;
     headers: Headers;
-    status: number;
+    status: 403 | 404 | 410;
 };
 /**
  * Clears the cache for themes api requests.

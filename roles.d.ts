@@ -140,14 +140,14 @@ declare const getRoles: (query: {
 type GetRolesHttpResponse = {
     data: ListRolesResult;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetRolesHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetRolesHttpResponse>;
 };
 type GetRolesHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 429 | 500;
 };
 /**
  * Creates a custom role. Role names must be unique, and there is a maximum of 500 custom roles per tenant. Requestor must be assigned the `TenantAdmin` role.
@@ -159,12 +159,12 @@ declare const createRole: (body: CreateRole, options?: ApiCallOptions) => Promis
 type CreateRoleHttpResponse = {
     data: Role;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CreateRoleHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 429 | 500;
 };
 /**
  * Deletes the requested role. Role can only be deleted if it has been unassigned from all users and groups. Only applicable to roles of type `custom`. Requestor must be assigned the `TenantAdmin` role.
@@ -176,12 +176,12 @@ declare const deleteRole: (id: string, options?: ApiCallOptions) => Promise<Dele
 type DeleteRoleHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteRoleHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 429 | 500;
 };
 /**
  * Returns the requested role.
@@ -193,12 +193,12 @@ declare const getRole: (id: string, options?: ApiCallOptions) => Promise<GetRole
 type GetRoleHttpResponse = {
     data: Role;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetRoleHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 404 | 429 | 500;
 };
 /**
  * Updates the requested role. Only applicable to roles of type `custom`. Requestor must be assigned the `TenantAdmin` role.
@@ -211,12 +211,12 @@ declare const patchRole: (id: string, body: PatchRoles, options?: ApiCallOptions
 type PatchRoleHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type PatchRoleHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 429 | 500;
 };
 /**
  * Clears the cache for roles api requests.

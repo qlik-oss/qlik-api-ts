@@ -100,14 +100,14 @@ declare const getNotifications: (query: {
 type GetNotificationsHttpResponse = {
     data: Notifications;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetNotificationsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetNotificationsHttpResponse>;
 };
 type GetNotificationsHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 500;
 };
 /**
  * Delete all notifications.
@@ -118,12 +118,12 @@ declare const deleteNotifications: (options?: ApiCallOptions) => Promise<DeleteN
 type DeleteNotificationsHttpResponse = {
     data: Meta;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteNotificationsHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 401 | 500;
 };
 /**
  * Patch all notifications.
@@ -135,12 +135,12 @@ declare const patchNotifications: (body: NotificationPatchSchema, options?: ApiC
 type PatchNotificationsHttpResponse = {
     data: Meta;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type PatchNotificationsHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 500;
 };
 /**
  * Delete a notification.
@@ -152,12 +152,12 @@ declare const deleteNotification: (notificationId: string, options?: ApiCallOpti
 type DeleteNotificationHttpResponse = {
     data: Meta;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteNotificationHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 401 | 404 | 500;
 };
 /**
  * Retrieve a single notification by Id.
@@ -169,12 +169,12 @@ declare const getNotification: (notificationId: string, options?: ApiCallOptions
 type GetNotificationHttpResponse = {
     data: Notification;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetNotificationHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 401 | 404 | 500;
 };
 /**
  * Patch a notification.
@@ -187,12 +187,12 @@ declare const patchNotification: (notificationId: string, body: NotificationPatc
 type PatchNotificationHttpResponse = {
     data: Meta;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type PatchNotificationHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 404 | 500;
 };
 /**
  * Clears the cache for web-notifications api requests.

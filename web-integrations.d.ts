@@ -142,7 +142,7 @@ declare const getWebIntegrations: (query: {
 type GetWebIntegrationsHttpResponse = {
     data: WebIntegrations;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetWebIntegrationsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetWebIntegrationsHttpResponse>;
 };
@@ -161,12 +161,12 @@ declare const createWebIntegration: (body: WebIntegrationPostSchema, options?: A
 type CreateWebIntegrationHttpResponse = {
     data: WebIntegrationPost;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CreateWebIntegrationHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 403;
 };
 /**
  * Deletes a single web integration by ID.
@@ -178,12 +178,12 @@ declare const deleteWebIntegration: (id: string, options?: ApiCallOptions) => Pr
 type DeleteWebIntegrationHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteWebIntegrationHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 404;
 };
 /**
  * Retrieves a single web integration by ID.
@@ -195,12 +195,12 @@ declare const getWebIntegration: (id: string, options?: ApiCallOptions) => Promi
 type GetWebIntegrationHttpResponse = {
     data: WebIntegration;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetWebIntegrationHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 404;
 };
 /**
  * Updates a single web integration by ID.
@@ -213,12 +213,12 @@ declare const patchWebIntegration: (id: string, body: WebIntegrationPatchSchema,
 type PatchWebIntegrationHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type PatchWebIntegrationHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 404;
 };
 /**
  * Clears the cache for web-integrations api requests.

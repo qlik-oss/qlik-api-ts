@@ -97,12 +97,12 @@ declare const getReloadTasks: (query: {
 type GetReloadTasksHttpResponse = {
     data: Tasks;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetReloadTasksHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 429 | 500 | 503;
 };
 /**
  * Creates a task for a specified app.
@@ -114,12 +114,12 @@ declare const createReloadTask: (body: PostTaskBody, options?: ApiCallOptions) =
 type CreateReloadTaskHttpResponse = {
     data: Task;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CreateReloadTaskHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Deletes a task
@@ -131,12 +131,12 @@ declare const deleteReloadTask: (taskId: string, options?: ApiCallOptions) => Pr
 type DeleteReloadTaskHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteReloadTaskHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500;
 };
 /**
  * Finds and returns a task.
@@ -148,12 +148,12 @@ declare const getReloadTask: (taskId: string, options?: ApiCallOptions) => Promi
 type GetReloadTaskHttpResponse = {
     data: Task;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetReloadTaskHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 429 | 500 | 503;
 };
 /**
  * Updates an existing task
@@ -166,12 +166,12 @@ declare const updateReloadTask: (taskId: string, body: PutTaskBody, options?: Ap
 type UpdateReloadTaskHttpResponse = {
     data: Task;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type UpdateReloadTaskHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Clears the cache for reload-tasks api requests.

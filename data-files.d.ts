@@ -313,14 +313,14 @@ declare const getDataFiles: (query: {
 type GetDataFilesHttpResponse = {
     data: GetDataFileInfosResponse;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetDataFilesHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetDataFilesHttpResponse>;
 };
 type GetDataFilesHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403;
 };
 /**
  * Upload a new data file or create a new folder.
@@ -370,12 +370,12 @@ declare const uploadDataFile: (body: {
 type UploadDataFileHttpResponse = {
     data: DataFileUploadResponse;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type UploadDataFileHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 409 | 413 | 423 | 501;
 };
 /**
  * This is to allow for a separate admin type of operation that is more global in terms of access in cases
@@ -390,12 +390,12 @@ declare const moveDataFiles: (body: DataFileBatchChangeSpaceRequest, options?: A
 type MoveDataFilesHttpResponse = {
     data: MultiStatusResponse;
     headers: Headers;
-    status: number;
+    status: 207;
 };
 type MoveDataFilesHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400;
 };
 /**
  * Delete the specified set of data files and/or folders as a single batch.
@@ -407,12 +407,12 @@ declare const deleteDataFiles: (body: DataFileBatchDeleteRequest, options?: ApiC
 type DeleteDataFilesHttpResponse = {
     data: MultiStatusResponse;
     headers: Headers;
-    status: number;
+    status: 207;
 };
 type DeleteDataFilesHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400;
 };
 /**
  * The non-filtered list contains a set of hardcoded connections, along with one connection per team space that
@@ -444,14 +444,14 @@ declare const getDataFilesConnections: (query: {
 type GetDataFilesConnectionsHttpResponse = {
     data: GetConnectionsResponse;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetDataFilesConnectionsHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetDataFilesConnectionsHttpResponse>;
 };
 type GetDataFilesConnectionsHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403;
 };
 /**
  * Get the built-in connection used by the engine to load/write data files given a connection ID.
@@ -463,12 +463,12 @@ declare const getDataFileConnection: (id: string, options?: ApiCallOptions) => P
 type GetDataFileConnectionHttpResponse = {
     data: ConnectionsResponse;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetDataFileConnectionHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 403 | 404;
 };
 /**
  * Get quota information for the calling user.
@@ -479,12 +479,12 @@ declare const getDataFilesQuotas: (options?: ApiCallOptions) => Promise<GetDataF
 type GetDataFilesQuotasHttpResponse = {
     data: QuotaResponse;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetDataFilesQuotasHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403;
 };
 /**
  * Delete the specified data file or folder.  Deleting a folder will also recursively delete all files and
@@ -497,12 +497,12 @@ declare const deleteDataFile: (id: string, options?: ApiCallOptions) => Promise<
 type DeleteDataFileHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteDataFileHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404;
 };
 /**
  * Get descriptive info for the specified data file.
@@ -514,12 +514,12 @@ declare const getDataFile: (id: string, options?: ApiCallOptions) => Promise<Get
 type GetDataFileHttpResponse = {
     data: DataFileUploadResponse;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetDataFileHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404;
 };
 /**
  * Re-upload an existing data file or update an existing folder.
@@ -582,12 +582,12 @@ declare const reuploadDataFile: (id: string, body: {
 type ReuploadDataFileHttpResponse = {
     data: DataFileUploadResponse;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type ReuploadDataFileHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404 | 409 | 413 | 423;
 };
 /**
  * This is primarily an admin type of operation.  In general, the owner of a data file or folder is implicitly
@@ -606,12 +606,12 @@ declare const changeDataFileOwner: (id: string, body: ChangeDataFileOwnerRequest
 type ChangeDataFileOwnerHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type ChangeDataFileOwnerHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404 | 409 | 423;
 };
 /**
  * This is to allow for a separate admin type of operation that is more global in terms of access in cases
@@ -631,12 +631,12 @@ declare const moveDataFile: (id: string, body: ChangeDataFileSpaceRequest, optio
 type MoveDataFileHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type MoveDataFileHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404 | 409 | 423;
 };
 /**
  * Clears the cache for data-files api requests.

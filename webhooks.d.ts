@@ -176,14 +176,14 @@ declare const getWebhooks: (query: {
 type GetWebhooksHttpResponse = {
     data: WebhookList;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetWebhooksHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetWebhooksHttpResponse>;
 };
 type GetWebhooksHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 500 | 503;
 };
 /**
  * Creates a new webhook. User must be assigned the `TenantAdmin` role to create `tenant` level webhooks.
@@ -195,12 +195,12 @@ declare const createWebhook: (body: WebhookPost, options?: ApiCallOptions) => Pr
 type CreateWebhookHttpResponse = {
     data: WebhookResponse;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CreateWebhookHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 500 | 503;
 };
 /**
  * Lists event-types that are possible to subscribe to.
@@ -211,12 +211,12 @@ declare const getWebhookEventTypes: (options?: ApiCallOptions) => Promise<GetWeb
 type GetWebhookEventTypesHttpResponse = {
     data: EventTypes;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetWebhookEventTypesHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 401 | 500 | 503;
 };
 /**
  * Deletes a specific webhook.
@@ -228,12 +228,12 @@ declare const deleteWebhook: (id: string, options?: ApiCallOptions) => Promise<D
 type DeleteWebhookHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteWebhookHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Returns details for a specific webhook.
@@ -245,12 +245,12 @@ declare const getWebhook: (id: string, options?: ApiCallOptions) => Promise<GetW
 type GetWebhookHttpResponse = {
     data: WebhookResponse;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetWebhookHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Patches a webhook to update one or more properties.
@@ -263,12 +263,12 @@ declare const patchWebhook: (id: string, body: WebhookPatch[], options?: ApiCall
 type PatchWebhookHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type PatchWebhookHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Updates a webhook, any omitted fields will be cleared, returns updated webhook.
@@ -281,12 +281,12 @@ declare const updateWebhook: (id: string, body: WebhookBase, options?: ApiCallOp
 type UpdateWebhookHttpResponse = {
     data: WebhookResponse;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type UpdateWebhookHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Returns deliveries for a specific webhook. Delivery history is stored for 1 week.
@@ -312,14 +312,14 @@ declare const getWebhookDeliveries: (id: string, query: {
 type GetWebhookDeliveriesHttpResponse = {
     data: DeliveryList;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetWebhookDeliveriesHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetWebhookDeliveriesHttpResponse>;
 };
 type GetWebhookDeliveriesHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Returns details for a specific delivery.
@@ -332,12 +332,12 @@ declare const getWebhookDelivery: (id: string, deliveryId: string, options?: Api
 type GetWebhookDeliveryHttpResponse = {
     data: Delivery;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetWebhookDeliveryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
  * Resends the delivery with the same payload.
@@ -350,12 +350,12 @@ declare const resendWebhookDelivery: (id: string, deliveryId: string, options?: 
 type ResendWebhookDeliveryHttpResponse = {
     data: Delivery;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type ResendWebhookDeliveryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: number;
+    status: 401 | 404 | 500 | 503;
 };
 /**
  * Clears the cache for webhooks api requests.

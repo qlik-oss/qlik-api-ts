@@ -114,12 +114,12 @@ declare const filterOrphanedDataCredentials: (body: ActionFilterOrphanRequest, o
 type FilterOrphanedDataCredentialsHttpResponse = {
     data: ActionFilterOrphanResponse;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type FilterOrphanedDataCredentialsHttpError = {
     data: ResponseErrors;
     headers: Headers;
-    status: number;
+    status: 400 | 403;
 };
 /**
  * Deletes the specified credential by ID (or by name when type=credentialname is set in query)
@@ -135,12 +135,12 @@ declare const deleteDataCredential: (qID: string, query: {
 type DeleteDataCredentialHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteDataCredentialHttpError = {
     data: ResponseErrors;
     headers: Headers;
-    status: number;
+    status: 404;
 };
 /**
  * Gets a credential by ID (or by name when bycredentialname=true is set in query)
@@ -156,12 +156,12 @@ declare const getDataCredential: (qID: string, query: {
 type GetDataCredentialHttpResponse = {
     data: Credential;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetDataCredentialHttpError = {
     data: ResponseErrors;
     headers: Headers;
-    status: number;
+    status: 400 | 404;
 };
 /**
  * Patches a credential specified by ID (or by name when bycredentialname=true is set in query)
@@ -178,12 +178,12 @@ declare const patchDataCredential: (qID: string, query: {
 type PatchDataCredentialHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type PatchDataCredentialHttpError = {
     data: ResponseErrors;
     headers: Headers;
-    status: number;
+    status: 400 | 404 | 409;
 };
 /**
  * Updates a credential specified by ID (or by name when bycredentialname=true is set in query)
@@ -200,12 +200,12 @@ declare const updateDataCredential: (qID: string, query: {
 type UpdateDataCredentialHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type UpdateDataCredentialHttpError = {
     data: ResponseErrors;
     headers: Headers;
-    status: number;
+    status: 400 | 404 | 409;
 };
 /**
  * Clears the cache for data-credentials api requests.

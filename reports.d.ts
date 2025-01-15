@@ -558,12 +558,12 @@ declare const createReport: (body: ReportRequest, options?: ApiCallOptions) => P
 type CreateReportHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 202;
 };
 type CreateReportHttpError = {
     data: Error;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 409 | 429 | 500;
 };
 /**
  * Get report request processing status.
@@ -575,12 +575,12 @@ declare const getReportStatus: (id: string, options?: ApiCallOptions) => Promise
 type GetReportStatusHttpResponse = {
     data: ReportStatus;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetReportStatusHttpError = {
     data: Error;
     headers: Headers;
-    status: number;
+    status: 400 | 401 | 403 | 404 | 409 | 429 | 500;
 };
 /**
  * Clears the cache for reports api requests.

@@ -134,7 +134,7 @@ declare const createTenant: (body: TenantCreationRequest, options?: ApiCallOptio
 type CreateTenantHttpResponse = {
     data: Tenant;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CreateTenantHttpError = {
     data: Errors;
@@ -150,7 +150,7 @@ declare const getMyTenant: (options?: ApiCallOptions) => Promise<GetMyTenantHttp
 type GetMyTenantHttpResponse = {
     data: Tenant;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetMyTenantHttpError = {
     data: unknown;
@@ -167,7 +167,7 @@ declare const getTenant: (tenantId: string, options?: ApiCallOptions) => Promise
 type GetTenantHttpResponse = {
     data: Tenant;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetTenantHttpError = {
     data: Errors;
@@ -185,8 +185,9 @@ declare const patchTenant: (tenantId: string, body: TenantPatchSchema, options?:
 type PatchTenantHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
+type PatchTenantHttpError = PatchTenant400HttpError | PatchTenant403HttpError | PatchTenant404HttpError | PatchTenant429HttpError | PatchTenantdefaultHttpError;
 type PatchTenant400HttpError = {
     data: TenantPatchErrors;
     headers: Headers;
@@ -207,12 +208,11 @@ type PatchTenant429HttpError = {
     headers: Headers;
     status: 429;
 };
-type PatchTenantDefaultHttpError = {
+type PatchTenantdefaultHttpError = {
     data: Errors;
     headers: Headers;
     status: "default";
 };
-type PatchTenantHttpError = PatchTenant400HttpError | PatchTenant403HttpError | PatchTenant404HttpError | PatchTenant429HttpError | PatchTenantDefaultHttpError;
 /**
  * Deactivates a specific tenant. Once deactivated, tenant will be deleted on or after `estimatedPurgeDate`. Tenant can be reactivated using `/v1/tenants/{tenantId}/actions/reactivate` until this date. You must use a regional OAuth client generated via the [My Qlik portal](https://account.myqlik.qlik.com/account) to call this endpoint. Tenant creation, deactivation, and reactivation requests must be sent to the register endpoint in the relevant Qlik Cloud region, e.g. `https://register.us.qlikcloud.com/api/v1/tenants/{tenantId}/actions/deactivate` if interacting with tenants in the `us` region.
  *
@@ -224,7 +224,7 @@ declare const deactivateTenant: (tenantId: string, body: TenantDeactivateRequest
 type DeactivateTenantHttpResponse = {
     data: TenantDeactivateResponse;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type DeactivateTenantHttpError = {
     data: Errors;
@@ -242,7 +242,7 @@ declare const reactivateTenant: (tenantId: string, body: unknown, options?: ApiC
 type ReactivateTenantHttpResponse = {
     data: unknown;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type ReactivateTenantHttpError = {
     data: Errors;
@@ -308,4 +308,4 @@ interface TenantsAPI {
  */
 declare const tenantsExport: TenantsAPI;
 
-export { type CreateTenantHttpError, type CreateTenantHttpResponse, type DeactivateTenantHttpError, type DeactivateTenantHttpResponse, type Error, type Errors, type GetMyTenantHttpError, type GetMyTenantHttpResponse, type GetTenantHttpError, type GetTenantHttpResponse, type PatchTenant400HttpError, type PatchTenant403HttpError, type PatchTenant404HttpError, type PatchTenant429HttpError, type PatchTenantDefaultHttpError, type PatchTenantHttpError, type PatchTenantHttpResponse, type ReactivateTenantHttpError, type ReactivateTenantHttpResponse, type Tenant, type TenantCreationRequest, type TenantDeactivateRequest, type TenantDeactivateResponse, type TenantPatchErrors, type TenantPatchSchema, type TenantsAPI, clearCache, createTenant, deactivateTenant, tenantsExport as default, getMyTenant, getTenant, patchTenant, reactivateTenant };
+export { type CreateTenantHttpError, type CreateTenantHttpResponse, type DeactivateTenantHttpError, type DeactivateTenantHttpResponse, type Error, type Errors, type GetMyTenantHttpError, type GetMyTenantHttpResponse, type GetTenantHttpError, type GetTenantHttpResponse, type PatchTenant400HttpError, type PatchTenant403HttpError, type PatchTenant404HttpError, type PatchTenant429HttpError, type PatchTenantHttpError, type PatchTenantHttpResponse, type PatchTenantdefaultHttpError, type ReactivateTenantHttpError, type ReactivateTenantHttpResponse, type Tenant, type TenantCreationRequest, type TenantDeactivateRequest, type TenantDeactivateResponse, type TenantPatchErrors, type TenantPatchSchema, type TenantsAPI, clearCache, createTenant, deactivateTenant, tenantsExport as default, getMyTenant, getTenant, patchTenant, reactivateTenant };

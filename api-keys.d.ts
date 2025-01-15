@@ -160,14 +160,14 @@ declare const getApiKeys: (query: {
 type GetApiKeysHttpResponse = {
     data: ApiKeyPage;
     headers: Headers;
-    status: number;
+    status: 200;
     prev?: (options?: ApiCallOptions) => Promise<GetApiKeysHttpResponse>;
     next?: (options?: ApiCallOptions) => Promise<GetApiKeysHttpResponse>;
 };
 type GetApiKeysHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 429;
 };
 /**
  * Creates an API key, either for a user, or for configuring SCIM for a compatible Identity Provider.
@@ -180,7 +180,7 @@ declare const createApiKey: (body: ApiKeyBody, options?: ApiCallOptions) => Prom
 type CreateApiKeyHttpResponse = {
     data: ApiKeyWithToken;
     headers: Headers;
-    status: number;
+    status: 201;
 };
 type CreateApiKeyHttpError = {
     data: Errors;
@@ -197,7 +197,7 @@ declare const getApiKeysConfig: (tenantId: string, options?: ApiCallOptions) => 
 type GetApiKeysConfigHttpResponse = {
     data: ApiKeysConfig;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetApiKeysConfigHttpError = {
     data: Errors;
@@ -215,12 +215,12 @@ declare const patchApiKeysConfig: (tenantId: string, body: ApiKeysConfigPatchSch
 type PatchApiKeysConfigHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type PatchApiKeysConfigHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404 | 429;
 };
 /**
  * Deletes or revokes an API key for a given API key ID. When the owner of the API key sends the request, the key will be deleted and removed from the tenant. When a user assigned the `TenantAdmin` role sends the request, the key will be disabled and marked as revoked.
@@ -232,12 +232,12 @@ declare const deleteApiKey: (id: string, options?: ApiCallOptions) => Promise<De
 type DeleteApiKeyHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type DeleteApiKeyHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 403 | 404 | 429;
 };
 /**
  * Returns the API key for a given API key ID.
@@ -249,7 +249,7 @@ declare const getApiKey: (id: string, options?: ApiCallOptions) => Promise<GetAp
 type GetApiKeyHttpResponse = {
     data: ApiKey;
     headers: Headers;
-    status: number;
+    status: 200;
 };
 type GetApiKeyHttpError = {
     data: Errors;
@@ -267,12 +267,12 @@ declare const patchApiKey: (id: string, body: ApiKeysPatchSchema, options?: ApiC
 type PatchApiKeyHttpResponse = {
     data: void;
     headers: Headers;
-    status: number;
+    status: 204;
 };
 type PatchApiKeyHttpError = {
     data: Errors;
     headers: Headers;
-    status: number;
+    status: 400 | 403 | 404 | 429;
 };
 /**
  * Clears the cache for api-keys api requests.
