@@ -193,6 +193,7 @@ type ErrorResponseCode = {
 /**
  * ### Custom error codes
  * * BG-3 - Access denied, no read access
+ * * BG-30 - Feature not enabled on tenant.
  */
 type ErrorResponseForbidden = {
     errors?: ErrorResponseCode[];
