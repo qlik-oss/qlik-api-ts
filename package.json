@@ -16,7 +16,7 @@
     "nanoid": "^5.0.9",
     "ws": "^8.18.0"
   },
-  "packageManager": "pnpm@9.15.3",
+  "packageManager": "pnpm@9.15.4",
   "engines": {
     "node": ">=18"
   },
