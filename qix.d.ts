@@ -1,7 +1,7 @@
 import { H as HostConfig } from './auth-types-PkN9CAF_.js';
 import './invoke-fetch-types-BXn-uSF5.js';
 
-declare const QIX_SCHEMA_VERSION = "12.2309.0";
+declare const QIX_SCHEMA_VERSION = "12.2325.0";
 type AlfaNumString = {
     /**
      * Calculated value.
@@ -3752,6 +3752,12 @@ type NxDimensionInfo = {
      * Refers to a dimension stored in the library.
      */
     qLibraryId?: string;
+    /**
+     * The expanded and stripped dimension name used internally in engine.
+     *
+     * Stability: *experimental*
+     */
+    qEffectiveDimensionName?: string;
 };
 type NxDimensionType = "D" | "NX_DIMENSION_TYPE_DISCRETE" | "N" | "NX_DIMENSION_TYPE_NUMERIC" | "T" | "NX_DIMENSION_TYPE_TIME";
 type NxDownloadInfo = {
@@ -5187,6 +5193,12 @@ type NxTreeDimensionInfo = {
      * Refers to a dimension stored in the library.
      */
     qLibraryId?: string;
+    /**
+     * The expanded and stripped dimension name used internally in engine.
+     *
+     * Stability: *experimental*
+     */
+    qEffectiveDimensionName?: string;
 };
 type NxTreeMultiRangeSelectInfo = {
     /**

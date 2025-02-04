@@ -17,10 +17,6 @@ type Href = {
  * The boolean value used to present the reload is partial or not.
  */
 type Partial = boolean;
-/**
- * The priority of the reload. The higher the priority, the sooner the reload will be scheduled relative to other reloads for the same tenant.
- */
-type Priority = number;
 type Reload = {
     /** The ID of the app. */
     appId: string;
@@ -41,8 +37,6 @@ type Reload = {
     log?: string;
     /** The boolean value used to present the reload is partial or not. */
     partial?: Partial;
-    /** The priority of the reload. The higher the priority, the sooner the reload will be scheduled relative to other reloads for the same tenant. */
-    priority?: Priority;
     /** The time the reload job was consumed from the queue. */
     startTime?: string;
     /** The status of the reload. There are seven statuses. `QUEUED`, `RELOADING`, `CANCELING` are the active statuses. `SUCCEEDED`, `FAILED`, `CANCELED`, `EXCEEDED_LIMIT` are the end statuses. */
@@ -62,8 +56,6 @@ type ReloadRequest = {
     appId: string;
     /** The boolean value used to present the reload is partial or not */
     partial?: boolean;
-    /** The priority of the reload. The higher the priority, the sooner the reload will be scheduled relative to other reloads for the same tenant. */
-    priority?: Priority;
 };
 type Reloads = {
     data: Reload[];
@@ -216,4 +208,4 @@ interface ReloadsAPI {
  */
 declare const reloadsExport: ReloadsAPI;
 
-export { type CancelReloadHttpError, type CancelReloadHttpResponse, type Error, type Errors, type GetReloadHttpError, type GetReloadHttpResponse, type GetReloadsHttpError, type GetReloadsHttpResponse, type Href, type Partial, type Priority, type QueueReloadHttpError, type QueueReloadHttpResponse, type Reload, type ReloadLinks, type ReloadRequest, type Reloads, type ReloadsAPI, type ReloadsLinks, type Status, type Type, cancelReload, clearCache, reloadsExport as default, getReload, getReloads, queueReload };
+export { type CancelReloadHttpError, type CancelReloadHttpResponse, type Error, type Errors, type GetReloadHttpError, type GetReloadHttpResponse, type GetReloadsHttpError, type GetReloadsHttpResponse, type Href, type Partial, type QueueReloadHttpError, type QueueReloadHttpResponse, type Reload, type ReloadLinks, type ReloadRequest, type Reloads, type ReloadsAPI, type ReloadsLinks, type Status, type Type, cancelReload, clearCache, reloadsExport as default, getReload, getReloads, queueReload };

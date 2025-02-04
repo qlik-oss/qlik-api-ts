@@ -447,7 +447,7 @@ type SenseDataTemplate = {
  * Used to produce reports from a template file.
  */
 type SenseFileTemplate = {
-    /** A JSON object that is passed as-is to the mashup page while rendering, this will be applied to all charts within the sheet. It includes properties of the whole sheet such as theme, gradient etc. Currently only the "theme" property is supported. */
+    /** A JSON object that is passed as-is to the mashup page while rendering, this will be applied to all charts within the sheet. It includes properties of the whole sheet such as theme, gradient etc. Currently only the "theme" and "language" properties are supported. */
     jsOpts?: unknown;
     /** Choose the reloadTimestamp constraint to apply. An empty value leads to the default noCheck. */
     reloadTimestampMatchType?: ReloadTimestampMatchType;
