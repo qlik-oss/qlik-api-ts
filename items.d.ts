@@ -129,7 +129,7 @@ type ItemMetaResponseBody = {
 /**
  * The case-sensitive string defining the item's type.
  */
-type ItemResourceTypeEnum = "app" | "collection" | "qlikview" | "insight" | "qvapp" | "genericlink" | "sharingservicetask" | "note" | "dataasset" | "dataset" | "automation" | "automl-experiment" | "automl-deployment";
+type ItemResourceTypeEnum = "app" | "qlikview" | "qvapp" | "genericlink" | "sharingservicetask" | "note" | "dataasset" | "dataset" | "automation" | "automl-experiment" | "automl-deployment";
 /**
  * An item.
  */
