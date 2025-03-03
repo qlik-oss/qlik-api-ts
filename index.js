@@ -577,6 +577,10 @@ var spacesMiniModule = apiDefToApiPublic("spaces", {
           assignments: {
             "": ["getSpaceAssignments:GQ:", "createSpaceAssignment:PBJ:"],
             "{assignmentId}": ["deleteSpaceAssignment:D:", "getSpaceAssignment:G:", "updateSpaceAssignment:UBJ:"]
+          },
+          shares: {
+            "": ["getSpaceShares:GQ:", "createSpaceShare:PBJ:"],
+            "{shareId}": ["deleteSpaceShare:D:", "getSpaceShare:G:", "patchShare:ABJ:"]
           }
         }
       }

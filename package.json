@@ -14,11 +14,11 @@
     "enigma.js": "^2.14.0",
     "lodash": "^4.17.21",
     "nanoid": "^5.0.9",
-    "ws": "^8.18.0"
+    "ws": "^8.18.1"
   },
-  "packageManager": "pnpm@9.15.5",
+  "packageManager": "pnpm@10.4.1",
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "exports": {
     ".": "./index.js",

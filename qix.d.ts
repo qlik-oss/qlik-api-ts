@@ -1,7 +1,7 @@
 import { H as HostConfig } from './auth-types-PkN9CAF_.js';
 import './invoke-fetch-types-BXn-uSF5.js';
 
-declare const QIX_SCHEMA_VERSION = "12.2325.0";
+declare const QIX_SCHEMA_VERSION = "12.2351.0";
 type AlfaNumString = {
     /**
      * Calculated value.
@@ -4162,6 +4162,7 @@ type NxLibraryDimension = {
      * Alias of the dimension.
      */
     qAlias?: string;
+    qScriptGenerated?: boolean;
 };
 type NxLibraryDimensionDef = {
     /**
@@ -4186,6 +4187,7 @@ type NxLibraryDimensionDef = {
      * Alias of the dimension.
      */
     qAlias?: string;
+    qScriptGenerated?: boolean;
 };
 /**
  * Information about the library measure. Is the layout for _NxLibraryMeasureDef_.
@@ -4209,6 +4211,7 @@ type NxLibraryMeasure = {
      * This parameter is optional.
      */
     qNumFormat?: FieldAttributes;
+    qScriptGenerated?: boolean;
 };
 type NxLibraryMeasureDef = {
     /**
@@ -4247,6 +4250,7 @@ type NxLibraryMeasureDef = {
      * This parameter is optional.
      */
     qNumFormat?: FieldAttributes;
+    qScriptGenerated?: boolean;
 };
 type NxLinkedObjectInfo = {
     /**

@@ -253,6 +253,27 @@ type SpaceStatsResponse = {
 };
 /**
  * Get descriptive info for the specified data files.
+ * @example
+ * getDataFiles(
+ *   {
+ *     allowInternalFiles: false,
+ *     appId: "f34b91a1-0dc3-44ac-a847-51cb84122c84",
+ *     baseNameWildcard: "*SomeFileName*",
+ *     connectionId: "ee6a390c-5d33-11e8-9c2d-fa7ae01bbebc",
+ *     excludeFiles: false,
+ *     excludeSubFolders: false,
+ *     folderId: "ee6a390c-5d33-11e8-9c2d-fa7ae01bbebc",
+ *     folderPath: "some/folder",
+ *     includeAllSpaces: false,
+ *     includeFolders: false,
+ *     includeFolderStats: false,
+ *     limit: 5,
+ *     name: "MyFile.csv",
+ *     notOwnerId: "lDL4DIINndhL_iJkcbqWyJenuwizP-2D",
+ *     ownerId: "lDL4DIINndhL_iJkcbqWyJenuwizP-2D",
+ *     page: "NzlmNzI5NWMtZGJlZC00Y2Y4LThkNDAtMzQ5ZDU3YzNjMzQ1"
+ *   }
+ * )
  *
  * @param query an object with query parameters
  * @throws GetDataFilesHttpError
@@ -417,6 +438,18 @@ type DeleteDataFilesHttpError = {
 /**
  * The non-filtered list contains a set of hardcoded connections, along with one connection per team space that
  * the given user has access to.
+ * @example
+ * getDataFilesConnections(
+ *   {
+ *     appId: "f34b91a1-0dc3-44ac-a847-51cb84122c84",
+ *     includeSpaceStats: false,
+ *     limit: 5,
+ *     name: "MySenseApp",
+ *     page: "NzlmNzI5NWMtZGJlZC00Y2Y4LThkNDAtMzQ5ZDU3YzNjMzQ1",
+ *     personal: true,
+ *     spaceId: "617979737a9f56e49dea2e6e"
+ *   }
+ * )
  *
  * @param query an object with query parameters
  * @throws GetDataFilesConnectionsHttpError
@@ -455,6 +488,10 @@ type GetDataFilesConnectionsHttpError = {
 };
 /**
  * Get the built-in connection used by the engine to load/write data files given a connection ID.
+ * @example
+ * getDataFileConnection(
+ *   "ee6a390c-5d33-11e8-9c2d-fa7ae01bbebc"
+ * )
  *
  * @param id The ID of the connection.
  * @throws GetDataFileConnectionHttpError
@@ -489,6 +526,10 @@ type GetDataFilesQuotasHttpError = {
 /**
  * Delete the specified data file or folder.  Deleting a folder will also recursively delete all files and
  * subfolders that reside within the specified folder.
+ * @example
+ * deleteDataFile(
+ *   "ee6a390c-5d33-11e8-9c2d-fa7ae01bbebc"
+ * )
  *
  * @param id The ID of the data file or folder to delete.
  * @throws DeleteDataFileHttpError
@@ -506,6 +547,10 @@ type DeleteDataFileHttpError = {
 };
 /**
  * Get descriptive info for the specified data file.
+ * @example
+ * getDataFile(
+ *   "ee6a390c-5d33-11e8-9c2d-fa7ae01bbebc"
+ * )
  *
  * @param id The ID of the data file.
  * @throws GetDataFileHttpError
@@ -645,6 +690,27 @@ declare function clearCache(): void;
 interface DataFilesAPI {
     /**
      * Get descriptive info for the specified data files.
+     * @example
+     * getDataFiles(
+     *   {
+     *     allowInternalFiles: false,
+     *     appId: "f34b91a1-0dc3-44ac-a847-51cb84122c84",
+     *     baseNameWildcard: "*SomeFileName*",
+     *     connectionId: "ee6a390c-5d33-11e8-9c2d-fa7ae01bbebc",
+     *     excludeFiles: false,
+     *     excludeSubFolders: false,
+     *     folderId: "ee6a390c-5d33-11e8-9c2d-fa7ae01bbebc",
+     *     folderPath: "some/folder",
+     *     includeAllSpaces: false,
+     *     includeFolders: false,
+     *     includeFolderStats: false,
+     *     limit: 5,
+     *     name: "MyFile.csv",
+     *     notOwnerId: "lDL4DIINndhL_iJkcbqWyJenuwizP-2D",
+     *     ownerId: "lDL4DIINndhL_iJkcbqWyJenuwizP-2D",
+     *     page: "NzlmNzI5NWMtZGJlZC00Y2Y4LThkNDAtMzQ5ZDU3YzNjMzQ1"
+     *   }
+     * )
      *
      * @param query an object with query parameters
      * @throws GetDataFilesHttpError
@@ -677,6 +743,18 @@ interface DataFilesAPI {
     /**
      * The non-filtered list contains a set of hardcoded connections, along with one connection per team space that
      * the given user has access to.
+     * @example
+     * getDataFilesConnections(
+     *   {
+     *     appId: "f34b91a1-0dc3-44ac-a847-51cb84122c84",
+     *     includeSpaceStats: false,
+     *     limit: 5,
+     *     name: "MySenseApp",
+     *     page: "NzlmNzI5NWMtZGJlZC00Y2Y4LThkNDAtMzQ5ZDU3YzNjMzQ1",
+     *     personal: true,
+     *     spaceId: "617979737a9f56e49dea2e6e"
+     *   }
+     * )
      *
      * @param query an object with query parameters
      * @throws GetDataFilesConnectionsHttpError
@@ -684,6 +762,10 @@ interface DataFilesAPI {
     getDataFilesConnections: typeof getDataFilesConnections;
     /**
      * Get the built-in connection used by the engine to load/write data files given a connection ID.
+     * @example
+     * getDataFileConnection(
+     *   "ee6a390c-5d33-11e8-9c2d-fa7ae01bbebc"
+     * )
      *
      * @param id The ID of the connection.
      * @throws GetDataFileConnectionHttpError
@@ -698,6 +780,10 @@ interface DataFilesAPI {
     /**
      * Delete the specified data file or folder.  Deleting a folder will also recursively delete all files and
      * subfolders that reside within the specified folder.
+     * @example
+     * deleteDataFile(
+     *   "ee6a390c-5d33-11e8-9c2d-fa7ae01bbebc"
+     * )
      *
      * @param id The ID of the data file or folder to delete.
      * @throws DeleteDataFileHttpError
@@ -705,6 +791,10 @@ interface DataFilesAPI {
     deleteDataFile: typeof deleteDataFile;
     /**
      * Get descriptive info for the specified data file.
+     * @example
+     * getDataFile(
+     *   "ee6a390c-5d33-11e8-9c2d-fa7ae01bbebc"
+     * )
      *
      * @param id The ID of the data file.
      * @throws GetDataFileHttpError

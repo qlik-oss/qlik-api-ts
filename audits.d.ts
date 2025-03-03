@@ -156,7 +156,7 @@ type GetAuditsHttpError = {
  */
 declare const getArchivedAudits: (query: {
     /** Date to be used as filter and criteria during extraction. */
-    date?: string;
+    date: string;
 }, options?: ApiCallOptions) => Promise<GetArchivedAuditsHttpResponse>;
 type GetArchivedAuditsHttpResponse = {
     data: GetArchiveResult;

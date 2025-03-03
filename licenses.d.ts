@@ -1,6 +1,21 @@
 import { A as ApiCallOptions } from './invoke-fetch-types-BXn-uSF5.js';
 import './auth-types-PkN9CAF_.js';
 
+/**
+ * @example
+ * {
+ *   add: [
+ *     {
+ *       subject: "qlik\kalle",
+ *       type: "professional"
+ *     },
+ *     {
+ *       subject: "qlik\nalle",
+ *       type: "analyzer"
+ *     }
+ *   ]
+ * }
+ */
 type AssignmentsActionsAddRequest = {
     add: {
         /** User name */
@@ -14,6 +29,25 @@ type AssignmentsActionsAddRequest = {
         userId?: string;
     }[];
 };
+/**
+ * @example
+ * {
+ *   data: [
+ *     {
+ *       status: 201,
+ *       subject: "qlik\kalle",
+ *       type: "professional"
+ *     },
+ *     {
+ *       code: "LICENSES-011",
+ *       status: 403,
+ *       subject: "qlik\nalle",
+ *       title: "No available allotment error, No available allotment.",
+ *       type: "analyzer"
+ *     }
+ *   ]
+ * }
+ */
 type AssignmentsActionsAddResponse = {
     data: {
         /** Error code */
@@ -28,6 +62,17 @@ type AssignmentsActionsAddResponse = {
         type?: string;
     }[];
 };
+/**
+ * @example
+ * {
+ *   delete: [
+ *     {
+ *       subject: "qlik\malik",
+ *       type: "analyzer"
+ *     }
+ *   ]
+ * }
+ */
 type AssignmentsActionsDeleteRequest = {
     delete: {
         /** User subject */
@@ -36,6 +81,25 @@ type AssignmentsActionsDeleteRequest = {
         type: string;
     }[];
 };
+/**
+ * @example
+ * {
+ *   data: [
+ *     {
+ *       status: 200,
+ *       subject: "qlik\malik",
+ *       type: "professional"
+ *     },
+ *     {
+ *       code: "LICENSES-016",
+ *       status: 404,
+ *       subject: "qlik\no",
+ *       title: "Assignment not found.",
+ *       type: "analyzer"
+ *     }
+ *   ]
+ * }
+ */
 type AssignmentsActionsDeleteResponse = {
     data: {
         /** Error code */
@@ -50,6 +114,18 @@ type AssignmentsActionsDeleteResponse = {
         type?: string;
     }[];
 };
+/**
+ * @example
+ * {
+ *   update: [
+ *     {
+ *       sourceType: "analyzer",
+ *       subject: "qlik\malik",
+ *       type: "professional"
+ *     }
+ *   ]
+ * }
+ */
 type AssignmentsActionsUpdateRequest = {
     update: {
         /** The current user subject, in case that should be patched. */
@@ -62,6 +138,26 @@ type AssignmentsActionsUpdateRequest = {
         type?: string;
     }[];
 };
+/**
+ * @example
+ * {
+ *   data: [
+ *     {
+ *       sourceType: "analyzer",
+ *       status: 200,
+ *       subject: "qlik\malik",
+ *       type: "professional"
+ *     },
+ *     {
+ *       code: "LICENSES-016",
+ *       sourceType: "analyzer",
+ *       status: 404,
+ *       subject: "qlik/sara",
+ *       title: "Assignment not found."
+ *     }
+ *   ]
+ * }
+ */
 type AssignmentsActionsUpdateResponse = {
     data: {
         /** Error code */
@@ -80,6 +176,31 @@ type AssignmentsActionsUpdateResponse = {
         type?: string;
     }[];
 };
+/**
+ * @example
+ * {
+ *   data: [
+ *     {
+ *       created: "2020-12-03T09:24:48.114Z",
+ *       excess: false,
+ *       subject: "qlik\kalle",
+ *       type: "analyzer"
+ *     },
+ *     {
+ *       created: "2020-12-03T09:24:48.114Z",
+ *       subject: "qlik\nalle"
+ *     }
+ *   ],
+ *   links: {
+ *     next: {
+ *       href: "http://license/v1/licenses/assignments?limit=4&page=bmV4dDpGZ0FBQUFkZmFXUUFYOHBUcTlpM1U4UU1YWHZrQUE%3D"
+ *     },
+ *     prev: {
+ *       href: "http://license/v1/licenses/assignments?limit=4&page=cHJldjpGZ0FBQUFkZmFXUUFYOHBUcTlpM1U4UU1YWHZ0QUE%3D"
+ *     }
+ *   }
+ * }
+ */
 type AssignmentsResponse = {
     data: {
         /** Assignment created date. */
@@ -124,6 +245,19 @@ type ConsumptionEventsResponse = {
         prev?: Href;
     };
 };
+/**
+ * @example
+ * {
+ *   error: "util.Error",
+ *   errors: [
+ *     {
+ *       code: "LICENSES-123",
+ *       title: "error title"
+ *     }
+ *   ],
+ *   message: "error message"
+ * }
+ */
 type ErrorResponse = {
     /** @deprecated
      * Error type */
@@ -144,6 +278,43 @@ type Href = {
     /** link */
     href?: string;
 };
+/**
+ * @example
+ * {
+ *   allotments: [
+ *     {
+ *       name: "analyzer_time",
+ *       overage: 100,
+ *       units: 300,
+ *       unitsUsed: 242,
+ *       usageClass: "time"
+ *     },
+ *     {
+ *       name: "professional",
+ *       units: 200,
+ *       unitsUsed: 15,
+ *       usageClass: "assigned"
+ *     }
+ *   ],
+ *   licenseKey: "hejhbGciOiJSUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6IktFWTEifQ.eyJqdGkiOiIxZjZkZTc0Zi04MDcyLTRjMTQtYjc1OS02ZjlkYmJmYWM5MjAiLCJsaWNlbnNlIjoiOTk5OTAwMDAwMDAwMTIzNCJ9.fwa6l6gY1MR_Ja2OMnV65V68fbzQYW5OAKUFnLfG9oZjNAbjhdDkZvS2S2zHaBnSrSva1ARh5iq_S0KTBOKKcJJDTb7jRVURyaAvbCuBDk_0ITrUudHaT9U_Mc9EKkfT8mR6vthhZxVzEhyYPFS7gDw7M6bav2ntpDsoJFPgous",
+ *   licenseNumber: "9999000000001204",
+ *   origin: "Internal",
+ *   parameters: [
+ *     {
+ *       name: "qlikAlerting",
+ *       valid: "./.",
+ *       values: {
+ *         "saas_alerting": "FULL"
+ *       }
+ *     }
+ *   ],
+ *   product: "Qlik Sense Enterprise SaaS",
+ *   secondaryNumber: "12345",
+ *   status: "Ok",
+ *   trial: false,
+ *   valid: "2018-01-01/2018-12-31"
+ * }
+ */
 type LicenseOverview = {
     allotments: {
         name: "professional" | "analyzer" | "analyzer_time";
@@ -153,6 +324,8 @@ type LicenseOverview = {
         unitsUsed: number;
         usageClass: string;
     }[];
+    /** the capability bank id */
+    capabilityBankId?: string;
     /** An ISO 8601 timestamp for when the license was last changed. */
     changeTime?: string;
     /** An ISO 8601 timestamp for when the latest time the license has been known to be valid, a missing value indicates the indefinite future. */
@@ -191,6 +364,17 @@ type LicenseOverview = {
     /** Period that the license is currently set to be active. Represented as an ISO 8601 time interval with start and end. */
     valid: string;
 };
+/**
+ * @example
+ * {
+ *   origin: "Internal",
+ *   product: "Qlik Sense Business",
+ *   status: "Ok",
+ *   trial: false,
+ *   type: "Signed",
+ *   valid: "2018-01-01/2018-12-31"
+ * }
+ */
 type LicenseStatus = {
     /** Origin of license key. */
     origin: "Internal" | "External";
@@ -205,6 +389,13 @@ type LicenseStatus = {
     /** Period that the license is currently set to be active. Represented as an ISO 8601 time interval with start and end. */
     valid: string;
 };
+/**
+ * @example
+ * {
+ *   autoAssignAnalyzer: true,
+ *   autoAssignProfessional: false
+ * }
+ */
 type SettingsBody = {
     /** If analyzer users are available, they will be automatically assigned. Otherwise, analyzer capacity will be assigned, if available. */
     autoAssignAnalyzer?: boolean;

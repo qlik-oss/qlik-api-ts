@@ -4,7 +4,7 @@ import './auth-types-PkN9CAF_.js';
 /**
  * The supported actions for user-created spaces.
  */
-type ActionName = "change_owner" | "create" | "read" | "update" | "delete" | "publish";
+type ActionName = "change_owner" | "create" | "read" | "update" | "delete" | "publish" | "link_environment";
 type Assignment = {
     /** The userId or groupId based on the type. */
     assigneeId: string;
@@ -57,32 +57,6 @@ type Assignments = {
         /** The total number of assignments matching the current filter. */
         count: number;
     };
-};
-/**
- * An Environment is an environment context simplifying the grouping of spaces into environments by allowing users to control it on the environment instead of on the spaces themselves.
- */
-type Environment = {
-    /** The date and time when the environment was created. */
-    readonly createdAt?: string;
-    /** The ID of the user who created the environment. */
-    readonly createdBy?: string;
-    /** The description of the environment. */
-    description?: string;
-    /** A unique identifier for the environment, for example, 62716f4b39b865ece543cd45. */
-    readonly id: string;
-    readonly links: {
-        self: Link;
-    };
-    /** The name of the environment. */
-    name: string;
-    /** The ID for the environment owner. */
-    readonly ownerId?: string;
-    /** The ID for the tenant, for example, xqGQ0k66vSR8f9G7J-vYtHZQkiYrCpct. */
-    readonly tenantId: string;
-    /** The date and time when the environment was updated. */
-    readonly updatedAt?: string;
-    /** The name of the environment. */
-    variables?: Variable[];
 };
 /**
  * An error object.
@@ -140,10 +114,78 @@ type Link = {
  * - Data: consumer, dataconsumer, datapreview, facilitator, operator, producer, publisher
  */
 type RoleType = "consumer" | "contributor" | "dataconsumer" | "datapreview" | "facilitator" | "operator" | "producer" | "publisher" | "basicconsumer" | "codeveloper";
+type Share = {
+    /** The userId or groupId based on the type. */
+    assigneeId: string;
+    readonly createdAt?: string;
+    /** The ID of the user who created the share. */
+    readonly createdBy?: string;
+    /** If the share is disabled (effective ONLY for link shares). */
+    disabled?: boolean;
+    readonly id: string;
+    readonly links?: {
+        self: Link;
+        space?: Link;
+    };
+    /** The ID of the shared resource. */
+    resourceId: string;
+    /** The name of the shared resource. */
+    resourceName?: string;
+    /** The type of the shared resource. */
+    resourceType: "app";
+    /** The roles assigned to the assigneeId. */
+    roles?: ShareRoleType[];
+    readonly spaceId: string;
+    readonly tenantId: string;
+    type: ShareType;
+    readonly updatedAt?: string;
+    /** The ID of the user who updated the share. */
+    readonly updatedBy?: string;
+};
+type ShareCreate = {
+    /** The userId or groupId based on the type. */
+    assigneeId: string;
+    /** The resource id for the shared item. */
+    resourceId: string;
+    /** The resource type for the shared item. */
+    resourceType: string;
+    /** The roles assigned to the assigneeId. */
+    roles: ShareRoleType[];
+    type: ShareType;
+};
+type SharePatch = {
+    /** The operation to be performed. */
+    op: "replace";
+    /** Field of Share to be patched (updated). */
+    path: "/roles" | "/disabled";
+    /** The value to be used within the operations.
+     * - roles: The roles assigned to the assigneeId.
+     * - disabled: To disable the share (effective ONLY for link shares). */
+    value: string;
+}[];
+/**
+ * Supported roles by space type:
+ * - Shared: consumer
+ * - Managed: consumer, contributor
+ */
+type ShareRoleType = unknown;
+type ShareType = "user" | "group" | "link";
 /**
  * The supported roles for Shared spaces.
  */
 type SharedSpaceRoleType = "facilitator" | "consumer" | "producer" | "dataconsumer" | "codeveloper";
+type Shares = {
+    data?: Share[];
+    readonly links?: {
+        next?: Link;
+        prev?: Link;
+        self: Link;
+    };
+    readonly meta?: {
+        /** The total number of Shares matching the current filter. */
+        count: number;
+    };
+};
 /**
  * A space is a security context simplifying the management of access control by allowing users to control it on the containers instead of on the resources themselves.
  */
@@ -154,8 +196,6 @@ type Space = {
     readonly createdBy?: string;
     /** The description of the space. Personal spaces do not have a description. */
     description?: string;
-    /** An Environment is an environment context simplifying the grouping of spaces into environments by allowing users to control it on the environment instead of on the spaces themselves. */
-    environment?: Environment;
     /** A unique identifier for the space, for example, 62716f4b39b865ece543cd45. */
     readonly id: string;
     readonly links: {
@@ -238,12 +278,6 @@ type Spaces = {
         };
     };
 };
-type Variable = {
-    /** The Key */
-    readonly key?: string;
-    /** The value. */
-    readonly value?: string;
-};
 /**
  * Retrieves spaces that the current user has access to and match the query.
  *
@@ -316,7 +350,7 @@ type GetSpaceTypesHttpError = {
     status: 401 | 500;
 };
 /**
- * Deletes a space.
+ * Deletes a space. Ensure that you first delete all resources from the space to avoid orphaning content.
  *
  * @param spaceId The ID of the space to delete.
  * @throws DeleteSpaceHttpError
@@ -490,6 +524,118 @@ type UpdateSpaceAssignmentHttpError = {
     status: 401 | 403 | 404 | 500;
 };
 /**
+ * Retrieves the shares of the space matching the query.
+ *
+ * @param spaceId The ID of the space containing the shares.
+ * @param query an object with query parameters
+ * @throws GetSpaceSharesHttpError
+ */
+declare const getSpaceShares: (spaceId: string, query: {
+    /** The ID of the group to which the resource is shared. */
+    groupId?: string;
+    /** Maximum number of shares to return. */
+    limit?: number;
+    /** The name of the shared resource. */
+    name?: string;
+    /** The next page cursor. Next links make use of this. */
+    next?: string;
+    /** The previous page cursor. Previous links make use of this. */
+    prev?: string;
+    /** The ID of the shared resource. */
+    resourceId?: string;
+    /** The type of the shared resource. */
+    resourceType?: string;
+    /** The type of share. `user` shares assign to a specific user, `group` shares assign to a specific group, and `link` shares provide anonymous access to a resource. */
+    type?: ShareType;
+    /** The ID of the user to which the resource is shared. */
+    userId?: string;
+}, options?: ApiCallOptions) => Promise<GetSpaceSharesHttpResponse>;
+type GetSpaceSharesHttpResponse = {
+    data: Shares;
+    headers: Headers;
+    status: 200;
+    prev?: (options?: ApiCallOptions) => Promise<GetSpaceSharesHttpResponse>;
+    next?: (options?: ApiCallOptions) => Promise<GetSpaceSharesHttpResponse>;
+};
+type GetSpaceSharesHttpError = {
+    data: Errors;
+    headers: Headers;
+    status: 401 | 403 | 404 | 500;
+};
+/**
+ * Create a space share
+ *
+ * @param spaceId The ID of the space of the share.
+ * @param body an object with the body content
+ * @throws CreateSpaceShareHttpError
+ */
+declare const createSpaceShare: (spaceId: string, body: ShareCreate, options?: ApiCallOptions) => Promise<CreateSpaceShareHttpResponse>;
+type CreateSpaceShareHttpResponse = {
+    data: Share;
+    headers: Headers;
+    status: 201;
+};
+type CreateSpaceShareHttpError = {
+    data: Errors;
+    headers: Headers;
+    status: 401 | 403 | 404 | 409 | 500;
+};
+/**
+ * Deletes a space share.
+ *
+ * @param spaceId The ID of the space to which the share belongs.
+ * @param shareId The ID of the share to delete.
+ * @throws DeleteSpaceShareHttpError
+ */
+declare const deleteSpaceShare: (spaceId: string, shareId: string, options?: ApiCallOptions) => Promise<DeleteSpaceShareHttpResponse>;
+type DeleteSpaceShareHttpResponse = {
+    data: void;
+    headers: Headers;
+    status: 204;
+};
+type DeleteSpaceShareHttpError = {
+    data: Errors;
+    headers: Headers;
+    status: 401 | 403 | 404 | 500;
+};
+/**
+ * Retrieves a single space share by ID.
+ *
+ * @param spaceId The ID of the space to which the share belongs.
+ * @param shareId The ID of the share to retrieve.
+ * @throws GetSpaceShareHttpError
+ */
+declare const getSpaceShare: (spaceId: string, shareId: string, options?: ApiCallOptions) => Promise<GetSpaceShareHttpResponse>;
+type GetSpaceShareHttpResponse = {
+    data: Share;
+    headers: Headers;
+    status: 200;
+};
+type GetSpaceShareHttpError = {
+    data: Errors;
+    headers: Headers;
+    status: 401 | 403 | 404 | 500;
+};
+/**
+ * Updates properties of a space share (roles, and disabled state for link shares).
+ *
+ * @param spaceId The ID of the space to which the share belongs.
+ * @param shareId The ID of the share to update.
+ * @param body an object with the body content
+ * @throws PatchShareHttpError
+ */
+declare const patchShare: (spaceId: string, shareId: string, body: SharePatch, options?: ApiCallOptions) => Promise<PatchShareHttpResponse>;
+type PatchShareHttpResponse = {
+    data: Share;
+    headers: Headers;
+    status: 200;
+};
+type PatchShareHttpError = {
+    data: Errors;
+    headers: Headers;
+    status: 401 | 403 | 404 | 500;
+};
+/**
  * Clears the cache for spaces api requests.
  */
 declare function clearCache(): void;
@@ -515,7 +661,7 @@ interface SpacesAPI {
      */
     getSpaceTypes: typeof getSpaceTypes;
     /**
-     * Deletes a space.
+     * Deletes a space. Ensure that you first delete all resources from the space to avoid orphaning content.
      *
      * @param spaceId The ID of the space to delete.
      * @throws DeleteSpaceHttpError
@@ -586,6 +732,47 @@ interface SpacesAPI {
      */
     updateSpaceAssignment: typeof updateSpaceAssignment;
     /**
+     * Retrieves the shares of the space matching the query.
+     *
+     * @param spaceId The ID of the space containing the shares.
+     * @param query an object with query parameters
+     * @throws GetSpaceSharesHttpError
+     */
+    getSpaceShares: typeof getSpaceShares;
+    /**
+     * Create a space share
+     *
+     * @param spaceId The ID of the space of the share.
+     * @param body an object with the body content
+     * @throws CreateSpaceShareHttpError
+     */
+    createSpaceShare: typeof createSpaceShare;
+    /**
+     * Deletes a space share.
+     *
+     * @param spaceId The ID of the space to which the share belongs.
+     * @param shareId The ID of the share to delete.
+     * @throws DeleteSpaceShareHttpError
+     */
+    deleteSpaceShare: typeof deleteSpaceShare;
+    /**
+     * Retrieves a single space share by ID.
+     *
+     * @param spaceId The ID of the space to which the share belongs.
+     * @param shareId The ID of the share to retrieve.
+     * @throws GetSpaceShareHttpError
+     */
+    getSpaceShare: typeof getSpaceShare;
+    /**
+     * Updates properties of a space share (roles, and disabled state for link shares).
+     *
+     * @param spaceId The ID of the space to which the share belongs.
+     * @param shareId The ID of the share to update.
+     * @param body an object with the body content
+     * @throws PatchShareHttpError
+     */
+    patchShare: typeof patchShare;
+    /**
      * Clears the cache for spaces api requests.
      */
     clearCache: typeof clearCache;
@@ -595,4 +782,4 @@ interface SpacesAPI {
  */
 declare const spacesExport: SpacesAPI;
 
-export { type ActionName, type Assignment, type AssignmentCreate, type AssignmentType, type AssignmentUpdate, type Assignments, type CreateSpaceAssignmentHttpError, type CreateSpaceAssignmentHttpResponse, type CreateSpaceHttpError, type CreateSpaceHttpResponse, type DeleteSpaceAssignmentHttpError, type DeleteSpaceAssignmentHttpResponse, type DeleteSpaceHttpError, type DeleteSpaceHttpResponse, type Environment, type Error, type Errors, type GetSpaceAssignmentHttpError, type GetSpaceAssignmentHttpResponse, type GetSpaceAssignmentsHttpError, type GetSpaceAssignmentsHttpResponse, type GetSpaceHttpError, type GetSpaceHttpResponse, type GetSpaceTypesHttpError, type GetSpaceTypesHttpResponse, type GetSpacesHttpError, type GetSpacesHttpResponse, type Link, type PatchSpaceHttpError, type PatchSpaceHttpResponse, type RoleType, type SharedSpaceRoleType, type Space, type SpaceCreate, type SpacePatch, type SpaceType, type SpaceTypes, type SpaceUpdate, type Spaces, type SpacesAPI, type UpdateSpaceAssignmentHttpError, type UpdateSpaceAssignmentHttpResponse, type UpdateSpaceHttpError, type UpdateSpaceHttpResponse, type Variable, clearCache, createSpace, createSpaceAssignment, spacesExport as default, deleteSpace, deleteSpaceAssignment, getSpace, getSpaceAssignment, getSpaceAssignments, getSpaceTypes, getSpaces, patchSpace, updateSpace, updateSpaceAssignment };
+export { type ActionName, type Assignment, type AssignmentCreate, type AssignmentType, type AssignmentUpdate, type Assignments, type CreateSpaceAssignmentHttpError, type CreateSpaceAssignmentHttpResponse, type CreateSpaceHttpError, type CreateSpaceHttpResponse, type CreateSpaceShareHttpError, type CreateSpaceShareHttpResponse, type DeleteSpaceAssignmentHttpError, type DeleteSpaceAssignmentHttpResponse, type DeleteSpaceHttpError, type DeleteSpaceHttpResponse, type DeleteSpaceShareHttpError, type DeleteSpaceShareHttpResponse, type Error, type Errors, type GetSpaceAssignmentHttpError, type GetSpaceAssignmentHttpResponse, type GetSpaceAssignmentsHttpError, type GetSpaceAssignmentsHttpResponse, type GetSpaceHttpError, type GetSpaceHttpResponse, type GetSpaceShareHttpError, type GetSpaceShareHttpResponse, type GetSpaceSharesHttpError, type GetSpaceSharesHttpResponse, type GetSpaceTypesHttpError, type GetSpaceTypesHttpResponse, type GetSpacesHttpError, type GetSpacesHttpResponse, type Link, type PatchShareHttpError, type PatchShareHttpResponse, type PatchSpaceHttpError, type PatchSpaceHttpResponse, type RoleType, type Share, type ShareCreate, type SharePatch, type ShareRoleType, type ShareType, type SharedSpaceRoleType, type Shares, type Space, type SpaceCreate, type SpacePatch, type SpaceType, type SpaceTypes, type SpaceUpdate, type Spaces, type SpacesAPI, type UpdateSpaceAssignmentHttpError, type UpdateSpaceAssignmentHttpResponse, type UpdateSpaceHttpError, type UpdateSpaceHttpResponse, clearCache, createSpace, createSpaceAssignment, createSpaceShare, spacesExport as default, deleteSpace, deleteSpaceAssignment, deleteSpaceShare, getSpace, getSpaceAssignment, getSpaceAssignments, getSpaceShare, getSpaceShares, getSpaceTypes, getSpaces, patchShare, patchSpace, updateSpace, updateSpaceAssignment };

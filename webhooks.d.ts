@@ -10,7 +10,7 @@ type Delivery = {
         /** The sent body/payload of the delivery */
         body?: unknown;
         /** Headers sent for this delivery */
-        headers?: unknown;
+        headers?: Record<string, string>;
         /** URL used for this delivery */
         url?: string;
     };
@@ -18,7 +18,7 @@ type Delivery = {
         /** The received body of the delivery */
         body?: string;
         /** Headers received for this delivery */
-        headers?: unknown;
+        headers?: Record<string, string>;
         /** The HTTP status code of the response */
         statusCode?: number;
     };
@@ -94,7 +94,7 @@ type WebhookBase = {
      * For more detailed information regarding the SCIM filter syntax (RFC7644) used please follow the link to external documentation. */
     filter?: string;
     /** Additional headers in the post request */
-    headers?: unknown;
+    headers?: Record<string, string>;
     /** The webhook's unique identifier */
     readonly id?: string;
     /** Defines at what level the webhook should operate: for all resources belonging to a tenant or restricted to only those accessible by the webhook-creator. */

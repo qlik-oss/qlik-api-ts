@@ -25,6 +25,16 @@ type Error = {
 };
 /**
  * The error response object describing the error from the handling of an HTTP request.
+ * @example
+ * {
+ *   errors: [
+ *     {
+ *       code: "TENANTS-8",
+ *       title: "Not found"
+ *     }
+ *   ],
+ *   traceId: "000000000000000079cf1ebeae103de1"
+ * }
  */
 type Errors = {
     /** An array of errors related to the operation. */
@@ -62,6 +72,16 @@ type WebIntegrationPatch = {
     /** New value to be used for this operation. */
     value: string;
 };
+/**
+ * @example
+ * [
+ *   {
+ *     op: "replace",
+ *     path: "/name",
+ *     value: "New name"
+ *   }
+ * ]
+ */
 type WebIntegrationPatchSchema = WebIntegrationPatch[];
 /**
  * The creation of a web integration response.

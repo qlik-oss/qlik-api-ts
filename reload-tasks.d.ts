@@ -6,10 +6,28 @@ type Error = {
     detail?: string;
     title: string;
 };
+/**
+ * @example
+ * {
+ *   errors: [
+ *     {
+ *       code: "TASKS-123",
+ *       title: "short error message"
+ *     }
+ *   ],
+ *   traceId: "7975401f3954aa47"
+ * }
+ */
 type Errors = {
     errors?: Error[];
     traceId?: string;
 };
+/**
+ * @example
+ * {
+ *   href: "http://example.com"
+ * }
+ */
 type Href = {
     href: string;
 };
@@ -43,6 +61,8 @@ type Task = TaskBase & {
     /** @deprecated
      * The reason why the task was disabled. */
     log?: string;
+    /** A flag indicating whether the task has been migrated to the new scheduling service. */
+    migrated?: boolean;
     /** The next time the task will execute. */
     nextExecutionTime?: string;
     /** The space ID of the application */

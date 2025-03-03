@@ -89,7 +89,27 @@ type ApiKeysConfig = {
     /** The expiry of the scim `externalClient` token in ISO8601 duration format, e.g. `P365D` for 365 days. Used during the creation of an `externalClient` API key for configuring a SCIM compatible Identity Provider. */
     scim_externalClient_expiry?: string;
 };
+/**
+ * @example
+ * [
+ *   {
+ *     op: "replace",
+ *     path: "/api_keys_enabled",
+ *     value: true
+ *   }
+ * ]
+ */
 type ApiKeysConfigPatchSchema = ApiKeyConfigPatch[];
+/**
+ * @example
+ * [
+ *   {
+ *     op: "replace",
+ *     path: "/description",
+ *     value: "my new description"
+ *   }
+ * ]
+ */
 type ApiKeysPatchSchema = ApiKeyPatch[];
 /**
  * An error object.

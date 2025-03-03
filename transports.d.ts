@@ -72,6 +72,15 @@ type EmailConfigFieldPatch = {
     /** The value to be used for this operation. */
     value: string;
 };
+/**
+ * @example
+ * [
+ *   {
+ *     path: "/username",
+ *     value: "New name"
+ *   }
+ * ]
+ */
 type EmailConfigPatch = EmailConfigFieldPatch[];
 type GetBasicAuthConfig = {
     /** The email address that should appear in From field when sending emails with this account */

@@ -25,7 +25,7 @@ type DataAsset = {
     /** The value is automatically set by the application. */
     ownerId?: string;
     /** A Map of name-value pairs. */
-    properties?: unknown;
+    properties?: Record<string, unknown>;
     spaceId?: string;
     tags?: string[];
     technicalDescription?: string;

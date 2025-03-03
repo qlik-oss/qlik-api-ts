@@ -25,6 +25,16 @@ type Error = {
 };
 /**
  * The error response object describing the error from the handling of an HTTP request.
+ * @example
+ * {
+ *   errors: [
+ *     {
+ *       code: "TENANTS-8",
+ *       title: "Not found"
+ *     }
+ *   ],
+ *   traceId: "000000000000000079cf1ebeae103de1"
+ * }
  */
 type Errors = {
     /** An array of errors related to the operation. */
@@ -43,6 +53,7 @@ type Tenant = {
     /** The datacenter where the tenant is located. */
     datacenter?: string;
     enableAnalyticCreation?: boolean;
+    enableAppOpeningFeedback?: boolean;
     /** List of case insensitive hostnames that are mapped to the tenant. The first record maps to the display name and the subsequent entries are aliases. */
     hostnames?: string[];
     /** The unique tenant identifier. */
@@ -116,11 +127,46 @@ type TenantPatchErrors = {
         title: string;
     }[];
 };
+/**
+ * @example
+ * [
+ *   {
+ *     op: "replace",
+ *     path: "/name",
+ *     value: "Corp"
+ *   },
+ *   {
+ *     op: "replace",
+ *     path: "/hostnames/1",
+ *     value: "example-tenant.us.qlikcloud.com"
+ *   },
+ *   {
+ *     op: "replace",
+ *     path: "/autoAssignCreateSharedSpacesRoleToProfessionals",
+ *     value: true
+ *   },
+ *   {
+ *     op: "replace",
+ *     path: "/autoAssignPrivateAnalyticsContentCreatorRoleToProfessionals",
+ *     value: false
+ *   },
+ *   {
+ *     op: "replace",
+ *     path: "/autoAssignDataServicesContributorRoleToProfessionals",
+ *     value: true
+ *   },
+ *   {
+ *     op: "replace",
+ *     path: "/enableAnalyticCreation",
+ *     value: false
+ *   }
+ * ]
+ */
 type TenantPatchSchema = {
     /** The operation to be performed. */
     op: "replace";
     /** A JSON Pointer value that references a location within the target document where the operation is performed. */
-    path: "/name" | "/hostnames/1" | "/autoAssignCreateSharedSpacesRoleToProfessionals" | "/autoAssignPrivateAnalyticsContentCreatorRoleToProfessionals" | "/autoAssignDataServicesContributorRoleToProfessionals" | "/enableAnalyticCreation";
+    path: "/name" | "/hostnames/1" | "/autoAssignCreateSharedSpacesRoleToProfessionals" | "/autoAssignPrivateAnalyticsContentCreatorRoleToProfessionals" | "/autoAssignDataServicesContributorRoleToProfessionals" | "/enableAnalyticCreation" | "/enableAppOpeningFeedback";
     /** The value to be used for this operation. */
     value: string | boolean;
 }[];
