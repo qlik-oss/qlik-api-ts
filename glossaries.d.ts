@@ -14,6 +14,19 @@ type JSONPatch = {
 };
 /**
  * An array of JSON Patch documents
+ * @example
+ * [
+ *   {
+ *     op: "replace",
+ *     path: "/name",
+ *     value: "new name"
+ *   },
+ *   {
+ *     op: "replace",
+ *     path: "/description",
+ *     value: "new description"
+ *   }
+ * ]
  */
 type JSONPatchArray = JSONPatch[];
 type AtlanEntity = {
@@ -866,7 +879,7 @@ type UpdateGlossaryTermHttpError = {
  */
 declare const changeGlossaryTermStatus: (id: string, termId: string, query: {
     /** The status to update to. */
-    status?: "draft" | "verified" | "deprecated";
+    status: "draft" | "verified" | "deprecated";
 }, options?: ApiCallOptions) => Promise<ChangeGlossaryTermStatusHttpResponse>;
 type ChangeGlossaryTermStatusHttpResponse = {
     data: Term;

@@ -70,6 +70,13 @@ type NotificationPatch = {
 };
 /**
  * An array of JSON Patch documents
+ * @example
+ * [
+ *   {
+ *     op: "replace",
+ *     path: "/read"
+ *   }
+ * ]
  */
 type NotificationPatchSchema = NotificationPatch[];
 type Notifications = {
@@ -81,6 +88,12 @@ type Notifications = {
 };
 /**
  * Retrieve notifications matching the query.
+ * @example
+ * getNotifications(
+ *   {
+ *     resourceType: "app,space"
+ *   }
+ * )
  *
  * @param query an object with query parameters
  * @throws GetNotificationsHttpError
@@ -201,6 +214,12 @@ declare function clearCache(): void;
 interface WebNotificationsAPI {
     /**
      * Retrieve notifications matching the query.
+     * @example
+     * getNotifications(
+     *   {
+     *     resourceType: "app,space"
+     *   }
+     * )
      *
      * @param query an object with query parameters
      * @throws GetNotificationsHttpError

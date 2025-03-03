@@ -265,6 +265,8 @@ type PatchRequest = {
 };
 /**
  * Access type allowed on associated data connection
+ * @example
+ * "list"
  */
 type Privilege = "list" | "update" | "delete" | "read" | "change_owner" | "change_space";
 type ResponseErrors = {
@@ -289,6 +291,25 @@ type TopLevelLink = {
 };
 /**
  * Gets a list of connections
+ * @example
+ * getDataConnections(
+ *   {
+ *     dataName: "data",
+ *     extended: false,
+ *     spaceId: "611bcebaeec1203d88211ac4",
+ *     personal: false,
+ *     owner: "928e2a66-01ba-4678-aa32-e74c213896fa",
+ *     ownedByMe: true,
+ *     limit: 30,
+ *     sort: "+qName",
+ *     page: "page=JwAAAAljcmVhdGVkAPfQ-sx0AQAAB19pZABfb93nZcM4SN1M0e8A",
+ *     noDatafiles: true,
+ *     userId: "6K9xjsItDexffolu5vg1oWYkY8x7f-0G",
+ *     caseinsensitive: true,
+ *     locale: "en",
+ *     includeQris: true
+ *   }
+ * )
  *
  * @param query an object with query parameters
  * @throws GetDataConnectionsHttpError
@@ -407,6 +428,14 @@ type UpdateDataConnectionsHttpError = {
 };
 /**
  * Deletes the specified data connection by ID (or by name when type=connectionname is set in query)
+ * @example
+ * deleteDataConnection(
+ *   "82ee7b44-0c4d-491b-bd38-82640c0430a5",
+ *   {
+ *     type: "connectionname",
+ *     spaceId: "611bcebaeec1203d88211ac4"
+ *   }
+ * )
  *
  * @param qID Connection ID
  * @param query an object with query parameters
@@ -430,6 +459,19 @@ type DeleteDataConnectionHttpError = {
 };
 /**
  * Retrieves a connection by connection ID, or by name when the query parameter "type" is set to "connectionname."
+ * @example
+ * getDataConnection(
+ *   "82ee7b44-0c4d-491b-bd38-82640c0430a5",
+ *   {
+ *     extended: false,
+ *     type: "connectionname",
+ *     credentialId: "22379dc5-076e-4fec-ae20-5529a8a57dc2",
+ *     byCredentialName: false,
+ *     spaceId: "611bcebaeec1203d88211ac4",
+ *     noCache: false,
+ *     parseConnection: true
+ *   }
+ * )
  *
  * @param qID Connection ID
  * @param query an object with query parameters
@@ -514,6 +556,25 @@ declare function clearCache(): void;
 interface DataConnectionsAPI {
     /**
      * Gets a list of connections
+     * @example
+     * getDataConnections(
+     *   {
+     *     dataName: "data",
+     *     extended: false,
+     *     spaceId: "611bcebaeec1203d88211ac4",
+     *     personal: false,
+     *     owner: "928e2a66-01ba-4678-aa32-e74c213896fa",
+     *     ownedByMe: true,
+     *     limit: 30,
+     *     sort: "+qName",
+     *     page: "page=JwAAAAljcmVhdGVkAPfQ-sx0AQAAB19pZABfb93nZcM4SN1M0e8A",
+     *     noDatafiles: true,
+     *     userId: "6K9xjsItDexffolu5vg1oWYkY8x7f-0G",
+     *     caseinsensitive: true,
+     *     locale: "en",
+     *     includeQris: true
+     *   }
+     * )
      *
      * @param query an object with query parameters
      * @throws GetDataConnectionsHttpError
@@ -549,6 +610,14 @@ interface DataConnectionsAPI {
     updateDataConnections: typeof updateDataConnections;
     /**
      * Deletes the specified data connection by ID (or by name when type=connectionname is set in query)
+     * @example
+     * deleteDataConnection(
+     *   "82ee7b44-0c4d-491b-bd38-82640c0430a5",
+     *   {
+     *     type: "connectionname",
+     *     spaceId: "611bcebaeec1203d88211ac4"
+     *   }
+     * )
      *
      * @param qID Connection ID
      * @param query an object with query parameters
@@ -557,6 +626,19 @@ interface DataConnectionsAPI {
     deleteDataConnection: typeof deleteDataConnection;
     /**
      * Retrieves a connection by connection ID, or by name when the query parameter "type" is set to "connectionname."
+     * @example
+     * getDataConnection(
+     *   "82ee7b44-0c4d-491b-bd38-82640c0430a5",
+     *   {
+     *     extended: false,
+     *     type: "connectionname",
+     *     credentialId: "22379dc5-076e-4fec-ae20-5529a8a57dc2",
+     *     byCredentialName: false,
+     *     spaceId: "611bcebaeec1203d88211ac4",
+     *     noCache: false,
+     *     parseConnection: true
+     *   }
+     * )
      *
      * @param qID Connection ID
      * @param query an object with query parameters

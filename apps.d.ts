@@ -526,6 +526,48 @@ type FilterListItem = {
     readonly ownerId?: string;
     readonly updatedAt?: string;
 };
+/**
+ * @example
+ * {
+ *   description: "this is a filter sample",
+ *   filterType: "REP",
+ *   filterV1_0: {
+ *     fieldsByState: {
+ *       "$": [
+ *         {
+ *           name: "Country",
+ *           overrideValues: false,
+ *           selectExcluded: false,
+ *           values: [
+ *             {
+ *               valueAsText: "1-Argentina",
+ *               valueType: "string"
+ *             },
+ *             {
+ *               valueAsText: "4-Brazil",
+ *               valueType: "string"
+ *             }
+ *           ]
+ *         },
+ *         {
+ *           name: "Order number",
+ *           overrideValues: false,
+ *           selectExcluded: false,
+ *           values: [
+ *             {
+ *               valueAsNumber: 61300,
+ *               valueAsText: "61300",
+ *               valueType: "number"
+ *             }
+ *           ]
+ *         }
+ *       ]
+ *     }
+ *   },
+ *   filterVersion: "filter-1.0",
+ *   name: "Filter sample"
+ * }
+ */
 type FilterRequest = {
     /** The App ID. */
     appId?: string;
@@ -540,9 +582,45 @@ type FilterRequest = {
     ownerId?: string;
 };
 type FilterType = "REP" | "SUB";
+/**
+ * @example
+ * {
+ *   fieldsByState: {
+ *     "$": [
+ *       {
+ *         name: "Country",
+ *         overrideValues: false,
+ *         selectExcluded: false,
+ *         values: [
+ *           {
+ *             valueAsText: "1-Argentina",
+ *             valueType: "string"
+ *           },
+ *           {
+ *             valueAsText: "4-Brazil",
+ *             valueType: "string"
+ *           }
+ *         ]
+ *       },
+ *       {
+ *         name: "Order number",
+ *         overrideValues: false,
+ *         selectExcluded: false,
+ *         values: [
+ *           {
+ *             valueAsNumber: 61300,
+ *             valueAsText: "61300",
+ *             valueType: "number"
+ *           }
+ *         ]
+ *       }
+ *     ]
+ *   }
+ * }
+ */
 type FilterV10 = {
     /** Map of fields to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and maximum number of overall field values allowed is 150000. */
-    fieldsByState?: unknown;
+    fieldsByState?: Record<string, FilterField[]>;
     /** The filter variables. */
     variables?: FilterVariable[];
 };
@@ -610,6 +688,20 @@ type Links = {
     prev?: Href;
     self?: Href;
 };
+/**
+ * @example
+ * {
+ *   next: {
+ *     href: "https://tenant.qlik-cloud.com:443/api/v1/apps/816e23e1-03d2-446b-8721-cdee6b5e59cf/report-filters?filter=&filterTypes=REP&filterTypes=REP&limit=20&page=0&sort=%2Bname"
+ *   },
+ *   prev: {
+ *     href: "https://tenant.qlik-cloud.com:443/api/v1/apps/816e23e1-03d2-446b-8721-cdee6b5e59cf/report-filters?filter=&filterTypes=REP&filterTypes=REP&limit=20&page=0&sort=%2Bname"
+ *   },
+ *   self: {
+ *     href: "https://tenant.qlik-cloud.com:443/api/v1/apps/816e23e1-03d2-446b-8721-cdee6b5e59cf/report-filters?filter=&filterTypes=REP&filterTypes=REP&limit=20&page=0&sort=%2Bname"
+ *   }
+ * }
+ */
 type LinksResponse = {
     next: LinkResponse;
     prev: LinkResponse;
@@ -1000,6 +1092,11 @@ type Classification = {
     diff?: number;
     trend?: string;
 };
+type CmpEngineSpec = {
+    baseline?: EngineSpec;
+    changed?: boolean;
+    comparison?: EngineSpec;
+};
 type Cmpbool = Classification & {
     baseline?: boolean;
     comparison?: boolean;
@@ -1020,6 +1117,7 @@ type Comparison = {
     appOpenTimeSeconds?: Cmpfloat;
     dataModelSizeMib?: Cmpfloat;
     documentSizeMib?: Cmpfloat;
+    engine?: CmpEngineSpec;
     fileSizeMib?: Cmpfloat;
     hasSectionAccess?: Cmpbool;
     maxMemoryMib?: Cmpfloat;
@@ -1069,19 +1167,24 @@ type Comparisontables = (Objecttopspec & {
     name?: string;
     no_of_rows?: Cmpint;
 })[];
+type EngineSpec = {
+    engineMemoryBytes?: number;
+};
 type Evaluation = {
     appId?: string;
     appItemId?: string;
     appName?: string;
     details?: {
         concurrentReload?: boolean;
+        /** @deprecated */
         dedicated?: boolean;
         engineHasCache?: boolean;
         errors?: string[];
-        objectMetrics?: unknown;
+        objectMetrics?: Record<string, Resultentry>;
         warnings?: string[];
     };
     ended?: string;
+    engine?: EngineSpec;
     events?: Event[];
     id?: string;
     metadata?: Metadata;
@@ -1269,6 +1372,11 @@ type GetAppEvaluationComparisonHttpError = {
 };
 /**
  * Accepts two evaluation ids and downloads a log, in XML format, denoting the differences between the two.
+ * @example
+ * getAppEvaluationComparisonXml(
+ *   "abcdefghijklmnopq",
+ *   "abcdefghijklmnopq"
+ * )
  *
  * @param baseid Id of the baseline evaluation
  * @param comparisonid Id of the comparison evaluation
@@ -1310,6 +1418,10 @@ type GetAppEvaluationHttpError = {
 };
 /**
  * Find and download an evaluation log by a specific evaluation id.
+ * @example
+ * getAppEvaluationXml(
+ *   "abcdefghijklmnopq"
+ * )
  *
  * @param id Id of the desired evaluation.
  * @throws GetAppEvaluationXmlHttpError
@@ -1815,7 +1927,7 @@ declare const getAppReportFilters: (appId: string, query: {
      * (name co "query1" or description co "query2") and ownerId eq "123" */
     filter?: string;
     /** The filter type (REP, SUB). REP stands for report bookmark, SUB for subscription bookmark. */
-    filterTypes?: ("REP" | "SUB")[];
+    filterTypes: ("REP" | "SUB")[];
     /** Limit the returned result set */
     limit?: number;
     /** If present, the cursor that starts the page of data that is returned. */
@@ -1862,7 +1974,7 @@ type CreateAppReportFilterHttpError = {
  */
 declare const countAppReportFilters: (appId: string, query: {
     /** The filter type (REP, SUB). REP stands for report bookmark, SUB for subscription bookmark. */
-    filterTypes?: ("REP" | "SUB")[];
+    filterTypes: ("REP" | "SUB")[];
 }, options?: ApiCallOptions) => Promise<CountAppReportFiltersHttpResponse>;
 type CountAppReportFiltersHttpResponse = {
     data: FiltersCount;
@@ -2108,6 +2220,10 @@ type GetAppEvaluationsHttpError = {
 };
 /**
  * Queue an app evaluation by its app guid.
+ * @example
+ * queueAppEvaluation(
+ *   "abcdefghijklmnopq"
+ * )
  *
  * @param guid Guid of the app.
  * @throws QueueAppEvaluationHttpError
@@ -2146,6 +2262,11 @@ interface AppsAPI {
     getAppEvaluationComparison: typeof getAppEvaluationComparison;
     /**
      * Accepts two evaluation ids and downloads a log, in XML format, denoting the differences between the two.
+     * @example
+     * getAppEvaluationComparisonXml(
+     *   "abcdefghijklmnopq",
+     *   "abcdefghijklmnopq"
+     * )
      *
      * @param baseid Id of the baseline evaluation
      * @param comparisonid Id of the comparison evaluation
@@ -2162,6 +2283,10 @@ interface AppsAPI {
     getAppEvaluation: typeof getAppEvaluation;
     /**
      * Find and download an evaluation log by a specific evaluation id.
+     * @example
+     * getAppEvaluationXml(
+     *   "abcdefghijklmnopq"
+     * )
      *
      * @param id Id of the desired evaluation.
      * @throws GetAppEvaluationXmlHttpError
@@ -2484,6 +2609,10 @@ interface AppsAPI {
     getAppEvaluations: typeof getAppEvaluations;
     /**
      * Queue an app evaluation by its app guid.
+     * @example
+     * queueAppEvaluation(
+     *   "abcdefghijklmnopq"
+     * )
      *
      * @param guid Guid of the app.
      * @throws QueueAppEvaluationHttpError
@@ -2499,4 +2628,4 @@ interface AppsAPI {
  */
 declare const appsExport: AppsAPI;
 
-export { type Analysis, type AnalysisComposition, type AnalysisDescriptor, type AnalysisDescriptorResponse, type AnalysisDetails, type AnalysisGroup, type AnalysisModelItemField, type AnalysisModelItemMasterItem, type AnalysisModelResponse, type AnalysisModelResponseDetail, type AnalysisRecommendRequest, type AnalysisRecommendationResponse, type AnalysisRecommendationResponseDetail, type AppAttributes, type AppContentList, type AppContentListItem, type AppObjectGenericType, type AppUpdateAttributes, type AppsAPI, type ChartType, type Classification, type Classifications, type Cmpbool, type Cmpfloat, type CmpfloatWithTimeout, type Cmpint, type Comparison, type Comparisonfields, type ComparisonobjMemoryLimit, type Comparisonobjresponsetime, type Comparisonoobjheavy, type Comparisontables, type CompositionMinMax, type CopyAppHttpError, type CopyAppHttpResponse, type CountAppReportFiltersHttpError, type CountAppReportFiltersHttpResponse, type CreateApp, type CreateAppHttpError, type CreateAppHttpResponse, type CreateAppReportFilterHttpError, type CreateAppReportFilterHttpResponse, type DataModelMetadata, type DeleteAppHttpError, type DeleteAppHttpResponse, type DeleteAppMediaHttpError, type DeleteAppMediaHttpResponse, type DeleteAppReportFilterHttpError, type DeleteAppReportFilterHttpResponse, type DeleteAppScriptHttpError, type DeleteAppScriptHttpResponse, type Error, type Errors, type Evaluation, type Evaluations, type EvaluatorError, type Event, type ExportAppHttpError, type ExportAppHttpResponse, type FieldAttrType, type FieldAttributes, type FieldInTableProfilingData, type FieldMetadata, type FieldOverride, type FileData, type Filter, type FilterError, type FilterErrors, type FilterField, type FilterFieldValue, type FilterItemPatch, type FilterList, type FilterListItem, type FilterRequest, type FilterType, type FilterV10, type FilterVariable, type FiltersCount, type Float64, type FrequencyDistributionData, type GetAppDataLineageHttpError, type GetAppDataLineageHttpResponse, type GetAppDataMetadataHttpError, type GetAppDataMetadataHttpResponse, type GetAppEvaluationComparisonHttpError, type GetAppEvaluationComparisonHttpResponse, type GetAppEvaluationComparisonXmlHttpError, type GetAppEvaluationComparisonXmlHttpResponse, type GetAppEvaluationHttpError, type GetAppEvaluationHttpResponse, type GetAppEvaluationXmlHttpError, type GetAppEvaluationXmlHttpResponse, type GetAppEvaluationsHttpError, type GetAppEvaluationsHttpResponse, type GetAppInfoHttpError, type GetAppInfoHttpResponse, type GetAppInsightAnalysesHttpError, type GetAppInsightAnalysesHttpResponse, type GetAppInsightAnalysisModelHttpError, type GetAppInsightAnalysisModelHttpResponse, type GetAppInsightAnalysisRecommendationsHttpError, type GetAppInsightAnalysisRecommendationsHttpResponse, type GetAppMediaHttpError, type GetAppMediaHttpResponse, type GetAppMediaListHttpError, type GetAppMediaListHttpResponse, type GetAppReloadLogHttpError, type GetAppReloadLogHttpResponse, type GetAppReloadLogsHttpError, type GetAppReloadLogsHttpResponse, type GetAppReloadMetadataHttpError, type GetAppReloadMetadataHttpResponse, type GetAppReportFilterHttpError, type GetAppReportFilterHttpResponse, type GetAppReportFiltersHttpError, type GetAppReportFiltersHttpResponse, type GetAppScriptHistoryHttpError, type GetAppScriptHistoryHttpResponse, type GetAppScriptHttpError, type GetAppScriptHttpResponse, type GetAppThumbnailHttpError, type GetAppThumbnailHttpResponse, type GetAppsPrivilegesHttpError, type GetAppsPrivilegesHttpResponse, type HardwareMeta, type Href, type ImportAppHttpError, type ImportAppHttpResponse, type JsonObject, type LastReloadMetadata, type LineageInfoRest, type LinkResponse, type Links, type LinksResponse, type Log, type Metadata, type MoveAppToSpaceHttpError, type MoveAppToSpaceHttpResponse, type NavigationLink, type NavigationLinks, type NumberFormat, type NxApp, type NxAppCreatePrivileges, type NxAppObject, type NxAttributes, type NxObjectAttributes, type NxPatch, type NxPatchOperationType, type Objectmetrics, type Objectspec, type Objecttopspec, type PartialNluInfo, type PatchAppReportFilterHttpError, type PatchAppReportFilterHttpResponse, type PatchAppScriptHttpError, type PatchAppScriptHttpResponse, type PatchFilter, type PatchFilterItem, type PublishApp, type PublishAppHttpError, type PublishAppHttpResponse, type PublishData, type QueueAppEvaluationHttpError, type QueueAppEvaluationHttpResponse, type RecommendFieldItem, type RecommendItems, type RecommendMasterItem, type RecommendNaturalLangQuery, type RecommendedAnalysis, type RecommendedAnalysisCore, type ReloadIncludeFile, type ReloadListMetadata, type ReloadMeta, type ReloadStatements, type RemoveAppFromSpaceHttpError, type RemoveAppFromSpaceHttpResponse, type RepublishApp, type RepublishAppHttpError, type RepublishAppHttpResponse, type Result, type Resultentry, type Resultmetadatatopfields, type Resultmetadatatoptables, type ResultobjMemoryLimit, type Resultobjresponsetime, type Resultobjsheet, type Resultsingle, type ScriptLogList, type ScriptLogMeta, type ScriptMeta, type ScriptMetaList, type ScriptVersion, type SimplifiedClassifications, type Sortedcomparisonfields, type Sortedcomparisonobjresponsetime, type Sortedcomparisonoobjheavy, type Sortedcomparisontables, type SymbolFrequency, type SymbolValue, type TableMetadata, type TableProfilingData, type UpdateApp, type UpdateAppInfoHttpError, type UpdateAppInfoHttpResponse, type UpdateAppObjectOwnerHttpError, type UpdateAppObjectOwnerHttpResponse, type UpdateAppOwnerHttpError, type UpdateAppOwnerHttpResponse, type UpdateAppScriptHttpError, type UpdateAppScriptHttpResponse, type UpdateOwner, type UpdateSpace, type UploadAppMediaHttpError, type UploadAppMediaHttpResponse, type UsageEnum, type UserPrivileges, clearCache, copyApp, countAppReportFilters, createApp, createAppReportFilter, appsExport as default, deleteApp, deleteAppMedia, deleteAppReportFilter, deleteAppScript, exportApp, getAppDataLineage, getAppDataMetadata, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXml, getAppEvaluationXml, getAppEvaluations, getAppInfo, getAppInsightAnalyses, getAppInsightAnalysisModel, getAppInsightAnalysisRecommendations, getAppMedia, getAppMediaList, getAppReloadLog, getAppReloadLogs, getAppReloadMetadata, getAppReportFilter, getAppReportFilters, getAppScript, getAppScriptHistory, getAppThumbnail, getAppsPrivileges, importApp, moveAppToSpace, patchAppReportFilter, patchAppScript, publishApp, queueAppEvaluation, removeAppFromSpace, republishApp, updateAppInfo, updateAppObjectOwner, updateAppOwner, updateAppScript, uploadAppMedia };
+export { type Analysis, type AnalysisComposition, type AnalysisDescriptor, type AnalysisDescriptorResponse, type AnalysisDetails, type AnalysisGroup, type AnalysisModelItemField, type AnalysisModelItemMasterItem, type AnalysisModelResponse, type AnalysisModelResponseDetail, type AnalysisRecommendRequest, type AnalysisRecommendationResponse, type AnalysisRecommendationResponseDetail, type AppAttributes, type AppContentList, type AppContentListItem, type AppObjectGenericType, type AppUpdateAttributes, type AppsAPI, type ChartType, type Classification, type Classifications, type CmpEngineSpec, type Cmpbool, type Cmpfloat, type CmpfloatWithTimeout, type Cmpint, type Comparison, type Comparisonfields, type ComparisonobjMemoryLimit, type Comparisonobjresponsetime, type Comparisonoobjheavy, type Comparisontables, type CompositionMinMax, type CopyAppHttpError, type CopyAppHttpResponse, type CountAppReportFiltersHttpError, type CountAppReportFiltersHttpResponse, type CreateApp, type CreateAppHttpError, type CreateAppHttpResponse, type CreateAppReportFilterHttpError, type CreateAppReportFilterHttpResponse, type DataModelMetadata, type DeleteAppHttpError, type DeleteAppHttpResponse, type DeleteAppMediaHttpError, type DeleteAppMediaHttpResponse, type DeleteAppReportFilterHttpError, type DeleteAppReportFilterHttpResponse, type DeleteAppScriptHttpError, type DeleteAppScriptHttpResponse, type EngineSpec, type Error, type Errors, type Evaluation, type Evaluations, type EvaluatorError, type Event, type ExportAppHttpError, type ExportAppHttpResponse, type FieldAttrType, type FieldAttributes, type FieldInTableProfilingData, type FieldMetadata, type FieldOverride, type FileData, type Filter, type FilterError, type FilterErrors, type FilterField, type FilterFieldValue, type FilterItemPatch, type FilterList, type FilterListItem, type FilterRequest, type FilterType, type FilterV10, type FilterVariable, type FiltersCount, type Float64, type FrequencyDistributionData, type GetAppDataLineageHttpError, type GetAppDataLineageHttpResponse, type GetAppDataMetadataHttpError, type GetAppDataMetadataHttpResponse, type GetAppEvaluationComparisonHttpError, type GetAppEvaluationComparisonHttpResponse, type GetAppEvaluationComparisonXmlHttpError, type GetAppEvaluationComparisonXmlHttpResponse, type GetAppEvaluationHttpError, type GetAppEvaluationHttpResponse, type GetAppEvaluationXmlHttpError, type GetAppEvaluationXmlHttpResponse, type GetAppEvaluationsHttpError, type GetAppEvaluationsHttpResponse, type GetAppInfoHttpError, type GetAppInfoHttpResponse, type GetAppInsightAnalysesHttpError, type GetAppInsightAnalysesHttpResponse, type GetAppInsightAnalysisModelHttpError, type GetAppInsightAnalysisModelHttpResponse, type GetAppInsightAnalysisRecommendationsHttpError, type GetAppInsightAnalysisRecommendationsHttpResponse, type GetAppMediaHttpError, type GetAppMediaHttpResponse, type GetAppMediaListHttpError, type GetAppMediaListHttpResponse, type GetAppReloadLogHttpError, type GetAppReloadLogHttpResponse, type GetAppReloadLogsHttpError, type GetAppReloadLogsHttpResponse, type GetAppReloadMetadataHttpError, type GetAppReloadMetadataHttpResponse, type GetAppReportFilterHttpError, type GetAppReportFilterHttpResponse, type GetAppReportFiltersHttpError, type GetAppReportFiltersHttpResponse, type GetAppScriptHistoryHttpError, type GetAppScriptHistoryHttpResponse, type GetAppScriptHttpError, type GetAppScriptHttpResponse, type GetAppThumbnailHttpError, type GetAppThumbnailHttpResponse, type GetAppsPrivilegesHttpError, type GetAppsPrivilegesHttpResponse, type HardwareMeta, type Href, type ImportAppHttpError, type ImportAppHttpResponse, type JsonObject, type LastReloadMetadata, type LineageInfoRest, type LinkResponse, type Links, type LinksResponse, type Log, type Metadata, type MoveAppToSpaceHttpError, type MoveAppToSpaceHttpResponse, type NavigationLink, type NavigationLinks, type NumberFormat, type NxApp, type NxAppCreatePrivileges, type NxAppObject, type NxAttributes, type NxObjectAttributes, type NxPatch, type NxPatchOperationType, type Objectmetrics, type Objectspec, type Objecttopspec, type PartialNluInfo, type PatchAppReportFilterHttpError, type PatchAppReportFilterHttpResponse, type PatchAppScriptHttpError, type PatchAppScriptHttpResponse, type PatchFilter, type PatchFilterItem, type PublishApp, type PublishAppHttpError, type PublishAppHttpResponse, type PublishData, type QueueAppEvaluationHttpError, type QueueAppEvaluationHttpResponse, type RecommendFieldItem, type RecommendItems, type RecommendMasterItem, type RecommendNaturalLangQuery, type RecommendedAnalysis, type RecommendedAnalysisCore, type ReloadIncludeFile, type ReloadListMetadata, type ReloadMeta, type ReloadStatements, type RemoveAppFromSpaceHttpError, type RemoveAppFromSpaceHttpResponse, type RepublishApp, type RepublishAppHttpError, type RepublishAppHttpResponse, type Result, type Resultentry, type Resultmetadatatopfields, type Resultmetadatatoptables, type ResultobjMemoryLimit, type Resultobjresponsetime, type Resultobjsheet, type Resultsingle, type ScriptLogList, type ScriptLogMeta, type ScriptMeta, type ScriptMetaList, type ScriptVersion, type SimplifiedClassifications, type Sortedcomparisonfields, type Sortedcomparisonobjresponsetime, type Sortedcomparisonoobjheavy, type Sortedcomparisontables, type SymbolFrequency, type SymbolValue, type TableMetadata, type TableProfilingData, type UpdateApp, type UpdateAppInfoHttpError, type UpdateAppInfoHttpResponse, type UpdateAppObjectOwnerHttpError, type UpdateAppObjectOwnerHttpResponse, type UpdateAppOwnerHttpError, type UpdateAppOwnerHttpResponse, type UpdateAppScriptHttpError, type UpdateAppScriptHttpResponse, type UpdateOwner, type UpdateSpace, type UploadAppMediaHttpError, type UploadAppMediaHttpResponse, type UsageEnum, type UserPrivileges, clearCache, copyApp, countAppReportFilters, createApp, createAppReportFilter, appsExport as default, deleteApp, deleteAppMedia, deleteAppReportFilter, deleteAppScript, exportApp, getAppDataLineage, getAppDataMetadata, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXml, getAppEvaluationXml, getAppEvaluations, getAppInfo, getAppInsightAnalyses, getAppInsightAnalysisModel, getAppInsightAnalysisRecommendations, getAppMedia, getAppMediaList, getAppReloadLog, getAppReloadLogs, getAppReloadMetadata, getAppReportFilter, getAppReportFilters, getAppScript, getAppScriptHistory, getAppThumbnail, getAppsPrivileges, importApp, moveAppToSpace, patchAppReportFilter, patchAppScript, publishApp, queueAppEvaluation, removeAppFromSpace, republishApp, updateAppInfo, updateAppObjectOwner, updateAppOwner, updateAppScript, uploadAppMedia };

@@ -16,6 +16,13 @@ type AssignedGroups = {
 }[];
 /**
  * An array of group reference names and provider type.
+ * @example
+ * [
+ *   {
+ *     name: "Developers",
+ *     providerType: "custom"
+ *   }
+ * ]
  */
 type AssignedGroupsRefNames = {
     /** The name of the group */
@@ -75,6 +82,17 @@ type ErrorItem = {
 };
 /**
  * The error response object describing the error from the handling of an HTTP request.
+ * @example
+ * {
+ *   errors: [
+ *     {
+ *       code: "USERS-7",
+ *       status: 404,
+ *       title: "Not found"
+ *     }
+ *   ],
+ *   traceId: "000000000000000079cf1ebeae103de1"
+ * }
  */
 type Errors = {
     /** An array of errors related to the operation. */
@@ -136,10 +154,58 @@ type JSONPatch = {
 };
 /**
  * An array of JSON Patch documents
+ * @example
+ * [
+ *   {
+ *     op: "replace",
+ *     path: "/name",
+ *     value: "John"
+ *   },
+ *   {
+ *     op: "replace",
+ *     path: "/assignedRoles",
+ *     value: [
+ *       {
+ *         "name": "Developer"
+ *       }
+ *     ]
+ *   },
+ *   {
+ *     op: "replace",
+ *     value: "unicorn@corp.example"
+ *   },
+ *   {
+ *     op: "replace",
+ *     value: "America/Halifax"
+ *   },
+ *   {
+ *     op: "replace",
+ *     path: "/preferredLocale",
+ *     value: "en_US_POSIX"
+ *   },
+ *   {
+ *     op: "replace",
+ *     path: "/status",
+ *     value: "active"
+ *   },
+ *   {
+ *     op: "add"
+ *   },
+ *   {
+ *     op: "remove-value",
+ *     path: "/assignedRoles"
+ *   }
+ * ]
  */
 type JSONPatchArray = JSONPatch[];
 /**
  * An array of entity reference identifiers (e.g. roles, groups).
+ * @example
+ * [
+ *   {
+ *     id: "507f191e810c19729de860ea"
+ *   }
+ * ]
  */
 type RefIDs = {
     /** The unique identitier */
@@ -147,6 +213,12 @@ type RefIDs = {
 }[];
 /**
  * An array of reference names (e.g. roles).
+ * @example
+ * [
+ *   {
+ *     name: "TenantAdmin"
+ *   }
+ * ]
  */
 type RefNames = {
     /** The name of the entity */
@@ -228,6 +300,22 @@ type UserCount = {
     /** The total number of users in the tenant. */
     total: number;
 };
+/**
+ * @example
+ * {
+ *   assignedRoles: [
+ *     {
+ *       name: "Developer"
+ *     }
+ *   ],
+ *   email: "john.smith@corp.example",
+ *   name: "John Smith",
+ *   picture: "https://corp.example/docs/jsmith.png",
+ *   status: "invited",
+ *   subject: "1234asdasa6789",
+ *   tenantId: "q3VRZ4YMixRaLKEPhkZWM-XMIDN7cO8f"
+ * }
+ */
 type UserPostSchema = {
     /** The roles to assign to the user. */
     assignedRoles?: RefIDs | RefNames;

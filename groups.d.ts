@@ -16,6 +16,12 @@ type AssignedRoles = {
 }[];
 /**
  * An array of role reference identifiers.
+ * @example
+ * [
+ *   {
+ *     id: "507f191e810c19729de860ea"
+ *   }
+ * ]
  */
 type AssignedRolesRefIDs = {
     /** The unique role identitier */
@@ -23,6 +29,12 @@ type AssignedRolesRefIDs = {
 }[];
 /**
  * An array of role reference names.
+ * @example
+ * [
+ *   {
+ *     name: "TenantAdmin"
+ *   }
+ * ]
  */
 type AssignedRolesRefNames = {
     /** The name of the role */
@@ -52,6 +64,17 @@ type Error = {
 };
 /**
  * The error response object describing the error from the handling of an HTTP request.
+ * @example
+ * {
+ *   errors: [
+ *     {
+ *       code: "GROUPS-7",
+ *       status: 404,
+ *       title: "Not found"
+ *     }
+ *   ],
+ *   traceId: "00000000000000000137b213cf12a77b"
+ * }
  */
 type Errors = {
     /** An array of errors related to the operation. */
@@ -113,8 +136,34 @@ type GroupPatch = {
 };
 /**
  * An array of JSON Patches for a group.
+ * @example
+ * [
+ *   {
+ *     op: "replace",
+ *     value: [
+ *       {
+ *         name: "TenantAdmin"
+ *       },
+ *       {
+ *         name: "AnalyticsAdmin"
+ *       }
+ *     ]
+ *   }
+ * ]
  */
 type GroupPatchSchema = GroupPatch[];
+/**
+ * @example
+ * {
+ *   assignedRoles: [
+ *     {
+ *       name: "Developer"
+ *     }
+ *   ],
+ *   name: "Development",
+ *   status: "active"
+ * }
+ */
 type GroupPostSchema = {
     /** The roles to assign to the group (limit of 100 roles per group). */
     assignedRoles?: AssignedRolesRefIDs | AssignedRolesRefNames;
@@ -197,6 +246,27 @@ type SettingsPatch = {
 };
 /**
  * An array of JSON Patches for the groups settings.
+ * @example
+ * [
+ *   {
+ *     op: "replace",
+ *     path: "/syncIdpGroups",
+ *     value: true
+ *   },
+ *   {
+ *     op: "replace",
+ *     path: "/autoCreateGroups",
+ *     value: true
+ *   },
+ *   {
+ *     op: "replace",
+ *     value: [
+ *       {
+ *         name: "Steward"
+ *       }
+ *     ]
+ *   }
+ * ]
  */
 type SettingsPatchSchema = SettingsPatch[];
 /**

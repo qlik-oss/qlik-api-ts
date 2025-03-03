@@ -10,7 +10,7 @@ type AppError = {
     /** The method that is failing. */
     method?: string;
     /** Parameters of method that fails. */
-    parameters?: unknown;
+    parameters?: Record<string, string>;
 };
 /**
  * Errors occurring when dealing with the app.
@@ -39,12 +39,21 @@ type ComposableTemplate = {
     /** Template type and version using semantic versioning. It must have the following name convention, dashed-separated-template-name-MAJOR.MINOR */
     type: "sense-image-1.0" | "sense-sheet-1.0";
 };
+type CycleOutput = {
+    /** Output to be used to export an excel template. */
+    excelOutput?: ExcelOutput;
+    /** not needed at initial phase */
+    namingPattern?: "fieldValueWithUnderscore";
+    /** Output to be used to export a single visualization, a sheet, Sense Excel template as pdf. For Sense Excel template (sense-excel-template-1.0) no properties are needed, any property specified has no effect. */
+    pdfOutput?: PdfOutput;
+    type: "excel" | "pdf" | "html";
+};
 /**
  * Definitions of common properties that are shared between templates, e.g. selectionsByState can be the same for all templates within a composition of templates.
  */
 type Definitions = {
     /** It maps an ID to a selectionsByState object. */
-    selectionsByState?: unknown;
+    selectionsByState?: Record<string, Record<string, QSelection[]>>;
 };
 /**
  * Properties of the document. In case of multiple composition, only properties specified in the composition output are taken and the ones specified in each output item are ignored.
@@ -64,6 +73,14 @@ type Error = {
 type ExcelOutput = {
     /** The output format of the report to be produced. */
     outFormat?: "xlsx";
+};
+type ExportDataOptions = {
+    /** Show the Selections Applied to the Visualization in the artifact produced */
+    showSelections?: boolean;
+    /** Show Visualization Title, SubTitle, Footnote in the artifact produced */
+    showTitles?: boolean;
+    /** Show Visualization Totals in the artifact produced */
+    showTotals?: boolean;
 };
 /**
  * Error occured during report generation.
@@ -144,7 +161,8 @@ type ExportError = {
      * - "REP-400050" Error retrieving outputs.
      * - "REP-400052" Report Request Aborted from internal error.
      * - "REP-500053" Unexpected number of generated cycle reports.
-     * - "REP-400054" The number of generated cycle reports exceeds the maximum allowed. */
+     * - "REP-400054" The number of generated cycle reports exceeds the maximum allowed.
+     * - "REP-400055" Export options not allowed for this object. */
     code: string;
     /** Optional. MAY be used to provide more concrete details. */
     detail?: string;
@@ -204,9 +222,30 @@ type NxPatch = {
     /** Corresponds to the value of the property to add or to the new value of the property to update. */
     qValue?: string;
 };
+/**
+ * @example
+ * {
+ *   outputId: "output1",
+ *   pdfOutput: {
+ *     align: {
+ *       horizontal: "center",
+ *       vertical: "middle"
+ *     },
+ *     imageRenderingDpi: 300,
+ *     orientation: "P",
+ *     resizeData: {
+ *       fit: "210mmx287mm"
+ *     },
+ *     resizeType: "fit",
+ *     size: "A4"
+ *   },
+ *   type: "pdf"
+ * }
+ */
 type OutputItem = {
     /** The callback to be performed once the report is done. */
     callBackAction?: CallBackAction;
+    cycleOutput?: CycleOutput;
     /** Output to be used to export an excel template. */
     excelOutput?: ExcelOutput;
     /** Output to be used to export a single visualization as image. */
@@ -234,8 +273,8 @@ type OutputItem = {
      *    - excel requires excelOutput to be set
      *    - pdfcomposition requires pdfCompositionOutput to be set
      *    - pptxcomposition requires pptxCompositionOutput to be set
-     *    - pdf requires pdfOuput to be set
-     *    - pptx requires pptxOuput to be set
+     *    - pdf requires pdfOutput to be set
+     *    - pptx requires pptxOutput to be set
      *    - image requires imageOutput to be set
      *    - csv doesn't have csv output
      *    - xlsx requires xlsxOutput to be set */
@@ -329,6 +368,78 @@ type Reason = {
     outputId?: string;
     traceId?: string;
 };
+/**
+ * @example
+ * {
+ *   compositionTemplates: [
+ *     {
+ *       senseSheetTemplate: {
+ *         appId: "2451e58e-a1b9-4047-abf6-315e91d8a610",
+ *         selectionsByStateDef: "sel1",
+ *         sheet: {
+ *           id: "5ffe3801-1b6d-439d-a849-84d0748358f1"
+ *         }
+ *       },
+ *       type: "sense-sheet-1.0"
+ *     },
+ *     {
+ *       senseSheetTemplate: {
+ *         appId: "2451e58e-a1b9-4047-abf6-315e91d8a610",
+ *         selectionsByStateDef: "sel1",
+ *         sheet: {
+ *           id: "ffrxJyA"
+ *         }
+ *       },
+ *       type: "sense-sheet-1.0"
+ *     }
+ *   ],
+ *   definitions: {
+ *     selectionsByState: {
+ *       "sel1": {
+ *         "$": [
+ *           {
+ *             defaultIsNumeric: false,
+ *             fieldName: "Region",
+ *             values: [
+ *               {
+ *                 isNumeric: false,
+ *                 text: "Arizona"
+ *               }
+ *             ]
+ *           }
+ *         ]
+ *       }
+ *     }
+ *   },
+ *   output: {
+ *     outputId: "composition1",
+ *     pdfCompositionOutput: {
+ *       pdfOutputs: [
+ *         {
+ *           align: {
+ *             horizontal: "center",
+ *             vertical: "middle"
+ *           },
+ *           orientation: "A",
+ *           resizeType: "autofit",
+ *           size: "A4"
+ *         },
+ *         {
+ *           align: {
+ *             horizontal: "center",
+ *             vertical: "middle"
+ *           },
+ *           orientation: "A",
+ *           resizeType: "autofit",
+ *           size: "A4"
+ *         }
+ *       ]
+ *     },
+ *     type: "pdfcomposition"
+ *   },
+ *   type: "composition-1.0"
+ * }
+ */
 type ReportRequest = {
     /** Composition of senseSheetTemplate and/or senseImageTemplate templates. */
     compositionTemplates?: ComposableTemplate[];
@@ -351,7 +462,7 @@ type ReportRequest = {
     /** Used to export a sheet as pdf or pptx. */
     senseSheetTemplate?: SenseSheetTemplate;
     /** Template type and version using semantic versioning. It must have the following name convention: dashed-separated-template-name-MAJOR.MINOR.
-     * Please note that sense-pixel-perfect-template-1.0, sense-html-template-1.0, sense-story-x.0 and qv-data-x.0 are only for internal use.
+     * Please note that sense-html-template-1.0, sense-story-x.0 and qv-data-x.0 are only for internal use.
      *
      * Each type requires a specific template to be provided:
      *   - composition-1.0 requires compositionTemplates to be set
@@ -359,15 +470,39 @@ type ReportRequest = {
      *   - sense-image-1.0 requires senseImageTemplate to be set
      *   - sense-sheet-1.0 requires senseSheetTemplate to be set
      *   - sense-data-1.0 requires senseDataTemplate to be set
+     *   - sense-pixel-perfect-template-1.0 requires sensePixelPerfectTemplate to be set
      *
      * Each template type supports specific output types:
-     *   - composition-1.0 supports pdfcomposition and pptxComposition output type
+     *   - composition-1.0 supports pdfcomposition and pptxcomposition output type
      *   - sense-excel-template-1.0 supports excel and pdf output type
      *   - sense-image-1.0 supports pdf, pptx and png output types
      *   - sense-sheet-1.0 supports pdf, pptx output type
-     *   - sense-data-1.0 supports xlsx output type */
+     *   - sense-data-1.0 supports xlsx output type
+     *   - sense-pixel-perfect-template-1.0 supports pdf output types
+     *
+     * Each output type requires a specific output to be provided:
+     *   - pdfcomposition requires pdfCompositionOutput to be set
+     *   - pptxcomposition requires pptxCompositionOutput to be set
+     *   - pdf requires pdfOutput to be set
+     *   - pptx requires pptxOutput to be set
+     *   - image requires imageOutput to be set
+     *   - xlsx requires xlsxOutput to be set */
     type: "composition-1.0" | "sense-image-1.0" | "sense-data-1.0" | "sense-sheet-1.0" | "sense-story-1.0" | "qv-data-1.0" | "qv-data-2.0" | "sense-excel-template-1.0" | "sense-pixel-perfect-template-1.0" | "sense-html-template-1.0";
 };
+/**
+ * @example
+ * {
+ *   resolutionAttempts: 1,
+ *   results: [
+ *     {
+ *       location: "https://qlikcloud.com:443/api/v1/temp-contents/619baab68023910001efcb86?inline=1",
+ *       outputId: "output1"
+ *     }
+ *   ],
+ *   status: "done",
+ *   statusLocation: "/reports/01562a37-23e3-4b43-865d-84c26122276c/status"
+ * }
+ */
 type ReportStatus = {
     /** @deprecated
      * Present when status is failed. Deprecated. Use /reports/{id}/outputs instead. */
@@ -421,14 +556,15 @@ type SelectionError = {
 type SelectionErrors = SelectionError[];
 type SelectionFilter = {
     /** A map for applying soft properties, aka patches, to specific visualization IDs within the sheet. */
-    patchesById?: unknown;
+    patchesById?: Record<string, NxPatch[]>;
     /** Map of selections to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and Maximum number of overall field values allowed is 150000. */
-    selectionsByState?: unknown;
+    selectionsByState?: Record<string, QSelection[]>;
     variables?: unknown[];
 };
 type SelectionStrategy = "failOnErrors" | "ignoreErrorsReturnDetails" | "ignoreErrorsNoDetails";
 type SenseDataTemplate = {
     appId: string;
+    exportOptions?: ExportDataOptions;
     /** Sense visualization id. Visualizations created "on the fly" are not supported. */
     id: string;
     patches?: NxPatch[];
@@ -438,7 +574,7 @@ type SenseDataTemplate = {
     selectionStrategy?: SelectionStrategy;
     selectionType?: SenseSelectionType;
     /** Map of selections to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and maximum number of overall field values allowed is 150000. */
-    selectionsByState?: unknown;
+    selectionsByState?: Record<string, QSelection[]>;
     /** The temporary bookmark to apply. Patches and Variables are ignored if passed to the API, because they already are applied in the backend. */
     temporaryBookmarkV2?: SenseTemporaryBookmarkV2;
     variables?: unknown[];
@@ -447,6 +583,8 @@ type SenseDataTemplate = {
  * Used to produce reports from a template file.
  */
 type SenseFileTemplate = {
+    /** The values of the field to be selected. */
+    cycleFields?: string[];
     /** A JSON object that is passed as-is to the mashup page while rendering, this will be applied to all charts within the sheet. It includes properties of the whole sheet such as theme, gradient etc. Currently only the "theme" and "language" properties are supported. */
     jsOpts?: unknown;
     /** Choose the reloadTimestamp constraint to apply. An empty value leads to the default noCheck. */
@@ -467,7 +605,7 @@ type SenseImageTemplate = {
     selectionStrategy?: SelectionStrategy;
     selectionType?: SenseSelectionType;
     /** Map of selections to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and maximum number of overall field values allowed is 150000. */
-    selectionsByState?: unknown;
+    selectionsByState?: Record<string, QSelection[]>;
     /** The definition ID referring to a selectionsByState definition declared in definitions. */
     selectionsByStateDef?: string;
     /** The temporary bookmark to apply. Patches and Variables are ignored if passed to the API, because they already are applied in the backend. */
@@ -490,7 +628,7 @@ type SenseSheetTemplate = {
     selectionStrategy?: SelectionStrategy;
     selectionType?: SenseSelectionType;
     /** Map of selections to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and maximum number of overall field values allowed is 150000. */
-    selectionsByState?: unknown;
+    selectionsByState?: Record<string, QSelection[]>;
     /** The definition ID referring to a selectionsByState definition declared in definitions. */
     selectionsByStateDef?: string;
     /** It refers to the Sense Sheet to be exported. Note that if widthPx and heightPx are not specified, default values will be applied depending on the actual size and layout properties of the Sense Sheet object. */
@@ -516,9 +654,9 @@ type Sheet = {
     /** A JSON object that is passed as-is to the mashup page while rendering, this will be applied to all charts within the sheet. It includes properties of the whole sheet such as theme, gradient etc. */
     jsOpts?: unknown;
     /** A map for applying jsOpts to specific visualization IDs within the sheet. */
-    jsOptsById?: unknown;
+    jsOptsById?: Record<string, unknown>;
     /** A map for applying soft properties, aka patches, to specific visualization IDs within the sheet. */
-    patchesById?: unknown;
+    patchesById?: Record<string, NxPatch[]>;
     /** The width of the sheet in pixels. Default value is: - 1680 pixels for responsive sheet - 1120 pixels for extended sheet - same width set in sheet properties for custom sheet */
     widthPx?: number;
 };
@@ -546,6 +684,8 @@ type Visualization = {
 };
 /**
  * Choose the reloadTimestamp constraint to apply. An empty value leads to the default noCheck.
+ * @example
+ * "noCheck"
  */
 type ReloadTimestampMatchType = "noCheck" | "requestTimeExact";
 /**
@@ -611,4 +751,4 @@ interface ReportsAPI {
  */
 declare const reportsExport: ReportsAPI;
 
-export { type AppError, type AppErrors, type CallBackAction, type ChainableSelection, type ChainableSelectionType, type ComposableTemplate, type CreateReportHttpError, type CreateReportHttpResponse, type Definitions, type DocProperties, type Error, type ExcelOutput, type ExportError, type ExportErrors, type Float64, type GetReportStatusHttpError, type GetReportStatusHttpResponse, type HttpRequest, type ImageOutput, type Meta, type MetaExportError, type NxPatch, type OutputItem, type PdfCompositionOutput, type PdfOutput, type PptxCompositionOutput, type PptxOutput, type QFieldValue, type QSelection, type Reason, type ReloadTimestampMatchType, type ReportRequest, type ReportStatus, type ReportsAPI, type Result, type SelectionChain, type SelectionError, type SelectionErrors, type SelectionFilter, type SelectionStrategy, type SenseDataTemplate, type SenseFileTemplate, type SenseImageTemplate, type SensePersistentBookmark, type SenseSelectionType, type SenseSheetTemplate, type SenseTemporaryBookmarkV2, type Sheet, type TemplateLocation, type Visualization, clearCache, createReport, reportsExport as default, getReportStatus };
+export { type AppError, type AppErrors, type CallBackAction, type ChainableSelection, type ChainableSelectionType, type ComposableTemplate, type CreateReportHttpError, type CreateReportHttpResponse, type CycleOutput, type Definitions, type DocProperties, type Error, type ExcelOutput, type ExportDataOptions, type ExportError, type ExportErrors, type Float64, type GetReportStatusHttpError, type GetReportStatusHttpResponse, type HttpRequest, type ImageOutput, type Meta, type MetaExportError, type NxPatch, type OutputItem, type PdfCompositionOutput, type PdfOutput, type PptxCompositionOutput, type PptxOutput, type QFieldValue, type QSelection, type Reason, type ReloadTimestampMatchType, type ReportRequest, type ReportStatus, type ReportsAPI, type Result, type SelectionChain, type SelectionError, type SelectionErrors, type SelectionFilter, type SelectionStrategy, type SenseDataTemplate, type SenseFileTemplate, type SenseImageTemplate, type SensePersistentBookmark, type SenseSelectionType, type SenseSheetTemplate, type SenseTemporaryBookmarkV2, type Sheet, type TemplateLocation, type Visualization, clearCache, createReport, reportsExport as default, getReportStatus };

@@ -189,6 +189,12 @@ type UsageObject = {
 };
 /**
  * Retrieves a list of automations
+ * @example
+ * getAutomations(
+ *   {
+ *     fields: "lastRun,lastRunStatus,runMode,createdAt,updatedAt"
+ *   }
+ * )
  *
  * @param query an object with query parameters
  * @throws GetAutomationsHttpError
@@ -242,7 +248,7 @@ declare const getAutomationsUsageMetrics: (query: {
     /** If specified, result will be broken apart for each automation */
     breakdownBy?: string;
     /** Indicates how the metrics should be filtered */
-    filter?: string;
+    filter: string;
 }, options?: ApiCallOptions) => Promise<GetAutomationsUsageMetricsHttpResponse>;
 type GetAutomationsUsageMetricsHttpResponse = {
     data: UsageList;
@@ -557,6 +563,12 @@ declare function clearCache(): void;
 interface AutomationsAPI {
     /**
      * Retrieves a list of automations
+     * @example
+     * getAutomations(
+     *   {
+     *     fields: "lastRun,lastRunStatus,runMode,createdAt,updatedAt"
+     *   }
+     * )
      *
      * @param query an object with query parameters
      * @throws GetAutomationsHttpError

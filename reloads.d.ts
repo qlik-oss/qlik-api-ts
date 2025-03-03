@@ -7,14 +7,33 @@ type Error = {
     detail?: string;
     title: string;
 };
+/**
+ * @example
+ * {
+ *   errors: [
+ *     {
+ *       code: "HTTP-123",
+ *       title: "short error message"
+ *     }
+ *   ]
+ * }
+ */
 type Errors = {
     errors?: Error[];
 };
+/**
+ * @example
+ * {
+ *   href: "http://example.com"
+ * }
+ */
 type Href = {
     href?: string;
 };
 /**
  * The boolean value used to present the reload is partial or not.
+ * @example
+ * false
  */
 type Partial = boolean;
 type Reload = {
@@ -67,21 +86,32 @@ type ReloadsLinks = ReloadLinks & {
 };
 /**
  * The status of the reload. There are seven statuses. `QUEUED`, `RELOADING`, `CANCELING` are the active statuses. `SUCCEEDED`, `FAILED`, `CANCELED`, `EXCEEDED_LIMIT` are the end statuses.
+ * @example
+ * "FAILED"
  */
 type Status = "QUEUED" | "RELOADING" | "CANCELING" | "SUCCEEDED" | "FAILED" | "CANCELED" | "EXCEEDED_LIMIT";
 /**
  * What initiated the reload: hub = one-time reload manually triggered in hub, chronos = time based scheduled reload triggered by chronos, external = reload triggered via external API request, automations = reload triggered in automation, data-refresh = reload triggered by refresh of data, choreographer = reload triggered by choreographer.
+ * @example
+ * "chronos"
  */
 type Type = "hub" | "external" | "chronos" | "automations" | "data-refresh" | "choreographer";
 /**
  * Finds and returns the reloads that the user has access to.
+ * @example
+ * getReloads(
+ *   {
+ *     filter: "(status eq \"FAILED\" or status eq \"EXCEEDED_LIMIT\") and partial eq \"false\" and type eq \"chronos\"
+ *     "
+ *   }
+ * )
  *
  * @param query an object with query parameters
  * @throws GetReloadsHttpError
  */
 declare const getReloads: (query: {
     /** The UUID formatted string used to search for an app's reload history entries. TenantAdmin users may omit this parameter to list all reload history in the tenant. */
-    appId?: string;
+    appId: string;
     /** SCIM filter expression used to search for reloads.
      * The filter syntax is defined in RFC 7644 section 3.4.2.2
      *
@@ -172,6 +202,13 @@ declare function clearCache(): void;
 interface ReloadsAPI {
     /**
      * Finds and returns the reloads that the user has access to.
+     * @example
+     * getReloads(
+     *   {
+     *     filter: "(status eq \"FAILED\" or status eq \"EXCEEDED_LIMIT\") and partial eq \"false\" and type eq \"chronos\"
+     *     "
+     *   }
+     * )
      *
      * @param query an object with query parameters
      * @throws GetReloadsHttpError

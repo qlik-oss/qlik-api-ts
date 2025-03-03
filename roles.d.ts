@@ -31,6 +31,16 @@ type Error = {
 };
 /**
  * The error response object describing the error from the handling of an HTTP request.
+ * @example
+ * {
+ *   errors: [
+ *     {
+ *       code: "IDENTITIES-10402",
+ *       title: "Not Found"
+ *     }
+ *   ],
+ *   traceId: "0000000000000000200ba0714061b982"
+ * }
  */
 type Errors = {
     /** An array of errors related to the operation. */
@@ -73,6 +83,26 @@ type PatchRole = {
 };
 /**
  * An array of JSON Patch documents
+ * @example
+ * [
+ *   {
+ *     op: "replace",
+ *     path: "/name",
+ *     value: "Role1"
+ *   },
+ *   {
+ *     op: "replace",
+ *     path: "/assignedScopes",
+ *     value: [
+ *       "knowledgebase"
+ *     ]
+ *   },
+ *   {
+ *     op: "replace",
+ *     path: "/description",
+ *     value: "My custom role description"
+ *   }
+ * ]
  */
 type PatchRoles = PatchRole[];
 type Role = {

@@ -123,6 +123,13 @@ type FilterOrphanedDataCredentialsHttpError = {
 };
 /**
  * Deletes the specified credential by ID (or by name when type=credentialname is set in query)
+ * @example
+ * deleteDataCredential(
+ *   "027d2703-e745-43ec-8876-a2e6ac341700",
+ *   {
+ *     byCredentialName: false
+ *   }
+ * )
  *
  * @param qID Credential ID
  * @param query an object with query parameters
@@ -144,6 +151,13 @@ type DeleteDataCredentialHttpError = {
 };
 /**
  * Gets a credential by ID (or by name when bycredentialname=true is set in query)
+ * @example
+ * getDataCredential(
+ *   "027d2703-e745-43ec-8876-a2e6ac341700",
+ *   {
+ *     byCredentialName: false
+ *   }
+ * )
  *
  * @param qID Credential ID
  * @param query an object with query parameters
@@ -221,6 +235,13 @@ interface DataCredentialsAPI {
     filterOrphanedDataCredentials: typeof filterOrphanedDataCredentials;
     /**
      * Deletes the specified credential by ID (or by name when type=credentialname is set in query)
+     * @example
+     * deleteDataCredential(
+     *   "027d2703-e745-43ec-8876-a2e6ac341700",
+     *   {
+     *     byCredentialName: false
+     *   }
+     * )
      *
      * @param qID Credential ID
      * @param query an object with query parameters
@@ -229,6 +250,13 @@ interface DataCredentialsAPI {
     deleteDataCredential: typeof deleteDataCredential;
     /**
      * Gets a credential by ID (or by name when bycredentialname=true is set in query)
+     * @example
+     * getDataCredential(
+     *   "027d2703-e745-43ec-8876-a2e6ac341700",
+     *   {
+     *     byCredentialName: false
+     *   }
+     * )
      *
      * @param qID Credential ID
      * @param query an object with query parameters
