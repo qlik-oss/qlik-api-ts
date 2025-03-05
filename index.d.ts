@@ -1,5 +1,5 @@
 import { InterceptorsAPI, createInterceptors } from './interceptors.js';
-import { registerAuthModule, setDefaultHostConfig, getAccessToken, AuthAPI } from './auth.js';
+import { AuthAPI, registerAuthModule, setDefaultHostConfig, getAccessToken } from './auth.js';
 import { QixAPI } from './qix.js';
 import { ApiKeysAPI } from './api-keys.js';
 import { AppsAPI } from './apps.js';
