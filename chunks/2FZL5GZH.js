@@ -22,21 +22,21 @@ var getPlatform = async (options = {}) => {
   const deploymentType = (productInfo.composition?.deploymentType || "").toLowerCase();
   const isControlCenter = deploymentType === "controlcenter";
   if (deploymentType === "qliksenseserver") {
-    return result({ isQSE: true, isWindows: true });
+    return result({ isQSE: true, isWindows: true, meta: extractMeta(productInfo) });
   }
   if (deploymentType === "qliksensedesktop") {
-    return result({ isQSD: true, isWindows: true });
+    return result({ isQSD: true, isWindows: true, meta: extractMeta(productInfo) });
   }
   if (deploymentType === "qliksensemobile") {
-    return result({ isQSE: true, isWindows: true });
+    return result({ isQSE: true, isWindows: true, meta: extractMeta(productInfo) });
   }
   if (deploymentType === "cloud-console") {
-    return result({ isCloud: true, isCloudConsole: true });
+    return result({ isCloud: true, isCloudConsole: true, meta: extractMeta(productInfo) });
   }
   if (productInfo.composition?.provider === "fedramp") {
-    return result({ isCloud: true, isQCG: true, isControlCenter });
+    return result({ isCloud: true, isQCG: true, isControlCenter, meta: extractMeta(productInfo) });
   }
-  return result({ isCloud: true, isQCS: true, isControlCenter });
+  return result({ isCloud: true, isQCS: true, isControlCenter, meta: extractMeta(productInfo) });
 };
 var productInfoPromises = {};
 function templateUrl(baseUrl) {
@@ -72,6 +72,25 @@ var getProductInfo = async ({ hostConfig, noCache } = {}) => {
       delete productInfoPromises[completeUrl];
     }
   }
+};
+var extractMeta = (data) => {
+  const urls = data.externalUrls;
+  if (!urls) {
+    return void 0;
+  }
+  const productName = data.composition?.productName ?? "Qlik";
+  const releaseLabel = data.composition?.releaseLabel || "-";
+  const productLabel = releaseLabel === "-" ? productName : `${productName} (${releaseLabel})`;
+  return {
+    productLabel,
+    urls: {
+      personalHelpBaseUrl: urls.personalHelpBaseUrl,
+      personalUpgradeBase: urls.personalUpgradeBase,
+      personalUpgradeUrl: urls.personalUpgradeUrl,
+      serverHelpBaseUrl: urls.serverHelpBaseUrl,
+      qlikWebPageUrl: urls.qlikWebPageUrl
+    }
+  };
 };
 var result = (data) => ({
   isNodeEnv: false,

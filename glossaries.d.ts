@@ -2,7 +2,7 @@ import { A as ApiCallOptions } from './invoke-fetch-types-BXn-uSF5.js';
 import './auth-types-PkN9CAF_.js';
 
 /**
- * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
+ * A JSON Patch document as defined in https://tools.ietf.org/html/rfc6902.
  */
 type JSONPatch = {
     /** The operation to be performed. */
@@ -115,6 +115,7 @@ type AtlasTerm = {
 };
 type CategoriesResult = {
     data: Category[];
+    /** URLs to a resource request */
     links?: PageLinks;
     meta?: ResultMeta;
 };
@@ -128,7 +129,7 @@ type Category = {
     id: string;
     name: string;
     parentId?: string;
-    /** This list contains the uids of the stewards of the category. */
+    /** This list contains the UIDs of the stewards of the category. */
     stewards?: string[];
     readonly updatedAt: string;
     /** The uid of the user who last updated the category */
@@ -139,7 +140,7 @@ type CreateCategory = {
     /** The name of the category. May not be identical to another category belonging to the same parent. */
     name?: string;
     parentId?: string;
-    /** This list contains the uids of the stewards of the category. */
+    /** This list contains the UIDs of the stewards of the category. */
     stewards?: string[];
 };
 type CreateGlossary = {
@@ -164,7 +165,7 @@ type CreateTerm = {
     name: string;
     relatedInformation?: string;
     relatesTo?: TermRelatesTo[];
-    /** This list contain the uids for the term's stewards */
+    /** This list contain the UIDs for the term's stewards */
     stewards?: string[];
     tags?: string[];
 };
@@ -266,6 +267,7 @@ type ExportTerm = {
 };
 type GlossariesResult = {
     data?: Glossary[];
+    /** URLs to a resource request */
     links?: PageLinks;
     meta?: ResultMeta;
 };
@@ -284,7 +286,7 @@ type Glossary = {
     overview: string;
     /** The unique identifier of the glossary owner */
     ownerId: string;
-    /** The unique identifier of the space containg the glossary */
+    /** The unique identifier of the space containing the glossary */
     spaceId: string;
     /** List of tags associated with the glossary. */
     tags: string[];
@@ -327,12 +329,16 @@ type ImportTerm = {
 };
 type LinksResult = {
     data?: TermLinksTo[];
+    /** URLs to a resource request */
     links?: PageLinks;
     meta?: ResultMeta;
 };
 type PageLink = {
     href?: string;
 };
+/**
+ * URLs to a resource request
+ */
 type PageLinks = {
     next?: PageLink;
     prev?: PageLink;
@@ -357,7 +363,7 @@ type StewardDetail = {
     userId?: string;
 };
 type Term = {
-    abbreviation?: string;
+    abbreviation: string;
     categories?: string[];
     readonly createdAt: string;
     readonly createdBy: string;
@@ -371,7 +377,7 @@ type Term = {
     revision: number;
     /** Terms status is used determine the status of a term */
     status: TermStatus;
-    /** This list contains the uids of the terms data stewards. */
+    /** This list contains the UIDs of the terms data stewards. */
     stewards: string[];
     tags: string[];
     readonly updatedAt: string;
@@ -436,6 +442,7 @@ type TermTemplate = {
 };
 type TermsResult = {
     data: Term[];
+    /** URLs to a resource request */
     links?: PageLinks;
     meta?: ResultMeta;
 };
@@ -558,7 +565,7 @@ type GetGlossaryHttpError = {
     status: 400 | 403 | 404;
 };
 /**
- * Updates glossary properties with json-patch formated data
+ * Updates glossary properties with json-patch formatted data
  *
  * @param id The glossary id.
  * @param body an object with the body content
@@ -696,7 +703,7 @@ type GetGlossaryCategoryHttpError = {
     status: 400 | 403 | 404;
 };
 /**
- * Updates category properties with json-patch formated data
+ * Updates category properties with json-patch formatted data
  *
  * @param id The glossary id.
  * @param categoryId The category id.
@@ -832,7 +839,7 @@ type GetGlossaryTermHttpError = {
     status: 400 | 403 | 404;
 };
 /**
- * Updates term properties with json-patch formated data
+ * Updates term properties with json-patch formatted data
  *
  * @param id The glossary id.
  * @param termId The term id.
@@ -1019,7 +1026,7 @@ interface GlossariesAPI {
      */
     getGlossary: typeof getGlossary;
     /**
-     * Updates glossary properties with json-patch formated data
+     * Updates glossary properties with json-patch formatted data
      *
      * @param id The glossary id.
      * @param body an object with the body content
@@ -1074,7 +1081,7 @@ interface GlossariesAPI {
      */
     getGlossaryCategory: typeof getGlossaryCategory;
     /**
-     * Updates category properties with json-patch formated data
+     * Updates category properties with json-patch formatted data
      *
      * @param id The glossary id.
      * @param categoryId The category id.
@@ -1124,7 +1131,7 @@ interface GlossariesAPI {
      */
     getGlossaryTerm: typeof getGlossaryTerm;
     /**
-     * Updates term properties with json-patch formated data
+     * Updates term properties with json-patch formatted data
      *
      * @param id The glossary id.
      * @param termId The term id.

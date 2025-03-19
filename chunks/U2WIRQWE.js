@@ -1,6 +1,6 @@
 import {
   getInvokeFetchRuntimeModule
-} from "./2B7YWDQC.js";
+} from "./WSUDVT4U.js";
 import {
   isBrowser
 } from "./2ZQ3ZX7F.js";

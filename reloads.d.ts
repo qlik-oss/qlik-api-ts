@@ -75,6 +75,8 @@ type ReloadRequest = {
     appId: string;
     /** The boolean value used to present the reload is partial or not */
     partial?: boolean;
+    /** The variables to be used in the load script. */
+    variables?: Record<string, string>;
 };
 type Reloads = {
     data: Reload[];

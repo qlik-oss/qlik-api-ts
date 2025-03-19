@@ -19,7 +19,7 @@ import {
   setDefaultHostConfig,
   toValidLocationUrl,
   toValidWebsocketLocationUrl
-} from "./NBW6PHZU.js";
+} from "./2FZL5GZH.js";
 import "./3RGGGGAR.js";
 import "./2ZQ3ZX7F.js";
 export {
