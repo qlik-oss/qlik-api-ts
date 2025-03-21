@@ -156,7 +156,7 @@ type ConnectionGet = {
     qSeparateCredentials: boolean;
     /** Type of connection, i.e. provider type of underlying connector */
     qType: string;
-    /** Encrypted base Qri string */
+    /** Encrypted base Qri string (filterable using SCIM filter, e.g. filter='qri co "snowflake"') */
     qri?: string;
     /** ID of the space to which the connection belongs */
     space?: string;

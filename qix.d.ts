@@ -1,7 +1,7 @@
 import { H as HostConfig } from './auth-types-PkN9CAF_.js';
 import './invoke-fetch-types-BXn-uSF5.js';
 
-declare const QIX_SCHEMA_VERSION = "12.2351.0";
+declare const QIX_SCHEMA_VERSION = "12.2372.0";
 type AlfaNumString = {
     /**
      * Calculated value.
@@ -8566,7 +8566,7 @@ type NativeDocFunctions<FieldRpcObject, GenericBookmarkRpcObject, GenericDimensi
      * - `ignorePatches`      -   Set to true to exclude patches from the bookmark. Default is false.
      * - `objectIdsToPatch`   -   Add softpatches for this objects if available. If empty all softpatches are added to the bookmark. Ignored if IgnorePatches is set to true.
      *
-     * Stability: *experimental*
+     * Stability: *locked*
      */
     replaceBookmark: (id: string, ignorePatches?: boolean, objectIdsToPatch?: string[]) => Promise<unknown>;
     /**

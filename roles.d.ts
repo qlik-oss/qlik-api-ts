@@ -77,8 +77,8 @@ type ListRolesResult = {
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
  */
 type PatchRole = {
-    op: "replace";
-    path: "/name" | "/description" | "/assignedScopes";
+    op: "replace" | "add" | "remove-value";
+    path: "/name" | "/description" | "/assignedScopes" | "/assignedScopes/-";
     value: string | string[];
 };
 /**
@@ -96,6 +96,16 @@ type PatchRole = {
  *     value: [
  *       "knowledgebase"
  *     ]
+ *   },
+ *   {
+ *     op: "add",
+ *     path: "/assignedScopes/-",
+ *     value: "knowledgebase"
+ *   },
+ *   {
+ *     op: "remove-value",
+ *     path: "/assignedScopes",
+ *     value: "knowledgebase"
  *   },
  *   {
  *     op: "replace",
