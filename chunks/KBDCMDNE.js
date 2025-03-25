@@ -1,6 +1,6 @@
 import {
   getAuthRuntimeModule
-} from "./WSUDVT4U.js";
+} from "./SU4ROXGY.js";
 
 // src/public/auth.ts
 function registerAuthModule(name, authModule) {

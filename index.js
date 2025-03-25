@@ -1,17 +1,17 @@
 import {
   qix_default
-} from "./chunks/73FEZYIL.js";
+} from "./chunks/OMS7JC5Z.js";
 import {
   auth_default
-} from "./chunks/NLMUM54C.js";
+} from "./chunks/KBDCMDNE.js";
 import {
   interceptors_default
 } from "./chunks/3RGGGGAR.js";
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/U2WIRQWE.js";
-import "./chunks/WSUDVT4U.js";
+} from "./chunks/RO3SEBOF.js";
+import "./chunks/SU4ROXGY.js";
 import "./chunks/2ZQ3ZX7F.js";
 
 // src/runtime-api-generator/runtime-api-generator-common.ts
@@ -533,6 +533,27 @@ var licensesMiniModule = apiDefToApiPublic("licenses", {
     }
   }
 });
+var oauthClientsMiniModule = apiDefToApiPublic("oauth-clients", {
+  api: {
+    v1: {
+      "oauth-clients": {
+        "": ["getOAuthClients:GQ:", "createOAuthClient:PBJ:"],
+        "{id}": {
+          "": ["deleteOAuthClient:D:", "getOAuthClient:G:", "patchOAuthClient:ABJ:"],
+          actions: { publish: ["publishOAuthClient:P:"] },
+          "client-secrets": { "": ["createOAuthClientSecret:P:"], "{hint}": ["deleteOAuthClientSecret:D:"] },
+          "connection-configs": {
+            me: [
+              "deleteOAuthClientConnectionConfig:D:",
+              "getOAuthClientConnectionConfig:G:",
+              "patchOAuthClientConnectionConfig:ABJ:"
+            ]
+          }
+        }
+      }
+    }
+  }
+});
 var quotasMiniModule = apiDefToApiPublic("quotas", {
   api: { v1: { quotas: { "": ["getQuotas:GQ:"], "{id}": ["getQuota:GQ:"] } } }
 });
@@ -709,6 +730,7 @@ var identityProviders = identityProvidersMiniModule(void 0, interceptors_default
 var interceptors = interceptors_default;
 var items = itemsMiniModule(void 0, interceptors_default);
 var licenses = licensesMiniModule(void 0, interceptors_default);
+var oauthClients = oauthClientsMiniModule(void 0, interceptors_default);
 var qix = qix_default;
 var quotas = quotasMiniModule(void 0, interceptors_default);
 var reloadTasks = reloadTasksMiniModule(void 0, interceptors_default);
@@ -746,6 +768,7 @@ var createQlikApi = (props) => {
     interceptors: scopedInterceptors,
     items: itemsMiniModule(props?.hostConfig, scopedInterceptors),
     licenses: licensesMiniModule(props?.hostConfig, scopedInterceptors),
+    oauthClients: oauthClientsMiniModule(props?.hostConfig, scopedInterceptors),
     qix: qix_default.withHostConfig(props?.hostConfig),
     quotas: quotasMiniModule(props?.hostConfig, scopedInterceptors),
     reloadTasks: reloadTasksMiniModule(props?.hostConfig, scopedInterceptors),
@@ -783,6 +806,7 @@ var api = {
   interceptors,
   items,
   licenses,
+  oauthClients,
   qix,
   quotas,
   reloadTasks,
@@ -823,6 +847,7 @@ export {
   interceptors,
   items,
   licenses,
+  oauthClients,
   qix,
   quotas,
   reloadTasks,
