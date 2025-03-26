@@ -18,6 +18,7 @@ import { GroupsAPI } from './groups.js';
 import { IdentityProvidersAPI } from './identity-providers.js';
 import { ItemsAPI } from './items.js';
 import { LicensesAPI } from './licenses.js';
+import { OauthClientsAPI } from './oauth-clients.js';
 import { QuotasAPI } from './quotas.js';
 import { ReloadTasksAPI } from './reload-tasks.js';
 import { ReloadsAPI } from './reloads.js';
@@ -60,6 +61,7 @@ declare const interceptors: InterceptorsAPI & {
 };
 declare const items: ItemsAPI;
 declare const licenses: LicensesAPI;
+declare const oauthClients: OauthClientsAPI;
 declare const qix: QixAPI & {
     withHostConfig: (hostConfig: HostConfig | undefined) => QixAPI;
 };
@@ -116,6 +118,8 @@ interface QlikAPI {
     items: ItemsAPI;
     /** Functions for the licenses api */
     licenses: LicensesAPI;
+    /** Functions for the oauthClients api */
+    oauthClients: OauthClientsAPI;
     /** Functions for the qix api */
     qix: QixAPI;
     /** Functions for the quotas api */
@@ -158,4 +162,4 @@ declare const api: QlikAPI & {
     }) => QlikAPI;
 };
 
-export { type CreateQlikApiProps, type QlikAPI, apiKeys, apps, audits, auth, automations, brands, collections, createQlikApi, cspOrigins, dataAssets, dataConnections, dataCredentials, dataFiles, api as default, extensions, glossaries, groups, identityProviders, interceptors, items, licenses, qix, quotas, reloadTasks, reloads, reports, roles, spaces, tempContents, tenants, themes, transports, users, webIntegrations, webNotifications, webhooks };
+export { type CreateQlikApiProps, type QlikAPI, apiKeys, apps, audits, auth, automations, brands, collections, createQlikApi, cspOrigins, dataAssets, dataConnections, dataCredentials, dataFiles, api as default, extensions, glossaries, groups, identityProviders, interceptors, items, licenses, oauthClients, qix, quotas, reloadTasks, reloads, reports, roles, spaces, tempContents, tenants, themes, transports, users, webIntegrations, webNotifications, webhooks };

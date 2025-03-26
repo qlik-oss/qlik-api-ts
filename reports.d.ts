@@ -471,6 +471,7 @@ type ReportRequest = {
      *   - sense-sheet-1.0 requires senseSheetTemplate to be set
      *   - sense-data-1.0 requires senseDataTemplate to be set
      *   - sense-pixel-perfect-template-1.0 requires sensePixelPerfectTemplate to be set
+     *   - sense-html-template-1.0 requires senseHtmlTemplate to be set
      *
      * Each template type supports specific output types:
      *   - composition-1.0 supports pdfcomposition and pptxcomposition output type
@@ -479,6 +480,7 @@ type ReportRequest = {
      *   - sense-sheet-1.0 supports pdf, pptx output type
      *   - sense-data-1.0 supports xlsx output type
      *   - sense-pixel-perfect-template-1.0 supports pdf output types
+     *   - sense-html-template-1.0 supports html output types
      *
      * Each output type requires a specific output to be provided:
      *   - pdfcomposition requires pdfCompositionOutput to be set
