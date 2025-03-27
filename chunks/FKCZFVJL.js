@@ -3,7 +3,7 @@ import {
   getRestCallAuthParams,
   getWebSocketAuthParams,
   toValidWebsocketLocationUrl
-} from "./2FZL5GZH.js";
+} from "./G6QUM5WQ.js";
 import "./3RGGGGAR.js";
 import {
   isNode

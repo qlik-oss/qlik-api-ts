@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@qlik+runtime-module-loader@1.0.18/node_modules/@qlik/runtime-module-loader/dist/index.js
+// node_modules/.pnpm/@qlik+runtime-module-loader@1.0.20/node_modules/@qlik/runtime-module-loader/dist/index.js
 window.__qlikMainPrivateResolvers = window.__qlikMainPrivateResolvers || {};
 window.__qlikMainPrivateResolvers.mainUrlPromise = window.__qlikMainPrivateResolvers.mainUrlPromise || new Promise((resolve) => {
   window.__qlikMainPrivateResolvers.resolveMainJsUrl = (value) => resolve(value);
@@ -7,22 +7,27 @@ window.__qlikMainPrivateResolvers.qlikMainPromise = window.__qlikMainPrivateReso
   if (window.QlikMain) {
     return window.QlikMain;
   }
+  const noHostWarningTimer = setTimeout(() => {
+    console.warn("Waiting for a host parameter pointing to a Qlik runtime system");
+  }, 5e3);
   const url = await window.__qlikMainPrivateResolvers.mainUrlPromise;
+  clearTimeout(noHostWarningTimer);
   return new Promise((resolve) => {
     if (window.QlikMain) {
       resolve(window.QlikMain);
+    } else {
+      const script = window.document.createElement("script");
+      script.src = url;
+      script.addEventListener("error", () => {
+        console.error(`Qlik runtime system not found: ${url}`);
+      });
+      script.addEventListener("load", () => {
+        if (window.QlikMain) {
+          resolve(window.QlikMain);
+        }
+      });
+      window.document.head.appendChild(script);
     }
-    const script = window.document.createElement("script");
-    script.src = url;
-    script.addEventListener("error", () => {
-      console.error(`Qlik runtime system not found: ${url}`);
-    });
-    script.addEventListener("load", () => {
-      if (window.QlikMain) {
-        resolve(window.QlikMain);
-      }
-    });
-    window.document.head.appendChild(script);
   });
 })();
 function provideHostConfigForMainJsUrl(hostConfig) {
@@ -30,9 +35,6 @@ function provideHostConfigForMainJsUrl(hostConfig) {
   function toMainJsUrl(hc) {
     const url = hc?.embedRuntimeUrl || hc?.url || hc?.host;
     if (!url) {
-      window.__qlikMainPrivateResolvers.noHostWarningTimer = setTimeout(() => {
-        console.warn("Waiting for a host parameter pointing to a Qlik runtime system");
-      }, 5e3);
       return void 0;
     }
     let locationUrl;
@@ -46,11 +48,6 @@ function provideHostConfigForMainJsUrl(hostConfig) {
   }
   const potentialMainJsUrl = toMainJsUrl(hostConfig);
   if (potentialMainJsUrl) {
-    const warningTimer = window.__qlikMainPrivateResolvers.noHostWarningTimer;
-    if (warningTimer) {
-      window.__qlikMainPrivateResolvers.noHostWarningTimer = void 0;
-      clearTimeout(warningTimer);
-    }
     window.__qlikMainPrivateResolvers.resolveMainJsUrl(potentialMainJsUrl);
   }
 }
