@@ -82,7 +82,9 @@ var extractMeta = (data) => {
   const releaseLabel = data.composition?.releaseLabel || "-";
   const productLabel = releaseLabel === "-" ? productName : `${productName} (${releaseLabel})`;
   return {
+    productId: data.composition?.senseId ?? "qlik",
     productLabel,
+    version: data.composition?.version,
     urls: {
       personalHelpBaseUrl: urls.personalHelpBaseUrl,
       personalUpgradeBase: urls.personalUpgradeBase,
