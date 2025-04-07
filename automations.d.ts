@@ -188,7 +188,7 @@ type UsageObject = {
     value: number;
 };
 /**
- * Retrieves a list of automations
+ * Retrieves a list of the automations that the requesting user has access to.
  * @example
  * getAutomations(
  *   {
@@ -222,7 +222,7 @@ type GetAutomationsHttpError = {
     status: 400 | 401 | 403 | 500 | 503;
 };
 /**
- * Create an automation
+ * Creates a new automation. The requesting user must be assigned the `AutomationCreator` role.
  *
  * @param body an object with the body content
  * @throws CreateAutomationHttpError
@@ -239,7 +239,7 @@ type CreateAutomationHttpError = {
     status: 400 | 401 | 403 | 500 | 503;
 };
 /**
- * Retrieves all automation usage for a tenant
+ * Retrieves paginated usage metrics for automations. The requesting user must be assigned the `TenantAdmin` role.
  *
  * @param query an object with query parameters
  * @throws GetAutomationsUsageMetricsHttpError
@@ -263,7 +263,7 @@ type GetAutomationsUsageMetricsHttpError = {
     status: 400 | 401 | 403 | 500 | 503;
 };
 /**
- * Delete an automation
+ * Deletes an automation. The requesting user must be the owner of the automation, or be assigned the `TenantAdmin` role.
  *
  * @param id The unique identifier for the automation.
  * @throws DeleteAutomationHttpError
@@ -280,7 +280,7 @@ type DeleteAutomationHttpError = {
     status: 401 | 403 | 404 | 500 | 503;
 };
 /**
- * Retrieves an automation
+ * Retrieves the full definition of an automation. The requesting user must be the owner of the automation.
  *
  * @param id The unique identifier for the automation.
  * @param query an object with query parameters
@@ -301,7 +301,7 @@ type GetAutomationWithQueryHttpError = {
     status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
- * Retrieves an automation
+ * Retrieves the full definition of an automation. The requesting user must be the owner of the automation.
  *
  * @param id The unique identifier for the automation.
  * @throws GetAutomationHttpError
@@ -318,7 +318,7 @@ type GetAutomationHttpError = {
     status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
- * Update an automation
+ * Updates the full definition of an automation. The requesting user must be the owner of the automation.
  *
  * @param id The unique identifier for the automation.
  * @param body an object with the body content
@@ -336,7 +336,7 @@ type UpdateAutomationHttpError = {
     status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
- * Copy an automation.
+ * Duplicates an existing automation. The requesting user must be the owner of the automation.
  *
  * @param id The unique identifier for the automation.
  * @param body an object with the body content
@@ -360,7 +360,7 @@ type CopyAutomationHttpError = {
     status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
- * Disables an automation.
+ * Disables an automation so that it cannot be run. The requesting user must be the owner of the automation, or be assigned the `TenantAdmin` role.
  *
  * @param id The unique identifier for the automation.
  * @throws DisableAutomationHttpError
@@ -377,7 +377,7 @@ type DisableAutomationHttpError = {
     status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
- * Enable an automation.
+ * Enables an automation so that it can be run. The requesting user must be the owner of the automation, or be assigned the `TenantAdmin` role.
  *
  * @param id The unique identifier for the automation.
  * @throws EnableAutomationHttpError
@@ -394,7 +394,7 @@ type EnableAutomationHttpError = {
     status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
- * This step will remove the history and change logs of this automation. All linked connections used inside an automation will be detached.
+ * Changes the owner of an automation to another user. This action removes the history and change logs of this automation. All linked connections used in the automation are detached and not moved to the new owner.
  *
  * @param id The unique identifier for the automation.
  * @param body an object with the body content
@@ -414,7 +414,7 @@ type MoveAutomationHttpError = {
     status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
- * Retrieves a list of runs for a specific automation.
+ * Retrieves a list of runs for a specific automation. The requesting user must be the owner of the automation, or be assigned the `TenantAdmin` role.
  *
  * @param id The unique identifier for the automation.
  * @param query an object with query parameters
@@ -443,7 +443,7 @@ type GetAutomationRunsHttpError = {
     status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
- * Create a run
+ * Creates a runs for a specific automation. The requesting user must be the owner of the automation.
  *
  * @param id The unique identifier for the automation.
  * @param body an object with the body content
@@ -461,7 +461,7 @@ type QueueAutomationRunHttpError = {
     status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
- * Retrieves a run
+ * Retrieves a specific run for an automation. The requesting user must be the owner of the automation.
  *
  * @param id The unique identifier for the automation.
  * @param runId The unique identifier for the run.
@@ -483,7 +483,7 @@ type GetAutomationRunWithQueryHttpError = {
     status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
- * Retrieves a run
+ * Retrieves a specific run for an automation. The requesting user must be the owner of the automation.
  *
  * @param id The unique identifier for the automation.
  * @param runId The unique identifier for the run.
@@ -501,7 +501,7 @@ type GetAutomationRunHttpError = {
     status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
- * Creates a temporary pre-signed AWS S3 URL to download the raw logs of a completed run. This URL is valid for 5 minutes.
+ * Retrieves the URL for the debug log of a specific automation run. The requesting user must be the owner of the automation.
  *
  * @param id The unique identifier for the automation.
  * @param runId The unique identifier for the run.
@@ -521,7 +521,7 @@ type GetAutomationRunDetailsHttpError = {
     status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
- * This action allows you to retry a specific run by creating a new run using the same inputs.
+ * Retries a specific run by creating a new run using the same inputs. The requesting user must be the owner of the automation.
  *
  * @param id The unique identifier for the automation.
  * @param runId The unique identifier for the run.
@@ -539,7 +539,7 @@ type RetryAutomationRunHttpError = {
     status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
- * Force a run to be stopped immediately.
+ * Forcefully stops an automation run immediately. The requesting user must be the owner of the automation.
  *
  * @param id The unique identifier for the automation.
  * @param runId The unique identifier for the run.
@@ -562,7 +562,7 @@ type StopAutomationRunHttpError = {
 declare function clearCache(): void;
 interface AutomationsAPI {
     /**
-     * Retrieves a list of automations
+     * Retrieves a list of the automations that the requesting user has access to.
      * @example
      * getAutomations(
      *   {
@@ -575,28 +575,28 @@ interface AutomationsAPI {
      */
     getAutomations: typeof getAutomations;
     /**
-     * Create an automation
+     * Creates a new automation. The requesting user must be assigned the `AutomationCreator` role.
      *
      * @param body an object with the body content
      * @throws CreateAutomationHttpError
      */
     createAutomation: typeof createAutomation;
     /**
-     * Retrieves all automation usage for a tenant
+     * Retrieves paginated usage metrics for automations. The requesting user must be assigned the `TenantAdmin` role.
      *
      * @param query an object with query parameters
      * @throws GetAutomationsUsageMetricsHttpError
      */
     getAutomationsUsageMetrics: typeof getAutomationsUsageMetrics;
     /**
-     * Delete an automation
+     * Deletes an automation. The requesting user must be the owner of the automation, or be assigned the `TenantAdmin` role.
      *
      * @param id The unique identifier for the automation.
      * @throws DeleteAutomationHttpError
      */
     deleteAutomation: typeof deleteAutomation;
     /**
-     * Retrieves an automation
+     * Retrieves the full definition of an automation. The requesting user must be the owner of the automation.
      *
      * @param id The unique identifier for the automation.
      * @param query an object with query parameters
@@ -604,14 +604,14 @@ interface AutomationsAPI {
      */
     getAutomationWithQuery: typeof getAutomationWithQuery;
     /**
-     * Retrieves an automation
+     * Retrieves the full definition of an automation. The requesting user must be the owner of the automation.
      *
      * @param id The unique identifier for the automation.
      * @throws GetAutomationHttpError
      */
     getAutomation: typeof getAutomation;
     /**
-     * Update an automation
+     * Updates the full definition of an automation. The requesting user must be the owner of the automation.
      *
      * @param id The unique identifier for the automation.
      * @param body an object with the body content
@@ -619,7 +619,7 @@ interface AutomationsAPI {
      */
     updateAutomation: typeof updateAutomation;
     /**
-     * Copy an automation.
+     * Duplicates an existing automation. The requesting user must be the owner of the automation.
      *
      * @param id The unique identifier for the automation.
      * @param body an object with the body content
@@ -627,21 +627,21 @@ interface AutomationsAPI {
      */
     copyAutomation: typeof copyAutomation;
     /**
-     * Disables an automation.
+     * Disables an automation so that it cannot be run. The requesting user must be the owner of the automation, or be assigned the `TenantAdmin` role.
      *
      * @param id The unique identifier for the automation.
      * @throws DisableAutomationHttpError
      */
     disableAutomation: typeof disableAutomation;
     /**
-     * Enable an automation.
+     * Enables an automation so that it can be run. The requesting user must be the owner of the automation, or be assigned the `TenantAdmin` role.
      *
      * @param id The unique identifier for the automation.
      * @throws EnableAutomationHttpError
      */
     enableAutomation: typeof enableAutomation;
     /**
-     * This step will remove the history and change logs of this automation. All linked connections used inside an automation will be detached.
+     * Changes the owner of an automation to another user. This action removes the history and change logs of this automation. All linked connections used in the automation are detached and not moved to the new owner.
      *
      * @param id The unique identifier for the automation.
      * @param body an object with the body content
@@ -649,7 +649,7 @@ interface AutomationsAPI {
      */
     moveAutomation: typeof moveAutomation;
     /**
-     * Retrieves a list of runs for a specific automation.
+     * Retrieves a list of runs for a specific automation. The requesting user must be the owner of the automation, or be assigned the `TenantAdmin` role.
      *
      * @param id The unique identifier for the automation.
      * @param query an object with query parameters
@@ -657,7 +657,7 @@ interface AutomationsAPI {
      */
     getAutomationRuns: typeof getAutomationRuns;
     /**
-     * Create a run
+     * Creates a runs for a specific automation. The requesting user must be the owner of the automation.
      *
      * @param id The unique identifier for the automation.
      * @param body an object with the body content
@@ -665,7 +665,7 @@ interface AutomationsAPI {
      */
     queueAutomationRun: typeof queueAutomationRun;
     /**
-     * Retrieves a run
+     * Retrieves a specific run for an automation. The requesting user must be the owner of the automation.
      *
      * @param id The unique identifier for the automation.
      * @param runId The unique identifier for the run.
@@ -674,7 +674,7 @@ interface AutomationsAPI {
      */
     getAutomationRunWithQuery: typeof getAutomationRunWithQuery;
     /**
-     * Retrieves a run
+     * Retrieves a specific run for an automation. The requesting user must be the owner of the automation.
      *
      * @param id The unique identifier for the automation.
      * @param runId The unique identifier for the run.
@@ -682,7 +682,7 @@ interface AutomationsAPI {
      */
     getAutomationRun: typeof getAutomationRun;
     /**
-     * Creates a temporary pre-signed AWS S3 URL to download the raw logs of a completed run. This URL is valid for 5 minutes.
+     * Retrieves the URL for the debug log of a specific automation run. The requesting user must be the owner of the automation.
      *
      * @param id The unique identifier for the automation.
      * @param runId The unique identifier for the run.
@@ -690,7 +690,7 @@ interface AutomationsAPI {
      */
     getAutomationRunDetails: typeof getAutomationRunDetails;
     /**
-     * This action allows you to retry a specific run by creating a new run using the same inputs.
+     * Retries a specific run by creating a new run using the same inputs. The requesting user must be the owner of the automation.
      *
      * @param id The unique identifier for the automation.
      * @param runId The unique identifier for the run.
@@ -698,7 +698,7 @@ interface AutomationsAPI {
      */
     retryAutomationRun: typeof retryAutomationRun;
     /**
-     * Force a run to be stopped immediately.
+     * Forcefully stops an automation run immediately. The requesting user must be the owner of the automation.
      *
      * @param id The unique identifier for the automation.
      * @param runId The unique identifier for the run.
