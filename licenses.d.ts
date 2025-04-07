@@ -367,6 +367,7 @@ type LicenseOverview = {
 /**
  * @example
  * {
+ *   extensionStatus: "Unavailable",
  *   origin: "Internal",
  *   product: "Qlik Sense Business",
  *   status: "Ok",
@@ -376,6 +377,8 @@ type LicenseOverview = {
  * }
  */
 type LicenseStatus = {
+    /** Enum with extension status of license. access. */
+    extensionStatus: "Unavailable" | "Pending" | "Available";
     /** Origin of license key. */
     origin: "Internal" | "External";
     /** The product the license is valid for. */
