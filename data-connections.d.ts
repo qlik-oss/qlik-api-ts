@@ -130,10 +130,10 @@ type ConnectionGet = {
     /** List of connection parsed from connection string (only available when query parseConnection=true is set) */
     connectionProperties?: unknown;
     /** Datetime when the connection was created */
-    created: string;
+    created?: string;
     /** Data source ID */
     datasourceID?: string;
-    links?: Link;
+    links: Link;
     /** Array of string (i.e. update, delete, read) indicating the user's privileges on the associated connection */
     privileges: Privilege[];
     /** 0 or 1 value indicating whether the data connector is 64-bit (0) or 32-bit (1). Defaults to 0 if not specified. */
@@ -153,7 +153,7 @@ type ConnectionGet = {
     /** Descriptive name of the data connection */
     qName: string;
     /** Indicates whether or not this is a credential-less connection */
-    qSeparateCredentials: boolean;
+    qSeparateCredentials?: boolean;
     /** Type of connection, i.e. provider type of underlying connector */
     qType: string;
     /** Encrypted base Qri string (filterable using SCIM filter, e.g. filter='qri co "snowflake"') */
@@ -165,9 +165,9 @@ type ConnectionGet = {
     /** Tenant ID of the connection's creator */
     tenant: string;
     /** Datetime when the connection was last updated */
-    updated: string;
+    updated?: string;
     /** User ID of the connection's creator */
-    user: string;
+    user?: string;
 };
 type ConnectionUpdate = {
     /** ID of the datasource associated with this connection */

@@ -286,6 +286,8 @@ type FieldInTableProfilingData = {
     Average?: number;
     /** Average string length of textual values. 0 otherwise. */
     AvgStringLen?: number;
+    /** Data evenness aka Shannon's entropy normalized to [0,1] */
+    DataEvenness?: number;
     /** Number of distinct numeric values */
     DistinctNumericValues?: number;
     /** Number of distinct text values */

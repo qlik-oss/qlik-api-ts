@@ -123,6 +123,11 @@ type OAuthClientCreateRequest = {
     clientName: string;
     /** URI for homepage of client */
     clientUri?: string;
+    /** Optional settings for configuring the client connection. */
+    connectionConfig?: {
+        /** Specifies the consent method for the connection. The only allowed value is "trusted." */
+        consentMethod?: "trusted";
+    };
     /** Client description */
     description?: string;
     /** URI for logo of client */
