@@ -6,37 +6,51 @@ import {
   isNode
 } from "./2ZQ3ZX7F.js";
 
+// src/auth/internal/default-host-config.ts
+var defaultHostConfig = {};
+function setDefaultHostConfig(hostConfig) {
+  defaultHostConfig = hostConfig || {};
+}
+function withDefaultHostConfig(hostConfig) {
+  if (hostConfig && Object.keys(hostConfig).length > 0) {
+    return hostConfig;
+  }
+  return defaultHostConfig;
+}
+
 // src/platform/platform-functions.ts
 var getPlatform = async (options = {}) => {
+  const hc = withDefaultHostConfig(options.hostConfig);
+  const isAnonymous = hc?.authType === "anonymous" || !!hc.accessCode;
   const isNodeEnvironment = typeof window === "undefined";
   if (isNodeEnvironment) {
-    return result({ isNodeEnv: true });
+    return result({ isNodeEnv: true, isAnonymous });
   }
   const { data: productInfo, status } = await getProductInfo(options);
   if (status === 404) {
-    return result({ isUnknown: true });
+    return result({ isUnknown: true, isAnonymous });
   }
   if (!productInfo || status <= 399 && status >= 300) {
-    return result({ isQSE: true, isWindows: true });
+    return result({ isQSE: true, isWindows: true, isAnonymous });
   }
   const deploymentType = (productInfo.composition?.deploymentType || "").toLowerCase();
   const isControlCenter = deploymentType === "controlcenter";
   if (deploymentType === "qliksenseserver") {
-    return result({ isQSE: true, isWindows: true, meta: extractMeta(productInfo) });
+    return result({ isQSE: true, isWindows: true, isAnonymous, meta: extractMeta(productInfo) });
   }
   if (deploymentType === "qliksensedesktop") {
-    return result({ isQSD: true, isWindows: true, meta: extractMeta(productInfo) });
+    return result({ isQSD: true, isWindows: true, isAnonymous, meta: extractMeta(productInfo) });
   }
   if (deploymentType === "qliksensemobile") {
-    return result({ isQSE: true, isWindows: true, meta: extractMeta(productInfo) });
+    return result({ isQSE: true, isWindows: true, isAnonymous, meta: extractMeta(productInfo) });
   }
   if (deploymentType === "cloud-console") {
-    return result({ isCloud: true, isCloudConsole: true, meta: extractMeta(productInfo) });
+    return result({ isCloud: true, isCloudConsole: true, isAnonymous, meta: extractMeta(productInfo) });
   }
   if (productInfo.composition?.provider === "fedramp") {
-    return result({ isCloud: true, isQCG: true, isControlCenter, meta: extractMeta(productInfo) });
+    return result({ isCloud: true, isQCG: true, isControlCenter, isAnonymous, meta: extractMeta(productInfo) });
   }
-  return result({ isCloud: true, isQCS: true, isControlCenter, meta: extractMeta(productInfo) });
+  return result({ isCloud: true, isQCS: true, isControlCenter, isAnonymous, meta: extractMeta(productInfo) });
 };
 var productInfoPromises = {};
 function templateUrl(baseUrl) {
@@ -105,20 +119,9 @@ var result = (data) => ({
   isQSE: false,
   isQSD: false,
   isUnknown: false,
+  isAnonymous: false,
   ...data
 });
-
-// src/auth/internal/default-host-config.ts
-var defaultHostConfig = {};
-function setDefaultHostConfig(hostConfig) {
-  defaultHostConfig = hostConfig || {};
-}
-function withDefaultHostConfig(hostConfig) {
-  if (hostConfig && Object.keys(hostConfig).length > 0) {
-    return hostConfig;
-  }
-  return defaultHostConfig;
-}
 
 // src/auth/internal/auth-module-registry.ts
 var authModules = {};
@@ -242,6 +245,9 @@ function isHostCrossOrigin(hostConfig) {
 }
 async function isWindows(hostConfig) {
   const hostConfigToUse = withDefaultHostConfig(hostConfig);
+  if (typeof hostConfigToUse.forceIsWindows === "boolean") {
+    return hostConfigToUse.forceIsWindows;
+  }
   if (hostConfigToUse.authType === "cookie") {
     return false;
   }
@@ -467,6 +473,17 @@ function internalValidateHostConfig(hostConfig, options) {
   return true;
 }
 
+// src/utils/expose-internal-test-apis.ts
+var internalApisName = "__QLIK_INTERNAL__DO_NOT_USE_OR_YOU_WILL_BE_FIRED";
+function exposeInternalApiOnWindow(name, fn) {
+  if (globalThis.location?.origin.startsWith("https://localhost:") || globalThis.location?.origin?.endsWith("qlik-stage.com")) {
+    if (globalThis[internalApisName] === void 0) {
+      globalThis[internalApisName] = {};
+    }
+    globalThis[internalApisName][name] = fn;
+  }
+}
+
 // src/auth/internal/default-auth-modules/oauth/storage-helpers.ts
 var storagePrefix = "qlik-qmfe-api";
 function getTopicFromOauthHostConfig(hostConfig) {
@@ -483,6 +500,20 @@ function getTopicFromAnonHostConfig(hostConfig) {
   return `${hostConfig.accessCode}_${hostConfig.clientId}`;
 }
 var cachedTokens = {};
+function clearAllCachedTokens() {
+  for (const key in cachedTokens) {
+    delete cachedTokens[key];
+  }
+}
+exposeInternalApiOnWindow("clearAllAccessTokens", () => {
+  console.log("Clearing tokens", cachedTokens);
+  Object.keys(cachedTokens).forEach((key) => {
+    console.log("Clearing access tokens for", key);
+    deleteFromLocalStorage(key, ["access-token", "refresh-token"]);
+    deleteFromSessionStorage(key, ["access-token", "refresh-token"]);
+  });
+  clearAllCachedTokens();
+});
 function saveInLocalStorage(topic, name, value) {
   localStorage.setItem(`${storagePrefix}-${topic}-${name}`, value);
 }
@@ -551,6 +582,7 @@ async function loadOrAcquireAccessToken(topic, acquireTokens, noCache, accessTok
   const mayUseStorage = isBrowser();
   const storedOauthTokens = cachedTokens[topic] || (mayUseStorage ? loadOauthTokensFromStorage(topic, accessTokenStorage) : void 0);
   if (storedOauthTokens) {
+    cachedTokens[topic] = storedOauthTokens;
     return Promise.resolve(storedOauthTokens);
   }
   const tokensPromise = acquireTokens();
@@ -2242,6 +2274,7 @@ export {
   checkForCrossDomainRequest,
   logout,
   generateRandomString,
+  exposeInternalApiOnWindow,
   InvokeFetchError,
   EncodingError,
   invokeFetch,
