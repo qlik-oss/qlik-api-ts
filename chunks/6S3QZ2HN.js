@@ -1,16 +1,19 @@
 import {
+  getHumanReadableSocketClosedErrorMessage
+} from "./ETNHFALU.js";
+import {
+  exposeInternalApiOnWindow,
   generateRandomString,
   getRestCallAuthParams,
   getWebSocketAuthParams,
+  handleAuthenticationError,
+  isWindows,
   toValidWebsocketLocationUrl
-} from "./G6QUM5WQ.js";
+} from "./757QACNX.js";
 import "./3RGGGGAR.js";
 import {
   isNode
 } from "./2ZQ3ZX7F.js";
-
-// src/qix/session/enigma-session.ts
-import enigma from "enigma.js";
 
 // src/qix/session/schema/engine-api.js
 var engine_api_default = {
@@ -8575,6 +8578,9 @@ var base_default = {
   types: ["Doc", "GenericObject", "GenericDimension", "GenericMeasure", "GenericBookmark", "GenericVariable", "Field"],
   init(args) {
     const { api } = args;
+    if (api.Promise) {
+      return;
+    }
     if (api.getAppLayout) {
       api.session.app = api;
     }
@@ -8602,9 +8608,13 @@ function createGetMethod(cacheKey) {
         return api.migrate.object(api).then(() => api);
       }
       return api;
-    }).catch(() => {
+    }).catch((err) => {
       delete apiCache[id];
-      return Promise.reject({ error: { code: engine_enums_default.NxLocalizedErrorCode.LOCERR_GENERIC_NOT_FOUND } });
+      return Promise.reject({
+        code: engine_enums_default.NxLocalizedErrorCode.LOCERR_GENERIC_NOT_FOUND,
+        message: "Object not found",
+        error: { code: engine_enums_default.NxLocalizedErrorCode.LOCERR_GENERIC_NOT_FOUND }
+      });
     });
     apiCache[id] = promise;
     return promise;
@@ -9209,16 +9219,16 @@ var state_default = {
         self.setState(RPCStates.VALIDATING);
       }
       if (self.ongoingRequests[CACHE_KEY]) {
-        const ongoingRequests = self.ongoingRequests[CACHE_KEY];
+        const ongoingRequests2 = self.ongoingRequests[CACHE_KEY];
         if (pure) {
-          return ongoingRequests.then(() => {
+          return ongoingRequests2.then(() => {
             if (!self.pureLayout.permissions) {
               self.pureLayout.permissions = self.layout.permissions;
             }
             return self.pureLayout;
           });
         }
-        return ongoingRequests;
+        return ongoingRequests2;
       }
       const request = _getLayout().then((layout) => {
         if (!self.isValid) {
@@ -10380,8 +10390,9 @@ async function createEnigmaSession({
     /^http/,
     "ws"
   );
+  const unitTestCreateWebSocket = hostConfig?.createWebSocket;
   let createSocketBuilder;
-  if (isNodeEnvironment) {
+  if (isNodeEnvironment && !unitTestCreateWebSocket) {
     const WS = (await import("ws")).default;
     createSocketBuilder = async () => {
       let url = baseUrl;
@@ -10400,9 +10411,17 @@ async function createEnigmaSession({
       Object.entries(queryParams).forEach(([key, value]) => {
         url = `${url}&${key}=${value}`;
       });
-      return (socketUrl) => new WebSocket(url);
+      return (socketUrl) => {
+        const socket = unitTestCreateWebSocket ? unitTestCreateWebSocket(url) : new WebSocket(url);
+        exposeInternalApiOnWindow("closeLastWebSocket", (code) => {
+          console.log("Closing websocket with code", code, socket);
+          socket.close(code);
+        });
+        return socket;
+      };
     };
   }
+  const { default: enigma } = await import("enigma.js");
   const session = enigma.create({
     schema: engine_api_default,
     mixins: mixins5,
@@ -10424,6 +10443,2049 @@ async function createEnigmaSession({
   session.resume = resume;
   return session;
 }
+
+// src/qix/session/phoenix/logger.ts
+var ongoingRequests = /* @__PURE__ */ new Set();
+var requestDepths = /* @__PURE__ */ new Map();
+var startIntent = 0;
+var baseIndent = "      ";
+var logEnabled = false;
+try {
+  logEnabled = globalThis.qlikQixWebSocketLogEnabled || localStorage?.getItem("qlik-qix-websocket-log") === "true";
+} catch {
+}
+function logRequest(handleOrObject, websocketRequest, request) {
+  if (logEnabled) {
+    const indent = startIndent(websocketRequest);
+    const preThing = `${indent} ===> ${websocketRequest.id} call `;
+    console.log(`${preThing}${toLogName(handleOrObject)}.${request.method}`, ...formatParams(request.params));
+  }
+}
+function logResponse(handleOrObject, websocketRequest, sendResponse) {
+  if (logEnabled) {
+    const indent = endIndent(websocketRequest);
+    if (sendResponse?.change) {
+      console.log(`${indent} <--- ${websocketRequest.id} Changed: ${sendResponse.change.join(", ")}`);
+    }
+    if (sendResponse?.close) {
+      console.log(`${indent} <--- ${websocketRequest.id} Closed:  ${sendResponse.close.join(", ")}`);
+    }
+    const preThing = `${indent} <=== ${websocketRequest.id} return`;
+    if (sendResponse.error) {
+      console.log(preThing, JSON.stringify(sendResponse.error));
+    } else {
+      console.log(preThing, sendResponse.result);
+    }
+  }
+}
+function logJsonRpcChannelError(handleOrObject, websocketRequest, error) {
+  if (logEnabled) {
+    const indent = endIndent(websocketRequest);
+    const preThing = `${indent} <=== ${websocketRequest.id} throw`;
+    console.log(preThing, JSON.stringify(error));
+  }
+}
+function logEvent(message, ...optionalParams) {
+  if (logEnabled) {
+    console.log("QIX", message, ...optionalParams);
+  }
+}
+function startIndent(websocketRequest) {
+  ongoingRequests.add(websocketRequest.id);
+  requestDepths.set(websocketRequest.id, ongoingRequests.size);
+  const indent = baseIndent.repeat(startIntent + ongoingRequests.size);
+  return indent;
+}
+function endIndent(websocketRequest) {
+  const indent = baseIndent.repeat(startIntent + (requestDepths.get(websocketRequest.id) || 0));
+  ongoingRequests.delete(websocketRequest.id);
+  requestDepths.delete(websocketRequest.id);
+  return indent;
+}
+function toLogName(handleOrObject) {
+  if (handleOrObject === 1) {
+    return "Doc";
+  } else if (handleOrObject === -1) {
+    return "Global";
+  } else if (typeof handleOrObject === "undefined") {
+    return "(undefined handle)";
+  } else if (typeof handleOrObject === "object") {
+    const obj = handleOrObject;
+    if (!obj.id) {
+      const params = obj.respawnInfo.creatingRequest?.params;
+      if (Array.isArray(params)) {
+        return params?.filter((arg) => typeof arg === "string").join("/");
+      }
+    }
+    return `${obj.id}/${obj.getHandle()}`;
+  } else {
+    return handleOrObject;
+  }
+}
+function formatParams(params) {
+  if (Array.isArray(params)) {
+    const result = ["("];
+    for (let i = 0; i < params.length; i++) {
+      result.push(params[i]);
+      if (i < params.length - 1) {
+        result.push(",");
+      }
+    }
+    result.push(")");
+    return result;
+  } else {
+    return [params];
+  }
+}
+
+// src/qix/session/phoenix/interest-monitor.ts
+function createInterestMonitor() {
+  let activity = createPromiseAndResolveFunc();
+  let listening = false;
+  let onUserActivityDetectedCallback;
+  function signalInterest() {
+    stopListeningForActivity();
+    logEvent("Someone is interested in this");
+    onUserActivityDetectedCallback?.();
+    activity.resolve();
+  }
+  function waitUntilSomeoneIsInterestedInThis() {
+    logEvent("Waiting for someone to be interested in this");
+    startListeningForActivity();
+    const result = activity.promise;
+    activity = createPromiseAndResolveFunc();
+    return result;
+  }
+  function resetAnyInterestSignalledBeforeNow() {
+    logEvent("stop waiting for someone to be interested in this");
+    stopListeningForActivity();
+    activity = createPromiseAndResolveFunc();
+  }
+  function onUserActivityDetected(activityCallback) {
+    onUserActivityDetectedCallback = activityCallback;
+  }
+  function mouseListener() {
+    signalInterest();
+  }
+  function visibilityChangeListener() {
+    if (globalThis.document?.visibilityState === "visible") {
+      logEvent("Document is visible");
+      signalInterest();
+    }
+  }
+  function focusListener() {
+    logEvent("Document has focus");
+    signalInterest();
+  }
+  function startListeningForActivity() {
+    if (!listening) {
+      listening = true;
+      globalThis.window?.document.addEventListener("visibilitychange", visibilityChangeListener);
+      globalThis.window?.addEventListener("focus", focusListener);
+      globalThis.window?.addEventListener("mousemove", mouseListener);
+    }
+  }
+  function stopListeningForActivity() {
+    if (listening) {
+      listening = false;
+      globalThis.window?.document.removeEventListener("visibilitychange", visibilityChangeListener);
+      globalThis.window?.removeEventListener("focus", focusListener);
+      globalThis.window?.removeEventListener("mousemove", mouseListener);
+    }
+  }
+  const api = {
+    startListeningForActivity,
+    stopListeningForActivity,
+    waitUntilSomeoneIsInterestedInThis,
+    resetAnyInterestSignalledBeforeNow,
+    onUserActivityDetected,
+    signalInterest
+  };
+  return api;
+}
+function createPromiseAndResolveFunc() {
+  let resolve = () => {
+  };
+  const promise = new Promise((res) => {
+    resolve = res;
+  });
+  return { promise, resolve };
+}
+
+// src/qix/session/phoenix/rpc-object-ref.ts
+function normalizeObjectRef(response) {
+  if (response.qHandle) {
+    return {
+      handle: response.qHandle,
+      type: response.qType,
+      id: response.qGenericId,
+      genericType: response.qGenericType
+    };
+  } else {
+    return {
+      handle: response.handle,
+      type: response.type,
+      id: response.id,
+      genericType: response.genericType
+    };
+  }
+}
+function isQixObjectRef(ref) {
+  return typeof ref === "object" && ref.qHandle && ref.qType;
+}
+function getHandleOfRef(response) {
+  return response.qHandle ?? response.handle;
+}
+
+// src/qix/session/phoenix/phoenix-session-state.ts
+function createPhoenixSessionState({
+  doc,
+  global,
+  executedAppActions
+}) {
+  const objects = {};
+  return {
+    getObjects() {
+      return objects;
+    },
+    getObject(ref) {
+      if (typeof ref === "object") {
+        const handle = getHandleOfRef(ref);
+        if (handle === global.getHandle()) {
+          return global;
+        }
+        if (handle === doc.getHandle()) {
+          return doc;
+        }
+        if (handle) {
+          return objects[handle];
+        }
+        return void 0;
+      }
+      return objects[ref];
+    },
+    removeObject(handle) {
+      delete objects[handle];
+    },
+    setObject(handle, object) {
+      objects[handle] = object;
+    },
+    getDoc() {
+      return doc;
+    },
+    getGlobal() {
+      return global;
+    },
+    addExecutedInitialAppAction(initialAppAction) {
+      executedAppActions.push(initialAppAction);
+    },
+    isAppActionExecuted(initialAppAction) {
+      return executedAppActions.indexOf(initialAppAction) >= 0;
+    },
+    getExecutedAppActions() {
+      return executedAppActions;
+    }
+  };
+}
+
+// src/qix/session/phoenix/json-patch.js
+import originalExtend from "extend";
+var extend2 = originalExtend.bind(null, true);
+var JSONPatch2 = {};
+var { isArray: isArray2 } = Array;
+function isObject2(v) {
+  return v != null && !Array.isArray(v) && typeof v === "object";
+}
+function isUndef2(v) {
+  return typeof v === "undefined";
+}
+function isFunction2(v) {
+  return typeof v === "function";
+}
+function generateValue2(val) {
+  if (val) {
+    return extend2({}, { val }).val;
+  }
+  return val;
+}
+function isSpecialProperty2(obj, key) {
+  return isFunction2(obj[key]) || key.substring(0, 2) === "$$" || key.substring(0, 1) === "_";
+}
+function getParent2(data, str) {
+  const seperator = "/";
+  const parts = str.substring(1).split(seperator).slice(0, -1);
+  let numPart;
+  parts.forEach((part, i) => {
+    if (i === parts.length) {
+      return;
+    }
+    numPart = +part;
+    const newPart = !isNaN(numPart) ? [] : {};
+    data[numPart || part] = isUndef2(data[numPart || part]) ? newPart : data[part];
+    data = data[numPart || part];
+  });
+  return data;
+}
+function emptyObject2(obj) {
+  Object.keys(obj).forEach((key) => {
+    const config = Object.getOwnPropertyDescriptor(obj, key);
+    if (config.configurable && !isSpecialProperty2(obj, key)) {
+      delete obj[key];
+    }
+  });
+}
+function compare2(a, b) {
+  let isIdentical = true;
+  if (isObject2(a) && isObject2(b)) {
+    if (Object.keys(a).length !== Object.keys(b).length) {
+      return false;
+    }
+    Object.keys(a).forEach((key) => {
+      if (!compare2(a[key], b[key])) {
+        isIdentical = false;
+      }
+    });
+    return isIdentical;
+  }
+  if (isArray2(a) && isArray2(b)) {
+    if (a.length !== b.length) {
+      return false;
+    }
+    for (let i = 0, l = a.length; i < l; i += 1) {
+      if (!compare2(a[i], b[i])) {
+        return false;
+      }
+    }
+    return true;
+  }
+  return a === b;
+}
+function patchArray2(original, newA, basePath) {
+  let patches = [];
+  const oldA = original.slice();
+  let tmpIdx = -1;
+  function findIndex(a, id, idx) {
+    if (a[idx] && isUndef2(a[idx].qInfo)) {
+      return null;
+    }
+    if (a[idx] && a[idx].qInfo.qId === id) {
+      return idx;
+    }
+    for (let ii = 0, ll = a.length; ii < ll; ii += 1) {
+      if (a[ii] && a[ii].qInfo.qId === id) {
+        return ii;
+      }
+    }
+    return -1;
+  }
+  if (compare2(newA, oldA)) {
+    return patches;
+  }
+  if (!isUndef2(newA[0]) && isUndef2(newA[0].qInfo)) {
+    patches.push({
+      op: "replace",
+      path: basePath,
+      value: newA
+    });
+    return patches;
+  }
+  for (let i = oldA.length - 1; i >= 0; i -= 1) {
+    tmpIdx = findIndex(newA, oldA[i].qInfo && oldA[i].qInfo.qId, i);
+    if (tmpIdx === -1) {
+      patches.push({
+        op: "remove",
+        path: `${basePath}/${i}`
+      });
+      oldA.splice(i, 1);
+    } else {
+      patches = patches.concat(JSONPatch2.generate(oldA[i], newA[tmpIdx], `${basePath}/${i}`));
+    }
+  }
+  for (let i = 0, l = newA.length; i < l; i += 1) {
+    tmpIdx = findIndex(oldA, newA[i].qInfo && newA[i].qInfo.qId);
+    if (tmpIdx === -1) {
+      patches.push({
+        op: "add",
+        path: `${basePath}/${i}`,
+        value: newA[i]
+      });
+      oldA.splice(i, 0, newA[i]);
+    } else if (tmpIdx !== i) {
+      patches.push({
+        op: "move",
+        path: `${basePath}/${i}`,
+        from: `${basePath}/${tmpIdx}`
+      });
+      oldA.splice(i, 0, oldA.splice(tmpIdx, 1)[0]);
+    }
+  }
+  return patches;
+}
+JSONPatch2.generate = function generate(original, newData, basePath) {
+  basePath = basePath || "";
+  let patches = [];
+  Object.keys(newData).forEach((key) => {
+    const val = generateValue2(newData[key]);
+    const oldVal = original[key];
+    const tmpPath = `${basePath}/${key}`;
+    if (compare2(val, oldVal) || isSpecialProperty2(newData, key)) {
+      return;
+    }
+    if (isUndef2(oldVal)) {
+      patches.push({
+        op: "add",
+        path: tmpPath,
+        value: val
+      });
+    } else if (isObject2(val) && isObject2(oldVal)) {
+      patches = patches.concat(JSONPatch2.generate(oldVal, val, tmpPath));
+    } else if (isArray2(val) && isArray2(oldVal)) {
+      patches = patches.concat(patchArray2(oldVal, val, tmpPath));
+    } else {
+      patches.push({
+        op: "replace",
+        path: `${basePath}/${key}`,
+        value: val
+      });
+    }
+  });
+  Object.keys(original).forEach((key) => {
+    if (isUndef2(newData[key]) && !isSpecialProperty2(original, key)) {
+      patches.push({
+        op: "remove",
+        path: `${basePath}/${key}`
+      });
+    }
+  });
+  return patches;
+};
+JSONPatch2.apply = function apply(original, patches) {
+  patches.forEach((patch) => {
+    let parent = getParent2(original, patch.path);
+    let key = patch.path.split("/").splice(-1)[0];
+    let target = key && isNaN(+key) ? parent[key] : parent[+key] || parent;
+    const from = patch.from ? patch.from.split("/").splice(-1)[0] : null;
+    if (patch.path === "/") {
+      parent = null;
+      target = original;
+    }
+    if (patch.op === "add" || patch.op === "replace") {
+      if (isArray2(parent)) {
+        if (key === "-") {
+          key = parent.length;
+        }
+        parent.splice(+key, patch.op === "add" ? 0 : 1, patch.value);
+      } else if (isArray2(target) && isArray2(patch.value)) {
+        target.length = 0;
+        const chunkSize = 1e3;
+        for (let i = 0; i < patch.value.length; i += chunkSize) {
+          const chunk = patch.value.slice(i, i + chunkSize);
+          target.push(...chunk);
+        }
+      } else if (isObject2(target) && isObject2(patch.value)) {
+        emptyObject2(target);
+        extend2(target, patch.value);
+      } else if (!parent) {
+        throw new Error("Patchee is not an object we can patch");
+      } else {
+        parent[key] = patch.value;
+      }
+    } else if (patch.op === "move") {
+      const oldParent = getParent2(original, patch.from);
+      if (isArray2(parent)) {
+        parent.splice(+key, 0, oldParent.splice(+from, 1)[0]);
+      } else {
+        parent[key] = oldParent[from];
+        delete oldParent[from];
+      }
+    } else if (patch.op === "remove") {
+      if (isArray2(parent)) {
+        parent.splice(+key, 1);
+      } else {
+        delete parent[key];
+      }
+    }
+  });
+};
+JSONPatch2.clone = function clone(obj) {
+  return extend2({}, obj);
+};
+JSONPatch2.createPatch = function createPatch(op, val, path) {
+  const patch = {
+    op: op.toLowerCase(),
+    path
+  };
+  if (patch.op === "move") {
+    patch.from = val;
+  } else if (typeof val !== "undefined") {
+    patch.value = val;
+  }
+  return patch;
+};
+JSONPatch2.updateObject = function updateObject(original, newData) {
+  if (!Object.keys(original).length) {
+    extend2(original, newData);
+    return;
+  }
+  JSONPatch2.apply(original, JSONPatch2.generate(original, newData));
+};
+var json_patch_default2 = JSONPatch2;
+
+// src/qix/session/phoenix/delta-compression.ts
+function unwrapDeltas(result, state, handle, method) {
+  const newResult = {};
+  Object.entries(result).forEach(([outKey, patches]) => {
+    if (!Array.isArray(patches)) {
+      throw new Error("Unexpected RPC response, expected array of patches");
+    }
+    let entry = state[handle]?.[method]?.[outKey];
+    if (typeof entry === "undefined") {
+      entry = patches[0] && Array.isArray(patches[0].value) ? [] : {};
+    }
+    if (patches.length) {
+      if (patches[0].path === "/" && typeof patches[0].value !== "object") {
+        entry = patches[0].value;
+      } else {
+        json_patch_default2.apply(entry, patches);
+      }
+      if (!state[handle]) {
+        state[handle] = {};
+      }
+      if (!state[handle][method]) {
+        state[handle][method] = {};
+      }
+      state[handle][method][outKey] = entry;
+    }
+    newResult[outKey] = entry;
+  });
+  return JSON.parse(JSON.stringify(newResult));
+}
+
+// src/qix/session/phoenix/protocol-helpers.ts
+function getDeltaAndReturnEmptyProps(request) {
+  if (request.method === "GetProperties" || request.method === "GetFullPropertyTree") {
+    return {
+      return_empty: true,
+      delta: false
+      // return_empty require delta to be false to work
+    };
+  } else {
+    return {
+      delta: request.outKey !== -1 && request.outKey !== "qSuccess"
+    };
+  }
+}
+function extractResult(request, resultObject) {
+  if (typeof resultObject !== "object") {
+    return resultObject;
+  }
+  if (request.method === "CreateSessionApp" || request.method === "CreateSessionAppFromApp") {
+    resultObject.qReturn.qGenericId = resultObject.qSessionAppId || resultObject.qReturn.qGenericId;
+  } else if (request.method === "GetInteract" || request.method === "StoreTempSelectionState" || request.method === "CreateTemporaryBookmark") {
+    delete resultObject.qReturn;
+  }
+  if (typeof resultObject.qReturn !== "undefined") {
+    return resultObject.qReturn;
+  }
+  if (request.outKey !== -1) {
+    return resultObject[request.outKey || "qReturn"];
+  }
+  return resultObject;
+}
+function createResolvablePromise() {
+  let resolve;
+  let reject;
+  const promise = new Promise((res, rej) => {
+    resolve = res;
+    reject = rej;
+  });
+  return [promise, resolve, reject];
+}
+
+// src/qix/session/phoenix/websocket.ts
+var forceUniqueSessionForTestPurposes = false;
+exposeInternalApiOnWindow("makeNextWebsocketGetNewEngineSession", () => {
+  forceUniqueSessionForTestPurposes = true;
+});
+var WebSocketError = class extends Error {
+  code;
+  reason;
+  constructor({ code = 0, reason = "" }, { appId, hostConfig }) {
+    super(getHumanReadableSocketClosedErrorMessage({ code, reason }, { appId, hostConfig }));
+    this.code = code;
+    this.reason = reason;
+  }
+};
+async function createWebSocket(props, listeners) {
+  try {
+    return await createWebsocketSingleAttempt(props, listeners);
+  } catch (err) {
+    logEvent("Retrying to create websocket", err);
+    const action = await handleAuthenticationError({
+      headers: new Headers(),
+      status: 101,
+      canRetry: true,
+      hostConfig: props.hostConfig
+    });
+    if (action.retry) {
+      return createWebsocketSingleAttempt(props, listeners);
+    }
+    if (action.preventDefault) {
+      return new Promise(() => {
+      });
+    }
+    throw err;
+  }
+}
+async function createWebsocketSingleAttempt({ appId, identity, hostConfig, useReloadEngine = false, workloadType, ttlSeconds }, listeners) {
+  const locationUrl = toValidWebsocketLocationUrl(hostConfig);
+  const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
+  const ttlPart = ttlSeconds !== void 0 && ttlSeconds >= 0 ? `/ttl/${ttlSeconds}` : "";
+  const identityToUse = forceUniqueSessionForTestPurposes ? generateRandomString(16) : identity;
+  if (forceUniqueSessionForTestPurposes) {
+    logEvent("Forcing a new session for testing purposes");
+    forceUniqueSessionForTestPurposes = false;
+  }
+  const identityPart = identityToUse ? `/identity/${identityToUse}` : "";
+  const workloadTypePart = useReloadEngine ? "&workloadType=interactive-reload" : workloadType ? `&workloadType=${workloadType}` : "";
+  let url = `${locationUrl}/app/${appId}${identityPart}${ttlPart}?reloadUri=${reloadUri}${workloadTypePart}`.replace(
+    /^http/,
+    "ws"
+  );
+  const isNodeEnvironment = isNode();
+  const unitTestCreateWebSocket = hostConfig?.createWebSocket;
+  logEvent("Creating websocket", url);
+  let socket;
+  if (isNodeEnvironment && !unitTestCreateWebSocket) {
+    const { headers, queryParams } = await getRestCallAuthParams({ hostConfig, method: "POST" });
+    const WS = (await import("ws")).default;
+    Object.entries(queryParams).forEach(([key, value]) => {
+      url = `${url}&${key}=${value}`;
+    });
+    socket = new WS(url, void 0, {
+      headers
+    });
+  } else {
+    const { queryParams } = await getWebSocketAuthParams({ hostConfig });
+    Object.entries(queryParams).forEach(([key, value]) => {
+      url = `${url}&${key}=${value}`;
+    });
+    socket = unitTestCreateWebSocket ? unitTestCreateWebSocket(url) : new WebSocket(url);
+    exposeInternalApiOnWindow("closeLastWebSocket", (code) => {
+      console.log("Closing websocket with code", code, socket);
+      socket.close(code);
+    });
+  }
+  logEvent("Created websocket", url);
+  const [socketOpenPromise, resolveSocketOpenPromise, rejectSocketOpenPromise] = createResolvablePromise();
+  let opened = false;
+  socket.onopen = () => {
+    socket.onopen = null;
+    socket.onerror = null;
+    logEvent("Websocket opened");
+    opened = true;
+    resolveSocketOpenPromise(socket);
+  };
+  socket.onerror = () => {
+    socket.onopen = null;
+    socket.onerror = null;
+  };
+  socket.onmessage = (message) => {
+    listeners.onMessage(message);
+  };
+  socket.onclose = ({ code, reason }) => {
+    if (!opened) {
+      rejectSocketOpenPromise(new WebSocketError({ code, reason }, { appId, hostConfig }));
+    } else {
+      listeners.onClose({ code, reason });
+    }
+  };
+  return socketOpenPromise;
+}
+
+// src/qix/session/phoenix/json-rpc-channel.ts
+var RPC_CLOSE_NORMAL = 1e3;
+var RPC_CLOSE_MANUAL_SUSPEND = 4e3;
+var WebsocketClosedError = class extends Error {
+};
+async function createJsonRpcChannel(props, listener) {
+  const { hostConfig } = props;
+  const [connectionInfoPromise, resolveConnectionInfo] = createResolvablePromise();
+  const [authenticationInfoPromise, resolveAuthenticationInfo] = createResolvablePromise();
+  let pendingInvocations = {};
+  let initiator = "network";
+  let closed = false;
+  const socket = await createWebSocket(props, {
+    onMessage: (event) => {
+      const data = JSON.parse(event.data);
+      if (isInvocationResponse(data)) {
+        const pendingInvocation = pendingInvocations[data.id];
+        listener.onMessage(data, pendingInvocation?.handle);
+        pendingInvocation?.resolve(data);
+      } else {
+        listener.onMessage(data, void 0);
+        if (data.method === "OnConnected") {
+          resolveConnectionInfo(data.params?.qSessionState);
+        } else if (data.method === "OnAuthenticationInformation") {
+          if (data.mustAuthenticate) {
+            void handleAuthenticationError({
+              headers: new Headers(),
+              status: 101,
+              canRetry: true,
+              hostConfig
+            }).then(() => {
+              socket.close();
+            });
+          } else {
+            resolveAuthenticationInfo(data);
+          }
+        }
+      }
+    },
+    onClose: ({ code, reason }) => {
+      logEvent("Websocket closed", code, reason);
+      closed = true;
+      listener.onConnectionClosed({ code, reason, initiator });
+      const pendingInvocationsAtCloseTime = Object.values(pendingInvocations);
+      pendingInvocations = {};
+      pendingInvocationsAtCloseTime.forEach(
+        (pendingInvocation) => pendingInvocation.reject(new WebsocketClosedError())
+      );
+    }
+  });
+  const sessionState = await connectionInfoPromise;
+  const reattached = sessionState === "SESSION_ATTACHED";
+  if (await isWindows(hostConfig)) {
+    const authInfo = await authenticationInfoPromise;
+    if (authInfo.mustAuthenticate) {
+      throw new Error("Windows authentication needed");
+    }
+  }
+  function send(request) {
+    if (closed) {
+      throw new WebsocketClosedError();
+    }
+    const promise = new Promise((resolve, reject) => {
+      pendingInvocations[request.id] = {
+        handle: request.handle,
+        resolve,
+        reject
+      };
+      socket.send(JSON.stringify(request));
+    });
+    return promise;
+  }
+  return {
+    send,
+    isClosed: () => !!closed,
+    isReattached: () => !!reattached,
+    getSessionState: () => sessionState,
+    closeNormal: () => {
+      logEvent("Closing websocket!");
+      initiator = "manual";
+      closed = true;
+      socket.close(RPC_CLOSE_NORMAL, "Websocket closed from client side");
+    },
+    closeSuspend: () => {
+      logEvent("Suspending websocket!");
+      initiator = "manual";
+      closed = true;
+      socket.close(RPC_CLOSE_MANUAL_SUSPEND, "Websocket suspended from client side");
+    }
+  };
+}
+function isInvocationResponse(data) {
+  return data.id;
+}
+
+// src/qix/session/phoenix/qix-connection.ts
+var QixError = class extends Error {
+  code;
+  parameter;
+  enigmaError = true;
+  isCancelled;
+  constructor({
+    message,
+    code,
+    parameter
+  }, isCancelled) {
+    super(message);
+    this.code = code;
+    this.parameter = parameter;
+    this.isCancelled = isCancelled || false;
+  }
+};
+function isCancelRequest(handleOrObject, method) {
+  const handle = typeof handleOrObject === "object" ? handleOrObject.getHandle() : handleOrObject;
+  return handle === 1 && method === "CancelRequest";
+}
+async function createQixConnection(props, listener) {
+  let requestCounter = 1;
+  const canceledRequests = {};
+  function storeCanceledRequestId(request) {
+    if (Array.isArray(request.params) && request.params.length > 0) {
+      const cancelledRequestId = request.params[0];
+      canceledRequests[cancelledRequestId] = true;
+    }
+  }
+  function requestWasCanceled(requestId) {
+    if (canceledRequests[requestId]) {
+      delete canceledRequests[requestId];
+      return true;
+    }
+    return false;
+  }
+  function onMessage(message, handle) {
+    listener.onMessageReceived(message, handle);
+    if (message.change) {
+      message.change.forEach((changedHandle) => listener.onObjectChanged(changedHandle));
+    }
+    if (message.close) {
+      message.close.forEach((closedHandle) => listener.onObjectClosed(closedHandle));
+    }
+    if (message.params) {
+      listener.onNotification(message);
+    }
+  }
+  function onConnectionClosed(closeEvent) {
+    listener.onConnectionClosed(closeEvent);
+  }
+  const lowLevelConnection = await createJsonRpcChannel(props, { onMessage, onConnectionClosed });
+  const deltaState = {};
+  async function invoke(handleOrObject, request, reportRequestId) {
+    const { outKey, ...requestWithoutOutKey } = request;
+    const handle = typeof handleOrObject === "object" ? handleOrObject.getHandle() : handleOrObject;
+    const websocketRequest = {
+      jsonrpc: "2.0",
+      handle,
+      id: requestCounter++,
+      ...getDeltaAndReturnEmptyProps({ method: request.method, outKey: outKey || -1 }),
+      ...requestWithoutOutKey
+    };
+    reportRequestId?.(websocketRequest.id);
+    if (isCancelRequest(handleOrObject, request.method)) {
+      storeCanceledRequestId(request);
+    }
+    logRequest(handleOrObject, websocketRequest, request);
+    listener.onMessageSent(websocketRequest, websocketRequest.handle);
+    let response;
+    try {
+      response = await lowLevelConnection.send(websocketRequest);
+    } catch (error) {
+      logJsonRpcChannelError(handleOrObject, websocketRequest, error);
+      throw error;
+    }
+    if (response.error) {
+      const isCancelled = requestWasCanceled(websocketRequest.id);
+      const { jsonrpc: jsonrpc2, delta: delta2, id: id2, ...errorResponse } = response;
+      logResponse(handleOrObject, websocketRequest, errorResponse);
+      throw new QixError(response.error, isCancelled);
+    }
+    let resultObject = response.result || {};
+    if (response.delta) {
+      resultObject = unwrapDeltas(resultObject, deltaState, handle, request.method);
+    }
+    const result = extractResult({ method: request.method, outKey: outKey || -1 }, resultObject);
+    const { jsonrpc, delta, id, ...sendResponse } = { ...response, result };
+    logResponse(handleOrObject, websocketRequest, sendResponse);
+    return result;
+  }
+  return {
+    invoke,
+    isReattached: lowLevelConnection.isReattached,
+    getSessionState: lowLevelConnection.getSessionState,
+    isClosed: lowLevelConnection.isClosed,
+    closeNormal: lowLevelConnection.closeNormal,
+    closeSuspend: lowLevelConnection.closeSuspend
+  };
+}
+
+// src/qix/session/phoenix/retry-logic.ts
+var retryRegexpFilter2 = /(?!^GetHyperCube|^GetListObject)(^Get|^Create|^OpenDoc$)/i;
+function shouldRetryRequest(request, error) {
+  if (error instanceof QixError) {
+    if (error.isCancelled) {
+      return { retry: false };
+    }
+    if (!retryRegexpFilter2.test(request.method)) {
+      return { retry: false };
+    }
+    if (error.code === engine_api_default.enums.LocalizedErrorCode.LOCERR_GENERIC_ABORTED) {
+      return {
+        retry: true
+      };
+    }
+    if (error.code === engine_api_default.enums.LocalizedErrorCode.LOCERR_HC_MODAL_OBJECT_ERROR) {
+      return {
+        retry: true,
+        retryPrepAction: async ({ connection, appHandle }) => {
+          return connection.invoke(appHandle, { method: "abortModalSelection", params: [] });
+        }
+      };
+    }
+    return { retry: false };
+  }
+  return { retry: true };
+}
+
+// src/qix/session/phoenix/event-emitter.js
+var util = {};
+util.isObject = function isObject3(arg) {
+  return typeof arg === "object" && arg !== null;
+};
+util.isNumber = function isNumber(arg) {
+  return typeof arg === "number";
+};
+util.isUndefined = function isUndefined(arg) {
+  return arg === void 0;
+};
+util.isFunction = function isFunction3(arg) {
+  return typeof arg === "function";
+};
+function EventEmitter() {
+  EventEmitter.init.call(this);
+}
+EventEmitter.EventEmitter = EventEmitter;
+EventEmitter.prototype._events = void 0;
+EventEmitter.prototype._maxListeners = void 0;
+EventEmitter.defaultMaxListeners = 10;
+EventEmitter.init = function() {
+  this._events = this._events || {};
+  this._maxListeners = this._maxListeners || void 0;
+};
+EventEmitter.prototype.setMaxListeners = function(n) {
+  if (!util.isNumber(n) || n < 0 || isNaN(n)) throw TypeError("n must be a positive number");
+  this._maxListeners = n;
+  return this;
+};
+EventEmitter.prototype.emit = function(type) {
+  var er, handler, len, args, i, listeners;
+  if (!this._events) this._events = {};
+  if (type === "error" && !this._events.error) {
+    er = arguments[1];
+    if (er instanceof Error) {
+      throw er;
+    } else {
+      throw Error('Uncaught, unspecified "error" event.');
+    }
+    return false;
+  }
+  handler = this._events[type];
+  if (util.isUndefined(handler)) return false;
+  if (util.isFunction(handler)) {
+    switch (arguments.length) {
+      // fast cases
+      case 1:
+        handler.call(this);
+        break;
+      case 2:
+        handler.call(this, arguments[1]);
+        break;
+      case 3:
+        handler.call(this, arguments[1], arguments[2]);
+        break;
+      // slower
+      default:
+        len = arguments.length;
+        args = new Array(len - 1);
+        for (i = 1; i < len; i++) args[i - 1] = arguments[i];
+        handler.apply(this, args);
+    }
+  } else if (util.isObject(handler)) {
+    len = arguments.length;
+    args = new Array(len - 1);
+    for (i = 1; i < len; i++) args[i - 1] = arguments[i];
+    listeners = handler.slice();
+    len = listeners.length;
+    for (i = 0; i < len; i++) listeners[i].apply(this, args);
+  }
+  return true;
+};
+EventEmitter.prototype.addListener = function(type, listener) {
+  var m;
+  if (!util.isFunction(listener)) throw TypeError("listener must be a function");
+  if (!this._events) this._events = {};
+  if (this._events.newListener)
+    this.emit("newListener", type, util.isFunction(listener.listener) ? listener.listener : listener);
+  if (!this._events[type])
+    this._events[type] = listener;
+  else if (util.isObject(this._events[type]))
+    this._events[type].push(listener);
+  else this._events[type] = [this._events[type], listener];
+  if (util.isObject(this._events[type]) && !this._events[type].warned) {
+    var m;
+    if (!util.isUndefined(this._maxListeners)) {
+      m = this._maxListeners;
+    } else {
+      m = EventEmitter.defaultMaxListeners;
+    }
+    if (m && m > 0 && this._events[type].length > m) {
+      this._events[type].warned = true;
+      if (util.isFunction(console.error)) {
+        console.error(
+          "(node) warning: possible EventEmitter memory leak detected. %d listeners added. Use emitter.setMaxListeners() to increase limit.",
+          this._events[type].length
+        );
+      }
+      if (util.isFunction(console.trace)) console.trace();
+    }
+  }
+  return this;
+};
+EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+EventEmitter.prototype.once = function(type, listener) {
+  if (!util.isFunction(listener)) throw TypeError("listener must be a function");
+  var fired = false;
+  function g() {
+    this.removeListener(type, g);
+    if (!fired) {
+      fired = true;
+      listener.apply(this, arguments);
+    }
+  }
+  g.listener = listener;
+  this.on(type, g);
+  return this;
+};
+EventEmitter.prototype.removeListener = function(type, listener) {
+  var list, position, length, i;
+  if (!util.isFunction(listener)) throw TypeError("listener must be a function");
+  if (!this._events || !this._events[type]) return this;
+  list = this._events[type];
+  length = list.length;
+  position = -1;
+  if (list === listener || util.isFunction(list.listener) && list.listener === listener) {
+    delete this._events[type];
+    if (this._events.removeListener) this.emit("removeListener", type, listener);
+  } else if (util.isObject(list)) {
+    for (i = length; i-- > 0; ) {
+      if (list[i] === listener || list[i].listener && list[i].listener === listener) {
+        position = i;
+        break;
+      }
+    }
+    if (position < 0) return this;
+    if (list.length === 1) {
+      list.length = 0;
+      delete this._events[type];
+    } else {
+      list.splice(position, 1);
+    }
+    if (this._events.removeListener) this.emit("removeListener", type, listener);
+  }
+  return this;
+};
+EventEmitter.prototype.removeAllListeners = function(type) {
+  var key, listeners;
+  if (!this._events) return this;
+  if (!this._events.removeListener) {
+    if (arguments.length === 0) this._events = {};
+    else if (this._events[type]) delete this._events[type];
+    return this;
+  }
+  if (arguments.length === 0) {
+    for (key in this._events) {
+      if (key === "removeListener") continue;
+      this.removeAllListeners(key);
+    }
+    this.removeAllListeners("removeListener");
+    this._events = {};
+    return this;
+  }
+  listeners = this._events[type];
+  if (util.isFunction(listeners)) {
+    this.removeListener(type, listeners);
+  } else if (Array.isArray(listeners)) {
+    while (listeners.length) this.removeListener(type, listeners[listeners.length - 1]);
+  }
+  delete this._events[type];
+  return this;
+};
+EventEmitter.prototype.listeners = function(type) {
+  var ret;
+  if (!this._events || !this._events[type]) ret = [];
+  else if (util.isFunction(this._events[type])) ret = [this._events[type]];
+  else ret = this._events[type].slice();
+  return ret;
+};
+EventEmitter.listenerCount = function(emitter, type) {
+  var ret;
+  if (!emitter._events || !emitter._events[type]) ret = 0;
+  else if (util.isFunction(emitter._events[type])) ret = 1;
+  else ret = emitter._events[type].length;
+  return ret;
+};
+
+// src/qix/session/phoenix/rpc-object-session.ts
+var counter = 0;
+var SuspendResumeImpl = class {
+  Promise;
+  #connection;
+  constructor(connection) {
+    this.Promise = Promise;
+    this.#connection = connection;
+  }
+  resume() {
+    return this.#connection.resume();
+  }
+  suspend() {
+    return this.#connection.suspend();
+  }
+  get isSuspended() {
+    return this.#connection.isSuspended;
+  }
+};
+var ConfigImpl = class {
+  Promise;
+  constructor() {
+    this.Promise = Promise;
+  }
+};
+var RpcImpl = class extends EventEmitter {
+  Promise;
+  #connection;
+  constructor(connection) {
+    super();
+    this.#connection = connection;
+    this.Promise = Promise;
+  }
+  /**
+   * @deprecated
+   * For backwards compatibility, this function is deprecated.
+   */
+  send(requestWithHandle) {
+    const object = { getHandle: () => requestWithHandle.handle };
+    const { handle, ...request } = requestWithHandle;
+    return this.#connection.invoke(object, request, () => {
+    });
+  }
+  // Backwards compatibility placeholder functions that does nothing
+  close() {
+  }
+};
+var RpcObjectSessionImpl = class extends EventEmitter {
+  rpc;
+  suspendResume;
+  config;
+  id = counter++;
+  #connection;
+  /**
+   *
+   * @internal
+   */
+  constructor(connection) {
+    super();
+    this.#connection = connection;
+    this.rpc = new RpcImpl(connection);
+    this.suspendResume = new SuspendResumeImpl(connection);
+    this.config = new ConfigImpl();
+  }
+  /**
+   * @deprecated
+   * For backwards compatibility, this function is deprecated.
+   */
+  send(requestWithHandle) {
+    return this.rpc.send(requestWithHandle);
+  }
+  getObjectApi(ref) {
+    return this.#connection.getObjectApi(ref);
+  }
+  /**
+   * Returns the app object for the session.
+   */
+  get global() {
+    return this.#connection.global;
+  }
+  /**
+   * Returns the app object for the session.
+   */
+  get app() {
+    return this.#connection.doc;
+  }
+  get sessionState() {
+    return this.#connection.sessionState;
+  }
+  get Promise() {
+    return Promise;
+  }
+  resume() {
+    return this.#connection.resume();
+  }
+  suspend() {
+    return this.#connection.suspend();
+  }
+  get createdAt() {
+    return this.#connection.createdAt;
+  }
+  get lastTrafficAt() {
+    return this.#connection.lastTrafficAt;
+  }
+  get globalPromise() {
+    return Promise.resolve(this.#connection.global);
+  }
+  get openDocPromise() {
+    return Promise.resolve(this.#connection.doc);
+  }
+  // TODO IMPLEMENT FOR BACKWARDS COMPATIBLIITY
+  open() {
+    return this.globalPromise;
+  }
+  close() {
+    return Promise.resolve();
+  }
+};
+
+// src/qix/session/phoenix/phoenix-connection.ts
+async function createPhoenixConnection(openProps, objectFactory2, { onWebSocketEvent, getInitialAppActions }) {
+  const phoenixConnection = new PhoenixConnectionImpl(openProps, objectFactory2, {
+    onWebSocketEvent,
+    getInitialAppActions
+  });
+  await phoenixConnection.waitForConnection();
+  return phoenixConnection;
+}
+var PhoenixConnectionImpl = class {
+  #interestMonitor = createInterestMonitor();
+  #sessionIsNotInUseAnymore = false;
+  #openProps;
+  #objectFactory;
+  #rpcObjectSession;
+  #owner;
+  #globalRpcObject;
+  #docRpcObject;
+  #state = "opening";
+  #currentReincarnationPromise = Promise.resolve(void 0);
+  #currentReincarnation;
+  #lastTrafficAt = Date.now();
+  #createdAt = Date.now();
+  /** @internal */
+  constructor(openProps, objectFactory2, owner) {
+    this.#openProps = openProps;
+    this.#objectFactory = objectFactory2;
+    this.#owner = owner;
+    this.#rpcObjectSession = new RpcObjectSessionImpl(this);
+    logEvent("Creating phoenix session", openProps);
+    this.#globalRpcObject = objectFactory2.createObject(
+      { qHandle: -1, qType: "Global", qGenericId: "Global" },
+      this,
+      void 0
+    );
+    this.#docRpcObject = objectFactory2.createObject(
+      { qHandle: 1, qGenericId: openProps.appId, qType: "Doc" },
+      this,
+      void 0
+    );
+    this.#interestMonitor.onUserActivityDetected(() => {
+      void this.#getCurrentOrAcquireNewReincarnation();
+    });
+  }
+  get classicEnigmaSessionApi() {
+    return this.#rpcObjectSession;
+  }
+  get createdAt() {
+    return this.#createdAt;
+  }
+  get lastTrafficAt() {
+    return this.#lastTrafficAt;
+  }
+  async waitForConnection() {
+    await this.#getCurrentOrAcquireNewReincarnation();
+  }
+  /**
+   * Invokes a method on the engine and returns the result.
+   * If the result is an object reference, it will be resolved to a PhoenixRpcObject.
+   * If the request fails, it will be retried if the error is retryable.
+   * If the websocket is down or goes down during the request a new connection will be opened and reestablished and the request retried.
+   *
+   *
+   * @param object An rpc object (or at least something that can provide a handle)
+   * @param request a high level qix request (method, params and outKey)
+   * @param reportRequestId
+   * @returns Either the Json response or a PhoenixRpcObject
+   * @throws QixError if the request fails and is not retryable
+   */
+  async invoke(object, request, reportRequestId) {
+    try {
+      return await this.#sendAndResolveRpcObjects(object, request, reportRequestId);
+    } catch (err) {
+      const { retry, retryPrepAction } = shouldRetryRequest(request, err);
+      if (retry) {
+        if (retryPrepAction) {
+          await retryPrepAction({
+            connection: this.#currentReincarnation.connection,
+            appHandle: this.#currentReincarnation.state.getDoc().getHandle()
+          });
+        }
+        return this.#sendAndResolveRpcObjects(object, request, reportRequestId);
+      }
+      throw err;
+    }
+  }
+  /**
+   * Returns an RPC object for the given reference. If the object already exists, it will be returned.
+   */
+  getObjectApi(ref) {
+    if (!this.#currentReincarnation) {
+      throw new Error("Not yet connected!");
+    }
+    const existingObject = this.#currentReincarnation.state.getObject(ref);
+    if (existingObject) {
+      return existingObject;
+    }
+    const newObject = this.#objectFactory.createObject(ref, this, void 0);
+    this.#currentReincarnation.state.setObject(newObject.getHandle(), newObject);
+    return newObject;
+  }
+  /**
+   * The main Doc/App rpc object
+   */
+  get doc() {
+    return this.#docRpcObject;
+  }
+  /**
+   * The Global rpc object
+   */
+  get global() {
+    return this.#globalRpcObject;
+  }
+  /**
+   * A string representing if the session was newly established or reonnected
+   */
+  get sessionState() {
+    return this.#currentReincarnation?.connection.getSessionState() ?? "";
+  }
+  /**
+   * Signals from outside that the session is not in use (maybe will be in a few seconds!)
+   */
+  stopActivityMonitoring() {
+    this.#interestMonitor.stopListeningForActivity();
+  }
+  close() {
+    this.#interestMonitor.stopListeningForActivity();
+    this.#sessionIsNotInUseAnymore = true;
+    if (this.#currentReincarnation && !this.#currentReincarnation.connection.isClosed()) {
+      this.#currentReincarnation.connection.closeNormal();
+    }
+  }
+  async resume() {
+    this.#interestMonitor.signalInterest();
+    await this.#getCurrentOrAcquireNewReincarnation();
+  }
+  async suspend() {
+    if (this.#currentReincarnation && !this.#currentReincarnation.connection.isClosed()) {
+      this.#currentReincarnation.connection.closeSuspend();
+    }
+  }
+  get isSuspended() {
+    return this.#currentReincarnation && this.#currentReincarnation.connection.isClosed() || false;
+  }
+  initialAppActionsUpdated() {
+    void (async () => {
+      await this.#runPendingInitialAppActions(await this.#getCurrentOrAcquireNewReincarnation());
+    })();
+  }
+  /**
+   * Makes a single attempt at calling the backend
+   * * Acquires a working connection
+   * * Invokes the backend using thta connection
+   * * If the result is an object reference, it will be resolved to a PhoenixRpcObject
+   */
+  async #sendAndResolveRpcObjects(object, request, reportRequestId) {
+    const { connection, state } = await this.#getCurrentOrAcquireNewReincarnation();
+    const result = await connection.invoke(object, request, reportRequestId);
+    if (isQixObjectRef(result)) {
+      const objectRef = result;
+      let objectResult = state.getObject(objectRef.qHandle);
+      if (!objectResult) {
+        objectResult = this.#objectFactory.createObject(objectRef, this, request);
+        state.setObject(objectRef.qHandle, objectResult);
+      }
+      return objectResult;
+    }
+    return result;
+  }
+  /**
+   * This function will acquire a new reincarnation (connection + session state) if the current one is closed
+   * It will also update the traffic timestamp
+   */
+  async #getCurrentOrAcquireNewReincarnation() {
+    this.#lastTrafficAt = Date.now();
+    const result = this.#currentReincarnationPromise.then(async (lastReincarnation) => {
+      while (lastReincarnation?.next !== void 0) {
+        lastReincarnation = await lastReincarnation.next;
+      }
+      if (lastReincarnation && !lastReincarnation.connection.isClosed()) {
+        return lastReincarnation;
+      }
+      const isResume = !!lastReincarnation;
+      if (isResume) {
+        this.#state = "resuming";
+        this.#onResuming();
+      }
+      const newReincarnation = await this.#openNewQixConnectionAndPrepareSessionStateWithRetry(
+        lastReincarnation,
+        isResume
+      );
+      this.#state = "open";
+      if (isResume) {
+        this.#onResume();
+      } else {
+        this.#onOpen();
+      }
+      this.#currentReincarnation = newReincarnation;
+      await this.#runPendingInitialAppActions(newReincarnation);
+      return newReincarnation;
+    });
+    this.#currentReincarnationPromise = result;
+    return result;
+  }
+  /**
+   * Really tries and retries to successfully open a new Qix connection and prepares the session state for the new connection.
+   * If a few attempts of reopening fails, it will wait for activity on the session before trying again.
+   * This means that this function will not return until a new reincarnation is acquired.
+   *
+   */
+  async #openNewQixConnectionAndPrepareSessionStateWithRetry(lastReincarnation, isResume) {
+    return new Promise((resolve, reject) => {
+      let retryCount = 0;
+      const INITIAL_RETRY_TIME = 2e3;
+      let retryWaitTime = INITIAL_RETRY_TIME;
+      const oneTry = async () => {
+        logEvent("Trying to acquire new reincarnation", this.#openProps);
+        try {
+          resolve(await this.#openNewQixConnectionAndPrepareSessionState(lastReincarnation?.state));
+        } catch (err) {
+          if (isResume) {
+            this.#interestMonitor.resetAnyInterestSignalledBeforeNow();
+            if (retryCount < 5) {
+              retryCount++;
+              retryWaitTime *= 1.5;
+              logEvent("Failed to acquire new reincarnation, retrying in ", retryWaitTime, err);
+              setTimeout(() => {
+                void oneTry();
+              }, retryWaitTime);
+            } else {
+              await this.#interestMonitor.waitUntilSomeoneIsInterestedInThis();
+              logEvent("Activity detected, retrying to acquire new reincarnation", this.#openProps);
+              retryCount = 0;
+              retryWaitTime = INITIAL_RETRY_TIME;
+              setTimeout(() => {
+                void oneTry();
+              }, retryWaitTime);
+            }
+          } else {
+            logEvent("Failed to open app", err);
+            reject(err);
+          }
+        }
+      };
+      void oneTry();
+    });
+  }
+  async #openNewQixConnectionAndPrepareSessionState(lastState) {
+    let stateForNewConnection;
+    stateForNewConnection = void 0;
+    logEvent("-------- Opening new Qix Connection ---------");
+    const newConnection = await createQixConnection(this.#openProps, {
+      onMessageSent: (message, handle) => {
+        this.#onMessageSent(message, stateForNewConnection?.getObject(handle));
+      },
+      onMessageReceived: (message, handle) => {
+        const object = handle ? stateForNewConnection?.getObject(handle) : void 0;
+        this.#onMessageReceived(message, object);
+      },
+      onNotification: (message) => {
+        this.#onNotification(message);
+      },
+      onObjectChanged: (handle) => {
+        stateForNewConnection?.getObject(handle)?.emit("changed");
+      },
+      onObjectClosed: (handle) => {
+        stateForNewConnection?.getObject(handle)?.emit("closed");
+        stateForNewConnection?.removeObject(handle);
+      },
+      onConnectionClosed: (error) => {
+        this.#onConnectionClosed(error);
+      }
+    });
+    const appRef = await newConnection.invoke(-1, {
+      method: "OpenDoc",
+      params: [this.#openProps.appId, "", "", "", !!this.#openProps.withoutData],
+      outKey: -1
+    });
+    this.#docRpcObject.setHandle(appRef.qHandle);
+    const newState = createPhoenixSessionState({
+      global: this.#globalRpcObject,
+      doc: this.#docRpcObject,
+      executedAppActions: lastState?.getExecutedAppActions() ?? []
+    });
+    if (lastState) {
+      await Promise.all(
+        Object.values(lastState.getObjects()).map(async (object) => {
+          await object.respawn(newConnection);
+          newState.setObject(object.getHandle(), object);
+        })
+      );
+      logEvent("-------- Respawned objects ---------");
+      logEvent(
+        Object.entries(lastState.getObjects()).map(([key, value]) => `${value.id}: ${key} => ${value.getHandle()}`)
+      );
+    }
+    stateForNewConnection = newState;
+    if (lastState) {
+      Object.values(lastState.getObjects()).forEach((object) => {
+        object.emit("changed");
+      });
+    }
+    logEvent("-------- Opening done ---------");
+    return { connection: newConnection, state: newState };
+  }
+  /* -------------------------------------------------------------------------- */
+  /*              Event handlers for various Qix Connection events              */
+  /* -------------------------------------------------------------------------- */
+  #onOpen() {
+    this.#owner.onWebSocketEvent({ eventType: "opened", ...this.#openProps });
+    this.#rpcObjectSession.emit("opened");
+  }
+  #onResuming() {
+    this.#owner.onWebSocketEvent({ eventType: "resuming", ...this.#openProps });
+    this.#rpcObjectSession.emit("resuming");
+  }
+  #onResume() {
+    this.#createdAt = Date.now();
+    this.#owner.onWebSocketEvent({ eventType: "resumed", ...this.#openProps });
+    this.#rpcObjectSession.emit("resumed");
+  }
+  #onMessageSent(message, object) {
+    this.#rpcObjectSession.rpc.emit("traffic", "sent", message, object?.handle);
+    this.#rpcObjectSession.emit("traffic:*", "sent", message);
+    this.#rpcObjectSession.emit(`traffic:sent`, message);
+    object?.emit("traffic:*", "sent", message);
+    object?.emit("traffic:sent", message);
+  }
+  #onMessageReceived(message, object) {
+    this.#rpcObjectSession.rpc.emit("traffic", "received", message, object?.handle);
+    this.#rpcObjectSession.emit("traffic:*", message);
+    this.#rpcObjectSession.emit(`traffic:received`, message);
+    object?.emit("traffic:*", "received", message);
+    object?.emit("traffic:received", message);
+  }
+  #onNotification(message) {
+    this.#rpcObjectSession.emit("notification:*", message.method, message.params);
+    this.#rpcObjectSession.emit(`notification:${message.method}`, message.params);
+    this.#rpcObjectSession.rpc.emit("notification", message);
+  }
+  #onConnectionClosed(closeEvent) {
+    const { code, reason, initiator } = closeEvent || { code: 0, reason: "unknown", initiator: "network" };
+    if (this.#sessionIsNotInUseAnymore) {
+      logEvent("Connection closed, session is not in use anymore", this.#openProps);
+      this.#owner.onWebSocketEvent({ eventType: "closed", code, reason, ...this.#openProps });
+      this.#rpcObjectSession.emit("closed", { code, reason, initiator });
+    } else if (this.#state === "open") {
+      logEvent("Connection closed, session is still in use", this.#openProps, code, reason);
+      this.#owner.onWebSocketEvent({ eventType: "suspended", code, reason, initiator, ...this.#openProps });
+      this.#rpcObjectSession.emit("suspended", { code, reason, initiator });
+      if (shouldResumeImmediately(code)) {
+        void this.#getCurrentOrAcquireNewReincarnation();
+      } else {
+        this.#interestMonitor.startListeningForActivity();
+      }
+    }
+  }
+  async #runPendingInitialAppActions(newReincarnation) {
+    for (const action of this.#owner.getInitialAppActions()) {
+      if (!newReincarnation.state.isAppActionExecuted(action)) {
+        await action(newReincarnation.state.getDoc());
+        newReincarnation.state.addExecutedInitialAppAction(action);
+      }
+    }
+  }
+};
+function shouldResumeImmediately(code) {
+  const IMMEDIATE_RESUME_CDDES = {
+    /** The engine hosting the session is shutting down,
+     *  auto-resume to get another session from another engine. */
+    ENGINE_TERMINATING: 4003,
+    /** App deleted from an engine, auto-resume to open it on another engine. */
+    APP_DELETED: 4004,
+    /** App-mode changed to Direct Query mode, let's auto-resume */
+    APP_MODE_CHANGED: 4007
+  };
+  switch (code) {
+    case IMMEDIATE_RESUME_CDDES.ENGINE_TERMINATING:
+    case IMMEDIATE_RESUME_CDDES.APP_DELETED:
+    case IMMEDIATE_RESUME_CDDES.APP_MODE_CHANGED:
+      return true;
+    default:
+      return false;
+  }
+}
+
+// src/qix/session/phoenix/remote-object.ts
+var RemoteObjectImpl = class {
+  #connection;
+  #handle;
+  #id;
+  #type;
+  #genericType;
+  #respawnInfo;
+  constructor({ connection, handle, id, type, genericType, respawnInfo }) {
+    this.#connection = connection;
+    this.#handle = handle;
+    this.#id = id;
+    this.#type = type;
+    this.#genericType = genericType;
+    this.#respawnInfo = respawnInfo;
+  }
+  invoke(req) {
+    let lastRequestId = 0;
+    const promise = this.#connection.invoke(this, req, (requestId) => {
+      lastRequestId = requestId;
+    });
+    addToPromiseChain(promise, "requestId", () => lastRequestId);
+    return promise;
+  }
+  getHandle() {
+    return this.#handle;
+  }
+  get handle() {
+    return this.#handle;
+  }
+  set handle(newHandle) {
+    this.#handle = newHandle;
+  }
+  get id() {
+    return this.#id;
+  }
+  get type() {
+    return this.#type;
+  }
+  get genericType() {
+    return this.#genericType;
+  }
+  get session() {
+    return this.#connection.classicEnigmaSessionApi;
+  }
+  get respawnInfo() {
+    return this.#respawnInfo;
+  }
+};
+function addToPromiseChain(promise, name, getValue) {
+  Object.defineProperty(promise, name, {
+    get() {
+      return getValue();
+    },
+    enumerable: true,
+    configurable: true
+  });
+  const { then } = promise;
+  promise.then = function patchedThen(...params) {
+    const chain = then.apply(this, params);
+    addToPromiseChain(chain, name, getValue);
+    return chain;
+  };
+}
+
+// src/qix/session/phoenix/rpc-object.ts
+var PhoenixRpcObjectImpl = class extends EventEmitter {
+  /** @internal */
+  #remoteObject;
+  /** @deprecated */
+  Promise;
+  /**
+   * @internal
+   */
+  constructor(rpcObjectCore) {
+    super();
+    this.#remoteObject = rpcObjectCore;
+    this.Promise = Promise;
+  }
+  get __remote__() {
+    return this.#remoteObject;
+  }
+  get handle() {
+    return this.#remoteObject.handle;
+  }
+  set handle(handle) {
+    this.#remoteObject.handle = handle;
+  }
+  get app() {
+    return this.#remoteObject.session.app;
+  }
+  get global() {
+    return this.#remoteObject.session.global;
+  }
+  set global(newGlobal) {
+    if (newGlobal !== this.#remoteObject.session.global) {
+      console.warn("Changing the global object on a qix object is not allowed");
+    }
+  }
+  get id() {
+    return this.#remoteObject.id;
+  }
+  get type() {
+    return this.#remoteObject.type;
+  }
+  get genericType() {
+    return this.#remoteObject.genericType;
+  }
+  get session() {
+    return this.#remoteObject.session;
+  }
+  getHandle() {
+    return this.#remoteObject.handle;
+  }
+  setHandle(handle) {
+    const oldHandle = this.#remoteObject.handle;
+    this.#remoteObject.handle = handle;
+    if (oldHandle !== handle) {
+      logEvent("Change handle for ", this.#remoteObject.id, "from", oldHandle, "to", handle);
+    }
+  }
+  /** @deprecated */
+  get enigmaModel() {
+    return this;
+  }
+  /**
+   * @internal
+   */
+  // This is overriden in mixins but the signature needs to have a QixConnection as parameter
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async respawn(newConnection) {
+    if (this.#remoteObject.type !== "Doc" && this.#remoteObject.type !== "Global") {
+      console.error("No respawn mixin found for object ", this.#remoteObject.type, this.#remoteObject.genericType);
+    }
+  }
+};
+
+// src/qix/session/phoenix/rpc-object-respawn-mixins.ts
+var refetch1 = {
+  types: ["GenericObject"],
+  override: {
+    async respawn(original, connection) {
+      if (this.__remote__.respawnInfo.isSessionObject) {
+        let objectFoundInEngine = false;
+        if (connection.isReattached()) {
+          try {
+            this.setHandle(
+              await connection.invoke(this.app.handle, { method: "GetObject", params: [this.id], outKey: -1 }).then((res) => res.qHandle)
+            );
+            objectFoundInEngine = true;
+          } catch (err) {
+            console.warn("Session object not found in reattached session", err);
+            objectFoundInEngine = false;
+          }
+        }
+        if (!objectFoundInEngine) {
+          const props = JSON.parse(JSON.stringify(this.__remote__.respawnInfo.properties));
+          props.qInfo = props.qInfo || {};
+          props.qInfo.qId = this.id;
+          logEvent("Respawning session object using", this.__remote__.respawnInfo.properties);
+          this.setHandle(
+            await connection.invoke(this.app.handle, {
+              method: "CreateSessionObject",
+              params: [props],
+              outKey: -1
+            }).then((res) => res.qHandle)
+          );
+        }
+      } else {
+        this.setHandle(
+          await connection.invoke(this.app.handle, { method: "GetObject", params: [this.id], outKey: -1 }).then((res) => res.qHandle)
+        );
+      }
+      if (this.__remote__.respawnInfo.activeModalSelectionPaths && !connection.isReattached()) {
+        try {
+          logEvent(
+            "########### BeginSelections ###################################",
+            this.__remote__.respawnInfo.activeModalSelectionPaths
+          );
+          await connection.invoke(this.handle, {
+            method: "BeginSelections",
+            params: [this.__remote__.respawnInfo.activeModalSelectionPaths],
+            outKey: -1
+          });
+        } catch (err) {
+          console.warn("Could not reapply modal selection state", err);
+        }
+      }
+    },
+    async beginSelections(original, paths) {
+      logEvent("Storing modal selections", this.handle, this.__remote__.respawnInfo.activeModalSelectionPaths);
+      this.__remote__.respawnInfo.activeModalSelectionPaths = paths;
+      return original(paths);
+    },
+    async endSelections(original, accept) {
+      this.__remote__.respawnInfo.activeModalSelectionPaths = void 0;
+      logEvent("Removing modal selections", this.handle, this.__remote__.respawnInfo.activeModalSelectionPaths);
+      return original(accept);
+    },
+    /**
+     * TODO SUPPORT THESE ASWELL
+          applyPatches: (patches: NxPatch[], softPatch?: boolean) => Promise<void>;
+          clearSoftPatches: () => Promise<void>;
+          copyFrom: (fromId: string) => Promise<void>;
+          destroyAllChildren: (propForThis?: CustomProperties) => Promise<void>;
+          destroyChild: (id: string, propForThis?: CustomProperties) => Promise<boolean>;
+          lock: (path: string, colIndices?: number[]) => Promise<void>;
+          resetMadeSelections: () => Promise<void>;
+          setChildArrayOrder: (ids: string[]) => Promise<void>;
+          setFullPropertyTree: (propEntry: GenericObjectEntry) => Promise<void>;
+          setProperties: (prop: CustomProperties) => Promise<void>;
+          unlock: (path: string, colIndices?: number[]) => Promise<void>;
+     */
+    async setProperties(original, props) {
+      this.__remote__.respawnInfo.properties = props;
+      return original(props);
+    }
+  }
+};
+var variableRespawnMixin = {
+  types: ["GenericVariable"],
+  override: {
+    async respawn(original, connection) {
+      logEvent("Respawning variable ", this.id);
+      if (this.__remote__.respawnInfo.isSessionObject) {
+        let objectFoundInEngine = false;
+        if (connection.isReattached()) {
+          try {
+            this.setHandle(
+              await connection.invoke(this.app.handle, { method: "GetObject", params: [this.id], outKey: -1 }).then((res) => res.qHandle)
+            );
+            objectFoundInEngine = true;
+          } catch (err) {
+            console.warn("Session variable not found in reattached session", err);
+            objectFoundInEngine = false;
+          }
+        }
+        if (!objectFoundInEngine) {
+          this.setHandle(
+            await connection.invoke(this.app.handle, {
+              method: "CreateSessionVariable",
+              params: [this.__remote__.respawnInfo.properties],
+              outKey: -1
+            }).then((res) => res.qHandle)
+          );
+        }
+      } else {
+        this.setHandle(
+          await connection.invoke(this.app.handle, { method: "GetObject", params: [this.id], outKey: -1 }).then((res) => res.qHandle)
+        );
+      }
+    },
+    // TODO suppor these functions as well
+    //applyPatches: (patches: NxPatch[]) => Promise<void>;
+    //setDualValue: (text: string, num: number) => Promise<void>;
+    //setNumValue: (val: number) => Promise<void>;
+    //setStringValue: (val: string) => Promise<void>;
+    async setProperties(original, props) {
+      this.__remote__.respawnInfo.properties = props;
+      return original(props);
+    }
+  }
+};
+var variarbleMeasureAndBookmarkRespawnMixin = {
+  types: ["GenericDimension", "GenericMeasure", "GenericBookmark"],
+  override: {
+    async respawn(original, connection) {
+      logEvent("Respawning field dimension, measure or bookmark", this.id);
+      this.setHandle(
+        await connection.invoke(this.app.handle, { method: "GetObject", params: [this.id], outKey: -1 }).then((res) => res.qHandle)
+      );
+    }
+  }
+};
+var fieldRespawningMixin = {
+  types: ["Field"],
+  override: {
+    async respawn(original, connection) {
+      logEvent("Respawning field object ", this.id);
+      if (this.__remote__.respawnInfo.creatingRequest && this.__remote__.respawnInfo.creatingRequest.method.startsWith("Get")) {
+        this.setHandle(
+          await connection.invoke(1, this.__remote__.respawnInfo.creatingRequest).then((res) => res.qHandle)
+        );
+        logEvent("Respawned field object using creating request ", this.id, this.handle);
+      } else {
+        this.setHandle(0);
+        logEvent("No idea how to respawn", this.id);
+      }
+    }
+  }
+};
+var rememberCreatePropsMixin = {
+  types: ["Doc"],
+  override: {
+    async createSessionObject(original, properties) {
+      const object = await original(properties);
+      const phoenixObject = object;
+      phoenixObject.__remote__.respawnInfo.isSessionObject = true;
+      phoenixObject.__remote__.respawnInfo.properties = properties;
+      return phoenixObject;
+    },
+    async createSessionVariable(original, properties) {
+      const object = await original(properties);
+      const phoenixObject = object;
+      phoenixObject.__remote__.respawnInfo.isSessionObject = true;
+      phoenixObject.__remote__.respawnInfo.properties = properties;
+      return object;
+    }
+  }
+};
+var rpc_object_respawn_mixins_default = [
+  refetch1,
+  variableRespawnMixin,
+  variarbleMeasureAndBookmarkRespawnMixin,
+  fieldRespawningMixin,
+  rememberCreatePropsMixin
+];
+
+// src/qix/session/phoenix/rpc-object-mixins.ts
+function toMixinMap(mixinsArray) {
+  const mixins6 = {};
+  rpc_object_respawn_mixins_default.concat(mixinsArray).forEach((mixin22) => {
+    (Array.isArray(mixin22.types) ? mixin22.types : [mixin22.types]).forEach((type) => {
+      mixins6[type] = mixins6[type] || [];
+      mixins6[type].push(mixin22);
+    });
+  });
+  return mixins6;
+}
+function applyMixins(classPrototype, mixinList) {
+  mixinList.forEach(({ extend: extend3 = {}, override = {} }) => {
+    Object.keys(override).forEach((key) => {
+      if (typeof classPrototype[key] === "function" && typeof override[key] === "function") {
+        const baseFn = classPrototype[key];
+        classPrototype[key] = function wrappedFn(...args) {
+          return override[key].apply(this, [baseFn.bind(this), ...args]);
+        };
+      } else {
+        throw new Error(
+          `Tring to override non-existing function in ${classPrototype.type}/${classPrototype.genericType}: ${key}`
+        );
+      }
+    });
+    Object.keys(extend3).forEach((key) => {
+      if (typeof classPrototype[key] === "function" && typeof extend3[key] === "function") {
+        throw new Error(
+          `Extend is not allowed. Function already exists in  ${classPrototype.type}/${classPrototype.genericType}: ${key}`
+        );
+      } else {
+        classPrototype[key] = extend3[key];
+      }
+    });
+  });
+}
+function initMixins(rpcObject, mixinList) {
+  mixinList.forEach(({ init }) => {
+    if (init) {
+      init.bind(rpcObject)({ api: rpcObject, config: { Promise } });
+    }
+  });
+}
+
+// src/qix/session/phoenix/rpc-object-schema.ts
+function schemaToStructureOfUnboundFunctions(schema) {
+  const result = {};
+  Object.entries(schema.structs).forEach(([type, objectSchema]) => {
+    result[type] = schemaToFunctionsEntries(objectSchema);
+  });
+  function schemaToFunctionsEntries(objectSchema) {
+    return Object.entries(objectSchema).map(([pascalName, methodSchema]) => {
+      return { methodName: toCamelCase(pascalName), fn: generateUnboundMethod(pascalName, methodSchema) };
+    });
+  }
+  return result;
+}
+function generateUnboundMethod(pascalMethodName, methodSchema) {
+  const out = methodSchema.Out;
+  const outKey = out.length === 1 ? out[0].Name : -1;
+  return function generatedMethod(...params) {
+    return this.__remote__.invoke({ method: pascalMethodName, params, outKey });
+  };
+}
+function toCamelCase(symbol) {
+  return symbol.substring(0, 1).toLowerCase() + symbol.substring(1);
+}
+
+// src/qix/session/phoenix/rpc-object-factory.ts
+function createRpcObjectFactory(schema, mixinsArray) {
+  return new RpcObjectFactoryImpl(schema, mixinsArray);
+}
+var RpcObjectFactoryImpl = class {
+  /**
+   * Map from type to mixin
+   */
+  #mixinsByType;
+  /**
+   * Map from type to array of native qix functions
+   */
+  #nativeFunctionsByType;
+  /**
+   * All generated rpc object classes with mixins and native functions
+   */
+  #generatedClasses = {};
+  constructor(schema, mixinsArray) {
+    this.#mixinsByType = toMixinMap(mixinsArray);
+    this.#nativeFunctionsByType = schemaToStructureOfUnboundFunctions(schema);
+  }
+  /**
+   * Creates a new RPC Object with mixins et'al
+   */
+  createObject(refMultipleFormats, connection, creatingRequest) {
+    const { handle, id, type, genericType } = normalizeObjectRef(refMultipleFormats);
+    if (!type) {
+      throw new Error(`Trying to create object without type: ${type}`);
+    }
+    const coreRpcObject = new RemoteObjectImpl({
+      connection,
+      handle,
+      respawnInfo: {
+        creatingRequest
+      },
+      id,
+      type,
+      genericType
+    });
+    const TypeSpecificPhoenixRpcClass = this.#getClass(type, genericType);
+    return new TypeSpecificPhoenixRpcClass(coreRpcObject);
+  }
+  #getClass(type, genericType) {
+    const key = `${type}:${genericType}`;
+    if (!this.#generatedClasses[key]) {
+      const rpcFunctions = this.#getRpcFunctionsForType(type);
+      const mixins6 = this.#getMixinsForType(type).concat(this.#getMixinsForType(genericType));
+      this.#generatedClasses[type] = class GeneratedBaseQixRpxObject extends PhoenixRpcObjectImpl {
+        constructor(createProps) {
+          super(createProps);
+          initMixins(this, mixins6);
+        }
+      };
+      const classPrototype = this.#generatedClasses[type].prototype;
+      rpcFunctions.forEach(({ methodName, fn }) => {
+        classPrototype[methodName] = fn;
+      });
+      applyMixins(classPrototype, mixins6);
+    }
+    return this.#generatedClasses[type];
+  }
+  #getMixinsForType(type) {
+    return (type ? this.#mixinsByType[type] : []) || [];
+  }
+  #getRpcFunctionsForType(type) {
+    return this.#nativeFunctionsByType[type];
+  }
+};
+
+// src/qix/session/qix-chunk-entrypoint.ts
+var objectFactory;
+async function createPhoenixConnectionEntrypoint(openProps, connectionwOwner) {
+  objectFactory = objectFactory || createRpcObjectFactory(engine_api_default, mixins5);
+  return createPhoenixConnection(openProps, objectFactory, connectionwOwner);
+}
+async function createEnigmaSessionEntrypoint(openProps) {
+  return createEnigmaSession(openProps);
+}
 export {
-  createEnigmaSession
+  createEnigmaSessionEntrypoint,
+  createPhoenixConnectionEntrypoint
 };

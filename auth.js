@@ -4,8 +4,8 @@ import {
   logout,
   registerAuthModule,
   setDefaultHostConfig
-} from "./chunks/QK4TMJ64.js";
-import "./chunks/TXC5XORK.js";
+} from "./chunks/I7BG6JMK.js";
+import "./chunks/46MCLX7N.js";
 export {
   auth_default as default,
   getAccessToken,

@@ -12,11 +12,12 @@
   },
   "dependencies": {
     "enigma.js": "^2.14.0",
+    "extend": "3.0.2",
     "lodash": "^4.17.21",
     "nanoid": "^5.0.9",
     "ws": "^8.18.1"
   },
-  "packageManager": "pnpm@10.7.1",
+  "packageManager": "pnpm@10.8.1",
   "engines": {
     "node": ">=20"
   },

@@ -140,6 +140,8 @@ type GetReloadsHttpResponse = {
     data: Reloads;
     headers: Headers;
     status: 200;
+    prev?: (options?: ApiCallOptions) => Promise<GetReloadsHttpResponse>;
+    next?: (options?: ApiCallOptions) => Promise<GetReloadsHttpResponse>;
 };
 type GetReloadsHttpError = {
     data: Errors;
