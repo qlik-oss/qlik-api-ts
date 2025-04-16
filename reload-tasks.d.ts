@@ -118,6 +118,8 @@ type GetReloadTasksHttpResponse = {
     data: Tasks;
     headers: Headers;
     status: 200;
+    prev?: (options?: ApiCallOptions) => Promise<GetReloadTasksHttpResponse>;
+    next?: (options?: ApiCallOptions) => Promise<GetReloadTasksHttpResponse>;
 };
 type GetReloadTasksHttpError = {
     data: Errors;
