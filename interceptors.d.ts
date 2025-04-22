@@ -1,5 +1,5 @@
-import { I as InvokeFetchResponse, a as InvokeFetchProperties } from './invoke-fetch-types-BXn-uSF5.js';
-import './auth-types-PkN9CAF_.js';
+import { I as InvokeFetchResponse, a as InvokeFetchProperties } from './invoke-fetch-types-Cq7bjkqn.js';
+import './auth-types-DqfMuSRX.js';
 
 /**
  * The RestInterceptor type is a function that can be used to intercept requests and responses

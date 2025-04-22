@@ -15,11 +15,13 @@ import {
   isWindows,
   logout,
   registerAuthModule,
+  registerHostConfig,
   serializeHostConfig,
   setDefaultHostConfig,
   toValidLocationUrl,
-  toValidWebsocketLocationUrl
-} from "./757QACNX.js";
+  toValidWebsocketLocationUrl,
+  unregisterHostConfig
+} from "./FKDGGR2O.js";
 import "./3RGGGGAR.js";
 import "./2ZQ3ZX7F.js";
 export {
@@ -39,8 +41,10 @@ export {
   isWindows,
   logout,
   registerAuthModule,
+  registerHostConfig,
   serializeHostConfig,
   setDefaultHostConfig,
   toValidLocationUrl,
-  toValidWebsocketLocationUrl
+  toValidWebsocketLocationUrl,
+  unregisterHostConfig
 };

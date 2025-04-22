@@ -1,4 +1,4 @@
-import { H as HostConfig } from './auth-types-PkN9CAF_.js';
+import { H as HostConfig } from './auth-types-DqfMuSRX.js';
 
 /** ApiKey Auth Configuration for a HostConfig */
 type ApiKeyAuthConfig = {
@@ -82,6 +82,11 @@ type AnonymousAuthConfig = {
     /** client id of oauth client created by tenant admin */
     clientId: string;
 };
+/** Used to reference a registered host config as a single string */
+type ReferenceConfig = {
+    /** The name of the registered host config to reference */
+    reference: string;
+};
 declare global {
     /**
      * QlikAuthModules is a global interface that can be extended to add custom auth modules.
@@ -101,6 +106,9 @@ declare global {
         };
         windowscookie: {
             config: WindowsCookieAuthConfig;
+        };
+        reference: {
+            config: ReferenceConfig;
         };
         none: {
             config: object;
@@ -160,7 +168,7 @@ type ApiCallOptions = {
      */
     useCacheIfAfter?: Date;
     /**
-     * Specify if another host than `globalThis.location` is to be used. Typically used in embedding and mashups
+     * Specify the host configif the api call is a cross-domain request. Typically used in embedding and mashups
      */
     hostConfig?: HostConfig;
     /**

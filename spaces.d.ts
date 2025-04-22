@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-BXn-uSF5.js';
-import './auth-types-PkN9CAF_.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-Cq7bjkqn.js';
+import './auth-types-DqfMuSRX.js';
 
 /**
  * The supported actions for user-created spaces.
@@ -170,10 +170,6 @@ type SharePatch = {
  */
 type ShareRoleType = unknown;
 type ShareType = "user" | "group" | "link";
-/**
- * The supported roles for Shared spaces.
- */
-type SharedSpaceRoleType = "facilitator" | "consumer" | "producer" | "dataconsumer" | "codeveloper";
 type Shares = {
     data?: Share[];
     readonly links?: {
@@ -782,4 +778,4 @@ interface SpacesAPI {
  */
 declare const spacesExport: SpacesAPI;
 
-export { type ActionName, type Assignment, type AssignmentCreate, type AssignmentType, type AssignmentUpdate, type Assignments, type CreateSpaceAssignmentHttpError, type CreateSpaceAssignmentHttpResponse, type CreateSpaceHttpError, type CreateSpaceHttpResponse, type CreateSpaceShareHttpError, type CreateSpaceShareHttpResponse, type DeleteSpaceAssignmentHttpError, type DeleteSpaceAssignmentHttpResponse, type DeleteSpaceHttpError, type DeleteSpaceHttpResponse, type DeleteSpaceShareHttpError, type DeleteSpaceShareHttpResponse, type Error, type Errors, type GetSpaceAssignmentHttpError, type GetSpaceAssignmentHttpResponse, type GetSpaceAssignmentsHttpError, type GetSpaceAssignmentsHttpResponse, type GetSpaceHttpError, type GetSpaceHttpResponse, type GetSpaceShareHttpError, type GetSpaceShareHttpResponse, type GetSpaceSharesHttpError, type GetSpaceSharesHttpResponse, type GetSpaceTypesHttpError, type GetSpaceTypesHttpResponse, type GetSpacesHttpError, type GetSpacesHttpResponse, type Link, type PatchShareHttpError, type PatchShareHttpResponse, type PatchSpaceHttpError, type PatchSpaceHttpResponse, type RoleType, type Share, type ShareCreate, type SharePatch, type ShareRoleType, type ShareType, type SharedSpaceRoleType, type Shares, type Space, type SpaceCreate, type SpacePatch, type SpaceType, type SpaceTypes, type SpaceUpdate, type Spaces, type SpacesAPI, type UpdateSpaceAssignmentHttpError, type UpdateSpaceAssignmentHttpResponse, type UpdateSpaceHttpError, type UpdateSpaceHttpResponse, clearCache, createSpace, createSpaceAssignment, createSpaceShare, spacesExport as default, deleteSpace, deleteSpaceAssignment, deleteSpaceShare, getSpace, getSpaceAssignment, getSpaceAssignments, getSpaceShare, getSpaceShares, getSpaceTypes, getSpaces, patchShare, patchSpace, updateSpace, updateSpaceAssignment };
+export { type ActionName, type Assignment, type AssignmentCreate, type AssignmentType, type AssignmentUpdate, type Assignments, type CreateSpaceAssignmentHttpError, type CreateSpaceAssignmentHttpResponse, type CreateSpaceHttpError, type CreateSpaceHttpResponse, type CreateSpaceShareHttpError, type CreateSpaceShareHttpResponse, type DeleteSpaceAssignmentHttpError, type DeleteSpaceAssignmentHttpResponse, type DeleteSpaceHttpError, type DeleteSpaceHttpResponse, type DeleteSpaceShareHttpError, type DeleteSpaceShareHttpResponse, type Error, type Errors, type GetSpaceAssignmentHttpError, type GetSpaceAssignmentHttpResponse, type GetSpaceAssignmentsHttpError, type GetSpaceAssignmentsHttpResponse, type GetSpaceHttpError, type GetSpaceHttpResponse, type GetSpaceShareHttpError, type GetSpaceShareHttpResponse, type GetSpaceSharesHttpError, type GetSpaceSharesHttpResponse, type GetSpaceTypesHttpError, type GetSpaceTypesHttpResponse, type GetSpacesHttpError, type GetSpacesHttpResponse, type Link, type PatchShareHttpError, type PatchShareHttpResponse, type PatchSpaceHttpError, type PatchSpaceHttpResponse, type RoleType, type Share, type ShareCreate, type SharePatch, type ShareRoleType, type ShareType, type Shares, type Space, type SpaceCreate, type SpacePatch, type SpaceType, type SpaceTypes, type SpaceUpdate, type Spaces, type SpacesAPI, type UpdateSpaceAssignmentHttpError, type UpdateSpaceAssignmentHttpResponse, type UpdateSpaceHttpError, type UpdateSpaceHttpResponse, clearCache, createSpace, createSpaceAssignment, createSpaceShare, spacesExport as default, deleteSpace, deleteSpaceAssignment, deleteSpaceShare, getSpace, getSpaceAssignment, getSpaceAssignments, getSpaceShare, getSpaceShares, getSpaceTypes, getSpaces, patchShare, patchSpace, updateSpace, updateSpaceAssignment };

@@ -6,12 +6,40 @@ import {
   isNode
 } from "./2ZQ3ZX7F.js";
 
+// src/auth/internal/host-config-registry.ts
+var registeredHostConfigs = {};
+function registerHostConfigInternal(name, hostConfig) {
+  if (hostConfig?.reference) {
+    throw new InvalidHostConfigError("Cannot register a host config with a reference");
+  }
+  if (registeredHostConfigs[name]) {
+    console.warn(`registerHostConfig: Host config with name "${name}" is already registered. Overwriting.`);
+  }
+  registeredHostConfigs[name] = hostConfig;
+}
+function unregisterHostConfigInternal(name) {
+  if (registeredHostConfigs[name]) {
+    delete registeredHostConfigs[name];
+  } else {
+    console.warn(`unregisterHostConfig: Host config with name "${name}" not found.`);
+  }
+}
+function getRegisteredHostConfigInternal(name) {
+  if (!registeredHostConfigs[name]) {
+    throw new Error(`Host config with name "${name}" not found.`);
+  }
+  return registeredHostConfigs[name];
+}
+
 // src/auth/internal/default-host-config.ts
 var defaultHostConfig = {};
-function setDefaultHostConfig(hostConfig) {
+function setDefaultHostConfigInternal(hostConfig) {
   defaultHostConfig = hostConfig || {};
 }
-function withDefaultHostConfig(hostConfig) {
+function withResolvedHostConfig(hostConfig) {
+  if (hostConfig?.reference) {
+    return getRegisteredHostConfigInternal(hostConfig.reference);
+  }
   if (hostConfig && Object.keys(hostConfig).length > 0) {
     return hostConfig;
   }
@@ -20,7 +48,7 @@ function withDefaultHostConfig(hostConfig) {
 
 // src/platform/platform-functions.ts
 var getPlatform = async (options = {}) => {
-  const hc = withDefaultHostConfig(options.hostConfig);
+  const hc = withResolvedHostConfig(options.hostConfig);
   const isAnonymous = hc?.authType === "anonymous" || !!hc.accessCode;
   const isNodeEnvironment = typeof window === "undefined";
   if (isNodeEnvironment) {
@@ -136,7 +164,7 @@ function getRegisteredAuthModule(authType) {
   return authModules[authType.toLowerCase()];
 }
 async function getAuthModule(hostConfig) {
-  const hostConfigToUse = withDefaultHostConfig(hostConfig);
+  const hostConfigToUse = withResolvedHostConfig(hostConfig);
   const authType = await determineAuthType(hostConfigToUse);
   if (ongoingAuthModuleLoading) {
     await ongoingAuthModuleLoading;
@@ -196,7 +224,7 @@ var InvalidAuthTypeError = class extends Error {
   constructor(authType) {
     const validAuthModules = getRegisteredAuthModules();
     super(
-      `Not a valid auth type: ${authType}, valid auth types are; '${validAuthModules.filter((name) => name !== "QmfeEmbedFramerAuthModule").join("', '")}'`
+      `Not a valid auth type: ${authType}, valid auth types are; '${validAuthModules.filter((name) => name.toLowerCase() !== "qmfeembedframerauthmodule").join("', '")}'`
     );
     this.name = "InvalidAuthTypeError";
   }
@@ -232,7 +260,7 @@ function isHostCrossOrigin(hostConfig) {
   if (!globalThis.location?.origin) {
     return true;
   }
-  const hostConfigToUse = withDefaultHostConfig(hostConfig);
+  const hostConfigToUse = withResolvedHostConfig(hostConfig);
   if (Object.keys(hostConfigToUse).length === 0) {
     return false;
   }
@@ -244,7 +272,7 @@ function isHostCrossOrigin(hostConfig) {
   return false;
 }
 async function isWindows(hostConfig) {
-  const hostConfigToUse = withDefaultHostConfig(hostConfig);
+  const hostConfigToUse = withResolvedHostConfig(hostConfig);
   if (typeof hostConfigToUse.forceIsWindows === "boolean") {
     return hostConfigToUse.forceIsWindows;
   }
@@ -257,7 +285,7 @@ async function isWindows(hostConfig) {
   return (await getPlatform({ hostConfig })).isWindows;
 }
 function toValidLocationUrl(hostConfig) {
-  const url = withDefaultHostConfig(hostConfig)?.host;
+  const url = withResolvedHostConfig(hostConfig)?.host;
   let locationUrl;
   if (!url) {
     locationUrl = "";
@@ -272,7 +300,7 @@ function toValidLocationUrl(hostConfig) {
   return locationUrl;
 }
 function toValidWebsocketLocationUrl(hostConfig) {
-  const url = withDefaultHostConfig(hostConfig)?.host;
+  const url = withResolvedHostConfig(hostConfig)?.host;
   let locationUrl;
   if (!url) {
     locationUrl = globalThis.location.origin;
@@ -287,7 +315,7 @@ function toValidWebsocketLocationUrl(hostConfig) {
   return locationUrl.replace(leadingHttp, "ws");
 }
 async function getWebSocketAuthParams(props) {
-  const hostConfigToUse = withDefaultHostConfig(props.hostConfig);
+  const hostConfigToUse = withResolvedHostConfig(props.hostConfig);
   try {
     const authModule = await getAuthModule(hostConfigToUse);
     return await authModule.getWebSocketAuthParams({
@@ -300,7 +328,7 @@ async function getWebSocketAuthParams(props) {
   }
 }
 async function getWebResourceAuthParams(props) {
-  const hostConfigToUse = withDefaultHostConfig(props.hostConfig);
+  const hostConfigToUse = withResolvedHostConfig(props.hostConfig);
   try {
     const authModule = await getAuthModule(hostConfigToUse);
     return await authModule.getWebResourceAuthParams?.({
@@ -313,7 +341,7 @@ async function getWebResourceAuthParams(props) {
   }
 }
 async function handleAuthenticationError(props) {
-  const hostConfigToUse = withDefaultHostConfig(props.hostConfig);
+  const hostConfigToUse = withResolvedHostConfig(props.hostConfig);
   const authModule = await getAuthModule(hostConfigToUse);
   const result2 = await authModule.handleAuthenticationError({
     ...props,
@@ -328,7 +356,7 @@ async function handleAuthenticationError(props) {
   return result2;
 }
 async function getRestCallAuthParams(props) {
-  const hostConfigToUse = withDefaultHostConfig(props.hostConfig);
+  const hostConfigToUse = withResolvedHostConfig(props.hostConfig);
   try {
     const authModule = await getAuthModule(hostConfigToUse);
     return await authModule.getRestCallAuthParams({
@@ -351,11 +379,17 @@ async function getAccessToken(props) {
 function registerAuthModule2(name, authModule) {
   registerAuthModule(name, authModule);
 }
-function setDefaultHostConfig2(hostConfig) {
-  setDefaultHostConfig(hostConfig);
+function setDefaultHostConfig(hostConfig) {
+  setDefaultHostConfigInternal(hostConfig);
+}
+function registerHostConfig(name, hostConfig) {
+  registerHostConfigInternal(name, hostConfig);
+}
+function unregisterHostConfig(name) {
+  unregisterHostConfigInternal(name);
 }
 function serializeHostConfig(hostConfig) {
-  const hostConfigToUse = withDefaultHostConfig(hostConfig);
+  const hostConfigToUse = withResolvedHostConfig(hostConfig);
   return JSON.stringify(hostConfigToUse, hostConfigPropertyIgnorer);
 }
 async function determineAuthType(hostConfig) {
@@ -374,13 +408,16 @@ async function determineAuthType(hostConfig) {
   if (hostConfig.webIntegrationId) {
     return "cookie";
   }
+  if (hostConfig.reference) {
+    return "reference";
+  }
   if (await isWindows(hostConfig)) {
     return "windowscookie";
   }
   return "cookie";
 }
 function checkForCrossDomainRequest(hostConfig) {
-  const hostConfigToUse = withDefaultHostConfig(hostConfig);
+  const hostConfigToUse = withResolvedHostConfig(hostConfig);
   if (isHostCrossOrigin(hostConfigToUse)) {
     if (Object.keys(hostConfigToUse).length === 0) {
       throw new InvalidHostConfigError("a host config must be provided when making a cross domain request");
@@ -1447,6 +1484,23 @@ var oauth_default = {
   })
 };
 
+// src/auth/internal/default-auth-modules/reference.ts
+function getRestCallAuthParams7() {
+  throw new Error("getRestCallAuthParams should never be called for reference auth module");
+}
+function getWebSocketAuthParams7() {
+  throw new Error("getWebSocketAuthParams should never be called for reference auth module");
+}
+function handleAuthenticationError7() {
+  throw new Error("handleAuthenticationError should never be called for reference auth module");
+}
+var reference_default = {
+  getRestCallAuthParams: getRestCallAuthParams7,
+  getWebSocketAuthParams: getWebSocketAuthParams7,
+  handleAuthenticationError: handleAuthenticationError7,
+  validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, { requiredProps: ["reference"], optionalProps: [] })
+};
+
 // src/auth/internal/default-auth-modules/windows-cookie/xrf-keys.ts
 var xrfKeys = {};
 function createXrfKey() {
@@ -1470,7 +1524,7 @@ function getXrfKey(hostConfig) {
 }
 
 // src/auth/internal/default-auth-modules/windows-cookie.ts
-async function getRestCallAuthParams7({
+async function getRestCallAuthParams8({
   hostConfig
 }) {
   return {
@@ -1483,7 +1537,7 @@ async function getRestCallAuthParams7({
     credentials: getCredentialsForCookieAuth(hostConfig)
   };
 }
-async function getWebSocketAuthParams7({
+async function getWebSocketAuthParams8({
   hostConfig
 }) {
   return {
@@ -1493,7 +1547,7 @@ async function getWebSocketAuthParams7({
     }
   };
 }
-async function handleAuthenticationError7({
+async function handleAuthenticationError8({
   hostConfig
 }) {
   if (hostConfig.loginUri) {
@@ -1512,9 +1566,9 @@ async function handleAuthenticationError7({
   };
 }
 var windows_cookie_default = {
-  getRestCallAuthParams: getRestCallAuthParams7,
-  getWebSocketAuthParams: getWebSocketAuthParams7,
-  handleAuthenticationError: handleAuthenticationError7,
+  getRestCallAuthParams: getRestCallAuthParams8,
+  getWebSocketAuthParams: getWebSocketAuthParams8,
+  handleAuthenticationError: handleAuthenticationError8,
   validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, {
     requiredProps: [],
     optionalProps: ["loginUri", "crossSiteCookies"]
@@ -1532,6 +1586,7 @@ function registerDefaultAuthModules() {
     registerAuthModule("oauth2", oauth_default);
     registerAuthModule("anonymous", anonymous_default);
     registerAuthModule("windowscookie", windows_cookie_default);
+    registerAuthModule("reference", reference_default);
     authModulesRegistered = true;
   }
 }
@@ -1539,7 +1594,9 @@ registerDefaultAuthModules();
 var auth = {
   logout,
   registerAuthModule,
-  setDefaultHostConfig: setDefaultHostConfig2,
+  setDefaultHostConfig,
+  registerHostConfig,
+  unregisterHostConfig,
   getRestCallAuthParams,
   getWebSocketAuthParams,
   getWebResourceAuthParams,
@@ -2156,9 +2213,9 @@ function cleanStack(stack) {
 // src/invoke-fetch/invoke-fetch-functions.ts
 var defaultUserAgent = "qmfe-api/latest";
 async function invokeFetch(api, props, interceptors) {
-  interceptors = interceptors || getInterceptors();
+  const effectiveInterceptors = interceptors || getInterceptors();
   const invokeFetchFinal = (reqeust) => invokeFetchIntercepted(api, reqeust);
-  const withInterceptors = (interceptors || []).reduce(
+  const withInterceptors = (effectiveInterceptors || []).reduce(
     (proceed, interceptor) => (request) => interceptor(request, proceed),
     invokeFetchFinal
   );
@@ -2268,7 +2325,9 @@ export {
   getRestCallAuthParams,
   getAccessToken,
   registerAuthModule2 as registerAuthModule,
-  setDefaultHostConfig2 as setDefaultHostConfig,
+  setDefaultHostConfig,
+  registerHostConfig,
+  unregisterHostConfig,
   serializeHostConfig,
   determineAuthType,
   checkForCrossDomainRequest,
