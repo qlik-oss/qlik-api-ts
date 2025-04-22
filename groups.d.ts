@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-BXn-uSF5.js';
-import './auth-types-PkN9CAF_.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-Cq7bjkqn.js';
+import './auth-types-DqfMuSRX.js';
 
 /**
  * An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles.
@@ -189,8 +189,9 @@ type GroupSettings = {
             href: string;
         };
     };
-    /** Determines if groups should be created on login. */
-    syncIdpGroups: boolean;
+    /** @deprecated
+     * Determines if groups should be created on login. */
+    syncIdpGroups?: boolean;
     systemGroups?: {
         "000000000000000000000001"?: {
             /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */

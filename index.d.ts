@@ -1,5 +1,5 @@
 import { InterceptorsAPI, createInterceptors } from './interceptors.js';
-import { AuthAPI, registerAuthModule, setDefaultHostConfig, getAccessToken } from './auth.js';
+import { AuthAPI, registerAuthModule, setDefaultHostConfig, registerHostConfig, unregisterHostConfig, getAccessToken } from './auth.js';
 import { QixAPI } from './qix.js';
 import { ApiKeysAPI } from './api-keys.js';
 import { AppsAPI } from './apps.js';
@@ -33,8 +33,8 @@ import { UsersAPI } from './users.js';
 import { WebIntegrationsAPI } from './web-integrations.js';
 import { WebNotificationsAPI } from './web-notifications.js';
 import { WebhooksAPI } from './webhooks.js';
-import { H as HostConfig } from './auth-types-PkN9CAF_.js';
-import './invoke-fetch-types-BXn-uSF5.js';
+import { H as HostConfig } from './auth-types-DqfMuSRX.js';
+import './invoke-fetch-types-Cq7bjkqn.js';
 
 declare const apiKeys: ApiKeysAPI;
 declare const apps: AppsAPI;
@@ -42,6 +42,8 @@ declare const audits: AuditsAPI;
 declare const auth: {
     registerAuthModule: typeof registerAuthModule;
     setDefaultHostConfig: typeof setDefaultHostConfig;
+    registerHostConfig: typeof registerHostConfig;
+    unregisterHostConfig: typeof unregisterHostConfig;
     getAccessToken: typeof getAccessToken;
 };
 declare const automations: AutomationsAPI;

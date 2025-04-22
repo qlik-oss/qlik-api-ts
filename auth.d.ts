@@ -1,5 +1,5 @@
-import { A as AuthType, a as AuthModule, H as HostConfig } from './auth-types-PkN9CAF_.js';
-export { g as AuthenticationErrorAction, C as Credentials, e as GetRemoteAuthDataProps, G as GetRestCallAuthParamsProps, c as GetWebResourceAuthParamsProps, b as GetWebSocketAuthParamsProps, f as HandleAuthenticationErrorProps, R as RestCallAuthParams, d as WebResourceAuthParams, W as WebSocketAuthParams } from './auth-types-PkN9CAF_.js';
+import { A as AuthType, a as AuthModule, H as HostConfig } from './auth-types-DqfMuSRX.js';
+export { g as AuthenticationErrorAction, C as Credentials, e as GetRemoteAuthDataProps, G as GetRestCallAuthParamsProps, c as GetWebResourceAuthParamsProps, b as GetWebSocketAuthParamsProps, f as HandleAuthenticationErrorProps, R as RestCallAuthParams, d as WebResourceAuthParams, W as WebSocketAuthParams } from './auth-types-DqfMuSRX.js';
 
 /**
  * Registers an auth module that can handle authentication. An auth module is used by specifying its name as authType in the HostConfig passed in to api calls.
@@ -18,6 +18,17 @@ declare function logout(): void;
  * @param hostConfig the default HostConfig to use
  */
 declare function setDefaultHostConfig(hostConfig: HostConfig | undefined): void;
+/**
+ * Registers a host config with the given name.
+ * @param name The name of the host config to be used to reference the host config later.
+ * @param hostConfig The host config to register.
+ */
+declare function registerHostConfig(name: string, hostConfig: HostConfig): void;
+/**
+ * Unregisters a host config with the given name.
+ * @param name The name of the host config to unregister.
+ */
+declare function unregisterHostConfig(name: string): void;
 /**
  * Returns an access token using the supplied host config. Typically used on the backend to supply the access token to the frontend
  */
@@ -40,6 +51,17 @@ interface AuthAPI {
      */
     setDefaultHostConfig: typeof setDefaultHostConfig;
     /**
+     * Registers a host config with the given name.
+     * @param name The name of the host config to be used to reference the host config later.
+     * @param hostConfig The host config to register.
+     */
+    registerHostConfig: typeof registerHostConfig;
+    /**
+     * Unregisters a host config with the given name.
+     * @param name The name of the host config to unregister.
+     */
+    unregisterHostConfig: typeof unregisterHostConfig;
+    /**
      * Returns an access token using the supplied host config. Typically used on the backend to supply the access token to the frontend
      */
     getAccessToken: typeof getAccessToken;
@@ -47,7 +69,9 @@ interface AuthAPI {
 declare const _default: {
     registerAuthModule: typeof registerAuthModule;
     setDefaultHostConfig: typeof setDefaultHostConfig;
+    registerHostConfig: typeof registerHostConfig;
+    unregisterHostConfig: typeof unregisterHostConfig;
     getAccessToken: typeof getAccessToken;
 };
 
-export { type AuthAPI, AuthModule, AuthType, HostConfig, _default as default, getAccessToken, logout, registerAuthModule, setDefaultHostConfig };
+export { type AuthAPI, AuthModule, AuthType, HostConfig, _default as default, getAccessToken, logout, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig };

@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-BXn-uSF5.js';
-import './auth-types-PkN9CAF_.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-Cq7bjkqn.js';
+import './auth-types-DqfMuSRX.js';
 
 /**
  * Object containing meta data regarding the bundle the extension belongs to. If it does not belong to a bundle, this object is not defined.

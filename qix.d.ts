@@ -1,7 +1,7 @@
-import { H as HostConfig } from './auth-types-PkN9CAF_.js';
-import './invoke-fetch-types-BXn-uSF5.js';
+import { H as HostConfig } from './auth-types-DqfMuSRX.js';
+import './invoke-fetch-types-Cq7bjkqn.js';
 
-declare const QIX_SCHEMA_VERSION = "12.2402.0";
+declare const QIX_SCHEMA_VERSION = "12.2409.0";
 type AlfaNumString = {
     /**
      * Calculated value.

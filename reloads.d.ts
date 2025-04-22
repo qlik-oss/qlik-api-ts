@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-BXn-uSF5.js';
-import './auth-types-PkN9CAF_.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-Cq7bjkqn.js';
+import './auth-types-DqfMuSRX.js';
 
 type Error = {
     /** The error code is in form of 'RELOADS-xxx'. ranges from 'RELOADS-001' to 'RELOADS-013'.  */

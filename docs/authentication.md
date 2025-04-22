@@ -246,4 +246,51 @@ const hostConfig: HostConfig = {
 setDefaultHostConfig(hostConfig);
 ```
 
+## Registering a Host Config
+
+It is possible to register a named host config and reference it when making api-calls.
+
+When referencing a registered host config we use a special host config type with the auth type `reference` which only
+takes one property with the same name (`.reference`). There is no need to specify the auth type in the host config
+when using this host config type.
+
+This example shows how to use the `registerHostConfig` function and how to reference it.
+
+```ts
+import { auth, spaces } from "@qlik/api";
+
+auth.registerHostConfig("tenant 1", {
+  host: "tenant1.eu.qlikcloud.com",
+  authType: "apikey",
+  apiKey: "<api-key>",
+});
+
+auth.registerHostConfig("tenant 2", {
+  host: "tenant2.eu.qlikcloud.com",
+  authType: "apikey",
+  apiKey: "<api-key>",
+});
+
+const response = await spaces.getSpaces({}, { hostConfig: { reference: "tenant 1" } });
+console.log(`Tenant 1 has ${response.data.data.length} spaces`);
+const response2 = await spaces.getSpaces({}, { hostConfig: { reference: "tenant 2" } });
+console.log(`Tenant 2 has ${response2.data.data.length} spaces`);
+```
+
+This works equally well when using it in the `createQlikApi` function.
+
+```ts
+import { auth, createQlikApi } from "@qlik/api";
+
+auth.registerHostConfig("tenant 1", {
+  host: "tenant1.eu.qlikcloud.com",
+  authType: "apikey",
+  apiKey: "<api-key>",
+});
+
+const api = createQlikApi({ reference: "tenant 1" });
+
+// api is now bound to the registered host config "tenant 1"
+```
+
 ◁ [Back to overview](../README.md)
