@@ -388,7 +388,7 @@ type LicenseStatus = {
     /** Boolean indicating if it is a trial license. */
     trial: boolean;
     /** Type of license key. */
-    type: "Signed" | "Plain";
+    type: "Signed" | "Plain" | 2;
     /** Period that the license is currently set to be active. Represented as an ISO 8601 time interval with start and end. */
     valid: string;
 };
