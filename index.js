@@ -1,17 +1,17 @@
 import {
   qix_default
-} from "./chunks/KBSD75QL.js";
+} from "./chunks/YTT2FEVE.js";
 import {
   auth_default
-} from "./chunks/GUU3KZGK.js";
+} from "./chunks/RCLKKVYB.js";
 import {
   interceptors_default
 } from "./chunks/3RGGGGAR.js";
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/YKZ2QYHN.js";
-import "./chunks/DLKLPD7T.js";
+} from "./chunks/VVD2DPKQ.js";
+import "./chunks/LTNGXTXG.js";
 import "./chunks/2ZQ3ZX7F.js";
 
 // src/runtime-api-generator/runtime-api-generator-common.ts
@@ -273,6 +273,49 @@ var appsMiniModule = apiDefToApiPublic("apps", {
     }
   }
 });
+var assistantsMiniModule = apiDefToApiPublic("assistants", {
+  api: {
+    v1: {
+      assistants: {
+        "": ["getAssistants:GQ:", "createAssistant:PBJ:"],
+        "{assistantId}": {
+          feedback: ["getAssistantFeedback:G:"],
+          sources: { plaintexts: ["getAssistantSources:PBJ:"] },
+          starters: {
+            "": ["getAssistantStarters:GQ:", "createAssistantStarter:PBJ:"],
+            "{starterId}": {
+              "": ["deleteAssistantStarter:D:", "getAssistantStarter:G:", "updateAssistantStarter:UBJ:"],
+              followups: {
+                "{followupId}": ["deleteAssistantStarterFollowup:D:", "updateAssistantStarterFollowup:UBJ:"]
+              }
+            }
+          },
+          threads: {
+            "": ["getAssistantThreads:GQ:", "createAssistantThread:PBJ:"],
+            "{threadId}": {
+              actions: { invoke: ["invokeAssistantThread:PBJ:"], stream: ["streamAssistantThread:PBJ:"] },
+              interactions: {
+                "": ["getAssistantThreadInteractions:GQ:", "createAssistantThreadInteraction:PBJ:"],
+                "{interactionId}": {
+                  "": ["deleteAssistantThreadInteraction:D:", "getAssistantThreadInteraction:G:"],
+                  feedback: {
+                    "": ["createAssistantThreadInteractionFeedback:PBJ:"],
+                    "{feedbackId}": ["patchAssistantThreadInteractionFeedback:ABJ:"]
+                  },
+                  reviews: ["createAssistantThreadInteractionReview:PBJ:"]
+                }
+              }
+            }
+          }
+        },
+        "{assistantid}": {
+          threads: { "{threadid}": ["deleteAssistantThread:D:", "getAssistantThread:G:", "patchAssistantThread:ABJ:"] }
+        },
+        "{id}": ["deleteAssistant:D:", "getAssistant:G:", "patchAssistant:ABJ:"]
+      }
+    }
+  }
+});
 var auditsMiniModule = apiDefToApiPublic("audits", {
   api: {
     v1: {
@@ -283,6 +326,23 @@ var auditsMiniModule = apiDefToApiPublic("audits", {
         sources: ["getAuditSources:G:"],
         types: ["getAuditTypes:G:"],
         "{id}": ["getAudit:G:"]
+      }
+    }
+  }
+});
+var automationConnectionsMiniModule = apiDefToApiPublic("automation-connections", {
+  api: {
+    v1: {
+      "automation-connections": {
+        "": ["getAutomationConnections:GQ:", "createAutomationConnection:PBJ:"],
+        "{id}": {
+          "": ["deleteAutomationConnection:DQ:", "getAutomationConnection:G:", "updateAutomationConnection:UBJ:"],
+          actions: {
+            "change-owner": ["changeOwnerAutomationConnection:PBJ:"],
+            "change-space": ["changeSpaceAutomationConnection:PBJ:"],
+            check: ["checkAutomationConnection:P:"]
+          }
+        }
       }
     }
   }
@@ -312,6 +372,31 @@ var automationsMiniModule = apiDefToApiPublic("automations", {
               }
             }
           }
+        }
+      }
+    }
+  }
+});
+var automlDeploymentsMiniModule = apiDefToApiPublic("automl-deployments", {
+  api: {
+    v1: {
+      "automl-deployments": {
+        "{deploymentId}": { "realtime-predictions": ["createAutomlDeploymentRealtimePrediction:PQBJ:"] }
+      }
+    }
+  }
+});
+var automlPredictionsMiniModule = apiDefToApiPublic("automl-predictions", {
+  api: {
+    v1: {
+      "automl-predictions": {
+        "{predictionId}": {
+          "coordinate-shap": ["getAutomlPredictionCoordinateShap:GQ:"],
+          jobs: ["createAutomlPredictionJob:P:"],
+          "not-predicted-reasons": ["getAutomlPredictionNotPredictedReasons:GQ:"],
+          predictions: ["getAutomlPredictionPredictions:GQ:"],
+          shap: ["getAutomlPredictionShap:GQ:"],
+          source: ["getAutomlPredictionSource:GQ:"]
         }
       }
     }
@@ -356,6 +441,27 @@ var collectionsMiniModule = apiDefToApiPublic("collections", {
     }
   }
 });
+var conditionsMiniModule = apiDefToApiPublic("conditions", {
+  api: {
+    v1: {
+      conditions: {
+        "": ["createCondition:PBJ:"],
+        previews: { "": ["createConditionPreview:PBJ:"], "{id}": ["getConditionPreview:G:"] },
+        settings: ["getConditionsSettings:G:", "setConditionsSettings:UBJ:"],
+        "{id}": {
+          "": ["deleteCondition:D:", "getCondition:G:", "patchCondition:ABJ:"],
+          evaluations: {
+            "": ["createConditionEvaluation:PBJ:"],
+            "{evaluationId}": ["deleteConditionEvaluation:D:", "getConditionEvaluation:G:"]
+          }
+        }
+      }
+    }
+  }
+});
+var consumptionMiniModule = apiDefToApiPublic("consumption", {
+  api: { v1: { consumption: { executions: ["getConsumptionExecutions:GQ:"] } } }
+});
 var cspOriginsMiniModule = apiDefToApiPublic("csp-origins", {
   api: {
     v1: {
@@ -363,6 +469,33 @@ var cspOriginsMiniModule = apiDefToApiPublic("csp-origins", {
         "": ["getCSPEntries:GQ:", "createCSPEntry:PBJ:"],
         actions: { "generate-header": ["getCSPHeader:G:"] },
         "{id}": ["deleteCSPEntry:D:", "getCSPEntry:G:", "updateCSPEntry:UBJ:"]
+      }
+    }
+  }
+});
+var csrfTokenMiniModule = apiDefToApiPublic("csrf-token", {
+  api: { v1: { "csrf-token": ["getCsrfToken:G:"] } }
+});
+var dataAlertsMiniModule = apiDefToApiPublic("data-alerts", {
+  api: {
+    v1: {
+      "data-alerts": {
+        "": ["getDataAlerts:GQ:", "createDataAlert:PBJ:"],
+        actions: { trigger: ["triggerDataAlerts:PBJ:"], validate: ["validateDataAlerts:PBJ:"] },
+        settings: ["getDataAlertsSettings:G:", "setDataAlertsSettings:UBJ:"],
+        "{alertId}": {
+          "": ["deleteDataAlert:D:", "getDataAlert:G:", "patchDataAlert:ABJ:"],
+          condition: ["getDataAlertCondition:G:"],
+          executions: { "{executionId}": ["deleteDataAlertExecution:D:", "getDataAlertExecution:G:"] },
+          "recipient-stats": ["getDataAlertRecipientStats:GQ:"]
+        },
+        "{taskId}": {
+          executions: {
+            "": ["getDataAlertExecutions:GQ:"],
+            stats: ["getDataAlertExecutionsStats:GQ:"],
+            "{executionId}": { evaluations: ["getDataAlertExecutionEvaluations:G:"] }
+          }
+        }
       }
     }
   }
@@ -423,6 +556,125 @@ var dataFilesMiniModule = apiDefToApiPublic("data-files", {
         "{id}": {
           "": ["deleteDataFile:D:", "getDataFile:G:", "reuploadDataFile:UBM:"],
           actions: { "change-owner": ["changeDataFileOwner:PBJ:"], "change-space": ["moveDataFile:PBJ:"] }
+        }
+      }
+    }
+  }
+});
+var dataQualitiesMiniModule = apiDefToApiPublic("data-qualities", {
+  api: {
+    v1: {
+      "data-qualities": {
+        computations: {
+          "": ["triggerDataQualitiesComputation:PBJ:"],
+          "{computationId}": ["getDataQualitiesComputation:G:"]
+        },
+        "global-results": ["getDataQualitiesGlobalResults:GQ:"]
+      }
+    }
+  }
+});
+var dataSetsMiniModule = apiDefToApiPublic("data-sets", {
+  api: {
+    v1: {
+      "data-sets": {
+        "": ["deleteDataSets:DBJ:", "createDataSet:PBJ:"],
+        "{data-set-id}": {
+          "": ["getDataSet:GQ:", "patchDataSet:ABJ:", "updateDataSet:UBJ:"],
+          profiles: ["getDataSetProfiles:GQ:"]
+        }
+      }
+    }
+  }
+});
+var dataSourcesMiniModule = apiDefToApiPublic("data-sources", {
+  api: {
+    v1: {
+      "data-sources": {
+        "": ["getDataSources:GQ:"],
+        "{dataSourceId}": { "api-specs": ["getDataSourceApiSpecs:G:"], gateways: ["getDataSourceGateways:GQ:"] }
+      }
+    }
+  }
+});
+var dataStoresMiniModule = apiDefToApiPublic("data-stores", {
+  api: {
+    v1: {
+      "data-stores": {
+        "": ["deleteDataStores:DBJ:", "getDataStores:GQ:", "createDataStore:PBJ:"],
+        "{data-store-ids}": {
+          "data-assets": {
+            "": ["deleteDataStoreDataAssets:D:", "getDataStoreDataAssets:GQ:"],
+            "{data-asset-ids}": {
+              "data-sets": ["deleteDataStoreDataAssetDataSets:D:", "getDataStoreDataAssetDataSets:GQ:"]
+            }
+          }
+        },
+        "{data-store-id}": ["getDataStore:GQ:", "patchDataStore:ABJ:", "updateDataStore:UBJ:"]
+      }
+    }
+  }
+});
+var dcaasMiniModule = apiDefToApiPublic("dcaas", {
+  api: {
+    v1: {
+      dcaas: {
+        actions: {
+          "data-connections": {
+            "": ["dataConnectionsDcaas:PBJ:"],
+            "api-specs": ["dataConnectionsDcaasApiSpecs:GQ:"],
+            "{connectionId}": ["dataConnectionsDcaa:G:"]
+          }
+        }
+      }
+    }
+  }
+});
+var diProjectsMiniModule = apiDefToApiPublic("di-projects", {
+  api: {
+    v1: {
+      "di-projects": {
+        "": ["getDiProjects:GQ:", "createDiProject:PBJ:"],
+        actions: { "{actionId}": ["getDiProject:GQ:"] },
+        "{projectId}": {
+          actions: {
+            export: ["exportDiProject:PBJ:"],
+            import: ["importDiProject:PBM:"],
+            prepare: ["prepareDiProject:PBJ:"],
+            validate: ["validateDiProject:PBJ:"]
+          },
+          bindings: ["getDiProjectExportVariables:GQ:", "setDiProjectExportVariables:UBJ:"],
+          "di-tasks": {
+            "": ["getDiProjectDiTasks:G:"],
+            "{dataTaskId}": {
+              "": ["getDiProjectDiTask:G:"],
+              actions: { prepare: ["prepareDiProjectDiTask:PBJ:"], validate: ["validateDiProjectDiTask:PBJ:"] },
+              runtime: {
+                actions: { start: ["startDiProjectDiTaskRuntime:P:"], stop: ["stopDiProjectDiTaskRuntime:P:"] },
+                state: ["getDiProjectDiTaskRuntimeState:G:"]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+});
+var encryptionMiniModule = apiDefToApiPublic("encryption", {
+  api: {
+    v1: {
+      encryption: {
+        keyproviders: {
+          "": ["getEncryptionKeyproviders:G:", "createEncryptionKeyprovider:PBJ:"],
+          actions: {
+            list: ["listEncryptionKeyproviders:G:"],
+            "reset-to-default-provider": ["resetEncryptionKeyproviders:P:"]
+          },
+          migration: { actions: { details: ["getEncryptionKeyprovidersMigrationDetails:G:"] } },
+          "{arnFingerPrint}": {
+            "": ["deleteEncryptionKeyprovider:D:", "getEncryptionKeyprovider:G:", "patchEncryptionKeyprovider:ABJ:"],
+            actions: { migrate: ["migrateEncryptionKeyprovider:P:"], test: ["testEncryptionKeyprovider:P:"] }
+          }
         }
       }
     }
@@ -513,6 +765,39 @@ var itemsMiniModule = apiDefToApiPublic("items", {
     }
   }
 });
+var knowledgebasesMiniModule = apiDefToApiPublic("knowledgebases", {
+  api: {
+    v1: {
+      knowledgebases: {
+        "": ["getKnowledgebases:GQ:", "createKnowledgebase:PBJ:"],
+        "{id}": {
+          "": ["deleteKnowledgebase:D:", "getKnowledgebase:G:", "patchKnowledgebase:ABJ:"],
+          datasources: {
+            "": ["createKnowledgebaseDatasource:PBJ:"],
+            "{datasourceId}": {
+              "": ["deleteKnowledgebaseDatasource:D:", "updateKnowledgebaseDatasource:UBJ:"],
+              actions: {
+                cancel: ["cancelKnowledgebaseDatasource:P:"],
+                download: ["downloadKnowledgebaseDatasource:PBJ:"],
+                sync: ["syncKnowledgebaseDatasource:PQ:"]
+              },
+              histories: {
+                "": ["getKnowledgebaseDatasourceHistories:GQ:"],
+                "{syncId}": ["getKnowledgebaseDatasourceHistory:G:"]
+              },
+              schedules: [
+                "deleteKnowledgebaseDatasourceSchedule:D:",
+                "getKnowledgebaseDatasourceSchedule:G:",
+                "createKnowledgebaseDatasourceSchedule:PBJ:"
+              ]
+            }
+          },
+          histories: ["getKnowledgebaseHistories:GQ:"]
+        }
+      }
+    }
+  }
+});
 var licensesMiniModule = apiDefToApiPublic("licenses", {
   api: {
     v1: {
@@ -532,6 +817,95 @@ var licensesMiniModule = apiDefToApiPublic("licenses", {
       }
     }
   }
+});
+var lineageGraphsMiniModule = apiDefToApiPublic("lineage-graphs", {
+  api: {
+    v1: {
+      "lineage-graphs": {
+        impact: {
+          "{id}": {
+            actions: { expand: ["expandLineageGraphImpact:GQ:"], search: ["searchLineageGraphImpact:GQ:"] },
+            overview: ["getLineageGraphImpactOverview:GQ:"],
+            source: ["getLineageGraphImpactSource:G:"]
+          }
+        },
+        nodes: {
+          "{id}": {
+            "": ["getLineageGraphNode:GQ:"],
+            actions: { expand: ["expandLineageGraphNode:GQ:"], search: ["searchLineageGraphNode:GQ:"] },
+            overview: ["createLineageGraphNodeOverview:PQBJ:"]
+          }
+        }
+      }
+    }
+  }
+});
+var mlMiniModule = apiDefToApiPublic("ml", {
+  api: {
+    v1: {
+      ml: {
+        deployments: {
+          "": ["getMlDeployments:GQ:", "createMlDeployment:PBJ:"],
+          "{deploymentId}": {
+            "": ["deleteMlDeployment:D:", "getMlDeployment:G:", "patchMlDeployment:ABJ:"],
+            actions: {
+              "activate-models": ["activateModelsMlDeployment:P:"],
+              "deactivate-models": ["deactivateModelsMlDeployment:P:"]
+            },
+            aliases: {
+              "": ["getMlDeploymentAliases:GQ:", "createMlDeploymentAliase:PBJ:"],
+              "{aliasId}": ["deleteMlDeploymentAliase:D:", "getMlDeploymentAliase:G:", "patchMlDeploymentAliase:ABJ:"],
+              "{aliasName}": {
+                "realtime-predictions": { actions: { run: ["runMlDeploymentAliaseRealtimePredictions:PQBJ:"] } }
+              }
+            },
+            "batch-predictions": {
+              "": ["getMlDeploymentBatchPredictions:GQ:", "createMlDeploymentBatchPrediction:PBJ:"],
+              "{batchPredictionId}": {
+                "": [
+                  "deleteMlDeploymentBatchPrediction:D:",
+                  "getMlDeploymentBatchPrediction:G:",
+                  "patchMlDeploymentBatchPrediction:ABJ:"
+                ],
+                actions: { predict: ["predictMlDeploymentBatchPrediction:P:"] },
+                schedule: [
+                  "deleteMlDeploymentBatchPredictionSchedule:D:",
+                  "getMlDeploymentBatchPredictionSchedule:G:",
+                  "updateMlDeploymentBatchPredictionSchedule:ABJ:",
+                  "setMlDeploymentBatchPredictionSchedule:UBJ:"
+                ]
+              }
+            },
+            models: { actions: { add: ["addMlDeploymentModels:PBJ:"], remove: ["removeMlDeploymentModels:PBJ:"] } },
+            "realtime-predictions": { actions: { run: ["runMlDeploymentRealtimePredictions:PQBJ:"] } }
+          }
+        },
+        experiments: {
+          "": ["getMlExperiments:GQ:", "createMlExperiment:PBJ:"],
+          "{experimentId}": {
+            "": ["deleteMlExperiment:D:", "getMlExperiment:G:", "patchMlExperiment:ABJ:"],
+            models: { "": ["getMlExperimentModels:GQ:"], "{modelId}": ["getMlExperimentModel:G:"] },
+            versions: {
+              "": ["getMlExperimentVersions:GQ:", "createMlExperimentVersion:PBJ:"],
+              "{experimentVersionId}": [
+                "deleteMlExperimentVersion:D:",
+                "getMlExperimentVersion:G:",
+                "patchMlExperimentVersion:ABJ:"
+              ]
+            }
+          }
+        },
+        jobs: { "{corrType}": { "{corrId}": { actions: { cancel: ["cancelMlJob:P:"] } } } },
+        "profile-insights": { "": ["createMlProfileInsight:PBJ:"], "{dataSetId}": ["getMlProfileInsight:G:"] }
+      }
+    }
+  }
+});
+var notesMiniModule = apiDefToApiPublic("notes", {
+  api: { v1: { notes: { settings: ["getNotesSettings:G:", "setNotesSettings:UBJ:"] } } }
+});
+var notificationsMiniModule = apiDefToApiPublic("notifications", {
+  api: { v1: { notifications: ["getNotifications:GQ:"] } }
 });
 var oauthClientsMiniModule = apiDefToApiPublic("oauth-clients", {
   api: {
@@ -553,6 +927,12 @@ var oauthClientsMiniModule = apiDefToApiPublic("oauth-clients", {
       }
     }
   }
+});
+var oauthTokensMiniModule = apiDefToApiPublic("oauth-tokens", {
+  api: { v1: { "oauth-tokens": { "": ["getOauthTokens:GQ:"], "{tokenId}": ["deleteOauthToken:D:"] } } }
+});
+var questionsMiniModule = apiDefToApiPublic("questions", {
+  api: { v1: { questions: { actions: { ask: ["askQuestions:PBJ:"], filter: ["filterQuestions:PQBJ:"] } } } }
 });
 var quotasMiniModule = apiDefToApiPublic("quotas", {
   api: { v1: { quotas: { "": ["getQuotas:GQ:"], "{id}": ["getQuota:GQ:"] } } }
@@ -577,6 +957,24 @@ var reloadsMiniModule = apiDefToApiPublic("reloads", {
     }
   }
 });
+var reportTemplatesMiniModule = apiDefToApiPublic("report-templates", {
+  api: {
+    v1: {
+      "report-templates": {
+        "": ["getReportTemplates:GQ:", "createReportTemplate:PBJ:"],
+        "{id}": {
+          "": [
+            "deleteReportTemplate:D:",
+            "getReportTemplate:G:",
+            "patchReportTemplate:ABJ:",
+            "updateReportTemplate:UBJ:"
+          ],
+          actions: { download: ["downloadReportTemplate:P:"] }
+        }
+      }
+    }
+  }
+});
 var reportsMiniModule = apiDefToApiPublic("reports", {
   api: { v1: { reports: { "": ["createReport:PBJ:"], "{id}": { status: ["getReportStatus:G:"] } } } }
 });
@@ -584,6 +982,25 @@ var rolesMiniModule = apiDefToApiPublic("roles", {
   api: {
     v1: {
       roles: { "": ["getRoles:GQ:", "createRole:PBJ:"], "{id}": ["deleteRole:D:", "getRole:G:", "patchRole:ABJ:"] }
+    }
+  }
+});
+var sharingTasksMiniModule = apiDefToApiPublic("sharing-tasks", {
+  api: {
+    v1: {
+      "sharing-tasks": {
+        "": ["getSharingTasks:GQ:", "createSharingTask:PBJ:"],
+        actions: { execute: ["executeSharingTasks:PBJ:"] },
+        settings: [
+          "getSharingTasksSettings:G:",
+          "updateSharingTasksSettings:ABJ:",
+          "configureSharingTasksSettings:UBJ:"
+        ],
+        "{taskId}": {
+          "": ["deleteSharingTask:D:", "getSharingTask:GQ:", "patchSharingTask:ABJ:"],
+          actions: { cancel: ["cancelSharingTask:P:"] }
+        }
+      }
     }
   }
 });
@@ -603,6 +1020,21 @@ var spacesMiniModule = apiDefToApiPublic("spaces", {
             "": ["getSpaceShares:GQ:", "createSpaceShare:PBJ:"],
             "{shareId}": ["deleteSpaceShare:D:", "getSpaceShare:G:", "patchShare:ABJ:"]
           }
+        }
+      }
+    }
+  }
+});
+var tasksMiniModule = apiDefToApiPublic("tasks", {
+  api: {
+    v1: {
+      tasks: {
+        "": ["getTasks:GQ:", "createTask:PQBJ:"],
+        resources: { "{id}": { runs: ["getTasksResourceRuns:GQ:"] } },
+        "{id}": {
+          "": ["deleteTask:D:", "getTask:G:", "updateTask:UBJ:"],
+          actions: { start: ["startTask:PQ:"] },
+          runs: { "": ["getTaskRuns:GQ:"], last: ["getLastTaskRun:G:"], "{runId}": { log: ["getTaskRunLog:G:"] } }
         }
       }
     }
@@ -661,6 +1093,22 @@ var transportsMiniModule = apiDefToApiPublic("transports", {
     }
   }
 });
+var uiConfigMiniModule = apiDefToApiPublic("ui-config", {
+  api: {
+    v1: {
+      "ui-config": {
+        "pinned-links": {
+          "": ["getUiConfigPinnedLinks:G:", "createUiConfigPinnedLink:PBJ:"],
+          actions: {
+            "bulk-create-pinned-links": ["createUiConfigPinnedLinks:PBJ:"],
+            "delete-all-pinned-links": ["deleteAllUiConfigPinnedLinks:P:"]
+          },
+          "{id}": ["deleteUiConfigPinnedLink:D:", "getUiConfigPinnedLink:G:", "patchUiConfigPinnedLink:ABJ:"]
+        }
+      }
+    }
+  }
+});
 var usersMiniModule = apiDefToApiPublic("users", {
   api: {
     v1: {
@@ -713,35 +1161,61 @@ var webhooksMiniModule = apiDefToApiPublic("webhooks", {
 });
 var apiKeys = apiKeysMiniModule(void 0, interceptors_default);
 var apps = appsMiniModule(void 0, interceptors_default);
+var assistants = assistantsMiniModule(void 0, interceptors_default);
 var audits = auditsMiniModule(void 0, interceptors_default);
 var auth = auth_default;
+var automationConnections = automationConnectionsMiniModule(void 0, interceptors_default);
 var automations = automationsMiniModule(void 0, interceptors_default);
+var automlDeployments = automlDeploymentsMiniModule(void 0, interceptors_default);
+var automlPredictions = automlPredictionsMiniModule(void 0, interceptors_default);
 var brands = brandsMiniModule(void 0, interceptors_default);
 var collections = collectionsMiniModule(void 0, interceptors_default);
+var conditions = conditionsMiniModule(void 0, interceptors_default);
+var consumption = consumptionMiniModule(void 0, interceptors_default);
 var cspOrigins = cspOriginsMiniModule(void 0, interceptors_default);
+var csrfToken = csrfTokenMiniModule(void 0, interceptors_default);
+var dataAlerts = dataAlertsMiniModule(void 0, interceptors_default);
 var dataAssets = dataAssetsMiniModule(void 0, interceptors_default);
 var dataConnections = dataConnectionsMiniModule(void 0, interceptors_default);
 var dataCredentials = dataCredentialsMiniModule(void 0, interceptors_default);
 var dataFiles = dataFilesMiniModule(void 0, interceptors_default);
+var dataQualities = dataQualitiesMiniModule(void 0, interceptors_default);
+var dataSets = dataSetsMiniModule(void 0, interceptors_default);
+var dataSources = dataSourcesMiniModule(void 0, interceptors_default);
+var dataStores = dataStoresMiniModule(void 0, interceptors_default);
+var dcaas = dcaasMiniModule(void 0, interceptors_default);
+var diProjects = diProjectsMiniModule(void 0, interceptors_default);
+var encryption = encryptionMiniModule(void 0, interceptors_default);
 var extensions = extensionsMiniModule(void 0, interceptors_default);
 var glossaries = glossariesMiniModule(void 0, interceptors_default);
 var groups = groupsMiniModule(void 0, interceptors_default);
 var identityProviders = identityProvidersMiniModule(void 0, interceptors_default);
 var interceptors = interceptors_default;
 var items = itemsMiniModule(void 0, interceptors_default);
+var knowledgebases = knowledgebasesMiniModule(void 0, interceptors_default);
 var licenses = licensesMiniModule(void 0, interceptors_default);
+var lineageGraphs = lineageGraphsMiniModule(void 0, interceptors_default);
+var ml = mlMiniModule(void 0, interceptors_default);
+var notes = notesMiniModule(void 0, interceptors_default);
+var notifications = notificationsMiniModule(void 0, interceptors_default);
 var oauthClients = oauthClientsMiniModule(void 0, interceptors_default);
+var oauthTokens = oauthTokensMiniModule(void 0, interceptors_default);
 var qix = qix_default;
+var questions = questionsMiniModule(void 0, interceptors_default);
 var quotas = quotasMiniModule(void 0, interceptors_default);
 var reloadTasks = reloadTasksMiniModule(void 0, interceptors_default);
 var reloads = reloadsMiniModule(void 0, interceptors_default);
+var reportTemplates = reportTemplatesMiniModule(void 0, interceptors_default);
 var reports = reportsMiniModule(void 0, interceptors_default);
 var roles = rolesMiniModule(void 0, interceptors_default);
+var sharingTasks = sharingTasksMiniModule(void 0, interceptors_default);
 var spaces = spacesMiniModule(void 0, interceptors_default);
+var tasks = tasksMiniModule(void 0, interceptors_default);
 var tempContents = tempContentsMiniModule(void 0, interceptors_default);
 var tenants = tenantsMiniModule(void 0, interceptors_default);
 var themes = themesMiniModule(void 0, interceptors_default);
 var transports = transportsMiniModule(void 0, interceptors_default);
+var uiConfig = uiConfigMiniModule(void 0, interceptors_default);
 var users = usersMiniModule(void 0, interceptors_default);
 var webIntegrations = webIntegrationsMiniModule(void 0, interceptors_default);
 var webNotifications = webNotificationsMiniModule(void 0, interceptors_default);
@@ -751,35 +1225,61 @@ var createQlikApi = (props) => {
   return {
     apiKeys: apiKeysMiniModule(props?.hostConfig, scopedInterceptors),
     apps: appsMiniModule(props?.hostConfig, scopedInterceptors),
+    assistants: assistantsMiniModule(props?.hostConfig, scopedInterceptors),
     audits: auditsMiniModule(props?.hostConfig, scopedInterceptors),
     auth: auth_default,
+    automationConnections: automationConnectionsMiniModule(props?.hostConfig, scopedInterceptors),
     automations: automationsMiniModule(props?.hostConfig, scopedInterceptors),
+    automlDeployments: automlDeploymentsMiniModule(props?.hostConfig, scopedInterceptors),
+    automlPredictions: automlPredictionsMiniModule(props?.hostConfig, scopedInterceptors),
     brands: brandsMiniModule(props?.hostConfig, scopedInterceptors),
     collections: collectionsMiniModule(props?.hostConfig, scopedInterceptors),
+    conditions: conditionsMiniModule(props?.hostConfig, scopedInterceptors),
+    consumption: consumptionMiniModule(props?.hostConfig, scopedInterceptors),
     cspOrigins: cspOriginsMiniModule(props?.hostConfig, scopedInterceptors),
+    csrfToken: csrfTokenMiniModule(props?.hostConfig, scopedInterceptors),
+    dataAlerts: dataAlertsMiniModule(props?.hostConfig, scopedInterceptors),
     dataAssets: dataAssetsMiniModule(props?.hostConfig, scopedInterceptors),
     dataConnections: dataConnectionsMiniModule(props?.hostConfig, scopedInterceptors),
     dataCredentials: dataCredentialsMiniModule(props?.hostConfig, scopedInterceptors),
     dataFiles: dataFilesMiniModule(props?.hostConfig, scopedInterceptors),
+    dataQualities: dataQualitiesMiniModule(props?.hostConfig, scopedInterceptors),
+    dataSets: dataSetsMiniModule(props?.hostConfig, scopedInterceptors),
+    dataSources: dataSourcesMiniModule(props?.hostConfig, scopedInterceptors),
+    dataStores: dataStoresMiniModule(props?.hostConfig, scopedInterceptors),
+    dcaas: dcaasMiniModule(props?.hostConfig, scopedInterceptors),
+    diProjects: diProjectsMiniModule(props?.hostConfig, scopedInterceptors),
+    encryption: encryptionMiniModule(props?.hostConfig, scopedInterceptors),
     extensions: extensionsMiniModule(props?.hostConfig, scopedInterceptors),
     glossaries: glossariesMiniModule(props?.hostConfig, scopedInterceptors),
     groups: groupsMiniModule(props?.hostConfig, scopedInterceptors),
     identityProviders: identityProvidersMiniModule(props?.hostConfig, scopedInterceptors),
     interceptors: scopedInterceptors,
     items: itemsMiniModule(props?.hostConfig, scopedInterceptors),
+    knowledgebases: knowledgebasesMiniModule(props?.hostConfig, scopedInterceptors),
     licenses: licensesMiniModule(props?.hostConfig, scopedInterceptors),
+    lineageGraphs: lineageGraphsMiniModule(props?.hostConfig, scopedInterceptors),
+    ml: mlMiniModule(props?.hostConfig, scopedInterceptors),
+    notes: notesMiniModule(props?.hostConfig, scopedInterceptors),
+    notifications: notificationsMiniModule(props?.hostConfig, scopedInterceptors),
     oauthClients: oauthClientsMiniModule(props?.hostConfig, scopedInterceptors),
+    oauthTokens: oauthTokensMiniModule(props?.hostConfig, scopedInterceptors),
     qix: qix_default.withHostConfig(props?.hostConfig),
+    questions: questionsMiniModule(props?.hostConfig, scopedInterceptors),
     quotas: quotasMiniModule(props?.hostConfig, scopedInterceptors),
     reloadTasks: reloadTasksMiniModule(props?.hostConfig, scopedInterceptors),
     reloads: reloadsMiniModule(props?.hostConfig, scopedInterceptors),
+    reportTemplates: reportTemplatesMiniModule(props?.hostConfig, scopedInterceptors),
     reports: reportsMiniModule(props?.hostConfig, scopedInterceptors),
     roles: rolesMiniModule(props?.hostConfig, scopedInterceptors),
+    sharingTasks: sharingTasksMiniModule(props?.hostConfig, scopedInterceptors),
     spaces: spacesMiniModule(props?.hostConfig, scopedInterceptors),
+    tasks: tasksMiniModule(props?.hostConfig, scopedInterceptors),
     tempContents: tempContentsMiniModule(props?.hostConfig, scopedInterceptors),
     tenants: tenantsMiniModule(props?.hostConfig, scopedInterceptors),
     themes: themesMiniModule(props?.hostConfig, scopedInterceptors),
     transports: transportsMiniModule(props?.hostConfig, scopedInterceptors),
+    uiConfig: uiConfigMiniModule(props?.hostConfig, scopedInterceptors),
     users: usersMiniModule(props?.hostConfig, scopedInterceptors),
     webIntegrations: webIntegrationsMiniModule(props?.hostConfig, scopedInterceptors),
     webNotifications: webNotificationsMiniModule(props?.hostConfig, scopedInterceptors),
@@ -789,35 +1289,61 @@ var createQlikApi = (props) => {
 var api = {
   apiKeys,
   apps,
+  assistants,
   audits,
   auth,
+  automationConnections,
   automations,
+  automlDeployments,
+  automlPredictions,
   brands,
   collections,
+  conditions,
+  consumption,
   cspOrigins,
+  csrfToken,
+  dataAlerts,
   dataAssets,
   dataConnections,
   dataCredentials,
   dataFiles,
+  dataQualities,
+  dataSets,
+  dataSources,
+  dataStores,
+  dcaas,
+  diProjects,
+  encryption,
   extensions,
   glossaries,
   groups,
   identityProviders,
   interceptors,
   items,
+  knowledgebases,
   licenses,
+  lineageGraphs,
+  ml,
+  notes,
+  notifications,
   oauthClients,
+  oauthTokens,
   qix,
+  questions,
   quotas,
   reloadTasks,
   reloads,
+  reportTemplates,
   reports,
   roles,
+  sharingTasks,
   spaces,
+  tasks,
   tempContents,
   tenants,
   themes,
   transports,
+  uiConfig,
   users,
   webIntegrations,
   webNotifications,
@@ -828,37 +1354,63 @@ var public_default = api;
 export {
   apiKeys,
   apps,
+  assistants,
   audits,
   auth,
+  automationConnections,
   automations,
+  automlDeployments,
+  automlPredictions,
   brands,
   collections,
+  conditions,
+  consumption,
   createQlikApi,
   cspOrigins,
+  csrfToken,
+  dataAlerts,
   dataAssets,
   dataConnections,
   dataCredentials,
   dataFiles,
+  dataQualities,
+  dataSets,
+  dataSources,
+  dataStores,
+  dcaas,
   public_default as default,
+  diProjects,
+  encryption,
   extensions,
   glossaries,
   groups,
   identityProviders,
   interceptors,
   items,
+  knowledgebases,
   licenses,
+  lineageGraphs,
+  ml,
+  notes,
+  notifications,
   oauthClients,
+  oauthTokens,
   qix,
+  questions,
   quotas,
   reloadTasks,
   reloads,
+  reportTemplates,
   reports,
   roles,
+  sharingTasks,
   spaces,
+  tasks,
   tempContents,
   tenants,
   themes,
   transports,
+  uiConfig,
   users,
   webIntegrations,
   webNotifications,
