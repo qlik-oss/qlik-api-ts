@@ -1,5 +1,5 @@
 import { InterceptorsAPI, createInterceptors } from './interceptors.js';
-import { AuthAPI, registerAuthModule, setDefaultHostConfig, registerHostConfig, unregisterHostConfig, getAccessToken } from './auth.js';
+import { AuthAPI, registerAuthModule, setDefaultHostConfig, registerHostConfig, unregisterHostConfig, getAccessToken, getWebResourceAuthParams } from './auth.js';
 import { QixAPI } from './qix.js';
 import { ApiKeysAPI } from './api-keys.js';
 import { AppsAPI } from './apps.js';
@@ -26,6 +26,7 @@ import { DataSourcesAPI } from './data-sources.js';
 import { DataStoresAPI } from './data-stores.js';
 import { DcaasAPI } from './dcaas.js';
 import { DiProjectsAPI } from './di-projects.js';
+import { DirectAccessAgentsAPI } from './direct-access-agents.js';
 import { EncryptionAPI } from './encryption.js';
 import { ExtensionsAPI } from './extensions.js';
 import { GlossariesAPI } from './glossaries.js';
@@ -59,8 +60,8 @@ import { UsersAPI } from './users.js';
 import { WebIntegrationsAPI } from './web-integrations.js';
 import { WebNotificationsAPI } from './web-notifications.js';
 import { WebhooksAPI } from './webhooks.js';
-import { H as HostConfig } from './auth-types-DqfMuSRX.js';
-import './invoke-fetch-types-Cq7bjkqn.js';
+import { H as HostConfig } from './auth-types-Btwi7CsB.js';
+import './invoke-fetch-types-X7m1IIvI.js';
 
 declare const apiKeys: ApiKeysAPI;
 declare const apps: AppsAPI;
@@ -72,6 +73,7 @@ declare const auth: {
     registerHostConfig: typeof registerHostConfig;
     unregisterHostConfig: typeof unregisterHostConfig;
     getAccessToken: typeof getAccessToken;
+    getWebResourceAuthParams: typeof getWebResourceAuthParams;
 };
 declare const automationConnections: AutomationConnectionsAPI;
 declare const automations: AutomationsAPI;
@@ -94,6 +96,7 @@ declare const dataSources: DataSourcesAPI;
 declare const dataStores: DataStoresAPI;
 declare const dcaas: DcaasAPI;
 declare const diProjects: DiProjectsAPI;
+declare const directAccessAgents: DirectAccessAgentsAPI;
 declare const encryption: EncryptionAPI;
 declare const extensions: ExtensionsAPI;
 declare const glossaries: GlossariesAPI;
@@ -186,6 +189,8 @@ interface QlikAPI {
     dcaas: DcaasAPI;
     /** Functions for the diProjects api */
     diProjects: DiProjectsAPI;
+    /** Functions for the directAccessAgents api */
+    directAccessAgents: DirectAccessAgentsAPI;
     /** Functions for the encryption api */
     encryption: EncryptionAPI;
     /** Functions for the extensions api */
@@ -268,4 +273,4 @@ declare const api: QlikAPI & {
     }) => QlikAPI;
 };
 
-export { type CreateQlikApiProps, type QlikAPI, apiKeys, apps, assistants, audits, auth, automationConnections, automations, automlDeployments, automlPredictions, brands, collections, conditions, consumption, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataQualities, dataSets, dataSources, dataStores, dcaas, api as default, diProjects, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks };
+export { type CreateQlikApiProps, type QlikAPI, apiKeys, apps, assistants, audits, auth, automationConnections, automations, automlDeployments, automlPredictions, brands, collections, conditions, consumption, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataQualities, dataSets, dataSources, dataStores, dcaas, api as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks };

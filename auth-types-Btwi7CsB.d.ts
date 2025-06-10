@@ -104,4 +104,4 @@ type HostConfigCommon = {
     }) => unknown;
 };
 
-export type { AuthType as A, Credentials as C, GetRestCallAuthParamsProps as G, HostConfig as H, RestCallAuthParams as R, WebSocketAuthParams as W, AuthModule as a, GetWebSocketAuthParamsProps as b, GetWebResourceAuthParamsProps as c, WebResourceAuthParams as d, GetRemoteAuthDataProps as e, HandleAuthenticationErrorProps as f, AuthenticationErrorAction as g };
+export type { AuthType as A, Credentials as C, GetRestCallAuthParamsProps as G, HostConfig as H, RestCallAuthParams as R, WebResourceAuthParams as W, AuthModule as a, GetWebSocketAuthParamsProps as b, WebSocketAuthParams as c, GetWebResourceAuthParamsProps as d, GetRemoteAuthDataProps as e, HandleAuthenticationErrorProps as f, AuthenticationErrorAction as g };

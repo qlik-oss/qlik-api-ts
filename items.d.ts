@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-Cq7bjkqn.js';
-import './auth-types-DqfMuSRX.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
+import './auth-types-Btwi7CsB.js';
 
 type CollectionTypes = "private" | "public" | "publicgoverned";
 type ErrorResponseBody = {
@@ -110,6 +110,7 @@ type CollectionsLinksResponseBody = {
 type ItemLinksResponseBody = {
     collections?: Link;
     open?: Link;
+    qvPlugin?: Link;
     self?: Link;
     thumbnail?: Link;
 };

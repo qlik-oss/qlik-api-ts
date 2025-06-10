@@ -1,7 +1,6 @@
-import { H as HostConfig } from './auth-types-DqfMuSRX.js';
-import './invoke-fetch-types-Cq7bjkqn.js';
+import { H as HostConfig } from './auth-types-Btwi7CsB.js';
 
-declare const QIX_SCHEMA_VERSION = "12.2418.0";
+declare const QIX_SCHEMA_VERSION = "12.2459.0";
 type AlfaNumString = {
     /**
      * Calculated value.
@@ -441,6 +440,12 @@ type BookmarkList<QData> = {
      * Information about the list of bookmarks.
      */
     qItems?: NxContainerEntry<QData>[];
+    /**
+     * Hierarchy of groups and bookmarks, below the top level group pointed to by the qGroupId property.
+     *
+     * Stability: *experimental*
+     */
+    qHierarchy?: NxGroupMember[];
 };
 /**
  * Defines the list of bookmarks.
@@ -458,6 +463,12 @@ type BookmarkListDef = {
      * Include the bookmark patches. Patches can be very large and may make the list result unmanageable.
      */
     qIncludePatches?: boolean;
+    /**
+     * ID of separate generic object that holds an NxGroupDef, specifying a grouping and ordering of bookmarks.
+     *
+     * Stability: *experimental*
+     */
+    qGroupId?: string;
 };
 type BookmarkStateFieldPages = {
     /**
@@ -3971,6 +3982,48 @@ type NxGetObjectOptions = {
      * Set of data.
      */
     qData?: Record<string, string>;
+};
+/**
+ * Defines the properties of an object group.
+ *
+ * Stability: *experimental*
+ */
+type NxGroupDef = {
+    /**
+     * Specifies the class of the group's object members.
+     *
+     * One of:
+     * * bookmark or MEMBER_BOOKMARK
+     * * object or MEMBER_OBJECT
+     */
+    qClass?: NxGroupMemberClass;
+    /**
+     * Specifies the type of the group's object members.
+     */
+    qType?: string;
+    /**
+     * The group's label. Will be evaluated as an expression if it starts with '='.
+     */
+    qLabel?: string;
+    /**
+     * The objects and sub-groups that are members of the group.
+     */
+    qMemberIds?: NxGroupObjectId[];
+};
+type NxGroupMember = {
+    qObjectId?: string;
+};
+type NxGroupMemberClass = "bookmark" | "MEMBER_BOOKMARK" | "object" | "MEMBER_OBJECT";
+/**
+ * Holds the ID of a _NxGroupDef_'s member.
+ * _GroupId_ holds the ID of a sub-group while _ObjectId_ holds the ID of an object.
+ * Only one Id should be set. _GroupId_ takes precedence if both are set.
+ *
+ * Stability: *experimental*
+ */
+type NxGroupObjectId = {
+    qGroupId?: string;
+    qObjectId?: string;
 };
 type NxGroupTail = {
     /**
@@ -8686,6 +8739,21 @@ type NativeDocFunctions<FieldRpcObject, GenericBookmarkRpcObject, GenericDimensi
      */
     getObjects: <QData>(options: NxGetObjectOptions) => Promise<NxContainerEntry<QData>[]>;
     /**
+     * Get or create a generic object at app level with a specific Id and Type.
+     * Id and Type are specified in the GenericObjectProperties passed in.
+     * All other fields in this parameter serve as default properties.
+     * If the object does not exist with that Id, it is created and initialized from the default properties.
+     * If the object already exists, it is not changed. The properties passed in are not used.
+     * The call will fail if the Id is already used for another purpose, such as for an object of a different Type.
+     *
+     * Parameters:
+     *
+     * - `prop`   -   GenericObjectProperties with at least Info : { "qId": "&lt;identifier of the new generic object&gt;", "qType": "&lt;type of the new generic object&gt;" }
+     *
+     * Stability: *experimental*
+     */
+    getOrCreateObject: <CustomProperties = DefaultGenericObjectProperties, CustomGenericObject = GenericObjectRpcObject>(prop: CustomProperties) => Promise<CustomGenericObject>;
+    /**
      * Gets values in script.
      *
      * Stability: *locked*
@@ -9815,6 +9883,21 @@ type NativeGenericObjectFunctions<CustomProperties, CustomLayout, GenericObjectR
      */
     acceptListObjectSearch: (path: string, toggleMode: boolean, softLock?: boolean) => Promise<void>;
     /**
+     * You can use the AddGroupMembers method with any object that contains an object grouping definition.
+     * This method allows you to add one or more members to an existing group of objects directly.
+     *
+     * Parameters:
+     *
+     * - `path`            -   Path to the definition of the object to be selected.
+     * For exampleb _/qNxGroupDef_ .
+     * - `members`         -   Array of IDs for the objects and/or subgroups to add to the group.
+     * - `targetGroupId`   -   Name of the group the Members will be added to (if not the called object).
+     * - `posId`           -   Id of the member whose position to insert into.
+     *
+     * Stability: *experimental*
+     */
+    addGroupMembers: (path: string, members: NxGroupObjectId[], targetGroupId?: string, posId?: string) => Promise<void>;
+    /**
      * Applies a patch to the properties of an object. Allows an update to some of the properties.
      * It is possible to apply a patch to the properties of a generic object, that is not persistent. Such a patch is called a soft patch.
      * In that case, the result of the operation on the properties (add, remove or delete) is not shown when doing _GetProperties_ , and only a _GetLayout_ call shows the result of the operation.
@@ -9938,6 +10021,20 @@ type NativeGenericObjectFunctions<CustomProperties, CustomLayout, GenericObjectR
      * Stability: *locked*
      */
     createChild: <CustomChildProperties = GenericObjectProperties, CustomGenericObject = GenericObjectRpcObject>(prop: CustomChildProperties, propForThis?: CustomProperties) => Promise<CustomGenericObject>;
+    /**
+     * You can use the CreateGroup method with any object that contains an object grouping definition.
+     * This method allows you to create a new subgroup of objects directly and add it to a groups members.
+     *
+     * Parameters:
+     *
+     * - `path`            -   Path to the definition of the object to be selected.
+     * For example _/qNxGroupDef_ .
+     * - `groupDef`        -   Definition of the new group.
+     * - `targetGroupId`   -   Id of the group to create the new subgroup in (if not the called object).
+     *
+     * Stability: *experimental*
+     */
+    createGroup: (path: string, groupDef: NxGroupDef, targetGroupId?: string) => Promise<string>;
     /**
      * Removes all children and all children to the children on an object.
      *
@@ -10558,6 +10655,35 @@ type NativeGenericObjectFunctions<CustomProperties, CustomLayout, GenericObjectR
      */
     rangeSelectHyperCubeValues: (path: string, ranges: NxRangeSelectInfo[], columnsToSelect?: number[], orMode?: boolean, deselectOnlyOneSelected?: boolean) => Promise<boolean>;
     /**
+     * You can use the RemoveGroup method with any object that contains an object grouping definition.
+     * This method allows you to remove a group of objects directly.
+     * This action only removes the group, not any of its members.
+     *
+     * Parameters:
+     *
+     * - `path`      -   Path to the definition of the object to be selected.
+     * For example _/qNxGroupDef_ .
+     * - `groupId`   -   Name of the group to be removed.
+     * May not be an empty string.
+     *
+     * Stability: *experimental*
+     */
+    removeGroup: (path: string, groupId: string) => Promise<void>;
+    /**
+     * You can use the RemoveGroupMembers method with any object that contains an object grouping definition.
+     * This method allows you to remove one or more members from an existing group of objects directly.
+     *
+     * Parameters:
+     *
+     * - `path`            -   Path to the definition of the object to be selected.
+     * For example _/qNxGroupDef_ .
+     * - `members`         -   Array of IDs for the objects and/or subgroups to remove from the group.
+     * - `targetGroupId`   -   Name of the group the Members will be removed from (if not the called object).
+     *
+     * Stability: *experimental*
+     */
+    removeGroupMembers: (path: string, members: string[], targetGroupId?: string) => Promise<void>;
+    /**
      * Resets all selections made in selection mode.
      *
      * Stability: *locked*
@@ -10836,6 +10962,21 @@ type NativeGenericObjectFunctions<CustomProperties, CustomLayout, GenericObjectR
      * Stability: *locked*
      */
     setFullPropertyTree: (propEntry: GenericObjectEntry) => Promise<void>;
+    /**
+     * You can use the SetGroupLabel method with any object that contains an object grouping definition.
+     * This method allows you to change the label of an existing group of objects directly.
+     *
+     * Parameters:
+     *
+     * - `path`            -   Path to the definition of the object to be selected.
+     * For example _/qNxGroupDef_ .
+     * - `newLabel`        -   New label for the group.
+     * A label starting with an '=' will be evaluated as an expression.
+     * - `targetGroupId`   -   Id of the group whose label will be set (if not the called object).
+     *
+     * Stability: *experimental*
+     */
+    setGroupLabel: (path: string, newLabel: string, targetGroupId?: string) => Promise<void>;
     /**
      * Sets some properties for a generic object.
      * <div class=note>The properties depends on the generic object type, see [properties](genericobject-property.html).</div>
@@ -12242,4 +12383,4 @@ declare const qix: QixAPI & {
     withHostConfig: (hostConfig: HostConfig | undefined) => QixAPI;
 };
 
-export { type AlfaNumString, type AlternateStateData, type AnyGenericObjectLayout, type AnyGenericObjectProperties, type AppEntry, type AppObjectList, type AppObjectListDef, type AppScript, type AppScriptMeta, type AppSession, type ApplyGroupStateWarning, type ApplyGroupStateWarningType, type ApplyGroupStatesResult, type ArrayOfNxValuePoint, type AssociationScore, type BNFDef, type BNFDefMetaType, type BNFType, type Blob, type Bookmark, type BookmarkApplyAndVerifyResult, type BookmarkFieldItem, type BookmarkFieldPage, type BookmarkFieldPageEx, type BookmarkFieldVerifyResultState, type BookmarkFieldVerifyWarning, type BookmarkList, type BookmarkListData, type BookmarkListDef, type BookmarkListItem, type BookmarkStateFieldPages, type BookmarkVariableItem, type CalendarStrings, type CharEncodingType, type CharRange, type ChildList, type ChildListDef, type CloseProps, type CodePage, type CombinedWebSocketStateEvent, type CondDef, type Connection, type ContentLibraryList, type ContentLibraryListItem, type CurrentSelections, type CustomConnector, type CyclicGroupPosition, type DataField, type DataRecord, type DataTable, type DataTableEx, type Database, type DatabaseInfo, type DatabaseOwner, type DelimiterInfo, type DerivedFieldsInTableData, type DimensionList, type DimensionListData, type DimensionListDef, type DimensionListItem, type DimensionReference, type DoReloadExParams, type DoReloadExResult, type Doc, type DocAction, type DocListEntry, type DriveInfo, type DriveType, type DynamicAppViewListData, type DynamicAppViewListItem, type EditorBreakpoint, type EmbeddedSnapshot, type EmbeddedSnapshotDef, type ErrorData, type ErrorDataCode, type ExpandedFieldListItem, type ExpansionData, type ExtendedLayoutBookmarkData, type ExtendedPivotStateData, type ExtensionList, type ExtensionListDef, type FailureData, type Field, type FieldAttrType, type FieldAttributes, type FieldDefEx, type FieldDescription, type FieldInTableData, type FieldInTableProfilingData, type FieldList, type FieldListDef, type FieldListObject, type FieldOrColumn, type FieldScores, type FieldType, type FieldValue, type FileDataFormat, type FileType, type FilterInfo, type FilterType, type FolderItem, type FolderItemType, type FrequencyDistributionData, type FunctionGroup, type GenericBookmark, type GenericBookmarkEntry, type GenericBookmarkLayout, type GenericBookmarkProperties, type GenericConnectMachine, type GenericDimension, type GenericDimensionInfo, type GenericDimensionLayout, type GenericDimensionProperties, type GenericListObject, type GenericMeasure, type GenericMeasureLayout, type GenericMeasureProperties, type GenericObject, type GenericObjectEntry, type GenericObjectLayout, type GenericObjectLayoutAdditionalProperties, type GenericObjectLayoutNode, type GenericObjectLayoutNodeLevel2, type GenericObjectLayoutNodeLevel3, type GenericObjectLayoutNodeLevel4, type GenericObjectLayoutNodeLevel5, type GenericObjectLayoutNodeRec, type GenericObjectProperties, type GenericObjectPropertiesAdditionalProperties, type GenericObjectPropertiesNode, type GenericObjectPropertiesNodeLevel2, type GenericObjectPropertiesNodeLevel3, type GenericObjectPropertiesNodeLevel4, type GenericObjectPropertiesNodeLevel5, type GenericObjectPropertiesNodeRec, type GenericVariable, type GenericVariableConstraints, type GenericVariableLayout, type GenericVariableProperties, type GenericVariableType, type Global, type GraphMode, type GroupBookmarkData, type GroupState, type GroupStateInfo, type HyperCube, type HyperCubeDef, type InputFieldItem, type InterFieldSortData, type InteractDef, type InteractType, type KeyType, type LayoutBookmarkData, type LayoutExclude, type LayoutFieldInfo, type LineageInfo, type ListBoxProperties, type ListFunctions, type ListItem, type ListObject, type ListObjectDef, type LocaleInfo, type LogOnType, type MasterObjectListData, type MasterObjectListItem, type MeasureList, type MeasureListData, type MeasureListDef, type MeasureListItem, type MediaListDef, type MediaListItem, type MetaData, type ModalFunctions, type NativeDocFunctions, type NativeFieldFunctions, type NativeGenericBookmarkFunctions, type NativeGenericDimensionFunctions, type NativeGenericMeasureFunctions, type NativeGenericObjectFunctions, type NativeGenericVariableFunctions, type NativeGlobalFunctions, type NativeReactHooks, type NativeVariableFunctions, type NxAppLayout, type NxAppProperties, type NxAttrDimDef, type NxAttrDimInfo, type NxAttrExprDef, type NxAttrExprInfo, type NxAttributeDimValues, type NxAttributeExpressionValues, type NxAutoSortByStateDef, type NxAxisData, type NxAxisTicks, type NxBookmark, type NxCalcCond, type NxCardinalities, type NxCell, type NxCellPosition, type NxCellRows, type NxContainerEntry, type NxContinuousDataOptions, type NxContinuousMode, type NxContinuousRangeSelectInfo, type NxCurrentSelectionItem, type NxDataAreaPage, type NxDataPage, type NxDataReductionMode, type NxDerivedField, type NxDerivedFieldDescriptionList, type NxDerivedFieldsData, type NxDerivedGroup, type NxDimCellType, type NxDimension, type NxDimensionInfo, type NxDimensionType, type NxDownloadInfo, type NxDownloadOptions, type NxEngineVersion, type NxExportFileType, type NxExportState, type NxFeature, type NxFieldDescription, type NxFieldProperties, type NxFieldResourceId, type NxFieldSelectionInfo, type NxFieldSelectionMode, type NxFieldTableResourceId, type NxFrequencyMode, type NxGetBookmarkOptions, type NxGetObjectOptions, type NxGroupTail, type NxGrpType, type NxHighlightRanges, type NxHypercubeMode, type NxInfo, type NxInlineDimensionDef, type NxInlineMeasureDef, type NxLTrendlineType, type NxLayoutErrors, type NxLibraryDimension, type NxLibraryDimensionDef, type NxLibraryMeasure, type NxLibraryMeasureDef, type NxLinkedObjectInfo, type NxListObjectExpression, type NxListObjectExpressionDef, type NxLocalizedErrorCode, type NxLocalizedWarningCode, type NxMatchingFieldInfo, type NxMatchingFieldMode, type NxMeasure, type NxMeasureInfo, type NxMeta, type NxMetaDef, type NxMiniChart, type NxMiniChartCell, type NxMiniChartData, type NxMiniChartDef, type NxMiniChartRows, type NxMultiRangeSelectInfo, type NxPage, type NxPageTreeLevel, type NxPageTreeNode, type NxPatch, type NxPatchOperationType, type NxPatches, type NxPivotDimensionCell, type NxPivotPage, type NxPivotValuePoint, type NxRange, type NxRangeSelectInfo, type NxSelectionCell, type NxSelectionCellType, type NxSelectionInfo, type NxSimpleDimValue, type NxSimpleValue, type NxSortIndicatorType, type NxStackPage, type NxStackedPivotCell, type NxStateCounts, type NxStreamListEntry, type NxTempBookmarkOptions, type NxTickCell, type NxTreeDataOption, type NxTreeDimensionDef, type NxTreeDimensionInfo, type NxTreeMultiRangeSelectInfo, type NxTreeNode, type NxTreeRangeSelectInfo, type NxTreeValue, type NxTrendline, type NxTrendlineDef, type NxTrendlineMode, type NxValidationError, type NxVariableListItem, type NxVariableProperties, type NxViewPort, type ODAGAppLinkListData, type ODAGAppLinkListItem, type ObjectHelperFunctions, type ObjectInterface, type OdbcDsn, type OleDbProvider, type OpenAppSessionProps, type OtherLimitMode, type OtherMode, type OtherSortMode, type OtherTotalSpecProp, type Point, type PositionMark, type ProgressData, type ProgressMessage, type QFunction, QIX_SCHEMA_VERSION, type QMediaList, type QRange, type QixAPI, type RangeSelectInfo, type Rect, type ReloadError, type RpcObject, type SampleResult, type ScriptSyntaxError, type ScrollPosition, type SearchAssociationResult, type SearchAttribute, type SearchCharRange, type SearchCombinationOptions, type SearchContextType, type SearchFieldDictionary, type SearchFieldMatch, type SearchFieldMatchType, type SearchFieldMatchesItem, type SearchFieldSelectionMode, type SearchFieldValueItem, type SearchGroup, type SearchGroupItem, type SearchGroupItemMatch, type SearchGroupItemOptions, type SearchGroupItemType, type SearchGroupOptions, type SearchGroupType, type SearchMatchCombination, type SearchMatchCombinations, type SearchObjectOptions, type SearchPage, type SearchResult, type SearchSuggestItem, type SearchSuggestionResult, type SearchTermResult, type SearchValueOptions, type SearchValuePage, type SearchValueResult, type SelectInfo, type SelectionObject, type SelectionObjectDef, type SheetListData, type SheetListDataCell, type SheetListDataCellBounds, type SheetListItem, type Size, type SortCriteria, type SourceKeyRecord, type SpecialObjectFunctions, type StandardFunctions, type StateEnumType, type StateFieldValues, type StaticContentList, type StaticContentListItem, type StaticContentUrl, type StaticContentUrlDef, type StoryListData, type StoryListItem, type StringExpr, type StringExpression, type SymbolFrequency, type SymbolValue, type TableProfilingData, type TableRecord, type TableRow, type TableViewBroomPointSaveInfo, type TableViewConnectionPointSaveInfo, type TableViewCtlSaveInfo, type TableViewDlgSaveInfo, type TableViewSaveInfo, type TableViewTableWinSaveInfo, type TextMacro, type TotalMode, type TransformAppParameters, type TransformAppResult, type TreeData, type TreeDataDef, type UndoInfo, type UndoInfoDef, type UndoInfoObject, type UsageEnum, type UseAppHook, type ValueExpr, type ValueExpression, type VariableList, type VariableListData, type VariableListDef, type VariableListItem, type WebSocketEvent, type WorkloadType, qix as default, openAppSession, withHostConfig };
+export { type AlfaNumString, type AlternateStateData, type AnyGenericObjectLayout, type AnyGenericObjectProperties, type AppEntry, type AppObjectList, type AppObjectListDef, type AppScript, type AppScriptMeta, type AppSession, type ApplyGroupStateWarning, type ApplyGroupStateWarningType, type ApplyGroupStatesResult, type ArrayOfNxValuePoint, type AssociationScore, type BNFDef, type BNFDefMetaType, type BNFType, type Blob, type Bookmark, type BookmarkApplyAndVerifyResult, type BookmarkFieldItem, type BookmarkFieldPage, type BookmarkFieldPageEx, type BookmarkFieldVerifyResultState, type BookmarkFieldVerifyWarning, type BookmarkList, type BookmarkListData, type BookmarkListDef, type BookmarkListItem, type BookmarkStateFieldPages, type BookmarkVariableItem, type CalendarStrings, type CharEncodingType, type CharRange, type ChildList, type ChildListDef, type CloseProps, type CodePage, type CombinedWebSocketStateEvent, type CondDef, type Connection, type ContentLibraryList, type ContentLibraryListItem, type CurrentSelections, type CustomConnector, type CyclicGroupPosition, type DataField, type DataRecord, type DataTable, type DataTableEx, type Database, type DatabaseInfo, type DatabaseOwner, type DelimiterInfo, type DerivedFieldsInTableData, type DimensionList, type DimensionListData, type DimensionListDef, type DimensionListItem, type DimensionReference, type DoReloadExParams, type DoReloadExResult, type Doc, type DocAction, type DocListEntry, type DriveInfo, type DriveType, type DynamicAppViewListData, type DynamicAppViewListItem, type EditorBreakpoint, type EmbeddedSnapshot, type EmbeddedSnapshotDef, type ErrorData, type ErrorDataCode, type ExpandedFieldListItem, type ExpansionData, type ExtendedLayoutBookmarkData, type ExtendedPivotStateData, type ExtensionList, type ExtensionListDef, type FailureData, type Field, type FieldAttrType, type FieldAttributes, type FieldDefEx, type FieldDescription, type FieldInTableData, type FieldInTableProfilingData, type FieldList, type FieldListDef, type FieldListObject, type FieldOrColumn, type FieldScores, type FieldType, type FieldValue, type FileDataFormat, type FileType, type FilterInfo, type FilterType, type FolderItem, type FolderItemType, type FrequencyDistributionData, type FunctionGroup, type GenericBookmark, type GenericBookmarkEntry, type GenericBookmarkLayout, type GenericBookmarkProperties, type GenericConnectMachine, type GenericDimension, type GenericDimensionInfo, type GenericDimensionLayout, type GenericDimensionProperties, type GenericListObject, type GenericMeasure, type GenericMeasureLayout, type GenericMeasureProperties, type GenericObject, type GenericObjectEntry, type GenericObjectLayout, type GenericObjectLayoutAdditionalProperties, type GenericObjectLayoutNode, type GenericObjectLayoutNodeLevel2, type GenericObjectLayoutNodeLevel3, type GenericObjectLayoutNodeLevel4, type GenericObjectLayoutNodeLevel5, type GenericObjectLayoutNodeRec, type GenericObjectProperties, type GenericObjectPropertiesAdditionalProperties, type GenericObjectPropertiesNode, type GenericObjectPropertiesNodeLevel2, type GenericObjectPropertiesNodeLevel3, type GenericObjectPropertiesNodeLevel4, type GenericObjectPropertiesNodeLevel5, type GenericObjectPropertiesNodeRec, type GenericVariable, type GenericVariableConstraints, type GenericVariableLayout, type GenericVariableProperties, type GenericVariableType, type Global, type GraphMode, type GroupBookmarkData, type GroupState, type GroupStateInfo, type HyperCube, type HyperCubeDef, type InputFieldItem, type InterFieldSortData, type InteractDef, type InteractType, type KeyType, type LayoutBookmarkData, type LayoutExclude, type LayoutFieldInfo, type LineageInfo, type ListBoxProperties, type ListFunctions, type ListItem, type ListObject, type ListObjectDef, type LocaleInfo, type LogOnType, type MasterObjectListData, type MasterObjectListItem, type MeasureList, type MeasureListData, type MeasureListDef, type MeasureListItem, type MediaListDef, type MediaListItem, type MetaData, type ModalFunctions, type NativeDocFunctions, type NativeFieldFunctions, type NativeGenericBookmarkFunctions, type NativeGenericDimensionFunctions, type NativeGenericMeasureFunctions, type NativeGenericObjectFunctions, type NativeGenericVariableFunctions, type NativeGlobalFunctions, type NativeReactHooks, type NativeVariableFunctions, type NxAppLayout, type NxAppProperties, type NxAttrDimDef, type NxAttrDimInfo, type NxAttrExprDef, type NxAttrExprInfo, type NxAttributeDimValues, type NxAttributeExpressionValues, type NxAutoSortByStateDef, type NxAxisData, type NxAxisTicks, type NxBookmark, type NxCalcCond, type NxCardinalities, type NxCell, type NxCellPosition, type NxCellRows, type NxContainerEntry, type NxContinuousDataOptions, type NxContinuousMode, type NxContinuousRangeSelectInfo, type NxCurrentSelectionItem, type NxDataAreaPage, type NxDataPage, type NxDataReductionMode, type NxDerivedField, type NxDerivedFieldDescriptionList, type NxDerivedFieldsData, type NxDerivedGroup, type NxDimCellType, type NxDimension, type NxDimensionInfo, type NxDimensionType, type NxDownloadInfo, type NxDownloadOptions, type NxEngineVersion, type NxExportFileType, type NxExportState, type NxFeature, type NxFieldDescription, type NxFieldProperties, type NxFieldResourceId, type NxFieldSelectionInfo, type NxFieldSelectionMode, type NxFieldTableResourceId, type NxFrequencyMode, type NxGetBookmarkOptions, type NxGetObjectOptions, type NxGroupDef, type NxGroupMember, type NxGroupMemberClass, type NxGroupObjectId, type NxGroupTail, type NxGrpType, type NxHighlightRanges, type NxHypercubeMode, type NxInfo, type NxInlineDimensionDef, type NxInlineMeasureDef, type NxLTrendlineType, type NxLayoutErrors, type NxLibraryDimension, type NxLibraryDimensionDef, type NxLibraryMeasure, type NxLibraryMeasureDef, type NxLinkedObjectInfo, type NxListObjectExpression, type NxListObjectExpressionDef, type NxLocalizedErrorCode, type NxLocalizedWarningCode, type NxMatchingFieldInfo, type NxMatchingFieldMode, type NxMeasure, type NxMeasureInfo, type NxMeta, type NxMetaDef, type NxMiniChart, type NxMiniChartCell, type NxMiniChartData, type NxMiniChartDef, type NxMiniChartRows, type NxMultiRangeSelectInfo, type NxPage, type NxPageTreeLevel, type NxPageTreeNode, type NxPatch, type NxPatchOperationType, type NxPatches, type NxPivotDimensionCell, type NxPivotPage, type NxPivotValuePoint, type NxRange, type NxRangeSelectInfo, type NxSelectionCell, type NxSelectionCellType, type NxSelectionInfo, type NxSimpleDimValue, type NxSimpleValue, type NxSortIndicatorType, type NxStackPage, type NxStackedPivotCell, type NxStateCounts, type NxStreamListEntry, type NxTempBookmarkOptions, type NxTickCell, type NxTreeDataOption, type NxTreeDimensionDef, type NxTreeDimensionInfo, type NxTreeMultiRangeSelectInfo, type NxTreeNode, type NxTreeRangeSelectInfo, type NxTreeValue, type NxTrendline, type NxTrendlineDef, type NxTrendlineMode, type NxValidationError, type NxVariableListItem, type NxVariableProperties, type NxViewPort, type ODAGAppLinkListData, type ODAGAppLinkListItem, type ObjectHelperFunctions, type ObjectInterface, type OdbcDsn, type OleDbProvider, type OpenAppSessionProps, type OtherLimitMode, type OtherMode, type OtherSortMode, type OtherTotalSpecProp, type Point, type PositionMark, type ProgressData, type ProgressMessage, type QFunction, QIX_SCHEMA_VERSION, type QMediaList, type QRange, type QixAPI, type RangeSelectInfo, type Rect, type ReloadError, type RpcObject, type SampleResult, type ScriptSyntaxError, type ScrollPosition, type SearchAssociationResult, type SearchAttribute, type SearchCharRange, type SearchCombinationOptions, type SearchContextType, type SearchFieldDictionary, type SearchFieldMatch, type SearchFieldMatchType, type SearchFieldMatchesItem, type SearchFieldSelectionMode, type SearchFieldValueItem, type SearchGroup, type SearchGroupItem, type SearchGroupItemMatch, type SearchGroupItemOptions, type SearchGroupItemType, type SearchGroupOptions, type SearchGroupType, type SearchMatchCombination, type SearchMatchCombinations, type SearchObjectOptions, type SearchPage, type SearchResult, type SearchSuggestItem, type SearchSuggestionResult, type SearchTermResult, type SearchValueOptions, type SearchValuePage, type SearchValueResult, type SelectInfo, type SelectionObject, type SelectionObjectDef, type SheetListData, type SheetListDataCell, type SheetListDataCellBounds, type SheetListItem, type Size, type SortCriteria, type SourceKeyRecord, type SpecialObjectFunctions, type StandardFunctions, type StateEnumType, type StateFieldValues, type StaticContentList, type StaticContentListItem, type StaticContentUrl, type StaticContentUrlDef, type StoryListData, type StoryListItem, type StringExpr, type StringExpression, type SymbolFrequency, type SymbolValue, type TableProfilingData, type TableRecord, type TableRow, type TableViewBroomPointSaveInfo, type TableViewConnectionPointSaveInfo, type TableViewCtlSaveInfo, type TableViewDlgSaveInfo, type TableViewSaveInfo, type TableViewTableWinSaveInfo, type TextMacro, type TotalMode, type TransformAppParameters, type TransformAppResult, type TreeData, type TreeDataDef, type UndoInfo, type UndoInfoDef, type UndoInfoObject, type UsageEnum, type UseAppHook, type ValueExpr, type ValueExpression, type VariableList, type VariableListData, type VariableListDef, type VariableListItem, type WebSocketEvent, type WorkloadType, qix as default, openAppSession, withHostConfig };

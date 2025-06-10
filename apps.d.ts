@@ -1,5 +1,5 @@
-import { A as ApiCallOptions, D as DownloadableBlob } from './invoke-fetch-types-Cq7bjkqn.js';
-import './auth-types-DqfMuSRX.js';
+import { A as ApiCallOptions, D as DownloadableBlob } from './invoke-fetch-types-X7m1IIvI.js';
+import './auth-types-Btwi7CsB.js';
 
 type Analysis = "breakdown" | "changePoint" | "comparison" | "contribution" | "correlation" | "fact" | "mutualInfo" | "rank" | "spike" | "trend" | "values";
 type AnalysisComposition = {

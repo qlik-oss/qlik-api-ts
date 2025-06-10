@@ -1,5 +1,5 @@
-import { A as AuthType, a as AuthModule, H as HostConfig } from './auth-types-DqfMuSRX.js';
-export { g as AuthenticationErrorAction, C as Credentials, e as GetRemoteAuthDataProps, G as GetRestCallAuthParamsProps, c as GetWebResourceAuthParamsProps, b as GetWebSocketAuthParamsProps, f as HandleAuthenticationErrorProps, R as RestCallAuthParams, d as WebResourceAuthParams, W as WebSocketAuthParams } from './auth-types-DqfMuSRX.js';
+import { A as AuthType, a as AuthModule, H as HostConfig, W as WebResourceAuthParams } from './auth-types-Btwi7CsB.js';
+export { g as AuthenticationErrorAction, C as Credentials, e as GetRemoteAuthDataProps, G as GetRestCallAuthParamsProps, d as GetWebResourceAuthParamsProps, b as GetWebSocketAuthParamsProps, f as HandleAuthenticationErrorProps, R as RestCallAuthParams, c as WebSocketAuthParams } from './auth-types-Btwi7CsB.js';
 
 /**
  * Registers an auth module that can handle authentication. An auth module is used by specifying its name as authType in the HostConfig passed in to api calls.
@@ -36,7 +36,14 @@ declare function getAccessToken({ hostConfig }: {
     hostConfig?: HostConfig;
 }): Promise<string>;
 /**
- * The AuthApi interface provides the public interface for the auth module.
+ * Returns a record of query parameters that needs to be added to resources requests, e.g.
+ * image tags, etc.
+ */
+declare function getWebResourceAuthParams({ hostConfig, }: {
+    hostConfig?: HostConfig;
+}): Promise<WebResourceAuthParams>;
+/**
+ * The AuthAPI interface provides the public interface for the auth module.
  */
 interface AuthAPI {
     /**
@@ -65,6 +72,11 @@ interface AuthAPI {
      * Returns an access token using the supplied host config. Typically used on the backend to supply the access token to the frontend
      */
     getAccessToken: typeof getAccessToken;
+    /**
+     * Returns a record of query parameters that needs to be added to resources requests, e.g.
+     * image tags, etc.
+     */
+    getWebResourceAuthParams: typeof getWebResourceAuthParams;
 }
 declare const _default: {
     registerAuthModule: typeof registerAuthModule;
@@ -72,6 +84,7 @@ declare const _default: {
     registerHostConfig: typeof registerHostConfig;
     unregisterHostConfig: typeof unregisterHostConfig;
     getAccessToken: typeof getAccessToken;
+    getWebResourceAuthParams: typeof getWebResourceAuthParams;
 };
 
-export { type AuthAPI, AuthModule, AuthType, HostConfig, _default as default, getAccessToken, logout, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig };
+export { type AuthAPI, AuthModule, AuthType, HostConfig, WebResourceAuthParams, _default as default, getAccessToken, getWebResourceAuthParams, logout, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig };

@@ -7,7 +7,7 @@ import {
   invokeFetch,
   isWindows,
   toValidWebsocketLocationUrl
-} from "./FKDGGR2O.js";
+} from "./W6FDNN2K.js";
 import "./3RGGGGAR.js";
 import {
   isBrowser
@@ -225,76 +225,6 @@ function triggerGlobalWebSocketEventListeners(event) {
   stateListener(toGlobalAppSessionId(event), event);
 }
 
-// src/qix/session/shared-sessions-phoenix.ts
-function createSharedPhoenixSession(props, { onClose, onWebSocketEvent: onWebSocketEventGlobal, getInitialAppActions }) {
-  try {
-    const clients = [];
-    const onWebSocketEvent2 = (event) => {
-      onWebSocketEventGlobal(event);
-      for (const client of clients) {
-        client.onWebSocketEvent(event);
-      }
-    };
-    const phoenixConnectionPromise = import("./M64RLKVG.js").then((module) => {
-      return module.createPhoenixConnectionEntrypoint(props, {
-        onWebSocketEvent: onWebSocketEvent2,
-        getInitialAppActions
-      });
-    });
-    const docPromise = phoenixConnectionPromise.then((phoenixConnection) => phoenixConnection.doc);
-    const sharedSession = {
-      getDoc: () => docPromise,
-      addClient(client) {
-        const index = clients.indexOf(client, 0);
-        if (index === -1) {
-          clients.push(client);
-        }
-      },
-      removeClient(client, closeDelay) {
-        if (clients.length === 1) {
-          void phoenixConnectionPromise.then((phoenixConnection) => {
-            phoenixConnection.stopActivityMonitoring();
-          });
-        }
-        const actuallyRemove = () => {
-          const index = clients.indexOf(client, 0);
-          if (index > -1) {
-            clients.splice(index, 1);
-          }
-          if (clients.length === 0) {
-            onClose();
-            void phoenixConnectionPromise.then((phoenixConnection) => {
-              phoenixConnection.close();
-            });
-          }
-        };
-        if (closeDelay > 0) {
-          return new Promise((resolve) => {
-            setTimeout(() => {
-              actuallyRemove();
-              resolve();
-            }, closeDelay);
-          });
-        } else {
-          actuallyRemove();
-          return Promise.resolve();
-        }
-      },
-      resume: async () => {
-        void phoenixConnectionPromise.then((session) => session.resume());
-      },
-      initialActionsUpdated() {
-        void phoenixConnectionPromise.then((session) => session.initialAppActionsUpdated());
-      },
-      clientsCount: () => clients.length
-    };
-    return sharedSession;
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
-}
-
 // src/qix/session/shared-sessions.ts
 function listenForWindowsAuthenticationInformation(session) {
   let resolveAuthSuggestedInWebsocket;
@@ -317,7 +247,7 @@ function listenForWindowsAuthenticationInformation(session) {
   return authSuggestedInWebsocket;
 }
 async function createAndSetupEnigmaSession(props, canRetry, onWebSocketEvent2) {
-  const { createEnigmaSessionEntrypoint } = await import("./M64RLKVG.js");
+  const { createEnigmaSessionEntrypoint } = await import("./K77NA74R.js");
   const session = await createEnigmaSessionEntrypoint(props);
   setupSessionListeners(session, props, onWebSocketEvent2);
   let global;
@@ -599,6 +529,76 @@ async function sessionResumeWithRetry(session, hostConfig) {
     return Promise.reject(error);
   }
   return Promise.resolve();
+}
+
+// src/qix/session/shared-sessions-phoenix.ts
+function createSharedPhoenixSession(props, { onClose, onWebSocketEvent: onWebSocketEventGlobal, getInitialAppActions }) {
+  try {
+    const clients = [];
+    const onWebSocketEvent2 = (event) => {
+      onWebSocketEventGlobal(event);
+      for (const client of clients) {
+        client.onWebSocketEvent(event);
+      }
+    };
+    const phoenixConnectionPromise = import("./K77NA74R.js").then((module) => {
+      return module.createPhoenixConnectionEntrypoint(props, {
+        onWebSocketEvent: onWebSocketEvent2,
+        getInitialAppActions
+      });
+    });
+    const docPromise = phoenixConnectionPromise.then((phoenixConnection) => phoenixConnection.doc);
+    const sharedSession = {
+      getDoc: () => docPromise,
+      addClient(client) {
+        const index = clients.indexOf(client, 0);
+        if (index === -1) {
+          clients.push(client);
+        }
+      },
+      removeClient(client, closeDelay) {
+        if (clients.length === 1) {
+          void phoenixConnectionPromise.then((phoenixConnection) => {
+            phoenixConnection.stopActivityMonitoring();
+          });
+        }
+        const actuallyRemove = () => {
+          const index = clients.indexOf(client, 0);
+          if (index > -1) {
+            clients.splice(index, 1);
+          }
+          if (clients.length === 0) {
+            onClose();
+            void phoenixConnectionPromise.then((phoenixConnection) => {
+              phoenixConnection.close();
+            });
+          }
+        };
+        if (closeDelay > 0) {
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              actuallyRemove();
+              resolve();
+            }, closeDelay);
+          });
+        } else {
+          actuallyRemove();
+          return Promise.resolve();
+        }
+      },
+      resume: async () => {
+        void phoenixConnectionPromise.then((session) => session.resume());
+      },
+      initialActionsUpdated() {
+        void phoenixConnectionPromise.then((session) => session.initialAppActionsUpdated());
+      },
+      clientsCount: () => clients.length
+    };
+    return sharedSession;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
 }
 
 // src/qix/shared-sessions-manager.ts

@@ -1,5 +1,12 @@
-import { I as InvokeFetchResponse, a as InvokeFetchProperties } from './invoke-fetch-types-Cq7bjkqn.js';
-import './auth-types-DqfMuSRX.js';
+import { I as InvokeFetchResponse, a as InvokeFetchProperties } from './invoke-fetch-types-X7m1IIvI.js';
+import './auth-types-Btwi7CsB.js';
+
+/**
+ * This module provides a way to intercept requests and responses in the qmfe-api.
+ * It allows you to modify the request before it is sent and the response before it is returned.
+ * This is useful for adding headers, modifying the request body, or handling errors.
+ * @module interceptors
+ */
 
 /**
  * The RestInterceptor type is a function that can be used to intercept requests and responses

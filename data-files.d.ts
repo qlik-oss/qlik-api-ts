@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-Cq7bjkqn.js';
-import './auth-types-DqfMuSRX.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
+import './auth-types-Btwi7CsB.js';
 
 type BatchChangeSpaceItem = {
     /** The ID of the data file whose space will be changed. */

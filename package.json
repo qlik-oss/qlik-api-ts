@@ -14,10 +14,10 @@
     "enigma.js": "^2.14.0",
     "extend": "3.0.2",
     "lodash": "^4.17.21",
-    "nanoid": "^5.0.9",
-    "ws": "^8.18.1"
+    "nanoid": "^5.1.5",
+    "ws": "^8.18.2"
   },
-  "packageManager": "pnpm@10.10.0",
+  "packageManager": "pnpm@10.12.1",
   "engines": {
     "node": ">=20"
   },
@@ -48,6 +48,7 @@
     "./data-stores": "./data-stores.js",
     "./dcaas": "./dcaas.js",
     "./di-projects": "./di-projects.js",
+    "./direct-access-agents": "./direct-access-agents.js",
     "./encryption": "./encryption.js",
     "./extensions": "./extensions.js",
     "./glossaries": "./glossaries.js",
@@ -81,7 +82,8 @@
     "./web-integrations": "./web-integrations.js",
     "./web-notifications": "./web-notifications.js",
     "./webhooks": "./webhooks.js",
-    "./qix": "./qix.js",
-    "./auth": "./auth.js"
+    "./auth": "./auth.js",
+    "./interceptors": "./interceptors.js",
+    "./qix": "./qix.js"
   }
 }

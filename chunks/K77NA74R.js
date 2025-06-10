@@ -9,7 +9,7 @@ import {
   handleAuthenticationError,
   isWindows,
   toValidWebsocketLocationUrl
-} from "./FKDGGR2O.js";
+} from "./W6FDNN2K.js";
 import "./3RGGGGAR.js";
 import {
   isNode
@@ -10961,6 +10961,10 @@ function unwrapDeltas(result, state, handle, method) {
   return JSON.parse(JSON.stringify(newResult));
 }
 
+// src/qix/session/phoenix/websocket-closed-error.ts
+var WebsocketClosedError = class extends Error {
+};
+
 // src/qix/session/phoenix/protocol-helpers.ts
 function getDeltaAndReturnEmptyProps(request) {
   if (request.method === "GetProperties" || request.method === "GetFullPropertyTree") {
@@ -11106,8 +11110,6 @@ async function createWebsocketSingleAttempt({ appId, identity, hostConfig, useRe
 // src/qix/session/phoenix/json-rpc-channel.ts
 var RPC_CLOSE_NORMAL = 1e3;
 var RPC_CLOSE_MANUAL_SUSPEND = 4e3;
-var WebsocketClosedError = class extends Error {
-};
 async function createJsonRpcChannel(props, listener) {
   const { hostConfig } = props;
   const [connectionInfoPromise, resolveConnectionInfo] = createResolvablePromise();
