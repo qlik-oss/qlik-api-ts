@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type BatchChangeSpaceItem = {
     /** The ID of the data file whose space will be changed. */
@@ -278,7 +278,7 @@ type SpaceStatsResponse = {
  * @param query an object with query parameters
  * @throws GetDataFilesHttpError
  */
-declare const getDataFiles: (query: {
+declare function getDataFiles(query: {
     /** If set to false, do not return data files with internal extensions else return all the data files. */
     allowInternalFiles?: boolean;
     /** Only return files scoped to the specified app.  If this parameter is not specified, only files that are not
@@ -330,7 +330,7 @@ declare const getDataFiles: (query: {
     /** The name of the field used to sort the result.  By default, the sort order is ascending.  Putting a '+' prefix on
      * the sort field name explicitly indicates ascending sort order.  A '-' prefix indicates a descending sort order. */
     sort?: GetDataFileInfosSortField;
-}, options?: ApiCallOptions) => Promise<GetDataFilesHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDataFilesHttpResponse>;
 type GetDataFilesHttpResponse = {
     data: GetDataFileInfosResponse;
     headers: Headers;
@@ -349,7 +349,7 @@ type GetDataFilesHttpError = {
  * @param body an object with the body content
  * @throws UploadDataFileHttpError
  */
-declare const uploadDataFile: (body: {
+declare function uploadDataFile(body: {
     /** IFormFile form multipart/form-data */
     File?: BodyInit;
     /** See PostDataFileRequest schema which defines request structure.
@@ -387,7 +387,7 @@ declare const uploadDataFile: (body: {
          * the one returned from the temp content upload request.  This option does not apply when POSTing a folder. */
         tempContentFileId?: string;
     };
-}, options?: ApiCallOptions) => Promise<UploadDataFileHttpResponse>;
+}, options?: ApiCallOptions): Promise<UploadDataFileHttpResponse>;
 type UploadDataFileHttpResponse = {
     data: DataFileUploadResponse;
     headers: Headers;
@@ -407,7 +407,7 @@ type UploadDataFileHttpError = {
  * @param body an object with the body content
  * @throws MoveDataFilesHttpError
  */
-declare const moveDataFiles: (body: DataFileBatchChangeSpaceRequest, options?: ApiCallOptions) => Promise<MoveDataFilesHttpResponse>;
+declare function moveDataFiles(body: DataFileBatchChangeSpaceRequest, options?: ApiCallOptions): Promise<MoveDataFilesHttpResponse>;
 type MoveDataFilesHttpResponse = {
     data: MultiStatusResponse;
     headers: Headers;
@@ -424,7 +424,7 @@ type MoveDataFilesHttpError = {
  * @param body an object with the body content
  * @throws DeleteDataFilesHttpError
  */
-declare const deleteDataFiles: (body: DataFileBatchDeleteRequest, options?: ApiCallOptions) => Promise<DeleteDataFilesHttpResponse>;
+declare function deleteDataFiles(body: DataFileBatchDeleteRequest, options?: ApiCallOptions): Promise<DeleteDataFilesHttpResponse>;
 type DeleteDataFilesHttpResponse = {
     data: MultiStatusResponse;
     headers: Headers;
@@ -454,7 +454,7 @@ type DeleteDataFilesHttpError = {
  * @param query an object with query parameters
  * @throws GetDataFilesConnectionsHttpError
  */
-declare const getDataFilesConnections: (query: {
+declare function getDataFilesConnections(query: {
     /** If present, get connections with connection strings that are scoped to the given app ID. */
     appId?: string;
     /** If set to true, include computed space-level statistics for the spaces represented by the connections in the
@@ -473,7 +473,7 @@ declare const getDataFilesConnections: (query: {
     sort?: GetConnectionsSortField;
     /** If present, only return the connection that accesses data files in the specified space. */
     spaceId?: string;
-}, options?: ApiCallOptions) => Promise<GetDataFilesConnectionsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDataFilesConnectionsHttpResponse>;
 type GetDataFilesConnectionsHttpResponse = {
     data: GetConnectionsResponse;
     headers: Headers;
@@ -496,7 +496,7 @@ type GetDataFilesConnectionsHttpError = {
  * @param id The ID of the connection.
  * @throws GetDataFileConnectionHttpError
  */
-declare const getDataFileConnection: (id: string, options?: ApiCallOptions) => Promise<GetDataFileConnectionHttpResponse>;
+declare function getDataFileConnection(id: string, options?: ApiCallOptions): Promise<GetDataFileConnectionHttpResponse>;
 type GetDataFileConnectionHttpResponse = {
     data: ConnectionsResponse;
     headers: Headers;
@@ -512,7 +512,7 @@ type GetDataFileConnectionHttpError = {
  *
  * @throws GetDataFilesQuotasHttpError
  */
-declare const getDataFilesQuotas: (options?: ApiCallOptions) => Promise<GetDataFilesQuotasHttpResponse>;
+declare function getDataFilesQuotas(options?: ApiCallOptions): Promise<GetDataFilesQuotasHttpResponse>;
 type GetDataFilesQuotasHttpResponse = {
     data: QuotaResponse;
     headers: Headers;
@@ -534,7 +534,7 @@ type GetDataFilesQuotasHttpError = {
  * @param id The ID of the data file or folder to delete.
  * @throws DeleteDataFileHttpError
  */
-declare const deleteDataFile: (id: string, options?: ApiCallOptions) => Promise<DeleteDataFileHttpResponse>;
+declare function deleteDataFile(id: string, options?: ApiCallOptions): Promise<DeleteDataFileHttpResponse>;
 type DeleteDataFileHttpResponse = {
     data: void;
     headers: Headers;
@@ -555,7 +555,7 @@ type DeleteDataFileHttpError = {
  * @param id The ID of the data file.
  * @throws GetDataFileHttpError
  */
-declare const getDataFile: (id: string, options?: ApiCallOptions) => Promise<GetDataFileHttpResponse>;
+declare function getDataFile(id: string, options?: ApiCallOptions): Promise<GetDataFileHttpResponse>;
 type GetDataFileHttpResponse = {
     data: DataFileUploadResponse;
     headers: Headers;
@@ -573,7 +573,7 @@ type GetDataFileHttpError = {
  * @param body an object with the body content
  * @throws ReuploadDataFileHttpError
  */
-declare const reuploadDataFile: (id: string, body: {
+declare function reuploadDataFile(id: string, body: {
     /** IFormFile form multipart/form-data */
     File?: BodyInit;
     /** See PutDataFileRequest schema which defines request structure.
@@ -623,7 +623,7 @@ declare const reuploadDataFile: (id: string, body: {
          * the one returned from the temp content upload request. */
         tempContentFileId?: string;
     };
-}, options?: ApiCallOptions) => Promise<ReuploadDataFileHttpResponse>;
+}, options?: ApiCallOptions): Promise<ReuploadDataFileHttpResponse>;
 type ReuploadDataFileHttpResponse = {
     data: DataFileUploadResponse;
     headers: Headers;
@@ -647,7 +647,7 @@ type ReuploadDataFileHttpError = {
  * @param body an object with the body content
  * @throws ChangeDataFileOwnerHttpError
  */
-declare const changeDataFileOwner: (id: string, body: ChangeDataFileOwnerRequest, options?: ApiCallOptions) => Promise<ChangeDataFileOwnerHttpResponse>;
+declare function changeDataFileOwner(id: string, body: ChangeDataFileOwnerRequest, options?: ApiCallOptions): Promise<ChangeDataFileOwnerHttpResponse>;
 type ChangeDataFileOwnerHttpResponse = {
     data: void;
     headers: Headers;
@@ -672,7 +672,7 @@ type ChangeDataFileOwnerHttpError = {
  * @param body an object with the body content
  * @throws MoveDataFileHttpError
  */
-declare const moveDataFile: (id: string, body: ChangeDataFileSpaceRequest, options?: ApiCallOptions) => Promise<MoveDataFileHttpResponse>;
+declare function moveDataFile(id: string, body: ChangeDataFileSpaceRequest, options?: ApiCallOptions): Promise<MoveDataFileHttpResponse>;
 type MoveDataFileHttpResponse = {
     data: void;
     headers: Headers;

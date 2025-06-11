@@ -1,91 +1,115 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/brands.ts
-var getBrands = async (query, options) => invokeFetch("brands", {
-  method: "get",
-  pathTemplate: "/api/v1/brands",
-  query,
-  options
-});
-var createBrand = async (body, options) => invokeFetch("brands", {
-  method: "post",
-  pathTemplate: "/api/v1/brands",
-  body,
-  contentType: "multipart/form-data",
-  options
-});
-var getActiveBrand = async (options) => invokeFetch("brands", {
-  method: "get",
-  pathTemplate: "/api/v1/brands/active",
-  options
-});
-var deleteBrand = async (brandId, options) => invokeFetch("brands", {
-  method: "delete",
-  pathTemplate: "/api/v1/brands/{brand-id}",
-  pathVariables: { "brand-id": brandId },
-  options
-});
-var getBrand = async (brandId, options) => invokeFetch("brands", {
-  method: "get",
-  pathTemplate: "/api/v1/brands/{brand-id}",
-  pathVariables: { "brand-id": brandId },
-  options
-});
-var patchBrand = async (brandId, body, options) => invokeFetch("brands", {
-  method: "patch",
-  pathTemplate: "/api/v1/brands/{brand-id}",
-  pathVariables: { "brand-id": brandId },
-  body,
-  contentType: "application/json",
-  options
-});
-var activateBrand = async (brandId, body, options) => invokeFetch("brands", {
-  method: "post",
-  pathTemplate: "/api/v1/brands/{brand-id}/actions/activate",
-  pathVariables: { "brand-id": brandId },
-  body,
-  options
-});
-var deactivateBrand = async (brandId, body, options) => invokeFetch("brands", {
-  method: "post",
-  pathTemplate: "/api/v1/brands/{brand-id}/actions/deactivate",
-  pathVariables: { "brand-id": brandId },
-  body,
-  options
-});
-var deleteBrandFile = async (brandId, brandFileId, options) => invokeFetch("brands", {
-  method: "delete",
-  pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
-  pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
-  options
-});
-var getBrandFile = async (brandId, brandFileId, options) => invokeFetch("brands", {
-  method: "get",
-  pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
-  pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
-  options
-});
-var createBrandFile = async (brandId, brandFileId, body, options) => invokeFetch("brands", {
-  method: "post",
-  pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
-  pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
-  body,
-  contentType: "multipart/form-data",
-  options
-});
-var updateBrandFile = async (brandId, brandFileId, body, options) => invokeFetch("brands", {
-  method: "put",
-  pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
-  pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
-  body,
-  contentType: "multipart/form-data",
-  options
-});
+async function getBrands(query, options) {
+  return invokeFetch("brands", {
+    method: "get",
+    pathTemplate: "/api/v1/brands",
+    query,
+    options
+  });
+}
+async function createBrand(body, options) {
+  return invokeFetch("brands", {
+    method: "post",
+    pathTemplate: "/api/v1/brands",
+    body,
+    contentType: "multipart/form-data",
+    options
+  });
+}
+async function getActiveBrand(options) {
+  return invokeFetch("brands", {
+    method: "get",
+    pathTemplate: "/api/v1/brands/active",
+    options
+  });
+}
+async function deleteBrand(brandId, options) {
+  return invokeFetch("brands", {
+    method: "delete",
+    pathTemplate: "/api/v1/brands/{brand-id}",
+    pathVariables: { "brand-id": brandId },
+    options
+  });
+}
+async function getBrand(brandId, options) {
+  return invokeFetch("brands", {
+    method: "get",
+    pathTemplate: "/api/v1/brands/{brand-id}",
+    pathVariables: { "brand-id": brandId },
+    options
+  });
+}
+async function patchBrand(brandId, body, options) {
+  return invokeFetch("brands", {
+    method: "patch",
+    pathTemplate: "/api/v1/brands/{brand-id}",
+    pathVariables: { "brand-id": brandId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function activateBrand(brandId, body, options) {
+  return invokeFetch("brands", {
+    method: "post",
+    pathTemplate: "/api/v1/brands/{brand-id}/actions/activate",
+    pathVariables: { "brand-id": brandId },
+    body,
+    options
+  });
+}
+async function deactivateBrand(brandId, body, options) {
+  return invokeFetch("brands", {
+    method: "post",
+    pathTemplate: "/api/v1/brands/{brand-id}/actions/deactivate",
+    pathVariables: { "brand-id": brandId },
+    body,
+    options
+  });
+}
+async function deleteBrandFile(brandId, brandFileId, options) {
+  return invokeFetch("brands", {
+    method: "delete",
+    pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
+    pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
+    options
+  });
+}
+async function getBrandFile(brandId, brandFileId, options) {
+  return invokeFetch("brands", {
+    method: "get",
+    pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
+    pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
+    options
+  });
+}
+async function createBrandFile(brandId, brandFileId, body, options) {
+  return invokeFetch("brands", {
+    method: "post",
+    pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
+    pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
+    body,
+    contentType: "multipart/form-data",
+    options
+  });
+}
+async function updateBrandFile(brandId, brandFileId, body, options) {
+  return invokeFetch("brands", {
+    method: "put",
+    pathTemplate: "/api/v1/brands/{brand-id}/files/{brand-file-id}",
+    pathVariables: { "brand-id": brandId, "brand-file-id": brandFileId },
+    body,
+    contentType: "multipart/form-data",
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("brands");
 }

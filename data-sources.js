@@ -1,30 +1,36 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/data-sources.ts
-var getDataSources = async (query, options) => invokeFetch("data-sources", {
-  method: "get",
-  pathTemplate: "/api/v1/data-sources",
-  query,
-  options
-});
-var getDataSourceApiSpecs = async (dataSourceId, options) => invokeFetch("data-sources", {
-  method: "get",
-  pathTemplate: "/api/v1/data-sources/{dataSourceId}/api-specs",
-  pathVariables: { dataSourceId },
-  options
-});
-var getDataSourceGateways = async (dataSourceId, query, options) => invokeFetch("data-sources", {
-  method: "get",
-  pathTemplate: "/api/v1/data-sources/{dataSourceId}/gateways",
-  pathVariables: { dataSourceId },
-  query,
-  options
-});
+async function getDataSources(query, options) {
+  return invokeFetch("data-sources", {
+    method: "get",
+    pathTemplate: "/api/v1/data-sources",
+    query,
+    options
+  });
+}
+async function getDataSourceApiSpecs(dataSourceId, options) {
+  return invokeFetch("data-sources", {
+    method: "get",
+    pathTemplate: "/api/v1/data-sources/{dataSourceId}/api-specs",
+    pathVariables: { dataSourceId },
+    options
+  });
+}
+async function getDataSourceGateways(dataSourceId, query, options) {
+  return invokeFetch("data-sources", {
+    method: "get",
+    pathTemplate: "/api/v1/data-sources/{dataSourceId}/gateways",
+    pathVariables: { dataSourceId },
+    query,
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("data-sources");
 }

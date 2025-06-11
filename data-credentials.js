@@ -1,50 +1,60 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/data-credentials.ts
-var filterOrphanedDataCredentials = async (body, options) => invokeFetch("data-credentials", {
-  method: "post",
-  pathTemplate: "/api/v1/data-credentials/actions/filter-orphan",
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteDataCredential = async (qID, query, options) => invokeFetch("data-credentials", {
-  method: "delete",
-  pathTemplate: "/api/v1/data-credentials/{qID}",
-  pathVariables: { qID },
-  query,
-  options
-});
-var getDataCredential = async (qID, query, options) => invokeFetch("data-credentials", {
-  method: "get",
-  pathTemplate: "/api/v1/data-credentials/{qID}",
-  pathVariables: { qID },
-  query,
-  options
-});
-var patchDataCredential = async (qID, query, body, options) => invokeFetch("data-credentials", {
-  method: "patch",
-  pathTemplate: "/api/v1/data-credentials/{qID}",
-  pathVariables: { qID },
-  query,
-  body,
-  contentType: "application/json",
-  options
-});
-var updateDataCredential = async (qID, query, body, options) => invokeFetch("data-credentials", {
-  method: "put",
-  pathTemplate: "/api/v1/data-credentials/{qID}",
-  pathVariables: { qID },
-  query,
-  body,
-  contentType: "application/json",
-  options
-});
+async function filterOrphanedDataCredentials(body, options) {
+  return invokeFetch("data-credentials", {
+    method: "post",
+    pathTemplate: "/api/v1/data-credentials/actions/filter-orphan",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteDataCredential(qID, query, options) {
+  return invokeFetch("data-credentials", {
+    method: "delete",
+    pathTemplate: "/api/v1/data-credentials/{qID}",
+    pathVariables: { qID },
+    query,
+    options
+  });
+}
+async function getDataCredential(qID, query, options) {
+  return invokeFetch("data-credentials", {
+    method: "get",
+    pathTemplate: "/api/v1/data-credentials/{qID}",
+    pathVariables: { qID },
+    query,
+    options
+  });
+}
+async function patchDataCredential(qID, query, body, options) {
+  return invokeFetch("data-credentials", {
+    method: "patch",
+    pathTemplate: "/api/v1/data-credentials/{qID}",
+    pathVariables: { qID },
+    query,
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function updateDataCredential(qID, query, body, options) {
+  return invokeFetch("data-credentials", {
+    method: "put",
+    pathTemplate: "/api/v1/data-credentials/{qID}",
+    pathVariables: { qID },
+    query,
+    body,
+    contentType: "application/json",
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("data-credentials");
 }

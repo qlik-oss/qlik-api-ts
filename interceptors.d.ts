@@ -1,5 +1,5 @@
-import { I as InvokeFetchResponse, a as InvokeFetchProperties } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { I as InvokeFetchResponse, a as InvokeFetchProperties } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * This module provides a way to intercept requests and responses in the qmfe-api.

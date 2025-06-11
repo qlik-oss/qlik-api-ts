@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
@@ -389,7 +389,7 @@ type SyncHistoryResult = {
  * @param query an object with query parameters
  * @throws GetKnowledgebasesHttpError
  */
-declare const getKnowledgebases: (query: {
+declare function getKnowledgebases(query: {
     /** @deprecated
      * Optional parameter to request total count for query */
     countTotal?: boolean;
@@ -401,7 +401,7 @@ declare const getKnowledgebases: (query: {
     prev?: string;
     /** Optional resource field name to sort on, case insensitive, eg. name. Can be prefixed with - to set descending order, defaults to ascending. */
     sort?: "NAME" | "-NAME" | "DESCRIPTION" | "-DESCRIPTION" | "CREATED" | "-CREATED" | "UPDATED" | "-UPDATED";
-}, options?: ApiCallOptions) => Promise<GetKnowledgebasesHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetKnowledgebasesHttpResponse>;
 type GetKnowledgebasesHttpResponse = {
     data: KnowledgeBasesResult;
     headers: Headers;
@@ -420,7 +420,7 @@ type GetKnowledgebasesHttpError = {
  * @param body an object with the body content
  * @throws CreateKnowledgebaseHttpError
  */
-declare const createKnowledgebase: (body: CreateKnowledgeBase, options?: ApiCallOptions) => Promise<CreateKnowledgebaseHttpResponse>;
+declare function createKnowledgebase(body: CreateKnowledgeBase, options?: ApiCallOptions): Promise<CreateKnowledgebaseHttpResponse>;
 type CreateKnowledgebaseHttpResponse = {
     data: KnowledgeBaseLight;
     headers: Headers;
@@ -437,7 +437,7 @@ type CreateKnowledgebaseHttpError = {
  * @param id The id of the knowledgebase to delete.
  * @throws DeleteKnowledgebaseHttpError
  */
-declare const deleteKnowledgebase: (id: string, options?: ApiCallOptions) => Promise<DeleteKnowledgebaseHttpResponse>;
+declare function deleteKnowledgebase(id: string, options?: ApiCallOptions): Promise<DeleteKnowledgebaseHttpResponse>;
 type DeleteKnowledgebaseHttpResponse = {
     data: void;
     headers: Headers;
@@ -454,7 +454,7 @@ type DeleteKnowledgebaseHttpError = {
  * @param id The id of the knowledgebase to retrieve.
  * @throws GetKnowledgebaseHttpError
  */
-declare const getKnowledgebase: (id: string, options?: ApiCallOptions) => Promise<GetKnowledgebaseHttpResponse>;
+declare function getKnowledgebase(id: string, options?: ApiCallOptions): Promise<GetKnowledgebaseHttpResponse>;
 type GetKnowledgebaseHttpResponse = {
     data: KnowledgeBase;
     headers: Headers;
@@ -472,7 +472,7 @@ type GetKnowledgebaseHttpError = {
  * @param body an object with the body content
  * @throws PatchKnowledgebaseHttpError
  */
-declare const patchKnowledgebase: (id: string, body: JSONPatchArray, options?: ApiCallOptions) => Promise<PatchKnowledgebaseHttpResponse>;
+declare function patchKnowledgebase(id: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchKnowledgebaseHttpResponse>;
 type PatchKnowledgebaseHttpResponse = {
     data: void;
     headers: Headers;
@@ -490,7 +490,7 @@ type PatchKnowledgebaseHttpError = {
  * @param body an object with the body content
  * @throws CreateKnowledgebaseDatasourceHttpError
  */
-declare const createKnowledgebaseDatasource: (id: string, body: CreateDataSource, options?: ApiCallOptions) => Promise<CreateKnowledgebaseDatasourceHttpResponse>;
+declare function createKnowledgebaseDatasource(id: string, body: CreateDataSource, options?: ApiCallOptions): Promise<CreateKnowledgebaseDatasourceHttpResponse>;
 type CreateKnowledgebaseDatasourceHttpResponse = {
     data: DataSource;
     headers: Headers;
@@ -508,7 +508,7 @@ type CreateKnowledgebaseDatasourceHttpError = {
  * @param datasourceId The id of the datasource to delete.
  * @throws DeleteKnowledgebaseDatasourceHttpError
  */
-declare const deleteKnowledgebaseDatasource: (id: string, datasourceId: string, options?: ApiCallOptions) => Promise<DeleteKnowledgebaseDatasourceHttpResponse>;
+declare function deleteKnowledgebaseDatasource(id: string, datasourceId: string, options?: ApiCallOptions): Promise<DeleteKnowledgebaseDatasourceHttpResponse>;
 type DeleteKnowledgebaseDatasourceHttpResponse = {
     data: void;
     headers: Headers;
@@ -527,7 +527,7 @@ type DeleteKnowledgebaseDatasourceHttpError = {
  * @param body an object with the body content
  * @throws UpdateKnowledgebaseDatasourceHttpError
  */
-declare const updateKnowledgebaseDatasource: (id: string, datasourceId: string, body: DataSource, options?: ApiCallOptions) => Promise<UpdateKnowledgebaseDatasourceHttpResponse>;
+declare function updateKnowledgebaseDatasource(id: string, datasourceId: string, body: DataSource, options?: ApiCallOptions): Promise<UpdateKnowledgebaseDatasourceHttpResponse>;
 type UpdateKnowledgebaseDatasourceHttpResponse = {
     data: DataSource;
     headers: Headers;
@@ -545,7 +545,7 @@ type UpdateKnowledgebaseDatasourceHttpError = {
  * @param datasourceId The id of the datasource to cancel sync for.
  * @throws CancelKnowledgebaseDatasourceHttpError
  */
-declare const cancelKnowledgebaseDatasource: (id: string, datasourceId: string, options?: ApiCallOptions) => Promise<CancelKnowledgebaseDatasourceHttpResponse>;
+declare function cancelKnowledgebaseDatasource(id: string, datasourceId: string, options?: ApiCallOptions): Promise<CancelKnowledgebaseDatasourceHttpResponse>;
 type CancelKnowledgebaseDatasourceHttpResponse = {
     data: DataSourceSync;
     headers: Headers;
@@ -564,7 +564,7 @@ type CancelKnowledgebaseDatasourceHttpError = {
  * @param body an object with the body content
  * @throws DownloadKnowledgebaseDatasourceHttpError
  */
-declare const downloadKnowledgebaseDatasource: (id: string, datasourceId: string, body: DownloadFile, options?: ApiCallOptions) => Promise<DownloadKnowledgebaseDatasourceHttpResponse>;
+declare function downloadKnowledgebaseDatasource(id: string, datasourceId: string, body: DownloadFile, options?: ApiCallOptions): Promise<DownloadKnowledgebaseDatasourceHttpResponse>;
 type DownloadKnowledgebaseDatasourceHttpResponse = {
     data: DownloadFileResponse;
     headers: Headers;
@@ -583,10 +583,10 @@ type DownloadKnowledgebaseDatasourceHttpError = {
  * @param query an object with query parameters
  * @throws SyncKnowledgebaseDatasourceHttpError
  */
-declare const syncKnowledgebaseDatasource: (id: string, datasourceId: string, query: {
+declare function syncKnowledgebaseDatasource(id: string, datasourceId: string, query: {
     /** Optional parameter to migrate indexed files to docdetails collection */
     migrate?: boolean;
-}, options?: ApiCallOptions) => Promise<SyncKnowledgebaseDatasourceHttpResponse>;
+}, options?: ApiCallOptions): Promise<SyncKnowledgebaseDatasourceHttpResponse>;
 type SyncKnowledgebaseDatasourceHttpResponse = {
     data: DataSourceSync;
     headers: Headers;
@@ -605,7 +605,7 @@ type SyncKnowledgebaseDatasourceHttpError = {
  * @param query an object with query parameters
  * @throws GetKnowledgebaseDatasourceHistoriesHttpError
  */
-declare const getKnowledgebaseDatasourceHistories: (id: string, datasourceId: string, query: {
+declare function getKnowledgebaseDatasourceHistories(id: string, datasourceId: string, query: {
     /** The number of knowledgebases to get. */
     limit?: number;
     /** Optional parameter to request the next page. */
@@ -614,7 +614,7 @@ declare const getKnowledgebaseDatasourceHistories: (id: string, datasourceId: st
     prev?: string;
     /** Optional resource field name to sort on, case insensitive, eg. name. Can be prefixed with - to set descending order, defaults to ascending. */
     sort?: "COMPLETED" | "-COMPLETED";
-}, options?: ApiCallOptions) => Promise<GetKnowledgebaseDatasourceHistoriesHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetKnowledgebaseDatasourceHistoriesHttpResponse>;
 type GetKnowledgebaseDatasourceHistoriesHttpResponse = {
     data: SyncHistoryResult;
     headers: Headers;
@@ -637,7 +637,7 @@ type GetKnowledgebaseDatasourceHistoriesHttpError = {
  * @param syncId The sync identifier.
  * @throws GetKnowledgebaseDatasourceHistoryHttpError
  */
-declare const getKnowledgebaseDatasourceHistory: (id: string, datasourceId: string, syncId: string, options?: ApiCallOptions) => Promise<GetKnowledgebaseDatasourceHistoryHttpResponse>;
+declare function getKnowledgebaseDatasourceHistory(id: string, datasourceId: string, syncId: string, options?: ApiCallOptions): Promise<GetKnowledgebaseDatasourceHistoryHttpResponse>;
 type GetKnowledgebaseDatasourceHistoryHttpResponse = {
     data: SyncHistoryDetails;
     headers: Headers;
@@ -655,7 +655,7 @@ type GetKnowledgebaseDatasourceHistoryHttpError = {
  * @param datasourceId The id of the datasource the schedule belongs to.
  * @throws DeleteKnowledgebaseDatasourceScheduleHttpError
  */
-declare const deleteKnowledgebaseDatasourceSchedule: (id: string, datasourceId: string, options?: ApiCallOptions) => Promise<DeleteKnowledgebaseDatasourceScheduleHttpResponse>;
+declare function deleteKnowledgebaseDatasourceSchedule(id: string, datasourceId: string, options?: ApiCallOptions): Promise<DeleteKnowledgebaseDatasourceScheduleHttpResponse>;
 type DeleteKnowledgebaseDatasourceScheduleHttpResponse = {
     data: void;
     headers: Headers;
@@ -673,7 +673,7 @@ type DeleteKnowledgebaseDatasourceScheduleHttpError = {
  * @param datasourceId The id of the datasource the schedule belongs to.
  * @throws GetKnowledgebaseDatasourceScheduleHttpError
  */
-declare const getKnowledgebaseDatasourceSchedule: (id: string, datasourceId: string, options?: ApiCallOptions) => Promise<GetKnowledgebaseDatasourceScheduleHttpResponse>;
+declare function getKnowledgebaseDatasourceSchedule(id: string, datasourceId: string, options?: ApiCallOptions): Promise<GetKnowledgebaseDatasourceScheduleHttpResponse>;
 type GetKnowledgebaseDatasourceScheduleHttpResponse = {
     data: ScheduleWithManifest;
     headers: Headers;
@@ -692,7 +692,7 @@ type GetKnowledgebaseDatasourceScheduleHttpError = {
  * @param body an object with the body content
  * @throws CreateKnowledgebaseDatasourceScheduleHttpError
  */
-declare const createKnowledgebaseDatasourceSchedule: (id: string, datasourceId: string, body: Schedule, options?: ApiCallOptions) => Promise<CreateKnowledgebaseDatasourceScheduleHttpResponse>;
+declare function createKnowledgebaseDatasourceSchedule(id: string, datasourceId: string, body: Schedule, options?: ApiCallOptions): Promise<CreateKnowledgebaseDatasourceScheduleHttpResponse>;
 type CreateKnowledgebaseDatasourceScheduleHttpResponse = {
     data: ScheduleWithManifest;
     headers: Headers;
@@ -710,7 +710,7 @@ type CreateKnowledgebaseDatasourceScheduleHttpError = {
  * @param query an object with query parameters
  * @throws GetKnowledgebaseHistoriesHttpError
  */
-declare const getKnowledgebaseHistories: (id: string, query: {
+declare function getKnowledgebaseHistories(id: string, query: {
     /** The number of sync histories to get. */
     limit?: number;
     /** Optional parameter to request the next page. */
@@ -719,7 +719,7 @@ declare const getKnowledgebaseHistories: (id: string, query: {
     prev?: string;
     /** Optional resource field name to sort on, case insensitive, eg. name. Can be prefixed with - to set descending order, defaults to ascending. */
     sort?: "COMPLETED" | "-COMPLETED";
-}, options?: ApiCallOptions) => Promise<GetKnowledgebaseHistoriesHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetKnowledgebaseHistoriesHttpResponse>;
 type GetKnowledgebaseHistoriesHttpResponse = {
     data: SyncHistoryResult;
     headers: Headers;

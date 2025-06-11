@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type BatchIdDto = {
     ids?: string[];
@@ -66,7 +66,7 @@ type JsonPatch = {
  * @param body an object with the body content
  * @throws DeleteDataAssetsHttpError
  */
-declare const deleteDataAssets: (body: BatchIdDto, options?: ApiCallOptions) => Promise<DeleteDataAssetsHttpResponse>;
+declare function deleteDataAssets(body: BatchIdDto, options?: ApiCallOptions): Promise<DeleteDataAssetsHttpResponse>;
 type DeleteDataAssetsHttpResponse = {
     data: void;
     headers: Headers;
@@ -83,7 +83,7 @@ type DeleteDataAssetsHttpError = {
  * @param body an object with the body content
  * @throws CreateDataAssetHttpError
  */
-declare const createDataAsset: (body: DataAsset, options?: ApiCallOptions) => Promise<CreateDataAssetHttpResponse>;
+declare function createDataAsset(body: DataAsset, options?: ApiCallOptions): Promise<CreateDataAssetHttpResponse>;
 type CreateDataAssetHttpResponse = {
     data: DataAsset;
     headers: Headers;
@@ -101,10 +101,10 @@ type CreateDataAssetHttpError = {
  * @param query an object with query parameters
  * @throws GetDataAssetHttpError
  */
-declare const getDataAsset: (dataAssetId: string, query: {
+declare function getDataAsset(dataAssetId: string, query: {
     /** Comma-separated fields to return in the response. */
     projections?: string[];
-}, options?: ApiCallOptions) => Promise<GetDataAssetHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDataAssetHttpResponse>;
 type GetDataAssetHttpResponse = {
     data: DataAsset;
     headers: Headers;
@@ -122,7 +122,7 @@ type GetDataAssetHttpError = {
  * @param body an object with the body content
  * @throws PatchDataAssetHttpError
  */
-declare const patchDataAsset: (dataAssetId: string, body: JsonPatch[], options?: ApiCallOptions) => Promise<PatchDataAssetHttpResponse>;
+declare function patchDataAsset(dataAssetId: string, body: JsonPatch[], options?: ApiCallOptions): Promise<PatchDataAssetHttpResponse>;
 type PatchDataAssetHttpResponse = {
     data: DataAsset;
     headers: Headers;
@@ -140,7 +140,7 @@ type PatchDataAssetHttpError = {
  * @param body an object with the body content
  * @throws UpdateDataAssetHttpError
  */
-declare const updateDataAsset: (dataAssetId: string, body: DataAsset, options?: ApiCallOptions) => Promise<UpdateDataAssetHttpResponse>;
+declare function updateDataAsset(dataAssetId: string, body: DataAsset, options?: ApiCallOptions): Promise<UpdateDataAssetHttpResponse>;
 type UpdateDataAssetHttpResponse = {
     data: DataAsset;
     headers: Headers;

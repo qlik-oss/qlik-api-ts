@@ -1,5 +1,5 @@
-import { A as ApiCallOptions, D as DownloadableBlob } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions, D as DownloadableBlob } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * A brand is a collection of assets for applying custom branding. Only a single brand can be active in a tenant.
@@ -105,7 +105,7 @@ type NoActiveBrand = unknown;
  * @param query an object with query parameters
  * @throws GetBrandsHttpError
  */
-declare const getBrands: (query: {
+declare function getBrands(query: {
     /** Cursor to previous. */
     endingBefore?: string;
     /** Maximum number of brands to retrieve. */
@@ -114,7 +114,7 @@ declare const getBrands: (query: {
     sort?: "id" | "+id" | "-id" | "createdAt" | "+createdAt" | "-createdAt" | "updatedAt" | "+updatedAt" | "-updatedAt";
     /** Cursor to the next page. */
     startingAfter?: string;
-}, options?: ApiCallOptions) => Promise<GetBrandsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetBrandsHttpResponse>;
 type GetBrandsHttpResponse = {
     data: BrandsList;
     headers: Headers;
@@ -149,7 +149,7 @@ type GetBrands500HttpError = {
  * @param body an object with the body content
  * @throws CreateBrandHttpError
  */
-declare const createBrand: (body: {
+declare function createBrand(body: {
     /** Description of the brand. */
     description?: string;
     /** The path and name of a properly formatted ICO file. Maximum size is 100 KB. */
@@ -160,7 +160,7 @@ declare const createBrand: (body: {
     name: string;
     /** The path and name of a JSON file to define brand style settings. Maximum size is 100 KB. This property is not currently operational. */
     styles?: BodyInit;
-}, options?: ApiCallOptions) => Promise<CreateBrandHttpResponse>;
+}, options?: ApiCallOptions): Promise<CreateBrandHttpResponse>;
 type CreateBrandHttpResponse = {
     data: Brand;
     headers: Headers;
@@ -192,7 +192,7 @@ type CreateBrand500HttpError = {
  *
  * @throws GetActiveBrandHttpError
  */
-declare const getActiveBrand: (options?: ApiCallOptions) => Promise<GetActiveBrandHttpResponse>;
+declare function getActiveBrand(options?: ApiCallOptions): Promise<GetActiveBrandHttpResponse>;
 type GetActiveBrandHttpResponse = {
     data: Brand | NoActiveBrand;
     headers: Headers;
@@ -209,7 +209,7 @@ type GetActiveBrandHttpError = {
  * @param brandId The brand's unique identifier.
  * @throws DeleteBrandHttpError
  */
-declare const deleteBrand: (brandId: string, options?: ApiCallOptions) => Promise<DeleteBrandHttpResponse>;
+declare function deleteBrand(brandId: string, options?: ApiCallOptions): Promise<DeleteBrandHttpResponse>;
 type DeleteBrandHttpResponse = {
     data: void;
     headers: Headers;
@@ -247,7 +247,7 @@ type DeleteBrand500HttpError = {
  * @param brandId The brand's unique identifier.
  * @throws GetBrandHttpError
  */
-declare const getBrand: (brandId: string, options?: ApiCallOptions) => Promise<GetBrandHttpResponse>;
+declare function getBrand(brandId: string, options?: ApiCallOptions): Promise<GetBrandHttpResponse>;
 type GetBrandHttpResponse = {
     data: Brand;
     headers: Headers;
@@ -286,7 +286,7 @@ type GetBrand500HttpError = {
  * @param body an object with the body content
  * @throws PatchBrandHttpError
  */
-declare const patchBrand: (brandId: string, body: BrandPatch[], options?: ApiCallOptions) => Promise<PatchBrandHttpResponse>;
+declare function patchBrand(brandId: string, body: BrandPatch[], options?: ApiCallOptions): Promise<PatchBrandHttpResponse>;
 type PatchBrandHttpResponse = {
     data: void;
     headers: Headers;
@@ -325,7 +325,7 @@ type PatchBrand500HttpError = {
  * @param body an object with the body content
  * @throws ActivateBrandHttpError
  */
-declare const activateBrand: (brandId: string, body: unknown, options?: ApiCallOptions) => Promise<ActivateBrandHttpResponse>;
+declare function activateBrand(brandId: string, body: unknown, options?: ApiCallOptions): Promise<ActivateBrandHttpResponse>;
 type ActivateBrandHttpResponse = {
     data: Brand;
     headers: Headers;
@@ -364,7 +364,7 @@ type ActivateBrand500HttpError = {
  * @param body an object with the body content
  * @throws DeactivateBrandHttpError
  */
-declare const deactivateBrand: (brandId: string, body: unknown, options?: ApiCallOptions) => Promise<DeactivateBrandHttpResponse>;
+declare function deactivateBrand(brandId: string, body: unknown, options?: ApiCallOptions): Promise<DeactivateBrandHttpResponse>;
 type DeactivateBrandHttpResponse = {
     data: Brand;
     headers: Headers;
@@ -403,7 +403,7 @@ type DeactivateBrand500HttpError = {
  * @param brandFileId The unique identifier of a file within a brand.
  * @throws DeleteBrandFileHttpError
  */
-declare const deleteBrandFile: (brandId: string, brandFileId: string, options?: ApiCallOptions) => Promise<DeleteBrandFileHttpResponse>;
+declare function deleteBrandFile(brandId: string, brandFileId: string, options?: ApiCallOptions): Promise<DeleteBrandFileHttpResponse>;
 type DeleteBrandFileHttpResponse = {
     data: void;
     headers: Headers;
@@ -442,7 +442,7 @@ type DeleteBrandFile500HttpError = {
  * @param brandFileId The unique identifier of a file within a brand.
  * @throws GetBrandFileHttpError
  */
-declare const getBrandFile: (brandId: string, brandFileId: string, options?: ApiCallOptions) => Promise<GetBrandFileHttpResponse>;
+declare function getBrandFile(brandId: string, brandFileId: string, options?: ApiCallOptions): Promise<GetBrandFileHttpResponse>;
 type GetBrandFileHttpResponse = {
     data: DownloadableBlob;
     headers: Headers;
@@ -482,10 +482,10 @@ type GetBrandFile500HttpError = {
  * @param body an object with the body content
  * @throws CreateBrandFileHttpError
  */
-declare const createBrandFile: (brandId: string, brandFileId: string, body: {
+declare function createBrandFile(brandId: string, brandFileId: string, body: {
     /** The path and name of a file to upload. */
     file?: BodyInit;
-}, options?: ApiCallOptions) => Promise<CreateBrandFileHttpResponse>;
+}, options?: ApiCallOptions): Promise<CreateBrandFileHttpResponse>;
 type CreateBrandFileHttpResponse = {
     data: BrandFile;
     headers: Headers;
@@ -525,10 +525,10 @@ type CreateBrandFile500HttpError = {
  * @param body an object with the body content
  * @throws UpdateBrandFileHttpError
  */
-declare const updateBrandFile: (brandId: string, brandFileId: string, body: {
+declare function updateBrandFile(brandId: string, brandFileId: string, body: {
     /** A file to upload. */
     file?: BodyInit;
-}, options?: ApiCallOptions) => Promise<UpdateBrandFileHttpResponse>;
+}, options?: ApiCallOptions): Promise<UpdateBrandFileHttpResponse>;
 type UpdateBrandFileHttpResponse = {
     data: BrandFile;
     headers: Headers;

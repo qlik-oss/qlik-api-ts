@@ -1,63 +1,79 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/items.ts
-var getItems = async (query, options) => invokeFetch("items", {
-  method: "get",
-  pathTemplate: "/api/v1/items",
-  query,
-  options
-});
-var getItemsSettings = async (options) => invokeFetch("items", {
-  method: "get",
-  pathTemplate: "/api/v1/items/settings",
-  options
-});
-var patchItemsSettings = async (body, options) => invokeFetch("items", {
-  method: "patch",
-  pathTemplate: "/api/v1/items/settings",
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteItem = async (itemId, options) => invokeFetch("items", {
-  method: "delete",
-  pathTemplate: "/api/v1/items/{itemId}",
-  pathVariables: { itemId },
-  options
-});
-var getItem = async (itemId, options) => invokeFetch("items", {
-  method: "get",
-  pathTemplate: "/api/v1/items/{itemId}",
-  pathVariables: { itemId },
-  options
-});
-var updateItem = async (itemId, body, options) => invokeFetch("items", {
-  method: "put",
-  pathTemplate: "/api/v1/items/{itemId}",
-  pathVariables: { itemId },
-  body,
-  contentType: "application/json",
-  options
-});
-var getItemCollections = async (itemId, query, options) => invokeFetch("items", {
-  method: "get",
-  pathTemplate: "/api/v1/items/{itemId}/collections",
-  pathVariables: { itemId },
-  query,
-  options
-});
-var getPublishedItems = async (itemId, query, options) => invokeFetch("items", {
-  method: "get",
-  pathTemplate: "/api/v1/items/{itemId}/publisheditems",
-  pathVariables: { itemId },
-  query,
-  options
-});
+async function getItems(query, options) {
+  return invokeFetch("items", {
+    method: "get",
+    pathTemplate: "/api/v1/items",
+    query,
+    options
+  });
+}
+async function getItemsSettings(options) {
+  return invokeFetch("items", {
+    method: "get",
+    pathTemplate: "/api/v1/items/settings",
+    options
+  });
+}
+async function patchItemsSettings(body, options) {
+  return invokeFetch("items", {
+    method: "patch",
+    pathTemplate: "/api/v1/items/settings",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteItem(itemId, options) {
+  return invokeFetch("items", {
+    method: "delete",
+    pathTemplate: "/api/v1/items/{itemId}",
+    pathVariables: { itemId },
+    options
+  });
+}
+async function getItem(itemId, options) {
+  return invokeFetch("items", {
+    method: "get",
+    pathTemplate: "/api/v1/items/{itemId}",
+    pathVariables: { itemId },
+    options
+  });
+}
+async function updateItem(itemId, body, options) {
+  return invokeFetch("items", {
+    method: "put",
+    pathTemplate: "/api/v1/items/{itemId}",
+    pathVariables: { itemId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getItemCollections(itemId, query, options) {
+  return invokeFetch("items", {
+    method: "get",
+    pathTemplate: "/api/v1/items/{itemId}/collections",
+    pathVariables: { itemId },
+    query,
+    options
+  });
+}
+async function getPublishedItems(itemId, query, options) {
+  return invokeFetch("items", {
+    method: "get",
+    pathTemplate: "/api/v1/items/{itemId}/publisheditems",
+    pathVariables: { itemId },
+    query,
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("items");
 }

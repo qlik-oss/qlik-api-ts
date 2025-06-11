@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type CreateRole = {
     /** Selection of scopes to assign to role */
@@ -163,7 +163,7 @@ type Role = {
  * @param query an object with query parameters
  * @throws GetRolesHttpError
  */
-declare const getRoles: (query: {
+declare function getRoles(query: {
     /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax. All conditional statements within this query parameter are case insensitive. */
     filter?: string;
     /** The number of roles to retrieve. */
@@ -176,7 +176,7 @@ declare const getRoles: (query: {
     sort?: string;
     /** Determines wether to return a count of the total records matched in the query. Defaults to false. */
     totalResults?: boolean;
-}, options?: ApiCallOptions) => Promise<GetRolesHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetRolesHttpResponse>;
 type GetRolesHttpResponse = {
     data: ListRolesResult;
     headers: Headers;
@@ -195,7 +195,7 @@ type GetRolesHttpError = {
  * @param body an object with the body content
  * @throws CreateRoleHttpError
  */
-declare const createRole: (body: CreateRole, options?: ApiCallOptions) => Promise<CreateRoleHttpResponse>;
+declare function createRole(body: CreateRole, options?: ApiCallOptions): Promise<CreateRoleHttpResponse>;
 type CreateRoleHttpResponse = {
     data: Role;
     headers: Headers;
@@ -212,7 +212,7 @@ type CreateRoleHttpError = {
  * @param id The unique identifier for the role.
  * @throws DeleteRoleHttpError
  */
-declare const deleteRole: (id: string, options?: ApiCallOptions) => Promise<DeleteRoleHttpResponse>;
+declare function deleteRole(id: string, options?: ApiCallOptions): Promise<DeleteRoleHttpResponse>;
 type DeleteRoleHttpResponse = {
     data: void;
     headers: Headers;
@@ -229,7 +229,7 @@ type DeleteRoleHttpError = {
  * @param id The unique identifier for the role.
  * @throws GetRoleHttpError
  */
-declare const getRole: (id: string, options?: ApiCallOptions) => Promise<GetRoleHttpResponse>;
+declare function getRole(id: string, options?: ApiCallOptions): Promise<GetRoleHttpResponse>;
 type GetRoleHttpResponse = {
     data: Role;
     headers: Headers;
@@ -247,7 +247,7 @@ type GetRoleHttpError = {
  * @param body an object with the body content
  * @throws PatchRoleHttpError
  */
-declare const patchRole: (id: string, body: PatchRoles, options?: ApiCallOptions) => Promise<PatchRoleHttpResponse>;
+declare function patchRole(id: string, body: PatchRoles, options?: ApiCallOptions): Promise<PatchRoleHttpResponse>;
 type PatchRoleHttpResponse = {
     data: void;
     headers: Headers;

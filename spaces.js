@@ -1,127 +1,161 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/spaces.ts
-var getSpaces = async (query, options) => invokeFetch("spaces", {
-  method: "get",
-  pathTemplate: "/api/v1/spaces",
-  query,
-  options
-});
-var createSpace = async (body, options) => invokeFetch("spaces", {
-  method: "post",
-  pathTemplate: "/api/v1/spaces",
-  body,
-  contentType: "application/json",
-  options
-});
-var getSpaceTypes = async (options) => invokeFetch("spaces", {
-  method: "get",
-  pathTemplate: "/api/v1/spaces/types",
-  options
-});
-var deleteSpace = async (spaceId, options) => invokeFetch("spaces", {
-  method: "delete",
-  pathTemplate: "/api/v1/spaces/{spaceId}",
-  pathVariables: { spaceId },
-  options
-});
-var getSpace = async (spaceId, options) => invokeFetch("spaces", {
-  method: "get",
-  pathTemplate: "/api/v1/spaces/{spaceId}",
-  pathVariables: { spaceId },
-  options
-});
-var patchSpace = async (spaceId, body, options) => invokeFetch("spaces", {
-  method: "patch",
-  pathTemplate: "/api/v1/spaces/{spaceId}",
-  pathVariables: { spaceId },
-  body,
-  contentType: "application/json",
-  options
-});
-var updateSpace = async (spaceId, body, options) => invokeFetch("spaces", {
-  method: "put",
-  pathTemplate: "/api/v1/spaces/{spaceId}",
-  pathVariables: { spaceId },
-  body,
-  contentType: "application/json",
-  options
-});
-var getSpaceAssignments = async (spaceId, query, options) => invokeFetch("spaces", {
-  method: "get",
-  pathTemplate: "/api/v1/spaces/{spaceId}/assignments",
-  pathVariables: { spaceId },
-  query,
-  options
-});
-var createSpaceAssignment = async (spaceId, body, options) => invokeFetch("spaces", {
-  method: "post",
-  pathTemplate: "/api/v1/spaces/{spaceId}/assignments",
-  pathVariables: { spaceId },
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteSpaceAssignment = async (spaceId, assignmentId, options) => invokeFetch("spaces", {
-  method: "delete",
-  pathTemplate: "/api/v1/spaces/{spaceId}/assignments/{assignmentId}",
-  pathVariables: { spaceId, assignmentId },
-  options
-});
-var getSpaceAssignment = async (spaceId, assignmentId, options) => invokeFetch("spaces", {
-  method: "get",
-  pathTemplate: "/api/v1/spaces/{spaceId}/assignments/{assignmentId}",
-  pathVariables: { spaceId, assignmentId },
-  options
-});
-var updateSpaceAssignment = async (spaceId, assignmentId, body, options) => invokeFetch("spaces", {
-  method: "put",
-  pathTemplate: "/api/v1/spaces/{spaceId}/assignments/{assignmentId}",
-  pathVariables: { spaceId, assignmentId },
-  body,
-  contentType: "application/json",
-  options
-});
-var getSpaceShares = async (spaceId, query, options) => invokeFetch("spaces", {
-  method: "get",
-  pathTemplate: "/api/v1/spaces/{spaceId}/shares",
-  pathVariables: { spaceId },
-  query,
-  options
-});
-var createSpaceShare = async (spaceId, body, options) => invokeFetch("spaces", {
-  method: "post",
-  pathTemplate: "/api/v1/spaces/{spaceId}/shares",
-  pathVariables: { spaceId },
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteSpaceShare = async (spaceId, shareId, options) => invokeFetch("spaces", {
-  method: "delete",
-  pathTemplate: "/api/v1/spaces/{spaceId}/shares/{shareId}",
-  pathVariables: { spaceId, shareId },
-  options
-});
-var getSpaceShare = async (spaceId, shareId, options) => invokeFetch("spaces", {
-  method: "get",
-  pathTemplate: "/api/v1/spaces/{spaceId}/shares/{shareId}",
-  pathVariables: { spaceId, shareId },
-  options
-});
-var patchShare = async (spaceId, shareId, body, options) => invokeFetch("spaces", {
-  method: "patch",
-  pathTemplate: "/api/v1/spaces/{spaceId}/shares/{shareId}",
-  pathVariables: { spaceId, shareId },
-  body,
-  contentType: "application/json",
-  options
-});
+async function getSpaces(query, options) {
+  return invokeFetch("spaces", {
+    method: "get",
+    pathTemplate: "/api/v1/spaces",
+    query,
+    options
+  });
+}
+async function createSpace(body, options) {
+  return invokeFetch("spaces", {
+    method: "post",
+    pathTemplate: "/api/v1/spaces",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getSpaceTypes(options) {
+  return invokeFetch("spaces", {
+    method: "get",
+    pathTemplate: "/api/v1/spaces/types",
+    options
+  });
+}
+async function deleteSpace(spaceId, options) {
+  return invokeFetch("spaces", {
+    method: "delete",
+    pathTemplate: "/api/v1/spaces/{spaceId}",
+    pathVariables: { spaceId },
+    options
+  });
+}
+async function getSpace(spaceId, options) {
+  return invokeFetch("spaces", {
+    method: "get",
+    pathTemplate: "/api/v1/spaces/{spaceId}",
+    pathVariables: { spaceId },
+    options
+  });
+}
+async function patchSpace(spaceId, body, options) {
+  return invokeFetch("spaces", {
+    method: "patch",
+    pathTemplate: "/api/v1/spaces/{spaceId}",
+    pathVariables: { spaceId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function updateSpace(spaceId, body, options) {
+  return invokeFetch("spaces", {
+    method: "put",
+    pathTemplate: "/api/v1/spaces/{spaceId}",
+    pathVariables: { spaceId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getSpaceAssignments(spaceId, query, options) {
+  return invokeFetch("spaces", {
+    method: "get",
+    pathTemplate: "/api/v1/spaces/{spaceId}/assignments",
+    pathVariables: { spaceId },
+    query,
+    options
+  });
+}
+async function createSpaceAssignment(spaceId, body, options) {
+  return invokeFetch("spaces", {
+    method: "post",
+    pathTemplate: "/api/v1/spaces/{spaceId}/assignments",
+    pathVariables: { spaceId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteSpaceAssignment(spaceId, assignmentId, options) {
+  return invokeFetch("spaces", {
+    method: "delete",
+    pathTemplate: "/api/v1/spaces/{spaceId}/assignments/{assignmentId}",
+    pathVariables: { spaceId, assignmentId },
+    options
+  });
+}
+async function getSpaceAssignment(spaceId, assignmentId, options) {
+  return invokeFetch("spaces", {
+    method: "get",
+    pathTemplate: "/api/v1/spaces/{spaceId}/assignments/{assignmentId}",
+    pathVariables: { spaceId, assignmentId },
+    options
+  });
+}
+async function updateSpaceAssignment(spaceId, assignmentId, body, options) {
+  return invokeFetch("spaces", {
+    method: "put",
+    pathTemplate: "/api/v1/spaces/{spaceId}/assignments/{assignmentId}",
+    pathVariables: { spaceId, assignmentId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getSpaceShares(spaceId, query, options) {
+  return invokeFetch("spaces", {
+    method: "get",
+    pathTemplate: "/api/v1/spaces/{spaceId}/shares",
+    pathVariables: { spaceId },
+    query,
+    options
+  });
+}
+async function createSpaceShare(spaceId, body, options) {
+  return invokeFetch("spaces", {
+    method: "post",
+    pathTemplate: "/api/v1/spaces/{spaceId}/shares",
+    pathVariables: { spaceId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteSpaceShare(spaceId, shareId, options) {
+  return invokeFetch("spaces", {
+    method: "delete",
+    pathTemplate: "/api/v1/spaces/{spaceId}/shares/{shareId}",
+    pathVariables: { spaceId, shareId },
+    options
+  });
+}
+async function getSpaceShare(spaceId, shareId, options) {
+  return invokeFetch("spaces", {
+    method: "get",
+    pathTemplate: "/api/v1/spaces/{spaceId}/shares/{shareId}",
+    pathVariables: { spaceId, shareId },
+    options
+  });
+}
+async function patchShare(spaceId, shareId, body, options) {
+  return invokeFetch("spaces", {
+    method: "patch",
+    pathTemplate: "/api/v1/spaces/{spaceId}/shares/{shareId}",
+    pathVariables: { spaceId, shareId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("spaces");
 }

@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * Error in resource handling
@@ -696,7 +696,7 @@ type ReloadTimestampMatchType = "noCheck" | "requestTimeExact";
  * @param body an object with the body content
  * @throws CreateReportHttpError
  */
-declare const createReport: (body: ReportRequest, options?: ApiCallOptions) => Promise<CreateReportHttpResponse>;
+declare function createReport(body: ReportRequest, options?: ApiCallOptions): Promise<CreateReportHttpResponse>;
 type CreateReportHttpResponse = {
     data: void;
     headers: Headers;
@@ -713,7 +713,7 @@ type CreateReportHttpError = {
  * @param id Identifier of the request.
  * @throws GetReportStatusHttpError
  */
-declare const getReportStatus: (id: string, options?: ApiCallOptions) => Promise<GetReportStatusHttpResponse>;
+declare function getReportStatus(id: string, options?: ApiCallOptions): Promise<GetReportStatusHttpResponse>;
 type GetReportStatusHttpResponse = {
     data: ReportStatus;
     headers: Headers;

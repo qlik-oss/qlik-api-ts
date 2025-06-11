@@ -1,58 +1,72 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/api-keys.ts
-var getApiKeys = async (query, options) => invokeFetch("api-keys", {
-  method: "get",
-  pathTemplate: "/api/v1/api-keys",
-  query,
-  options
-});
-var createApiKey = async (body, options) => invokeFetch("api-keys", {
-  method: "post",
-  pathTemplate: "/api/v1/api-keys",
-  body,
-  contentType: "application/json",
-  options
-});
-var getApiKeysConfig = async (tenantId, options) => invokeFetch("api-keys", {
-  method: "get",
-  pathTemplate: "/api/v1/api-keys/configs/{tenantId}",
-  pathVariables: { tenantId },
-  options
-});
-var patchApiKeysConfig = async (tenantId, body, options) => invokeFetch("api-keys", {
-  method: "patch",
-  pathTemplate: "/api/v1/api-keys/configs/{tenantId}",
-  pathVariables: { tenantId },
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteApiKey = async (id, options) => invokeFetch("api-keys", {
-  method: "delete",
-  pathTemplate: "/api/v1/api-keys/{id}",
-  pathVariables: { id },
-  options
-});
-var getApiKey = async (id, options) => invokeFetch("api-keys", {
-  method: "get",
-  pathTemplate: "/api/v1/api-keys/{id}",
-  pathVariables: { id },
-  options
-});
-var patchApiKey = async (id, body, options) => invokeFetch("api-keys", {
-  method: "patch",
-  pathTemplate: "/api/v1/api-keys/{id}",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
+async function getApiKeys(query, options) {
+  return invokeFetch("api-keys", {
+    method: "get",
+    pathTemplate: "/api/v1/api-keys",
+    query,
+    options
+  });
+}
+async function createApiKey(body, options) {
+  return invokeFetch("api-keys", {
+    method: "post",
+    pathTemplate: "/api/v1/api-keys",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getApiKeysConfig(tenantId, options) {
+  return invokeFetch("api-keys", {
+    method: "get",
+    pathTemplate: "/api/v1/api-keys/configs/{tenantId}",
+    pathVariables: { tenantId },
+    options
+  });
+}
+async function patchApiKeysConfig(tenantId, body, options) {
+  return invokeFetch("api-keys", {
+    method: "patch",
+    pathTemplate: "/api/v1/api-keys/configs/{tenantId}",
+    pathVariables: { tenantId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteApiKey(id, options) {
+  return invokeFetch("api-keys", {
+    method: "delete",
+    pathTemplate: "/api/v1/api-keys/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function getApiKey(id, options) {
+  return invokeFetch("api-keys", {
+    method: "get",
+    pathTemplate: "/api/v1/api-keys/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function patchApiKey(id, body, options) {
+  return invokeFetch("api-keys", {
+    method: "patch",
+    pathTemplate: "/api/v1/api-keys/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("api-keys");
 }

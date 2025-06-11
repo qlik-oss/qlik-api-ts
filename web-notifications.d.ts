@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * An error object.
@@ -98,7 +98,7 @@ type Notifications = {
  * @param query an object with query parameters
  * @throws GetNotificationsHttpError
  */
-declare const getNotifications: (query: {
+declare function getNotifications(query: {
     /** The number of notification entries to retrieved. */
     limit?: number;
     /** Page number */
@@ -109,7 +109,7 @@ declare const getNotifications: (query: {
     resourceType?: string;
     /** The field to sort by, with +/- prefix indicating sort order */
     sort?: "+createdAt" | "-createdAt" | "+updatedAt" | "-updatedAt";
-}, options?: ApiCallOptions) => Promise<GetNotificationsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetNotificationsHttpResponse>;
 type GetNotificationsHttpResponse = {
     data: Notifications;
     headers: Headers;
@@ -127,7 +127,7 @@ type GetNotificationsHttpError = {
  *
  * @throws DeleteNotificationsHttpError
  */
-declare const deleteNotifications: (options?: ApiCallOptions) => Promise<DeleteNotificationsHttpResponse>;
+declare function deleteNotifications(options?: ApiCallOptions): Promise<DeleteNotificationsHttpResponse>;
 type DeleteNotificationsHttpResponse = {
     data: Meta;
     headers: Headers;
@@ -144,7 +144,7 @@ type DeleteNotificationsHttpError = {
  * @param body an object with the body content
  * @throws PatchNotificationsHttpError
  */
-declare const patchNotifications: (body: NotificationPatchSchema, options?: ApiCallOptions) => Promise<PatchNotificationsHttpResponse>;
+declare function patchNotifications(body: NotificationPatchSchema, options?: ApiCallOptions): Promise<PatchNotificationsHttpResponse>;
 type PatchNotificationsHttpResponse = {
     data: Meta;
     headers: Headers;
@@ -161,7 +161,7 @@ type PatchNotificationsHttpError = {
  * @param notificationId The id of the notification to delete.
  * @throws DeleteNotificationHttpError
  */
-declare const deleteNotification: (notificationId: string, options?: ApiCallOptions) => Promise<DeleteNotificationHttpResponse>;
+declare function deleteNotification(notificationId: string, options?: ApiCallOptions): Promise<DeleteNotificationHttpResponse>;
 type DeleteNotificationHttpResponse = {
     data: Meta;
     headers: Headers;
@@ -178,7 +178,7 @@ type DeleteNotificationHttpError = {
  * @param notificationId The id of the notification to retrieve.
  * @throws GetNotificationHttpError
  */
-declare const getNotification: (notificationId: string, options?: ApiCallOptions) => Promise<GetNotificationHttpResponse>;
+declare function getNotification(notificationId: string, options?: ApiCallOptions): Promise<GetNotificationHttpResponse>;
 type GetNotificationHttpResponse = {
     data: Notification;
     headers: Headers;
@@ -196,7 +196,7 @@ type GetNotificationHttpError = {
  * @param body an object with the body content
  * @throws PatchNotificationHttpError
  */
-declare const patchNotification: (notificationId: string, body: NotificationPatchSchema, options?: ApiCallOptions) => Promise<PatchNotificationHttpResponse>;
+declare function patchNotification(notificationId: string, body: NotificationPatchSchema, options?: ApiCallOptions): Promise<PatchNotificationHttpResponse>;
 type PatchNotificationHttpResponse = {
     data: Meta;
     headers: Headers;

@@ -1,30 +1,36 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/dcaas.ts
-var dataConnectionsDcaas = async (body, options) => invokeFetch("dcaas", {
-  method: "post",
-  pathTemplate: "/api/v1/dcaas/actions/data-connections",
-  body,
-  contentType: "application/json",
-  options
-});
-var dataConnectionsDcaasApiSpecs = async (query, options) => invokeFetch("dcaas", {
-  method: "get",
-  pathTemplate: "/api/v1/dcaas/actions/data-connections/api-specs",
-  query,
-  options
-});
-var dataConnectionsDcaa = async (connectionId, options) => invokeFetch("dcaas", {
-  method: "get",
-  pathTemplate: "/api/v1/dcaas/actions/data-connections/{connectionId}",
-  pathVariables: { connectionId },
-  options
-});
+async function dataConnectionsDcaas(body, options) {
+  return invokeFetch("dcaas", {
+    method: "post",
+    pathTemplate: "/api/v1/dcaas/actions/data-connections",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function dataConnectionsDcaasApiSpecs(query, options) {
+  return invokeFetch("dcaas", {
+    method: "get",
+    pathTemplate: "/api/v1/dcaas/actions/data-connections/api-specs",
+    query,
+    options
+  });
+}
+async function dataConnectionsDcaa(connectionId, options) {
+  return invokeFetch("dcaas", {
+    method: "get",
+    pathTemplate: "/api/v1/dcaas/actions/data-connections/{connectionId}",
+    pathVariables: { connectionId },
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("dcaas");
 }

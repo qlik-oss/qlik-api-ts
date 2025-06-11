@@ -1,30 +1,36 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/data-qualities.ts
-var triggerDataQualitiesComputation = async (body, options) => invokeFetch("data-qualities", {
-  method: "post",
-  pathTemplate: "/api/v1/data-qualities/computations",
-  body,
-  contentType: "application/json",
-  options
-});
-var getDataQualitiesComputation = async (computationId, options) => invokeFetch("data-qualities", {
-  method: "get",
-  pathTemplate: "/api/v1/data-qualities/computations/{computationId}",
-  pathVariables: { computationId },
-  options
-});
-var getDataQualitiesGlobalResults = async (query, options) => invokeFetch("data-qualities", {
-  method: "get",
-  pathTemplate: "/api/v1/data-qualities/global-results",
-  query,
-  options
-});
+async function triggerDataQualitiesComputation(body, options) {
+  return invokeFetch("data-qualities", {
+    method: "post",
+    pathTemplate: "/api/v1/data-qualities/computations",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getDataQualitiesComputation(computationId, options) {
+  return invokeFetch("data-qualities", {
+    method: "get",
+    pathTemplate: "/api/v1/data-qualities/computations/{computationId}",
+    pathVariables: { computationId },
+    options
+  });
+}
+async function getDataQualitiesGlobalResults(query, options) {
+  return invokeFetch("data-qualities", {
+    method: "get",
+    pathTemplate: "/api/v1/data-qualities/global-results",
+    query,
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("data-qualities");
 }

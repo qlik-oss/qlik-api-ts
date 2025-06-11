@@ -1,55 +1,69 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/themes.ts
-var getThemes = async (options) => invokeFetch("themes", {
-  method: "get",
-  pathTemplate: "/api/v1/themes",
-  options
-});
-var uploadTheme = async (body, options) => invokeFetch("themes", {
-  method: "post",
-  pathTemplate: "/api/v1/themes",
-  body,
-  contentType: "multipart/form-data",
-  options
-});
-var deleteTheme = async (id, options) => invokeFetch("themes", {
-  method: "delete",
-  pathTemplate: "/api/v1/themes/{id}",
-  pathVariables: { id },
-  options
-});
-var getTheme = async (id, options) => invokeFetch("themes", {
-  method: "get",
-  pathTemplate: "/api/v1/themes/{id}",
-  pathVariables: { id },
-  options
-});
-var patchTheme = async (id, body, options) => invokeFetch("themes", {
-  method: "patch",
-  pathTemplate: "/api/v1/themes/{id}",
-  pathVariables: { id },
-  body,
-  contentType: "multipart/form-data",
-  options
-});
-var downloadTheme = async (id, options) => invokeFetch("themes", {
-  method: "get",
-  pathTemplate: "/api/v1/themes/{id}/file",
-  pathVariables: { id },
-  options
-});
-var downloadFileFromTheme = async (id, filepath, options) => invokeFetch("themes", {
-  method: "get",
-  pathTemplate: "/api/v1/themes/{id}/file/{filepath}",
-  pathVariables: { id, filepath },
-  options
-});
+async function getThemes(options) {
+  return invokeFetch("themes", {
+    method: "get",
+    pathTemplate: "/api/v1/themes",
+    options
+  });
+}
+async function uploadTheme(body, options) {
+  return invokeFetch("themes", {
+    method: "post",
+    pathTemplate: "/api/v1/themes",
+    body,
+    contentType: "multipart/form-data",
+    options
+  });
+}
+async function deleteTheme(id, options) {
+  return invokeFetch("themes", {
+    method: "delete",
+    pathTemplate: "/api/v1/themes/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function getTheme(id, options) {
+  return invokeFetch("themes", {
+    method: "get",
+    pathTemplate: "/api/v1/themes/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function patchTheme(id, body, options) {
+  return invokeFetch("themes", {
+    method: "patch",
+    pathTemplate: "/api/v1/themes/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "multipart/form-data",
+    options
+  });
+}
+async function downloadTheme(id, options) {
+  return invokeFetch("themes", {
+    method: "get",
+    pathTemplate: "/api/v1/themes/{id}/file",
+    pathVariables: { id },
+    options
+  });
+}
+async function downloadFileFromTheme(id, filepath, options) {
+  return invokeFetch("themes", {
+    method: "get",
+    pathTemplate: "/api/v1/themes/{id}/file/{filepath}",
+    pathVariables: { id, filepath },
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("themes");
 }

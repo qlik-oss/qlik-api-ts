@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type AutomationConnectionChangeOwnerObject = {
     /** The unique identifier of the new owner. */
@@ -140,7 +140,7 @@ type PaginationLink = {
  * @param query an object with query parameters
  * @throws GetAutomationConnectionsHttpError
  */
-declare const getAutomationConnections: (query: {
+declare function getAutomationConnections(query: {
     /** Filters the result based on the specified criteria: name, connectorId, ownerId, or spaceId. */
     filter?: string;
     /** The number of automation connections to retrieve. */
@@ -149,7 +149,7 @@ declare const getAutomationConnections: (query: {
     listAll?: boolean;
     /** The field to sort by, with +- prefix indicating sort order. (?sort=-name => sort on the name field using descending order) */
     sort?: "id" | "name" | "createdAt" | "updatedAt" | "+id" | "+name" | "+createdAt" | "+updatedAt" | "-id" | "-name" | "-createdAt" | "-updatedAt";
-}, options?: ApiCallOptions) => Promise<GetAutomationConnectionsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAutomationConnectionsHttpResponse>;
 type GetAutomationConnectionsHttpResponse = {
     data: AutomationConnectionsList;
     headers: Headers;
@@ -168,7 +168,7 @@ type GetAutomationConnectionsHttpError = {
  * @param body an object with the body content
  * @throws CreateAutomationConnectionHttpError
  */
-declare const createAutomationConnection: (body: AutomationConnectionCreationObject, options?: ApiCallOptions) => Promise<CreateAutomationConnectionHttpResponse>;
+declare function createAutomationConnection(body: AutomationConnectionCreationObject, options?: ApiCallOptions): Promise<CreateAutomationConnectionHttpResponse>;
 type CreateAutomationConnectionHttpResponse = {
     data: AutomationConnectionDetailObject;
     headers: Headers;
@@ -186,10 +186,10 @@ type CreateAutomationConnectionHttpError = {
  * @param query an object with query parameters
  * @throws DeleteAutomationConnectionHttpError
  */
-declare const deleteAutomationConnection: (id: string, query: {
+declare function deleteAutomationConnection(id: string, query: {
     /** When true, the automation connection will be deleted regardless of its usage by any automations. */
     forced?: boolean;
-}, options?: ApiCallOptions) => Promise<DeleteAutomationConnectionHttpResponse>;
+}, options?: ApiCallOptions): Promise<DeleteAutomationConnectionHttpResponse>;
 type DeleteAutomationConnectionHttpResponse = {
     data: void;
     headers: Headers;
@@ -206,7 +206,7 @@ type DeleteAutomationConnectionHttpError = {
  * @param id The unique identifier for the automation connection.
  * @throws GetAutomationConnectionHttpError
  */
-declare const getAutomationConnection: (id: string, options?: ApiCallOptions) => Promise<GetAutomationConnectionHttpResponse>;
+declare function getAutomationConnection(id: string, options?: ApiCallOptions): Promise<GetAutomationConnectionHttpResponse>;
 type GetAutomationConnectionHttpResponse = {
     data: AutomationConnectionDetailObject;
     headers: Headers;
@@ -224,7 +224,7 @@ type GetAutomationConnectionHttpError = {
  * @param body an object with the body content
  * @throws UpdateAutomationConnectionHttpError
  */
-declare const updateAutomationConnection: (id: string, body: AutomationConnectionPutRequestObject, options?: ApiCallOptions) => Promise<UpdateAutomationConnectionHttpResponse>;
+declare function updateAutomationConnection(id: string, body: AutomationConnectionPutRequestObject, options?: ApiCallOptions): Promise<UpdateAutomationConnectionHttpResponse>;
 type UpdateAutomationConnectionHttpResponse = {
     data: AutomationConnectionDetailObject;
     headers: Headers;
@@ -242,7 +242,7 @@ type UpdateAutomationConnectionHttpError = {
  * @param body an object with the body content
  * @throws ChangeOwnerAutomationConnectionHttpError
  */
-declare const changeOwnerAutomationConnection: (id: string, body: AutomationConnectionChangeOwnerObject, options?: ApiCallOptions) => Promise<ChangeOwnerAutomationConnectionHttpResponse>;
+declare function changeOwnerAutomationConnection(id: string, body: AutomationConnectionChangeOwnerObject, options?: ApiCallOptions): Promise<ChangeOwnerAutomationConnectionHttpResponse>;
 type ChangeOwnerAutomationConnectionHttpResponse = {
     data: void;
     headers: Headers;
@@ -260,7 +260,7 @@ type ChangeOwnerAutomationConnectionHttpError = {
  * @param body an object with the body content
  * @throws ChangeSpaceAutomationConnectionHttpError
  */
-declare const changeSpaceAutomationConnection: (id: string, body: AutomationConnectionChangeSpaceObject, options?: ApiCallOptions) => Promise<ChangeSpaceAutomationConnectionHttpResponse>;
+declare function changeSpaceAutomationConnection(id: string, body: AutomationConnectionChangeSpaceObject, options?: ApiCallOptions): Promise<ChangeSpaceAutomationConnectionHttpResponse>;
 type ChangeSpaceAutomationConnectionHttpResponse = {
     data: void;
     headers: Headers;
@@ -277,7 +277,7 @@ type ChangeSpaceAutomationConnectionHttpError = {
  * @param id The unique identifier for the automation connection.
  * @throws CheckAutomationConnectionHttpError
  */
-declare const checkAutomationConnection: (id: string, options?: ApiCallOptions) => Promise<CheckAutomationConnectionHttpResponse>;
+declare function checkAutomationConnection(id: string, options?: ApiCallOptions): Promise<CheckAutomationConnectionHttpResponse>;
 type CheckAutomationConnectionHttpResponse = {
     data: AutomationConnectionCheckObject;
     headers: Headers;

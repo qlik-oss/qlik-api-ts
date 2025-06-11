@@ -1,83 +1,105 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/conditions.ts
-var createCondition = async (body, options) => invokeFetch("conditions", {
-  method: "post",
-  pathTemplate: "/api/v1/conditions",
-  body,
-  contentType: "application/json",
-  options
-});
-var createConditionPreview = async (body, options) => invokeFetch("conditions", {
-  method: "post",
-  pathTemplate: "/api/v1/conditions/previews",
-  body,
-  contentType: "application/json",
-  options
-});
-var getConditionPreview = async (id, options) => invokeFetch("conditions", {
-  method: "get",
-  pathTemplate: "/api/v1/conditions/previews/{id}",
-  pathVariables: { id },
-  options
-});
-var getConditionsSettings = async (options) => invokeFetch("conditions", {
-  method: "get",
-  pathTemplate: "/api/v1/conditions/settings",
-  options
-});
-var setConditionsSettings = async (body, options) => invokeFetch("conditions", {
-  method: "put",
-  pathTemplate: "/api/v1/conditions/settings",
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteCondition = async (id, options) => invokeFetch("conditions", {
-  method: "delete",
-  pathTemplate: "/api/v1/conditions/{id}",
-  pathVariables: { id },
-  options
-});
-var getCondition = async (id, options) => invokeFetch("conditions", {
-  method: "get",
-  pathTemplate: "/api/v1/conditions/{id}",
-  pathVariables: { id },
-  options
-});
-var patchCondition = async (id, body, options) => invokeFetch("conditions", {
-  method: "patch",
-  pathTemplate: "/api/v1/conditions/{id}",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
-var createConditionEvaluation = async (id, body, options) => invokeFetch("conditions", {
-  method: "post",
-  pathTemplate: "/api/v1/conditions/{id}/evaluations",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteConditionEvaluation = async (id, evaluationId, options) => invokeFetch("conditions", {
-  method: "delete",
-  pathTemplate: "/api/v1/conditions/{id}/evaluations/{evaluationId}",
-  pathVariables: { id, evaluationId },
-  options
-});
-var getConditionEvaluation = async (id, evaluationId, options) => invokeFetch("conditions", {
-  method: "get",
-  pathTemplate: "/api/v1/conditions/{id}/evaluations/{evaluationId}",
-  pathVariables: { id, evaluationId },
-  options
-});
+async function createCondition(body, options) {
+  return invokeFetch("conditions", {
+    method: "post",
+    pathTemplate: "/api/v1/conditions",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function createConditionPreview(body, options) {
+  return invokeFetch("conditions", {
+    method: "post",
+    pathTemplate: "/api/v1/conditions/previews",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getConditionPreview(id, options) {
+  return invokeFetch("conditions", {
+    method: "get",
+    pathTemplate: "/api/v1/conditions/previews/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function getConditionsSettings(options) {
+  return invokeFetch("conditions", {
+    method: "get",
+    pathTemplate: "/api/v1/conditions/settings",
+    options
+  });
+}
+async function setConditionsSettings(body, options) {
+  return invokeFetch("conditions", {
+    method: "put",
+    pathTemplate: "/api/v1/conditions/settings",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteCondition(id, options) {
+  return invokeFetch("conditions", {
+    method: "delete",
+    pathTemplate: "/api/v1/conditions/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function getCondition(id, options) {
+  return invokeFetch("conditions", {
+    method: "get",
+    pathTemplate: "/api/v1/conditions/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function patchCondition(id, body, options) {
+  return invokeFetch("conditions", {
+    method: "patch",
+    pathTemplate: "/api/v1/conditions/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function createConditionEvaluation(id, body, options) {
+  return invokeFetch("conditions", {
+    method: "post",
+    pathTemplate: "/api/v1/conditions/{id}/evaluations",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteConditionEvaluation(id, evaluationId, options) {
+  return invokeFetch("conditions", {
+    method: "delete",
+    pathTemplate: "/api/v1/conditions/{id}/evaluations/{evaluationId}",
+    pathVariables: { id, evaluationId },
+    options
+  });
+}
+async function getConditionEvaluation(id, evaluationId, options) {
+  return invokeFetch("conditions", {
+    method: "get",
+    pathTemplate: "/api/v1/conditions/{id}/evaluations/{evaluationId}",
+    pathVariables: { id, evaluationId },
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("conditions");
 }

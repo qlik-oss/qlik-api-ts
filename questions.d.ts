@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type Analysis = "breakdown" | "changePoint" | "comparison" | "contribution" | "correlation" | "fact" | "mutualInfo" | "rank" | "spike" | "trend" | "values";
 type AnalysisGroup = "anomaly" | "brekadown" | "comparison" | "correl" | "fact" | "list" | "mutualInfo" | "rank";
@@ -287,7 +287,7 @@ type RenderVisualization = {
  * @param body an object with the body content
  * @throws AskQuestionsHttpError
  */
-declare const askQuestions: (body: QueryCreate, options?: ApiCallOptions) => Promise<AskQuestionsHttpResponse>;
+declare function askQuestions(body: QueryCreate, options?: ApiCallOptions): Promise<AskQuestionsHttpResponse>;
 type AskQuestionsHttpResponse = AskQuestions200HttpResponse | AskQuestions201HttpResponse;
 type AskQuestions200HttpResponse = {
     data: QueryNotCreated;
@@ -311,14 +311,14 @@ type AskQuestionsHttpError = {
  * @param body an object with the body content
  * @throws FilterQuestionsHttpError
  */
-declare const filterQuestions: (query: {
+declare function filterQuestions(query: {
     /** The preferred number of entries returned */
     limit?: number;
     /** A cursor pointing to the page of data to retrieve. */
     page?: string;
     /** A single field from the data model on which to sort the response. The '+' or '-' operator may be used to specify ascending or desending order. */
     sort?: "createdAt" | "updatedAt" | "+createdAt" | "+updatedAt" | "-createdAt" | "-updatedAt";
-}, body: NLMetricsRequest, options?: ApiCallOptions) => Promise<FilterQuestionsHttpResponse>;
+}, body: NLMetricsRequest, options?: ApiCallOptions): Promise<FilterQuestionsHttpResponse>;
 type FilterQuestionsHttpResponse = {
     data: NLMetricsResponse;
     headers: Headers;

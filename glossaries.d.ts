@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * A JSON Patch document as defined in https://tools.ietf.org/html/rfc6902.
@@ -452,7 +452,7 @@ type TermsResult = {
  * @param query an object with query parameters
  * @throws GetGlossariesHttpError
  */
-declare const getGlossaries: (query: {
+declare function getGlossaries(query: {
     /** Optional parameter to request total count for query */
     countTotal?: boolean;
     /** The number of glossaries to get. */
@@ -463,7 +463,7 @@ declare const getGlossaries: (query: {
     prev?: string;
     /** Optional resource field name to sort on, eg. name. Can be prefixed with +/- to determine order, defaults to (+) ascending. */
     sort?: "name" | "+name" | "-name" | "description" | "+description" | "-description";
-}, options?: ApiCallOptions) => Promise<GetGlossariesHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetGlossariesHttpResponse>;
 type GetGlossariesHttpResponse = {
     data: GlossariesResult;
     headers: Headers;
@@ -482,7 +482,7 @@ type GetGlossariesHttpError = {
  * @param body an object with the body content
  * @throws CreateGlossaryHttpError
  */
-declare const createGlossary: (body: CreateGlossary, options?: ApiCallOptions) => Promise<CreateGlossaryHttpResponse>;
+declare function createGlossary(body: CreateGlossary, options?: ApiCallOptions): Promise<CreateGlossaryHttpResponse>;
 type CreateGlossaryHttpResponse = {
     data: Glossary;
     headers: Headers;
@@ -501,14 +501,14 @@ type CreateGlossaryHttpError = {
  * @param body an object with the body content
  * @throws ImportGlossaryHttpError
  */
-declare const importGlossary: (query: {
+declare function importGlossary(query: {
     /** Appending the current importer user as steward to categories/terms where no steward is defined/not match the identity service. */
     importerAsFallbackSteward?: boolean;
     /** Using email in the steward fields to lookup userIds in the identity service */
     lookupUserOnEmail?: boolean;
     /** The spaceId (leave blank or omit for personal) */
     spaceId?: string;
-}, body: QlikGlossary, options?: ApiCallOptions) => Promise<ImportGlossaryHttpResponse>;
+}, body: QlikGlossary, options?: ApiCallOptions): Promise<ImportGlossaryHttpResponse>;
 type ImportGlossaryHttpResponse = {
     data: Glossary;
     headers: Headers;
@@ -536,7 +536,7 @@ type ImportGlossary404HttpError = {
  * @param id The id of the glossary to delete.
  * @throws DeleteGlossaryHttpError
  */
-declare const deleteGlossary: (id: string, options?: ApiCallOptions) => Promise<DeleteGlossaryHttpResponse>;
+declare function deleteGlossary(id: string, options?: ApiCallOptions): Promise<DeleteGlossaryHttpResponse>;
 type DeleteGlossaryHttpResponse = {
     data: void;
     headers: Headers;
@@ -553,7 +553,7 @@ type DeleteGlossaryHttpError = {
  * @param id The id of the glossary to retrieve.
  * @throws GetGlossaryHttpError
  */
-declare const getGlossary: (id: string, options?: ApiCallOptions) => Promise<GetGlossaryHttpResponse>;
+declare function getGlossary(id: string, options?: ApiCallOptions): Promise<GetGlossaryHttpResponse>;
 type GetGlossaryHttpResponse = {
     data: Glossary;
     headers: Headers;
@@ -571,7 +571,7 @@ type GetGlossaryHttpError = {
  * @param body an object with the body content
  * @throws PatchGlossaryHttpError
  */
-declare const patchGlossary: (id: string, body: JSONPatchArray, options?: ApiCallOptions) => Promise<PatchGlossaryHttpResponse>;
+declare function patchGlossary(id: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchGlossaryHttpResponse>;
 type PatchGlossaryHttpResponse = {
     data: void;
     headers: Headers;
@@ -589,7 +589,7 @@ type PatchGlossaryHttpError = {
  * @param body an object with the body content
  * @throws UpdateGlossaryHttpError
  */
-declare const updateGlossary: (id: string, body: CreateGlossary, options?: ApiCallOptions) => Promise<UpdateGlossaryHttpResponse>;
+declare function updateGlossary(id: string, body: CreateGlossary, options?: ApiCallOptions): Promise<UpdateGlossaryHttpResponse>;
 type UpdateGlossaryHttpResponse = {
     data: Glossary;
     headers: Headers;
@@ -606,7 +606,7 @@ type UpdateGlossaryHttpError = {
  * @param id The glossary id.
  * @throws ExportGlossaryHttpError
  */
-declare const exportGlossary: (id: string, options?: ApiCallOptions) => Promise<ExportGlossaryHttpResponse>;
+declare function exportGlossary(id: string, options?: ApiCallOptions): Promise<ExportGlossaryHttpResponse>;
 type ExportGlossaryHttpResponse = {
     data: ExportGlossary;
     headers: Headers;
@@ -624,7 +624,7 @@ type ExportGlossaryHttpError = {
  * @param query an object with query parameters
  * @throws GetGlossaryCategoriesHttpError
  */
-declare const getGlossaryCategories: (id: string, query: {
+declare function getGlossaryCategories(id: string, query: {
     /** Optional parameter to request total count for query */
     countTotal?: boolean;
     /** The number of terms to get. */
@@ -635,7 +635,7 @@ declare const getGlossaryCategories: (id: string, query: {
     prev?: string;
     /** Optional resource field name to sort on, eg. name. Can be prefixed with +/- to determine order, defaults to (+) ascending. */
     sort?: "description" | "+description" | "-description" | "name" | "+name" | "-name" | "update" | "+update" | "-update";
-}, options?: ApiCallOptions) => Promise<GetGlossaryCategoriesHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetGlossaryCategoriesHttpResponse>;
 type GetGlossaryCategoriesHttpResponse = {
     data: CategoriesResult;
     headers: Headers;
@@ -655,7 +655,7 @@ type GetGlossaryCategoriesHttpError = {
  * @param body an object with the body content
  * @throws CreateGlossaryCategoryHttpError
  */
-declare const createGlossaryCategory: (id: string, body: CreateCategory, options?: ApiCallOptions) => Promise<CreateGlossaryCategoryHttpResponse>;
+declare function createGlossaryCategory(id: string, body: CreateCategory, options?: ApiCallOptions): Promise<CreateGlossaryCategoryHttpResponse>;
 type CreateGlossaryCategoryHttpResponse = {
     data: Category;
     headers: Headers;
@@ -673,7 +673,7 @@ type CreateGlossaryCategoryHttpError = {
  * @param categoryId The id for the category to delete. All subcategories are also deleted
  * @throws DeleteGlossaryCategoryHttpError
  */
-declare const deleteGlossaryCategory: (id: string, categoryId: string, options?: ApiCallOptions) => Promise<DeleteGlossaryCategoryHttpResponse>;
+declare function deleteGlossaryCategory(id: string, categoryId: string, options?: ApiCallOptions): Promise<DeleteGlossaryCategoryHttpResponse>;
 type DeleteGlossaryCategoryHttpResponse = {
     data: void;
     headers: Headers;
@@ -691,7 +691,7 @@ type DeleteGlossaryCategoryHttpError = {
  * @param categoryId The category id.
  * @throws GetGlossaryCategoryHttpError
  */
-declare const getGlossaryCategory: (id: string, categoryId: string, options?: ApiCallOptions) => Promise<GetGlossaryCategoryHttpResponse>;
+declare function getGlossaryCategory(id: string, categoryId: string, options?: ApiCallOptions): Promise<GetGlossaryCategoryHttpResponse>;
 type GetGlossaryCategoryHttpResponse = {
     data: Category;
     headers: Headers;
@@ -710,7 +710,7 @@ type GetGlossaryCategoryHttpError = {
  * @param body an object with the body content
  * @throws PatchGlossaryCategoryHttpError
  */
-declare const patchGlossaryCategory: (id: string, categoryId: string, body: JSONPatchArray, options?: ApiCallOptions) => Promise<PatchGlossaryCategoryHttpResponse>;
+declare function patchGlossaryCategory(id: string, categoryId: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchGlossaryCategoryHttpResponse>;
 type PatchGlossaryCategoryHttpResponse = {
     data: void;
     headers: Headers;
@@ -729,7 +729,7 @@ type PatchGlossaryCategoryHttpError = {
  * @param body an object with the body content
  * @throws UpdateGlossaryCategoryHttpError
  */
-declare const updateGlossaryCategory: (id: string, categoryId: string, body: CreateCategory, options?: ApiCallOptions) => Promise<UpdateGlossaryCategoryHttpResponse>;
+declare function updateGlossaryCategory(id: string, categoryId: string, body: CreateCategory, options?: ApiCallOptions): Promise<UpdateGlossaryCategoryHttpResponse>;
 type UpdateGlossaryCategoryHttpResponse = {
     data: Category;
     headers: Headers;
@@ -747,7 +747,7 @@ type UpdateGlossaryCategoryHttpError = {
  * @param query an object with query parameters
  * @throws GetGlossaryTermsHttpError
  */
-declare const getGlossaryTerms: (id: string, query: {
+declare function getGlossaryTerms(id: string, query: {
     /** Optional parameter to request total count for query */
     countTotal?: boolean;
     /** Optional SCIM filter to be used to filter terms
@@ -771,7 +771,7 @@ declare const getGlossaryTerms: (id: string, query: {
     prev?: string;
     /** Optional resource field name to sort on, eg. name. Can be prefixed with +/- to determine order, defaults to (+) ascending. */
     sort?: "abbreviation" | "+abbreviation" | "-abbreviation" | "description" | "+description" | "-description" | "name" | "+name" | "-name" | "status" | "+status" | "-status" | "updated" | "+updated" | "-updated";
-}, options?: ApiCallOptions) => Promise<GetGlossaryTermsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetGlossaryTermsHttpResponse>;
 type GetGlossaryTermsHttpResponse = {
     data: TermsResult;
     headers: Headers;
@@ -791,7 +791,7 @@ type GetGlossaryTermsHttpError = {
  * @param body an object with the body content
  * @throws CreateGlossaryTermHttpError
  */
-declare const createGlossaryTerm: (id: string, body: CreateTerm, options?: ApiCallOptions) => Promise<CreateGlossaryTermHttpResponse>;
+declare function createGlossaryTerm(id: string, body: CreateTerm, options?: ApiCallOptions): Promise<CreateGlossaryTermHttpResponse>;
 type CreateGlossaryTermHttpResponse = {
     data: Term;
     headers: Headers;
@@ -809,7 +809,7 @@ type CreateGlossaryTermHttpError = {
  * @param termId The term id.
  * @throws DeleteGlossaryTermHttpError
  */
-declare const deleteGlossaryTerm: (id: string, termId: string, options?: ApiCallOptions) => Promise<DeleteGlossaryTermHttpResponse>;
+declare function deleteGlossaryTerm(id: string, termId: string, options?: ApiCallOptions): Promise<DeleteGlossaryTermHttpResponse>;
 type DeleteGlossaryTermHttpResponse = {
     data: void;
     headers: Headers;
@@ -827,7 +827,7 @@ type DeleteGlossaryTermHttpError = {
  * @param termId The term id.
  * @throws GetGlossaryTermHttpError
  */
-declare const getGlossaryTerm: (id: string, termId: string, options?: ApiCallOptions) => Promise<GetGlossaryTermHttpResponse>;
+declare function getGlossaryTerm(id: string, termId: string, options?: ApiCallOptions): Promise<GetGlossaryTermHttpResponse>;
 type GetGlossaryTermHttpResponse = {
     data: Term;
     headers: Headers;
@@ -846,7 +846,7 @@ type GetGlossaryTermHttpError = {
  * @param body an object with the body content
  * @throws PatchGlossaryTermHttpError
  */
-declare const patchGlossaryTerm: (id: string, termId: string, body: JSONPatchArray, options?: ApiCallOptions) => Promise<PatchGlossaryTermHttpResponse>;
+declare function patchGlossaryTerm(id: string, termId: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchGlossaryTermHttpResponse>;
 type PatchGlossaryTermHttpResponse = {
     data: void;
     headers: Headers;
@@ -865,7 +865,7 @@ type PatchGlossaryTermHttpError = {
  * @param body an object with the body content
  * @throws UpdateGlossaryTermHttpError
  */
-declare const updateGlossaryTerm: (id: string, termId: string, body: CreateTerm, options?: ApiCallOptions) => Promise<UpdateGlossaryTermHttpResponse>;
+declare function updateGlossaryTerm(id: string, termId: string, body: CreateTerm, options?: ApiCallOptions): Promise<UpdateGlossaryTermHttpResponse>;
 type UpdateGlossaryTermHttpResponse = {
     data: Term;
     headers: Headers;
@@ -884,10 +884,10 @@ type UpdateGlossaryTermHttpError = {
  * @param query an object with query parameters
  * @throws ChangeGlossaryTermStatusHttpError
  */
-declare const changeGlossaryTermStatus: (id: string, termId: string, query: {
+declare function changeGlossaryTermStatus(id: string, termId: string, query: {
     /** The status to update to. */
     status: "draft" | "verified" | "deprecated";
-}, options?: ApiCallOptions) => Promise<ChangeGlossaryTermStatusHttpResponse>;
+}, options?: ApiCallOptions): Promise<ChangeGlossaryTermStatusHttpResponse>;
 type ChangeGlossaryTermStatusHttpResponse = {
     data: Term;
     headers: Headers;
@@ -906,7 +906,7 @@ type ChangeGlossaryTermStatusHttpError = {
  * @param query an object with query parameters
  * @throws GetGlossaryTermLinksHttpError
  */
-declare const getGlossaryTermLinks: (id: string, termId: string, query: {
+declare function getGlossaryTermLinks(id: string, termId: string, query: {
     /** Optional parameter to request total count for query */
     countTotal?: boolean;
     /** Optional SCIM filter to be used to filter terms */
@@ -919,7 +919,7 @@ declare const getGlossaryTermLinks: (id: string, termId: string, query: {
     prev?: string;
     /** Optional resource field name to sort on, eg. name. Can be prefixed with +/- to determine order, defaults to (+) ascending. */
     sort?: "type" | "+type" | "-type" | "subtype" | "+subtype" | "-subtype" | "created" | "+created" | "-created";
-}, options?: ApiCallOptions) => Promise<GetGlossaryTermLinksHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetGlossaryTermLinksHttpResponse>;
 type GetGlossaryTermLinksHttpResponse = {
     data: LinksResult;
     headers: Headers;
@@ -940,7 +940,7 @@ type GetGlossaryTermLinksHttpError = {
  * @param body an object with the body content
  * @throws CreateGlossaryTermLinkHttpError
  */
-declare const createGlossaryTermLink: (id: string, termId: string, body: TermCreateLinksTo, options?: ApiCallOptions) => Promise<CreateGlossaryTermLinkHttpResponse>;
+declare function createGlossaryTermLink(id: string, termId: string, body: TermCreateLinksTo, options?: ApiCallOptions): Promise<CreateGlossaryTermLinkHttpResponse>;
 type CreateGlossaryTermLinkHttpResponse = {
     data: TermLinksTo;
     headers: Headers;
@@ -959,7 +959,7 @@ type CreateGlossaryTermLinkHttpError = {
  * @param query an object with query parameters
  * @throws GetGlossaryTermRevisionsHttpError
  */
-declare const getGlossaryTermRevisions: (id: string, termId: string, query: {
+declare function getGlossaryTermRevisions(id: string, termId: string, query: {
     /** Optional parameter to request total count for query */
     countTotal?: boolean;
     /** The number of terms to get. */
@@ -970,7 +970,7 @@ declare const getGlossaryTermRevisions: (id: string, termId: string, query: {
     prev?: string;
     /** Optional resource field name to sort on, eg. name. Can be prefixed with +/- to determine order, defaults to (+) ascending. */
     sort?: "update" | "+update" | "-update";
-}, options?: ApiCallOptions) => Promise<GetGlossaryTermRevisionsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetGlossaryTermRevisionsHttpResponse>;
 type GetGlossaryTermRevisionsHttpResponse = {
     data: TermsResult;
     headers: Headers;

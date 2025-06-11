@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type Error = {
     code: string;
@@ -102,7 +102,7 @@ type Tasks = {
  * @param query an object with query parameters
  * @throws GetReloadTasksHttpError
  */
-declare const getReloadTasks: (query: {
+declare function getReloadTasks(query: {
     /** The case sensitive string used to search for a task by app ID. */
     appId?: string;
     /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
@@ -113,7 +113,7 @@ declare const getReloadTasks: (query: {
     partial?: boolean;
     /** The cursor to the previous page of resources. Provide either the next or prev cursor, but not both. */
     prev?: string;
-}, options?: ApiCallOptions) => Promise<GetReloadTasksHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetReloadTasksHttpResponse>;
 type GetReloadTasksHttpResponse = {
     data: Tasks;
     headers: Headers;
@@ -132,7 +132,7 @@ type GetReloadTasksHttpError = {
  * @param body an object with the body content
  * @throws CreateReloadTaskHttpError
  */
-declare const createReloadTask: (body: PostTaskBody, options?: ApiCallOptions) => Promise<CreateReloadTaskHttpResponse>;
+declare function createReloadTask(body: PostTaskBody, options?: ApiCallOptions): Promise<CreateReloadTaskHttpResponse>;
 type CreateReloadTaskHttpResponse = {
     data: Task;
     headers: Headers;
@@ -149,7 +149,7 @@ type CreateReloadTaskHttpError = {
  * @param taskId The unique identifier of the task.
  * @throws DeleteReloadTaskHttpError
  */
-declare const deleteReloadTask: (taskId: string, options?: ApiCallOptions) => Promise<DeleteReloadTaskHttpResponse>;
+declare function deleteReloadTask(taskId: string, options?: ApiCallOptions): Promise<DeleteReloadTaskHttpResponse>;
 type DeleteReloadTaskHttpResponse = {
     data: void;
     headers: Headers;
@@ -166,7 +166,7 @@ type DeleteReloadTaskHttpError = {
  * @param taskId The unique identifier of the task.
  * @throws GetReloadTaskHttpError
  */
-declare const getReloadTask: (taskId: string, options?: ApiCallOptions) => Promise<GetReloadTaskHttpResponse>;
+declare function getReloadTask(taskId: string, options?: ApiCallOptions): Promise<GetReloadTaskHttpResponse>;
 type GetReloadTaskHttpResponse = {
     data: Task;
     headers: Headers;
@@ -184,7 +184,7 @@ type GetReloadTaskHttpError = {
  * @param body an object with the body content
  * @throws UpdateReloadTaskHttpError
  */
-declare const updateReloadTask: (taskId: string, body: PutTaskBody, options?: ApiCallOptions) => Promise<UpdateReloadTaskHttpResponse>;
+declare function updateReloadTask(taskId: string, body: PutTaskBody, options?: ApiCallOptions): Promise<UpdateReloadTaskHttpResponse>;
 type UpdateReloadTaskHttpResponse = {
     data: Task;
     headers: Headers;

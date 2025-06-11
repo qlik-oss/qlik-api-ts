@@ -1,55 +1,67 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/data-sets.ts
-var deleteDataSets = async (body, options) => invokeFetch("data-sets", {
-  method: "delete",
-  pathTemplate: "/api/v1/data-sets",
-  body,
-  contentType: "application/json",
-  options
-});
-var createDataSet = async (body, options) => invokeFetch("data-sets", {
-  method: "post",
-  pathTemplate: "/api/v1/data-sets",
-  body,
-  contentType: "application/json",
-  options
-});
-var getDataSet = async (dataSetId, query, options) => invokeFetch("data-sets", {
-  method: "get",
-  pathTemplate: "/api/v1/data-sets/{data-set-id}",
-  pathVariables: { "data-set-id": dataSetId },
-  query,
-  options
-});
-var patchDataSet = async (dataSetId, body, options) => invokeFetch("data-sets", {
-  method: "patch",
-  pathTemplate: "/api/v1/data-sets/{data-set-id}",
-  pathVariables: { "data-set-id": dataSetId },
-  body,
-  contentType: "application/json",
-  options
-});
-var updateDataSet = async (dataSetId, body, options) => invokeFetch("data-sets", {
-  method: "put",
-  pathTemplate: "/api/v1/data-sets/{data-set-id}",
-  pathVariables: { "data-set-id": dataSetId },
-  body,
-  contentType: "application/json",
-  options
-});
-var getDataSetProfiles = async (dataSetId, query, options) => invokeFetch("data-sets", {
-  method: "get",
-  pathTemplate: "/api/v1/data-sets/{data-set-id}/profiles",
-  pathVariables: { "data-set-id": dataSetId },
-  query,
-  options
-});
+async function deleteDataSets(body, options) {
+  return invokeFetch("data-sets", {
+    method: "delete",
+    pathTemplate: "/api/v1/data-sets",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function createDataSet(body, options) {
+  return invokeFetch("data-sets", {
+    method: "post",
+    pathTemplate: "/api/v1/data-sets",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getDataSet(dataSetId, query, options) {
+  return invokeFetch("data-sets", {
+    method: "get",
+    pathTemplate: "/api/v1/data-sets/{data-set-id}",
+    pathVariables: { "data-set-id": dataSetId },
+    query,
+    options
+  });
+}
+async function patchDataSet(dataSetId, body, options) {
+  return invokeFetch("data-sets", {
+    method: "patch",
+    pathTemplate: "/api/v1/data-sets/{data-set-id}",
+    pathVariables: { "data-set-id": dataSetId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function updateDataSet(dataSetId, body, options) {
+  return invokeFetch("data-sets", {
+    method: "put",
+    pathTemplate: "/api/v1/data-sets/{data-set-id}",
+    pathVariables: { "data-set-id": dataSetId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getDataSetProfiles(dataSetId, query, options) {
+  return invokeFetch("data-sets", {
+    method: "get",
+    pathTemplate: "/api/v1/data-sets/{data-set-id}/profiles",
+    pathVariables: { "data-set-id": dataSetId },
+    query,
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("data-sets");
 }

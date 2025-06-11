@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type BatchIdDto = {
     ids?: string[];
@@ -246,7 +246,7 @@ type UserTag = {
  * @param body an object with the body content
  * @throws DeleteDataSetsHttpError
  */
-declare const deleteDataSets: (body: BatchIdDto, options?: ApiCallOptions) => Promise<DeleteDataSetsHttpResponse>;
+declare function deleteDataSets(body: BatchIdDto, options?: ApiCallOptions): Promise<DeleteDataSetsHttpResponse>;
 type DeleteDataSetsHttpResponse = {
     data: void;
     headers: Headers;
@@ -263,7 +263,7 @@ type DeleteDataSetsHttpError = {
  * @param body an object with the body content
  * @throws CreateDataSetHttpError
  */
-declare const createDataSet: (body: DataSet, options?: ApiCallOptions) => Promise<CreateDataSetHttpResponse>;
+declare function createDataSet(body: DataSet, options?: ApiCallOptions): Promise<CreateDataSetHttpResponse>;
 type CreateDataSetHttpResponse = {
     data: DataSet;
     headers: Headers;
@@ -281,10 +281,10 @@ type CreateDataSetHttpError = {
  * @param query an object with query parameters
  * @throws GetDataSetHttpError
  */
-declare const getDataSet: (dataSetId: string, query: {
+declare function getDataSet(dataSetId: string, query: {
     /** Comma-separated fields to return in the response. */
     projections?: string[];
-}, options?: ApiCallOptions) => Promise<GetDataSetHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDataSetHttpResponse>;
 type GetDataSetHttpResponse = {
     data: DataSet;
     headers: Headers;
@@ -302,7 +302,7 @@ type GetDataSetHttpError = {
  * @param body an object with the body content
  * @throws PatchDataSetHttpError
  */
-declare const patchDataSet: (dataSetId: string, body: JsonPatch[], options?: ApiCallOptions) => Promise<PatchDataSetHttpResponse>;
+declare function patchDataSet(dataSetId: string, body: JsonPatch[], options?: ApiCallOptions): Promise<PatchDataSetHttpResponse>;
 type PatchDataSetHttpResponse = {
     data: DataSet;
     headers: Headers;
@@ -320,7 +320,7 @@ type PatchDataSetHttpError = {
  * @param body an object with the body content
  * @throws UpdateDataSetHttpError
  */
-declare const updateDataSet: (dataSetId: string, body: DataSet, options?: ApiCallOptions) => Promise<UpdateDataSetHttpResponse>;
+declare function updateDataSet(dataSetId: string, body: DataSet, options?: ApiCallOptions): Promise<UpdateDataSetHttpResponse>;
 type UpdateDataSetHttpResponse = {
     data: DataSet;
     headers: Headers;
@@ -338,7 +338,7 @@ type UpdateDataSetHttpError = {
  * @param query an object with query parameters
  * @throws GetDataSetProfilesHttpError
  */
-declare const getDataSetProfiles: (dataSetId: string, query: {
+declare function getDataSetProfiles(dataSetId: string, query: {
     /** Comma-separated data connection IDs. */
     dataConnectionIds?: string[];
     /** Page size limit. */
@@ -347,7 +347,7 @@ declare const getDataSetProfiles: (dataSetId: string, query: {
     /** Comma-separated fields to return in the response. */
     projections?: string[];
     sort?: string[];
-}, options?: ApiCallOptions) => Promise<GetDataSetProfilesHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDataSetProfilesHttpResponse>;
 type GetDataSetProfilesHttpResponse = {
     data: PageDataSetProfile;
     headers: Headers;

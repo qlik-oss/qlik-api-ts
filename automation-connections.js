@@ -1,67 +1,83 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/automation-connections.ts
-var getAutomationConnections = async (query, options) => invokeFetch("automation-connections", {
-  method: "get",
-  pathTemplate: "/api/v1/automation-connections",
-  query,
-  options
-});
-var createAutomationConnection = async (body, options) => invokeFetch("automation-connections", {
-  method: "post",
-  pathTemplate: "/api/v1/automation-connections",
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteAutomationConnection = async (id, query, options) => invokeFetch("automation-connections", {
-  method: "delete",
-  pathTemplate: "/api/v1/automation-connections/{id}",
-  pathVariables: { id },
-  query,
-  options
-});
-var getAutomationConnection = async (id, options) => invokeFetch("automation-connections", {
-  method: "get",
-  pathTemplate: "/api/v1/automation-connections/{id}",
-  pathVariables: { id },
-  options
-});
-var updateAutomationConnection = async (id, body, options) => invokeFetch("automation-connections", {
-  method: "put",
-  pathTemplate: "/api/v1/automation-connections/{id}",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
-var changeOwnerAutomationConnection = async (id, body, options) => invokeFetch("automation-connections", {
-  method: "post",
-  pathTemplate: "/api/v1/automation-connections/{id}/actions/change-owner",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
-var changeSpaceAutomationConnection = async (id, body, options) => invokeFetch("automation-connections", {
-  method: "post",
-  pathTemplate: "/api/v1/automation-connections/{id}/actions/change-space",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
-var checkAutomationConnection = async (id, options) => invokeFetch("automation-connections", {
-  method: "post",
-  pathTemplate: "/api/v1/automation-connections/{id}/actions/check",
-  pathVariables: { id },
-  options
-});
+async function getAutomationConnections(query, options) {
+  return invokeFetch("automation-connections", {
+    method: "get",
+    pathTemplate: "/api/v1/automation-connections",
+    query,
+    options
+  });
+}
+async function createAutomationConnection(body, options) {
+  return invokeFetch("automation-connections", {
+    method: "post",
+    pathTemplate: "/api/v1/automation-connections",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteAutomationConnection(id, query, options) {
+  return invokeFetch("automation-connections", {
+    method: "delete",
+    pathTemplate: "/api/v1/automation-connections/{id}",
+    pathVariables: { id },
+    query,
+    options
+  });
+}
+async function getAutomationConnection(id, options) {
+  return invokeFetch("automation-connections", {
+    method: "get",
+    pathTemplate: "/api/v1/automation-connections/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function updateAutomationConnection(id, body, options) {
+  return invokeFetch("automation-connections", {
+    method: "put",
+    pathTemplate: "/api/v1/automation-connections/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function changeOwnerAutomationConnection(id, body, options) {
+  return invokeFetch("automation-connections", {
+    method: "post",
+    pathTemplate: "/api/v1/automation-connections/{id}/actions/change-owner",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function changeSpaceAutomationConnection(id, body, options) {
+  return invokeFetch("automation-connections", {
+    method: "post",
+    pathTemplate: "/api/v1/automation-connections/{id}/actions/change-space",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function checkAutomationConnection(id, options) {
+  return invokeFetch("automation-connections", {
+    method: "post",
+    pathTemplate: "/api/v1/automation-connections/{id}/actions/check",
+    pathVariables: { id },
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("automation-connections");
 }

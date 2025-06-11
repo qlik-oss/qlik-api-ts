@@ -1,76 +1,96 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/webhooks.ts
-var getWebhooks = async (query, options) => invokeFetch("webhooks", {
-  method: "get",
-  pathTemplate: "/api/v1/webhooks",
-  query,
-  options
-});
-var createWebhook = async (body, options) => invokeFetch("webhooks", {
-  method: "post",
-  pathTemplate: "/api/v1/webhooks",
-  body,
-  contentType: "application/json",
-  options
-});
-var getWebhookEventTypes = async (options) => invokeFetch("webhooks", {
-  method: "get",
-  pathTemplate: "/api/v1/webhooks/event-types",
-  options
-});
-var deleteWebhook = async (id, options) => invokeFetch("webhooks", {
-  method: "delete",
-  pathTemplate: "/api/v1/webhooks/{id}",
-  pathVariables: { id },
-  options
-});
-var getWebhook = async (id, options) => invokeFetch("webhooks", {
-  method: "get",
-  pathTemplate: "/api/v1/webhooks/{id}",
-  pathVariables: { id },
-  options
-});
-var patchWebhook = async (id, body, options) => invokeFetch("webhooks", {
-  method: "patch",
-  pathTemplate: "/api/v1/webhooks/{id}",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
-var updateWebhook = async (id, body, options) => invokeFetch("webhooks", {
-  method: "put",
-  pathTemplate: "/api/v1/webhooks/{id}",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
-var getWebhookDeliveries = async (id, query, options) => invokeFetch("webhooks", {
-  method: "get",
-  pathTemplate: "/api/v1/webhooks/{id}/deliveries",
-  pathVariables: { id },
-  query,
-  options
-});
-var getWebhookDelivery = async (id, deliveryId, options) => invokeFetch("webhooks", {
-  method: "get",
-  pathTemplate: "/api/v1/webhooks/{id}/deliveries/{deliveryId}",
-  pathVariables: { id, deliveryId },
-  options
-});
-var resendWebhookDelivery = async (id, deliveryId, options) => invokeFetch("webhooks", {
-  method: "post",
-  pathTemplate: "/api/v1/webhooks/{id}/deliveries/{deliveryId}/actions/resend",
-  pathVariables: { id, deliveryId },
-  options
-});
+async function getWebhooks(query, options) {
+  return invokeFetch("webhooks", {
+    method: "get",
+    pathTemplate: "/api/v1/webhooks",
+    query,
+    options
+  });
+}
+async function createWebhook(body, options) {
+  return invokeFetch("webhooks", {
+    method: "post",
+    pathTemplate: "/api/v1/webhooks",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getWebhookEventTypes(options) {
+  return invokeFetch("webhooks", {
+    method: "get",
+    pathTemplate: "/api/v1/webhooks/event-types",
+    options
+  });
+}
+async function deleteWebhook(id, options) {
+  return invokeFetch("webhooks", {
+    method: "delete",
+    pathTemplate: "/api/v1/webhooks/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function getWebhook(id, options) {
+  return invokeFetch("webhooks", {
+    method: "get",
+    pathTemplate: "/api/v1/webhooks/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function patchWebhook(id, body, options) {
+  return invokeFetch("webhooks", {
+    method: "patch",
+    pathTemplate: "/api/v1/webhooks/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function updateWebhook(id, body, options) {
+  return invokeFetch("webhooks", {
+    method: "put",
+    pathTemplate: "/api/v1/webhooks/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getWebhookDeliveries(id, query, options) {
+  return invokeFetch("webhooks", {
+    method: "get",
+    pathTemplate: "/api/v1/webhooks/{id}/deliveries",
+    pathVariables: { id },
+    query,
+    options
+  });
+}
+async function getWebhookDelivery(id, deliveryId, options) {
+  return invokeFetch("webhooks", {
+    method: "get",
+    pathTemplate: "/api/v1/webhooks/{id}/deliveries/{deliveryId}",
+    pathVariables: { id, deliveryId },
+    options
+  });
+}
+async function resendWebhookDelivery(id, deliveryId, options) {
+  return invokeFetch("webhooks", {
+    method: "post",
+    pathTemplate: "/api/v1/webhooks/{id}/deliveries/{deliveryId}/actions/resend",
+    pathVariables: { id, deliveryId },
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("webhooks");
 }

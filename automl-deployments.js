@@ -1,20 +1,22 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/automl-deployments.ts
-var createAutomlDeploymentRealtimePrediction = async (deploymentId, query, body, options) => invokeFetch("automl-deployments", {
-  method: "post",
-  pathTemplate: "/api/v1/automl-deployments/{deploymentId}/realtime-predictions",
-  pathVariables: { deploymentId },
-  query,
-  body,
-  contentType: "application/json",
-  options
-});
+async function createAutomlDeploymentRealtimePrediction(deploymentId, query, body, options) {
+  return invokeFetch("automl-deployments", {
+    method: "post",
+    pathTemplate: "/api/v1/automl-deployments/{deploymentId}/realtime-predictions",
+    pathVariables: { deploymentId },
+    query,
+    body,
+    contentType: "application/json",
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("automl-deployments");
 }

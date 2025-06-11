@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type APISettingsUpload = {
     /** Whether API endpoints for sharing are enabled */
@@ -664,7 +664,7 @@ type UserIDRecipientPersist = {
  * @param query an object with query parameters
  * @throws GetSharingTasksHttpError
  */
-declare const getSharingTasks: (query: {
+declare function getSharingTasks(query: {
     /** the filter by sharing task resource app id. TenantAdmin users may omit this parameter to list all sharing-tasks in the tenant. */
     appid?: string;
     /** Indicates if task with the status DELETING should be excluded from the list */
@@ -693,7 +693,7 @@ declare const getSharingTasks: (query: {
     templateId?: string[];
     /** the filter by sharing task resource type. If type is template-sharing only and user is not tenant admin, appid is also required. */
     type?: ("chart-monitoring" | "chart-sharing" | "sheet-sharing" | "template-sharing")[];
-}, options?: ApiCallOptions) => Promise<GetSharingTasksHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetSharingTasksHttpResponse>;
 type GetSharingTasksHttpResponse = {
     data: SharingTaskRecurringListResponse;
     headers: Headers;
@@ -712,7 +712,7 @@ type GetSharingTasksHttpError = {
  * @param body an object with the body content
  * @throws CreateSharingTaskHttpError
  */
-declare const createSharingTask: (body: SharingTaskRecurringCreateRequest, options?: ApiCallOptions) => Promise<CreateSharingTaskHttpResponse>;
+declare function createSharingTask(body: SharingTaskRecurringCreateRequest, options?: ApiCallOptions): Promise<CreateSharingTaskHttpResponse>;
 type CreateSharingTaskHttpResponse = {
     data: SharingTaskRecurringResponse;
     headers: Headers;
@@ -729,7 +729,7 @@ type CreateSharingTaskHttpError = {
  * @param body an object with the body content
  * @throws ExecuteSharingTasksHttpError
  */
-declare const executeSharingTasks: (body: SharingActionsTriggerCreateRequest, options?: ApiCallOptions) => Promise<ExecuteSharingTasksHttpResponse>;
+declare function executeSharingTasks(body: SharingActionsTriggerCreateRequest, options?: ApiCallOptions): Promise<ExecuteSharingTasksHttpResponse>;
 type ExecuteSharingTasksHttpResponse = {
     data: void;
     headers: Headers;
@@ -745,7 +745,7 @@ type ExecuteSharingTasksHttpError = {
  *
  * @throws GetSharingTasksSettingsHttpError
  */
-declare const getSharingTasksSettings: (options?: ApiCallOptions) => Promise<GetSharingTasksSettingsHttpResponse>;
+declare function getSharingTasksSettings(options?: ApiCallOptions): Promise<GetSharingTasksSettingsHttpResponse>;
 type GetSharingTasksSettingsHttpResponse = {
     data: SharingSettings;
     headers: Headers;
@@ -762,7 +762,7 @@ type GetSharingTasksSettingsHttpError = {
  * @param body an object with the body content
  * @throws UpdateSharingTasksSettingsHttpError
  */
-declare const updateSharingTasksSettings: (body: SharingSettingsPatchCompliantList, options?: ApiCallOptions) => Promise<UpdateSharingTasksSettingsHttpResponse>;
+declare function updateSharingTasksSettings(body: SharingSettingsPatchCompliantList, options?: ApiCallOptions): Promise<UpdateSharingTasksSettingsHttpResponse>;
 type UpdateSharingTasksSettingsHttpResponse = {
     data: void;
     headers: Headers;
@@ -779,7 +779,7 @@ type UpdateSharingTasksSettingsHttpError = {
  * @param body an object with the body content
  * @throws ConfigureSharingTasksSettingsHttpError
  */
-declare const configureSharingTasksSettings: (body: APISettingsUpload, options?: ApiCallOptions) => Promise<ConfigureSharingTasksSettingsHttpResponse>;
+declare function configureSharingTasksSettings(body: APISettingsUpload, options?: ApiCallOptions): Promise<ConfigureSharingTasksSettingsHttpResponse>;
 type ConfigureSharingTasksSettingsHttpResponse = {
     data: void;
     headers: Headers;
@@ -796,7 +796,7 @@ type ConfigureSharingTasksSettingsHttpError = {
  * @param taskId The sharing task identifier.
  * @throws DeleteSharingTaskHttpError
  */
-declare const deleteSharingTask: (taskId: string, options?: ApiCallOptions) => Promise<DeleteSharingTaskHttpResponse>;
+declare function deleteSharingTask(taskId: string, options?: ApiCallOptions): Promise<DeleteSharingTaskHttpResponse>;
 type DeleteSharingTaskHttpResponse = {
     data: void;
     headers: Headers;
@@ -814,10 +814,10 @@ type DeleteSharingTaskHttpError = {
  * @param query an object with query parameters
  * @throws GetSharingTaskHttpError
  */
-declare const getSharingTask: (taskId: string, query: {
+declare function getSharingTask(taskId: string, query: {
     /** A boolean flag to know if the user has clicked on the view chart button */
     isViewChart?: boolean;
-}, options?: ApiCallOptions) => Promise<GetSharingTaskHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetSharingTaskHttpResponse>;
 type GetSharingTaskHttpResponse = {
     data: SharingTaskRecurringResponse;
     headers: Headers;
@@ -835,7 +835,7 @@ type GetSharingTaskHttpError = {
  * @param body an object with the body content
  * @throws PatchSharingTaskHttpError
  */
-declare const patchSharingTask: (taskId: string, body: SharingTaskPatchRequestCompliantList, options?: ApiCallOptions) => Promise<PatchSharingTaskHttpResponse>;
+declare function patchSharingTask(taskId: string, body: SharingTaskPatchRequestCompliantList, options?: ApiCallOptions): Promise<PatchSharingTaskHttpResponse>;
 type PatchSharingTaskHttpResponse = {
     data: void;
     headers: Headers;
@@ -852,7 +852,7 @@ type PatchSharingTaskHttpError = {
  * @param taskId The sharing task identifier.
  * @throws CancelSharingTaskHttpError
  */
-declare const cancelSharingTask: (taskId: string, options?: ApiCallOptions) => Promise<CancelSharingTaskHttpResponse>;
+declare function cancelSharingTask(taskId: string, options?: ApiCallOptions): Promise<CancelSharingTaskHttpResponse>;
 type CancelSharingTaskHttpResponse = {
     data: void;
     headers: Headers;

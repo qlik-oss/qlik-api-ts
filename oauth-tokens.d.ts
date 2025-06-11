@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * An error object.
@@ -55,7 +55,7 @@ type OauthTokenPage = {
  * @param query an object with query parameters
  * @throws GetOauthTokensHttpError
  */
-declare const getOauthTokens: (query: {
+declare function getOauthTokens(query: {
     /** The maximum number of tokens to return. */
     limit?: number;
     /** The target page. */
@@ -64,7 +64,7 @@ declare const getOauthTokens: (query: {
     sort?: "userId";
     /** The ID of the user to limit results to. */
     userId?: string;
-}, options?: ApiCallOptions) => Promise<GetOauthTokensHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetOauthTokensHttpResponse>;
 type GetOauthTokensHttpResponse = {
     data: OauthTokenPage;
     headers: Headers;
@@ -83,7 +83,7 @@ type GetOauthTokensHttpError = {
  * @param tokenId The ID of the token to revoke.
  * @throws DeleteOauthTokenHttpError
  */
-declare const deleteOauthToken: (tokenId: string, options?: ApiCallOptions) => Promise<DeleteOauthTokenHttpResponse>;
+declare function deleteOauthToken(tokenId: string, options?: ApiCallOptions): Promise<DeleteOauthTokenHttpResponse>;
 type DeleteOauthTokenHttpResponse = {
     data: void;
     headers: Headers;

@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type AppErrorResponse = {
     errors?: Error[];
@@ -39,9 +39,9 @@ type Error = {
  * @param query an object with query parameters
  * @throws GetAutomlPredictionCoordinateShapHttpError
  */
-declare const getAutomlPredictionCoordinateShap: (predictionId: string, query: {
+declare function getAutomlPredictionCoordinateShap(predictionId: string, query: {
     refId?: string;
-}, options?: ApiCallOptions) => Promise<GetAutomlPredictionCoordinateShapHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAutomlPredictionCoordinateShapHttpResponse>;
 type GetAutomlPredictionCoordinateShapHttpResponse = {
     data: string;
     headers: Headers;
@@ -58,7 +58,7 @@ type GetAutomlPredictionCoordinateShapHttpError = {
  * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
  * @throws CreateAutomlPredictionJobHttpError
  */
-declare const createAutomlPredictionJob: (predictionId: string, options?: ApiCallOptions) => Promise<CreateAutomlPredictionJobHttpResponse>;
+declare function createAutomlPredictionJob(predictionId: string, options?: ApiCallOptions): Promise<CreateAutomlPredictionJobHttpResponse>;
 type CreateAutomlPredictionJobHttpResponse = {
     data: void;
     headers: Headers;
@@ -76,9 +76,9 @@ type CreateAutomlPredictionJobHttpError = {
  * @param query an object with query parameters
  * @throws GetAutomlPredictionNotPredictedReasonsHttpError
  */
-declare const getAutomlPredictionNotPredictedReasons: (predictionId: string, query: {
+declare function getAutomlPredictionNotPredictedReasons(predictionId: string, query: {
     refId?: string;
-}, options?: ApiCallOptions) => Promise<GetAutomlPredictionNotPredictedReasonsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAutomlPredictionNotPredictedReasonsHttpResponse>;
 type GetAutomlPredictionNotPredictedReasonsHttpResponse = {
     data: string;
     headers: Headers;
@@ -96,9 +96,9 @@ type GetAutomlPredictionNotPredictedReasonsHttpError = {
  * @param query an object with query parameters
  * @throws GetAutomlPredictionPredictionsHttpError
  */
-declare const getAutomlPredictionPredictions: (predictionId: string, query: {
+declare function getAutomlPredictionPredictions(predictionId: string, query: {
     refId?: string;
-}, options?: ApiCallOptions) => Promise<GetAutomlPredictionPredictionsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAutomlPredictionPredictionsHttpResponse>;
 type GetAutomlPredictionPredictionsHttpResponse = {
     data: void;
     headers: Headers;
@@ -116,9 +116,9 @@ type GetAutomlPredictionPredictionsHttpError = {
  * @param query an object with query parameters
  * @throws GetAutomlPredictionShapHttpError
  */
-declare const getAutomlPredictionShap: (predictionId: string, query: {
+declare function getAutomlPredictionShap(predictionId: string, query: {
     refId?: string;
-}, options?: ApiCallOptions) => Promise<GetAutomlPredictionShapHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAutomlPredictionShapHttpResponse>;
 type GetAutomlPredictionShapHttpResponse = {
     data: void;
     headers: Headers;
@@ -136,9 +136,9 @@ type GetAutomlPredictionShapHttpError = {
  * @param query an object with query parameters
  * @throws GetAutomlPredictionSourceHttpError
  */
-declare const getAutomlPredictionSource: (predictionId: string, query: {
+declare function getAutomlPredictionSource(predictionId: string, query: {
     refId?: string;
-}, options?: ApiCallOptions) => Promise<GetAutomlPredictionSourceHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAutomlPredictionSourceHttpResponse>;
 type GetAutomlPredictionSourceHttpResponse = {
     data: string;
     headers: Headers;

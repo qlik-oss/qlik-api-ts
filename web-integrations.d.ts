@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * An error object describing the error.
@@ -147,7 +147,7 @@ type WebIntegrations = {
  * @param query an object with query parameters
  * @throws GetWebIntegrationsHttpError
  */
-declare const getWebIntegrations: (query: {
+declare function getWebIntegrations(query: {
     /** The target web integration ID to start looking before for web integrations. Cannot be used in conjunction with startingAfter. */
     endingBefore?: string;
     /** The number of web integration entries to retrieve. */
@@ -158,7 +158,7 @@ declare const getWebIntegrations: (query: {
     startingAfter?: string;
     /** The tenant ID to filter by. */
     tenantId?: string;
-}, options?: ApiCallOptions) => Promise<GetWebIntegrationsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetWebIntegrationsHttpResponse>;
 type GetWebIntegrationsHttpResponse = {
     data: WebIntegrations;
     headers: Headers;
@@ -177,7 +177,7 @@ type GetWebIntegrationsHttpError = {
  * @param body an object with the body content
  * @throws CreateWebIntegrationHttpError
  */
-declare const createWebIntegration: (body: WebIntegrationPostSchema, options?: ApiCallOptions) => Promise<CreateWebIntegrationHttpResponse>;
+declare function createWebIntegration(body: WebIntegrationPostSchema, options?: ApiCallOptions): Promise<CreateWebIntegrationHttpResponse>;
 type CreateWebIntegrationHttpResponse = {
     data: WebIntegrationPost;
     headers: Headers;
@@ -194,7 +194,7 @@ type CreateWebIntegrationHttpError = {
  * @param id The ID of the web integration to delete.
  * @throws DeleteWebIntegrationHttpError
  */
-declare const deleteWebIntegration: (id: string, options?: ApiCallOptions) => Promise<DeleteWebIntegrationHttpResponse>;
+declare function deleteWebIntegration(id: string, options?: ApiCallOptions): Promise<DeleteWebIntegrationHttpResponse>;
 type DeleteWebIntegrationHttpResponse = {
     data: void;
     headers: Headers;
@@ -211,7 +211,7 @@ type DeleteWebIntegrationHttpError = {
  * @param id The ID of the web integration to retrieve.
  * @throws GetWebIntegrationHttpError
  */
-declare const getWebIntegration: (id: string, options?: ApiCallOptions) => Promise<GetWebIntegrationHttpResponse>;
+declare function getWebIntegration(id: string, options?: ApiCallOptions): Promise<GetWebIntegrationHttpResponse>;
 type GetWebIntegrationHttpResponse = {
     data: WebIntegration;
     headers: Headers;
@@ -229,7 +229,7 @@ type GetWebIntegrationHttpError = {
  * @param body an object with the body content
  * @throws PatchWebIntegrationHttpError
  */
-declare const patchWebIntegration: (id: string, body: WebIntegrationPatchSchema, options?: ApiCallOptions) => Promise<PatchWebIntegrationHttpResponse>;
+declare function patchWebIntegration(id: string, body: WebIntegrationPatchSchema, options?: ApiCallOptions): Promise<PatchWebIntegrationHttpResponse>;
 type PatchWebIntegrationHttpResponse = {
     data: void;
     headers: Headers;

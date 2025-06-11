@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type ConfigurationLineBase = ConfigurationLineNumeric | ConfigurationLineString;
 type ConfigurationLineNumeric = {
@@ -86,7 +86,7 @@ type UpdateConfigurationFlatFileRequest = {
  * @param agentAction The type of action to perform. Permitted values are `restart` (will not restart the agent if a reload is in `RELOADING` status) and `force-restart` (will restart the agent even if a reload is in `RELOADING` status).
  * @throws RestartDirectAccessAgentHttpError
  */
-declare const restartDirectAccessAgent: (agentId: string, agentAction: string, options?: ApiCallOptions) => Promise<RestartDirectAccessAgentHttpResponse>;
+declare function restartDirectAccessAgent(agentId: string, agentAction: string, options?: ApiCallOptions): Promise<RestartDirectAccessAgentHttpResponse>;
 type RestartDirectAccessAgentHttpResponse = {
     data: void;
     headers: Headers;
@@ -104,10 +104,10 @@ type RestartDirectAccessAgentHttpError = {
  * @param query an object with query parameters
  * @throws GetDirectAccessAgentConfigurationHttpError
  */
-declare const getDirectAccessAgentConfiguration: (agentId: string, query: {
+declare function getDirectAccessAgentConfiguration(agentId: string, query: {
     /** Individual properties within the agent configuration */
     queryProperties?: string[];
-}, options?: ApiCallOptions) => Promise<GetDirectAccessAgentConfigurationHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDirectAccessAgentConfigurationHttpResponse>;
 type GetDirectAccessAgentConfigurationHttpResponse = {
     data: ConfigurationResponse;
     headers: Headers;
@@ -125,7 +125,7 @@ type GetDirectAccessAgentConfigurationHttpError = {
  * @param body an object with the body content
  * @throws PatchDirectAccessAgentConfigurationHttpError
  */
-declare const patchDirectAccessAgentConfiguration: (agentId: string, body: Operation[], options?: ApiCallOptions) => Promise<PatchDirectAccessAgentConfigurationHttpResponse>;
+declare function patchDirectAccessAgentConfiguration(agentId: string, body: Operation[], options?: ApiCallOptions): Promise<PatchDirectAccessAgentConfigurationHttpResponse>;
 type PatchDirectAccessAgentConfigurationHttpResponse = PatchDirectAccessAgentConfiguration204HttpResponse | PatchDirectAccessAgentConfiguration207HttpResponse;
 type PatchDirectAccessAgentConfiguration204HttpResponse = {
     data: void;
@@ -150,7 +150,7 @@ type PatchDirectAccessAgentConfigurationHttpError = {
  * @param query an object with query parameters
  * @throws GetDirectAccessAgentConnectorFilesHttpError
  */
-declare const getDirectAccessAgentConnectorFiles: (agentId: string, connectorType: string, query: Record<string, unknown>, options?: ApiCallOptions) => Promise<GetDirectAccessAgentConnectorFilesHttpResponse>;
+declare function getDirectAccessAgentConnectorFiles(agentId: string, connectorType: string, query: Record<string, unknown>, options?: ApiCallOptions): Promise<GetDirectAccessAgentConnectorFilesHttpResponse>;
 type GetDirectAccessAgentConnectorFilesHttpResponse = {
     data: ConnectorFlatFileConfigurationResponse;
     headers: Headers;
@@ -168,7 +168,7 @@ type GetDirectAccessAgentConnectorFilesHttpError = {
  * @param connectorType The connector to retrieve the list of files for
  * @throws GetDirectAccessAgentConnectorFilesWithoutQueryHttpError
  */
-declare const getDirectAccessAgentConnectorFilesWithoutQuery: (agentId: string, connectorType: string, options?: ApiCallOptions) => Promise<GetDirectAccessAgentConnectorFilesWithoutQueryHttpResponse>;
+declare function getDirectAccessAgentConnectorFilesWithoutQuery(agentId: string, connectorType: string, options?: ApiCallOptions): Promise<GetDirectAccessAgentConnectorFilesWithoutQueryHttpResponse>;
 type GetDirectAccessAgentConnectorFilesWithoutQueryHttpResponse = {
     data: ConnectorFlatFileConfigurationResponse;
     headers: Headers;
@@ -187,7 +187,7 @@ type GetDirectAccessAgentConnectorFilesWithoutQueryHttpError = {
  * @param fileType The type of file to retrieve
  * @throws GetDirectAccessAgentConnectorFileHttpError
  */
-declare const getDirectAccessAgentConnectorFile: (agentId: string, connectorType: string, fileType: string, options?: ApiCallOptions) => Promise<GetDirectAccessAgentConnectorFileHttpResponse>;
+declare function getDirectAccessAgentConnectorFile(agentId: string, connectorType: string, fileType: string, options?: ApiCallOptions): Promise<GetDirectAccessAgentConnectorFileHttpResponse>;
 type GetDirectAccessAgentConnectorFileHttpResponse = {
     data: ConnectorFlatFileConfigurationResponse;
     headers: Headers;
@@ -208,7 +208,7 @@ type GetDirectAccessAgentConnectorFileHttpError = {
  * @param body an object with the body content
  * @throws UpdateDirectAccessAgentConnectorFileHttpError
  */
-declare const updateDirectAccessAgentConnectorFile: (agentId: string, connectorType: string, fileType: string, query: Record<string, unknown>, body: UpdateConfigurationFlatFileRequest, options?: ApiCallOptions) => Promise<UpdateDirectAccessAgentConnectorFileHttpResponse>;
+declare function updateDirectAccessAgentConnectorFile(agentId: string, connectorType: string, fileType: string, query: Record<string, unknown>, body: UpdateConfigurationFlatFileRequest, options?: ApiCallOptions): Promise<UpdateDirectAccessAgentConnectorFileHttpResponse>;
 type UpdateDirectAccessAgentConnectorFileHttpResponse = {
     data: void;
     headers: Headers;
@@ -228,7 +228,7 @@ type UpdateDirectAccessAgentConnectorFileHttpError = {
  * @param body an object with the body content
  * @throws UpdateDirectAccessAgentConnectorFileWithoutQueryHttpError
  */
-declare const updateDirectAccessAgentConnectorFileWithoutQuery: (agentId: string, connectorType: string, fileType: string, body: UpdateConfigurationFlatFileRequest, options?: ApiCallOptions) => Promise<UpdateDirectAccessAgentConnectorFileWithoutQueryHttpResponse>;
+declare function updateDirectAccessAgentConnectorFileWithoutQuery(agentId: string, connectorType: string, fileType: string, body: UpdateConfigurationFlatFileRequest, options?: ApiCallOptions): Promise<UpdateDirectAccessAgentConnectorFileWithoutQueryHttpResponse>;
 type UpdateDirectAccessAgentConnectorFileWithoutQueryHttpResponse = {
     data: void;
     headers: Headers;

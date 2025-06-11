@@ -1,131 +1,167 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/automations.ts
-var getAutomations = async (query, options) => invokeFetch("automations", {
-  method: "get",
-  pathTemplate: "/api/v1/automations",
-  query,
-  options
-});
-var createAutomation = async (body, options) => invokeFetch("automations", {
-  method: "post",
-  pathTemplate: "/api/v1/automations",
-  body,
-  contentType: "application/json",
-  options
-});
-var getAutomationsUsageMetrics = async (query, options) => invokeFetch("automations", {
-  method: "get",
-  pathTemplate: "/api/v1/automations/usage",
-  query,
-  options
-});
-var deleteAutomation = async (id, options) => invokeFetch("automations", {
-  method: "delete",
-  pathTemplate: "/api/v1/automations/{id}",
-  pathVariables: { id },
-  options
-});
-var getAutomationWithQuery = async (id, query, options) => invokeFetch("automations", {
-  method: "get",
-  pathTemplate: "/api/v1/automations/{id}",
-  pathVariables: { id },
-  query,
-  options
-});
-var getAutomation = async (id, options) => invokeFetch("automations", {
-  method: "get",
-  pathTemplate: "/api/v1/automations/{id}",
-  pathVariables: { id },
-  options
-});
-var updateAutomation = async (id, body, options) => invokeFetch("automations", {
-  method: "put",
-  pathTemplate: "/api/v1/automations/{id}",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
-var copyAutomation = async (id, body, options) => invokeFetch("automations", {
-  method: "post",
-  pathTemplate: "/api/v1/automations/{id}/actions/copy",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
-var disableAutomation = async (id, options) => invokeFetch("automations", {
-  method: "post",
-  pathTemplate: "/api/v1/automations/{id}/actions/disable",
-  pathVariables: { id },
-  options
-});
-var enableAutomation = async (id, options) => invokeFetch("automations", {
-  method: "post",
-  pathTemplate: "/api/v1/automations/{id}/actions/enable",
-  pathVariables: { id },
-  options
-});
-var moveAutomation = async (id, body, options) => invokeFetch("automations", {
-  method: "post",
-  pathTemplate: "/api/v1/automations/{id}/actions/move",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
-var getAutomationRuns = async (id, query, options) => invokeFetch("automations", {
-  method: "get",
-  pathTemplate: "/api/v1/automations/{id}/runs",
-  pathVariables: { id },
-  query,
-  options
-});
-var queueAutomationRun = async (id, body, options) => invokeFetch("automations", {
-  method: "post",
-  pathTemplate: "/api/v1/automations/{id}/runs",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
-var getAutomationRunWithQuery = async (id, runId, query, options) => invokeFetch("automations", {
-  method: "get",
-  pathTemplate: "/api/v1/automations/{id}/runs/{runId}",
-  pathVariables: { id, runId },
-  query,
-  options
-});
-var getAutomationRun = async (id, runId, options) => invokeFetch("automations", {
-  method: "get",
-  pathTemplate: "/api/v1/automations/{id}/runs/{runId}",
-  pathVariables: { id, runId },
-  options
-});
-var getAutomationRunDetails = async (id, runId, options) => invokeFetch("automations", {
-  method: "post",
-  pathTemplate: "/api/v1/automations/{id}/runs/{runId}/actions/export",
-  pathVariables: { id, runId },
-  options
-});
-var retryAutomationRun = async (id, runId, options) => invokeFetch("automations", {
-  method: "post",
-  pathTemplate: "/api/v1/automations/{id}/runs/{runId}/actions/retry",
-  pathVariables: { id, runId },
-  options
-});
-var stopAutomationRun = async (id, runId, options) => invokeFetch("automations", {
-  method: "post",
-  pathTemplate: "/api/v1/automations/{id}/runs/{runId}/actions/stop",
-  pathVariables: { id, runId },
-  options
-});
+async function getAutomations(query, options) {
+  return invokeFetch("automations", {
+    method: "get",
+    pathTemplate: "/api/v1/automations",
+    query,
+    options
+  });
+}
+async function createAutomation(body, options) {
+  return invokeFetch("automations", {
+    method: "post",
+    pathTemplate: "/api/v1/automations",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getAutomationsUsageMetrics(query, options) {
+  return invokeFetch("automations", {
+    method: "get",
+    pathTemplate: "/api/v1/automations/usage",
+    query,
+    options
+  });
+}
+async function deleteAutomation(id, options) {
+  return invokeFetch("automations", {
+    method: "delete",
+    pathTemplate: "/api/v1/automations/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function getAutomationWithQuery(id, query, options) {
+  return invokeFetch("automations", {
+    method: "get",
+    pathTemplate: "/api/v1/automations/{id}",
+    pathVariables: { id },
+    query,
+    options
+  });
+}
+async function getAutomation(id, options) {
+  return invokeFetch("automations", {
+    method: "get",
+    pathTemplate: "/api/v1/automations/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function updateAutomation(id, body, options) {
+  return invokeFetch("automations", {
+    method: "put",
+    pathTemplate: "/api/v1/automations/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function copyAutomation(id, body, options) {
+  return invokeFetch("automations", {
+    method: "post",
+    pathTemplate: "/api/v1/automations/{id}/actions/copy",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function disableAutomation(id, options) {
+  return invokeFetch("automations", {
+    method: "post",
+    pathTemplate: "/api/v1/automations/{id}/actions/disable",
+    pathVariables: { id },
+    options
+  });
+}
+async function enableAutomation(id, options) {
+  return invokeFetch("automations", {
+    method: "post",
+    pathTemplate: "/api/v1/automations/{id}/actions/enable",
+    pathVariables: { id },
+    options
+  });
+}
+async function moveAutomation(id, body, options) {
+  return invokeFetch("automations", {
+    method: "post",
+    pathTemplate: "/api/v1/automations/{id}/actions/move",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getAutomationRuns(id, query, options) {
+  return invokeFetch("automations", {
+    method: "get",
+    pathTemplate: "/api/v1/automations/{id}/runs",
+    pathVariables: { id },
+    query,
+    options
+  });
+}
+async function queueAutomationRun(id, body, options) {
+  return invokeFetch("automations", {
+    method: "post",
+    pathTemplate: "/api/v1/automations/{id}/runs",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getAutomationRunWithQuery(id, runId, query, options) {
+  return invokeFetch("automations", {
+    method: "get",
+    pathTemplate: "/api/v1/automations/{id}/runs/{runId}",
+    pathVariables: { id, runId },
+    query,
+    options
+  });
+}
+async function getAutomationRun(id, runId, options) {
+  return invokeFetch("automations", {
+    method: "get",
+    pathTemplate: "/api/v1/automations/{id}/runs/{runId}",
+    pathVariables: { id, runId },
+    options
+  });
+}
+async function getAutomationRunDetails(id, runId, options) {
+  return invokeFetch("automations", {
+    method: "post",
+    pathTemplate: "/api/v1/automations/{id}/runs/{runId}/actions/export",
+    pathVariables: { id, runId },
+    options
+  });
+}
+async function retryAutomationRun(id, runId, options) {
+  return invokeFetch("automations", {
+    method: "post",
+    pathTemplate: "/api/v1/automations/{id}/runs/{runId}/actions/retry",
+    pathVariables: { id, runId },
+    options
+  });
+}
+async function stopAutomationRun(id, runId, options) {
+  return invokeFetch("automations", {
+    method: "post",
+    pathTemplate: "/api/v1/automations/{id}/runs/{runId}/actions/stop",
+    pathVariables: { id, runId },
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("automations");
 }

@@ -1,44 +1,54 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/reload-tasks.ts
-var getReloadTasks = async (query, options) => invokeFetch("reload-tasks", {
-  method: "get",
-  pathTemplate: "/api/v1/reload-tasks",
-  query,
-  options
-});
-var createReloadTask = async (body, options) => invokeFetch("reload-tasks", {
-  method: "post",
-  pathTemplate: "/api/v1/reload-tasks",
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteReloadTask = async (taskId, options) => invokeFetch("reload-tasks", {
-  method: "delete",
-  pathTemplate: "/api/v1/reload-tasks/{taskId}",
-  pathVariables: { taskId },
-  options
-});
-var getReloadTask = async (taskId, options) => invokeFetch("reload-tasks", {
-  method: "get",
-  pathTemplate: "/api/v1/reload-tasks/{taskId}",
-  pathVariables: { taskId },
-  options
-});
-var updateReloadTask = async (taskId, body, options) => invokeFetch("reload-tasks", {
-  method: "put",
-  pathTemplate: "/api/v1/reload-tasks/{taskId}",
-  pathVariables: { taskId },
-  body,
-  contentType: "application/json",
-  options
-});
+async function getReloadTasks(query, options) {
+  return invokeFetch("reload-tasks", {
+    method: "get",
+    pathTemplate: "/api/v1/reload-tasks",
+    query,
+    options
+  });
+}
+async function createReloadTask(body, options) {
+  return invokeFetch("reload-tasks", {
+    method: "post",
+    pathTemplate: "/api/v1/reload-tasks",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteReloadTask(taskId, options) {
+  return invokeFetch("reload-tasks", {
+    method: "delete",
+    pathTemplate: "/api/v1/reload-tasks/{taskId}",
+    pathVariables: { taskId },
+    options
+  });
+}
+async function getReloadTask(taskId, options) {
+  return invokeFetch("reload-tasks", {
+    method: "get",
+    pathTemplate: "/api/v1/reload-tasks/{taskId}",
+    pathVariables: { taskId },
+    options
+  });
+}
+async function updateReloadTask(taskId, body, options) {
+  return invokeFetch("reload-tasks", {
+    method: "put",
+    pathTemplate: "/api/v1/reload-tasks/{taskId}",
+    pathVariables: { taskId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("reload-tasks");
 }

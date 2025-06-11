@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type ApiKey = {
     /** When the API key was created. */
@@ -161,7 +161,7 @@ type ApiKeyPage = {
  * @param query an object with query parameters
  * @throws GetApiKeysHttpError
  */
-declare const getApiKeys: (query: {
+declare function getApiKeys(query: {
     /** The user ID that created the API key. */
     createdByUser?: string;
     /** Get resources with IDs that are lower than the target resource ID. Cannot be used in conjunction with startingAfter. */
@@ -176,7 +176,7 @@ declare const getApiKeys: (query: {
     status?: "active" | "expired" | "revoked";
     /** The ID of the subject. For SCIM the format is `SCIM\\{{IDP-ID}}`, where `{{IDP-ID}}` is the ID of the IDP in Qlik. For users, use their user ID, e.g. `64ef645a3b7009d55dee5a2b`. */
     sub?: string;
-}, options?: ApiCallOptions) => Promise<GetApiKeysHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetApiKeysHttpResponse>;
 type GetApiKeysHttpResponse = {
     data: ApiKeyPage;
     headers: Headers;
@@ -196,7 +196,7 @@ type GetApiKeysHttpError = {
  * @param body an object with the body content
  * @throws CreateApiKeyHttpError
  */
-declare const createApiKey: (body: ApiKeyBody, options?: ApiCallOptions) => Promise<CreateApiKeyHttpResponse>;
+declare function createApiKey(body: ApiKeyBody, options?: ApiCallOptions): Promise<CreateApiKeyHttpResponse>;
 type CreateApiKeyHttpResponse = {
     data: ApiKeyWithToken;
     headers: Headers;
@@ -213,7 +213,7 @@ type CreateApiKeyHttpError = {
  * @param tenantId The tenant ID from which you wish to retrieve the API key configuration.
  * @throws GetApiKeysConfigHttpError
  */
-declare const getApiKeysConfig: (tenantId: string, options?: ApiCallOptions) => Promise<GetApiKeysConfigHttpResponse>;
+declare function getApiKeysConfig(tenantId: string, options?: ApiCallOptions): Promise<GetApiKeysConfigHttpResponse>;
 type GetApiKeysConfigHttpResponse = {
     data: ApiKeysConfig;
     headers: Headers;
@@ -231,7 +231,7 @@ type GetApiKeysConfigHttpError = {
  * @param body an object with the body content
  * @throws PatchApiKeysConfigHttpError
  */
-declare const patchApiKeysConfig: (tenantId: string, body: ApiKeysConfigPatchSchema, options?: ApiCallOptions) => Promise<PatchApiKeysConfigHttpResponse>;
+declare function patchApiKeysConfig(tenantId: string, body: ApiKeysConfigPatchSchema, options?: ApiCallOptions): Promise<PatchApiKeysConfigHttpResponse>;
 type PatchApiKeysConfigHttpResponse = {
     data: void;
     headers: Headers;
@@ -248,7 +248,7 @@ type PatchApiKeysConfigHttpError = {
  * @param id The ID of the API key to be retrieved.
  * @throws DeleteApiKeyHttpError
  */
-declare const deleteApiKey: (id: string, options?: ApiCallOptions) => Promise<DeleteApiKeyHttpResponse>;
+declare function deleteApiKey(id: string, options?: ApiCallOptions): Promise<DeleteApiKeyHttpResponse>;
 type DeleteApiKeyHttpResponse = {
     data: void;
     headers: Headers;
@@ -265,7 +265,7 @@ type DeleteApiKeyHttpError = {
  * @param id The ID of the API key to be retrieved.
  * @throws GetApiKeyHttpError
  */
-declare const getApiKey: (id: string, options?: ApiCallOptions) => Promise<GetApiKeyHttpResponse>;
+declare function getApiKey(id: string, options?: ApiCallOptions): Promise<GetApiKeyHttpResponse>;
 type GetApiKeyHttpResponse = {
     data: ApiKey;
     headers: Headers;
@@ -283,7 +283,7 @@ type GetApiKeyHttpError = {
  * @param body an object with the body content
  * @throws PatchApiKeyHttpError
  */
-declare const patchApiKey: (id: string, body: ApiKeysPatchSchema, options?: ApiCallOptions) => Promise<PatchApiKeyHttpResponse>;
+declare function patchApiKey(id: string, body: ApiKeysPatchSchema, options?: ApiCallOptions): Promise<PatchApiKeyHttpResponse>;
 type PatchApiKeyHttpResponse = {
     data: void;
     headers: Headers;

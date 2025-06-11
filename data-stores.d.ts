@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type BatchIdDto = {
     ids?: string[];
@@ -238,7 +238,7 @@ type UserTag = {
  * @param body an object with the body content
  * @throws DeleteDataStoresHttpError
  */
-declare const deleteDataStores: (body: BatchIdDto, options?: ApiCallOptions) => Promise<DeleteDataStoresHttpResponse>;
+declare function deleteDataStores(body: BatchIdDto, options?: ApiCallOptions): Promise<DeleteDataStoresHttpResponse>;
 type DeleteDataStoresHttpResponse = {
     data: void;
     headers: Headers;
@@ -255,7 +255,7 @@ type DeleteDataStoresHttpError = {
  * @param query an object with query parameters
  * @throws GetDataStoresHttpError
  */
-declare const getDataStores: (query: {
+declare function getDataStores(query: {
     /** Page size limit. */
     limit?: number;
     page?: number;
@@ -263,7 +263,7 @@ declare const getDataStores: (query: {
     projections?: string[];
     /** Comma-separated fields and field start with '-' character sorts the result set in descending order. */
     sort?: string[];
-}, options?: ApiCallOptions) => Promise<GetDataStoresHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDataStoresHttpResponse>;
 type GetDataStoresHttpResponse = {
     data: PageDataStore;
     headers: Headers;
@@ -282,7 +282,7 @@ type GetDataStoresHttpError = {
  * @param body an object with the body content
  * @throws CreateDataStoreHttpError
  */
-declare const createDataStore: (body: DataStore, options?: ApiCallOptions) => Promise<CreateDataStoreHttpResponse>;
+declare function createDataStore(body: DataStore, options?: ApiCallOptions): Promise<CreateDataStoreHttpResponse>;
 type CreateDataStoreHttpResponse = {
     data: DataStore;
     headers: Headers;
@@ -299,7 +299,7 @@ type CreateDataStoreHttpError = {
  * @param dataStoreIds Comma-separated data store IDs or * to include all data stores.
  * @throws DeleteDataStoreDataAssetsHttpError
  */
-declare const deleteDataStoreDataAssets: (dataStoreIds: string, options?: ApiCallOptions) => Promise<DeleteDataStoreDataAssetsHttpResponse>;
+declare function deleteDataStoreDataAssets(dataStoreIds: string, options?: ApiCallOptions): Promise<DeleteDataStoreDataAssetsHttpResponse>;
 type DeleteDataStoreDataAssetsHttpResponse = {
     data: void;
     headers: Headers;
@@ -317,7 +317,7 @@ type DeleteDataStoreDataAssetsHttpError = {
  * @param query an object with query parameters
  * @throws GetDataStoreDataAssetsHttpError
  */
-declare const getDataStoreDataAssets: (dataStoreIds: string, query: {
+declare function getDataStoreDataAssets(dataStoreIds: string, query: {
     /** Page size limit. */
     limit?: number;
     page?: number;
@@ -325,7 +325,7 @@ declare const getDataStoreDataAssets: (dataStoreIds: string, query: {
     projections?: string[];
     /** Comma-separated fields and field start with '-' character sorts the result set in descending order. */
     sort?: string[];
-}, options?: ApiCallOptions) => Promise<GetDataStoreDataAssetsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDataStoreDataAssetsHttpResponse>;
 type GetDataStoreDataAssetsHttpResponse = {
     data: PageDataAsset;
     headers: Headers;
@@ -345,7 +345,7 @@ type GetDataStoreDataAssetsHttpError = {
  * @param dataAssetIds Comma-separated data asset IDs or * to include all data assets.
  * @throws DeleteDataStoreDataAssetDataSetsHttpError
  */
-declare const deleteDataStoreDataAssetDataSets: (dataStoreIds: string, dataAssetIds: string, options?: ApiCallOptions) => Promise<DeleteDataStoreDataAssetDataSetsHttpResponse>;
+declare function deleteDataStoreDataAssetDataSets(dataStoreIds: string, dataAssetIds: string, options?: ApiCallOptions): Promise<DeleteDataStoreDataAssetDataSetsHttpResponse>;
 type DeleteDataStoreDataAssetDataSetsHttpResponse = {
     data: void;
     headers: Headers;
@@ -364,7 +364,7 @@ type DeleteDataStoreDataAssetDataSetsHttpError = {
  * @param query an object with query parameters
  * @throws GetDataStoreDataAssetDataSetsHttpError
  */
-declare const getDataStoreDataAssetDataSets: (dataStoreIds: string, dataAssetIds: string, query: {
+declare function getDataStoreDataAssetDataSets(dataStoreIds: string, dataAssetIds: string, query: {
     /** Page size limit. */
     limit?: number;
     page?: number;
@@ -372,7 +372,7 @@ declare const getDataStoreDataAssetDataSets: (dataStoreIds: string, dataAssetIds
     projections?: string[];
     /** Comma-separated fields and field start with '-' character sorts the result set in descending order. */
     sort?: string[];
-}, options?: ApiCallOptions) => Promise<GetDataStoreDataAssetDataSetsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDataStoreDataAssetDataSetsHttpResponse>;
 type GetDataStoreDataAssetDataSetsHttpResponse = {
     data: PageDataSet;
     headers: Headers;
@@ -392,10 +392,10 @@ type GetDataStoreDataAssetDataSetsHttpError = {
  * @param query an object with query parameters
  * @throws GetDataStoreHttpError
  */
-declare const getDataStore: (dataStoreId: string, query: {
+declare function getDataStore(dataStoreId: string, query: {
     /** Comma-separated fields to return in the response. */
     projections?: string[];
-}, options?: ApiCallOptions) => Promise<GetDataStoreHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDataStoreHttpResponse>;
 type GetDataStoreHttpResponse = {
     data: DataStore;
     headers: Headers;
@@ -413,7 +413,7 @@ type GetDataStoreHttpError = {
  * @param body an object with the body content
  * @throws PatchDataStoreHttpError
  */
-declare const patchDataStore: (dataStoreId: string, body: JsonPatch[], options?: ApiCallOptions) => Promise<PatchDataStoreHttpResponse>;
+declare function patchDataStore(dataStoreId: string, body: JsonPatch[], options?: ApiCallOptions): Promise<PatchDataStoreHttpResponse>;
 type PatchDataStoreHttpResponse = {
     data: DataStore;
     headers: Headers;
@@ -431,7 +431,7 @@ type PatchDataStoreHttpError = {
  * @param body an object with the body content
  * @throws UpdateDataStoreHttpError
  */
-declare const updateDataStore: (dataStoreId: string, body: DataStore, options?: ApiCallOptions) => Promise<UpdateDataStoreHttpResponse>;
+declare function updateDataStore(dataStoreId: string, body: DataStore, options?: ApiCallOptions): Promise<UpdateDataStoreHttpResponse>;
 type UpdateDataStoreHttpResponse = {
     data: DataStore;
     headers: Headers;

@@ -1,68 +1,84 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/lineage-graphs.ts
-var expandLineageGraphImpact = async (id, query, options) => invokeFetch("lineage-graphs", {
-  method: "get",
-  pathTemplate: "/api/v1/lineage-graphs/impact/{id}/actions/expand",
-  pathVariables: { id },
-  query,
-  options
-});
-var searchLineageGraphImpact = async (id, query, options) => invokeFetch("lineage-graphs", {
-  method: "get",
-  pathTemplate: "/api/v1/lineage-graphs/impact/{id}/actions/search",
-  pathVariables: { id },
-  query,
-  options
-});
-var getLineageGraphImpactOverview = async (id, query, options) => invokeFetch("lineage-graphs", {
-  method: "get",
-  pathTemplate: "/api/v1/lineage-graphs/impact/{id}/overview",
-  pathVariables: { id },
-  query,
-  options
-});
-var getLineageGraphImpactSource = async (id, options) => invokeFetch("lineage-graphs", {
-  method: "get",
-  pathTemplate: "/api/v1/lineage-graphs/impact/{id}/source",
-  pathVariables: { id },
-  options
-});
-var getLineageGraphNode = async (id, query, options) => invokeFetch("lineage-graphs", {
-  method: "get",
-  pathTemplate: "/api/v1/lineage-graphs/nodes/{id}",
-  pathVariables: { id },
-  query,
-  options
-});
-var expandLineageGraphNode = async (id, query, options) => invokeFetch("lineage-graphs", {
-  method: "get",
-  pathTemplate: "/api/v1/lineage-graphs/nodes/{id}/actions/expand",
-  pathVariables: { id },
-  query,
-  options
-});
-var searchLineageGraphNode = async (id, query, options) => invokeFetch("lineage-graphs", {
-  method: "get",
-  pathTemplate: "/api/v1/lineage-graphs/nodes/{id}/actions/search",
-  pathVariables: { id },
-  query,
-  options
-});
-var createLineageGraphNodeOverview = async (id, query, body, options) => invokeFetch("lineage-graphs", {
-  method: "post",
-  pathTemplate: "/api/v1/lineage-graphs/nodes/{id}/overview",
-  pathVariables: { id },
-  query,
-  body,
-  contentType: "application/json",
-  options
-});
+async function expandLineageGraphImpact(id, query, options) {
+  return invokeFetch("lineage-graphs", {
+    method: "get",
+    pathTemplate: "/api/v1/lineage-graphs/impact/{id}/actions/expand",
+    pathVariables: { id },
+    query,
+    options
+  });
+}
+async function searchLineageGraphImpact(id, query, options) {
+  return invokeFetch("lineage-graphs", {
+    method: "get",
+    pathTemplate: "/api/v1/lineage-graphs/impact/{id}/actions/search",
+    pathVariables: { id },
+    query,
+    options
+  });
+}
+async function getLineageGraphImpactOverview(id, query, options) {
+  return invokeFetch("lineage-graphs", {
+    method: "get",
+    pathTemplate: "/api/v1/lineage-graphs/impact/{id}/overview",
+    pathVariables: { id },
+    query,
+    options
+  });
+}
+async function getLineageGraphImpactSource(id, options) {
+  return invokeFetch("lineage-graphs", {
+    method: "get",
+    pathTemplate: "/api/v1/lineage-graphs/impact/{id}/source",
+    pathVariables: { id },
+    options
+  });
+}
+async function getLineageGraphNode(id, query, options) {
+  return invokeFetch("lineage-graphs", {
+    method: "get",
+    pathTemplate: "/api/v1/lineage-graphs/nodes/{id}",
+    pathVariables: { id },
+    query,
+    options
+  });
+}
+async function expandLineageGraphNode(id, query, options) {
+  return invokeFetch("lineage-graphs", {
+    method: "get",
+    pathTemplate: "/api/v1/lineage-graphs/nodes/{id}/actions/expand",
+    pathVariables: { id },
+    query,
+    options
+  });
+}
+async function searchLineageGraphNode(id, query, options) {
+  return invokeFetch("lineage-graphs", {
+    method: "get",
+    pathTemplate: "/api/v1/lineage-graphs/nodes/{id}/actions/search",
+    pathVariables: { id },
+    query,
+    options
+  });
+}
+async function createLineageGraphNodeOverview(id, query, body, options) {
+  return invokeFetch("lineage-graphs", {
+    method: "post",
+    pathTemplate: "/api/v1/lineage-graphs/nodes/{id}/overview",
+    pathVariables: { id },
+    query,
+    body,
+    contentType: "application/json",
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("lineage-graphs");
 }

@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type ActionFilterOrphanRequest = {
     /** Filtering on datasource ID of credentials */
@@ -110,7 +110,7 @@ type ResponseErrors = {
  * @param body an object with the body content
  * @throws FilterOrphanedDataCredentialsHttpError
  */
-declare const filterOrphanedDataCredentials: (body: ActionFilterOrphanRequest, options?: ApiCallOptions) => Promise<FilterOrphanedDataCredentialsHttpResponse>;
+declare function filterOrphanedDataCredentials(body: ActionFilterOrphanRequest, options?: ApiCallOptions): Promise<FilterOrphanedDataCredentialsHttpResponse>;
 type FilterOrphanedDataCredentialsHttpResponse = {
     data: ActionFilterOrphanResponse;
     headers: Headers;
@@ -135,10 +135,10 @@ type FilterOrphanedDataCredentialsHttpError = {
  * @param query an object with query parameters
  * @throws DeleteDataCredentialHttpError
  */
-declare const deleteDataCredential: (qID: string, query: {
+declare function deleteDataCredential(qID: string, query: {
     /** If set to true, credentialId in the query will be interpreted as credential's name */
     byCredentialName?: boolean;
-}, options?: ApiCallOptions) => Promise<DeleteDataCredentialHttpResponse>;
+}, options?: ApiCallOptions): Promise<DeleteDataCredentialHttpResponse>;
 type DeleteDataCredentialHttpResponse = {
     data: void;
     headers: Headers;
@@ -163,10 +163,10 @@ type DeleteDataCredentialHttpError = {
  * @param query an object with query parameters
  * @throws GetDataCredentialHttpError
  */
-declare const getDataCredential: (qID: string, query: {
+declare function getDataCredential(qID: string, query: {
     /** If set to true, credentialId in the query will be interpreted as credential's name */
     byCredentialName?: boolean;
-}, options?: ApiCallOptions) => Promise<GetDataCredentialHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDataCredentialHttpResponse>;
 type GetDataCredentialHttpResponse = {
     data: Credential;
     headers: Headers;
@@ -185,10 +185,10 @@ type GetDataCredentialHttpError = {
  * @param body an object with the body content
  * @throws PatchDataCredentialHttpError
  */
-declare const patchDataCredential: (qID: string, query: {
+declare function patchDataCredential(qID: string, query: {
     /** If set to true, credentialId in the query will be interpreted as credential's name */
     byCredentialName?: boolean;
-}, body: PatchRequest, options?: ApiCallOptions) => Promise<PatchDataCredentialHttpResponse>;
+}, body: PatchRequest, options?: ApiCallOptions): Promise<PatchDataCredentialHttpResponse>;
 type PatchDataCredentialHttpResponse = {
     data: void;
     headers: Headers;
@@ -207,10 +207,10 @@ type PatchDataCredentialHttpError = {
  * @param body an object with the body content
  * @throws UpdateDataCredentialHttpError
  */
-declare const updateDataCredential: (qID: string, query: {
+declare function updateDataCredential(qID: string, query: {
     /** If set to true, credentialId in the query will be interpreted as credential's name */
     byCredentialName?: boolean;
-}, body: CredentialCreate, options?: ApiCallOptions) => Promise<UpdateDataCredentialHttpResponse>;
+}, body: CredentialCreate, options?: ApiCallOptions): Promise<UpdateDataCredentialHttpResponse>;
 type UpdateDataCredentialHttpResponse = {
     data: void;
     headers: Headers;

@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type CollectionByIdPatch = {
     /** The operation to be performed. */
@@ -240,7 +240,7 @@ type Meta = {
  * @param query an object with query parameters
  * @throws GetCollectionsHttpError
  */
-declare const getCollections: (query: {
+declare function getCollections(query: {
     /** The case-sensitive string used to search for a resource by creatorId. */
     creatorId?: string;
     /** The collection's unique identifier. */
@@ -267,7 +267,7 @@ declare const getCollections: (query: {
     type?: CollectionTypes;
     /** A commaseparated case-sensitive string used to filter by multiple types. */
     types?: CollectionTypes[];
-}, options?: ApiCallOptions) => Promise<GetCollectionsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetCollectionsHttpResponse>;
 type GetCollectionsHttpResponse = {
     data: CollectionsListCollectionsResponseBody;
     headers: Headers;
@@ -286,7 +286,7 @@ type GetCollectionsHttpError = {
  * @param body an object with the body content
  * @throws CreateCollectionHttpError
  */
-declare const createCollection: (body: CollectionsCreateCollectionRequestBody, options?: ApiCallOptions) => Promise<CreateCollectionHttpResponse>;
+declare function createCollection(body: CollectionsCreateCollectionRequestBody, options?: ApiCallOptions): Promise<CreateCollectionHttpResponse>;
 type CreateCollectionHttpResponse = {
     data: CollectionResultResponseBody;
     headers: Headers;
@@ -302,7 +302,7 @@ type CreateCollectionHttpError = {
  *
  * @throws GetFavoritesCollectionHttpError
  */
-declare const getFavoritesCollection: (options?: ApiCallOptions) => Promise<GetFavoritesCollectionHttpResponse>;
+declare function getFavoritesCollection(options?: ApiCallOptions): Promise<GetFavoritesCollectionHttpResponse>;
 type GetFavoritesCollectionHttpResponse = {
     data: CollectionResultResponseBody;
     headers: Headers;
@@ -319,7 +319,7 @@ type GetFavoritesCollectionHttpError = {
  * @param collectionId The collection's unique identifier.
  * @throws DeleteCollectionHttpError
  */
-declare const deleteCollection: (collectionId: string, options?: ApiCallOptions) => Promise<DeleteCollectionHttpResponse>;
+declare function deleteCollection(collectionId: string, options?: ApiCallOptions): Promise<DeleteCollectionHttpResponse>;
 type DeleteCollectionHttpResponse = {
     data: void;
     headers: Headers;
@@ -336,7 +336,7 @@ type DeleteCollectionHttpError = {
  * @param collectionId The collection's unique identifier.
  * @throws GetCollectionHttpError
  */
-declare const getCollection: (collectionId: string, options?: ApiCallOptions) => Promise<GetCollectionHttpResponse>;
+declare function getCollection(collectionId: string, options?: ApiCallOptions): Promise<GetCollectionHttpResponse>;
 type GetCollectionHttpResponse = {
     data: CollectionResultResponseBody;
     headers: Headers;
@@ -354,7 +354,7 @@ type GetCollectionHttpError = {
  * @param body an object with the body content
  * @throws PatchCollectionHttpError
  */
-declare const patchCollection: (collectionId: string, body: CollectionByIdPatch, options?: ApiCallOptions) => Promise<PatchCollectionHttpResponse>;
+declare function patchCollection(collectionId: string, body: CollectionByIdPatch, options?: ApiCallOptions): Promise<PatchCollectionHttpResponse>;
 type PatchCollectionHttpResponse = {
     data: CollectionResultResponseBody;
     headers: Headers;
@@ -372,7 +372,7 @@ type PatchCollectionHttpError = {
  * @param body an object with the body content
  * @throws UpdateCollectionHttpError
  */
-declare const updateCollection: (collectionId: string, body: CollectionsUpdateCollectionRequestBody, options?: ApiCallOptions) => Promise<UpdateCollectionHttpResponse>;
+declare function updateCollection(collectionId: string, body: CollectionsUpdateCollectionRequestBody, options?: ApiCallOptions): Promise<UpdateCollectionHttpResponse>;
 type UpdateCollectionHttpResponse = {
     data: CollectionResultResponseBody;
     headers: Headers;
@@ -391,7 +391,7 @@ type UpdateCollectionHttpError = {
  * @param query an object with query parameters
  * @throws GetCollectionItemsHttpError
  */
-declare const getCollectionItems: (collectionId: string, query: {
+declare function getCollectionItems(collectionId: string, query: {
     /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
     limit?: number;
     /** The case-insensitive string used to search for a resource by name. */
@@ -417,7 +417,7 @@ declare const getCollectionItems: (collectionId: string, query: {
     sort?: "+createdAt" | "-createdAt" | "+name" | "-name" | "+updatedAt" | "-updatedAt";
     /** The space's unique identifier (supports \'personal\' as spaceId). */
     spaceId?: string;
-}, options?: ApiCallOptions) => Promise<GetCollectionItemsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetCollectionItemsHttpResponse>;
 type GetCollectionItemsHttpResponse = {
     data: CollectionsListCollectionItemsResponseBody;
     headers: Headers;
@@ -435,7 +435,7 @@ type GetCollectionItemsHttpError = {
  * @param body an object with the body content
  * @throws AddCollectionItemHttpError
  */
-declare const addCollectionItem: (collectionId: string, body: CollectionsAddCollectionItemRequestBody, options?: ApiCallOptions) => Promise<AddCollectionItemHttpResponse>;
+declare function addCollectionItem(collectionId: string, body: CollectionsAddCollectionItemRequestBody, options?: ApiCallOptions): Promise<AddCollectionItemHttpResponse>;
 type AddCollectionItemHttpResponse = {
     data: ItemResultResponseBody;
     headers: Headers;
@@ -453,7 +453,7 @@ type AddCollectionItemHttpError = {
  * @param itemId The item's unique identifier.
  * @throws DeleteCollectionItemHttpError
  */
-declare const deleteCollectionItem: (collectionId: string, itemId: string, options?: ApiCallOptions) => Promise<DeleteCollectionItemHttpResponse>;
+declare function deleteCollectionItem(collectionId: string, itemId: string, options?: ApiCallOptions): Promise<DeleteCollectionItemHttpResponse>;
 type DeleteCollectionItemHttpResponse = {
     data: void;
     headers: Headers;
@@ -471,7 +471,7 @@ type DeleteCollectionItemHttpError = {
  * @param itemId The item's unique identifier.
  * @throws GetCollectionItemHttpError
  */
-declare const getCollectionItem: (collectionId: string, itemId: string, options?: ApiCallOptions) => Promise<GetCollectionItemHttpResponse>;
+declare function getCollectionItem(collectionId: string, itemId: string, options?: ApiCallOptions): Promise<GetCollectionItemHttpResponse>;
 type GetCollectionItemHttpResponse = {
     data: ItemResultResponseBody;
     headers: Headers;

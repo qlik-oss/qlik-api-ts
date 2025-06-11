@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * @example
@@ -117,7 +117,7 @@ type StandardErrorItem = {
  *
  * @throws GetEncryptionKeyprovidersHttpError
  */
-declare const getEncryptionKeyproviders: (options?: ApiCallOptions) => Promise<GetEncryptionKeyprovidersHttpResponse>;
+declare function getEncryptionKeyproviders(options?: ApiCallOptions): Promise<GetEncryptionKeyprovidersHttpResponse>;
 type GetEncryptionKeyprovidersHttpResponse = {
     data: KeyProviders;
     headers: Headers;
@@ -134,7 +134,7 @@ type GetEncryptionKeyprovidersHttpError = {
  * @param body an object with the body content
  * @throws CreateEncryptionKeyproviderHttpError
  */
-declare const createEncryptionKeyprovider: (body: KeyProvider, options?: ApiCallOptions) => Promise<CreateEncryptionKeyproviderHttpResponse>;
+declare function createEncryptionKeyprovider(body: KeyProvider, options?: ApiCallOptions): Promise<CreateEncryptionKeyproviderHttpResponse>;
 type CreateEncryptionKeyproviderHttpResponse = {
     data: KeyProvider;
     headers: Headers;
@@ -150,7 +150,7 @@ type CreateEncryptionKeyproviderHttpError = {
  *
  * @throws ListEncryptionKeyprovidersHttpError
  */
-declare const listEncryptionKeyproviders: (options?: ApiCallOptions) => Promise<ListEncryptionKeyprovidersHttpResponse>;
+declare function listEncryptionKeyproviders(options?: ApiCallOptions): Promise<ListEncryptionKeyprovidersHttpResponse>;
 type ListEncryptionKeyprovidersHttpResponse = {
     data: ListKeyProviders;
     headers: Headers;
@@ -166,7 +166,7 @@ type ListEncryptionKeyprovidersHttpError = {
  *
  * @throws ResetEncryptionKeyprovidersHttpError
  */
-declare const resetEncryptionKeyproviders: (options?: ApiCallOptions) => Promise<ResetEncryptionKeyprovidersHttpResponse>;
+declare function resetEncryptionKeyproviders(options?: ApiCallOptions): Promise<ResetEncryptionKeyprovidersHttpResponse>;
 type ResetEncryptionKeyprovidersHttpResponse = ResetEncryptionKeyproviders200HttpResponse | ResetEncryptionKeyproviders205HttpResponse;
 type ResetEncryptionKeyproviders200HttpResponse = {
     data: ResetMigrationNotNeeded;
@@ -188,7 +188,7 @@ type ResetEncryptionKeyprovidersHttpError = {
  *
  * @throws GetEncryptionKeyprovidersMigrationDetailsHttpError
  */
-declare const getEncryptionKeyprovidersMigrationDetails: (options?: ApiCallOptions) => Promise<GetEncryptionKeyprovidersMigrationDetailsHttpResponse>;
+declare function getEncryptionKeyprovidersMigrationDetails(options?: ApiCallOptions): Promise<GetEncryptionKeyprovidersMigrationDetailsHttpResponse>;
 type GetEncryptionKeyprovidersMigrationDetailsHttpResponse = {
     data: MigrationInformation;
     headers: Headers;
@@ -205,7 +205,7 @@ type GetEncryptionKeyprovidersMigrationDetailsHttpError = {
  * @param arnFingerPrint The fingerprint of the key provider you wish to delete.
  * @throws DeleteEncryptionKeyproviderHttpError
  */
-declare const deleteEncryptionKeyprovider: (arnFingerPrint: string, options?: ApiCallOptions) => Promise<DeleteEncryptionKeyproviderHttpResponse>;
+declare function deleteEncryptionKeyprovider(arnFingerPrint: string, options?: ApiCallOptions): Promise<DeleteEncryptionKeyproviderHttpResponse>;
 type DeleteEncryptionKeyproviderHttpResponse = {
     data: KeyProvidersDeleteResponseBody;
     headers: Headers;
@@ -222,7 +222,7 @@ type DeleteEncryptionKeyproviderHttpError = {
  * @param arnFingerPrint The fingerprint of the requested provider key.
  * @throws GetEncryptionKeyproviderHttpError
  */
-declare const getEncryptionKeyprovider: (arnFingerPrint: string, options?: ApiCallOptions) => Promise<GetEncryptionKeyproviderHttpResponse>;
+declare function getEncryptionKeyprovider(arnFingerPrint: string, options?: ApiCallOptions): Promise<GetEncryptionKeyproviderHttpResponse>;
 type GetEncryptionKeyproviderHttpResponse = {
     data: KeyProvider;
     headers: Headers;
@@ -240,7 +240,7 @@ type GetEncryptionKeyproviderHttpError = {
  * @param body an object with the body content
  * @throws PatchEncryptionKeyproviderHttpError
  */
-declare const patchEncryptionKeyprovider: (arnFingerPrint: string, body: KeyProviderPatchSchema, options?: ApiCallOptions) => Promise<PatchEncryptionKeyproviderHttpResponse>;
+declare function patchEncryptionKeyprovider(arnFingerPrint: string, body: KeyProviderPatchSchema, options?: ApiCallOptions): Promise<PatchEncryptionKeyproviderHttpResponse>;
 type PatchEncryptionKeyproviderHttpResponse = {
     data: void;
     headers: Headers;
@@ -257,7 +257,7 @@ type PatchEncryptionKeyproviderHttpError = {
  * @param arnFingerPrint The fingerprint of an existing key provider key.
  * @throws MigrateEncryptionKeyproviderHttpError
  */
-declare const migrateEncryptionKeyprovider: (arnFingerPrint: string, options?: ApiCallOptions) => Promise<MigrateEncryptionKeyproviderHttpResponse>;
+declare function migrateEncryptionKeyprovider(arnFingerPrint: string, options?: ApiCallOptions): Promise<MigrateEncryptionKeyproviderHttpResponse>;
 type MigrateEncryptionKeyproviderHttpResponse = {
     data: MigrationInformation;
     headers: Headers;
@@ -274,7 +274,7 @@ type MigrateEncryptionKeyproviderHttpError = {
  * @param arnFingerPrint The fingerprint of an existing key provider key.
  * @throws TestEncryptionKeyproviderHttpError
  */
-declare const testEncryptionKeyprovider: (arnFingerPrint: string, options?: ApiCallOptions) => Promise<TestEncryptionKeyproviderHttpResponse>;
+declare function testEncryptionKeyprovider(arnFingerPrint: string, options?: ApiCallOptions): Promise<TestEncryptionKeyproviderHttpResponse>;
 type TestEncryptionKeyproviderHttpResponse = {
     data: KeyProvider;
     headers: Headers;

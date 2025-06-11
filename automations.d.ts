@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type AutomationDetailRequestObject = {
     description?: string;
@@ -199,7 +199,7 @@ type UsageObject = {
  * @param query an object with query parameters
  * @throws GetAutomationsHttpError
  */
-declare const getAutomations: (query: {
+declare function getAutomations(query: {
     /** Allows to select the actual fields to be returned. When no fields are defined, all are returned. */
     fields?: string;
     /** Allowed filters: name, runMode, lastRunStatus, ownerId */
@@ -208,7 +208,7 @@ declare const getAutomations: (query: {
     limit?: number;
     /** The field to sort by, with +- prefix indicating sort order. (?query=-name => sort on the name field using descending order) */
     sort?: "id" | "name" | "runMode" | "state" | "createdAt" | "updatedAt" | "lastRunAt" | "lastRunStatus" | "duration" | "+id" | "+name" | "+runMode" | "+state" | "+createdAt" | "+updatedAt" | "+lastRunAt" | "+lastRunStatus" | "-id" | "-name" | "-runMode" | "-state" | "-createdAt" | "-updatedAt" | "-lastRunAt" | "-lastRunStatus" | "+duration" | "-duration";
-}, options?: ApiCallOptions) => Promise<GetAutomationsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAutomationsHttpResponse>;
 type GetAutomationsHttpResponse = {
     data: AutomationList;
     headers: Headers;
@@ -227,7 +227,7 @@ type GetAutomationsHttpError = {
  * @param body an object with the body content
  * @throws CreateAutomationHttpError
  */
-declare const createAutomation: (body: AutomationDetailRequestObject, options?: ApiCallOptions) => Promise<CreateAutomationHttpResponse>;
+declare function createAutomation(body: AutomationDetailRequestObject, options?: ApiCallOptions): Promise<CreateAutomationHttpResponse>;
 type CreateAutomationHttpResponse = {
     data: AutomationDetailResponseObject;
     headers: Headers;
@@ -244,12 +244,12 @@ type CreateAutomationHttpError = {
  * @param query an object with query parameters
  * @throws GetAutomationsUsageMetricsHttpError
  */
-declare const getAutomationsUsageMetrics: (query: {
+declare function getAutomationsUsageMetrics(query: {
     /** If specified, result will be broken apart for each automation */
     breakdownBy?: string;
     /** Indicates how the metrics should be filtered */
     filter: string;
-}, options?: ApiCallOptions) => Promise<GetAutomationsUsageMetricsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAutomationsUsageMetricsHttpResponse>;
 type GetAutomationsUsageMetricsHttpResponse = {
     data: UsageList;
     headers: Headers;
@@ -268,7 +268,7 @@ type GetAutomationsUsageMetricsHttpError = {
  * @param id The unique identifier for the automation.
  * @throws DeleteAutomationHttpError
  */
-declare const deleteAutomation: (id: string, options?: ApiCallOptions) => Promise<DeleteAutomationHttpResponse>;
+declare function deleteAutomation(id: string, options?: ApiCallOptions): Promise<DeleteAutomationHttpResponse>;
 type DeleteAutomationHttpResponse = {
     data: void;
     headers: Headers;
@@ -286,10 +286,10 @@ type DeleteAutomationHttpError = {
  * @param query an object with query parameters
  * @throws GetAutomationWithQueryHttpError
  */
-declare const getAutomationWithQuery: (id: string, query: {
+declare function getAutomationWithQuery(id: string, query: {
     /** Allows to select the actual fields to be returned. Where the default is all fields */
     fields?: string;
-}, options?: ApiCallOptions) => Promise<GetAutomationWithQueryHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAutomationWithQueryHttpResponse>;
 type GetAutomationWithQueryHttpResponse = {
     data: AutomationDetailResponseObject;
     headers: Headers;
@@ -306,7 +306,7 @@ type GetAutomationWithQueryHttpError = {
  * @param id The unique identifier for the automation.
  * @throws GetAutomationHttpError
  */
-declare const getAutomation: (id: string, options?: ApiCallOptions) => Promise<GetAutomationHttpResponse>;
+declare function getAutomation(id: string, options?: ApiCallOptions): Promise<GetAutomationHttpResponse>;
 type GetAutomationHttpResponse = {
     data: AutomationDetailResponseObject;
     headers: Headers;
@@ -324,7 +324,7 @@ type GetAutomationHttpError = {
  * @param body an object with the body content
  * @throws UpdateAutomationHttpError
  */
-declare const updateAutomation: (id: string, body: AutomationDetailRequestObject, options?: ApiCallOptions) => Promise<UpdateAutomationHttpResponse>;
+declare function updateAutomation(id: string, body: AutomationDetailRequestObject, options?: ApiCallOptions): Promise<UpdateAutomationHttpResponse>;
 type UpdateAutomationHttpResponse = {
     data: AutomationDetailResponseObject;
     headers: Headers;
@@ -342,10 +342,10 @@ type UpdateAutomationHttpError = {
  * @param body an object with the body content
  * @throws CopyAutomationHttpError
  */
-declare const copyAutomation: (id: string, body: {
+declare function copyAutomation(id: string, body: {
     /** Name of the new automation. */
     name: string;
-}, options?: ApiCallOptions) => Promise<CopyAutomationHttpResponse>;
+}, options?: ApiCallOptions): Promise<CopyAutomationHttpResponse>;
 type CopyAutomationHttpResponse = {
     data: {
         /** The unique identifier for the automation. */
@@ -365,7 +365,7 @@ type CopyAutomationHttpError = {
  * @param id The unique identifier for the automation.
  * @throws DisableAutomationHttpError
  */
-declare const disableAutomation: (id: string, options?: ApiCallOptions) => Promise<DisableAutomationHttpResponse>;
+declare function disableAutomation(id: string, options?: ApiCallOptions): Promise<DisableAutomationHttpResponse>;
 type DisableAutomationHttpResponse = {
     data: void;
     headers: Headers;
@@ -382,7 +382,7 @@ type DisableAutomationHttpError = {
  * @param id The unique identifier for the automation.
  * @throws EnableAutomationHttpError
  */
-declare const enableAutomation: (id: string, options?: ApiCallOptions) => Promise<EnableAutomationHttpResponse>;
+declare function enableAutomation(id: string, options?: ApiCallOptions): Promise<EnableAutomationHttpResponse>;
 type EnableAutomationHttpResponse = {
     data: void;
     headers: Headers;
@@ -400,9 +400,9 @@ type EnableAutomationHttpError = {
  * @param body an object with the body content
  * @throws MoveAutomationHttpError
  */
-declare const moveAutomation: (id: string, body: {
+declare function moveAutomation(id: string, body: {
     userId: string;
-}, options?: ApiCallOptions) => Promise<MoveAutomationHttpResponse>;
+}, options?: ApiCallOptions): Promise<MoveAutomationHttpResponse>;
 type MoveAutomationHttpResponse = {
     data: void;
     headers: Headers;
@@ -420,7 +420,7 @@ type MoveAutomationHttpError = {
  * @param query an object with query parameters
  * @throws GetAutomationRunsHttpError
  */
-declare const getAutomationRuns: (id: string, query: {
+declare function getAutomationRuns(id: string, query: {
     /** Allows to select the actual fields to be returned. Where the default is all fields */
     fields?: string;
     /** Allowed filters: status, context, startTime and title */
@@ -429,7 +429,7 @@ declare const getAutomationRuns: (id: string, query: {
     limit?: number;
     /** The field to sort by, with +- prefix indicating sort order. (?query=-startTime => sort on the startTime field using descending order) */
     sort?: "id" | "status" | "startTime" | "-id" | "-status" | "-startTime" | "+id" | "+status" | "+startTime";
-}, options?: ApiCallOptions) => Promise<GetAutomationRunsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAutomationRunsHttpResponse>;
 type GetAutomationRunsHttpResponse = {
     data: RunList;
     headers: Headers;
@@ -449,7 +449,7 @@ type GetAutomationRunsHttpError = {
  * @param body an object with the body content
  * @throws QueueAutomationRunHttpError
  */
-declare const queueAutomationRun: (id: string, body: RunDetailRequestObject, options?: ApiCallOptions) => Promise<QueueAutomationRunHttpResponse>;
+declare function queueAutomationRun(id: string, body: RunDetailRequestObject, options?: ApiCallOptions): Promise<QueueAutomationRunHttpResponse>;
 type QueueAutomationRunHttpResponse = {
     data: RunDetailResponseObject;
     headers: Headers;
@@ -468,10 +468,10 @@ type QueueAutomationRunHttpError = {
  * @param query an object with query parameters
  * @throws GetAutomationRunWithQueryHttpError
  */
-declare const getAutomationRunWithQuery: (id: string, runId: string, query: {
+declare function getAutomationRunWithQuery(id: string, runId: string, query: {
     /** Allows to select the actual fields to be returned. Where the default is all fields */
     fields?: string;
-}, options?: ApiCallOptions) => Promise<GetAutomationRunWithQueryHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAutomationRunWithQueryHttpResponse>;
 type GetAutomationRunWithQueryHttpResponse = {
     data: RunDetailResponseObject;
     headers: Headers;
@@ -489,7 +489,7 @@ type GetAutomationRunWithQueryHttpError = {
  * @param runId The unique identifier for the run.
  * @throws GetAutomationRunHttpError
  */
-declare const getAutomationRun: (id: string, runId: string, options?: ApiCallOptions) => Promise<GetAutomationRunHttpResponse>;
+declare function getAutomationRun(id: string, runId: string, options?: ApiCallOptions): Promise<GetAutomationRunHttpResponse>;
 type GetAutomationRunHttpResponse = {
     data: RunDetailResponseObject;
     headers: Headers;
@@ -507,7 +507,7 @@ type GetAutomationRunHttpError = {
  * @param runId The unique identifier for the run.
  * @throws GetAutomationRunDetailsHttpError
  */
-declare const getAutomationRunDetails: (id: string, runId: string, options?: ApiCallOptions) => Promise<GetAutomationRunDetailsHttpResponse>;
+declare function getAutomationRunDetails(id: string, runId: string, options?: ApiCallOptions): Promise<GetAutomationRunDetailsHttpResponse>;
 type GetAutomationRunDetailsHttpResponse = {
     data: {
         url?: string;
@@ -527,7 +527,7 @@ type GetAutomationRunDetailsHttpError = {
  * @param runId The unique identifier for the run.
  * @throws RetryAutomationRunHttpError
  */
-declare const retryAutomationRun: (id: string, runId: string, options?: ApiCallOptions) => Promise<RetryAutomationRunHttpResponse>;
+declare function retryAutomationRun(id: string, runId: string, options?: ApiCallOptions): Promise<RetryAutomationRunHttpResponse>;
 type RetryAutomationRunHttpResponse = {
     data: void;
     headers: Headers;
@@ -545,7 +545,7 @@ type RetryAutomationRunHttpError = {
  * @param runId The unique identifier for the run.
  * @throws StopAutomationRunHttpError
  */
-declare const stopAutomationRun: (id: string, runId: string, options?: ApiCallOptions) => Promise<StopAutomationRunHttpResponse>;
+declare function stopAutomationRun(id: string, runId: string, options?: ApiCallOptions): Promise<StopAutomationRunHttpResponse>;
 type StopAutomationRunHttpResponse = {
     data: void;
     headers: Headers;

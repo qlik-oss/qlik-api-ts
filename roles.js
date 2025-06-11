@@ -1,44 +1,54 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/roles.ts
-var getRoles = async (query, options) => invokeFetch("roles", {
-  method: "get",
-  pathTemplate: "/api/v1/roles",
-  query,
-  options
-});
-var createRole = async (body, options) => invokeFetch("roles", {
-  method: "post",
-  pathTemplate: "/api/v1/roles",
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteRole = async (id, options) => invokeFetch("roles", {
-  method: "delete",
-  pathTemplate: "/api/v1/roles/{id}",
-  pathVariables: { id },
-  options
-});
-var getRole = async (id, options) => invokeFetch("roles", {
-  method: "get",
-  pathTemplate: "/api/v1/roles/{id}",
-  pathVariables: { id },
-  options
-});
-var patchRole = async (id, body, options) => invokeFetch("roles", {
-  method: "patch",
-  pathTemplate: "/api/v1/roles/{id}",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
+async function getRoles(query, options) {
+  return invokeFetch("roles", {
+    method: "get",
+    pathTemplate: "/api/v1/roles",
+    query,
+    options
+  });
+}
+async function createRole(body, options) {
+  return invokeFetch("roles", {
+    method: "post",
+    pathTemplate: "/api/v1/roles",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteRole(id, options) {
+  return invokeFetch("roles", {
+    method: "delete",
+    pathTemplate: "/api/v1/roles/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function getRole(id, options) {
+  return invokeFetch("roles", {
+    method: "get",
+    pathTemplate: "/api/v1/roles/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function patchRole(id, body, options) {
+  return invokeFetch("roles", {
+    method: "patch",
+    pathTemplate: "/api/v1/roles/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("roles");
 }

@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * The ID of the computation
@@ -78,7 +78,7 @@ type SamplingConfiguration = {
  * @param body an object with the body content
  * @throws TriggerDataQualitiesComputationHttpError
  */
-declare const triggerDataQualitiesComputation: (body: DataQualityComputationRequest, options?: ApiCallOptions) => Promise<TriggerDataQualitiesComputationHttpResponse>;
+declare function triggerDataQualitiesComputation(body: DataQualityComputationRequest, options?: ApiCallOptions): Promise<TriggerDataQualitiesComputationHttpResponse>;
 type TriggerDataQualitiesComputationHttpResponse = {
     data: ComputationResponse;
     headers: Headers;
@@ -99,7 +99,7 @@ type TriggerDataQualitiesComputationHttpError = {
  * @param computationId The ID of the computation
  * @throws GetDataQualitiesComputationHttpError
  */
-declare const getDataQualitiesComputation: (computationId: string, options?: ApiCallOptions) => Promise<GetDataQualitiesComputationHttpResponse>;
+declare function getDataQualitiesComputation(computationId: string, options?: ApiCallOptions): Promise<GetDataQualitiesComputationHttpResponse>;
 type GetDataQualitiesComputationHttpResponse = {
     data: ComputationStatusResponse;
     headers: Headers;
@@ -116,12 +116,12 @@ type GetDataQualitiesComputationHttpError = {
  * @param query an object with query parameters
  * @throws GetDataQualitiesGlobalResultsHttpError
  */
-declare const getDataQualitiesGlobalResults: (query: {
+declare function getDataQualitiesGlobalResults(query: {
     /** The connection ID */
     connectionId?: ConnectionIdType;
     /** The ID of the dataset */
     datasetId: DatasetIdType;
-}, options?: ApiCallOptions) => Promise<GetDataQualitiesGlobalResultsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDataQualitiesGlobalResultsHttpResponse>;
 type GetDataQualitiesGlobalResultsHttpResponse = {
     data: DatasetQualityGlobalResultsResponse;
     headers: Headers;

@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type ErrorResponse = {
     errors?: HttpResult[];
@@ -256,7 +256,7 @@ type TaskMetadata = {
  * @param query an object with query parameters
  * @throws GetTasksHttpError
  */
-declare const getTasks: (query: {
+declare function getTasks(query: {
     /** The maximum number of resources to return for a request. */
     limit?: number;
     /** The page cursor. */
@@ -267,7 +267,7 @@ declare const getTasks: (query: {
      * -updatedAt). A property must be prefixed by + or - to
      * indicate ascending or descending sort order respectively. */
     sort?: "+createdAt" | "-createdAt" | "+updatedAt" | "-updatedAt";
-}, options?: ApiCallOptions) => Promise<GetTasksHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetTasksHttpResponse>;
 type GetTasksHttpResponse = {
     data: TaskList;
     headers: Headers;
@@ -287,10 +287,10 @@ type GetTasksHttpError = {
  * @param body an object with the body content
  * @throws CreateTaskHttpError
  */
-declare const createTask: (query: {
+declare function createTask(query: {
     /** ID of the reload-task to migrate from the old system (optional). */
     migrateFrom?: string;
-}, body: Task, options?: ApiCallOptions) => Promise<CreateTaskHttpResponse>;
+}, body: Task, options?: ApiCallOptions): Promise<CreateTaskHttpResponse>;
 type CreateTaskHttpResponse = {
     data: Task;
     headers: Headers;
@@ -308,7 +308,7 @@ type CreateTaskHttpError = {
  * @param query an object with query parameters
  * @throws GetTasksResourceRunsHttpError
  */
-declare const getTasksResourceRuns: (id: string, query: {
+declare function getTasksResourceRuns(id: string, query: {
     /** The maximum number of task runs to return for a request. */
     limit?: number;
     /** The page cursor. */
@@ -316,7 +316,7 @@ declare const getTasksResourceRuns: (id: string, query: {
     /** The property of a resource to sort on (default sort is -startedAt).
      * A property must be prefixed by + or - to indicate ascending or descending sort order respectively. */
     sort?: "+startedAt" | "-startedAt" | "+endedAt" | "-endedAt" | "+status" | "-status" | "+taskId" | "-taskId" | "+actionId" | "-actionId";
-}, options?: ApiCallOptions) => Promise<GetTasksResourceRunsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetTasksResourceRunsHttpResponse>;
 type GetTasksResourceRunsHttpResponse = {
     data: OrchRunList;
     headers: Headers;
@@ -335,7 +335,7 @@ type GetTasksResourceRunsHttpError = {
  * @param id The task's unique identifier.
  * @throws DeleteTaskHttpError
  */
-declare const deleteTask: (id: string, options?: ApiCallOptions) => Promise<DeleteTaskHttpResponse>;
+declare function deleteTask(id: string, options?: ApiCallOptions): Promise<DeleteTaskHttpResponse>;
 type DeleteTaskHttpResponse = {
     data: void;
     headers: Headers;
@@ -352,7 +352,7 @@ type DeleteTaskHttpError = {
  * @param id The task's unique identifier.
  * @throws GetTaskHttpError
  */
-declare const getTask: (id: string, options?: ApiCallOptions) => Promise<GetTaskHttpResponse>;
+declare function getTask(id: string, options?: ApiCallOptions): Promise<GetTaskHttpResponse>;
 type GetTaskHttpResponse = {
     data: Task;
     headers: Headers;
@@ -370,7 +370,7 @@ type GetTaskHttpError = {
  * @param body an object with the body content
  * @throws UpdateTaskHttpError
  */
-declare const updateTask: (id: string, body: Task, options?: ApiCallOptions) => Promise<UpdateTaskHttpResponse>;
+declare function updateTask(id: string, body: Task, options?: ApiCallOptions): Promise<UpdateTaskHttpResponse>;
 type UpdateTaskHttpResponse = {
     data: Task;
     headers: Headers;
@@ -388,10 +388,10 @@ type UpdateTaskHttpError = {
  * @param query an object with query parameters
  * @throws StartTaskHttpError
  */
-declare const startTask: (id: string, query: {
+declare function startTask(id: string, query: {
     /** Indicates the origin of the trigger. If not provided, defaults to 'manual'. For event-triggered tasks, this can be the name of the triggering task. */
     source?: string;
-}, options?: ApiCallOptions) => Promise<StartTaskHttpResponse>;
+}, options?: ApiCallOptions): Promise<StartTaskHttpResponse>;
 type StartTaskHttpResponse = {
     data: {
         message?: string;
@@ -411,7 +411,7 @@ type StartTaskHttpError = {
  * @param query an object with query parameters
  * @throws GetTaskRunsHttpError
  */
-declare const getTaskRuns: (id: string, query: {
+declare function getTaskRuns(id: string, query: {
     /** The maximum number of task runs to return for a request. */
     limit?: number;
     /** The page cursor. */
@@ -419,7 +419,7 @@ declare const getTaskRuns: (id: string, query: {
     /** The property of a resource to sort on (default sort is -startedAt).
      * A property must be prefixed by + or - to indicate ascending or descending sort order respectively. */
     sort?: "+startedAt" | "-startedAt" | "+endedAt" | "-endedAt" | "+status" | "-status" | "+taskId" | "-taskId" | "+actionId" | "-actionId";
-}, options?: ApiCallOptions) => Promise<GetTaskRunsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetTaskRunsHttpResponse>;
 type GetTaskRunsHttpResponse = {
     data: OrchRunList;
     headers: Headers;
@@ -438,7 +438,7 @@ type GetTaskRunsHttpError = {
  * @param id The task's unique identifier.
  * @throws GetLastTaskRunHttpError
  */
-declare const getLastTaskRun: (id: string, options?: ApiCallOptions) => Promise<GetLastTaskRunHttpResponse>;
+declare function getLastTaskRun(id: string, options?: ApiCallOptions): Promise<GetLastTaskRunHttpResponse>;
 type GetLastTaskRunHttpResponse = {
     data: OrchRun;
     headers: Headers;
@@ -456,7 +456,7 @@ type GetLastTaskRunHttpError = {
  * @param runId The run's unique identifier.
  * @throws GetTaskRunLogHttpError
  */
-declare const getTaskRunLog: (id: string, runId: string, options?: ApiCallOptions) => Promise<GetTaskRunLogHttpResponse>;
+declare function getTaskRunLog(id: string, runId: string, options?: ApiCallOptions): Promise<GetTaskRunLogHttpResponse>;
 type GetTaskRunLogHttpResponse = {
     data: {
         /** Log content in plain text format */

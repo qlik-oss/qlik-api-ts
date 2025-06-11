@@ -1,80 +1,100 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/data-stores.ts
-var deleteDataStores = async (body, options) => invokeFetch("data-stores", {
-  method: "delete",
-  pathTemplate: "/api/v1/data-stores",
-  body,
-  contentType: "application/json",
-  options
-});
-var getDataStores = async (query, options) => invokeFetch("data-stores", {
-  method: "get",
-  pathTemplate: "/api/v1/data-stores",
-  query,
-  options
-});
-var createDataStore = async (body, options) => invokeFetch("data-stores", {
-  method: "post",
-  pathTemplate: "/api/v1/data-stores",
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteDataStoreDataAssets = async (dataStoreIds, options) => invokeFetch("data-stores", {
-  method: "delete",
-  pathTemplate: "/api/v1/data-stores/{data-store-ids}/data-assets",
-  pathVariables: { "data-store-ids": dataStoreIds },
-  options
-});
-var getDataStoreDataAssets = async (dataStoreIds, query, options) => invokeFetch("data-stores", {
-  method: "get",
-  pathTemplate: "/api/v1/data-stores/{data-store-ids}/data-assets",
-  pathVariables: { "data-store-ids": dataStoreIds },
-  query,
-  options
-});
-var deleteDataStoreDataAssetDataSets = async (dataStoreIds, dataAssetIds, options) => invokeFetch("data-stores", {
-  method: "delete",
-  pathTemplate: "/api/v1/data-stores/{data-store-ids}/data-assets/{data-asset-ids}/data-sets",
-  pathVariables: { "data-store-ids": dataStoreIds, "data-asset-ids": dataAssetIds },
-  options
-});
-var getDataStoreDataAssetDataSets = async (dataStoreIds, dataAssetIds, query, options) => invokeFetch("data-stores", {
-  method: "get",
-  pathTemplate: "/api/v1/data-stores/{data-store-ids}/data-assets/{data-asset-ids}/data-sets",
-  pathVariables: { "data-store-ids": dataStoreIds, "data-asset-ids": dataAssetIds },
-  query,
-  options
-});
-var getDataStore = async (dataStoreId, query, options) => invokeFetch("data-stores", {
-  method: "get",
-  pathTemplate: "/api/v1/data-stores/{data-store-id}",
-  pathVariables: { "data-store-id": dataStoreId },
-  query,
-  options
-});
-var patchDataStore = async (dataStoreId, body, options) => invokeFetch("data-stores", {
-  method: "patch",
-  pathTemplate: "/api/v1/data-stores/{data-store-id}",
-  pathVariables: { "data-store-id": dataStoreId },
-  body,
-  contentType: "application/json",
-  options
-});
-var updateDataStore = async (dataStoreId, body, options) => invokeFetch("data-stores", {
-  method: "put",
-  pathTemplate: "/api/v1/data-stores/{data-store-id}",
-  pathVariables: { "data-store-id": dataStoreId },
-  body,
-  contentType: "application/json",
-  options
-});
+async function deleteDataStores(body, options) {
+  return invokeFetch("data-stores", {
+    method: "delete",
+    pathTemplate: "/api/v1/data-stores",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getDataStores(query, options) {
+  return invokeFetch("data-stores", {
+    method: "get",
+    pathTemplate: "/api/v1/data-stores",
+    query,
+    options
+  });
+}
+async function createDataStore(body, options) {
+  return invokeFetch("data-stores", {
+    method: "post",
+    pathTemplate: "/api/v1/data-stores",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteDataStoreDataAssets(dataStoreIds, options) {
+  return invokeFetch("data-stores", {
+    method: "delete",
+    pathTemplate: "/api/v1/data-stores/{data-store-ids}/data-assets",
+    pathVariables: { "data-store-ids": dataStoreIds },
+    options
+  });
+}
+async function getDataStoreDataAssets(dataStoreIds, query, options) {
+  return invokeFetch("data-stores", {
+    method: "get",
+    pathTemplate: "/api/v1/data-stores/{data-store-ids}/data-assets",
+    pathVariables: { "data-store-ids": dataStoreIds },
+    query,
+    options
+  });
+}
+async function deleteDataStoreDataAssetDataSets(dataStoreIds, dataAssetIds, options) {
+  return invokeFetch("data-stores", {
+    method: "delete",
+    pathTemplate: "/api/v1/data-stores/{data-store-ids}/data-assets/{data-asset-ids}/data-sets",
+    pathVariables: { "data-store-ids": dataStoreIds, "data-asset-ids": dataAssetIds },
+    options
+  });
+}
+async function getDataStoreDataAssetDataSets(dataStoreIds, dataAssetIds, query, options) {
+  return invokeFetch("data-stores", {
+    method: "get",
+    pathTemplate: "/api/v1/data-stores/{data-store-ids}/data-assets/{data-asset-ids}/data-sets",
+    pathVariables: { "data-store-ids": dataStoreIds, "data-asset-ids": dataAssetIds },
+    query,
+    options
+  });
+}
+async function getDataStore(dataStoreId, query, options) {
+  return invokeFetch("data-stores", {
+    method: "get",
+    pathTemplate: "/api/v1/data-stores/{data-store-id}",
+    pathVariables: { "data-store-id": dataStoreId },
+    query,
+    options
+  });
+}
+async function patchDataStore(dataStoreId, body, options) {
+  return invokeFetch("data-stores", {
+    method: "patch",
+    pathTemplate: "/api/v1/data-stores/{data-store-id}",
+    pathVariables: { "data-store-id": dataStoreId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function updateDataStore(dataStoreId, body, options) {
+  return invokeFetch("data-stores", {
+    method: "put",
+    pathTemplate: "/api/v1/data-stores/{data-store-id}",
+    pathVariables: { "data-store-id": dataStoreId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("data-stores");
 }

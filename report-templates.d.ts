@@ -1,5 +1,5 @@
-import { A as ApiCallOptions, D as DownloadableBlob } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions, D as DownloadableBlob } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type CreateTemplateRequest = {
     /** Template description */
@@ -88,7 +88,7 @@ type UpdateTemplateRequest = {
  * @param query an object with query parameters
  * @throws GetReportTemplatesHttpError
  */
-declare const getReportTemplates: (query: {
+declare function getReportTemplates(query: {
     /** If present, restrict the number of returned items to this value. */
     limit?: number;
     /** Template name to search and filter for. Case-insensitive open search with wildcards both as prefix and suffix. */
@@ -101,7 +101,7 @@ declare const getReportTemplates: (query: {
     sort?: ("name" | "+name" | "-name" | "createdAt" | "+createdAt" | "-createdAt" | "updatedAt" | "+updatedAt" | "-updatedAt" | "type" | "+type" | "-type")[];
     /** Return the templates that are using the specified app as data source. */
     sourceAppId?: string;
-}, options?: ApiCallOptions) => Promise<GetReportTemplatesHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetReportTemplatesHttpResponse>;
 type GetReportTemplatesHttpResponse = {
     data: GetTemplatesResponse;
     headers: Headers;
@@ -120,7 +120,7 @@ type GetReportTemplatesHttpError = {
  * @param body an object with the body content
  * @throws CreateReportTemplateHttpError
  */
-declare const createReportTemplate: (body: CreateTemplateRequest, options?: ApiCallOptions) => Promise<CreateReportTemplateHttpResponse>;
+declare function createReportTemplate(body: CreateTemplateRequest, options?: ApiCallOptions): Promise<CreateReportTemplateHttpResponse>;
 type CreateReportTemplateHttpResponse = {
     data: ReportTemplateResponse;
     headers: Headers;
@@ -137,7 +137,7 @@ type CreateReportTemplateHttpError = {
  * @param id The ID of the report template to delete.
  * @throws DeleteReportTemplateHttpError
  */
-declare const deleteReportTemplate: (id: string, options?: ApiCallOptions) => Promise<DeleteReportTemplateHttpResponse>;
+declare function deleteReportTemplate(id: string, options?: ApiCallOptions): Promise<DeleteReportTemplateHttpResponse>;
 type DeleteReportTemplateHttpResponse = {
     data: void;
     headers: Headers;
@@ -154,7 +154,7 @@ type DeleteReportTemplateHttpError = {
  * @param id The ID of the report template.
  * @throws GetReportTemplateHttpError
  */
-declare const getReportTemplate: (id: string, options?: ApiCallOptions) => Promise<GetReportTemplateHttpResponse>;
+declare function getReportTemplate(id: string, options?: ApiCallOptions): Promise<GetReportTemplateHttpResponse>;
 type GetReportTemplateHttpResponse = {
     data: ReportTemplateResponse;
     headers: Headers;
@@ -172,7 +172,7 @@ type GetReportTemplateHttpError = {
  * @param body an object with the body content
  * @throws PatchReportTemplateHttpError
  */
-declare const patchReportTemplate: (id: string, body: Operation[], options?: ApiCallOptions) => Promise<PatchReportTemplateHttpResponse>;
+declare function patchReportTemplate(id: string, body: Operation[], options?: ApiCallOptions): Promise<PatchReportTemplateHttpResponse>;
 type PatchReportTemplateHttpResponse = {
     data: void;
     headers: Headers;
@@ -190,7 +190,7 @@ type PatchReportTemplateHttpError = {
  * @param body an object with the body content
  * @throws UpdateReportTemplateHttpError
  */
-declare const updateReportTemplate: (id: string, body: UpdateTemplateRequest, options?: ApiCallOptions) => Promise<UpdateReportTemplateHttpResponse>;
+declare function updateReportTemplate(id: string, body: UpdateTemplateRequest, options?: ApiCallOptions): Promise<UpdateReportTemplateHttpResponse>;
 type UpdateReportTemplateHttpResponse = {
     data: ReportTemplateResponse;
     headers: Headers;
@@ -207,7 +207,7 @@ type UpdateReportTemplateHttpError = {
  * @param id The ID of the report template.
  * @throws DownloadReportTemplateHttpError
  */
-declare const downloadReportTemplate: (id: string, options?: ApiCallOptions) => Promise<DownloadReportTemplateHttpResponse>;
+declare function downloadReportTemplate(id: string, options?: ApiCallOptions): Promise<DownloadReportTemplateHttpResponse>;
 type DownloadReportTemplateHttpResponse = {
     data: DownloadableBlob;
     headers: Headers;

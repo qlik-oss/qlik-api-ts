@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type Error = {
     /** The error code is in form of 'RELOADS-xxx'. ranges from 'RELOADS-001' to 'RELOADS-013'.  */
@@ -111,7 +111,7 @@ type Type = "hub" | "external" | "chronos" | "automations" | "data-refresh" | "c
  * @param query an object with query parameters
  * @throws GetReloadsHttpError
  */
-declare const getReloads: (query: {
+declare function getReloads(query: {
     /** The UUID formatted string used to search for an app's reload history entries. TenantAdmin users may omit this parameter to list all reload history in the tenant. */
     appId: string;
     /** SCIM filter expression used to search for reloads.
@@ -135,7 +135,7 @@ declare const getReloads: (query: {
     partial?: boolean;
     /** The cursor to the previous page of resources. Provide either the next or prev cursor, but not both. */
     prev?: string;
-}, options?: ApiCallOptions) => Promise<GetReloadsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetReloadsHttpResponse>;
 type GetReloadsHttpResponse = {
     data: Reloads;
     headers: Headers;
@@ -154,7 +154,7 @@ type GetReloadsHttpError = {
  * @param body an object with the body content
  * @throws QueueReloadHttpError
  */
-declare const queueReload: (body: ReloadRequest, options?: ApiCallOptions) => Promise<QueueReloadHttpResponse>;
+declare function queueReload(body: ReloadRequest, options?: ApiCallOptions): Promise<QueueReloadHttpResponse>;
 type QueueReloadHttpResponse = {
     data: Reload;
     headers: Headers;
@@ -171,7 +171,7 @@ type QueueReloadHttpError = {
  * @param reloadId The unique identifier of the reload.
  * @throws GetReloadHttpError
  */
-declare const getReload: (reloadId: string, options?: ApiCallOptions) => Promise<GetReloadHttpResponse>;
+declare function getReload(reloadId: string, options?: ApiCallOptions): Promise<GetReloadHttpResponse>;
 type GetReloadHttpResponse = {
     data: Reload;
     headers: Headers;
@@ -188,7 +188,7 @@ type GetReloadHttpError = {
  * @param reloadId The unique identifier of the reload.
  * @throws CancelReloadHttpError
  */
-declare const cancelReload: (reloadId: string, options?: ApiCallOptions) => Promise<CancelReloadHttpResponse>;
+declare function cancelReload(reloadId: string, options?: ApiCallOptions): Promise<CancelReloadHttpResponse>;
 type CancelReloadHttpResponse = {
     data: void;
     headers: Headers;

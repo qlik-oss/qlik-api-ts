@@ -1,45 +1,57 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/transports.ts
-var deleteEmailConfig = async (options) => invokeFetch("transports", {
-  method: "delete",
-  pathTemplate: "/api/v1/transports/email-config",
-  options
-});
-var getEmailConfig = async (options) => invokeFetch("transports", {
-  method: "get",
-  pathTemplate: "/api/v1/transports/email-config",
-  options
-});
-var patchEmailConfig = async (body, options) => invokeFetch("transports", {
-  method: "patch",
-  pathTemplate: "/api/v1/transports/email-config",
-  body,
-  contentType: "application/json",
-  options
-});
-var sendTestEmail = async (body, options) => invokeFetch("transports", {
-  method: "post",
-  pathTemplate: "/api/v1/transports/email-config/actions/send-test-email",
-  body,
-  contentType: "application/json",
-  options
-});
-var validateEmailConfig = async (options) => invokeFetch("transports", {
-  method: "post",
-  pathTemplate: "/api/v1/transports/email-config/actions/validate",
-  options
-});
-var verifyEmailConfigConnection = async (options) => invokeFetch("transports", {
-  method: "post",
-  pathTemplate: "/api/v1/transports/email-config/actions/verify-connection",
-  options
-});
+async function deleteEmailConfig(options) {
+  return invokeFetch("transports", {
+    method: "delete",
+    pathTemplate: "/api/v1/transports/email-config",
+    options
+  });
+}
+async function getEmailConfig(options) {
+  return invokeFetch("transports", {
+    method: "get",
+    pathTemplate: "/api/v1/transports/email-config",
+    options
+  });
+}
+async function patchEmailConfig(body, options) {
+  return invokeFetch("transports", {
+    method: "patch",
+    pathTemplate: "/api/v1/transports/email-config",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function sendTestEmail(body, options) {
+  return invokeFetch("transports", {
+    method: "post",
+    pathTemplate: "/api/v1/transports/email-config/actions/send-test-email",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function validateEmailConfig(options) {
+  return invokeFetch("transports", {
+    method: "post",
+    pathTemplate: "/api/v1/transports/email-config/actions/validate",
+    options
+  });
+}
+async function verifyEmailConfigConnection(options) {
+  return invokeFetch("transports", {
+    method: "post",
+    pathTemplate: "/api/v1/transports/email-config/actions/verify-connection",
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("transports");
 }

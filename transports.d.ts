@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type DeleteConfigNotFoundError = {
     errors?: {
@@ -162,7 +162,7 @@ type SmtpResult = {
  *
  * @throws DeleteEmailConfigHttpError
  */
-declare const deleteEmailConfig: (options?: ApiCallOptions) => Promise<DeleteEmailConfigHttpResponse>;
+declare function deleteEmailConfig(options?: ApiCallOptions): Promise<DeleteEmailConfigHttpResponse>;
 type DeleteEmailConfigHttpResponse = {
     data: void;
     headers: Headers;
@@ -189,7 +189,7 @@ type DeleteEmailConfigdefaultHttpError = {
  *
  * @throws GetEmailConfigHttpError
  */
-declare const getEmailConfig: (options?: ApiCallOptions) => Promise<GetEmailConfigHttpResponse>;
+declare function getEmailConfig(options?: ApiCallOptions): Promise<GetEmailConfigHttpResponse>;
 type GetEmailConfigHttpResponse = {
     data: GetEmailConfig;
     headers: Headers;
@@ -212,7 +212,7 @@ type GetEmailConfigdefaultHttpError = {
  * @param body an object with the body content
  * @throws PatchEmailConfigHttpError
  */
-declare const patchEmailConfig: (body: EmailConfigPatch, options?: ApiCallOptions) => Promise<PatchEmailConfigHttpResponse>;
+declare function patchEmailConfig(body: EmailConfigPatch, options?: ApiCallOptions): Promise<PatchEmailConfigHttpResponse>;
 type PatchEmailConfigHttpResponse = {
     data: void;
     headers: Headers;
@@ -240,7 +240,7 @@ type PatchEmailConfigdefaultHttpError = {
  * @param body an object with the body content
  * @throws SendTestEmailHttpError
  */
-declare const sendTestEmail: (body: Email, options?: ApiCallOptions) => Promise<SendTestEmailHttpResponse>;
+declare function sendTestEmail(body: Email, options?: ApiCallOptions): Promise<SendTestEmailHttpResponse>;
 type SendTestEmailHttpResponse = {
     data: SmtpResult;
     headers: Headers;
@@ -267,7 +267,7 @@ type SendTestEmaildefaultHttpError = {
  *
  * @throws ValidateEmailConfigHttpError
  */
-declare const validateEmailConfig: (options?: ApiCallOptions) => Promise<ValidateEmailConfigHttpResponse>;
+declare function validateEmailConfig(options?: ApiCallOptions): Promise<ValidateEmailConfigHttpResponse>;
 type ValidateEmailConfigHttpResponse = {
     data: SmtpCheck;
     headers: Headers;
@@ -283,7 +283,7 @@ type ValidateEmailConfigHttpError = {
  *
  * @throws VerifyEmailConfigConnectionHttpError
  */
-declare const verifyEmailConfigConnection: (options?: ApiCallOptions) => Promise<VerifyEmailConfigConnectionHttpResponse>;
+declare function verifyEmailConfigConnection(options?: ApiCallOptions): Promise<VerifyEmailConfigConnectionHttpResponse>;
 type VerifyEmailConfigConnectionHttpResponse = {
     data: SmtpResult;
     headers: Headers;

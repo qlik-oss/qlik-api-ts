@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type Assistant = {
     /** Datetime when the assistant was created. */
@@ -486,7 +486,7 @@ type ThreadsResult = {
  * @param query an object with query parameters
  * @throws GetAssistantsHttpError
  */
-declare const getAssistants: (query: {
+declare function getAssistants(query: {
     /** @deprecated
      * Optional parameter to request total count for query. */
     countTotal?: boolean;
@@ -498,7 +498,7 @@ declare const getAssistants: (query: {
     prev?: string;
     /** Optional resource field name to sort on, case insensitive, e.g. `name`. Can be prefixed with `-` to set descending order; defaults to ascending. */
     sort?: "NAME" | "-NAME" | "DESCRIPTION" | "-DESCRIPTION" | "CREATED" | "-CREATED" | "UPDATED" | "-UPDATED";
-}, options?: ApiCallOptions) => Promise<GetAssistantsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAssistantsHttpResponse>;
 type GetAssistantsHttpResponse = {
     data: AssistantsResult;
     headers: Headers;
@@ -517,7 +517,7 @@ type GetAssistantsHttpError = {
  * @param body an object with the body content
  * @throws CreateAssistantHttpError
  */
-declare const createAssistant: (body: CreateAssistant, options?: ApiCallOptions) => Promise<CreateAssistantHttpResponse>;
+declare function createAssistant(body: CreateAssistant, options?: ApiCallOptions): Promise<CreateAssistantHttpResponse>;
 type CreateAssistantHttpResponse = {
     data: Assistant;
     headers: Headers;
@@ -534,7 +534,7 @@ type CreateAssistantHttpError = {
  * @param assistantId The ID of the assistant from which to retrieve feedback summary.
  * @throws GetAssistantFeedbackHttpError
  */
-declare const getAssistantFeedback: (assistantId: string, options?: ApiCallOptions) => Promise<GetAssistantFeedbackHttpResponse>;
+declare function getAssistantFeedback(assistantId: string, options?: ApiCallOptions): Promise<GetAssistantFeedbackHttpResponse>;
 type GetAssistantFeedbackHttpResponse = {
     data: FeedbackSummary;
     headers: Headers;
@@ -552,7 +552,7 @@ type GetAssistantFeedbackHttpError = {
  * @param body an object with the body content
  * @throws GetAssistantSourcesHttpError
  */
-declare const getAssistantSources: (assistantId: string, body: ChunksRefs, options?: ApiCallOptions) => Promise<GetAssistantSourcesHttpResponse>;
+declare function getAssistantSources(assistantId: string, body: ChunksRefs, options?: ApiCallOptions): Promise<GetAssistantSourcesHttpResponse>;
 type GetAssistantSourcesHttpResponse = {
     data: SourcesPlaintext;
     headers: Headers;
@@ -570,7 +570,7 @@ type GetAssistantSourcesHttpError = {
  * @param query an object with query parameters
  * @throws GetAssistantStartersHttpError
  */
-declare const getAssistantStarters: (assistantId: string, query: {
+declare function getAssistantStarters(assistantId: string, query: {
     /** The number of starters to get. */
     limit?: number;
     /** Optional parameter to request the next page. */
@@ -579,7 +579,7 @@ declare const getAssistantStarters: (assistantId: string, query: {
     prev?: string;
     /** Optional resource field name to sort on, case insensitive, e.g. `name`. Can be prefixed with `-` to set descending order; defaults to ascending. */
     sort?: "QUESTION" | "-QUESTION" | "CREATED" | "-CREATED" | "UPDATED" | "-UPDATED";
-}, options?: ApiCallOptions) => Promise<GetAssistantStartersHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAssistantStartersHttpResponse>;
 type GetAssistantStartersHttpResponse = {
     data: StartersResult;
     headers: Headers;
@@ -599,7 +599,7 @@ type GetAssistantStartersHttpError = {
  * @param body an object with the body content
  * @throws CreateAssistantStarterHttpError
  */
-declare const createAssistantStarter: (assistantId: string, body: CreateStarter, options?: ApiCallOptions) => Promise<CreateAssistantStarterHttpResponse>;
+declare function createAssistantStarter(assistantId: string, body: CreateStarter, options?: ApiCallOptions): Promise<CreateAssistantStarterHttpResponse>;
 type CreateAssistantStarterHttpResponse = {
     data: Starter;
     headers: Headers;
@@ -617,7 +617,7 @@ type CreateAssistantStarterHttpError = {
  * @param starterId The ID of the starter to delete.
  * @throws DeleteAssistantStarterHttpError
  */
-declare const deleteAssistantStarter: (assistantId: string, starterId: string, options?: ApiCallOptions) => Promise<DeleteAssistantStarterHttpResponse>;
+declare function deleteAssistantStarter(assistantId: string, starterId: string, options?: ApiCallOptions): Promise<DeleteAssistantStarterHttpResponse>;
 type DeleteAssistantStarterHttpResponse = {
     data: void;
     headers: Headers;
@@ -635,7 +635,7 @@ type DeleteAssistantStarterHttpError = {
  * @param starterId The ID of the starter to retrieve.
  * @throws GetAssistantStarterHttpError
  */
-declare const getAssistantStarter: (assistantId: string, starterId: string, options?: ApiCallOptions) => Promise<GetAssistantStarterHttpResponse>;
+declare function getAssistantStarter(assistantId: string, starterId: string, options?: ApiCallOptions): Promise<GetAssistantStarterHttpResponse>;
 type GetAssistantStarterHttpResponse = {
     data: Starter;
     headers: Headers;
@@ -654,7 +654,7 @@ type GetAssistantStarterHttpError = {
  * @param body an object with the body content
  * @throws UpdateAssistantStarterHttpError
  */
-declare const updateAssistantStarter: (assistantId: string, starterId: string, body: Starter, options?: ApiCallOptions) => Promise<UpdateAssistantStarterHttpResponse>;
+declare function updateAssistantStarter(assistantId: string, starterId: string, body: Starter, options?: ApiCallOptions): Promise<UpdateAssistantStarterHttpResponse>;
 type UpdateAssistantStarterHttpResponse = {
     data: Starter;
     headers: Headers;
@@ -673,7 +673,7 @@ type UpdateAssistantStarterHttpError = {
  * @param followupId The ID of the Followup to delete.
  * @throws DeleteAssistantStarterFollowupHttpError
  */
-declare const deleteAssistantStarterFollowup: (assistantId: string, starterId: string, followupId: string, options?: ApiCallOptions) => Promise<DeleteAssistantStarterFollowupHttpResponse>;
+declare function deleteAssistantStarterFollowup(assistantId: string, starterId: string, followupId: string, options?: ApiCallOptions): Promise<DeleteAssistantStarterFollowupHttpResponse>;
 type DeleteAssistantStarterFollowupHttpResponse = {
     data: void;
     headers: Headers;
@@ -693,7 +693,7 @@ type DeleteAssistantStarterFollowupHttpError = {
  * @param body an object with the body content
  * @throws UpdateAssistantStarterFollowupHttpError
  */
-declare const updateAssistantStarterFollowup: (assistantId: string, starterId: string, followupId: string, body: Followup, options?: ApiCallOptions) => Promise<UpdateAssistantStarterFollowupHttpResponse>;
+declare function updateAssistantStarterFollowup(assistantId: string, starterId: string, followupId: string, body: Followup, options?: ApiCallOptions): Promise<UpdateAssistantStarterFollowupHttpResponse>;
 type UpdateAssistantStarterFollowupHttpResponse = {
     data: Starter;
     headers: Headers;
@@ -711,7 +711,7 @@ type UpdateAssistantStarterFollowupHttpError = {
  * @param query an object with query parameters
  * @throws GetAssistantThreadsHttpError
  */
-declare const getAssistantThreads: (assistantId: string, query: {
+declare function getAssistantThreads(assistantId: string, query: {
     /** Optional parameter to filter threads. */
     filter?: string;
     /** The number of assistants to get. */
@@ -722,7 +722,7 @@ declare const getAssistantThreads: (assistantId: string, query: {
     prev?: string;
     /** Optional resource field name to sort on, case insensitive, e.g. `name`. Can be prefixed with `-` to set descending order; defaults to ascending. */
     sort?: "NAME" | "-NAME" | "CREATED" | "-CREATED" | "UPDATED" | "-UPDATED";
-}, options?: ApiCallOptions) => Promise<GetAssistantThreadsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAssistantThreadsHttpResponse>;
 type GetAssistantThreadsHttpResponse = {
     data: ThreadsResult;
     headers: Headers;
@@ -742,7 +742,7 @@ type GetAssistantThreadsHttpError = {
  * @param body an object with the body content
  * @throws CreateAssistantThreadHttpError
  */
-declare const createAssistantThread: (assistantId: string, body: CreateThread, options?: ApiCallOptions) => Promise<CreateAssistantThreadHttpResponse>;
+declare function createAssistantThread(assistantId: string, body: CreateThread, options?: ApiCallOptions): Promise<CreateAssistantThreadHttpResponse>;
 type CreateAssistantThreadHttpResponse = {
     data: Thread;
     headers: Headers;
@@ -761,7 +761,7 @@ type CreateAssistantThreadHttpError = {
  * @param body an object with the body content
  * @throws InvokeAssistantThreadHttpError
  */
-declare const invokeAssistantThread: (assistantId: string, threadId: string, body: PromptInput, options?: ApiCallOptions) => Promise<InvokeAssistantThreadHttpResponse>;
+declare function invokeAssistantThread(assistantId: string, threadId: string, body: PromptInput, options?: ApiCallOptions): Promise<InvokeAssistantThreadHttpResponse>;
 type InvokeAssistantThreadHttpResponse = {
     data: PromptOutputInvoke;
     headers: Headers;
@@ -780,7 +780,7 @@ type InvokeAssistantThreadHttpError = {
  * @param body an object with the body content
  * @throws StreamAssistantThreadHttpError
  */
-declare const streamAssistantThread: (assistantId: string, threadId: string, body: PromptInput, options?: ApiCallOptions) => Promise<StreamAssistantThreadHttpResponse>;
+declare function streamAssistantThread(assistantId: string, threadId: string, body: PromptInput, options?: ApiCallOptions): Promise<StreamAssistantThreadHttpResponse>;
 type StreamAssistantThreadHttpResponse = {
     data: PromptOutput;
     headers: Headers;
@@ -799,7 +799,7 @@ type StreamAssistantThreadHttpError = {
  * @param query an object with query parameters
  * @throws GetAssistantThreadInteractionsHttpError
  */
-declare const getAssistantThreadInteractions: (assistantId: string, threadId: string, query: {
+declare function getAssistantThreadInteractions(assistantId: string, threadId: string, query: {
     /** The number of feedback to get. */
     limit?: number;
     /** Optional parameter to request the next page. */
@@ -808,7 +808,7 @@ declare const getAssistantThreadInteractions: (assistantId: string, threadId: st
     prev?: string;
     /** Optional resource field name to sort on, case insensitive, e.g. `created`. Can be prefixed with `-` to set descending order; defaults to ascending. */
     sort?: "CREATED" | "-CREATED" | "UPDATED" | "-UPDATED";
-}, options?: ApiCallOptions) => Promise<GetAssistantThreadInteractionsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAssistantThreadInteractionsHttpResponse>;
 type GetAssistantThreadInteractionsHttpResponse = {
     data: InteractionsResult;
     headers: Headers;
@@ -829,7 +829,7 @@ type GetAssistantThreadInteractionsHttpError = {
  * @param body an object with the body content
  * @throws CreateAssistantThreadInteractionHttpError
  */
-declare const createAssistantThreadInteraction: (assistantId: string, threadId: string, body: CreateInteraction, options?: ApiCallOptions) => Promise<CreateAssistantThreadInteractionHttpResponse>;
+declare function createAssistantThreadInteraction(assistantId: string, threadId: string, body: CreateInteraction, options?: ApiCallOptions): Promise<CreateAssistantThreadInteractionHttpResponse>;
 type CreateAssistantThreadInteractionHttpResponse = {
     data: Interaction;
     headers: Headers;
@@ -848,7 +848,7 @@ type CreateAssistantThreadInteractionHttpError = {
  * @param interactionId The ID of the interaction to delete.
  * @throws DeleteAssistantThreadInteractionHttpError
  */
-declare const deleteAssistantThreadInteraction: (assistantId: string, threadId: string, interactionId: string, options?: ApiCallOptions) => Promise<DeleteAssistantThreadInteractionHttpResponse>;
+declare function deleteAssistantThreadInteraction(assistantId: string, threadId: string, interactionId: string, options?: ApiCallOptions): Promise<DeleteAssistantThreadInteractionHttpResponse>;
 type DeleteAssistantThreadInteractionHttpResponse = {
     data: void;
     headers: Headers;
@@ -867,7 +867,7 @@ type DeleteAssistantThreadInteractionHttpError = {
  * @param interactionId The ID of the interaction to retrieve.
  * @throws GetAssistantThreadInteractionHttpError
  */
-declare const getAssistantThreadInteraction: (assistantId: string, threadId: string, interactionId: string, options?: ApiCallOptions) => Promise<GetAssistantThreadInteractionHttpResponse>;
+declare function getAssistantThreadInteraction(assistantId: string, threadId: string, interactionId: string, options?: ApiCallOptions): Promise<GetAssistantThreadInteractionHttpResponse>;
 type GetAssistantThreadInteractionHttpResponse = {
     data: Interaction;
     headers: Headers;
@@ -887,7 +887,7 @@ type GetAssistantThreadInteractionHttpError = {
  * @param body an object with the body content
  * @throws CreateAssistantThreadInteractionFeedbackHttpError
  */
-declare const createAssistantThreadInteractionFeedback: (assistantId: string, threadId: string, interactionId: string, body: CreateFeedback, options?: ApiCallOptions) => Promise<CreateAssistantThreadInteractionFeedbackHttpResponse>;
+declare function createAssistantThreadInteractionFeedback(assistantId: string, threadId: string, interactionId: string, body: CreateFeedback, options?: ApiCallOptions): Promise<CreateAssistantThreadInteractionFeedbackHttpResponse>;
 type CreateAssistantThreadInteractionFeedbackHttpResponse = {
     data: Interaction;
     headers: Headers;
@@ -908,7 +908,7 @@ type CreateAssistantThreadInteractionFeedbackHttpError = {
  * @param body an object with the body content
  * @throws PatchAssistantThreadInteractionFeedbackHttpError
  */
-declare const patchAssistantThreadInteractionFeedback: (assistantId: string, threadId: string, interactionId: string, feedbackId: string, body: FeedbackPatchArray, options?: ApiCallOptions) => Promise<PatchAssistantThreadInteractionFeedbackHttpResponse>;
+declare function patchAssistantThreadInteractionFeedback(assistantId: string, threadId: string, interactionId: string, feedbackId: string, body: FeedbackPatchArray, options?: ApiCallOptions): Promise<PatchAssistantThreadInteractionFeedbackHttpResponse>;
 type PatchAssistantThreadInteractionFeedbackHttpResponse = {
     data: void;
     headers: Headers;
@@ -928,7 +928,7 @@ type PatchAssistantThreadInteractionFeedbackHttpError = {
  * @param body an object with the body content
  * @throws CreateAssistantThreadInteractionReviewHttpError
  */
-declare const createAssistantThreadInteractionReview: (assistantId: string, threadId: string, interactionId: string, body: CreateReview, options?: ApiCallOptions) => Promise<CreateAssistantThreadInteractionReviewHttpResponse>;
+declare function createAssistantThreadInteractionReview(assistantId: string, threadId: string, interactionId: string, body: CreateReview, options?: ApiCallOptions): Promise<CreateAssistantThreadInteractionReviewHttpResponse>;
 type CreateAssistantThreadInteractionReviewHttpResponse = {
     data: Interaction;
     headers: Headers;
@@ -946,7 +946,7 @@ type CreateAssistantThreadInteractionReviewHttpError = {
  * @param threadid The ID of the thread to retrieve.
  * @throws DeleteAssistantThreadHttpError
  */
-declare const deleteAssistantThread: (assistantid: string, threadid: string, options?: ApiCallOptions) => Promise<DeleteAssistantThreadHttpResponse>;
+declare function deleteAssistantThread(assistantid: string, threadid: string, options?: ApiCallOptions): Promise<DeleteAssistantThreadHttpResponse>;
 type DeleteAssistantThreadHttpResponse = {
     data: void;
     headers: Headers;
@@ -964,7 +964,7 @@ type DeleteAssistantThreadHttpError = {
  * @param threadid The ID of the thread to retrieve.
  * @throws GetAssistantThreadHttpError
  */
-declare const getAssistantThread: (assistantid: string, threadid: string, options?: ApiCallOptions) => Promise<GetAssistantThreadHttpResponse>;
+declare function getAssistantThread(assistantid: string, threadid: string, options?: ApiCallOptions): Promise<GetAssistantThreadHttpResponse>;
 type GetAssistantThreadHttpResponse = {
     data: ThreadWithMessages;
     headers: Headers;
@@ -983,7 +983,7 @@ type GetAssistantThreadHttpError = {
  * @param body an object with the body content
  * @throws PatchAssistantThreadHttpError
  */
-declare const patchAssistantThread: (assistantid: string, threadid: string, body: ThreadPatchArray, options?: ApiCallOptions) => Promise<PatchAssistantThreadHttpResponse>;
+declare function patchAssistantThread(assistantid: string, threadid: string, body: ThreadPatchArray, options?: ApiCallOptions): Promise<PatchAssistantThreadHttpResponse>;
 type PatchAssistantThreadHttpResponse = {
     data: void;
     headers: Headers;
@@ -1000,7 +1000,7 @@ type PatchAssistantThreadHttpError = {
  * @param id The ID of the assistant to delete.
  * @throws DeleteAssistantHttpError
  */
-declare const deleteAssistant: (id: string, options?: ApiCallOptions) => Promise<DeleteAssistantHttpResponse>;
+declare function deleteAssistant(id: string, options?: ApiCallOptions): Promise<DeleteAssistantHttpResponse>;
 type DeleteAssistantHttpResponse = {
     data: void;
     headers: Headers;
@@ -1017,7 +1017,7 @@ type DeleteAssistantHttpError = {
  * @param id The ID of the assistant to retrieve.
  * @throws GetAssistantHttpError
  */
-declare const getAssistant: (id: string, options?: ApiCallOptions) => Promise<GetAssistantHttpResponse>;
+declare function getAssistant(id: string, options?: ApiCallOptions): Promise<GetAssistantHttpResponse>;
 type GetAssistantHttpResponse = {
     data: Assistant;
     headers: Headers;
@@ -1035,7 +1035,7 @@ type GetAssistantHttpError = {
  * @param body an object with the body content
  * @throws PatchAssistantHttpError
  */
-declare const patchAssistant: (id: string, body: JSONPatchArray, options?: ApiCallOptions) => Promise<PatchAssistantHttpResponse>;
+declare function patchAssistant(id: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchAssistantHttpResponse>;
 type PatchAssistantHttpResponse = {
     data: void;
     headers: Headers;

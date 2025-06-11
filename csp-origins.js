@@ -1,49 +1,61 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/csp-origins.ts
-var getCSPEntries = async (query, options) => invokeFetch("csp-origins", {
-  method: "get",
-  pathTemplate: "/api/v1/csp-origins",
-  query,
-  options
-});
-var createCSPEntry = async (body, options) => invokeFetch("csp-origins", {
-  method: "post",
-  pathTemplate: "/api/v1/csp-origins",
-  body,
-  contentType: "application/json",
-  options
-});
-var getCSPHeader = async (options) => invokeFetch("csp-origins", {
-  method: "get",
-  pathTemplate: "/api/v1/csp-origins/actions/generate-header",
-  options
-});
-var deleteCSPEntry = async (id, options) => invokeFetch("csp-origins", {
-  method: "delete",
-  pathTemplate: "/api/v1/csp-origins/{id}",
-  pathVariables: { id },
-  options
-});
-var getCSPEntry = async (id, options) => invokeFetch("csp-origins", {
-  method: "get",
-  pathTemplate: "/api/v1/csp-origins/{id}",
-  pathVariables: { id },
-  options
-});
-var updateCSPEntry = async (id, body, options) => invokeFetch("csp-origins", {
-  method: "put",
-  pathTemplate: "/api/v1/csp-origins/{id}",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
+async function getCSPEntries(query, options) {
+  return invokeFetch("csp-origins", {
+    method: "get",
+    pathTemplate: "/api/v1/csp-origins",
+    query,
+    options
+  });
+}
+async function createCSPEntry(body, options) {
+  return invokeFetch("csp-origins", {
+    method: "post",
+    pathTemplate: "/api/v1/csp-origins",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getCSPHeader(options) {
+  return invokeFetch("csp-origins", {
+    method: "get",
+    pathTemplate: "/api/v1/csp-origins/actions/generate-header",
+    options
+  });
+}
+async function deleteCSPEntry(id, options) {
+  return invokeFetch("csp-origins", {
+    method: "delete",
+    pathTemplate: "/api/v1/csp-origins/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function getCSPEntry(id, options) {
+  return invokeFetch("csp-origins", {
+    method: "get",
+    pathTemplate: "/api/v1/csp-origins/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function updateCSPEntry(id, body, options) {
+  return invokeFetch("csp-origins", {
+    method: "put",
+    pathTemplate: "/api/v1/csp-origins/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("csp-origins");
 }

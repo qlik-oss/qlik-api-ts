@@ -1,301 +1,385 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/ml.ts
-var getMlDeployments = async (query, options) => invokeFetch("ml", {
-  method: "get",
-  pathTemplate: "/api/v1/ml/deployments",
-  query,
-  options
-});
-var createMlDeployment = async (body, options) => invokeFetch("ml", {
-  method: "post",
-  pathTemplate: "/api/v1/ml/deployments",
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteMlDeployment = async (deploymentId, options) => invokeFetch("ml", {
-  method: "delete",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}",
-  pathVariables: { deploymentId },
-  options
-});
-var getMlDeployment = async (deploymentId, options) => invokeFetch("ml", {
-  method: "get",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}",
-  pathVariables: { deploymentId },
-  options
-});
-var patchMlDeployment = async (deploymentId, body, options) => invokeFetch("ml", {
-  method: "patch",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}",
-  pathVariables: { deploymentId },
-  body,
-  contentType: "application/json",
-  options
-});
-var activateModelsMlDeployment = async (deploymentId, options) => invokeFetch("ml", {
-  method: "post",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/actions/activate-models",
-  pathVariables: { deploymentId },
-  options
-});
-var deactivateModelsMlDeployment = async (deploymentId, options) => invokeFetch("ml", {
-  method: "post",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/actions/deactivate-models",
-  pathVariables: { deploymentId },
-  options
-});
-var getMlDeploymentAliases = async (deploymentId, query, options) => invokeFetch("ml", {
-  method: "get",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/aliases",
-  pathVariables: { deploymentId },
-  query,
-  options
-});
-var createMlDeploymentAliase = async (deploymentId, body, options) => invokeFetch("ml", {
-  method: "post",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/aliases",
-  pathVariables: { deploymentId },
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteMlDeploymentAliase = async (deploymentId, aliasId, options) => invokeFetch("ml", {
-  method: "delete",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/aliases/{aliasId}",
-  pathVariables: { deploymentId, aliasId },
-  options
-});
-var getMlDeploymentAliase = async (deploymentId, aliasId, options) => invokeFetch("ml", {
-  method: "get",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/aliases/{aliasId}",
-  pathVariables: { deploymentId, aliasId },
-  options
-});
-var patchMlDeploymentAliase = async (deploymentId, aliasId, body, options) => invokeFetch("ml", {
-  method: "patch",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/aliases/{aliasId}",
-  pathVariables: { deploymentId, aliasId },
-  body,
-  contentType: "application/json",
-  options
-});
-var runMlDeploymentAliaseRealtimePredictions = async (deploymentId, aliasName, query, body, options) => invokeFetch("ml", {
-  method: "post",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/aliases/{aliasName}/realtime-predictions/actions/run",
-  pathVariables: { deploymentId, aliasName },
-  query,
-  body,
-  contentType: "application/json",
-  options
-});
-var getMlDeploymentBatchPredictions = async (deploymentId, query, options) => invokeFetch("ml", {
-  method: "get",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions",
-  pathVariables: { deploymentId },
-  query,
-  options
-});
-var createMlDeploymentBatchPrediction = async (deploymentId, body, options) => invokeFetch("ml", {
-  method: "post",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions",
-  pathVariables: { deploymentId },
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteMlDeploymentBatchPrediction = async (deploymentId, batchPredictionId, options) => invokeFetch("ml", {
-  method: "delete",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions/{batchPredictionId}",
-  pathVariables: { deploymentId, batchPredictionId },
-  options
-});
-var getMlDeploymentBatchPrediction = async (deploymentId, batchPredictionId, options) => invokeFetch("ml", {
-  method: "get",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions/{batchPredictionId}",
-  pathVariables: { deploymentId, batchPredictionId },
-  options
-});
-var patchMlDeploymentBatchPrediction = async (deploymentId, batchPredictionId, body, options) => invokeFetch("ml", {
-  method: "patch",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions/{batchPredictionId}",
-  pathVariables: { deploymentId, batchPredictionId },
-  body,
-  contentType: "application/json",
-  options
-});
-var predictMlDeploymentBatchPrediction = async (deploymentId, batchPredictionId, options) => invokeFetch("ml", {
-  method: "post",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions/{batchPredictionId}/actions/predict",
-  pathVariables: { deploymentId, batchPredictionId },
-  options
-});
-var deleteMlDeploymentBatchPredictionSchedule = async (deploymentId, batchPredictionId, options) => invokeFetch("ml", {
-  method: "delete",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions/{batchPredictionId}/schedule",
-  pathVariables: { deploymentId, batchPredictionId },
-  options
-});
-var getMlDeploymentBatchPredictionSchedule = async (deploymentId, batchPredictionId, options) => invokeFetch("ml", {
-  method: "get",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions/{batchPredictionId}/schedule",
-  pathVariables: { deploymentId, batchPredictionId },
-  options
-});
-var updateMlDeploymentBatchPredictionSchedule = async (deploymentId, batchPredictionId, body, options) => invokeFetch("ml", {
-  method: "patch",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions/{batchPredictionId}/schedule",
-  pathVariables: { deploymentId, batchPredictionId },
-  body,
-  contentType: "application/json",
-  options
-});
-var setMlDeploymentBatchPredictionSchedule = async (deploymentId, batchPredictionId, body, options) => invokeFetch("ml", {
-  method: "put",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions/{batchPredictionId}/schedule",
-  pathVariables: { deploymentId, batchPredictionId },
-  body,
-  contentType: "application/json",
-  options
-});
-var addMlDeploymentModels = async (deploymentId, body, options) => invokeFetch("ml", {
-  method: "post",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/models/actions/add",
-  pathVariables: { deploymentId },
-  body,
-  contentType: "application/json",
-  options
-});
-var removeMlDeploymentModels = async (deploymentId, body, options) => invokeFetch("ml", {
-  method: "post",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/models/actions/remove",
-  pathVariables: { deploymentId },
-  body,
-  contentType: "application/json",
-  options
-});
-var runMlDeploymentRealtimePredictions = async (deploymentId, query, body, options) => invokeFetch("ml", {
-  method: "post",
-  pathTemplate: "/api/v1/ml/deployments/{deploymentId}/realtime-predictions/actions/run",
-  pathVariables: { deploymentId },
-  query,
-  body,
-  contentType: "application/json",
-  options
-});
-var getMlExperiments = async (query, options) => invokeFetch("ml", {
-  method: "get",
-  pathTemplate: "/api/v1/ml/experiments",
-  query,
-  options
-});
-var createMlExperiment = async (body, options) => invokeFetch("ml", {
-  method: "post",
-  pathTemplate: "/api/v1/ml/experiments",
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteMlExperiment = async (experimentId, options) => invokeFetch("ml", {
-  method: "delete",
-  pathTemplate: "/api/v1/ml/experiments/{experimentId}",
-  pathVariables: { experimentId },
-  options
-});
-var getMlExperiment = async (experimentId, options) => invokeFetch("ml", {
-  method: "get",
-  pathTemplate: "/api/v1/ml/experiments/{experimentId}",
-  pathVariables: { experimentId },
-  options
-});
-var patchMlExperiment = async (experimentId, body, options) => invokeFetch("ml", {
-  method: "patch",
-  pathTemplate: "/api/v1/ml/experiments/{experimentId}",
-  pathVariables: { experimentId },
-  body,
-  contentType: "application/json",
-  options
-});
-var getMlExperimentModels = async (experimentId, query, options) => invokeFetch("ml", {
-  method: "get",
-  pathTemplate: "/api/v1/ml/experiments/{experimentId}/models",
-  pathVariables: { experimentId },
-  query,
-  options
-});
-var getMlExperimentModel = async (experimentId, modelId, options) => invokeFetch("ml", {
-  method: "get",
-  pathTemplate: "/api/v1/ml/experiments/{experimentId}/models/{modelId}",
-  pathVariables: { experimentId, modelId },
-  options
-});
-var getMlExperimentVersions = async (experimentId, query, options) => invokeFetch("ml", {
-  method: "get",
-  pathTemplate: "/api/v1/ml/experiments/{experimentId}/versions",
-  pathVariables: { experimentId },
-  query,
-  options
-});
-var createMlExperimentVersion = async (experimentId, body, options) => invokeFetch("ml", {
-  method: "post",
-  pathTemplate: "/api/v1/ml/experiments/{experimentId}/versions",
-  pathVariables: { experimentId },
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteMlExperimentVersion = async (experimentId, experimentVersionId, options) => invokeFetch("ml", {
-  method: "delete",
-  pathTemplate: "/api/v1/ml/experiments/{experimentId}/versions/{experimentVersionId}",
-  pathVariables: { experimentId, experimentVersionId },
-  options
-});
-var getMlExperimentVersion = async (experimentId, experimentVersionId, options) => invokeFetch("ml", {
-  method: "get",
-  pathTemplate: "/api/v1/ml/experiments/{experimentId}/versions/{experimentVersionId}",
-  pathVariables: { experimentId, experimentVersionId },
-  options
-});
-var patchMlExperimentVersion = async (experimentId, experimentVersionId, body, options) => invokeFetch("ml", {
-  method: "patch",
-  pathTemplate: "/api/v1/ml/experiments/{experimentId}/versions/{experimentVersionId}",
-  pathVariables: { experimentId, experimentVersionId },
-  body,
-  contentType: "application/json",
-  options
-});
-var cancelMlJob = async (corrType, corrId, options) => invokeFetch("ml", {
-  method: "post",
-  pathTemplate: "/api/v1/ml/jobs/{corrType}/{corrId}/actions/cancel",
-  pathVariables: { corrType, corrId },
-  options
-});
-var createMlProfileInsight = async (body, options) => invokeFetch("ml", {
-  method: "post",
-  pathTemplate: "/api/v1/ml/profile-insights",
-  body,
-  contentType: "application/json",
-  options
-});
-var getMlProfileInsightWithQuery = async (dataSetId, query, options) => invokeFetch("ml", {
-  method: "get",
-  pathTemplate: "/api/v1/ml/profile-insights/{dataSetId}",
-  pathVariables: { dataSetId },
-  query,
-  options
-});
-var getMlProfileInsight = async (dataSetId, options) => invokeFetch("ml", {
-  method: "get",
-  pathTemplate: "/api/v1/ml/profile-insights/{dataSetId}",
-  pathVariables: { dataSetId },
-  options
-});
+async function getMlDeployments(query, options) {
+  return invokeFetch("ml", {
+    method: "get",
+    pathTemplate: "/api/v1/ml/deployments",
+    query,
+    options
+  });
+}
+async function createMlDeployment(body, options) {
+  return invokeFetch("ml", {
+    method: "post",
+    pathTemplate: "/api/v1/ml/deployments",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteMlDeployment(deploymentId, options) {
+  return invokeFetch("ml", {
+    method: "delete",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}",
+    pathVariables: { deploymentId },
+    options
+  });
+}
+async function getMlDeployment(deploymentId, options) {
+  return invokeFetch("ml", {
+    method: "get",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}",
+    pathVariables: { deploymentId },
+    options
+  });
+}
+async function patchMlDeployment(deploymentId, body, options) {
+  return invokeFetch("ml", {
+    method: "patch",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}",
+    pathVariables: { deploymentId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function activateModelsMlDeployment(deploymentId, options) {
+  return invokeFetch("ml", {
+    method: "post",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/actions/activate-models",
+    pathVariables: { deploymentId },
+    options
+  });
+}
+async function deactivateModelsMlDeployment(deploymentId, options) {
+  return invokeFetch("ml", {
+    method: "post",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/actions/deactivate-models",
+    pathVariables: { deploymentId },
+    options
+  });
+}
+async function getMlDeploymentAliases(deploymentId, query, options) {
+  return invokeFetch("ml", {
+    method: "get",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/aliases",
+    pathVariables: { deploymentId },
+    query,
+    options
+  });
+}
+async function createMlDeploymentAliase(deploymentId, body, options) {
+  return invokeFetch("ml", {
+    method: "post",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/aliases",
+    pathVariables: { deploymentId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteMlDeploymentAliase(deploymentId, aliasId, options) {
+  return invokeFetch("ml", {
+    method: "delete",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/aliases/{aliasId}",
+    pathVariables: { deploymentId, aliasId },
+    options
+  });
+}
+async function getMlDeploymentAliase(deploymentId, aliasId, options) {
+  return invokeFetch("ml", {
+    method: "get",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/aliases/{aliasId}",
+    pathVariables: { deploymentId, aliasId },
+    options
+  });
+}
+async function patchMlDeploymentAliase(deploymentId, aliasId, body, options) {
+  return invokeFetch("ml", {
+    method: "patch",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/aliases/{aliasId}",
+    pathVariables: { deploymentId, aliasId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function runMlDeploymentAliaseRealtimePredictions(deploymentId, aliasName, query, body, options) {
+  return invokeFetch("ml", {
+    method: "post",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/aliases/{aliasName}/realtime-predictions/actions/run",
+    pathVariables: { deploymentId, aliasName },
+    query,
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getMlDeploymentBatchPredictions(deploymentId, query, options) {
+  return invokeFetch("ml", {
+    method: "get",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions",
+    pathVariables: { deploymentId },
+    query,
+    options
+  });
+}
+async function createMlDeploymentBatchPrediction(deploymentId, body, options) {
+  return invokeFetch("ml", {
+    method: "post",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions",
+    pathVariables: { deploymentId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteMlDeploymentBatchPrediction(deploymentId, batchPredictionId, options) {
+  return invokeFetch("ml", {
+    method: "delete",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions/{batchPredictionId}",
+    pathVariables: { deploymentId, batchPredictionId },
+    options
+  });
+}
+async function getMlDeploymentBatchPrediction(deploymentId, batchPredictionId, options) {
+  return invokeFetch("ml", {
+    method: "get",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions/{batchPredictionId}",
+    pathVariables: { deploymentId, batchPredictionId },
+    options
+  });
+}
+async function patchMlDeploymentBatchPrediction(deploymentId, batchPredictionId, body, options) {
+  return invokeFetch("ml", {
+    method: "patch",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions/{batchPredictionId}",
+    pathVariables: { deploymentId, batchPredictionId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function predictMlDeploymentBatchPrediction(deploymentId, batchPredictionId, options) {
+  return invokeFetch("ml", {
+    method: "post",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions/{batchPredictionId}/actions/predict",
+    pathVariables: { deploymentId, batchPredictionId },
+    options
+  });
+}
+async function deleteMlDeploymentBatchPredictionSchedule(deploymentId, batchPredictionId, options) {
+  return invokeFetch("ml", {
+    method: "delete",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions/{batchPredictionId}/schedule",
+    pathVariables: { deploymentId, batchPredictionId },
+    options
+  });
+}
+async function getMlDeploymentBatchPredictionSchedule(deploymentId, batchPredictionId, options) {
+  return invokeFetch("ml", {
+    method: "get",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions/{batchPredictionId}/schedule",
+    pathVariables: { deploymentId, batchPredictionId },
+    options
+  });
+}
+async function updateMlDeploymentBatchPredictionSchedule(deploymentId, batchPredictionId, body, options) {
+  return invokeFetch("ml", {
+    method: "patch",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions/{batchPredictionId}/schedule",
+    pathVariables: { deploymentId, batchPredictionId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function setMlDeploymentBatchPredictionSchedule(deploymentId, batchPredictionId, body, options) {
+  return invokeFetch("ml", {
+    method: "put",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/batch-predictions/{batchPredictionId}/schedule",
+    pathVariables: { deploymentId, batchPredictionId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function addMlDeploymentModels(deploymentId, body, options) {
+  return invokeFetch("ml", {
+    method: "post",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/models/actions/add",
+    pathVariables: { deploymentId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function removeMlDeploymentModels(deploymentId, body, options) {
+  return invokeFetch("ml", {
+    method: "post",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/models/actions/remove",
+    pathVariables: { deploymentId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function runMlDeploymentRealtimePredictions(deploymentId, query, body, options) {
+  return invokeFetch("ml", {
+    method: "post",
+    pathTemplate: "/api/v1/ml/deployments/{deploymentId}/realtime-predictions/actions/run",
+    pathVariables: { deploymentId },
+    query,
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getMlExperiments(query, options) {
+  return invokeFetch("ml", {
+    method: "get",
+    pathTemplate: "/api/v1/ml/experiments",
+    query,
+    options
+  });
+}
+async function createMlExperiment(body, options) {
+  return invokeFetch("ml", {
+    method: "post",
+    pathTemplate: "/api/v1/ml/experiments",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteMlExperiment(experimentId, options) {
+  return invokeFetch("ml", {
+    method: "delete",
+    pathTemplate: "/api/v1/ml/experiments/{experimentId}",
+    pathVariables: { experimentId },
+    options
+  });
+}
+async function getMlExperiment(experimentId, options) {
+  return invokeFetch("ml", {
+    method: "get",
+    pathTemplate: "/api/v1/ml/experiments/{experimentId}",
+    pathVariables: { experimentId },
+    options
+  });
+}
+async function patchMlExperiment(experimentId, body, options) {
+  return invokeFetch("ml", {
+    method: "patch",
+    pathTemplate: "/api/v1/ml/experiments/{experimentId}",
+    pathVariables: { experimentId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getMlExperimentModels(experimentId, query, options) {
+  return invokeFetch("ml", {
+    method: "get",
+    pathTemplate: "/api/v1/ml/experiments/{experimentId}/models",
+    pathVariables: { experimentId },
+    query,
+    options
+  });
+}
+async function getMlExperimentModel(experimentId, modelId, options) {
+  return invokeFetch("ml", {
+    method: "get",
+    pathTemplate: "/api/v1/ml/experiments/{experimentId}/models/{modelId}",
+    pathVariables: { experimentId, modelId },
+    options
+  });
+}
+async function getMlExperimentVersions(experimentId, query, options) {
+  return invokeFetch("ml", {
+    method: "get",
+    pathTemplate: "/api/v1/ml/experiments/{experimentId}/versions",
+    pathVariables: { experimentId },
+    query,
+    options
+  });
+}
+async function createMlExperimentVersion(experimentId, body, options) {
+  return invokeFetch("ml", {
+    method: "post",
+    pathTemplate: "/api/v1/ml/experiments/{experimentId}/versions",
+    pathVariables: { experimentId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteMlExperimentVersion(experimentId, experimentVersionId, options) {
+  return invokeFetch("ml", {
+    method: "delete",
+    pathTemplate: "/api/v1/ml/experiments/{experimentId}/versions/{experimentVersionId}",
+    pathVariables: { experimentId, experimentVersionId },
+    options
+  });
+}
+async function getMlExperimentVersion(experimentId, experimentVersionId, options) {
+  return invokeFetch("ml", {
+    method: "get",
+    pathTemplate: "/api/v1/ml/experiments/{experimentId}/versions/{experimentVersionId}",
+    pathVariables: { experimentId, experimentVersionId },
+    options
+  });
+}
+async function patchMlExperimentVersion(experimentId, experimentVersionId, body, options) {
+  return invokeFetch("ml", {
+    method: "patch",
+    pathTemplate: "/api/v1/ml/experiments/{experimentId}/versions/{experimentVersionId}",
+    pathVariables: { experimentId, experimentVersionId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function cancelMlJob(corrType, corrId, options) {
+  return invokeFetch("ml", {
+    method: "post",
+    pathTemplate: "/api/v1/ml/jobs/{corrType}/{corrId}/actions/cancel",
+    pathVariables: { corrType, corrId },
+    options
+  });
+}
+async function createMlProfileInsight(body, options) {
+  return invokeFetch("ml", {
+    method: "post",
+    pathTemplate: "/api/v1/ml/profile-insights",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getMlProfileInsightWithQuery(dataSetId, query, options) {
+  return invokeFetch("ml", {
+    method: "get",
+    pathTemplate: "/api/v1/ml/profile-insights/{dataSetId}",
+    pathVariables: { dataSetId },
+    query,
+    options
+  });
+}
+async function getMlProfileInsight(dataSetId, options) {
+  return invokeFetch("ml", {
+    method: "get",
+    pathTemplate: "/api/v1/ml/profile-insights/{dataSetId}",
+    pathVariables: { dataSetId },
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("ml");
 }

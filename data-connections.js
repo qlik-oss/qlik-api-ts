@@ -1,77 +1,95 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/data-connections.ts
-var getDataConnections = async (query, options) => invokeFetch("data-connections", {
-  method: "get",
-  pathTemplate: "/api/v1/data-connections",
-  query,
-  options
-});
-var createDataConnection = async (body, options) => invokeFetch("data-connections", {
-  method: "post",
-  pathTemplate: "/api/v1/data-connections",
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteDataConnections = async (body, options) => invokeFetch("data-connections", {
-  method: "post",
-  pathTemplate: "/api/v1/data-connections/actions/delete",
-  body,
-  contentType: "application/json",
-  options
-});
-var duplicateDataAConnection = async (body, options) => invokeFetch("data-connections", {
-  method: "post",
-  pathTemplate: "/api/v1/data-connections/actions/duplicate",
-  body,
-  contentType: "application/json",
-  options
-});
-var updateDataConnections = async (body, options) => invokeFetch("data-connections", {
-  method: "post",
-  pathTemplate: "/api/v1/data-connections/actions/update",
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteDataConnection = async (qID, query, options) => invokeFetch("data-connections", {
-  method: "delete",
-  pathTemplate: "/api/v1/data-connections/{qID}",
-  pathVariables: { qID },
-  query,
-  options
-});
-var getDataConnection = async (qID, query, options) => invokeFetch("data-connections", {
-  method: "get",
-  pathTemplate: "/api/v1/data-connections/{qID}",
-  pathVariables: { qID },
-  query,
-  options
-});
-var patchDataConnection = async (qID, query, body, options) => invokeFetch("data-connections", {
-  method: "patch",
-  pathTemplate: "/api/v1/data-connections/{qID}",
-  pathVariables: { qID },
-  query,
-  body,
-  contentType: "application/json",
-  options
-});
-var updateDataConnection = async (qID, query, body, options) => invokeFetch("data-connections", {
-  method: "put",
-  pathTemplate: "/api/v1/data-connections/{qID}",
-  pathVariables: { qID },
-  query,
-  body,
-  contentType: "application/json",
-  options
-});
+async function getDataConnections(query, options) {
+  return invokeFetch("data-connections", {
+    method: "get",
+    pathTemplate: "/api/v1/data-connections",
+    query,
+    options
+  });
+}
+async function createDataConnection(body, options) {
+  return invokeFetch("data-connections", {
+    method: "post",
+    pathTemplate: "/api/v1/data-connections",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteDataConnections(body, options) {
+  return invokeFetch("data-connections", {
+    method: "post",
+    pathTemplate: "/api/v1/data-connections/actions/delete",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function duplicateDataAConnection(body, options) {
+  return invokeFetch("data-connections", {
+    method: "post",
+    pathTemplate: "/api/v1/data-connections/actions/duplicate",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function updateDataConnections(body, options) {
+  return invokeFetch("data-connections", {
+    method: "post",
+    pathTemplate: "/api/v1/data-connections/actions/update",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteDataConnection(qID, query, options) {
+  return invokeFetch("data-connections", {
+    method: "delete",
+    pathTemplate: "/api/v1/data-connections/{qID}",
+    pathVariables: { qID },
+    query,
+    options
+  });
+}
+async function getDataConnection(qID, query, options) {
+  return invokeFetch("data-connections", {
+    method: "get",
+    pathTemplate: "/api/v1/data-connections/{qID}",
+    pathVariables: { qID },
+    query,
+    options
+  });
+}
+async function patchDataConnection(qID, query, body, options) {
+  return invokeFetch("data-connections", {
+    method: "patch",
+    pathTemplate: "/api/v1/data-connections/{qID}",
+    pathVariables: { qID },
+    query,
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function updateDataConnection(qID, query, body, options) {
+  return invokeFetch("data-connections", {
+    method: "put",
+    pathTemplate: "/api/v1/data-connections/{qID}",
+    pathVariables: { qID },
+    query,
+    body,
+    contentType: "application/json",
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("data-connections");
 }

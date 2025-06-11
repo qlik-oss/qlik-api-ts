@@ -1,5 +1,5 @@
-import { A as AuthType, a as AuthModule, H as HostConfig, W as WebResourceAuthParams } from './auth-types-Btwi7CsB.js';
-export { g as AuthenticationErrorAction, C as Credentials, e as GetRemoteAuthDataProps, G as GetRestCallAuthParamsProps, d as GetWebResourceAuthParamsProps, b as GetWebSocketAuthParamsProps, f as HandleAuthenticationErrorProps, R as RestCallAuthParams, c as WebSocketAuthParams } from './auth-types-Btwi7CsB.js';
+import { A as AuthType, a as AuthModule, H as HostConfig, W as WebResourceAuthParams } from './auth-types-Cj5bM3Yk.js';
+export { j as AuthTypeThatCanBeOmitted, g as AuthenticationErrorAction, C as Credentials, e as GetRemoteAuthDataProps, G as GetRestCallAuthParamsProps, d as GetWebResourceAuthParamsProps, b as GetWebSocketAuthParamsProps, f as HandleAuthenticationErrorProps, h as HostConfigCommon, R as RestCallAuthParams, c as WebSocketAuthParams, k as authTypesThatCanBeOmitted, i as hostConfigCommonProperties } from './auth-types-Cj5bM3Yk.js';
 
 /**
  * Registers an auth module that can handle authentication. An auth module is used by specifying its name as authType in the HostConfig passed in to api calls.

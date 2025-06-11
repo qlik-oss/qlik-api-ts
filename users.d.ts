@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * An array of group references.
@@ -365,7 +365,7 @@ type Users = {
  * @param query an object with query parameters
  * @throws GetUsersHttpError
  */
-declare const getUsers: (query: {
+declare function getUsers(query: {
     /** @deprecated
      * The email to filter by. Deprecated. Use the new `filter` parameter to provide an advanced query filter. */
     email?: string;
@@ -435,7 +435,7 @@ declare const getUsers: (query: {
     tenantId?: string;
     /** Whether to return a total match count in the result. Defaults to false. It will trigger an extra DB query to count, reducing the efficiency of the endpoint. */
     totalResults?: boolean;
-}, options?: ApiCallOptions) => Promise<GetUsersHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetUsersHttpResponse>;
 type GetUsersHttpResponse = {
     data: Users;
     headers: Headers;
@@ -454,7 +454,7 @@ type GetUsersHttpError = {
  * @param body an object with the body content
  * @throws CreateUserHttpError
  */
-declare const createUser: (body: UserPostSchema, options?: ApiCallOptions) => Promise<CreateUserHttpResponse>;
+declare function createUser(body: UserPostSchema, options?: ApiCallOptions): Promise<CreateUserHttpResponse>;
 type CreateUserHttpResponse = {
     data: User;
     headers: Headers;
@@ -471,11 +471,11 @@ type CreateUserHttpError = {
  * @param query an object with query parameters
  * @throws CountUsersHttpError
  */
-declare const countUsers: (query: {
+declare function countUsers(query: {
     /** @deprecated
      * The tenant ID to filter by. */
     tenantId?: string;
-}, options?: ApiCallOptions) => Promise<CountUsersHttpResponse>;
+}, options?: ApiCallOptions): Promise<CountUsersHttpResponse>;
 type CountUsersHttpResponse = {
     data: UserCount;
     headers: Headers;
@@ -493,7 +493,7 @@ type CountUsersHttpError = {
  * @param body an object with the body content
  * @throws FilterUsersHttpError
  */
-declare const filterUsers: (query: {
+declare function filterUsers(query: {
     /** A comma-delimited string of the requested fields per entity. If the 'links' value is omitted, then the entity HATEOAS link will also be omitted. */
     fields?: string;
     /** The number of user entries to retrieve. */
@@ -504,7 +504,7 @@ declare const filterUsers: (query: {
     prev?: string;
     /** The field to sort by, with +/- prefix indicating sort order */
     sort?: "name" | "+name" | "-name";
-}, body: Filter, options?: ApiCallOptions) => Promise<FilterUsersHttpResponse>;
+}, body: Filter, options?: ApiCallOptions): Promise<FilterUsersHttpResponse>;
 type FilterUsersHttpResponse = {
     data: Users;
     headers: Headers;
@@ -523,7 +523,7 @@ type FilterUsersHttpError = {
  * @param body an object with the body content
  * @throws InviteUsersHttpError
  */
-declare const inviteUsers: (body: InviteRequestData, options?: ApiCallOptions) => Promise<InviteUsersHttpResponse>;
+declare function inviteUsers(body: InviteRequestData, options?: ApiCallOptions): Promise<InviteUsersHttpResponse>;
 type InviteUsersHttpResponse = {
     data: InviteDataResponse;
     headers: Headers;
@@ -539,7 +539,7 @@ type InviteUsersHttpError = {
  *
  * @throws GetMyUserHttpError
  */
-declare const getMyUser: (options?: ApiCallOptions) => Promise<GetMyUserHttpResponse>;
+declare function getMyUser(options?: ApiCallOptions): Promise<GetMyUserHttpResponse>;
 type GetMyUserHttpResponse = {
     data: User;
     headers: Headers;
@@ -556,7 +556,7 @@ type GetMyUserHttpError = {
  * @param userId The ID of the user to delete.
  * @throws DeleteUserHttpError
  */
-declare const deleteUser: (userId: string, options?: ApiCallOptions) => Promise<DeleteUserHttpResponse>;
+declare function deleteUser(userId: string, options?: ApiCallOptions): Promise<DeleteUserHttpResponse>;
 type DeleteUserHttpResponse = {
     data: void;
     headers: Headers;
@@ -574,10 +574,10 @@ type DeleteUserHttpError = {
  * @param query an object with query parameters
  * @throws GetUserHttpError
  */
-declare const getUser: (userId: string, query: {
+declare function getUser(userId: string, query: {
     /** A comma-delimited string of the requested fields per entity. If the 'links' value is omitted, then the entity HATEOAS link will also be omitted. */
     fields?: string;
-}, options?: ApiCallOptions) => Promise<GetUserHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetUserHttpResponse>;
 type GetUserHttpResponse = {
     data: User & unknown;
     headers: Headers;
@@ -595,7 +595,7 @@ type GetUserHttpError = {
  * @param body an object with the body content
  * @throws PatchUserHttpError
  */
-declare const patchUser: (userId: string, body: JSONPatchArray, options?: ApiCallOptions) => Promise<PatchUserHttpResponse>;
+declare function patchUser(userId: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchUserHttpResponse>;
 type PatchUserHttpResponse = PatchUser204HttpResponse | PatchUser207HttpResponse;
 type PatchUser204HttpResponse = {
     data: void;

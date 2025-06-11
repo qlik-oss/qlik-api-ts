@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * An error object.
@@ -55,14 +55,14 @@ type NotificationsObject = {
  * @param query an object with query parameters
  * @throws GetNotificationsHttpError
  */
-declare const getNotifications: (query: {
+declare function getNotifications(query: {
     /** If present, idenfies the language of the returned 'friendlyName' property. */
     locale?: string;
     /** If present, represents the 'manageableInHub' value to filter by. */
     manageableInHub?: true | false;
     /** If present, represents the 'subscribable' value to filter by. */
     subscribable?: true | false;
-}, options?: ApiCallOptions) => Promise<GetNotificationsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetNotificationsHttpResponse>;
 type GetNotificationsHttpResponse = {
     data: NotificationsObject;
     headers: Headers;

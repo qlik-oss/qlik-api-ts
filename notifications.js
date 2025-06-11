@@ -1,17 +1,19 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/notifications.ts
-var getNotifications = async (query, options) => invokeFetch("notifications", {
-  method: "get",
-  pathTemplate: "/api/v1/notifications",
-  query,
-  options
-});
+async function getNotifications(query, options) {
+  return invokeFetch("notifications", {
+    method: "get",
+    pathTemplate: "/api/v1/notifications",
+    query,
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("notifications");
 }

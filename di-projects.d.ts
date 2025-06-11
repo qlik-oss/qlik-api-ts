@@ -1,5 +1,5 @@
-import { A as ApiCallOptions, D as DownloadableBlob } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions, D as DownloadableBlob } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type AsyncActionDetails = {
     endTime?: string;
@@ -156,10 +156,10 @@ type ValidateTaskReq = unknown;
  * @param query an object with query parameters
  * @throws GetDiProjectsHttpError
  */
-declare const getDiProjects: (query: {
+declare function getDiProjects(query: {
     /** Filter by space id */
     spaceId?: string;
-}, options?: ApiCallOptions) => Promise<GetDiProjectsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDiProjectsHttpResponse>;
 type GetDiProjectsHttpResponse = {
     data: ListDiProjectsRsp;
     headers: Headers;
@@ -176,7 +176,7 @@ type GetDiProjectsHttpError = {
  * @param body an object with the body content
  * @throws CreateDiProjectHttpError
  */
-declare const createDiProject: (body: CreateDiProjectReq, options?: ApiCallOptions) => Promise<CreateDiProjectHttpResponse>;
+declare function createDiProject(body: CreateDiProjectReq, options?: ApiCallOptions): Promise<CreateDiProjectHttpResponse>;
 type CreateDiProjectHttpResponse = {
     data: DiProjectItemRsp;
     headers: Headers;
@@ -194,10 +194,10 @@ type CreateDiProjectHttpError = {
  * @param query an object with query parameters
  * @throws GetDiProjectHttpError
  */
-declare const getDiProject: (actionId: string, query: {
+declare function getDiProject(actionId: string, query: {
     /** Specifies whether to include detailed status information in the response. Set to `true` to return detailed information. */
     detailed?: boolean;
-}, options?: ApiCallOptions) => Promise<GetDiProjectHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDiProjectHttpResponse>;
 type GetDiProjectHttpResponse = {
     data: AsyncActionDetails;
     headers: Headers;
@@ -215,7 +215,7 @@ type GetDiProjectHttpError = {
  * @param body an object with the body content
  * @throws ExportDiProjectHttpError
  */
-declare const exportDiProject: (projectId: string, body: ExportDiProjectReq, options?: ApiCallOptions) => Promise<ExportDiProjectHttpResponse>;
+declare function exportDiProject(projectId: string, body: ExportDiProjectReq, options?: ApiCallOptions): Promise<ExportDiProjectHttpResponse>;
 type ExportDiProjectHttpResponse = {
     data: DownloadableBlob;
     headers: Headers;
@@ -233,9 +233,9 @@ type ExportDiProjectHttpError = {
  * @param body an object with the body content
  * @throws ImportDiProjectHttpError
  */
-declare const importDiProject: (projectId: string, body: {
+declare function importDiProject(projectId: string, body: {
     zip?: BodyInit;
-}, options?: ApiCallOptions) => Promise<ImportDiProjectHttpResponse>;
+}, options?: ApiCallOptions): Promise<ImportDiProjectHttpResponse>;
 type ImportDiProjectHttpResponse = {
     data: ImportDiProjectRsp;
     headers: Headers;
@@ -253,7 +253,7 @@ type ImportDiProjectHttpError = {
  * @param body an object with the body content
  * @throws PrepareDiProjectHttpError
  */
-declare const prepareDiProject: (projectId: string, body: PrepareProjectReq, options?: ApiCallOptions) => Promise<PrepareDiProjectHttpResponse>;
+declare function prepareDiProject(projectId: string, body: PrepareProjectReq, options?: ApiCallOptions): Promise<PrepareDiProjectHttpResponse>;
 type PrepareDiProjectHttpResponse = {
     data: AsyncActionRsp;
     headers: Headers;
@@ -271,7 +271,7 @@ type PrepareDiProjectHttpError = {
  * @param body an object with the body content
  * @throws ValidateDiProjectHttpError
  */
-declare const validateDiProject: (projectId: string, body: ValidateProjectReq, options?: ApiCallOptions) => Promise<ValidateDiProjectHttpResponse>;
+declare function validateDiProject(projectId: string, body: ValidateProjectReq, options?: ApiCallOptions): Promise<ValidateDiProjectHttpResponse>;
 type ValidateDiProjectHttpResponse = {
     data: AsyncActionRsp;
     headers: Headers;
@@ -296,10 +296,10 @@ type ValidateDiProjectHttpError = {
  * @param query an object with query parameters
  * @throws GetDiProjectExportVariablesHttpError
  */
-declare const getDiProjectExportVariables: (projectId: string, query: {
+declare function getDiProjectExportVariables(projectId: string, query: {
     /** Recalculate the bindings if true, otherwise saved bindings are returned. */
     recalculate?: boolean;
-}, options?: ApiCallOptions) => Promise<GetDiProjectExportVariablesHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDiProjectExportVariablesHttpResponse>;
 type GetDiProjectExportVariablesHttpResponse = {
     data: GetDiExportProjectVariablesRsp;
     headers: Headers;
@@ -317,7 +317,7 @@ type GetDiProjectExportVariablesHttpError = {
  * @param body an object with the body content
  * @throws SetDiProjectExportVariablesHttpError
  */
-declare const setDiProjectExportVariables: (projectId: string, body: UpdateDiExportProjectVariablesReq, options?: ApiCallOptions) => Promise<SetDiProjectExportVariablesHttpResponse>;
+declare function setDiProjectExportVariables(projectId: string, body: UpdateDiExportProjectVariablesReq, options?: ApiCallOptions): Promise<SetDiProjectExportVariablesHttpResponse>;
 type SetDiProjectExportVariablesHttpResponse = {
     data: UpdateDiExportProjectVariablesRsp;
     headers: Headers;
@@ -338,7 +338,7 @@ type SetDiProjectExportVariablesHttpError = {
  * @param projectId Data project id
  * @throws GetDiProjectDiTasksHttpError
  */
-declare const getDiProjectDiTasks: (projectId: string, options?: ApiCallOptions) => Promise<GetDiProjectDiTasksHttpResponse>;
+declare function getDiProjectDiTasks(projectId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTasksHttpResponse>;
 type GetDiProjectDiTasksHttpResponse = {
     data: ListDataTasksRsp;
     headers: Headers;
@@ -361,7 +361,7 @@ type GetDiProjectDiTasksHttpError = {
  * @param dataTaskId Data task id
  * @throws GetDiProjectDiTaskHttpError
  */
-declare const getDiProjectDiTask: (projectId: string, dataTaskId: string, options?: ApiCallOptions) => Promise<GetDiProjectDiTaskHttpResponse>;
+declare function getDiProjectDiTask(projectId: string, dataTaskId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTaskHttpResponse>;
 type GetDiProjectDiTaskHttpResponse = {
     data: DataTaskItemRsp;
     headers: Headers;
@@ -380,7 +380,7 @@ type GetDiProjectDiTaskHttpError = {
  * @param body an object with the body content
  * @throws PrepareDiProjectDiTaskHttpError
  */
-declare const prepareDiProjectDiTask: (projectId: string, dataTaskId: string, body: PrepareTaskReq, options?: ApiCallOptions) => Promise<PrepareDiProjectDiTaskHttpResponse>;
+declare function prepareDiProjectDiTask(projectId: string, dataTaskId: string, body: PrepareTaskReq, options?: ApiCallOptions): Promise<PrepareDiProjectDiTaskHttpResponse>;
 type PrepareDiProjectDiTaskHttpResponse = {
     data: AsyncActionRsp;
     headers: Headers;
@@ -405,7 +405,7 @@ type PrepareDiProjectDiTaskHttpError = {
  * @param body an object with the body content
  * @throws ValidateDiProjectDiTaskHttpError
  */
-declare const validateDiProjectDiTask: (projectId: string, dataTaskId: string, body: ValidateTaskReq, options?: ApiCallOptions) => Promise<ValidateDiProjectDiTaskHttpResponse>;
+declare function validateDiProjectDiTask(projectId: string, dataTaskId: string, body: ValidateTaskReq, options?: ApiCallOptions): Promise<ValidateDiProjectDiTaskHttpResponse>;
 type ValidateDiProjectDiTaskHttpResponse = {
     data: AsyncActionRsp;
     headers: Headers;
@@ -428,7 +428,7 @@ type ValidateDiProjectDiTaskHttpError = {
  * @param dataTaskId Data task id
  * @throws StartDiProjectDiTaskRuntimeHttpError
  */
-declare const startDiProjectDiTaskRuntime: (projectId: string, dataTaskId: string, options?: ApiCallOptions) => Promise<StartDiProjectDiTaskRuntimeHttpResponse>;
+declare function startDiProjectDiTaskRuntime(projectId: string, dataTaskId: string, options?: ApiCallOptions): Promise<StartDiProjectDiTaskRuntimeHttpResponse>;
 type StartDiProjectDiTaskRuntimeHttpResponse = {
     data: void;
     headers: Headers;
@@ -451,7 +451,7 @@ type StartDiProjectDiTaskRuntimeHttpError = {
  * @param dataTaskId
  * @throws StopDiProjectDiTaskRuntimeHttpError
  */
-declare const stopDiProjectDiTaskRuntime: (projectId: string, dataTaskId: string, options?: ApiCallOptions) => Promise<StopDiProjectDiTaskRuntimeHttpResponse>;
+declare function stopDiProjectDiTaskRuntime(projectId: string, dataTaskId: string, options?: ApiCallOptions): Promise<StopDiProjectDiTaskRuntimeHttpResponse>;
 type StopDiProjectDiTaskRuntimeHttpResponse = {
     data: void;
     headers: Headers;
@@ -474,7 +474,7 @@ type StopDiProjectDiTaskRuntimeHttpError = {
  * @param dataTaskId
  * @throws GetDiProjectDiTaskRuntimeStateHttpError
  */
-declare const getDiProjectDiTaskRuntimeState: (projectId: string, dataTaskId: string, options?: ApiCallOptions) => Promise<GetDiProjectDiTaskRuntimeStateHttpResponse>;
+declare function getDiProjectDiTaskRuntimeState(projectId: string, dataTaskId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTaskRuntimeStateHttpResponse>;
 type GetDiProjectDiTaskRuntimeStateHttpResponse = {
     data: {
         lastRun?: DataTaskInstanceState;
