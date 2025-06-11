@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type BulkCreatePinnedLinkItemPayload = CreatePinnedLinkConfigPayload & {
     links: CreatePinnedLinkPayload[];
@@ -55,7 +55,7 @@ type PinnedLink = {
  *
  * @throws GetUiConfigPinnedLinksHttpError
  */
-declare const getUiConfigPinnedLinks: (options?: ApiCallOptions) => Promise<GetUiConfigPinnedLinksHttpResponse>;
+declare function getUiConfigPinnedLinks(options?: ApiCallOptions): Promise<GetUiConfigPinnedLinksHttpResponse>;
 type GetUiConfigPinnedLinksHttpResponse = {
     data: {
         data?: PinnedLink[];
@@ -74,7 +74,7 @@ type GetUiConfigPinnedLinksHttpError = {
  * @param body an object with the body content
  * @throws CreateUiConfigPinnedLinkHttpError
  */
-declare const createUiConfigPinnedLink: (body: CreatePinnedLinkPayload & CreatePinnedLinkConfigPayload, options?: ApiCallOptions) => Promise<CreateUiConfigPinnedLinkHttpResponse>;
+declare function createUiConfigPinnedLink(body: CreatePinnedLinkPayload & CreatePinnedLinkConfigPayload, options?: ApiCallOptions): Promise<CreateUiConfigPinnedLinkHttpResponse>;
 type CreateUiConfigPinnedLinkHttpResponse = {
     data: PinnedLink;
     headers: Headers;
@@ -97,7 +97,7 @@ type CreateUiConfigPinnedLinkdefaultHttpError = {
  * @param body an object with the body content
  * @throws CreateUiConfigPinnedLinksHttpError
  */
-declare const createUiConfigPinnedLinks: (body: BulkCreatePinnedLinkItemPayload, options?: ApiCallOptions) => Promise<CreateUiConfigPinnedLinksHttpResponse>;
+declare function createUiConfigPinnedLinks(body: BulkCreatePinnedLinkItemPayload, options?: ApiCallOptions): Promise<CreateUiConfigPinnedLinksHttpResponse>;
 type CreateUiConfigPinnedLinksHttpResponse = {
     data: {
         data?: PinnedLink[];
@@ -121,7 +121,7 @@ type CreateUiConfigPinnedLinksdefaultHttpError = {
  *
  * @throws DeleteAllUiConfigPinnedLinksHttpError
  */
-declare const deleteAllUiConfigPinnedLinks: (options?: ApiCallOptions) => Promise<DeleteAllUiConfigPinnedLinksHttpResponse>;
+declare function deleteAllUiConfigPinnedLinks(options?: ApiCallOptions): Promise<DeleteAllUiConfigPinnedLinksHttpResponse>;
 type DeleteAllUiConfigPinnedLinksHttpResponse = {
     data: void;
     headers: Headers;
@@ -144,7 +144,7 @@ type DeleteAllUiConfigPinnedLinksdefaultHttpError = {
  * @param id The pinned link identifier.
  * @throws DeleteUiConfigPinnedLinkHttpError
  */
-declare const deleteUiConfigPinnedLink: (id: string, options?: ApiCallOptions) => Promise<DeleteUiConfigPinnedLinkHttpResponse>;
+declare function deleteUiConfigPinnedLink(id: string, options?: ApiCallOptions): Promise<DeleteUiConfigPinnedLinkHttpResponse>;
 type DeleteUiConfigPinnedLinkHttpResponse = {
     data: void;
     headers: Headers;
@@ -167,7 +167,7 @@ type DeleteUiConfigPinnedLinkdefaultHttpError = {
  * @param id The pinned link identifier.
  * @throws GetUiConfigPinnedLinkHttpError
  */
-declare const getUiConfigPinnedLink: (id: string, options?: ApiCallOptions) => Promise<GetUiConfigPinnedLinkHttpResponse>;
+declare function getUiConfigPinnedLink(id: string, options?: ApiCallOptions): Promise<GetUiConfigPinnedLinkHttpResponse>;
 type GetUiConfigPinnedLinkHttpResponse = {
     data: PinnedLink;
     headers: Headers;
@@ -191,7 +191,7 @@ type GetUiConfigPinnedLinkdefaultHttpError = {
  * @param body an object with the body content
  * @throws PatchUiConfigPinnedLinkHttpError
  */
-declare const patchUiConfigPinnedLink: (id: string, body: JSONPatchPinnedLinkPayload, options?: ApiCallOptions) => Promise<PatchUiConfigPinnedLinkHttpResponse>;
+declare function patchUiConfigPinnedLink(id: string, body: JSONPatchPinnedLinkPayload, options?: ApiCallOptions): Promise<PatchUiConfigPinnedLinkHttpResponse>;
 type PatchUiConfigPinnedLinkHttpResponse = {
     data: PinnedLink;
     headers: Headers;

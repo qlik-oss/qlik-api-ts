@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * An error object
@@ -1389,7 +1389,7 @@ type UpdatedAt = string;
  * @param query an object with query parameters
  * @throws GetMlDeploymentsHttpError
  */
-declare const getMlDeployments: (query: {
+declare function getMlDeployments(query: {
     /** Deployment fields by which you can filter responses.<br><br>
      * - `spaceId` ID string (or empty string for personal space) - ID of space in which deployment(s) exist
      * - `modelId` UUID string - By model ID
@@ -1411,7 +1411,7 @@ declare const getMlDeployments: (query: {
     offset?: number;
     /** Field(s) by which to sort response */
     sort?: EnumSortDeployments;
-}, options?: ApiCallOptions) => Promise<GetMlDeploymentsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetMlDeploymentsHttpResponse>;
 type GetMlDeploymentsHttpResponse = {
     data: DeploymentFindResponse;
     headers: Headers;
@@ -1430,7 +1430,7 @@ type GetMlDeploymentsHttpError = {
  * @param body an object with the body content
  * @throws CreateMlDeploymentHttpError
  */
-declare const createMlDeployment: (body: DeploymentInput, options?: ApiCallOptions) => Promise<CreateMlDeploymentHttpResponse>;
+declare function createMlDeployment(body: DeploymentInput, options?: ApiCallOptions): Promise<CreateMlDeploymentHttpResponse>;
 type CreateMlDeploymentHttpResponse = {
     data: DeploymentPostResponse;
     headers: Headers;
@@ -1447,7 +1447,7 @@ type CreateMlDeploymentHttpError = {
  * @param deploymentId ID of the deployment
  * @throws DeleteMlDeploymentHttpError
  */
-declare const deleteMlDeployment: (deploymentId: string, options?: ApiCallOptions) => Promise<DeleteMlDeploymentHttpResponse>;
+declare function deleteMlDeployment(deploymentId: string, options?: ApiCallOptions): Promise<DeleteMlDeploymentHttpResponse>;
 type DeleteMlDeploymentHttpResponse = {
     data: void;
     headers: Headers;
@@ -1464,7 +1464,7 @@ type DeleteMlDeploymentHttpError = {
  * @param deploymentId ID of the deployment
  * @throws GetMlDeploymentHttpError
  */
-declare const getMlDeployment: (deploymentId: string, options?: ApiCallOptions) => Promise<GetMlDeploymentHttpResponse>;
+declare function getMlDeployment(deploymentId: string, options?: ApiCallOptions): Promise<GetMlDeploymentHttpResponse>;
 type GetMlDeploymentHttpResponse = {
     data: DeploymentGetResponse;
     headers: Headers;
@@ -1482,7 +1482,7 @@ type GetMlDeploymentHttpError = {
  * @param body an object with the body content
  * @throws PatchMlDeploymentHttpError
  */
-declare const patchMlDeployment: (deploymentId: string, body: DeploymentPatch, options?: ApiCallOptions) => Promise<PatchMlDeploymentHttpResponse>;
+declare function patchMlDeployment(deploymentId: string, body: DeploymentPatch, options?: ApiCallOptions): Promise<PatchMlDeploymentHttpResponse>;
 type PatchMlDeploymentHttpResponse = {
     data: void;
     headers: Headers;
@@ -1499,7 +1499,7 @@ type PatchMlDeploymentHttpError = {
  * @param deploymentId ID of the deployment
  * @throws ActivateModelsMlDeploymentHttpError
  */
-declare const activateModelsMlDeployment: (deploymentId: string, options?: ApiCallOptions) => Promise<ActivateModelsMlDeploymentHttpResponse>;
+declare function activateModelsMlDeployment(deploymentId: string, options?: ApiCallOptions): Promise<ActivateModelsMlDeploymentHttpResponse>;
 type ActivateModelsMlDeploymentHttpResponse = {
     data: void;
     headers: Headers;
@@ -1516,7 +1516,7 @@ type ActivateModelsMlDeploymentHttpError = {
  * @param deploymentId ID of the deployment
  * @throws DeactivateModelsMlDeploymentHttpError
  */
-declare const deactivateModelsMlDeployment: (deploymentId: string, options?: ApiCallOptions) => Promise<DeactivateModelsMlDeploymentHttpResponse>;
+declare function deactivateModelsMlDeployment(deploymentId: string, options?: ApiCallOptions): Promise<DeactivateModelsMlDeploymentHttpResponse>;
 type DeactivateModelsMlDeploymentHttpResponse = {
     data: void;
     headers: Headers;
@@ -1534,7 +1534,7 @@ type DeactivateModelsMlDeploymentHttpError = {
  * @param query an object with query parameters
  * @throws GetMlDeploymentAliasesHttpError
  */
-declare const getMlDeploymentAliases: (deploymentId: string, query: {
+declare function getMlDeploymentAliases(deploymentId: string, query: {
     /** Alias fields by which you can filter responses
      * - `name` string - Aliases with exact name
      * - `modelId` UUID string - By model ID
@@ -1546,7 +1546,7 @@ declare const getMlDeploymentAliases: (deploymentId: string, query: {
     offset?: number;
     /** Field(s) by which to sort response */
     sort?: EnumSortAliases;
-}, options?: ApiCallOptions) => Promise<GetMlDeploymentAliasesHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetMlDeploymentAliasesHttpResponse>;
 type GetMlDeploymentAliasesHttpResponse = {
     data: AliasFindResponse;
     headers: Headers;
@@ -1566,7 +1566,7 @@ type GetMlDeploymentAliasesHttpError = {
  * @param body an object with the body content
  * @throws CreateMlDeploymentAliaseHttpError
  */
-declare const createMlDeploymentAliase: (deploymentId: string, body: AliasInput, options?: ApiCallOptions) => Promise<CreateMlDeploymentAliaseHttpResponse>;
+declare function createMlDeploymentAliase(deploymentId: string, body: AliasInput, options?: ApiCallOptions): Promise<CreateMlDeploymentAliaseHttpResponse>;
 type CreateMlDeploymentAliaseHttpResponse = {
     data: AliasPostResponse;
     headers: Headers;
@@ -1584,7 +1584,7 @@ type CreateMlDeploymentAliaseHttpError = {
  * @param aliasId ID of the alias
  * @throws DeleteMlDeploymentAliaseHttpError
  */
-declare const deleteMlDeploymentAliase: (deploymentId: string, aliasId: string, options?: ApiCallOptions) => Promise<DeleteMlDeploymentAliaseHttpResponse>;
+declare function deleteMlDeploymentAliase(deploymentId: string, aliasId: string, options?: ApiCallOptions): Promise<DeleteMlDeploymentAliaseHttpResponse>;
 type DeleteMlDeploymentAliaseHttpResponse = {
     data: void;
     headers: Headers;
@@ -1602,7 +1602,7 @@ type DeleteMlDeploymentAliaseHttpError = {
  * @param aliasId ID of the alias
  * @throws GetMlDeploymentAliaseHttpError
  */
-declare const getMlDeploymentAliase: (deploymentId: string, aliasId: string, options?: ApiCallOptions) => Promise<GetMlDeploymentAliaseHttpResponse>;
+declare function getMlDeploymentAliase(deploymentId: string, aliasId: string, options?: ApiCallOptions): Promise<GetMlDeploymentAliaseHttpResponse>;
 type GetMlDeploymentAliaseHttpResponse = {
     data: AliasGetResponse;
     headers: Headers;
@@ -1621,7 +1621,7 @@ type GetMlDeploymentAliaseHttpError = {
  * @param body an object with the body content
  * @throws PatchMlDeploymentAliaseHttpError
  */
-declare const patchMlDeploymentAliase: (deploymentId: string, aliasId: string, body: AliasPatch, options?: ApiCallOptions) => Promise<PatchMlDeploymentAliaseHttpResponse>;
+declare function patchMlDeploymentAliase(deploymentId: string, aliasId: string, body: AliasPatch, options?: ApiCallOptions): Promise<PatchMlDeploymentAliaseHttpResponse>;
 type PatchMlDeploymentAliaseHttpResponse = {
     data: void;
     headers: Headers;
@@ -1641,7 +1641,7 @@ type PatchMlDeploymentAliaseHttpError = {
  * @param body an object with the body content
  * @throws RunMlDeploymentAliaseRealtimePredictionsHttpError
  */
-declare const runMlDeploymentAliaseRealtimePredictions: (deploymentId: string, aliasName: string, query: {
+declare function runMlDeploymentAliaseRealtimePredictions(deploymentId: string, aliasName: string, query: {
     /** If true, reason why a prediction was not produced included response */
     includeNotPredictedReason?: boolean;
     /** If true, shap values included in response */
@@ -1653,7 +1653,7 @@ declare const runMlDeploymentAliaseRealtimePredictions: (deploymentId: string, a
      * and values. This is intended to allow the caller to join results
      * with source data. */
     index?: string;
-}, body: RealtimePredictionInput, options?: ApiCallOptions) => Promise<RunMlDeploymentAliaseRealtimePredictionsHttpResponse>;
+}, body: RealtimePredictionInput, options?: ApiCallOptions): Promise<RunMlDeploymentAliaseRealtimePredictionsHttpResponse>;
 type RunMlDeploymentAliaseRealtimePredictionsHttpResponse = {
     data: RealtimePrediction;
     headers: Headers;
@@ -1671,7 +1671,7 @@ type RunMlDeploymentAliaseRealtimePredictionsHttpError = {
  * @param query an object with query parameters
  * @throws GetMlDeploymentBatchPredictionsHttpError
  */
-declare const getMlDeploymentBatchPredictions: (deploymentId: string, query: {
+declare function getMlDeploymentBatchPredictions(deploymentId: string, query: {
     /** Batch prediction fields by which you can filter responses.<br><br>
      * - `modelId` UUID string - By model ID */
     filter?: string;
@@ -1681,7 +1681,7 @@ declare const getMlDeploymentBatchPredictions: (deploymentId: string, query: {
     offset?: number;
     /** Field(s) by which to sort response */
     sort?: EnumSortBatchPredictions;
-}, options?: ApiCallOptions) => Promise<GetMlDeploymentBatchPredictionsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetMlDeploymentBatchPredictionsHttpResponse>;
 type GetMlDeploymentBatchPredictionsHttpResponse = {
     data: BatchPredictionFindResponse;
     headers: Headers;
@@ -1701,7 +1701,7 @@ type GetMlDeploymentBatchPredictionsHttpError = {
  * @param body an object with the body content
  * @throws CreateMlDeploymentBatchPredictionHttpError
  */
-declare const createMlDeploymentBatchPrediction: (deploymentId: string, body: BatchPredictionInput, options?: ApiCallOptions) => Promise<CreateMlDeploymentBatchPredictionHttpResponse>;
+declare function createMlDeploymentBatchPrediction(deploymentId: string, body: BatchPredictionInput, options?: ApiCallOptions): Promise<CreateMlDeploymentBatchPredictionHttpResponse>;
 type CreateMlDeploymentBatchPredictionHttpResponse = {
     data: BatchPredictionPostResponse;
     headers: Headers;
@@ -1719,7 +1719,7 @@ type CreateMlDeploymentBatchPredictionHttpError = {
  * @param batchPredictionId ID of the batch prediction
  * @throws DeleteMlDeploymentBatchPredictionHttpError
  */
-declare const deleteMlDeploymentBatchPrediction: (deploymentId: string, batchPredictionId: string, options?: ApiCallOptions) => Promise<DeleteMlDeploymentBatchPredictionHttpResponse>;
+declare function deleteMlDeploymentBatchPrediction(deploymentId: string, batchPredictionId: string, options?: ApiCallOptions): Promise<DeleteMlDeploymentBatchPredictionHttpResponse>;
 type DeleteMlDeploymentBatchPredictionHttpResponse = {
     data: void;
     headers: Headers;
@@ -1737,7 +1737,7 @@ type DeleteMlDeploymentBatchPredictionHttpError = {
  * @param batchPredictionId ID of the batch prediction
  * @throws GetMlDeploymentBatchPredictionHttpError
  */
-declare const getMlDeploymentBatchPrediction: (deploymentId: string, batchPredictionId: string, options?: ApiCallOptions) => Promise<GetMlDeploymentBatchPredictionHttpResponse>;
+declare function getMlDeploymentBatchPrediction(deploymentId: string, batchPredictionId: string, options?: ApiCallOptions): Promise<GetMlDeploymentBatchPredictionHttpResponse>;
 type GetMlDeploymentBatchPredictionHttpResponse = {
     data: BatchPredictionGetResponse;
     headers: Headers;
@@ -1756,7 +1756,7 @@ type GetMlDeploymentBatchPredictionHttpError = {
  * @param body an object with the body content
  * @throws PatchMlDeploymentBatchPredictionHttpError
  */
-declare const patchMlDeploymentBatchPrediction: (deploymentId: string, batchPredictionId: string, body: BatchPredictionPatch, options?: ApiCallOptions) => Promise<PatchMlDeploymentBatchPredictionHttpResponse>;
+declare function patchMlDeploymentBatchPrediction(deploymentId: string, batchPredictionId: string, body: BatchPredictionPatch, options?: ApiCallOptions): Promise<PatchMlDeploymentBatchPredictionHttpResponse>;
 type PatchMlDeploymentBatchPredictionHttpResponse = {
     data: void;
     headers: Headers;
@@ -1774,7 +1774,7 @@ type PatchMlDeploymentBatchPredictionHttpError = {
  * @param batchPredictionId ID of the batch prediction
  * @throws PredictMlDeploymentBatchPredictionHttpError
  */
-declare const predictMlDeploymentBatchPrediction: (deploymentId: string, batchPredictionId: string, options?: ApiCallOptions) => Promise<PredictMlDeploymentBatchPredictionHttpResponse>;
+declare function predictMlDeploymentBatchPrediction(deploymentId: string, batchPredictionId: string, options?: ApiCallOptions): Promise<PredictMlDeploymentBatchPredictionHttpResponse>;
 type PredictMlDeploymentBatchPredictionHttpResponse = {
     data: BatchPredictionActionResponse;
     headers: Headers;
@@ -1792,7 +1792,7 @@ type PredictMlDeploymentBatchPredictionHttpError = {
  * @param batchPredictionId ID of the batch prediction
  * @throws DeleteMlDeploymentBatchPredictionScheduleHttpError
  */
-declare const deleteMlDeploymentBatchPredictionSchedule: (deploymentId: string, batchPredictionId: string, options?: ApiCallOptions) => Promise<DeleteMlDeploymentBatchPredictionScheduleHttpResponse>;
+declare function deleteMlDeploymentBatchPredictionSchedule(deploymentId: string, batchPredictionId: string, options?: ApiCallOptions): Promise<DeleteMlDeploymentBatchPredictionScheduleHttpResponse>;
 type DeleteMlDeploymentBatchPredictionScheduleHttpResponse = {
     data: void;
     headers: Headers;
@@ -1810,7 +1810,7 @@ type DeleteMlDeploymentBatchPredictionScheduleHttpError = {
  * @param batchPredictionId ID of the batch prediction
  * @throws GetMlDeploymentBatchPredictionScheduleHttpError
  */
-declare const getMlDeploymentBatchPredictionSchedule: (deploymentId: string, batchPredictionId: string, options?: ApiCallOptions) => Promise<GetMlDeploymentBatchPredictionScheduleHttpResponse>;
+declare function getMlDeploymentBatchPredictionSchedule(deploymentId: string, batchPredictionId: string, options?: ApiCallOptions): Promise<GetMlDeploymentBatchPredictionScheduleHttpResponse>;
 type GetMlDeploymentBatchPredictionScheduleHttpResponse = {
     data: BatchPredictionScheduleGetResponse;
     headers: Headers;
@@ -1829,7 +1829,7 @@ type GetMlDeploymentBatchPredictionScheduleHttpError = {
  * @param body an object with the body content
  * @throws UpdateMlDeploymentBatchPredictionScheduleHttpError
  */
-declare const updateMlDeploymentBatchPredictionSchedule: (deploymentId: string, batchPredictionId: string, body: BatchPredictionSchedulePatch, options?: ApiCallOptions) => Promise<UpdateMlDeploymentBatchPredictionScheduleHttpResponse>;
+declare function updateMlDeploymentBatchPredictionSchedule(deploymentId: string, batchPredictionId: string, body: BatchPredictionSchedulePatch, options?: ApiCallOptions): Promise<UpdateMlDeploymentBatchPredictionScheduleHttpResponse>;
 type UpdateMlDeploymentBatchPredictionScheduleHttpResponse = {
     data: void;
     headers: Headers;
@@ -1848,7 +1848,7 @@ type UpdateMlDeploymentBatchPredictionScheduleHttpError = {
  * @param body an object with the body content
  * @throws SetMlDeploymentBatchPredictionScheduleHttpError
  */
-declare const setMlDeploymentBatchPredictionSchedule: (deploymentId: string, batchPredictionId: string, body: BatchPredictionScheduleInput, options?: ApiCallOptions) => Promise<SetMlDeploymentBatchPredictionScheduleHttpResponse>;
+declare function setMlDeploymentBatchPredictionSchedule(deploymentId: string, batchPredictionId: string, body: BatchPredictionScheduleInput, options?: ApiCallOptions): Promise<SetMlDeploymentBatchPredictionScheduleHttpResponse>;
 type SetMlDeploymentBatchPredictionScheduleHttpResponse = {
     data: BatchPredictionSchedulePutResponse;
     headers: Headers;
@@ -1866,7 +1866,7 @@ type SetMlDeploymentBatchPredictionScheduleHttpError = {
  * @param body an object with the body content
  * @throws AddMlDeploymentModelsHttpError
  */
-declare const addMlDeploymentModels: (deploymentId: string, body: DeployedModelsInput, options?: ApiCallOptions) => Promise<AddMlDeploymentModelsHttpResponse>;
+declare function addMlDeploymentModels(deploymentId: string, body: DeployedModelsInput, options?: ApiCallOptions): Promise<AddMlDeploymentModelsHttpResponse>;
 type AddMlDeploymentModelsHttpResponse = {
     data: void;
     headers: Headers;
@@ -1884,7 +1884,7 @@ type AddMlDeploymentModelsHttpError = {
  * @param body an object with the body content
  * @throws RemoveMlDeploymentModelsHttpError
  */
-declare const removeMlDeploymentModels: (deploymentId: string, body: DeployedModelsInput, options?: ApiCallOptions) => Promise<RemoveMlDeploymentModelsHttpResponse>;
+declare function removeMlDeploymentModels(deploymentId: string, body: DeployedModelsInput, options?: ApiCallOptions): Promise<RemoveMlDeploymentModelsHttpResponse>;
 type RemoveMlDeploymentModelsHttpResponse = {
     data: void;
     headers: Headers;
@@ -1903,7 +1903,7 @@ type RemoveMlDeploymentModelsHttpError = {
  * @param body an object with the body content
  * @throws RunMlDeploymentRealtimePredictionsHttpError
  */
-declare const runMlDeploymentRealtimePredictions: (deploymentId: string, query: {
+declare function runMlDeploymentRealtimePredictions(deploymentId: string, query: {
     /** If true, reason why a prediction was not produced included response */
     includeNotPredictedReason?: boolean;
     /** If true, shapley values included in response */
@@ -1915,7 +1915,7 @@ declare const runMlDeploymentRealtimePredictions: (deploymentId: string, query: 
      * and values. This is intended to allow the caller to join results
      * with source data. */
     index?: string;
-}, body: RealtimePredictionInput, options?: ApiCallOptions) => Promise<RunMlDeploymentRealtimePredictionsHttpResponse>;
+}, body: RealtimePredictionInput, options?: ApiCallOptions): Promise<RunMlDeploymentRealtimePredictionsHttpResponse>;
 type RunMlDeploymentRealtimePredictionsHttpResponse = {
     data: RealtimePrediction;
     headers: Headers;
@@ -1941,7 +1941,7 @@ type RunMlDeploymentRealtimePredictionsHttpError = {
  * @param query an object with query parameters
  * @throws GetMlExperimentsHttpError
  */
-declare const getMlExperiments: (query: {
+declare function getMlExperiments(query: {
     /** Experiment fields by which you can filter responses within this tenant
      * - `ownerId` ID string - ID of the owner/user that created the experiment
      * - `spaceId` ID string (or empty string for personal space) - ID of the space where the experiment is saved.
@@ -1955,7 +1955,7 @@ declare const getMlExperiments: (query: {
     offset?: number;
     /** Field(s) by which to sort response */
     sort?: EnumSortExperiments;
-}, options?: ApiCallOptions) => Promise<GetMlExperimentsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetMlExperimentsHttpResponse>;
 type GetMlExperimentsHttpResponse = {
     data: ExperimentFindResponse;
     headers: Headers;
@@ -1974,7 +1974,7 @@ type GetMlExperimentsHttpError = {
  * @param body an object with the body content
  * @throws CreateMlExperimentHttpError
  */
-declare const createMlExperiment: (body: ExperimentInput, options?: ApiCallOptions) => Promise<CreateMlExperimentHttpResponse>;
+declare function createMlExperiment(body: ExperimentInput, options?: ApiCallOptions): Promise<CreateMlExperimentHttpResponse>;
 type CreateMlExperimentHttpResponse = {
     data: ExperimentPostResponse;
     headers: Headers;
@@ -1991,7 +1991,7 @@ type CreateMlExperimentHttpError = {
  * @param experimentId ID of the experiment
  * @throws DeleteMlExperimentHttpError
  */
-declare const deleteMlExperiment: (experimentId: string, options?: ApiCallOptions) => Promise<DeleteMlExperimentHttpResponse>;
+declare function deleteMlExperiment(experimentId: string, options?: ApiCallOptions): Promise<DeleteMlExperimentHttpResponse>;
 type DeleteMlExperimentHttpResponse = {
     data: void;
     headers: Headers;
@@ -2008,7 +2008,7 @@ type DeleteMlExperimentHttpError = {
  * @param experimentId ID of the experiment
  * @throws GetMlExperimentHttpError
  */
-declare const getMlExperiment: (experimentId: string, options?: ApiCallOptions) => Promise<GetMlExperimentHttpResponse>;
+declare function getMlExperiment(experimentId: string, options?: ApiCallOptions): Promise<GetMlExperimentHttpResponse>;
 type GetMlExperimentHttpResponse = {
     data: ExperimentGetResponse;
     headers: Headers;
@@ -2026,7 +2026,7 @@ type GetMlExperimentHttpError = {
  * @param body an object with the body content
  * @throws PatchMlExperimentHttpError
  */
-declare const patchMlExperiment: (experimentId: string, body: ExperimentPatch, options?: ApiCallOptions) => Promise<PatchMlExperimentHttpResponse>;
+declare function patchMlExperiment(experimentId: string, body: ExperimentPatch, options?: ApiCallOptions): Promise<PatchMlExperimentHttpResponse>;
 type PatchMlExperimentHttpResponse = {
     data: void;
     headers: Headers;
@@ -2044,7 +2044,7 @@ type PatchMlExperimentHttpError = {
  * @param query an object with query parameters
  * @throws GetMlExperimentModelsHttpError
  */
-declare const getMlExperimentModels: (experimentId: string, query: {
+declare function getMlExperimentModels(experimentId: string, query: {
     /** Model fields you can filter by:<br><br>
      *
      * - `experimentVersionId` UUID string - Find by experiment version ID
@@ -2076,7 +2076,7 @@ declare const getMlExperimentModels: (experimentId: string, query: {
     offset?: number;
     /** Field(s) by which to sort response */
     sort?: EnumSortModels;
-}, options?: ApiCallOptions) => Promise<GetMlExperimentModelsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetMlExperimentModelsHttpResponse>;
 type GetMlExperimentModelsHttpResponse = {
     data: ModelFindResponse;
     headers: Headers;
@@ -2096,7 +2096,7 @@ type GetMlExperimentModelsHttpError = {
  * @param modelId ID of the model
  * @throws GetMlExperimentModelHttpError
  */
-declare const getMlExperimentModel: (experimentId: string, modelId: string, options?: ApiCallOptions) => Promise<GetMlExperimentModelHttpResponse>;
+declare function getMlExperimentModel(experimentId: string, modelId: string, options?: ApiCallOptions): Promise<GetMlExperimentModelHttpResponse>;
 type GetMlExperimentModelHttpResponse = {
     data: ModelGetResponse;
     headers: Headers;
@@ -2114,7 +2114,7 @@ type GetMlExperimentModelHttpError = {
  * @param query an object with query parameters
  * @throws GetMlExperimentVersionsHttpError
  */
-declare const getMlExperimentVersions: (experimentId: string, query: {
+declare function getMlExperimentVersions(experimentId: string, query: {
     /** Experiment version filter options
      * - `isRunning` boolean - Is the experiment version running (training models)?
      * - `isSettled` boolean - Is the experiment version settled?
@@ -2128,7 +2128,7 @@ declare const getMlExperimentVersions: (experimentId: string, query: {
     offset?: number;
     /** Field(s) by which to sort response */
     sort?: EnumSortExperimentVersions;
-}, options?: ApiCallOptions) => Promise<GetMlExperimentVersionsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetMlExperimentVersionsHttpResponse>;
 type GetMlExperimentVersionsHttpResponse = {
     data: ExperimentVersionFindResponse;
     headers: Headers;
@@ -2150,7 +2150,7 @@ type GetMlExperimentVersionsHttpError = {
  * @param body an object with the body content
  * @throws CreateMlExperimentVersionHttpError
  */
-declare const createMlExperimentVersion: (experimentId: string, body: ExperimentVersionInput, options?: ApiCallOptions) => Promise<CreateMlExperimentVersionHttpResponse>;
+declare function createMlExperimentVersion(experimentId: string, body: ExperimentVersionInput, options?: ApiCallOptions): Promise<CreateMlExperimentVersionHttpResponse>;
 type CreateMlExperimentVersionHttpResponse = {
     data: ExperimentVersionPostResponse;
     headers: Headers;
@@ -2168,7 +2168,7 @@ type CreateMlExperimentVersionHttpError = {
  * @param experimentVersionId ID of the experiment version
  * @throws DeleteMlExperimentVersionHttpError
  */
-declare const deleteMlExperimentVersion: (experimentId: string, experimentVersionId: string, options?: ApiCallOptions) => Promise<DeleteMlExperimentVersionHttpResponse>;
+declare function deleteMlExperimentVersion(experimentId: string, experimentVersionId: string, options?: ApiCallOptions): Promise<DeleteMlExperimentVersionHttpResponse>;
 type DeleteMlExperimentVersionHttpResponse = {
     data: void;
     headers: Headers;
@@ -2186,7 +2186,7 @@ type DeleteMlExperimentVersionHttpError = {
  * @param experimentVersionId ID of the experiment version
  * @throws GetMlExperimentVersionHttpError
  */
-declare const getMlExperimentVersion: (experimentId: string, experimentVersionId: string, options?: ApiCallOptions) => Promise<GetMlExperimentVersionHttpResponse>;
+declare function getMlExperimentVersion(experimentId: string, experimentVersionId: string, options?: ApiCallOptions): Promise<GetMlExperimentVersionHttpResponse>;
 type GetMlExperimentVersionHttpResponse = {
     data: ExperimentVersionGetResponse;
     headers: Headers;
@@ -2205,7 +2205,7 @@ type GetMlExperimentVersionHttpError = {
  * @param body an object with the body content
  * @throws PatchMlExperimentVersionHttpError
  */
-declare const patchMlExperimentVersion: (experimentId: string, experimentVersionId: string, body: ExperimentVersionPatch, options?: ApiCallOptions) => Promise<PatchMlExperimentVersionHttpResponse>;
+declare function patchMlExperimentVersion(experimentId: string, experimentVersionId: string, body: ExperimentVersionPatch, options?: ApiCallOptions): Promise<PatchMlExperimentVersionHttpResponse>;
 type PatchMlExperimentVersionHttpResponse = {
     data: void;
     headers: Headers;
@@ -2223,7 +2223,7 @@ type PatchMlExperimentVersionHttpError = {
  * @param corrId The ID of a correlated resource of corrType
  * @throws CancelMlJobHttpError
  */
-declare const cancelMlJob: (corrType: string, corrId: string, options?: ApiCallOptions) => Promise<CancelMlJobHttpResponse>;
+declare function cancelMlJob(corrType: string, corrId: string, options?: ApiCallOptions): Promise<CancelMlJobHttpResponse>;
 type CancelMlJobHttpResponse = {
     data: void;
     headers: Headers;
@@ -2243,7 +2243,7 @@ type CancelMlJobHttpError = {
  * @param body an object with the body content
  * @throws CreateMlProfileInsightHttpError
  */
-declare const createMlProfileInsight: (body: ProfileInsightsInput, options?: ApiCallOptions) => Promise<CreateMlProfileInsightHttpResponse>;
+declare function createMlProfileInsight(body: ProfileInsightsInput, options?: ApiCallOptions): Promise<CreateMlProfileInsightHttpResponse>;
 type CreateMlProfileInsightHttpResponse = {
     data: ProfileInsightsGetResponse;
     headers: Headers;
@@ -2263,14 +2263,14 @@ type CreateMlProfileInsightHttpError = {
  * @param query an object with query parameters
  * @throws GetMlProfileInsightWithQueryHttpError
  */
-declare const getMlProfileInsightWithQuery: (dataSetId: string, query: {
+declare function getMlProfileInsightWithQuery(dataSetId: string, query: {
     /** The optional experiment type for profile-insights GET requests after
      * this is known. */
     experimentType?: ExperimentType;
     /** The optional target feature for profile-insights GET requests after this
      * is known. */
     target?: string;
-}, options?: ApiCallOptions) => Promise<GetMlProfileInsightWithQueryHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetMlProfileInsightWithQueryHttpResponse>;
 type GetMlProfileInsightWithQueryHttpResponse = {
     data: ProfileInsightsGetResponse;
     headers: Headers;
@@ -2289,7 +2289,7 @@ type GetMlProfileInsightWithQueryHttpError = {
  * @param dataSetId The Qlik catalog dataset ID
  * @throws GetMlProfileInsightHttpError
  */
-declare const getMlProfileInsight: (dataSetId: string, options?: ApiCallOptions) => Promise<GetMlProfileInsightHttpResponse>;
+declare function getMlProfileInsight(dataSetId: string, options?: ApiCallOptions): Promise<GetMlProfileInsightHttpResponse>;
 type GetMlProfileInsightHttpResponse = {
     data: ProfileInsightsGetResponse;
     headers: Headers;

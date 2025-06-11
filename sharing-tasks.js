@@ -1,77 +1,97 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/sharing-tasks.ts
-var getSharingTasks = async (query, options) => invokeFetch("sharing-tasks", {
-  method: "get",
-  pathTemplate: "/api/v1/sharing-tasks",
-  query,
-  options
-});
-var createSharingTask = async (body, options) => invokeFetch("sharing-tasks", {
-  method: "post",
-  pathTemplate: "/api/v1/sharing-tasks",
-  body,
-  contentType: "application/json",
-  options
-});
-var executeSharingTasks = async (body, options) => invokeFetch("sharing-tasks", {
-  method: "post",
-  pathTemplate: "/api/v1/sharing-tasks/actions/execute",
-  body,
-  contentType: "application/json",
-  options
-});
-var getSharingTasksSettings = async (options) => invokeFetch("sharing-tasks", {
-  method: "get",
-  pathTemplate: "/api/v1/sharing-tasks/settings",
-  options
-});
-var updateSharingTasksSettings = async (body, options) => invokeFetch("sharing-tasks", {
-  method: "patch",
-  pathTemplate: "/api/v1/sharing-tasks/settings",
-  body,
-  contentType: "application/json",
-  options
-});
-var configureSharingTasksSettings = async (body, options) => invokeFetch("sharing-tasks", {
-  method: "put",
-  pathTemplate: "/api/v1/sharing-tasks/settings",
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteSharingTask = async (taskId, options) => invokeFetch("sharing-tasks", {
-  method: "delete",
-  pathTemplate: "/api/v1/sharing-tasks/{taskId}",
-  pathVariables: { taskId },
-  options
-});
-var getSharingTask = async (taskId, query, options) => invokeFetch("sharing-tasks", {
-  method: "get",
-  pathTemplate: "/api/v1/sharing-tasks/{taskId}",
-  pathVariables: { taskId },
-  query,
-  options
-});
-var patchSharingTask = async (taskId, body, options) => invokeFetch("sharing-tasks", {
-  method: "patch",
-  pathTemplate: "/api/v1/sharing-tasks/{taskId}",
-  pathVariables: { taskId },
-  body,
-  contentType: "application/json",
-  options
-});
-var cancelSharingTask = async (taskId, options) => invokeFetch("sharing-tasks", {
-  method: "post",
-  pathTemplate: "/api/v1/sharing-tasks/{taskId}/actions/cancel",
-  pathVariables: { taskId },
-  options
-});
+async function getSharingTasks(query, options) {
+  return invokeFetch("sharing-tasks", {
+    method: "get",
+    pathTemplate: "/api/v1/sharing-tasks",
+    query,
+    options
+  });
+}
+async function createSharingTask(body, options) {
+  return invokeFetch("sharing-tasks", {
+    method: "post",
+    pathTemplate: "/api/v1/sharing-tasks",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function executeSharingTasks(body, options) {
+  return invokeFetch("sharing-tasks", {
+    method: "post",
+    pathTemplate: "/api/v1/sharing-tasks/actions/execute",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getSharingTasksSettings(options) {
+  return invokeFetch("sharing-tasks", {
+    method: "get",
+    pathTemplate: "/api/v1/sharing-tasks/settings",
+    options
+  });
+}
+async function updateSharingTasksSettings(body, options) {
+  return invokeFetch("sharing-tasks", {
+    method: "patch",
+    pathTemplate: "/api/v1/sharing-tasks/settings",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function configureSharingTasksSettings(body, options) {
+  return invokeFetch("sharing-tasks", {
+    method: "put",
+    pathTemplate: "/api/v1/sharing-tasks/settings",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteSharingTask(taskId, options) {
+  return invokeFetch("sharing-tasks", {
+    method: "delete",
+    pathTemplate: "/api/v1/sharing-tasks/{taskId}",
+    pathVariables: { taskId },
+    options
+  });
+}
+async function getSharingTask(taskId, query, options) {
+  return invokeFetch("sharing-tasks", {
+    method: "get",
+    pathTemplate: "/api/v1/sharing-tasks/{taskId}",
+    pathVariables: { taskId },
+    query,
+    options
+  });
+}
+async function patchSharingTask(taskId, body, options) {
+  return invokeFetch("sharing-tasks", {
+    method: "patch",
+    pathTemplate: "/api/v1/sharing-tasks/{taskId}",
+    pathVariables: { taskId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function cancelSharingTask(taskId, options) {
+  return invokeFetch("sharing-tasks", {
+    method: "post",
+    pathTemplate: "/api/v1/sharing-tasks/{taskId}/actions/cancel",
+    pathVariables: { taskId },
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("sharing-tasks");
 }

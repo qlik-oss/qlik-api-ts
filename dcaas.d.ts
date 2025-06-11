@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type ApiSpecResponse = {
     /** List of properties required for the given datasource */
@@ -95,7 +95,7 @@ type ResponseErrors = {
  * @param body an object with the body content
  * @throws DataConnectionsDcaasHttpError
  */
-declare const dataConnectionsDcaas: (body: CreateConnectionReq, options?: ApiCallOptions) => Promise<DataConnectionsDcaasHttpResponse>;
+declare function dataConnectionsDcaas(body: CreateConnectionReq, options?: ApiCallOptions): Promise<DataConnectionsDcaasHttpResponse>;
 type DataConnectionsDcaasHttpResponse = {
     data: CreateConnectionRes | AuthUrlResponse;
     headers: Headers;
@@ -114,10 +114,10 @@ type DataConnectionsDcaasHttpError = {
  * @param query an object with query parameters
  * @throws DataConnectionsDcaasApiSpecsHttpError
  */
-declare const dataConnectionsDcaasApiSpecs: (query: {
+declare function dataConnectionsDcaasApiSpecs(query: {
     /** Datasource ID */
     dataSourceId: string;
-}, options?: ApiCallOptions) => Promise<DataConnectionsDcaasApiSpecsHttpResponse>;
+}, options?: ApiCallOptions): Promise<DataConnectionsDcaasApiSpecsHttpResponse>;
 type DataConnectionsDcaasApiSpecsHttpResponse = {
     data: ApiSpecResponse;
     headers: Headers;
@@ -136,7 +136,7 @@ type DataConnectionsDcaasApiSpecsHttpError = {
  * @param connectionId ID of the connection
  * @throws DataConnectionsDcaaHttpError
  */
-declare const dataConnectionsDcaa: (connectionId: string, options?: ApiCallOptions) => Promise<DataConnectionsDcaaHttpResponse>;
+declare function dataConnectionsDcaa(connectionId: string, options?: ApiCallOptions): Promise<DataConnectionsDcaaHttpResponse>;
 type DataConnectionsDcaaHttpResponse = {
     data: GetConnectionResponse;
     headers: Headers;

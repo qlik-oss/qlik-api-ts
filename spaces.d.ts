@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * The supported actions for user-created spaces.
@@ -280,7 +280,7 @@ type Spaces = {
  * @param query an object with query parameters
  * @throws GetSpacesHttpError
  */
-declare const getSpaces: (query: {
+declare function getSpaces(query: {
     /** Action on space. Supports only "?action=publish". */
     action?: string;
     /** Exact match filtering on space name using SCIM. Case insensitive on attribute name. For example ?filter=name eq "MySpace" and ?filter=NAME eq "MySpace" is both valid. */
@@ -299,7 +299,7 @@ declare const getSpaces: (query: {
     sort?: string;
     /** Type(s) of space to filter. For example, "?type=managed,shared". */
     type?: string;
-}, options?: ApiCallOptions) => Promise<GetSpacesHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetSpacesHttpResponse>;
 type GetSpacesHttpResponse = {
     data: Spaces;
     headers: Headers;
@@ -318,7 +318,7 @@ type GetSpacesHttpError = {
  * @param body an object with the body content
  * @throws CreateSpaceHttpError
  */
-declare const createSpace: (body: SpaceCreate, options?: ApiCallOptions) => Promise<CreateSpaceHttpResponse>;
+declare function createSpace(body: SpaceCreate, options?: ApiCallOptions): Promise<CreateSpaceHttpResponse>;
 type CreateSpaceHttpResponse = {
     data: Space;
     headers: Headers;
@@ -334,7 +334,7 @@ type CreateSpaceHttpError = {
  *
  * @throws GetSpaceTypesHttpError
  */
-declare const getSpaceTypes: (options?: ApiCallOptions) => Promise<GetSpaceTypesHttpResponse>;
+declare function getSpaceTypes(options?: ApiCallOptions): Promise<GetSpaceTypesHttpResponse>;
 type GetSpaceTypesHttpResponse = {
     data: SpaceTypes;
     headers: Headers;
@@ -351,7 +351,7 @@ type GetSpaceTypesHttpError = {
  * @param spaceId The ID of the space to delete.
  * @throws DeleteSpaceHttpError
  */
-declare const deleteSpace: (spaceId: string, options?: ApiCallOptions) => Promise<DeleteSpaceHttpResponse>;
+declare function deleteSpace(spaceId: string, options?: ApiCallOptions): Promise<DeleteSpaceHttpResponse>;
 type DeleteSpaceHttpResponse = {
     data: void;
     headers: Headers;
@@ -368,7 +368,7 @@ type DeleteSpaceHttpError = {
  * @param spaceId The ID of the space to retrieve.
  * @throws GetSpaceHttpError
  */
-declare const getSpace: (spaceId: string, options?: ApiCallOptions) => Promise<GetSpaceHttpResponse>;
+declare function getSpace(spaceId: string, options?: ApiCallOptions): Promise<GetSpaceHttpResponse>;
 type GetSpaceHttpResponse = {
     data: Space;
     headers: Headers;
@@ -386,7 +386,7 @@ type GetSpaceHttpError = {
  * @param body an object with the body content
  * @throws PatchSpaceHttpError
  */
-declare const patchSpace: (spaceId: string, body: SpacePatch, options?: ApiCallOptions) => Promise<PatchSpaceHttpResponse>;
+declare function patchSpace(spaceId: string, body: SpacePatch, options?: ApiCallOptions): Promise<PatchSpaceHttpResponse>;
 type PatchSpaceHttpResponse = {
     data: Space;
     headers: Headers;
@@ -404,7 +404,7 @@ type PatchSpaceHttpError = {
  * @param body an object with the body content
  * @throws UpdateSpaceHttpError
  */
-declare const updateSpace: (spaceId: string, body: SpaceUpdate, options?: ApiCallOptions) => Promise<UpdateSpaceHttpResponse>;
+declare function updateSpace(spaceId: string, body: SpaceUpdate, options?: ApiCallOptions): Promise<UpdateSpaceHttpResponse>;
 type UpdateSpaceHttpResponse = {
     data: Space;
     headers: Headers;
@@ -422,7 +422,7 @@ type UpdateSpaceHttpError = {
  * @param query an object with query parameters
  * @throws GetSpaceAssignmentsHttpError
  */
-declare const getSpaceAssignments: (spaceId: string, query: {
+declare function getSpaceAssignments(spaceId: string, query: {
     /** Filters assignment for a specific assigneeid. */
     assigneeId?: string;
     /** Maximum number of assignments to return. */
@@ -433,7 +433,7 @@ declare const getSpaceAssignments: (spaceId: string, query: {
     prev?: string;
     /** The type of assignment. Supported values are user or group. */
     type?: AssignmentType;
-}, options?: ApiCallOptions) => Promise<GetSpaceAssignmentsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetSpaceAssignmentsHttpResponse>;
 type GetSpaceAssignmentsHttpResponse = {
     data: Assignments;
     headers: Headers;
@@ -453,7 +453,7 @@ type GetSpaceAssignmentsHttpError = {
  * @param body an object with the body content
  * @throws CreateSpaceAssignmentHttpError
  */
-declare const createSpaceAssignment: (spaceId: string, body: AssignmentCreate, options?: ApiCallOptions) => Promise<CreateSpaceAssignmentHttpResponse>;
+declare function createSpaceAssignment(spaceId: string, body: AssignmentCreate, options?: ApiCallOptions): Promise<CreateSpaceAssignmentHttpResponse>;
 type CreateSpaceAssignmentHttpResponse = {
     data: Assignment;
     headers: Headers;
@@ -471,7 +471,7 @@ type CreateSpaceAssignmentHttpError = {
  * @param assignmentId The ID of the assignment to delete.
  * @throws DeleteSpaceAssignmentHttpError
  */
-declare const deleteSpaceAssignment: (spaceId: string, assignmentId: string, options?: ApiCallOptions) => Promise<DeleteSpaceAssignmentHttpResponse>;
+declare function deleteSpaceAssignment(spaceId: string, assignmentId: string, options?: ApiCallOptions): Promise<DeleteSpaceAssignmentHttpResponse>;
 type DeleteSpaceAssignmentHttpResponse = {
     data: void;
     headers: Headers;
@@ -489,7 +489,7 @@ type DeleteSpaceAssignmentHttpError = {
  * @param assignmentId The ID of the assignment to retrieve.
  * @throws GetSpaceAssignmentHttpError
  */
-declare const getSpaceAssignment: (spaceId: string, assignmentId: string, options?: ApiCallOptions) => Promise<GetSpaceAssignmentHttpResponse>;
+declare function getSpaceAssignment(spaceId: string, assignmentId: string, options?: ApiCallOptions): Promise<GetSpaceAssignmentHttpResponse>;
 type GetSpaceAssignmentHttpResponse = {
     data: Assignment;
     headers: Headers;
@@ -508,7 +508,7 @@ type GetSpaceAssignmentHttpError = {
  * @param body an object with the body content
  * @throws UpdateSpaceAssignmentHttpError
  */
-declare const updateSpaceAssignment: (spaceId: string, assignmentId: string, body: AssignmentUpdate, options?: ApiCallOptions) => Promise<UpdateSpaceAssignmentHttpResponse>;
+declare function updateSpaceAssignment(spaceId: string, assignmentId: string, body: AssignmentUpdate, options?: ApiCallOptions): Promise<UpdateSpaceAssignmentHttpResponse>;
 type UpdateSpaceAssignmentHttpResponse = {
     data: Assignment;
     headers: Headers;
@@ -526,7 +526,7 @@ type UpdateSpaceAssignmentHttpError = {
  * @param query an object with query parameters
  * @throws GetSpaceSharesHttpError
  */
-declare const getSpaceShares: (spaceId: string, query: {
+declare function getSpaceShares(spaceId: string, query: {
     /** The ID of the group to which the resource is shared. */
     groupId?: string;
     /** Maximum number of shares to return. */
@@ -545,7 +545,7 @@ declare const getSpaceShares: (spaceId: string, query: {
     type?: ShareType;
     /** The ID of the user to which the resource is shared. */
     userId?: string;
-}, options?: ApiCallOptions) => Promise<GetSpaceSharesHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetSpaceSharesHttpResponse>;
 type GetSpaceSharesHttpResponse = {
     data: Shares;
     headers: Headers;
@@ -565,7 +565,7 @@ type GetSpaceSharesHttpError = {
  * @param body an object with the body content
  * @throws CreateSpaceShareHttpError
  */
-declare const createSpaceShare: (spaceId: string, body: ShareCreate, options?: ApiCallOptions) => Promise<CreateSpaceShareHttpResponse>;
+declare function createSpaceShare(spaceId: string, body: ShareCreate, options?: ApiCallOptions): Promise<CreateSpaceShareHttpResponse>;
 type CreateSpaceShareHttpResponse = {
     data: Share;
     headers: Headers;
@@ -583,7 +583,7 @@ type CreateSpaceShareHttpError = {
  * @param shareId The ID of the share to delete.
  * @throws DeleteSpaceShareHttpError
  */
-declare const deleteSpaceShare: (spaceId: string, shareId: string, options?: ApiCallOptions) => Promise<DeleteSpaceShareHttpResponse>;
+declare function deleteSpaceShare(spaceId: string, shareId: string, options?: ApiCallOptions): Promise<DeleteSpaceShareHttpResponse>;
 type DeleteSpaceShareHttpResponse = {
     data: void;
     headers: Headers;
@@ -601,7 +601,7 @@ type DeleteSpaceShareHttpError = {
  * @param shareId The ID of the share to retrieve.
  * @throws GetSpaceShareHttpError
  */
-declare const getSpaceShare: (spaceId: string, shareId: string, options?: ApiCallOptions) => Promise<GetSpaceShareHttpResponse>;
+declare function getSpaceShare(spaceId: string, shareId: string, options?: ApiCallOptions): Promise<GetSpaceShareHttpResponse>;
 type GetSpaceShareHttpResponse = {
     data: Share;
     headers: Headers;
@@ -620,7 +620,7 @@ type GetSpaceShareHttpError = {
  * @param body an object with the body content
  * @throws PatchShareHttpError
  */
-declare const patchShare: (spaceId: string, shareId: string, body: SharePatch, options?: ApiCallOptions) => Promise<PatchShareHttpResponse>;
+declare function patchShare(spaceId: string, shareId: string, body: SharePatch, options?: ApiCallOptions): Promise<PatchShareHttpResponse>;
 type PatchShareHttpResponse = {
     data: Share;
     headers: Headers;

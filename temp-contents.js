@@ -1,32 +1,38 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/temp-contents.ts
-var uploadTempFile = async (query, body, options) => invokeFetch("temp-contents", {
-  method: "post",
-  pathTemplate: "/api/v1/temp-contents",
-  query,
-  body,
-  contentType: "application/octet-stream",
-  options
-});
-var downloadTempFile = async (id, query, options) => invokeFetch("temp-contents", {
-  method: "get",
-  pathTemplate: "/api/v1/temp-contents/{id}",
-  pathVariables: { id },
-  query,
-  options
-});
-var getTempFileDetails = async (id, options) => invokeFetch("temp-contents", {
-  method: "get",
-  pathTemplate: "/api/v1/temp-contents/{id}/details",
-  pathVariables: { id },
-  options
-});
+async function uploadTempFile(query, body, options) {
+  return invokeFetch("temp-contents", {
+    method: "post",
+    pathTemplate: "/api/v1/temp-contents",
+    query,
+    body,
+    contentType: "application/octet-stream",
+    options
+  });
+}
+async function downloadTempFile(id, query, options) {
+  return invokeFetch("temp-contents", {
+    method: "get",
+    pathTemplate: "/api/v1/temp-contents/{id}",
+    pathVariables: { id },
+    query,
+    options
+  });
+}
+async function getTempFileDetails(id, options) {
+  return invokeFetch("temp-contents", {
+    method: "get",
+    pathTemplate: "/api/v1/temp-contents/{id}/details",
+    pathVariables: { id },
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("temp-contents");
 }

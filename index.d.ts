@@ -60,8 +60,8 @@ import { UsersAPI } from './users.js';
 import { WebIntegrationsAPI } from './web-integrations.js';
 import { WebNotificationsAPI } from './web-notifications.js';
 import { WebhooksAPI } from './webhooks.js';
-import { H as HostConfig } from './auth-types-Btwi7CsB.js';
-import './invoke-fetch-types-X7m1IIvI.js';
+import { H as HostConfig } from './auth-types-Cj5bM3Yk.js';
+import './invoke-fetch-types-BYCD4pc9.js';
 
 declare const apiKeys: ApiKeysAPI;
 declare const apps: AppsAPI;

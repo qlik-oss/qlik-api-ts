@@ -3,7 +3,6 @@ import {
   InvalidAuthTypeError,
   InvalidHostConfigError,
   UnexpectedAuthTypeError,
-  checkForCrossDomainRequest,
   determineAuthType,
   getRestCallAuthParams,
   getWebResourceAuthParams,
@@ -18,15 +17,13 @@ import {
   setDefaultHostConfig,
   toValidLocationUrl,
   toValidWebsocketLocationUrl,
-  unregisterHostConfig,
-  withResolvedHostConfig
-} from "./W6FDNN2K.js";
-import "./3RGGGGAR.js";
-import "./2ZQ3ZX7F.js";
+  unregisterHostConfig
+} from "./OTIO4SEJ.js";
+import "./ZCTVPXGO.js";
+import "./7MMXU6EL.js";
 
 // src/auth/auth.ts
 var auth = {
-  checkForCrossDomainRequest,
   determineAuthType,
   getRestCallAuthParams,
   getWebResourceAuthParams,
@@ -41,8 +38,7 @@ var auth = {
   setDefaultHostConfig,
   toValidLocationUrl,
   toValidWebsocketLocationUrl,
-  unregisterHostConfig,
-  withResolvedHostConfig
+  unregisterHostConfig
 };
 var auth_default = auth;
 export {
@@ -50,7 +46,6 @@ export {
   InvalidAuthTypeError,
   InvalidHostConfigError,
   UnexpectedAuthTypeError,
-  checkForCrossDomainRequest,
   auth_default as default,
   determineAuthType,
   getRestCallAuthParams,
@@ -66,6 +61,5 @@ export {
   setDefaultHostConfig,
   toValidLocationUrl,
   toValidWebsocketLocationUrl,
-  unregisterHostConfig,
-  withResolvedHostConfig
+  unregisterHostConfig
 };

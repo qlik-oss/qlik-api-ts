@@ -1,10 +1,12 @@
 import {
   getInterceptors
-} from "./3RGGGGAR.js";
+} from "./ZCTVPXGO.js";
 import {
+  cleanFalsyValues,
   isBrowser,
-  isNode
-} from "./2ZQ3ZX7F.js";
+  isNode,
+  sortKeys
+} from "./7MMXU6EL.js";
 
 // src/invoke-fetch/invoke-fetch-errors.ts
 var InvokeFetchError = class extends Error {
@@ -155,45 +157,23 @@ var result = (data) => ({
   ...data
 });
 
-// src/auth/internal/host-config-registry.ts
-var registeredHostConfigs = {};
-function registerHostConfigInternal(name, hostConfig) {
-  if (hostConfig?.reference) {
-    throw new InvalidHostConfigError("Cannot register a host config with a reference");
-  }
-  if (registeredHostConfigs[name]) {
-    console.warn(`registerHostConfig: Host config with name "${name}" is already registered. Overwriting.`);
-  }
-  registeredHostConfigs[name] = hostConfig;
-}
-function unregisterHostConfigInternal(name) {
-  if (registeredHostConfigs[name]) {
-    delete registeredHostConfigs[name];
-  } else {
-    console.warn(`unregisterHostConfig: Host config with name "${name}" not found.`);
-  }
-}
-function getRegisteredHostConfigInternal(name) {
-  if (!registeredHostConfigs[name]) {
-    throw new Error(`Host config with name "${name}" not found.`);
-  }
-  return registeredHostConfigs[name];
-}
-
-// src/auth/internal/default-host-config.ts
-var defaultHostConfig = {};
-function setDefaultHostConfigInternal(hostConfig) {
-  defaultHostConfig = hostConfig || {};
-}
-function withResolvedHostConfigInternal(hostConfig) {
-  if (hostConfig?.reference) {
-    return getRegisteredHostConfigInternal(hostConfig.reference);
-  }
-  if (hostConfig && Object.keys(hostConfig).length > 0) {
-    return hostConfig;
-  }
-  return defaultHostConfig;
-}
+// src/auth/auth-types.ts
+var hostConfigCommonProperties = [
+  "authType",
+  "autoRedirect",
+  "authRedirectUserConfirmation",
+  "embedRuntimeUrl",
+  "host",
+  "onAuthFailed"
+];
+var authTypesThatCanBeOmitted = [
+  "apikey",
+  "oauth2",
+  "cookie",
+  "windowscookie",
+  "reference",
+  "anonymous"
+];
 
 // src/utils/random.ts
 import { customAlphabet, nanoid } from "nanoid";
@@ -202,50 +182,6 @@ function generateRandomString(targetLength) {
 }
 function generateRandomHexString(targetLength) {
   return customAlphabet("1234567890abcdef", targetLength)();
-}
-
-// src/auth/internal/internal-auth-functions.ts
-function internalGetCredentialsForCookieAuth(hostConfig) {
-  if (hostConfig.crossSiteCookies === false) {
-    return "same-origin";
-  }
-  if (isHostCrossOrigin(hostConfig)) {
-    return "include";
-  }
-  return "same-origin";
-}
-function internalValidateHostConfig(hostConfig, options) {
-  const missingRequiredProps = [];
-  for (const requiredProp of options.requiredProps) {
-    if (!hostConfig[requiredProp]) {
-      missingRequiredProps.push(requiredProp);
-    }
-  }
-  if (missingRequiredProps.length > 0) {
-    throw new InvalidHostConfigError(
-      `missing required properties in host config; '${missingRequiredProps.join("', '")}'`
-    );
-  }
-  const validProps = [
-    "authType",
-    "autoRedirect",
-    "authRedirectUserConfirmation",
-    "embedRuntimeUrl",
-    "host",
-    "onAuthFailed",
-    ...options.requiredProps,
-    ...options.optionalProps
-  ];
-  const invalidKeys = [];
-  Object.keys(hostConfig).forEach((key) => {
-    if (!validProps.some((k) => k === key)) {
-      invalidKeys.push(key);
-    }
-  });
-  if (invalidKeys.length > 0) {
-    throw new InvalidHostConfigError(`unknown properties in host config; '${invalidKeys.join("', '")}'`);
-  }
-  return true;
 }
 
 // src/utils/expose-internal-test-apis.ts
@@ -924,14 +860,12 @@ async function handleAuthenticationError({
   };
 }
 var anonymous_default = {
+  requiredProps: ["clientId", "accessCode"],
+  optionalProps: [],
   getRestCallAuthParams,
   getWebSocketAuthParams,
   getWebResourceAuthParams,
-  handleAuthenticationError,
-  validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, {
-    requiredProps: ["clientId", "accessCode"],
-    optionalProps: []
-  })
+  handleAuthenticationError
 };
 
 // src/auth/internal/default-auth-modules/apikey.ts
@@ -955,10 +889,11 @@ function handleAuthenticationError2() {
   return Promise.resolve({});
 }
 var apikey_default = {
+  requiredProps: ["apiKey"],
+  optionalProps: [],
   getRestCallAuthParams: getRestCallAuthParams2,
   getWebSocketAuthParams: getWebSocketAuthParams2,
-  handleAuthenticationError: handleAuthenticationError2,
-  validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, { requiredProps: ["apiKey"], optionalProps: [] })
+  handleAuthenticationError: handleAuthenticationError2
 };
 
 // src/http/http-constants.ts
@@ -1008,6 +943,17 @@ async function getCsrfToken(hostConfig, noCache) {
   return csrfTokens[locationUrl];
 }
 var csrfTokens = {};
+
+// src/auth/internal/internal-auth-functions.ts
+function internalGetCredentialsForCookieAuth(hostConfig) {
+  if (hostConfig.crossSiteCookies === false) {
+    return "same-origin";
+  }
+  if (isHostCrossOrigin(hostConfig)) {
+    return "include";
+  }
+  return "same-origin";
+}
 
 // src/auth/internal/default-auth-modules/cookie.ts
 function isModifyingVerb(verb) {
@@ -1062,13 +1008,11 @@ async function handleAuthenticationError3({
   };
 }
 var cookie_default = {
+  requiredProps: [],
+  optionalProps: ["webIntegrationId", "crossSiteCookies", "anonymousMode"],
   getRestCallAuthParams: getRestCallAuthParams3,
   getWebSocketAuthParams: getWebSocketAuthParams3,
-  handleAuthenticationError: handleAuthenticationError3,
-  validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, {
-    requiredProps: [],
-    optionalProps: ["webIntegrationId", "crossSiteCookies", "anonymousMode"]
-  })
+  handleAuthenticationError: handleAuthenticationError3
 };
 
 // src/auth/internal/default-auth-modules/none.ts
@@ -1082,10 +1026,11 @@ function handleAuthenticationError4() {
   return Promise.resolve({});
 }
 var none_default = {
+  requiredProps: [],
+  optionalProps: [],
   getRestCallAuthParams: getRestCallAuthParams4,
   getWebSocketAuthParams: getWebSocketAuthParams4,
-  handleAuthenticationError: handleAuthenticationError4,
-  validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, { requiredProps: [], optionalProps: [] })
+  handleAuthenticationError: handleAuthenticationError4
 };
 
 // src/auth/internal/default-auth-modules/oauth/callback.ts
@@ -1204,24 +1149,22 @@ async function handleAuthenticationError5({
   };
 }
 var oauth_default = {
+  requiredProps: ["clientId"],
+  optionalProps: [
+    "clientSecret",
+    "redirectUri",
+    "accessTokenStorage",
+    "scope",
+    "subject",
+    "userId",
+    "noCache",
+    "getAccessToken",
+    "performInteractiveLogin"
+  ],
   getRestCallAuthParams: getRestCallAuthParams5,
   getWebSocketAuthParams: getWebSocketAuthParams5,
   getWebResourceAuthParams: getWebResourceAuthParams2,
-  handleAuthenticationError: handleAuthenticationError5,
-  validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, {
-    requiredProps: ["clientId"],
-    optionalProps: [
-      "clientSecret",
-      "redirectUri",
-      "accessTokenStorage",
-      "scope",
-      "subject",
-      "userId",
-      "noCache",
-      "getAccessToken",
-      "performInteractiveLogin"
-    ]
-  })
+  handleAuthenticationError: handleAuthenticationError5
 };
 
 // src/auth/internal/default-auth-modules/reference.ts
@@ -1235,10 +1178,11 @@ function handleAuthenticationError6() {
   throw new Error("handleAuthenticationError should never be called for reference auth module");
 }
 var reference_default = {
+  requiredProps: ["reference"],
+  optionalProps: [],
   getRestCallAuthParams: getRestCallAuthParams6,
   getWebSocketAuthParams: getWebSocketAuthParams6,
-  handleAuthenticationError: handleAuthenticationError6,
-  validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, { requiredProps: ["reference"], optionalProps: [] })
+  handleAuthenticationError: handleAuthenticationError6
 };
 
 // src/auth/internal/default-auth-modules/windows-cookie/xrf-keys.ts
@@ -1306,13 +1250,11 @@ async function handleAuthenticationError7({
   };
 }
 var windows_cookie_default = {
+  requiredProps: [],
+  optionalProps: ["loginUri", "crossSiteCookies"],
   getRestCallAuthParams: getRestCallAuthParams7,
   getWebSocketAuthParams: getWebSocketAuthParams7,
-  handleAuthenticationError: handleAuthenticationError7,
-  validateHostConfig: (hostConfig) => internalValidateHostConfig(hostConfig, {
-    requiredProps: [],
-    optionalProps: ["loginUri", "crossSiteCookies"]
-  })
+  handleAuthenticationError: handleAuthenticationError7
 };
 
 // src/auth/internal/auth-module-registry.ts
@@ -1341,7 +1283,7 @@ function getRegisteredAuthModule(authType) {
   return authModules[authType.toLowerCase()];
 }
 async function getAuthModule(hostConfig) {
-  const hostConfigToUse = withResolvedHostConfigInternal(hostConfig);
+  const hostConfigToUse = withResolvedHostConfig(hostConfig);
   const authType = await determineAuthType(hostConfigToUse);
   if (ongoingAuthModuleLoading) {
     await ongoingAuthModuleLoading;
@@ -1361,6 +1303,11 @@ async function getAuthModule(hostConfig) {
   }
   if (authModule.validateHostConfig) {
     authModule.validateHostConfig({ authType, ...hostConfigToUse });
+  } else {
+    internalValidateHostConfig(
+      { authType, ...hostConfigToUse },
+      { requiredProps: authModule.requiredProps || [], optionalProps: authModule.optionalProps || [] }
+    );
   }
   return authModule;
 }
@@ -1381,6 +1328,54 @@ async function resolveGloballyDefinedAuthModule(authType) {
     throw new InvalidAuthTypeError(authType);
   }
   return Promise.resolve(void 0);
+}
+function internalValidateHostConfig(hostConfig, { requiredProps, optionalProps }) {
+  const missingRequiredProps = [];
+  for (const requiredProp of requiredProps) {
+    if (!hostConfig[requiredProp]) {
+      missingRequiredProps.push(requiredProp);
+    }
+  }
+  if (missingRequiredProps.length > 0) {
+    throw new InvalidHostConfigError(
+      `missing required properties in host config; '${missingRequiredProps.join("', '")}'`
+    );
+  }
+  const validProps = [...hostConfigCommonProperties, ...requiredProps, ...optionalProps];
+  const invalidKeys = [];
+  Object.keys(hostConfig).forEach((key) => {
+    if (!validProps.includes(key)) {
+      invalidKeys.push(key);
+    }
+  });
+  if (invalidKeys.length > 0) {
+    console.warn(`WARNING: unknown properties in host config; '${invalidKeys.join("', '")}'`);
+  }
+  return true;
+}
+async function determineAuthType(hostConfig) {
+  if (hostConfig.authType) {
+    return hostConfig.authType;
+  }
+  if (hostConfig.apiKey) {
+    return "apikey";
+  }
+  if (hostConfig.accessCode) {
+    return "anonymous";
+  }
+  if (hostConfig.clientId) {
+    return "oauth2";
+  }
+  if (hostConfig.webIntegrationId) {
+    return "cookie";
+  }
+  if (hostConfig.reference) {
+    return "reference";
+  }
+  if (await isWindows(hostConfig)) {
+    return "windowscookie";
+  }
+  return "cookie";
 }
 
 // src/auth/auth-errors.ts
@@ -1425,6 +1420,64 @@ var AuthorizationError = class extends Error {
   }
 };
 
+// src/auth/internal/host-config-functions.ts
+var defaultHostConfig = {};
+function setDefaultHostConfigInternal(hostConfig) {
+  defaultHostConfig = hostConfig || {};
+}
+function getDefaultHostConfigInternal() {
+  return defaultHostConfig;
+}
+function removeDefaults(hostConfig) {
+  const cleanedHostConfig = cleanFalsyValues(hostConfig) || {};
+  if (cleanedHostConfig.host) {
+    cleanedHostConfig.host = toValidLocationUrl(cleanedHostConfig);
+  }
+  if (isBrowser()) {
+    if (toValidLocationUrl(cleanedHostConfig) === window.location.origin) {
+      delete cleanedHostConfig.host;
+    }
+  }
+  if (cleanedHostConfig.authType && authTypesThatCanBeOmitted.includes(cleanedHostConfig.authType)) {
+    delete cleanedHostConfig.authType;
+  }
+  return cleanedHostConfig;
+}
+function globalReplacer(key, value) {
+  if (typeof value === "function") {
+    return void 0;
+  }
+  return value;
+}
+function serializeHostConfigInternal(hostConfig) {
+  const hostConfigToUse = removeDefaults(withResolvedHostConfig(hostConfig));
+  const sorted = sortKeys(hostConfigToUse);
+  return JSON.stringify(sorted, globalReplacer);
+}
+var registeredHostConfigs = /* @__PURE__ */ new Map();
+function registerHostConfigInternal(name, hostConfig) {
+  if (hostConfig?.reference) {
+    throw new InvalidHostConfigError("Cannot register a host config with a reference");
+  }
+  if (registeredHostConfigs.has(name)) {
+    console.warn(`registerHostConfig: Host config with name "${name}" is already registered. Overwriting.`);
+  }
+  registeredHostConfigs.set(name, hostConfig);
+}
+function unregisterHostConfigInternal(name) {
+  if (registeredHostConfigs.has(name)) {
+    registeredHostConfigs.delete(name);
+  } else {
+    console.warn(`unregisterHostConfig: Host config with name "${name}" not found.`);
+  }
+}
+function getRegisteredHostConfigInternal(name) {
+  if (!registeredHostConfigs.has(name)) {
+    throw new Error(`Host config with name "${name}" not found.`);
+  }
+  return registeredHostConfigs.get(name);
+}
+
 // src/auth/auth-functions.ts
 globalThis.loggingOut = false;
 var lastErrorMessage = "";
@@ -1434,11 +1487,14 @@ function logToConsole({ message }) {
     console.error(message);
   }
 }
+function determineAuthType2(hostConfig) {
+  return determineAuthType(hostConfig);
+}
 function isHostCrossOrigin(hostConfig) {
   if (!globalThis.location?.origin) {
     return true;
   }
-  const hostConfigToUse = withResolvedHostConfigInternal(hostConfig);
+  const hostConfigToUse = withResolvedHostConfig(hostConfig);
   if (Object.keys(hostConfigToUse).length === 0) {
     return false;
   }
@@ -1450,7 +1506,7 @@ function isHostCrossOrigin(hostConfig) {
   return false;
 }
 async function isWindows(hostConfig) {
-  const hostConfigToUse = withResolvedHostConfigInternal(hostConfig);
+  const hostConfigToUse = withResolvedHostConfig(hostConfig);
   if (typeof hostConfigToUse.forceIsWindows === "boolean") {
     return hostConfigToUse.forceIsWindows;
   }
@@ -1463,7 +1519,7 @@ async function isWindows(hostConfig) {
   return (await getPlatform({ hostConfig })).isWindows;
 }
 function toValidLocationUrl(hostConfig) {
-  const url = withResolvedHostConfigInternal(hostConfig)?.host;
+  const url = withResolvedHostConfig(hostConfig)?.host?.trim();
   let locationUrl;
   if (!url) {
     locationUrl = "";
@@ -1478,7 +1534,7 @@ function toValidLocationUrl(hostConfig) {
   return locationUrl;
 }
 function toValidWebsocketLocationUrl(hostConfig) {
-  const url = withResolvedHostConfigInternal(hostConfig)?.host;
+  const url = withResolvedHostConfig(hostConfig)?.host;
   let locationUrl;
   if (!url) {
     locationUrl = globalThis.location.origin;
@@ -1493,7 +1549,7 @@ function toValidWebsocketLocationUrl(hostConfig) {
   return locationUrl.replace(leadingHttp, "ws");
 }
 async function getWebSocketAuthParams8(props) {
-  const hostConfigToUse = withResolvedHostConfigInternal(props.hostConfig);
+  const hostConfigToUse = withResolvedHostConfig(props.hostConfig);
   try {
     const authModule = await getAuthModule(hostConfigToUse);
     return await authModule.getWebSocketAuthParams({
@@ -1506,7 +1562,7 @@ async function getWebSocketAuthParams8(props) {
   }
 }
 async function getWebResourceAuthParams3(props) {
-  const hostConfigToUse = withResolvedHostConfigInternal(props.hostConfig);
+  const hostConfigToUse = withResolvedHostConfig(props.hostConfig);
   try {
     const authModule = await getAuthModule(hostConfigToUse);
     return await authModule.getWebResourceAuthParams?.({
@@ -1519,7 +1575,7 @@ async function getWebResourceAuthParams3(props) {
   }
 }
 async function handleAuthenticationError8(props) {
-  const hostConfigToUse = withResolvedHostConfigInternal(props.hostConfig);
+  const hostConfigToUse = withResolvedHostConfig(props.hostConfig);
   const authModule = await getAuthModule(hostConfigToUse);
   const result2 = await authModule.handleAuthenticationError({
     ...props,
@@ -1534,7 +1590,7 @@ async function handleAuthenticationError8(props) {
   return result2;
 }
 async function getRestCallAuthParams8(props) {
-  const hostConfigToUse = withResolvedHostConfigInternal(props.hostConfig);
+  const hostConfigToUse = withResolvedHostConfig(props.hostConfig);
   try {
     const authModule = await getAuthModule(hostConfigToUse);
     return await authModule.getRestCallAuthParams({
@@ -1559,41 +1615,18 @@ function unregisterHostConfig(name) {
   unregisterHostConfigInternal(name);
 }
 function serializeHostConfig(hostConfig) {
-  const hostConfigToUse = withResolvedHostConfigInternal(hostConfig);
-  return JSON.stringify(hostConfigToUse, hostConfigPropertyIgnorer);
-}
-async function determineAuthType(hostConfig) {
-  if (hostConfig.authType) {
-    return hostConfig.authType;
-  }
-  if (hostConfig.apiKey) {
-    return "apikey";
-  }
-  if (hostConfig.accessCode) {
-    return "anonymous";
-  }
-  if (hostConfig.clientId) {
-    return "oauth2";
-  }
-  if (hostConfig.webIntegrationId) {
-    return "cookie";
-  }
-  if (hostConfig.reference) {
-    return "reference";
-  }
-  if (await isWindows(hostConfig)) {
-    return "windowscookie";
-  }
-  return "cookie";
+  return serializeHostConfigInternal(hostConfig);
 }
 function checkForCrossDomainRequest(hostConfig) {
-  const hostConfigToUse = withResolvedHostConfigInternal(hostConfig);
+  const hostConfigToUse = withResolvedHostConfig(hostConfig);
   if (isHostCrossOrigin(hostConfigToUse)) {
     if (Object.keys(hostConfigToUse).length === 0) {
       throw new InvalidHostConfigError("a host config must be provided when making a cross domain request");
     }
     if (!hostConfigToUse.host) {
-      throw new InvalidHostConfigError("A 'host' must be set in host config when making a cross domain request");
+      throw new InvalidHostConfigError(
+        "A 'host' property must be set in host config when making a cross domain request"
+      );
     }
   }
 }
@@ -1613,21 +1646,14 @@ function normalizeInbandAuthError({ errorBody, status }) {
 function normalizeAuthModuleError(err) {
   return { message: err.message || "Unknown error" };
 }
-function hostConfigPropertyIgnorer(key, value) {
-  if (key === "") {
-    return value;
-  }
-  if (key === "authType") {
-    return void 0;
-  }
-  const vtype = typeof value;
-  if (vtype === "object" || vtype === "function") {
-    return void 0;
-  }
-  return value;
-}
 function withResolvedHostConfig(hostConfig) {
-  return withResolvedHostConfigInternal(hostConfig);
+  if (hostConfig?.reference) {
+    return getRegisteredHostConfigInternal(hostConfig.reference);
+  }
+  if (hostConfig && Object.keys(hostConfig).length > 0) {
+    return hostConfig;
+  }
+  return getDefaultHostConfigInternal();
 }
 
 // src/invoke-fetch/internal/invoke-fetch-helpers.ts
@@ -2290,6 +2316,7 @@ export {
   UnexpectedAuthTypeError,
   InvalidAuthTypeError,
   AuthorizationError,
+  determineAuthType2 as determineAuthType,
   isHostCrossOrigin,
   isWindows,
   toValidLocationUrl,
@@ -2303,8 +2330,5 @@ export {
   registerHostConfig,
   unregisterHostConfig,
   serializeHostConfig,
-  determineAuthType,
-  checkForCrossDomainRequest,
-  logout,
-  withResolvedHostConfig
+  logout
 };

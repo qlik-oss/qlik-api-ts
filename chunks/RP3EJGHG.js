@@ -7,11 +7,11 @@ import {
   invokeFetch,
   isWindows,
   toValidWebsocketLocationUrl
-} from "./W6FDNN2K.js";
-import "./3RGGGGAR.js";
+} from "./OTIO4SEJ.js";
+import "./ZCTVPXGO.js";
 import {
   isBrowser
-} from "./2ZQ3ZX7F.js";
+} from "./7MMXU6EL.js";
 
 // src/qix/app-session.ts
 var isBrowserEnvironment = isBrowser();
@@ -247,7 +247,7 @@ function listenForWindowsAuthenticationInformation(session) {
   return authSuggestedInWebsocket;
 }
 async function createAndSetupEnigmaSession(props, canRetry, onWebSocketEvent2) {
-  const { createEnigmaSessionEntrypoint } = await import("./K77NA74R.js");
+  const { createEnigmaSessionEntrypoint } = await import("./62DXIH3S.js");
   const session = await createEnigmaSessionEntrypoint(props);
   setupSessionListeners(session, props, onWebSocketEvent2);
   let global;
@@ -541,7 +541,7 @@ function createSharedPhoenixSession(props, { onClose, onWebSocketEvent: onWebSoc
         client.onWebSocketEvent(event);
       }
     };
-    const phoenixConnectionPromise = import("./K77NA74R.js").then((module) => {
+    const phoenixConnectionPromise = import("./62DXIH3S.js").then((module) => {
       return module.createPhoenixConnectionEntrypoint(props, {
         onWebSocketEvent: onWebSocketEvent2,
         getInitialAppActions

@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type CSPEntry = {
     /** The CSP entry's unique identifier. */
@@ -76,7 +76,7 @@ type Link = {
  * @param query an object with query parameters
  * @throws GetCSPEntriesHttpError
  */
-declare const getCSPEntries: (query: {
+declare function getCSPEntries(query: {
     /** Filter resources by directive 'childSrc', true/false. */
     childSrc?: boolean;
     /** Filter resources by directive 'connectSrc', true/false. */
@@ -115,7 +115,7 @@ declare const getCSPEntries: (query: {
     styleSrc?: boolean;
     /** Filter resources by directive 'workerSrc', true/false. */
     workerSrc?: boolean;
-}, options?: ApiCallOptions) => Promise<GetCSPEntriesHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetCSPEntriesHttpResponse>;
 type GetCSPEntriesHttpResponse = {
     data: CSPEntryList;
     headers: Headers;
@@ -134,7 +134,7 @@ type GetCSPEntriesHttpError = {
  * @param body an object with the body content
  * @throws CreateCSPEntryHttpError
  */
-declare const createCSPEntry: (body: CSPEntryContent, options?: ApiCallOptions) => Promise<CreateCSPEntryHttpResponse>;
+declare function createCSPEntry(body: CSPEntryContent, options?: ApiCallOptions): Promise<CreateCSPEntryHttpResponse>;
 type CreateCSPEntryHttpResponse = {
     data: CSPEntry;
     headers: Headers;
@@ -150,7 +150,7 @@ type CreateCSPEntryHttpError = {
  *
  * @throws GetCSPHeaderHttpError
  */
-declare const getCSPHeader: (options?: ApiCallOptions) => Promise<GetCSPHeaderHttpResponse>;
+declare function getCSPHeader(options?: ApiCallOptions): Promise<GetCSPHeaderHttpResponse>;
 type GetCSPHeaderHttpResponse = {
     data: CSPHeader;
     headers: Headers;
@@ -167,7 +167,7 @@ type GetCSPHeaderHttpError = {
  * @param id The CSP entry's unique identifier.
  * @throws DeleteCSPEntryHttpError
  */
-declare const deleteCSPEntry: (id: string, options?: ApiCallOptions) => Promise<DeleteCSPEntryHttpResponse>;
+declare function deleteCSPEntry(id: string, options?: ApiCallOptions): Promise<DeleteCSPEntryHttpResponse>;
 type DeleteCSPEntryHttpResponse = {
     data: void;
     headers: Headers;
@@ -184,7 +184,7 @@ type DeleteCSPEntryHttpError = {
  * @param id The CSP entry's unique identifier.
  * @throws GetCSPEntryHttpError
  */
-declare const getCSPEntry: (id: string, options?: ApiCallOptions) => Promise<GetCSPEntryHttpResponse>;
+declare function getCSPEntry(id: string, options?: ApiCallOptions): Promise<GetCSPEntryHttpResponse>;
 type GetCSPEntryHttpResponse = {
     data: CSPEntry;
     headers: Headers;
@@ -202,7 +202,7 @@ type GetCSPEntryHttpError = {
  * @param body an object with the body content
  * @throws UpdateCSPEntryHttpError
  */
-declare const updateCSPEntry: (id: string, body: CSPEntryContent, options?: ApiCallOptions) => Promise<UpdateCSPEntryHttpResponse>;
+declare function updateCSPEntry(id: string, body: CSPEntryContent, options?: ApiCallOptions): Promise<UpdateCSPEntryHttpResponse>;
 type UpdateCSPEntryHttpResponse = {
     data: CSPEntry;
     headers: Headers;

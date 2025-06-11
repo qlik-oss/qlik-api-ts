@@ -1,53 +1,65 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/tenants.ts
-var createTenant = async (body, options) => invokeFetch("tenants", {
-  method: "post",
-  pathTemplate: "/api/v1/tenants",
-  body,
-  contentType: "application/json",
-  options
-});
-var getMyTenant = async (options) => invokeFetch("tenants", {
-  method: "get",
-  pathTemplate: "/api/v1/tenants/me",
-  options
-});
-var getTenant = async (tenantId, options) => invokeFetch("tenants", {
-  method: "get",
-  pathTemplate: "/api/v1/tenants/{tenantId}",
-  pathVariables: { tenantId },
-  options
-});
-var patchTenant = async (tenantId, body, options) => invokeFetch("tenants", {
-  method: "patch",
-  pathTemplate: "/api/v1/tenants/{tenantId}",
-  pathVariables: { tenantId },
-  body,
-  contentType: "application/json",
-  options
-});
-var deactivateTenant = async (tenantId, body, options) => invokeFetch("tenants", {
-  method: "post",
-  pathTemplate: "/api/v1/tenants/{tenantId}/actions/deactivate",
-  pathVariables: { tenantId },
-  body,
-  contentType: "application/json",
-  options
-});
-var reactivateTenant = async (tenantId, body, options) => invokeFetch("tenants", {
-  method: "post",
-  pathTemplate: "/api/v1/tenants/{tenantId}/actions/reactivate",
-  pathVariables: { tenantId },
-  body,
-  contentType: "application/json",
-  options
-});
+async function createTenant(body, options) {
+  return invokeFetch("tenants", {
+    method: "post",
+    pathTemplate: "/api/v1/tenants",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getMyTenant(options) {
+  return invokeFetch("tenants", {
+    method: "get",
+    pathTemplate: "/api/v1/tenants/me",
+    options
+  });
+}
+async function getTenant(tenantId, options) {
+  return invokeFetch("tenants", {
+    method: "get",
+    pathTemplate: "/api/v1/tenants/{tenantId}",
+    pathVariables: { tenantId },
+    options
+  });
+}
+async function patchTenant(tenantId, body, options) {
+  return invokeFetch("tenants", {
+    method: "patch",
+    pathTemplate: "/api/v1/tenants/{tenantId}",
+    pathVariables: { tenantId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deactivateTenant(tenantId, body, options) {
+  return invokeFetch("tenants", {
+    method: "post",
+    pathTemplate: "/api/v1/tenants/{tenantId}/actions/deactivate",
+    pathVariables: { tenantId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function reactivateTenant(tenantId, body, options) {
+  return invokeFetch("tenants", {
+    method: "post",
+    pathTemplate: "/api/v1/tenants/{tenantId}/actions/reactivate",
+    pathVariables: { tenantId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("tenants");
 }

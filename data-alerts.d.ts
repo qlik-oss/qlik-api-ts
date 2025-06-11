@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type AlertingActionsTriggerCreateRequest = {
     alertingTaskID: string;
@@ -514,7 +514,7 @@ type UserIDRecipient = {
  * @param query an object with query parameters
  * @throws GetDataAlertsHttpError
  */
-declare const getDataAlerts: (query: {
+declare function getDataAlerts(query: {
     /** The app ID you would like to filter by */
     appID?: string;
     /** The conditionId you would like to filter by */
@@ -537,7 +537,7 @@ declare const getDataAlerts: (query: {
     sort?: ("-datecreated" | "datecreated" | "+datecreated" | "-ownername" | "ownername" | "+ownername" | "lasttrigger" | "-lasttrigger" | "+lasttrigger" | "lastscan" | "-lastscan" | "+lastscan" | "name" | "-name" | "+name" | "enabled" | "-enabled" | "+enabled" | "status" | "-status" | "+status" | "nextexecutiontime" | "-nextexecutiontime" | "+nextexecutiontime")[];
     /** The status you would like to filter by */
     status?: ("INVALID_RECIPIENT" | "INVALID_OWNER" | "DISABLED" | "VALID")[];
-}, options?: ApiCallOptions) => Promise<GetDataAlertsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDataAlertsHttpResponse>;
 type GetDataAlertsHttpResponse = {
     data: AlertingTaskListResponse;
     headers: Headers;
@@ -556,7 +556,7 @@ type GetDataAlertsHttpError = {
  * @param body an object with the body content
  * @throws CreateDataAlertHttpError
  */
-declare const createDataAlert: (body: AlertingTaskCreateRequest, options?: ApiCallOptions) => Promise<CreateDataAlertHttpResponse>;
+declare function createDataAlert(body: AlertingTaskCreateRequest, options?: ApiCallOptions): Promise<CreateDataAlertHttpResponse>;
 type CreateDataAlertHttpResponse = {
     data: AlertingTaskResponse;
     headers: Headers;
@@ -573,7 +573,7 @@ type CreateDataAlertHttpError = {
  * @param body an object with the body content
  * @throws TriggerDataAlertsHttpError
  */
-declare const triggerDataAlerts: (body: AlertingActionsTriggerCreateRequest, options?: ApiCallOptions) => Promise<TriggerDataAlertsHttpResponse>;
+declare function triggerDataAlerts(body: AlertingActionsTriggerCreateRequest, options?: ApiCallOptions): Promise<TriggerDataAlertsHttpResponse>;
 type TriggerDataAlertsHttpResponse = {
     data: AlertingActionsTriggerCreateResponse;
     headers: Headers;
@@ -590,7 +590,7 @@ type TriggerDataAlertsHttpError = {
  * @param body an object with the body content
  * @throws ValidateDataAlertsHttpError
  */
-declare const validateDataAlerts: (body: AlertingTaskCreateRequest, options?: ApiCallOptions) => Promise<ValidateDataAlertsHttpResponse>;
+declare function validateDataAlerts(body: AlertingTaskCreateRequest, options?: ApiCallOptions): Promise<ValidateDataAlertsHttpResponse>;
 type ValidateDataAlertsHttpResponse = {
     data: AlertingTaskValidationResponse;
     headers: Headers;
@@ -606,7 +606,7 @@ type ValidateDataAlertsHttpError = {
  *
  * @throws GetDataAlertsSettingsHttpError
  */
-declare const getDataAlertsSettings: (options?: ApiCallOptions) => Promise<GetDataAlertsSettingsHttpResponse>;
+declare function getDataAlertsSettings(options?: ApiCallOptions): Promise<GetDataAlertsSettingsHttpResponse>;
 type GetDataAlertsSettingsHttpResponse = {
     data: AlertingSettings;
     headers: Headers;
@@ -623,7 +623,7 @@ type GetDataAlertsSettingsHttpError = {
  * @param body an object with the body content
  * @throws SetDataAlertsSettingsHttpError
  */
-declare const setDataAlertsSettings: (body: AlertingSettingsUpload, options?: ApiCallOptions) => Promise<SetDataAlertsSettingsHttpResponse>;
+declare function setDataAlertsSettings(body: AlertingSettingsUpload, options?: ApiCallOptions): Promise<SetDataAlertsSettingsHttpResponse>;
 type SetDataAlertsSettingsHttpResponse = {
     data: void;
     headers: Headers;
@@ -640,7 +640,7 @@ type SetDataAlertsSettingsHttpError = {
  * @param alertId The alerting task identifier.
  * @throws DeleteDataAlertHttpError
  */
-declare const deleteDataAlert: (alertId: string, options?: ApiCallOptions) => Promise<DeleteDataAlertHttpResponse>;
+declare function deleteDataAlert(alertId: string, options?: ApiCallOptions): Promise<DeleteDataAlertHttpResponse>;
 type DeleteDataAlertHttpResponse = {
     data: void;
     headers: Headers;
@@ -657,7 +657,7 @@ type DeleteDataAlertHttpError = {
  * @param alertId The alerting task identifier.
  * @throws GetDataAlertHttpError
  */
-declare const getDataAlert: (alertId: string, options?: ApiCallOptions) => Promise<GetDataAlertHttpResponse>;
+declare function getDataAlert(alertId: string, options?: ApiCallOptions): Promise<GetDataAlertHttpResponse>;
 type GetDataAlertHttpResponse = {
     data: AlertingTaskResponse;
     headers: Headers;
@@ -675,7 +675,7 @@ type GetDataAlertHttpError = {
  * @param body an object with the body content
  * @throws PatchDataAlertHttpError
  */
-declare const patchDataAlert: (alertId: string, body: AlertingTaskPatchRequestCompliantList, options?: ApiCallOptions) => Promise<PatchDataAlertHttpResponse>;
+declare function patchDataAlert(alertId: string, body: AlertingTaskPatchRequestCompliantList, options?: ApiCallOptions): Promise<PatchDataAlertHttpResponse>;
 type PatchDataAlertHttpResponse = {
     data: void;
     headers: Headers;
@@ -692,7 +692,7 @@ type PatchDataAlertHttpError = {
  * @param alertId The alerting task identifier.
  * @throws GetDataAlertConditionHttpError
  */
-declare const getDataAlertCondition: (alertId: string, options?: ApiCallOptions) => Promise<GetDataAlertConditionHttpResponse>;
+declare function getDataAlertCondition(alertId: string, options?: ApiCallOptions): Promise<GetDataAlertConditionHttpResponse>;
 type GetDataAlertConditionHttpResponse = {
     data: AlertingConditionResponse;
     headers: Headers;
@@ -710,7 +710,7 @@ type GetDataAlertConditionHttpError = {
  * @param executionId The execution identifier.
  * @throws DeleteDataAlertExecutionHttpError
  */
-declare const deleteDataAlertExecution: (alertId: string, executionId: string, options?: ApiCallOptions) => Promise<DeleteDataAlertExecutionHttpResponse>;
+declare function deleteDataAlertExecution(alertId: string, executionId: string, options?: ApiCallOptions): Promise<DeleteDataAlertExecutionHttpResponse>;
 type DeleteDataAlertExecutionHttpResponse = {
     data: void;
     headers: Headers;
@@ -728,7 +728,7 @@ type DeleteDataAlertExecutionHttpError = {
  * @param executionId The execution identifier. If value is "latest", the latest execution will be returned
  * @throws GetDataAlertExecutionHttpError
  */
-declare const getDataAlertExecution: (alertId: string, executionId: string, options?: ApiCallOptions) => Promise<GetDataAlertExecutionHttpResponse>;
+declare function getDataAlertExecution(alertId: string, executionId: string, options?: ApiCallOptions): Promise<GetDataAlertExecutionHttpResponse>;
 type GetDataAlertExecutionHttpResponse = {
     data: AlertingExecutionResponse;
     headers: Headers;
@@ -746,7 +746,7 @@ type GetDataAlertExecutionHttpError = {
  * @param query an object with query parameters
  * @throws GetDataAlertRecipientStatsHttpError
  */
-declare const getDataAlertRecipientStats: (alertId: string, query: {
+declare function getDataAlertRecipientStats(alertId: string, query: {
     /** The name of the groups you would like to filter by */
     groups?: string[];
     /** Sort the returned result set by the specified field */
@@ -755,7 +755,7 @@ declare const getDataAlertRecipientStats: (alertId: string, query: {
     subscribed?: boolean;
     /** The recipients ID you would like to filter by */
     userID?: string;
-}, options?: ApiCallOptions) => Promise<GetDataAlertRecipientStatsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDataAlertRecipientStatsHttpResponse>;
 type GetDataAlertRecipientStatsHttpResponse = {
     data: AlertingRecipientStatsResponse;
     headers: Headers;
@@ -773,7 +773,7 @@ type GetDataAlertRecipientStatsHttpError = {
  * @param query an object with query parameters
  * @throws GetDataAlertExecutionsHttpError
  */
-declare const getDataAlertExecutions: (taskId: string, query: {
+declare function getDataAlertExecutions(taskId: string, query: {
     /** Filter by condition id related to the executions. */
     conditionId?: string;
     /** Filter by whether the alerting task execution status is FINISHED or FAILED. */
@@ -810,7 +810,7 @@ declare const getDataAlertExecutions: (taskId: string, query: {
     triggered?: boolean;
     /** Specifies a date that executions should have been created before. Date in RFC3339Nano format, such as 2020-01-01T00:00:00.000Z */
     until?: string;
-}, options?: ApiCallOptions) => Promise<GetDataAlertExecutionsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDataAlertExecutionsHttpResponse>;
 type GetDataAlertExecutionsHttpResponse = {
     data: AlertingExecutionListResponse;
     headers: Headers;
@@ -832,10 +832,10 @@ type GetDataAlertExecutionsHttpError = {
  * @param query an object with query parameters
  * @throws GetDataAlertExecutionsStatsHttpError
  */
-declare const getDataAlertExecutionsStats: (taskId: string, query: {
+declare function getDataAlertExecutionsStats(taskId: string, query: {
     /** The period by which the stats aggregation needs to be performed. */
     period: "month";
-}, options?: ApiCallOptions) => Promise<GetDataAlertExecutionsStatsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDataAlertExecutionsStatsHttpResponse>;
 type GetDataAlertExecutionsStatsHttpResponse = {
     data: AlertingTaskExecutionStats;
     headers: Headers;
@@ -855,7 +855,7 @@ type GetDataAlertExecutionsStatsHttpError = {
  * @param executionId The execution identifier.
  * @throws GetDataAlertExecutionEvaluationsHttpError
  */
-declare const getDataAlertExecutionEvaluations: (taskId: string, executionId: string, options?: ApiCallOptions) => Promise<GetDataAlertExecutionEvaluationsHttpResponse>;
+declare function getDataAlertExecutionEvaluations(taskId: string, executionId: string, options?: ApiCallOptions): Promise<GetDataAlertExecutionEvaluationsHttpResponse>;
 type GetDataAlertExecutionEvaluationsHttpResponse = {
     data: EvaluationGetResponse;
     headers: Headers;

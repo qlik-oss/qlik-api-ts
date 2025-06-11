@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type AppErrorResponse = {
     errors?: Error[];
@@ -50,7 +50,7 @@ type RealtimePredictionInput = {
  * @param body an object with the body content
  * @throws CreateAutomlDeploymentRealtimePredictionHttpError
  */
-declare const createAutomlDeploymentRealtimePrediction: (deploymentId: string, query: {
+declare function createAutomlDeploymentRealtimePrediction(deploymentId: string, query: {
     /** If true, will include a column with the reason why a prediction was not produced. */
     includeNotPredictedReason?: boolean;
     /** If true, the shapley values will be included in the response. */
@@ -59,7 +59,7 @@ declare const createAutomlDeploymentRealtimePrediction: (deploymentId: string, q
     includeSource?: boolean;
     /** The name of the feature in the source data to use as an index in the response data. The column will be included with its original name and values. This is intended to allow the caller to join results with source data. */
     index?: string;
-}, body: RealtimePredictionInput, options?: ApiCallOptions) => Promise<CreateAutomlDeploymentRealtimePredictionHttpResponse>;
+}, body: RealtimePredictionInput, options?: ApiCallOptions): Promise<CreateAutomlDeploymentRealtimePredictionHttpResponse>;
 type CreateAutomlDeploymentRealtimePredictionHttpResponse = {
     data: void;
     headers: Headers;

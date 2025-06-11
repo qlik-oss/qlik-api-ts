@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type CollectionTypes = "private" | "public" | "publicgoverned";
 type ErrorResponseBody = {
@@ -252,7 +252,7 @@ type SpaceTypeEnum = "shared" | "managed" | "personal" | "data";
  * @param query an object with query parameters
  * @throws GetItemsHttpError
  */
-declare const getItems: (query: {
+declare function getItems(query: {
     /** The collection's unique identifier. Used to filter for items with a specific tag (collection type `public`), or collection. */
     collectionId?: string;
     /** User's unique identifier. */
@@ -296,7 +296,7 @@ declare const getItems: (query: {
     spaceId?: string;
     /** The case-sensitive string used to filter items on space type(s). For example '?spaceType=shared,personal'. */
     spaceType?: SpaceTypeEnum;
-}, options?: ApiCallOptions) => Promise<GetItemsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetItemsHttpResponse>;
 type GetItemsHttpResponse = {
     data: ItemsListItemsResponseBody;
     headers: Headers;
@@ -314,7 +314,7 @@ type GetItemsHttpError = {
  *
  * @throws GetItemsSettingsHttpError
  */
-declare const getItemsSettings: (options?: ApiCallOptions) => Promise<GetItemsSettingsHttpResponse>;
+declare function getItemsSettings(options?: ApiCallOptions): Promise<GetItemsSettingsHttpResponse>;
 type GetItemsSettingsHttpResponse = {
     data: ItemsSettingsResponseBody;
     headers: Headers;
@@ -331,7 +331,7 @@ type GetItemsSettingsHttpError = {
  * @param body an object with the body content
  * @throws PatchItemsSettingsHttpError
  */
-declare const patchItemsSettings: (body: ItemsSettingsPatch, options?: ApiCallOptions) => Promise<PatchItemsSettingsHttpResponse>;
+declare function patchItemsSettings(body: ItemsSettingsPatch, options?: ApiCallOptions): Promise<PatchItemsSettingsHttpResponse>;
 type PatchItemsSettingsHttpResponse = {
     data: ItemsSettingsResponseBody;
     headers: Headers;
@@ -348,7 +348,7 @@ type PatchItemsSettingsHttpError = {
  * @param itemId The item's unique identifier.
  * @throws DeleteItemHttpError
  */
-declare const deleteItem: (itemId: string, options?: ApiCallOptions) => Promise<DeleteItemHttpResponse>;
+declare function deleteItem(itemId: string, options?: ApiCallOptions): Promise<DeleteItemHttpResponse>;
 type DeleteItemHttpResponse = {
     data: void;
     headers: Headers;
@@ -365,7 +365,7 @@ type DeleteItemHttpError = {
  * @param itemId The item's unique identifier
  * @throws GetItemHttpError
  */
-declare const getItem: (itemId: string, options?: ApiCallOptions) => Promise<GetItemHttpResponse>;
+declare function getItem(itemId: string, options?: ApiCallOptions): Promise<GetItemHttpResponse>;
 type GetItemHttpResponse = {
     data: ItemResultResponseBody;
     headers: Headers;
@@ -383,7 +383,7 @@ type GetItemHttpError = {
  * @param body an object with the body content
  * @throws UpdateItemHttpError
  */
-declare const updateItem: (itemId: string, body: ItemsUpdateItemRequestBody, options?: ApiCallOptions) => Promise<UpdateItemHttpResponse>;
+declare function updateItem(itemId: string, body: ItemsUpdateItemRequestBody, options?: ApiCallOptions): Promise<UpdateItemHttpResponse>;
 type UpdateItemHttpResponse = {
     data: ItemResultResponseBody;
     headers: Headers;
@@ -401,7 +401,7 @@ type UpdateItemHttpError = {
  * @param query an object with query parameters
  * @throws GetItemCollectionsHttpError
  */
-declare const getItemCollections: (itemId: string, query: {
+declare function getItemCollections(itemId: string, query: {
     /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
     limit?: number;
     /** The case-sensitive string used to search for a collection by name. */
@@ -416,7 +416,7 @@ declare const getItemCollections: (itemId: string, query: {
     sort?: "+createdAt" | "-createdAt" | "+name" | "-name" | "+updatedAt" | "-updatedAt";
     /** The case-sensitive string used to search for a collection by type. */
     type?: CollectionTypes;
-}, options?: ApiCallOptions) => Promise<GetItemCollectionsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetItemCollectionsHttpResponse>;
 type GetItemCollectionsHttpResponse = {
     data: ItemsListItemCollectionsResponseBody;
     headers: Headers;
@@ -436,7 +436,7 @@ type GetItemCollectionsHttpError = {
  * @param query an object with query parameters
  * @throws GetPublishedItemsHttpError
  */
-declare const getPublishedItems: (itemId: string, query: {
+declare function getPublishedItems(itemId: string, query: {
     /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
     limit?: number;
     /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
@@ -447,7 +447,7 @@ declare const getPublishedItems: (itemId: string, query: {
     resourceType?: ItemResourceTypeEnum;
     /** The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively. */
     sort?: "+createdAt" | "-createdAt" | "+name" | "-name" | "+updatedAt" | "-updatedAt";
-}, options?: ApiCallOptions) => Promise<GetPublishedItemsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetPublishedItemsHttpResponse>;
 type GetPublishedItemsHttpResponse = {
     data: ItemsListItemCollectionsResponseBody;
     headers: Headers;

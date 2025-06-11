@@ -1,66 +1,84 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/licenses.ts
-var getLicenseAssignments = async (query, options) => invokeFetch("licenses", {
-  method: "get",
-  pathTemplate: "/api/v1/licenses/assignments",
-  query,
-  options
-});
-var addLicenseAssignments = async (body, options) => invokeFetch("licenses", {
-  method: "post",
-  pathTemplate: "/api/v1/licenses/assignments/actions/add",
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteLicenseAssignments = async (body, options) => invokeFetch("licenses", {
-  method: "post",
-  pathTemplate: "/api/v1/licenses/assignments/actions/delete",
-  body,
-  contentType: "application/json",
-  options
-});
-var updateLicenseAssignments = async (body, options) => invokeFetch("licenses", {
-  method: "post",
-  pathTemplate: "/api/v1/licenses/assignments/actions/update",
-  body,
-  contentType: "application/json",
-  options
-});
-var getLicenseConsumption = async (query, options) => invokeFetch("licenses", {
-  method: "get",
-  pathTemplate: "/api/v1/licenses/consumption",
-  query,
-  options
-});
-var getLicenseOverview = async (options) => invokeFetch("licenses", {
-  method: "get",
-  pathTemplate: "/api/v1/licenses/overview",
-  options
-});
-var getLicenseSettings = async (options) => invokeFetch("licenses", {
-  method: "get",
-  pathTemplate: "/api/v1/licenses/settings",
-  options
-});
-var updateLicenseSettings = async (body, options) => invokeFetch("licenses", {
-  method: "put",
-  pathTemplate: "/api/v1/licenses/settings",
-  body,
-  contentType: "application/json",
-  options
-});
-var getLicenseStatus = async (options) => invokeFetch("licenses", {
-  method: "get",
-  pathTemplate: "/api/v1/licenses/status",
-  options
-});
+async function getLicenseAssignments(query, options) {
+  return invokeFetch("licenses", {
+    method: "get",
+    pathTemplate: "/api/v1/licenses/assignments",
+    query,
+    options
+  });
+}
+async function addLicenseAssignments(body, options) {
+  return invokeFetch("licenses", {
+    method: "post",
+    pathTemplate: "/api/v1/licenses/assignments/actions/add",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteLicenseAssignments(body, options) {
+  return invokeFetch("licenses", {
+    method: "post",
+    pathTemplate: "/api/v1/licenses/assignments/actions/delete",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function updateLicenseAssignments(body, options) {
+  return invokeFetch("licenses", {
+    method: "post",
+    pathTemplate: "/api/v1/licenses/assignments/actions/update",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getLicenseConsumption(query, options) {
+  return invokeFetch("licenses", {
+    method: "get",
+    pathTemplate: "/api/v1/licenses/consumption",
+    query,
+    options
+  });
+}
+async function getLicenseOverview(options) {
+  return invokeFetch("licenses", {
+    method: "get",
+    pathTemplate: "/api/v1/licenses/overview",
+    options
+  });
+}
+async function getLicenseSettings(options) {
+  return invokeFetch("licenses", {
+    method: "get",
+    pathTemplate: "/api/v1/licenses/settings",
+    options
+  });
+}
+async function updateLicenseSettings(body, options) {
+  return invokeFetch("licenses", {
+    method: "put",
+    pathTemplate: "/api/v1/licenses/settings",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getLicenseStatus(options) {
+  return invokeFetch("licenses", {
+    method: "get",
+    pathTemplate: "/api/v1/licenses/status",
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("licenses");
 }

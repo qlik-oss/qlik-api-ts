@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type APISettings = {
     /** Whether API endpoints for condition manager are enabled */
@@ -380,7 +380,7 @@ type SingleErrorResponse = {
  * @param body an object with the body content
  * @throws CreateConditionHttpError
  */
-declare const createCondition: (body: ConditionCreateRequest, options?: ApiCallOptions) => Promise<CreateConditionHttpResponse>;
+declare function createCondition(body: ConditionCreateRequest, options?: ApiCallOptions): Promise<CreateConditionHttpResponse>;
 type CreateConditionHttpResponse = {
     data: ConditionResponse;
     headers: Headers;
@@ -397,7 +397,7 @@ type CreateConditionHttpError = {
  * @param body an object with the body content
  * @throws CreateConditionPreviewHttpError
  */
-declare const createConditionPreview: (body: ConditionCreateRequest, options?: ApiCallOptions) => Promise<CreateConditionPreviewHttpResponse>;
+declare function createConditionPreview(body: ConditionCreateRequest, options?: ApiCallOptions): Promise<CreateConditionPreviewHttpResponse>;
 type CreateConditionPreviewHttpResponse = {
     data: PreviewResponse;
     headers: Headers;
@@ -414,7 +414,7 @@ type CreateConditionPreviewHttpError = {
  * @param id The id of the condition
  * @throws GetConditionPreviewHttpError
  */
-declare const getConditionPreview: (id: string, options?: ApiCallOptions) => Promise<GetConditionPreviewHttpResponse>;
+declare function getConditionPreview(id: string, options?: ApiCallOptions): Promise<GetConditionPreviewHttpResponse>;
 type GetConditionPreviewHttpResponse = {
     data: PreviewStatusResponse;
     headers: Headers;
@@ -430,7 +430,7 @@ type GetConditionPreviewHttpError = {
  *
  * @throws GetConditionsSettingsHttpError
  */
-declare const getConditionsSettings: (options?: ApiCallOptions) => Promise<GetConditionsSettingsHttpResponse>;
+declare function getConditionsSettings(options?: ApiCallOptions): Promise<GetConditionsSettingsHttpResponse>;
 type GetConditionsSettingsHttpResponse = {
     data: APISettings;
     headers: Headers;
@@ -447,7 +447,7 @@ type GetConditionsSettingsHttpError = {
  * @param body an object with the body content
  * @throws SetConditionsSettingsHttpError
  */
-declare const setConditionsSettings: (body: APISettingsUpload, options?: ApiCallOptions) => Promise<SetConditionsSettingsHttpResponse>;
+declare function setConditionsSettings(body: APISettingsUpload, options?: ApiCallOptions): Promise<SetConditionsSettingsHttpResponse>;
 type SetConditionsSettingsHttpResponse = {
     data: void;
     headers: Headers;
@@ -464,7 +464,7 @@ type SetConditionsSettingsHttpError = {
  * @param id The id of the condition
  * @throws DeleteConditionHttpError
  */
-declare const deleteCondition: (id: string, options?: ApiCallOptions) => Promise<DeleteConditionHttpResponse>;
+declare function deleteCondition(id: string, options?: ApiCallOptions): Promise<DeleteConditionHttpResponse>;
 type DeleteConditionHttpResponse = {
     data: void;
     headers: Headers;
@@ -481,7 +481,7 @@ type DeleteConditionHttpError = {
  * @param id The id of the condition
  * @throws GetConditionHttpError
  */
-declare const getCondition: (id: string, options?: ApiCallOptions) => Promise<GetConditionHttpResponse>;
+declare function getCondition(id: string, options?: ApiCallOptions): Promise<GetConditionHttpResponse>;
 type GetConditionHttpResponse = {
     data: Condition;
     headers: Headers;
@@ -499,7 +499,7 @@ type GetConditionHttpError = {
  * @param body an object with the body content
  * @throws PatchConditionHttpError
  */
-declare const patchCondition: (id: string, body: ConditionPatch, options?: ApiCallOptions) => Promise<PatchConditionHttpResponse>;
+declare function patchCondition(id: string, body: ConditionPatch, options?: ApiCallOptions): Promise<PatchConditionHttpResponse>;
 type PatchConditionHttpResponse = {
     data: void;
     headers: Headers;
@@ -517,7 +517,7 @@ type PatchConditionHttpError = {
  * @param body an object with the body content
  * @throws CreateConditionEvaluationHttpError
  */
-declare const createConditionEvaluation: (id: string, body: CreateEvaluationRequest, options?: ApiCallOptions) => Promise<CreateConditionEvaluationHttpResponse>;
+declare function createConditionEvaluation(id: string, body: CreateEvaluationRequest, options?: ApiCallOptions): Promise<CreateConditionEvaluationHttpResponse>;
 type CreateConditionEvaluationHttpResponse = {
     data: CreateEvaluationResponse;
     headers: Headers;
@@ -535,7 +535,7 @@ type CreateConditionEvaluationHttpError = {
  * @param evaluationId The id of the evaluation
  * @throws DeleteConditionEvaluationHttpError
  */
-declare const deleteConditionEvaluation: (id: string, evaluationId: string, options?: ApiCallOptions) => Promise<DeleteConditionEvaluationHttpResponse>;
+declare function deleteConditionEvaluation(id: string, evaluationId: string, options?: ApiCallOptions): Promise<DeleteConditionEvaluationHttpResponse>;
 type DeleteConditionEvaluationHttpResponse = {
     data: void;
     headers: Headers;
@@ -553,7 +553,7 @@ type DeleteConditionEvaluationHttpError = {
  * @param evaluationId The id of the evaluation
  * @throws GetConditionEvaluationHttpError
  */
-declare const getConditionEvaluation: (id: string, evaluationId: string, options?: ApiCallOptions) => Promise<GetConditionEvaluationHttpResponse>;
+declare function getConditionEvaluation(id: string, evaluationId: string, options?: ApiCallOptions): Promise<GetConditionEvaluationHttpResponse>;
 type GetConditionEvaluationHttpResponse = {
     data: GetEvaluationResponse;
     headers: Headers;

@@ -9,11 +9,11 @@ import {
   handleAuthenticationError,
   isWindows,
   toValidWebsocketLocationUrl
-} from "./W6FDNN2K.js";
-import "./3RGGGGAR.js";
+} from "./OTIO4SEJ.js";
+import "./ZCTVPXGO.js";
 import {
   isNode
-} from "./2ZQ3ZX7F.js";
+} from "./7MMXU6EL.js";
 
 // src/qix/session/schema/engine-api.js
 var engine_api_default = {

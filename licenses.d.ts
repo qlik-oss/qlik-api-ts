@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * @example
@@ -411,7 +411,7 @@ type SettingsBody = {
  * @param query an object with query parameters
  * @throws GetLicenseAssignmentsHttpError
  */
-declare const getLicenseAssignments: (query: {
+declare function getLicenseAssignments(query: {
     /** The filter for finding entries. */
     filter?: string;
     /** The preferred number of entries to return. */
@@ -422,7 +422,7 @@ declare const getLicenseAssignments: (query: {
     page?: string;
     /** The field to sort on; can be prefixed with +/- for ascending/descending sort order. */
     sort?: string;
-}, options?: ApiCallOptions) => Promise<GetLicenseAssignmentsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetLicenseAssignmentsHttpResponse>;
 type GetLicenseAssignmentsHttpResponse = {
     data: AssignmentsResponse;
     headers: Headers;
@@ -441,7 +441,7 @@ type GetLicenseAssignmentsHttpError = {
  * @param body an object with the body content
  * @throws AddLicenseAssignmentsHttpError
  */
-declare const addLicenseAssignments: (body: AssignmentsActionsAddRequest, options?: ApiCallOptions) => Promise<AddLicenseAssignmentsHttpResponse>;
+declare function addLicenseAssignments(body: AssignmentsActionsAddRequest, options?: ApiCallOptions): Promise<AddLicenseAssignmentsHttpResponse>;
 type AddLicenseAssignmentsHttpResponse = {
     data: AssignmentsActionsAddResponse;
     headers: Headers;
@@ -458,7 +458,7 @@ type AddLicenseAssignmentsHttpError = {
  * @param body an object with the body content
  * @throws DeleteLicenseAssignmentsHttpError
  */
-declare const deleteLicenseAssignments: (body: AssignmentsActionsDeleteRequest, options?: ApiCallOptions) => Promise<DeleteLicenseAssignmentsHttpResponse>;
+declare function deleteLicenseAssignments(body: AssignmentsActionsDeleteRequest, options?: ApiCallOptions): Promise<DeleteLicenseAssignmentsHttpResponse>;
 type DeleteLicenseAssignmentsHttpResponse = {
     data: AssignmentsActionsDeleteResponse;
     headers: Headers;
@@ -475,7 +475,7 @@ type DeleteLicenseAssignmentsHttpError = {
  * @param body an object with the body content
  * @throws UpdateLicenseAssignmentsHttpError
  */
-declare const updateLicenseAssignments: (body: AssignmentsActionsUpdateRequest, options?: ApiCallOptions) => Promise<UpdateLicenseAssignmentsHttpResponse>;
+declare function updateLicenseAssignments(body: AssignmentsActionsUpdateRequest, options?: ApiCallOptions): Promise<UpdateLicenseAssignmentsHttpResponse>;
 type UpdateLicenseAssignmentsHttpResponse = {
     data: AssignmentsActionsUpdateResponse;
     headers: Headers;
@@ -492,7 +492,7 @@ type UpdateLicenseAssignmentsHttpError = {
  * @param query an object with query parameters
  * @throws GetLicenseConsumptionHttpError
  */
-declare const getLicenseConsumption: (query: {
+declare function getLicenseConsumption(query: {
     /** The SCIM filter for the query. Filterable property is "endTime". */
     filter?: string;
     /** The preferred number of entries to return. */
@@ -501,7 +501,7 @@ declare const getLicenseConsumption: (query: {
     page?: string;
     /** The field to sort on; can be prefixed with +/- for ascending/descending sort order. */
     sort?: string;
-}, options?: ApiCallOptions) => Promise<GetLicenseConsumptionHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetLicenseConsumptionHttpResponse>;
 type GetLicenseConsumptionHttpResponse = {
     data: ConsumptionEventsResponse;
     headers: Headers;
@@ -519,7 +519,7 @@ type GetLicenseConsumptionHttpError = {
  *
  * @throws GetLicenseOverviewHttpError
  */
-declare const getLicenseOverview: (options?: ApiCallOptions) => Promise<GetLicenseOverviewHttpResponse>;
+declare function getLicenseOverview(options?: ApiCallOptions): Promise<GetLicenseOverviewHttpResponse>;
 type GetLicenseOverviewHttpResponse = {
     data: LicenseOverview;
     headers: Headers;
@@ -535,7 +535,7 @@ type GetLicenseOverviewHttpError = {
  *
  * @throws GetLicenseSettingsHttpError
  */
-declare const getLicenseSettings: (options?: ApiCallOptions) => Promise<GetLicenseSettingsHttpResponse>;
+declare function getLicenseSettings(options?: ApiCallOptions): Promise<GetLicenseSettingsHttpResponse>;
 type GetLicenseSettingsHttpResponse = {
     data: SettingsBody;
     headers: Headers;
@@ -552,7 +552,7 @@ type GetLicenseSettingsHttpError = {
  * @param body an object with the body content
  * @throws UpdateLicenseSettingsHttpError
  */
-declare const updateLicenseSettings: (body: SettingsBody, options?: ApiCallOptions) => Promise<UpdateLicenseSettingsHttpResponse>;
+declare function updateLicenseSettings(body: SettingsBody, options?: ApiCallOptions): Promise<UpdateLicenseSettingsHttpResponse>;
 type UpdateLicenseSettingsHttpResponse = {
     data: SettingsBody;
     headers: Headers;
@@ -568,7 +568,7 @@ type UpdateLicenseSettingsHttpError = {
  *
  * @throws GetLicenseStatusHttpError
  */
-declare const getLicenseStatus: (options?: ApiCallOptions) => Promise<GetLicenseStatusHttpResponse>;
+declare function getLicenseStatus(options?: ApiCallOptions): Promise<GetLicenseStatusHttpResponse>;
 type GetLicenseStatusHttpResponse = {
     data: LicenseStatus;
     headers: Headers;

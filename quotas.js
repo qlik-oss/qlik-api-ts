@@ -1,24 +1,28 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/quotas.ts
-var getQuotas = async (query, options) => invokeFetch("quotas", {
-  method: "get",
-  pathTemplate: "/api/v1/quotas",
-  query,
-  options
-});
-var getQuota = async (id, query, options) => invokeFetch("quotas", {
-  method: "get",
-  pathTemplate: "/api/v1/quotas/{id}",
-  pathVariables: { id },
-  query,
-  options
-});
+async function getQuotas(query, options) {
+  return invokeFetch("quotas", {
+    method: "get",
+    pathTemplate: "/api/v1/quotas",
+    query,
+    options
+  });
+}
+async function getQuota(id, query, options) {
+  return invokeFetch("quotas", {
+    method: "get",
+    pathTemplate: "/api/v1/quotas/{id}",
+    pathVariables: { id },
+    query,
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("quotas");
 }

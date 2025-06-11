@@ -1,5 +1,5 @@
-import { A as ApiCallOptions, D as DownloadableBlob } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions, D as DownloadableBlob } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type Analysis = "breakdown" | "changePoint" | "comparison" | "contribution" | "correlation" | "fact" | "mutualInfo" | "rank" | "spike" | "trend" | "values";
 type AnalysisComposition = {
@@ -1327,7 +1327,7 @@ type Sortedcomparisontables = {
  * @param body an object with the body content
  * @throws CreateAppHttpError
  */
-declare const createApp: (body: CreateApp, options?: ApiCallOptions) => Promise<CreateAppHttpResponse>;
+declare function createApp(body: CreateApp, options?: ApiCallOptions): Promise<CreateAppHttpResponse>;
 type CreateAppHttpResponse = {
     data: NxApp;
     headers: Headers;
@@ -1346,12 +1346,12 @@ type CreateAppHttpError = {
  * @param query an object with query parameters
  * @throws GetAppEvaluationComparisonHttpError
  */
-declare const getAppEvaluationComparison: (baseid: string, comparisonid: string, query: {
+declare function getAppEvaluationComparison(baseid: string, comparisonid: string, query: {
     /** Get the full list of comparisons including non-significant diffs */
     all?: boolean;
     /** Specify output format, currently supported are 'json' and 'xml' */
     format?: string;
-}, options?: ApiCallOptions) => Promise<GetAppEvaluationComparisonHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAppEvaluationComparisonHttpResponse>;
 type GetAppEvaluationComparisonHttpResponse = {
     data: Comparison;
     headers: Headers;
@@ -1374,7 +1374,7 @@ type GetAppEvaluationComparisonHttpError = {
  * @param comparisonid Id of the comparison evaluation
  * @throws GetAppEvaluationComparisonXmlHttpError
  */
-declare const getAppEvaluationComparisonXml: (baseid: string, comparisonid: string, options?: ApiCallOptions) => Promise<GetAppEvaluationComparisonXmlHttpResponse>;
+declare function getAppEvaluationComparisonXml(baseid: string, comparisonid: string, options?: ApiCallOptions): Promise<GetAppEvaluationComparisonXmlHttpResponse>;
 type GetAppEvaluationComparisonXmlHttpResponse = {
     data: Comparison;
     headers: Headers;
@@ -1392,12 +1392,12 @@ type GetAppEvaluationComparisonXmlHttpError = {
  * @param query an object with query parameters
  * @throws GetAppEvaluationHttpError
  */
-declare const getAppEvaluation: (id: string, query: {
+declare function getAppEvaluation(id: string, query: {
     /** Get the full data of the evaluation */
     all?: boolean;
     /** Specify output format, currently supported are 'json' and 'xml' */
     format?: string;
-}, options?: ApiCallOptions) => Promise<GetAppEvaluationHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAppEvaluationHttpResponse>;
 type GetAppEvaluationHttpResponse = {
     data: Evaluation;
     headers: Headers;
@@ -1418,7 +1418,7 @@ type GetAppEvaluationHttpError = {
  * @param id Id of the desired evaluation.
  * @throws GetAppEvaluationXmlHttpError
  */
-declare const getAppEvaluationXml: (id: string, options?: ApiCallOptions) => Promise<GetAppEvaluationXmlHttpResponse>;
+declare function getAppEvaluationXml(id: string, options?: ApiCallOptions): Promise<GetAppEvaluationXmlHttpResponse>;
 type GetAppEvaluationXmlHttpResponse = {
     data: Evaluation;
     headers: Headers;
@@ -1436,7 +1436,7 @@ type GetAppEvaluationXmlHttpError = {
  * @param body an object with the body content
  * @throws ImportAppHttpError
  */
-declare const importApp: (query: {
+declare function importApp(query: {
     /** If NoData is true, the data of the existing app will be kept as is, otherwise it will be replaced by the new incoming data. */
     NoData?: boolean;
     /** The app ID of the target app when source is qvw file. */
@@ -1455,7 +1455,7 @@ declare const importApp: (query: {
     name?: string;
     /** The space ID of the target app. */
     spaceId?: string;
-}, body: BodyInit, options?: ApiCallOptions) => Promise<ImportAppHttpResponse>;
+}, body: BodyInit, options?: ApiCallOptions): Promise<ImportAppHttpResponse>;
 type ImportAppHttpResponse = {
     data: NxApp;
     headers: Headers;
@@ -1471,7 +1471,7 @@ type ImportAppHttpError = {
  *
  * @throws GetAppsPrivilegesHttpError
  */
-declare const getAppsPrivileges: (options?: ApiCallOptions) => Promise<GetAppsPrivilegesHttpResponse>;
+declare function getAppsPrivileges(options?: ApiCallOptions): Promise<GetAppsPrivilegesHttpResponse>;
 type GetAppsPrivilegesHttpResponse = {
     data: UserPrivileges[];
     headers: Headers;
@@ -1488,7 +1488,7 @@ type GetAppsPrivilegesHttpError = {
  * @param appId Identifier of the app.
  * @throws DeleteAppHttpError
  */
-declare const deleteApp: (appId: string, options?: ApiCallOptions) => Promise<DeleteAppHttpResponse>;
+declare function deleteApp(appId: string, options?: ApiCallOptions): Promise<DeleteAppHttpResponse>;
 type DeleteAppHttpResponse = {
     data: void;
     headers: Headers;
@@ -1505,7 +1505,7 @@ type DeleteAppHttpError = {
  * @param appId Identifier of the app.
  * @throws GetAppInfoHttpError
  */
-declare const getAppInfo: (appId: string, options?: ApiCallOptions) => Promise<GetAppInfoHttpResponse>;
+declare function getAppInfo(appId: string, options?: ApiCallOptions): Promise<GetAppInfoHttpResponse>;
 type GetAppInfoHttpResponse = {
     data: NxApp;
     headers: Headers;
@@ -1523,7 +1523,7 @@ type GetAppInfoHttpError = {
  * @param body an object with the body content
  * @throws UpdateAppInfoHttpError
  */
-declare const updateAppInfo: (appId: string, body: UpdateApp, options?: ApiCallOptions) => Promise<UpdateAppInfoHttpResponse>;
+declare function updateAppInfo(appId: string, body: UpdateApp, options?: ApiCallOptions): Promise<UpdateAppInfoHttpResponse>;
 type UpdateAppInfoHttpResponse = {
     data: NxApp;
     headers: Headers;
@@ -1541,7 +1541,7 @@ type UpdateAppInfoHttpError = {
  * @param body an object with the body content
  * @throws CopyAppHttpError
  */
-declare const copyApp: (appId: string, body: CreateApp, options?: ApiCallOptions) => Promise<CopyAppHttpResponse>;
+declare function copyApp(appId: string, body: CreateApp, options?: ApiCallOptions): Promise<CopyAppHttpResponse>;
 type CopyAppHttpResponse = {
     data: NxApp;
     headers: Headers;
@@ -1559,7 +1559,7 @@ type CopyAppHttpError = {
  * @param appId Identifier of the app.
  * @throws GetAppDataLineageHttpError
  */
-declare const getAppDataLineage: (appId: string, options?: ApiCallOptions) => Promise<GetAppDataLineageHttpResponse>;
+declare function getAppDataLineage(appId: string, options?: ApiCallOptions): Promise<GetAppDataLineageHttpResponse>;
 type GetAppDataLineageHttpResponse = {
     data: LineageInfoRest[];
     headers: Headers;
@@ -1577,7 +1577,7 @@ type GetAppDataLineageHttpError = {
  * @param appId Identifier of the app.
  * @throws GetAppDataMetadataHttpError
  */
-declare const getAppDataMetadata: (appId: string, options?: ApiCallOptions) => Promise<GetAppDataMetadataHttpResponse>;
+declare function getAppDataMetadata(appId: string, options?: ApiCallOptions): Promise<GetAppDataMetadataHttpResponse>;
 type GetAppDataMetadataHttpResponse = {
     data: DataModelMetadata;
     headers: Headers;
@@ -1595,10 +1595,10 @@ type GetAppDataMetadataHttpError = {
  * @param query an object with query parameters
  * @throws ExportAppHttpError
  */
-declare const exportApp: (appId: string, query: {
+declare function exportApp(appId: string, query: {
     /** The flag indicating if only object contents should be exported. */
     NoData?: boolean;
-}, options?: ApiCallOptions) => Promise<ExportAppHttpResponse>;
+}, options?: ApiCallOptions): Promise<ExportAppHttpResponse>;
 type ExportAppHttpResponse = {
     data: DownloadableBlob;
     headers: Headers;
@@ -1615,7 +1615,7 @@ type ExportAppHttpError = {
  * @param appId Qlik Sense app identifier
  * @throws GetAppInsightAnalysesHttpError
  */
-declare const getAppInsightAnalyses: (appId: string, options?: ApiCallOptions) => Promise<GetAppInsightAnalysesHttpResponse>;
+declare function getAppInsightAnalyses(appId: string, options?: ApiCallOptions): Promise<GetAppInsightAnalysesHttpResponse>;
 type GetAppInsightAnalysesHttpResponse = {
     data: AnalysisDescriptorResponse;
     headers: Headers;
@@ -1635,7 +1635,7 @@ type GetAppInsightAnalysesHttpError = {
  * @param body an object with the body content
  * @throws GetAppInsightAnalysisRecommendationsHttpError
  */
-declare const getAppInsightAnalysisRecommendations: (appId: string, body: AnalysisRecommendRequest, options?: ApiCallOptions) => Promise<GetAppInsightAnalysisRecommendationsHttpResponse>;
+declare function getAppInsightAnalysisRecommendations(appId: string, body: AnalysisRecommendRequest, options?: ApiCallOptions): Promise<GetAppInsightAnalysisRecommendationsHttpResponse>;
 type GetAppInsightAnalysisRecommendationsHttpResponse = {
     data: AnalysisRecommendationResponse;
     headers: Headers;
@@ -1652,7 +1652,7 @@ type GetAppInsightAnalysisRecommendationsHttpError = {
  * @param appId Qlik Sense app identifier
  * @throws GetAppInsightAnalysisModelHttpError
  */
-declare const getAppInsightAnalysisModel: (appId: string, options?: ApiCallOptions) => Promise<GetAppInsightAnalysisModelHttpResponse>;
+declare function getAppInsightAnalysisModel(appId: string, options?: ApiCallOptions): Promise<GetAppInsightAnalysisModelHttpResponse>;
 type GetAppInsightAnalysisModelHttpResponse = {
     data: AnalysisModelResponse;
     headers: Headers;
@@ -1673,7 +1673,7 @@ type GetAppInsightAnalysisModelHttpError = {
  * @param path Path to file content.
  * @throws DeleteAppMediaHttpError
  */
-declare const deleteAppMedia: (appId: string, path: string, options?: ApiCallOptions) => Promise<DeleteAppMediaHttpResponse>;
+declare function deleteAppMedia(appId: string, path: string, options?: ApiCallOptions): Promise<DeleteAppMediaHttpResponse>;
 type DeleteAppMediaHttpResponse = {
     data: void;
     headers: Headers;
@@ -1692,7 +1692,7 @@ type DeleteAppMediaHttpError = {
  * @param path Path to file content.
  * @throws GetAppMediaHttpError
  */
-declare const getAppMedia: (appId: string, path: string, options?: ApiCallOptions) => Promise<GetAppMediaHttpResponse>;
+declare function getAppMedia(appId: string, path: string, options?: ApiCallOptions): Promise<GetAppMediaHttpResponse>;
 type GetAppMediaHttpResponse = {
     data: DownloadableBlob;
     headers: Headers;
@@ -1712,7 +1712,7 @@ type GetAppMediaHttpError = {
  * @param body an object with the body content
  * @throws UploadAppMediaHttpError
  */
-declare const uploadAppMedia: (appId: string, path: string, body: BodyInit, options?: ApiCallOptions) => Promise<UploadAppMediaHttpResponse>;
+declare function uploadAppMedia(appId: string, path: string, body: BodyInit, options?: ApiCallOptions): Promise<UploadAppMediaHttpResponse>;
 type UploadAppMediaHttpResponse = {
     data: void;
     headers: Headers;
@@ -1732,13 +1732,13 @@ type UploadAppMediaHttpError = {
  * @param query an object with query parameters
  * @throws GetAppMediaListHttpError
  */
-declare const getAppMediaList: (appId: string, path: string, query: {
+declare function getAppMediaList(appId: string, path: string, query: {
     /** Optional. List output can include files and folders in different ways:
      * * Not recursive, default if show option is not supplied or incorrectly specified, results in output with files and empty directories for the path specified only.
      * * Recursive(r), use ?show=r or ?show=recursive, results in a recursive output with files, all empty folders are excluded.
      * * All(a), use ?show=a or ?show=all, results in a recursive output with files and empty directories. */
     show?: string;
-}, options?: ApiCallOptions) => Promise<GetAppMediaListHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAppMediaListHttpResponse>;
 type GetAppMediaListHttpResponse = {
     data: AppContentList;
     headers: Headers;
@@ -1757,7 +1757,7 @@ type GetAppMediaListHttpError = {
  * @param appId Unique application identifier.
  * @throws GetAppThumbnailHttpError
  */
-declare const getAppThumbnail: (appId: string, options?: ApiCallOptions) => Promise<GetAppThumbnailHttpResponse>;
+declare function getAppThumbnail(appId: string, options?: ApiCallOptions): Promise<GetAppThumbnailHttpResponse>;
 type GetAppThumbnailHttpResponse = {
     data: DownloadableBlob;
     headers: Headers;
@@ -1777,7 +1777,7 @@ type GetAppThumbnailHttpError = {
  * @param body an object with the body content
  * @throws UpdateAppObjectOwnerHttpError
  */
-declare const updateAppObjectOwner: (appId: string, objectId: string, body: UpdateOwner, options?: ApiCallOptions) => Promise<UpdateAppObjectOwnerHttpResponse>;
+declare function updateAppObjectOwner(appId: string, objectId: string, body: UpdateOwner, options?: ApiCallOptions): Promise<UpdateAppObjectOwnerHttpResponse>;
 type UpdateAppObjectOwnerHttpResponse = {
     data: NxAppObject;
     headers: Headers;
@@ -1795,7 +1795,7 @@ type UpdateAppObjectOwnerHttpError = {
  * @param body an object with the body content
  * @throws UpdateAppOwnerHttpError
  */
-declare const updateAppOwner: (appId: string, body: UpdateOwner, options?: ApiCallOptions) => Promise<UpdateAppOwnerHttpResponse>;
+declare function updateAppOwner(appId: string, body: UpdateOwner, options?: ApiCallOptions): Promise<UpdateAppOwnerHttpResponse>;
 type UpdateAppOwnerHttpResponse = {
     data: NxApp;
     headers: Headers;
@@ -1813,7 +1813,7 @@ type UpdateAppOwnerHttpError = {
  * @param body an object with the body content
  * @throws PublishAppHttpError
  */
-declare const publishApp: (appId: string, body: PublishApp, options?: ApiCallOptions) => Promise<PublishAppHttpResponse>;
+declare function publishApp(appId: string, body: PublishApp, options?: ApiCallOptions): Promise<PublishAppHttpResponse>;
 type PublishAppHttpResponse = {
     data: NxApp;
     headers: Headers;
@@ -1831,7 +1831,7 @@ type PublishAppHttpError = {
  * @param body an object with the body content
  * @throws RepublishAppHttpError
  */
-declare const republishApp: (appId: string, body: RepublishApp, options?: ApiCallOptions) => Promise<RepublishAppHttpResponse>;
+declare function republishApp(appId: string, body: RepublishApp, options?: ApiCallOptions): Promise<RepublishAppHttpResponse>;
 type RepublishAppHttpResponse = {
     data: NxApp;
     headers: Headers;
@@ -1849,7 +1849,7 @@ type RepublishAppHttpError = {
  * @param appId Identifier of the app.
  * @throws GetAppReloadLogsHttpError
  */
-declare const getAppReloadLogs: (appId: string, options?: ApiCallOptions) => Promise<GetAppReloadLogsHttpResponse>;
+declare function getAppReloadLogs(appId: string, options?: ApiCallOptions): Promise<GetAppReloadLogsHttpResponse>;
 type GetAppReloadLogsHttpResponse = {
     data: ScriptLogList;
     headers: Headers;
@@ -1868,7 +1868,7 @@ type GetAppReloadLogsHttpError = {
  * @param reloadId Identifier of the reload.
  * @throws GetAppReloadLogHttpError
  */
-declare const getAppReloadLog: (appId: string, reloadId: string, options?: ApiCallOptions) => Promise<GetAppReloadLogHttpResponse>;
+declare function getAppReloadLog(appId: string, reloadId: string, options?: ApiCallOptions): Promise<GetAppReloadLogHttpResponse>;
 type GetAppReloadLogHttpResponse = {
     data: DownloadableBlob;
     headers: Headers;
@@ -1888,12 +1888,12 @@ type GetAppReloadLogHttpError = {
  * @param query an object with query parameters
  * @throws GetAppReloadMetadataHttpError
  */
-declare const getAppReloadMetadata: (appId: string, reloadId: string, query: {
+declare function getAppReloadMetadata(appId: string, reloadId: string, query: {
     /** Include metadata for reloads ran with SkipStore flag set to true. Default: false */
     includeSkipStoreReloads?: boolean;
     /** Maximum number of records to return from this request. Default: 100 */
     limit?: string;
-}, options?: ApiCallOptions) => Promise<GetAppReloadMetadataHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAppReloadMetadataHttpResponse>;
 type GetAppReloadMetadataHttpResponse = {
     data: ReloadListMetadata;
     headers: Headers;
@@ -1911,7 +1911,7 @@ type GetAppReloadMetadataHttpError = {
  * @param query an object with query parameters
  * @throws GetAppReportFiltersHttpError
  */
-declare const getAppReportFilters: (appId: string, query: {
+declare function getAppReportFilters(appId: string, query: {
     /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax. Cannot be combined with any of the fields marked as deprecated. All conditional statements within this query parameter are case insensitive.
      * The following fields support the `co` (contains) operator: `name`, `description`
      * The following fields support the `eq` (equals) operator: `ownerId`
@@ -1926,7 +1926,7 @@ declare const getAppReportFilters: (appId: string, query: {
     page?: string;
     /** Sorting parameters. */
     sort?: ("+ownerId" | "-ownerId" | "-name" | "+name" | "+description" | "-description" | "+createdAt" | "-createdAt" | "+updatedAt" | "-updatedAt")[];
-}, options?: ApiCallOptions) => Promise<GetAppReportFiltersHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAppReportFiltersHttpResponse>;
 type GetAppReportFiltersHttpResponse = {
     data: FilterList;
     headers: Headers;
@@ -1946,7 +1946,7 @@ type GetAppReportFiltersHttpError = {
  * @param body an object with the body content
  * @throws CreateAppReportFilterHttpError
  */
-declare const createAppReportFilter: (appId: string, body: FilterRequest, options?: ApiCallOptions) => Promise<CreateAppReportFilterHttpResponse>;
+declare function createAppReportFilter(appId: string, body: FilterRequest, options?: ApiCallOptions): Promise<CreateAppReportFilterHttpResponse>;
 type CreateAppReportFilterHttpResponse = {
     data: Filter;
     headers: Headers;
@@ -1964,10 +1964,10 @@ type CreateAppReportFilterHttpError = {
  * @param query an object with query parameters
  * @throws CountAppReportFiltersHttpError
  */
-declare const countAppReportFilters: (appId: string, query: {
+declare function countAppReportFilters(appId: string, query: {
     /** The filter type (REP, SUB). REP stands for report bookmark, SUB for subscription bookmark. */
     filterTypes: ("REP" | "SUB")[];
-}, options?: ApiCallOptions) => Promise<CountAppReportFiltersHttpResponse>;
+}, options?: ApiCallOptions): Promise<CountAppReportFiltersHttpResponse>;
 type CountAppReportFiltersHttpResponse = {
     data: FiltersCount;
     headers: Headers;
@@ -1985,7 +1985,7 @@ type CountAppReportFiltersHttpError = {
  * @param id The filter id identifier (bookmarkId).
  * @throws DeleteAppReportFilterHttpError
  */
-declare const deleteAppReportFilter: (appId: string, id: string, options?: ApiCallOptions) => Promise<DeleteAppReportFilterHttpResponse>;
+declare function deleteAppReportFilter(appId: string, id: string, options?: ApiCallOptions): Promise<DeleteAppReportFilterHttpResponse>;
 type DeleteAppReportFilterHttpResponse = {
     data: void;
     headers: Headers;
@@ -2003,7 +2003,7 @@ type DeleteAppReportFilterHttpError = {
  * @param id The filter id identifier (bookmarkId).
  * @throws GetAppReportFilterHttpError
  */
-declare const getAppReportFilter: (appId: string, id: string, options?: ApiCallOptions) => Promise<GetAppReportFilterHttpResponse>;
+declare function getAppReportFilter(appId: string, id: string, options?: ApiCallOptions): Promise<GetAppReportFilterHttpResponse>;
 type GetAppReportFilterHttpResponse = {
     data: Filter;
     headers: Headers;
@@ -2022,7 +2022,7 @@ type GetAppReportFilterHttpError = {
  * @param body an object with the body content
  * @throws PatchAppReportFilterHttpError
  */
-declare const patchAppReportFilter: (appId: string, id: string, body: PatchFilter, options?: ApiCallOptions) => Promise<PatchAppReportFilterHttpResponse>;
+declare function patchAppReportFilter(appId: string, id: string, body: PatchFilter, options?: ApiCallOptions): Promise<PatchAppReportFilterHttpResponse>;
 type PatchAppReportFilterHttpResponse = {
     data: void;
     headers: Headers;
@@ -2041,7 +2041,7 @@ type PatchAppReportFilterHttpError = {
  * @param query an object with query parameters
  * @throws GetAppScriptHistoryHttpError
  */
-declare const getAppScriptHistory: (appId: string, query: {
+declare function getAppScriptHistory(appId: string, query: {
     /** A scim filter expression defining which script versions should be retrieved. Filterable fields are:
      * * ScriptId
      * * ModifiedTime
@@ -2051,7 +2051,7 @@ declare const getAppScriptHistory: (appId: string, query: {
     limit?: string;
     /** Opaque definition of which page of the result set to return. Returned from a previous call using the same filter. Not yet supported. */
     page?: string;
-}, options?: ApiCallOptions) => Promise<GetAppScriptHistoryHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAppScriptHistoryHttpResponse>;
 type GetAppScriptHistoryHttpResponse = {
     data: ScriptMetaList;
     headers: Headers;
@@ -2071,7 +2071,7 @@ type GetAppScriptHistoryHttpError = {
  * @param body an object with the body content
  * @throws UpdateAppScriptHttpError
  */
-declare const updateAppScript: (appId: string, body: ScriptVersion, options?: ApiCallOptions) => Promise<UpdateAppScriptHttpResponse>;
+declare function updateAppScript(appId: string, body: ScriptVersion, options?: ApiCallOptions): Promise<UpdateAppScriptHttpResponse>;
 type UpdateAppScriptHttpResponse = {
     data: void;
     headers: Headers;
@@ -2090,7 +2090,7 @@ type UpdateAppScriptHttpError = {
  * @param id Identifier of the script version
  * @throws DeleteAppScriptHttpError
  */
-declare const deleteAppScript: (appId: string, id: string, options?: ApiCallOptions) => Promise<DeleteAppScriptHttpResponse>;
+declare function deleteAppScript(appId: string, id: string, options?: ApiCallOptions): Promise<DeleteAppScriptHttpResponse>;
 type DeleteAppScriptHttpResponse = {
     data: void;
     headers: Headers;
@@ -2109,7 +2109,7 @@ type DeleteAppScriptHttpError = {
  * @param id Identifier of the script version, or 'current' for retrieving the current version.
  * @throws GetAppScriptHttpError
  */
-declare const getAppScript: (appId: string, id: string, options?: ApiCallOptions) => Promise<GetAppScriptHttpResponse>;
+declare function getAppScript(appId: string, id: string, options?: ApiCallOptions): Promise<GetAppScriptHttpResponse>;
 type GetAppScriptHttpResponse = {
     data: ScriptVersion;
     headers: Headers;
@@ -2128,7 +2128,7 @@ type GetAppScriptHttpError = {
  * @param body an object with the body content
  * @throws PatchAppScriptHttpError
  */
-declare const patchAppScript: (appId: string, id: string, body: NxPatch[], options?: ApiCallOptions) => Promise<PatchAppScriptHttpResponse>;
+declare function patchAppScript(appId: string, id: string, body: NxPatch[], options?: ApiCallOptions): Promise<PatchAppScriptHttpResponse>;
 type PatchAppScriptHttpResponse = {
     data: void;
     headers: Headers;
@@ -2145,7 +2145,7 @@ type PatchAppScriptHttpError = {
  * @param appId Identifier of the app.
  * @throws RemoveAppFromSpaceHttpError
  */
-declare const removeAppFromSpace: (appId: string, options?: ApiCallOptions) => Promise<RemoveAppFromSpaceHttpResponse>;
+declare function removeAppFromSpace(appId: string, options?: ApiCallOptions): Promise<RemoveAppFromSpaceHttpResponse>;
 type RemoveAppFromSpaceHttpResponse = {
     data: NxApp;
     headers: Headers;
@@ -2163,7 +2163,7 @@ type RemoveAppFromSpaceHttpError = {
  * @param body an object with the body content
  * @throws MoveAppToSpaceHttpError
  */
-declare const moveAppToSpace: (appId: string, body: UpdateSpace, options?: ApiCallOptions) => Promise<MoveAppToSpaceHttpResponse>;
+declare function moveAppToSpace(appId: string, body: UpdateSpace, options?: ApiCallOptions): Promise<MoveAppToSpaceHttpResponse>;
 type MoveAppToSpaceHttpResponse = {
     data: NxApp;
     headers: Headers;
@@ -2182,7 +2182,7 @@ type MoveAppToSpaceHttpError = {
  * @param query an object with query parameters
  * @throws GetAppEvaluationsHttpError
  */
-declare const getAppEvaluations: (guid: string, query: {
+declare function getAppEvaluations(guid: string, query: {
     /** Get the full data of the evaluation */
     all?: boolean;
     /** Add file transfer headers to response */
@@ -2197,7 +2197,7 @@ declare const getAppEvaluations: (guid: string, query: {
     prev?: string;
     /** Property to sort list on */
     sort?: string;
-}, options?: ApiCallOptions) => Promise<GetAppEvaluationsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAppEvaluationsHttpResponse>;
 type GetAppEvaluationsHttpResponse = {
     data: Evaluations;
     headers: Headers;
@@ -2220,7 +2220,7 @@ type GetAppEvaluationsHttpError = {
  * @param guid Guid of the app.
  * @throws QueueAppEvaluationHttpError
  */
-declare const queueAppEvaluation: (guid: string, options?: ApiCallOptions) => Promise<QueueAppEvaluationHttpResponse>;
+declare function queueAppEvaluation(guid: string, options?: ApiCallOptions): Promise<QueueAppEvaluationHttpResponse>;
 type QueueAppEvaluationHttpResponse = {
     data: Evaluation;
     headers: Headers;

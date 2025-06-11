@@ -1,91 +1,115 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/data-files.ts
-var getDataFiles = async (query, options) => invokeFetch("data-files", {
-  method: "get",
-  pathTemplate: "/api/v1/data-files",
-  query,
-  options
-});
-var uploadDataFile = async (body, options) => invokeFetch("data-files", {
-  method: "post",
-  pathTemplate: "/api/v1/data-files",
-  body,
-  contentType: "multipart/form-data",
-  options
-});
-var moveDataFiles = async (body, options) => invokeFetch("data-files", {
-  method: "post",
-  pathTemplate: "/api/v1/data-files/actions/change-space",
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteDataFiles = async (body, options) => invokeFetch("data-files", {
-  method: "post",
-  pathTemplate: "/api/v1/data-files/actions/delete",
-  body,
-  contentType: "application/json",
-  options
-});
-var getDataFilesConnections = async (query, options) => invokeFetch("data-files", {
-  method: "get",
-  pathTemplate: "/api/v1/data-files/connections",
-  query,
-  options
-});
-var getDataFileConnection = async (id, options) => invokeFetch("data-files", {
-  method: "get",
-  pathTemplate: "/api/v1/data-files/connections/{id}",
-  pathVariables: { id },
-  options
-});
-var getDataFilesQuotas = async (options) => invokeFetch("data-files", {
-  method: "get",
-  pathTemplate: "/api/v1/data-files/quotas",
-  options
-});
-var deleteDataFile = async (id, options) => invokeFetch("data-files", {
-  method: "delete",
-  pathTemplate: "/api/v1/data-files/{id}",
-  pathVariables: { id },
-  options
-});
-var getDataFile = async (id, options) => invokeFetch("data-files", {
-  method: "get",
-  pathTemplate: "/api/v1/data-files/{id}",
-  pathVariables: { id },
-  options
-});
-var reuploadDataFile = async (id, body, options) => invokeFetch("data-files", {
-  method: "put",
-  pathTemplate: "/api/v1/data-files/{id}",
-  pathVariables: { id },
-  body,
-  contentType: "multipart/form-data",
-  options
-});
-var changeDataFileOwner = async (id, body, options) => invokeFetch("data-files", {
-  method: "post",
-  pathTemplate: "/api/v1/data-files/{id}/actions/change-owner",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
-var moveDataFile = async (id, body, options) => invokeFetch("data-files", {
-  method: "post",
-  pathTemplate: "/api/v1/data-files/{id}/actions/change-space",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
+async function getDataFiles(query, options) {
+  return invokeFetch("data-files", {
+    method: "get",
+    pathTemplate: "/api/v1/data-files",
+    query,
+    options
+  });
+}
+async function uploadDataFile(body, options) {
+  return invokeFetch("data-files", {
+    method: "post",
+    pathTemplate: "/api/v1/data-files",
+    body,
+    contentType: "multipart/form-data",
+    options
+  });
+}
+async function moveDataFiles(body, options) {
+  return invokeFetch("data-files", {
+    method: "post",
+    pathTemplate: "/api/v1/data-files/actions/change-space",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteDataFiles(body, options) {
+  return invokeFetch("data-files", {
+    method: "post",
+    pathTemplate: "/api/v1/data-files/actions/delete",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getDataFilesConnections(query, options) {
+  return invokeFetch("data-files", {
+    method: "get",
+    pathTemplate: "/api/v1/data-files/connections",
+    query,
+    options
+  });
+}
+async function getDataFileConnection(id, options) {
+  return invokeFetch("data-files", {
+    method: "get",
+    pathTemplate: "/api/v1/data-files/connections/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function getDataFilesQuotas(options) {
+  return invokeFetch("data-files", {
+    method: "get",
+    pathTemplate: "/api/v1/data-files/quotas",
+    options
+  });
+}
+async function deleteDataFile(id, options) {
+  return invokeFetch("data-files", {
+    method: "delete",
+    pathTemplate: "/api/v1/data-files/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function getDataFile(id, options) {
+  return invokeFetch("data-files", {
+    method: "get",
+    pathTemplate: "/api/v1/data-files/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function reuploadDataFile(id, body, options) {
+  return invokeFetch("data-files", {
+    method: "put",
+    pathTemplate: "/api/v1/data-files/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "multipart/form-data",
+    options
+  });
+}
+async function changeDataFileOwner(id, body, options) {
+  return invokeFetch("data-files", {
+    method: "post",
+    pathTemplate: "/api/v1/data-files/{id}/actions/change-owner",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function moveDataFile(id, body, options) {
+  return invokeFetch("data-files", {
+    method: "post",
+    pathTemplate: "/api/v1/data-files/{id}/actions/change-space",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("data-files");
 }

@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * The data integration data asset where the node belongs to
@@ -179,7 +179,7 @@ type Qris = string[];
  * @param query an object with query parameters
  * @throws ExpandLineageGraphImpactHttpError
  */
-declare const expandLineageGraphImpact: (id: string, query: {
+declare function expandLineageGraphImpact(id: string, query: {
     /** The number of downstream resource levels nodes to retrieve. (5 if not provided, -1 means unlimited and 1 means direct lineage) */
     down?: number;
     /** The level to get the nodes on. */
@@ -189,7 +189,7 @@ declare const expandLineageGraphImpact: (id: string, query: {
      * If a TABLE level QRI is used with `level` parameter being `TABLE`, only the RESOURCE level of the node will be
      * taken into consideration. */
     node: string;
-}, options?: ApiCallOptions) => Promise<ExpandLineageGraphImpactHttpResponse>;
+}, options?: ApiCallOptions): Promise<ExpandLineageGraphImpactHttpResponse>;
 type ExpandLineageGraphImpactHttpResponse = {
     data: GraphResponse;
     headers: Headers;
@@ -241,13 +241,13 @@ type ExpandLineageGraphImpact503HttpError = {
  * @param query an object with query parameters
  * @throws SearchLineageGraphImpactHttpError
  */
-declare const searchLineageGraphImpact: (id: string, query: {
+declare function searchLineageGraphImpact(id: string, query: {
     /** The number of downstream resource levels nodes to search. (5 if not provided, -1 means unlimited) and 1 means direct lineage. */
     down?: number;
     /** The expression that matches the SCIM filter format. The filter has to be encoded.
      * The currently supported attribute is "label", attribute operator "co" (contains), and grouping operator "or". Example: 'label co "label1" or label co "label2"'. The search queries are case insensetive. */
     filter: string;
-}, options?: ApiCallOptions) => Promise<SearchLineageGraphImpactHttpResponse>;
+}, options?: ApiCallOptions): Promise<SearchLineageGraphImpactHttpResponse>;
 type SearchLineageGraphImpactHttpResponse = {
     data: GraphsResponse;
     headers: Headers;
@@ -293,10 +293,10 @@ type SearchLineageGraphImpact503HttpError = {
  * @param query an object with query parameters
  * @throws GetLineageGraphImpactOverviewHttpError
  */
-declare const getLineageGraphImpactOverview: (id: string, query: {
+declare function getLineageGraphImpactOverview(id: string, query: {
     /** The number of downstream resource levels nodes to retrieve. (5 if not provided, -1 means unlimited and 1 means direct lineage) */
     down?: number;
-}, options?: ApiCallOptions) => Promise<GetLineageGraphImpactOverviewHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetLineageGraphImpactOverviewHttpResponse>;
 type GetLineageGraphImpactOverviewHttpResponse = {
     data: GraphResponse;
     headers: Headers;
@@ -343,7 +343,7 @@ type GetLineageGraphImpactOverview503HttpError = {
  * @param id The id (QRI) for root node.
  * @throws GetLineageGraphImpactSourceHttpError
  */
-declare const getLineageGraphImpactSource: (id: string, options?: ApiCallOptions) => Promise<GetLineageGraphImpactSourceHttpResponse>;
+declare function getLineageGraphImpactSource(id: string, options?: ApiCallOptions): Promise<GetLineageGraphImpactSourceHttpResponse>;
 type GetLineageGraphImpactSourceHttpResponse = {
     data: GraphsResponse;
     headers: Headers;
@@ -388,14 +388,14 @@ type GetLineageGraphImpactSource503HttpError = {
  * @param query an object with query parameters
  * @throws GetLineageGraphNodeHttpError
  */
-declare const getLineageGraphNode: (id: string, query: {
+declare function getLineageGraphNode(id: string, query: {
     /** To collapse internal nodes, set to true, false otherwise. */
     collapse?: boolean;
     /** The graph level to retrieve. */
     level?: "field" | "table" | "resource" | "all";
     /** The number of upstream levels of nodes to retrieve. (5 if not provided, -1 means unlimited) */
     up?: number;
-}, options?: ApiCallOptions) => Promise<GetLineageGraphNodeHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetLineageGraphNodeHttpResponse>;
 type GetLineageGraphNodeHttpResponse = {
     data: GraphLevelsResponse;
     headers: Headers;
@@ -441,7 +441,7 @@ type GetLineageGraphNode503HttpError = {
  * @param query an object with query parameters
  * @throws ExpandLineageGraphNodeHttpError
  */
-declare const expandLineageGraphNode: (id: string, query: {
+declare function expandLineageGraphNode(id: string, query: {
     /** To collapse internal nodes, set to true, false otherwise. */
     collapse?: boolean;
     /** The level to expand to. */
@@ -450,7 +450,7 @@ declare const expandLineageGraphNode: (id: string, query: {
     node: string;
     /** The number of upstream levels of nodes retrieved to expand. (5 if not provided, -1 means unlimited) */
     up?: number;
-}, options?: ApiCallOptions) => Promise<ExpandLineageGraphNodeHttpResponse>;
+}, options?: ApiCallOptions): Promise<ExpandLineageGraphNodeHttpResponse>;
 type ExpandLineageGraphNodeHttpResponse = {
     data: GraphResponse;
     headers: Headers;
@@ -502,7 +502,7 @@ type ExpandLineageGraphNode503HttpError = {
  * @param query an object with query parameters
  * @throws SearchLineageGraphNodeHttpError
  */
-declare const searchLineageGraphNode: (id: string, query: {
+declare function searchLineageGraphNode(id: string, query: {
     /** To collapse internal nodes, set to true, false otherwise. */
     collapse?: boolean;
     /** The expression that matches the SCIM filter format. The filter has to be encoded.
@@ -510,7 +510,7 @@ declare const searchLineageGraphNode: (id: string, query: {
     filter: string;
     /** The number of upstream levels of nodes retrieved to search. (5 if not provided, -1 means unlimited) */
     up?: number;
-}, options?: ApiCallOptions) => Promise<SearchLineageGraphNodeHttpResponse>;
+}, options?: ApiCallOptions): Promise<SearchLineageGraphNodeHttpResponse>;
 type SearchLineageGraphNodeHttpResponse = {
     data: GraphsResponse;
     headers: Headers;
@@ -556,12 +556,12 @@ type SearchLineageGraphNode503HttpError = {
  * @param body an object with the body content
  * @throws CreateLineageGraphNodeOverviewHttpError
  */
-declare const createLineageGraphNodeOverview: (id: string, query: {
+declare function createLineageGraphNodeOverview(id: string, query: {
     /** To collapse internal nodes, set to true, false otherwise. */
     collapse?: boolean;
     /** The number of upstream levels of nodes retrieved to get overview from. (5 if not provided, -1 means unlimited) */
     up?: number;
-}, body: Qris, options?: ApiCallOptions) => Promise<CreateLineageGraphNodeOverviewHttpResponse>;
+}, body: Qris, options?: ApiCallOptions): Promise<CreateLineageGraphNodeOverviewHttpResponse>;
 type CreateLineageGraphNodeOverviewHttpResponse = CreateLineageGraphNodeOverview200HttpResponse | CreateLineageGraphNodeOverview201HttpResponse | CreateLineageGraphNodeOverview207HttpResponse;
 type CreateLineageGraphNodeOverview200HttpResponse = {
     data: OverviewItems;

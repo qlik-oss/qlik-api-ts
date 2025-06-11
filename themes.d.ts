@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * An error object.
@@ -75,7 +75,7 @@ type Themes = {
  *
  * @throws GetThemesHttpError
  */
-declare const getThemes: (options?: ApiCallOptions) => Promise<GetThemesHttpResponse>;
+declare function getThemes(options?: ApiCallOptions): Promise<GetThemesHttpResponse>;
 type GetThemesHttpResponse = {
     data: Themes;
     headers: Headers;
@@ -92,12 +92,12 @@ type GetThemesHttpError = {
  * @param body an object with the body content
  * @throws UploadThemeHttpError
  */
-declare const uploadTheme: (body: {
+declare function uploadTheme(body: {
     /** The theme model. */
     data?: Theme;
     /** Theme archive. */
     file?: BodyInit;
-}, options?: ApiCallOptions) => Promise<UploadThemeHttpResponse>;
+}, options?: ApiCallOptions): Promise<UploadThemeHttpResponse>;
 type UploadThemeHttpResponse = {
     data: Theme;
     headers: Headers;
@@ -114,7 +114,7 @@ type UploadThemeHttpError = {
  * @param id Theme identifier or its qextFilename.
  * @throws DeleteThemeHttpError
  */
-declare const deleteTheme: (id: string, options?: ApiCallOptions) => Promise<DeleteThemeHttpResponse>;
+declare function deleteTheme(id: string, options?: ApiCallOptions): Promise<DeleteThemeHttpResponse>;
 type DeleteThemeHttpResponse = {
     data: void;
     headers: Headers;
@@ -131,7 +131,7 @@ type DeleteThemeHttpError = {
  * @param id Theme identifier or its qextFilename
  * @throws GetThemeHttpError
  */
-declare const getTheme: (id: string, options?: ApiCallOptions) => Promise<GetThemeHttpResponse>;
+declare function getTheme(id: string, options?: ApiCallOptions): Promise<GetThemeHttpResponse>;
 type GetThemeHttpResponse = {
     data: Theme;
     headers: Headers;
@@ -149,12 +149,12 @@ type GetThemeHttpError = {
  * @param body an object with the body content
  * @throws PatchThemeHttpError
  */
-declare const patchTheme: (id: string, body: {
+declare function patchTheme(id: string, body: {
     /** The theme model. */
     data?: Theme;
     /** Theme archive. */
     file?: BodyInit;
-}, options?: ApiCallOptions) => Promise<PatchThemeHttpResponse>;
+}, options?: ApiCallOptions): Promise<PatchThemeHttpResponse>;
 type PatchThemeHttpResponse = {
     data: Themes;
     headers: Headers;
@@ -171,7 +171,7 @@ type PatchThemeHttpError = {
  * @param id Theme identifier or its qextFilename
  * @throws DownloadThemeHttpError
  */
-declare const downloadTheme: (id: string, options?: ApiCallOptions) => Promise<DownloadThemeHttpResponse>;
+declare function downloadTheme(id: string, options?: ApiCallOptions): Promise<DownloadThemeHttpResponse>;
 type DownloadThemeHttpResponse = {
     data: void;
     headers: Headers;
@@ -189,7 +189,7 @@ type DownloadThemeHttpError = {
  * @param filepath Path to the file location within the specified theme archive. Folders separated with forward slashes.
  * @throws DownloadFileFromThemeHttpError
  */
-declare const downloadFileFromTheme: (id: string, filepath: string, options?: ApiCallOptions) => Promise<DownloadFileFromThemeHttpResponse>;
+declare function downloadFileFromTheme(id: string, filepath: string, options?: ApiCallOptions): Promise<DownloadFileFromThemeHttpResponse>;
 type DownloadFileFromThemeHttpResponse = {
     data: void;
     headers: Headers;

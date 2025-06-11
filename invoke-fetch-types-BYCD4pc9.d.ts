@@ -1,4 +1,4 @@
-import { H as HostConfig } from './auth-types-Btwi7CsB.js';
+import { H as HostConfig } from './auth-types-Cj5bM3Yk.js';
 
 /** The typical base return type of a fetch call */
 type InvokeFetchResponse = {

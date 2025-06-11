@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type Enforcement = {
     /** Resource action type to be blocked */
@@ -125,7 +125,7 @@ type StandardListResponseProps = {
  * @param query an object with query parameters
  * @throws GetConsumptionExecutionsHttpError
  */
-declare const getConsumptionExecutions: (query: {
+declare function getConsumptionExecutions(query: {
     actionToBlock?: string;
     /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax.
      *
@@ -144,7 +144,7 @@ declare const getConsumptionExecutions: (query: {
     /** Specifies which periods to include regardless of the period type, start and end specified */
     periodsToInclude?: ("current" | "previous")[];
     sort?: ("periodstart" | "-periodstart" | "+periodstart" | "periodend" | "-periodend" | "+periodend")[];
-}, options?: ApiCallOptions) => Promise<GetConsumptionExecutionsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetConsumptionExecutionsHttpResponse>;
 type GetConsumptionExecutionsHttpResponse = {
     data: ExecutionsByTenantList;
     headers: Headers;

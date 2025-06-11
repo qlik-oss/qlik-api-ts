@@ -1,6 +1,6 @@
 import {
   isBrowser
-} from "./2ZQ3ZX7F.js";
+} from "./7MMXU6EL.js";
 
 // src/interceptors/interceptors.ts
 var GLOBAL_INTERCEPTORS;

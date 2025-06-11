@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * Object containing meta data regarding the bundle the extension belongs to. If it does not belong to a bundle, this object is not defined.
@@ -100,7 +100,7 @@ type Meta = {
  *
  * @throws GetExtensionsHttpError
  */
-declare const getExtensions: (options?: ApiCallOptions) => Promise<GetExtensionsHttpResponse>;
+declare function getExtensions(options?: ApiCallOptions): Promise<GetExtensionsHttpResponse>;
 type GetExtensionsHttpResponse = {
     data: Extensions;
     headers: Headers;
@@ -117,12 +117,12 @@ type GetExtensionsHttpError = {
  * @param body an object with the body content
  * @throws UploadExtensionHttpError
  */
-declare const uploadExtension: (body: {
+declare function uploadExtension(body: {
     /** The extension model. */
     data?: Extension;
     /** Extension archive. */
     file?: BodyInit;
-}, options?: ApiCallOptions) => Promise<UploadExtensionHttpResponse>;
+}, options?: ApiCallOptions): Promise<UploadExtensionHttpResponse>;
 type UploadExtensionHttpResponse = {
     data: Extension;
     headers: Headers;
@@ -139,7 +139,7 @@ type UploadExtensionHttpError = {
  * @param id Extension identifier or its qextFilename.
  * @throws DeleteExtensionHttpError
  */
-declare const deleteExtension: (id: string, options?: ApiCallOptions) => Promise<DeleteExtensionHttpResponse>;
+declare function deleteExtension(id: string, options?: ApiCallOptions): Promise<DeleteExtensionHttpResponse>;
 type DeleteExtensionHttpResponse = {
     data: void;
     headers: Headers;
@@ -156,7 +156,7 @@ type DeleteExtensionHttpError = {
  * @param id Extension identifier or its qextFilename.
  * @throws GetExtensionHttpError
  */
-declare const getExtension: (id: string, options?: ApiCallOptions) => Promise<GetExtensionHttpResponse>;
+declare function getExtension(id: string, options?: ApiCallOptions): Promise<GetExtensionHttpResponse>;
 type GetExtensionHttpResponse = {
     data: Extension;
     headers: Headers;
@@ -174,12 +174,12 @@ type GetExtensionHttpError = {
  * @param body an object with the body content
  * @throws PatchExtensionHttpError
  */
-declare const patchExtension: (id: string, body: {
+declare function patchExtension(id: string, body: {
     /** The extension model. */
     data?: Extension;
     /** Extension archive. */
     file?: BodyInit;
-}, options?: ApiCallOptions) => Promise<PatchExtensionHttpResponse>;
+}, options?: ApiCallOptions): Promise<PatchExtensionHttpResponse>;
 type PatchExtensionHttpResponse = {
     data: Extension;
     headers: Headers;
@@ -196,7 +196,7 @@ type PatchExtensionHttpError = {
  * @param id Extension identifier or its qextFilename.
  * @throws DownloadExtensionHttpError
  */
-declare const downloadExtension: (id: string, options?: ApiCallOptions) => Promise<DownloadExtensionHttpResponse>;
+declare function downloadExtension(id: string, options?: ApiCallOptions): Promise<DownloadExtensionHttpResponse>;
 type DownloadExtensionHttpResponse = {
     data: void;
     headers: Headers;
@@ -214,7 +214,7 @@ type DownloadExtensionHttpError = {
  * @param filepath Path to the file location within the specified extension archive. Folders separated with forward slashes.
  * @throws DownloadFileFromExtensionHttpError
  */
-declare const downloadFileFromExtension: (id: string, filepath: string, options?: ApiCallOptions) => Promise<DownloadFileFromExtensionHttpResponse>;
+declare function downloadFileFromExtension(id: string, filepath: string, options?: ApiCallOptions): Promise<DownloadFileFromExtensionHttpResponse>;
 type DownloadFileFromExtensionHttpResponse = {
     data: void;
     headers: Headers;

@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * A specific error.
@@ -44,10 +44,10 @@ type Quota = {
  * @param query an object with query parameters
  * @throws GetQuotasHttpError
  */
-declare const getQuotas: (query: {
+declare function getQuotas(query: {
     /** The Boolean flag indicating whether quota usage shall be part of the response. The default value is false (only limits returned). */
     reportUsage?: boolean;
-}, options?: ApiCallOptions) => Promise<GetQuotasHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetQuotasHttpResponse>;
 type GetQuotasHttpResponse = {
     data: GetQuotasResult;
     headers: Headers;
@@ -65,10 +65,10 @@ type GetQuotasHttpError = {
  * @param query an object with query parameters
  * @throws GetQuotaHttpError
  */
-declare const getQuota: (id: string, query: {
+declare function getQuota(id: string, query: {
     /** The Boolean flag indicating whether quota usage shall be part of the response. The default value is false (usage not included). */
     reportUsage?: boolean;
-}, options?: ApiCallOptions) => Promise<GetQuotaHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetQuotaHttpResponse>;
 type GetQuotaHttpResponse = {
     data: GetQuotaByIdResult;
     headers: Headers;

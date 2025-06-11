@@ -1,312 +1,400 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/apps.ts
-var createApp = async (body, options) => invokeFetch("apps", {
-  method: "post",
-  pathTemplate: "/api/v1/apps",
-  body,
-  contentType: "application/json",
-  options
-});
-var getAppEvaluationComparison = async (baseid, comparisonid, query, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/evaluations/{baseid}/actions/compare/{comparisonid}",
-  pathVariables: { baseid, comparisonid },
-  query,
-  options
-});
-var getAppEvaluationComparisonXml = async (baseid, comparisonid, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/evaluations/{baseid}/actions/compare/{comparisonid}/actions/download",
-  pathVariables: { baseid, comparisonid },
-  options
-});
-var getAppEvaluation = async (id, query, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/evaluations/{id}",
-  pathVariables: { id },
-  query,
-  options
-});
-var getAppEvaluationXml = async (id, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/evaluations/{id}/actions/download",
-  pathVariables: { id },
-  options
-});
-var importApp = async (query, body, options) => invokeFetch("apps", {
-  method: "post",
-  pathTemplate: "/api/v1/apps/import",
-  query,
-  body,
-  contentType: "application/octet-stream",
-  options
-});
-var getAppsPrivileges = async (options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/privileges",
-  options
-});
-var deleteApp = async (appId, options) => invokeFetch("apps", {
-  method: "delete",
-  pathTemplate: "/api/v1/apps/{appId}",
-  pathVariables: { appId },
-  options
-});
-var getAppInfo = async (appId, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/{appId}",
-  pathVariables: { appId },
-  options
-});
-var updateAppInfo = async (appId, body, options) => invokeFetch("apps", {
-  method: "put",
-  pathTemplate: "/api/v1/apps/{appId}",
-  pathVariables: { appId },
-  body,
-  contentType: "application/json",
-  options
-});
-var copyApp = async (appId, body, options) => invokeFetch("apps", {
-  method: "post",
-  pathTemplate: "/api/v1/apps/{appId}/copy",
-  pathVariables: { appId },
-  body,
-  contentType: "application/json",
-  options
-});
-var getAppDataLineage = async (appId, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/{appId}/data/lineage",
-  pathVariables: { appId },
-  options
-});
-var getAppDataMetadata = async (appId, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/{appId}/data/metadata",
-  pathVariables: { appId },
-  options
-});
-var exportApp = async (appId, query, options) => invokeFetch("apps", {
-  method: "post",
-  pathTemplate: "/api/v1/apps/{appId}/export",
-  pathVariables: { appId },
-  query,
-  options
-});
-var getAppInsightAnalyses = async (appId, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/{appId}/insight-analyses",
-  pathVariables: { appId },
-  options
-});
-var getAppInsightAnalysisRecommendations = async (appId, body, options) => invokeFetch("apps", {
-  method: "post",
-  pathTemplate: "/api/v1/apps/{appId}/insight-analyses/actions/recommend",
-  pathVariables: { appId },
-  body,
-  contentType: "application/json",
-  options
-});
-var getAppInsightAnalysisModel = async (appId, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/{appId}/insight-analyses/model",
-  pathVariables: { appId },
-  options
-});
-var deleteAppMedia = async (appId, path, options) => invokeFetch("apps", {
-  method: "delete",
-  pathTemplate: "/api/v1/apps/{appId}/media/files/{path}",
-  pathVariables: { appId, path },
-  options
-});
-var getAppMedia = async (appId, path, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/{appId}/media/files/{path}",
-  pathVariables: { appId, path },
-  options
-});
-var uploadAppMedia = async (appId, path, body, options) => invokeFetch("apps", {
-  method: "put",
-  pathTemplate: "/api/v1/apps/{appId}/media/files/{path}",
-  pathVariables: { appId, path },
-  body,
-  contentType: "application/octet-stream",
-  options
-});
-var getAppMediaList = async (appId, path, query, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/{appId}/media/list/{path}",
-  pathVariables: { appId, path },
-  query,
-  options
-});
-var getAppThumbnail = async (appId, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/{appId}/media/thumbnail",
-  pathVariables: { appId },
-  options
-});
-var updateAppObjectOwner = async (appId, objectId, body, options) => invokeFetch("apps", {
-  method: "post",
-  pathTemplate: "/api/v1/apps/{appId}/objects/{objectId}/actions/change-owner",
-  pathVariables: { appId, objectId },
-  body,
-  contentType: "application/json",
-  options
-});
-var updateAppOwner = async (appId, body, options) => invokeFetch("apps", {
-  method: "put",
-  pathTemplate: "/api/v1/apps/{appId}/owner",
-  pathVariables: { appId },
-  body,
-  contentType: "application/json",
-  options
-});
-var publishApp = async (appId, body, options) => invokeFetch("apps", {
-  method: "post",
-  pathTemplate: "/api/v1/apps/{appId}/publish",
-  pathVariables: { appId },
-  body,
-  contentType: "application/json",
-  options
-});
-var republishApp = async (appId, body, options) => invokeFetch("apps", {
-  method: "put",
-  pathTemplate: "/api/v1/apps/{appId}/publish",
-  pathVariables: { appId },
-  body,
-  contentType: "application/json",
-  options
-});
-var getAppReloadLogs = async (appId, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/{appId}/reloads/logs",
-  pathVariables: { appId },
-  options
-});
-var getAppReloadLog = async (appId, reloadId, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/{appId}/reloads/logs/{reloadId}",
-  pathVariables: { appId, reloadId },
-  options
-});
-var getAppReloadMetadata = async (appId, reloadId, query, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/{appId}/reloads/metadata/{reloadId}",
-  pathVariables: { appId, reloadId },
-  query,
-  options
-});
-var getAppReportFilters = async (appId, query, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/{appId}/report-filters",
-  pathVariables: { appId },
-  query,
-  options
-});
-var createAppReportFilter = async (appId, body, options) => invokeFetch("apps", {
-  method: "post",
-  pathTemplate: "/api/v1/apps/{appId}/report-filters",
-  pathVariables: { appId },
-  body,
-  contentType: "application/json",
-  options
-});
-var countAppReportFilters = async (appId, query, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/{appId}/report-filters/actions/count",
-  pathVariables: { appId },
-  query,
-  options
-});
-var deleteAppReportFilter = async (appId, id, options) => invokeFetch("apps", {
-  method: "delete",
-  pathTemplate: "/api/v1/apps/{appId}/report-filters/{id}",
-  pathVariables: { appId, id },
-  options
-});
-var getAppReportFilter = async (appId, id, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/{appId}/report-filters/{id}",
-  pathVariables: { appId, id },
-  options
-});
-var patchAppReportFilter = async (appId, id, body, options) => invokeFetch("apps", {
-  method: "patch",
-  pathTemplate: "/api/v1/apps/{appId}/report-filters/{id}",
-  pathVariables: { appId, id },
-  body,
-  contentType: "application/json",
-  options
-});
-var getAppScriptHistory = async (appId, query, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/{appId}/scripts",
-  pathVariables: { appId },
-  query,
-  options
-});
-var updateAppScript = async (appId, body, options) => invokeFetch("apps", {
-  method: "post",
-  pathTemplate: "/api/v1/apps/{appId}/scripts",
-  pathVariables: { appId },
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteAppScript = async (appId, id, options) => invokeFetch("apps", {
-  method: "delete",
-  pathTemplate: "/api/v1/apps/{appId}/scripts/{id}",
-  pathVariables: { appId, id },
-  options
-});
-var getAppScript = async (appId, id, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/{appId}/scripts/{id}",
-  pathVariables: { appId, id },
-  options
-});
-var patchAppScript = async (appId, id, body, options) => invokeFetch("apps", {
-  method: "patch",
-  pathTemplate: "/api/v1/apps/{appId}/scripts/{id}",
-  pathVariables: { appId, id },
-  body,
-  contentType: "application/json",
-  options
-});
-var removeAppFromSpace = async (appId, options) => invokeFetch("apps", {
-  method: "delete",
-  pathTemplate: "/api/v1/apps/{appId}/space",
-  pathVariables: { appId },
-  options
-});
-var moveAppToSpace = async (appId, body, options) => invokeFetch("apps", {
-  method: "put",
-  pathTemplate: "/api/v1/apps/{appId}/space",
-  pathVariables: { appId },
-  body,
-  contentType: "application/json",
-  options
-});
-var getAppEvaluations = async (guid, query, options) => invokeFetch("apps", {
-  method: "get",
-  pathTemplate: "/api/v1/apps/{guid}/evaluations",
-  pathVariables: { guid },
-  query,
-  options
-});
-var queueAppEvaluation = async (guid, options) => invokeFetch("apps", {
-  method: "post",
-  pathTemplate: "/api/v1/apps/{guid}/evaluations",
-  pathVariables: { guid },
-  options
-});
+async function createApp(body, options) {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getAppEvaluationComparison(baseid, comparisonid, query, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/evaluations/{baseid}/actions/compare/{comparisonid}",
+    pathVariables: { baseid, comparisonid },
+    query,
+    options
+  });
+}
+async function getAppEvaluationComparisonXml(baseid, comparisonid, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/evaluations/{baseid}/actions/compare/{comparisonid}/actions/download",
+    pathVariables: { baseid, comparisonid },
+    options
+  });
+}
+async function getAppEvaluation(id, query, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/evaluations/{id}",
+    pathVariables: { id },
+    query,
+    options
+  });
+}
+async function getAppEvaluationXml(id, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/evaluations/{id}/actions/download",
+    pathVariables: { id },
+    options
+  });
+}
+async function importApp(query, body, options) {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps/import",
+    query,
+    body,
+    contentType: "application/octet-stream",
+    options
+  });
+}
+async function getAppsPrivileges(options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/privileges",
+    options
+  });
+}
+async function deleteApp(appId, options) {
+  return invokeFetch("apps", {
+    method: "delete",
+    pathTemplate: "/api/v1/apps/{appId}",
+    pathVariables: { appId },
+    options
+  });
+}
+async function getAppInfo(appId, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}",
+    pathVariables: { appId },
+    options
+  });
+}
+async function updateAppInfo(appId, body, options) {
+  return invokeFetch("apps", {
+    method: "put",
+    pathTemplate: "/api/v1/apps/{appId}",
+    pathVariables: { appId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function copyApp(appId, body, options) {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps/{appId}/copy",
+    pathVariables: { appId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getAppDataLineage(appId, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/data/lineage",
+    pathVariables: { appId },
+    options
+  });
+}
+async function getAppDataMetadata(appId, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/data/metadata",
+    pathVariables: { appId },
+    options
+  });
+}
+async function exportApp(appId, query, options) {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps/{appId}/export",
+    pathVariables: { appId },
+    query,
+    options
+  });
+}
+async function getAppInsightAnalyses(appId, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/insight-analyses",
+    pathVariables: { appId },
+    options
+  });
+}
+async function getAppInsightAnalysisRecommendations(appId, body, options) {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps/{appId}/insight-analyses/actions/recommend",
+    pathVariables: { appId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getAppInsightAnalysisModel(appId, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/insight-analyses/model",
+    pathVariables: { appId },
+    options
+  });
+}
+async function deleteAppMedia(appId, path, options) {
+  return invokeFetch("apps", {
+    method: "delete",
+    pathTemplate: "/api/v1/apps/{appId}/media/files/{path}",
+    pathVariables: { appId, path },
+    options
+  });
+}
+async function getAppMedia(appId, path, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/media/files/{path}",
+    pathVariables: { appId, path },
+    options
+  });
+}
+async function uploadAppMedia(appId, path, body, options) {
+  return invokeFetch("apps", {
+    method: "put",
+    pathTemplate: "/api/v1/apps/{appId}/media/files/{path}",
+    pathVariables: { appId, path },
+    body,
+    contentType: "application/octet-stream",
+    options
+  });
+}
+async function getAppMediaList(appId, path, query, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/media/list/{path}",
+    pathVariables: { appId, path },
+    query,
+    options
+  });
+}
+async function getAppThumbnail(appId, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/media/thumbnail",
+    pathVariables: { appId },
+    options
+  });
+}
+async function updateAppObjectOwner(appId, objectId, body, options) {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps/{appId}/objects/{objectId}/actions/change-owner",
+    pathVariables: { appId, objectId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function updateAppOwner(appId, body, options) {
+  return invokeFetch("apps", {
+    method: "put",
+    pathTemplate: "/api/v1/apps/{appId}/owner",
+    pathVariables: { appId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function publishApp(appId, body, options) {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps/{appId}/publish",
+    pathVariables: { appId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function republishApp(appId, body, options) {
+  return invokeFetch("apps", {
+    method: "put",
+    pathTemplate: "/api/v1/apps/{appId}/publish",
+    pathVariables: { appId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getAppReloadLogs(appId, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/reloads/logs",
+    pathVariables: { appId },
+    options
+  });
+}
+async function getAppReloadLog(appId, reloadId, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/reloads/logs/{reloadId}",
+    pathVariables: { appId, reloadId },
+    options
+  });
+}
+async function getAppReloadMetadata(appId, reloadId, query, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/reloads/metadata/{reloadId}",
+    pathVariables: { appId, reloadId },
+    query,
+    options
+  });
+}
+async function getAppReportFilters(appId, query, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/report-filters",
+    pathVariables: { appId },
+    query,
+    options
+  });
+}
+async function createAppReportFilter(appId, body, options) {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps/{appId}/report-filters",
+    pathVariables: { appId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function countAppReportFilters(appId, query, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/report-filters/actions/count",
+    pathVariables: { appId },
+    query,
+    options
+  });
+}
+async function deleteAppReportFilter(appId, id, options) {
+  return invokeFetch("apps", {
+    method: "delete",
+    pathTemplate: "/api/v1/apps/{appId}/report-filters/{id}",
+    pathVariables: { appId, id },
+    options
+  });
+}
+async function getAppReportFilter(appId, id, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/report-filters/{id}",
+    pathVariables: { appId, id },
+    options
+  });
+}
+async function patchAppReportFilter(appId, id, body, options) {
+  return invokeFetch("apps", {
+    method: "patch",
+    pathTemplate: "/api/v1/apps/{appId}/report-filters/{id}",
+    pathVariables: { appId, id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getAppScriptHistory(appId, query, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/scripts",
+    pathVariables: { appId },
+    query,
+    options
+  });
+}
+async function updateAppScript(appId, body, options) {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps/{appId}/scripts",
+    pathVariables: { appId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteAppScript(appId, id, options) {
+  return invokeFetch("apps", {
+    method: "delete",
+    pathTemplate: "/api/v1/apps/{appId}/scripts/{id}",
+    pathVariables: { appId, id },
+    options
+  });
+}
+async function getAppScript(appId, id, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/scripts/{id}",
+    pathVariables: { appId, id },
+    options
+  });
+}
+async function patchAppScript(appId, id, body, options) {
+  return invokeFetch("apps", {
+    method: "patch",
+    pathTemplate: "/api/v1/apps/{appId}/scripts/{id}",
+    pathVariables: { appId, id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function removeAppFromSpace(appId, options) {
+  return invokeFetch("apps", {
+    method: "delete",
+    pathTemplate: "/api/v1/apps/{appId}/space",
+    pathVariables: { appId },
+    options
+  });
+}
+async function moveAppToSpace(appId, body, options) {
+  return invokeFetch("apps", {
+    method: "put",
+    pathTemplate: "/api/v1/apps/{appId}/space",
+    pathVariables: { appId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getAppEvaluations(guid, query, options) {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{guid}/evaluations",
+    pathVariables: { guid },
+    query,
+    options
+  });
+}
+async function queueAppEvaluation(guid, options) {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps/{guid}/evaluations",
+    pathVariables: { guid },
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("apps");
 }

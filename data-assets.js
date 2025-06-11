@@ -1,48 +1,58 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/data-assets.ts
-var deleteDataAssets = async (body, options) => invokeFetch("data-assets", {
-  method: "delete",
-  pathTemplate: "/api/v1/data-assets",
-  body,
-  contentType: "application/json",
-  options
-});
-var createDataAsset = async (body, options) => invokeFetch("data-assets", {
-  method: "post",
-  pathTemplate: "/api/v1/data-assets",
-  body,
-  contentType: "application/json",
-  options
-});
-var getDataAsset = async (dataAssetId, query, options) => invokeFetch("data-assets", {
-  method: "get",
-  pathTemplate: "/api/v1/data-assets/{data-asset-id}",
-  pathVariables: { "data-asset-id": dataAssetId },
-  query,
-  options
-});
-var patchDataAsset = async (dataAssetId, body, options) => invokeFetch("data-assets", {
-  method: "patch",
-  pathTemplate: "/api/v1/data-assets/{data-asset-id}",
-  pathVariables: { "data-asset-id": dataAssetId },
-  body,
-  contentType: "application/json",
-  options
-});
-var updateDataAsset = async (dataAssetId, body, options) => invokeFetch("data-assets", {
-  method: "put",
-  pathTemplate: "/api/v1/data-assets/{data-asset-id}",
-  pathVariables: { "data-asset-id": dataAssetId },
-  body,
-  contentType: "application/json",
-  options
-});
+async function deleteDataAssets(body, options) {
+  return invokeFetch("data-assets", {
+    method: "delete",
+    pathTemplate: "/api/v1/data-assets",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function createDataAsset(body, options) {
+  return invokeFetch("data-assets", {
+    method: "post",
+    pathTemplate: "/api/v1/data-assets",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getDataAsset(dataAssetId, query, options) {
+  return invokeFetch("data-assets", {
+    method: "get",
+    pathTemplate: "/api/v1/data-assets/{data-asset-id}",
+    pathVariables: { "data-asset-id": dataAssetId },
+    query,
+    options
+  });
+}
+async function patchDataAsset(dataAssetId, body, options) {
+  return invokeFetch("data-assets", {
+    method: "patch",
+    pathTemplate: "/api/v1/data-assets/{data-asset-id}",
+    pathVariables: { "data-asset-id": dataAssetId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function updateDataAsset(dataAssetId, body, options) {
+  return invokeFetch("data-assets", {
+    method: "put",
+    pathTemplate: "/api/v1/data-assets/{data-asset-id}",
+    pathVariables: { "data-asset-id": dataAssetId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("data-assets");
 }

@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * An error object describing the error.
@@ -176,7 +176,7 @@ type TenantPatchSchema = {
  * @param body an object with the body content
  * @throws CreateTenantHttpError
  */
-declare const createTenant: (body: TenantCreationRequest, options?: ApiCallOptions) => Promise<CreateTenantHttpResponse>;
+declare function createTenant(body: TenantCreationRequest, options?: ApiCallOptions): Promise<CreateTenantHttpResponse>;
 type CreateTenantHttpResponse = {
     data: Tenant;
     headers: Headers;
@@ -192,7 +192,7 @@ type CreateTenantHttpError = {
  *
  * @throws GetMyTenantHttpError
  */
-declare const getMyTenant: (options?: ApiCallOptions) => Promise<GetMyTenantHttpResponse>;
+declare function getMyTenant(options?: ApiCallOptions): Promise<GetMyTenantHttpResponse>;
 type GetMyTenantHttpResponse = {
     data: Tenant;
     headers: Headers;
@@ -209,7 +209,7 @@ type GetMyTenantHttpError = {
  * @param tenantId The ID of the tenant to retrieve
  * @throws GetTenantHttpError
  */
-declare const getTenant: (tenantId: string, options?: ApiCallOptions) => Promise<GetTenantHttpResponse>;
+declare function getTenant(tenantId: string, options?: ApiCallOptions): Promise<GetTenantHttpResponse>;
 type GetTenantHttpResponse = {
     data: Tenant;
     headers: Headers;
@@ -227,7 +227,7 @@ type GetTenantHttpError = {
  * @param body an object with the body content
  * @throws PatchTenantHttpError
  */
-declare const patchTenant: (tenantId: string, body: TenantPatchSchema, options?: ApiCallOptions) => Promise<PatchTenantHttpResponse>;
+declare function patchTenant(tenantId: string, body: TenantPatchSchema, options?: ApiCallOptions): Promise<PatchTenantHttpResponse>;
 type PatchTenantHttpResponse = {
     data: void;
     headers: Headers;
@@ -266,7 +266,7 @@ type PatchTenantdefaultHttpError = {
  * @param body an object with the body content
  * @throws DeactivateTenantHttpError
  */
-declare const deactivateTenant: (tenantId: string, body: TenantDeactivateRequest, options?: ApiCallOptions) => Promise<DeactivateTenantHttpResponse>;
+declare function deactivateTenant(tenantId: string, body: TenantDeactivateRequest, options?: ApiCallOptions): Promise<DeactivateTenantHttpResponse>;
 type DeactivateTenantHttpResponse = {
     data: TenantDeactivateResponse;
     headers: Headers;
@@ -284,7 +284,7 @@ type DeactivateTenantHttpError = {
  * @param body an object with the body content
  * @throws ReactivateTenantHttpError
  */
-declare const reactivateTenant: (tenantId: string, body: unknown, options?: ApiCallOptions) => Promise<ReactivateTenantHttpResponse>;
+declare function reactivateTenant(tenantId: string, body: unknown, options?: ApiCallOptions): Promise<ReactivateTenantHttpResponse>;
 type ReactivateTenantHttpResponse = {
     data: unknown;
     headers: Headers;

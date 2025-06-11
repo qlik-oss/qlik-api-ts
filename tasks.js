@@ -1,78 +1,98 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/tasks.ts
-var getTasks = async (query, options) => invokeFetch("tasks", {
-  method: "get",
-  pathTemplate: "/api/v1/tasks",
-  query,
-  options
-});
-var createTask = async (query, body, options) => invokeFetch("tasks", {
-  method: "post",
-  pathTemplate: "/api/v1/tasks",
-  query,
-  body,
-  contentType: "application/json",
-  options
-});
-var getTasksResourceRuns = async (id, query, options) => invokeFetch("tasks", {
-  method: "get",
-  pathTemplate: "/api/v1/tasks/resources/{id}/runs",
-  pathVariables: { id },
-  query,
-  options
-});
-var deleteTask = async (id, options) => invokeFetch("tasks", {
-  method: "delete",
-  pathTemplate: "/api/v1/tasks/{id}",
-  pathVariables: { id },
-  options
-});
-var getTask = async (id, options) => invokeFetch("tasks", {
-  method: "get",
-  pathTemplate: "/api/v1/tasks/{id}",
-  pathVariables: { id },
-  options
-});
-var updateTask = async (id, body, options) => invokeFetch("tasks", {
-  method: "put",
-  pathTemplate: "/api/v1/tasks/{id}",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
-var startTask = async (id, query, options) => invokeFetch("tasks", {
-  method: "post",
-  pathTemplate: "/api/v1/tasks/{id}/actions/start",
-  pathVariables: { id },
-  query,
-  options
-});
-var getTaskRuns = async (id, query, options) => invokeFetch("tasks", {
-  method: "get",
-  pathTemplate: "/api/v1/tasks/{id}/runs",
-  pathVariables: { id },
-  query,
-  options
-});
-var getLastTaskRun = async (id, options) => invokeFetch("tasks", {
-  method: "get",
-  pathTemplate: "/api/v1/tasks/{id}/runs/last",
-  pathVariables: { id },
-  options
-});
-var getTaskRunLog = async (id, runId, options) => invokeFetch("tasks", {
-  method: "get",
-  pathTemplate: "/api/v1/tasks/{id}/runs/{runId}/log",
-  pathVariables: { id, runId },
-  options
-});
+async function getTasks(query, options) {
+  return invokeFetch("tasks", {
+    method: "get",
+    pathTemplate: "/api/v1/tasks",
+    query,
+    options
+  });
+}
+async function createTask(query, body, options) {
+  return invokeFetch("tasks", {
+    method: "post",
+    pathTemplate: "/api/v1/tasks",
+    query,
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getTasksResourceRuns(id, query, options) {
+  return invokeFetch("tasks", {
+    method: "get",
+    pathTemplate: "/api/v1/tasks/resources/{id}/runs",
+    pathVariables: { id },
+    query,
+    options
+  });
+}
+async function deleteTask(id, options) {
+  return invokeFetch("tasks", {
+    method: "delete",
+    pathTemplate: "/api/v1/tasks/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function getTask(id, options) {
+  return invokeFetch("tasks", {
+    method: "get",
+    pathTemplate: "/api/v1/tasks/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function updateTask(id, body, options) {
+  return invokeFetch("tasks", {
+    method: "put",
+    pathTemplate: "/api/v1/tasks/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function startTask(id, query, options) {
+  return invokeFetch("tasks", {
+    method: "post",
+    pathTemplate: "/api/v1/tasks/{id}/actions/start",
+    pathVariables: { id },
+    query,
+    options
+  });
+}
+async function getTaskRuns(id, query, options) {
+  return invokeFetch("tasks", {
+    method: "get",
+    pathTemplate: "/api/v1/tasks/{id}/runs",
+    pathVariables: { id },
+    query,
+    options
+  });
+}
+async function getLastTaskRun(id, options) {
+  return invokeFetch("tasks", {
+    method: "get",
+    pathTemplate: "/api/v1/tasks/{id}/runs/last",
+    pathVariables: { id },
+    options
+  });
+}
+async function getTaskRunLog(id, runId, options) {
+  return invokeFetch("tasks", {
+    method: "get",
+    pathTemplate: "/api/v1/tasks/{id}/runs/{runId}/log",
+    pathVariables: { id, runId },
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("tasks");
 }

@@ -58,8 +58,20 @@ type AuthenticationErrorAction = {
      */
     preventDefault?: boolean;
 };
+/** A typed string array with extracted required properties from a type */
+type RequiredKeys<T> = {
+    [K in keyof T]-?: {} extends Pick<T, K> ? never : K;
+}[keyof T];
+/** A typed string array with extracted optional properties from a type */
+type OptionalKeys<T> = {
+    [K in keyof T]-?: {} extends Pick<T, K> ? K : never;
+}[keyof T];
 /** An authentication module for a specific authentication format, like oauth, cookies etc */
 type AuthModule<A extends AuthType = AuthType> = {
+    /** Properties required for this auth module */
+    requiredProps?: RequiredKeys<HostConfig<A>>[];
+    /** Properties that are optional for this auth module */
+    optionalProps?: OptionalKeys<HostConfig<A>>[];
     /** Get auth params for rest api calls */
     getRestCallAuthParams: (props: GetRestCallAuthParamsProps<A>) => Promise<RestCallAuthParams>;
     /** Get auth params for websocket api calls */
@@ -77,14 +89,6 @@ type AuthType = keyof QlikAuthModules;
 type HostConfig<A extends AuthType = AuthType> = {
     [K in keyof QlikAuthModules]: QlikAuthModuleConfigUnion<K> & HostConfigCommon;
 }[A];
-/** The keys in this interface are used to determine what auth types that are allowed to be set to undefined */
-interface ImplicitQlikAuthModules {
-    apikey: object;
-    oauth2: object;
-    cookie: object;
-    reference: object;
-    anonymous: object;
-}
 type QlikAuthModuleConfigUnion<K extends keyof QlikAuthModules> = (K extends keyof ImplicitQlikAuthModules ? {
     authType?: K;
 } : {
@@ -103,5 +107,21 @@ type HostConfigCommon = {
         message: string;
     }) => unknown;
 };
+/**
+ * These properties are always allowed in the host config, even if they are not defined in the HostConfig interface
+ * for the specific auth module.
+ */
+declare const hostConfigCommonProperties: (keyof HostConfig)[];
+/** The keys in this interface are used to determine what auth types that are allowed to be set to undefined */
+interface ImplicitQlikAuthModules {
+    apikey: object;
+    oauth2: object;
+    cookie: object;
+    windowscookie: object;
+    reference: object;
+    anonymous: object;
+}
+type AuthTypeThatCanBeOmitted = keyof ImplicitQlikAuthModules;
+declare const authTypesThatCanBeOmitted: AuthTypeThatCanBeOmitted[];
 
-export type { AuthType as A, Credentials as C, GetRestCallAuthParamsProps as G, HostConfig as H, RestCallAuthParams as R, WebResourceAuthParams as W, AuthModule as a, GetWebSocketAuthParamsProps as b, WebSocketAuthParams as c, GetWebResourceAuthParamsProps as d, GetRemoteAuthDataProps as e, HandleAuthenticationErrorProps as f, AuthenticationErrorAction as g };
+export { type AuthType as A, type Credentials as C, type GetRestCallAuthParamsProps as G, type HostConfig as H, type RestCallAuthParams as R, type WebResourceAuthParams as W, type AuthModule as a, type GetWebSocketAuthParamsProps as b, type WebSocketAuthParams as c, type GetWebResourceAuthParamsProps as d, type GetRemoteAuthDataProps as e, type HandleAuthenticationErrorProps as f, type AuthenticationErrorAction as g, type HostConfigCommon as h, hostConfigCommonProperties as i, type AuthTypeThatCanBeOmitted as j, authTypesThatCanBeOmitted as k };

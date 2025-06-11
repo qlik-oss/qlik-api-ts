@@ -1,44 +1,56 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/audits.ts
-var getAudits = async (query, options) => invokeFetch("audits", {
-  method: "get",
-  pathTemplate: "/api/v1/audits",
-  query,
-  options
-});
-var getArchivedAudits = async (query, options) => invokeFetch("audits", {
-  method: "get",
-  pathTemplate: "/api/v1/audits/archive",
-  query,
-  options
-});
-var getAuditsSettings = async (options) => invokeFetch("audits", {
-  method: "get",
-  pathTemplate: "/api/v1/audits/settings",
-  options
-});
-var getAuditSources = async (options) => invokeFetch("audits", {
-  method: "get",
-  pathTemplate: "/api/v1/audits/sources",
-  options
-});
-var getAuditTypes = async (options) => invokeFetch("audits", {
-  method: "get",
-  pathTemplate: "/api/v1/audits/types",
-  options
-});
-var getAudit = async (id, options) => invokeFetch("audits", {
-  method: "get",
-  pathTemplate: "/api/v1/audits/{id}",
-  pathVariables: { id },
-  options
-});
+async function getAudits(query, options) {
+  return invokeFetch("audits", {
+    method: "get",
+    pathTemplate: "/api/v1/audits",
+    query,
+    options
+  });
+}
+async function getArchivedAudits(query, options) {
+  return invokeFetch("audits", {
+    method: "get",
+    pathTemplate: "/api/v1/audits/archive",
+    query,
+    options
+  });
+}
+async function getAuditsSettings(options) {
+  return invokeFetch("audits", {
+    method: "get",
+    pathTemplate: "/api/v1/audits/settings",
+    options
+  });
+}
+async function getAuditSources(options) {
+  return invokeFetch("audits", {
+    method: "get",
+    pathTemplate: "/api/v1/audits/sources",
+    options
+  });
+}
+async function getAuditTypes(options) {
+  return invokeFetch("audits", {
+    method: "get",
+    pathTemplate: "/api/v1/audits/types",
+    options
+  });
+}
+async function getAudit(id, options) {
+  return invokeFetch("audits", {
+    method: "get",
+    pathTemplate: "/api/v1/audits/{id}",
+    pathVariables: { id },
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("audits");
 }

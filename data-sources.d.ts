@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type ApiSpecResponse = {
     /** List of properties required for the given datasource */
@@ -130,14 +130,14 @@ type UiInfo = {
  * @param query an object with query parameters
  * @throws GetDataSourcesHttpError
  */
-declare const getDataSources: (query: {
+declare function getDataSources(query: {
     /** Filtering on datasourceID, when multiple dataSourceId are set in query, last dataSourceId will be used */
     dataSourceId?: string;
     /** Determines if provider detail is returned */
     detail?: boolean;
     /** Determines if UI info is returned */
     includeui?: boolean;
-}, options?: ApiCallOptions) => Promise<GetDataSourcesHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDataSourcesHttpResponse>;
 type GetDataSourcesHttpResponse = {
     data: DataSourcesResponseNew;
     headers: Headers;
@@ -158,7 +158,7 @@ type GetDataSourcesHttpError = {
  * @param dataSourceId Datasource ID
  * @throws GetDataSourceApiSpecsHttpError
  */
-declare const getDataSourceApiSpecs: (dataSourceId: string, options?: ApiCallOptions) => Promise<GetDataSourceApiSpecsHttpResponse>;
+declare function getDataSourceApiSpecs(dataSourceId: string, options?: ApiCallOptions): Promise<GetDataSourceApiSpecsHttpResponse>;
 type GetDataSourceApiSpecsHttpResponse = {
     data: ApiSpecResponse;
     headers: Headers;
@@ -183,10 +183,10 @@ type GetDataSourceApiSpecsHttpError = {
  * @param query an object with query parameters
  * @throws GetDataSourceGatewaysHttpError
  */
-declare const getDataSourceGateways: (dataSourceId: string, query: {
+declare function getDataSourceGateways(dataSourceId: string, query: {
     /** Force to get a refreshed list from backend. Cached list will be returned if not set or set to false. */
     forceRefresh?: boolean;
-}, options?: ApiCallOptions) => Promise<GetDataSourceGatewaysHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDataSourceGatewaysHttpResponse>;
 type GetDataSourceGatewaysHttpResponse = {
     data: {
         /** List of gateway ID's for given datasource ID */

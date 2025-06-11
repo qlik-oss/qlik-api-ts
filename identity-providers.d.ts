@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type BaseIDP = {
     /** Indicates whether the IdP is available for use. */
@@ -500,7 +500,7 @@ type DecryptingKey = {
  * @param query an object with query parameters
  * @throws GetIdpsHttpError
  */
-declare const getIdps: (query: {
+declare function getIdps(query: {
     /** If provided, filters the results by the active field. */
     active?: boolean;
     /** The number of IdP entries to retrieve. */
@@ -509,7 +509,7 @@ declare const getIdps: (query: {
     next?: string;
     /** The previous page cursor. */
     prev?: string;
-}, options?: ApiCallOptions) => Promise<GetIdpsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetIdpsHttpResponse>;
 type GetIdpsHttpResponse = {
     data: IDPArray;
     headers: Headers;
@@ -528,7 +528,7 @@ type GetIdpsHttpError = {
  * @param body an object with the body content
  * @throws CreateIdpHttpError
  */
-declare const createIdp: (body: IDPPostSchema, options?: ApiCallOptions) => Promise<CreateIdpHttpResponse>;
+declare function createIdp(body: IDPPostSchema, options?: ApiCallOptions): Promise<CreateIdpHttpResponse>;
 type CreateIdpHttpResponse = {
     data: IDP;
     headers: Headers;
@@ -544,7 +544,7 @@ type CreateIdpHttpError = {
  *
  * @throws GetIdpWellKnownMetaDataHttpError
  */
-declare const getIdpWellKnownMetaData: (options?: ApiCallOptions) => Promise<GetIdpWellKnownMetaDataHttpResponse>;
+declare function getIdpWellKnownMetaData(options?: ApiCallOptions): Promise<GetIdpWellKnownMetaDataHttpResponse>;
 type GetIdpWellKnownMetaDataHttpResponse = {
     data: unknown;
     headers: Headers;
@@ -560,7 +560,7 @@ type GetIdpWellKnownMetaDataHttpError = {
  *
  * @throws GetMyIdpMetaHttpError
  */
-declare const getMyIdpMeta: (options?: ApiCallOptions) => Promise<GetMyIdpMetaHttpResponse>;
+declare function getMyIdpMeta(options?: ApiCallOptions): Promise<GetMyIdpMetaHttpResponse>;
 type GetMyIdpMetaHttpResponse = {
     data: IDPMeta;
     headers: Headers;
@@ -576,7 +576,7 @@ type GetMyIdpMetaHttpError = {
  *
  * @throws GetIdpStatusesHttpError
  */
-declare const getIdpStatuses: (options?: ApiCallOptions) => Promise<GetIdpStatusesHttpResponse>;
+declare function getIdpStatuses(options?: ApiCallOptions): Promise<GetIdpStatusesHttpResponse>;
 type GetIdpStatusesHttpResponse = {
     data: IDPsStatus;
     headers: Headers;
@@ -593,7 +593,7 @@ type GetIdpStatusesHttpError = {
  * @param id The identity provider ID.
  * @throws DeleteIdpHttpError
  */
-declare const deleteIdp: (id: string, options?: ApiCallOptions) => Promise<DeleteIdpHttpResponse>;
+declare function deleteIdp(id: string, options?: ApiCallOptions): Promise<DeleteIdpHttpResponse>;
 type DeleteIdpHttpResponse = {
     data: void;
     headers: Headers;
@@ -610,7 +610,7 @@ type DeleteIdpHttpError = {
  * @param id The identity provider ID.
  * @throws GetIdpHttpError
  */
-declare const getIdp: (id: string, options?: ApiCallOptions) => Promise<GetIdpHttpResponse>;
+declare function getIdp(id: string, options?: ApiCallOptions): Promise<GetIdpHttpResponse>;
 type GetIdpHttpResponse = {
     data: IDP;
     headers: Headers;
@@ -628,7 +628,7 @@ type GetIdpHttpError = {
  * @param body an object with the body content
  * @throws PatchIdpHttpError
  */
-declare const patchIdp: (id: string, body: IDPPatchSchema, options?: ApiCallOptions) => Promise<PatchIdpHttpResponse>;
+declare function patchIdp(id: string, body: IDPPatchSchema, options?: ApiCallOptions): Promise<PatchIdpHttpResponse>;
 type PatchIdpHttpResponse = {
     data: void;
     headers: Headers;

@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type ActionDeleteRequest = {
     connections: {
@@ -314,7 +314,7 @@ type TopLevelLink = {
  * @param query an object with query parameters
  * @throws GetDataConnectionsHttpError
  */
-declare const getDataConnections: (query: {
+declare function getDataConnections(query: {
     /** Sort results will be returned in case insensitive order if set to true (Only used along with sort query) */
     caseinsensitive?: boolean;
     /** Provides an alternate name to be used for data[] element in GET response. */
@@ -345,7 +345,7 @@ declare const getDataConnections: (query: {
     spaceId?: string;
     /** Filtering on userId. Requires admin role if specified userId doesn't match that is defined in JWT. */
     userId?: string;
-}, options?: ApiCallOptions) => Promise<GetDataConnectionsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDataConnectionsHttpResponse>;
 type GetDataConnectionsHttpResponse = {
     data: Connections;
     headers: Headers;
@@ -364,7 +364,7 @@ type GetDataConnectionsHttpError = {
  * @param body an object with the body content
  * @throws CreateDataConnectionHttpError
  */
-declare const createDataConnection: (body: ConnectionCreate | DcaasConnectionCreate, options?: ApiCallOptions) => Promise<CreateDataConnectionHttpResponse>;
+declare function createDataConnection(body: ConnectionCreate | DcaasConnectionCreate, options?: ApiCallOptions): Promise<CreateDataConnectionHttpResponse>;
 type CreateDataConnectionHttpResponse = {
     data: ConnectionCreateResponse | DcaasConnectionCreateAuthResponse;
     headers: Headers;
@@ -381,7 +381,7 @@ type CreateDataConnectionHttpError = {
  * @param body an object with the body content
  * @throws DeleteDataConnectionsHttpError
  */
-declare const deleteDataConnections: (body: ActionDeleteRequest, options?: ApiCallOptions) => Promise<DeleteDataConnectionsHttpResponse>;
+declare function deleteDataConnections(body: ActionDeleteRequest, options?: ApiCallOptions): Promise<DeleteDataConnectionsHttpResponse>;
 type DeleteDataConnectionsHttpResponse = {
     data: BulkResponse;
     headers: Headers;
@@ -398,7 +398,7 @@ type DeleteDataConnectionsHttpError = {
  * @param body an object with the body content
  * @throws DuplicateDataAConnectionHttpError
  */
-declare const duplicateDataAConnection: (body: ActionDuplicateRequest, options?: ApiCallOptions) => Promise<DuplicateDataAConnectionHttpResponse>;
+declare function duplicateDataAConnection(body: ActionDuplicateRequest, options?: ApiCallOptions): Promise<DuplicateDataAConnectionHttpResponse>;
 type DuplicateDataAConnectionHttpResponse = {
     data: ConnectionCreateResponse;
     headers: Headers;
@@ -415,7 +415,7 @@ type DuplicateDataAConnectionHttpError = {
  * @param body an object with the body content
  * @throws UpdateDataConnectionsHttpError
  */
-declare const updateDataConnections: (body: ActionUpdateRequest, options?: ApiCallOptions) => Promise<UpdateDataConnectionsHttpResponse>;
+declare function updateDataConnections(body: ActionUpdateRequest, options?: ApiCallOptions): Promise<UpdateDataConnectionsHttpResponse>;
 type UpdateDataConnectionsHttpResponse = {
     data: BulkResponse;
     headers: Headers;
@@ -441,12 +441,12 @@ type UpdateDataConnectionsHttpError = {
  * @param query an object with query parameters
  * @throws DeleteDataConnectionHttpError
  */
-declare const deleteDataConnection: (qID: string, query: {
+declare function deleteDataConnection(qID: string, query: {
     /** Filtering on connections by space ID */
     spaceId?: string;
     /** Connection / credential ID defined in path become connection / credential name when this query parameter is set */
     type?: "connectionname" | "credentialname";
-}, options?: ApiCallOptions) => Promise<DeleteDataConnectionHttpResponse>;
+}, options?: ApiCallOptions): Promise<DeleteDataConnectionHttpResponse>;
 type DeleteDataConnectionHttpResponse = {
     data: void;
     headers: Headers;
@@ -477,7 +477,7 @@ type DeleteDataConnectionHttpError = {
  * @param query an object with query parameters
  * @throws GetDataConnectionHttpError
  */
-declare const getDataConnection: (qID: string, query: {
+declare function getDataConnection(qID: string, query: {
     /** If set to true, credentialId in the query will be interpreted as credential's name */
     byCredentialName?: boolean;
     /** Credential ID */
@@ -492,7 +492,7 @@ declare const getDataConnection: (qID: string, query: {
     spaceId?: string;
     /** Connection / credential ID defined in path become connection / credential name when this query parameter is set */
     type?: "connectionname" | "credentialname";
-}, options?: ApiCallOptions) => Promise<GetDataConnectionHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetDataConnectionHttpResponse>;
 type GetDataConnectionHttpResponse = {
     data: ConnectionGet;
     headers: Headers;
@@ -511,10 +511,10 @@ type GetDataConnectionHttpError = {
  * @param body an object with the body content
  * @throws PatchDataConnectionHttpError
  */
-declare const patchDataConnection: (qID: string, query: {
+declare function patchDataConnection(qID: string, query: {
     /** Connection / credential ID defined in path become connection / credential name when this query parameter is set */
     type?: "connectionname" | "credentialname";
-}, body: PatchRequest, options?: ApiCallOptions) => Promise<PatchDataConnectionHttpResponse>;
+}, body: PatchRequest, options?: ApiCallOptions): Promise<PatchDataConnectionHttpResponse>;
 type PatchDataConnectionHttpResponse = {
     data: void;
     headers: Headers;
@@ -533,12 +533,12 @@ type PatchDataConnectionHttpError = {
  * @param body an object with the body content
  * @throws UpdateDataConnectionHttpError
  */
-declare const updateDataConnection: (qID: string, query: {
+declare function updateDataConnection(qID: string, query: {
     /** Filtering on connections by space ID */
     spaceId?: string;
     /** Connection / credential ID defined in path become connection / credential name when this query parameter is set */
     type?: "connectionname" | "credentialname";
-}, body: ConnectionUpdate, options?: ApiCallOptions) => Promise<UpdateDataConnectionHttpResponse>;
+}, body: ConnectionUpdate, options?: ApiCallOptions): Promise<UpdateDataConnectionHttpResponse>;
 type UpdateDataConnectionHttpResponse = {
     data: void;
     headers: Headers;

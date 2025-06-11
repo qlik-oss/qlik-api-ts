@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * An error object.
@@ -27,7 +27,7 @@ type Errors = {
  *
  * @throws GetCsrfTokenHttpError
  */
-declare const getCsrfToken: (options?: ApiCallOptions) => Promise<GetCsrfTokenHttpResponse>;
+declare function getCsrfToken(options?: ApiCallOptions): Promise<GetCsrfTokenHttpResponse>;
 type GetCsrfTokenHttpResponse = {
     data: void;
     headers: Headers;

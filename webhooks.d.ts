@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type Delivery = {
     /** The name of the triggering event-type */
@@ -145,7 +145,7 @@ type WebhookResponse = WebhookBase & {
  * @param query an object with query parameters
  * @throws GetWebhooksHttpError
  */
-declare const getWebhooks: (query: {
+declare function getWebhooks(query: {
     /** Filter resources by user that created it */
     createdByUserId?: string;
     /** Filter resources by enabled true/false */
@@ -172,7 +172,7 @@ declare const getWebhooks: (query: {
     updatedByUserId?: string;
     /** Filter resources by url (wildcard and case insensitive) */
     url?: string;
-}, options?: ApiCallOptions) => Promise<GetWebhooksHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetWebhooksHttpResponse>;
 type GetWebhooksHttpResponse = {
     data: WebhookList;
     headers: Headers;
@@ -191,7 +191,7 @@ type GetWebhooksHttpError = {
  * @param body an object with the body content
  * @throws CreateWebhookHttpError
  */
-declare const createWebhook: (body: WebhookPost, options?: ApiCallOptions) => Promise<CreateWebhookHttpResponse>;
+declare function createWebhook(body: WebhookPost, options?: ApiCallOptions): Promise<CreateWebhookHttpResponse>;
 type CreateWebhookHttpResponse = {
     data: WebhookResponse;
     headers: Headers;
@@ -207,7 +207,7 @@ type CreateWebhookHttpError = {
  *
  * @throws GetWebhookEventTypesHttpError
  */
-declare const getWebhookEventTypes: (options?: ApiCallOptions) => Promise<GetWebhookEventTypesHttpResponse>;
+declare function getWebhookEventTypes(options?: ApiCallOptions): Promise<GetWebhookEventTypesHttpResponse>;
 type GetWebhookEventTypesHttpResponse = {
     data: EventTypes;
     headers: Headers;
@@ -224,7 +224,7 @@ type GetWebhookEventTypesHttpError = {
  * @param id The webhook's unique identifier.
  * @throws DeleteWebhookHttpError
  */
-declare const deleteWebhook: (id: string, options?: ApiCallOptions) => Promise<DeleteWebhookHttpResponse>;
+declare function deleteWebhook(id: string, options?: ApiCallOptions): Promise<DeleteWebhookHttpResponse>;
 type DeleteWebhookHttpResponse = {
     data: void;
     headers: Headers;
@@ -241,7 +241,7 @@ type DeleteWebhookHttpError = {
  * @param id The webhook's unique identifier.
  * @throws GetWebhookHttpError
  */
-declare const getWebhook: (id: string, options?: ApiCallOptions) => Promise<GetWebhookHttpResponse>;
+declare function getWebhook(id: string, options?: ApiCallOptions): Promise<GetWebhookHttpResponse>;
 type GetWebhookHttpResponse = {
     data: WebhookResponse;
     headers: Headers;
@@ -259,7 +259,7 @@ type GetWebhookHttpError = {
  * @param body an object with the body content
  * @throws PatchWebhookHttpError
  */
-declare const patchWebhook: (id: string, body: WebhookPatch[], options?: ApiCallOptions) => Promise<PatchWebhookHttpResponse>;
+declare function patchWebhook(id: string, body: WebhookPatch[], options?: ApiCallOptions): Promise<PatchWebhookHttpResponse>;
 type PatchWebhookHttpResponse = {
     data: void;
     headers: Headers;
@@ -277,7 +277,7 @@ type PatchWebhookHttpError = {
  * @param body an object with the body content
  * @throws UpdateWebhookHttpError
  */
-declare const updateWebhook: (id: string, body: WebhookBase, options?: ApiCallOptions) => Promise<UpdateWebhookHttpResponse>;
+declare function updateWebhook(id: string, body: WebhookBase, options?: ApiCallOptions): Promise<UpdateWebhookHttpResponse>;
 type UpdateWebhookHttpResponse = {
     data: WebhookResponse;
     headers: Headers;
@@ -295,7 +295,7 @@ type UpdateWebhookHttpError = {
  * @param query an object with query parameters
  * @throws GetWebhookDeliveriesHttpError
  */
-declare const getWebhookDeliveries: (id: string, query: {
+declare function getWebhookDeliveries(id: string, query: {
     /** Filter resources by event-type */
     eventType?: string;
     /** Maximum number of deliveries to retrieve */
@@ -308,7 +308,7 @@ declare const getWebhookDeliveries: (id: string, query: {
     sort?: "status" | "+status" | "-status" | "triggeredAt" | "+triggeredAt" | "-triggeredAt";
     /** Filter resources by status (success or fail) */
     status?: "success" | "fail";
-}, options?: ApiCallOptions) => Promise<GetWebhookDeliveriesHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetWebhookDeliveriesHttpResponse>;
 type GetWebhookDeliveriesHttpResponse = {
     data: DeliveryList;
     headers: Headers;
@@ -328,7 +328,7 @@ type GetWebhookDeliveriesHttpError = {
  * @param deliveryId The delivery's unique identifier.
  * @throws GetWebhookDeliveryHttpError
  */
-declare const getWebhookDelivery: (id: string, deliveryId: string, options?: ApiCallOptions) => Promise<GetWebhookDeliveryHttpResponse>;
+declare function getWebhookDelivery(id: string, deliveryId: string, options?: ApiCallOptions): Promise<GetWebhookDeliveryHttpResponse>;
 type GetWebhookDeliveryHttpResponse = {
     data: Delivery;
     headers: Headers;
@@ -346,7 +346,7 @@ type GetWebhookDeliveryHttpError = {
  * @param deliveryId The delivery's unique identifier.
  * @throws ResendWebhookDeliveryHttpError
  */
-declare const resendWebhookDelivery: (id: string, deliveryId: string, options?: ApiCallOptions) => Promise<ResendWebhookDeliveryHttpResponse>;
+declare function resendWebhookDelivery(id: string, deliveryId: string, options?: ApiCallOptions): Promise<ResendWebhookDeliveryHttpResponse>;
 type ResendWebhookDeliveryHttpResponse = {
     data: Delivery;
     headers: Headers;

@@ -1,23 +1,27 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/oauth-tokens.ts
-var getOauthTokens = async (query, options) => invokeFetch("oauth-tokens", {
-  method: "get",
-  pathTemplate: "/api/v1/oauth-tokens",
-  query,
-  options
-});
-var deleteOauthToken = async (tokenId, options) => invokeFetch("oauth-tokens", {
-  method: "delete",
-  pathTemplate: "/api/v1/oauth-tokens/{tokenId}",
-  pathVariables: { tokenId },
-  options
-});
+async function getOauthTokens(query, options) {
+  return invokeFetch("oauth-tokens", {
+    method: "get",
+    pathTemplate: "/api/v1/oauth-tokens",
+    query,
+    options
+  });
+}
+async function deleteOauthToken(tokenId, options) {
+  return invokeFetch("oauth-tokens", {
+    method: "delete",
+    pathTemplate: "/api/v1/oauth-tokens/{tokenId}",
+    pathVariables: { tokenId },
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("oauth-tokens");
 }

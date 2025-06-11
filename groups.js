@@ -1,64 +1,80 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/groups.ts
-var getGroups = async (query, options) => invokeFetch("groups", {
-  method: "get",
-  pathTemplate: "/api/v1/groups",
-  query,
-  options
-});
-var createGroup = async (body, options) => invokeFetch("groups", {
-  method: "post",
-  pathTemplate: "/api/v1/groups",
-  body,
-  contentType: "application/json",
-  options
-});
-var filterGroups = async (query, body, options) => invokeFetch("groups", {
-  method: "post",
-  pathTemplate: "/api/v1/groups/actions/filter",
-  query,
-  body,
-  contentType: "application/json",
-  options
-});
-var getGroupsSettings = async (options) => invokeFetch("groups", {
-  method: "get",
-  pathTemplate: "/api/v1/groups/settings",
-  options
-});
-var patchGroupsSettings = async (body, options) => invokeFetch("groups", {
-  method: "patch",
-  pathTemplate: "/api/v1/groups/settings",
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteGroup = async (groupId, options) => invokeFetch("groups", {
-  method: "delete",
-  pathTemplate: "/api/v1/groups/{groupId}",
-  pathVariables: { groupId },
-  options
-});
-var getGroup = async (groupId, options) => invokeFetch("groups", {
-  method: "get",
-  pathTemplate: "/api/v1/groups/{groupId}",
-  pathVariables: { groupId },
-  options
-});
-var patchGroup = async (groupId, body, options) => invokeFetch("groups", {
-  method: "patch",
-  pathTemplate: "/api/v1/groups/{groupId}",
-  pathVariables: { groupId },
-  body,
-  contentType: "application/json",
-  options
-});
+async function getGroups(query, options) {
+  return invokeFetch("groups", {
+    method: "get",
+    pathTemplate: "/api/v1/groups",
+    query,
+    options
+  });
+}
+async function createGroup(body, options) {
+  return invokeFetch("groups", {
+    method: "post",
+    pathTemplate: "/api/v1/groups",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function filterGroups(query, body, options) {
+  return invokeFetch("groups", {
+    method: "post",
+    pathTemplate: "/api/v1/groups/actions/filter",
+    query,
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getGroupsSettings(options) {
+  return invokeFetch("groups", {
+    method: "get",
+    pathTemplate: "/api/v1/groups/settings",
+    options
+  });
+}
+async function patchGroupsSettings(body, options) {
+  return invokeFetch("groups", {
+    method: "patch",
+    pathTemplate: "/api/v1/groups/settings",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteGroup(groupId, options) {
+  return invokeFetch("groups", {
+    method: "delete",
+    pathTemplate: "/api/v1/groups/{groupId}",
+    pathVariables: { groupId },
+    options
+  });
+}
+async function getGroup(groupId, options) {
+  return invokeFetch("groups", {
+    method: "get",
+    pathTemplate: "/api/v1/groups/{groupId}",
+    pathVariables: { groupId },
+    options
+  });
+}
+async function patchGroup(groupId, body, options) {
+  return invokeFetch("groups", {
+    method: "patch",
+    pathTemplate: "/api/v1/groups/{groupId}",
+    pathVariables: { groupId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("groups");
 }

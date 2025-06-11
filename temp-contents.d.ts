@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * An Error object.
@@ -54,13 +54,13 @@ type DetailResponse = {
  * @param body an object with the body content
  * @throws UploadTempFileHttpError
  */
-declare const uploadTempFile: (query: {
+declare function uploadTempFile(query: {
     /** The name of the file to upload. */
     filename?: string;
     /** The TTL parameter is used to define the time-to-live for the content resource in seconds.
      * It defaults to one hour (3600) if no input is provided. Max TTL is 259200 (3 days).' */
     ttl?: number;
-}, body: BodyInit, options?: ApiCallOptions) => Promise<UploadTempFileHttpResponse>;
+}, body: BodyInit, options?: ApiCallOptions): Promise<UploadTempFileHttpResponse>;
 type UploadTempFileHttpResponse = {
     data: void;
     headers: Headers;
@@ -78,10 +78,10 @@ type UploadTempFileHttpError = {
  * @param query an object with query parameters
  * @throws DownloadTempFileHttpError
  */
-declare const downloadTempFile: (id: string, query: {
+declare function downloadTempFile(id: string, query: {
     /** Set to "1" to download the file in inline mode. Useful for displaying a preview of the file in a browser. */
     inline?: string;
-}, options?: ApiCallOptions) => Promise<DownloadTempFileHttpResponse>;
+}, options?: ApiCallOptions): Promise<DownloadTempFileHttpResponse>;
 type DownloadTempFileHttpResponse = DownloadTempFile200HttpResponse | DownloadTempFile204HttpResponse | DownloadTempFile206HttpResponse;
 type DownloadTempFile200HttpResponse = {
     data: unknown;
@@ -109,7 +109,7 @@ type DownloadTempFileHttpError = {
  * @param id The temporary contents ID.
  * @throws GetTempFileDetailsHttpError
  */
-declare const getTempFileDetails: (id: string, options?: ApiCallOptions) => Promise<GetTempFileDetailsHttpResponse>;
+declare function getTempFileDetails(id: string, options?: ApiCallOptions): Promise<GetTempFileDetailsHttpResponse>;
 type GetTempFileDetailsHttpResponse = GetTempFileDetails200HttpResponse | GetTempFileDetails204HttpResponse;
 type GetTempFileDetails200HttpResponse = {
     data: DetailResponse;

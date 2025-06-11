@@ -1,55 +1,69 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/extensions.ts
-var getExtensions = async (options) => invokeFetch("extensions", {
-  method: "get",
-  pathTemplate: "/api/v1/extensions",
-  options
-});
-var uploadExtension = async (body, options) => invokeFetch("extensions", {
-  method: "post",
-  pathTemplate: "/api/v1/extensions",
-  body,
-  contentType: "multipart/form-data",
-  options
-});
-var deleteExtension = async (id, options) => invokeFetch("extensions", {
-  method: "delete",
-  pathTemplate: "/api/v1/extensions/{id}",
-  pathVariables: { id },
-  options
-});
-var getExtension = async (id, options) => invokeFetch("extensions", {
-  method: "get",
-  pathTemplate: "/api/v1/extensions/{id}",
-  pathVariables: { id },
-  options
-});
-var patchExtension = async (id, body, options) => invokeFetch("extensions", {
-  method: "patch",
-  pathTemplate: "/api/v1/extensions/{id}",
-  pathVariables: { id },
-  body,
-  contentType: "multipart/form-data",
-  options
-});
-var downloadExtension = async (id, options) => invokeFetch("extensions", {
-  method: "get",
-  pathTemplate: "/api/v1/extensions/{id}/file",
-  pathVariables: { id },
-  options
-});
-var downloadFileFromExtension = async (id, filepath, options) => invokeFetch("extensions", {
-  method: "get",
-  pathTemplate: "/api/v1/extensions/{id}/file/{filepath}",
-  pathVariables: { id, filepath },
-  options
-});
+async function getExtensions(options) {
+  return invokeFetch("extensions", {
+    method: "get",
+    pathTemplate: "/api/v1/extensions",
+    options
+  });
+}
+async function uploadExtension(body, options) {
+  return invokeFetch("extensions", {
+    method: "post",
+    pathTemplate: "/api/v1/extensions",
+    body,
+    contentType: "multipart/form-data",
+    options
+  });
+}
+async function deleteExtension(id, options) {
+  return invokeFetch("extensions", {
+    method: "delete",
+    pathTemplate: "/api/v1/extensions/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function getExtension(id, options) {
+  return invokeFetch("extensions", {
+    method: "get",
+    pathTemplate: "/api/v1/extensions/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function patchExtension(id, body, options) {
+  return invokeFetch("extensions", {
+    method: "patch",
+    pathTemplate: "/api/v1/extensions/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "multipart/form-data",
+    options
+  });
+}
+async function downloadExtension(id, options) {
+  return invokeFetch("extensions", {
+    method: "get",
+    pathTemplate: "/api/v1/extensions/{id}/file",
+    pathVariables: { id },
+    options
+  });
+}
+async function downloadFileFromExtension(id, filepath, options) {
+  return invokeFetch("extensions", {
+    method: "get",
+    pathTemplate: "/api/v1/extensions/{id}/file/{filepath}",
+    pathVariables: { id, filepath },
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("extensions");
 }

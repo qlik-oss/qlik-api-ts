@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * The possible states for the status of notes configuration GET or POST operation
@@ -51,7 +51,7 @@ type NotesUserSettings = {
  *
  * @throws GetNotesSettingsHttpError
  */
-declare const getNotesSettings: (options?: ApiCallOptions) => Promise<GetNotesSettingsHttpResponse>;
+declare function getNotesSettings(options?: ApiCallOptions): Promise<GetNotesSettingsHttpResponse>;
 type GetNotesSettingsHttpResponse = {
     data: NotesUserSettings;
     headers: Headers;
@@ -68,7 +68,7 @@ type GetNotesSettingsHttpError = {
  * @param body an object with the body content
  * @throws SetNotesSettingsHttpError
  */
-declare const setNotesSettings: (body: NoteSettingsPutPayload, options?: ApiCallOptions) => Promise<SetNotesSettingsHttpResponse>;
+declare function setNotesSettings(body: NoteSettingsPutPayload, options?: ApiCallOptions): Promise<SetNotesSettingsHttpResponse>;
 type SetNotesSettingsHttpResponse = {
     data: NoteSettingsPutResponse;
     headers: Headers;

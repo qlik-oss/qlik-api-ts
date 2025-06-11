@@ -1,24 +1,28 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/reports.ts
-var createReport = async (body, options) => invokeFetch("reports", {
-  method: "post",
-  pathTemplate: "/api/v1/reports",
-  body,
-  contentType: "application/json",
-  options
-});
-var getReportStatus = async (id, options) => invokeFetch("reports", {
-  method: "get",
-  pathTemplate: "/api/v1/reports/{id}/status",
-  pathVariables: { id },
-  options
-});
+async function createReport(body, options) {
+  return invokeFetch("reports", {
+    method: "post",
+    pathTemplate: "/api/v1/reports",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getReportStatus(id, options) {
+  return invokeFetch("reports", {
+    method: "get",
+    pathTemplate: "/api/v1/reports/{id}/status",
+    pathVariables: { id },
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("reports");
 }

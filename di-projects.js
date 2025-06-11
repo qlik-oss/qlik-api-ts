@@ -1,124 +1,156 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/di-projects.ts
-var getDiProjects = async (query, options) => invokeFetch("di-projects", {
-  method: "get",
-  pathTemplate: "/api/v1/di-projects",
-  query,
-  options
-});
-var createDiProject = async (body, options) => invokeFetch("di-projects", {
-  method: "post",
-  pathTemplate: "/api/v1/di-projects",
-  body,
-  contentType: "application/json",
-  options
-});
-var getDiProject = async (actionId, query, options) => invokeFetch("di-projects", {
-  method: "get",
-  pathTemplate: "/api/v1/di-projects/actions/{actionId}",
-  pathVariables: { actionId },
-  query,
-  options
-});
-var exportDiProject = async (projectId, body, options) => invokeFetch("di-projects", {
-  method: "post",
-  pathTemplate: "/api/v1/di-projects/{projectId}/actions/export",
-  pathVariables: { projectId },
-  body,
-  contentType: "application/json",
-  options
-});
-var importDiProject = async (projectId, body, options) => invokeFetch("di-projects", {
-  method: "post",
-  pathTemplate: "/api/v1/di-projects/{projectId}/actions/import",
-  pathVariables: { projectId },
-  body,
-  contentType: "multipart/form-data",
-  options
-});
-var prepareDiProject = async (projectId, body, options) => invokeFetch("di-projects", {
-  method: "post",
-  pathTemplate: "/api/v1/di-projects/{projectId}/actions/prepare",
-  pathVariables: { projectId },
-  body,
-  contentType: "application/json",
-  options
-});
-var validateDiProject = async (projectId, body, options) => invokeFetch("di-projects", {
-  method: "post",
-  pathTemplate: "/api/v1/di-projects/{projectId}/actions/validate",
-  pathVariables: { projectId },
-  body,
-  contentType: "application/json",
-  options
-});
-var getDiProjectExportVariables = async (projectId, query, options) => invokeFetch("di-projects", {
-  method: "get",
-  pathTemplate: "/api/v1/di-projects/{projectId}/bindings",
-  pathVariables: { projectId },
-  query,
-  options
-});
-var setDiProjectExportVariables = async (projectId, body, options) => invokeFetch("di-projects", {
-  method: "put",
-  pathTemplate: "/api/v1/di-projects/{projectId}/bindings",
-  pathVariables: { projectId },
-  body,
-  contentType: "application/json",
-  options
-});
-var getDiProjectDiTasks = async (projectId, options) => invokeFetch("di-projects", {
-  method: "get",
-  pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks",
-  pathVariables: { projectId },
-  options
-});
-var getDiProjectDiTask = async (projectId, dataTaskId, options) => invokeFetch("di-projects", {
-  method: "get",
-  pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks/{dataTaskId}",
-  pathVariables: { projectId, dataTaskId },
-  options
-});
-var prepareDiProjectDiTask = async (projectId, dataTaskId, body, options) => invokeFetch("di-projects", {
-  method: "post",
-  pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks/{dataTaskId}/actions/prepare",
-  pathVariables: { projectId, dataTaskId },
-  body,
-  contentType: "application/json",
-  options
-});
-var validateDiProjectDiTask = async (projectId, dataTaskId, body, options) => invokeFetch("di-projects", {
-  method: "post",
-  pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks/{dataTaskId}/actions/validate",
-  pathVariables: { projectId, dataTaskId },
-  body,
-  contentType: "application/json",
-  options
-});
-var startDiProjectDiTaskRuntime = async (projectId, dataTaskId, options) => invokeFetch("di-projects", {
-  method: "post",
-  pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks/{dataTaskId}/runtime/actions/start",
-  pathVariables: { projectId, dataTaskId },
-  options
-});
-var stopDiProjectDiTaskRuntime = async (projectId, dataTaskId, options) => invokeFetch("di-projects", {
-  method: "post",
-  pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks/{dataTaskId}/runtime/actions/stop",
-  pathVariables: { projectId, dataTaskId },
-  options
-});
-var getDiProjectDiTaskRuntimeState = async (projectId, dataTaskId, options) => invokeFetch("di-projects", {
-  method: "get",
-  pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks/{dataTaskId}/runtime/state",
-  pathVariables: { projectId, dataTaskId },
-  options
-});
+async function getDiProjects(query, options) {
+  return invokeFetch("di-projects", {
+    method: "get",
+    pathTemplate: "/api/v1/di-projects",
+    query,
+    options
+  });
+}
+async function createDiProject(body, options) {
+  return invokeFetch("di-projects", {
+    method: "post",
+    pathTemplate: "/api/v1/di-projects",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getDiProject(actionId, query, options) {
+  return invokeFetch("di-projects", {
+    method: "get",
+    pathTemplate: "/api/v1/di-projects/actions/{actionId}",
+    pathVariables: { actionId },
+    query,
+    options
+  });
+}
+async function exportDiProject(projectId, body, options) {
+  return invokeFetch("di-projects", {
+    method: "post",
+    pathTemplate: "/api/v1/di-projects/{projectId}/actions/export",
+    pathVariables: { projectId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function importDiProject(projectId, body, options) {
+  return invokeFetch("di-projects", {
+    method: "post",
+    pathTemplate: "/api/v1/di-projects/{projectId}/actions/import",
+    pathVariables: { projectId },
+    body,
+    contentType: "multipart/form-data",
+    options
+  });
+}
+async function prepareDiProject(projectId, body, options) {
+  return invokeFetch("di-projects", {
+    method: "post",
+    pathTemplate: "/api/v1/di-projects/{projectId}/actions/prepare",
+    pathVariables: { projectId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function validateDiProject(projectId, body, options) {
+  return invokeFetch("di-projects", {
+    method: "post",
+    pathTemplate: "/api/v1/di-projects/{projectId}/actions/validate",
+    pathVariables: { projectId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getDiProjectExportVariables(projectId, query, options) {
+  return invokeFetch("di-projects", {
+    method: "get",
+    pathTemplate: "/api/v1/di-projects/{projectId}/bindings",
+    pathVariables: { projectId },
+    query,
+    options
+  });
+}
+async function setDiProjectExportVariables(projectId, body, options) {
+  return invokeFetch("di-projects", {
+    method: "put",
+    pathTemplate: "/api/v1/di-projects/{projectId}/bindings",
+    pathVariables: { projectId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getDiProjectDiTasks(projectId, options) {
+  return invokeFetch("di-projects", {
+    method: "get",
+    pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks",
+    pathVariables: { projectId },
+    options
+  });
+}
+async function getDiProjectDiTask(projectId, dataTaskId, options) {
+  return invokeFetch("di-projects", {
+    method: "get",
+    pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks/{dataTaskId}",
+    pathVariables: { projectId, dataTaskId },
+    options
+  });
+}
+async function prepareDiProjectDiTask(projectId, dataTaskId, body, options) {
+  return invokeFetch("di-projects", {
+    method: "post",
+    pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks/{dataTaskId}/actions/prepare",
+    pathVariables: { projectId, dataTaskId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function validateDiProjectDiTask(projectId, dataTaskId, body, options) {
+  return invokeFetch("di-projects", {
+    method: "post",
+    pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks/{dataTaskId}/actions/validate",
+    pathVariables: { projectId, dataTaskId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function startDiProjectDiTaskRuntime(projectId, dataTaskId, options) {
+  return invokeFetch("di-projects", {
+    method: "post",
+    pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks/{dataTaskId}/runtime/actions/start",
+    pathVariables: { projectId, dataTaskId },
+    options
+  });
+}
+async function stopDiProjectDiTaskRuntime(projectId, dataTaskId, options) {
+  return invokeFetch("di-projects", {
+    method: "post",
+    pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks/{dataTaskId}/runtime/actions/stop",
+    pathVariables: { projectId, dataTaskId },
+    options
+  });
+}
+async function getDiProjectDiTaskRuntimeState(projectId, dataTaskId, options) {
+  return invokeFetch("di-projects", {
+    method: "get",
+    pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks/{dataTaskId}/runtime/state",
+    pathVariables: { projectId, dataTaskId },
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("di-projects");
 }

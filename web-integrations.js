@@ -1,44 +1,54 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/web-integrations.ts
-var getWebIntegrations = async (query, options) => invokeFetch("web-integrations", {
-  method: "get",
-  pathTemplate: "/api/v1/web-integrations",
-  query,
-  options
-});
-var createWebIntegration = async (body, options) => invokeFetch("web-integrations", {
-  method: "post",
-  pathTemplate: "/api/v1/web-integrations",
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteWebIntegration = async (id, options) => invokeFetch("web-integrations", {
-  method: "delete",
-  pathTemplate: "/api/v1/web-integrations/{id}",
-  pathVariables: { id },
-  options
-});
-var getWebIntegration = async (id, options) => invokeFetch("web-integrations", {
-  method: "get",
-  pathTemplate: "/api/v1/web-integrations/{id}",
-  pathVariables: { id },
-  options
-});
-var patchWebIntegration = async (id, body, options) => invokeFetch("web-integrations", {
-  method: "patch",
-  pathTemplate: "/api/v1/web-integrations/{id}",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
+async function getWebIntegrations(query, options) {
+  return invokeFetch("web-integrations", {
+    method: "get",
+    pathTemplate: "/api/v1/web-integrations",
+    query,
+    options
+  });
+}
+async function createWebIntegration(body, options) {
+  return invokeFetch("web-integrations", {
+    method: "post",
+    pathTemplate: "/api/v1/web-integrations",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteWebIntegration(id, options) {
+  return invokeFetch("web-integrations", {
+    method: "delete",
+    pathTemplate: "/api/v1/web-integrations/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function getWebIntegration(id, options) {
+  return invokeFetch("web-integrations", {
+    method: "get",
+    pathTemplate: "/api/v1/web-integrations/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function patchWebIntegration(id, body, options) {
+  return invokeFetch("web-integrations", {
+    method: "patch",
+    pathTemplate: "/api/v1/web-integrations/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("web-integrations");
 }

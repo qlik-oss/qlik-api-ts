@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 type ArchiveItem = {
     /** The type that content is encoded in, always "application/json". */
@@ -116,7 +116,7 @@ type Href = {
  * @param query an object with query parameters
  * @throws GetAuditsHttpError
  */
-declare const getAudits: (query: {
+declare function getAudits(query: {
     /** The start/end time interval formatted in ISO 8601 to search by eventTime. For example, "?eventTime=2021-07-14T18:41:15.00Z/2021-07-14T18:41:15.99Z". */
     eventTime?: string;
     /** The case-sensitive string used to search by eventType. Retrieve a list of possible eventTypes with `/v1/audits/types`. */
@@ -135,7 +135,7 @@ declare const getAudits: (query: {
     source?: string;
     /** The case-sensitive string used to search by userId. */
     userId?: string;
-}, options?: ApiCallOptions) => Promise<GetAuditsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetAuditsHttpResponse>;
 type GetAuditsHttpResponse = {
     data: GetResult;
     headers: Headers;
@@ -154,10 +154,10 @@ type GetAuditsHttpError = {
  * @param query an object with query parameters
  * @throws GetArchivedAuditsHttpError
  */
-declare const getArchivedAudits: (query: {
+declare function getArchivedAudits(query: {
     /** Date to be used as filter and criteria during extraction. */
     date: string;
-}, options?: ApiCallOptions) => Promise<GetArchivedAuditsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetArchivedAuditsHttpResponse>;
 type GetArchivedAuditsHttpResponse = {
     data: GetArchiveResult;
     headers: Headers;
@@ -173,7 +173,7 @@ type GetArchivedAuditsHttpError = {
  *
  * @throws GetAuditsSettingsHttpError
  */
-declare const getAuditsSettings: (options?: ApiCallOptions) => Promise<GetAuditsSettingsHttpResponse>;
+declare function getAuditsSettings(options?: ApiCallOptions): Promise<GetAuditsSettingsHttpResponse>;
 type GetAuditsSettingsHttpResponse = {
     data: GetSettingsResult;
     headers: Headers;
@@ -189,7 +189,7 @@ type GetAuditsSettingsHttpError = {
  *
  * @throws GetAuditSourcesHttpError
  */
-declare const getAuditSources: (options?: ApiCallOptions) => Promise<GetAuditSourcesHttpResponse>;
+declare function getAuditSources(options?: ApiCallOptions): Promise<GetAuditSourcesHttpResponse>;
 type GetAuditSourcesHttpResponse = {
     data: GetObjectsResult;
     headers: Headers;
@@ -207,7 +207,7 @@ type GetAuditSourcesHttpError = {
  *
  * @throws GetAuditTypesHttpError
  */
-declare const getAuditTypes: (options?: ApiCallOptions) => Promise<GetAuditTypesHttpResponse>;
+declare function getAuditTypes(options?: ApiCallOptions): Promise<GetAuditTypesHttpResponse>;
 type GetAuditTypesHttpResponse = {
     data: GetObjectsResult;
     headers: Headers;
@@ -226,7 +226,7 @@ type GetAuditTypesHttpError = {
  * @param id The audit item's unique identifier.
  * @throws GetAuditHttpError
  */
-declare const getAudit: (id: string, options?: ApiCallOptions) => Promise<GetAuditHttpResponse>;
+declare function getAudit(id: string, options?: ApiCallOptions): Promise<GetAuditHttpResponse>;
 type GetAuditHttpResponse = {
     data: GetByIDResult;
     headers: Headers;

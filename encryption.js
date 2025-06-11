@@ -1,70 +1,90 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/encryption.ts
-var getEncryptionKeyproviders = async (options) => invokeFetch("encryption", {
-  method: "get",
-  pathTemplate: "/api/v1/encryption/keyproviders",
-  options
-});
-var createEncryptionKeyprovider = async (body, options) => invokeFetch("encryption", {
-  method: "post",
-  pathTemplate: "/api/v1/encryption/keyproviders",
-  body,
-  contentType: "application/json",
-  options
-});
-var listEncryptionKeyproviders = async (options) => invokeFetch("encryption", {
-  method: "get",
-  pathTemplate: "/api/v1/encryption/keyproviders/actions/list",
-  options
-});
-var resetEncryptionKeyproviders = async (options) => invokeFetch("encryption", {
-  method: "post",
-  pathTemplate: "/api/v1/encryption/keyproviders/actions/reset-to-default-provider",
-  options
-});
-var getEncryptionKeyprovidersMigrationDetails = async (options) => invokeFetch("encryption", {
-  method: "get",
-  pathTemplate: "/api/v1/encryption/keyproviders/migration/actions/details",
-  options
-});
-var deleteEncryptionKeyprovider = async (arnFingerPrint, options) => invokeFetch("encryption", {
-  method: "delete",
-  pathTemplate: "/api/v1/encryption/keyproviders/{arnFingerPrint}",
-  pathVariables: { arnFingerPrint },
-  options
-});
-var getEncryptionKeyprovider = async (arnFingerPrint, options) => invokeFetch("encryption", {
-  method: "get",
-  pathTemplate: "/api/v1/encryption/keyproviders/{arnFingerPrint}",
-  pathVariables: { arnFingerPrint },
-  options
-});
-var patchEncryptionKeyprovider = async (arnFingerPrint, body, options) => invokeFetch("encryption", {
-  method: "patch",
-  pathTemplate: "/api/v1/encryption/keyproviders/{arnFingerPrint}",
-  pathVariables: { arnFingerPrint },
-  body,
-  contentType: "application/json",
-  options
-});
-var migrateEncryptionKeyprovider = async (arnFingerPrint, options) => invokeFetch("encryption", {
-  method: "post",
-  pathTemplate: "/api/v1/encryption/keyproviders/{arnFingerPrint}/actions/migrate",
-  pathVariables: { arnFingerPrint },
-  options
-});
-var testEncryptionKeyprovider = async (arnFingerPrint, options) => invokeFetch("encryption", {
-  method: "post",
-  pathTemplate: "/api/v1/encryption/keyproviders/{arnFingerPrint}/actions/test",
-  pathVariables: { arnFingerPrint },
-  options
-});
+async function getEncryptionKeyproviders(options) {
+  return invokeFetch("encryption", {
+    method: "get",
+    pathTemplate: "/api/v1/encryption/keyproviders",
+    options
+  });
+}
+async function createEncryptionKeyprovider(body, options) {
+  return invokeFetch("encryption", {
+    method: "post",
+    pathTemplate: "/api/v1/encryption/keyproviders",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function listEncryptionKeyproviders(options) {
+  return invokeFetch("encryption", {
+    method: "get",
+    pathTemplate: "/api/v1/encryption/keyproviders/actions/list",
+    options
+  });
+}
+async function resetEncryptionKeyproviders(options) {
+  return invokeFetch("encryption", {
+    method: "post",
+    pathTemplate: "/api/v1/encryption/keyproviders/actions/reset-to-default-provider",
+    options
+  });
+}
+async function getEncryptionKeyprovidersMigrationDetails(options) {
+  return invokeFetch("encryption", {
+    method: "get",
+    pathTemplate: "/api/v1/encryption/keyproviders/migration/actions/details",
+    options
+  });
+}
+async function deleteEncryptionKeyprovider(arnFingerPrint, options) {
+  return invokeFetch("encryption", {
+    method: "delete",
+    pathTemplate: "/api/v1/encryption/keyproviders/{arnFingerPrint}",
+    pathVariables: { arnFingerPrint },
+    options
+  });
+}
+async function getEncryptionKeyprovider(arnFingerPrint, options) {
+  return invokeFetch("encryption", {
+    method: "get",
+    pathTemplate: "/api/v1/encryption/keyproviders/{arnFingerPrint}",
+    pathVariables: { arnFingerPrint },
+    options
+  });
+}
+async function patchEncryptionKeyprovider(arnFingerPrint, body, options) {
+  return invokeFetch("encryption", {
+    method: "patch",
+    pathTemplate: "/api/v1/encryption/keyproviders/{arnFingerPrint}",
+    pathVariables: { arnFingerPrint },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function migrateEncryptionKeyprovider(arnFingerPrint, options) {
+  return invokeFetch("encryption", {
+    method: "post",
+    pathTemplate: "/api/v1/encryption/keyproviders/{arnFingerPrint}/actions/migrate",
+    pathVariables: { arnFingerPrint },
+    options
+  });
+}
+async function testEncryptionKeyprovider(arnFingerPrint, options) {
+  return invokeFetch("encryption", {
+    method: "post",
+    pathTemplate: "/api/v1/encryption/keyproviders/{arnFingerPrint}/actions/test",
+    pathVariables: { arnFingerPrint },
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("encryption");
 }

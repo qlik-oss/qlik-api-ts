@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * Hints of any client application secrets
@@ -219,7 +219,7 @@ type OAuthConnectionConfigUpdate = {
  * @param query an object with query parameters
  * @throws GetOAuthClientsHttpError
  */
-declare const getOAuthClients: (query: {
+declare function getOAuthClients(query: {
     /** The filter query that should be used to filter the list of oauth clients.  The filter syntax is defined in RFC 7644. Valid attributes for filtering are `clientId`, `clientName`, `appType`, and `tenantId`. */
     filter?: string;
     /** The number of OAuth client entries to retrieve. */
@@ -232,7 +232,7 @@ declare const getOAuthClients: (query: {
     sort?: string;
     /** Boolean query parameter that determines if the total count of results should be included in the response. If true, the response includes the total number of results in the `totalResults` field. If false or not included in the query, `totalResults` will be excluded from the response. */
     totalResults?: boolean;
-}, options?: ApiCallOptions) => Promise<GetOAuthClientsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetOAuthClientsHttpResponse>;
 type GetOAuthClientsHttpResponse = {
     data: OAuthClientAdminListResponse | OAuthClientListResponse;
     headers: Headers;
@@ -249,7 +249,7 @@ type GetOAuthClientsHttpError = {
  * @param body an object with the body content
  * @throws CreateOAuthClientHttpError
  */
-declare const createOAuthClient: (body: OAuthClientCreateRequest, options?: ApiCallOptions) => Promise<CreateOAuthClientHttpResponse>;
+declare function createOAuthClient(body: OAuthClientCreateRequest, options?: ApiCallOptions): Promise<CreateOAuthClientHttpResponse>;
 type CreateOAuthClientHttpResponse = {
     data: OAuthClientCreateResponse;
     headers: Headers;
@@ -266,7 +266,7 @@ type CreateOAuthClientHttpError = {
  * @param id The unique identifier for the OAuth client
  * @throws DeleteOAuthClientHttpError
  */
-declare const deleteOAuthClient: (id: string, options?: ApiCallOptions) => Promise<DeleteOAuthClientHttpResponse>;
+declare function deleteOAuthClient(id: string, options?: ApiCallOptions): Promise<DeleteOAuthClientHttpResponse>;
 type DeleteOAuthClientHttpResponse = {
     data: void;
     headers: Headers;
@@ -283,7 +283,7 @@ type DeleteOAuthClientHttpError = {
  * @param id The unique identifier for the OAuth client
  * @throws GetOAuthClientHttpError
  */
-declare const getOAuthClient: (id: string, options?: ApiCallOptions) => Promise<GetOAuthClientHttpResponse>;
+declare function getOAuthClient(id: string, options?: ApiCallOptions): Promise<GetOAuthClientHttpResponse>;
 type GetOAuthClientHttpResponse = {
     data: OAuthClientAdminReadResponse | OAuthClientReadResponse;
     headers: Headers;
@@ -301,7 +301,7 @@ type GetOAuthClientHttpError = {
  * @param body an object with the body content
  * @throws PatchOAuthClientHttpError
  */
-declare const patchOAuthClient: (id: string, body: OAuthClientUpdate[], options?: ApiCallOptions) => Promise<PatchOAuthClientHttpResponse>;
+declare function patchOAuthClient(id: string, body: OAuthClientUpdate[], options?: ApiCallOptions): Promise<PatchOAuthClientHttpResponse>;
 type PatchOAuthClientHttpResponse = {
     data: void;
     headers: Headers;
@@ -318,7 +318,7 @@ type PatchOAuthClientHttpError = {
  * @param id The unique identifier for the OAuth client
  * @throws PublishOAuthClientHttpError
  */
-declare const publishOAuthClient: (id: string, options?: ApiCallOptions) => Promise<PublishOAuthClientHttpResponse>;
+declare function publishOAuthClient(id: string, options?: ApiCallOptions): Promise<PublishOAuthClientHttpResponse>;
 type PublishOAuthClientHttpResponse = {
     data: OAuthClientPublishResponse;
     headers: Headers;
@@ -335,7 +335,7 @@ type PublishOAuthClientHttpError = {
  * @param id The unique identifier for the OAuth client
  * @throws CreateOAuthClientSecretHttpError
  */
-declare const createOAuthClientSecret: (id: string, options?: ApiCallOptions) => Promise<CreateOAuthClientSecretHttpResponse>;
+declare function createOAuthClientSecret(id: string, options?: ApiCallOptions): Promise<CreateOAuthClientSecretHttpResponse>;
 type CreateOAuthClientSecretHttpResponse = {
     data: OAuthClientSecretResponse;
     headers: Headers;
@@ -353,7 +353,7 @@ type CreateOAuthClientSecretHttpError = {
  * @param hint The unique identifier for the OAuth secret
  * @throws DeleteOAuthClientSecretHttpError
  */
-declare const deleteOAuthClientSecret: (id: string, hint: string, options?: ApiCallOptions) => Promise<DeleteOAuthClientSecretHttpResponse>;
+declare function deleteOAuthClientSecret(id: string, hint: string, options?: ApiCallOptions): Promise<DeleteOAuthClientSecretHttpResponse>;
 type DeleteOAuthClientSecretHttpResponse = {
     data: void;
     headers: Headers;
@@ -370,7 +370,7 @@ type DeleteOAuthClientSecretHttpError = {
  * @param id The unique identifier for the OAuth client
  * @throws DeleteOAuthClientConnectionConfigHttpError
  */
-declare const deleteOAuthClientConnectionConfig: (id: string, options?: ApiCallOptions) => Promise<DeleteOAuthClientConnectionConfigHttpResponse>;
+declare function deleteOAuthClientConnectionConfig(id: string, options?: ApiCallOptions): Promise<DeleteOAuthClientConnectionConfigHttpResponse>;
 type DeleteOAuthClientConnectionConfigHttpResponse = {
     data: void;
     headers: Headers;
@@ -387,7 +387,7 @@ type DeleteOAuthClientConnectionConfigHttpError = {
  * @param id The unique identifier for an OAuth client
  * @throws GetOAuthClientConnectionConfigHttpError
  */
-declare const getOAuthClientConnectionConfig: (id: string, options?: ApiCallOptions) => Promise<GetOAuthClientConnectionConfigHttpResponse>;
+declare function getOAuthClientConnectionConfig(id: string, options?: ApiCallOptions): Promise<GetOAuthClientConnectionConfigHttpResponse>;
 type GetOAuthClientConnectionConfigHttpResponse = {
     data: ConnectionConfigReadResponse;
     headers: Headers;
@@ -405,7 +405,7 @@ type GetOAuthClientConnectionConfigHttpError = {
  * @param body an object with the body content
  * @throws PatchOAuthClientConnectionConfigHttpError
  */
-declare const patchOAuthClientConnectionConfig: (id: string, body: OAuthConnectionConfigUpdate[], options?: ApiCallOptions) => Promise<PatchOAuthClientConnectionConfigHttpResponse>;
+declare function patchOAuthClientConnectionConfig(id: string, body: OAuthConnectionConfigUpdate[], options?: ApiCallOptions): Promise<PatchOAuthClientConnectionConfigHttpResponse>;
 type PatchOAuthClientConnectionConfigHttpResponse = {
     data: void;
     headers: Headers;

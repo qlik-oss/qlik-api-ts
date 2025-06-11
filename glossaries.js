@@ -1,181 +1,229 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/glossaries.ts
-var getGlossaries = async (query, options) => invokeFetch("glossaries", {
-  method: "get",
-  pathTemplate: "/api/v1/glossaries",
-  query,
-  options
-});
-var createGlossary = async (body, options) => invokeFetch("glossaries", {
-  method: "post",
-  pathTemplate: "/api/v1/glossaries",
-  body,
-  contentType: "application/json",
-  options
-});
-var importGlossary = async (query, body, options) => invokeFetch("glossaries", {
-  method: "post",
-  pathTemplate: "/api/v1/glossaries/actions/import",
-  query,
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteGlossary = async (id, options) => invokeFetch("glossaries", {
-  method: "delete",
-  pathTemplate: "/api/v1/glossaries/{id}",
-  pathVariables: { id },
-  options
-});
-var getGlossary = async (id, options) => invokeFetch("glossaries", {
-  method: "get",
-  pathTemplate: "/api/v1/glossaries/{id}",
-  pathVariables: { id },
-  options
-});
-var patchGlossary = async (id, body, options) => invokeFetch("glossaries", {
-  method: "patch",
-  pathTemplate: "/api/v1/glossaries/{id}",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
-var updateGlossary = async (id, body, options) => invokeFetch("glossaries", {
-  method: "put",
-  pathTemplate: "/api/v1/glossaries/{id}",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
-var exportGlossary = async (id, options) => invokeFetch("glossaries", {
-  method: "get",
-  pathTemplate: "/api/v1/glossaries/{id}/actions/export",
-  pathVariables: { id },
-  options
-});
-var getGlossaryCategories = async (id, query, options) => invokeFetch("glossaries", {
-  method: "get",
-  pathTemplate: "/api/v1/glossaries/{id}/categories",
-  pathVariables: { id },
-  query,
-  options
-});
-var createGlossaryCategory = async (id, body, options) => invokeFetch("glossaries", {
-  method: "post",
-  pathTemplate: "/api/v1/glossaries/{id}/categories",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteGlossaryCategory = async (id, categoryId, options) => invokeFetch("glossaries", {
-  method: "delete",
-  pathTemplate: "/api/v1/glossaries/{id}/categories/{categoryId}",
-  pathVariables: { id, categoryId },
-  options
-});
-var getGlossaryCategory = async (id, categoryId, options) => invokeFetch("glossaries", {
-  method: "get",
-  pathTemplate: "/api/v1/glossaries/{id}/categories/{categoryId}",
-  pathVariables: { id, categoryId },
-  options
-});
-var patchGlossaryCategory = async (id, categoryId, body, options) => invokeFetch("glossaries", {
-  method: "patch",
-  pathTemplate: "/api/v1/glossaries/{id}/categories/{categoryId}",
-  pathVariables: { id, categoryId },
-  body,
-  contentType: "application/json",
-  options
-});
-var updateGlossaryCategory = async (id, categoryId, body, options) => invokeFetch("glossaries", {
-  method: "put",
-  pathTemplate: "/api/v1/glossaries/{id}/categories/{categoryId}",
-  pathVariables: { id, categoryId },
-  body,
-  contentType: "application/json",
-  options
-});
-var getGlossaryTerms = async (id, query, options) => invokeFetch("glossaries", {
-  method: "get",
-  pathTemplate: "/api/v1/glossaries/{id}/terms",
-  pathVariables: { id },
-  query,
-  options
-});
-var createGlossaryTerm = async (id, body, options) => invokeFetch("glossaries", {
-  method: "post",
-  pathTemplate: "/api/v1/glossaries/{id}/terms",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteGlossaryTerm = async (id, termId, options) => invokeFetch("glossaries", {
-  method: "delete",
-  pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}",
-  pathVariables: { id, termId },
-  options
-});
-var getGlossaryTerm = async (id, termId, options) => invokeFetch("glossaries", {
-  method: "get",
-  pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}",
-  pathVariables: { id, termId },
-  options
-});
-var patchGlossaryTerm = async (id, termId, body, options) => invokeFetch("glossaries", {
-  method: "patch",
-  pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}",
-  pathVariables: { id, termId },
-  body,
-  contentType: "application/json",
-  options
-});
-var updateGlossaryTerm = async (id, termId, body, options) => invokeFetch("glossaries", {
-  method: "put",
-  pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}",
-  pathVariables: { id, termId },
-  body,
-  contentType: "application/json",
-  options
-});
-var changeGlossaryTermStatus = async (id, termId, query, options) => invokeFetch("glossaries", {
-  method: "post",
-  pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}/actions/change-status",
-  pathVariables: { id, termId },
-  query,
-  options
-});
-var getGlossaryTermLinks = async (id, termId, query, options) => invokeFetch("glossaries", {
-  method: "get",
-  pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}/links",
-  pathVariables: { id, termId },
-  query,
-  options
-});
-var createGlossaryTermLink = async (id, termId, body, options) => invokeFetch("glossaries", {
-  method: "post",
-  pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}/links",
-  pathVariables: { id, termId },
-  body,
-  contentType: "application/json",
-  options
-});
-var getGlossaryTermRevisions = async (id, termId, query, options) => invokeFetch("glossaries", {
-  method: "get",
-  pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}/revisions",
-  pathVariables: { id, termId },
-  query,
-  options
-});
+async function getGlossaries(query, options) {
+  return invokeFetch("glossaries", {
+    method: "get",
+    pathTemplate: "/api/v1/glossaries",
+    query,
+    options
+  });
+}
+async function createGlossary(body, options) {
+  return invokeFetch("glossaries", {
+    method: "post",
+    pathTemplate: "/api/v1/glossaries",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function importGlossary(query, body, options) {
+  return invokeFetch("glossaries", {
+    method: "post",
+    pathTemplate: "/api/v1/glossaries/actions/import",
+    query,
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteGlossary(id, options) {
+  return invokeFetch("glossaries", {
+    method: "delete",
+    pathTemplate: "/api/v1/glossaries/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function getGlossary(id, options) {
+  return invokeFetch("glossaries", {
+    method: "get",
+    pathTemplate: "/api/v1/glossaries/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function patchGlossary(id, body, options) {
+  return invokeFetch("glossaries", {
+    method: "patch",
+    pathTemplate: "/api/v1/glossaries/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function updateGlossary(id, body, options) {
+  return invokeFetch("glossaries", {
+    method: "put",
+    pathTemplate: "/api/v1/glossaries/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function exportGlossary(id, options) {
+  return invokeFetch("glossaries", {
+    method: "get",
+    pathTemplate: "/api/v1/glossaries/{id}/actions/export",
+    pathVariables: { id },
+    options
+  });
+}
+async function getGlossaryCategories(id, query, options) {
+  return invokeFetch("glossaries", {
+    method: "get",
+    pathTemplate: "/api/v1/glossaries/{id}/categories",
+    pathVariables: { id },
+    query,
+    options
+  });
+}
+async function createGlossaryCategory(id, body, options) {
+  return invokeFetch("glossaries", {
+    method: "post",
+    pathTemplate: "/api/v1/glossaries/{id}/categories",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteGlossaryCategory(id, categoryId, options) {
+  return invokeFetch("glossaries", {
+    method: "delete",
+    pathTemplate: "/api/v1/glossaries/{id}/categories/{categoryId}",
+    pathVariables: { id, categoryId },
+    options
+  });
+}
+async function getGlossaryCategory(id, categoryId, options) {
+  return invokeFetch("glossaries", {
+    method: "get",
+    pathTemplate: "/api/v1/glossaries/{id}/categories/{categoryId}",
+    pathVariables: { id, categoryId },
+    options
+  });
+}
+async function patchGlossaryCategory(id, categoryId, body, options) {
+  return invokeFetch("glossaries", {
+    method: "patch",
+    pathTemplate: "/api/v1/glossaries/{id}/categories/{categoryId}",
+    pathVariables: { id, categoryId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function updateGlossaryCategory(id, categoryId, body, options) {
+  return invokeFetch("glossaries", {
+    method: "put",
+    pathTemplate: "/api/v1/glossaries/{id}/categories/{categoryId}",
+    pathVariables: { id, categoryId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getGlossaryTerms(id, query, options) {
+  return invokeFetch("glossaries", {
+    method: "get",
+    pathTemplate: "/api/v1/glossaries/{id}/terms",
+    pathVariables: { id },
+    query,
+    options
+  });
+}
+async function createGlossaryTerm(id, body, options) {
+  return invokeFetch("glossaries", {
+    method: "post",
+    pathTemplate: "/api/v1/glossaries/{id}/terms",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteGlossaryTerm(id, termId, options) {
+  return invokeFetch("glossaries", {
+    method: "delete",
+    pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}",
+    pathVariables: { id, termId },
+    options
+  });
+}
+async function getGlossaryTerm(id, termId, options) {
+  return invokeFetch("glossaries", {
+    method: "get",
+    pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}",
+    pathVariables: { id, termId },
+    options
+  });
+}
+async function patchGlossaryTerm(id, termId, body, options) {
+  return invokeFetch("glossaries", {
+    method: "patch",
+    pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}",
+    pathVariables: { id, termId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function updateGlossaryTerm(id, termId, body, options) {
+  return invokeFetch("glossaries", {
+    method: "put",
+    pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}",
+    pathVariables: { id, termId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function changeGlossaryTermStatus(id, termId, query, options) {
+  return invokeFetch("glossaries", {
+    method: "post",
+    pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}/actions/change-status",
+    pathVariables: { id, termId },
+    query,
+    options
+  });
+}
+async function getGlossaryTermLinks(id, termId, query, options) {
+  return invokeFetch("glossaries", {
+    method: "get",
+    pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}/links",
+    pathVariables: { id, termId },
+    query,
+    options
+  });
+}
+async function createGlossaryTermLink(id, termId, body, options) {
+  return invokeFetch("glossaries", {
+    method: "post",
+    pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}/links",
+    pathVariables: { id, termId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function getGlossaryTermRevisions(id, termId, query, options) {
+  return invokeFetch("glossaries", {
+    method: "get",
+    pathTemplate: "/api/v1/glossaries/{id}/terms/{termId}/revisions",
+    pathVariables: { id, termId },
+    query,
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("glossaries");
 }

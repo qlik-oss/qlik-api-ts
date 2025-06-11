@@ -1,5 +1,5 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-X7m1IIvI.js';
-import './auth-types-Btwi7CsB.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
+import './auth-types-Cj5bM3Yk.js';
 
 /**
  * An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles.
@@ -276,7 +276,7 @@ type SettingsPatchSchema = SettingsPatch[];
  * @param query an object with query parameters
  * @throws GetGroupsHttpError
  */
-declare const getGroups: (query: {
+declare function getGroups(query: {
     /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax. Cannot be combined with any of the fields marked as deprecated. All conditional statements within this query parameter are case insensitive. */
     filter?: string;
     /** The number of groups to retrieve. */
@@ -291,7 +291,7 @@ declare const getGroups: (query: {
     systemGroups?: boolean;
     /** Whether to return a total match count in the result. Defaults to false. */
     totalResults?: boolean;
-}, options?: ApiCallOptions) => Promise<GetGroupsHttpResponse>;
+}, options?: ApiCallOptions): Promise<GetGroupsHttpResponse>;
 type GetGroupsHttpResponse = {
     data: Groups;
     headers: Headers;
@@ -310,7 +310,7 @@ type GetGroupsHttpError = {
  * @param body an object with the body content
  * @throws CreateGroupHttpError
  */
-declare const createGroup: (body: GroupPostSchema, options?: ApiCallOptions) => Promise<CreateGroupHttpResponse>;
+declare function createGroup(body: GroupPostSchema, options?: ApiCallOptions): Promise<CreateGroupHttpResponse>;
 type CreateGroupHttpResponse = {
     data: Group;
     headers: Headers;
@@ -328,7 +328,7 @@ type CreateGroupHttpError = {
  * @param body an object with the body content
  * @throws FilterGroupsHttpError
  */
-declare const filterGroups: (query: {
+declare function filterGroups(query: {
     /** The number of user entries to retrieve. */
     limit?: number;
     /** Get users with IDs that are higher than the target user ID. Cannot be used in conjunction with prev. */
@@ -337,7 +337,7 @@ declare const filterGroups: (query: {
     prev?: string;
     /** The field to sort by, with +/- prefix indicating sort order */
     sort?: "name" | "+name" | "-name";
-}, body: Filter, options?: ApiCallOptions) => Promise<FilterGroupsHttpResponse>;
+}, body: Filter, options?: ApiCallOptions): Promise<FilterGroupsHttpResponse>;
 type FilterGroupsHttpResponse = {
     data: Groups;
     headers: Headers;
@@ -355,7 +355,7 @@ type FilterGroupsHttpError = {
  *
  * @throws GetGroupsSettingsHttpError
  */
-declare const getGroupsSettings: (options?: ApiCallOptions) => Promise<GetGroupsSettingsHttpResponse>;
+declare function getGroupsSettings(options?: ApiCallOptions): Promise<GetGroupsSettingsHttpResponse>;
 type GetGroupsSettingsHttpResponse = {
     data: GroupSettings;
     headers: Headers;
@@ -372,7 +372,7 @@ type GetGroupsSettingsHttpError = {
  * @param body an object with the body content
  * @throws PatchGroupsSettingsHttpError
  */
-declare const patchGroupsSettings: (body: SettingsPatchSchema, options?: ApiCallOptions) => Promise<PatchGroupsSettingsHttpResponse>;
+declare function patchGroupsSettings(body: SettingsPatchSchema, options?: ApiCallOptions): Promise<PatchGroupsSettingsHttpResponse>;
 type PatchGroupsSettingsHttpResponse = {
     data: void;
     headers: Headers;
@@ -389,7 +389,7 @@ type PatchGroupsSettingsHttpError = {
  * @param groupId The ID of the group to delete.
  * @throws DeleteGroupHttpError
  */
-declare const deleteGroup: (groupId: string, options?: ApiCallOptions) => Promise<DeleteGroupHttpResponse>;
+declare function deleteGroup(groupId: string, options?: ApiCallOptions): Promise<DeleteGroupHttpResponse>;
 type DeleteGroupHttpResponse = {
     data: void;
     headers: Headers;
@@ -406,7 +406,7 @@ type DeleteGroupHttpError = {
  * @param groupId The group's unique identifier
  * @throws GetGroupHttpError
  */
-declare const getGroup: (groupId: string, options?: ApiCallOptions) => Promise<GetGroupHttpResponse>;
+declare function getGroup(groupId: string, options?: ApiCallOptions): Promise<GetGroupHttpResponse>;
 type GetGroupHttpResponse = {
     data: Group;
     headers: Headers;
@@ -424,7 +424,7 @@ type GetGroupHttpError = {
  * @param body an object with the body content
  * @throws PatchGroupHttpError
  */
-declare const patchGroup: (groupId: string, body: GroupPatchSchema, options?: ApiCallOptions) => Promise<PatchGroupHttpResponse>;
+declare function patchGroup(groupId: string, body: GroupPatchSchema, options?: ApiCallOptions): Promise<PatchGroupHttpResponse>;
 type PatchGroupHttpResponse = {
     data: void;
     headers: Headers;

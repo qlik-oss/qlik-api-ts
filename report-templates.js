@@ -1,58 +1,72 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/PUS32UJH.js";
-import "./chunks/CLZXLW6N.js";
-import "./chunks/2ZQ3ZX7F.js";
+} from "./chunks/LIEZG7IM.js";
+import "./chunks/GPRUNZV4.js";
+import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/report-templates.ts
-var getReportTemplates = async (query, options) => invokeFetch("report-templates", {
-  method: "get",
-  pathTemplate: "/api/v1/report-templates",
-  query,
-  options
-});
-var createReportTemplate = async (body, options) => invokeFetch("report-templates", {
-  method: "post",
-  pathTemplate: "/api/v1/report-templates",
-  body,
-  contentType: "application/json",
-  options
-});
-var deleteReportTemplate = async (id, options) => invokeFetch("report-templates", {
-  method: "delete",
-  pathTemplate: "/api/v1/report-templates/{id}",
-  pathVariables: { id },
-  options
-});
-var getReportTemplate = async (id, options) => invokeFetch("report-templates", {
-  method: "get",
-  pathTemplate: "/api/v1/report-templates/{id}",
-  pathVariables: { id },
-  options
-});
-var patchReportTemplate = async (id, body, options) => invokeFetch("report-templates", {
-  method: "patch",
-  pathTemplate: "/api/v1/report-templates/{id}",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
-var updateReportTemplate = async (id, body, options) => invokeFetch("report-templates", {
-  method: "put",
-  pathTemplate: "/api/v1/report-templates/{id}",
-  pathVariables: { id },
-  body,
-  contentType: "application/json",
-  options
-});
-var downloadReportTemplate = async (id, options) => invokeFetch("report-templates", {
-  method: "post",
-  pathTemplate: "/api/v1/report-templates/{id}/actions/download",
-  pathVariables: { id },
-  options
-});
+async function getReportTemplates(query, options) {
+  return invokeFetch("report-templates", {
+    method: "get",
+    pathTemplate: "/api/v1/report-templates",
+    query,
+    options
+  });
+}
+async function createReportTemplate(body, options) {
+  return invokeFetch("report-templates", {
+    method: "post",
+    pathTemplate: "/api/v1/report-templates",
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function deleteReportTemplate(id, options) {
+  return invokeFetch("report-templates", {
+    method: "delete",
+    pathTemplate: "/api/v1/report-templates/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function getReportTemplate(id, options) {
+  return invokeFetch("report-templates", {
+    method: "get",
+    pathTemplate: "/api/v1/report-templates/{id}",
+    pathVariables: { id },
+    options
+  });
+}
+async function patchReportTemplate(id, body, options) {
+  return invokeFetch("report-templates", {
+    method: "patch",
+    pathTemplate: "/api/v1/report-templates/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function updateReportTemplate(id, body, options) {
+  return invokeFetch("report-templates", {
+    method: "put",
+    pathTemplate: "/api/v1/report-templates/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function downloadReportTemplate(id, options) {
+  return invokeFetch("report-templates", {
+    method: "post",
+    pathTemplate: "/api/v1/report-templates/{id}/actions/download",
+    pathVariables: { id },
+    options
+  });
+}
 function clearCache() {
   return clearApiCache("report-templates");
 }
