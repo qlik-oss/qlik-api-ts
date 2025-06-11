@@ -1,6 +1,6 @@
 import {
   getAuthRuntimeModule
-} from "./LTNGXTXG.js";
+} from "./CLZXLW6N.js";
 
 // src/public/auth.ts
 function registerAuthModule(name, authModule) {
@@ -21,12 +21,18 @@ function unregisterHostConfig(name) {
 async function getAccessToken({ hostConfig }) {
   return getAuthRuntimeModule(hostConfig).then((impl) => impl.getAccessToken({ hostConfig }));
 }
+async function getWebResourceAuthParams({
+  hostConfig
+}) {
+  return getAuthRuntimeModule(hostConfig).then((impl) => impl.getWebResourceAuthParams({ hostConfig }));
+}
 var auth_default = {
   registerAuthModule,
   setDefaultHostConfig,
   registerHostConfig,
   unregisterHostConfig,
-  getAccessToken
+  getAccessToken,
+  getWebResourceAuthParams
 };
 
 export {
@@ -36,5 +42,6 @@ export {
   registerHostConfig,
   unregisterHostConfig,
   getAccessToken,
+  getWebResourceAuthParams,
   auth_default
 };

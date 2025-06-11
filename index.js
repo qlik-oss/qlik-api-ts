@@ -1,17 +1,17 @@
 import {
   qix_default
-} from "./chunks/YTT2FEVE.js";
+} from "./chunks/IAYEJSP6.js";
 import {
   auth_default
-} from "./chunks/RCLKKVYB.js";
+} from "./chunks/6LQO4OS7.js";
 import {
   interceptors_default
 } from "./chunks/3RGGGGAR.js";
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/VVD2DPKQ.js";
-import "./chunks/LTNGXTXG.js";
+} from "./chunks/PUS32UJH.js";
+import "./chunks/CLZXLW6N.js";
 import "./chunks/2ZQ3ZX7F.js";
 
 // src/runtime-api-generator/runtime-api-generator-common.ts
@@ -202,6 +202,9 @@ function apiDefToApiPublic(namespace, def) {
     return proxy;
   };
 }
+
+// src/public/interceptors.ts
+var interceptors_default2 = interceptors_default;
 
 // src/public/index.ts
 var apiKeysMiniModule = apiDefToApiPublic("api-keys", {
@@ -660,6 +663,30 @@ var diProjectsMiniModule = apiDefToApiPublic("di-projects", {
     }
   }
 });
+var directAccessAgentsMiniModule = apiDefToApiPublic("direct-access-agents", {
+  api: {
+    v1: {
+      "direct-access-agents": {
+        "{agentId}": {
+          actions: { "{agentAction}": ["restartDirectAccessAgent:P:"] },
+          configurations: ["getDirectAccessAgentConfiguration:GQ:", "patchDirectAccessAgentConfiguration:ABJ:"],
+          connectors: {
+            "{connectorType}": {
+              files: {
+                "": ["getDirectAccessAgentConnectorFiles:GQ:", "getDirectAccessAgentConnectorFilesWithoutQuery:G:"],
+                "{fileType}": [
+                  "getDirectAccessAgentConnectorFile:G:",
+                  "updateDirectAccessAgentConnectorFile:UQBJ:",
+                  "updateDirectAccessAgentConnectorFileWithoutQuery:UBJ:"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+});
 var encryptionMiniModule = apiDefToApiPublic("encryption", {
   api: {
     v1: {
@@ -896,7 +923,10 @@ var mlMiniModule = apiDefToApiPublic("ml", {
           }
         },
         jobs: { "{corrType}": { "{corrId}": { actions: { cancel: ["cancelMlJob:P:"] } } } },
-        "profile-insights": { "": ["createMlProfileInsight:PBJ:"], "{dataSetId}": ["getMlProfileInsight:G:"] }
+        "profile-insights": {
+          "": ["createMlProfileInsight:PBJ:"],
+          "{dataSetId}": ["getMlProfileInsightWithQuery:GQ:", "getMlProfileInsight:G:"]
+        }
       }
     }
   }
@@ -1159,69 +1189,70 @@ var webhooksMiniModule = apiDefToApiPublic("webhooks", {
     }
   }
 });
-var apiKeys = apiKeysMiniModule(void 0, interceptors_default);
-var apps = appsMiniModule(void 0, interceptors_default);
-var assistants = assistantsMiniModule(void 0, interceptors_default);
-var audits = auditsMiniModule(void 0, interceptors_default);
+var apiKeys = apiKeysMiniModule(void 0, interceptors_default2);
+var apps = appsMiniModule(void 0, interceptors_default2);
+var assistants = assistantsMiniModule(void 0, interceptors_default2);
+var audits = auditsMiniModule(void 0, interceptors_default2);
 var auth = auth_default;
-var automationConnections = automationConnectionsMiniModule(void 0, interceptors_default);
-var automations = automationsMiniModule(void 0, interceptors_default);
-var automlDeployments = automlDeploymentsMiniModule(void 0, interceptors_default);
-var automlPredictions = automlPredictionsMiniModule(void 0, interceptors_default);
-var brands = brandsMiniModule(void 0, interceptors_default);
-var collections = collectionsMiniModule(void 0, interceptors_default);
-var conditions = conditionsMiniModule(void 0, interceptors_default);
-var consumption = consumptionMiniModule(void 0, interceptors_default);
-var cspOrigins = cspOriginsMiniModule(void 0, interceptors_default);
-var csrfToken = csrfTokenMiniModule(void 0, interceptors_default);
-var dataAlerts = dataAlertsMiniModule(void 0, interceptors_default);
-var dataAssets = dataAssetsMiniModule(void 0, interceptors_default);
-var dataConnections = dataConnectionsMiniModule(void 0, interceptors_default);
-var dataCredentials = dataCredentialsMiniModule(void 0, interceptors_default);
-var dataFiles = dataFilesMiniModule(void 0, interceptors_default);
-var dataQualities = dataQualitiesMiniModule(void 0, interceptors_default);
-var dataSets = dataSetsMiniModule(void 0, interceptors_default);
-var dataSources = dataSourcesMiniModule(void 0, interceptors_default);
-var dataStores = dataStoresMiniModule(void 0, interceptors_default);
-var dcaas = dcaasMiniModule(void 0, interceptors_default);
-var diProjects = diProjectsMiniModule(void 0, interceptors_default);
-var encryption = encryptionMiniModule(void 0, interceptors_default);
-var extensions = extensionsMiniModule(void 0, interceptors_default);
-var glossaries = glossariesMiniModule(void 0, interceptors_default);
-var groups = groupsMiniModule(void 0, interceptors_default);
-var identityProviders = identityProvidersMiniModule(void 0, interceptors_default);
-var interceptors = interceptors_default;
-var items = itemsMiniModule(void 0, interceptors_default);
-var knowledgebases = knowledgebasesMiniModule(void 0, interceptors_default);
-var licenses = licensesMiniModule(void 0, interceptors_default);
-var lineageGraphs = lineageGraphsMiniModule(void 0, interceptors_default);
-var ml = mlMiniModule(void 0, interceptors_default);
-var notes = notesMiniModule(void 0, interceptors_default);
-var notifications = notificationsMiniModule(void 0, interceptors_default);
-var oauthClients = oauthClientsMiniModule(void 0, interceptors_default);
-var oauthTokens = oauthTokensMiniModule(void 0, interceptors_default);
+var automationConnections = automationConnectionsMiniModule(void 0, interceptors_default2);
+var automations = automationsMiniModule(void 0, interceptors_default2);
+var automlDeployments = automlDeploymentsMiniModule(void 0, interceptors_default2);
+var automlPredictions = automlPredictionsMiniModule(void 0, interceptors_default2);
+var brands = brandsMiniModule(void 0, interceptors_default2);
+var collections = collectionsMiniModule(void 0, interceptors_default2);
+var conditions = conditionsMiniModule(void 0, interceptors_default2);
+var consumption = consumptionMiniModule(void 0, interceptors_default2);
+var cspOrigins = cspOriginsMiniModule(void 0, interceptors_default2);
+var csrfToken = csrfTokenMiniModule(void 0, interceptors_default2);
+var dataAlerts = dataAlertsMiniModule(void 0, interceptors_default2);
+var dataAssets = dataAssetsMiniModule(void 0, interceptors_default2);
+var dataConnections = dataConnectionsMiniModule(void 0, interceptors_default2);
+var dataCredentials = dataCredentialsMiniModule(void 0, interceptors_default2);
+var dataFiles = dataFilesMiniModule(void 0, interceptors_default2);
+var dataQualities = dataQualitiesMiniModule(void 0, interceptors_default2);
+var dataSets = dataSetsMiniModule(void 0, interceptors_default2);
+var dataSources = dataSourcesMiniModule(void 0, interceptors_default2);
+var dataStores = dataStoresMiniModule(void 0, interceptors_default2);
+var dcaas = dcaasMiniModule(void 0, interceptors_default2);
+var diProjects = diProjectsMiniModule(void 0, interceptors_default2);
+var directAccessAgents = directAccessAgentsMiniModule(void 0, interceptors_default2);
+var encryption = encryptionMiniModule(void 0, interceptors_default2);
+var extensions = extensionsMiniModule(void 0, interceptors_default2);
+var glossaries = glossariesMiniModule(void 0, interceptors_default2);
+var groups = groupsMiniModule(void 0, interceptors_default2);
+var identityProviders = identityProvidersMiniModule(void 0, interceptors_default2);
+var interceptors = interceptors_default2;
+var items = itemsMiniModule(void 0, interceptors_default2);
+var knowledgebases = knowledgebasesMiniModule(void 0, interceptors_default2);
+var licenses = licensesMiniModule(void 0, interceptors_default2);
+var lineageGraphs = lineageGraphsMiniModule(void 0, interceptors_default2);
+var ml = mlMiniModule(void 0, interceptors_default2);
+var notes = notesMiniModule(void 0, interceptors_default2);
+var notifications = notificationsMiniModule(void 0, interceptors_default2);
+var oauthClients = oauthClientsMiniModule(void 0, interceptors_default2);
+var oauthTokens = oauthTokensMiniModule(void 0, interceptors_default2);
 var qix = qix_default;
-var questions = questionsMiniModule(void 0, interceptors_default);
-var quotas = quotasMiniModule(void 0, interceptors_default);
-var reloadTasks = reloadTasksMiniModule(void 0, interceptors_default);
-var reloads = reloadsMiniModule(void 0, interceptors_default);
-var reportTemplates = reportTemplatesMiniModule(void 0, interceptors_default);
-var reports = reportsMiniModule(void 0, interceptors_default);
-var roles = rolesMiniModule(void 0, interceptors_default);
-var sharingTasks = sharingTasksMiniModule(void 0, interceptors_default);
-var spaces = spacesMiniModule(void 0, interceptors_default);
-var tasks = tasksMiniModule(void 0, interceptors_default);
-var tempContents = tempContentsMiniModule(void 0, interceptors_default);
-var tenants = tenantsMiniModule(void 0, interceptors_default);
-var themes = themesMiniModule(void 0, interceptors_default);
-var transports = transportsMiniModule(void 0, interceptors_default);
-var uiConfig = uiConfigMiniModule(void 0, interceptors_default);
-var users = usersMiniModule(void 0, interceptors_default);
-var webIntegrations = webIntegrationsMiniModule(void 0, interceptors_default);
-var webNotifications = webNotificationsMiniModule(void 0, interceptors_default);
-var webhooks = webhooksMiniModule(void 0, interceptors_default);
+var questions = questionsMiniModule(void 0, interceptors_default2);
+var quotas = quotasMiniModule(void 0, interceptors_default2);
+var reloadTasks = reloadTasksMiniModule(void 0, interceptors_default2);
+var reloads = reloadsMiniModule(void 0, interceptors_default2);
+var reportTemplates = reportTemplatesMiniModule(void 0, interceptors_default2);
+var reports = reportsMiniModule(void 0, interceptors_default2);
+var roles = rolesMiniModule(void 0, interceptors_default2);
+var sharingTasks = sharingTasksMiniModule(void 0, interceptors_default2);
+var spaces = spacesMiniModule(void 0, interceptors_default2);
+var tasks = tasksMiniModule(void 0, interceptors_default2);
+var tempContents = tempContentsMiniModule(void 0, interceptors_default2);
+var tenants = tenantsMiniModule(void 0, interceptors_default2);
+var themes = themesMiniModule(void 0, interceptors_default2);
+var transports = transportsMiniModule(void 0, interceptors_default2);
+var uiConfig = uiConfigMiniModule(void 0, interceptors_default2);
+var users = usersMiniModule(void 0, interceptors_default2);
+var webIntegrations = webIntegrationsMiniModule(void 0, interceptors_default2);
+var webNotifications = webNotificationsMiniModule(void 0, interceptors_default2);
+var webhooks = webhooksMiniModule(void 0, interceptors_default2);
 var createQlikApi = (props) => {
-  const scopedInterceptors = interceptors_default.createInterceptors();
+  const scopedInterceptors = interceptors_default2.createInterceptors();
   return {
     apiKeys: apiKeysMiniModule(props?.hostConfig, scopedInterceptors),
     apps: appsMiniModule(props?.hostConfig, scopedInterceptors),
@@ -1249,6 +1280,7 @@ var createQlikApi = (props) => {
     dataStores: dataStoresMiniModule(props?.hostConfig, scopedInterceptors),
     dcaas: dcaasMiniModule(props?.hostConfig, scopedInterceptors),
     diProjects: diProjectsMiniModule(props?.hostConfig, scopedInterceptors),
+    directAccessAgents: directAccessAgentsMiniModule(props?.hostConfig, scopedInterceptors),
     encryption: encryptionMiniModule(props?.hostConfig, scopedInterceptors),
     extensions: extensionsMiniModule(props?.hostConfig, scopedInterceptors),
     glossaries: glossariesMiniModule(props?.hostConfig, scopedInterceptors),
@@ -1313,6 +1345,7 @@ var api = {
   dataStores,
   dcaas,
   diProjects,
+  directAccessAgents,
   encryption,
   extensions,
   glossaries,
@@ -1380,6 +1413,7 @@ export {
   dcaas,
   public_default as default,
   diProjects,
+  directAccessAgents,
   encryption,
   extensions,
   glossaries,

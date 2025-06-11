@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/VVD2DPKQ.js";
-import "./chunks/LTNGXTXG.js";
+} from "./chunks/PUS32UJH.js";
+import "./chunks/CLZXLW6N.js";
 import "./chunks/2ZQ3ZX7F.js";
 
 // src/public/rest/ml.ts
@@ -283,6 +283,13 @@ var createMlProfileInsight = async (body, options) => invokeFetch("ml", {
   contentType: "application/json",
   options
 });
+var getMlProfileInsightWithQuery = async (dataSetId, query, options) => invokeFetch("ml", {
+  method: "get",
+  pathTemplate: "/api/v1/ml/profile-insights/{dataSetId}",
+  pathVariables: { dataSetId },
+  query,
+  options
+});
 var getMlProfileInsight = async (dataSetId, options) => invokeFetch("ml", {
   method: "get",
   pathTemplate: "/api/v1/ml/profile-insights/{dataSetId}",
@@ -333,6 +340,7 @@ var mlExport = {
   patchMlExperimentVersion,
   cancelMlJob,
   createMlProfileInsight,
+  getMlProfileInsightWithQuery,
   getMlProfileInsight,
   clearCache
 };
@@ -370,6 +378,7 @@ export {
   getMlExperimentVersions,
   getMlExperiments,
   getMlProfileInsight,
+  getMlProfileInsightWithQuery,
   patchMlDeployment,
   patchMlDeploymentAliase,
   patchMlDeploymentBatchPrediction,
