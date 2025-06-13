@@ -90,14 +90,22 @@ type AliasInput = {
  * The mode of an alias. Default mode means the model assigned to that alias will be used if alias is not specified
  */
 type AliasMode = "default" | "undefined";
+/**
+ * @example
+ * [
+ *   {
+ *     op: "replace",
+ *     path: "/name"
+ *   },
+ *   {
+ *     op: "replace",
+ *     path: "/models"
+ *   }
+ * ]
+ */
 type AliasPatch = AliasPatchItem[];
 /**
  * Alias values that can be patched.
- * @example
- * {
- *   op: "replace",
- *   path: "/name"
- * }
  */
 type AliasPatchItem = {
     /** All patch requests use the replace operation */
@@ -158,7 +166,10 @@ type BatchPrediction = {
     /** Timestamp when this was updated */
     updatedAt?: UpdatedAt;
     /** Sets which files, file names, and spaces are used to write results of
-     * batch predictions (output files) to the catalog. */
+     * batch predictions (output files) to the catalog.
+     *
+     * Note that for predictions based on time series models, `dstShapName`
+     * and `dstCoordShapName` do not apply and will be ignored if set. */
     writeback?: BatchPredictionWriteback;
 };
 /**
@@ -215,7 +226,10 @@ type BatchPredictionInput = {
             /** Configuration to schedule a batch prediction */
             schedule?: BatchPredictionScheduleInputAttributes;
             /** Sets which files, file names, and spaces are used to write results of
-             * batch predictions (output files) to the catalog. */
+             * batch predictions (output files) to the catalog.
+             *
+             * Note that for predictions based on time series models, `dstShapName`
+             * and `dstCoordShapName` do not apply and will be ignored if set. */
             writeback?: BatchPredictionWriteback;
         };
         type?: "batch-prediction";
@@ -327,6 +341,9 @@ type BatchPredictionStatus = "modified" | "ready" | "error" | "cancelled" | "pen
 /**
  * Sets which files, file names, and spaces are used to write results of
  * batch predictions (output files) to the catalog.
+ *
+ * Note that for predictions based on time series models, `dstShapName`
+ * and `dstCoordShapName` do not apply and will be ignored if set.
  */
 type BatchPredictionWriteback = {
     dstCoordShapName?: string;
@@ -354,7 +371,7 @@ type ColumnTransform = {
     changeType: string;
     name: string;
 };
-type ConfigurationKey = "DATE_INDEX" | "FUTURE_FEATURE" | "GROUP_ID" | "FORECAST_GAP_SIZE" | "FORECAST_WINDOW_SIZE";
+type ConfigurationKey = "DATE_INDEX" | "FUTURE_FEATURE" | "GROUP_ID" | "FORECAST_GAP_SIZE" | "FORECAST_WINDOW_SIZE" | "GROUP_ID_PRIMARY";
 /**
  * The ID of a correlated resource of corrType
  */
@@ -619,6 +636,30 @@ type ExperimentInput = {
  */
 type ExperimentMode = "intelligent" | "manual" | "manual_hpo";
 /**
+ * Criteria to determine which pool of models to provide recommendations from
+ */
+type ExperimentModelRecommendationFilter = {
+    /** The model algorithms to consider */
+    algorithms?: ModelAlgorithm[];
+    /** Whether to only consider models that are already deployed */
+    deployed?: boolean;
+    /** Whether to only consider models with 100% sampling */
+    fullSampling?: boolean;
+    /** The versionNumbers of the experiment versions to consider models from */
+    versionNumbers?: number[];
+};
+type ExperimentModelRecommendationPostResponse = {
+    data: {
+        /** Model recommendations */
+        attributes: {
+            bestModel?: ModelForRecommendations;
+            fastestModel?: ModelForRecommendations;
+            mostAccurateModel?: ModelForRecommendations;
+        };
+        type: "model-recommendation";
+    };
+};
+/**
  * @example
  * [
  *   {
@@ -743,6 +784,13 @@ type ExperimentVersionGetResponse = {
         id: EntityId;
         type: "experiment-version";
     };
+    /** Metadata not directly part of the ExperimentVersion type */
+    meta?: {
+        /** TrainingMetadata returned from MLCore. This will contain
+         * more specific information about items like groups, systemRecommendations,
+         * and window/gap values */
+        trainingMetadata?: TrainingMetadata;
+    };
 };
 /**
  * ID of the experiment version
@@ -850,6 +898,12 @@ type FeatureInsights = {
      * objects within a NestedColumn, each of which may contain its own
      * FeatureInsights. */
     engineeredFeatures?: string[];
+    /** Only applies for time series experiment types. This intial estimate
+     * of the combined max forecast window and gap (aka - horizon). It only
+     * applies to possible date index columns. After the experiment version
+     * is created, we get a more precise number for subsequent versions.
+     * When training data is grouped, this estimate may be less accurate. */
+    estimatedMaxForecastHorizon?: number;
     /** Experiment types in this feature insight */
     experimentTypes: ExperimentType[];
     /** List of insights about this feature. */
@@ -884,6 +938,15 @@ type FileType = string;
  */
 type FindResponseMeta = {
     count: number;
+};
+/**
+ * A group identifier that consists of the column name associated
+ * and the type of group (primary or secondary).
+ */
+type GroupId = {
+    column: string;
+    /** Indicates the type of group (primary or secondary groups) */
+    type?: TimeseriesGroupType;
 };
 /**
  * A optional column name upon which to create an index. Must be unique for
@@ -974,6 +1037,12 @@ type ModelFindResponse = {
     links: ResponseLinks;
     /** Meta for FIND operations */
     meta?: FindResponseMeta;
+};
+type ModelForRecommendations = Model & {
+    metrics?: {
+        /** This represents model prediction speed in rows/second */
+        predictionSpeed: number;
+    };
 };
 type ModelGetResponse = {
     data: {
@@ -1364,10 +1433,45 @@ type SpaceId = string;
  */
 type TenantId = string;
 /**
+ * Indicates the type of group (primary or secondary groups)
+ */
+type TimeseriesGroupType = "primary" | "secondary";
+/**
  * Training duration in seconds. If provided, minimum is 900 (15m) and
  * max is 21600 (6h).
  */
 type TrainingDuration = number;
+/**
+ * TrainingMetadata returned from MLCore. This will contain
+ * more specific information about items like groups, systemRecommendations,
+ * and window/gap values
+ */
+type TrainingMetadata = {
+    /** The maximum value to be used for the length of the apply dataset.
+     * This value is 3x the forecast window */
+    applyWindow?: number;
+    /** Timestamp when this was created */
+    createdAt?: CreatedAt;
+    /** The maximum range that can be forecasted */
+    forecastWindow?: number;
+    futureCovarianceColumns?: string[];
+    /** The gap between the end of the training dataset
+     * and the start of the forecast window */
+    gap?: number;
+    isUsingSystemRecGrouping?: boolean;
+    /** The maximum value for the forecast horizon
+     * The forecast horizon is equal to the gap + forecast window */
+    maxForecastHorizon?: number;
+    /** The grouping selected for the experiment version */
+    selectedGrouping?: GroupId[];
+    staticCovarianceColumns?: string[];
+    /** Recommended groupings constructed from the workers */
+    systemRecommendations?: GroupId[];
+    targetColumns?: string[];
+    timeRangeUsed?: string[];
+    /** The interval of time between each grouping of data in the dataset */
+    timeStep?: string;
+};
 type Transform = {
     column?: ColumnTransform;
 };
@@ -2038,6 +2142,24 @@ type PatchMlExperimentHttpError = {
     status: number;
 };
 /**
+ * Returns model recommendations for a specified experiment, including the best-performing, fastest, and most accurate models based on evaluation metrics.
+ *
+ * @param experimentId ID of the experiment
+ * @param body an object with the body content
+ * @throws RecommendModelsMlExperimentHttpError
+ */
+declare function recommendModelsMlExperiment(experimentId: string, body: ExperimentModelRecommendationFilter, options?: ApiCallOptions): Promise<RecommendModelsMlExperimentHttpResponse>;
+type RecommendModelsMlExperimentHttpResponse = {
+    data: ExperimentModelRecommendationPostResponse;
+    headers: Headers;
+    status: 200;
+};
+type RecommendModelsMlExperimentHttpError = {
+    data: Failure;
+    headers: Headers;
+    status: number;
+};
+/**
  * List models
  *
  * @param experimentId ID of the experiment
@@ -2568,6 +2690,14 @@ interface MlAPI {
      */
     patchMlExperiment: typeof patchMlExperiment;
     /**
+     * Returns model recommendations for a specified experiment, including the best-performing, fastest, and most accurate models based on evaluation metrics.
+     *
+     * @param experimentId ID of the experiment
+     * @param body an object with the body content
+     * @throws RecommendModelsMlExperimentHttpError
+     */
+    recommendModelsMlExperiment: typeof recommendModelsMlExperiment;
+    /**
      * List models
      *
      * @param experimentId ID of the experiment
@@ -2673,4 +2803,4 @@ interface MlAPI {
  */
 declare const mlExport: MlAPI;
 
-export { type APIError, type ActivateModelsMlDeploymentHttpError, type ActivateModelsMlDeploymentHttpResponse, type AddMlDeploymentModelsHttpError, type AddMlDeploymentModelsHttpResponse, type Alias, type AliasFindResponse, type AliasGetResponse, type AliasId, type AliasInput, type AliasMode, type AliasPatch, type AliasPatchItem, type AliasPostResponse, type AnyType, type BatchPrediction, type BatchPredictionActionResponse, type BatchPredictionFindResponse, type BatchPredictionGetResponse, type BatchPredictionInput, type BatchPredictionPatch, type BatchPredictionPostResponse, type BatchPredictionSchedule, type BatchPredictionScheduleGetResponse, type BatchPredictionScheduleInput, type BatchPredictionScheduleInputAttributes, type BatchPredictionSchedulePatch, type BatchPredictionSchedulePutResponse, type BatchPredictionStatus, type BatchPredictionWriteback, type BinaryImbalanceSampling, type CancelMlJobHttpError, type CancelMlJobHttpResponse, type ChangeType, type ColumnTransform, type ConfigurationKey, type CorrId, type CorrType, type CreateMlDeploymentAliaseHttpError, type CreateMlDeploymentAliaseHttpResponse, type CreateMlDeploymentBatchPredictionHttpError, type CreateMlDeploymentBatchPredictionHttpResponse, type CreateMlDeploymentHttpError, type CreateMlDeploymentHttpResponse, type CreateMlExperimentHttpError, type CreateMlExperimentHttpResponse, type CreateMlExperimentVersionHttpError, type CreateMlExperimentVersionHttpResponse, type CreateMlProfileInsightHttpError, type CreateMlProfileInsightHttpResponse, type CreatedAt, type CreatedBy, type DataSchemaConfiguration, type DataSetId, type DataType, type DatasetOrigin, type DateIndexes, type DeactivateModelsMlDeploymentHttpError, type DeactivateModelsMlDeploymentHttpResponse, type DeleteMlDeploymentAliaseHttpError, type DeleteMlDeploymentAliaseHttpResponse, type DeleteMlDeploymentBatchPredictionHttpError, type DeleteMlDeploymentBatchPredictionHttpResponse, type DeleteMlDeploymentBatchPredictionScheduleHttpError, type DeleteMlDeploymentBatchPredictionScheduleHttpResponse, type DeleteMlDeploymentHttpError, type DeleteMlDeploymentHttpResponse, type DeleteMlExperimentHttpError, type DeleteMlExperimentHttpResponse, type DeleteMlExperimentVersionHttpError, type DeleteMlExperimentVersionHttpResponse, type DeletedAt, type DeployedModelIds, type DeployedModelsInput, type Deployment, type DeploymentFindResponse, type DeploymentGetResponse, type DeploymentId, type DeploymentInput, type DeploymentPatch, type DeploymentPostResponse, type DroppedFeature, type EntityDescription, type EntityId, type EntityName, type EnumSortAliases, type EnumSortBatchPredictions, type EnumSortDeployments, type EnumSortExperimentVersions, type EnumSortExperiments, type EnumSortModels, type ErrorMessage, type Errors, type Experiment, type ExperimentFindResponse, type ExperimentGetResponse, type ExperimentId, type ExperimentInput, type ExperimentMode, type ExperimentPatch, type ExperimentPatchItem, type ExperimentPostResponse, type ExperimentType, type ExperimentVersion, type ExperimentVersionFindResponse, type ExperimentVersionGetResponse, type ExperimentVersionId, type ExperimentVersionInput, type ExperimentVersionPatch, type ExperimentVersionPostResponse, type Failure, type Feature, type FeatureInsights, type FeatureType, type FeaturesList, type FileType, type FindResponseMeta, type GetMlDeploymentAliaseHttpError, type GetMlDeploymentAliaseHttpResponse, type GetMlDeploymentAliasesHttpError, type GetMlDeploymentAliasesHttpResponse, type GetMlDeploymentBatchPredictionHttpError, type GetMlDeploymentBatchPredictionHttpResponse, type GetMlDeploymentBatchPredictionScheduleHttpError, type GetMlDeploymentBatchPredictionScheduleHttpResponse, type GetMlDeploymentBatchPredictionsHttpError, type GetMlDeploymentBatchPredictionsHttpResponse, type GetMlDeploymentHttpError, type GetMlDeploymentHttpResponse, type GetMlDeploymentsHttpError, type GetMlDeploymentsHttpResponse, type GetMlExperimentHttpError, type GetMlExperimentHttpResponse, type GetMlExperimentModelHttpError, type GetMlExperimentModelHttpResponse, type GetMlExperimentModelsHttpError, type GetMlExperimentModelsHttpResponse, type GetMlExperimentVersionHttpError, type GetMlExperimentVersionHttpResponse, type GetMlExperimentVersionsHttpError, type GetMlExperimentVersionsHttpResponse, type GetMlExperimentsHttpError, type GetMlExperimentsHttpResponse, type GetMlProfileInsightHttpError, type GetMlProfileInsightHttpResponse, type GetMlProfileInsightWithQueryHttpError, type GetMlProfileInsightWithQueryHttpResponse, type IndexColumn, type Insights, type JobType, type MlAPI, type Model, type ModelAlgorithm, type ModelAlgorithmAbbreviation, type ModelFindResponse, type ModelGetResponse, type ModelId, type ModelInfo, type ModelMetrics, type ModelMetricsBinary, type ModelMetricsMulticlass, type ModelMetricsRegression, type ModelMetricsTimeseries, type ModelState, type ModelStatus, type ModelsInfo, type OutputFile, type OwnerId, type ParentJobId, type PatchMlDeploymentAliaseHttpError, type PatchMlDeploymentAliaseHttpResponse, type PatchMlDeploymentBatchPredictionHttpError, type PatchMlDeploymentBatchPredictionHttpResponse, type PatchMlDeploymentHttpError, type PatchMlDeploymentHttpResponse, type PatchMlExperimentHttpError, type PatchMlExperimentHttpResponse, type PatchMlExperimentVersionHttpError, type PatchMlExperimentVersionHttpResponse, type Pipeline, type PredictMlDeploymentBatchPredictionHttpError, type PredictMlDeploymentBatchPredictionHttpResponse, type PredictionJobResponse, type PreprocessedInsightColumn, type ProfileInsights, type ProfileInsightsGetResponse, type ProfileInsightsInput, type RealTimePredictionInputSchema, type RealTimePredictionSchema, type RealtimePrediction, type RealtimePredictionInput, type RemoveMlDeploymentModelsHttpError, type RemoveMlDeploymentModelsHttpResponse, type ResponseLinks, type RunMlDeploymentAliaseRealtimePredictionsHttpError, type RunMlDeploymentAliaseRealtimePredictionsHttpResponse, type RunMlDeploymentRealtimePredictionsHttpError, type RunMlDeploymentRealtimePredictionsHttpResponse, type SetMlDeploymentBatchPredictionScheduleHttpError, type SetMlDeploymentBatchPredictionScheduleHttpResponse, type SpaceId, type TenantId, type TrainingDuration, type Transform, type UpdateMlDeploymentBatchPredictionScheduleHttpError, type UpdateMlDeploymentBatchPredictionScheduleHttpResponse, type UpdatedAt, activateModelsMlDeployment, addMlDeploymentModels, cancelMlJob, clearCache, createMlDeployment, createMlDeploymentAliase, createMlDeploymentBatchPrediction, createMlExperiment, createMlExperimentVersion, createMlProfileInsight, deactivateModelsMlDeployment, mlExport as default, deleteMlDeployment, deleteMlDeploymentAliase, deleteMlDeploymentBatchPrediction, deleteMlDeploymentBatchPredictionSchedule, deleteMlExperiment, deleteMlExperimentVersion, getMlDeployment, getMlDeploymentAliase, getMlDeploymentAliases, getMlDeploymentBatchPrediction, getMlDeploymentBatchPredictionSchedule, getMlDeploymentBatchPredictions, getMlDeployments, getMlExperiment, getMlExperimentModel, getMlExperimentModels, getMlExperimentVersion, getMlExperimentVersions, getMlExperiments, getMlProfileInsight, getMlProfileInsightWithQuery, patchMlDeployment, patchMlDeploymentAliase, patchMlDeploymentBatchPrediction, patchMlExperiment, patchMlExperimentVersion, predictMlDeploymentBatchPrediction, removeMlDeploymentModels, runMlDeploymentAliaseRealtimePredictions, runMlDeploymentRealtimePredictions, setMlDeploymentBatchPredictionSchedule, updateMlDeploymentBatchPredictionSchedule };
+export { type APIError, type ActivateModelsMlDeploymentHttpError, type ActivateModelsMlDeploymentHttpResponse, type AddMlDeploymentModelsHttpError, type AddMlDeploymentModelsHttpResponse, type Alias, type AliasFindResponse, type AliasGetResponse, type AliasId, type AliasInput, type AliasMode, type AliasPatch, type AliasPatchItem, type AliasPostResponse, type AnyType, type BatchPrediction, type BatchPredictionActionResponse, type BatchPredictionFindResponse, type BatchPredictionGetResponse, type BatchPredictionInput, type BatchPredictionPatch, type BatchPredictionPostResponse, type BatchPredictionSchedule, type BatchPredictionScheduleGetResponse, type BatchPredictionScheduleInput, type BatchPredictionScheduleInputAttributes, type BatchPredictionSchedulePatch, type BatchPredictionSchedulePutResponse, type BatchPredictionStatus, type BatchPredictionWriteback, type BinaryImbalanceSampling, type CancelMlJobHttpError, type CancelMlJobHttpResponse, type ChangeType, type ColumnTransform, type ConfigurationKey, type CorrId, type CorrType, type CreateMlDeploymentAliaseHttpError, type CreateMlDeploymentAliaseHttpResponse, type CreateMlDeploymentBatchPredictionHttpError, type CreateMlDeploymentBatchPredictionHttpResponse, type CreateMlDeploymentHttpError, type CreateMlDeploymentHttpResponse, type CreateMlExperimentHttpError, type CreateMlExperimentHttpResponse, type CreateMlExperimentVersionHttpError, type CreateMlExperimentVersionHttpResponse, type CreateMlProfileInsightHttpError, type CreateMlProfileInsightHttpResponse, type CreatedAt, type CreatedBy, type DataSchemaConfiguration, type DataSetId, type DataType, type DatasetOrigin, type DateIndexes, type DeactivateModelsMlDeploymentHttpError, type DeactivateModelsMlDeploymentHttpResponse, type DeleteMlDeploymentAliaseHttpError, type DeleteMlDeploymentAliaseHttpResponse, type DeleteMlDeploymentBatchPredictionHttpError, type DeleteMlDeploymentBatchPredictionHttpResponse, type DeleteMlDeploymentBatchPredictionScheduleHttpError, type DeleteMlDeploymentBatchPredictionScheduleHttpResponse, type DeleteMlDeploymentHttpError, type DeleteMlDeploymentHttpResponse, type DeleteMlExperimentHttpError, type DeleteMlExperimentHttpResponse, type DeleteMlExperimentVersionHttpError, type DeleteMlExperimentVersionHttpResponse, type DeletedAt, type DeployedModelIds, type DeployedModelsInput, type Deployment, type DeploymentFindResponse, type DeploymentGetResponse, type DeploymentId, type DeploymentInput, type DeploymentPatch, type DeploymentPostResponse, type DroppedFeature, type EntityDescription, type EntityId, type EntityName, type EnumSortAliases, type EnumSortBatchPredictions, type EnumSortDeployments, type EnumSortExperimentVersions, type EnumSortExperiments, type EnumSortModels, type ErrorMessage, type Errors, type Experiment, type ExperimentFindResponse, type ExperimentGetResponse, type ExperimentId, type ExperimentInput, type ExperimentMode, type ExperimentModelRecommendationFilter, type ExperimentModelRecommendationPostResponse, type ExperimentPatch, type ExperimentPatchItem, type ExperimentPostResponse, type ExperimentType, type ExperimentVersion, type ExperimentVersionFindResponse, type ExperimentVersionGetResponse, type ExperimentVersionId, type ExperimentVersionInput, type ExperimentVersionPatch, type ExperimentVersionPostResponse, type Failure, type Feature, type FeatureInsights, type FeatureType, type FeaturesList, type FileType, type FindResponseMeta, type GetMlDeploymentAliaseHttpError, type GetMlDeploymentAliaseHttpResponse, type GetMlDeploymentAliasesHttpError, type GetMlDeploymentAliasesHttpResponse, type GetMlDeploymentBatchPredictionHttpError, type GetMlDeploymentBatchPredictionHttpResponse, type GetMlDeploymentBatchPredictionScheduleHttpError, type GetMlDeploymentBatchPredictionScheduleHttpResponse, type GetMlDeploymentBatchPredictionsHttpError, type GetMlDeploymentBatchPredictionsHttpResponse, type GetMlDeploymentHttpError, type GetMlDeploymentHttpResponse, type GetMlDeploymentsHttpError, type GetMlDeploymentsHttpResponse, type GetMlExperimentHttpError, type GetMlExperimentHttpResponse, type GetMlExperimentModelHttpError, type GetMlExperimentModelHttpResponse, type GetMlExperimentModelsHttpError, type GetMlExperimentModelsHttpResponse, type GetMlExperimentVersionHttpError, type GetMlExperimentVersionHttpResponse, type GetMlExperimentVersionsHttpError, type GetMlExperimentVersionsHttpResponse, type GetMlExperimentsHttpError, type GetMlExperimentsHttpResponse, type GetMlProfileInsightHttpError, type GetMlProfileInsightHttpResponse, type GetMlProfileInsightWithQueryHttpError, type GetMlProfileInsightWithQueryHttpResponse, type GroupId, type IndexColumn, type Insights, type JobType, type MlAPI, type Model, type ModelAlgorithm, type ModelAlgorithmAbbreviation, type ModelFindResponse, type ModelForRecommendations, type ModelGetResponse, type ModelId, type ModelInfo, type ModelMetrics, type ModelMetricsBinary, type ModelMetricsMulticlass, type ModelMetricsRegression, type ModelMetricsTimeseries, type ModelState, type ModelStatus, type ModelsInfo, type OutputFile, type OwnerId, type ParentJobId, type PatchMlDeploymentAliaseHttpError, type PatchMlDeploymentAliaseHttpResponse, type PatchMlDeploymentBatchPredictionHttpError, type PatchMlDeploymentBatchPredictionHttpResponse, type PatchMlDeploymentHttpError, type PatchMlDeploymentHttpResponse, type PatchMlExperimentHttpError, type PatchMlExperimentHttpResponse, type PatchMlExperimentVersionHttpError, type PatchMlExperimentVersionHttpResponse, type Pipeline, type PredictMlDeploymentBatchPredictionHttpError, type PredictMlDeploymentBatchPredictionHttpResponse, type PredictionJobResponse, type PreprocessedInsightColumn, type ProfileInsights, type ProfileInsightsGetResponse, type ProfileInsightsInput, type RealTimePredictionInputSchema, type RealTimePredictionSchema, type RealtimePrediction, type RealtimePredictionInput, type RecommendModelsMlExperimentHttpError, type RecommendModelsMlExperimentHttpResponse, type RemoveMlDeploymentModelsHttpError, type RemoveMlDeploymentModelsHttpResponse, type ResponseLinks, type RunMlDeploymentAliaseRealtimePredictionsHttpError, type RunMlDeploymentAliaseRealtimePredictionsHttpResponse, type RunMlDeploymentRealtimePredictionsHttpError, type RunMlDeploymentRealtimePredictionsHttpResponse, type SetMlDeploymentBatchPredictionScheduleHttpError, type SetMlDeploymentBatchPredictionScheduleHttpResponse, type SpaceId, type TenantId, type TimeseriesGroupType, type TrainingDuration, type TrainingMetadata, type Transform, type UpdateMlDeploymentBatchPredictionScheduleHttpError, type UpdateMlDeploymentBatchPredictionScheduleHttpResponse, type UpdatedAt, activateModelsMlDeployment, addMlDeploymentModels, cancelMlJob, clearCache, createMlDeployment, createMlDeploymentAliase, createMlDeploymentBatchPrediction, createMlExperiment, createMlExperimentVersion, createMlProfileInsight, deactivateModelsMlDeployment, mlExport as default, deleteMlDeployment, deleteMlDeploymentAliase, deleteMlDeploymentBatchPrediction, deleteMlDeploymentBatchPredictionSchedule, deleteMlExperiment, deleteMlExperimentVersion, getMlDeployment, getMlDeploymentAliase, getMlDeploymentAliases, getMlDeploymentBatchPrediction, getMlDeploymentBatchPredictionSchedule, getMlDeploymentBatchPredictions, getMlDeployments, getMlExperiment, getMlExperimentModel, getMlExperimentModels, getMlExperimentVersion, getMlExperimentVersions, getMlExperiments, getMlProfileInsight, getMlProfileInsightWithQuery, patchMlDeployment, patchMlDeploymentAliase, patchMlDeploymentBatchPrediction, patchMlExperiment, patchMlExperimentVersion, predictMlDeploymentBatchPrediction, recommendModelsMlExperiment, removeMlDeploymentModels, runMlDeploymentAliaseRealtimePredictions, runMlDeploymentRealtimePredictions, setMlDeploymentBatchPredictionSchedule, updateMlDeploymentBatchPredictionSchedule };

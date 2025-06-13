@@ -80,7 +80,7 @@ type UpdateConfigurationFlatFileRequest = {
     contentsToSave?: string[];
 };
 /**
- * Restarts the specified agent. If a reload is in `RELOADING` status, the `restart` action will be ignored, but `force-restart` will restart the agent even if a reload is in `RELOADING` status. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.2+.
+ * Restarts the specified agent. If a reload is in `RELOADING` status the `restart` action will be ignored. Use `force-restart` to restart the agent even if a reload is in `RELOADING` status. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
  *
  * @param agentId The agent ID
  * @param agentAction The type of action to perform. Permitted values are `restart` (will not restart the agent if a reload is in `RELOADING` status) and `force-restart` (will restart the agent even if a reload is in `RELOADING` status).
@@ -95,10 +95,10 @@ type RestartDirectAccessAgentHttpResponse = {
 type RestartDirectAccessAgentHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: 400 | 403 | 404;
+    status: 400 | 403 | 404 | 409 | 500;
 };
 /**
- * Retrieves the connector agent configuration from the specified agent. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.2+.
+ * Retrieves the connector agent configuration from the specified agent. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
  *
  * @param agentId The agent ID
  * @param query an object with query parameters
@@ -116,10 +116,10 @@ type GetDirectAccessAgentConfigurationHttpResponse = {
 type GetDirectAccessAgentConfigurationHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: 404;
+    status: 403 | 404;
 };
 /**
- * Makes changes to the local agent configuration using JSON Patch. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.2+.
+ * Makes changes to the local agent configuration using JSON Patch. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
  *
  * @param agentId The agent ID
  * @param body an object with the body content
@@ -140,10 +140,10 @@ type PatchDirectAccessAgentConfiguration207HttpResponse = {
 type PatchDirectAccessAgentConfigurationHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: 400 | 404 | 415;
+    status: 400 | 403 | 404 | 415;
 };
 /**
- * Retrieves the configuration files associated with the connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.4+.
+ * Retrieves the configuration files associated with the connector. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
  *
  * @param agentId The agent ID
  * @param connectorType The connector to retrieve the list of files for
@@ -159,10 +159,10 @@ type GetDirectAccessAgentConnectorFilesHttpResponse = {
 type GetDirectAccessAgentConnectorFilesHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: 404;
+    status: 403 | 404;
 };
 /**
- * Retrieves the configuration files associated with the connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.4+.
+ * Retrieves the configuration files associated with the connector. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
  *
  * @param agentId The agent ID
  * @param connectorType The connector to retrieve the list of files for
@@ -177,10 +177,10 @@ type GetDirectAccessAgentConnectorFilesWithoutQueryHttpResponse = {
 type GetDirectAccessAgentConnectorFilesWithoutQueryHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: 404;
+    status: 403 | 404;
 };
 /**
- * Retrieves the configuration items in the flat file for the specified connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.4+.
+ * Retrieves the configuration items in the flat file for the specified connector. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
  *
  * @param agentId The agent ID
  * @param connectorType The connector type to retrieve
@@ -196,10 +196,10 @@ type GetDirectAccessAgentConnectorFileHttpResponse = {
 type GetDirectAccessAgentConnectorFileHttpError = {
     data: ErrorResponse;
     headers: Headers;
-    status: 404;
+    status: 403 | 404;
 };
 /**
- * Completely replaces the contents of the connector's configuration file. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.4+.
+ * Completely replaces the contents of the connector's configuration file. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
  *
  * @param agentId The agent ID
  * @param connectorType The connector type to update
@@ -220,7 +220,7 @@ type UpdateDirectAccessAgentConnectorFileHttpError = {
     status: 400 | 404 | 409;
 };
 /**
- * Completely replaces the contents of the connector's configuration file. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.4+.
+ * Completely replaces the contents of the connector's configuration file. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
  *
  * @param agentId The agent ID
  * @param connectorType The connector type to update
@@ -245,7 +245,7 @@ type UpdateDirectAccessAgentConnectorFileWithoutQueryHttpError = {
 declare function clearCache(): void;
 interface DirectAccessAgentsAPI {
     /**
-     * Restarts the specified agent. If a reload is in `RELOADING` status, the `restart` action will be ignored, but `force-restart` will restart the agent even if a reload is in `RELOADING` status. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.2+.
+     * Restarts the specified agent. If a reload is in `RELOADING` status the `restart` action will be ignored. Use `force-restart` to restart the agent even if a reload is in `RELOADING` status. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
      *
      * @param agentId The agent ID
      * @param agentAction The type of action to perform. Permitted values are `restart` (will not restart the agent if a reload is in `RELOADING` status) and `force-restart` (will restart the agent even if a reload is in `RELOADING` status).
@@ -253,7 +253,7 @@ interface DirectAccessAgentsAPI {
      */
     restartDirectAccessAgent: typeof restartDirectAccessAgent;
     /**
-     * Retrieves the connector agent configuration from the specified agent. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.2+.
+     * Retrieves the connector agent configuration from the specified agent. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
      *
      * @param agentId The agent ID
      * @param query an object with query parameters
@@ -261,7 +261,7 @@ interface DirectAccessAgentsAPI {
      */
     getDirectAccessAgentConfiguration: typeof getDirectAccessAgentConfiguration;
     /**
-     * Makes changes to the local agent configuration using JSON Patch. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.2+.
+     * Makes changes to the local agent configuration using JSON Patch. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
      *
      * @param agentId The agent ID
      * @param body an object with the body content
@@ -269,7 +269,7 @@ interface DirectAccessAgentsAPI {
      */
     patchDirectAccessAgentConfiguration: typeof patchDirectAccessAgentConfiguration;
     /**
-     * Retrieves the configuration files associated with the connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.4+.
+     * Retrieves the configuration files associated with the connector. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
      *
      * @param agentId The agent ID
      * @param connectorType The connector to retrieve the list of files for
@@ -278,7 +278,7 @@ interface DirectAccessAgentsAPI {
      */
     getDirectAccessAgentConnectorFiles: typeof getDirectAccessAgentConnectorFiles;
     /**
-     * Retrieves the configuration files associated with the connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.4+.
+     * Retrieves the configuration files associated with the connector. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
      *
      * @param agentId The agent ID
      * @param connectorType The connector to retrieve the list of files for
@@ -286,7 +286,7 @@ interface DirectAccessAgentsAPI {
      */
     getDirectAccessAgentConnectorFilesWithoutQuery: typeof getDirectAccessAgentConnectorFilesWithoutQuery;
     /**
-     * Retrieves the configuration items in the flat file for the specified connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.4+.
+     * Retrieves the configuration items in the flat file for the specified connector. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
      *
      * @param agentId The agent ID
      * @param connectorType The connector type to retrieve
@@ -295,7 +295,7 @@ interface DirectAccessAgentsAPI {
      */
     getDirectAccessAgentConnectorFile: typeof getDirectAccessAgentConnectorFile;
     /**
-     * Completely replaces the contents of the connector's configuration file. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.4+.
+     * Completely replaces the contents of the connector's configuration file. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
      *
      * @param agentId The agent ID
      * @param connectorType The connector type to update
@@ -306,7 +306,7 @@ interface DirectAccessAgentsAPI {
      */
     updateDirectAccessAgentConnectorFile: typeof updateDirectAccessAgentConnectorFile;
     /**
-     * Completely replaces the contents of the connector's configuration file. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.4+.
+     * Completely replaces the contents of the connector's configuration file. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
      *
      * @param agentId The agent ID
      * @param connectorType The connector type to update

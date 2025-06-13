@@ -4,7 +4,7 @@ import './auth-types-Cj5bM3Yk.js';
 /**
  * The supported actions for user-created spaces.
  */
-type ActionName = "change_owner" | "create" | "read" | "update" | "delete" | "publish" | "link_environment";
+type ActionName = "change_owner" | "create" | "read" | "update" | "delete" | "publish" | "link_environment" | "restrict";
 type Assignment = {
     /** The userId or groupId based on the type. */
     assigneeId: string;
@@ -425,12 +425,16 @@ type UpdateSpaceHttpError = {
 declare function getSpaceAssignments(spaceId: string, query: {
     /** Filters assignment for a specific assigneeid. */
     assigneeId?: string;
+    /** The bot user of the assignment. The value should be a boolean, for example ?botUser=true */
+    botUser?: boolean;
     /** Maximum number of assignments to return. */
     limit?: number;
     /** The next page cursor. Next links make use of this. */
     next?: string;
     /** The previous page cursor. Previous links make use of this. */
     prev?: string;
+    /** The roles of the assignment. The value should be a comma separated list of roles, for example ?roles=facilitator,contributor */
+    roles?: RoleType[];
     /** The type of assignment. Supported values are user or group. */
     type?: AssignmentType;
 }, options?: ApiCallOptions): Promise<GetSpaceAssignmentsHttpResponse>;

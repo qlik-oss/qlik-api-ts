@@ -4,6 +4,7 @@ import {
   InvalidHostConfigError,
   UnexpectedAuthTypeError,
   determineAuthType,
+  getDefaultHostConfig,
   getRestCallAuthParams,
   getWebResourceAuthParams,
   getWebSocketAuthParams,
@@ -18,13 +19,14 @@ import {
   toValidLocationUrl,
   toValidWebsocketLocationUrl,
   unregisterHostConfig
-} from "./OTIO4SEJ.js";
+} from "./I2HA7WJB.js";
 import "./ZCTVPXGO.js";
 import "./7MMXU6EL.js";
 
 // src/auth/auth.ts
 var auth = {
   determineAuthType,
+  getDefaultHostConfig,
   getRestCallAuthParams,
   getWebResourceAuthParams,
   getWebSocketAuthParams,
@@ -48,6 +50,7 @@ export {
   UnexpectedAuthTypeError,
   auth_default as default,
   determineAuthType,
+  getDefaultHostConfig,
   getRestCallAuthParams,
   getWebResourceAuthParams,
   getWebSocketAuthParams,

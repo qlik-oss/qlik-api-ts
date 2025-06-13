@@ -1,17 +1,17 @@
 import {
   qix_default
-} from "./chunks/33GQY7N7.js";
+} from "./chunks/QZKOA6VR.js";
 import {
   auth_default
-} from "./chunks/SPATCXXU.js";
+} from "./chunks/6C6WMV7V.js";
 import {
   interceptors_default
 } from "./chunks/ZCTVPXGO.js";
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/LIEZG7IM.js";
-import "./chunks/GPRUNZV4.js";
+} from "./chunks/6WNP7HZQ.js";
+import "./chunks/QAOVZB27.js";
 import "./chunks/7MMXU6EL.js";
 
 // src/runtime-api-generator/runtime-api-generator-common.ts
@@ -911,6 +911,7 @@ var mlMiniModule = apiDefToApiPublic("ml", {
           "": ["getMlExperiments:GQ:", "createMlExperiment:PBJ:"],
           "{experimentId}": {
             "": ["deleteMlExperiment:D:", "getMlExperiment:G:", "patchMlExperiment:ABJ:"],
+            actions: { "recommend-models": ["recommendModelsMlExperiment:PBJ:"] },
             models: { "": ["getMlExperimentModels:GQ:"], "{modelId}": ["getMlExperimentModel:G:"] },
             versions: {
               "": ["getMlExperimentVersions:GQ:", "createMlExperimentVersion:PBJ:"],
