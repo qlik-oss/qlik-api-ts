@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/LIEZG7IM.js";
-import "./chunks/GPRUNZV4.js";
+} from "./chunks/6WNP7HZQ.js";
+import "./chunks/QAOVZB27.js";
 import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/ml.ts
@@ -284,6 +284,16 @@ async function patchMlExperiment(experimentId, body, options) {
     options
   });
 }
+async function recommendModelsMlExperiment(experimentId, body, options) {
+  return invokeFetch("ml", {
+    method: "post",
+    pathTemplate: "/api/v1/ml/experiments/{experimentId}/actions/recommend-models",
+    pathVariables: { experimentId },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
 async function getMlExperimentModels(experimentId, query, options) {
   return invokeFetch("ml", {
     method: "get",
@@ -415,6 +425,7 @@ var mlExport = {
   deleteMlExperiment,
   getMlExperiment,
   patchMlExperiment,
+  recommendModelsMlExperiment,
   getMlExperimentModels,
   getMlExperimentModel,
   getMlExperimentVersions,
@@ -469,6 +480,7 @@ export {
   patchMlExperiment,
   patchMlExperimentVersion,
   predictMlDeploymentBatchPrediction,
+  recommendModelsMlExperiment,
   removeMlDeploymentModels,
   runMlDeploymentAliaseRealtimePredictions,
   runMlDeploymentRealtimePredictions,

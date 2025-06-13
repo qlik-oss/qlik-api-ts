@@ -1421,13 +1421,6 @@ var AuthorizationError = class extends Error {
 };
 
 // src/auth/internal/host-config-functions.ts
-var defaultHostConfig = {};
-function setDefaultHostConfigInternal(hostConfig) {
-  defaultHostConfig = hostConfig || {};
-}
-function getDefaultHostConfigInternal() {
-  return defaultHostConfig;
-}
 function removeDefaults(hostConfig) {
   const cleanedHostConfig = cleanFalsyValues(hostConfig) || {};
   if (cleanedHostConfig.host) {
@@ -1449,13 +1442,13 @@ function globalReplacer(key, value) {
   }
   return value;
 }
-function serializeHostConfigInternal(hostConfig) {
+function serializeHostConfig(hostConfig) {
   const hostConfigToUse = removeDefaults(withResolvedHostConfig(hostConfig));
   const sorted = sortKeys(hostConfigToUse);
   return JSON.stringify(sorted, globalReplacer);
 }
 var registeredHostConfigs = /* @__PURE__ */ new Map();
-function registerHostConfigInternal(name, hostConfig) {
+function registerHostConfig(name, hostConfig) {
   if (hostConfig?.reference) {
     throw new InvalidHostConfigError("Cannot register a host config with a reference");
   }
@@ -1464,18 +1457,21 @@ function registerHostConfigInternal(name, hostConfig) {
   }
   registeredHostConfigs.set(name, hostConfig);
 }
-function unregisterHostConfigInternal(name) {
+function unregisterHostConfig(name) {
   if (registeredHostConfigs.has(name)) {
     registeredHostConfigs.delete(name);
   } else {
     console.warn(`unregisterHostConfig: Host config with name "${name}" not found.`);
   }
 }
-function getRegisteredHostConfigInternal(name) {
-  if (!registeredHostConfigs.has(name)) {
-    throw new Error(`Host config with name "${name}" not found.`);
-  }
+function getRegisteredHostConfig(name) {
   return registeredHostConfigs.get(name);
+}
+function setDefaultHostConfig(hostConfig) {
+  registerHostConfig("default", hostConfig || {});
+}
+function getDefaultHostConfig() {
+  return getRegisteredHostConfig("default") || {};
 }
 
 // src/auth/auth-functions.ts
@@ -1605,17 +1601,17 @@ async function getRestCallAuthParams8(props) {
 function registerAuthModule2(name, authModule) {
   registerAuthModule(name, authModule);
 }
-function setDefaultHostConfig(hostConfig) {
-  setDefaultHostConfigInternal(hostConfig);
+function setDefaultHostConfig2(hostConfig) {
+  setDefaultHostConfig(hostConfig);
 }
-function registerHostConfig(name, hostConfig) {
-  registerHostConfigInternal(name, hostConfig);
+function registerHostConfig2(name, hostConfig) {
+  registerHostConfig(name, hostConfig);
 }
-function unregisterHostConfig(name) {
-  unregisterHostConfigInternal(name);
+function unregisterHostConfig2(name) {
+  unregisterHostConfig(name);
 }
-function serializeHostConfig(hostConfig) {
-  return serializeHostConfigInternal(hostConfig);
+function serializeHostConfig2(hostConfig) {
+  return serializeHostConfig(hostConfig);
 }
 function checkForCrossDomainRequest(hostConfig) {
   const hostConfigToUse = withResolvedHostConfig(hostConfig);
@@ -1648,12 +1644,21 @@ function normalizeAuthModuleError(err) {
 }
 function withResolvedHostConfig(hostConfig) {
   if (hostConfig?.reference) {
-    return getRegisteredHostConfigInternal(hostConfig.reference);
+    const refConfig = getRegisteredHostConfig(hostConfig.reference);
+    if (!refConfig) {
+      throw new InvalidHostConfigError(
+        `Host config with name "${hostConfig.reference}" not found.`
+      );
+    }
+    return refConfig;
   }
   if (hostConfig && Object.keys(hostConfig).length > 0) {
     return hostConfig;
   }
-  return getDefaultHostConfigInternal();
+  return getDefaultHostConfig();
+}
+function getDefaultHostConfig2() {
+  return getDefaultHostConfig();
 }
 
 // src/invoke-fetch/internal/invoke-fetch-helpers.ts
@@ -2034,7 +2039,7 @@ async function getInvokeFetchUrlParams({
   const url = locationUrl + applyPathVariables(pathTemplate, pathVariables);
   const queryString = encodeQueryParams({ ...query, ...authQueryParams });
   const completeUrl = toCompleteUrl(url, queryString);
-  const cacheKey = toCacheKey(url, queryString, serializeHostConfig(options?.hostConfig), options?.headers);
+  const cacheKey = toCacheKey(url, queryString, serializeHostConfig2(options?.hostConfig), options?.headers);
   return { completeUrl, cacheKey, authHeaders, credentials };
 }
 function invokeFetchWithUrl(api, props) {
@@ -2113,7 +2118,7 @@ function invokeFetchWithUrlAndRetry(api, {
   return cloneResultPromise(resultPromiseAfterCacheClearing);
 }
 function addPagingFunctions(api, value, method, body, options, authHeaders, credentials) {
-  const serializedHostConfig = serializeHostConfig(options?.hostConfig);
+  const serializedHostConfig = serializeHostConfig2(options?.hostConfig);
   return value.then((resp) => {
     const dataWithPotentialLinks = resp.data;
     if (!dataWithPotentialLinks) {
@@ -2326,9 +2331,10 @@ export {
   handleAuthenticationError8 as handleAuthenticationError,
   getRestCallAuthParams8 as getRestCallAuthParams,
   registerAuthModule2 as registerAuthModule,
-  setDefaultHostConfig,
-  registerHostConfig,
-  unregisterHostConfig,
-  serializeHostConfig,
-  logout
+  setDefaultHostConfig2 as setDefaultHostConfig,
+  registerHostConfig2 as registerHostConfig,
+  unregisterHostConfig2 as unregisterHostConfig,
+  serializeHostConfig2 as serializeHostConfig,
+  logout,
+  getDefaultHostConfig2 as getDefaultHostConfig
 };

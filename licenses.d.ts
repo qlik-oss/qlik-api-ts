@@ -328,6 +328,8 @@ type LicenseOverview = {
     capabilityBankId?: string;
     /** An ISO 8601 timestamp for when the license was last changed. */
     changeTime?: string;
+    /** Customer ID */
+    customerId?: string;
     /** An ISO 8601 timestamp for when the latest time the license has been known to be valid, a missing value indicates the indefinite future. */
     latestValidTime?: string;
     licenseKey: string;
@@ -388,7 +390,7 @@ type LicenseStatus = {
     /** Boolean indicating if it is a trial license. */
     trial: boolean;
     /** Type of license key. */
-    type: "Signed" | "Plain" | 2;
+    type: "Signed" | "Plain" | "2.0";
     /** Period that the license is currently set to be active. Represented as an ISO 8601 time interval with start and end. */
     valid: string;
 };

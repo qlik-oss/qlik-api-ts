@@ -39,7 +39,7 @@ type ApiKeyBody = {
 type ApiKeyConfigPatch = {
     /** The operation to be performed. */
     op: "replace";
-    /** The path for the given resource field to patch. */
+    /** The path for the given resource field to patch. The '/api_keys_enabled' option is deprecated and will be removed in a future release. */
     path: "/api_keys_enabled" | "/max_api_key_expiry" | "/max_keys_per_user" | "/scim_externalClient_expiry";
     /** The value to be used for this operation. */
     value: unknown;
@@ -80,7 +80,8 @@ type ApiKeyWithToken = {
     token: string;
 };
 type ApiKeysConfig = {
-    /** Enables or disables user API key functionality for the specified tenant. */
+    /** @deprecated
+     * Enables or disables user API key functionality for the specified tenant. */
     api_keys_enabled?: boolean;
     /** The maximum lifetime, in ISO8601 duration format, for which an API key can be issued for the specified tenant, e.g. `P7D` for 7 days. */
     max_api_key_expiry?: string;
