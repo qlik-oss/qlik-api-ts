@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@qlik+runtime-module-loader@1.0.21/node_modules/@qlik/runtime-module-loader/dist/index.js
+// node_modules/.pnpm/@qlik+runtime-module-loader@1.0.22/node_modules/@qlik/runtime-module-loader/dist/index.js
 window.__qlikMainPrivateResolvers = window.__qlikMainPrivateResolvers || {};
 window.__qlikMainPrivateResolvers.mainUrlPromise = window.__qlikMainPrivateResolvers.mainUrlPromise || new Promise((resolve) => {
   window.__qlikMainPrivateResolvers.resolveMainJsUrl = (value) => resolve(value);
