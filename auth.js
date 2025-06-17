@@ -7,8 +7,8 @@ import {
   registerHostConfig,
   setDefaultHostConfig,
   unregisterHostConfig
-} from "./chunks/6C6WMV7V.js";
-import "./chunks/QAOVZB27.js";
+} from "./chunks/IF5BLC7L.js";
+import "./chunks/GZ7FHV5J.js";
 export {
   auth_default as default,
   getAccessToken,
