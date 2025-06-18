@@ -1,4 +1,8 @@
 import {
+  authTypesThatCanBeOmitted,
+  hostConfigCommonProperties
+} from "./3Z3VFAGW.js";
+import {
   getInterceptors
 } from "./ZCTVPXGO.js";
 import {
@@ -156,24 +160,6 @@ var result = (data) => ({
   isAnonymous: false,
   ...data
 });
-
-// src/auth/auth-types.ts
-var hostConfigCommonProperties = [
-  "authType",
-  "autoRedirect",
-  "authRedirectUserConfirmation",
-  "embedRuntimeUrl",
-  "host",
-  "onAuthFailed"
-];
-var authTypesThatCanBeOmitted = [
-  "apikey",
-  "oauth2",
-  "cookie",
-  "windowscookie",
-  "reference",
-  "anonymous"
-];
 
 // src/utils/random.ts
 import { customAlphabet, nanoid } from "nanoid";
