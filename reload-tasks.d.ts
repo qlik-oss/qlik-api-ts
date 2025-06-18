@@ -1,5 +1,4 @@
-import { A as ApiCallOptions } from './invoke-fetch-types-BYCD4pc9.js';
-import './auth-types-Cj5bM3Yk.js';
+import { A as ApiCallOptions } from './invoke-fetch-types-D62-HKKp.js';
 
 type Error = {
     code: string;

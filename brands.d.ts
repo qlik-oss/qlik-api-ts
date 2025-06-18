@@ -1,5 +1,4 @@
-import { A as ApiCallOptions, D as DownloadableBlob } from './invoke-fetch-types-BYCD4pc9.js';
-import './auth-types-Cj5bM3Yk.js';
+import { A as ApiCallOptions, D as DownloadableBlob } from './invoke-fetch-types-D62-HKKp.js';
 
 /**
  * A brand is a collection of assets for applying custom branding. Only a single brand can be active in a tenant.
