@@ -1,17 +1,17 @@
 import {
   qix_default
-} from "./chunks/JQBBQWLH.js";
+} from "./chunks/HRPAGB5W.js";
 import {
   auth_default
-} from "./chunks/SOQJR5Y3.js";
+} from "./chunks/G3FOSXFO.js";
 import {
   interceptors_default
 } from "./chunks/ZCTVPXGO.js";
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/NPB36P3M.js";
-import "./chunks/L5QSVLDQ.js";
+} from "./chunks/P6F6QA4Y.js";
+import "./chunks/DN5SVV4X.js";
 import "./chunks/7MMXU6EL.js";
 
 // src/runtime-api-generator/runtime-api-generator-common.ts
@@ -359,6 +359,8 @@ var automationsMiniModule = apiDefToApiPublic("automations", {
         "{id}": {
           "": ["deleteAutomation:D:", "getAutomationWithQuery:GQ:", "getAutomation:G:", "updateAutomation:UBJ:"],
           actions: {
+            "change-owner": ["changeOwnerAutomation:PBJ:"],
+            "change-space": ["changeSpaceAutomation:PBJ:"],
             copy: ["copyAutomation:PBJ:"],
             disable: ["disableAutomation:P:"],
             enable: ["enableAutomation:P:"],

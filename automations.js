@@ -1,8 +1,8 @@
 import {
   clearApiCache,
   invokeFetch
-} from "./chunks/NPB36P3M.js";
-import "./chunks/L5QSVLDQ.js";
+} from "./chunks/P6F6QA4Y.js";
+import "./chunks/DN5SVV4X.js";
 import "./chunks/7MMXU6EL.js";
 
 // src/public/rest/automations.ts
@@ -60,6 +60,26 @@ async function updateAutomation(id, body, options) {
   return invokeFetch("automations", {
     method: "put",
     pathTemplate: "/api/v1/automations/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function changeOwnerAutomation(id, body, options) {
+  return invokeFetch("automations", {
+    method: "post",
+    pathTemplate: "/api/v1/automations/{id}/actions/change-owner",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options
+  });
+}
+async function changeSpaceAutomation(id, body, options) {
+  return invokeFetch("automations", {
+    method: "post",
+    pathTemplate: "/api/v1/automations/{id}/actions/change-space",
     pathVariables: { id },
     body,
     contentType: "application/json",
@@ -173,6 +193,8 @@ var automationsExport = {
   getAutomationWithQuery,
   getAutomation,
   updateAutomation,
+  changeOwnerAutomation,
+  changeSpaceAutomation,
   copyAutomation,
   disableAutomation,
   enableAutomation,
@@ -188,6 +210,8 @@ var automationsExport = {
 };
 var automations_default = automationsExport;
 export {
+  changeOwnerAutomation,
+  changeSpaceAutomation,
   clearCache,
   copyAutomation,
   createAutomation,
