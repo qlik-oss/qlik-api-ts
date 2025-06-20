@@ -20,7 +20,7 @@ const hostConfig = {
 };
 
 // sets a default host config for every api request
-auth.setDefaultConfig(hostConfig);
+auth.setDefaultHostConfig(hostConfig);
 
 const { data: mySpaces } = spaces.getSpaces();
 
