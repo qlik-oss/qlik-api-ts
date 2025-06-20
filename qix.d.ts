@@ -1,6 +1,6 @@
 import { H as HostConfig } from './invoke-fetch-types-D62-HKKp.js';
 
-declare const QIX_SCHEMA_VERSION = "12.2471.0";
+declare const QIX_SCHEMA_VERSION = "12.2472.0";
 type AlfaNumString = {
     /**
      * Calculated value.
@@ -4000,7 +4000,11 @@ type NxGroupDef = {
     /**
      * Specifies the type of the group's object members.
      */
-    qType?: string;
+    qObjectType?: string;
+    /**
+     * Specifies the type of the group's subgroup members.
+     */
+    qGroupType?: string;
     /**
      * The group's label. Will be evaluated as an expression if it starts with '='.
      */
@@ -10025,7 +10029,8 @@ type NativeGenericObjectFunctions<CustomProperties, CustomLayout, GenericObjectR
     createChild: <CustomChildProperties = GenericObjectProperties, CustomGenericObject = GenericObjectRpcObject>(prop: CustomChildProperties, propForThis?: CustomProperties) => Promise<CustomGenericObject>;
     /**
      * You can use the CreateGroup method with any object that contains an object grouping definition.
-     * This method allows you to create a new subgroup of objects directly and add it to a groups members.
+     * This method allows you to create a new subgroup of objects directly and add it to a group's members.
+     * Returns the ID of the created subgroup.
      *
      * Parameters:
      *

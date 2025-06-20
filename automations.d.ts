@@ -346,6 +346,48 @@ type UpdateAutomationHttpError = {
     status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * Changes the owner of an automation to another user. This action removes the history and change logs of this automation. All linked connections used in the automation are detached and not moved to the new owner.
+ *
+ * @param id The unique identifier for the automation.
+ * @param body an object with the body content
+ * @throws ChangeOwnerAutomationHttpError
+ */
+declare function changeOwnerAutomation(id: string, body: {
+    /** The unique identifier of the new owner. */
+    userId: string;
+}, options?: ApiCallOptions): Promise<ChangeOwnerAutomationHttpResponse>;
+type ChangeOwnerAutomationHttpResponse = {
+    data: void;
+    headers: Headers;
+    status: 204;
+};
+type ChangeOwnerAutomationHttpError = {
+    data: ErrorResponse;
+    headers: Headers;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
+};
+/**
+ * Changes the space of an automation by specifying a new space.
+ *
+ * @param id The unique identifier for the automation.
+ * @param body an object with the body content
+ * @throws ChangeSpaceAutomationHttpError
+ */
+declare function changeSpaceAutomation(id: string, body: {
+    /** The unique identifier of the new space. */
+    spaceId: string;
+}, options?: ApiCallOptions): Promise<ChangeSpaceAutomationHttpResponse>;
+type ChangeSpaceAutomationHttpResponse = {
+    data: void;
+    headers: Headers;
+    status: 204;
+};
+type ChangeSpaceAutomationHttpError = {
+    data: ErrorResponse;
+    headers: Headers;
+    status: 400 | 401 | 403 | 404 | 500 | 503;
+};
+/**
  * Duplicates an existing automation. The requesting user must be the owner of the automation.
  *
  * @param id The unique identifier for the automation.
@@ -629,6 +671,22 @@ interface AutomationsAPI {
      */
     updateAutomation: typeof updateAutomation;
     /**
+     * Changes the owner of an automation to another user. This action removes the history and change logs of this automation. All linked connections used in the automation are detached and not moved to the new owner.
+     *
+     * @param id The unique identifier for the automation.
+     * @param body an object with the body content
+     * @throws ChangeOwnerAutomationHttpError
+     */
+    changeOwnerAutomation: typeof changeOwnerAutomation;
+    /**
+     * Changes the space of an automation by specifying a new space.
+     *
+     * @param id The unique identifier for the automation.
+     * @param body an object with the body content
+     * @throws ChangeSpaceAutomationHttpError
+     */
+    changeSpaceAutomation: typeof changeSpaceAutomation;
+    /**
      * Duplicates an existing automation. The requesting user must be the owner of the automation.
      *
      * @param id The unique identifier for the automation.
@@ -725,4 +783,4 @@ interface AutomationsAPI {
  */
 declare const automationsExport: AutomationsAPI;
 
-export { type AutomationDetailRequestObject, type AutomationDetailResponseObject, type AutomationList, type AutomationListObject, type AutomationUsageObject, type AutomationsAPI, type CopyAutomationHttpError, type CopyAutomationHttpResponse, type CreateAutomationHttpError, type CreateAutomationHttpResponse, type DeleteAutomationHttpError, type DeleteAutomationHttpResponse, type DisableAutomationHttpError, type DisableAutomationHttpResponse, type EnableAutomationHttpError, type EnableAutomationHttpResponse, type Error, type ErrorResponse, type GetAutomationHttpError, type GetAutomationHttpResponse, type GetAutomationRunDetailsHttpError, type GetAutomationRunDetailsHttpResponse, type GetAutomationRunHttpError, type GetAutomationRunHttpResponse, type GetAutomationRunWithQueryHttpError, type GetAutomationRunWithQueryHttpResponse, type GetAutomationRunsHttpError, type GetAutomationRunsHttpResponse, type GetAutomationWithQueryHttpError, type GetAutomationWithQueryHttpResponse, type GetAutomationsHttpError, type GetAutomationsHttpResponse, type GetAutomationsUsageMetricsHttpError, type GetAutomationsUsageMetricsHttpResponse, type Links, type MoveAutomationHttpError, type MoveAutomationHttpResponse, type PaginationLink, type QueueAutomationRunHttpError, type QueueAutomationRunHttpResponse, type RetryAutomationRunHttpError, type RetryAutomationRunHttpResponse, type RunDetailRequestObject, type RunDetailResponseObject, type RunList, type RunListObject, type ScheduleRequestObject, type ScheduleResponseObject, type StopAutomationRunHttpError, type StopAutomationRunHttpResponse, type UpdateAutomationHttpError, type UpdateAutomationHttpResponse, type UsageList, type UsageObject, clearCache, copyAutomation, createAutomation, automationsExport as default, deleteAutomation, disableAutomation, enableAutomation, getAutomation, getAutomationRun, getAutomationRunDetails, getAutomationRunWithQuery, getAutomationRuns, getAutomationWithQuery, getAutomations, getAutomationsUsageMetrics, moveAutomation, queueAutomationRun, retryAutomationRun, stopAutomationRun, updateAutomation };
+export { type AutomationDetailRequestObject, type AutomationDetailResponseObject, type AutomationList, type AutomationListObject, type AutomationUsageObject, type AutomationsAPI, type ChangeOwnerAutomationHttpError, type ChangeOwnerAutomationHttpResponse, type ChangeSpaceAutomationHttpError, type ChangeSpaceAutomationHttpResponse, type CopyAutomationHttpError, type CopyAutomationHttpResponse, type CreateAutomationHttpError, type CreateAutomationHttpResponse, type DeleteAutomationHttpError, type DeleteAutomationHttpResponse, type DisableAutomationHttpError, type DisableAutomationHttpResponse, type EnableAutomationHttpError, type EnableAutomationHttpResponse, type Error, type ErrorResponse, type GetAutomationHttpError, type GetAutomationHttpResponse, type GetAutomationRunDetailsHttpError, type GetAutomationRunDetailsHttpResponse, type GetAutomationRunHttpError, type GetAutomationRunHttpResponse, type GetAutomationRunWithQueryHttpError, type GetAutomationRunWithQueryHttpResponse, type GetAutomationRunsHttpError, type GetAutomationRunsHttpResponse, type GetAutomationWithQueryHttpError, type GetAutomationWithQueryHttpResponse, type GetAutomationsHttpError, type GetAutomationsHttpResponse, type GetAutomationsUsageMetricsHttpError, type GetAutomationsUsageMetricsHttpResponse, type Links, type MoveAutomationHttpError, type MoveAutomationHttpResponse, type PaginationLink, type QueueAutomationRunHttpError, type QueueAutomationRunHttpResponse, type RetryAutomationRunHttpError, type RetryAutomationRunHttpResponse, type RunDetailRequestObject, type RunDetailResponseObject, type RunList, type RunListObject, type ScheduleRequestObject, type ScheduleResponseObject, type StopAutomationRunHttpError, type StopAutomationRunHttpResponse, type UpdateAutomationHttpError, type UpdateAutomationHttpResponse, type UsageList, type UsageObject, changeOwnerAutomation, changeSpaceAutomation, clearCache, copyAutomation, createAutomation, automationsExport as default, deleteAutomation, disableAutomation, enableAutomation, getAutomation, getAutomationRun, getAutomationRunDetails, getAutomationRunWithQuery, getAutomationRuns, getAutomationWithQuery, getAutomations, getAutomationsUsageMetrics, moveAutomation, queueAutomationRun, retryAutomationRun, stopAutomationRun, updateAutomation };
