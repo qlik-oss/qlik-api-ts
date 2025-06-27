@@ -1,29 +1,41 @@
-import {
-  clearApiCache,
-  invokeFetch
-} from "./chunks/P6F6QA4Y.js";
-import "./chunks/DN5SVV4X.js";
-import "./chunks/7MMXU6EL.js";
+import "./chunks/utils-qEQ6sEXX.js";
+import "./chunks/public-runtime-modules-n9GdugeL.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DeSj7yXG.js";
 
-// src/public/rest/automl-deployments.ts
+//#region src/public/rest/automl-deployments.ts
+/**
+* Generates predictions in a synchronous request and response.
+*
+* @param deploymentId The ID of the ML deployed model that will be employed to produce predictions.
+* @param query an object with query parameters
+* @param body an object with the body content
+* @throws CreateAutomlDeploymentRealtimePredictionHttpError
+*/
 async function createAutomlDeploymentRealtimePrediction(deploymentId, query, body, options) {
-  return invokeFetch("automl-deployments", {
-    method: "post",
-    pathTemplate: "/api/v1/automl-deployments/{deploymentId}/realtime-predictions",
-    pathVariables: { deploymentId },
-    query,
-    body,
-    contentType: "application/json",
-    options
-  });
+	return invokeFetch("automl-deployments", {
+		method: "post",
+		pathTemplate: "/api/v1/automl-deployments/{deploymentId}/realtime-predictions",
+		pathVariables: { deploymentId },
+		query,
+		body,
+		contentType: "application/json",
+		options
+	});
 }
+/**
+* Clears the cache for automl-deployments api requests.
+*/
 function clearCache() {
-  return clearApiCache("automl-deployments");
+	return clearApiCache("automl-deployments");
 }
-var automlDeploymentsExport = { createAutomlDeploymentRealtimePrediction, clearCache };
-var automl_deployments_default = automlDeploymentsExport;
-export {
-  clearCache,
-  createAutomlDeploymentRealtimePrediction,
-  automl_deployments_default as default
+/**
+* Functions for the automl-deployments api
+*/
+const automlDeploymentsExport = {
+	createAutomlDeploymentRealtimePrediction,
+	clearCache
 };
+var automl_deployments_default = automlDeploymentsExport;
+
+//#endregion
+export { clearCache, createAutomlDeploymentRealtimePrediction, automl_deployments_default as default };

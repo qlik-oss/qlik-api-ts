@@ -1,35 +1,50 @@
-import {
-  clearApiCache,
-  invokeFetch
-} from "./chunks/P6F6QA4Y.js";
-import "./chunks/DN5SVV4X.js";
-import "./chunks/7MMXU6EL.js";
+import "./chunks/utils-qEQ6sEXX.js";
+import "./chunks/public-runtime-modules-n9GdugeL.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DeSj7yXG.js";
 
-// src/public/rest/notes.ts
+//#region src/public/rest/notes.ts
+/**
+* Get the enablement status of the notes feature set for this tenant and user.
+*
+* @throws GetNotesSettingsHttpError
+*/
 async function getNotesSettings(options) {
-  return invokeFetch("notes", {
-    method: "get",
-    pathTemplate: "/api/v1/notes/settings",
-    options
-  });
+	return invokeFetch("notes", {
+		method: "get",
+		pathTemplate: "/api/v1/notes/settings",
+		options
+	});
 }
+/**
+* update the settings
+*
+* @param body an object with the body content
+* @throws SetNotesSettingsHttpError
+*/
 async function setNotesSettings(body, options) {
-  return invokeFetch("notes", {
-    method: "put",
-    pathTemplate: "/api/v1/notes/settings",
-    body,
-    contentType: "application/json",
-    options
-  });
+	return invokeFetch("notes", {
+		method: "put",
+		pathTemplate: "/api/v1/notes/settings",
+		body,
+		contentType: "application/json",
+		options
+	});
 }
+/**
+* Clears the cache for notes api requests.
+*/
 function clearCache() {
-  return clearApiCache("notes");
+	return clearApiCache("notes");
 }
-var notesExport = { getNotesSettings, setNotesSettings, clearCache };
-var notes_default = notesExport;
-export {
-  clearCache,
-  notes_default as default,
-  getNotesSettings,
-  setNotesSettings
+/**
+* Functions for the notes api
+*/
+const notesExport = {
+	getNotesSettings,
+	setNotesSettings,
+	clearCache
 };
+var notes_default = notesExport;
+
+//#endregion
+export { clearCache, notes_default as default, getNotesSettings, setNotesSettings };

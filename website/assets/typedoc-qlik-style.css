@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:400,600");
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,600");
 
 /*
  * Define colors
@@ -9,7 +9,10 @@
   /* Qlik "Light default" */
   --light-color-background: #ffffff;
   --light-color-background-secondary: #fafafa;
+  --light-color-background-footer: #54565a;
   --light-color-background-navbar: rgb(25, 66, 108);
+  --light-color-background-app-menu: #0d2136;
+  --light-color-border-app-menu: #ffffff;
   --light-color-background-overlay: #c8d1da66;
 
   --light-color-accent: #d9d9d9;
@@ -31,7 +34,10 @@
   /* Qlik "Dark default" */
   --dark-color-background: #333333;
   --dark-color-background-secondary: #262626;
+  --dark-color-background-footer: #323436;
   --dark-color-background-navbar: rgb(5, 13, 22);
+  --dark-color-background-app-menu: hsl(0 0% 0%);
+  --dark-color-border-app-menu: #ffffff;
   --dark-color-background-overlay: #21283066;
 
   --dark-color-accent: #808080;
@@ -55,34 +61,48 @@
   --color-contrast-text: var(--color-text);
   --color-icon-background: var(--color-background);
   --color-focus-outline: var(--color-accent);
+
+  --toolbar-height: 80px;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
+    --color-background-footer: var(--light-color-background-footer);
     --color-background-navbar: var(--light-color-background-navbar);
     --color-background-overlay: var(--light-color-background-overlay);
     --color-warning-border: var(--light-color-warning-border);
+    --color-background-app-menu: var(--light-color-background-app-menu);
+    --color-border-app-menu: var(--light-color-border-app-menu);
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --color-background-footer: var(--dark-color-background-footer);
     --color-background-navbar: var(--dark-color-background-navbar);
     --color-background-overlay: var(--dark-color-background-overlay);
     --color-warning-border: var(--dark-color-warning-border);
+    --color-background-app-menu: var(--dark-color-background-app-menu);
+    --color-border-app-menu: var(--dark-color-border-app-menu);
   }
 }
 
 :root[data-theme="light"] {
+  --color-background-footer: var(--light-color-background-footer);
   --color-background-navbar: var(--light-color-background-navbar);
   --color-background-overlay: var(--light-color-background-overlay);
   --color-warning-border: var(--light-color-warning-border);
+  --color-background-app-menu: var(--light-color-background-app-menu);
+  --color-border-app-menu: var(--light-color-border-app-menu);
 }
 
 :root[data-theme="dark"] {
+  --color-background-footer: var(--dark-color-background-footer);
   --color-background-navbar: var(--dark-color-background-navbar);
   --color-background-overlay: var(--dark-color-background-overlay);
   --color-warning-border: var(--dark-color-warning-border);
+  --color-background-app-menu: var(--dark-color-background-app-menu);
+  --color-border-app-menu: var(--dark-color-border-app-menu);
 }
 
 /*
@@ -105,6 +125,21 @@ body {
 .tsd-page-toolbar a.title {
   color: var(--dark-color-text);
   text-decoration: none;
+  border-bottom: 2px solid transparent;
+  max-width: 30ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tsd-page-toolbar a.title:hover {
+  border-bottom: 2px solid var(--color-alert-tip);
+}
+/* Hide it on really small screen */
+/* TODO: Add it somewhere else for access? */
+@media (max-width: 600px) {
+  .tsd-page-toolbar a.title {
+    display: none;
+  }
 }
 
 /*
@@ -145,6 +180,8 @@ code.tsd-tag {
  */
 
 .tsd-page-toolbar {
+  display: flex;
+  height: var(--toolbar-height);
   background-color: var(--color-background-navbar);
   border-bottom-color: var(--color-accent);
   color: var(--dark-color-text);
@@ -152,6 +189,86 @@ code.tsd-tag {
 
 .tsd-page-toolbar > * {
   color: var(--dark-color-text);
+}
+.tsd-toolbar-contents.container {
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 8px;
+}
+.tsd-toolbar-contents.container > * {
+  display: flex;
+  align-items: center;
+}
+.tsd-toolbar-nav {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-inline: 8px;
+  height: 100%;
+  width: 100%;
+}
+
+.tsd-toolbar-contents {
+  margin: unset;
+  width: 100%;
+  gap: 8px;
+}
+
+.tsd-toolbar-contents .tsd-toolbar-logo {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  min-height: 20px;
+  width: 222px;
+  padding: 6px;
+}
+
+.tsd-toolbar-nav-section {
+  color: var(--dark-color-text);
+}
+.tsd-toolbar-left-section {
+  gap: 8px;
+}
+.tsd-toolbar-right-section {
+  display: flex;
+  gap: 8px;
+  width: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+  justify-content: end;
+}
+.tsd-toolbar-links {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.5rem 0.5rem;
+}
+.tsd-widget {
+  height: 36px;
+  width: 36px;
+}
+
+/*
+ * Toolbar trigger to open mobile menu (the typedoc hamburger icon)
+ */
+#tsd-toolbar-menu-trigger {
+  color: var(--dark-color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: color 0.15s;
+}
+#tsd-toolbar-menu-trigger:hover {
+  background: rgba(180, 180, 180, 0.18);
+}
+#tsd-toolbar-menu-trigger:active {
+  background: rgba(120, 120, 120, 0.22);
+}
+@media (min-width: 770px) {
+  #tsd-toolbar-menu-trigger {
+    display: none;
+  }
 }
 
 /*
@@ -163,7 +280,7 @@ code.tsd-tag {
   width: fit-content;
   height: fit-content;
   border: unset;
-  padding: 6px;
+  padding: 10px;
   background-color: var(--color-background-secondary);
   transition: opacity 0.15s ease-in-out;
 }
@@ -216,11 +333,6 @@ footer {
   color: var(--color-text);
   border-radius: 4px;
   padding: 4px;
-}
-
-.tsd-navigation a,
-.tsd-navigation a:hover {
-  text-decoration: none;
 }
 
 .tsd-navigation a:hover:not(.current) {
@@ -281,4 +393,216 @@ footer p {
   transition: transform 0.1s ease-in-out;
   margin-top: auto;
   margin-bottom: auto;
+}
+
+/* qlik.dev footer */
+
+footer {
+  display: flex;
+  justify-content: center;
+  background-color: var(--color-background-footer);
+  color: var(--dark-color-text);
+  padding: 0 16px;
+  max-height: unset;
+}
+
+footer .wrapper {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 64px 0;
+  width: 940px;
+  column-gap: 32px;
+  row-gap: 16px;
+  align-items: center;
+}
+
+@media screen and (max-width: 900px) {
+  footer .wrapper {
+    grid-template-columns: 1fr;
+    width: auto;
+    gap: 32px;
+  }
+}
+
+footer .wrapper img {
+  margin: 0;
+}
+
+footer .wrapper a {
+  color: var(--dark-color-text);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+footer .wrapper a:hover {
+  text-decoration: underline;
+}
+
+footer .wrapper a:focus {
+  outline-color: var(--dark-color-text);
+}
+
+footer .wrapper .icons a:hover {
+  text-decoration: none;
+}
+
+footer .wrapper a.text {
+  font-size: 1.125rem;
+}
+
+footer .wrapper .icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+footer .wrapper .icons a {
+  display: flex;
+  align-items: center;
+}
+
+footer .wrapper .social {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+footer .wrapper .legal {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+footer .wrapper .legal .links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+footer .wrapper .legal .copyright {
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+/*
+* Toolbar navigation
+*/
+
+/* hide checkbox itself */
+.tsd-toolbar-nav-toggle {
+  position: absolute;
+  left: -9999px;
+}
+.tsd-toolbar-dropdown {
+  display: none; /* shown only on mobile, see media query below */
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: color 0.15s;
+}
+.tsd-toolbar-dropdown:hover {
+  background: rgba(180, 180, 180, 0.18);
+}
+.tsd-toolbar-dropdown:active,
+.tsd-toolbar-nav-toggle:checked + .tsd-toolbar-dropdown {
+  background: rgba(120, 120, 120, 0.22);
+}
+
+.tsd-toolbar-desktop-nav {
+  width: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+  font-size: 1.125rem;
+}
+/* desktop list stays inline */
+.tsd-toolbar-desktop-nav ul {
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tsd-toolbar-desktop-nav a {
+  color: var(--dark-color-text);
+  text-decoration: none;
+}
+.tsd-toolbar-desktop-nav a:hover {
+  border-bottom: 2px solid var(--color-alert-tip);
+}
+
+/* mobile sheet (initially collapsed) */
+.tsd-toolbar-mobile-nav {
+  max-height: 0;
+  overflow: hidden;
+  position: fixed;
+  top: var(--toolbar-height, 80px);
+  left: 0;
+  right: 0;
+  background: var(--color-background-app-menu);
+  z-index: 30;
+  transition: max-height 0.2s ease;
+}
+
+.tsd-toolbar-mobile-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 0;
+  margin: 0;
+  list-style: none;
+}
+.tsd-toolbar-mobile-nav a {
+  color: var(--dark-color-text);
+  margin-left: 8px;
+  text-decoration: none;
+}
+.tsd-toolbar-mobile-nav li {
+  color: var(--dark-color-text);
+  position: relative;
+}
+.tsd-toolbar-mobile-nav li:hover {
+  background: none;
+}
+.tsd-toolbar-mobile-nav li:hover::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--color-alert-tip);
+}
+
+/* Under 1260px we make some changes on the toolbar */
+@media (max-width: 1260px) {
+  .tsd-toolbar-dropdown {
+    display: flex;
+  }
+  .tsd-toolbar-desktop-nav {
+    display: none;
+  }
+
+  .tsd-toolbar-links {
+    flex-direction: column;
+    gap: 0;
+    padding: 1.5rem 2rem;
+
+    & > :not(:last-child) {
+      border-bottom-style: solid;
+      border-bottom-color: var(--color-border-app-menu);
+    }
+  }
+
+  /* expand sheet when checkbox checked */
+  #tsd-toolbar-nav-toggle:checked ~ .tsd-toolbar-mobile-nav {
+    max-height: 50vh;
+  }
+  #tsd-toolbar-nav-toggle:checked ~ .tsd-toolbar-nav-overlay {
+    display: block;
+  }
 }

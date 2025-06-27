@@ -1,25 +1,34 @@
-import {
-  clearApiCache,
-  invokeFetch
-} from "./chunks/P6F6QA4Y.js";
-import "./chunks/DN5SVV4X.js";
-import "./chunks/7MMXU6EL.js";
+import "./chunks/utils-qEQ6sEXX.js";
+import "./chunks/public-runtime-modules-n9GdugeL.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DeSj7yXG.js";
 
-// src/public/rest/csrf-token.ts
+//#region src/public/rest/csrf-token.ts
+/**
+* Returns CSRF token via the qlik-csrf-token header.
+*
+* @throws GetCsrfTokenHttpError
+*/
 async function getCsrfToken(options) {
-  return invokeFetch("csrf-token", {
-    method: "get",
-    pathTemplate: "/api/v1/csrf-token",
-    options
-  });
+	return invokeFetch("csrf-token", {
+		method: "get",
+		pathTemplate: "/api/v1/csrf-token",
+		options
+	});
 }
+/**
+* Clears the cache for csrf-token api requests.
+*/
 function clearCache() {
-  return clearApiCache("csrf-token");
+	return clearApiCache("csrf-token");
 }
-var csrfTokenExport = { getCsrfToken, clearCache };
-var csrf_token_default = csrfTokenExport;
-export {
-  clearCache,
-  csrf_token_default as default,
-  getCsrfToken
+/**
+* Functions for the csrf-token api
+*/
+const csrfTokenExport = {
+	getCsrfToken,
+	clearCache
 };
+var csrf_token_default = csrfTokenExport;
+
+//#endregion
+export { clearCache, csrf_token_default as default, getCsrfToken };

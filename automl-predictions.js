@@ -1,84 +1,121 @@
-import {
-  clearApiCache,
-  invokeFetch
-} from "./chunks/P6F6QA4Y.js";
-import "./chunks/DN5SVV4X.js";
-import "./chunks/7MMXU6EL.js";
+import "./chunks/utils-qEQ6sEXX.js";
+import "./chunks/public-runtime-modules-n9GdugeL.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DeSj7yXG.js";
 
-// src/public/rest/automl-predictions.ts
+//#region src/public/rest/automl-predictions.ts
+/**
+* Returns a file containing the shapley values in coordinate form that are associated with a prediction ID.
+*
+* @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
+* @param query an object with query parameters
+* @throws GetAutomlPredictionCoordinateShapHttpError
+*/
 async function getAutomlPredictionCoordinateShap(predictionId, query, options) {
-  return invokeFetch("automl-predictions", {
-    method: "get",
-    pathTemplate: "/api/v1/automl-predictions/{predictionId}/coordinate-shap",
-    pathVariables: { predictionId },
-    query,
-    options
-  });
+	return invokeFetch("automl-predictions", {
+		method: "get",
+		pathTemplate: "/api/v1/automl-predictions/{predictionId}/coordinate-shap",
+		pathVariables: { predictionId },
+		query,
+		options
+	});
 }
+/**
+* Retrieve jobs that are associated with a prediction. Job with correlation type `prediction`.
+*
+* @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
+* @throws CreateAutomlPredictionJobHttpError
+*/
 async function createAutomlPredictionJob(predictionId, options) {
-  return invokeFetch("automl-predictions", {
-    method: "post",
-    pathTemplate: "/api/v1/automl-predictions/{predictionId}/jobs",
-    pathVariables: { predictionId },
-    options
-  });
+	return invokeFetch("automl-predictions", {
+		method: "post",
+		pathTemplate: "/api/v1/automl-predictions/{predictionId}/jobs",
+		pathVariables: { predictionId },
+		options
+	});
 }
+/**
+* Returns a file containing any rows in a prediction operation where a prediction was unable to be produced.
+*
+* @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
+* @param query an object with query parameters
+* @throws GetAutomlPredictionNotPredictedReasonsHttpError
+*/
 async function getAutomlPredictionNotPredictedReasons(predictionId, query, options) {
-  return invokeFetch("automl-predictions", {
-    method: "get",
-    pathTemplate: "/api/v1/automl-predictions/{predictionId}/not-predicted-reasons",
-    pathVariables: { predictionId },
-    query,
-    options
-  });
+	return invokeFetch("automl-predictions", {
+		method: "get",
+		pathTemplate: "/api/v1/automl-predictions/{predictionId}/not-predicted-reasons",
+		pathVariables: { predictionId },
+		query,
+		options
+	});
 }
+/**
+* Returns a file containing the predicted values that are associated with a prediction ID.
+*
+* @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
+* @param query an object with query parameters
+* @throws GetAutomlPredictionPredictionsHttpError
+*/
 async function getAutomlPredictionPredictions(predictionId, query, options) {
-  return invokeFetch("automl-predictions", {
-    method: "get",
-    pathTemplate: "/api/v1/automl-predictions/{predictionId}/predictions",
-    pathVariables: { predictionId },
-    query,
-    options
-  });
+	return invokeFetch("automl-predictions", {
+		method: "get",
+		pathTemplate: "/api/v1/automl-predictions/{predictionId}/predictions",
+		pathVariables: { predictionId },
+		query,
+		options
+	});
 }
+/**
+* Returns a file containing the shapley values that are associated with a prediction ID.
+*
+* @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
+* @param query an object with query parameters
+* @throws GetAutomlPredictionShapHttpError
+*/
 async function getAutomlPredictionShap(predictionId, query, options) {
-  return invokeFetch("automl-predictions", {
-    method: "get",
-    pathTemplate: "/api/v1/automl-predictions/{predictionId}/shap",
-    pathVariables: { predictionId },
-    query,
-    options
-  });
+	return invokeFetch("automl-predictions", {
+		method: "get",
+		pathTemplate: "/api/v1/automl-predictions/{predictionId}/shap",
+		pathVariables: { predictionId },
+		query,
+		options
+	});
 }
+/**
+* Returns a file containing the source values and an index field that are associated with a prediction ID.
+*
+* @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
+* @param query an object with query parameters
+* @throws GetAutomlPredictionSourceHttpError
+*/
 async function getAutomlPredictionSource(predictionId, query, options) {
-  return invokeFetch("automl-predictions", {
-    method: "get",
-    pathTemplate: "/api/v1/automl-predictions/{predictionId}/source",
-    pathVariables: { predictionId },
-    query,
-    options
-  });
+	return invokeFetch("automl-predictions", {
+		method: "get",
+		pathTemplate: "/api/v1/automl-predictions/{predictionId}/source",
+		pathVariables: { predictionId },
+		query,
+		options
+	});
 }
+/**
+* Clears the cache for automl-predictions api requests.
+*/
 function clearCache() {
-  return clearApiCache("automl-predictions");
+	return clearApiCache("automl-predictions");
 }
-var automlPredictionsExport = {
-  getAutomlPredictionCoordinateShap,
-  createAutomlPredictionJob,
-  getAutomlPredictionNotPredictedReasons,
-  getAutomlPredictionPredictions,
-  getAutomlPredictionShap,
-  getAutomlPredictionSource,
-  clearCache
+/**
+* Functions for the automl-predictions api
+*/
+const automlPredictionsExport = {
+	getAutomlPredictionCoordinateShap,
+	createAutomlPredictionJob,
+	getAutomlPredictionNotPredictedReasons,
+	getAutomlPredictionPredictions,
+	getAutomlPredictionShap,
+	getAutomlPredictionSource,
+	clearCache
 };
 var automl_predictions_default = automlPredictionsExport;
-export {
-  clearCache,
-  createAutomlPredictionJob,
-  automl_predictions_default as default,
-  getAutomlPredictionCoordinateShap,
-  getAutomlPredictionNotPredictedReasons,
-  getAutomlPredictionPredictions,
-  getAutomlPredictionShap,
-  getAutomlPredictionSource
-};
+
+//#endregion
+export { clearCache, createAutomlPredictionJob, automl_predictions_default as default, getAutomlPredictionCoordinateShap, getAutomlPredictionNotPredictedReasons, getAutomlPredictionPredictions, getAutomlPredictionShap, getAutomlPredictionSource };
