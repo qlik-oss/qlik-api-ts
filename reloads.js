@@ -1,54 +1,89 @@
-import {
-  clearApiCache,
-  invokeFetch
-} from "./chunks/P6F6QA4Y.js";
-import "./chunks/DN5SVV4X.js";
-import "./chunks/7MMXU6EL.js";
+import "./chunks/utils-qEQ6sEXX.js";
+import "./chunks/public-runtime-modules-n9GdugeL.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DeSj7yXG.js";
 
-// src/public/rest/reloads.ts
+//#region src/public/rest/reloads.ts
+/**
+* Finds and returns the reloads that the user has access to.
+* @example
+* getReloads(
+*   {
+*     filter: "(status eq \"FAILED\" or status eq \"EXCEEDED_LIMIT\") and partial eq \"false\" and type eq \"chronos\"
+*     "
+*   }
+* )
+*
+* @param query an object with query parameters
+* @throws GetReloadsHttpError
+*/
 async function getReloads(query, options) {
-  return invokeFetch("reloads", {
-    method: "get",
-    pathTemplate: "/api/v1/reloads",
-    query,
-    options
-  });
+	return invokeFetch("reloads", {
+		method: "get",
+		pathTemplate: "/api/v1/reloads",
+		query,
+		options
+	});
 }
+/**
+* Reloads an app specified by an app ID.
+*
+* @param body an object with the body content
+* @throws QueueReloadHttpError
+*/
 async function queueReload(body, options) {
-  return invokeFetch("reloads", {
-    method: "post",
-    pathTemplate: "/api/v1/reloads",
-    body,
-    contentType: "application/json",
-    options
-  });
+	return invokeFetch("reloads", {
+		method: "post",
+		pathTemplate: "/api/v1/reloads",
+		body,
+		contentType: "application/json",
+		options
+	});
 }
+/**
+* Finds and returns a reload record.
+*
+* @param reloadId The unique identifier of the reload.
+* @throws GetReloadHttpError
+*/
 async function getReload(reloadId, options) {
-  return invokeFetch("reloads", {
-    method: "get",
-    pathTemplate: "/api/v1/reloads/{reloadId}",
-    pathVariables: { reloadId },
-    options
-  });
+	return invokeFetch("reloads", {
+		method: "get",
+		pathTemplate: "/api/v1/reloads/{reloadId}",
+		pathVariables: { reloadId },
+		options
+	});
 }
+/**
+* Cancels a reload that is in progress or has been queued
+*
+* @param reloadId The unique identifier of the reload.
+* @throws CancelReloadHttpError
+*/
 async function cancelReload(reloadId, options) {
-  return invokeFetch("reloads", {
-    method: "post",
-    pathTemplate: "/api/v1/reloads/{reloadId}/actions/cancel",
-    pathVariables: { reloadId },
-    options
-  });
+	return invokeFetch("reloads", {
+		method: "post",
+		pathTemplate: "/api/v1/reloads/{reloadId}/actions/cancel",
+		pathVariables: { reloadId },
+		options
+	});
 }
+/**
+* Clears the cache for reloads api requests.
+*/
 function clearCache() {
-  return clearApiCache("reloads");
+	return clearApiCache("reloads");
 }
-var reloadsExport = { getReloads, queueReload, getReload, cancelReload, clearCache };
-var reloads_default = reloadsExport;
-export {
-  cancelReload,
-  clearCache,
-  reloads_default as default,
-  getReload,
-  getReloads,
-  queueReload
+/**
+* Functions for the reloads api
+*/
+const reloadsExport = {
+	getReloads,
+	queueReload,
+	getReload,
+	cancelReload,
+	clearCache
 };
+var reloads_default = reloadsExport;
+
+//#endregion
+export { cancelReload, clearCache, reloads_default as default, getReload, getReloads, queueReload };

@@ -1,47 +1,71 @@
-import {
-  clearApiCache,
-  invokeFetch
-} from "./chunks/P6F6QA4Y.js";
-import "./chunks/DN5SVV4X.js";
-import "./chunks/7MMXU6EL.js";
+import "./chunks/utils-qEQ6sEXX.js";
+import "./chunks/public-runtime-modules-n9GdugeL.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DeSj7yXG.js";
 
-// src/public/rest/temp-contents.ts
+//#region src/public/rest/temp-contents.ts
+/**
+* Upload a file as a temporary content resource. It returns a `201 Created` with a location header that contains the location of the created resource. If filename or TTL is not properly set, a `400 Bad request` is returned. For internal issues, a `500 Internal Server Error` is returned.
+*
+* @param query an object with query parameters
+* @param body an object with the body content
+* @throws UploadTempFileHttpError
+*/
 async function uploadTempFile(query, body, options) {
-  return invokeFetch("temp-contents", {
-    method: "post",
-    pathTemplate: "/api/v1/temp-contents",
-    query,
-    body,
-    contentType: "application/octet-stream",
-    options
-  });
+	return invokeFetch("temp-contents", {
+		method: "post",
+		pathTemplate: "/api/v1/temp-contents",
+		query,
+		body,
+		contentType: "application/octet-stream",
+		options
+	});
 }
+/**
+* This endpoint is used to retrieve a temporary content file. It returns a valid (`200 OK`) in case the file exists and the user is authorized to view the contents. It returns a `410 Gone` if the file has expired and `404 Not Found` if the criteria is not met.
+*
+* @param id The temporary contents ID.
+* @param query an object with query parameters
+* @throws DownloadTempFileHttpError
+*/
 async function downloadTempFile(id, query, options) {
-  return invokeFetch("temp-contents", {
-    method: "get",
-    pathTemplate: "/api/v1/temp-contents/{id}",
-    pathVariables: { id },
-    query,
-    options
-  });
+	return invokeFetch("temp-contents", {
+		method: "get",
+		pathTemplate: "/api/v1/temp-contents/{id}",
+		pathVariables: { id },
+		query,
+		options
+	});
 }
+/**
+* Retrieve a summary of the metadata associated with a temporary content resource. It returns a `200 OK` with a model if the temporary resource is valid. It returns a `410 Gone` if the file has expired and `404 Not Found` if the criteria is not met.
+*
+* @param id The temporary contents ID.
+* @throws GetTempFileDetailsHttpError
+*/
 async function getTempFileDetails(id, options) {
-  return invokeFetch("temp-contents", {
-    method: "get",
-    pathTemplate: "/api/v1/temp-contents/{id}/details",
-    pathVariables: { id },
-    options
-  });
+	return invokeFetch("temp-contents", {
+		method: "get",
+		pathTemplate: "/api/v1/temp-contents/{id}/details",
+		pathVariables: { id },
+		options
+	});
 }
+/**
+* Clears the cache for temp-contents api requests.
+*/
 function clearCache() {
-  return clearApiCache("temp-contents");
+	return clearApiCache("temp-contents");
 }
-var tempContentsExport = { uploadTempFile, downloadTempFile, getTempFileDetails, clearCache };
-var temp_contents_default = tempContentsExport;
-export {
-  clearCache,
-  temp_contents_default as default,
-  downloadTempFile,
-  getTempFileDetails,
-  uploadTempFile
+/**
+* Functions for the temp-contents api
+*/
+const tempContentsExport = {
+	uploadTempFile,
+	downloadTempFile,
+	getTempFileDetails,
+	clearCache
 };
+var temp_contents_default = tempContentsExport;
+
+//#endregion
+export { clearCache, temp_contents_default as default, downloadTempFile, getTempFileDetails, uploadTempFile };
