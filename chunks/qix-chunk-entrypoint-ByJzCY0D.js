@@ -2,7 +2,7 @@ import { isNode } from "./utils-qEQ6sEXX.js";
 import "./interceptors-DD0vKL8_.js";
 import "./global-types-CQrlc6w9.js";
 import "./auth-types-B0Z-Reol.js";
-import { exposeInternalApiOnWindow, generateRandomString, getRestCallAuthParams, getWebSocketAuthParams, handleAuthenticationError, isWindows, toValidWebsocketLocationUrl } from "./auth-functions-ClrPAf4t.js";
+import { exposeInternalApiOnWindow, generateRandomString, getRestCallAuthParams, getWebSocketAuthParams, handleAuthenticationError, isWindows, toValidWebsocketLocationUrl } from "./auth-functions-DHRxWU6t.js";
 import { getHumanReadableSocketClosedErrorMessage } from "./websocket-errors-CnW4OQWd.js";
 import isPlainObject from "lodash/isPlainObject.js";
 import merge from "lodash/merge.js";

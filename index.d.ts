@@ -4,7 +4,7 @@ import { AuthAPI, getAccessToken, getWebResourceAuthParams, registerAuthModule, 
 import { QixAPI } from "./chunks/qix-DggPusot.js";
 import { ApiKeysAPI } from "./chunks/api-keys-CI44OuNR.js";
 import { AppsAPI } from "./chunks/apps-BiGof9WJ.js";
-import { AssistantsAPI } from "./chunks/assistants-2UX0GzZ7.js";
+import { AssistantsAPI } from "./chunks/assistants-CDtI99Yr.js";
 import { AuditsAPI } from "./chunks/audits-C-UDFprK.js";
 import { AutomationConnectionsAPI } from "./chunks/automation-connections-keN9CuNO.js";
 import { AutomationsAPI } from "./chunks/automations-CFRnQ8sX.js";

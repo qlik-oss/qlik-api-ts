@@ -15,9 +15,9 @@
     "extend": "3.0.2",
     "lodash": "^4.17.21",
     "nanoid": "^5.1.5",
-    "ws": "^8.18.2"
+    "ws": "^8.18.3"
   },
-  "packageManager": "pnpm@10.12.2",
+  "packageManager": "pnpm@10.12.4",
   "engines": {
     "node": ">=20"
   },
