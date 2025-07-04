@@ -305,8 +305,8 @@ function toPerformInteractiveLoginFunction(performInteractiveLogin) {
 	}
 	return performInteractiveLogin;
 }
-function lookupGetAccessFn(getAccessToken) {
-	return globalThis[getAccessToken];
+function lookupGetAccessFn(getAccessToken$1) {
+	return globalThis[getAccessToken$1];
 }
 function lookupInteractiveLoginFn(name) {
 	return globalThis[name];
@@ -2110,6 +2110,20 @@ async function getRestCallAuthParams(props) {
 	}
 }
 /**
+* Returns a record of headers and a record of query params that needs to be added to outgoing rest calls
+* @param props.hostConfig the HostConfig containing authentication details
+* @param props.method the http method, which may affect what authentication are needed.
+*/
+async function getAccessToken(props) {
+	const res = await getRestCallAuthParams({
+		method: "GET",
+		...props
+	});
+	const authorizationHeader = res.headers?.Authorization;
+	if (authorizationHeader.indexOf("Bearer ") === 0) return authorizationHeader.substring(7);
+	throw new Error("Unknown format of authorization header returned by remote auth module");
+}
+/**
 * Registers an auth module that can handle authentication. An auth module is used by specifying its name as authType in the HostConfig passed in to api calls.
 * @param name the name of the module
 * @param authModule the implementation of the AuthModule interface
@@ -2214,4 +2228,4 @@ function getDefaultHostConfig$1() {
 }
 
 //#endregion
-export { AuthorizationError, EncodingError, InvalidAuthTypeError, InvalidHostConfigError, InvokeFetchError, UnexpectedAuthTypeError, clearApiCache, determineAuthType$1 as determineAuthType, exposeInternalApiOnWindow, generateRandomString, getDefaultHostConfig$1 as getDefaultHostConfig, getPlatform, getRestCallAuthParams, getWebResourceAuthParams, getWebSocketAuthParams, handleAuthenticationError, invokeFetch, isHostCrossOrigin, isWindows, logout, parseFetchResponse, registerAuthModule$1 as registerAuthModule, registerHostConfig$1 as registerHostConfig, serializeHostConfig$1 as serializeHostConfig, setDefaultHostConfig$1 as setDefaultHostConfig, toValidLocationUrl, toValidWebsocketLocationUrl, unregisterHostConfig$1 as unregisterHostConfig };
+export { AuthorizationError, EncodingError, InvalidAuthTypeError, InvalidHostConfigError, InvokeFetchError, UnexpectedAuthTypeError, clearApiCache, determineAuthType$1 as determineAuthType, exposeInternalApiOnWindow, generateRandomString, getAccessToken, getDefaultHostConfig$1 as getDefaultHostConfig, getPlatform, getRestCallAuthParams, getWebResourceAuthParams, getWebSocketAuthParams, handleAuthenticationError, invokeFetch, isHostCrossOrigin, isWindows, logout, parseFetchResponse, registerAuthModule$1 as registerAuthModule, registerHostConfig$1 as registerHostConfig, serializeHostConfig$1 as serializeHostConfig, setDefaultHostConfig$1 as setDefaultHostConfig, toValidLocationUrl, toValidWebsocketLocationUrl, unregisterHostConfig$1 as unregisterHostConfig };

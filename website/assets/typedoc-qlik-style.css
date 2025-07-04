@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:400,600");
+@import url("https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,600");
 
 /*
@@ -118,28 +118,41 @@ body {
   font-family: var(--font-family-text);
 }
 
+code,
+pre {
+  font-family: var(--font-family-code);
+}
+
 /*
  * Links
  */
 
 .tsd-page-toolbar a.title {
-  color: var(--dark-color-text);
-  text-decoration: none;
-  border-bottom: 2px solid transparent;
   max-width: 30ch;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.tsd-page-toolbar a.title:hover {
-  border-bottom: 2px solid var(--color-alert-tip);
+.tsd-page-toolbar a {
+  color: var(--dark-color-text);
+  text-decoration: none;
+  position: relative;
 }
-/* Hide it on really small screen */
-/* TODO: Add it somewhere else for access? */
-@media (max-width: 600px) {
-  .tsd-page-toolbar a.title {
-    display: none;
-  }
+.tsd-page-toolbar a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: transparent;
+}
+.tsd-page-toolbar a:hover::after {
+  background: var(--color-alert-tip);
+}
+.tsd-toolbar-nav .tsd-toolbar-logo-link:hover::after,
+.tsd-toolbar-mobile-nav a:hover::after {
+  background: none;
 }
 
 /*
@@ -239,7 +252,7 @@ code.tsd-tag {
 }
 .tsd-toolbar-links {
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   gap: 2rem;
   padding: 1.5rem 0.5rem;
 }
@@ -527,13 +540,6 @@ footer .wrapper .legal .copyright {
   padding: 0;
   list-style: none;
 }
-.tsd-toolbar-desktop-nav a {
-  color: var(--dark-color-text);
-  text-decoration: none;
-}
-.tsd-toolbar-desktop-nav a:hover {
-  border-bottom: 2px solid var(--color-alert-tip);
-}
 
 /* mobile sheet (initially collapsed) */
 .tsd-toolbar-mobile-nav {
@@ -561,9 +567,13 @@ footer .wrapper .legal .copyright {
   margin-left: 8px;
   text-decoration: none;
 }
+.tsd-toolbar-mobile-nav a:hover {
+  color: var(--dark-color-text-aside);
+}
 .tsd-toolbar-mobile-nav li {
   color: var(--dark-color-text);
   position: relative;
+  width: fit-content;
 }
 .tsd-toolbar-mobile-nav li:hover {
   background: none;
@@ -578,8 +588,8 @@ footer .wrapper .legal .copyright {
   background: var(--color-alert-tip);
 }
 
-/* Under 1260px we make some changes on the toolbar */
-@media (max-width: 1260px) {
+/* Under 940px we make some changes on the toolbar */
+@media (max-width: 940px) {
   .tsd-toolbar-dropdown {
     display: flex;
   }
@@ -591,11 +601,6 @@ footer .wrapper .legal .copyright {
     flex-direction: column;
     gap: 0;
     padding: 1.5rem 2rem;
-
-    & > :not(:last-child) {
-      border-bottom-style: solid;
-      border-bottom-color: var(--color-border-app-menu);
-    }
   }
 
   /* expand sheet when checkbox checked */
