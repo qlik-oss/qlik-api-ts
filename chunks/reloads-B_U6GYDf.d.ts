@@ -66,6 +66,8 @@ type Reload = {
   type: Type;
   /** The ID of the user who created the reload. */
   userId: string;
+  /** The weight of the reload for the same tenant. The higher the weight, the sooner the reload will be scheduled relative to other reloads for the same tenant. The personal app will be always set as 1 if the value presents. */
+  weight?: Weight;
 };
 type ReloadLinks = {
   self?: Href;
@@ -77,6 +79,8 @@ type ReloadRequest = {
   partial?: boolean;
   /** The variables to be used in the load script. */
   variables?: Record<string, string>;
+  /** The weight of the reload for the same tenant. The higher the weight, the sooner the reload will be scheduled relative to other reloads for the same tenant. The personal app will be always set as 1 if the value presents. */
+  weight?: Weight;
 };
 type Reloads = {
   data: Reload[];
@@ -98,6 +102,10 @@ type Status = "QUEUED" | "RELOADING" | "CANCELING" | "SUCCEEDED" | "FAILED" | "C
  * "chronos"
  */
 type Type = "hub" | "external" | "chronos" | "automations" | "data-refresh" | "choreographer";
+/**
+ * The weight of the reload for the same tenant. The higher the weight, the sooner the reload will be scheduled relative to other reloads for the same tenant. The personal app will be always set as 1 if the value presents.
+ */
+type Weight = number;
 /**
  * Finds and returns the reloads that the user has access to.
  * @example
@@ -249,4 +257,4 @@ interface ReloadsAPI {
  */
 declare const reloadsExport: ReloadsAPI;
 //#endregion
-export { CancelReloadHttpError, CancelReloadHttpResponse, Error, Errors, GetReloadHttpError, GetReloadHttpResponse, GetReloadsHttpError, GetReloadsHttpResponse, Href, Partial, QueueReloadHttpError, QueueReloadHttpResponse, Reload, ReloadLinks, ReloadRequest, Reloads, ReloadsAPI, ReloadsLinks, Status, Type, cancelReload, clearCache, getReload, getReloads, queueReload, reloadsExport };
+export { CancelReloadHttpError, CancelReloadHttpResponse, Error, Errors, GetReloadHttpError, GetReloadHttpResponse, GetReloadsHttpError, GetReloadsHttpResponse, Href, Partial, QueueReloadHttpError, QueueReloadHttpResponse, Reload, ReloadLinks, ReloadRequest, Reloads, ReloadsAPI, ReloadsLinks, Status, Type, Weight, cancelReload, clearCache, getReload, getReloads, queueReload, reloadsExport };

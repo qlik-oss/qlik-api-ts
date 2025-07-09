@@ -1,4 +1,4 @@
-import "./chunks/public-runtime-modules-Bfh2smA7.js";
-import { openAppSession, qix_default, withHostConfig } from "./chunks/qix-f5SasQCg.js";
+import "./chunks/public-runtime-modules-lsJEDVxt.js";
+import { openAppSession, qix_default, withHostConfig } from "./chunks/qix-CwYrlHFT.js";
 
 export { qix_default as default, openAppSession, withHostConfig };

@@ -509,7 +509,7 @@ type UserIDRecipient = {
   value?: string;
 };
 /**
- * Get a list of alerting tasks.
+ * Retrieves all data alert tasks accessible to the user. Users assigned the `TenantAdmin` or `AnalyticsAdmin` role can view all tasks.
  *
  * @param query an object with query parameters
  * @throws GetDataAlertsHttpError
@@ -551,7 +551,7 @@ type GetDataAlertsHttpError = {
   status: number;
 };
 /**
- * Creates a new alerting task.
+ * Creates a new data alerting task.
  *
  * @param body an object with the body content
  * @throws CreateDataAlertHttpError
@@ -568,7 +568,7 @@ type CreateDataAlertHttpError = {
   status: number;
 };
 /**
- * Creates a new alerting trigger action.
+ * Creates a new data alerting task trigger action.
  *
  * @param body an object with the body content
  * @throws TriggerDataAlertsHttpError
@@ -585,7 +585,7 @@ type TriggerDataAlertsHttpError = {
   status: number;
 };
 /**
- * Validates a new alerting task. Current support includes validation for recipients only.
+ * Validates a new data alerting task. Current support includes validation for recipients only.
  *
  * @param body an object with the body content
  * @throws ValidateDataAlertsHttpError
@@ -602,7 +602,7 @@ type ValidateDataAlertsHttpError = {
   status: number;
 };
 /**
- * Lists alerting settings.
+ * Retrieves the current settings for data alerts.
  *
  * @throws GetDataAlertsSettingsHttpError
  */
@@ -618,7 +618,7 @@ type GetDataAlertsSettingsHttpError = {
   status: number;
 };
 /**
- * Updates Alerting configuration. Accessible only by tenant admins.
+ * Updates the settings for data alerts. User must be assigned the `TenantAdmin` role.
  *
  * @param body an object with the body content
  * @throws SetDataAlertsSettingsHttpError
@@ -635,7 +635,7 @@ type SetDataAlertsSettingsHttpError = {
   status: number;
 };
 /**
- * Deletes an alerting task.
+ * Deletes a specific data alerting task.
  *
  * @param alertId The alerting task identifier.
  * @throws DeleteDataAlertHttpError
@@ -652,7 +652,7 @@ type DeleteDataAlertHttpError = {
   status: number;
 };
 /**
- * Get an alerting task by its id
+ * Returns the details of a specific data alert task.
  *
  * @param alertId The alerting task identifier.
  * @throws GetDataAlertHttpError
@@ -669,7 +669,7 @@ type GetDataAlertHttpError = {
   status: number;
 };
 /**
- * Updates an existing alerting task
+ * Updates one or more properties of a specific data alerting task.
  *
  * @param alertId The alerting task identifier.
  * @param body an object with the body content
@@ -687,7 +687,7 @@ type PatchDataAlertHttpError = {
   status: number;
 };
 /**
- * Get the condition associated with an alerting task
+ * Retrieves the condition associated with a data alerting task.
  *
  * @param alertId The alerting task identifier.
  * @throws GetDataAlertConditionHttpError
@@ -704,7 +704,7 @@ type GetDataAlertConditionHttpError = {
   status: number;
 };
 /**
- * Deletes an execution.
+ * Deletes a specific data alerting task execution.
  *
  * @param alertId The alerting task identifier.
  * @param executionId The execution identifier.
@@ -722,7 +722,7 @@ type DeleteDataAlertExecutionHttpError = {
   status: number;
 };
 /**
- * Gets a specified alerting execution.
+ * Retrieves a specific execution for the specified data alerting task.
  *
  * @param alertId The alerting task identifier.
  * @param executionId The execution identifier. If value is "latest", the latest execution will be returned
@@ -740,7 +740,7 @@ type GetDataAlertExecutionHttpError = {
   status: number;
 };
 /**
- * Get the recipient stats for an alerting task
+ * Retrieve the recipient stats for a data alerting task.
  *
  * @param alertId The alerting task identifier.
  * @param query an object with query parameters
@@ -767,7 +767,7 @@ type GetDataAlertRecipientStatsHttpError = {
   status: number;
 };
 /**
- * Lists all alerting-executions linked to a user and a tenant.
+ * Lists executions for the specified data alerting task.
  *
  * @param taskId The alerting task identifier.
  * @param query an object with query parameters
@@ -826,7 +826,7 @@ type GetDataAlertExecutionsHttpError = {
 /**
  * @deprecated
  *
- * Gets the stats for alerting task executions
+ * Retrieves stats for overall data alerting task executions.
  *
  * @param taskId The alerting task identifier.
  * @param query an object with query parameters
@@ -849,7 +849,7 @@ type GetDataAlertExecutionsStatsHttpError = {
   status: number;
 };
 /**
- * Gets the content of an evaluation from an execution
+ * Retrieves the content of an evaluation for a specified data alerting task execution.
  *
  * @param taskId The alerting task identifier.
  * @param executionId The execution identifier.
@@ -872,62 +872,62 @@ type GetDataAlertExecutionEvaluationsHttpError = {
 declare function clearCache(): void;
 interface DataAlertsAPI {
   /**
-   * Get a list of alerting tasks.
+   * Retrieves all data alert tasks accessible to the user. Users assigned the `TenantAdmin` or `AnalyticsAdmin` role can view all tasks.
    *
    * @param query an object with query parameters
    * @throws GetDataAlertsHttpError
    */
   getDataAlerts: typeof getDataAlerts;
   /**
-   * Creates a new alerting task.
+   * Creates a new data alerting task.
    *
    * @param body an object with the body content
    * @throws CreateDataAlertHttpError
    */
   createDataAlert: typeof createDataAlert;
   /**
-   * Creates a new alerting trigger action.
+   * Creates a new data alerting task trigger action.
    *
    * @param body an object with the body content
    * @throws TriggerDataAlertsHttpError
    */
   triggerDataAlerts: typeof triggerDataAlerts;
   /**
-   * Validates a new alerting task. Current support includes validation for recipients only.
+   * Validates a new data alerting task. Current support includes validation for recipients only.
    *
    * @param body an object with the body content
    * @throws ValidateDataAlertsHttpError
    */
   validateDataAlerts: typeof validateDataAlerts;
   /**
-   * Lists alerting settings.
+   * Retrieves the current settings for data alerts.
    *
    * @throws GetDataAlertsSettingsHttpError
    */
   getDataAlertsSettings: typeof getDataAlertsSettings;
   /**
-   * Updates Alerting configuration. Accessible only by tenant admins.
+   * Updates the settings for data alerts. User must be assigned the `TenantAdmin` role.
    *
    * @param body an object with the body content
    * @throws SetDataAlertsSettingsHttpError
    */
   setDataAlertsSettings: typeof setDataAlertsSettings;
   /**
-   * Deletes an alerting task.
+   * Deletes a specific data alerting task.
    *
    * @param alertId The alerting task identifier.
    * @throws DeleteDataAlertHttpError
    */
   deleteDataAlert: typeof deleteDataAlert;
   /**
-   * Get an alerting task by its id
+   * Returns the details of a specific data alert task.
    *
    * @param alertId The alerting task identifier.
    * @throws GetDataAlertHttpError
    */
   getDataAlert: typeof getDataAlert;
   /**
-   * Updates an existing alerting task
+   * Updates one or more properties of a specific data alerting task.
    *
    * @param alertId The alerting task identifier.
    * @param body an object with the body content
@@ -935,14 +935,14 @@ interface DataAlertsAPI {
    */
   patchDataAlert: typeof patchDataAlert;
   /**
-   * Get the condition associated with an alerting task
+   * Retrieves the condition associated with a data alerting task.
    *
    * @param alertId The alerting task identifier.
    * @throws GetDataAlertConditionHttpError
    */
   getDataAlertCondition: typeof getDataAlertCondition;
   /**
-   * Deletes an execution.
+   * Deletes a specific data alerting task execution.
    *
    * @param alertId The alerting task identifier.
    * @param executionId The execution identifier.
@@ -950,7 +950,7 @@ interface DataAlertsAPI {
    */
   deleteDataAlertExecution: typeof deleteDataAlertExecution;
   /**
-   * Gets a specified alerting execution.
+   * Retrieves a specific execution for the specified data alerting task.
    *
    * @param alertId The alerting task identifier.
    * @param executionId The execution identifier. If value is "latest", the latest execution will be returned
@@ -958,7 +958,7 @@ interface DataAlertsAPI {
    */
   getDataAlertExecution: typeof getDataAlertExecution;
   /**
-   * Get the recipient stats for an alerting task
+   * Retrieve the recipient stats for a data alerting task.
    *
    * @param alertId The alerting task identifier.
    * @param query an object with query parameters
@@ -966,7 +966,7 @@ interface DataAlertsAPI {
    */
   getDataAlertRecipientStats: typeof getDataAlertRecipientStats;
   /**
-   * Lists all alerting-executions linked to a user and a tenant.
+   * Lists executions for the specified data alerting task.
    *
    * @param taskId The alerting task identifier.
    * @param query an object with query parameters
@@ -976,7 +976,7 @@ interface DataAlertsAPI {
   /**
    * @deprecated
    *
-   * Gets the stats for alerting task executions
+   * Retrieves stats for overall data alerting task executions.
    *
    * @param taskId The alerting task identifier.
    * @param query an object with query parameters
@@ -984,7 +984,7 @@ interface DataAlertsAPI {
    */
   getDataAlertExecutionsStats: typeof getDataAlertExecutionsStats;
   /**
-   * Gets the content of an evaluation from an execution
+   * Retrieves the content of an evaluation for a specified data alerting task execution.
    *
    * @param taskId The alerting task identifier.
    * @param executionId The execution identifier.
