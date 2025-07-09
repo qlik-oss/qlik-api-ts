@@ -1,10 +1,10 @@
 import "./chunks/utils-qEQ6sEXX.js";
-import "./chunks/public-runtime-modules-Bfh2smA7.js";
-import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DJFDz11x.js";
+import "./chunks/public-runtime-modules-lsJEDVxt.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-B-ZucHu9.js";
 
 //#region src/public/rest/data-alerts.ts
 /**
-* Get a list of alerting tasks.
+* Retrieves all data alert tasks accessible to the user. Users assigned the `TenantAdmin` or `AnalyticsAdmin` role can view all tasks.
 *
 * @param query an object with query parameters
 * @throws GetDataAlertsHttpError
@@ -18,7 +18,7 @@ async function getDataAlerts(query, options) {
 	});
 }
 /**
-* Creates a new alerting task.
+* Creates a new data alerting task.
 *
 * @param body an object with the body content
 * @throws CreateDataAlertHttpError
@@ -33,7 +33,7 @@ async function createDataAlert(body, options) {
 	});
 }
 /**
-* Creates a new alerting trigger action.
+* Creates a new data alerting task trigger action.
 *
 * @param body an object with the body content
 * @throws TriggerDataAlertsHttpError
@@ -48,7 +48,7 @@ async function triggerDataAlerts(body, options) {
 	});
 }
 /**
-* Validates a new alerting task. Current support includes validation for recipients only.
+* Validates a new data alerting task. Current support includes validation for recipients only.
 *
 * @param body an object with the body content
 * @throws ValidateDataAlertsHttpError
@@ -63,7 +63,7 @@ async function validateDataAlerts(body, options) {
 	});
 }
 /**
-* Lists alerting settings.
+* Retrieves the current settings for data alerts.
 *
 * @throws GetDataAlertsSettingsHttpError
 */
@@ -75,7 +75,7 @@ async function getDataAlertsSettings(options) {
 	});
 }
 /**
-* Updates Alerting configuration. Accessible only by tenant admins.
+* Updates the settings for data alerts. User must be assigned the `TenantAdmin` role.
 *
 * @param body an object with the body content
 * @throws SetDataAlertsSettingsHttpError
@@ -90,7 +90,7 @@ async function setDataAlertsSettings(body, options) {
 	});
 }
 /**
-* Deletes an alerting task.
+* Deletes a specific data alerting task.
 *
 * @param alertId The alerting task identifier.
 * @throws DeleteDataAlertHttpError
@@ -104,7 +104,7 @@ async function deleteDataAlert(alertId, options) {
 	});
 }
 /**
-* Get an alerting task by its id
+* Returns the details of a specific data alert task.
 *
 * @param alertId The alerting task identifier.
 * @throws GetDataAlertHttpError
@@ -118,7 +118,7 @@ async function getDataAlert(alertId, options) {
 	});
 }
 /**
-* Updates an existing alerting task
+* Updates one or more properties of a specific data alerting task.
 *
 * @param alertId The alerting task identifier.
 * @param body an object with the body content
@@ -135,7 +135,7 @@ async function patchDataAlert(alertId, body, options) {
 	});
 }
 /**
-* Get the condition associated with an alerting task
+* Retrieves the condition associated with a data alerting task.
 *
 * @param alertId The alerting task identifier.
 * @throws GetDataAlertConditionHttpError
@@ -149,7 +149,7 @@ async function getDataAlertCondition(alertId, options) {
 	});
 }
 /**
-* Deletes an execution.
+* Deletes a specific data alerting task execution.
 *
 * @param alertId The alerting task identifier.
 * @param executionId The execution identifier.
@@ -167,7 +167,7 @@ async function deleteDataAlertExecution(alertId, executionId, options) {
 	});
 }
 /**
-* Gets a specified alerting execution.
+* Retrieves a specific execution for the specified data alerting task.
 *
 * @param alertId The alerting task identifier.
 * @param executionId The execution identifier. If value is "latest", the latest execution will be returned
@@ -185,7 +185,7 @@ async function getDataAlertExecution(alertId, executionId, options) {
 	});
 }
 /**
-* Get the recipient stats for an alerting task
+* Retrieve the recipient stats for a data alerting task.
 *
 * @param alertId The alerting task identifier.
 * @param query an object with query parameters
@@ -201,7 +201,7 @@ async function getDataAlertRecipientStats(alertId, query, options) {
 	});
 }
 /**
-* Lists all alerting-executions linked to a user and a tenant.
+* Lists executions for the specified data alerting task.
 *
 * @param taskId The alerting task identifier.
 * @param query an object with query parameters
@@ -219,7 +219,7 @@ async function getDataAlertExecutions(taskId, query, options) {
 /**
 * @deprecated
 *
-* Gets the stats for alerting task executions
+* Retrieves stats for overall data alerting task executions.
 *
 * @param taskId The alerting task identifier.
 * @param query an object with query parameters
@@ -235,7 +235,7 @@ async function getDataAlertExecutionsStats(taskId, query, options) {
 	});
 }
 /**
-* Gets the content of an evaluation from an execution
+* Retrieves the content of an evaluation for a specified data alerting task execution.
 *
 * @param taskId The alerting task identifier.
 * @param executionId The execution identifier.

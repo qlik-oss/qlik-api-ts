@@ -1,10 +1,10 @@
 import "./chunks/utils-qEQ6sEXX.js";
-import "./chunks/public-runtime-modules-Bfh2smA7.js";
-import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DJFDz11x.js";
+import "./chunks/public-runtime-modules-lsJEDVxt.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-B-ZucHu9.js";
 
 //#region src/public/rest/sharing-tasks.ts
 /**
-* Lists all sharing tasks.
+* Retrieves all sharing tasks accessible to the user. Users assigned the `TenantAdmin` or `AnalyticsAdmin` role can view all tasks.
 *
 * @param query an object with query parameters
 * @throws GetSharingTasksHttpError
@@ -33,7 +33,7 @@ async function createSharingTask(body, options) {
 	});
 }
 /**
-* Executes a recurring sharing task
+* Requests execution of the specified recurring sharing task.
 *
 * @param body an object with the body content
 * @throws ExecuteSharingTasksHttpError
@@ -48,7 +48,7 @@ async function executeSharingTasks(body, options) {
 	});
 }
 /**
-* Lists sharing settings.
+* Retrieves the current settings for sharing tasks, reports, and other related configuration.
 *
 * @throws GetSharingTasksSettingsHttpError
 */
@@ -60,7 +60,7 @@ async function getSharingTasksSettings(options) {
 	});
 }
 /**
-* Patches sharing features toggles. Accessible only by tenant admins.
+* Patches the toggle settings for sharing tasks, reports, and other related configuration in the tenant. User must be assigned the `TenantAdmin` role.
 *
 * @param body an object with the body content
 * @throws UpdateSharingTasksSettingsHttpError
@@ -75,7 +75,7 @@ async function updateSharingTasksSettings(body, options) {
 	});
 }
 /**
-* Updates API configuration. Accessible only by tenant admins.
+* Updates the settings for sharing tasks, reports, and other related configuration in the tenant. User must be assigned the `TenantAdmin` role.
 *
 * @param body an object with the body content
 * @throws ConfigureSharingTasksSettingsHttpError
@@ -90,7 +90,7 @@ async function configureSharingTasksSettings(body, options) {
 	});
 }
 /**
-* Deletes a sharing task.
+* Deletes a specific sharing task.
 *
 * @param taskId The sharing task identifier.
 * @throws DeleteSharingTaskHttpError
@@ -104,7 +104,7 @@ async function deleteSharingTask(taskId, options) {
 	});
 }
 /**
-* See details about a sharing task
+* Returns the details of a specific sharing task.
 *
 * @param taskId The sharing task identifier.
 * @param query an object with query parameters
@@ -120,7 +120,7 @@ async function getSharingTask(taskId, query, options) {
 	});
 }
 /**
-* Updates an existing sharing task.
+* Updates one or more properties of a specific sharing task.
 *
 * @param taskId The sharing task identifier.
 * @param body an object with the body content
@@ -137,7 +137,7 @@ async function patchSharingTask(taskId, body, options) {
 	});
 }
 /**
-* Cancels a recurring sharing task
+* Requests cancellation of an execution of the specified recurring sharing task.
 *
 * @param taskId The sharing task identifier.
 * @throws CancelSharingTaskHttpError

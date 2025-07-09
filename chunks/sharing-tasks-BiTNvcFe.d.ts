@@ -659,7 +659,7 @@ type UserIDRecipientPersist = {
   value?: string;
 };
 /**
- * Lists all sharing tasks.
+ * Retrieves all sharing tasks accessible to the user. Users assigned the `TenantAdmin` or `AnalyticsAdmin` role can view all tasks.
  *
  * @param query an object with query parameters
  * @throws GetSharingTasksHttpError
@@ -724,7 +724,7 @@ type CreateSharingTaskHttpError = {
   status: number;
 };
 /**
- * Executes a recurring sharing task
+ * Requests execution of the specified recurring sharing task.
  *
  * @param body an object with the body content
  * @throws ExecuteSharingTasksHttpError
@@ -741,7 +741,7 @@ type ExecuteSharingTasksHttpError = {
   status: number;
 };
 /**
- * Lists sharing settings.
+ * Retrieves the current settings for sharing tasks, reports, and other related configuration.
  *
  * @throws GetSharingTasksSettingsHttpError
  */
@@ -757,7 +757,7 @@ type GetSharingTasksSettingsHttpError = {
   status: number;
 };
 /**
- * Patches sharing features toggles. Accessible only by tenant admins.
+ * Patches the toggle settings for sharing tasks, reports, and other related configuration in the tenant. User must be assigned the `TenantAdmin` role.
  *
  * @param body an object with the body content
  * @throws UpdateSharingTasksSettingsHttpError
@@ -774,7 +774,7 @@ type UpdateSharingTasksSettingsHttpError = {
   status: number;
 };
 /**
- * Updates API configuration. Accessible only by tenant admins.
+ * Updates the settings for sharing tasks, reports, and other related configuration in the tenant. User must be assigned the `TenantAdmin` role.
  *
  * @param body an object with the body content
  * @throws ConfigureSharingTasksSettingsHttpError
@@ -791,7 +791,7 @@ type ConfigureSharingTasksSettingsHttpError = {
   status: number;
 };
 /**
- * Deletes a sharing task.
+ * Deletes a specific sharing task.
  *
  * @param taskId The sharing task identifier.
  * @throws DeleteSharingTaskHttpError
@@ -808,14 +808,14 @@ type DeleteSharingTaskHttpError = {
   status: number;
 };
 /**
- * See details about a sharing task
+ * Returns the details of a specific sharing task.
  *
  * @param taskId The sharing task identifier.
  * @param query an object with query parameters
  * @throws GetSharingTaskHttpError
  */
 declare function getSharingTask(taskId: string, query: {
-  /** A boolean flag to know if the user has clicked on the view chart button */
+  /** Determines whether to update the `lastViewed` property for the sharing task, which is used to determine whether the sharing task is still in use. If set to `true`, this will be updated to current time. */
   isViewChart?: boolean;
 }, options?: ApiCallOptions): Promise<GetSharingTaskHttpResponse>;
 type GetSharingTaskHttpResponse = {
@@ -829,7 +829,7 @@ type GetSharingTaskHttpError = {
   status: number;
 };
 /**
- * Updates an existing sharing task.
+ * Updates one or more properties of a specific sharing task.
  *
  * @param taskId The sharing task identifier.
  * @param body an object with the body content
@@ -847,7 +847,7 @@ type PatchSharingTaskHttpError = {
   status: number;
 };
 /**
- * Cancels a recurring sharing task
+ * Requests cancellation of an execution of the specified recurring sharing task.
  *
  * @param taskId The sharing task identifier.
  * @throws CancelSharingTaskHttpError
@@ -869,7 +869,7 @@ type CancelSharingTaskHttpError = {
 declare function clearCache(): void;
 interface SharingTasksAPI {
   /**
-   * Lists all sharing tasks.
+   * Retrieves all sharing tasks accessible to the user. Users assigned the `TenantAdmin` or `AnalyticsAdmin` role can view all tasks.
    *
    * @param query an object with query parameters
    * @throws GetSharingTasksHttpError
@@ -883,41 +883,41 @@ interface SharingTasksAPI {
    */
   createSharingTask: typeof createSharingTask;
   /**
-   * Executes a recurring sharing task
+   * Requests execution of the specified recurring sharing task.
    *
    * @param body an object with the body content
    * @throws ExecuteSharingTasksHttpError
    */
   executeSharingTasks: typeof executeSharingTasks;
   /**
-   * Lists sharing settings.
+   * Retrieves the current settings for sharing tasks, reports, and other related configuration.
    *
    * @throws GetSharingTasksSettingsHttpError
    */
   getSharingTasksSettings: typeof getSharingTasksSettings;
   /**
-   * Patches sharing features toggles. Accessible only by tenant admins.
+   * Patches the toggle settings for sharing tasks, reports, and other related configuration in the tenant. User must be assigned the `TenantAdmin` role.
    *
    * @param body an object with the body content
    * @throws UpdateSharingTasksSettingsHttpError
    */
   updateSharingTasksSettings: typeof updateSharingTasksSettings;
   /**
-   * Updates API configuration. Accessible only by tenant admins.
+   * Updates the settings for sharing tasks, reports, and other related configuration in the tenant. User must be assigned the `TenantAdmin` role.
    *
    * @param body an object with the body content
    * @throws ConfigureSharingTasksSettingsHttpError
    */
   configureSharingTasksSettings: typeof configureSharingTasksSettings;
   /**
-   * Deletes a sharing task.
+   * Deletes a specific sharing task.
    *
    * @param taskId The sharing task identifier.
    * @throws DeleteSharingTaskHttpError
    */
   deleteSharingTask: typeof deleteSharingTask;
   /**
-   * See details about a sharing task
+   * Returns the details of a specific sharing task.
    *
    * @param taskId The sharing task identifier.
    * @param query an object with query parameters
@@ -925,7 +925,7 @@ interface SharingTasksAPI {
    */
   getSharingTask: typeof getSharingTask;
   /**
-   * Updates an existing sharing task.
+   * Updates one or more properties of a specific sharing task.
    *
    * @param taskId The sharing task identifier.
    * @param body an object with the body content
@@ -933,7 +933,7 @@ interface SharingTasksAPI {
    */
   patchSharingTask: typeof patchSharingTask;
   /**
-   * Cancels a recurring sharing task
+   * Requests cancellation of an execution of the specified recurring sharing task.
    *
    * @param taskId The sharing task identifier.
    * @throws CancelSharingTaskHttpError
