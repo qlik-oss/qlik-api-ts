@@ -70,6 +70,8 @@ type Tenant = {
   };
   /** The display name of the tenant. */
   name: string;
+  /** The region where the tenant is located. */
+  readonly region?: string;
   /** The status of the tenant. */
   status?: "active" | "disabled" | "deleted";
 };

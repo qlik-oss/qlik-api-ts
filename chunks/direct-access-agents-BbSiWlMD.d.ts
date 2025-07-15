@@ -56,6 +56,22 @@ type ErrorResponse = {
   readonly hasErrors?: boolean;
   traceId?: string;
 };
+type OdbcCustomDataType = {
+  /** The IsBit property in the ODBC custom data type mapping file. */
+  bit?: boolean;
+  /** The Identifier property in the ODBC custom data type mapping file. */
+  id: string;
+  /** The NativeDataType property in the ODBC custom data type mapping file. */
+  nativeDataType: string;
+  /** The QlikDataType property in the ODBC custom data type mapping file. */
+  qlikDataType: string;
+  /** The Size property in the ODBC custom data type mapping file. */
+  size?: number;
+};
+type OdbcCustomDataTypeResponse = {
+  errorMessage?: ErrorResponse;
+  result?: OdbcCustomDataType[];
+};
 type Operation = {
   op: "add" | "replace" | "remove";
   path: "AGENT_LOG_LEVEL" | "AGENT_HEALTH_FAIL_MINUTES_LIMIT" | "AGENT_LOG_OPTIONS" | "EXTEND_FIRST_REQUEST_TIMEOUT" | "RELOAD_CACHE_MEMORY_MB" | "DCAAS_LOG_LEVEL" | "ODBC_LOG_LEVEL" | "ODBC_MAX_PROCESS_COUNT" | "ODBC_PROCESS_ISOLATION_MODE" | "ODBC_RELOAD_SESSION_LIFE" | "SAPBW_LOG_LEVEL" | "SAPBW_MAX_PROCESS_COUNT" | "SAPBW_PROCESS_ISOLATION_MODE" | "SAPSQL_LOG_LEVEL" | "SAPSQL_MAX_PROCESS_COUNT" | "SAPSQL_PROCESS_ISOLATION_MODE" | "SAPPACKAGE_LOG_LEVEL" | "SAPPACKAGE_MAX_PROCESS_COUNT" | "SAPPACKAGE_PROCESS_ISOLATION_MODE" | "FILE_LOG_LEVEL" | "FILE_MAX_PROCESS_COUNT" | "FILE_PROCESS_ISOLATION_MODE" | "REST_LOG_LEVEL" | "REST_MAX_PROCESS_COUNT" | "REST_PROCESS_ISOLATION_MODE" | "ODBC_TABLES_LIMIT_FOR_GENERICODBC" | "OVERRIDE_CHUNKS_CACHE_DIR" | "CHUNK_RECOVERY_RESUME_THRESHOLD_MINUTES";
@@ -77,6 +93,9 @@ type PatchOperationValidationResult = {
  */
 type UpdateConfigurationFlatFileRequest = {
   contentsToSave?: string[];
+};
+type UpdateOdbcCustomTypeMappingsRequest = {
+  odbcCustomDataTypes?: OdbcCustomDataType[];
 };
 /**
  * Restarts the specified agent. If a reload is in `RELOADING` status the `restart` action will be ignored. Use `force-restart` to restart the agent even if a reload is in `RELOADING` status. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
@@ -177,6 +196,43 @@ type GetDirectAccessAgentConnectorFilesWithoutQueryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 403 | 404;
+};
+/**
+ * Retrieves custom data type mapping settings for the Generic ODBC Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
+ *
+ * @param agentId The agent ID.
+ * @param connectorType The connector type. Must be `odbc-connector` for this endpoint.
+ * @throws GetDirectAccessAgentConnectorCustomDataTypeMappingsHttpError
+ */
+declare function getDirectAccessAgentConnectorCustomDataTypeMappings(agentId: string, connectorType: string, options?: ApiCallOptions): Promise<GetDirectAccessAgentConnectorCustomDataTypeMappingsHttpResponse>;
+type GetDirectAccessAgentConnectorCustomDataTypeMappingsHttpResponse = {
+  data: OdbcCustomDataTypeResponse;
+  headers: Headers;
+  status: 200;
+};
+type GetDirectAccessAgentConnectorCustomDataTypeMappingsHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: 404;
+};
+/**
+ * Completely replaces the contents of the custom data type mapping configuration file for the Generic ODBC connector. Partial updates are not supported. There are property naming differences between the API and the file contents. Use the API property format when making changes. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
+ *
+ * @param agentId The agent ID.
+ * @param connectorType The connector type. Must be `odbc-connector` for this endpoint.
+ * @param body an object with the body content
+ * @throws PutDirectAccessAgentConnectorCustomDataTypeMappingsHttpError
+ */
+declare function putDirectAccessAgentConnectorCustomDataTypeMappings(agentId: string, connectorType: string, body: UpdateOdbcCustomTypeMappingsRequest, options?: ApiCallOptions): Promise<PutDirectAccessAgentConnectorCustomDataTypeMappingsHttpResponse>;
+type PutDirectAccessAgentConnectorCustomDataTypeMappingsHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 204;
+};
+type PutDirectAccessAgentConnectorCustomDataTypeMappingsHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: 400 | 404 | 409;
 };
 /**
  * Retrieves the configuration items in the flat file for the specified connector. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
@@ -285,6 +341,23 @@ interface DirectAccessAgentsAPI {
    */
   getDirectAccessAgentConnectorFilesWithoutQuery: typeof getDirectAccessAgentConnectorFilesWithoutQuery;
   /**
+   * Retrieves custom data type mapping settings for the Generic ODBC Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
+   *
+   * @param agentId The agent ID.
+   * @param connectorType The connector type. Must be `odbc-connector` for this endpoint.
+   * @throws GetDirectAccessAgentConnectorCustomDataTypeMappingsHttpError
+   */
+  getDirectAccessAgentConnectorCustomDataTypeMappings: typeof getDirectAccessAgentConnectorCustomDataTypeMappings;
+  /**
+   * Completely replaces the contents of the custom data type mapping configuration file for the Generic ODBC connector. Partial updates are not supported. There are property naming differences between the API and the file contents. Use the API property format when making changes. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
+   *
+   * @param agentId The agent ID.
+   * @param connectorType The connector type. Must be `odbc-connector` for this endpoint.
+   * @param body an object with the body content
+   * @throws PutDirectAccessAgentConnectorCustomDataTypeMappingsHttpError
+   */
+  putDirectAccessAgentConnectorCustomDataTypeMappings: typeof putDirectAccessAgentConnectorCustomDataTypeMappings;
+  /**
    * Retrieves the configuration items in the flat file for the specified connector. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
    *
    * @param agentId The agent ID
@@ -324,4 +397,4 @@ interface DirectAccessAgentsAPI {
  */
 declare const directAccessAgentsExport: DirectAccessAgentsAPI;
 //#endregion
-export { ConfigurationLineBase, ConfigurationLineNumeric, ConfigurationLineString, ConfigurationResponse, ConnectorFlatFileConfigurationResponse, ConnectorSettings, DirectAccessAgentsAPI, ErrorMessage, ErrorResponse, GetDirectAccessAgentConfigurationHttpError, GetDirectAccessAgentConfigurationHttpResponse, GetDirectAccessAgentConnectorFileHttpError, GetDirectAccessAgentConnectorFileHttpResponse, GetDirectAccessAgentConnectorFilesHttpError, GetDirectAccessAgentConnectorFilesHttpResponse, GetDirectAccessAgentConnectorFilesWithoutQueryHttpError, GetDirectAccessAgentConnectorFilesWithoutQueryHttpResponse, Operation, PatchDirectAccessAgentConfiguration204HttpResponse, PatchDirectAccessAgentConfiguration207HttpResponse, PatchDirectAccessAgentConfigurationHttpError, PatchDirectAccessAgentConfigurationHttpResponse, PatchOperationResponse, PatchOperationValidationResult, RestartDirectAccessAgentHttpError, RestartDirectAccessAgentHttpResponse, UpdateConfigurationFlatFileRequest, UpdateDirectAccessAgentConnectorFileHttpError, UpdateDirectAccessAgentConnectorFileHttpResponse, UpdateDirectAccessAgentConnectorFileWithoutQueryHttpError, UpdateDirectAccessAgentConnectorFileWithoutQueryHttpResponse, clearCache, directAccessAgentsExport, getDirectAccessAgentConfiguration, getDirectAccessAgentConnectorFile, getDirectAccessAgentConnectorFiles, getDirectAccessAgentConnectorFilesWithoutQuery, patchDirectAccessAgentConfiguration, restartDirectAccessAgent, updateDirectAccessAgentConnectorFile, updateDirectAccessAgentConnectorFileWithoutQuery };
+export { ConfigurationLineBase, ConfigurationLineNumeric, ConfigurationLineString, ConfigurationResponse, ConnectorFlatFileConfigurationResponse, ConnectorSettings, DirectAccessAgentsAPI, ErrorMessage, ErrorResponse, GetDirectAccessAgentConfigurationHttpError, GetDirectAccessAgentConfigurationHttpResponse, GetDirectAccessAgentConnectorCustomDataTypeMappingsHttpError, GetDirectAccessAgentConnectorCustomDataTypeMappingsHttpResponse, GetDirectAccessAgentConnectorFileHttpError, GetDirectAccessAgentConnectorFileHttpResponse, GetDirectAccessAgentConnectorFilesHttpError, GetDirectAccessAgentConnectorFilesHttpResponse, GetDirectAccessAgentConnectorFilesWithoutQueryHttpError, GetDirectAccessAgentConnectorFilesWithoutQueryHttpResponse, OdbcCustomDataType, OdbcCustomDataTypeResponse, Operation, PatchDirectAccessAgentConfiguration204HttpResponse, PatchDirectAccessAgentConfiguration207HttpResponse, PatchDirectAccessAgentConfigurationHttpError, PatchDirectAccessAgentConfigurationHttpResponse, PatchOperationResponse, PatchOperationValidationResult, PutDirectAccessAgentConnectorCustomDataTypeMappingsHttpError, PutDirectAccessAgentConnectorCustomDataTypeMappingsHttpResponse, RestartDirectAccessAgentHttpError, RestartDirectAccessAgentHttpResponse, UpdateConfigurationFlatFileRequest, UpdateDirectAccessAgentConnectorFileHttpError, UpdateDirectAccessAgentConnectorFileHttpResponse, UpdateDirectAccessAgentConnectorFileWithoutQueryHttpError, UpdateDirectAccessAgentConnectorFileWithoutQueryHttpResponse, UpdateOdbcCustomTypeMappingsRequest, clearCache, directAccessAgentsExport, getDirectAccessAgentConfiguration, getDirectAccessAgentConnectorCustomDataTypeMappings, getDirectAccessAgentConnectorFile, getDirectAccessAgentConnectorFiles, getDirectAccessAgentConnectorFilesWithoutQuery, patchDirectAccessAgentConfiguration, putDirectAccessAgentConnectorCustomDataTypeMappings, restartDirectAccessAgent, updateDirectAccessAgentConnectorFile, updateDirectAccessAgentConnectorFileWithoutQuery };

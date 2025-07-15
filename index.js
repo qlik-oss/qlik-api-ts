@@ -613,6 +613,7 @@ const directAccessAgentsMiniModule = apiDefToApiPublic("direct-access-agents", {
 	configurations: ["getDirectAccessAgentConfiguration:GQ:", "patchDirectAccessAgentConfiguration:ABJ:"],
 	connectors: { "{connectorType}": { files: {
 		"": ["getDirectAccessAgentConnectorFiles:GQ:", "getDirectAccessAgentConnectorFilesWithoutQuery:G:"],
+		"custom-data-type-mappings": ["getDirectAccessAgentConnectorCustomDataTypeMappings:G:", "putDirectAccessAgentConnectorCustomDataTypeMappings:UBJ:"],
 		"{fileType}": [
 			"getDirectAccessAgentConnectorFile:G:",
 			"updateDirectAccessAgentConnectorFile:UQBJ:",
@@ -948,7 +949,14 @@ const sharingTasksMiniModule = apiDefToApiPublic("sharing-tasks", { api: { v1: {
 			"getSharingTask:GQ:",
 			"patchSharingTask:ABJ:"
 		],
-		actions: { cancel: ["cancelSharingTask:P:"] }
+		actions: { cancel: ["cancelSharingTask:P:"] },
+		executions: {
+			"": ["getSharingTaskExecutions:GQ:"],
+			"{executionId}": {
+				"": ["getSharingTaskExecution:GQ:"],
+				files: { "{fileAlias}": ["getSharingTaskExecutionFile:GQ:"] }
+			}
+		}
 	}
 } } } });
 const spacesMiniModule = apiDefToApiPublic("spaces", { api: { v1: { spaces: {
