@@ -1,4 +1,4 @@
-import { ApiCallOptions } from "./auth-types-BlCWK0FP.js";
+import { ApiCallOptions, DownloadableBlob } from "./auth-types-BlCWK0FP.js";
 
 //#region src/public/rest/sharing-tasks.d.ts
 type APISettingsUpload = {
@@ -215,6 +215,88 @@ type Self = {
 };
 type SharingActionsTriggerCreateRequest = {
   sharingTaskID: string;
+};
+type SharingExecutionError = {
+  /** Error code specific to sharing service. */
+  readonly code?: string;
+  /** Error cause. */
+  readonly detail?: string;
+  /** Error title. */
+  readonly title?: string;
+};
+type SharingExecutionErrors = SharingExecutionError[];
+type SharingExecutionFile = {
+  fileAlias?: string;
+  fileID?: string;
+  tempContentsLocation?: string;
+  /** identify the source task template */
+  readonly templateId?: string;
+  type?: "image" | "pdf" | "pptx" | "xlsx" | "html";
+  /** userId associated with the file */
+  readonly userId?: string;
+};
+type SharingExecutionListResponse = StandardListResponseProps & {
+  /** Gets a list of sharing-executions. */
+  executions?: SharingExecutionResponse[];
+  links?: ListLinks;
+};
+type SharingExecutionPersist = {
+  /** appId associated to sharing task execution */
+  readonly appId?: string;
+  /** @deprecated
+   * The ID of a filter in a reporting request */
+  readonly bookmarkId?: string;
+  readonly bookmarkIds?: string[];
+  /** Total count of cancelled reports in this execution */
+  readonly cancelledCount?: number;
+  /** Timestamp of execution cancel */
+  readonly cancelledTime?: string;
+  /** Timestamp of execution successful stop */
+  readonly endTime?: string;
+  errors?: SharingExecutionErrors;
+  /** eventID of the trigger NATS event */
+  readonly eventID?: string;
+  /** eventTime of the trigger NATS event */
+  readonly eventTime?: string;
+  /** Total count of failed reports in this execution */
+  readonly failedCount?: number;
+  /** Timestamp of execution stop */
+  readonly failedTime?: string;
+  /** Total count of failed uploaded reports in this execution */
+  readonly failedUploadCount?: number;
+  readonly files?: SharingExecutionFile[];
+  /** Gets the execution identifier. */
+  readonly id?: string;
+  /** Owner of the execution */
+  readonly ownerId?: string;
+  /** If this execution was triggered by an app reload. This will contain the reloadId from reloads service. Otherwise it is empty or omitted. */
+  readonly reloadId?: string;
+  /** If this execution was triggered by an app reload. This will contain the reload time to compare with reporting service when the report is requested. */
+  readonly reloadTime?: string;
+  /** ID for the sharing task that this execution references */
+  readonly sharingTaskID?: string;
+  /** Timestamp of execution start */
+  readonly startTime?: string;
+  /** Status of the task execution */
+  readonly status?: "initialized" | "in-progress" | "successful" | "failed" | "cancelled" | "invalid" | "presuccessful" | "cancelling";
+  /** Total count of successfully generated reports in this execution */
+  readonly successCount?: number;
+  /** Total count of successfully uploaded reports in this execution */
+  readonly successUploadCount?: number;
+  /** User that this execution is targeting as a recipient */
+  targetUser?: TargetUser;
+  /** The tenant that this execution belongs to */
+  readonly tenantId?: string;
+  /** Total count of reports in this execution */
+  readonly totalCount?: number;
+  /** Total count of reports to be uploaded in this execution */
+  readonly totalUploadCount?: number;
+  /** Workflow that the execution belongs to. Note that in a multi-recipient context we can have multiple executions (one per recipient) that share the same unique workflow. */
+  readonly workflowID?: string;
+};
+type SharingExecutionResponse = SharingExecutionPersist & {
+  fileLocations?: string[];
+  links?: Links;
 };
 type SharingSettings = {
   /** true if report-subscription feature is enabled for this tenant */
@@ -574,6 +656,20 @@ type StoryTemplate = {
   /** ID of story */
   storyId?: string;
 };
+/**
+ * User that this execution is targeting as a recipient
+ */
+type TargetUser = {
+  /** @deprecated */
+  filterName?: string;
+  filterNames?: string[];
+  /** timezone for the timestamp on the attached file name */
+  timezone?: string;
+  /** type of user eg email, userId, groupId */
+  type?: string;
+  /** contains the value of user type e.g. abc@xyz.com, 213efewr3 */
+  value?: string;
+};
 type TaskError = {
   /** Timestamp for the creation of the error */
   timestamp?: string;
@@ -864,6 +960,84 @@ type CancelSharingTaskHttpError = {
   status: number;
 };
 /**
+ * Lists executions for the specified sharing task.
+ *
+ * @param taskId The sharing task identifier.
+ * @param query an object with query parameters
+ * @throws GetSharingTaskExecutionsHttpError
+ */
+declare function getSharingTaskExecutions(taskId: string, query: {
+  /** Limit the returned result set */
+  limit?: number;
+  /** The cursor to the next page of data. Only one of next or previous may be specified. */
+  next?: string;
+  /** Offset for pagination - how many elements to skip */
+  offset?: number;
+  /** The cursor to the previous page of data. Only one of next or previous may be specified. */
+  prev?: string;
+  /** Sort the returned result set by the specified field */
+  sort?: ("starttime" | "-starttime" | "+starttime")[];
+  /** Specifies a filter for a particular field and value of an execution */
+  status?: "successful" | "failed";
+}, options?: ApiCallOptions): Promise<GetSharingTaskExecutionsHttpResponse>;
+type GetSharingTaskExecutionsHttpResponse = {
+  data: SharingExecutionListResponse;
+  headers: Headers;
+  status: 200;
+  prev?: (options?: ApiCallOptions) => Promise<GetSharingTaskExecutionsHttpResponse>;
+  next?: (options?: ApiCallOptions) => Promise<GetSharingTaskExecutionsHttpResponse>;
+};
+type GetSharingTaskExecutionsHttpError = {
+  data: Errors;
+  headers: Headers;
+  status: number;
+};
+/**
+ * Retrieves a specific sharing task execution.
+ *
+ * @param taskId The sharing task identifier.
+ * @param executionId The execution identifier. If value is "latest", the latest execution will be returned
+ * @param query an object with query parameters
+ * @throws GetSharingTaskExecutionHttpError
+ */
+declare function getSharingTaskExecution(taskId: string, executionId: string, query: {
+  /** Filter by status. If not present then no filtering is done on the status. This is only relevant when requesting latest execution. */
+  status?: "successful" | "failed" | "cancelled";
+}, options?: ApiCallOptions): Promise<GetSharingTaskExecutionHttpResponse>;
+type GetSharingTaskExecutionHttpResponse = {
+  data: SharingExecutionResponse;
+  headers: Headers;
+  status: 200;
+};
+type GetSharingTaskExecutionHttpError = {
+  data: Errors;
+  headers: Headers;
+  status: number;
+};
+/**
+ * Retrieves the file content for the requested execution and file type.
+ *
+ * @param taskId The sharing task identifier.
+ * @param executionId The execution identifier.
+ * @param fileAlias The execution identifier. If value is "latest", the latest execution will be returned
+ * @param query an object with query parameters
+ * @throws GetSharingTaskExecutionFileHttpError
+ */
+declare function getSharingTaskExecutionFile(taskId: string, executionId: string, fileAlias: string, query: {
+  /** Filter by status. If not present then no filtering is done on the status. This is only relevant when requesting latest execution. */
+  status?: "successful" | "failed" | "cancelled";
+}, options?: ApiCallOptions): Promise<GetSharingTaskExecutionFileHttpResponse>;
+type GetSharingTaskExecutionFileHttpResponse = {
+  data: DownloadableBlob;
+  headers: Headers;
+  status: 200;
+};
+type GetSharingTaskExecutionFileHttpError = {
+  data: Errors;
+  headers: Headers;
+  status: number;
+};
+/**
  * Clears the cache for sharing-tasks api requests.
  */
 declare function clearCache(): void;
@@ -940,6 +1114,33 @@ interface SharingTasksAPI {
    */
   cancelSharingTask: typeof cancelSharingTask;
   /**
+   * Lists executions for the specified sharing task.
+   *
+   * @param taskId The sharing task identifier.
+   * @param query an object with query parameters
+   * @throws GetSharingTaskExecutionsHttpError
+   */
+  getSharingTaskExecutions: typeof getSharingTaskExecutions;
+  /**
+   * Retrieves a specific sharing task execution.
+   *
+   * @param taskId The sharing task identifier.
+   * @param executionId The execution identifier. If value is "latest", the latest execution will be returned
+   * @param query an object with query parameters
+   * @throws GetSharingTaskExecutionHttpError
+   */
+  getSharingTaskExecution: typeof getSharingTaskExecution;
+  /**
+   * Retrieves the file content for the requested execution and file type.
+   *
+   * @param taskId The sharing task identifier.
+   * @param executionId The execution identifier.
+   * @param fileAlias The execution identifier. If value is "latest", the latest execution will be returned
+   * @param query an object with query parameters
+   * @throws GetSharingTaskExecutionFileHttpError
+   */
+  getSharingTaskExecutionFile: typeof getSharingTaskExecutionFile;
+  /**
    * Clears the cache for sharing-tasks api requests.
    */
   clearCache: typeof clearCache;
@@ -949,4 +1150,4 @@ interface SharingTasksAPI {
  */
 declare const sharingTasksExport: SharingTasksAPI;
 //#endregion
-export { APISettingsUpload, AlertingTaskGroupRecipientError, AlertingTaskRecipientError, CancelSharingTaskHttpError, CancelSharingTaskHttpResponse, ChartTemplate, ConfigureSharingTasksSettingsHttpError, ConfigureSharingTasksSettingsHttpResponse, CreateSharingTaskHttpError, CreateSharingTaskHttpResponse, DeleteSharingTaskHttpError, DeleteSharingTaskHttpResponse, EmailAddressRecipientPersist, EmailComposition, EncryptedProperty, Error, ErrorMeta, Errors, ExecuteSharingTasksHttpError, ExecuteSharingTasksHttpResponse, GetSharingTaskHttpError, GetSharingTaskHttpResponse, GetSharingTasksHttpError, GetSharingTasksHttpResponse, GetSharingTasksSettingsHttpError, GetSharingTasksSettingsHttpResponse, GroupIDRecipientPersist, InsightURL, Links, ListLinks, MultiSheetTemplate, Page, PatchSharingTaskHttpError, PatchSharingTaskHttpResponse, RecipientsPersist, RetentionPolicy, ScheduleOptions, Selection, Self, SharingActionsTriggerCreateRequest, SharingSettings, SharingSettingsPatchCompliant, SharingSettingsPatchCompliantList, SharingTaskPatchRequestCompliantList, SharingTaskRecurringCreateRequest, SharingTaskRecurringListResponse, SharingTaskRecurringPatchRequestCompliant, SharingTaskRecurringPersist, SharingTaskRecurringPersistEncryptedEmailContent, SharingTaskRecurringRecipients, SharingTaskRecurringResponse, SharingTasksAPI, SheetTemplate, StandardListResponseProps, State, StoryTemplate, TaskError, TaskGroupRecipientError, TaskRecipientError, TemplatePersist, TemplateResult, Trigger, UpdateSharingTasksSettingsHttpError, UpdateSharingTasksSettingsHttpResponse, UserIDRecipient, UserIDRecipientPersist, cancelSharingTask, clearCache, configureSharingTasksSettings, createSharingTask, deleteSharingTask, executeSharingTasks, getSharingTask, getSharingTasks, getSharingTasksSettings, patchSharingTask, sharingTasksExport, updateSharingTasksSettings };
+export { APISettingsUpload, AlertingTaskGroupRecipientError, AlertingTaskRecipientError, CancelSharingTaskHttpError, CancelSharingTaskHttpResponse, ChartTemplate, ConfigureSharingTasksSettingsHttpError, ConfigureSharingTasksSettingsHttpResponse, CreateSharingTaskHttpError, CreateSharingTaskHttpResponse, DeleteSharingTaskHttpError, DeleteSharingTaskHttpResponse, EmailAddressRecipientPersist, EmailComposition, EncryptedProperty, Error, ErrorMeta, Errors, ExecuteSharingTasksHttpError, ExecuteSharingTasksHttpResponse, GetSharingTaskExecutionFileHttpError, GetSharingTaskExecutionFileHttpResponse, GetSharingTaskExecutionHttpError, GetSharingTaskExecutionHttpResponse, GetSharingTaskExecutionsHttpError, GetSharingTaskExecutionsHttpResponse, GetSharingTaskHttpError, GetSharingTaskHttpResponse, GetSharingTasksHttpError, GetSharingTasksHttpResponse, GetSharingTasksSettingsHttpError, GetSharingTasksSettingsHttpResponse, GroupIDRecipientPersist, InsightURL, Links, ListLinks, MultiSheetTemplate, Page, PatchSharingTaskHttpError, PatchSharingTaskHttpResponse, RecipientsPersist, RetentionPolicy, ScheduleOptions, Selection, Self, SharingActionsTriggerCreateRequest, SharingExecutionError, SharingExecutionErrors, SharingExecutionFile, SharingExecutionListResponse, SharingExecutionPersist, SharingExecutionResponse, SharingSettings, SharingSettingsPatchCompliant, SharingSettingsPatchCompliantList, SharingTaskPatchRequestCompliantList, SharingTaskRecurringCreateRequest, SharingTaskRecurringListResponse, SharingTaskRecurringPatchRequestCompliant, SharingTaskRecurringPersist, SharingTaskRecurringPersistEncryptedEmailContent, SharingTaskRecurringRecipients, SharingTaskRecurringResponse, SharingTasksAPI, SheetTemplate, StandardListResponseProps, State, StoryTemplate, TargetUser, TaskError, TaskGroupRecipientError, TaskRecipientError, TemplatePersist, TemplateResult, Trigger, UpdateSharingTasksSettingsHttpError, UpdateSharingTasksSettingsHttpResponse, UserIDRecipient, UserIDRecipientPersist, cancelSharingTask, clearCache, configureSharingTasksSettings, createSharingTask, deleteSharingTask, executeSharingTasks, getSharingTask, getSharingTaskExecution, getSharingTaskExecutionFile, getSharingTaskExecutions, getSharingTasks, getSharingTasksSettings, patchSharingTask, sharingTasksExport, updateSharingTasksSettings };

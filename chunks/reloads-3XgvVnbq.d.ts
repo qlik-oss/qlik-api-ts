@@ -66,7 +66,7 @@ type Reload = {
   type: Type;
   /** The ID of the user who created the reload. */
   userId: string;
-  /** The weight of the reload for the same tenant. The higher the weight, the sooner the reload will be scheduled relative to other reloads for the same tenant. The personal app will be always set as 1 if the value presents. */
+  /** The weight of the reload for the same tenant. The higher the weight, the sooner the reload will be scheduled relative to other reloads for the same tenant. The personal app will be always set as 1. */
   weight?: Weight;
 };
 type ReloadLinks = {
@@ -79,7 +79,7 @@ type ReloadRequest = {
   partial?: boolean;
   /** The variables to be used in the load script. */
   variables?: Record<string, string>;
-  /** The weight of the reload for the same tenant. The higher the weight, the sooner the reload will be scheduled relative to other reloads for the same tenant. The personal app will be always set as 1 if the value presents. */
+  /** The weight of the reload for the same tenant. The higher the weight, the sooner the reload will be scheduled relative to other reloads for the same tenant. The personal app will be always set as 1. */
   weight?: Weight;
 };
 type Reloads = {
@@ -103,7 +103,7 @@ type Status = "QUEUED" | "RELOADING" | "CANCELING" | "SUCCEEDED" | "FAILED" | "C
  */
 type Type = "hub" | "external" | "chronos" | "automations" | "data-refresh" | "choreographer";
 /**
- * The weight of the reload for the same tenant. The higher the weight, the sooner the reload will be scheduled relative to other reloads for the same tenant. The personal app will be always set as 1 if the value presents.
+ * The weight of the reload for the same tenant. The higher the weight, the sooner the reload will be scheduled relative to other reloads for the same tenant. The personal app will be always set as 1.
  */
 type Weight = number;
 /**

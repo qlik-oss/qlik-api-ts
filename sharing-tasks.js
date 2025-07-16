@@ -151,6 +151,64 @@ async function cancelSharingTask(taskId, options) {
 	});
 }
 /**
+* Lists executions for the specified sharing task.
+*
+* @param taskId The sharing task identifier.
+* @param query an object with query parameters
+* @throws GetSharingTaskExecutionsHttpError
+*/
+async function getSharingTaskExecutions(taskId, query, options) {
+	return invokeFetch("sharing-tasks", {
+		method: "get",
+		pathTemplate: "/api/v1/sharing-tasks/{taskId}/executions",
+		pathVariables: { taskId },
+		query,
+		options
+	});
+}
+/**
+* Retrieves a specific sharing task execution.
+*
+* @param taskId The sharing task identifier.
+* @param executionId The execution identifier. If value is "latest", the latest execution will be returned
+* @param query an object with query parameters
+* @throws GetSharingTaskExecutionHttpError
+*/
+async function getSharingTaskExecution(taskId, executionId, query, options) {
+	return invokeFetch("sharing-tasks", {
+		method: "get",
+		pathTemplate: "/api/v1/sharing-tasks/{taskId}/executions/{executionId}",
+		pathVariables: {
+			taskId,
+			executionId
+		},
+		query,
+		options
+	});
+}
+/**
+* Retrieves the file content for the requested execution and file type.
+*
+* @param taskId The sharing task identifier.
+* @param executionId The execution identifier.
+* @param fileAlias The execution identifier. If value is "latest", the latest execution will be returned
+* @param query an object with query parameters
+* @throws GetSharingTaskExecutionFileHttpError
+*/
+async function getSharingTaskExecutionFile(taskId, executionId, fileAlias, query, options) {
+	return invokeFetch("sharing-tasks", {
+		method: "get",
+		pathTemplate: "/api/v1/sharing-tasks/{taskId}/executions/{executionId}/files/{fileAlias}",
+		pathVariables: {
+			taskId,
+			executionId,
+			fileAlias
+		},
+		query,
+		options
+	});
+}
+/**
 * Clears the cache for sharing-tasks api requests.
 */
 function clearCache() {
@@ -170,9 +228,12 @@ const sharingTasksExport = {
 	getSharingTask,
 	patchSharingTask,
 	cancelSharingTask,
+	getSharingTaskExecutions,
+	getSharingTaskExecution,
+	getSharingTaskExecutionFile,
 	clearCache
 };
 var sharing_tasks_default = sharingTasksExport;
 
 //#endregion
-export { cancelSharingTask, clearCache, configureSharingTasksSettings, createSharingTask, sharing_tasks_default as default, deleteSharingTask, executeSharingTasks, getSharingTask, getSharingTasks, getSharingTasksSettings, patchSharingTask, updateSharingTasksSettings };
+export { cancelSharingTask, clearCache, configureSharingTasksSettings, createSharingTask, sharing_tasks_default as default, deleteSharingTask, executeSharingTasks, getSharingTask, getSharingTaskExecution, getSharingTaskExecutionFile, getSharingTaskExecutions, getSharingTasks, getSharingTasksSettings, patchSharingTask, updateSharingTasksSettings };

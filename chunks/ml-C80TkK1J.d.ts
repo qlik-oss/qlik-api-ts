@@ -1198,10 +1198,42 @@ type ModelMetricsRegression = {
  * Timeseries metrics experiments valid for timeseries forecasting.
  */
 type ModelMetricsTimeseries = {
+  /** Mean absolute error (training data) */
+  mae?: number;
+  /** Mean absolute error (test data) */
+  maeTest?: number;
   /** Mean absolute percentage error (training data) */
   mape?: number;
   /** Mean absolute percentage error (test data) */
   mapeTest?: number;
+  /** Mean absolute scaled error (training data) */
+  mase?: number;
+  /** Mean absolute scaled error (test data) */
+  maseTest?: number;
+  /** Median absolute percentage error (training data) */
+  mdape?: number;
+  /** Median absolute percentage error (test data) */
+  mdapeTest?: number;
+  /** Median root mean squared error (training data) */
+  mdnrmse?: number;
+  /** Median root mean squared error (test data) */
+  mdnrmseTest?: number;
+  /** Mean root mean squared error (training data) */
+  mnrmse?: number;
+  /** Mean root mean squared error (test data) */
+  mnrmseTest?: number;
+  /** Root mean squared error (training data) */
+  rmse?: number;
+  /** Root mean squared error (test data) */
+  rmseTest?: number;
+  /** Symmetric mean absolute percentage error (training data) */
+  smape?: number;
+  /** Symmetric mean absolute percentage error (test data) */
+  smapeTest?: number;
+  /** Weighted mean absolute percentage error (training data) */
+  wmape?: number;
+  /** Weighted mean absolute percentage error (test data) */
+  wmapeTest?: number;
 };
 /**
  * Model state. These are the state of the model in relation to

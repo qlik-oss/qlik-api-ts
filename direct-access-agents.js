@@ -93,6 +93,45 @@ async function getDirectAccessAgentConnectorFilesWithoutQuery(agentId, connector
 	});
 }
 /**
+* Retrieves custom data type mapping settings for the Generic ODBC Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
+*
+* @param agentId The agent ID.
+* @param connectorType The connector type. Must be `odbc-connector` for this endpoint.
+* @throws GetDirectAccessAgentConnectorCustomDataTypeMappingsHttpError
+*/
+async function getDirectAccessAgentConnectorCustomDataTypeMappings(agentId, connectorType, options) {
+	return invokeFetch("direct-access-agents", {
+		method: "get",
+		pathTemplate: "/api/v1/direct-access-agents/{agentId}/connectors/{connectorType}/files/custom-data-type-mappings",
+		pathVariables: {
+			agentId,
+			connectorType
+		},
+		options
+	});
+}
+/**
+* Completely replaces the contents of the custom data type mapping configuration file for the Generic ODBC connector. Partial updates are not supported. There are property naming differences between the API and the file contents. Use the API property format when making changes. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
+*
+* @param agentId The agent ID.
+* @param connectorType The connector type. Must be `odbc-connector` for this endpoint.
+* @param body an object with the body content
+* @throws PutDirectAccessAgentConnectorCustomDataTypeMappingsHttpError
+*/
+async function putDirectAccessAgentConnectorCustomDataTypeMappings(agentId, connectorType, body, options) {
+	return invokeFetch("direct-access-agents", {
+		method: "put",
+		pathTemplate: "/api/v1/direct-access-agents/{agentId}/connectors/{connectorType}/files/custom-data-type-mappings",
+		pathVariables: {
+			agentId,
+			connectorType
+		},
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
 * Retrieves the configuration items in the flat file for the specified connector. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
 *
 * @param agentId The agent ID
@@ -175,6 +214,8 @@ const directAccessAgentsExport = {
 	patchDirectAccessAgentConfiguration,
 	getDirectAccessAgentConnectorFiles,
 	getDirectAccessAgentConnectorFilesWithoutQuery,
+	getDirectAccessAgentConnectorCustomDataTypeMappings,
+	putDirectAccessAgentConnectorCustomDataTypeMappings,
 	getDirectAccessAgentConnectorFile,
 	updateDirectAccessAgentConnectorFile,
 	updateDirectAccessAgentConnectorFileWithoutQuery,
@@ -183,4 +224,4 @@ const directAccessAgentsExport = {
 var direct_access_agents_default = directAccessAgentsExport;
 
 //#endregion
-export { clearCache, direct_access_agents_default as default, getDirectAccessAgentConfiguration, getDirectAccessAgentConnectorFile, getDirectAccessAgentConnectorFiles, getDirectAccessAgentConnectorFilesWithoutQuery, patchDirectAccessAgentConfiguration, restartDirectAccessAgent, updateDirectAccessAgentConnectorFile, updateDirectAccessAgentConnectorFileWithoutQuery };
+export { clearCache, direct_access_agents_default as default, getDirectAccessAgentConfiguration, getDirectAccessAgentConnectorCustomDataTypeMappings, getDirectAccessAgentConnectorFile, getDirectAccessAgentConnectorFiles, getDirectAccessAgentConnectorFilesWithoutQuery, patchDirectAccessAgentConfiguration, putDirectAccessAgentConnectorCustomDataTypeMappings, restartDirectAccessAgent, updateDirectAccessAgentConnectorFile, updateDirectAccessAgentConnectorFileWithoutQuery };
