@@ -380,6 +380,8 @@ type LicenseOverview = {
  * }
  */
 type LicenseStatus = {
+  /** Boolean indicating if the license is deactivated. */
+  deactivated: boolean;
   /** Enum with extension status of license. access. */
   extensionStatus: "Unavailable" | "Pending" | "Available";
   /** Origin of license key. */
