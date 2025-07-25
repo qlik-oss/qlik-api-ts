@@ -95,6 +95,7 @@ type UpdateConfigurationFlatFileRequest = {
   contentsToSave?: string[];
 };
 type UpdateOdbcCustomTypeMappingsRequest = {
+  /** The list of custom data types to update in the ODBC connector */
   odbcCustomDataTypes?: OdbcCustomDataType[];
 };
 /**
@@ -198,7 +199,7 @@ type GetDirectAccessAgentConnectorFilesWithoutQueryHttpError = {
   status: 403 | 404;
 };
 /**
- * Retrieves custom data type mapping settings for the Generic ODBC Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
+ * Retrieves the custom data type mapping settings for the Generic ODBC Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
  *
  * @param agentId The agent ID.
  * @param connectorType The connector type. Must be `odbc-connector` for this endpoint.
@@ -341,7 +342,7 @@ interface DirectAccessAgentsAPI {
    */
   getDirectAccessAgentConnectorFilesWithoutQuery: typeof getDirectAccessAgentConnectorFilesWithoutQuery;
   /**
-   * Retrieves custom data type mapping settings for the Generic ODBC Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
+   * Retrieves the custom data type mapping settings for the Generic ODBC Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
    *
    * @param agentId The agent ID.
    * @param connectorType The connector type. Must be `odbc-connector` for this endpoint.
