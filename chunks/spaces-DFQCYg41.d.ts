@@ -165,11 +165,11 @@ type SharePatch = {
   value: string;
 }[];
 /**
- * Supported roles by space type:
+ * The roles for the space share. Supported roles by space type:
  * - Shared: consumer
- * - Managed: consumer, contributor
+ * - Managed: basicconsumer, consumer, contributor
  */
-type ShareRoleType = unknown;
+type ShareRoleType = "consumer" | "contributor" | "basicconsumer";
 type ShareType = "user" | "group" | "link";
 type Shares = {
   data?: Share[];

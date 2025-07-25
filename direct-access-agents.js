@@ -93,7 +93,7 @@ async function getDirectAccessAgentConnectorFilesWithoutQuery(agentId, connector
 	});
 }
 /**
-* Retrieves custom data type mapping settings for the Generic ODBC Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
+* Retrieves the custom data type mapping settings for the Generic ODBC Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
 *
 * @param agentId The agent ID.
 * @param connectorType The connector type. Must be `odbc-connector` for this endpoint.
