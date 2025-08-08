@@ -93,7 +93,46 @@ async function getDirectAccessAgentConnectorFilesWithoutQuery(agentId, connector
 	});
 }
 /**
-* Retrieves custom data type mapping settings for the Generic ODBC Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
+* Retrieves the allowed paths settings for the File Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.6+.
+*
+* @param agentId The agent ID.
+* @param connectorType The connector type. Must be `file-connector` for this endpoint.
+* @throws GetDirectAccessAgentConnectorFilesAllowedPathsHttpError
+*/
+async function getDirectAccessAgentConnectorFilesAllowedPaths(agentId, connectorType, options) {
+	return invokeFetch("direct-access-agents", {
+		method: "get",
+		pathTemplate: "/api/v1/direct-access-agents/{agentId}/connectors/{connectorType}/files/allowed-paths",
+		pathVariables: {
+			agentId,
+			connectorType
+		},
+		options
+	});
+}
+/**
+* Completely replaces the contents of the allowed paths configuration file for the File connector. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.6+.
+*
+* @param agentId The agent ID.
+* @param connectorType The connector type. Must be `file-connector` for this endpoint.
+* @param body an object with the body content
+* @throws PutDirectAccessAgentConnectorFilesAllowedPathsHttpError
+*/
+async function putDirectAccessAgentConnectorFilesAllowedPaths(agentId, connectorType, body, options) {
+	return invokeFetch("direct-access-agents", {
+		method: "put",
+		pathTemplate: "/api/v1/direct-access-agents/{agentId}/connectors/{connectorType}/files/allowed-paths",
+		pathVariables: {
+			agentId,
+			connectorType
+		},
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
+* Retrieves the custom data type mapping settings for the Generic ODBC Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
 *
 * @param agentId The agent ID.
 * @param connectorType The connector type. Must be `odbc-connector` for this endpoint.
@@ -214,6 +253,8 @@ const directAccessAgentsExport = {
 	patchDirectAccessAgentConfiguration,
 	getDirectAccessAgentConnectorFiles,
 	getDirectAccessAgentConnectorFilesWithoutQuery,
+	getDirectAccessAgentConnectorFilesAllowedPaths,
+	putDirectAccessAgentConnectorFilesAllowedPaths,
 	getDirectAccessAgentConnectorCustomDataTypeMappings,
 	putDirectAccessAgentConnectorCustomDataTypeMappings,
 	getDirectAccessAgentConnectorFile,
@@ -224,4 +265,4 @@ const directAccessAgentsExport = {
 var direct_access_agents_default = directAccessAgentsExport;
 
 //#endregion
-export { clearCache, direct_access_agents_default as default, getDirectAccessAgentConfiguration, getDirectAccessAgentConnectorCustomDataTypeMappings, getDirectAccessAgentConnectorFile, getDirectAccessAgentConnectorFiles, getDirectAccessAgentConnectorFilesWithoutQuery, patchDirectAccessAgentConfiguration, putDirectAccessAgentConnectorCustomDataTypeMappings, restartDirectAccessAgent, updateDirectAccessAgentConnectorFile, updateDirectAccessAgentConnectorFileWithoutQuery };
+export { clearCache, direct_access_agents_default as default, getDirectAccessAgentConfiguration, getDirectAccessAgentConnectorCustomDataTypeMappings, getDirectAccessAgentConnectorFile, getDirectAccessAgentConnectorFiles, getDirectAccessAgentConnectorFilesAllowedPaths, getDirectAccessAgentConnectorFilesWithoutQuery, patchDirectAccessAgentConfiguration, putDirectAccessAgentConnectorCustomDataTypeMappings, putDirectAccessAgentConnectorFilesAllowedPaths, restartDirectAccessAgent, updateDirectAccessAgentConnectorFile, updateDirectAccessAgentConnectorFileWithoutQuery };

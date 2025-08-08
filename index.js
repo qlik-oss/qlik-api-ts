@@ -613,6 +613,7 @@ const directAccessAgentsMiniModule = apiDefToApiPublic("direct-access-agents", {
 	configurations: ["getDirectAccessAgentConfiguration:GQ:", "patchDirectAccessAgentConfiguration:ABJ:"],
 	connectors: { "{connectorType}": { files: {
 		"": ["getDirectAccessAgentConnectorFiles:GQ:", "getDirectAccessAgentConnectorFilesWithoutQuery:G:"],
+		"allowed-paths": ["getDirectAccessAgentConnectorFilesAllowedPaths:G:", "putDirectAccessAgentConnectorFilesAllowedPaths:UBJ:"],
 		"custom-data-type-mappings": ["getDirectAccessAgentConnectorCustomDataTypeMappings:G:", "putDirectAccessAgentConnectorCustomDataTypeMappings:UBJ:"],
 		"{fileType}": [
 			"getDirectAccessAgentConnectorFile:G:",

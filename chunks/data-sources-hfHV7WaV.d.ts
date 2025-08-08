@@ -123,6 +123,7 @@ type UiInfo = {
  *   {
  *     dataSourceId: "rest",
  *     detail: true,
+ *     includeDisabled: true,
  *     includeui: true
  *   }
  * )
@@ -135,6 +136,8 @@ declare function getDataSources(query: {
   dataSourceId?: string;
   /** Determines if provider detail is returned */
   detail?: boolean;
+  /** When true disabled datasources are also included in the response */
+  includeDisabled?: boolean;
   /** Determines if UI info is returned */
   includeui?: boolean;
 }, options?: ApiCallOptions): Promise<GetDataSourcesHttpResponse>;
@@ -221,6 +224,7 @@ interface DataSourcesAPI {
    *   {
    *     dataSourceId: "rest",
    *     detail: true,
+   *     includeDisabled: true,
    *     includeui: true
    *   }
    * )
