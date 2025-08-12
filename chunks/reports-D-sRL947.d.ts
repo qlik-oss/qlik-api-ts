@@ -319,6 +319,14 @@ type PdfOutput = {
   /** Size of the pdf page. */
   size?: "A1" | "A2" | "A3" | "A4" | "A5" | "A6" | "Letter" | "Legal" | "Tabloid";
 };
+type PostReportsResponse = {
+  /** A message indicating the status of the request. */
+  message?: string;
+  /** The absolute URL to get the outputs of the report request. */
+  outputsUrl?: string;
+  /** The report request ID */
+  readonly requestId?: string;
+};
 /**
  * Output to be used to export a composition of templates as pptx.
  */
@@ -700,7 +708,7 @@ type ReloadTimestampMatchType = "noCheck" | "requestTimeExact";
  */
 declare function createReport(body: ReportRequest, options?: ApiCallOptions): Promise<CreateReportHttpResponse>;
 type CreateReportHttpResponse = {
-  data: void;
+  data: PostReportsResponse;
   headers: Headers;
   status: 202;
 };
@@ -755,4 +763,4 @@ interface ReportsAPI {
  */
 declare const reportsExport: ReportsAPI;
 //#endregion
-export { AppError, AppErrors, CallBackAction, ChainableSelection, ChainableSelectionType, ComposableTemplate, CreateReportHttpError, CreateReportHttpResponse, CycleOutput, Definitions, DocProperties, Error, ExcelOutput, ExportDataOptions, ExportError, ExportErrors, Float64, GetReportStatusHttpError, GetReportStatusHttpResponse, HttpRequest, ImageOutput, Meta, MetaExportError, NxPatch, OutputItem, PdfCompositionOutput, PdfOutput, PptxCompositionOutput, PptxOutput, QFieldValue, QSelection, Reason, ReloadTimestampMatchType, ReportRequest, ReportStatus, ReportsAPI, Result, SelectionChain, SelectionError, SelectionErrors, SelectionFilter, SelectionStrategy, SenseDataTemplate, SenseFileTemplate, SenseImageTemplate, SensePersistentBookmark, SenseSelectionType, SenseSheetTemplate, SenseTemporaryBookmarkV2, Sheet, TemplateLocation, Visualization, clearCache, createReport, getReportStatus, reportsExport };
+export { AppError, AppErrors, CallBackAction, ChainableSelection, ChainableSelectionType, ComposableTemplate, CreateReportHttpError, CreateReportHttpResponse, CycleOutput, Definitions, DocProperties, Error, ExcelOutput, ExportDataOptions, ExportError, ExportErrors, Float64, GetReportStatusHttpError, GetReportStatusHttpResponse, HttpRequest, ImageOutput, Meta, MetaExportError, NxPatch, OutputItem, PdfCompositionOutput, PdfOutput, PostReportsResponse, PptxCompositionOutput, PptxOutput, QFieldValue, QSelection, Reason, ReloadTimestampMatchType, ReportRequest, ReportStatus, ReportsAPI, Result, SelectionChain, SelectionError, SelectionErrors, SelectionFilter, SelectionStrategy, SenseDataTemplate, SenseFileTemplate, SenseImageTemplate, SensePersistentBookmark, SenseSelectionType, SenseSheetTemplate, SenseTemporaryBookmarkV2, Sheet, TemplateLocation, Visualization, clearCache, createReport, getReportStatus, reportsExport };

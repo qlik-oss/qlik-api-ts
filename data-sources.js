@@ -10,6 +10,7 @@ import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-B-ZucHu9.js";
 *   {
 *     dataSourceId: "rest",
 *     detail: true,
+*     includeDisabled: true,
 *     includeui: true
 *   }
 * )

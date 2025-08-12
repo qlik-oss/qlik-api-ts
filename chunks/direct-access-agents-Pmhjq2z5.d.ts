@@ -56,6 +56,16 @@ type ErrorResponse = {
   readonly hasErrors?: boolean;
   traceId?: string;
 };
+type FileConnectorAllowedPath = {
+  /** The Path property in the File connector allowed paths file. */
+  path: string;
+  /** The Spaces property in the File connector allowed paths file. */
+  spaces?: string[];
+};
+type FileConnectorAllowedPathsResponse = {
+  errorMessage?: ErrorResponse;
+  result?: FileConnectorAllowedPath[];
+};
 type OdbcCustomDataType = {
   /** The IsBit property in the ODBC custom data type mapping file. */
   bit?: boolean;
@@ -74,7 +84,7 @@ type OdbcCustomDataTypeResponse = {
 };
 type Operation = {
   op: "add" | "replace" | "remove";
-  path: "AGENT_LOG_LEVEL" | "AGENT_HEALTH_FAIL_MINUTES_LIMIT" | "AGENT_LOG_OPTIONS" | "EXTEND_FIRST_REQUEST_TIMEOUT" | "RELOAD_CACHE_MEMORY_MB" | "DCAAS_LOG_LEVEL" | "ODBC_LOG_LEVEL" | "ODBC_MAX_PROCESS_COUNT" | "ODBC_PROCESS_ISOLATION_MODE" | "ODBC_RELOAD_SESSION_LIFE" | "SAPBW_LOG_LEVEL" | "SAPBW_MAX_PROCESS_COUNT" | "SAPBW_PROCESS_ISOLATION_MODE" | "SAPSQL_LOG_LEVEL" | "SAPSQL_MAX_PROCESS_COUNT" | "SAPSQL_PROCESS_ISOLATION_MODE" | "SAPPACKAGE_LOG_LEVEL" | "SAPPACKAGE_MAX_PROCESS_COUNT" | "SAPPACKAGE_PROCESS_ISOLATION_MODE" | "FILE_LOG_LEVEL" | "FILE_MAX_PROCESS_COUNT" | "FILE_PROCESS_ISOLATION_MODE" | "REST_LOG_LEVEL" | "REST_MAX_PROCESS_COUNT" | "REST_PROCESS_ISOLATION_MODE" | "ODBC_TABLES_LIMIT_FOR_GENERICODBC" | "OVERRIDE_CHUNKS_CACHE_DIR" | "CHUNK_RECOVERY_RESUME_THRESHOLD_MINUTES";
+  path: "AGENT_LOG_LEVEL" | "AGENT_HEALTH_FAIL_MINUTES_LIMIT" | "AGENT_LOG_OPTIONS" | "EXTEND_FIRST_REQUEST_TIMEOUT" | "RELOAD_CACHE_MEMORY_MB" | "DCAAS_LOG_LEVEL" | "ODBC_LOG_LEVEL" | "ODBC_MAX_PROCESS_COUNT" | "ODBC_PROCESS_ISOLATION_MODE" | "ODBC_RELOAD_SESSION_LIFE" | "SAPBW_LOG_LEVEL" | "SAPBW_MAX_PROCESS_COUNT" | "SAPBW_PROCESS_ISOLATION_MODE" | "SAPSQL_LOG_LEVEL" | "SAPSQL_MAX_PROCESS_COUNT" | "SAPSQL_PROCESS_ISOLATION_MODE" | "SAPPACKAGE_LOG_LEVEL" | "SAPPACKAGE_MAX_PROCESS_COUNT" | "SAPPACKAGE_PROCESS_ISOLATION_MODE" | "FILE_LOG_LEVEL" | "FILE_MAX_PROCESS_COUNT" | "FILE_PROCESS_ISOLATION_MODE" | "REST_LOG_LEVEL" | "REST_MAX_PROCESS_COUNT" | "REST_PROCESS_ISOLATION_MODE" | "ODBC_TABLES_LIMIT_FOR_GENERICODBC" | "OVERRIDE_CHUNKS_CACHE_DIR" | "CHUNK_RECOVERY_RESUME_THRESHOLD_MINUTES" | "REST_ALLOW_LOCALHOST_CONNECTION" | "OPTIONAL_CAPABILITIES";
   value: string;
 };
 type PatchOperationResponse = {
@@ -94,7 +104,12 @@ type PatchOperationValidationResult = {
 type UpdateConfigurationFlatFileRequest = {
   contentsToSave?: string[];
 };
+type UpdateFileConnectorAllowedPathsRequest = {
+  /** The list of allowed paths to update in the File connector */
+  fileConnectorAllowedPaths?: FileConnectorAllowedPath[];
+};
 type UpdateOdbcCustomTypeMappingsRequest = {
+  /** The list of custom data types to update in the ODBC connector */
   odbcCustomDataTypes?: OdbcCustomDataType[];
 };
 /**
@@ -198,7 +213,44 @@ type GetDirectAccessAgentConnectorFilesWithoutQueryHttpError = {
   status: 403 | 404;
 };
 /**
- * Retrieves custom data type mapping settings for the Generic ODBC Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
+ * Retrieves the allowed paths settings for the File Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.6+.
+ *
+ * @param agentId The agent ID.
+ * @param connectorType The connector type. Must be `file-connector` for this endpoint.
+ * @throws GetDirectAccessAgentConnectorFilesAllowedPathsHttpError
+ */
+declare function getDirectAccessAgentConnectorFilesAllowedPaths(agentId: string, connectorType: string, options?: ApiCallOptions): Promise<GetDirectAccessAgentConnectorFilesAllowedPathsHttpResponse>;
+type GetDirectAccessAgentConnectorFilesAllowedPathsHttpResponse = {
+  data: FileConnectorAllowedPathsResponse;
+  headers: Headers;
+  status: 200;
+};
+type GetDirectAccessAgentConnectorFilesAllowedPathsHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: 404;
+};
+/**
+ * Completely replaces the contents of the allowed paths configuration file for the File connector. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.6+.
+ *
+ * @param agentId The agent ID.
+ * @param connectorType The connector type. Must be `file-connector` for this endpoint.
+ * @param body an object with the body content
+ * @throws PutDirectAccessAgentConnectorFilesAllowedPathsHttpError
+ */
+declare function putDirectAccessAgentConnectorFilesAllowedPaths(agentId: string, connectorType: string, body: UpdateFileConnectorAllowedPathsRequest, options?: ApiCallOptions): Promise<PutDirectAccessAgentConnectorFilesAllowedPathsHttpResponse>;
+type PutDirectAccessAgentConnectorFilesAllowedPathsHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 204;
+};
+type PutDirectAccessAgentConnectorFilesAllowedPathsHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: 400 | 404 | 409;
+};
+/**
+ * Retrieves the custom data type mapping settings for the Generic ODBC Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
  *
  * @param agentId The agent ID.
  * @param connectorType The connector type. Must be `odbc-connector` for this endpoint.
@@ -341,7 +393,24 @@ interface DirectAccessAgentsAPI {
    */
   getDirectAccessAgentConnectorFilesWithoutQuery: typeof getDirectAccessAgentConnectorFilesWithoutQuery;
   /**
-   * Retrieves custom data type mapping settings for the Generic ODBC Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
+   * Retrieves the allowed paths settings for the File Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.6+.
+   *
+   * @param agentId The agent ID.
+   * @param connectorType The connector type. Must be `file-connector` for this endpoint.
+   * @throws GetDirectAccessAgentConnectorFilesAllowedPathsHttpError
+   */
+  getDirectAccessAgentConnectorFilesAllowedPaths: typeof getDirectAccessAgentConnectorFilesAllowedPaths;
+  /**
+   * Completely replaces the contents of the allowed paths configuration file for the File connector. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.6+.
+   *
+   * @param agentId The agent ID.
+   * @param connectorType The connector type. Must be `file-connector` for this endpoint.
+   * @param body an object with the body content
+   * @throws PutDirectAccessAgentConnectorFilesAllowedPathsHttpError
+   */
+  putDirectAccessAgentConnectorFilesAllowedPaths: typeof putDirectAccessAgentConnectorFilesAllowedPaths;
+  /**
+   * Retrieves the custom data type mapping settings for the Generic ODBC Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
    *
    * @param agentId The agent ID.
    * @param connectorType The connector type. Must be `odbc-connector` for this endpoint.
@@ -397,4 +466,4 @@ interface DirectAccessAgentsAPI {
  */
 declare const directAccessAgentsExport: DirectAccessAgentsAPI;
 //#endregion
-export { ConfigurationLineBase, ConfigurationLineNumeric, ConfigurationLineString, ConfigurationResponse, ConnectorFlatFileConfigurationResponse, ConnectorSettings, DirectAccessAgentsAPI, ErrorMessage, ErrorResponse, GetDirectAccessAgentConfigurationHttpError, GetDirectAccessAgentConfigurationHttpResponse, GetDirectAccessAgentConnectorCustomDataTypeMappingsHttpError, GetDirectAccessAgentConnectorCustomDataTypeMappingsHttpResponse, GetDirectAccessAgentConnectorFileHttpError, GetDirectAccessAgentConnectorFileHttpResponse, GetDirectAccessAgentConnectorFilesHttpError, GetDirectAccessAgentConnectorFilesHttpResponse, GetDirectAccessAgentConnectorFilesWithoutQueryHttpError, GetDirectAccessAgentConnectorFilesWithoutQueryHttpResponse, OdbcCustomDataType, OdbcCustomDataTypeResponse, Operation, PatchDirectAccessAgentConfiguration204HttpResponse, PatchDirectAccessAgentConfiguration207HttpResponse, PatchDirectAccessAgentConfigurationHttpError, PatchDirectAccessAgentConfigurationHttpResponse, PatchOperationResponse, PatchOperationValidationResult, PutDirectAccessAgentConnectorCustomDataTypeMappingsHttpError, PutDirectAccessAgentConnectorCustomDataTypeMappingsHttpResponse, RestartDirectAccessAgentHttpError, RestartDirectAccessAgentHttpResponse, UpdateConfigurationFlatFileRequest, UpdateDirectAccessAgentConnectorFileHttpError, UpdateDirectAccessAgentConnectorFileHttpResponse, UpdateDirectAccessAgentConnectorFileWithoutQueryHttpError, UpdateDirectAccessAgentConnectorFileWithoutQueryHttpResponse, UpdateOdbcCustomTypeMappingsRequest, clearCache, directAccessAgentsExport, getDirectAccessAgentConfiguration, getDirectAccessAgentConnectorCustomDataTypeMappings, getDirectAccessAgentConnectorFile, getDirectAccessAgentConnectorFiles, getDirectAccessAgentConnectorFilesWithoutQuery, patchDirectAccessAgentConfiguration, putDirectAccessAgentConnectorCustomDataTypeMappings, restartDirectAccessAgent, updateDirectAccessAgentConnectorFile, updateDirectAccessAgentConnectorFileWithoutQuery };
+export { ConfigurationLineBase, ConfigurationLineNumeric, ConfigurationLineString, ConfigurationResponse, ConnectorFlatFileConfigurationResponse, ConnectorSettings, DirectAccessAgentsAPI, ErrorMessage, ErrorResponse, FileConnectorAllowedPath, FileConnectorAllowedPathsResponse, GetDirectAccessAgentConfigurationHttpError, GetDirectAccessAgentConfigurationHttpResponse, GetDirectAccessAgentConnectorCustomDataTypeMappingsHttpError, GetDirectAccessAgentConnectorCustomDataTypeMappingsHttpResponse, GetDirectAccessAgentConnectorFileHttpError, GetDirectAccessAgentConnectorFileHttpResponse, GetDirectAccessAgentConnectorFilesAllowedPathsHttpError, GetDirectAccessAgentConnectorFilesAllowedPathsHttpResponse, GetDirectAccessAgentConnectorFilesHttpError, GetDirectAccessAgentConnectorFilesHttpResponse, GetDirectAccessAgentConnectorFilesWithoutQueryHttpError, GetDirectAccessAgentConnectorFilesWithoutQueryHttpResponse, OdbcCustomDataType, OdbcCustomDataTypeResponse, Operation, PatchDirectAccessAgentConfiguration204HttpResponse, PatchDirectAccessAgentConfiguration207HttpResponse, PatchDirectAccessAgentConfigurationHttpError, PatchDirectAccessAgentConfigurationHttpResponse, PatchOperationResponse, PatchOperationValidationResult, PutDirectAccessAgentConnectorCustomDataTypeMappingsHttpError, PutDirectAccessAgentConnectorCustomDataTypeMappingsHttpResponse, PutDirectAccessAgentConnectorFilesAllowedPathsHttpError, PutDirectAccessAgentConnectorFilesAllowedPathsHttpResponse, RestartDirectAccessAgentHttpError, RestartDirectAccessAgentHttpResponse, UpdateConfigurationFlatFileRequest, UpdateDirectAccessAgentConnectorFileHttpError, UpdateDirectAccessAgentConnectorFileHttpResponse, UpdateDirectAccessAgentConnectorFileWithoutQueryHttpError, UpdateDirectAccessAgentConnectorFileWithoutQueryHttpResponse, UpdateFileConnectorAllowedPathsRequest, UpdateOdbcCustomTypeMappingsRequest, clearCache, directAccessAgentsExport, getDirectAccessAgentConfiguration, getDirectAccessAgentConnectorCustomDataTypeMappings, getDirectAccessAgentConnectorFile, getDirectAccessAgentConnectorFiles, getDirectAccessAgentConnectorFilesAllowedPaths, getDirectAccessAgentConnectorFilesWithoutQuery, patchDirectAccessAgentConfiguration, putDirectAccessAgentConnectorCustomDataTypeMappings, putDirectAccessAgentConnectorFilesAllowedPaths, restartDirectAccessAgent, updateDirectAccessAgentConnectorFile, updateDirectAccessAgentConnectorFileWithoutQuery };
