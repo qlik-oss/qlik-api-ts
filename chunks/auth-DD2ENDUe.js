@@ -1,4 +1,4 @@
-import { getAuthRuntimeModule } from "./public-runtime-modules-lsJEDVxt.js";
+import { getAuthRuntimeModule } from "./public-runtime-modules-CNGnt1rU.js";
 
 //#region src/public/auth.ts
 /**

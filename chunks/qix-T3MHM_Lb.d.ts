@@ -1,7 +1,7 @@
 import { HostConfig } from "./auth-types-BlCWK0FP.js";
 
 //#region src/qix/types/engine-schema.d.ts
-declare const QIX_SCHEMA_VERSION = "12.2498.0";
+declare const QIX_SCHEMA_VERSION = "12.2505.0";
 type AlfaNumString = {
   /**
    * Calculated value.
