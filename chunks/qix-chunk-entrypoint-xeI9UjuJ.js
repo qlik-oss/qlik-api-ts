@@ -1,6 +1,6 @@
 import { isNode } from "./utils-qEQ6sEXX.js";
 import "./interceptors-DD0vKL8_.js";
-import "./global-types-CQrlc6w9.js";
+import "./global-types-BGMD2sDY.js";
 import "./auth-types-B0Z-Reol.js";
 import { exposeInternalApiOnWindow, generateRandomString, getRestCallAuthParams, getWebSocketAuthParams, handleAuthenticationError, isWindows, toValidWebsocketLocationUrl } from "./auth-functions-DHRxWU6t.js";
 import { getHumanReadableSocketClosedErrorMessage } from "./websocket-errors-CnW4OQWd.js";

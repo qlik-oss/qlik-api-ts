@@ -5,17 +5,17 @@
 */
 function getAuthRuntimeModule(hostConfig) {
 	const isNode = !!globalThis.process?.argv;
-	return isNode ? import("./auth-DhI7LQIw.js") : import("./dist-CjqdvDf3.js").then((mod) => mod.importRuntimeModule("auth@v1", hostConfig));
+	return isNode ? import("./auth-Cl-o3AnG.js") : import("./dist-CjqdvDf3.js").then((mod) => mod.importRuntimeModule("auth@v1", hostConfig));
 }
 async function getQixRuntimeModule(hostConfig) {
 	await getAuthRuntimeModule(hostConfig);
 	const isNode = !!globalThis.process?.argv;
-	return isNode ? import("./qix-bnv1_Kxc.js") : import("./dist-CjqdvDf3.js").then((mod) => mod.importRuntimeModule("qix@v1", hostConfig));
+	return isNode ? import("./qix-DbtKisCn.js") : import("./dist-CjqdvDf3.js").then((mod) => mod.importRuntimeModule("qix@v1", hostConfig));
 }
 async function getInvokeFetchRuntimeModule(hostConfig) {
 	await getAuthRuntimeModule(hostConfig);
 	const isNode = !!globalThis.process?.argv;
-	return isNode ? import("./invoke-fetch-NdtGGVxy.js") : import("./dist-CjqdvDf3.js").then((mod) => mod.importRuntimeModule("invoke-fetch@v1", hostConfig));
+	return isNode ? import("./invoke-fetch-BIh4VnG4.js") : import("./dist-CjqdvDf3.js").then((mod) => mod.importRuntimeModule("invoke-fetch@v1", hostConfig));
 }
 
 //#endregion
