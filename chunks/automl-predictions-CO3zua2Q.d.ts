@@ -33,6 +33,8 @@ type Error = {
   title?: string;
 };
 /**
+ * @deprecated
+ *
  * Returns a file containing the shapley values in coordinate form that are associated with a prediction ID.
  *
  * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
@@ -53,6 +55,8 @@ type GetAutomlPredictionCoordinateShapHttpError = {
   status: 400 | 401 | 403 | 404 | 409 | 503;
 };
 /**
+ * @deprecated
+ *
  * Retrieve jobs that are associated with a prediction. Job with correlation type `prediction`.
  *
  * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
@@ -70,6 +74,8 @@ type CreateAutomlPredictionJobHttpError = {
   status: 400 | 401 | 403 | 404 | 409 | 503;
 };
 /**
+ * @deprecated
+ *
  * Returns a file containing any rows in a prediction operation where a prediction was unable to be produced.
  *
  * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
@@ -90,6 +96,8 @@ type GetAutomlPredictionNotPredictedReasonsHttpError = {
   status: 400 | 401 | 403 | 404 | 409 | 503;
 };
 /**
+ * @deprecated
+ *
  * Returns a file containing the predicted values that are associated with a prediction ID.
  *
  * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
@@ -110,6 +118,8 @@ type GetAutomlPredictionPredictionsHttpError = {
   status: 400 | 401 | 403 | 404 | 409 | 503;
 };
 /**
+ * @deprecated
+ *
  * Returns a file containing the shapley values that are associated with a prediction ID.
  *
  * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
@@ -130,6 +140,8 @@ type GetAutomlPredictionShapHttpError = {
   status: 400 | 401 | 403 | 404 | 409 | 503;
 };
 /**
+ * @deprecated
+ *
  * Returns a file containing the source values and an index field that are associated with a prediction ID.
  *
  * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
@@ -155,6 +167,8 @@ type GetAutomlPredictionSourceHttpError = {
 declare function clearCache(): void;
 interface AutomlPredictionsAPI {
   /**
+   * @deprecated
+   *
    * Returns a file containing the shapley values in coordinate form that are associated with a prediction ID.
    *
    * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
@@ -163,6 +177,8 @@ interface AutomlPredictionsAPI {
    */
   getAutomlPredictionCoordinateShap: typeof getAutomlPredictionCoordinateShap;
   /**
+   * @deprecated
+   *
    * Retrieve jobs that are associated with a prediction. Job with correlation type `prediction`.
    *
    * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
@@ -170,6 +186,8 @@ interface AutomlPredictionsAPI {
    */
   createAutomlPredictionJob: typeof createAutomlPredictionJob;
   /**
+   * @deprecated
+   *
    * Returns a file containing any rows in a prediction operation where a prediction was unable to be produced.
    *
    * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
@@ -178,6 +196,8 @@ interface AutomlPredictionsAPI {
    */
   getAutomlPredictionNotPredictedReasons: typeof getAutomlPredictionNotPredictedReasons;
   /**
+   * @deprecated
+   *
    * Returns a file containing the predicted values that are associated with a prediction ID.
    *
    * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
@@ -186,6 +206,8 @@ interface AutomlPredictionsAPI {
    */
   getAutomlPredictionPredictions: typeof getAutomlPredictionPredictions;
   /**
+   * @deprecated
+   *
    * Returns a file containing the shapley values that are associated with a prediction ID.
    *
    * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
@@ -194,6 +216,8 @@ interface AutomlPredictionsAPI {
    */
   getAutomlPredictionShap: typeof getAutomlPredictionShap;
   /**
+   * @deprecated
+   *
    * Returns a file containing the source values and an index field that are associated with a prediction ID.
    *
    * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.

@@ -1,4 +1,4 @@
-import { isBrowser } from "./utils-qEQ6sEXX.js";
+import { isBrowser } from "./utils-CAGXTaqJ.js";
 
 //#region src/interceptors/interceptors.ts
 let GLOBAL_INTERCEPTORS;

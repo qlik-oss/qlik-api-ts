@@ -1,8 +1,8 @@
-import { isNode } from "./utils-qEQ6sEXX.js";
-import "./interceptors-DD0vKL8_.js";
+import { createResolvablePromise as createResolvablePromise$1, isNode } from "./utils-CAGXTaqJ.js";
+import "./interceptors-DBoV6UkN.js";
 import "./global-types-BGMD2sDY.js";
 import "./auth-types-B0Z-Reol.js";
-import { exposeInternalApiOnWindow, generateRandomString, getRestCallAuthParams, getWebSocketAuthParams, handleAuthenticationError, isWindows, toValidWebsocketLocationUrl } from "./auth-functions-DHRxWU6t.js";
+import { appendQueryToUrl, exposeInternalApiOnWindow, generateRandomString, getRestCallAuthParams, getWebSocketAuthParams, handleAuthenticationError, isWindows, toValidWebsocketLocationUrl } from "./auth-functions-DFqOVIUd.js";
 import { getHumanReadableSocketClosedErrorMessage } from "./websocket-errors-CnW4OQWd.js";
 import isPlainObject from "lodash/isPlainObject.js";
 import merge from "lodash/merge.js";
@@ -15350,12 +15350,140 @@ function createResolvablePromise() {
 }
 
 //#endregion
+//#region src/web-socket/web-socket-errors.ts
+const closeCodeMessages = {
+	1e3: "Connection closed normally.",
+	1001: "Going away.",
+	1002: "Protocol error.",
+	1003: "Unsupported data.",
+	1005: "No status received.",
+	1006: "Abnormal closure.",
+	1007: "Invalid frame payload data.",
+	1008: "Policy violation.",
+	1009: "Message too big.",
+	1010: "Mandatory extension missing.",
+	1011: "Server internal error.",
+	1012: "Service restart.",
+	1013: "Try again later.",
+	1014: "Bad gateway.",
+	1015: "TLS handshake failure."
+};
+const uknownCloseErrorMessage = "websocket closed for unknown reason";
+var WebSocketError = class extends Error {
+	code;
+	reason;
+	constructor({ code = 0, reason = "", host }) {
+		super(getHumanReadableSocketClosedErrorMessage$1({
+			code,
+			reason,
+			host
+		}));
+		this.code = code;
+		this.reason = reason;
+	}
+};
+/** Returns a human readable error message for the supplied close code */
+function getHumanReadableSocketClosedErrorMessage$1(err) {
+	const { code, reason, host } = err;
+	const closeMessage = code && closeCodeMessages[code] || reason || uknownCloseErrorMessage;
+	if (host) return `Failed to open web-socket on ${host}: ${closeMessage}`;
+	else return `Failed to open web-socket: ${closeMessage}`;
+}
+
+//#endregion
+//#region src/web-socket/web-socket-functions.ts
+/**
+* Establishes a new web-socket connection towards the provided relative path
+* using the authorization and host provided through hostConfig and sets up the
+* listeners. Handles auth-related retries.
+* @param webSocketProps WebSocketProperties
+* @returns a WebSocket promise
+*/
+async function createWebSocket(webSocketProps) {
+	try {
+		return await createWebSocketInternal(webSocketProps);
+	} catch (error) {
+		const err = error;
+		const errorBody = err.data;
+		const { status } = err;
+		if (status === 401 || status === 403 && errorBody?.code === "CSRF-TOKEN-2") {
+			const action = await handleAuthenticationError({
+				headers: new Headers(),
+				status,
+				canRetry: true,
+				hostConfig: webSocketProps.hostConfig
+			});
+			if (action.retry) return createWebSocketInternal(webSocketProps);
+			if (action.preventDefault) return new Promise(() => {});
+		}
+		throw err;
+	}
+}
+/**
+* @private
+* Establishes a new web-socket connection based on the passed in properties.
+* @param webSocketProps WebSocketProperties
+* @returns a WebSocket promise
+*/
+async function createWebSocketInternal(webSocketProps) {
+	const { relativePath, queryParams, hostConfig, listeners } = webSocketProps;
+	const isNodeEnvironment = isNode();
+	const unitTestCreateWebSocket = hostConfig?.createWebSocket;
+	const [socketOpenPromise, resolveSocketOpenPromise, rejectSocketOpenPromise] = createResolvablePromise$1();
+	const baseUrl = queryParams ? appendQueryToUrl(`${toValidWebsocketLocationUrl(hostConfig)}${relativePath}`, queryParams) : `${toValidWebsocketLocationUrl(hostConfig)}${relativePath}`;
+	let socket;
+	let url;
+	if (isNodeEnvironment && !unitTestCreateWebSocket) {
+		const { headers, queryParams: authQueryParams } = await getRestCallAuthParams({
+			hostConfig,
+			method: "POST"
+		});
+		const WS = (await import("ws")).default;
+		url = appendQueryToUrl(baseUrl, authQueryParams);
+		socket = new WS(url, void 0, { headers });
+	} else {
+		const { queryParams: authQueryParams } = await getWebSocketAuthParams({ hostConfig });
+		url = appendQueryToUrl(baseUrl, authQueryParams);
+		socket = unitTestCreateWebSocket ? unitTestCreateWebSocket(url) : new WebSocket(url);
+		exposeInternalApiOnWindow("closeLastWebSocket", (code) => {
+			console.log("Closing websocket with code", code, socket);
+			socket.close(code);
+		});
+	}
+	let opened = false;
+	socket.onopen = () => {
+		socket.onopen = null;
+		socket.onerror = null;
+		opened = true;
+		resolveSocketOpenPromise(socket);
+	};
+	socket.onerror = () => {
+		socket.onopen = null;
+		socket.onerror = null;
+	};
+	socket.onmessage = (message) => {
+		listeners.onMessage(message);
+	};
+	socket.onclose = (ev) => {
+		if (!opened) {
+			const { code, reason } = ev;
+			rejectSocketOpenPromise(new WebSocketError({
+				code,
+				reason,
+				host: hostConfig?.host || ""
+			}));
+		} else listeners.onClose(ev);
+	};
+	return socketOpenPromise;
+}
+
+//#endregion
 //#region src/qix/session/phoenix/websocket.ts
 let forceUniqueSessionForTestPurposes = false;
 exposeInternalApiOnWindow("makeNextWebsocketGetNewEngineSession", () => {
 	forceUniqueSessionForTestPurposes = true;
 });
-var WebSocketError = class extends Error {
+var QixWebSocketError = class extends Error {
 	code;
 	reason;
 	constructor({ code = 0, reason = "" }, { appId, hostConfig }) {
@@ -15374,90 +15502,58 @@ var WebSocketError = class extends Error {
 * Creates a websocket using the appropriate authentication mechanism. Retries once if the attempt fails.
 * Resolves once
 */
-async function createWebSocket(props, listeners) {
+async function createQixWebSocket(props, listeners) {
+	const { relativePath, queryParams } = buildQixPathAndQuery(props);
+	const { appId, hostConfig } = props;
 	try {
-		return await createWebsocketSingleAttempt(props, listeners);
-	} catch (err) {
-		logEvent("Retrying to create websocket", err);
-		const action = await handleAuthenticationError({
-			headers: new Headers(),
-			status: 101,
-			canRetry: true,
-			hostConfig: props.hostConfig
+		logEvent("Creating web-socket", relativePath);
+		const socketPromise = createWebSocket({
+			relativePath,
+			queryParams,
+			hostConfig,
+			listeners
 		});
-		if (action.retry) return createWebsocketSingleAttempt(props, listeners);
-		if (action.preventDefault) return new Promise(() => {});
+		logEvent("Created web-socket", relativePath);
+		const socket = await socketPromise;
+		logEvent("Opened web-socket", relativePath);
+		return socket;
+	} catch (err) {
+		if (err instanceof WebSocketError) {
+			const { code, reason } = err;
+			throw new QixWebSocketError({
+				code,
+				reason
+			}, {
+				appId,
+				hostConfig
+			});
+		}
 		throw err;
 	}
 }
-async function createWebsocketSingleAttempt({ appId, identity, hostConfig, useReloadEngine = false, workloadType, ttlSeconds }, listeners) {
-	const locationUrl = toValidWebsocketLocationUrl(hostConfig);
-	const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
-	const ttlPart = ttlSeconds !== void 0 && ttlSeconds >= 0 ? `/ttl/${ttlSeconds}` : "";
+/**
+* Creates the path and the query-parameters, based on the OpenAppSessionProps,
+* that should be added to the host to build the full URL for the (QIX)
+* web-socket connection.
+*/
+function buildQixPathAndQuery({ appId, identity, hostConfig, useReloadEngine = false, workloadType, ttlSeconds }) {
 	const identityToUse = forceUniqueSessionForTestPurposes ? generateRandomString(16) : identity;
 	if (forceUniqueSessionForTestPurposes) {
 		logEvent("Forcing a new session for testing purposes");
 		forceUniqueSessionForTestPurposes = false;
 	}
+	const ttlPart = ttlSeconds !== void 0 && ttlSeconds >= 0 ? `/ttl/${ttlSeconds}` : "";
 	const identityPart = identityToUse ? `/identity/${identityToUse}` : "";
-	const workloadTypePart = useReloadEngine ? "&workloadType=interactive-reload" : workloadType ? `&workloadType=${workloadType}` : "";
-	let url = `${locationUrl}/app/${appId}${identityPart}${ttlPart}?reloadUri=${reloadUri}${workloadTypePart}`.replace(/^http/, "ws");
-	const isNodeEnvironment = isNode();
-	const unitTestCreateWebSocket = hostConfig?.createWebSocket;
-	logEvent("Creating websocket", url);
-	let socket;
-	if (isNodeEnvironment && !unitTestCreateWebSocket) {
-		const { headers, queryParams } = await getRestCallAuthParams({
-			hostConfig,
-			method: "POST"
-		});
-		const WS = (await import("ws")).default;
-		Object.entries(queryParams).forEach(([key, value]) => {
-			url = `${url}&${key}=${value}`;
-		});
-		socket = new WS(url, void 0, { headers });
-	} else {
-		const { queryParams } = await getWebSocketAuthParams({ hostConfig });
-		Object.entries(queryParams).forEach(([key, value]) => {
-			url = `${url}&${key}=${value}`;
-		});
-		socket = unitTestCreateWebSocket ? unitTestCreateWebSocket(url) : new WebSocket(url);
-		exposeInternalApiOnWindow("closeLastWebSocket", (code) => {
-			console.log("Closing websocket with code", code, socket);
-			socket.close(code);
-		});
-	}
-	logEvent("Created websocket", url);
-	const [socketOpenPromise, resolveSocketOpenPromise, rejectSocketOpenPromise] = createResolvablePromise();
-	let opened = false;
-	socket.onopen = () => {
-		socket.onopen = null;
-		socket.onerror = null;
-		logEvent("Websocket opened");
-		opened = true;
-		resolveSocketOpenPromise(socket);
+	const path = `/app/${appId}${identityPart}${ttlPart}`;
+	const locationUrl = toValidWebsocketLocationUrl(hostConfig);
+	const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
+	const query = { reloadUri };
+	if (useReloadEngine) query["workloadType"] = "interactive-reload";
+	else if (workloadType) query["workloadType"] = workloadType;
+	return {
+		relativePath: path,
+		queryParams: query
 	};
-	socket.onerror = () => {
-		socket.onopen = null;
-		socket.onerror = null;
-	};
-	socket.onmessage = (message) => {
-		listeners.onMessage(message);
-	};
-	socket.onclose = ({ code, reason }) => {
-		if (!opened) rejectSocketOpenPromise(new WebSocketError({
-			code,
-			reason
-		}, {
-			appId,
-			hostConfig
-		}));
-		else listeners.onClose({
-			code,
-			reason
-		});
-	};
-	return socketOpenPromise;
 }
 
 //#endregion
@@ -15475,7 +15571,7 @@ async function createJsonRpcChannel(props, listener) {
 	let pendingInvocations = {};
 	let initiator = "network";
 	let closed = false;
-	const socket = await createWebSocket(props, {
+	const socket = await createQixWebSocket(props, {
 		onMessage: (event) => {
 			const data = JSON.parse(event.data);
 			if (isInvocationResponse(data)) {

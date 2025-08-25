@@ -43,6 +43,8 @@ type RealtimePredictionInput = {
   schema?: RealTimePredictionInputSchema[];
 };
 /**
+ * @deprecated
+ *
  * Generates predictions in a synchronous request and response.
  *
  * @param deploymentId The ID of the ML deployed model that will be employed to produce predictions.
@@ -76,6 +78,8 @@ type CreateAutomlDeploymentRealtimePredictionHttpError = {
 declare function clearCache(): void;
 interface AutomlDeploymentsAPI {
   /**
+   * @deprecated
+   *
    * Generates predictions in a synchronous request and response.
    *
    * @param deploymentId The ID of the ML deployed model that will be employed to produce predictions.

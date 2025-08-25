@@ -1,8 +1,8 @@
-import { isBrowser } from "./utils-qEQ6sEXX.js";
-import "./interceptors-DD0vKL8_.js";
+import { isBrowser } from "./utils-CAGXTaqJ.js";
+import "./interceptors-DBoV6UkN.js";
 import "./global-types-BGMD2sDY.js";
 import "./auth-types-B0Z-Reol.js";
-import { getPlatform, handleAuthenticationError, invokeFetch, isWindows, toValidWebsocketLocationUrl } from "./auth-functions-DHRxWU6t.js";
+import { getPlatform, handleAuthenticationError, invokeFetch, isWindows, toValidWebsocketLocationUrl } from "./auth-functions-DFqOVIUd.js";
 import { getHumanReadableSocketClosedErrorMessage } from "./websocket-errors-CnW4OQWd.js";
 
 //#region src/qix/app-session.ts
@@ -210,7 +210,7 @@ function listenForWindowsAuthenticationInformation(session) {
 * Opens the websocket and handles a few windows authentication details
 */
 async function createAndSetupEnigmaSession(props, canRetry, onWebSocketEvent$1) {
-	const { createEnigmaSessionEntrypoint } = await import("./qix-chunk-entrypoint-xeI9UjuJ.js");
+	const { createEnigmaSessionEntrypoint } = await import("./qix-chunk-entrypoint-BI51aJRa.js");
 	const session = await createEnigmaSessionEntrypoint(props);
 	setupSessionListeners(session, props, onWebSocketEvent$1);
 	let global;
@@ -464,7 +464,7 @@ function createSharedPhoenixSession(props, { onClose, onWebSocketEvent: onWebSoc
 			onWebSocketEventGlobal(event);
 			for (const client of clients) client.onWebSocketEvent(event);
 		};
-		const phoenixConnectionPromise = import("./qix-chunk-entrypoint-xeI9UjuJ.js").then((module) => {
+		const phoenixConnectionPromise = import("./qix-chunk-entrypoint-BI51aJRa.js").then((module) => {
 			return module.createPhoenixConnectionEntrypoint(props, {
 				onWebSocketEvent: onWebSocketEvent$1,
 				getInitialAppActions

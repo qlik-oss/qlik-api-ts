@@ -92,6 +92,19 @@ function cleanFalsyValues(obj) {
 	}
 	return obj;
 }
+function createResolvablePromise() {
+	let resolve;
+	let reject;
+	const promise = new Promise((res, rej) => {
+		resolve = res;
+		reject = rej;
+	});
+	return [
+		promise,
+		resolve,
+		reject
+	];
+}
 
 //#endregion
-export { cleanFalsyValues, isBrowser, isNode, sortKeys };
+export { cleanFalsyValues, createResolvablePromise, isBrowser, isNode, sortKeys };

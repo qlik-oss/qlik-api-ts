@@ -1,5 +1,5 @@
-import { cleanFalsyValues, isBrowser, isNode, sortKeys } from "./utils-qEQ6sEXX.js";
-import { getInterceptors } from "./interceptors-DD0vKL8_.js";
+import { cleanFalsyValues, isBrowser, isNode, sortKeys } from "./utils-CAGXTaqJ.js";
+import { getInterceptors } from "./interceptors-DBoV6UkN.js";
 import { authTypesThatCanBeOmitted, hostConfigCommonProperties } from "./auth-types-B0Z-Reol.js";
 import { customAlphabet, nanoid } from "nanoid";
 
@@ -809,16 +809,27 @@ function cleanStack(stack) {
 //#endregion
 //#region src/invoke-fetch/internal/invoke-fetch-helpers.ts
 /**
+* Appends the specified query parameters (encoded) to the provided url.
+* @private
+*/
+function appendQueryToUrl(url, queryParams) {
+	const queryString = encodeQueryParams(queryParams);
+	let firstQueryDelim;
+	if (url.indexOf("?") === -1) firstQueryDelim = "?";
+	else firstQueryDelim = "&";
+	return `${url}${firstQueryDelim}${queryString}`;
+}
+/**
 * Encode the query map into a query string
 * @private
 */
 function encodeQueryParams(query) {
-	if (query) return Object.entries(query).map((kv) => {
+	if (!query) return "";
+	return Object.entries(query).map((kv) => {
 		const [, value] = kv;
 		if (value === void 0) return void 0;
-		return kv.map((val) => encodeURIComponent(val)).join("=");
+		return kv.map((val) => encodeURIComponent(decodeURIComponent(val))).join("=");
 	}).filter(Boolean).join("&");
-	return "";
 }
 /**
 * Replaces the variable placeholders in the path template with the variable values
@@ -2228,4 +2239,4 @@ function getDefaultHostConfig$1() {
 }
 
 //#endregion
-export { AuthorizationError, EncodingError, InvalidAuthTypeError, InvalidHostConfigError, InvokeFetchError, UnexpectedAuthTypeError, clearApiCache, determineAuthType$1 as determineAuthType, exposeInternalApiOnWindow, generateRandomString, getAccessToken, getDefaultHostConfig$1 as getDefaultHostConfig, getPlatform, getRestCallAuthParams, getWebResourceAuthParams, getWebSocketAuthParams, handleAuthenticationError, invokeFetch, isHostCrossOrigin, isWindows, logout, parseFetchResponse, registerAuthModule$1 as registerAuthModule, registerHostConfig$1 as registerHostConfig, serializeHostConfig$1 as serializeHostConfig, setDefaultHostConfig$1 as setDefaultHostConfig, toValidLocationUrl, toValidWebsocketLocationUrl, unregisterHostConfig$1 as unregisterHostConfig };
+export { AuthorizationError, EncodingError, InvalidAuthTypeError, InvalidHostConfigError, InvokeFetchError, UnexpectedAuthTypeError, appendQueryToUrl, clearApiCache, determineAuthType$1 as determineAuthType, exposeInternalApiOnWindow, generateRandomString, getAccessToken, getDefaultHostConfig$1 as getDefaultHostConfig, getPlatform, getRestCallAuthParams, getWebResourceAuthParams, getWebSocketAuthParams, handleAuthenticationError, invokeFetch, isHostCrossOrigin, isWindows, logout, parseFetchResponse, registerAuthModule$1 as registerAuthModule, registerHostConfig$1 as registerHostConfig, serializeHostConfig$1 as serializeHostConfig, setDefaultHostConfig$1 as setDefaultHostConfig, toValidLocationUrl, toValidWebsocketLocationUrl, unregisterHostConfig$1 as unregisterHostConfig };
