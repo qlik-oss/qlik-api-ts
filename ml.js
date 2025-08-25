@@ -1,6 +1,6 @@
-import "./chunks/utils-qEQ6sEXX.js";
-import "./chunks/public-runtime-modules-CNGnt1rU.js";
-import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DbVuX5mE.js";
+import "./chunks/utils-CAGXTaqJ.js";
+import "./chunks/public-runtime-modules-D96zrIUt.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-CemG-HEM.js";
 
 //#region src/public/rest/ml.ts
 /**
@@ -116,7 +116,7 @@ async function deactivateModelsMlDeployment(deploymentId, options) {
 /**
 * Retrieves a list of aliases based on filter parameters for a deployment.
 *
-* @param deploymentId
+* @param deploymentId ID of the deployment
 * @param query an object with query parameters
 * @throws GetMlDeploymentAliasesHttpError
 */

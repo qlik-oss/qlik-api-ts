@@ -1,4 +1,4 @@
-import { ApiCallOptions } from "./auth-types-BlCWK0FP.js";
+import { ApiCallOptions, DownloadableBlob } from "./auth-types-BlCWK0FP.js";
 
 //#region src/public/rest/audits.d.ts
 type ArchiveItem = {
@@ -149,6 +149,22 @@ type GetAuditsHttpError = {
   status: 400 | 401 | 500;
 };
 /**
+ * Returns a Qlik Sense application (QVF file) containing usage data for the tenant's subscription. Requesting user must be assigned the `TenantAdmin` role. Available only for Capacity subscriptions. Consumption report is updated once per day.
+ *
+ * @throws FetchConsumptionAppAuditsHttpError
+ */
+declare function fetchConsumptionAppAudits(options?: ApiCallOptions): Promise<FetchConsumptionAppAuditsHttpResponse>;
+type FetchConsumptionAppAuditsHttpResponse = {
+  data: DownloadableBlob;
+  headers: Headers;
+  status: 200;
+};
+type FetchConsumptionAppAuditsHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: 400 | 401 | 403 | 404 | 500;
+};
+/**
  * Retrieves audit events from long term storage. Finds and returns audit events from the archive, formatted as a JSON array, for the given date and tenant (in JWT). Archived events are not removed.
  *
  * @param query an object with query parameters
@@ -250,6 +266,12 @@ interface AuditsAPI {
    */
   getAudits: typeof getAudits;
   /**
+   * Returns a Qlik Sense application (QVF file) containing usage data for the tenant's subscription. Requesting user must be assigned the `TenantAdmin` role. Available only for Capacity subscriptions. Consumption report is updated once per day.
+   *
+   * @throws FetchConsumptionAppAuditsHttpError
+   */
+  fetchConsumptionAppAudits: typeof fetchConsumptionAppAudits;
+  /**
    * Retrieves audit events from long term storage. Finds and returns audit events from the archive, formatted as a JSON array, for the given date and tenant (in JWT). Archived events are not removed.
    *
    * @param query an object with query parameters
@@ -291,4 +313,4 @@ interface AuditsAPI {
  */
 declare const auditsExport: AuditsAPI;
 //#endregion
-export { ArchiveItem, AuditsAPI, ErrorResponse, EventExtensions, GetArchiveResult, GetArchivedAuditsHttpError, GetArchivedAuditsHttpResponse, GetAuditHttpError, GetAuditHttpResponse, GetAuditSourcesHttpError, GetAuditSourcesHttpResponse, GetAuditTypesHttpError, GetAuditTypesHttpResponse, GetAuditsHttpError, GetAuditsHttpResponse, GetAuditsSettingsHttpError, GetAuditsSettingsHttpResponse, GetByIDResult, GetLinks, GetObjectsResult, GetResult, GetSettingsResult, Href, ListLinks, auditsExport, clearCache, getArchivedAudits, getAudit, getAuditSources, getAuditTypes, getAudits, getAuditsSettings };
+export { ArchiveItem, AuditsAPI, ErrorResponse, EventExtensions, FetchConsumptionAppAuditsHttpError, FetchConsumptionAppAuditsHttpResponse, GetArchiveResult, GetArchivedAuditsHttpError, GetArchivedAuditsHttpResponse, GetAuditHttpError, GetAuditHttpResponse, GetAuditSourcesHttpError, GetAuditSourcesHttpResponse, GetAuditTypesHttpError, GetAuditTypesHttpResponse, GetAuditsHttpError, GetAuditsHttpResponse, GetAuditsSettingsHttpError, GetAuditsSettingsHttpResponse, GetByIDResult, GetLinks, GetObjectsResult, GetResult, GetSettingsResult, Href, ListLinks, auditsExport, clearCache, fetchConsumptionAppAudits, getArchivedAudits, getAudit, getAuditSources, getAuditTypes, getAudits, getAuditsSettings };
