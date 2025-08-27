@@ -1,6 +1,6 @@
-import "./chunks/utils-qEQ6sEXX.js";
-import "./chunks/public-runtime-modules-CNGnt1rU.js";
-import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DbVuX5mE.js";
+import "./chunks/utils-CAGXTaqJ.js";
+import "./chunks/public-runtime-modules-P9LEbn8i.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-09EW5w1d.js";
 
 //#region src/public/rest/reports.ts
 /**
@@ -15,6 +15,23 @@ async function createReport(body, options) {
 		pathTemplate: "/api/v1/reports",
 		body,
 		contentType: "application/json",
+		options
+	});
+}
+/**
+* Get the list of the outputs produced so far for the given report request. The outputs are generated asynchronously
+* and are complete only when the status of the report request is 'done' or 'failed' or 'aborted'.
+*
+* @param id Identifier of the request.
+* @param query an object with query parameters
+* @throws GetReportOutputsHttpError
+*/
+async function getReportOutputs(id, query, options) {
+	return invokeFetch("reports", {
+		method: "get",
+		pathTemplate: "/api/v1/reports/{id}/outputs",
+		pathVariables: { id },
+		query,
 		options
 	});
 }
@@ -43,10 +60,11 @@ function clearCache() {
 */
 const reportsExport = {
 	createReport,
+	getReportOutputs,
 	getReportStatus,
 	clearCache
 };
 var reports_default = reportsExport;
 
 //#endregion
-export { clearCache, createReport, reports_default as default, getReportStatus };
+export { clearCache, createReport, reports_default as default, getReportOutputs, getReportStatus };

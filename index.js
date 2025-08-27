@@ -1,9 +1,9 @@
-import "./chunks/utils-qEQ6sEXX.js";
-import "./chunks/public-runtime-modules-CNGnt1rU.js";
-import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DbVuX5mE.js";
-import { auth_default } from "./chunks/auth-DD2ENDUe.js";
-import { interceptors_default } from "./chunks/interceptors-DD0vKL8_.js";
-import { qix_default } from "./chunks/qix-3nXOY2qw.js";
+import "./chunks/utils-CAGXTaqJ.js";
+import "./chunks/public-runtime-modules-P9LEbn8i.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-09EW5w1d.js";
+import { auth_default } from "./chunks/auth-IDN6Z4Nr.js";
+import { interceptors_default as interceptors_default$1 } from "./chunks/interceptors-DBoV6UkN.js";
+import { qix_default } from "./chunks/qix-C86sBDw3.js";
 
 //#region src/runtime-api-generator/runtime-api-generator-common.ts
 const methodAbbreviations = {
@@ -193,7 +193,7 @@ function apiDefToApiPublic(namespace, def) {
 
 //#endregion
 //#region src/public/interceptors.ts
-var interceptors_default$1 = interceptors_default;
+var interceptors_default = interceptors_default$1;
 
 //#endregion
 //#region src/public/index.ts
@@ -327,6 +327,7 @@ const assistantsMiniModule = apiDefToApiPublic("assistants", { api: { v1: { assi
 } } } });
 const auditsMiniModule = apiDefToApiPublic("audits", { api: { v1: { audits: {
 	"": ["getAudits:GQ:"],
+	actions: { "fetch-consumption-app": ["fetchConsumptionAppAudits:P:"] },
 	archive: ["getArchivedAudits:GQ:"],
 	settings: ["getAuditsSettings:G:"],
 	sources: ["getAuditSources:G:"],
@@ -926,7 +927,10 @@ const reportTemplatesMiniModule = apiDefToApiPublic("report-templates", { api: {
 } } } });
 const reportsMiniModule = apiDefToApiPublic("reports", { api: { v1: { reports: {
 	"": ["createReport:PBJ:"],
-	"{id}": { status: ["getReportStatus:G:"] }
+	"{id}": {
+		outputs: ["getReportOutputs:GQ:"],
+		status: ["getReportStatus:G:"]
+	}
 } } } });
 const rolesMiniModule = apiDefToApiPublic("roles", { api: { v1: { roles: {
 	"": ["getRoles:GQ:", "createRole:PBJ:"],
@@ -1111,70 +1115,70 @@ const webhooksMiniModule = apiDefToApiPublic("webhooks", { api: { v1: { webhooks
 		}
 	}
 } } } });
-const apiKeys = apiKeysMiniModule(void 0, interceptors_default$1);
-const apps = appsMiniModule(void 0, interceptors_default$1);
-const assistants = assistantsMiniModule(void 0, interceptors_default$1);
-const audits = auditsMiniModule(void 0, interceptors_default$1);
+const apiKeys = apiKeysMiniModule(void 0, interceptors_default);
+const apps = appsMiniModule(void 0, interceptors_default);
+const assistants = assistantsMiniModule(void 0, interceptors_default);
+const audits = auditsMiniModule(void 0, interceptors_default);
 const auth = auth_default;
-const automationConnections = automationConnectionsMiniModule(void 0, interceptors_default$1);
-const automations = automationsMiniModule(void 0, interceptors_default$1);
-const automlDeployments = automlDeploymentsMiniModule(void 0, interceptors_default$1);
-const automlPredictions = automlPredictionsMiniModule(void 0, interceptors_default$1);
-const brands = brandsMiniModule(void 0, interceptors_default$1);
-const collections = collectionsMiniModule(void 0, interceptors_default$1);
-const conditions = conditionsMiniModule(void 0, interceptors_default$1);
-const consumption = consumptionMiniModule(void 0, interceptors_default$1);
-const cspOrigins = cspOriginsMiniModule(void 0, interceptors_default$1);
-const csrfToken = csrfTokenMiniModule(void 0, interceptors_default$1);
-const dataAlerts = dataAlertsMiniModule(void 0, interceptors_default$1);
-const dataAssets = dataAssetsMiniModule(void 0, interceptors_default$1);
-const dataConnections = dataConnectionsMiniModule(void 0, interceptors_default$1);
-const dataCredentials = dataCredentialsMiniModule(void 0, interceptors_default$1);
-const dataFiles = dataFilesMiniModule(void 0, interceptors_default$1);
-const dataQualities = dataQualitiesMiniModule(void 0, interceptors_default$1);
-const dataSets = dataSetsMiniModule(void 0, interceptors_default$1);
-const dataSources = dataSourcesMiniModule(void 0, interceptors_default$1);
-const dataStores = dataStoresMiniModule(void 0, interceptors_default$1);
-const dcaas = dcaasMiniModule(void 0, interceptors_default$1);
-const diProjects = diProjectsMiniModule(void 0, interceptors_default$1);
-const directAccessAgents = directAccessAgentsMiniModule(void 0, interceptors_default$1);
-const encryption = encryptionMiniModule(void 0, interceptors_default$1);
-const extensions = extensionsMiniModule(void 0, interceptors_default$1);
-const glossaries = glossariesMiniModule(void 0, interceptors_default$1);
-const groups = groupsMiniModule(void 0, interceptors_default$1);
-const identityProviders = identityProvidersMiniModule(void 0, interceptors_default$1);
-const interceptors = interceptors_default$1;
-const items = itemsMiniModule(void 0, interceptors_default$1);
-const knowledgebases = knowledgebasesMiniModule(void 0, interceptors_default$1);
-const licenses = licensesMiniModule(void 0, interceptors_default$1);
-const lineageGraphs = lineageGraphsMiniModule(void 0, interceptors_default$1);
-const ml = mlMiniModule(void 0, interceptors_default$1);
-const notes = notesMiniModule(void 0, interceptors_default$1);
-const notifications = notificationsMiniModule(void 0, interceptors_default$1);
-const oauthClients = oauthClientsMiniModule(void 0, interceptors_default$1);
-const oauthTokens = oauthTokensMiniModule(void 0, interceptors_default$1);
+const automationConnections = automationConnectionsMiniModule(void 0, interceptors_default);
+const automations = automationsMiniModule(void 0, interceptors_default);
+const automlDeployments = automlDeploymentsMiniModule(void 0, interceptors_default);
+const automlPredictions = automlPredictionsMiniModule(void 0, interceptors_default);
+const brands = brandsMiniModule(void 0, interceptors_default);
+const collections = collectionsMiniModule(void 0, interceptors_default);
+const conditions = conditionsMiniModule(void 0, interceptors_default);
+const consumption = consumptionMiniModule(void 0, interceptors_default);
+const cspOrigins = cspOriginsMiniModule(void 0, interceptors_default);
+const csrfToken = csrfTokenMiniModule(void 0, interceptors_default);
+const dataAlerts = dataAlertsMiniModule(void 0, interceptors_default);
+const dataAssets = dataAssetsMiniModule(void 0, interceptors_default);
+const dataConnections = dataConnectionsMiniModule(void 0, interceptors_default);
+const dataCredentials = dataCredentialsMiniModule(void 0, interceptors_default);
+const dataFiles = dataFilesMiniModule(void 0, interceptors_default);
+const dataQualities = dataQualitiesMiniModule(void 0, interceptors_default);
+const dataSets = dataSetsMiniModule(void 0, interceptors_default);
+const dataSources = dataSourcesMiniModule(void 0, interceptors_default);
+const dataStores = dataStoresMiniModule(void 0, interceptors_default);
+const dcaas = dcaasMiniModule(void 0, interceptors_default);
+const diProjects = diProjectsMiniModule(void 0, interceptors_default);
+const directAccessAgents = directAccessAgentsMiniModule(void 0, interceptors_default);
+const encryption = encryptionMiniModule(void 0, interceptors_default);
+const extensions = extensionsMiniModule(void 0, interceptors_default);
+const glossaries = glossariesMiniModule(void 0, interceptors_default);
+const groups = groupsMiniModule(void 0, interceptors_default);
+const identityProviders = identityProvidersMiniModule(void 0, interceptors_default);
+const interceptors = interceptors_default;
+const items = itemsMiniModule(void 0, interceptors_default);
+const knowledgebases = knowledgebasesMiniModule(void 0, interceptors_default);
+const licenses = licensesMiniModule(void 0, interceptors_default);
+const lineageGraphs = lineageGraphsMiniModule(void 0, interceptors_default);
+const ml = mlMiniModule(void 0, interceptors_default);
+const notes = notesMiniModule(void 0, interceptors_default);
+const notifications = notificationsMiniModule(void 0, interceptors_default);
+const oauthClients = oauthClientsMiniModule(void 0, interceptors_default);
+const oauthTokens = oauthTokensMiniModule(void 0, interceptors_default);
 const qix = qix_default;
-const questions = questionsMiniModule(void 0, interceptors_default$1);
-const quotas = quotasMiniModule(void 0, interceptors_default$1);
-const reloadTasks = reloadTasksMiniModule(void 0, interceptors_default$1);
-const reloads = reloadsMiniModule(void 0, interceptors_default$1);
-const reportTemplates = reportTemplatesMiniModule(void 0, interceptors_default$1);
-const reports = reportsMiniModule(void 0, interceptors_default$1);
-const roles = rolesMiniModule(void 0, interceptors_default$1);
-const sharingTasks = sharingTasksMiniModule(void 0, interceptors_default$1);
-const spaces = spacesMiniModule(void 0, interceptors_default$1);
-const tasks = tasksMiniModule(void 0, interceptors_default$1);
-const tempContents = tempContentsMiniModule(void 0, interceptors_default$1);
-const tenants = tenantsMiniModule(void 0, interceptors_default$1);
-const themes = themesMiniModule(void 0, interceptors_default$1);
-const transports = transportsMiniModule(void 0, interceptors_default$1);
-const uiConfig = uiConfigMiniModule(void 0, interceptors_default$1);
-const users = usersMiniModule(void 0, interceptors_default$1);
-const webIntegrations = webIntegrationsMiniModule(void 0, interceptors_default$1);
-const webNotifications = webNotificationsMiniModule(void 0, interceptors_default$1);
-const webhooks = webhooksMiniModule(void 0, interceptors_default$1);
+const questions = questionsMiniModule(void 0, interceptors_default);
+const quotas = quotasMiniModule(void 0, interceptors_default);
+const reloadTasks = reloadTasksMiniModule(void 0, interceptors_default);
+const reloads = reloadsMiniModule(void 0, interceptors_default);
+const reportTemplates = reportTemplatesMiniModule(void 0, interceptors_default);
+const reports = reportsMiniModule(void 0, interceptors_default);
+const roles = rolesMiniModule(void 0, interceptors_default);
+const sharingTasks = sharingTasksMiniModule(void 0, interceptors_default);
+const spaces = spacesMiniModule(void 0, interceptors_default);
+const tasks = tasksMiniModule(void 0, interceptors_default);
+const tempContents = tempContentsMiniModule(void 0, interceptors_default);
+const tenants = tenantsMiniModule(void 0, interceptors_default);
+const themes = themesMiniModule(void 0, interceptors_default);
+const transports = transportsMiniModule(void 0, interceptors_default);
+const uiConfig = uiConfigMiniModule(void 0, interceptors_default);
+const users = usersMiniModule(void 0, interceptors_default);
+const webIntegrations = webIntegrationsMiniModule(void 0, interceptors_default);
+const webNotifications = webNotificationsMiniModule(void 0, interceptors_default);
+const webhooks = webhooksMiniModule(void 0, interceptors_default);
 const createQlikApi = (props) => {
-	const scopedInterceptors = interceptors_default$1.createInterceptors();
+	const scopedInterceptors = interceptors_default.createInterceptors();
 	return {
 		apiKeys: apiKeysMiniModule(props?.hostConfig, scopedInterceptors),
 		apps: appsMiniModule(props?.hostConfig, scopedInterceptors),

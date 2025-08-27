@@ -1,6 +1,6 @@
-import "./chunks/utils-qEQ6sEXX.js";
-import "./chunks/public-runtime-modules-CNGnt1rU.js";
-import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DbVuX5mE.js";
+import "./chunks/utils-CAGXTaqJ.js";
+import "./chunks/public-runtime-modules-P9LEbn8i.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-09EW5w1d.js";
 
 //#region src/public/rest/audits.ts
 /**
@@ -14,6 +14,18 @@ async function getAudits(query, options) {
 		method: "get",
 		pathTemplate: "/api/v1/audits",
 		query,
+		options
+	});
+}
+/**
+* Returns a Qlik Sense application (QVF file) containing usage data for the tenant's subscription. Requesting user must be assigned the `TenantAdmin` role. Available only for Capacity subscriptions. Consumption report is updated once per day.
+*
+* @throws FetchConsumptionAppAuditsHttpError
+*/
+async function fetchConsumptionAppAudits(options) {
+	return invokeFetch("audits", {
+		method: "post",
+		pathTemplate: "/api/v1/audits/actions/fetch-consumption-app",
 		options
 	});
 }
@@ -92,6 +104,7 @@ function clearCache() {
 */
 const auditsExport = {
 	getAudits,
+	fetchConsumptionAppAudits,
 	getArchivedAudits,
 	getAuditsSettings,
 	getAuditSources,
@@ -102,4 +115,4 @@ const auditsExport = {
 var audits_default = auditsExport;
 
 //#endregion
-export { clearCache, audits_default as default, getArchivedAudits, getAudit, getAuditSources, getAuditTypes, getAudits, getAuditsSettings };
+export { clearCache, audits_default as default, fetchConsumptionAppAudits, getArchivedAudits, getAudit, getAuditSources, getAuditTypes, getAudits, getAuditsSettings };
