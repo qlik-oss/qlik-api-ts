@@ -117,10 +117,14 @@ const authModule = {
 
 ## The Default Auth Modules
 
-- [Oauth2](#oauth2)
+- [OAuth2](#oauth2)
 - [Cookie](#cookie)
 - [Windows Cookie](#windows-cookie)
 - [API Key](#api-key)
+- [Anonymous](#anonymous)
+- [Reference](#reference)
+- [None](#none)
+- [NoAuth](#noauth)
 
 ### Oauth2
 
@@ -128,6 +132,8 @@ Uses a `clientId` from an oauth client created by a Qlik tenant administrator. A
 
 ```ts
 type Oauth2AuthConfig = {
+  /* the auth type */
+  authType?: "oauth2";
   /** The URL to the cloud tenant or windows server. If scheme is excluded https is used. May include a virtual proxy prefix on windows. Any trailing slashes are stripped. */
   host?: string;
   /** Client ID of oauth client created by tenant admin */
@@ -166,6 +172,8 @@ Uses a `webIntegrationId` created by a tenant administrator. Will get the a CSRF
 
 ```ts
 type CookieAuthConfig = {
+  /* the auth type */
+  authType?: "cookie";
   /** The URL to the cloud tenant or windows server. If scheme is excluded https is used. May include a virtual proxy prefix on windows. Any trailing slashes are stripped. */
   host?: string;
   /** Web Integration Id created by tenant admin */
@@ -181,6 +189,8 @@ Will do the necessary actions to communicate with a Qlik Sense Enterprise for Wi
 
 ```ts
 type WindowsCookieAuthConfig = {
+  /* the auth type */
+  authType?: "windowscookie";
   /** The URL to the cloud tenant or windows server. If scheme is excluded https is used. May include a virtual proxy prefix on windows. Any trailing slashes are stripped. */
   host?: string;
   /** location of the login page, auth module will redirect to this page when an unauthenticated api call is made */
@@ -196,8 +206,62 @@ Appends an `apiKey` to api requests that has been created by a user with a "deve
 
 ```ts
 type ApiKeyAuthConfig = {
+  /* the auth type */
+  authType?: "apikey";
   /** api key created by a developer role on a tenant */
   apiKey: string;
+};
+```
+
+### Anonymous
+
+Used for anonymous access to Qlik Cloud applications that have been configured for anonymous access. This auth module requires an access code and client ID from the tenant administrator.
+
+```ts
+type AnonymousAuthConfig = {
+  /* the auth type */
+  authType?: "anonymous";
+  /** this access code gives the anonymous access */
+  accessCode: string;
+  /** client id of oauth client created by tenant admin */
+  clientId: string;
+};
+```
+
+### Reference
+
+A special auth module that references a previously registered host config by name. This allows you to define a host config once and reuse it by referencing its name. See [Registering a Host Config](#registering-a-host-config) for more details.
+
+```ts
+type ReferenceConfig = {
+  /* the auth type */
+  authType?: "reference";
+  /** The name of the registered host config to reference */
+  reference: string;
+};
+```
+
+### None
+
+A minimal auth module that performs no authentication. It makes API calls without any authentication headers or tokens. This is typically used for testing scenarios or when connecting to services when authentication has been handled elsewhere.
+
+```ts
+type NoneAuthConfig = {
+  /* the auth type */
+  authType: "none";
+  // No additional configuration required
+};
+```
+
+### NoAuth
+
+A special auth module designed to block all API calls and WebSocket connections. This is useful when embedding a Qlik UI and no interaction with a QCS tenant needs to be made.
+
+```ts
+type NoAuthAuthConfig = {
+  /* the auth type */
+  authType: "noauth";
+  // No additional configuration required
 };
 ```
 

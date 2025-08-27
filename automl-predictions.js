@@ -1,9 +1,11 @@
-import "./chunks/utils-qEQ6sEXX.js";
-import "./chunks/public-runtime-modules-CNGnt1rU.js";
-import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DbVuX5mE.js";
+import "./chunks/utils-CAGXTaqJ.js";
+import "./chunks/public-runtime-modules-P9LEbn8i.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-09EW5w1d.js";
 
 //#region src/public/rest/automl-predictions.ts
 /**
+* @deprecated
+*
 * Returns a file containing the shapley values in coordinate form that are associated with a prediction ID.
 *
 * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
@@ -20,6 +22,8 @@ async function getAutomlPredictionCoordinateShap(predictionId, query, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Retrieve jobs that are associated with a prediction. Job with correlation type `prediction`.
 *
 * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
@@ -34,6 +38,8 @@ async function createAutomlPredictionJob(predictionId, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Returns a file containing any rows in a prediction operation where a prediction was unable to be produced.
 *
 * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
@@ -50,6 +56,8 @@ async function getAutomlPredictionNotPredictedReasons(predictionId, query, optio
 	});
 }
 /**
+* @deprecated
+*
 * Returns a file containing the predicted values that are associated with a prediction ID.
 *
 * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
@@ -66,6 +74,8 @@ async function getAutomlPredictionPredictions(predictionId, query, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Returns a file containing the shapley values that are associated with a prediction ID.
 *
 * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
@@ -82,6 +92,8 @@ async function getAutomlPredictionShap(predictionId, query, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Returns a file containing the source values and an index field that are associated with a prediction ID.
 *
 * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.

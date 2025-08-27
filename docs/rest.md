@@ -46,7 +46,7 @@ try {
 Every http response that has a status over 300 is considered to be an error and the promise is rejected. To handle this in typescript you can do the following:
 
 ```ts
-import { deleteExtension, type DeleteExtensionHttpError } from "@qlik/qmfe/extensions";
+import { deleteExtension, type DeleteExtensionHttpError } from "@qlik/api/extensions";
 
 try {
   const { status } = await deleteExtension("<extension-id>");

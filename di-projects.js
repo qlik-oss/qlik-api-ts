@@ -1,6 +1,6 @@
-import "./chunks/utils-qEQ6sEXX.js";
-import "./chunks/public-runtime-modules-CNGnt1rU.js";
-import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DbVuX5mE.js";
+import "./chunks/utils-CAGXTaqJ.js";
+import "./chunks/public-runtime-modules-P9LEbn8i.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-09EW5w1d.js";
 
 //#region src/public/rest/di-projects.ts
 /**
@@ -292,7 +292,7 @@ async function stopDiProjectDiTaskRuntime(projectId, dataTaskId, options) {
 	});
 }
 /**
-* Get data task runtime state within a data integration project.
+* Get the current runtime state of a data task
 * @example
 * getDiProjectDiTaskRuntimeState(
 *   "65424a71c11367914c1e659b",
