@@ -1,13 +1,13 @@
 import { HostConfig } from "./chunks/auth-types-B1c_1Nca.js";
 import { InterceptorsAPI, createInterceptors } from "./chunks/interceptors-BF556LaK.js";
 import { AuthAPI, getAccessToken, getWebResourceAuthParams, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig } from "./chunks/auth-DFOXWfqh.js";
-import { QixAPI } from "./chunks/qix-C1WaB-67.js";
+import { QixAPI } from "./chunks/qix-hgcIF2oL.js";
 import { ApiKeysAPI } from "./chunks/api-keys-C-ZqA-wl.js";
-import { AppsAPI } from "./chunks/apps-CJH5JjKB.js";
+import { AppsAPI } from "./chunks/apps-k7oY1h_6.js";
 import { AssistantsAPI } from "./chunks/assistants-BsDbpzl4.js";
 import { AuditsAPI } from "./chunks/audits-5CBpwcdx.js";
 import { AutomationConnectionsAPI } from "./chunks/automation-connections-DRQDgw7Q.js";
-import { AutomationsAPI } from "./chunks/automations-arVbySrW.js";
+import { AutomationsAPI } from "./chunks/automations-DQ-dYRFS.js";
 import { AutomlDeploymentsAPI } from "./chunks/automl-deployments-B-WuR_zE.js";
 import { AutomlPredictionsAPI } from "./chunks/automl-predictions-CewW0eZn.js";
 import { BrandsAPI } from "./chunks/brands-C4eALPrs.js";

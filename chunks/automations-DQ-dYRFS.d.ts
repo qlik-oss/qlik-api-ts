@@ -266,8 +266,8 @@ declare function getAutomationsUsageMetrics(query: {
   /** If specified, result will be broken apart for each automation */
   breakdownBy?: string;
   /** Indicates how the metrics should be filtered using a SCIM-style expression. Available parameters:
-   * - name (runs, scheduledRun, triggeredRun, webhookRuns, duration, bandwidthIn, bandwidthOut)
-   * - date */
+   * - name (specify one or more enums to return specific metrics. Supported enum values: `runs`, `scheduledRun`, `triggeredRun`, `webhookRuns`, `duration`, `bandwidthIn`, `bandwidthOut`)
+   * - date (return a metric for a specific date or range of dates, e.g. "2025-08-01") */
   filter: string;
 }, options?: ApiCallOptions): Promise<GetAutomationsUsageMetricsHttpResponse>;
 type GetAutomationsUsageMetricsHttpResponse = {
