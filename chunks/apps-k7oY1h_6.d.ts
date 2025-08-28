@@ -1028,6 +1028,7 @@ type ScriptMeta = {
 };
 type ScriptMetaList = {
   links?: NavigationLinks;
+  privileges?: string[];
   /** Script versions metadata. */
   scripts?: ScriptMeta[];
 };

@@ -1,4 +1,4 @@
-//#region node_modules/.pnpm/@qlik+runtime-module-loader@1.1.0/node_modules/@qlik/runtime-module-loader/dist/index.js
+//#region node_modules/.pnpm/@qlik+runtime-module-loader@1.2.0/node_modules/@qlik/runtime-module-loader/dist/index.js
 if (!window.__qlikMainPrivateResolvers) window.__qlikMainPrivateResolvers = {};
 if (!window.__qlikMainPrivateResolvers.mainUrlPromise) window.__qlikMainPrivateResolvers.mainUrlPromise = new Promise((resolve) => {
 	if (window.__qlikMainPrivateResolvers) window.__qlikMainPrivateResolvers.resolveMainJsUrl = (value) => {
@@ -32,7 +32,8 @@ function provideHostConfigForMainJsUrl(hostConfig) {
 	if (!window.__qlikMainPrivateResolvers) throw new Error("No main url resolver found");
 	function toMainJsUrl(hc) {
 		if (!window.__qlikMainPrivateResolvers) throw new Error("No main url resolver found");
-		const url = hc?.embedRuntimeUrl || hc?.url || hc?.host;
+		let url = hc?.embedRuntimeUrl || hc?.url || hc?.host;
+		if (!url && hc?.authType === "noauth") url = "https://cdn.qlikcloud.com/qmfe";
 		if (!url) return void 0;
 		let locationUrl;
 		if (url.toLowerCase().startsWith("https://") || url.toLowerCase().startsWith("http://")) locationUrl = url;
