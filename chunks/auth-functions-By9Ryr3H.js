@@ -1,5 +1,5 @@
-import { cleanFalsyValues, isBrowser, isNode, sortKeys } from "./utils-CAGXTaqJ.js";
-import { getInterceptors } from "./interceptors-DBoV6UkN.js";
+import { cleanFalsyValues, isBrowser, isNode, sortKeys } from "./utils-1j8VpsDa.js";
+import { getInterceptors } from "./interceptors-D4JOaDrv.js";
 import { authTypesThatCanBeOmitted, hostConfigCommonProperties } from "./auth-types-B0Z-Reol.js";
 import { customAlphabet, nanoid } from "nanoid";
 
@@ -7,8 +7,7 @@ import { customAlphabet, nanoid } from "nanoid";
 const getPlatform = async (options = {}) => {
 	const hc = withResolvedHostConfig(options.hostConfig);
 	const isAnonymous = hc?.authType === "anonymous" || !!hc.accessCode;
-	const isNodeEnvironment = typeof window === "undefined";
-	if (isNodeEnvironment) return result({
+	if (typeof window === "undefined") return result({
 		isNodeEnv: true,
 		isAnonymous
 	});
@@ -89,7 +88,7 @@ const getProductInfo = async ({ hostConfig, noCache } = {}) => {
 		if (!(completeUrl in productInfoPromises)) {
 			const fetchOptions = {};
 			if (globalThis.QlikMain && globalThis.QlikMain.resourceNeedsCredentials(completeUrl)) fetchOptions.credentials = "include";
-			const productInfoPromise = fetch(completeUrl, fetchOptions).then(async (res) => {
+			productInfoPromises[completeUrl] = fetch(completeUrl, fetchOptions).then(async (res) => {
 				if (res.ok) return {
 					data: await res.json(),
 					status: res.status
@@ -99,7 +98,6 @@ const getProductInfo = async ({ hostConfig, noCache } = {}) => {
 					status: res.status
 				};
 			});
-			productInfoPromises[completeUrl] = productInfoPromise;
 		}
 		const response = await productInfoPromises[completeUrl];
 		if (response.status >= 400 || !response.data) delete productInfoPromises[completeUrl];
@@ -117,7 +115,7 @@ const getProductInfo = async ({ hostConfig, noCache } = {}) => {
 /** @internal */
 const extractMeta = (data) => {
 	const urls = data.externalUrls;
-	if (!urls) return void 0;
+	if (!urls) return;
 	const productName = data.composition?.productName ?? "Qlik";
 	const releaseLabel = data.composition?.releaseLabel || "-";
 	const productLabel = releaseLabel === "-" ? productName : `${productName} (${releaseLabel})`;
@@ -245,7 +243,6 @@ function loadOauthTokensFromStorage(topic, accessTokenStorage) {
 		accessToken,
 		refreshToken
 	};
-	return void 0;
 }
 async function loadCachedOauthTokens(hostConfig) {
 	return cachedTokens[getTopicFromOauthHostConfig(hostConfig)];
@@ -321,8 +318,7 @@ function handlePossibleErrors(data) {
 function toQueryString(queryParams) {
 	const queryParamsKeys = Object.keys(queryParams);
 	queryParamsKeys.sort();
-	const query = queryParamsKeys.map((k) => `${k}=${queryParams[k]}`).join("&");
-	return query;
+	return queryParamsKeys.map((k) => `${k}=${queryParams[k]}`).join("&");
 }
 function byteArrayToBase64(hashArray) {
 	let result$1 = "";
@@ -341,8 +337,7 @@ async function sha256(message) {
 	const msgBuffer = new TextEncoder().encode(message);
 	const hashBuffer = await globalThis.crypto.subtle.digest("SHA-256", msgBuffer);
 	const hashArray = Array.from(new Uint8Array(hashBuffer));
-	const hashBase64 = byteArrayToBase64(hashArray);
-	return hashBase64.replaceAll(/\+/g, "-").replaceAll(/\//g, "_").replace(/=+$/, "");
+	return byteArrayToBase64(hashArray).replaceAll(/\+/g, "-").replaceAll(/\//g, "_").replace(/=+$/, "");
 }
 async function createInteractiveLoginUrl(hostConfig, redirectUri, state, verifier) {
 	const clientId = hostConfig.clientId || "";
@@ -386,7 +381,7 @@ async function startFullPageLoginFlow(hostConfig) {
 }
 async function exchangeCodeAndVerifierForAccessTokenData(hostConfig, code, verifier, redirectUri) {
 	try {
-		const result$1 = await fetch(`${toValidLocationUrl(hostConfig)}/oauth/token`, {
+		const data = await (await fetch(`${toValidLocationUrl(hostConfig)}/oauth/token`, {
 			method: "POST",
 			credentials: "include",
 			mode: "cors",
@@ -400,8 +395,7 @@ async function exchangeCodeAndVerifierForAccessTokenData(hostConfig, code, verif
 				...verifier ? { code_verifier: verifier } : {},
 				client_id: hostConfig.clientId
 			})
-		});
-		const data = await result$1.json();
+		})).json();
 		handlePossibleErrors(data);
 		return {
 			accessToken: data.access_token,
@@ -441,13 +435,12 @@ function createBodyWithCredentialsEtc(clientId, clientSecret, scope, subject, us
 	};
 }
 async function getOauthTokensWithCredentials(baseUrl, clientId, clientSecret, scope = "user_default", subject, userId) {
-	const result$1 = await fetch(`${baseUrl}/oauth/token`, {
+	const data = await (await fetch(`${baseUrl}/oauth/token`, {
 		method: "POST",
 		mode: "cors",
 		headers: { "content-type": "application/json" },
 		body: JSON.stringify(createBodyWithCredentialsEtc(clientId, clientSecret, scope, subject, userId))
-	});
-	const data = await result$1.json();
+	})).json();
 	return {
 		accessToken: data.access_token,
 		refreshToken: data.refresh_token,
@@ -455,7 +448,7 @@ async function getOauthTokensWithCredentials(baseUrl, clientId, clientSecret, sc
 	};
 }
 async function getOauthTokensWithRefreshToken(baseUrl, refreshToken, clientSecret) {
-	const result$1 = await fetch(`${baseUrl}/oauth/token`, {
+	const data = await (await fetch(`${baseUrl}/oauth/token`, {
 		method: "POST",
 		mode: "cors",
 		headers: { "content-type": "application/json" },
@@ -464,8 +457,7 @@ async function getOauthTokensWithRefreshToken(baseUrl, refreshToken, clientSecre
 			refresh_token: refreshToken,
 			client_secret: clientSecret
 		})
-	});
-	const data = await result$1.json();
+	})).json();
 	return {
 		accessToken: data.access_token,
 		refreshToken: data.refresh_token,
@@ -473,7 +465,7 @@ async function getOauthTokensWithRefreshToken(baseUrl, refreshToken, clientSecre
 	};
 }
 async function getAnonymousOauthAccessToken(baseUrl, accessCode, clientId, trackingCode) {
-	const result$1 = await fetch(`${baseUrl}/oauth/token/anonymous-embed`, {
+	const data = await (await fetch(`${baseUrl}/oauth/token/anonymous-embed`, {
 		method: "POST",
 		mode: "cors",
 		headers: { "content-type": "application/json" },
@@ -483,8 +475,7 @@ async function getAnonymousOauthAccessToken(baseUrl, accessCode, clientId, track
 			grant_type: "urn:qlik:oauth:anonymous-embed",
 			tracking_code: trackingCode
 		})
-	});
-	const data = await result$1.json();
+	})).json();
 	return {
 		accessToken: data.access_token,
 		refreshToken: data.refresh_token,
@@ -498,11 +489,10 @@ async function getAnonymousOauthAccessToken(baseUrl, accessCode, clientId, track
 async function getOAuthTokensForNode(hostConfig) {
 	const { clientId, clientSecret } = hostConfig;
 	if (!clientId || !clientSecret) throw new InvalidHostConfigError("A host config with authType set to \"oauth2\" has to provide a clientId and a clientSecret");
-	const oauthTokens = await loadOrAcquireAccessTokenOauth(hostConfig, async () => {
+	return await loadOrAcquireAccessTokenOauth(hostConfig, async () => {
 		if (!hostConfig.clientId || !hostConfig.clientSecret) throw new InvalidHostConfigError("A host config with authType set to \"oauth2\" has to provide a clientId and a clientSecret");
 		return getOauthTokensWithCredentials(toValidLocationUrl(hostConfig), hostConfig.clientId, hostConfig.clientSecret, hostConfig.scope, hostConfig.subject, hostConfig.userId);
 	});
-	return oauthTokens;
 }
 /**
 * Fetches the access token from storage or memory. If no one is found a code and verifier is expected to be found in the sesion storage
@@ -513,9 +503,8 @@ async function getOAuthTokensForBrowser(hostConfig) {
 	if (!clientId) throw new InvalidHostConfigError("A host config with authType set to \"oauth2\" has to also provide a clientId");
 	const oauthTokens = await loadOrAcquireAccessTokenOauth(hostConfig, async () => {
 		if (hostConfig.getAccessToken) try {
-			const tokenFetchedFromRemote = typeof hostConfig.getAccessToken === "string" ? await lookupGetAccessFn(hostConfig.getAccessToken)() : await hostConfig.getAccessToken();
 			return {
-				accessToken: tokenFetchedFromRemote,
+				accessToken: typeof hostConfig.getAccessToken === "string" ? await lookupGetAccessFn(hostConfig.getAccessToken)() : await hostConfig.getAccessToken(),
 				refreshToken: void 0,
 				errors: void 0
 			};
@@ -534,8 +523,7 @@ async function getOAuthTokensForBrowser(hostConfig) {
 				if (!usedRedirectUri) return errorMessageToAuthData("No redirect uri provided");
 				if (originalState !== state) return errorMessageToAuthData("State returned by custom interactive login function does not match original");
 				if (!code$1) return errorMessageToAuthData("No code found in response from custom interactive login function");
-				const tokenResponse = await exchangeCodeAndVerifierForAccessTokenData(hostConfig, code$1, verifier$1, usedRedirectUri);
-				return tokenResponse;
+				return await exchangeCodeAndVerifierForAccessTokenData(hostConfig, code$1, verifier$1, usedRedirectUri);
 			} catch (error) {
 				return {
 					accessToken: void 0,
@@ -556,7 +544,6 @@ async function getOAuthTokensForBrowser(hostConfig) {
 			const tokenResponse = await exchangeCodeAndVerifierForAccessTokenData(hostConfig, code, verifier, hostConfig.redirectUri);
 			if (tokenResponse) return tokenResponse;
 		}
-		return void 0;
 	});
 	if (oauthTokens) return oauthTokens;
 	if (hostConfig.performInteractiveLogin) return new Promise(() => {});
@@ -637,8 +624,7 @@ async function exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, pur
 		})
 	});
 	if (response.status !== 200) throw await toError(response);
-	const data = await response.json();
-	return data.access_token;
+	return (await response.json()).access_token;
 }
 async function toError(response) {
 	const body = await response.text();
@@ -708,18 +694,16 @@ async function getRestCallAuthParams$8({ hostConfig }) {
 	};
 }
 async function getWebSocketAuthParams$8({ hostConfig }) {
-	const websocketAccessToken = await handlePotentialAuthenticationErrorAndRetry$1(hostConfig, async () => {
+	return { queryParams: { accessToken: await handlePotentialAuthenticationErrorAndRetry$1(hostConfig, async () => {
 		const accessToken = await getAnonymousAccessToken(hostConfig);
 		return exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, "websocket");
-	});
-	return { queryParams: { accessToken: websocketAccessToken } };
+	}) } };
 }
 async function getWebResourceAuthParams$2({ hostConfig }) {
-	const websocketResourceAccessToken = await handlePotentialAuthenticationErrorAndRetry$1(hostConfig, async () => {
+	return { queryParams: { accessToken: await handlePotentialAuthenticationErrorAndRetry$1(hostConfig, async () => {
 		const accessToken = await getAnonymousAccessToken(hostConfig);
 		return exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, "websocket");
-	});
-	return { queryParams: { accessToken: websocketResourceAccessToken } };
+	}) } };
 }
 async function handleAuthenticationError$8({ hostConfig }) {
 	clearStoredAnonymousTokens(hostConfig);
@@ -831,7 +815,7 @@ function encodeQueryParams(query) {
 	if (!query) return "";
 	return Object.entries(query).map((kv) => {
 		const [, value] = kv;
-		if (value === void 0) return void 0;
+		if (value === void 0) return;
 		return kv.map((val) => encodeURIComponent(decodeURIComponent(val))).join("=");
 	}).filter(Boolean).join("&");
 }
@@ -1076,8 +1060,7 @@ async function performActualHttpFetch(method, completeUrl, unencodedBody, conten
 	if (options?.progress) response = await invokeXHR(completeUrl, request);
 	else response = await fetchAndTransformExceptions(completeUrl, request);
 	if (fetchTimeoutId) clearTimeout(fetchTimeoutId);
-	const invokeFetchResponse = await parseFetchResponse(response, completeUrl);
-	return invokeFetchResponse;
+	return await parseFetchResponse(response, completeUrl);
 }
 function encodeBody(unencodedBody, contentType) {
 	if (!unencodedBody) return {
@@ -1305,8 +1288,7 @@ const defaultUserAgent = "qmfe-api/latest";
 async function invokeFetch(api, props, interceptors) {
 	const effectiveInterceptors = interceptors || getInterceptors();
 	const invokeFetchFinal = (reqeust) => invokeFetchIntercepted(api, reqeust);
-	const withInterceptors = (effectiveInterceptors || []).reduce((proceed, interceptor) => (request) => interceptor(request, proceed), invokeFetchFinal);
-	return withInterceptors(props);
+	return (effectiveInterceptors || []).reduce((proceed, interceptor) => (request) => interceptor(request, proceed), invokeFetchFinal)(props);
 }
 /** @private Runs the intercepted version of invoke fetch */
 async function invokeFetchIntercepted(api, props) {
@@ -1389,12 +1371,11 @@ async function parseFetchResponse(fetchResponse, url) {
 	const errorMsg = `request to '${url}' failed with status ${status} ${statusText}.`;
 	if (status >= 300) throw new InvokeFetchError(errorMsg, status, headers, resultData);
 	if (status === 0) throw new InvokeFetchError(errorMsg, 302, headers, resultData);
-	const invokeFetchResponse = {
+	return {
 		status,
 		headers,
 		data: resultData
 	};
-	return invokeFetchResponse;
 }
 
 //#endregion
@@ -1427,20 +1408,18 @@ async function getCsrfToken(hostConfig, noCache) {
 	else pathTemplate = "/api/v1/csrf-token";
 	const fetchCsrfToken = async () => {
 		try {
-			const res = await invokeFetch("csrf-token", {
+			const csrfToken = (await invokeFetch("csrf-token", {
 				method: "get",
 				pathTemplate,
 				options: {
 					hostConfig,
 					noCache: true
 				}
-			});
-			const csrfToken = res.headers.get(QLIK_CSRF_TOKEN);
+			})).headers.get(QLIK_CSRF_TOKEN);
 			if (!csrfToken) return "";
 			return csrfToken;
 		} catch (e) {
-			const error = e;
-			if (error.status === 404) return "";
+			if (e.status === 404) return "";
 			throw e;
 		}
 	};
@@ -1622,18 +1601,16 @@ async function getRestCallAuthParams$3({ hostConfig }) {
 	};
 }
 async function getWebSocketAuthParams$3({ hostConfig }) {
-	const websocketAccessToken = await handlePotentialAuthenticationErrorAndRetry(hostConfig, async () => {
+	return { queryParams: { accessToken: await handlePotentialAuthenticationErrorAndRetry(hostConfig, async () => {
 		const accessToken = await getOAuthAccessToken(hostConfig);
 		return exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, "websocket");
-	});
-	return { queryParams: { accessToken: websocketAccessToken } };
+	}) } };
 }
 async function getWebResourceAuthParams$1({ hostConfig }) {
-	const webResourceAccessToken = await handlePotentialAuthenticationErrorAndRetry(hostConfig, async () => {
+	return { queryParams: { accessToken: await handlePotentialAuthenticationErrorAndRetry(hostConfig, async () => {
 		const accessToken = await getOAuthAccessToken(hostConfig);
 		return exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, "webresource");
-	});
-	return { queryParams: { accessToken: webResourceAccessToken } };
+	}) } };
 }
 async function handleAuthenticationError$3({ hostConfig }) {
 	if (hostConfig.getAccessToken) {
@@ -1839,8 +1816,7 @@ async function getAuthModule(hostConfig) {
 	return authModule;
 }
 async function resolveGloballyDefinedAuthModule(authType) {
-	const globalWindow = globalThis;
-	const globalVariable = globalWindow[authType];
+	const globalVariable = globalThis[authType];
 	if (globalVariable) {
 		let potentialAuthModule;
 		if (typeof globalVariable === "function") potentialAuthModule = await globalVariable();
@@ -1951,7 +1927,7 @@ function removeDefaults(hostConfig) {
 	return cleanedHostConfig;
 }
 function globalReplacer(key, value) {
-	if (typeof value === "function") return void 0;
+	if (typeof value === "function") return;
 	return value;
 }
 /**
@@ -2041,8 +2017,7 @@ function isHostCrossOrigin(hostConfig) {
 	const hostConfigToUse = withResolvedHostConfig(hostConfig);
 	if (Object.keys(hostConfigToUse).length === 0) return false;
 	try {
-		const locationUrl = new URL(toValidLocationUrl(hostConfigToUse));
-		return locationUrl.origin !== globalThis.location.origin;
+		return new URL(toValidLocationUrl(hostConfigToUse)).origin !== globalThis.location.origin;
 	} catch {}
 	return false;
 }
@@ -2090,8 +2065,7 @@ function toValidWebsocketLocationUrl(hostConfig) {
 async function getWebSocketAuthParams(props) {
 	const hostConfigToUse = withResolvedHostConfig(props.hostConfig);
 	try {
-		const authModule = await getAuthModule(hostConfigToUse);
-		return await authModule.getWebSocketAuthParams({
+		return await (await getAuthModule(hostConfigToUse)).getWebSocketAuthParams({
 			...props,
 			hostConfig: hostConfigToUse
 		});
@@ -2108,8 +2082,7 @@ async function getWebSocketAuthParams(props) {
 async function getWebResourceAuthParams(props) {
 	const hostConfigToUse = withResolvedHostConfig(props.hostConfig);
 	try {
-		const authModule = await getAuthModule(hostConfigToUse);
-		return await authModule.getWebResourceAuthParams?.({
+		return await (await getAuthModule(hostConfigToUse)).getWebResourceAuthParams?.({
 			...props,
 			hostConfig: hostConfigToUse
 		}) || { queryParams: {} };
@@ -2123,8 +2096,7 @@ async function getWebResourceAuthParams(props) {
 */
 async function handleAuthenticationError(props) {
 	const hostConfigToUse = withResolvedHostConfig(props.hostConfig);
-	const authModule = await getAuthModule(hostConfigToUse);
-	const result$1 = await authModule.handleAuthenticationError({
+	const result$1 = await (await getAuthModule(hostConfigToUse)).handleAuthenticationError({
 		...props,
 		hostConfig: hostConfigToUse
 	});
@@ -2147,8 +2119,7 @@ async function handleAuthenticationError(props) {
 async function getRestCallAuthParams(props) {
 	const hostConfigToUse = withResolvedHostConfig(props.hostConfig);
 	try {
-		const authModule = await getAuthModule(hostConfigToUse);
-		return await authModule.getRestCallAuthParams({
+		return await (await getAuthModule(hostConfigToUse)).getRestCallAuthParams({
 			...props,
 			hostConfig: hostConfigToUse
 		});
@@ -2163,11 +2134,10 @@ async function getRestCallAuthParams(props) {
 * @param props.method the http method, which may affect what authentication are needed.
 */
 async function getAccessToken(props) {
-	const res = await getRestCallAuthParams({
+	const authorizationHeader = (await getRestCallAuthParams({
 		method: "GET",
 		...props
-	});
-	const authorizationHeader = res.headers?.Authorization;
+	})).headers?.Authorization;
 	if (authorizationHeader.indexOf("Bearer ") === 0) return authorizationHeader.substring(7);
 	throw new Error("Unknown format of authorization header returned by remote auth module");
 }
@@ -2235,10 +2205,7 @@ const leadingHttp = /^http/;
 */
 function normalizeInbandAuthError({ errorBody, status }) {
 	const authError = errorBody;
-	if (typeof authError?.errors === "object") {
-		const err = new AuthorizationError(authError?.errors);
-		return { message: err.message };
-	}
+	if (typeof authError?.errors === "object") return { message: new AuthorizationError(authError?.errors).message };
 	return { message: `HTTP ${status}` };
 }
 /**

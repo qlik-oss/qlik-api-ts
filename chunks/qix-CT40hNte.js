@@ -1,9 +1,9 @@
-import { getQixRuntimeModule } from "./public-runtime-modules-BDwfbach.js";
+import { getQixRuntimeModule } from "./public-runtime-modules-BDZc6BaU.js";
 
 //#region src/public/qix.ts
 function openAppSession(appSessionProps) {
 	const appSessionPromise = getQixRuntimeModule(appSessionProps.hostConfig).then((impl) => impl.openAppSession(appSessionProps));
-	const appSessionProxy = {
+	return {
 		async getDoc() {
 			return (await appSessionPromise).getDoc();
 		},
@@ -20,7 +20,6 @@ function openAppSession(appSessionProps) {
 			return (await appSessionPromise).close(props);
 		}
 	};
-	return appSessionProxy;
 }
 function withHostConfig(hostConfig) {
 	return { openAppSession: (openAppSessionProps) => openAppSession(typeof openAppSessionProps === "string" ? {

@@ -1,10 +1,9 @@
-import { isBrowser } from "./utils-CAGXTaqJ.js";
+import { isBrowser } from "./utils-1j8VpsDa.js";
 
 //#region src/interceptors/interceptors.ts
 let GLOBAL_INTERCEPTORS;
 function createInterceptors() {
-	const startingInterceptors = GLOBAL_INTERCEPTORS?.getInterceptors() || [];
-	const interceptors$1 = [...startingInterceptors];
+	const interceptors$1 = [...GLOBAL_INTERCEPTORS?.getInterceptors() || []];
 	return {
 		addInterceptor: (interceptor) => {
 			interceptors$1.push(interceptor);
@@ -24,17 +23,14 @@ function addDefaultInterceptors() {
 	if (addDefaultInterceptorsRun) return;
 	if (isBrowser()) {
 		const readFlagsFromUrlQuery = () => {
-			const params = new URLSearchParams(window.location.search);
-			const featuresParam = params.get("features");
+			const featuresParam = new URLSearchParams(window.location.search).get("features");
 			if (!featuresParam) return {};
-			const features = featuresParam.split(",").map((item) => item.trim());
-			const urlFeatures = features.reduce((map, obj) => {
+			return featuresParam.split(",").map((item) => item.trim()).reduce((map, obj) => {
 				const value = !obj.startsWith("!");
 				const key = value ? obj : obj.substring(1);
 				map[key] = value;
 				return map;
 			}, {});
-			return urlFeatures;
 		};
 		const readFlagsFromLocalStorage = () => {
 			try {

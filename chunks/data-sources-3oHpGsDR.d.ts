@@ -38,6 +38,8 @@ type DataSourceNew = {
   dataSourceId: string;
   /** Datasource property name (could be null) */
   dataSourcePropertyName?: string;
+  /** Indicates if the datasource is disabled */
+  disabled?: boolean;
   /** Datasource name */
   name: string;
   /** Connector provider */

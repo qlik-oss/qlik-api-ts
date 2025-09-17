@@ -1,8 +1,8 @@
-import { isBrowser } from "./utils-CAGXTaqJ.js";
-import "./interceptors-DBoV6UkN.js";
+import { isBrowser } from "./utils-1j8VpsDa.js";
+import "./interceptors-D4JOaDrv.js";
 import "./global-types-BGMD2sDY.js";
 import "./auth-types-B0Z-Reol.js";
-import { getPlatform, handleAuthenticationError, invokeFetch, isWindows, toValidWebsocketLocationUrl } from "./auth-functions-CZbgZARw.js";
+import { getPlatform, handleAuthenticationError, invokeFetch, isWindows, toValidWebsocketLocationUrl } from "./auth-functions-By9Ryr3H.js";
 import { getHumanReadableSocketClosedErrorMessage } from "./websocket-errors-CnW4OQWd.js";
 
 //#region src/qix/app-session.ts
@@ -47,8 +47,7 @@ function createExternalSharedSession(externalApp, onWebSocketEvent$1, appSession
 	const sharedSession = {
 		getDoc: () => externalApp,
 		addClient(client) {
-			const index = clients.indexOf(client, 0);
-			if (index === -1) clients.push(client);
+			if (clients.indexOf(client, 0) === -1) clients.push(client);
 		},
 		removeClient(client) {
 			const index = clients.indexOf(client, 0);
@@ -117,8 +116,7 @@ function createExternalSharedSession(externalApp, onWebSocketEvent$1, appSession
 //#endregion
 //#region src/qix/internal/global-app-session.id.ts
 function toGlobalAppSessionId({ appId, identity, hostConfig, withoutData, useReloadEngine, ttlSeconds, workloadType, autoResume }) {
-	const locationUrl = toValidWebsocketLocationUrl(hostConfig);
-	let url = `${locationUrl}/${appId}`;
+	let url = `${toValidWebsocketLocationUrl(hostConfig)}/${appId}`;
 	if (identity) url += `/${identity}`;
 	if (ttlSeconds !== void 0 && ttlSeconds >= 0) url += `/ttl/${ttlSeconds}`;
 	if (useReloadEngine) url += "/useReloadEngine";
@@ -210,15 +208,14 @@ function listenForWindowsAuthenticationInformation(session) {
 * Opens the websocket and handles a few windows authentication details
 */
 async function createAndSetupEnigmaSession(props, canRetry, onWebSocketEvent$1) {
-	const { createEnigmaSessionEntrypoint } = await import("./qix-chunk-entrypoint-CpkRq84_.js");
+	const { createEnigmaSessionEntrypoint } = await import("./qix-chunk-entrypoint-w25mSjTi.js");
 	const session = await createEnigmaSessionEntrypoint(props);
 	setupSessionListeners(session, props, onWebSocketEvent$1);
 	let global;
 	if (await isWindows(props.hostConfig)) {
 		const loginInfoPromise = listenForWindowsAuthenticationInformation(session);
 		global = await session.open();
-		const loginInfo = await loginInfoPromise;
-		if (loginInfo?.mustAuthenticate) {
+		if ((await loginInfoPromise)?.mustAuthenticate) {
 			const action = await handleAuthenticationError({
 				headers: new Headers(),
 				status: 101,
@@ -363,11 +360,10 @@ function createSharedEnigmaSession(props, { getInitialAppActions, onClose, onWeb
 		onClose();
 		return sessionPromise.then((session) => session.close()).catch(() => {});
 	}
-	const sharedSession = {
+	return {
 		getDoc: () => docPromise,
 		addClient(client) {
-			const index = clients.indexOf(client, 0);
-			if (index === -1) clients.push(client);
+			if (clients.indexOf(client, 0) === -1) clients.push(client);
 		},
 		removeClient(client, closeDelay) {
 			const actuallyRemove = () => {
@@ -390,7 +386,6 @@ function createSharedEnigmaSession(props, { getInitialAppActions, onClose, onWeb
 		},
 		clientsCount: () => clients.length
 	};
-	return sharedSession;
 }
 let onlyOnReattach = false;
 async function checkConnectivity(hostConfig) {
@@ -402,15 +397,13 @@ async function checkConnectivity(hostConfig) {
 		noCache: true
 	};
 	try {
-		const result = await invokeFetch("", {
+		if (!(await invokeFetch("", {
 			method,
 			pathTemplate: "/api/v1/user-locale",
 			options
-		});
-		if (!result.headers.get("content-type")?.includes("application/json")) status = "unauthorized";
+		})).headers.get("content-type")?.includes("application/json")) status = "unauthorized";
 	} catch (err) {
-		const fetchErr = err;
-		switch (fetchErr.status) {
+		switch (err.status) {
 			case 0:
 				status = "offline";
 				break;
@@ -464,18 +457,17 @@ function createSharedPhoenixSession(props, { onClose, onWebSocketEvent: onWebSoc
 			onWebSocketEventGlobal(event);
 			for (const client of clients) client.onWebSocketEvent(event);
 		};
-		const phoenixConnectionPromise = import("./qix-chunk-entrypoint-CpkRq84_.js").then((module) => {
+		const phoenixConnectionPromise = import("./qix-chunk-entrypoint-w25mSjTi.js").then((module) => {
 			return module.createPhoenixConnectionEntrypoint(props, {
 				onWebSocketEvent: onWebSocketEvent$1,
 				getInitialAppActions
 			});
 		});
 		const docPromise = phoenixConnectionPromise.then((phoenixConnection) => phoenixConnection.doc);
-		const sharedSession = {
+		return {
 			getDoc: () => docPromise,
 			addClient(client) {
-				const index = clients.indexOf(client, 0);
-				if (index === -1) clients.push(client);
+				if (clients.indexOf(client, 0) === -1) clients.push(client);
 			},
 			removeClient(client, closeDelay) {
 				if (clients.length === 1) phoenixConnectionPromise.then((phoenixConnection) => {
@@ -510,7 +502,6 @@ function createSharedPhoenixSession(props, { onClose, onWebSocketEvent: onWebSoc
 			},
 			clientsCount: () => clients.length
 		};
-		return sharedSession;
 	} catch (err) {
 		console.error(err);
 		throw err;
@@ -618,8 +609,7 @@ async function createSessionApp(ttlSeconds, workloadType) {
 * @param host Configuration of what host to connect to
 */
 function openAppSession(appIdOrProps) {
-	const appSessionProps = typeof appIdOrProps === "string" ? { appId: appIdOrProps } : appIdOrProps;
-	const sharedSession = getOrCreateSharedSession(appSessionProps);
+	const sharedSession = getOrCreateSharedSession(typeof appIdOrProps === "string" ? { appId: appIdOrProps } : appIdOrProps);
 	return createAppSession(sharedSession);
 }
 /**

@@ -305,7 +305,8 @@ type TopLevelLink = {
  *     userId: "6K9xjsItDexffolu5vg1oWYkY8x7f-0G",
  *     caseinsensitive: true,
  *     locale: "en",
- *     includeQris: true
+ *     includeQris: true,
+ *     includeDisabled: true
  *   }
  * )
  *
@@ -321,6 +322,8 @@ declare function getDataConnections(query: {
   extended?: boolean;
   /** Filtering resources by properties (filterable properties only) using SCIM filter string. Note the filter string only applies to connections managed by data-connections service, i.e. filtering doesn't apply to DataFile connections. When filtering on datetime property (e.g. created, updated), datetime should be in RFC3339 format. */
   filter?: string;
+  /** Includes connections that uses disabled datasources */
+  includeDisabled?: boolean;
   /** Base Qri (encrypted) will be returned when the query is set to true, default is false */
   includeQris?: boolean;
   /** Number of resources to be returned (between 1 and 100) */
@@ -570,7 +573,8 @@ interface DataConnectionsAPI {
    *     userId: "6K9xjsItDexffolu5vg1oWYkY8x7f-0G",
    *     caseinsensitive: true,
    *     locale: "en",
-   *     includeQris: true
+   *     includeQris: true,
+   *     includeDisabled: true
    *   }
    * )
    *

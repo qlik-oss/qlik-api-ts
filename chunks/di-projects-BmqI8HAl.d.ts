@@ -72,6 +72,56 @@ type CreateDiProjectReq = {
   /** The type of the project */
   type?: "DATA_PIPELINE" | "DATA_MOVEMENT";
 };
+type DataTaskDatasetState = {
+  cdcStatus?: {
+    /** Number of DDL statements executed during the last run */
+    ddlCount?: number;
+    /** delete portion of totalProcessedCount. Only available for some task types */
+    deleteCount?: number;
+    /** Insert portion of totalProcessedCount. Only available for some task types */
+    insertCount?: number;
+    lastProcessed?: string;
+    message?: string;
+    state?: "QUEUED" | "PROCESSING" | "ACCUMULATING_CHANGES" | "COMPLETED" | "ERROR";
+    /** Total number of changes/DMLs applied to the dataset */
+    totalProcessedCount?: number;
+    /** update portion of totalProcessedCount. Only available for some task types */
+    updateCount?: number;
+  };
+  /** Is the data ready for use? */
+  dataReadiness?: "READY" | "NOT_READY" | "ERROR";
+  /** Id of the dataset */
+  datasetId?: string;
+  fullLoad?: {
+    /** Number of changes captured and cached during full load (CDC landing/replication tasks only) */
+    cachedChangesCount?: number;
+    /** Duration in HH:MM:SS format (hours:minutes:seconds) */
+    duration?: string;
+    endTime?: string;
+    /** Number of records that failed to load (currently only for knowledge marts) */
+    failedRecordsCount?: number;
+    message?: string;
+    startTime?: string;
+    state?: "QUEUED" | "LOADING" | "COMPLETED" | "ERROR";
+    /** Number of records (or docs in knowledge marts) were loaded. */
+    totalProcessedCount?: number;
+  };
+  lastBatchOfChanges?: {
+    /** Duration in HH:MM:SS format (hours:minutes:seconds) */
+    duration?: string;
+    endTime?: string;
+    message?: string;
+    startTime?: string;
+    state?: "QUEUED" | "PROCESSING" | "COMPLETED" | "ERROR";
+    /** Throughput in records per second */
+    throughputInRecordsPerSecond?: number;
+    totalProcessedCount?: number;
+  };
+  /** Name of the dataset */
+  name?: string;
+  /** Original name of the dataset, relevant only for data movement tasks */
+  sourceName?: string;
+};
 type DataTaskInstanceState = {
   cdcStatus?: {
     accumulatingChangesCount?: number;
@@ -549,6 +599,26 @@ type GetDiProjectDiTaskRuntimeStateHttpError = {
   status: 400 | 404;
 };
 /**
+ * Returns dataset-level runtime state for a data task
+ *
+ * @param projectId ID of the project
+ * @param dataTaskId ID of the data task
+ * @throws GetDiProjectDiTaskRuntimeStateDatasetsHttpError
+ */
+declare function getDiProjectDiTaskRuntimeStateDatasets(projectId: string, dataTaskId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTaskRuntimeStateDatasetsHttpResponse>;
+type GetDiProjectDiTaskRuntimeStateDatasetsHttpResponse = {
+  data: {
+    datasets?: DataTaskDatasetState[];
+  };
+  headers: Headers;
+  status: 200;
+};
+type GetDiProjectDiTaskRuntimeStateDatasetsHttpError = {
+  data: Errors;
+  headers: Headers;
+  status: 400 | 404;
+};
+/**
  * Clears the cache for di-projects api requests.
  */
 declare function clearCache(): void;
@@ -718,6 +788,14 @@ interface DiProjectsAPI {
    */
   getDiProjectDiTaskRuntimeState: typeof getDiProjectDiTaskRuntimeState;
   /**
+   * Returns dataset-level runtime state for a data task
+   *
+   * @param projectId ID of the project
+   * @param dataTaskId ID of the data task
+   * @throws GetDiProjectDiTaskRuntimeStateDatasetsHttpError
+   */
+  getDiProjectDiTaskRuntimeStateDatasets: typeof getDiProjectDiTaskRuntimeStateDatasets;
+  /**
    * Clears the cache for di-projects api requests.
    */
   clearCache: typeof clearCache;
@@ -727,4 +805,4 @@ interface DiProjectsAPI {
  */
 declare const diProjectsExport: DiProjectsAPI;
 //#endregion
-export { AsyncActionDetails, AsyncActionError, AsyncActionRsp, AsyncActionTaskProgress, AsyncActionType, AsyncCallStatus, CreateDiProjectHttpError, CreateDiProjectHttpResponse, CreateDiProjectReq, DataTaskInstanceState, DataTaskItemRsp, DataTaskRuntimeState, DataTaskType, DiProjectItemRsp, DiProjectOperationSelectedTask, DiProjectsAPI, Error, ErrorSource, Errors, ExportDiProjectHttpError, ExportDiProjectHttpResponse, ExportDiProjectReq, GetDiExportProjectVariablesRsp, GetDiProjectDiTaskHttpError, GetDiProjectDiTaskHttpResponse, GetDiProjectDiTaskRuntimeStateHttpError, GetDiProjectDiTaskRuntimeStateHttpResponse, GetDiProjectDiTasksHttpError, GetDiProjectDiTasksHttpResponse, GetDiProjectExportVariablesHttpError, GetDiProjectExportVariablesHttpResponse, GetDiProjectHttpError, GetDiProjectHttpResponse, GetDiProjectsHttpError, GetDiProjectsHttpResponse, ImportDiProjectHttpError, ImportDiProjectHttpResponse, ImportDiProjectRsp, ListDataTasksRsp, ListDiProjectsRsp, PrepareDiProjectDiTaskHttpError, PrepareDiProjectDiTaskHttpResponse, PrepareDiProjectHttpError, PrepareDiProjectHttpResponse, PrepareProjectReq, PrepareTaskReq, SetDiProjectExportVariablesHttpError, SetDiProjectExportVariablesHttpResponse, StartDiProjectDiTaskRuntimeHttpError, StartDiProjectDiTaskRuntimeHttpResponse, StopDiProjectDiTaskRuntimeHttpError, StopDiProjectDiTaskRuntimeHttpResponse, TaskSelectionList, UpdateDiExportProjectVariablesReq, UpdateDiExportProjectVariablesRsp, ValidateDiProjectDiTaskHttpError, ValidateDiProjectDiTaskHttpResponse, ValidateDiProjectHttpError, ValidateDiProjectHttpResponse, ValidateProjectReq, ValidateTaskReq, clearCache, createDiProject, diProjectsExport, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeState, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, setDiProjectExportVariables, startDiProjectDiTaskRuntime, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };
+export { AsyncActionDetails, AsyncActionError, AsyncActionRsp, AsyncActionTaskProgress, AsyncActionType, AsyncCallStatus, CreateDiProjectHttpError, CreateDiProjectHttpResponse, CreateDiProjectReq, DataTaskDatasetState, DataTaskInstanceState, DataTaskItemRsp, DataTaskRuntimeState, DataTaskType, DiProjectItemRsp, DiProjectOperationSelectedTask, DiProjectsAPI, Error, ErrorSource, Errors, ExportDiProjectHttpError, ExportDiProjectHttpResponse, ExportDiProjectReq, GetDiExportProjectVariablesRsp, GetDiProjectDiTaskHttpError, GetDiProjectDiTaskHttpResponse, GetDiProjectDiTaskRuntimeStateDatasetsHttpError, GetDiProjectDiTaskRuntimeStateDatasetsHttpResponse, GetDiProjectDiTaskRuntimeStateHttpError, GetDiProjectDiTaskRuntimeStateHttpResponse, GetDiProjectDiTasksHttpError, GetDiProjectDiTasksHttpResponse, GetDiProjectExportVariablesHttpError, GetDiProjectExportVariablesHttpResponse, GetDiProjectHttpError, GetDiProjectHttpResponse, GetDiProjectsHttpError, GetDiProjectsHttpResponse, ImportDiProjectHttpError, ImportDiProjectHttpResponse, ImportDiProjectRsp, ListDataTasksRsp, ListDiProjectsRsp, PrepareDiProjectDiTaskHttpError, PrepareDiProjectDiTaskHttpResponse, PrepareDiProjectHttpError, PrepareDiProjectHttpResponse, PrepareProjectReq, PrepareTaskReq, SetDiProjectExportVariablesHttpError, SetDiProjectExportVariablesHttpResponse, StartDiProjectDiTaskRuntimeHttpError, StartDiProjectDiTaskRuntimeHttpResponse, StopDiProjectDiTaskRuntimeHttpError, StopDiProjectDiTaskRuntimeHttpResponse, TaskSelectionList, UpdateDiExportProjectVariablesReq, UpdateDiExportProjectVariablesRsp, ValidateDiProjectDiTaskHttpError, ValidateDiProjectDiTaskHttpResponse, ValidateDiProjectHttpError, ValidateDiProjectHttpResponse, ValidateProjectReq, ValidateTaskReq, clearCache, createDiProject, diProjectsExport, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, setDiProjectExportVariables, startDiProjectDiTaskRuntime, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };

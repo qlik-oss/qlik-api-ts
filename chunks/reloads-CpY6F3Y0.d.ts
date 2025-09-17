@@ -77,7 +77,7 @@ type ReloadRequest = {
   appId: string;
   /** The boolean value used to present the reload is partial or not */
   partial?: boolean;
-  /** The variables to be used in the load script. */
+  /** The variables to be used in the load script. Maximum of 20 variables allowed with a maximum length of 256 characters for each name/value. */
   variables?: Record<string, string>;
   /** The weight of the reload for the same tenant. The higher the weight, the sooner the reload will be scheduled relative to other reloads for the same tenant. The personal app will be always set as 1. */
   weight?: Weight;
