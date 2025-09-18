@@ -21,7 +21,7 @@ type AutomationDetailResponseObject = {
   readonly id?: string;
   lastRun?: RunDetailResponseObject;
   readonly lastRunAt?: string;
-  readonly lastRunStatus?: "failed" | "finished" | "finished with warnings" | "must stop" | "not started" | "paused" | "running" | "starting" | "stopped";
+  readonly lastRunStatus?: "failed" | "finished" | "finished with warnings" | "must stop" | "not started" | "paused" | "running" | "starting" | "stopped" | "exceeded limit";
   name?: string;
   readonly ownerId?: string;
   readonly runMode?: "manual" | "scheduled" | "triggered" | "webhook";
@@ -58,7 +58,7 @@ type AutomationListObject = {
   readonly id?: string;
   lastRun?: RunDetailResponseObject;
   readonly lastRunAt?: string;
-  readonly lastRunStatus?: "failed" | "finished" | "finished with warnings" | "must stop" | "not started" | "paused" | "running" | "starting" | "stopped";
+  readonly lastRunStatus?: "failed" | "finished" | "finished with warnings" | "must stop" | "not started" | "paused" | "running" | "starting" | "stopped" | "exceeded limit";
   name?: string;
   readonly ownerId?: string;
   readonly runMode?: "manual" | "scheduled" | "triggered" | "webhook";
@@ -146,7 +146,7 @@ type RunDetailResponseObject = {
   readonly scheduledStartTime?: string;
   readonly spaceId?: string;
   readonly startTime?: string;
-  status?: "failed" | "finished" | "finished with warnings" | "must stop" | "not started" | "running" | "starting" | "stopped";
+  status?: "failed" | "finished" | "finished with warnings" | "must stop" | "not started" | "running" | "starting" | "stopped" | "exceeded limit" | "queued";
   readonly stopTime?: string;
   title?: string;
   readonly updatedAt?: string;
@@ -169,7 +169,7 @@ type RunListObject = {
   readonly scheduledStartTime?: string;
   readonly spaceId?: string;
   readonly startTime?: string;
-  status?: "failed" | "finished" | "finished with warnings" | "must stop" | "not started" | "running" | "starting" | "stopped";
+  status?: "failed" | "finished" | "finished with warnings" | "must stop" | "not started" | "running" | "starting" | "stopped" | "exceeded limit" | "queued";
   readonly stopTime?: string;
   title?: string;
   readonly updatedAt?: string;
@@ -224,7 +224,8 @@ declare function getAutomations(query: {
   limit?: number;
   /** When true, list all automations. Restricted to tenant admins and analytics admins. */
   listAll?: boolean;
-  /** The field to sort by, with +- prefix indicating sort order. (?query=-name => sort on the name field using descending order) */
+  /** The field to sort by, with +- prefix indicating sort order. (?sort=-name => sort on the name field using descending order)
+   * The `duration` option is deprecated and will be removed in a future release. */
   sort?: "id" | "name" | "runMode" | "state" | "createdAt" | "updatedAt" | "lastRunAt" | "lastRunStatus" | "duration" | "+id" | "+name" | "+runMode" | "+state" | "+createdAt" | "+updatedAt" | "+lastRunAt" | "+lastRunStatus" | "-id" | "-name" | "-runMode" | "-state" | "-createdAt" | "-updatedAt" | "-lastRunAt" | "-lastRunStatus" | "+duration" | "-duration";
 }, options?: ApiCallOptions): Promise<GetAutomationsHttpResponse>;
 type GetAutomationsHttpResponse = {

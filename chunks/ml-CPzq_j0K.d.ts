@@ -749,8 +749,8 @@ type ExperimentVersion = {
   /** ID of the top model (based on training scores) in this experiment
    * version */
   topModelId?: string;
-  /** Training duration in seconds. If provided, minimum is 900 (15m) and
-   * max is 21600 (6h). */
+  /** Optional training duration in seconds. If not provided, max value used.
+   * If provided, min 900 (15m) and max 21600 (6h). */
   trainingDuration?: TrainingDuration;
   /** Timestamp when this was updated */
   updatedAt: UpdatedAt;
@@ -821,8 +821,8 @@ type ExperimentVersionInput = {
       /** The target field in the dataset. Set in first experiment
        * version and can't be changed in subsequent versions. */
       target: string;
-      /** Training duration in seconds. If provided, minimum is 900 (15m) and
-       * max is 21600 (6h). */
+      /** Optional training duration in seconds. If not provided, max value used.
+       * If provided, min 900 (15m) and max 21600 (6h). */
       trainingDuration?: TrainingDuration;
     };
     type: "experiment-version";
@@ -848,6 +848,7 @@ type ExperimentVersionPostResponse = {
 };
 type Failure = {
   errors: APIError[];
+  traceId?: string;
 };
 /**
  * A feature (column) from your dataset
@@ -1444,8 +1445,8 @@ type SpaceId = string;
  */
 type TenantId = string;
 /**
- * Training duration in seconds. If provided, minimum is 900 (15m) and
- * max is 21600 (6h).
+ * Optional training duration in seconds. If not provided, max value used.
+ * If provided, min 900 (15m) and max 21600 (6h).
  */
 type TrainingDuration = number;
 type Transform = {

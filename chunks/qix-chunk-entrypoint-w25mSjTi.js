@@ -1,8 +1,8 @@
-import { createResolvablePromise as createResolvablePromise$1, isNode } from "./utils-CAGXTaqJ.js";
-import "./interceptors-DBoV6UkN.js";
+import { createResolvablePromise as createResolvablePromise$1, isNode } from "./utils-1j8VpsDa.js";
+import "./interceptors-D4JOaDrv.js";
 import "./global-types-BGMD2sDY.js";
 import "./auth-types-B0Z-Reol.js";
-import { appendQueryToUrl, exposeInternalApiOnWindow, generateRandomString, getRestCallAuthParams, getWebSocketAuthParams, handleAuthenticationError, isWindows, toValidWebsocketLocationUrl } from "./auth-functions-CZbgZARw.js";
+import { appendQueryToUrl, exposeInternalApiOnWindow, generateRandomString, getRestCallAuthParams, getWebSocketAuthParams, handleAuthenticationError, isWindows, toValidWebsocketLocationUrl } from "./auth-functions-By9Ryr3H.js";
 import { getHumanReadableSocketClosedErrorMessage } from "./websocket-errors-CnW4OQWd.js";
 import isPlainObject from "lodash/isPlainObject.js";
 import merge from "lodash/merge.js";
@@ -13430,8 +13430,7 @@ function isSpecialProperty$1(obj, key) {
 * @returns {Object} The parent object
 */
 function getParent$1(data, str) {
-	const seperator = "/";
-	const parts = str.substring(1).split(seperator).slice(0, -1);
+	const parts = str.substring(1).split("/").slice(0, -1);
 	let numPart;
 	parts.forEach((part, i) => {
 		if (i === parts.length) return;
@@ -13450,8 +13449,7 @@ function getParent$1(data, str) {
 */
 function emptyObject$1(obj) {
 	Object.keys(obj).forEach((key) => {
-		const config = Object.getOwnPropertyDescriptor(obj, key);
-		if (config.configurable && !isSpecialProperty$1(obj, key)) delete obj[key];
+		if (Object.getOwnPropertyDescriptor(obj, key).configurable && !isSpecialProperty$1(obj, key)) delete obj[key];
 	});
 }
 /**
@@ -13745,8 +13743,7 @@ Notification.prototype.unbind = function observeOnce(observer) {
 Notification.prototype.emit = function emit() {
 	const { receiver } = this;
 	const args = Array.prototype.slice.call(arguments);
-	const observers = this.observers.slice();
-	observers.forEach((observer) => {
+	this.observers.slice().forEach((observer) => {
 		observer.apply(receiver, args);
 	});
 };
@@ -14107,31 +14104,22 @@ const mixin$18 = {
 	types: ["CurrentSelection"],
 	extend: {
 		async clearField(fieldName, state) {
-			const self = this;
-			const field = await self.app.getField(fieldName, state);
-			return field.clear();
+			return (await this.app.getField(fieldName, state)).clear();
 		},
 		async lockField(fieldName) {
-			const self = this;
-			const field = await self.app.getField(fieldName, void 0);
-			return field.lock();
+			return (await this.app.getField(fieldName, void 0)).lock();
 		},
 		async unlockField(fieldName) {
-			const self = this;
-			const field = await self.app.getField(fieldName, void 0);
-			return field.unlock();
+			return (await this.app.getField(fieldName, void 0)).unlock();
 		},
 		clearAll() {
-			const self = this;
-			return self.app.clearAll();
+			return this.app.clearAll();
 		},
 		back() {
-			const self = this;
-			return self.app.back();
+			return this.app.back();
 		},
 		forward() {
-			const self = this;
-			return self.app.forward();
+			return this.app.forward();
 		}
 	}
 };
@@ -14198,12 +14186,10 @@ var undo_info_mixins_default = {
 						evenMarkers = layout$1.markers.length % 2 === 0;
 						if (!evenMarkers) return proceed(Promise.resolve());
 						queue.splice(0, 1);
-						return void 0;
 					}));
 					evenMarkers = layout.markers.length % 2 === 0;
 					if (!evenMarkers) isUndoLimitReached = true;
 					queue.splice(0, 1);
-					return void 0;
 				}));
 			}
 			return awaitQueue(proceed);
@@ -14218,11 +14204,9 @@ var undo_info_mixins_default = {
 							evenMarkers = layout.markers.length % 2 === 0;
 							if (!evenMarkers) return proceed(Promise.resolve());
 							queue.splice(0, 1);
-							return void 0;
 						}));
 					}
 					queue.splice(0, 1);
-					return void 0;
 				}));
 			}
 			return awaitQueue(proceed);
@@ -14230,7 +14214,7 @@ var undo_info_mixins_default = {
 		reset() {
 			const model = this;
 			return model.getLayout().then((layout) => {
-				if (!layout.qUndoInfo.qUndoCount && !layout.qUndoInfo.qRedoCount) return void 0;
+				if (!layout.qUndoInfo.qUndoCount && !layout.qUndoInfo.qRedoCount) return;
 				if (layout.markers.length) return model.getProperties().then((props) => {
 					props.markers.length = 0;
 					return model.setProperties(props).then(() => model.app.clearUndoBuffer());
@@ -14299,8 +14283,7 @@ const mixin$17 = {
 				const getLayout = obj.getLayout.bind(obj);
 				obj.getLayout = function() {
 					return getLayout().then((layout) => {
-						const items = layout[outKey].qItems;
-						items.forEach((item) => {
+						layout[outKey].qItems.forEach((item) => {
 							if (typeof item === "object") mapToLayout(item, false);
 						});
 						return layout[outKey].qItems;
@@ -14311,8 +14294,7 @@ const mixin$17 = {
 			return app._listCache[id];
 		},
 		getListData(listDef) {
-			const app = this;
-			return app.getListObject(listDef).then((list) => list.getLayout());
+			return this.getListObject(listDef).then((list) => list.getLayout());
 		}
 	},
 	init(args) {
@@ -14498,8 +14480,7 @@ const currentSelectionProps = {
 const mixin$5 = {
 	types: ["Doc"],
 	extend: { getCurrentSelectionObject() {
-		const self = this;
-		return self.getOrCreateSessionObject(currentSelectionProps);
+		return this.getOrCreateSessionObject(currentSelectionProps);
 	} }
 };
 
@@ -14819,8 +14800,7 @@ const undoInfoProps = {
 const mixin$15 = {
 	types: ["Doc"],
 	extend: { getUndoInfoObject() {
-		const self = this;
-		return self.getOrCreateSessionObject(undoInfoProps);
+		return this.getOrCreateSessionObject(undoInfoProps);
 	} }
 };
 
@@ -14876,14 +14856,11 @@ const mixins$3 = [
 //#region src/qix/session/mixins/genericobject/effective-properties.js
 function updateQAttribute(properties) {
 	const { qHyperCubeDef } = properties;
-	if (qHyperCubeDef && qHyperCubeDef.qMeasures && qHyperCubeDef.qDimensions) {
-		const columns = qHyperCubeDef.qDimensions.concat(qHyperCubeDef.qMeasures);
-		columns.forEach((column) => {
-			if (column.qAttributeExpressions) column.qAttributeExpressions.forEach((attributeExpression) => {
-				attributeExpression.qAttribute = true;
-			});
+	if (qHyperCubeDef && qHyperCubeDef.qMeasures && qHyperCubeDef.qDimensions) qHyperCubeDef.qDimensions.concat(qHyperCubeDef.qMeasures).forEach((column) => {
+		if (column.qAttributeExpressions) column.qAttributeExpressions.forEach((attributeExpression) => {
+			attributeExpression.qAttribute = true;
 		});
-	}
+	});
 }
 const mixin = {
 	types: ["GenericObject"],
@@ -14930,8 +14907,7 @@ const mixin$2 = {
 		unPublish(_unPublish) {
 			return this.getLayout().then((layout) => {
 				const meta = layout.qMeta;
-				const hasPermission = meta.published && !meta.approved;
-				if (hasPermission) return _unPublish();
+				if (meta.published && !meta.approved) return _unPublish();
 				return Promise.reject("Permission denied");
 			});
 		}
@@ -15032,8 +15008,7 @@ try {
 } catch {}
 function logRequest(handleOrObject, websocketRequest, request) {
 	if (logEnabled) {
-		const indent = startIndent(websocketRequest);
-		const preThing = `${indent} ===> ${websocketRequest.id} call `;
+		const preThing = `${startIndent(websocketRequest)} ===> ${websocketRequest.id} call `;
 		console.log(`${preThing}${toLogName(handleOrObject)}.${request.method}`, ...formatParams(request.params));
 	}
 }
@@ -15049,8 +15024,7 @@ function logResponse(handleOrObject, websocketRequest, sendResponse) {
 }
 function logJsonRpcChannelError(handleOrObject, websocketRequest, error) {
 	if (logEnabled) {
-		const indent = endIndent(websocketRequest);
-		const preThing = `${indent} <=== ${websocketRequest.id} throw`;
+		const preThing = `${endIndent(websocketRequest)} <=== ${websocketRequest.id} throw`;
 		console.log(preThing, JSON.stringify(error));
 	}
 }
@@ -15060,8 +15034,7 @@ function logEvent(message, ...optionalParams) {
 function startIndent(websocketRequest) {
 	ongoingRequests.add(websocketRequest.id);
 	requestDepths.set(websocketRequest.id, ongoingRequests.size);
-	const indent = baseIndent.repeat(startIntent + ongoingRequests.size);
-	return indent;
+	return baseIndent.repeat(startIntent + ongoingRequests.size);
 }
 function endIndent(websocketRequest) {
 	const indent = baseIndent.repeat(startIntent + (requestDepths.get(websocketRequest.id) || 0));
@@ -15154,7 +15127,7 @@ function createInterestMonitor() {
 			globalThis.window?.removeEventListener("mousemove", mouseListener);
 		}
 	}
-	const api = {
+	return {
 		startListeningForActivity,
 		stopListeningForActivity,
 		waitUntilSomeoneIsInterestedInThis,
@@ -15162,15 +15135,13 @@ function createInterestMonitor() {
 		onUserActivityDetected,
 		signalInterest
 	};
-	return api;
 }
 function createPromiseAndResolveFunc() {
 	let resolve = () => {};
-	const promise = new Promise((res) => {
-		resolve = res;
-	});
 	return {
-		promise,
+		promise: new Promise((res) => {
+			resolve = res;
+		}),
 		resolve
 	};
 }
@@ -15215,7 +15186,7 @@ function createPhoenixSessionState({ doc, global, executedAppActions }) {
 				if (handle === global.getHandle()) return global;
 				if (handle === doc.getHandle()) return doc;
 				if (handle) return objects[handle];
-				return void 0;
+				return;
 			}
 			return objects[ref];
 		},
@@ -15290,8 +15261,7 @@ function isSpecialProperty(obj, key) {
 * @returns {Object} The parent object
 */
 function getParent(data, str) {
-	const seperator = "/";
-	const parts = str.substring(1).split(seperator).slice(0, -1);
+	const parts = str.substring(1).split("/").slice(0, -1);
 	let numPart;
 	parts.forEach((part, i) => {
 		if (i === parts.length) return;
@@ -15311,8 +15281,7 @@ function getParent(data, str) {
 */
 function emptyObject(obj) {
 	Object.keys(obj).forEach((key) => {
-		const config = Object.getOwnPropertyDescriptor(obj, key);
-		if (config.configurable && !isSpecialProperty(obj, key)) delete obj[key];
+		if (Object.getOwnPropertyDescriptor(obj, key).configurable && !isSpecialProperty(obj, key)) delete obj[key];
 	});
 }
 /**
@@ -15578,12 +15547,11 @@ function extractResult(request, resultObject) {
 function createResolvablePromise() {
 	let resolve;
 	let reject;
-	const promise = new Promise((res, rej) => {
-		resolve = res;
-		reject = rej;
-	});
 	return [
-		promise,
+		new Promise((res, rej) => {
+			resolve = res;
+			reject = rej;
+		}),
 		resolve,
 		reject
 	];
@@ -15787,8 +15755,7 @@ function buildQixPathAndQuery({ appId, identity, hostConfig, useReloadEngine = f
 	const identityPart = identityToUse ? `/identity/${identityToUse}` : "";
 	const path = `/app/${appId}${identityPart}${ttlPart}`;
 	const locationUrl = toValidWebsocketLocationUrl(hostConfig);
-	const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
-	const query = { reloadUri };
+	const query = { reloadUri: encodeURIComponent(`${locationUrl}/sense/app/${appId}`) };
 	if (useReloadEngine) query["workloadType"] = "interactive-reload";
 	else if (workloadType) query["workloadType"] = workloadType;
 	return {
@@ -15849,12 +15816,11 @@ async function createJsonRpcChannel(props, listener) {
 	const sessionState = await connectionInfoPromise;
 	const reattached = sessionState === "SESSION_ATTACHED";
 	if (await isWindows(hostConfig)) {
-		const authInfo = await authenticationInfoPromise;
-		if (authInfo.mustAuthenticate) throw new Error("Windows authentication needed");
+		if ((await authenticationInfoPromise).mustAuthenticate) throw new Error("Windows authentication needed");
 	}
 	function send(request) {
 		if (closed) throw new WebsocketClosedError();
-		const promise = new Promise((resolve, reject) => {
+		return new Promise((resolve, reject) => {
 			pendingInvocations[request.id] = {
 				handle: request.handle,
 				resolve,
@@ -15862,7 +15828,6 @@ async function createJsonRpcChannel(props, listener) {
 			};
 			socket.send(JSON.stringify(request));
 		});
-		return promise;
 	}
 	return {
 		send,
@@ -15902,8 +15867,7 @@ var QixError = class extends Error {
 	}
 };
 function isCancelRequest(handleOrObject, method) {
-	const handle = typeof handleOrObject === "object" ? handleOrObject.getHandle() : handleOrObject;
-	return handle === 1 && method === "CancelRequest";
+	return (typeof handleOrObject === "object" ? handleOrObject.getHandle() : handleOrObject) === 1 && method === "CancelRequest";
 }
 /**
 * Creates a connection that can be used to invoke QIX objects on the backend. Takes care of protocol stuff like request ids, delta etc.
@@ -16555,8 +16519,7 @@ var PhoenixConnectionImpl = class {
 		});
 	}
 	async #openNewQixConnectionAndPrepareSessionState(lastState) {
-		let stateForNewConnection;
-		stateForNewConnection = void 0;
+		let stateForNewConnection = void 0;
 		logEvent("-------- Opening new Qix Connection ---------");
 		const newConnection = await createQixConnection(this.#openProps, {
 			onMessageSent: (message, handle) => {
@@ -16985,8 +16948,7 @@ const rememberCreatePropsMixin = {
 	types: ["Doc"],
 	override: {
 		async createSessionObject(original, properties) {
-			const object = await original(properties);
-			const phoenixObject = object;
+			const phoenixObject = await original(properties);
 			phoenixObject.__remote__.respawnInfo.isSessionObject = true;
 			phoenixObject.__remote__.respawnInfo.properties = properties;
 			return phoenixObject;
@@ -17119,8 +17081,7 @@ var RpcObjectFactoryImpl = class {
 			type,
 			genericType
 		});
-		const TypeSpecificPhoenixRpcClass = this.#getClass(type, genericType);
-		return new TypeSpecificPhoenixRpcClass(coreRpcObject);
+		return new (this.#getClass(type, genericType))(coreRpcObject);
 	}
 	#getClass(type, genericType) {
 		const key = `${type}:${genericType}`;

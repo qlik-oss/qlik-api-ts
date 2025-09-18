@@ -87,7 +87,7 @@ function cleanFalsyValues(obj) {
 					break;
 			}
 		}
-		if (Object.keys(cleaned).length === 0) return void 0;
+		if (Object.keys(cleaned).length === 0) return;
 		return cleaned;
 	}
 	return obj;
@@ -95,12 +95,11 @@ function cleanFalsyValues(obj) {
 function createResolvablePromise() {
 	let resolve;
 	let reject;
-	const promise = new Promise((res, rej) => {
-		resolve = res;
-		reject = rej;
-	});
 	return [
-		promise,
+		new Promise((res, rej) => {
+			resolve = res;
+			reject = rej;
+		}),
 		resolve,
 		reject
 	];

@@ -1,6 +1,6 @@
-import "./chunks/utils-CAGXTaqJ.js";
-import "./chunks/public-runtime-modules-BDwfbach.js";
-import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DuiAX21K.js";
+import "./chunks/utils-1j8VpsDa.js";
+import "./chunks/public-runtime-modules-BDZc6BaU.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-CAbtWWeJ.js";
 
 //#region src/public/rest/di-projects.ts
 /**
@@ -315,6 +315,24 @@ async function getDiProjectDiTaskRuntimeState(projectId, dataTaskId, options) {
 	});
 }
 /**
+* Returns dataset-level runtime state for a data task
+*
+* @param projectId ID of the project
+* @param dataTaskId ID of the data task
+* @throws GetDiProjectDiTaskRuntimeStateDatasetsHttpError
+*/
+async function getDiProjectDiTaskRuntimeStateDatasets(projectId, dataTaskId, options) {
+	return invokeFetch("di-projects", {
+		method: "get",
+		pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks/{dataTaskId}/runtime/state/datasets",
+		pathVariables: {
+			projectId,
+			dataTaskId
+		},
+		options
+	});
+}
+/**
 * Clears the cache for di-projects api requests.
 */
 function clearCache() {
@@ -340,9 +358,10 @@ const diProjectsExport = {
 	startDiProjectDiTaskRuntime,
 	stopDiProjectDiTaskRuntime,
 	getDiProjectDiTaskRuntimeState,
+	getDiProjectDiTaskRuntimeStateDatasets,
 	clearCache
 };
 var di_projects_default = diProjectsExport;
 
 //#endregion
-export { clearCache, createDiProject, di_projects_default as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeState, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, setDiProjectExportVariables, startDiProjectDiTaskRuntime, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };
+export { clearCache, createDiProject, di_projects_default as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, setDiProjectExportVariables, startDiProjectDiTaskRuntime, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };

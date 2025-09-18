@@ -1,9 +1,9 @@
-import "./chunks/utils-CAGXTaqJ.js";
-import "./chunks/public-runtime-modules-BDwfbach.js";
-import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DuiAX21K.js";
-import { auth_default } from "./chunks/auth-DM5ilf4I.js";
-import { interceptors_default as interceptors_default$1 } from "./chunks/interceptors-DBoV6UkN.js";
-import { qix_default } from "./chunks/qix-Cb4-XF7V.js";
+import "./chunks/utils-1j8VpsDa.js";
+import "./chunks/public-runtime-modules-BDZc6BaU.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-CAbtWWeJ.js";
+import { auth_default } from "./chunks/auth-BGyrh6Ls.js";
+import { interceptors_default as interceptors_default$1 } from "./chunks/interceptors-D4JOaDrv.js";
+import { qix_default } from "./chunks/qix-CT40hNte.js";
 
 //#region src/runtime-api-generator/runtime-api-generator-common.ts
 const methodAbbreviations = {
@@ -186,8 +186,7 @@ function apiDefToApiPublic(namespace, def) {
 				});
 			});
 		};
-		const proxy = createLazyApiProxy(lazyApi, initFunc);
-		return proxy;
+		return createLazyApiProxy(lazyApi, initFunc);
 	};
 }
 
@@ -603,7 +602,10 @@ const diProjectsMiniModule = apiDefToApiPublic("di-projects", { api: { v1: { "di
 						start: ["startDiProjectDiTaskRuntime:P:"],
 						stop: ["stopDiProjectDiTaskRuntime:P:"]
 					},
-					state: ["getDiProjectDiTaskRuntimeState:G:"]
+					state: {
+						"": ["getDiProjectDiTaskRuntimeState:G:"],
+						datasets: ["getDiProjectDiTaskRuntimeStateDatasets:G:"]
+					}
 				}
 			}
 		}
