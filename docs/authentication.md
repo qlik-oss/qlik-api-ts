@@ -357,4 +357,10 @@ const api = createQlikApi({ reference: "tenant 1" });
 // api is now bound to the registered host config "tenant 1"
 ```
 
+> ℹ️ **Note:**
+>
+> registerHostConfig can be used as the only way to configure the host config when
+> embedding/integrating with a Qlik Platform. If that's the case, then the qlik platform
+> will be loaded from the host configured in the **first** hostConfig that gets registered
+
 ◁ [Back to overview](../README.md)
