@@ -2,7 +2,7 @@ import { createResolvablePromise as createResolvablePromise$1, isNode } from "./
 import "./interceptors-D4JOaDrv.js";
 import "./global-types-BGMD2sDY.js";
 import "./auth-types-B0Z-Reol.js";
-import { appendQueryToUrl, exposeInternalApiOnWindow, generateRandomString, getRestCallAuthParams, getWebSocketAuthParams, handleAuthenticationError, isWindows, toValidWebsocketLocationUrl } from "./auth-functions-B3j26XdM.js";
+import { appendQueryToUrl, exposeInternalApiOnWindow, generateRandomString, getRestCallAuthParams, getWebSocketAuthParams, handleAuthenticationError, isWindows, toValidWebsocketLocationUrl } from "./auth-functions-KuUL5VnO.js";
 import { getHumanReadableSocketClosedErrorMessage } from "./websocket-errors-CnW4OQWd.js";
 import isPlainObject from "lodash/isPlainObject.js";
 import merge from "lodash/merge.js";
