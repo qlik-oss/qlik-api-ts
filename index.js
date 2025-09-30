@@ -1,9 +1,9 @@
 import "./chunks/utils-1j8VpsDa.js";
-import "./chunks/public-runtime-modules-n0gcxl0_.js";
-import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DLQ5LN79.js";
-import { auth_default } from "./chunks/auth-DH6Zx6GE.js";
+import "./chunks/public-runtime-modules-BWdSJoOb.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DUEcQxLv.js";
+import { auth_default } from "./chunks/auth-PA8-Loxu.js";
 import { interceptors_default as interceptors_default$1 } from "./chunks/interceptors-D4JOaDrv.js";
-import { qix_default } from "./chunks/qix-B_hHiSSK.js";
+import { qix_default } from "./chunks/qix-CkFE9Ji0.js";
 
 //#region src/runtime-api-generator/runtime-api-generator-common.ts
 const methodAbbreviations = {
@@ -173,7 +173,7 @@ const parsedMiniApis = {};
 * See the traverse function, the generated code and the generator
 * (found in tools/api-generator/genspecs) for the full picture.
 */
-function apiDefToApiPublic(namespace, def) {
+function apiDefToApiPublic(namespace, def, subApis) {
 	parsedMiniApis[namespace] = parsedMiniApis[namespace] || parseMiniApi(namespace, def);
 	const parsedMiniApi = parsedMiniApis[namespace];
 	return (hostConfig, interceptors$1) => {
@@ -184,6 +184,9 @@ function apiDefToApiPublic(namespace, def) {
 				operation.oldOperationNames.forEach((oldOperationName) => {
 					lazyApi[oldOperationName] = lazyApi[operationName];
 				});
+			});
+			if (subApis) Object.entries(subApis).forEach(([apiName, apiBuilder]) => {
+				lazyApi[apiName] = apiBuilder(hostConfig, interceptors$1);
 			});
 		};
 		return createLazyApiProxy(lazyApi, initFunc);
@@ -196,7 +199,7 @@ var interceptors_default = interceptors_default$1;
 
 //#endregion
 //#region src/public/index.ts
-const apiKeysMiniModule = apiDefToApiPublic("api-keys", { api: { v1: { "api-keys": {
+const createApiKeysRuntimeAPI = apiDefToApiPublic("api-keys", { api: { v1: { "api-keys": {
 	"": ["getApiKeys:GQ:", "createApiKey:PBJ:"],
 	configs: { "{tenantId}": ["getApiKeysConfig:G:", "patchApiKeysConfig:ABJ:"] },
 	"{id}": [
@@ -205,7 +208,7 @@ const apiKeysMiniModule = apiDefToApiPublic("api-keys", { api: { v1: { "api-keys
 		"patchApiKey:ABJ:"
 	]
 } } } });
-const appsMiniModule = apiDefToApiPublic("apps", { api: { v1: { apps: {
+const createAppsRuntimeAPI = apiDefToApiPublic("apps", { api: { v1: { apps: {
 	"": ["createApp:PBJ:"],
 	evaluations: {
 		"{baseid}": { actions: { compare: { "{comparisonid}": {
@@ -276,7 +279,7 @@ const appsMiniModule = apiDefToApiPublic("apps", { api: { v1: { apps: {
 	},
 	"{guid}": { evaluations: ["getAppEvaluations:GQ:", "queueAppEvaluation:P:"] }
 } } } });
-const assistantsMiniModule = apiDefToApiPublic("assistants", { api: { v1: { assistants: {
+const createAssistantsRuntimeAPI = apiDefToApiPublic("assistants", { api: { v1: { assistants: {
 	"": ["getAssistants:GQ:", "createAssistant:PBJ:"],
 	"{assistantId}": {
 		feedback: ["getAssistantFeedback:G:"],
@@ -324,7 +327,7 @@ const assistantsMiniModule = apiDefToApiPublic("assistants", { api: { v1: { assi
 		"patchAssistant:ABJ:"
 	]
 } } } });
-const auditsMiniModule = apiDefToApiPublic("audits", { api: { v1: { audits: {
+const createAuditsRuntimeAPI = apiDefToApiPublic("audits", { api: { v1: { audits: {
 	"": ["getAudits:GQ:"],
 	actions: { "fetch-consumption-app": ["fetchConsumptionAppAudits:P:"] },
 	archive: ["getArchivedAudits:GQ:"],
@@ -333,7 +336,7 @@ const auditsMiniModule = apiDefToApiPublic("audits", { api: { v1: { audits: {
 	types: ["getAuditTypes:G:"],
 	"{id}": ["getAudit:G:"]
 } } } });
-const automationConnectionsMiniModule = apiDefToApiPublic("automation-connections", { api: { v1: { "automation-connections": {
+const createAutomationConnectionsRuntimeAPI = apiDefToApiPublic("automation-connections", { api: { v1: { "automation-connections": {
 	"": ["getAutomationConnections:GQ:", "createAutomationConnection:PBJ:"],
 	"{id}": {
 		"": [
@@ -348,7 +351,7 @@ const automationConnectionsMiniModule = apiDefToApiPublic("automation-connection
 		}
 	}
 } } } });
-const automationsMiniModule = apiDefToApiPublic("automations", { api: { v1: { automations: {
+const createAutomationsRuntimeAPI = apiDefToApiPublic("automations", { api: { v1: { automations: {
 	"": ["getAutomations:GQ:", "createAutomation:PBJ:"],
 	usage: ["getAutomationsUsageMetrics:GQ:"],
 	"{id}": {
@@ -379,8 +382,8 @@ const automationsMiniModule = apiDefToApiPublic("automations", { api: { v1: { au
 		}
 	}
 } } } });
-const automlDeploymentsMiniModule = apiDefToApiPublic("automl-deployments", { api: { v1: { "automl-deployments": { "{deploymentId}": { "realtime-predictions": ["createAutomlDeploymentRealtimePrediction:PQBJ:"] } } } } });
-const automlPredictionsMiniModule = apiDefToApiPublic("automl-predictions", { api: { v1: { "automl-predictions": { "{predictionId}": {
+const createAutomlDeploymentsRuntimeAPI = apiDefToApiPublic("automl-deployments", { api: { v1: { "automl-deployments": { "{deploymentId}": { "realtime-predictions": ["createAutomlDeploymentRealtimePrediction:PQBJ:"] } } } } });
+const createAutomlPredictionsRuntimeAPI = apiDefToApiPublic("automl-predictions", { api: { v1: { "automl-predictions": { "{predictionId}": {
 	"coordinate-shap": ["getAutomlPredictionCoordinateShap:GQ:"],
 	jobs: ["createAutomlPredictionJob:P:"],
 	"not-predicted-reasons": ["getAutomlPredictionNotPredictedReasons:GQ:"],
@@ -388,7 +391,7 @@ const automlPredictionsMiniModule = apiDefToApiPublic("automl-predictions", { ap
 	shap: ["getAutomlPredictionShap:GQ:"],
 	source: ["getAutomlPredictionSource:GQ:"]
 } } } } });
-const brandsMiniModule = apiDefToApiPublic("brands", { api: { v1: { brands: {
+const createBrandsRuntimeAPI = apiDefToApiPublic("brands", { api: { v1: { brands: {
 	"": ["getBrands:GQ:", "createBrand:PBM:"],
 	active: ["getActiveBrand:G:"],
 	"{brand-id}": {
@@ -409,7 +412,7 @@ const brandsMiniModule = apiDefToApiPublic("brands", { api: { v1: { brands: {
 		] }
 	}
 } } } });
-const collectionsMiniModule = apiDefToApiPublic("collections", { api: { v1: { collections: {
+const createCollectionsRuntimeAPI = apiDefToApiPublic("collections", { api: { v1: { collections: {
 	"": ["getCollections:GQ:", "createCollection:PBJ:"],
 	favorites: ["getFavoritesCollection:G:"],
 	"{collectionId}": {
@@ -425,7 +428,7 @@ const collectionsMiniModule = apiDefToApiPublic("collections", { api: { v1: { co
 		}
 	}
 } } } });
-const conditionsMiniModule = apiDefToApiPublic("conditions", { api: { v1: { conditions: {
+const createConditionsRuntimeAPI = apiDefToApiPublic("conditions", { api: { v1: { conditions: {
 	"": ["createCondition:PBJ:"],
 	previews: {
 		"": ["createConditionPreview:PBJ:"],
@@ -444,8 +447,8 @@ const conditionsMiniModule = apiDefToApiPublic("conditions", { api: { v1: { cond
 		}
 	}
 } } } });
-const consumptionMiniModule = apiDefToApiPublic("consumption", { api: { v1: { consumption: { executions: ["getConsumptionExecutions:GQ:"] } } } });
-const cspOriginsMiniModule = apiDefToApiPublic("csp-origins", { api: { v1: { "csp-origins": {
+const createConsumptionRuntimeAPI = apiDefToApiPublic("consumption", { api: { v1: { consumption: { executions: ["getConsumptionExecutions:GQ:"] } } } });
+const createCspOriginsRuntimeAPI = apiDefToApiPublic("csp-origins", { api: { v1: { "csp-origins": {
 	"": ["getCSPEntries:GQ:", "createCSPEntry:PBJ:"],
 	actions: { "generate-header": ["getCSPHeader:G:"] },
 	"{id}": [
@@ -454,8 +457,8 @@ const cspOriginsMiniModule = apiDefToApiPublic("csp-origins", { api: { v1: { "cs
 		"updateCSPEntry:UBJ:"
 	]
 } } } });
-const csrfTokenMiniModule = apiDefToApiPublic("csrf-token", { api: { v1: { "csrf-token": ["getCsrfToken:G:"] } } });
-const dataAlertsMiniModule = apiDefToApiPublic("data-alerts", { api: { v1: { "data-alerts": {
+const createCsrfTokenRuntimeAPI = apiDefToApiPublic("csrf-token", { api: { v1: { "csrf-token": ["getCsrfToken:G:"] } } });
+const createDataAlertsRuntimeAPI = apiDefToApiPublic("data-alerts", { api: { v1: { "data-alerts": {
 	"": ["getDataAlerts:GQ:", "createDataAlert:PBJ:"],
 	actions: {
 		trigger: ["triggerDataAlerts:PBJ:"],
@@ -478,7 +481,7 @@ const dataAlertsMiniModule = apiDefToApiPublic("data-alerts", { api: { v1: { "da
 		"{executionId}": { evaluations: ["getDataAlertExecutionEvaluations:G:"] }
 	} }
 } } } });
-const dataAssetsMiniModule = apiDefToApiPublic("data-assets", { api: { v1: { "data-assets": {
+const createDataAssetsRuntimeAPI = apiDefToApiPublic("data-assets", { api: { v1: { "data-assets": {
 	"": ["deleteDataAssets:DBJ:", "createDataAsset:PBJ:"],
 	"{data-asset-id}": [
 		"getDataAsset:GQ:",
@@ -486,7 +489,7 @@ const dataAssetsMiniModule = apiDefToApiPublic("data-assets", { api: { v1: { "da
 		"updateDataAsset:UBJ:"
 	]
 } } } });
-const dataConnectionsMiniModule = apiDefToApiPublic("data-connections", { api: { v1: { "data-connections": {
+const createDataConnectionsRuntimeAPI = apiDefToApiPublic("data-connections", { api: { v1: { "data-connections": {
 	"": ["getDataConnections:GQ:", "createDataConnection:PBJ:"],
 	actions: {
 		delete: ["deleteDataConnections:PBJ:"],
@@ -500,7 +503,7 @@ const dataConnectionsMiniModule = apiDefToApiPublic("data-connections", { api: {
 		"updateDataConnection:UQBJ:"
 	]
 } } } });
-const dataCredentialsMiniModule = apiDefToApiPublic("data-credentials", { api: { v1: { "data-credentials": {
+const createDataCredentialsRuntimeAPI = apiDefToApiPublic("data-credentials", { api: { v1: { "data-credentials": {
 	actions: { "filter-orphan": ["filterOrphanedDataCredentials:PBJ:"] },
 	"{qID}": [
 		"deleteDataCredential:DQ:",
@@ -509,7 +512,7 @@ const dataCredentialsMiniModule = apiDefToApiPublic("data-credentials", { api: {
 		"updateDataCredential:UQBJ:"
 	]
 } } } });
-const dataFilesMiniModule = apiDefToApiPublic("data-files", { api: { v1: { "data-files": {
+const createDataFilesRuntimeAPI = apiDefToApiPublic("data-files", { api: { v1: { "data-files": {
 	"": ["getDataFiles:GQ:", "uploadDataFile:PBM:"],
 	actions: {
 		"change-space": ["moveDataFiles:PBJ:"],
@@ -532,14 +535,14 @@ const dataFilesMiniModule = apiDefToApiPublic("data-files", { api: { v1: { "data
 		}
 	}
 } } } });
-const dataQualitiesMiniModule = apiDefToApiPublic("data-qualities", { api: { v1: { "data-qualities": {
+const createDataQualitiesRuntimeAPI = apiDefToApiPublic("data-qualities", { api: { v1: { "data-qualities": {
 	computations: {
 		"": ["triggerDataQualitiesComputation:PBJ:"],
 		"{computationId}": ["getDataQualitiesComputation:G:"]
 	},
 	"global-results": ["getDataQualitiesGlobalResults:GQ:"]
 } } } });
-const dataSetsMiniModule = apiDefToApiPublic("data-sets", { api: { v1: { "data-sets": {
+const createDataSetsRuntimeAPI = apiDefToApiPublic("data-sets", { api: { v1: { "data-sets": {
 	"": ["deleteDataSets:DBJ:", "createDataSet:PBJ:"],
 	"{data-set-id}": {
 		"": [
@@ -550,14 +553,14 @@ const dataSetsMiniModule = apiDefToApiPublic("data-sets", { api: { v1: { "data-s
 		profiles: ["getDataSetProfiles:GQ:"]
 	}
 } } } });
-const dataSourcesMiniModule = apiDefToApiPublic("data-sources", { api: { v1: { "data-sources": {
+const createDataSourcesRuntimeAPI = apiDefToApiPublic("data-sources", { api: { v1: { "data-sources": {
 	"": ["getDataSources:GQ:"],
 	"{dataSourceId}": {
 		"api-specs": ["getDataSourceApiSpecs:G:"],
 		gateways: ["getDataSourceGateways:GQ:"]
 	}
 } } } });
-const dataStoresMiniModule = apiDefToApiPublic("data-stores", { api: { v1: { "data-stores": {
+const createDataStoresRuntimeAPI = apiDefToApiPublic("data-stores", { api: { v1: { "data-stores": {
 	"": [
 		"deleteDataStores:DBJ:",
 		"getDataStores:GQ:",
@@ -573,12 +576,12 @@ const dataStoresMiniModule = apiDefToApiPublic("data-stores", { api: { v1: { "da
 		"updateDataStore:UBJ:"
 	]
 } } } });
-const dcaasMiniModule = apiDefToApiPublic("dcaas", { api: { v1: { dcaas: { actions: { "data-connections": {
+const createDcaasRuntimeAPI = apiDefToApiPublic("dcaas", { api: { v1: { dcaas: { actions: { "data-connections": {
 	"": ["dataConnectionsDcaas:PBJ:"],
 	"api-specs": ["dataConnectionsDcaasApiSpecs:GQ:"],
 	"{connectionId}": ["dataConnectionsDcaa:G:"]
 } } } } } });
-const diProjectsMiniModule = apiDefToApiPublic("di-projects", { api: { v1: { "di-projects": {
+const createDiProjectsRuntimeAPI = apiDefToApiPublic("di-projects", { api: { v1: { "di-projects": {
 	"": ["getDiProjects:GQ:", "createDiProject:PBJ:"],
 	actions: { "{actionId}": ["getDiProject:GQ:"] },
 	"{projectId}": {
@@ -611,7 +614,7 @@ const diProjectsMiniModule = apiDefToApiPublic("di-projects", { api: { v1: { "di
 		}
 	}
 } } } });
-const directAccessAgentsMiniModule = apiDefToApiPublic("direct-access-agents", { api: { v1: { "direct-access-agents": { "{agentId}": {
+const createDirectAccessAgentsRuntimeAPI = apiDefToApiPublic("direct-access-agents", { api: { v1: { "direct-access-agents": { "{agentId}": {
 	actions: { "{agentAction}": ["restartDirectAccessAgent:P:"] },
 	configurations: ["getDirectAccessAgentConfiguration:GQ:", "patchDirectAccessAgentConfiguration:ABJ:"],
 	connectors: { "{connectorType}": { files: {
@@ -625,7 +628,7 @@ const directAccessAgentsMiniModule = apiDefToApiPublic("direct-access-agents", {
 		]
 	} } }
 } } } } });
-const encryptionMiniModule = apiDefToApiPublic("encryption", { api: { v1: { encryption: { keyproviders: {
+const createEncryptionRuntimeAPI = apiDefToApiPublic("encryption", { api: { v1: { encryption: { keyproviders: {
 	"": ["getEncryptionKeyproviders:G:", "createEncryptionKeyprovider:PBJ:"],
 	actions: {
 		list: ["listEncryptionKeyproviders:G:"],
@@ -644,7 +647,7 @@ const encryptionMiniModule = apiDefToApiPublic("encryption", { api: { v1: { encr
 		}
 	}
 } } } } });
-const extensionsMiniModule = apiDefToApiPublic("extensions", { api: { v1: { extensions: {
+const createExtensionsRuntimeAPI = apiDefToApiPublic("extensions", { api: { v1: { extensions: {
 	"": ["getExtensions:G:", "uploadExtension:PBM:"],
 	"{id}": {
 		"": [
@@ -658,7 +661,7 @@ const extensionsMiniModule = apiDefToApiPublic("extensions", { api: { v1: { exte
 		}
 	}
 } } } });
-const glossariesMiniModule = apiDefToApiPublic("glossaries", { api: { v1: { glossaries: {
+const createGlossariesRuntimeAPI = apiDefToApiPublic("glossaries", { api: { v1: { glossaries: {
 	"": ["getGlossaries:GQ:", "createGlossary:PBJ:"],
 	actions: { import: ["importGlossary:PQBJ:"] },
 	"{id}": {
@@ -694,7 +697,7 @@ const glossariesMiniModule = apiDefToApiPublic("glossaries", { api: { v1: { glos
 		}
 	}
 } } } });
-const groupsMiniModule = apiDefToApiPublic("groups", { api: { v1: { groups: {
+const createGroupsRuntimeAPI = apiDefToApiPublic("groups", { api: { v1: { groups: {
 	"": ["getGroups:GQ:", "createGroup:PBJ:"],
 	actions: { filter: ["filterGroups:PQBJ:"] },
 	settings: ["getGroupsSettings:G:", "patchGroupsSettings:ABJ:"],
@@ -704,7 +707,7 @@ const groupsMiniModule = apiDefToApiPublic("groups", { api: { v1: { groups: {
 		"patchGroup:ABJ:"
 	]
 } } } });
-const identityProvidersMiniModule = apiDefToApiPublic("identity-providers", { api: { v1: { "identity-providers": {
+const createIdentityProvidersRuntimeAPI = apiDefToApiPublic("identity-providers", { api: { v1: { "identity-providers": {
 	"": ["getIdps:GQ:", "createIdp:PBJ:"],
 	".well-known": { "metadata.json": ["getIdpWellKnownMetaData:G:"] },
 	me: { meta: ["getMyIdpMeta:G:"] },
@@ -715,7 +718,7 @@ const identityProvidersMiniModule = apiDefToApiPublic("identity-providers", { ap
 		"patchIdp:ABJ:"
 	]
 } } } });
-const itemsMiniModule = apiDefToApiPublic("items", { api: { v1: { items: {
+const createItemsRuntimeAPI = apiDefToApiPublic("items", { api: { v1: { items: {
 	"": ["getItems:GQ:"],
 	settings: ["getItemsSettings:G:", "patchItemsSettings:ABJ:"],
 	"{itemId}": {
@@ -728,7 +731,7 @@ const itemsMiniModule = apiDefToApiPublic("items", { api: { v1: { items: {
 		publisheditems: ["getPublishedItems:GQ:"]
 	}
 } } } });
-const knowledgebasesMiniModule = apiDefToApiPublic("knowledgebases", { api: { v1: { knowledgebases: {
+const createKnowledgebasesRuntimeAPI = apiDefToApiPublic("knowledgebases", { api: { v1: { knowledgebases: {
 	"": ["getKnowledgebases:GQ:", "createKnowledgebase:PBJ:"],
 	"{id}": {
 		"": [
@@ -759,7 +762,7 @@ const knowledgebasesMiniModule = apiDefToApiPublic("knowledgebases", { api: { v1
 		histories: ["getKnowledgebaseHistories:GQ:"]
 	}
 } } } });
-const licensesMiniModule = apiDefToApiPublic("licenses", { api: { v1: { licenses: {
+const createLicensesRuntimeAPI = apiDefToApiPublic("licenses", { api: { v1: { licenses: {
 	assignments: {
 		"": ["getLicenseAssignments:GQ:"],
 		actions: {
@@ -773,7 +776,7 @@ const licensesMiniModule = apiDefToApiPublic("licenses", { api: { v1: { licenses
 	settings: ["getLicenseSettings:G:", "updateLicenseSettings:UBJ:"],
 	status: ["getLicenseStatus:G:"]
 } } } });
-const lineageGraphsMiniModule = apiDefToApiPublic("lineage-graphs", { api: { v1: { "lineage-graphs": {
+const createLineageGraphsRuntimeAPI = apiDefToApiPublic("lineage-graphs", { api: { v1: { "lineage-graphs": {
 	impact: { "{id}": {
 		actions: {
 			expand: ["expandLineageGraphImpact:GQ:"],
@@ -791,7 +794,7 @@ const lineageGraphsMiniModule = apiDefToApiPublic("lineage-graphs", { api: { v1:
 		overview: ["createLineageGraphNodeOverview:PQBJ:"]
 	} }
 } } } });
-const mlMiniModule = apiDefToApiPublic("ml", { api: { v1: { ml: {
+const createMlRuntimeAPI = apiDefToApiPublic("ml", { api: { v1: { ml: {
 	deployments: {
 		"": ["getMlDeployments:GQ:", "createMlDeployment:PBJ:"],
 		"{deploymentId}": {
@@ -866,9 +869,9 @@ const mlMiniModule = apiDefToApiPublic("ml", { api: { v1: { ml: {
 		"{dataSetId}": ["getMlProfileInsightWithQuery:GQ:", "getMlProfileInsight:G:"]
 	}
 } } } });
-const notesMiniModule = apiDefToApiPublic("notes", { api: { v1: { notes: { settings: ["getNotesSettings:G:", "setNotesSettings:UBJ:"] } } } });
-const notificationsMiniModule = apiDefToApiPublic("notifications", { api: { v1: { notifications: ["getNotifications:GQ:"] } } });
-const oauthClientsMiniModule = apiDefToApiPublic("oauth-clients", { api: { v1: { "oauth-clients": {
+const createNotesRuntimeAPI = apiDefToApiPublic("notes", { api: { v1: { notes: { settings: ["getNotesSettings:G:", "setNotesSettings:UBJ:"] } } } });
+const createNotificationsRuntimeAPI = apiDefToApiPublic("notifications", { api: { v1: { notifications: ["getNotifications:GQ:"] } } });
+const createOauthClientsRuntimeAPI = apiDefToApiPublic("oauth-clients", { api: { v1: { "oauth-clients": {
 	"": ["getOAuthClients:GQ:", "createOAuthClient:PBJ:"],
 	"{id}": {
 		"": [
@@ -888,19 +891,19 @@ const oauthClientsMiniModule = apiDefToApiPublic("oauth-clients", { api: { v1: {
 		] }
 	}
 } } } });
-const oauthTokensMiniModule = apiDefToApiPublic("oauth-tokens", { api: { v1: { "oauth-tokens": {
+const createOauthTokensRuntimeAPI = apiDefToApiPublic("oauth-tokens", { api: { v1: { "oauth-tokens": {
 	"": ["getOauthTokens:GQ:"],
 	"{tokenId}": ["deleteOauthToken:D:"]
 } } } });
-const questionsMiniModule = apiDefToApiPublic("questions", { api: { v1: { questions: { actions: {
+const createQuestionsRuntimeAPI = apiDefToApiPublic("questions", { api: { v1: { questions: { actions: {
 	ask: ["askQuestions:PBJ:"],
 	filter: ["filterQuestions:PQBJ:"]
 } } } } });
-const quotasMiniModule = apiDefToApiPublic("quotas", { api: { v1: { quotas: {
+const createQuotasRuntimeAPI = apiDefToApiPublic("quotas", { api: { v1: { quotas: {
 	"": ["getQuotas:GQ:"],
 	"{id}": ["getQuota:GQ:"]
 } } } });
-const reloadTasksMiniModule = apiDefToApiPublic("reload-tasks", { api: { v1: { "reload-tasks": {
+const createReloadTasksRuntimeAPI = apiDefToApiPublic("reload-tasks", { api: { v1: { "reload-tasks": {
 	"": ["getReloadTasks:GQ:", "createReloadTask:PBJ:"],
 	"{taskId}": [
 		"deleteReloadTask:D:",
@@ -908,14 +911,14 @@ const reloadTasksMiniModule = apiDefToApiPublic("reload-tasks", { api: { v1: { "
 		"updateReloadTask:UBJ:"
 	]
 } } } });
-const reloadsMiniModule = apiDefToApiPublic("reloads", { api: { v1: { reloads: {
+const createReloadsRuntimeAPI = apiDefToApiPublic("reloads", { api: { v1: { reloads: {
 	"": ["getReloads:GQ:", "queueReload:PBJ:"],
 	"{reloadId}": {
 		"": ["getReload:G:"],
 		actions: { cancel: ["cancelReload:P:"] }
 	}
 } } } });
-const reportTemplatesMiniModule = apiDefToApiPublic("report-templates", { api: { v1: { "report-templates": {
+const createReportTemplatesRuntimeAPI = apiDefToApiPublic("report-templates", { api: { v1: { "report-templates": {
 	"": ["getReportTemplates:GQ:", "createReportTemplate:PBJ:"],
 	"{id}": {
 		"": [
@@ -927,14 +930,14 @@ const reportTemplatesMiniModule = apiDefToApiPublic("report-templates", { api: {
 		actions: { download: ["downloadReportTemplate:P:"] }
 	}
 } } } });
-const reportsMiniModule = apiDefToApiPublic("reports", { api: { v1: { reports: {
+const createReportsRuntimeAPI = apiDefToApiPublic("reports", { api: { v1: { reports: {
 	"": ["createReport:PBJ:"],
 	"{id}": {
 		outputs: ["getReportOutputs:GQ:"],
 		status: ["getReportStatus:G:"]
 	}
 } } } });
-const rolesMiniModule = apiDefToApiPublic("roles", { api: { v1: { roles: {
+const createRolesRuntimeAPI = apiDefToApiPublic("roles", { api: { v1: { roles: {
 	"": ["getRoles:GQ:", "createRole:PBJ:"],
 	"{id}": [
 		"deleteRole:D:",
@@ -942,7 +945,7 @@ const rolesMiniModule = apiDefToApiPublic("roles", { api: { v1: { roles: {
 		"patchRole:ABJ:"
 	]
 } } } });
-const sharingTasksMiniModule = apiDefToApiPublic("sharing-tasks", { api: { v1: { "sharing-tasks": {
+const createSharingTasksRuntimeAPI = apiDefToApiPublic("sharing-tasks", { api: { v1: { "sharing-tasks": {
 	"": ["getSharingTasks:GQ:", "createSharingTask:PBJ:"],
 	actions: { execute: ["executeSharingTasks:PBJ:"] },
 	settings: [
@@ -966,7 +969,7 @@ const sharingTasksMiniModule = apiDefToApiPublic("sharing-tasks", { api: { v1: {
 		}
 	}
 } } } });
-const spacesMiniModule = apiDefToApiPublic("spaces", { api: { v1: { spaces: {
+const createSpacesRuntimeAPI = apiDefToApiPublic("spaces", { api: { v1: { spaces: {
 	"": ["getSpaces:GQ:", "createSpace:PBJ:"],
 	types: ["getSpaceTypes:G:"],
 	"{spaceId}": {
@@ -994,7 +997,7 @@ const spacesMiniModule = apiDefToApiPublic("spaces", { api: { v1: { spaces: {
 		}
 	}
 } } } });
-const tasksMiniModule = apiDefToApiPublic("tasks", { api: { v1: { tasks: {
+const createTasksRuntimeAPI = apiDefToApiPublic("tasks", { api: { v1: { tasks: {
 	"": ["getTasks:GQ:", "createTask:PQBJ:"],
 	resources: { "{id}": { runs: ["getTasksResourceRuns:GQ:"] } },
 	"{id}": {
@@ -1011,14 +1014,14 @@ const tasksMiniModule = apiDefToApiPublic("tasks", { api: { v1: { tasks: {
 		}
 	}
 } } } });
-const tempContentsMiniModule = apiDefToApiPublic("temp-contents", { api: { v1: { "temp-contents": {
+const createTempContentsRuntimeAPI = apiDefToApiPublic("temp-contents", { api: { v1: { "temp-contents": {
 	"": ["uploadTempFile:PQBO:"],
 	"{id}": {
 		"": ["downloadTempFile:GQ:"],
 		details: ["getTempFileDetails:G:"]
 	}
 } } } });
-const tenantsMiniModule = apiDefToApiPublic("tenants", { api: { v1: { tenants: {
+const createTenantsRuntimeAPI = apiDefToApiPublic("tenants", { api: { v1: { tenants: {
 	"": ["createTenant:PBJ:"],
 	me: ["getMyTenant:G:"],
 	"{tenantId}": {
@@ -1029,7 +1032,7 @@ const tenantsMiniModule = apiDefToApiPublic("tenants", { api: { v1: { tenants: {
 		}
 	}
 } } } });
-const themesMiniModule = apiDefToApiPublic("themes", { api: { v1: { themes: {
+const createThemesRuntimeAPI = apiDefToApiPublic("themes", { api: { v1: { themes: {
 	"": ["getThemes:G:", "uploadTheme:PBM:"],
 	"{id}": {
 		"": [
@@ -1043,7 +1046,7 @@ const themesMiniModule = apiDefToApiPublic("themes", { api: { v1: { themes: {
 		}
 	}
 } } } });
-const transportsMiniModule = apiDefToApiPublic("transports", { api: { v1: { transports: { "email-config": {
+const createTransportsRuntimeAPI = apiDefToApiPublic("transports", { api: { v1: { transports: { "email-config": {
 	"": [
 		"deleteEmailConfig:D:",
 		"getEmailConfig:G:",
@@ -1055,7 +1058,7 @@ const transportsMiniModule = apiDefToApiPublic("transports", { api: { v1: { tran
 		"verify-connection": ["verifyEmailConfigConnection:P:"]
 	}
 } } } } });
-const uiConfigMiniModule = apiDefToApiPublic("ui-config", { api: { v1: { "ui-config": { "pinned-links": {
+const createUiConfigRuntimeAPI = apiDefToApiPublic("ui-config", { api: { v1: { "ui-config": { "pinned-links": {
 	"": ["getUiConfigPinnedLinks:G:", "createUiConfigPinnedLink:PBJ:"],
 	actions: {
 		"bulk-create-pinned-links": ["createUiConfigPinnedLinks:PBJ:"],
@@ -1067,7 +1070,7 @@ const uiConfigMiniModule = apiDefToApiPublic("ui-config", { api: { v1: { "ui-con
 		"patchUiConfigPinnedLink:ABJ:"
 	]
 } } } } });
-const usersMiniModule = apiDefToApiPublic("users", { api: { v1: { users: {
+const createUsersRuntimeAPI = apiDefToApiPublic("users", { api: { v1: { users: {
 	"": ["getUsers:GQ:", "createUser:PBJ:"],
 	actions: {
 		count: ["countUsers:GQ:"],
@@ -1081,7 +1084,7 @@ const usersMiniModule = apiDefToApiPublic("users", { api: { v1: { users: {
 		"patchUser:ABJ:"
 	]
 } } } });
-const webIntegrationsMiniModule = apiDefToApiPublic("web-integrations", { api: { v1: { "web-integrations": {
+const createWebIntegrationsRuntimeAPI = apiDefToApiPublic("web-integrations", { api: { v1: { "web-integrations": {
 	"": ["getWebIntegrations:GQ:", "createWebIntegration:PBJ:"],
 	"{id}": [
 		"deleteWebIntegration:D:",
@@ -1089,7 +1092,7 @@ const webIntegrationsMiniModule = apiDefToApiPublic("web-integrations", { api: {
 		"patchWebIntegration:ABJ:"
 	]
 } } } });
-const webNotificationsMiniModule = apiDefToApiPublic("web-notifications", { api: { v1: { "web-notifications": {
+const createWebNotificationsRuntimeAPI = apiDefToApiPublic("web-notifications", { api: { v1: { "web-notifications": {
 	"": ["getNotifications:GQ:"],
 	all: ["deleteNotifications:D:", "patchNotifications:ABJ:"],
 	"{notificationId}": [
@@ -1098,7 +1101,7 @@ const webNotificationsMiniModule = apiDefToApiPublic("web-notifications", { api:
 		"patchNotification:ABJ:"
 	]
 } } } });
-const webhooksMiniModule = apiDefToApiPublic("webhooks", { api: { v1: { webhooks: {
+const createWebhooksRuntimeAPI = apiDefToApiPublic("webhooks", { api: { v1: { webhooks: {
 	"": ["getWebhooks:GQ:", "createWebhook:PBJ:"],
 	"event-types": ["getWebhookEventTypes:G:"],
 	"{id}": {
@@ -1117,142 +1120,144 @@ const webhooksMiniModule = apiDefToApiPublic("webhooks", { api: { v1: { webhooks
 		}
 	}
 } } } });
-const apiKeys = apiKeysMiniModule(void 0, interceptors_default);
-const apps = appsMiniModule(void 0, interceptors_default);
-const assistants = assistantsMiniModule(void 0, interceptors_default);
-const audits = auditsMiniModule(void 0, interceptors_default);
 const auth = auth_default;
-const automationConnections = automationConnectionsMiniModule(void 0, interceptors_default);
-const automations = automationsMiniModule(void 0, interceptors_default);
-const automlDeployments = automlDeploymentsMiniModule(void 0, interceptors_default);
-const automlPredictions = automlPredictionsMiniModule(void 0, interceptors_default);
-const brands = brandsMiniModule(void 0, interceptors_default);
-const collections = collectionsMiniModule(void 0, interceptors_default);
-const conditions = conditionsMiniModule(void 0, interceptors_default);
-const consumption = consumptionMiniModule(void 0, interceptors_default);
-const cspOrigins = cspOriginsMiniModule(void 0, interceptors_default);
-const csrfToken = csrfTokenMiniModule(void 0, interceptors_default);
-const dataAlerts = dataAlertsMiniModule(void 0, interceptors_default);
-const dataAssets = dataAssetsMiniModule(void 0, interceptors_default);
-const dataConnections = dataConnectionsMiniModule(void 0, interceptors_default);
-const dataCredentials = dataCredentialsMiniModule(void 0, interceptors_default);
-const dataFiles = dataFilesMiniModule(void 0, interceptors_default);
-const dataQualities = dataQualitiesMiniModule(void 0, interceptors_default);
-const dataSets = dataSetsMiniModule(void 0, interceptors_default);
-const dataSources = dataSourcesMiniModule(void 0, interceptors_default);
-const dataStores = dataStoresMiniModule(void 0, interceptors_default);
-const dcaas = dcaasMiniModule(void 0, interceptors_default);
-const diProjects = diProjectsMiniModule(void 0, interceptors_default);
-const directAccessAgents = directAccessAgentsMiniModule(void 0, interceptors_default);
-const encryption = encryptionMiniModule(void 0, interceptors_default);
-const extensions = extensionsMiniModule(void 0, interceptors_default);
-const glossaries = glossariesMiniModule(void 0, interceptors_default);
-const groups = groupsMiniModule(void 0, interceptors_default);
-const identityProviders = identityProvidersMiniModule(void 0, interceptors_default);
 const interceptors = interceptors_default;
-const items = itemsMiniModule(void 0, interceptors_default);
-const knowledgebases = knowledgebasesMiniModule(void 0, interceptors_default);
-const licenses = licensesMiniModule(void 0, interceptors_default);
-const lineageGraphs = lineageGraphsMiniModule(void 0, interceptors_default);
-const ml = mlMiniModule(void 0, interceptors_default);
-const notes = notesMiniModule(void 0, interceptors_default);
-const notifications = notificationsMiniModule(void 0, interceptors_default);
-const oauthClients = oauthClientsMiniModule(void 0, interceptors_default);
-const oauthTokens = oauthTokensMiniModule(void 0, interceptors_default);
 const qix = qix_default;
-const questions = questionsMiniModule(void 0, interceptors_default);
-const quotas = quotasMiniModule(void 0, interceptors_default);
-const reloadTasks = reloadTasksMiniModule(void 0, interceptors_default);
-const reloads = reloadsMiniModule(void 0, interceptors_default);
-const reportTemplates = reportTemplatesMiniModule(void 0, interceptors_default);
-const reports = reportsMiniModule(void 0, interceptors_default);
-const roles = rolesMiniModule(void 0, interceptors_default);
-const sharingTasks = sharingTasksMiniModule(void 0, interceptors_default);
-const spaces = spacesMiniModule(void 0, interceptors_default);
-const tasks = tasksMiniModule(void 0, interceptors_default);
-const tempContents = tempContentsMiniModule(void 0, interceptors_default);
-const tenants = tenantsMiniModule(void 0, interceptors_default);
-const themes = themesMiniModule(void 0, interceptors_default);
-const transports = transportsMiniModule(void 0, interceptors_default);
-const uiConfig = uiConfigMiniModule(void 0, interceptors_default);
-const users = usersMiniModule(void 0, interceptors_default);
-const webIntegrations = webIntegrationsMiniModule(void 0, interceptors_default);
-const webNotifications = webNotificationsMiniModule(void 0, interceptors_default);
-const webhooks = webhooksMiniModule(void 0, interceptors_default);
+const apiKeys = createApiKeysRuntimeAPI(void 0, interceptors_default);
+const apps = createAppsRuntimeAPI(void 0, interceptors_default);
+const assistants = createAssistantsRuntimeAPI(void 0, interceptors_default);
+const audits = createAuditsRuntimeAPI(void 0, interceptors_default);
+const automationConnections = createAutomationConnectionsRuntimeAPI(void 0, interceptors_default);
+const automations = createAutomationsRuntimeAPI(void 0, interceptors_default);
+const automlDeployments = createAutomlDeploymentsRuntimeAPI(void 0, interceptors_default);
+const automlPredictions = createAutomlPredictionsRuntimeAPI(void 0, interceptors_default);
+const brands = createBrandsRuntimeAPI(void 0, interceptors_default);
+const collections = createCollectionsRuntimeAPI(void 0, interceptors_default);
+const conditions = createConditionsRuntimeAPI(void 0, interceptors_default);
+const consumption = createConsumptionRuntimeAPI(void 0, interceptors_default);
+const cspOrigins = createCspOriginsRuntimeAPI(void 0, interceptors_default);
+const csrfToken = createCsrfTokenRuntimeAPI(void 0, interceptors_default);
+const dataAlerts = createDataAlertsRuntimeAPI(void 0, interceptors_default);
+const dataAssets = createDataAssetsRuntimeAPI(void 0, interceptors_default);
+const dataConnections = createDataConnectionsRuntimeAPI(void 0, interceptors_default);
+const dataCredentials = createDataCredentialsRuntimeAPI(void 0, interceptors_default);
+const dataFiles = createDataFilesRuntimeAPI(void 0, interceptors_default);
+const dataQualities = createDataQualitiesRuntimeAPI(void 0, interceptors_default);
+const dataSets = createDataSetsRuntimeAPI(void 0, interceptors_default);
+const dataSources = createDataSourcesRuntimeAPI(void 0, interceptors_default);
+const dataStores = createDataStoresRuntimeAPI(void 0, interceptors_default);
+const dcaas = createDcaasRuntimeAPI(void 0, interceptors_default);
+const diProjects = createDiProjectsRuntimeAPI(void 0, interceptors_default);
+const directAccessAgents = createDirectAccessAgentsRuntimeAPI(void 0, interceptors_default);
+const encryption = createEncryptionRuntimeAPI(void 0, interceptors_default);
+const extensions = createExtensionsRuntimeAPI(void 0, interceptors_default);
+const glossaries = createGlossariesRuntimeAPI(void 0, interceptors_default);
+const groups = createGroupsRuntimeAPI(void 0, interceptors_default);
+const identityProviders = createIdentityProvidersRuntimeAPI(void 0, interceptors_default);
+const items = createItemsRuntimeAPI(void 0, interceptors_default);
+const knowledgebases = createKnowledgebasesRuntimeAPI(void 0, interceptors_default);
+const licenses = createLicensesRuntimeAPI(void 0, interceptors_default);
+const lineageGraphs = createLineageGraphsRuntimeAPI(void 0, interceptors_default);
+const ml = createMlRuntimeAPI(void 0, interceptors_default);
+const notes = createNotesRuntimeAPI(void 0, interceptors_default);
+const notifications = createNotificationsRuntimeAPI(void 0, interceptors_default);
+const oauthClients = createOauthClientsRuntimeAPI(void 0, interceptors_default);
+const oauthTokens = createOauthTokensRuntimeAPI(void 0, interceptors_default);
+const questions = createQuestionsRuntimeAPI(void 0, interceptors_default);
+const quotas = createQuotasRuntimeAPI(void 0, interceptors_default);
+const reloadTasks = createReloadTasksRuntimeAPI(void 0, interceptors_default);
+const reloads = createReloadsRuntimeAPI(void 0, interceptors_default);
+const reportTemplates = createReportTemplatesRuntimeAPI(void 0, interceptors_default);
+const reports = createReportsRuntimeAPI(void 0, interceptors_default);
+const roles = createRolesRuntimeAPI(void 0, interceptors_default);
+const sharingTasks = createSharingTasksRuntimeAPI(void 0, interceptors_default);
+const spaces = createSpacesRuntimeAPI(void 0, interceptors_default);
+const tasks = createTasksRuntimeAPI(void 0, interceptors_default);
+const tempContents = createTempContentsRuntimeAPI(void 0, interceptors_default);
+const tenants = createTenantsRuntimeAPI(void 0, interceptors_default);
+const themes = createThemesRuntimeAPI(void 0, interceptors_default);
+const transports = createTransportsRuntimeAPI(void 0, interceptors_default);
+const uiConfig = createUiConfigRuntimeAPI(void 0, interceptors_default);
+const users = createUsersRuntimeAPI(void 0, interceptors_default);
+const webIntegrations = createWebIntegrationsRuntimeAPI(void 0, interceptors_default);
+const webNotifications = createWebNotificationsRuntimeAPI(void 0, interceptors_default);
+const webhooks = createWebhooksRuntimeAPI(void 0, interceptors_default);
 const createQlikApi = (props) => {
 	const scopedInterceptors = interceptors_default.createInterceptors();
 	return {
-		apiKeys: apiKeysMiniModule(props?.hostConfig, scopedInterceptors),
-		apps: appsMiniModule(props?.hostConfig, scopedInterceptors),
-		assistants: assistantsMiniModule(props?.hostConfig, scopedInterceptors),
-		audits: auditsMiniModule(props?.hostConfig, scopedInterceptors),
 		auth: auth_default,
-		automationConnections: automationConnectionsMiniModule(props?.hostConfig, scopedInterceptors),
-		automations: automationsMiniModule(props?.hostConfig, scopedInterceptors),
-		automlDeployments: automlDeploymentsMiniModule(props?.hostConfig, scopedInterceptors),
-		automlPredictions: automlPredictionsMiniModule(props?.hostConfig, scopedInterceptors),
-		brands: brandsMiniModule(props?.hostConfig, scopedInterceptors),
-		collections: collectionsMiniModule(props?.hostConfig, scopedInterceptors),
-		conditions: conditionsMiniModule(props?.hostConfig, scopedInterceptors),
-		consumption: consumptionMiniModule(props?.hostConfig, scopedInterceptors),
-		cspOrigins: cspOriginsMiniModule(props?.hostConfig, scopedInterceptors),
-		csrfToken: csrfTokenMiniModule(props?.hostConfig, scopedInterceptors),
-		dataAlerts: dataAlertsMiniModule(props?.hostConfig, scopedInterceptors),
-		dataAssets: dataAssetsMiniModule(props?.hostConfig, scopedInterceptors),
-		dataConnections: dataConnectionsMiniModule(props?.hostConfig, scopedInterceptors),
-		dataCredentials: dataCredentialsMiniModule(props?.hostConfig, scopedInterceptors),
-		dataFiles: dataFilesMiniModule(props?.hostConfig, scopedInterceptors),
-		dataQualities: dataQualitiesMiniModule(props?.hostConfig, scopedInterceptors),
-		dataSets: dataSetsMiniModule(props?.hostConfig, scopedInterceptors),
-		dataSources: dataSourcesMiniModule(props?.hostConfig, scopedInterceptors),
-		dataStores: dataStoresMiniModule(props?.hostConfig, scopedInterceptors),
-		dcaas: dcaasMiniModule(props?.hostConfig, scopedInterceptors),
-		diProjects: diProjectsMiniModule(props?.hostConfig, scopedInterceptors),
-		directAccessAgents: directAccessAgentsMiniModule(props?.hostConfig, scopedInterceptors),
-		encryption: encryptionMiniModule(props?.hostConfig, scopedInterceptors),
-		extensions: extensionsMiniModule(props?.hostConfig, scopedInterceptors),
-		glossaries: glossariesMiniModule(props?.hostConfig, scopedInterceptors),
-		groups: groupsMiniModule(props?.hostConfig, scopedInterceptors),
-		identityProviders: identityProvidersMiniModule(props?.hostConfig, scopedInterceptors),
 		interceptors: scopedInterceptors,
-		items: itemsMiniModule(props?.hostConfig, scopedInterceptors),
-		knowledgebases: knowledgebasesMiniModule(props?.hostConfig, scopedInterceptors),
-		licenses: licensesMiniModule(props?.hostConfig, scopedInterceptors),
-		lineageGraphs: lineageGraphsMiniModule(props?.hostConfig, scopedInterceptors),
-		ml: mlMiniModule(props?.hostConfig, scopedInterceptors),
-		notes: notesMiniModule(props?.hostConfig, scopedInterceptors),
-		notifications: notificationsMiniModule(props?.hostConfig, scopedInterceptors),
-		oauthClients: oauthClientsMiniModule(props?.hostConfig, scopedInterceptors),
-		oauthTokens: oauthTokensMiniModule(props?.hostConfig, scopedInterceptors),
 		qix: qix_default.withHostConfig(props?.hostConfig),
-		questions: questionsMiniModule(props?.hostConfig, scopedInterceptors),
-		quotas: quotasMiniModule(props?.hostConfig, scopedInterceptors),
-		reloadTasks: reloadTasksMiniModule(props?.hostConfig, scopedInterceptors),
-		reloads: reloadsMiniModule(props?.hostConfig, scopedInterceptors),
-		reportTemplates: reportTemplatesMiniModule(props?.hostConfig, scopedInterceptors),
-		reports: reportsMiniModule(props?.hostConfig, scopedInterceptors),
-		roles: rolesMiniModule(props?.hostConfig, scopedInterceptors),
-		sharingTasks: sharingTasksMiniModule(props?.hostConfig, scopedInterceptors),
-		spaces: spacesMiniModule(props?.hostConfig, scopedInterceptors),
-		tasks: tasksMiniModule(props?.hostConfig, scopedInterceptors),
-		tempContents: tempContentsMiniModule(props?.hostConfig, scopedInterceptors),
-		tenants: tenantsMiniModule(props?.hostConfig, scopedInterceptors),
-		themes: themesMiniModule(props?.hostConfig, scopedInterceptors),
-		transports: transportsMiniModule(props?.hostConfig, scopedInterceptors),
-		uiConfig: uiConfigMiniModule(props?.hostConfig, scopedInterceptors),
-		users: usersMiniModule(props?.hostConfig, scopedInterceptors),
-		webIntegrations: webIntegrationsMiniModule(props?.hostConfig, scopedInterceptors),
-		webNotifications: webNotificationsMiniModule(props?.hostConfig, scopedInterceptors),
-		webhooks: webhooksMiniModule(props?.hostConfig, scopedInterceptors)
+		apiKeys: createApiKeysRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		apps: createAppsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		assistants: createAssistantsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		audits: createAuditsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		automationConnections: createAutomationConnectionsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		automations: createAutomationsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		automlDeployments: createAutomlDeploymentsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		automlPredictions: createAutomlPredictionsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		brands: createBrandsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		collections: createCollectionsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		conditions: createConditionsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		consumption: createConsumptionRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		cspOrigins: createCspOriginsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		csrfToken: createCsrfTokenRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		dataAlerts: createDataAlertsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		dataAssets: createDataAssetsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		dataConnections: createDataConnectionsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		dataCredentials: createDataCredentialsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		dataFiles: createDataFilesRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		dataQualities: createDataQualitiesRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		dataSets: createDataSetsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		dataSources: createDataSourcesRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		dataStores: createDataStoresRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		dcaas: createDcaasRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		diProjects: createDiProjectsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		directAccessAgents: createDirectAccessAgentsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		encryption: createEncryptionRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		extensions: createExtensionsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		glossaries: createGlossariesRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		groups: createGroupsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		identityProviders: createIdentityProvidersRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		items: createItemsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		knowledgebases: createKnowledgebasesRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		licenses: createLicensesRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		lineageGraphs: createLineageGraphsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		ml: createMlRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		notes: createNotesRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		notifications: createNotificationsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		oauthClients: createOauthClientsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		oauthTokens: createOauthTokensRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		questions: createQuestionsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		quotas: createQuotasRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		reloadTasks: createReloadTasksRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		reloads: createReloadsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		reportTemplates: createReportTemplatesRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		reports: createReportsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		roles: createRolesRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		sharingTasks: createSharingTasksRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		spaces: createSpacesRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		tasks: createTasksRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		tempContents: createTempContentsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		tenants: createTenantsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		themes: createThemesRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		transports: createTransportsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		uiConfig: createUiConfigRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		users: createUsersRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		webIntegrations: createWebIntegrationsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		webNotifications: createWebNotificationsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		webhooks: createWebhooksRuntimeAPI(props?.hostConfig, scopedInterceptors)
 	};
 };
 /** Javascript/Typescript bindings to Qlik's platform API's */
 const api = {
+	auth,
+	interceptors,
+	qix,
 	apiKeys,
 	apps,
 	assistants,
 	audits,
-	auth,
 	automationConnections,
 	automations,
 	automlDeployments,
@@ -1280,7 +1285,6 @@ const api = {
 	glossaries,
 	groups,
 	identityProviders,
-	interceptors,
 	items,
 	knowledgebases,
 	licenses,
@@ -1290,7 +1294,6 @@ const api = {
 	notifications,
 	oauthClients,
 	oauthTokens,
-	qix,
 	questions,
 	quotas,
 	reloadTasks,

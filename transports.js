@@ -1,10 +1,10 @@
 import "./chunks/utils-1j8VpsDa.js";
-import "./chunks/public-runtime-modules-n0gcxl0_.js";
-import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DLQ5LN79.js";
+import "./chunks/public-runtime-modules-BWdSJoOb.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DUEcQxLv.js";
 
 //#region src/public/rest/transports.ts
 /**
-* Deletes email configuration for a given tenant id (retrieved from JWT).
+* Deletes the email configuration for the tenant.
 *
 * @throws DeleteEmailConfigHttpError
 */
@@ -16,7 +16,7 @@ async function deleteEmailConfig(options) {
 	});
 }
 /**
-* Returns the email configuration for a given tenant id (retrieved from JWT).
+* Returns the current email configuration and configuration status for the tenant.
 *
 * @throws GetEmailConfigHttpError
 */
@@ -28,7 +28,7 @@ async function getEmailConfig(options) {
 	});
 }
 /**
-* Patch the email configuration for a given tenant id (retrieved from JWT).
+* Patch the email configuration for the tenant.
 *
 * @param body an object with the body content
 * @throws PatchEmailConfigHttpError
@@ -43,7 +43,7 @@ async function patchEmailConfig(body, options) {
 	});
 }
 /**
-* Send a test mail with the supplied email info (subject, body, recipient). Email config from database is used for the connection.
+* Attempts to sends a test email using the active configuration, with the supplied email info (subject, body, recipient).
 *
 * @param body an object with the body content
 * @throws SendTestEmailHttpError
@@ -58,7 +58,7 @@ async function sendTestEmail(body, options) {
 	});
 }
 /**
-* Returns the isValid value for the email configuration for the tenant. Will return false if no email configuration exists.
+* Returns the current isValid value for the email configuration for the tenant. Does not attempt to connect to a server to verify the connection or send a test email. Will return false if no email configuration exists.
 *
 * @throws ValidateEmailConfigHttpError
 */
@@ -70,7 +70,7 @@ async function validateEmailConfig(options) {
 	});
 }
 /**
-* Verifies connection to email server for tenant provided via JWT
+* Attempts to verify connection to email server using a low-level protocol handshake to confirm the server is reachable and the credentials are valid, without sending a test email.
 *
 * @throws VerifyEmailConfigConnectionHttpError
 */
