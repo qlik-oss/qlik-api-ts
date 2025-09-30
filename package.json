@@ -14,10 +14,10 @@
     "enigma.js": "^2.14.0",
     "extend": "3.0.2",
     "lodash": "^4.17.21",
-    "nanoid": "^5.1.5",
+    "nanoid": "^5.1.6",
     "ws": "^8.18.3"
   },
-  "packageManager": "pnpm@10.17.0",
+  "packageManager": "pnpm@10.17.1",
   "engines": {
     "node": ">=20"
   },

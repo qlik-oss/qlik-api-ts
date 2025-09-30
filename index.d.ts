@@ -1,72 +1,68 @@
-import { HostConfig } from "./chunks/auth-types-B1c_1Nca.js";
-import { InterceptorsAPI, createInterceptors } from "./chunks/interceptors-BF556LaK.js";
-import { AuthAPI, getAccessToken, getWebResourceAuthParams, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig } from "./chunks/auth-DFOXWfqh.js";
-import { QixAPI } from "./chunks/qix-CbiHOu7Z.js";
-import { ApiKeysAPI } from "./chunks/api-keys-C-ZqA-wl.js";
-import { AppsAPI } from "./chunks/apps-k7oY1h_6.js";
-import { AssistantsAPI } from "./chunks/assistants-BsDbpzl4.js";
-import { AuditsAPI } from "./chunks/audits-5CBpwcdx.js";
-import { AutomationConnectionsAPI } from "./chunks/automation-connections-DRQDgw7Q.js";
-import { AutomationsAPI } from "./chunks/automations-C0rperoU.js";
-import { AutomlDeploymentsAPI } from "./chunks/automl-deployments-B-WuR_zE.js";
-import { AutomlPredictionsAPI } from "./chunks/automl-predictions-CewW0eZn.js";
-import { BrandsAPI } from "./chunks/brands-C4eALPrs.js";
-import { CollectionsAPI } from "./chunks/collections-Djmd9gof.js";
-import { ConditionsAPI } from "./chunks/conditions-BRDxUbgu.js";
-import { ConsumptionAPI } from "./chunks/consumption-UNw8R7jN.js";
-import { CspOriginsAPI } from "./chunks/csp-origins-_4HBSdgU.js";
-import { CsrfTokenAPI } from "./chunks/csrf-token-CsvbqXyY.js";
-import { DataAlertsAPI } from "./chunks/data-alerts-DSV3VOnW.js";
-import { DataAssetsAPI } from "./chunks/data-assets-C3U3T_lj.js";
-import { DataConnectionsAPI } from "./chunks/data-connections-CYbObLbP.js";
-import { DataCredentialsAPI } from "./chunks/data-credentials-CgCjw_Cn.js";
-import { DataFilesAPI } from "./chunks/data-files-DH19MfYE.js";
-import { DataQualitiesAPI } from "./chunks/data-qualities-BogHQw4I.js";
-import { DataSetsAPI } from "./chunks/data-sets-B27GmshO.js";
-import { DataSourcesAPI } from "./chunks/data-sources-3oHpGsDR.js";
-import { DataStoresAPI } from "./chunks/data-stores-BjfzMp9W.js";
-import { DcaasAPI } from "./chunks/dcaas-A7hfpAI5.js";
-import { DiProjectsAPI } from "./chunks/di-projects-BmqI8HAl.js";
-import { DirectAccessAgentsAPI } from "./chunks/direct-access-agents-CfUpbi73.js";
-import { EncryptionAPI } from "./chunks/encryption-CjBmNQDZ.js";
-import { ExtensionsAPI } from "./chunks/extensions-D05y2FWk.js";
-import { GlossariesAPI } from "./chunks/glossaries-vYbykU3r.js";
-import { GroupsAPI } from "./chunks/groups-BapgngJf.js";
-import { IdentityProvidersAPI } from "./chunks/identity-providers-CAxsp9hP.js";
-import { ItemsAPI } from "./chunks/items-CjVrNg57.js";
-import { KnowledgebasesAPI } from "./chunks/knowledgebases-BFiV7Fwh.js";
-import { LicensesAPI } from "./chunks/licenses-yZKgQ2k6.js";
-import { LineageGraphsAPI } from "./chunks/lineage-graphs-Bkc04N-t.js";
-import { MlAPI } from "./chunks/ml-CPzq_j0K.js";
-import { NotesAPI } from "./chunks/notes-C5HjmBeI.js";
-import { NotificationsAPI } from "./chunks/notifications-DfP7aWPH.js";
-import { OauthClientsAPI } from "./chunks/oauth-clients-BmMEDuET.js";
-import { OauthTokensAPI } from "./chunks/oauth-tokens-Dimf19DE.js";
-import { QuestionsAPI } from "./chunks/questions-CFN7BgWt.js";
-import { QuotasAPI } from "./chunks/quotas-BUH2e2K_.js";
-import { ReloadTasksAPI } from "./chunks/reload-tasks-DN3X2-30.js";
-import { ReloadsAPI } from "./chunks/reloads-CpY6F3Y0.js";
-import { ReportTemplatesAPI } from "./chunks/report-templates-D5KOFkRi.js";
-import { ReportsAPI } from "./chunks/reports-CRwCogRL.js";
-import { RolesAPI } from "./chunks/roles-DCzyiLdU.js";
-import { SharingTasksAPI } from "./chunks/sharing-tasks-DsxFrADQ.js";
-import { SpacesAPI } from "./chunks/spaces-B0cx23Nc.js";
-import { TasksAPI } from "./chunks/tasks-DWfE5JM_.js";
-import { TempContentsAPI } from "./chunks/temp-contents-CU94UTZU.js";
-import { TenantsAPI } from "./chunks/tenants-DvtbiwAP.js";
-import { ThemesAPI } from "./chunks/themes-BPkyCLWS.js";
-import { TransportsAPI } from "./chunks/transports-DlRmSWLj.js";
-import { UiConfigAPI } from "./chunks/ui-config-BqX-bPjf.js";
-import { UsersAPI } from "./chunks/users-CuQ0nboa.js";
-import { WebIntegrationsAPI } from "./chunks/web-integrations-D54LCd0Z.js";
-import { WebNotificationsAPI } from "./chunks/web-notifications-sUlHGnmy.js";
-import { WebhooksAPI } from "./chunks/webhooks-Dw0FIeFq.js";
+import { HostConfig } from "./chunks/auth-types-ua5FEdjz.js";
+import { InterceptorsAPI, createInterceptors } from "./chunks/interceptors-DHkfs1ua.js";
+import { AuthAPI, getAccessToken, getWebResourceAuthParams, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig } from "./chunks/auth-DKv6n_GN.js";
+import { QixAPI } from "./chunks/qix-8oI6W8Iq.js";
+import { ApiKeysAPI } from "./chunks/api-keys-D0c8ujRu.js";
+import { AppsAPI } from "./chunks/apps-CdqN0t8i.js";
+import { AssistantsAPI } from "./chunks/assistants-BW8V6f0F.js";
+import { AuditsAPI } from "./chunks/audits-D0ad6UDR.js";
+import { AutomationConnectionsAPI } from "./chunks/automation-connections-BJuPyGkj.js";
+import { AutomationsAPI } from "./chunks/automations-DDzikXsW.js";
+import { AutomlDeploymentsAPI } from "./chunks/automl-deployments-RC6MYluL.js";
+import { AutomlPredictionsAPI } from "./chunks/automl-predictions-BC_cxfIy.js";
+import { BrandsAPI } from "./chunks/brands-JtflEMN1.js";
+import { CollectionsAPI } from "./chunks/collections-B17vc2zP.js";
+import { ConditionsAPI } from "./chunks/conditions-JgsgLbSx.js";
+import { ConsumptionAPI } from "./chunks/consumption-BBGQgCsU.js";
+import { CspOriginsAPI } from "./chunks/csp-origins-C2z2ryaw.js";
+import { CsrfTokenAPI } from "./chunks/csrf-token-Cwz241tT.js";
+import { DataAlertsAPI } from "./chunks/data-alerts-rxwsP4C7.js";
+import { DataAssetsAPI } from "./chunks/data-assets-BRJ0MQgV.js";
+import { DataConnectionsAPI } from "./chunks/data-connections-9H_4Pih5.js";
+import { DataCredentialsAPI } from "./chunks/data-credentials-AULREOtn.js";
+import { DataFilesAPI } from "./chunks/data-files-CDxGxSIx.js";
+import { DataQualitiesAPI } from "./chunks/data-qualities-B-v0Njga.js";
+import { DataSetsAPI } from "./chunks/data-sets-ChmF7dI4.js";
+import { DataSourcesAPI } from "./chunks/data-sources-oBO7aHct.js";
+import { DataStoresAPI } from "./chunks/data-stores-C2RE1Aos.js";
+import { DcaasAPI } from "./chunks/dcaas-D4iZGtLn.js";
+import { DiProjectsAPI } from "./chunks/di-projects-BxX0b3lC.js";
+import { DirectAccessAgentsAPI } from "./chunks/direct-access-agents-XxiAo3y9.js";
+import { EncryptionAPI } from "./chunks/encryption-1JNNXFB7.js";
+import { ExtensionsAPI } from "./chunks/extensions-qbclNpnA.js";
+import { GlossariesAPI } from "./chunks/glossaries-g1PPnHoM.js";
+import { GroupsAPI } from "./chunks/groups-DrqKqkAv.js";
+import { IdentityProvidersAPI } from "./chunks/identity-providers-iRAccwIg.js";
+import { ItemsAPI } from "./chunks/items-N3gAR5AS.js";
+import { KnowledgebasesAPI } from "./chunks/knowledgebases-B0tcNrg8.js";
+import { LicensesAPI } from "./chunks/licenses-CrB0eiUU.js";
+import { LineageGraphsAPI } from "./chunks/lineage-graphs-BL1kIsvQ.js";
+import { MlAPI } from "./chunks/ml-CQQZV57e.js";
+import { NotesAPI } from "./chunks/notes-BWDOf71L.js";
+import { NotificationsAPI } from "./chunks/notifications--FW8kp8T.js";
+import { OauthClientsAPI } from "./chunks/oauth-clients-BDI9_NJw.js";
+import { OauthTokensAPI } from "./chunks/oauth-tokens-CqViLZD0.js";
+import { QuestionsAPI } from "./chunks/questions-DAXXmfTM.js";
+import { QuotasAPI } from "./chunks/quotas-BV0q47cU.js";
+import { ReloadTasksAPI } from "./chunks/reload-tasks-DORwZo4c.js";
+import { ReloadsAPI } from "./chunks/reloads-C7RAAgAu.js";
+import { ReportTemplatesAPI } from "./chunks/report-templates-C3P0_-D3.js";
+import { ReportsAPI } from "./chunks/reports-C7saF89N.js";
+import { RolesAPI } from "./chunks/roles-DBdOYajz.js";
+import { SharingTasksAPI } from "./chunks/sharing-tasks-Dm9L1sMF.js";
+import { SpacesAPI } from "./chunks/spaces-CjF6Q30z.js";
+import { TasksAPI } from "./chunks/tasks-CX1ohkzr.js";
+import { TempContentsAPI } from "./chunks/temp-contents-D-NhmvhI.js";
+import { TenantsAPI } from "./chunks/tenants-BbFJ4gEC.js";
+import { ThemesAPI } from "./chunks/themes-DCHwpvan.js";
+import { TransportsAPI } from "./chunks/transports-CQoT2abX.js";
+import { UiConfigAPI } from "./chunks/ui-config-8gkgFE8J.js";
+import { UsersAPI } from "./chunks/users-D7kk0z77.js";
+import { WebIntegrationsAPI } from "./chunks/web-integrations-BMiMloLY.js";
+import { WebNotificationsAPI } from "./chunks/web-notifications-CGGnIRRw.js";
+import { WebhooksAPI } from "./chunks/webhooks-tylLbUkb.js";
 
 //#region src/public/index.d.ts
-declare const apiKeys: ApiKeysAPI;
-declare const apps: AppsAPI;
-declare const assistants: AssistantsAPI;
-declare const audits: AuditsAPI;
 declare const auth: {
   registerAuthModule: typeof registerAuthModule;
   setDefaultHostConfig: typeof setDefaultHostConfig;
@@ -75,6 +71,16 @@ declare const auth: {
   getAccessToken: typeof getAccessToken;
   getWebResourceAuthParams: typeof getWebResourceAuthParams;
 };
+declare const interceptors: InterceptorsAPI & {
+  createInterceptors: typeof createInterceptors;
+};
+declare const qix: QixAPI & {
+  withHostConfig: (hostConfig: HostConfig | undefined) => QixAPI;
+};
+declare const apiKeys: ApiKeysAPI;
+declare const apps: AppsAPI;
+declare const assistants: AssistantsAPI;
+declare const audits: AuditsAPI;
 declare const automationConnections: AutomationConnectionsAPI;
 declare const automations: AutomationsAPI;
 declare const automlDeployments: AutomlDeploymentsAPI;
@@ -102,9 +108,6 @@ declare const extensions: ExtensionsAPI;
 declare const glossaries: GlossariesAPI;
 declare const groups: GroupsAPI;
 declare const identityProviders: IdentityProvidersAPI;
-declare const interceptors: InterceptorsAPI & {
-  createInterceptors: typeof createInterceptors;
-};
 declare const items: ItemsAPI;
 declare const knowledgebases: KnowledgebasesAPI;
 declare const licenses: LicensesAPI;
@@ -114,9 +117,6 @@ declare const notes: NotesAPI;
 declare const notifications: NotificationsAPI;
 declare const oauthClients: OauthClientsAPI;
 declare const oauthTokens: OauthTokensAPI;
-declare const qix: QixAPI & {
-  withHostConfig: (hostConfig: HostConfig | undefined) => QixAPI;
-};
 declare const questions: QuestionsAPI;
 declare const quotas: QuotasAPI;
 declare const reloadTasks: ReloadTasksAPI;
@@ -137,6 +137,12 @@ declare const webIntegrations: WebIntegrationsAPI;
 declare const webNotifications: WebNotificationsAPI;
 declare const webhooks: WebhooksAPI;
 interface QlikAPI {
+  /** Functions for the auth api */
+  auth: AuthAPI;
+  /** Functions for the interceptors api */
+  interceptors: InterceptorsAPI;
+  /** Functions for the qix api */
+  qix: QixAPI;
   /** Functions for the apiKeys api */
   apiKeys: ApiKeysAPI;
   /** Functions for the apps api */
@@ -145,8 +151,6 @@ interface QlikAPI {
   assistants: AssistantsAPI;
   /** Functions for the audits api */
   audits: AuditsAPI;
-  /** Functions for the auth api */
-  auth: AuthAPI;
   /** Functions for the automationConnections api */
   automationConnections: AutomationConnectionsAPI;
   /** Functions for the automations api */
@@ -201,8 +205,6 @@ interface QlikAPI {
   groups: GroupsAPI;
   /** Functions for the identityProviders api */
   identityProviders: IdentityProvidersAPI;
-  /** Functions for the interceptors api */
-  interceptors: InterceptorsAPI;
   /** Functions for the items api */
   items: ItemsAPI;
   /** Functions for the knowledgebases api */
@@ -221,8 +223,6 @@ interface QlikAPI {
   oauthClients: OauthClientsAPI;
   /** Functions for the oauthTokens api */
   oauthTokens: OauthTokensAPI;
-  /** Functions for the qix api */
-  qix: QixAPI;
   /** Functions for the questions api */
   questions: QuestionsAPI;
   /** Functions for the quotas api */

@@ -1,6 +1,6 @@
 import "./chunks/utils-1j8VpsDa.js";
-import "./chunks/public-runtime-modules-n0gcxl0_.js";
-import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DLQ5LN79.js";
+import "./chunks/public-runtime-modules-BWdSJoOb.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-DUEcQxLv.js";
 
 //#region src/public/rest/glossaries.ts
 /**
@@ -18,7 +18,7 @@ async function getGlossaries(query, options) {
 	});
 }
 /**
-* Creates a new glossary. Only a steward can create a glossary.
+* Only a steward can create a glossary.
 *
 * @param body an object with the body content
 * @throws CreateGlossaryHttpError
@@ -33,8 +33,8 @@ async function createGlossary(body, options) {
 	});
 }
 /**
-* Creates a new glossary, including categories and terms, based on a glossary definition file.
-* Supported formats are currently, qlik, atlan and atlas
+* Creates a new or updates an existing glossary, including categories and terms, based on a glossary definition file.
+* Supported formats are currently, qlik, atlan and atlas.
 *
 * @param query an object with query parameters
 * @param body an object with the body content
@@ -79,7 +79,7 @@ async function getGlossary(id, options) {
 	});
 }
 /**
-* Updates glossary properties with json-patch formatted data
+* Updates glossary properties with json-patch formatted data.
 *
 * @param id The glossary id.
 * @param body an object with the body content
@@ -196,7 +196,7 @@ async function getGlossaryCategory(id, categoryId, options) {
 	});
 }
 /**
-* Updates category properties with json-patch formatted data
+* Updates category properties with json-patch formatted data.
 *
 * @param id The glossary id.
 * @param categoryId The category id.
@@ -349,7 +349,7 @@ async function updateGlossaryTerm(id, termId, body, options) {
 	});
 }
 /**
-* Changes the status of the term. Only a steward can verify a term. Once the term is verified only a steward can modify the term.
+* Only a steward can verify a term. Once the term is verified only a steward can modify the term. Note that links to resources are considered external relations that can be managed independently of the status of the term.
 *
 * @param id The glossary id.
 * @param termId The term id.
@@ -389,7 +389,7 @@ async function getGlossaryTermLinks(id, termId, query, options) {
 	});
 }
 /**
-* Creates a new link to a term.
+* Links to resources are not considered term properties but external relations. Links can be created for terms in any status. Permissions on term and resource determine if the link can be created.
 *
 * @param id The glossary id.
 * @param termId The term id.

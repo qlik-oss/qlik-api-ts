@@ -1,3 +1,3 @@
-import "./chunks/auth-types-B1c_1Nca.js";
-import { ConfigReasonCode, Error, Errors, GetNotesSettingsHttpError, GetNotesSettingsHttpResponse, NoteSettingsPutPayload, NoteSettingsPutResponse, NotesAPI, NotesUserSettings, SetNotesSettingsHttpError, SetNotesSettingsHttpResponse, clearCache, getNotesSettings, notesExport, setNotesSettings } from "./chunks/notes-C5HjmBeI.js";
+import "./chunks/auth-types-ua5FEdjz.js";
+import { ConfigReasonCode, Error, Errors, GetNotesSettingsHttpError, GetNotesSettingsHttpResponse, NoteSettingsPutPayload, NoteSettingsPutResponse, NotesAPI, NotesUserSettings, SetNotesSettingsHttpError, SetNotesSettingsHttpResponse, clearCache, getNotesSettings, notesExport, setNotesSettings } from "./chunks/notes-BWDOf71L.js";
 export { ConfigReasonCode, Error, Errors, GetNotesSettingsHttpError, GetNotesSettingsHttpResponse, NoteSettingsPutPayload, NoteSettingsPutResponse, NotesAPI, NotesUserSettings, SetNotesSettingsHttpError, SetNotesSettingsHttpResponse, clearCache, notesExport as default, getNotesSettings, setNotesSettings };
