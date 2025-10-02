@@ -1,5 +1,5 @@
 import { isBrowser } from "./utils-1j8VpsDa.js";
-import { getInvokeFetchRuntimeModule } from "./public-runtime-modules-Bid7jvqK.js";
+import { getInvokeFetchRuntimeModule } from "./public-runtime-modules-BBAJOUvT.js";
 
 //#region src/public/invoke-fetch.ts
 const defaultUserAgent = "qlik-api/latest";

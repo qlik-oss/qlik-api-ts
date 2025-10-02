@@ -6,7 +6,7 @@ const importRuntimeModulePromise = (async () => {
 	if (isNode$1) return () => {
 		throw new Error("importRuntimeModule cannot be used in a Node.js context");
 	};
-	return (await import("./dist-DtYihfwd.js")).importRuntimeModule;
+	return (await import("./dist-CKkIPLEp.js")).importRuntimeModule;
 })();
 /**
 * @param hostConfig
