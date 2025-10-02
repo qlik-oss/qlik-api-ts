@@ -87,7 +87,7 @@ const getProductInfo = async ({ hostConfig, noCache } = {}) => {
 	try {
 		if (!(completeUrl in productInfoPromises)) {
 			const fetchOptions = {};
-			if (globalThis.QlikMain && globalThis.QlikMain.resourceNeedsCredentials(completeUrl)) fetchOptions.credentials = "include";
+			if (globalThis.QlikMain?.resourceNeedsCredentials(completeUrl)) fetchOptions.credentials = "include";
 			productInfoPromises[completeUrl] = fetch(completeUrl, fetchOptions).then(async (res) => {
 				if (res.ok) return {
 					data: await res.json(),
