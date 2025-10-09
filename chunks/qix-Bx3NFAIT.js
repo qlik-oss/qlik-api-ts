@@ -2,7 +2,7 @@ import { isBrowser } from "./utils-1j8VpsDa.js";
 import "./interceptors-D4JOaDrv.js";
 import "./global-types-BGMD2sDY.js";
 import "./auth-types-B0Z-Reol.js";
-import { getPlatform, handleAuthenticationError, invokeFetch, isWindows, toValidWebsocketLocationUrl } from "./auth-functions-KuUL5VnO.js";
+import { getPlatform, handleAuthenticationError, invokeFetch, isWindows, toValidWebsocketLocationUrl } from "./auth-functions-C-yT7DYx.js";
 import { getHumanReadableSocketClosedErrorMessage } from "./websocket-errors-CnW4OQWd.js";
 
 //#region src/qix/app-session.ts
@@ -70,44 +70,39 @@ function createExternalSharedSession(externalApp, onWebSocketEvent$1, appSession
 	};
 	externalApp.then((app) => {
 		app.session.on("opened", (event) => {
-			const wsEvent = {
+			triggerEventListeners({
 				eventType: "opened",
 				...appSessionProps,
 				...event
-			};
-			triggerEventListeners(wsEvent);
+			});
 		});
 		app.session.on("closed", (event) => {
-			const wsEvent = {
+			triggerEventListeners({
 				eventType: "closed",
 				...appSessionProps,
 				...event
-			};
-			triggerEventListeners(wsEvent);
+			});
 		});
 		app.session.on("suspended", (event) => {
-			const wsEvent = {
+			triggerEventListeners({
 				eventType: "suspended",
 				...appSessionProps,
 				...event
-			};
-			triggerEventListeners(wsEvent);
+			});
 		});
 		app.session.on("resuming", (event) => {
-			const wsEvent = {
+			triggerEventListeners({
 				eventType: "resuming",
 				...appSessionProps,
 				...event
-			};
-			triggerEventListeners(wsEvent);
+			});
 		});
 		app.session.on("resumed", (event) => {
-			const wsEvent = {
+			triggerEventListeners({
 				eventType: "resumed",
 				...appSessionProps,
 				...event
-			};
-			triggerEventListeners(wsEvent);
+			});
 		});
 	});
 	return sharedSession;
@@ -208,7 +203,7 @@ function listenForWindowsAuthenticationInformation(session) {
 * Opens the websocket and handles a few windows authentication details
 */
 async function createAndSetupEnigmaSession(props, canRetry, onWebSocketEvent$1) {
-	const { createEnigmaSessionEntrypoint } = await import("./qix-chunk-entrypoint-CJ9R1CLV.js");
+	const { createEnigmaSessionEntrypoint } = await import("./qix-chunk-entrypoint-DIohsKqX.js");
 	const session = await createEnigmaSessionEntrypoint(props);
 	setupSessionListeners(session, props, onWebSocketEvent$1);
 	let global;
@@ -233,44 +228,39 @@ async function createAndSetupEnigmaSession(props, canRetry, onWebSocketEvent$1) 
 }
 function setupSessionListeners(session, props, eventListener) {
 	session.on("opened", (event) => {
-		const wsEvent = {
+		eventListener({
 			eventType: "opened",
 			...props,
 			...event
-		};
-		eventListener(wsEvent);
+		});
 	});
 	session.on("closed", (event) => {
-		const wsEvent = {
+		eventListener({
 			eventType: "closed",
 			...props,
 			...event
-		};
-		eventListener(wsEvent);
+		});
 	});
 	session.on("suspended", (event) => {
-		const wsEvent = {
+		eventListener({
 			eventType: "suspended",
 			...props,
 			...event
-		};
-		eventListener(wsEvent);
+		});
 	});
 	session.on("resuming", (event) => {
-		const wsEvent = {
+		eventListener({
 			eventType: "resuming",
 			...props,
 			...event
-		};
-		eventListener(wsEvent);
+		});
 	});
 	session.on("resumed", (event) => {
-		const wsEvent = {
+		eventListener({
 			eventType: "resumed",
 			...props,
 			...event
-		};
-		eventListener(wsEvent);
+		});
 	});
 }
 function separatePromises(input) {
@@ -457,7 +447,7 @@ function createSharedPhoenixSession(props, { onClose, onWebSocketEvent: onWebSoc
 			onWebSocketEventGlobal(event);
 			for (const client of clients) client.onWebSocketEvent(event);
 		};
-		const phoenixConnectionPromise = import("./qix-chunk-entrypoint-CJ9R1CLV.js").then((module) => {
+		const phoenixConnectionPromise = import("./qix-chunk-entrypoint-DIohsKqX.js").then((module) => {
 			return module.createPhoenixConnectionEntrypoint(props, {
 				onWebSocketEvent: onWebSocketEvent$1,
 				getInitialAppActions
@@ -518,8 +508,7 @@ const externalApps = {};
 * If a session already exists for the given props combination, it will be reused.
 */
 function getOrCreateSharedSession(props) {
-	const appSessionId = toGlobalAppSessionId(props);
-	const externalAppSession = externalApps[appSessionId];
+	const externalAppSession = externalApps[toGlobalAppSessionId(props)];
 	if (externalAppSession) return externalAppSession;
 	const key = toGlobalAppSessionId(props);
 	if (sharedSessions[key]) return sharedSessions[key];
@@ -609,8 +598,7 @@ async function createSessionApp(ttlSeconds, workloadType) {
 * @param host Configuration of what host to connect to
 */
 function openAppSession(appIdOrProps) {
-	const sharedSession = getOrCreateSharedSession(typeof appIdOrProps === "string" ? { appId: appIdOrProps } : appIdOrProps);
-	return createAppSession(sharedSession);
+	return createAppSession(getOrCreateSharedSession(typeof appIdOrProps === "string" ? { appId: appIdOrProps } : appIdOrProps));
 }
 /**
 * Factory for getting a react hook that returns the `Doc` of an app based on the supplied app id

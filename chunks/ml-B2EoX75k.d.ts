@@ -1754,7 +1754,13 @@ type RunMlDeploymentAliaseRealtimePredictionsHttpError = {
  */
 declare function getMlDeploymentBatchPredictions(deploymentId: string, query: {
   /** Batch prediction fields by which you can filter responses.<br><br>
-   * - `modelId` UUID string - By model ID */
+   * - `aliasId` UUID string - ID of an alias within the batch prediction
+   * - `createdBy` ID string
+   * - `deploymentId` UUID string - ID of a deployment of a model associated with the experiment
+   * - `experimentId` UUID string - ID of experiment in which model(s) exist
+   * - `experimentVersionId` UUID string - ID of experiment version in which model(s) exist
+   * - `modelId` UUID string - By model ID
+   * - `ownerId` ID string of batch prediction owner */
   filter?: string;
   /** Number of results per page. Default is 32. */
   limit?: number;

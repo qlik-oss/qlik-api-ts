@@ -13,17 +13,17 @@ const importRuntimeModulePromise = (async () => {
 * @returns
 */
 async function getAuthRuntimeModule(hostConfig) {
-	if (isNode$1) return import("./auth-BgDh43gP.js");
+	if (isNode$1) return import("./auth-BhhkR7Kq.js");
 	return (await importRuntimeModulePromise)("auth@v1", hostConfig);
 }
 async function getQixRuntimeModule(hostConfig) {
 	await getAuthRuntimeModule(hostConfig);
-	if (isNode$1) return import("./qix-0TV95g_d.js");
+	if (isNode$1) return import("./qix-Bx3NFAIT.js");
 	return (await importRuntimeModulePromise)("qix@v1", hostConfig);
 }
 async function getInvokeFetchRuntimeModule(hostConfig) {
 	await getAuthRuntimeModule(hostConfig);
-	if (isNode$1) return import("./invoke-fetch-COIxoXL6.js");
+	if (isNode$1) return import("./invoke-fetch-_OliPqk_.js");
 	return (await importRuntimeModulePromise)("invoke-fetch@v1", hostConfig);
 }
 

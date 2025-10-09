@@ -82,8 +82,7 @@ function templateUrl(baseUrl) {
 * `data` is `undefined` if the file can not be retrieved.
 */
 const getProductInfo = async ({ hostConfig, noCache } = {}) => {
-	const url = toValidLocationUrl(hostConfig);
-	const completeUrl = templateUrl(url);
+	const completeUrl = templateUrl(toValidLocationUrl(hostConfig));
 	try {
 		if (!(completeUrl in productInfoPromises)) {
 			const fetchOptions = {};
@@ -249,13 +248,11 @@ async function loadCachedOauthTokens(hostConfig) {
 }
 async function loadOrAcquireAccessTokenOauth(hostConfig, acquireTokens) {
 	if (!hostConfig.clientId) throw new InvalidHostConfigError("A host config with authType set to \"oauth2\" has to also provide a clientId");
-	const topic = getTopicFromOauthHostConfig(hostConfig);
-	return loadOrAcquireAccessToken(topic, acquireTokens, hostConfig.noCache, hostConfig.accessTokenStorage);
+	return loadOrAcquireAccessToken(getTopicFromOauthHostConfig(hostConfig), acquireTokens, hostConfig.noCache, hostConfig.accessTokenStorage);
 }
 async function loadOrAcquireAccessTokenAnon(hostConfig, acquireTokens) {
 	if (!hostConfig.accessCode) throw new InvalidHostConfigError("A host config with authType set to \"anonymous\" has to also provide an accessCode");
-	const topic = getTopicFromAnonHostConfig(hostConfig);
-	return loadOrAcquireAccessToken(topic, acquireTokens, false, void 0);
+	return loadOrAcquireAccessToken(getTopicFromAnonHostConfig(hostConfig), acquireTokens, false, void 0);
 }
 async function loadOrAcquireAccessToken(topic, acquireTokens, noCache, accessTokenStorage) {
 	if (noCache) return acquireTokens();
@@ -336,14 +333,13 @@ function byteArrayToBase64(hashArray) {
 async function sha256(message) {
 	const msgBuffer = new TextEncoder().encode(message);
 	const hashBuffer = await globalThis.crypto.subtle.digest("SHA-256", msgBuffer);
-	const hashArray = Array.from(new Uint8Array(hashBuffer));
-	return byteArrayToBase64(hashArray).replaceAll(/\+/g, "-").replaceAll(/\//g, "_").replace(/=+$/, "");
+	return byteArrayToBase64(Array.from(new Uint8Array(hashBuffer))).replaceAll(/\+/g, "-").replaceAll(/\//g, "_").replace(/=+$/, "");
 }
 async function createInteractiveLoginUrl(hostConfig, redirectUri, state, verifier) {
 	const clientId = hostConfig.clientId || "";
 	const locationUrl = toValidLocationUrl(hostConfig);
 	const codeChallenge = await sha256(verifier);
-	const queryParams = {
+	return `${locationUrl}/oauth/authorize?${toQueryString({
 		response_type: "code",
 		client_id: clientId,
 		redirect_uri: redirectUri,
@@ -351,8 +347,7 @@ async function createInteractiveLoginUrl(hostConfig, redirectUri, state, verifie
 		state,
 		code_challenge: codeChallenge,
 		code_challenge_method: "S256"
-	};
-	return `${locationUrl}/oauth/authorize?${toQueryString(queryParams)}`;
+	})}`;
 }
 async function startFullPageLoginFlow(hostConfig) {
 	const clientId = hostConfig.clientId || "";
@@ -367,7 +362,7 @@ async function startFullPageLoginFlow(hostConfig) {
 	saveInSessionStorage(topic, "verifier", verifier);
 	saveInSessionStorage(topic, "href", globalThis.location.href);
 	saveInSessionStorage("", "client-in-progress", topic);
-	const queryParams = {
+	const url = `${locationUrl}/oauth/authorize?${toQueryString({
 		response_type: "code",
 		client_id: clientId,
 		redirect_uri: redirectUri,
@@ -375,8 +370,7 @@ async function startFullPageLoginFlow(hostConfig) {
 		state,
 		code_challenge: codeChallenge,
 		code_challenge_method: "S256"
-	};
-	const url = `${locationUrl}/oauth/authorize?${toQueryString(queryParams)}`;
+	})}`;
 	globalThis.location.replace(url);
 }
 async function exchangeCodeAndVerifierForAccessTokenData(hostConfig, code, verifier, redirectUri) {
@@ -629,8 +623,7 @@ async function exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, pur
 async function toError(response) {
 	const body = await response.text();
 	try {
-		const data = JSON.parse(body);
-		return new AuthorizationError(data.errors);
+		return new AuthorizationError(JSON.parse(body).errors);
 	} catch {
 		return new AuthorizationError([{
 			code: "unknown",
@@ -670,16 +663,13 @@ async function getOrCreateTrackingCode(hostConfig) {
 }
 function createTrackingCode() {
 	const timeStamp = Math.floor(Date.now() / 1e3).toString(16);
-	const randomString = generateRandomHexString(40 - timeStamp.length);
-	return `${timeStamp}${randomString}`;
+	return `${timeStamp}${generateRandomHexString(40 - timeStamp.length)}`;
 }
 async function getAnonymousAccessToken(hostConfig) {
 	const { accessCode, clientId } = hostConfig;
 	if (!accessCode || !clientId) throw new InvalidHostConfigError("A host config with authType set to \"anonymous\" has to provide both an accessCode and clientId");
 	const tokens = await loadOrAcquireAccessTokenAnon(hostConfig, async () => {
-		const baseUrl = toValidLocationUrl(hostConfig);
-		const trackingCode = await getOrCreateTrackingCode(hostConfig);
-		return getAnonymousOauthAccessToken(baseUrl, accessCode, clientId, trackingCode);
+		return getAnonymousOauthAccessToken(toValidLocationUrl(hostConfig), accessCode, clientId, await getOrCreateTrackingCode(hostConfig));
 	});
 	if (!tokens) return "";
 	if (tokens.errors) throw new AuthorizationError(tokens.errors);
@@ -695,14 +685,12 @@ async function getRestCallAuthParams$8({ hostConfig }) {
 }
 async function getWebSocketAuthParams$8({ hostConfig }) {
 	return { queryParams: { accessToken: await handlePotentialAuthenticationErrorAndRetry$1(hostConfig, async () => {
-		const accessToken = await getAnonymousAccessToken(hostConfig);
-		return exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, "websocket");
+		return exchangeAccessTokenForTemporaryToken(hostConfig, await getAnonymousAccessToken(hostConfig), "websocket");
 	}) } };
 }
 async function getWebResourceAuthParams$2({ hostConfig }) {
 	return { queryParams: { accessToken: await handlePotentialAuthenticationErrorAndRetry$1(hostConfig, async () => {
-		const accessToken = await getAnonymousAccessToken(hostConfig);
-		return exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, "websocket");
+		return exchangeAccessTokenForTemporaryToken(hostConfig, await getAnonymousAccessToken(hostConfig), "websocket");
 	}) } };
 }
 async function handleAuthenticationError$8({ hostConfig }) {
@@ -1140,11 +1128,9 @@ async function getInvokeFetchUrlParams({ method, pathTemplate, pathVariables, qu
 		...query,
 		...authQueryParams
 	});
-	const completeUrl = toCompleteUrl(url, queryString);
-	const cacheKey = toCacheKey(url, queryString, serializeHostConfig$1(options?.hostConfig), options?.headers);
 	return {
-		completeUrl,
-		cacheKey,
+		completeUrl: toCompleteUrl(url, queryString),
+		cacheKey: toCacheKey(url, queryString, serializeHostConfig$1(options?.hostConfig), options?.headers),
 		authHeaders,
 		credentials
 	};
@@ -1175,8 +1161,7 @@ function invokeFetchWithUrlAndRetry(api, { method, completeUrl, cacheKey, body, 
 		return cloneResultPromise(cacheEntry.value);
 	}
 	const resultPromiseFromBackend = performActualHttpFetch(method, completeUrl, body, contentType, options, authHeaders, credentials, userAgent);
-	const resultAfterAuthenticationCheck = interceptAuthenticationErrors(options?.hostConfig, resultPromiseFromBackend, performRetry);
-	const resultPromiseAfterPagingAddon = addPagingFunctions(api, resultAfterAuthenticationCheck, method, body, options, authHeaders, credentials);
+	const resultPromiseAfterPagingAddon = addPagingFunctions(api, interceptAuthenticationErrors(options?.hostConfig, resultPromiseFromBackend, performRetry), method, body, options, authHeaders, credentials);
 	const resultPromiseAfterCacheClearing = clearCacheOnError(cache[api], cacheKey, resultPromiseAfterPagingAddon);
 	if (shouldPopulateCache(method)) {
 		if (Object.hasOwn && !Object.hasOwn(cache, api) || api === "__proto__") throw new Error(`Forbidden api name: ${api}`);
@@ -1272,8 +1257,7 @@ async function download(blob, filename) {
 	} else {
 		const { writeFileSync } = await import("fs");
 		const arrayBuffer = await blob.arrayBuffer();
-		const uint8Array = new Uint8Array(arrayBuffer);
-		writeFileSync(filename, uint8Array);
+		writeFileSync(filename, new Uint8Array(arrayBuffer));
 	}
 }
 
@@ -1613,14 +1597,12 @@ async function getRestCallAuthParams$3({ hostConfig }) {
 }
 async function getWebSocketAuthParams$3({ hostConfig }) {
 	return { queryParams: { accessToken: await handlePotentialAuthenticationErrorAndRetry(hostConfig, async () => {
-		const accessToken = await getOAuthAccessToken(hostConfig);
-		return exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, "websocket");
+		return exchangeAccessTokenForTemporaryToken(hostConfig, await getOAuthAccessToken(hostConfig), "websocket");
 	}) } };
 }
 async function getWebResourceAuthParams$1({ hostConfig }) {
 	return { queryParams: { accessToken: await handlePotentialAuthenticationErrorAndRetry(hostConfig, async () => {
-		const accessToken = await getOAuthAccessToken(hostConfig);
-		return exchangeAccessTokenForTemporaryToken(hostConfig, accessToken, "webresource");
+		return exchangeAccessTokenForTemporaryToken(hostConfig, await getOAuthAccessToken(hostConfig), "webresource");
 	}) } };
 }
 async function handleAuthenticationError$3({ hostConfig }) {
@@ -1964,8 +1946,7 @@ function globalReplacer(key, value) {
 * Serializes the provided hostConfig, if present, otherwise the default one.
 */
 function serializeHostConfig(hostConfig) {
-	const hostConfigToUse = removeDefaults(withResolvedHostConfig(hostConfig));
-	const sorted = sortKeys(hostConfigToUse);
+	const sorted = sortKeys(removeDefaults(withResolvedHostConfig(hostConfig)));
 	return JSON.stringify(sorted, globalReplacer);
 }
 const registeredHostConfigs = /* @__PURE__ */ new Map();

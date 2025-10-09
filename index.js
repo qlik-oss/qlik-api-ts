@@ -1,9 +1,9 @@
 import "./chunks/utils-1j8VpsDa.js";
-import "./chunks/public-runtime-modules-BBAJOUvT.js";
-import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-Z1aRlURh.js";
-import { auth_default } from "./chunks/auth-Bgj9KHYv.js";
+import "./chunks/public-runtime-modules-Cw_OPlEz.js";
+import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-A7qVbXGE.js";
+import { auth_default } from "./chunks/auth-fSev2CDn.js";
 import { interceptors_default as interceptors_default$1 } from "./chunks/interceptors-D4JOaDrv.js";
-import { qix_default } from "./chunks/qix-DLKCrPFH.js";
+import { qix_default } from "./chunks/qix-Bt4MYnCb.js";
 
 //#region src/runtime-api-generator/runtime-api-generator-common.ts
 const methodAbbreviations = {
@@ -557,7 +557,8 @@ const createDataSourcesRuntimeAPI = apiDefToApiPublic("data-sources", { api: { v
 	"": ["getDataSources:GQ:"],
 	"{dataSourceId}": {
 		"api-specs": ["getDataSourceApiSpecs:G:"],
-		gateways: ["getDataSourceGateways:GQ:"]
+		gateways: ["getDataSourceGateways:GQ:"],
+		settings: ["getDataSourceSettings:G:", "putDataSourceSettings:UBJ:"]
 	}
 } } } });
 const createDataStoresRuntimeAPI = apiDefToApiPublic("data-stores", { api: { v1: { "data-stores": {
