@@ -9,7 +9,7 @@ type Delivery = {
   request?: {
     /** The sent body/payload of the delivery */
     body?: unknown;
-    /** Headers sent for this delivery */
+    /** Headers sent for this delivery, values of encryptedHeaders are omitted as such "**OMITTED**" */
     headers?: Record<string, string>;
     /** URL used for this delivery */
     url?: string;
@@ -17,7 +17,7 @@ type Delivery = {
   response?: {
     /** The received body of the delivery */
     body?: string;
-    /** Headers received for this delivery */
+    /** Headers received for this delivery, values of encryptedHeaders are omitted as such "**OMITTED**" */
     headers?: Record<string, string>;
     /** The HTTP status code of the response */
     statusCode?: number;
@@ -84,6 +84,8 @@ type WebhookBase = {
   readonly disabledReasonCode?: string;
   /** Whether the webhook is active and sending requests */
   enabled?: boolean;
+  /** These headers are persisted encrypted and decrypted to be sent as normal headers in post request (webhook delivery), in case of URL change these headers will need to be re-entered. Note: duplicate headers are not allowed and are case-insensitive. */
+  encryptedHeaders?: Record<string, string>;
   /** Types of events for which the webhook should trigger. Retrieve available types from `/v1/webhooks/event-types`. */
   eventTypes?: string[];
   /** Filter that should match for a webhook to be triggered.
@@ -93,7 +95,7 @@ type WebhookBase = {
    * Note that attribute values must be valid JSON strings, hence they're enclosed with double quotes
    * For more detailed information regarding the SCIM filter syntax (RFC7644) used please follow the link to external documentation. */
   filter?: string;
-  /** Additional headers in the post request */
+  /** Additional headers in the post request (webhook delivery). Note: duplicate headers are not allowed and are case-insensitive. */
   headers?: Record<string, string>;
   /** The webhook's unique identifier */
   readonly id?: string;
@@ -127,7 +129,7 @@ type WebhookPatch = {
   /** The operation to be performed */
   op: "add" | "remove" | "replace";
   /** The path for the given resource field to patch */
-  path: "/name" | "/description" | "/url" | "/eventTypes" | "/headers" | "/enabled" | "/secret";
+  path: "/name" | "/description" | "/url" | "/eventTypes" | "/headers" | "/enabled" | "/secret" | "/encryptedHeaders";
   /** The value to be used for this operation. */
   value?: boolean | number | unknown | string;
 };
@@ -135,9 +137,57 @@ type WebhookPost = WebhookBase & {
   /** Indicates from where the webhook was created and its purpose */
   origin?: "api" | "automations" | "management-console";
 };
-type WebhookResponse = WebhookBase & {
+type WebhookResponse = WebhookResponseBase & {
   /** Indicates from where the webhook was created and its purpose */
   readonly origin?: "api" | "automations" | "management-console";
+};
+type WebhookResponseBase = {
+  /** If enabled the certificate chain of the configured URL will be checked for revocation before sending the webhook. */
+  checkCertificateRevocation?: boolean;
+  /** The UTC timestamp when the webhook was created */
+  readonly createdAt?: string;
+  /** The id of the user that created the webhook */
+  readonly createdByUserId?: string;
+  /** The reason for creating the webhook */
+  description?: string;
+  /** The reason for the webhook to be disabled */
+  readonly disabledReason?: string;
+  /** The unique code for the reason */
+  readonly disabledReasonCode?: string;
+  /** Whether the webhook is active and sending requests */
+  enabled?: boolean;
+  /** Additional encrypted headers in the post request */
+  encryptedHeaders?: string[];
+  /** Types of events for which the webhook should trigger. Retrieve available types from `/v1/webhooks/event-types`. */
+  eventTypes?: string[];
+  /** Filter that should match for a webhook to be triggered.
+   * Supported common attribute names are 'id', 'spaceId' and 'topLevelResourceId', beside the common attributes the "com.qlik.v1.app.reload.finished" event also supports "data.status" that could be either "ok" or "error" but can't be used together with other event types.
+   * Supported attribute operators are 'eq' and 'ne'.
+   * Supported logical operators are 'and' and 'or'.
+   * Note that attribute values must be valid JSON strings, hence they're enclosed with double quotes
+   * For more detailed information regarding the SCIM filter syntax (RFC7644) used please follow the link to external documentation. */
+  filter?: string;
+  /** Additional headers in the post request */
+  headers?: Record<string, string>;
+  /** The webhook's unique identifier */
+  readonly id?: string;
+  /** Defines at what level the webhook should operate: for all resources belonging to a tenant or restricted to only those accessible by the webhook-creator. */
+  level?: "tenant" | "user";
+  /** The name for the webhook */
+  name: string;
+  /** The id of the user that owns the webhook, only applicable for user level webhooks */
+  ownerId?: string;
+  /** @deprecated
+   * String used as secret for calculating HMAC hash sent as header */
+  secret?: string;
+  /** Provides status of the string used as secret for calculating HMAC hash sent as header is already added or not */
+  secretKeyAdded?: boolean;
+  /** The UTC timestamp when the webhook was last updated */
+  readonly updatedAt?: string;
+  /** The id of the user that last updated the webhook */
+  readonly updatedByUserId?: string;
+  /** Target URL for webhook HTTPS requests */
+  url: string;
 };
 /**
  * Retrieves all webhooks entries for a tenant that the user has access to. Users assigned the `TenantAdmin` role can retrieve all webhooks. A user can have up to 150 webhooks at one time.
@@ -446,4 +496,4 @@ type WebhooksAPI = {
  */
 declare const webhooksExport: WebhooksAPI;
 //#endregion
-export { CreateWebhookHttpError, CreateWebhookHttpResponse, DeleteWebhookHttpError, DeleteWebhookHttpResponse, Delivery, DeliveryList, Error, ErrorResponse, EventType, EventTypes, GetWebhookDeliveriesHttpError, GetWebhookDeliveriesHttpResponse, GetWebhookDeliveryHttpError, GetWebhookDeliveryHttpResponse, GetWebhookEventTypesHttpError, GetWebhookEventTypesHttpResponse, GetWebhookHttpError, GetWebhookHttpResponse, GetWebhooksHttpError, GetWebhooksHttpResponse, Link, PatchWebhookHttpError, PatchWebhookHttpResponse, ResendWebhookDeliveryHttpError, ResendWebhookDeliveryHttpResponse, UpdateWebhookHttpError, UpdateWebhookHttpResponse, WebhookBase, WebhookList, WebhookPatch, WebhookPost, WebhookResponse, WebhooksAPI, clearCache, createWebhook, deleteWebhook, getWebhook, getWebhookDeliveries, getWebhookDelivery, getWebhookEventTypes, getWebhooks, patchWebhook, resendWebhookDelivery, updateWebhook, webhooksExport };
+export { CreateWebhookHttpError, CreateWebhookHttpResponse, DeleteWebhookHttpError, DeleteWebhookHttpResponse, Delivery, DeliveryList, Error, ErrorResponse, EventType, EventTypes, GetWebhookDeliveriesHttpError, GetWebhookDeliveriesHttpResponse, GetWebhookDeliveryHttpError, GetWebhookDeliveryHttpResponse, GetWebhookEventTypesHttpError, GetWebhookEventTypesHttpResponse, GetWebhookHttpError, GetWebhookHttpResponse, GetWebhooksHttpError, GetWebhooksHttpResponse, Link, PatchWebhookHttpError, PatchWebhookHttpResponse, ResendWebhookDeliveryHttpError, ResendWebhookDeliveryHttpResponse, UpdateWebhookHttpError, UpdateWebhookHttpResponse, WebhookBase, WebhookList, WebhookPatch, WebhookPost, WebhookResponse, WebhookResponseBase, WebhooksAPI, clearCache, createWebhook, deleteWebhook, getWebhook, getWebhookDeliveries, getWebhookDelivery, getWebhookEventTypes, getWebhooks, patchWebhook, resendWebhookDelivery, updateWebhook, webhooksExport };

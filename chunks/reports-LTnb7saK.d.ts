@@ -47,7 +47,7 @@ type CycleOutput = {
   namingPattern?: "fieldValueWithUnderscore";
   /** Output to be used to export a single visualization, a sheet, Sense Excel template as pdf. For Sense Excel template (sense-excel-template-1.0) no properties are needed, any property specified has no effect. */
   pdfOutput?: PdfOutput;
-  type: "excel" | "pdf" | "html";
+  type: "excel" | "pdf" | "html" | "powerpoint" | "word";
 };
 /**
  * Definitions of common properties that are shared between templates, e.g. selectionsByState can be the same for all templates within a composition of templates.
@@ -289,6 +289,10 @@ type OutputItem = {
    * Each template type supports specific output types:
    *    - composition-1.0 supports only pdfcomposition and pptxcomposition output types
    *    - sense-excel-template-1.0 supports only excel and pdf output type
+   *    - sense-pixel-perfect-template-1.0 supports only pdf output type
+   *    - sense-html-template-1.0 supports only html output type
+   *    - sense-powerpoint-template-1.0 supports powerpoint and pdf output types
+   *    - sense-word-template-1.0 supports word and pdf output types
    *    - sense-image-1.0 supports pdf, pptx and image output types
    *    - sense-sheet-1.0 supports pdf and pptx output type
    *    - sense-data-1.0 supports xlsx output type
@@ -302,7 +306,7 @@ type OutputItem = {
    *    - image requires imageOutput to be set
    *    - csv doesn't have csv output
    *    - xlsx requires xlsxOutput to be set */
-  type: "image" | "pdf" | "xlsx" | "jsondata" | "pdfcomposition" | "excel" | "pptx" | "pptxcomposition" | "csv" | "cycle" | "html";
+  type: "image" | "pdf" | "xlsx" | "jsondata" | "pdfcomposition" | "excel" | "pptx" | "pptxcomposition" | "csv" | "cycle" | "html" | "powerpoint" | "word";
 };
 type OutputList = {
   /** a list of outputs containing all the report outputs */
@@ -510,10 +514,14 @@ type ReportRequest = {
   senseImageTemplate?: SenseImageTemplate;
   /** Used to produce reports from a template file. */
   sensePixelPerfectTemplate?: SenseFileTemplate;
+  /** Used to produce reports from a template file. */
+  sensePowerPointTemplate?: SenseFileTemplate;
   /** Used to export a sheet as pdf or pptx. */
   senseSheetTemplate?: SenseSheetTemplate;
+  /** Used to produce reports from a template file. */
+  senseWordTemplate?: SenseFileTemplate;
   /** Template type and version using semantic versioning. It must have the following name convention: dashed-separated-template-name-MAJOR.MINOR.
-   * Please note that sense-html-template-1.0, sense-story-x.0 and qv-data-x.0 are only for internal use.
+   * Please note that sense-powerpoint-template-1.0, sense-word-template-1.0, sense-story-x.0 and qv-data-x.0 are only for internal use.
    *
    * Each type requires a specific template to be provided:
    *   - composition-1.0 requires compositionTemplates to be set
@@ -523,6 +531,8 @@ type ReportRequest = {
    *   - sense-data-1.0 requires senseDataTemplate to be set
    *   - sense-pixel-perfect-template-1.0 requires sensePixelPerfectTemplate to be set
    *   - sense-html-template-1.0 requires senseHtmlTemplate to be set
+   *   - sense-powerpoint-template-1.0 requires sensePowerPointTemplate to be set
+   *   - sense-word-template-1.0 requires senseWordTemplate to be set
    *
    * Each template type supports specific output types:
    *   - composition-1.0 supports pdfcomposition and pptxcomposition output type
@@ -532,6 +542,8 @@ type ReportRequest = {
    *   - sense-data-1.0 supports xlsx output type
    *   - sense-pixel-perfect-template-1.0 supports pdf output types
    *   - sense-html-template-1.0 supports html output types
+   *   - sense-powerpoint-template-1.0 supports powerpoint and pdf output types
+   *   - sense-word-template-1.0 supports word and pdf output types
    *
    * Each output type requires a specific output to be provided:
    *   - pdfcomposition requires pdfCompositionOutput to be set
@@ -540,7 +552,7 @@ type ReportRequest = {
    *   - pptx requires pptxOutput to be set
    *   - image requires imageOutput to be set
    *   - xlsx requires xlsxOutput to be set */
-  type: "composition-1.0" | "sense-image-1.0" | "sense-data-1.0" | "sense-sheet-1.0" | "sense-story-1.0" | "qv-data-1.0" | "qv-data-2.0" | "sense-excel-template-1.0" | "sense-pixel-perfect-template-1.0" | "sense-html-template-1.0";
+  type: "composition-1.0" | "sense-image-1.0" | "sense-data-1.0" | "sense-sheet-1.0" | "sense-story-1.0" | "qv-data-1.0" | "qv-data-2.0" | "sense-excel-template-1.0" | "sense-pixel-perfect-template-1.0" | "sense-html-template-1.0" | "sense-powerpoint-template-1.0" | "sense-word-template-1.0";
 };
 /**
  * @example

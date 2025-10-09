@@ -3,7 +3,13 @@
 </div></li><li><span><span class="tsd-kind-parameter">query</span>: <span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">filter</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">limit</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">offset</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">sort</span><span class="tsd-signature-symbol">?:</span> <a href="../types/ml.EnumSortBatchPredictions.html" class="tsd-signature-type tsd-kind-type-alias">EnumSortBatchPredictions</a><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></span><div class="tsd-comment tsd-typography"><p>an object with query parameters</p>
 </div><ul class="tsd-parameters"><li class="tsd-parameter"><h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">filter</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5><div class="tsd-comment tsd-typography"><p>Batch prediction fields by which you can filter responses.<br><br></p>
 <ul>
+<li><code>aliasId</code> UUID string - ID of an alias within the batch prediction</li>
+<li><code>createdBy</code> ID string</li>
+<li><code>deploymentId</code> UUID string - ID of a deployment of a model associated with the experiment</li>
+<li><code>experimentId</code> UUID string - ID of experiment in which model(s) exist</li>
+<li><code>experimentVersionId</code> UUID string - ID of experiment version in which model(s) exist</li>
 <li><code>modelId</code> UUID string - By model ID</li>
+<li><code>ownerId</code> ID string of batch prediction owner</li>
 </ul>
 </div></li><li class="tsd-parameter"><h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">limit</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5><div class="tsd-comment tsd-typography"><p>Number of results per page. Default is 32.</p>
 </div></li><li class="tsd-parameter"><h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">offset</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5><div class="tsd-comment tsd-typography"><p>Number of rows to skip before getting page[size]</p>

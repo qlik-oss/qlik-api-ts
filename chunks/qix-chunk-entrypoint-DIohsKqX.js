@@ -2,7 +2,7 @@ import { createResolvablePromise as createResolvablePromise$1, isNode } from "./
 import "./interceptors-D4JOaDrv.js";
 import "./global-types-BGMD2sDY.js";
 import "./auth-types-B0Z-Reol.js";
-import { appendQueryToUrl, exposeInternalApiOnWindow, generateRandomString, getRestCallAuthParams, getWebSocketAuthParams, handleAuthenticationError, isWindows, toValidWebsocketLocationUrl } from "./auth-functions-KuUL5VnO.js";
+import { appendQueryToUrl, exposeInternalApiOnWindow, generateRandomString, getRestCallAuthParams, getWebSocketAuthParams, handleAuthenticationError, isWindows, toValidWebsocketLocationUrl } from "./auth-functions-C-yT7DYx.js";
 import { getHumanReadableSocketClosedErrorMessage } from "./websocket-errors-CnW4OQWd.js";
 import isPlainObject from "lodash/isPlainObject.js";
 import merge from "lodash/merge.js";
@@ -14940,9 +14940,7 @@ async function createEnigmaSession({ appId, identity, hostConfig, useReloadEngin
 	const locationUrl = toValidWebsocketLocationUrl(hostConfig);
 	const reloadUri = encodeURIComponent(`${locationUrl}/sense/app/${appId}`);
 	const ttlPart = ttlSeconds !== void 0 && ttlSeconds >= 0 ? `/ttl/${ttlSeconds}` : "";
-	const identityPart = identity ? `/identity/${identity}` : "";
-	const workloadTypePart = useReloadEngine ? "&workloadType=interactive-reload" : workloadType ? `&workloadType=${workloadType}` : "";
-	const baseUrl = `${locationUrl}/app/${appId}${identityPart}${ttlPart}?reloadUri=${reloadUri}${workloadTypePart}`.replace(/^http/, "ws");
+	const baseUrl = `${locationUrl}/app/${appId}${identity ? `/identity/${identity}` : ""}${ttlPart}?reloadUri=${reloadUri}${useReloadEngine ? "&workloadType=interactive-reload" : workloadType ? `&workloadType=${workloadType}` : ""}`.replace(/^http/, "ws");
 	const unitTestCreateWebSocket = hostConfig?.createWebSocket;
 	let createSocketBuilder;
 	if (isNodeEnvironment && !unitTestCreateWebSocket) {
@@ -15752,8 +15750,7 @@ function buildQixPathAndQuery({ appId, identity, hostConfig, useReloadEngine = f
 		forceUniqueSessionForTestPurposes = false;
 	}
 	const ttlPart = ttlSeconds !== void 0 && ttlSeconds >= 0 ? `/ttl/${ttlSeconds}` : "";
-	const identityPart = identityToUse ? `/identity/${identityToUse}` : "";
-	const path = `/app/${appId}${identityPart}${ttlPart}`;
+	const path = `/app/${appId}${identityToUse ? `/identity/${identityToUse}` : ""}${ttlPart}`;
 	const locationUrl = toValidWebsocketLocationUrl(hostConfig);
 	const query = { reloadUri: encodeURIComponent(`${locationUrl}/sense/app/${appId}`) };
 	if (useReloadEngine) query["workloadType"] = "interactive-reload";

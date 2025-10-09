@@ -108,17 +108,12 @@ type TenantDeactivateResponse = {
   /** The status of the tenant. */
   status?: "disabled";
 };
+type TenantMultipleMetaErrorsDetail = TenantSingleMetaErrorDetail[];
 type TenantPatchErrors = {
   errors?: {
     /** The error code. */
     code: string;
-    /** Additional properties relating to the error. */
-    meta?: {
-      /** The error code. */
-      code?: string;
-      /** Summary of the problem. */
-      title?: string;
-    };
+    meta?: TenantSingleMetaErrorDetail | TenantMultipleMetaErrorsDetail;
     /** References to the source of the error. */
     source?: {
       /** The URI query parameter that caused the error. */
@@ -173,6 +168,12 @@ type TenantPatchSchema = {
   /** The value to be used for this operation. */
   value: string | boolean;
 }[];
+type TenantSingleMetaErrorDetail = {
+  /** The error code. */
+  code?: string;
+  /** The error summary. */
+  title?: string;
+};
 /**
  * Creates a tenant in the requested region, linked to the provided license key. You must use a regional OAuth client generated via the [My Qlik portal](https://account.myqlik.qlik.com/account) to call this endpoint. Tenant creation, deactivation, and reactivation requests must be sent to the register endpoint in the relevant Qlik Cloud region, e.g. `https://register.us.qlikcloud.com/api/v1/tenants` if interacting with tenants in the `us` region.
  *
@@ -357,4 +358,4 @@ type TenantsAPI = {
  */
 declare const tenantsExport: TenantsAPI;
 //#endregion
-export { CreateTenantHttpError, CreateTenantHttpResponse, DeactivateTenantHttpError, DeactivateTenantHttpResponse, Error, Errors, GetMyTenantHttpError, GetMyTenantHttpResponse, GetTenantHttpError, GetTenantHttpResponse, PatchTenant400HttpError, PatchTenant403HttpError, PatchTenant404HttpError, PatchTenant429HttpError, PatchTenantHttpError, PatchTenantHttpResponse, PatchTenantdefaultHttpError, ReactivateTenantHttpError, ReactivateTenantHttpResponse, Tenant, TenantCreationRequest, TenantDeactivateRequest, TenantDeactivateResponse, TenantPatchErrors, TenantPatchSchema, TenantsAPI, clearCache, createTenant, deactivateTenant, getMyTenant, getTenant, patchTenant, reactivateTenant, tenantsExport };
+export { CreateTenantHttpError, CreateTenantHttpResponse, DeactivateTenantHttpError, DeactivateTenantHttpResponse, Error, Errors, GetMyTenantHttpError, GetMyTenantHttpResponse, GetTenantHttpError, GetTenantHttpResponse, PatchTenant400HttpError, PatchTenant403HttpError, PatchTenant404HttpError, PatchTenant429HttpError, PatchTenantHttpError, PatchTenantHttpResponse, PatchTenantdefaultHttpError, ReactivateTenantHttpError, ReactivateTenantHttpResponse, Tenant, TenantCreationRequest, TenantDeactivateRequest, TenantDeactivateResponse, TenantMultipleMetaErrorsDetail, TenantPatchErrors, TenantPatchSchema, TenantSingleMetaErrorDetail, TenantsAPI, clearCache, createTenant, deactivateTenant, getMyTenant, getTenant, patchTenant, reactivateTenant, tenantsExport };

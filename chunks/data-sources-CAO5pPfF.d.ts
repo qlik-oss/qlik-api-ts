@@ -13,11 +13,11 @@ type ApiSpecResponse = {
  * Datasource metadata
  */
 type ConnectorNodesInfo = {
-  /** List of datasource Ids provided by the provider */
+  /** List of datasource IDs provided by the provider */
   cachedDataSources?: string[];
   /** Contract type used to communicate with the connector (between 0 and 3) */
   contractType: number;
-  /** Indicates if the datasources is up to date */
+  /** Indicates whether the datasources are up to date */
   dataSourcesUpdated: boolean;
   /** Connector provider name */
   providerName: string;
@@ -38,7 +38,7 @@ type DataSourceNew = {
   dataSourceId: string;
   /** Datasource property name (could be null) */
   dataSourcePropertyName?: string;
-  /** Indicates if the datasource is disabled */
+  /** Indicates whether the datasource is disabled */
   disabled?: boolean;
   /** Datasource name */
   name: string;
@@ -50,6 +50,20 @@ type DataSourceNew = {
   qriDefinition?: QriDefinition;
   /** UI related metadata (only present when 'includeui' is set to true in query) */
   uiInfo?: UiInfo;
+};
+/**
+ * Defines configuration settings for a data source.
+ */
+type DataSourceSettingsRequest = {
+  /** Indicates whether the data source is disabled. */
+  disabled: boolean;
+};
+/**
+ * Represents the current settings of a data source.
+ */
+type DataSourceSettingsResponse = {
+  /** Indicates whether the data source is disabled. */
+  disabled?: boolean;
 };
 type DataSourcesResponseNew = {
   /** List of connector nodes (only present when query parameter 'detail' is set to true) */
@@ -138,7 +152,7 @@ declare function getDataSources(query: {
   dataSourceId?: string;
   /** Determines if provider detail is returned */
   detail?: boolean;
-  /** When true disabled datasources are also included in the response */
+  /** When true, disabled datasources are also included in the response */
   includeDisabled?: boolean;
   /** Determines if UI info is returned */
   includeui?: boolean;
@@ -215,6 +229,45 @@ type GetDataSourceGatewaysHttpError = {
   status: 401 | 404 | 500;
 };
 /**
+ * Retrieves the settings for a data source.
+ * @example
+ * getDataSourceSettings(
+ *   "rest"
+ * )
+ *
+ * @param dataSourceId Datasource ID
+ * @throws GetDataSourceSettingsHttpError
+ */
+declare function getDataSourceSettings(dataSourceId: string, options?: ApiCallOptions): Promise<GetDataSourceSettingsHttpResponse>;
+type GetDataSourceSettingsHttpResponse = {
+  data: DataSourceSettingsResponse;
+  headers: Headers;
+  status: 200;
+};
+type GetDataSourceSettingsHttpError = {
+  data: ResponseErrors;
+  headers: Headers;
+  status: 400 | 401 | 404 | 500;
+};
+/**
+ * Updates the settings for a data source.
+ *
+ * @param dataSourceId Datasource ID
+ * @param body an object with the body content
+ * @throws PutDataSourceSettingsHttpError
+ */
+declare function putDataSourceSettings(dataSourceId: string, body: DataSourceSettingsRequest, options?: ApiCallOptions): Promise<PutDataSourceSettingsHttpResponse>;
+type PutDataSourceSettingsHttpResponse = {
+  data: DataSourceSettingsResponse;
+  headers: Headers;
+  status: 200;
+};
+type PutDataSourceSettingsHttpError = {
+  data: ResponseErrors;
+  headers: Headers;
+  status: 400 | 401 | 404 | 500;
+};
+/**
  * Clears the cache for data-sources api requests.
  */
 declare function clearCache(): void;
@@ -262,6 +315,25 @@ type DataSourcesAPI = {
    */
   getDataSourceGateways: typeof getDataSourceGateways;
   /**
+   * Retrieves the settings for a data source.
+   * @example
+   * getDataSourceSettings(
+   *   "rest"
+   * )
+   *
+   * @param dataSourceId Datasource ID
+   * @throws GetDataSourceSettingsHttpError
+   */
+  getDataSourceSettings: typeof getDataSourceSettings;
+  /**
+   * Updates the settings for a data source.
+   *
+   * @param dataSourceId Datasource ID
+   * @param body an object with the body content
+   * @throws PutDataSourceSettingsHttpError
+   */
+  putDataSourceSettings: typeof putDataSourceSettings;
+  /**
    * Clears the cache for data-sources api requests.
    */
   clearCache: typeof clearCache;
@@ -271,4 +343,4 @@ type DataSourcesAPI = {
  */
 declare const dataSourcesExport: DataSourcesAPI;
 //#endregion
-export { ApiSpecResponse, ConnectorNodesInfo, DataSourceNew, DataSourcesAPI, DataSourcesResponseNew, GetDataSourceApiSpecsHttpError, GetDataSourceApiSpecsHttpResponse, GetDataSourceGatewaysHttpError, GetDataSourceGatewaysHttpResponse, GetDataSourcesHttpError, GetDataSourcesHttpResponse, PublicApiError, QriDefinition, QriTemplate, ResponseErrors, UiInfo, clearCache, dataSourcesExport, getDataSourceApiSpecs, getDataSourceGateways, getDataSources };
+export { ApiSpecResponse, ConnectorNodesInfo, DataSourceNew, DataSourceSettingsRequest, DataSourceSettingsResponse, DataSourcesAPI, DataSourcesResponseNew, GetDataSourceApiSpecsHttpError, GetDataSourceApiSpecsHttpResponse, GetDataSourceGatewaysHttpError, GetDataSourceGatewaysHttpResponse, GetDataSourceSettingsHttpError, GetDataSourceSettingsHttpResponse, GetDataSourcesHttpError, GetDataSourcesHttpResponse, PublicApiError, PutDataSourceSettingsHttpError, PutDataSourceSettingsHttpResponse, QriDefinition, QriTemplate, ResponseErrors, UiInfo, clearCache, dataSourcesExport, getDataSourceApiSpecs, getDataSourceGateways, getDataSourceSettings, getDataSources, putDataSourceSettings };
