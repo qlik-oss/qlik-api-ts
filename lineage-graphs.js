@@ -1,6 +1,6 @@
-import "./chunks/utils-1j8VpsDa.js";
-import "./chunks/public-runtime-modules-BBAJOUvT.js";
-import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-Z1aRlURh.js";
+import "./chunks/utils-DI6bFnHB.js";
+import "./chunks/public-runtime-modules-C-9amT4R.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CIrdtp97.js";
 
 //#region src/public/rest/lineage-graphs.ts
 /**
@@ -20,8 +20,7 @@ async function expandLineageGraphImpact(id, query, options) {
 	});
 }
 /**
-* Search all labels within a impact graph on all available levels.
-* Returns result per level
+* Searchs all labels within a impact graph on all available levels. Returns result per level.
 * @example
 * searchLineageGraphImpact(
 *   "qri:app:sense://e5c651d5-1198-45a2-be5d-f016cee0baf5",
@@ -44,9 +43,7 @@ async function searchLineageGraphImpact(id, query, options) {
 	});
 }
 /**
-* Returns all RESOURCE level nodes that are impacted by a change in the source node.
-* The number of tables and fields that are impacted for each resource are included as metadata.
-* The id (QRI) can be on any level (FIELD, TABLE or RESOURCE) and the impact will be collected based on the starting QRI.
+* Returns all RESOURCE level nodes that are impacted by a change in the source node. The number of tables and fields that are impacted for each resource are included as metadata. The id (QRI) can be on any level (FIELD, TABLE or RESOURCE) and the impact will be collected based on the starting QRI.
 *
 * @param id The qri for root node.
 * @param query an object with query parameters
@@ -80,8 +77,7 @@ async function getLineageGraphImpactSource(id, options) {
 	});
 }
 /**
-* Returns lineage graphs for requested levels of a source node.
-* The id (QRI) can point to an item on the field, table and resource level.
+* Returns lineage graphs of a source node. The id (QRI) can point to an item on the field, table and resource level.
 *
 * @param id The id (QRI) for the source node.
 * @param query an object with query parameters
@@ -97,9 +93,7 @@ async function getLineageGraphNode(id, query, options) {
 	});
 }
 /**
-* Returns the expanded node and its edges.
-* Up and downstream nodes are not part of the response, edges are.
-* The id is the root node that lineage is requested for. The QRI of the node to expand is sent as the query parameter "node" for expansion.
+* Returns the expanded node and its edges. Up and downstream nodes are not part of the response, edges are. The id is the root node that lineage is requested for. The QRI of the node to expand is sent as the query parameter "node" for expansion.
 *
 * @param id The id (QRI) for the source node.
 * @param query an object with query parameters
@@ -115,8 +109,7 @@ async function expandLineageGraphNode(id, query, options) {
 	});
 }
 /**
-* Search all labels within a lineage graph on all available levels.
-* Returns result per level.
+* Returns result per level by searching all labels within a lineage graph on all available levels.
 * @example
 * searchLineageGraphNode(
 *   "qri:app:sense://e5c651d5-1198-45a2-be5d-f016cee0baf5",
@@ -139,8 +132,7 @@ async function searchLineageGraphNode(id, query, options) {
 	});
 }
 /**
-* Returns the first generation upstream direct lineage.
-* For each field QRI, will find any direct linege dataset or application.
+* Returns the first generation upstream direct lineage. For each field QRI, will find any direct linege dataset or application.
 *
 * @param id The qri for root node.
 * @param query an object with query parameters

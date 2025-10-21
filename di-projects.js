@@ -1,6 +1,6 @@
-import "./chunks/utils-1j8VpsDa.js";
-import "./chunks/public-runtime-modules-BBAJOUvT.js";
-import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-Z1aRlURh.js";
+import "./chunks/utils-DI6bFnHB.js";
+import "./chunks/public-runtime-modules-C-9amT4R.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CIrdtp97.js";
 
 //#region src/public/rest/di-projects.ts
 /**
@@ -118,13 +118,6 @@ async function validateDiProject(projectId, body, options) {
 }
 /**
 * Retrieves the export variables for a specific data integration project.
-* @example
-* getDiProjectExportVariables(
-*   "65424a71c11367914c1e659b",
-*   {
-*     recalculate: true
-*   }
-* )
 *
 * @param projectId Data project ID
 * @param query an object with query parameters
@@ -158,10 +151,6 @@ async function setDiProjectExportVariables(projectId, body, options) {
 }
 /**
 * Lists data tasks within a given data integration project.
-* @example
-* getDiProjectDiTasks(
-*   "65424a71c11367914c1e659b"
-* )
 *
 * @param projectId Data project id
 * @throws GetDiProjectDiTasksHttpError
@@ -176,11 +165,6 @@ async function getDiProjectDiTasks(projectId, options) {
 }
 /**
 * Get a specific data task within a project.
-* @example
-* getDiProjectDiTask(
-*   "65424a71c11367914c1e659b",
-*   "task-cYSY"
-* )
 *
 * @param projectId Data project id
 * @param dataTaskId Data task id
@@ -201,7 +185,7 @@ async function getDiProjectDiTask(projectId, dataTaskId, options) {
 * Prepares the specified data task for execution.
 *
 * @param projectId Data project ID
-* @param dataTaskId Data task ID
+* @param dataTaskId Data task id
 * @param body an object with the body content
 * @throws PrepareDiProjectDiTaskHttpError
 */
@@ -220,12 +204,6 @@ async function prepareDiProjectDiTask(projectId, dataTaskId, body, options) {
 }
 /**
 * Validates the specified data task.
-* @example
-* validateDiProjectDiTask(
-*   "65424a71c11367914c1e659b",
-*   "task-cYSY",
-*   null
-* )
 *
 * @param projectId Data project ID
 * @param dataTaskId Data task ID
@@ -247,11 +225,6 @@ async function validateDiProjectDiTask(projectId, dataTaskId, body, options) {
 }
 /**
 * Start a data task on a data integration project.
-* @example
-* startDiProjectDiTaskRuntime(
-*   "65424a71c11367914c1e659b",
-*   "task-cYSY"
-* )
 *
 * @param projectId Data project id
 * @param dataTaskId Data task id
@@ -270,11 +243,6 @@ async function startDiProjectDiTaskRuntime(projectId, dataTaskId, options) {
 }
 /**
 * Stop a data task on a data integration project.
-* @example
-* stopDiProjectDiTaskRuntime(
-*   "65424a71c11367914c1e659b",
-*   "task-cYSY"
-* )
 *
 * @param projectId
 * @param dataTaskId
@@ -293,11 +261,6 @@ async function stopDiProjectDiTaskRuntime(projectId, dataTaskId, options) {
 }
 /**
 * Get the current runtime state of a data task
-* @example
-* getDiProjectDiTaskRuntimeState(
-*   "65424a71c11367914c1e659b",
-*   "task-cYSY"
-* )
 *
 * @param projectId
 * @param dataTaskId
