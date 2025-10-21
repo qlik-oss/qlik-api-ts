@@ -1,6 +1,6 @@
-import "./chunks/utils-1j8VpsDa.js";
-import "./chunks/public-runtime-modules-BBAJOUvT.js";
-import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-Z1aRlURh.js";
+import "./chunks/utils-DI6bFnHB.js";
+import "./chunks/public-runtime-modules-C-9amT4R.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CIrdtp97.js";
 
 //#region src/public/rest/direct-access-agents.ts
 /**
@@ -95,8 +95,8 @@ async function getDirectAccessAgentConnectorFilesWithoutQuery(agentId, connector
 /**
 * Retrieves the allowed paths settings for the File Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.6+.
 *
-* @param agentId The agent ID.
-* @param connectorType The connector type. Must be `file-connector` for this endpoint.
+* @param agentId The agent ID
+* @param connectorType Please use `file-connector` when retrieving the allowed paths for the file connector.
 * @throws GetDirectAccessAgentConnectorFilesAllowedPathsHttpError
 */
 async function getDirectAccessAgentConnectorFilesAllowedPaths(agentId, connectorType, options) {
@@ -111,10 +111,10 @@ async function getDirectAccessAgentConnectorFilesAllowedPaths(agentId, connector
 	});
 }
 /**
-* Completely replaces the contents of the allowed paths configuration file for the File connector. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.6+.
+* Completely replaces the contents of the allowed paths configuration file for the File Connector. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.6+.
 *
-* @param agentId The agent ID.
-* @param connectorType The connector type. Must be `file-connector` for this endpoint.
+* @param agentId The agent id
+* @param connectorType Please use `file-connector` when updating the allowed paths for the file connector.
 * @param body an object with the body content
 * @throws PutDirectAccessAgentConnectorFilesAllowedPathsHttpError
 */

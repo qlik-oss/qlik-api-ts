@@ -1,6 +1,6 @@
-import "./chunks/utils-1j8VpsDa.js";
-import "./chunks/public-runtime-modules-BBAJOUvT.js";
-import { clearApiCache, invokeFetch } from "./chunks/invoke-fetch-Z1aRlURh.js";
+import "./chunks/utils-DI6bFnHB.js";
+import "./chunks/public-runtime-modules-C-9amT4R.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CIrdtp97.js";
 
 //#region src/public/rest/data-sources.ts
 /**
@@ -68,6 +68,41 @@ async function getDataSourceGateways(dataSourceId, query, options) {
 	});
 }
 /**
+* Retrieves the settings for a data source.
+* @example
+* getDataSourceSettings(
+*   "rest"
+* )
+*
+* @param dataSourceId Datasource ID
+* @throws GetDataSourceSettingsHttpError
+*/
+async function getDataSourceSettings(dataSourceId, options) {
+	return invokeFetch("data-sources", {
+		method: "get",
+		pathTemplate: "/api/v1/data-sources/{dataSourceId}/settings",
+		pathVariables: { dataSourceId },
+		options
+	});
+}
+/**
+* Updates the settings for a data source.
+*
+* @param dataSourceId Datasource ID
+* @param body an object with the body content
+* @throws PutDataSourceSettingsHttpError
+*/
+async function putDataSourceSettings(dataSourceId, body, options) {
+	return invokeFetch("data-sources", {
+		method: "put",
+		pathTemplate: "/api/v1/data-sources/{dataSourceId}/settings",
+		pathVariables: { dataSourceId },
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
 * Clears the cache for data-sources api requests.
 */
 function clearCache() {
@@ -80,9 +115,11 @@ const dataSourcesExport = {
 	getDataSources,
 	getDataSourceApiSpecs,
 	getDataSourceGateways,
+	getDataSourceSettings,
+	putDataSourceSettings,
 	clearCache
 };
 var data_sources_default = dataSourcesExport;
 
 //#endregion
-export { clearCache, data_sources_default as default, getDataSourceApiSpecs, getDataSourceGateways, getDataSources };
+export { clearCache, data_sources_default as default, getDataSourceApiSpecs, getDataSourceGateways, getDataSourceSettings, getDataSources, putDataSourceSettings };
