@@ -1,6 +1,6 @@
 import "./chunks/utils-DI6bFnHB.js";
-import "./chunks/public-runtime-modules-C-9amT4R.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CIrdtp97.js";
+import "./chunks/public-runtime-modules-Ba7JShug.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CFT8jqUv.js";
 
 //#region src/public/rest/ml.ts
 /**
@@ -8,7 +8,7 @@ import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CIrd
 * @example
 * getMlDeployments(
 *   {
-*     filter: "`filter=spaceId eq \"UUID\" and modelState eq \"enabled\"`",
+*     filter: "`filter=spaceId eq \"UUID\" and predictionEnabled eq \"true\" and nameContains co \"abc\"`",
 *     limit: 10,
 *     offset: 32
 *   }

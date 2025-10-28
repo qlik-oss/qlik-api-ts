@@ -1,3 +1,3 @@
-import "./chunks/auth-types-CMYVHKHt.js";
-import { a as GetQuotaHttpResponse, c as GetQuotasResult, d as clearCache, f as getQuota, i as GetQuotaHttpError, l as Quota, m as quotasExport, n as ErrorResponse, o as GetQuotasHttpError, p as getQuotas, r as GetQuotaByIdResult, s as GetQuotasHttpResponse, t as Error, u as QuotasAPI } from "./chunks/quotas-DMd7lZT8.js";
+import "./chunks/auth-types-BK8AvfyD.js";
+import { a as GetQuotaHttpResponse, c as GetQuotasResult, d as clearCache, f as getQuota, i as GetQuotaHttpError, l as Quota, m as quotasExport, n as ErrorResponse, o as GetQuotasHttpError, p as getQuotas, r as GetQuotaByIdResult, s as GetQuotasHttpResponse, t as Error, u as QuotasAPI } from "./chunks/quotas-CzVCUzyQ.js";
 export { Error, ErrorResponse, GetQuotaByIdResult, GetQuotaHttpError, GetQuotaHttpResponse, GetQuotasHttpError, GetQuotasHttpResponse, GetQuotasResult, Quota, QuotasAPI, clearCache, quotasExport as default, getQuota, getQuotas };
