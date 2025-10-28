@@ -1,9 +1,9 @@
 import "./chunks/utils-DI6bFnHB.js";
-import "./chunks/public-runtime-modules-C-9amT4R.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CIrdtp97.js";
-import { t as auth_default } from "./chunks/auth-CTDo3q9V.js";
+import "./chunks/public-runtime-modules-Ba7JShug.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CFT8jqUv.js";
+import { t as auth_default } from "./chunks/auth-BRE0LkDN.js";
 import { a as interceptors_default$1 } from "./chunks/interceptors-CT9deBo6.js";
-import { n as qix_default } from "./chunks/qix-C4qlX8hm.js";
+import { n as qix_default } from "./chunks/qix-CVri1pjZ.js";
 
 //#region src/runtime-api-generator/runtime-api-generator-common.ts
 const methodAbbreviations = {
@@ -351,6 +351,7 @@ const createAutomationConnectionsRuntimeAPI = apiDefToApiPublic("automation-conn
 		}
 	}
 } } } });
+const createAutomationConnectorsRuntimeAPI = apiDefToApiPublic("automation-connectors", { api: { v1: { "automation-connectors": ["getAutomationConnectors:GQ:"] } } });
 const createAutomationsRuntimeAPI = apiDefToApiPublic("automations", { api: { v1: { automations: {
 	"": ["getAutomations:GQ:", "createAutomation:PBJ:"],
 	usage: ["getAutomationsUsageMetrics:GQ:"],
@@ -1129,6 +1130,7 @@ const apps = createAppsRuntimeAPI(void 0, interceptors_default);
 const assistants = createAssistantsRuntimeAPI(void 0, interceptors_default);
 const audits = createAuditsRuntimeAPI(void 0, interceptors_default);
 const automationConnections = createAutomationConnectionsRuntimeAPI(void 0, interceptors_default);
+const automationConnectors = createAutomationConnectorsRuntimeAPI(void 0, interceptors_default);
 const automations = createAutomationsRuntimeAPI(void 0, interceptors_default);
 const automlDeployments = createAutomlDeploymentsRuntimeAPI(void 0, interceptors_default);
 const automlPredictions = createAutomlPredictionsRuntimeAPI(void 0, interceptors_default);
@@ -1194,6 +1196,7 @@ const createQlikApi = (props) => {
 		assistants: createAssistantsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		audits: createAuditsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		automationConnections: createAutomationConnectionsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		automationConnectors: createAutomationConnectorsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		automations: createAutomationsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		automlDeployments: createAutomlDeploymentsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		automlPredictions: createAutomlPredictionsRuntimeAPI(props?.hostConfig, scopedInterceptors),
@@ -1260,6 +1263,7 @@ const api = {
 	assistants,
 	audits,
 	automationConnections,
+	automationConnectors,
 	automations,
 	automlDeployments,
 	automlPredictions,
@@ -1319,4 +1323,4 @@ const api = {
 var public_default = api;
 
 //#endregion
-export { apiKeys, apps, assistants, audits, auth, automationConnections, automations, automlDeployments, automlPredictions, brands, collections, conditions, consumption, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataQualities, dataSets, dataSources, dataStores, dcaas, public_default as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks };
+export { apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, brands, collections, conditions, consumption, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataQualities, dataSets, dataSources, dataStores, dcaas, public_default as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks };

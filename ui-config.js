@@ -1,6 +1,6 @@
 import "./chunks/utils-DI6bFnHB.js";
-import "./chunks/public-runtime-modules-C-9amT4R.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CIrdtp97.js";
+import "./chunks/public-runtime-modules-Ba7JShug.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CFT8jqUv.js";
 
 //#region src/public/rest/ui-config.ts
 /**
