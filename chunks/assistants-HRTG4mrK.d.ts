@@ -18,8 +18,6 @@ type Assistant = {
   id: string;
   /** List of knowledgebases the assistant is using. */
   knowledgeBases: string[];
-  /** Indiciates if the assistant is legacy. Immutable once created. */
-  readonly legacy: boolean;
   /** The name of the assistant. */
   name: string;
   /** List of starter IDs in the order they will be sorted. */
@@ -236,8 +234,6 @@ type CreateAssistant = {
   description: string;
   /** List of knowledgebases the assistant is using. */
   knowledgeBases: string[];
-  /** Whether the assistant uses legacy (v1) functionality. Immutable once created. This flag must be specified if legacy assistant behavior is explicitly required. */
-  legacy?: boolean;
   /** The name of the assistant. */
   name: string;
   /** List of starter IDs in the order they will be sorted. */
@@ -265,8 +261,6 @@ type CreateAssistantWithAvatar = {
   description: string;
   /** List of knowledgebases the assistant is using. */
   knowledgeBases: string[];
-  /** Whether the assistant uses legacy (v1) functionality. Immutable once created. This flag must be specified if legacy assistant behavior is explicitly required. */
-  legacy?: boolean;
   /** The name of the assistant. */
   name: string;
   /** Unique identifier of the space to contain the assistant. */

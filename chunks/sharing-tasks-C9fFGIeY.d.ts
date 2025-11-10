@@ -537,7 +537,8 @@ type SharingTaskRecurringPersist = {
   owner?: string;
   /** User name of owner of the sharing task */
   ownerName?: string;
-  /** flag sent by UI to configure the persistent bookmark to use variables */
+  /** @deprecated
+   * Flag to configure the persistent bookmark to use variables. it is valid for subscriptions with type chart-sharing or sheet-sharing. Deprecated: please use the same field defined in the template instead. */
   persistentBookmarkIncludeVariables?: boolean;
   /** List of persisted recipients. */
   recipients?: RecipientsPersist;

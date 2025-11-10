@@ -2043,6 +2043,7 @@ function isHostCrossOrigin(hostConfig) {
 async function isWindows(hostConfig) {
 	const hostConfigToUse = withResolvedHostConfig(hostConfig);
 	if (typeof hostConfigToUse.forceIsWindows === "boolean") return hostConfigToUse.forceIsWindows;
+	if (hostConfigToUse.host?.endsWith(".qlik-stage.com") || hostConfigToUse.host?.endsWith(".qlikcloud.com") || hostConfigToUse.host?.endsWith(".qlikcloudgov.com")) return false;
 	if (hostConfigToUse.authType === "cookie") return false;
 	if (hostConfigToUse.authType === "windowscookie") return true;
 	return (await getPlatform({ hostConfig })).isWindows;

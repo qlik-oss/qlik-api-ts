@@ -1,4 +1,4 @@
-import { r as getQixRuntimeModule } from "./public-runtime-modules-Ba7JShug.js";
+import { r as getQixRuntimeModule } from "./public-runtime-modules-DNHVdCZ6.js";
 
 //#region src/public/qix.ts
 function openAppSession(appSessionProps) {

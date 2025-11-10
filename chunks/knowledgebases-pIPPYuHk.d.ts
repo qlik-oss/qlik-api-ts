@@ -59,6 +59,8 @@ type CreateDataSource = {
   type: "file" | "web" | "database";
 };
 type CreateKnowledgeBase = {
+  /** User opt in to advanced parsing and chunking pipeline. Default is false, which will run legacy parsing and chunking. */
+  advancedIndexing?: boolean;
   /** Description of the knowledgebase */
   description?: string;
   /** Name of the knowledgebase */
@@ -233,6 +235,8 @@ type KnowledgeBase = KnowledgeBaseLight & {
   datasources?: DataSource[];
 };
 type KnowledgeBaseLight = {
+  /** User opt in to advanced parsing and chunking pipeline. Default is false, which will run legacy parsing and chunking. */
+  advancedIndexing?: boolean;
   contentSummary: ContentSummary;
   /** Datetime when the knowledgebase was created */
   readonly createdAt: string;

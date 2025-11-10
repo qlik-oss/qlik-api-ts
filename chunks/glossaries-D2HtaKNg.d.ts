@@ -373,7 +373,10 @@ type Term = {
   id: string;
   linksTo?: TermLinksTo[];
   name: string;
+  /** Term relations where this term is the target of the relation. */
+  referredRelations?: TermRelatesTo[];
   relatedInformation: string;
+  /** Term relations assigned to this term. */
   relatesTo?: TermRelatesTo[];
   revision: number;
   /** Terms status is used determine the status of a term */
@@ -425,7 +428,7 @@ type TermRelatesTo = {
   /** The unique identifier of the related term. NOTE! In case of import the string refers to the index of the term in the import document. */
   termId: string;
   /** How the term related to the other object */
-  type: "isA" | "hasA" | "seeAlso" | "synonym" | "antonym" | "classifies" | "other";
+  type: "isA" | "hasA" | "seeAlso" | "synonym" | "antonym" | "classifies" | "other" | "replaces" | "replacedBy" | "hasSubtype" | "preferredTerm" | "seeInstead" | "defines" | "definedBy";
 };
 /**
  * Terms status is used determine the status of a term

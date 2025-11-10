@@ -2,7 +2,7 @@ import { i as isNode, n as createResolvablePromise$1 } from "./utils-DI6bFnHB.js
 import "./interceptors-CT9deBo6.js";
 import "./global-types-BGMD2sDY.js";
 import "./auth-types-BuIzsuoh.js";
-import { O as exposeInternalApiOnWindow, T as appendQueryToUrl, g as toValidWebsocketLocationUrl, i as getRestCallAuthParams, k as generateRandomString, l as isWindows, o as getWebSocketAuthParams, s as handleAuthenticationError } from "./auth-functions-ddchV8d1.js";
+import { O as exposeInternalApiOnWindow, T as appendQueryToUrl, g as toValidWebsocketLocationUrl, i as getRestCallAuthParams, k as generateRandomString, l as isWindows, o as getWebSocketAuthParams, s as handleAuthenticationError } from "./auth-functions-BZN9dCw1.js";
 import { t as getHumanReadableSocketClosedErrorMessage } from "./websocket-errors-BX-whwFJ.js";
 import isPlainObject from "lodash/isPlainObject.js";
 import merge from "lodash/merge.js";
@@ -12675,6 +12675,7 @@ var engine_api_default = {
 			LOCERR_GENERIC_MEMORY_LIMIT_REACHED: 19,
 			LOCERR_GENERIC_NOT_IMPLEMENTED: 20,
 			LOCERR_GENERIC_ENGINE_TERMINATED: 21,
+			LOCERR_GENERIC_WRITE_OPERATIONS_LIMIT_REACHED: 22,
 			LOCERR_HTTP_400: 400,
 			LOCERR_HTTP_401: 401,
 			LOCERR_HTTP_402: 402,
@@ -13177,6 +13178,9 @@ var engine_api_default = {
 
 //#endregion
 //#region src/qix/session/schema/engine-enums.js
+/**
+* Get enunm definitions from Engine API based on engine's json specification
+*/
 const { enums } = engine_api_default;
 for (const key in enums) enums[`Nx${key}`] = enums[key];
 var engine_enums_default = enums;
@@ -13293,7 +13297,7 @@ var get_object_cache_default = mixin$20;
 //#region src/qix/session/mixins/all/layout-observable.js
 function Observable(api) {
 	this.getLayout = function(api$1) {
-		this.requestPromise = api$1.getLayout().then((layout) => {
+		this.requestPromise = api$1.getLayout(false).then((layout) => {
 			this.requestPromise = null;
 			if (api$1.isCancelled) return;
 			this.fn(layout);
@@ -14984,6 +14988,9 @@ async function createEnigmaSession({ appId, identity, hostConfig, useReloadEngin
 			retryModalObjectError,
 			somethingWithErrorPopupsResponnseInterceptor
 		]
+	});
+	session.on("notification:OnConnected", (params) => {
+		session.sessionState = params.qSessionState;
 	});
 	const originalResume = session.resume.bind(session);
 	const resume = async (onlyIfAttached) => {
