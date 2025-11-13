@@ -867,6 +867,7 @@ const shouldPopulateCache = (method) => method === "get" || method === "GET";
 * @private
 */
 function clone(value) {
+	if (typeof value === "undefined" || value === null) return value;
 	if (value && (value instanceof Blob || value instanceof Object && value.toString() === "[object Blob]")) return value;
 	if (value && value instanceof ReadableStream) return value;
 	if (typeof value === "string") return value;

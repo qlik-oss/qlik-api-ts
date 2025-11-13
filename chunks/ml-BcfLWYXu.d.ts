@@ -1341,6 +1341,18 @@ type ProfileInsights = {
   };
   /** List of feature insights object, one per feature in the dataset */
   insights?: FeatureInsights[];
+  /** Is this a CSV dataset > 1GB? */
+  isLargeCsv?: boolean;
+  /** Number of rows in the dataset.
+   *
+   * When isLargeCsv is true, this is an estimate since their metadata is
+   * based on a sample rather than the full dataset.
+   *
+   * For datasets over 1GB, multiply `rows` (this) by `columns` (features
+   * included in experiment version) to calculate total `cells` to
+   * ensure it stays under your license limit. Large CSVs have a hard
+   * 100M cell limit. */
+  numberOfRows?: number;
   /** ID of owner/user for this entity */
   ownerId: OwnerId;
   /** Status of profile insights. Not available until `ready`. */
