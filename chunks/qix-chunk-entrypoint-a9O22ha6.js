@@ -2,7 +2,7 @@ import { i as isNode, n as createResolvablePromise$1 } from "./utils-DI6bFnHB.js
 import "./interceptors-CT9deBo6.js";
 import "./global-types-BGMD2sDY.js";
 import "./auth-types-BuIzsuoh.js";
-import { O as exposeInternalApiOnWindow, T as appendQueryToUrl, g as toValidWebsocketLocationUrl, i as getRestCallAuthParams, k as generateRandomString, l as isWindows, o as getWebSocketAuthParams, s as handleAuthenticationError } from "./auth-functions-BZN9dCw1.js";
+import { O as exposeInternalApiOnWindow, T as appendQueryToUrl, g as toValidWebsocketLocationUrl, i as getRestCallAuthParams, k as generateRandomString, l as isWindows, o as getWebSocketAuthParams, s as handleAuthenticationError } from "./auth-functions-RwRVWEF6.js";
 import { t as getHumanReadableSocketClosedErrorMessage } from "./websocket-errors-BX-whwFJ.js";
 import isPlainObject from "lodash/isPlainObject.js";
 import merge from "lodash/merge.js";

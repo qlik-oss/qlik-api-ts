@@ -390,13 +390,25 @@ type Term = {
 };
 /**
  * Describes links to other data assets such as analytics applications or dataset.
+ *
+ * **Note**: When linking to a subresource (e.g., a master dimension, master measure, or dataset field within an app or dataset),
+ * all three subresource fields (`subResourceType`, `subResourceId`, and `subResourceName`) must be provided together.
+ * If any one subresource field is specified, all three are required.
  */
 type TermCreateLinksTo = {
+  /** The unique identifier of the resource (app or dataset) to link to the term. */
   resourceId: string;
+  /** The type of resource being linked to the term. */
   resourceType: "app" | "dataset";
+  /** Required when subResourceType or subResourceName is provided. The unique identifier of the subresource. */
   subResourceId?: string;
+  /** Required when subResourceType or subResourceId is provided. The display name of the subresource. */
   subResourceName?: string;
+  /** Required when subResourceId or subResourceName is provided. The type of the subresource. */
   subResourceType?: "master_dimension" | "master_measure" | "field";
+  /** The type of relationship between the term and the linked resource:
+   * - `definition`: Use when the term provides the formal definition for the linked resource (e.g., a term defines what a master measure or dimension means)
+   * - `related`: Use when the term is generally related to the resource but doesn't formally define it */
   type?: "definition" | "related";
 };
 /**

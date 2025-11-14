@@ -1,6 +1,6 @@
 import "./chunks/utils-DI6bFnHB.js";
-import "./chunks/public-runtime-modules-DNHVdCZ6.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-Cn50MiSD.js";
+import "./chunks/public-runtime-modules-ubkNzy_K.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DmsPYERB.js";
 
 //#region src/public/rest/users.ts
 /**
@@ -43,6 +43,18 @@ async function countUsers(query, options) {
 		method: "get",
 		pathTemplate: "/api/v1/users/actions/count",
 		query,
+		options
+	});
+}
+/**
+* Returns the number of users in a given tenant
+*
+* @throws CountUsersWithoutQueryHttpError
+*/
+async function countUsersWithoutQuery(options) {
+	return invokeFetch("users", {
+		method: "get",
+		pathTemplate: "/api/v1/users/actions/count",
 		options
 	});
 }
@@ -150,6 +162,7 @@ const usersExport = {
 	getUsers,
 	createUser,
 	countUsers,
+	countUsersWithoutQuery,
 	filterUsers,
 	inviteUsers,
 	getMyUser,
@@ -161,4 +174,4 @@ const usersExport = {
 var users_default = usersExport;
 
 //#endregion
-export { clearCache, countUsers, createUser, users_default as default, deleteUser, filterUsers, getMyUser, getUser, getUsers, inviteUsers, patchUser };
+export { clearCache, countUsers, countUsersWithoutQuery, createUser, users_default as default, deleteUser, filterUsers, getMyUser, getUser, getUsers, inviteUsers, patchUser };

@@ -248,9 +248,6 @@ type User = {
   assignedRoles?: AssignedRoles;
   /** An array of scopes assigned to a user */
   readonly assignedScopes?: AssignedScopes;
-  /** @deprecated
-   * Deprecated. Use `createdAt` instead. */
-  readonly created?: string;
   /** The timestamp for when the user record was created. */
   readonly createdAt?: string;
   /** The email address for the user. */
@@ -259,9 +256,6 @@ type User = {
   readonly id: string;
   /** The Unix timestamp indicating when the invite will expire. */
   readonly inviteExpiry?: number;
-  /** @deprecated
-   * Deprecated. Use `lastUpdatedAt` instead. */
-  readonly lastUpdated?: string;
   /** The timestamp for when the user record was last updated. */
   readonly lastUpdatedAt?: string;
   /** Pagination links to the user. */
@@ -282,9 +276,6 @@ type User = {
   preferredLocale?: string;
   /** Represents the end-user's preferred time zone. */
   preferredZoneinfo?: string;
-  /** @deprecated
-   * List of system roles to which the user has been assigned. Only returned when permitted by access control. Deprecated. Use `assignedRoles` instead. */
-  roles?: ("TenantAdmin" | "Developer" | "AnalyticsAdmin" | "DataAdmin" | "DataSpaceCreator" | "ManagedSpaceCreator" | "SharedSpaceCreator")[];
   /** The status of the user within the tenant. */
   status?: "active" | "invited" | "disabled" | "deleted" | "provisioned";
   /** The unique user identitier from an identity provider. */
@@ -326,9 +317,6 @@ type UserPostSchema = {
   name?: string;
   /** A static url linking to the avatar of the user. */
   picture?: string;
-  /** @deprecated
-   * List of system roles to which the user has been assigned. Only returned when permitted by access control. */
-  roles?: ("TenantAdmin" | "Developer" | "AnalyticsAdmin" | "DataAdmin" | "DataSpaceCreator" | "ManagedSpaceCreator" | "SharedSpaceCreator")[];
   /** The status of the created user within the tenant. */
   status?: "invited";
   /** The unique user identitier from an identity provider. */
@@ -367,12 +355,6 @@ type Users = {
  * @throws GetUsersHttpError
  */
 declare function getUsers(query: {
-  /** @deprecated
-   * The email to filter by. Deprecated. Use the new `filter` parameter to provide an advanced query filter. */
-  email?: string;
-  /** @deprecated
-   * Get users with IDs that are lower than the target user ID. Cannot be used in conjunction with startingAfter. Deprecated. Use `prev` instead. */
-  endingBefore?: string;
   /** A comma-delimited string of the requested fields per entity. If the 'links' value is omitted, then the entity HATEOAS link will also be omitted. */
   fields?: string;
   /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax. Cannot be combined with any of the fields marked as deprecated. All conditional statements within this query parameter are case insensitive.
@@ -411,29 +393,8 @@ declare function getUsers(query: {
   next?: string;
   /** Get users that come before this cursor value when sorted. Cannot be used in conjunction with `next`. */
   prev?: string;
-  /** @deprecated
-   * The role to filter by. Deprecated. */
-  role?: string;
   /** The field to sort by, with +/- prefix indicating sort order */
   sort?: "name" | "+name" | "-name" | "_id" | "+_id" | "-_id" | "id" | "+id" | "-id" | "tenantId" | "+tenantId" | "-tenantId" | "clientId" | "+clientId" | "-clientId" | "status" | "+status" | "-status" | "subject" | "+subject" | "-subject" | "email" | "+email" | "-email" | "inviteExpiry" | "+inviteExpiry" | "-inviteExpiry" | "createdAt" | "+createdAt" | "-createdAt";
-  /** @deprecated
-   * The user parameter to sort by. Deprecated. Use `sort` instead. */
-  sortBy?: "name";
-  /** @deprecated
-   * The sort order, either ascending or descending. Deprecated. Use `sort` instead. */
-  sortOrder?: "asc" | "desc";
-  /** @deprecated
-   * Get users with IDs that are higher than the target user ID. Cannot be used in conjunction with endingBefore. Deprecated. Use `next` instead. */
-  startingAfter?: string;
-  /** @deprecated
-   * The status to filter by. Supports multiple values delimited by commas. Deprecated. Use the new `filter` parameter to provide an advanced query filter. */
-  status?: "active" | "invited" | "disabled" | "deleted" | "provisioned";
-  /** @deprecated
-   * The subject to filter by. Deprecated. Use the new `filter` parameter to provide an advanced query filter. */
-  subject?: string;
-  /** @deprecated
-   * The tenant ID to filter by. Deprecated. */
-  tenantId?: string;
   /** Whether to return a total match count in the result. Defaults to false. It will trigger an extra DB query to count, reducing the efficiency of the endpoint. */
   totalResults?: boolean;
 }, options?: ApiCallOptions): Promise<GetUsersHttpResponse>;
@@ -472,17 +433,29 @@ type CreateUserHttpError = {
  * @param query an object with query parameters
  * @throws CountUsersHttpError
  */
-declare function countUsers(query: {
-  /** @deprecated
-   * The tenant ID to filter by. */
-  tenantId?: string;
-}, options?: ApiCallOptions): Promise<CountUsersHttpResponse>;
+declare function countUsers(query: Record<string, unknown>, options?: ApiCallOptions): Promise<CountUsersHttpResponse>;
 type CountUsersHttpResponse = {
   data: UserCount;
   headers: Headers;
   status: 200;
 };
 type CountUsersHttpError = {
+  data: Errors;
+  headers: Headers;
+  status: 403 | 404 | 429;
+};
+/**
+ * Returns the number of users in a given tenant
+ *
+ * @throws CountUsersWithoutQueryHttpError
+ */
+declare function countUsersWithoutQuery(options?: ApiCallOptions): Promise<CountUsersWithoutQueryHttpResponse>;
+type CountUsersWithoutQueryHttpResponse = {
+  data: UserCount;
+  headers: Headers;
+  status: 200;
+};
+type CountUsersWithoutQueryHttpError = {
   data: Errors;
   headers: Headers;
   status: 403 | 404 | 429;
@@ -640,6 +613,12 @@ type UsersAPI = {
    */
   countUsers: typeof countUsers;
   /**
+   * Returns the number of users in a given tenant
+   *
+   * @throws CountUsersWithoutQueryHttpError
+   */
+  countUsersWithoutQuery: typeof countUsersWithoutQuery;
+  /**
    * Retrieves a list of users matching the filter using an advanced query string.
    *
    * @param query an object with query parameters
@@ -693,4 +672,4 @@ type UsersAPI = {
  */
 declare const usersExport: UsersAPI;
 //#endregion
-export { patchUser as $, JSONPatch as A, UserCount as B, GetUsersHttpResponse as C, InviteRequestData as D, InviteItem as E, PatchUserHttpResponse as F, countUsers as G, Users as H, RefIDs as I, filterUsers as J, createUser as K, RefNames as L, PatchUser204HttpResponse as M, PatchUser207HttpResponse as N, InviteUsersHttpError as O, PatchUserHttpError as P, inviteUsers as Q, ResultItem as R, GetUsersHttpError as S, InviteErrorItem as T, UsersAPI as U, UserPostSchema as V, clearCache as W, getUser as X, getMyUser as Y, getUsers as Z, FilterUsersHttpResponse as _, CountUsersHttpError as a, GetUserHttpError as b, CreateUserHttpResponse as c, Error as d, usersExport as et, ErrorItem as f, FilterUsersHttpError as g, Filter as h, AssignedScopes as i, JSONPatchArray as j, InviteUsersHttpResponse as k, DeleteUserHttpError as l, ErrorsResponse as m, AssignedGroupsRefNames as n, CountUsersHttpResponse as o, Errors as p, deleteUser as q, AssignedRoles as r, CreateUserHttpError as s, AssignedGroups as t, DeleteUserHttpResponse as u, GetMyUserHttpError as v, InviteDataResponse as w, GetUserHttpResponse as x, GetMyUserHttpResponse as y, User as z };
+export { getUser as $, InviteUsersHttpError as A, ResultItem as B, GetUserHttpResponse as C, InviteErrorItem as D, InviteDataResponse as E, PatchUser207HttpResponse as F, UsersAPI as G, UserCount as H, PatchUserHttpError as I, countUsersWithoutQuery as J, clearCache as K, PatchUserHttpResponse as L, JSONPatch as M, JSONPatchArray as N, InviteItem as O, PatchUser204HttpResponse as P, getMyUser as Q, RefIDs as R, GetUserHttpError as S, GetUsersHttpResponse as T, UserPostSchema as U, User as V, Users as W, deleteUser as X, createUser as Y, filterUsers as Z, Filter as _, CountUsersHttpError as a, GetMyUserHttpError as b, CountUsersWithoutQueryHttpResponse as c, DeleteUserHttpError as d, getUsers as et, DeleteUserHttpResponse as f, ErrorsResponse as g, Errors as h, AssignedScopes as i, InviteUsersHttpResponse as j, InviteRequestData as k, CreateUserHttpError as l, ErrorItem as m, AssignedGroupsRefNames as n, patchUser as nt, CountUsersHttpResponse as o, Error as p, countUsers as q, AssignedRoles as r, usersExport as rt, CountUsersWithoutQueryHttpError as s, AssignedGroups as t, inviteUsers as tt, CreateUserHttpResponse as u, FilterUsersHttpError as v, GetUsersHttpError as w, GetMyUserHttpResponse as x, FilterUsersHttpResponse as y, RefNames as z };
