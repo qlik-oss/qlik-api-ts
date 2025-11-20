@@ -1,9 +1,9 @@
-import "./chunks/utils-DI6bFnHB.js";
-import "./chunks/public-runtime-modules-ubkNzy_K.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DmsPYERB.js";
-import { t as auth_default } from "./chunks/auth-BXMXloVo.js";
-import { a as interceptors_default$1 } from "./chunks/interceptors-CT9deBo6.js";
-import { n as qix_default } from "./chunks/qix-ChjOL1_B.js";
+import "./chunks/utils-UaAiVTcc.js";
+import "./chunks/public-runtime-modules-DiFgGaqr.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CoW3QRhJ.js";
+import { t as auth_default } from "./chunks/auth-DVfvT8TD.js";
+import { a as interceptors_default$1 } from "./chunks/interceptors-DoQ44M-n.js";
+import { n as qix_default } from "./chunks/qix-DCY6Rh2X.js";
 
 //#region src/runtime-api-generator/runtime-api-generator-common.ts
 const methodAbbreviations = {
@@ -282,6 +282,7 @@ const createAppsRuntimeAPI = apiDefToApiPublic("apps", { api: { v1: { apps: {
 const createAssistantsRuntimeAPI = apiDefToApiPublic("assistants", { api: { v1: { assistants: {
 	"": ["getAssistants:GQ:", "createAssistant:PBJ:"],
 	"{assistantId}": {
+		actions: { search: ["searchAssistant:PBJ:"] },
 		feedback: ["getAssistantFeedback:G:"],
 		sources: { plaintexts: ["getAssistantSources:PBJ:"] },
 		starters: {
@@ -622,11 +623,16 @@ const createDiProjectsRuntimeAPI = apiDefToApiPublic("di-projects", { api: { v1:
 } } } });
 const createDirectAccessAgentsRuntimeAPI = apiDefToApiPublic("direct-access-agents", { api: { v1: { "direct-access-agents": { "{agentId}": {
 	actions: { "{agentAction}": ["restartDirectAccessAgent:P:"] },
+	benchmarks: {
+		"": ["createDirectAccessAgentBenchmark:PQ:"],
+		"{benchmarkId}": {
+			"": ["getDirectAccessAgentBenchmark:G:"],
+			cancel: ["createDirectAccessAgentBenchmarkCancel:P:"]
+		}
+	},
 	configurations: ["getDirectAccessAgentConfiguration:GQ:", "patchDirectAccessAgentConfiguration:ABJ:"],
 	connectors: { "{connectorType}": { files: {
 		"": ["getDirectAccessAgentConnectorFiles:GQ:", "getDirectAccessAgentConnectorFilesWithoutQuery:G:"],
-		"allowed-paths": ["getDirectAccessAgentConnectorFilesAllowedPaths:G:", "putDirectAccessAgentConnectorFilesAllowedPaths:UBJ:"],
-		"custom-data-type-mappings": ["getDirectAccessAgentConnectorCustomDataTypeMappings:G:", "putDirectAccessAgentConnectorCustomDataTypeMappings:UBJ:"],
 		"{fileType}": [
 			"getDirectAccessAgentConnectorFile:G:",
 			"updateDirectAccessAgentConnectorFile:UQBJ:",
@@ -745,6 +751,7 @@ const createKnowledgebasesRuntimeAPI = apiDefToApiPublic("knowledgebases", { api
 			"getKnowledgebase:G:",
 			"patchKnowledgebase:ABJ:"
 		],
+		actions: { search: ["searchKnowledgebase:PBJ:"] },
 		datasources: {
 			"": ["createKnowledgebaseDatasource:PBJ:"],
 			"{datasourceId}": {

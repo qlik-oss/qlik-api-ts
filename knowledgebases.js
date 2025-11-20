@@ -1,6 +1,6 @@
-import "./chunks/utils-DI6bFnHB.js";
-import "./chunks/public-runtime-modules-ubkNzy_K.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DmsPYERB.js";
+import "./chunks/utils-UaAiVTcc.js";
+import "./chunks/public-runtime-modules-DiFgGaqr.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CoW3QRhJ.js";
 
 //#region src/public/rest/knowledgebases.ts
 /**
@@ -71,6 +71,23 @@ async function patchKnowledgebase(id, body, options) {
 	return invokeFetch("knowledgebases", {
 		method: "patch",
 		pathTemplate: "/api/v1/knowledgebases/{id}",
+		pathVariables: { id },
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
+* Execute search with either `SIMPLE` or `FULL` mode. SIMPLE does semantic search while FULL will also do reranking and include keyword based chunks. Use topN to control number of chunks in response, max limit is 50. Default to 5.
+*
+* @param id The ID of the knowledgebase
+* @param body an object with the body content
+* @throws SearchKnowledgebaseHttpError
+*/
+async function searchKnowledgebase(id, body, options) {
+	return invokeFetch("knowledgebases", {
+		method: "post",
+		pathTemplate: "/api/v1/knowledgebases/{id}/actions/search",
 		pathVariables: { id },
 		body,
 		contentType: "application/json",
@@ -322,6 +339,7 @@ const knowledgebasesExport = {
 	deleteKnowledgebase,
 	getKnowledgebase,
 	patchKnowledgebase,
+	searchKnowledgebase,
 	createKnowledgebaseDatasource,
 	deleteKnowledgebaseDatasource,
 	updateKnowledgebaseDatasource,
@@ -339,4 +357,4 @@ const knowledgebasesExport = {
 var knowledgebases_default = knowledgebasesExport;
 
 //#endregion
-export { cancelKnowledgebaseDatasource, clearCache, createKnowledgebase, createKnowledgebaseDatasource, createKnowledgebaseDatasourceSchedule, knowledgebases_default as default, deleteKnowledgebase, deleteKnowledgebaseDatasource, deleteKnowledgebaseDatasourceSchedule, downloadKnowledgebaseDatasource, getKnowledgebase, getKnowledgebaseDatasourceHistories, getKnowledgebaseDatasourceHistory, getKnowledgebaseDatasourceSchedule, getKnowledgebaseHistories, getKnowledgebases, patchKnowledgebase, syncKnowledgebaseDatasource, updateKnowledgebaseDatasource };
+export { cancelKnowledgebaseDatasource, clearCache, createKnowledgebase, createKnowledgebaseDatasource, createKnowledgebaseDatasourceSchedule, knowledgebases_default as default, deleteKnowledgebase, deleteKnowledgebaseDatasource, deleteKnowledgebaseDatasourceSchedule, downloadKnowledgebaseDatasource, getKnowledgebase, getKnowledgebaseDatasourceHistories, getKnowledgebaseDatasourceHistory, getKnowledgebaseDatasourceSchedule, getKnowledgebaseHistories, getKnowledgebases, patchKnowledgebase, searchKnowledgebase, syncKnowledgebaseDatasource, updateKnowledgebaseDatasource };

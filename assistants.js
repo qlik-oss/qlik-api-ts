@@ -1,6 +1,6 @@
-import "./chunks/utils-DI6bFnHB.js";
-import "./chunks/public-runtime-modules-ubkNzy_K.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DmsPYERB.js";
+import "./chunks/utils-UaAiVTcc.js";
+import "./chunks/public-runtime-modules-DiFgGaqr.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CoW3QRhJ.js";
 
 //#region src/public/rest/assistants.ts
 /**
@@ -27,6 +27,23 @@ async function createAssistant(body, options) {
 	return invokeFetch("assistants", {
 		method: "post",
 		pathTemplate: "/api/v1/assistants",
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
+* Perform search with either `SIMPLE` or `FULL` mode. SIMPLE does semantic search while FULL does semantic search, reranking and hybrid search. Use topN to control number of chunks in response, max limit is 50. Default to 5.
+*
+* @param assistantId The ID for the Assistant of interest
+* @param body an object with the body content
+* @throws SearchAssistantHttpError
+*/
+async function searchAssistant(assistantId, body, options) {
+	return invokeFetch("assistants", {
+		method: "post",
+		pathTemplate: "/api/v1/assistants/{assistantId}/actions/search",
+		pathVariables: { assistantId },
 		body,
 		contentType: "application/json",
 		options
@@ -232,8 +249,8 @@ async function createAssistantThread(assistantId, body, options) {
 /**
 * Execute prompt in synchronous non-streaming mode.
 *
-* @param assistantId The id of the Assistant containing requested Thread
-* @param threadId The id of the Thread to retrieve
+* @param assistantId The ID of the Assistant containing requested Thread
+* @param threadId The ID of the Thread to retrieve
 * @param body an object with the body content
 * @throws InvokeAssistantThreadHttpError
 */
@@ -253,8 +270,8 @@ async function invokeAssistantThread(assistantId, threadId, body, options) {
 /**
 * Execute prompt in asynchronous streaming mode.
 *
-* @param assistantId The id of the Assistant containing requested Thread
-* @param threadId The id of the Thread to retrieve
+* @param assistantId The ID of the Assistant containing requested Thread
+* @param threadId The ID of the Thread to retrieve
 * @param body an object with the body content
 * @throws StreamAssistantThreadHttpError
 */
@@ -537,6 +554,7 @@ function clearCache() {
 const assistantsExport = {
 	getAssistants,
 	createAssistant,
+	searchAssistant,
 	getAssistantFeedback,
 	getAssistantSources,
 	getAssistantStarters,
@@ -568,4 +586,4 @@ const assistantsExport = {
 var assistants_default = assistantsExport;
 
 //#endregion
-export { clearCache, createAssistant, createAssistantStarter, createAssistantThread, createAssistantThreadInteraction, createAssistantThreadInteractionFeedback, createAssistantThreadInteractionReview, assistants_default as default, deleteAssistant, deleteAssistantStarter, deleteAssistantStarterFollowup, deleteAssistantThread, deleteAssistantThreadInteraction, getAssistant, getAssistantFeedback, getAssistantSources, getAssistantStarter, getAssistantStarters, getAssistantThread, getAssistantThreadInteraction, getAssistantThreadInteractions, getAssistantThreads, getAssistants, invokeAssistantThread, patchAssistant, patchAssistantThread, patchAssistantThreadInteractionFeedback, streamAssistantThread, updateAssistantStarter, updateAssistantStarterFollowup };
+export { clearCache, createAssistant, createAssistantStarter, createAssistantThread, createAssistantThreadInteraction, createAssistantThreadInteractionFeedback, createAssistantThreadInteractionReview, assistants_default as default, deleteAssistant, deleteAssistantStarter, deleteAssistantStarterFollowup, deleteAssistantThread, deleteAssistantThreadInteraction, getAssistant, getAssistantFeedback, getAssistantSources, getAssistantStarter, getAssistantStarters, getAssistantThread, getAssistantThreadInteraction, getAssistantThreadInteractions, getAssistantThreads, getAssistants, invokeAssistantThread, patchAssistant, patchAssistantThread, patchAssistantThreadInteractionFeedback, searchAssistant, streamAssistantThread, updateAssistantStarter, updateAssistantStarterFollowup };
