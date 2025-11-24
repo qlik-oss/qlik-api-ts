@@ -19,7 +19,8 @@ import { y as ApiCallOptions } from "./auth-types-CHOUViJI.js";
  */
 type AssignmentsActionsAddRequest = {
   add: {
-    /** User name */
+    /** @deprecated
+     * User name */
     name?: string;
     /** User subject */
     subject: string;

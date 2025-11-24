@@ -222,6 +222,7 @@ const createAppsRuntimeAPI = apiDefToApiPublic("apps", { api: { v1: { apps: {
 	},
 	import: ["importApp:PQBO:"],
 	privileges: ["getAppsPrivileges:G:"],
+	validatescript: ["validateScript:PBJ:"],
 	"{appId}": {
 		"": [
 			"deleteApp:D:",

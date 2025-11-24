@@ -1,7 +1,7 @@
 import { d as HostConfig } from "./auth-types-CHOUViJI.js";
 
 //#region src/qix/types/engine-schema.d.ts
-declare const QIX_SCHEMA_VERSION = "12.2622.0";
+declare const QIX_SCHEMA_VERSION = "12.2623.0";
 type AlfaNumString = {
   /**
    * Calculated value.

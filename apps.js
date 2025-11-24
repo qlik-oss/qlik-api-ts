@@ -125,6 +125,21 @@ async function getAppsPrivileges(options) {
 	});
 }
 /**
+* Validates the script.
+*
+* @param body an object with the body content
+* @throws ValidateScriptHttpError
+*/
+async function validateScript(body, options) {
+	return invokeFetch("apps", {
+		method: "post",
+		pathTemplate: "/api/v1/apps/validatescript",
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
 * Deletes a specific app.
 *
 * @param appId Identifier of the app.
@@ -784,6 +799,7 @@ const appsExport = {
 	getAppEvaluationXml,
 	importApp,
 	getAppsPrivileges,
+	validateScript,
 	deleteApp,
 	getAppInfo,
 	updateAppInfo,
@@ -826,4 +842,4 @@ const appsExport = {
 var apps_default = appsExport;
 
 //#endregion
-export { clearCache, copyApp, countAppReportFilters, createApp, createAppReportFilter, apps_default as default, deleteApp, deleteAppMedia, deleteAppReportFilter, deleteAppScript, exportApp, getAppDataLineage, getAppDataMetadata, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXml, getAppEvaluationXml, getAppEvaluations, getAppInfo, getAppInsightAnalyses, getAppInsightAnalysisModel, getAppInsightAnalysisRecommendations, getAppMedia, getAppMediaList, getAppReloadLog, getAppReloadLogs, getAppReloadMetadata, getAppReportFilter, getAppReportFilters, getAppScript, getAppScriptHistory, getAppThumbnail, getAppsPrivileges, importApp, moveAppToSpace, patchAppReportFilter, patchAppScript, publishApp, queueAppEvaluation, removeAppFromSpace, republishApp, updateAppInfo, updateAppObjectOwner, updateAppOwner, updateAppScript, uploadAppMedia };
+export { clearCache, copyApp, countAppReportFilters, createApp, createAppReportFilter, apps_default as default, deleteApp, deleteAppMedia, deleteAppReportFilter, deleteAppScript, exportApp, getAppDataLineage, getAppDataMetadata, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXml, getAppEvaluationXml, getAppEvaluations, getAppInfo, getAppInsightAnalyses, getAppInsightAnalysisModel, getAppInsightAnalysisRecommendations, getAppMedia, getAppMediaList, getAppReloadLog, getAppReloadLogs, getAppReloadMetadata, getAppReportFilter, getAppReportFilters, getAppScript, getAppScriptHistory, getAppThumbnail, getAppsPrivileges, importApp, moveAppToSpace, patchAppReportFilter, patchAppScript, publishApp, queueAppEvaluation, removeAppFromSpace, republishApp, updateAppInfo, updateAppObjectOwner, updateAppOwner, updateAppScript, uploadAppMedia, validateScript };
