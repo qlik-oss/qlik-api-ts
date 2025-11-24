@@ -1339,6 +1339,9 @@ type ProfileInsights = {
     featuresList?: FeaturesList;
     name: string;
   };
+  /** Optional experiment version ID. When included, it indicates that
+   * this dataset profile is a snapshot from a previous version. */
+  experimentVersionId?: string;
   /** List of feature insights object, one per feature in the dataset */
   insights?: FeatureInsights[];
   /** Is this a CSV dataset > 1GB? */
@@ -1355,6 +1358,8 @@ type ProfileInsights = {
   numberOfRows?: number;
   /** ID of owner/user for this entity */
   ownerId: OwnerId;
+  /** Size of the profiled dataset in bytes. */
+  sizeInBytes?: number;
   /** Status of profile insights. Not available until `ready`. */
   status: "pending" | "error" | "ready";
   /** Tenant ID for this entity */
@@ -2382,6 +2387,11 @@ declare function getMlProfileInsightWithQuery(dataSetId: string, query: {
   /** The optional experiment type for profile-insights GET requests after
    * this is known. */
   experimentType?: ExperimentType;
+  /** The optional experimentVersionId query parameter for profile-insights
+   * GET requests. When provided after a version has been trained, it gets
+   * the profile insights snapshot used in previous versions rather than
+   * new results. */
+  experimentVersionId?: string;
   /** The optional target feature for profile-insights GET requests after this
    * is known. */
   target?: string;

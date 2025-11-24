@@ -39,11 +39,17 @@ type ChartTemplate = {
   outZoom?: number;
   /** Soft property changes on chart */
   patches?: unknown[];
+  /** Flag to configure the persistent bookmark to use variables. */
+  persistentBookmarkIncludeVariables?: boolean;
   /** sheetId of app */
   sheetId?: string;
   /** widthPx of chart */
   widthPx?: number;
 };
+/**
+ * A bookmark is considered old if its modification date is older than the app creation date.
+ */
+type CleanupStrategy = "noCleanup" | "removeOldBookmarks";
 /**
  * recipient object model that is directly persisted in the DB
  */
@@ -143,6 +149,8 @@ type MultiSheetTemplate = {
   jsOpts?: unknown;
   jsOptsById?: Record<string, unknown>;
   patchesById?: Record<string, unknown[]>;
+  /** Flag to configure the persistent bookmark to use variables */
+  persistentBookmarkIncludeVariables?: boolean;
   /** Currently only autofit is supported.
    * If omitted, autofit is the default.
    * The type of resize to be performed:
@@ -410,6 +418,8 @@ type SharingTaskRecurringCreateRequest = {
   /** @deprecated
    * Name of the app associated (through the templates) with this sharing task */
   appName?: string;
+  /** A bookmark is considered old if its modification date is older than the app creation date. */
+  cleanupStrategy?: CleanupStrategy;
   /** the id of the data connection */
   dataConnectionID?: string;
   /** Description of the sharing task */
@@ -1151,4 +1161,4 @@ type SharingTasksAPI = {
  */
 declare const sharingTasksExport: SharingTasksAPI;
 //#endregion
-export { SharingSettings as $, GetSharingTasksHttpResponse as A, deleteSharingTask as At, PatchSharingTaskHttpResponse as B, updateSharingTasksSettings as Bt, GetSharingTaskExecutionHttpError as C, UpdateSharingTasksSettingsHttpResponse as Ct, GetSharingTaskHttpError as D, clearCache as Dt, GetSharingTaskExecutionsHttpResponse as E, cancelSharingTask as Et, Links as F, getSharingTaskExecutions as Ft, Self as G, RetentionPolicy as H, ListLinks as I, getSharingTasks as It, SharingExecutionErrors as J, SharingActionsTriggerCreateRequest as K, MultiSheetTemplate as L, getSharingTasksSettings as Lt, GetSharingTasksSettingsHttpResponse as M, getSharingTask as Mt, GroupIDRecipientPersist as N, getSharingTaskExecution as Nt, GetSharingTaskHttpResponse as O, configureSharingTasksSettings as Ot, InsightURL as P, getSharingTaskExecutionFile as Pt, SharingExecutionResponse as Q, Page as R, patchSharingTask as Rt, GetSharingTaskExecutionFileHttpResponse as S, UpdateSharingTasksSettingsHttpError as St, GetSharingTaskExecutionsHttpError as T, UserIDRecipientPersist as Tt, ScheduleOptions as U, RecipientsPersist as V, Selection as W, SharingExecutionListResponse as X, SharingExecutionFile as Y, SharingExecutionPersist as Z, ErrorMeta as _, TaskGroupRecipientError as _t, CancelSharingTaskHttpResponse as a, SharingTaskRecurringPatchRequestCompliant as at, ExecuteSharingTasksHttpResponse as b, TemplateResult as bt, ConfigureSharingTasksSettingsHttpResponse as c, SharingTaskRecurringRecipients as ct, DeleteSharingTaskHttpError as d, SheetTemplate as dt, SharingSettingsPatchCompliant as et, DeleteSharingTaskHttpResponse as f, StandardListResponseProps as ft, Error as g, TaskError as gt, EncryptedProperty as h, TargetUser as ht, CancelSharingTaskHttpError as i, SharingTaskRecurringListResponse as it, GetSharingTasksSettingsHttpError as j, executeSharingTasks as jt, GetSharingTasksHttpError as k, createSharingTask as kt, CreateSharingTaskHttpError as l, SharingTaskRecurringResponse as lt, EmailComposition as m, StoryTemplate as mt, AlertingTaskGroupRecipientError as n, SharingTaskPatchRequestCompliantList as nt, ChartTemplate as o, SharingTaskRecurringPersist as ot, EmailAddressRecipientPersist as p, State as pt, SharingExecutionError as q, AlertingTaskRecipientError as r, SharingTaskRecurringCreateRequest as rt, ConfigureSharingTasksSettingsHttpError as s, SharingTaskRecurringPersistEncryptedEmailContent as st, APISettingsUpload as t, SharingSettingsPatchCompliantList as tt, CreateSharingTaskHttpResponse as u, SharingTasksAPI as ut, Errors as v, TaskRecipientError as vt, GetSharingTaskExecutionHttpResponse as w, UserIDRecipient as wt, GetSharingTaskExecutionFileHttpError as x, Trigger as xt, ExecuteSharingTasksHttpError as y, TemplatePersist as yt, PatchSharingTaskHttpError as z, sharingTasksExport as zt };
+export { SharingExecutionResponse as $, GetSharingTasksHttpError as A, createSharingTask as At, PatchSharingTaskHttpError as B, sharingTasksExport as Bt, GetSharingTaskExecutionFileHttpResponse as C, UpdateSharingTasksSettingsHttpError as Ct, GetSharingTaskExecutionsHttpResponse as D, cancelSharingTask as Dt, GetSharingTaskExecutionsHttpError as E, UserIDRecipientPersist as Et, InsightURL as F, getSharingTaskExecutionFile as Ft, Selection as G, RecipientsPersist as H, Links as I, getSharingTaskExecutions as It, SharingExecutionError as J, Self as K, ListLinks as L, getSharingTasks as Lt, GetSharingTasksSettingsHttpError as M, executeSharingTasks as Mt, GetSharingTasksSettingsHttpResponse as N, getSharingTask as Nt, GetSharingTaskHttpError as O, clearCache as Ot, GroupIDRecipientPersist as P, getSharingTaskExecution as Pt, SharingExecutionPersist as Q, MultiSheetTemplate as R, getSharingTasksSettings as Rt, GetSharingTaskExecutionFileHttpError as S, Trigger as St, GetSharingTaskExecutionHttpResponse as T, UserIDRecipient as Tt, RetentionPolicy as U, PatchSharingTaskHttpResponse as V, updateSharingTasksSettings as Vt, ScheduleOptions as W, SharingExecutionFile as X, SharingExecutionErrors as Y, SharingExecutionListResponse as Z, Error as _, TaskError as _t, CancelSharingTaskHttpResponse as a, SharingTaskRecurringListResponse as at, ExecuteSharingTasksHttpError as b, TemplatePersist as bt, ConfigureSharingTasksSettingsHttpError as c, SharingTaskRecurringPersistEncryptedEmailContent as ct, CreateSharingTaskHttpResponse as d, SharingTasksAPI as dt, SharingSettings as et, DeleteSharingTaskHttpError as f, SheetTemplate as ft, EncryptedProperty as g, TargetUser as gt, EmailComposition as h, StoryTemplate as ht, CancelSharingTaskHttpError as i, SharingTaskRecurringCreateRequest as it, GetSharingTasksHttpResponse as j, deleteSharingTask as jt, GetSharingTaskHttpResponse as k, configureSharingTasksSettings as kt, ConfigureSharingTasksSettingsHttpResponse as l, SharingTaskRecurringRecipients as lt, EmailAddressRecipientPersist as m, State as mt, AlertingTaskGroupRecipientError as n, SharingSettingsPatchCompliantList as nt, ChartTemplate as o, SharingTaskRecurringPatchRequestCompliant as ot, DeleteSharingTaskHttpResponse as p, StandardListResponseProps as pt, SharingActionsTriggerCreateRequest as q, AlertingTaskRecipientError as r, SharingTaskPatchRequestCompliantList as rt, CleanupStrategy as s, SharingTaskRecurringPersist as st, APISettingsUpload as t, SharingSettingsPatchCompliant as tt, CreateSharingTaskHttpError as u, SharingTaskRecurringResponse as ut, ErrorMeta as v, TaskGroupRecipientError as vt, GetSharingTaskExecutionHttpError as w, UpdateSharingTasksSettingsHttpResponse as wt, ExecuteSharingTasksHttpResponse as x, TemplateResult as xt, Errors as y, TaskRecipientError as yt, Page as z, patchSharingTask as zt };
