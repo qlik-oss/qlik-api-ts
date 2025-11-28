@@ -1,6 +1,6 @@
 import "./chunks/utils-UaAiVTcc.js";
-import "./chunks/public-runtime-modules-DiFgGaqr.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CoW3QRhJ.js";
+import "./chunks/public-runtime-modules-C386fCsU.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-dW7RXRMD.js";
 
 //#region src/public/rest/web-notifications.ts
 /**
