@@ -17,7 +17,7 @@
     "nanoid": "^5.1.6",
     "ws": "^8.18.3"
   },
-  "packageManager": "pnpm@10.23.0",
+  "packageManager": "pnpm@10.24.0",
   "engines": {
     "node": ">=20"
   },
@@ -37,6 +37,8 @@
     "./collections": "./collections.js",
     "./conditions": "./conditions.js",
     "./consumption": "./consumption.js",
+    "./core": "./core.js",
+    "./core/ip-policies": "./core/ip-policies.js",
     "./csp-origins": "./csp-origins.js",
     "./csrf-token": "./csrf-token.js",
     "./data-alerts": "./data-alerts.js",

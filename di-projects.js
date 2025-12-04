@@ -1,6 +1,6 @@
-import "./chunks/utils-UaAiVTcc.js";
-import "./chunks/public-runtime-modules-C386fCsU.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-dW7RXRMD.js";
+import "./chunks/utils-BnC4lrlq.js";
+import "./chunks/public-runtime-modules-Dwjzb3l8.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-PcVIxLW4.js";
 
 //#region src/public/rest/di-projects.ts
 /**
@@ -35,7 +35,7 @@ async function createDiProject(body, options) {
 /**
 * Retrieves the status of an asynchronous operation.
 *
-* @param actionId Action ID
+* @param actionId Identifier of the action.
 * @param query an object with query parameters
 * @throws GetDiProjectHttpError
 */
@@ -51,7 +51,7 @@ async function getDiProject(actionId, query, options) {
 /**
 * Exports the specified data integration project.
 *
-* @param projectId Data project ID
+* @param projectId Identifier of the data project.
 * @param body an object with the body content
 * @throws ExportDiProjectHttpError
 */
@@ -68,7 +68,7 @@ async function exportDiProject(projectId, body, options) {
 /**
 * Imports a data integration project from a `.zip` file.
 *
-* @param projectId Data project ID
+* @param projectId Identifier of the data project.
 * @param body an object with the body content
 * @throws ImportDiProjectHttpError
 */
@@ -85,7 +85,7 @@ async function importDiProject(projectId, body, options) {
 /**
 * Prepares the data integration project and its tasks for execution.
 *
-* @param projectId Data project ID
+* @param projectId Identifier of the data project.
 * @param body an object with the body content
 * @throws PrepareDiProjectHttpError
 */
@@ -102,7 +102,7 @@ async function prepareDiProject(projectId, body, options) {
 /**
 * Validates the data integration project and its tasks.
 *
-* @param projectId Data project ID
+* @param projectId Identifier of the data project.
 * @param body an object with the body content
 * @throws ValidateDiProjectHttpError
 */
@@ -119,7 +119,7 @@ async function validateDiProject(projectId, body, options) {
 /**
 * Retrieves the export variables for a specific data integration project.
 *
-* @param projectId Data project ID
+* @param projectId Identifier of the data project.
 * @param query an object with query parameters
 * @throws GetDiProjectExportVariablesHttpError
 */
@@ -135,7 +135,7 @@ async function getDiProjectExportVariables(projectId, query, options) {
 /**
 * Updates the export variables for a specific data integration project.
 *
-* @param projectId Data project ID
+* @param projectId Identifier of the data project.
 * @param body an object with the body content
 * @throws SetDiProjectExportVariablesHttpError
 */
@@ -152,7 +152,7 @@ async function setDiProjectExportVariables(projectId, body, options) {
 /**
 * Lists data tasks within a given data integration project.
 *
-* @param projectId Data project id
+* @param projectId Identifier of the data project.
 * @throws GetDiProjectDiTasksHttpError
 */
 async function getDiProjectDiTasks(projectId, options) {
@@ -166,8 +166,8 @@ async function getDiProjectDiTasks(projectId, options) {
 /**
 * Get a specific data task within a project.
 *
-* @param projectId Data project id
-* @param dataTaskId Data task id
+* @param projectId Identifier of the data project.
+* @param dataTaskId Identifier of the data task.
 * @throws GetDiProjectDiTaskHttpError
 */
 async function getDiProjectDiTask(projectId, dataTaskId, options) {
@@ -184,8 +184,8 @@ async function getDiProjectDiTask(projectId, dataTaskId, options) {
 /**
 * Prepares the specified data task for execution.
 *
-* @param projectId Data project ID
-* @param dataTaskId Data task id
+* @param projectId Identifier of the data project.
+* @param dataTaskId Identifier of the data task.
 * @param body an object with the body content
 * @throws PrepareDiProjectDiTaskHttpError
 */
@@ -203,10 +203,31 @@ async function prepareDiProjectDiTask(projectId, dataTaskId, body, options) {
 	});
 }
 /**
+* Registers a request to reload the datasets associated with the specified data task. The reload does not occur immediately; it will take effect on the next scheduled or manual run of the task.
+*
+* @param projectId Identifier of the data project.
+* @param dataTaskId Identifier of the data task.
+* @param body an object with the body content
+* @throws RequestReloadDiProjectDiTaskHttpError
+*/
+async function requestReloadDiProjectDiTask(projectId, dataTaskId, body, options) {
+	return invokeFetch("di-projects", {
+		method: "post",
+		pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks/{dataTaskId}/actions/request-reload",
+		pathVariables: {
+			projectId,
+			dataTaskId
+		},
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
 * Validates the specified data task.
 *
-* @param projectId Data project ID
-* @param dataTaskId Data task ID
+* @param projectId Identifier of the data project.
+* @param dataTaskId Identifier of the data task.
 * @param body an object with the body content
 * @throws ValidateDiProjectDiTaskHttpError
 */
@@ -226,8 +247,8 @@ async function validateDiProjectDiTask(projectId, dataTaskId, body, options) {
 /**
 * Start a data task on a data integration project.
 *
-* @param projectId Data project id
-* @param dataTaskId Data task id
+* @param projectId Identifier of the data project.
+* @param dataTaskId Identifier of the data task.
 * @throws StartDiProjectDiTaskRuntimeHttpError
 */
 async function startDiProjectDiTaskRuntime(projectId, dataTaskId, options) {
@@ -244,8 +265,8 @@ async function startDiProjectDiTaskRuntime(projectId, dataTaskId, options) {
 /**
 * Stop a data task on a data integration project.
 *
-* @param projectId
-* @param dataTaskId
+* @param projectId Identifier of the data project.
+* @param dataTaskId Identifier of the data task.
 * @throws StopDiProjectDiTaskRuntimeHttpError
 */
 async function stopDiProjectDiTaskRuntime(projectId, dataTaskId, options) {
@@ -262,8 +283,8 @@ async function stopDiProjectDiTaskRuntime(projectId, dataTaskId, options) {
 /**
 * Get the current runtime state of a data task
 *
-* @param projectId
-* @param dataTaskId
+* @param projectId Identifier of the data project.
+* @param dataTaskId Identifier of the data task.
 * @throws GetDiProjectDiTaskRuntimeStateHttpError
 */
 async function getDiProjectDiTaskRuntimeState(projectId, dataTaskId, options) {
@@ -280,8 +301,8 @@ async function getDiProjectDiTaskRuntimeState(projectId, dataTaskId, options) {
 /**
 * Returns dataset-level runtime state for a data task
 *
-* @param projectId ID of the project
-* @param dataTaskId ID of the data task
+* @param projectId Identifier of the data project.
+* @param dataTaskId Identifier of the data task.
 * @throws GetDiProjectDiTaskRuntimeStateDatasetsHttpError
 */
 async function getDiProjectDiTaskRuntimeStateDatasets(projectId, dataTaskId, options) {
@@ -317,6 +338,7 @@ const diProjectsExport = {
 	getDiProjectDiTasks,
 	getDiProjectDiTask,
 	prepareDiProjectDiTask,
+	requestReloadDiProjectDiTask,
 	validateDiProjectDiTask,
 	startDiProjectDiTaskRuntime,
 	stopDiProjectDiTaskRuntime,
@@ -327,4 +349,4 @@ const diProjectsExport = {
 var di_projects_default = diProjectsExport;
 
 //#endregion
-export { clearCache, createDiProject, di_projects_default as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, setDiProjectExportVariables, startDiProjectDiTaskRuntime, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };
+export { clearCache, createDiProject, di_projects_default as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, requestReloadDiProjectDiTask, setDiProjectExportVariables, startDiProjectDiTaskRuntime, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };

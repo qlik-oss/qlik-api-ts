@@ -1,9 +1,9 @@
-import "./chunks/utils-UaAiVTcc.js";
-import "./chunks/public-runtime-modules-C386fCsU.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-dW7RXRMD.js";
-import { t as auth_default } from "./chunks/auth-HTzrHntg.js";
-import { a as interceptors_default$1 } from "./chunks/interceptors-DoQ44M-n.js";
-import { n as qix_default } from "./chunks/qix-BanGESrA.js";
+import "./chunks/utils-BnC4lrlq.js";
+import "./chunks/public-runtime-modules-Dwjzb3l8.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-PcVIxLW4.js";
+import { t as auth_default } from "./chunks/auth-D11iO7ZV.js";
+import { a as interceptors_default$1 } from "./chunks/interceptors-DTYm37AU.js";
+import { n as qix_default } from "./chunks/qix-CYQsLyGQ.js";
 
 //#region src/runtime-api-generator/runtime-api-generator-common.ts
 const methodAbbreviations = {
@@ -455,6 +455,18 @@ const createConditionsRuntimeAPI = apiDefToApiPublic("conditions", { api: { v1: 
 	}
 } } } });
 const createConsumptionRuntimeAPI = apiDefToApiPublic("consumption", { api: { v1: { consumption: { executions: ["getConsumptionExecutions:GQ:"] } } } });
+const createCoreIpPoliciesRuntimeAPI = apiDefToApiPublic("core/ip-policies", { api: { core: { "ip-policies": {
+	"": ["getIpPolicies:GQ:", "createIpPolicy:PBJ:"],
+	"{id}": [
+		"deleteIpPolicy:D:",
+		"getIpPolicy:G:",
+		"patchIpPolicy:ABJ:"
+	]
+} } } });
+const createCoreRuntimeAPI = apiDefToApiPublic("core", {}, {
+	"ip-policies": createCoreIpPoliciesRuntimeAPI,
+	ipPolicies: createCoreIpPoliciesRuntimeAPI
+});
 const createCspOriginsRuntimeAPI = apiDefToApiPublic("csp-origins", { api: { v1: { "csp-origins": {
 	"": ["getCSPEntries:GQ:", "createCSPEntry:PBJ:"],
 	actions: { "generate-header": ["getCSPHeader:G:"] },
@@ -606,6 +618,7 @@ const createDiProjectsRuntimeAPI = apiDefToApiPublic("di-projects", { api: { v1:
 				"": ["getDiProjectDiTask:G:"],
 				actions: {
 					prepare: ["prepareDiProjectDiTask:PBJ:"],
+					"request-reload": ["requestReloadDiProjectDiTask:PBJ:"],
 					validate: ["validateDiProjectDiTask:PBJ:"]
 				},
 				runtime: {
@@ -632,14 +645,18 @@ const createDirectAccessAgentsRuntimeAPI = apiDefToApiPublic("direct-access-agen
 		}
 	},
 	configurations: ["getDirectAccessAgentConfiguration:GQ:", "patchDirectAccessAgentConfiguration:ABJ:"],
-	connectors: { "{connectorType}": { files: {
-		"": ["getDirectAccessAgentConnectorFiles:GQ:", "getDirectAccessAgentConnectorFilesWithoutQuery:G:"],
-		"{fileType}": [
-			"getDirectAccessAgentConnectorFile:G:",
-			"updateDirectAccessAgentConnectorFile:UQBJ:",
-			"updateDirectAccessAgentConnectorFileWithoutQuery:UBJ:"
-		]
-	} } }
+	connectors: {
+		"file-connector": { files: { "allowed-paths": ["getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths:G:", "putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths:UBJ:"] } },
+		"odbc-connector": { files: { "custom-data-type-mappings": ["getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings:G:", "putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings:UBJ:"] } },
+		"{connectorType}": { files: {
+			"": ["getDirectAccessAgentConnectorFiles:GQ:", "getDirectAccessAgentConnectorFilesWithoutQuery:G:"],
+			"{fileType}": [
+				"getDirectAccessAgentConnectorFile:G:",
+				"updateDirectAccessAgentConnectorFile:UQBJ:",
+				"updateDirectAccessAgentConnectorFileWithoutQuery:UBJ:"
+			]
+		} }
+	}
 } } } } });
 const createEncryptionRuntimeAPI = apiDefToApiPublic("encryption", { api: { v1: { encryption: { keyproviders: {
 	"": ["getEncryptionKeyproviders:G:", "createEncryptionKeyprovider:PBJ:"],
@@ -1151,6 +1168,7 @@ const brands = createBrandsRuntimeAPI(void 0, interceptors_default);
 const collections = createCollectionsRuntimeAPI(void 0, interceptors_default);
 const conditions = createConditionsRuntimeAPI(void 0, interceptors_default);
 const consumption = createConsumptionRuntimeAPI(void 0, interceptors_default);
+const core = createCoreRuntimeAPI(void 0, interceptors_default);
 const cspOrigins = createCspOriginsRuntimeAPI(void 0, interceptors_default);
 const csrfToken = createCsrfTokenRuntimeAPI(void 0, interceptors_default);
 const dataAlerts = createDataAlertsRuntimeAPI(void 0, interceptors_default);
@@ -1218,6 +1236,7 @@ const createQlikApi = (props) => {
 		collections: createCollectionsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		conditions: createConditionsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		consumption: createConsumptionRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		core: createCoreRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		cspOrigins: createCspOriginsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		csrfToken: createCsrfTokenRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		dataAlerts: createDataAlertsRuntimeAPI(props?.hostConfig, scopedInterceptors),
@@ -1286,6 +1305,7 @@ const api = {
 	collections,
 	conditions,
 	consumption,
+	core,
 	cspOrigins,
 	csrfToken,
 	dataAlerts,
@@ -1338,4 +1358,4 @@ const api = {
 var public_default = api;
 
 //#endregion
-export { apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, consumption, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataQualities, dataSets, dataSources, dataStores, dcaas, public_default as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks };
+export { apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataQualities, dataSets, dataSources, dataStores, dcaas, public_default as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks };

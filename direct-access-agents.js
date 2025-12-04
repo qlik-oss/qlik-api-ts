@@ -1,6 +1,6 @@
-import "./chunks/utils-UaAiVTcc.js";
-import "./chunks/public-runtime-modules-C386fCsU.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-dW7RXRMD.js";
+import "./chunks/utils-BnC4lrlq.js";
+import "./chunks/public-runtime-modules-Dwjzb3l8.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-PcVIxLW4.js";
 
 //#region src/public/rest/direct-access-agents.ts
 /**
@@ -100,6 +100,68 @@ async function patchDirectAccessAgentConfiguration(agentId, body, options) {
 	return invokeFetch("direct-access-agents", {
 		method: "patch",
 		pathTemplate: "/api/v1/direct-access-agents/{agentId}/configurations",
+		pathVariables: { agentId },
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
+* Retrieves the allowed paths settings for the File Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.6+.
+*
+* @param agentId The agent ID
+* @throws GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError
+*/
+async function getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths(agentId, options) {
+	return invokeFetch("direct-access-agents", {
+		method: "get",
+		pathTemplate: "/api/v1/direct-access-agents/{agentId}/connectors/file-connector/files/allowed-paths",
+		pathVariables: { agentId },
+		options
+	});
+}
+/**
+* Completely replaces the contents of the allowed paths configuration file for the File Connector. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.6+.
+*
+* @param agentId The agent id
+* @param body an object with the body content
+* @throws PutDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError
+*/
+async function putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths(agentId, body, options) {
+	return invokeFetch("direct-access-agents", {
+		method: "put",
+		pathTemplate: "/api/v1/direct-access-agents/{agentId}/connectors/file-connector/files/allowed-paths",
+		pathVariables: { agentId },
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
+* Retrieves the custom data type mapping settings for the Generic ODBC Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
+*
+* @param agentId The agent ID.
+* @throws GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpError
+*/
+async function getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings(agentId, options) {
+	return invokeFetch("direct-access-agents", {
+		method: "get",
+		pathTemplate: "/api/v1/direct-access-agents/{agentId}/connectors/odbc-connector/files/custom-data-type-mappings",
+		pathVariables: { agentId },
+		options
+	});
+}
+/**
+* Completely replaces the contents of the custom data type mapping configuration file for the Generic ODBC connector. Partial updates are not supported. There are property naming differences between the API and the file contents. Use the API property format when making changes. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
+*
+* @param agentId The agent ID.
+* @param body an object with the body content
+* @throws PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpError
+*/
+async function putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings(agentId, body, options) {
+	return invokeFetch("direct-access-agents", {
+		method: "put",
+		pathTemplate: "/api/v1/direct-access-agents/{agentId}/connectors/odbc-connector/files/custom-data-type-mappings",
 		pathVariables: { agentId },
 		body,
 		contentType: "application/json",
@@ -228,6 +290,10 @@ const directAccessAgentsExport = {
 	createDirectAccessAgentBenchmarkCancel,
 	getDirectAccessAgentConfiguration,
 	patchDirectAccessAgentConfiguration,
+	getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths,
+	putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths,
+	getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings,
+	putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings,
 	getDirectAccessAgentConnectorFiles,
 	getDirectAccessAgentConnectorFilesWithoutQuery,
 	getDirectAccessAgentConnectorFile,
@@ -238,4 +304,4 @@ const directAccessAgentsExport = {
 var direct_access_agents_default = directAccessAgentsExport;
 
 //#endregion
-export { clearCache, createDirectAccessAgentBenchmark, createDirectAccessAgentBenchmarkCancel, direct_access_agents_default as default, getDirectAccessAgentBenchmark, getDirectAccessAgentConfiguration, getDirectAccessAgentConnectorFile, getDirectAccessAgentConnectorFiles, getDirectAccessAgentConnectorFilesWithoutQuery, patchDirectAccessAgentConfiguration, restartDirectAccessAgent, updateDirectAccessAgentConnectorFile, updateDirectAccessAgentConnectorFileWithoutQuery };
+export { clearCache, createDirectAccessAgentBenchmark, createDirectAccessAgentBenchmarkCancel, direct_access_agents_default as default, getDirectAccessAgentBenchmark, getDirectAccessAgentConfiguration, getDirectAccessAgentConnectorFile, getDirectAccessAgentConnectorFiles, getDirectAccessAgentConnectorFilesWithoutQuery, getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths, getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings, patchDirectAccessAgentConfiguration, putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths, putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings, restartDirectAccessAgent, updateDirectAccessAgentConnectorFile, updateDirectAccessAgentConnectorFileWithoutQuery };
