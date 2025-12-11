@@ -1,9 +1,8 @@
-import "./chunks/utils-BnC4lrlq.js";
-import "./chunks/public-runtime-modules-Dwjzb3l8.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-PcVIxLW4.js";
-import { t as auth_default } from "./chunks/auth-D11iO7ZV.js";
-import { a as interceptors_default$1 } from "./chunks/interceptors-DTYm37AU.js";
-import { n as qix_default } from "./chunks/qix-CYQsLyGQ.js";
+import "./chunks/public-runtime-modules-CfWEOfVS.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-Cxl7YHCk.js";
+import { t as auth_default } from "./chunks/auth-TLtO6AW8.js";
+import { a as interceptors_default$1 } from "./chunks/interceptors-CPiYMwHB.js";
+import { n as qix_default } from "./chunks/qix-BOlMjyM3.js";
 
 //#region src/runtime-api-generator/runtime-api-generator-common.ts
 const methodAbbreviations = {
@@ -623,7 +622,7 @@ const createDiProjectsRuntimeAPI = apiDefToApiPublic("di-projects", { api: { v1:
 				},
 				runtime: {
 					actions: {
-						start: ["startDiProjectDiTaskRuntime:P:"],
+						start: ["startDiProjectDiTaskRuntimeWithBody:PBJ:", "startDiProjectDiTaskRuntime:P:"],
 						stop: ["stopDiProjectDiTaskRuntime:P:"]
 					},
 					state: {
@@ -656,7 +655,8 @@ const createDirectAccessAgentsRuntimeAPI = apiDefToApiPublic("direct-access-agen
 				"updateDirectAccessAgentConnectorFileWithoutQuery:UBJ:"
 			]
 		} }
-	}
+	},
+	tools: { "metrics-collector": { configuration: ["getDirectAccessAgentToolsMetricsCollectorConfiguration:G:", "setDirectAccessAgentToolsMetricsCollectorConfiguration:UBJ:"] } }
 } } } } });
 const createEncryptionRuntimeAPI = apiDefToApiPublic("encryption", { api: { v1: { encryption: { keyproviders: {
 	"": ["getEncryptionKeyproviders:G:", "createEncryptionKeyprovider:PBJ:"],

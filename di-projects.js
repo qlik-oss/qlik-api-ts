@@ -1,6 +1,5 @@
-import "./chunks/utils-BnC4lrlq.js";
-import "./chunks/public-runtime-modules-Dwjzb3l8.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-PcVIxLW4.js";
+import "./chunks/public-runtime-modules-CfWEOfVS.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-Cxl7YHCk.js";
 
 //#region src/public/rest/di-projects.ts
 /**
@@ -249,6 +248,27 @@ async function validateDiProjectDiTask(projectId, dataTaskId, body, options) {
 *
 * @param projectId Identifier of the data project.
 * @param dataTaskId Identifier of the data task.
+* @param body an object with the body content
+* @throws StartDiProjectDiTaskRuntimeWithBodyHttpError
+*/
+async function startDiProjectDiTaskRuntimeWithBody(projectId, dataTaskId, body, options) {
+	return invokeFetch("di-projects", {
+		method: "post",
+		pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks/{dataTaskId}/runtime/actions/start",
+		pathVariables: {
+			projectId,
+			dataTaskId
+		},
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
+* Start a data task on a data integration project.
+*
+* @param projectId Identifier of the data project.
+* @param dataTaskId Identifier of the data task.
 * @throws StartDiProjectDiTaskRuntimeHttpError
 */
 async function startDiProjectDiTaskRuntime(projectId, dataTaskId, options) {
@@ -340,6 +360,7 @@ const diProjectsExport = {
 	prepareDiProjectDiTask,
 	requestReloadDiProjectDiTask,
 	validateDiProjectDiTask,
+	startDiProjectDiTaskRuntimeWithBody,
 	startDiProjectDiTaskRuntime,
 	stopDiProjectDiTaskRuntime,
 	getDiProjectDiTaskRuntimeState,
@@ -349,4 +370,4 @@ const diProjectsExport = {
 var di_projects_default = diProjectsExport;
 
 //#endregion
-export { clearCache, createDiProject, di_projects_default as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, requestReloadDiProjectDiTask, setDiProjectExportVariables, startDiProjectDiTaskRuntime, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };
+export { clearCache, createDiProject, di_projects_default as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, requestReloadDiProjectDiTask, setDiProjectExportVariables, startDiProjectDiTaskRuntime, startDiProjectDiTaskRuntimeWithBody, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };

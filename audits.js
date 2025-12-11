@@ -1,6 +1,5 @@
-import "./chunks/utils-BnC4lrlq.js";
-import "./chunks/public-runtime-modules-Dwjzb3l8.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-PcVIxLW4.js";
+import "./chunks/public-runtime-modules-CfWEOfVS.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-Cxl7YHCk.js";
 
 //#region src/public/rest/audits.ts
 /**
@@ -30,7 +29,8 @@ async function fetchConsumptionAppAudits(options) {
 	});
 }
 /**
-* Retrieves audit events from long term storage. Finds and returns audit events from the archive, formatted as a JSON array, for the given date and tenant (in JWT). Archived events are not removed.
+* Retrieves audit events from long-term storage. Returns all archived audit events for the specified date and tenant, formatted as a JSON array.
+* Archived events are retained for the full lifetime of the tenant, and are not removed or size-limited.
 *
 * @param query an object with query parameters
 * @throws GetArchivedAuditsHttpError
