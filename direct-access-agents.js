@@ -1,6 +1,5 @@
-import "./chunks/utils-BnC4lrlq.js";
-import "./chunks/public-runtime-modules-Dwjzb3l8.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-PcVIxLW4.js";
+import "./chunks/public-runtime-modules-CfWEOfVS.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-Cxl7YHCk.js";
 
 //#region src/public/rest/direct-access-agents.ts
 /**
@@ -275,6 +274,37 @@ async function updateDirectAccessAgentConnectorFileWithoutQuery(agentId, connect
 	});
 }
 /**
+* Retrieves the settings for the metrics collector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.9+.
+*
+* @param agentId The agent ID.
+* @throws GetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError
+*/
+async function getDirectAccessAgentToolsMetricsCollectorConfiguration(agentId, options) {
+	return invokeFetch("direct-access-agents", {
+		method: "get",
+		pathTemplate: "/api/v1/direct-access-agents/{agentId}/tools/metrics-collector/configuration",
+		pathVariables: { agentId },
+		options
+	});
+}
+/**
+* Completely replaces the contents of the metrics collector settings configuration file. Partial updates are not supported.  Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.9+.
+*
+* @param agentId The agent ID.
+* @param body an object with the body content
+* @throws SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError
+*/
+async function setDirectAccessAgentToolsMetricsCollectorConfiguration(agentId, body, options) {
+	return invokeFetch("direct-access-agents", {
+		method: "put",
+		pathTemplate: "/api/v1/direct-access-agents/{agentId}/tools/metrics-collector/configuration",
+		pathVariables: { agentId },
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
 * Clears the cache for direct-access-agents api requests.
 */
 function clearCache() {
@@ -299,9 +329,11 @@ const directAccessAgentsExport = {
 	getDirectAccessAgentConnectorFile,
 	updateDirectAccessAgentConnectorFile,
 	updateDirectAccessAgentConnectorFileWithoutQuery,
+	getDirectAccessAgentToolsMetricsCollectorConfiguration,
+	setDirectAccessAgentToolsMetricsCollectorConfiguration,
 	clearCache
 };
 var direct_access_agents_default = directAccessAgentsExport;
 
 //#endregion
-export { clearCache, createDirectAccessAgentBenchmark, createDirectAccessAgentBenchmarkCancel, direct_access_agents_default as default, getDirectAccessAgentBenchmark, getDirectAccessAgentConfiguration, getDirectAccessAgentConnectorFile, getDirectAccessAgentConnectorFiles, getDirectAccessAgentConnectorFilesWithoutQuery, getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths, getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings, patchDirectAccessAgentConfiguration, putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths, putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings, restartDirectAccessAgent, updateDirectAccessAgentConnectorFile, updateDirectAccessAgentConnectorFileWithoutQuery };
+export { clearCache, createDirectAccessAgentBenchmark, createDirectAccessAgentBenchmarkCancel, direct_access_agents_default as default, getDirectAccessAgentBenchmark, getDirectAccessAgentConfiguration, getDirectAccessAgentConnectorFile, getDirectAccessAgentConnectorFiles, getDirectAccessAgentConnectorFilesWithoutQuery, getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths, getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings, getDirectAccessAgentToolsMetricsCollectorConfiguration, patchDirectAccessAgentConfiguration, putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths, putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings, restartDirectAccessAgent, setDirectAccessAgentToolsMetricsCollectorConfiguration, updateDirectAccessAgentConnectorFile, updateDirectAccessAgentConnectorFileWithoutQuery };
