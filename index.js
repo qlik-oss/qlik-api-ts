@@ -1,8 +1,8 @@
-import "./chunks/public-runtime-modules-CfWEOfVS.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-Cxl7YHCk.js";
-import { t as auth_default } from "./chunks/auth-TLtO6AW8.js";
-import { a as interceptors_default$1 } from "./chunks/interceptors-CPiYMwHB.js";
-import { n as qix_default } from "./chunks/qix-BOlMjyM3.js";
+import "./chunks/public-runtime-modules-C7GMbX7E.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CBsbPeVH.js";
+import auth_default from "./auth.js";
+import { a as interceptors_default$1 } from "./chunks/interceptors-BeHmFB2L.js";
+import qix_default from "./qix.js";
 
 //#region src/runtime-api-generator/runtime-api-generator-common.ts
 const methodAbbreviations = {
@@ -198,6 +198,20 @@ var interceptors_default = interceptors_default$1;
 
 //#endregion
 //#region src/public/index.ts
+const createAnalyticsChangeStoresRuntimeAPI = apiDefToApiPublic("analytics/change-stores", { api: { analytics: { "change-stores": {
+	"": ["getChangeStores:GQ:"],
+	"{storeId}": {
+		"": ["getChangeStore:G:"],
+		changes: {
+			"": ["getChangeStoreChanges:GQ:"],
+			"tabular-views": ["getChangeStoreChangesTabularViews:GQ:"]
+		}
+	}
+} } } });
+const createAnalyticsRuntimeAPI = apiDefToApiPublic("analytics", {}, {
+	"change-stores": createAnalyticsChangeStoresRuntimeAPI,
+	changeStores: createAnalyticsChangeStoresRuntimeAPI
+});
 const createApiKeysRuntimeAPI = apiDefToApiPublic("api-keys", { api: { v1: { "api-keys": {
 	"": ["getApiKeys:GQ:", "createApiKey:PBJ:"],
 	configs: { "{tenantId}": ["getApiKeysConfig:G:", "patchApiKeysConfig:ABJ:"] },
@@ -1081,7 +1095,8 @@ const createTransportsRuntimeAPI = apiDefToApiPublic("transports", { api: { v1: 
 	"": [
 		"deleteEmailConfig:D:",
 		"getEmailConfig:G:",
-		"patchEmailConfig:ABJ:"
+		"patchEmailConfig:ABJ:",
+		"updateEmailConfig:UBJ:"
 	],
 	actions: {
 		"send-test-email": ["sendTestEmail:PBJ:"],
@@ -1154,6 +1169,7 @@ const createWebhooksRuntimeAPI = apiDefToApiPublic("webhooks", { api: { v1: { we
 const auth = auth_default;
 const interceptors = interceptors_default;
 const qix = qix_default;
+const analytics = createAnalyticsRuntimeAPI(void 0, interceptors_default);
 const apiKeys = createApiKeysRuntimeAPI(void 0, interceptors_default);
 const apps = createAppsRuntimeAPI(void 0, interceptors_default);
 const assistants = createAssistantsRuntimeAPI(void 0, interceptors_default);
@@ -1222,6 +1238,7 @@ const createQlikApi = (props) => {
 		auth: auth_default,
 		interceptors: scopedInterceptors,
 		qix: qix_default.withHostConfig(props?.hostConfig),
+		analytics: createAnalyticsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		apiKeys: createApiKeysRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		apps: createAppsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		assistants: createAssistantsRuntimeAPI(props?.hostConfig, scopedInterceptors),
@@ -1291,6 +1308,7 @@ const api = {
 	auth,
 	interceptors,
 	qix,
+	analytics,
 	apiKeys,
 	apps,
 	assistants,
@@ -1358,4 +1376,4 @@ const api = {
 var public_default = api;
 
 //#endregion
-export { apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataQualities, dataSets, dataSources, dataStores, dcaas, public_default as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks };
+export { analytics, apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataQualities, dataSets, dataSources, dataStores, dcaas, public_default as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks };
