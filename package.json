@@ -15,14 +15,16 @@
     "extend": "3.0.2",
     "lodash": "^4.17.21",
     "nanoid": "^5.1.6",
-    "ws": "^8.18.3"
+    "ws": "^8.19.0"
   },
-  "packageManager": "pnpm@10.24.0",
+  "packageManager": "pnpm@10.28.0",
   "engines": {
     "node": ">=20"
   },
   "exports": {
     ".": "./index.js",
+    "./analytics": "./analytics.js",
+    "./analytics/change-stores": "./analytics/change-stores.js",
     "./api-keys": "./api-keys.js",
     "./apps": "./apps.js",
     "./assistants": "./assistants.js",

@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-CfWEOfVS.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-Cxl7YHCk.js";
+import "./chunks/public-runtime-modules-C7GMbX7E.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CBsbPeVH.js";
 
 //#region src/public/rest/transports.ts
 /**
@@ -37,6 +37,21 @@ async function getEmailConfig(options) {
 async function patchEmailConfig(body, options) {
 	return invokeFetch("transports", {
 		method: "patch",
+		pathTemplate: "/api/v1/transports/email-config",
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
+* Create or replace the email configuration for the tenant.
+*
+* @param body an object with the body content
+* @throws UpdateEmailConfigHttpError
+*/
+async function updateEmailConfig(body, options) {
+	return invokeFetch("transports", {
+		method: "put",
 		pathTemplate: "/api/v1/transports/email-config",
 		body,
 		contentType: "application/json",
@@ -95,6 +110,7 @@ const transportsExport = {
 	deleteEmailConfig,
 	getEmailConfig,
 	patchEmailConfig,
+	updateEmailConfig,
 	sendTestEmail,
 	validateEmailConfig,
 	verifyEmailConfigConnection,
@@ -103,4 +119,4 @@ const transportsExport = {
 var transports_default = transportsExport;
 
 //#endregion
-export { clearCache, transports_default as default, deleteEmailConfig, getEmailConfig, patchEmailConfig, sendTestEmail, validateEmailConfig, verifyEmailConfigConnection };
+export { clearCache, transports_default as default, deleteEmailConfig, getEmailConfig, patchEmailConfig, sendTestEmail, updateEmailConfig, validateEmailConfig, verifyEmailConfigConnection };
