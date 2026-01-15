@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-C7GMbX7E.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CBsbPeVH.js";
+import "./chunks/public-runtime-modules-QhLPeQr5.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B7lGscuQ.js";
 
 //#region src/public/rest/extensions.ts
 /**

@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-C7GMbX7E.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CBsbPeVH.js";
+import "./chunks/public-runtime-modules-QhLPeQr5.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B7lGscuQ.js";
 
 //#region src/public/rest/transports.ts
 /**
@@ -29,7 +29,7 @@ async function getEmailConfig(options) {
 /**
 * @deprecated
 *
-* Patch the email configuration for the tenant.
+* Patches the email configuration for the tenant. This endpoint is deprecated, use `PUT /transports/email-config` to replace the entire configuration instead.
 *
 * @param body an object with the body content
 * @throws PatchEmailConfigHttpError
@@ -44,7 +44,7 @@ async function patchEmailConfig(body, options) {
 	});
 }
 /**
-* Create or replace the email configuration for the tenant.
+* Creates or replaces the email configuration for the tenant. Validation of the configuration is done as part of the request.
 *
 * @param body an object with the body content
 * @throws UpdateEmailConfigHttpError

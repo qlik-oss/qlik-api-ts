@@ -95,56 +95,12 @@ type ExportError = {
    * - "REP-400010" Maximum 1048566 rows limit exceeded. Download data in a visualization can't generate an .xlsx file due to limitations to the number of rows you can download.
    * - "REP-400011" The size of the downloaded Excel file exceed 100 MB limit. Download data in a visualization can't generate an .xlsx file due to limitations to the amount of data you can download.
    * - "REP-400015" Bad request in enigma request. The patch value has invalid JSON format.
-   * - "REP-401000" Unauthorized. The client must authenticate itself to get the requested response.
-   * - "REP-401001" Unauthorized, bad JWT.
-   * - "REP-403000" Forbidden. The client does not have access rights to the content.
-   * - "REP-403001" App forbidden, the user does not have read permission on the app.
-   * - "REP-403002" Chart type not supported.
-   * - "REP-404000" Not found. The server can not find the requested resource.
-   * - "REP-404001" App not found, the app does not exist or it has been deleted.
-   * - "REP-404002" Chart not found, the chart does not exist or it has been deleted.
-   * - "REP-404003" Sheet not found, the sheet does not exist or it has been deleted or it is unavailable.
-   * - "REP-404004" Story not found, the story does not exist or it has been deleted or it is unavailable.
-   * - "REP-429000" Too many request. The user has sent too many requests in a given amount of time ("rate limiting").
-   * - "REP-429012" Exceeded max session tenant quota. A tenant has opened too many different sessions at the same time.
-   * - "REP-429014" The export could not be completed within the requested deadline.
-   * - "REP-429016" Exceeded max session tenant quota per day.
-   * - "REP-500000" Fail to resolve resource.
-   * - "REP-500006" Fail to get report session parameters.
-   * - "REP-503005" Engine unavailable, qix-sessions error no engines available.
-   * - "REP-503013" Session unavailable. The engine session used to create the report is unavailable.
-   * - "REP-500100" Image rendering generic error on Sense client.
-   * - "REP-500101" Image rendering could not set cookies error on Sense client.
-   * - "REP-400102" Image rendering invalid strategy error on Sense client.
-   * - "REP-500103" Image rendering JS timeout error on Sense client.
-   * - "REP-500104" Image rendering load URL timeout error on Sense client.
-   * - "REP-500105" Image rendering max paint attempts exceeded error on Sense client.
-   * - "REP-500106" Image rendering max JS attempts exceeded error on Sense client.
-   * - "REP-500107" Image rendering render timeout error on Sense client.
-   * - "REP-500108" Image rendering JS failure due to timeout error on Sense client.
-   * - "REP-500109" Image rendering generic JS failure error on Sense client.
-   * - "REP-400029" Reload Entitlement Limit Reached.
-   * - "REP-409046" Report aborted due to app reload.
-   * - "REP-500047" Error setting GroupState.
-   * - "REP-403048" Forbidden. User does not have permission to export the report (access control usePermission)
-   * - "REP-422051" There is no report to produce due to empty dataset or missing fields (the measure/dimension was removed or omitted in Section Access)
-   * - "REP-500014" The app did not open within 10 minutes.
    * - "REP-400017" Static App size exceeded.
    * - "REP-400018" Excel string length exceeded.
-   * - "REP-403019" Export is not available for app with enabled directQuery feature.
-   * - "REP-409001" App conflict.
-   * - "REP-503001" Rest Engine Error.
    * - "REP-400020" Invalid Issuer.
-   * - "REP-400028" Invalid Tags.
-   * - "REP-409021" Reload timestamp constraint not met.
-   * - "REP-429022" Enigma generic abort.
-   * - "REP-500023" Validate Report Request Tags failure.
    * - "REP-400024" Cannot extract claims from JWT.
-   * - "REP-403025" No entitlement to perform the operation.
-   * - "REP-403026" No entitlement to perform the operation. Export capability is off.
-   * - "REP-403027" Object without Hypercube or unsupported object type.
-   * - "REP-422030" Apply variables error.
-   * - "REP-500200" Report Generator error.
+   * - "REP-400028" Invalid Tags.
+   * - "REP-400029" Reload Entitlement Limit Reached.
    * - "REP-400035" Multiple selections detected in a field having OneAndOnlyone attribute.
    * - "REP-400036" No selection detected in a field having OneAndOnlyone attribute.
    * - "REP-400037" Max number of images exceeded in a report.
@@ -152,22 +108,66 @@ type ExportError = {
    * - "REP-400039" Max number of objects exceeded in a report.
    * - "REP-400040" Max number of templates exceeded in a report.
    * - "REP-400041" Unsupported dimension type for level tag.
-   * - "REP-500240" Engine Global generic closure error.
-   * - "REP-500260" Engine Websocket generic closure error.
-   * - "REP-500280" Engine proxy generic closure error.
-   * - "REP-400240" Engine Client Global generic closure error
-   * - "REP-400260" Engine Client generic closure error.
-   * - "REP-400280" Engine Client proxy generic closure error.
-   * - "REP-500045" Failure setting Bookmark timestamp.
    * - "REP-400050" Error retrieving outputs.
    * - "REP-400052" Report Request Aborted from internal error.
-   * - "REP-500053" Unexpected number of generated cycle reports.
    * - "REP-400054" The number of generated cycle reports exceeds the maximum allowed.
    * - "REP-400055" Export options not allowed for this object.
    * - "REP-400057" The sense object has an empty GenericType.
+   * - "REP-400102" Image rendering invalid strategy error on Sense client.
+   * - "REP-400240" Engine Client Global generic closure error
+   * - "REP-400260" Engine Client generic closure error.
+   * - "REP-400280" Engine Client proxy generic closure error.
+   * - "REP-401000" Unauthorized. The client must authenticate itself to get the requested response.
+   * - "REP-401001" Unauthorized, bad JWT.
+   * - "REP-403000" Forbidden. The client does not have access rights to the content.
+   * - "REP-403001" App forbidden, the user does not have read permission on the app.
+   * - "REP-403002" Chart type not supported.
+   * - "REP-403019" Export is not available for app with enabled directQuery feature.
+   * - "REP-403025" No entitlement to perform the operation.
+   * - "REP-403026" No entitlement to perform the operation. Export capability is off.
+   * - "REP-403027" Object without Hypercube or unsupported object type.
+   * - "REP-403048" Forbidden. User does not have permission to export the report (access control usePermission)
+   * - "REP-404000" Not found. The server can not find the requested resource.
+   * - "REP-404001" App not found, the app does not exist or it has been deleted.
+   * - "REP-404002" Chart not found, the chart does not exist or it has been deleted.
+   * - "REP-404003" Sheet not found, the sheet does not exist or it has been deleted or it is unavailable.
+   * - "REP-404004" Story not found, the story does not exist or it has been deleted or it is unavailable.
+   * - "REP-409001" App conflict.
+   * - "REP-409021" Reload timestamp constraint not met.
+   * - "REP-409046" Report aborted due to app reload.
+   * - "REP-422030" Apply variables error.
+   * - "REP-422051" There is no report to produce due to empty dataset or missing fields (the measure/dimension was removed or omitted in Section Access)
+   * - "REP-429000" Too many request. The user has sent too many requests in a given amount of time ("rate limiting").
+   * - "REP-429012" Exceeded max session tenant quota. A tenant has opened too many different sessions at the same time.
+   * - "REP-429014" The export could not be completed within the requested deadline.
+   * - "REP-429016" Exceeded max session tenant quota per day.
+   * - "REP-429022" Enigma generic abort.
+   * - "REP-500000" Fail to resolve resource.
+   * - "REP-500006" Fail to get report session parameters.
+   * - "REP-500014" The app did not open within 10 minutes.
+   * - "REP-500023" Validate Report Request Tags failure.
+   * - "REP-500045" Failure setting Bookmark timestamp.
+   * - "REP-500047" Error setting GroupState.
+   * - "REP-500053" Unexpected number of generated cycle reports.
    * - "REP-500059" The App is corrupt.
-   * - "REP-503060" Engine Service unavailable.
-   * - "REP-500061" Engine Memory limit reached. */
+   * - "REP-500061" Engine Memory limit reached.
+   * - "REP-500100" Image rendering generic error on Sense client.
+   * - "REP-500101" Image rendering could not set cookies error on Sense client.
+   * - "REP-500103" Image rendering JS timeout error on Sense client.
+   * - "REP-500104" Image rendering load URL timeout error on Sense client.
+   * - "REP-500105" Image rendering max paint attempts exceeded error on Sense client.
+   * - "REP-500106" Image rendering max JS attempts exceeded error on Sense client.
+   * - "REP-500107" Image rendering render timeout error on Sense client.
+   * - "REP-500108" Image rendering JS failure due to timeout error on Sense client.
+   * - "REP-500109" Image rendering generic JS failure error on Sense client.
+   * - "REP-500200" Report Generator error.
+   * - "REP-500240" Engine Global generic closure error.
+   * - "REP-500260" Engine Websocket generic closure error.
+   * - "REP-500280" Engine proxy generic closure error.
+   * - "REP-503001" Rest Engine Error.
+   * - "REP-503005" Engine unavailable, qix-sessions error no engines available.
+   * - "REP-503013" Session unavailable. The engine session used to create the report is unavailable.
+   * - "REP-503060" Engine Service unavailable. */
   code: string;
   /** Optional. MAY be used to provide more concrete details. */
   detail?: string;

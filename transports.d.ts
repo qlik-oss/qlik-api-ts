@@ -135,6 +135,9 @@ type GetMicrosoft365Config = {
   /** Microsoft365 tenant identifier */
   providerTenantId?: string;
 };
+/**
+ * SMTP basic authentication configuration. Provides server address, credentials, and sender information for standard SMTP email delivery.
+ */
 type PutBasicAuthConfig = {
   /** The email address that should appear in From field when sending emails with this account */
   emailAddress?: string;
@@ -156,6 +159,9 @@ type PutEmailConfig = {
   /** Name of the service provider for authentication */
   serviceProvider?: "Microsoft365" | "BasicAuth";
 };
+/**
+ * Microsoft 365 authentication configuration. Provides OAuth credentials and tenant information for Microsoft 365 email delivery.
+ */
 type PutMicrosoft365Config = {
   /** Microsoft365 client identifier */
   clientId?: string;
@@ -243,7 +249,7 @@ type GetEmailConfigdefaultHttpError = {
 /**
  * @deprecated
  *
- * Patch the email configuration for the tenant.
+ * Patches the email configuration for the tenant. This endpoint is deprecated, use `PUT /transports/email-config` to replace the entire configuration instead.
  *
  * @param body an object with the body content
  * @throws PatchEmailConfigHttpError
@@ -271,7 +277,7 @@ type PatchEmailConfigdefaultHttpError = {
   status: "default";
 };
 /**
- * Create or replace the email configuration for the tenant.
+ * Creates or replaces the email configuration for the tenant. Validation of the configuration is done as part of the request.
  *
  * @param body an object with the body content
  * @throws UpdateEmailConfigHttpError
@@ -384,14 +390,14 @@ type TransportsAPI = {
   /**
    * @deprecated
    *
-   * Patch the email configuration for the tenant.
+   * Patches the email configuration for the tenant. This endpoint is deprecated, use `PUT /transports/email-config` to replace the entire configuration instead.
    *
    * @param body an object with the body content
    * @throws PatchEmailConfigHttpError
    */
   patchEmailConfig: typeof patchEmailConfig;
   /**
-   * Create or replace the email configuration for the tenant.
+   * Creates or replaces the email configuration for the tenant. Validation of the configuration is done as part of the request.
    *
    * @param body an object with the body content
    * @throws UpdateEmailConfigHttpError

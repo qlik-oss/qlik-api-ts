@@ -39,6 +39,8 @@ type DataSourceNew = {
   dataSourceId: string;
   /** Datasource property name (could be null) */
   dataSourcePropertyName?: string;
+  /** Type of datasource */
+  dataSourceType?: string;
   /** Indicates whether the datasource is disabled */
   disabled?: boolean;
   /** Datasource name */
