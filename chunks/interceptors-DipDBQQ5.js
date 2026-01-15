@@ -1,6 +1,5 @@
 import { a as sortKeys, i as isNode, r as isBrowser, t as cleanFalsyValues } from "./utils-vv-xFm06.js";
 import { n as hostConfigCommonProperties, t as authTypesThatCanBeOmitted } from "./auth-types-h43TVDpB.js";
-import { customAlphabet, nanoid } from "nanoid";
 
 //#region src/platform/platform-functions.ts
 const getPlatform = async (options = {}) => {
@@ -129,27 +128,42 @@ const result = (data) => ({
 
 //#endregion
 //#region src/utils/random.ts
+const NANOID_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-";
+const HEX_ALPHABET = "0123456789abcdef";
+/**
+* Generates a random string from the given alphabet using crypto.getRandomValues
+* Works in both browser and Node.js environments
+*/
+function generateRandomFromAlphabet(alphabet, length) {
+	const bytes = new Uint8Array(length);
+	globalThis.crypto.getRandomValues(bytes);
+	let result$1 = "";
+	for (let i = 0; i < length; i++) result$1 += alphabet[bytes[i] % alphabet.length];
+	return result$1;
+}
 /**
 * Method helper for generating a random string [a-zA-Z0-9\-_]{length}
 * @param length - the length of the string
 */
 function generateRandomString(targetLength) {
-	return nanoid(targetLength);
+	return generateRandomFromAlphabet(NANOID_ALPHABET, targetLength);
 }
 /**
 * Method helper for generating a random hexadecimal-string [0-9a-f]{length}
 * @param length - the length of the string
 */
 function generateRandomHexString(targetLength) {
-	return customAlphabet("1234567890abcdef", targetLength)();
+	return generateRandomFromAlphabet(HEX_ALPHABET, targetLength);
 }
 
 //#endregion
 //#region src/utils/expose-internal-test-apis.ts
 function exposeInternalApiOnWindow(name, fn) {
 	if (globalThis.location?.origin.startsWith("https://localhost:") || globalThis.location?.origin?.endsWith("qlik-stage.com")) {
-		if (globalThis.QlikMain && globalThis.QlikMain.INTERNAL__DO_NOT_USE.qix === void 0) globalThis.QlikMain.INTERNAL__DO_NOT_USE.qix = {};
-		globalThis.QlikMain.INTERNAL__DO_NOT_USE.qix[name] = fn;
+		if (globalThis.QlikMain) {
+			if (globalThis.QlikMain.INTERNAL__DO_NOT_USE.qix === void 0) globalThis.QlikMain.INTERNAL__DO_NOT_USE.qix = {};
+			globalThis.QlikMain.INTERNAL__DO_NOT_USE.qix[name] = fn;
+		}
 	}
 }
 

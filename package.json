@@ -11,10 +11,10 @@
     "fs": false
   },
   "dependencies": {
+    "ajv": "file:npm-public",
     "enigma.js": "^2.14.0",
     "extend": "3.0.2",
     "lodash": "^4.17.21",
-    "nanoid": "^5.1.6",
     "ws": "^8.19.0"
   },
   "packageManager": "pnpm@10.28.0",

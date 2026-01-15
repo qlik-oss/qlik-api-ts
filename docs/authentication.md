@@ -38,7 +38,7 @@ const hostConfig = {
     apiKey: "<api-key>",
   }
 
-const { data: mySpaces } = spaces.getSpaces({}, {
+const { data: mySpaces } = await spaces.getSpaces({}, {
   hostConfig,
 });
 

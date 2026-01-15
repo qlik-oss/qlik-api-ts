@@ -25,6 +25,8 @@ type Error = {
   status?: number;
   /** Title of the HTTP status code. */
   title: string;
+  /** The active traceId. */
+  traceId?: string;
 };
 /**
  * The extension model.

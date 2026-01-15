@@ -54,13 +54,18 @@ type ErrorResponse404 = {
 };
 type ErrorResponse429 = {
   code?: string;
+  errors?: {
+    code?: string;
+    detail?: string;
+    title?: string;
+  }[];
   title?: string;
 };
 type ErrorResponse500 = {
   errors?: {
     code?: string;
     detail?: string;
-    /** The meta contains additional inforomation when requests fail due to internal errors. */
+    /** The meta contains additional information when requests fail due to internal errors. */
     meta?: unknown;
     title?: string;
   }[];
@@ -98,6 +103,9 @@ type Graph = {
   nodes?: Nodes;
   type?: string;
 };
+/**
+ * Populating graph property on single level request and graphs property on multi level requests.
+ */
 type GraphLevelsResponse = {
   /** The lineage graph containing the node. */
   graph?: Graph;

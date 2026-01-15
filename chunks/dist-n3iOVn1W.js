@@ -1,4 +1,4 @@
-//#region node_modules/.pnpm/@qlik+runtime-module-loader@1.3.4/node_modules/@qlik/runtime-module-loader/dist/index.js
+//#region node_modules/.pnpm/@qlik+runtime-module-loader@1.4.0/node_modules/@qlik/runtime-module-loader/dist/index.js
 if (!window.__qlikMainPrivateResolvers) window.__qlikMainPrivateResolvers = {};
 if (!window.__qlikMainPrivateResolvers.mainUrlPromise) window.__qlikMainPrivateResolvers.mainUrlPromise = new Promise((resolve) => {
 	if (window.__qlikMainPrivateResolvers) window.__qlikMainPrivateResolvers.resolveMainJsUrl = (value) => {
@@ -73,14 +73,14 @@ async function importFromCdn(name) {
 async function handleWindowsAuthentication(url, hostConfig) {
 	if (hostConfig?.authType === "windowscookie") {
 		if (hostConfig.getAccessToken) {
-			const token = await resolveTokenIfPresent(hostConfig.getAccessToken);
-			if (token) await fetch(url, {
+			const token2 = await resolveTokenIfPresent(hostConfig.getAccessToken);
+			if (token2) await fetch(url, {
 				method: "GET",
 				mode: "cors",
 				credentials: "include",
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Bearer ${token}`
+					Authorization: `Bearer ${token2}`
 				}
 			});
 			return true;

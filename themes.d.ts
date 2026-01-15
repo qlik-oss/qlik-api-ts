@@ -14,6 +14,8 @@ type Error = {
   status?: number;
   /** Title of the HTTP status code. */
   title: string;
+  /** The active traceId. */
+  traceId?: string;
 };
 /**
  * Object containing meta data regarding an error. It does not necessarily contain all the properties.

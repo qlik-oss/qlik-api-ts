@@ -1,7 +1,7 @@
 import { d as HostConfig } from "./auth-types-YrlH_R9f.js";
 
 //#region src/qix/types/engine-schema.d.ts
-declare const QIX_SCHEMA_VERSION = "12.2651.0";
+declare const QIX_SCHEMA_VERSION = "12.2667.0";
 type AlfaNumString = {
   /**
    * Calculated value.
@@ -4006,6 +4006,10 @@ type NxGroupDef = {
    * The group's label. Will be evaluated as an expression if it starts with '='.
    */
   qLabel?: string;
+  /**
+   * Include all groups of the relevant type, by adding those groups last that are not explicitly included in the hierarchy (orphans)
+   */
+  qIncludeOrphanGroups?: boolean;
   /**
    * The objects and sub-groups that are members of the group.
    */
