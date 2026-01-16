@@ -3,7 +3,7 @@ import { n as hostConfigCommonProperties, t as authTypesThatCanBeOmitted } from 
 
 //#region src/platform/platform-functions.ts
 const getPlatform = async (options = {}) => {
-	const hc = withResolvedHostConfig(options.hostConfig);
+	const hc = resolveHostConfig(options.hostConfig);
 	if (hc.authType === "mock-backend-rest-recorder") return hc.recordGetPlatform();
 	if (hc?.authType === "mock-backend") return hc.mockGetPlatform();
 	if (hc?.authType === "noauth") return result({ isUnknown: true });
@@ -154,6 +154,154 @@ function generateRandomString(targetLength) {
 */
 function generateRandomHexString(targetLength) {
 	return generateRandomFromAlphabet(HEX_ALPHABET, targetLength);
+}
+
+//#endregion
+//#region src/auth/internal/host-config-functions.ts
+const emptyHostConfig = {};
+const normalizedHostConfigs = /* @__PURE__ */ new Map();
+/**
+* Returns a new host config with all default and falsy values removed.
+* @param hostConfig - The host config to fill with defaults
+* @returns
+*/
+function removeDefaults(hostConfig) {
+	const cleanedHostConfig = cleanFalsyValues(hostConfig) || {};
+	if (cleanedHostConfig.host) cleanedHostConfig.host = toValidLocationUrl(cleanedHostConfig);
+	if (isBrowser()) {
+		if (toValidLocationUrl(cleanedHostConfig) === window.location.origin) delete cleanedHostConfig.host;
+	}
+	if (cleanedHostConfig.authType && authTypesThatCanBeOmitted.includes(cleanedHostConfig.authType)) delete cleanedHostConfig.authType;
+	return cleanedHostConfig;
+}
+function globalReplacer(key, value) {
+	if (typeof value === "function") return;
+	return value;
+}
+/**
+* Serializes the provided hostConfig, if present, otherwise the default one.
+*/
+function serializeHostConfig$1(hostConfig) {
+	const sorted = sortKeys(removeDefaults(resolveHostConfig(hostConfig)));
+	return JSON.stringify(sorted, globalReplacer);
+}
+const registeredHostConfigs = /* @__PURE__ */ new Map();
+/**
+* Registers a host config with the given name.
+* @param name The name of the host config to be used to reference the host config later.
+* @param hostConfig The host config to register.
+*/
+function registerHostConfig$1(name, hostConfig) {
+	const reference = hostConfig?.reference || null;
+	if (reference && !registeredHostConfigs.has(reference)) throw new InvalidHostConfigError(`Host config with reference "${reference}" is not registered. Please register it before using it.`);
+	if (registeredHostConfigs.has(name)) console.warn(`registerHostConfig: Host config with name "${name}" is already registered. Overwriting.`);
+	registeredHostConfigs.set(name, hostConfig);
+}
+/**
+* Unregisters a host config with the given name.
+* @param name The name of the host config to unregister.
+*/
+function unregisterHostConfig$1(name) {
+	if (registeredHostConfigs.has(name)) registeredHostConfigs.delete(name);
+	else console.warn(`unregisterHostConfig: Host config with name "${name}" not found.`);
+}
+/**
+* Gets the host config with the given name.
+* @private
+* @param name The name of the host config to get.
+* @returns The host config, or undefined if not found.
+*/
+function getRegisteredHostConfig(name) {
+	return registeredHostConfigs.get(name);
+}
+/**
+* Sets the default host config that will be used for all api calls that do not include a HostConfig
+* @private
+* @param hostConfig the default HostConfig to use
+*/
+function setDefaultHostConfig$1(hostConfig) {
+	registerHostConfig$1("default", hostConfig || {});
+}
+/**
+* Gets the default host config that will be used for all qmfe api calls that do not include a HostConfig.
+* @private
+* @returns The default host config that will be used for all qmfe api calls that do not include a HostConfig
+*/
+function getDefaultHostConfig$1() {
+	return getRegisteredHostConfig("default") || {};
+}
+function normalizeHostConfig$1(hostConfig) {
+	const suppliedHostConfigOrEmpty = hostConfig || emptyHostConfig;
+	const serializedHostConfigKey = serializeHostConfig$1(suppliedHostConfigOrEmpty);
+	let normalizedHostConfig = normalizedHostConfigs.get(serializedHostConfigKey);
+	if (!normalizedHostConfig) {
+		normalizedHostConfig = removeDefaults(resolveHostConfig(suppliedHostConfigOrEmpty));
+		normalizedHostConfigs.set(serializedHostConfigKey, normalizedHostConfig);
+	}
+	return normalizedHostConfig;
+}
+
+//#endregion
+//#region src/auth/internal/page-redirect-request-listeners.ts
+/**
+* A store containing all listener registries for different host configurations.
+*/
+const listenerRegistries$1 = /* @__PURE__ */ new Map();
+/**
+* Retrieves the listener registry for a given host configuration, creating one if it doesn't exist.
+*/
+function getRegistryForHostConfig(hostConfig) {
+	const key = serializeHostConfig$1(hostConfig);
+	let registry = listenerRegistries$1.get(key);
+	if (!registry) {
+		registry = {
+			redirectRequestedListeners: /* @__PURE__ */ new Set(),
+			redirectStartedListeners: /* @__PURE__ */ new Set()
+		};
+		listenerRegistries$1.set(key, registry);
+	}
+	return registry;
+}
+/**
+* Registers a listener for page redirects requested by auth modules.
+* @param hostConfig
+* @param listener
+* @returns
+*/
+function onPageRedirectRequested$1(hostConfig, listener) {
+	const registry = getRegistryForHostConfig(hostConfig);
+	registry.redirectRequestedListeners.add(listener);
+	return () => {
+		registry.redirectRequestedListeners.delete(listener);
+	};
+}
+function onPageRedirectStarted$1(hostConfig, listener) {
+	const registry = getRegistryForHostConfig(hostConfig);
+	registry.redirectStartedListeners.add(listener);
+	return () => {
+		registry.redirectStartedListeners.delete(listener);
+	};
+}
+function requestRedirect(hostConfig) {
+	const registry = getRegistryForHostConfig(hostConfig);
+	const hasRedirectListener = registry.redirectRequestedListeners.size > 0 || hostConfig.authRedirectUserConfirmation;
+	if (hostConfig.autoRedirect || !hasRedirectListener) return Promise.resolve();
+	if (typeof hostConfig.authRedirectUserConfirmation === "function") return hostConfig.authRedirectUserConfirmation().catch(() => {});
+	return new Promise((resolve) => {
+		const proceed = () => {
+			for (const startedListener of registry.redirectStartedListeners) try {
+				startedListener();
+			} catch (error) {
+				console.warn(error);
+			}
+			resolve();
+		};
+		for (const requestListener of registry.redirectRequestedListeners) try {
+			requestListener({ proceed });
+		} catch (error) {
+			console.warn(error);
+		}
+	});
 }
 
 //#endregion
@@ -535,7 +683,7 @@ async function getOAuthTokensForBrowser(hostConfig) {
 	});
 	if (oauthTokens) return oauthTokens;
 	if (hostConfig.performInteractiveLogin) return new Promise(() => {});
-	if (hostConfig.authRedirectUserConfirmation) await hostConfig.authRedirectUserConfirmation();
+	await requestRedirect(hostConfig);
 	startFullPageLoginFlow(hostConfig);
 	return new Promise(() => {});
 }
@@ -1565,7 +1713,7 @@ async function handleAuthenticationError$7({ hostConfig, status }) {
 	};
 	const webIntegrationParam = hostConfig.webIntegrationId ? `qlik-web-integration-id=${hostConfig?.webIntegrationId}&` : "";
 	const locationUrl = toValidLocationUrl(hostConfig);
-	if (hostConfig.authRedirectUserConfirmation) await hostConfig.authRedirectUserConfirmation();
+	await requestRedirect(hostConfig);
 	globalThis.location.replace(`${locationUrl}/login?${webIntegrationParam}returnto=${encodeURIComponent(globalThis.location.href)}`);
 	return { preventDefault: true };
 }
@@ -1712,7 +1860,7 @@ async function handleAuthenticationError$4({ hostConfig }) {
 			clearStoredOauthTokens(hostConfig);
 			return { retry: true };
 		}
-		if (hostConfig.authRedirectUserConfirmation) await hostConfig.authRedirectUserConfirmation();
+		await requestRedirect(hostConfig);
 		startFullPageLoginFlow(hostConfig);
 		return { preventDefault: true };
 	}
@@ -1802,7 +1950,7 @@ async function getWebSocketAuthParams$2({ hostConfig }) {
 }
 async function handleAuthenticationError$2({ hostConfig }) {
 	if (hostConfig.loginUri) {
-		if (hostConfig.authRedirectUserConfirmation) await hostConfig.authRedirectUserConfirmation();
+		await requestRedirect(hostConfig);
 		globalThis.location.replace(hostConfig.loginUri.replace("{location}", encodeURIComponent(globalThis.location.href)));
 		return { preventDefault: true };
 	}
@@ -1968,7 +2116,7 @@ function getRegisteredAuthModule(authType) {
 * @param hostConfig
 */
 async function getAuthModule(hostConfig) {
-	const hostConfigToUse = withResolvedHostConfig(hostConfig);
+	const hostConfigToUse = resolveHostConfig(hostConfig);
 	const authType = await determineAuthType$1(hostConfigToUse);
 	if (ongoingAuthModuleLoading) await ongoingAuthModuleLoading;
 	let authModule = getRegisteredAuthModule(authType);
@@ -2093,76 +2241,55 @@ var AuthorizationError = class extends Error {
 };
 
 //#endregion
-//#region src/auth/internal/host-config-functions.ts
+//#region src/auth/internal/fatal-auth-error-listeners.ts
+const listenerRegistries = /* @__PURE__ */ new Map();
+let lastErrorMessage = "";
+let lastHostConfig;
 /**
-* Returns a new host config with all default and falsy values removed.
-* @param hostConfig - The host config to fill with defaults
-* @returns
+* Retrieves the listener registry for a given host configuration, creating one if it doesn't exist.
 */
-function removeDefaults(hostConfig) {
-	const cleanedHostConfig = cleanFalsyValues(hostConfig) || {};
-	if (cleanedHostConfig.host) cleanedHostConfig.host = toValidLocationUrl(cleanedHostConfig);
-	if (isBrowser()) {
-		if (toValidLocationUrl(cleanedHostConfig) === window.location.origin) delete cleanedHostConfig.host;
+function getAuthErrorListenerRegistryForHostConfig(hostConfig) {
+	const key = serializeHostConfig$1(hostConfig);
+	let registry = listenerRegistries.get(key);
+	if (!registry) {
+		registry = { listeners: /* @__PURE__ */ new Set() };
+		listenerRegistries.set(key, registry);
 	}
-	if (cleanedHostConfig.authType && authTypesThatCanBeOmitted.includes(cleanedHostConfig.authType)) delete cleanedHostConfig.authType;
-	return cleanedHostConfig;
-}
-function globalReplacer(key, value) {
-	if (typeof value === "function") return;
-	return value;
+	return registry;
 }
 /**
-* Serializes the provided hostConfig, if present, otherwise the default one.
+* Emits a fatal authentication error to all registered listeners plus to the onAuthFailed property in the hostConfig.
+* If there are no listeners or onAuthFailed callback, the error message is logged to the console.
 */
-function serializeHostConfig$1(hostConfig) {
-	const sorted = sortKeys(removeDefaults(withResolvedHostConfig(hostConfig)));
-	return JSON.stringify(sorted, globalReplacer);
-}
-const registeredHostConfigs = /* @__PURE__ */ new Map();
-/**
-* Registers a host config with the given name.
-* @param name The name of the host config to be used to reference the host config later.
-* @param hostConfig The host config to register.
-*/
-function registerHostConfig$1(name, hostConfig) {
-	const reference = hostConfig?.reference || null;
-	if (reference && !registeredHostConfigs.has(reference)) throw new InvalidHostConfigError(`Host config with reference "${reference}" is not registered. Please register it before using it.`);
-	if (registeredHostConfigs.has(name)) console.warn(`registerHostConfig: Host config with name "${name}" is already registered. Overwriting.`);
-	registeredHostConfigs.set(name, hostConfig);
-}
-/**
-* Unregisters a host config with the given name.
-* @param name The name of the host config to unregister.
-*/
-function unregisterHostConfig$1(name) {
-	if (registeredHostConfigs.has(name)) registeredHostConfigs.delete(name);
-	else console.warn(`unregisterHostConfig: Host config with name "${name}" not found.`);
+function emitFatalAuthError(hostConfig, normalizedError) {
+	if (hostConfig === lastHostConfig && normalizedError.message === lastErrorMessage) return;
+	lastHostConfig = hostConfig;
+	lastErrorMessage = normalizedError.message;
+	let someOneIsListening = false;
+	const registry = getAuthErrorListenerRegistryForHostConfig(hostConfig);
+	for (const listener of registry.listeners) try {
+		someOneIsListening = true;
+		listener(normalizedError);
+	} catch (listenerError) {
+		console.warn("Error in auth error listener", listenerError);
+	}
+	if (hostConfig.onAuthFailed) try {
+		someOneIsListening = true;
+		hostConfig.onAuthFailed(normalizedError);
+	} catch (callbackError) {
+		console.warn("Error in onAuthFailed callback", callbackError);
+	}
+	if (!someOneIsListening) console.error(normalizedError.message);
 }
 /**
-* Gets the host config with the given name.
-* @private
-* @param name The name of the host config to get.
-* @returns The host config, or undefined if not found.
+* Registers a listener for fatal auth errors. This means errors in the actual auth mechanism, i.e. misconfigurations etc.
 */
-function getRegisteredHostConfig(name) {
-	return registeredHostConfigs.get(name);
-}
-/**
-* Sets the default host config that will be used for all api calls that do not include a HostConfig
-* @private
-* @param hostConfig the default HostConfig to use
-*/
-function setDefaultHostConfig$1(hostConfig) {
-	registerHostConfig$1("default", hostConfig || {});
-}
-/**
-* Gets the default host config that will be used for all qmfe api calls that do not include a HostConfig.
-* @private
-* @returns The default host config that will be used for all qmfe api calls that do not include a HostConfig
-*/
-function getDefaultHostConfig$1() {
-	return getRegisteredHostConfig("default") || {};
+function onFatalAuthError$1(hostConfig, callback) {
+	const registry = getAuthErrorListenerRegistryForHostConfig(hostConfig);
+	registry.listeners.add(callback);
+	return () => {
+		registry.listeners.delete(callback);
+	};
 }
 
 //#endregion
@@ -2171,14 +2298,6 @@ function getDefaultHostConfig$1() {
 * Set initial loggingOut value to false to make sure it has a value before any auth module is loaded
 */
 globalThis.loggingOut = false;
-let lastErrorMessage = "";
-/** Default error logger that simply prints the error unless it is identical to the last one (to prevent bloating of the console) */
-function logToConsole({ message }) {
-	if (message !== lastErrorMessage) {
-		lastErrorMessage = message;
-		console.error(message);
-	}
-}
 /**
 * Determines the authType associated with a HostConfig even if it's
 * not explicitly set.
@@ -2195,7 +2314,7 @@ function determineAuthType(hostConfig) {
 */
 function isHostCrossOrigin(hostConfig) {
 	if (!globalThis.location?.origin) return true;
-	const hostConfigToUse = withResolvedHostConfig(hostConfig);
+	const hostConfigToUse = resolveHostConfig(hostConfig);
 	if (Object.keys(hostConfigToUse).length === 0) return false;
 	try {
 		return new URL(toValidLocationUrl(hostConfigToUse)).origin !== globalThis.location.origin;
@@ -2207,7 +2326,7 @@ function isHostCrossOrigin(hostConfig) {
 * @param hostConfig the HostConfig containing authentication details
 */
 async function isWindows(hostConfig) {
-	const hostConfigToUse = withResolvedHostConfig(hostConfig);
+	const hostConfigToUse = resolveHostConfig(hostConfig);
 	if (typeof hostConfigToUse.forceIsWindows === "boolean") return hostConfigToUse.forceIsWindows;
 	if (hostConfigToUse.host?.endsWith(".qlik-stage.com") || hostConfigToUse.host?.endsWith(".qlikcloud.com") || hostConfigToUse.host?.endsWith(".qlikcloudgov.com")) return false;
 	if (hostConfigToUse.authType === "cookie") return false;
@@ -2219,7 +2338,7 @@ async function isWindows(hostConfig) {
 * @param hostConfig the HostConfig containing authentication details
 */
 function toValidLocationUrl(hostConfig) {
-	const url = withResolvedHostConfig(hostConfig)?.host?.trim();
+	const url = resolveHostConfig(hostConfig)?.host?.trim();
 	let locationUrl;
 	if (!url) locationUrl = "";
 	else if (url.toLowerCase().startsWith("https://") || url.toLowerCase().startsWith("http://")) locationUrl = url;
@@ -2232,7 +2351,7 @@ function toValidLocationUrl(hostConfig) {
 * @param hostConfig the HostConfig containing authentication details
 */
 function toValidWebsocketLocationUrl(hostConfig) {
-	const url = withResolvedHostConfig(hostConfig)?.host;
+	const url = resolveHostConfig(hostConfig)?.host;
 	let locationUrl;
 	if (!url) locationUrl = globalThis.location.origin;
 	else if (url.toLowerCase().startsWith("https://") || url.toLowerCase().startsWith("http://")) locationUrl = url;
@@ -2245,14 +2364,14 @@ function toValidWebsocketLocationUrl(hostConfig) {
 * @param hostConfig the HostConfig containing authentication details
 */
 async function getWebSocketAuthParams(props) {
-	const hostConfigToUse = withResolvedHostConfig(props.hostConfig);
+	const hostConfigToUse = resolveHostConfig(props.hostConfig);
 	try {
 		return await (await getAuthModule(hostConfigToUse)).getWebSocketAuthParams({
 			...props,
 			hostConfig: hostConfigToUse
 		});
 	} catch (err) {
-		(hostConfigToUse.onAuthFailed || logToConsole)(normalizeAuthModuleError(err));
+		emitFatalAuthError(hostConfigToUse, normalizeAuthModuleError(err));
 		throw err;
 	}
 }
@@ -2262,14 +2381,14 @@ async function getWebSocketAuthParams(props) {
 * @param hostConfig the HostConfig containing authentication details
 */
 async function getWebResourceAuthParams(props) {
-	const hostConfigToUse = withResolvedHostConfig(props.hostConfig);
+	const hostConfigToUse = resolveHostConfig(props.hostConfig);
 	try {
 		return await (await getAuthModule(hostConfigToUse)).getWebResourceAuthParams?.({
 			...props,
 			hostConfig: hostConfigToUse
 		}) || { queryParams: {} };
 	} catch (err) {
-		(hostConfigToUse.onAuthFailed || logToConsole)(normalizeAuthModuleError(err));
+		emitFatalAuthError(hostConfigToUse, normalizeAuthModuleError(err));
 		throw err;
 	}
 }
@@ -2277,7 +2396,7 @@ async function getWebResourceAuthParams(props) {
 * Calls and return handleAuthenticationError on the authModule a host config is associated with.
 */
 async function handleAuthenticationError(props) {
-	const hostConfigToUse = withResolvedHostConfig(props.hostConfig);
+	const hostConfigToUse = resolveHostConfig(props.hostConfig);
 	const result$1 = await (await getAuthModule(hostConfigToUse)).handleAuthenticationError({
 		...props,
 		hostConfig: hostConfigToUse
@@ -2286,7 +2405,7 @@ async function handleAuthenticationError(props) {
 	const willHangUntilANewPageIsLoaded = result$1.preventDefault;
 	if (!willRetry && !willHangUntilANewPageIsLoaded) {
 		const { status, errorBody } = props;
-		(hostConfigToUse.onAuthFailed || logToConsole)(normalizeInbandAuthError({
+		emitFatalAuthError(hostConfigToUse, normalizeInbandAuthError({
 			status,
 			errorBody
 		}));
@@ -2299,14 +2418,14 @@ async function handleAuthenticationError(props) {
 * @param props.method the http method, which may affect what authentication are needed.
 */
 async function getRestCallAuthParams(props) {
-	const hostConfigToUse = withResolvedHostConfig(props.hostConfig);
+	const hostConfigToUse = resolveHostConfig(props.hostConfig);
 	try {
 		return await (await getAuthModule(hostConfigToUse)).getRestCallAuthParams({
 			...props,
 			hostConfig: hostConfigToUse
 		});
 	} catch (err) {
-		(hostConfigToUse.onAuthFailed || logToConsole)(normalizeAuthModuleError(err));
+		emitFatalAuthError(hostConfigToUse, normalizeAuthModuleError(err));
 		throw err;
 	}
 }
@@ -2363,11 +2482,17 @@ function serializeHostConfig(hostConfig) {
 * Throws errors if hostConfig is missing or missing properties on cross domain requests
 */
 function checkForCrossDomainRequest(hostConfig) {
-	const hostConfigToUse = withResolvedHostConfig(hostConfig);
+	const hostConfigToUse = resolveHostConfig(hostConfig);
 	if (isHostCrossOrigin(hostConfigToUse)) {
 		if (Object.keys(hostConfigToUse).length === 0) throw new InvalidHostConfigError("a host config must be provided when making a cross domain request");
 		if (!hostConfigToUse.host) throw new InvalidHostConfigError("A 'host' property must be set in host config when making a cross domain request");
 	}
+}
+/**
+* Returns a normalized host config that will always be the same instance when the serialized host config is the same.
+*/
+function normalizeHostConfig(hostConfig) {
+	return normalizeHostConfig$1(hostConfig);
 }
 /**
 * Logs out the user and sets `global.loggingOut` to true.
@@ -2400,15 +2525,14 @@ function normalizeAuthModuleError(err) {
 	return { message: err.message || "Unknown error" };
 }
 /**
-* Returns a resolved host config. If the host config is a reference to a registered host config, it will be resolved
-* to the actual host config.
-* If the host config is undefined or empty, the default host config will be used.
-* If the host config is not a reference, it will be returned as is.
-* @private
+* Replaces the supplied host config according the following rules:
+* * If the host config is a reference to a registered host config, the registered host config will be used.
+* * If the host config is undefined or empty, the default host config will be returned.
+* * If the host config is not a reference and not empty or undefined, it will be returned as is.
+* * If the host config is empty or undefined an empty object (which represents the default cookie mode) is returned.
 * @param hostConfig - The host config to resolve
-* @returns
 */
-function withResolvedHostConfig(hostConfig) {
+function resolveHostConfig(hostConfig) {
 	if (hostConfig?.reference) {
 		const refConfig = getRegisteredHostConfig(hostConfig.reference);
 		if (!refConfig) throw new InvalidHostConfigError(`Host config with name "${hostConfig.reference}" not found.`);
@@ -2422,6 +2546,30 @@ function withResolvedHostConfig(hostConfig) {
 */
 function getDefaultHostConfig() {
 	return getDefaultHostConfig$1();
+}
+/**
+* Registers a callback to be invoked when a fatal authentication error occurs for the provided hostConfig.
+* @param callback The callback function to register
+* @returns A function to unregister the callback
+*/
+function onFatalAuthError(hostConfig, callback) {
+	return onFatalAuthError$1(hostConfig, callback);
+}
+/**
+* Registers a listener for page redirect requested by the auth module that is handling authentication for the provided host configuration.
+* This is typically used when embedded to let the end user explicitly approve a redirect by for instance clicking an "authorize" button. The user can then decide to leave that UI unauthorized
+* and stay on the page.
+* The listener is provided a `proceed` function that if called continues the redirect process. Before actually redirecting the page, the onPageRedirectStarted listeners are called.
+* Note that if more than one listener is registered, it still takes just one proceed call to continue the redirect process so it can not be used to block the redirect.
+*/
+function onPageRedirectRequested(hostConfig, listener) {
+	return onPageRedirectRequested$1(hostConfig, listener);
+}
+/**
+* Registers a listener that will be called when a page redirect is started by the auth module that is handling authentication for the provided host configuration.
+*/
+function onPageRedirectStarted(hostConfig, listener) {
+	return onPageRedirectStarted$1(hostConfig, listener);
 }
 
 //#endregion
@@ -2615,4 +2763,4 @@ const interceptors = {
 var interceptors_default = interceptors;
 
 //#endregion
-export { parseFetchResponse as A, unregisterHostConfig as C, UnexpectedAuthTypeError as D, InvalidHostConfigError as E, generateRandomString as F, getPlatform as I, EncodingError as M, InvokeFetchError as N, clearApiCache as O, exposeInternalApiOnWindow as P, toValidWebsocketLocationUrl as S, InvalidAuthTypeError as T, registerAuthModule as _, interceptors_default as a, setDefaultHostConfig as b, getAccessToken as c, getWebResourceAuthParams as d, getWebSocketAuthParams as f, logout as g, isWindows as h, getInterceptors as i, appendQueryToUrl as j, invokeFetch as k, getDefaultHostConfig as l, isHostCrossOrigin as m, addInterceptor as n, removeInterceptor as o, handleAuthenticationError as p, createInterceptors as r, determineAuthType as s, addDefaultInterceptors as t, getRestCallAuthParams as u, registerHostConfig as v, AuthorizationError as w, toValidLocationUrl as x, serializeHostConfig as y };
+export { InvalidHostConfigError as A, getPlatform as B, serializeHostConfig as C, unregisterHostConfig as D, toValidWebsocketLocationUrl as E, appendQueryToUrl as F, EncodingError as I, InvokeFetchError as L, clearApiCache as M, invokeFetch as N, AuthorizationError as O, parseFetchResponse as P, exposeInternalApiOnWindow as R, registerHostConfig as S, toValidLocationUrl as T, normalizeHostConfig as _, interceptors_default as a, onPageRedirectStarted as b, getAccessToken as c, getWebResourceAuthParams as d, getWebSocketAuthParams as f, logout as g, isWindows as h, getInterceptors as i, UnexpectedAuthTypeError as j, InvalidAuthTypeError as k, getDefaultHostConfig as l, isHostCrossOrigin as m, addInterceptor as n, removeInterceptor as o, handleAuthenticationError as p, createInterceptors as r, determineAuthType as s, addDefaultInterceptors as t, getRestCallAuthParams as u, onFatalAuthError as v, setDefaultHostConfig as w, registerAuthModule as x, onPageRedirectRequested as y, generateRandomString as z };
