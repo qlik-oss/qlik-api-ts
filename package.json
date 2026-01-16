@@ -11,7 +11,6 @@
     "fs": false
   },
   "dependencies": {
-    "ajv": "file:npm-public",
     "enigma.js": "^2.14.0",
     "extend": "3.0.2",
     "lodash": "^4.17.21",
