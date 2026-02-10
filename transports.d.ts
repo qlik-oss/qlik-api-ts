@@ -1,12 +1,10 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/transports.d.ts
 type DeleteConfigNotFoundError = {
   errors?: {
-    /** The error code. */
-    code: string;
-    /** Summary of the problem */
+    /** The error code. */code: string; /** Summary of the problem */
     title: string;
   }[];
 };
@@ -14,9 +12,7 @@ type DeleteConfigNotFoundError = {
  * An error object.
  */
 type ErrorPublic = {
-  /** The error code. */
-  code: string;
-  /** Summary of the problem. */
+  /** The error code. */code: string; /** Summary of the problem. */
   title: string;
 };
 type ErrorsPublic = {
@@ -24,53 +20,39 @@ type ErrorsPublic = {
 };
 type SendTestMailConfigNotFoundError = {
   errors?: {
-    /** The error code. */
-    code: string;
-    /** Summary of the problem */
+    /** The error code. */code: string; /** Summary of the problem */
     title: string;
   }[];
 };
 type TenantAdminError = {
   errors?: {
-    /** The error code. */
-    code: string;
-    /** Summary of the problem */
+    /** The error code. */code: string; /** Summary of the problem */
     title: string;
   }[];
 };
 type UpdateEmailConfigError = {
   errors?: {
-    /** The error code. */
-    code: string;
-    /** Summary of the problem */
+    /** The error code. */code: string; /** Summary of the problem */
     title: string;
   }[];
 };
 type VerifyConnectionConfigNotFoundError = {
   errors?: {
-    /** The error code. */
-    code: string;
-    /** Summary of the problem */
+    /** The error code. */code: string; /** Summary of the problem */
     title: string;
   }[];
 };
 type Email = {
-  /** email body */
-  body?: string;
-  /** email recipient (email address) */
-  recipient?: string;
-  /** email subject */
+  /** email body */body?: string; /** email recipient (email address) */
+  recipient?: string; /** email subject */
   subject?: string;
 };
 /**
  * A JSON Patch document as defined in https://datatracker.ietf.org/doc/html/rfc6902.
  */
 type EmailConfigFieldPatch = {
-  /** The operation to be performed. */
-  op: "replace, remove, add";
-  /** The path for the given resource field to patch. */
-  path: "/username" | "/serverAddress" | "/serverPort" | "/securityType" | "/emailAddress" | "/emailPassword";
-  /** The value to be used for this operation. */
+  /** The operation to be performed. */op: "replace, remove, add"; /** The path for the given resource field to patch. */
+  path: "/username" | "/serverAddress" | "/serverPort" | "/securityType" | "/emailAddress" | "/emailPassword"; /** The value to be used for this operation. */
   value: string;
 };
 /**
@@ -84,117 +66,75 @@ type EmailConfigFieldPatch = {
  */
 type EmailConfigPatch = EmailConfigFieldPatch[];
 type GetBasicAuthConfig = {
-  /** The email address that should appear in From field when sending emails with this account */
-  emailAddress?: string;
-  /** The selected SMTP security mechanism. Could be either 'none', 'StartTLS' or 'SSL/TLS' */
-  securityType?: string;
-  /** The name that should appear in From field when sending emails with this account */
-  senderName?: string;
-  /** domain name or IP address of SMTP server */
-  serverAddress?: string;
-  /** smtp server port */
-  serverPort?: number;
-  /** user name used for SMTP login */
+  /** The email address that should appear in From field when sending emails with this account */emailAddress?: string; /** The selected SMTP security mechanism. Could be either 'none', 'StartTLS' or 'SSL/TLS' */
+  securityType?: string; /** The name that should appear in From field when sending emails with this account */
+  senderName?: string; /** domain name or IP address of SMTP server */
+  serverAddress?: string; /** smtp server port */
+  serverPort?: number; /** user name used for SMTP login */
   username?: string;
 };
 type GetEmailConfig = {
-  /** Number of authentication failures */
-  authFailures?: number;
-  /** used for SMTP authentication */
-  emailAddress?: string;
-  /** Indicates error with this email configuration. OK means that no error is indicated. Possible values are OK, CONFIG_NOT_SET, INCOMPLETE_CONFIG, INVALID_CREDENTIALS, PROVIDER_ERROR */
-  errorCode?: string;
-  /** Is the configuration valid */
+  /** Number of authentication failures */authFailures?: number; /** used for SMTP authentication */
+  emailAddress?: string; /** Indicates error with this email configuration. OK means that no error is indicated. Possible values are OK, CONFIG_NOT_SET, INCOMPLETE_CONFIG, INVALID_CREDENTIALS, PROVIDER_ERROR */
+  errorCode?: string; /** Is the configuration valid */
   isValid?: boolean;
-  lastUpdated?: string;
-  /** Last modification time. Formatted as a ISO 8601 string. */
-  modificationTime?: string;
-  /** Indicates if password is defined for this smtp config. The password itself is not returned! */
+  lastUpdated?: string; /** Last modification time. Formatted as a ISO 8601 string. */
+  modificationTime?: string; /** Indicates if password is defined for this smtp config. The password itself is not returned! */
   passwordExists?: boolean;
-  providerConfig?: GetMicrosoft365Config | GetBasicAuthConfig;
-  /** one of none, StartTLS or SSL/TLS */
-  securityType?: string;
-  /** domain name or IP address of SMTP server */
-  serverAddress?: string;
-  /** smtp server listening port */
-  serverPort?: number;
-  /** Name of the service provider for authentication */
-  serviceProvider?: "Microsoft365" | "BasicAuth";
-  /** Contains statusCode and statusReason */
-  status?: SmtpConfigStatus;
-  /** The tenant Id */
-  tenantId?: string;
-  /** user name */
+  providerConfig?: GetMicrosoft365Config | GetBasicAuthConfig; /** one of none, StartTLS or SSL/TLS */
+  securityType?: string; /** domain name or IP address of SMTP server */
+  serverAddress?: string; /** smtp server listening port */
+  serverPort?: number; /** Name of the service provider for authentication */
+  serviceProvider?: "Microsoft365" | "BasicAuth"; /** Contains statusCode and statusReason */
+  status?: SmtpConfigStatus; /** The tenant Id */
+  tenantId?: string; /** user name */
   username?: string;
 };
 type GetMicrosoft365Config = {
-  /** Microsoft365 client identifier */
-  clientId?: string;
-  /** The email address that should appear in From field when sending emails with this account */
-  emailAddress?: string;
-  /** Microsoft365 tenant identifier */
+  /** Microsoft365 client identifier */clientId?: string; /** The email address that should appear in From field when sending emails with this account */
+  emailAddress?: string; /** Microsoft365 tenant identifier */
   providerTenantId?: string;
 };
 /**
  * SMTP basic authentication configuration. Provides server address, credentials, and sender information for standard SMTP email delivery.
  */
 type PutBasicAuthConfig = {
-  /** The email address that should appear in From field when sending emails with this account */
-  emailAddress?: string;
-  /** password for SMTP basic authentication */
-  emailPassword?: string;
-  /** SMTP security mechanism to use. Could be either 'none', 'StartTLS' or 'SSL/TLS' */
-  securityType?: string;
-  /** The name that should appear in From field when sending emails with this account */
-  senderName?: string;
-  /** domain name or IP address of SMTP server */
-  serverAddress?: string;
-  /** smtp server port */
-  serverPort?: number;
-  /** user name used for SMTP login */
+  /** The email address that should appear in From field when sending emails with this account */emailAddress?: string; /** password for SMTP basic authentication */
+  emailPassword?: string; /** SMTP security mechanism to use. Could be either 'none', 'StartTLS' or 'SSL/TLS' */
+  securityType?: string; /** The name that should appear in From field when sending emails with this account */
+  senderName?: string; /** domain name or IP address of SMTP server */
+  serverAddress?: string; /** smtp server port */
+  serverPort?: number; /** user name used for SMTP login */
   username?: string;
 };
 type PutEmailConfig = {
-  providerConfig?: PutMicrosoft365Config | PutBasicAuthConfig;
-  /** Name of the service provider for authentication */
+  providerConfig?: PutMicrosoft365Config | PutBasicAuthConfig; /** Name of the service provider for authentication */
   serviceProvider?: "Microsoft365" | "BasicAuth";
 };
 /**
  * Microsoft 365 authentication configuration. Provides OAuth credentials and tenant information for Microsoft 365 email delivery.
  */
 type PutMicrosoft365Config = {
-  /** Microsoft365 client identifier */
-  clientId?: string;
-  /** secret to authenticate the Microsoft365 account */
-  clientSecret?: string;
-  /** The email address that should appear in From field when sending emails with this account */
-  emailAddress?: string;
-  /** Microsoft365 tenant identifier */
+  /** Microsoft365 client identifier */clientId?: string; /** secret to authenticate the Microsoft365 account */
+  clientSecret?: string; /** The email address that should appear in From field when sending emails with this account */
+  emailAddress?: string; /** Microsoft365 tenant identifier */
   providerTenantId?: string;
 };
 type SmtpCheck = {
-  /** Indicates error with this email configuration. OK means that no error is indicated. Possible values are OK, CONFIG_NOT_SET, INCOMPLETE_CONFIG, INVALID_CREDENTIALS, PROVIDER_ERROR */
-  errorCode?: string;
-  /** true if smtp config is correct and complete. Will return false if smtp-config does not exist at all */
+  /** Indicates error with this email configuration. OK means that no error is indicated. Possible values are OK, CONFIG_NOT_SET, INCOMPLETE_CONFIG, INVALID_CREDENTIALS, PROVIDER_ERROR */errorCode?: string; /** true if smtp config is correct and complete. Will return false if smtp-config does not exist at all */
   isValid?: boolean;
 };
 /**
  * Contains statusCode and statusReason
  */
 type SmtpConfigStatus = {
-  /** Status code */
-  statusCode?: number;
-  /** Status reason */
+  /** Status code */statusCode?: number; /** Status reason */
   statusReason?: string;
 };
 type SmtpResult = {
-  /** could not resolve domain name, connection refused, connection timed out, SSL mismatch */
-  connectionFailed?: boolean;
-  /** error message from SMTP middleware .. a bit technical but could be useful to administrator */
-  message?: string;
-  /** smtp result code string from the SMTP server. eg. "250 2.6.0" */
-  smtpResponseCode?: number;
-  /** was SMTP operation successful or not. Other fields herein provide more detail */
+  /** could not resolve domain name, connection refused, connection timed out, SSL mismatch */connectionFailed?: boolean; /** error message from SMTP middleware .. a bit technical but could be useful to administrator */
+  message?: string; /** smtp result code string from the SMTP server. eg. "250 2.6.0" */
+  smtpResponseCode?: number; /** was SMTP operation successful or not. Other fields herein provide more detail */
   success?: boolean;
 };
 /**

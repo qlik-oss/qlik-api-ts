@@ -1,37 +1,23 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/webhooks.d.ts
 type Delivery = {
-  /** The name of the triggering event-type. */
-  eventType: string;
-  /** The delivery's unique identifier. */
-  id: string;
-  /** Request details for the delivery. */
+  /** The name of the triggering event-type. */eventType: string; /** The delivery's unique identifier. */
+  id: string; /** Request details for the delivery. */
   request?: {
-    /** The sent body/payload of the delivery. */
-    body?: unknown;
-    /** Headers sent for this delivery, values of encryptedHeaders are omitted as such "**OMITTED**". */
-    headers?: Record<string, string>;
-    /** URL used for this delivery. */
+    /** The sent body/payload of the delivery. */body?: unknown; /** Headers sent for this delivery, values of encryptedHeaders are omitted as such "**OMITTED**". */
+    headers?: Record<string, string>; /** URL used for this delivery. */
     url?: string;
-  };
-  /** Response details for the delivery. */
+  }; /** Response details for the delivery. */
   response?: {
-    /** The received body of the delivery. */
-    body?: string;
-    /** Headers received for this delivery, values of encryptedHeaders are omitted as such "**OMITTED**". */
-    headers?: Record<string, string>;
-    /** The HTTP status code of the response. */
+    /** The received body of the delivery. */body?: string; /** Headers received for this delivery, values of encryptedHeaders are omitted as such "**OMITTED**". */
+    headers?: Record<string, string>; /** The HTTP status code of the response. */
     statusCode?: number;
-  };
-  /** The status of delivery. */
-  status: "success" | "fail";
-  /** The status message of the delivery. */
-  statusMessage?: string;
-  /** The UTC timestamp when the delivery was triggered. */
-  triggeredAt: string;
-  /** The unique webhook identifier that the delivery is for. */
+  }; /** The status of delivery. */
+  status: "success" | "fail"; /** The status message of the delivery. */
+  statusMessage?: string; /** The UTC timestamp when the delivery was triggered. */
+  triggeredAt: string; /** The unique webhook identifier that the delivery is for. */
   webhookId: string;
 };
 type DeliveryList = {
@@ -43,55 +29,36 @@ type DeliveryList = {
   };
 };
 type Error = {
-  /** The unique code for the error. */
-  code: string;
-  /** May be used to provide additional details. */
-  detail?: string;
-  /** A summary of what went wrong. */
+  /** The unique code for the error. */code: string; /** May be used to provide additional details. */
+  detail?: string; /** A summary of what went wrong. */
   title: string;
 };
 type ErrorResponse = {
-  errors?: Error[];
-  /** A way to trace the source of the error. */
+  errors?: Error[]; /** A way to trace the source of the error. */
   traceId?: string;
 };
 type EventType = {
-  /** Description of the event type. */
-  description?: string;
-  /** Specifies which levels that are supported for this event type. */
-  levels?: string[];
-  /** Name of the event type. */
-  name?: string;
-  /** Title of the event type. */
+  /** Description of the event type. */description?: string; /** Specifies which levels that are supported for this event type. */
+  levels?: string[]; /** Name of the event type. */
+  name?: string; /** Title of the event type. */
   title?: string;
 };
 type EventTypes = {
   data?: EventType[];
 };
 type Link = {
-  /** URL to a resource request. */
-  href: string;
+  /** URL to a resource request. */href: string;
 };
 type WebhookBase = {
-  /** If enabled the certificate chain of the configured URL will be checked for revocation before sending the webhook. */
-  checkCertificateRevocation?: boolean;
-  /** The UTC timestamp when the webhook was created. */
-  readonly createdAt?: string;
-  /** The id of the user that created the webhook. */
-  readonly createdByUserId?: string;
-  /** The reason for creating the webhook. */
-  description?: string;
-  /** The reason for the webhook to be disabled. */
-  readonly disabledReason?: string;
-  /** The unique code for the reason. */
-  readonly disabledReasonCode?: string;
-  /** If enabled the webhook will be sent as a CloudEvent, once enabled for a webhook it cannot be disabled. */
-  enableCloudEventDelivery?: boolean;
-  /** Whether the webhook is active and sending requests. */
-  enabled?: boolean;
-  /** These headers are persisted encrypted and decrypted to be sent as normal headers in post request (webhook delivery), in case of URL change these headers will need to be re-entered. Note: duplicate headers are not allowed and are case-insensitive. */
-  encryptedHeaders?: Record<string, string>;
-  /** Types of events for which the webhook should trigger. Retrieve available types from `/v1/webhooks/event-types`. */
+  /** If enabled the certificate chain of the configured URL will be checked for revocation before sending the webhook. */checkCertificateRevocation?: boolean; /** The UTC timestamp when the webhook was created. */
+  readonly createdAt?: string; /** The id of the user that created the webhook. */
+  readonly createdByUserId?: string; /** The reason for creating the webhook. */
+  description?: string; /** The reason for the webhook to be disabled. */
+  readonly disabledReason?: string; /** The unique code for the reason. */
+  readonly disabledReasonCode?: string; /** If enabled the webhook will be sent as a CloudEvent, once enabled for a webhook it cannot be disabled. */
+  enableCloudEventDelivery?: boolean; /** Whether the webhook is active and sending requests. */
+  enabled?: boolean; /** These headers are persisted encrypted and decrypted to be sent as normal headers in post request (webhook delivery), in case of URL change these headers will need to be re-entered. Note: duplicate headers are not allowed and are case-insensitive. */
+  encryptedHeaders?: Record<string, string>; /** Types of events for which the webhook should trigger. Retrieve available types from `/v1/webhooks/event-types`. */
   eventTypes?: string[];
   /** Filter that should match for a webhook to be triggered.
    * Supported common attribute names are 'id', 'spaceId' and 'topLevelResourceId', beside the common attributes the "com.qlik.v1.app.reload.finished" event also supports "data.status" that could be either "ok" or "error" but can't be used together with other event types.
@@ -99,24 +66,15 @@ type WebhookBase = {
    * Supported logical operators are 'and' and 'or'.
    * Note that attribute values must be valid JSON strings, hence they're enclosed with double quotes.
    * For more detailed information regarding the SCIM filter syntax (RFC7644) used please follow the link to external documentation. */
-  filter?: string;
-  /** Additional headers in the post request (webhook delivery). Note: duplicate headers are not allowed and are case-insensitive. */
-  headers?: Record<string, string>;
-  /** The webhook's unique identifier. */
-  readonly id?: string;
-  /** Defines at what level the webhook should operate: for all resources belonging to a tenant or restricted to only those accessible by the webhook-creator. */
-  level?: "tenant" | "user";
-  /** The name for the webhook. */
-  name: string;
-  /** The id of the user that owns the webhook, only applicable for user level webhooks. */
-  ownerId?: string;
-  /** String used as secret for calculating HMAC hash sent as header. */
-  secret?: string;
-  /** The UTC timestamp when the webhook was last updated. */
-  readonly updatedAt?: string;
-  /** The id of the user that last updated the webhook. */
-  readonly updatedByUserId?: string;
-  /** Target URL for webhook HTTPS requests. */
+  filter?: string; /** Additional headers in the post request (webhook delivery). Note: duplicate headers are not allowed and are case-insensitive. */
+  headers?: Record<string, string>; /** The webhook's unique identifier. */
+  readonly id?: string; /** Defines at what level the webhook should operate: for all resources belonging to a tenant or restricted to only those accessible by the webhook-creator. */
+  level?: "tenant" | "user"; /** The name for the webhook. */
+  name: string; /** The id of the user that owns the webhook, only applicable for user level webhooks. */
+  ownerId?: string; /** String used as secret for calculating HMAC hash sent as header. */
+  secret?: string; /** The UTC timestamp when the webhook was last updated. */
+  readonly updatedAt?: string; /** The id of the user that last updated the webhook. */
+  readonly updatedByUserId?: string; /** Target URL for webhook HTTPS requests. */
   url: string;
 };
 type WebhookList = {
@@ -131,41 +89,26 @@ type WebhookList = {
  * A JSON Patch document as defined in https://datatracker.ietf.org/doc/html/rfc6902
  */
 type WebhookPatch = {
-  /** The operation to be performed. */
-  op: "add" | "remove" | "replace";
-  /** The path for the given resource field to patch. */
-  path: "/name" | "/description" | "/url" | "/eventTypes" | "/headers" | "/enabled" | "/secret" | "/encryptedHeaders" | "/enableCloudEventDelivery";
-  /** The value to be used for this operation. */
+  /** The operation to be performed. */op: "add" | "remove" | "replace"; /** The path for the given resource field to patch. */
+  path: "/name" | "/description" | "/url" | "/eventTypes" | "/headers" | "/enabled" | "/secret" | "/encryptedHeaders" | "/enableCloudEventDelivery"; /** The value to be used for this operation. */
   value?: boolean | number | unknown | string;
 };
 type WebhookPost = WebhookBase & {
-  /** Indicates from where the webhook was created and its purpose. */
-  origin?: "api" | "automations" | "management-console";
+  /** Indicates from where the webhook was created and its purpose. */origin?: "api" | "automations" | "management-console";
 };
 type WebhookResponse = WebhookResponseBase & {
-  /** Indicates from where the webhook was created and its purpose. */
-  readonly origin?: "api" | "automations" | "management-console";
+  /** Indicates from where the webhook was created and its purpose. */readonly origin?: "api" | "automations" | "management-console";
 };
 type WebhookResponseBase = {
-  /** If enabled the certificate chain of the configured URL will be checked for revocation before sending the webhook. */
-  checkCertificateRevocation?: boolean;
-  /** The UTC timestamp when the webhook was created. */
-  readonly createdAt?: string;
-  /** The id of the user that created the webhook. */
-  readonly createdByUserId?: string;
-  /** The reason for creating the webhook. */
-  description?: string;
-  /** The reason for the webhook to be disabled. */
-  readonly disabledReason?: string;
-  /** The unique code for the reason. */
-  readonly disabledReasonCode?: string;
-  /** If enabled the webhook will be sent as a CloudEvent, once enabled for a webhook it cannot be disabled. */
-  enableCloudEventDelivery?: boolean;
-  /** Whether the webhook is active and sending requests. */
-  enabled?: boolean;
-  /** Additional encrypted headers in the post request. */
-  encryptedHeaders?: string[];
-  /** Types of events for which the webhook should trigger. Retrieve available types from `/v1/webhooks/event-types`. */
+  /** If enabled the certificate chain of the configured URL will be checked for revocation before sending the webhook. */checkCertificateRevocation?: boolean; /** The UTC timestamp when the webhook was created. */
+  readonly createdAt?: string; /** The id of the user that created the webhook. */
+  readonly createdByUserId?: string; /** The reason for creating the webhook. */
+  description?: string; /** The reason for the webhook to be disabled. */
+  readonly disabledReason?: string; /** The unique code for the reason. */
+  readonly disabledReasonCode?: string; /** If enabled the webhook will be sent as a CloudEvent, once enabled for a webhook it cannot be disabled. */
+  enableCloudEventDelivery?: boolean; /** Whether the webhook is active and sending requests. */
+  enabled?: boolean; /** Additional encrypted headers in the post request. */
+  encryptedHeaders?: string[]; /** Types of events for which the webhook should trigger. Retrieve available types from `/v1/webhooks/event-types`. */
   eventTypes?: string[];
   /** Filter that should match for a webhook to be triggered.
    * Supported common attribute names are 'id', 'spaceId' and 'topLevelResourceId', beside the common attributes the "com.qlik.v1.app.reload.finished" event also supports "data.status" that could be either "ok" or "error" but can't be used together with other event types.
@@ -173,27 +116,18 @@ type WebhookResponseBase = {
    * Supported logical operators are 'and' and 'or'.
    * Note that attribute values must be valid JSON strings, hence they're enclosed with double quotes.
    * For more detailed information regarding the SCIM filter syntax (RFC7644) used please follow the link to external documentation. */
-  filter?: string;
-  /** Additional headers in the post request. */
-  headers?: Record<string, string>;
-  /** The webhook's unique identifier. */
-  readonly id?: string;
-  /** Defines at what level the webhook should operate: for all resources belonging to a tenant or restricted to only those accessible by the webhook-creator. */
-  level?: "tenant" | "user";
-  /** The name for the webhook. */
-  name: string;
-  /** The id of the user that owns the webhook, only applicable for user level webhooks. */
+  filter?: string; /** Additional headers in the post request. */
+  headers?: Record<string, string>; /** The webhook's unique identifier. */
+  readonly id?: string; /** Defines at what level the webhook should operate: for all resources belonging to a tenant or restricted to only those accessible by the webhook-creator. */
+  level?: "tenant" | "user"; /** The name for the webhook. */
+  name: string; /** The id of the user that owns the webhook, only applicable for user level webhooks. */
   ownerId?: string;
   /** @deprecated
    * String used as secret for calculating HMAC hash sent as header. */
-  secret?: string;
-  /** Provides status of the string used as secret for calculating HMAC hash sent as header is already added or not. */
-  secretKeyAdded?: boolean;
-  /** The UTC timestamp when the webhook was last updated. */
-  readonly updatedAt?: string;
-  /** The id of the user that last updated the webhook. */
-  readonly updatedByUserId?: string;
-  /** Target URL for webhook HTTPS requests. */
+  secret?: string; /** Provides status of the string used as secret for calculating HMAC hash sent as header is already added or not. */
+  secretKeyAdded?: boolean; /** The UTC timestamp when the webhook was last updated. */
+  readonly updatedAt?: string; /** The id of the user that last updated the webhook. */
+  readonly updatedByUserId?: string; /** Target URL for webhook HTTPS requests. */
   url: string;
 };
 /**
@@ -203,31 +137,18 @@ type WebhookResponseBase = {
  * @throws GetWebhooksHttpError
  */
 declare function getWebhooks(query: {
-  /** Filter resources by user that created it. */
-  createdByUserId?: string;
-  /** Filter resources by enabled true/false. */
-  enabled?: boolean;
-  /** Filter resources by event-type/types, a single webhook item can have multiple event-types. */
-  eventTypes?: string;
-  /** Filter resources by level that user has access to (either user or level). */
-  level?: string;
-  /** Maximum number of webhooks to retrieve. */
-  limit?: number;
-  /** Filter resources by name (wildcard and case insensitive). */
-  name?: string;
-  /** Cursor to the next page. */
-  next?: string;
-  /** Filter resources by origins, supports multiorigin. */
-  origins?: "api" | "automations" | "management-console";
-  /** Filter resources by user that owns it, only applicable for user level webhooks. */
-  ownerId?: string;
-  /** Cursor to the previous page. */
-  prev?: string;
-  /** Field to sort by, prefix with -/+ to indicate order. */
-  sort?: "name" | "+name" | "-name" | "url" | "+url" | "-url" | "createdAt" | "+createdAt" | "-createdAt" | "updatedAt" | "+updatedAt" | "-updatedAt";
-  /** Filter resources by user that last updated the webhook. */
-  updatedByUserId?: string;
-  /** Filter resources by URL (wildcard and case insensitive). */
+  /** Filter resources by user that created it. */createdByUserId?: string; /** Filter resources by enabled true/false. */
+  enabled?: boolean; /** Filter resources by event-type/types, a single webhook item can have multiple event-types. */
+  eventTypes?: string; /** Filter resources by level that user has access to (either user or level). */
+  level?: string; /** Maximum number of webhooks to retrieve. */
+  limit?: number; /** Filter resources by name (wildcard and case insensitive). */
+  name?: string; /** Cursor to the next page. */
+  next?: string; /** Filter resources by origins, supports multiorigin. */
+  origins?: "api" | "automations" | "management-console"; /** Filter resources by user that owns it, only applicable for user level webhooks. */
+  ownerId?: string; /** Cursor to the previous page. */
+  prev?: string; /** Field to sort by, prefix with -/+ to indicate order. */
+  sort?: "name" | "+name" | "-name" | "url" | "+url" | "-url" | "createdAt" | "+createdAt" | "-createdAt" | "updatedAt" | "+updatedAt" | "-updatedAt"; /** Filter resources by user that last updated the webhook. */
+  updatedByUserId?: string; /** Filter resources by URL (wildcard and case insensitive). */
   url?: string;
 }, options?: ApiCallOptions): Promise<GetWebhooksHttpResponse>;
 type GetWebhooksHttpResponse = {
@@ -353,17 +274,11 @@ type UpdateWebhookHttpError = {
  * @throws GetWebhookDeliveriesHttpError
  */
 declare function getWebhookDeliveries(id: string, query: {
-  /** Filter resources by event-type. */
-  eventType?: string;
-  /** Maximum number of deliveries to retrieve. */
-  limit?: number;
-  /** Cursor to the next page. */
-  next?: string;
-  /** Cursor to the previous page. */
-  prev?: string;
-  /** Field to sort by, prefix with -/+ to indicate order. */
-  sort?: "status" | "+status" | "-status" | "triggeredAt" | "+triggeredAt" | "-triggeredAt";
-  /** Filter resources by status (success or fail). */
+  /** Filter resources by event-type. */eventType?: string; /** Maximum number of deliveries to retrieve. */
+  limit?: number; /** Cursor to the next page. */
+  next?: string; /** Cursor to the previous page. */
+  prev?: string; /** Field to sort by, prefix with -/+ to indicate order. */
+  sort?: "status" | "+status" | "-status" | "triggeredAt" | "+triggeredAt" | "-triggeredAt"; /** Filter resources by status (success or fail). */
   status?: "success" | "fail";
 }, options?: ApiCallOptions): Promise<GetWebhookDeliveriesHttpResponse>;
 type GetWebhookDeliveriesHttpResponse = {

@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/data-sources.ts
 /**
@@ -118,7 +118,6 @@ const dataSourcesExport = {
 	putDataSourceSettings,
 	clearCache
 };
-var data_sources_default = dataSourcesExport;
 
 //#endregion
-export { clearCache, data_sources_default as default, getDataSourceApiSpecs, getDataSourceGateways, getDataSourceSettings, getDataSources, putDataSourceSettings };
+export { clearCache, dataSourcesExport as default, getDataSourceApiSpecs, getDataSourceGateways, getDataSourceSettings, getDataSources, putDataSourceSettings };

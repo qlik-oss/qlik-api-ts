@@ -1,27 +1,17 @@
-import { S as DownloadableBlob, y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions, DownloadableBlob } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/audits.d.ts
 type ArchiveItem = {
-  /** The type that content is encoded in, always "application/json". */
-  contentType?: string;
-  /** Additional information about the event's details. The structure depends on the type and version of the event. */
-  data?: unknown;
-  /** The event's unique identifier. */
-  eventId?: string;
-  /** The RFC3339 datetime when the event happened. */
-  eventTime?: string;
-  /** The type of event that describes committed action. */
-  eventType?: string;
-  /** The version of the event type. */
-  eventTypeVersion?: string;
-  /** The availability of the properties depends on the event and the context it was triggered in. */
-  extensions?: EventExtensions;
-  /** The source of the event message, usually the producing service. */
-  source?: string;
-  /** The ID of the tenant that owns the item. This is populated using the JWT. */
-  tenantId?: string;
-  /** The ID of the user who performed the action that triggered the event. */
+  /** The type that content is encoded in, always "application/json". */contentType?: string; /** Additional information about the event's details. The structure depends on the type and version of the event. */
+  data?: unknown; /** The event's unique identifier. */
+  eventId?: string; /** The RFC3339 datetime when the event happened. */
+  eventTime?: string; /** The type of event that describes committed action. */
+  eventType?: string; /** The version of the event type. */
+  eventTypeVersion?: string; /** The availability of the properties depends on the event and the context it was triggered in. */
+  extensions?: EventExtensions; /** The source of the event message, usually the producing service. */
+  source?: string; /** The ID of the tenant that owns the item. This is populated using the JWT. */
+  tenantId?: string; /** The ID of the user who performed the action that triggered the event. */
   userId?: string;
 };
 type ErrorResponse = {
@@ -36,70 +26,46 @@ type ErrorResponse = {
  * The availability of the properties depends on the event and the context it was triggered in.
  */
 type EventExtensions = {
-  /** Specifies the entity performing the action on behalf of another party listed as triggering the action. */
-  actor?: {
-    /** Opaque value identifying impersonating entity. */
-    sub?: string;
-    /** The type of the impersonating entity. */
+  /** Specifies the entity performing the action on behalf of another party listed as triggering the action. */actor?: {
+    /** Opaque value identifying impersonating entity. */sub?: string; /** The type of the impersonating entity. */
     subType?: string;
-  };
-  /** Id of the owner of the resource affected by the eventContext. */
-  ownerId?: string;
-  /** Id of the space related to the action performed on the eventContext. */
-  spaceId?: string;
-  /** If the event originated from a sub resource the topLevelResourceId contains the id of the top level resource associated with the sub resource. */
-  topLevelResourceId?: string;
-  /** Might be present if the action is of type "updated" and should contain information about the changes made to the resource. */
+  }; /** Id of the owner of the resource affected by the eventContext. */
+  ownerId?: string; /** Id of the space related to the action performed on the eventContext. */
+  spaceId?: string; /** If the event originated from a sub resource the topLevelResourceId contains the id of the top level resource associated with the sub resource. */
+  topLevelResourceId?: string; /** Might be present if the action is of type "updated" and should contain information about the changes made to the resource. */
   updates?: unknown;
 };
 type GetArchiveResult = {
-  /** List of archived events. The structure of the events depend on their type and version. */
-  data?: ArchiveItem[];
+  /** List of archived events. The structure of the events depend on their type and version. */data?: ArchiveItem[];
 };
 type GetByIDResult = {
-  /** The type that content is encoded in, always "application/json". */
-  contentType?: string;
-  /** Additional information about the event's details. The structure depends on the type and version of the event. */
-  data?: unknown;
-  /** The event's unique identifier. */
-  eventId?: string;
-  /** The RFC3339 datetime when the event happened. */
-  eventTime?: string;
-  /** The type of event that describes committed action. */
-  eventType?: string;
-  /** The version of the event type. */
-  eventTypeVersion?: string;
-  /** The availability of the properties depends on the event and the context it was triggered in. */
-  extensions?: EventExtensions;
-  /** The resource item's unique identifier. */
+  /** The type that content is encoded in, always "application/json". */contentType?: string; /** Additional information about the event's details. The structure depends on the type and version of the event. */
+  data?: unknown; /** The event's unique identifier. */
+  eventId?: string; /** The RFC3339 datetime when the event happened. */
+  eventTime?: string; /** The type of event that describes committed action. */
+  eventType?: string; /** The version of the event type. */
+  eventTypeVersion?: string; /** The availability of the properties depends on the event and the context it was triggered in. */
+  extensions?: EventExtensions; /** The resource item's unique identifier. */
   id?: string;
-  links?: GetLinks;
-  /** The source of the event message, usually the producing service. */
-  source?: string;
-  /** The ID of the tenant that owns the item. This is populated using the JWT. */
-  tenantId?: string;
-  /** The ID of the user who performed the action that triggered the event. */
+  links?: GetLinks; /** The source of the event message, usually the producing service. */
+  source?: string; /** The ID of the tenant that owns the item. This is populated using the JWT. */
+  tenantId?: string; /** The ID of the user who performed the action that triggered the event. */
   userId?: string;
 };
 type GetLinks = {
   self?: Href;
 };
 type GetObjectsResult = {
-  /** List of requested resources. */
-  data?: string[];
+  /** List of requested resources. */data?: string[];
   links?: ListLinks;
 };
 type GetResult = {
-  /** List of audit items. */
-  data?: GetByIDResult[];
+  /** List of audit items. */data?: GetByIDResult[];
   links?: ListLinks;
 };
 type GetSettingsResult = {
-  /** Server configuration options. */
-  data?: {
-    /** Is Long Term Storage archiving enabled?. */
-    ArchiveEnabled?: boolean;
-    /** The events TTL in seconds. */
+  /** Server configuration options. */data?: {
+    /** Is Long Term Storage archiving enabled?. */ArchiveEnabled?: boolean; /** The events TTL in seconds. */
     EventTTL?: number;
   };
 };
@@ -118,23 +84,14 @@ type Href = {
  * @throws GetAuditsHttpError
  */
 declare function getAudits(query: {
-  /** The start/end time interval formatted in ISO 8601 to search by eventTime. For example, "?eventTime=2021-07-14T18:41:15.00Z/2021-07-14T18:41:15.99Z". */
-  eventTime?: string;
-  /** The case-sensitive string used to search by eventType. Retrieve a list of possible eventTypes with `/v1/audits/types`. */
-  eventType?: string;
-  /** The comma separated list of audit unique identifiers. */
-  id?: string;
-  /** The maximum number of resources to return for a request. */
-  limit?: number;
-  /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
-  next?: string;
-  /** The cursor to the previous page of resources. Provide either the next or prev cursor, but not both. */
-  prev?: string;
-  /** The property of a resource to sort on (default sort is -eventTime). The supported properties are source, eventType, and eventTime. A property must be prefixed by + or - to indicate ascending or descending sort order respectively. */
-  sort?: string;
-  /** The case-sensitive string used to search by source. Retrieve a list of possible sources with `/v1/audits/sources`. */
-  source?: string;
-  /** The case-sensitive string used to search by userId. */
+  /** The start/end time interval formatted in ISO 8601 to search by eventTime. For example, "?eventTime=2021-07-14T18:41:15.00Z/2021-07-14T18:41:15.99Z". */eventTime?: string; /** The case-sensitive string used to search by eventType. Retrieve a list of possible eventTypes with `/v1/audits/types`. */
+  eventType?: string; /** The comma separated list of audit unique identifiers. */
+  id?: string; /** The maximum number of resources to return for a request. */
+  limit?: number; /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
+  next?: string; /** The cursor to the previous page of resources. Provide either the next or prev cursor, but not both. */
+  prev?: string; /** The property of a resource to sort on (default sort is -eventTime). The supported properties are source, eventType, and eventTime. A property must be prefixed by + or - to indicate ascending or descending sort order respectively. */
+  sort?: string; /** The case-sensitive string used to search by source. Retrieve a list of possible sources with `/v1/audits/sources`. */
+  source?: string; /** The case-sensitive string used to search by userId. */
   userId?: string;
 }, options?: ApiCallOptions): Promise<GetAuditsHttpResponse>;
 type GetAuditsHttpResponse = {
@@ -173,8 +130,7 @@ type FetchConsumptionAppAuditsHttpError = {
  * @throws GetArchivedAuditsHttpError
  */
 declare function getArchivedAudits(query: {
-  /** Date to be used as filter and criteria during extraction. */
-  date: string;
+  /** Date to be used as filter and criteria during extraction. */date: string;
 }, options?: ApiCallOptions): Promise<GetArchivedAuditsHttpResponse>;
 type GetArchivedAuditsHttpResponse = {
   data: GetArchiveResult;

@@ -1,8 +1,7 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/encryption.d.ts
-
 /**
  * @example
  * {
@@ -21,33 +20,20 @@ import "./chunks/invoke-fetch-C1Z0RJYU.js";
  * }
  */
 type KeyProvider = {
-  /** The provider resource notation for the key. */
-  arn: string;
-  /** The ARN fingerprint. */
-  readonly arnFingerPrint?: string;
-  /** When key entry was created. */
-  readonly createdAt?: string;
-  /** Indicates whether the key is being used to encrypt/decrypt secrets. */
-  readonly current?: boolean;
-  /** When the key was demoted from being current to non active. */
-  readonly demotedFromCurrentAt?: string;
-  /** Description of key provider entry. */
-  description?: string;
-  /** Key Provider type. */
-  keyprovider: "AWS-KMS";
-  /** Indicates whether the key has multi-region configurations and has replica key in qcs secondary region. */
-  readonly multiRegion?: boolean;
-  /** Name of key provider entry. */
-  name: string;
-  /** When the key was promoted to being the current active one. */
+  /** The provider resource notation for the key. */arn: string; /** The ARN fingerprint. */
+  readonly arnFingerPrint?: string; /** When key entry was created. */
+  readonly createdAt?: string; /** Indicates whether the key is being used to encrypt/decrypt secrets. */
+  readonly current?: boolean; /** When the key was demoted from being current to non active. */
+  readonly demotedFromCurrentAt?: string; /** Description of key provider entry. */
+  description?: string; /** Key Provider type. */
+  keyprovider: "AWS-KMS"; /** Indicates whether the key has multi-region configurations and has replica key in qcs secondary region. */
+  readonly multiRegion?: boolean; /** Name of key provider entry. */
+  name: string; /** When the key was promoted to being the current active one. */
   readonly promotedToCurrentAt?: string;
   readonly replicaKeys?: {
-    /** Replica key keeps list of backup keys from the supported qcs secondary region. */
-    arn?: string;
-    /** Region indicates the backup qcs-region link to the primary region. */
+    /** Replica key keeps list of backup keys from the supported qcs secondary region. */arn?: string; /** Region indicates the backup qcs-region link to the primary region. */
     region?: string;
-  }[];
-  /** Tenant ID. */
+  }[]; /** Tenant ID. */
   readonly tenantId?: string;
 };
 /**
@@ -60,11 +46,8 @@ type KeyProvider = {
  * }
  */
 type KeyProviderPatchBase = {
-  /** The operation to be performed. */
-  op: "replace";
-  /** The property path. */
-  path: string;
-  /** The value to be used for this operation. */
+  /** The operation to be performed. */op: "replace"; /** The property path. */
+  path: string; /** The value to be used for this operation. */
   value: string;
 };
 type KeyProviderPatchSchema = KeyProviderPatchBase[];
@@ -72,47 +55,33 @@ type KeyProviders = {
   errors?: KeyProvider[];
 };
 type KeyProvidersDeleteResponseBody = {
-  /** Successful response message. */
-  response?: string;
+  /** Successful response message. */response?: string;
 };
 type ListKeyProviders = {
   errors?: KeyProvider[];
 };
 type MigrationInformation = {
-  completedAt?: string;
-  /** Migration operation ID. */
+  completedAt?: string; /** Migration operation ID. */
   id?: string;
-  initiatedAt?: string;
-  /** The key ARN being migrated from (in case of QlikVault, could be a short name only). */
-  migratingFrom?: string;
-  /** The new key ARN that keys should be migrated to. */
-  migratingTo?: string;
-  /** The new key ARN fingerprint. */
-  migratingToFingerprint?: string;
-  /** The new key prefix (to help services know which prefix should NOT be migrated). */
-  migratingToPrefix?: string;
-  /** Progress in percentage. */
-  progress?: number;
-  /** Migration operation state. */
-  state?: "New" | "InProgress" | "Completed";
-  /** Tenant ID. */
+  initiatedAt?: string; /** The key ARN being migrated from (in case of QlikVault, could be a short name only). */
+  migratingFrom?: string; /** The new key ARN that keys should be migrated to. */
+  migratingTo?: string; /** The new key ARN fingerprint. */
+  migratingToFingerprint?: string; /** The new key prefix (to help services know which prefix should NOT be migrated). */
+  migratingToPrefix?: string; /** Progress in percentage. */
+  progress?: number; /** Migration operation state. */
+  state?: "New" | "InProgress" | "Completed"; /** Tenant ID. */
   tenantId?: string;
 };
 type ResetMigrationNotNeeded = {
-  /** Tenant is already using Qlik KMS, no migration is required. */
-  message?: string;
+  /** Tenant is already using Qlik KMS, no migration is required. */message?: string;
 };
 type StandardError = {
   errors: StandardErrorItem[];
 };
 type StandardErrorItem = {
-  /** The error code. */
-  code: string;
-  /** Extra information about the error. */
-  detail?: string;
-  /** Additional error object metadata. */
-  meta?: unknown;
-  /** Description of the error. */
+  /** The error code. */code: string; /** Extra information about the error. */
+  detail?: string; /** Additional error object metadata. */
+  meta?: unknown; /** Description of the error. */
   title: string;
 };
 /**

@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/data-assets.ts
 /**
@@ -99,7 +99,6 @@ const dataAssetsExport = {
 	updateDataAsset,
 	clearCache
 };
-var data_assets_default = dataAssetsExport;
 
 //#endregion
-export { clearCache, createDataAsset, data_assets_default as default, deleteDataAssets, getDataAsset, patchDataAsset, updateDataAsset };
+export { clearCache, createDataAsset, dataAssetsExport as default, deleteDataAssets, getDataAsset, patchDataAsset, updateDataAsset };

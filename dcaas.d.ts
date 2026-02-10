@@ -1,88 +1,54 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/dcaas.d.ts
 type ApiSpecResponse = {
-  /** List of properties required for the given datasource */
-  connectionProperties: unknown;
-  /** Datasource provider */
-  connectorProvider: string;
-  /** Datasource provider (i.e. connector) version */
+  /** List of properties required for the given datasource */connectionProperties: unknown; /** Datasource provider */
+  connectorProvider: string; /** Datasource provider (i.e. connector) version */
   connectorVersion: string;
 };
 /**
  * Response returned when 'authUrlOnly' is set to true in the request body
  */
 type AuthUrlResponse = {
-  /** Authentication URL for OAuth datasource */
-  authUrl: string;
+  /** Authentication URL for OAuth datasource */authUrl: string;
 };
 type CreateConnectionReq = {
-  /** When set to true, only authentication URL will be returned if datasource supports OAuth (other properties set in the request will ignored). This property will be ignored if the request is not OAuth or datasource doesn't support OAuth */
-  authUrlOnly?: boolean;
-  /** Connection name */
-  connectionName: string;
-  /** List of connection properties required to create dataconnection for a given datasource, which is defined by the response of 'GET /v1/data-datasources/:{datasourceId}/api-specs' */
-  connectionProperties: unknown;
-  /** Datasource ID */
-  dataSourceId: string;
-  /** Target connection space ID */
-  spaceId?: string;
-  /** string tags (32 or less) persisted with the connection object */
+  /** When set to true, only authentication URL will be returned if datasource supports OAuth (other properties set in the request will ignored). This property will be ignored if the request is not OAuth or datasource doesn't support OAuth */authUrlOnly?: boolean; /** Connection name */
+  connectionName: string; /** List of connection properties required to create dataconnection for a given datasource, which is defined by the response of 'GET /v1/data-datasources/:{datasourceId}/api-specs' */
+  connectionProperties: unknown; /** Datasource ID */
+  dataSourceId: string; /** Target connection space ID */
+  spaceId?: string; /** string tags (32 or less) persisted with the connection object */
   tags?: string[];
 };
 type CreateConnectionRes = {
-  /** Connection ID */
-  connectionId: string;
-  /** Connection name */
-  connectionName: string;
-  /** Created at time stamp */
-  createdAt: string;
-  /** Credentials ID (if credentials are included in the request) */
-  credentialsId?: string;
-  /** Datasource ID */
-  dataSourceId: string;
-  /** Space ID */
-  spaceId?: string;
-  /** Tenant ID */
-  tenantId: string;
-  /** Updated at time stamp */
-  updateAt: string;
-  /** User ID */
+  /** Connection ID */connectionId: string; /** Connection name */
+  connectionName: string; /** Created at time stamp */
+  createdAt: string; /** Credentials ID (if credentials are included in the request) */
+  credentialsId?: string; /** Datasource ID */
+  dataSourceId: string; /** Space ID */
+  spaceId?: string; /** Tenant ID */
+  tenantId: string; /** Updated at time stamp */
+  updateAt: string; /** User ID */
   userId: string;
 };
 type GetConnectionResponse = {
-  /** Connection ID */
-  connectionId: string;
-  /** Connection name */
-  connectionName: string;
-  /** List of connection properties */
-  connectionProperties: unknown;
-  /** Created at time stamp */
-  createdAt: string;
-  /** Credentials ID (associated with the connection, either embedded or separated) */
-  credentialsId?: string;
-  /** Datasource ID */
-  dataSourceId: string;
-  /** Space ID */
-  spaceId?: string;
-  /** string tags associated with the connection */
-  tags?: string[];
-  /** Tenant ID */
-  tenantId: string;
-  /** Updated at time stamp */
-  updateAt: string;
-  /** User ID */
+  /** Connection ID */connectionId: string; /** Connection name */
+  connectionName: string; /** List of connection properties */
+  connectionProperties: unknown; /** Created at time stamp */
+  createdAt: string; /** Credentials ID (associated with the connection, either embedded or separated) */
+  credentialsId?: string; /** Datasource ID */
+  dataSourceId: string; /** Space ID */
+  spaceId?: string; /** string tags associated with the connection */
+  tags?: string[]; /** Tenant ID */
+  tenantId: string; /** Updated at time stamp */
+  updateAt: string; /** User ID */
   userId: string;
 };
 type PublicApiError = {
-  /** A service specific error code string */
-  code: string;
-  /** Concrete detail about the error */
-  detail?: string;
-  /** Additional metadata associated with the error */
-  meta?: unknown;
-  /** Summary of the error */
+  /** A service specific error code string */code: string; /** Concrete detail about the error */
+  detail?: string; /** Additional metadata associated with the error */
+  meta?: unknown; /** Summary of the error */
   title: string;
 };
 type ResponseErrors = {
@@ -116,8 +82,7 @@ type DataConnectionsDcaasHttpError = {
  * @throws DataConnectionsDcaasApiSpecsHttpError
  */
 declare function dataConnectionsDcaasApiSpecs(query: {
-  /** Datasource ID */
-  dataSourceId: string;
+  /** Datasource ID */dataSourceId: string;
 }, options?: ApiCallOptions): Promise<DataConnectionsDcaasApiSpecsHttpResponse>;
 type DataConnectionsDcaasApiSpecsHttpResponse = {
   data: ApiSpecResponse;

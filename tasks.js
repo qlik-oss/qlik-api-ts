@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/tasks.ts
 /**
@@ -180,7 +180,6 @@ const tasksExport = {
 	getTaskRunLog,
 	clearCache
 };
-var tasks_default = tasksExport;
 
 //#endregion
-export { clearCache, createTask, tasks_default as default, deleteTask, getLastTaskRun, getTask, getTaskRunLog, getTaskRuns, getTasks, getTasksResourceRuns, startTask, updateTask };
+export { clearCache, createTask, tasksExport as default, deleteTask, getLastTaskRun, getTask, getTaskRunLog, getTaskRuns, getTasks, getTasksResourceRuns, startTask, updateTask };

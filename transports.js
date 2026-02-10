@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/transports.ts
 /**
@@ -116,7 +116,6 @@ const transportsExport = {
 	verifyEmailConfigConnection,
 	clearCache
 };
-var transports_default = transportsExport;
 
 //#endregion
-export { clearCache, transports_default as default, deleteEmailConfig, getEmailConfig, patchEmailConfig, sendTestEmail, updateEmailConfig, validateEmailConfig, verifyEmailConfigConnection };
+export { clearCache, transportsExport as default, deleteEmailConfig, getEmailConfig, patchEmailConfig, sendTestEmail, updateEmailConfig, validateEmailConfig, verifyEmailConfigConnection };

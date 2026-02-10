@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/ui-config.ts
 /**
@@ -120,7 +120,6 @@ const uiConfigExport = {
 	patchUiConfigPinnedLink,
 	clearCache
 };
-var ui_config_default = uiConfigExport;
 
 //#endregion
-export { clearCache, createUiConfigPinnedLink, createUiConfigPinnedLinks, ui_config_default as default, deleteAllUiConfigPinnedLinks, deleteUiConfigPinnedLink, getUiConfigPinnedLink, getUiConfigPinnedLinks, patchUiConfigPinnedLink };
+export { clearCache, createUiConfigPinnedLink, createUiConfigPinnedLinks, uiConfigExport as default, deleteAllUiConfigPinnedLinks, deleteUiConfigPinnedLink, getUiConfigPinnedLink, getUiConfigPinnedLinks, patchUiConfigPinnedLink };

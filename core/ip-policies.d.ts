@@ -1,36 +1,26 @@
-import { y as ApiCallOptions } from "../chunks/auth-types-YrlH_R9f.js";
-import "../chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "../invoke-fetch-types.js";
+import "../chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/core/ip-policies.d.ts
 declare namespace ip_policies_d_exports {
   export { CreateIPPolicy, CreateIpPolicyHttpError, CreateIpPolicyHttpResponse, DeleteIpPolicyHttpError, DeleteIpPolicyHttpResponse, Error, Errors, GetIpPoliciesHttpError, GetIpPoliciesHttpResponse, GetIpPolicyHttpError, GetIpPolicyHttpResponse, IPPolicyListItem, IPPolicyResource, IpPoliciesAPI, JSONPatch, JSONPatchArray, Link, Links, ListIPPoliciesResult, PatchIpPolicyHttpError, PatchIpPolicyHttpResponse, clearCache, createIpPolicy, ipPoliciesExport as default, deleteIpPolicy, getIpPolicies, getIpPolicy, patchIpPolicy };
 }
 type CreateIPPolicy = {
-  /** An array of allowed IP IPv4 addresses, either as plain IP addresses, or as CIDR ranges. */
-  allowedIps: string[];
-  /** Indicates whether the IP policy is enabled. */
-  enabled?: boolean;
-  /** The descriptive name for the IP policy. */
+  /** An array of allowed IP IPv4 addresses, either as plain IP addresses, or as CIDR ranges. */allowedIps: string[]; /** Indicates whether the IP policy is enabled. */
+  enabled?: boolean; /** The descriptive name for the IP policy. */
   name?: string;
 };
 /**
  * An error object describing the error.
  */
 type Error = {
-  /** The error code. */
-  code: string;
-  /** A human-readable explanation specific to this occurrence of the problem. */
-  detail?: string;
-  /** Additional properties relating to the error. */
-  meta?: unknown;
-  /** References to the source of the error. */
+  /** The error code. */code: string; /** A human-readable explanation specific to this occurrence of the problem. */
+  detail?: string; /** Additional properties relating to the error. */
+  meta?: unknown; /** References to the source of the error. */
   source?: {
-    /** The URI query parameter that caused the error. */
-    parameter?: string;
-    /** A JSON Pointer to the property that caused the error. */
+    /** The URI query parameter that caused the error. */parameter?: string; /** A JSON Pointer to the property that caused the error. */
     pointer?: string;
-  };
-  /** Summary of the problem. */
+  }; /** Summary of the problem. */
   title: string;
 };
 /**
@@ -47,72 +37,43 @@ type Error = {
  * }
  */
 type Errors = {
-  /** An array of errors related to the operation. */
-  errors?: Error[];
-  /** A unique identifier for tracing the error. */
+  /** An array of errors related to the operation. */errors?: Error[]; /** A unique identifier for tracing the error. */
   traceId?: string;
 };
 type IPPolicyListItem = {
-  /** An array of allowed IP addresses. */
-  allowedIps?: string[];
-  /** The timestamp for when the resource was created. */
-  createdAt?: string;
-  /** The user ID of the user who created the IP policy. */
-  createdBy?: string;
-  /** Indicates whether the IP policy can be deleted. */
-  deletable?: boolean;
-  /** Indicates whether the IP policy can be updated. */
-  editable?: boolean;
-  /** Indicates whether the IP policy is enabled. */
-  enabled?: boolean;
-  /** The unique identifier for the IP policy. */
-  readonly id: string;
-  /** The descriptive name for the IP policy. */
-  name?: string;
-  /** The tenant unique identifier associated with the given IP policy. */
-  tenantId?: string;
-  /** Indicates whether the IP policy can be enabled/disabled. */
-  toggleable?: boolean;
-  /** The timestamp for when the resource was last updated. */
-  updatedAt?: string;
-  /** The user ID of the user who last updated the IP policy. */
+  /** An array of allowed IP addresses. */allowedIps?: string[]; /** The timestamp for when the resource was created. */
+  createdAt?: string; /** The user ID of the user who created the IP policy. */
+  createdBy?: string; /** Indicates whether the IP policy can be deleted. */
+  deletable?: boolean; /** Indicates whether the IP policy can be updated. */
+  editable?: boolean; /** Indicates whether the IP policy is enabled. */
+  enabled?: boolean; /** The unique identifier for the IP policy. */
+  readonly id: string; /** The descriptive name for the IP policy. */
+  name?: string; /** The tenant unique identifier associated with the given IP policy. */
+  tenantId?: string; /** Indicates whether the IP policy can be enabled/disabled. */
+  toggleable?: boolean; /** The timestamp for when the resource was last updated. */
+  updatedAt?: string; /** The user ID of the user who last updated the IP policy. */
   updatedBy?: string;
 };
 type IPPolicyResource = {
-  /** An array of allowed public IPv4 addresses. */
-  allowedIps: string[];
-  /** The timestamp for when the IP policy was created. */
-  createdAt: string;
-  /** The user ID of the user who created the IP policy. */
-  createdBy: string;
-  /** Indicates whether the IP policy can be deleted. */
-  deletable: boolean;
-  /** Indicates whether the IP policy can be updated. */
-  editable: boolean;
-  /** Indicates whether the IP policy is enabled. */
-  enabled: boolean;
-  /** The unique identifier for the IP policy. */
-  readonly id: string;
-  /** The descriptive name for the IP policy. */
-  name: string;
-  /** The tenant unique identifier associated with the given IP policy. */
-  tenantId: string;
-  /** Indicates whether the IP policy can be enabled/disabled.. */
-  toggleable: boolean;
-  /** The timestamp for when the IP policy was last updated. */
-  updatedAt: string;
-  /** The user ID of the user who last updated the IP policy. */
+  /** An array of allowed public IPv4 addresses. */allowedIps: string[]; /** The timestamp for when the IP policy was created. */
+  createdAt: string; /** The user ID of the user who created the IP policy. */
+  createdBy: string; /** Indicates whether the IP policy can be deleted. */
+  deletable: boolean; /** Indicates whether the IP policy can be updated. */
+  editable: boolean; /** Indicates whether the IP policy is enabled. */
+  enabled: boolean; /** The unique identifier for the IP policy. */
+  readonly id: string; /** The descriptive name for the IP policy. */
+  name: string; /** The tenant unique identifier associated with the given IP policy. */
+  tenantId: string; /** Indicates whether the IP policy can be enabled/disabled.. */
+  toggleable: boolean; /** The timestamp for when the IP policy was last updated. */
+  updatedAt: string; /** The user ID of the user who last updated the IP policy. */
   updatedBy: string;
 };
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
  */
 type JSONPatch = {
-  /** The operation to be performed. */
-  op: "replace";
-  /** A JSON Pointer. */
-  path: "/enabled" | "/name" | "/allowedIps";
-  /** The value to be used for this operation. */
+  /** The operation to be performed. */op: "replace"; /** A JSON Pointer. */
+  path: "/enabled" | "/name" | "/allowedIps"; /** The value to be used for this operation. */
   value: string | boolean | string[];
 };
 /**
@@ -150,19 +111,13 @@ type Link = {
  * Contains pagination links. self is a link to the current results page, next is a link to the next results page and prev is a link to the previous results page
  */
 type Links = {
-  /** A link */
-  next?: Link;
-  /** A link */
-  prev?: Link;
-  /** A link */
+  /** A link */next?: Link; /** A link */
+  prev?: Link; /** A link */
   self: Link;
 };
 type ListIPPoliciesResult = {
-  /** An array of IP policies. */
-  data: IPPolicyListItem[];
-  /** Contains pagination links. self is a link to the current results page, next is a link to the next results page and prev is a link to the previous results page */
-  links: Links;
-  /** Indicates the total number of matching documents. Will only be returned if the query parameter "totalResults" is true. */
+  /** An array of IP policies. */data: IPPolicyListItem[]; /** Contains pagination links. self is a link to the current results page, next is a link to the next results page and prev is a link to the previous results page */
+  links: Links; /** Indicates the total number of matching documents. Will only be returned if the query parameter "totalResults" is true. */
   totalResults?: number;
 };
 /**
@@ -172,8 +127,7 @@ type ListIPPoliciesResult = {
  * @throws GetIpPoliciesHttpError
  */
 declare function getIpPolicies(query: {
-  /** A comma-separated list of fields to limit in the response. */
-  fields?: string;
+  /** A comma-separated list of fields to limit in the response. */fields?: string;
   /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax. All conditional statements within this query parameter are case insensitive.
    *
    * field "enabled" supports following operators: eq
@@ -183,14 +137,10 @@ declare function getIpPolicies(query: {
    * field "name" supports following operators: eq, co
    *
    * field "tenantId" supports following operators: eq */
-  filter?: string;
-  /** The number of IP policies to retrieve. */
-  limit?: number;
-  /** The page cursor. Takes precedence over other parameters. */
-  page?: string;
-  /** Optional resource field name to sort on, eg. name. Can be prefixed with +/- to determine order, defaults to (+) ascending. */
-  sort?: "enabled" | "+enabled" | "-enabled" | "createdAt" | "+createdAt" | "-createdAt" | "updatedAt" | "+updatedAt" | "-updatedAt" | "name" | "+name" | "-name";
-  /** Determines whether to return a count of the total records matched in the query. Defaults to false. */
+  filter?: string; /** The number of IP policies to retrieve. */
+  limit?: number; /** The page cursor. Takes precedence over other parameters. */
+  page?: string; /** Optional resource field name to sort on, eg. name. Can be prefixed with +/- to determine order, defaults to (+) ascending. */
+  sort?: "enabled" | "+enabled" | "-enabled" | "createdAt" | "+createdAt" | "-createdAt" | "updatedAt" | "+updatedAt" | "-updatedAt" | "name" | "+name" | "-name"; /** Determines whether to return a count of the total records matched in the query. Defaults to false. */
   totalResults?: boolean;
 }, options?: ApiCallOptions): Promise<GetIpPoliciesHttpResponse>;
 type GetIpPoliciesHttpResponse = {

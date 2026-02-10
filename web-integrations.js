@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/web-integrations.ts
 /**
@@ -93,7 +93,6 @@ const webIntegrationsExport = {
 	patchWebIntegration,
 	clearCache
 };
-var web_integrations_default = webIntegrationsExport;
 
 //#endregion
-export { clearCache, createWebIntegration, web_integrations_default as default, deleteWebIntegration, getWebIntegration, getWebIntegrations, patchWebIntegration };
+export { clearCache, createWebIntegration, webIntegrationsExport as default, deleteWebIntegration, getWebIntegration, getWebIntegrations, patchWebIntegration };

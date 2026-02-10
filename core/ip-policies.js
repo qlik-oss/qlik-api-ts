@@ -1,12 +1,12 @@
-import { t as __exportAll } from "../chunks/chunk-D3vHIbds.js";
-import "../chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-CckTK7bh.js";
+import { t as __exportAll } from "../chunks/chunk-BdHzlgOL.js";
+import "../chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/core/ip-policies.ts
 var ip_policies_exports = /* @__PURE__ */ __exportAll({
 	clearCache: () => clearCache,
 	createIpPolicy: () => createIpPolicy,
-	default: () => ip_policies_default,
+	default: () => ipPoliciesExport,
 	deleteIpPolicy: () => deleteIpPolicy,
 	getIpPolicies: () => getIpPolicies,
 	getIpPolicy: () => getIpPolicy,
@@ -103,7 +103,6 @@ const ipPoliciesExport = {
 	patchIpPolicy,
 	clearCache
 };
-var ip_policies_default = ipPoliciesExport;
 
 //#endregion
-export { clearCache, createIpPolicy, ip_policies_default as default, deleteIpPolicy, getIpPolicies, getIpPolicy, patchIpPolicy, ip_policies_exports as t };
+export { clearCache, createIpPolicy, ipPoliciesExport as default, deleteIpPolicy, getIpPolicies, getIpPolicy, patchIpPolicy, ip_policies_exports as t };

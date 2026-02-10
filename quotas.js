@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/quotas.ts
 /**
@@ -46,7 +46,6 @@ const quotasExport = {
 	getQuota,
 	clearCache
 };
-var quotas_default = quotasExport;
 
 //#endregion
-export { clearCache, quotas_default as default, getQuota, getQuotas };
+export { clearCache, quotasExport as default, getQuota, getQuotas };

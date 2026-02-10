@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/automl-predictions.ts
 /**
@@ -126,7 +126,6 @@ const automlPredictionsExport = {
 	getAutomlPredictionSource,
 	clearCache
 };
-var automl_predictions_default = automlPredictionsExport;
 
 //#endregion
-export { clearCache, createAutomlPredictionJob, automl_predictions_default as default, getAutomlPredictionCoordinateShap, getAutomlPredictionNotPredictedReasons, getAutomlPredictionPredictions, getAutomlPredictionShap, getAutomlPredictionSource };
+export { clearCache, createAutomlPredictionJob, automlPredictionsExport as default, getAutomlPredictionCoordinateShap, getAutomlPredictionNotPredictedReasons, getAutomlPredictionPredictions, getAutomlPredictionShap, getAutomlPredictionSource };

@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/notifications.ts
 /**
@@ -29,7 +29,6 @@ const notificationsExport = {
 	getNotifications,
 	clearCache
 };
-var notifications_default = notificationsExport;
 
 //#endregion
-export { clearCache, notifications_default as default, getNotifications };
+export { clearCache, notificationsExport as default, getNotifications };

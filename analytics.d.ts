@@ -1,5 +1,4 @@
-import "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 import changeStoresExport, { t as change_stores_d_exports } from "./analytics/change-stores.js";
 
 //#region src/public/rest/analytics.d.ts

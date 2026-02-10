@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/report-templates.ts
 /**
@@ -126,7 +126,6 @@ const reportTemplatesExport = {
 	downloadReportTemplate,
 	clearCache
 };
-var report_templates_default = reportTemplatesExport;
 
 //#endregion
-export { clearCache, createReportTemplate, report_templates_default as default, deleteReportTemplate, downloadReportTemplate, getReportTemplate, getReportTemplates, patchReportTemplate, updateReportTemplate };
+export { clearCache, createReportTemplate, reportTemplatesExport as default, deleteReportTemplate, downloadReportTemplate, getReportTemplate, getReportTemplates, patchReportTemplate, updateReportTemplate };

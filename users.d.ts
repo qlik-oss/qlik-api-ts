@@ -1,18 +1,14 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/users.d.ts
 /**
  * An array of group references.
  */
 type AssignedGroups = {
-  /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */
-  assignedRoles?: AssignedRoles;
-  /** The unique group identitier */
-  id: string;
-  /** The group name */
-  readonly name: string;
-  /** The provider type of the group */
+  /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */assignedRoles?: AssignedRoles; /** The unique group identitier */
+  id: string; /** The group name */
+  readonly name: string; /** The provider type of the group */
   providerType?: "idp" | "custom";
 }[];
 /**
@@ -20,28 +16,22 @@ type AssignedGroups = {
  * @example
  * [
  *   {
- *     name: "Developers",
+ *     name: "My Custom Group",
  *     providerType: "custom"
  *   }
  * ]
  */
 type AssignedGroupsRefNames = {
-  /** The name of the group */
-  name: string;
-  /** The type of provider for the group. */
+  /** The name of the group */name: string; /** The type of provider for the group. */
   providerType: "idp" | "custom";
 }[];
 /**
  * An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles.
  */
 type AssignedRoles = {
-  /** The unique role identitier */
-  id: string;
-  /** The role level */
-  readonly level: "admin" | "user";
-  /** The role name */
-  readonly name: string;
-  /** The type of role */
+  /** The unique role identitier */id: string; /** The role level */
+  readonly level: "admin" | "user"; /** The role name */
+  readonly name: string; /** The type of role */
   readonly type: "default" | "custom";
 }[];
 /**
@@ -52,33 +42,22 @@ type AssignedScopes = string[];
  * An error object describing the error.
  */
 type Error = {
-  /** The error code. */
-  code: string;
-  /** A human-readable explanation specific to this occurrence of the problem. */
-  detail?: string;
-  /** Additional properties relating to the error. */
-  meta?: unknown;
-  /** References to the source of the error. */
+  /** The error code. */code: string; /** A human-readable explanation specific to this occurrence of the problem. */
+  detail?: string; /** Additional properties relating to the error. */
+  meta?: unknown; /** References to the source of the error. */
   source?: {
-    /** The URI query parameter that caused the error. */
-    parameter?: string;
-    /** A JSON Pointer to the property that caused the error. */
+    /** The URI query parameter that caused the error. */parameter?: string; /** A JSON Pointer to the property that caused the error. */
     pointer?: string;
-  };
-  /** The HTTP status code. */
-  status?: number;
-  /** Summary of the problem. */
+  }; /** The HTTP status code. */
+  status?: number; /** Summary of the problem. */
   title: string;
 };
 /**
  * Error object.
  */
 type ErrorItem = {
-  /** Error code */
-  code: number;
-  /** A human-readable explanation specific to this occurrence of the problem (if applicable) */
-  detail?: string;
-  /** Summary of the problem */
+  /** Error code */code: number; /** A human-readable explanation specific to this occurrence of the problem (if applicable) */
+  detail?: string; /** Summary of the problem */
   title: string;
 };
 /**
@@ -96,9 +75,7 @@ type ErrorItem = {
  * }
  */
 type Errors = {
-  /** An array of errors related to the operation. */
-  errors?: Error[];
-  /** A unique identifier for tracing the error. */
+  /** An array of errors related to the operation. */errors?: Error[]; /** A unique identifier for tracing the error. */
   traceId?: string;
 };
 type ErrorsResponse = {
@@ -108,8 +85,7 @@ type ErrorsResponse = {
  * An advanced query filter to be used for complex user querying in the tenant.
  */
 type Filter = {
-  /** The advanced filtering to be applied the query. All conditional statements within this query parameter are case insensitive. */
-  filter?: string;
+  /** The advanced filtering to be applied the query. All conditional statements within this query parameter are case insensitive. */filter?: string;
 };
 /**
  * Data list - ResultItem or ErrorItem for each InviteeItem.
@@ -121,36 +97,25 @@ type InviteDataResponse = {
  * Error object.
  */
 type InviteErrorItem = ErrorItem & {
-  /** Error code - | HTTP Status code | 1001 - Active User | 1002 - Disabled User | 1003 - Default External Dependency Error | */
-  code?: string;
-  /** Invitee email */
-  email: string;
-  /** Result status = "error" */
+  /** Error code - | HTTP Status code | 1001 - Active User | 1002 - Disabled User | 1003 - Default External Dependency Error | */code?: string; /** Invitee email */
+  email: string; /** Result status = "error" */
   status: "error";
 };
 type InviteItem = {
-  /** Email address for this invitee. Example - "foo@qlik.com". */
-  email: string;
-  /** Optional ISO 639-1 2 letter code for invite language. Defaults to 'en' when missing or not found. */
-  language?: string;
-  /** Optional display name for this invitee. Example - "Elvis Presley". */
-  name?: string;
-  /** Flag - when true invite message is sent to inactive or invited users. Typically used to force email resend to users who are not yet active. */
+  /** Email address for this invitee. Example - "foo@qlik.com". */email: string; /** Optional ISO 639-1 2 letter code for invite language. Defaults to 'en' when missing or not found. */
+  language?: string; /** Optional display name for this invitee. Example - "Elvis Presley". */
+  name?: string; /** Flag - when true invite message is sent to inactive or invited users. Typically used to force email resend to users who are not yet active. */
   resend?: boolean;
 };
 type InviteRequestData = {
-  /** List of invitees who should receive an invite email. */
-  invitees?: InviteItem[];
+  /** List of invitees who should receive an invite email. */invitees?: InviteItem[];
 };
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
  */
 type JSONPatch = {
-  /** The operation to be performed. The fields `set` and `unset` are deprecated. */
-  op: "replace" | "set" | "unset" | "add" | "renew" | "remove-value";
-  /** A JSON Pointer. The field `roles` is deprecated. */
-  path: "/name" | "/roles" | "/assignedRoles" | "/inviteExpiry" | "/preferredZoneinfo" | "/preferredLocale" | "/status" | "/assignedGroups";
-  /** The value to be used for this operation. */
+  /** The operation to be performed. The fields `set` and `unset` are deprecated. */op: "replace" | "set" | "unset" | "add" | "renew" | "remove-value"; /** A JSON Pointer. The field `roles` is deprecated. */
+  path: "/name" | "/roles" | "/assignedRoles" | "/inviteExpiry" | "/preferredZoneinfo" | "/preferredLocale" | "/status" | "/assignedGroups"; /** The value to be used for this operation. */
   value: string | boolean | unknown[] | RefIDs | RefNames | AssignedGroupsRefNames;
 };
 /**
@@ -167,7 +132,7 @@ type JSONPatch = {
  *     path: "/assignedRoles",
  *     value: [
  *       {
- *         "name": "Developer"
+ *         "name": "My Custom Role"
  *       }
  *     ]
  *   },
@@ -209,8 +174,7 @@ type JSONPatchArray = JSONPatch[];
  * ]
  */
 type RefIDs = {
-  /** The unique identitier */
-  id: string;
+  /** The unique identitier */id: string;
 }[];
 /**
  * An array of reference names (e.g. roles).
@@ -222,82 +186,56 @@ type RefIDs = {
  * ]
  */
 type RefNames = {
-  /** The name of the entity */
-  name: string;
+  /** The name of the entity */name: string;
 }[];
 /**
  * Invitee result item
  */
 type ResultItem = {
-  /** Email specified for this invitee */
-  email: string;
-  /** Result status = {"ok" (new user; email sent) | "exists" (existing user; no email sent)} */
-  status: "ok" | "exists";
-  /** IdP generated UUID for this invitee */
-  subject: string;
-  /** UserId for this invitee */
+  /** Email specified for this invitee */email: string; /** Result status = {"ok" (new user; email sent) | "exists" (existing user; no email sent)} */
+  status: "ok" | "exists"; /** IdP generated UUID for this invitee */
+  subject: string; /** UserId for this invitee */
   userId: string;
 };
 /**
  * A user object.
  */
 type User = {
-  /** An array of group references. */
-  assignedGroups?: AssignedGroups;
-  /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */
-  assignedRoles?: AssignedRoles;
-  /** An array of scopes assigned to a user */
-  readonly assignedScopes?: AssignedScopes;
-  /** The timestamp for when the user record was created. */
-  readonly createdAt?: string;
-  /** The email address for the user. */
-  email?: string;
-  /** The unique user identifier. */
-  readonly id: string;
-  /** The Unix timestamp indicating when the invite will expire. */
-  readonly inviteExpiry?: number;
-  /** The timestamp for when the user record was last updated. */
-  readonly lastUpdatedAt?: string;
-  /** Pagination links to the user. */
+  /** An array of group references. */assignedGroups?: AssignedGroups; /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */
+  assignedRoles?: AssignedRoles; /** An array of scopes assigned to a user */
+  readonly assignedScopes?: AssignedScopes; /** The timestamp for when the user record was created. */
+  readonly createdAt?: string; /** The email address for the user. */
+  email?: string; /** The unique user identifier. */
+  readonly id: string; /** The Unix timestamp indicating when the invite will expire. */
+  readonly inviteExpiry?: number; /** The timestamp for when the user record was last updated. */
+  readonly lastUpdatedAt?: string; /** Pagination links to the user. */
   readonly links?: {
-    /** A link to this user. */
-    self: {
-      /** URL that defines the resource. */
-      href: string;
+    /** A link to this user. */self: {
+      /** URL that defines the resource. */href: string;
     };
-  };
-  /** Represents the end-user's language tag. */
-  locale?: string;
-  /** The name of the user. */
-  name: string;
-  /** A static url linking to the avatar of the user. */
-  picture?: string;
-  /** Represents the end-user's preferred language tag. */
-  preferredLocale?: string;
-  /** Represents the end-user's preferred time zone. */
-  preferredZoneinfo?: string;
-  /** The status of the user within the tenant. */
-  status?: "active" | "invited" | "disabled" | "deleted" | "provisioned";
-  /** The unique user identitier from an identity provider. */
-  subject: string;
-  /** The tenant that the user belongs too. */
-  tenantId: string;
-  /** Represents the end-user's time zone. */
+  }; /** Represents the end-user's language tag. */
+  locale?: string; /** The name of the user. */
+  name: string; /** A static url linking to the avatar of the user. */
+  picture?: string; /** Represents the end-user's preferred language tag. */
+  preferredLocale?: string; /** Represents the end-user's preferred time zone. */
+  preferredZoneinfo?: string; /** The status of the user within the tenant. */
+  status?: "active" | "invited" | "disabled" | "deleted" | "provisioned"; /** The unique user identitier from an identity provider. */
+  subject: string; /** The tenant that the user belongs too. */
+  tenantId: string; /** Represents the end-user's time zone. */
   zoneinfo?: string;
 };
 /**
  * The result object for the user count.
  */
 type UserCount = {
-  /** The total number of users in the tenant. */
-  total: number;
+  /** The total number of users in the tenant. */total: number;
 };
 /**
  * @example
  * {
  *   assignedRoles: [
  *     {
- *       name: "Developer"
+ *       name: "My Custom Role"
  *     }
  *   ],
  *   email: "john.smith@corp.example",
@@ -309,43 +247,27 @@ type UserCount = {
  * }
  */
 type UserPostSchema = {
-  /** The roles to assign to the user. */
-  assignedRoles?: RefIDs | RefNames;
-  /** The email address for the user. This is a required field when inviting a user. */
-  email?: string;
-  /** The name of the user. */
-  name?: string;
-  /** A static url linking to the avatar of the user. */
-  picture?: string;
-  /** The status of the created user within the tenant. */
-  status?: "invited";
-  /** The unique user identitier from an identity provider. */
-  subject: string;
-  /** The tenant that the user will belong too. */
+  /** The roles to assign to the user. */assignedRoles?: RefIDs | RefNames; /** The email address for the user. This is a required field when inviting a user. */
+  email?: string; /** The name of the user. */
+  name?: string; /** A static url linking to the avatar of the user. */
+  picture?: string; /** The status of the created user within the tenant. */
+  status?: "invited"; /** The unique user identitier from an identity provider. */
+  subject: string; /** The tenant that the user will belong too. */
   tenantId?: string;
 };
 type Users = {
-  /** List of users. */
-  data?: User[];
-  /** Pagination links */
+  /** List of users. */data?: User[]; /** Pagination links */
   links?: {
-    /** Link information for next page */
-    next?: {
-      /** URL to the next page of records */
-      href: string;
-    };
-    /** Link information for previous page */
+    /** Link information for next page */next?: {
+      /** URL to the next page of records */href: string;
+    }; /** Link information for previous page */
     prev?: {
-      /** URL to the previous page of records */
-      href: string;
-    };
-    /** Link information for current page */
+      /** URL to the previous page of records */href: string;
+    }; /** Link information for current page */
     self: {
-      /** URL to the current page of records */
-      href: string;
+      /** URL to the current page of records */href: string;
     };
-  };
-  /** Indicates the total number of matching documents. Will only be returned if the query parameter "totalResults" is true. */
+  }; /** Indicates the total number of matching documents. Will only be returned if the query parameter "totalResults" is true. */
   totalResults?: number;
 };
 /**
@@ -355,8 +277,7 @@ type Users = {
  * @throws GetUsersHttpError
  */
 declare function getUsers(query: {
-  /** A comma-delimited string of the requested fields per entity. If the 'links' value is omitted, then the entity HATEOAS link will also be omitted. */
-  fields?: string;
+  /** A comma-delimited string of the requested fields per entity. If the 'links' value is omitted, then the entity HATEOAS link will also be omitted. */fields?: string;
   /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax. Cannot be combined with any of the fields marked as deprecated. All conditional statements within this query parameter are case insensitive.
    *
    * The following fields support the `eq` operator: `id`, `subject`, `name`, `email`, `status`, `clientId`, `assignedRoles.id` `assignedRoles.name`, `assignedGroups.id`, `assignedGroupsAssignedRoles.name`
@@ -386,16 +307,11 @@ declare function getUsers(query: {
    * ```
    * name eq "Bob" or name eq "Alice" and (status eq "active" or status eq "disabled")
    * ``` */
-  filter?: string;
-  /** The number of user entries to retrieve. */
-  limit?: number;
-  /** Get users that come after this cursor value when sorted. Cannot be used in conjunction with `prev`. */
-  next?: string;
-  /** Get users that come before this cursor value when sorted. Cannot be used in conjunction with `next`. */
-  prev?: string;
-  /** The field to sort by, with +/- prefix indicating sort order */
-  sort?: "name" | "+name" | "-name" | "_id" | "+_id" | "-_id" | "id" | "+id" | "-id" | "tenantId" | "+tenantId" | "-tenantId" | "clientId" | "+clientId" | "-clientId" | "status" | "+status" | "-status" | "subject" | "+subject" | "-subject" | "email" | "+email" | "-email" | "inviteExpiry" | "+inviteExpiry" | "-inviteExpiry" | "createdAt" | "+createdAt" | "-createdAt";
-  /** Whether to return a total match count in the result. Defaults to false. It will trigger an extra DB query to count, reducing the efficiency of the endpoint. */
+  filter?: string; /** The number of user entries to retrieve. */
+  limit?: number; /** Get users that come after this cursor value when sorted. Cannot be used in conjunction with `prev`. */
+  next?: string; /** Get users that come before this cursor value when sorted. Cannot be used in conjunction with `next`. */
+  prev?: string; /** The field to sort by, with +/- prefix indicating sort order */
+  sort?: "name" | "+name" | "-name" | "_id" | "+_id" | "-_id" | "id" | "+id" | "-id" | "tenantId" | "+tenantId" | "-tenantId" | "clientId" | "+clientId" | "-clientId" | "status" | "+status" | "-status" | "subject" | "+subject" | "-subject" | "email" | "+email" | "-email" | "inviteExpiry" | "+inviteExpiry" | "-inviteExpiry" | "createdAt" | "+createdAt" | "-createdAt"; /** Whether to return a total match count in the result. Defaults to false. It will trigger an extra DB query to count, reducing the efficiency of the endpoint. */
   totalResults?: boolean;
 }, options?: ApiCallOptions): Promise<GetUsersHttpResponse>;
 type GetUsersHttpResponse = {
@@ -468,15 +384,10 @@ type CountUsersWithoutQueryHttpError = {
  * @throws FilterUsersHttpError
  */
 declare function filterUsers(query: {
-  /** A comma-delimited string of the requested fields per entity. If the 'links' value is omitted, then the entity HATEOAS link will also be omitted. */
-  fields?: string;
-  /** The number of user entries to retrieve. */
-  limit?: number;
-  /** Get users with IDs that are higher than the target user ID. Cannot be used in conjunction with prev. */
-  next?: string;
-  /** Get users with IDs that are lower than the target user ID. Cannot be used in conjunction with next. */
-  prev?: string;
-  /** The field to sort by, with +/- prefix indicating sort order */
+  /** A comma-delimited string of the requested fields per entity. If the 'links' value is omitted, then the entity HATEOAS link will also be omitted. */fields?: string; /** The number of user entries to retrieve. */
+  limit?: number; /** Get users with IDs that are higher than the target user ID. Cannot be used in conjunction with prev. */
+  next?: string; /** Get users with IDs that are lower than the target user ID. Cannot be used in conjunction with next. */
+  prev?: string; /** The field to sort by, with +/- prefix indicating sort order */
   sort?: "name" | "+name" | "-name";
 }, body: Filter, options?: ApiCallOptions): Promise<FilterUsersHttpResponse>;
 type FilterUsersHttpResponse = {
@@ -549,8 +460,7 @@ type DeleteUserHttpError = {
  * @throws GetUserHttpError
  */
 declare function getUser(userId: string, query: {
-  /** A comma-delimited string of the requested fields per entity. If the 'links' value is omitted, then the entity HATEOAS link will also be omitted. */
-  fields?: string;
+  /** A comma-delimited string of the requested fields per entity. If the 'links' value is omitted, then the entity HATEOAS link will also be omitted. */fields?: string;
 }, options?: ApiCallOptions): Promise<GetUserHttpResponse>;
 type GetUserHttpResponse = {
   data: User & unknown;

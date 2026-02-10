@@ -1,5 +1,5 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/data-stores.d.ts
 type BatchIdDto = {
@@ -7,33 +7,23 @@ type BatchIdDto = {
 };
 type DataAsset = {
   appId?: string;
-  appType: string;
-  /** The value is automatically set by the application. User defined value is ignored. */
-  readonly createdBy?: string;
-  /** The value is automatically set by the application. User defined value is ignored. */
-  readonly createdTime?: string;
-  /** The date-time when the source data was last changed */
+  appType: string; /** The value is automatically set by the application. User defined value is ignored. */
+  readonly createdBy?: string; /** The value is automatically set by the application. User defined value is ignored. */
+  readonly createdTime?: string; /** The date-time when the source data was last changed */
   dataFreshness?: string;
   dataStoreInfo?: DataStoreInfo;
-  description?: string;
-  /** Only required when updating the resource. Must be null for new resources. */
-  id?: string;
-  /** The value is automatically set by the application. User defined value is ignored. */
-  readonly lastModifiedBy?: string;
-  /** The value is automatically set by the application. User defined value is ignored. */
+  description?: string; /** Only required when updating the resource. Must be null for new resources. */
+  id?: string; /** The value is automatically set by the application. User defined value is ignored. */
+  readonly lastModifiedBy?: string; /** The value is automatically set by the application. User defined value is ignored. */
   readonly lastModifiedTime?: string;
-  name?: string;
-  /** The value is automatically set by the application. */
-  ownerId?: string;
-  /** A Map of name-value pairs. */
+  name?: string; /** The value is automatically set by the application. */
+  ownerId?: string; /** A Map of name-value pairs. */
   properties?: Record<string, unknown>;
   spaceId?: string;
   tags?: string[];
   technicalDescription?: string;
-  technicalName: string;
-  /** The value is automatically set by the application. User defined value is ignored. */
-  readonly tenantId?: string;
-  /** Only required when updating the resource. Must be null for new resources. */
+  technicalName: string; /** The value is automatically set by the application. User defined value is ignored. */
+  readonly tenantId?: string; /** Only required when updating the resource. Must be null for new resources. */
   version?: number;
 };
 type DataAssetInfo = {
@@ -53,78 +43,53 @@ type DataField = {
   orphan?: boolean;
   primaryKey?: boolean;
   properties?: Record<string, unknown>;
-  sensitive?: boolean;
-  /** An array of system tags */
-  tags?: string[];
-  /** An array of user-supplied tags */
+  sensitive?: boolean; /** An array of system tags */
+  tags?: string[]; /** An array of user-supplied tags */
   userTags?: UserTag[];
 };
 type DataSet = {
-  /** Optional field to specify additional schemas for files where multiple tables or sheets are available. User must define primary schema in 'schema' attribute and rest of the sheets/ tables can be defined using this field. This field is not populated for the dataSets with single schema */
-  additionalSchemas?: Schema[];
-  /** Optional override of DataAsset appType. */
-  appTypeOverride?: string;
-  /** The value is automatically set by the application. User defined value is ignored. */
-  readonly createdBy?: string;
-  /** The connectionId that created the Dataset. Optional. */
-  createdByConnectionId?: string;
-  /** The value is automatically set by the application. User defined value is ignored. */
+  /** Optional field to specify additional schemas for files where multiple tables or sheets are available. User must define primary schema in 'schema' attribute and rest of the sheets/ tables can be defined using this field. This field is not populated for the dataSets with single schema */additionalSchemas?: Schema[]; /** Optional override of DataAsset appType. */
+  appTypeOverride?: string; /** The value is automatically set by the application. User defined value is ignored. */
+  readonly createdBy?: string; /** The connectionId that created the Dataset. Optional. */
+  createdByConnectionId?: string; /** The value is automatically set by the application. User defined value is ignored. */
   readonly createdTime?: string;
   dataAssetInfo: DataAssetInfo;
-  description?: string;
-  /** Only required when updating the resource. Must be null for new resources. */
-  id?: string;
-  /** The value is automatically set by the application. User defined value is ignored. */
-  readonly lastModifiedBy?: string;
-  /** The value is automatically set by the application. User defined value is ignored. */
+  description?: string; /** Only required when updating the resource. Must be null for new resources. */
+  id?: string; /** The value is automatically set by the application. User defined value is ignored. */
+  readonly lastModifiedBy?: string; /** The value is automatically set by the application. User defined value is ignored. */
   readonly lastModifiedTime?: string;
   name?: string;
-  operational?: Operational;
-  /** The value is automatically set by the application. */
-  ownerId?: string;
-  /** A Map of name-value pairs. */
-  properties?: Record<string, unknown>;
-  /** NOTE: this will be deprecated after migration to secureQri. Required user defined field. All the parts in the format must be separated by ':'. The first part denotes the resourceType, followed by dataStoreType and tenant guid. The spaceGuid or userGuid is to be populated based on if the dataset is in shared or private space and finally the full file name. This field is auto populated for the dataSet generated for qix-datafiles. */
-  qri: string;
-  /** Optional field to specify additional schemas for files where multiple tables or sheets are available. User must define primary schema in 'schema' attribute and rest of the sheets/ tables can be defined using this field. This field is not populated for the dataSets with single schema */
+  operational?: Operational; /** The value is automatically set by the application. */
+  ownerId?: string; /** A Map of name-value pairs. */
+  properties?: Record<string, unknown>; /** NOTE: this will be deprecated after migration to secureQri. Required user defined field. All the parts in the format must be separated by ':'. The first part denotes the resourceType, followed by dataStoreType and tenant guid. The spaceGuid or userGuid is to be populated based on if the dataset is in shared or private space and finally the full file name. This field is auto populated for the dataSet generated for qix-datafiles. */
+  qri: string; /** Optional field to specify additional schemas for files where multiple tables or sheets are available. User must define primary schema in 'schema' attribute and rest of the sheets/ tables can be defined using this field. This field is not populated for the dataSets with single schema */
   schema?: Schema;
   secureQri: string;
   spaceId?: string;
   tags?: string[];
   technicalDescription?: string;
-  technicalName: string;
-  /** The value is automatically set by the application. User defined value is ignored. */
+  technicalName: string; /** The value is automatically set by the application. User defined value is ignored. */
   readonly tenantId?: string;
-  type?: string;
-  /** Only required when updating the resource. Must be null for new resources. */
+  type?: string; /** Only required when updating the resource. Must be null for new resources. */
   version?: number;
 };
 type DataStore = {
-  /** The value is automatically set by the application. User defined value is ignored. */
-  readonly createdBy?: string;
-  /** The value is automatically set by the application. User defined value is ignored. */
+  /** The value is automatically set by the application. User defined value is ignored. */readonly createdBy?: string; /** The value is automatically set by the application. User defined value is ignored. */
   readonly createdTime?: string;
-  description?: string;
-  /** Only required when updating the resource. Must be null for new resources. */
-  id?: string;
-  /** The value is automatically set by the application. User defined value is ignored. */
-  readonly lastModifiedBy?: string;
-  /** The value is automatically set by the application. User defined value is ignored. */
+  description?: string; /** Only required when updating the resource. Must be null for new resources. */
+  id?: string; /** The value is automatically set by the application. User defined value is ignored. */
+  readonly lastModifiedBy?: string; /** The value is automatically set by the application. User defined value is ignored. */
   readonly lastModifiedTime?: string;
-  name?: string;
-  /** The value is automatically set by the application. */
-  ownerId?: string;
-  /** A Map of name-value pairs. */
+  name?: string; /** The value is automatically set by the application. */
+  ownerId?: string; /** A Map of name-value pairs. */
   properties?: Record<string, unknown>;
   spaceId?: string;
   tags?: string[];
   technicalDescription?: string;
-  technicalName: string;
-  /** The value is automatically set by the application. User defined value is ignored. */
+  technicalName: string; /** The value is automatically set by the application. User defined value is ignored. */
   readonly tenantId?: string;
   type: string;
-  uri?: string;
-  /** Only required when updating the resource. Must be null for new resources. */
+  uri?: string; /** Only required when updating the resource. Must be null for new resources. */
   version?: number;
 };
 type DataStoreInfo = {
@@ -143,20 +108,14 @@ type ErrorResponse = {
   traceId?: string;
 };
 type FieldDataType = {
-  originalType?: string;
-  /** The properties map key is string and the value is of type object. Please note, Datatype DECIMAL requires two mandatory properties to be defined; these properties must be named: precision and scale, each of these property accepts integer value.  All other datatypes does not require any manadatory properties to be defined. */
-  properties?: Record<string, unknown>;
-  /** Each datatype may vary in terms of required properties. Example: Datatype DECIMAL requires two mandatory properties to be defined - precision and scale, each one accepts integer value. All other datatypes does not have any required properties. */
+  originalType?: string; /** The properties map key is string and the value is of type object. Please note, Datatype DECIMAL requires two mandatory properties to be defined; these properties must be named: precision and scale, each of these property accepts integer value.  All other datatypes does not require any manadatory properties to be defined. */
+  properties?: Record<string, unknown>; /** Each datatype may vary in terms of required properties. Example: Datatype DECIMAL requires two mandatory properties to be defined - precision and scale, each one accepts integer value. All other datatypes does not have any required properties. */
   type: "DATE" | "TIME" | "DATETIME" | "TIMESTAMP" | "STRING" | "DOUBLE" | "DECIMAL" | "INTEGER" | "BOOLEAN" | "BINARY" | "CUSTOM";
 };
 type JsonPatch = {
-  /** A JSON Pointer path pointing to the location to move/copy from. */
-  from?: string;
-  /** The operation to be performed. */
-  op: "add" | "remove" | "replace" | "move" | "copy" | "test";
-  /** A JSON pointer to the property being affected. */
-  path: string;
-  /** The value to add, replace or test. */
+  /** A JSON Pointer path pointing to the location to move/copy from. */from?: string; /** The operation to be performed. */
+  op: "add" | "remove" | "replace" | "move" | "copy" | "test"; /** A JSON pointer to the property being affected. */
+  path: string; /** The value to add, replace or test. */
   value?: unknown;
 };
 type Link = {
@@ -211,11 +170,9 @@ type PageDataStore = {
  * Optional field to specify additional schemas for files where multiple tables or sheets are available. User must define primary schema in 'schema' attribute and rest of the sheets/ tables can be defined using this field. This field is not populated for the dataSets with single schema
  */
 type Schema = {
-  /** Anomalies associated with this schema. Example: $warning-unknown-headers */
-  anomalies?: string[];
+  /** Anomalies associated with this schema. Example: $warning-unknown-headers */anomalies?: string[];
   dataFields: DataField[];
-  readonly effectiveDate?: string;
-  /** Options for loading files. Example: "qLabel": "embedded labels" */
+  readonly effectiveDate?: string; /** Options for loading files. Example: "qLabel": "embedded labels" */
   loadOptions?: Record<string, unknown>;
   overrideSchemaAnomalies?: boolean;
   schemaName?: string;
@@ -229,8 +186,7 @@ type TableConnectionInfo = {
  * An array of user-supplied tags
  */
 type UserTag = {
-  /** The id of the tag in Collections */
-  id?: string;
+  /** The id of the tag in Collections */id?: string;
   name?: string;
 };
 /**
@@ -257,12 +213,9 @@ type DeleteDataStoresHttpError = {
  * @throws GetDataStoresHttpError
  */
 declare function getDataStores(query: {
-  /** Page size limit. */
-  limit?: number;
-  page?: number;
-  /** Comma-separated fields to return in the response. */
-  projections?: string[];
-  /** Comma-separated fields and field start with '-' character sorts the result set in descending order. */
+  /** Page size limit. */limit?: number;
+  page?: number; /** Comma-separated fields to return in the response. */
+  projections?: string[]; /** Comma-separated fields and field start with '-' character sorts the result set in descending order. */
   sort?: string[];
 }, options?: ApiCallOptions): Promise<GetDataStoresHttpResponse>;
 type GetDataStoresHttpResponse = {
@@ -319,12 +272,9 @@ type DeleteDataStoreDataAssetsHttpError = {
  * @throws GetDataStoreDataAssetsHttpError
  */
 declare function getDataStoreDataAssets(dataStoreIds: string, query: {
-  /** Page size limit. */
-  limit?: number;
-  page?: number;
-  /** Comma-separated fields to return in the response. */
-  projections?: string[];
-  /** Comma-separated fields and field start with '-' character sorts the result set in descending order. */
+  /** Page size limit. */limit?: number;
+  page?: number; /** Comma-separated fields to return in the response. */
+  projections?: string[]; /** Comma-separated fields and field start with '-' character sorts the result set in descending order. */
   sort?: string[];
 }, options?: ApiCallOptions): Promise<GetDataStoreDataAssetsHttpResponse>;
 type GetDataStoreDataAssetsHttpResponse = {
@@ -366,12 +316,9 @@ type DeleteDataStoreDataAssetDataSetsHttpError = {
  * @throws GetDataStoreDataAssetDataSetsHttpError
  */
 declare function getDataStoreDataAssetDataSets(dataStoreIds: string, dataAssetIds: string, query: {
-  /** Page size limit. */
-  limit?: number;
-  page?: number;
-  /** Comma-separated fields to return in the response. */
-  projections?: string[];
-  /** Comma-separated fields and field start with '-' character sorts the result set in descending order. */
+  /** Page size limit. */limit?: number;
+  page?: number; /** Comma-separated fields to return in the response. */
+  projections?: string[]; /** Comma-separated fields and field start with '-' character sorts the result set in descending order. */
   sort?: string[];
 }, options?: ApiCallOptions): Promise<GetDataStoreDataAssetDataSetsHttpResponse>;
 type GetDataStoreDataAssetDataSetsHttpResponse = {
@@ -394,8 +341,7 @@ type GetDataStoreDataAssetDataSetsHttpError = {
  * @throws GetDataStoreHttpError
  */
 declare function getDataStore(dataStoreId: string, query: {
-  /** Comma-separated fields to return in the response. */
-  projections?: string[];
+  /** Comma-separated fields to return in the response. */projections?: string[];
 }, options?: ApiCallOptions): Promise<GetDataStoreHttpResponse>;
 type GetDataStoreHttpResponse = {
   data: DataStore;

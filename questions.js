@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/questions.ts
 /**
@@ -48,7 +48,6 @@ const questionsExport = {
 	filterQuestions,
 	clearCache
 };
-var questions_default = questionsExport;
 
 //#endregion
-export { askQuestions, clearCache, questions_default as default, filterQuestions };
+export { askQuestions, clearCache, questionsExport as default, filterQuestions };

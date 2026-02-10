@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/users.ts
 /**
@@ -170,7 +170,6 @@ const usersExport = {
 	patchUser,
 	clearCache
 };
-var users_default = usersExport;
 
 //#endregion
-export { clearCache, countUsers, countUsersWithoutQuery, createUser, users_default as default, deleteUser, filterUsers, getMyUser, getUser, getUsers, inviteUsers, patchUser };
+export { clearCache, countUsers, countUsersWithoutQuery, createUser, usersExport as default, deleteUser, filterUsers, getMyUser, getUser, getUsers, inviteUsers, patchUser };

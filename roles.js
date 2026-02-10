@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/roles.ts
 /**
@@ -93,7 +93,6 @@ const rolesExport = {
 	patchRole,
 	clearCache
 };
-var roles_default = rolesExport;
 
 //#endregion
-export { clearCache, createRole, roles_default as default, deleteRole, getRole, getRoles, patchRole };
+export { clearCache, createRole, rolesExport as default, deleteRole, getRole, getRoles, patchRole };

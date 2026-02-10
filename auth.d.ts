@@ -1,7 +1,6 @@
-import { _ as hostConfigCommonProperties, a as Credentials, c as GetWebResourceAuthParamsProps, d as HostConfig, f as HostConfigCommon, g as authTypesThatCanBeOmitted, h as WebSocketAuthParams, i as AuthenticationErrorAction, l as GetWebSocketAuthParamsProps, m as WebResourceAuthParams, n as AuthType, o as GetRemoteAuthDataProps, p as RestCallAuthParams, r as AuthTypeThatCanBeOmitted, s as GetRestCallAuthParamsProps, t as AuthModule, u as HandleAuthenticationErrorProps } from "./chunks/auth-types-YrlH_R9f.js";
+import { AuthModule, AuthType, AuthTypeThatCanBeOmitted, AuthenticationErrorAction, Credentials, GetRemoteAuthDataProps, GetRestCallAuthParamsProps, GetWebResourceAuthParamsProps, GetWebSocketAuthParamsProps, HandleAuthenticationErrorProps, HostConfig, HostConfigCommon, RestCallAuthParams, WebResourceAuthParams, WebSocketAuthParams, authTypesThatCanBeOmitted, hostConfigCommonProperties } from "./auth-types.js";
 
 //#region src/public/auth.d.ts
-
 /**
  * Registers an auth module that can handle authentication. An auth module is used by specifying its name as authType in the HostConfig passed in to api calls.
  * @param name the name of the module

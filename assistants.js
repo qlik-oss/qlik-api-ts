@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/assistants.ts
 /**
@@ -582,7 +582,6 @@ const assistantsExport = {
 	patchAssistant,
 	clearCache
 };
-var assistants_default = assistantsExport;
 
 //#endregion
-export { clearCache, createAssistant, createAssistantStarter, createAssistantThread, createAssistantThreadInteraction, createAssistantThreadInteractionFeedback, createAssistantThreadInteractionReview, assistants_default as default, deleteAssistant, deleteAssistantStarter, deleteAssistantStarterFollowup, deleteAssistantThread, deleteAssistantThreadInteraction, getAssistant, getAssistantFeedback, getAssistantSources, getAssistantStarter, getAssistantStarters, getAssistantThread, getAssistantThreadInteraction, getAssistantThreadInteractions, getAssistantThreads, getAssistants, invokeAssistantThread, patchAssistant, patchAssistantThread, patchAssistantThreadInteractionFeedback, searchAssistant, streamAssistantThread, updateAssistantStarter, updateAssistantStarterFollowup };
+export { clearCache, createAssistant, createAssistantStarter, createAssistantThread, createAssistantThreadInteraction, createAssistantThreadInteractionFeedback, createAssistantThreadInteractionReview, assistantsExport as default, deleteAssistant, deleteAssistantStarter, deleteAssistantStarterFollowup, deleteAssistantThread, deleteAssistantThreadInteraction, getAssistant, getAssistantFeedback, getAssistantSources, getAssistantStarter, getAssistantStarters, getAssistantThread, getAssistantThreadInteraction, getAssistantThreadInteractions, getAssistantThreads, getAssistants, invokeAssistantThread, patchAssistant, patchAssistantThread, patchAssistantThreadInteractionFeedback, searchAssistant, streamAssistantThread, updateAssistantStarter, updateAssistantStarterFollowup };

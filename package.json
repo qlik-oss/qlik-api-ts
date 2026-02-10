@@ -13,10 +13,10 @@
   "dependencies": {
     "enigma.js": "^2.14.0",
     "extend": "3.0.2",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "ws": "^8.19.0"
   },
-  "packageManager": "pnpm@10.28.0",
+  "packageManager": "pnpm@10.29.2",
   "engines": {
     "node": ">=20"
   },
@@ -47,6 +47,8 @@
     "./data-connections": "./data-connections.js",
     "./data-credentials": "./data-credentials.js",
     "./data-files": "./data-files.js",
+    "./data-governance": "./data-governance.js",
+    "./data-governance/data-products": "./data-governance/data-products.js",
     "./data-qualities": "./data-qualities.js",
     "./data-sets": "./data-sets.js",
     "./data-sources": "./data-sources.js",
@@ -79,6 +81,7 @@
     "./spaces": "./spaces.js",
     "./tasks": "./tasks.js",
     "./temp-contents": "./temp-contents.js",
+    "./tenant-settings": "./tenant-settings.js",
     "./tenants": "./tenants.js",
     "./themes": "./themes.js",
     "./transports": "./transports.js",

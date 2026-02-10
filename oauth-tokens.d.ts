@@ -1,45 +1,32 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/oauth-tokens.d.ts
 /**
  * An error object.
  */
 type Error = {
-  /** The error code. */
-  code: string;
-  /** The detailed error message. */
-  detail?: string;
-  /** Non-standard information about the error. */
-  meta?: unknown;
-  /** The http status code. */
-  status?: string;
-  /** The error title. */
+  /** The error code. */code: string; /** The detailed error message. */
+  detail?: string; /** Non-standard information about the error. */
+  meta?: unknown; /** The http status code. */
+  status?: string; /** The error title. */
   title: string;
 };
 /**
  * A representation of the errors encountered from the HTTP request.
  */
 type Errors = {
-  /** List of errors and their properties. */
-  errors?: Error[];
+  /** List of errors and their properties. */errors?: Error[];
 };
 type Link = {
-  /** The URL for the link. */
-  href: string;
+  /** The URL for the link. */href: string;
 };
 type OauthToken = {
-  /** The description of the token. */
-  description?: string;
-  /** The type of the user device the authorization token is generated for (Tablet, Phone etc.). */
-  deviceType?: string;
-  /** The token ID. */
-  id: string;
-  /** The last time the token was used. */
-  lastUsed?: string;
-  /** The ID of the owning tenant. */
-  tenantId: string;
-  /** The ID of the owning user. */
+  /** The description of the token. */description?: string; /** The type of the user device the authorization token is generated for (Tablet, Phone etc.). */
+  deviceType?: string; /** The token ID. */
+  id: string; /** The last time the token was used. */
+  lastUsed?: string; /** The ID of the owning tenant. */
+  tenantId: string; /** The ID of the owning user. */
   userId: string;
 };
 type OauthTokenPage = {
@@ -57,13 +44,9 @@ type OauthTokenPage = {
  * @throws GetOauthTokensHttpError
  */
 declare function getOauthTokens(query: {
-  /** The maximum number of tokens to return. */
-  limit?: number;
-  /** The target page. */
-  page?: string;
-  /** The field to sort by. */
-  sort?: "userId";
-  /** The ID of the user to limit results to. */
+  /** The maximum number of tokens to return. */limit?: number; /** The target page. */
+  page?: string; /** The field to sort by. */
+  sort?: "userId"; /** The ID of the user to limit results to. */
   userId?: string;
 }, options?: ApiCallOptions): Promise<GetOauthTokensHttpResponse>;
 type GetOauthTokensHttpResponse = {

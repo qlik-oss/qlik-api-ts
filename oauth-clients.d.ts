@@ -1,35 +1,26 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/oauth-clients.d.ts
 /**
  * Hints of any client application secrets
  */
 type ClientSecrets = {
-  /** The timestamp for when the client-secret record was created. */
-  createdAt?: string;
-  /** The identifier for the user that created the client-secret record. */
-  createdBy?: string;
-  /** Hint of a client application secret */
+  /** The timestamp for when the client-secret record was created. */createdAt?: string; /** The identifier for the user that created the client-secret record. */
+  createdBy?: string; /** Hint of a client application secret */
   hint: string;
 }[];
 /**
  * Response schema for reading a connection config
  */
 type ConnectionConfigReadResponse = {
-  /** Consent method */
-  readonly consentMethod: string;
-  /** OAuth client has been deleted by owning tenant, only applies for published clients. */
-  readonly deletedByOwner?: boolean;
-  /** Status */
+  /** Consent method */readonly consentMethod: string; /** OAuth client has been deleted by owning tenant, only applies for published clients. */
+  readonly deletedByOwner?: boolean; /** Status */
   readonly status?: string;
 };
 type Error = {
-  /** The unique code for the error */
-  code: string;
-  /** Additional details about the error */
-  detail?: string;
-  /** A summary of the error */
+  /** The unique code for the error */code: string; /** Additional details about the error */
+  detail?: string; /** A summary of the error */
   title: string;
 };
 type ErrorResponse = {
@@ -39,28 +30,18 @@ type ErrorResponse = {
  * JSON Web Key (JWK) for the public key used to verify the signature of a client assertion JWT
  */
 type JWK = {
-  /** Algorithm intended for use with the key */
-  alg: "RS256" | "RS512" | "ES384";
-  /** Curve for EC keys */
-  crv?: string;
-  /** Exponent for RSA keys */
-  e?: string;
-  /** Key ID */
-  kid: string;
-  /** Key type (e.g., RSA, EC) */
-  kty: "RSA" | "EC";
-  /** Modulus for RSA keys */
-  n?: string;
-  /** Intended use of the key (typically "sig" for signature) */
-  use: "sig";
-  /** X coordinate for EC keys */
-  x?: string;
-  /** Y coordinate for EC keys */
+  /** Algorithm intended for use with the key */alg: "RS256" | "RS512" | "ES384"; /** Curve for EC keys */
+  crv?: string; /** Exponent for RSA keys */
+  e?: string; /** Key ID */
+  kid: string; /** Key type (e.g., RSA, EC) */
+  kty: "RSA" | "EC"; /** Modulus for RSA keys */
+  n?: string; /** Intended use of the key (typically "sig" for signature) */
+  use: "sig"; /** X coordinate for EC keys */
+  x?: string; /** Y coordinate for EC keys */
   y?: string;
 };
 type Link = {
-  /** URL that defines the resource */
-  href: string;
+  /** URL that defines the resource */href: string;
 };
 type Links = {
   next?: Link;
@@ -71,19 +52,12 @@ type Links = {
  * Schema for a OAuth client when listing as an admin user
  */
 type OAuthClientAdminListItem = {
-  /** List of allowed authentication methods for the client */
-  allowedAuthMethods?: ("client_secret" | "private_key_jwt")[];
-  /** List of allowed origins for client */
-  allowedOrigins?: string[];
-  /** Client application id */
-  readonly clientId: string;
-  /** Hints of any client application secrets */
-  readonly clientSecrets?: ClientSecrets;
-  /** Response schema for reading a connection config */
-  connectionConfig?: ConnectionConfigReadResponse;
-  /** List of public keys for JWT authentication */
-  publicKeys?: JWK[];
-  /** List of allowed redirect URIs for login */
+  /** List of allowed authentication methods for the client */allowedAuthMethods?: ("client_secret" | "private_key_jwt")[]; /** List of allowed origins for client */
+  allowedOrigins?: string[]; /** Client application id */
+  readonly clientId: string; /** Hints of any client application secrets */
+  readonly clientSecrets?: ClientSecrets; /** Response schema for reading a connection config */
+  connectionConfig?: ConnectionConfigReadResponse; /** List of public keys for JWT authentication */
+  publicKeys?: JWK[]; /** List of allowed redirect URIs for login */
   redirectUris?: string[];
 } & OAuthClientBase;
 /**
@@ -91,103 +65,75 @@ type OAuthClientAdminListItem = {
  */
 type OAuthClientAdminListResponse = {
   data: OAuthClientAdminListItem[];
-  links: Links;
-  /** Total number of oauth clients, included only if `totalResults` query parameter is set to true. */
+  links: Links; /** Total number of oauth clients, included only if `totalResults` query parameter is set to true. */
   totalResults?: number;
 };
 /**
  * Response schema for reading an OAuth client as an admin user
  */
 type OAuthClientAdminReadResponse = {
-  /** List of allowed authentication methods for the client */
-  allowedAuthMethods?: ("client_secret" | "private_key_jwt")[];
-  /** List of allowed origins for client */
-  allowedOrigins?: string[];
-  /** Client application id */
-  readonly clientId: string;
-  /** Hints of any client application secrets */
-  readonly clientSecrets?: ClientSecrets;
-  /** List of public keys for JWT authentication */
-  publicKeys?: JWK[];
-  /** List of allowed redirect URIs for login */
+  /** List of allowed authentication methods for the client */allowedAuthMethods?: ("client_secret" | "private_key_jwt")[]; /** List of allowed origins for client */
+  allowedOrigins?: string[]; /** Client application id */
+  readonly clientId: string; /** Hints of any client application secrets */
+  readonly clientSecrets?: ClientSecrets; /** List of public keys for JWT authentication */
+  publicKeys?: JWK[]; /** List of allowed redirect URIs for login */
   redirectUris?: string[];
 } & OAuthClientBase;
 /**
  * Base schema for OAuth client requests and responses
  */
 type OAuthClientBase = {
-  /** Allowed grant types, only for use with appType: 'web' */
-  allowedGrantTypes?: ("client_credentials" | "urn:qlik:oauth:user-impersonation")[];
-  /** List of allowed scopes for this client. For a full list of scopes see [qlik.dev/authenticate/oauth/scopes/](https://qlik.dev/authenticate/oauth/scopes/). */
-  allowedScopes?: string[];
-  /** Application type */
-  appType: "web" | "native" | "spa" | "anonymous-embed";
-  /** Client application name */
-  clientName: string;
-  /** URI for homepage of client */
-  clientUri?: string;
-  /** The timestamp for when the oauth-clients record was created. */
-  createdAt: string;
-  /** The timestamp for when the oauth-clients record was deleted. */
-  deletedAt?: string;
-  /** Client description */
-  description?: string;
-  /** Is set if client disabled */
-  readonly disableTag?: string;
-  /** URI for logo of client */
-  logoUri?: string;
-  /** The timestamp which is set, if the client is published. */
-  publishedAt?: string;
-  /** The timestamp for when the oauth-clients record was updated. */
+  /** List of allowed authentication methods for the client */allowedAuthMethods?: ("client_secret" | "private_key_jwt")[]; /** Allowed grant types, only for use with appType: 'web' */
+  allowedGrantTypes?: ("client_credentials" | "urn:qlik:oauth:user-impersonation")[]; /** List of allowed scopes for this client. For a full list of scopes see [qlik.dev/authenticate/oauth/scopes/](https://qlik.dev/authenticate/oauth/scopes/). */
+  allowedScopes?: string[]; /** Application type */
+  appType: "web" | "native" | "spa" | "anonymous-embed"; /** Client application name */
+  clientName: string; /** Hints of any client application secrets */
+  readonly clientSecrets?: {
+    /** The timestamp for when the client-secret record was created. */createdAt?: string; /** The identifier for the user that created the client-secret record. */
+    createdBy?: string; /** Hint of a client application secret */
+    hint: string;
+  }[]; /** URI for homepage of client */
+  clientUri?: string; /** Optional settings for configuring the client connection. */
+  connectionConfig?: {
+    /** Specifies the consent method for the connection. */consentMethod?: "required" | "trusted";
+  }; /** The timestamp for when the oauth-clients record was created. */
+  createdAt: string; /** The timestamp for when the oauth-clients record was deleted. */
+  deletedAt?: string; /** Client description */
+  description?: string; /** Is set if client disabled */
+  readonly disableTag?: string; /** URI for logo of client */
+  logoUri?: string; /** List of public keys for JWT authentication */
+  publicKeys?: JWK[]; /** The timestamp which is set, if the client is published. */
+  publishedAt?: string; /** The timestamp for when the oauth-clients record was updated. */
   updatedAt?: string;
 };
 /**
  * Request schema for OAuth client creation
  */
 type OAuthClientCreateRequest = {
-  /** List of allowed authentication methods for the client */
-  allowedAuthMethods?: ("client_secret" | "private_key_jwt")[];
-  /** Allowed grant types, only for use with appType: 'web' */
-  allowedGrantTypes?: ("client_credentials" | "urn:qlik:oauth:user-impersonation")[];
-  /** List of allowed origins for this client, only available with SPA application type */
-  allowedOrigins?: string[];
-  /** List of allowed scopes for this client. For a full list of scopes see [qlik.dev/authenticate/oauth/scopes/](https://qlik.dev/authenticate/oauth/scopes/). */
-  allowedScopes?: string[];
-  /** Application type */
-  appType: "web" | "native" | "spa" | "anonymous-embed";
-  /** Client application name */
-  clientName: string;
-  /** URI for homepage of client */
-  clientUri?: string;
-  /** Optional settings for configuring the client connection. */
+  /** List of allowed authentication methods for the client */allowedAuthMethods?: ("client_secret" | "private_key_jwt")[]; /** Allowed grant types, only for use with appType: 'web' */
+  allowedGrantTypes?: ("client_credentials" | "urn:qlik:oauth:user-impersonation")[]; /** List of allowed origins for this client, only available with SPA application type */
+  allowedOrigins?: string[]; /** List of allowed scopes for this client. For a full list of scopes see [qlik.dev/authenticate/oauth/scopes/](https://qlik.dev/authenticate/oauth/scopes/). */
+  allowedScopes?: string[]; /** Application type */
+  appType: "web" | "native" | "spa" | "anonymous-embed"; /** Client application name */
+  clientName: string; /** URI for homepage of client */
+  clientUri?: string; /** Optional settings for configuring the client connection. */
   connectionConfig?: {
-    /** Specifies the consent method for the connection. The only allowed value is "trusted." */
-    consentMethod?: "trusted";
-  };
-  /** Client description */
-  description?: string;
-  /** URI for logo of client */
-  logoUri?: string;
-  /** List of public keys for JWT authentication (required when using private_key_jwt) */
-  publicKeys?: JWK[];
-  /** List of allowed redirect URIs for login */
+    /** Specifies the consent method for the connection. The only allowed value is "trusted." */consentMethod?: "trusted";
+  }; /** Client description */
+  description?: string; /** URI for logo of client */
+  logoUri?: string; /** List of public keys for JWT authentication (required when using private_key_jwt) */
+  publicKeys?: JWK[]; /** List of allowed redirect URIs for login */
   redirectUris?: string[];
 };
 /**
  * Response schema for OAuth client creation
  */
 type OAuthClientCreateResponse = {
-  /** List of allowed authentication methods for the client */
-  allowedAuthMethods?: ("client_secret" | "private_key_jwt")[];
-  /** List of allowed redirect URIs for login */
-  allowedOrigins?: string[];
-  /** Client application id */
-  readonly clientId: string;
-  /** Client application secret */
-  readonly clientSecret: string;
-  /** List of public keys for JWT authentication */
-  publicKeys?: JWK[];
-  /** List of allowed redirect URIs for login */
+  /** List of allowed authentication methods for the client */allowedAuthMethods?: ("client_secret" | "private_key_jwt")[]; /** List of allowed redirect URIs for login */
+  allowedOrigins?: string[]; /** Client application id */
+  readonly clientId: string; /** Client application secret */
+  readonly clientSecret: string; /** List of public keys for JWT authentication */
+  publicKeys?: JWK[]; /** List of allowed redirect URIs for login */
   redirectUris?: string[];
 } & OAuthClientBase;
 /**
@@ -198,54 +144,47 @@ type OAuthClientListResponse = {
   links: Links;
 };
 /**
+ * Response schema for PATCH /oauth-clients when a client secret is generated
+ */
+type OAuthClientPatchResponse = {
+  /** The generated client application secret */readonly clientSecret: string;
+};
+/**
  * Response schema for successfully publishing an OAuth client
  */
 type OAuthClientPublishResponse = {
-  /** The timestamp which is set, if the client is published. */
-  publishedAt: string;
+  /** The timestamp which is set, if the client is published. */publishedAt: string;
 };
 /**
  * Response schema for reading an OAuth client
  */
 type OAuthClientReadResponse = {
-  /** Client application id */
-  readonly clientId: string;
+  /** Client application id */readonly clientId: string;
 } & OAuthClientBase;
 /**
  * Response schema for creating an OAuth client application secret
  */
 type OAuthClientSecretResponse = {
-  /** Client application id */
-  readonly clientId: string;
-  /** Client application secret */
-  readonly clientSecret: string;
-  /** The timestamp for when the client-secret record was created. */
-  createdAt?: string;
-  /** The identifier for the user that created the client-secret record. */
-  createdBy?: string;
-  /** Client application hint */
+  /** Client application id */readonly clientId: string; /** Client application secret */
+  readonly clientSecret: string; /** The timestamp for when the client-secret record was created. */
+  createdAt?: string; /** The identifier for the user that created the client-secret record. */
+  createdBy?: string; /** Client application hint */
   readonly hint: string;
 };
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902
  */
 type OAuthClientUpdate = {
-  /** The operation to be performed */
-  op: "add" | "remove" | "replace";
-  /** The path for the given resource field to patch */
-  path: "/allowedOrigins" | "/clientName" | "/clientUri" | "/description" | "/logoUri" | "/redirectUris" | "/allowedScopes" | "/allowedGrantTypes";
-  /** The value to be used for this operation. */
+  /** The operation to be performed */op: "add" | "remove" | "replace"; /** The path for the given resource field to patch */
+  path: "/allowedOrigins" | "/clientName" | "/clientUri" | "/description" | "/logoUri" | "/redirectUris" | "/allowedScopes" | "/allowedGrantTypes" | "/publicKeys" | "/allowedAuthMethods"; /** The value to be used for this operation. */
   value?: string | string[];
 };
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902
  */
 type OAuthConnectionConfigUpdate = {
-  /** The operation to be performed */
-  op: "replace";
-  /** The path for the given resource field to patch */
-  path: "/consentMethod";
-  /** The value to be used for this operation. */
+  /** The operation to be performed */op: "replace"; /** The path for the given resource field to patch */
+  path: "/consentMethod"; /** The value to be used for this operation. */
   value: "required" | "trusted";
 };
 /**
@@ -262,17 +201,11 @@ type OAuthConnectionConfigUpdate = {
  * @throws GetOAuthClientsHttpError
  */
 declare function getOAuthClients(query: {
-  /** The filter query that should be used to filter the list of oauth clients.  The filter syntax is defined in RFC 7644. Valid attributes for filtering are `clientId`, `clientName`, `appType`, and `tenantId`. */
-  filter?: string;
-  /** The number of OAuth client entries to retrieve. */
-  limit?: number;
-  /** The next page cursor */
-  next?: string;
-  /** The previous page cursor */
-  prev?: string;
-  /** The attribute to sort by, beginning with + for ascending and - for descending. Valid attributes for sorting are clientId, clientName, appType, tenantId, createdAt, updatedAt. */
-  sort?: string;
-  /** Boolean query parameter that determines if the total count of results should be included in the response. If true, the response includes the total number of results in the `totalResults` field. If false or not included in the query, `totalResults` will be excluded from the response. */
+  /** The filter query that should be used to filter the list of oauth clients.  The filter syntax is defined in RFC 7644. Valid attributes for filtering are `clientId`, `clientName`, `appType`, and `tenantId`. */filter?: string; /** The number of OAuth client entries to retrieve. */
+  limit?: number; /** The next page cursor */
+  next?: string; /** The previous page cursor */
+  prev?: string; /** The attribute to sort by, beginning with + for ascending and - for descending. Valid attributes for sorting are clientId, clientName, appType, tenantId, createdAt, updatedAt. */
+  sort?: string; /** Boolean query parameter that determines if the total count of results should be included in the response. If true, the response includes the total number of results in the `totalResults` field. If false or not included in the query, `totalResults` will be excluded from the response. */
   totalResults?: boolean;
 }, options?: ApiCallOptions): Promise<GetOAuthClientsHttpResponse>;
 type GetOAuthClientsHttpResponse = {
@@ -337,14 +270,20 @@ type GetOAuthClientHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
- * Updates the specified OAuth client.
+ * Updates the specified OAuth client. Returns 202 Accepted with a client secret in the response body if a client secret is generated during the update (e.g., when adding client_secret to allowedAuthMethods). Otherwise returns 204 No Content.
  *
  * @param id The unique identifier for the OAuth client
  * @param body an object with the body content
  * @throws PatchOAuthClientHttpError
  */
 declare function patchOAuthClient(id: string, body: OAuthClientUpdate[], options?: ApiCallOptions): Promise<PatchOAuthClientHttpResponse>;
-type PatchOAuthClientHttpResponse = {
+type PatchOAuthClientHttpResponse = PatchOAuthClient202HttpResponse | PatchOAuthClient204HttpResponse;
+type PatchOAuthClient202HttpResponse = {
+  data: OAuthClientPatchResponse;
+  headers: Headers;
+  status: 202;
+};
+type PatchOAuthClient204HttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
@@ -499,7 +438,7 @@ type OauthClientsAPI = {
    */
   getOAuthClient: typeof getOAuthClient;
   /**
-   * Updates the specified OAuth client.
+   * Updates the specified OAuth client. Returns 202 Accepted with a client secret in the response body if a client secret is generated during the update (e.g., when adding client_secret to allowedAuthMethods). Otherwise returns 204 No Content.
    *
    * @param id The unique identifier for the OAuth client
    * @param body an object with the body content
@@ -560,4 +499,4 @@ type OauthClientsAPI = {
  */
 declare const oauthClientsExport: OauthClientsAPI;
 //#endregion
-export { ClientSecrets, ConnectionConfigReadResponse, CreateOAuthClientHttpError, CreateOAuthClientHttpResponse, CreateOAuthClientSecretHttpError, CreateOAuthClientSecretHttpResponse, DeleteOAuthClientConnectionConfigHttpError, DeleteOAuthClientConnectionConfigHttpResponse, DeleteOAuthClientHttpError, DeleteOAuthClientHttpResponse, DeleteOAuthClientSecretHttpError, DeleteOAuthClientSecretHttpResponse, Error, ErrorResponse, GetOAuthClientConnectionConfigHttpError, GetOAuthClientConnectionConfigHttpResponse, GetOAuthClientHttpError, GetOAuthClientHttpResponse, GetOAuthClientsHttpError, GetOAuthClientsHttpResponse, JWK, Link, Links, OAuthClientAdminListItem, OAuthClientAdminListResponse, OAuthClientAdminReadResponse, OAuthClientBase, OAuthClientCreateRequest, OAuthClientCreateResponse, OAuthClientListResponse, OAuthClientPublishResponse, OAuthClientReadResponse, OAuthClientSecretResponse, OAuthClientUpdate, OAuthConnectionConfigUpdate, OauthClientsAPI, PatchOAuthClientConnectionConfigHttpError, PatchOAuthClientConnectionConfigHttpResponse, PatchOAuthClientHttpError, PatchOAuthClientHttpResponse, PublishOAuthClientHttpError, PublishOAuthClientHttpResponse, clearCache, createOAuthClient, createOAuthClientSecret, oauthClientsExport as default, deleteOAuthClient, deleteOAuthClientConnectionConfig, deleteOAuthClientSecret, getOAuthClient, getOAuthClientConnectionConfig, getOAuthClients, patchOAuthClient, patchOAuthClientConnectionConfig, publishOAuthClient };
+export { ClientSecrets, ConnectionConfigReadResponse, CreateOAuthClientHttpError, CreateOAuthClientHttpResponse, CreateOAuthClientSecretHttpError, CreateOAuthClientSecretHttpResponse, DeleteOAuthClientConnectionConfigHttpError, DeleteOAuthClientConnectionConfigHttpResponse, DeleteOAuthClientHttpError, DeleteOAuthClientHttpResponse, DeleteOAuthClientSecretHttpError, DeleteOAuthClientSecretHttpResponse, Error, ErrorResponse, GetOAuthClientConnectionConfigHttpError, GetOAuthClientConnectionConfigHttpResponse, GetOAuthClientHttpError, GetOAuthClientHttpResponse, GetOAuthClientsHttpError, GetOAuthClientsHttpResponse, JWK, Link, Links, OAuthClientAdminListItem, OAuthClientAdminListResponse, OAuthClientAdminReadResponse, OAuthClientBase, OAuthClientCreateRequest, OAuthClientCreateResponse, OAuthClientListResponse, OAuthClientPatchResponse, OAuthClientPublishResponse, OAuthClientReadResponse, OAuthClientSecretResponse, OAuthClientUpdate, OAuthConnectionConfigUpdate, OauthClientsAPI, PatchOAuthClient202HttpResponse, PatchOAuthClient204HttpResponse, PatchOAuthClientConnectionConfigHttpError, PatchOAuthClientConnectionConfigHttpResponse, PatchOAuthClientHttpError, PatchOAuthClientHttpResponse, PublishOAuthClientHttpError, PublishOAuthClientHttpResponse, clearCache, createOAuthClient, createOAuthClientSecret, oauthClientsExport as default, deleteOAuthClient, deleteOAuthClientConnectionConfig, deleteOAuthClientSecret, getOAuthClient, getOAuthClientConnectionConfig, getOAuthClients, patchOAuthClient, patchOAuthClientConnectionConfig, publishOAuthClient };

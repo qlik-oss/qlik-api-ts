@@ -1,11 +1,9 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/consumption.d.ts
 type Enforcement = {
-  /** Resource action type to be blocked */
-  actionToBlock?: string;
-  /** Resource type to be blocked */
+  /** Resource action type to be blocked */actionToBlock?: string; /** Resource type to be blocked */
   resourceType?: string;
 };
 /**
@@ -25,53 +23,32 @@ type ErrorResponse = {
   traceId?: string;
 };
 type ExecutionResponse = {
-  blocked?: boolean;
-  /** RFC3339 timestamp when a block event was last emitted for this execution. */
-  blockedEventTime?: string;
-  /** The capacity limit. */
+  blocked?: boolean; /** RFC3339 timestamp when a block event was last emitted for this execution. */
+  blockedEventTime?: string; /** The capacity limit. */
   capacityLimit?: number;
-  closeToOverage?: boolean;
-  /** The id of the consumption report */
-  consumptionReportId?: string;
-  /** The field to determine if a resource should be visible on the client. */
-  customerFacing?: boolean;
-  /** Contains a list of resources that are blocked when quota for this is reached. */
-  enforcement?: Enforcement[];
-  /** The global usage. */
-  globalUsage?: number;
-  /** The guardrail limit. */
-  guardrailLimit?: number;
-  /** The local usage. */
+  closeToOverage?: boolean; /** The id of the consumption report */
+  consumptionReportId?: string; /** The field to determine if a resource should be visible on the client. */
+  customerFacing?: boolean; /** Contains a list of resources that are blocked when quota for this is reached. */
+  enforcement?: Enforcement[]; /** The global usage. */
+  globalUsage?: number; /** The guardrail limit. */
+  guardrailLimit?: number; /** The local usage. */
   localUsage?: number;
-  overage?: boolean;
-  /** RFC3339 timestamp when a overage event was last emitted for this execution. */
-  overageEventTime?: string;
-  /** The end of the associated period. */
-  periodEnd?: string;
-  /** The start of the associated period. */
+  overage?: boolean; /** RFC3339 timestamp when a overage event was last emitted for this execution. */
+  overageEventTime?: string; /** The end of the associated period. */
+  periodEnd?: string; /** The start of the associated period. */
   periodStart?: string;
-  periodType?: "day" | "month" | "year" | "" | "fixed" | "minute";
-  /** The resource action. */
-  resourceAction?: "report.generated" | "reload" | "scheduledReload" | "executed" | "aggregation" | "import" | "updated" | "deployed" | "3rd_party_executed" | "standard_executed";
-  /** The resource id. */
-  resourceId?: string;
-  /** The resource type. */
+  periodType?: "day" | "month" | "year" | "" | "fixed" | "minute"; /** The resource action. */
+  resourceAction?: "report.generated" | "reload" | "scheduledReload" | "executed" | "aggregation" | "import" | "updated" | "deployed" | "3rd_party_executed" | "standard_executed"; /** The resource id. */
+  resourceId?: string; /** The resource type. */
   resourceType?: "app" | "automations" | "space" | "data.volume.consumption";
-  scope?: ("user" | "tenant" | "resourceId" | "resourceType" | "resourceAction")[];
-  /** The map to the resource scope. */
+  scope?: ("user" | "tenant" | "resourceId" | "resourceType" | "resourceAction")[]; /** The map to the resource scope. */
   scopeMapping?: string;
-  segments?: Record<string, unknown>[];
-  /** The resource task description. */
-  taskDescription?: string;
-  /** The resource task name. */
-  taskName?: string;
-  /** The tenant id. */
-  tenantId?: string;
-  /** Unit of measurement for the resource consumption */
-  unit?: string;
-  /** The RFC3339 timestamp when the resource was updated. */
-  updateTime?: string;
-  /** The user id. */
+  segments?: Record<string, unknown>[]; /** The resource task description. */
+  taskDescription?: string; /** The resource task name. */
+  taskName?: string; /** The tenant id. */
+  tenantId?: string; /** Unit of measurement for the resource consumption */
+  unit?: string; /** The RFC3339 timestamp when the resource was updated. */
+  updateTime?: string; /** The user id. */
   userId?: string;
 };
 type ExecutionsByTenantList = StandardListResponseProps & {
@@ -83,16 +60,12 @@ type ExecutionsByTenantList = StandardListResponseProps & {
 };
 type ListLinks = {
   next?: Page;
-  prev?: Page;
-  /** Object with Href to a particular element or set of elements */
+  prev?: Page; /** Object with Href to a particular element or set of elements */
   self?: Self;
 };
 type Page = {
-  /** URL to particular set of elements */
-  href?: string;
-  /** Page unique token */
-  token?: string;
-  /** Page type, can be next or prev */
+  /** URL to particular set of elements */href?: string; /** Page unique token */
+  token?: string; /** Page type, can be next or prev */
   type?: "prev" | "next";
 };
 /**
@@ -102,22 +75,16 @@ type Self = {
   href?: string;
 };
 type SingleErrorResponse = {
-  /** Error code specific to usage-tracker. */
-  readonly code?: string;
-  /** Error cause. */
-  readonly detail?: string;
-  /** meta properties for an error. */
-  meta?: unknown;
-  /** Error title. */
+  /** Error code specific to usage-tracker. */readonly code?: string; /** Error cause. */
+  readonly detail?: string; /** meta properties for an error. */
+  meta?: unknown; /** Error title. */
   readonly title?: string;
 };
 /**
  * properties that should be added to every list response
  */
 type StandardListResponseProps = {
-  /** count of entries on the currently shown page */
-  currentPageCount: number;
-  /** total count of entries in the collection as a whole */
+  /** count of entries on the currently shown page */currentPageCount: number; /** total count of entries in the collection as a whole */
   totalCount: number;
 };
 /**
@@ -135,14 +102,10 @@ declare function getConsumptionExecutions(query: {
    * The following fields are supported: `scope`, `resourcetype`, `resourceaction`, `resourceid`, `capacitylimit`,
    * `localusage`, `globalusage`, `overage`, `blocked`, `periodstart`, `periodend`, `consumptionreportid`, `blockedeventtime`,
    * `overageeventtime`, `taskname`, `taskdescription`, `userid`, `tenantid`, `customerfacing`, `actiontoblock` */
-  filter?: string;
-  /** Limit the returned result set */
-  limit?: number;
-  /** Offset for pagination - how many elements to skip */
-  offset?: number;
-  /** The cursor to the page of data. */
-  page?: string;
-  /** Specifies which periods to include regardless of the period type, start and end specified */
+  filter?: string; /** Limit the returned result set */
+  limit?: number; /** Offset for pagination - how many elements to skip */
+  offset?: number; /** The cursor to the page of data. */
+  page?: string; /** Specifies which periods to include regardless of the period type, start and end specified */
   periodsToInclude?: ("current" | "previous")[];
   sort?: ("periodstart" | "-periodstart" | "+periodstart" | "periodend" | "-periodend" | "+periodend")[];
 }, options?: ApiCallOptions): Promise<GetConsumptionExecutionsHttpResponse>;

@@ -1,5 +1,5 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/notes.d.ts
 /**
@@ -7,11 +7,8 @@ import "./chunks/invoke-fetch-C1Z0RJYU.js";
  */
 type ConfigReasonCode = "deployment" | "toggle" | "license";
 type Error = {
-  /** Error code specific to notes broker service. */
-  readonly code?: string;
-  /** Error cause. */
-  readonly detail?: string;
-  /** Error title. */
+  /** Error code specific to notes broker service. */readonly code?: string; /** Error cause. */
+  readonly detail?: string; /** Error title. */
   readonly title?: string;
 };
 /**
@@ -27,24 +24,18 @@ type Error = {
  * }
  */
 type Errors = {
-  errors?: Error[];
-  /** An optional traceId */
+  errors?: Error[]; /** An optional traceId */
   traceId?: string;
 };
 type NoteSettingsPutPayload = {
-  /** pass 'true' to enable the note toggle for the tenant, 'false' to disable the toggle (other values are ignore). */
-  toggledOn?: boolean;
+  /** pass 'true' to enable the note toggle for the tenant, 'false' to disable the toggle (other values are ignore). */toggledOn?: boolean;
 };
 type NoteSettingsPutResponse = {
-  /** 'true' if the note feature is enabled for this tenant and user otherwise 'false'. */
-  toggleOn?: boolean;
+  /** 'true' if the note feature is enabled for this tenant and user otherwise 'false'. */toggleOn?: boolean;
 };
 type NotesUserSettings = {
-  /** 'true' if the note feature is enabled for this tenant and user otherwise 'false'. */
-  available: boolean;
-  /** The timestamp for the last time this users notes settings were fetched from downstream services. */
-  lastFetch?: string;
-  /** The possible states for the status of notes configuration GET or POST operation */
+  /** 'true' if the note feature is enabled for this tenant and user otherwise 'false'. */available: boolean; /** The timestamp for the last time this users notes settings were fetched from downstream services. */
+  lastFetch?: string; /** The possible states for the status of notes configuration GET or POST operation */
   reason?: ConfigReasonCode;
 };
 /**

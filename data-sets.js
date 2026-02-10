@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/data-sets.ts
 /**
@@ -116,7 +116,6 @@ const dataSetsExport = {
 	getDataSetProfiles,
 	clearCache
 };
-var data_sets_default = dataSetsExport;
 
 //#endregion
-export { clearCache, createDataSet, data_sets_default as default, deleteDataSets, getDataSet, getDataSetProfiles, patchDataSet, updateDataSet };
+export { clearCache, createDataSet, dataSetsExport as default, deleteDataSets, getDataSet, getDataSetProfiles, patchDataSet, updateDataSet };

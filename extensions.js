@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/extensions.ts
 /**
@@ -125,7 +125,6 @@ const extensionsExport = {
 	downloadFileFromExtension,
 	clearCache
 };
-var extensions_default = extensionsExport;
 
 //#endregion
-export { clearCache, extensions_default as default, deleteExtension, downloadExtension, downloadFileFromExtension, getExtension, getExtensions, patchExtension, uploadExtension };
+export { clearCache, extensionsExport as default, deleteExtension, downloadExtension, downloadFileFromExtension, getExtension, getExtensions, patchExtension, uploadExtension };

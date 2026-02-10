@@ -1,5 +1,5 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/direct-access-agents.d.ts
 type CancelBenchmarkResponse = {
@@ -62,9 +62,7 @@ type ErrorResponse = {
   traceId?: string;
 };
 type FileConnectorAllowedPath = {
-  /** The Path property in the File connector allowed paths file. */
-  path: string;
-  /** The Spaces property in the Odbc custom type mappings file. */
+  /** The Path property in the File connector allowed paths file. */path: string; /** The Spaces property in the Odbc custom type mappings file. */
   spaces?: string[];
 };
 type FileConnectorAllowedPathsResponse = {
@@ -72,40 +70,26 @@ type FileConnectorAllowedPathsResponse = {
   result?: FileConnectorAllowedPath[];
 };
 type GetBenchmarkStatusResponse = {
-  /** The ISO 8601 formatted timestamp when the benchmark task completed or was cancelled */
-  benchmarkEndTime?: string;
-  /** The benchmark ID */
-  benchmarkId?: string;
-  /** The ISO 8601 formatted timestamp when the benchmark task started execution */
+  /** The ISO 8601 formatted timestamp when the benchmark task completed or was cancelled */benchmarkEndTime?: string; /** The benchmark ID */
+  benchmarkId?: string; /** The ISO 8601 formatted timestamp when the benchmark task started execution */
   benchmarkStartTime?: string;
-  results?: GetBenchmarkStatusResults;
-  /** The benchmark status */
-  status?: string;
-  /** Additional details about the benchmark status */
-  statusMessage?: string;
-  /** The total bytes requested to be transferred during the benchmark */
+  results?: GetBenchmarkStatusResults; /** The benchmark status */
+  status?: string; /** Additional details about the benchmark status */
+  statusMessage?: string; /** The total bytes requested to be transferred during the benchmark */
   totalBytesRequested?: number;
 };
 type GetBenchmarkStatusResults = {
-  /** The ISO 8601 formatted timestamp when data transmission completed */
-  dataTransmissionEndTime?: string;
-  /** The ISO 8601 formatted timestamp when data transmission start */
-  dataTransmissionStartTime?: string;
-  /** The latency in ms measured during data transmission */
-  latency?: number;
-  /** The data throughput in KB/s measured during data transmission */
-  throughput?: number;
-  /** The total number of bytes successfully transferred during data transmission */
+  /** The ISO 8601 formatted timestamp when data transmission completed */dataTransmissionEndTime?: string; /** The ISO 8601 formatted timestamp when data transmission start */
+  dataTransmissionStartTime?: string; /** The latency in ms measured during data transmission */
+  latency?: number; /** The data throughput in KB/s measured during data transmission */
+  throughput?: number; /** The total number of bytes successfully transferred during data transmission */
   totalBytesTransferred?: number;
 };
 type LinkResponseObject = {
-  /** The URL to the related resource */
-  href?: string;
+  /** The URL to the related resource */href?: string;
 };
 type MetricsCollectorConnectorConfigurationApiResponse = {
-  /** Indicates whether metrics collection is enabled for this connector. */
-  metricsCollectionEnabled: boolean;
-  /** Frequency in seconds at which metrics are collected from this connector. */
+  /** Indicates whether metrics collection is enabled for this connector. */metricsCollectionEnabled: boolean; /** Frequency in seconds at which metrics are collected from this connector. */
   scrapeIntervalSeconds: number;
 };
 type MetricsCollectorConnectorConfigurationsApiResponse = {
@@ -119,22 +103,16 @@ type MetricsCollectorConnectorConfigurationsApiResponse = {
   systemMetrics?: MetricsCollectorConnectorConfigurationApiResponse;
 };
 type MetricsCollectorIndividualConnectorConfigurationRequest = {
-  /** Indicates whether metrics collection is enabled for this connector. */
-  metricsCollectionEnabled: boolean;
-  /** Frequency in seconds at which metrics are collected from this connector. */
+  /** Indicates whether metrics collection is enabled for this connector. */metricsCollectionEnabled: boolean; /** Frequency in seconds at which metrics are collected from this connector. */
   scrapeIntervalSeconds: number;
 };
 type MetricsCollectorSettings = {
   /** The base interval in seconds for the metrics collection loop.
    * This defines how frequently the collector checks whether to scrape each connector, not the interval at which each connector is scraped. Must be equal to or less than the lowest individual connector scrape interval. */
-  baseScrapeIntervalSeconds: number;
-  /** The interval in minutes the metrics collector checks for and deletes old data. */
-  dataRetentionCheckIntervalMinutes: number;
-  /** Indicates whether the metrics collector is enabled. */
-  enabled: boolean;
-  /** The number of days to retain local data. */
-  localDataRetentionDays: number;
-  /** The file location for the local metrics database. If not specified, defaults to `C:\ProgramData\Qlik\Gateway\tmp`. */
+  baseScrapeIntervalSeconds: number; /** The interval in minutes the metrics collector checks for and deletes old data. */
+  dataRetentionCheckIntervalMinutes: number; /** Indicates whether the metrics collector is enabled. */
+  enabled: boolean; /** The number of days to retain local data. */
+  localDataRetentionDays: number; /** The file location for the local metrics database. If not specified, defaults to `C:\ProgramData\Qlik\Gateway\tmp`. */
   localDatabaseFileLocation?: string;
   /** The port number that the metrics collector API will run on.
    * This must match the port that the SYSTEM connector runs on to enable network metrics collection. */
@@ -149,15 +127,10 @@ type MetricsCollectorSettingsApiResponseConnectorConfigurationResponse = {
   result?: MetricsCollectorSettingsApiResponse;
 };
 type OdbcCustomDataType = {
-  /** The IsBit property in the ODBC custom data type mapping file. */
-  bit?: boolean;
-  /** The Identifier property in the ODBC custom data type mapping file. */
-  id: string;
-  /** The NativeDataType property in the ODBC custom data type mapping file. */
-  nativeDataType: string;
-  /** The QlikDataType property in the ODBC custom data type mapping file. */
-  qlikDataType: string;
-  /** The Size property in the ODBC custom data type mapping file. */
+  /** The IsBit property in the ODBC custom data type mapping file. */bit?: boolean; /** The Identifier property in the ODBC custom data type mapping file. */
+  id: string; /** The NativeDataType property in the ODBC custom data type mapping file. */
+  nativeDataType: string; /** The QlikDataType property in the ODBC custom data type mapping file. */
+  qlikDataType: string; /** The Size property in the ODBC custom data type mapping file. */
   size?: number;
 };
 type OdbcCustomDataTypeResponse = {
@@ -208,14 +181,10 @@ type UpdateMetricsCollectorConnectorConfigurationsRequest = {
 type UpdateMetricsCollectorSettings = {
   /** The base interval in seconds for the metrics collection loop.
    * This defines how frequently the collector checks whether to scrape each connector, not the interval at which each connector is scraped. Must be equal to or less than the lowest individual connector scrape interval. */
-  baseScrapeIntervalSeconds: number;
-  /** The interval in minutes the metrics collector checks for and deletes old data. */
-  dataRetentionCheckIntervalMinutes: number;
-  /** Indicates whether the metrics collector is enabled. */
-  enabled: boolean;
-  /** The number of days to retain local data. */
-  localDataRetentionDays: number;
-  /** The file location for the local metrics database. If not specified, defaults to `C:\ProgramData\Qlik\Gateway\tmp`. */
+  baseScrapeIntervalSeconds: number; /** The interval in minutes the metrics collector checks for and deletes old data. */
+  dataRetentionCheckIntervalMinutes: number; /** Indicates whether the metrics collector is enabled. */
+  enabled: boolean; /** The number of days to retain local data. */
+  localDataRetentionDays: number; /** The file location for the local metrics database. If not specified, defaults to `C:\ProgramData\Qlik\Gateway\tmp`. */
   localDatabaseFileLocation: string;
   /** The port number that the metrics collector API will run on.
    * This must match the port that the SYSTEM connector runs on to enable network metrics collection. */
@@ -254,9 +223,7 @@ type RestartDirectAccessAgentHttpError = {
  * @throws CreateDirectAccessAgentBenchmarkHttpError
  */
 declare function createDirectAccessAgentBenchmark(agentId: string, query: {
-  /** Forces the benchmark to start regardless of the state of the agent. Does not override QCS resource limits. Use with caution. */
-  force?: boolean;
-  /** The volume of data in GB to transfer during the throughput measurement part of the benchmark. */
+  /** Forces the benchmark to start regardless of the state of the agent. Does not override QCS resource limits. Use with caution. */force?: boolean; /** The volume of data in GB to transfer during the throughput measurement part of the benchmark. */
   gigaBytesToTransfer?: number;
 }, options?: ApiCallOptions): Promise<CreateDirectAccessAgentBenchmarkHttpResponse>;
 type CreateDirectAccessAgentBenchmarkHttpResponse = {
@@ -313,8 +280,7 @@ type CreateDirectAccessAgentBenchmarkCancelHttpError = {
  * @throws GetDirectAccessAgentConfigurationHttpError
  */
 declare function getDirectAccessAgentConfiguration(agentId: string, query: {
-  /** Individual properties within the agent configuration */
-  queryProperties?: string[];
+  /** Individual properties within the agent configuration */queryProperties?: string[];
 }, options?: ApiCallOptions): Promise<GetDirectAccessAgentConfigurationHttpResponse>;
 type GetDirectAccessAgentConfigurationHttpResponse = {
   data: ConfigurationResponse;
