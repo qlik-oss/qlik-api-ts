@@ -3,6 +3,8 @@ import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi
 
 //#region src/public/rest/data-qualities.ts
 /**
+* @deprecated
+*
 * Triggers the computation of data quality.
 *
 * @param body an object with the body content
@@ -18,6 +20,8 @@ async function triggerDataQualitiesComputation(body, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Returns the execution status of a data quality computation.
 * @example
 * getDataQualitiesComputation(
@@ -36,6 +40,8 @@ async function getDataQualitiesComputation(computationId, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Returns the global data results for a dataset, including counts of total, valid, invalid, and empty sample cells.
 *
 * @param query an object with query parameters

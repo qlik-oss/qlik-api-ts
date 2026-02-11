@@ -428,9 +428,9 @@ async function updateAppOwner(appId, body, options) {
 	});
 }
 /**
+* Removes the app size override for an app.
 *
-*
-* @param appId
+* @param appId Identifier of the app
 * @throws DeleteAppPlacementHttpError
 */
 async function deleteAppPlacement(appId, options) {
@@ -442,9 +442,9 @@ async function deleteAppPlacement(appId, options) {
 	});
 }
 /**
+* Retrieves the app size override for an app.
 *
-*
-* @param appId
+* @param appId Identifier of the app
 * @throws GetAppPlacementHttpError
 */
 async function getAppPlacement(appId, options) {
@@ -456,9 +456,9 @@ async function getAppPlacement(appId, options) {
 	});
 }
 /**
+* Sets the app size override for an app.
 *
-*
-* @param appId
+* @param appId Identifier of the app
 * @param body an object with the body content
 * @throws ReplaceAppPlacementHttpError
 */

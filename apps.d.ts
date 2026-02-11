@@ -157,6 +157,9 @@ type DataModelMetadata = {
   usage?: UsageEnum;
 };
 type EngineGBSize = "0" | "40" | "60" | "80" | "120" | "160" | "200";
+/**
+ * Engine size override for app placement on non reload engines.
+ */
 type EngineSize = {
   minEngineSize?: EngineGBSize;
 };
@@ -1634,9 +1637,9 @@ type UpdateAppOwnerHttpError = {
   status: 403 | 404;
 };
 /**
+ * Removes the app size override for an app.
  *
- *
- * @param appId
+ * @param appId Identifier of the app
  * @throws DeleteAppPlacementHttpError
  */
 declare function deleteAppPlacement(appId: string, options?: ApiCallOptions): Promise<DeleteAppPlacementHttpResponse>;
@@ -1651,9 +1654,9 @@ type DeleteAppPlacementHttpError = {
   status: number;
 };
 /**
+ * Retrieves the app size override for an app.
  *
- *
- * @param appId
+ * @param appId Identifier of the app
  * @throws GetAppPlacementHttpError
  */
 declare function getAppPlacement(appId: string, options?: ApiCallOptions): Promise<GetAppPlacementHttpResponse>;
@@ -1668,9 +1671,9 @@ type GetAppPlacementHttpError = {
   status: number;
 };
 /**
+ * Sets the app size override for an app.
  *
- *
- * @param appId
+ * @param appId Identifier of the app
  * @param body an object with the body content
  * @throws ReplaceAppPlacementHttpError
  */
@@ -2333,23 +2336,23 @@ type AppsAPI = {
    */
   updateAppOwner: typeof updateAppOwner;
   /**
+   * Removes the app size override for an app.
    *
-   *
-   * @param appId
+   * @param appId Identifier of the app
    * @throws DeleteAppPlacementHttpError
    */
   deleteAppPlacement: typeof deleteAppPlacement;
   /**
+   * Retrieves the app size override for an app.
    *
-   *
-   * @param appId
+   * @param appId Identifier of the app
    * @throws GetAppPlacementHttpError
    */
   getAppPlacement: typeof getAppPlacement;
   /**
+   * Sets the app size override for an app.
    *
-   *
-   * @param appId
+   * @param appId Identifier of the app
    * @param body an object with the body content
    * @throws ReplaceAppPlacementHttpError
    */
