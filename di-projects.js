@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/di-projects.ts
 /**
@@ -202,6 +202,27 @@ async function prepareDiProjectDiTask(projectId, dataTaskId, body, options) {
 	});
 }
 /**
+* Recreates datasets in the specified data task.
+*
+* @param projectId Identifier of the data project.
+* @param dataTaskId Identifier of the data task.
+* @param body an object with the body content
+* @throws RecreateDatasetsDiProjectDiTaskHttpError
+*/
+async function recreateDatasetsDiProjectDiTask(projectId, dataTaskId, body, options) {
+	return invokeFetch("di-projects", {
+		method: "post",
+		pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks/{dataTaskId}/actions/recreate-datasets",
+		pathVariables: {
+			projectId,
+			dataTaskId
+		},
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
 * Registers a request to reload the datasets associated with the specified data task. The reload does not occur immediately; it will take effect on the next scheduled or manual run of the task.
 *
 * @param projectId Identifier of the data project.
@@ -358,6 +379,7 @@ const diProjectsExport = {
 	getDiProjectDiTasks,
 	getDiProjectDiTask,
 	prepareDiProjectDiTask,
+	recreateDatasetsDiProjectDiTask,
 	requestReloadDiProjectDiTask,
 	validateDiProjectDiTask,
 	startDiProjectDiTaskRuntimeWithBody,
@@ -367,7 +389,6 @@ const diProjectsExport = {
 	getDiProjectDiTaskRuntimeStateDatasets,
 	clearCache
 };
-var di_projects_default = diProjectsExport;
 
 //#endregion
-export { clearCache, createDiProject, di_projects_default as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, requestReloadDiProjectDiTask, setDiProjectExportVariables, startDiProjectDiTaskRuntime, startDiProjectDiTaskRuntimeWithBody, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };
+export { clearCache, createDiProject, diProjectsExport as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, recreateDatasetsDiProjectDiTask, requestReloadDiProjectDiTask, setDiProjectExportVariables, startDiProjectDiTaskRuntime, startDiProjectDiTaskRuntimeWithBody, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };

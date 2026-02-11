@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/direct-access-agents.ts
 /**
@@ -333,7 +333,6 @@ const directAccessAgentsExport = {
 	setDirectAccessAgentToolsMetricsCollectorConfiguration,
 	clearCache
 };
-var direct_access_agents_default = directAccessAgentsExport;
 
 //#endregion
-export { clearCache, createDirectAccessAgentBenchmark, createDirectAccessAgentBenchmarkCancel, direct_access_agents_default as default, getDirectAccessAgentBenchmark, getDirectAccessAgentConfiguration, getDirectAccessAgentConnectorFile, getDirectAccessAgentConnectorFiles, getDirectAccessAgentConnectorFilesWithoutQuery, getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths, getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings, getDirectAccessAgentToolsMetricsCollectorConfiguration, patchDirectAccessAgentConfiguration, putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths, putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings, restartDirectAccessAgent, setDirectAccessAgentToolsMetricsCollectorConfiguration, updateDirectAccessAgentConnectorFile, updateDirectAccessAgentConnectorFileWithoutQuery };
+export { clearCache, createDirectAccessAgentBenchmark, createDirectAccessAgentBenchmarkCancel, directAccessAgentsExport as default, getDirectAccessAgentBenchmark, getDirectAccessAgentConfiguration, getDirectAccessAgentConnectorFile, getDirectAccessAgentConnectorFiles, getDirectAccessAgentConnectorFilesWithoutQuery, getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths, getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings, getDirectAccessAgentToolsMetricsCollectorConfiguration, patchDirectAccessAgentConfiguration, putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths, putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings, restartDirectAccessAgent, setDirectAccessAgentToolsMetricsCollectorConfiguration, updateDirectAccessAgentConnectorFile, updateDirectAccessAgentConnectorFileWithoutQuery };

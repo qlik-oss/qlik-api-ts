@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/reloads.ts
 /**
@@ -82,7 +82,6 @@ const reloadsExport = {
 	cancelReload,
 	clearCache
 };
-var reloads_default = reloadsExport;
 
 //#endregion
-export { cancelReload, clearCache, reloads_default as default, getReload, getReloads, queueReload };
+export { cancelReload, clearCache, reloadsExport as default, getReload, getReloads, queueReload };

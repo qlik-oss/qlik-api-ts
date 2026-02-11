@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/temp-contents.ts
 /**
@@ -64,7 +64,6 @@ const tempContentsExport = {
 	getTempFileDetails,
 	clearCache
 };
-var temp_contents_default = tempContentsExport;
 
 //#endregion
-export { clearCache, temp_contents_default as default, downloadTempFile, getTempFileDetails, uploadTempFile };
+export { clearCache, tempContentsExport as default, downloadTempFile, getTempFileDetails, uploadTempFile };

@@ -1,87 +1,56 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions, DownloadableBlob } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/extensions.d.ts
 /**
  * Object containing meta data regarding the bundle the extension belongs to. If it does not belong to a bundle, this object is not defined.
  */
 type BundleMeta = {
-  /** Description of the bundle. */
-  description?: string;
-  /** Unique identifier of the bundle. */
-  id?: string;
-  /** Name of the bundle. */
+  /** Description of the bundle. */description?: string; /** Unique identifier of the bundle. */
+  id?: string; /** Name of the bundle. */
   name?: string;
 };
 /**
  * An error object.
  */
 type Error = {
-  /** Object containing meta data regarding an error. It does not necessarily contain all the properties. */
-  meta?: Meta;
-  /** Optional JSON patch object pointing to an invalid property. */
-  source?: unknown;
-  /** The HTTP status code. */
-  status?: number;
-  /** Title of the HTTP status code. */
-  title: string;
-  /** The active traceId. */
+  /** Object containing meta data regarding an error. It does not necessarily contain all the properties. */meta?: Meta; /** Optional JSON patch object pointing to an invalid property. */
+  source?: unknown; /** The HTTP status code. */
+  status?: number; /** Title of the HTTP status code. */
+  title: string; /** The active traceId. */
   traceId?: string;
 };
 /**
  * The extension model.
  */
 type Extension = {
-  /** Author of the extension. */
-  author?: string;
-  /** Object containing meta data regarding the bundle the extension belongs to. If it does not belong to a bundle, this object is not defined. */
-  bundle?: BundleMeta;
-  /** If the extension is part of an extension bundle. */
-  bundled?: boolean;
-  /** Checksum of the extension contents. */
+  /** Author of the extension. */author?: string; /** Object containing meta data regarding the bundle the extension belongs to. If it does not belong to a bundle, this object is not defined. */
+  bundle?: BundleMeta; /** If the extension is part of an extension bundle. */
+  bundled?: boolean; /** Checksum of the extension contents. */
   checksum?: string;
-  readonly createdAt?: string;
-  /** Map of dependencies describing version of the component it requires. */
-  dependencies?: unknown;
-  /** A date noting when the extension was deprecated. */
-  deprecated?: string;
-  /** Description of the extension. */
-  description?: string;
-  /** The file that was uploaded with the extension. */
-  file?: unknown;
-  /** Home page of the extension. */
-  homepage?: string;
-  /** Icon to show in the client. */
+  readonly createdAt?: string; /** Map of dependencies describing version of the component it requires. */
+  dependencies?: unknown; /** A date noting when the extension was deprecated. */
+  deprecated?: string; /** Description of the extension. */
+  description?: string; /** The file that was uploaded with the extension. */
+  file?: unknown; /** Home page of the extension. */
+  homepage?: string; /** Icon to show in the client. */
   icon?: string;
-  readonly id?: string;
-  /** Keywords for the extension. */
-  keywords?: string;
-  /** Under which license this extension is published. */
-  license?: string;
-  /** Relative path to the extension's entry file, defaults to `filename` from the qext file. */
-  loadpath?: string;
-  /** The display name of this extension. */
-  name?: string;
-  /** Path to an image that enables users to preview the extension. */
-  preview?: string;
-  /** The name of the qext file that was uploaded with this extension. */
-  qextFilename?: string;
-  /** The version from the qext file that was uploaded with this extension. */
-  qextVersion?: string;
-  /** Link to the extension source code. */
-  repository?: string;
-  /** If the extension is a supernova extension or not. */
-  supernova?: boolean;
-  /** Supplier of the extension. */
-  supplier?: string;
-  /** List of tags. */
+  readonly id?: string; /** Keywords for the extension. */
+  keywords?: string; /** Under which license this extension is published. */
+  license?: string; /** Relative path to the extension's entry file, defaults to `filename` from the qext file. */
+  loadpath?: string; /** The display name of this extension. */
+  name?: string; /** Path to an image that enables users to preview the extension. */
+  preview?: string; /** The name of the qext file that was uploaded with this extension. */
+  qextFilename?: string; /** The version from the qext file that was uploaded with this extension. */
+  qextVersion?: string; /** Link to the extension source code. */
+  repository?: string; /** If the extension is a supernova extension or not. */
+  supernova?: boolean; /** Supplier of the extension. */
+  supplier?: string; /** List of tags. */
   tags?: string[];
-  readonly tenantId?: string;
-  /** The type of this extension (visualization, etc.). */
+  readonly tenantId?: string; /** The type of this extension (visualization, etc.). */
   type?: string;
   readonly updateAt?: string;
-  readonly userId?: string;
-  /** Version of the extension. */
+  readonly userId?: string; /** Version of the extension. */
   version?: string;
 };
 type Extensions = {
@@ -91,11 +60,8 @@ type Extensions = {
  * Object containing meta data regarding an error. It does not necessarily contain all the properties.
  */
 type Meta = {
-  /** A more detailed message explaining the error. */
-  message?: string;
-  /** Name of the resource related to the error. If there is a conflict, it is the name of the model attempting to be created. */
-  resourceName?: string;
-  /** Full stack trace of the error that was raised. */
+  /** A more detailed message explaining the error. */message?: string; /** Name of the resource related to the error. If there is a conflict, it is the name of the model attempting to be created. */
+  resourceName?: string; /** Full stack trace of the error that was raised. */
   stack?: string;
 };
 /**
@@ -121,9 +87,7 @@ type GetExtensionsHttpError = {
  * @throws UploadExtensionHttpError
  */
 declare function uploadExtension(body: {
-  /** The extension model. */
-  data?: Extension;
-  /** Extension archive. */
+  /** The extension model. */data?: Extension; /** Extension archive. */
   file?: BodyInit;
 }, options?: ApiCallOptions): Promise<UploadExtensionHttpResponse>;
 type UploadExtensionHttpResponse = {
@@ -178,9 +142,7 @@ type GetExtensionHttpError = {
  * @throws PatchExtensionHttpError
  */
 declare function patchExtension(id: string, body: {
-  /** The extension model. */
-  data?: Extension;
-  /** Extension archive. */
+  /** The extension model. */data?: Extension; /** Extension archive. */
   file?: BodyInit;
 }, options?: ApiCallOptions): Promise<PatchExtensionHttpResponse>;
 type PatchExtensionHttpResponse = {
@@ -201,7 +163,7 @@ type PatchExtensionHttpError = {
  */
 declare function downloadExtension(id: string, options?: ApiCallOptions): Promise<DownloadExtensionHttpResponse>;
 type DownloadExtensionHttpResponse = {
-  data: void;
+  data: DownloadableBlob;
   headers: Headers;
   status: 200;
 };

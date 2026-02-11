@@ -1,18 +1,18 @@
-import { t as __exportAll } from "../chunks/chunk-D3vHIbds.js";
-import "../chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-CckTK7bh.js";
+import { t as __exportAll } from "../chunks/chunk-BdHzlgOL.js";
+import "../chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/analytics/change-stores.ts
 var change_stores_exports = /* @__PURE__ */ __exportAll({
 	clearCache: () => clearCache,
-	default: () => change_stores_default,
+	default: () => changeStoresExport,
 	getChangeStore: () => getChangeStore,
 	getChangeStoreChanges: () => getChangeStoreChanges,
 	getChangeStoreChangesTabularViews: () => getChangeStoreChangesTabularViews,
 	getChangeStores: () => getChangeStores
 });
 /**
-* Get a list of change-stores.
+* Returns a list of change-stores, accessible to the user.
 * @example
 * getChangeStores(
 *   {
@@ -35,7 +35,7 @@ async function getChangeStores(query, options) {
 	});
 }
 /**
-* Get change store by Id.
+* Returns detailed information about a specific change store, such as its configuration and associated charts.
 * @example
 * getChangeStore(
 *   "507f1f77bcf86cd799439011"
@@ -53,7 +53,7 @@ async function getChangeStore(storeId, options) {
 	});
 }
 /**
-* Retrieve changes for the specified change store.
+* Returns a list of changes within the specified change-store.
 * @example
 * getChangeStoreChanges(
 *   "507f1f77bcf86cd799439011",
@@ -78,7 +78,7 @@ async function getChangeStoreChanges(storeId, query, options) {
 	});
 }
 /**
-* Retrieve changes in tabular view.
+* Returns changes in tabular format, showing modified rows with optional expansion to include all columns.
 * @example
 * getChangeStoreChangesTabularViews(
 *   "507f1f77bcf86cd799439011",
@@ -117,7 +117,6 @@ const changeStoresExport = {
 	getChangeStoreChangesTabularViews,
 	clearCache
 };
-var change_stores_default = changeStoresExport;
 
 //#endregion
-export { clearCache, change_stores_default as default, getChangeStore, getChangeStoreChanges, getChangeStoreChangesTabularViews, getChangeStores, change_stores_exports as t };
+export { clearCache, changeStoresExport as default, getChangeStore, getChangeStoreChanges, getChangeStoreChangesTabularViews, getChangeStores, change_stores_exports as t };

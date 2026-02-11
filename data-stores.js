@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/data-stores.ts
 /**
@@ -186,7 +186,6 @@ const dataStoresExport = {
 	updateDataStore,
 	clearCache
 };
-var data_stores_default = dataStoresExport;
 
 //#endregion
-export { clearCache, createDataStore, data_stores_default as default, deleteDataStoreDataAssetDataSets, deleteDataStoreDataAssets, deleteDataStores, getDataStore, getDataStoreDataAssetDataSets, getDataStoreDataAssets, getDataStores, patchDataStore, updateDataStore };
+export { clearCache, createDataStore, dataStoresExport as default, deleteDataStoreDataAssetDataSets, deleteDataStoreDataAssets, deleteDataStores, getDataStore, getDataStoreDataAssetDataSets, getDataStoreDataAssets, getDataStores, patchDataStore, updateDataStore };

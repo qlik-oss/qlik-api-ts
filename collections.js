@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/collections.ts
 /**
@@ -198,7 +198,6 @@ const collectionsExport = {
 	getCollectionItem,
 	clearCache
 };
-var collections_default = collectionsExport;
 
 //#endregion
-export { addCollectionItem, clearCache, createCollection, collections_default as default, deleteCollection, deleteCollectionItem, getCollection, getCollectionItem, getCollectionItems, getCollections, getFavoritesCollection, patchCollection, updateCollection };
+export { addCollectionItem, clearCache, createCollection, collectionsExport as default, deleteCollection, deleteCollectionItem, getCollection, getCollectionItem, getCollectionItems, getCollections, getFavoritesCollection, patchCollection, updateCollection };

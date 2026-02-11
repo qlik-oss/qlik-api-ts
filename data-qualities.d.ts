@@ -1,5 +1,5 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/data-qualities.d.ts
 /**
@@ -24,9 +24,7 @@ type ConnectionIdType = string;
  * }
  */
 type DataQualityComputationRequest = {
-  /** The ID of the connection */
-  connectionId?: ConnectionIdType;
-  /** The ID of the dataset */
+  /** The ID of the connection */connectionId?: ConnectionIdType; /** The ID of the dataset */
   datasetId?: DatasetIdType;
 } & SamplingConfiguration;
 /**
@@ -34,14 +32,12 @@ type DataQualityComputationRequest = {
  */
 type DatasetIdType = string;
 type DatasetQualityGlobalResultsResponse = {
-  /** The ID of the dataset */
-  datasetId: string;
+  /** The ID of the dataset */datasetId: string;
   qualities: QualitiesGlobalResultsResponse[];
 };
 type Error = {
   code?: string;
   detail?: string;
-  status?: string;
   title?: string;
 };
 type ErrorResponse = {
@@ -50,27 +46,19 @@ type ErrorResponse = {
 };
 type ExecutionStatus = "PROFILE_REQUESTED" | "PROFILE_FAILED" | "REQUESTED" | "SUBMITTED" | "SUCCEEDED" | "FAILED";
 type QualitiesGlobalResultsResponse = {
-  /** The ID of the connection */
-  connectionId: string;
+  /** The ID of the connection */connectionId: string;
   quality: QualityGlobalResultsResponse;
 };
 type QualityGlobalResultsResponse = {
-  /** Number of empty sample cells */
-  empty: number;
-  /** Number of invalid sample cells */
-  invalid: number;
-  /** Total number of cells in the sample */
+  /** Number of empty sample cells */empty: number; /** Number of invalid sample cells */
+  invalid: number; /** Total number of cells in the sample */
   total: number;
-  updatedAt: string;
-  /** Number of valid sample cells */
+  updatedAt: string; /** Number of valid sample cells */
   valid: number;
 };
 type SamplingConfiguration = {
-  /** Specifies where the data quality computation takes place. In PUSHDOWN mode, it runs within the Cloud Data Warehouse (e.g., Snowflake, Databricks), whereas in PULLUP mode, it runs in Qlik Cloud. */
-  executionMode?: "PUSHDOWN" | "PULLUP";
-  /** Specifies how the dataset is sampled. ABSOLUTE represents a fixed number of rows, while RELATIVE refers to a percentage of the total dataset rows. */
-  sampleMode?: "ABSOLUTE" | "RELATIVE";
-  /** The actual value of the selected sampling method size (either a fixed number for ABSOLUTE mode or a percentage for RELATIVE mode). */
+  /** Specifies where the data quality computation takes place. In PUSHDOWN mode, it runs within the Cloud Data Warehouse (e.g., Snowflake, Databricks), whereas in PULLUP mode, it runs in Qlik Cloud. */executionMode?: "PUSHDOWN" | "PULLUP"; /** Specifies how the dataset is sampled. ABSOLUTE represents a fixed number of rows, while RELATIVE refers to a percentage of the total dataset rows. */
+  sampleMode?: "ABSOLUTE" | "RELATIVE"; /** The actual value of the selected sampling method size (either a fixed number for ABSOLUTE mode or a percentage for RELATIVE mode). */
   sampleSize?: number;
 };
 /**
@@ -118,9 +106,7 @@ type GetDataQualitiesComputationHttpError = {
  * @throws GetDataQualitiesGlobalResultsHttpError
  */
 declare function getDataQualitiesGlobalResults(query: {
-  /** The connection ID */
-  connectionId?: ConnectionIdType;
-  /** The ID of the dataset */
+  /** The connection ID */connectionId?: ConnectionIdType; /** The ID of the dataset */
   datasetId: DatasetIdType;
 }, options?: ApiCallOptions): Promise<GetDataQualitiesGlobalResultsHttpResponse>;
 type GetDataQualitiesGlobalResultsHttpResponse = {

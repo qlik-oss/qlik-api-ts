@@ -1,5 +1,5 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/items.d.ts
 type CollectionTypes = "private" | "public" | "publicgoverned";
@@ -21,47 +21,33 @@ type ItemsListItemsResponseBody = {
   links: ItemsLinksResponseBody;
 };
 type ItemsSettingsPatch = {
-  /** The operation to be performed. Only "replace" is supported. */
-  op: "replace";
-  /** Field of Settings to be patched (updated). */
-  path: "/usageMetricsEnabled";
-  /** The value to be used within the operations. */
+  /** The operation to be performed. Only "replace" is supported. */op: "replace"; /** Field of Settings to be patched (updated). */
+  path: "/usageMetricsEnabled"; /** The value to be used within the operations. */
   value: boolean;
 }[];
 type ItemsSettingsResponseBody = {
-  /** Decides if the usage metrics will be shown in the hub UI. */
-  usageMetricsEnabled: boolean;
+  /** Decides if the usage metrics will be shown in the hub UI. */usageMetricsEnabled: boolean;
 };
 type ItemsUpdateItemRequestBody = {
   description?: string;
   name?: string;
   resourceAttributes?: unknown;
-  resourceCustomAttributes?: unknown;
-  /** The case-sensitive string used to search for an item by resourceId. If resourceId is provided, then resourceType must be provided. Provide either the resourceId or resourceLink, but not both. */
-  resourceId?: string;
-  /** The case-sensitive string used to search for an item by resourceLink. If resourceLink is provided, then resourceType must be provided. Provide either the resourceId or resourceLink, but not both. */
-  resourceLink?: string;
-  /** Optional field defining the item's subtype, if any. */
-  resourceSubType?: string;
-  /** The case-sensitive string defining the item's type. */
-  resourceType: ItemResourceTypeEnum;
-  /** The RFC3339 datetime when the resource that the item references was last updated. */
-  resourceUpdatedAt?: string;
-  /** The space's unique identifier. */
-  spaceId?: string;
-  /** The item thumbnail's unique identifier. This is optional for internal resources. */
+  resourceCustomAttributes?: unknown; /** The case-sensitive string used to search for an item by resourceId. If resourceId is provided, then resourceType must be provided. Provide either the resourceId or resourceLink, but not both. */
+  resourceId?: string; /** The case-sensitive string used to search for an item by resourceLink. If resourceLink is provided, then resourceType must be provided. Provide either the resourceId or resourceLink, but not both. */
+  resourceLink?: string; /** Optional field defining the item's subtype, if any. */
+  resourceSubType?: string; /** The case-sensitive string defining the item's type. */
+  resourceType: ItemResourceTypeEnum; /** The RFC3339 datetime when the resource that the item references was last updated. */
+  resourceUpdatedAt?: string; /** The space's unique identifier. */
+  spaceId?: string; /** The item thumbnail's unique identifier. This is optional for internal resources. */
   thumbnailId?: string;
 };
 type Link = {
   href?: string;
 };
 type ServiceError = {
-  /** Code is a unique identifier for this error class. */
-  code?: string;
-  /** Detail is a human-readable explanation specific to this occurrence of the problem. */
+  /** Code is a unique identifier for this error class. */code?: string; /** Detail is a human-readable explanation specific to this occurrence of the problem. */
   detail?: string;
-  meta?: Meta;
-  /** Title is the name of this class of errors. */
+  meta?: Meta; /** Title is the name of this class of errors. */
   title?: string;
 };
 type CollectionLinksResponseBody = {
@@ -72,34 +58,24 @@ type CollectionLinksResponseBody = {
  * Collection metadata and computed fields.
  */
 type CollectionMetaResponseBody = {
-  /** Multiple items. */
-  items?: ItemsResultResponseBody;
+  /** Multiple items. */items?: ItemsResultResponseBody;
 };
 /**
  * A collection.
  */
 type CollectionResultResponseBody = {
-  /** The RFC3339 datetime when the collection was created. */
-  createdAt: string;
-  /** The ID of the user who created the collection. This property is only populated if the JWT contains a userId. */
+  /** The RFC3339 datetime when the collection was created. */createdAt: string; /** The ID of the user who created the collection. This property is only populated if the JWT contains a userId. */
   creatorId?: string;
-  description?: string;
-  /** States if a collection has reached its items limit or not */
-  full?: boolean;
-  /** The collection's unique identifier. */
-  id: string;
-  /** The number of items that have been added to the collection that the user has access to. */
+  description?: string; /** States if a collection has reached its items limit or not */
+  full?: boolean; /** The collection's unique identifier. */
+  id: string; /** The number of items that have been added to the collection that the user has access to. */
   itemCount: number;
-  links: CollectionLinksResponseBody;
-  /** Collection metadata and computed fields. */
+  links: CollectionLinksResponseBody; /** Collection metadata and computed fields. */
   meta?: CollectionMetaResponseBody;
-  name: string;
-  /** The ID of the tenant that owns the collection. This property is populated by using JWT. */
+  name: string; /** The ID of the tenant that owns the collection. This property is populated by using JWT. */
   tenantId: string;
-  type: "private" | "public" | "favorite" | "publicgoverned";
-  /** The RFC3339 datetime when the collection was last updated. */
-  updatedAt: string;
-  /** The ID of the user who last updated the collection. This property is only populated if the JWT contains a userId. */
+  type: "private" | "public" | "favorite" | "publicgoverned"; /** The RFC3339 datetime when the collection was last updated. */
+  updatedAt: string; /** The ID of the user who last updated the collection. This property is only populated if the JWT contains a userId. */
   updaterId?: string;
 };
 type CollectionsLinksResponseBody = {
@@ -119,13 +95,9 @@ type ItemLinksResponseBody = {
  * Item metadata and computed fields.
  */
 type ItemMetaResponseBody = {
-  /** The actions that the user can perform on the item. */
-  actions: string[];
-  /** An array of collections that the item is part of. */
-  collections: ItemTagResponseBody[];
-  /** The flag that indicates if item is in the user's favorites collection. */
-  isFavorited: boolean;
-  /** An array of tags that the item is part of. */
+  /** The actions that the user can perform on the item. */actions: string[]; /** An array of collections that the item is part of. */
+  collections: ItemTagResponseBody[]; /** The flag that indicates if item is in the user's favorites collection. */
+  isFavorited: boolean; /** An array of tags that the item is part of. */
   tags: ItemTagResponseBody[];
 };
 /**
@@ -136,82 +108,52 @@ type ItemResourceTypeEnum = "app" | "qlikview" | "qvapp" | "genericlink" | "shar
  * An item.
  */
 type ItemResultResponseBody = {
-  /** The actions that the user can perform on the item. */
-  actions: string[];
-  /** The ID of the collections that the item has been added to. */
-  collectionIds: string[];
-  /** The RFC3339 datetime when the item was created. */
-  createdAt: string;
-  /** The ID of the user who created the item. This is only populated if the JWT contains a userId. */
+  /** The actions that the user can perform on the item. */actions: string[]; /** The ID of the collections that the item has been added to. */
+  collectionIds: string[]; /** The RFC3339 datetime when the item was created. */
+  createdAt: string; /** The ID of the user who created the item. This is only populated if the JWT contains a userId. */
   creatorId?: string;
-  description?: string;
-  /** The item's unique identifier. */
-  id: string;
-  /** The flag that indicates if item is in the user's favorites collection. */
+  description?: string; /** The item's unique identifier. */
+  id: string; /** The flag that indicates if item is in the user's favorites collection. */
   isFavorited: boolean;
   itemViews?: ItemViewsResponseBody;
-  links: ItemLinksResponseBody;
-  /** Item metadata and computed fields. */
+  links: ItemLinksResponseBody; /** Item metadata and computed fields. */
   meta: ItemMetaResponseBody;
-  name: string;
-  /** The ID of the user who owns the item. */
+  name: string; /** The ID of the user who owns the item. */
   ownerId?: string;
-  resourceAttributes: unknown;
-  /** The RFC3339 datetime when the resource that the item references was created. */
+  resourceAttributes: unknown; /** The RFC3339 datetime when the resource that the item references was created. */
   resourceCreatedAt: string;
-  resourceCustomAttributes: unknown;
-  /** The case-sensitive string used to search for an item by resourceId. If resourceId is provided, then resourceType must be provided. Provide either the resourceId or resourceLink, but not both. */
-  resourceId?: string;
-  /** The case-sensitive string used to search for an item by resourceLink. If resourceLink is provided, then resourceType must be provided. Provide either the resourceId or resourceLink, but not both. */
-  resourceLink?: string;
-  /** The RFC3339 datetime when the resource last reload ended. */
-  resourceReloadEndTime?: string;
-  /** If the resource last reload was successful or not. */
+  resourceCustomAttributes: unknown; /** The case-sensitive string used to search for an item by resourceId. If resourceId is provided, then resourceType must be provided. Provide either the resourceId or resourceLink, but not both. */
+  resourceId?: string; /** The case-sensitive string used to search for an item by resourceLink. If resourceLink is provided, then resourceType must be provided. Provide either the resourceId or resourceLink, but not both. */
+  resourceLink?: string; /** The RFC3339 datetime when the resource last reload ended. */
+  resourceReloadEndTime?: string; /** If the resource last reload was successful or not. */
   resourceReloadStatus?: string;
-  resourceSize?: ItemsResourceSizeResponseBody;
-  /** Optional field defining the item's subtype, if any. */
-  resourceSubType?: string;
-  /** The case-sensitive string defining the item's type. */
-  resourceType: ItemResourceTypeEnum;
-  /** The RFC3339 datetime when the resource that the item references was last updated. */
-  resourceUpdatedAt: string;
-  /** The space's unique identifier. */
-  spaceId?: string;
-  /** The ID of the tenant that owns the item. This is populated using the JWT. */
-  tenantId: string;
-  /** The item thumbnail's unique identifier. This is optional for internal resources. */
-  thumbnailId?: string;
-  /** The RFC3339 datetime when the item was last updated. */
-  updatedAt: string;
-  /** ID of the user who last updated the item. This is only populated if the JWT contains a userId. */
+  resourceSize?: ItemsResourceSizeResponseBody; /** Optional field defining the item's subtype, if any. */
+  resourceSubType?: string; /** The case-sensitive string defining the item's type. */
+  resourceType: ItemResourceTypeEnum; /** The RFC3339 datetime when the resource that the item references was last updated. */
+  resourceUpdatedAt: string; /** The space's unique identifier. */
+  spaceId?: string; /** The ID of the tenant that owns the item. This is populated using the JWT. */
+  tenantId: string; /** The item thumbnail's unique identifier. This is optional for internal resources. */
+  thumbnailId?: string; /** The RFC3339 datetime when the item was last updated. */
+  updatedAt: string; /** ID of the user who last updated the item. This is only populated if the JWT contains a userId. */
   updaterId?: string;
 };
 /**
  * Holds basic information about a tag or collection.
  */
 type ItemTagResponseBody = {
-  /** The ID of the tag/collection. */
-  id: string;
-  /** The name of the tag/collection. */
+  /** The ID of the tag/collection. */id: string; /** The name of the tag/collection. */
   name: string;
 };
 type ItemViewsResponseBody = {
-  /** Total number of views the resource got during the last 28 days. */
-  total?: number;
-  /** Trend in views over the last 4 weeks. The trend value is a float number representing a linear regression slope (the x-coefficient) calculated from the weekly unique users views in the preceding 4 weeks. */
-  trend?: number;
-  /** Number of unique users who viewed the resource during the last 28 days. */
-  unique?: number;
-  /** Number of apps this dataset is used in (datasets only). */
+  /** Total number of views the resource got during the last 28 days. */total?: number; /** Trend in views over the last 4 weeks. The trend value is a float number representing a linear regression slope (the x-coefficient) calculated from the weekly unique users views in the preceding 4 weeks. */
+  trend?: number; /** Number of unique users who viewed the resource during the last 28 days. */
+  unique?: number; /** Number of apps this dataset is used in (datasets only). */
   usedBy?: number;
   week?: ItemViewsWeeksResponseBody[];
 };
 type ItemViewsWeeksResponseBody = {
-  /** The RFC3339 datetime representing the start of the referenced week. */
-  start?: string;
-  /** Total number of views the resource got during the referenced week. */
-  total?: number;
-  /** Number of unique users who viewed the resource during the referenced week. */
+  /** The RFC3339 datetime representing the start of the referenced week. */start?: string; /** Total number of views the resource got during the referenced week. */
+  total?: number; /** Number of unique users who viewed the resource during the referenced week. */
   unique?: number;
 };
 type ItemsLinksResponseBody = {
@@ -221,9 +163,7 @@ type ItemsLinksResponseBody = {
   self?: Link;
 };
 type ItemsResourceSizeResponseBody = {
-  /** Size of the app on disk in bytes. */
-  appFile?: number;
-  /** Size of the app in memory in bytes. */
+  /** Size of the app on disk in bytes. */appFile?: number; /** Size of the app in memory in bytes. */
   appMemory?: number;
 };
 /**
@@ -234,13 +174,9 @@ type ItemsResultResponseBody = {
   links: ItemsLinksResponseBody;
 };
 type Meta = {
-  /** Further explanation of the error */
-  explain?: unknown;
-  /** Is the error a server-side fault? */
-  fault?: boolean;
-  /** Is the error temporary? */
-  temporary?: boolean;
-  /** Is the error a timeout? */
+  /** Further explanation of the error */explain?: unknown; /** Is the error a server-side fault? */
+  fault?: boolean; /** Is the error temporary? */
+  temporary?: boolean; /** Is the error a timeout? */
   timeout?: boolean;
 };
 /**
@@ -254,48 +190,28 @@ type SpaceTypeEnum = "shared" | "managed" | "personal" | "data";
  * @throws GetItemsHttpError
  */
 declare function getItems(query: {
-  /** The collection's unique identifier. Used to filter for items with a specific tag (collection type `public`), or collection. */
-  collectionId?: string;
-  /** User's unique identifier. */
-  createdByUserId?: string;
-  /** The item's unique identifier. */
-  id?: string;
-  /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
-  limit?: number;
-  /** The case-insensitive string used to search for a resource by name. */
-  name?: string;
-  /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
-  next?: string;
-  /** If set to true, the user's available actions for each item will not be evaluated meaning the actions-array will be omitted from the response (reduces response time). */
-  noActions?: boolean;
-  /** User's unique identifier. */
-  notCreatedByUserId?: string;
-  /** Owner identifier. */
-  notOwnerId?: string;
-  /** Owner identifier. */
-  ownerId?: string;
-  /** The cursor to the previous page of resources. Provide either the next or prev cursor, but not both. */
-  prev?: string;
-  /** The case-insensitive string used to search for a resource by name or description. */
-  query?: string;
-  /** The case-sensitive string used to search for an item by resourceId. If resourceId is provided, then resourceType must be provided. Provide either the resourceId or resourceLink, but not both. */
-  resourceId?: string;
-  /** The case-sensitive strings used to search for an item by resourceIds. The maximum number of resourceIds it supports is 100. If resourceIds is provided, then resourceType must be provided. For example '?resourceIds=appId1,appId2' */
-  resourceIds?: string;
-  /** The case-sensitive string used to search for an item by resourceLink. If resourceLink is provided, then resourceType must be provided. Provide either the resourceId or resourceLink, but not both. */
-  resourceLink?: string;
-  /** the case-sensitive string used to filter items by resourceSubType(s). For example '?resourceSubType=chart-monitoring,qix-df,qvd'. Will return a 400 error if used in conjuction with the square bracket syntax for resourceSubType filtering in the 'resourceType' query parameter. */
-  resourceSubType?: string;
-  /** The case-sensitive string used to filter items by resourceType(s). For example '?resourceType=app,qvapp'. Additionally, a optional resourceSubType filter can be added to each resourceType. For example '?resourceType=app[qvd,chart-monitoring],qvapp'. An trailing comma can be used to include the empty resourceSubType, e.g. '?resourceType=app[qvd,chart-monitoring,]', or, to include only empty resourceSubTypes, '?resourceType=app[]' This syntax replaces the 'resourceSubType' query param, and using both in the same query will result in a 400 error. */
+  /** The collection's unique identifier. Used to filter for items with a specific tag (collection type `public`), or collection. */collectionId?: string; /** User's unique identifier. */
+  createdByUserId?: string; /** The item's unique identifier. */
+  id?: string; /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
+  limit?: number; /** The case-insensitive string used to search for a resource by name. */
+  name?: string; /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
+  next?: string; /** If set to true, the user's available actions for each item will not be evaluated meaning the actions-array will be omitted from the response (reduces response time). */
+  noActions?: boolean; /** User's unique identifier. */
+  notCreatedByUserId?: string; /** Owner identifier. */
+  notOwnerId?: string; /** Owner identifier. */
+  ownerId?: string; /** The cursor to the previous page of resources. Provide either the next or prev cursor, but not both. */
+  prev?: string; /** The case-insensitive string used to search for a resource by name or description. */
+  query?: string; /** The case-sensitive string used to search for an item by resourceId. If resourceId is provided, then resourceType must be provided. Provide either the resourceId or resourceLink, but not both. */
+  resourceId?: string; /** The case-sensitive strings used to search for an item by resourceIds. The maximum number of resourceIds it supports is 100. If resourceIds is provided, then resourceType must be provided. For example '?resourceIds=appId1,appId2' */
+  resourceIds?: string; /** The case-sensitive string used to search for an item by resourceLink. If resourceLink is provided, then resourceType must be provided. Provide either the resourceId or resourceLink, but not both. */
+  resourceLink?: string; /** the case-sensitive string used to filter items by resourceSubType(s). For example '?resourceSubType=chart-monitoring,qix-df,qvd'. Will return a 400 error if used in conjuction with the square bracket syntax for resourceSubType filtering in the 'resourceType' query parameter. */
+  resourceSubType?: string; /** The case-sensitive string used to filter items by resourceType(s). For example '?resourceType=app,qvapp'. Additionally, a optional resourceSubType filter can be added to each resourceType. For example '?resourceType=app[qvd,chart-monitoring],qvapp'. An trailing comma can be used to include the empty resourceSubType, e.g. '?resourceType=app[qvd,chart-monitoring,]', or, to include only empty resourceSubTypes, '?resourceType=app[]' This syntax replaces the 'resourceSubType' query param, and using both in the same query will result in a 400 error. */
   resourceType?: ItemResourceTypeEnum;
   /** @deprecated
    * Whether or not to return items in a shared space. */
-  shared?: boolean;
-  /** The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, recentlyUsed and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively. */
-  sort?: "+createdAt" | "-createdAt" | "+name" | "-name" | "+updatedAt" | "-updatedAt" | "+recentlyUsed" | "-recentlyUsed";
-  /** The space's unique identifier (supports \'personal\' as spaceId). */
-  spaceId?: string;
-  /** The case-sensitive string used to filter items on space type(s). For example '?spaceType=shared,personal'. */
+  shared?: boolean; /** The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, recentlyUsed and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively. */
+  sort?: "+createdAt" | "-createdAt" | "+name" | "-name" | "+updatedAt" | "-updatedAt" | "+recentlyUsed" | "-recentlyUsed"; /** The space's unique identifier (supports \'personal\' as spaceId). */
+  spaceId?: string; /** The case-sensitive string used to filter items on space type(s). For example '?spaceType=shared,personal'. */
   spaceType?: SpaceTypeEnum;
 }, options?: ApiCallOptions): Promise<GetItemsHttpResponse>;
 type GetItemsHttpResponse = {
@@ -403,19 +319,12 @@ type UpdateItemHttpError = {
  * @throws GetItemCollectionsHttpError
  */
 declare function getItemCollections(itemId: string, query: {
-  /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
-  limit?: number;
-  /** The case-sensitive string used to search for a collection by name. */
-  name?: string;
-  /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
-  next?: string;
-  /** The cursor to the previous page of resources. Provide either the next or prev cursor, but not both. */
-  prev?: string;
-  /** The case-insensitive string used to search for a resource by name or description. */
-  query?: string;
-  /** The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively. */
-  sort?: "+createdAt" | "-createdAt" | "+name" | "-name" | "+updatedAt" | "-updatedAt";
-  /** The case-sensitive string used to search for a collection by type. */
+  /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */limit?: number; /** The case-sensitive string used to search for a collection by name. */
+  name?: string; /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
+  next?: string; /** The cursor to the previous page of resources. Provide either the next or prev cursor, but not both. */
+  prev?: string; /** The case-insensitive string used to search for a resource by name or description. */
+  query?: string; /** The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively. */
+  sort?: "+createdAt" | "-createdAt" | "+name" | "-name" | "+updatedAt" | "-updatedAt"; /** The case-sensitive string used to search for a collection by type. */
   type?: CollectionTypes;
 }, options?: ApiCallOptions): Promise<GetItemCollectionsHttpResponse>;
 type GetItemCollectionsHttpResponse = {
@@ -438,15 +347,10 @@ type GetItemCollectionsHttpError = {
  * @throws GetPublishedItemsHttpError
  */
 declare function getPublishedItems(itemId: string, query: {
-  /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
-  limit?: number;
-  /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
-  next?: string;
-  /** The cursor to the previous page of resources. Provide either the next or prev cursor, but not both. */
-  prev?: string;
-  /** The case-sensitive string used to search for an item by resourceType. */
-  resourceType?: ItemResourceTypeEnum;
-  /** The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively. */
+  /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */limit?: number; /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
+  next?: string; /** The cursor to the previous page of resources. Provide either the next or prev cursor, but not both. */
+  prev?: string; /** The case-sensitive string used to search for an item by resourceType. */
+  resourceType?: ItemResourceTypeEnum; /** The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively. */
   sort?: "+createdAt" | "-createdAt" | "+name" | "-name" | "+updatedAt" | "-updatedAt";
 }, options?: ApiCallOptions): Promise<GetPublishedItemsHttpResponse>;
 type GetPublishedItemsHttpResponse = {

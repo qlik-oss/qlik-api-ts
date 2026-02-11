@@ -1,5 +1,5 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/automation-connectors.d.ts
 type AutomationConnectorsList = {
@@ -7,23 +7,17 @@ type AutomationConnectorsList = {
   links?: Links;
 };
 type AutomationConnectorsListObject = {
-  /** Indicates if the connector is billable. */
-  billable?: boolean;
-  readonly id?: string;
-  /** The name of an automation connector. */
+  /** Indicates if the connector is billable. */billable?: boolean;
+  readonly id?: string; /** The name of an automation connector. */
   name?: string;
 };
 type Error = {
-  /** The unique code for the error */
-  code: string;
-  /** May be used to provide additional details */
-  detail?: string;
-  /** A summary of what went wrong */
+  /** The unique code for the error */code: string; /** May be used to provide additional details */
+  detail?: string; /** A summary of what went wrong */
   title: string;
 };
 type ErrorResponse = {
-  errors?: Error[];
-  /** A way to trace the source of the error. */
+  errors?: Error[]; /** A way to trace the source of the error. */
   traceId?: string;
 };
 type Links = {
@@ -31,8 +25,7 @@ type Links = {
   prev?: PaginationLink;
 };
 type PaginationLink = {
-  /** The URL to a resource request */
-  href?: string;
+  /** The URL to a resource request */href?: string;
 };
 /**
  * Retrieves a list of automation connectors.
@@ -41,11 +34,8 @@ type PaginationLink = {
  * @throws GetAutomationConnectorsHttpError
  */
 declare function getAutomationConnectors(query: {
-  /** Filters the result based on the specified criteria: name. */
-  filter?: string;
-  /** The number of automation connectors to retrieve. */
-  limit?: number;
-  /** The field to sort by, with +- prefix indicating sort order. (?sort=-name => sort on the name field using descending order) */
+  /** Filters the result based on the specified criteria: name. */filter?: string; /** The number of automation connectors to retrieve. */
+  limit?: number; /** The field to sort by, with +- prefix indicating sort order. (?sort=-name => sort on the name field using descending order) */
   sort?: "name" | "+name" | "-name";
 }, options?: ApiCallOptions): Promise<GetAutomationConnectorsHttpResponse>;
 type GetAutomationConnectorsHttpResponse = {

@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/apps.ts
 /**
@@ -428,6 +428,51 @@ async function updateAppOwner(appId, body, options) {
 	});
 }
 /**
+*
+*
+* @param appId
+* @throws DeleteAppPlacementHttpError
+*/
+async function deleteAppPlacement(appId, options) {
+	return invokeFetch("apps", {
+		method: "delete",
+		pathTemplate: "/api/v1/apps/{appId}/placement",
+		pathVariables: { appId },
+		options
+	});
+}
+/**
+*
+*
+* @param appId
+* @throws GetAppPlacementHttpError
+*/
+async function getAppPlacement(appId, options) {
+	return invokeFetch("apps", {
+		method: "get",
+		pathTemplate: "/api/v1/apps/{appId}/placement",
+		pathVariables: { appId },
+		options
+	});
+}
+/**
+*
+*
+* @param appId
+* @param body an object with the body content
+* @throws ReplaceAppPlacementHttpError
+*/
+async function replaceAppPlacement(appId, body, options) {
+	return invokeFetch("apps", {
+		method: "put",
+		pathTemplate: "/api/v1/apps/{appId}/placement",
+		pathVariables: { appId },
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
 * Publishes a specific app to a managed space.
 *
 * @param appId Identifier of the app.
@@ -497,10 +542,10 @@ async function getAppReloadLog(appId, reloadId, options) {
 }
 /**
 * Retrieves the app reload metadata list.
-* Reload metadata contains reload information, including reload id, duration, endtime and lineage load info.
+* Reload metadata contains reload information, including reload id, duration, endtime and lineage load info. Data is available for the last 10 reloads of an application.
 *
 * @param appId Identifier of the app
-* @param reloadId Identifier of the reload. Use empty reloadId to get all reloads.
+* @param reloadId
 * @param query an object with query parameters
 * @throws GetAppReloadMetadataHttpError
 */
@@ -580,6 +625,26 @@ async function deleteAppReportFilter(appId, id, options) {
 			appId,
 			id
 		},
+		options
+	});
+}
+/**
+* Get a filter
+*
+* @param appId Qlik Sense app identifier
+* @param id The filter id identifier (bookmarkId).
+* @param query an object with query parameters
+* @throws GetAppReportFilterWithQueryHttpError
+*/
+async function getAppReportFilterWithQuery(appId, id, query, options) {
+	return invokeFetch("apps", {
+		method: "get",
+		pathTemplate: "/api/v1/apps/{appId}/report-filters/{id}",
+		pathVariables: {
+			appId,
+			id
+		},
+		query,
 		options
 	});
 }
@@ -816,6 +881,9 @@ const appsExport = {
 	getAppThumbnail,
 	updateAppObjectOwner,
 	updateAppOwner,
+	deleteAppPlacement,
+	getAppPlacement,
+	replaceAppPlacement,
 	publishApp,
 	republishApp,
 	getAppReloadLogs,
@@ -825,6 +893,7 @@ const appsExport = {
 	createAppReportFilter,
 	countAppReportFilters,
 	deleteAppReportFilter,
+	getAppReportFilterWithQuery,
 	getAppReportFilter,
 	patchAppReportFilter,
 	getAppScriptHistory,
@@ -838,7 +907,6 @@ const appsExport = {
 	queueAppEvaluation,
 	clearCache
 };
-var apps_default = appsExport;
 
 //#endregion
-export { clearCache, copyApp, countAppReportFilters, createApp, createAppReportFilter, apps_default as default, deleteApp, deleteAppMedia, deleteAppReportFilter, deleteAppScript, exportApp, getAppDataLineage, getAppDataMetadata, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXml, getAppEvaluationXml, getAppEvaluations, getAppInfo, getAppInsightAnalyses, getAppInsightAnalysisModel, getAppInsightAnalysisRecommendations, getAppMedia, getAppMediaList, getAppReloadLog, getAppReloadLogs, getAppReloadMetadata, getAppReportFilter, getAppReportFilters, getAppScript, getAppScriptHistory, getAppThumbnail, getAppsPrivileges, importApp, moveAppToSpace, patchAppReportFilter, patchAppScript, publishApp, queueAppEvaluation, removeAppFromSpace, republishApp, updateAppInfo, updateAppObjectOwner, updateAppOwner, updateAppScript, uploadAppMedia, validateScript };
+export { clearCache, copyApp, countAppReportFilters, createApp, createAppReportFilter, appsExport as default, deleteApp, deleteAppMedia, deleteAppPlacement, deleteAppReportFilter, deleteAppScript, exportApp, getAppDataLineage, getAppDataMetadata, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXml, getAppEvaluationXml, getAppEvaluations, getAppInfo, getAppInsightAnalyses, getAppInsightAnalysisModel, getAppInsightAnalysisRecommendations, getAppMedia, getAppMediaList, getAppPlacement, getAppReloadLog, getAppReloadLogs, getAppReloadMetadata, getAppReportFilter, getAppReportFilterWithQuery, getAppReportFilters, getAppScript, getAppScriptHistory, getAppThumbnail, getAppsPrivileges, importApp, moveAppToSpace, patchAppReportFilter, patchAppScript, publishApp, queueAppEvaluation, removeAppFromSpace, replaceAppPlacement, republishApp, updateAppInfo, updateAppObjectOwner, updateAppOwner, updateAppScript, uploadAppMedia, validateScript };

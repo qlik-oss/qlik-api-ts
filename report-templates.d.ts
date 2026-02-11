@@ -1,37 +1,26 @@
-import { S as DownloadableBlob, y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions, DownloadableBlob } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/report-templates.d.ts
 type CreateTemplateRequest = {
-  /** Template description */
-  description?: string;
-  /** Template name */
-  name: string;
-  /** Specifies the action to perform with the given source app id. Use "validate" to verify that the template source app matches the provided value. Use "replace" to migrate the template to a different app by replacing the source app id. */
-  sourceAppAction?: "validate" | "replace";
-  /** The ID of the app that this template is using as data source. The id stored in the template file metadata is used if no value is specified. */
-  sourceAppId?: string;
-  /** The ID of a previously uploaded temporary content file */
+  /** Template description */description?: string; /** Template name */
+  name: string; /** Specifies the action to perform with the given source app id. Use "validate" to verify that the template source app matches the provided value. Use "replace" to migrate the template to a different app by replacing the source app id. */
+  sourceAppAction?: "validate" | "replace"; /** The ID of the app that this template is using as data source. The id stored in the template file metadata is used if no value is specified. */
+  sourceAppId?: string; /** The ID of a previously uploaded temporary content file */
   temporaryContentId: string;
 };
 type ErrorResponseItem = {
-  /** The error code. */
-  code?: string;
-  /** A human-readable explanation specific to this occurrence of the problem. */
-  detail?: string;
-  /** Additional error metadata. */
-  meta?: unknown;
-  /** Summary of the problem. */
+  /** The error code. */code?: string; /** A human-readable explanation specific to this occurrence of the problem. */
+  detail?: string; /** Additional error metadata. */
+  meta?: unknown; /** Summary of the problem. */
   title?: string;
 };
 type ErrorResult = {
-  /** List of errors and their properties. */
-  errors?: ErrorResponseItem[];
+  /** List of errors and their properties. */errors?: ErrorResponseItem[];
   readonly statusCode?: number;
 };
 type GetTemplatesResponse = {
-  /** The current page data. */
-  data?: ReportTemplateResponse[];
+  /** The current page data. */data?: ReportTemplateResponse[];
   links?: PaginationLinks;
 };
 type Operation = {
@@ -41,8 +30,7 @@ type Operation = {
   value?: unknown;
 };
 type PaginationLink = {
-  /** The URL for the pagination link. */
-  href?: string;
+  /** The URL for the pagination link. */href?: string;
 };
 type PaginationLinks = {
   next?: PaginationLink;
@@ -50,37 +38,22 @@ type PaginationLinks = {
   self?: PaginationLink;
 };
 type ReportTemplateResponse = {
-  /** The date and time when the template was created. */
-  createdAt?: string;
-  /** The id of the user who created the template. */
-  createdBy?: string;
-  /** Template description */
-  description?: string;
-  /** The template ID */
-  id?: string;
-  /** The template metadata version */
-  metadataVersion?: number;
-  /** Template name */
-  name?: string;
-  /** The user that this template is scoped to. */
-  ownerId?: string;
-  /** The id of the app that this template is using as data source. */
-  sourceAppId?: string;
-  /** The name of the app that this template is using as data source. */
-  sourceAppName?: string;
-  /** The date and time when the template was last updated. */
-  updatedAt?: string;
-  /** The id of the user who last updated the template. */
+  /** The date and time when the template was created. */createdAt?: string; /** The id of the user who created the template. */
+  createdBy?: string; /** Template description */
+  description?: string; /** The template ID */
+  id?: string; /** The template metadata version */
+  metadataVersion?: number; /** Template name */
+  name?: string; /** The user that this template is scoped to. */
+  ownerId?: string; /** The id of the app that this template is using as data source. */
+  sourceAppId?: string; /** The name of the app that this template is using as data source. */
+  sourceAppName?: string; /** The date and time when the template was last updated. */
+  updatedAt?: string; /** The id of the user who last updated the template. */
   updatedBy?: string;
 };
 type UpdateTemplateRequest = {
-  /** Template description */
-  description?: string;
-  /** Template name */
-  name: string;
-  /** Specifies the action to perform with the new source app. Use "validate" to verify that the source app of the uploaded template matches the target app. Use "replace" to migrate the uploaded template to the target app by replacing the source app id. */
-  sourceAppAction?: "validate" | "replace";
-  /** The ID of a previously uploaded temporary content file */
+  /** Template description */description?: string; /** Template name */
+  name: string; /** Specifies the action to perform with the new source app. Use "validate" to verify that the source app of the uploaded template matches the target app. Use "replace" to migrate the uploaded template to the target app by replacing the source app id. */
+  sourceAppAction?: "validate" | "replace"; /** The ID of a previously uploaded temporary content file */
   temporaryContentId: string;
 };
 /**
@@ -90,17 +63,11 @@ type UpdateTemplateRequest = {
  * @throws GetReportTemplatesHttpError
  */
 declare function getReportTemplates(query: {
-  /** If present, restrict the number of returned items to this value. */
-  limit?: number;
-  /** Template name to search and filter for. Case-insensitive open search with wildcards both as prefix and suffix. */
-  name?: string;
-  /** Return the templates for the specified owner. */
-  ownerId?: string;
-  /** If present, skip this number of the returned values in the result set (facilitates paging). */
-  skip?: number;
-  /** Field to sort by. Prefix with +/- to indicate ascending/descending. By default, the sort order is ascending. */
-  sort?: ("name" | "+name" | "-name" | "createdAt" | "+createdAt" | "-createdAt" | "updatedAt" | "+updatedAt" | "-updatedAt" | "type" | "+type" | "-type")[];
-  /** Return the templates that are using the specified app as data source. */
+  /** If present, restrict the number of returned items to this value. */limit?: number; /** Template name to search and filter for. Case-insensitive open search with wildcards both as prefix and suffix. */
+  name?: string; /** Return the templates for the specified owner. */
+  ownerId?: string; /** If present, skip this number of the returned values in the result set (facilitates paging). */
+  skip?: number; /** Field to sort by. Prefix with +/- to indicate ascending/descending. By default, the sort order is ascending. */
+  sort?: ("name" | "+name" | "-name" | "createdAt" | "+createdAt" | "-createdAt" | "updatedAt" | "+updatedAt" | "-updatedAt" | "type" | "+type" | "-type")[]; /** Return the templates that are using the specified app as data source. */
   sourceAppId?: string;
 }, options?: ApiCallOptions): Promise<GetReportTemplatesHttpResponse>;
 type GetReportTemplatesHttpResponse = {

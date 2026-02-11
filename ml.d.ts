@@ -1,71 +1,48 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/ml.d.ts
 /**
  * An error object
  */
 type APIError = {
-  /** Qlik error code (not HTTP response status code) */
-  code: string;
-  /** Description of the error */
-  detail?: string;
-  /** Additional details about the error. These may vary by error. */
+  /** Qlik error code (not HTTP response status code) */code: string; /** Description of the error */
+  detail?: string; /** Additional details about the error. These may vary by error. */
   meta?: {
-    /** The argument */
-    argument?: string;
-    /** Extra details for what may have caused the error */
-    details?: string;
-    /** The unique id of the error instance */
-    errorId?: string;
-    /** The issue code */
-    issue?: string;
-    /** The resource type that the error occurred on */
-    resource?: string;
-    /** The resource id that the error occurred on */
+    /** The argument */argument?: string; /** Extra details for what may have caused the error */
+    details?: string; /** The unique id of the error instance */
+    errorId?: string; /** The issue code */
+    issue?: string; /** The resource type that the error occurred on */
+    resource?: string; /** The resource id that the error occurred on */
     resourceId?: string;
-  };
-  /** Short summary of error */
+  }; /** Short summary of error */
   title: string;
 };
 /**
  * An AutoML alias
  */
 type Alias = {
-  /** Timestamp when this was created */
-  createdAt: CreatedAt;
-  /** ID of the owner/user that created this entity */
-  createdBy: string;
-  /** ID of a model deployment */
-  deploymentId: DeploymentId;
-  /** ID of this entity */
-  id: EntityId;
-  /** The mode of an alias. Default mode means the model assigned to that alias will be used if alias is not specified */
+  /** Timestamp when this was created */createdAt: CreatedAt; /** ID of the owner/user that created this entity */
+  createdBy: string; /** ID of a model deployment */
+  deploymentId: DeploymentId; /** ID of this entity */
+  id: EntityId; /** The mode of an alias. Default mode means the model assigned to that alias will be used if alias is not specified */
   mode: AliasMode;
-  models: ModelsInfo;
-  /** Name of this entity */
-  name: EntityName;
-  /** Timestamp when this was updated */
+  models: ModelsInfo; /** Name of this entity */
+  name: EntityName; /** Timestamp when this was updated */
   updatedAt: UpdatedAt;
 };
 type AliasFindResponse = {
   data: {
-    /** An AutoML alias */
-    attributes: Alias;
-    /** ID of this entity */
+    /** An AutoML alias */attributes: Alias; /** ID of this entity */
     id: EntityId;
     type: "alias";
-  }[];
-  /** Resource links included in paginated responses */
-  links: ResponseLinks;
-  /** Meta for FIND operations */
+  }[]; /** Resource links included in paginated responses */
+  links: ResponseLinks; /** Meta for FIND operations */
   meta?: FindResponseMeta;
 };
 type AliasGetResponse = {
   data: {
-    /** An AutoML alias */
-    attributes: Alias;
-    /** ID of this entity */
+    /** An AutoML alias */attributes: Alias; /** ID of this entity */
     id: EntityId;
     type: "alias";
   };
@@ -80,8 +57,7 @@ type AliasId = string;
 type AliasInput = {
   data: {
     attributes: {
-      models: ModelsInfo;
-      /** Name of this entity */
+      models: ModelsInfo; /** Name of this entity */
       name: EntityName;
     };
     type: "alias";
@@ -109,18 +85,13 @@ type AliasPatch = AliasPatchItem[];
  * Alias values that can be patched.
  */
 type AliasPatchItem = {
-  /** All patch requests use the replace operation */
-  op: "replace";
-  /** Path for the property you want to update */
-  path: "/name" | "/models";
-  /** Use for fields that can be `any` type (string, number, etc.) */
+  /** All patch requests use the replace operation */op: "replace"; /** Path for the property you want to update */
+  path: "/name" | "/models"; /** Use for fields that can be `any` type (string, number, etc.) */
   value: AnyType;
 };
 type AliasPostResponse = {
   data: {
-    /** An AutoML alias */
-    attributes: Alias;
-    /** ID of this entity */
+    /** An AutoML alias */attributes: Alias; /** ID of this entity */
     id: EntityId;
     type: "alias";
   };
@@ -133,38 +104,23 @@ type AnyType = unknown;
  * A batch prediction job configuration
  */
 type BatchPrediction = {
-  /** ID of an alias */
-  aliasId?: AliasId;
-  /** Timestamp when this was created */
-  createdAt?: CreatedAt;
-  /** ID of the owner/user that ran this prediction batch */
-  createdBy?: string;
-  /** The Qlik catalog dataset ID */
-  dataSetId?: DataSetId;
-  /** ID of the dataset with the prediction results */
-  datasetId?: string;
-  /** ID of a model deployment */
-  deploymentId?: DeploymentId;
-  /** JSON string of error object */
-  errorMessage?: ErrorMessage;
-  /** JSON string with list of error objects */
-  errors?: Errors;
-  /** ID of this entity */
+  /** ID of an alias */aliasId?: AliasId; /** Timestamp when this was created */
+  createdAt?: CreatedAt; /** ID of the owner/user that ran this prediction batch */
+  createdBy?: string; /** The Qlik catalog dataset ID */
+  dataSetId?: DataSetId; /** ID of the dataset with the prediction results */
+  datasetId?: string; /** ID of a model deployment */
+  deploymentId?: DeploymentId; /** JSON string of error object */
+  errorMessage?: ErrorMessage; /** JSON string with list of error objects */
+  errors?: Errors; /** ID of this entity */
   id?: EntityId;
   /** A optional column name upon which to create an index. Must be unique for
    * every row. If not included, Qlik will create a unique index column. */
-  indexColumn?: IndexColumn;
-  /** Name of this entity */
-  name?: EntityName;
-  /** Where to output dataset */
-  outputDataset?: string;
-  /** ID of owner/user for this entity */
-  ownerId?: OwnerId;
-  /** Batch prediction job schedule */
-  schedule?: BatchPredictionSchedule;
-  /** Status of this batch prediction */
-  status?: BatchPredictionStatus;
-  /** Timestamp when this was updated */
+  indexColumn?: IndexColumn; /** Name of this entity */
+  name?: EntityName; /** Where to output dataset */
+  outputDataset?: string; /** ID of owner/user for this entity */
+  ownerId?: OwnerId; /** Batch prediction job schedule */
+  schedule?: BatchPredictionSchedule; /** Status of this batch prediction */
+  status?: BatchPredictionStatus; /** Timestamp when this was updated */
   updatedAt?: UpdatedAt;
   /** Sets which files, file names, and spaces are used to write results of
    * batch predictions (output files) to the catalog.
@@ -178,30 +134,23 @@ type BatchPrediction = {
  */
 type BatchPredictionActionResponse = {
   data: {
-    attributes: PredictionJobResponse;
-    /** ID of this entity */
+    attributes: PredictionJobResponse; /** ID of this entity */
     id: EntityId;
     type: "job";
   };
 };
 type BatchPredictionFindResponse = {
   data: {
-    /** A batch prediction job configuration */
-    attributes: BatchPrediction;
-    /** ID of this entity */
+    /** A batch prediction job configuration */attributes: BatchPrediction; /** ID of this entity */
     id: EntityId;
     type: "batch-prediction";
-  }[];
-  /** Resource links included in paginated responses */
-  links: ResponseLinks;
-  /** Meta for FIND operations */
+  }[]; /** Resource links included in paginated responses */
+  links: ResponseLinks; /** Meta for FIND operations */
   meta?: FindResponseMeta;
 };
 type BatchPredictionGetResponse = {
   data: {
-    /** A batch prediction job configuration */
-    attributes: BatchPrediction;
-    /** ID of this entity */
+    /** A batch prediction job configuration */attributes: BatchPrediction; /** ID of this entity */
     id: EntityId;
     type: "batch-prediction";
   };
@@ -212,19 +161,14 @@ type BatchPredictionGetResponse = {
 type BatchPredictionInput = {
   data?: {
     attributes?: {
-      /** ID of an alias */
-      aliasId?: AliasId;
-      /** The Qlik catalog dataset ID */
-      dataSetId?: DataSetId;
-      /** ID of a model deployment */
+      /** ID of an alias */aliasId?: AliasId; /** The Qlik catalog dataset ID */
+      dataSetId?: DataSetId; /** ID of a model deployment */
       deploymentId?: DeploymentId;
       description?: string;
       /** A optional column name upon which to create an index. Must be unique for
        * every row. If not included, Qlik will create a unique index column. */
-      indexColumn?: IndexColumn;
-      /** Name of this entity */
-      name?: EntityName;
-      /** Configuration to schedule a batch prediction */
+      indexColumn?: IndexColumn; /** Name of this entity */
+      name?: EntityName; /** Configuration to schedule a batch prediction */
       schedule?: BatchPredictionScheduleInputAttributes;
       /** Sets which files, file names, and spaces are used to write results of
        * batch predictions (output files) to the catalog.
@@ -237,18 +181,13 @@ type BatchPredictionInput = {
   };
 };
 type BatchPredictionPatch = {
-  /** All patch requests use the replace operation */
-  op: "replace";
-  /** Path for the property you want to update */
-  path: "/name" | "/description" | "/dataSetId" | "/indexColumn" | "/applyDatasetChangeOnly" | "/ownerId" | "/writeback/spaceId" | "/writeback/format" | "/writeback/dstName" | "/writeback/dstShapName" | "/writeback/dstCoordShapName" | "/writeback/dstNotPredictedName" | "/writeback/dstSourceName";
-  /** Use for fields that can be `any` type (string, number, etc.) */
+  /** All patch requests use the replace operation */op: "replace"; /** Path for the property you want to update */
+  path: "/name" | "/description" | "/dataSetId" | "/indexColumn" | "/applyDatasetChangeOnly" | "/ownerId" | "/writeback/spaceId" | "/writeback/format" | "/writeback/dstName" | "/writeback/dstShapName" | "/writeback/dstCoordShapName" | "/writeback/dstNotPredictedName" | "/writeback/dstSourceName"; /** Use for fields that can be `any` type (string, number, etc.) */
   value: AnyType;
 }[];
 type BatchPredictionPostResponse = {
   data: {
-    /** A batch prediction job configuration */
-    attributes: BatchPrediction;
-    /** ID of this entity */
+    /** A batch prediction job configuration */attributes: BatchPrediction; /** ID of this entity */
     id: EntityId;
     type: "batch-prediction";
   };
@@ -260,31 +199,22 @@ type BatchPredictionSchedule = {
   /** If true, only run prediction if dataset has changed to avoid
    * duplicates. If set to false, re-runs predictions on unchanged
    * datasets. */
-  applyDatasetChangeOnly?: boolean;
-  /** The ID of the chronos job */
-  chronosJobId?: string;
-  /** When the job finished */
-  endDateTime?: string;
-  /** Number of times a scheduled prediction job has failed */
-  failureAttempts?: number;
-  /** When the last successful job happened */
+  applyDatasetChangeOnly?: boolean; /** The ID of the chronos job */
+  chronosJobId?: string; /** When the job finished */
+  endDateTime?: string; /** Number of times a scheduled prediction job has failed */
+  failureAttempts?: number; /** When the last successful job happened */
   lastSuccessfulDateTime?: string;
   /** Recurrence rules. Maximum is DAILY but you can specify the
    * hour, minute, and second it runs each day.
    * One string per rule. */
-  recurrence?: string[];
-  /** When the job is scheduled to start */
-  startDateTime?: string;
-  /** The status of the schedule */
-  status?: "pending" | "active" | "error" | "error_scheduler_unreachable" | "error_scheduler_callback_error" | "licence_advanced_features_required" | "failing_schedule_permission";
-  /** Timezone used for the date-time fields */
+  recurrence?: string[]; /** When the job is scheduled to start */
+  startDateTime?: string; /** The status of the schedule */
+  status?: "pending" | "active" | "error" | "error_scheduler_unreachable" | "error_scheduler_callback_error" | "licence_advanced_features_required" | "failing_schedule_permission"; /** Timezone used for the date-time fields */
   timezone?: string;
 };
 type BatchPredictionScheduleGetResponse = {
   data: {
-    /** Batch prediction job schedule */
-    attributes: BatchPredictionSchedule;
-    /** ID of this entity */
+    /** Batch prediction job schedule */attributes: BatchPredictionSchedule; /** ID of this entity */
     id: EntityId;
     type: "batch-prediction-schedule";
   };
@@ -294,8 +224,7 @@ type BatchPredictionScheduleGetResponse = {
  */
 type BatchPredictionScheduleInput = {
   data?: {
-    /** Configuration to schedule a batch prediction */
-    attributes?: BatchPredictionScheduleInputAttributes;
+    /** Configuration to schedule a batch prediction */attributes?: BatchPredictionScheduleInputAttributes;
     type?: "batch-prediction-schedule";
   };
 };
@@ -306,31 +235,23 @@ type BatchPredictionScheduleInputAttributes = {
   /** If true, only run prediction if dataset has changed to avoid
    * duplicates. If set to false, re-runs predictions on unchanged
    * datasets. */
-  applyDatasetChangeOnly?: boolean;
-  /** When the job is scheduled to finish */
+  applyDatasetChangeOnly?: boolean; /** When the job is scheduled to finish */
   endDateTime?: string;
   /** Recurrence rules. Maximum is DAILY but you can specify the
    * hour, minute, and second it runs each day.
    * One string per rule. */
-  recurrence?: string[];
-  /** When the job is scheduled to start */
-  startDateTime: string;
-  /** Timezone used for the date-time fields */
+  recurrence?: string[]; /** When the job is scheduled to start */
+  startDateTime: string; /** Timezone used for the date-time fields */
   timezone: string;
 };
 type BatchPredictionSchedulePatch = {
-  /** All patch requests use the replace operation */
-  op: "replace";
-  /** Path for the property you want to update */
-  path: "/startDateTime" | "/endDateTime" | "/timezone" | "/recurrence" | "/applyDatasetChangeOnly";
-  /** Use for fields that can be `any` type (string, number, etc.) */
+  /** All patch requests use the replace operation */op: "replace"; /** Path for the property you want to update */
+  path: "/startDateTime" | "/endDateTime" | "/timezone" | "/recurrence" | "/applyDatasetChangeOnly"; /** Use for fields that can be `any` type (string, number, etc.) */
   value: AnyType;
 }[];
 type BatchPredictionSchedulePutResponse = {
   data: {
-    /** Batch prediction job schedule */
-    attributes: BatchPredictionSchedule;
-    /** ID of this entity */
+    /** Batch prediction job schedule */attributes: BatchPredictionSchedule; /** ID of this entity */
     id: EntityId;
     type: "batch-prediction-schedule";
   };
@@ -351,8 +272,7 @@ type BatchPredictionWriteback = {
   dstName: string;
   dstNotPredictedName?: string;
   dstShapName?: string;
-  dstSourceName?: string;
-  /** File format for write back files (this applies to all) */
+  dstSourceName?: string; /** File format for write back files (this applies to all) */
   format: "qvd" | "parquet" | "csv";
   /** Space ID where you want to save batch prediction writebacks or
    * empty string ('') save them to your personal space. */
@@ -423,8 +343,7 @@ type DeployedModelIds = string[];
 type DeployedModelsInput = {
   data: {
     attributes: {
-      /** IDs of all models deployed to the deployment */
-      deployedModelIds: DeployedModelIds;
+      /** IDs of all models deployed to the deployment */deployedModelIds: DeployedModelIds;
     };
     type: "deployed-models";
   };
@@ -433,53 +352,33 @@ type DeployedModelsInput = {
  * A deployed model against which you can run predictions
  */
 type Deployment = {
-  /** Timestamp when this was created */
-  createdAt: CreatedAt;
-  /** ID of the owner/user that created this entity. */
-  createdBy: CreatedBy;
-  /** IDs of all models deployed to the deployment */
-  deployedModelIds?: DeployedModelIds;
-  /** Whether this deployment is deprecated */
-  deprecated: boolean;
-  /** Description of this entity */
-  description: EntityDescription;
-  /** Whether to allow predictions */
-  enablePredictions: boolean;
-  /** JSON string of error object */
-  errorMessage?: ErrorMessage;
-  /** JSON string with list of error objects */
-  errors?: Errors;
-  /** ID of this entity */
-  id: EntityId;
-  /** ID of the model */
-  modelId: ModelId;
-  /** Name of this entity */
-  name: EntityName;
-  /** ID of owner/user for this entity */
-  ownerId: OwnerId;
-  /** Space ID for this entity (empty string for personal space) */
-  spaceId: SpaceId;
-  /** Timestamp when this was updated */
+  /** Timestamp when this was created */createdAt: CreatedAt; /** ID of the owner/user that created this entity. */
+  createdBy: CreatedBy; /** IDs of all models deployed to the deployment */
+  deployedModelIds?: DeployedModelIds; /** Whether this deployment is deprecated */
+  deprecated: boolean; /** Description of this entity */
+  description: EntityDescription; /** Whether to allow predictions */
+  enablePredictions: boolean; /** JSON string of error object */
+  errorMessage?: ErrorMessage; /** JSON string with list of error objects */
+  errors?: Errors; /** ID of this entity */
+  id: EntityId; /** ID of the model */
+  modelId: ModelId; /** Name of this entity */
+  name: EntityName; /** ID of owner/user for this entity */
+  ownerId: OwnerId; /** Space ID for this entity (empty string for personal space) */
+  spaceId: SpaceId; /** Timestamp when this was updated */
   updatedAt: UpdatedAt;
 };
 type DeploymentFindResponse = {
   data: {
-    /** A deployed model against which you can run predictions */
-    attributes: Deployment;
-    /** ID of this entity */
+    /** A deployed model against which you can run predictions */attributes: Deployment; /** ID of this entity */
     id: EntityId;
     type: "deployment";
-  }[];
-  /** Resource links included in paginated responses */
-  links: ResponseLinks;
-  /** Meta for FIND operations */
+  }[]; /** Resource links included in paginated responses */
+  links: ResponseLinks; /** Meta for FIND operations */
   meta?: FindResponseMeta;
 };
 type DeploymentGetResponse = {
   data: {
-    /** A deployed model against which you can run predictions */
-    attributes: Deployment;
-    /** ID of this entity */
+    /** A deployed model against which you can run predictions */attributes: Deployment; /** ID of this entity */
     id: EntityId;
     type: "deployment";
   };
@@ -494,35 +393,24 @@ type DeploymentId = string;
 type DeploymentInput = {
   data?: {
     attributes?: {
-      /** Whether this deployment is deprecated */
-      deprecated?: boolean;
-      /** Description of this entity */
-      description?: EntityDescription;
-      /** Whether to allow real-time predictions */
-      enablePredictions?: boolean;
-      /** ID of the model */
-      modelId: ModelId;
-      /** Name of this entity */
-      name: EntityName;
-      /** Space ID for this entity (empty string for personal space) */
+      /** Whether this deployment is deprecated */deprecated?: boolean; /** Description of this entity */
+      description?: EntityDescription; /** Whether to allow real-time predictions */
+      enablePredictions?: boolean; /** ID of the model */
+      modelId: ModelId; /** Name of this entity */
+      name: EntityName; /** Space ID for this entity (empty string for personal space) */
       spaceId: SpaceId;
     };
     type?: "deployment";
   };
 };
 type DeploymentPatch = {
-  /** All patch requests use the replace operation */
-  op: "replace";
-  /** Path for the property you want to update */
-  path: "/name" | "/description" | "/spaceId";
-  /** Use for fields that can be `any` type (string, number, etc.) */
+  /** All patch requests use the replace operation */op: "replace"; /** Path for the property you want to update */
+  path: "/name" | "/description" | "/spaceId"; /** Use for fields that can be `any` type (string, number, etc.) */
   value: AnyType;
 }[];
 type DeploymentPostResponse = {
   data: {
-    /** A deployed model against which you can run predictions */
-    attributes: Deployment;
-    /** ID of this entity */
+    /** A deployed model against which you can run predictions */attributes: Deployment; /** ID of this entity */
     id: EntityId;
     type: "deployment";
   };
@@ -531,9 +419,7 @@ type DeploymentPostResponse = {
  * Feature dropped during preprocessing
  */
 type DroppedFeature = {
-  /** Name of dropped feature in the dataset */
-  name?: string;
-  /** Reason the feature was dropped */
+  /** Name of dropped feature in the dataset */name?: string; /** Reason the feature was dropped */
   reason?: "highly_correlated" | "has_target_leakage" | "is_date_engineered" | "feature_with_low_importance";
 };
 /**
@@ -566,41 +452,27 @@ type Errors = APIError[];
  * An AutoML experiment
  */
 type Experiment = {
-  /** Timestamp when this was created */
-  createdAt: CreatedAt;
-  /** Description of this entity */
-  description?: EntityDescription;
-  /** ID of this entity */
-  id: EntityId;
-  /** Name of this entity */
-  name?: EntityName;
-  /** ID of owner/user for this entity */
-  ownerId: OwnerId;
-  /** Space ID for this entity (empty string for personal space) */
-  spaceId: SpaceId;
-  /** Tenant ID for this entity */
-  tenantId: TenantId;
-  /** Timestamp when this was updated */
+  /** Timestamp when this was created */createdAt: CreatedAt; /** Description of this entity */
+  description?: EntityDescription; /** ID of this entity */
+  id: EntityId; /** Name of this entity */
+  name?: EntityName; /** ID of owner/user for this entity */
+  ownerId: OwnerId; /** Space ID for this entity (empty string for personal space) */
+  spaceId: SpaceId; /** Tenant ID for this entity */
+  tenantId: TenantId; /** Timestamp when this was updated */
   updatedAt: UpdatedAt;
 };
 type ExperimentFindResponse = {
   data: {
-    /** An AutoML experiment */
-    attributes: Experiment;
-    /** ID of this entity */
+    /** An AutoML experiment */attributes: Experiment; /** ID of this entity */
     id: EntityId;
     type: "experiment";
-  }[];
-  /** Resource links included in paginated responses */
-  links: ResponseLinks;
-  /** Meta for FIND operations */
+  }[]; /** Resource links included in paginated responses */
+  links: ResponseLinks; /** Meta for FIND operations */
   meta?: FindResponseMeta;
 };
 type ExperimentGetResponse = {
   data: {
-    /** An AutoML experiment */
-    attributes: Experiment;
-    /** ID of this entity */
+    /** An AutoML experiment */attributes: Experiment; /** ID of this entity */
     id: EntityId;
     type: "experiment";
   };
@@ -613,15 +485,10 @@ type ExperimentId = string;
  * Input for creating this entity
  */
 type ExperimentInput = {
-  /** Data container for ExperimentInput */
-  data?: {
-    /** Experiment input attributes */
-    attributes?: {
-      /** Description of this entity */
-      description?: EntityDescription;
-      /** Name of this entity */
-      name: EntityName;
-      /** Space ID for this entity (empty string for personal space) */
+  /** Data container for ExperimentInput */data?: {
+    /** Experiment input attributes */attributes?: {
+      /** Description of this entity */description?: EntityDescription; /** Name of this entity */
+      name: EntityName; /** Space ID for this entity (empty string for personal space) */
       spaceId: SpaceId;
     };
     type?: "experiment";
@@ -635,19 +502,14 @@ type ExperimentMode = "intelligent" | "manual" | "manual_hpo";
  * Criteria to determine which pool of models to provide recommendations from
  */
 type ExperimentModelRecommendationFilter = {
-  /** The model algorithms to consider */
-  algorithms?: ModelAlgorithm[];
-  /** Whether to only consider models that are already deployed */
-  deployed?: boolean;
-  /** Whether to only consider models with 100% sampling */
-  fullSampling?: boolean;
-  /** The versionNumbers of the experiment versions to consider models from */
+  /** The model algorithms to consider */algorithms?: ModelAlgorithm[]; /** Whether to only consider models that are already deployed */
+  deployed?: boolean; /** Whether to only consider models with 100% sampling */
+  fullSampling?: boolean; /** The versionNumbers of the experiment versions to consider models from */
   versionNumbers?: number[];
 };
 type ExperimentModelRecommendationPostResponse = {
   data: {
-    /** Model recommendations */
-    attributes: {
+    /** Model recommendations */attributes: {
       bestModel?: ModelForRecommendations;
       fastestModel?: ModelForRecommendations;
       mostAccurateModel?: ModelForRecommendations;
@@ -677,18 +539,13 @@ type ExperimentPatch = ExperimentPatchItem[];
  * Experiment fields that can be patched. The following paths all require `value` to be a string: `/name`, `/spaceId`, and `/description`
  */
 type ExperimentPatchItem = {
-  /** All patch requests use the replace operation */
-  op: "replace";
-  /** Path for the property you want to update */
-  path: "/name" | "/description" | "/spaceId";
-  /** Use for fields that can be `any` type (string, number, etc.) */
+  /** All patch requests use the replace operation */op: "replace"; /** Path for the property you want to update */
+  path: "/name" | "/description" | "/spaceId"; /** Use for fields that can be `any` type (string, number, etc.) */
   value: AnyType;
 };
 type ExperimentPostResponse = {
   data: {
-    /** An AutoML experiment */
-    attributes: Experiment;
-    /** ID of this entity */
+    /** An AutoML experiment */attributes: Experiment; /** ID of this entity */
     id: EntityId;
     type: "experiment";
   };
@@ -702,81 +559,57 @@ type ExperimentType = "binary" | "multiclass" | "regression";
  * models within an experiment.
  */
 type ExperimentVersion = {
-  /** List of algorithms selected for model training in this version */
-  algorithms?: ModelAlgorithm[];
-  /** Timestamp when this was created */
-  createdAt: CreatedAt;
-  /** ID of owner/user for this entity */
-  createdByUserId: OwnerId;
-  /** The Qlik catalog dataset ID */
-  dataSetId: DataSetId;
-  /** Whether this is a new or other dataset */
-  datasetOrigin?: DatasetOrigin;
-  /** A optional date column name to index */
-  dateIndexes?: DateIndexes;
-  /** JSON string of error object */
-  errorMessage?: ErrorMessage;
-  /** JSON string with list of error objects */
-  errors?: Errors;
-  /** ID of the experiment */
-  experimentId: ExperimentId;
-  /** The model training mode for the experiment version */
-  experimentMode?: ExperimentMode;
-  /** Experiment type */
+  /** List of algorithms selected for model training in this version */algorithms?: ModelAlgorithm[]; /** Timestamp when this was created */
+  createdAt: CreatedAt; /** ID of owner/user for this entity */
+  createdByUserId: OwnerId; /** The Qlik catalog dataset ID */
+  dataSetId: DataSetId; /** Whether this is a new or other dataset */
+  datasetOrigin?: DatasetOrigin; /** A optional date column name to index */
+  dateIndexes?: DateIndexes; /** JSON string of error object */
+  errorMessage?: ErrorMessage; /** JSON string with list of error objects */
+  errors?: Errors; /** ID of the experiment */
+  experimentId: ExperimentId; /** The model training mode for the experiment version */
+  experimentMode?: ExperimentMode; /** Experiment type */
   experimentType: ExperimentType;
   /** List of features from your dataset for creating Experiment
    * Versions. This appears in from ProfileInsights response (in the
    * defaultVersionConfig). You can adjust the default settings before
    * using it as input to create or update Experiment Versions. */
-  featuresList?: FeaturesList;
-  /** ID of this entity */
-  id: EntityId;
-  /** Number of the last batch */
-  lastBatchNum?: number;
-  /** Name of this entity */
+  featuresList?: FeaturesList; /** ID of this entity */
+  id: EntityId; /** Number of the last batch */
+  lastBatchNum?: number; /** Name of this entity */
   name?: EntityName;
   /** Pipeline metadata including transformations to apply to columns and
    * specific schema configuration data */
-  pipeline?: Pipeline;
-  /** Preprocessed insights. Like feature insights but with fewer details. */
-  preprocessedInsights?: PreprocessedInsightColumn[];
-  /** ID of the dataset profile with metadata about source data */
-  profileId?: string;
-  /** Current status of this entity */
-  status: "ready" | "error" | "cancelled" | "pending" | "dataprep_requested" | "datasync_requested" | "datasync_done";
-  /** The target field in the dataset */
+  pipeline?: Pipeline; /** Preprocessed insights. Like feature insights but with fewer details. */
+  preprocessedInsights?: PreprocessedInsightColumn[]; /** ID of the dataset profile with metadata about source data */
+  profileId?: string; /** Current status of this entity */
+  status: "ready" | "error" | "cancelled" | "pending" | "dataprep_requested" | "datasync_requested" | "datasync_done"; /** The target field in the dataset */
   target: string;
   /** ID of the top model (based on training scores) in this experiment
    * version */
   topModelId?: string;
   /** Optional training duration in seconds. If not provided, max value used.
    * If provided, min 900 (15m) and max 21600 (6h). */
-  trainingDuration?: TrainingDuration;
-  /** Timestamp when this was updated */
-  updatedAt: UpdatedAt;
-  /** 1-based sequential version number within the experiment */
+  trainingDuration?: TrainingDuration; /** Timestamp when this was updated */
+  updatedAt: UpdatedAt; /** 1-based sequential version number within the experiment */
   versionNumber?: number;
 };
 type ExperimentVersionFindResponse = {
   data: {
     /** An AutoML experiment version. This is a configuration for training
      * models within an experiment. */
-    attributes: ExperimentVersion;
-    /** ID of this entity */
+    attributes: ExperimentVersion; /** ID of this entity */
     id: EntityId;
     type: "experiment-version";
-  }[];
-  /** Resource links included in paginated responses */
-  links: ResponseLinks;
-  /** Meta for FIND operations */
+  }[]; /** Resource links included in paginated responses */
+  links: ResponseLinks; /** Meta for FIND operations */
   meta?: FindResponseMeta;
 };
 type ExperimentVersionGetResponse = {
   data: {
     /** An AutoML experiment version. This is a configuration for training
      * models within an experiment. */
-    attributes: ExperimentVersion;
-    /** ID of this entity */
+    attributes: ExperimentVersion; /** ID of this entity */
     id: EntityId;
     type: "experiment-version";
   };
@@ -798,16 +631,11 @@ type ExperimentVersionInput = {
        *
        * If not provided, defaults to all valid algorithms for your
        * experimentType. */
-      algorithms?: ModelAlgorithm[];
-      /** The Qlik catalog dataset ID */
-      dataSetId: DataSetId;
-      /** Whether this is a new or other dataset */
-      datasetOrigin?: DatasetOrigin;
-      /** A optional date column name to index */
-      dateIndexes?: DateIndexes;
-      /** The model training mode for the experiment version */
-      experimentMode: ExperimentMode;
-      /** Experiment type */
+      algorithms?: ModelAlgorithm[]; /** The Qlik catalog dataset ID */
+      dataSetId: DataSetId; /** Whether this is a new or other dataset */
+      datasetOrigin?: DatasetOrigin; /** A optional date column name to index */
+      dateIndexes?: DateIndexes; /** The model training mode for the experiment version */
+      experimentMode: ExperimentMode; /** Experiment type */
       experimentType: ExperimentType;
       /** List of features from your dataset for creating Experiment
        * Versions. This appears in from ProfileInsights response (in the
@@ -829,19 +657,15 @@ type ExperimentVersionInput = {
   };
 };
 type ExperimentVersionPatch = {
-  /** All patch requests use the replace operation */
-  op: "replace";
-  /** Path for the properties you can update. */
-  path: "/name";
-  /** Use for fields that can be `any` type (string, number, etc.) */
+  /** All patch requests use the replace operation */op: "replace"; /** Path for the properties you can update. */
+  path: "/name"; /** Use for fields that can be `any` type (string, number, etc.) */
   value: AnyType;
 }[];
 type ExperimentVersionPostResponse = {
   data: {
     /** An AutoML experiment version. This is a configuration for training
      * models within an experiment. */
-    attributes: ExperimentVersion;
-    /** ID of this entity */
+    attributes: ExperimentVersion; /** ID of this entity */
     id: EntityId;
     type: "experiment-version";
   };
@@ -856,8 +680,7 @@ type Failure = {
 type Feature = {
   /** Indicates if you want to change the featureType for this
    * feature within the experiment version */
-  changeType?: ChangeType;
-  /** The data type of this feature in your dataset */
+  changeType?: ChangeType; /** The data type of this feature in your dataset */
   dataType?: DataType;
   /** The default feature type based on the feature's data type.
    * If you want a value to be interpreted differently (e.g. 0/1
@@ -866,10 +689,8 @@ type Feature = {
   /** Include this feature in your experiment version? Default
    * here is based on insights for this feature
    * (e.g. willBeDropped). */
-  include?: boolean;
-  /** Name of the feature column */
-  name?: string;
-  /** The parent feature name for engineered features. e.g. `OrderDate` may be the parent of its engineered features (features extracted from parent) like `OrderDate.YEAR`, `OrderDate.MONTH`, etc. */
+  include?: boolean; /** Name of the feature column */
+  name?: string; /** The parent feature name for engineered features. e.g. `OrderDate` may be the parent of its engineered features (features extracted from parent) like `OrderDate.YEAR`, `OrderDate.MONTH`, etc. */
   parentFeature?: string;
 };
 /**
@@ -877,8 +698,7 @@ type Feature = {
  * ProfileInsights.
  */
 type FeatureInsights = {
-  /** Whether a feature cannot be the target field */
-  cannotBeTarget: boolean;
+  /** Whether a feature cannot be the target field */cannotBeTarget: boolean;
   /** The default feature type based on the feature's data type.
    * If you want a value to be interpreted differently (e.g. 0/1
    * as categorical/boolean instead of numeric), use `changeType`. */
@@ -893,12 +713,9 @@ type FeatureInsights = {
    * applies to possible date index columns. After the experiment version
    * is created, we get a more precise number for subsequent versions.
    * When training data is grouped, this estimate may be less accurate. */
-  estimatedMaxForecastHorizon?: number;
-  /** Experiment types in this feature insight */
-  experimentTypes: ExperimentType[];
-  /** List of insights about this feature. */
-  insights: Insights[];
-  /** Name of the feature insight */
+  estimatedMaxForecastHorizon?: number; /** Experiment types in this feature insight */
+  experimentTypes: ExperimentType[]; /** List of insights about this feature. */
+  insights: Insights[]; /** Name of the feature insight */
   name: string;
   /** Whether this feature will be dropped. Traits like high cardinality
    * make some features less predictive or too costly to merit use. */
@@ -946,50 +763,34 @@ type JobType = "prediction";
  * A model based on an algorithm within an experiment version.
  */
 type Model = {
-  /** Model algorithm name abbreviation */
-  algoAbbrv?: ModelAlgorithmAbbreviation;
-  /** The algorithm used by this model */
+  /** Model algorithm name abbreviation */algoAbbrv?: ModelAlgorithmAbbreviation; /** The algorithm used by this model */
   algorithm?: string;
   anomalyRatio?: number;
   /** Batch number indicates the index of the experiment version fold
    * (most relevant when HPO is enabled) */
   batchNum?: number;
   binaryImbalanceSampling?: BinaryImbalanceSampling;
-  binningFeatures?: string[];
-  /** Dataset columns selected as features */
-  columns?: string[];
-  /** Timestamp when this was created */
-  createdAt?: CreatedAt;
-  /** Description of this entity */
-  description?: EntityDescription;
-  /** Features dropped because they're unsuitable */
-  droppedFeatures?: DroppedFeature[];
-  /** JSON string of error object */
-  errorMessage?: ErrorMessage;
-  /** JSON string with list of error objects */
-  errors?: Errors;
-  /** ID of the experiment version */
-  experimentVersionId?: ExperimentVersionId;
-  /** Version number of the hyperparameter optimization */
-  hpoNum?: number;
-  /** ID of this entity */
-  id?: EntityId;
-  /** Model metrics based on the type of model */
+  binningFeatures?: string[]; /** Dataset columns selected as features */
+  columns?: string[]; /** Timestamp when this was created */
+  createdAt?: CreatedAt; /** Description of this entity */
+  description?: EntityDescription; /** Features dropped because they're unsuitable */
+  droppedFeatures?: DroppedFeature[]; /** JSON string of error object */
+  errorMessage?: ErrorMessage; /** JSON string with list of error objects */
+  errors?: Errors; /** ID of the experiment version */
+  experimentVersionId?: ExperimentVersionId; /** Version number of the hyperparameter optimization */
+  hpoNum?: number; /** ID of this entity */
+  id?: EntityId; /** Model metrics based on the type of model */
   metrics?: ModelMetrics;
   /** Model state. These are the state of the model in relation to
    * deployments. */
-  modelState?: ModelState;
-  /** Name of this entity */
+  modelState?: ModelState; /** Name of this entity */
   name?: EntityName;
-  powerTransformFeatures?: string[];
-  /** Ratio of sample data in relation to the dataset */
-  samplingRatio?: number;
-  /** Model sequence number within the experiment version */
+  powerTransformFeatures?: string[]; /** Ratio of sample data in relation to the dataset */
+  samplingRatio?: number; /** Model sequence number within the experiment version */
   seqNum?: number;
   /** Model status. These are the status of the model in relation to
    * experiments (i.e. training status). */
-  status?: ModelStatus;
-  /** Timestamp when this was updated */
+  status?: ModelStatus; /** Timestamp when this was updated */
   updatedAt?: UpdatedAt;
 };
 /**
@@ -1008,28 +809,21 @@ type ModelAlgorithm = "catboost_classifier" | "catboost_regression" | "elasticne
 type ModelAlgorithmAbbreviation = "CATBC" | "CATBR" | "ELNC" | "GNBC" | "LGBMC" | "LGBMR" | "LINR" | "LOGC" | "LSOC" | "RAFC" | "RAFR" | "SGDR" | "XGBC" | "XGBR";
 type ModelFindResponse = {
   data: {
-    /** A model based on an algorithm within an experiment version. */
-    attributes: Model;
-    /** ID of this entity */
+    /** A model based on an algorithm within an experiment version. */attributes: Model; /** ID of this entity */
     id: EntityId;
     type: "model";
-  }[];
-  /** Resource links included in paginated responses */
-  links: ResponseLinks;
-  /** Meta for FIND operations */
+  }[]; /** Resource links included in paginated responses */
+  links: ResponseLinks; /** Meta for FIND operations */
   meta?: FindResponseMeta;
 };
 type ModelForRecommendations = Model & {
   metrics?: {
-    /** This represents model prediction speed in rows/second */
-    predictionSpeed: number;
+    /** This represents model prediction speed in rows/second */predictionSpeed: number;
   };
 };
 type ModelGetResponse = {
   data: {
-    /** A model based on an algorithm within an experiment version. */
-    attributes: Model;
-    /** ID of this entity */
+    /** A model based on an algorithm within an experiment version. */attributes: Model; /** ID of this entity */
     id: EntityId;
     type: "model";
   };
@@ -1042,8 +836,7 @@ type ModelId = string;
  * Model information stored on an alias
  */
 type ModelInfo = {
-  /** ID of this entity */
-  id?: EntityId;
+  /** ID of this entity */id?: EntityId;
 };
 /**
  * Model metrics based on the type of model
@@ -1057,8 +850,7 @@ type ModelMetrics = {
   multiclass?: ModelMetricsMulticlass;
   /** Regression metrics for numeric values. Details:
    * https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/AutoML/scoring-regression.htm */
-  regression?: ModelMetricsRegression;
-  /** Timeseries metrics experiments valid for timeseries forecasting. */
+  regression?: ModelMetricsRegression; /** Timeseries metrics experiments valid for timeseries forecasting. */
   timeseries?: ModelMetricsTimeseries;
 };
 /**
@@ -1071,68 +863,40 @@ type ModelMetricsBinary = {
   accuracy?: number;
   /** Average measure of how often the model made correct predictions
    * (test data) */
-  accuracyTest?: number;
-  /** Area under curve (training data) */
-  auc?: number;
-  /** Area under curve (test data) */
-  aucTest?: number;
-  /** The harmonic mean of precision and recall for training data */
-  f1?: number;
-  /** The harmonic mean of precision and recall for test data */
-  f1Test?: number;
-  /** The false positive rate (training data) */
-  fallout?: number;
-  /** The false positive rate (test data) */
-  falloutTest?: number;
-  /** Actual true values incorrectly predicted as false (training data) */
-  falseNegative?: number;
-  /** Actual true values incorrectly predicted as false (test data) */
-  falseNegativeTest?: number;
-  /** Actual false values incorrectly predicted as true (training data) */
-  falsePositive?: number;
-  /** Actual false values incorrectly predicted as true (test data) */
-  falsePositiveTest?: number;
-  /** Measures accuracy in logistic regression (training data) */
-  logLoss?: number;
-  /** Measures accuracy in logistic regression (test data) */
-  logLossTest?: number;
-  /** Matthews correlation coefficient (training data) */
-  mcc?: number;
-  /** Matthews correlation coefficient (test data) */
-  mccTest?: number;
-  /** The false negative rate (training data) */
-  missRate?: number;
-  /** The false negative rate (test data) */
-  missRateTest?: number;
-  /** Negative predictive value (training data) */
-  npv?: number;
-  /** Negative predictive value (test data) */
+  accuracyTest?: number; /** Area under curve (training data) */
+  auc?: number; /** Area under curve (test data) */
+  aucTest?: number; /** The harmonic mean of precision and recall for training data */
+  f1?: number; /** The harmonic mean of precision and recall for test data */
+  f1Test?: number; /** The false positive rate (training data) */
+  fallout?: number; /** The false positive rate (test data) */
+  falloutTest?: number; /** Actual true values incorrectly predicted as false (training data) */
+  falseNegative?: number; /** Actual true values incorrectly predicted as false (test data) */
+  falseNegativeTest?: number; /** Actual false values incorrectly predicted as true (training data) */
+  falsePositive?: number; /** Actual false values incorrectly predicted as true (test data) */
+  falsePositiveTest?: number; /** Measures accuracy in logistic regression (training data) */
+  logLoss?: number; /** Measures accuracy in logistic regression (test data) */
+  logLossTest?: number; /** Matthews correlation coefficient (training data) */
+  mcc?: number; /** Matthews correlation coefficient (test data) */
+  mccTest?: number; /** The false negative rate (training data) */
+  missRate?: number; /** The false negative rate (test data) */
+  missRateTest?: number; /** Negative predictive value (training data) */
+  npv?: number; /** Negative predictive value (test data) */
   npvTest?: number;
   /** Positive predictive value. Probability that the model was correct
    * when it predicted something was true. (training data) */
   precision?: number;
   /** Positive predictive value. Probability that the model was correct
    * when it predicted something was true. (test data) */
-  precisionTest?: number;
-  /** The true positive rate (training data) */
-  recall?: number;
-  /** The true positive rate (test data) */
-  recallTest?: number;
-  /** The true negative rate (training data) */
-  specificity?: number;
-  /** The true negative rate (test data) */
-  specificityTest?: number;
-  /** Probability that a prediction is true (training data) */
-  threshold?: number;
-  /** Probability that a prediction is true (test data) */
-  thresholdTest?: number;
-  /** Actual false values correctly predicted as false (training data) */
-  trueNegative?: number;
-  /** Actual false values correctly predicted as false (test data) */
-  trueNegativeTest?: number;
-  /** Actual true values correctly predicted as true (training data) */
-  truePositive?: number;
-  /** Actual true values correctly predicted as true (test data) */
+  precisionTest?: number; /** The true positive rate (training data) */
+  recall?: number; /** The true positive rate (test data) */
+  recallTest?: number; /** The true negative rate (training data) */
+  specificity?: number; /** The true negative rate (test data) */
+  specificityTest?: number; /** Probability that a prediction is true (training data) */
+  threshold?: number; /** Probability that a prediction is true (test data) */
+  thresholdTest?: number; /** Actual false values correctly predicted as false (training data) */
+  trueNegative?: number; /** Actual false values correctly predicted as false (test data) */
+  trueNegativeTest?: number; /** Actual true values correctly predicted as true (training data) */
+  truePositive?: number; /** Actual true values correctly predicted as true (test data) */
   truePositiveTest?: number;
 };
 /**
@@ -1142,8 +906,7 @@ type ModelMetricsBinary = {
 type ModelMetricsMulticlass = {
   /** Average of how often the model made a correct prediction (training
    * data) */
-  accuracy?: number;
-  /** Average of how often the model made a correct prediction (test data) */
+  accuracy?: number; /** Average of how often the model made a correct prediction (test data) */
   accuracyTest?: number;
   /** A matrix summary of the accuracy of predictions in a classification
    * model (training data) */
@@ -1162,10 +925,8 @@ type ModelMetricsMulticlass = {
   f1Micro?: number;
   /** Micro F1 is the F1 value calculated across the entire confusion
    * matrix (test data) */
-  f1MicroTest?: number;
-  /** Weighted F1 (training data) */
-  f1Weighted?: number;
-  /** Weighted F1 (test data) */
+  f1MicroTest?: number; /** Weighted F1 (training data) */
+  f1Weighted?: number; /** Weighted F1 (test data) */
   f1WeightedTest?: number;
 };
 /**
@@ -1173,62 +934,36 @@ type ModelMetricsMulticlass = {
  * https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/AutoML/scoring-regression.htm
  */
 type ModelMetricsRegression = {
-  /** Mean absolute error (training data) */
-  mae?: number;
-  /** Mean absolute error (test data) */
-  maeTest?: number;
-  /** Mean squared error (training data) */
-  mse?: number;
-  /** Mean squared error (test data) */
-  mseTest?: number;
-  /** R squared (training data) */
-  r2?: number;
-  /** R squared (test data) */
-  r2Test?: number;
-  /** Root mean squared error (training data) */
-  rmse?: number;
-  /** Root mean squared error (test data) */
+  /** Mean absolute error (training data) */mae?: number; /** Mean absolute error (test data) */
+  maeTest?: number; /** Mean squared error (training data) */
+  mse?: number; /** Mean squared error (test data) */
+  mseTest?: number; /** R squared (training data) */
+  r2?: number; /** R squared (test data) */
+  r2Test?: number; /** Root mean squared error (training data) */
+  rmse?: number; /** Root mean squared error (test data) */
   rmseTest?: number;
 };
 /**
  * Timeseries metrics experiments valid for timeseries forecasting.
  */
 type ModelMetricsTimeseries = {
-  /** Mean absolute error (training data) */
-  mae?: number;
-  /** Mean absolute error (test data) */
-  maeTest?: number;
-  /** Mean absolute percentage error (training data) */
-  mape?: number;
-  /** Mean absolute percentage error (test data) */
-  mapeTest?: number;
-  /** Mean absolute scaled error (training data) */
-  mase?: number;
-  /** Mean absolute scaled error (test data) */
-  maseTest?: number;
-  /** Median absolute percentage error (training data) */
-  mdape?: number;
-  /** Median absolute percentage error (test data) */
-  mdapeTest?: number;
-  /** Median root mean squared error (training data) */
-  mdnrmse?: number;
-  /** Median root mean squared error (test data) */
-  mdnrmseTest?: number;
-  /** Mean root mean squared error (training data) */
-  mnrmse?: number;
-  /** Mean root mean squared error (test data) */
-  mnrmseTest?: number;
-  /** Root mean squared error (training data) */
-  rmse?: number;
-  /** Root mean squared error (test data) */
-  rmseTest?: number;
-  /** Symmetric mean absolute percentage error (training data) */
-  smape?: number;
-  /** Symmetric mean absolute percentage error (test data) */
-  smapeTest?: number;
-  /** Weighted mean absolute percentage error (training data) */
-  wmape?: number;
-  /** Weighted mean absolute percentage error (test data) */
+  /** Mean absolute error (training data) */mae?: number; /** Mean absolute error (test data) */
+  maeTest?: number; /** Mean absolute percentage error (training data) */
+  mape?: number; /** Mean absolute percentage error (test data) */
+  mapeTest?: number; /** Mean absolute scaled error (training data) */
+  mase?: number; /** Mean absolute scaled error (test data) */
+  maseTest?: number; /** Median absolute percentage error (training data) */
+  mdape?: number; /** Median absolute percentage error (test data) */
+  mdapeTest?: number; /** Median root mean squared error (training data) */
+  mdnrmse?: number; /** Median root mean squared error (test data) */
+  mdnrmseTest?: number; /** Mean root mean squared error (training data) */
+  mnrmse?: number; /** Mean root mean squared error (test data) */
+  mnrmseTest?: number; /** Root mean squared error (training data) */
+  rmse?: number; /** Root mean squared error (test data) */
+  rmseTest?: number; /** Symmetric mean absolute percentage error (training data) */
+  smape?: number; /** Symmetric mean absolute percentage error (test data) */
+  smapeTest?: number; /** Weighted mean absolute percentage error (training data) */
+  wmape?: number; /** Weighted mean absolute percentage error (test data) */
   wmapeTest?: number;
 };
 /**
@@ -1243,12 +978,10 @@ type ModelState = "pending" | "enabled" | "disabled" | "inactive";
 type ModelStatus = "pending" | "training_requested" | "training_done" | "ready" | "error";
 type ModelsInfo = ModelInfo[];
 type OutputFile = {
-  fileName: string;
-  /** Dataset file type */
+  fileName: string; /** Dataset file type */
   fileType: FileType;
   key: string;
-  path: string;
-  /** Space ID for this entity (empty string for personal space) */
+  path: string; /** Space ID for this entity (empty string for personal space) */
   spaceId: SpaceId;
 };
 /**
@@ -1267,43 +1000,31 @@ type Pipeline = {
   transforms?: Transform[];
 };
 type PredictionJobResponse = {
-  /** The ID of a correlated resource of corrType */
-  corrId: CorrId;
+  /** The ID of a correlated resource of corrType */corrId: CorrId;
   /** Types names of correlated resources (batch 'prediction' and
    * experiment_version) */
-  corrType: CorrType;
-  /** Timestamp when this was created */
-  createdAt: CreatedAt;
-  /** ID of the owner/user that created this entity */
-  createdBy: string;
-  /** Timestamp when this is deleted */
-  deletedAt: DeletedAt;
-  /** ID of a model deployment */
+  corrType: CorrType; /** Timestamp when this was created */
+  createdAt: CreatedAt; /** ID of the owner/user that created this entity */
+  createdBy: string; /** Timestamp when this is deleted */
+  deletedAt: DeletedAt; /** ID of a model deployment */
   deploymentId: DeploymentId;
   details: {
     isScheduled: boolean;
     lineageSchemaUpdated: boolean;
     outputFiles: OutputFile[];
   };
-  experimentVersionNumber: string;
-  /** ID of this entity */
-  id: EntityId;
-  /** The type for this job */
-  jobType: JobType;
-  /** ID of the model */
+  experimentVersionNumber: string; /** ID of this entity */
+  id: EntityId; /** The type for this job */
+  jobType: JobType; /** ID of the model */
   modelId: ModelId;
-  name: string;
-  /** ID of the current job's parent */
+  name: string; /** ID of the current job's parent */
   parentJobId: ParentJobId;
   parentName: string;
-  rowsPredicted: number;
-  /** Status of this job */
+  rowsPredicted: number; /** Status of this job */
   status: "pending" | "completed" | "cancelled" | "error";
-  success: boolean;
-  /** Tenant ID for this entity */
+  success: boolean; /** Tenant ID for this entity */
   tenantId: TenantId;
-  trigger: string;
-  /** Timestamp when this was updated */
+  trigger: string; /** Timestamp when this was updated */
   updatedAt: UpdatedAt;
 };
 /**
@@ -1312,8 +1033,7 @@ type PredictionJobResponse = {
 type PreprocessedInsightColumn = {
   /** Preliminary list of column/feature insights available after
    * preprocessing but before feature insights are available */
-  insights: ("is_free_text" | "cannot_be_processed_as_free_text" | "is_date_engineered" | "has_target_leakage" | "feature_type_change_invalid" | "feature_type_change_failed" | "feature_type_change_successful" | "data_bias_detected" | "representation_bias_detected")[];
-  /** Name of the preprocessed insight column */
+  insights: ("is_free_text" | "cannot_be_processed_as_free_text" | "is_date_engineered" | "has_target_leakage" | "feature_type_change_invalid" | "feature_type_change_failed" | "feature_type_change_successful" | "data_bias_detected" | "representation_bias_detected")[]; /** Name of the preprocessed insight column */
   name: string;
   /** Whether this feature insight will be dropped due to free text or
    * high cardinality that makes it less useful */
@@ -1323,14 +1043,10 @@ type PreprocessedInsightColumn = {
  * Insights (metadata) about an experiment dataset
  */
 type ProfileInsights = {
-  /** List of algorithms available for the selected experiment type */
-  algorithms?: ModelAlgorithm[];
+  /** List of algorithms available for the selected experiment type */algorithms?: ModelAlgorithm[];
   defaultVersionConfig?: {
-    /** The Qlik catalog dataset ID */
-    dataSetId: DataSetId;
-    /** Whether this is a new or other dataset */
-    datasetOrigin: DatasetOrigin;
-    /** The model training mode for the experiment version */
+    /** The Qlik catalog dataset ID */dataSetId: DataSetId; /** Whether this is a new or other dataset */
+    datasetOrigin: DatasetOrigin; /** The model training mode for the experiment version */
     experimentMode: ExperimentMode;
     /** List of features from your dataset for creating Experiment
      * Versions. This appears in from ProfileInsights response (in the
@@ -1341,10 +1057,8 @@ type ProfileInsights = {
   };
   /** Optional experiment version ID. When included, it indicates that
    * this dataset profile is a snapshot from a previous version. */
-  experimentVersionId?: string;
-  /** List of feature insights object, one per feature in the dataset */
-  insights?: FeatureInsights[];
-  /** Is this a CSV dataset > 1GB? */
+  experimentVersionId?: string; /** List of feature insights object, one per feature in the dataset */
+  insights?: FeatureInsights[]; /** Is this a CSV dataset > 1GB? */
   isLargeCsv?: boolean;
   /** Number of rows in the dataset.
    *
@@ -1355,21 +1069,15 @@ type ProfileInsights = {
    * included in experiment version) to calculate total `cells` to
    * ensure it stays under your license limit. Large CSVs have a hard
    * 100M cell limit. */
-  numberOfRows?: number;
-  /** ID of owner/user for this entity */
-  ownerId: OwnerId;
-  /** Size of the profiled dataset in bytes. */
-  sizeInBytes?: number;
-  /** Status of profile insights. Not available until `ready`. */
-  status: "pending" | "error" | "ready";
-  /** Tenant ID for this entity */
+  numberOfRows?: number; /** ID of owner/user for this entity */
+  ownerId: OwnerId; /** Size of the profiled dataset in bytes. */
+  sizeInBytes?: number; /** Status of profile insights. Not available until `ready`. */
+  status: "pending" | "error" | "ready"; /** Tenant ID for this entity */
   tenantId: TenantId;
 };
 type ProfileInsightsGetResponse = {
   data: {
-    /** Insights (metadata) about an experiment dataset */
-    attributes: ProfileInsights;
-    /** ID of this entity */
+    /** Insights (metadata) about an experiment dataset */attributes: ProfileInsights; /** ID of this entity */
     id: EntityId;
     type: "profile-insights";
   };
@@ -1379,29 +1087,21 @@ type ProfileInsightsGetResponse = {
  * experiment versions
  */
 type ProfileInsightsInput = {
-  /** Data wrapper for request input */
-  data?: {
-    /** The request body for this resource */
-    attributes?: {
-      /** The Qlik catalog dataset ID */
-      dataSetId?: DataSetId;
-      /** Experiment type */
-      experimentType?: ExperimentType;
-      /** Whether the server should or client should manage polling/waiting */
-      shouldWait?: boolean;
-      /** Optional selected target provided on subsequent requests */
+  /** Data wrapper for request input */data?: {
+    /** The request body for this resource */attributes?: {
+      /** The Qlik catalog dataset ID */dataSetId?: DataSetId; /** Experiment type */
+      experimentType?: ExperimentType; /** Whether the server should or client should manage polling/waiting */
+      shouldWait?: boolean; /** Optional selected target provided on subsequent requests */
       target?: string;
     };
     type?: "profile-insights";
   };
 };
 type RealTimePredictionInputSchema = {
-  /** The name of a feature in the dataset */
-  name?: string;
+  /** The name of a feature in the dataset */name?: string;
 };
 type RealTimePredictionSchema = {
-  /** The name of a feature in the dataset */
-  name?: string;
+  /** The name of a feature in the dataset */name?: string;
 };
 /**
  * Input values for creating realtime predictions
@@ -1409,9 +1109,7 @@ type RealTimePredictionSchema = {
 type RealtimePrediction = {
   data?: {
     attributes?: {
-      /** Rows of the dataset from which to produce predictions */
-      rows?: string[][];
-      /** List of features in the dataset */
+      /** Rows of the dataset from which to produce predictions */rows?: string[][]; /** List of features in the dataset */
       schema?: RealTimePredictionSchema[];
     };
     type?: "realtime-prediction";
@@ -1423,8 +1121,7 @@ type RealtimePrediction = {
 type RealtimePredictionInput = {
   /** Rows of the dataset from which to produce predictions.
    * Date features must be in ISO 8601 format. */
-  rows?: string[][];
-  /** List of features in the dataset. */
+  rows?: string[][]; /** List of features in the dataset. */
   schema?: RealTimePredictionInputSchema[];
 };
 /**
@@ -1432,8 +1129,7 @@ type RealtimePredictionInput = {
  */
 type ResponseLinks = {
   first: {
-    /** Link to the first set of responses from `offset` 0 to count `limit`` */
-    href?: string;
+    /** Link to the first set of responses from `offset` 0 to count `limit`` */href?: string;
   };
   last: {
     /** Link to the last set of responses from `limit` minus `offset` to
@@ -1441,16 +1137,13 @@ type ResponseLinks = {
     href?: string;
   };
   next: {
-    /** Link to the next set of responses */
-    href?: string;
+    /** Link to the next set of responses */href?: string;
   };
   prev: {
-    /** Link to the previous set of responses */
-    href?: string;
+    /** Link to the previous set of responses */href?: string;
   };
   self: {
-    /** Link to the current set of responses */
-    href?: string;
+    /** Link to the current set of responses */href?: string;
   };
 };
 /**
@@ -1500,12 +1193,9 @@ declare function getMlDeployments(query: {
    * - `exactName` string - Deployments with exact name. Names may not be unique.
    * - `nameContains` string - Deployments where name includes this. Names may not be unique
    * - `experimentType` string - Deployments that have models of the experiment type */
-  filter?: string;
-  /** Number of results per page. Default is 32. */
-  limit?: number;
-  /** Number of rows to skip before getting page[size] */
-  offset?: number;
-  /** Field(s) by which to sort response */
+  filter?: string; /** Number of results per page. Default is 32. */
+  limit?: number; /** Number of rows to skip before getting page[size] */
+  offset?: number; /** Field(s) by which to sort response */
   sort?: EnumSortDeployments;
 }, options?: ApiCallOptions): Promise<GetMlDeploymentsHttpResponse>;
 type GetMlDeploymentsHttpResponse = {
@@ -1635,12 +1325,9 @@ declare function getMlDeploymentAliases(deploymentId: string, query: {
    * - `name` string - Aliases with exact name
    * - `modelId` UUID string - By model ID
    * - `mode` enum string - Mode by which alias is set to */
-  filter?: string;
-  /** Number of results per page. Default is 32. */
-  limit?: number;
-  /** Number of rows to skip before getting page[size] */
-  offset?: number;
-  /** Field(s) by which to sort response */
+  filter?: string; /** Number of results per page. Default is 32. */
+  limit?: number; /** Number of rows to skip before getting page[size] */
+  offset?: number; /** Field(s) by which to sort response */
   sort?: EnumSortAliases;
 }, options?: ApiCallOptions): Promise<GetMlDeploymentAliasesHttpResponse>;
 type GetMlDeploymentAliasesHttpResponse = {
@@ -1738,11 +1425,8 @@ type PatchMlDeploymentAliaseHttpError = {
  * @throws RunMlDeploymentAliaseRealtimePredictionsHttpError
  */
 declare function runMlDeploymentAliaseRealtimePredictions(deploymentId: string, aliasName: string, query: {
-  /** If true, reason why a prediction was not produced included response */
-  includeNotPredictedReason?: boolean;
-  /** If true, shap values included in response */
-  includeShap?: boolean;
-  /** If true, source data included in response */
+  /** If true, reason why a prediction was not produced included response */includeNotPredictedReason?: boolean; /** If true, shap values included in response */
+  includeShap?: boolean; /** If true, source data included in response */
   includeSource?: boolean;
   /** The name of the feature in the source data to use as an index in the
    * response data. The column will be included with its original name
@@ -1776,12 +1460,9 @@ declare function getMlDeploymentBatchPredictions(deploymentId: string, query: {
    * - `experimentVersionId` UUID string - ID of experiment version in which model(s) exist
    * - `modelId` UUID string - By model ID
    * - `ownerId` ID string of batch prediction owner */
-  filter?: string;
-  /** Number of results per page. Default is 32. */
-  limit?: number;
-  /** Number of rows to skip before getting page[size] */
-  offset?: number;
-  /** Field(s) by which to sort response */
+  filter?: string; /** Number of results per page. Default is 32. */
+  limit?: number; /** Number of rows to skip before getting page[size] */
+  offset?: number; /** Field(s) by which to sort response */
   sort?: EnumSortBatchPredictions;
 }, options?: ApiCallOptions): Promise<GetMlDeploymentBatchPredictionsHttpResponse>;
 type GetMlDeploymentBatchPredictionsHttpResponse = {
@@ -2006,11 +1687,8 @@ type RemoveMlDeploymentModelsHttpError = {
  * @throws RunMlDeploymentRealtimePredictionsHttpError
  */
 declare function runMlDeploymentRealtimePredictions(deploymentId: string, query: {
-  /** If true, reason why a prediction was not produced included response */
-  includeNotPredictedReason?: boolean;
-  /** If true, shapley values included in response */
-  includeShap?: boolean;
-  /** If true, source data included in response */
+  /** If true, reason why a prediction was not produced included response */includeNotPredictedReason?: boolean; /** If true, shapley values included in response */
+  includeShap?: boolean; /** If true, source data included in response */
   includeSource?: boolean;
   /** The name of the feature in the source data to use as an index in the
    * response data. The column will be included with its original name
@@ -2050,12 +1728,9 @@ declare function getMlExperiments(query: {
    * - `experimentVersionId` UUID string - ID of an experiment version in the experiment
    * - `modelId` UUID string - ID of a model associated with the experiment
    * - `deploymentId` UUID string - ID of a deployment of a model associated with the experiment */
-  filter?: string;
-  /** Number of results per page. Default is 32. */
-  limit?: number;
-  /** Number of rows to skip before getting page[size] */
-  offset?: number;
-  /** Field(s) by which to sort response */
+  filter?: string; /** Number of results per page. Default is 32. */
+  limit?: number; /** Number of rows to skip before getting page[size] */
+  offset?: number; /** Field(s) by which to sort response */
   sort?: EnumSortExperiments;
 }, options?: ApiCallOptions): Promise<GetMlExperimentsHttpResponse>;
 type GetMlExperimentsHttpResponse = {
@@ -2189,12 +1864,9 @@ declare function getMlExperimentModels(experimentId: string, query: {
    * - `samplingRatio` number - Find models by sampling ratio
    * - `modelState` enum string - State by which to find models<br><br>
    *   - Valid states: `pending, enabled, disabled, inactive` */
-  filter?: string;
-  /** Number of results per page. Default is 32. */
-  limit?: number;
-  /** Number of rows to skip before getting page[size] */
-  offset?: number;
-  /** Field(s) by which to sort response */
+  filter?: string; /** Number of results per page. Default is 32. */
+  limit?: number; /** Number of rows to skip before getting page[size] */
+  offset?: number; /** Field(s) by which to sort response */
   sort?: EnumSortModels;
 }, options?: ApiCallOptions): Promise<GetMlExperimentModelsHttpResponse>;
 type GetMlExperimentModelsHttpResponse = {
@@ -2241,12 +1913,9 @@ declare function getMlExperimentVersions(experimentId: string, query: {
    * - `status` enum string - Status to filter by. Omit to get models of any status.
    *   - Valid statuses: pending, ready, error, cancelled
    * - `modelId` UUID string - ID of a model associated with the experiment */
-  filter?: string;
-  /** Number of results per page. Default is 32. */
-  limit?: number;
-  /** Number of rows to skip before getting page[size] */
-  offset?: number;
-  /** Field(s) by which to sort response */
+  filter?: string; /** Number of results per page. Default is 32. */
+  limit?: number; /** Number of rows to skip before getting page[size] */
+  offset?: number; /** Field(s) by which to sort response */
   sort?: EnumSortExperimentVersions;
 }, options?: ApiCallOptions): Promise<GetMlExperimentVersionsHttpResponse>;
 type GetMlExperimentVersionsHttpResponse = {

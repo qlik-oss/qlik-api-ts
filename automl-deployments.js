@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/automl-deployments.ts
 /**
@@ -36,7 +36,6 @@ const automlDeploymentsExport = {
 	createAutomlDeploymentRealtimePrediction,
 	clearCache
 };
-var automl_deployments_default = automlDeploymentsExport;
 
 //#endregion
-export { clearCache, createAutomlDeploymentRealtimePrediction, automl_deployments_default as default };
+export { clearCache, createAutomlDeploymentRealtimePrediction, automlDeploymentsExport as default };

@@ -1,16 +1,13 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/knowledgebases.d.ts
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
  */
 type JSONPatch = {
-  /** The operation to be performed. */
-  op: "REPLACE";
-  /** A JSON Pointer. */
-  path: string;
-  /** The value to be used for this operation. */
+  /** The operation to be performed. */op: "REPLACE"; /** A JSON Pointer. */
+  path: string; /** The value to be used for this operation. */
   value: string | number | boolean;
 };
 /**
@@ -29,27 +26,17 @@ type JSONPatch = {
  */
 type JSONPatchArray = JSONPatch[];
 type Chunk = {
-  /** Metadata about the chunk */
-  chunkMeta: KbChunkMeta;
-  /** search method for the chunk, e.g. `semantic search`, `keyword search` or `semantic and keyword search` */
-  searchSource?: string;
-  /** Similarity score from embedding match */
-  semanticScore?: number;
-  /** Text content of the chunk */
-  text: string;
-  /** Score from keyword search */
+  /** Metadata about the chunk */chunkMeta: KbChunkMeta; /** search method for the chunk, e.g. `semantic search`, `keyword search` or `semantic and keyword search` */
+  searchSource?: string; /** Similarity score from embedding match */
+  semanticScore?: number; /** Text content of the chunk */
+  text: string; /** Score from keyword search */
   tfidfScore?: number;
 };
 type Chunking = {
-  /** Allows to keep or remove separators used */
-  keepSeparator: boolean;
-  /** Chunk overlap, should be less than size */
-  overlap: number;
-  /** List of separators to chunk by */
-  separators: string[];
-  /** Size of chunks */
-  size: number;
-  /** Chunking strategy */
+  /** Allows to keep or remove separators used */keepSeparator: boolean; /** Chunk overlap, should be less than size */
+  overlap: number; /** List of separators to chunk by */
+  separators: string[]; /** Size of chunks */
+  size: number; /** Chunking strategy */
   type: string;
 };
 type ContentSummary = {
@@ -62,26 +49,17 @@ type ContentSummary = {
  * Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided.
  */
 type CreateDataSource = {
-  /** Configuration for webcrawling */
-  crawlerConfig?: DataSourceCrawlConfig;
-  /** Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided. */
-  fileConfig?: DataSourceFileConfig;
-  /** Name of the datasource */
+  /** Configuration for webcrawling */crawlerConfig?: DataSourceCrawlConfig; /** Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided. */
+  fileConfig?: DataSourceFileConfig; /** Name of the datasource */
   name: string;
   type: "file" | "web" | "database";
 };
 type CreateKnowledgeBase = {
-  /** User opt in to advanced parsing and chunking pipeline. Default is false, which will run legacy parsing and chunking. */
-  advancedIndexing?: boolean;
-  /** Description of the knowledgebase */
-  description?: string;
-  /** Name of the knowledgebase */
-  name: string;
-  /** Number of selected errors to store in the case of any failed datasources. Optional value with a default of 10. */
-  selectedErrorsCount?: number;
-  /** Unique identifier of the space to contain the knowledgebase */
-  spaceId: string;
-  /** List of tags for knowledgebase */
+  /** User opt in to advanced parsing and chunking pipeline. Default is false, which will run legacy parsing and chunking. */advancedIndexing?: boolean; /** Description of the knowledgebase */
+  description?: string; /** Name of the knowledgebase */
+  name: string; /** Number of selected errors to store in the case of any failed datasources. Optional value with a default of 10. */
+  selectedErrorsCount?: number; /** Unique identifier of the space to contain the knowledgebase */
+  spaceId: string; /** List of tags for knowledgebase */
   tags?: string[];
 };
 /**
@@ -89,18 +67,12 @@ type CreateKnowledgeBase = {
  */
 type DataSource = {
   chunking?: Chunking;
-  contentSummary: ContentSummary;
-  /** Configuration for webcrawling */
-  crawlerConfig?: DataSourceCrawlConfig;
-  /** Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided. */
-  fileConfig?: DataSourceFileConfig;
-  /** Unique identifier of the datasource */
-  id: string;
-  /** Name of the datasource */
-  name?: string;
-  /** The number of times that a datasource was referenced as a source in an answer */
-  sourceCount?: number;
-  /** The unique identifier of the space containing the datasource */
+  contentSummary: ContentSummary; /** Configuration for webcrawling */
+  crawlerConfig?: DataSourceCrawlConfig; /** Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided. */
+  fileConfig?: DataSourceFileConfig; /** Unique identifier of the datasource */
+  id: string; /** Name of the datasource */
+  name?: string; /** The number of times that a datasource was referenced as a source in an answer */
+  sourceCount?: number; /** The unique identifier of the space containing the datasource */
   spaceId?: string;
   syncInfo?: DataSourceSyncStatus;
   type: "file" | "web" | "database";
@@ -109,87 +81,60 @@ type DataSource = {
  * Configuration for webcrawling
  */
 type DataSourceCrawlConfig = {
-  /** Pattern matching links to crawl */
-  crawlPatterns?: DataSourceCrawlPattern[];
-  /** Pattern matching links to index */
-  indexPatterns?: DataSourceCrawlPattern[];
-  /** Scope for th webcrawler */
-  scope: DataSourceCrawlScope;
-  /** Seed URL that crawling will start on. */
+  /** Pattern matching links to crawl */crawlPatterns?: DataSourceCrawlPattern[]; /** Pattern matching links to index */
+  indexPatterns?: DataSourceCrawlPattern[]; /** Scope for th webcrawler */
+  scope: DataSourceCrawlScope; /** Seed URL that crawling will start on. */
   url: string;
 };
 /**
  * Include or exclude pattern
  */
 type DataSourceCrawlPattern = {
-  /** Regex patterna to filter links on */
-  pattern: string;
-  /** include or exclude */
+  /** Regex patterna to filter links on */pattern: string; /** include or exclude */
   type: "include" | "exclude";
 };
 /**
  * Scope for th webcrawler
  */
 type DataSourceCrawlScope = {
-  /** The number of levels of links the crawler will traverse */
-  depth: number;
-  /** if set to true crawler will try to download and index other supported content like pdf:s from links */
-  downloadFiles?: boolean;
-  /** Maximum number of links per page that will be extracted */
-  maxLinks?: number;
-  /** Optional parameter. Max size of downloaded files in bytes */
-  maxSize?: number;
-  /** The scope that the crawler will crawl. */
+  /** The number of levels of links the crawler will traverse */depth: number; /** if set to true crawler will try to download and index other supported content like pdf:s from links */
+  downloadFiles?: boolean; /** Maximum number of links per page that will be extracted */
+  maxLinks?: number; /** Optional parameter. Max size of downloaded files in bytes */
+  maxSize?: number; /** The scope that the crawler will crawl. */
   scope: "all" | "domain" | "subdomain";
 };
 /**
  * Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided.
  */
 type DataSourceFileConfig = {
-  /** connection id to be used to retrieve the raw data */
-  connectionId: string;
-  /** Pattern matching links to crawl */
+  /** connection id to be used to retrieve the raw data */connectionId: string; /** Pattern matching links to crawl */
   crawlPatterns?: DataSourceCrawlPattern[];
-  files?: string[];
-  /** Root folder for traversing. */
-  folder?: string;
-  /** Scope for the file crawler. */
-  scope?: DataSourceFileCrawlScope;
-  /** userId of the owner of the datasource fileConfig */
+  files?: string[]; /** Root folder for traversing. */
+  folder?: string; /** Scope for the file crawler. */
+  scope?: DataSourceFileCrawlScope; /** userId of the owner of the datasource fileConfig */
   userId: string;
 };
 /**
  * Scope for the file crawler.
  */
 type DataSourceFileCrawlScope = {
-  /** The number of levels of sub folders that should be considered */
-  depth: number;
-  /** list of file extensions to be considered */
-  extensions?: string[];
-  /** Maximum number of files per folder that should be considered */
-  maxFilesPerFolder?: number;
-  /** Total number of files that should be considered */
-  maxFilesTotal?: number;
-  /** Optional parameter. Max size of downloaded files in bytes */
-  maxSize?: number;
-  /** only files modified after this time should be indexed. If set older files will be removed from index. */
+  /** The number of levels of sub folders that should be considered */depth: number; /** list of file extensions to be considered */
+  extensions?: string[]; /** Maximum number of files per folder that should be considered */
+  maxFilesPerFolder?: number; /** Total number of files that should be considered */
+  maxFilesTotal?: number; /** Optional parameter. Max size of downloaded files in bytes */
+  maxSize?: number; /** only files modified after this time should be indexed. If set older files will be removed from index. */
   modifiedAfter?: string;
 };
 /**
  * Response when a datasource sync is started, contains the sync Id
  */
 type DataSourceSync = {
-  /** Unique identifier of the sync */
-  id: string;
+  /** Unique identifier of the sync */id: string;
 };
 type DataSourceSyncStatus = {
-  /** Datetime when the sync task was completed */
-  readonly completedAt: string;
-  /** sync Id */
-  lastSyncId?: string;
-  /** Datetime when the sync task was started */
-  readonly startedAt: string;
-  /** Sync status */
+  /** Datetime when the sync task was completed */readonly completedAt: string; /** sync Id */
+  lastSyncId?: string; /** Datetime when the sync task was started */
+  readonly startedAt: string; /** Sync status */
   readonly status: "neverIndexed" | "progress" | "completed" | "completedWithError" | "toAdd" | "toDelete";
 };
 /**
@@ -207,24 +152,17 @@ type DocStats = {
   readonly updated: number;
 };
 type DownloadFile = {
-  /** file path to the file to downlaod. */
-  path: string;
+  /** file path to the file to downlaod. */path: string;
 };
 /**
  * Download information for the file.
  */
 type DownloadFileResponse = {
-  /** Size of downloaded file. */
-  fileSize: number;
-  /** Date for last time the file was modified. */
-  lastUpdatedAt: string;
-  /** The mimetype of the file. */
-  mimeType: string;
-  /** The requested file name. */
-  name: string;
-  /** Space id the file belongs in. */
-  spaceId: string;
-  /** URL to download the file. */
+  /** Size of downloaded file. */fileSize: number; /** Date for last time the file was modified. */
+  lastUpdatedAt: string; /** The mimetype of the file. */
+  mimeType: string; /** The requested file name. */
+  name: string; /** Space id the file belongs in. */
+  spaceId: string; /** URL to download the file. */
   url: string;
 };
 type Duration = {
@@ -239,11 +177,6 @@ type ErrorResponse = {
   traceId?: string;
 };
 type ErrorResponseCode = {
-  code?: string;
-  detail?: string;
-  title?: string;
-};
-type ErrorResponseCodeCopy = {
   /** Custom error codes
    * * AE-1 - Internal processing error
    * * AE-2 - Incorrect request
@@ -256,6 +189,11 @@ type ErrorResponseCodeCopy = {
   detail?: string;
   title?: string;
 };
+type ErrorResponseCodeCopy = {
+  code?: string;
+  detail?: string;
+  title?: string;
+};
 type ErrorResponseCopy = {
   errors?: ErrorResponseCodeCopy[];
   traceId?: string;
@@ -264,49 +202,30 @@ type ErrorResponseCopy = {
  * Metadata about the chunk
  */
 type KbChunkMeta = {
-  /** chunkId */
-  chunkId: string;
-  /** datasourceId of chunk */
-  datasourceId: string;
-  /** documentId of chunk */
-  documentId: string;
-  /** knowledgeBaseId of chunk */
-  knowledgeBaseId: string;
-  /** source of chunk */
+  /** chunkId */chunkId: string; /** datasourceId of chunk */
+  datasourceId: string; /** documentId of chunk */
+  documentId: string; /** knowledgeBaseId of chunk */
+  knowledgeBaseId: string; /** source of chunk */
   source: string;
 };
 type KnowledgeBase = KnowledgeBaseLight & {
   datasources?: DataSource[];
 };
 type KnowledgeBaseLight = {
-  /** User opt in to advanced parsing and chunking pipeline. Default is false, which will run legacy parsing and chunking. */
-  advancedIndexing?: boolean;
-  contentSummary: ContentSummary;
-  /** Datetime when the knowledgebase was created */
-  readonly createdAt: string;
-  /** Unique identifier of the user who created the knowledgebase */
-  readonly createdBy: string;
-  /** Description of the knowledgebase */
-  description: string;
-  /** Unique identifier of the knowledgebase */
-  id: string;
-  /** Datetime when the knowledgebase was last indexed */
-  readonly lastIndexedAt?: string;
-  /** Name of the knowledgebase */
-  name: string;
-  /** The unique identifier of the knowledgebase owner */
-  ownerId: string;
-  /** Number of selected errors to store in the case of any failed datasources. */
-  selectedErrorsCount?: number;
-  /** The unique identifier of the space containing the knowledgebase */
-  spaceId: string;
-  /** List of tags associated with the knowledgebase. */
-  tags: string[];
-  /** Unique identifier of the tenant */
-  tenantId?: string;
-  /** Datetime when the knowledgebase was updated */
-  readonly updatedAt: string;
-  /** The unique identifier of the user who last updated the knowledgebase */
+  /** User opt in to advanced parsing and chunking pipeline. Default is false, which will run legacy parsing and chunking. */advancedIndexing?: boolean;
+  contentSummary: ContentSummary; /** Datetime when the knowledgebase was created */
+  readonly createdAt: string; /** Unique identifier of the user who created the knowledgebase */
+  readonly createdBy: string; /** Description of the knowledgebase */
+  description: string; /** Unique identifier of the knowledgebase */
+  id: string; /** Datetime when the knowledgebase was last indexed */
+  readonly lastIndexedAt?: string; /** Name of the knowledgebase */
+  name: string; /** The unique identifier of the knowledgebase owner */
+  ownerId: string; /** Number of selected errors to store in the case of any failed datasources. */
+  selectedErrorsCount?: number; /** The unique identifier of the space containing the knowledgebase */
+  spaceId: string; /** List of tags associated with the knowledgebase. */
+  tags: string[]; /** Unique identifier of the tenant */
+  tenantId?: string; /** Datetime when the knowledgebase was updated */
+  readonly updatedAt: string; /** The unique identifier of the user who last updated the knowledgebase */
   readonly updatedBy: string;
 };
 type KnowledgeBasesResult = {
@@ -332,41 +251,28 @@ type Schedule = {
  * An event specification relative to the calendar, similar to a traditional cron specification.
  */
 type ScheduleCalendar = {
-  /** Description of the intention of this schedule */
-  comment: string;
-  /** DayOfMonth range to match (1-31). Default matches all days */
-  dayOfMonth: ScheduleRange[];
-  /** DayOfWeek range to match (0-6; 0 is Sunday). Default matches all days of the week */
-  dayOfWeek: ScheduleRange[];
-  /** Hour range to match (0-23). Default matches 0 */
-  hour: ScheduleRange[];
-  /** Minute range to match (0-59). Default matches 0 */
-  minute: ScheduleRange[];
-  /** Month range to match (1-12). Default matches all months */
-  month: ScheduleRange[];
-  /** Second range to match (0-59). Default matches 0 */
-  second: ScheduleRange[];
-  /** Year range to match. Default matches all years */
+  /** Description of the intention of this schedule */comment: string; /** DayOfMonth range to match (1-31). Default matches all days */
+  dayOfMonth: ScheduleRange[]; /** DayOfWeek range to match (0-6; 0 is Sunday). Default matches all days of the week */
+  dayOfWeek: ScheduleRange[]; /** Hour range to match (0-23). Default matches 0 */
+  hour: ScheduleRange[]; /** Minute range to match (0-59). Default matches 0 */
+  minute: ScheduleRange[]; /** Month range to match (1-12). Default matches all months */
+  month: ScheduleRange[]; /** Second range to match (0-59). Default matches 0 */
+  second: ScheduleRange[]; /** Year range to match. Default matches all years */
   year: ScheduleRange[];
 };
 /**
  * For example, an `every` of 1 hour with `offset` of zero would match every hour, on the hour. The same `every` but an `offset` of 19 minutes would match every `xx:19:00`.
  */
 type ScheduleInterval = {
-  /** The period to repeat the interval */
-  every: string;
-  /** A fixed offset added to the intervals period. Optional, defaults to 0 */
+  /** The period to repeat the interval */every: string; /** A fixed offset added to the intervals period. Optional, defaults to 0 */
   offset?: string;
 };
 /**
  * ScheduleRange represents a set of integer values, used to match fields of a calendar time in scheduleCalendar. If end < start, then end is interpreted as equal to start
  */
 type ScheduleRange = {
-  /** End of the range (inclusive). If end < start, then end is interpreted as equal to start. Optional, defaulted to Start */
-  end?: number;
-  /** Start of the range (inclusive) */
-  start: number;
-  /** Step to be take between each value. Optional, defaulted to 1 */
+  /** End of the range (inclusive). If end < start, then end is interpreted as equal to start. Optional, defaulted to Start */end?: number; /** Start of the range (inclusive) */
+  start: number; /** Step to be take between each value. Optional, defaulted to 1 */
   step?: number;
 };
 type ScheduleWithManifest = {
@@ -379,64 +285,38 @@ type ScheduleWithManifest = {
   tenantId: string;
 };
 type SearchRequest = {
-  /** Query text or question to search. */
-  prompt: string;
-  /** Search mode to use.   Allowed values: `SIMPLE` and `FULL`.   Default: `SIMPLE`. */
-  searchMode?: "SIMPLE" | "FULL";
-  /** Number of chunks to return in results. */
+  /** Query text or question to search. */prompt: string; /** Search mode to use.   Allowed values: `SIMPLE` and `FULL`.   Default: `SIMPLE`. */
+  searchMode?: "SIMPLE" | "FULL"; /** Number of chunks to return in results. */
   topN?: number;
 };
 type SearchResponse = {
-  /** Retrieved document chunks */
-  chunks: Chunk[];
+  /** Retrieved document chunks */chunks: Chunk[];
 };
 type SyncHistory = {
-  /** Datetime when the sync task was completed */
-  readonly completedAt?: string;
-  /** Connection id that the datasource used */
-  connectionId: string;
-  /** datasource id */
-  datasourceId: string;
-  /** Summary of documents processed */
-  docStats: DocStats;
-  /** sync id */
-  id: string;
-  /** populated with up to the first selectedErrorsCount errors if there were any during sync */
-  selectedErrors?: string[];
-  /** Datetime when the sync task was started */
-  readonly startedAt: string;
-  /** Sync status */
-  readonly status: "neverIndexed" | "progress" | "completed" | "completedWithError";
-  /** Datasource trigger type, was it manually or automatically synced */
+  /** Datetime when the sync task was completed */readonly completedAt?: string; /** Connection id that the datasource used */
+  connectionId: string; /** datasource id */
+  datasourceId: string; /** Summary of documents processed */
+  docStats: DocStats; /** sync id */
+  id: string; /** populated with up to the first selectedErrorsCount errors if there were any during sync */
+  selectedErrors?: string[]; /** Datetime when the sync task was started */
+  readonly startedAt: string; /** Sync status */
+  readonly status: "neverIndexed" | "progress" | "completed" | "completedWithError"; /** Datasource trigger type, was it manually or automatically synced */
   triggerType: string;
 };
 type SyncHistoryDetails = {
-  /** acion performed */
-  readonly action: "add" | "delete" | "update";
-  /** chunk size */
-  readonly chunkSize?: number;
-  /** number of chunks */
+  /** acion performed */readonly action: "add" | "delete" | "update"; /** chunk size */
+  readonly chunkSize?: number; /** number of chunks */
   readonly chunks?: number;
-  duration?: Duration;
-  /** error if one happened during sync */
-  error?: string;
-  /** page count */
-  readonly explicitPages: number;
-  /** Datetime when the file processing finished */
-  readonly fileCompletedAt?: string;
-  /** Datetime when the file was last modified */
-  readonly fileLastModified?: string;
-  /** file size */
-  readonly fileSize?: number;
-  /** Datetime when the file processing started */
-  readonly fileStartedAt?: string;
-  /** document Id */
-  id: string;
-  /** Source of the document */
-  readonly source: string;
-  /** sync Id */
-  syncId: string;
-  /** Datetime when the sync task was executed */
+  duration?: Duration; /** error if one happened during sync */
+  error?: string; /** page count */
+  readonly explicitPages: number; /** Datetime when the file processing finished */
+  readonly fileCompletedAt?: string; /** Datetime when the file was last modified */
+  readonly fileLastModified?: string; /** file size */
+  readonly fileSize?: number; /** Datetime when the file processing started */
+  readonly fileStartedAt?: string; /** document Id */
+  id: string; /** Source of the document */
+  readonly source: string; /** sync Id */
+  syncId: string; /** Datetime when the sync task was executed */
   readonly syncedAt: string;
 };
 type SyncHistoryResult = {
@@ -453,14 +333,10 @@ type SyncHistoryResult = {
 declare function getKnowledgebases(query: {
   /** @deprecated
    * Optional parameter to request total count for query */
-  countTotal?: boolean;
-  /** The number of knowledgebases to get. */
-  limit?: number;
-  /** Optional parameter to request the next page. */
-  next?: string;
-  /** Optional parameter to request the previous page. */
-  prev?: string;
-  /** Optional resource field name to sort on, case insensitive, eg. name. Can be prefixed with - to set descending order, defaults to ascending. */
+  countTotal?: boolean; /** The number of knowledgebases to get. */
+  limit?: number; /** Optional parameter to request the next page. */
+  next?: string; /** Optional parameter to request the previous page. */
+  prev?: string; /** Optional resource field name to sort on, case insensitive, eg. name. Can be prefixed with - to set descending order, defaults to ascending. */
   sort?: "NAME" | "-NAME" | "DESCRIPTION" | "-DESCRIPTION" | "CREATED" | "-CREATED" | "UPDATED" | "-UPDATED";
 }, options?: ApiCallOptions): Promise<GetKnowledgebasesHttpResponse>;
 type GetKnowledgebasesHttpResponse = {
@@ -471,7 +347,7 @@ type GetKnowledgebasesHttpResponse = {
   next?: (options?: ApiCallOptions) => Promise<GetKnowledgebasesHttpResponse>;
 };
 type GetKnowledgebasesHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403;
 };
@@ -488,7 +364,7 @@ type CreateKnowledgebaseHttpResponse = {
   status: 201;
 };
 type CreateKnowledgebaseHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403;
 };
@@ -505,7 +381,7 @@ type DeleteKnowledgebaseHttpResponse = {
   status: 204;
 };
 type DeleteKnowledgebaseHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -522,7 +398,7 @@ type GetKnowledgebaseHttpResponse = {
   status: 200;
 };
 type GetKnowledgebaseHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -540,7 +416,7 @@ type PatchKnowledgebaseHttpResponse = {
   status: 204;
 };
 type PatchKnowledgebaseHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429;
 };
@@ -558,7 +434,7 @@ type SearchKnowledgebaseHttpResponse = {
   status: 200;
 };
 type SearchKnowledgebaseHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 405 | 500;
 };
@@ -576,7 +452,7 @@ type CreateKnowledgebaseDatasourceHttpResponse = {
   status: 201;
 };
 type CreateKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -594,7 +470,7 @@ type DeleteKnowledgebaseDatasourceHttpResponse = {
   status: 204;
 };
 type DeleteKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -613,7 +489,7 @@ type UpdateKnowledgebaseDatasourceHttpResponse = {
   status: 200;
 };
 type UpdateKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -631,7 +507,7 @@ type CancelKnowledgebaseDatasourceHttpResponse = {
   status: 200;
 };
 type CancelKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -650,7 +526,7 @@ type DownloadKnowledgebaseDatasourceHttpResponse = {
   status: 200;
 };
 type DownloadKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -663,8 +539,7 @@ type DownloadKnowledgebaseDatasourceHttpError = {
  * @throws SyncKnowledgebaseDatasourceHttpError
  */
 declare function syncKnowledgebaseDatasource(id: string, datasourceId: string, query: {
-  /** Optional parameter to migrate indexed files to docdetails collection */
-  migrate?: boolean;
+  /** Optional parameter to migrate indexed files to docdetails collection */migrate?: boolean;
 }, options?: ApiCallOptions): Promise<SyncKnowledgebaseDatasourceHttpResponse>;
 type SyncKnowledgebaseDatasourceHttpResponse = {
   data: DataSourceSync;
@@ -672,7 +547,7 @@ type SyncKnowledgebaseDatasourceHttpResponse = {
   status: 202;
 };
 type SyncKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -685,13 +560,9 @@ type SyncKnowledgebaseDatasourceHttpError = {
  * @throws GetKnowledgebaseDatasourceHistoriesHttpError
  */
 declare function getKnowledgebaseDatasourceHistories(id: string, datasourceId: string, query: {
-  /** The number of knowledgebases to get. */
-  limit?: number;
-  /** Optional parameter to request the next page. */
-  next?: string;
-  /** Optional parameter to request the previous page. */
-  prev?: string;
-  /** Optional resource field name to sort on, case insensitive, eg. name. Can be prefixed with - to set descending order, defaults to ascending. */
+  /** The number of knowledgebases to get. */limit?: number; /** Optional parameter to request the next page. */
+  next?: string; /** Optional parameter to request the previous page. */
+  prev?: string; /** Optional resource field name to sort on, case insensitive, eg. name. Can be prefixed with - to set descending order, defaults to ascending. */
   sort?: "COMPLETED" | "-COMPLETED";
 }, options?: ApiCallOptions): Promise<GetKnowledgebaseDatasourceHistoriesHttpResponse>;
 type GetKnowledgebaseDatasourceHistoriesHttpResponse = {
@@ -702,7 +573,7 @@ type GetKnowledgebaseDatasourceHistoriesHttpResponse = {
   next?: (options?: ApiCallOptions) => Promise<GetKnowledgebaseDatasourceHistoriesHttpResponse>;
 };
 type GetKnowledgebaseDatasourceHistoriesHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -723,7 +594,7 @@ type GetKnowledgebaseDatasourceHistoryHttpResponse = {
   status: 200;
 };
 type GetKnowledgebaseDatasourceHistoryHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -741,7 +612,7 @@ type DeleteKnowledgebaseDatasourceScheduleHttpResponse = {
   status: 204;
 };
 type DeleteKnowledgebaseDatasourceScheduleHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -759,7 +630,7 @@ type GetKnowledgebaseDatasourceScheduleHttpResponse = {
   status: 200;
 };
 type GetKnowledgebaseDatasourceScheduleHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -778,7 +649,7 @@ type CreateKnowledgebaseDatasourceScheduleHttpResponse = {
   status: 200 | 201;
 };
 type CreateKnowledgebaseDatasourceScheduleHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -790,13 +661,9 @@ type CreateKnowledgebaseDatasourceScheduleHttpError = {
  * @throws GetKnowledgebaseHistoriesHttpError
  */
 declare function getKnowledgebaseHistories(id: string, query: {
-  /** The number of sync histories to get. */
-  limit?: number;
-  /** Optional parameter to request the next page. */
-  next?: string;
-  /** Optional parameter to request the previous page. */
-  prev?: string;
-  /** Optional resource field name to sort on, case insensitive, eg. name. Can be prefixed with - to set descending order, defaults to ascending. */
+  /** The number of sync histories to get. */limit?: number; /** Optional parameter to request the next page. */
+  next?: string; /** Optional parameter to request the previous page. */
+  prev?: string; /** Optional resource field name to sort on, case insensitive, eg. name. Can be prefixed with - to set descending order, defaults to ascending. */
   sort?: "COMPLETED" | "-COMPLETED";
 }, options?: ApiCallOptions): Promise<GetKnowledgebaseHistoriesHttpResponse>;
 type GetKnowledgebaseHistoriesHttpResponse = {
@@ -807,7 +674,7 @@ type GetKnowledgebaseHistoriesHttpResponse = {
   next?: (options?: ApiCallOptions) => Promise<GetKnowledgebaseHistoriesHttpResponse>;
 };
 type GetKnowledgebaseHistoriesHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };

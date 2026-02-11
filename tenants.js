@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/tenants.ts
 /**
@@ -112,7 +112,6 @@ const tenantsExport = {
 	reactivateTenant,
 	clearCache
 };
-var tenants_default = tenantsExport;
 
 //#endregion
-export { clearCache, createTenant, deactivateTenant, tenants_default as default, getMyTenant, getTenant, patchTenant, reactivateTenant };
+export { clearCache, createTenant, deactivateTenant, tenantsExport as default, getMyTenant, getTenant, patchTenant, reactivateTenant };

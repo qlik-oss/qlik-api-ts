@@ -1,89 +1,60 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/data-sources.d.ts
 type ApiSpecResponse = {
-  /** List of properties required for the given datasource */
-  connectionProperties: unknown;
-  /** Datasource provider */
-  connectorProvider: string;
-  /** Datasource provider (i.e. connector) version */
+  /** List of properties required for the given datasource */connectionProperties: unknown; /** Datasource provider */
+  connectorProvider: string; /** Datasource provider (i.e. connector) version */
   connectorVersion: string;
 };
 /**
  * Datasource metadata
  */
 type ConnectorNodesInfo = {
-  /** List of datasource IDs provided by the provider */
-  cachedDataSources?: string[];
-  /** Contract type used to communicate with the connector (between 0 and 3) */
-  contractType: number;
-  /** Indicates whether the datasources are up to date */
-  dataSourcesUpdated: boolean;
-  /** Connector provider name */
-  providerName: string;
-  /** State of the connector node */
-  state: string;
-  /** URL of connector node */
+  /** List of datasource IDs provided by the provider */cachedDataSources?: string[]; /** Contract type used to communicate with the connector (between 0 and 3) */
+  contractType: number; /** Indicates whether the datasources are up to date */
+  dataSourcesUpdated: boolean; /** Connector provider name */
+  providerName: string; /** State of the connector node */
+  state: string; /** URL of connector node */
   url: string;
 };
 /**
  * Datasource metadata
  */
 type DataSourceNew = {
-  /** List of capabilities supported by the datasource */
-  capabilities?: string[];
-  /** Override value of dataload URL (could be null) */
-  dataLoadUrlOverride?: string;
-  /** Unique identifier of datasource */
-  dataSourceId: string;
-  /** Datasource property name (could be null) */
-  dataSourcePropertyName?: string;
-  /** Type of datasource */
-  dataSourceType?: string;
-  /** Indicates whether the datasource is disabled */
-  disabled?: boolean;
-  /** Datasource name */
-  name: string;
-  /** Connector provider */
-  provider: string;
-  /** Provider name */
-  providerName: string;
-  /** Qri definition template */
-  qriDefinition?: QriDefinition;
-  /** UI related metadata (only present when 'includeui' is set to true in query) */
+  /** List of capabilities supported by the datasource */capabilities?: string[]; /** Override value of dataload URL (could be null) */
+  dataLoadUrlOverride?: string; /** Unique identifier of datasource */
+  dataSourceId: string; /** Datasource property name (could be null) */
+  dataSourcePropertyName?: string; /** Type of datasource */
+  dataSourceType?: string; /** Indicates whether the datasource is disabled */
+  disabled?: boolean; /** Datasource name */
+  name: string; /** Connector provider */
+  provider: string; /** Provider name */
+  providerName: string; /** Qri definition template */
+  qriDefinition?: QriDefinition; /** UI related metadata (only present when 'includeui' is set to true in query) */
   uiInfo?: UiInfo;
 };
 /**
  * Defines configuration settings for a data source.
  */
 type DataSourceSettingsRequest = {
-  /** Indicates whether the data source is disabled. */
-  disabled: boolean;
+  /** Indicates whether the data source is disabled. */disabled: boolean;
 };
 /**
  * Represents the current settings of a data source.
  */
 type DataSourceSettingsResponse = {
-  /** Indicates whether the data source is disabled. */
-  disabled?: boolean;
+  /** Indicates whether the data source is disabled. */disabled?: boolean;
 };
 type DataSourcesResponseNew = {
-  /** List of connector nodes (only present when query parameter 'detail' is set to true) */
-  connectorNodes?: ConnectorNodesInfo[];
-  /** List of datasources metadata object */
-  dataSources: DataSourceNew[];
-  /** Time stamp of last updated */
+  /** List of connector nodes (only present when query parameter 'detail' is set to true) */connectorNodes?: ConnectorNodesInfo[]; /** List of datasources metadata object */
+  dataSources: DataSourceNew[]; /** Time stamp of last updated */
   lastUpdated: string;
 };
 type PublicApiError = {
-  /** A service specific error code string */
-  code: string;
-  /** Concrete detail about the error */
-  detail?: string;
-  /** Additional metadata associated with the error */
-  meta?: unknown;
-  /** Summary of the error */
+  /** A service specific error code string */code: string; /** Concrete detail about the error */
+  detail?: string; /** Additional metadata associated with the error */
+  meta?: unknown; /** Summary of the error */
   title: string;
 };
 /**
@@ -92,23 +63,18 @@ type PublicApiError = {
 type QriDefinition = {
   connectionPart: unknown & QriTemplate;
   itemPart?: unknown & {
-    /** Prefix of the template */
-    prefix?: string;
+    /** Prefix of the template */prefix?: string;
   } & QriTemplate;
   pathPart: unknown & {
-    /** Prefix of the template */
-    prefix?: string;
-  } & QriTemplate;
-  /** Qri prefix */
+    /** Prefix of the template */prefix?: string;
+  } & QriTemplate; /** Qri prefix */
   qriPrefix: string;
 };
 /**
  * Connection part of Qri template
  */
 type QriTemplate = {
-  /** List of properties used in template */
-  properties: string[];
-  /** Qri template */
+  /** List of properties used in template */properties: string[]; /** Qri template */
   template: string;
 };
 type ResponseErrors = {
@@ -118,21 +84,13 @@ type ResponseErrors = {
  * UI related metadata (only present when 'includeui' is set to true in query)
  */
 type UiInfo = {
-  /** Connect URL */
-  connectUrl?: string;
-  /** Connector main URL */
-  connectorMainUrl?: string;
-  /** Credentials URL */
-  credentialsUrl?: string;
-  /** Icon URL */
-  iconRectUrl?: string;
-  /** Square icon URL */
-  iconSquareUrl?: string;
-  /** If support iframe */
-  iframe?: boolean;
-  /** Indicate if the datasource supports load model */
-  loadModelSupport?: string;
-  /** Select URL */
+  /** Connect URL */connectUrl?: string; /** Connector main URL */
+  connectorMainUrl?: string; /** Credentials URL */
+  credentialsUrl?: string; /** Icon URL */
+  iconRectUrl?: string; /** Square icon URL */
+  iconSquareUrl?: string; /** If support iframe */
+  iframe?: boolean; /** Indicate if the datasource supports load model */
+  loadModelSupport?: string; /** Select URL */
   selectUrl?: string;
 };
 /**
@@ -151,13 +109,9 @@ type UiInfo = {
  * @throws GetDataSourcesHttpError
  */
 declare function getDataSources(query: {
-  /** Filtering on datasourceID, when multiple dataSourceId are set in query, last dataSourceId will be used */
-  dataSourceId?: string;
-  /** Determines if provider detail is returned */
-  detail?: boolean;
-  /** When true, disabled datasources are also included in the response */
-  includeDisabled?: boolean;
-  /** Determines if UI info is returned */
+  /** Filtering on datasourceID, when multiple dataSourceId are set in query, last dataSourceId will be used */dataSourceId?: string; /** Determines if provider detail is returned */
+  detail?: boolean; /** When true, disabled datasources are also included in the response */
+  includeDisabled?: boolean; /** Determines if UI info is returned */
   includeui?: boolean;
 }, options?: ApiCallOptions): Promise<GetDataSourcesHttpResponse>;
 type GetDataSourcesHttpResponse = {
@@ -206,21 +160,15 @@ type GetDataSourceApiSpecsHttpError = {
  * @throws GetDataSourceGatewaysHttpError
  */
 declare function getDataSourceGateways(dataSourceId: string, query: {
-  /** Force to get a refreshed list from backend. Cached list will be returned if not set or set to false. */
-  forceRefresh?: boolean;
+  /** Force to get a refreshed list from backend. Cached list will be returned if not set or set to false. */forceRefresh?: boolean;
 }, options?: ApiCallOptions): Promise<GetDataSourceGatewaysHttpResponse>;
 type GetDataSourceGatewaysHttpResponse = {
   data: {
-    /** List of gateway ID's for given datasource ID */
-    gateways?: {
-      /** Whether the gateway is default */
-      default?: boolean;
-      /** Gateway ID */
-      id?: string;
-      /** Gateway name */
+    /** List of gateway ID's for given datasource ID */gateways?: {
+      /** Whether the gateway is default */default?: boolean; /** Gateway ID */
+      id?: string; /** Gateway name */
       name?: string;
-    }[];
-    /** Time stamp when the gateways data were refreshed */
+    }[]; /** Time stamp when the gateways data were refreshed */
     refreshedAt?: string;
   };
   headers: Headers;

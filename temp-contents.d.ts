@@ -1,51 +1,35 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/temp-contents.d.ts
 /**
  * An Error object.
  */
 type Error = {
-  /** The API error code. */
-  code: string;
-  /** A human-readable problem description of the issue. */
-  detail?: string;
-  /** Additional properties and information regarding the issue. */
+  /** The API error code. */code: string; /** A human-readable problem description of the issue. */
+  detail?: string; /** Additional properties and information regarding the issue. */
   meta?: {
-    /** The error type. */
-    errorType?: string;
-    /** Locale */
-    locale?: string;
-    /** The source errors (stack trace). */
+    /** The error type. */errorType?: string; /** Locale */
+    locale?: string; /** The source errors (stack trace). */
     sourceErrors?: string;
-  };
-  /** Title of the type of API Error. */
+  }; /** Title of the type of API Error. */
   title: string;
 };
 /**
  * An array of Error objects.
  */
 type Errors = {
-  errors?: Error[];
-  /** A way to trace the source of the error. */
+  errors?: Error[]; /** A way to trace the source of the error. */
   traceId?: string;
 };
 type DetailResponse = {
-  /** Datetime-stamp when the resource was created (in UTC). */
-  CreatedAt?: string;
-  /** Identifier for the subject / resource creator. */
-  CreatorID?: string;
-  /** Datetime-stamp when the resource expired (in UTC). */
-  Expires?: string;
-  /** Identifier */
-  ID?: string;
-  /** File name of the file uploaded by the user. */
-  Name?: string;
-  /** Size of resource (in bytes). */
-  Size?: string;
-  /** Time-to-live in seconds. */
-  TTLSeconds?: number;
-  /** Datetime-stamp when the resource was updated (in UTC). */
+  /** Datetime-stamp when the resource was created (in UTC). */CreatedAt?: string; /** Identifier for the subject / resource creator. */
+  CreatorID?: string; /** Datetime-stamp when the resource expired (in UTC). */
+  Expires?: string; /** Identifier */
+  ID?: string; /** File name of the file uploaded by the user. */
+  Name?: string; /** Size of resource (in bytes). */
+  Size?: string; /** Time-to-live in seconds. */
+  TTLSeconds?: number; /** Datetime-stamp when the resource was updated (in UTC). */
   UpdatedAt?: string;
 };
 /**
@@ -56,8 +40,7 @@ type DetailResponse = {
  * @throws UploadTempFileHttpError
  */
 declare function uploadTempFile(query: {
-  /** The name of the file to upload. */
-  filename?: string;
+  /** The name of the file to upload. */filename?: string;
   /** The TTL parameter is used to define the time-to-live for the content resource in seconds.
    * It defaults to one hour (3600) if no input is provided. Max TTL is 259200 (3 days).' */
   ttl?: number;
@@ -80,8 +63,7 @@ type UploadTempFileHttpError = {
  * @throws DownloadTempFileHttpError
  */
 declare function downloadTempFile(id: string, query: {
-  /** Set to "1" to download the file in inline mode. Useful for displaying a preview of the file in a browser. */
-  inline?: string;
+  /** Set to "1" to download the file in inline mode. Useful for displaying a preview of the file in a browser. */inline?: string;
 }, options?: ApiCallOptions): Promise<DownloadTempFileHttpResponse>;
 type DownloadTempFileHttpResponse = DownloadTempFile200HttpResponse | DownloadTempFile204HttpResponse | DownloadTempFile206HttpResponse;
 type DownloadTempFile200HttpResponse = {

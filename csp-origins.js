@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/csp-origins.ts
 /**
@@ -106,7 +106,6 @@ const cspOriginsExport = {
 	updateCSPEntry,
 	clearCache
 };
-var csp_origins_default = cspOriginsExport;
 
 //#endregion
-export { clearCache, createCSPEntry, csp_origins_default as default, deleteCSPEntry, getCSPEntries, getCSPEntry, getCSPHeader, updateCSPEntry };
+export { clearCache, createCSPEntry, cspOriginsExport as default, deleteCSPEntry, getCSPEntries, getCSPEntry, getCSPHeader, updateCSPEntry };

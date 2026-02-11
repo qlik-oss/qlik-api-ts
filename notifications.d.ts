@@ -1,54 +1,41 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/notifications.d.ts
 /**
  * An error object.
  */
 type Error = {
-  /** The error code. */
-  code: string;
-  /** A human-readable explanation specific to this occurrence of the problem. */
-  detail?: string;
-  /** Summary of the problem. */
+  /** The error code. */code: string; /** A human-readable explanation specific to this occurrence of the problem. */
+  detail?: string; /** Summary of the problem. */
   title: string;
 };
 /**
  * Notification result item
  */
 type NotificationItem = {
-  /** Indicates if the notification can be managed in the hub. If true, the object will also contain 'subscriptionInfo' object and a 'presentationInfo' object with a non-empty scopes array. */
-  isManageableInHub?: boolean;
-  /** Indicates if the notification can be subscribed to by users.  If true, the object will also contain 'subscriptionInfo' object */
-  isSubscribable: boolean;
-  /** Notification name pattern that will trigger this notification e.g resource.action */
-  notificationNamePattern: string;
-  /** Object containing information pertaining to the presentaion of a notification in the UI */
+  /** Indicates if the notification can be managed in the hub. If true, the object will also contain 'subscriptionInfo' object and a 'presentationInfo' object with a non-empty scopes array. */isManageableInHub?: boolean; /** Indicates if the notification can be subscribed to by users.  If true, the object will also contain 'subscriptionInfo' object */
+  isSubscribable: boolean; /** Notification name pattern that will trigger this notification e.g resource.action */
+  notificationNamePattern: string; /** Object containing information pertaining to the presentaion of a notification in the UI */
   presentationInfo?: {
-    /** Localized, human-readable string representing the name of the notification suitable to use in a UI */
-    friendlyName?: string;
-    /** Friendly name to be displayed for each scope. */
-    scopeFriendlyNames?: Record<string, string>;
-    /** Information about the scopes to which this notification applies.  Helps determine the placement of the notification in the UI */
+    /** Localized, human-readable string representing the name of the notification suitable to use in a UI */friendlyName?: string; /** Friendly name to be displayed for each scope. */
+    scopeFriendlyNames?: Record<string, string>; /** Information about the scopes to which this notification applies.  Helps determine the placement of the notification in the UI */
     scopes?: string[];
-  };
-  /** Object indicating what properties to use to subscribe to this notification via the 'Subscriptions' service.  For info about its properties, refer to the Subscription sevice's API doc. */
+  }; /** Object indicating what properties to use to subscribe to this notification via the 'Subscriptions' service.  For info about its properties, refer to the Subscription sevice's API doc. */
   subscriptionInfo?: {
     action: string;
     resourceId?: string;
     resourceSubType?: string;
     resourceType: string;
     target?: string;
-  };
-  /** Type of Transport e.g. Email, Notification, Slack message etc... */
+  }; /** Type of Transport e.g. Email, Notification, Slack message etc... */
   transports: string[];
 };
 /**
  * Object containing array representing list of supported notifications
  */
 type NotificationsObject = {
-  /** list of notifications */
-  notifications: NotificationItem[];
+  /** list of notifications */notifications: NotificationItem[];
 };
 /**
  * List all supported notifications
@@ -57,11 +44,8 @@ type NotificationsObject = {
  * @throws GetNotificationsHttpError
  */
 declare function getNotifications(query: {
-  /** If present, idenfies the language of the returned 'friendlyName' property. */
-  locale?: string;
-  /** If present, represents the 'manageableInHub' value to filter by. */
-  manageableInHub?: true | false;
-  /** If present, represents the 'subscribable' value to filter by. */
+  /** If present, idenfies the language of the returned 'friendlyName' property. */locale?: string; /** If present, represents the 'manageableInHub' value to filter by. */
+  manageableInHub?: true | false; /** If present, represents the 'subscribable' value to filter by. */
   subscribable?: true | false;
 }, options?: ApiCallOptions): Promise<GetNotificationsHttpResponse>;
 type GetNotificationsHttpResponse = {

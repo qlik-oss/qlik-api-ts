@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/oauth-clients.ts
 /**
@@ -67,7 +67,7 @@ async function getOAuthClient(id, options) {
 	});
 }
 /**
-* Updates the specified OAuth client.
+* Updates the specified OAuth client. Returns 202 Accepted with a client secret in the response body if a client secret is generated during the update (e.g., when adding client_secret to allowedAuthMethods). Otherwise returns 204 No Content.
 *
 * @param id The unique identifier for the OAuth client
 * @param body an object with the body content
@@ -197,7 +197,6 @@ const oauthClientsExport = {
 	patchOAuthClientConnectionConfig,
 	clearCache
 };
-var oauth_clients_default = oauthClientsExport;
 
 //#endregion
-export { clearCache, createOAuthClient, createOAuthClientSecret, oauth_clients_default as default, deleteOAuthClient, deleteOAuthClientConnectionConfig, deleteOAuthClientSecret, getOAuthClient, getOAuthClientConnectionConfig, getOAuthClients, patchOAuthClient, patchOAuthClientConnectionConfig, publishOAuthClient };
+export { clearCache, createOAuthClient, createOAuthClientSecret, oauthClientsExport as default, deleteOAuthClient, deleteOAuthClientConnectionConfig, deleteOAuthClientSecret, getOAuthClient, getOAuthClientConnectionConfig, getOAuthClients, patchOAuthClient, patchOAuthClientConnectionConfig, publishOAuthClient };

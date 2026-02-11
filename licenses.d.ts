@@ -1,8 +1,7 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/licenses.d.ts
-
 /**
  * @example
  * {
@@ -22,10 +21,8 @@ type AssignmentsActionsAddRequest = {
   add: {
     /** @deprecated
      * User name */
-    name?: string;
-    /** User subject */
-    subject: string;
-    /** Allotment type */
+    name?: string; /** User subject */
+    subject: string; /** Allotment type */
     type: string;
     /** @deprecated
      * User ID */
@@ -53,15 +50,10 @@ type AssignmentsActionsAddRequest = {
  */
 type AssignmentsActionsAddResponse = {
   data: {
-    /** Error code */
-    code?: string;
-    /** Response status */
-    status: number;
-    /** Subject */
-    subject: string;
-    /** Error title */
-    title?: string;
-    /** Allotment type */
+    /** Error code */code?: string; /** Response status */
+    status: number; /** Subject */
+    subject: string; /** Error title */
+    title?: string; /** Allotment type */
     type?: string;
   }[];
 };
@@ -78,9 +70,7 @@ type AssignmentsActionsAddResponse = {
  */
 type AssignmentsActionsDeleteRequest = {
   delete: {
-    /** User subject */
-    subject: string;
-    /** Allotment type */
+    /** User subject */subject: string; /** Allotment type */
     type: string;
   }[];
 };
@@ -105,15 +95,10 @@ type AssignmentsActionsDeleteRequest = {
  */
 type AssignmentsActionsDeleteResponse = {
   data: {
-    /** Error code */
-    code?: string;
-    /** Response status */
-    status: number;
-    /** Subject */
-    subject?: string;
-    /** Error title */
-    title?: string;
-    /** Allotment type */
+    /** Error code */code?: string; /** Response status */
+    status: number; /** Subject */
+    subject?: string; /** Error title */
+    title?: string; /** Allotment type */
     type?: string;
   }[];
 };
@@ -131,13 +116,9 @@ type AssignmentsActionsDeleteResponse = {
  */
 type AssignmentsActionsUpdateRequest = {
   update: {
-    /** The current user subject, in case that should be patched. */
-    sourceSubject?: string;
-    /** Current assignment type. */
-    sourceType?: string;
-    /** User subject, the current or the desired after the patch. */
-    subject: string;
-    /** Target assignment type. */
+    /** The current user subject, in case that should be patched. */sourceSubject?: string; /** Current assignment type. */
+    sourceType?: string; /** User subject, the current or the desired after the patch. */
+    subject: string; /** Target assignment type. */
     type?: string;
   }[];
 };
@@ -163,19 +144,12 @@ type AssignmentsActionsUpdateRequest = {
  */
 type AssignmentsActionsUpdateResponse = {
   data: {
-    /** Error code */
-    code?: string;
-    /** Current subject. */
-    sourceSubject?: string;
-    /** Current allotment type. */
-    sourceType?: string;
-    /** HTTP status code indicating the result of the individual assignment operation. A value of 200 represents a successful update, while 201 indicates a new resource was created due to a subject update. Any 400-level status codes indicate an error. */
-    status: number;
-    /** Target subject. */
-    subject?: string;
-    /** Error title */
-    title?: string;
-    /** Target allotment type. */
+    /** Error code */code?: string; /** Current subject. */
+    sourceSubject?: string; /** Current allotment type. */
+    sourceType?: string; /** HTTP status code indicating the result of the individual assignment operation. A value of 200 represents a successful update, while 201 indicates a new resource was created due to a subject update. Any 400-level status codes indicate an error. */
+    status: number; /** Target subject. */
+    subject?: string; /** Error title */
+    title?: string; /** Target allotment type. */
     type?: string;
   }[];
 };
@@ -206,13 +180,9 @@ type AssignmentsActionsUpdateResponse = {
  */
 type AssignmentsResponse = {
   data: {
-    /** Assignment created date. */
-    created: string;
-    /** Assignment excess status. */
-    excess: boolean;
-    /** Subject */
-    subject: string;
-    /** Allotment type */
+    /** Assignment created date. */created: string; /** Assignment excess status. */
+    excess: boolean; /** Subject */
+    subject: string; /** Allotment type */
     type: string;
   }[];
   links: {
@@ -222,25 +192,15 @@ type AssignmentsResponse = {
 };
 type ConsumptionEventsResponse = {
   data: {
-    /** Allotment ID */
-    allotmentId?: string;
-    /** App ID */
-    appId?: string;
-    /** Analyzer capacity chunks consumed. */
-    capacityUsed?: number;
-    /** Engine session duration. */
-    duration?: string;
-    /** Engine session end time. */
-    endTime?: string;
-    /** ID */
-    id?: string;
-    /** License usage */
-    licenseUsage?: string;
-    /** Analyzer capacity minutes consumed. */
-    minutesUsed?: number;
-    /** Engine session ID. */
-    sessionId?: string;
-    /** User ID */
+    /** Allotment ID */allotmentId?: string; /** App ID */
+    appId?: string; /** Analyzer capacity chunks consumed. */
+    capacityUsed?: number; /** Engine session duration. */
+    duration?: string; /** Engine session end time. */
+    endTime?: string; /** ID */
+    id?: string; /** License usage */
+    licenseUsage?: string; /** Analyzer capacity minutes consumed. */
+    minutesUsed?: number; /** Engine session ID. */
+    sessionId?: string; /** User ID */
     userId?: string;
   }[];
   links: {
@@ -266,11 +226,8 @@ type ErrorResponse = {
    * Error type */
   error: string;
   errors: {
-    /** Error code */
-    code: string;
-    /** Additional error detail. */
-    detail?: string;
-    /** Error title */
+    /** Error code */code: string; /** Additional error detail. */
+    detail?: string; /** Error title */
     title: string;
   }[];
   /** @deprecated
@@ -278,8 +235,7 @@ type ErrorResponse = {
   message: string;
 };
 type Href = {
-  /** link */
-  href?: string;
+  /** link */href?: string;
 };
 /**
  * @example
@@ -320,53 +276,34 @@ type Href = {
  */
 type LicenseOverview = {
   allotments: {
-    name: "professional" | "analyzer" | "analyzer_time";
-    /** Overage value; -1 means unbounded overage. */
+    name: "professional" | "analyzer" | "analyzer_time"; /** Overage value; -1 means unbounded overage. */
     overage?: number;
     units: number;
     unitsUsed: number;
     usageClass: string;
-  }[];
-  /** the capability bank id */
-  capabilityBankId?: string;
-  /** An ISO 8601 timestamp for when the license was last changed. */
-  changeTime?: string;
-  /** Customer ID */
-  customerId?: string;
-  /** An ISO 8601 timestamp for when the latest time the license has been known to be valid, a missing value indicates the indefinite future. */
+  }[]; /** the capability bank id */
+  capabilityBankId?: string; /** An ISO 8601 timestamp for when the license was last changed. */
+  changeTime?: string; /** Customer ID */
+  customerId?: string; /** An ISO 8601 timestamp for when the latest time the license has been known to be valid, a missing value indicates the indefinite future. */
   latestValidTime?: string;
   licenseKey: string;
   licenseNumber: string;
-  licenseType?: string;
-  /** Origin of license key. */
-  origin: "Internal" | "External";
-  /** The license parameters. */
+  licenseType?: string; /** Origin of license key. */
+  origin: "Internal" | "External"; /** The license parameters. */
   parameters: {
-    /** Parameters for licenses to control access to the parameters. */
-    access?: {
-      /** Name of an allotment that the user must have access to. to */
-      allotment?: string;
-    };
-    /** Parameter set (provision) name. */
-    name: string;
-    /** Time interval for parameter validity. */
-    valid: string;
-    /** Parameter values */
+    /** Parameters for licenses to control access to the parameters. */access?: {
+      /** Name of an allotment that the user must have access to. to */allotment?: string;
+    }; /** Parameter set (provision) name. */
+    name: string; /** Time interval for parameter validity. */
+    valid: string; /** Parameter values */
     values?: unknown;
-  }[];
-  /** the parent number of the license. can be shared by multiple license numbers */
-  parentLicenseNumber?: string;
-  /** The product the license is valid for. */
-  product: string;
-  /** The secondary number of a definition. */
-  secondaryNumber: string;
-  /** Enum with status of license. Only status Ok grants license. access. */
-  status: "Ok" | "Blacklisted" | "Expired";
-  /** Boolean indicating if it is a trial license. */
-  trial: boolean;
-  /** An ISO 8601 timestamp for when the license was last updated. */
-  updated: string;
-  /** Period that the license is currently set to be active. Represented as an ISO 8601 time interval with start and end. */
+  }[]; /** the parent number of the license. can be shared by multiple license numbers */
+  parentLicenseNumber?: string; /** The product the license is valid for. */
+  product: string; /** The secondary number of a definition. */
+  secondaryNumber: string; /** Enum with status of license. Only status Ok grants license. access. */
+  status: "Ok" | "Blacklisted" | "Expired"; /** Boolean indicating if it is a trial license. */
+  trial: boolean; /** An ISO 8601 timestamp for when the license was last updated. */
+  updated: string; /** Period that the license is currently set to be active. Represented as an ISO 8601 time interval with start and end. */
   valid: string;
 };
 /**
@@ -382,21 +319,13 @@ type LicenseOverview = {
  * }
  */
 type LicenseStatus = {
-  /** Boolean indicating if the license is deactivated. */
-  deactivated: boolean;
-  /** Enum with extension status of license. access. */
-  extensionStatus: "Unavailable" | "Pending" | "Available";
-  /** Origin of license key. */
-  origin: "Internal" | "External";
-  /** The product the license is valid for. */
-  product: string;
-  /** Enum with status of license. Only status Ok grants license. access. */
-  status: "Ok" | "Blacklisted" | "Expired" | "Missing";
-  /** Boolean indicating if it is a trial license. */
-  trial: boolean;
-  /** Type of license key. */
-  type: "Signed" | "Plain" | "2.0";
-  /** Period that the license is currently set to be active. Represented as an ISO 8601 time interval with start and end. */
+  /** Boolean indicating if the license is deactivated. */deactivated: boolean; /** Enum with extension status of license. access. */
+  extensionStatus: "Unavailable" | "Pending" | "Available"; /** Origin of license key. */
+  origin: "Internal" | "External"; /** The product the license is valid for. */
+  product: string; /** Enum with status of license. Only status Ok grants license. access. */
+  status: "Ok" | "Blacklisted" | "Expired" | "Missing"; /** Boolean indicating if it is a trial license. */
+  trial: boolean; /** Type of license key. */
+  type: "Signed" | "Plain" | "2.0"; /** Period that the license is currently set to be active. Represented as an ISO 8601 time interval with start and end. */
   valid: string;
 };
 /**
@@ -407,9 +336,7 @@ type LicenseStatus = {
  * }
  */
 type SettingsBody = {
-  /** If analyzer users are available, they will be automatically assigned. Otherwise, analyzer capacity will be assigned, if available. */
-  autoAssignAnalyzer?: boolean;
-  /** If professional users are available, they will be automatically assigned. Otherwise, analyzer capacity will be assigned, if available. */
+  /** If analyzer users are available, they will be automatically assigned. Otherwise, analyzer capacity will be assigned, if available. */autoAssignAnalyzer?: boolean; /** If professional users are available, they will be automatically assigned. Otherwise, analyzer capacity will be assigned, if available. */
   autoAssignProfessional?: boolean;
 };
 /**
@@ -419,15 +346,10 @@ type SettingsBody = {
  * @throws GetLicenseAssignmentsHttpError
  */
 declare function getLicenseAssignments(query: {
-  /** The filter for finding entries. */
-  filter?: string;
-  /** The preferred number of entries to return. */
-  limit?: number;
-  /** Only return assignments which are 'orphans' in the current tenant. */
-  orphans?: boolean;
-  /** The requested page. */
-  page?: string;
-  /** The field to sort on; can be prefixed with +/- for ascending/descending sort order. */
+  /** The filter for finding entries. */filter?: string; /** The preferred number of entries to return. */
+  limit?: number; /** Only return assignments which are 'orphans' in the current tenant. */
+  orphans?: boolean; /** The requested page. */
+  page?: string; /** The field to sort on; can be prefixed with +/- for ascending/descending sort order. */
   sort?: string;
 }, options?: ApiCallOptions): Promise<GetLicenseAssignmentsHttpResponse>;
 type GetLicenseAssignmentsHttpResponse = {
@@ -500,13 +422,9 @@ type UpdateLicenseAssignmentsHttpError = {
  * @throws GetLicenseConsumptionHttpError
  */
 declare function getLicenseConsumption(query: {
-  /** The SCIM filter for the query. Filterable property is "endTime". */
-  filter?: string;
-  /** The preferred number of entries to return. */
-  limit?: number;
-  /** The requested page. */
-  page?: string;
-  /** The field to sort on; can be prefixed with +/- for ascending/descending sort order. */
+  /** The SCIM filter for the query. Filterable property is "endTime". */filter?: string; /** The preferred number of entries to return. */
+  limit?: number; /** The requested page. */
+  page?: string; /** The field to sort on; can be prefixed with +/- for ascending/descending sort order. */
   sort?: string;
 }, options?: ApiCallOptions): Promise<GetLicenseConsumptionHttpResponse>;
 type GetLicenseConsumptionHttpResponse = {

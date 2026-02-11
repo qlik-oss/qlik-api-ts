@@ -1,10 +1,9 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/tasks.d.ts
 type ErrorResponse = {
-  errors?: HttpResult[];
-  /** A way to trace the source of the error. */
+  errors?: HttpResult[]; /** A way to trace the source of the error. */
   traceId?: string;
 };
 /**
@@ -20,43 +19,27 @@ type HttpResult = {
   title?: string;
 };
 type Link = {
-  /** URL to a resource request */
-  href: string;
+  /** URL to a resource request */href: string;
 };
 type OrchMeta = {
-  attrs?: Record<string, string>;
-  /** The ID of the orchestration associated with the task in the choreographer */
-  id: string;
-  /** orchestration system type */
+  attrs?: Record<string, string>; /** The ID of the orchestration associated with the task in the choreographer */
+  id: string; /** orchestration system type */
   type: 0 | 1 | 2 | 3;
 };
 type OrchRun = {
-  /** The ID of the action */
-  actionId: string;
-  /** The UTC timestamp when the task run ended */
-  readonly endedAt?: string;
-  /** user ID of on behalf of whom the Task was executed. */
-  executedAs?: string;
-  /** The ID of the task run */
-  id: string;
-  /** log info of the run */
-  log?: string;
-  /** The ID of the resource */
-  resourceId: string;
-  /** The UTC timestamp when the task run started */
-  readonly startedAt?: string;
-  /** task run status */
-  status: "RUNNING" | "SUCCEEDED" | "FAILED";
-  /** The ID of the task */
+  /** The ID of the action */actionId: string; /** The UTC timestamp when the task run ended */
+  readonly endedAt?: string; /** user ID of on behalf of whom the Task was executed. */
+  executedAs?: string; /** The ID of the task run */
+  id: string; /** log info of the run */
+  log?: string; /** The ID of the resource */
+  resourceId: string; /** The UTC timestamp when the task run started */
+  readonly startedAt?: string; /** task run status */
+  status: "RUNNING" | "SUCCEEDED" | "FAILED"; /** The ID of the task */
   taskId: string;
-  taskMeta: TaskMetadata;
-  /** task name */
-  taskName: string;
-  /** Information about who or what triggered the task run. */
-  triggeredBy: string;
-  /** The ID of the worker who is carrying out the real job. e.g. App.Reload job is carried out by Reload Engine, in this case, workerId will be reloadId from reload engine. Or, if we are using Automation, workerId will be Automation runId. */
-  workerId: string;
-  /** worker type or target system */
+  taskMeta: TaskMetadata; /** task name */
+  taskName: string; /** Information about who or what triggered the task run. */
+  triggeredBy: string; /** The ID of the worker who is carrying out the real job. e.g. App.Reload job is carried out by Reload Engine, in this case, workerId will be reloadId from reload engine. Or, if we are using Automation, workerId will be Automation runId. */
+  workerId: string; /** worker type or target system */
   workerType: string;
 };
 type OrchRunList = {
@@ -68,31 +51,19 @@ type OrchRunList = {
   };
 };
 type Task = {
-  /** List of helpful terms describing the workflows intended purpose, subject areas, or other important qualities */
-  annotations?: string[];
-  /** Workflow description */
-  description?: string;
-  /** Indicates whether the task is enabled or not */
-  enabled?: boolean;
-  /** Workflow CloudEvent definitions. Defines CloudEvents that can be consumed or produced */
-  events?: Events;
-  /** The choreographer's unique identifier */
-  readonly id?: string;
-  /** If 'true', workflow instances is not terminated when there are no active execution paths. Instance can be terminated via 'terminate end definition' or reaching defined 'workflowExecTimeout' */
-  keepActive?: boolean;
-  /** Optional expression that will be used to generate a domain-specific workflow instance identifier */
+  /** List of helpful terms describing the workflows intended purpose, subject areas, or other important qualities */annotations?: string[]; /** Workflow description */
+  description?: string; /** Indicates whether the task is enabled or not */
+  enabled?: boolean; /** Workflow CloudEvent definitions. Defines CloudEvents that can be consumed or produced */
+  events?: Events; /** The choreographer's unique identifier */
+  readonly id?: string; /** If 'true', workflow instances is not terminated when there are no active execution paths. Instance can be terminated via 'terminate end definition' or reaching defined 'workflowExecTimeout' */
+  keepActive?: boolean; /** Optional expression that will be used to generate a domain-specific workflow instance identifier */
   key?: string;
-  metadata?: TaskMetadata;
-  /** The name that identifies the workflow definition, and which, when combined with its version, forms a unique identifier. */
-  name: string;
-  /** The resource ID of the task. The `Task.resourceId` value from user input is ignored and will be calculated automatically from `Task.states`. */
-  resourceId?: string;
-  /** Serverless Workflow schema version */
+  metadata?: TaskMetadata; /** The name that identifies the workflow definition, and which, when combined with its version, forms a unique identifier. */
+  name: string; /** The resource ID of the task. The `Task.resourceId` value from user input is ignored and will be calculated automatically from `Task.states`. */
+  resourceId?: string; /** Serverless Workflow schema version */
   specVersion: string;
-  start?: Startdef;
-  /** State definitions */
-  states?: Eventstate[];
-  /** Workflow version */
+  start?: Startdef; /** State definitions */
+  states?: Eventstate[]; /** Workflow version */
   version?: string;
 };
 type TaskList = {
@@ -104,22 +75,15 @@ type TaskList = {
   };
 };
 type TriggerMeta = {
-  /** The ID of the Trigger associated with the task in the choreographer */
-  id: string;
-  /** trigger type */
+  /** The ID of the Trigger associated with the task in the choreographer */id: string; /** trigger type */
   type: 0 | 1 | 2 | 3;
 };
 type Action = {
-  /** Expression, if defined, must evaluate to true for this action to be performed. If false, action is disregarded */
-  condition?: string;
-  functionRef?: Functionref;
-  /** Unique action definition name */
-  name?: string;
-  /** List of unique references to defined workflow errors for which the action should not be retried. Used only when `autoRetries` is set to `true` */
-  nonRetryableErrors?: string[];
-  /** References a defined workflow retry definition. If not defined the default retry policy is assumed */
-  retryRef?: string;
-  /** List of unique references to defined workflow errors for which the action should be retried. Used only when `autoRetries` is set to `false` */
+  /** Expression, if defined, must evaluate to true for this action to be performed. If false, action is disregarded */condition?: string;
+  functionRef?: Functionref; /** Unique action definition name */
+  name?: string; /** List of unique references to defined workflow errors for which the action should not be retried. Used only when `autoRetries` is set to `true` */
+  nonRetryableErrors?: string[]; /** References a defined workflow retry definition. If not defined the default retry policy is assumed */
+  retryRef?: string; /** List of unique references to defined workflow errors for which the action should be retried. Used only when `autoRetries` is set to `false` */
   retryableErrors?: string[];
 } & unknown;
 /**
@@ -130,15 +94,11 @@ type ActionExecTimeout = string;
  * CloudEvent correlation definition
  */
 type CorrelationDef = {
-  /** CloudEvent Extension Context Attribute name */
-  contextAttributeName: "id" | "status";
-  /** CloudEvent Extension Context Attribute value */
+  /** CloudEvent Extension Context Attribute name */contextAttributeName: "id" | "status"; /** CloudEvent Extension Context Attribute value */
   contextAttributeValue?: string;
 };
 type Crondef = string | {
-  /** Repeating interval (cron expression) describing when the workflow instance should be created */
-  expression: string;
-  /** Specific date and time (ISO 8601 format) when the cron expression invocation is no longer valid */
+  /** Repeating interval (cron expression) describing when the workflow instance should be created */expression: string; /** Specific date and time (ISO 8601 format) when the cron expression invocation is no longer valid */
   validUntil?: string;
 };
 /**
@@ -150,77 +110,49 @@ type End = boolean;
  */
 type EventTimeout = string;
 type Eventdef = {
-  /** CloudEvent correlation definitions */
-  correlation?: CorrelationDef[];
-  /** If `true`, only the Event payload is accessible to consuming Workflow states. If `false`, both event payload and context attributes should be accessible */
-  dataOnly?: boolean;
-  /** Unique event name */
-  name?: string;
-  /** CloudEvent source */
-  source?: "system-events.task";
-  /** CloudEvent type */
+  /** CloudEvent correlation definitions */correlation?: CorrelationDef[]; /** If `true`, only the Event payload is accessible to consuming Workflow states. If `false`, both event payload and context attributes should be accessible */
+  dataOnly?: boolean; /** Unique event name */
+  name?: string; /** CloudEvent source */
+  source?: "system-events.task"; /** CloudEvent type */
   type?: "com.qlik.v1.task.run.finished";
 };
 /**
  * This state is used to wait for events from event sources, then consumes them and invoke one or more actions to run in sequence or parallel
  */
 type Eventstate = {
-  /** Unique Name of a workflow state which is responsible for compensation of this state */
-  compensatedBy?: string;
-  /** State end definition */
-  end?: End;
-  /** If true consuming one of the defined events causes its associated actions to be performed. If false all of the defined events must be consumed in order for actions to be performed */
-  exclusive?: boolean;
-  /** State name */
-  name?: string;
-  /** Define the events to be consumed and optional actions to be performed */
-  onEvents?: Onevents[];
-  /** State specific timeouts */
+  /** Unique Name of a workflow state which is responsible for compensation of this state */compensatedBy?: string; /** State end definition */
+  end?: End; /** If true consuming one of the defined events causes its associated actions to be performed. If false all of the defined events must be consumed in order for actions to be performed */
+  exclusive?: boolean; /** State name */
+  name?: string; /** Define the events to be consumed and optional actions to be performed */
+  onEvents?: Onevents[]; /** State specific timeouts */
   timeouts?: {
-    /** Action execution timeout duration (literal ISO 8601 duration format or expression which evaluation results in an ISO 8601 duration) */
-    actionExecTimeout?: ActionExecTimeout;
-    /** Timeout duration to wait for consuming defined events (literal ISO 8601 duration format or expression which evaluation results in an ISO 8601 duration) */
-    eventTimeout?: EventTimeout;
-    /** Workflow state execution timeout duration (literal ISO 8601 duration format or expression which evaluation results in an ISO 8601 duration) */
+    /** Action execution timeout duration (literal ISO 8601 duration format or expression which evaluation results in an ISO 8601 duration) */actionExecTimeout?: ActionExecTimeout; /** Timeout duration to wait for consuming defined events (literal ISO 8601 duration format or expression which evaluation results in an ISO 8601 duration) */
+    eventTimeout?: EventTimeout; /** Workflow state execution timeout duration (literal ISO 8601 duration format or expression which evaluation results in an ISO 8601 duration) */
     stateExecTimeout?: StateExecTimeout;
-  };
-  /** State type */
+  }; /** State type */
   type?: "EVENT";
 } & unknown;
 type Functionref = string | {
-  /** Function arguments/inputs */
-  arguments?: unknown;
-  /** Specifies if the function should be invoked sync or async */
-  invoke?: "SYNC" | "ASYNC";
-  /** Name of the referenced function */
-  refName: "app.reload";
-  /** Only used if function type is 'graphql'. A string containing a valid GraphQL selection set */
+  /** Function arguments/inputs */arguments?: unknown; /** Specifies if the function should be invoked sync or async */
+  invoke?: "SYNC" | "ASYNC"; /** Name of the referenced function */
+  refName: "app.reload"; /** Only used if function type is 'graphql'. A string containing a valid GraphQL selection set */
   selectionSet?: string;
 };
 type Onevents = {
-  /** Specifies how actions are to be performed (in sequence or in parallel) */
-  actionMode?: "SEQUENTIAL" | "PARALLEL";
-  /** Actions to be performed if expression matches */
-  actions?: Action[];
-  /** References one or more unique event names in the defined workflow events */
+  /** Specifies how actions are to be performed (in sequence or in parallel) */actionMode?: "SEQUENTIAL" | "PARALLEL"; /** Actions to be performed if expression matches */
+  actions?: Action[]; /** References one or more unique event names in the defined workflow events */
   eventRefs: string[];
 };
 type Schedule = string | ({
-  cron?: Crondef;
-  /** Specific date and time (ISO 8601 format) when the workflow instance should be terminated */
-  endDateTime?: string;
-  /** Time interval (must be repeating interval) described with ISO 8601 format. Declares when workflow instances will be automatically created. */
-  interval?: string;
-  /** The RRULE recurrence string for chronos job */
-  recurrence?: string;
-  /** Specific date and time (ISO 8601 format) when the workflow instance should be created */
-  startDateTime?: string;
-  /** Timezone name used to evaluate the interval & cron-expression. (default: UTC) */
+  cron?: Crondef; /** Specific date and time (ISO 8601 format) when the workflow instance should be terminated */
+  endDateTime?: string; /** Time interval (must be repeating interval) described with ISO 8601 format. Declares when workflow instances will be automatically created. */
+  interval?: string; /** The RRULE recurrence string for chronos job */
+  recurrence?: string; /** Specific date and time (ISO 8601 format) when the workflow instance should be created */
+  startDateTime?: string; /** Timezone name used to evaluate the interval & cron-expression. (default: UTC) */
   timezone?: string;
 } & unknown);
 type Startdef = {
-  schedule: Schedule;
-  /** Name of the starting workflow state */
+  schedule: Schedule; /** Name of the starting workflow state */
   stateName?: string;
 };
 /**
@@ -228,27 +160,17 @@ type Startdef = {
  */
 type StateExecTimeout = string;
 type TaskMetadata = {
-  /** The UTC timestamp when the task was created */
-  readonly createdAt?: string;
-  /** The user ID of the user that created the task */
-  createdBy?: string;
-  /** The UTC timestamp when the task was deleted */
-  readonly deletedAt?: string;
-  /** why the Task is disabled */
-  disabledCode?: "MANUALLY" | "CONSECUTIVE-FAILURES" | "APP-SCRIPT-UPDATED" | "OWNER-DELETED" | "OWNER-DISABLED";
-  /** The ID of the reload-task this one was migrated from (if applicable) */
+  /** The UTC timestamp when the task was created */readonly createdAt?: string; /** The user ID of the user that created the task */
+  createdBy?: string; /** The UTC timestamp when the task was deleted */
+  readonly deletedAt?: string; /** why the Task is disabled */
+  disabledCode?: "MANUALLY" | "CONSECUTIVE-FAILURES" | "APP-SCRIPT-UPDATED" | "OWNER-DELETED" | "OWNER-DISABLED"; /** The ID of the reload-task this one was migrated from (if applicable) */
   migratedFrom?: string;
-  orchestration?: OrchMeta;
-  /** The user ID of the owner of the task */
-  ownerId?: string;
-  /** The space ID that the Task will operate in */
-  spaceId?: string;
-  /** The tenant ID that the Task will operate in */
+  orchestration?: OrchMeta; /** The user ID of the owner of the task */
+  ownerId?: string; /** The space ID that the Task will operate in */
+  spaceId?: string; /** The tenant ID that the Task will operate in */
   tenantId?: string;
-  trigger?: TriggerMeta;
-  /** The UTC timestamp when the task was last updated */
-  updatedAt?: string;
-  /** resource usage. Normally it means in which product domain the resource is used. if this field is not presented, it has default of `ANALYTICS` */
+  trigger?: TriggerMeta; /** The UTC timestamp when the task was last updated */
+  updatedAt?: string; /** resource usage. Normally it means in which product domain the resource is used. if this field is not presented, it has default of `ANALYTICS` */
   usage?: "ANALYTICS" | "DATA_PREPARATION" | "DATAFLOW_PREP" | "SINGLE_TABLE_PREP";
 };
 /**
@@ -258,11 +180,8 @@ type TaskMetadata = {
  * @throws GetTasksHttpError
  */
 declare function getTasks(query: {
-  /** The maximum number of resources to return for a request. */
-  limit?: number;
-  /** The page cursor. */
-  page?: string;
-  /** Filter tasks by its target resource ID. */
+  /** The maximum number of resources to return for a request. */limit?: number; /** The page cursor. */
+  page?: string; /** Filter tasks by its target resource ID. */
   resourceId?: string;
   /** The property of a resource to sort on (default sort is
    * -updatedAt). A property must be prefixed by + or - to
@@ -289,8 +208,7 @@ type GetTasksHttpError = {
  * @throws CreateTaskHttpError
  */
 declare function createTask(query: {
-  /** ID of the reload-task to migrate from the old system (optional). */
-  migrateFrom?: string;
+  /** ID of the reload-task to migrate from the old system (optional). */migrateFrom?: string;
 }, body: Task, options?: ApiCallOptions): Promise<CreateTaskHttpResponse>;
 type CreateTaskHttpResponse = {
   data: Task;
@@ -310,9 +228,7 @@ type CreateTaskHttpError = {
  * @throws GetTasksResourceRunsHttpError
  */
 declare function getTasksResourceRuns(id: string, query: {
-  /** The maximum number of task runs to return for a request. */
-  limit?: number;
-  /** The page cursor. */
+  /** The maximum number of task runs to return for a request. */limit?: number; /** The page cursor. */
   page?: string;
   /** The property of a resource to sort on (default sort is -startedAt).
    * A property must be prefixed by + or - to indicate ascending or descending sort order respectively. */
@@ -390,8 +306,7 @@ type UpdateTaskHttpError = {
  * @throws StartTaskHttpError
  */
 declare function startTask(id: string, query: {
-  /** Indicates the origin of the trigger. If not provided, defaults to 'manual'. For event-triggered tasks, this can be the name of the triggering task. */
-  source?: string;
+  /** Indicates the origin of the trigger. If not provided, defaults to 'manual'. For event-triggered tasks, this can be the name of the triggering task. */source?: string;
 }, options?: ApiCallOptions): Promise<StartTaskHttpResponse>;
 type StartTaskHttpResponse = {
   data: {
@@ -413,9 +328,7 @@ type StartTaskHttpError = {
  * @throws GetTaskRunsHttpError
  */
 declare function getTaskRuns(id: string, query: {
-  /** The maximum number of task runs to return for a request. */
-  limit?: number;
-  /** The page cursor. */
+  /** The maximum number of task runs to return for a request. */limit?: number; /** The page cursor. */
   page?: string;
   /** The property of a resource to sort on (default sort is -startedAt).
    * A property must be prefixed by + or - to indicate ascending or descending sort order respectively. */
@@ -460,8 +373,7 @@ type GetLastTaskRunHttpError = {
 declare function getTaskRunLog(id: string, runId: string, options?: ApiCallOptions): Promise<GetTaskRunLogHttpResponse>;
 type GetTaskRunLogHttpResponse = {
   data: {
-    /** Log content in plain text format */
-    logContent?: string;
+    /** Log content in plain text format */logContent?: string;
   };
   headers: Headers;
   status: 200;

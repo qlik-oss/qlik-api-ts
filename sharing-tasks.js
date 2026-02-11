@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/sharing-tasks.ts
 /**
@@ -232,7 +232,6 @@ const sharingTasksExport = {
 	getSharingTaskExecutionFile,
 	clearCache
 };
-var sharing_tasks_default = sharingTasksExport;
 
 //#endregion
-export { cancelSharingTask, clearCache, configureSharingTasksSettings, createSharingTask, sharing_tasks_default as default, deleteSharingTask, executeSharingTasks, getSharingTask, getSharingTaskExecution, getSharingTaskExecutionFile, getSharingTaskExecutions, getSharingTasks, getSharingTasksSettings, patchSharingTask, updateSharingTasksSettings };
+export { cancelSharingTask, clearCache, configureSharingTasksSettings, createSharingTask, sharingTasksExport as default, deleteSharingTask, executeSharingTasks, getSharingTask, getSharingTaskExecution, getSharingTaskExecutionFile, getSharingTaskExecutions, getSharingTasks, getSharingTasksSettings, patchSharingTask, updateSharingTasksSettings };

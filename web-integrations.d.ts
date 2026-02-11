@@ -1,27 +1,19 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/web-integrations.d.ts
 /**
  * An error object describing the error.
  */
 type Error = {
-  /** The error code. */
-  code: string;
-  /** A human-readable explanation specific to this occurrence of the error. */
-  detail?: string;
-  /** Additional properties relating to the error. */
-  meta?: unknown;
-  /** References to the source of the error. */
+  /** The error code. */code: string; /** A human-readable explanation specific to this occurrence of the error. */
+  detail?: string; /** Additional properties relating to the error. */
+  meta?: unknown; /** References to the source of the error. */
   source?: {
-    /** The URI query parameter that caused the error. */
-    parameter?: string;
-    /** A JSON Pointer to the property that caused the error. */
+    /** The URI query parameter that caused the error. */parameter?: string; /** A JSON Pointer to the property that caused the error. */
     pointer?: string;
-  };
-  /** The HTTP status code. */
-  status: string;
-  /** Summary of the problem. */
+  }; /** The HTTP status code. */
+  status: string; /** Summary of the problem. */
   title: string;
 };
 /**
@@ -38,39 +30,27 @@ type Error = {
  * }
  */
 type Errors = {
-  /** An array of errors related to the operation. */
-  errors?: Error[];
-  /** A unique identifier for tracing the error. */
+  /** An array of errors related to the operation. */errors?: Error[]; /** A unique identifier for tracing the error. */
   traceId?: string;
 };
 /**
  * A web integration object.
  */
 type WebIntegration = {
-  /** The time the web integration was created. */
-  readonly created?: string;
-  /** The user that created the web integration. */
-  readonly createdBy?: string;
-  /** The unique web integration identifier. */
-  readonly id?: string;
-  /** The time the web integration was last updated. */
-  readonly lastUpdated?: string;
-  /** The name of the web integration. */
-  name?: string;
-  /** The tenant that the web integration belongs to. */
-  tenantId?: string;
-  /** The origins that are allowed to make requests to the tenant. */
+  /** The time the web integration was created. */readonly created?: string; /** The user that created the web integration. */
+  readonly createdBy?: string; /** The unique web integration identifier. */
+  readonly id?: string; /** The time the web integration was last updated. */
+  readonly lastUpdated?: string; /** The name of the web integration. */
+  name?: string; /** The tenant that the web integration belongs to. */
+  tenantId?: string; /** The origins that are allowed to make requests to the tenant. */
   validOrigins?: string[];
 };
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
  */
 type WebIntegrationPatch = {
-  /** The operation to be performed. */
-  op: "replace";
-  /** A JSON Pointer. */
-  path: "/name" | "/validOrigins";
-  /** New value to be used for this operation. */
+  /** The operation to be performed. */op: "replace"; /** A JSON Pointer. */
+  path: "/name" | "/validOrigins"; /** New value to be used for this operation. */
   value: string;
 };
 /**
@@ -88,57 +68,37 @@ type WebIntegrationPatchSchema = WebIntegrationPatch[];
  * The creation of a web integration response.
  */
 type WebIntegrationPost = {
-  /** The time the web integration was created. */
-  readonly created?: string;
-  /** The user that created the web integration. */
-  readonly createdBy?: string;
-  /** The unique web integration identifier. */
-  readonly id?: string;
-  /** The time the web integration was last updated. */
-  readonly lastUpdated?: string;
-  /** Pagination links */
+  /** The time the web integration was created. */readonly created?: string; /** The user that created the web integration. */
+  readonly createdBy?: string; /** The unique web integration identifier. */
+  readonly id?: string; /** The time the web integration was last updated. */
+  readonly lastUpdated?: string; /** Pagination links */
   links?: {
-    /** Link information for current page. */
-    self: {
-      /** URL to the current page of records. */
-      href: string;
+    /** Link information for current page. */self: {
+      /** URL to the current page of records. */href: string;
     };
-  };
-  /** The name of the newly created web integration. */
-  name?: string;
-  /** The tenant that the web integration belongs to. */
-  tenantId?: string;
-  /** The origins that are allowed to make requests to the tenant. */
+  }; /** The name of the newly created web integration. */
+  name?: string; /** The tenant that the web integration belongs to. */
+  tenantId?: string; /** The origins that are allowed to make requests to the tenant. */
   validOrigins?: string[];
 };
 type WebIntegrationPostSchema = {
-  /** The name of the web integration to create. */
-  name: string;
-  /** The origins that are allowed to make requests to the tenant. */
+  /** The name of the web integration to create. */name: string; /** The origins that are allowed to make requests to the tenant. */
   validOrigins?: string[];
 };
 /**
  * An array of web integration objects.
  */
 type WebIntegrations = {
-  /** Properties of web integrations in a given tenant. */
-  data?: WebIntegration[];
-  /** Pagination links */
+  /** Properties of web integrations in a given tenant. */data?: WebIntegration[]; /** Pagination links */
   links?: {
-    /** Link information for next page. */
-    next?: {
-      /** URL to the next page of records. */
-      href: string;
-    };
-    /** Link information for previous page. */
+    /** Link information for next page. */next?: {
+      /** URL to the next page of records. */href: string;
+    }; /** Link information for previous page. */
     prev?: {
-      /** URL to the previous page of records. */
-      href: string;
-    };
-    /** Link information for current page. */
+      /** URL to the previous page of records. */href: string;
+    }; /** Link information for current page. */
     self: {
-      /** URL to the current page of records. */
-      href: string;
+      /** URL to the current page of records. */href: string;
     };
   };
 };
@@ -149,15 +109,10 @@ type WebIntegrations = {
  * @throws GetWebIntegrationsHttpError
  */
 declare function getWebIntegrations(query: {
-  /** The target web integration ID to start looking before for web integrations. Cannot be used in conjunction with startingAfter. */
-  endingBefore?: string;
-  /** The number of web integration entries to retrieve. */
-  limit?: number;
-  /** The field to sort by. Prefix with +/- to indicate ascending/descending order. */
-  sort?: "name" | "+name" | "-name";
-  /** The target web integration ID to start looking after for web integrations. Cannot be used in conjunction with endingBefore. */
-  startingAfter?: string;
-  /** The tenant ID to filter by. */
+  /** The target web integration ID to start looking before for web integrations. Cannot be used in conjunction with startingAfter. */endingBefore?: string; /** The number of web integration entries to retrieve. */
+  limit?: number; /** The field to sort by. Prefix with +/- to indicate ascending/descending order. */
+  sort?: "name" | "+name" | "-name"; /** The target web integration ID to start looking after for web integrations. Cannot be used in conjunction with endingBefore. */
+  startingAfter?: string; /** The tenant ID to filter by. */
   tenantId?: string;
 }, options?: ApiCallOptions): Promise<GetWebIntegrationsHttpResponse>;
 type GetWebIntegrationsHttpResponse = {

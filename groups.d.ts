@@ -1,18 +1,14 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/groups.d.ts
 /**
  * An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles.
  */
 type AssignedRoles = {
-  /** The unique role identitier */
-  id: string;
-  /** The role level */
-  readonly level: "admin" | "user";
-  /** The role name */
-  readonly name: string;
-  /** The type of role */
+  /** The unique role identitier */id: string; /** The role level */
+  readonly level: "admin" | "user"; /** The role name */
+  readonly name: string; /** The type of role */
   readonly type: "default" | "custom";
 }[];
 /**
@@ -25,8 +21,7 @@ type AssignedRoles = {
  * ]
  */
 type AssignedRolesRefIDs = {
-  /** The unique role identitier */
-  id: string;
+  /** The unique role identitier */id: string;
 }[];
 /**
  * An array of role reference names.
@@ -38,29 +33,20 @@ type AssignedRolesRefIDs = {
  * ]
  */
 type AssignedRolesRefNames = {
-  /** The name of the role */
-  name: string;
+  /** The name of the role */name: string;
 }[];
 /**
  * An error object describing the error.
  */
 type Error = {
-  /** The error code. */
-  code: string;
-  /** A human-readable explanation specific to this occurrence of the problem. */
-  detail?: string;
-  /** Additional properties relating to the error. */
-  meta?: unknown;
-  /** References to the source of the error. */
+  /** The error code. */code: string; /** A human-readable explanation specific to this occurrence of the problem. */
+  detail?: string; /** Additional properties relating to the error. */
+  meta?: unknown; /** References to the source of the error. */
   source?: {
-    /** The URI query parameter that caused the error. */
-    parameter?: string;
-    /** A JSON Pointer to the property that caused the error. */
+    /** The URI query parameter that caused the error. */parameter?: string; /** A JSON Pointer to the property that caused the error. */
     pointer?: string;
-  };
-  /** The HTTP status code. */
-  status?: number;
-  /** Summary of the problem. */
+  }; /** The HTTP status code. */
+  status?: number; /** Summary of the problem. */
   title: string;
 };
 /**
@@ -78,61 +64,42 @@ type Error = {
  * }
  */
 type Errors = {
-  /** An array of errors related to the operation. */
-  errors?: Error[];
-  /** A unique identifier for tracing the error. */
+  /** An array of errors related to the operation. */errors?: Error[]; /** A unique identifier for tracing the error. */
   traceId?: string;
 };
 /**
  * An advanced query filter to be used for complex user querying in the tenant.
  */
 type Filter = {
-  /** The advanced filtering to be applied the query. All conditional statements within this query parameter are case insensitive. */
-  filter?: string;
+  /** The advanced filtering to be applied the query. All conditional statements within this query parameter are case insensitive. */filter?: string;
 };
 /**
  * represents a Group document
  */
 type Group = {
-  /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */
-  assignedRoles?: AssignedRoles;
-  /** The timestamp for when the group record was created. */
-  createdAt: string;
-  /** Id of user that created role. */
-  readonly createdBy?: string;
-  /** A description of a custom group. */
-  description?: string;
-  /** The unique identifier for the group */
-  readonly id: string;
-  /** The timestamp for when the group record was last updated. */
-  lastUpdatedAt: string;
-  /** Contains Links for current document */
+  /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */assignedRoles?: AssignedRoles; /** The timestamp for when the group record was created. */
+  createdAt: string; /** Id of user that created role. */
+  readonly createdBy?: string; /** A description of a custom group. */
+  description?: string; /** The unique identifier for the group */
+  readonly id: string; /** The timestamp for when the group record was last updated. */
+  lastUpdatedAt: string; /** Contains Links for current document */
   links: {
     self: {
-      /** Link to the current group document */
-      href: string;
+      /** Link to the current group document */href: string;
     };
-  };
-  /** The name of the group. */
-  name: string;
-  /** The type of provider for the group. */
-  providerType?: "idp" | "custom";
-  /** The state of the group. */
-  status: "active" | "disabled";
-  /** The tenant identifier associated with the given group */
-  tenantId: string;
-  /** Id of user that last updated this role. */
+  }; /** The name of the group. */
+  name: string; /** The type of provider for the group. */
+  providerType?: "idp" | "custom"; /** The state of the group. */
+  status: "active" | "disabled"; /** The tenant identifier associated with the given group */
+  tenantId: string; /** Id of user that last updated this role. */
   readonly updatedBy?: string;
 };
 /**
  * A JSON Patch document.
  */
 type GroupPatch = {
-  /** The operation to be performed. Currently "replace" is the only supported operation. */
-  op: "replace";
-  /** Attribute name of a field of the Groups entity. "Name" and "description" is only available for custom groups. */
-  path: "assignedRoles" | "name" | "description";
-  /** The roles to assign to the group (limit of 100 roles per group) or the new custom group name or description. */
+  /** The operation to be performed. Currently "replace" is the only supported operation. */op: "replace"; /** Attribute name of a field of the Groups entity. "Name" and "description" is only available for custom groups. */
+  path: "assignedRoles" | "name" | "description"; /** The roles to assign to the group (limit of 100 roles per group) or the new custom group name or description. */
   value: AssignedRolesRefIDs | AssignedRolesRefNames | string;
 };
 /**
@@ -158,7 +125,7 @@ type GroupPatchSchema = GroupPatch[];
  * {
  *   assignedRoles: [
  *     {
- *       name: "Developer"
+ *       name: "A Custom Role"
  *     }
  *   ],
  *   name: "Development",
@@ -166,28 +133,20 @@ type GroupPatchSchema = GroupPatch[];
  * }
  */
 type GroupPostSchema = {
-  /** The roles to assign to the group (limit of 100 roles per group). */
-  assignedRoles?: AssignedRolesRefIDs | AssignedRolesRefNames;
-  /** The description of the group. */
-  description?: string;
-  /** The name of the group (maximum length of 256 characters). */
-  name: string;
-  /** The type of group provider. Must be "idp" or "custom". Defaults to "idp" if not provided. */
-  providerType?: "idp" | "custom";
-  /** The status of the created group within the tenant. Defaults to active if empty. */
+  /** The roles to assign to the group (limit of 100 roles per group). */assignedRoles?: AssignedRolesRefIDs | AssignedRolesRefNames; /** The description of the group. */
+  description?: string; /** The name of the group (maximum length of 256 characters). */
+  name: string; /** The type of group provider. Must be "idp" or "custom". Defaults to "idp" if not provided. */
+  providerType?: "idp" | "custom"; /** The status of the created group within the tenant. Defaults to active if empty. */
   status?: "active";
 };
 /**
  * represents a GroupSetting document
  */
 type GroupSettings = {
-  /** Determines if groups should be created on login. */
-  autoCreateGroups: boolean;
-  /** Contains Links for current document */
+  /** Determines if groups should be created on login. */autoCreateGroups: boolean; /** Contains Links for current document */
   links: {
     self: {
-      /** Link to the current group settings document */
-      href: string;
+      /** Link to the current group settings document */href: string;
     };
   };
   /** @deprecated
@@ -195,55 +154,40 @@ type GroupSettings = {
   syncIdpGroups?: boolean;
   systemGroups?: {
     "000000000000000000000001"?: {
-      /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */
-      assignedRoles?: AssignedRoles;
-      /** The timestamp for when the Everyone group was created. */
-      createdAt?: string;
-      /** For Everyone, this is always `true` and can't be patched. */
-      enabled?: boolean;
-      /** The ID of the Everyone group. This value will not change and is immutable. */
-      id?: "000000000000000000000001";
-      /** The timestamp for when the Everyone group was last updated. */
-      lastUpdatedAt?: string;
-      /** The name of the Everyone group. This value will not change and is immutable. */
+      /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */assignedRoles?: AssignedRoles; /** The timestamp for when the Everyone group was created. */
+      createdAt?: string; /** For Everyone, this is always `true` and can't be patched. */
+      enabled?: boolean; /** The ID of the Everyone group. This value will not change and is immutable. */
+      id?: "000000000000000000000001"; /** The timestamp for when the Everyone group was last updated. */
+      lastUpdatedAt?: string; /** The name of the Everyone group. This value will not change and is immutable. */
       name?: "com.qlik.Everyone";
     };
-  };
-  /** The unique tenant identifier. */
+  }; /** The unique tenant identifier. */
   tenantId: string;
 };
 /**
  * A result object when listing groups.
  */
 type Groups = {
-  /** An array of groups. */
-  data?: Group[];
+  /** An array of groups. */data?: Group[];
   links?: {
     next?: {
-      /** Link to the next page of items */
-      href: string;
+      /** Link to the next page of items */href: string;
     };
     prev?: {
-      /** Link to the previous page of items */
-      href: string;
+      /** Link to the previous page of items */href: string;
     };
     self: {
-      /** Link to the current page of items */
-      href: string;
+      /** Link to the current page of items */href: string;
     };
-  };
-  /** Indicates the total number of matching documents. Will only be returned if the query parameter "totalResults" is true. */
+  }; /** Indicates the total number of matching documents. Will only be returned if the query parameter "totalResults" is true. */
   totalResults?: number;
 };
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
  */
 type SettingsPatch = {
-  /** The operation to be performed. */
-  op: "replace";
-  /** A JSON Pointer. */
-  path: "/autoCreateGroups" | "/syncIdpGroups" | "/systemGroups/{id}/assignedRoles";
-  /** The value to be used for this operation. */
+  /** The operation to be performed. */op: "replace"; /** A JSON Pointer. */
+  path: "/autoCreateGroups" | "/syncIdpGroups" | "/systemGroups/{id}/assignedRoles"; /** The value to be used for this operation. */
   value: boolean | AssignedRolesRefIDs | AssignedRolesRefNames;
 };
 /**
@@ -278,19 +222,12 @@ type SettingsPatchSchema = SettingsPatch[];
  * @throws GetGroupsHttpError
  */
 declare function getGroups(query: {
-  /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax. Cannot be combined with any of the fields marked as deprecated. All conditional statements within this query parameter are case insensitive. */
-  filter?: string;
-  /** The number of groups to retrieve. */
-  limit?: number;
-  /** The next page cursor. */
-  next?: string;
-  /** The previous page cursor. */
-  prev?: string;
-  /** Optional resource field name to sort on, eg. name. Can be prefixed with +/- to determine order, defaults to (+) ascending. */
-  sort?: string;
-  /** Return system groups (e.g. Everyone) instead of regular groups. Cannot be combined with any other query parameters. */
-  systemGroups?: boolean;
-  /** Whether to return a total match count in the result. Defaults to false. */
+  /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax. Cannot be combined with any of the fields marked as deprecated. All conditional statements within this query parameter are case insensitive. */filter?: string; /** The number of groups to retrieve. */
+  limit?: number; /** The next page cursor. */
+  next?: string; /** The previous page cursor. */
+  prev?: string; /** Optional resource field name to sort on, eg. name. Can be prefixed with +/- to determine order, defaults to (+) ascending. */
+  sort?: string; /** Return system groups (e.g. Everyone) instead of regular groups. Cannot be combined with any other query parameters. */
+  systemGroups?: boolean; /** Whether to return a total match count in the result. Defaults to false. */
   totalResults?: boolean;
 }, options?: ApiCallOptions): Promise<GetGroupsHttpResponse>;
 type GetGroupsHttpResponse = {
@@ -330,13 +267,9 @@ type CreateGroupHttpError = {
  * @throws FilterGroupsHttpError
  */
 declare function filterGroups(query: {
-  /** The number of user entries to retrieve. */
-  limit?: number;
-  /** Get users with IDs that are higher than the target user ID. Cannot be used in conjunction with prev. */
-  next?: string;
-  /** Get users with IDs that are lower than the target user ID. Cannot be used in conjunction with next. */
-  prev?: string;
-  /** The field to sort by, with +/- prefix indicating sort order */
+  /** The number of user entries to retrieve. */limit?: number; /** Get users with IDs that are higher than the target user ID. Cannot be used in conjunction with prev. */
+  next?: string; /** Get users with IDs that are lower than the target user ID. Cannot be used in conjunction with next. */
+  prev?: string; /** The field to sort by, with +/- prefix indicating sort order */
   sort?: "name" | "+name" | "-name";
 }, body: Filter, options?: ApiCallOptions): Promise<FilterGroupsHttpResponse>;
 type FilterGroupsHttpResponse = {

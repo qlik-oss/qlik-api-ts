@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/brands.ts
 /**
@@ -222,7 +222,6 @@ const brandsExport = {
 	updateBrandFile,
 	clearCache
 };
-var brands_default = brandsExport;
 
 //#endregion
-export { activateBrand, clearCache, createBrand, createBrandFile, deactivateBrand, brands_default as default, deleteBrand, deleteBrandFile, getActiveBrand, getBrand, getBrandFile, getBrands, patchBrand, updateBrandFile };
+export { activateBrand, clearCache, createBrand, createBrandFile, deactivateBrand, brandsExport as default, deleteBrand, deleteBrandFile, getActiveBrand, getBrand, getBrandFile, getBrands, patchBrand, updateBrandFile };

@@ -1,5 +1,5 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/reload-tasks.d.ts
 type Error = {
@@ -42,55 +42,37 @@ type PostTaskBody = TaskBase & {
   type?: "scheduled_reload";
 };
 type PutTaskBody = TaskBase & {
-  /** Toggle for enabling and disabling the reload task */
-  state?: "Enabled" | "Disabled" | "Completed";
+  /** Toggle for enabling and disabling the reload task */state?: "Enabled" | "Disabled" | "Completed";
 };
 type SelfLink = {
   self: Href;
 };
 type Task = TaskBase & {
-  /** The reason why the task was disabled. */
-  disabledCode?: "MANUALLY" | "CONSECUTIVE-FAILURES" | "OWNER-DELETED" | "OWNER-DISABLED";
+  /** The reason why the task was disabled. */disabledCode?: "MANUALLY" | "CONSECUTIVE-FAILURES" | "OWNER-DELETED" | "OWNER-DISABLED";
   /** @deprecated
    * The fortress ID of the application */
-  fortressId?: string;
-  /** The ID of the task. */
-  id: string;
-  /** The last time the task executed. */
+  fortressId?: string; /** The ID of the task. */
+  id: string; /** The last time the task executed. */
   lastExecutionTime?: string;
   links: SelfLink;
   /** @deprecated
    * The reason why the task was disabled. */
-  log?: string;
-  /** A flag indicating whether the task has been migrated to the new scheduling service. */
-  migrated?: boolean;
-  /** The next time the task will execute. */
-  nextExecutionTime?: string;
-  /** The space ID of the application */
-  spaceId?: string;
-  /** Toggle for enabling and disabling the reload task */
-  state: "Enabled" | "Disabled" | "Completed";
-  /** The ID of the tenant who owns the task. */
-  tenantId: string;
-  /** The ID of the user who owns the task. */
+  log?: string; /** A flag indicating whether the task has been migrated to the new scheduling service. */
+  migrated?: boolean; /** The next time the task will execute. */
+  nextExecutionTime?: string; /** The space ID of the application */
+  spaceId?: string; /** Toggle for enabling and disabling the reload task */
+  state: "Enabled" | "Disabled" | "Completed"; /** The ID of the tenant who owns the task. */
+  tenantId: string; /** The ID of the user who owns the task. */
   userId: string;
 };
 type TaskBase = {
-  /** The ID of the app. */
-  appId?: string;
-  /** A flag that indicates whether a reload is triggered when data of the app is changed */
-  autoReload?: boolean;
-  /** A flag that indicates whether it is a partial reload or not for the auto reload */
-  autoReloadPartial?: boolean;
-  /** The time that the task will stop recurring. If the time zone is missing, this is a combined date-time value expressing a time with a fixed UTC offset (formatted according to RFC3339). If a time zone is given, the zone offset must be omitted. */
-  endDateTime?: string;
-  /** The task is partial reload or not */
-  partial?: boolean;
-  /** List of RECUR lines for a recurring event, as specified in RFC5545. Note that DTSTART and DTEND lines are not allowed in this field; event start and end times are specified in the start and end fields. This field is omitted for single events or instances of recurring events */
-  recurrence?: string[];
-  /** The time that the task execution start recurring. If the time zone is missing, this is a combined date-time value expressing a time with a fixed UTC offset (formatted according to RFC3339). If a time zone is given, the zone offset must be omitted. Field startDateTime should not be before the Unix epoch 00:00:00 UTC on 1 January 1970. Note that the empty string value with the empty recurrence array indicates the scheduled job is not set. */
-  startDateTime?: string;
-  /** The time zone in which the time is specified. (Formatted as an IANA Time Zone Database name, e.g. Europe/Zurich.) This field specifies the time zone in which the event start/end are expanded. If missing the start/end fields must specify a UTC offset in RFC3339 format. */
+  /** The ID of the app. */appId?: string; /** A flag that indicates whether a reload is triggered when data of the app is changed */
+  autoReload?: boolean; /** A flag that indicates whether it is a partial reload or not for the auto reload */
+  autoReloadPartial?: boolean; /** The time that the task will stop recurring. If the time zone is missing, this is a combined date-time value expressing a time with a fixed UTC offset (formatted according to RFC3339). If a time zone is given, the zone offset must be omitted. */
+  endDateTime?: string; /** The task is partial reload or not */
+  partial?: boolean; /** List of RECUR lines for a recurring event, as specified in RFC5545. Note that DTSTART and DTEND lines are not allowed in this field; event start and end times are specified in the start and end fields. This field is omitted for single events or instances of recurring events */
+  recurrence?: string[]; /** The time that the task execution start recurring. If the time zone is missing, this is a combined date-time value expressing a time with a fixed UTC offset (formatted according to RFC3339). If a time zone is given, the zone offset must be omitted. Field startDateTime should not be before the Unix epoch 00:00:00 UTC on 1 January 1970. Note that the empty string value with the empty recurrence array indicates the scheduled job is not set. */
+  startDateTime?: string; /** The time zone in which the time is specified. (Formatted as an IANA Time Zone Database name, e.g. Europe/Zurich.) This field specifies the time zone in which the event start/end are expanded. If missing the start/end fields must specify a UTC offset in RFC3339 format. */
   timeZone?: string;
 };
 type Tasks = {
@@ -104,15 +86,10 @@ type Tasks = {
  * @throws GetReloadTasksHttpError
  */
 declare function getReloadTasks(query: {
-  /** The case sensitive string used to search for a task by app ID. */
-  appId?: string;
-  /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
-  limit?: number;
-  /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
-  next?: string;
-  /** The boolean value used to search for a task is partial or not */
-  partial?: boolean;
-  /** The cursor to the previous page of resources. Provide either the next or prev cursor, but not both. */
+  /** The case sensitive string used to search for a task by app ID. */appId?: string; /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
+  limit?: number; /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
+  next?: string; /** The boolean value used to search for a task is partial or not */
+  partial?: boolean; /** The cursor to the previous page of resources. Provide either the next or prev cursor, but not both. */
   prev?: string;
 }, options?: ApiCallOptions): Promise<GetReloadTasksHttpResponse>;
 type GetReloadTasksHttpResponse = {

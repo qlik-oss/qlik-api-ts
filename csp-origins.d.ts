@@ -1,47 +1,28 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/csp-origins.d.ts
 type CSPEntry = {
-  /** The CSP entry's unique identifier. */
-  id?: string;
+  /** The CSP entry's unique identifier. */id?: string;
 } & CSPEntryContent;
 type CSPEntryContent = {
-  /** Defines the valid sources for loading web workers and nested browsing contexts using elements such as frame and iFrame. */
-  childSrc?: boolean;
-  /** Restricts the URLs that can be loaded using script interfaces. */
-  connectSrc?: boolean;
-  /** Restricts the URLs that can be connected to websockets (all sources will be prefixed with 'wss://'). */
-  connectSrcWSS?: boolean;
-  /** The UTC timestamp when the CSP entry was created. */
-  readonly createdDate?: string;
-  /** The reason for adding this origin to the Content Security Policy. */
-  description?: string;
-  /** Specifies valid sources for loading fonts. */
-  fontSrc?: boolean;
-  /** Allow forms to be submitted to the origin. */
-  formAction?: boolean;
-  /** Specifies valid sources for embedding the resource using frame, iFrame, object, embed and applet. */
-  frameAncestors?: boolean;
-  /** Specifies valid sources for loading nested browsing contexts using elements such as frame and iFrame. */
-  frameSrc?: boolean;
-  /** Specifies valid sources of images and favicons. */
-  imgSrc?: boolean;
-  /** Specifies valid sources for loading media using the audio and video elements. */
-  mediaSrc?: boolean;
-  /** The UTC timestamp when the CSP entry was last modified. */
-  readonly modifiedDate?: string;
-  /** The name for this entry. */
-  name?: string;
-  /** Specifies valid sources for the object, embed, and applet elements. */
-  objectSrc?: boolean;
-  /** The origin that the CSP directives should be applied to. */
-  origin: string;
-  /** Specifies valid sources for JavaScript. */
-  scriptSrc?: boolean;
-  /** Specifies valid sources for stylesheets. */
-  styleSrc?: boolean;
-  /** Specifies valid sources for Worker, SharedWorker, or ServiceWorker scripts. */
+  /** Defines the valid sources for loading web workers and nested browsing contexts using elements such as frame and iFrame. */childSrc?: boolean; /** Restricts the URLs that can be loaded using script interfaces. */
+  connectSrc?: boolean; /** Restricts the URLs that can be connected to websockets (all sources will be prefixed with 'wss://'). */
+  connectSrcWSS?: boolean; /** The UTC timestamp when the CSP entry was created. */
+  readonly createdDate?: string; /** The reason for adding this origin to the Content Security Policy. */
+  description?: string; /** Specifies valid sources for loading fonts. */
+  fontSrc?: boolean; /** Allow forms to be submitted to the origin. */
+  formAction?: boolean; /** Specifies valid sources for embedding the resource using frame, iFrame, object, embed and applet. */
+  frameAncestors?: boolean; /** Specifies valid sources for loading nested browsing contexts using elements such as frame and iFrame. */
+  frameSrc?: boolean; /** Specifies valid sources of images and favicons. */
+  imgSrc?: boolean; /** Specifies valid sources for loading media using the audio and video elements. */
+  mediaSrc?: boolean; /** The UTC timestamp when the CSP entry was last modified. */
+  readonly modifiedDate?: string; /** The name for this entry. */
+  name?: string; /** Specifies valid sources for the object, embed, and applet elements. */
+  objectSrc?: boolean; /** The origin that the CSP directives should be applied to. */
+  origin: string; /** Specifies valid sources for JavaScript. */
+  scriptSrc?: boolean; /** Specifies valid sources for stylesheets. */
+  styleSrc?: boolean; /** Specifies valid sources for Worker, SharedWorker, or ServiceWorker scripts. */
   workerSrc?: boolean;
 };
 type CSPEntryList = {
@@ -53,23 +34,18 @@ type CSPEntryList = {
   };
 };
 type CSPHeader = {
-  /** The compiled CSP header. */
-  "Content-Security-Policy"?: string;
+  /** The compiled CSP header. */"Content-Security-Policy"?: string;
 };
 type Error = {
-  /** The unique code for the error. */
-  code: string;
-  /** May be used to provide additional details. */
-  detail?: string;
-  /** A summary of what went wrong. */
+  /** The unique code for the error. */code: string; /** May be used to provide additional details. */
+  detail?: string; /** A summary of what went wrong. */
   title: string;
 };
 type ErrorResponse = {
   errors?: Error[];
 };
 type Link = {
-  /** URL to a resource request. */
-  href: string;
+  /** URL to a resource request. */href: string;
 };
 /**
  * Retrieves all content security policies for a tenant.
@@ -78,43 +54,24 @@ type Link = {
  * @throws GetCSPEntriesHttpError
  */
 declare function getCSPEntries(query: {
-  /** Filter resources by directive 'childSrc', true/false. */
-  childSrc?: boolean;
-  /** Filter resources by directive 'connectSrc', true/false. */
-  connectSrc?: boolean;
-  /** Filter resources by directive 'connectSrcWSS', true/false. */
-  connectSrcWSS?: boolean;
-  /** Filter resources by directive 'fontSrc', true/false. */
-  fontSrc?: boolean;
-  /** Filter resources by directive 'formAction', true/false. */
-  formAction?: boolean;
-  /** Filter resources by directive 'frameAncestors', true/false. */
-  frameAncestors?: boolean;
-  /** Filter resources by directive 'frameSrc', true/false. */
-  frameSrc?: boolean;
-  /** Filter resources by directive 'imgSrc', true/false. */
-  imgSrc?: boolean;
-  /** Maximum number of CSP-Origins to retrieve. */
-  limit?: number;
-  /** Filter resources by directive 'mediaSrc', true/false. */
-  mediaSrc?: boolean;
-  /** Filter resources by name (wildcard and case insensitive). */
-  name?: string;
-  /** Cursor to the next page. */
-  next?: string;
-  /** Filter resources by directive 'objectSrc', true/false. */
-  objectSrc?: boolean;
-  /** Filter resources by origin (wildcard and case insensitive). */
-  origin?: string;
-  /** Cursor to previous next page. */
-  prev?: string;
-  /** Filter resources by directive 'scriptSrc', true/false. */
-  scriptSrc?: boolean;
-  /** Field to sort by, prefix with -/+ to indicate order. */
-  sort?: "name" | "-name" | "origin" | "-origin" | "createdDate" | "-createdDate" | "modifiedDate" | "-modifiedDate";
-  /** Filter resources by directive 'styleSrc', true/false. */
-  styleSrc?: boolean;
-  /** Filter resources by directive 'workerSrc', true/false. */
+  /** Filter resources by directive 'childSrc', true/false. */childSrc?: boolean; /** Filter resources by directive 'connectSrc', true/false. */
+  connectSrc?: boolean; /** Filter resources by directive 'connectSrcWSS', true/false. */
+  connectSrcWSS?: boolean; /** Filter resources by directive 'fontSrc', true/false. */
+  fontSrc?: boolean; /** Filter resources by directive 'formAction', true/false. */
+  formAction?: boolean; /** Filter resources by directive 'frameAncestors', true/false. */
+  frameAncestors?: boolean; /** Filter resources by directive 'frameSrc', true/false. */
+  frameSrc?: boolean; /** Filter resources by directive 'imgSrc', true/false. */
+  imgSrc?: boolean; /** Maximum number of CSP-Origins to retrieve. */
+  limit?: number; /** Filter resources by directive 'mediaSrc', true/false. */
+  mediaSrc?: boolean; /** Filter resources by name (wildcard and case insensitive). */
+  name?: string; /** Cursor to the next page. */
+  next?: string; /** Filter resources by directive 'objectSrc', true/false. */
+  objectSrc?: boolean; /** Filter resources by origin (wildcard and case insensitive). */
+  origin?: string; /** Cursor to previous next page. */
+  prev?: string; /** Filter resources by directive 'scriptSrc', true/false. */
+  scriptSrc?: boolean; /** Field to sort by, prefix with -/+ to indicate order. */
+  sort?: "name" | "-name" | "origin" | "-origin" | "createdDate" | "-createdDate" | "modifiedDate" | "-modifiedDate"; /** Filter resources by directive 'styleSrc', true/false. */
+  styleSrc?: boolean; /** Filter resources by directive 'workerSrc', true/false. */
   workerSrc?: boolean;
 }, options?: ApiCallOptions): Promise<GetCSPEntriesHttpResponse>;
 type GetCSPEntriesHttpResponse = {

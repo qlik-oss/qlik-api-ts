@@ -1,8 +1,9 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 import auth_default from "./auth.js";
-import { a as interceptors_default$1 } from "./chunks/interceptors-2VSXImC9.js";
-import qix_default from "./qix.js";
+import "./chunks/boot-interceptors-DqRxTczb.js";
+import interceptors$1 from "./interceptors.js";
+import qix$1 from "./qix.js";
 
 //#region src/runtime-api-generator/runtime-api-generator-common.ts
 const methodAbbreviations = {
@@ -49,7 +50,7 @@ const ignoredProps = new Set([
 * in the list of ignored-props (see 'ignoredProps' in this file) or calling the
 * 'ownKeys' function (e.g. through Object.keys).
 */
-function createLazyApiProxy(api$1, initFunc) {
+function createLazyApiProxy(api, initFunc) {
 	const handler = {
 		initiated: false,
 		init: () => {
@@ -72,12 +73,12 @@ function createLazyApiProxy(api$1, initFunc) {
 			return target[key];
 		}
 	};
-	return new Proxy(api$1, handler);
+	return new Proxy(api, handler);
 }
 function parseMiniApi(namespace, def) {
-	const api$1 = { operations: {} };
-	traverse(namespace, "", def, api$1.operations);
-	return api$1;
+	const api = { operations: {} };
+	traverse(namespace, "", def, api.operations);
+	return api;
 }
 /**
 * traverse visits each node in the "URL-segment tree".
@@ -122,7 +123,7 @@ function traverse(namespace, parentPath, node, operations) {
 * invokeFetch with the correct arguments.
 * Query and body, if present, will be sent as arguments.
 */
-function createClassicApiFn({ namespace, operationName, pathTemplate, method, argNames, hasQuery, hasBody, contentType, useInstead }, hostConfig, interceptors$1, enableConsoleWarnings, invokeFetchFnGetter) {
+function createClassicApiFn({ namespace, operationName, pathTemplate, method, argNames, hasQuery, hasBody, contentType, useInstead }, hostConfig, interceptors, enableConsoleWarnings, invokeFetchFnGetter) {
 	return (...args) => {
 		const pathVariables = {};
 		argNames.forEach((argName, index) => {
@@ -158,7 +159,7 @@ function createClassicApiFn({ namespace, operationName, pathTemplate, method, ar
 			body,
 			...contentType ? { contentType } : {},
 			options: optionsIncludingDefaultHostConfig
-		}, interceptors$1?.getInterceptors());
+		}, interceptors?.getInterceptors());
 	};
 }
 
@@ -175,17 +176,17 @@ const parsedMiniApis = {};
 function apiDefToApiPublic(namespace, def, subApis) {
 	parsedMiniApis[namespace] = parsedMiniApis[namespace] || parseMiniApi(namespace, def);
 	const parsedMiniApi = parsedMiniApis[namespace];
-	return (hostConfig, interceptors$1) => {
+	return (hostConfig, interceptors) => {
 		const lazyApi = { clearCache: () => clearApiCache(namespace) };
 		const initFunc = () => {
 			Object.entries(parsedMiniApi.operations).forEach(([operationName, operation]) => {
-				lazyApi[operationName] = createClassicApiFn(operation, hostConfig, interceptors$1, true, () => invokeFetch);
+				lazyApi[operationName] = createClassicApiFn(operation, hostConfig, interceptors, true, () => invokeFetch);
 				operation.oldOperationNames.forEach((oldOperationName) => {
 					lazyApi[oldOperationName] = lazyApi[operationName];
 				});
 			});
 			if (subApis) Object.entries(subApis).forEach(([apiName, apiBuilder]) => {
-				lazyApi[apiName] = apiBuilder(hostConfig, interceptors$1);
+				lazyApi[apiName] = apiBuilder(hostConfig, interceptors);
 			});
 		};
 		return createLazyApiProxy(lazyApi, initFunc);
@@ -194,7 +195,7 @@ function apiDefToApiPublic(namespace, def, subApis) {
 
 //#endregion
 //#region src/public/interceptors.ts
-var interceptors_default = interceptors_default$1;
+var interceptors_default = interceptors$1;
 
 //#endregion
 //#region src/public/index.ts
@@ -264,6 +265,11 @@ const createAppsRuntimeAPI = apiDefToApiPublic("apps", { api: { v1: { apps: {
 		},
 		objects: { "{objectId}": { actions: { "change-owner": ["updateAppObjectOwner:PBJ:"] } } },
 		owner: ["updateAppOwner:UBJ:"],
+		placement: [
+			"deleteAppPlacement:D:",
+			"getAppPlacement:G:",
+			"replaceAppPlacement:UBJ:"
+		],
 		publish: ["publishApp:PBJ:", "republishApp:UBJ:"],
 		reloads: {
 			logs: {
@@ -277,6 +283,7 @@ const createAppsRuntimeAPI = apiDefToApiPublic("apps", { api: { v1: { apps: {
 			actions: { count: ["countAppReportFilters:GQ:"] },
 			"{id}": [
 				"deleteAppReportFilter:D:",
+				"getAppReportFilterWithQuery:GQ:",
 				"getAppReportFilter:G:",
 				"patchAppReportFilter:ABJ:"
 			]
@@ -567,6 +574,28 @@ const createDataFilesRuntimeAPI = apiDefToApiPublic("data-files", { api: { v1: {
 		}
 	}
 } } } });
+const createDataGovernanceDataProductsRuntimeAPI = apiDefToApiPublic("data-governance/data-products", { api: { "data-governance": { "data-products": {
+	"": ["createDataProduct:PBJ:"],
+	actions: { "generate-provider-url": ["generateProviderUrlDataProducts:PQ:"] },
+	"{dataProductId}": {
+		"": [
+			"deleteDataProduct:D:",
+			"getDataProduct:G:",
+			"patchDataProduct:ABJ:"
+		],
+		actions: {
+			activate: ["activateDataProduct:PBJ:"],
+			deactivate: ["deactivateDataProduct:P:"],
+			"export-documentation": ["exportDocumentationDataProduct:G:"],
+			move: ["moveDataProduct:PBJ:"]
+		},
+		changelogs: ["getDataProductChangelogs:GQ:"]
+	}
+} } } });
+const createDataGovernanceRuntimeAPI = apiDefToApiPublic("data-governance", {}, {
+	"data-products": createDataGovernanceDataProductsRuntimeAPI,
+	dataProducts: createDataGovernanceDataProductsRuntimeAPI
+});
 const createDataQualitiesRuntimeAPI = apiDefToApiPublic("data-qualities", { api: { v1: { "data-qualities": {
 	computations: {
 		"": ["triggerDataQualitiesComputation:PBJ:"],
@@ -631,6 +660,7 @@ const createDiProjectsRuntimeAPI = apiDefToApiPublic("di-projects", { api: { v1:
 				"": ["getDiProjectDiTask:G:"],
 				actions: {
 					prepare: ["prepareDiProjectDiTask:PBJ:"],
+					"recreate-datasets": ["recreateDatasetsDiProjectDiTask:PBJ:"],
 					"request-reload": ["requestReloadDiProjectDiTask:PBJ:"],
 					validate: ["validateDiProjectDiTask:PBJ:"]
 				},
@@ -1066,6 +1096,16 @@ const createTempContentsRuntimeAPI = apiDefToApiPublic("temp-contents", { api: {
 		details: ["getTempFileDetails:G:"]
 	}
 } } } });
+const createTenantSettingsRuntimeAPI = apiDefToApiPublic("tenant-settings", { api: { v1: { "tenant-settings": {
+	"": [
+		"deleteTenantSettings:D:",
+		"getTenantSettings:G:",
+		"updateTenantSettings:ABJ:",
+		"createTenantSettings:PBJ:"
+	],
+	actions: { "toggle-cross-region-data-processing": ["toggleCrossRegionDataProcessingTenantSettings:PBJ:"] },
+	"start-pages": ["getStartPages:G:"]
+} } } });
 const createTenantsRuntimeAPI = apiDefToApiPublic("tenants", { api: { v1: { tenants: {
 	"": ["createTenant:PBJ:"],
 	me: ["getMyTenant:G:"],
@@ -1168,7 +1208,7 @@ const createWebhooksRuntimeAPI = apiDefToApiPublic("webhooks", { api: { v1: { we
 } } } });
 const auth = auth_default;
 const interceptors = interceptors_default;
-const qix = qix_default;
+const qix = qix$1;
 const analytics = createAnalyticsRuntimeAPI(void 0, interceptors_default);
 const apiKeys = createApiKeysRuntimeAPI(void 0, interceptors_default);
 const apps = createAppsRuntimeAPI(void 0, interceptors_default);
@@ -1192,6 +1232,7 @@ const dataAssets = createDataAssetsRuntimeAPI(void 0, interceptors_default);
 const dataConnections = createDataConnectionsRuntimeAPI(void 0, interceptors_default);
 const dataCredentials = createDataCredentialsRuntimeAPI(void 0, interceptors_default);
 const dataFiles = createDataFilesRuntimeAPI(void 0, interceptors_default);
+const dataGovernance = createDataGovernanceRuntimeAPI(void 0, interceptors_default);
 const dataQualities = createDataQualitiesRuntimeAPI(void 0, interceptors_default);
 const dataSets = createDataSetsRuntimeAPI(void 0, interceptors_default);
 const dataSources = createDataSourcesRuntimeAPI(void 0, interceptors_default);
@@ -1224,6 +1265,7 @@ const sharingTasks = createSharingTasksRuntimeAPI(void 0, interceptors_default);
 const spaces = createSpacesRuntimeAPI(void 0, interceptors_default);
 const tasks = createTasksRuntimeAPI(void 0, interceptors_default);
 const tempContents = createTempContentsRuntimeAPI(void 0, interceptors_default);
+const tenantSettings = createTenantSettingsRuntimeAPI(void 0, interceptors_default);
 const tenants = createTenantsRuntimeAPI(void 0, interceptors_default);
 const themes = createThemesRuntimeAPI(void 0, interceptors_default);
 const transports = createTransportsRuntimeAPI(void 0, interceptors_default);
@@ -1237,7 +1279,7 @@ const createQlikApi = (props) => {
 	return {
 		auth: auth_default,
 		interceptors: scopedInterceptors,
-		qix: qix_default.withHostConfig(props?.hostConfig),
+		qix: qix$1.withHostConfig(props?.hostConfig),
 		analytics: createAnalyticsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		apiKeys: createApiKeysRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		apps: createAppsRuntimeAPI(props?.hostConfig, scopedInterceptors),
@@ -1261,6 +1303,7 @@ const createQlikApi = (props) => {
 		dataConnections: createDataConnectionsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		dataCredentials: createDataCredentialsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		dataFiles: createDataFilesRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		dataGovernance: createDataGovernanceRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		dataQualities: createDataQualitiesRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		dataSets: createDataSetsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		dataSources: createDataSourcesRuntimeAPI(props?.hostConfig, scopedInterceptors),
@@ -1293,6 +1336,7 @@ const createQlikApi = (props) => {
 		spaces: createSpacesRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		tasks: createTasksRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		tempContents: createTempContentsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		tenantSettings: createTenantSettingsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		tenants: createTenantsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		themes: createThemesRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		transports: createTransportsRuntimeAPI(props?.hostConfig, scopedInterceptors),
@@ -1331,6 +1375,7 @@ const api = {
 	dataConnections,
 	dataCredentials,
 	dataFiles,
+	dataGovernance,
 	dataQualities,
 	dataSets,
 	dataSources,
@@ -1363,6 +1408,7 @@ const api = {
 	spaces,
 	tasks,
 	tempContents,
+	tenantSettings,
 	tenants,
 	themes,
 	transports,
@@ -1373,7 +1419,6 @@ const api = {
 	webhooks,
 	createQlikApi
 };
-var public_default = api;
 
 //#endregion
-export { analytics, apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataQualities, dataSets, dataSources, dataStores, dcaas, public_default as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks };
+export { analytics, apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataGovernance, dataQualities, dataSets, dataSources, dataStores, dcaas, api as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenantSettings, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks };

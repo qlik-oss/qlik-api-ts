@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/automations.ts
 /**
@@ -365,7 +365,6 @@ const automationsExport = {
 	stopAutomationRun,
 	clearCache
 };
-var automations_default = automationsExport;
 
 //#endregion
-export { changeOwnerAutomation, changeSpaceAutomation, clearCache, copyAutomation, createAutomation, automations_default as default, deleteAutomation, disableAutomation, enableAutomation, getAutomation, getAutomationRun, getAutomationRunDetails, getAutomationRunWithQuery, getAutomationRuns, getAutomationWithQuery, getAutomations, getAutomationsUsageMetrics, moveAutomation, queueAutomationRun, retryAutomationRun, stopAutomationRun, updateAutomation };
+export { changeOwnerAutomation, changeSpaceAutomation, clearCache, copyAutomation, createAutomation, automationsExport as default, deleteAutomation, disableAutomation, enableAutomation, getAutomation, getAutomationRun, getAutomationRunDetails, getAutomationRunWithQuery, getAutomationRuns, getAutomationWithQuery, getAutomations, getAutomationsUsageMetrics, moveAutomation, queueAutomationRun, retryAutomationRun, stopAutomationRun, updateAutomation };

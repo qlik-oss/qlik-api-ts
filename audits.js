@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/audits.ts
 /**
@@ -112,7 +112,6 @@ const auditsExport = {
 	getAudit,
 	clearCache
 };
-var audits_default = auditsExport;
 
 //#endregion
-export { clearCache, audits_default as default, fetchConsumptionAppAudits, getArchivedAudits, getAudit, getAuditSources, getAuditTypes, getAudits, getAuditsSettings };
+export { clearCache, auditsExport as default, fetchConsumptionAppAudits, getArchivedAudits, getAudit, getAuditSources, getAuditTypes, getAudits, getAuditsSettings };

@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/automation-connections.ts
 /**
@@ -146,7 +146,6 @@ const automationConnectionsExport = {
 	checkAutomationConnection,
 	clearCache
 };
-var automation_connections_default = automationConnectionsExport;
 
 //#endregion
-export { changeOwnerAutomationConnection, changeSpaceAutomationConnection, checkAutomationConnection, clearCache, createAutomationConnection, automation_connections_default as default, deleteAutomationConnection, getAutomationConnection, getAutomationConnections, updateAutomationConnection };
+export { changeOwnerAutomationConnection, changeSpaceAutomationConnection, checkAutomationConnection, clearCache, createAutomationConnection, automationConnectionsExport as default, deleteAutomationConnection, getAutomationConnection, getAutomationConnections, updateAutomationConnection };

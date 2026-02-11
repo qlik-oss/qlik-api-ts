@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/data-files.ts
 /**
@@ -267,7 +267,6 @@ const dataFilesExport = {
 	moveDataFile,
 	clearCache
 };
-var data_files_default = dataFilesExport;
 
 //#endregion
-export { changeDataFileOwner, clearCache, data_files_default as default, deleteDataFile, deleteDataFiles, getDataFile, getDataFileConnection, getDataFiles, getDataFilesConnections, getDataFilesQuotas, moveDataFile, moveDataFiles, reuploadDataFile, uploadDataFile };
+export { changeDataFileOwner, clearCache, dataFilesExport as default, deleteDataFile, deleteDataFiles, getDataFile, getDataFileConnection, getDataFiles, getDataFilesConnections, getDataFilesQuotas, moveDataFile, moveDataFiles, reuploadDataFile, uploadDataFile };

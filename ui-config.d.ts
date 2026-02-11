@@ -1,26 +1,20 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/ui-config.d.ts
 type BulkCreatePinnedLinkItemPayload = CreatePinnedLinkConfigPayload & {
   links: CreatePinnedLinkPayload[];
 };
 type CreatePinnedLinkConfigPayload = {
-  /** Specifies the scope of the link. Only supports `tenant`. */
-  scope: "tenant";
-  /** Specifies the type of the link. Only supports `custom-link`. */
+  /** Specifies the scope of the link. Only supports `tenant`. */scope: "tenant"; /** Specifies the type of the link. Only supports `custom-link`. */
   type: "custom-link";
 };
 type CreatePinnedLinkPayload = {
-  /** The URL the user will be taken to when they click on the custom link. Must be https. */
-  link: string;
-  /** The title of the link, which will be shown in the navigation bar. Max length 50 characters. */
+  /** The URL the user will be taken to when they click on the custom link. Must be https. */link: string; /** The title of the link, which will be shown in the navigation bar. Max length 50 characters. */
   name: string;
 };
 type Error = {
-  /** Error code. */
-  readonly code?: number;
-  /** Error cause. */
+  /** Error code. */readonly code?: number; /** Error cause. */
   readonly message?: string;
 };
 type ErrorResponse403 = {
@@ -33,21 +27,18 @@ type ErrorResponse403 = {
 };
 type JSONPatchPinnedLinkPayload = {
   op: "replace";
-  path: "/name" | "/link";
-  /** The value to be used for this operation. */
+  path: "/name" | "/link"; /** The value to be used for this operation. */
   value: string;
 }[];
 type PinnedLink = {
-  /** Date string */
-  createdAt: string;
+  /** Date string */createdAt: string;
   createdBy: string;
   id: string;
   link: string;
   name: string;
   scope: "user" | "tenant";
   tenantId: string;
-  type: "custom-link";
-  /** Date string */
+  type: "custom-link"; /** Date string */
   updatedAt?: string;
   updatedBy?: string;
 };

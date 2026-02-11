@@ -1,73 +1,49 @@
-import { y as ApiCallOptions } from "./chunks/auth-types-YrlH_R9f.js";
-import "./chunks/invoke-fetch-C1Z0RJYU.js";
+import { ApiCallOptions, DownloadableBlob } from "./invoke-fetch-types.js";
+import "./chunks/invoke-fetch-DFc3yzaj.js";
 
 //#region src/public/rest/themes.d.ts
 /**
  * An error object.
  */
 type Error = {
-  /** Object containing meta data regarding an error. It does not necessarily contain all the properties. */
-  meta?: Meta;
-  /** Optional JSON patch object pointing to an invalid property. */
-  source?: unknown;
-  /** The HTTP status code. */
-  status?: number;
-  /** Title of the HTTP status code. */
-  title: string;
-  /** The active traceId. */
+  /** Object containing meta data regarding an error. It does not necessarily contain all the properties. */meta?: Meta; /** Optional JSON patch object pointing to an invalid property. */
+  source?: unknown; /** The HTTP status code. */
+  status?: number; /** Title of the HTTP status code. */
+  title: string; /** The active traceId. */
   traceId?: string;
 };
 /**
  * Object containing meta data regarding an error. It does not necessarily contain all the properties.
  */
 type Meta = {
-  /** A more detailed message explaining the error. */
-  message?: string;
-  /** Name of the resource related to the error. If there is a conflict, it is the name of the model attempting to be created. */
-  resourceName?: string;
-  /** Full stack trace of the error that was raised. */
+  /** A more detailed message explaining the error. */message?: string; /** Name of the resource related to the error. If there is a conflict, it is the name of the model attempting to be created. */
+  resourceName?: string; /** Full stack trace of the error that was raised. */
   stack?: string;
 };
 /**
  * The theme model.
  */
 type Theme = {
-  /** Author of the theme. */
-  author?: string;
-  readonly createdAt?: string;
-  /** Map of dependencies describing version of the component it requires. */
-  dependencies?: unknown;
-  /** Description of the theme. */
-  description?: string;
-  /** The file that was uploaded with the theme. */
-  file?: unknown;
-  /** Home page of the theme. */
-  homepage?: string;
-  /** Icon to show in the client. */
+  /** Author of the theme. */author?: string;
+  readonly createdAt?: string; /** Map of dependencies describing version of the component it requires. */
+  dependencies?: unknown; /** Description of the theme. */
+  description?: string; /** The file that was uploaded with the theme. */
+  file?: unknown; /** Home page of the theme. */
+  homepage?: string; /** Icon to show in the client. */
   icon?: string;
-  readonly id?: string;
-  /** Keywords for the theme. */
-  keywords?: string;
-  /** Under which license this theme is published. */
-  license?: string;
-  /** The display name of this theme. */
-  name?: string;
-  /** The name of the qext file that was uploaded with this theme. */
-  qextFilename?: string;
-  /** The version from the qext file that was uploaded with this extension. */
-  qextVersion?: string;
-  /** Link to the theme source code. */
-  repository?: string;
-  /** Supplier of the theme. */
-  supplier?: string;
-  /** List of tags. */
+  readonly id?: string; /** Keywords for the theme. */
+  keywords?: string; /** Under which license this theme is published. */
+  license?: string; /** The display name of this theme. */
+  name?: string; /** The name of the qext file that was uploaded with this theme. */
+  qextFilename?: string; /** The version from the qext file that was uploaded with this extension. */
+  qextVersion?: string; /** Link to the theme source code. */
+  repository?: string; /** Supplier of the theme. */
+  supplier?: string; /** List of tags. */
   tags?: string[];
-  readonly tenantId?: string;
-  /** The type of this theme (visualization, etc.). */
+  readonly tenantId?: string; /** The type of this theme (visualization, etc.). */
   type?: string;
   readonly updateAt?: string;
-  readonly userId?: string;
-  /** Version of the theme. */
+  readonly userId?: string; /** Version of the theme. */
   version?: string;
 };
 type Themes = {
@@ -96,9 +72,7 @@ type GetThemesHttpError = {
  * @throws UploadThemeHttpError
  */
 declare function uploadTheme(body: {
-  /** The theme model. */
-  data?: Theme;
-  /** Theme archive. */
+  /** The theme model. */data?: Theme; /** Theme archive. */
   file?: BodyInit;
 }, options?: ApiCallOptions): Promise<UploadThemeHttpResponse>;
 type UploadThemeHttpResponse = {
@@ -153,9 +127,7 @@ type GetThemeHttpError = {
  * @throws PatchThemeHttpError
  */
 declare function patchTheme(id: string, body: {
-  /** The theme model. */
-  data?: Theme;
-  /** Theme archive. */
+  /** The theme model. */data?: Theme; /** Theme archive. */
   file?: BodyInit;
 }, options?: ApiCallOptions): Promise<PatchThemeHttpResponse>;
 type PatchThemeHttpResponse = {
@@ -176,7 +148,7 @@ type PatchThemeHttpError = {
  */
 declare function downloadTheme(id: string, options?: ApiCallOptions): Promise<DownloadThemeHttpResponse>;
 type DownloadThemeHttpResponse = {
-  data: void;
+  data: DownloadableBlob;
   headers: Headers;
   status: 200;
 };

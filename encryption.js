@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-BqxAMJ9M.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CckTK7bh.js";
+import "./chunks/public-runtime-modules-2KfyI2qM.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
 
 //#region src/public/rest/encryption.ts
 /**
@@ -160,7 +160,6 @@ const encryptionExport = {
 	testEncryptionKeyprovider,
 	clearCache
 };
-var encryption_default = encryptionExport;
 
 //#endregion
-export { clearCache, createEncryptionKeyprovider, encryption_default as default, deleteEncryptionKeyprovider, getEncryptionKeyprovider, getEncryptionKeyproviders, getEncryptionKeyprovidersMigrationDetails, listEncryptionKeyproviders, migrateEncryptionKeyprovider, patchEncryptionKeyprovider, resetEncryptionKeyproviders, testEncryptionKeyprovider };
+export { clearCache, createEncryptionKeyprovider, encryptionExport as default, deleteEncryptionKeyprovider, getEncryptionKeyprovider, getEncryptionKeyproviders, getEncryptionKeyprovidersMigrationDetails, listEncryptionKeyproviders, migrateEncryptionKeyprovider, patchEncryptionKeyprovider, resetEncryptionKeyproviders, testEncryptionKeyprovider };
