@@ -62,6 +62,8 @@ type SamplingConfiguration = {
   sampleSize?: number;
 };
 /**
+ * @deprecated
+ *
  * Triggers the computation of data quality.
  *
  * @param body an object with the body content
@@ -79,6 +81,8 @@ type TriggerDataQualitiesComputationHttpError = {
   status: 400 | 401 | 403 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Returns the execution status of a data quality computation.
  * @example
  * getDataQualitiesComputation(
@@ -100,6 +104,8 @@ type GetDataQualitiesComputationHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Returns the global data results for a dataset, including counts of total, valid, invalid, and empty sample cells.
  *
  * @param query an object with query parameters
@@ -125,6 +131,8 @@ type GetDataQualitiesGlobalResultsHttpError = {
 declare function clearCache(): void;
 type DataQualitiesAPI = {
   /**
+   * @deprecated
+   *
    * Triggers the computation of data quality.
    *
    * @param body an object with the body content
@@ -132,6 +140,8 @@ type DataQualitiesAPI = {
    */
   triggerDataQualitiesComputation: typeof triggerDataQualitiesComputation;
   /**
+   * @deprecated
+   *
    * Returns the execution status of a data quality computation.
    * @example
    * getDataQualitiesComputation(
@@ -143,6 +153,8 @@ type DataQualitiesAPI = {
    */
   getDataQualitiesComputation: typeof getDataQualitiesComputation;
   /**
+   * @deprecated
+   *
    * Returns the global data results for a dataset, including counts of total, valid, invalid, and empty sample cells.
    *
    * @param query an object with query parameters

@@ -63,6 +63,9 @@ type ReloadRequest = {
   variables?: Record<string, string>; /** The weight of the reload for the same tenant. The higher the weight, the sooner the reload will be scheduled relative to other reloads for the same tenant. The personal app will be always set as 1. */
   weight?: Weight;
 };
+type ReloadStatus = {
+  /** The status of the reload. */status?: "QUEUED" | "RELOADING" | "CANCELING" | "SUCCEEDED" | "FAILED" | "CANCELED" | "EXCEEDED_LIMIT";
+};
 type Reloads = {
   data: Reload[];
   links: ReloadsLinks;
@@ -172,10 +175,16 @@ type GetReloadHttpError = {
  * @throws CancelReloadHttpError
  */
 declare function cancelReload(reloadId: string, options?: ApiCallOptions): Promise<CancelReloadHttpResponse>;
-type CancelReloadHttpResponse = {
+type CancelReloadHttpResponse = CancelReload202HttpResponse | CancelReload204HttpResponse;
+type CancelReload202HttpResponse = {
+  data: ReloadStatus;
+  headers: Headers;
+  status: 202;
+};
+type CancelReload204HttpResponse = {
   data: void;
   headers: Headers;
-  status: 202 | 204;
+  status: 204;
 };
 type CancelReloadHttpError = {
   data: Errors;
@@ -232,4 +241,4 @@ type ReloadsAPI = {
  */
 declare const reloadsExport: ReloadsAPI;
 //#endregion
-export { CancelReloadHttpError, CancelReloadHttpResponse, Error, Errors, GetReloadHttpError, GetReloadHttpResponse, GetReloadsHttpError, GetReloadsHttpResponse, Href, Partial, QueueReloadHttpError, QueueReloadHttpResponse, Reload, ReloadLinks, ReloadRequest, Reloads, ReloadsAPI, ReloadsLinks, Status, Type, Weight, cancelReload, clearCache, reloadsExport as default, getReload, getReloads, queueReload };
+export { CancelReload202HttpResponse, CancelReload204HttpResponse, CancelReloadHttpError, CancelReloadHttpResponse, Error, Errors, GetReloadHttpError, GetReloadHttpResponse, GetReloadsHttpError, GetReloadsHttpResponse, Href, Partial, QueueReloadHttpError, QueueReloadHttpResponse, Reload, ReloadLinks, ReloadRequest, ReloadStatus, Reloads, ReloadsAPI, ReloadsLinks, Status, Type, Weight, cancelReload, clearCache, reloadsExport as default, getReload, getReloads, queueReload };
