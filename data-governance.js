@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-2KfyI2qM.js";
-import "./chunks/invoke-fetch-DMAi6Fg3.js";
+import "./chunks/public-runtime-modules-Dl6Qu08B.js";
+import "./chunks/invoke-fetch-DqBb7hUC.js";
 import dataProductsExport, { t as data_products_exports } from "./data-governance/data-products.js";
 
 //#region src/public/rest/data-governance.ts

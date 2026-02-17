@@ -1,5 +1,5 @@
 import { i as isNode, n as createResolvablePromise$1 } from "./utils-jkpLuYZR.js";
-import { A as appendQueryToUrl, N as exposeInternalApiOnWindow, P as generateRandomString, c as handleAuthenticationError, s as getWebSocketAuthParams, u as isWindows, x as toValidWebsocketLocationUrl } from "./boot-interceptors-DqRxTczb.js";
+import { A as appendQueryToUrl, N as exposeInternalApiOnWindow, P as generateRandomString, c as handleAuthenticationError, s as getWebSocketAuthParams, u as isWindows, x as toValidWebsocketLocationUrl } from "./boot-interceptors-BHyG6jXf.js";
 import { t as getHumanReadableSocketClosedErrorMessage$1 } from "./websocket-errors-C5U1tba-.js";
 import isPlainObject from "lodash/isPlainObject.js";
 import merge from "lodash/merge.js";
@@ -15166,6 +15166,12 @@ function normalizeObjectRef(response) {
 function isQixObjectRef(ref) {
 	return typeof ref === "object" && ref.qHandle && ref.qType;
 }
+/**
+* Returns true if the supplied parameter is an object with a qReturn with a null qHandle
+*/
+function isQixObjectNotFoundError(result) {
+	return typeof result === "object" && typeof result.qReturn === "object" && result.qReturn.qHandle === null;
+}
 function getHandleOfRef(response) {
 	return response.qHandle ?? response.handle;
 }
@@ -15938,6 +15944,13 @@ async function createQixConnection(props, listener) {
 			const { jsonrpc, delta, id, ...errorResponse } = response;
 			logResponse(handleOrObject, websocketRequest, errorResponse);
 			throw new QixError(response.error, isCancelled);
+		}
+		if (isQixObjectNotFoundError(response.result)) {
+			const isCancelled = requestWasCanceled(websocketRequest.id);
+			throw new QixError({
+				code: engine_api_default.enums.LocalizedErrorCode.LOCERR_GENERIC_NOT_FOUND,
+				message: "Object not found"
+			}, isCancelled);
 		}
 		let resultObject = response.result || {};
 		if (response.delta) resultObject = unwrapDeltas(resultObject, deltaState, handle, request.method);

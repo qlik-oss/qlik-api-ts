@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-2KfyI2qM.js";
-import "./chunks/invoke-fetch-DMAi6Fg3.js";
+import "./chunks/public-runtime-modules-Dl6Qu08B.js";
+import "./chunks/invoke-fetch-DqBb7hUC.js";
 import changeStoresExport, { t as change_stores_exports } from "./analytics/change-stores.js";
 
 //#region src/public/rest/analytics.ts

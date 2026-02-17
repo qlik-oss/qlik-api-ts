@@ -1,8 +1,10 @@
-import "./chunks/public-runtime-modules-2KfyI2qM.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DMAi6Fg3.js";
+import "./chunks/public-runtime-modules-Dl6Qu08B.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DqBb7hUC.js";
 
 //#region src/public/rest/notes.ts
 /**
+* @deprecated
+*
 * Get the enablement status of the notes feature set for this tenant and user.
 *
 * @throws GetNotesSettingsHttpError
@@ -15,6 +17,8 @@ async function getNotesSettings(options) {
 	});
 }
 /**
+* @deprecated
+*
 * update the settings
 *
 * @param body an object with the body content

@@ -624,9 +624,10 @@ async function getAnonymousOauthAccessToken(baseUrl, accessCode, clientId, track
 * This code is intended to run in a node environment
 */
 async function getOAuthTokensForNode(hostConfig) {
-	const { clientId, clientSecret } = hostConfig;
-	if (!clientId || !clientSecret) throw new InvalidHostConfigError("A host config with authType set to \"oauth2\" has to provide a clientId and a clientSecret");
+	const { clientId, clientSecret, performInteractiveLogin } = hostConfig;
+	if (!clientId || !clientSecret && !performInteractiveLogin) throw new InvalidHostConfigError("A host config with authType set to \"oauth2\" has to provide a clientId and a clientSecret or a performInteractiveLogin function");
 	return await loadOrAcquireAccessTokenOauth(hostConfig, async () => {
+		if (hostConfig.performInteractiveLogin) return getOauthTokensWithInteractiveLogin(hostConfig);
 		if (!hostConfig.clientId || !hostConfig.clientSecret) throw new InvalidHostConfigError("A host config with authType set to \"oauth2\" has to provide a clientId and a clientSecret");
 		return getOauthTokensWithCredentials(toValidLocationUrl(hostConfig), hostConfig.clientId, hostConfig.clientSecret, hostConfig.scope, hostConfig.subject, hostConfig.userId);
 	});
@@ -648,32 +649,7 @@ async function getOAuthTokensForBrowser(hostConfig) {
 		} catch {
 			return errorMessageToAuthData("Could not fetch access token using custom function");
 		}
-		if (hostConfig.performInteractiveLogin) {
-			let usedRedirectUri;
-			try {
-				const verifier = generateRandomString(128);
-				const originalState = generateRandomString(43);
-				const { code, state } = extractCodeAndState(await toPerformInteractiveLoginFunction(hostConfig.performInteractiveLogin)({ getLoginUrl: async ({ redirectUri }) => {
-					usedRedirectUri = redirectUri;
-					return createInteractiveLoginUrl(hostConfig, redirectUri, originalState, verifier);
-				} }));
-				if (!usedRedirectUri) return errorMessageToAuthData("No redirect uri provided");
-				if (originalState !== state) return errorMessageToAuthData("State returned by custom interactive login function does not match original");
-				if (!code) return errorMessageToAuthData("No code found in response from custom interactive login function");
-				return await exchangeCodeAndVerifierForAccessTokenData(hostConfig, code, verifier, usedRedirectUri);
-			} catch (error) {
-				return {
-					accessToken: void 0,
-					refreshToken: void 0,
-					errors: [{
-						code: "",
-						status: 401,
-						title: "Could not perform custom interactive login",
-						detail: `${error}`
-					}]
-				};
-			}
-		}
+		if (hostConfig.performInteractiveLogin) return getOauthTokensWithInteractiveLogin(hostConfig);
 		const topic = getTopicFromOauthHostConfig(hostConfig);
 		const code = loadAndDeleteFromSessionStorage(topic, "code");
 		const verifier = loadAndDeleteFromSessionStorage(topic, "verifier");
@@ -687,6 +663,33 @@ async function getOAuthTokensForBrowser(hostConfig) {
 	await requestRedirect(hostConfig);
 	startFullPageLoginFlow(hostConfig);
 	return new Promise(() => {});
+}
+async function getOauthTokensWithInteractiveLogin(hostConfig) {
+	if (!hostConfig.performInteractiveLogin) return errorMessageToAuthData("No performInteractiveLogin function in hostConfig");
+	let usedRedirectUri;
+	try {
+		const verifier = generateRandomString(128);
+		const originalState = generateRandomString(43);
+		const { code, state } = extractCodeAndState(await toPerformInteractiveLoginFunction(hostConfig.performInteractiveLogin)({ getLoginUrl: async ({ redirectUri }) => {
+			usedRedirectUri = redirectUri;
+			return createInteractiveLoginUrl(hostConfig, redirectUri, originalState, verifier);
+		} }));
+		if (!usedRedirectUri) return errorMessageToAuthData("No redirect uri provided");
+		if (originalState !== state) return errorMessageToAuthData("State returned by custom interactive login function does not match original");
+		if (!code) return errorMessageToAuthData("No code found in response from custom interactive login function");
+		return await exchangeCodeAndVerifierForAccessTokenData(hostConfig, code, verifier, usedRedirectUri);
+	} catch (error) {
+		return {
+			accessToken: void 0,
+			refreshToken: void 0,
+			errors: [{
+				code: "",
+				status: 401,
+				title: "Could not perform custom interactive login",
+				detail: `${error}`
+			}]
+		};
+	}
 }
 let lastOauthTokensCall = Promise.resolve("");
 async function getOAuthAccessToken(hostConfig) {
@@ -721,7 +724,13 @@ async function refreshAccessToken(hostConfig) {
 }
 function extractCodeAndState(input) {
 	if (typeof input === "string") {
-		const queryParams = new URLSearchParams(new URL(input).search);
+		let parsedUrl;
+		try {
+			parsedUrl = new URL(input);
+		} catch {
+			parsedUrl = new URL(input, "http://localhost");
+		}
+		const queryParams = new URLSearchParams(parsedUrl.search);
 		return {
 			code: queryParams.get("code") || "",
 			state: queryParams.get("state") || ""
@@ -1857,11 +1866,11 @@ async function handleAuthenticationError$4({ hostConfig }) {
 			retry: true
 		};
 	}
+	if (hostConfig.performInteractiveLogin) {
+		clearStoredOauthTokens(hostConfig);
+		return { retry: true };
+	}
 	if (isBrowser()) {
-		if (hostConfig.performInteractiveLogin) {
-			clearStoredOauthTokens(hostConfig);
-			return { retry: true };
-		}
 		await requestRedirect(hostConfig);
 		startFullPageLoginFlow(hostConfig);
 		return { preventDefault: true };

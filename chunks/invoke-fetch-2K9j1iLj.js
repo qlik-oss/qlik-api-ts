@@ -1,4 +1,4 @@
-import { D as clearApiCache, M as InvokeFetchError, O as invokeFetch, j as EncodingError, k as parseFetchResponse } from "./boot-interceptors-DqRxTczb.js";
+import { D as clearApiCache, M as InvokeFetchError, O as invokeFetch, j as EncodingError, k as parseFetchResponse } from "./boot-interceptors-BHyG6jXf.js";
 
 //#region src/invoke-fetch/invoke-fetch.ts
 /**

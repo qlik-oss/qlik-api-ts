@@ -16,7 +16,7 @@
     "lodash": "^4.17.23",
     "ws": "^8.19.0"
   },
-  "packageManager": "pnpm@10.29.2",
+  "packageManager": "pnpm@10.29.3",
   "engines": {
     "node": ">=20"
   },

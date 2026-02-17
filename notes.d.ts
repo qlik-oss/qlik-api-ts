@@ -39,6 +39,8 @@ type NotesUserSettings = {
   reason?: ConfigReasonCode;
 };
 /**
+ * @deprecated
+ *
  * Get the enablement status of the notes feature set for this tenant and user.
  *
  * @throws GetNotesSettingsHttpError
@@ -55,6 +57,8 @@ type GetNotesSettingsHttpError = {
   status: number;
 };
 /**
+ * @deprecated
+ *
  * update the settings
  *
  * @param body an object with the body content
@@ -77,12 +81,16 @@ type SetNotesSettingsHttpError = {
 declare function clearCache(): void;
 type NotesAPI = {
   /**
+   * @deprecated
+   *
    * Get the enablement status of the notes feature set for this tenant and user.
    *
    * @throws GetNotesSettingsHttpError
    */
   getNotesSettings: typeof getNotesSettings;
   /**
+   * @deprecated
+   *
    * update the settings
    *
    * @param body an object with the body content

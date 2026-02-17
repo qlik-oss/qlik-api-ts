@@ -1,5 +1,5 @@
 import { r as isBrowser } from "./chunks/utils-jkpLuYZR.js";
-import { t as coreBootInterceptor } from "./chunks/boot-interceptors-DqRxTczb.js";
+import { t as coreBootInterceptor } from "./chunks/boot-interceptors-BHyG6jXf.js";
 
 //#region src/interceptors/interceptors.ts
 let GLOBAL_INTERCEPTORS;
