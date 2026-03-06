@@ -1,6 +1,4 @@
-import { ApiCallOptions } from "./invoke-fetch-types.js";
-import "./chunks/invoke-fetch-DFc3yzaj.js";
-
+import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
 //#region src/public/rest/csp-origins.d.ts
 type CSPEntry = {
   /** The CSP entry's unique identifier. */id?: string;

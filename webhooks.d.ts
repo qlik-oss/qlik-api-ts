@@ -1,17 +1,15 @@
-import { ApiCallOptions } from "./invoke-fetch-types.js";
-import "./chunks/invoke-fetch-DFc3yzaj.js";
-
+import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
 //#region src/public/rest/webhooks.d.ts
 type Delivery = {
   /** The name of the triggering event-type. */eventType: string; /** The delivery's unique identifier. */
   id: string; /** Request details for the delivery. */
   request?: {
-    /** The sent body/payload of the delivery. */body?: unknown; /** Headers sent for this delivery, values of encryptedHeaders are omitted as such "**OMITTED**". */
+    /** The sent body/payload of the delivery. */body?: unknown; /** Headers sent for this delivery, values of encryptedHeaders are omitted as such "**OMITTED**". Maximum size: 2048 bytes for non-encrypted headers + 2048 bytes for encrypted headers. */
     headers?: Record<string, string>; /** URL used for this delivery. */
     url?: string;
   }; /** Response details for the delivery. */
   response?: {
-    /** The received body of the delivery. */body?: string; /** Headers received for this delivery, values of encryptedHeaders are omitted as such "**OMITTED**". */
+    /** The received body of the delivery. */body?: string; /** Headers received for this delivery, values of encryptedHeaders are omitted as such "**OMITTED**". Maximum size: 2048 bytes for non-encrypted headers + 2048 bytes for encrypted headers. */
     headers?: Record<string, string>; /** The HTTP status code of the response. */
     statusCode?: number;
   }; /** The status of delivery. */
@@ -57,7 +55,7 @@ type WebhookBase = {
   readonly disabledReason?: string; /** The unique code for the reason. */
   readonly disabledReasonCode?: string; /** If enabled the webhook will be sent as a CloudEvent, once enabled for a webhook it cannot be disabled. */
   enableCloudEventDelivery?: boolean; /** Whether the webhook is active and sending requests. */
-  enabled?: boolean; /** These headers are persisted encrypted and decrypted to be sent as normal headers in post request (webhook delivery), in case of URL change these headers will need to be re-entered. Note: duplicate headers are not allowed and are case-insensitive. */
+  enabled?: boolean; /** These headers are persisted encrypted and decrypted to be sent as normal headers in post request (webhook delivery), in case of URL change these headers will need to be re-entered. Note: duplicate headers are not allowed and are case-insensitive. Maximum size: 2048 bytes for encrypted headers. */
   encryptedHeaders?: Record<string, string>; /** Types of events for which the webhook should trigger. Retrieve available types from `/v1/webhooks/event-types`. */
   eventTypes?: string[];
   /** Filter that should match for a webhook to be triggered.
@@ -66,7 +64,7 @@ type WebhookBase = {
    * Supported logical operators are 'and' and 'or'.
    * Note that attribute values must be valid JSON strings, hence they're enclosed with double quotes.
    * For more detailed information regarding the SCIM filter syntax (RFC7644) used please follow the link to external documentation. */
-  filter?: string; /** Additional headers in the post request (webhook delivery). Note: duplicate headers are not allowed and are case-insensitive. */
+  filter?: string; /** Additional headers in the post request (webhook delivery). Note: duplicate headers are not allowed and are case-insensitive. Maximum size: 2048 bytes for non-encrypted headers. */
   headers?: Record<string, string>; /** The webhook's unique identifier. */
   readonly id?: string; /** Defines at what level the webhook should operate: for all resources belonging to a tenant or restricted to only those accessible by the webhook-creator. */
   level?: "tenant" | "user"; /** The name for the webhook. */
@@ -107,7 +105,7 @@ type WebhookResponseBase = {
   readonly disabledReason?: string; /** The unique code for the reason. */
   readonly disabledReasonCode?: string; /** If enabled the webhook will be sent as a CloudEvent, once enabled for a webhook it cannot be disabled. */
   enableCloudEventDelivery?: boolean; /** Whether the webhook is active and sending requests. */
-  enabled?: boolean; /** Additional encrypted headers in the post request. */
+  enabled?: boolean; /** Additional encrypted headers in the post request. Maximum size: 2048 bytes for encrypted headers. */
   encryptedHeaders?: string[]; /** Types of events for which the webhook should trigger. Retrieve available types from `/v1/webhooks/event-types`. */
   eventTypes?: string[];
   /** Filter that should match for a webhook to be triggered.
@@ -116,7 +114,7 @@ type WebhookResponseBase = {
    * Supported logical operators are 'and' and 'or'.
    * Note that attribute values must be valid JSON strings, hence they're enclosed with double quotes.
    * For more detailed information regarding the SCIM filter syntax (RFC7644) used please follow the link to external documentation. */
-  filter?: string; /** Additional headers in the post request. */
+  filter?: string; /** Additional headers in the post request. Maximum size: 2048 bytes for non-encrypted headers. */
   headers?: Record<string, string>; /** The webhook's unique identifier. */
   readonly id?: string; /** Defines at what level the webhook should operate: for all resources belonging to a tenant or restricted to only those accessible by the webhook-creator. */
   level?: "tenant" | "user"; /** The name for the webhook. */

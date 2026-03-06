@@ -1,14 +1,16 @@
-import { ApiCallOptions } from "./invoke-fetch-types.js";
-import "./chunks/invoke-fetch-DFc3yzaj.js";
-
+import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
 //#region src/public/rest/automation-connectors.d.ts
 type AutomationConnectorsList = {
   data?: AutomationConnectorsListObject[];
   links?: Links;
 };
 type AutomationConnectorsListObject = {
-  /** Indicates if the connector is billable. */billable?: boolean;
-  readonly id?: string; /** The name of an automation connector. */
+  /** Indicates if the connector is billable. */billable?: boolean; /** Indicates if the connector supports webhooks. */
+  hasWebhooks?: boolean;
+  readonly id?: string; /** The URL to the large logo of the connector. */
+  logoLarge?: string; /** The URL to the medium logo of the connector. */
+  logoMedium?: string; /** The URL to the small logo of the connector. */
+  logoSmall?: string; /** The name of an automation connector. */
   name?: string;
 };
 type Error = {
@@ -35,8 +37,8 @@ type PaginationLink = {
  */
 declare function getAutomationConnectors(query: {
   /** Filters the result based on the specified criteria: name. */filter?: string; /** The number of automation connectors to retrieve. */
-  limit?: number; /** The field to sort by, with +- prefix indicating sort order. (?sort=-name => sort on the name field using descending order) */
-  sort?: "name" | "+name" | "-name";
+  limit?: number; /** The field to sort by, with +- prefix indicating sort order. (`?sort=-name` => sort on the `name` field using descending order). */
+  sort?: "id" | "-id" | "+id" | "name" | "+name" | "-name";
 }, options?: ApiCallOptions): Promise<GetAutomationConnectorsHttpResponse>;
 type GetAutomationConnectorsHttpResponse = {
   data: AutomationConnectorsList;

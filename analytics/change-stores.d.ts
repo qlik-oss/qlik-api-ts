@@ -1,7 +1,4 @@
-import { ApiCallOptions } from "../invoke-fetch-types.js";
-import "../chunks/invoke-fetch-DFc3yzaj.js";
-
-//#region src/public/rest/analytics/change-stores.d.ts
+import { b as ApiCallOptions } from "../chunks/auth-types-DVvka7Hz.js";
 declare namespace change_stores_d_exports {
   export { CellKey, Change, ChangeStore, ChangeStoresAPI, Error, ErrorResponse, GetChangeStoreChangesHttpError, GetChangeStoreChangesHttpResponse, GetChangeStoreChangesTabularViewsHttpError, GetChangeStoreChangesTabularViewsHttpResponse, GetChangeStoreHttpError, GetChangeStoreHttpResponse, GetChangeStoresHttpError, GetChangeStoresHttpResponse, GetChangesData, ListDefaultData, Pagination, PrimaryKey, ReferenceId, RowKey, TabularView, UsedBy, UsedByArray, clearCache, changeStoresExport as default, getChangeStore, getChangeStoreChanges, getChangeStoreChangesTabularViews, getChangeStores };
 }

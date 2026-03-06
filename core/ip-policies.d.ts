@@ -1,7 +1,4 @@
-import { ApiCallOptions } from "../invoke-fetch-types.js";
-import "../chunks/invoke-fetch-DFc3yzaj.js";
-
-//#region src/public/rest/core/ip-policies.d.ts
+import { b as ApiCallOptions } from "../chunks/auth-types-DVvka7Hz.js";
 declare namespace ip_policies_d_exports {
   export { CreateIPPolicy, CreateIpPolicyHttpError, CreateIpPolicyHttpResponse, DeleteIpPolicyHttpError, DeleteIpPolicyHttpResponse, Error, Errors, GetIpPoliciesHttpError, GetIpPoliciesHttpResponse, GetIpPolicyHttpError, GetIpPolicyHttpResponse, IPPolicyListItem, IPPolicyResource, IpPoliciesAPI, JSONPatch, JSONPatchArray, Link, Links, ListIPPoliciesResult, PatchIpPolicyHttpError, PatchIpPolicyHttpResponse, clearCache, createIpPolicy, ipPoliciesExport as default, deleteIpPolicy, getIpPolicies, getIpPolicy, patchIpPolicy };
 }

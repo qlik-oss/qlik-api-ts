@@ -1,6 +1,4 @@
-import { ApiCallOptions } from "./invoke-fetch-types.js";
-import "./chunks/invoke-fetch-DFc3yzaj.js";
-
+import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
 //#region src/public/rest/knowledgebases.d.ts
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
@@ -49,8 +47,7 @@ type ContentSummary = {
  * Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided.
  */
 type CreateDataSource = {
-  /** Configuration for webcrawling */crawlerConfig?: DataSourceCrawlConfig; /** Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided. */
-  fileConfig?: DataSourceFileConfig; /** Name of the datasource */
+  /** Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided. */fileConfig?: DataSourceFileConfig; /** Name of the datasource */
   name: string;
   type: "file" | "web" | "database";
 };
@@ -67,8 +64,7 @@ type CreateKnowledgeBase = {
  */
 type DataSource = {
   chunking?: Chunking;
-  contentSummary: ContentSummary; /** Configuration for webcrawling */
-  crawlerConfig?: DataSourceCrawlConfig; /** Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided. */
+  contentSummary: ContentSummary; /** Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided. */
   fileConfig?: DataSourceFileConfig; /** Unique identifier of the datasource */
   id: string; /** Name of the datasource */
   name?: string; /** The number of times that a datasource was referenced as a source in an answer */
@@ -78,30 +74,11 @@ type DataSource = {
   type: "file" | "web" | "database";
 };
 /**
- * Configuration for webcrawling
- */
-type DataSourceCrawlConfig = {
-  /** Pattern matching links to crawl */crawlPatterns?: DataSourceCrawlPattern[]; /** Pattern matching links to index */
-  indexPatterns?: DataSourceCrawlPattern[]; /** Scope for th webcrawler */
-  scope: DataSourceCrawlScope; /** Seed URL that crawling will start on. */
-  url: string;
-};
-/**
  * Include or exclude pattern
  */
 type DataSourceCrawlPattern = {
   /** Regex patterna to filter links on */pattern: string; /** include or exclude */
   type: "include" | "exclude";
-};
-/**
- * Scope for th webcrawler
- */
-type DataSourceCrawlScope = {
-  /** The number of levels of links the crawler will traverse */depth: number; /** if set to true crawler will try to download and index other supported content like pdf:s from links */
-  downloadFiles?: boolean; /** Maximum number of links per page that will be extracted */
-  maxLinks?: number; /** Optional parameter. Max size of downloaded files in bytes */
-  maxSize?: number; /** The scope that the crawler will crawl. */
-  scope: "all" | "domain" | "subdomain";
 };
 /**
  * Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided.
@@ -177,6 +154,11 @@ type ErrorResponse = {
   traceId?: string;
 };
 type ErrorResponseCode = {
+  code?: string;
+  detail?: string;
+  title?: string;
+};
+type ErrorResponseCodeCopy = {
   /** Custom error codes
    * * AE-1 - Internal processing error
    * * AE-2 - Incorrect request
@@ -185,11 +167,6 @@ type ErrorResponseCode = {
    * * AE-5 - Resource is not found
    * * AE-6 - API usage rate limit is exceeded
    * * AE-7 - Method is not allowed */
-  code?: string;
-  detail?: string;
-  title?: string;
-};
-type ErrorResponseCodeCopy = {
   code?: string;
   detail?: string;
   title?: string;
@@ -347,7 +324,7 @@ type GetKnowledgebasesHttpResponse = {
   next?: (options?: ApiCallOptions) => Promise<GetKnowledgebasesHttpResponse>;
 };
 type GetKnowledgebasesHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403;
 };
@@ -364,7 +341,7 @@ type CreateKnowledgebaseHttpResponse = {
   status: 201;
 };
 type CreateKnowledgebaseHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403;
 };
@@ -381,7 +358,7 @@ type DeleteKnowledgebaseHttpResponse = {
   status: 204;
 };
 type DeleteKnowledgebaseHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -398,7 +375,7 @@ type GetKnowledgebaseHttpResponse = {
   status: 200;
 };
 type GetKnowledgebaseHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -416,7 +393,7 @@ type PatchKnowledgebaseHttpResponse = {
   status: 204;
 };
 type PatchKnowledgebaseHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429;
 };
@@ -434,7 +411,7 @@ type SearchKnowledgebaseHttpResponse = {
   status: 200;
 };
 type SearchKnowledgebaseHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404 | 405 | 500;
 };
@@ -452,7 +429,7 @@ type CreateKnowledgebaseDatasourceHttpResponse = {
   status: 201;
 };
 type CreateKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -470,7 +447,7 @@ type DeleteKnowledgebaseDatasourceHttpResponse = {
   status: 204;
 };
 type DeleteKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -489,7 +466,7 @@ type UpdateKnowledgebaseDatasourceHttpResponse = {
   status: 200;
 };
 type UpdateKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -507,7 +484,7 @@ type CancelKnowledgebaseDatasourceHttpResponse = {
   status: 200;
 };
 type CancelKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -526,7 +503,7 @@ type DownloadKnowledgebaseDatasourceHttpResponse = {
   status: 200;
 };
 type DownloadKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -547,7 +524,7 @@ type SyncKnowledgebaseDatasourceHttpResponse = {
   status: 202;
 };
 type SyncKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -573,7 +550,7 @@ type GetKnowledgebaseDatasourceHistoriesHttpResponse = {
   next?: (options?: ApiCallOptions) => Promise<GetKnowledgebaseDatasourceHistoriesHttpResponse>;
 };
 type GetKnowledgebaseDatasourceHistoriesHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -594,7 +571,7 @@ type GetKnowledgebaseDatasourceHistoryHttpResponse = {
   status: 200;
 };
 type GetKnowledgebaseDatasourceHistoryHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -612,7 +589,7 @@ type DeleteKnowledgebaseDatasourceScheduleHttpResponse = {
   status: 204;
 };
 type DeleteKnowledgebaseDatasourceScheduleHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -630,7 +607,7 @@ type GetKnowledgebaseDatasourceScheduleHttpResponse = {
   status: 200;
 };
 type GetKnowledgebaseDatasourceScheduleHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -649,7 +626,7 @@ type CreateKnowledgebaseDatasourceScheduleHttpResponse = {
   status: 200 | 201;
 };
 type CreateKnowledgebaseDatasourceScheduleHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -674,7 +651,7 @@ type GetKnowledgebaseHistoriesHttpResponse = {
   next?: (options?: ApiCallOptions) => Promise<GetKnowledgebaseHistoriesHttpResponse>;
 };
 type GetKnowledgebaseHistoriesHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -841,4 +818,4 @@ type KnowledgebasesAPI = {
  */
 declare const knowledgebasesExport: KnowledgebasesAPI;
 //#endregion
-export { CancelKnowledgebaseDatasourceHttpError, CancelKnowledgebaseDatasourceHttpResponse, Chunk, Chunking, ContentSummary, CreateDataSource, CreateKnowledgeBase, CreateKnowledgebaseDatasourceHttpError, CreateKnowledgebaseDatasourceHttpResponse, CreateKnowledgebaseDatasourceScheduleHttpError, CreateKnowledgebaseDatasourceScheduleHttpResponse, CreateKnowledgebaseHttpError, CreateKnowledgebaseHttpResponse, DataSource, DataSourceCrawlConfig, DataSourceCrawlPattern, DataSourceCrawlScope, DataSourceFileConfig, DataSourceFileCrawlScope, DataSourceSync, DataSourceSyncStatus, DeleteKnowledgebaseDatasourceHttpError, DeleteKnowledgebaseDatasourceHttpResponse, DeleteKnowledgebaseDatasourceScheduleHttpError, DeleteKnowledgebaseDatasourceScheduleHttpResponse, DeleteKnowledgebaseHttpError, DeleteKnowledgebaseHttpResponse, DocStats, DownloadFile, DownloadFileResponse, DownloadKnowledgebaseDatasourceHttpError, DownloadKnowledgebaseDatasourceHttpResponse, Duration, ErrorResponse, ErrorResponseCode, ErrorResponseCodeCopy, ErrorResponseCopy, GetKnowledgebaseDatasourceHistoriesHttpError, GetKnowledgebaseDatasourceHistoriesHttpResponse, GetKnowledgebaseDatasourceHistoryHttpError, GetKnowledgebaseDatasourceHistoryHttpResponse, GetKnowledgebaseDatasourceScheduleHttpError, GetKnowledgebaseDatasourceScheduleHttpResponse, GetKnowledgebaseHistoriesHttpError, GetKnowledgebaseHistoriesHttpResponse, GetKnowledgebaseHttpError, GetKnowledgebaseHttpResponse, GetKnowledgebasesHttpError, GetKnowledgebasesHttpResponse, JSONPatch, JSONPatchArray, KbChunkMeta, KnowledgeBase, KnowledgeBaseLight, KnowledgeBasesResult, KnowledgebasesAPI, PageLink, PageLinks, PatchKnowledgebaseHttpError, PatchKnowledgebaseHttpResponse, ResultMeta, Schedule, ScheduleCalendar, ScheduleInterval, ScheduleRange, ScheduleWithManifest, SearchKnowledgebaseHttpError, SearchKnowledgebaseHttpResponse, SearchRequest, SearchResponse, SyncHistory, SyncHistoryDetails, SyncHistoryResult, SyncKnowledgebaseDatasourceHttpError, SyncKnowledgebaseDatasourceHttpResponse, UpdateKnowledgebaseDatasourceHttpError, UpdateKnowledgebaseDatasourceHttpResponse, cancelKnowledgebaseDatasource, clearCache, createKnowledgebase, createKnowledgebaseDatasource, createKnowledgebaseDatasourceSchedule, knowledgebasesExport as default, deleteKnowledgebase, deleteKnowledgebaseDatasource, deleteKnowledgebaseDatasourceSchedule, downloadKnowledgebaseDatasource, getKnowledgebase, getKnowledgebaseDatasourceHistories, getKnowledgebaseDatasourceHistory, getKnowledgebaseDatasourceSchedule, getKnowledgebaseHistories, getKnowledgebases, patchKnowledgebase, searchKnowledgebase, syncKnowledgebaseDatasource, updateKnowledgebaseDatasource };
+export { CancelKnowledgebaseDatasourceHttpError, CancelKnowledgebaseDatasourceHttpResponse, Chunk, Chunking, ContentSummary, CreateDataSource, CreateKnowledgeBase, CreateKnowledgebaseDatasourceHttpError, CreateKnowledgebaseDatasourceHttpResponse, CreateKnowledgebaseDatasourceScheduleHttpError, CreateKnowledgebaseDatasourceScheduleHttpResponse, CreateKnowledgebaseHttpError, CreateKnowledgebaseHttpResponse, DataSource, DataSourceCrawlPattern, DataSourceFileConfig, DataSourceFileCrawlScope, DataSourceSync, DataSourceSyncStatus, DeleteKnowledgebaseDatasourceHttpError, DeleteKnowledgebaseDatasourceHttpResponse, DeleteKnowledgebaseDatasourceScheduleHttpError, DeleteKnowledgebaseDatasourceScheduleHttpResponse, DeleteKnowledgebaseHttpError, DeleteKnowledgebaseHttpResponse, DocStats, DownloadFile, DownloadFileResponse, DownloadKnowledgebaseDatasourceHttpError, DownloadKnowledgebaseDatasourceHttpResponse, Duration, ErrorResponse, ErrorResponseCode, ErrorResponseCodeCopy, ErrorResponseCopy, GetKnowledgebaseDatasourceHistoriesHttpError, GetKnowledgebaseDatasourceHistoriesHttpResponse, GetKnowledgebaseDatasourceHistoryHttpError, GetKnowledgebaseDatasourceHistoryHttpResponse, GetKnowledgebaseDatasourceScheduleHttpError, GetKnowledgebaseDatasourceScheduleHttpResponse, GetKnowledgebaseHistoriesHttpError, GetKnowledgebaseHistoriesHttpResponse, GetKnowledgebaseHttpError, GetKnowledgebaseHttpResponse, GetKnowledgebasesHttpError, GetKnowledgebasesHttpResponse, JSONPatch, JSONPatchArray, KbChunkMeta, KnowledgeBase, KnowledgeBaseLight, KnowledgeBasesResult, KnowledgebasesAPI, PageLink, PageLinks, PatchKnowledgebaseHttpError, PatchKnowledgebaseHttpResponse, ResultMeta, Schedule, ScheduleCalendar, ScheduleInterval, ScheduleRange, ScheduleWithManifest, SearchKnowledgebaseHttpError, SearchKnowledgebaseHttpResponse, SearchRequest, SearchResponse, SyncHistory, SyncHistoryDetails, SyncHistoryResult, SyncKnowledgebaseDatasourceHttpError, SyncKnowledgebaseDatasourceHttpResponse, UpdateKnowledgebaseDatasourceHttpError, UpdateKnowledgebaseDatasourceHttpResponse, cancelKnowledgebaseDatasource, clearCache, createKnowledgebase, createKnowledgebaseDatasource, createKnowledgebaseDatasourceSchedule, knowledgebasesExport as default, deleteKnowledgebase, deleteKnowledgebaseDatasource, deleteKnowledgebaseDatasourceSchedule, downloadKnowledgebaseDatasource, getKnowledgebase, getKnowledgebaseDatasourceHistories, getKnowledgebaseDatasourceHistory, getKnowledgebaseDatasourceSchedule, getKnowledgebaseHistories, getKnowledgebases, patchKnowledgebase, searchKnowledgebase, syncKnowledgebaseDatasource, updateKnowledgebaseDatasource };

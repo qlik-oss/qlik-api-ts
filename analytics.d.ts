@@ -1,4 +1,3 @@
-import "./chunks/invoke-fetch-DFc3yzaj.js";
 import changeStoresExport, { t as change_stores_d_exports } from "./analytics/change-stores.js";
 
 //#region src/public/rest/analytics.d.ts

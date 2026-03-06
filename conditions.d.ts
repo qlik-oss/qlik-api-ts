@@ -1,6 +1,4 @@
-import { ApiCallOptions } from "./invoke-fetch-types.js";
-import "./chunks/invoke-fetch-DFc3yzaj.js";
-
+import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
 //#region src/public/rest/conditions.d.ts
 type APISettings = {
   /** Whether API endpoints for condition manager are enabled */"enable-conditions": boolean; /** These persisted api settings are only available for this tenant. Extracted from request JWT. */

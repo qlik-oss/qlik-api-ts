@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-Dl6Qu08B.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DqBb7hUC.js";
+import "./chunks/public-runtime-modules-mBjjPn7I.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DxtIsSVQ.js";
 
 //#region src/public/rest/collections.ts
 /**
@@ -107,9 +107,8 @@ async function updateCollection(collectionId, body, options) {
 }
 /**
 * Retrieves items from a collection that the user has access to.
-* 
+*
 * @param collectionId The collection's unique identifier. (This query also supports 'favorites' as the collectionID).
-
 * @param query an object with query parameters
 * @throws GetCollectionItemsHttpError
 */

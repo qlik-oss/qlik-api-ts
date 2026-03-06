@@ -1,9 +1,7 @@
-import { HostConfig } from "./auth-types.js";
-import "./chunks/invoke-fetch-DFc3yzaj.js";
+import { d as HostConfig } from "./chunks/auth-types-DVvka7Hz.js";
 import { InterceptorsAPI, createInterceptors } from "./interceptors.js";
 import { AuthAPI, getAccessToken, getWebResourceAuthParams, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig } from "./auth.js";
-import "./chunks/qix-types-CQzxiZIV.js";
-import { QixAPI } from "./qix.js";
+import { t as QixAPI } from "./chunks/qix-CJntvLix.js";
 import { ChangeStoresAPI } from "./analytics/change-stores.js";
 import { AnalyticsAPI } from "./analytics.js";
 import { ApiKeysAPI } from "./api-keys.js";
@@ -72,6 +70,10 @@ import { UsersAPI } from "./users.js";
 import { WebIntegrationsAPI } from "./web-integrations.js";
 import { WebNotificationsAPI } from "./web-notifications.js";
 import { WebhooksAPI } from "./webhooks.js";
+import { AutomationConnectionsAPI as AutomationConnectionsAPI$1 } from "./workflows/automation-connections.js";
+import { AutomationConnectorsAPI as AutomationConnectorsAPI$1 } from "./workflows/automation-connectors.js";
+import { AutomationsAPI as AutomationsAPI$1 } from "./workflows/automations.js";
+import { WorkflowsAPI } from "./workflows.js";
 
 //#region src/public/index.d.ts
 declare const auth: {
@@ -159,6 +161,11 @@ declare const users: UsersAPI;
 declare const webIntegrations: WebIntegrationsAPI;
 declare const webNotifications: WebNotificationsAPI;
 declare const webhooks: WebhooksAPI;
+declare const workflows: {
+  automationConnections: AutomationConnectionsAPI$1;
+  automationConnectors: AutomationConnectorsAPI$1;
+  automations: AutomationsAPI$1;
+};
 interface QlikAPI {
   /** Functions for the auth api */
   auth: AuthAPI;
@@ -302,6 +309,12 @@ interface QlikAPI {
   webNotifications: WebNotificationsAPI;
   /** Functions for the webhooks api */
   webhooks: WebhooksAPI;
+  /** Functions for the workflows api */
+  workflows: WorkflowsAPI & {
+    automationConnections: AutomationConnectionsAPI$1;
+    automationConnectors: AutomationConnectorsAPI$1;
+    automations: AutomationsAPI$1;
+  };
 }
 type CreateQlikApiProps = {
   hostConfig?: HostConfig;
@@ -314,4 +327,4 @@ declare const api: QlikAPI & {
   }) => QlikAPI;
 };
 //#endregion
-export { CreateQlikApiProps, QlikAPI, analytics, apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataGovernance, dataQualities, dataSets, dataSources, dataStores, dcaas, api as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenantSettings, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks };
+export { CreateQlikApiProps, QlikAPI, analytics, apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataGovernance, dataQualities, dataSets, dataSources, dataStores, dcaas, api as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenantSettings, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks, workflows };
