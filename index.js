@@ -1,8 +1,7 @@
-import "./chunks/public-runtime-modules-Dl6Qu08B.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DqBb7hUC.js";
+import "./chunks/public-runtime-modules-mBjjPn7I.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DxtIsSVQ.js";
 import auth_default from "./auth.js";
-import "./chunks/boot-interceptors-BHyG6jXf.js";
-import interceptors$1 from "./interceptors.js";
+import { a as interceptors$1 } from "./chunks/interceptors-DMiDeqEz.js";
 import qix$1 from "./qix.js";
 
 //#region src/runtime-api-generator/runtime-api-generator-common.ts
@@ -1206,6 +1205,61 @@ const createWebhooksRuntimeAPI = apiDefToApiPublic("webhooks", { api: { v1: { we
 		}
 	}
 } } } });
+const createWorkflowsAutomationConnectionsRuntimeAPI = apiDefToApiPublic("workflows/automation-connections", { api: { workflows: { "automation-connections": {
+	"": ["getAutomationConnections:GQ:", "createAutomationConnection:PBJ:"],
+	"{id}": {
+		"": [
+			"deleteAutomationConnection:DQ:",
+			"getAutomationConnection:G:",
+			"updateAutomationConnection:UBJ:"
+		],
+		actions: {
+			"change-owner": ["changeOwnerAutomationConnection:PBJ:"],
+			"change-space": ["changeSpaceAutomationConnection:PBJ:"],
+			check: ["checkAutomationConnection:P:"]
+		}
+	}
+} } } });
+const createWorkflowsAutomationConnectorsRuntimeAPI = apiDefToApiPublic("workflows/automation-connectors", { api: { workflows: { "automation-connectors": ["getAutomationConnectors:GQ:"] } } });
+const createWorkflowsAutomationsRuntimeAPI = apiDefToApiPublic("workflows/automations", { api: { workflows: { automations: {
+	"": ["getAutomations:GQ:", "createAutomation:PBJ:"],
+	settings: ["getAutomationsSettings:G:", "updateAutomationsSettings:UBJ:"],
+	usage: ["getAutomationsUsageMetrics:GQ:"],
+	"{id}": {
+		"": [
+			"deleteAutomation:D:",
+			"getAutomation:G:",
+			"updateAutomation:UBJ:"
+		],
+		actions: {
+			"change-owner": ["changeOwnerAutomation:PBJ:"],
+			"change-space": ["changeSpaceAutomation:PBJ:"],
+			copy: ["copyAutomation:PBJ:"],
+			disable: ["disableAutomation:P:"],
+			enable: ["enableAutomation:P:"],
+			move: ["moveAutomation:PBJ:"]
+		},
+		runs: {
+			"": ["getAutomationRuns:GQ:", "createAutomationRun:PBJ:"],
+			"{runId}": {
+				"": ["getAutomationRun:G:"],
+				actions: {
+					export: ["exportAutomationRun:P:"],
+					retry: ["retryAutomationRun:P:"],
+					stop: ["stopAutomationRun:P:"]
+				},
+				debug: ["getAutomationRunDebug:G:"]
+			}
+		}
+	}
+} } } });
+const createWorkflowsRuntimeAPI = apiDefToApiPublic("workflows", {}, {
+	"automation-connections": createWorkflowsAutomationConnectionsRuntimeAPI,
+	automationConnections: createWorkflowsAutomationConnectionsRuntimeAPI,
+	"automation-connectors": createWorkflowsAutomationConnectorsRuntimeAPI,
+	automationConnectors: createWorkflowsAutomationConnectorsRuntimeAPI,
+	automations: createWorkflowsAutomationsRuntimeAPI
+});
 const auth = auth_default;
 const interceptors = interceptors_default;
 const qix = qix$1;
@@ -1274,6 +1328,7 @@ const users = createUsersRuntimeAPI(void 0, interceptors_default);
 const webIntegrations = createWebIntegrationsRuntimeAPI(void 0, interceptors_default);
 const webNotifications = createWebNotificationsRuntimeAPI(void 0, interceptors_default);
 const webhooks = createWebhooksRuntimeAPI(void 0, interceptors_default);
+const workflows = createWorkflowsRuntimeAPI(void 0, interceptors_default);
 const createQlikApi = (props) => {
 	const scopedInterceptors = interceptors_default.createInterceptors();
 	return {
@@ -1344,7 +1399,8 @@ const createQlikApi = (props) => {
 		users: createUsersRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		webIntegrations: createWebIntegrationsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		webNotifications: createWebNotificationsRuntimeAPI(props?.hostConfig, scopedInterceptors),
-		webhooks: createWebhooksRuntimeAPI(props?.hostConfig, scopedInterceptors)
+		webhooks: createWebhooksRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		workflows: createWorkflowsRuntimeAPI(props?.hostConfig, scopedInterceptors)
 	};
 };
 /** Javascript/Typescript bindings to Qlik's platform API's */
@@ -1417,8 +1473,9 @@ const api = {
 	webIntegrations,
 	webNotifications,
 	webhooks,
+	workflows,
 	createQlikApi
 };
 
 //#endregion
-export { analytics, apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataGovernance, dataQualities, dataSets, dataSources, dataStores, dcaas, api as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenantSettings, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks };
+export { analytics, apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataGovernance, dataQualities, dataSets, dataSources, dataStores, dcaas, api as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenantSettings, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks, workflows };

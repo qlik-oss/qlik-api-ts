@@ -1,9 +1,9 @@
-import "./chunks/public-runtime-modules-Dl6Qu08B.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DqBb7hUC.js";
+import "./chunks/public-runtime-modules-mBjjPn7I.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DxtIsSVQ.js";
 
 //#region src/public/rest/automation-connections.ts
 /**
-* Retrieves a list of automation connections
+* Retrieves a list of automation connections the requesting user has access to.
 *
 * @param query an object with query parameters
 * @throws GetAutomationConnectionsHttpError

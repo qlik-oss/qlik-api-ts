@@ -1,6 +1,4 @@
-import { ApiCallOptions } from "./invoke-fetch-types.js";
-import "./chunks/invoke-fetch-DFc3yzaj.js";
-
+import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
 //#region src/public/rest/api-keys.d.ts
 type ApiKey = {
   /** When the API key was created. */readonly created?: string; /** The ID of the user who created the key. */

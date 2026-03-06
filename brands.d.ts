@@ -1,6 +1,4 @@
-import { ApiCallOptions, DownloadableBlob } from "./invoke-fetch-types.js";
-import "./chunks/invoke-fetch-DFc3yzaj.js";
-
+import { C as DownloadableBlob, b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
 //#region src/public/rest/brands.d.ts
 /**
  * A brand is a collection of assets for applying custom branding. Only a single brand can be active in a tenant.

@@ -1,7 +1,4 @@
-import { ApiCallOptions } from "../invoke-fetch-types.js";
-import "../chunks/invoke-fetch-DFc3yzaj.js";
-
-//#region src/public/rest/data-governance/data-products.d.ts
+import { b as ApiCallOptions } from "../chunks/auth-types-DVvka7Hz.js";
 declare namespace data_products_d_exports {
   export { ActivateDataProductHttpError, ActivateDataProductHttpResponse, ActivateDataProductRequest, ArrayOfUniqueStrings, ChangelogOperation, CreateDataProductHttpError, CreateDataProductHttpResponse, CreateDataProductRequest, DataProductChangelog, DataProductChangelogResponse, DataProductResponse, DataProductsAPI, DeactivateDataProductHttpError, DeactivateDataProductHttpResponse, DeleteDataProductHttpError, DeleteDataProductHttpResponse, Error, ErrorResponse, ExportDocumentationDataProductHttpError, ExportDocumentationDataProductHttpResponse, GenerateProviderUrlDataProductsHttpError, GenerateProviderUrlDataProductsHttpResponse, GenerateProviderUrlResponse, GetDataProductChangelogsHttpError, GetDataProductChangelogsHttpResponse, GetDataProductHttpError, GetDataProductHttpResponse, KeyContact, Link, Links, MoveDataProductHttpError, MoveDataProductHttpResponse, MoveDataProductRequest, PatchDataProductHttpError, PatchDataProductHttpResponse, PatchDataProductRequest, Quality, TrustScore, TrustScoreDimension, activateDataProduct, clearCache, createDataProduct, deactivateDataProduct, dataProductsExport as default, deleteDataProduct, exportDocumentationDataProduct, generateProviderUrlDataProducts, getDataProduct, getDataProductChangelogs, moveDataProduct, patchDataProduct };
 }

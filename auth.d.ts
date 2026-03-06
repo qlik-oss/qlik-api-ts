@@ -1,4 +1,4 @@
-import { AuthModule, AuthType, AuthTypeThatCanBeOmitted, AuthenticationErrorAction, Credentials, GetRemoteAuthDataProps, GetRestCallAuthParamsProps, GetWebResourceAuthParamsProps, GetWebSocketAuthParamsProps, HandleAuthenticationErrorProps, HostConfig, HostConfigCommon, RestCallAuthParams, WebResourceAuthParams, WebSocketAuthParams, authTypesThatCanBeOmitted, hostConfigCommonProperties } from "./auth-types.js";
+import { _ as hostConfigCommonProperties, a as Credentials, c as GetWebResourceAuthParamsProps, d as HostConfig, f as HostConfigCommon, g as authTypesThatCanBeOmitted, h as WebSocketAuthParams, i as AuthenticationErrorAction, l as GetWebSocketAuthParamsProps, m as WebResourceAuthParams, n as AuthType, o as GetRemoteAuthDataProps, p as RestCallAuthParams, r as AuthTypeThatCanBeOmitted, s as GetRestCallAuthParamsProps, t as AuthModule, u as HandleAuthenticationErrorProps } from "./chunks/auth-types-DVvka7Hz.js";
 
 //#region src/public/auth.d.ts
 /**

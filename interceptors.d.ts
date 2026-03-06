@@ -1,6 +1,4 @@
-import { InvokeFetchProperties, InvokeFetchResponse } from "./invoke-fetch-types.js";
-import "./chunks/invoke-fetch-DFc3yzaj.js";
-
+import { T as InvokeFetchResponse, w as InvokeFetchProperties } from "./chunks/auth-types-DVvka7Hz.js";
 //#region src/interceptors/interceptors.d.ts
 /**
  * The RestInterceptor type is a function that can be used to intercept requests and responses

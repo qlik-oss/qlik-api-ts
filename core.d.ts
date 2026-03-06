@@ -1,4 +1,3 @@
-import "./chunks/invoke-fetch-DFc3yzaj.js";
 import ipPoliciesExport, { t as ip_policies_d_exports } from "./core/ip-policies.js";
 
 //#region src/public/rest/core.d.ts

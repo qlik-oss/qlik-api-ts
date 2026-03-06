@@ -16,7 +16,7 @@
     "lodash": "^4.17.23",
     "ws": "^8.19.0"
   },
-  "packageManager": "pnpm@10.29.3",
+  "packageManager": "pnpm@10.30.3",
   "engines": {
     "node": ">=20"
   },
@@ -90,6 +90,10 @@
     "./web-integrations": "./web-integrations.js",
     "./web-notifications": "./web-notifications.js",
     "./webhooks": "./webhooks.js",
+    "./workflows": "./workflows.js",
+    "./workflows/automation-connections": "./workflows/automation-connections.js",
+    "./workflows/automation-connectors": "./workflows/automation-connectors.js",
+    "./workflows/automations": "./workflows/automations.js",
     "./auth": "./auth.js",
     "./interceptors": "./interceptors.js",
     "./qix": "./qix.js"

@@ -1,6 +1,4 @@
-import { ApiCallOptions } from "./invoke-fetch-types.js";
-import "./chunks/invoke-fetch-DFc3yzaj.js";
-
+import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
 //#region src/public/rest/automation-connections.d.ts
 type AutomationConnectionChangeOwnerObject = {
   /** The unique identifier of the new owner. */userId?: string;
@@ -9,7 +7,8 @@ type AutomationConnectionChangeSpaceObject = {
   /** The unique identifier of the new space. */spaceId?: string;
 };
 type AutomationConnectionCheckObject = {
-  /** The connection status of the automation connection. When true, the automation connection is connected. */isConnected?: boolean;
+  /** The connection status of the automation connection. When true, the automation connection is connected. */connected?: boolean; /** The connection status of the automation connection. When true, the automation connection is connected. */
+  is_connected?: boolean;
 };
 type AutomationConnectionCreationObject = {
   /** The unique identifier of the connector from which the automation connection is created. */connectorId: string; /** The name of the created automation connection. */
@@ -90,7 +89,7 @@ type PaginationLink = {
   /** The URL to a resource request */href?: string;
 };
 /**
- * Retrieves a list of automation connections
+ * Retrieves a list of automation connections the requesting user has access to.
  *
  * @param query an object with query parameters
  * @throws GetAutomationConnectionsHttpError
@@ -98,7 +97,7 @@ type PaginationLink = {
 declare function getAutomationConnections(query: {
   /** Filters the result based on the specified criteria: name, connectorId, ownerId, or spaceId. */filter?: string; /** The number of automation connections to retrieve. */
   limit?: number; /** When true, list all connections. Restricted to tenant admins and analytics admins. */
-  listAll?: boolean; /** The field to sort by, with +- prefix indicating sort order. (?sort=-name => sort on the name field using descending order) */
+  listAll?: boolean; /** The field to sort by, with +- prefix indicating sort order. (`?sort=-name` => sort on the `name` field using descending order). */
   sort?: "id" | "name" | "createdAt" | "updatedAt" | "+id" | "+name" | "+createdAt" | "+updatedAt" | "-id" | "-name" | "-createdAt" | "-updatedAt";
 }, options?: ApiCallOptions): Promise<GetAutomationConnectionsHttpResponse>;
 type GetAutomationConnectionsHttpResponse = {
@@ -244,7 +243,7 @@ type CheckAutomationConnectionHttpError = {
 declare function clearCache(): void;
 type AutomationConnectionsAPI = {
   /**
-   * Retrieves a list of automation connections
+   * Retrieves a list of automation connections the requesting user has access to.
    *
    * @param query an object with query parameters
    * @throws GetAutomationConnectionsHttpError
