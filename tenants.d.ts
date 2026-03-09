@@ -1,6 +1,4 @@
-import { ApiCallOptions } from "./invoke-fetch-types.js";
-import "./chunks/invoke-fetch-DFc3yzaj.js";
-
+import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
 //#region src/public/rest/tenants.d.ts
 /**
  * An error object describing the error.
@@ -52,7 +50,7 @@ type Tenant = {
   }; /** The display name of the tenant. */
   name: string; /** The region where the tenant is located. */
   readonly region?: string; /** The status of the tenant. */
-  status?: "active" | "disabled" | "deleted";
+  status?: "active" | "disabled" | "deleted" | "pending" | "initializing";
 };
 type TenantCreationRequest = {
   /** The datacenter where the tenant is located.

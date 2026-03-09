@@ -1,6 +1,4 @@
-import { ApiCallOptions } from "./invoke-fetch-types.js";
-import "./chunks/invoke-fetch-DFc3yzaj.js";
-
+import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
 //#region src/public/rest/banners.d.ts
 type BannerResponse = {
   readonly createdAt: string; /** userId of the user who created the banner */

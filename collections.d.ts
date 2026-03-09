@@ -1,6 +1,4 @@
-import { ApiCallOptions } from "./invoke-fetch-types.js";
-import "./chunks/invoke-fetch-DFc3yzaj.js";
-
+import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
 //#region src/public/rest/collections.d.ts
 type CollectionByIdPatch = {
   /** The operation to be performed. */op: "replace"; /** Field of collection to be patched. */
@@ -322,7 +320,6 @@ type UpdateCollectionHttpError = {
  * Retrieves items from a collection that the user has access to.
  *
  * @param collectionId The collection's unique identifier. (This query also supports 'favorites' as the collectionID).
-
  * @param query an object with query parameters
  * @throws GetCollectionItemsHttpError
  */
@@ -465,7 +462,7 @@ type CollectionsAPI = {
    * Retrieves items from a collection that the user has access to.
    *
    * @param collectionId The collection's unique identifier. (This query also supports 'favorites' as the collectionID).
-      * @param query an object with query parameters
+   * @param query an object with query parameters
    * @throws GetCollectionItemsHttpError
    */
   getCollectionItems: typeof getCollectionItems;

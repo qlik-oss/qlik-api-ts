@@ -1,6 +1,4 @@
-import { ApiCallOptions, DownloadableBlob } from "./invoke-fetch-types.js";
-import "./chunks/invoke-fetch-DFc3yzaj.js";
-
+import { C as DownloadableBlob, b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
 //#region src/public/rest/audits.d.ts
 type ArchiveItem = {
   /** The type that content is encoded in, always "application/json". */contentType?: string; /** Additional information about the event's details. The structure depends on the type and version of the event. */

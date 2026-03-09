@@ -1,4 +1,3 @@
-import "./chunks/invoke-fetch-DFc3yzaj.js";
 import dataProductsExport, { t as data_products_d_exports } from "./data-governance/data-products.js";
 
 //#region src/public/rest/data-governance.d.ts

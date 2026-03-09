@@ -1,6 +1,4 @@
-import { ApiCallOptions, DownloadableBlob } from "./invoke-fetch-types.js";
-import "./chunks/invoke-fetch-DFc3yzaj.js";
-
+import { C as DownloadableBlob, b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
 //#region src/public/rest/di-projects.d.ts
 type AsyncActionDetails = {
   endTime?: string;
@@ -89,11 +87,14 @@ type DataTaskDatasetState = {
   name?: string; /** Original name of the dataset, relevant only for data movement tasks */
   sourceName?: string;
   streaming?: {
+    /** Timestamp of the latest source record inserted into the target dataset. */lastProcessed?: string;
     message?: string; /** Number of records that had parsing issues */
     parseIssueCount?: number; /** Total number of records filtered out and not written to the dataset */
     recordsFilteredCount?: number; /** Total number of records written to the dataset */
     recordsWrittenCount?: number;
-    state?: "QUEUED" | "RUNNING" | "ERROR";
+    state?: "QUEUED" | "RUNNING" | "ERROR"; /** Total number of processed changes for the dataset */
+    totalProcessedCount?: number; /** Queryable records pending merge into optimized Iceberg partitions. */
+    unoptimizedRecordsCount?: number;
   };
 };
 type DataTaskInstanceState = {

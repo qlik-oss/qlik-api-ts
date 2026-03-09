@@ -1,6 +1,4 @@
-import { ApiCallOptions, DownloadableBlob } from "./invoke-fetch-types.js";
-import "./chunks/invoke-fetch-DFc3yzaj.js";
-
+import { C as DownloadableBlob, b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
 //#region src/public/rest/report-templates.d.ts
 type CreateTemplateRequest = {
   /** Template description */description?: string; /** Template name */
@@ -46,7 +44,8 @@ type ReportTemplateResponse = {
   name?: string; /** The user that this template is scoped to. */
   ownerId?: string; /** The id of the app that this template is using as data source. */
   sourceAppId?: string; /** The name of the app that this template is using as data source. */
-  sourceAppName?: string; /** The date and time when the template was last updated. */
+  sourceAppName?: string; /** Template type */
+  type?: "excel" | "pixelPerfect" | "html" | "powerPoint" | "word"; /** The date and time when the template was last updated. */
   updatedAt?: string; /** The id of the user who last updated the template. */
   updatedBy?: string;
 };
