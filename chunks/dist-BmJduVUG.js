@@ -1,4 +1,4 @@
-//#region node_modules/.pnpm/@qlik+runtime-module-loader@1.4.0/node_modules/@qlik/runtime-module-loader/dist/index.js
+//#region node_modules/.pnpm/@qlik+runtime-module-loader@1.4.1/node_modules/@qlik/runtime-module-loader/dist/index.js
 if (!window.__qlikMainPrivateResolvers) window.__qlikMainPrivateResolvers = {};
 if (!window.__qlikMainPrivateResolvers.mainUrlPromise) window.__qlikMainPrivateResolvers.mainUrlPromise = new Promise((resolve) => {
 	if (window.__qlikMainPrivateResolvers) window.__qlikMainPrivateResolvers.resolveMainJsUrl = (value) => {

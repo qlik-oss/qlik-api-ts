@@ -226,9 +226,11 @@ type SharingExecutionResponse = SharingExecutionPersist & {
   links?: Links;
 };
 type SharingSettings = {
-  /** true if report-subscription feature is enabled for this tenant */"enable-report-subscription": boolean; /** true if reporting-template-subscription feature is enabled for this tenant */
-  "enable-reporting-template-subscription": boolean; /** Whether API endpoints for sharing are enabled */
-  "enable-sharing": boolean; /** Maximum number of recipients when creating a sharing task */
+  /** true if report-subscription feature is enabled for this tenant */"enable-report-subscription"?: boolean;
+  /** @deprecated
+   * true if reporting-template-subscription feature is enabled for this tenant */
+  "enable-reporting-template-subscription"?: boolean; /** Whether API endpoints for sharing are enabled */
+  "enable-sharing"?: boolean; /** Maximum number of recipients when creating a sharing task */
   readonly maxRecipients?: number; /** Max Recipients accepted when creating a new subscription (excluding the owner) */
   readonly maxSubscriptionRecipients?: number; /** This indicates that there is an ongoing operation to either disable or enable the report subscription feature. none means that no such operation is ongoing. enabling/disabling means that system is currently enabling/disabling the feature */
   readonly reportSubscriptionStatus?: "none" | "enabling" | "disabling"; /** UTC timestamp of the most recent change of reportSubscriptionStatus. If there has not been any such change, this is the timestamp of the initial creation of the record. */
@@ -265,16 +267,6 @@ type SharingSettingsPatchCompliant = {
  *   {
  *     op: "replace",
  *     path: "/enable-report-subscription",
- *     value: false
- *   },
- *   {
- *     op: "replace",
- *     path: "/enable-reporting-template-subscription",
- *     value: true
- *   },
- *   {
- *     op: "replace",
- *     path: "/enable-reporting-template-subscription",
  *     value: false
  *   }
  * ]

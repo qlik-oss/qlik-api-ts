@@ -118,7 +118,8 @@ declare function getReloads(query: {
   log?: boolean; /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
   next?: string; /** The boolean value used to search for a reload is partial or not. */
   partial?: boolean; /** The cursor to the previous page of resources. Provide either the next or prev cursor, but not both. */
-  prev?: string;
+  prev?: string; /** The field to sort by, with +/- prefix indicating sort order */
+  sort?: "creationTime" | "+creationTime" | "-creationTime" | "status" | "+status" | "-status" | "startTime" | "+startTime" | "-startTime" | "endTime" | "+endTime" | "-endTime";
 }, options?: ApiCallOptions): Promise<GetReloadsHttpResponse>;
 type GetReloadsHttpResponse = {
   data: Reloads;
