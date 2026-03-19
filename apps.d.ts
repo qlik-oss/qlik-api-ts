@@ -1435,7 +1435,7 @@ type ExportAppHttpResponse = {
 type ExportAppHttpError = {
   data: void;
   headers: Headers;
-  status: 400 | 403 | 404;
+  status: 400 | 401 | 403 | 404;
 };
 /**
  * Returns information about supported analyses for the app's data model. Lists available analysis types, along with minimum and maximum number of dimensions, measures, and fields.
@@ -1549,7 +1549,7 @@ type UploadAppMediaHttpResponse = {
 type UploadAppMediaHttpError = {
   data: void;
   headers: Headers;
-  status: 403 | 404;
+  status: 403 | 404 | 409;
 };
 /**
  * Lists media content.

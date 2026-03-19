@@ -216,7 +216,9 @@ type Spaces = {
  * @throws GetSpacesHttpError
  */
 declare function getSpaces(query: {
-  /** Action on space. Supports only "?action=publish". */action?: string; /** Maximum number of spaces to return. */
+  /** Action on space. Supports only "?action=publish". */action?: string; /** Environment name to filter by. For example, "?environment.name=Development". Use an empty value to return spaces with no environment. */
+  "environment.name"?: string; /** Environment ID to filter by. For example, "?environmentId=67f4fba37f7cbb2f04ce727a". Use an empty value to return spaces with no environment. */
+  environmentId?: string; /** Maximum number of spaces to return. */
   limit?: number; /** Space name to search and filter for. Case-insensitive open search with wildcards both as prefix and suffix. For example, "?name=fin" will get "finance", "Final" and "Griffin". */
   name?: string; /** The next page cursor. Next links make use of this. */
   next?: string; /** Space ownerId to filter by. For example, "?ownerId=123". */

@@ -1,5 +1,5 @@
-import "./chunks/public-runtime-modules-mBjjPn7I.js";
-import "./chunks/invoke-fetch-DxtIsSVQ.js";
+import "./chunks/public-runtime-modules-BAapp6Tu.js";
+import "./chunks/invoke-fetch-DGnqhw9s.js";
 import ipPoliciesExport, { t as ip_policies_exports } from "./core/ip-policies.js";
 
 //#region src/public/rest/core.ts
