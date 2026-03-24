@@ -233,12 +233,12 @@ type BatchPredictionScheduleInputAttributes = {
   /** If true, only run prediction if dataset has changed to avoid
    * duplicates. If set to false, re-runs predictions on unchanged
    * datasets. */
-  applyDatasetChangeOnly?: boolean; /** When the job is scheduled to finish */
+  applyDatasetChangeOnly: boolean; /** When the job is scheduled to finish, date needs to be now or in future */
   endDateTime?: string;
   /** Recurrence rules. Maximum is DAILY but you can specify the
    * hour, minute, and second it runs each day.
    * One string per rule. */
-  recurrence?: string[]; /** When the job is scheduled to start */
+  recurrence: string[]; /** When the job is scheduled to start, date needs to be now or in future */
   startDateTime: string; /** Timezone used for the date-time fields */
   timezone: string;
 };

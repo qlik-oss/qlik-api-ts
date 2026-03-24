@@ -998,6 +998,14 @@ function toCompleteUrl(url, query) {
 	if (query !== "") return `${url}?${query}`;
 	return url;
 }
+/**
+* Returns true if the status code is 301 or 302 or for ..../qps/csrftoken with 403 which really should be 401 on windows but isn't for historical reasons
+*/
+function means401OnWindows(completeUrl, statusCode) {
+	const url = new URL(completeUrl, "http://dummy");
+	const isQpsCsrfTokenUrl = url.pathname.endsWith("/qps/csrftoken") && url.searchParams.has("xrfkey");
+	return statusCode === 301 || statusCode === 302 || isQpsCsrfTokenUrl && statusCode === 403;
+}
 
 //#endregion
 //#region src/invoke-fetch/internal/invoke-xhr.ts
@@ -1419,7 +1427,7 @@ function invokeFetchWithUrlAndRetry(api, props, performRetry) {
 	const cachedResponse = getFromCache(api, cachingContext);
 	if (cachedResponse) return cachedResponse;
 	const resultPromiseFromBackend = performActualHttpFetch(method, completeUrl, body, contentType, options, authHeaders, credentials, userAgent);
-	const resultAfterAuthenticationCheck = interceptAuthenticationErrors(options?.hostConfig, resultPromiseFromBackend, performRetry);
+	const resultAfterAuthenticationCheck = interceptAuthenticationErrors(options?.hostConfig, completeUrl, resultPromiseFromBackend, performRetry);
 	return updateCache(api, cachingContext, addPagingFunctions(api, {
 		...props,
 		value: resultAfterAuthenticationCheck
@@ -1467,13 +1475,13 @@ function addPagingFunctions(api, { method, body, options, authHeaders, credentia
 function neverResolvingPromise() {
 	return new Promise(() => {});
 }
-async function interceptAuthenticationErrors(hostConfig, resultPromise, performRetry) {
+async function interceptAuthenticationErrors(hostConfig, completeUrl, resultPromise, performRetry) {
 	try {
 		return await resultPromise;
 	} catch (error) {
 		const err = error;
 		const errorBody = err.data;
-		if (err.status === 401 || err.status === 403 && errorBody?.code === "CSRF-TOKEN-2" || (err.status === 301 || err.status === 302) && await isWindows(hostConfig)) {
+		if (err.status === 401 || err.status === 403 && errorBody?.code === "CSRF-TOKEN-2" || means401OnWindows(completeUrl, err.status) && await isWindows(hostConfig)) {
 			if (globalThis.loggingOut) return neverResolvingPromise();
 			const { retry, preventDefault } = await handleAuthenticationError({
 				hostConfig,
@@ -1991,7 +1999,8 @@ async function handleAuthenticationError$2({ hostConfig }) {
 				headers: {
 					"Content-Type": "application/json",
 					Authorization: `Bearer ${token}`
-				}
+				},
+				cache: "no-cache"
 			});
 			return { retry: true };
 		}
