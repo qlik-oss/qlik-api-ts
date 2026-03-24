@@ -1,5 +1,5 @@
 import { r as isBrowser } from "./utils-B7chC9_U.js";
-import { B as getPlatform, E as toValidWebsocketLocationUrl, N as invokeFetch, h as isWindows, p as handleAuthenticationError } from "./interceptors-DMiDeqEz.js";
+import { B as getPlatform, E as toValidWebsocketLocationUrl, N as invokeFetch, h as isWindows, p as handleAuthenticationError } from "./interceptors-YI1D7Uo3.js";
 import { t as getHumanReadableSocketClosedErrorMessage } from "./websocket-errors-C6cw1uQN.js";
 
 //#region src/qix/app-session.ts
@@ -199,11 +199,12 @@ function listenForWindowsAuthenticationInformation(session) {
 * Opens the websocket and handles a few windows authentication details
 */
 async function createAndSetupEnigmaSession(props, canRetry, onWebSocketEvent) {
-	const { createEnigmaSessionEntrypoint } = await import("./qix-chunk-entrypoint-CyQYGyl2.js");
+	const { createEnigmaSessionEntrypoint } = await import("./qix-chunk-entrypoint-Cw_-gLrS.js");
+	const isWin = await isWindows(props.hostConfig);
 	const session = await createEnigmaSessionEntrypoint(props);
-	setupSessionListeners(session, props, onWebSocketEvent);
+	setupSessionListeners(session, props, onWebSocketEvent, isWin);
 	let global;
-	if (await isWindows(props.hostConfig)) {
+	if (isWin) {
 		const loginInfoPromise = listenForWindowsAuthenticationInformation(session);
 		global = await session.open();
 		if ((await loginInfoPromise)?.mustAuthenticate) {
@@ -222,7 +223,18 @@ async function createAndSetupEnigmaSession(props, canRetry, onWebSocketEvent) {
 		global
 	};
 }
-function setupSessionListeners(session, props, eventListener) {
+function setupSessionListeners(session, props, eventListener, isWin) {
+	let syntheticSuspendEventOnWindowsAlreadySent = false;
+	if (isWin) session.on("notification:OnSessionTimedOut", () => {
+		syntheticSuspendEventOnWindowsAlreadySent = true;
+		eventListener({
+			eventType: "suspended",
+			code: 4001,
+			reason: "Session timed out",
+			initiator: "network",
+			...props
+		});
+	});
 	session.on("opened", (event) => {
 		eventListener({
 			eventType: "opened",
@@ -238,7 +250,7 @@ function setupSessionListeners(session, props, eventListener) {
 		});
 	});
 	session.on("suspended", (event) => {
-		eventListener({
+		if (!syntheticSuspendEventOnWindowsAlreadySent) eventListener({
 			eventType: "suspended",
 			...props,
 			...event
@@ -445,7 +457,7 @@ function createSharedPhoenixSession(props, { onClose, onWebSocketEvent: onWebSoc
 			onWebSocketEventGlobal(event);
 			for (const client of clients) client.onWebSocketEvent(event);
 		};
-		const phoenixConnectionPromise = import("./qix-chunk-entrypoint-CyQYGyl2.js").then((module) => {
+		const phoenixConnectionPromise = import("./qix-chunk-entrypoint-Cw_-gLrS.js").then((module) => {
 			return module.createPhoenixConnectionEntrypoint(props, {
 				onWebSocketEvent,
 				getInitialAppActions

@@ -47,8 +47,7 @@ type ContentSummary = {
  * Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided.
  */
 type CreateDataSource = {
-  /** Configuration for webcrawling */crawlerConfig?: DataSourceCrawlConfig; /** Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided. */
-  fileConfig?: DataSourceFileConfig; /** Name of the datasource */
+  /** Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided. */fileConfig?: DataSourceFileConfig; /** Name of the datasource */
   name: string;
   type: "file" | "web" | "database";
 };
@@ -65,8 +64,7 @@ type CreateKnowledgeBase = {
  */
 type DataSource = {
   chunking?: Chunking;
-  contentSummary: ContentSummary; /** Configuration for webcrawling */
-  crawlerConfig?: DataSourceCrawlConfig; /** Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided. */
+  contentSummary: ContentSummary; /** Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided. */
   fileConfig?: DataSourceFileConfig; /** Unique identifier of the datasource */
   id: string; /** Name of the datasource */
   name?: string; /** The number of times that a datasource was referenced as a source in an answer */
@@ -76,30 +74,11 @@ type DataSource = {
   type: "file" | "web" | "database";
 };
 /**
- * Configuration for webcrawling
- */
-type DataSourceCrawlConfig = {
-  /** Pattern matching links to crawl */crawlPatterns?: DataSourceCrawlPattern[]; /** Pattern matching links to index */
-  indexPatterns?: DataSourceCrawlPattern[]; /** Scope for th webcrawler */
-  scope: DataSourceCrawlScope; /** Seed URL that crawling will start on. */
-  url: string;
-};
-/**
  * Include or exclude pattern
  */
 type DataSourceCrawlPattern = {
   /** Regex patterna to filter links on */pattern: string; /** include or exclude */
   type: "include" | "exclude";
-};
-/**
- * Scope for th webcrawler
- */
-type DataSourceCrawlScope = {
-  /** The number of levels of links the crawler will traverse */depth: number; /** if set to true crawler will try to download and index other supported content like pdf:s from links */
-  downloadFiles?: boolean; /** Maximum number of links per page that will be extracted */
-  maxLinks?: number; /** Optional parameter. Max size of downloaded files in bytes */
-  maxSize?: number; /** The scope that the crawler will crawl. */
-  scope: "all" | "domain" | "subdomain";
 };
 /**
  * Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided.
@@ -839,4 +818,4 @@ type KnowledgebasesAPI = {
  */
 declare const knowledgebasesExport: KnowledgebasesAPI;
 //#endregion
-export { CancelKnowledgebaseDatasourceHttpError, CancelKnowledgebaseDatasourceHttpResponse, Chunk, Chunking, ContentSummary, CreateDataSource, CreateKnowledgeBase, CreateKnowledgebaseDatasourceHttpError, CreateKnowledgebaseDatasourceHttpResponse, CreateKnowledgebaseDatasourceScheduleHttpError, CreateKnowledgebaseDatasourceScheduleHttpResponse, CreateKnowledgebaseHttpError, CreateKnowledgebaseHttpResponse, DataSource, DataSourceCrawlConfig, DataSourceCrawlPattern, DataSourceCrawlScope, DataSourceFileConfig, DataSourceFileCrawlScope, DataSourceSync, DataSourceSyncStatus, DeleteKnowledgebaseDatasourceHttpError, DeleteKnowledgebaseDatasourceHttpResponse, DeleteKnowledgebaseDatasourceScheduleHttpError, DeleteKnowledgebaseDatasourceScheduleHttpResponse, DeleteKnowledgebaseHttpError, DeleteKnowledgebaseHttpResponse, DocStats, DownloadFile, DownloadFileResponse, DownloadKnowledgebaseDatasourceHttpError, DownloadKnowledgebaseDatasourceHttpResponse, Duration, ErrorResponse, ErrorResponseCode, ErrorResponseCodeCopy, ErrorResponseCopy, GetKnowledgebaseDatasourceHistoriesHttpError, GetKnowledgebaseDatasourceHistoriesHttpResponse, GetKnowledgebaseDatasourceHistoryHttpError, GetKnowledgebaseDatasourceHistoryHttpResponse, GetKnowledgebaseDatasourceScheduleHttpError, GetKnowledgebaseDatasourceScheduleHttpResponse, GetKnowledgebaseHistoriesHttpError, GetKnowledgebaseHistoriesHttpResponse, GetKnowledgebaseHttpError, GetKnowledgebaseHttpResponse, GetKnowledgebasesHttpError, GetKnowledgebasesHttpResponse, JSONPatch, JSONPatchArray, KbChunkMeta, KnowledgeBase, KnowledgeBaseLight, KnowledgeBasesResult, KnowledgebasesAPI, PageLink, PageLinks, PatchKnowledgebaseHttpError, PatchKnowledgebaseHttpResponse, ResultMeta, Schedule, ScheduleCalendar, ScheduleInterval, ScheduleRange, ScheduleWithManifest, SearchKnowledgebaseHttpError, SearchKnowledgebaseHttpResponse, SearchRequest, SearchResponse, SyncHistory, SyncHistoryDetails, SyncHistoryResult, SyncKnowledgebaseDatasourceHttpError, SyncKnowledgebaseDatasourceHttpResponse, UpdateKnowledgebaseDatasourceHttpError, UpdateKnowledgebaseDatasourceHttpResponse, cancelKnowledgebaseDatasource, clearCache, createKnowledgebase, createKnowledgebaseDatasource, createKnowledgebaseDatasourceSchedule, knowledgebasesExport as default, deleteKnowledgebase, deleteKnowledgebaseDatasource, deleteKnowledgebaseDatasourceSchedule, downloadKnowledgebaseDatasource, getKnowledgebase, getKnowledgebaseDatasourceHistories, getKnowledgebaseDatasourceHistory, getKnowledgebaseDatasourceSchedule, getKnowledgebaseHistories, getKnowledgebases, patchKnowledgebase, searchKnowledgebase, syncKnowledgebaseDatasource, updateKnowledgebaseDatasource };
+export { CancelKnowledgebaseDatasourceHttpError, CancelKnowledgebaseDatasourceHttpResponse, Chunk, Chunking, ContentSummary, CreateDataSource, CreateKnowledgeBase, CreateKnowledgebaseDatasourceHttpError, CreateKnowledgebaseDatasourceHttpResponse, CreateKnowledgebaseDatasourceScheduleHttpError, CreateKnowledgebaseDatasourceScheduleHttpResponse, CreateKnowledgebaseHttpError, CreateKnowledgebaseHttpResponse, DataSource, DataSourceCrawlPattern, DataSourceFileConfig, DataSourceFileCrawlScope, DataSourceSync, DataSourceSyncStatus, DeleteKnowledgebaseDatasourceHttpError, DeleteKnowledgebaseDatasourceHttpResponse, DeleteKnowledgebaseDatasourceScheduleHttpError, DeleteKnowledgebaseDatasourceScheduleHttpResponse, DeleteKnowledgebaseHttpError, DeleteKnowledgebaseHttpResponse, DocStats, DownloadFile, DownloadFileResponse, DownloadKnowledgebaseDatasourceHttpError, DownloadKnowledgebaseDatasourceHttpResponse, Duration, ErrorResponse, ErrorResponseCode, ErrorResponseCodeCopy, ErrorResponseCopy, GetKnowledgebaseDatasourceHistoriesHttpError, GetKnowledgebaseDatasourceHistoriesHttpResponse, GetKnowledgebaseDatasourceHistoryHttpError, GetKnowledgebaseDatasourceHistoryHttpResponse, GetKnowledgebaseDatasourceScheduleHttpError, GetKnowledgebaseDatasourceScheduleHttpResponse, GetKnowledgebaseHistoriesHttpError, GetKnowledgebaseHistoriesHttpResponse, GetKnowledgebaseHttpError, GetKnowledgebaseHttpResponse, GetKnowledgebasesHttpError, GetKnowledgebasesHttpResponse, JSONPatch, JSONPatchArray, KbChunkMeta, KnowledgeBase, KnowledgeBaseLight, KnowledgeBasesResult, KnowledgebasesAPI, PageLink, PageLinks, PatchKnowledgebaseHttpError, PatchKnowledgebaseHttpResponse, ResultMeta, Schedule, ScheduleCalendar, ScheduleInterval, ScheduleRange, ScheduleWithManifest, SearchKnowledgebaseHttpError, SearchKnowledgebaseHttpResponse, SearchRequest, SearchResponse, SyncHistory, SyncHistoryDetails, SyncHistoryResult, SyncKnowledgebaseDatasourceHttpError, SyncKnowledgebaseDatasourceHttpResponse, UpdateKnowledgebaseDatasourceHttpError, UpdateKnowledgebaseDatasourceHttpResponse, cancelKnowledgebaseDatasource, clearCache, createKnowledgebase, createKnowledgebaseDatasource, createKnowledgebaseDatasourceSchedule, knowledgebasesExport as default, deleteKnowledgebase, deleteKnowledgebaseDatasource, deleteKnowledgebaseDatasourceSchedule, downloadKnowledgebaseDatasource, getKnowledgebase, getKnowledgebaseDatasourceHistories, getKnowledgebaseDatasourceHistory, getKnowledgebaseDatasourceSchedule, getKnowledgebaseHistories, getKnowledgebases, patchKnowledgebase, searchKnowledgebase, syncKnowledgebaseDatasource, updateKnowledgebaseDatasource };

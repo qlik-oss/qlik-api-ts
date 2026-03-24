@@ -1,5 +1,5 @@
 import { i as isNode, n as createResolvablePromise$1 } from "./utils-B7chC9_U.js";
-import { E as toValidWebsocketLocationUrl, F as appendQueryToUrl, R as exposeInternalApiOnWindow, f as getWebSocketAuthParams, h as isWindows, p as handleAuthenticationError, z as generateRandomString } from "./interceptors-DMiDeqEz.js";
+import { E as toValidWebsocketLocationUrl, F as appendQueryToUrl, R as exposeInternalApiOnWindow, f as getWebSocketAuthParams, h as isWindows, p as handleAuthenticationError, z as generateRandomString } from "./interceptors-YI1D7Uo3.js";
 import { t as getHumanReadableSocketClosedErrorMessage$1 } from "./websocket-errors-C6cw1uQN.js";
 import isPlainObject from "lodash/isPlainObject.js";
 import merge from "lodash/merge.js";
@@ -16642,6 +16642,11 @@ var PhoenixConnectionImpl = class {
 				reason,
 				initiator
 			});
+			this.#rpcObjectSession.rpc.emit("closed", {
+				code,
+				reason,
+				initiator
+			});
 		} else if (this.#state === "open") {
 			logEvent("Connection closed, session is still in use", this.#openProps, code, reason);
 			this.#owner.onWebSocketEvent({
@@ -16652,6 +16657,11 @@ var PhoenixConnectionImpl = class {
 				...this.#openProps
 			});
 			this.#rpcObjectSession.emit("suspended", {
+				code,
+				reason,
+				initiator
+			});
+			this.#rpcObjectSession.rpc.emit("closed", {
 				code,
 				reason,
 				initiator
