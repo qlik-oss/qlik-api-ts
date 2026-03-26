@@ -1,4 +1,4 @@
-import { I as EncodingError, L as InvokeFetchError, M as clearApiCache, N as invokeFetch, P as parseFetchResponse } from "./interceptors-YI1D7Uo3.js";
+import { I as EncodingError, L as InvokeFetchError, M as clearApiCache, N as invokeFetch, P as parseFetchResponse } from "./interceptors-DU5ofxDg.js";
 
 //#region src/invoke-fetch/invoke-fetch.ts
 /**

@@ -57,6 +57,14 @@ type UpdateTemplateRequest = {
 };
 /**
  * Get descriptive info for the specified templates.
+ * @example
+ * getReportTemplates(
+ *   {
+ *     name: "Sales",
+ *     ownerId: "0rTsxGg_rtsZAs19Zib_421n6haydjIh",
+ *     sourceAppId: "78fb8e8d-bc83-4da1-b0d1-b0dc0a5c3e5b"
+ *   }
+ * )
  *
  * @param query an object with query parameters
  * @throws GetReportTemplatesHttpError
@@ -192,6 +200,14 @@ declare function clearCache(): void;
 type ReportTemplatesAPI = {
   /**
    * Get descriptive info for the specified templates.
+   * @example
+   * getReportTemplates(
+   *   {
+   *     name: "Sales",
+   *     ownerId: "0rTsxGg_rtsZAs19Zib_421n6haydjIh",
+   *     sourceAppId: "78fb8e8d-bc83-4da1-b0d1-b0dc0a5c3e5b"
+   *   }
+   * )
    *
    * @param query an object with query parameters
    * @throws GetReportTemplatesHttpError

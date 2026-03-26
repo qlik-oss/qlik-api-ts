@@ -31,7 +31,8 @@ type Theme = {
   icon?: string;
   readonly id?: string; /** Keywords for the theme. */
   keywords?: string; /** Under which license this theme is published. */
-  license?: string; /** The display name of this theme. */
+  license?: string; /** The migration state of the theme. It can be either "READY_TO_MOVE", "IN_PROGRESS" or "COMPLETED". */
+  readonly migrationState?: string; /** The display name of this theme. */
   name?: string; /** The name of the qext file that was uploaded with this theme. */
   qextFilename?: string; /** The version from the qext file that was uploaded with this extension. */
   qextVersion?: string; /** Link to the theme source code. */

@@ -1,5 +1,5 @@
 import { r as isBrowser } from "./utils-B7chC9_U.js";
-import { B as getPlatform, E as toValidWebsocketLocationUrl, N as invokeFetch, h as isWindows, p as handleAuthenticationError } from "./interceptors-YI1D7Uo3.js";
+import { B as getPlatform, E as toValidWebsocketLocationUrl, N as invokeFetch, h as isWindows, p as handleAuthenticationError } from "./interceptors-DU5ofxDg.js";
 import { t as getHumanReadableSocketClosedErrorMessage } from "./websocket-errors-C6cw1uQN.js";
 
 //#region src/qix/app-session.ts
@@ -110,6 +110,10 @@ function createExternalSharedSession(externalApp, onWebSocketEvent, appSessionPr
 function toGlobalAppSessionId({ appId, identity, hostConfig, withoutData, useReloadEngine, ttlSeconds, workloadType }) {
 	let url = `${toValidWebsocketLocationUrl(hostConfig)}/${appId}`;
 	if (identity) url += `/${identity}`;
+	if (hostConfig?.authType === "oauth2") {
+		if (hostConfig.userId) url += `/userId/${hostConfig.userId}`;
+		if (hostConfig.subject) url += `/subject/${hostConfig.subject}`;
+	}
 	if (ttlSeconds !== void 0 && ttlSeconds >= 0) url += `/ttl/${ttlSeconds}`;
 	if (useReloadEngine) url += "/useReloadEngine";
 	if (withoutData) url += "/withoutData";
@@ -199,7 +203,7 @@ function listenForWindowsAuthenticationInformation(session) {
 * Opens the websocket and handles a few windows authentication details
 */
 async function createAndSetupEnigmaSession(props, canRetry, onWebSocketEvent) {
-	const { createEnigmaSessionEntrypoint } = await import("./qix-chunk-entrypoint-Cw_-gLrS.js");
+	const { createEnigmaSessionEntrypoint } = await import("./qix-chunk-entrypoint-Azb4eydb.js");
 	const isWin = await isWindows(props.hostConfig);
 	const session = await createEnigmaSessionEntrypoint(props);
 	setupSessionListeners(session, props, onWebSocketEvent, isWin);
@@ -457,7 +461,7 @@ function createSharedPhoenixSession(props, { onClose, onWebSocketEvent: onWebSoc
 			onWebSocketEventGlobal(event);
 			for (const client of clients) client.onWebSocketEvent(event);
 		};
-		const phoenixConnectionPromise = import("./qix-chunk-entrypoint-Cw_-gLrS.js").then((module) => {
+		const phoenixConnectionPromise = import("./qix-chunk-entrypoint-Azb4eydb.js").then((module) => {
 			return module.createPhoenixConnectionEntrypoint(props, {
 				onWebSocketEvent,
 				getInitialAppActions

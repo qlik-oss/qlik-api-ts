@@ -1,5 +1,5 @@
 import { i as isNode, n as createResolvablePromise$1 } from "./utils-B7chC9_U.js";
-import { E as toValidWebsocketLocationUrl, F as appendQueryToUrl, R as exposeInternalApiOnWindow, f as getWebSocketAuthParams, h as isWindows, p as handleAuthenticationError, z as generateRandomString } from "./interceptors-YI1D7Uo3.js";
+import { E as toValidWebsocketLocationUrl, F as appendQueryToUrl, R as exposeInternalApiOnWindow, f as getWebSocketAuthParams, h as isWindows, p as handleAuthenticationError, z as generateRandomString } from "./interceptors-DU5ofxDg.js";
 import { t as getHumanReadableSocketClosedErrorMessage$1 } from "./websocket-errors-C6cw1uQN.js";
 import isPlainObject from "lodash/isPlainObject.js";
 import merge from "lodash/merge.js";
