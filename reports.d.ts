@@ -132,6 +132,7 @@ type ExportError = {
    * - "REP-500053" Unexpected number of generated cycle reports.
    * - "REP-500059" The App is corrupt.
    * - "REP-500061" Engine Memory limit reached.
+   * - "REP-500062" Too many resolution attempts for a task.
    * - "REP-500100" Image rendering generic error on Sense client.
    * - "REP-500101" Image rendering could not set cookies error on Sense client.
    * - "REP-500103" Image rendering JS timeout error on Sense client.

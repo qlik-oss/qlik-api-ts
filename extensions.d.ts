@@ -36,7 +36,8 @@ type Extension = {
   readonly id?: string; /** Keywords for the extension. */
   keywords?: string; /** Under which license this extension is published. */
   license?: string; /** Relative path to the extension's entry file, defaults to `filename` from the qext file. */
-  loadpath?: string; /** The display name of this extension. */
+  loadpath?: string; /** The migration state of the extension. It can be either "READY_TO_MOVE", "IN_PROGRESS" or "COMPLETED". */
+  readonly migrationState?: string; /** The display name of this extension. */
   name?: string; /** Path to an image that enables users to preview the extension. */
   preview?: string; /** The name of the qext file that was uploaded with this extension. */
   qextFilename?: string; /** The version from the qext file that was uploaded with this extension. */

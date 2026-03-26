@@ -2622,7 +2622,9 @@ const coreBootPaths = new Set([
 	"/api/v1/licenses/allotments/me",
 	"/api/v1/licenses/number",
 	"/api/v1/licenses/status",
+	"/api/v1/tenant-settings",
 	"/api/v1/tenants/me",
+	"/api/v1/user-settings",
 	"/api/v1/users/me",
 	"/api/v1/user-locale"
 ]);
