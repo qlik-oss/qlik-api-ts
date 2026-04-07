@@ -56,7 +56,7 @@ type QualityGlobalResultsResponse = {
 };
 type SamplingConfiguration = {
   /** Specifies where the data quality computation takes place. In PUSHDOWN mode, it runs within the Cloud Data Warehouse (e.g., Snowflake, Databricks), whereas in PULLUP mode, it runs in Qlik Cloud. */executionMode?: "PUSHDOWN" | "PULLUP"; /** Specifies how the dataset is sampled. ABSOLUTE represents a fixed number of rows, while RELATIVE refers to a percentage of the total dataset rows. */
-  sampleMode?: "ABSOLUTE" | "RELATIVE"; /** The actual value of the selected sampling method size (either a fixed number for ABSOLUTE mode or a percentage for RELATIVE mode). */
+  sampleMode?: "ABSOLUTE" | "RELATIVE"; /** The actual value of the selected sampling method size (either a fixed number for ABSOLUTE mode or a percentage for RELATIVE mode). Maximum allowed value for ABSOLUTE mode is 100000. */
   sampleSize?: number;
 };
 /**

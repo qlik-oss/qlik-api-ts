@@ -56,8 +56,8 @@ async function createTenantSettings(body, options) {
 	});
 }
 /**
-* Sets the cross region inference setting for the tenant. Creates tenant settings if none exist, or updates existing settings. This is access controlled by the permission admin.tenant-settings:update.
-* When cross-region processing is required, you must include an additional header x-qlik-consent-verified: true in your API requests to confirm that you have the authority to enable this feature and accept the associated terms.
+* Sets the cross region inference setting for the tenant. Creates tenant settings if none exist, or updates existing settings. This is access controlled by the permission `admin.tenant-settings:update`.
+* When cross-region processing is required, you must include an additional header `x-qlik-consent-verified: true` in your API requests to confirm that you have the authority to enable this feature and accept the associated terms.
 *
 * @param body an object with the body content
 * @throws ToggleCrossRegionDataProcessingTenantSettingsHttpError
