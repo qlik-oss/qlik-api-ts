@@ -141,7 +141,7 @@ type UsedByArray = UsedBy[];
 declare function getChangeStores(query: {
   /** A SCIM filter expression used to filter the result.
    * The filter parameter allows complex logical expressions using comparison operators and grouping.
-   * - **Supported attributes:** `storeName`, `storeId`, `referenceId`, `usedBy.appId`, `primaryKey`
+   * - **Supported attributes:** `storeName`, `storeId`, `referenceId`, `usedBy.appId`, `primaryKey`, `isUsedByEmpty`
    * - **Supported operators:** `eq`, `ne`, `co`, `sw`, `ew`, `pr`, `gt`, `ge`, `lt`, `le`
    * - **Logical operators:** `and`, `or`, `not` */
   filter?: string; /** Defines the size of each paged result (maximum 100). */

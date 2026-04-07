@@ -119,7 +119,8 @@ type DataTaskInstanceState = {
     datasetsInErrorCount?: number; /** For tasks that run on a gateway, this is the id of the gateway */
     gatewayId?: string; /** For tasks that run on a gateway, this is the name of the gateway */
     gatewayName?: string; /** For tasks that run on a gateway, this is the internal name of the task on the gateway */
-    gatewayTaskName?: string; /** For lakehouse storage tasks, this is the name of the cluster where the task runs */
+    gatewayTaskName?: string; /** For lakehouse storage tasks, this is the id of the cluster where the task runs */
+    lakehouseClusterId?: string; /** For lakehouse storage tasks, this is the name of the cluster where the task runs */
     lakehouseClusterName?: string; /** The latest point in time the live views reflect, based on updates from the source system. */
     liveViewsUpdatedTo?: string;
   };

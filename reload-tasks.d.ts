@@ -78,6 +78,8 @@ type Tasks = {
   links: PaginationLinks;
 };
 /**
+ * @deprecated
+ *
  * Finds and returns the tasks that the user has access to.
  *
  * @param query an object with query parameters
@@ -103,6 +105,8 @@ type GetReloadTasksHttpError = {
   status: 400 | 401 | 403 | 404 | 429 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Creates a task for a specified app.
  *
  * @param body an object with the body content
@@ -120,6 +124,8 @@ type CreateReloadTaskHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Deletes a task
  *
  * @param taskId The unique identifier of the task.
@@ -137,6 +143,8 @@ type DeleteReloadTaskHttpError = {
   status: 400 | 401 | 403 | 404 | 500;
 };
 /**
+ * @deprecated
+ *
  * Finds and returns a task.
  *
  * @param taskId The unique identifier of the task.
@@ -154,6 +162,8 @@ type GetReloadTaskHttpError = {
   status: 400 | 401 | 403 | 404 | 429 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Updates an existing task
  *
  * @param taskId The unique identifier of the task.
@@ -177,6 +187,8 @@ type UpdateReloadTaskHttpError = {
 declare function clearCache(): void;
 type ReloadTasksAPI = {
   /**
+   * @deprecated
+   *
    * Finds and returns the tasks that the user has access to.
    *
    * @param query an object with query parameters
@@ -184,6 +196,8 @@ type ReloadTasksAPI = {
    */
   getReloadTasks: typeof getReloadTasks;
   /**
+   * @deprecated
+   *
    * Creates a task for a specified app.
    *
    * @param body an object with the body content
@@ -191,6 +205,8 @@ type ReloadTasksAPI = {
    */
   createReloadTask: typeof createReloadTask;
   /**
+   * @deprecated
+   *
    * Deletes a task
    *
    * @param taskId The unique identifier of the task.
@@ -198,6 +214,8 @@ type ReloadTasksAPI = {
    */
   deleteReloadTask: typeof deleteReloadTask;
   /**
+   * @deprecated
+   *
    * Finds and returns a task.
    *
    * @param taskId The unique identifier of the task.
@@ -205,6 +223,8 @@ type ReloadTasksAPI = {
    */
   getReloadTask: typeof getReloadTask;
   /**
+   * @deprecated
+   *
    * Updates an existing task
    *
    * @param taskId The unique identifier of the task.

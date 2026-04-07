@@ -2,6 +2,8 @@ import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CPqx
 
 //#region src/public/rest/reload-tasks.ts
 /**
+* @deprecated
+*
 * Finds and returns the tasks that the user has access to.
 *
 * @param query an object with query parameters
@@ -16,6 +18,8 @@ async function getReloadTasks(query, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Creates a task for a specified app.
 *
 * @param body an object with the body content
@@ -31,6 +35,8 @@ async function createReloadTask(body, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Deletes a task
 *
 * @param taskId The unique identifier of the task.
@@ -45,6 +51,8 @@ async function deleteReloadTask(taskId, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Finds and returns a task.
 *
 * @param taskId The unique identifier of the task.
@@ -59,6 +67,8 @@ async function getReloadTask(taskId, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Updates an existing task
 *
 * @param taskId The unique identifier of the task.
