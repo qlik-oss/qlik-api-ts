@@ -1,4 +1,4 @@
-import { _ as hostConfigCommonProperties, a as Credentials, c as GetWebResourceAuthParamsProps, d as HostConfig, f as HostConfigCommon, g as authTypesThatCanBeOmitted, h as WebSocketAuthParams, i as AuthenticationErrorAction, l as GetWebSocketAuthParamsProps, m as WebResourceAuthParams, n as AuthType, o as GetRemoteAuthDataProps, p as RestCallAuthParams, r as AuthTypeThatCanBeOmitted, s as GetRestCallAuthParamsProps, t as AuthModule, u as HandleAuthenticationErrorProps } from "./chunks/auth-types-DVvka7Hz.js";
+import { _ as authTypesThatCanBeOmitted, a as Credentials, c as GetWebResourceAuthParamsProps, d as HostConfig, f as HostConfigCommon, g as WebSocketAuthParams, h as WebResourceAuthParams, i as AuthenticationErrorAction, l as GetWebSocketAuthParamsProps, m as RestCallAuthParams, n as AuthType, o as GetRemoteAuthDataProps, p as PfxAuthOptions, r as AuthTypeThatCanBeOmitted, s as GetRestCallAuthParamsProps, t as AuthModule, u as HandleAuthenticationErrorProps, v as hostConfigCommonProperties } from "./chunks/auth-types-DjJJgiRF.js";
 
 //#region src/public/auth.d.ts
 /**
@@ -91,4 +91,4 @@ declare const _default: {
   getWebResourceAuthParams: typeof getWebResourceAuthParams;
 };
 //#endregion
-export { AuthAPI, AuthModule, AuthType, AuthTypeThatCanBeOmitted, AuthenticationErrorAction, Credentials, GetRemoteAuthDataProps, GetRestCallAuthParamsProps, GetWebResourceAuthParamsProps, GetWebSocketAuthParamsProps, HandleAuthenticationErrorProps, HostConfig, HostConfigCommon, RestCallAuthParams, WebResourceAuthParams, WebSocketAuthParams, authTypesThatCanBeOmitted, _default as default, getAccessToken, getWebResourceAuthParams, hostConfigCommonProperties, logout, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig };
+export { AuthAPI, AuthModule, AuthType, AuthTypeThatCanBeOmitted, AuthenticationErrorAction, Credentials, GetRemoteAuthDataProps, GetRestCallAuthParamsProps, GetWebResourceAuthParamsProps, GetWebSocketAuthParamsProps, HandleAuthenticationErrorProps, HostConfig, HostConfigCommon, PfxAuthOptions, RestCallAuthParams, WebResourceAuthParams, WebSocketAuthParams, authTypesThatCanBeOmitted, _default as default, getAccessToken, getWebResourceAuthParams, hostConfigCommonProperties, logout, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig };

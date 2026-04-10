@@ -1,4 +1,4 @@
-import { C as DownloadableBlob, b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
 //#region src/public/rest/report-templates.d.ts
 type CreateTemplateRequest = {
   /** Template description */description?: string; /** Template name */

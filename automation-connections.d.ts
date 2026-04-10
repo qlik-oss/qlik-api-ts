@@ -1,4 +1,4 @@
-import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
 //#region src/public/rest/automation-connections.d.ts
 type AutomationConnectionChangeOwnerObject = {
   /** The unique identifier of the new owner. */userId?: string;

@@ -1,4 +1,4 @@
-import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
 //#region src/public/rest/roles.d.ts
 type CreateRole = {
   /** Selection of scopes to assign to role */assignedScopes?: string[]; /** Role description */

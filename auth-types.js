@@ -17,7 +17,8 @@ const authTypesThatCanBeOmitted = [
 	"cookie",
 	"windowscookie",
 	"reference",
-	"anonymous"
+	"anonymous",
+	"pfx"
 ];
 
 //#endregion

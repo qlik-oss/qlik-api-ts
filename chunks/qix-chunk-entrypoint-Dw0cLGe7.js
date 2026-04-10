@@ -1,8 +1,8 @@
 import { i as isNode, n as createResolvablePromise$1 } from "./utils-B7chC9_U.js";
-import { E as toValidWebsocketLocationUrl, F as appendQueryToUrl, R as exposeInternalApiOnWindow, f as getWebSocketAuthParams, h as isWindows, p as handleAuthenticationError, z as generateRandomString } from "./interceptors-DU5ofxDg.js";
+import { E as toValidWebsocketLocationUrl, F as appendQueryToUrl, R as exposeInternalApiOnWindow, f as getWebSocketAuthParams, h as isWindows, p as handleAuthenticationError, z as generateRandomString } from "./interceptors-CFr5PGJ1.js";
 import { t as getHumanReadableSocketClosedErrorMessage$1 } from "./websocket-errors-C6cw1uQN.js";
-import isPlainObject from "lodash/isPlainObject.js";
-import merge from "lodash/merge.js";
+import isPlainObject from "lodash-es/isPlainObject.js";
+import merge from "lodash-es/merge.js";
 import originalExtend from "extend";
 
 //#region src/qix/session/schema/engine-api.js
@@ -14944,13 +14944,16 @@ async function createEnigmaSession({ appId, identity, hostConfig, useReloadEngin
 		const WS = (await import("ws")).default;
 		createSocketBuilder = async () => {
 			let url = baseUrl;
-			const { headers, queryParams } = await getWebSocketAuthParams({ hostConfig });
+			const { headers, queryParams, pfxOptions } = await getWebSocketAuthParams({ hostConfig });
 			Object.entries(queryParams || {}).forEach(([key, value]) => {
 				url = `${url}&${key}=${value}`;
 			});
 			return (socketUrl) => {
 				if (unitTestCreateWebSocket) return unitTestCreateWebSocket(url);
-				return new WS(url, void 0, { headers });
+				return new WS(url, void 0, {
+					headers,
+					...pfxOptions
+				});
 			};
 		};
 	} else createSocketBuilder = async () => {
@@ -15643,13 +15646,16 @@ async function createWebSocketInternal(webSocketProps) {
 	const unitTestCreateWebSocket = hostConfig?.createWebSocket;
 	const [socketOpenPromise, resolveSocketOpenPromise, rejectSocketOpenPromise] = createResolvablePromise$1();
 	const baseUrl = queryParams ? appendQueryToUrl(`${toValidWebsocketLocationUrl(hostConfig)}${relativePath}`, queryParams) : `${toValidWebsocketLocationUrl(hostConfig)}${relativePath}`;
-	const { headers, queryParams: authQueryParams } = await getWebSocketAuthParams({ hostConfig });
+	const { headers, queryParams: authQueryParams, pfxOptions } = await getWebSocketAuthParams({ hostConfig });
 	const url = appendQueryToUrl(baseUrl, authQueryParams);
 	let socket;
 	if (unitTestCreateWebSocket) socket = unitTestCreateWebSocket(url);
 	else if (isNodeEnvironment) {
 		const WS = (await import("ws")).default;
-		socket = new WS(url, void 0, { headers });
+		socket = new WS(url, void 0, {
+			headers,
+			...pfxOptions
+		});
 	} else {
 		socket = new WebSocket(url);
 		exposeInternalApiOnWindow("closeLastWebSocket", (code) => {

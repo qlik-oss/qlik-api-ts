@@ -1,4 +1,4 @@
-import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
 //#region src/public/rest/assistants.d.ts
 type Assistant = {
   /** Datetime when the assistant was created. */readonly createdAt: string; /** Unique identifier of the user who created the assistant. */
@@ -136,7 +136,8 @@ type Thread = {
   name: string;
   ownerId: string;
   summaryStats: FeedbackSummary; /** Datetime when the thread was updated. */
-  readonly updatedAt: string;
+  readonly updatedAt: string; /** If the thread should respond in the user's preferred language. */
+  useUserPreferredLanguage: boolean;
 };
 type ThreadWithMessages = {
   /** Datetime when the thread was created. */readonly createdAt: string; /** Datetime when the thread was deleted. */
@@ -148,7 +149,8 @@ type ThreadWithMessages = {
   name: string; /** Unique identifier of the thread owner. */
   ownerId: string;
   summaryStats: FeedbackSummary; /** Datetime when the thread was updated. */
-  readonly updatedAt: string;
+  readonly updatedAt: string; /** If the thread should respond in the user's preferred language. */
+  useUserPreferredLanguage: boolean;
 };
 type AssistantsResult = {
   data: Assistant[];
@@ -220,7 +222,8 @@ type CreateStarter = {
 type CreateThread = {
   /** Datetime when the thread was created. */readonly createdAt?: string; /** The name of the thread. */
   name: string; /** Datetime when the thread was updated. */
-  readonly updatedAt?: string;
+  readonly updatedAt?: string; /** Whether the thread should use the user's preferred language. */
+  useUserPreferredLanguage?: boolean;
 };
 type ErrorResponse = {
   errors?: ErrorResponseCode[];

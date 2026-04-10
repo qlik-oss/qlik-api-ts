@@ -1,4 +1,4 @@
-import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
 //#region src/public/rest/banners.d.ts
 type BannerResponse = {
   readonly createdAt: string; /** userId of the user who created the banner */

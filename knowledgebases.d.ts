@@ -1,4 +1,4 @@
-import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
 //#region src/public/rest/knowledgebases.d.ts
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
