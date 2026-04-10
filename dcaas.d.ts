@@ -1,4 +1,4 @@
-import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
 //#region src/public/rest/dcaas.d.ts
 type ApiSpecResponse = {
   /** List of properties required for the given datasource */connectionProperties: unknown; /** Datasource provider */

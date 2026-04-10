@@ -1,4 +1,4 @@
-import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
 //#region src/public/rest/data-files.d.ts
 type BatchChangeSpaceItem = {
   /** The ID of the data file whose space will be changed. */id: string;

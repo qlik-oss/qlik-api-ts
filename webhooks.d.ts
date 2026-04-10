@@ -1,4 +1,4 @@
-import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
 //#region src/public/rest/webhooks.d.ts
 type Delivery = {
   /** The name of the triggering event-type. */eventType: string; /** The delivery's unique identifier. */

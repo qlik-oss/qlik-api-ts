@@ -120,11 +120,13 @@ const authModule = {
 - [OAuth2](#oauth2)
 - [Cookie](#cookie)
 - [Windows Cookie](#windows-cookie)
+- [Windows Cookie Node](#windows-cookie-node)
 - [API Key](#api-key)
 - [Anonymous](#anonymous)
 - [Reference](#reference)
 - [None](#none)
 - [NoAuth](#noauth)
+- [PFX Certificates](#pfx)
 
 ### Oauth2
 
@@ -191,12 +193,32 @@ Will do the necessary actions to communicate with a Qlik Sense Enterprise for Wi
 type WindowsCookieAuthConfig = {
   /* the auth type */
   authType?: "windowscookie";
-  /** The URL to the cloud tenant or windows server. If scheme is excluded https is used. May include a virtual proxy prefix on windows. Any trailing slashes are stripped. */
+  /** The URL to the windows server. If scheme is excluded https is used. May include a virtual proxy prefix on windows. Any trailing slashes are stripped. */
   host?: string;
   /** location of the login page, auth module will redirect to this page when an unauthenticated api call is made */
   loginUri?: string;
   /** If set to false the `credentials` property will be set to same-origin  */
   crossSiteCookies?: boolean;
+};
+```
+
+### Windows Cookie Node
+
+This allows users to connect to a Qlik Sense Enterprise for Windows server from Node.js. This includes fetching an XrfKey from the Qlik Sense Server Repository Service. In Node.js, `getAccessToken` is required so the auth module can fetch a Windows auth JWT, exchange it for a session cookie, and manage that cookie in request headers for subsequent calls.
+
+```ts
+type WindowsCookieAuthConfig = {
+  /* the auth type */
+  authType?: "windowscookie";
+  /** The URL to the windows server. If scheme is excluded https is used. May include a virtual proxy prefix on windows. Any trailing slashes are stripped. */
+  host?: string;
+  /**
+   * A custom function that can be used to fetch a windows auth jwt.
+   * The jwt will be exchanged for a session cookie.
+   * In the browser this should typically fetch the jwt from a custom backend service.
+   * Mandatory in Node.js environments.
+   */
+  getAccessToken: string | (() => Promise<string>);
 };
 ```
 
@@ -262,6 +284,21 @@ type NoAuthAuthConfig = {
   /* the auth type */
   authType: "noauth";
   // No additional configuration required
+};
+```
+
+### PFX
+
+This auth module can be used to connect to a Qlik Sense Enterprise windows server using exported certificates. The certificates will be used when setting up a websocket connection.
+
+```ts
+type PfxConfig = {
+  /** client.pfx file as buffer */
+  pfx: Uint8Array;
+  /** Passphrase for the pfx file */
+  passphrase: string;
+  /** Optional X-Qlik-User header */
+  userHeader?: string;
 };
 ```
 

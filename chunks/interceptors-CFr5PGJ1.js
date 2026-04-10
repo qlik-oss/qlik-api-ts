@@ -811,7 +811,7 @@ async function handlePotentialAuthenticationErrorAndRetry$1(hostConfig, fn) {
 	try {
 		return await fn();
 	} catch (err) {
-		const { retry } = await handleAuthenticationError$9({
+		const { retry } = await handleAuthenticationError$10({
 			hostConfig,
 			canRetry: true
 		});
@@ -844,14 +844,14 @@ async function getAnonymousAccessToken(hostConfig) {
 	if (tokens.accessToken) return tokens.accessToken;
 	return "";
 }
-async function getRestCallAuthParams$9({ hostConfig }) {
+async function getRestCallAuthParams$10({ hostConfig }) {
 	return {
 		headers: { Authorization: `Bearer ${await getAnonymousAccessToken(hostConfig)}` },
 		queryParams: {},
 		credentials: "omit"
 	};
 }
-async function getWebSocketAuthParams$9({ hostConfig }) {
+async function getWebSocketAuthParams$10({ hostConfig }) {
 	if (isNode()) return { headers: { Authorization: `Bearer ${await getAnonymousAccessToken(hostConfig)}` } };
 	return { queryParams: { accessToken: await handlePotentialAuthenticationErrorAndRetry$1(hostConfig, async () => {
 		return exchangeAccessTokenForTemporaryToken(hostConfig, await getAnonymousAccessToken(hostConfig), "websocket");
@@ -862,7 +862,7 @@ async function getWebResourceAuthParams$2({ hostConfig }) {
 		return exchangeAccessTokenForTemporaryToken(hostConfig, await getAnonymousAccessToken(hostConfig), "websocket");
 	}) } };
 }
-async function handleAuthenticationError$9({ hostConfig }) {
+async function handleAuthenticationError$10({ hostConfig }) {
 	clearStoredAnonymousTokens(hostConfig);
 	return {
 		preventDefault: false,
@@ -872,34 +872,34 @@ async function handleAuthenticationError$9({ hostConfig }) {
 var anonymous_default = {
 	requiredProps: ["clientId", "accessCode"],
 	optionalProps: [],
-	getRestCallAuthParams: getRestCallAuthParams$9,
-	getWebSocketAuthParams: getWebSocketAuthParams$9,
+	getRestCallAuthParams: getRestCallAuthParams$10,
+	getWebSocketAuthParams: getWebSocketAuthParams$10,
 	getWebResourceAuthParams: getWebResourceAuthParams$2,
-	handleAuthenticationError: handleAuthenticationError$9
+	handleAuthenticationError: handleAuthenticationError$10
 };
 
 //#endregion
 //#region src/auth/internal/default-auth-modules/apikey.ts
-function getRestCallAuthParams$8({ hostConfig }) {
+function getRestCallAuthParams$9({ hostConfig }) {
 	return Promise.resolve({
 		headers: { Authorization: `Bearer ${hostConfig?.apiKey}` },
 		queryParams: {},
 		credentials: "omit"
 	});
 }
-async function getWebSocketAuthParams$8({ hostConfig }) {
+async function getWebSocketAuthParams$9({ hostConfig }) {
 	if (isBrowser()) throw new Error("Not supported in browser environment");
 	return Promise.resolve({ headers: { Authorization: `Bearer ${hostConfig?.apiKey}` } });
 }
-function handleAuthenticationError$8() {
+function handleAuthenticationError$9() {
 	return Promise.resolve({});
 }
 var apikey_default = {
 	requiredProps: ["apiKey"],
 	optionalProps: [],
-	getRestCallAuthParams: getRestCallAuthParams$8,
-	getWebSocketAuthParams: getWebSocketAuthParams$8,
-	handleAuthenticationError: handleAuthenticationError$8
+	getRestCallAuthParams: getRestCallAuthParams$9,
+	getWebSocketAuthParams: getWebSocketAuthParams$9,
+	handleAuthenticationError: handleAuthenticationError$9
 };
 
 //#endregion
@@ -1719,7 +1719,7 @@ function lookupGlobalGetAccessTokenFn(getAccessToken) {
 function isModifyingVerb(verb) {
 	return !(verb === "get" || verb === "GET");
 }
-async function getRestCallAuthParams$7({ hostConfig, method }) {
+async function getRestCallAuthParams$8({ hostConfig, method }) {
 	const headers = {};
 	if (isModifyingVerb(method)) headers["qlik-csrf-token"] = await getCsrfToken(hostConfig);
 	if (hostConfig.webIntegrationId) headers["qlik-web-integration-id"] = hostConfig.webIntegrationId;
@@ -1729,7 +1729,7 @@ async function getRestCallAuthParams$7({ hostConfig, method }) {
 		credentials: internalGetCredentialsForCookieAuth(hostConfig)
 	};
 }
-async function getWebSocketAuthParams$7({ hostConfig }) {
+async function getWebSocketAuthParams$8({ hostConfig }) {
 	if (isNode()) {
 		const headers = {};
 		headers["qlik-csrf-token"] = await getCsrfToken(hostConfig);
@@ -1740,7 +1740,7 @@ async function getWebSocketAuthParams$7({ hostConfig }) {
 	if (hostConfig.webIntegrationId) params["qlik-web-integration-id"] = hostConfig.webIntegrationId;
 	return { queryParams: params };
 }
-async function handleAuthenticationError$7({ hostConfig, status }) {
+async function handleAuthenticationError$8({ hostConfig, status }) {
 	clearCsrfToken(hostConfig);
 	if (status === 403) return {
 		preventDefault: false,
@@ -1760,57 +1760,57 @@ var cookie_default = {
 		"crossSiteCookies",
 		"anonymousMode"
 	],
-	getRestCallAuthParams: getRestCallAuthParams$7,
-	getWebSocketAuthParams: getWebSocketAuthParams$7,
-	handleAuthenticationError: handleAuthenticationError$7
+	getRestCallAuthParams: getRestCallAuthParams$8,
+	getWebSocketAuthParams: getWebSocketAuthParams$8,
+	handleAuthenticationError: handleAuthenticationError$8
 };
 
 //#endregion
 //#region src/auth/internal/default-auth-modules/noauth.ts
-function getRestCallAuthParams$6(_props) {
+function getRestCallAuthParams$7(_props) {
 	return Promise.resolve({
 		headers: {},
 		queryParams: {},
 		credentials: "same-origin"
 	});
 }
-function getWebSocketAuthParams$6(_props) {
+function getWebSocketAuthParams$7(_props) {
 	return Promise.resolve({ queryParams: {} });
 }
-function handleAuthenticationError$6(_props) {
+function handleAuthenticationError$7(_props) {
 	return Promise.resolve({});
 }
 /** @private */
 var noauth_default = {
 	requiredProps: [],
 	optionalProps: [],
-	getRestCallAuthParams: getRestCallAuthParams$6,
-	getWebSocketAuthParams: getWebSocketAuthParams$6,
-	handleAuthenticationError: handleAuthenticationError$6
+	getRestCallAuthParams: getRestCallAuthParams$7,
+	getWebSocketAuthParams: getWebSocketAuthParams$7,
+	handleAuthenticationError: handleAuthenticationError$7
 };
 
 //#endregion
 //#region src/auth/internal/default-auth-modules/none.ts
-function getRestCallAuthParams$5() {
+function getRestCallAuthParams$6() {
 	return Promise.resolve({
 		headers: {},
 		queryParams: {},
 		credentials: "same-origin"
 	});
 }
-function getWebSocketAuthParams$5() {
+function getWebSocketAuthParams$6() {
 	return Promise.resolve({ queryParams: {} });
 }
-function handleAuthenticationError$5() {
+function handleAuthenticationError$6() {
 	return Promise.resolve({});
 }
 /** @private */
 var none_default = {
 	requiredProps: [],
 	optionalProps: [],
-	getRestCallAuthParams: getRestCallAuthParams$5,
-	getWebSocketAuthParams: getWebSocketAuthParams$5,
-	handleAuthenticationError: handleAuthenticationError$5
+	getRestCallAuthParams: getRestCallAuthParams$6,
+	getWebSocketAuthParams: getWebSocketAuthParams$6,
+	handleAuthenticationError: handleAuthenticationError$6
 };
 
 //#endregion
@@ -1856,7 +1856,7 @@ async function handlePotentialAuthenticationErrorAndRetry(hostConfig, fn) {
 	try {
 		return await fn();
 	} catch (err) {
-		const { retry } = await handleAuthenticationError$4({
+		const { retry } = await handleAuthenticationError$5({
 			hostConfig,
 			canRetry: true
 		});
@@ -1864,14 +1864,14 @@ async function handlePotentialAuthenticationErrorAndRetry(hostConfig, fn) {
 		throw err;
 	}
 }
-async function getRestCallAuthParams$4({ hostConfig }) {
+async function getRestCallAuthParams$5({ hostConfig }) {
 	return {
 		headers: { Authorization: `Bearer ${await getOAuthAccessToken(hostConfig)}` },
 		queryParams: {},
 		credentials: "omit"
 	};
 }
-async function getWebSocketAuthParams$4({ hostConfig }) {
+async function getWebSocketAuthParams$5({ hostConfig }) {
 	if (isNode()) return { headers: { Authorization: `Bearer ${await getOAuthAccessToken(hostConfig)}` } };
 	return { queryParams: { accessToken: await handlePotentialAuthenticationErrorAndRetry(hostConfig, async () => {
 		return exchangeAccessTokenForTemporaryToken(hostConfig, await getOAuthAccessToken(hostConfig), "websocket");
@@ -1882,7 +1882,7 @@ async function getWebResourceAuthParams$1({ hostConfig }) {
 		return exchangeAccessTokenForTemporaryToken(hostConfig, await getOAuthAccessToken(hostConfig), "webresource");
 	}) } };
 }
-async function handleAuthenticationError$4({ hostConfig }) {
+async function handleAuthenticationError$5({ hostConfig }) {
 	if (hostConfig.getAccessToken) {
 		clearStoredOauthTokens(hostConfig);
 		return {
@@ -1918,21 +1918,21 @@ var oauth_default = {
 		"getAccessToken",
 		"performInteractiveLogin"
 	],
-	getRestCallAuthParams: getRestCallAuthParams$4,
-	getWebSocketAuthParams: getWebSocketAuthParams$4,
+	getRestCallAuthParams: getRestCallAuthParams$5,
+	getWebSocketAuthParams: getWebSocketAuthParams$5,
 	getWebResourceAuthParams: getWebResourceAuthParams$1,
-	handleAuthenticationError: handleAuthenticationError$4
+	handleAuthenticationError: handleAuthenticationError$5
 };
 
 //#endregion
 //#region src/auth/internal/default-auth-modules/reference.ts
-function getRestCallAuthParams$3() {
+function getRestCallAuthParams$4() {
 	throw new Error("getRestCallAuthParams should never be called for reference auth module");
 }
-function getWebSocketAuthParams$3() {
+function getWebSocketAuthParams$4() {
 	throw new Error("getWebSocketAuthParams should never be called for reference auth module");
 }
-function handleAuthenticationError$3() {
+function handleAuthenticationError$4() {
 	throw new Error("handleAuthenticationError should never be called for reference auth module");
 }
 /**
@@ -1941,9 +1941,9 @@ function handleAuthenticationError$3() {
 var reference_default = {
 	requiredProps: ["reference"],
 	optionalProps: [],
-	getRestCallAuthParams: getRestCallAuthParams$3,
-	getWebSocketAuthParams: getWebSocketAuthParams$3,
-	handleAuthenticationError: handleAuthenticationError$3
+	getRestCallAuthParams: getRestCallAuthParams$4,
+	getWebSocketAuthParams: getWebSocketAuthParams$4,
+	handleAuthenticationError: handleAuthenticationError$4
 };
 
 //#endregion
@@ -1970,20 +1970,20 @@ function getXrfKey(hostConfig) {
 
 //#endregion
 //#region src/auth/internal/default-auth-modules/windows-cookie.ts
-async function getRestCallAuthParams$2({ hostConfig }) {
+async function getRestCallAuthParams$3({ hostConfig }) {
 	return {
 		headers: { "X-Qlik-XrfKey": getXrfKey(hostConfig) },
 		queryParams: { xrfkey: getXrfKey(hostConfig) },
 		credentials: internalGetCredentialsForCookieAuth(hostConfig)
 	};
 }
-async function getWebSocketAuthParams$2({ hostConfig }) {
+async function getWebSocketAuthParams$3({ hostConfig }) {
 	return { queryParams: {
 		xrfkey: getXrfKey(hostConfig),
 		"qlik-csrf-token": await getCsrfToken(hostConfig, true)
 	} };
 }
-async function handleAuthenticationError$2({ hostConfig }) {
+async function handleAuthenticationError$3({ hostConfig }) {
 	if (hostConfig.loginUri) {
 		await requestRedirect(hostConfig);
 		globalThis.location.replace(hostConfig.loginUri.replace("{location}", encodeURIComponent(globalThis.location.href)));
@@ -2015,9 +2015,9 @@ var windows_cookie_default = {
 		"crossSiteCookies",
 		"getAccessToken"
 	],
-	getRestCallAuthParams: getRestCallAuthParams$2,
-	getWebSocketAuthParams: getWebSocketAuthParams$2,
-	handleAuthenticationError: handleAuthenticationError$2
+	getRestCallAuthParams: getRestCallAuthParams$3,
+	getWebSocketAuthParams: getWebSocketAuthParams$3,
+	handleAuthenticationError: handleAuthenticationError$3
 };
 
 //#endregion
@@ -2054,7 +2054,7 @@ async function getCookie(hostConfig) {
 	if (!cookie) throw new Error("Failed to exchange access token for cookie");
 	return cookie;
 }
-async function getRestCallAuthParams$1({ hostConfig }) {
+async function getRestCallAuthParams$2({ hostConfig }) {
 	return {
 		queryParams: { xrfkey: getXrfKey(hostConfig) },
 		headers: {
@@ -2064,13 +2064,13 @@ async function getRestCallAuthParams$1({ hostConfig }) {
 		credentials: internalGetCredentialsForCookieAuth(hostConfig)
 	};
 }
-async function getWebSocketAuthParams$1({ hostConfig }) {
+async function getWebSocketAuthParams$2({ hostConfig }) {
 	return {
 		queryParams: { "qlik-csrf-token": await getCsrfToken(hostConfig, true) },
 		headers: { Cookie: await getCookie(hostConfig) }
 	};
 }
-async function handleAuthenticationError$1({ hostConfig }) {
+async function handleAuthenticationError$2({ hostConfig }) {
 	clearCookieInStore(hostConfig);
 	return { retry: true };
 }
@@ -2090,6 +2090,41 @@ var windows_cookie_node_default = {
 		}
 		throw new InvalidHostConfigError("The \"getAccessToken\" property must be a function or the name of a globally defined function.");
 	},
+	getRestCallAuthParams: getRestCallAuthParams$2,
+	getWebSocketAuthParams: getWebSocketAuthParams$2,
+	handleAuthenticationError: handleAuthenticationError$2
+};
+
+//#endregion
+//#region src/auth/internal/default-auth-modules/pfx.ts
+function getRestCallAuthParams$1({ hostConfig }) {
+	return Promise.resolve({
+		headers: {},
+		queryParams: {},
+		credentials: "omit",
+		pfxOptions: {
+			pfx: hostConfig?.pfx,
+			passphrase: hostConfig?.passphrase
+		}
+	});
+}
+async function getWebSocketAuthParams$1({ hostConfig }) {
+	if (isBrowser()) throw new Error("Not supported in browser environment");
+	const xQlikUserHeader = hostConfig?.userHeader || "UserDirectory=INTERNAL; UserId=sa_engine";
+	return Promise.resolve({
+		headers: { "X-Qlik-User": xQlikUserHeader },
+		pfxOptions: {
+			pfx: hostConfig?.pfx,
+			passphrase: hostConfig?.passphrase || ""
+		}
+	});
+}
+function handleAuthenticationError$1() {
+	return Promise.resolve({});
+}
+var pfx_default = {
+	requiredProps: ["pfx"],
+	optionalProps: ["passphrase", "userHeader"],
 	getRestCallAuthParams: getRestCallAuthParams$1,
 	getWebSocketAuthParams: getWebSocketAuthParams$1,
 	handleAuthenticationError: handleAuthenticationError$1
@@ -2114,6 +2149,7 @@ let authModulesRegistered = false;
 		registerAuthModule$1("noauth", noauth_default);
 		registerAuthModule$1("oauth2", oauth_default);
 		registerAuthModule$1("anonymous", anonymous_default);
+		registerAuthModule$1("pfx", pfx_default);
 		if (isBrowser()) registerAuthModule$1("windowscookie", windows_cookie_default);
 		else registerAuthModule$1("windowscookie", windows_cookie_node_default);
 		registerAuthModule$1("reference", reference_default);
@@ -2230,6 +2266,7 @@ async function determineAuthType$1(hostConfig) {
 	if (hostConfig.clientId) return "oauth2";
 	if (hostConfig.webIntegrationId) return "cookie";
 	if (hostConfig.reference) return "reference";
+	if (hostConfig.pfx) return "pfx";
 	if (await isWindows(hostConfig)) return "windowscookie";
 	return "cookie";
 }

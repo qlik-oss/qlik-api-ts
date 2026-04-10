@@ -1,4 +1,4 @@
-import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
 //#region src/public/rest/ui-config.d.ts
 type BulkCreatePinnedLinkItemPayload = CreatePinnedLinkConfigPayload & {
   links: CreatePinnedLinkPayload[];

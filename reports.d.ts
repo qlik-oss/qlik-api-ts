@@ -1,4 +1,4 @@
-import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
 //#region src/public/rest/reports.d.ts
 /**
  * Error in resource handling
@@ -133,6 +133,7 @@ type ExportError = {
    * - "REP-500059" The App is corrupt.
    * - "REP-500061" Engine Memory limit reached.
    * - "REP-500062" Too many resolution attempts for a task.
+   * - "REP-500063" Engine terminated
    * - "REP-500100" Image rendering generic error on Sense client.
    * - "REP-500101" Image rendering could not set cookies error on Sense client.
    * - "REP-500103" Image rendering JS timeout error on Sense client.

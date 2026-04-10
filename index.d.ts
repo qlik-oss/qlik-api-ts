@@ -1,7 +1,7 @@
-import { d as HostConfig } from "./chunks/auth-types-DVvka7Hz.js";
+import { d as HostConfig } from "./chunks/auth-types-DjJJgiRF.js";
 import { InterceptorsAPI, createInterceptors } from "./interceptors.js";
 import { AuthAPI, getAccessToken, getWebResourceAuthParams, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig } from "./auth.js";
-import { t as QixAPI } from "./chunks/qix-BRLNDomi.js";
+import { t as QixAPI } from "./chunks/qix-BoElWn36.js";
 import { ChangeStoresAPI } from "./analytics/change-stores.js";
 import { AnalyticsAPI } from "./analytics.js";
 import { ApiKeysAPI } from "./api-keys.js";

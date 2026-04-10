@@ -1,6 +1,6 @@
-import { d as HostConfig } from "./auth-types-DVvka7Hz.js";
+import { d as HostConfig } from "./auth-types-DjJJgiRF.js";
 //#region src/qix/types/engine-schema.d.ts
-declare const QIX_SCHEMA_VERSION = "12.2756.0";
+declare const QIX_SCHEMA_VERSION = "12.2760.0";
 type AlfaNumString = {
   /**
    * Calculated value.

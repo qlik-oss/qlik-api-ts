@@ -1,4 +1,4 @@
-import { b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
 //#region src/public/rest/tenants.d.ts
 /**
  * An error object describing the error.
@@ -50,7 +50,7 @@ type Tenant = {
   }; /** The display name of the tenant. */
   name: string; /** The region where the tenant is located. */
   readonly region?: string; /** The status of the tenant. */
-  status?: "active" | "disabled" | "deleted" | "pending" | "initializing";
+  status?: "active" | "disabled" | "deleted" | "user-access-disabled";
 };
 type TenantCreationRequest = {
   /** The datacenter where the tenant is located.

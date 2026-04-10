@@ -1,4 +1,4 @@
-import { b as ApiCallOptions } from "../chunks/auth-types-DVvka7Hz.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-DjJJgiRF.js";
 declare namespace data_products_d_exports {
   export { ActivateDataProductHttpError, ActivateDataProductHttpResponse, ActivateDataProductRequest, ArrayOfUniqueStrings, ChangelogOperation, CreateDataProductHttpError, CreateDataProductHttpResponse, CreateDataProductRequest, DataProductChangelog, DataProductChangelogResponse, DataProductResponse, DataProductsAPI, DeactivateDataProductHttpError, DeactivateDataProductHttpResponse, DeleteDataProductHttpError, DeleteDataProductHttpResponse, Error, ErrorResponse, ExportDocumentationDataProductHttpError, ExportDocumentationDataProductHttpResponse, GenerateProviderUrlDataProductsHttpError, GenerateProviderUrlDataProductsHttpResponse, GenerateProviderUrlResponse, GetDataProductChangelogsHttpError, GetDataProductChangelogsHttpResponse, GetDataProductHttpError, GetDataProductHttpResponse, KeyContact, Link, Links, MoveDataProductHttpError, MoveDataProductHttpResponse, MoveDataProductRequest, PatchDataProductHttpError, PatchDataProductHttpResponse, PatchDataProductRequest, Quality, TrustScore, TrustScoreDimension, activateDataProduct, clearCache, createDataProduct, deactivateDataProduct, dataProductsExport as default, deleteDataProduct, exportDocumentationDataProduct, generateProviderUrlDataProducts, getDataProduct, getDataProductChangelogs, moveDataProduct, patchDataProduct };
 }
@@ -53,7 +53,8 @@ type DataProductResponse = {
   keyContacts?: KeyContact[]; /** Primary identifier used for main data product reference. */
   mainId?: string;
   name: string; /** Identifier of the user who owns the data product and is responsible for governance. */
-  ownerId?: string; /** Qlik Resource Identifier (QRI) uniquely identifying the data product across the platform. */
+  ownerId?: string; /** Number of pending changes that are not yet activated. */
+  pendingChangesCount?: number; /** Qlik Resource Identifier (QRI) uniquely identifying the data product across the platform. */
   qri?: string;
   quality?: Quality; /** Documentation in Markdown format providing detailed information about the data product. */
   readMe?: string;

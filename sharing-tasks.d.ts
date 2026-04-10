@@ -1,4 +1,4 @@
-import { C as DownloadableBlob, b as ApiCallOptions } from "./chunks/auth-types-DVvka7Hz.js";
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
 //#region src/public/rest/sharing-tasks.d.ts
 type APISettingsUpload = {
   /** Whether API endpoints for sharing are enabled */"enable-sharing": boolean; /** Maximum number of recipients when creating a sharing task */

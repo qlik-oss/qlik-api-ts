@@ -220,6 +220,11 @@ type AnonymousAuthConfig = {
 type ReferenceConfig = {
   /** The name of the registered host config to reference */reference: string;
 };
+type PfxConfig = {
+  /** pfx file as buffer */pfx: Uint8Array; /** Passphrase for the pfx file */
+  passphrase?: string; /** Optional X-Qlik-User header */
+  userHeader?: string;
+};
 declare global {
   /**
    * QlikAuthModules is a global interface that can be extended to add custom auth modules.
@@ -242,6 +247,9 @@ declare global {
     };
     reference: {
       config: ReferenceConfig;
+    };
+    pfx: {
+      config: PfxConfig;
     };
     none: {
       config: object;
@@ -275,6 +283,11 @@ declare global {
 }
 //#endregion
 //#region src/auth/auth-types.d.ts
+/** Auth options for the websocket connection. These options are only applicable for nodeJS applications connecting to Qlik Sense Enterprise on Windows */
+type PfxAuthOptions = {
+  /** PFX file from an exported certificate */pfx: Uint8Array; /** Passphrase for the PFX file */
+  passphrase: string;
+};
 /** Credentials setting for http requests */
 type Credentials = "include" | "same-origin" | "omit";
 /** Props for function getRestCallAuthParams */
@@ -284,8 +297,8 @@ type GetRestCallAuthParamsProps<A extends AuthType = AuthType> = {
 };
 /** Http request parameters for auth to use when making a rest call based on a host config */
 type RestCallAuthParams = {
-  headers: Record<string, string>;
-  queryParams: Record<string, string>;
+  /** Headers added to the outgoing REST request. Headers are only applied in NodeJS environments and NOT in browsers */headers: Record<string, string>; /** The query parameters to add to the REST request URL */
+  queryParams: Record<string, string>; /** Credentials setting for http requests */
   credentials: Credentials;
 };
 /** Props for function getWebsocketAuthParams */
@@ -294,8 +307,9 @@ type GetWebSocketAuthParamsProps<A extends AuthType = AuthType> = {
 };
 /** Websocket auth parameters to use when setting up a websocket based on a host config */
 type WebSocketAuthParams = {
-  /** Note that headers are only applied in NodeJS environments and NOT in the browser */headers?: Record<string, string>;
-  queryParams?: Record<string, string>;
+  /** The query parameters to add to the websocket URL */queryParams?: Record<string, string>; /** Headers added to the websocket connection. Headers is only applied in NodeJS environments and NOT in browsers */
+  headers?: Record<string, string>; /** Auth options for the websocket connection. These options are only applicable for nodeJS applications connecting to Qlik Sense Enterprise on Windows */
+  pfxOptions?: PfxAuthOptions;
 };
 /** Props for function getWebResourceAuthParams */
 type GetWebResourceAuthParamsProps<A extends AuthType = AuthType> = {
@@ -378,8 +392,9 @@ interface ImplicitQlikAuthModules {
   windowscookie: object;
   reference: object;
   anonymous: object;
+  pfx: object;
 }
 type AuthTypeThatCanBeOmitted = keyof ImplicitQlikAuthModules;
 declare const authTypesThatCanBeOmitted: AuthTypeThatCanBeOmitted[];
 //#endregion
-export { DownloadableBlob as C, ProgressOptions as D, PartialProgressEvent as E, _default as O, CacheOptions as S, InvokeFetchResponse as T, hostConfigCommonProperties as _, Credentials as a, ApiCallOptions as b, GetWebResourceAuthParamsProps as c, HostConfig as d, HostConfigCommon as f, authTypesThatCanBeOmitted as g, WebSocketAuthParams as h, AuthenticationErrorAction as i, GetWebSocketAuthParamsProps as l, WebResourceAuthParams as m, AuthType as n, GetRemoteAuthDataProps as o, RestCallAuthParams as p, AuthTypeThatCanBeOmitted as r, GetRestCallAuthParamsProps as s, AuthModule as t, HandleAuthenticationErrorProps as u, PerformInteractiveLoginFn as v, InvokeFetchProperties as w, CacheEntry as x, SecretStorage as y };
+export { CacheOptions as C, PartialProgressEvent as D, InvokeFetchResponse as E, ProgressOptions as O, CacheEntry as S, InvokeFetchProperties as T, authTypesThatCanBeOmitted as _, Credentials as a, SecretStorage as b, GetWebResourceAuthParamsProps as c, HostConfig as d, HostConfigCommon as f, WebSocketAuthParams as g, WebResourceAuthParams as h, AuthenticationErrorAction as i, _default as k, GetWebSocketAuthParamsProps as l, RestCallAuthParams as m, AuthType as n, GetRemoteAuthDataProps as o, PfxAuthOptions as p, AuthTypeThatCanBeOmitted as r, GetRestCallAuthParamsProps as s, AuthModule as t, HandleAuthenticationErrorProps as u, hostConfigCommonProperties as v, DownloadableBlob as w, ApiCallOptions as x, PerformInteractiveLoginFn as y };
