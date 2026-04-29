@@ -106,7 +106,8 @@ type DataTaskInstanceState = {
     totalProcessedCount?: number;
   }; /** Duration in HH:MM:SS format (hours:minutes:seconds) */
   duration?: string; /** Timestamp indicating when the task instance ended */
-  endTime?: string;
+  endTime?: string; /** List of errors encountered during the last run */
+  errors?: Error[];
   fullLoad?: {
     /** Number of datasets that have completed full load in this task run */completedCount?: number; /** Number of datasets that have failed full load in this task run */
     errorCount?: number; /** Number of datasets that are currently being loaded in this task run */
@@ -139,7 +140,8 @@ type DataTaskInstanceState = {
     queuedCount?: number; /** Number of streaming datasets that are currently running */
     runningCount?: number; /** Total number of records processed */
     totalProcessedCount?: number;
-  };
+  }; /** Trace identifier for the last run, useful for diagnostics and support */
+  traceId?: string;
 };
 type DataTaskItemRsp = {
   description?: string;

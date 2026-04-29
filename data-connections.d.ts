@@ -219,7 +219,7 @@ declare function getDataConnections(query: {
   ownedByMe?: boolean; /** Filtering on datafile connections by owner (i.e. app) ID. */
   owner?: string; /** Pagination cursor string, which is generated automatically in previous pagination query. */
   page?: string; /** Filtering on personal connections, ignored if spaceId is defined in same request */
-  personal?: boolean; /** Name of field sort on for pagination, with prefix with + or - indicating ascending or descending order. When used for data-connections, sort field only applies to non-datafiles connections. Whatever sorting order is, datafiles connections will be returned after all regular connections being returned. */
+  personal?: boolean; /** Field to sort results by. Prefix the field name with `+` for ascending order or `-` for descending order. This parameter is only applicable to paginated requests (e.g. `?limit=30&sort=+qName`) For data connections, sorting only applies to non-datafile connections. Datafile connections are always returned after standard connections, regardless of sort order. */
   sort?: string; /** Filtering on connections by space ID */
   spaceId?: string; /** Filtering on userId. Requires admin role if specified userId doesn't match that is defined in JWT. */
   userId?: string;

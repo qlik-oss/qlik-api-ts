@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-RxGqWk3q.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B7l8UGyY.js";
 import auth_default from "./auth.js";
-import { a as interceptors$1 } from "./chunks/interceptors-CFr5PGJ1.js";
+import { a as interceptors$1 } from "./chunks/interceptors-CJ5KSs4l.js";
 import qix$1 from "./qix.js";
 
 //#region src/runtime-api-generator/runtime-api-generator-common.ts
@@ -472,7 +472,71 @@ const createConditionsRuntimeAPI = apiDefToApiPublic("conditions", { api: { v1: 
 		}
 	}
 } } } });
+const createConnectivityDataConnectionsRuntimeAPI = apiDefToApiPublic("connectivity/data-connections", { api: { connectivity: { "data-connections": {
+	"": ["getDataConnections:GQ:", "createDataConnection:PBJ:"],
+	actions: {
+		delete: ["deleteDataConnections:PBJ:"],
+		duplicate: ["duplicateDataConnections:PBJ:"],
+		update: ["updateDataConnections:PBJ:"]
+	},
+	"{qID}": [
+		"deleteDataConnection:DQ:",
+		"getDataConnection:GQ:",
+		"patchDataConnection:AQBJ:",
+		"updateDataConnection:UQBJ:"
+	]
+} } } });
+const createConnectivityDataCredentialsRuntimeAPI = apiDefToApiPublic("connectivity/data-credentials", { api: { connectivity: { "data-credentials": {
+	actions: { "filter-orphan": ["filterOrphanDataCredentials:PBJ:"] },
+	"{qID}": [
+		"deleteDataCredential:DQ:",
+		"getDataCredential:GQ:",
+		"patchDataCredential:AQBJ:",
+		"updateDataCredential:UQBJ:"
+	]
+} } } });
+const createConnectivityDataSourcesRuntimeAPI = apiDefToApiPublic("connectivity/data-sources", { api: { connectivity: { "data-sources": {
+	"": ["getDataSources:GQ:"],
+	actions: { "generate-qri": ["generateQriDataSources:PBJ:"] },
+	endpoints: {
+		"": ["getDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME:G:"],
+		actions: { filter: ["filterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME:PBJ:"] }
+	},
+	"{dataSourceId}": {
+		"api-specs": ["getDataSourceApiSpecs:G:"],
+		gateways: ["getDataSourceGateways:GQ:"],
+		settings: ["getDataSourceSettings:G:", "putDataSourceSettings_FIX_THIS_QUIRKY_NAME:UBJ:"]
+	}
+} } } });
+const createConnectivityRuntimeAPI = apiDefToApiPublic("connectivity", {}, {
+	"data-connections": createConnectivityDataConnectionsRuntimeAPI,
+	dataConnections: createConnectivityDataConnectionsRuntimeAPI,
+	"data-credentials": createConnectivityDataCredentialsRuntimeAPI,
+	dataCredentials: createConnectivityDataCredentialsRuntimeAPI,
+	"data-sources": createConnectivityDataSourcesRuntimeAPI,
+	dataSources: createConnectivityDataSourcesRuntimeAPI
+});
 const createConsumptionRuntimeAPI = apiDefToApiPublic("consumption", { api: { v1: { consumption: { executions: ["getConsumptionExecutions:GQ:"] } } } });
+const createCoreAuthSettingsRuntimeAPI = apiDefToApiPublic("core/auth-settings", { api: { core: { "auth-settings": ["getAuthSettings:G:", "patchAuthSettings:ABJ:"] } } });
+const createCoreDataFilesRuntimeAPI = apiDefToApiPublic("core/data-files", { api: { core: { "data-files": {
+	actions: {
+		"change-space": ["changeSpaceDataFiles:PBJ:"],
+		post: ["postDataFiles:PBJ:"]
+	},
+	connections: {
+		"": ["getDataFilesConnections:GQ:"],
+		actions: { filter: ["filterDataFilesConnections:PBJ:"] }
+	},
+	deletes: ["getDataFilesDeletes:GQ:"],
+	"{id}": {
+		"": ["deleteDataFile:D:", "getDataFile:G:"],
+		actions: {
+			"change-owner": ["changeOwnerDataFile:PBJ:"],
+			"change-space": ["changeSpaceDataFile:PBJ:"]
+		},
+		"folder-stats": ["getDataFileFolderStats:G:"]
+	}
+} } } });
 const createCoreIpPoliciesRuntimeAPI = apiDefToApiPublic("core/ip-policies", { api: { core: { "ip-policies": {
 	"": ["getIpPolicies:GQ:", "createIpPolicy:PBJ:"],
 	"{id}": [
@@ -482,6 +546,10 @@ const createCoreIpPoliciesRuntimeAPI = apiDefToApiPublic("core/ip-policies", { a
 	]
 } } } });
 const createCoreRuntimeAPI = apiDefToApiPublic("core", {}, {
+	"auth-settings": createCoreAuthSettingsRuntimeAPI,
+	authSettings: createCoreAuthSettingsRuntimeAPI,
+	"data-files": createCoreDataFilesRuntimeAPI,
+	dataFiles: createCoreDataFilesRuntimeAPI,
 	"ip-policies": createCoreIpPoliciesRuntimeAPI,
 	ipPolicies: createCoreIpPoliciesRuntimeAPI
 });
@@ -1101,7 +1169,10 @@ const createTenantSettingsRuntimeAPI = apiDefToApiPublic("tenant-settings", { ap
 		"updateTenantSettings:ABJ:",
 		"createTenantSettings:PBJ:"
 	],
-	actions: { "toggle-cross-region-data-processing": ["toggleCrossRegionDataProcessingTenantSettings:PBJ:"] },
+	actions: {
+		"toggle-cross-region-data-processing": ["toggleCrossRegionDataProcessingTenantSettings:PBJ:"],
+		"toggle-cross-region-inference": ["toggleCrossRegionInferenceTenantSettings:PBJ:"]
+	},
 	"start-pages": ["getStartPages:G:"]
 } } } });
 const createTenantsRuntimeAPI = apiDefToApiPublic("tenants", { api: { v1: { tenants: {
@@ -1220,44 +1291,43 @@ const createWorkflowsAutomationConnectionsRuntimeAPI = apiDefToApiPublic("workfl
 	}
 } } } });
 const createWorkflowsAutomationConnectorsRuntimeAPI = apiDefToApiPublic("workflows/automation-connectors", { api: { workflows: { "automation-connectors": ["getAutomationConnectors:GQ:"] } } });
-const createWorkflowsAutomationsRuntimeAPI = apiDefToApiPublic("workflows/automations", { api: { workflows: { automations: {
-	"": ["getAutomations:GQ:", "createAutomation:PBJ:"],
-	settings: ["getAutomationsSettings:G:", "updateAutomationsSettings:UBJ:"],
-	usage: ["getAutomationsUsageMetrics:GQ:"],
-	"{id}": {
-		"": [
-			"deleteAutomation:D:",
-			"getAutomation:G:",
-			"updateAutomation:UBJ:"
-		],
-		actions: {
-			"change-owner": ["changeOwnerAutomation:PBJ:"],
-			"change-space": ["changeSpaceAutomation:PBJ:"],
-			copy: ["copyAutomation:PBJ:"],
-			disable: ["disableAutomation:P:"],
-			enable: ["enableAutomation:P:"],
-			move: ["moveAutomation:PBJ:"]
-		},
-		runs: {
-			"": ["getAutomationRuns:GQ:", "createAutomationRun:PBJ:"],
-			"{runId}": {
-				"": ["getAutomationRun:G:"],
-				actions: {
-					export: ["exportAutomationRun:P:"],
-					retry: ["retryAutomationRun:P:"],
-					stop: ["stopAutomationRun:P:"]
-				},
-				debug: ["getAutomationRunDebug:G:"]
-			}
-		}
-	}
-} } } });
 const createWorkflowsRuntimeAPI = apiDefToApiPublic("workflows", {}, {
 	"automation-connections": createWorkflowsAutomationConnectionsRuntimeAPI,
 	automationConnections: createWorkflowsAutomationConnectionsRuntimeAPI,
 	"automation-connectors": createWorkflowsAutomationConnectorsRuntimeAPI,
 	automationConnectors: createWorkflowsAutomationConnectorsRuntimeAPI,
-	automations: createWorkflowsAutomationsRuntimeAPI
+	automations: apiDefToApiPublic("workflows/automations", { api: { workflows: { automations: {
+		"": ["getAutomations:GQ:", "createAutomation:PBJ:"],
+		settings: ["getAutomationsSettings:G:", "updateAutomationsSettings:UBJ:"],
+		usage: ["getAutomationsUsageMetrics:GQ:"],
+		"{id}": {
+			"": [
+				"deleteAutomation:D:",
+				"getAutomation:G:",
+				"updateAutomation:UBJ:"
+			],
+			actions: {
+				"change-owner": ["changeOwnerAutomation:PBJ:"],
+				"change-space": ["changeSpaceAutomation:PBJ:"],
+				copy: ["copyAutomation:PBJ:"],
+				disable: ["disableAutomation:P:"],
+				enable: ["enableAutomation:P:"],
+				move: ["moveAutomation:PBJ:"]
+			},
+			runs: {
+				"": ["getAutomationRuns:GQ:", "createAutomationRun:PBJ:"],
+				"{runId}": {
+					"": ["getAutomationRun:G:"],
+					actions: {
+						export: ["exportAutomationRun:P:"],
+						retry: ["retryAutomationRun:P:"],
+						stop: ["stopAutomationRun:P:"]
+					},
+					debug: ["getAutomationRunDebug:G:"]
+				}
+			}
+		}
+	} } } })
 });
 const auth = auth_default;
 const interceptors = interceptors_default;
@@ -1276,6 +1346,7 @@ const banners = createBannersRuntimeAPI(void 0, interceptors_default);
 const brands = createBrandsRuntimeAPI(void 0, interceptors_default);
 const collections = createCollectionsRuntimeAPI(void 0, interceptors_default);
 const conditions = createConditionsRuntimeAPI(void 0, interceptors_default);
+const connectivity = createConnectivityRuntimeAPI(void 0, interceptors_default);
 const consumption = createConsumptionRuntimeAPI(void 0, interceptors_default);
 const core = createCoreRuntimeAPI(void 0, interceptors_default);
 const cspOrigins = createCspOriginsRuntimeAPI(void 0, interceptors_default);
@@ -1348,6 +1419,7 @@ const createQlikApi = (props) => {
 		brands: createBrandsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		collections: createCollectionsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		conditions: createConditionsRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		connectivity: createConnectivityRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		consumption: createConsumptionRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		core: createCoreRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		cspOrigins: createCspOriginsRuntimeAPI(props?.hostConfig, scopedInterceptors),
@@ -1421,6 +1493,7 @@ const api = {
 	brands,
 	collections,
 	conditions,
+	connectivity,
 	consumption,
 	core,
 	cspOrigins,
@@ -1477,4 +1550,4 @@ const api = {
 };
 
 //#endregion
-export { analytics, apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataGovernance, dataQualities, dataSets, dataSources, dataStores, dcaas, api as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenantSettings, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks, workflows };
+export { analytics, apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, connectivity, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataGovernance, dataQualities, dataSets, dataSources, dataStores, dcaas, api as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenantSettings, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks, workflows };

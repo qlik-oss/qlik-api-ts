@@ -223,6 +223,24 @@ type ToggleCrossRegionDataProcessingTenantSettingsHttpError = {
   status: number;
 };
 /**
+ * Sets the cross-region inference setting for the tenant. Creates tenant settings if none exist, or updates existing settings. This is access controlled by the permission `admin.tenant-settings:update`.
+ * When cross-region inference is required, you must include an additional header `x-qlik-consent-verified: true` in your API requests to confirm that you have the authority to enable this feature and accept the associated terms.
+ *
+ * @param body an object with the body content
+ * @throws ToggleCrossRegionInferenceTenantSettingsHttpError
+ */
+declare function toggleCrossRegionInferenceTenantSettings(body: SetCrossRegionDataProcessing, options?: ApiCallOptions): Promise<ToggleCrossRegionInferenceTenantSettingsHttpResponse>;
+type ToggleCrossRegionInferenceTenantSettingsHttpResponse = {
+  data: TenantSettingsDefinition;
+  headers: Headers;
+  status: 200;
+};
+type ToggleCrossRegionInferenceTenantSettingsHttpError = {
+  data: Error;
+  headers: Headers;
+  status: number;
+};
+/**
  * Retrieves start pages for the tenant settings.
  *
  * @throws GetStartPagesHttpError
@@ -278,6 +296,14 @@ type TenantSettingsAPI = {
    */
   toggleCrossRegionDataProcessingTenantSettings: typeof toggleCrossRegionDataProcessingTenantSettings;
   /**
+   * Sets the cross-region inference setting for the tenant. Creates tenant settings if none exist, or updates existing settings. This is access controlled by the permission `admin.tenant-settings:update`.
+   * When cross-region inference is required, you must include an additional header `x-qlik-consent-verified: true` in your API requests to confirm that you have the authority to enable this feature and accept the associated terms.
+   *
+   * @param body an object with the body content
+   * @throws ToggleCrossRegionInferenceTenantSettingsHttpError
+   */
+  toggleCrossRegionInferenceTenantSettings: typeof toggleCrossRegionInferenceTenantSettings;
+  /**
    * Retrieves start pages for the tenant settings.
    *
    * @throws GetStartPagesHttpError
@@ -293,4 +319,4 @@ type TenantSettingsAPI = {
  */
 declare const tenantSettingsExport: TenantSettingsAPI;
 //#endregion
-export { CreateTenantSettings400HttpError, CreateTenantSettings401HttpError, CreateTenantSettings403HttpError, CreateTenantSettings500HttpError, CreateTenantSettingsHttpError, CreateTenantSettingsHttpResponse, CreateTenantSettingsdefaultHttpError, CustomizeNoAccess, DeleteTenantSettingsHttpError, DeleteTenantSettingsHttpResponse, Error, ErrorResponse400, ErrorResponse401, ErrorResponse403, ErrorResponse500, GetStartPagesHttpError, GetStartPagesHttpResponse, GetTenantSettingsHttpError, GetTenantSettingsHttpResponse, JSONPatchRequestAddReplaceTest, JSONPatchRequestMoveCopy, JSONPatchRequestRemove, PatchRequest, ReleaseCadenceConfig, SetCrossRegionDataProcessing, SetCrossRegionDataProcessingConfig, StartPage, StartPageConfigConsole, StartPageConfigCreationHub, StartPageConfigHub, StartPageConfigQdi, TenantSettingsAPI, TenantSettingsCreateDefinition, TenantSettingsDefinition, TenantStartPagesResponse, ToggleCrossRegionDataProcessingTenantSettingsHttpError, ToggleCrossRegionDataProcessingTenantSettingsHttpResponse, UpdateTenantSettingsHttpError, UpdateTenantSettingsHttpResponse, clearCache, createTenantSettings, tenantSettingsExport as default, deleteTenantSettings, getStartPages, getTenantSettings, toggleCrossRegionDataProcessingTenantSettings, updateTenantSettings };
+export { CreateTenantSettings400HttpError, CreateTenantSettings401HttpError, CreateTenantSettings403HttpError, CreateTenantSettings500HttpError, CreateTenantSettingsHttpError, CreateTenantSettingsHttpResponse, CreateTenantSettingsdefaultHttpError, CustomizeNoAccess, DeleteTenantSettingsHttpError, DeleteTenantSettingsHttpResponse, Error, ErrorResponse400, ErrorResponse401, ErrorResponse403, ErrorResponse500, GetStartPagesHttpError, GetStartPagesHttpResponse, GetTenantSettingsHttpError, GetTenantSettingsHttpResponse, JSONPatchRequestAddReplaceTest, JSONPatchRequestMoveCopy, JSONPatchRequestRemove, PatchRequest, ReleaseCadenceConfig, SetCrossRegionDataProcessing, SetCrossRegionDataProcessingConfig, StartPage, StartPageConfigConsole, StartPageConfigCreationHub, StartPageConfigHub, StartPageConfigQdi, TenantSettingsAPI, TenantSettingsCreateDefinition, TenantSettingsDefinition, TenantStartPagesResponse, ToggleCrossRegionDataProcessingTenantSettingsHttpError, ToggleCrossRegionDataProcessingTenantSettingsHttpResponse, ToggleCrossRegionInferenceTenantSettingsHttpError, ToggleCrossRegionInferenceTenantSettingsHttpResponse, UpdateTenantSettingsHttpError, UpdateTenantSettingsHttpResponse, clearCache, createTenantSettings, tenantSettingsExport as default, deleteTenantSettings, getStartPages, getTenantSettings, toggleCrossRegionDataProcessingTenantSettings, toggleCrossRegionInferenceTenantSettings, updateTenantSettings };

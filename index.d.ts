@@ -1,7 +1,7 @@
 import { d as HostConfig } from "./chunks/auth-types-DjJJgiRF.js";
 import { InterceptorsAPI, createInterceptors } from "./interceptors.js";
 import { AuthAPI, getAccessToken, getWebResourceAuthParams, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig } from "./auth.js";
-import { t as QixAPI } from "./chunks/qix-BoElWn36.js";
+import { t as QixAPI } from "./chunks/qix-D2Ljw7xT.js";
 import { ChangeStoresAPI } from "./analytics/change-stores.js";
 import { AnalyticsAPI } from "./analytics.js";
 import { ApiKeysAPI } from "./api-keys.js";
@@ -17,21 +17,27 @@ import { BannersAPI } from "./banners.js";
 import { BrandsAPI } from "./brands.js";
 import { CollectionsAPI } from "./collections.js";
 import { ConditionsAPI } from "./conditions.js";
+import { DataConnectionsAPI } from "./connectivity/data-connections.js";
+import { DataCredentialsAPI } from "./connectivity/data-credentials.js";
+import { DataSourcesAPI } from "./connectivity/data-sources.js";
+import { ConnectivityAPI } from "./connectivity.js";
 import { ConsumptionAPI } from "./consumption.js";
+import { AuthSettingsAPI } from "./core/auth-settings.js";
+import { DataFilesAPI } from "./core/data-files.js";
 import { IpPoliciesAPI } from "./core/ip-policies.js";
 import { CoreAPI } from "./core.js";
 import { CspOriginsAPI } from "./csp-origins.js";
 import { CsrfTokenAPI } from "./csrf-token.js";
 import { DataAlertsAPI } from "./data-alerts.js";
 import { DataAssetsAPI } from "./data-assets.js";
-import { DataConnectionsAPI } from "./data-connections.js";
-import { DataCredentialsAPI } from "./data-credentials.js";
-import { DataFilesAPI } from "./data-files.js";
+import { DataConnectionsAPI as DataConnectionsAPI$1 } from "./data-connections.js";
+import { DataCredentialsAPI as DataCredentialsAPI$1 } from "./data-credentials.js";
+import { DataFilesAPI as DataFilesAPI$1 } from "./data-files.js";
 import { DataProductsAPI } from "./data-governance/data-products.js";
 import { DataGovernanceAPI } from "./data-governance.js";
 import { DataQualitiesAPI } from "./data-qualities.js";
 import { DataSetsAPI } from "./data-sets.js";
-import { DataSourcesAPI } from "./data-sources.js";
+import { DataSourcesAPI as DataSourcesAPI$1 } from "./data-sources.js";
 import { DataStoresAPI } from "./data-stores.js";
 import { DcaasAPI } from "./dcaas.js";
 import { DiProjectsAPI } from "./di-projects.js";
@@ -106,23 +112,30 @@ declare const banners: BannersAPI;
 declare const brands: BrandsAPI;
 declare const collections: CollectionsAPI;
 declare const conditions: ConditionsAPI;
+declare const connectivity: {
+  dataConnections: DataConnectionsAPI;
+  dataCredentials: DataCredentialsAPI;
+  dataSources: DataSourcesAPI;
+};
 declare const consumption: ConsumptionAPI;
 declare const core: {
+  authSettings: AuthSettingsAPI;
+  dataFiles: DataFilesAPI;
   ipPolicies: IpPoliciesAPI;
 };
 declare const cspOrigins: CspOriginsAPI;
 declare const csrfToken: CsrfTokenAPI;
 declare const dataAlerts: DataAlertsAPI;
 declare const dataAssets: DataAssetsAPI;
-declare const dataConnections: DataConnectionsAPI;
-declare const dataCredentials: DataCredentialsAPI;
-declare const dataFiles: DataFilesAPI;
+declare const dataConnections: DataConnectionsAPI$1;
+declare const dataCredentials: DataCredentialsAPI$1;
+declare const dataFiles: DataFilesAPI$1;
 declare const dataGovernance: {
   dataProducts: DataProductsAPI;
 };
 declare const dataQualities: DataQualitiesAPI;
 declare const dataSets: DataSetsAPI;
-declare const dataSources: DataSourcesAPI;
+declare const dataSources: DataSourcesAPI$1;
 declare const dataStores: DataStoresAPI;
 declare const dcaas: DcaasAPI;
 declare const diProjects: DiProjectsAPI;
@@ -203,10 +216,18 @@ interface QlikAPI {
   collections: CollectionsAPI;
   /** Functions for the conditions api */
   conditions: ConditionsAPI;
+  /** Functions for the connectivity api */
+  connectivity: ConnectivityAPI & {
+    dataConnections: DataConnectionsAPI;
+    dataCredentials: DataCredentialsAPI;
+    dataSources: DataSourcesAPI;
+  };
   /** Functions for the consumption api */
   consumption: ConsumptionAPI;
   /** Functions for the core api */
   core: CoreAPI & {
+    authSettings: AuthSettingsAPI;
+    dataFiles: DataFilesAPI;
     ipPolicies: IpPoliciesAPI;
   };
   /** Functions for the cspOrigins api */
@@ -218,11 +239,11 @@ interface QlikAPI {
   /** Functions for the dataAssets api */
   dataAssets: DataAssetsAPI;
   /** Functions for the dataConnections api */
-  dataConnections: DataConnectionsAPI;
+  dataConnections: DataConnectionsAPI$1;
   /** Functions for the dataCredentials api */
-  dataCredentials: DataCredentialsAPI;
+  dataCredentials: DataCredentialsAPI$1;
   /** Functions for the dataFiles api */
-  dataFiles: DataFilesAPI;
+  dataFiles: DataFilesAPI$1;
   /** Functions for the dataGovernance api */
   dataGovernance: DataGovernanceAPI & {
     dataProducts: DataProductsAPI;
@@ -232,7 +253,7 @@ interface QlikAPI {
   /** Functions for the dataSets api */
   dataSets: DataSetsAPI;
   /** Functions for the dataSources api */
-  dataSources: DataSourcesAPI;
+  dataSources: DataSourcesAPI$1;
   /** Functions for the dataStores api */
   dataStores: DataStoresAPI;
   /** Functions for the dcaas api */
@@ -327,4 +348,4 @@ declare const api: QlikAPI & {
   }) => QlikAPI;
 };
 //#endregion
-export { CreateQlikApiProps, QlikAPI, analytics, apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataGovernance, dataQualities, dataSets, dataSources, dataStores, dcaas, api as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenantSettings, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks, workflows };
+export { CreateQlikApiProps, QlikAPI, analytics, apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, connectivity, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataGovernance, dataQualities, dataSets, dataSources, dataStores, dcaas, api as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenantSettings, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks, workflows };
