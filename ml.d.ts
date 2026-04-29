@@ -282,6 +282,13 @@ type BinaryImbalanceSampling = {
   sampleRatio?: number;
 };
 /**
+ * A frequency bin in a field's frequency distribution.
+ */
+type BinnedFrequency = {
+  binEdge?: number;
+  frequency?: number;
+};
+/**
  * Indicates if you want to change the featureType for this
  * feature within the experiment version
  */
@@ -313,6 +320,14 @@ type CreatedBy = string;
  * "672e55cfcadfb8a18281523e"
  */
 type DataSetId = string;
+/**
+ * Full dataset profile from the Profile Service.
+ */
+type DataSetProfile = {
+  /** Metadata about a dataset profile computation. */meta: ProfileMetadata;
+  profiles?: TableProfile[];
+  samples?: TableSample[];
+};
 /**
  * The data type of this feature in your dataset
  * @example
@@ -733,6 +748,44 @@ type FeatureType = "categorical" | "numeric" | "date" | "freetext";
  */
 type FeaturesList = Feature[];
 /**
+ * Profile metadata for a single field/column.
+ */
+type FieldProfile = {
+  average?: number;
+  averageStringLength?: number; /** Classification metadata for a field. */
+  classification?: ProfileClassification;
+  dataType?: string;
+  distinctValueCount?: number;
+  emptyStringCount?: number;
+  firstSortedStringValue?: string;
+  fractiles?: number[];
+  frequencyDistribution?: BinnedFrequency[];
+  index?: number;
+  kurtosis?: number;
+  lastSortedStringValue?: string;
+  maxNumericValue?: number;
+  maxStringLength?: number;
+  median?: number;
+  minNumericValue?: number;
+  minStringLength?: number;
+  mostFrequentValues?: ProfileFrequency[];
+  name?: string;
+  negativeValueCount?: number;
+  nullValueCount?: number;
+  numericValueCount?: number;
+  positiveValueCount?: number;
+  sampleValues?: string[];
+  skewness?: number;
+  standardDeviation?: number;
+  sumNumericValues?: number;
+  sumSquaredNumericValues?: number;
+  sumStringLength?: number;
+  tags?: string[];
+  technicalName?: string;
+  textValueCount?: number;
+  zeroValueCount?: number;
+};
+/**
  * Dataset file type
  * @example
  * "qvd, parquet, csv"
@@ -744,6 +797,16 @@ type FileType = string;
 type FindResponseMeta = {
   count: number;
 };
+/**
+ * Fields to include in the response.
+ *
+ * Currently only supported value is `dataSetProfile`.
+ *
+ * When `dataSetProfile` is specified, the response includes the full dataset profile.
+ * @example
+ * "dataSetProfile"
+ */
+type IncludeProfileInsightsField = "dataSetProfile";
 /**
  * A optional column name upon which to create an index. Must be unique for
  * every row. If not included, Qlik will create a unique index column.
@@ -1038,10 +1101,36 @@ type PreprocessedInsightColumn = {
   willBeDropped: boolean;
 };
 /**
+ * Classification metadata for a field.
+ */
+type ProfileClassification = {
+  obfuscation?: string;
+  pii?: boolean;
+  sensitive?: boolean;
+  tags?: ProfileClassificationTag[];
+};
+/**
+ * A classification tag with a confidence score.
+ */
+type ProfileClassificationTag = {
+  score?: number;
+  tag?: string;
+};
+/**
+ * A value and its frequency count.
+ */
+type ProfileFrequency = {
+  frequency?: number;
+  value?: string;
+};
+/**
  * Insights (metadata) about an experiment dataset
  */
 type ProfileInsights = {
-  /** List of algorithms available for the selected experiment type */algorithms?: ModelAlgorithm[];
+  /** List of algorithms available for the selected experiment type */algorithms?: ModelAlgorithm[]; /** Full dataset profile from the Profile Service. */
+  dataSetProfile?: DataSetProfile;
+  /** Default configuration for creating an experiment version from this
+   * dataset. Not returned when `experimentVersionId` is provided. */
   defaultVersionConfig?: {
     /** The Qlik catalog dataset ID */dataSetId: DataSetId; /** Whether this is a new or other dataset */
     datasetOrigin: DatasetOrigin; /** The model training mode for the experiment version */
@@ -1088,12 +1177,32 @@ type ProfileInsightsInput = {
   /** Data wrapper for request input */data?: {
     /** The request body for this resource */attributes?: {
       /** The Qlik catalog dataset ID */dataSetId?: DataSetId; /** Experiment type */
-      experimentType?: ExperimentType; /** Whether the server should or client should manage polling/waiting */
+      experimentType?: ExperimentType;
+      /** Fields to include in the response.
+       *
+       * Currently only supported value is `dataSetProfile`.
+       *
+       * When `dataSetProfile` is specified, the response includes the full dataset profile. */
+      include?: IncludeProfileInsightsField; /** Whether the server should or client should manage polling/waiting */
       shouldWait?: boolean; /** Optional selected target provided on subsequent requests */
       target?: string;
     };
     type?: "profile-insights";
   };
+};
+/**
+ * Metadata about a dataset profile computation.
+ */
+type ProfileMetadata = {
+  computationEndTime?: string;
+  computationStartTime?: string;
+  connectionId?: string; /** The Qlik catalog dataset ID */
+  dataSetId: DataSetId;
+  lastLoadTime?: string;
+  maxSizeBytes?: number;
+  messages?: string[];
+  resultType?: "NORMAL" | "BASIC" | "BASIC_TOO_LARGE";
+  status: "FINISHED" | "PARTIAL" | "QUEUED" | "RUNNING" | "STALE" | "CANCELLED" | "FAILED" | "INCOMPLETE" | "DEFERRED";
 };
 type RealTimePredictionInputSchema = {
   /** The name of a feature in the dataset */name?: string;
@@ -1148,6 +1257,29 @@ type ResponseLinks = {
  * Space ID for this entity (empty string for personal space)
  */
 type SpaceId = string;
+/**
+ * Profile metadata for a single table/dataset.
+ */
+type TableProfile = {
+  fieldProfiles: FieldProfile[];
+  name: string;
+  numberOfRows: number;
+  sizeInBytes?: number;
+};
+/**
+ * A single record of sample values.
+ */
+type TableRecord = {
+  values?: string[];
+};
+/**
+ * Sample values from a table/dataset.
+ */
+type TableSample = {
+  fieldNames?: string[];
+  name?: string;
+  records?: TableRecord[];
+};
 /**
  * Tenant ID for this entity
  */
@@ -2473,4 +2605,4 @@ type MlAPI = {
  */
 declare const mlExport: MlAPI;
 //#endregion
-export { APIError, ActivateModelsMlDeploymentHttpError, ActivateModelsMlDeploymentHttpResponse, AddMlDeploymentModelsHttpError, AddMlDeploymentModelsHttpResponse, Alias, AliasFindResponse, AliasGetResponse, AliasId, AliasInput, AliasMode, AliasPatch, AliasPatchItem, AliasPostResponse, AnyType, BatchPrediction, BatchPredictionActionResponse, BatchPredictionFindResponse, BatchPredictionGetResponse, BatchPredictionInput, BatchPredictionPatch, BatchPredictionPostResponse, BatchPredictionSchedule, BatchPredictionScheduleGetResponse, BatchPredictionScheduleInput, BatchPredictionScheduleInputAttributes, BatchPredictionSchedulePatch, BatchPredictionSchedulePutResponse, BatchPredictionStatus, BatchPredictionWriteback, BinaryImbalanceSampling, CancelMlJobHttpError, CancelMlJobHttpResponse, ChangeType, ColumnTransform, CorrId, CorrType, CreateMlDeploymentAliaseHttpError, CreateMlDeploymentAliaseHttpResponse, CreateMlDeploymentBatchPredictionHttpError, CreateMlDeploymentBatchPredictionHttpResponse, CreateMlDeploymentHttpError, CreateMlDeploymentHttpResponse, CreateMlExperimentHttpError, CreateMlExperimentHttpResponse, CreateMlExperimentVersionHttpError, CreateMlExperimentVersionHttpResponse, CreateMlProfileInsightHttpError, CreateMlProfileInsightHttpResponse, CreatedAt, CreatedBy, DataSetId, DataType, DatasetOrigin, DateIndexes, DeactivateModelsMlDeploymentHttpError, DeactivateModelsMlDeploymentHttpResponse, DeleteMlDeploymentAliaseHttpError, DeleteMlDeploymentAliaseHttpResponse, DeleteMlDeploymentBatchPredictionHttpError, DeleteMlDeploymentBatchPredictionHttpResponse, DeleteMlDeploymentBatchPredictionScheduleHttpError, DeleteMlDeploymentBatchPredictionScheduleHttpResponse, DeleteMlDeploymentHttpError, DeleteMlDeploymentHttpResponse, DeleteMlExperimentHttpError, DeleteMlExperimentHttpResponse, DeleteMlExperimentVersionHttpError, DeleteMlExperimentVersionHttpResponse, DeletedAt, DeployedModelIds, DeployedModelsInput, Deployment, DeploymentFindResponse, DeploymentGetResponse, DeploymentId, DeploymentInput, DeploymentPatch, DeploymentPostResponse, DroppedFeature, EntityDescription, EntityId, EntityName, EnumSortAliases, EnumSortBatchPredictions, EnumSortDeployments, EnumSortExperimentVersions, EnumSortExperiments, EnumSortModels, ErrorMessage, Errors, Experiment, ExperimentFindResponse, ExperimentGetResponse, ExperimentId, ExperimentInput, ExperimentMode, ExperimentModelRecommendationFilter, ExperimentModelRecommendationPostResponse, ExperimentPatch, ExperimentPatchItem, ExperimentPostResponse, ExperimentType, ExperimentVersion, ExperimentVersionFindResponse, ExperimentVersionGetResponse, ExperimentVersionId, ExperimentVersionInput, ExperimentVersionPatch, ExperimentVersionPostResponse, Failure, Feature, FeatureInsights, FeatureType, FeaturesList, FileType, FindResponseMeta, GetMlDeploymentAliaseHttpError, GetMlDeploymentAliaseHttpResponse, GetMlDeploymentAliasesHttpError, GetMlDeploymentAliasesHttpResponse, GetMlDeploymentBatchPredictionHttpError, GetMlDeploymentBatchPredictionHttpResponse, GetMlDeploymentBatchPredictionScheduleHttpError, GetMlDeploymentBatchPredictionScheduleHttpResponse, GetMlDeploymentBatchPredictionsHttpError, GetMlDeploymentBatchPredictionsHttpResponse, GetMlDeploymentHttpError, GetMlDeploymentHttpResponse, GetMlDeploymentsHttpError, GetMlDeploymentsHttpResponse, GetMlExperimentHttpError, GetMlExperimentHttpResponse, GetMlExperimentModelHttpError, GetMlExperimentModelHttpResponse, GetMlExperimentModelsHttpError, GetMlExperimentModelsHttpResponse, GetMlExperimentVersionHttpError, GetMlExperimentVersionHttpResponse, GetMlExperimentVersionsHttpError, GetMlExperimentVersionsHttpResponse, GetMlExperimentsHttpError, GetMlExperimentsHttpResponse, GetMlProfileInsightHttpError, GetMlProfileInsightHttpResponse, GetMlProfileInsightWithQueryHttpError, GetMlProfileInsightWithQueryHttpResponse, IndexColumn, Insights, JobType, MlAPI, Model, ModelAlgorithm, ModelAlgorithmAbbreviation, ModelFindResponse, ModelForRecommendations, ModelGetResponse, ModelId, ModelInfo, ModelMetrics, ModelMetricsBinary, ModelMetricsMulticlass, ModelMetricsRegression, ModelMetricsTimeseries, ModelState, ModelStatus, ModelsInfo, OutputFile, OwnerId, ParentJobId, PatchMlDeploymentAliaseHttpError, PatchMlDeploymentAliaseHttpResponse, PatchMlDeploymentBatchPredictionHttpError, PatchMlDeploymentBatchPredictionHttpResponse, PatchMlDeploymentHttpError, PatchMlDeploymentHttpResponse, PatchMlExperimentHttpError, PatchMlExperimentHttpResponse, PatchMlExperimentVersionHttpError, PatchMlExperimentVersionHttpResponse, Pipeline, PredictMlDeploymentBatchPredictionHttpError, PredictMlDeploymentBatchPredictionHttpResponse, PredictionJobResponse, PreprocessedInsightColumn, ProfileInsights, ProfileInsightsGetResponse, ProfileInsightsInput, RealTimePredictionInputSchema, RealTimePredictionSchema, RealtimePrediction, RealtimePredictionInput, RecommendModelsMlExperimentHttpError, RecommendModelsMlExperimentHttpResponse, RemoveMlDeploymentModelsHttpError, RemoveMlDeploymentModelsHttpResponse, ResponseLinks, RunMlDeploymentAliaseRealtimePredictionsHttpError, RunMlDeploymentAliaseRealtimePredictionsHttpResponse, RunMlDeploymentRealtimePredictionsHttpError, RunMlDeploymentRealtimePredictionsHttpResponse, SetMlDeploymentBatchPredictionScheduleHttpError, SetMlDeploymentBatchPredictionScheduleHttpResponse, SpaceId, TenantId, TrainingDuration, Transform, UpdateMlDeploymentBatchPredictionScheduleHttpError, UpdateMlDeploymentBatchPredictionScheduleHttpResponse, UpdatedAt, activateModelsMlDeployment, addMlDeploymentModels, cancelMlJob, clearCache, createMlDeployment, createMlDeploymentAliase, createMlDeploymentBatchPrediction, createMlExperiment, createMlExperimentVersion, createMlProfileInsight, deactivateModelsMlDeployment, mlExport as default, deleteMlDeployment, deleteMlDeploymentAliase, deleteMlDeploymentBatchPrediction, deleteMlDeploymentBatchPredictionSchedule, deleteMlExperiment, deleteMlExperimentVersion, getMlDeployment, getMlDeploymentAliase, getMlDeploymentAliases, getMlDeploymentBatchPrediction, getMlDeploymentBatchPredictionSchedule, getMlDeploymentBatchPredictions, getMlDeployments, getMlExperiment, getMlExperimentModel, getMlExperimentModels, getMlExperimentVersion, getMlExperimentVersions, getMlExperiments, getMlProfileInsight, getMlProfileInsightWithQuery, patchMlDeployment, patchMlDeploymentAliase, patchMlDeploymentBatchPrediction, patchMlExperiment, patchMlExperimentVersion, predictMlDeploymentBatchPrediction, recommendModelsMlExperiment, removeMlDeploymentModels, runMlDeploymentAliaseRealtimePredictions, runMlDeploymentRealtimePredictions, setMlDeploymentBatchPredictionSchedule, updateMlDeploymentBatchPredictionSchedule };
+export { APIError, ActivateModelsMlDeploymentHttpError, ActivateModelsMlDeploymentHttpResponse, AddMlDeploymentModelsHttpError, AddMlDeploymentModelsHttpResponse, Alias, AliasFindResponse, AliasGetResponse, AliasId, AliasInput, AliasMode, AliasPatch, AliasPatchItem, AliasPostResponse, AnyType, BatchPrediction, BatchPredictionActionResponse, BatchPredictionFindResponse, BatchPredictionGetResponse, BatchPredictionInput, BatchPredictionPatch, BatchPredictionPostResponse, BatchPredictionSchedule, BatchPredictionScheduleGetResponse, BatchPredictionScheduleInput, BatchPredictionScheduleInputAttributes, BatchPredictionSchedulePatch, BatchPredictionSchedulePutResponse, BatchPredictionStatus, BatchPredictionWriteback, BinaryImbalanceSampling, BinnedFrequency, CancelMlJobHttpError, CancelMlJobHttpResponse, ChangeType, ColumnTransform, CorrId, CorrType, CreateMlDeploymentAliaseHttpError, CreateMlDeploymentAliaseHttpResponse, CreateMlDeploymentBatchPredictionHttpError, CreateMlDeploymentBatchPredictionHttpResponse, CreateMlDeploymentHttpError, CreateMlDeploymentHttpResponse, CreateMlExperimentHttpError, CreateMlExperimentHttpResponse, CreateMlExperimentVersionHttpError, CreateMlExperimentVersionHttpResponse, CreateMlProfileInsightHttpError, CreateMlProfileInsightHttpResponse, CreatedAt, CreatedBy, DataSetId, DataSetProfile, DataType, DatasetOrigin, DateIndexes, DeactivateModelsMlDeploymentHttpError, DeactivateModelsMlDeploymentHttpResponse, DeleteMlDeploymentAliaseHttpError, DeleteMlDeploymentAliaseHttpResponse, DeleteMlDeploymentBatchPredictionHttpError, DeleteMlDeploymentBatchPredictionHttpResponse, DeleteMlDeploymentBatchPredictionScheduleHttpError, DeleteMlDeploymentBatchPredictionScheduleHttpResponse, DeleteMlDeploymentHttpError, DeleteMlDeploymentHttpResponse, DeleteMlExperimentHttpError, DeleteMlExperimentHttpResponse, DeleteMlExperimentVersionHttpError, DeleteMlExperimentVersionHttpResponse, DeletedAt, DeployedModelIds, DeployedModelsInput, Deployment, DeploymentFindResponse, DeploymentGetResponse, DeploymentId, DeploymentInput, DeploymentPatch, DeploymentPostResponse, DroppedFeature, EntityDescription, EntityId, EntityName, EnumSortAliases, EnumSortBatchPredictions, EnumSortDeployments, EnumSortExperimentVersions, EnumSortExperiments, EnumSortModels, ErrorMessage, Errors, Experiment, ExperimentFindResponse, ExperimentGetResponse, ExperimentId, ExperimentInput, ExperimentMode, ExperimentModelRecommendationFilter, ExperimentModelRecommendationPostResponse, ExperimentPatch, ExperimentPatchItem, ExperimentPostResponse, ExperimentType, ExperimentVersion, ExperimentVersionFindResponse, ExperimentVersionGetResponse, ExperimentVersionId, ExperimentVersionInput, ExperimentVersionPatch, ExperimentVersionPostResponse, Failure, Feature, FeatureInsights, FeatureType, FeaturesList, FieldProfile, FileType, FindResponseMeta, GetMlDeploymentAliaseHttpError, GetMlDeploymentAliaseHttpResponse, GetMlDeploymentAliasesHttpError, GetMlDeploymentAliasesHttpResponse, GetMlDeploymentBatchPredictionHttpError, GetMlDeploymentBatchPredictionHttpResponse, GetMlDeploymentBatchPredictionScheduleHttpError, GetMlDeploymentBatchPredictionScheduleHttpResponse, GetMlDeploymentBatchPredictionsHttpError, GetMlDeploymentBatchPredictionsHttpResponse, GetMlDeploymentHttpError, GetMlDeploymentHttpResponse, GetMlDeploymentsHttpError, GetMlDeploymentsHttpResponse, GetMlExperimentHttpError, GetMlExperimentHttpResponse, GetMlExperimentModelHttpError, GetMlExperimentModelHttpResponse, GetMlExperimentModelsHttpError, GetMlExperimentModelsHttpResponse, GetMlExperimentVersionHttpError, GetMlExperimentVersionHttpResponse, GetMlExperimentVersionsHttpError, GetMlExperimentVersionsHttpResponse, GetMlExperimentsHttpError, GetMlExperimentsHttpResponse, GetMlProfileInsightHttpError, GetMlProfileInsightHttpResponse, GetMlProfileInsightWithQueryHttpError, GetMlProfileInsightWithQueryHttpResponse, IncludeProfileInsightsField, IndexColumn, Insights, JobType, MlAPI, Model, ModelAlgorithm, ModelAlgorithmAbbreviation, ModelFindResponse, ModelForRecommendations, ModelGetResponse, ModelId, ModelInfo, ModelMetrics, ModelMetricsBinary, ModelMetricsMulticlass, ModelMetricsRegression, ModelMetricsTimeseries, ModelState, ModelStatus, ModelsInfo, OutputFile, OwnerId, ParentJobId, PatchMlDeploymentAliaseHttpError, PatchMlDeploymentAliaseHttpResponse, PatchMlDeploymentBatchPredictionHttpError, PatchMlDeploymentBatchPredictionHttpResponse, PatchMlDeploymentHttpError, PatchMlDeploymentHttpResponse, PatchMlExperimentHttpError, PatchMlExperimentHttpResponse, PatchMlExperimentVersionHttpError, PatchMlExperimentVersionHttpResponse, Pipeline, PredictMlDeploymentBatchPredictionHttpError, PredictMlDeploymentBatchPredictionHttpResponse, PredictionJobResponse, PreprocessedInsightColumn, ProfileClassification, ProfileClassificationTag, ProfileFrequency, ProfileInsights, ProfileInsightsGetResponse, ProfileInsightsInput, ProfileMetadata, RealTimePredictionInputSchema, RealTimePredictionSchema, RealtimePrediction, RealtimePredictionInput, RecommendModelsMlExperimentHttpError, RecommendModelsMlExperimentHttpResponse, RemoveMlDeploymentModelsHttpError, RemoveMlDeploymentModelsHttpResponse, ResponseLinks, RunMlDeploymentAliaseRealtimePredictionsHttpError, RunMlDeploymentAliaseRealtimePredictionsHttpResponse, RunMlDeploymentRealtimePredictionsHttpError, RunMlDeploymentRealtimePredictionsHttpResponse, SetMlDeploymentBatchPredictionScheduleHttpError, SetMlDeploymentBatchPredictionScheduleHttpResponse, SpaceId, TableProfile, TableRecord, TableSample, TenantId, TrainingDuration, Transform, UpdateMlDeploymentBatchPredictionScheduleHttpError, UpdateMlDeploymentBatchPredictionScheduleHttpResponse, UpdatedAt, activateModelsMlDeployment, addMlDeploymentModels, cancelMlJob, clearCache, createMlDeployment, createMlDeploymentAliase, createMlDeploymentBatchPrediction, createMlExperiment, createMlExperimentVersion, createMlProfileInsight, deactivateModelsMlDeployment, mlExport as default, deleteMlDeployment, deleteMlDeploymentAliase, deleteMlDeploymentBatchPrediction, deleteMlDeploymentBatchPredictionSchedule, deleteMlExperiment, deleteMlExperimentVersion, getMlDeployment, getMlDeploymentAliase, getMlDeploymentAliases, getMlDeploymentBatchPrediction, getMlDeploymentBatchPredictionSchedule, getMlDeploymentBatchPredictions, getMlDeployments, getMlExperiment, getMlExperimentModel, getMlExperimentModels, getMlExperimentVersion, getMlExperimentVersions, getMlExperiments, getMlProfileInsight, getMlProfileInsightWithQuery, patchMlDeployment, patchMlDeploymentAliase, patchMlDeploymentBatchPrediction, patchMlExperiment, patchMlExperimentVersion, predictMlDeploymentBatchPrediction, recommendModelsMlExperiment, removeMlDeploymentModels, runMlDeploymentAliaseRealtimePredictions, runMlDeploymentRealtimePredictions, setMlDeploymentBatchPredictionSchedule, updateMlDeploymentBatchPredictionSchedule };

@@ -42,28 +42,28 @@ type DataProductChangelogResponse = {
 type DataProductResponse = {
   /** Indicates whether the data product is currently activated for consumption. */activated?: boolean; /** Timestamp when the data product was most recently activated in ISO 8601 format. */
   activatedAt?: string; /** List of target environments or platforms where the data product is activated. */
-  activatedOn?: string[];
-  apiConsumableDatasetIds?: string[]; /** Timestamp when the data product was created in ISO 8601 format. */
-  createdAt?: string; /** Identifier of the user who created the data product. */
-  createdBy?: string;
-  datasetIds?: string[];
+  activatedOn: string[];
+  apiConsumableDatasetIds: string[]; /** Timestamp when the data product was created in ISO 8601 format. */
+  createdAt: string; /** Identifier of the user who created the data product. */
+  createdBy: string;
+  datasetIds: string[];
   description?: string;
-  glossaryIds?: string[];
+  glossaryIds: string[];
   id: string;
-  keyContacts?: KeyContact[]; /** Primary identifier used for main data product reference. */
+  keyContacts: KeyContact[]; /** Primary identifier used for main data product reference. */
   mainId?: string;
   name: string; /** Identifier of the user who owns the data product and is responsible for governance. */
-  ownerId?: string; /** Number of pending changes that are not yet activated. */
+  ownerId: string; /** Number of pending changes that are not yet activated. */
   pendingChangesCount?: number; /** Qlik Resource Identifier (QRI) uniquely identifying the data product across the platform. */
-  qri?: string;
+  qri: string;
   quality?: Quality; /** Documentation in Markdown format providing detailed information about the data product. */
   readMe?: string;
   spaceId?: string;
-  tags?: string[];
+  tags: string[];
   tenantId: string;
   trustScore?: TrustScore; /** Timestamp of the most recent update in ISO 8601 format. */
-  updatedAt?: string; /** Identifier of the user who last updated the data product. */
-  updatedBy?: string;
+  updatedAt: string; /** Identifier of the user who last updated the data product. */
+  updatedBy: string;
 };
 type Error = {
   code?: string;

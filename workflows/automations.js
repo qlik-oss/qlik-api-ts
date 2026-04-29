@@ -1,5 +1,5 @@
 import { t as __exportAll } from "../chunks/chunk-BdHzlgOL.js";
-import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-RxGqWk3q.js";
+import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-B7l8UGyY.js";
 
 //#region src/public/rest/workflows/automations.ts
 var automations_exports = /* @__PURE__ */ __exportAll({

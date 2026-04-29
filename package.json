@@ -1,11 +1,11 @@
 {
   "name": "@qlik/api",
   "description": "Exposes functions for interacting with Qlik apis",
+  "license": "ISC",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/qlik-oss/qlik-api-ts.git"
   },
-  "license": "ISC",
   "type": "module",
   "browser": {
     "fs": false
@@ -16,10 +16,10 @@
     "lodash-es": "^4.18.1",
     "ws": "^8.20.0"
   },
-  "packageManager": "pnpm@10.33.0",
   "engines": {
     "node": ">=20"
   },
+  "packageManager": "pnpm@10.33.2",
   "exports": {
     ".": "./index.js",
     "./analytics": "./analytics.js",
@@ -37,8 +37,14 @@
     "./brands": "./brands.js",
     "./collections": "./collections.js",
     "./conditions": "./conditions.js",
+    "./connectivity": "./connectivity.js",
+    "./connectivity/data-connections": "./connectivity/data-connections.js",
+    "./connectivity/data-credentials": "./connectivity/data-credentials.js",
+    "./connectivity/data-sources": "./connectivity/data-sources.js",
     "./consumption": "./consumption.js",
     "./core": "./core.js",
+    "./core/auth-settings": "./core/auth-settings.js",
+    "./core/data-files": "./core/data-files.js",
     "./core/ip-policies": "./core/ip-policies.js",
     "./csp-origins": "./csp-origins.js",
     "./csrf-token": "./csrf-token.js",

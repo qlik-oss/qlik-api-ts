@@ -1,4 +1,4 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-RxGqWk3q.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B7l8UGyY.js";
 
 //#region src/public/rest/tenant-settings.ts
 /**
@@ -72,6 +72,22 @@ async function toggleCrossRegionDataProcessingTenantSettings(body, options) {
 	});
 }
 /**
+* Sets the cross-region inference setting for the tenant. Creates tenant settings if none exist, or updates existing settings. This is access controlled by the permission `admin.tenant-settings:update`.
+* When cross-region inference is required, you must include an additional header `x-qlik-consent-verified: true` in your API requests to confirm that you have the authority to enable this feature and accept the associated terms.
+*
+* @param body an object with the body content
+* @throws ToggleCrossRegionInferenceTenantSettingsHttpError
+*/
+async function toggleCrossRegionInferenceTenantSettings(body, options) {
+	return invokeFetch("tenant-settings", {
+		method: "post",
+		pathTemplate: "/api/v1/tenant-settings/actions/toggle-cross-region-inference",
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
 * Retrieves start pages for the tenant settings.
 *
 * @throws GetStartPagesHttpError
@@ -98,9 +114,10 @@ const tenantSettingsExport = {
 	updateTenantSettings,
 	createTenantSettings,
 	toggleCrossRegionDataProcessingTenantSettings,
+	toggleCrossRegionInferenceTenantSettings,
 	getStartPages,
 	clearCache
 };
 
 //#endregion
-export { clearCache, createTenantSettings, tenantSettingsExport as default, deleteTenantSettings, getStartPages, getTenantSettings, toggleCrossRegionDataProcessingTenantSettings, updateTenantSettings };
+export { clearCache, createTenantSettings, tenantSettingsExport as default, deleteTenantSettings, getStartPages, getTenantSettings, toggleCrossRegionDataProcessingTenantSettings, toggleCrossRegionInferenceTenantSettings, updateTenantSettings };
