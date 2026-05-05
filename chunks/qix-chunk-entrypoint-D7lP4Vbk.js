@@ -1,5 +1,5 @@
 import { i as isNode, n as createResolvablePromise$1 } from "./utils-6yIYp94j.js";
-import { E as toValidWebsocketLocationUrl, F as appendQueryToUrl, R as exposeInternalApiOnWindow, f as getWebSocketAuthParams, h as isWindows, p as handleAuthenticationError, z as generateRandomString } from "./interceptors-CJ5KSs4l.js";
+import { E as toValidWebsocketLocationUrl, F as appendQueryToUrl, R as exposeInternalApiOnWindow, f as getWebSocketAuthParams, h as isWindows, p as handleAuthenticationError, z as generateRandomString } from "./interceptors-opxWmydH.js";
 import { t as getHumanReadableSocketClosedErrorMessage$1 } from "./websocket-errors-C6cw1uQN.js";
 import isPlainObject from "lodash-es/isPlainObject.js";
 import merge from "lodash-es/merge.js";
@@ -15687,7 +15687,7 @@ const closeCodeMessages = {
 	1014: "Bad gateway.",
 	1015: "TLS handshake failure."
 };
-const uknownCloseErrorMessage = "websocket closed for unknown reason";
+const unknownCloseErrorMessage = "websocket closed for unknown reason";
 var WebSocketError = class extends Error {
 	code;
 	reason;
@@ -15704,7 +15704,7 @@ var WebSocketError = class extends Error {
 /** Returns a human readable error message for the supplied close code */
 function getHumanReadableSocketClosedErrorMessage(err) {
 	const { code, reason, host } = err;
-	const closeMessage = code && closeCodeMessages[code] || reason || uknownCloseErrorMessage;
+	const closeMessage = code && closeCodeMessages[code] || reason || unknownCloseErrorMessage;
 	if (host) return `Failed to open web-socket on ${host}: ${closeMessage}`;
 	else return `Failed to open web-socket: ${closeMessage}`;
 }
