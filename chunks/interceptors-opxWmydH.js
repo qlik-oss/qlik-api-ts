@@ -1612,6 +1612,7 @@ async function parseFetchResponse(fetchResponse, url) {
 		case "text/event-stream":
 			resultData = fetchResponse.body;
 			break;
+		case void 0:
 		default:
 			try {
 				resultData = await fetchResponse.text();
