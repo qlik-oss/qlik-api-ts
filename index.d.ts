@@ -1,7 +1,7 @@
 import { d as HostConfig } from "./chunks/auth-types-DjJJgiRF.js";
 import { InterceptorsAPI, createInterceptors } from "./interceptors.js";
 import { AuthAPI, getAccessToken, getWebResourceAuthParams, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig } from "./auth.js";
-import { t as QixAPI } from "./chunks/qix-D2Ljw7xT.js";
+import { t as QixAPI } from "./chunks/qix-CJHgFOL-.js";
 import { ChangeStoresAPI } from "./analytics/change-stores.js";
 import { AnalyticsAPI } from "./analytics.js";
 import { ApiKeysAPI } from "./api-keys.js";
@@ -63,9 +63,11 @@ import { ReloadsAPI } from "./reloads.js";
 import { ReportTemplatesAPI } from "./report-templates.js";
 import { ReportsAPI } from "./reports.js";
 import { RolesAPI } from "./roles.js";
+import { TasksAPI } from "./scheduling/tasks.js";
+import { SchedulingAPI } from "./scheduling.js";
 import { SharingTasksAPI } from "./sharing-tasks.js";
 import { SpacesAPI } from "./spaces.js";
-import { TasksAPI } from "./tasks.js";
+import { TasksAPI as TasksAPI$1 } from "./tasks.js";
 import { TempContentsAPI } from "./temp-contents.js";
 import { TenantSettingsAPI } from "./tenant-settings.js";
 import { TenantsAPI } from "./tenants.js";
@@ -161,9 +163,12 @@ declare const reloads: ReloadsAPI;
 declare const reportTemplates: ReportTemplatesAPI;
 declare const reports: ReportsAPI;
 declare const roles: RolesAPI;
+declare const scheduling: {
+  tasks: TasksAPI;
+};
 declare const sharingTasks: SharingTasksAPI;
 declare const spaces: SpacesAPI;
-declare const tasks: TasksAPI;
+declare const tasks: TasksAPI$1;
 declare const tempContents: TempContentsAPI;
 declare const tenantSettings: TenantSettingsAPI;
 declare const tenants: TenantsAPI;
@@ -304,12 +309,16 @@ interface QlikAPI {
   reports: ReportsAPI;
   /** Functions for the roles api */
   roles: RolesAPI;
+  /** Functions for the scheduling api */
+  scheduling: SchedulingAPI & {
+    tasks: TasksAPI;
+  };
   /** Functions for the sharingTasks api */
   sharingTasks: SharingTasksAPI;
   /** Functions for the spaces api */
   spaces: SpacesAPI;
   /** Functions for the tasks api */
-  tasks: TasksAPI;
+  tasks: TasksAPI$1;
   /** Functions for the tempContents api */
   tempContents: TempContentsAPI;
   /** Functions for the tenantSettings api */
@@ -348,4 +357,4 @@ declare const api: QlikAPI & {
   }) => QlikAPI;
 };
 //#endregion
-export { CreateQlikApiProps, QlikAPI, analytics, apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, connectivity, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataGovernance, dataQualities, dataSets, dataSources, dataStores, dcaas, api as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenantSettings, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks, workflows };
+export { CreateQlikApiProps, QlikAPI, analytics, apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, connectivity, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataGovernance, dataQualities, dataSets, dataSources, dataStores, dcaas, api as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, scheduling, sharingTasks, spaces, tasks, tempContents, tenantSettings, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks, workflows };

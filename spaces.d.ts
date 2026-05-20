@@ -223,7 +223,8 @@ declare function getSpaces(query: {
   name?: string; /** The next page cursor. Next links make use of this. */
   next?: string; /** Space ownerId to filter by. For example, "?ownerId=123". */
   ownerId?: string; /** The previous page cursor. Previous links make use of this. */
-  prev?: string; /** Field to sort by. Prefix with +/- to indicate asc/desc. For example, "?sort=+name" to sort ascending on Name. Supported fields are "type", "name" and "createdAt". */
+  prev?: string; /** Comma-separated list of roles to filter spaces by the caller's assignment role. For example, "?roles=publisher,facilitator" returns spaces where the caller has the publisher or facilitator role. */
+  roles?: RoleType[]; /** Field to sort by. Prefix with +/- to indicate asc/desc. For example, "?sort=+name" to sort ascending on Name. Supported fields are "type", "name" and "createdAt". */
   sort?: string; /** Type(s) of space to filter. For example, "?type=managed,shared". */
   type?: string;
 }, options?: ApiCallOptions): Promise<GetSpacesHttpResponse>;

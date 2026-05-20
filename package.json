@@ -14,10 +14,10 @@
     "enigma.js": "^2.14.0",
     "extend": "3.0.2",
     "lodash-es": "^4.18.1",
-    "ws": "^8.20.0"
+    "ws": "^8.20.1"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=20.0.0"
   },
   "packageManager": "pnpm@10.33.2",
   "exports": {
@@ -83,6 +83,8 @@
     "./report-templates": "./report-templates.js",
     "./reports": "./reports.js",
     "./roles": "./roles.js",
+    "./scheduling": "./scheduling.js",
+    "./scheduling/tasks": "./scheduling/tasks.js",
     "./sharing-tasks": "./sharing-tasks.js",
     "./spaces": "./spaces.js",
     "./tasks": "./tasks.js",

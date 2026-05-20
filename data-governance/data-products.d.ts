@@ -18,7 +18,10 @@ type ChangelogOperation = {
  * Request payload for creating a data product.
  */
 type CreateDataProductRequest = {
-  /** A description of the Data Product. */description?: string; /** List of key contacts for the data product. */
+  /** List of dataset IDs for which API consumption is enabled. Must be a subset of datasetIds. */apiConsumableDatasetIds?: string[]; /** List of dataset IDs associated with the Data Product. Maximum of 100 items. */
+  datasetIds?: string[]; /** A description of the Data Product. */
+  description?: string; /** List of glossary IDs linked to the Data Product. Each entry must be a valid UUIDv4 (maximum 36 characters). Maximum of 100 items. */
+  glossaryIds?: string[]; /** List of key contacts for the data product. */
   keyContacts?: KeyContact[]; /** Display name of the data product. */
   name: string; /** A readme of the Data Product. */
   readMe?: string; /** Unique identifier of the space. */

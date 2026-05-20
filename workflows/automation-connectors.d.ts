@@ -38,7 +38,8 @@ type PaginationLink = {
  * @throws GetAutomationConnectorsHttpError
  */
 declare function getAutomationConnectors(query: {
-  /** Filters the result based on the specified criteria: name. */filter?: string; /** The number of automation connectors to retrieve. */
+  /** Pagination cursor returned from a previous request. */cursor?: string; /** Filters the result based on the specified criteria: name. */
+  filter?: string; /** The number of automation connectors to retrieve. */
   limit?: number; /** The field to sort by, with +- prefix indicating sort order. (`?sort=-name` => sort on the `name` field using descending order). */
   sort?: "id" | "-id" | "+id" | "name" | "+name" | "-name";
 }, options?: ApiCallOptions): Promise<GetAutomationConnectorsHttpResponse>;

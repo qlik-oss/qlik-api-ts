@@ -1,9 +1,9 @@
-import { i as isNode, n as createResolvablePromise$1 } from "./utils-6yIYp94j.js";
-import { E as toValidWebsocketLocationUrl, F as appendQueryToUrl, R as exposeInternalApiOnWindow, f as getWebSocketAuthParams, h as isWindows, p as handleAuthenticationError, z as generateRandomString } from "./interceptors-opxWmydH.js";
+import { i as isNode, n as createResolvablePromise$1 } from "./utils-COWNd3uN.js";
+import { E as toValidWebsocketLocationUrl, F as appendQueryToUrl, R as exposeInternalApiOnWindow, f as getWebSocketAuthParams, h as isWindows, p as handleAuthenticationError, z as generateRandomString } from "./interceptors-DSlOn_k7.js";
 import { t as getHumanReadableSocketClosedErrorMessage$1 } from "./websocket-errors-C6cw1uQN.js";
 import isPlainObject from "lodash-es/isPlainObject.js";
 import merge from "lodash-es/merge.js";
-import originalExtend from "extend";
+import extend from "extend";
 
 //#region src/qix/session/schema/engine-api.js
 var engine_api_default = {
@@ -13270,7 +13270,7 @@ function createGetMethod(cacheKey) {
 const genericGet = createGetMethod("generic-get-");
 const variableGet = createGetMethod("variable-get-");
 const fieldGet = createGetMethod("field-get-");
-const mixin$20 = {
+const mixin$22 = {
 	types: "Doc",
 	override: {},
 	init(args) {
@@ -13284,12 +13284,12 @@ const mixin$20 = {
 	"getMeasure",
 	"getVariableById"
 ].forEach((method) => {
-	mixin$20.override[method] = genericGet;
+	mixin$22.override[method] = genericGet;
 });
 ["getVariable", "getVariableByName"].forEach((method) => {
-	mixin$20.override[method] = variableGet;
+	mixin$22.override[method] = variableGet;
 });
-mixin$20.override.getField = fieldGet;
+mixin$22.override.getField = fieldGet;
 
 //#endregion
 //#region src/qix/session/mixins/all/layout-observable.js
@@ -13390,7 +13390,7 @@ var migration_default = {
 //#endregion
 //#region src/qix/session/mixins/utils/json-patch.js
 const JSONPatch$1 = {};
-const extend$1 = merge;
+const extend$2 = merge;
 const isObject$1 = isPlainObject;
 const isArray$1 = Array.isArray;
 const isUndef$1 = function(v) {
@@ -13407,7 +13407,7 @@ const isFunction$1 = function(v) {
 * @returns {Object} a unique, duplicated value
 */
 function generateValue$1(val) {
-	if (val) val = extend$1({}, { val }).val;
+	if (val) val = extend$2({}, { val }).val;
 	return val;
 }
 /**
@@ -13595,7 +13595,7 @@ JSONPatch$1.apply = function(original, patches) {
 			target.push.apply(target, newValues);
 		} else if (isObject$1(target) && isObject$1(patch.value)) {
 			emptyObject$1(target);
-			extend$1(target, patch.value);
+			extend$2(target, patch.value);
 		} else parent[key] = patch.value;
 		else if (patch.op === "move") {
 			const oldParent = getParent$1(original, patch.from);
@@ -13615,7 +13615,7 @@ JSONPatch$1.apply = function(original, patches) {
 * @returns {Object} A new object identical to the `obj`
 */
 JSONPatch$1.clone = function(obj) {
-	return extend$1({}, obj);
+	return extend$2({}, obj);
 };
 /**
 * Creates a JSON-patch.
@@ -13649,7 +13649,7 @@ JSONPatch$1.createPatch = function(op, val, path) {
 */
 JSONPatch$1.updateObject = function(original, newData) {
 	if (!Object.keys(original).length) {
-		extend$1(original, newData);
+		extend$2(original, newData);
 		return;
 	}
 	JSONPatch$1.apply(original, JSONPatch$1.generate(original, newData));
@@ -14097,7 +14097,7 @@ var state_default = {
 //#region src/qix/session/mixins/all/index.ts
 const mixins$4 = [
 	base_default,
-	mixin$20,
+	mixin$22,
 	migration_default,
 	state_default,
 	layout_observable_default
@@ -14105,7 +14105,7 @@ const mixins$4 = [
 
 //#endregion
 //#region src/qix/session/mixins/custom/currentselections/current-selections-mixins.ts
-const mixin$19 = {
+const mixin$21 = {
 	types: ["CurrentSelection"],
 	extend: {
 		async clearField(fieldName, state) {
@@ -14131,7 +14131,7 @@ const mixin$19 = {
 
 //#endregion
 //#region src/qix/session/mixins/custom/fieldlist/fields-mixins.js
-const mixin$18 = {
+const mixin$20 = {
 	types: ["FieldList"],
 	extend: { expand() {
 		return this.getLayout().then((list) => {
@@ -14268,14 +14268,14 @@ var undo_info_mixins_default = {
 //#endregion
 //#region src/qix/session/mixins/custom/index.ts
 const mixins$3 = [
-	mixin$19,
-	mixin$18,
+	mixin$21,
+	mixin$20,
 	undo_info_mixins_default
 ];
 
 //#endregion
 //#region src/qix/session/mixins/doc/base.ts
-const mixin$17 = {
+const mixin$19 = {
 	types: "Doc",
 	extend: {
 		getOrCreateSessionObject(props) {
@@ -14421,7 +14421,7 @@ const bookmarkListProps = {
 		}
 	}
 };
-const mixin$16 = {
+const mixin$18 = {
 	types: "Doc",
 	extend: {
 		getBookmarkList() {
@@ -14435,7 +14435,7 @@ const mixin$16 = {
 
 //#endregion
 //#region src/qix/session/mixins/doc/create-client-objects.js
-const mixin$15 = {
+const mixin$17 = {
 	types: "Doc",
 	override: {
 		createBookmark(_createBookmark, props) {
@@ -14554,7 +14554,7 @@ const currentSelectionProps = {
 	},
 	qSelectionObjectDef: {}
 };
-const mixin$14 = {
+const mixin$16 = {
 	types: ["Doc"],
 	extend: { getCurrentSelectionObject() {
 		return this.getOrCreateSessionObject(currentSelectionProps);
@@ -14579,7 +14579,7 @@ const dimensionListProps = {
 		}
 	}
 };
-const mixin$13 = {
+const mixin$15 = {
 	types: "Doc",
 	extend: {
 		getDimensionList() {
@@ -14606,7 +14606,7 @@ const listProps = {
 		}
 	}
 };
-const mixin$12 = {
+const mixin$14 = {
 	types: "Doc",
 	extend: {
 		getDynamicAppViewList() {
@@ -14661,7 +14661,7 @@ const onTheFlyWithHiddenListProps = {
 		qShowDefinitionOnly: true
 	}
 };
-const mixin$11 = {
+const mixin$13 = {
 	types: "Doc",
 	extend: {
 		getFieldList() {
@@ -14696,7 +14696,7 @@ const masterObjectListProps = {
 		}
 	}
 };
-const mixin$10 = {
+const mixin$12 = {
 	types: "Doc",
 	extend: {
 		getMasterObjectList() {
@@ -14724,7 +14724,7 @@ const measureListProps = {
 		}
 	}
 };
-const mixin$9 = {
+const mixin$11 = {
 	types: "Doc",
 	extend: {
 		getMeasureList() {
@@ -14751,7 +14751,7 @@ const sheetListProps$1 = {
 		}
 	}
 };
-const mixin$8 = {
+const mixin$10 = {
 	types: "Doc",
 	extend: {
 		getODAGAppLinkList() {
@@ -14790,7 +14790,7 @@ const sheetListProps = {
 		}
 	}
 };
-const mixin$7 = {
+const mixin$9 = {
 	types: "Doc",
 	extend: {
 		/**
@@ -14826,7 +14826,7 @@ const snapshotListProps = {
 		}
 	}
 };
-const mixin$6 = {
+const mixin$8 = {
 	types: "Doc",
 	extend: {
 		getSnapshotListObject() {
@@ -14855,7 +14855,7 @@ const storyListProps = {
 		}
 	}
 };
-const mixin$5 = {
+const mixin$7 = {
 	types: "Doc",
 	extend: {
 		getStoryList() {
@@ -14877,7 +14877,7 @@ const undoInfoProps = {
 	qUndoInfoDef: {},
 	markers: []
 };
-const mixin$4 = {
+const mixin$6 = {
 	types: ["Doc"],
 	extend: { getUndoInfoObject() {
 		return this.getOrCreateSessionObject(undoInfoProps);
@@ -14898,7 +14898,7 @@ const variableListProps = {
 		qData: { tags: "/tags" }
 	}
 };
-const mixin$3 = {
+const mixin$5 = {
 	types: "Doc",
 	extend: {
 		getVariableList() {
@@ -14913,23 +14913,23 @@ const mixin$3 = {
 //#endregion
 //#region src/qix/session/mixins/doc/index.ts
 const mixins$2 = [
-	mixin$17,
+	mixin$19,
 	normalize_default,
 	modal_default,
+	mixin$18,
+	mixin$17,
 	mixin$16,
 	mixin$15,
-	mixin$14,
 	mixin$13,
+	mixin$12,
 	mixin$11,
 	mixin$10,
+	mixin$14,
 	mixin$9,
 	mixin$8,
-	mixin$12,
 	mixin$7,
 	mixin$6,
-	mixin$5,
-	mixin$4,
-	mixin$3
+	mixin$5
 ];
 
 //#endregion
@@ -14942,7 +14942,7 @@ function updateQAttribute(properties) {
 		});
 	});
 }
-const mixin$2 = {
+const mixin$4 = {
 	types: ["GenericObject"],
 	override: {
 		setProperties(_setProperties, properties) {
@@ -14962,7 +14962,7 @@ const mixin$2 = {
 
 //#endregion
 //#region src/qix/session/mixins/genericobject/export-data.js
-const mixin$1 = {
+const mixin$3 = {
 	types: "GenericObject",
 	override: { 
 	/**
@@ -14989,7 +14989,7 @@ exportData(_exportData, fileType, path, filename, exportState) {
 
 //#endregion
 //#region src/qix/session/mixins/genericobject/publishing.js
-const mixin = {
+const mixin$2 = {
 	types: ["GenericObject"],
 	override: {
 		/**
@@ -15019,10 +15019,75 @@ const mixin = {
 //#endregion
 //#region src/qix/session/mixins/genericobject/index.ts
 const mixins$1 = [
-	mixin$1,
-	mixin$2,
-	mixin
+	mixin$3,
+	mixin$4,
+	mixin$2
 ];
+
+//#endregion
+//#region src/qix/session/mixins/story/story.ts
+const mixin$1 = {
+	types: "story",
+	extend: {
+		clone() {
+			const oldModel = this;
+			return oldModel.app.cloneObject(this.id).then((newId) => oldModel.app.getObject(newId));
+		},
+		createSlide(opts) {
+			return this.createChild(extend({
+				qInfo: {
+					qId: generateRandomString(21),
+					qType: "slide"
+				},
+				rank: -1,
+				qChildListDef: { qData: {
+					title: "/title",
+					sheetId: "/sheetId",
+					ratio: "/ratio",
+					position: "/position",
+					dataPath: "/dataPath",
+					srcPath: "/srcPath",
+					visualization: "/visualization",
+					visualizationType: "/visualizationType",
+					style: "/style"
+				} }
+			}, opts || {}));
+		}
+	}
+};
+
+//#endregion
+//#region src/qix/session/mixins/slide/slide.ts
+function sortSlidesByRank(slides) {
+	function compare(a, b) {
+		if (a.qData.rank < b.qData.rank) return -1;
+		if (a.qData.rank > b.qData.rank) return 1;
+		return 0;
+	}
+	if (Array.isArray(slides) && slides.length > 0) return slides.sort(compare);
+	return slides;
+}
+const mixin = {
+	types: "slide",
+	extend: { duplicate(story) {
+		let rank;
+		const obj = this;
+		return story.getLayout().then((layout) => {
+			const items = sortSlidesByRank(layout.qChildList.qItems.slice());
+			for (let i = 0; i < items.length; i++) if (items[i].qInfo.qId === obj.id) {
+				const prev = items[i];
+				const next = items[i + 1];
+				if (next || prev) if (next && !prev) rank = next.qData.rank - 1;
+				else if (!next && prev) rank = prev.qData.rank + 1;
+				else rank = (prev.qData.rank + next.qData.rank) / 2;
+			}
+			return story.createSlide({ rank }).then((nSlide) => nSlide.copyFrom(obj.id).then(() => nSlide.getProperties().then((item) => {
+				item.rank = rank;
+				return nSlide.setProperties(item);
+			})));
+		});
+	} }
+};
 
 //#endregion
 //#region src/qix/session/mixins/index.ts
@@ -15030,7 +15095,9 @@ const mixins = [
 	...mixins$2,
 	...mixins$4,
 	...mixins$1,
-	...mixins$3
+	...mixins$3,
+	mixin$1,
+	mixin
 ];
 
 //#endregion
@@ -15328,7 +15395,7 @@ function createPhoenixSessionState({ doc, global, executedAppActions }) {
 
 //#endregion
 //#region src/qix/session/phoenix/json-patch.js
-const extend = originalExtend.bind(null, true);
+const extend$1 = extend.bind(null, true);
 const JSONPatch = {};
 const { isArray } = Array;
 function isObject(v) {
@@ -15348,7 +15415,7 @@ function isFunction(v) {
 * @returns {Object} a unique, duplicated value
 */
 function generateValue(val) {
-	if (val) return extend({}, { val }).val;
+	if (val) return extend$1({}, { val }).val;
 	return val;
 }
 /**
@@ -15546,7 +15613,7 @@ JSONPatch.apply = function apply(original, patches) {
 			}
 		} else if (isObject(target) && isObject(patch.value)) {
 			emptyObject(target);
-			extend(target, patch.value);
+			extend$1(target, patch.value);
 		} else if (!parent) throw new Error("Patchee is not an object we can patch");
 		else parent[key] = patch.value;
 		else if (patch.op === "move") {
@@ -15567,7 +15634,7 @@ JSONPatch.apply = function apply(original, patches) {
 * @returns {Object} A new object identical to the `obj`
 */
 JSONPatch.clone = function clone(obj) {
-	return extend({}, obj);
+	return extend$1({}, obj);
 };
 /**
 * Creates a JSON-patch.
@@ -15602,7 +15669,7 @@ JSONPatch.createPatch = function createPatch(op, val, path) {
 */
 JSONPatch.updateObject = function updateObject(original, newData) {
 	if (!Object.keys(original).length) {
-		extend(original, newData);
+		extend$1(original, newData);
 		return;
 	}
 	JSONPatch.apply(original, JSONPatch.generate(original, newData));
@@ -15656,8 +15723,12 @@ function extractResult(request, resultObject) {
 	return resultObject;
 }
 function createResolvablePromise() {
-	let resolve;
-	let reject;
+	let resolve = () => {
+		throw new Error("Promise resolver not initialized");
+	};
+	let reject = () => {
+		throw new Error("Promise rejector not initialized");
+	};
 	return [
 		new Promise((res, rej) => {
 			resolve = res;
@@ -16078,11 +16149,11 @@ async function createQixConnection(props, listener) {
 	}
 	return {
 		invoke,
-		isReattached: lowLevelConnection.isReattached,
-		getSessionState: lowLevelConnection.getSessionState,
-		isClosed: lowLevelConnection.isClosed,
-		closeNormal: lowLevelConnection.closeNormal,
-		closeSuspend: lowLevelConnection.closeSuspend
+		isReattached: () => lowLevelConnection.isReattached(),
+		getSessionState: () => lowLevelConnection.getSessionState(),
+		isClosed: () => lowLevelConnection.isClosed(),
+		closeNormal: () => lowLevelConnection.closeNormal(),
+		closeSuspend: () => lowLevelConnection.closeSuspend()
 	};
 }
 
@@ -16280,16 +16351,533 @@ EventEmitter.listenerCount = function(emitter, type) {
 };
 
 //#endregion
-//#region src/qix/session/phoenix/rpc-object-session.ts
+//#region src/qix/session/phoenix/custom-promise.ts
+function wrapInPromise(value, CustomPromise) {
+	if (isPromiseLike(value)) return new CustomPromise((resolve, reject) => {
+		value.then(resolve, reject);
+	});
+	return value;
+}
+function isPromiseLike(value) {
+	return value !== null && (typeof value === "object" || typeof value === "function") && typeof value.then === "function" && typeof value.catch === "function";
+}
+function getPromiseWrapper(CustomPromise) {
+	return (value) => {
+		return wrapInPromise(value, CustomPromise);
+	};
+}
+
+//#endregion
+//#region src/qix/session/phoenix/rpc-object-respawn-mixins.ts
 /**
-* Implements the classic enigma.js session interface plus some new functions like invoke.
+* The respawn functions are called when a session is reattached and the objects need to get their new handles and potentially even be recreated from scratch
+* if the session has dissapeared from the server. since the ordinary invoke function on the object and object.session will retrigger the respawning process when already inside t
+* the respawning process we have to use the connection.invoke function instead. which simple takes the handle and the request as arguments and sends it to the server.
 */
-let counter = 0;
+const refetch1 = {
+	types: ["GenericObject"],
+	override: {
+		async respawn(original, connection) {
+			if (this.__remote__.respawnInfo.isSessionObject) {
+				let objectFoundInEngine = false;
+				if (connection.isReattached()) try {
+					this.setHandle(await connection.invoke(this.app.handle, {
+						method: "GetObject",
+						params: [this.id],
+						outKey: -1
+					}).then((res) => res.qHandle));
+					objectFoundInEngine = true;
+				} catch (err) {
+					console.warn("Session object not found in reattached session", err);
+					objectFoundInEngine = false;
+				}
+				if (!objectFoundInEngine) {
+					const props = JSON.parse(JSON.stringify(this.__remote__.respawnInfo.properties));
+					props.qInfo = props.qInfo || {};
+					props.qInfo.qId = this.id;
+					logEvent("Respawning session object using", this.__remote__.respawnInfo.properties);
+					this.setHandle(await connection.invoke(this.app.handle, {
+						method: "CreateSessionObject",
+						params: [props],
+						outKey: -1
+					}).then((res) => res.qHandle));
+				}
+			} else this.setHandle(await connection.invoke(this.app.handle, {
+				method: "GetObject",
+				params: [this.id],
+				outKey: -1
+			}).then((res) => res.qHandle));
+			if (this.__remote__.respawnInfo.activeModalSelectionPaths && !connection.isReattached()) try {
+				logEvent("########### BeginSelections ###################################", this.__remote__.respawnInfo.activeModalSelectionPaths);
+				await connection.invoke(this.handle, {
+					method: "BeginSelections",
+					params: [this.__remote__.respawnInfo.activeModalSelectionPaths],
+					outKey: -1
+				});
+			} catch (err) {
+				console.warn("Could not reapply modal selection state", err);
+			}
+		},
+		async beginSelections(original, paths) {
+			logEvent("Storing modal selections", this.handle, this.__remote__.respawnInfo.activeModalSelectionPaths);
+			this.__remote__.respawnInfo.activeModalSelectionPaths = paths;
+			return original(paths);
+		},
+		async endSelections(original, accept) {
+			this.__remote__.respawnInfo.activeModalSelectionPaths = void 0;
+			logEvent("Removing modal selections", this.handle, this.__remote__.respawnInfo.activeModalSelectionPaths);
+			return original(accept);
+		},
+		/**
+		* TODO SUPPORT THESE ASWELL
+		applyPatches: (patches: NxPatch[], softPatch?: boolean) => Promise<void>;
+		clearSoftPatches: () => Promise<void>;
+		copyFrom: (fromId: string) => Promise<void>;
+		destroyAllChildren: (propForThis?: CustomProperties) => Promise<void>;
+		destroyChild: (id: string, propForThis?: CustomProperties) => Promise<boolean>;
+		lock: (path: string, colIndices?: number[]) => Promise<void>;
+		resetMadeSelections: () => Promise<void>;
+		setChildArrayOrder: (ids: string[]) => Promise<void>;
+		setFullPropertyTree: (propEntry: GenericObjectEntry) => Promise<void>;
+		setProperties: (prop: CustomProperties) => Promise<void>;
+		unlock: (path: string, colIndices?: number[]) => Promise<void>;
+		*/
+		async setProperties(original, props) {
+			this.__remote__.respawnInfo.properties = props;
+			return original(props);
+		}
+	}
+};
+const variableRespawnMixin = {
+	types: ["GenericVariable"],
+	override: {
+		async respawn(original, connection) {
+			logEvent("Respawning variable ", this.id);
+			if (this.__remote__.respawnInfo.isSessionObject) {
+				let objectFoundInEngine = false;
+				if (connection.isReattached()) try {
+					this.setHandle(await connection.invoke(this.app.handle, {
+						method: "GetObject",
+						params: [this.id],
+						outKey: -1
+					}).then((res) => res.qHandle));
+					objectFoundInEngine = true;
+				} catch (err) {
+					console.warn("Session variable not found in reattached session", err);
+					objectFoundInEngine = false;
+				}
+				if (!objectFoundInEngine) this.setHandle(await connection.invoke(this.app.handle, {
+					method: "CreateSessionVariable",
+					params: [this.__remote__.respawnInfo.properties],
+					outKey: -1
+				}).then((res) => res.qHandle));
+			} else this.setHandle(await connection.invoke(this.app.handle, {
+				method: "GetObject",
+				params: [this.id],
+				outKey: -1
+			}).then((res) => res.qHandle));
+		},
+		async setProperties(original, props) {
+			this.__remote__.respawnInfo.properties = props;
+			return original(props);
+		}
+	}
+};
+const variarbleMeasureAndBookmarkRespawnMixin = {
+	types: [
+		"GenericDimension",
+		"GenericMeasure",
+		"GenericBookmark"
+	],
+	override: { async respawn(original, connection) {
+		logEvent("Respawning field dimension, measure or bookmark", this.id);
+		this.setHandle(await connection.invoke(this.app.handle, {
+			method: "GetObject",
+			params: [this.id],
+			outKey: -1
+		}).then((res) => res.qHandle));
+	} }
+};
+const fieldRespawningMixin = {
+	types: ["Field"],
+	override: { async respawn(original, connection) {
+		logEvent("Respawning field object ", this.id);
+		if (this.__remote__.respawnInfo.creatingRequest && this.__remote__.respawnInfo.creatingRequest.method.startsWith("Get")) {
+			this.setHandle(await connection.invoke(1, this.__remote__.respawnInfo.creatingRequest).then((res) => res.qHandle));
+			logEvent("Respawned field object using creating request ", this.id, this.handle);
+		} else {
+			this.setHandle(0);
+			logEvent("No idea how to respawn", this.id);
+		}
+	} }
+};
+const rememberCreatePropsMixin = {
+	types: ["Doc"],
+	override: {
+		async createSessionObject(original, properties) {
+			const phoenixObject = await original(properties);
+			phoenixObject.__remote__.respawnInfo.isSessionObject = true;
+			phoenixObject.__remote__.respawnInfo.properties = properties;
+			return phoenixObject;
+		},
+		async createSessionVariable(original, properties) {
+			const object = await original(properties);
+			const phoenixObject = object;
+			phoenixObject.__remote__.respawnInfo.isSessionObject = true;
+			phoenixObject.__remote__.respawnInfo.properties = properties;
+			return object;
+		}
+	}
+};
+var rpc_object_respawn_mixins_default = [
+	refetch1,
+	variableRespawnMixin,
+	variarbleMeasureAndBookmarkRespawnMixin,
+	fieldRespawningMixin,
+	rememberCreatePropsMixin
+];
+
+//#endregion
+//#region src/qix/session/phoenix/rpc-object-mixins.ts
+function toMixinMap(mixinsArray) {
+	const mixins = {};
+	rpc_object_respawn_mixins_default.concat(mixinsArray).forEach((mixin) => {
+		(Array.isArray(mixin.types) ? mixin.types : [mixin.types]).forEach((type) => {
+			mixins[type] = mixins[type] || [];
+			mixins[type].push(mixin);
+		});
+	});
+	return mixins;
+}
+function applyMixins(classPrototype, mixinList) {
+	mixinList.forEach(({ extend = {}, override = {} }) => {
+		Object.keys(override).forEach((key) => {
+			if (typeof classPrototype[key] === "function" && typeof override[key] === "function") {
+				const baseFn = classPrototype[key];
+				classPrototype[key] = function wrappedFn(...args) {
+					return override[key].apply(this, [baseFn.bind(this), ...args]);
+				};
+			} else throw new Error(`Tring to override non-existing function in ${classPrototype.type}/${classPrototype.genericType}: ${key}`);
+		});
+		Object.keys(extend).forEach((key) => {
+			if (typeof classPrototype[key] === "function" && typeof extend[key] === "function") throw new Error(`Extend is not allowed. Function already exists in  ${classPrototype.type}/${classPrototype.genericType}: ${key}`);
+			else classPrototype[key] = extend[key];
+		});
+	});
+}
+function initMixins(rpcObject, mixinList) {
+	mixinList.forEach(({ init }) => {
+		if (init) init.bind(rpcObject)({
+			api: rpcObject,
+			config: { Promise }
+		});
+	});
+}
+
+//#endregion
+//#region src/qix/session/phoenix/rpc-object.ts
+var PhoenixRpcObjectImpl = class extends EventEmitter {
+	/** @internal */
+	#remoteObject;
+	#classicSession;
+	alterEgosWithMixins = /* @__PURE__ */ new Map();
+	/** @deprecated */
+	Promise = Promise;
+	/**
+	* @internal
+	*/
+	constructor(rpcObjectCore) {
+		super();
+		this.#remoteObject = rpcObjectCore;
+		this.#classicSession = rpcObjectCore.session;
+	}
+	get __remote__() {
+		return this.#remoteObject;
+	}
+	get handle() {
+		return this.#remoteObject.handle;
+	}
+	set handle(handle) {
+		this.#remoteObject.handle = handle;
+	}
+	get app() {
+		return this.#classicSession.app;
+	}
+	get global() {
+		return this.#classicSession.global;
+	}
+	set global(newGlobal) {
+		if (newGlobal !== this.#remoteObject.session.global) console.warn("Changing the global object on a qix object is not allowed");
+	}
+	get id() {
+		return this.#remoteObject.id;
+	}
+	get type() {
+		return this.#remoteObject.type;
+	}
+	get genericType() {
+		return this.#remoteObject.genericType;
+	}
+	get session() {
+		return this.#classicSession;
+	}
+	getHandle() {
+		return this.#remoteObject.handle;
+	}
+	setHandle(handle) {
+		const oldHandle = this.#remoteObject.handle;
+		this.#remoteObject.handle = handle;
+		if (oldHandle !== handle) logEvent("Change handle for ", this.#remoteObject.id, "from", oldHandle, "to", handle);
+	}
+	/** @deprecated */
+	get enigmaModel() {
+		return this;
+	}
+	/**
+	* @internal
+	*/
+	async respawn(newConnection) {
+		if (this.#remoteObject.type !== "Doc" && this.#remoteObject.type !== "Global") console.error("No respawn mixin found for object ", this.#remoteObject.type, this.#remoteObject.genericType);
+	}
+	withMixins(...mixins) {
+		if (mixins.length === 0) return this;
+		const cacheKey = toMixinsCacheKey(mixins);
+		let alterEgoWithMixins = this.alterEgosWithMixins.get(cacheKey);
+		if (!alterEgoWithMixins) {
+			alterEgoWithMixins = this.#createAlterEgoWithMixins(mixins);
+			addMemberForwarders(alterEgoWithMixins, this);
+			this.alterEgosWithMixins.set(cacheKey, alterEgoWithMixins);
+			alterEgoWithMixins.setSessionWithMixins(this.session.withMixins(mixins, alterEgoWithMixins.Promise));
+		}
+		return alterEgoWithMixins;
+	}
+	#createAlterEgoWithMixins(mixins) {
+		return new (getGeneratedMixinClass(mixins, getPrototypeJustBeforeBase(this), this.type, this.genericType))(this, mixins);
+	}
+};
+function addMemberForwarders(alterEgoWithMixins, original) {
+	Object.getOwnPropertyNames(original).forEach((key) => {
+		if (!Object.getOwnPropertyDescriptor(alterEgoWithMixins, key)) Object.defineProperty(alterEgoWithMixins, key, {
+			get() {
+				return original[key];
+			},
+			set(newValue) {
+				original[key] = newValue;
+			},
+			configurable: true,
+			enumerable: true
+		});
+	});
+}
+
+//#endregion
+//#region src/qix/session/phoenix/event-emitter-forwarder.ts
+var EventEmitterForwarder = class {
+	#original;
+	constructor(original) {
+		this.#original = original;
+	}
+	on(event, func) {
+		return this.#original.on(event, func);
+	}
+	addListener(event, func) {
+		return this.#original.addListener(event, func);
+	}
+	once(event, func) {
+		return this.#original.once(event, func);
+	}
+	removeListener(event, func) {
+		return this.#original.removeListener(event, func);
+	}
+	emit(event, ...args) {
+		return this.#original.emit(event, ...args);
+	}
+	removeAllListeners(event) {
+		return this.#original.removeAllListeners(event);
+	}
+	listeners(event) {
+		return this.#original.listeners(event);
+	}
+	setMaxListeners(count) {
+		return this.#original.setMaxListeners(count);
+	}
+	static listenerCount(emitter, event) {
+		return EventEmitter.listenerCount(emitter, event);
+	}
+};
+
+//#endregion
+//#region src/qix/session/phoenix/rpc-object-with-mixins.ts
+var PhoenixRpcObjectWithMixinsImpl = class extends EventEmitterForwarder {
+	__original_rpc_object;
+	#classicSessionWithMixins;
+	#mixins;
+	Promise;
+	/**
+	* @internal
+	*/
+	constructor(original, mixins) {
+		super(original);
+		this.__original_rpc_object = original;
+		this.#mixins = mixins || [];
+		this.Promise = this.#mixins.toReversed().find((mixin) => mixin.Promise)?.Promise || Promise;
+	}
+	setSessionWithMixins(newSession) {
+		this.#classicSessionWithMixins = newSession;
+	}
+	get app() {
+		if (!this.#classicSessionWithMixins) throw new Error("Session with mixins has not been set on this object");
+		return this.#classicSessionWithMixins.app;
+	}
+	get global() {
+		if (!this.#classicSessionWithMixins) throw new Error("Session with mixins has not been set on this object");
+		return this.#classicSessionWithMixins.global;
+	}
+	get session() {
+		if (!this.#classicSessionWithMixins) throw new Error("Session with mixins has not been set on this object");
+		return this.#classicSessionWithMixins;
+	}
+	withMixins(...extraMixins) {
+		if (extraMixins.length === 0 || extraMixins === this.#mixins) return this;
+		const effectiveMixins = mergeMixins(this.#mixins, extraMixins);
+		return this.__original_rpc_object.withMixins(...effectiveMixins);
+	}
+	/** SIMPLE FORWARDING TO ORIGINAL */
+	get __remote__() {
+		return this.__original_rpc_object.__remote__;
+	}
+	get handle() {
+		return this.__original_rpc_object.handle;
+	}
+	set handle(handle) {
+		this.__original_rpc_object.handle = handle;
+	}
+	get id() {
+		return this.__original_rpc_object.id;
+	}
+	get type() {
+		return this.__original_rpc_object.type;
+	}
+	get genericType() {
+		return this.__original_rpc_object.genericType;
+	}
+	getHandle() {
+		return this.__original_rpc_object.getHandle();
+	}
+	setHandle(handle) {
+		this.__original_rpc_object.setHandle(handle);
+	}
+	get enigmaModel() {
+		return this;
+	}
+	respawn(newConnection) {
+		return this.__original_rpc_object.respawn(newConnection);
+	}
+};
+
+//#endregion
+//#region src/qix/session/phoenix/rpc-object-dynamic-mixins.ts
+const generatedMixinClassCache = /* @__PURE__ */ new Map();
+let mixinIdentityMap = /* @__PURE__ */ new WeakMap();
+let nextMixinIdentity = 1;
+function getMixinIdentity(mixin) {
+	const existingIdentity = mixinIdentityMap.get(mixin);
+	if (existingIdentity) return existingIdentity;
+	const newIdentity = nextMixinIdentity;
+	nextMixinIdentity += 1;
+	mixinIdentityMap.set(mixin, newIdentity);
+	return newIdentity;
+}
+function toMixinsCacheKey(mixins) {
+	return mixins.map((mixin) => getMixinIdentity(mixin)).sort((a, b) => a - b).join(",");
+}
+function mergeMixins(existingMixins, incomingMixins) {
+	const mergedMixins = [...existingMixins];
+	incomingMixins.forEach((mixin) => {
+		if (!mergedMixins.includes(mixin)) mergedMixins.push(mixin);
+	});
+	return mergedMixins;
+}
+function getPrototypeJustBeforeBase(instance) {
+	const basePrototype = PhoenixRpcObjectImpl.prototype;
+	let currentPrototype = Object.getPrototypeOf(instance);
+	const fallbackPrototype = currentPrototype;
+	while (currentPrototype && currentPrototype !== basePrototype) {
+		const parentPrototype = Object.getPrototypeOf(currentPrototype);
+		if (parentPrototype === basePrototype) return currentPrototype;
+		currentPrototype = parentPrototype;
+	}
+	return fallbackPrototype || basePrototype;
+}
+function getGeneratedMixinClass(effectiveMixins, sourcePrototype, type, genericType) {
+	const sourceClass = sourcePrototype.constructor;
+	let cachedClassByMixins = generatedMixinClassCache.get(sourceClass);
+	if (!cachedClassByMixins) {
+		cachedClassByMixins = /* @__PURE__ */ new Map();
+		generatedMixinClassCache.set(sourceClass, cachedClassByMixins);
+	}
+	const mixinsCacheKey = toMixinsCacheKey(effectiveMixins);
+	let MixinClass = cachedClassByMixins.get(mixinsCacheKey);
+	if (!MixinClass) {
+		MixinClass = generateClassWithMixins(effectiveMixins, sourcePrototype, type, genericType);
+		cachedClassByMixins.set(mixinsCacheKey, MixinClass);
+	}
+	return MixinClass;
+}
+function generateClassWithMixins(effectiveMixins, sourcePrototype, type, genericType) {
+	const wrapInPromise = getPromiseWrapper([...effectiveMixins].toReversed().find((mixin) => mixin.Promise)?.Promise || Promise);
+	const wrapWithMixins = (result) => {
+		if (isPromiseLike(result)) return result.then((resolvedResult) => wrapWithMixins(resolvedResult));
+		if (result instanceof PhoenixRpcObjectImpl) return result.withMixins(...effectiveMixins);
+		return result;
+	};
+	const MixinClass = class GeneratedMixinQixRpxObject extends PhoenixRpcObjectWithMixinsImpl {
+		constructor(original, mixins) {
+			super(original, mixins);
+			initMixins(this, effectiveMixins);
+		}
+	};
+	const newPrototype = MixinClass.prototype;
+	const oldPrototype = sourcePrototype;
+	Object.getOwnPropertyNames(oldPrototype).forEach((key) => {
+		if (key === "constructor") return;
+		const descriptor = Object.getOwnPropertyDescriptor(oldPrototype, key);
+		const value = descriptor?.value;
+		if (typeof value === "function") {
+			Object.defineProperty(newPrototype, key, {
+				value: function wrappedForwarder(...args) {
+					return wrapInPromise(wrapWithMixins(value.apply(this.__original_rpc_object, args)));
+				},
+				configurable: true,
+				writable: true
+			});
+			return;
+		}
+		if (descriptor?.get || descriptor?.set) Object.defineProperty(newPrototype, key, {
+			get: descriptor.get ? function wrappedGetter() {
+				const result = descriptor.get?.call(this.__original_rpc_object);
+				return wrapWithMixins(result);
+			} : void 0,
+			set: descriptor.set ? function wrappedSetter(newValue) {
+				descriptor.set?.call(this.__original_rpc_object, newValue);
+			} : void 0,
+			configurable: true
+		});
+	});
+	applyMixins(newPrototype, effectiveMixins.filter((mixin) => {
+		const types = Array.isArray(mixin.types) ? mixin.types : [mixin.types];
+		return types.includes(type) || genericType && types.includes(genericType);
+	}));
+	return MixinClass;
+}
+
+//#endregion
+//#region src/qix/session/phoenix/rpc-object-session-inner-parts.ts
 var SuspendResumeImpl = class {
 	Promise;
 	#connection;
-	constructor(connection) {
-		this.Promise = Promise;
+	constructor(connection, CustomPromise) {
+		this.Promise = CustomPromise;
 		this.#connection = connection;
 	}
 	resume() {
@@ -16304,17 +16892,17 @@ var SuspendResumeImpl = class {
 };
 var ConfigImpl = class {
 	Promise;
-	constructor() {
-		this.Promise = Promise;
+	constructor(CustomPromise) {
+		this.Promise = CustomPromise;
 	}
 };
 var RpcImpl = class extends EventEmitter {
 	Promise;
 	#connection;
-	constructor(connection) {
+	constructor(connection, CustomPromise) {
 		super();
 		this.#connection = connection;
-		this.Promise = Promise;
+		this.Promise = CustomPromise;
 	}
 	/**
 	* @deprecated
@@ -16327,12 +16915,106 @@ var RpcImpl = class extends EventEmitter {
 	}
 	close() {}
 };
+
+//#endregion
+//#region src/qix/session/phoenix/rpc-object-session-with-mixins.ts
+/**
+* Implements the classic enigma.js session interface plus some new functions like invoke.
+*/
+var RpcObjectSessionWithMixinsImpl = class extends EventEmitterForwarder {
+	#original;
+	#promise;
+	#global;
+	#app;
+	rpc;
+	suspendResume;
+	config;
+	constructor(connection, original, CustomPromise, global, app) {
+		super(original);
+		this.#original = original;
+		this.#promise = CustomPromise;
+		this.#global = global;
+		this.#app = app;
+		this.rpc = new RpcImpl(connection, CustomPromise);
+		this.suspendResume = new SuspendResumeImpl(connection, CustomPromise);
+		this.config = new ConfigImpl(CustomPromise);
+	}
+	#wrapInPromise(promise) {
+		return wrapInPromise(promise, this.#promise);
+	}
+	/**
+	* @deprecated
+	* For backwards compatibility, this function is deprecated.
+	*/
+	send(requestWithHandle) {
+		return this.#wrapInPromise(this.#original.send(requestWithHandle));
+	}
+	get id() {
+		return this.#original.id;
+	}
+	getObjectApi(ref) {
+		return this.#original.getObjectApi(ref);
+	}
+	/**
+	* Returns the app object for the session.
+	*/
+	get global() {
+		return this.#global;
+	}
+	/**
+	* Returns the app object for the session.
+	*/
+	get app() {
+		return this.#app;
+	}
+	get sessionState() {
+		return this.#original.sessionState;
+	}
+	get Promise() {
+		return this.#promise;
+	}
+	resume() {
+		return this.#original.resume();
+	}
+	suspend() {
+		return this.#original.suspend();
+	}
+	get createdAt() {
+		return this.#original.createdAt;
+	}
+	get lastTrafficAt() {
+		return this.#original.lastTrafficAt;
+	}
+	get globalPromise() {
+		return this.#wrapInPromise(Promise.resolve(this.#global));
+	}
+	get openDocPromise() {
+		return this.#wrapInPromise(Promise.resolve(this.#app));
+	}
+	open() {
+		return this.#wrapInPromise(this.globalPromise);
+	}
+	close() {
+		return this.#wrapInPromise(Promise.resolve());
+	}
+	withMixins(extraMixins) {
+		return this.#original.withMixins(extraMixins, this.#promise);
+	}
+};
+
+//#endregion
+//#region src/qix/session/phoenix/rpc-object-session.ts
+/**
+* Implements the classic enigma.js session interface plus some new functions like invoke.
+*/
+let counter = 0;
 var RpcObjectSessionImpl = class extends EventEmitter {
 	rpc;
 	suspendResume;
 	config;
 	id = counter++;
 	#connection;
+	#alterEgosWithMixins = /* @__PURE__ */ new Map();
 	/**
 	*
 	* @internal
@@ -16340,9 +17022,9 @@ var RpcObjectSessionImpl = class extends EventEmitter {
 	constructor(connection) {
 		super();
 		this.#connection = connection;
-		this.rpc = new RpcImpl(connection);
-		this.suspendResume = new SuspendResumeImpl(connection);
-		this.config = new ConfigImpl();
+		this.rpc = new RpcImpl(connection, Promise);
+		this.suspendResume = new SuspendResumeImpl(connection, Promise);
+		this.config = new ConfigImpl(Promise);
 	}
 	/**
 	* @deprecated
@@ -16395,6 +17077,15 @@ var RpcObjectSessionImpl = class extends EventEmitter {
 	}
 	close() {
 		return Promise.resolve();
+	}
+	withMixins(mixins, promise) {
+		const mixinsCacheKey = toMixinsCacheKey(mixins);
+		let alterEgoWithMixins = this.#alterEgosWithMixins.get(mixinsCacheKey);
+		if (!alterEgoWithMixins) {
+			alterEgoWithMixins = new RpcObjectSessionWithMixinsImpl(this.#connection, this, promise, this.#connection.global.withMixins?.(...mixins) || this.#connection.global, this.#connection.doc.withMixins?.(...mixins) || this.#connection.doc);
+			this.#alterEgosWithMixins.set(mixinsCacheKey, alterEgoWithMixins);
+		}
+		return alterEgoWithMixins;
 	}
 };
 
@@ -16481,10 +17172,14 @@ var PhoenixConnectionImpl = class {
 		} catch (err) {
 			const { retry, retryPrepAction } = shouldRetryRequest(request, err);
 			if (retry) {
-				if (retryPrepAction) await retryPrepAction({
-					connection: this.#currentReincarnation.connection,
-					appHandle: this.#currentReincarnation.state.getDoc().getHandle()
-				});
+				if (retryPrepAction) {
+					const currentReincarnation = this.#currentReincarnation;
+					if (!currentReincarnation) throw new Error("No active reincarnation available for retry preparation", { cause: err });
+					await retryPrepAction({
+						connection: currentReincarnation.connection,
+						appHandle: currentReincarnation.state.getDoc().getHandle()
+					});
+				}
 				return this.#sendAndResolveRpcObjects(object, request, reportRequestId);
 			}
 			throw err;
@@ -16870,284 +17565,12 @@ function addToPromiseChain(promise, name, getValue) {
 		enumerable: true,
 		configurable: true
 	});
-	const { then } = promise;
+	const then = promise.then.bind(promise);
 	promise.then = function patchedThen(...params) {
-		const chain = then.apply(this, params);
+		const chain = then(...params);
 		addToPromiseChain(chain, name, getValue);
 		return chain;
 	};
-}
-
-//#endregion
-//#region src/qix/session/phoenix/rpc-object.ts
-var PhoenixRpcObjectImpl = class extends EventEmitter {
-	/** @internal */
-	#remoteObject;
-	/** @deprecated */
-	Promise;
-	/**
-	* @internal
-	*/
-	constructor(rpcObjectCore) {
-		super();
-		this.#remoteObject = rpcObjectCore;
-		this.Promise = Promise;
-	}
-	get __remote__() {
-		return this.#remoteObject;
-	}
-	get handle() {
-		return this.#remoteObject.handle;
-	}
-	set handle(handle) {
-		this.#remoteObject.handle = handle;
-	}
-	get app() {
-		return this.#remoteObject.session.app;
-	}
-	get global() {
-		return this.#remoteObject.session.global;
-	}
-	set global(newGlobal) {
-		if (newGlobal !== this.#remoteObject.session.global) console.warn("Changing the global object on a qix object is not allowed");
-	}
-	get id() {
-		return this.#remoteObject.id;
-	}
-	get type() {
-		return this.#remoteObject.type;
-	}
-	get genericType() {
-		return this.#remoteObject.genericType;
-	}
-	get session() {
-		return this.#remoteObject.session;
-	}
-	getHandle() {
-		return this.#remoteObject.handle;
-	}
-	setHandle(handle) {
-		const oldHandle = this.#remoteObject.handle;
-		this.#remoteObject.handle = handle;
-		if (oldHandle !== handle) logEvent("Change handle for ", this.#remoteObject.id, "from", oldHandle, "to", handle);
-	}
-	/** @deprecated */
-	get enigmaModel() {
-		return this;
-	}
-	/**
-	* @internal
-	*/
-	async respawn(newConnection) {
-		if (this.#remoteObject.type !== "Doc" && this.#remoteObject.type !== "Global") console.error("No respawn mixin found for object ", this.#remoteObject.type, this.#remoteObject.genericType);
-	}
-};
-
-//#endregion
-//#region src/qix/session/phoenix/rpc-object-respawn-mixins.ts
-/**
-* The respawn functions are called when a session is reattached and the objects need to get their new handles and potentially even be recreated from scratch
-* if the session has dissapeared from the server. since the ordinary invoke function on the object and object.session will retrigger the respawning process when already inside t
-* the respawning process we have to use the connection.invoke function instead. which simple takes the handle and the request as arguments and sends it to the server.
-*/
-const refetch1 = {
-	types: ["GenericObject"],
-	override: {
-		async respawn(original, connection) {
-			if (this.__remote__.respawnInfo.isSessionObject) {
-				let objectFoundInEngine = false;
-				if (connection.isReattached()) try {
-					this.setHandle(await connection.invoke(this.app.handle, {
-						method: "GetObject",
-						params: [this.id],
-						outKey: -1
-					}).then((res) => res.qHandle));
-					objectFoundInEngine = true;
-				} catch (err) {
-					console.warn("Session object not found in reattached session", err);
-					objectFoundInEngine = false;
-				}
-				if (!objectFoundInEngine) {
-					const props = JSON.parse(JSON.stringify(this.__remote__.respawnInfo.properties));
-					props.qInfo = props.qInfo || {};
-					props.qInfo.qId = this.id;
-					logEvent("Respawning session object using", this.__remote__.respawnInfo.properties);
-					this.setHandle(await connection.invoke(this.app.handle, {
-						method: "CreateSessionObject",
-						params: [props],
-						outKey: -1
-					}).then((res) => res.qHandle));
-				}
-			} else this.setHandle(await connection.invoke(this.app.handle, {
-				method: "GetObject",
-				params: [this.id],
-				outKey: -1
-			}).then((res) => res.qHandle));
-			if (this.__remote__.respawnInfo.activeModalSelectionPaths && !connection.isReattached()) try {
-				logEvent("########### BeginSelections ###################################", this.__remote__.respawnInfo.activeModalSelectionPaths);
-				await connection.invoke(this.handle, {
-					method: "BeginSelections",
-					params: [this.__remote__.respawnInfo.activeModalSelectionPaths],
-					outKey: -1
-				});
-			} catch (err) {
-				console.warn("Could not reapply modal selection state", err);
-			}
-		},
-		async beginSelections(original, paths) {
-			logEvent("Storing modal selections", this.handle, this.__remote__.respawnInfo.activeModalSelectionPaths);
-			this.__remote__.respawnInfo.activeModalSelectionPaths = paths;
-			return original(paths);
-		},
-		async endSelections(original, accept) {
-			this.__remote__.respawnInfo.activeModalSelectionPaths = void 0;
-			logEvent("Removing modal selections", this.handle, this.__remote__.respawnInfo.activeModalSelectionPaths);
-			return original(accept);
-		},
-		/**
-		* TODO SUPPORT THESE ASWELL
-		applyPatches: (patches: NxPatch[], softPatch?: boolean) => Promise<void>;
-		clearSoftPatches: () => Promise<void>;
-		copyFrom: (fromId: string) => Promise<void>;
-		destroyAllChildren: (propForThis?: CustomProperties) => Promise<void>;
-		destroyChild: (id: string, propForThis?: CustomProperties) => Promise<boolean>;
-		lock: (path: string, colIndices?: number[]) => Promise<void>;
-		resetMadeSelections: () => Promise<void>;
-		setChildArrayOrder: (ids: string[]) => Promise<void>;
-		setFullPropertyTree: (propEntry: GenericObjectEntry) => Promise<void>;
-		setProperties: (prop: CustomProperties) => Promise<void>;
-		unlock: (path: string, colIndices?: number[]) => Promise<void>;
-		*/
-		async setProperties(original, props) {
-			this.__remote__.respawnInfo.properties = props;
-			return original(props);
-		}
-	}
-};
-const variableRespawnMixin = {
-	types: ["GenericVariable"],
-	override: {
-		async respawn(original, connection) {
-			logEvent("Respawning variable ", this.id);
-			if (this.__remote__.respawnInfo.isSessionObject) {
-				let objectFoundInEngine = false;
-				if (connection.isReattached()) try {
-					this.setHandle(await connection.invoke(this.app.handle, {
-						method: "GetObject",
-						params: [this.id],
-						outKey: -1
-					}).then((res) => res.qHandle));
-					objectFoundInEngine = true;
-				} catch (err) {
-					console.warn("Session variable not found in reattached session", err);
-					objectFoundInEngine = false;
-				}
-				if (!objectFoundInEngine) this.setHandle(await connection.invoke(this.app.handle, {
-					method: "CreateSessionVariable",
-					params: [this.__remote__.respawnInfo.properties],
-					outKey: -1
-				}).then((res) => res.qHandle));
-			} else this.setHandle(await connection.invoke(this.app.handle, {
-				method: "GetObject",
-				params: [this.id],
-				outKey: -1
-			}).then((res) => res.qHandle));
-		},
-		async setProperties(original, props) {
-			this.__remote__.respawnInfo.properties = props;
-			return original(props);
-		}
-	}
-};
-const variarbleMeasureAndBookmarkRespawnMixin = {
-	types: [
-		"GenericDimension",
-		"GenericMeasure",
-		"GenericBookmark"
-	],
-	override: { async respawn(original, connection) {
-		logEvent("Respawning field dimension, measure or bookmark", this.id);
-		this.setHandle(await connection.invoke(this.app.handle, {
-			method: "GetObject",
-			params: [this.id],
-			outKey: -1
-		}).then((res) => res.qHandle));
-	} }
-};
-const fieldRespawningMixin = {
-	types: ["Field"],
-	override: { async respawn(original, connection) {
-		logEvent("Respawning field object ", this.id);
-		if (this.__remote__.respawnInfo.creatingRequest && this.__remote__.respawnInfo.creatingRequest.method.startsWith("Get")) {
-			this.setHandle(await connection.invoke(1, this.__remote__.respawnInfo.creatingRequest).then((res) => res.qHandle));
-			logEvent("Respawned field object using creating request ", this.id, this.handle);
-		} else {
-			this.setHandle(0);
-			logEvent("No idea how to respawn", this.id);
-		}
-	} }
-};
-const rememberCreatePropsMixin = {
-	types: ["Doc"],
-	override: {
-		async createSessionObject(original, properties) {
-			const phoenixObject = await original(properties);
-			phoenixObject.__remote__.respawnInfo.isSessionObject = true;
-			phoenixObject.__remote__.respawnInfo.properties = properties;
-			return phoenixObject;
-		},
-		async createSessionVariable(original, properties) {
-			const object = await original(properties);
-			const phoenixObject = object;
-			phoenixObject.__remote__.respawnInfo.isSessionObject = true;
-			phoenixObject.__remote__.respawnInfo.properties = properties;
-			return object;
-		}
-	}
-};
-var rpc_object_respawn_mixins_default = [
-	refetch1,
-	variableRespawnMixin,
-	variarbleMeasureAndBookmarkRespawnMixin,
-	fieldRespawningMixin,
-	rememberCreatePropsMixin
-];
-
-//#endregion
-//#region src/qix/session/phoenix/rpc-object-mixins.ts
-function toMixinMap(mixinsArray) {
-	const mixins = {};
-	rpc_object_respawn_mixins_default.concat(mixinsArray).forEach((mixin) => {
-		(Array.isArray(mixin.types) ? mixin.types : [mixin.types]).forEach((type) => {
-			mixins[type] = mixins[type] || [];
-			mixins[type].push(mixin);
-		});
-	});
-	return mixins;
-}
-function applyMixins(classPrototype, mixinList) {
-	mixinList.forEach(({ extend = {}, override = {} }) => {
-		Object.keys(override).forEach((key) => {
-			if (typeof classPrototype[key] === "function" && typeof override[key] === "function") {
-				const baseFn = classPrototype[key];
-				classPrototype[key] = function wrappedFn(...args) {
-					return override[key].apply(this, [baseFn.bind(this), ...args]);
-				};
-			} else throw new Error(`Tring to override non-existing function in ${classPrototype.type}/${classPrototype.genericType}: ${key}`);
-		});
-		Object.keys(extend).forEach((key) => {
-			if (typeof classPrototype[key] === "function" && typeof extend[key] === "function") throw new Error(`Extend is not allowed. Function already exists in  ${classPrototype.type}/${classPrototype.genericType}: ${key}`);
-			else classPrototype[key] = extend[key];
-		});
-	});
-}
-function initMixins(rpcObject, mixinList) {
-	mixinList.forEach(({ init }) => {
-		if (init) init.bind(rpcObject)({
-			api: rpcObject,
-			config: { Promise }
-		});
-	});
 }
 
 //#endregion

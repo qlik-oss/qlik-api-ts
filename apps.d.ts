@@ -905,7 +905,7 @@ type UpdateOwner = {
 type UpdateSpace = {
   spaceId?: string;
 };
-type UsageEnum = "ANALYTICS" | "DATA_PREPARATION" | "DATAFLOW_PREP" | "SINGLE_TABLE_PREP";
+type UsageEnum = "ANALYTICS" | "DATA_PREPARATION" | "DATAFLOW_PREP" | "SINGLE_TABLE_PREP" | "DIRECT_QUERY_MODE";
 type UserPrivileges = "can_create_app" | "can_import_app" | "can_create_session_app";
 type Classification = {
   absoluteDiff?: number;

@@ -226,23 +226,18 @@ type SharingExecutionResponse = SharingExecutionPersist & {
   links?: Links;
 };
 type SharingSettings = {
-  /** true if report-subscription feature is enabled for this tenant */"enable-report-subscription"?: boolean;
-  /** @deprecated
-   * true if reporting-template-subscription feature is enabled for this tenant */
-  "enable-reporting-template-subscription"?: boolean; /** Whether API endpoints for sharing are enabled */
+  /** true if report-subscription feature is enabled for this tenant */"enable-report-subscription"?: boolean; /** Whether API endpoints for sharing are enabled */
   "enable-sharing"?: boolean; /** Maximum number of recipients when creating a sharing task */
   readonly maxRecipients?: number; /** Max Recipients accepted when creating a new subscription (excluding the owner) */
   readonly maxSubscriptionRecipients?: number; /** This indicates that there is an ongoing operation to either disable or enable the report subscription feature. none means that no such operation is ongoing. enabling/disabling means that system is currently enabling/disabling the feature */
   readonly reportSubscriptionStatus?: "none" | "enabling" | "disabling"; /** UTC timestamp of the most recent change of reportSubscriptionStatus. If there has not been any such change, this is the timestamp of the initial creation of the record. */
   readonly reportSubscriptionStatusChangeTime?: string; /** Whether the license for the tenant has the reportingService feature enabled. */
-  "reporting-service-license-status"?: "enabled" | "disabled"; /** This indicates that there is an ongoing operation to either disable or enable the reporting template subscription feature. none means that no such operation is ongoing. enabling/disabling means that system is currently enabling/disabling the feature */
-  readonly reportingTemplateSubscriptionStatus?: "none" | "enabling" | "disabling"; /** UTC timestamp of the most recent change of reportSubscriptionStatus. If there has not been any such change, this is the timestamp of the initial creation of the record. */
-  readonly reportingTemplateSubscriptionStatusChangeTime?: string; /** These persisted sharing settings are only available for this tenant. Extracted from request JWT. */
+  "reporting-service-license-status"?: "enabled" | "disabled"; /** These persisted sharing settings are only available for this tenant. Extracted from request JWT. */
   readonly tenantId?: string;
 };
 type SharingSettingsPatchCompliant = {
   /** The operation to be performed. */op: "replace"; /** The path for the given resource field to patch. */
-  path: "/enable-sharing" | "/enable-report-subscription" | "/enable-reporting-template-subscription"; /** The value to be used for this operation. */
+  path: "/enable-sharing" | "/enable-report-subscription"; /** The value to be used for this operation. */
   value?: unknown;
 };
 /**

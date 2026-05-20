@@ -95,7 +95,8 @@ type PaginationLink = {
  * @throws GetAutomationConnectionsHttpError
  */
 declare function getAutomationConnections(query: {
-  /** Filters the result based on the specified criteria: name, connectorId, ownerId, or spaceId. */filter?: string; /** The number of automation connections to retrieve. */
+  /** Pagination cursor returned from a previous request. */cursor?: string; /** Filters the result based on the specified criteria: name, connectorId, ownerId, or spaceId. */
+  filter?: string; /** The number of automation connections to retrieve. */
   limit?: number; /** When true, list all connections. Restricted to tenant admins and analytics admins. */
   listAll?: boolean; /** The field to sort by, with +- prefix indicating sort order. (`?sort=-name` => sort on the `name` field using descending order). */
   sort?: "id" | "name" | "createdAt" | "updatedAt" | "+id" | "+name" | "+createdAt" | "+updatedAt" | "-id" | "-name" | "-createdAt" | "-updatedAt";

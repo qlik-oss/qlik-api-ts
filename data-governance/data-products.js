@@ -1,5 +1,5 @@
 import { t as __exportAll } from "../chunks/chunk-BdHzlgOL.js";
-import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-C6eGdcjv.js";
+import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch--Qa19wyc.js";
 
 //#region src/public/rest/data-governance/data-products.ts
 var data_products_exports = /* @__PURE__ */ __exportAll({
