@@ -123,6 +123,7 @@ type ExportError = {
    * - "REP-429014" The export could not be completed within the requested deadline.
    * - "REP-429016" Exceeded max session tenant quota per day.
    * - "REP-429022" Enigma generic abort.
+   * - "REP-400064" Missing Bookmark
    * - "REP-500000" Fail to resolve resource.
    * - "REP-500006" Fail to get report session parameters.
    * - "REP-500014" The app did not open within 10 minutes.

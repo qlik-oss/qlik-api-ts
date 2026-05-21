@@ -95,8 +95,12 @@ function cleanFalsyValues(obj) {
 	return obj;
 }
 function createResolvablePromise() {
-	let resolve;
-	let reject;
+	let resolve = () => {
+		throw new Error("Promise resolver not initialized");
+	};
+	let reject = () => {
+		throw new Error("Promise rejector not initialized");
+	};
 	return [
 		new Promise((res, rej) => {
 			resolve = res;

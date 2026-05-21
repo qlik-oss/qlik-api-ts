@@ -1,6 +1,6 @@
 import { d as HostConfig } from "./auth-types-DjJJgiRF.js";
 //#region src/qix/types/engine-schema.d.ts
-declare const QIX_SCHEMA_VERSION = "12.2790.0";
+declare const QIX_SCHEMA_VERSION = "12.2802.0";
 type AlfaNumString = {
   /**
    * Calculated value.
@@ -995,6 +995,7 @@ type DocListEntry = {
    * * DATA_PREPARATION
    * * DATAFLOW_PREP
    * * SINGLE_TABLE_PREP
+   * * DIRECT_QUERY_MODE
    */
   qUsage?: UsageEnum;
 };
@@ -2964,6 +2965,7 @@ type NxAppLayout = {
    * * DATA_PREPARATION
    * * DATAFLOW_PREP
    * * SINGLE_TABLE_PREP
+   * * DIRECT_QUERY_MODE
    */
   qUsage?: UsageEnum;
 };
@@ -3018,6 +3020,7 @@ type NxAppProperties = {
    * * DATA_PREPARATION
    * * DATAFLOW_PREP
    * * SINGLE_TABLE_PREP
+   * * DIRECT_QUERY_MODE
    */
   qUsage?: UsageEnum;
 };
@@ -7307,7 +7310,7 @@ type UndoInfo = {
  * The numbers of undos and redos are empty when an object is created. The number of possible undos is increased every time an action (for example, create a child, set some properties) on the object is performed. The number of possible redos is increased every time an undo action is performed.
  */
 type UndoInfoDef = object;
-type UsageEnum = "ANALYTICS" | "DATA_PREPARATION" | "DATAFLOW_PREP" | "SINGLE_TABLE_PREP";
+type UsageEnum = "ANALYTICS" | "DATA_PREPARATION" | "DATAFLOW_PREP" | "SINGLE_TABLE_PREP" | "DIRECT_QUERY_MODE";
 type ValueExpr = {
   /**
    * Expression evaluated to dual.

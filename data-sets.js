@@ -1,4 +1,4 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-C6eGdcjv.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch--Qa19wyc.js";
 
 //#region src/public/rest/data-sets.ts
 /**
@@ -48,7 +48,13 @@ async function getDataSet(dataSetId, query, options) {
 	});
 }
 /**
-* Patch data set.
+* Partially updates an existing DataSet by ID using JSON Patch operations (RFC 6902), including ownership attributes.
+*
+* A user can update any DataSet within a space if they fulfill **one** of the following conditions:
+*
+* - Has **Can edit** permission in a **data space**.
+* - Is a **Professional** user with the **Editor** or **Operator** role in a **shared space**.
+* - Is a **Professional** user with the **Facilitator** or **Operator** role in a **managed space**.
 *
 * @param dataSetId
 * @param body an object with the body content
@@ -65,7 +71,13 @@ async function patchDataSet(dataSetId, body, options) {
 	});
 }
 /**
-* Update data set.
+* Fully replaces an existing DataSet by ID, including ownership attributes.
+*
+* A user can update any DataSet within a space if they fulfill **one** of the following conditions:
+*
+* - Has **Can edit** permission in a **data space**.
+* - Is a **Professional** user with the **Editor** or **Operator** role in a **shared space**.
+* - Is a **Professional** user with the **Facilitator** or **Operator** role in a **managed space**.
 *
 * @param dataSetId
 * @param body an object with the body content

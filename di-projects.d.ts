@@ -52,12 +52,14 @@ type CreateDiProjectReq = {
 type DataTaskDatasetState = {
   cdcStatus?: {
     /** Number of DDL statements executed during the last run */ddlCount?: number; /** delete portion of totalProcessedCount. Only available for some task types */
-    deleteCount?: number; /** Insert portion of totalProcessedCount. Only available for some task types */
+    deleteCount?: number; /** Number of incoming changes for the dataset. Only relevant for 'Iceberg Storage' and 'Streaming Transform' tasks. */
+    incomingChangesCount?: number; /** Insert portion of totalProcessedCount. Only available for some task types */
     insertCount?: number;
     lastProcessed?: string;
     message?: string;
     state?: "QUEUED" | "PROCESSING" | "ACCUMULATING_CHANGES" | "COMPLETED" | "ERROR"; /** Total number of changes/DMLs applied to the dataset */
-    totalProcessedCount?: number; /** update portion of totalProcessedCount. Only available for some task types */
+    totalProcessedCount?: number; /** Number of records that are queryable via the view, but not yet merged into optimized Iceberg partitions. Only relevant for 'Iceberg Storage' and 'Streaming Transform' tasks. */
+    unoptimizedRecordsCount?: number; /** update portion of totalProcessedCount. Only available for some task types */
     updateCount?: number;
   }; /** Is the data ready for use? */
   dataReadiness?: "READY" | "NOT_READY" | "ERROR"; /** Id of the dataset */
@@ -100,7 +102,8 @@ type DataTaskDatasetState = {
 type DataTaskInstanceState = {
   cdcStatus?: {
     accumulatingChangesCount?: number;
-    applyingChangesCount?: number; /** Duration in HH:MM:SS format (hours:minutes:seconds) */
+    applyingChangesCount?: number; /** Number of incoming changes. Only relevant for 'Iceberg Storage' and 'Streaming Transform' tasks. */
+    incomingChangesCount?: number; /** Duration in HH:MM:SS format (hours:minutes:seconds) */
     latency?: string; /** Throughput in kilobytes per second */
     throughputInKilobytesPerSecond?: number;
     totalProcessedCount?: number;
@@ -161,6 +164,13 @@ type DataTaskRuntimeState = {
   type?: DataTaskType;
 };
 type DataTaskType = "LANDING" | "STORAGE" | "QVD_STORAGE" | "TRANSFORM" | "DATAMART" | "REGISTERED_DATA" | "REPLICATION" | "DISTRIBUTION" | "LAKE_LANDING" | "KNOWLEDGE_MART" | "FILE_BASED_KNOWLEDGE_MART" | "LAKEHOUSE_STORAGE" | "LAKEHOUSE_MIRROR" | "STREAMING_LAKE_LANDING" | "STREAMING_TRANSFORM";
+/**
+ * Defines the export format for the project files.
+ * - 'LEGACY': Exports a ZIP of the previous JSON files. Deprecated and will be removed in a future release.
+ * - 'MINIMAL': Exports a ZIP of the new YAML files, including only non-default attribute values.
+ * - 'ALL': Exports a ZIP of the new YAML files, including all attributes.
+ */
+type DiExportMode = "MINIMAL" | "ALL" | "LEGACY";
 type DiProjectItemRsp = {
   description?: string;
   id?: string;
@@ -188,6 +198,11 @@ type Errors = {
 };
 type ExportDiProjectReq = {
   /** Include bindings in the exported zip file (optional, default is false) */includeBindings?: boolean;
+  /** Defines the export format for the project files.
+   * - 'LEGACY': Exports a ZIP of the previous JSON files. Deprecated and will be removed in a future release.
+   * - 'MINIMAL': Exports a ZIP of the new YAML files, including only non-default attribute values.
+   * - 'ALL': Exports a ZIP of the new YAML files, including all attributes. */
+  mode?: DiExportMode;
 };
 /**
  * Statistics for file-based tasks.
@@ -807,4 +822,4 @@ type DiProjectsAPI = {
  */
 declare const diProjectsExport: DiProjectsAPI;
 //#endregion
-export { AsyncActionDetails, AsyncActionError, AsyncActionRsp, AsyncActionTaskProgress, AsyncActionType, AsyncCallStatus, CreateDiProjectHttpError, CreateDiProjectHttpResponse, CreateDiProjectReq, DataTaskDatasetState, DataTaskInstanceState, DataTaskItemRsp, DataTaskRuntimeState, DataTaskType, DiProjectItemRsp, DiProjectOperationSelectedTask, DiProjectsAPI, Error, ErrorSource, Errors, ExportDiProjectHttpError, ExportDiProjectHttpResponse, ExportDiProjectReq, FileStatistics, GetDiExportProjectVariablesRsp, GetDiProjectDiTaskHttpError, GetDiProjectDiTaskHttpResponse, GetDiProjectDiTaskRuntimeStateDatasetsHttpError, GetDiProjectDiTaskRuntimeStateDatasetsHttpResponse, GetDiProjectDiTaskRuntimeStateHttpError, GetDiProjectDiTaskRuntimeStateHttpResponse, GetDiProjectDiTasksHttpError, GetDiProjectDiTasksHttpResponse, GetDiProjectExportVariablesHttpError, GetDiProjectExportVariablesHttpResponse, GetDiProjectHttpError, GetDiProjectHttpResponse, GetDiProjectsHttpError, GetDiProjectsHttpResponse, ImportDiProjectHttpError, ImportDiProjectHttpResponse, ImportDiProjectRsp, ListDataTasksRsp, ListDiProjectsRsp, OperationStatistics, PrepareDiProjectDiTaskHttpError, PrepareDiProjectDiTaskHttpResponse, PrepareDiProjectHttpError, PrepareDiProjectHttpResponse, PrepareProjectReq, PrepareTaskReq, RecreateDatasetsDiProjectDiTaskHttpError, RecreateDatasetsDiProjectDiTaskHttpResponse, RecreateTaskDatasetsReq, ReloadDiTaskReq, ReloadRequestResponse, RequestReloadDiProjectDiTaskHttpError, RequestReloadDiProjectDiTaskHttpResponse, SetDiProjectExportVariablesHttpError, SetDiProjectExportVariablesHttpResponse, StartDiProjectDiTaskRuntimeHttpError, StartDiProjectDiTaskRuntimeHttpResponse, StartDiProjectDiTaskRuntimeWithBodyHttpError, StartDiProjectDiTaskRuntimeWithBodyHttpResponse, StartTaskReq, StopDiProjectDiTaskRuntimeHttpError, StopDiProjectDiTaskRuntimeHttpResponse, TaskSelectionList, UpdateDiExportProjectVariablesReq, UpdateDiExportProjectVariablesRsp, ValidateDiProjectDiTaskHttpError, ValidateDiProjectDiTaskHttpResponse, ValidateDiProjectHttpError, ValidateDiProjectHttpResponse, ValidateProjectReq, ValidateTaskReq, clearCache, createDiProject, diProjectsExport as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, recreateDatasetsDiProjectDiTask, requestReloadDiProjectDiTask, setDiProjectExportVariables, startDiProjectDiTaskRuntime, startDiProjectDiTaskRuntimeWithBody, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };
+export { AsyncActionDetails, AsyncActionError, AsyncActionRsp, AsyncActionTaskProgress, AsyncActionType, AsyncCallStatus, CreateDiProjectHttpError, CreateDiProjectHttpResponse, CreateDiProjectReq, DataTaskDatasetState, DataTaskInstanceState, DataTaskItemRsp, DataTaskRuntimeState, DataTaskType, DiExportMode, DiProjectItemRsp, DiProjectOperationSelectedTask, DiProjectsAPI, Error, ErrorSource, Errors, ExportDiProjectHttpError, ExportDiProjectHttpResponse, ExportDiProjectReq, FileStatistics, GetDiExportProjectVariablesRsp, GetDiProjectDiTaskHttpError, GetDiProjectDiTaskHttpResponse, GetDiProjectDiTaskRuntimeStateDatasetsHttpError, GetDiProjectDiTaskRuntimeStateDatasetsHttpResponse, GetDiProjectDiTaskRuntimeStateHttpError, GetDiProjectDiTaskRuntimeStateHttpResponse, GetDiProjectDiTasksHttpError, GetDiProjectDiTasksHttpResponse, GetDiProjectExportVariablesHttpError, GetDiProjectExportVariablesHttpResponse, GetDiProjectHttpError, GetDiProjectHttpResponse, GetDiProjectsHttpError, GetDiProjectsHttpResponse, ImportDiProjectHttpError, ImportDiProjectHttpResponse, ImportDiProjectRsp, ListDataTasksRsp, ListDiProjectsRsp, OperationStatistics, PrepareDiProjectDiTaskHttpError, PrepareDiProjectDiTaskHttpResponse, PrepareDiProjectHttpError, PrepareDiProjectHttpResponse, PrepareProjectReq, PrepareTaskReq, RecreateDatasetsDiProjectDiTaskHttpError, RecreateDatasetsDiProjectDiTaskHttpResponse, RecreateTaskDatasetsReq, ReloadDiTaskReq, ReloadRequestResponse, RequestReloadDiProjectDiTaskHttpError, RequestReloadDiProjectDiTaskHttpResponse, SetDiProjectExportVariablesHttpError, SetDiProjectExportVariablesHttpResponse, StartDiProjectDiTaskRuntimeHttpError, StartDiProjectDiTaskRuntimeHttpResponse, StartDiProjectDiTaskRuntimeWithBodyHttpError, StartDiProjectDiTaskRuntimeWithBodyHttpResponse, StartTaskReq, StopDiProjectDiTaskRuntimeHttpError, StopDiProjectDiTaskRuntimeHttpResponse, TaskSelectionList, UpdateDiExportProjectVariablesReq, UpdateDiExportProjectVariablesRsp, ValidateDiProjectDiTaskHttpError, ValidateDiProjectDiTaskHttpResponse, ValidateDiProjectHttpError, ValidateDiProjectHttpResponse, ValidateProjectReq, ValidateTaskReq, clearCache, createDiProject, diProjectsExport as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, recreateDatasetsDiProjectDiTask, requestReloadDiProjectDiTask, setDiProjectExportVariables, startDiProjectDiTaskRuntime, startDiProjectDiTaskRuntimeWithBody, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };

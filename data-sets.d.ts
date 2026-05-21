@@ -269,7 +269,13 @@ type GetDataSetHttpError = {
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
 };
 /**
- * Patch data set.
+ * Partially updates an existing DataSet by ID using JSON Patch operations (RFC 6902), including ownership attributes.
+ *
+ * A user can update any DataSet within a space if they fulfill **one** of the following conditions:
+ *
+ * - Has **Can edit** permission in a **data space**.
+ * - Is a **Professional** user with the **Editor** or **Operator** role in a **shared space**.
+ * - Is a **Professional** user with the **Facilitator** or **Operator** role in a **managed space**.
  *
  * @param dataSetId
  * @param body an object with the body content
@@ -287,7 +293,13 @@ type PatchDataSetHttpError = {
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
 };
 /**
- * Update data set.
+ * Fully replaces an existing DataSet by ID, including ownership attributes.
+ *
+ * A user can update any DataSet within a space if they fulfill **one** of the following conditions:
+ *
+ * - Has **Can edit** permission in a **data space**.
+ * - Is a **Professional** user with the **Editor** or **Operator** role in a **shared space**.
+ * - Is a **Professional** user with the **Facilitator** or **Operator** role in a **managed space**.
  *
  * @param dataSetId
  * @param body an object with the body content
@@ -358,7 +370,13 @@ type DataSetsAPI = {
    */
   getDataSet: typeof getDataSet;
   /**
-   * Patch data set.
+   * Partially updates an existing DataSet by ID using JSON Patch operations (RFC 6902), including ownership attributes.
+   *
+   * A user can update any DataSet within a space if they fulfill **one** of the following conditions:
+   *
+   * - Has **Can edit** permission in a **data space**.
+   * - Is a **Professional** user with the **Editor** or **Operator** role in a **shared space**.
+   * - Is a **Professional** user with the **Facilitator** or **Operator** role in a **managed space**.
    *
    * @param dataSetId
    * @param body an object with the body content
@@ -366,7 +384,13 @@ type DataSetsAPI = {
    */
   patchDataSet: typeof patchDataSet;
   /**
-   * Update data set.
+   * Fully replaces an existing DataSet by ID, including ownership attributes.
+   *
+   * A user can update any DataSet within a space if they fulfill **one** of the following conditions:
+   *
+   * - Has **Can edit** permission in a **data space**.
+   * - Is a **Professional** user with the **Editor** or **Operator** role in a **shared space**.
+   * - Is a **Professional** user with the **Facilitator** or **Operator** role in a **managed space**.
    *
    * @param dataSetId
    * @param body an object with the body content

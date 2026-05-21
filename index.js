@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-C6eGdcjv.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch--Qa19wyc.js";
 import auth_default from "./auth.js";
-import { a as interceptors$1 } from "./chunks/interceptors-opxWmydH.js";
+import { a as interceptors$1 } from "./chunks/interceptors-DSlOn_k7.js";
 import qix$1 from "./qix.js";
 
 //#region src/runtime-api-generator/runtime-api-generator-common.ts
@@ -1086,6 +1086,31 @@ const createRolesRuntimeAPI = apiDefToApiPublic("roles", { api: { v1: { roles: {
 		"patchRole:ABJ:"
 	]
 } } } });
+const createSchedulingRuntimeAPI = apiDefToApiPublic("scheduling", {}, { tasks: apiDefToApiPublic("scheduling/tasks", { api: { scheduling: { tasks: {
+	"": ["getTasks:GQ:", "createTask:PQBJ:"],
+	resources: { "{id}": { runs: ["getTasksResourceRuns_FIX_THIS_QUIRKY_NAME:GQ:"] } },
+	"{id}": {
+		"": [
+			"deleteTask:D:",
+			"getTask:G:",
+			"patchTask:ABJ:",
+			"updateTask:UBJ:"
+		],
+		actions: { start: ["startTask:PQ:"] },
+		graphs: {
+			ancestors: ["getTaskGraphsAncestors_FIX_THIS_QUIRKY_NAME:GQ:"],
+			children: ["getTaskGraphsChildren_FIX_THIS_QUIRKY_NAME:GQ:"],
+			descendants: ["getTaskGraphsDescendants_FIX_THIS_QUIRKY_NAME:GQ:"],
+			parents: ["getTaskGraphsParents_FIX_THIS_QUIRKY_NAME:GQ:"],
+			subgraph: ["getTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAME:GQ:"]
+		},
+		runs: {
+			"": ["getTaskRuns:GQ:"],
+			last: ["getTaskRunsLast_FIX_THIS_QUIRKY_NAME:G:"],
+			"{runId}": { log: ["getTaskRunLog:G:"] }
+		}
+	}
+} } } }) });
 const createSharingTasksRuntimeAPI = apiDefToApiPublic("sharing-tasks", { api: { v1: { "sharing-tasks": {
 	"": ["getSharingTasks:GQ:", "createSharingTask:PBJ:"],
 	actions: { execute: ["executeSharingTasks:PBJ:"] },
@@ -1385,6 +1410,7 @@ const reloads = createReloadsRuntimeAPI(void 0, interceptors_default);
 const reportTemplates = createReportTemplatesRuntimeAPI(void 0, interceptors_default);
 const reports = createReportsRuntimeAPI(void 0, interceptors_default);
 const roles = createRolesRuntimeAPI(void 0, interceptors_default);
+const scheduling = createSchedulingRuntimeAPI(void 0, interceptors_default);
 const sharingTasks = createSharingTasksRuntimeAPI(void 0, interceptors_default);
 const spaces = createSpacesRuntimeAPI(void 0, interceptors_default);
 const tasks = createTasksRuntimeAPI(void 0, interceptors_default);
@@ -1458,6 +1484,7 @@ const createQlikApi = (props) => {
 		reportTemplates: createReportTemplatesRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		reports: createReportsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		roles: createRolesRuntimeAPI(props?.hostConfig, scopedInterceptors),
+		scheduling: createSchedulingRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		sharingTasks: createSharingTasksRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		spaces: createSpacesRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		tasks: createTasksRuntimeAPI(props?.hostConfig, scopedInterceptors),
@@ -1532,6 +1559,7 @@ const api = {
 	reportTemplates,
 	reports,
 	roles,
+	scheduling,
 	sharingTasks,
 	spaces,
 	tasks,
@@ -1550,4 +1578,4 @@ const api = {
 };
 
 //#endregion
-export { analytics, apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, connectivity, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataGovernance, dataQualities, dataSets, dataSources, dataStores, dcaas, api as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, sharingTasks, spaces, tasks, tempContents, tenantSettings, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks, workflows };
+export { analytics, apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, connectivity, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataGovernance, dataQualities, dataSets, dataSources, dataStores, dcaas, api as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, scheduling, sharingTasks, spaces, tasks, tempContents, tenantSettings, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks, workflows };

@@ -1,4 +1,4 @@
-import { a as sortKeys, i as isNode, r as isBrowser, t as cleanFalsyValues } from "./utils-6yIYp94j.js";
+import { a as sortKeys, i as isNode, r as isBrowser, t as cleanFalsyValues } from "./utils-COWNd3uN.js";
 import { authTypesThatCanBeOmitted, hostConfigCommonProperties } from "../auth-types.js";
 
 //#region src/platform/platform-functions.ts
@@ -307,7 +307,10 @@ function requestRedirect(hostConfig) {
 //#endregion
 //#region src/utils/expose-internal-test-apis.ts
 function exposeInternalApiOnWindow(name, fn) {
-	if (globalThis.location?.origin.startsWith("https://localhost:") || globalThis.location?.origin?.endsWith("qlik-stage.com")) {
+	const hostname = globalThis.location?.hostname?.toLowerCase();
+	const isLocalhost = hostname === "localhost";
+	const isQlikStageDomain = hostname?.endsWith(".qlik-stage.com");
+	if (isLocalhost || isQlikStageDomain) {
 		if (globalThis.QlikMain) {
 			if (globalThis.QlikMain.INTERNAL__DO_NOT_USE.qix === void 0) globalThis.QlikMain.INTERNAL__DO_NOT_USE.qix = {};
 			globalThis.QlikMain.INTERNAL__DO_NOT_USE.qix[name] = fn;
@@ -1507,7 +1510,7 @@ function getServiceOverrideHeaderFromLocalStorage() {
 /** Convert a Blob to a DownloadableBlob */
 function toDownloadableBlob(blob, name) {
 	const result = blob;
-	if (name) result.download = (filename = name) => download(blob, filename);
+	if (name) result.download = (filename) => download(blob, filename ?? name);
 	else result.download = (filename) => download(blob, filename);
 	return result;
 }
@@ -1613,12 +1616,20 @@ async function parseFetchResponse(fetchResponse, url) {
 			resultData = fetchResponse.body;
 			break;
 		case void 0:
-		default:
+		default: {
+			let bodyText;
 			try {
-				resultData = await fetchResponse.text();
-				resultData = JSON.parse(resultData);
-			} catch {}
+				bodyText = await fetchResponse.text();
+			} catch (error) {
+				throw new InvokeFetchError(`request to '${url}' failed while reading response body: ${error instanceof Error ? error.message : String(error)}`, fetchResponse.status, fetchResponse.headers, void 0);
+			}
+			try {
+				resultData = JSON.parse(bodyText);
+			} catch {
+				resultData = bodyText;
+			}
 			break;
+		}
 	}
 	const { status, statusText, headers } = fetchResponse;
 	const errorMsg = `request to '${url}' failed with status ${status} ${statusText}.`;

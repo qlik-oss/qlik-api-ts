@@ -37,7 +37,7 @@ type Tenant = {
   autoAssignPrivateAnalyticsContentCreatorRoleToProfessionals?: boolean; /** The timestamp for when the tenant record was created (1970-01-01T00:00:00.001Z for static tenants). */
   readonly created?: string; /** The user ID who created the tenant. */
   createdByUser?: string; /** The datacenter where the tenant is located. */
-  datacenter?: string;
+  datacenter?: string; /** @deprecated */
   enableAnalyticCreation?: boolean;
   enableAppOpeningFeedback?: boolean; /** List of case insensitive hostnames that are mapped to the tenant. The first record maps to the display name and the subsequent entries are aliases. */
   hostnames?: string[]; /** The unique tenant identifier. */
@@ -50,7 +50,8 @@ type Tenant = {
   }; /** The display name of the tenant. */
   name: string; /** The region where the tenant is located. */
   readonly region?: string; /** The status of the tenant. */
-  status?: "active" | "disabled" | "deleted" | "user-access-disabled";
+  status?: "active" | "disabled" | "deleted" | "user-access-disabled"; /** The timestamp for when the tenant status was last changed. */
+  readonly statusLastUpdatedAt?: string;
 };
 type TenantCreationRequest = {
   /** The datacenter where the tenant is located.

@@ -180,7 +180,8 @@ type UsageObject = {
  * @throws GetAutomationsHttpError
  */
 declare function getAutomations(query: {
-  /** Allowed filters: `name`, `runMode`, `lastRunStatus`, `ownerId`, `spaceId`. */filter?: string; /** The number of automations to retrieve. */
+  /** Pagination cursor returned from a previous request. */cursor?: string; /** Allowed filters: `name`, `runMode`, `lastRunStatus`, `ownerId`, `spaceId`. */
+  filter?: string; /** The number of automations to retrieve. */
   limit?: number; /** When true, list all automations. Restricted to tenant admins and analytics admins. */
   listAll?: boolean; /** The field to sort by, with +- prefix indicating sort order. (`?sort=-name` => sort on the `name` field using descending order). */
   sort?: "id" | "name" | "runMode" | "state" | "createdAt" | "updatedAt" | "lastRunAt" | "lastRunStatus" | "+id" | "+name" | "+runMode" | "+state" | "+createdAt" | "+updatedAt" | "+lastRunAt" | "+lastRunStatus" | "-id" | "-name" | "-runMode" | "-state" | "-createdAt" | "-updatedAt" | "-lastRunAt" | "-lastRunStatus" | "maxConcurrentRuns" | "+maxConcurrentRuns" | "-maxConcurrentRuns";
@@ -455,7 +456,8 @@ type MoveAutomationHttpError = {
  * @throws GetAutomationRunsHttpError
  */
 declare function getAutomationRuns(id: string, query: {
-  /** Allowed filters: `status`, `context`, `startTime`, `title`, `spaceId`, `ownerId`, `executedById`, `billable`. */filter?: string; /** The number of runs to retrieve. */
+  /** Pagination cursor returned from a previous request. */cursor?: string; /** Allowed filters: `status`, `context`, `startTime`, `title`, `spaceId`, `ownerId`, `executedById`, `billable`. */
+  filter?: string; /** The number of runs to retrieve. */
   limit?: number; /** The field to sort by, with +- prefix indicating sort order. (`?query=-startTime` => sort on the `startTime` field using descending order). */
   sort?: "id" | "status" | "startTime" | "-id" | "-status" | "-startTime" | "+id" | "+status" | "+startTime";
 }, options?: ApiCallOptions): Promise<GetAutomationRunsHttpResponse>;
