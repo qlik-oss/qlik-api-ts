@@ -148,13 +148,13 @@ type RunListObject = {
   readonly updatedAt?: string;
 };
 type ScheduleRequestObject = {
-  /** time in seconds. */interval?: number; /** The date and time when the schedule becomes active. */
+  /** Interval in seconds; must be a multiple of 60. Values are rounded to the nearest minute (≥30 seconds rounded up, otherwise down). */interval?: number; /** The date and time when the schedule becomes active. */
   startAt?: string; /** The date and time until the schedule is active. */
   stopAt?: string; /** The timezone applied to the start and end times. */
   timezone?: string;
 };
 type ScheduleResponseObject = {
-  readonly id?: string; /** time in seconds. */
+  readonly id?: string; /** Interval in seconds. */
   interval?: number;
   lastStartedAt?: string;
   startAt?: string;

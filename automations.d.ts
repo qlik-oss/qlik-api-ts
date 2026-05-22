@@ -146,13 +146,13 @@ type RunListObject = {
   readonly updatedAt?: string;
 };
 type ScheduleRequestObject = {
-  /** time in seconds. */interval?: number;
+  /** Interval in seconds; must be a multiple of 60. Values are rounded to the nearest minute (≥30 seconds rounded up, otherwise down). */interval?: number;
   startAt?: string;
   stopAt?: string;
   timezone?: string;
 };
 type ScheduleResponseObject = {
-  readonly id?: string; /** time in seconds. */
+  readonly id?: string; /** Interval in seconds. */
   interval?: number;
   lastStartedAt?: string;
   startAt?: string;
