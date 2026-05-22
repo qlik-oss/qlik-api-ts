@@ -8,6 +8,7 @@ var change_stores_exports = /* @__PURE__ */ __exportAll({
 	getChangeStore: () => getChangeStore,
 	getChangeStoreChanges: () => getChangeStoreChanges,
 	getChangeStoreChangesTabularViews: () => getChangeStoreChangesTabularViews,
+	getChangeStoreEditableColumns: () => getChangeStoreEditableColumns,
 	getChangeStores: () => getChangeStores
 });
 /**
@@ -101,6 +102,31 @@ async function getChangeStoreChangesTabularViews(storeId, query, options) {
 	});
 }
 /**
+* Returns a paginated list of editable-columns that belong to the specified change store, supporting optional filtering and sorting.
+* @example
+* getChangeStoreEditableColumns(
+*   "507f1f77bcf86cd799439011",
+*   {
+*     page: "1a2b3c",
+*     limit: 100,
+*     sort: "+createdAt"
+*   }
+* )
+*
+* @param storeId The id of the change store.
+* @param query an object with query parameters
+* @throws GetChangeStoreEditableColumnsHttpError
+*/
+async function getChangeStoreEditableColumns(storeId, query, options) {
+	return invokeFetch("analytics/change-stores", {
+		method: "get",
+		pathTemplate: "/api/analytics/change-stores/{storeId}/editable-columns",
+		pathVariables: { storeId },
+		query,
+		options
+	});
+}
+/**
 * Clears the cache for analytics/change-stores api requests.
 */
 function clearCache() {
@@ -114,8 +140,9 @@ const changeStoresExport = {
 	getChangeStore,
 	getChangeStoreChanges,
 	getChangeStoreChangesTabularViews,
+	getChangeStoreEditableColumns,
 	clearCache
 };
 
 //#endregion
-export { clearCache, changeStoresExport as default, getChangeStore, getChangeStoreChanges, getChangeStoreChangesTabularViews, getChangeStores, change_stores_exports as t };
+export { clearCache, changeStoresExport as default, getChangeStore, getChangeStoreChanges, getChangeStoreChangesTabularViews, getChangeStoreEditableColumns, getChangeStores, change_stores_exports as t };

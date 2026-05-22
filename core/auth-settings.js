@@ -21,7 +21,7 @@ async function getAuthSettings(options) {
 	});
 }
 /**
-* Updates one or more authentication settings for the tenant using JSON Patch (RFC 6902). Supports `replace` operations on `/userSessionInactivityTimeoutMinutes` and `/maxUserSessionLifespanMinutes`. The value for `maxUserSessionLifespanMinutes` must be a whole number of hours (divisible by 60). The user must be assigned the `TenantAdmin` role.
+* Updates one or more authentication settings for the tenant using JSON Patch (RFC 6902). Supports `replace` operations on `/userSessionInactivityTimeoutMinutes`, `/maxUserSessionLifespanMinutes`, and `/dynamicClientRegistrationEnabled`. The value for `maxUserSessionLifespanMinutes` must be a whole number of hours (divisible by 60). The user must be assigned the `TenantAdmin` role.
 *
 * @param body an object with the body content
 * @throws PatchAuthSettingsHttpError

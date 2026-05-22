@@ -34,8 +34,9 @@ import { DataConnectionsAPI as DataConnectionsAPI$1 } from "./data-connections.j
 import { DataCredentialsAPI as DataCredentialsAPI$1 } from "./data-credentials.js";
 import { DataFilesAPI as DataFilesAPI$1 } from "./data-files.js";
 import { DataProductsAPI } from "./data-governance/data-products.js";
+import { DataQualitiesAPI } from "./data-governance/data-qualities.js";
 import { DataGovernanceAPI } from "./data-governance.js";
-import { DataQualitiesAPI } from "./data-qualities.js";
+import { DataQualitiesAPI as DataQualitiesAPI$1 } from "./data-qualities.js";
 import { DataSetsAPI } from "./data-sets.js";
 import { DataSourcesAPI as DataSourcesAPI$1 } from "./data-sources.js";
 import { DataStoresAPI } from "./data-stores.js";
@@ -134,8 +135,9 @@ declare const dataCredentials: DataCredentialsAPI$1;
 declare const dataFiles: DataFilesAPI$1;
 declare const dataGovernance: {
   dataProducts: DataProductsAPI;
+  dataQualities: DataQualitiesAPI;
 };
-declare const dataQualities: DataQualitiesAPI;
+declare const dataQualities: DataQualitiesAPI$1;
 declare const dataSets: DataSetsAPI;
 declare const dataSources: DataSourcesAPI$1;
 declare const dataStores: DataStoresAPI;
@@ -252,9 +254,10 @@ interface QlikAPI {
   /** Functions for the dataGovernance api */
   dataGovernance: DataGovernanceAPI & {
     dataProducts: DataProductsAPI;
+    dataQualities: DataQualitiesAPI;
   };
   /** Functions for the dataQualities api */
-  dataQualities: DataQualitiesAPI;
+  dataQualities: DataQualitiesAPI$1;
   /** Functions for the dataSets api */
   dataSets: DataSetsAPI;
   /** Functions for the dataSources api */

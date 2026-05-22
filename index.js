@@ -204,7 +204,8 @@ const createAnalyticsChangeStoresRuntimeAPI = apiDefToApiPublic("analytics/chang
 		changes: {
 			"": ["getChangeStoreChanges:GQ:"],
 			"tabular-views": ["getChangeStoreChangesTabularViews:GQ:"]
-		}
+		},
+		"editable-columns": ["getChangeStoreEditableColumns:GQ:"]
 	}
 } } } });
 const createAnalyticsRuntimeAPI = apiDefToApiPublic("analytics", {}, {
@@ -658,9 +659,18 @@ const createDataGovernanceDataProductsRuntimeAPI = apiDefToApiPublic("data-gover
 		changelogs: ["getDataProductChangelogs:GQ:"]
 	}
 } } } });
+const createDataGovernanceDataQualitiesRuntimeAPI = apiDefToApiPublic("data-governance/data-qualities", { api: { "data-governance": { "data-qualities": {
+	computations: {
+		"": ["createDataQualitiesComputation_FIX_THIS_QUIRKY_NAME:PBJ:"],
+		"{computationId}": ["getDataQualitiesComputation_FIX_THIS_QUIRKY_NAME:G:"]
+	},
+	"global-results": ["getDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAME:GQ:"]
+} } } });
 const createDataGovernanceRuntimeAPI = apiDefToApiPublic("data-governance", {}, {
 	"data-products": createDataGovernanceDataProductsRuntimeAPI,
-	dataProducts: createDataGovernanceDataProductsRuntimeAPI
+	dataProducts: createDataGovernanceDataProductsRuntimeAPI,
+	"data-qualities": createDataGovernanceDataQualitiesRuntimeAPI,
+	dataQualities: createDataGovernanceDataQualitiesRuntimeAPI
 });
 const createDataQualitiesRuntimeAPI = apiDefToApiPublic("data-qualities", { api: { v1: { "data-qualities": {
 	computations: {

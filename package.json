@@ -55,6 +55,7 @@
     "./data-files": "./data-files.js",
     "./data-governance": "./data-governance.js",
     "./data-governance/data-products": "./data-governance/data-products.js",
+    "./data-governance/data-qualities": "./data-governance/data-qualities.js",
     "./data-qualities": "./data-qualities.js",
     "./data-sets": "./data-sets.js",
     "./data-sources": "./data-sources.js",
