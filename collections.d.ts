@@ -1,4 +1,4 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
 //#region src/public/rest/collections.d.ts
 type CollectionByIdPatch = {
   /** The operation to be performed. */op: "replace"; /** Field of collection to be patched. */

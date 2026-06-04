@@ -1,4 +1,4 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
 //#region src/public/rest/glossaries.d.ts
 /**
  * A JSON Patch document as defined in https://tools.ietf.org/html/rfc6902.
@@ -46,7 +46,7 @@ type AtlanEntityAttributes = {
   userDescription?: string;
 };
 /**
- * Atlan glossary format. See https://apidocs.atlan.com/
+ * Atlan glossary format. For more information, see https://docs.atlan.com/
  */
 type AtlanGlossary = {
   entity?: AtlanEntity;

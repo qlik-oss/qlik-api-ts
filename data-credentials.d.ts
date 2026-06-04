@@ -1,4 +1,4 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
 //#region src/public/rest/data-credentials.d.ts
 type ActionFilterOrphanRequest = {
   /** Filtering on datasource ID of credentials */datasourceID?: string; /** Filtering on separate status of credentials: * 0 - embedded credential * 1 - separated credential */

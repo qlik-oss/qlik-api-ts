@@ -1,4 +1,4 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
 //#region src/public/rest/assistants.d.ts
 type Assistant = {
   /** Datetime when the assistant was created. */readonly createdAt: string; /** Unique identifier of the user who created the assistant. */
@@ -230,11 +230,6 @@ type ErrorResponse = {
   traceId?: string;
 };
 type ErrorResponseCode = {
-  code?: string;
-  detail?: string;
-  title?: string;
-};
-type ErrorResponseCodeCopy = {
   /** Custom error codes
    * * AE-1 - Internal processing error
    * * AE-2 - Incorrect request
@@ -243,6 +238,11 @@ type ErrorResponseCodeCopy = {
    * * AE-5 - Resource is not found
    * * AE-6 - API usage rate limit is exceeded
    * * AE-7 - Method is not allowed */
+  code?: string;
+  detail?: string;
+  title?: string;
+};
+type ErrorResponseCodeCopy = {
   code?: string;
   detail?: string;
   title?: string;
@@ -400,7 +400,7 @@ type GetAssistantsHttpResponse = {
   next?: (options?: ApiCallOptions) => Promise<GetAssistantsHttpResponse>;
 };
 type GetAssistantsHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403;
 };
@@ -417,7 +417,7 @@ type CreateAssistantHttpResponse = {
   status: 201;
 };
 type CreateAssistantHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403;
 };
@@ -435,7 +435,7 @@ type SearchAssistantHttpResponse = {
   status: 200;
 };
 type SearchAssistantHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 405 | 500;
 };
@@ -452,7 +452,7 @@ type GetAssistantFeedbackHttpResponse = {
   status: 200;
 };
 type GetAssistantFeedbackHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -470,7 +470,7 @@ type GetAssistantSourcesHttpResponse = {
   status: 202;
 };
 type GetAssistantSourcesHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -495,7 +495,7 @@ type GetAssistantStartersHttpResponse = {
   next?: (options?: ApiCallOptions) => Promise<GetAssistantStartersHttpResponse>;
 };
 type GetAssistantStartersHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -513,7 +513,7 @@ type CreateAssistantStarterHttpResponse = {
   status: 201;
 };
 type CreateAssistantStarterHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -531,7 +531,7 @@ type DeleteAssistantStarterHttpResponse = {
   status: 204;
 };
 type DeleteAssistantStarterHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -549,7 +549,7 @@ type GetAssistantStarterHttpResponse = {
   status: 200;
 };
 type GetAssistantStarterHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -568,7 +568,7 @@ type UpdateAssistantStarterHttpResponse = {
   status: 200;
 };
 type UpdateAssistantStarterHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -587,7 +587,7 @@ type DeleteAssistantStarterFollowupHttpResponse = {
   status: 204;
 };
 type DeleteAssistantStarterFollowupHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -607,7 +607,7 @@ type UpdateAssistantStarterFollowupHttpResponse = {
   status: 200;
 };
 type UpdateAssistantStarterFollowupHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -633,7 +633,7 @@ type GetAssistantThreadsHttpResponse = {
   next?: (options?: ApiCallOptions) => Promise<GetAssistantThreadsHttpResponse>;
 };
 type GetAssistantThreadsHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -651,7 +651,7 @@ type CreateAssistantThreadHttpResponse = {
   status: 201;
 };
 type CreateAssistantThreadHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -670,7 +670,7 @@ type InvokeAssistantThreadHttpResponse = {
   status: 200;
 };
 type InvokeAssistantThreadHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 500;
 };
@@ -689,7 +689,7 @@ type StreamAssistantThreadHttpResponse = {
   status: 200;
 };
 type StreamAssistantThreadHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 405 | 500;
 };
@@ -715,7 +715,7 @@ type GetAssistantThreadInteractionsHttpResponse = {
   next?: (options?: ApiCallOptions) => Promise<GetAssistantThreadInteractionsHttpResponse>;
 };
 type GetAssistantThreadInteractionsHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -734,7 +734,7 @@ type CreateAssistantThreadInteractionHttpResponse = {
   status: 201;
 };
 type CreateAssistantThreadInteractionHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -753,7 +753,7 @@ type DeleteAssistantThreadInteractionHttpResponse = {
   status: 204;
 };
 type DeleteAssistantThreadInteractionHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -772,7 +772,7 @@ type GetAssistantThreadInteractionHttpResponse = {
   status: 200;
 };
 type GetAssistantThreadInteractionHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -792,7 +792,7 @@ type CreateAssistantThreadInteractionFeedbackHttpResponse = {
   status: 201;
 };
 type CreateAssistantThreadInteractionFeedbackHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -813,7 +813,7 @@ type PatchAssistantThreadInteractionFeedbackHttpResponse = {
   status: 204;
 };
 type PatchAssistantThreadInteractionFeedbackHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -833,7 +833,7 @@ type CreateAssistantThreadInteractionReviewHttpResponse = {
   status: 201;
 };
 type CreateAssistantThreadInteractionReviewHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -851,7 +851,7 @@ type DeleteAssistantThreadHttpResponse = {
   status: 204;
 };
 type DeleteAssistantThreadHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -869,7 +869,7 @@ type GetAssistantThreadHttpResponse = {
   status: 200;
 };
 type GetAssistantThreadHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -888,7 +888,7 @@ type PatchAssistantThreadHttpResponse = {
   status: 204;
 };
 type PatchAssistantThreadHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429;
 };
@@ -905,7 +905,7 @@ type DeleteAssistantHttpResponse = {
   status: 204;
 };
 type DeleteAssistantHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -922,7 +922,7 @@ type GetAssistantHttpResponse = {
   status: 200;
 };
 type GetAssistantHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -940,7 +940,7 @@ type PatchAssistantHttpResponse = {
   status: 204;
 };
 type PatchAssistantHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429;
 };

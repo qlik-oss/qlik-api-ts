@@ -1,4 +1,4 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-DjJJgiRF.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
 declare namespace change_stores_d_exports {
   export { CellKey, Change, ChangeStore, ChangeStoresAPI, EditableColumn, Error, ErrorResponse, GetChangeStoreChangesHttpError, GetChangeStoreChangesHttpResponse, GetChangeStoreChangesTabularViewsHttpError, GetChangeStoreChangesTabularViewsHttpResponse, GetChangeStoreEditableColumnsHttpError, GetChangeStoreEditableColumnsHttpResponse, GetChangeStoreHttpError, GetChangeStoreHttpResponse, GetChangeStoresHttpError, GetChangeStoresHttpResponse, GetChangesData, ListDefaultData, Pagination, PrimaryKey, ReferenceId, RowKey, TabularView, UsedBy, UsedByArray, clearCache, changeStoresExport as default, getChangeStore, getChangeStoreChanges, getChangeStoreChangesTabularViews, getChangeStoreEditableColumns, getChangeStores };
 }
@@ -41,7 +41,9 @@ type ChangeStore = {
 type EditableColumn = {
   /** Name of the editable column. */columnName?: string; /** Configuration values required for the editable-column type. */
   config?: {
-    /** Expression used to create dynamic selector values. */selectorExpression?: string; /** Type of selector. fixed, dynamic or empty if editable-column type is not editable-selector. */
+    /** Maximum selectable date for editable-date columns (ISO 8601 date). */maxDate?: string; /** Minimum selectable date for editable-date columns (ISO 8601 date). */
+    minDate?: string; /** Expression used to create dynamic selector values. */
+    selectorExpression?: string; /** Type of selector. fixed, dynamic or empty if editable-column type is not editable-selector. */
     selectorType?: "fixed" | "dynamic" | ""; /** List of value/label key/value pairs. */
     selectorValues?: {
       /** The Label of the selector. */label?: string; /** The Value of the selector. */
@@ -60,7 +62,7 @@ type EditableColumn = {
   spaceId?: string; /** Store id. */
   storeId?: string; /** Tenant id. */
   tenantId?: string; /** Type of the editable column. */
-  type?: "editable-text" | "editable-selector"; /** Timestamp of last update. */
+  type?: "editable-text" | "editable-selector" | "editable-date"; /** Timestamp of last update. */
   updatedAt?: string; /** List of chart/app references. */
   usedBy?: UsedByArray;
 };

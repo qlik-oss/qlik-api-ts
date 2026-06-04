@@ -1,4 +1,4 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
 //#region src/public/rest/ml.d.ts
 /**
  * An error object
@@ -1082,7 +1082,7 @@ type PredictionJobResponse = {
   parentJobId: ParentJobId;
   parentName: string;
   rowsPredicted: number; /** Status of this job */
-  status: "pending" | "completed" | "cancelled" | "error";
+  status: "pending" | "completed" | "cancelled" | "error" | "deleted_resource";
   success: boolean; /** Tenant ID for this entity */
   tenantId: TenantId;
   trigger: string; /** Timestamp when this was updated */

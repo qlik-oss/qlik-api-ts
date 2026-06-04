@@ -1,4 +1,8 @@
 import changeStoresExport, { t as change_stores_d_exports } from "./analytics/change-stores.js";
+import odagAppsExport, { t as odag_apps_d_exports } from "./analytics/odag-apps.js";
+import odagLinksExport, { t as odag_links_d_exports } from "./analytics/odag-links.js";
+import odagRequestsExport, { t as odag_requests_d_exports } from "./analytics/odag-requests.js";
+import odagSettingsExport, { t as odag_settings_d_exports } from "./analytics/odag-settings.js";
 
 //#region src/public/rest/analytics.d.ts
 type AnalyticsAPI = {};
@@ -7,6 +11,10 @@ type AnalyticsAPI = {};
  */
 declare const analyticsExport: AnalyticsAPI & {
   changeStores: typeof changeStoresExport;
+  odagApps: typeof odagAppsExport;
+  odagLinks: typeof odagLinksExport;
+  odagRequests: typeof odagRequestsExport;
+  odagSettings: typeof odagSettingsExport;
 };
 //#endregion
-export { AnalyticsAPI, change_stores_d_exports as changeStores, analyticsExport as default };
+export { AnalyticsAPI, change_stores_d_exports as changeStores, analyticsExport as default, odag_apps_d_exports as odagApps, odag_links_d_exports as odagLinks, odag_requests_d_exports as odagRequests, odag_settings_d_exports as odagSettings };

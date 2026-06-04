@@ -1,4 +1,4 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
 //#region src/public/rest/tasks.d.ts
 type ErrorResponse = {
   errors?: HttpResult[]; /** A way to trace the source of the error. */

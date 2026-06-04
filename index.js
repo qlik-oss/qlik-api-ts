@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch--Qa19wyc.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CpHbSqJB.js";
 import auth_default from "./auth.js";
-import { a as interceptors$1 } from "./chunks/interceptors-DSlOn_k7.js";
+import { a as interceptors$1 } from "./chunks/interceptors-Ce5-8eIE.js";
 import qix$1 from "./qix.js";
 
 //#region src/runtime-api-generator/runtime-api-generator-common.ts
@@ -208,9 +208,38 @@ const createAnalyticsChangeStoresRuntimeAPI = apiDefToApiPublic("analytics/chang
 		"editable-columns": ["getChangeStoreEditableColumns:GQ:"]
 	}
 } } } });
+const createAnalyticsOdagAppsRuntimeAPI = apiDefToApiPublic("analytics/odag-apps", { api: { analytics: { "odag-apps": ["getOdagApps:GQ:"] } } });
+const createAnalyticsOdagLinksRuntimeAPI = apiDefToApiPublic("analytics/odag-links", { api: { analytics: { "odag-links": {
+	"": ["getOdagLinks:GQ:", "createOdagLink:PQBJ:"],
+	cancreate: ["getOdagLinksCancreate_FIX_THIS_QUIRKY_NAME:GQ:"],
+	"selection-app-link-usages": ["createOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAME:PQBJ:"],
+	"{linkId}": {
+		"": ["getOdagLink:GQ:", "updateOdagLink:UQBJ:"],
+		requests: ["getOdagLinkRequests:GQ:", "createOdagLinkRequest:PBJ:"]
+	}
+} } } });
+const createAnalyticsOdagRequestsRuntimeAPI = apiDefToApiPublic("analytics/odag-requests", { api: { analytics: { "odag-requests": { "{requestId}": {
+	"": ["getOdagRequest:G:", "updateOdagRequest:UQ:"],
+	app: ["deleteOdagRequestApp:D:"],
+	"reload-app": ["createOdagRequestReloadApp:PBJ:"],
+	"rename-app": ["createOdagRequestRenameApp:PBJ:"],
+	selections: ["getOdagRequestSelections:G:"]
+} } } } });
+const createAnalyticsOdagSettingsRuntimeAPI = apiDefToApiPublic("analytics/odag-settings", { api: { analytics: { "odag-settings": {
+	"": ["getOdagSettings:G:", "putOdagSettings_FIX_THIS_QUIRKY_NAME:UBJ:"],
+	canupdate: ["getOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAME:G:"]
+} } } });
 const createAnalyticsRuntimeAPI = apiDefToApiPublic("analytics", {}, {
 	"change-stores": createAnalyticsChangeStoresRuntimeAPI,
-	changeStores: createAnalyticsChangeStoresRuntimeAPI
+	changeStores: createAnalyticsChangeStoresRuntimeAPI,
+	"odag-apps": createAnalyticsOdagAppsRuntimeAPI,
+	odagApps: createAnalyticsOdagAppsRuntimeAPI,
+	"odag-links": createAnalyticsOdagLinksRuntimeAPI,
+	odagLinks: createAnalyticsOdagLinksRuntimeAPI,
+	"odag-requests": createAnalyticsOdagRequestsRuntimeAPI,
+	odagRequests: createAnalyticsOdagRequestsRuntimeAPI,
+	"odag-settings": createAnalyticsOdagSettingsRuntimeAPI,
+	odagSettings: createAnalyticsOdagSettingsRuntimeAPI
 });
 const createApiKeysRuntimeAPI = apiDefToApiPublic("api-keys", { api: { v1: { "api-keys": {
 	"": ["getApiKeys:GQ:", "createApiKey:PBJ:"],

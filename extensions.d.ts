@@ -1,4 +1,4 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
 //#region src/public/rest/extensions.d.ts
 /**
  * Object containing meta data regarding the bundle the extension belongs to. If it does not belong to a bundle, this object is not defined.

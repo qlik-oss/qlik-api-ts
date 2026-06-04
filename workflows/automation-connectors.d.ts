@@ -1,4 +1,4 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-DjJJgiRF.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
 declare namespace automation_connectors_d_exports {
   export { AutomationConnectorsAPI, AutomationConnectorsList, AutomationConnectorsListObject, Error, ErrorResponse, GetAutomationConnectorsHttpError, GetAutomationConnectorsHttpResponse, Links, PaginationLink, clearCache, automationConnectorsExport as default, getAutomationConnectors };
 }

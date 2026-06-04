@@ -1,4 +1,4 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-DjJJgiRF.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
 declare namespace data_qualities_d_exports {
   export { ComputationResponse, ComputationStatusResponse, ConnectionIdType, CreateDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpError, CreateDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpResponse, DataQualitiesAPI, DataQualityComputationRequest, DatasetIdType, DatasetQualityGlobalResultsResponse, Error, ErrorResponse, ExecutionStatus, GetDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpError, GetDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpResponse, GetDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAMEHttpError, GetDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAMEHttpResponse, QualitiesGlobalResultsResponse, QualityGlobalResultsResponse, SamplingConfiguration, clearCache, createDataQualitiesComputation_FIX_THIS_QUIRKY_NAME, dataQualitiesExport as default, getDataQualitiesComputation_FIX_THIS_QUIRKY_NAME, getDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAME };
 }
