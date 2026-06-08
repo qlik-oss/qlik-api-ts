@@ -14,7 +14,7 @@
     "enigma.js": "^2.14.0",
     "extend": "3.0.2",
     "lodash-es": "^4.18.1",
-    "ws": "^8.20.1"
+    "ws": "^8.21.0"
   },
   "engines": {
     "node": ">=20.0.0"
@@ -24,6 +24,10 @@
     ".": "./index.js",
     "./analytics": "./analytics.js",
     "./analytics/change-stores": "./analytics/change-stores.js",
+    "./analytics/odag-apps": "./analytics/odag-apps.js",
+    "./analytics/odag-links": "./analytics/odag-links.js",
+    "./analytics/odag-requests": "./analytics/odag-requests.js",
+    "./analytics/odag-settings": "./analytics/odag-settings.js",
     "./api-keys": "./api-keys.js",
     "./apps": "./apps.js",
     "./assistants": "./assistants.js",

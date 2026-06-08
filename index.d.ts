@@ -1,8 +1,12 @@
-import { d as HostConfig } from "./chunks/auth-types-DjJJgiRF.js";
+import { d as HostConfig } from "./chunks/auth-types-BAiSvIRn.js";
 import { InterceptorsAPI, createInterceptors } from "./interceptors.js";
 import { AuthAPI, getAccessToken, getWebResourceAuthParams, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig } from "./auth.js";
-import { t as QixAPI } from "./chunks/qix-lPA2mcxT.js";
+import { t as QixAPI } from "./chunks/qix-CluwyLOA.js";
 import { ChangeStoresAPI } from "./analytics/change-stores.js";
+import { OdagAppsAPI } from "./analytics/odag-apps.js";
+import { OdagLinksAPI } from "./analytics/odag-links.js";
+import { OdagRequestsAPI } from "./analytics/odag-requests.js";
+import { OdagSettingsAPI } from "./analytics/odag-settings.js";
 import { AnalyticsAPI } from "./analytics.js";
 import { ApiKeysAPI } from "./api-keys.js";
 import { AppsAPI } from "./apps.js";
@@ -101,6 +105,10 @@ declare const qix: QixAPI & {
 };
 declare const analytics: {
   changeStores: ChangeStoresAPI;
+  odagApps: OdagAppsAPI;
+  odagLinks: OdagLinksAPI;
+  odagRequests: OdagRequestsAPI;
+  odagSettings: OdagSettingsAPI;
 };
 declare const apiKeys: ApiKeysAPI;
 declare const apps: AppsAPI;
@@ -196,6 +204,10 @@ interface QlikAPI {
   /** Functions for the analytics api */
   analytics: AnalyticsAPI & {
     changeStores: ChangeStoresAPI;
+    odagApps: OdagAppsAPI;
+    odagLinks: OdagLinksAPI;
+    odagRequests: OdagRequestsAPI;
+    odagSettings: OdagSettingsAPI;
   };
   /** Functions for the apiKeys api */
   apiKeys: ApiKeysAPI;

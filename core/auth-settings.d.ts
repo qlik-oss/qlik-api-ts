@@ -1,4 +1,4 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-DjJJgiRF.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
 declare namespace auth_settings_d_exports {
   export { AuthSettingsAPI, AuthSettingsJSONPatch, AuthSettingsJSONPatchArray, AuthSettingsResource, Error, Errors, GetAuthSettingsHttpError, GetAuthSettingsHttpResponse, PatchAuthSettingsHttpError, PatchAuthSettingsHttpResponse, clearCache, authSettingsExport as default, getAuthSettings, patchAuthSettings };
 }

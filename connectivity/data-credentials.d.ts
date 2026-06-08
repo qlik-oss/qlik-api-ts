@@ -1,4 +1,4 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-DjJJgiRF.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
 declare namespace data_credentials_d_exports {
   export { ActionFilterOrphanRequest, ActionFilterOrphanResponse, Credential, CredentialCreate, DataCredentialsAPI, DeleteDataCredentialHttpError, DeleteDataCredentialHttpResponse, Error, Errors, FilterOrphanDataCredentialsHttpError, FilterOrphanDataCredentialsHttpResponse, GetDataCredentialHttpError, GetDataCredentialHttpResponse, Link, OrphanCredentialResItem, PatchDataCredentialHttpError, PatchDataCredentialHttpResponse, PatchRequest, ResponseErrors, UpdateDataCredentialHttpError, UpdateDataCredentialHttpResponse, clearCache, dataCredentialsExport as default, deleteDataCredential, filterOrphanDataCredentials, getDataCredential, patchDataCredential, updateDataCredential };
 }

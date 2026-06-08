@@ -1,4 +1,4 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
 //#region src/public/rest/apps.d.ts
 type Analysis = "breakdown" | "changePoint" | "comparison" | "contribution" | "correlation" | "fact" | "mutualInfo" | "rank" | "spike" | "trend" | "values";
 type AnalysisComposition = {

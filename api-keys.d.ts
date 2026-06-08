@@ -1,4 +1,4 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
 //#region src/public/rest/api-keys.d.ts
 type ApiKey = {
   /** When the API key was created. */readonly created?: string; /** The ID of the user who created the key. */

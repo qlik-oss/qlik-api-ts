@@ -1,4 +1,4 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
 //#region src/public/rest/web-integrations.d.ts
 /**
  * An error object describing the error.

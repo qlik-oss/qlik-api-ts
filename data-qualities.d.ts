@@ -1,4 +1,4 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
 //#region src/public/rest/data-qualities.d.ts
 /**
  * Response returned when a data quality computation is successfully triggered.

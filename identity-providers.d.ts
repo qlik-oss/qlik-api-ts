@@ -1,4 +1,4 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
 //#region src/public/rest/identity-providers.d.ts
 type BaseIDP = {
   /** Indicates whether the IdP is available for use. */active?: boolean;

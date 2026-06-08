@@ -1,4 +1,4 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
 //#region src/public/rest/items.d.ts
 type CollectionTypes = "private" | "public" | "publicgoverned";
 type ErrorResponseBody = {

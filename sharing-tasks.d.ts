@@ -1,4 +1,4 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-DjJJgiRF.js";
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
 //#region src/public/rest/sharing-tasks.d.ts
 type APISettingsUpload = {
   /** Whether API endpoints for sharing are enabled */"enable-sharing": boolean; /** Maximum number of recipients when creating a sharing task */
@@ -396,7 +396,7 @@ type SharingTaskRecurringPersist = {
   spaceId?: string; /** Time to start capturing the history */
   startTime?: string; /** State of the selections and jsOpts */
   state?: State; /** the status of this recurring sharing task */
-  readonly statusCode?: "CHART_NOT_FOUND" | "APP_NOT_FOUND" | "STORY_NOT_FOUND" | "SHEET_NOT_FOUND" | "ENGINE_POD_NOT_AVAILABLE" | "APP_FORBIDDEN" | "CHART_TYPE_NOT_ALLOWED" | "FAILED" | "DELETING" | "IN_PROGRESS" | "VALID" | "MAX_FAILURES_REACHED" | "BOOKMARK_NOT_FOUND" | "CANCELLING" | "CANCELLED" | "REPORTING_CONSUMPTION_EXCEEDED" | "REPORTING_CAPABILITY_NOT_FOUND"; /** error message indicating the underlying failure */
+  readonly statusCode?: "CHART_NOT_FOUND" | "APP_NOT_FOUND" | "STORY_NOT_FOUND" | "SHEET_NOT_FOUND" | "ENGINE_POD_NOT_AVAILABLE" | "APP_FORBIDDEN" | "CHART_TYPE_NOT_ALLOWED" | "FAILED" | "DELETING" | "IN_PROGRESS" | "VALID" | "MAX_FAILURES_REACHED" | "BOOKMARK_NOT_FOUND" | "CANCELLING" | "CANCELLED" | "REPORTING_CONSUMPTION_EXCEEDED" | "REPORTING_CAPABILITY_NOT_FOUND" | "REPORTING_DAILY_QUOTA_EXCEEDED"; /** error message indicating the underlying failure */
   readonly statusLabel?: string;
   /** @deprecated
    * Mashup subType of sharing task */
@@ -488,7 +488,7 @@ type TargetUser = {
 };
 type TaskError = {
   /** Timestamp for the creation of the error */timestamp?: string; /** Identifier for type of error occurring on sharing task */
-  value?: "OWNER_DISABLED" | "OWNER_ACCESS" | "OWNER_LICENSE" | "APP_DELETED" | "NO_RECIPIENTS" | "PARTIAL_ACCESS" | "ORPHAN" | "PARTIAL_SENT" | "FATAL_SENT_ERROR" | "SECTION_ACCESS_MODIFIED" | "INVALID_DISTRIBUTION_LIST" | "MAX_DL_RECIPIENTS_LIMIT_REACHED" | "TEMPLATE_NOT_FOUND" | "REPORTING_BOOKMARK_NOT_FOUND" | "DATA_CONNECTION_NOT_FOUND" | "INVALID_SHAREPOINT_DIRECTORY" | "GENERIC_FILE_UPLOAD_ERROR" | "DISABLED_DUE_TO_OWNERSHIP_CHANGE" | "REPORTING_CONSUMPTION_EXCEEDED" | "REPORTING_CAPABILITY_NOT_FOUND" | "EXECUTION_TIME_OUT" | "OWNER_INSUFFICIENT_PERMISSIONS" | "MAX_UNIQUE_REPORTS_LIMIT_REACHED" | "MISSING_DISTRIBUTION_LIST" | "SECTION_ACCESS_NOT_SUPPORTED";
+  value?: "OWNER_DISABLED" | "OWNER_ACCESS" | "OWNER_LICENSE" | "APP_DELETED" | "NO_RECIPIENTS" | "PARTIAL_ACCESS" | "ORPHAN" | "PARTIAL_SENT" | "FATAL_SENT_ERROR" | "SECTION_ACCESS_MODIFIED" | "INVALID_DISTRIBUTION_LIST" | "MAX_DL_RECIPIENTS_LIMIT_REACHED" | "TEMPLATE_NOT_FOUND" | "REPORTING_BOOKMARK_NOT_FOUND" | "DATA_CONNECTION_NOT_FOUND" | "INVALID_SHAREPOINT_DIRECTORY" | "GENERIC_FILE_UPLOAD_ERROR" | "DISABLED_DUE_TO_OWNERSHIP_CHANGE" | "REPORTING_CONSUMPTION_EXCEEDED" | "REPORTING_CAPABILITY_NOT_FOUND" | "EXECUTION_TIME_OUT" | "OWNER_INSUFFICIENT_PERMISSIONS" | "MAX_UNIQUE_REPORTS_LIMIT_REACHED" | "MISSING_DISTRIBUTION_LIST" | "SECTION_ACCESS_NOT_SUPPORTED" | "REPORTING_DAILY_QUOTA_EXCEEDED";
 };
 type TaskGroupRecipientError = {
   /** Timestamp for the creation of the error */timestamp?: string; /** Identifier for type of error occurring on sharing task specific for group recipient */
