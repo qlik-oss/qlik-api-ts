@@ -1,7 +1,8 @@
 import { d as HostConfig } from "./chunks/auth-types-BAiSvIRn.js";
 import { InterceptorsAPI, createInterceptors } from "./interceptors.js";
 import { AuthAPI, getAccessToken, getWebResourceAuthParams, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig } from "./auth.js";
-import { t as QixAPI } from "./chunks/qix-CluwyLOA.js";
+import { t as QixAPI } from "./chunks/qix-BsDRka-v.js";
+import { AppsAPI } from "./analytics/apps.js";
 import { ChangeStoresAPI } from "./analytics/change-stores.js";
 import { OdagAppsAPI } from "./analytics/odag-apps.js";
 import { OdagLinksAPI } from "./analytics/odag-links.js";
@@ -9,7 +10,7 @@ import { OdagRequestsAPI } from "./analytics/odag-requests.js";
 import { OdagSettingsAPI } from "./analytics/odag-settings.js";
 import { AnalyticsAPI } from "./analytics.js";
 import { ApiKeysAPI } from "./api-keys.js";
-import { AppsAPI } from "./apps.js";
+import { AppsAPI as AppsAPI$1 } from "./apps.js";
 import { AssistantsAPI } from "./assistants.js";
 import { AuditsAPI } from "./audits.js";
 import { AutomationConnectionsAPI } from "./automation-connections.js";
@@ -104,6 +105,7 @@ declare const qix: QixAPI & {
   withHostConfig: (hostConfig: HostConfig | undefined) => QixAPI;
 };
 declare const analytics: {
+  apps: AppsAPI;
   changeStores: ChangeStoresAPI;
   odagApps: OdagAppsAPI;
   odagLinks: OdagLinksAPI;
@@ -111,7 +113,7 @@ declare const analytics: {
   odagSettings: OdagSettingsAPI;
 };
 declare const apiKeys: ApiKeysAPI;
-declare const apps: AppsAPI;
+declare const apps: AppsAPI$1;
 declare const assistants: AssistantsAPI;
 declare const audits: AuditsAPI;
 declare const automationConnections: AutomationConnectionsAPI;
@@ -203,6 +205,7 @@ interface QlikAPI {
   qix: QixAPI;
   /** Functions for the analytics api */
   analytics: AnalyticsAPI & {
+    apps: AppsAPI;
     changeStores: ChangeStoresAPI;
     odagApps: OdagAppsAPI;
     odagLinks: OdagLinksAPI;
@@ -212,7 +215,7 @@ interface QlikAPI {
   /** Functions for the apiKeys api */
   apiKeys: ApiKeysAPI;
   /** Functions for the apps api */
-  apps: AppsAPI;
+  apps: AppsAPI$1;
   /** Functions for the assistants api */
   assistants: AssistantsAPI;
   /** Functions for the audits api */
