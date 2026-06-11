@@ -23,6 +23,7 @@
   "exports": {
     ".": "./index.js",
     "./analytics": "./analytics.js",
+    "./analytics/apps": "./analytics/apps.js",
     "./analytics/change-stores": "./analytics/change-stores.js",
     "./analytics/odag-apps": "./analytics/odag-apps.js",
     "./analytics/odag-links": "./analytics/odag-links.js",
