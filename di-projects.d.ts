@@ -44,13 +44,16 @@ type CreateDiProjectReq = {
   /** The cloud staging connection string */cloudStagingConnection?: string; /** A description of the project */
   description?: string; /** The name of the project */
   name?: string; /** The platform connection string */
-  platformConnection?: string; /** The platform type of the project. Supported values: - SNOWFLAKE: Snowflake - BIGQUERY: Google BigQuery - SYNAPSE: Azure Synapse - DATABRICKS: Databricks - REDSHIFT: Amazon Redshift - MSSQL: Microsoft SQL Server - FABRIC: Microsoft Fabric (OneLake) - QLIK_QVD: Qlik-managed QVD - QLIK_QVD_CUSTOMER_MANAGED: Customer-managed QVD */
-  platformType?: "SNOWFLAKE" | "BIGQUERY" | "SYNAPSE" | "DATABRICKS" | "REDSHIFT" | "MSSQL" | "FABRIC" | "QLIK_QVD" | "QLIK_QVD_CUSTOMER_MANAGED"; /** The ID of the space where the project will be created */
+  platformConnection?: string; /** The platform type of the project. Supported values: - SNOWFLAKE: Snowflake - BIGQUERY: Google BigQuery - SYNAPSE: Azure Synapse - DATABRICKS: Databricks - REDSHIFT: Amazon Redshift - MSSQL: Microsoft SQL Server - FABRIC: Microsoft Fabric (OneLake) - QLIK_QVD: Qlik-managed QVD - QLIK_QVD_CUSTOMER_MANAGED: Customer-managed QVD - QLIK_OPEN_LAKEHOUSE: Qlik Open Lakehouse - NONE: No platform (e.g. replication-only projects) */
+  platformType?: PlatformType; /** The ID of the space where the project will be created */
   space?: string; /** The type of the project */
   type?: "DATA_PIPELINE" | "DATA_MOVEMENT";
 };
+/**
+ * Represents the execution state of a single dataset within a task run, including full load, CDC, and streaming progress.
+ */
 type DataTaskDatasetState = {
-  cdcStatus?: {
+  /** Change Data Capture state for the dataset, tracking incremental changes applied and any errors. */cdcStatus?: {
     /** Number of DDL statements executed during the last run */ddlCount?: number; /** delete portion of totalProcessedCount. Only available for some task types */
     deleteCount?: number; /** Number of incoming changes for the dataset. Only relevant for 'Iceberg Storage' and 'Streaming Transform' tasks. */
     incomingChangesCount?: number; /** Insert portion of totalProcessedCount. Only available for some task types */
@@ -87,7 +90,7 @@ type DataTaskDatasetState = {
     totalProcessedCount?: number;
   }; /** Name of the dataset */
   name?: string; /** Original name of the dataset, relevant only for data movement tasks */
-  sourceName?: string;
+  sourceName?: string; /** Real-time streaming state for the dataset, tracking record processing and transformation statistics. */
   streaming?: {
     /** Timestamp of the latest source record inserted into the target dataset. */lastProcessed?: string;
     message?: string; /** Number of records that had parsing issues */
@@ -99,8 +102,11 @@ type DataTaskDatasetState = {
     unoptimizedRecordsCount?: number;
   };
 };
+/**
+ * Represents the execution state of a task instance, including progress metrics, errors, and operation-specific statistics.
+ */
 type DataTaskInstanceState = {
-  cdcStatus?: {
+  /** Change Data Capture status information for tasks performing incremental updates, including latency and processing counts. */cdcStatus?: {
     accumulatingChangesCount?: number;
     applyingChangesCount?: number; /** Number of incoming changes. Only relevant for 'Iceberg Storage' and 'Streaming Transform' tasks. */
     incomingChangesCount?: number; /** Duration in HH:MM:SS format (hours:minutes:seconds) */
@@ -110,13 +116,13 @@ type DataTaskInstanceState = {
   }; /** Duration in HH:MM:SS format (hours:minutes:seconds) */
   duration?: string; /** Timestamp indicating when the task instance ended */
   endTime?: string; /** List of errors encountered during the last run */
-  errors?: Error[];
+  errors?: Error[]; /** Statistics for the full load phase of the task run, tracking dataset processing progress. */
   fullLoad?: {
     /** Number of datasets that have completed full load in this task run */completedCount?: number; /** Number of datasets that have failed full load in this task run */
     errorCount?: number; /** Number of datasets that are currently being loaded in this task run */
     loadingCount?: number; /** Number of datasets that are queued for full load in this task run */
     queuedCount?: number;
-  };
+  }; /** Overall task execution statistics including dataset counts, data freshness timestamps, and infrastructure details. */
   general?: {
     /** The latest point in time the data reflects, based on updates from the source system. */dataTaskUpdatedTo?: string; /** Total number of datasets produced by the task, including ones in error */
     datasetCount?: number; /** Count of datasets that encountered errors */
@@ -127,7 +133,7 @@ type DataTaskInstanceState = {
     lakehouseClusterId?: string; /** For lakehouse storage tasks, this is the name of the cluster where the task runs */
     lakehouseClusterName?: string; /** The latest point in time the live views reflect, based on updates from the source system. */
     liveViewsUpdatedTo?: string;
-  };
+  }; /** Statistics for the most recent batch of changes processed during the task run, including timing and throughput metrics. */
   lastBatchOfChanges?: {
     /** This batch starts with operational source changes from this time. */relatesToRecordsFrom?: string; /** This batch ends with operational source changes from this time. */
     relatesToRecordsTo?: string; /** Throughput in records per second */
@@ -136,7 +142,7 @@ type DataTaskInstanceState = {
   };
   message?: string; /** Timestamp indicating when the task instance started */
   startTime?: string;
-  state?: "STARTING" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELED" | "STOPPING";
+  state?: "STARTING" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELED" | "STOPPING"; /** Real-time streaming statistics for tasks that continuously process data streams. */
   streaming?: {
     /** Number of streaming datasets that have encountered errors */errorCount?: number; /** Duration in HH:MM:SS format (hours:minutes:seconds) */
     latency?: string; /** Number of streaming datasets that are queued */
@@ -154,8 +160,11 @@ type DataTaskItemRsp = {
   spaceId?: string;
   type?: DataTaskType;
 };
+/**
+ * Represents the current or historical execution state of a data task, including progress information, error details, and dataset-level statistics.
+ */
 type DataTaskRuntimeState = {
-  lastRun?: DataTaskInstanceState; /** Name of the data task */
+  /** Represents the execution state of a task instance, including progress metrics, errors, and operation-specific statistics. */lastRun?: DataTaskInstanceState; /** Name of the data task */
   name?: string;
   runReadiness?: {
     message?: string;
@@ -175,25 +184,49 @@ type DiProjectItemRsp = {
   description?: string;
   id?: string;
   name?: string;
-  ownerId?: string;
-  spaceId?: string;
+  ownerId?: string; /** The platform type of the project. Supported values: - SNOWFLAKE: Snowflake - BIGQUERY: Google BigQuery - SYNAPSE: Azure Synapse - DATABRICKS: Databricks - REDSHIFT: Amazon Redshift - MSSQL: Microsoft SQL Server - FABRIC: Microsoft Fabric (OneLake) - QLIK_QVD: Qlik-managed QVD - QLIK_QVD_CUSTOMER_MANAGED: Customer-managed QVD - QLIK_OPEN_LAKEHOUSE: Qlik Open Lakehouse - NONE: No platform (e.g. replication-only projects) */
+  platformType?: PlatformType;
+  spaceId?: string; /** The type of the project */
+  type?: "DATA_PIPELINE" | "DATA_MOVEMENT";
 };
 type DiProjectOperationSelectedTask = {
   /** Task identifier */taskId: string;
 };
+/**
+ * Request parameters for searching task run history, including filter criteria and pagination options.
+ */
+type DiSearchTaskRunHistoryReq = {
+  /** Field filters to apply to the search. */filters?: TaskRunSearchFilter[]; /** Cursor for paging. Pass the `runId` of the last item from the previous response to fetch the next page; omit on the first request. */
+  lastId?: string; /** Maximum number of runs to return. */
+  limit?: number;
+};
+type DiSearchTaskRunHistoryRsp = {
+  /** Identifier of the last run in this page. Pass this value back as `lastId` in the next request to fetch the following page. */lastId?: string; /** True when more pages are available after this one; false when this is the last page. */
+  nextPageExists?: boolean; /** List of task run instances matching the search. */
+  runs?: TaskRunItemRsp[];
+};
+/**
+ * Represents a single error condition with details about what went wrong.
+ */
 type Error = {
-  code?: string;
-  detail?: string;
-  source?: ErrorSource;
-  status?: number;
+  /** Machine-readable error code for programmatic handling. */code?: string; /** Detailed explanation of the error and suggested remediation steps. */
+  detail?: string; /** Identifies the location of the error in the request. */
+  source?: ErrorSource; /** HTTP status code associated with the error. */
+  status?: number; /** Brief human-readable summary of the error. */
   title?: string;
 };
+/**
+ * Identifies the location of the error in the request.
+ */
 type ErrorSource = {
-  parameter?: string;
+  /** Name of the query parameter or path parameter that caused the error. */parameter?: string; /** JSON Pointer (RFC 6901) to the field in the request body that caused the error. */
   pointer?: string;
 };
+/**
+ * Standard error response wrapper containing one or more error details and a trace ID for diagnostics.
+ */
 type Errors = {
-  errors?: Error[];
+  /** Array of error objects describing what went wrong. */errors?: Error[]; /** Unique identifier for this error response, useful for tracking and support inquiries. */
   traceId?: string;
 };
 type ExportDiProjectReq = {
@@ -216,6 +249,9 @@ type GetDiExportProjectVariablesRsp = {
   variables?: Record<string, string>;
 };
 type ImportDiProjectRsp = unknown;
+type ListDataTaskDatasetsRsp = {
+  datasets?: DataTaskDatasetState[];
+};
 type ListDataTasksRsp = {
   dataTasks?: DataTaskItemRsp[];
 };
@@ -231,6 +267,12 @@ type OperationStatistics = {
   insertCount?: number; /** Number of update operations. */
   updateCount?: number;
 };
+/**
+ * The platform type of the project. Supported values: - SNOWFLAKE: Snowflake - BIGQUERY: Google BigQuery - SYNAPSE: Azure Synapse - DATABRICKS: Databricks - REDSHIFT: Amazon Redshift - MSSQL: Microsoft SQL Server - FABRIC: Microsoft Fabric (OneLake) - QLIK_QVD: Qlik-managed QVD - QLIK_QVD_CUSTOMER_MANAGED: Customer-managed QVD - QLIK_OPEN_LAKEHOUSE: Qlik Open Lakehouse - NONE: No platform (e.g. replication-only projects)
+ * @example
+ * "SNOWFLAKE"
+ */
+type PlatformType = "SNOWFLAKE" | "BIGQUERY" | "SYNAPSE" | "DATABRICKS" | "REDSHIFT" | "MSSQL" | "FABRIC" | "QLIK_QVD" | "QLIK_QVD_CUSTOMER_MANAGED" | "QLIK_OPEN_LAKEHOUSE" | "NONE";
 type PrepareProjectReq = {
   allowRecreate?: boolean; /** Array of tasks to prepare. Leave empty to trigger project-level orchestration using built-in logic (same as in the user interface). */
   selectedTasks?: TaskSelectionList;
@@ -258,6 +300,46 @@ type StartTaskReq = {
   /** Task run option for the task (optional, applies to Replication tasks only). */option?: "PROCESS_CHANGES_FROM_TIMESTAMP" | "PROCESS_CHANGES_FROM_POSITION" | "RECOVER_USING_LOCALLY_STORED_CHECKPOINT"; /** The value indicating where to resume the process, either a timestamp or an offset depending on the run option (optional, applies to Replication tasks only). */
   processChangesFrom?: string;
 };
+/**
+ * Represents a single historical task run instance with execution status, timing, and error information.
+ */
+type TaskRunItemRsp = {
+  /** Total number of datasets processed in this run. */datasetsCount?: number; /** Number of datasets that encountered errors in this run. */
+  datasetsErrorCount?: number; /** Duration of the run in HH:MM:SS format. */
+  duration?: string; /** Timestamp indicating when the run ended. */
+  endTime?: string; /** Error message, if the run failed. */
+  errorMessage?: string; /** Origin-specific sub-status of the run, when applicable. */
+  originSubStatus?: string; /** Identifier of the run instance. */
+  runId?: string; /** Timestamp indicating when the run started. */
+  startTime?: string; /** Execution status of a task run instance. */
+  status?: TaskRunStatus; /** Sub-status of the run, when applicable. */
+  subStatus?: string;
+};
+/**
+ * Specifies a single filter criterion to apply when searching task run history.
+ */
+type TaskRunSearchFilter = {
+  /** The run-history field to filter on. */field: TaskRunSearchFilterField;
+  /** Filter operator.
+   * - `IN` / `NOT_IN`: exact match against the values list (recommended for ID, STATUS, SUB_STATUS).
+   * - `BETWEEN`: only valid with the `PERIOD` field. The `value` list must contain two ISO-8601 timestamps (start, end). */
+  operator: TaskRunSearchFilterOperator; /** Values to match. For `BETWEEN` on `PERIOD`, supply exactly two ISO-8601 timestamps. */
+  value: string[];
+};
+/**
+ * The run-history field to filter on.
+ */
+type TaskRunSearchFilterField = "ID" | "STATUS" | "SUB_STATUS" | "PERIOD";
+/**
+ * Filter operator.
+ * - `IN` / `NOT_IN`: exact match against the values list (recommended for ID, STATUS, SUB_STATUS).
+ * - `BETWEEN`: only valid with the `PERIOD` field. The `value` list must contain two ISO-8601 timestamps (start, end).
+ */
+type TaskRunSearchFilterOperator = "IN" | "NOT_IN" | "BETWEEN";
+/**
+ * Execution status of a task run instance.
+ */
+type TaskRunStatus = "STARTING" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELED" | "MISFIRED";
 /**
  * Array of tasks to prepare. Leave empty to trigger project-level orchestration using built-in logic (same as in the user interface).
  */
@@ -608,6 +690,63 @@ type StopDiProjectDiTaskRuntimeHttpError = {
   status: 400 | 404;
 };
 /**
+ * Returns a paginated list of historical run instances for the specified data task, filtered by the provided criteria.
+ *
+ * @param projectId Identifier of the data project.
+ * @param dataTaskId Identifier of the data task.
+ * @param body an object with the body content
+ * @throws SearchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAMEHttpError
+ */
+declare function searchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAME(projectId: string, dataTaskId: string, body: DiSearchTaskRunHistoryReq, options?: ApiCallOptions): Promise<SearchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAMEHttpResponse>;
+type SearchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+  data: DiSearchTaskRunHistoryRsp;
+  headers: Headers;
+  status: 200;
+};
+type SearchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAMEHttpError = {
+  data: Errors;
+  headers: Headers;
+  status: 400 | 404;
+};
+/**
+ * Returns the state of a specific historical run instance for a data task, including execution progress and any errors encountered.
+ *
+ * @param projectId Identifier of the data project.
+ * @param dataTaskId Identifier of the data task.
+ * @param runId Identifier of the run instance.
+ * @throws GetDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAMEHttpError
+ */
+declare function getDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAME(projectId: string, dataTaskId: string, runId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAMEHttpResponse>;
+type GetDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+  data: DataTaskRuntimeState;
+  headers: Headers;
+  status: 200;
+};
+type GetDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAMEHttpError = {
+  data: Errors;
+  headers: Headers;
+  status: 400 | 404;
+};
+/**
+ * Returns dataset-level state for a specific historical run instance of a data task. All datasets for the run are returned in a single response; this endpoint does not paginate.
+ *
+ * @param projectId Identifier of the data project.
+ * @param dataTaskId Identifier of the data task.
+ * @param runId Identifier of the run instance.
+ * @throws GetDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAMEHttpError
+ */
+declare function getDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAME(projectId: string, dataTaskId: string, runId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAMEHttpResponse>;
+type GetDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+  data: ListDataTaskDatasetsRsp;
+  headers: Headers;
+  status: 200;
+};
+type GetDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAMEHttpError = {
+  data: Errors;
+  headers: Headers;
+  status: 400 | 404 | 410 | 413;
+};
+/**
  * Get the current runtime state of a data task
  *
  * @param projectId Identifier of the data project.
@@ -797,6 +936,33 @@ type DiProjectsAPI = {
    */
   stopDiProjectDiTaskRuntime: typeof stopDiProjectDiTaskRuntime;
   /**
+   * Returns a paginated list of historical run instances for the specified data task, filtered by the provided criteria.
+   *
+   * @param projectId Identifier of the data project.
+   * @param dataTaskId Identifier of the data task.
+   * @param body an object with the body content
+   * @throws SearchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAMEHttpError
+   */
+  searchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAME: typeof searchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAME;
+  /**
+   * Returns the state of a specific historical run instance for a data task, including execution progress and any errors encountered.
+   *
+   * @param projectId Identifier of the data project.
+   * @param dataTaskId Identifier of the data task.
+   * @param runId Identifier of the run instance.
+   * @throws GetDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAMEHttpError
+   */
+  getDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAME: typeof getDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAME;
+  /**
+   * Returns dataset-level state for a specific historical run instance of a data task. All datasets for the run are returned in a single response; this endpoint does not paginate.
+   *
+   * @param projectId Identifier of the data project.
+   * @param dataTaskId Identifier of the data task.
+   * @param runId Identifier of the run instance.
+   * @throws GetDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAMEHttpError
+   */
+  getDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAME: typeof getDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAME;
+  /**
    * Get the current runtime state of a data task
    *
    * @param projectId Identifier of the data project.
@@ -822,4 +988,4 @@ type DiProjectsAPI = {
  */
 declare const diProjectsExport: DiProjectsAPI;
 //#endregion
-export { AsyncActionDetails, AsyncActionError, AsyncActionRsp, AsyncActionTaskProgress, AsyncActionType, AsyncCallStatus, CreateDiProjectHttpError, CreateDiProjectHttpResponse, CreateDiProjectReq, DataTaskDatasetState, DataTaskInstanceState, DataTaskItemRsp, DataTaskRuntimeState, DataTaskType, DiExportMode, DiProjectItemRsp, DiProjectOperationSelectedTask, DiProjectsAPI, Error, ErrorSource, Errors, ExportDiProjectHttpError, ExportDiProjectHttpResponse, ExportDiProjectReq, FileStatistics, GetDiExportProjectVariablesRsp, GetDiProjectDiTaskHttpError, GetDiProjectDiTaskHttpResponse, GetDiProjectDiTaskRuntimeStateDatasetsHttpError, GetDiProjectDiTaskRuntimeStateDatasetsHttpResponse, GetDiProjectDiTaskRuntimeStateHttpError, GetDiProjectDiTaskRuntimeStateHttpResponse, GetDiProjectDiTasksHttpError, GetDiProjectDiTasksHttpResponse, GetDiProjectExportVariablesHttpError, GetDiProjectExportVariablesHttpResponse, GetDiProjectHttpError, GetDiProjectHttpResponse, GetDiProjectsHttpError, GetDiProjectsHttpResponse, ImportDiProjectHttpError, ImportDiProjectHttpResponse, ImportDiProjectRsp, ListDataTasksRsp, ListDiProjectsRsp, OperationStatistics, PrepareDiProjectDiTaskHttpError, PrepareDiProjectDiTaskHttpResponse, PrepareDiProjectHttpError, PrepareDiProjectHttpResponse, PrepareProjectReq, PrepareTaskReq, RecreateDatasetsDiProjectDiTaskHttpError, RecreateDatasetsDiProjectDiTaskHttpResponse, RecreateTaskDatasetsReq, ReloadDiTaskReq, ReloadRequestResponse, RequestReloadDiProjectDiTaskHttpError, RequestReloadDiProjectDiTaskHttpResponse, SetDiProjectExportVariablesHttpError, SetDiProjectExportVariablesHttpResponse, StartDiProjectDiTaskRuntimeHttpError, StartDiProjectDiTaskRuntimeHttpResponse, StartDiProjectDiTaskRuntimeWithBodyHttpError, StartDiProjectDiTaskRuntimeWithBodyHttpResponse, StartTaskReq, StopDiProjectDiTaskRuntimeHttpError, StopDiProjectDiTaskRuntimeHttpResponse, TaskSelectionList, UpdateDiExportProjectVariablesReq, UpdateDiExportProjectVariablesRsp, ValidateDiProjectDiTaskHttpError, ValidateDiProjectDiTaskHttpResponse, ValidateDiProjectHttpError, ValidateDiProjectHttpResponse, ValidateProjectReq, ValidateTaskReq, clearCache, createDiProject, diProjectsExport as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, recreateDatasetsDiProjectDiTask, requestReloadDiProjectDiTask, setDiProjectExportVariables, startDiProjectDiTaskRuntime, startDiProjectDiTaskRuntimeWithBody, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };
+export { AsyncActionDetails, AsyncActionError, AsyncActionRsp, AsyncActionTaskProgress, AsyncActionType, AsyncCallStatus, CreateDiProjectHttpError, CreateDiProjectHttpResponse, CreateDiProjectReq, DataTaskDatasetState, DataTaskInstanceState, DataTaskItemRsp, DataTaskRuntimeState, DataTaskType, DiExportMode, DiProjectItemRsp, DiProjectOperationSelectedTask, DiProjectsAPI, DiSearchTaskRunHistoryReq, DiSearchTaskRunHistoryRsp, Error, ErrorSource, Errors, ExportDiProjectHttpError, ExportDiProjectHttpResponse, ExportDiProjectReq, FileStatistics, GetDiExportProjectVariablesRsp, GetDiProjectDiTaskHttpError, GetDiProjectDiTaskHttpResponse, GetDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAMEHttpError, GetDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAMEHttpResponse, GetDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAMEHttpError, GetDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAMEHttpResponse, GetDiProjectDiTaskRuntimeStateDatasetsHttpError, GetDiProjectDiTaskRuntimeStateDatasetsHttpResponse, GetDiProjectDiTaskRuntimeStateHttpError, GetDiProjectDiTaskRuntimeStateHttpResponse, GetDiProjectDiTasksHttpError, GetDiProjectDiTasksHttpResponse, GetDiProjectExportVariablesHttpError, GetDiProjectExportVariablesHttpResponse, GetDiProjectHttpError, GetDiProjectHttpResponse, GetDiProjectsHttpError, GetDiProjectsHttpResponse, ImportDiProjectHttpError, ImportDiProjectHttpResponse, ImportDiProjectRsp, ListDataTaskDatasetsRsp, ListDataTasksRsp, ListDiProjectsRsp, OperationStatistics, PlatformType, PrepareDiProjectDiTaskHttpError, PrepareDiProjectDiTaskHttpResponse, PrepareDiProjectHttpError, PrepareDiProjectHttpResponse, PrepareProjectReq, PrepareTaskReq, RecreateDatasetsDiProjectDiTaskHttpError, RecreateDatasetsDiProjectDiTaskHttpResponse, RecreateTaskDatasetsReq, ReloadDiTaskReq, ReloadRequestResponse, RequestReloadDiProjectDiTaskHttpError, RequestReloadDiProjectDiTaskHttpResponse, SearchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAMEHttpError, SearchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAMEHttpResponse, SetDiProjectExportVariablesHttpError, SetDiProjectExportVariablesHttpResponse, StartDiProjectDiTaskRuntimeHttpError, StartDiProjectDiTaskRuntimeHttpResponse, StartDiProjectDiTaskRuntimeWithBodyHttpError, StartDiProjectDiTaskRuntimeWithBodyHttpResponse, StartTaskReq, StopDiProjectDiTaskRuntimeHttpError, StopDiProjectDiTaskRuntimeHttpResponse, TaskRunItemRsp, TaskRunSearchFilter, TaskRunSearchFilterField, TaskRunSearchFilterOperator, TaskRunStatus, TaskSelectionList, UpdateDiExportProjectVariablesReq, UpdateDiExportProjectVariablesRsp, ValidateDiProjectDiTaskHttpError, ValidateDiProjectDiTaskHttpResponse, ValidateDiProjectHttpError, ValidateDiProjectHttpResponse, ValidateProjectReq, ValidateTaskReq, clearCache, createDiProject, diProjectsExport as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAME, getDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAME, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, recreateDatasetsDiProjectDiTask, requestReloadDiProjectDiTask, searchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAME, setDiProjectExportVariables, startDiProjectDiTaskRuntime, startDiProjectDiTaskRuntimeWithBody, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };

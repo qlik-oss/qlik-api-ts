@@ -5,7 +5,8 @@ type AutomationConnectorsList = {
   links?: Links;
 };
 type AutomationConnectorsListObject = {
-  /** Indicates if the connector is billable. */billable?: boolean; /** Indicates if the connector supports webhooks. */
+  /** Indicates if the connector is billable. */billable?: boolean; /** The description of the automation connector. */
+  description?: string; /** Indicates if the connector supports webhooks. */
   hasWebhooks?: boolean;
   readonly id?: string; /** The URL to the large logo of the connector. */
   logoLarge?: string; /** The URL to the medium logo of the connector. */

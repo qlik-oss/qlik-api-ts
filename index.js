@@ -197,6 +197,20 @@ var interceptors_default = interceptors$1;
 
 //#endregion
 //#region src/public/index.ts
+const createAnalyticsAppsRuntimeAPI = apiDefToApiPublic("analytics/apps", { api: { analytics: { apps: {
+	evaluations: {
+		"{baselineId}": { compare: { "{comparisonId}": {
+			"": ["getAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME:GQ:"],
+			actions: { download: ["downloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME:G:"] }
+		} } },
+		"{id}": {
+			"": ["getAppsEvaluation_FIX_THIS_QUIRKY_NAME:GQ:"],
+			actions: { download: ["downloadAppsEvaluation_FIX_THIS_QUIRKY_NAME:G:"] }
+		}
+	},
+	"{appId}": { actions: { restore: ["restoreApp:P:"] } },
+	"{guid}": { evaluations: ["getAppEvaluations:GQ:", "createAppEvaluation:P:"] }
+} } } });
 const createAnalyticsChangeStoresRuntimeAPI = apiDefToApiPublic("analytics/change-stores", { api: { analytics: { "change-stores": {
 	"": ["getChangeStores:GQ:"],
 	"{storeId}": {
@@ -230,6 +244,7 @@ const createAnalyticsOdagSettingsRuntimeAPI = apiDefToApiPublic("analytics/odag-
 	canupdate: ["getOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAME:G:"]
 } } } });
 const createAnalyticsRuntimeAPI = apiDefToApiPublic("analytics", {}, {
+	apps: createAnalyticsAppsRuntimeAPI,
 	"change-stores": createAnalyticsChangeStoresRuntimeAPI,
 	changeStores: createAnalyticsChangeStoresRuntimeAPI,
 	"odag-apps": createAnalyticsOdagAppsRuntimeAPI,
@@ -773,6 +788,13 @@ const createDiProjectsRuntimeAPI = apiDefToApiPublic("di-projects", { api: { v1:
 					actions: {
 						start: ["startDiProjectDiTaskRuntimeWithBody:PBJ:", "startDiProjectDiTaskRuntime:P:"],
 						stop: ["stopDiProjectDiTaskRuntime:P:"]
+					},
+					runs: {
+						actions: { search: ["searchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAME:PBJ:"] },
+						"{runId}": { state: {
+							"": ["getDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAME:G:"],
+							datasets: ["getDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAME:G:"]
+						} }
 					},
 					state: {
 						"": ["getDiProjectDiTaskRuntimeState:G:"],

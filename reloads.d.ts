@@ -44,7 +44,9 @@ type Reload = {
   id: string;
   links?: ReloadLinks; /** The log describing the result of the latest reload execution from the request. */
   log?: string; /** The boolean value used to present the reload is partial or not. */
-  partial?: Partial; /** The time the reload job was consumed from the queue. */
+  partial?: Partial; /** The String field identifying the specific resource ID within that service */
+  resourceId?: ResourceId; /** The String field identifying the service type that triggered the reload, e.g. "api" */
+  resourceType?: ResourceType; /** The time the reload job was consumed from the queue. */
   startTime?: string; /** The status of the reload. There are seven statuses. `QUEUED`, `RELOADING`, `CANCELING` are the active statuses. `SUCCEEDED`, `FAILED`, `CANCELED`, `EXCEEDED_LIMIT` are the end statuses. */
   status: Status; /** The ID of the tenant who owns the reload. */
   tenantId: string; /** What initiated the reload: hub = one-time reload manually triggered in hub, chronos = time based scheduled reload triggered by chronos, external = reload triggered via external API request, automations = reload triggered in automation, data-refresh = reload triggered by refresh of data, choreographer = reload triggered by choreographer. */
@@ -57,7 +59,9 @@ type ReloadLinks = {
 };
 type ReloadRequest = {
   /** The ID of the app to be reloaded. */appId: string; /** The boolean value used to present the reload is partial or not */
-  partial?: boolean; /** The variables to be used in the load script. Maximum of 20 variables allowed with a maximum length of 256 characters for each name/value. */
+  partial?: boolean; /** The String field identifying the specific resource ID within that service */
+  resourceId?: ResourceId; /** The String field identifying the service type that triggered the reload, e.g. "api" */
+  resourceType?: ResourceType; /** The variables to be used in the load script. Maximum of 20 variables allowed with a maximum length of 256 characters for each name/value. */
   variables?: Record<string, string>; /** The weight of the reload for the same tenant. The higher the weight, the sooner the reload will be scheduled relative to other reloads for the same tenant. The personal app will be always set as 1. */
   weight?: Weight;
 };
@@ -72,6 +76,18 @@ type ReloadsLinks = ReloadLinks & {
   next?: Href;
   prev?: Href;
 };
+/**
+ * The String field identifying the specific resource ID within that service
+ * @example
+ * "5be59decca62aa00097268a4"
+ */
+type ResourceId = string;
+/**
+ * The String field identifying the service type that triggered the reload, e.g. "api"
+ * @example
+ * "api"
+ */
+type ResourceType = "api" | "reload-tasks" | "tasks" | "automate";
 /**
  * The status of the reload. There are seven statuses. `QUEUED`, `RELOADING`, `CANCELING` are the active statuses. `SUCCEEDED`, `FAILED`, `CANCELED`, `EXCEEDED_LIMIT` are the end statuses.
  * @example
@@ -240,4 +256,4 @@ type ReloadsAPI = {
  */
 declare const reloadsExport: ReloadsAPI;
 //#endregion
-export { CancelReload202HttpResponse, CancelReload204HttpResponse, CancelReloadHttpError, CancelReloadHttpResponse, Error, Errors, GetReloadHttpError, GetReloadHttpResponse, GetReloadsHttpError, GetReloadsHttpResponse, Href, Partial, QueueReloadHttpError, QueueReloadHttpResponse, Reload, ReloadLinks, ReloadRequest, ReloadStatus, Reloads, ReloadsAPI, ReloadsLinks, Status, Type, Weight, cancelReload, clearCache, reloadsExport as default, getReload, getReloads, queueReload };
+export { CancelReload202HttpResponse, CancelReload204HttpResponse, CancelReloadHttpError, CancelReloadHttpResponse, Error, Errors, GetReloadHttpError, GetReloadHttpResponse, GetReloadsHttpError, GetReloadsHttpResponse, Href, Partial, QueueReloadHttpError, QueueReloadHttpResponse, Reload, ReloadLinks, ReloadRequest, ReloadStatus, Reloads, ReloadsAPI, ReloadsLinks, ResourceId, ResourceType, Status, Type, Weight, cancelReload, clearCache, reloadsExport as default, getReload, getReloads, queueReload };

@@ -95,7 +95,8 @@ type OAuthClientBase = {
   connectionConfig?: {
     /** Specifies the consent method for the connection. */consentMethod?: "required" | "trusted";
   }; /** The timestamp for when the oauth-clients record was created. */
-  createdAt: string; /** The timestamp for when the oauth-clients record was deleted. */
+  createdAt: string; /** The type of caller that created this client. Possible values are `user`, `service`, and `dcr` for Dynamic Client Registration. */
+  readonly createdByType?: string; /** The timestamp for when the oauth-clients record was deleted. */
   deletedAt?: string; /** Client description */
   description?: string; /** Is set if client disabled */
   readonly disableTag?: string; /** URI for logo of client */
