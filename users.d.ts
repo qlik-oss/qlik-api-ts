@@ -278,7 +278,7 @@ declare function getUsers(query: {
   /** A comma-delimited string of the requested fields per entity. If the 'links' value is omitted, then the entity HATEOAS link will also be omitted. */fields?: string;
   /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax. Cannot be combined with any of the fields marked as deprecated. All conditional statements within this query parameter are case insensitive.
    *
-   * The following fields support the `eq` operator: `id`, `subject`, `name`, `email`, `status`, `clientId`, `assignedRoles.id` `assignedRoles.name`, `assignedGroups.id`, `assignedGroupsAssignedRoles.name`
+   * The following fields support the `eq` operator: `id`, `subject`, `name`, `email`, `status`, `clientId`, `assignedRoles.id`, `assignedRoles.name`, `assignedGroups.id`, `assignedGroupsAssignedRoles.name`, `assignedScopes`
    *
    * Additionally, the following fields support the `co` operator: `name`, `email`, `subject`
    *

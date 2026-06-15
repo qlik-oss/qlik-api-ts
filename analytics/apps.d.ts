@@ -1,6 +1,6 @@
 import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
 declare namespace apps_d_exports {
-  export { AppsAPI, Classification, CmpEngineSpec, Cmpbool, Cmpfloat, CmpfloatWithTimeout, Cmpint, Comparison, Comparisonfields, ComparisonobjMemoryLimit, Comparisonobjresponsetime, Comparisontables, CreateAppEvaluationHttpError, CreateAppEvaluationHttpResponse, DataSourceStatus, DownloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpError, DownloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpResponse, DownloadAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpError, DownloadAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpResponse, EngineSpec, ErrorItem, ErrorResponse, Evaluation, Evaluations, EvaluatorError, Event, GetAppEvaluationsHttpError, GetAppEvaluationsHttpResponse, GetAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpError, GetAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpResponse, GetAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpError, GetAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpResponse, Href, NxAppCreatePrivileges, NxAppV2, NxAttributesV2, Objectmetrics, Objectspec, Objecttopspec, OpenAppProgress, OpenAppStep, ReloadInformation, RestoreAppHttpError, RestoreAppHttpResponse, Result, Resultentry, ResultobjMemoryLimit, Resultobjresponsetime, Resultobjsheet, Resultsingle, Sortedcomparisonfields, Sortedcomparisonobjresponsetime, Sortedcomparisontables, StateEnum, UsageEnum, clearCache, createAppEvaluation, appsExport as default, downloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME, downloadAppsEvaluation_FIX_THIS_QUIRKY_NAME, getAppEvaluations, getAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME, getAppsEvaluation_FIX_THIS_QUIRKY_NAME, restoreApp };
+  export { AppsAPI, Classification, CmpEngineSpec, Cmpbool, Cmpfloat, CmpfloatWithTimeout, Cmpint, Comparison, Comparisonfields, ComparisonobjMemoryLimit, Comparisonobjresponsetime, Comparisontables, CreateAppEvaluationHttpError, CreateAppEvaluationHttpResponse, DataSourceStatus, EngineSpec, ErrorItem, ErrorResponse, Evaluation, Evaluations, EvaluatorError, Event, GetAppEvaluationComparisonHttpError, GetAppEvaluationComparisonHttpResponse, GetAppEvaluationComparisonXmlHttpError, GetAppEvaluationComparisonXmlHttpResponse, GetAppEvaluationHttpError, GetAppEvaluationHttpResponse, GetAppEvaluationXmlHttpError, GetAppEvaluationXmlHttpResponse, GetAppEvaluationsHttpError, GetAppEvaluationsHttpResponse, Href, NxAppCreatePrivileges, NxAppV2, NxAttributesV2, Objectmetrics, Objectspec, Objecttopspec, OpenAppProgress, OpenAppStep, ReloadInformation, RestoreAppHttpError, RestoreAppHttpResponse, Result, Resultentry, ResultobjMemoryLimit, Resultobjresponsetime, Resultobjsheet, Resultsingle, Sortedcomparisonfields, Sortedcomparisonobjresponsetime, Sortedcomparisontables, StateEnum, UsageEnum, clearCache, createAppEvaluation, appsExport as default, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXml, getAppEvaluationXml, getAppEvaluations, restoreApp };
 }
 type ErrorItem = {
   /** A unique code for the error. */code: string; /** Additional information about the error. */
@@ -318,18 +318,18 @@ type Sortedcomparisontables = {
  * @param baselineId The unique identifier of the baseline app evaluation.
  * @param comparisonId The unique identifier of the comparison app evaluation.
  * @param query an object with query parameters
- * @throws GetAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetAppEvaluationComparisonHttpError
  */
-declare function getAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME(baselineId: string, comparisonId: string, query: {
+declare function getAppEvaluationComparison(baselineId: string, comparisonId: string, query: {
   /** When `true`, includes all comparison entries regardless of significance. */all?: boolean; /** The output format for the response. Accepts `json` or `xml`. */
   format?: string;
-}, options?: ApiCallOptions): Promise<GetAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type GetAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+}, options?: ApiCallOptions): Promise<GetAppEvaluationComparisonHttpResponse>;
+type GetAppEvaluationComparisonHttpResponse = {
   data: Comparison;
   headers: Headers;
   status: 200;
 };
-type GetAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetAppEvaluationComparisonHttpError = {
   data: EvaluatorError;
   headers: Headers;
   status: 404 | 500;
@@ -339,22 +339,22 @@ type GetAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpError = {
  * defaulting to XML format. Use the `Accept` header to request JSON output instead.
  * Both evaluations must belong to the same app.
  * @example
- * downloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME(
+ * getAppEvaluationComparisonXml(
  *   "abcdefghijklmnopq",
  *   "abcdefghijklmnopq"
  * )
  *
  * @param baselineId The unique identifier of the baseline app evaluation.
  * @param comparisonId The unique identifier of the comparison app evaluation.
- * @throws DownloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetAppEvaluationComparisonXmlHttpError
  */
-declare function downloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME(baselineId: string, comparisonId: string, options?: ApiCallOptions): Promise<DownloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type DownloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+declare function getAppEvaluationComparisonXml(baselineId: string, comparisonId: string, options?: ApiCallOptions): Promise<GetAppEvaluationComparisonXmlHttpResponse>;
+type GetAppEvaluationComparisonXmlHttpResponse = {
   data: Comparison;
   headers: Headers;
   status: 200;
 };
-type DownloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetAppEvaluationComparisonXmlHttpError = {
   data: EvaluatorError;
   headers: Headers;
   status: 404 | 500;
@@ -365,18 +365,18 @@ type DownloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpError = {
  *
  * @param id The unique identifier of the app evaluation to retrieve.
  * @param query an object with query parameters
- * @throws GetAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetAppEvaluationHttpError
  */
-declare function getAppsEvaluation_FIX_THIS_QUIRKY_NAME(id: string, query: {
+declare function getAppEvaluation(id: string, query: {
   /** When `true`, includes full app evaluation details in the response. */all?: boolean; /** The output format for the response. Accepts `json` or `xml`. */
   format?: string;
-}, options?: ApiCallOptions): Promise<GetAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type GetAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+}, options?: ApiCallOptions): Promise<GetAppEvaluationHttpResponse>;
+type GetAppEvaluationHttpResponse = {
   data: Evaluation;
   headers: Headers;
   status: 200;
 };
-type GetAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetAppEvaluationHttpError = {
   data: EvaluatorError;
   headers: Headers;
   status: 404 | 500;
@@ -385,20 +385,20 @@ type GetAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpError = {
  * Downloads the evaluation log for the specified app evaluation, defaulting to XML
  * format. Use the `Accept` header to request JSON output instead.
  * @example
- * downloadAppsEvaluation_FIX_THIS_QUIRKY_NAME(
+ * getAppEvaluationXml(
  *   "abcdefghijklmnopq"
  * )
  *
  * @param id The unique identifier of the app evaluation to download.
- * @throws DownloadAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetAppEvaluationXmlHttpError
  */
-declare function downloadAppsEvaluation_FIX_THIS_QUIRKY_NAME(id: string, options?: ApiCallOptions): Promise<DownloadAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type DownloadAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+declare function getAppEvaluationXml(id: string, options?: ApiCallOptions): Promise<GetAppEvaluationXmlHttpResponse>;
+type GetAppEvaluationXmlHttpResponse = {
   data: Evaluation;
   headers: Headers;
   status: 200;
 };
-type DownloadAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetAppEvaluationXmlHttpError = {
   data: EvaluatorError;
   headers: Headers;
   status: 404 | 500;
@@ -489,45 +489,45 @@ type AppsAPI = {
    * @param baselineId The unique identifier of the baseline app evaluation.
    * @param comparisonId The unique identifier of the comparison app evaluation.
    * @param query an object with query parameters
-   * @throws GetAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetAppEvaluationComparisonHttpError
    */
-  getAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME: typeof getAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME;
+  getAppEvaluationComparison: typeof getAppEvaluationComparison;
   /**
    * Downloads a comparison log for the two specified app evaluations (baseline and comparison),
    * defaulting to XML format. Use the `Accept` header to request JSON output instead.
    * Both evaluations must belong to the same app.
    * @example
-   * downloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME(
+   * getAppEvaluationComparisonXml(
    *   "abcdefghijklmnopq",
    *   "abcdefghijklmnopq"
    * )
    *
    * @param baselineId The unique identifier of the baseline app evaluation.
    * @param comparisonId The unique identifier of the comparison app evaluation.
-   * @throws DownloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetAppEvaluationComparisonXmlHttpError
    */
-  downloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME: typeof downloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME;
+  getAppEvaluationComparisonXml: typeof getAppEvaluationComparisonXml;
   /**
    * Retrieves a single app evaluation by its unique identifier. Use the `all` parameter
    * to include full evaluation details in the response.
    *
    * @param id The unique identifier of the app evaluation to retrieve.
    * @param query an object with query parameters
-   * @throws GetAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetAppEvaluationHttpError
    */
-  getAppsEvaluation_FIX_THIS_QUIRKY_NAME: typeof getAppsEvaluation_FIX_THIS_QUIRKY_NAME;
+  getAppEvaluation: typeof getAppEvaluation;
   /**
    * Downloads the evaluation log for the specified app evaluation, defaulting to XML
    * format. Use the `Accept` header to request JSON output instead.
    * @example
-   * downloadAppsEvaluation_FIX_THIS_QUIRKY_NAME(
+   * getAppEvaluationXml(
    *   "abcdefghijklmnopq"
    * )
    *
    * @param id The unique identifier of the app evaluation to download.
-   * @throws DownloadAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetAppEvaluationXmlHttpError
    */
-  downloadAppsEvaluation_FIX_THIS_QUIRKY_NAME: typeof downloadAppsEvaluation_FIX_THIS_QUIRKY_NAME;
+  getAppEvaluationXml: typeof getAppEvaluationXml;
   /**
    * Restores a soft-deleted Qlik Cloud Analytics application to the same space with the same app ID, retaining the properties it had at the time of deletion.
    * This operation is available to the app owner and Tenant Admins. The app owner can restore the app only if the original space still exists and they still have delete permission in the space; otherwise, a 403 Forbidden error is returned.
@@ -571,4 +571,4 @@ type AppsAPI = {
  */
 declare const appsExport: AppsAPI;
 //#endregion
-export { AppsAPI, Classification, CmpEngineSpec, Cmpbool, Cmpfloat, CmpfloatWithTimeout, Cmpint, Comparison, Comparisonfields, ComparisonobjMemoryLimit, Comparisonobjresponsetime, Comparisontables, CreateAppEvaluationHttpError, CreateAppEvaluationHttpResponse, DataSourceStatus, DownloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpError, DownloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpResponse, DownloadAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpError, DownloadAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpResponse, EngineSpec, ErrorItem, ErrorResponse, Evaluation, Evaluations, EvaluatorError, Event, GetAppEvaluationsHttpError, GetAppEvaluationsHttpResponse, GetAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpError, GetAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpResponse, GetAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpError, GetAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpResponse, Href, NxAppCreatePrivileges, NxAppV2, NxAttributesV2, Objectmetrics, Objectspec, Objecttopspec, OpenAppProgress, OpenAppStep, ReloadInformation, RestoreAppHttpError, RestoreAppHttpResponse, Result, Resultentry, ResultobjMemoryLimit, Resultobjresponsetime, Resultobjsheet, Resultsingle, Sortedcomparisonfields, Sortedcomparisonobjresponsetime, Sortedcomparisontables, StateEnum, UsageEnum, clearCache, createAppEvaluation, appsExport as default, downloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME, downloadAppsEvaluation_FIX_THIS_QUIRKY_NAME, getAppEvaluations, getAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME, getAppsEvaluation_FIX_THIS_QUIRKY_NAME, restoreApp, apps_d_exports as t };
+export { AppsAPI, Classification, CmpEngineSpec, Cmpbool, Cmpfloat, CmpfloatWithTimeout, Cmpint, Comparison, Comparisonfields, ComparisonobjMemoryLimit, Comparisonobjresponsetime, Comparisontables, CreateAppEvaluationHttpError, CreateAppEvaluationHttpResponse, DataSourceStatus, EngineSpec, ErrorItem, ErrorResponse, Evaluation, Evaluations, EvaluatorError, Event, GetAppEvaluationComparisonHttpError, GetAppEvaluationComparisonHttpResponse, GetAppEvaluationComparisonXmlHttpError, GetAppEvaluationComparisonXmlHttpResponse, GetAppEvaluationHttpError, GetAppEvaluationHttpResponse, GetAppEvaluationXmlHttpError, GetAppEvaluationXmlHttpResponse, GetAppEvaluationsHttpError, GetAppEvaluationsHttpResponse, Href, NxAppCreatePrivileges, NxAppV2, NxAttributesV2, Objectmetrics, Objectspec, Objecttopspec, OpenAppProgress, OpenAppStep, ReloadInformation, RestoreAppHttpError, RestoreAppHttpResponse, Result, Resultentry, ResultobjMemoryLimit, Resultobjresponsetime, Resultobjsheet, Resultsingle, Sortedcomparisonfields, Sortedcomparisonobjresponsetime, Sortedcomparisontables, StateEnum, UsageEnum, clearCache, createAppEvaluation, appsExport as default, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXml, getAppEvaluationXml, getAppEvaluations, restoreApp, apps_d_exports as t };

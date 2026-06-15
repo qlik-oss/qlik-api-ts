@@ -1,13 +1,13 @@
 import { t as __exportAll } from "../chunks/chunk-w6R9maHv.js";
-import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-CpHbSqJB.js";
+import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-BJ-uhqfm.js";
 
 //#region src/public/rest/data-governance/data-qualities.ts
 var data_qualities_exports = /* @__PURE__ */ __exportAll({
 	clearCache: () => clearCache,
-	createDataQualitiesComputation_FIX_THIS_QUIRKY_NAME: () => createDataQualitiesComputation_FIX_THIS_QUIRKY_NAME,
+	createDataQualityComputation: () => createDataQualityComputation,
 	default: () => dataQualitiesExport,
-	getDataQualitiesComputation_FIX_THIS_QUIRKY_NAME: () => getDataQualitiesComputation_FIX_THIS_QUIRKY_NAME,
-	getDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAME: () => getDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAME
+	getDataQualityComputation: () => getDataQualityComputation,
+	getDataQualityGlobalResults: () => getDataQualityGlobalResults
 });
 /**
 * Triggers a full data quality computation for a dataset, running profile calculation followed by data quality
@@ -16,9 +16,9 @@ var data_qualities_exports = /* @__PURE__ */ __exportAll({
 * Poll the status endpoint until `status` is `SUCCEEDED` or `FAILED`.
 *
 * @param body an object with the body content
-* @throws CreateDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws CreateDataQualityComputationHttpError
 */
-async function createDataQualitiesComputation_FIX_THIS_QUIRKY_NAME(body, options) {
+async function createDataQualityComputation(body, options) {
 	return invokeFetch("data-governance/data-qualities", {
 		method: "post",
 		pathTemplate: "/api/data-governance/data-qualities/computations",
@@ -32,14 +32,14 @@ async function createDataQualitiesComputation_FIX_THIS_QUIRKY_NAME(body, options
 * computation to determine when results are available. The `status` field returns one of `REQUESTED`,
 * `SUBMITTED`, `PROFILE_REQUESTED`, `SUCCEEDED`, `FAILED`, or `PROFILE_FAILED`.
 * @example
-* getDataQualitiesComputation_FIX_THIS_QUIRKY_NAME(
+* getDataQualityComputation(
 *   "4db06daa-3117-412e-8fb4-b29c937f9a0e"
 * )
 *
 * @param computationId The unique identifier of the computation, as returned by `POST /data-governance/data-qualities/computations`.
-* @throws GetDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetDataQualityComputationHttpError
 */
-async function getDataQualitiesComputation_FIX_THIS_QUIRKY_NAME(computationId, options) {
+async function getDataQualityComputation(computationId, options) {
 	return invokeFetch("data-governance/data-qualities", {
 		method: "get",
 		pathTemplate: "/api/data-governance/data-qualities/computations/{computationId}",
@@ -52,9 +52,9 @@ async function getDataQualitiesComputation_FIX_THIS_QUIRKY_NAME(computationId, o
 * sample cells.
 *
 * @param query an object with query parameters
-* @throws GetDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetDataQualityGlobalResultsHttpError
 */
-async function getDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAME(query, options) {
+async function getDataQualityGlobalResults(query, options) {
 	return invokeFetch("data-governance/data-qualities", {
 		method: "get",
 		pathTemplate: "/api/data-governance/data-qualities/global-results",
@@ -72,11 +72,11 @@ function clearCache() {
 * Functions for the data-qualities api
 */
 const dataQualitiesExport = {
-	createDataQualitiesComputation_FIX_THIS_QUIRKY_NAME,
-	getDataQualitiesComputation_FIX_THIS_QUIRKY_NAME,
-	getDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAME,
+	createDataQualityComputation,
+	getDataQualityComputation,
+	getDataQualityGlobalResults,
 	clearCache
 };
 
 //#endregion
-export { clearCache, createDataQualitiesComputation_FIX_THIS_QUIRKY_NAME, dataQualitiesExport as default, getDataQualitiesComputation_FIX_THIS_QUIRKY_NAME, getDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAME, data_qualities_exports as t };
+export { clearCache, createDataQualityComputation, dataQualitiesExport as default, getDataQualityComputation, getDataQualityGlobalResults, data_qualities_exports as t };

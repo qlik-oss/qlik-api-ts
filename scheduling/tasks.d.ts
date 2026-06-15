@@ -1,6 +1,6 @@
 import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
 declare namespace tasks_d_exports {
-  export { Action, ActionExecTimeout, CorrelationDef, CreateTaskHttpError, CreateTaskHttpResponse, Crondef, DeleteTaskHttpError, DeleteTaskHttpResponse, End, ErrorResponse, EventTimeout, Eventdef, Events, Eventstate, Functionref, GetTaskGraphsAncestors_FIX_THIS_QUIRKY_NAMEHttpError, GetTaskGraphsAncestors_FIX_THIS_QUIRKY_NAMEHttpResponse, GetTaskGraphsChildren_FIX_THIS_QUIRKY_NAMEHttpError, GetTaskGraphsChildren_FIX_THIS_QUIRKY_NAMEHttpResponse, GetTaskGraphsDescendants_FIX_THIS_QUIRKY_NAMEHttpError, GetTaskGraphsDescendants_FIX_THIS_QUIRKY_NAMEHttpResponse, GetTaskGraphsParents_FIX_THIS_QUIRKY_NAMEHttpError, GetTaskGraphsParents_FIX_THIS_QUIRKY_NAMEHttpResponse, GetTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAMEHttpError, GetTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAMEHttpResponse, GetTaskHttpError, GetTaskHttpResponse, GetTaskRunLogHttpError, GetTaskRunLogHttpResponse, GetTaskRunsHttpError, GetTaskRunsHttpResponse, GetTaskRunsLast_FIX_THIS_QUIRKY_NAMEHttpError, GetTaskRunsLast_FIX_THIS_QUIRKY_NAMEHttpResponse, GetTasksHttpError, GetTasksHttpResponse, GetTasksResourceRuns_FIX_THIS_QUIRKY_NAMEHttpError, GetTasksResourceRuns_FIX_THIS_QUIRKY_NAMEHttpResponse, HttpResult, JSONPatch, Link, Onevents, OrchMeta, OrchRun, OrchRunBase, OrchRunList, PatchTask200HttpResponse, PatchTask204HttpResponse, PatchTaskHttpError, PatchTaskHttpResponse, PatchValue, Schedule, StartTaskHttpError, StartTaskHttpResponse, Startdef, StateExecTimeout, Task, TaskGraph, TaskGraphEdge, TaskGraphVertex, TaskList, TaskMetadata, TaskTopology, TasksAPI, TriggerMeta, UpdateTaskHttpError, UpdateTaskHttpResponse, clearCache, createTask, tasksExport as default, deleteTask, getTask, getTaskGraphsAncestors_FIX_THIS_QUIRKY_NAME, getTaskGraphsChildren_FIX_THIS_QUIRKY_NAME, getTaskGraphsDescendants_FIX_THIS_QUIRKY_NAME, getTaskGraphsParents_FIX_THIS_QUIRKY_NAME, getTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAME, getTaskRunLog, getTaskRuns, getTaskRunsLast_FIX_THIS_QUIRKY_NAME, getTasks, getTasksResourceRuns_FIX_THIS_QUIRKY_NAME, patchTask, startTask, updateTask };
+  export { Action, ActionExecTimeout, CorrelationDef, CreateTaskHttpError, CreateTaskHttpResponse, Crondef, DeleteTaskHttpError, DeleteTaskHttpResponse, End, ErrorResponse, EventTimeout, Eventdef, Events, Eventstate, Functionref, GetTaskGraphAncestorsHttpError, GetTaskGraphAncestorsHttpResponse, GetTaskGraphChildrenHttpError, GetTaskGraphChildrenHttpResponse, GetTaskGraphDescendantsHttpError, GetTaskGraphDescendantsHttpResponse, GetTaskGraphParentsHttpError, GetTaskGraphParentsHttpResponse, GetTaskHttpError, GetTaskHttpResponse, GetTaskLastRunHttpError, GetTaskLastRunHttpResponse, GetTaskResourceRunsHttpError, GetTaskResourceRunsHttpResponse, GetTaskRunLogHttpError, GetTaskRunLogHttpResponse, GetTaskRunsHttpError, GetTaskRunsHttpResponse, GetTaskSubgraphHttpError, GetTaskSubgraphHttpResponse, GetTasksHttpError, GetTasksHttpResponse, HttpResult, JSONPatch, Link, Onevents, OrchMeta, OrchRun, OrchRunBase, OrchRunList, PatchTask200HttpResponse, PatchTask204HttpResponse, PatchTaskHttpError, PatchTaskHttpResponse, PatchValue, Schedule, StartTaskHttpError, StartTaskHttpResponse, Startdef, StateExecTimeout, Task, TaskGraph, TaskGraphEdge, TaskGraphVertex, TaskList, TaskMetadata, TaskTopology, TasksAPI, TriggerMeta, UpdateTaskHttpError, UpdateTaskHttpResponse, clearCache, createTask, tasksExport as default, deleteTask, getTask, getTaskGraphAncestors, getTaskGraphChildren, getTaskGraphDescendants, getTaskGraphParents, getTaskLastRun, getTaskResourceRuns, getTaskRunLog, getTaskRuns, getTaskSubgraph, getTasks, patchTask, startTask, updateTask };
 }
 type ErrorResponse = {
   errors?: HttpResult[]; /** A trace identifier for correlating the error to a specific service request. */
@@ -425,21 +425,21 @@ type CreateTaskHttpError = {
  *
  * @param id The unique identifier of the resource to retrieve task runs for.
  * @param query an object with query parameters
- * @throws GetTasksResourceRuns_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetTaskResourceRunsHttpError
  */
-declare function getTasksResourceRuns_FIX_THIS_QUIRKY_NAME(id: string, query: {
+declare function getTaskResourceRuns(id: string, query: {
   /** Maximum number of task runs to return per page. */limit?: number; /** Cursor token for fetching the next page of results. */
   page?: string; /** Field and direction to sort results by. Prefix the field name with `+` for ascending or `-` for descending order. Defaults to `-startedAt`. */
   sort?: "+startedAt" | "-startedAt" | "+endedAt" | "-endedAt" | "+status" | "-status" | "+taskId" | "-taskId" | "+actionId" | "-actionId";
-}, options?: ApiCallOptions): Promise<GetTasksResourceRuns_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type GetTasksResourceRuns_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+}, options?: ApiCallOptions): Promise<GetTaskResourceRunsHttpResponse>;
+type GetTaskResourceRunsHttpResponse = {
   data: OrchRunList;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetTasksResourceRuns_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetTasksResourceRuns_FIX_THIS_QUIRKY_NAMEHttpResponse>;
+  prev?: (options?: ApiCallOptions) => Promise<GetTaskResourceRunsHttpResponse>;
+  next?: (options?: ApiCallOptions) => Promise<GetTaskResourceRunsHttpResponse>;
 };
-type GetTasksResourceRuns_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetTaskResourceRunsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -547,18 +547,18 @@ type StartTaskHttpError = {
  *
  * @param id The unique identifier of the task.
  * @param query an object with query parameters
- * @throws GetTaskGraphsAncestors_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetTaskGraphAncestorsHttpError
  */
-declare function getTaskGraphsAncestors_FIX_THIS_QUIRKY_NAME(id: string, query: {
+declare function getTaskGraphAncestors(id: string, query: {
   /** Maximum ancestor depth to traverse breadth-first. */level?: number; /** When `true`, includes the full task document for each accessible vertex in the response. */
   withTask?: boolean;
-}, options?: ApiCallOptions): Promise<GetTaskGraphsAncestors_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type GetTaskGraphsAncestors_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+}, options?: ApiCallOptions): Promise<GetTaskGraphAncestorsHttpResponse>;
+type GetTaskGraphAncestorsHttpResponse = {
   data: TaskGraph;
   headers: Headers;
   status: 200;
 };
-type GetTaskGraphsAncestors_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetTaskGraphAncestorsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -568,24 +568,24 @@ type GetTaskGraphsAncestors_FIX_THIS_QUIRKY_NAMEHttpError = {
  *
  * @param id The unique identifier of the parent task.
  * @param query an object with query parameters
- * @throws GetTaskGraphsChildren_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetTaskGraphChildrenHttpError
  */
-declare function getTaskGraphsChildren_FIX_THIS_QUIRKY_NAME(id: string, query: {
+declare function getTaskGraphChildren(id: string, query: {
   /** Advanced filter expression using RFC 7644 SCIM syntax. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for syntax details. All comparisons are case-insensitive. Supported fields: `name`, `enabled`, `resourceId`, `ownerId`, `spaceId`, `createdAt`, `updatedAt`, `updatedBy`, `lastStatus`, `lastTriggeredBy`, `lastStartedAt`, `lastEndedAt`, `lastExecutedAs`, and `triggerType`. */filter?: string; /** Maximum number of tasks to return per page. */
   limit?: number; /** Cursor token for fetching the next page of results. */
   page?: string;
   /** Field and direction to sort results by. Prefix the field name with
    * `+` for ascending or `-` for descending order. Defaults to `-updatedAt`. */
   sort?: "+createdAt" | "-createdAt" | "+enabled" | "-enabled" | "+name" | "-name" | "+ownerId" | "-ownerId" | "+resourceId" | "-resourceId" | "+spaceId" | "-spaceId" | "+updatedAt" | "-updatedAt" | "+updatedBy" | "-updatedBy" | "+lastStatus" | "-lastStatus" | "+lastTriggeredBy" | "-lastTriggeredBy" | "+lastStartedAt" | "-lastStartedAt" | "+lastEndedAt" | "-lastEndedAt" | "+lastExecutedAs" | "-lastExecutedAs" | "+triggerType" | "-triggerType";
-}, options?: ApiCallOptions): Promise<GetTaskGraphsChildren_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type GetTaskGraphsChildren_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+}, options?: ApiCallOptions): Promise<GetTaskGraphChildrenHttpResponse>;
+type GetTaskGraphChildrenHttpResponse = {
   data: TaskList;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetTaskGraphsChildren_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetTaskGraphsChildren_FIX_THIS_QUIRKY_NAMEHttpResponse>;
+  prev?: (options?: ApiCallOptions) => Promise<GetTaskGraphChildrenHttpResponse>;
+  next?: (options?: ApiCallOptions) => Promise<GetTaskGraphChildrenHttpResponse>;
 };
-type GetTaskGraphsChildren_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetTaskGraphChildrenHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -595,18 +595,18 @@ type GetTaskGraphsChildren_FIX_THIS_QUIRKY_NAMEHttpError = {
  *
  * @param id The unique identifier of the task.
  * @param query an object with query parameters
- * @throws GetTaskGraphsDescendants_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetTaskGraphDescendantsHttpError
  */
-declare function getTaskGraphsDescendants_FIX_THIS_QUIRKY_NAME(id: string, query: {
+declare function getTaskGraphDescendants(id: string, query: {
   /** Maximum descendant depth to traverse breadth-first. */level?: number; /** When `true`, includes the full task document for each accessible vertex in the response. */
   withTask?: boolean;
-}, options?: ApiCallOptions): Promise<GetTaskGraphsDescendants_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type GetTaskGraphsDescendants_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+}, options?: ApiCallOptions): Promise<GetTaskGraphDescendantsHttpResponse>;
+type GetTaskGraphDescendantsHttpResponse = {
   data: TaskGraph;
   headers: Headers;
   status: 200;
 };
-type GetTaskGraphsDescendants_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetTaskGraphDescendantsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -616,24 +616,24 @@ type GetTaskGraphsDescendants_FIX_THIS_QUIRKY_NAMEHttpError = {
  *
  * @param id The unique identifier of the child task.
  * @param query an object with query parameters
- * @throws GetTaskGraphsParents_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetTaskGraphParentsHttpError
  */
-declare function getTaskGraphsParents_FIX_THIS_QUIRKY_NAME(id: string, query: {
+declare function getTaskGraphParents(id: string, query: {
   /** Advanced filter expression using RFC 7644 SCIM syntax. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for syntax details. All comparisons are case-insensitive. Supported fields: `name`, `enabled`, `resourceId`, `ownerId`, `spaceId`, `createdAt`, `updatedAt`, `updatedBy`, `lastStatus`, `lastTriggeredBy`, `lastStartedAt`, `lastEndedAt`, `lastExecutedAs`, and `triggerType`. */filter?: string; /** Maximum number of tasks to return per page. */
   limit?: number; /** Cursor token for fetching the next page of results. */
   page?: string;
   /** Field and direction to sort results by. Prefix the field name with
    * `+` for ascending or `-` for descending order. Defaults to `-updatedAt`. */
   sort?: "+createdAt" | "-createdAt" | "+enabled" | "-enabled" | "+name" | "-name" | "+ownerId" | "-ownerId" | "+resourceId" | "-resourceId" | "+spaceId" | "-spaceId" | "+updatedAt" | "-updatedAt" | "+updatedBy" | "-updatedBy" | "+lastStatus" | "-lastStatus" | "+lastTriggeredBy" | "-lastTriggeredBy" | "+lastStartedAt" | "-lastStartedAt" | "+lastEndedAt" | "-lastEndedAt" | "+lastExecutedAs" | "-lastExecutedAs" | "+triggerType" | "-triggerType";
-}, options?: ApiCallOptions): Promise<GetTaskGraphsParents_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type GetTaskGraphsParents_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+}, options?: ApiCallOptions): Promise<GetTaskGraphParentsHttpResponse>;
+type GetTaskGraphParentsHttpResponse = {
   data: TaskList;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetTaskGraphsParents_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetTaskGraphsParents_FIX_THIS_QUIRKY_NAMEHttpResponse>;
+  prev?: (options?: ApiCallOptions) => Promise<GetTaskGraphParentsHttpResponse>;
+  next?: (options?: ApiCallOptions) => Promise<GetTaskGraphParentsHttpResponse>;
 };
-type GetTaskGraphsParents_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetTaskGraphParentsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -643,18 +643,18 @@ type GetTaskGraphsParents_FIX_THIS_QUIRKY_NAMEHttpError = {
  *
  * @param id The unique identifier of the task.
  * @param query an object with query parameters
- * @throws GetTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetTaskSubgraphHttpError
  */
-declare function getTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAME(id: string, query: {
+declare function getTaskSubgraph(id: string, query: {
   /** Maximum ancestor and descendant depth to traverse breadth-first. */level?: number; /** When `true`, includes the full task document for each accessible vertex in the response. */
   withTask?: boolean;
-}, options?: ApiCallOptions): Promise<GetTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type GetTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+}, options?: ApiCallOptions): Promise<GetTaskSubgraphHttpResponse>;
+type GetTaskSubgraphHttpResponse = {
   data: TaskGraph;
   headers: Headers;
   status: 200;
 };
-type GetTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetTaskSubgraphHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -687,15 +687,15 @@ type GetTaskRunsHttpError = {
  * Retrieves the most recent execution run for the specified task. Returns a 404 response if the task has never been run. Use this operation to quickly check whether the last run succeeded or failed without paginating through the full run history.
  *
  * @param id The unique identifier of the task.
- * @throws GetTaskRunsLast_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetTaskLastRunHttpError
  */
-declare function getTaskRunsLast_FIX_THIS_QUIRKY_NAME(id: string, options?: ApiCallOptions): Promise<GetTaskRunsLast_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type GetTaskRunsLast_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+declare function getTaskLastRun(id: string, options?: ApiCallOptions): Promise<GetTaskLastRunHttpResponse>;
+type GetTaskLastRunHttpResponse = {
   data: OrchRun;
   headers: Headers;
   status: 200;
 };
-type GetTaskRunsLast_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetTaskLastRunHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -745,9 +745,9 @@ type TasksAPI = {
    *
    * @param id The unique identifier of the resource to retrieve task runs for.
    * @param query an object with query parameters
-   * @throws GetTasksResourceRuns_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetTaskResourceRunsHttpError
    */
-  getTasksResourceRuns_FIX_THIS_QUIRKY_NAME: typeof getTasksResourceRuns_FIX_THIS_QUIRKY_NAME;
+  getTaskResourceRuns: typeof getTaskResourceRuns;
   /**
    * Deletes a specific task and cancels any scheduled or pending runs associated with it. This action cannot be undone. Tenant admins can delete tasks owned by other users.
    *
@@ -791,41 +791,41 @@ type TasksAPI = {
    *
    * @param id The unique identifier of the task.
    * @param query an object with query parameters
-   * @throws GetTaskGraphsAncestors_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetTaskGraphAncestorsHttpError
    */
-  getTaskGraphsAncestors_FIX_THIS_QUIRKY_NAME: typeof getTaskGraphsAncestors_FIX_THIS_QUIRKY_NAME;
+  getTaskGraphAncestors: typeof getTaskGraphAncestors;
   /**
    * Retrieves a paginated list of tasks that are direct children of the specified task in the dependency graph. A child task is one that is triggered when the parent task completes successfully.
    *
    * @param id The unique identifier of the parent task.
    * @param query an object with query parameters
-   * @throws GetTaskGraphsChildren_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetTaskGraphChildrenHttpError
    */
-  getTaskGraphsChildren_FIX_THIS_QUIRKY_NAME: typeof getTaskGraphsChildren_FIX_THIS_QUIRKY_NAME;
+  getTaskGraphChildren: typeof getTaskGraphChildren;
   /**
    * Retrieves the descendant subgraph for a specific task, with the requested task as the root vertex. Traverses child relationships breadth-first down to the depth specified by `level`. Use this to identify all downstream tasks that will be triggered when this task completes.
    *
    * @param id The unique identifier of the task.
    * @param query an object with query parameters
-   * @throws GetTaskGraphsDescendants_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetTaskGraphDescendantsHttpError
    */
-  getTaskGraphsDescendants_FIX_THIS_QUIRKY_NAME: typeof getTaskGraphsDescendants_FIX_THIS_QUIRKY_NAME;
+  getTaskGraphDescendants: typeof getTaskGraphDescendants;
   /**
    * Retrieves a paginated list of tasks that are direct parents of the specified task in the dependency graph. A parent task is one whose completion triggers the current task.
    *
    * @param id The unique identifier of the child task.
    * @param query an object with query parameters
-   * @throws GetTaskGraphsParents_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetTaskGraphParentsHttpError
    */
-  getTaskGraphsParents_FIX_THIS_QUIRKY_NAME: typeof getTaskGraphsParents_FIX_THIS_QUIRKY_NAME;
+  getTaskGraphParents: typeof getTaskGraphParents;
   /**
    * Retrieves the combined ancestor-and-descendant subgraph for a specific task, with the requested task as the root vertex. Traverses both parent and child relationships breadth-first up to the depth specified by `level`. Use this to see the full dependency context for a task in one request.
    *
    * @param id The unique identifier of the task.
    * @param query an object with query parameters
-   * @throws GetTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetTaskSubgraphHttpError
    */
-  getTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAME: typeof getTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAME;
+  getTaskSubgraph: typeof getTaskSubgraph;
   /**
    * Retrieves a paginated list of execution runs for the specified task, ordered by most recent run by default. Each run record includes the start and end time, status, and the identity that triggered it.
    *
@@ -838,9 +838,9 @@ type TasksAPI = {
    * Retrieves the most recent execution run for the specified task. Returns a 404 response if the task has never been run. Use this operation to quickly check whether the last run succeeded or failed without paginating through the full run history.
    *
    * @param id The unique identifier of the task.
-   * @throws GetTaskRunsLast_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetTaskLastRunHttpError
    */
-  getTaskRunsLast_FIX_THIS_QUIRKY_NAME: typeof getTaskRunsLast_FIX_THIS_QUIRKY_NAME;
+  getTaskLastRun: typeof getTaskLastRun;
   /**
    * Retrieves the execution log for a specific task run. Set the `Accept` header to `text/plain` to receive the raw log as a downloadable file, or `application/json` (default) to receive it wrapped in a JSON object with a `logContent` field.
    *
@@ -859,4 +859,4 @@ type TasksAPI = {
  */
 declare const tasksExport: TasksAPI;
 //#endregion
-export { Action, ActionExecTimeout, CorrelationDef, CreateTaskHttpError, CreateTaskHttpResponse, Crondef, DeleteTaskHttpError, DeleteTaskHttpResponse, End, ErrorResponse, EventTimeout, Eventdef, Events, Eventstate, Functionref, GetTaskGraphsAncestors_FIX_THIS_QUIRKY_NAMEHttpError, GetTaskGraphsAncestors_FIX_THIS_QUIRKY_NAMEHttpResponse, GetTaskGraphsChildren_FIX_THIS_QUIRKY_NAMEHttpError, GetTaskGraphsChildren_FIX_THIS_QUIRKY_NAMEHttpResponse, GetTaskGraphsDescendants_FIX_THIS_QUIRKY_NAMEHttpError, GetTaskGraphsDescendants_FIX_THIS_QUIRKY_NAMEHttpResponse, GetTaskGraphsParents_FIX_THIS_QUIRKY_NAMEHttpError, GetTaskGraphsParents_FIX_THIS_QUIRKY_NAMEHttpResponse, GetTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAMEHttpError, GetTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAMEHttpResponse, GetTaskHttpError, GetTaskHttpResponse, GetTaskRunLogHttpError, GetTaskRunLogHttpResponse, GetTaskRunsHttpError, GetTaskRunsHttpResponse, GetTaskRunsLast_FIX_THIS_QUIRKY_NAMEHttpError, GetTaskRunsLast_FIX_THIS_QUIRKY_NAMEHttpResponse, GetTasksHttpError, GetTasksHttpResponse, GetTasksResourceRuns_FIX_THIS_QUIRKY_NAMEHttpError, GetTasksResourceRuns_FIX_THIS_QUIRKY_NAMEHttpResponse, HttpResult, JSONPatch, Link, Onevents, OrchMeta, OrchRun, OrchRunBase, OrchRunList, PatchTask200HttpResponse, PatchTask204HttpResponse, PatchTaskHttpError, PatchTaskHttpResponse, PatchValue, Schedule, StartTaskHttpError, StartTaskHttpResponse, Startdef, StateExecTimeout, Task, TaskGraph, TaskGraphEdge, TaskGraphVertex, TaskList, TaskMetadata, TaskTopology, TasksAPI, TriggerMeta, UpdateTaskHttpError, UpdateTaskHttpResponse, clearCache, createTask, tasksExport as default, deleteTask, getTask, getTaskGraphsAncestors_FIX_THIS_QUIRKY_NAME, getTaskGraphsChildren_FIX_THIS_QUIRKY_NAME, getTaskGraphsDescendants_FIX_THIS_QUIRKY_NAME, getTaskGraphsParents_FIX_THIS_QUIRKY_NAME, getTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAME, getTaskRunLog, getTaskRuns, getTaskRunsLast_FIX_THIS_QUIRKY_NAME, getTasks, getTasksResourceRuns_FIX_THIS_QUIRKY_NAME, patchTask, startTask, tasks_d_exports as t, updateTask };
+export { Action, ActionExecTimeout, CorrelationDef, CreateTaskHttpError, CreateTaskHttpResponse, Crondef, DeleteTaskHttpError, DeleteTaskHttpResponse, End, ErrorResponse, EventTimeout, Eventdef, Events, Eventstate, Functionref, GetTaskGraphAncestorsHttpError, GetTaskGraphAncestorsHttpResponse, GetTaskGraphChildrenHttpError, GetTaskGraphChildrenHttpResponse, GetTaskGraphDescendantsHttpError, GetTaskGraphDescendantsHttpResponse, GetTaskGraphParentsHttpError, GetTaskGraphParentsHttpResponse, GetTaskHttpError, GetTaskHttpResponse, GetTaskLastRunHttpError, GetTaskLastRunHttpResponse, GetTaskResourceRunsHttpError, GetTaskResourceRunsHttpResponse, GetTaskRunLogHttpError, GetTaskRunLogHttpResponse, GetTaskRunsHttpError, GetTaskRunsHttpResponse, GetTaskSubgraphHttpError, GetTaskSubgraphHttpResponse, GetTasksHttpError, GetTasksHttpResponse, HttpResult, JSONPatch, Link, Onevents, OrchMeta, OrchRun, OrchRunBase, OrchRunList, PatchTask200HttpResponse, PatchTask204HttpResponse, PatchTaskHttpError, PatchTaskHttpResponse, PatchValue, Schedule, StartTaskHttpError, StartTaskHttpResponse, Startdef, StateExecTimeout, Task, TaskGraph, TaskGraphEdge, TaskGraphVertex, TaskList, TaskMetadata, TaskTopology, TasksAPI, TriggerMeta, UpdateTaskHttpError, UpdateTaskHttpResponse, clearCache, createTask, tasksExport as default, deleteTask, getTask, getTaskGraphAncestors, getTaskGraphChildren, getTaskGraphDescendants, getTaskGraphParents, getTaskLastRun, getTaskResourceRuns, getTaskRunLog, getTaskRuns, getTaskSubgraph, getTasks, patchTask, startTask, tasks_d_exports as t, updateTask };

@@ -1,5 +1,5 @@
 import { t as __exportAll } from "../chunks/chunk-w6R9maHv.js";
-import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-CpHbSqJB.js";
+import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-BJ-uhqfm.js";
 
 //#region src/public/rest/scheduling/tasks.ts
 var tasks_exports = /* @__PURE__ */ __exportAll({
@@ -8,16 +8,16 @@ var tasks_exports = /* @__PURE__ */ __exportAll({
 	default: () => tasksExport,
 	deleteTask: () => deleteTask,
 	getTask: () => getTask,
-	getTaskGraphsAncestors_FIX_THIS_QUIRKY_NAME: () => getTaskGraphsAncestors_FIX_THIS_QUIRKY_NAME,
-	getTaskGraphsChildren_FIX_THIS_QUIRKY_NAME: () => getTaskGraphsChildren_FIX_THIS_QUIRKY_NAME,
-	getTaskGraphsDescendants_FIX_THIS_QUIRKY_NAME: () => getTaskGraphsDescendants_FIX_THIS_QUIRKY_NAME,
-	getTaskGraphsParents_FIX_THIS_QUIRKY_NAME: () => getTaskGraphsParents_FIX_THIS_QUIRKY_NAME,
-	getTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAME: () => getTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAME,
+	getTaskGraphAncestors: () => getTaskGraphAncestors,
+	getTaskGraphChildren: () => getTaskGraphChildren,
+	getTaskGraphDescendants: () => getTaskGraphDescendants,
+	getTaskGraphParents: () => getTaskGraphParents,
+	getTaskLastRun: () => getTaskLastRun,
+	getTaskResourceRuns: () => getTaskResourceRuns,
 	getTaskRunLog: () => getTaskRunLog,
 	getTaskRuns: () => getTaskRuns,
-	getTaskRunsLast_FIX_THIS_QUIRKY_NAME: () => getTaskRunsLast_FIX_THIS_QUIRKY_NAME,
+	getTaskSubgraph: () => getTaskSubgraph,
 	getTasks: () => getTasks,
-	getTasksResourceRuns_FIX_THIS_QUIRKY_NAME: () => getTasksResourceRuns_FIX_THIS_QUIRKY_NAME,
 	patchTask: () => patchTask,
 	startTask: () => startTask,
 	updateTask: () => updateTask
@@ -58,9 +58,9 @@ async function createTask(query, body, options) {
 *
 * @param id The unique identifier of the resource to retrieve task runs for.
 * @param query an object with query parameters
-* @throws GetTasksResourceRuns_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetTaskResourceRunsHttpError
 */
-async function getTasksResourceRuns_FIX_THIS_QUIRKY_NAME(id, query, options) {
+async function getTaskResourceRuns(id, query, options) {
 	return invokeFetch("scheduling/tasks", {
 		method: "get",
 		pathTemplate: "/api/scheduling/tasks/resources/{id}/runs",
@@ -152,9 +152,9 @@ async function startTask(id, query, options) {
 *
 * @param id The unique identifier of the task.
 * @param query an object with query parameters
-* @throws GetTaskGraphsAncestors_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetTaskGraphAncestorsHttpError
 */
-async function getTaskGraphsAncestors_FIX_THIS_QUIRKY_NAME(id, query, options) {
+async function getTaskGraphAncestors(id, query, options) {
 	return invokeFetch("scheduling/tasks", {
 		method: "get",
 		pathTemplate: "/api/scheduling/tasks/{id}/graphs/ancestors",
@@ -168,9 +168,9 @@ async function getTaskGraphsAncestors_FIX_THIS_QUIRKY_NAME(id, query, options) {
 *
 * @param id The unique identifier of the parent task.
 * @param query an object with query parameters
-* @throws GetTaskGraphsChildren_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetTaskGraphChildrenHttpError
 */
-async function getTaskGraphsChildren_FIX_THIS_QUIRKY_NAME(id, query, options) {
+async function getTaskGraphChildren(id, query, options) {
 	return invokeFetch("scheduling/tasks", {
 		method: "get",
 		pathTemplate: "/api/scheduling/tasks/{id}/graphs/children",
@@ -184,9 +184,9 @@ async function getTaskGraphsChildren_FIX_THIS_QUIRKY_NAME(id, query, options) {
 *
 * @param id The unique identifier of the task.
 * @param query an object with query parameters
-* @throws GetTaskGraphsDescendants_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetTaskGraphDescendantsHttpError
 */
-async function getTaskGraphsDescendants_FIX_THIS_QUIRKY_NAME(id, query, options) {
+async function getTaskGraphDescendants(id, query, options) {
 	return invokeFetch("scheduling/tasks", {
 		method: "get",
 		pathTemplate: "/api/scheduling/tasks/{id}/graphs/descendants",
@@ -200,9 +200,9 @@ async function getTaskGraphsDescendants_FIX_THIS_QUIRKY_NAME(id, query, options)
 *
 * @param id The unique identifier of the child task.
 * @param query an object with query parameters
-* @throws GetTaskGraphsParents_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetTaskGraphParentsHttpError
 */
-async function getTaskGraphsParents_FIX_THIS_QUIRKY_NAME(id, query, options) {
+async function getTaskGraphParents(id, query, options) {
 	return invokeFetch("scheduling/tasks", {
 		method: "get",
 		pathTemplate: "/api/scheduling/tasks/{id}/graphs/parents",
@@ -216,9 +216,9 @@ async function getTaskGraphsParents_FIX_THIS_QUIRKY_NAME(id, query, options) {
 *
 * @param id The unique identifier of the task.
 * @param query an object with query parameters
-* @throws GetTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetTaskSubgraphHttpError
 */
-async function getTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAME(id, query, options) {
+async function getTaskSubgraph(id, query, options) {
 	return invokeFetch("scheduling/tasks", {
 		method: "get",
 		pathTemplate: "/api/scheduling/tasks/{id}/graphs/subgraph",
@@ -247,9 +247,9 @@ async function getTaskRuns(id, query, options) {
 * Retrieves the most recent execution run for the specified task. Returns a 404 response if the task has never been run. Use this operation to quickly check whether the last run succeeded or failed without paginating through the full run history.
 *
 * @param id The unique identifier of the task.
-* @throws GetTaskRunsLast_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetTaskLastRunHttpError
 */
-async function getTaskRunsLast_FIX_THIS_QUIRKY_NAME(id, options) {
+async function getTaskLastRun(id, options) {
 	return invokeFetch("scheduling/tasks", {
 		method: "get",
 		pathTemplate: "/api/scheduling/tasks/{id}/runs/last",
@@ -287,22 +287,22 @@ function clearCache() {
 const tasksExport = {
 	getTasks,
 	createTask,
-	getTasksResourceRuns_FIX_THIS_QUIRKY_NAME,
+	getTaskResourceRuns,
 	deleteTask,
 	getTask,
 	patchTask,
 	updateTask,
 	startTask,
-	getTaskGraphsAncestors_FIX_THIS_QUIRKY_NAME,
-	getTaskGraphsChildren_FIX_THIS_QUIRKY_NAME,
-	getTaskGraphsDescendants_FIX_THIS_QUIRKY_NAME,
-	getTaskGraphsParents_FIX_THIS_QUIRKY_NAME,
-	getTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAME,
+	getTaskGraphAncestors,
+	getTaskGraphChildren,
+	getTaskGraphDescendants,
+	getTaskGraphParents,
+	getTaskSubgraph,
 	getTaskRuns,
-	getTaskRunsLast_FIX_THIS_QUIRKY_NAME,
+	getTaskLastRun,
 	getTaskRunLog,
 	clearCache
 };
 
 //#endregion
-export { clearCache, createTask, tasksExport as default, deleteTask, getTask, getTaskGraphsAncestors_FIX_THIS_QUIRKY_NAME, getTaskGraphsChildren_FIX_THIS_QUIRKY_NAME, getTaskGraphsDescendants_FIX_THIS_QUIRKY_NAME, getTaskGraphsParents_FIX_THIS_QUIRKY_NAME, getTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAME, getTaskRunLog, getTaskRuns, getTaskRunsLast_FIX_THIS_QUIRKY_NAME, getTasks, getTasksResourceRuns_FIX_THIS_QUIRKY_NAME, patchTask, startTask, tasks_exports as t, updateTask };
+export { clearCache, createTask, tasksExport as default, deleteTask, getTask, getTaskGraphAncestors, getTaskGraphChildren, getTaskGraphDescendants, getTaskGraphParents, getTaskLastRun, getTaskResourceRuns, getTaskRunLog, getTaskRuns, getTaskSubgraph, getTasks, patchTask, startTask, tasks_exports as t, updateTask };

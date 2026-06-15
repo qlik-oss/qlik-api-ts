@@ -1,17 +1,17 @@
 import { t as __exportAll } from "../chunks/chunk-w6R9maHv.js";
-import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-CpHbSqJB.js";
+import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-BJ-uhqfm.js";
 
 //#region src/public/rest/analytics/odag-links.ts
 var odag_links_exports = /* @__PURE__ */ __exportAll({
 	clearCache: () => clearCache,
 	createOdagLink: () => createOdagLink,
 	createOdagLinkRequest: () => createOdagLinkRequest,
-	createOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAME: () => createOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAME,
 	default: () => odagLinksExport,
 	getOdagLink: () => getOdagLink,
+	getOdagLinkCreatePermission: () => getOdagLinkCreatePermission,
 	getOdagLinkRequests: () => getOdagLinkRequests,
 	getOdagLinks: () => getOdagLinks,
-	getOdagLinksCancreate_FIX_THIS_QUIRKY_NAME: () => getOdagLinksCancreate_FIX_THIS_QUIRKY_NAME,
+	getOdagLinksSelectionAppUsages: () => getOdagLinksSelectionAppUsages,
 	updateOdagLink: () => updateOdagLink
 });
 /**
@@ -49,9 +49,9 @@ async function createOdagLink(query, body, options) {
 * Checks whether the current user has permission to create new ODAG links. Optionally verify permissions for a specific template Analytics Application or selection Analytics Application context. Returns a boolean indicating create permission status.
 *
 * @param query an object with query parameters
-* @throws GetOdagLinksCancreate_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetOdagLinkCreatePermissionHttpError
 */
-async function getOdagLinksCancreate_FIX_THIS_QUIRKY_NAME(query, options) {
+async function getOdagLinkCreatePermission(query, options) {
 	return invokeFetch("analytics/odag-links", {
 		method: "get",
 		pathTemplate: "/api/analytics/odag-links/cancreate",
@@ -64,9 +64,9 @@ async function getOdagLinksCancreate_FIX_THIS_QUIRKY_NAME(query, options) {
 *
 * @param query an object with query parameters
 * @param body an object with the body content
-* @throws CreateOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetOdagLinksSelectionAppUsagesHttpError
 */
-async function createOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAME(query, body, options) {
+async function getOdagLinksSelectionAppUsages(query, body, options) {
 	return invokeFetch("analytics/odag-links", {
 		method: "post",
 		pathTemplate: "/api/analytics/odag-links/selection-app-link-usages",
@@ -156,8 +156,8 @@ function clearCache() {
 const odagLinksExport = {
 	getOdagLinks,
 	createOdagLink,
-	getOdagLinksCancreate_FIX_THIS_QUIRKY_NAME,
-	createOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAME,
+	getOdagLinkCreatePermission,
+	getOdagLinksSelectionAppUsages,
 	getOdagLink,
 	updateOdagLink,
 	getOdagLinkRequests,
@@ -166,4 +166,4 @@ const odagLinksExport = {
 };
 
 //#endregion
-export { clearCache, createOdagLink, createOdagLinkRequest, createOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAME, odagLinksExport as default, getOdagLink, getOdagLinkRequests, getOdagLinks, getOdagLinksCancreate_FIX_THIS_QUIRKY_NAME, odag_links_exports as t, updateOdagLink };
+export { clearCache, createOdagLink, createOdagLinkRequest, odagLinksExport as default, getOdagLink, getOdagLinkCreatePermission, getOdagLinkRequests, getOdagLinks, getOdagLinksSelectionAppUsages, odag_links_exports as t, updateOdagLink };

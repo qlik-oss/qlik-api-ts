@@ -1,18 +1,18 @@
 import { t as __exportAll } from "../chunks/chunk-w6R9maHv.js";
-import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-CpHbSqJB.js";
+import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-BJ-uhqfm.js";
 
 //#region src/public/rest/connectivity/data-sources.ts
 var data_sources_exports = /* @__PURE__ */ __exportAll({
 	clearCache: () => clearCache,
 	default: () => dataSourcesExport,
-	filterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME: () => filterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME,
+	filterDataSourceEndpoints: () => filterDataSourceEndpoints,
 	generateQriDataSources: () => generateQriDataSources,
 	getDataSourceApiSpecs: () => getDataSourceApiSpecs,
+	getDataSourceEndpoints: () => getDataSourceEndpoints,
 	getDataSourceGateways: () => getDataSourceGateways,
 	getDataSourceSettings: () => getDataSourceSettings,
 	getDataSources: () => getDataSources,
-	getDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME: () => getDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME,
-	putDataSourceSettings_FIX_THIS_QUIRKY_NAME: () => putDataSourceSettings_FIX_THIS_QUIRKY_NAME
+	putDataSourceSettings: () => putDataSourceSettings
 });
 /**
 * Returns the list of datasources available on the connector node. Each entry
@@ -64,9 +64,9 @@ async function generateQriDataSources(body, options) {
 * endpoint session. Use this operation to audit active endpoint allocations
 * or to locate the URL for an existing endpoint.
 *
-* @throws GetDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetDataSourceEndpointsHttpError
 */
-async function getDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME(options) {
+async function getDataSourceEndpoints(options) {
 	return invokeFetch("connectivity/data-sources", {
 		method: "get",
 		pathTemplate: "/api/connectivity/data-sources/endpoints",
@@ -80,9 +80,9 @@ async function getDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME(options) {
 * initiate a data load session.
 *
 * @param body an object with the body content
-* @throws FilterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws FilterDataSourceEndpointsHttpError
 */
-async function filterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME(body, options) {
+async function filterDataSourceEndpoints(body, options) {
 	return invokeFetch("connectivity/data-sources", {
 		method: "post",
 		pathTemplate: "/api/connectivity/data-sources/endpoints/actions/filter",
@@ -166,9 +166,9 @@ async function getDataSourceSettings(dataSourceId, options) {
 *
 * @param dataSourceId The unique identifier of the datasource to update settings for.
 * @param body an object with the body content
-* @throws PutDataSourceSettings_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws PutDataSourceSettingsHttpError
 */
-async function putDataSourceSettings_FIX_THIS_QUIRKY_NAME(dataSourceId, body, options) {
+async function putDataSourceSettings(dataSourceId, body, options) {
 	return invokeFetch("connectivity/data-sources", {
 		method: "put",
 		pathTemplate: "/api/connectivity/data-sources/{dataSourceId}/settings",
@@ -190,14 +190,14 @@ function clearCache() {
 const dataSourcesExport = {
 	getDataSources,
 	generateQriDataSources,
-	getDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME,
-	filterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME,
+	getDataSourceEndpoints,
+	filterDataSourceEndpoints,
 	getDataSourceApiSpecs,
 	getDataSourceGateways,
 	getDataSourceSettings,
-	putDataSourceSettings_FIX_THIS_QUIRKY_NAME,
+	putDataSourceSettings,
 	clearCache
 };
 
 //#endregion
-export { clearCache, dataSourcesExport as default, filterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME, generateQriDataSources, getDataSourceApiSpecs, getDataSourceGateways, getDataSourceSettings, getDataSources, getDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME, putDataSourceSettings_FIX_THIS_QUIRKY_NAME, data_sources_exports as t };
+export { clearCache, dataSourcesExport as default, filterDataSourceEndpoints, generateQriDataSources, getDataSourceApiSpecs, getDataSourceEndpoints, getDataSourceGateways, getDataSourceSettings, getDataSources, putDataSourceSettings, data_sources_exports as t };

@@ -1,6 +1,6 @@
 import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
 declare namespace odag_settings_d_exports {
-  export { CanUpdateSettings, ErrorDetailsV2, ErrorV2, GetOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAMEHttpError, GetOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAMEHttpResponse, GetOdagSettingsHttpError, GetOdagSettingsHttpResponse, MetaV2, OdagSettingsAPI, OdagSettingsV2, PutOdagSettings_FIX_THIS_QUIRKY_NAMEHttpError, PutOdagSettings_FIX_THIS_QUIRKY_NAMEHttpResponse, SettingsPutPayload, clearCache, odagSettingsExport as default, getOdagSettings, getOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAME, putOdagSettings_FIX_THIS_QUIRKY_NAME };
+  export { CanUpdateSettings, ErrorDetailsV2, ErrorV2, GetOdagSettingsHttpError, GetOdagSettingsHttpResponse, GetOdagSettingsUpdatePermissionHttpError, GetOdagSettingsUpdatePermissionHttpResponse, MetaV2, OdagSettingsAPI, OdagSettingsV2, PutOdagSettingsHttpError, PutOdagSettingsHttpResponse, SettingsPutPayload, clearCache, odagSettingsExport as default, getOdagSettings, getOdagSettingsUpdatePermission, putOdagSettings };
 }
 /**
  * An object used to inform the caller whether the current user has privilege to update ODAG settings.
@@ -64,15 +64,15 @@ type GetOdagSettingsHttpError = {
  * Modifies ODAG settings such as feature enablement. Available only to administrators. Changes apply immediately to all ODAG operations.
  *
  * @param body an object with the body content
- * @throws PutOdagSettings_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws PutOdagSettingsHttpError
  */
-declare function putOdagSettings_FIX_THIS_QUIRKY_NAME(body: SettingsPutPayload, options?: ApiCallOptions): Promise<PutOdagSettings_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type PutOdagSettings_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+declare function putOdagSettings(body: SettingsPutPayload, options?: ApiCallOptions): Promise<PutOdagSettingsHttpResponse>;
+type PutOdagSettingsHttpResponse = {
   data: OdagSettingsV2;
   headers: Headers;
   status: 200;
 };
-type PutOdagSettings_FIX_THIS_QUIRKY_NAMEHttpError = {
+type PutOdagSettingsHttpError = {
   data: ErrorV2;
   headers: Headers;
   status: 403 | 500;
@@ -80,15 +80,15 @@ type PutOdagSettings_FIX_THIS_QUIRKY_NAMEHttpError = {
 /**
  * Checks whether the current user has permission to modify ODAG settings.
  *
- * @throws GetOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetOdagSettingsUpdatePermissionHttpError
  */
-declare function getOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAME(options?: ApiCallOptions): Promise<GetOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type GetOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+declare function getOdagSettingsUpdatePermission(options?: ApiCallOptions): Promise<GetOdagSettingsUpdatePermissionHttpResponse>;
+type GetOdagSettingsUpdatePermissionHttpResponse = {
   data: CanUpdateSettings;
   headers: Headers;
   status: 200;
 };
-type GetOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetOdagSettingsUpdatePermissionHttpError = {
   data: ErrorV2;
   headers: Headers;
   status: 403;
@@ -108,15 +108,15 @@ type OdagSettingsAPI = {
    * Modifies ODAG settings such as feature enablement. Available only to administrators. Changes apply immediately to all ODAG operations.
    *
    * @param body an object with the body content
-   * @throws PutOdagSettings_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws PutOdagSettingsHttpError
    */
-  putOdagSettings_FIX_THIS_QUIRKY_NAME: typeof putOdagSettings_FIX_THIS_QUIRKY_NAME;
+  putOdagSettings: typeof putOdagSettings;
   /**
    * Checks whether the current user has permission to modify ODAG settings.
    *
-   * @throws GetOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetOdagSettingsUpdatePermissionHttpError
    */
-  getOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAME: typeof getOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAME;
+  getOdagSettingsUpdatePermission: typeof getOdagSettingsUpdatePermission;
   /**
    * Clears the cache for odag-settings api requests.
    */
@@ -127,4 +127,4 @@ type OdagSettingsAPI = {
  */
 declare const odagSettingsExport: OdagSettingsAPI;
 //#endregion
-export { CanUpdateSettings, ErrorDetailsV2, ErrorV2, GetOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAMEHttpError, GetOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAMEHttpResponse, GetOdagSettingsHttpError, GetOdagSettingsHttpResponse, MetaV2, OdagSettingsAPI, OdagSettingsV2, PutOdagSettings_FIX_THIS_QUIRKY_NAMEHttpError, PutOdagSettings_FIX_THIS_QUIRKY_NAMEHttpResponse, SettingsPutPayload, clearCache, odagSettingsExport as default, getOdagSettings, getOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAME, putOdagSettings_FIX_THIS_QUIRKY_NAME, odag_settings_d_exports as t };
+export { CanUpdateSettings, ErrorDetailsV2, ErrorV2, GetOdagSettingsHttpError, GetOdagSettingsHttpResponse, GetOdagSettingsUpdatePermissionHttpError, GetOdagSettingsUpdatePermissionHttpResponse, MetaV2, OdagSettingsAPI, OdagSettingsV2, PutOdagSettingsHttpError, PutOdagSettingsHttpResponse, SettingsPutPayload, clearCache, odagSettingsExport as default, getOdagSettings, getOdagSettingsUpdatePermission, putOdagSettings, odag_settings_d_exports as t };

@@ -695,15 +695,15 @@ type StopDiProjectDiTaskRuntimeHttpError = {
  * @param projectId Identifier of the data project.
  * @param dataTaskId Identifier of the data task.
  * @param body an object with the body content
- * @throws SearchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws SearchDiProjectDiTaskRuntimeRunsHttpError
  */
-declare function searchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAME(projectId: string, dataTaskId: string, body: DiSearchTaskRunHistoryReq, options?: ApiCallOptions): Promise<SearchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type SearchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+declare function searchDiProjectDiTaskRuntimeRuns(projectId: string, dataTaskId: string, body: DiSearchTaskRunHistoryReq, options?: ApiCallOptions): Promise<SearchDiProjectDiTaskRuntimeRunsHttpResponse>;
+type SearchDiProjectDiTaskRuntimeRunsHttpResponse = {
   data: DiSearchTaskRunHistoryRsp;
   headers: Headers;
   status: 200;
 };
-type SearchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAMEHttpError = {
+type SearchDiProjectDiTaskRuntimeRunsHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -714,15 +714,15 @@ type SearchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAMEHttpError = {
  * @param projectId Identifier of the data project.
  * @param dataTaskId Identifier of the data task.
  * @param runId Identifier of the run instance.
- * @throws GetDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetDiProjectDiTaskRuntimeRunStateHttpError
  */
-declare function getDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAME(projectId: string, dataTaskId: string, runId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type GetDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+declare function getDiProjectDiTaskRuntimeRunState(projectId: string, dataTaskId: string, runId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTaskRuntimeRunStateHttpResponse>;
+type GetDiProjectDiTaskRuntimeRunStateHttpResponse = {
   data: DataTaskRuntimeState;
   headers: Headers;
   status: 200;
 };
-type GetDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetDiProjectDiTaskRuntimeRunStateHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -733,15 +733,15 @@ type GetDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAMEHttpError = {
  * @param projectId Identifier of the data project.
  * @param dataTaskId Identifier of the data task.
  * @param runId Identifier of the run instance.
- * @throws GetDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetDiProjectDiTaskRuntimeRunStateDatasetsHttpError
  */
-declare function getDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAME(projectId: string, dataTaskId: string, runId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type GetDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+declare function getDiProjectDiTaskRuntimeRunStateDatasets(projectId: string, dataTaskId: string, runId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTaskRuntimeRunStateDatasetsHttpResponse>;
+type GetDiProjectDiTaskRuntimeRunStateDatasetsHttpResponse = {
   data: ListDataTaskDatasetsRsp;
   headers: Headers;
   status: 200;
 };
-type GetDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetDiProjectDiTaskRuntimeRunStateDatasetsHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404 | 410 | 413;
@@ -941,27 +941,27 @@ type DiProjectsAPI = {
    * @param projectId Identifier of the data project.
    * @param dataTaskId Identifier of the data task.
    * @param body an object with the body content
-   * @throws SearchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws SearchDiProjectDiTaskRuntimeRunsHttpError
    */
-  searchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAME: typeof searchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAME;
+  searchDiProjectDiTaskRuntimeRuns: typeof searchDiProjectDiTaskRuntimeRuns;
   /**
    * Returns the state of a specific historical run instance for a data task, including execution progress and any errors encountered.
    *
    * @param projectId Identifier of the data project.
    * @param dataTaskId Identifier of the data task.
    * @param runId Identifier of the run instance.
-   * @throws GetDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetDiProjectDiTaskRuntimeRunStateHttpError
    */
-  getDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAME: typeof getDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAME;
+  getDiProjectDiTaskRuntimeRunState: typeof getDiProjectDiTaskRuntimeRunState;
   /**
    * Returns dataset-level state for a specific historical run instance of a data task. All datasets for the run are returned in a single response; this endpoint does not paginate.
    *
    * @param projectId Identifier of the data project.
    * @param dataTaskId Identifier of the data task.
    * @param runId Identifier of the run instance.
-   * @throws GetDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetDiProjectDiTaskRuntimeRunStateDatasetsHttpError
    */
-  getDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAME: typeof getDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAME;
+  getDiProjectDiTaskRuntimeRunStateDatasets: typeof getDiProjectDiTaskRuntimeRunStateDatasets;
   /**
    * Get the current runtime state of a data task
    *
@@ -988,4 +988,4 @@ type DiProjectsAPI = {
  */
 declare const diProjectsExport: DiProjectsAPI;
 //#endregion
-export { AsyncActionDetails, AsyncActionError, AsyncActionRsp, AsyncActionTaskProgress, AsyncActionType, AsyncCallStatus, CreateDiProjectHttpError, CreateDiProjectHttpResponse, CreateDiProjectReq, DataTaskDatasetState, DataTaskInstanceState, DataTaskItemRsp, DataTaskRuntimeState, DataTaskType, DiExportMode, DiProjectItemRsp, DiProjectOperationSelectedTask, DiProjectsAPI, DiSearchTaskRunHistoryReq, DiSearchTaskRunHistoryRsp, Error, ErrorSource, Errors, ExportDiProjectHttpError, ExportDiProjectHttpResponse, ExportDiProjectReq, FileStatistics, GetDiExportProjectVariablesRsp, GetDiProjectDiTaskHttpError, GetDiProjectDiTaskHttpResponse, GetDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAMEHttpError, GetDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAMEHttpResponse, GetDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAMEHttpError, GetDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAMEHttpResponse, GetDiProjectDiTaskRuntimeStateDatasetsHttpError, GetDiProjectDiTaskRuntimeStateDatasetsHttpResponse, GetDiProjectDiTaskRuntimeStateHttpError, GetDiProjectDiTaskRuntimeStateHttpResponse, GetDiProjectDiTasksHttpError, GetDiProjectDiTasksHttpResponse, GetDiProjectExportVariablesHttpError, GetDiProjectExportVariablesHttpResponse, GetDiProjectHttpError, GetDiProjectHttpResponse, GetDiProjectsHttpError, GetDiProjectsHttpResponse, ImportDiProjectHttpError, ImportDiProjectHttpResponse, ImportDiProjectRsp, ListDataTaskDatasetsRsp, ListDataTasksRsp, ListDiProjectsRsp, OperationStatistics, PlatformType, PrepareDiProjectDiTaskHttpError, PrepareDiProjectDiTaskHttpResponse, PrepareDiProjectHttpError, PrepareDiProjectHttpResponse, PrepareProjectReq, PrepareTaskReq, RecreateDatasetsDiProjectDiTaskHttpError, RecreateDatasetsDiProjectDiTaskHttpResponse, RecreateTaskDatasetsReq, ReloadDiTaskReq, ReloadRequestResponse, RequestReloadDiProjectDiTaskHttpError, RequestReloadDiProjectDiTaskHttpResponse, SearchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAMEHttpError, SearchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAMEHttpResponse, SetDiProjectExportVariablesHttpError, SetDiProjectExportVariablesHttpResponse, StartDiProjectDiTaskRuntimeHttpError, StartDiProjectDiTaskRuntimeHttpResponse, StartDiProjectDiTaskRuntimeWithBodyHttpError, StartDiProjectDiTaskRuntimeWithBodyHttpResponse, StartTaskReq, StopDiProjectDiTaskRuntimeHttpError, StopDiProjectDiTaskRuntimeHttpResponse, TaskRunItemRsp, TaskRunSearchFilter, TaskRunSearchFilterField, TaskRunSearchFilterOperator, TaskRunStatus, TaskSelectionList, UpdateDiExportProjectVariablesReq, UpdateDiExportProjectVariablesRsp, ValidateDiProjectDiTaskHttpError, ValidateDiProjectDiTaskHttpResponse, ValidateDiProjectHttpError, ValidateDiProjectHttpResponse, ValidateProjectReq, ValidateTaskReq, clearCache, createDiProject, diProjectsExport as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAME, getDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAME, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, recreateDatasetsDiProjectDiTask, requestReloadDiProjectDiTask, searchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAME, setDiProjectExportVariables, startDiProjectDiTaskRuntime, startDiProjectDiTaskRuntimeWithBody, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };
+export { AsyncActionDetails, AsyncActionError, AsyncActionRsp, AsyncActionTaskProgress, AsyncActionType, AsyncCallStatus, CreateDiProjectHttpError, CreateDiProjectHttpResponse, CreateDiProjectReq, DataTaskDatasetState, DataTaskInstanceState, DataTaskItemRsp, DataTaskRuntimeState, DataTaskType, DiExportMode, DiProjectItemRsp, DiProjectOperationSelectedTask, DiProjectsAPI, DiSearchTaskRunHistoryReq, DiSearchTaskRunHistoryRsp, Error, ErrorSource, Errors, ExportDiProjectHttpError, ExportDiProjectHttpResponse, ExportDiProjectReq, FileStatistics, GetDiExportProjectVariablesRsp, GetDiProjectDiTaskHttpError, GetDiProjectDiTaskHttpResponse, GetDiProjectDiTaskRuntimeRunStateDatasetsHttpError, GetDiProjectDiTaskRuntimeRunStateDatasetsHttpResponse, GetDiProjectDiTaskRuntimeRunStateHttpError, GetDiProjectDiTaskRuntimeRunStateHttpResponse, GetDiProjectDiTaskRuntimeStateDatasetsHttpError, GetDiProjectDiTaskRuntimeStateDatasetsHttpResponse, GetDiProjectDiTaskRuntimeStateHttpError, GetDiProjectDiTaskRuntimeStateHttpResponse, GetDiProjectDiTasksHttpError, GetDiProjectDiTasksHttpResponse, GetDiProjectExportVariablesHttpError, GetDiProjectExportVariablesHttpResponse, GetDiProjectHttpError, GetDiProjectHttpResponse, GetDiProjectsHttpError, GetDiProjectsHttpResponse, ImportDiProjectHttpError, ImportDiProjectHttpResponse, ImportDiProjectRsp, ListDataTaskDatasetsRsp, ListDataTasksRsp, ListDiProjectsRsp, OperationStatistics, PlatformType, PrepareDiProjectDiTaskHttpError, PrepareDiProjectDiTaskHttpResponse, PrepareDiProjectHttpError, PrepareDiProjectHttpResponse, PrepareProjectReq, PrepareTaskReq, RecreateDatasetsDiProjectDiTaskHttpError, RecreateDatasetsDiProjectDiTaskHttpResponse, RecreateTaskDatasetsReq, ReloadDiTaskReq, ReloadRequestResponse, RequestReloadDiProjectDiTaskHttpError, RequestReloadDiProjectDiTaskHttpResponse, SearchDiProjectDiTaskRuntimeRunsHttpError, SearchDiProjectDiTaskRuntimeRunsHttpResponse, SetDiProjectExportVariablesHttpError, SetDiProjectExportVariablesHttpResponse, StartDiProjectDiTaskRuntimeHttpError, StartDiProjectDiTaskRuntimeHttpResponse, StartDiProjectDiTaskRuntimeWithBodyHttpError, StartDiProjectDiTaskRuntimeWithBodyHttpResponse, StartTaskReq, StopDiProjectDiTaskRuntimeHttpError, StopDiProjectDiTaskRuntimeHttpResponse, TaskRunItemRsp, TaskRunSearchFilter, TaskRunSearchFilterField, TaskRunSearchFilterOperator, TaskRunStatus, TaskSelectionList, UpdateDiExportProjectVariablesReq, UpdateDiExportProjectVariablesRsp, ValidateDiProjectDiTaskHttpError, ValidateDiProjectDiTaskHttpResponse, ValidateDiProjectHttpError, ValidateDiProjectHttpResponse, ValidateProjectReq, ValidateTaskReq, clearCache, createDiProject, diProjectsExport as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeRunState, getDiProjectDiTaskRuntimeRunStateDatasets, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, recreateDatasetsDiProjectDiTask, requestReloadDiProjectDiTask, searchDiProjectDiTaskRuntimeRuns, setDiProjectExportVariables, startDiProjectDiTaskRuntime, startDiProjectDiTaskRuntimeWithBody, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };

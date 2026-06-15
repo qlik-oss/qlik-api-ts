@@ -1,13 +1,13 @@
 import { t as __exportAll } from "../chunks/chunk-w6R9maHv.js";
-import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-CpHbSqJB.js";
+import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-BJ-uhqfm.js";
 
 //#region src/public/rest/analytics/odag-settings.ts
 var odag_settings_exports = /* @__PURE__ */ __exportAll({
 	clearCache: () => clearCache,
 	default: () => odagSettingsExport,
 	getOdagSettings: () => getOdagSettings,
-	getOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAME: () => getOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAME,
-	putOdagSettings_FIX_THIS_QUIRKY_NAME: () => putOdagSettings_FIX_THIS_QUIRKY_NAME
+	getOdagSettingsUpdatePermission: () => getOdagSettingsUpdatePermission,
+	putOdagSettings: () => putOdagSettings
 });
 /**
 * Retrieves ODAG settings, including feature enablement status. Available only to administrators.
@@ -25,9 +25,9 @@ async function getOdagSettings(options) {
 * Modifies ODAG settings such as feature enablement. Available only to administrators. Changes apply immediately to all ODAG operations.
 *
 * @param body an object with the body content
-* @throws PutOdagSettings_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws PutOdagSettingsHttpError
 */
-async function putOdagSettings_FIX_THIS_QUIRKY_NAME(body, options) {
+async function putOdagSettings(body, options) {
 	return invokeFetch("analytics/odag-settings", {
 		method: "put",
 		pathTemplate: "/api/analytics/odag-settings",
@@ -39,9 +39,9 @@ async function putOdagSettings_FIX_THIS_QUIRKY_NAME(body, options) {
 /**
 * Checks whether the current user has permission to modify ODAG settings.
 *
-* @throws GetOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetOdagSettingsUpdatePermissionHttpError
 */
-async function getOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAME(options) {
+async function getOdagSettingsUpdatePermission(options) {
 	return invokeFetch("analytics/odag-settings", {
 		method: "get",
 		pathTemplate: "/api/analytics/odag-settings/canupdate",
@@ -59,10 +59,10 @@ function clearCache() {
 */
 const odagSettingsExport = {
 	getOdagSettings,
-	putOdagSettings_FIX_THIS_QUIRKY_NAME,
-	getOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAME,
+	putOdagSettings,
+	getOdagSettingsUpdatePermission,
 	clearCache
 };
 
 //#endregion
-export { clearCache, odagSettingsExport as default, getOdagSettings, getOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAME, putOdagSettings_FIX_THIS_QUIRKY_NAME, odag_settings_exports as t };
+export { clearCache, odagSettingsExport as default, getOdagSettings, getOdagSettingsUpdatePermission, putOdagSettings, odag_settings_exports as t };
