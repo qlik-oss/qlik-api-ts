@@ -1,4 +1,4 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CpHbSqJB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-BJ-uhqfm.js";
 import auth_default from "./auth.js";
 import { a as interceptors$1 } from "./chunks/interceptors-Ce5-8eIE.js";
 import qix$1 from "./qix.js";
@@ -200,12 +200,12 @@ var interceptors_default = interceptors$1;
 const createAnalyticsAppsRuntimeAPI = apiDefToApiPublic("analytics/apps", { api: { analytics: { apps: {
 	evaluations: {
 		"{baselineId}": { compare: { "{comparisonId}": {
-			"": ["getAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME:GQ:"],
-			actions: { download: ["downloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME:G:"] }
+			"": ["getAppEvaluationComparison:GQ:"],
+			actions: { download: ["getAppEvaluationComparisonXml:G:"] }
 		} } },
 		"{id}": {
-			"": ["getAppsEvaluation_FIX_THIS_QUIRKY_NAME:GQ:"],
-			actions: { download: ["downloadAppsEvaluation_FIX_THIS_QUIRKY_NAME:G:"] }
+			"": ["getAppEvaluation:GQ:"],
+			actions: { download: ["getAppEvaluationXml:G:"] }
 		}
 	},
 	"{appId}": { actions: { restore: ["restoreApp:P:"] } },
@@ -225,8 +225,8 @@ const createAnalyticsChangeStoresRuntimeAPI = apiDefToApiPublic("analytics/chang
 const createAnalyticsOdagAppsRuntimeAPI = apiDefToApiPublic("analytics/odag-apps", { api: { analytics: { "odag-apps": ["getOdagApps:GQ:"] } } });
 const createAnalyticsOdagLinksRuntimeAPI = apiDefToApiPublic("analytics/odag-links", { api: { analytics: { "odag-links": {
 	"": ["getOdagLinks:GQ:", "createOdagLink:PQBJ:"],
-	cancreate: ["getOdagLinksCancreate_FIX_THIS_QUIRKY_NAME:GQ:"],
-	"selection-app-link-usages": ["createOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAME:PQBJ:"],
+	cancreate: ["getOdagLinkCreatePermission:GQ:"],
+	"selection-app-link-usages": ["getOdagLinksSelectionAppUsages:PQBJ:"],
 	"{linkId}": {
 		"": ["getOdagLink:GQ:", "updateOdagLink:UQBJ:"],
 		requests: ["getOdagLinkRequests:GQ:", "createOdagLinkRequest:PBJ:"]
@@ -240,8 +240,8 @@ const createAnalyticsOdagRequestsRuntimeAPI = apiDefToApiPublic("analytics/odag-
 	selections: ["getOdagRequestSelections:G:"]
 } } } } });
 const createAnalyticsOdagSettingsRuntimeAPI = apiDefToApiPublic("analytics/odag-settings", { api: { analytics: { "odag-settings": {
-	"": ["getOdagSettings:G:", "putOdagSettings_FIX_THIS_QUIRKY_NAME:UBJ:"],
-	canupdate: ["getOdagSettingsCanupdate_FIX_THIS_QUIRKY_NAME:G:"]
+	"": ["getOdagSettings:G:", "putOdagSettings:UBJ:"],
+	canupdate: ["getOdagSettingsUpdatePermission:G:"]
 } } } });
 const createAnalyticsRuntimeAPI = apiDefToApiPublic("analytics", {}, {
 	apps: createAnalyticsAppsRuntimeAPI,
@@ -544,13 +544,13 @@ const createConnectivityDataSourcesRuntimeAPI = apiDefToApiPublic("connectivity/
 	"": ["getDataSources:GQ:"],
 	actions: { "generate-qri": ["generateQriDataSources:PBJ:"] },
 	endpoints: {
-		"": ["getDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME:G:"],
-		actions: { filter: ["filterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME:PBJ:"] }
+		"": ["getDataSourceEndpoints:G:"],
+		actions: { filter: ["filterDataSourceEndpoints:PBJ:"] }
 	},
 	"{dataSourceId}": {
 		"api-specs": ["getDataSourceApiSpecs:G:"],
 		gateways: ["getDataSourceGateways:GQ:"],
-		settings: ["getDataSourceSettings:G:", "putDataSourceSettings_FIX_THIS_QUIRKY_NAME:UBJ:"]
+		settings: ["getDataSourceSettings:G:", "putDataSourceSettings:UBJ:"]
 	}
 } } } });
 const createConnectivityRuntimeAPI = apiDefToApiPublic("connectivity", {}, {
@@ -705,10 +705,10 @@ const createDataGovernanceDataProductsRuntimeAPI = apiDefToApiPublic("data-gover
 } } } });
 const createDataGovernanceDataQualitiesRuntimeAPI = apiDefToApiPublic("data-governance/data-qualities", { api: { "data-governance": { "data-qualities": {
 	computations: {
-		"": ["createDataQualitiesComputation_FIX_THIS_QUIRKY_NAME:PBJ:"],
-		"{computationId}": ["getDataQualitiesComputation_FIX_THIS_QUIRKY_NAME:G:"]
+		"": ["createDataQualityComputation:PBJ:"],
+		"{computationId}": ["getDataQualityComputation:G:"]
 	},
-	"global-results": ["getDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAME:GQ:"]
+	"global-results": ["getDataQualityGlobalResults:GQ:"]
 } } } });
 const createDataGovernanceRuntimeAPI = apiDefToApiPublic("data-governance", {}, {
 	"data-products": createDataGovernanceDataProductsRuntimeAPI,
@@ -790,10 +790,10 @@ const createDiProjectsRuntimeAPI = apiDefToApiPublic("di-projects", { api: { v1:
 						stop: ["stopDiProjectDiTaskRuntime:P:"]
 					},
 					runs: {
-						actions: { search: ["searchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAME:PBJ:"] },
+						actions: { search: ["searchDiProjectDiTaskRuntimeRuns:PBJ:"] },
 						"{runId}": { state: {
-							"": ["getDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAME:G:"],
-							datasets: ["getDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAME:G:"]
+							"": ["getDiProjectDiTaskRuntimeRunState:G:"],
+							datasets: ["getDiProjectDiTaskRuntimeRunStateDatasets:G:"]
 						} }
 					},
 					state: {
@@ -1149,7 +1149,7 @@ const createRolesRuntimeAPI = apiDefToApiPublic("roles", { api: { v1: { roles: {
 } } } });
 const createSchedulingRuntimeAPI = apiDefToApiPublic("scheduling", {}, { tasks: apiDefToApiPublic("scheduling/tasks", { api: { scheduling: { tasks: {
 	"": ["getTasks:GQ:", "createTask:PQBJ:"],
-	resources: { "{id}": { runs: ["getTasksResourceRuns_FIX_THIS_QUIRKY_NAME:GQ:"] } },
+	resources: { "{id}": { runs: ["getTaskResourceRuns:GQ:"] } },
 	"{id}": {
 		"": [
 			"deleteTask:D:",
@@ -1159,15 +1159,15 @@ const createSchedulingRuntimeAPI = apiDefToApiPublic("scheduling", {}, { tasks: 
 		],
 		actions: { start: ["startTask:PQ:"] },
 		graphs: {
-			ancestors: ["getTaskGraphsAncestors_FIX_THIS_QUIRKY_NAME:GQ:"],
-			children: ["getTaskGraphsChildren_FIX_THIS_QUIRKY_NAME:GQ:"],
-			descendants: ["getTaskGraphsDescendants_FIX_THIS_QUIRKY_NAME:GQ:"],
-			parents: ["getTaskGraphsParents_FIX_THIS_QUIRKY_NAME:GQ:"],
-			subgraph: ["getTaskGraphsSubgraph_FIX_THIS_QUIRKY_NAME:GQ:"]
+			ancestors: ["getTaskGraphAncestors:GQ:"],
+			children: ["getTaskGraphChildren:GQ:"],
+			descendants: ["getTaskGraphDescendants:GQ:"],
+			parents: ["getTaskGraphParents:GQ:"],
+			subgraph: ["getTaskSubgraph:GQ:"]
 		},
 		runs: {
 			"": ["getTaskRuns:GQ:"],
-			last: ["getTaskRunsLast_FIX_THIS_QUIRKY_NAME:G:"],
+			last: ["getTaskLastRun:G:"],
 			"{runId}": { log: ["getTaskRunLog:G:"] }
 		}
 	}

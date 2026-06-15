@@ -1,4 +1,4 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CpHbSqJB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-BJ-uhqfm.js";
 
 //#region src/public/rest/di-projects.ts
 /**
@@ -326,9 +326,9 @@ async function stopDiProjectDiTaskRuntime(projectId, dataTaskId, options) {
 * @param projectId Identifier of the data project.
 * @param dataTaskId Identifier of the data task.
 * @param body an object with the body content
-* @throws SearchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws SearchDiProjectDiTaskRuntimeRunsHttpError
 */
-async function searchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAME(projectId, dataTaskId, body, options) {
+async function searchDiProjectDiTaskRuntimeRuns(projectId, dataTaskId, body, options) {
 	return invokeFetch("di-projects", {
 		method: "post",
 		pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks/{dataTaskId}/runtime/runs/actions/search",
@@ -347,9 +347,9 @@ async function searchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAME(projectId, 
 * @param projectId Identifier of the data project.
 * @param dataTaskId Identifier of the data task.
 * @param runId Identifier of the run instance.
-* @throws GetDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetDiProjectDiTaskRuntimeRunStateHttpError
 */
-async function getDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAME(projectId, dataTaskId, runId, options) {
+async function getDiProjectDiTaskRuntimeRunState(projectId, dataTaskId, runId, options) {
 	return invokeFetch("di-projects", {
 		method: "get",
 		pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks/{dataTaskId}/runtime/runs/{runId}/state",
@@ -367,9 +367,9 @@ async function getDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAME(projectId,
 * @param projectId Identifier of the data project.
 * @param dataTaskId Identifier of the data task.
 * @param runId Identifier of the run instance.
-* @throws GetDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetDiProjectDiTaskRuntimeRunStateDatasetsHttpError
 */
-async function getDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAME(projectId, dataTaskId, runId, options) {
+async function getDiProjectDiTaskRuntimeRunStateDatasets(projectId, dataTaskId, runId, options) {
 	return invokeFetch("di-projects", {
 		method: "get",
 		pathTemplate: "/api/v1/di-projects/{projectId}/di-tasks/{dataTaskId}/runtime/runs/{runId}/state/datasets",
@@ -445,13 +445,13 @@ const diProjectsExport = {
 	startDiProjectDiTaskRuntimeWithBody,
 	startDiProjectDiTaskRuntime,
 	stopDiProjectDiTaskRuntime,
-	searchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAME,
-	getDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAME,
-	getDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAME,
+	searchDiProjectDiTaskRuntimeRuns,
+	getDiProjectDiTaskRuntimeRunState,
+	getDiProjectDiTaskRuntimeRunStateDatasets,
 	getDiProjectDiTaskRuntimeState,
 	getDiProjectDiTaskRuntimeStateDatasets,
 	clearCache
 };
 
 //#endregion
-export { clearCache, createDiProject, diProjectsExport as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeRunStateDatasets_FIX_THIS_QUIRKY_NAME, getDiProjectDiTaskRuntimeRunState_FIX_THIS_QUIRKY_NAME, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, recreateDatasetsDiProjectDiTask, requestReloadDiProjectDiTask, searchDiProjectDiTaskRuntimeRuns_FIX_THIS_QUIRKY_NAME, setDiProjectExportVariables, startDiProjectDiTaskRuntime, startDiProjectDiTaskRuntimeWithBody, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };
+export { clearCache, createDiProject, diProjectsExport as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeRunState, getDiProjectDiTaskRuntimeRunStateDatasets, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, recreateDatasetsDiProjectDiTask, requestReloadDiProjectDiTask, searchDiProjectDiTaskRuntimeRuns, setDiProjectExportVariables, startDiProjectDiTaskRuntime, startDiProjectDiTaskRuntimeWithBody, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };

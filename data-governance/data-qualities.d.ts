@@ -1,6 +1,6 @@
 import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
 declare namespace data_qualities_d_exports {
-  export { ComputationResponse, ComputationStatusResponse, ConnectionIdType, CreateDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpError, CreateDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpResponse, DataQualitiesAPI, DataQualityComputationRequest, DatasetIdType, DatasetQualityGlobalResultsResponse, Error, ErrorResponse, ExecutionStatus, GetDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpError, GetDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpResponse, GetDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAMEHttpError, GetDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAMEHttpResponse, QualitiesGlobalResultsResponse, QualityGlobalResultsResponse, SamplingConfiguration, clearCache, createDataQualitiesComputation_FIX_THIS_QUIRKY_NAME, dataQualitiesExport as default, getDataQualitiesComputation_FIX_THIS_QUIRKY_NAME, getDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAME };
+  export { ComputationResponse, ComputationStatusResponse, ConnectionIdType, CreateDataQualityComputationHttpError, CreateDataQualityComputationHttpResponse, DataQualitiesAPI, DataQualityComputationRequest, DatasetIdType, DatasetQualityGlobalResultsResponse, Error, ErrorResponse, ExecutionStatus, GetDataQualityComputationHttpError, GetDataQualityComputationHttpResponse, GetDataQualityGlobalResultsHttpError, GetDataQualityGlobalResultsHttpResponse, QualitiesGlobalResultsResponse, QualityGlobalResultsResponse, SamplingConfiguration, clearCache, createDataQualityComputation, dataQualitiesExport as default, getDataQualityComputation, getDataQualityGlobalResults };
 }
 /**
  * Response returned when a data quality computation is successfully triggered.
@@ -80,15 +80,15 @@ type SamplingConfiguration = {
  * Poll the status endpoint until `status` is `SUCCEEDED` or `FAILED`.
  *
  * @param body an object with the body content
- * @throws CreateDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws CreateDataQualityComputationHttpError
  */
-declare function createDataQualitiesComputation_FIX_THIS_QUIRKY_NAME(body: DataQualityComputationRequest, options?: ApiCallOptions): Promise<CreateDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type CreateDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+declare function createDataQualityComputation(body: DataQualityComputationRequest, options?: ApiCallOptions): Promise<CreateDataQualityComputationHttpResponse>;
+type CreateDataQualityComputationHttpResponse = {
   data: ComputationResponse;
   headers: Headers;
   status: 202;
 };
-type CreateDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpError = {
+type CreateDataQualityComputationHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 500 | 503;
@@ -98,20 +98,20 @@ type CreateDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpError = {
  * computation to determine when results are available. The `status` field returns one of `REQUESTED`,
  * `SUBMITTED`, `PROFILE_REQUESTED`, `SUCCEEDED`, `FAILED`, or `PROFILE_FAILED`.
  * @example
- * getDataQualitiesComputation_FIX_THIS_QUIRKY_NAME(
+ * getDataQualityComputation(
  *   "4db06daa-3117-412e-8fb4-b29c937f9a0e"
  * )
  *
  * @param computationId The unique identifier of the computation, as returned by `POST /data-governance/data-qualities/computations`.
- * @throws GetDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetDataQualityComputationHttpError
  */
-declare function getDataQualitiesComputation_FIX_THIS_QUIRKY_NAME(computationId: string, options?: ApiCallOptions): Promise<GetDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type GetDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+declare function getDataQualityComputation(computationId: string, options?: ApiCallOptions): Promise<GetDataQualityComputationHttpResponse>;
+type GetDataQualityComputationHttpResponse = {
   data: ComputationStatusResponse;
   headers: Headers;
   status: 200;
 };
-type GetDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetDataQualityComputationHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -121,18 +121,18 @@ type GetDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpError = {
  * sample cells.
  *
  * @param query an object with query parameters
- * @throws GetDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetDataQualityGlobalResultsHttpError
  */
-declare function getDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAME(query: {
+declare function getDataQualityGlobalResults(query: {
   /** The unique identifier of the connection. */connectionId?: ConnectionIdType; /** The unique identifier of the dataset. */
   datasetId: DatasetIdType;
-}, options?: ApiCallOptions): Promise<GetDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type GetDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+}, options?: ApiCallOptions): Promise<GetDataQualityGlobalResultsHttpResponse>;
+type GetDataQualityGlobalResultsHttpResponse = {
   data: DatasetQualityGlobalResultsResponse;
   headers: Headers;
   status: 200;
 };
-type GetDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetDataQualityGlobalResultsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -149,30 +149,30 @@ type DataQualitiesAPI = {
    * Poll the status endpoint until `status` is `SUCCEEDED` or `FAILED`.
    *
    * @param body an object with the body content
-   * @throws CreateDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws CreateDataQualityComputationHttpError
    */
-  createDataQualitiesComputation_FIX_THIS_QUIRKY_NAME: typeof createDataQualitiesComputation_FIX_THIS_QUIRKY_NAME;
+  createDataQualityComputation: typeof createDataQualityComputation;
   /**
    * Retrieves the current execution status of a data quality computation. Poll this endpoint after triggering a
    * computation to determine when results are available. The `status` field returns one of `REQUESTED`,
    * `SUBMITTED`, `PROFILE_REQUESTED`, `SUCCEEDED`, `FAILED`, or `PROFILE_FAILED`.
    * @example
-   * getDataQualitiesComputation_FIX_THIS_QUIRKY_NAME(
+   * getDataQualityComputation(
    *   "4db06daa-3117-412e-8fb4-b29c937f9a0e"
    * )
    *
    * @param computationId The unique identifier of the computation, as returned by `POST /data-governance/data-qualities/computations`.
-   * @throws GetDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetDataQualityComputationHttpError
    */
-  getDataQualitiesComputation_FIX_THIS_QUIRKY_NAME: typeof getDataQualitiesComputation_FIX_THIS_QUIRKY_NAME;
+  getDataQualityComputation: typeof getDataQualityComputation;
   /**
    * Retrieves the global quality results for a dataset, showing counts of valid, invalid, empty, and total
    * sample cells.
    *
    * @param query an object with query parameters
-   * @throws GetDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetDataQualityGlobalResultsHttpError
    */
-  getDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAME: typeof getDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAME;
+  getDataQualityGlobalResults: typeof getDataQualityGlobalResults;
   /**
    * Clears the cache for data-qualities api requests.
    */
@@ -183,4 +183,4 @@ type DataQualitiesAPI = {
  */
 declare const dataQualitiesExport: DataQualitiesAPI;
 //#endregion
-export { ComputationResponse, ComputationStatusResponse, ConnectionIdType, CreateDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpError, CreateDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpResponse, DataQualitiesAPI, DataQualityComputationRequest, DatasetIdType, DatasetQualityGlobalResultsResponse, Error, ErrorResponse, ExecutionStatus, GetDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpError, GetDataQualitiesComputation_FIX_THIS_QUIRKY_NAMEHttpResponse, GetDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAMEHttpError, GetDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAMEHttpResponse, QualitiesGlobalResultsResponse, QualityGlobalResultsResponse, SamplingConfiguration, clearCache, createDataQualitiesComputation_FIX_THIS_QUIRKY_NAME, dataQualitiesExport as default, getDataQualitiesComputation_FIX_THIS_QUIRKY_NAME, getDataQualitiesGlobalResults_FIX_THIS_QUIRKY_NAME, data_qualities_d_exports as t };
+export { ComputationResponse, ComputationStatusResponse, ConnectionIdType, CreateDataQualityComputationHttpError, CreateDataQualityComputationHttpResponse, DataQualitiesAPI, DataQualityComputationRequest, DatasetIdType, DatasetQualityGlobalResultsResponse, Error, ErrorResponse, ExecutionStatus, GetDataQualityComputationHttpError, GetDataQualityComputationHttpResponse, GetDataQualityGlobalResultsHttpError, GetDataQualityGlobalResultsHttpResponse, QualitiesGlobalResultsResponse, QualityGlobalResultsResponse, SamplingConfiguration, clearCache, createDataQualityComputation, dataQualitiesExport as default, getDataQualityComputation, getDataQualityGlobalResults, data_qualities_d_exports as t };

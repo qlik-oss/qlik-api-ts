@@ -1,6 +1,6 @@
 import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
 declare namespace data_sources_d_exports {
-  export { ApiSpecResponse, ConnectionInstance, ConnectorNodesInfo, DataSourceNew, DataSourceSettingsRequest, DataSourceSettingsResponse, DataSourcesAPI, DataSourcesResponseNew, DcaasApiError, EndpointInstanceRef, FilterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpError, FilterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpResponse, GenerateQriDataSourcesHttpError, GenerateQriDataSourcesHttpResponse, GetDataSourceApiSpecsHttpError, GetDataSourceApiSpecsHttpResponse, GetDataSourceGatewaysHttpError, GetDataSourceGatewaysHttpResponse, GetDataSourceSettingsHttpError, GetDataSourceSettingsHttpResponse, GetDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpError, GetDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpResponse, GetDataSourcesHttpError, GetDataSourcesHttpResponse, GetEndpointsResponse, PostEndpointRequestWithConnectionId, PostEndpointRequestWithConnectionName, PostEndpointRequestWithConnectionString, PostEndpointRequestWithDatasourceID, PostEndpointResponse, PublicApiError, PutDataSourceSettings_FIX_THIS_QUIRKY_NAMEHttpError, PutDataSourceSettings_FIX_THIS_QUIRKY_NAMEHttpResponse, QriConnectionType, QriDefinition, QriPropertyRef, QriRequest, QriRequestItem, QriRequestItemPropertyArray, QriRequestPathPropertyArray, QriResponseItem, QriTemplate, ResponseErrors, UiInfo, clearCache, dataSourcesExport as default, filterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME, generateQriDataSources, getDataSourceApiSpecs, getDataSourceGateways, getDataSourceSettings, getDataSources, getDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME, putDataSourceSettings_FIX_THIS_QUIRKY_NAME };
+  export { ApiSpecResponse, ConnectionInstance, ConnectorNodesInfo, DataSourceNew, DataSourceSettingsRequest, DataSourceSettingsResponse, DataSourcesAPI, DataSourcesResponseNew, DcaasApiError, EndpointInstanceRef, FilterDataSourceEndpointsHttpError, FilterDataSourceEndpointsHttpResponse, GenerateQriDataSourcesHttpError, GenerateQriDataSourcesHttpResponse, GetDataSourceApiSpecsHttpError, GetDataSourceApiSpecsHttpResponse, GetDataSourceEndpointsHttpError, GetDataSourceEndpointsHttpResponse, GetDataSourceGatewaysHttpError, GetDataSourceGatewaysHttpResponse, GetDataSourceSettingsHttpError, GetDataSourceSettingsHttpResponse, GetDataSourcesHttpError, GetDataSourcesHttpResponse, GetEndpointsResponse, PostEndpointRequestWithConnectionId, PostEndpointRequestWithConnectionName, PostEndpointRequestWithConnectionString, PostEndpointRequestWithDatasourceID, PostEndpointResponse, PublicApiError, PutDataSourceSettingsHttpError, PutDataSourceSettingsHttpResponse, QriConnectionType, QriDefinition, QriPropertyRef, QriRequest, QriRequestItem, QriRequestItemPropertyArray, QriRequestPathPropertyArray, QriResponseItem, QriTemplate, ResponseErrors, UiInfo, clearCache, dataSourcesExport as default, filterDataSourceEndpoints, generateQriDataSources, getDataSourceApiSpecs, getDataSourceEndpoints, getDataSourceGateways, getDataSourceSettings, getDataSources, putDataSourceSettings };
 }
 /**
  * Connection property schema and connector metadata for a datasource.
@@ -316,15 +316,15 @@ type GenerateQriDataSourcesHttpError = {
  * endpoint session. Use this operation to audit active endpoint allocations
  * or to locate the URL for an existing endpoint.
  *
- * @throws GetDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetDataSourceEndpointsHttpError
  */
-declare function getDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME(options?: ApiCallOptions): Promise<GetDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type GetDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+declare function getDataSourceEndpoints(options?: ApiCallOptions): Promise<GetDataSourceEndpointsHttpResponse>;
+type GetDataSourceEndpointsHttpResponse = {
   data: GetEndpointsResponse;
   headers: Headers;
   status: 200;
 };
-type GetDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetDataSourceEndpointsHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 401 | 500;
@@ -336,15 +336,15 @@ type GetDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpError = {
  * initiate a data load session.
  *
  * @param body an object with the body content
- * @throws FilterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws FilterDataSourceEndpointsHttpError
  */
-declare function filterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME(body: PostEndpointRequestWithConnectionName | PostEndpointRequestWithConnectionId | PostEndpointRequestWithConnectionString | PostEndpointRequestWithDatasourceID, options?: ApiCallOptions): Promise<FilterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type FilterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+declare function filterDataSourceEndpoints(body: PostEndpointRequestWithConnectionName | PostEndpointRequestWithConnectionId | PostEndpointRequestWithConnectionString | PostEndpointRequestWithDatasourceID, options?: ApiCallOptions): Promise<FilterDataSourceEndpointsHttpResponse>;
+type FilterDataSourceEndpointsHttpResponse = {
   data: PostEndpointResponse;
   headers: Headers;
   status: 201;
 };
-type FilterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpError = {
+type FilterDataSourceEndpointsHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 401 | 500;
@@ -441,15 +441,15 @@ type GetDataSourceSettingsHttpError = {
  *
  * @param dataSourceId The unique identifier of the datasource to update settings for.
  * @param body an object with the body content
- * @throws PutDataSourceSettings_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws PutDataSourceSettingsHttpError
  */
-declare function putDataSourceSettings_FIX_THIS_QUIRKY_NAME(dataSourceId: string, body: DataSourceSettingsRequest, options?: ApiCallOptions): Promise<PutDataSourceSettings_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type PutDataSourceSettings_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+declare function putDataSourceSettings(dataSourceId: string, body: DataSourceSettingsRequest, options?: ApiCallOptions): Promise<PutDataSourceSettingsHttpResponse>;
+type PutDataSourceSettingsHttpResponse = {
   data: DataSourceSettingsResponse;
   headers: Headers;
   status: 200;
 };
-type PutDataSourceSettings_FIX_THIS_QUIRKY_NAMEHttpError = {
+type PutDataSourceSettingsHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 401 | 404 | 409 | 500;
@@ -494,9 +494,9 @@ type DataSourcesAPI = {
    * endpoint session. Use this operation to audit active endpoint allocations
    * or to locate the URL for an existing endpoint.
    *
-   * @throws GetDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetDataSourceEndpointsHttpError
    */
-  getDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME: typeof getDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME;
+  getDataSourceEndpoints: typeof getDataSourceEndpoints;
   /**
    * Provisions a gRPC endpoint for loading data using the specified connection.
    * The connection can be resolved by name, ID, connection string, or datasource
@@ -504,9 +504,9 @@ type DataSourcesAPI = {
    * initiate a data load session.
    *
    * @param body an object with the body content
-   * @throws FilterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws FilterDataSourceEndpointsHttpError
    */
-  filterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME: typeof filterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME;
+  filterDataSourceEndpoints: typeof filterDataSourceEndpoints;
   /**
    * Retrieves the connection property schema for the specified datasource,
    * including the connector provider, version, and the full list of properties
@@ -560,9 +560,9 @@ type DataSourcesAPI = {
    *
    * @param dataSourceId The unique identifier of the datasource to update settings for.
    * @param body an object with the body content
-   * @throws PutDataSourceSettings_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws PutDataSourceSettingsHttpError
    */
-  putDataSourceSettings_FIX_THIS_QUIRKY_NAME: typeof putDataSourceSettings_FIX_THIS_QUIRKY_NAME;
+  putDataSourceSettings: typeof putDataSourceSettings;
   /**
    * Clears the cache for data-sources api requests.
    */
@@ -573,4 +573,4 @@ type DataSourcesAPI = {
  */
 declare const dataSourcesExport: DataSourcesAPI;
 //#endregion
-export { ApiSpecResponse, ConnectionInstance, ConnectorNodesInfo, DataSourceNew, DataSourceSettingsRequest, DataSourceSettingsResponse, DataSourcesAPI, DataSourcesResponseNew, DcaasApiError, EndpointInstanceRef, FilterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpError, FilterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpResponse, GenerateQriDataSourcesHttpError, GenerateQriDataSourcesHttpResponse, GetDataSourceApiSpecsHttpError, GetDataSourceApiSpecsHttpResponse, GetDataSourceGatewaysHttpError, GetDataSourceGatewaysHttpResponse, GetDataSourceSettingsHttpError, GetDataSourceSettingsHttpResponse, GetDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpError, GetDataSourcesEndpoints_FIX_THIS_QUIRKY_NAMEHttpResponse, GetDataSourcesHttpError, GetDataSourcesHttpResponse, GetEndpointsResponse, PostEndpointRequestWithConnectionId, PostEndpointRequestWithConnectionName, PostEndpointRequestWithConnectionString, PostEndpointRequestWithDatasourceID, PostEndpointResponse, PublicApiError, PutDataSourceSettings_FIX_THIS_QUIRKY_NAMEHttpError, PutDataSourceSettings_FIX_THIS_QUIRKY_NAMEHttpResponse, QriConnectionType, QriDefinition, QriPropertyRef, QriRequest, QriRequestItem, QriRequestItemPropertyArray, QriRequestPathPropertyArray, QriResponseItem, QriTemplate, ResponseErrors, UiInfo, clearCache, dataSourcesExport as default, filterDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME, generateQriDataSources, getDataSourceApiSpecs, getDataSourceGateways, getDataSourceSettings, getDataSources, getDataSourcesEndpoints_FIX_THIS_QUIRKY_NAME, putDataSourceSettings_FIX_THIS_QUIRKY_NAME, data_sources_d_exports as t };
+export { ApiSpecResponse, ConnectionInstance, ConnectorNodesInfo, DataSourceNew, DataSourceSettingsRequest, DataSourceSettingsResponse, DataSourcesAPI, DataSourcesResponseNew, DcaasApiError, EndpointInstanceRef, FilterDataSourceEndpointsHttpError, FilterDataSourceEndpointsHttpResponse, GenerateQriDataSourcesHttpError, GenerateQriDataSourcesHttpResponse, GetDataSourceApiSpecsHttpError, GetDataSourceApiSpecsHttpResponse, GetDataSourceEndpointsHttpError, GetDataSourceEndpointsHttpResponse, GetDataSourceGatewaysHttpError, GetDataSourceGatewaysHttpResponse, GetDataSourceSettingsHttpError, GetDataSourceSettingsHttpResponse, GetDataSourcesHttpError, GetDataSourcesHttpResponse, GetEndpointsResponse, PostEndpointRequestWithConnectionId, PostEndpointRequestWithConnectionName, PostEndpointRequestWithConnectionString, PostEndpointRequestWithDatasourceID, PostEndpointResponse, PublicApiError, PutDataSourceSettingsHttpError, PutDataSourceSettingsHttpResponse, QriConnectionType, QriDefinition, QriPropertyRef, QriRequest, QriRequestItem, QriRequestItemPropertyArray, QriRequestPathPropertyArray, QriResponseItem, QriTemplate, ResponseErrors, UiInfo, clearCache, dataSourcesExport as default, filterDataSourceEndpoints, generateQriDataSources, getDataSourceApiSpecs, getDataSourceEndpoints, getDataSourceGateways, getDataSourceSettings, getDataSources, putDataSourceSettings, data_sources_d_exports as t };

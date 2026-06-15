@@ -1,7 +1,7 @@
 import { d as HostConfig } from "./chunks/auth-types-BAiSvIRn.js";
 import { InterceptorsAPI, createInterceptors } from "./interceptors.js";
 import { AuthAPI, getAccessToken, getWebResourceAuthParams, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig } from "./auth.js";
-import { t as QixAPI } from "./chunks/qix-BsDRka-v.js";
+import { t as QixAPI } from "./chunks/qix-Ca7Vxt1r.js";
 import { AppsAPI } from "./analytics/apps.js";
 import { ChangeStoresAPI } from "./analytics/change-stores.js";
 import { OdagAppsAPI } from "./analytics/odag-apps.js";

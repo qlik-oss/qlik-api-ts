@@ -1,16 +1,16 @@
 import { t as __exportAll } from "../chunks/chunk-w6R9maHv.js";
-import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-CpHbSqJB.js";
+import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-BJ-uhqfm.js";
 
 //#region src/public/rest/analytics/apps.ts
 var apps_exports = /* @__PURE__ */ __exportAll({
 	clearCache: () => clearCache,
 	createAppEvaluation: () => createAppEvaluation,
 	default: () => appsExport,
-	downloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME: () => downloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME,
-	downloadAppsEvaluation_FIX_THIS_QUIRKY_NAME: () => downloadAppsEvaluation_FIX_THIS_QUIRKY_NAME,
+	getAppEvaluation: () => getAppEvaluation,
+	getAppEvaluationComparison: () => getAppEvaluationComparison,
+	getAppEvaluationComparisonXml: () => getAppEvaluationComparisonXml,
+	getAppEvaluationXml: () => getAppEvaluationXml,
 	getAppEvaluations: () => getAppEvaluations,
-	getAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME: () => getAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME,
-	getAppsEvaluation_FIX_THIS_QUIRKY_NAME: () => getAppsEvaluation_FIX_THIS_QUIRKY_NAME,
 	restoreApp: () => restoreApp
 });
 /**
@@ -21,9 +21,9 @@ var apps_exports = /* @__PURE__ */ __exportAll({
 * @param baselineId The unique identifier of the baseline app evaluation.
 * @param comparisonId The unique identifier of the comparison app evaluation.
 * @param query an object with query parameters
-* @throws GetAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetAppEvaluationComparisonHttpError
 */
-async function getAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME(baselineId, comparisonId, query, options) {
+async function getAppEvaluationComparison(baselineId, comparisonId, query, options) {
 	return invokeFetch("analytics/apps", {
 		method: "get",
 		pathTemplate: "/api/analytics/apps/evaluations/{baselineId}/compare/{comparisonId}",
@@ -40,16 +40,16 @@ async function getAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME(baselineId, compari
 * defaulting to XML format. Use the `Accept` header to request JSON output instead.
 * Both evaluations must belong to the same app.
 * @example
-* downloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME(
+* getAppEvaluationComparisonXml(
 *   "abcdefghijklmnopq",
 *   "abcdefghijklmnopq"
 * )
 *
 * @param baselineId The unique identifier of the baseline app evaluation.
 * @param comparisonId The unique identifier of the comparison app evaluation.
-* @throws DownloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetAppEvaluationComparisonXmlHttpError
 */
-async function downloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME(baselineId, comparisonId, options) {
+async function getAppEvaluationComparisonXml(baselineId, comparisonId, options) {
 	return invokeFetch("analytics/apps", {
 		method: "get",
 		pathTemplate: "/api/analytics/apps/evaluations/{baselineId}/compare/{comparisonId}/actions/download",
@@ -66,9 +66,9 @@ async function downloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME(baselineId, co
 *
 * @param id The unique identifier of the app evaluation to retrieve.
 * @param query an object with query parameters
-* @throws GetAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetAppEvaluationHttpError
 */
-async function getAppsEvaluation_FIX_THIS_QUIRKY_NAME(id, query, options) {
+async function getAppEvaluation(id, query, options) {
 	return invokeFetch("analytics/apps", {
 		method: "get",
 		pathTemplate: "/api/analytics/apps/evaluations/{id}",
@@ -81,14 +81,14 @@ async function getAppsEvaluation_FIX_THIS_QUIRKY_NAME(id, query, options) {
 * Downloads the evaluation log for the specified app evaluation, defaulting to XML
 * format. Use the `Accept` header to request JSON output instead.
 * @example
-* downloadAppsEvaluation_FIX_THIS_QUIRKY_NAME(
+* getAppEvaluationXml(
 *   "abcdefghijklmnopq"
 * )
 *
 * @param id The unique identifier of the app evaluation to download.
-* @throws DownloadAppsEvaluation_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetAppEvaluationXmlHttpError
 */
-async function downloadAppsEvaluation_FIX_THIS_QUIRKY_NAME(id, options) {
+async function getAppEvaluationXml(id, options) {
 	return invokeFetch("analytics/apps", {
 		method: "get",
 		pathTemplate: "/api/analytics/apps/evaluations/{id}/actions/download",
@@ -161,10 +161,10 @@ function clearCache() {
 * Functions for the apps api
 */
 const appsExport = {
-	getAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME,
-	downloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME,
-	getAppsEvaluation_FIX_THIS_QUIRKY_NAME,
-	downloadAppsEvaluation_FIX_THIS_QUIRKY_NAME,
+	getAppEvaluationComparison,
+	getAppEvaluationComparisonXml,
+	getAppEvaluation,
+	getAppEvaluationXml,
 	restoreApp,
 	getAppEvaluations,
 	createAppEvaluation,
@@ -172,4 +172,4 @@ const appsExport = {
 };
 
 //#endregion
-export { clearCache, createAppEvaluation, appsExport as default, downloadAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME, downloadAppsEvaluation_FIX_THIS_QUIRKY_NAME, getAppEvaluations, getAppsEvaluationCompare_FIX_THIS_QUIRKY_NAME, getAppsEvaluation_FIX_THIS_QUIRKY_NAME, restoreApp, apps_exports as t };
+export { clearCache, createAppEvaluation, appsExport as default, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXml, getAppEvaluationXml, getAppEvaluations, restoreApp, apps_exports as t };

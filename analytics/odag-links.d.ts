@@ -1,6 +1,6 @@
 import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
 declare namespace odag_links_d_exports {
-  export { AppIdV2, AppNameParameterV2, AppNameV2, AppStateCondensedV2, BindFormattingV2, BindingArrayV2, BindingV2, CanCreateLinks, CreateOdagLinkHttpError, CreateOdagLinkHttpResponse, CreateOdagLinkRequestHttpError, CreateOdagLinkRequestHttpResponse, CreateOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAMEHttpError, CreateOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAMEHttpResponse, DataLoadStatus, ErrorDetailsV2, ErrorV2, FieldSelectionStateV2, FieldValueV2, GetOdagLinkHttpError, GetOdagLinkHttpResponse, GetOdagLinkRequestsHttpError, GetOdagLinkRequestsHttpResponse, GetOdagLinksCancreate_FIX_THIS_QUIRKY_NAMEHttpError, GetOdagLinksCancreate_FIX_THIS_QUIRKY_NAMEHttpResponse, GetOdagLinksHttpError, GetOdagLinksHttpResponse, LinkAddPayloadV2, LinkId, LinkNameV2, LinkPropAppOpenMethodV2, LinkPropAppRetentionTimeV2, LinkPropDisableV2, LinkPropGenAppLimitV2, LinkPropGenAppNameV2, LinkPropLimitPolicyV2, LinkPropMenuLabelV2, LinkPropOverrideGenAppLimitV2, LinkPropRowEstRangeV2, LinkPropTargetSheetV2, LinkPropertiesV2, LinkPutPayloadV2, LinkRowEstExprV2, LinkStateFullV2, LinkStateRefV2, LinkStatusSettingV2, LinkStatusV2, LinkTypeV2, LinkUsageContextV2, MetaV2, NumericOnlyV2, OdagLinksAPI, RequestArrayV2, RequestIdV2, RequestKindV2, RequestLoadInfoV2, RequestObjectV2, RequestPostPayloadV2, RequestStateV2, SelAppLinkUsagePayload, SelectAppParamTypeV2, SelectStatusV2, SelectionStateDescrV2, SelectionStateV2, UpdateOdagLinkHttpError, UpdateOdagLinkHttpResponse, UserIdV2, UserStateCondensedV2, ValueCountRangeV2, clearCache, createOdagLink, createOdagLinkRequest, createOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAME, odagLinksExport as default, getOdagLink, getOdagLinkRequests, getOdagLinks, getOdagLinksCancreate_FIX_THIS_QUIRKY_NAME, updateOdagLink };
+  export { AppIdV2, AppNameParameterV2, AppNameV2, AppStateCondensedV2, BindFormattingV2, BindingArrayV2, BindingV2, CanCreateLinks, CreateOdagLinkHttpError, CreateOdagLinkHttpResponse, CreateOdagLinkRequestHttpError, CreateOdagLinkRequestHttpResponse, DataLoadStatus, ErrorDetailsV2, ErrorV2, FieldSelectionStateV2, FieldValueV2, GetOdagLinkCreatePermissionHttpError, GetOdagLinkCreatePermissionHttpResponse, GetOdagLinkHttpError, GetOdagLinkHttpResponse, GetOdagLinkRequestsHttpError, GetOdagLinkRequestsHttpResponse, GetOdagLinksHttpError, GetOdagLinksHttpResponse, GetOdagLinksSelectionAppUsagesHttpError, GetOdagLinksSelectionAppUsagesHttpResponse, LinkAddPayloadV2, LinkId, LinkNameV2, LinkPropAppOpenMethodV2, LinkPropAppRetentionTimeV2, LinkPropDisableV2, LinkPropGenAppLimitV2, LinkPropGenAppNameV2, LinkPropLimitPolicyV2, LinkPropMenuLabelV2, LinkPropOverrideGenAppLimitV2, LinkPropRowEstRangeV2, LinkPropTargetSheetV2, LinkPropertiesV2, LinkPutPayloadV2, LinkRowEstExprV2, LinkStateFullV2, LinkStateRefV2, LinkStatusSettingV2, LinkStatusV2, LinkTypeV2, LinkUsageContextV2, MetaV2, NumericOnlyV2, OdagLinksAPI, RequestArrayV2, RequestIdV2, RequestKindV2, RequestLoadInfoV2, RequestObjectV2, RequestPostPayloadV2, RequestStateV2, SelAppLinkUsagePayload, SelectAppParamTypeV2, SelectStatusV2, SelectionStateDescrV2, SelectionStateV2, UpdateOdagLinkHttpError, UpdateOdagLinkHttpResponse, UserIdV2, UserStateCondensedV2, ValueCountRangeV2, clearCache, createOdagLink, createOdagLinkRequest, odagLinksExport as default, getOdagLink, getOdagLinkCreatePermission, getOdagLinkRequests, getOdagLinks, getOdagLinksSelectionAppUsages, updateOdagLink };
 }
 /**
  * The system-assigned ID for an Analytics Application.
@@ -453,19 +453,19 @@ type CreateOdagLinkHttpError = {
  * Checks whether the current user has permission to create new ODAG links. Optionally verify permissions for a specific template Analytics Application or selection Analytics Application context. Returns a boolean indicating create permission status.
  *
  * @param query an object with query parameters
- * @throws GetOdagLinksCancreate_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetOdagLinkCreatePermissionHttpError
  */
-declare function getOdagLinksCancreate_FIX_THIS_QUIRKY_NAME(query: {
+declare function getOdagLinkCreatePermission(query: {
   /** When `true`, deny permission if the selection Analytics Application cannot be updated. This parameter is ignored unless `optSelectAppId` is also supplied. */optDenyIfSelAppNotUpdatable?: boolean; /** An optional parameter for specifying the ID of a selection Analytics Application. */
   optSelectAppId?: string; /** An optional parameter for specifying the ID of a template Analytics Application. */
   optTemplateAppId?: string;
-}, options?: ApiCallOptions): Promise<GetOdagLinksCancreate_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type GetOdagLinksCancreate_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+}, options?: ApiCallOptions): Promise<GetOdagLinkCreatePermissionHttpResponse>;
+type GetOdagLinkCreatePermissionHttpResponse = {
   data: CanCreateLinks;
   headers: Headers;
   status: 200;
 };
-type GetOdagLinksCancreate_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetOdagLinkCreatePermissionHttpError = {
   data: ErrorV2;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -475,19 +475,19 @@ type GetOdagLinksCancreate_FIX_THIS_QUIRKY_NAMEHttpError = {
  *
  * @param query an object with query parameters
  * @param body an object with the body content
- * @throws CreateOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetOdagLinksSelectionAppUsagesHttpError
  */
-declare function createOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAME(query: {
+declare function getOdagLinksSelectionAppUsages(query: {
   /** When `true`, include master charts from the template Analytics Application in the response. */includeCharts?: boolean; /** The ID of a selection Analytics Application. */
   selAppId: string; /** The type of the links to query. Defaults to `link`. */
   type?: LinkTypeV2;
-}, body: SelAppLinkUsagePayload, options?: ApiCallOptions): Promise<CreateOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type CreateOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+}, body: SelAppLinkUsagePayload, options?: ApiCallOptions): Promise<GetOdagLinksSelectionAppUsagesHttpResponse>;
+type GetOdagLinksSelectionAppUsagesHttpResponse = {
   data: LinkStateRefV2[];
   headers: Headers;
   status: 200;
 };
-type CreateOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetOdagLinksSelectionAppUsagesHttpError = {
   data: ErrorV2;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -598,17 +598,17 @@ type OdagLinksAPI = {
    * Checks whether the current user has permission to create new ODAG links. Optionally verify permissions for a specific template Analytics Application or selection Analytics Application context. Returns a boolean indicating create permission status.
    *
    * @param query an object with query parameters
-   * @throws GetOdagLinksCancreate_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetOdagLinkCreatePermissionHttpError
    */
-  getOdagLinksCancreate_FIX_THIS_QUIRKY_NAME: typeof getOdagLinksCancreate_FIX_THIS_QUIRKY_NAME;
+  getOdagLinkCreatePermission: typeof getOdagLinkCreatePermission;
   /**
    * Registers the current set of ODAG links referenced by a selection Analytics Application and returns only those links the current user can access. Call this when a selection Analytics Application is opened or after modifying its ODAG link references. The response is an array of objects, where the `id` identifies the requested link and `link` contains the link state when accessible. Use `GET /analytics/odag-links/{linkId}` for full details.
    *
    * @param query an object with query parameters
    * @param body an object with the body content
-   * @throws CreateOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetOdagLinksSelectionAppUsagesHttpError
    */
-  createOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAME: typeof createOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAME;
+  getOdagLinksSelectionAppUsages: typeof getOdagLinksSelectionAppUsages;
   /**
    * Retrieves details of a specific ODAG link, including bindings, properties, status, and template Analytics Application charts. Use this to review link configuration or verify permissions before generating Analytics Applications.
    *
@@ -652,4 +652,4 @@ type OdagLinksAPI = {
  */
 declare const odagLinksExport: OdagLinksAPI;
 //#endregion
-export { AppIdV2, AppNameParameterV2, AppNameV2, AppStateCondensedV2, BindFormattingV2, BindingArrayV2, BindingV2, CanCreateLinks, CreateOdagLinkHttpError, CreateOdagLinkHttpResponse, CreateOdagLinkRequestHttpError, CreateOdagLinkRequestHttpResponse, CreateOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAMEHttpError, CreateOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAMEHttpResponse, DataLoadStatus, ErrorDetailsV2, ErrorV2, FieldSelectionStateV2, FieldValueV2, GetOdagLinkHttpError, GetOdagLinkHttpResponse, GetOdagLinkRequestsHttpError, GetOdagLinkRequestsHttpResponse, GetOdagLinksCancreate_FIX_THIS_QUIRKY_NAMEHttpError, GetOdagLinksCancreate_FIX_THIS_QUIRKY_NAMEHttpResponse, GetOdagLinksHttpError, GetOdagLinksHttpResponse, LinkAddPayloadV2, LinkId, LinkNameV2, LinkPropAppOpenMethodV2, LinkPropAppRetentionTimeV2, LinkPropDisableV2, LinkPropGenAppLimitV2, LinkPropGenAppNameV2, LinkPropLimitPolicyV2, LinkPropMenuLabelV2, LinkPropOverrideGenAppLimitV2, LinkPropRowEstRangeV2, LinkPropTargetSheetV2, LinkPropertiesV2, LinkPutPayloadV2, LinkRowEstExprV2, LinkStateFullV2, LinkStateRefV2, LinkStatusSettingV2, LinkStatusV2, LinkTypeV2, LinkUsageContextV2, MetaV2, NumericOnlyV2, OdagLinksAPI, RequestArrayV2, RequestIdV2, RequestKindV2, RequestLoadInfoV2, RequestObjectV2, RequestPostPayloadV2, RequestStateV2, SelAppLinkUsagePayload, SelectAppParamTypeV2, SelectStatusV2, SelectionStateDescrV2, SelectionStateV2, UpdateOdagLinkHttpError, UpdateOdagLinkHttpResponse, UserIdV2, UserStateCondensedV2, ValueCountRangeV2, clearCache, createOdagLink, createOdagLinkRequest, createOdagLinksSelectionAppLinkUsage_FIX_THIS_QUIRKY_NAME, odagLinksExport as default, getOdagLink, getOdagLinkRequests, getOdagLinks, getOdagLinksCancreate_FIX_THIS_QUIRKY_NAME, odag_links_d_exports as t, updateOdagLink };
+export { AppIdV2, AppNameParameterV2, AppNameV2, AppStateCondensedV2, BindFormattingV2, BindingArrayV2, BindingV2, CanCreateLinks, CreateOdagLinkHttpError, CreateOdagLinkHttpResponse, CreateOdagLinkRequestHttpError, CreateOdagLinkRequestHttpResponse, DataLoadStatus, ErrorDetailsV2, ErrorV2, FieldSelectionStateV2, FieldValueV2, GetOdagLinkCreatePermissionHttpError, GetOdagLinkCreatePermissionHttpResponse, GetOdagLinkHttpError, GetOdagLinkHttpResponse, GetOdagLinkRequestsHttpError, GetOdagLinkRequestsHttpResponse, GetOdagLinksHttpError, GetOdagLinksHttpResponse, GetOdagLinksSelectionAppUsagesHttpError, GetOdagLinksSelectionAppUsagesHttpResponse, LinkAddPayloadV2, LinkId, LinkNameV2, LinkPropAppOpenMethodV2, LinkPropAppRetentionTimeV2, LinkPropDisableV2, LinkPropGenAppLimitV2, LinkPropGenAppNameV2, LinkPropLimitPolicyV2, LinkPropMenuLabelV2, LinkPropOverrideGenAppLimitV2, LinkPropRowEstRangeV2, LinkPropTargetSheetV2, LinkPropertiesV2, LinkPutPayloadV2, LinkRowEstExprV2, LinkStateFullV2, LinkStateRefV2, LinkStatusSettingV2, LinkStatusV2, LinkTypeV2, LinkUsageContextV2, MetaV2, NumericOnlyV2, OdagLinksAPI, RequestArrayV2, RequestIdV2, RequestKindV2, RequestLoadInfoV2, RequestObjectV2, RequestPostPayloadV2, RequestStateV2, SelAppLinkUsagePayload, SelectAppParamTypeV2, SelectStatusV2, SelectionStateDescrV2, SelectionStateV2, UpdateOdagLinkHttpError, UpdateOdagLinkHttpResponse, UserIdV2, UserStateCondensedV2, ValueCountRangeV2, clearCache, createOdagLink, createOdagLinkRequest, odagLinksExport as default, getOdagLink, getOdagLinkCreatePermission, getOdagLinkRequests, getOdagLinks, getOdagLinksSelectionAppUsages, odag_links_d_exports as t, updateOdagLink };

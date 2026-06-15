@@ -1,4 +1,4 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CpHbSqJB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-BJ-uhqfm.js";
 
 //#region src/public/rest/extensions.ts
 /**
