@@ -2664,7 +2664,7 @@ function onPageRedirectStarted(hostConfig, listener) {
 * The paths expected in the from core-init BFF response.
 * Exposed for testing.
 */
-const coreBootPaths = new Set([
+const coreBootPaths = /* @__PURE__ */ new Set([
 	"/api/v1/brands/active",
 	"/api/v1/claims/me",
 	"/api/v1/licenses/allotments",

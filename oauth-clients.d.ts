@@ -200,7 +200,7 @@ type OAuthConnectionConfigUpdate = {
  * @throws GetOAuthClientsHttpError
  */
 declare function getOAuthClients(query: {
-  /** The filter query that should be used to filter the list of oauth clients.  The filter syntax is defined in RFC 7644. Valid attributes for filtering are `clientId`, `clientName`, `appType`, and `tenantId`. */filter?: string; /** The number of OAuth client entries to retrieve. */
+  /** The filter query that should be used to filter the list of oauth clients.  The filter syntax is defined in RFC 7644. Valid attributes for filtering are `clientId`, `clientName`, `appType`, `tenantId`, and `createdByType`. */filter?: string; /** The number of OAuth client entries to retrieve. */
   limit?: number; /** The next page cursor */
   next?: string; /** The previous page cursor */
   prev?: string; /** The attribute to sort by, beginning with + for ascending and - for descending. Valid attributes for sorting are clientId, clientName, appType, tenantId, createdAt, updatedAt. */
