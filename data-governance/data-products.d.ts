@@ -11,8 +11,8 @@ type ActivateDataProductRequest = {
 type ArrayOfUniqueStrings = string[];
 type ChangelogOperation = {
   operator?: "replace" | "add" | "remove";
-  path?: "/name" | "/description" | "/spaceId" | "/datasetIds" | "/glossaryIds" | "/readMe" | "/keyContacts" | "/tags" | "/activatedOn" | "/apiConsumableDatasetIds";
-  value?: string | ArrayOfUniqueStrings | unknown[];
+  path?: "/name" | "/description" | "/spaceId" | "/datasetIds" | "/glossaryIds" | "/readMe" | "/keyContacts" | "/tags" | "/activatedOn" | "/apiConsumableDatasetIds" | "/semanticModel";
+  value?: string | ArrayOfUniqueStrings | unknown[] | unknown;
 };
 /**
  * Request payload for creating a data product.

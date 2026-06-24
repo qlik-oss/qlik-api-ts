@@ -25,6 +25,8 @@
     "./analytics": "./analytics.js",
     "./analytics/apps": "./analytics/apps.js",
     "./analytics/change-stores": "./analytics/change-stores.js",
+    "./analytics/discovery-agent": "./analytics/discovery-agent.js",
+    "./analytics/discovery-agent/adaptive-cards": "./analytics/discovery-agent/adaptive-cards.js",
     "./analytics/odag-apps": "./analytics/odag-apps.js",
     "./analytics/odag-links": "./analytics/odag-links.js",
     "./analytics/odag-requests": "./analytics/odag-requests.js",
