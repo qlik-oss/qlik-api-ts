@@ -569,7 +569,8 @@ type SenseFileTemplate = {
 type SenseImageTemplate = {
   appId: string;
   persistentBookmark?: SensePersistentBookmark; /** Choose the reloadTimestamp constraint to apply. An empty value leads to the default noCheck. */
-  reloadTimestampMatchType?: ReloadTimestampMatchType;
+  reloadTimestampMatchType?: ReloadTimestampMatchType; /** Array of ChainableSelection */
+  selectionChain?: SelectionChain;
   selectionStrategy?: SelectionStrategy;
   selectionType?: SenseSelectionType; /** Map of selections to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and maximum number of overall field values allowed is 150000. */
   selectionsByState?: Record<string, QSelection[]>; /** The definition ID referring to a selectionsByState definition declared in definitions. */
@@ -623,8 +624,8 @@ type Visualization = {
   /** Height in pixels. */heightPx: number; /** The sense visualization id or json definition. */
   id: string; /** A JSON object that is passed as-is to the mashup page while rendering. */
   jsOpts?: unknown; /** Soft properties, aka patches, to be applied to the visualization. */
-  patches?: NxPatch[]; /** Choose visualization to export an image of a sense chart, sessionobject for a visualization to be created on-the-fly. An empty value leads to the type being inferred by its id. */
-  type?: "visualization" | "sessionobject"; /** Width in pixels. */
+  patches?: NxPatch[]; /** Choose visualization to export an image of a sense chart, sessionobject for a visualization to be created on-the-fly, sheet to export a sheet as a whole image. An empty value leads to the type being inferred by its id. */
+  type?: "visualization" | "sessionobject" | "sheet"; /** Width in pixels. */
   widthPx: number;
 };
 /**

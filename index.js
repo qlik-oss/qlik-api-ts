@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-BJ-uhqfm.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DvyLyo3f.js";
 import auth_default from "./auth.js";
-import { a as interceptors$1 } from "./chunks/interceptors-Ce5-8eIE.js";
+import { a as interceptors$1 } from "./chunks/interceptors-xwMkgAmO.js";
 import qix$1 from "./qix.js";
 
 //#region src/runtime-api-generator/runtime-api-generator-common.ts
@@ -36,7 +36,7 @@ function contentTypeCharToContentType(typeChar) {
 		throw new Error(`Unknown short hand content-type: ${typeChar}`);
 	}
 }
-const ignoredProps = new Set([
+const ignoredProps = /* @__PURE__ */ new Set([
 	"$$typeof",
 	"then",
 	"__esmodule"

@@ -139,7 +139,7 @@ type CreateDataProductHttpResponse = {
 type CreateDataProductHttpError = {
   data: ErrorResponse;
   headers: Headers;
-  status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
+  status: 400 | 401 | 403 | 404 | 409 | 422 | 500 | 503;
 };
 /**
  * Generates a URL to access a third-party provider's user interface.

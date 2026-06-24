@@ -1793,7 +1793,7 @@ type GetAppReloadMetadataHttpError = {
 declare function getAppReportFilters(appId: string, query: {
   /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax. Cannot be combined with any of the fields marked as deprecated. All conditional statements within this query parameter are case insensitive.
    * The following fields support the `co` (contains) operator: `name`, `description`
-   * The following fields support the `eq` (equals) operator: `ownerId`
+   * The following fields support the `eq` (equals) operator: `id`, `ownerId`
    * Example:
    * (name co "query1" or description co "query2") and ownerId eq "123" */
   filter?: string; /** The filter type (REP, SUB). REP stands for report bookmark, SUB for subscription bookmark. */
