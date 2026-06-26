@@ -1,9 +1,11 @@
 import { d as HostConfig } from "./chunks/auth-types-BAiSvIRn.js";
 import { InterceptorsAPI, createInterceptors } from "./interceptors.js";
 import { AuthAPI, getAccessToken, getWebResourceAuthParams, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig } from "./auth.js";
-import { t as QixAPI } from "./chunks/qix-DMktr5hx.js";
+import { t as QixAPI } from "./chunks/qix-B8YcpbV_.js";
 import { AppsAPI } from "./analytics/apps.js";
 import { ChangeStoresAPI } from "./analytics/change-stores.js";
+import { r as AdaptiveCardsAPI } from "./chunks/adaptive-cards-BvI_p0_-.js";
+import { DiscoveryAgentAPI } from "./analytics/discovery-agent.js";
 import { OdagAppsAPI } from "./analytics/odag-apps.js";
 import { OdagLinksAPI } from "./analytics/odag-links.js";
 import { OdagRequestsAPI } from "./analytics/odag-requests.js";
@@ -107,6 +109,9 @@ declare const qix: QixAPI & {
 declare const analytics: {
   apps: AppsAPI;
   changeStores: ChangeStoresAPI;
+  discoveryAgent: DiscoveryAgentAPI & {
+    adaptiveCards: AdaptiveCardsAPI;
+  };
   odagApps: OdagAppsAPI;
   odagLinks: OdagLinksAPI;
   odagRequests: OdagRequestsAPI;
@@ -207,6 +212,9 @@ interface QlikAPI {
   analytics: AnalyticsAPI & {
     apps: AppsAPI;
     changeStores: ChangeStoresAPI;
+    discoveryAgent: DiscoveryAgentAPI & {
+      adaptiveCards: AdaptiveCardsAPI;
+    };
     odagApps: OdagAppsAPI;
     odagLinks: OdagLinksAPI;
     odagRequests: OdagRequestsAPI;

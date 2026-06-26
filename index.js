@@ -222,6 +222,11 @@ const createAnalyticsChangeStoresRuntimeAPI = apiDefToApiPublic("analytics/chang
 		"editable-columns": ["getChangeStoreEditableColumns:GQ:"]
 	}
 } } } });
+const createAnalyticsDiscoveryAgentAdaptiveCardsRuntimeAPI = apiDefToApiPublic("analytics/discovery-agent/adaptive-cards", { api: { analytics: { "discovery-agent": { "adaptive-cards": ["getDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAME:GQ:"] } } } });
+const createAnalyticsDiscoveryAgentRuntimeAPI = apiDefToApiPublic("analytics/discovery-agent", {}, {
+	"adaptive-cards": createAnalyticsDiscoveryAgentAdaptiveCardsRuntimeAPI,
+	adaptiveCards: createAnalyticsDiscoveryAgentAdaptiveCardsRuntimeAPI
+});
 const createAnalyticsOdagAppsRuntimeAPI = apiDefToApiPublic("analytics/odag-apps", { api: { analytics: { "odag-apps": ["getOdagApps:GQ:"] } } });
 const createAnalyticsOdagLinksRuntimeAPI = apiDefToApiPublic("analytics/odag-links", { api: { analytics: { "odag-links": {
 	"": ["getOdagLinks:GQ:", "createOdagLink:PQBJ:"],
@@ -247,6 +252,8 @@ const createAnalyticsRuntimeAPI = apiDefToApiPublic("analytics", {}, {
 	apps: createAnalyticsAppsRuntimeAPI,
 	"change-stores": createAnalyticsChangeStoresRuntimeAPI,
 	changeStores: createAnalyticsChangeStoresRuntimeAPI,
+	"discovery-agent": createAnalyticsDiscoveryAgentRuntimeAPI,
+	discoveryAgent: createAnalyticsDiscoveryAgentRuntimeAPI,
 	"odag-apps": createAnalyticsOdagAppsRuntimeAPI,
 	odagApps: createAnalyticsOdagAppsRuntimeAPI,
 	"odag-links": createAnalyticsOdagLinksRuntimeAPI,
