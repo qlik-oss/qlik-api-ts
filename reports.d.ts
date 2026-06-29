@@ -177,7 +177,7 @@ type ImageOutput = {
   outZoom?: number;
 };
 type LinkResponse = {
-  href?: string;
+  href?: string | null;
 };
 /**
  * @example
@@ -666,7 +666,7 @@ declare function getReportOutputs(id: string, query: {
    * outputId eq "123" or outputId eq "321" */
   filter?: string; /** Limit the returned result set */
   limit?: number; /** If present, the cursor that starts the page of data that is returned. */
-  page?: string; /** Sorting parameters */
+  page?: string | null; /** Sorting parameters */
   sort?: ("+outputId" | "-outputId" | "+sizeBytes" | "-sizeBytes")[];
 }, options?: ApiCallOptions): Promise<GetReportOutputsHttpResponse>;
 type GetReportOutputsHttpResponse = {

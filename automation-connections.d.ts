@@ -86,7 +86,7 @@ type Links = {
   prev?: PaginationLink;
 };
 type PaginationLink = {
-  /** The URL to a resource request */href?: string;
+  /** The URL to a resource request */href?: string | null;
 };
 /**
  * Retrieves a list of automation connections the requesting user has access to.

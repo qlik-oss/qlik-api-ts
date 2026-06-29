@@ -64,7 +64,7 @@ type OAuthClientAdminListItem = {
 type OAuthClientAdminListResponse = {
   data: OAuthClientAdminListItem[];
   links: Links; /** Total number of oauth clients, included only if `totalResults` query parameter is set to true. */
-  totalResults?: number;
+  totalResults?: number | null;
 };
 /**
  * Response schema for reading an OAuth client as an admin user

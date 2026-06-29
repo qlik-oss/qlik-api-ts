@@ -35,7 +35,7 @@ type AsyncActionTaskProgress = {
 /**
  * Type of action being performed
  */
-type AsyncActionType = "PROJECT_PREPARE" | "PROJECT_VALIDATE" | "TASK_PREPARE" | "TASK_VALIDATE";
+type AsyncActionType = "PROJECT_PREPARE" | "PROJECT_VALIDATE" | "TASK_PREPARE" | "TASK_VALIDATE" | "PROJECT_IMPORT";
 /**
  * State of the action
  */
@@ -172,7 +172,7 @@ type DataTaskRuntimeState = {
   };
   type?: DataTaskType;
 };
-type DataTaskType = "LANDING" | "STORAGE" | "QVD_STORAGE" | "TRANSFORM" | "DATAMART" | "REGISTERED_DATA" | "REPLICATION" | "DISTRIBUTION" | "LAKE_LANDING" | "KNOWLEDGE_MART" | "FILE_BASED_KNOWLEDGE_MART" | "LAKEHOUSE_STORAGE" | "LAKEHOUSE_MIRROR" | "STREAMING_LAKE_LANDING" | "STREAMING_TRANSFORM";
+type DataTaskType = "LANDING" | "STORAGE" | "QVD_STORAGE" | "TRANSFORM" | "DATAMART" | "REGISTERED_DATA" | "REPLICATION" | "DISTRIBUTION" | "LAKE_LANDING" | "KNOWLEDGE_MART" | "FILE_BASED_KNOWLEDGE_MART" | "LAKEHOUSE_STORAGE" | "LAKEHOUSE_MIRROR" | "STREAMING_LAKE_LANDING" | "STREAMING_TRANSFORM" | "REPLICATE_LANDING";
 /**
  * Defines the export format for the project files.
  * - 'LEGACY': Exports a ZIP of the previous JSON files. Deprecated and will be removed in a future release.
@@ -230,7 +230,7 @@ type Errors = {
   traceId?: string;
 };
 type ExportDiProjectReq = {
-  /** Include bindings in the exported zip file (optional, default is false) */includeBindings?: boolean;
+  /** Include bindings in the exported zip file. If not specified, defaults to `false`. */includeBindings?: boolean;
   /** Defines the export format for the project files.
    * - 'LEGACY': Exports a ZIP of the previous JSON files. Deprecated and will be removed in a future release.
    * - 'MINIMAL': Exports a ZIP of the new YAML files, including only non-default attribute values.
@@ -430,7 +430,9 @@ type ExportDiProjectHttpError = {
   status: 400 | 404 | 500;
 };
 /**
- * Imports a data integration project from a `.zip` file.
+ * Imports a data integration project synchronously from a legacy JSON-based `.zip` file.
+ * This endpoint only accepts zips that contain JSON project files (the legacy format). The import is processed synchronously and completes before the response is returned.
+ * Submitting a YAML-based zip to this endpoint returns `400`. To import a YAML-based zip, use `POST /di-projects/{projectId}/actions/import-async` instead.
  *
  * @param projectId Identifier of the data project.
  * @param body an object with the body content
@@ -447,7 +449,7 @@ type ImportDiProjectHttpResponse = {
 type ImportDiProjectHttpError = {
   data: Errors;
   headers: Headers;
-  status: 400 | 404 | 500;
+  status: 400 | 404 | 409 | 500;
 };
 /**
  * Prepares the data integration project and its tasks for execution.
@@ -820,7 +822,9 @@ type DiProjectsAPI = {
    */
   exportDiProject: typeof exportDiProject;
   /**
-   * Imports a data integration project from a `.zip` file.
+   * Imports a data integration project synchronously from a legacy JSON-based `.zip` file.
+   * This endpoint only accepts zips that contain JSON project files (the legacy format). The import is processed synchronously and completes before the response is returned.
+   * Submitting a YAML-based zip to this endpoint returns `400`. To import a YAML-based zip, use `POST /di-projects/{projectId}/actions/import-async` instead.
    *
    * @param projectId Identifier of the data project.
    * @param body an object with the body content

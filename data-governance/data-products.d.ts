@@ -8,11 +8,11 @@ type ActivateDataProductRequest = {
   spaceId?: string;
   tags?: string[];
 };
-type ArrayOfUniqueStrings = string[];
+type ArrayOfUniqueStrings = string[] | null;
 type ChangelogOperation = {
   operator?: "replace" | "add" | "remove";
   path?: "/name" | "/description" | "/spaceId" | "/datasetIds" | "/glossaryIds" | "/readMe" | "/keyContacts" | "/tags" | "/activatedOn" | "/apiConsumableDatasetIds" | "/semanticModel";
-  value?: string | ArrayOfUniqueStrings | unknown[] | unknown;
+  value?: string | null | ArrayOfUniqueStrings | unknown[] | null | unknown | null;
 };
 /**
  * Request payload for creating a data product.
@@ -104,7 +104,7 @@ type MoveDataProductRequest = {
 type PatchDataProductRequest = {
   op: "replace";
   path: "/name" | "/description" | "/datasetIds" | "/glossaryIds" | "/readMe" | "/keyContacts" | "/tags" | "/apiConsumableDatasetIds";
-  value?: string | ArrayOfUniqueStrings | unknown[];
+  value?: string | null | ArrayOfUniqueStrings | unknown[] | null;
 }[];
 type Quality = {
   completeness: number;

@@ -82,7 +82,7 @@ type Links = {
   prev?: PaginationLink;
 };
 type PaginationLink = {
-  /** The URL to a resource request */href?: string;
+  /** The URL to a resource request */href?: string | null;
 };
 type RunDetailRequestObject = {
   /** The source that triggers the automation will set the context. */context: "api"; /** The unique identifier of the run. */
@@ -92,7 +92,7 @@ type RunDetailResponseObject = {
   /** Indicates if this automation run is archived. */readonly archived?: boolean; /** The source that triggers the automation will set the context. Certain contexts impact the execution of an automation (for example, The "test_run" context will not process all results when listing items). */
   context?: "test_run" | "editor" | "detail" | "api_sync" | "api_async" | "webhook" | "lookup";
   readonly createdAt?: string; /** List of errors that occurred during the automation run. */
-  error?: unknown[]; /** The unique identifier of the user who executed the automation run. */
+  error?: unknown[] | null; /** The unique identifier of the user who executed the automation run. */
   readonly executedById?: string; /** The unique identifier of the run. */
   readonly id?: string; /** Indicates if this automation run is archived. */
   readonly isArchived?: boolean; /** Indicates if this automation run is a test run. */
@@ -112,13 +112,13 @@ type RunDetailResponseObject = {
       txBytes?: number;
     }; /** The number of API calls made. */
     totalApiCalls?: number;
-  }; /** The unique identifier of the owner of the automation run. */
+  } | null; /** The unique identifier of the owner of the automation run. */
   readonly ownerId?: string; /** The date and time at which the automation run is scheduled to start. */
-  readonly scheduledStartTime?: string; /** The unique identifier of the space in which the automation run is created. */
+  readonly scheduledStartTime?: string | null; /** The unique identifier of the space in which the automation run is created. */
   readonly spaceId?: string; /** The date and time at which the automation run started. */
-  readonly startTime?: string; /** The current status of the automation run. */
+  readonly startTime?: string | null; /** The current status of the automation run. */
   status?: "failed" | "finished" | "finished with warnings" | "must stop" | "not started" | "running" | "starting" | "stopped" | "exceeded limit" | "queued"; /** The date and time at which the automation run stopped. */
-  readonly stopTime?: string; /** Indicates if this automation run is a test run. */
+  readonly stopTime?: string | null; /** Indicates if this automation run is a test run. */
   readonly testRun?: boolean; /** The title of the automation run. */
   title?: string;
   readonly updatedAt?: string;
@@ -132,13 +132,13 @@ type RunListObject = {
   context?: "test_run" | "editor" | "detail" | "api_sync" | "api_async" | "webhook" | "lookup";
   readonly createdAt?: string; /** Duration of the run, indicated in seconds. Calculated from start and stop times */
   readonly duration?: number; /** List of errors that occurred during the automation run. */
-  error?: unknown[]; /** The unique identifier of the user who executed the automation run. */
-  readonly executedById?: string;
+  error?: unknown[] | null; /** The unique identifier of the user who executed the automation run. */
+  readonly executedById?: string | null;
   readonly id?: string; /** Indicates if this automation run is archived. */
   readonly isArchived?: boolean; /** Indicates if this automation run is a test run. */
   readonly isTestRun?: boolean; /** The unique identifier of the owner of the automation run. */
   readonly ownerId?: string; /** The date and time at which the automation run is scheduled to start. */
-  readonly scheduledStartTime?: string; /** The unique identifier of the space in which the automation run is created. */
+  readonly scheduledStartTime?: string | null; /** The unique identifier of the space in which the automation run is created. */
   readonly spaceId?: string; /** The date and time at which the automation run started. */
   readonly startTime?: string; /** The current status of the automation run. */
   status?: "failed" | "finished" | "finished with warnings" | "must stop" | "not started" | "running" | "starting" | "stopped" | "exceeded limit" | "queued"; /** The date and time at which the automation run stopped. */

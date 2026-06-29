@@ -148,12 +148,12 @@ type RetentionPolicy = {
 };
 type ScheduleOptions = {
   /** The chronos job identifier. It is set once the related chronos job is created. */readonly chronosJobID?: string; /** EndDateTime is a local date time with respect to the above timezone parameter. If the timezone parameter is missing, then the timezone used is the one retrieved from user infos. Therefore ISO8601 time offsets are not allowed (e.g. "2026-01-02T16:04:05Z" or "2026-01-02T16:04:05+01"), if passed an error will be returned. EndDateTime is an optional parameter, when not set or when it's an empty string, the recurrence is intended to be never ending. */
-  endDateTime?: string; /** lastExecutionTime is the time of the chronos job last execution in RFC3339 format (a time with a fixed UTC offset). Could be empty if job has not run yet. */
-  readonly lastExecutionTime?: string; /** nextExecutionTime is the time of the chronos job next execution in RFC3339 format (a time with a fixed UTC offset). Could be empty if the job is completed. */
-  readonly nextExecutionTime?: string; /** List of RRULEs for SCHEDULED triggers, as specified in RFC5545. Note that DTSTART and DTEND, UNTIL lines are not allowed in this field; start and end times are specified in the start and end fields. RDATE and EXDATE lines are not currently supported. EXRULE is not supported since it is deprecated by RFC5545. It is mandatory if the trigger type is SCHEDULED. At least 1 rule must be set and maximum 5 rules are allowed. */
+  endDateTime?: string | null; /** lastExecutionTime is the time of the chronos job last execution in RFC3339 format (a time with a fixed UTC offset). Could be empty if job has not run yet. */
+  readonly lastExecutionTime?: string | null; /** nextExecutionTime is the time of the chronos job next execution in RFC3339 format (a time with a fixed UTC offset). Could be empty if the job is completed. */
+  readonly nextExecutionTime?: string | null; /** List of RRULEs for SCHEDULED triggers, as specified in RFC5545. Note that DTSTART and DTEND, UNTIL lines are not allowed in this field; start and end times are specified in the start and end fields. RDATE and EXDATE lines are not currently supported. EXRULE is not supported since it is deprecated by RFC5545. It is mandatory if the trigger type is SCHEDULED. At least 1 rule must be set and maximum 5 rules are allowed. */
   recurrence?: string[]; /** StartDateTime is a local date time with respect to the above timezone parameter. If the timezone parameter is missing, then the timezone used is the one retrieved from user infos. Therefore ISO8601 time offsets are not allowed (e.g. "2026-01-02T16:04:05Z" or "2026-01-02T16:04:05+01"), if passed an error will be returned. StartDateTime should not be older than 1 year from current date. StartDateTime is an optional parameter, when not set or when it's an empty string, its value is set to the current local date time. */
-  startDateTime?: string; /** The timezone for time calculations in SCHEDULED triggers, optional. */
-  timezone?: string;
+  startDateTime?: string | null; /** The timezone for time calculations in SCHEDULED triggers, optional. */
+  timezone?: string | null;
 };
 type Selection = {
   displayName?: string;
@@ -520,7 +520,7 @@ type Trigger = {
   /** The chronosJobId which triggers the sharing task */readonly chronosJobID?: string; /** Toggle for executing sharing task on app reload. */
   executeOnAppReload?: boolean; /** To prevent overflow in the history, setting this to daily store the chart of a previous day in the history and maintain the live version with the tag latest. */
   executionHistoryInterval?: "minutely" | "hourly" | "daily" | "weekly" | "monthly" | "quarterly" | "yearly"; /** List of RRULE lines for a recurring event, as specified in RFC5545. Note that DTSTART and DTEND, UNTIL lines are not allowed in this field; event start and end times are specified in the start and end fields. RDATE and EXDATE lines are not currently supported. EXRULE is not supported since it is deprecated by RFC5545. This field is omitted for single events. */
-  recurrence: string[];
+  recurrence: string[] | null;
 };
 /**
  * an internal recipient based on its user id.
@@ -530,7 +530,7 @@ type UserIDRecipient = {
   enabled?: boolean; /** A list of associated groups. If a user is added individually the "addedIndividually" pseudo group is included */
   groups?: string[]; /** Whether this recipient is subscribed to alerts of a task */
   subscribed?: boolean;
-  taskRecipientErrors?: TaskRecipientError[]; /** User ID of recipient (internal user). */
+  taskRecipientErrors?: TaskRecipientError[] | null; /** User ID of recipient (internal user). */
   value?: string;
 };
 /**
