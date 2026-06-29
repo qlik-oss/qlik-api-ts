@@ -6,9 +6,9 @@ declare namespace auth_settings_d_exports {
  * A JSON Patch document for authentication settings as defined in http://tools.ietf.org/html/rfc6902.
  */
 type AuthSettingsJSONPatch = {
-  /** The operation to be performed. */op: "replace"; /** A JSON Pointer to the authentication settings field. Use `/dynamicClientRegistrationEnabled` only with a boolean `value`. Fields `/dcrDefaultConsentMethod` and `/dcrAllowedAuthenticationMethods` are only available when dynamic client registration is enabled. */
-  path: "/userSessionInactivityTimeoutMinutes" | "/maxUserSessionLifespanMinutes" | "/dynamicClientRegistrationEnabled" | "/dcrDefaultConsentMethod" | "/dcrAllowedAuthenticationMethods"; /** Value to set for the targeted authentication settings field. Timeout fields accept only integer values, `/dynamicClientRegistrationEnabled` accepts only boolean values, `/dcrDefaultConsentMethod` accepts a string value, and `/dcrAllowedAuthenticationMethods` accepts an array of strings. */
-  value: number | boolean | string;
+  /** The operation to be performed. */op: "replace"; /** A JSON Pointer to the authentication settings field. Use `/dynamicClientRegistrationEnabled` only with a boolean `value`. Field `/dcrAllowedAuthenticationMethods` is only available when dynamic client registration is enabled. */
+  path: "/userSessionInactivityTimeoutMinutes" | "/maxUserSessionLifespanMinutes" | "/dynamicClientRegistrationEnabled" | "/dcrAllowedAuthenticationMethods"; /** Value to set for the targeted authentication settings field. Timeout fields accept only integer values, `/dynamicClientRegistrationEnabled` accepts only boolean values, and `/dcrAllowedAuthenticationMethods` accepts an array of strings. */
+  value: number | boolean | string | string[];
 };
 /**
  * An array of JSON Patch documents for authentication settings.
@@ -31,7 +31,10 @@ type AuthSettingsJSONPatch = {
  *   },
  *   {
  *     op: "replace",
- *     path: "/dcrAllowedAuthenticationMethods"
+ *     path: "/dcrAllowedAuthenticationMethods",
+ *     value: [
+ *       "client_secret"
+ *     ]
  *   }
  * ]
  */
@@ -40,8 +43,7 @@ type AuthSettingsJSONPatchArray = AuthSettingsJSONPatch[];
  * The authentication settings for a tenant, controlling user session duration and inactivity behavior.
  */
 type AuthSettingsResource = {
-  /** The allowed authentication methods for dynamic client registration. Only present when dynamic client registration is enabled. */dcrAllowedAuthenticationMethods?: ("none" | "client_secret")[]; /** The default consent method for dynamic client registration. Only present when dynamic client registration is enabled. */
-  dcrDefaultConsentMethod?: "trusted" | "required"; /** Indicates whether dynamic client registration is enabled for this tenant. */
+  /** The allowed authentication methods for dynamic client registration. Only present when dynamic client registration is enabled. */dcrAllowedAuthenticationMethods?: ("none" | "client_secret")[]; /** Indicates whether dynamic client registration is enabled for this tenant. */
   dynamicClientRegistrationEnabled?: boolean; /** The unique identifier for the authentication settings. */
   readonly id?: string; /** `true` if the authentication settings are using tenant-wide defaults. No custom values have been saved for this tenant. */
   readonly isDefault?: boolean; /** Maximum total lifespan for a user session, in minutes. Sessions are invalidated after this duration regardless of activity. */

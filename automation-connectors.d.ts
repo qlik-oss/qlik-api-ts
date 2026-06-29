@@ -6,12 +6,12 @@ type AutomationConnectorsList = {
 };
 type AutomationConnectorsListObject = {
   /** Indicates if the connector is billable. */billable?: boolean; /** The description of the automation connector. */
-  description?: string; /** Indicates if the connector supports webhooks. */
+  description?: string | null; /** Indicates if the connector supports webhooks. */
   hasWebhooks?: boolean;
   readonly id?: string; /** The URL to the large logo of the connector. */
-  logoLarge?: string; /** The URL to the medium logo of the connector. */
-  logoMedium?: string; /** The URL to the small logo of the connector. */
-  logoSmall?: string; /** The name of an automation connector. */
+  logoLarge?: string | null; /** The URL to the medium logo of the connector. */
+  logoMedium?: string | null; /** The URL to the small logo of the connector. */
+  logoSmall?: string | null; /** The name of an automation connector. */
   name?: string;
 };
 type Error = {
@@ -28,7 +28,7 @@ type Links = {
   prev?: PaginationLink;
 };
 type PaginationLink = {
-  /** The URL to a resource request */href?: string;
+  /** The URL to a resource request */href?: string | null;
 };
 /**
  * Retrieves a list of automation connectors.

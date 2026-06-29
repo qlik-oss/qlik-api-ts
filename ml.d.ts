@@ -704,7 +704,7 @@ type Feature = {
    * (e.g. willBeDropped). */
   include?: boolean; /** Name of the feature column */
   name?: string; /** The parent feature name for engineered features. e.g. `OrderDate` may be the parent of its engineered features (features extracted from parent) like `OrderDate.YEAR`, `OrderDate.MONTH`, etc. */
-  parentFeature?: string;
+  parentFeature?: string | null;
 };
 /**
  * Metadata about the features in your dataset, generated when you create
@@ -826,12 +826,12 @@ type JobType = "prediction";
 type Model = {
   /** Model algorithm name abbreviation */algoAbbrv?: ModelAlgorithmAbbreviation; /** The algorithm used by this model */
   algorithm?: string;
-  anomalyRatio?: number;
+  anomalyRatio?: number | null;
   /** Batch number indicates the index of the experiment version fold
    * (most relevant when HPO is enabled) */
   batchNum?: number;
   binaryImbalanceSampling?: BinaryImbalanceSampling;
-  binningFeatures?: string[]; /** Dataset columns selected as features */
+  binningFeatures?: string[] | null; /** Dataset columns selected as features */
   columns?: string[]; /** Timestamp when this was created */
   createdAt?: CreatedAt; /** Description of this entity */
   description?: EntityDescription; /** Features dropped because they're unsuitable */
@@ -846,7 +846,7 @@ type Model = {
    * deployments. */
   modelState?: ModelState; /** Name of this entity */
   name?: EntityName;
-  powerTransformFeatures?: string[]; /** Ratio of sample data in relation to the dataset */
+  powerTransformFeatures?: string[] | null; /** Ratio of sample data in relation to the dataset */
   samplingRatio?: number; /** Model sequence number within the experiment version */
   seqNum?: number;
   /** Model status. These are the status of the model in relation to
@@ -879,7 +879,7 @@ type ModelFindResponse = {
 };
 type ModelForRecommendations = Model & {
   metrics?: {
-    /** This represents model prediction speed in rows/second */predictionSpeed: number;
+    /** This represents model prediction speed in rows/second */predictionSpeed: number | null;
   };
 };
 type ModelGetResponse = {

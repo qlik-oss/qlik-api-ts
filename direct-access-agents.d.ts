@@ -1,90 +1,90 @@
 import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
 //#region src/public/rest/direct-access-agents.d.ts
 type CancelBenchmarkResponse = {
-  message?: string;
+  message?: string | null;
   statusUrl?: LinkResponseObject;
 };
 type ConfigurationLineBase = ConfigurationLineNumeric | ConfigurationLineString;
 type ConfigurationLineNumeric = {
   allowMultipleValues?: boolean;
-  apiActions?: ("Read" | "Write")[];
+  apiActions?: ("Read" | "Write")[] | null;
   applyWithoutRestart?: boolean;
-  connector?: string;
-  defaultValue?: string;
-  description?: string;
-  displayName?: string;
-  name?: string;
+  connector?: string | null;
+  defaultValue?: string | null;
+  description?: string | null;
+  displayName?: string | null;
+  name?: string | null;
   pendingApplication?: boolean;
-  pendingValue?: string;
+  pendingValue?: string | null;
   permittedRangeEnd?: number;
   permittedRangeStart?: number;
-  uiActions?: ("Read" | "Write")[];
-  value?: string;
+  uiActions?: ("Read" | "Write")[] | null;
+  value?: string | null;
 };
 type ConfigurationLineString = {
   allowMultipleValues?: boolean;
-  apiActions?: ("Read" | "Write")[];
+  apiActions?: ("Read" | "Write")[] | null;
   applyWithoutRestart?: boolean;
-  connector?: string;
-  defaultValue?: string;
-  description?: string;
-  displayName?: string;
-  name?: string;
+  connector?: string | null;
+  defaultValue?: string | null;
+  description?: string | null;
+  displayName?: string | null;
+  name?: string | null;
   pendingApplication?: boolean;
-  pendingValue?: string;
-  permittedValues?: string[];
-  uiActions?: ("Read" | "Write")[];
-  value?: string;
+  pendingValue?: string | null;
+  permittedValues?: string[] | null;
+  uiActions?: ("Read" | "Write")[] | null;
+  value?: string | null;
 };
 type ConfigurationResponse = {
-  connectorAgentSettings?: ConfigurationLineBase[];
-  connectors?: ConnectorSettings[];
-  dcaasSettings?: ConfigurationLineBase[];
+  connectorAgentSettings?: ConfigurationLineBase[] | null;
+  connectors?: ConnectorSettings[] | null;
+  dcaasSettings?: ConfigurationLineBase[] | null;
 };
 type ConnectorFlatFileConfigurationResponse = {
   errorMessage?: ErrorResponse;
-  result?: string[];
+  result?: string[] | null;
 };
 type ConnectorSettings = {
-  connectorName?: string;
-  settings?: ConfigurationLineBase[];
+  connectorName?: string | null;
+  settings?: ConfigurationLineBase[] | null;
 };
 type ErrorMessage = {
-  code?: string;
-  detail?: string;
-  title?: string;
+  code?: string | null;
+  detail?: string | null;
+  title?: string | null;
 };
 type ErrorResponse = {
-  errors?: ErrorMessage[];
+  errors?: ErrorMessage[] | null;
   readonly hasErrors?: boolean;
-  traceId?: string;
+  traceId?: string | null;
 };
 type FileConnectorAllowedPath = {
   /** The Path property in the File connector allowed paths file. */path: string; /** The Spaces property in the Odbc custom type mappings file. */
-  spaces?: string[];
+  spaces?: string[] | null;
 };
 type FileConnectorAllowedPathsResponse = {
   errorMessage?: ErrorResponse;
-  result?: FileConnectorAllowedPath[];
+  result?: FileConnectorAllowedPath[] | null;
 };
 type GetBenchmarkStatusResponse = {
-  /** The ISO 8601 formatted timestamp when the benchmark task completed or was cancelled */benchmarkEndTime?: string; /** The benchmark ID */
-  benchmarkId?: string; /** The ISO 8601 formatted timestamp when the benchmark task started execution */
-  benchmarkStartTime?: string;
+  /** The ISO 8601 formatted timestamp when the benchmark task completed or was cancelled */benchmarkEndTime?: string | null; /** The benchmark ID */
+  benchmarkId?: string | null; /** The ISO 8601 formatted timestamp when the benchmark task started execution */
+  benchmarkStartTime?: string | null;
   results?: GetBenchmarkStatusResults; /** The benchmark status */
-  status?: string; /** Additional details about the benchmark status */
-  statusMessage?: string; /** The total bytes requested to be transferred during the benchmark */
+  status?: string | null; /** Additional details about the benchmark status */
+  statusMessage?: string | null; /** The total bytes requested to be transferred during the benchmark */
   totalBytesRequested?: number;
 };
 type GetBenchmarkStatusResults = {
-  /** The ISO 8601 formatted timestamp when data transmission completed */dataTransmissionEndTime?: string; /** The ISO 8601 formatted timestamp when data transmission start */
-  dataTransmissionStartTime?: string; /** The latency in ms measured during data transmission */
+  /** The ISO 8601 formatted timestamp when data transmission completed */dataTransmissionEndTime?: string | null; /** The ISO 8601 formatted timestamp when data transmission start */
+  dataTransmissionStartTime?: string | null; /** The latency in ms measured during data transmission */
   latency?: number; /** The data throughput in KB/s measured during data transmission */
   throughput?: number; /** The total number of bytes successfully transferred during data transmission */
   totalBytesTransferred?: number;
 };
 type LinkResponseObject = {
-  /** The URL to the related resource */href?: string;
+  /** The URL to the related resource */href?: string | null;
 };
 type MetricsCollectorConnectorConfigurationApiResponse = {
   /** Indicates whether metrics collection is enabled for this connector. */metricsCollectionEnabled: boolean; /** Frequency in seconds at which metrics are collected from this connector. */
@@ -111,7 +111,7 @@ type MetricsCollectorSettings = {
   dataRetentionCheckIntervalMinutes: number; /** Indicates whether the metrics collector is enabled. */
   enabled: boolean; /** The number of days to retain local data. */
   localDataRetentionDays: number; /** The file location for the local metrics database. If not specified, defaults to `C:\ProgramData\Qlik\Gateway\tmp`. */
-  localDatabaseFileLocation?: string;
+  localDatabaseFileLocation?: string | null;
   /** The port number that the metrics collector API will run on.
    * This must match the port that the SYSTEM connector runs on to enable network metrics collection. */
   port: number;
@@ -133,7 +133,7 @@ type OdbcCustomDataType = {
 };
 type OdbcCustomDataTypeResponse = {
   errorMessage?: ErrorResponse;
-  result?: OdbcCustomDataType[];
+  result?: OdbcCustomDataType[] | null;
 };
 type Operation = {
   op: "add" | "replace" | "remove";
@@ -141,30 +141,30 @@ type Operation = {
   value: string;
 };
 type PatchOperationResponse = {
-  data?: PatchOperationValidationResult[];
-  errorMessage?: string;
+  data?: PatchOperationValidationResult[] | null;
+  errorMessage?: string | null;
   failedPatchError?: ErrorResponse;
   httpStatusCode?: number;
 };
 type PatchOperationValidationResult = {
   operation?: Operation;
   valid?: boolean;
-  validationResult?: string;
+  validationResult?: string | null;
 };
 type RunBenchmarkResponse = {
-  benchmarkId?: string;
+  benchmarkId?: string | null;
 };
 /**
  * The request to update a connector flat file
  */
 type UpdateConfigurationFlatFileRequest = {
-  contentsToSave?: string[];
+  contentsToSave?: string[] | null;
 };
 /**
  * The request to update file connector allowed paths configuration
  */
 type UpdateFileConnectorAllowedPathsRequest = {
-  fileConnectorAllowedPaths?: FileConnectorAllowedPath[];
+  fileConnectorAllowedPaths?: FileConnectorAllowedPath[] | null;
 };
 type UpdateMetricsCollectorConnectorConfigurationsRequest = {
   connectorAgent: MetricsCollectorIndividualConnectorConfigurationRequest;
@@ -193,7 +193,7 @@ type UpdateMetricsCollectorSettingsRequest = {
   metricsCollectorSettings: UpdateMetricsCollectorSettings;
 };
 type UpdateOdbcCustomTypeMappingsRequest = {
-  odbcCustomDataTypes?: OdbcCustomDataType[];
+  odbcCustomDataTypes?: OdbcCustomDataType[] | null;
 };
 /**
  * Restarts the specified agent. If a reload is in `RELOADING` status the `restart` action will be ignored. Use `force-restart` to restart the agent even if a reload is in `RELOADING` status. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.

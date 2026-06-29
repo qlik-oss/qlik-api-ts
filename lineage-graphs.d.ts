@@ -10,7 +10,7 @@ type DataAsset = {
   type?: string;
 };
 type Edge = {
-  /** The index of edges. This is only used in the POST request. */id?: string;
+  /** The index of edges. This is only used in the POST request. */id?: string | null;
   metadata?: {
     type?: string;
   };
@@ -106,10 +106,10 @@ type GraphsResponse = {
   /** The list of lineage graphs. */graphs?: Graphs;
 };
 type LineageOverviewInfo = {
-  /** Resource level label */resourceLabel?: string; /** Resource level QRI */
-  resourceQRI?: string; /** Table level label */
-  tableLabel?: string; /** Table level QRI that the field belongs to. */
-  tableQRI?: string;
+  /** Resource level label */resourceLabel?: string | null; /** Resource level QRI */
+  resourceQRI?: string | null; /** Table level label */
+  tableLabel?: string | null; /** Table level QRI that the field belongs to. */
+  tableQRI?: string | null;
 };
 type MultiStatusResponse = {
   data?: MultiStatusResponseItem[];

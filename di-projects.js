@@ -64,7 +64,9 @@ async function exportDiProject(projectId, body, options) {
 	});
 }
 /**
-* Imports a data integration project from a `.zip` file.
+* Imports a data integration project synchronously from a legacy JSON-based `.zip` file.
+* This endpoint only accepts zips that contain JSON project files (the legacy format). The import is processed synchronously and completes before the response is returned.
+* Submitting a YAML-based zip to this endpoint returns `400`. To import a YAML-based zip, use `POST /di-projects/{projectId}/actions/import-async` instead.
 *
 * @param projectId Identifier of the data project.
 * @param body an object with the body content

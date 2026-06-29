@@ -1,34 +1,34 @@
 import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
 //#region src/public/rest/report-templates.d.ts
 type CreateTemplateRequest = {
-  /** Template description */description?: string; /** Template name */
+  /** Template description */description?: string | null; /** Template name */
   name: string; /** Specifies the action to perform with the given source app id. Use "validate" to verify that the template source app matches the provided value. Use "replace" to migrate the template to a different app by replacing the source app id. */
   sourceAppAction?: "validate" | "replace"; /** The ID of the app that this template is using as data source. The id stored in the template file metadata is used if no value is specified. */
-  sourceAppId?: string; /** The ID of a previously uploaded temporary content file */
+  sourceAppId?: string | null; /** The ID of a previously uploaded temporary content file */
   temporaryContentId: string;
 };
 type ErrorResponseItem = {
-  /** The error code. */code?: string; /** A human-readable explanation specific to this occurrence of the problem. */
-  detail?: string; /** Additional error metadata. */
-  meta?: unknown; /** Summary of the problem. */
-  title?: string;
+  /** The error code. */code?: string | null; /** A human-readable explanation specific to this occurrence of the problem. */
+  detail?: string | null; /** Additional error metadata. */
+  meta?: unknown | null; /** Summary of the problem. */
+  title?: string | null;
 };
 type ErrorResult = {
-  /** List of errors and their properties. */errors?: ErrorResponseItem[];
-  readonly statusCode?: number;
+  /** List of errors and their properties. */errors?: ErrorResponseItem[] | null;
+  readonly statusCode?: number | null;
 };
 type GetTemplatesResponse = {
-  /** The current page data. */data?: ReportTemplateResponse[];
+  /** The current page data. */data?: ReportTemplateResponse[] | null;
   links?: PaginationLinks;
 };
 type Operation = {
-  from?: string;
-  op?: string;
-  path?: string;
-  value?: unknown;
+  from?: string | null;
+  op?: string | null;
+  path?: string | null;
+  value?: unknown | null;
 };
 type PaginationLink = {
-  /** The URL for the pagination link. */href?: string;
+  /** The URL for the pagination link. */href?: string | null;
 };
 type PaginationLinks = {
   next?: PaginationLink;
@@ -36,21 +36,21 @@ type PaginationLinks = {
   self?: PaginationLink;
 };
 type ReportTemplateResponse = {
-  /** The date and time when the template was created. */createdAt?: string; /** The id of the user who created the template. */
-  createdBy?: string; /** Template description */
-  description?: string; /** The template ID */
-  id?: string; /** The template metadata version */
+  /** The date and time when the template was created. */createdAt?: string | null; /** The id of the user who created the template. */
+  createdBy?: string | null; /** Template description */
+  description?: string | null; /** The template ID */
+  id?: string | null; /** The template metadata version */
   metadataVersion?: number; /** Template name */
-  name?: string; /** The user that this template is scoped to. */
-  ownerId?: string; /** The id of the app that this template is using as data source. */
-  sourceAppId?: string; /** The name of the app that this template is using as data source. */
-  sourceAppName?: string; /** Template type */
+  name?: string | null; /** The user that this template is scoped to. */
+  ownerId?: string | null; /** The id of the app that this template is using as data source. */
+  sourceAppId?: string | null; /** The name of the app that this template is using as data source. */
+  sourceAppName?: string | null; /** Template type */
   type?: "excel" | "pixelPerfect" | "html" | "powerPoint" | "word"; /** The date and time when the template was last updated. */
-  updatedAt?: string; /** The id of the user who last updated the template. */
-  updatedBy?: string;
+  updatedAt?: string | null; /** The id of the user who last updated the template. */
+  updatedBy?: string | null;
 };
 type UpdateTemplateRequest = {
-  /** Template description */description?: string; /** Template name */
+  /** Template description */description?: string | null; /** Template name */
   name: string; /** Specifies the action to perform with the new source app. Use "validate" to verify that the source app of the uploaded template matches the target app. Use "replace" to migrate the uploaded template to the target app by replacing the source app id. */
   sourceAppAction?: "validate" | "replace"; /** The ID of a previously uploaded temporary content file */
   temporaryContentId: string;

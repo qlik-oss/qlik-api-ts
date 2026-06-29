@@ -578,7 +578,7 @@ type LineageInfoRest = {
   statement?: string;
 };
 type LinkResponse = {
-  href?: string;
+  href?: string | null;
 };
 type Links = {
   next?: Href;
@@ -1800,7 +1800,7 @@ declare function getAppReportFilters(appId: string, query: {
   filterTypes: ("REP" | "SUB")[]; /** Limit the returned result set */
   limit?: number; /** Load type expressing the kind of request, eg. interactive for report requests from the Web UI, batch for scheduled report generation. */
   loadType?: "interactive" | "batch"; /** If present, the cursor that starts the page of data that is returned. */
-  page?: string; /** Sorting parameters. */
+  page?: string | null; /** Sorting parameters. */
   sort?: ("+ownerId" | "-ownerId" | "-name" | "+name" | "+description" | "-description" | "+createdAt" | "-createdAt" | "+updatedAt" | "-updatedAt")[];
 }, options?: ApiCallOptions): Promise<GetAppReportFiltersHttpResponse>;
 type GetAppReportFiltersHttpResponse = {

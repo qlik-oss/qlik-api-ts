@@ -6,7 +6,7 @@ type BatchChangeSpaceItem = {
   /** The ID of the data file whose space will be changed. */id: string;
   /** The ID of the new space.  Passing in a null will result in the data file being moved to the user's
    * personal space. */
-  spaceId?: string;
+  spaceId?: string | null;
 };
 type BatchPostItem = {
   /** See PostDataFileRequest schema which defines request structure.
@@ -17,7 +17,7 @@ type ChangeDataFileOwnerRequest = {
   /** The ID of the new owner. */ownerId: string;
 };
 type ChangeDataFileSpaceRequest = {
-  /** The ID of the space.  If null, this data file will be moved to the user's personal space. */spaceId?: string;
+  /** The ID of the space.  If null, this data file will be moved to the user's personal space. */spaceId?: string | null;
 };
 type ConnectionsResponse = {
   /** The connect statement that will be passed to the connector when invoked. */connectStatement: string; /** The unique identifier of the connection. */
@@ -25,7 +25,7 @@ type ConnectionsResponse = {
   name: string;
   /** The team space that the given connection is associated with.  If null, the connection is not associated
    * with any specific team space. */
-  spaceId?: string;
+  spaceId?: string | null;
   spaceStats?: SpaceStatsResponse; /** The type of the connection. */
   type: string;
 };
@@ -42,23 +42,23 @@ type DataFileBatchPostRequest = {
   /** The list of POST operations. */post: BatchPostItem[];
 };
 type DataFileDeleteRecordResponseV2 = {
-  /** The name of the file or folder, not including any folder path prefix. */baseName?: string; /** The user that deleted this data file or folder. */
+  /** The name of the file or folder, not including any folder path prefix. */baseName?: string | null; /** The user that deleted this data file or folder. */
   createdBy: string; /** The date that the file was deleted. */
   deletedDate: string; /** The unique ID of the file or folder that was deleted. */
   fileMetadataId: string; /** True if this is a folder, false if it is a file. */
   folder?: boolean;
   /** If the file or folder reside in a parent folder, this is the parent folder ID.  If the file or folder
    * did not reside in a parent folder, this value is null. */
-  folderId?: string;
+  folderId?: string | null;
   /** If the file or folder resided in a parent folder, this is the parent folder path.  If the file or folder
    * did not reside in a parent folder, this value is null. */
-  folderPath?: string; /** The full name of the file or folder, including any folder path prefix. */
+  folderPath?: string | null; /** The full name of the file or folder, including any folder path prefix. */
   name: string;
   /** If not null, the ID of the space that the uploaded file or resideed in.  If null, this implies that the
    * item was stored in the user-private area (DataFiles) */
-  spaceId?: string; /** The tenant that this file or folder is scoped to. */
+  spaceId?: string | null; /** The tenant that this file or folder is scoped to. */
   tenantId: string; /** If the file or folder resided in a user's personal space, the user that this item is scoped to. */
-  userId?: string;
+  userId?: string | null;
 };
 /**
  * <p>Members:</p><ul></ul>
@@ -66,25 +66,25 @@ type DataFileDeleteRecordResponseV2 = {
 type DataFilePermission = "read" | "update" | "delete" | "list" | "change_owner" | "change_space";
 type DataFileUploadResponseV2 = {
   /** The CRUD actions that are allowed on the given data file. */actions: DataFilePermission[]; /** If this file or folder is bound to the lifecycle of a specific app, this is the ID of this app. */
-  appId?: string; /** The name of the file or folder, not including any folder path prefix. */
-  baseName?: string; /** If the data file's content was updated, this is the DateTime of the last content update. */
-  contentUpdatedDate?: string; /** The date that the file or folder was created. */
+  appId?: string | null; /** The name of the file or folder, not including any folder path prefix. */
+  baseName?: string | null; /** If the data file's content was updated, this is the DateTime of the last content update. */
+  contentUpdatedDate?: string | null; /** The date that the file or folder was created. */
   createdAt: string; /** Whether or not this given item represents a folder or a file. */
   folder?: boolean;
   /** If the file or folder resides in a parent folder, this is the parent folder ID.  If the file or folder
    * does not reside in a parent folder, this value is null. */
-  folderId?: string;
+  folderId?: string | null;
   /** If the file or folder resides in a parent folder, this is the parent folder path.  If the file or folder
    * does not reside in a parent folder, this value is null. */
-  folderPath?: string;
+  folderPath?: string | null;
   folderStats: FolderStatsResponse; /** The ID for the file or folder. */
   id: string; /** The full name of the file or folder, including any folder path prefix. */
   name: string; /** The 'owner' of a file or folder is the user who last uploaded the item's content. */
   ownerId: string; /** The QRI generated from the datafile or folder's metadata. */
-  qri?: string; /** The size of the uploaded file, in bytes.  0 if this item represents a folder */
+  qri?: string | null; /** The size of the uploaded file, in bytes.  0 if this item represents a folder */
   size: number; /** If the file or folder was created in a team space, this is the ID of that space. */
-  spaceId?: string; /** The date that the updated file or folder was last modified. */
-  updatedAt?: string;
+  spaceId?: string | null; /** The date that the updated file or folder was last modified. */
+  updatedAt?: string | null;
 };
 /**
  * Fine-grained error codes for data-files REST operations.  For operations which do not have a more fine-grained
@@ -104,14 +104,14 @@ type ErrorResponseItem = {
    *             not.</li><li><i>DF-019</i> - The specified target folder is a child of the specified source folder, which is not allowed.</li><li><i>DF-020</i> - The specified folder does not exist in the specified space.</li><li><i>DF-021</i> - The specified source file or folder is already locked.</li><li><i>DF-022</i> - The automatic creation of a missing parent folder failed.</li><li><i>DF-023</i> - An attempt to lock a parent folder of a given data file item failed.</li><li><i>DF-024</i> - The attempt to copy a source file or folder to a target failed.</li><li><i>DF-025</i> - The specified target file or folder is already locked.</li><li><i>DF-026</i> - The request results in the creation of a folder hierarchy which is beyond the max allowed folder
    *             hierarchy depth.</li></ul> */
   code: ErrorCode; /** A human-readable explanation specific to this occurrence of the problem. */
-  detail?: string; /** Summary of the problem. */
-  title?: string;
+  detail?: string | null; /** Summary of the problem. */
+  title?: string | null;
 };
 type FilterConnectionsRequest = {
   /** If set to true, include computed space-level statistics for the spaces represented by the connections in the
    * returned list.  If false, this information is not returned. */
   includeSpaceStats?: boolean; /** If present, only return connections with the given name. */
-  name?: string; /** The list of space IDs that is used to filter the connection result set. */
+  name?: string | null; /** The list of space IDs that is used to filter the connection result set. */
   spaceIds: string[];
 };
 type FolderStatsResponse = {
@@ -164,7 +164,7 @@ type GetDataFileDeleteRecordsResponseV2 = {
  */
 type GetDataFileDeleteRecordsSortField = "deletedDate" | "+deletedDate" | "-deletedDate";
 type LinkResponse = {
-  /** The URL for the link. */href?: string;
+  /** The URL for the link. */href?: string | null;
 };
 type LinksResponse = {
   next: LinkResponse;
@@ -180,10 +180,10 @@ type MultiStatusResponseItem = {
    *             not.</li><li><i>DF-019</i> - The specified target folder is a child of the specified source folder, which is not allowed.</li><li><i>DF-020</i> - The specified folder does not exist in the specified space.</li><li><i>DF-021</i> - The specified source file or folder is already locked.</li><li><i>DF-022</i> - The automatic creation of a missing parent folder failed.</li><li><i>DF-023</i> - An attempt to lock a parent folder of a given data file item failed.</li><li><i>DF-024</i> - The attempt to copy a source file or folder to a target failed.</li><li><i>DF-025</i> - The specified target file or folder is already locked.</li><li><i>DF-026</i> - The request results in the creation of a folder hierarchy which is beyond the max allowed folder
    *             hierarchy depth.</li></ul> */
   code: ErrorCode; /** A human-readable explanation specific to this occurrence of the problem. */
-  detail?: string; /** The unique identifier of the file. */
+  detail?: string | null; /** The unique identifier of the file. */
   id: string; /** The HTTP status code. */
   status: number; /** Summary of the problem. */
-  title?: string;
+  title?: string | null;
 };
 /**
  * See PostDataFileRequest schema which defines request structure.
@@ -192,18 +192,18 @@ type MultiStatusResponseItem = {
 type PostDataFileRequest = {
   /** If this file should be bound to the lifecycle of a specific app, this is the ID of this app.  If this
    * request is creating a folder, the specification of an app ID is not allowed. */
-  appId?: string;
+  appId?: string | null;
   /** If present, this is the DataFiles connection that the upload should occur in the context of.  If absent,
    * the default is that the upload will occur in the context of the Personal Space DataFiles connection.  If the
    * DataFiles connection is different from the one specified when the file or folder was last POSTed or PUT, this
    * will result in a logical move of this file or folder into the new space. */
-  connectionId?: string; /** If true, a folder will be created.  If false, a file is created. */
+  connectionId?: string | null; /** If true, a folder will be created.  If false, a file is created. */
   folder?: boolean;
   /** If the specified file or folder should be moved to become a a sub-item of an existing folder, this is the ID
    * of this parent folder.  Any additional folder path that is present on the Name property will be created
    * as a subfolder hierarchy of this folder.  If the FolderID is null, the file or folder specified in the
    * Name property (including any folder prefix on that name), will be created in the root of the space. */
-  folderId?: string;
+  folderId?: string | null;
   /** Name that will be given to the file or folder.  It should be noted that the '/' character
    * in the name indicates a 'path' separator in a logical folder hierarchy for the name.  Names that
    * contain '/'s should be used with the assumption that a logical 'folder hierarchy' is being defined for the
@@ -213,13 +213,13 @@ type PostDataFileRequest = {
    * into the specified data file or folder.  That is, for a file instead of the file content being specified in
    * the Data element, it is effectively copied from an existing, previously uploaded file.  For a folder, rather
    * than the new folder being empty, it's contents are copied from an existing, previously created folder. */
-  sourceId?: string;
+  sourceId?: string | null;
   /** If a TempContentFileId is specified, this is the ID of a previously uploaded temporary content file whose
    * content should be copied into the specified data file.  That is, instead of the file content being specified
    * in the Data element, it is effectively copied from an existing, previously uploaded file.  The expectation
    * is that this file was previously uploaded to the temporary content service, and the ID specified here is
    * the one returned from the temp content upload request.  This option does not apply when POSTing a folder. */
-  tempContentFileId?: string;
+  tempContentFileId?: string | null;
 };
 type SpaceStatsResponse = {
   /** The sum of the file sizes, in bytes, of all app-scoped data files that reside as direct and indirect children of
@@ -309,18 +309,18 @@ type PostDataFilesHttpError = {
  * @throws GetDataFilesConnectionsHttpError
  */
 declare function getDataFilesConnections(query: {
-  /** If present, get connections with connection strings that are scoped to the given app ID. */appId?: string;
+  /** If present, get connections with connection strings that are scoped to the given app ID. */appId?: string | null;
   /** If set to true, include computed space-level statistics for the spaces represented by the connections in the
    * returned list.  If false, this information is not returned. */
   includeSpaceStats?: boolean; /** If present, the maximum number of data file connection records to return. */
   limit?: number; /** If present, only return connections with the given name. */
-  name?: string; /** If present, the cursor that starts the page of data that is returned. */
-  page?: string; /** If true, only return the connections that access data in a personal space.  Default is false. */
+  name?: string | null; /** If present, the cursor that starts the page of data that is returned. */
+  page?: string | null; /** If true, only return the connections that access data in a personal space.  Default is false. */
   personal?: boolean;
   /** The name of the field used to sort the result.  By default, the sort is ascending.  Putting a '+' prefix on
    * the sort field name explicitly indicates ascending sort order.  A '-' prefix indicates a descending sort order. */
   sort?: GetConnectionsSortField; /** If present, only return the connection that accesses data files in the specified space. */
-  spaceId?: string;
+  spaceId?: string | null;
 }, options?: ApiCallOptions): Promise<GetDataFilesConnectionsHttpResponse>;
 type GetDataFilesConnectionsHttpResponse = {
   data: GetConnectionsResponse;
@@ -378,13 +378,13 @@ declare function getDataFilesDeletes(query: {
   /** If set to false, do not return data files with internal extensions else return all the data files. */allowInternalFiles?: boolean;
   /** If specified, the returned list will only include data files and folders that have been deleted prior to the
    * specified date (inclusive). */
-  deleteEndDate?: string;
+  deleteEndDate?: string | null;
   /** If specified, the returned list will only include data files and folders that have been deleted since the
    * specified date (inclusive). */
-  deleteStartDate?: string; /** If set to true, include deleted folders in the result.  If false, only return data files. */
+  deleteStartDate?: string | null; /** If set to true, include deleted folders in the result.  If false, only return data files. */
   includeFolders?: boolean; /** If present, the maximum number of records of deleted data files and folders to return. */
   limit?: number; /** If present, the cursor that starts the page of data that is returned. */
-  page?: string;
+  page?: string | null;
   /** The name of the field used to sort the result.  By default, the sort order is ascending.  Putting a '+' prefix on
    * the sort field name explicitly indicates ascending sort order.  A '-' prefix indicates a descending sort order. */
   sort?: GetDataFileDeleteRecordsSortField;
