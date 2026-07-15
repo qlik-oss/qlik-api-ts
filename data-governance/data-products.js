@@ -5,6 +5,7 @@ import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-Dvy
 var data_products_exports = /* @__PURE__ */ __exportAll({
 	activateDataProduct: () => activateDataProduct,
 	clearCache: () => clearCache,
+	computeDatasetsDataQualityDataProduct: () => computeDatasetsDataQualityDataProduct,
 	createDataProduct: () => createDataProduct,
 	deactivateDataProduct: () => deactivateDataProduct,
 	default: () => dataProductsExport,
@@ -118,6 +119,23 @@ async function activateDataProduct(dataProductId, body, options) {
 	});
 }
 /**
+* Triggers a full data quality computation for all datasets in the data product, running profile calculation followed by data quality
+* assessment. Returns a `batchComputationId` that can be used to track overall progress via the batch computation status endpoint
+* (`GET /api/data-governance/data-qualities/batch-computations/{batchComputationId}`). The computation runs asynchronously.
+* Poll the status endpoint until `status` is `FINISHED`.
+*
+* @param dataProductId Unique identifier of the data product. Must be a valid GUID assigned when the data product was created.
+* @throws ComputeDatasetsDataQualityDataProductHttpError
+*/
+async function computeDatasetsDataQualityDataProduct(dataProductId, options) {
+	return invokeFetch("data-governance/data-products", {
+		method: "post",
+		pathTemplate: "/api/data-governance/data-products/{dataProductId}/actions/compute-datasets-data-quality",
+		pathVariables: { dataProductId },
+		options
+	});
+}
+/**
 * Deactivates a data product, preventing it from being consumed by other services or users.
 *
 * @param dataProductId Unique identifier of the data product. Must be a valid GUID assigned when the data product was created.
@@ -200,6 +218,7 @@ const dataProductsExport = {
 	getDataProduct,
 	patchDataProduct,
 	activateDataProduct,
+	computeDatasetsDataQualityDataProduct,
 	deactivateDataProduct,
 	exportDocumentationDataProduct,
 	moveDataProduct,
@@ -208,4 +227,4 @@ const dataProductsExport = {
 };
 
 //#endregion
-export { activateDataProduct, clearCache, createDataProduct, deactivateDataProduct, dataProductsExport as default, deleteDataProduct, exportDocumentationDataProduct, generateProviderUrlDataProducts, getDataProduct, getDataProductChangelogs, moveDataProduct, patchDataProduct, data_products_exports as t };
+export { activateDataProduct, clearCache, computeDatasetsDataQualityDataProduct, createDataProduct, deactivateDataProduct, dataProductsExport as default, deleteDataProduct, exportDocumentationDataProduct, generateProviderUrlDataProducts, getDataProduct, getDataProductChangelogs, moveDataProduct, patchDataProduct, data_products_exports as t };

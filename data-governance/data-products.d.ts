@@ -1,6 +1,6 @@
 import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
 declare namespace data_products_d_exports {
-  export { ActivateDataProductHttpError, ActivateDataProductHttpResponse, ActivateDataProductRequest, ArrayOfUniqueStrings, ChangelogOperation, CreateDataProductHttpError, CreateDataProductHttpResponse, CreateDataProductRequest, DataProductChangelog, DataProductChangelogResponse, DataProductResponse, DataProductsAPI, DeactivateDataProductHttpError, DeactivateDataProductHttpResponse, DeleteDataProductHttpError, DeleteDataProductHttpResponse, Error, ErrorResponse, ExportDocumentationDataProductHttpError, ExportDocumentationDataProductHttpResponse, GenerateProviderUrlDataProductsHttpError, GenerateProviderUrlDataProductsHttpResponse, GenerateProviderUrlResponse, GetDataProductChangelogsHttpError, GetDataProductChangelogsHttpResponse, GetDataProductHttpError, GetDataProductHttpResponse, KeyContact, Link, Links, MoveDataProductHttpError, MoveDataProductHttpResponse, MoveDataProductRequest, PatchDataProductHttpError, PatchDataProductHttpResponse, PatchDataProductRequest, Quality, TrustScore, TrustScoreDimension, activateDataProduct, clearCache, createDataProduct, deactivateDataProduct, dataProductsExport as default, deleteDataProduct, exportDocumentationDataProduct, generateProviderUrlDataProducts, getDataProduct, getDataProductChangelogs, moveDataProduct, patchDataProduct };
+  export { ActivateDataProductHttpError, ActivateDataProductHttpResponse, ActivateDataProductRequest, ArrayOfUniqueStrings, ChangelogOperation, ComputationResponse, ComputeDatasetsDataQualityDataProductHttpError, ComputeDatasetsDataQualityDataProductHttpResponse, CreateDataProductHttpError, CreateDataProductHttpResponse, CreateDataProductRequest, DataProductChangelog, DataProductChangelogResponse, DataProductResponse, DataProductsAPI, DatasetIdType, DatasetsComputationResponse, DeactivateDataProductHttpError, DeactivateDataProductHttpResponse, DeleteDataProductHttpError, DeleteDataProductHttpResponse, Error, ErrorResponse, ExecutionStatus, ExportDocumentationDataProductHttpError, ExportDocumentationDataProductHttpResponse, GenerateProviderUrlDataProductsHttpError, GenerateProviderUrlDataProductsHttpResponse, GenerateProviderUrlResponse, GetDataProductChangelogsHttpError, GetDataProductChangelogsHttpResponse, GetDataProductHttpError, GetDataProductHttpResponse, KeyContact, Link, Links, MoveDataProductHttpError, MoveDataProductHttpResponse, MoveDataProductRequest, PatchDataProductHttpError, PatchDataProductHttpResponse, PatchDataProductRequest, Quality, TrustScore, TrustScoreDimension, activateDataProduct, clearCache, computeDatasetsDataQualityDataProduct, createDataProduct, deactivateDataProduct, dataProductsExport as default, deleteDataProduct, exportDocumentationDataProduct, generateProviderUrlDataProducts, getDataProduct, getDataProductChangelogs, moveDataProduct, patchDataProduct };
 }
 type ActivateDataProductRequest = {
   /** A description of the data product. */description?: string; /** Name of the data product to activate. */
@@ -13,6 +13,15 @@ type ChangelogOperation = {
   operator?: "replace" | "add" | "remove";
   path?: "/name" | "/description" | "/spaceId" | "/datasetIds" | "/glossaryIds" | "/readMe" | "/keyContacts" | "/tags" | "/activatedOn" | "/apiConsumableDatasetIds" | "/semanticModel";
   value?: string | null | ArrayOfUniqueStrings | unknown[] | null | unknown | null;
+};
+/**
+ * Result of a data quality computation for a single dataset.
+ */
+type ComputationResponse = {
+  /** Unique identifier for this individual data quality computation job. */computationId: string; /** The ID of the dataset */
+  datasetId: DatasetIdType; /** Error message if the computation failed; absent on success. */
+  error?: string; /** Current execution status of the computation (REQUESTED or FAILED). */
+  status: ExecutionStatus;
 };
 /**
  * Request payload for creating a data product.
@@ -68,6 +77,19 @@ type DataProductResponse = {
   updatedAt: string; /** Identifier of the user who last updated the data product. */
   updatedBy: string;
 };
+/**
+ * The ID of the dataset
+ * @example
+ * "669144f5aa2d642638ef1dd0"
+ */
+type DatasetIdType = string;
+/**
+ * Response containing the batch computation identifier and per-dataset quality computation results.
+ */
+type DatasetsComputationResponse = {
+  /** Unique identifier for the data quality batch computation job. */batchComputationId: string; /** List of computation results, one entry per dataset in the data product. */
+  datasetResponses: ComputationResponse[];
+};
 type Error = {
   code?: string;
   detail?: string;
@@ -78,6 +100,12 @@ type ErrorResponse = {
   errors?: Error[];
   traceId?: string;
 };
+/**
+ * Current execution status of the computation (REQUESTED or FAILED).
+ * @example
+ * "REQUESTED"
+ */
+type ExecutionStatus = "REQUESTED" | "FAILED";
 type GenerateProviderUrlResponse = {
   url: string;
 };
@@ -239,6 +267,26 @@ type ActivateDataProductHttpError = {
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
 };
 /**
+ * Triggers a full data quality computation for all datasets in the data product, running profile calculation followed by data quality
+ * assessment. Returns a `batchComputationId` that can be used to track overall progress via the batch computation status endpoint
+ * (`GET /api/data-governance/data-qualities/batch-computations/{batchComputationId}`). The computation runs asynchronously.
+ * Poll the status endpoint until `status` is `FINISHED`.
+ *
+ * @param dataProductId Unique identifier of the data product. Must be a valid GUID assigned when the data product was created.
+ * @throws ComputeDatasetsDataQualityDataProductHttpError
+ */
+declare function computeDatasetsDataQualityDataProduct(dataProductId: string, options?: ApiCallOptions): Promise<ComputeDatasetsDataQualityDataProductHttpResponse>;
+type ComputeDatasetsDataQualityDataProductHttpResponse = {
+  data: DatasetsComputationResponse;
+  headers: Headers;
+  status: 202;
+};
+type ComputeDatasetsDataQualityDataProductHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: 400 | 401 | 403 | 404 | 500 | 503;
+};
+/**
  * Deactivates a data product, preventing it from being consumed by other services or users.
  *
  * @param dataProductId Unique identifier of the data product. Must be a valid GUID assigned when the data product was created.
@@ -382,6 +430,16 @@ type DataProductsAPI = {
    */
   activateDataProduct: typeof activateDataProduct;
   /**
+   * Triggers a full data quality computation for all datasets in the data product, running profile calculation followed by data quality
+   * assessment. Returns a `batchComputationId` that can be used to track overall progress via the batch computation status endpoint
+   * (`GET /api/data-governance/data-qualities/batch-computations/{batchComputationId}`). The computation runs asynchronously.
+   * Poll the status endpoint until `status` is `FINISHED`.
+   *
+   * @param dataProductId Unique identifier of the data product. Must be a valid GUID assigned when the data product was created.
+   * @throws ComputeDatasetsDataQualityDataProductHttpError
+   */
+  computeDatasetsDataQualityDataProduct: typeof computeDatasetsDataQualityDataProduct;
+  /**
    * Deactivates a data product, preventing it from being consumed by other services or users.
    *
    * @param dataProductId Unique identifier of the data product. Must be a valid GUID assigned when the data product was created.
@@ -427,4 +485,4 @@ type DataProductsAPI = {
  */
 declare const dataProductsExport: DataProductsAPI;
 //#endregion
-export { ActivateDataProductHttpError, ActivateDataProductHttpResponse, ActivateDataProductRequest, ArrayOfUniqueStrings, ChangelogOperation, CreateDataProductHttpError, CreateDataProductHttpResponse, CreateDataProductRequest, DataProductChangelog, DataProductChangelogResponse, DataProductResponse, DataProductsAPI, DeactivateDataProductHttpError, DeactivateDataProductHttpResponse, DeleteDataProductHttpError, DeleteDataProductHttpResponse, Error, ErrorResponse, ExportDocumentationDataProductHttpError, ExportDocumentationDataProductHttpResponse, GenerateProviderUrlDataProductsHttpError, GenerateProviderUrlDataProductsHttpResponse, GenerateProviderUrlResponse, GetDataProductChangelogsHttpError, GetDataProductChangelogsHttpResponse, GetDataProductHttpError, GetDataProductHttpResponse, KeyContact, Link, Links, MoveDataProductHttpError, MoveDataProductHttpResponse, MoveDataProductRequest, PatchDataProductHttpError, PatchDataProductHttpResponse, PatchDataProductRequest, Quality, TrustScore, TrustScoreDimension, activateDataProduct, clearCache, createDataProduct, deactivateDataProduct, dataProductsExport as default, deleteDataProduct, exportDocumentationDataProduct, generateProviderUrlDataProducts, getDataProduct, getDataProductChangelogs, moveDataProduct, patchDataProduct, data_products_d_exports as t };
+export { ActivateDataProductHttpError, ActivateDataProductHttpResponse, ActivateDataProductRequest, ArrayOfUniqueStrings, ChangelogOperation, ComputationResponse, ComputeDatasetsDataQualityDataProductHttpError, ComputeDatasetsDataQualityDataProductHttpResponse, CreateDataProductHttpError, CreateDataProductHttpResponse, CreateDataProductRequest, DataProductChangelog, DataProductChangelogResponse, DataProductResponse, DataProductsAPI, DatasetIdType, DatasetsComputationResponse, DeactivateDataProductHttpError, DeactivateDataProductHttpResponse, DeleteDataProductHttpError, DeleteDataProductHttpResponse, Error, ErrorResponse, ExecutionStatus, ExportDocumentationDataProductHttpError, ExportDocumentationDataProductHttpResponse, GenerateProviderUrlDataProductsHttpError, GenerateProviderUrlDataProductsHttpResponse, GenerateProviderUrlResponse, GetDataProductChangelogsHttpError, GetDataProductChangelogsHttpResponse, GetDataProductHttpError, GetDataProductHttpResponse, KeyContact, Link, Links, MoveDataProductHttpError, MoveDataProductHttpResponse, MoveDataProductRequest, PatchDataProductHttpError, PatchDataProductHttpResponse, PatchDataProductRequest, Quality, TrustScore, TrustScoreDimension, activateDataProduct, clearCache, computeDatasetsDataQualityDataProduct, createDataProduct, deactivateDataProduct, dataProductsExport as default, deleteDataProduct, exportDocumentationDataProduct, generateProviderUrlDataProducts, getDataProduct, getDataProductChangelogs, moveDataProduct, patchDataProduct, data_products_d_exports as t };

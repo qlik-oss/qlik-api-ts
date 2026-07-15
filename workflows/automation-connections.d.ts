@@ -6,7 +6,7 @@ type AutomationConnectionChangeOwnerObject = {
   /** The unique identifier of the new owner. */userId?: string;
 };
 type AutomationConnectionChangeSpaceObject = {
-  /** The unique identifier of the new space. */spaceId?: string;
+  /** The unique identifier of the new space. Leave empty to move to the owner's personal space. */spaceId?: string;
 };
 type AutomationConnectionCheckObject = {
   /** The connection status of the automation connection. When true, the automation connection is connected. */connected?: boolean; /** The connection status of the automation connection. When true, the automation connection is connected. */

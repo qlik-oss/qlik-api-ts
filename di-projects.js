@@ -47,6 +47,21 @@ async function getDiProject(actionId, query, options) {
 	});
 }
 /**
+* Validates the project definition files in a `.zip` and returns a structured report of warnings and errors. The validation runs synchronously and completes before the response is returned. Use this operation before importing with `POST /di-projects/{projectId}/actions/import-async` to confirm that YAML-based pipeline definitions are correct.
+*
+* @param body an object with the body content
+* @throws ValidateProjectDefinitionsHttpError
+*/
+async function validateProjectDefinitions(body, options) {
+	return invokeFetch("di-projects", {
+		method: "post",
+		pathTemplate: "/api/v1/di-projects/utils/actions/validate-project-definitions",
+		body,
+		contentType: "multipart/form-data",
+		options
+	});
+}
+/**
 * Exports the specified data integration project.
 *
 * @param projectId Identifier of the data project.
@@ -76,6 +91,23 @@ async function importDiProject(projectId, body, options) {
 	return invokeFetch("di-projects", {
 		method: "post",
 		pathTemplate: "/api/v1/di-projects/{projectId}/actions/import",
+		pathVariables: { projectId },
+		body,
+		contentType: "multipart/form-data",
+		options
+	});
+}
+/**
+* Imports a data integration project from a `.zip` file and returns an action identifier for tracking the background import operation. Accepts both JSON-based (legacy) and YAML-based project formats, making it the recommended endpoint for deploying YAML-defined pipeline definitions programmatically. Poll the import status using `GET /di-projects/actions/{actionId}`.
+*
+* @param projectId Identifier of the data project.
+* @param body an object with the body content
+* @throws ImportAsyncDiProjectHttpError
+*/
+async function importAsyncDiProject(projectId, body, options) {
+	return invokeFetch("di-projects", {
+		method: "post",
+		pathTemplate: "/api/v1/di-projects/{projectId}/actions/import-async",
 		pathVariables: { projectId },
 		body,
 		contentType: "multipart/form-data",
@@ -432,8 +464,10 @@ const diProjectsExport = {
 	getDiProjects,
 	createDiProject,
 	getDiProject,
+	validateProjectDefinitions,
 	exportDiProject,
 	importDiProject,
+	importAsyncDiProject,
 	prepareDiProject,
 	validateDiProject,
 	getDiProjectExportVariables,
@@ -456,4 +490,4 @@ const diProjectsExport = {
 };
 
 //#endregion
-export { clearCache, createDiProject, diProjectsExport as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeRunState, getDiProjectDiTaskRuntimeRunStateDatasets, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, recreateDatasetsDiProjectDiTask, requestReloadDiProjectDiTask, searchDiProjectDiTaskRuntimeRuns, setDiProjectExportVariables, startDiProjectDiTaskRuntime, startDiProjectDiTaskRuntimeWithBody, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };
+export { clearCache, createDiProject, diProjectsExport as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeRunState, getDiProjectDiTaskRuntimeRunStateDatasets, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importAsyncDiProject, importDiProject, prepareDiProject, prepareDiProjectDiTask, recreateDatasetsDiProjectDiTask, requestReloadDiProjectDiTask, searchDiProjectDiTaskRuntimeRuns, setDiProjectExportVariables, startDiProjectDiTaskRuntime, startDiProjectDiTaskRuntimeWithBody, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask, validateProjectDefinitions };

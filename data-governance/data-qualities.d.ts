@@ -9,7 +9,7 @@ type ComputationResponse = {
   /** The unique identifier of the triggered computation. Use this value to poll for status. */computationId: string;
 };
 type ComputationStatusResponse = {
-  status: ExecutionStatus;
+  /** Status of a data quality computation. */status: ExecutionStatus;
 };
 /**
  * The ID of the connection
@@ -43,16 +43,23 @@ type DatasetQualityGlobalResultsResponse = {
   /** The unique identifier of the dataset. */datasetId: string;
   qualities: QualitiesGlobalResultsResponse[];
 };
+/**
+ * An individual error detail.
+ */
 type Error = {
-  code?: string;
-  detail?: string;
-  title?: string;
+  /** The error code identifying the type of error. */code: string; /** A human-readable explanation of the error. */
+  detail?: string; /** A short summary of the error. */
+  title: string;
 };
+/**
+ * Standard error response wrapper.
+ */
 type ErrorResponse = {
-  errors?: Error[];
+  /** List of errors that occurred. */errors: Error[]; /** Trace identifier for debugging purposes. */
   traceId?: string;
 };
 /**
+ * Status of a data quality computation.
  * @example
  * "SUCCEEDED"
  */

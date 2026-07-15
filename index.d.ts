@@ -4,7 +4,7 @@ import { AuthAPI, getAccessToken, getWebResourceAuthParams, registerAuthModule, 
 import { t as QixAPI } from "./chunks/qix-B8YcpbV_.js";
 import { AppsAPI } from "./analytics/apps.js";
 import { ChangeStoresAPI } from "./analytics/change-stores.js";
-import { r as AdaptiveCardsAPI } from "./chunks/adaptive-cards-BvI_p0_-.js";
+import { r as AdaptiveCardsAPI } from "./chunks/adaptive-cards-CPE7R1vg.js";
 import { DiscoveryAgentAPI } from "./analytics/discovery-agent.js";
 import { OdagAppsAPI } from "./analytics/odag-apps.js";
 import { OdagLinksAPI } from "./analytics/odag-links.js";
@@ -42,6 +42,7 @@ import { DataCredentialsAPI as DataCredentialsAPI$1 } from "./data-credentials.j
 import { DataFilesAPI as DataFilesAPI$1 } from "./data-files.js";
 import { DataProductsAPI } from "./data-governance/data-products.js";
 import { DataQualitiesAPI } from "./data-governance/data-qualities.js";
+import { TrustScoresAPI } from "./data-governance/trust-scores.js";
 import { DataGovernanceAPI } from "./data-governance.js";
 import { DataQualitiesAPI as DataQualitiesAPI$1 } from "./data-qualities.js";
 import { DataSetsAPI } from "./data-sets.js";
@@ -151,6 +152,7 @@ declare const dataFiles: DataFilesAPI$1;
 declare const dataGovernance: {
   dataProducts: DataProductsAPI;
   dataQualities: DataQualitiesAPI;
+  trustScores: TrustScoresAPI;
 };
 declare const dataQualities: DataQualitiesAPI$1;
 declare const dataSets: DataSetsAPI;
@@ -278,6 +280,7 @@ interface QlikAPI {
   dataGovernance: DataGovernanceAPI & {
     dataProducts: DataProductsAPI;
     dataQualities: DataQualitiesAPI;
+    trustScores: TrustScoresAPI;
   };
   /** Functions for the dataQualities api */
   dataQualities: DataQualitiesAPI$1;

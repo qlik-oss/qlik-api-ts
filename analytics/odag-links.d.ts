@@ -248,7 +248,8 @@ type LinkStateFullV2 = {
   owner: UserStateCondensedV2;
   privileges?: string[]; /** The complete set of possible properties for a link and their associated user context/value pairings. */
   properties: LinkPropertiesV2; /** The measure expression to be evaluated in the context of the selection Analytics Application for the link that estimates the number of records that will be qualified by the primary load query of the template Analytics Application. This expression must be valid in the context of the selection Analytics Application fields and update whenever the selection state of the selection Analytics Application changes. */
-  rowEstExpr: LinkRowEstExprV2; /** The current status of a link. */
+  rowEstExpr: LinkRowEstExprV2; /** The ID of the original link this was copied from. Present only on deep-copied links. */
+  readonly sourceLinkId?: string; /** The current status of a link. */
   status: LinkStatusV2; /** Condensed state of an Analytics Application returned in `state` for Link, LinkUsage, Request, and ODAG Apps GET calls. */
   templateApp: AppStateCondensedV2;
   templateAppChartObjects?: unknown[];

@@ -6,20 +6,18 @@
     "type": "git",
     "url": "git+https://github.com/qlik-oss/qlik-api-ts.git"
   },
+  "files": [
+    "docs",
+    "docs-internal",
+    "lib",
+    "dist",
+    "README.md",
+    "README-PUBLIC.md"
+  ],
   "type": "module",
   "browser": {
     "fs": false
   },
-  "dependencies": {
-    "enigma.js": "^2.14.0",
-    "extend": "3.0.2",
-    "lodash-es": "^4.18.1",
-    "ws": "^8.21.0"
-  },
-  "engines": {
-    "node": ">=20.0.0"
-  },
-  "packageManager": "pnpm@11.8.0",
   "exports": {
     ".": "./index.js",
     "./analytics": "./analytics.js",
@@ -63,6 +61,7 @@
     "./data-governance": "./data-governance.js",
     "./data-governance/data-products": "./data-governance/data-products.js",
     "./data-governance/data-qualities": "./data-governance/data-qualities.js",
+    "./data-governance/trust-scores": "./data-governance/trust-scores.js",
     "./data-qualities": "./data-qualities.js",
     "./data-sets": "./data-sets.js",
     "./data-sources": "./data-sources.js",
@@ -113,5 +112,15 @@
     "./auth": "./auth.js",
     "./interceptors": "./interceptors.js",
     "./qix": "./qix.js"
-  }
+  },
+  "dependencies": {
+    "enigma.js": "^2.14.0",
+    "extend": "3.0.2",
+    "lodash-es": "^4.18.1",
+    "ws": "^8.21.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "packageManager": "pnpm@11.10.0"
 }
