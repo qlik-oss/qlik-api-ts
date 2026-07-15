@@ -5,17 +5,17 @@ import { n as invokeFetch, t as clearApiCache } from "../../chunks/invoke-fetch-
 var adaptive_cards_exports = /* @__PURE__ */ __exportAll({
 	clearCache: () => clearCache,
 	default: () => adaptiveCardsExport,
-	getDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAME: () => getDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAME
+	getAdaptiveCards: () => getAdaptiveCards
 });
 /**
-* Retrieves Adaptive Card(s) in JSON format. Support fetching of a single card by metric ID or multiple cards by a list of metric IDs. Support filtering by app IDs, measures, dimensions, categories, breakdown dimension, analysis types and triggered time range. When filtering by measures, use appIds parameter to scope results to specific apps, as the same measure expression can exist across multiple apps.
+* Retrieves Adaptive Cards for in-app metrics. Supports fetching a single card by metric ID or multiple cards by a list of metric IDs. Supports filtering by app IDs, measures, dimensions, categories, breakdown dimensions, analysis types, and triggered time range. When filtering by measures, use the `appIds` parameter to scope results to specific apps, as the same measure expression can exist across multiple apps.
 *
-* **Ranking behaviour:** When the endpoint is called *without any filter parameters* (bare `GET /adaptive-cards`), only the top-ranked result per metric (rank ≤ 1) or results without a rank field are returned. When *any* DB-reaching filter is supplied (`metricIds`, `dimensions`, `measures`, `appIds`, `breakdowns`, `analysisTypes`, `comparisonPeriods`, `timeRangeStart`, `timeRangeEnd`), ranking is not applied and all matching results are returned so that explicit filters are never silently constrained by rank.
+* When called without any filter parameters, only the top-ranked result per metric is returned. When any filtering parameter is supplied (`metricIds`, `dimensions`, `measures`, `appIds`, `breakdowns`, `analysisTypes`, `comparisonPeriods`, `timeRangeStart`, `timeRangeEnd`), ranking is not applied and all matching results are returned.
 *
 * @param query an object with query parameters
-* @throws GetDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAMEHttpError
+* @throws GetAdaptiveCardsHttpError
 */
-async function getDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAME(query, options) {
+async function getAdaptiveCards(query, options) {
 	return invokeFetch("analytics/discovery-agent/adaptive-cards", {
 		method: "get",
 		pathTemplate: "/api/analytics/discovery-agent/adaptive-cards",
@@ -33,9 +33,9 @@ function clearCache() {
 * Functions for the adaptive-cards api
 */
 const adaptiveCardsExport = {
-	getDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAME,
+	getAdaptiveCards,
 	clearCache
 };
 
 //#endregion
-export { clearCache, adaptiveCardsExport as default, getDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAME, adaptive_cards_exports as t };
+export { clearCache, adaptiveCardsExport as default, getAdaptiveCards, adaptive_cards_exports as t };

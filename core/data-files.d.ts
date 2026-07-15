@@ -10,7 +10,7 @@ type BatchChangeSpaceItem = {
 };
 type BatchPostItem = {
   /** See PostDataFileRequest schema which defines request structure.
-   *  See  model. */
+   *  See PostDataFileRequest model. */
   request: PostDataFileRequest;
 };
 type ChangeDataFileOwnerRequest = {
@@ -187,7 +187,7 @@ type MultiStatusResponseItem = {
 };
 /**
  * See PostDataFileRequest schema which defines request structure.
- *  See  model.
+ *  See PostDataFileRequest model.
  */
 type PostDataFileRequest = {
   /** If this file should be bound to the lifecycle of a specific app, this is the ID of this app.  If this

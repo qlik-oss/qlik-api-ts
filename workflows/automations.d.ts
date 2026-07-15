@@ -354,7 +354,7 @@ type ChangeOwnerAutomationHttpError = {
  * @throws ChangeSpaceAutomationHttpError
  */
 declare function changeSpaceAutomation(id: string, body: {
-  /** The unique identifier of the new space. */spaceId: string;
+  /** The unique identifier of the new space. Leave empty to move to the owner's personal space. */spaceId: string;
 }, options?: ApiCallOptions): Promise<ChangeSpaceAutomationHttpResponse>;
 type ChangeSpaceAutomationHttpResponse = {
   data: void;

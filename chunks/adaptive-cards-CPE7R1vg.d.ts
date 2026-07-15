@@ -1,9 +1,9 @@
 import { x as ApiCallOptions } from "./auth-types-BAiSvIRn.js";
 declare namespace adaptive_cards_d_exports {
-  export { AdaptiveCard, AdaptiveCards, AdaptiveCardsAPI, AdaptiveCardsLinks, AggregationFrequencyEnum, AggregationType, AnalysisTypeEnum, BreakDownDimension, BreakdownConditionFilter, BreakdownFilter, BreakdownFilterType, BreakdownSearchFilter, BreakdownTopBottomFilter, Categories, ComparisonType, ConditionType, Error, Errors, FormattedInAppMetricDefinition, FormattedInAppMetricRecord, GetDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAMEHttpError, GetDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAMEHttpResponse, Href, SearchType, StatusEnum, TopBottomType, TopBottomUnit, UpwardIsEnum, ValueType, clearCache, adaptiveCardsExport as default, getDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAME };
+  export { AdaptiveCard, AdaptiveCards, AdaptiveCardsAPI, AdaptiveCardsLinks, AggregationFrequencyEnum, AggregationType, AnalysisTypeEnum, BreakDownDimension, BreakdownConditionFilter, BreakdownFilter, BreakdownFilterType, BreakdownSearchFilter, BreakdownTopBottomFilter, Categories, ComparisonType, ConditionType, Error, Errors, FormattedInAppMetricDefinition, FormattedInAppMetricRecord, GetAdaptiveCardsHttpError, GetAdaptiveCardsHttpResponse, Href, SearchType, StatusEnum, TopBottomType, TopBottomUnit, UpwardIsEnum, ValueType, clearCache, adaptiveCardsExport as default, getAdaptiveCards };
 }
 /**
- * Adaptive card
+ * Adaptive Card
  */
 type AdaptiveCard = unknown;
 type AdaptiveCards = {
@@ -272,17 +272,15 @@ type UpwardIsEnum = 0 | 1 | -1;
  */
 type ValueType = "calculated" | "fixed";
 /**
- * Retrieves Adaptive Card(s) in JSON format. Support fetching of a single card by metric ID or multiple cards by a list of metric IDs. Support filtering by app IDs, measures, dimensions, categories, breakdown dimension, analysis types and triggered time range. When filtering by measures, use appIds parameter to scope results to specific apps, as the same measure expression can exist across multiple apps.
+ * Retrieves Adaptive Cards for in-app metrics. Supports fetching a single card by metric ID or multiple cards by a list of metric IDs. Supports filtering by app IDs, measures, dimensions, categories, breakdown dimensions, analysis types, and triggered time range. When filtering by measures, use the `appIds` parameter to scope results to specific apps, as the same measure expression can exist across multiple apps.
  *
- * **Ranking behaviour:** When the endpoint is called *without any filter parameters* (bare `GET /adaptive-cards`), only the top-ranked result per metric (rank ≤ 1) or results without a rank field are returned. When *any* DB-reaching filter is supplied (`metricIds`, `dimensions`, `measures`, `appIds`, `breakdowns`, `analysisTypes`, `comparisonPeriods`, `timeRangeStart`, `timeRangeEnd`), ranking is not applied and all matching results are returned so that explicit filters are never silently constrained by rank.
+ * When called without any filter parameters, only the top-ranked result per metric is returned. When any filtering parameter is supplied (`metricIds`, `dimensions`, `measures`, `appIds`, `breakdowns`, `analysisTypes`, `comparisonPeriods`, `timeRangeStart`, `timeRangeEnd`), ranking is not applied and all matching results are returned.
  *
  * @param query an object with query parameters
- * @throws GetDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetAdaptiveCardsHttpError
  */
-declare function getDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAME(query: {
-  /** Filter by analysis types. Repeat parameter to include multiple types (results may match any of the provided types).
-   * When this parameter is present, the rank filter is disabled and all matching analysis types are returned regardless of rank. */
-  analysisTypes?: AnalysisTypeEnum[];
+declare function getAdaptiveCards(query: {
+  /** Filter by analysis type. Repeat the parameter to include multiple types. When this parameter is present, all matching results are returned regardless of ranking. */analysisTypes?: AnalysisTypeEnum[];
   /** Filter by app ID(s). Use this to scope results to specific apps. When combined with measures, returns only cards matching BOTH criteria (AND logic). Repeat the parameter to supply multiple app IDs (OR logic within appIds).
    *
    * **Recommendation:** Use consistent parameter order for better HTTP cache hit rates:
@@ -302,30 +300,28 @@ declare function getDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAME(query: {
   appIds?: string[];
   /** Filter by one or more breakdown selections in the form `dimension:value` (example `Region:EMEA`). Values are selected from the UI dropdown — not free text — and should match available dimension/value pairs.
    * Repeat the parameter to supply multiple breakdowns; results match any of the provided breakdown pairs. */
-  breakdowns?: string[]; /** List of category ids from the business glossary. Parsed by the API but not applied to the DB filter in the current implementation. */
-  categories?: string[];
-  /** Filter by comparison (aggregation) periods. Example values: D, W, M, Q, Y.
-   * When this parameter is present, the rank filter is disabled and all matching periods are returned regardless of rank. */
+  breakdowns?: string[]; /** Filter by category IDs from the business glossary. Category filtering is not currently applied to the result set. */
+  categories?: string[]; /** Filter by comparison period. Example values: `D`, `W`, `M`, `Q`, `Y`. When this parameter is present, all matching results are returned regardless of ranking. */
   comparisonPeriods?: AggregationFrequencyEnum[]; /** Filter by dimension(s). Matching is case-sensitive; leading and trailing whitespace will be trimmed. Repeat the parameter to supply multiple dimensions. */
   dimensions?: string[]; /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
   limit?: number; /** Filter by measure(s). Matching is case-sensitive; leading and trailing whitespace will be trimmed. Repeat the parameter to supply multiple measures. */
-  measures?: string[]; /** Comma-separated list of metric IDs to return Adaptive Cards for. When omitted the endpoint may return cards for multiple metrics visible to the tenant. */
+  measures?: string[]; /** Filter by metric ID. Repeat the parameter to supply multiple IDs. When omitted, returns cards for all metrics visible to the caller. */
   metricIds?: string[]; /** The numeric offset to the next page of resources. Provide either the next or prev parameter, but not both. */
   next?: number; /** The numeric offset to the previous page of resources. Provide either the next or prev parameter, but not both. */
   prev?: number; /** The field to sort by, with +/- prefix indicating sort order */
-  sort?: "creationTime" | "+creationTime" | "-creationTime"; /** Exclusive upper bound for analysis result end time. Use ISO 8601 format (example: 2023-10-31T00:00:00.000Z). The store applies this as endTime < timeRangeEnd. */
-  timeRangeEnd?: string; /** Inclusive lower bound for analysis result end time. Use ISO 8601 format (example: 2023-10-01T00:00:00.000Z). The store applies this as endTime >= timeRangeStart. */
-  timeRangeStart?: string; /** Optional filter to request only one category: measures, dimensions, or breakdowns. When omitted, all categories are returned. */
+  sort?: "creationTime" | "+creationTime" | "-creationTime"; /** Exclusive upper bound for filtering by analysis result end time. Use ISO 8601 format. */
+  timeRangeEnd?: string; /** Inclusive lower bound for filtering by analysis result end time. Use ISO 8601 format. */
+  timeRangeStart?: string; /** Filter by Adaptive Card category. When omitted, cards from all categories are returned. */
   type?: "measures" | "dimensions" | "breakdowns";
-}, options?: ApiCallOptions): Promise<GetDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-type GetDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+}, options?: ApiCallOptions): Promise<GetAdaptiveCardsHttpResponse>;
+type GetAdaptiveCardsHttpResponse = {
   data: AdaptiveCards;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAMEHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAMEHttpResponse>;
+  prev?: (options?: ApiCallOptions) => Promise<GetAdaptiveCardsHttpResponse>;
+  next?: (options?: ApiCallOptions) => Promise<GetAdaptiveCardsHttpResponse>;
 };
-type GetDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAMEHttpError = {
+type GetAdaptiveCardsHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 403 | 500;
@@ -336,14 +332,14 @@ type GetDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAMEHttpError = {
 declare function clearCache(): void;
 type AdaptiveCardsAPI = {
   /**
-   * Retrieves Adaptive Card(s) in JSON format. Support fetching of a single card by metric ID or multiple cards by a list of metric IDs. Support filtering by app IDs, measures, dimensions, categories, breakdown dimension, analysis types and triggered time range. When filtering by measures, use appIds parameter to scope results to specific apps, as the same measure expression can exist across multiple apps.
+   * Retrieves Adaptive Cards for in-app metrics. Supports fetching a single card by metric ID or multiple cards by a list of metric IDs. Supports filtering by app IDs, measures, dimensions, categories, breakdown dimensions, analysis types, and triggered time range. When filtering by measures, use the `appIds` parameter to scope results to specific apps, as the same measure expression can exist across multiple apps.
    *
-   * **Ranking behaviour:** When the endpoint is called *without any filter parameters* (bare `GET /adaptive-cards`), only the top-ranked result per metric (rank ≤ 1) or results without a rank field are returned. When *any* DB-reaching filter is supplied (`metricIds`, `dimensions`, `measures`, `appIds`, `breakdowns`, `analysisTypes`, `comparisonPeriods`, `timeRangeStart`, `timeRangeEnd`), ranking is not applied and all matching results are returned so that explicit filters are never silently constrained by rank.
+   * When called without any filter parameters, only the top-ranked result per metric is returned. When any filtering parameter is supplied (`metricIds`, `dimensions`, `measures`, `appIds`, `breakdowns`, `analysisTypes`, `comparisonPeriods`, `timeRangeStart`, `timeRangeEnd`), ranking is not applied and all matching results are returned.
    *
    * @param query an object with query parameters
-   * @throws GetDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetAdaptiveCardsHttpError
    */
-  getDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAME: typeof getDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAME;
+  getAdaptiveCards: typeof getAdaptiveCards;
   /**
    * Clears the cache for adaptive-cards api requests.
    */
@@ -354,4 +350,4 @@ type AdaptiveCardsAPI = {
  */
 declare const adaptiveCardsExport: AdaptiveCardsAPI;
 //#endregion
-export { adaptiveCardsExport as A, Href as C, TopBottomUnit as D, TopBottomType as E, clearCache as M, getDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAME as N, UpwardIsEnum as O, GetDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAMEHttpResponse as S, StatusEnum as T, Error as _, AggregationFrequencyEnum as a, FormattedInAppMetricRecord as b, BreakDownDimension as c, BreakdownFilterType as d, BreakdownSearchFilter as f, ConditionType as g, ComparisonType as h, AdaptiveCardsLinks as i, adaptive_cards_d_exports as j, ValueType as k, BreakdownConditionFilter as l, Categories as m, AdaptiveCards as n, AggregationType as o, BreakdownTopBottomFilter as p, AdaptiveCardsAPI as r, AnalysisTypeEnum as s, AdaptiveCard as t, BreakdownFilter as u, Errors as v, SearchType as w, GetDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAMEHttpError as x, FormattedInAppMetricDefinition as y };
+export { adaptiveCardsExport as A, Href as C, TopBottomUnit as D, TopBottomType as E, clearCache as M, getAdaptiveCards as N, UpwardIsEnum as O, GetAdaptiveCardsHttpResponse as S, StatusEnum as T, Error as _, AggregationFrequencyEnum as a, FormattedInAppMetricRecord as b, BreakDownDimension as c, BreakdownFilterType as d, BreakdownSearchFilter as f, ConditionType as g, ComparisonType as h, AdaptiveCardsLinks as i, adaptive_cards_d_exports as j, ValueType as k, BreakdownConditionFilter as l, Categories as m, AdaptiveCards as n, AggregationType as o, BreakdownTopBottomFilter as p, AdaptiveCardsAPI as r, AnalysisTypeEnum as s, AdaptiveCard as t, BreakdownFilter as u, Errors as v, SearchType as w, GetAdaptiveCardsHttpError as x, FormattedInAppMetricDefinition as y };

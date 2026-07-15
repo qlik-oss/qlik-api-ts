@@ -222,7 +222,7 @@ const createAnalyticsChangeStoresRuntimeAPI = apiDefToApiPublic("analytics/chang
 		"editable-columns": ["getChangeStoreEditableColumns:GQ:"]
 	}
 } } } });
-const createAnalyticsDiscoveryAgentAdaptiveCardsRuntimeAPI = apiDefToApiPublic("analytics/discovery-agent/adaptive-cards", { api: { analytics: { "discovery-agent": { "adaptive-cards": ["getDiscoveryAgentAdaptiveCards_FIX_THIS_QUIRKY_NAME:GQ:"] } } } });
+const createAnalyticsDiscoveryAgentAdaptiveCardsRuntimeAPI = apiDefToApiPublic("analytics/discovery-agent/adaptive-cards", { api: { analytics: { "discovery-agent": { "adaptive-cards": ["getAdaptiveCards:GQ:"] } } } });
 const createAnalyticsDiscoveryAgentRuntimeAPI = apiDefToApiPublic("analytics/discovery-agent", {}, {
 	"adaptive-cards": createAnalyticsDiscoveryAgentAdaptiveCardsRuntimeAPI,
 	adaptiveCards: createAnalyticsDiscoveryAgentAdaptiveCardsRuntimeAPI
@@ -703,6 +703,7 @@ const createDataGovernanceDataProductsRuntimeAPI = apiDefToApiPublic("data-gover
 		],
 		actions: {
 			activate: ["activateDataProduct:PBJ:"],
+			"compute-datasets-data-quality": ["computeDatasetsDataQualityDataProduct:P:"],
 			deactivate: ["deactivateDataProduct:P:"],
 			"export-documentation": ["exportDocumentationDataProduct:G:"],
 			move: ["moveDataProduct:PBJ:"]
@@ -717,11 +718,14 @@ const createDataGovernanceDataQualitiesRuntimeAPI = apiDefToApiPublic("data-gove
 	},
 	"global-results": ["getDataQualityGlobalResults:GQ:"]
 } } } });
+const createDataGovernanceTrustScoresRuntimeAPI = apiDefToApiPublic("data-governance/trust-scores", { api: { "data-governance": { "trust-scores": { results: { "data-sets": { actions: { filter: ["filterDatasetsTrustScore:PBJ:"] } } } } } } });
 const createDataGovernanceRuntimeAPI = apiDefToApiPublic("data-governance", {}, {
 	"data-products": createDataGovernanceDataProductsRuntimeAPI,
 	dataProducts: createDataGovernanceDataProductsRuntimeAPI,
 	"data-qualities": createDataGovernanceDataQualitiesRuntimeAPI,
-	dataQualities: createDataGovernanceDataQualitiesRuntimeAPI
+	dataQualities: createDataGovernanceDataQualitiesRuntimeAPI,
+	"trust-scores": createDataGovernanceTrustScoresRuntimeAPI,
+	trustScores: createDataGovernanceTrustScoresRuntimeAPI
 });
 const createDataQualitiesRuntimeAPI = apiDefToApiPublic("data-qualities", { api: { v1: { "data-qualities": {
 	computations: {
@@ -773,10 +777,12 @@ const createDcaasRuntimeAPI = apiDefToApiPublic("dcaas", { api: { v1: { dcaas: {
 const createDiProjectsRuntimeAPI = apiDefToApiPublic("di-projects", { api: { v1: { "di-projects": {
 	"": ["getDiProjects:GQ:", "createDiProject:PBJ:"],
 	actions: { "{actionId}": ["getDiProject:GQ:"] },
+	utils: { actions: { "validate-project-definitions": ["validateProjectDefinitions:PBM:"] } },
 	"{projectId}": {
 		actions: {
 			export: ["exportDiProject:PBJ:"],
 			import: ["importDiProject:PBM:"],
+			"import-async": ["importAsyncDiProject:PBM:"],
 			prepare: ["prepareDiProject:PBJ:"],
 			validate: ["validateDiProject:PBJ:"]
 		},

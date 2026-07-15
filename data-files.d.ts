@@ -309,7 +309,7 @@ type GetDataFilesHttpError = {
 declare function uploadDataFile(body: {
   /** IFormFile form multipart/form-data */File?: BodyInit | null;
   /** See PostDataFileRequest schema which defines request structure.
-   *  See  model. */
+   *  See PostDataFileRequest model. */
   Json?: {
     /** If this file should be bound to the lifecycle of a specific app, this is the ID of this app.  If this
      * request is creating a folder, the specification of an app ID is not allowed. */
@@ -525,7 +525,7 @@ type GetDataFileHttpError = {
 declare function reuploadDataFile(id: string, body: {
   /** IFormFile form multipart/form-data */File?: BodyInit | null;
   /** See PutDataFileRequest schema which defines request structure.
-   *  See  model. */
+   *  See PutDataFileRequest model. */
   Json?: {
     /** If this file should be bound to the lifecycle of a specific app, this is the ID of this app.  If this
      * request is creating a folder, the specification of an app ID is not allowed. */

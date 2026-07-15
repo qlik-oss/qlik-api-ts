@@ -348,6 +348,21 @@ type UpdateDiExportProjectVariablesReq = {
   variables?: Record<string, string>;
 };
 type UpdateDiExportProjectVariablesRsp = unknown;
+/**
+ * A single validation finding, including its severity, a human-readable description of the issue, and the location in the project definition where it was found.
+ */
+type ValidateProjectDefinitionsReport = {
+  /** Severity of the validation finding. `WARNING` indicates a potential issue that does not block import; `ERROR` indicates a critical issue that must be resolved before importing. */level?: ValidateProjectDefinitionsReportLevel; /** Path to the field or file in the project definition where the issue was found. */
+  path?: string; /** Human-readable description of the validation finding. */
+  reason?: string;
+};
+/**
+ * Severity of the validation finding. `WARNING` indicates a potential issue that does not block import; `ERROR` indicates a critical issue that must be resolved before importing.
+ */
+type ValidateProjectDefinitionsReportLevel = "WARNING" | "ERROR";
+type ValidateProjectDefinitionsRsp = {
+  /** List of validation findings. An empty array indicates no issues were found. */reports?: ValidateProjectDefinitionsReport[];
+};
 type ValidateProjectReq = {
   /** Array of tasks to prepare. Leave empty to trigger project-level orchestration using built-in logic (same as in the user interface). */selectedTasks?: TaskSelectionList;
 };
@@ -412,6 +427,25 @@ type GetDiProjectHttpError = {
   status: 404;
 };
 /**
+ * Validates the project definition files in a `.zip` and returns a structured report of warnings and errors. The validation runs synchronously and completes before the response is returned. Use this operation before importing with `POST /di-projects/{projectId}/actions/import-async` to confirm that YAML-based pipeline definitions are correct.
+ *
+ * @param body an object with the body content
+ * @throws ValidateProjectDefinitionsHttpError
+ */
+declare function validateProjectDefinitions(body: {
+  zip?: BodyInit;
+}, options?: ApiCallOptions): Promise<ValidateProjectDefinitionsHttpResponse>;
+type ValidateProjectDefinitionsHttpResponse = {
+  data: ValidateProjectDefinitionsRsp;
+  headers: Headers;
+  status: 200;
+};
+type ValidateProjectDefinitionsHttpError = {
+  data: Errors;
+  headers: Headers;
+  status: 400 | 404 | 500;
+};
+/**
  * Exports the specified data integration project.
  *
  * @param projectId Identifier of the data project.
@@ -447,6 +481,26 @@ type ImportDiProjectHttpResponse = {
   status: 200;
 };
 type ImportDiProjectHttpError = {
+  data: Errors;
+  headers: Headers;
+  status: 400 | 404 | 409 | 500;
+};
+/**
+ * Imports a data integration project from a `.zip` file and returns an action identifier for tracking the background import operation. Accepts both JSON-based (legacy) and YAML-based project formats, making it the recommended endpoint for deploying YAML-defined pipeline definitions programmatically. Poll the import status using `GET /di-projects/actions/{actionId}`.
+ *
+ * @param projectId Identifier of the data project.
+ * @param body an object with the body content
+ * @throws ImportAsyncDiProjectHttpError
+ */
+declare function importAsyncDiProject(projectId: string, body: {
+  zip?: BodyInit;
+}, options?: ApiCallOptions): Promise<ImportAsyncDiProjectHttpResponse>;
+type ImportAsyncDiProjectHttpResponse = {
+  data: AsyncActionRsp;
+  headers: Headers;
+  status: 202;
+};
+type ImportAsyncDiProjectHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404 | 409 | 500;
@@ -814,6 +868,13 @@ type DiProjectsAPI = {
    */
   getDiProject: typeof getDiProject;
   /**
+   * Validates the project definition files in a `.zip` and returns a structured report of warnings and errors. The validation runs synchronously and completes before the response is returned. Use this operation before importing with `POST /di-projects/{projectId}/actions/import-async` to confirm that YAML-based pipeline definitions are correct.
+   *
+   * @param body an object with the body content
+   * @throws ValidateProjectDefinitionsHttpError
+   */
+  validateProjectDefinitions: typeof validateProjectDefinitions;
+  /**
    * Exports the specified data integration project.
    *
    * @param projectId Identifier of the data project.
@@ -831,6 +892,14 @@ type DiProjectsAPI = {
    * @throws ImportDiProjectHttpError
    */
   importDiProject: typeof importDiProject;
+  /**
+   * Imports a data integration project from a `.zip` file and returns an action identifier for tracking the background import operation. Accepts both JSON-based (legacy) and YAML-based project formats, making it the recommended endpoint for deploying YAML-defined pipeline definitions programmatically. Poll the import status using `GET /di-projects/actions/{actionId}`.
+   *
+   * @param projectId Identifier of the data project.
+   * @param body an object with the body content
+   * @throws ImportAsyncDiProjectHttpError
+   */
+  importAsyncDiProject: typeof importAsyncDiProject;
   /**
    * Prepares the data integration project and its tasks for execution.
    *
@@ -992,4 +1061,4 @@ type DiProjectsAPI = {
  */
 declare const diProjectsExport: DiProjectsAPI;
 //#endregion
-export { AsyncActionDetails, AsyncActionError, AsyncActionRsp, AsyncActionTaskProgress, AsyncActionType, AsyncCallStatus, CreateDiProjectHttpError, CreateDiProjectHttpResponse, CreateDiProjectReq, DataTaskDatasetState, DataTaskInstanceState, DataTaskItemRsp, DataTaskRuntimeState, DataTaskType, DiExportMode, DiProjectItemRsp, DiProjectOperationSelectedTask, DiProjectsAPI, DiSearchTaskRunHistoryReq, DiSearchTaskRunHistoryRsp, Error, ErrorSource, Errors, ExportDiProjectHttpError, ExportDiProjectHttpResponse, ExportDiProjectReq, FileStatistics, GetDiExportProjectVariablesRsp, GetDiProjectDiTaskHttpError, GetDiProjectDiTaskHttpResponse, GetDiProjectDiTaskRuntimeRunStateDatasetsHttpError, GetDiProjectDiTaskRuntimeRunStateDatasetsHttpResponse, GetDiProjectDiTaskRuntimeRunStateHttpError, GetDiProjectDiTaskRuntimeRunStateHttpResponse, GetDiProjectDiTaskRuntimeStateDatasetsHttpError, GetDiProjectDiTaskRuntimeStateDatasetsHttpResponse, GetDiProjectDiTaskRuntimeStateHttpError, GetDiProjectDiTaskRuntimeStateHttpResponse, GetDiProjectDiTasksHttpError, GetDiProjectDiTasksHttpResponse, GetDiProjectExportVariablesHttpError, GetDiProjectExportVariablesHttpResponse, GetDiProjectHttpError, GetDiProjectHttpResponse, GetDiProjectsHttpError, GetDiProjectsHttpResponse, ImportDiProjectHttpError, ImportDiProjectHttpResponse, ImportDiProjectRsp, ListDataTaskDatasetsRsp, ListDataTasksRsp, ListDiProjectsRsp, OperationStatistics, PlatformType, PrepareDiProjectDiTaskHttpError, PrepareDiProjectDiTaskHttpResponse, PrepareDiProjectHttpError, PrepareDiProjectHttpResponse, PrepareProjectReq, PrepareTaskReq, RecreateDatasetsDiProjectDiTaskHttpError, RecreateDatasetsDiProjectDiTaskHttpResponse, RecreateTaskDatasetsReq, ReloadDiTaskReq, ReloadRequestResponse, RequestReloadDiProjectDiTaskHttpError, RequestReloadDiProjectDiTaskHttpResponse, SearchDiProjectDiTaskRuntimeRunsHttpError, SearchDiProjectDiTaskRuntimeRunsHttpResponse, SetDiProjectExportVariablesHttpError, SetDiProjectExportVariablesHttpResponse, StartDiProjectDiTaskRuntimeHttpError, StartDiProjectDiTaskRuntimeHttpResponse, StartDiProjectDiTaskRuntimeWithBodyHttpError, StartDiProjectDiTaskRuntimeWithBodyHttpResponse, StartTaskReq, StopDiProjectDiTaskRuntimeHttpError, StopDiProjectDiTaskRuntimeHttpResponse, TaskRunItemRsp, TaskRunSearchFilter, TaskRunSearchFilterField, TaskRunSearchFilterOperator, TaskRunStatus, TaskSelectionList, UpdateDiExportProjectVariablesReq, UpdateDiExportProjectVariablesRsp, ValidateDiProjectDiTaskHttpError, ValidateDiProjectDiTaskHttpResponse, ValidateDiProjectHttpError, ValidateDiProjectHttpResponse, ValidateProjectReq, ValidateTaskReq, clearCache, createDiProject, diProjectsExport as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeRunState, getDiProjectDiTaskRuntimeRunStateDatasets, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importDiProject, prepareDiProject, prepareDiProjectDiTask, recreateDatasetsDiProjectDiTask, requestReloadDiProjectDiTask, searchDiProjectDiTaskRuntimeRuns, setDiProjectExportVariables, startDiProjectDiTaskRuntime, startDiProjectDiTaskRuntimeWithBody, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask };
+export { AsyncActionDetails, AsyncActionError, AsyncActionRsp, AsyncActionTaskProgress, AsyncActionType, AsyncCallStatus, CreateDiProjectHttpError, CreateDiProjectHttpResponse, CreateDiProjectReq, DataTaskDatasetState, DataTaskInstanceState, DataTaskItemRsp, DataTaskRuntimeState, DataTaskType, DiExportMode, DiProjectItemRsp, DiProjectOperationSelectedTask, DiProjectsAPI, DiSearchTaskRunHistoryReq, DiSearchTaskRunHistoryRsp, Error, ErrorSource, Errors, ExportDiProjectHttpError, ExportDiProjectHttpResponse, ExportDiProjectReq, FileStatistics, GetDiExportProjectVariablesRsp, GetDiProjectDiTaskHttpError, GetDiProjectDiTaskHttpResponse, GetDiProjectDiTaskRuntimeRunStateDatasetsHttpError, GetDiProjectDiTaskRuntimeRunStateDatasetsHttpResponse, GetDiProjectDiTaskRuntimeRunStateHttpError, GetDiProjectDiTaskRuntimeRunStateHttpResponse, GetDiProjectDiTaskRuntimeStateDatasetsHttpError, GetDiProjectDiTaskRuntimeStateDatasetsHttpResponse, GetDiProjectDiTaskRuntimeStateHttpError, GetDiProjectDiTaskRuntimeStateHttpResponse, GetDiProjectDiTasksHttpError, GetDiProjectDiTasksHttpResponse, GetDiProjectExportVariablesHttpError, GetDiProjectExportVariablesHttpResponse, GetDiProjectHttpError, GetDiProjectHttpResponse, GetDiProjectsHttpError, GetDiProjectsHttpResponse, ImportAsyncDiProjectHttpError, ImportAsyncDiProjectHttpResponse, ImportDiProjectHttpError, ImportDiProjectHttpResponse, ImportDiProjectRsp, ListDataTaskDatasetsRsp, ListDataTasksRsp, ListDiProjectsRsp, OperationStatistics, PlatformType, PrepareDiProjectDiTaskHttpError, PrepareDiProjectDiTaskHttpResponse, PrepareDiProjectHttpError, PrepareDiProjectHttpResponse, PrepareProjectReq, PrepareTaskReq, RecreateDatasetsDiProjectDiTaskHttpError, RecreateDatasetsDiProjectDiTaskHttpResponse, RecreateTaskDatasetsReq, ReloadDiTaskReq, ReloadRequestResponse, RequestReloadDiProjectDiTaskHttpError, RequestReloadDiProjectDiTaskHttpResponse, SearchDiProjectDiTaskRuntimeRunsHttpError, SearchDiProjectDiTaskRuntimeRunsHttpResponse, SetDiProjectExportVariablesHttpError, SetDiProjectExportVariablesHttpResponse, StartDiProjectDiTaskRuntimeHttpError, StartDiProjectDiTaskRuntimeHttpResponse, StartDiProjectDiTaskRuntimeWithBodyHttpError, StartDiProjectDiTaskRuntimeWithBodyHttpResponse, StartTaskReq, StopDiProjectDiTaskRuntimeHttpError, StopDiProjectDiTaskRuntimeHttpResponse, TaskRunItemRsp, TaskRunSearchFilter, TaskRunSearchFilterField, TaskRunSearchFilterOperator, TaskRunStatus, TaskSelectionList, UpdateDiExportProjectVariablesReq, UpdateDiExportProjectVariablesRsp, ValidateDiProjectDiTaskHttpError, ValidateDiProjectDiTaskHttpResponse, ValidateDiProjectHttpError, ValidateDiProjectHttpResponse, ValidateProjectDefinitionsHttpError, ValidateProjectDefinitionsHttpResponse, ValidateProjectDefinitionsReport, ValidateProjectDefinitionsReportLevel, ValidateProjectDefinitionsRsp, ValidateProjectReq, ValidateTaskReq, clearCache, createDiProject, diProjectsExport as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeRunState, getDiProjectDiTaskRuntimeRunStateDatasets, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importAsyncDiProject, importDiProject, prepareDiProject, prepareDiProjectDiTask, recreateDatasetsDiProjectDiTask, requestReloadDiProjectDiTask, searchDiProjectDiTaskRuntimeRuns, setDiProjectExportVariables, startDiProjectDiTaskRuntime, startDiProjectDiTaskRuntimeWithBody, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask, validateProjectDefinitions };
