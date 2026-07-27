@@ -1,23 +1,33 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
+import "./chunks/invoke-fetch-DcXyLc5n.js";
 //#region src/public/rest/apps.d.ts
 type Analysis = "breakdown" | "changePoint" | "comparison" | "contribution" | "correlation" | "fact" | "mutualInfo" | "rank" | "spike" | "trend" | "values";
 type AnalysisComposition = {
   description?: {
     long?: string;
     short?: string;
-  }; /** Upper and lower bounds for items of specific classification types */
-  dims?: CompositionMinMax; /** Upper and lower bounds for items of specific classification types */
-  geos?: CompositionMinMax; /** Upper and lower bounds for items of specific classification types */
-  items?: CompositionMinMax; /** Upper and lower bounds for items of specific classification types */
-  msrs?: CompositionMinMax; /** Upper and lower bounds for items of specific classification types */
+  };
+  /** Upper and lower bounds for items of specific classification types */
+  dims?: CompositionMinMax;
+  /** Upper and lower bounds for items of specific classification types */
+  geos?: CompositionMinMax;
+  /** Upper and lower bounds for items of specific classification types */
+  items?: CompositionMinMax;
+  /** Upper and lower bounds for items of specific classification types */
+  msrs?: CompositionMinMax;
+  /** Upper and lower bounds for items of specific classification types */
   temporals?: CompositionMinMax;
 };
 type AnalysisDescriptor = {
   compositions?: AnalysisComposition[];
-  id?: string; /** Used for period-specific analyses to indicate the defined or available calendar period must be of type autoCalendar */
-  requiresAutoCalendarPeriod?: boolean; /** Used for period-specific analyses to indicate the temporal dimension must be associated with one or more analysis periods */
-  requiresAvailableAnalysisPeriod?: boolean; /** Used for period-specific analyses to indicate the measure must be associated with one or more analysis periods */
-  requiresDefinedAnalysisPeriod?: boolean; /** If analysis can work with master items (default is true) */
+  id?: string;
+  /** Used for period-specific analyses to indicate the defined or available calendar period must be of type autoCalendar */
+  requiresAutoCalendarPeriod?: boolean;
+  /** Used for period-specific analyses to indicate the temporal dimension must be associated with one or more analysis periods */
+  requiresAvailableAnalysisPeriod?: boolean;
+  /** Used for period-specific analyses to indicate the measure must be associated with one or more analysis periods */
+  requiresDefinedAnalysisPeriod?: boolean;
+  /** If analysis can work with master items (default is true) */
   supportsMasterItems?: boolean;
 };
 type AnalysisDescriptorResponse = {
@@ -31,15 +41,21 @@ type AnalysisDetails = {
 };
 type AnalysisGroup = "anomaly" | "brekadown" | "comparison" | "correl" | "fact" | "list" | "mutualInfo" | "rank";
 type AnalysisModelItemField = {
-  /** classification defines the default role that attribute can play in an analysis */classifications?: Classifications; /** whether the field is hidden in business logic */
-  isHidden?: boolean; /** populated only for fields */
+  /** classification defines the default role that attribute can play in an analysis */
+  classifications?: Classifications;
+  /** whether the field is hidden in business logic */
+  isHidden?: boolean;
+  /** populated only for fields */
   name?: string;
   simplifiedClassifications?: SimplifiedClassifications;
 };
 type AnalysisModelItemMasterItem = {
-  caption?: string; /** classification defines the default role that attribute can play in an analysis */
-  classifications?: Classifications; /** whether the master item is hidden in business logic */
-  isHidden?: boolean; /** only available for master items */
+  caption?: string;
+  /** classification defines the default role that attribute can play in an analysis */
+  classifications?: Classifications;
+  /** whether the master item is hidden in business logic */
+  isHidden?: boolean;
+  /** only available for master items */
   libId?: string;
   simplifiedClassifications?: SimplifiedClassifications;
 };
@@ -48,8 +64,10 @@ type AnalysisModelResponse = {
   links?: Links;
 };
 type AnalysisModelResponseDetail = {
-  fields?: AnalysisModelItemField[]; /** set only if previous property is true, to indicate if the business logic passes validation */
-  isDefinedLogicalModelValid?: boolean; /** if the analysis model is constructed based on a user-defined business-logic (as opposed to a default one) */
+  fields?: AnalysisModelItemField[];
+  /** set only if previous property is true, to indicate if the business logic passes validation */
+  isDefinedLogicalModelValid?: boolean;
+  /** if the analysis model is constructed based on a user-defined business-logic (as opposed to a default one) */
   isLogicalModelEnabled?: boolean;
   masterItems?: AnalysisModelItemMasterItem[];
 };
@@ -104,26 +122,39 @@ type AnalysisRecommendationResponseDetail = {
   recAnalyses: RecommendedAnalysis[];
 };
 type AppAttributes = {
-  /** The description of the application */description?: string; /** Set custom locale instead of the system default */
-  locale?: string; /** The name (title) of the application */
-  name?: string; /** The space ID of the application */
+  /** The description of the application */
+  description?: string;
+  /** Set custom locale instead of the system default */
+  locale?: string;
+  /** The name (title) of the application */
+  name?: string;
+  /** The space ID of the application */
   spaceId?: string;
   usage?: UsageEnum;
 };
 type AppContentList = {
-  /** Content list items. */data?: AppContentListItem[]; /** Content library name. */
-  library?: string; /** Content library relative listing path. Empty in case of root listed or representing actual subpath listed. */
+  /** Content list items. */
+  data?: AppContentListItem[];
+  /** Content library name. */
+  library?: string;
+  /** Content library relative listing path. Empty in case of root listed or representing actual subpath listed. */
   subpath?: string;
 };
 type AppContentListItem = {
-  /** Unique content identifier. */id?: string; /** Unique content link. */
-  link?: string; /** Content name. */
-  name?: string; /** Content type. */
+  /** Unique content identifier. */
+  id?: string;
+  /** Unique content link. */
+  link?: string;
+  /** Content name. */
+  name?: string;
+  /** Content type. */
   type?: string;
 };
 type AppObjectGenericType = "genericObject" | "genericBookmark" | "genericMeasure" | "genericDimension" | "genericVariable";
 type AppUpdateAttributes = {
-  /** The description of the application. */description?: string; /** The name (title) of the application. */
+  /** The description of the application. */
+  description?: string;
+  /** The name (title) of the application. */
   name?: string;
 };
 /**
@@ -145,12 +176,17 @@ type CreateApp = {
   attributes?: AppAttributes;
 };
 type DataModelMetadata = {
-  /** List of field descriptions. */fields?: FieldMetadata[]; /** If set to true, the app has section access configured. */
+  /** List of field descriptions. */
+  fields?: FieldMetadata[];
+  /** If set to true, the app has section access configured. */
   has_section_access?: boolean;
   is_direct_query_mode?: boolean;
-  reload_meta?: LastReloadMetadata; /** Static memory usage for the app. */
-  static_byte_size?: number; /** List of table descriptions. */
-  tables?: TableMetadata[]; /** Profiling data of the tables in the app. */
+  reload_meta?: LastReloadMetadata;
+  /** Static memory usage for the app. */
+  static_byte_size?: number;
+  /** List of table descriptions. */
+  tables?: TableMetadata[];
+  /** Profiling data of the tables in the app. */
   tables_profiling_data?: TableProfilingData[];
   usage?: UsageEnum;
 };
@@ -165,13 +201,20 @@ type EngineSize = {
  * An error object.
  */
 type Error = {
-  /** The error code. */code: string; /** A human-readable explanation specific to this occurrence of the problem. */
-  detail?: string; /** Additional properties relating to the error. */
-  meta?: unknown; /** References to the source of the error. */
+  /** The error code. */
+  code: string;
+  /** A human-readable explanation specific to this occurrence of the problem. */
+  detail?: string;
+  /** Additional properties relating to the error. */
+  meta?: unknown;
+  /** References to the source of the error. */
   source?: {
-    /** The URI query parameter that caused the error. */parameter?: string; /** A JSON Pointer to the property that caused the error. */
+    /** The URI query parameter that caused the error. */
+    parameter?: string;
+    /** A JSON Pointer to the property that caused the error. */
     pointer?: string;
-  }; /** Summary of the problem. */
+  };
+  /** Summary of the problem. */
   title: string;
 };
 type Errors = {
@@ -246,27 +289,48 @@ type FieldAttributes = {
   nDec?: number;
 };
 type FieldInTableProfilingData = {
-  /** Average of all numerical values. NaN otherwise. */Average?: number; /** Average string length of textual values. 0 otherwise. */
-  AvgStringLen?: number; /** Data evenness aka Shannon's entropy normalized to [0,1] */
-  DataEvenness?: number; /** Number of distinct numeric values */
-  DistinctNumericValues?: number; /** Number of distinct text values */
-  DistinctTextValues?: number; /** Number of distinct values */
-  DistinctValues?: number; /** Number of empty strings */
-  EmptyStrings?: number; /** List of tags related to the field. */
-  FieldTags?: string[]; /** For textual values the first sorted string. */
-  FirstSorted?: string; /** The .01, .05, .1, .25, .5, .75, .9, .95, .99 fractiles. Array of NaN otherwise. */
+  /** Average of all numerical values. NaN otherwise. */
+  Average?: number;
+  /** Average string length of textual values. 0 otherwise. */
+  AvgStringLen?: number;
+  /** Data evenness aka Shannon's entropy normalized to [0,1] */
+  DataEvenness?: number;
+  /** Number of distinct numeric values */
+  DistinctNumericValues?: number;
+  /** Number of distinct text values */
+  DistinctTextValues?: number;
+  /** Number of distinct values */
+  DistinctValues?: number;
+  /** Number of empty strings */
+  EmptyStrings?: number;
+  /** List of tags related to the field. */
+  FieldTags?: string[];
+  /** For textual values the first sorted string. */
+  FirstSorted?: string;
+  /** The .01, .05, .1, .25, .5, .75, .9, .95, .99 fractiles. Array of NaN otherwise. */
   Fractiles?: number[];
-  FrequencyDistribution?: FrequencyDistributionData; /** Kurtosis of the numerical values. NaN otherwise. */
-  Kurtosis?: number; /** For textual values the last sorted string. */
-  LastSorted?: string; /** Maximum value of numerical values. NaN otherwise. */
-  Max?: number; /** Maximum string length of textual values. 0 otherwise. */
-  MaxStringLen?: number; /** Median of all numerical values. NaN otherwise. */
-  Median?: number; /** Minimum value of numerical values. NaN otherwise. */
-  Min?: number; /** Minimum string length of textual values. 0 otherwise. */
-  MinStringLen?: number; /** Three most frequent values and their frequencies */
-  MostFrequent?: SymbolFrequency[]; /** Name of the field. */
-  Name?: string; /** Number of negative values */
-  NegValues?: number; /** Number of null values */
+  FrequencyDistribution?: FrequencyDistributionData;
+  /** Kurtosis of the numerical values. NaN otherwise. */
+  Kurtosis?: number;
+  /** For textual values the last sorted string. */
+  LastSorted?: string;
+  /** Maximum value of numerical values. NaN otherwise. */
+  Max?: number;
+  /** Maximum string length of textual values. 0 otherwise. */
+  MaxStringLen?: number;
+  /** Median of all numerical values. NaN otherwise. */
+  Median?: number;
+  /** Minimum value of numerical values. NaN otherwise. */
+  Min?: number;
+  /** Minimum string length of textual values. 0 otherwise. */
+  MinStringLen?: number;
+  /** Three most frequent values and their frequencies */
+  MostFrequent?: SymbolFrequency[];
+  /** Name of the field. */
+  Name?: string;
+  /** Number of negative values */
+  NegValues?: number;
+  /** Number of null values */
   NullValues?: number;
   /** Sets the formatting of a field.
    * The properties of _qFieldAttributes_ and the formatting mechanism are described below.
@@ -305,28 +369,41 @@ type FieldInTableProfilingData = {
    *
    * ### Type is ASCII
    * No formatting, _qFmt_ is ignored. */
-  NumberFormat?: FieldAttributes; /** Number of numeric values */
-  NumericValues?: number; /** Number of positive values */
-  PosValues?: number; /** Skewness of the numerical values. NaN otherwise. */
-  Skewness?: number; /** Standard deviation of numerical values. NaN otherwise. */
-  Std?: number; /** Sum of all numerical values. NaN otherwise. */
-  Sum?: number; /** Squared sum of all numerical values. NaN otherwise. */
-  Sum2?: number; /** Sum of all characters in strings in the field */
-  SumStringLen?: number; /** Number of textual values */
-  TextValues?: number; /** Number of zero values for numerical values */
+  NumberFormat?: FieldAttributes;
+  /** Number of numeric values */
+  NumericValues?: number;
+  /** Number of positive values */
+  PosValues?: number;
+  /** Skewness of the numerical values. NaN otherwise. */
+  Skewness?: number;
+  /** Standard deviation of numerical values. NaN otherwise. */
+  Std?: number;
+  /** Sum of all numerical values. NaN otherwise. */
+  Sum?: number;
+  /** Squared sum of all numerical values. NaN otherwise. */
+  Sum2?: number;
+  /** Sum of all characters in strings in the field */
+  SumStringLen?: number;
+  /** Number of textual values */
+  TextValues?: number;
+  /** Number of zero values for numerical values */
   ZeroValues?: number;
 };
 type FieldMetadata = {
   /** If set to true, the field has one and only one selection (not 0 and not more than 1).
    * If this property is set to true, the field cannot be cleared anymore and no more selections can be performed in that field.
    * The default value is false. */
-  always_one_selected?: boolean; /** Static RAM memory used in bytes. */
-  byte_size?: number; /** Number of distinct field values. */
-  cardinal?: number; /** Field comment. */
+  always_one_selected?: boolean;
+  /** Static RAM memory used in bytes. */
+  byte_size?: number;
+  /** Number of distinct field values. */
+  cardinal?: number;
+  /** Field comment. */
   comment?: string;
   /** If set to true, only distinct field values are shown.
    * The default value is false. */
-  distinct_only?: boolean; /** Hash of the data in the field. If the data in a reload is the same, the hash will be consistent. */
+  distinct_only?: boolean;
+  /** Hash of the data in the field. If the data in a reload is the same, the hash will be consistent. */
   hash?: string;
   /** If set to true, the field is hidden.
    * The default value is false. */
@@ -342,12 +419,15 @@ type FieldMetadata = {
   is_semantic?: boolean;
   /** If set to true, the field is a system field.
    * The default value is false. */
-  is_system?: boolean; /** Name of the field. */
-  name?: string; /** List of table names. */
+  is_system?: boolean;
+  /** Name of the field. */
+  name?: string;
+  /** List of table names. */
   src_tables?: string[];
   /** Gives information on a field. For example, it can return the type of the field.
    * Examples: key, text, ASCII. */
-  tags?: string[]; /** Total number of field values. */
+  tags?: string[];
+  /** Total number of field values. */
   total_count?: number;
 };
 type FieldOverride = {
@@ -356,13 +436,17 @@ type FieldOverride = {
 };
 type FileData = BodyInit;
 type Filter = {
-  readonly createdAt?: string; /** The filter description. */
+  readonly createdAt?: string;
+  /** The filter description. */
   description?: string;
   filterType?: FilterType;
   filterV1_0?: FilterV10;
-  filterVersion?: "filter-1.0" | "filter-2.0"; /** The filter ID (bookmarkId). */
-  readonly id?: string; /** The filter name. */
-  name?: string; /** The user that owns the filter, if missing the same as the request user. */
+  filterVersion?: "filter-1.0" | "filter-2.0";
+  /** The filter ID (bookmarkId). */
+  readonly id?: string;
+  /** The filter name. */
+  name?: string;
+  /** The user that owns the filter, if missing the same as the request user. */
   ownerId?: string;
   readonly updatedAt?: string;
 };
@@ -397,7 +481,8 @@ type FilterError = {
    * - "REP-429034" Filters quota exceeded.
    * - "REP-400044" Missing or renamed field.
    * - "REP-403049" Report filter access not allowed. */
-  code: string; /** A summary in english explaining what went wrong. */
+  code: string;
+  /** A summary in english explaining what went wrong. */
   title: string;
 };
 /**
@@ -407,10 +492,12 @@ type FilterErrors = {
   errors: FilterError[];
 };
 type FilterField = {
-  /** Gets the resource description. */description?: string;
+  /** Gets the resource description. */
+  description?: string;
   name: string;
   overrideValues?: boolean;
-  selectExcluded?: boolean; /** The filter values. */
+  selectExcluded?: boolean;
+  /** The filter values. */
   values?: FilterFieldValue[];
 };
 type FilterFieldValue = {
@@ -419,24 +506,32 @@ type FilterFieldValue = {
   valueType?: "string" | "number" | "evaluate" | "search";
 };
 type FilterItemPatch = {
-  /** The filter description. */description?: string;
+  /** The filter description. */
+  description?: string;
   filterV1_0?: FilterV10;
-  filterVersion?: "filter-1.0" | "filter-2.0"; /** The filter name. */
-  name?: string; /** The user that owns the filter, if missing the same as the request user. */
+  filterVersion?: "filter-1.0" | "filter-2.0";
+  /** The filter name. */
+  name?: string;
+  /** The user that owns the filter, if missing the same as the request user. */
   ownerId?: string;
 };
 type FilterList = {
-  /** a list of filters containing all the filters properties (like name,description...) except the filter definition (like FilterV1_0) */data: FilterListItem[];
+  /** a list of filters containing all the filters properties (like name,description...) except the filter definition (like FilterV1_0) */
+  data: FilterListItem[];
   links: LinksResponse;
 };
 type FilterListItem = {
-  readonly createdAt?: string; /** The filter description. */
+  readonly createdAt?: string;
+  /** The filter description. */
   readonly description?: string;
   filterType?: FilterType;
   filterV1_0?: FilterV10;
-  readonly filterVersion?: "filter-1.0" | "filter-2.0"; /** The filter ID (bookmarkId) */
-  readonly id?: string; /** The filter name. */
-  readonly name?: string; /** The user that owns the filter, if missing the same as the request user. */
+  readonly filterVersion?: "filter-1.0" | "filter-2.0";
+  /** The filter ID (bookmarkId) */
+  readonly id?: string;
+  /** The filter name. */
+  readonly name?: string;
+  /** The user that owns the filter, if missing the same as the request user. */
   readonly ownerId?: string;
   readonly updatedAt?: string;
 };
@@ -483,12 +578,16 @@ type FilterListItem = {
  * }
  */
 type FilterRequest = {
-  /** The App ID. */appId?: string; /** The filter description. */
+  /** The App ID. */
+  appId?: string;
+  /** The filter description. */
   description?: string;
   filterType: FilterType;
   filterV1_0?: FilterV10;
-  filterVersion: "filter-1.0" | "filter-2.0"; /** The filter name. */
-  name: string; /** The user that owns the filter, if missing the same as the request user. */
+  filterVersion: "filter-1.0" | "filter-2.0";
+  /** The filter name. */
+  name: string;
+  /** The user that owns the filter, if missing the same as the request user. */
   ownerId?: string;
 };
 type FilterType = "REP" | "SUB";
@@ -529,7 +628,9 @@ type FilterType = "REP" | "SUB";
  * }
  */
 type FilterV10 = {
-  /** Map of fields to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and maximum number of overall field values allowed is 150000. */fieldsByState?: Record<string, FilterField[]>; /** The filter variables. */
+  /** Map of fields to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and maximum number of overall field values allowed is 150000. */
+  fieldsByState?: Record<string, FilterField[]>;
+  /** The filter variables. */
   variables?: FilterVariable[];
 };
 type FilterVariable = {
@@ -538,16 +639,22 @@ type FilterVariable = {
   value?: string;
 };
 type FiltersCount = {
-  /** The total number of filters. */readonly total?: number;
+  /** The total number of filters. */
+  readonly total?: number;
 };
 type Float64 = number;
 type FrequencyDistributionData = {
-  /** Bins edges. */BinsEdges?: number[]; /** Bins frequencies. */
-  Frequencies?: number[]; /** Number of bins. */
+  /** Bins edges. */
+  BinsEdges?: number[];
+  /** Bins frequencies. */
+  Frequencies?: number[];
+  /** Number of bins. */
   NumberOfBins?: number;
 };
 type HardwareMeta = {
-  /** Number of logical cores available. */logical_cores?: number; /** RAM available. */
+  /** Number of logical cores available. */
+  logical_cores?: number;
+  /** RAM available. */
   total_memory?: number;
 };
 type Href = {
@@ -558,10 +665,14 @@ type Href = {
  */
 type JsonObject = unknown;
 type LastReloadMetadata = {
-  /** Number of CPU milliseconds it took to reload the app. */cpu_time_spent_ms?: number; /** Maximum number of bytes used during full reload of the app. */
+  /** Number of CPU milliseconds it took to reload the app. */
+  cpu_time_spent_ms?: number;
+  /** Maximum number of bytes used during full reload of the app. */
   fullReloadPeakMemoryBytes?: number;
-  hardware?: HardwareMeta; /** Maximum number of bytes used during partial reload of the app. */
-  partialReloadPeakMemoryBytes?: number; /** Maximum number of bytes used during reload of the app. */
+  hardware?: HardwareMeta;
+  /** Maximum number of bytes used during partial reload of the app. */
+  partialReloadPeakMemoryBytes?: number;
+  /** Maximum number of bytes used during reload of the app. */
   peak_memory_bytes?: number;
 };
 type LineageInfoRest = {
@@ -574,7 +685,8 @@ type LineageInfoRest = {
    * * [webfile]: the data comes from a web-based file.
    * * STORE: path to QVD or TXT file where data is stored.
    * * EXTENSION: the data comes from a Server Side Extension (SSE). */
-  discriminator?: string; /** The LOAD and SELECT script statements from the data load script. */
+  discriminator?: string;
+  /** The LOAD and SELECT script statements from the data load script. */
   statement?: string;
 };
 type LinkResponse = {
@@ -605,7 +717,8 @@ type LinksResponse = {
   self: LinkResponse;
 };
 type Log = {
-  /** Provides a link to download the log file. */log?: string;
+  /** Provides a link to download the log file. */
+  log?: string;
 };
 type NavigationLink = {
   href?: string;
@@ -618,7 +731,9 @@ type NavigationLinks = {
  * Application attributes and user privileges.
  */
 type NxApp = {
-  /** App attributes. This structure can also contain extra user-defined attributes. */attributes?: NxAttributes; /** Object create privileges. Hints to the client what type of objects the user is allowed to create. */
+  /** App attributes. This structure can also contain extra user-defined attributes. */
+  attributes?: NxAttributes;
+  /** Object create privileges. Hints to the client what type of objects the user is allowed to create. */
   create?: NxAppCreatePrivileges[];
   /** Application privileges.
    * Hints to the client what actions the user is allowed to perform.
@@ -638,14 +753,17 @@ type NxApp = {
   privileges?: string[];
 };
 type NxAppCreatePrivileges = {
-  /** Is set to true if the user has privileges to create the resource. */canCreate?: boolean; /** Type of resource. For example, sheet, story, bookmark, etc. */
+  /** Is set to true if the user has privileges to create the resource. */
+  canCreate?: boolean;
+  /** Type of resource. For example, sheet, story, bookmark, etc. */
   resource?: string;
 };
 /**
  * Application object attributes and user privileges.
  */
 type NxAppObject = {
-  /** App object attributes. This structure can also contain extra user-defined attributes. */attributes?: NxObjectAttributes;
+  /** App object attributes. This structure can also contain extra user-defined attributes. */
+  attributes?: NxObjectAttributes;
   /** Application object privileges.
    * Hints to the client what actions the user is allowed to perform.
    * Could be any of:
@@ -662,26 +780,41 @@ type NxAppObject = {
  * App attributes. This structure can also contain extra user-defined attributes.
  */
 type NxAttributes = {
-  /** The date and time when the app was created. */createdDate?: string; /** Contains dynamic JSON data specified by the client. */
-  custom?: JsonObject; /** App description. */
-  description?: string; /** The dynamic color of the app. */
-  dynamicColor?: string; /** If set to true, the app is encrypted. */
-  encrypted?: boolean; /** If set to true, the app has section access configured, */
-  hasSectionAccess?: boolean; /** The App ID. */
-  id?: string; /** True if the app is a Direct Query app, false if not */
-  isDirectQueryMode?: boolean; /** Date and time of the last reload of the app. */
-  lastReloadTime?: string; /** The date and time when the app was modified. */
-  modifiedDate?: string; /** App name. */
-  name?: string; /** The Origin App ID for published apps. */
+  /** The date and time when the app was created. */
+  createdDate?: string;
+  /** Contains dynamic JSON data specified by the client. */
+  custom?: JsonObject;
+  /** App description. */
+  description?: string;
+  /** The dynamic color of the app. */
+  dynamicColor?: string;
+  /** If set to true, the app is encrypted. */
+  encrypted?: boolean;
+  /** If set to true, the app has section access configured, */
+  hasSectionAccess?: boolean;
+  /** The App ID. */
+  id?: string;
+  /** True if the app is a Direct Query app, false if not */
+  isDirectQueryMode?: boolean;
+  /** Date and time of the last reload of the app. */
+  lastReloadTime?: string;
+  /** The date and time when the app was modified. */
+  modifiedDate?: string;
+  /** App name. */
+  name?: string;
+  /** The Origin App ID for published apps. */
   originAppId?: string;
   /** @deprecated
    * Deprecated. Use the Users API to fetch user metadata. */
-  owner?: string; /** Identifier of the app owner. */
-  ownerId?: string; /** The date and time when the app was published, empty if unpublished. Use to determine if an app is published in Qlik Cloud. */
+  owner?: string;
+  /** Identifier of the app owner. */
+  ownerId?: string;
+  /** The date and time when the app was published, empty if unpublished. Use to determine if an app is published in Qlik Cloud. */
   publishTime?: string;
   /** For Qlik Cloud, indicates whether the app has been distributed from client-managed, not whether it has been published. To determine
    * if the app is published in Qlik Cloud, check for a non-empty value in the publishTime field. For client-managed, determines if the app is published. */
-  published?: boolean; /** App thumbnail. */
+  published?: boolean;
+  /** App thumbnail. */
   thumbnail?: string;
   usage?: UsageEnum;
 };
@@ -689,19 +822,29 @@ type NxAttributes = {
  * App object attributes. This structure can also contain extra user-defined attributes.
  */
 type NxObjectAttributes = {
-  /** True if the object is approved. */approved?: boolean; /** The date and time when the object was created. */
-  createdAt?: string; /** Object description. */
+  /** True if the object is approved. */
+  approved?: boolean;
+  /** The date and time when the object was created. */
+  createdAt?: string;
+  /** Object description. */
   description?: string;
-  genericType?: AppObjectGenericType; /** The object Id. */
-  id?: string; /** Object name. */
-  name?: string; /** The type of the object. */
-  objectType?: string; /** The object owner's Id. */
-  ownerId?: string; /** The date and time when the object was published, empty if unpublished. */
-  publishedAt?: string; /** The date and time when the object was modified. */
+  genericType?: AppObjectGenericType;
+  /** The object Id. */
+  id?: string;
+  /** Object name. */
+  name?: string;
+  /** The type of the object. */
+  objectType?: string;
+  /** The object owner's Id. */
+  ownerId?: string;
+  /** The date and time when the object was published, empty if unpublished. */
+  publishedAt?: string;
+  /** The date and time when the object was modified. */
   updatedAt?: string;
 };
 type NxPatch = {
-  Op?: NxPatchOperationType; /** Path to the property to add, remove or replace. */
+  Op?: NxPatchOperationType;
+  /** Path to the property to add, remove or replace. */
   Path?: string;
   /** This parameter is not used in a remove operation.
    * Corresponds to the value of the property to add or to the new value of the property to update.
@@ -714,16 +857,24 @@ type NxPatchOperationType = "add" | "remove" | "replace";
  * Contains break down of the asked question in the form of tokens with their classification.
  */
 type PartialNluInfo = {
-  /** Qlik sense application field selected for given token or phrase */fieldName?: string; /** Filter value found from query */
-  fieldValue?: string; /** Role of the token or phrase from query */
-  role?: "dimension" | "measure" | "date"; /** Matching token or phrase from query */
-  text?: string; /** Type of token from query */
+  /** Qlik sense application field selected for given token or phrase */
+  fieldName?: string;
+  /** Filter value found from query */
+  fieldValue?: string;
+  /** Role of the token or phrase from query */
+  role?: "dimension" | "measure" | "date";
+  /** Matching token or phrase from query */
+  text?: string;
+  /** Type of token from query */
   type?: "field" | "filter" | "master_dimension" | "master_measure" | "custom_analysis";
 };
 type PatchFilter = PatchFilterItem[];
 type PatchFilterItem = {
-  /** operation (replace). */op: "replace"; /** A JSON Pointer path (/). */
-  path: "/filter"; /** The value to be used for this operation. The properties that cannot be patched include id, filterType, appId */
+  /** operation (replace). */
+  op: "replace";
+  /** A JSON Pointer path (/). */
+  path: "/filter";
+  /** The value to be used for this operation. The properties that cannot be patched include id, filterType, appId */
   value: {
     Filter?: FilterItemPatch;
   };
@@ -732,14 +883,18 @@ type PatchFilterItem = {
  * Override for app placement on non reload engines.
  */
 type Placement = {
-  /** The iso timestamp for when the override was configured. */createdAt?: string;
+  /** The iso timestamp for when the override was configured. */
+  createdAt?: string;
   minEngineSize?: EngineGBSize;
 };
 type PublishApp = {
   attributes?: AppUpdateAttributes;
-  data?: PublishData; /** The original is moved instead of copied. The current published state of all objects is kept. */
-  moveApp?: boolean; /** If app is moved, originAppId needs to be provided. */
-  originAppId?: string; /** The managed space ID where the app will be published. */
+  data?: PublishData;
+  /** The original is moved instead of copied. The current published state of all objects is kept. */
+  moveApp?: boolean;
+  /** If app is moved, originAppId needs to be provided. */
+  originAppId?: string;
+  /** The managed space ID where the app will be published. */
   spaceId?: string;
 };
 type PublishData = "source" | "target";
@@ -754,7 +909,8 @@ type RecommendItems = {
   fields?: RecommendFieldItem[];
   libItems?: RecommendMasterItem[];
   targetAnalysis?: {
-    /** id of the target analysis, returned by the GET insight-analyses endpoint */id?: string;
+    /** id of the target analysis, returned by the GET insight-analyses endpoint */
+    id?: string;
   };
 };
 /**
@@ -767,73 +923,111 @@ type RecommendMasterItem = {
   };
 };
 type RecommendNaturalLangQuery = {
-  /** The NL query. */text: string;
+  /** The NL query. */
+  text: string;
 };
 type RecommendedAnalysis = RecommendedAnalysisCore & {
-  /** part analyses (only for macro analyses) */parts?: RecommendedAnalysisCore[];
+  /** part analyses (only for macro analyses) */
+  parts?: RecommendedAnalysisCore[];
 };
 type RecommendedAnalysisCore = {
-  analysis?: AnalysisDetails; /** Chart type given to current recommendation */
-  chartType?: ChartType; /** (chart options + hypercube definition) */
-  options?: unknown; /** percentage of selected items in the analysis to the overall items passed to the endpoint */
+  analysis?: AnalysisDetails;
+  /** Chart type given to current recommendation */
+  chartType?: ChartType;
+  /** (chart options + hypercube definition) */
+  options?: unknown;
+  /** percentage of selected items in the analysis to the overall items passed to the endpoint */
   relevance?: number;
 };
 type ReloadIncludeFile = {
-  /** The connection name. */connection?: string; /** File location within the connection. */
-  path?: string; /** File QRI resource identifier. */
+  /** The connection name. */
+  connection?: string;
+  /** File location within the connection. */
+  path?: string;
+  /** File QRI resource identifier. */
   qri?: string;
 };
 type ReloadListMetadata = {
-  /** Array of ReloadMeta. */data?: ReloadMeta[];
+  /** Array of ReloadMeta. */
+  data?: ReloadMeta[];
 };
 type ReloadMeta = {
-  /** A Base64-encoded hash value of the new section access database. */accessDbHash?: string; /** A Base64-encoded hash value of the new app database. */
-  appDbHash?: string; /** Duration of reload (ms). */
-  duration?: number; /** Time when reload ended. */
-  endTime?: string; /** Files brought into the script via include/mustInclude macros. */
-  includeFiles?: ReloadIncludeFile[]; /** True if the reload is a partial reload. */
+  /** A Base64-encoded hash value of the new section access database. */
+  accessDbHash?: string;
+  /** A Base64-encoded hash value of the new app database. */
+  appDbHash?: string;
+  /** Duration of reload (ms). */
+  duration?: number;
+  /** Time when reload ended. */
+  endTime?: string;
+  /** Files brought into the script via include/mustInclude macros. */
+  includeFiles?: ReloadIncludeFile[];
+  /** True if the reload is a partial reload. */
   isPartialReload?: boolean;
   loadDataFilesBytes?: number;
   loadExternalBytes?: number;
-  loadFilesBytes?: number; /** Reload identifier. */
-  reloadId?: string; /** If greater than or equal 0, defines max number of rows loaded from a data source. */
+  loadFilesBytes?: number;
+  /** Reload identifier. */
+  reloadId?: string;
+  /** If greater than or equal 0, defines max number of rows loaded from a data source. */
   rowLimit?: number;
   /** Set to true to skip Store statements.
    * The default value is false. */
-  skipStore?: boolean; /** List of external loaded or stored statements. */
+  skipStore?: boolean;
+  /** List of external loaded or stored statements. */
   statements?: ReloadStatements[];
   storeDataFilesBytes?: number;
-  storeFilesBytes?: number; /** A Base64-encoded hash value of all fields stored via the store statements. */
-  storeHash?: string; /** true if the reload was successful. */
+  storeFilesBytes?: number;
+  /** A Base64-encoded hash value of all fields stored via the store statements. */
+  storeHash?: string;
+  /** true if the reload was successful. */
   success?: boolean;
 };
 type ReloadStatements = {
-  /** The connection name. */connection?: string; /** Connection ID. */
-  connectionId?: string; /** Data loaded from the network (bytes). */
-  dataSize?: number; /** Duration of data generation (ms). */
-  duration?: number; /** Label of the resource level node in lineage. */
-  label?: string; /** Number of fields loaded. */
-  nbrOfFields?: number; /** Number of rows loaded. */
-  nbrOfRows?: number; /** Partial load operation. e.g. add/replace/update/merge. n/a when not in partial load mode. */
-  partialReloadOperation?: string; /** Resource Identifier. */
-  qri?: string; /** Name of the source table in lineage. */
-  tableName?: string; /** Type of statement, e.g. Store/Load. */
+  /** The connection name. */
+  connection?: string;
+  /** Connection ID. */
+  connectionId?: string;
+  /** Data loaded from the network (bytes). */
+  dataSize?: number;
+  /** Duration of data generation (ms). */
+  duration?: number;
+  /** Label of the resource level node in lineage. */
+  label?: string;
+  /** Number of fields loaded. */
+  nbrOfFields?: number;
+  /** Number of rows loaded. */
+  nbrOfRows?: number;
+  /** Partial load operation. e.g. add/replace/update/merge. n/a when not in partial load mode. */
+  partialReloadOperation?: string;
+  /** Resource Identifier. */
+  qri?: string;
+  /** Name of the source table in lineage. */
+  tableName?: string;
+  /** Type of statement, e.g. Store/Load. */
   type?: string;
 };
 type RepublishApp = {
-  attributes?: AppUpdateAttributes; /** Validate that source app is same as originally published. */
+  attributes?: AppUpdateAttributes;
+  /** Validate that source app is same as originally published. */
   checkOriginAppId?: boolean;
-  data?: PublishData; /** The target ID to be republished. */
+  data?: PublishData;
+  /** The target ID to be republished. */
   targetId?: string;
 };
 type Script = {
   script?: string;
 };
 type ScriptIssue = {
-  /** UTF-8 byte column of the issue. */Column?: number; /** Additional information like workarounds or clarifications. */
-  Info?: string; /** Line in the tab of the issue. */
-  Line?: number; /** Error or warning string. What is the problem. */
-  Msg?: string; /** The index of the tab for the issue. */
+  /** UTF-8 byte column of the issue. */
+  Column?: number;
+  /** Additional information like workarounds or clarifications. */
+  Info?: string;
+  /** Line in the tab of the issue. */
+  Line?: number;
+  /** Error or warning string. What is the problem. */
+  Msg?: string;
+  /** The index of the tab for the issue. */
   Tab?: number;
 };
 type ScriptIssues = {
@@ -841,42 +1035,60 @@ type ScriptIssues = {
   Warnings?: ScriptIssue[];
 };
 type ScriptLogList = {
-  /** Array of scriptLogMeta. */data?: ScriptLogMeta[];
+  /** Array of scriptLogMeta. */
+  data?: ScriptLogMeta[];
 };
 type ScriptLogMeta = {
-  /** Duration of reload (ms). */duration?: number; /** Time when reload ended. */
+  /** Duration of reload (ms). */
+  duration?: number;
+  /** Time when reload ended. */
   endTime?: string;
-  links?: Log; /** Reload identifier. */
-  reloadId?: string; /** True if the reload was successful. */
+  links?: Log;
+  /** Reload identifier. */
+  reloadId?: string;
+  /** True if the reload was successful. */
   success?: boolean;
 };
 type ScriptMeta = {
-  /** Script version last modification time. */modifiedTime?: string; /** User last modifying script version. */
-  modifierId?: string; /** Script id. */
-  scriptId?: string; /** Script size. */
-  size?: number; /** Description of this script version */
+  /** Script version last modification time. */
+  modifiedTime?: string;
+  /** User last modifying script version. */
+  modifierId?: string;
+  /** Script id. */
+  scriptId?: string;
+  /** Script size. */
+  size?: number;
+  /** Description of this script version */
   versionMessage?: string;
 };
 type ScriptMetaList = {
   links?: NavigationLinks;
-  privileges?: string[]; /** Script versions metadata. */
+  privileges?: string[];
+  /** Script versions metadata. */
   scripts?: ScriptMeta[];
 };
 type ScriptVersion = {
-  /** Script text. */script?: string; /** Description of this script version */
+  /** Script text. */
+  script?: string;
+  /** Description of this script version */
   versionMessage?: string;
 };
 type SimplifiedClassifications = ("dimension" | "measure" | "temporal" | "geographical")[];
 type SymbolFrequency = {
-  /** Frequency of the above symbol in the field */Frequency?: number;
+  /** Frequency of the above symbol in the field */
+  Frequency?: number;
   Symbol?: SymbolValue;
 };
 type SymbolValue = {
-  /** Numeric value of the symbol. NaN otherwise. */Number?: number; /** String value of the symbol. This parameter is optional and present only if Symbol is a string. */
+  /** Numeric value of the symbol. NaN otherwise. */
+  Number?: number;
+  /** String value of the symbol. This parameter is optional and present only if Symbol is a string. */
   Text?: string;
 };
 type TableMetadata = {
-  /** Static RAM memory used in bytes. */byte_size?: number; /** Table comment. */
+  /** Static RAM memory used in bytes. */
+  byte_size?: number;
+  /** Table comment. */
   comment?: string;
   /** If set to true, the table is loose due to circular connection.
    * The default value is false. */
@@ -886,14 +1098,20 @@ type TableMetadata = {
   is_semantic?: boolean;
   /** If set to true, the table is a system table.
    * The default value is false. */
-  is_system?: boolean; /** Name of the table. */
-  name?: string; /** Number of fields. */
-  no_of_fields?: number; /** Number of key fields. */
-  no_of_key_fields?: number; /** Number of rows. */
+  is_system?: boolean;
+  /** Name of the table. */
+  name?: string;
+  /** Number of fields. */
+  no_of_fields?: number;
+  /** Number of key fields. */
+  no_of_key_fields?: number;
+  /** Number of rows. */
   no_of_rows?: number;
 };
 type TableProfilingData = {
-  /** Field values profiling info */FieldProfiling?: FieldInTableProfilingData[]; /** Number of rows in the table. */
+  /** Field values profiling info */
+  FieldProfiling?: FieldInTableProfilingData[];
+  /** Number of rows in the table. */
   NoOfRows?: number;
 };
 type UpdateApp = {
@@ -986,7 +1204,8 @@ type Evaluation = {
   appItemId?: string;
   appName?: string;
   details?: {
-    concurrentReload?: boolean; /** @deprecated */
+    concurrentReload?: boolean;
+    /** @deprecated */
     dedicated?: boolean;
     engineHasCache?: boolean;
     errors?: string[];
@@ -1161,6 +1380,8 @@ type CreateAppHttpError = {
   status: number;
 };
 /**
+ * @deprecated
+ *
  * Accepts two evaluation ids and returns a comparison denoting the differences between the two.
  *
  * @param baseid Id of the baseline evaluation
@@ -1169,7 +1390,9 @@ type CreateAppHttpError = {
  * @throws GetAppEvaluationComparisonHttpError
  */
 declare function getAppEvaluationComparison(baseid: string, comparisonid: string, query: {
-  /** Get the full list of comparisons including non-significant diffs */all?: boolean; /** Specify output format, currently supported are 'json' and 'xml' */
+  /** Get the full list of comparisons including non-significant diffs */
+  all?: boolean;
+  /** Specify output format, currently supported are 'json' and 'xml' */
   format?: string;
 }, options?: ApiCallOptions): Promise<GetAppEvaluationComparisonHttpResponse>;
 type GetAppEvaluationComparisonHttpResponse = {
@@ -1183,6 +1406,8 @@ type GetAppEvaluationComparisonHttpError = {
   status: 404 | 500;
 };
 /**
+ * @deprecated
+ *
  * Accepts two evaluation ids and downloads a log, in XML format, denoting the differences between the two.
  * @example
  * getAppEvaluationComparisonXml(
@@ -1206,6 +1431,8 @@ type GetAppEvaluationComparisonXmlHttpError = {
   status: 404 | 500;
 };
 /**
+ * @deprecated
+ *
  * Find an evaluation by a specific id.
  *
  * @param id Id of the desired evaluation.
@@ -1213,7 +1440,9 @@ type GetAppEvaluationComparisonXmlHttpError = {
  * @throws GetAppEvaluationHttpError
  */
 declare function getAppEvaluation(id: string, query: {
-  /** Get the full data of the evaluation */all?: boolean; /** Specify output format, currently supported are 'json' and 'xml' */
+  /** Get the full data of the evaluation */
+  all?: boolean;
+  /** Specify output format, currently supported are 'json' and 'xml' */
   format?: string;
 }, options?: ApiCallOptions): Promise<GetAppEvaluationHttpResponse>;
 type GetAppEvaluationHttpResponse = {
@@ -1227,6 +1456,8 @@ type GetAppEvaluationHttpError = {
   status: 404 | 500;
 };
 /**
+ * @deprecated
+ *
  * Find and download an evaluation log by a specific evaluation id.
  * @example
  * getAppEvaluationXml(
@@ -1255,17 +1486,23 @@ type GetAppEvaluationXmlHttpError = {
  * @throws ImportAppHttpError
  */
 declare function importApp(query: {
-  /** If NoData is true, the data of the existing app will be kept as is, otherwise it will be replaced by the new incoming data. */NoData?: boolean; /** The app ID of the target app when source is qvw file. */
-  appId?: string; /** The name of the target app when source does not have a specified name, applicable if source is qvw file. */
-  fallbackName?: string; /** The file ID to be downloaded from Temporary Content Service (TCS) and used during import. */
+  /** If NoData is true, the data of the existing app will be kept as is, otherwise it will be replaced by the new incoming data. */
+  NoData?: boolean;
+  /** The app ID of the target app when source is qvw file. */
+  appId?: string;
+  /** The name of the target app when source does not have a specified name, applicable if source is qvw file. */
+  fallbackName?: string;
+  /** The file ID to be downloaded from Temporary Content Service (TCS) and used during import. */
   fileId?: string;
   /** The import mode. In `new` mode (default), the source app will be imported as a new app.<div class=note>The `autoreplace` mode is an internal mode only and is not permitted for external use.</div>
    *
    * One of:
    * * NEW
    * * AUTOREPLACE */
-  mode?: string; /** The name of the target app. */
-  name?: string; /** The space ID of the target app. */
+  mode?: string;
+  /** The name of the target app. */
+  name?: string;
+  /** The space ID of the target app. */
   spaceId?: string;
 }, body: BodyInit, options?: ApiCallOptions): Promise<ImportAppHttpResponse>;
 type ImportAppHttpResponse = {
@@ -1425,7 +1662,8 @@ type GetAppDataMetadataHttpError = {
  * @throws ExportAppHttpError
  */
 declare function exportApp(appId: string, query: {
-  /** The flag indicating if only object contents should be exported. */NoData?: boolean;
+  /** The flag indicating if only object contents should be exported. */
+  NoData?: boolean;
 }, options?: ApiCallOptions): Promise<ExportAppHttpResponse>;
 type ExportAppHttpResponse = {
   data: DownloadableBlob;
@@ -1769,8 +2007,11 @@ type GetAppReloadLogHttpError = {
  * @throws GetAppReloadMetadataHttpError
  */
 declare function getAppReloadMetadata(appId: string, reloadId: string, query: {
-  /** Include metadata for reloads ran with SkipStore flag set to true. Default: false */includeSkipStoreReloads?: boolean; /** Maximum number of records to return from this request. Default: 100 */
-  limit?: string; /** Identifier of the reload. Use empty reloadId to get all reloads. */
+  /** Include metadata for reloads ran with SkipStore flag set to true. Default: false */
+  includeSkipStoreReloads?: boolean;
+  /** Maximum number of records to return from this request. Default: 100 */
+  limit?: string;
+  /** Identifier of the reload. Use empty reloadId to get all reloads. */
   reloadId?: string;
 }, options?: ApiCallOptions): Promise<GetAppReloadMetadataHttpResponse>;
 type GetAppReloadMetadataHttpResponse = {
@@ -1796,11 +2037,16 @@ declare function getAppReportFilters(appId: string, query: {
    * The following fields support the `eq` (equals) operator: `id`, `ownerId`
    * Example:
    * (name co "query1" or description co "query2") and ownerId eq "123" */
-  filter?: string; /** The filter type (REP, SUB). REP stands for report bookmark, SUB for subscription bookmark. */
-  filterTypes: ("REP" | "SUB")[]; /** Limit the returned result set */
-  limit?: number; /** Load type expressing the kind of request, eg. interactive for report requests from the Web UI, batch for scheduled report generation. */
-  loadType?: "interactive" | "batch"; /** If present, the cursor that starts the page of data that is returned. */
-  page?: string | null; /** Sorting parameters. */
+  filter?: string;
+  /** The filter type (REP, SUB). REP stands for report bookmark, SUB for subscription bookmark. */
+  filterTypes: ("REP" | "SUB")[];
+  /** Limit the returned result set */
+  limit?: number;
+  /** Load type expressing the kind of request, eg. interactive for report requests from the Web UI, batch for scheduled report generation. */
+  loadType?: "interactive" | "batch";
+  /** If present, the cursor that starts the page of data that is returned. */
+  page?: string | null;
+  /** Sorting parameters. */
   sort?: ("+ownerId" | "-ownerId" | "-name" | "+name" | "+description" | "-description" | "+createdAt" | "-createdAt" | "+updatedAt" | "-updatedAt")[];
 }, options?: ApiCallOptions): Promise<GetAppReportFiltersHttpResponse>;
 type GetAppReportFiltersHttpResponse = {
@@ -1841,7 +2087,8 @@ type CreateAppReportFilterHttpError = {
  * @throws CountAppReportFiltersHttpError
  */
 declare function countAppReportFilters(appId: string, query: {
-  /** The filter type (REP, SUB). REP stands for report bookmark, SUB for subscription bookmark. */filterTypes: ("REP" | "SUB")[];
+  /** The filter type (REP, SUB). REP stands for report bookmark, SUB for subscription bookmark. */
+  filterTypes: ("REP" | "SUB")[];
 }, options?: ApiCallOptions): Promise<CountAppReportFiltersHttpResponse>;
 type CountAppReportFiltersHttpResponse = {
   data: FiltersCount;
@@ -1880,7 +2127,8 @@ type DeleteAppReportFilterHttpError = {
  * @throws GetAppReportFilterWithQueryHttpError
  */
 declare function getAppReportFilterWithQuery(appId: string, id: string, query: {
-  /** Load type expressing the kind of request, eg. interactive for report requests from the Web UI, batch for scheduled report generation. */loadType?: "interactive" | "batch";
+  /** Load type expressing the kind of request, eg. interactive for report requests from the Web UI, batch for scheduled report generation. */
+  loadType?: "interactive" | "batch";
 }, options?: ApiCallOptions): Promise<GetAppReportFilterWithQueryHttpResponse>;
 type GetAppReportFilterWithQueryHttpResponse = {
   data: Filter;
@@ -1942,8 +2190,10 @@ declare function getAppScriptHistory(appId: string, query: {
    * * ScriptId
    * * ModifiedTime
    * * ModifierId */
-  filter?: string; /** Maximum number of records to return from this request. */
-  limit?: string; /** Opaque definition of which page of the result set to return. Returned from a previous call using the same filter. Not yet supported. */
+  filter?: string;
+  /** Maximum number of records to return from this request. */
+  limit?: string;
+  /** Opaque definition of which page of the result set to return. Returned from a previous call using the same filter. Not yet supported. */
   page?: string;
 }, options?: ApiCallOptions): Promise<GetAppScriptHistoryHttpResponse>;
 type GetAppScriptHistoryHttpResponse = {
@@ -2069,6 +2319,8 @@ type MoveAppToSpaceHttpError = {
   status: number;
 };
 /**
+ * @deprecated
+ *
  * Find all evaluations for an app GUID.
  * Supports paging via next, prev which are sent in the response body
  *
@@ -2077,12 +2329,19 @@ type MoveAppToSpaceHttpError = {
  * @throws GetAppEvaluationsHttpError
  */
 declare function getAppEvaluations(guid: string, query: {
-  /** Get the full data of the evaluation */all?: boolean; /** Add file transfer headers to response */
-  fileMode?: boolean; /** Specify output format, currently supported are 'json' and 'xml' */
-  format?: string; /** Number of results to return per page. */
-  limit?: number; /** The app evaluation id to get next page from */
-  next?: string; /** The app evaluation id to get previous page from */
-  prev?: string; /** Property to sort list on */
+  /** Get the full data of the evaluation */
+  all?: boolean;
+  /** Add file transfer headers to response */
+  fileMode?: boolean;
+  /** Specify output format, currently supported are 'json' and 'xml' */
+  format?: string;
+  /** Number of results to return per page. */
+  limit?: number;
+  /** The app evaluation id to get next page from */
+  next?: string;
+  /** The app evaluation id to get previous page from */
+  prev?: string;
+  /** Property to sort list on */
   sort?: string;
 }, options?: ApiCallOptions): Promise<GetAppEvaluationsHttpResponse>;
 type GetAppEvaluationsHttpResponse = {
@@ -2098,6 +2357,8 @@ type GetAppEvaluationsHttpError = {
   status: 400 | 404 | 500;
 };
 /**
+ * @deprecated
+ *
  * Queue an app evaluation by its app guid.
  * @example
  * queueAppEvaluation(
@@ -2131,6 +2392,8 @@ type AppsAPI = {
    */
   createApp: typeof createApp;
   /**
+   * @deprecated
+   *
    * Accepts two evaluation ids and returns a comparison denoting the differences between the two.
    *
    * @param baseid Id of the baseline evaluation
@@ -2140,6 +2403,8 @@ type AppsAPI = {
    */
   getAppEvaluationComparison: typeof getAppEvaluationComparison;
   /**
+   * @deprecated
+   *
    * Accepts two evaluation ids and downloads a log, in XML format, denoting the differences between the two.
    * @example
    * getAppEvaluationComparisonXml(
@@ -2153,6 +2418,8 @@ type AppsAPI = {
    */
   getAppEvaluationComparisonXml: typeof getAppEvaluationComparisonXml;
   /**
+   * @deprecated
+   *
    * Find an evaluation by a specific id.
    *
    * @param id Id of the desired evaluation.
@@ -2161,6 +2428,8 @@ type AppsAPI = {
    */
   getAppEvaluation: typeof getAppEvaluation;
   /**
+   * @deprecated
+   *
    * Find and download an evaluation log by a specific evaluation id.
    * @example
    * getAppEvaluationXml(
@@ -2516,6 +2785,8 @@ type AppsAPI = {
    */
   moveAppToSpace: typeof moveAppToSpace;
   /**
+   * @deprecated
+   *
    * Find all evaluations for an app GUID.
    * Supports paging via next, prev which are sent in the response body
    *
@@ -2525,6 +2796,8 @@ type AppsAPI = {
    */
   getAppEvaluations: typeof getAppEvaluations;
   /**
+   * @deprecated
+   *
    * Queue an app evaluation by its app guid.
    * @example
    * queueAppEvaluation(

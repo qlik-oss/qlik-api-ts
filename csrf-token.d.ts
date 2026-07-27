@@ -1,13 +1,19 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
+import "./chunks/invoke-fetch-DcXyLc5n.js";
 //#region src/public/rest/csrf-token.d.ts
 /**
  * An error object.
  */
 type Error = {
-  /** The error code. */code: string; /** The detailed error message */
-  detail?: string; /** Non-standard information about the error */
-  meta?: unknown; /** The http status code. */
-  status?: string; /** The error title. */
+  /** The error code. */
+  code: string;
+  /** The detailed error message */
+  detail?: string;
+  /** Non-standard information about the error */
+  meta?: unknown;
+  /** The http status code. */
+  status?: string;
+  /** The error title. */
   title: string;
 };
 /**

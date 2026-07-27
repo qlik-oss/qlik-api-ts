@@ -9,9 +9,12 @@ type InvokeFetchResponse = {
 };
 /** An entry in the cache for one specific cacheKey */
 type CacheEntry = {
-  lastPulled: number; /** last time the cache was accessed and prevented an api call */
-  lastHit: Date | null; /** number of times the cache has been hit by a client */
-  hitCount: number; /** the url path of the cache hit. Useful to determine how many different qmfes are accessing the cache key */
+  lastPulled: number;
+  /** last time the cache was accessed and prevented an api call */
+  lastHit: Date | null;
+  /** number of times the cache has been hit by a client */
+  hitCount: number;
+  /** the url path of the cache hit. Useful to determine how many different qmfes are accessing the cache key */
   accessedPaths: Set<string>;
   value: Promise<unknown>;
 };
@@ -23,7 +26,9 @@ type CacheOptions = {
 };
 /** Additional options for an api call done with invoke-fetch */
 type ApiCallOptions = {
-  /** Additional headers to pass on to the request. */headers?: Record<string, string>; /** if set to true the call will not use a cached result */
+  /** Additional headers to pass on to the request. */
+  headers?: Record<string, string>;
+  /** if set to true the call will not use a cached result */
   noCache?: boolean;
   /**
    * Only used cached results whose age in milliseconds are less than that or equal to `maxCacheAge`.
@@ -61,22 +66,34 @@ type ApiCallOptions = {
   progress?: ProgressOptions;
 };
 type InvokeFetchProperties = {
-  /** http method */method: string; /** data passed to api call */
-  body?: unknown; /** additional api call options */
-  options?: ApiCallOptions; /** override default RequestInit options */
-  requestInitOverrides?: RequestInit; /** path to api endpoint, can be in a template format e.g. /api/v1/space/{spaceId} */
-  pathTemplate: string; /** path variables to be used in the path template */
-  pathVariables?: Record<string, string>; /** additional query to url */
-  query?: Record<string, unknown>; /** specify what content-type to send, if omitted "application/json" is assumed */
-  contentType?: string; /** override the default user-agent with this value. This will also override any browser's UA. */
+  /** http method */
+  method: string;
+  /** data passed to api call */
+  body?: unknown;
+  /** additional api call options */
+  options?: ApiCallOptions;
+  /** override default RequestInit options */
+  requestInitOverrides?: RequestInit;
+  /** path to api endpoint, can be in a template format e.g. /api/v1/space/{spaceId} */
+  pathTemplate: string;
+  /** path variables to be used in the path template */
+  pathVariables?: Record<string, string>;
+  /** additional query to url */
+  query?: Record<string, unknown>;
+  /** specify what content-type to send, if omitted "application/json" is assumed */
+  contentType?: string;
+  /** override the default user-agent with this value. This will also override any browser's UA. */
   userAgent?: string;
 };
 type DownloadableBlob = Blob & {
-  /** download the blob in a using the specified filename */download: (filename: string) => Promise<void>;
+  /** download the blob in a using the specified filename */
+  download: (filename: string) => Promise<void>;
 };
 /** The callback options for reporting progress. */
 type ProgressOptions = {
-  /** upload callback, called repeatedly when upload-progress is available */onUpload?: (event: PartialProgressEvent) => void; /** download callback, called repeatedly when upload-progress is available */
+  /** upload callback, called repeatedly when upload-progress is available */
+  onUpload?: (event: PartialProgressEvent) => void;
+  /** download callback, called repeatedly when upload-progress is available */
   onDownload?: (event: PartialProgressEvent) => void;
 };
 /** Represents the current upload or download progress a API-call.
@@ -88,7 +105,9 @@ type ProgressOptions = {
  * See MDN: {@link https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent}
  */
 type PartialProgressEvent = {
-  /** Number of bytes currently loaded. */loaded: ProgressEvent["loaded"]; /** The total size of the payload, if computable. */
+  /** Number of bytes currently loaded. */
+  loaded: ProgressEvent["loaded"];
+  /** The total size of the payload, if computable. */
   total?: ProgressEvent["total"];
 };
 declare const _default: {};
@@ -124,17 +143,23 @@ type ProductInfo = {
 //#region src/global-types.d.ts
 /** ApiKey Auth Configuration for a HostConfig */
 type ApiKeyAuthConfig = {
-  /** api key created by a developer role on a tenant */apiKey: string;
+  /** api key created by a developer role on a tenant */
+  apiKey: string;
 };
 /** Cookie Auth Configuration for a HostConfig */
 type CookieAuthConfig = {
-  /** Web Integration Id created by tenant admin */webIntegrationId?: string; /** If set to false the `credentials` property will be set to same-origin  */
-  crossSiteCookies?: boolean; /** Set to true if browser is running in anonymous mode, which is detected if there's a eac token in the url */
+  /** Web Integration Id created by tenant admin */
+  webIntegrationId?: string;
+  /** If set to false the `credentials` property will be set to same-origin  */
+  crossSiteCookies?: boolean;
+  /** Set to true if browser is running in anonymous mode, which is detected if there's a eac token in the url */
   anonymousMode?: boolean;
 };
 /** WindowsCookie Auth Configuration for a HostConfig */
 type WindowsCookieAuthConfig = {
-  /** location of the login page, auth module will redirect to this page when an unauthenticated api call is made. Not applicable in Node.js environments. */loginUri?: string; /** If set to false the `credentials` property will be set to same-origin. Not applicable in Node.js environments. */
+  /** location of the login page, auth module will redirect to this page when an unauthenticated api call is made. Not applicable in Node.js environments. */
+  loginUri?: string;
+  /** If set to false the `credentials` property will be set to same-origin. Not applicable in Node.js environments. */
   crossSiteCookies?: boolean;
   /**
    * A custom function that can be used to fetch a windows auth jwt.
@@ -175,10 +200,15 @@ type PerformInteractiveLoginFn = (props: {
 } | string>;
 /** OAuth2 Auth Configuration for a HostConfig */
 type Oauth2AuthConfig = {
-  /** client id of oauth client created by tenant admin */clientId: string; /** client id of oauth client created by tenant admin */
-  clientSecret?: string; /** location of where the client should be redirected after getting hold of the access token */
-  redirectUri?: string; /** If set, store the access token in either local or session storage, or using a custom secret storage implementation. Otherwise it is only stored in memory. */
-  accessTokenStorage?: "session" | "local" | SecretStorage; /** A string with comma separated values of oauth2 scopes https://oauth.net/2/scope defaults to "user_default" */
+  /** client id of oauth client created by tenant admin */
+  clientId: string;
+  /** client id of oauth client created by tenant admin */
+  clientSecret?: string;
+  /** location of where the client should be redirected after getting hold of the access token */
+  redirectUri?: string;
+  /** If set, store the access token in either local or session storage, or using a custom secret storage implementation. Otherwise it is only stored in memory. */
+  accessTokenStorage?: "session" | "local" | SecretStorage;
+  /** A string with comma separated values of oauth2 scopes https://oauth.net/2/scope defaults to "user_default" */
   scope?: string;
   /**
    * A custom function that can be used on the client side to fetch an oauth access token from a custom backend.
@@ -213,16 +243,21 @@ type AnonymousAuthConfig = {
   /**
    * Experimental and unsupported
    */
-  accessCode: string; /** client id of oauth client created by tenant admin */
+  accessCode: string;
+  /** client id of oauth client created by tenant admin */
   clientId: string;
 };
 /** Used to reference a registered host config as a single string */
 type ReferenceConfig = {
-  /** The name of the registered host config to reference */reference: string;
+  /** The name of the registered host config to reference */
+  reference: string;
 };
 type PfxConfig = {
-  /** pfx file as buffer */pfx: Uint8Array; /** Passphrase for the pfx file */
-  passphrase?: string; /** Optional X-Qlik-User header */
+  /** pfx file as buffer */
+  pfx: Uint8Array;
+  /** Passphrase for the pfx file */
+  passphrase?: string;
+  /** Optional X-Qlik-User header */
   userHeader?: string;
 };
 declare global {
@@ -285,20 +320,26 @@ declare global {
 //#region src/auth/auth-types.d.ts
 /** Auth options for the websocket connection. These options are only applicable for nodeJS applications connecting to Qlik Sense Enterprise on Windows */
 type PfxAuthOptions = {
-  /** PFX file from an exported certificate */pfx: Uint8Array; /** Passphrase for the PFX file */
+  /** PFX file from an exported certificate */
+  pfx: Uint8Array;
+  /** Passphrase for the PFX file */
   passphrase: string;
 };
 /** Credentials setting for http requests */
 type Credentials = "include" | "same-origin" | "omit";
 /** Props for function getRestCallAuthParams */
 type GetRestCallAuthParamsProps<A extends AuthType = AuthType> = {
-  hostConfig: HostConfig<A>; /** The HTTP method in the outgoing REST call */
+  hostConfig: HostConfig<A>;
+  /** The HTTP method in the outgoing REST call */
   method: string;
 };
 /** Http request parameters for auth to use when making a rest call based on a host config */
 type RestCallAuthParams = {
-  /** Headers added to the outgoing REST request. Headers are only applied in NodeJS environments and NOT in browsers */headers: Record<string, string>; /** The query parameters to add to the REST request URL */
-  queryParams: Record<string, string>; /** Credentials setting for http requests */
+  /** Headers added to the outgoing REST request. Headers are only applied in NodeJS environments and NOT in browsers */
+  headers: Record<string, string>;
+  /** The query parameters to add to the REST request URL */
+  queryParams: Record<string, string>;
+  /** Credentials setting for http requests */
   credentials: Credentials;
 };
 /** Props for function getWebsocketAuthParams */
@@ -307,8 +348,11 @@ type GetWebSocketAuthParamsProps<A extends AuthType = AuthType> = {
 };
 /** Websocket auth parameters to use when setting up a websocket based on a host config */
 type WebSocketAuthParams = {
-  /** The query parameters to add to the websocket URL */queryParams?: Record<string, string>; /** Headers added to the websocket connection. Headers is only applied in NodeJS environments and NOT in browsers */
-  headers?: Record<string, string>; /** Auth options for the websocket connection. These options are only applicable for nodeJS applications connecting to Qlik Sense Enterprise on Windows */
+  /** The query parameters to add to the websocket URL */
+  queryParams?: Record<string, string>;
+  /** Headers added to the websocket connection. Headers is only applied in NodeJS environments and NOT in browsers */
+  headers?: Record<string, string>;
+  /** Auth options for the websocket connection. These options are only applicable for nodeJS applications connecting to Qlik Sense Enterprise on Windows */
   pfxOptions?: PfxAuthOptions;
 };
 /** Props for function getWebResourceAuthParams */
@@ -325,10 +369,15 @@ type GetRemoteAuthDataProps<A extends AuthType = AuthType> = {
 };
 /** Props for function handleAuthenticationError */
 type HandleAuthenticationErrorProps<A extends AuthType = AuthType> = {
-  /** host config for connecting to a host */hostConfig: HostConfig<A>; /** HTTP status of the response */
-  status: number; /** Body of the error response */
-  errorBody?: Record<string, unknown>; /** HTTP response headers */
-  headers: Headers; /** Set to true if it is possible to perform a retry. This will be true for the first call, and false if the call is actually a retry */
+  /** host config for connecting to a host */
+  hostConfig: HostConfig<A>;
+  /** HTTP status of the response */
+  status: number;
+  /** Body of the error response */
+  errorBody?: Record<string, unknown>;
+  /** HTTP response headers */
+  headers: Headers;
+  /** Set to true if it is possible to perform a retry. This will be true for the first call, and false if the call is actually a retry */
   canRetry: boolean;
 };
 /** Action to take when error occurs during authentication */
@@ -345,30 +394,38 @@ type AuthenticationErrorAction = {
   preventDefault?: boolean;
 };
 /** A typed string array with extracted required properties from a type */
-type RequiredKeys<T> = { [K in keyof T]-?: {} extends Pick<T, K> ? never : K }[keyof T];
+type RequiredKeys<T> = { [K in keyof T]-?: {} extends Pick<T, K> ? never : K; }[keyof T];
 /** A typed string array with extracted optional properties from a type */
-type OptionalKeys<T> = { [K in keyof T]-?: {} extends Pick<T, K> ? K : never }[keyof T];
+type OptionalKeys<T> = { [K in keyof T]-?: {} extends Pick<T, K> ? K : never; }[keyof T];
 /** An authentication module for a specific authentication format, like oauth, cookies etc */
 type AuthModule<A extends AuthType = AuthType> = {
-  /** Properties required for this auth module */requiredProps?: RequiredKeys<HostConfig<A>>[]; /** Properties that are optional for this auth module */
-  optionalProps?: OptionalKeys<HostConfig<A>>[]; /** Get auth params for rest api calls */
-  getRestCallAuthParams: (props: GetRestCallAuthParamsProps<A>) => Promise<RestCallAuthParams>; /** Get auth params for websocket api calls */
-  getWebSocketAuthParams: (props: GetWebSocketAuthParamsProps<A>) => Promise<WebSocketAuthParams>; /** Get auth params for web resource request */
-  getWebResourceAuthParams?: (props: GetWebResourceAuthParamsProps<A>) => Promise<WebResourceAuthParams>; /** Callback for when auth error happens */
-  handleAuthenticationError: (props: HandleAuthenticationErrorProps<A>) => Promise<AuthenticationErrorAction>; /** Runtime check for validating host config */
+  /** Properties required for this auth module */
+  requiredProps?: RequiredKeys<HostConfig<A>>[];
+  /** Properties that are optional for this auth module */
+  optionalProps?: OptionalKeys<HostConfig<A>>[];
+  /** Get auth params for rest api calls */
+  getRestCallAuthParams: (props: GetRestCallAuthParamsProps<A>) => Promise<RestCallAuthParams>;
+  /** Get auth params for websocket api calls */
+  getWebSocketAuthParams: (props: GetWebSocketAuthParamsProps<A>) => Promise<WebSocketAuthParams>;
+  /** Get auth params for web resource request */
+  getWebResourceAuthParams?: (props: GetWebResourceAuthParamsProps<A>) => Promise<WebResourceAuthParams>;
+  /** Callback for when auth error happens */
+  handleAuthenticationError: (props: HandleAuthenticationErrorProps<A>) => Promise<AuthenticationErrorAction>;
+  /** Runtime check for validating host config */
   validateHostConfig?: (hostConfig: Record<string, unknown>) => boolean;
 };
 /** Valid strings for known authentication types */
 type AuthType = keyof QlikAuthModules;
 /** Configuration object for connecting and authenticating with Qlik platform(s) */
-type HostConfig<A extends AuthType = AuthType> = { [K in keyof QlikAuthModules]: QlikAuthModuleConfigUnion<K> & HostConfigCommon }[A];
+type HostConfig<A extends AuthType = AuthType> = { [K in keyof QlikAuthModules]: QlikAuthModuleConfigUnion<K> & HostConfigCommon; }[A];
 type QlikAuthModuleConfigUnion<K extends keyof QlikAuthModules> = (K extends keyof ImplicitQlikAuthModules ? {
   authType?: K;
 } : {
   authType: K;
 }) & QlikAuthModules[K]["config"];
 type HostConfigCommon = {
-  /** The URL to the cloud tenant or windows server. If scheme is excluded https is used. May include a virtual proxy prefix on windows. Any trailing slashes are stripped. */host?: string;
+  /** The URL to the cloud tenant or windows server. If scheme is excluded https is used. May include a virtual proxy prefix on windows. Any trailing slashes are stripped. */
+  host?: string;
   autoRedirect?: boolean;
   authRedirectUserConfirmation?: () => Promise<void>;
   /**

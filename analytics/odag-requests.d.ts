@@ -1,4 +1,5 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-o-bqAUAV.js";
+import "../chunks/invoke-fetch-DcXyLc5n.js";
 declare namespace odag_requests_d_exports {
   export { AppIdV2, AppNameV2, AppStateCondensedV2, CreateOdagRequestReloadAppHttpError, CreateOdagRequestReloadAppHttpResponse, CreateOdagRequestRenameAppHttpError, CreateOdagRequestRenameAppHttpResponse, DataLoadStatus, DeleteOdagRequestAppHttpError, DeleteOdagRequestAppHttpResponse, ErrorDetailsV2, ErrorV2, FieldSelectionStateV2, FieldValueV2, GetOdagRequestHttpError, GetOdagRequestHttpResponse, GetOdagRequestSelectionsHttpError, GetOdagRequestSelectionsHttpResponse, LinkId, MetaV2, OdagRequestsAPI, ReloadAppPayloadV2, RenameAppPayloadV2, RequestAction, RequestIdV2, RequestKindV2, RequestLoadInfoV2, RequestObjectV2, RequestStateV2, SelectAppParamTypeV2, SelectStatusV2, SelectionStateV2, UpdateOdagRequestHttpError, UpdateOdagRequestHttpResponse, UserIdV2, UserStateCondensedV2, clearCache, createOdagRequestReloadApp, createOdagRequestRenameApp, odagRequestsExport as default, deleteOdagRequestApp, getOdagRequest, getOdagRequestSelections, updateOdagRequest };
 }
@@ -16,7 +17,9 @@ type AppNameV2 = string;
  * Condensed state of an Analytics Application returned in `state` for Link, LinkUsage, Request, and ODAG Apps GET calls.
  */
 type AppStateCondensedV2 = {
-  /** The system-assigned ID for an Analytics Application. */id: AppIdV2; /** The name of an Analytics Application. */
+  /** The system-assigned ID for an Analytics Application. */
+  id: AppIdV2;
+  /** The name of an Analytics Application. */
   name: AppNameV2;
 };
 /**
@@ -27,8 +30,11 @@ type DataLoadStatus = "pending" | "success" | "warnings" | "failed";
  * A single error entry within an error response.
  */
 type ErrorDetailsV2 = {
-  /** A unique code used to identify the template form of the message in i18n tables (language independent). */code?: string; /** The message describing the error. */
-  detail?: string; /** Additional metadata associated with an error. */
+  /** A unique code used to identify the template form of the message in i18n tables (language independent). */
+  code?: string;
+  /** The message describing the error. */
+  detail?: string;
+  /** Additional metadata associated with an error. */
   meta?: MetaV2;
   title?: string;
 };
@@ -36,23 +42,29 @@ type ErrorDetailsV2 = {
  * A standard error response containing a list of one or more errors.
  */
 type ErrorV2 = {
-  errors?: ErrorDetailsV2[]; /** A unique ID of the trace which the error occurred in. Makes it possible to locate involved services and find log messages from the time of the error. */
+  errors?: ErrorDetailsV2[];
+  /** A unique ID of the trace which the error occurred in. Makes it possible to locate involved services and find log messages from the time of the error. */
   traceId?: string;
 };
 /**
  * The set of values used by link bindings to generate an Analytics Application.
  */
 type FieldSelectionStateV2 = {
-  /** The actual number of selected values. Not used for `bindSelectionState`. */selectedSize?: number; /** The name of a variable or field that corresponds to one or more bindings having a matching `selectAppParamName` used to generate Analytics Applications. */
-  selectionAppParamName: string; /** The different kinds of selection Analytics Application parameters whose values can be bound to the script of template Analytics Applications when generating new Analytics Applications. Note that `Exclude` is used to specifically prevent fields defined as optional bind parameters in the template Analytics Application script from being bound (these must either not have the optional quantity constraint specifiers or have a minimum quantity of 0). */
-  selectionAppParamType: SelectAppParamTypeV2; /** The list of values in the selection state for this field. */
+  /** The actual number of selected values. Not used for `bindSelectionState`. */
+  selectedSize?: number;
+  /** The name of a variable or field that corresponds to one or more bindings having a matching `selectAppParamName` used to generate Analytics Applications. */
+  selectionAppParamName: string;
+  /** The different kinds of selection Analytics Application parameters whose values can be bound to the script of template Analytics Applications when generating new Analytics Applications. Note that `Exclude` is used to specifically prevent fields defined as optional bind parameters in the template Analytics Application script from being bound (these must either not have the optional quantity constraint specifiers or have a minimum quantity of 0). */
+  selectionAppParamType: SelectAppParamTypeV2;
+  /** The list of values in the selection state for this field. */
   values: FieldValueV2[];
 };
 /**
  * A single field value with its selection status.
  */
 type FieldValueV2 = {
-  numValue?: string; /** The valid set of selection states that a specific field value can be in. One of: `S` (selected), `O` (optional), or `X` (excluded). */
+  numValue?: string;
+  /** The valid set of selection states that a specific field value can be in. One of: `S` (selected), `O` (optional), or `X` (excluded). */
   selStatus: SelectStatusV2;
   strValue: string;
 };
@@ -64,22 +76,28 @@ type LinkId = string;
  * Additional metadata associated with an error.
  */
 type MetaV2 = {
-  /** The HTTP status code for the error. Generally speaking, the following codes have these meanings: `200` - Success, `201` - Success (object created), `400` - Error with user input, `403` - Authorization error (user lacks permission), `404` - Object not found, `409` - Attempt to change an object using an obsolete last ModifiedDate. */statusCode?: number;
+  /** The HTTP status code for the error. Generally speaking, the following codes have these meanings: `200` - Success, `201` - Success (object created), `400` - Error with user input, `403` - Authorization error (user lacks permission), `404` - Object not found, `409` - Attempt to change an object using an obsolete last ModifiedDate. */
+  statusCode?: number;
 };
 /**
  * Payload to send when reloading an Analytics Application generated by an ODAG request.
  */
 type ReloadAppPayloadV2 = {
-  /** The current row estimate value calculated by the link's `rowEstExpr` property in the context of the selection Analytics Application. */actualRowEst?: number; /** A collection of FieldSelectionStateV2 objects. */
-  bindSelectionState?: SelectionStateV2; /** Determines whether the request should be copied along with the generated Analytics Application. */
-  copyRequest?: boolean; /** A collection of FieldSelectionStateV2 objects. */
+  /** The current row estimate value calculated by the link's `rowEstExpr` property in the context of the selection Analytics Application. */
+  actualRowEst?: number;
+  /** A collection of FieldSelectionStateV2 objects. */
+  bindSelectionState?: SelectionStateV2;
+  /** Determines whether the request should be copied along with the generated Analytics Application. */
+  copyRequest?: boolean;
+  /** A collection of FieldSelectionStateV2 objects. */
   selectionState?: SelectionStateV2;
 };
 /**
  * Payload to send when renaming an Analytics Application generated by an ODAG request.
  */
 type RenameAppPayloadV2 = {
-  /** The new name of the generated Analytics Application. */appName: string;
+  /** The new name of the generated Analytics Application. */
+  appName: string;
 };
 /**
  * The valid set of action that can be performed on a request.
@@ -97,9 +115,11 @@ type RequestKindV2 = "single" | "multiple" | "singlesub";
  * An object that describes the state of a generated Analytics Application's data load operation. In request objects that include this object as an optional property, the property will be missing for `multiple` generation requests (see their sub-requests for their data load information) or for `single` and `singlesub` requests that have not yet reached their `loading` phase.
  */
 type RequestLoadInfoV2 = {
-  finishedAt?: string; /** The engine host name used to perform the data load operation for this request. This property will be missing in `multiple` generation requests (see the `loadHost` field of their sub-requests) and will be an empty string on a `single` or `singlesub` request that has not yet reached the `loading` phase. */
+  finishedAt?: string;
+  /** The engine host name used to perform the data load operation for this request. This property will be missing in `multiple` generation requests (see the `loadHost` field of their sub-requests) and will be an empty string on a `single` or `singlesub` request that has not yet reached the `loading` phase. */
   loadHost: string;
-  startedAt: string; /** The completion status of a completed Request. */
+  startedAt: string;
+  /** The completion status of a completed Request. */
   status?: DataLoadStatus;
 };
 /**
@@ -109,33 +129,57 @@ type RequestLoadInfoV2 = {
  * If this is a `single` or `singlesub` request that was canceled before reaching the `loading` phase, the `generatedApp` property is missing because generated Analytics Applications for pre-load phase requests are deleted. If this is a `multiple` request, the `generatedApp` property is also missing.
  */
 type RequestObjectV2 = {
-  /** The evaluated value of the Link's `rowEstExpr` measure expression at the time this request was initiated. */actualRowEst?: number; /** A 64-bit hash of the bound field state at the time the request was made. */
+  /** The evaluated value of the Link's `rowEstExpr` measure expression at the time this request was initiated. */
+  actualRowEst?: number;
+  /** A 64-bit hash of the bound field state at the time the request was made. */
   bindingStateHash?: number;
-  createdDate: string; /** The Link's `rowEstExpr` property setting at the time this request was initiated. */
-  curRowEstExpr?: string; /** The Link's `rowEstRange.highBound` value for the user at the time this request was initiated. */
-  curRowEstHighBound?: number; /** The Link's `rowEstRange.lowBound` value for the user at the time this request was initiated. */
-  curRowEstLowBound?: number; /** Detailed message if the request failed. */
-  errorMessage?: string; /** Condensed state of an Analytics Application returned in `state` for Link, LinkUsage, Request, and ODAG Apps GET calls. */
-  generatedApp?: AppStateCondensedV2; /** The name of an Analytics Application. */
-  generatedAppName?: AppNameV2; /** The system-assigned ID for an ODAG request. */
-  id: RequestIdV2; /** For links that do not use any partitioning fields, a `single` Analytics Application generation request is created. However, for selection Analytics Applications that designate a set of partitioning fields and the user selects multiple values for any of those partitioning fields, ODAG uses a separate `singlesub` request to generate a separate Analytics Application for each combination of selected partition field values, and tracks the queuing and data load phase of each of those sub-requests separately. Note that `singlesub` requests share the same link ID as their spawning `multiple` parent request. */
-  kind: RequestKindV2; /** The system-assigned ID for a link. */
-  link: LinkId; /** An object that describes the state of a generated Analytics Application's data load operation. In request objects that include this object as an optional property, the property will be missing for `multiple` generation requests (see their sub-requests for their data load information) or for `single` and `singlesub` requests that have not yet reached their `loading` phase. */
+  createdDate: string;
+  /** The Link's `rowEstExpr` property setting at the time this request was initiated. */
+  curRowEstExpr?: string;
+  /** The Link's `rowEstRange.highBound` value for the user at the time this request was initiated. */
+  curRowEstHighBound?: number;
+  /** The Link's `rowEstRange.lowBound` value for the user at the time this request was initiated. */
+  curRowEstLowBound?: number;
+  /** Detailed message if the request failed. */
+  errorMessage?: string;
+  /** Condensed state of an Analytics Application returned in `state` for Link, LinkUsage, Request, and ODAG Apps GET calls. */
+  generatedApp?: AppStateCondensedV2;
+  /** The name of an Analytics Application. */
+  generatedAppName?: AppNameV2;
+  /** The system-assigned ID for an ODAG request. */
+  id: RequestIdV2;
+  /** For links that do not use any partitioning fields, a `single` Analytics Application generation request is created. However, for selection Analytics Applications that designate a set of partitioning fields and the user selects multiple values for any of those partitioning fields, ODAG uses a separate `singlesub` request to generate a separate Analytics Application for each combination of selected partition field values, and tracks the queuing and data load phase of each of those sub-requests separately. Note that `singlesub` requests share the same link ID as their spawning `multiple` parent request. */
+  kind: RequestKindV2;
+  /** The system-assigned ID for a link. */
+  link: LinkId;
+  /** An object that describes the state of a generated Analytics Application's data load operation. In request objects that include this object as an optional property, the property will be missing for `multiple` generation requests (see their sub-requests for their data load information) or for `single` and `singlesub` requests that have not yet reached their `loading` phase. */
   loadState?: RequestLoadInfoV2;
-  modifiedDate: string; /** Condensed state of a user returned in state of ownable ODAG entities (for example, a link or request). */
-  owner: UserStateCondensedV2; /** The system-assigned ID for an ODAG request. */
+  modifiedDate: string;
+  /** Condensed state of a user returned in state of ownable ODAG entities (for example, a link or request). */
+  owner: UserStateCondensedV2;
+  /** The system-assigned ID for an ODAG request. */
   parentRequestId?: RequestIdV2;
-  purgeAfter?: string; /** The remaining time in minutes this request will be retained (0 means kept forever). */
-  retentionTime?: number; /** The system-assigned ID for an Analytics Application. */
-  selectionApp?: AppIdV2; /** The name of an Analytics Application. */
-  selectionAppName?: AppNameV2; /** A 64-bit hash of the selected field values at the time the request was made. */
+  purgeAfter?: string;
+  /** The remaining time in minutes this request will be retained (0 means kept forever). */
+  retentionTime?: number;
+  /** The system-assigned ID for an Analytics Application. */
+  selectionApp?: AppIdV2;
+  /** The name of an Analytics Application. */
+  selectionAppName?: AppNameV2;
+  /** A 64-bit hash of the selected field values at the time the request was made. */
   selectionStateHash?: number;
-  sheetname?: string; /** The current state of an ODAG request. */
-  state: RequestStateV2; /** The ID of the target sheet, taken from the link properties, to navigate to when opening the generated Analytics Application (empty for Analytics Application overview). */
-  targetSheet?: string; /** The system-assigned ID for an Analytics Application. */
-  templateApp: AppIdV2; /** The name of an Analytics Application. */
-  templateAppName?: AppNameV2; /** The value of the Link's `appRetentionTime` property at the time the Analytics Application was generated (`0` means no auto-purge). */
-  timeToLive?: number; /** A list of validation errors or warnings. */
+  sheetname?: string;
+  /** The current state of an ODAG request. */
+  state: RequestStateV2;
+  /** The ID of the target sheet, taken from the link properties, to navigate to when opening the generated Analytics Application (empty for Analytics Application overview). */
+  targetSheet?: string;
+  /** The system-assigned ID for an Analytics Application. */
+  templateApp: AppIdV2;
+  /** The name of an Analytics Application. */
+  templateAppName?: AppNameV2;
+  /** The value of the Link's `appRetentionTime` property at the time the Analytics Application was generated (`0` means no auto-purge). */
+  timeToLive?: number;
+  /** A list of validation errors or warnings. */
   validation?: string[];
 };
 /**
@@ -164,9 +208,12 @@ type UserIdV2 = string;
  * Condensed state of a user returned in state of ownable ODAG entities (for example, a link or request).
  */
 type UserStateCondensedV2 = {
-  /** The system-assigned ID for a user */id: UserIdV2;
-  name: string; /** Identity subject used for identity mapping. */
-  subject: string; /** Tenant identifier. */
+  /** The system-assigned ID for a user */
+  id: UserIdV2;
+  name: string;
+  /** Identity subject used for identity mapping. */
+  subject: string;
+  /** Tenant identifier. */
   tenantid: string;
 };
 /**
@@ -194,9 +241,13 @@ type GetOdagRequestHttpError = {
  * @throws UpdateOdagRequestHttpError
  */
 declare function updateOdagRequest(requestId: string, query: {
-  /** The action to perform on the request. One of: (1) `cancel` a pending or in-flight request; (2) `pause` a request that has not started (still in the `queued` state); (3) `resume` a paused request; (4) acknowledge a prior cancellation; or (5) acknowledge a prior failure. */action: RequestAction; /** Optional flag used with the `cancel` action. When `autoAck` is `true`, a canceled request automatically transitions to the `canceledAck` state after cancellation completes. When `autoAck` is `false`, the request transitions to `canceled`, and you must call this endpoint again with `action=ackcancel` to acknowledge the cancellation. */
-  autoAck?: boolean; /** Optional flag that deletes the generated Analytics Application after an `action` of `cancel` (with `autoAck=true`), `ackcancel`, or `ackfailure`. */
-  delGenApp?: boolean; /** Optional flag used with the `cancel` action. When `true`, the API does not return an error if the request reaches the `succeeded` state while the cancellation request is in progress. */
+  /** The action to perform on the request. One of: (1) `cancel` a pending or in-flight request; (2) `pause` a request that has not started (still in the `queued` state); (3) `resume` a paused request; (4) acknowledge a prior cancellation; or (5) acknowledge a prior failure. */
+  action: RequestAction;
+  /** Optional flag used with the `cancel` action. When `autoAck` is `true`, a canceled request automatically transitions to the `canceledAck` state after cancellation completes. When `autoAck` is `false`, the request transitions to `canceled`, and you must call this endpoint again with `action=ackcancel` to acknowledge the cancellation. */
+  autoAck?: boolean;
+  /** Optional flag that deletes the generated Analytics Application after an `action` of `cancel` (with `autoAck=true`), `ackcancel`, or `ackfailure`. */
+  delGenApp?: boolean;
+  /** Optional flag used with the `cancel` action. When `true`, the API does not return an error if the request reaches the `succeeded` state while the cancellation request is in progress. */
   ignoreSucceeded?: boolean;
 }, options?: ApiCallOptions): Promise<UpdateOdagRequestHttpResponse>;
 type UpdateOdagRequestHttpResponse = {

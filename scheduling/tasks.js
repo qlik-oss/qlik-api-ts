@@ -1,10 +1,11 @@
 import { t as __exportAll } from "../chunks/rolldown-runtime-w6R9maHv.js";
-import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-DvyLyo3f.js";
+import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-B8GqRz9s.js";
 
 //#region src/public/rest/scheduling/tasks.ts
 var tasks_exports = /* @__PURE__ */ __exportAll({
 	clearCache: () => clearCache,
 	createTask: () => createTask,
+	createTaskWithoutQuery: () => createTaskWithoutQuery,
 	default: () => tasksExport,
 	deleteTask: () => deleteTask,
 	getTask: () => getTask,
@@ -48,6 +49,21 @@ async function createTask(query, body, options) {
 		method: "post",
 		pathTemplate: "/api/scheduling/tasks",
 		query,
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
+* Creates a new task for the specified resource. The task is owned by the requesting user and is disabled by default until explicitly enabled. The `resourceId` is derived automatically from the task's state definitions and cannot be set directly in the request body.
+*
+* @param body an object with the body content
+* @throws CreateTaskWithoutQueryHttpError
+*/
+async function createTaskWithoutQuery(body, options) {
+	return invokeFetch("scheduling/tasks", {
+		method: "post",
+		pathTemplate: "/api/scheduling/tasks",
 		body,
 		contentType: "application/json",
 		options
@@ -287,6 +303,7 @@ function clearCache() {
 const tasksExport = {
 	getTasks,
 	createTask,
+	createTaskWithoutQuery,
 	getTaskResourceRuns,
 	deleteTask,
 	getTask,
@@ -305,4 +322,4 @@ const tasksExport = {
 };
 
 //#endregion
-export { clearCache, createTask, tasksExport as default, deleteTask, getTask, getTaskGraphAncestors, getTaskGraphChildren, getTaskGraphDescendants, getTaskGraphParents, getTaskLastRun, getTaskResourceRuns, getTaskRunLog, getTaskRuns, getTaskSubgraph, getTasks, patchTask, startTask, tasks_exports as t, updateTask };
+export { clearCache, createTask, createTaskWithoutQuery, tasksExport as default, deleteTask, getTask, getTaskGraphAncestors, getTaskGraphChildren, getTaskGraphDescendants, getTaskGraphParents, getTaskLastRun, getTaskResourceRuns, getTaskRunLog, getTaskRuns, getTaskSubgraph, getTasks, patchTask, startTask, tasks_exports as t, updateTask };

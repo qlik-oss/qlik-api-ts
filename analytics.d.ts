@@ -5,7 +5,6 @@ import odagAppsExport, { t as odag_apps_d_exports } from "./analytics/odag-apps.
 import odagLinksExport, { t as odag_links_d_exports } from "./analytics/odag-links.js";
 import odagRequestsExport, { t as odag_requests_d_exports } from "./analytics/odag-requests.js";
 import odagSettingsExport, { t as odag_settings_d_exports } from "./analytics/odag-settings.js";
-
 //#region src/public/rest/analytics.d.ts
 type AnalyticsAPI = {};
 /**

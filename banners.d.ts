@@ -1,28 +1,35 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
+import "./chunks/invoke-fetch-DcXyLc5n.js";
 //#region src/public/rest/banners.d.ts
 type BannerResponse = {
-  readonly createdAt: string; /** userId of the user who created the banner */
+  readonly createdAt: string;
+  /** userId of the user who created the banner */
   createdBy: string;
-  enabled: boolean; /** date-time in UTC. */
+  enabled: boolean;
+  /** date-time in UTC. */
   endTime: string;
   readonly id: string;
   linkEnabled: boolean;
   linkLabel?: string;
   linkUrl?: string;
-  message: string; /** date-time in UTC. */
+  message: string;
+  /** date-time in UTC. */
   startTime: string;
   readonly tenantId: string;
   type: "info" | "warning" | "error" | "resolved";
-  readonly updatedAt: string; /** userId of the user who last modified the banner */
+  readonly updatedAt: string;
+  /** userId of the user who last modified the banner */
   updatedBy: string;
 };
 type BannerUpsertDefinition = {
-  enabled: boolean; /** date-time in UTC. */
+  enabled: boolean;
+  /** date-time in UTC. */
   endTime: string;
   linkEnabled: boolean;
   linkLabel?: string;
   linkUrl?: string;
-  message: string; /** date-time in UTC. */
+  message: string;
+  /** date-time in UTC. */
   startTime: string;
   type: "info" | "warning" | "error" | "resolved";
 };

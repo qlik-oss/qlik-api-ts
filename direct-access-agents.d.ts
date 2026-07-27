@@ -1,4 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
+import "./chunks/invoke-fetch-DcXyLc5n.js";
 //#region src/public/rest/direct-access-agents.d.ts
 type CancelBenchmarkResponse = {
   message?: string | null;
@@ -60,7 +61,9 @@ type ErrorResponse = {
   traceId?: string | null;
 };
 type FileConnectorAllowedPath = {
-  /** The Path property in the File connector allowed paths file. */path: string; /** The Spaces property in the Odbc custom type mappings file. */
+  /** The Path property in the File connector allowed paths file. */
+  path: string;
+  /** The Spaces property in the Odbc custom type mappings file. */
   spaces?: string[] | null;
 };
 type FileConnectorAllowedPathsResponse = {
@@ -68,26 +71,40 @@ type FileConnectorAllowedPathsResponse = {
   result?: FileConnectorAllowedPath[] | null;
 };
 type GetBenchmarkStatusResponse = {
-  /** The ISO 8601 formatted timestamp when the benchmark task completed or was cancelled */benchmarkEndTime?: string | null; /** The benchmark ID */
-  benchmarkId?: string | null; /** The ISO 8601 formatted timestamp when the benchmark task started execution */
+  /** The ISO 8601 formatted timestamp when the benchmark task completed or was cancelled */
+  benchmarkEndTime?: string | null;
+  /** The benchmark ID */
+  benchmarkId?: string | null;
+  /** The ISO 8601 formatted timestamp when the benchmark task started execution */
   benchmarkStartTime?: string | null;
-  results?: GetBenchmarkStatusResults; /** The benchmark status */
-  status?: string | null; /** Additional details about the benchmark status */
-  statusMessage?: string | null; /** The total bytes requested to be transferred during the benchmark */
+  results?: GetBenchmarkStatusResults;
+  /** The benchmark status */
+  status?: string | null;
+  /** Additional details about the benchmark status */
+  statusMessage?: string | null;
+  /** The total bytes requested to be transferred during the benchmark */
   totalBytesRequested?: number;
 };
 type GetBenchmarkStatusResults = {
-  /** The ISO 8601 formatted timestamp when data transmission completed */dataTransmissionEndTime?: string | null; /** The ISO 8601 formatted timestamp when data transmission start */
-  dataTransmissionStartTime?: string | null; /** The latency in ms measured during data transmission */
-  latency?: number; /** The data throughput in KB/s measured during data transmission */
-  throughput?: number; /** The total number of bytes successfully transferred during data transmission */
+  /** The ISO 8601 formatted timestamp when data transmission completed */
+  dataTransmissionEndTime?: string | null;
+  /** The ISO 8601 formatted timestamp when data transmission start */
+  dataTransmissionStartTime?: string | null;
+  /** The latency in ms measured during data transmission */
+  latency?: number;
+  /** The data throughput in KB/s measured during data transmission */
+  throughput?: number;
+  /** The total number of bytes successfully transferred during data transmission */
   totalBytesTransferred?: number;
 };
 type LinkResponseObject = {
-  /** The URL to the related resource */href?: string | null;
+  /** The URL to the related resource */
+  href?: string | null;
 };
 type MetricsCollectorConnectorConfigurationApiResponse = {
-  /** Indicates whether metrics collection is enabled for this connector. */metricsCollectionEnabled: boolean; /** Frequency in seconds at which metrics are collected from this connector. */
+  /** Indicates whether metrics collection is enabled for this connector. */
+  metricsCollectionEnabled: boolean;
+  /** Frequency in seconds at which metrics are collected from this connector. */
   scrapeIntervalSeconds: number;
 };
 type MetricsCollectorConnectorConfigurationsApiResponse = {
@@ -101,16 +118,22 @@ type MetricsCollectorConnectorConfigurationsApiResponse = {
   systemMetrics?: MetricsCollectorConnectorConfigurationApiResponse;
 };
 type MetricsCollectorIndividualConnectorConfigurationRequest = {
-  /** Indicates whether metrics collection is enabled for this connector. */metricsCollectionEnabled: boolean; /** Frequency in seconds at which metrics are collected from this connector. */
+  /** Indicates whether metrics collection is enabled for this connector. */
+  metricsCollectionEnabled: boolean;
+  /** Frequency in seconds at which metrics are collected from this connector. */
   scrapeIntervalSeconds: number;
 };
 type MetricsCollectorSettings = {
   /** The base interval in seconds for the metrics collection loop.
    * This defines how frequently the collector checks whether to scrape each connector, not the interval at which each connector is scraped. Must be equal to or less than the lowest individual connector scrape interval. */
-  baseScrapeIntervalSeconds: number; /** The interval in minutes the metrics collector checks for and deletes old data. */
-  dataRetentionCheckIntervalMinutes: number; /** Indicates whether the metrics collector is enabled. */
-  enabled: boolean; /** The number of days to retain local data. */
-  localDataRetentionDays: number; /** The file location for the local metrics database. If not specified, defaults to `C:\ProgramData\Qlik\Gateway\tmp`. */
+  baseScrapeIntervalSeconds: number;
+  /** The interval in minutes the metrics collector checks for and deletes old data. */
+  dataRetentionCheckIntervalMinutes: number;
+  /** Indicates whether the metrics collector is enabled. */
+  enabled: boolean;
+  /** The number of days to retain local data. */
+  localDataRetentionDays: number;
+  /** The file location for the local metrics database. If not specified, defaults to `C:\ProgramData\Qlik\Gateway\tmp`. */
   localDatabaseFileLocation?: string | null;
   /** The port number that the metrics collector API will run on.
    * This must match the port that the SYSTEM connector runs on to enable network metrics collection. */
@@ -125,10 +148,15 @@ type MetricsCollectorSettingsApiResponseConnectorConfigurationResponse = {
   result?: MetricsCollectorSettingsApiResponse;
 };
 type OdbcCustomDataType = {
-  /** The IsBit property in the ODBC custom data type mapping file. */bit?: boolean; /** The Identifier property in the ODBC custom data type mapping file. */
-  id: string; /** The NativeDataType property in the ODBC custom data type mapping file. */
-  nativeDataType: string; /** The QlikDataType property in the ODBC custom data type mapping file. */
-  qlikDataType: string; /** The Size property in the ODBC custom data type mapping file. */
+  /** The IsBit property in the ODBC custom data type mapping file. */
+  bit?: boolean;
+  /** The Identifier property in the ODBC custom data type mapping file. */
+  id: string;
+  /** The NativeDataType property in the ODBC custom data type mapping file. */
+  nativeDataType: string;
+  /** The QlikDataType property in the ODBC custom data type mapping file. */
+  qlikDataType: string;
+  /** The Size property in the ODBC custom data type mapping file. */
   size?: number;
 };
 type OdbcCustomDataTypeResponse = {
@@ -137,7 +165,7 @@ type OdbcCustomDataTypeResponse = {
 };
 type Operation = {
   op: "add" | "replace" | "remove";
-  path: "AGENT_LOG_LEVEL" | "AGENT_HEALTH_FAIL_MINUTES_LIMIT" | "AGENT_LOG_OPTIONS" | "EXTEND_FIRST_REQUEST_TIMEOUT" | "RELOAD_CACHE_MEMORY_MB" | "DCAAS_LOG_LEVEL" | "ODBC_LOG_LEVEL" | "ODBC_MAX_PROCESS_COUNT" | "ODBC_PROCESS_ISOLATION_MODE" | "ODBC_RELOAD_SESSION_LIFE" | "SAPBW_LOG_LEVEL" | "SAPBW_MAX_PROCESS_COUNT" | "SAPBW_PROCESS_ISOLATION_MODE" | "SAPSQL_LOG_LEVEL" | "SAPSQL_MAX_PROCESS_COUNT" | "SAPSQL_PROCESS_ISOLATION_MODE" | "SAPPACKAGE_LOG_LEVEL" | "SAPPACKAGE_MAX_PROCESS_COUNT" | "SAPPACKAGE_PROCESS_ISOLATION_MODE" | "FILE_LOG_LEVEL" | "FILE_MAX_PROCESS_COUNT" | "FILE_PROCESS_ISOLATION_MODE" | "REST_LOG_LEVEL" | "REST_MAX_PROCESS_COUNT" | "REST_PROCESS_ISOLATION_MODE" | "ODBC_TABLES_LIMIT_FOR_GENERICODBC" | "OVERRIDE_CHUNKS_CACHE_DIR" | "CHUNK_RECOVERY_RESUME_THRESHOLD_MINUTES" | "REST_ALLOW_LOCALHOST_CONNECTION" | "OPTIONAL_CAPABILITIES";
+  path: "AGENT_LOG_LEVEL" | "AGENT_HEALTH_FAIL_MINUTES_LIMIT" | "AGENT_LOG_OPTIONS" | "EXTEND_FIRST_REQUEST_TIMEOUT" | "RELOAD_CACHE_MEMORY_MB" | "DCAAS_LOG_LEVEL" | "ODBC_LOG_LEVEL" | "ODBC_MAX_PROCESS_COUNT" | "ODBC_PROCESS_ISOLATION_MODE" | "ODBC_RELOAD_SESSION_LIFE" | "SAPBW_LOG_LEVEL" | "SAPBW_MAX_PROCESS_COUNT" | "SAPBW_PROCESS_ISOLATION_MODE" | "SAPSQL_LOG_LEVEL" | "SAPSQL_MAX_PROCESS_COUNT" | "SAPSQL_PROCESS_ISOLATION_MODE" | "SAPPACKAGE_LOG_LEVEL" | "SAPPACKAGE_MAX_PROCESS_COUNT" | "SAPPACKAGE_PROCESS_ISOLATION_MODE" | "FILE_LOG_LEVEL" | "FILE_MAX_PROCESS_COUNT" | "FILE_PROCESS_ISOLATION_MODE" | "REST_LOG_LEVEL" | "REST_MAX_PROCESS_COUNT" | "REST_PROCESS_ISOLATION_MODE" | "ODBC_TABLES_LIMIT_FOR_GENERICODBC" | "OVERRIDE_CHUNKS_CACHE_DIR" | "CHUNK_RECOVERY_RESUME_THRESHOLD_MINUTES" | "REST_ALLOW_LOCALHOST_CONNECTION" | "OPTIONAL_CAPABILITIES" | "AGENT_LOG_MAX_FILE_SIZE_MB" | "AGENT_LOG_RETENTION_DAYS" | "METRICS_LOG_MAX_FILE_SIZE_MB" | "METRICS_LOG_RETENTION_DAYS" | "DCAAS_LOG_RETENTION_DAYS" | "ODBC_LOG_RETENTION_DAYS" | "SAPBW_LOG_RETENTION_DAYS" | "SAPSQL_LOG_RETENTION_DAYS" | "SAPPACKAGE_LOG_RETENTION_DAYS" | "REST_LOG_RETENTION_DAYS" | "FILE_LOG_RETENTION_DAYS";
   value: string;
 };
 type PatchOperationResponse = {
@@ -179,10 +207,14 @@ type UpdateMetricsCollectorConnectorConfigurationsRequest = {
 type UpdateMetricsCollectorSettings = {
   /** The base interval in seconds for the metrics collection loop.
    * This defines how frequently the collector checks whether to scrape each connector, not the interval at which each connector is scraped. Must be equal to or less than the lowest individual connector scrape interval. */
-  baseScrapeIntervalSeconds: number; /** The interval in minutes the metrics collector checks for and deletes old data. */
-  dataRetentionCheckIntervalMinutes: number; /** Indicates whether the metrics collector is enabled. */
-  enabled: boolean; /** The number of days to retain local data. */
-  localDataRetentionDays: number; /** The file location for the local metrics database. If not specified, defaults to `C:\ProgramData\Qlik\Gateway\tmp`. */
+  baseScrapeIntervalSeconds: number;
+  /** The interval in minutes the metrics collector checks for and deletes old data. */
+  dataRetentionCheckIntervalMinutes: number;
+  /** Indicates whether the metrics collector is enabled. */
+  enabled: boolean;
+  /** The number of days to retain local data. */
+  localDataRetentionDays: number;
+  /** The file location for the local metrics database. If not specified, defaults to `C:\ProgramData\Qlik\Gateway\tmp`. */
   localDatabaseFileLocation: string;
   /** The port number that the metrics collector API will run on.
    * This must match the port that the SYSTEM connector runs on to enable network metrics collection. */
@@ -221,7 +253,9 @@ type RestartDirectAccessAgentHttpError = {
  * @throws CreateDirectAccessAgentBenchmarkHttpError
  */
 declare function createDirectAccessAgentBenchmark(agentId: string, query: {
-  /** Forces the benchmark to start regardless of the state of the agent. Does not override QCS resource limits. Use with caution. */force?: boolean; /** The volume of data in GB to transfer during the throughput measurement part of the benchmark. */
+  /** Forces the benchmark to start regardless of the state of the agent. Does not override QCS resource limits. Use with caution. */
+  force?: boolean;
+  /** The volume of data in GB to transfer during the throughput measurement part of the benchmark. */
   gigaBytesToTransfer?: number;
 }, options?: ApiCallOptions): Promise<CreateDirectAccessAgentBenchmarkHttpResponse>;
 type CreateDirectAccessAgentBenchmarkHttpResponse = {
@@ -278,7 +312,8 @@ type CreateDirectAccessAgentBenchmarkCancelHttpError = {
  * @throws GetDirectAccessAgentConfigurationHttpError
  */
 declare function getDirectAccessAgentConfiguration(agentId: string, query: {
-  /** Individual properties within the agent configuration */queryProperties?: string[];
+  /** Individual properties within the agent configuration */
+  queryProperties?: string[];
 }, options?: ApiCallOptions): Promise<GetDirectAccessAgentConfigurationHttpResponse>;
 type GetDirectAccessAgentConfigurationHttpResponse = {
   data: ConfigurationResponse;

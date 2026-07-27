@@ -1,27 +1,38 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
+import "./chunks/invoke-fetch-DcXyLc5n.js";
 //#region src/public/rest/data-assets.d.ts
 type BatchIdDto = {
   ids?: string[];
 };
 type DataAsset = {
   appId?: string;
-  appType: string; /** The value is automatically set by the application. User defined value is ignored. */
-  readonly createdBy?: string; /** The value is automatically set by the application. User defined value is ignored. */
-  readonly createdTime?: string; /** The date-time when the source data was last changed */
+  appType: string;
+  /** The value is automatically set by the application. User defined value is ignored. */
+  readonly createdBy?: string;
+  /** The value is automatically set by the application. User defined value is ignored. */
+  readonly createdTime?: string;
+  /** The date-time when the source data was last changed */
   dataFreshness?: string;
   dataStoreInfo?: DataStoreInfo;
-  description?: string; /** Only required when updating the resource. Must be null for new resources. */
-  id?: string; /** The value is automatically set by the application. User defined value is ignored. */
-  readonly lastModifiedBy?: string; /** The value is automatically set by the application. User defined value is ignored. */
+  description?: string;
+  /** Only required when updating the resource. Must be null for new resources. */
+  id?: string;
+  /** The value is automatically set by the application. User defined value is ignored. */
+  readonly lastModifiedBy?: string;
+  /** The value is automatically set by the application. User defined value is ignored. */
   readonly lastModifiedTime?: string;
-  name?: string; /** The value is automatically set by the application. */
-  ownerId?: string; /** A Map of name-value pairs. */
+  name?: string;
+  /** The value is automatically set by the application. */
+  ownerId?: string;
+  /** A Map of name-value pairs. */
   properties?: Record<string, unknown>;
   spaceId?: string;
   tags?: string[];
   technicalDescription?: string;
-  technicalName: string; /** The value is automatically set by the application. User defined value is ignored. */
-  readonly tenantId?: string; /** Only required when updating the resource. Must be null for new resources. */
+  technicalName: string;
+  /** The value is automatically set by the application. User defined value is ignored. */
+  readonly tenantId?: string;
+  /** Only required when updating the resource. Must be null for new resources. */
   version?: number;
 };
 type DataStoreInfo = {
@@ -40,9 +51,13 @@ type ErrorResponse = {
   traceId?: string;
 };
 type JsonPatch = {
-  /** A JSON Pointer path pointing to the location to move/copy from. */from?: string; /** The operation to be performed. */
-  op: "add" | "remove" | "replace" | "move" | "copy" | "test"; /** A JSON pointer to the property being affected. */
-  path: string; /** The value to add, replace or test. */
+  /** A JSON Pointer path pointing to the location to move/copy from. */
+  from?: string;
+  /** The operation to be performed. */
+  op: "add" | "remove" | "replace" | "move" | "copy" | "test";
+  /** A JSON pointer to the property being affected. */
+  path: string;
+  /** The value to add, replace or test. */
   value?: unknown;
 };
 /**
@@ -87,7 +102,8 @@ type CreateDataAssetHttpError = {
  * @throws GetDataAssetHttpError
  */
 declare function getDataAsset(dataAssetId: string, query: {
-  /** Comma-separated fields to return in the response. */projections?: string[];
+  /** Comma-separated fields to return in the response. */
+  projections?: string[];
 }, options?: ApiCallOptions): Promise<GetDataAssetHttpResponse>;
 type GetDataAssetHttpResponse = {
   data: DataAsset;

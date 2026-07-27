@@ -58,7 +58,9 @@ feature within the experiment version</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="datatype"><code class="tsd-tag">Optional</code><span>data<wbr/>Type</span><a href="#datatype" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">dataType</span><span class="tsd-signature-symbol">?:</span> <a href="ml.DataType.html" class="tsd-signature-type tsd-kind-type-alias">DataType</a></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">dataType</span><span class="tsd-signature-symbol">?:</span> <a href="ml.DataType.html" class="tsd-signature-type tsd-kind-type-alias">DataType</a></div>
+<div class="tsd-comment tsd-typography"><p>The data type of this feature in your dataset</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="featuretype"><code class="tsd-tag">Optional</code><span>feature<wbr/>Type</span><a href="#featuretype" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">featureType</span><span class="tsd-signature-symbol">?:</span> <a href="ml.FeatureType.html" class="tsd-signature-type tsd-kind-type-alias">FeatureType</a></div>
@@ -75,10 +77,14 @@ here is based on insights for this feature
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="name"><code class="tsd-tag">Optional</code><span>name</span><a href="#name" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>Name of the feature column</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="parentfeature"><code class="tsd-tag">Optional</code><span>parent<wbr/>Feature</span><a href="#parentfeature" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">parentFeature</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></div></section></section></details></div>
+<div class="tsd-signature"><span class="tsd-kind-property">parentFeature</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></div>
+<div class="tsd-comment tsd-typography"><p>The parent feature name for engineered features. e.g. <code>OrderDate</code> may be the parent of its engineered features (features extracted from parent) like <code>OrderDate.YEAR</code>, <code>OrderDate.MONTH</code>, etc.</p>
+</div></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

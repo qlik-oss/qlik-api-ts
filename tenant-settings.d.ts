@@ -1,4 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
+import "./chunks/invoke-fetch-DcXyLc5n.js";
 //#region src/public/rest/tenant-settings.d.ts
 type CustomizeNoAccess = {
   linkEnabled: boolean;
@@ -8,7 +9,9 @@ type CustomizeNoAccess = {
 };
 type Error = {
   errors?: {
-    /** Error code. */readonly code?: number; /** Error cause. */
+    /** Error code. */
+    readonly code?: number;
+    /** Error cause. */
     readonly title?: string;
   }[];
 };
@@ -49,17 +52,25 @@ type ErrorResponse500 = {
   traceId?: string;
 };
 type JSONPatchRequestAddReplaceTest = {
-  /** The operation to perform. */op: "add" | "replace" | "test"; /** A JSON Pointer path. */
-  path: string; /** The value to add, replace or test. */
+  /** The operation to perform. */
+  op: "add" | "replace" | "test";
+  /** A JSON Pointer path. */
+  path: string;
+  /** The value to add, replace or test. */
   value: unknown;
 };
 type JSONPatchRequestMoveCopy = {
-  /** A JSON Pointer path. */from: string; /** The operation to perform. */
-  op: "move" | "copy"; /** A JSON Pointer path. */
+  /** A JSON Pointer path. */
+  from: string;
+  /** The operation to perform. */
+  op: "move" | "copy";
+  /** A JSON Pointer path. */
   path: string;
 };
 type JSONPatchRequestRemove = {
-  /** The operation to perform. */op: "remove"; /** A JSON Pointer path. */
+  /** The operation to perform. */
+  op: "remove";
+  /** A JSON Pointer path. */
   path: string;
 };
 type PatchRequest = (JSONPatchRequestAddReplaceTest | JSONPatchRequestRemove | JSONPatchRequestMoveCopy)[];
@@ -71,7 +82,8 @@ type ReleaseCadenceConfig = "monthly" | "continuous";
  * Set to true to enable cross-region inference, false to disable. Defaults to false.
  */
 type SetCrossRegionDataProcessing = {
-  /** Set to true to enable cross-region inference, false to disable. */value: SetCrossRegionDataProcessingConfig;
+  /** Set to true to enable cross-region inference, false to disable. */
+  value: SetCrossRegionDataProcessingConfig;
 };
 /**
  * Set to true to enable cross-region inference, false to disable.
@@ -102,15 +114,19 @@ type TenantSettingsCreateDefinition = {
   preferredStartPage?: StartPage;
 };
 type TenantSettingsDefinition = {
-  readonly createdAt: string; /** userId of the user who created the settings */
-  createdBy: string; /** Set to true to enable cross-region inference, false to disable. */
+  readonly createdAt: string;
+  /** userId of the user who created the settings */
+  createdBy: string;
+  /** Set to true to enable cross-region inference, false to disable. */
   crossRegionDataProcessing?: SetCrossRegionDataProcessingConfig;
   customizeNoAccess?: CustomizeNoAccess;
   readonly id: string;
-  preferredStartPage?: StartPageConfigHub | StartPageConfigCreationHub | StartPageConfigQdi | StartPageConfigConsole; /** Set the release cadence */
+  preferredStartPage?: StartPageConfigHub | StartPageConfigCreationHub | StartPageConfigQdi | StartPageConfigConsole;
+  /** Set the release cadence */
   releaseCadence?: ReleaseCadenceConfig;
   readonly tenantId: string;
-  readonly updatedAt: string; /** userId of the user who last modified the settings */
+  readonly updatedAt: string;
+  /** userId of the user who last modified the settings */
   updatedBy?: string;
 };
 type TenantStartPagesResponse = {

@@ -58,16 +58,24 @@
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="imagerenderingdpi"><code class="tsd-tag">Optional</code><span>image<wbr/>Rendering<wbr/>Dpi</span><a href="#imagerenderingdpi" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">imageRenderingDpi</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">imageRenderingDpi</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
+<div class="tsd-comment tsd-typography"><p>This value is used for rendered images only, set to a default of 300 dpi.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="orientation"><code class="tsd-tag">Optional</code><span>orientation</span><a href="#orientation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">orientation</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">&quot;P&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;L&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;A&quot;</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">orientation</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">&quot;P&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;L&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;A&quot;</span></div>
+<div class="tsd-comment tsd-typography"><p>P for portrait, L for landscape and A for auto-detect. Auto-detect sets the orientation depending on the content width and height proportions: if content width &gt; height the orientation is automatically set to landscape, portrait otherwise.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="properties"><code class="tsd-tag">Optional</code><span>properties</span><a href="#properties" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">properties</span><span class="tsd-signature-symbol">?:</span> <a href="reports.DocProperties.html" class="tsd-signature-type tsd-kind-type-alias">DocProperties</a></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">properties</span><span class="tsd-signature-symbol">?:</span> <a href="reports.DocProperties.html" class="tsd-signature-type tsd-kind-type-alias">DocProperties</a></div>
+<div class="tsd-comment tsd-typography"><p>Properties of the document. In case of multiple composition, only properties specified in the composition output are taken and the ones specified in each output item are ignored.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="resizedata"><code class="tsd-tag">Optional</code><span>resize<wbr/>Data</span><a href="#resizedata" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">resizeData</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-symbol">{</span> <span class="tsd-kind-property">fit</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">}</span></div>
+<div class="tsd-comment tsd-typography"><p>The area where the object (eg. sheet, chart) is printed. Required in case of &quot;fit&quot; resizeType.</p>
+</div>
 <div class="tsd-type-declaration">
 <h4>Type Declaration</h4>
 <ul class="tsd-parameters">
@@ -87,7 +95,9 @@
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="size"><code class="tsd-tag">Optional</code><span>size</span><a href="#size" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">size</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">&quot;A1&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;A2&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;A3&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;A4&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;A5&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;A6&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;Letter&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;Legal&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;Tabloid&quot;</span></div></section></section></details></div>
+<div class="tsd-signature"><span class="tsd-kind-property">size</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">&quot;A1&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;A2&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;A3&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;A4&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;A5&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;A6&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;Letter&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;Legal&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;Tabloid&quot;</span></div>
+<div class="tsd-comment tsd-typography"><p>Size of the pdf page.</p>
+</div></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

@@ -1,5 +1,5 @@
 import { t as __exportAll } from "../chunks/rolldown-runtime-w6R9maHv.js";
-import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-DvyLyo3f.js";
+import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-B8GqRz9s.js";
 
 //#region src/public/rest/workflows/automations.ts
 var automations_exports = /* @__PURE__ */ __exportAll({
@@ -146,7 +146,7 @@ async function updateAutomation(id, body, options) {
 	});
 }
 /**
-* Changes the owner of an automation to another user. This action removes the history and change logs of this automation. All linked connections used in the automation are detached and not moved to the new owner. The requesting user must be assigned one of the following roles: `TenantAdmin`, `AnalyticsAdmin` or have at least one of the following scopes: `admin.automations`, `admin.automations:strict`.
+* Changes the owner of an automation to another user. This action removes the history and change logs of this automation. All linked connections used in the automation are detached and not moved to the new owner. The requesting user must be assigned `TenantAdmin` role or have at least one of the following scopes: `admin.automations`, `admin.automations:strict`.
 *
 * @param id The unique identifier for the automation.
 * @param body an object with the body content
@@ -231,7 +231,7 @@ async function enableAutomation(id, options) {
 	});
 }
 /**
-* Changes the owner of an automation to another user. This action removes the history and change logs of this automation. All linked connections used in the automation are detached and not moved to the new owner. The requesting user must be assigned one of the following roles: `TenantAdmin`, `AnalyticsAdmin` or have at least one of the following scopes: `admin.automations`, `admin.automations:strict`.
+* Changes the owner of an automation to another user. This action removes the history and change logs of this automation. All linked connections used in the automation are detached and not moved to the new owner. The requesting user must be assigned `TenantAdmin` role or have at least one of the following scopes: `admin.automations`, `admin.automations:strict`.
 *
 * @param id The unique identifier for the automation.
 * @param body an object with the body content

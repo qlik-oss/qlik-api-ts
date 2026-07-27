@@ -1,10 +1,12 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
+import "./chunks/invoke-fetch-DcXyLc5n.js";
 //#region src/public/rest/data-qualities.d.ts
 /**
  * Response returned when a data quality computation is successfully triggered.
  */
 type ComputationResponse = {
-  /** The unique identifier of the triggered computation. Use this value to poll for status. */computationId: string;
+  /** The unique identifier of the triggered computation. Use this value to poll for status. */
+  computationId: string;
 };
 type ComputationStatusResponse = {
   status: ExecutionStatus;
@@ -26,7 +28,9 @@ type ConnectionIdType = string;
  * }
  */
 type DataQualityComputationRequest = {
-  /** The ID of the connection */connectionId?: ConnectionIdType; /** The ID of the dataset */
+  /** The ID of the connection */
+  connectionId?: ConnectionIdType;
+  /** The ID of the dataset */
   datasetId?: DatasetIdType;
 } & SamplingConfiguration;
 /**
@@ -34,7 +38,8 @@ type DataQualityComputationRequest = {
  */
 type DatasetIdType = string;
 type DatasetQualityGlobalResultsResponse = {
-  /** The unique identifier of the dataset. */datasetId: string;
+  /** The unique identifier of the dataset. */
+  datasetId: string;
   qualities: QualitiesGlobalResultsResponse[];
 };
 type Error = {
@@ -48,19 +53,28 @@ type ErrorResponse = {
 };
 type ExecutionStatus = "PROFILE_REQUESTED" | "PROFILE_FAILED" | "REQUESTED" | "SUBMITTED" | "SUCCEEDED" | "FAILED";
 type QualitiesGlobalResultsResponse = {
-  /** The unique identifier of the connection. */connectionId: string;
+  /** The unique identifier of the connection. */
+  connectionId: string;
   quality: QualityGlobalResultsResponse;
 };
 type QualityGlobalResultsResponse = {
-  /** Number of empty sample cells. */empty: number; /** Number of invalid sample cells. */
-  invalid: number; /** Total number of cells in the sample. */
-  total: number; /** Timestamp of the most recent data quality computation for this dataset and connection. */
-  updatedAt: string; /** Number of valid sample cells. */
+  /** Number of empty sample cells. */
+  empty: number;
+  /** Number of invalid sample cells. */
+  invalid: number;
+  /** Total number of cells in the sample. */
+  total: number;
+  /** Timestamp of the most recent data quality computation for this dataset and connection. */
+  updatedAt: string;
+  /** Number of valid sample cells. */
   valid: number;
 };
 type SamplingConfiguration = {
-  /** Specifies where the data quality computation takes place. In `PUSHDOWN` mode, it runs within the Cloud Data Warehouse (e.g., Snowflake, Databricks), whereas in `PULLUP` mode, it runs in Qlik Cloud. */executionMode?: "PUSHDOWN" | "PULLUP"; /** Specifies how the dataset is sampled. `ABSOLUTE` represents a fixed number of rows, while `RELATIVE` refers to a percentage of the total dataset rows. */
-  sampleMode?: "ABSOLUTE" | "RELATIVE"; /** The actual value of the selected sampling method size (either a fixed number for `ABSOLUTE` mode or a percentage for `RELATIVE` mode). Maximum allowed value for `ABSOLUTE` mode is `100000`. */
+  /** Specifies where the data quality computation takes place. In `PUSHDOWN` mode, it runs within the Cloud Data Warehouse (e.g., Snowflake, Databricks), whereas in `PULLUP` mode, it runs in Qlik Cloud. */
+  executionMode?: "PUSHDOWN" | "PULLUP";
+  /** Specifies how the dataset is sampled. `ABSOLUTE` represents a fixed number of rows, while `RELATIVE` refers to a percentage of the total dataset rows. */
+  sampleMode?: "ABSOLUTE" | "RELATIVE";
+  /** The actual value of the selected sampling method size (either a fixed number for `ABSOLUTE` mode or a percentage for `RELATIVE` mode). Maximum allowed value for `ABSOLUTE` mode is `100000`. */
   sampleSize?: number;
 };
 /**
@@ -120,7 +134,9 @@ type GetDataQualitiesComputationHttpError = {
  * @throws GetDataQualitiesGlobalResultsHttpError
  */
 declare function getDataQualitiesGlobalResults(query: {
-  /** The unique identifier of the connection. */connectionId?: ConnectionIdType; /** The unique identifier of the dataset. */
+  /** The unique identifier of the connection. */
+  connectionId?: ConnectionIdType;
+  /** The unique identifier of the dataset. */
   datasetId: DatasetIdType;
 }, options?: ApiCallOptions): Promise<GetDataQualitiesGlobalResultsHttpResponse>;
 type GetDataQualitiesGlobalResultsHttpResponse = {

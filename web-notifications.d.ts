@@ -1,12 +1,17 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
+import "./chunks/invoke-fetch-DcXyLc5n.js";
 //#region src/public/rest/web-notifications.d.ts
 /**
  * An error object.
  */
 type Error = {
-  /** The error code. */code: string; /** A human-readable explanation specific to this occurrence of the problem. */
-  message?: string; /** The HTTP status code. */
-  status?: number; /** Summary of the problem. */
+  /** The error code. */
+  code: string;
+  /** A human-readable explanation specific to this occurrence of the problem. */
+  message?: string;
+  /** The HTTP status code. */
+  status?: number;
+  /** Summary of the problem. */
   title: string;
 };
 /**
@@ -33,7 +38,8 @@ type Links = {
  * Notifications meta data
  */
 type Meta = {
-  /** The total number of unread notification. */unreadCount?: number;
+  /** The total number of unread notification. */
+  unreadCount?: number;
 };
 type Notification = {
   readonly action?: string;
@@ -55,8 +61,11 @@ type Notification = {
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
  */
 type NotificationPatch = {
-  /** The operation to be performed. */op: "replace"; /** The path for the given resource field to patch. */
-  path: "/read"; /** The value to be used for this operation. */
+  /** The operation to be performed. */
+  op: "replace";
+  /** The path for the given resource field to patch. */
+  path: "/read";
+  /** The value to be used for this operation. */
   value: string;
 };
 /**
@@ -71,8 +80,10 @@ type NotificationPatch = {
  */
 type NotificationPatchSchema = NotificationPatch[];
 type Notifications = {
-  data?: Notification[]; /** Notifications links */
-  links?: Links; /** Notifications meta data */
+  data?: Notification[];
+  /** Notifications links */
+  links?: Links;
+  /** Notifications meta data */
   meta?: Meta;
 };
 /**
@@ -88,10 +99,15 @@ type Notifications = {
  * @throws GetNotificationsHttpError
  */
 declare function getNotifications(query: {
-  /** The number of notification entries to retrieved. */limit?: number; /** Page number */
-  page?: number; /** Read status of the notification */
-  read?: boolean; /** Filter by resource types. If passing more than 1 resource type, use comma seperated string. */
-  resourceType?: string; /** The field to sort by, with +/- prefix indicating sort order */
+  /** The number of notification entries to retrieved. */
+  limit?: number;
+  /** Page number */
+  page?: number;
+  /** Read status of the notification */
+  read?: boolean;
+  /** Filter by resource types. If passing more than 1 resource type, use comma seperated string. */
+  resourceType?: string;
+  /** The field to sort by, with +/- prefix indicating sort order */
   sort?: "+createdAt" | "-createdAt" | "+updatedAt" | "-updatedAt";
 }, options?: ApiCallOptions): Promise<GetNotificationsHttpResponse>;
 type GetNotificationsHttpResponse = {

@@ -1,7 +1,6 @@
 import dataConnectionsExport, { t as data_connections_d_exports } from "./connectivity/data-connections.js";
 import dataCredentialsExport, { t as data_credentials_d_exports } from "./connectivity/data-credentials.js";
 import dataSourcesExport, { t as data_sources_d_exports } from "./connectivity/data-sources.js";
-
 //#region src/public/rest/connectivity.d.ts
 type ConnectivityAPI = {};
 /**

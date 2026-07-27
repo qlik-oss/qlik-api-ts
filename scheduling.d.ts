@@ -1,5 +1,4 @@
 import tasksExport, { t as tasks_d_exports } from "./scheduling/tasks.js";
-
 //#region src/public/rest/scheduling.d.ts
 type SchedulingAPI = {};
 /**

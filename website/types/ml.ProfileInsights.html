@@ -62,7 +62,9 @@
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="datasetprofile"><code class="tsd-tag">Optional</code><span>data<wbr/>Set<wbr/>Profile</span><a href="#datasetprofile" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">dataSetProfile</span><span class="tsd-signature-symbol">?:</span> <a href="ml.DataSetProfile.html" class="tsd-signature-type tsd-kind-type-alias">DataSetProfile</a></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">dataSetProfile</span><span class="tsd-signature-symbol">?:</span> <a href="ml.DataSetProfile.html" class="tsd-signature-type tsd-kind-type-alias">DataSetProfile</a></div>
+<div class="tsd-comment tsd-typography"><p>Full dataset profile from the Profile Service.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="defaultversionconfig"><code class="tsd-tag">Optional</code><span>default<wbr/>Version<wbr/>Config</span><a href="#defaultversionconfig" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">defaultVersionConfig</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">dataSetId</span><span class="tsd-signature-symbol">:</span> <a href="ml.DataSetId.html" class="tsd-signature-type tsd-kind-type-alias">DataSetId</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">datasetOrigin</span><span class="tsd-signature-symbol">:</span> <a href="ml.DatasetOrigin.html" class="tsd-signature-type tsd-kind-type-alias">DatasetOrigin</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">experimentMode</span><span class="tsd-signature-symbol">:</span> <a href="ml.ExperimentMode.html" class="tsd-signature-type tsd-kind-type-alias">ExperimentMode</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">featuresList</span><span class="tsd-signature-symbol">?:</span> <a href="ml.FeaturesList.html" class="tsd-signature-type tsd-kind-type-alias">FeaturesList</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
@@ -77,9 +79,13 @@ dataset. Not returned when <code>experimentVersionId</code> is provided.</p>
 <div class="tsd-comment tsd-typography"><p>The Qlik catalog dataset ID</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><span class="tsd-kind-property">datasetOrigin</span><span class="tsd-signature-symbol">: </span><a href="ml.DatasetOrigin.html" class="tsd-signature-type tsd-kind-type-alias">DatasetOrigin</a></h5></li>
+<h5><span class="tsd-kind-property">datasetOrigin</span><span class="tsd-signature-symbol">: </span><a href="ml.DatasetOrigin.html" class="tsd-signature-type tsd-kind-type-alias">DatasetOrigin</a></h5>
+<div class="tsd-comment tsd-typography"><p>Whether this is a new or other dataset</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><span class="tsd-kind-property">experimentMode</span><span class="tsd-signature-symbol">: </span><a href="ml.ExperimentMode.html" class="tsd-signature-type tsd-kind-type-alias">ExperimentMode</a></h5></li>
+<h5><span class="tsd-kind-property">experimentMode</span><span class="tsd-signature-symbol">: </span><a href="ml.ExperimentMode.html" class="tsd-signature-type tsd-kind-type-alias">ExperimentMode</a></h5>
+<div class="tsd-comment tsd-typography"><p>The model training mode for the experiment version</p>
+</div></li>
 <li class="tsd-parameter">
 <h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">featuresList</span><span class="tsd-signature-symbol">?: </span><a href="ml.FeaturesList.html" class="tsd-signature-type tsd-kind-type-alias">FeaturesList</a></h5>
 <div class="tsd-comment tsd-typography"><p>List of features from your dataset for creating Experiment
@@ -97,10 +103,14 @@ this dataset profile is a snapshot from a previous version.</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="insights"><code class="tsd-tag">Optional</code><span>insights</span><a href="#insights" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">insights</span><span class="tsd-signature-symbol">?:</span> <a href="ml.FeatureInsights.html" class="tsd-signature-type tsd-kind-type-alias">FeatureInsights</a><span class="tsd-signature-symbol">[]</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">insights</span><span class="tsd-signature-symbol">?:</span> <a href="ml.FeatureInsights.html" class="tsd-signature-type tsd-kind-type-alias">FeatureInsights</a><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-comment tsd-typography"><p>List of feature insights object, one per feature in the dataset</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="islargecsv"><code class="tsd-tag">Optional</code><span>is<wbr/>Large<wbr/>Csv</span><a href="#islargecsv" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">isLargeCsv</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">isLargeCsv</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
+<div class="tsd-comment tsd-typography"><p>Is this a CSV dataset &gt; 1GB?</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="numberofrows"><code class="tsd-tag">Optional</code><span>number<wbr/>Of<wbr/>Rows</span><a href="#numberofrows" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">numberOfRows</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
@@ -114,16 +124,24 @@ ensure it stays under your license limit. Large CSVs have a hard
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="ownerid"><span>owner<wbr/>Id</span><a href="#ownerid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">ownerId</span><span class="tsd-signature-symbol">:</span> <a href="ml.OwnerId.html" class="tsd-signature-type tsd-kind-type-alias">OwnerId</a></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">ownerId</span><span class="tsd-signature-symbol">:</span> <a href="ml.OwnerId.html" class="tsd-signature-type tsd-kind-type-alias">OwnerId</a></div>
+<div class="tsd-comment tsd-typography"><p>ID of owner/user for this entity</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="sizeinbytes"><code class="tsd-tag">Optional</code><span>size<wbr/>In<wbr/>Bytes</span><a href="#sizeinbytes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">sizeInBytes</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">sizeInBytes</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
+<div class="tsd-comment tsd-typography"><p>Size of the profiled dataset in bytes.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="status"><span>status</span><a href="#status" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">status</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;pending&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;error&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;ready&quot;</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">status</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;pending&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;error&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;ready&quot;</span></div>
+<div class="tsd-comment tsd-typography"><p>Status of profile insights. Not available until <code>ready</code>.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="tenantid"><span>tenant<wbr/>Id</span><a href="#tenantid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">tenantId</span><span class="tsd-signature-symbol">:</span> <a href="ml.TenantId.html" class="tsd-signature-type tsd-kind-type-alias">TenantId</a></div></section></section></details></div>
+<div class="tsd-signature"><span class="tsd-kind-property">tenantId</span><span class="tsd-signature-symbol">:</span> <a href="ml.TenantId.html" class="tsd-signature-type tsd-kind-type-alias">TenantId</a></div>
+<div class="tsd-comment tsd-typography"><p>Tenant ID for this entity</p>
+</div></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

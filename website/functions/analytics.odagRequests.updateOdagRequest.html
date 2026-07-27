@@ -52,11 +52,17 @@
 <div class="tsd-comment tsd-typography"><p>The action to perform on the request. One of: (1) <code>cancel</code> a pending or in-flight request; (2) <code>pause</code> a request that has not started (still in the <code>queued</code> state); (3) <code>resume</code> a paused request; (4) acknowledge a prior cancellation; or (5) acknowledge a prior failure.</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">autoAck</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">autoAck</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+<div class="tsd-comment tsd-typography"><p>Optional flag used with the <code>cancel</code> action. When <code>autoAck</code> is <code>true</code>, a canceled request automatically transitions to the <code>canceledAck</code> state after cancellation completes. When <code>autoAck</code> is <code>false</code>, the request transitions to <code>canceled</code>, and you must call this endpoint again with <code>action=ackcancel</code> to acknowledge the cancellation.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">delGenApp</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">delGenApp</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+<div class="tsd-comment tsd-typography"><p>Optional flag that deletes the generated Analytics Application after an <code>action</code> of <code>cancel</code> (with <code>autoAck=true</code>), <code>ackcancel</code>, or <code>ackfailure</code>.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">ignoreSucceeded</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5></li></ul></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">ignoreSucceeded</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+<div class="tsd-comment tsd-typography"><p>Optional flag used with the <code>cancel</code> action. When <code>true</code>, the API does not return an error if the request reaches the <code>succeeded</code> state while the cancellation request is in progress.</p>
+</div></li></ul></li>
 <li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">options</span>: <a href="../types/invoke-fetch-types.ApiCallOptions.html" class="tsd-signature-type tsd-kind-type-alias">ApiCallOptions</a></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/analytics.odagRequests.UpdateOdagRequestHttpResponse.html" class="tsd-signature-type tsd-kind-type-alias">UpdateOdagRequestHttpResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography">

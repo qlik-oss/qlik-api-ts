@@ -59,22 +59,34 @@
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="enabled"><code class="tsd-tag">Optional</code><span>enabled</span><a href="#enabled" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">enabled</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">enabled</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
+<div class="tsd-comment tsd-typography"><p>Whether this axis is enabled in the tenant configuration. Disabled axes have a <code>weight</code> of <code>0</code> and do not affect the overall score.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="id"><span>id</span><a href="#id" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">id</span><span class="tsd-signature-symbol">:</span> <a href="data-governance.trustScores.AxisId.html" class="tsd-signature-type tsd-kind-type-alias">AxisId</a></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">id</span><span class="tsd-signature-symbol">:</span> <a href="data-governance.trustScores.AxisId.html" class="tsd-signature-type tsd-kind-type-alias">AxisId</a></div>
+<div class="tsd-comment tsd-typography"><p>Defines the axis of the Trust Score.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="metrics"><span>metrics</span><a href="#metrics" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">metrics</span><span class="tsd-signature-symbol">:</span> <a href="data-governance.trustScores.MetricResponse.html" class="tsd-signature-type tsd-kind-type-alias">MetricResponse</a><span class="tsd-signature-symbol">[]</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">metrics</span><span class="tsd-signature-symbol">:</span> <a href="data-governance.trustScores.MetricResponse.html" class="tsd-signature-type tsd-kind-type-alias">MetricResponse</a><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-comment tsd-typography"><p>Per-metric breakdown contributing to this axis score.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="previousscore"><code class="tsd-tag">Optional</code><span>previous<wbr/>Score</span><a href="#previousscore" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">previousScore</span><span class="tsd-signature-symbol">?:</span> <a href="data-governance.trustScores.GenericScore.html" class="tsd-signature-type tsd-kind-type-alias">GenericScore</a></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">previousScore</span><span class="tsd-signature-symbol">?:</span> <a href="data-governance.trustScores.GenericScore.html" class="tsd-signature-type tsd-kind-type-alias">GenericScore</a></div>
+<div class="tsd-comment tsd-typography"><p>Axis score from the previous computation, for change tracking.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="score"><code class="tsd-tag">Optional</code><span>score</span><a href="#score" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">score</span><span class="tsd-signature-symbol">?:</span> <a href="data-governance.trustScores.GenericScore.html" class="tsd-signature-type tsd-kind-type-alias">GenericScore</a></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">score</span><span class="tsd-signature-symbol">?:</span> <a href="data-governance.trustScores.GenericScore.html" class="tsd-signature-type tsd-kind-type-alias">GenericScore</a></div>
+<div class="tsd-comment tsd-typography"><p>Computed score for this axis [0, 100]. Omitted when axis is not applicable.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="weight"><span>weight</span><a href="#weight" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">weight</span><span class="tsd-signature-symbol">:</span> <a href="data-governance.trustScores.GenericWeight.html" class="tsd-signature-type tsd-kind-type-alias">GenericWeight</a></div></section></section></details></div>
+<div class="tsd-signature"><span class="tsd-kind-property">weight</span><span class="tsd-signature-symbol">:</span> <a href="data-governance.trustScores.GenericWeight.html" class="tsd-signature-type tsd-kind-type-alias">GenericWeight</a></div>
+<div class="tsd-comment tsd-typography"><p>Defines the weight of the axis or metric in the Trust Score.</p>
+</div></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

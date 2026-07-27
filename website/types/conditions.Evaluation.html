@@ -68,19 +68,29 @@
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="byokmigrationid"><code class="tsd-tag">Optional</code><span>byok<wbr/>Migration<wbr/>Id</span><a href="#byokmigrationid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">byokMigrationId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">byokMigrationId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>internal identifier used when migrating keys</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="causalevent"><code class="tsd-tag">Optional</code><span>causal<wbr/>Event</span><a href="#causalevent" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">causalEvent</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">unknown</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">causalEvent</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">unknown</span></div>
+<div class="tsd-comment tsd-typography"><p>Representation of the event that caused the condition to be evaluated if one was included on when the evaluation was triggered</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="condition"><code class="tsd-tag">Optional</code><span>condition</span><a href="#condition" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">condition</span><span class="tsd-signature-symbol">?:</span> <a href="conditions.Condition.html" class="tsd-signature-type tsd-kind-type-alias">Condition</a></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">condition</span><span class="tsd-signature-symbol">?:</span> <a href="conditions.Condition.html" class="tsd-signature-type tsd-kind-type-alias">Condition</a></div>
+<div class="tsd-comment tsd-typography"><p>only one of compoundCondition or dataCondition should be set</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="conditionid"><code class="tsd-tag">Optional</code> <code class="tsd-tag">Readonly</code><span>condition<wbr/>Id</span><a href="#conditionid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">conditionId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">conditionId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>The unique id of the associated condition</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="contextid"><code class="tsd-tag">Optional</code><span>context<wbr/>Id</span><a href="#contextid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">contextId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">contextId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>Extra context information to carry through to the result if one was included on when the evaluation was triggered</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="dataconditionevaluatorid"><code class="tsd-tag">Optional</code> <code class="tsd-tag">Readonly</code><span class="deprecated">data<wbr/>Condition<wbr/>Evaluator<wbr/>Id</span><a href="#dataconditionevaluatorid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">dataConditionEvaluatorId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
@@ -90,43 +100,67 @@
 </div></div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="endtime"><code class="tsd-tag">Optional</code> <code class="tsd-tag">Readonly</code><span>end<wbr/>Time</span><a href="#endtime" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">endTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">endTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>The time the evaluation ended</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="errors"><code class="tsd-tag">Optional</code><span>errors</span><a href="#errors" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">errors</span><span class="tsd-signature-symbol">?:</span> <a href="conditions.EvaluationErrors.html" class="tsd-signature-type tsd-kind-type-alias">EvaluationErrors</a></div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="id"><code class="tsd-tag">Optional</code> <code class="tsd-tag">Readonly</code><span>id</span><a href="#id" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">id</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">id</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>The unique id for the resource</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="ownerid"><code class="tsd-tag">Optional</code> <code class="tsd-tag">Readonly</code><span>owner<wbr/>Id</span><a href="#ownerid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">ownerId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">ownerId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>userId of user being impersonated to evaluate the condition</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="reloadendtime"><code class="tsd-tag">Optional</code> <code class="tsd-tag">Readonly</code><span>reload<wbr/>End<wbr/>Time</span><a href="#reloadendtime" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">reloadEndTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">reloadEndTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>The time when the reload was completed in Engine</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="removalerrorcount"><code class="tsd-tag">Optional</code><span>removal<wbr/>Error<wbr/>Count</span><a href="#removalerrorcount" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">removalErrorCount</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">removalErrorCount</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
+<div class="tsd-comment tsd-typography"><p>The number of times we have attempted to remove this evaluation data-file</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="result"><code class="tsd-tag">Optional</code> <code class="tsd-tag">Readonly</code><span>result</span><a href="#result" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">result</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">result</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
+<div class="tsd-comment tsd-typography"><p>The final result of the evalution</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="resultdata"><code class="tsd-tag">Optional</code><span>result<wbr/>Data</span><a href="#resultdata" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">resultData</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">unknown</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">resultData</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">unknown</span></div>
+<div class="tsd-comment tsd-typography"><p>Condition type specific result, one of dataResult or compoundResult</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="retries"><code class="tsd-tag">Optional</code> <code class="tsd-tag">Readonly</code><span>retries</span><a href="#retries" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">retries</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">retries</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
+<div class="tsd-comment tsd-typography"><p>number of retries sent to DCE</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="retrypolicy"><code class="tsd-tag">Optional</code><span>retry<wbr/>Policy</span><a href="#retrypolicy" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">retryPolicy</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">&quot;NONE&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;TOO_MANY_REQUESTS&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;GENERIC_ERROR&quot;</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">retryPolicy</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">&quot;NONE&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;TOO_MANY_REQUESTS&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;GENERIC_ERROR&quot;</span></div>
+<div class="tsd-comment tsd-typography"><p>what kind of retry policy this evaluation has</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="starttime"><code class="tsd-tag">Optional</code> <code class="tsd-tag">Readonly</code><span>start<wbr/>Time</span><a href="#starttime" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">startTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">startTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>The time the evaluation started</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="status"><code class="tsd-tag">Optional</code> <code class="tsd-tag">Readonly</code><span>status</span><a href="#status" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">status</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">&quot;RUNNING&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;FAILED&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;FINISHED&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;DELETING&quot;</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">status</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">&quot;RUNNING&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;FAILED&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;FINISHED&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;DELETING&quot;</span></div>
+<div class="tsd-comment tsd-typography"><p>The status of the evaluation execution</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="tenantid"><code class="tsd-tag">Optional</code> <code class="tsd-tag">Readonly</code><span>tenant<wbr/>Id</span><a href="#tenantid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">tenantId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div></section></section></details></div>
+<div class="tsd-signature"><span class="tsd-kind-property">tenantId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>The tenant id</p>
+</div></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

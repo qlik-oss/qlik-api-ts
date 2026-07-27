@@ -1,9 +1,12 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-o-bqAUAV.js";
+import "../chunks/invoke-fetch-DcXyLc5n.js";
 declare namespace change_stores_d_exports {
   export { CellKey, Change, ChangeStore, ChangeStoresAPI, EditableColumn, Error, ErrorResponse, GetChangeStoreChangesHttpError, GetChangeStoreChangesHttpResponse, GetChangeStoreChangesTabularViewsHttpError, GetChangeStoreChangesTabularViewsHttpResponse, GetChangeStoreEditableColumnsHttpError, GetChangeStoreEditableColumnsHttpResponse, GetChangeStoreHttpError, GetChangeStoreHttpResponse, GetChangeStoresHttpError, GetChangeStoresHttpResponse, GetChangesData, ListDefaultData, Pagination, PrimaryKey, ReferenceId, RowKey, TabularView, UsedBy, UsedByArray, clearCache, changeStoresExport as default, getChangeStore, getChangeStoreChanges, getChangeStoreChangesTabularViews, getChangeStoreEditableColumns, getChangeStores };
 }
 type CellKey = {
-  /** The id of the column. */columnId: string; /** A map of row keys. */
+  /** The id of the column. */
+  columnId: string;
+  /** A map of row keys. */
   rowKey: RowKey;
 };
 /**
@@ -13,10 +16,15 @@ type CellKey = {
  * }
  */
 type Change = {
-  /** The value of the cell. */cellValue?: string; /** Whether the change has been committed. */
-  committed?: boolean; /** The time when a user starts typing in a cell and the row becomes locked. */
-  createdAt?: string; /** The id of the user who created the change. */
-  createdBy?: string; /** The tenant id. */
+  /** The value of the cell. */
+  cellValue?: string;
+  /** Whether the change has been committed. */
+  committed?: boolean;
+  /** The time when a user starts typing in a cell and the row becomes locked. */
+  createdAt?: string;
+  /** The id of the user who created the change. */
+  createdBy?: string;
+  /** The tenant id. */
   tenantId?: string;
   /** The time when an update to the change has been done.
    * Examples of when this value is updated:
@@ -26,61 +34,100 @@ type Change = {
   updatedAt?: string;
 };
 type ChangeStore = {
-  /** The time when the change store was created. */createdAt?: string; /** The id of the user who created the change store. */
-  createdBy?: string; /** The list of primary key columns for the change store. */
-  primaryKey?: PrimaryKey; /** The publish reference id used to map stores across published apps/spaces. */
-  publishRefId?: string; /** The reference id used to identify related editable-columns or change stores. */
-  referenceId?: ReferenceId; /** The space id where the change store is located. */
-  spaceId?: string; /** The id of the change store. */
-  storeId?: string; /** The name of the change store. */
-  storeName?: string; /** The tenant id the change store belongs to. */
-  tenantId?: string; /** The time when the change store was last updated. */
-  updatedAt?: string; /** List of chart/app references. */
+  /** The time when the change store was created. */
+  createdAt?: string;
+  /** The id of the user who created the change store. */
+  createdBy?: string;
+  /** The list of primary key columns for the change store. */
+  primaryKey?: PrimaryKey;
+  /** The publish reference id used to map stores across published apps/spaces. */
+  publishRefId?: string;
+  /** The reference id used to identify related editable-columns or change stores. */
+  referenceId?: ReferenceId;
+  /** The space id where the change store is located. */
+  spaceId?: string;
+  /** The id of the change store. */
+  storeId?: string;
+  /** The name of the change store. */
+  storeName?: string;
+  /** The tenant id the change store belongs to. */
+  tenantId?: string;
+  /** The time when the change store was last updated. */
+  updatedAt?: string;
+  /** List of chart/app references. */
   usedBy?: UsedByArray;
 };
 type EditableColumn = {
-  /** Name of the editable column. */columnName?: string; /** Configuration values required for the editable-column type. */
+  /** Name of the editable column. */
+  columnName?: string;
+  /** Configuration values required for the editable-column type. */
   config?: {
-    /** Maximum selectable date for editable-date columns (ISO 8601 date). */maxDate?: string; /** Minimum selectable date for editable-date columns (ISO 8601 date). */
-    minDate?: string; /** Expression used to create dynamic selector values. */
-    selectorExpression?: string; /** Type of selector. fixed, dynamic or empty if editable-column type is not editable-selector. */
-    selectorType?: "fixed" | "dynamic" | ""; /** List of value/label key/value pairs. */
+    /** Maximum selectable date for editable-date columns (ISO 8601 date). */
+    maxDate?: string;
+    /** Minimum selectable date for editable-date columns (ISO 8601 date). */
+    minDate?: string;
+    /** Expression used to create dynamic selector values. */
+    selectorExpression?: string;
+    /** Type of selector. fixed, dynamic or empty if editable-column type is not editable-selector. */
+    selectorType?: "fixed" | "dynamic" | "";
+    /** List of value/label key/value pairs. */
     selectorValues?: {
-      /** The Label of the selector. */label?: string; /** The Value of the selector. */
+      /** The Label of the selector. */
+      label?: string;
+      /** The Value of the selector. */
       value?: string;
     }[];
-  }; /** Timestamp of creation. */
-  createdAt?: string; /** The user who created the column. */
-  createdBy?: string; /** The unique id of the editable column. */
-  id?: string; /** The publish reference id used to relate editable columns between published apps/spaces. */
-  publishRefId?: string; /** The unique id used to keep a reference of editable columns in multiple spaces. */
-  referenceId?: string; /** List of value/label key/value pairs. */
+  };
+  /** Timestamp of creation. */
+  createdAt?: string;
+  /** The user who created the column. */
+  createdBy?: string;
+  /** The unique id of the editable column. */
+  id?: string;
+  /** The publish reference id used to relate editable columns between published apps/spaces. */
+  publishRefId?: string;
+  /** The unique id used to keep a reference of editable columns in multiple spaces. */
+  referenceId?: string;
+  /** List of value/label key/value pairs. */
   selectorValues?: {
-    /** The Label of the selector. */label?: string; /** The Value of the selector. */
+    /** The Label of the selector. */
+    label?: string;
+    /** The Value of the selector. */
     value?: string;
-  }[]; /** The space id that the editable columns are associated with. */
-  spaceId?: string; /** Store id. */
-  storeId?: string; /** Tenant id. */
-  tenantId?: string; /** Type of the editable column. */
-  type?: "editable-text" | "editable-selector" | "editable-date"; /** Timestamp of last update. */
-  updatedAt?: string; /** List of chart/app references. */
+  }[];
+  /** The space id that the editable columns are associated with. */
+  spaceId?: string;
+  /** Store id. */
+  storeId?: string;
+  /** Tenant id. */
+  tenantId?: string;
+  /** Type of the editable column. */
+  type?: "editable-text" | "editable-selector" | "editable-date";
+  /** Timestamp of last update. */
+  updatedAt?: string;
+  /** List of chart/app references. */
   usedBy?: UsedByArray;
 };
 /**
  * An error object.
  */
 type Error = {
-  /** The error code. */code: string; /** Extra information about the error. */
-  detail?: string; /** Description of the error. */
+  /** The error code. */
+  code: string;
+  /** Extra information about the error. */
+  detail?: string;
+  /** Description of the error. */
   title: string;
 };
 type ErrorResponse = {
-  /** list of errors */errors?: Error[];
+  /** list of errors */
+  errors?: Error[];
   traceId?: string;
 };
 type GetChangesData = {
   cellKey?: CellKey;
-  changes?: Change[]; /** The name of the column. */
+  changes?: Change[];
+  /** The name of the column. */
   columnName?: string;
 };
 type ListDefaultData = {
@@ -139,12 +186,16 @@ type RowKey = Record<string, string>;
  */
 type TabularView = {
   data?: {
-    /** The timestamp when the row was last updated. */updatedAt?: string; /** The user id that performed the latest update in the row (corresponds to updatedAt). */
+    /** The timestamp when the row was last updated. */
+    updatedAt?: string;
+    /** The user id that performed the latest update in the row (corresponds to updatedAt). */
     updatedBy?: string;
   }[];
 };
 type UsedBy = {
-  /** The id of the app. */appId: string; /** The id of the chart. */
+  /** The id of the app. */
+  appId: string;
+  /** The id of the chart. */
   chartId: string;
 };
 /**
@@ -172,9 +223,12 @@ declare function getChangeStores(query: {
    * - **Supported attributes:** `storeName`, `storeId`, `referenceId`, `usedBy.appId`, `primaryKey`, `isUsedByEmpty`
    * - **Supported operators:** `eq`, `ne`, `co`, `sw`, `ew`, `pr`, `gt`, `ge`, `lt`, `le`
    * - **Logical operators:** `and`, `or`, `not` */
-  filter?: string; /** Defines the size of each paged result (maximum 100). */
-  limit?: number; /** Used for cursor-based pagination. */
-  page?: string; /** Sort results by a field, with optional + (asc) or - (desc) prefix */
+  filter?: string;
+  /** Defines the size of each paged result (maximum 100). */
+  limit?: number;
+  /** Used for cursor-based pagination. */
+  page?: string;
+  /** Sort results by a field, with optional + (asc) or - (desc) prefix */
   sort?: string;
   /** The space ID to filter change stores by. This parameter is required.
    * For personal spaces, use "personal".
@@ -240,9 +294,12 @@ declare function getChangeStoreChanges(storeId: string, query: {
    * - **Supported attributes:** `committed`, `cellKey.columnId`, `columnId`, `createdBy`, `createdAt`, `updatedAt`
    * - **Supported operators:** `eq`, `ne`, `co`, `sw`, `ew`, `pr`, `gt`, `ge`, `lt`, `le`
    * - **Logical operators:** `and`, `or`, `not` */
-  filter?: string; /** Defines the size of each paged result (maximum 100). */
-  limit?: number; /** Used for cursor-based pagination. */
-  page?: string; /** Sort results by a field, with optional + (asc) or - (desc) prefix */
+  filter?: string;
+  /** Defines the size of each paged result (maximum 100). */
+  limit?: number;
+  /** Used for cursor-based pagination. */
+  page?: string;
+  /** Sort results by a field, with optional + (asc) or - (desc) prefix */
   sort?: string;
 }, options?: ApiCallOptions): Promise<GetChangeStoreChangesHttpResponse>;
 type GetChangeStoreChangesHttpResponse = {
@@ -275,14 +332,17 @@ type GetChangeStoreChangesHttpError = {
  * @throws GetChangeStoreChangesTabularViewsHttpError
  */
 declare function getChangeStoreChangesTabularViews(storeId: string, query: {
-  /** When set to true, the records returned by this endpoint will include the latest change (if available) for each editable column in the record. This parameter should be used in combination with a filter on updatedAt for use cases that require all editable columns to be included in each response. */expandRow?: boolean;
+  /** When set to true, the records returned by this endpoint will include the latest change (if available) for each editable column in the record. This parameter should be used in combination with a filter on updatedAt for use cases that require all editable columns to be included in each response. */
+  expandRow?: boolean;
   /** A SCIM filter expression used to filter the result.
    * The filter parameter allows complex logical expressions using comparison operators and grouping.
    * - **Supported attributes:** `committed`, `cellKey.columnId`, `columnId`, `createdBy`, `createdAt`, `updatedAt`
    * - **Supported operators:** `eq`, `ne`, `co`, `sw`, `ew`, `pr`, `gt`, `ge`, `lt`, `le`
    * - **Logical operators:** `and`, `or`, `not` */
-  filter?: string; /** Defines the size of each paged result (maximum 100). */
-  limit?: number; /** Used for cursor-based pagination. */
+  filter?: string;
+  /** Defines the size of each paged result (maximum 100). */
+  limit?: number;
+  /** Used for cursor-based pagination. */
   page?: string;
 }, options?: ApiCallOptions): Promise<GetChangeStoreChangesTabularViewsHttpResponse>;
 type GetChangeStoreChangesTabularViewsHttpResponse = {
@@ -319,9 +379,12 @@ declare function getChangeStoreEditableColumns(storeId: string, query: {
    * - **Supported attributes:** `referenceId`, `spaceId`, `createdBy`, `type`, `columnName`, `usedBy.appId`, `usedBy.chartId`
    * - **Supported operators:** `eq`, `ne`, `co`, `sw`, `ew`, `pr`, `gt`, `ge`, `lt`, `le`
    * - **Logical operators:** `and`, `or`, `not` */
-  filter?: string; /** Defines the size of each paged result (maximum 100). */
-  limit?: number; /** Used for cursor-based pagination. */
-  page?: string; /** Sort results by a field, with optional + (asc) or - (desc) prefix */
+  filter?: string;
+  /** Defines the size of each paged result (maximum 100). */
+  limit?: number;
+  /** Used for cursor-based pagination. */
+  page?: string;
+  /** Sort results by a field, with optional + (asc) or - (desc) prefix */
   sort?: string;
 }, options?: ApiCallOptions): Promise<GetChangeStoreEditableColumnsHttpResponse>;
 type GetChangeStoreEditableColumnsHttpResponse = {

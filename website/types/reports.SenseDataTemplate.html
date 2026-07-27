@@ -60,7 +60,9 @@
 <div class="tsd-signature"><span class="tsd-kind-property">exportOptions</span><span class="tsd-signature-symbol">?:</span> <a href="reports.ExportDataOptions.html" class="tsd-signature-type tsd-kind-type-alias">ExportDataOptions</a></div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="id"><span>id</span><a href="#id" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>Sense visualization id. Visualizations created &quot;on the fly&quot; are not supported.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="patches"><code class="tsd-tag">Optional</code><span>patches</span><a href="#patches" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">patches</span><span class="tsd-signature-symbol">?:</span> <a href="reports.NxPatch.html" class="tsd-signature-type tsd-kind-type-alias">NxPatch</a><span class="tsd-signature-symbol">[]</span></div></section>
@@ -69,10 +71,14 @@
 <div class="tsd-signature"><span class="tsd-kind-property">persistentBookmark</span><span class="tsd-signature-symbol">?:</span> <a href="reports.SensePersistentBookmark.html" class="tsd-signature-type tsd-kind-type-alias">SensePersistentBookmark</a></div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="reloadtimestampmatchtype"><code class="tsd-tag">Optional</code><span>reload<wbr/>Timestamp<wbr/>Match<wbr/>Type</span><a href="#reloadtimestampmatchtype" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">reloadTimestampMatchType</span><span class="tsd-signature-symbol">?:</span> <a href="reports.ReloadTimestampMatchType.html" class="tsd-signature-type tsd-kind-type-alias">ReloadTimestampMatchType</a></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">reloadTimestampMatchType</span><span class="tsd-signature-symbol">?:</span> <a href="reports.ReloadTimestampMatchType.html" class="tsd-signature-type tsd-kind-type-alias">ReloadTimestampMatchType</a></div>
+<div class="tsd-comment tsd-typography"><p>Choose the reloadTimestamp constraint to apply. An empty value leads to the default noCheck.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="selectionsbystate"><code class="tsd-tag">Optional</code><span>selections<wbr/>By<wbr/>State</span><a href="#selectionsbystate" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">selectionsByState</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <a href="reports.QSelection.html" class="tsd-signature-type tsd-kind-type-alias">QSelection</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">selectionsByState</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <a href="reports.QSelection.html" class="tsd-signature-type tsd-kind-type-alias">QSelection</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography"><p>Map of selections to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and maximum number of overall field values allowed is 150000.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="selectionstrategy"><code class="tsd-tag">Optional</code><span>selection<wbr/>Strategy</span><a href="#selectionstrategy" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">selectionStrategy</span><span class="tsd-signature-symbol">?:</span> <a href="reports.SelectionStrategy.html" class="tsd-signature-type tsd-kind-type-alias">SelectionStrategy</a></div></section>
@@ -81,7 +87,9 @@
 <div class="tsd-signature"><span class="tsd-kind-property">selectionType</span><span class="tsd-signature-symbol">?:</span> <a href="reports.SenseSelectionType.html" class="tsd-signature-type tsd-kind-type-alias">SenseSelectionType</a></div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="temporarybookmarkv2"><code class="tsd-tag">Optional</code><span>temporary<wbr/>Bookmark<wbr/>V2</span><a href="#temporarybookmarkv2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">temporaryBookmarkV2</span><span class="tsd-signature-symbol">?:</span> <a href="reports.SenseTemporaryBookmarkV2.html" class="tsd-signature-type tsd-kind-type-alias">SenseTemporaryBookmarkV2</a></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">temporaryBookmarkV2</span><span class="tsd-signature-symbol">?:</span> <a href="reports.SenseTemporaryBookmarkV2.html" class="tsd-signature-type tsd-kind-type-alias">SenseTemporaryBookmarkV2</a></div>
+<div class="tsd-comment tsd-typography"><p>The temporary bookmark to apply. Patches and Variables are ignored if passed to the API, because they already are applied in the backend.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="variables"><code class="tsd-tag">Optional</code><span>variables</span><a href="#variables" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">variables</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span></div></section></section></details></div>

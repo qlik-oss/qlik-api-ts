@@ -1,4 +1,5 @@
-import { x as ApiCallOptions } from "./auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "./auth-types-o-bqAUAV.js";
+import "./invoke-fetch-DcXyLc5n.js";
 declare namespace adaptive_cards_d_exports {
   export { AdaptiveCard, AdaptiveCards, AdaptiveCardsAPI, AdaptiveCardsLinks, AggregationFrequencyEnum, AggregationType, AnalysisTypeEnum, BreakDownDimension, BreakdownConditionFilter, BreakdownFilter, BreakdownFilterType, BreakdownSearchFilter, BreakdownTopBottomFilter, Categories, ComparisonType, ConditionType, Error, Errors, FormattedInAppMetricDefinition, FormattedInAppMetricRecord, GetAdaptiveCardsHttpError, GetAdaptiveCardsHttpResponse, Href, SearchType, StatusEnum, TopBottomType, TopBottomUnit, UpwardIsEnum, ValueType, clearCache, adaptiveCardsExport as default, getAdaptiveCards };
 }
@@ -55,8 +56,11 @@ type AnalysisTypeEnum = "recordHigh" | "recordLow" | "aboveModel" | "belowModel"
  * }
  */
 type BreakDownDimension = {
-  /** The dimension name */dimension: string; /** Filter configuration for a breakdown dimension */
-  filter?: BreakdownFilter; /** List of values (kept for backward compatibility) */
+  /** The dimension name */
+  dimension: string;
+  /** Filter configuration for a breakdown dimension */
+  filter?: BreakdownFilter;
+  /** List of values (kept for backward compatibility) */
   values?: string[];
 };
 /**
@@ -71,19 +75,33 @@ type BreakDownDimension = {
  * - General type: Uses `aggregation`+`field` plus either `fromValue`+`toValue` (Fixed) or `fromAggregation`+`fromField`+`toAggregation`+`toField` (Calculated)
  */
 type BreakdownConditionFilter = {
-  /** Aggregation operation type */aggregation?: AggregationType; /** Aggregation operation type */
-  aggregation2?: AggregationType; /** Comparison operation type */
-  comparisonType: ComparisonType; /** Condition evaluation type */
-  conditionType: ConditionType; /** Primary field for calculated values */
-  field?: string; /** Additional field used only by General.Calculated for single comparisons */
-  field2?: string; /** Aggregation operation type */
-  fromAggregation?: AggregationType; /** Lower bound field for range comparisons with Calculated value type (used with > < or >= <=) */
-  fromField?: string; /** Lower bound value for range comparisons with Fixed value type (used with > < or >= <=) */
-  fromValue?: number; /** Aggregation operation type */
-  toAggregation?: AggregationType; /** Upper bound field for range comparisons with Calculated value type (used with > < or >= <=) */
-  toField?: string; /** Upper bound value for range comparisons with Fixed value type (used with > < or >= <=) */
-  toValue?: number; /** Fixed numeric value (used by single comparisons with Compare.Fixed and General.Fixed) */
-  value?: number; /** Whether the value is calculated or fixed */
+  /** Aggregation operation type */
+  aggregation?: AggregationType;
+  /** Aggregation operation type */
+  aggregation2?: AggregationType;
+  /** Comparison operation type */
+  comparisonType: ComparisonType;
+  /** Condition evaluation type */
+  conditionType: ConditionType;
+  /** Primary field for calculated values */
+  field?: string;
+  /** Additional field used only by General.Calculated for single comparisons */
+  field2?: string;
+  /** Aggregation operation type */
+  fromAggregation?: AggregationType;
+  /** Lower bound field for range comparisons with Calculated value type (used with > < or >= <=) */
+  fromField?: string;
+  /** Lower bound value for range comparisons with Fixed value type (used with > < or >= <=) */
+  fromValue?: number;
+  /** Aggregation operation type */
+  toAggregation?: AggregationType;
+  /** Upper bound field for range comparisons with Calculated value type (used with > < or >= <=) */
+  toField?: string;
+  /** Upper bound value for range comparisons with Fixed value type (used with > < or >= <=) */
+  toValue?: number;
+  /** Fixed numeric value (used by single comparisons with Compare.Fixed and General.Fixed) */
+  value?: number;
+  /** Whether the value is calculated or fixed */
   valueType?: ValueType;
 };
 /**
@@ -112,10 +130,14 @@ type BreakdownFilter = {
   /** When set to true, the filter values are excluded from analysis instead of included.
    * - If exclude is false or omitted, only the matched values are analyzed (max 50).
    * - If exclude is true, all dimension values EXCEPT the matched values are analyzed (max 50). */
-  exclude?: boolean; /** Search-based filtering configuration. If searchString is empty or not provided, all dimension values will be analyzed (no filtering applied). */
-  search?: BreakdownSearchFilter; /** Top/bottom filtering configuration */
-  topBottom?: BreakdownTopBottomFilter; /** Type of breakdown filter */
-  type: BreakdownFilterType; /** List of values to filter by (used when type is Values) */
+  exclude?: boolean;
+  /** Search-based filtering configuration. If searchString is empty or not provided, all dimension values will be analyzed (no filtering applied). */
+  search?: BreakdownSearchFilter;
+  /** Top/bottom filtering configuration */
+  topBottom?: BreakdownTopBottomFilter;
+  /** Type of breakdown filter */
+  type: BreakdownFilterType;
+  /** List of values to filter by (used when type is Values) */
   values?: string[];
 };
 /**
@@ -128,19 +150,26 @@ type BreakdownFilterType = "values" | "search" | "condition" | "topBottom";
  * Search-based filtering configuration. If searchString is empty or not provided, all dimension values will be analyzed (no filtering applied).
  */
 type BreakdownSearchFilter = {
-  /** String to search for. If empty, all dimension values are analyzed. */searchString?: string; /** Search operation type */
+  /** String to search for. If empty, all dimension values are analyzed. */
+  searchString?: string;
+  /** Search operation type */
   searchType: SearchType;
 };
 /**
  * Top/bottom filtering configuration
  */
 type BreakdownTopBottomFilter = {
-  /** Number of top/bottom values to select */number: number; /** Whether to select top or bottom values */
-  type: TopBottomType; /** Unit for top/bottom selection */
+  /** Number of top/bottom values to select */
+  number: number;
+  /** Whether to select top or bottom values */
+  type: TopBottomType;
+  /** Unit for top/bottom selection */
   unit: TopBottomUnit;
 };
 type Categories = {
-  /** The IDs of the categories. */categoryIds?: string[]; /** The ID of the glossary that the category belongs to. */
+  /** The IDs of the categories. */
+  categoryIds?: string[];
+  /** The ID of the glossary that the category belongs to. */
   glossaryId?: string;
 };
 /**
@@ -156,7 +185,8 @@ type ComparisonType = ">" | ">=" | "<" | "<=" | "> <" | ">= <=";
  */
 type ConditionType = "general" | "compare";
 type Error = {
-  /** The error code is in the form of 'OWL-xxx', ranges from 'OWL-001' to 'OWL-016'. */code: string;
+  /** The error code is in the form of 'OWL-xxx', ranges from 'OWL-001' to 'OWL-016'. */
+  code: string;
   detail?: string;
   title: string;
 };
@@ -203,27 +233,39 @@ type FormattedInAppMetricDefinition = {
   analysisTypes: AnalysisTypeEnum[];
   breakDownDimensions?: BreakDownDimension[];
   categories?: Categories[];
-  comparisonPeriods?: AggregationFrequencyEnum[]; /** A description of the in-app metric. */
+  comparisonPeriods?: AggregationFrequencyEnum[];
+  /** A description of the in-app metric. */
   description?: string;
-  dimension: string; /** The ID of the glossary that the in-app metric belongs to. */
+  dimension: string;
+  /** The ID of the glossary that the in-app metric belongs to. */
   glossaryId?: string;
   measure: string;
-  name: string; /** Number of days to offset the execution of analyses for this aggregation period. */
-  nextExecutionOffset?: number; /** Status of the in app metrics (0 - inactive, 1 - active). */
-  status?: StatusEnum; /** Indicates whether an increase in the metric is considered neutral (0), positive (1) or negative (-1). */
+  name: string;
+  /** Number of days to offset the execution of analyses for this aggregation period. */
+  nextExecutionOffset?: number;
+  /** Status of the in app metrics (0 - inactive, 1 - active). */
+  status?: StatusEnum;
+  /** Indicates whether an increase in the metric is considered neutral (0), positive (1) or negative (-1). */
   upwardIs?: UpwardIsEnum;
 };
 type FormattedInAppMetricRecord = {
-  /** The ID of the app. */appId: string; /** The time when the in-app metric was created. */
+  /** The ID of the app. */
+  appId: string;
+  /** The time when the in-app metric was created. */
   creationTime: string;
-  definition: FormattedInAppMetricDefinition; /** The ID of the in-app metric in the database. */
+  definition: FormattedInAppMetricDefinition;
+  /** The ID of the in-app metric in the database. */
   id: string;
   links: {
     self?: Href;
-  }; /** Status of the in app metrics (0 - inactive, 1 - active). */
-  status: StatusEnum; /** The ID of the tenant who owns the in-app metric. */
-  tenantId: string; /** The time when the in-app metric was last updated. */
-  updateTime: string; /** The ID of the user who created the in-app-metric. */
+  };
+  /** Status of the in app metrics (0 - inactive, 1 - active). */
+  status: StatusEnum;
+  /** The ID of the tenant who owns the in-app metric. */
+  tenantId: string;
+  /** The time when the in-app metric was last updated. */
+  updateTime: string;
+  /** The ID of the user who created the in-app-metric. */
   userId: string;
 };
 /**
@@ -280,7 +322,8 @@ type ValueType = "calculated" | "fixed";
  * @throws GetAdaptiveCardsHttpError
  */
 declare function getAdaptiveCards(query: {
-  /** Filter by analysis type. Repeat the parameter to include multiple types. When this parameter is present, all matching results are returned regardless of ranking. */analysisTypes?: AnalysisTypeEnum[];
+  /** Filter by analysis type. Repeat the parameter to include multiple types. When this parameter is present, all matching results are returned regardless of ranking. */
+  analysisTypes?: AnalysisTypeEnum[];
   /** Filter by app ID(s). Use this to scope results to specific apps. When combined with measures, returns only cards matching BOTH criteria (AND logic). Repeat the parameter to supply multiple app IDs (OR logic within appIds).
    *
    * **Recommendation:** Use consistent parameter order for better HTTP cache hit rates:
@@ -300,18 +343,30 @@ declare function getAdaptiveCards(query: {
   appIds?: string[];
   /** Filter by one or more breakdown selections in the form `dimension:value` (example `Region:EMEA`). Values are selected from the UI dropdown — not free text — and should match available dimension/value pairs.
    * Repeat the parameter to supply multiple breakdowns; results match any of the provided breakdown pairs. */
-  breakdowns?: string[]; /** Filter by category IDs from the business glossary. Category filtering is not currently applied to the result set. */
-  categories?: string[]; /** Filter by comparison period. Example values: `D`, `W`, `M`, `Q`, `Y`. When this parameter is present, all matching results are returned regardless of ranking. */
-  comparisonPeriods?: AggregationFrequencyEnum[]; /** Filter by dimension(s). Matching is case-sensitive; leading and trailing whitespace will be trimmed. Repeat the parameter to supply multiple dimensions. */
-  dimensions?: string[]; /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
-  limit?: number; /** Filter by measure(s). Matching is case-sensitive; leading and trailing whitespace will be trimmed. Repeat the parameter to supply multiple measures. */
-  measures?: string[]; /** Filter by metric ID. Repeat the parameter to supply multiple IDs. When omitted, returns cards for all metrics visible to the caller. */
-  metricIds?: string[]; /** The numeric offset to the next page of resources. Provide either the next or prev parameter, but not both. */
-  next?: number; /** The numeric offset to the previous page of resources. Provide either the next or prev parameter, but not both. */
-  prev?: number; /** The field to sort by, with +/- prefix indicating sort order */
-  sort?: "creationTime" | "+creationTime" | "-creationTime"; /** Exclusive upper bound for filtering by analysis result end time. Use ISO 8601 format. */
-  timeRangeEnd?: string; /** Inclusive lower bound for filtering by analysis result end time. Use ISO 8601 format. */
-  timeRangeStart?: string; /** Filter by Adaptive Card category. When omitted, cards from all categories are returned. */
+  breakdowns?: string[];
+  /** Filter by category IDs from the business glossary. Category filtering is not currently applied to the result set. */
+  categories?: string[];
+  /** Filter by comparison period. Example values: `D`, `W`, `M`, `Q`, `Y`. When this parameter is present, all matching results are returned regardless of ranking. */
+  comparisonPeriods?: AggregationFrequencyEnum[];
+  /** Filter by dimension(s). Matching is case-sensitive; leading and trailing whitespace will be trimmed. Repeat the parameter to supply multiple dimensions. */
+  dimensions?: string[];
+  /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
+  limit?: number;
+  /** Filter by measure(s). Matching is case-sensitive; leading and trailing whitespace will be trimmed. Repeat the parameter to supply multiple measures. */
+  measures?: string[];
+  /** Filter by metric ID. Repeat the parameter to supply multiple IDs. When omitted, returns cards for all metrics visible to the caller. */
+  metricIds?: string[];
+  /** The numeric offset to the next page of resources. Provide either the next or prev parameter, but not both. */
+  next?: number;
+  /** The numeric offset to the previous page of resources. Provide either the next or prev parameter, but not both. */
+  prev?: number;
+  /** The field to sort by, with +/- prefix indicating sort order */
+  sort?: "creationTime" | "+creationTime" | "-creationTime";
+  /** Exclusive upper bound for filtering by analysis result end time. Use ISO 8601 format. */
+  timeRangeEnd?: string;
+  /** Inclusive lower bound for filtering by analysis result end time. Use ISO 8601 format. */
+  timeRangeStart?: string;
+  /** Filter by Adaptive Card category. When omitted, cards from all categories are returned. */
   type?: "measures" | "dimensions" | "breakdowns";
 }, options?: ApiCallOptions): Promise<GetAdaptiveCardsHttpResponse>;
 type GetAdaptiveCardsHttpResponse = {

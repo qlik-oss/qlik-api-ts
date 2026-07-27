@@ -76,10 +76,14 @@
 <div class="tsd-signature"><span class="tsd-kind-property">qri</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="requestid"><code class="tsd-tag">Optional</code><span>request<wbr/>Id</span><a href="#requestid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">requestId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">requestId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>Echo of the caller-provided <code>requestId</code> from the corresponding request entry.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="status"><code class="tsd-tag">Optional</code><span>status</span><a href="#status" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">status</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-symbol">{</span> <span class="tsd-kind-property">code</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">errorResponse</span><span class="tsd-signature-symbol">?:</span> <a href="connectivity.dataSources.DcaasApiError.html" class="tsd-signature-type tsd-kind-type-alias">DcaasApiError</a> <span class="tsd-signature-symbol">}</span></div>
+<div class="tsd-comment tsd-typography"><p>Status of this QRI generation entry.</p>
+</div>
 <div class="tsd-type-declaration">
 <h4>Type Declaration</h4>
 <ul class="tsd-parameters">
@@ -88,7 +92,9 @@
 <div class="tsd-comment tsd-typography"><p>HTTP-style status code for this entry. <code>200</code> indicates success; values above <code>200</code> indicate failure. Detailed error information is included in <code>errorResponse</code> on failure.</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">errorResponse</span><span class="tsd-signature-symbol">?: </span><a href="connectivity.dataSources.DcaasApiError.html" class="tsd-signature-type tsd-kind-type-alias">DcaasApiError</a></h5></li></ul></div></section></section></details></div>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">errorResponse</span><span class="tsd-signature-symbol">?: </span><a href="connectivity.dataSources.DcaasApiError.html" class="tsd-signature-type tsd-kind-type-alias">DcaasApiError</a></h5>
+<div class="tsd-comment tsd-typography"><p>DCaaS-specific error information including error code, code name, and detailed message.</p>
+</div></li></ul></div></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

@@ -1,14 +1,19 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-o-bqAUAV.js";
+import "../chunks/invoke-fetch-DcXyLc5n.js";
 declare namespace apps_d_exports {
   export { AppsAPI, Classification, CmpEngineSpec, Cmpbool, Cmpfloat, CmpfloatWithTimeout, Cmpint, Comparison, Comparisonfields, ComparisonobjMemoryLimit, Comparisonobjresponsetime, Comparisontables, CreateAppEvaluationHttpError, CreateAppEvaluationHttpResponse, DataSourceStatus, EngineSpec, ErrorItem, ErrorResponse, Evaluation, Evaluations, EvaluatorError, Event, GetAppEvaluationComparisonHttpError, GetAppEvaluationComparisonHttpResponse, GetAppEvaluationComparisonXmlHttpError, GetAppEvaluationComparisonXmlHttpResponse, GetAppEvaluationHttpError, GetAppEvaluationHttpResponse, GetAppEvaluationXmlHttpError, GetAppEvaluationXmlHttpResponse, GetAppEvaluationsHttpError, GetAppEvaluationsHttpResponse, Href, NxAppCreatePrivileges, NxAppV2, NxAttributesV2, Objectmetrics, Objectspec, Objecttopspec, OpenAppProgress, OpenAppStep, ReloadInformation, RestoreAppHttpError, RestoreAppHttpResponse, Result, Resultentry, ResultobjMemoryLimit, Resultobjresponsetime, Resultobjsheet, Resultsingle, Sortedcomparisonfields, Sortedcomparisonobjresponsetime, Sortedcomparisontables, StateEnum, UsageEnum, clearCache, createAppEvaluation, appsExport as default, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXml, getAppEvaluationXml, getAppEvaluations, restoreApp };
 }
 type ErrorItem = {
-  /** A unique code for the error. */code: string; /** Additional information about the error. */
-  detail?: string; /** A human-readable description of the error. */
+  /** A unique code for the error. */
+  code: string;
+  /** Additional information about the error. */
+  detail?: string;
+  /** A human-readable description of the error. */
   title: string;
 };
 type ErrorResponse = {
-  /** Array of all errors that occurred during the request. */errors?: ErrorItem[];
+  /** Array of all errors that occurred during the request. */
+  errors?: ErrorItem[];
 };
 type EvaluatorError = {
   errors?: {
@@ -18,14 +23,18 @@ type EvaluatorError = {
   }[];
 };
 type NxAppCreatePrivileges = {
-  /** Is set to true if the user has privileges to create the resource. */canCreate?: boolean; /** Type of resource. For example, sheet, story, bookmark, etc. */
+  /** Is set to true if the user has privileges to create the resource. */
+  canCreate?: boolean;
+  /** Type of resource. For example, sheet, story, bookmark, etc. */
   resource?: string;
 };
 /**
  * Application attributes and user privileges.
  */
 type NxAppV2 = {
-  /** Application attributes. */attributes?: NxAttributesV2; /** Object create privileges. Hints to the client what type of objects the user is allowed to create. */
+  /** Application attributes. */
+  attributes?: NxAttributesV2;
+  /** Object create privileges. Hints to the client what type of objects the user is allowed to create. */
   create?: NxAppCreatePrivileges[];
   /** Application privileges.
    * Hints to the client what actions the user is allowed to perform.
@@ -48,16 +57,27 @@ type NxAppV2 = {
  * App attributes.
  */
 type NxAttributesV2 = {
-  /** The date and time when the app was created. */createdAt?: string; /** App description. */
-  description?: string; /** If set to true, the app has section access configured. */
-  hasSectionAccess?: boolean; /** The App ID. */
-  id?: string; /** App name. */
-  name?: string; /** The Origin App ID for promoted apps. */
-  originAppId?: string; /** Identifier of the app owner. */
-  ownerId?: string; /** The date and time when the app was promoted, empty if not promoted. Use to determine if an app is promoted in Qlik Cloud. */
-  promotedAt?: string; /** Date and time of the last reload of the app. */
-  reloadedAt?: string; /** App resource type. */
-  resourceType?: string; /** The ID of the app's space. */
+  /** The date and time when the app was created. */
+  createdAt?: string;
+  /** App description. */
+  description?: string;
+  /** If set to true, the app has section access configured. */
+  hasSectionAccess?: boolean;
+  /** The App ID. */
+  id?: string;
+  /** App name. */
+  name?: string;
+  /** The Origin App ID for promoted apps. */
+  originAppId?: string;
+  /** Identifier of the app owner. */
+  ownerId?: string;
+  /** The date and time when the app was promoted, empty if not promoted. Use to determine if an app is promoted in Qlik Cloud. */
+  promotedAt?: string;
+  /** Date and time of the last reload of the app. */
+  reloadedAt?: string;
+  /** App resource type. */
+  resourceType?: string;
+  /** The ID of the app's space. */
   spaceId?: string;
   /** Promotion state of the app.
    * Promotion state of an app.
@@ -65,7 +85,8 @@ type NxAttributesV2 = {
    * * EMPTY
    * * PROMOTED
    * * DISTRIBUTED */
-  state?: string & StateEnum; /** The date and time when the app was modified. */
+  state?: string & StateEnum;
+  /** The date and time when the app was modified. */
   updatedAt?: string;
   /** Indicates the use for the app.
    *
@@ -321,7 +342,9 @@ type Sortedcomparisontables = {
  * @throws GetAppEvaluationComparisonHttpError
  */
 declare function getAppEvaluationComparison(baselineId: string, comparisonId: string, query: {
-  /** When `true`, includes all comparison entries regardless of significance. */all?: boolean; /** The output format for the response. Accepts `json` or `xml`. */
+  /** When `true`, includes all comparison entries regardless of significance. */
+  all?: boolean;
+  /** The output format for the response. Accepts `json` or `xml`. */
   format?: string;
 }, options?: ApiCallOptions): Promise<GetAppEvaluationComparisonHttpResponse>;
 type GetAppEvaluationComparisonHttpResponse = {
@@ -368,7 +391,9 @@ type GetAppEvaluationComparisonXmlHttpError = {
  * @throws GetAppEvaluationHttpError
  */
 declare function getAppEvaluation(id: string, query: {
-  /** When `true`, includes full app evaluation details in the response. */all?: boolean; /** The output format for the response. Accepts `json` or `xml`. */
+  /** When `true`, includes full app evaluation details in the response. */
+  all?: boolean;
+  /** The output format for the response. Accepts `json` or `xml`. */
   format?: string;
 }, options?: ApiCallOptions): Promise<GetAppEvaluationHttpResponse>;
 type GetAppEvaluationHttpResponse = {
@@ -432,12 +457,19 @@ type RestoreAppHttpError = {
  * @throws GetAppEvaluationsHttpError
  */
 declare function getAppEvaluations(guid: string, query: {
-  /** When `true`, includes full evaluation details in each result. When `false`, detail fields are omitted. */all?: boolean; /** When `true`, adds file download headers to the response. */
-  fileMode?: boolean; /** The output format for the response. Accepts `json` or `xml`. */
-  format?: string; /** Maximum number of results to return per page. */
-  limit?: number; /** A cursor token for fetching the next page of results. */
-  next?: string; /** A cursor token for fetching the previous page of results. */
-  prev?: string; /** The field to sort results by. Prefix with `-` for descending order or `+` for ascending. */
+  /** When `true`, includes full evaluation details in each result. When `false`, detail fields are omitted. */
+  all?: boolean;
+  /** When `true`, adds file download headers to the response. */
+  fileMode?: boolean;
+  /** The output format for the response. Accepts `json` or `xml`. */
+  format?: string;
+  /** Maximum number of results to return per page. */
+  limit?: number;
+  /** A cursor token for fetching the next page of results. */
+  next?: string;
+  /** A cursor token for fetching the previous page of results. */
+  prev?: string;
+  /** The field to sort results by. Prefix with `-` for descending order or `+` for ascending. */
   sort?: "started" | "+started" | "-started";
 }, options?: ApiCallOptions): Promise<GetAppEvaluationsHttpResponse>;
 type GetAppEvaluationsHttpResponse = {

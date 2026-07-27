@@ -48,13 +48,21 @@
 <div class="tsd-comment tsd-typography"><p>A comma-delimited string of the requested fields per entity. If the 'links' value is omitted, then the entity HATEOAS link will also be omitted.</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">limit</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">limit</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The number of user entries to retrieve.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">next</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">next</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>Get users with IDs that are higher than the target user ID. Cannot be used in conjunction with prev.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">prev</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">prev</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>Get users with IDs that are lower than the target user ID. Cannot be used in conjunction with next.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">sort</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;name&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;-name&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;+name&quot;</span></h5></li></ul></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">sort</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;name&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;-name&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;+name&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>The field to sort by, with +/- prefix indicating sort order</p>
+</div></li></ul></li>
 <li><span><span class="tsd-kind-parameter">body</span>: <a href="../types/users.Filter.html" class="tsd-signature-type tsd-kind-type-alias">Filter</a></span>
 <div class="tsd-comment tsd-typography"><p>an object with the body content</p>
 </div></li>

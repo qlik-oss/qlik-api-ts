@@ -40,26 +40,42 @@
 <div class="tsd-comment tsd-typography"><p>Unique Name of a workflow state which is responsible for compensation of this state</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">end</span><span class="tsd-signature-symbol">?: </span><a href="tasks.End.html" class="tsd-signature-type tsd-kind-type-alias">End</a></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">end</span><span class="tsd-signature-symbol">?: </span><a href="tasks.End.html" class="tsd-signature-type tsd-kind-type-alias">End</a></h5>
+<div class="tsd-comment tsd-typography"><p>State end definition</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">exclusive</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">exclusive</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+<div class="tsd-comment tsd-typography"><p>If true consuming one of the defined events causes its associated actions to be performed. If false all of the defined events must be consumed in order for actions to be performed</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>State name</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">onEvents</span><span class="tsd-signature-symbol">?: </span><a href="tasks.Onevents.html" class="tsd-signature-type tsd-kind-type-alias">Onevents</a><span class="tsd-signature-symbol">[]</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">onEvents</span><span class="tsd-signature-symbol">?: </span><a href="tasks.Onevents.html" class="tsd-signature-type tsd-kind-type-alias">Onevents</a><span class="tsd-signature-symbol">[]</span></h5>
+<div class="tsd-comment tsd-typography"><p>Define the events to be consumed and optional actions to be performed</p>
+</div></li>
 <li class="tsd-parameter">
 <h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">timeouts</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">actionExecTimeout</span><span class="tsd-signature-symbol">?:</span> <a href="tasks.ActionExecTimeout.html" class="tsd-signature-type tsd-kind-type-alias">ActionExecTimeout</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">eventTimeout</span><span class="tsd-signature-symbol">?:</span> <a href="tasks.EventTimeout.html" class="tsd-signature-type tsd-kind-type-alias">EventTimeout</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">stateExecTimeout</span><span class="tsd-signature-symbol">?:</span> <a href="tasks.StateExecTimeout.html" class="tsd-signature-type tsd-kind-type-alias">StateExecTimeout</a><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></h5>
+<div class="tsd-comment tsd-typography"><p>State specific timeouts</p>
+</div>
 <ul class="tsd-parameters">
 <li class="tsd-parameter">
 <h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">actionExecTimeout</span><span class="tsd-signature-symbol">?: </span><a href="tasks.ActionExecTimeout.html" class="tsd-signature-type tsd-kind-type-alias">ActionExecTimeout</a></h5>
 <div class="tsd-comment tsd-typography"><p>Action execution timeout duration (literal ISO 8601 duration format or expression which evaluation results in an ISO 8601 duration)</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">eventTimeout</span><span class="tsd-signature-symbol">?: </span><a href="tasks.EventTimeout.html" class="tsd-signature-type tsd-kind-type-alias">EventTimeout</a></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">eventTimeout</span><span class="tsd-signature-symbol">?: </span><a href="tasks.EventTimeout.html" class="tsd-signature-type tsd-kind-type-alias">EventTimeout</a></h5>
+<div class="tsd-comment tsd-typography"><p>Timeout duration to wait for consuming defined events (literal ISO 8601 duration format or expression which evaluation results in an ISO 8601 duration)</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">stateExecTimeout</span><span class="tsd-signature-symbol">?: </span><a href="tasks.StateExecTimeout.html" class="tsd-signature-type tsd-kind-type-alias">StateExecTimeout</a></h5></li></ul></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">stateExecTimeout</span><span class="tsd-signature-symbol">?: </span><a href="tasks.StateExecTimeout.html" class="tsd-signature-type tsd-kind-type-alias">StateExecTimeout</a></h5>
+<div class="tsd-comment tsd-typography"><p>Workflow state execution timeout duration (literal ISO 8601 duration format or expression which evaluation results in an ISO 8601 duration)</p>
+</div></li></ul></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;EVENT&quot;</span></h5></li></ul></div></div>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;EVENT&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>State type</p>
+</div></li></ul></div></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

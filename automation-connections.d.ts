@@ -1,61 +1,96 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
+import "./chunks/invoke-fetch-DcXyLc5n.js";
 //#region src/public/rest/automation-connections.d.ts
 type AutomationConnectionChangeOwnerObject = {
-  /** The unique identifier of the new owner. */userId?: string;
+  /** The unique identifier of the new owner. */
+  userId?: string;
 };
 type AutomationConnectionChangeSpaceObject = {
-  /** The unique identifier of the new space. */spaceId?: string;
+  /** The unique identifier of the new space. */
+  spaceId?: string;
 };
 type AutomationConnectionCheckObject = {
-  /** The connection status of the automation connection. When true, the automation connection is connected. */connected?: boolean; /** The connection status of the automation connection. When true, the automation connection is connected. */
+  /** The connection status of the automation connection. When true, the automation connection is connected. */
+  connected?: boolean;
+  /** The connection status of the automation connection. When true, the automation connection is connected. */
   is_connected?: boolean;
 };
 type AutomationConnectionCreationObject = {
-  /** The unique identifier of the connector from which the automation connection is created. */connectorId: string; /** The name of the created automation connection. */
+  /** The unique identifier of the connector from which the automation connection is created. */
+  connectorId: string;
+  /** The name of the created automation connection. */
   name?: string;
-  params?: AutomationConnectionParamCreateObject[]; /** The unique identifier of the space in which the automation connection is created. */
+  params?: AutomationConnectionParamCreateObject[];
+  /** The unique identifier of the space in which the automation connection is created. */
   spaceId?: string;
 };
 type AutomationConnectionDetailObject = {
-  /** The unique identifier of the automation connector. */connectorId?: string; /** The timestamp when the automation connection was created. */
-  createdAt?: string; /** This contains the error message if a connection is being created with an issue. */
-  error?: unknown; /** The unique identifier of the automation connection. */
-  id?: string; /** The connection status of the automation connection. When true, the automation connection is connected. */
-  isConnected?: boolean; /** The name of the automation connection. */
-  name?: string; /** The name of the OAuth account associated with the automation connection. */
-  oauthAccountName?: string; /** The unique identifier of the owner of the automation connection. */
+  /** The unique identifier of the automation connector. */
+  connectorId?: string;
+  /** The timestamp when the automation connection was created. */
+  createdAt?: string;
+  /** This contains the error message if a connection is being created with an issue. */
+  error?: unknown;
+  /** The unique identifier of the automation connection. */
+  id?: string;
+  /** The connection status of the automation connection. When true, the automation connection is connected. */
+  isConnected?: boolean;
+  /** The name of the automation connection. */
+  name?: string;
+  /** The name of the OAuth account associated with the automation connection. */
+  oauthAccountName?: string;
+  /** The unique identifier of the owner of the automation connection. */
   ownerId?: string;
-  params?: AutomationConnectionParamObject[]; /** The redirect of the OAuth account. */
-  redirect?: string; /** The space ID of the automation connection. */
-  spaceId?: string; /** The timestamp when the automation connection was updated. */
+  params?: AutomationConnectionParamObject[];
+  /** The redirect of the OAuth account. */
+  redirect?: string;
+  /** The space ID of the automation connection. */
+  spaceId?: string;
+  /** The timestamp when the automation connection was updated. */
   updatedAt?: string;
 };
 type AutomationConnectionParamCreateObject = {
-  /** The name of the automation connection parameter. */name?: string; /** The value of the automation connection parameter option. */
+  /** The name of the automation connection parameter. */
+  name?: string;
+  /** The value of the automation connection parameter option. */
   value?: string;
 };
 type AutomationConnectionParamObject = {
-  /** The documentation of the automation connection parameter. */documentation?: string; /** The example value of the automation connection parameter. */
-  exampleValue?: string; /** The field type of the automation connection parameter. */
-  fieldType?: string; /** The unique identifier of the automation connection parameter. */
-  id?: string; /** When true, the parameter is optional. */
-  isOptional?: boolean; /** The metadata of the automation connection parameter. */
-  meta?: unknown[]; /** The name of the automation connection parameter. */
-  name?: string; /** The order that the automation connection configuration fields should be displayed in. */
+  /** The documentation of the automation connection parameter. */
+  documentation?: string;
+  /** The example value of the automation connection parameter. */
+  exampleValue?: string;
+  /** The field type of the automation connection parameter. */
+  fieldType?: string;
+  /** The unique identifier of the automation connection parameter. */
+  id?: string;
+  /** When true, the parameter is optional. */
+  isOptional?: boolean;
+  /** The metadata of the automation connection parameter. */
+  meta?: unknown[];
+  /** The name of the automation connection parameter. */
+  name?: string;
+  /** The order that the automation connection configuration fields should be displayed in. */
   order?: number;
-  paramOptions?: AutomationConnectionParamOptionObject[]; /** The value of the automation connection parameter. */
+  paramOptions?: AutomationConnectionParamOptionObject[];
+  /** The value of the automation connection parameter. */
   value?: string;
 };
 type AutomationConnectionParamOptionObject = {
-  /** The unique identifier of the automation connection parameter option. */id?: string; /** The value of the automation connection parameter option. */
+  /** The unique identifier of the automation connection parameter option. */
+  id?: string;
+  /** The value of the automation connection parameter option. */
   value?: string;
 };
 type AutomationConnectionParamPutObject = {
-  /** The unique identifier of the automation connection parameter option. */id?: string; /** The value of the automation connection parameter option. */
+  /** The unique identifier of the automation connection parameter option. */
+  id?: string;
+  /** The value of the automation connection parameter option. */
   value?: string;
 };
 type AutomationConnectionPutRequestObject = {
-  /** The new name of the automation connection to be renamed to. */name?: string;
+  /** The new name of the automation connection to be renamed to. */
+  name?: string;
   params?: AutomationConnectionParamPutObject[];
 };
 type AutomationConnectionsList = {
@@ -63,22 +98,34 @@ type AutomationConnectionsList = {
   links?: Links;
 };
 type AutomationConnectionsListObject = {
-  /** The unique identifier of the connector the automation connection is created from. */connectorId?: string; /** The timestamp when the automation connection is created. */
-  createdAt?: string; /** The unique identifier of an automation connection. */
-  id?: string; /** Returns true if the automtion connection is connected. */
-  isConnected?: boolean; /** The name of an automation connection. */
-  name?: string; /** The unique identifier of the owner of the automation connection. */
-  ownerId?: string; /** The space ID of the automation connection. */
-  spaceId?: string; /** The timestamp when the automation connection is updated. */
+  /** The unique identifier of the connector the automation connection is created from. */
+  connectorId?: string;
+  /** The timestamp when the automation connection is created. */
+  createdAt?: string;
+  /** The unique identifier of an automation connection. */
+  id?: string;
+  /** Returns true if the automtion connection is connected. */
+  isConnected?: boolean;
+  /** The name of an automation connection. */
+  name?: string;
+  /** The unique identifier of the owner of the automation connection. */
+  ownerId?: string;
+  /** The space ID of the automation connection. */
+  spaceId?: string;
+  /** The timestamp when the automation connection is updated. */
   updatedAt?: string;
 };
 type Error = {
-  /** The unique code for the error */code: string; /** May be used to provide additional details */
-  detail?: string; /** A summary of what went wrong */
+  /** The unique code for the error */
+  code: string;
+  /** May be used to provide additional details */
+  detail?: string;
+  /** A summary of what went wrong */
   title: string;
 };
 type ErrorResponse = {
-  errors?: Error[]; /** A way to trace the source of the error. */
+  errors?: Error[];
+  /** A way to trace the source of the error. */
   traceId?: string;
 };
 type Links = {
@@ -86,7 +133,8 @@ type Links = {
   prev?: PaginationLink;
 };
 type PaginationLink = {
-  /** The URL to a resource request */href?: string | null;
+  /** The URL to a resource request */
+  href?: string | null;
 };
 /**
  * Retrieves a list of automation connections the requesting user has access to.
@@ -95,10 +143,15 @@ type PaginationLink = {
  * @throws GetAutomationConnectionsHttpError
  */
 declare function getAutomationConnections(query: {
-  /** Pagination cursor returned from a previous request. */cursor?: string; /** Filters the result based on the specified criteria: name, connectorId, ownerId, or spaceId. */
-  filter?: string; /** The number of automation connections to retrieve. */
-  limit?: number; /** When true, list all connections. Restricted to tenant admins and analytics admins. */
-  listAll?: boolean; /** The field to sort by, with +- prefix indicating sort order. (`?sort=-name` => sort on the `name` field using descending order). */
+  /** Pagination cursor returned from a previous request. */
+  cursor?: string;
+  /** Filters the result based on the specified criteria: name, connectorId, ownerId, or spaceId. */
+  filter?: string;
+  /** The number of automation connections to retrieve. */
+  limit?: number;
+  /** When true, list all connections. Restricted to tenant admins and analytics admins. */
+  listAll?: boolean;
+  /** The field to sort by, with +- prefix indicating sort order. (`?sort=-name` => sort on the `name` field using descending order). */
   sort?: "id" | "name" | "createdAt" | "updatedAt" | "+id" | "+name" | "+createdAt" | "+updatedAt" | "-id" | "-name" | "-createdAt" | "-updatedAt";
 }, options?: ApiCallOptions): Promise<GetAutomationConnectionsHttpResponse>;
 type GetAutomationConnectionsHttpResponse = {
@@ -138,7 +191,8 @@ type CreateAutomationConnectionHttpError = {
  * @throws DeleteAutomationConnectionHttpError
  */
 declare function deleteAutomationConnection(id: string, query: {
-  /** When true, the automation connection will be deleted regardless of its usage by any automations. */forced?: boolean;
+  /** When true, the automation connection will be deleted regardless of its usage by any automations. */
+  forced?: boolean;
 }, options?: ApiCallOptions): Promise<DeleteAutomationConnectionHttpResponse>;
 type DeleteAutomationConnectionHttpResponse = {
   data: void;

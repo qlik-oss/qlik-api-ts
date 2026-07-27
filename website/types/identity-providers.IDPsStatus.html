@@ -51,6 +51,8 @@
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="idps_metadata"><code class="tsd-tag">Optional</code><span>idps_<wbr/>metadata</span><a href="#idps_metadata" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">idps_metadata</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">active</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">interactive</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">provider</span><span class="tsd-signature-symbol">?:</span> <a href="identity-providers.IDPProvider.html" class="tsd-signature-type tsd-kind-type-alias">IDPProvider</a><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-comment tsd-typography"><p>A list of IdP metadata.</p>
+</div>
 <div class="tsd-type-declaration">
 <h4>Type Declaration</h4>
 <ul class="tsd-parameters">
@@ -59,9 +61,13 @@
 <div class="tsd-comment tsd-typography"><p>Indicates whether the IdP is available for use.</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">interactive</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">interactive</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+<div class="tsd-comment tsd-typography"><p>Indicates whether the IdP is meant for interactive login.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">provider</span><span class="tsd-signature-symbol">?: </span><a href="identity-providers.IDPProvider.html" class="tsd-signature-type tsd-kind-type-alias">IDPProvider</a></h5></li></ul></div></section></section></details></div>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">provider</span><span class="tsd-signature-symbol">?: </span><a href="identity-providers.IDPProvider.html" class="tsd-signature-type tsd-kind-type-alias">IDPProvider</a></h5>
+<div class="tsd-comment tsd-typography"><p>The identity provider to be used. If protocol is <code>OIDC</code>, the valid values are <code>auth0</code>, <code>okta</code>, <code>generic</code>, <code>salesforce</code>, <code>keycloak</code>, <code>adfs</code>, and <code>azureAD</code>. If protocol is <code>jwtAuth</code>, the valid value is <code>external</code>.</p>
+</div></li></ul></div></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

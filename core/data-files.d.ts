@@ -1,9 +1,11 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-o-bqAUAV.js";
+import "../chunks/invoke-fetch-DcXyLc5n.js";
 declare namespace data_files_d_exports {
   export { BatchChangeSpaceItem, BatchPostItem, ChangeDataFileOwnerRequest, ChangeDataFileSpaceRequest, ChangeOwnerDataFileHttpError, ChangeOwnerDataFileHttpResponse, ChangeSpaceDataFileHttpError, ChangeSpaceDataFileHttpResponse, ChangeSpaceDataFilesHttpError, ChangeSpaceDataFilesHttpResponse, ConnectionsResponse, DataFileBatchChangeSpaceRequestV2, DataFileBatchPostRequest, DataFileDeleteRecordResponseV2, DataFilePermission, DataFileUploadResponseV2, DataFilesAPI, DeleteDataFileHttpError, DeleteDataFileHttpResponse, ErrorCode, ErrorResponse, ErrorResponseItem, FilterConnectionsRequest, FilterDataFilesConnectionsHttpError, FilterDataFilesConnectionsHttpResponse, FolderStatsResponse, GetConnectionsResponse, GetConnectionsSortField, GetDataFileDeleteRecordsResponseV2, GetDataFileDeleteRecordsSortField, GetDataFileFolderStatsHttpError, GetDataFileFolderStatsHttpResponse, GetDataFileHttpError, GetDataFileHttpResponse, GetDataFilesConnectionsHttpError, GetDataFilesConnectionsHttpResponse, GetDataFilesDeletesHttpError, GetDataFilesDeletesHttpResponse, LinkResponse, LinksResponse, MultiStatusResponse, MultiStatusResponseItem, PostDataFileRequest, PostDataFilesHttpError, PostDataFilesHttpResponse, SpaceStatsResponse, changeOwnerDataFile, changeSpaceDataFile, changeSpaceDataFiles, clearCache, dataFilesExport as default, deleteDataFile, filterDataFilesConnections, getDataFile, getDataFileFolderStats, getDataFilesConnections, getDataFilesDeletes, postDataFiles };
 }
 type BatchChangeSpaceItem = {
-  /** The ID of the data file whose space will be changed. */id: string;
+  /** The ID of the data file whose space will be changed. */
+  id: string;
   /** The ID of the new space.  Passing in a null will result in the data file being moved to the user's
    * personal space. */
   spaceId?: string | null;
@@ -14,50 +16,66 @@ type BatchPostItem = {
   request: PostDataFileRequest;
 };
 type ChangeDataFileOwnerRequest = {
-  /** The ID of the new owner. */ownerId: string;
+  /** The ID of the new owner. */
+  ownerId: string;
 };
 type ChangeDataFileSpaceRequest = {
-  /** The ID of the space.  If null, this data file will be moved to the user's personal space. */spaceId?: string | null;
+  /** The ID of the space.  If null, this data file will be moved to the user's personal space. */
+  spaceId?: string | null;
 };
 type ConnectionsResponse = {
-  /** The connect statement that will be passed to the connector when invoked. */connectStatement: string; /** The unique identifier of the connection. */
-  id: string; /** The name of the connection. */
+  /** The connect statement that will be passed to the connector when invoked. */
+  connectStatement: string;
+  /** The unique identifier of the connection. */
+  id: string;
+  /** The name of the connection. */
   name: string;
   /** The team space that the given connection is associated with.  If null, the connection is not associated
    * with any specific team space. */
   spaceId?: string | null;
-  spaceStats?: SpaceStatsResponse; /** The type of the connection. */
+  spaceStats?: SpaceStatsResponse;
+  /** The type of the connection. */
   type: string;
 };
 /**
  * Specifies the list of data file change space operations in a single batch.
  */
 type DataFileBatchChangeSpaceRequestV2 = {
-  /** The list of data files to delete. */changeSpace: BatchChangeSpaceItem[];
+  /** The list of data files to delete. */
+  changeSpace: BatchChangeSpaceItem[];
 };
 /**
  * Specifies a list of data file/folder POST operations in a single batch.
  */
 type DataFileBatchPostRequest = {
-  /** The list of POST operations. */post: BatchPostItem[];
+  /** The list of POST operations. */
+  post: BatchPostItem[];
 };
 type DataFileDeleteRecordResponseV2 = {
-  /** The name of the file or folder, not including any folder path prefix. */baseName?: string | null; /** The user that deleted this data file or folder. */
-  createdBy: string; /** The date that the file was deleted. */
-  deletedDate: string; /** The unique ID of the file or folder that was deleted. */
-  fileMetadataId: string; /** True if this is a folder, false if it is a file. */
+  /** The name of the file or folder, not including any folder path prefix. */
+  baseName?: string | null;
+  /** The user that deleted this data file or folder. */
+  createdBy: string;
+  /** The date that the file was deleted. */
+  deletedDate: string;
+  /** The unique ID of the file or folder that was deleted. */
+  fileMetadataId: string;
+  /** True if this is a folder, false if it is a file. */
   folder?: boolean;
   /** If the file or folder reside in a parent folder, this is the parent folder ID.  If the file or folder
    * did not reside in a parent folder, this value is null. */
   folderId?: string | null;
   /** If the file or folder resided in a parent folder, this is the parent folder path.  If the file or folder
    * did not reside in a parent folder, this value is null. */
-  folderPath?: string | null; /** The full name of the file or folder, including any folder path prefix. */
+  folderPath?: string | null;
+  /** The full name of the file or folder, including any folder path prefix. */
   name: string;
   /** If not null, the ID of the space that the uploaded file or resideed in.  If null, this implies that the
    * item was stored in the user-private area (DataFiles) */
-  spaceId?: string | null; /** The tenant that this file or folder is scoped to. */
-  tenantId: string; /** If the file or folder resided in a user's personal space, the user that this item is scoped to. */
+  spaceId?: string | null;
+  /** The tenant that this file or folder is scoped to. */
+  tenantId: string;
+  /** If the file or folder resided in a user's personal space, the user that this item is scoped to. */
   userId?: string | null;
 };
 /**
@@ -65,11 +83,17 @@ type DataFileDeleteRecordResponseV2 = {
  */
 type DataFilePermission = "read" | "update" | "delete" | "list" | "change_owner" | "change_space";
 type DataFileUploadResponseV2 = {
-  /** The CRUD actions that are allowed on the given data file. */actions: DataFilePermission[]; /** If this file or folder is bound to the lifecycle of a specific app, this is the ID of this app. */
-  appId?: string | null; /** The name of the file or folder, not including any folder path prefix. */
-  baseName?: string | null; /** If the data file's content was updated, this is the DateTime of the last content update. */
-  contentUpdatedDate?: string | null; /** The date that the file or folder was created. */
-  createdAt: string; /** Whether or not this given item represents a folder or a file. */
+  /** The CRUD actions that are allowed on the given data file. */
+  actions: DataFilePermission[];
+  /** If this file or folder is bound to the lifecycle of a specific app, this is the ID of this app. */
+  appId?: string | null;
+  /** The name of the file or folder, not including any folder path prefix. */
+  baseName?: string | null;
+  /** If the data file's content was updated, this is the DateTime of the last content update. */
+  contentUpdatedDate?: string | null;
+  /** The date that the file or folder was created. */
+  createdAt: string;
+  /** Whether or not this given item represents a folder or a file. */
   folder?: boolean;
   /** If the file or folder resides in a parent folder, this is the parent folder ID.  If the file or folder
    * does not reside in a parent folder, this value is null. */
@@ -77,13 +101,20 @@ type DataFileUploadResponseV2 = {
   /** If the file or folder resides in a parent folder, this is the parent folder path.  If the file or folder
    * does not reside in a parent folder, this value is null. */
   folderPath?: string | null;
-  folderStats: FolderStatsResponse; /** The ID for the file or folder. */
-  id: string; /** The full name of the file or folder, including any folder path prefix. */
-  name: string; /** The 'owner' of a file or folder is the user who last uploaded the item's content. */
-  ownerId: string; /** The QRI generated from the datafile or folder's metadata. */
-  qri?: string | null; /** The size of the uploaded file, in bytes.  0 if this item represents a folder */
-  size: number; /** If the file or folder was created in a team space, this is the ID of that space. */
-  spaceId?: string | null; /** The date that the updated file or folder was last modified. */
+  folderStats: FolderStatsResponse;
+  /** The ID for the file or folder. */
+  id: string;
+  /** The full name of the file or folder, including any folder path prefix. */
+  name: string;
+  /** The 'owner' of a file or folder is the user who last uploaded the item's content. */
+  ownerId: string;
+  /** The QRI generated from the datafile or folder's metadata. */
+  qri?: string | null;
+  /** The size of the uploaded file, in bytes.  0 if this item represents a folder */
+  size: number;
+  /** If the file or folder was created in a team space, this is the ID of that space. */
+  spaceId?: string | null;
+  /** The date that the updated file or folder was last modified. */
   updatedAt?: string | null;
 };
 /**
@@ -96,22 +127,27 @@ type DataFileUploadResponseV2 = {
  */
 type ErrorCode = "HTTP-200" | "HTTP-201" | "HTTP-204" | "HTTP-400" | "HTTP-403" | "HTTP-404" | "HTTP-409" | "HTTP-413" | "HTTP-423" | "HTTP-500" | "HTTP-501" | "HTTP-503" | "DF-001" | "DF-002" | "DF-003" | "DF-004" | "DF-005" | "DF-006" | "DF-007" | "DF-008" | "DF-009" | "DF-010" | "DF-011" | "DF-012" | "DF-013" | "DF-014" | "DF-015" | "DF-016" | "DF-017" | "DF-018" | "DF-019" | "DF-020" | "DF-021" | "DF-022" | "DF-023" | "DF-024" | "DF-025" | "DF-026";
 type ErrorResponse = {
-  /** List of errors and their properties. */errors: ErrorResponseItem[];
+  /** List of errors and their properties. */
+  errors: ErrorResponseItem[];
 };
 type ErrorResponseItem = {
   /** Fine-grained error codes for data-files REST operations.  For operations which do not have a more fine-grained
    * error code, the error code is set to the HTTP status code.<p>Members:</p><ul><li><i>DF-001</i> - The page cursor passed as a parameter to the GET operation is invalid.</li><li><i>DF-002</i> - The sort specification passed as a parameter to the GET operation is invalid.</li><li><i>DF-003</i> - FolderPath and FolderId are mutually exclusive, they cannot both be passed as parameters.</li><li><i>DF-004</i> - The provided FolderPath must be in canonical form.</li><li><i>DF-005</i> - The specified parent folder cannot be found.</li><li><i>DF-006</i> - The specified owner cannot be found.</li><li><i>DF-007</i> - A connection corresponding to the specified space cannot be found.</li><li><i>DF-008</i> - THe specified ID must correspond to a folder, not a file.</li><li><i>DF-009</i> - The specified space cannot be found.</li><li><i>DF-010</i> - The specified file name contains an invalid file extension.</li><li><i>DF-011</i> - The specified file name is missing a file extension.</li><li><i>DF-012</i> - The specified temporary content file could not be found.</li><li><i>DF-013</i> - Access to the specified space is forbidden.</li><li><i>DF-014</i> - The specified connection cannot be found.</li><li><i>DF-015</i> - The provided filename must be in canonical form.</li><li><i>DF-016</i> - The datafile size quota for the given personal space has been exceeded.</li><li><i>DF-017</i> - The specified source file or folder could not be found.</li><li><i>DF-018</i> - The source and target of a datafile operation must either both be folders or both be files, but they are
    *             not.</li><li><i>DF-019</i> - The specified target folder is a child of the specified source folder, which is not allowed.</li><li><i>DF-020</i> - The specified folder does not exist in the specified space.</li><li><i>DF-021</i> - The specified source file or folder is already locked.</li><li><i>DF-022</i> - The automatic creation of a missing parent folder failed.</li><li><i>DF-023</i> - An attempt to lock a parent folder of a given data file item failed.</li><li><i>DF-024</i> - The attempt to copy a source file or folder to a target failed.</li><li><i>DF-025</i> - The specified target file or folder is already locked.</li><li><i>DF-026</i> - The request results in the creation of a folder hierarchy which is beyond the max allowed folder
    *             hierarchy depth.</li></ul> */
-  code: ErrorCode; /** A human-readable explanation specific to this occurrence of the problem. */
-  detail?: string | null; /** Summary of the problem. */
+  code: ErrorCode;
+  /** A human-readable explanation specific to this occurrence of the problem. */
+  detail?: string | null;
+  /** Summary of the problem. */
   title?: string | null;
 };
 type FilterConnectionsRequest = {
   /** If set to true, include computed space-level statistics for the spaces represented by the connections in the
    * returned list.  If false, this information is not returned. */
-  includeSpaceStats?: boolean; /** If present, only return connections with the given name. */
-  name?: string | null; /** The list of space IDs that is used to filter the connection result set. */
+  includeSpaceStats?: boolean;
+  /** If present, only return connections with the given name. */
+  name?: string | null;
+  /** The list of space IDs that is used to filter the connection result set. */
   spaceIds: string[];
 };
 type FolderStatsResponse = {
@@ -123,9 +159,12 @@ type FolderStatsResponse = {
   aggregateFileSize: number;
   /** The sum of the file sizes, in bytes, of all internal data files that reside as direct and indirect children of
    * the given folder and it's sub-folder hierarchy. */
-  aggregateInternalFileSize: number; /** The number of app-scoped data files that reside as direct children of the given folder. */
-  directAppScopedFileCount: number; /** The number of data files that reside as direct children of the given folder. */
-  directFileCount: number; /** The number of sub-folders that reside as direct children of the given folder. */
+  aggregateInternalFileSize: number;
+  /** The number of app-scoped data files that reside as direct children of the given folder. */
+  directAppScopedFileCount: number;
+  /** The number of data files that reside as direct children of the given folder. */
+  directFileCount: number;
+  /** The number of sub-folders that reside as direct children of the given folder. */
   directFolderCount: number;
   /** The number of 'internal' data files (IE, those that are not visible to end users by default) that reside as
    * direct children of the given folder. */
@@ -144,7 +183,8 @@ type FolderStatsResponse = {
   totalInternalFileCount: number;
 };
 type GetConnectionsResponse = {
-  /** Properties of the connections to the tenant spaces. */data: ConnectionsResponse[];
+  /** Properties of the connections to the tenant spaces. */
+  data: ConnectionsResponse[];
   links: LinksResponse;
 };
 /**
@@ -164,7 +204,8 @@ type GetDataFileDeleteRecordsResponseV2 = {
  */
 type GetDataFileDeleteRecordsSortField = "deletedDate" | "+deletedDate" | "-deletedDate";
 type LinkResponse = {
-  /** The URL for the link. */href?: string | null;
+  /** The URL for the link. */
+  href?: string | null;
 };
 type LinksResponse = {
   next: LinkResponse;
@@ -172,17 +213,22 @@ type LinksResponse = {
   self: LinkResponse;
 };
 type MultiStatusResponse = {
-  /** List of individual results for the items in the specified batch. */data: MultiStatusResponseItem[];
+  /** List of individual results for the items in the specified batch. */
+  data: MultiStatusResponseItem[];
 };
 type MultiStatusResponseItem = {
   /** Fine-grained error codes for data-files REST operations.  For operations which do not have a more fine-grained
    * error code, the error code is set to the HTTP status code.<p>Members:</p><ul><li><i>DF-001</i> - The page cursor passed as a parameter to the GET operation is invalid.</li><li><i>DF-002</i> - The sort specification passed as a parameter to the GET operation is invalid.</li><li><i>DF-003</i> - FolderPath and FolderId are mutually exclusive, they cannot both be passed as parameters.</li><li><i>DF-004</i> - The provided FolderPath must be in canonical form.</li><li><i>DF-005</i> - The specified parent folder cannot be found.</li><li><i>DF-006</i> - The specified owner cannot be found.</li><li><i>DF-007</i> - A connection corresponding to the specified space cannot be found.</li><li><i>DF-008</i> - THe specified ID must correspond to a folder, not a file.</li><li><i>DF-009</i> - The specified space cannot be found.</li><li><i>DF-010</i> - The specified file name contains an invalid file extension.</li><li><i>DF-011</i> - The specified file name is missing a file extension.</li><li><i>DF-012</i> - The specified temporary content file could not be found.</li><li><i>DF-013</i> - Access to the specified space is forbidden.</li><li><i>DF-014</i> - The specified connection cannot be found.</li><li><i>DF-015</i> - The provided filename must be in canonical form.</li><li><i>DF-016</i> - The datafile size quota for the given personal space has been exceeded.</li><li><i>DF-017</i> - The specified source file or folder could not be found.</li><li><i>DF-018</i> - The source and target of a datafile operation must either both be folders or both be files, but they are
    *             not.</li><li><i>DF-019</i> - The specified target folder is a child of the specified source folder, which is not allowed.</li><li><i>DF-020</i> - The specified folder does not exist in the specified space.</li><li><i>DF-021</i> - The specified source file or folder is already locked.</li><li><i>DF-022</i> - The automatic creation of a missing parent folder failed.</li><li><i>DF-023</i> - An attempt to lock a parent folder of a given data file item failed.</li><li><i>DF-024</i> - The attempt to copy a source file or folder to a target failed.</li><li><i>DF-025</i> - The specified target file or folder is already locked.</li><li><i>DF-026</i> - The request results in the creation of a folder hierarchy which is beyond the max allowed folder
    *             hierarchy depth.</li></ul> */
-  code: ErrorCode; /** A human-readable explanation specific to this occurrence of the problem. */
-  detail?: string | null; /** The unique identifier of the file. */
-  id: string; /** The HTTP status code. */
-  status: number; /** Summary of the problem. */
+  code: ErrorCode;
+  /** A human-readable explanation specific to this occurrence of the problem. */
+  detail?: string | null;
+  /** The unique identifier of the file. */
+  id: string;
+  /** The HTTP status code. */
+  status: number;
+  /** Summary of the problem. */
   title?: string | null;
 };
 /**
@@ -197,7 +243,8 @@ type PostDataFileRequest = {
    * the default is that the upload will occur in the context of the Personal Space DataFiles connection.  If the
    * DataFiles connection is different from the one specified when the file or folder was last POSTed or PUT, this
    * will result in a logical move of this file or folder into the new space. */
-  connectionId?: string | null; /** If true, a folder will be created.  If false, a file is created. */
+  connectionId?: string | null;
+  /** If true, a folder will be created.  If false, a file is created. */
   folder?: boolean;
   /** If the specified file or folder should be moved to become a a sub-item of an existing folder, this is the ID
    * of this parent folder.  Any additional folder path that is present on the Name property will be created
@@ -230,9 +277,12 @@ type SpaceStatsResponse = {
   aggregateFileSize: number;
   /** The sum of the file sizes, in bytes, of all internal data files that reside as direct and indirect children of
    * the given folder and it's sub-folder hierarchy. */
-  aggregateInternalFileSize: number; /** The number of app-scoped data files that reside as direct children of the given folder. */
-  directAppScopedFileCount: number; /** The number of data files that reside as direct children of the given folder. */
-  directFileCount: number; /** The number of sub-folders that reside as direct children of the given folder. */
+  aggregateInternalFileSize: number;
+  /** The number of app-scoped data files that reside as direct children of the given folder. */
+  directAppScopedFileCount: number;
+  /** The number of data files that reside as direct children of the given folder. */
+  directFileCount: number;
+  /** The number of sub-folders that reside as direct children of the given folder. */
   directFolderCount: number;
   /** The number of 'internal' data files (IE, those that are not visible to end users by default) that reside as
    * direct children of the given folder. */
@@ -309,17 +359,23 @@ type PostDataFilesHttpError = {
  * @throws GetDataFilesConnectionsHttpError
  */
 declare function getDataFilesConnections(query: {
-  /** If present, get connections with connection strings that are scoped to the given app ID. */appId?: string | null;
+  /** If present, get connections with connection strings that are scoped to the given app ID. */
+  appId?: string | null;
   /** If set to true, include computed space-level statistics for the spaces represented by the connections in the
    * returned list.  If false, this information is not returned. */
-  includeSpaceStats?: boolean; /** If present, the maximum number of data file connection records to return. */
-  limit?: number; /** If present, only return connections with the given name. */
-  name?: string | null; /** If present, the cursor that starts the page of data that is returned. */
-  page?: string | null; /** If true, only return the connections that access data in a personal space.  Default is false. */
+  includeSpaceStats?: boolean;
+  /** If present, the maximum number of data file connection records to return. */
+  limit?: number;
+  /** If present, only return connections with the given name. */
+  name?: string | null;
+  /** If present, the cursor that starts the page of data that is returned. */
+  page?: string | null;
+  /** If true, only return the connections that access data in a personal space.  Default is false. */
   personal?: boolean;
   /** The name of the field used to sort the result.  By default, the sort is ascending.  Putting a '+' prefix on
    * the sort field name explicitly indicates ascending sort order.  A '-' prefix indicates a descending sort order. */
-  sort?: GetConnectionsSortField; /** If present, only return the connection that accesses data files in the specified space. */
+  sort?: GetConnectionsSortField;
+  /** If present, only return the connection that accesses data files in the specified space. */
   spaceId?: string | null;
 }, options?: ApiCallOptions): Promise<GetDataFilesConnectionsHttpResponse>;
 type GetDataFilesConnectionsHttpResponse = {
@@ -375,15 +431,19 @@ type FilterDataFilesConnectionsHttpError = {
  * @throws GetDataFilesDeletesHttpError
  */
 declare function getDataFilesDeletes(query: {
-  /** If set to false, do not return data files with internal extensions else return all the data files. */allowInternalFiles?: boolean;
+  /** If set to false, do not return data files with internal extensions else return all the data files. */
+  allowInternalFiles?: boolean;
   /** If specified, the returned list will only include data files and folders that have been deleted prior to the
    * specified date (inclusive). */
   deleteEndDate?: string | null;
   /** If specified, the returned list will only include data files and folders that have been deleted since the
    * specified date (inclusive). */
-  deleteStartDate?: string | null; /** If set to true, include deleted folders in the result.  If false, only return data files. */
-  includeFolders?: boolean; /** If present, the maximum number of records of deleted data files and folders to return. */
-  limit?: number; /** If present, the cursor that starts the page of data that is returned. */
+  deleteStartDate?: string | null;
+  /** If set to true, include deleted folders in the result.  If false, only return data files. */
+  includeFolders?: boolean;
+  /** If present, the maximum number of records of deleted data files and folders to return. */
+  limit?: number;
+  /** If present, the cursor that starts the page of data that is returned. */
   page?: string | null;
   /** The name of the field used to sort the result.  By default, the sort order is ascending.  Putting a '+' prefix on
    * the sort field name explicitly indicates ascending sort order.  A '-' prefix indicates a descending sort order. */

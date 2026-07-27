@@ -1,29 +1,41 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
+import "./chunks/invoke-fetch-DcXyLc5n.js";
 //#region src/public/rest/quotas.d.ts
 /**
  * A specific error.
  */
 type Error = {
-  /** The error code. */code: string; /** Summary of the problem. */
+  /** The error code. */
+  code: string;
+  /** Summary of the problem. */
   title: string;
 };
 type ErrorResponse = {
   errors?: Error[];
 };
 type GetQuotaByIdResult = {
-  /** Quota item. */data: Quota[];
+  /** Quota item. */
+  data: Quota[];
 };
 type GetQuotasResult = {
-  /** Array of quota items. */data: Quota[];
+  /** Array of quota items. */
+  data: Quota[];
 };
 type Quota = {
-  /** The attributes of the quota. */attributes: {
-    /** The quota limit. If there is no quota limit, -1 is returned. */quota: number; /** The unit of the quota limit. For memory quotas, the unit is always "bytes". For other discrete units, the item counted is used as unit, for example "spaces". */
-    unit: string; /** The current quota usage, if applicable. This attribute is only present if it is requested using the reportUsage query parameter. */
-    usage?: number; /** The warning thresholds at which "close to quota" warnings can be issued when exceeded. If omitted, no warning threshold shall be used. Currently, the array will contain only one threshold value. In the future, this may be extended. The threshold is a number between 0 and 1, relating to the quota limit. For example, a value of 0.9 means that a warning should be issued when exceeding 90% of the quota limit. */
+  /** The attributes of the quota. */
+  attributes: {
+    /** The quota limit. If there is no quota limit, -1 is returned. */
+    quota: number;
+    /** The unit of the quota limit. For memory quotas, the unit is always "bytes". For other discrete units, the item counted is used as unit, for example "spaces". */
+    unit: string;
+    /** The current quota usage, if applicable. This attribute is only present if it is requested using the reportUsage query parameter. */
+    usage?: number;
+    /** The warning thresholds at which "close to quota" warnings can be issued when exceeded. If omitted, no warning threshold shall be used. Currently, the array will contain only one threshold value. In the future, this may be extended. The threshold is a number between 0 and 1, relating to the quota limit. For example, a value of 0.9 means that a warning should be issued when exceeding 90% of the quota limit. */
     warningThresholds?: number[];
-  }; /** The unique identifier of the quota item. For example, "app_mem_size", "app_upload_disk_size", or "shared_spaces". */
-  id: string; /** The resource type of the quota item. Always equal to "quotas". */
+  };
+  /** The unique identifier of the quota item. For example, "app_mem_size", "app_upload_disk_size", or "shared_spaces". */
+  id: string;
+  /** The resource type of the quota item. Always equal to "quotas". */
   type: string;
 };
 /**
@@ -33,7 +45,8 @@ type Quota = {
  * @throws GetQuotasHttpError
  */
 declare function getQuotas(query: {
-  /** The Boolean flag indicating whether quota usage shall be part of the response. The default value is false (only limits returned). */reportUsage?: boolean;
+  /** The Boolean flag indicating whether quota usage shall be part of the response. The default value is false (only limits returned). */
+  reportUsage?: boolean;
 }, options?: ApiCallOptions): Promise<GetQuotasHttpResponse>;
 type GetQuotasHttpResponse = {
   data: GetQuotasResult;
@@ -53,7 +66,8 @@ type GetQuotasHttpError = {
  * @throws GetQuotaHttpError
  */
 declare function getQuota(id: string, query: {
-  /** The Boolean flag indicating whether quota usage shall be part of the response. The default value is false (usage not included). */reportUsage?: boolean;
+  /** The Boolean flag indicating whether quota usage shall be part of the response. The default value is false (usage not included). */
+  reportUsage?: boolean;
 }, options?: ApiCallOptions): Promise<GetQuotaHttpResponse>;
 type GetQuotaHttpResponse = {
   data: GetQuotaByIdResult;

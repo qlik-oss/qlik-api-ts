@@ -1,5 +1,5 @@
 import { r as isBrowser } from "./utils-6sNODUN0.js";
-import { B as getPlatform, E as toValidWebsocketLocationUrl, N as invokeFetch, h as isWindows, p as handleAuthenticationError } from "./interceptors-xwMkgAmO.js";
+import { B as getPlatform, E as toValidWebsocketLocationUrl, N as invokeFetch, h as isWindows, p as handleAuthenticationError } from "./interceptors-_UakH7Gk.js";
 import { t as getHumanReadableSocketClosedErrorMessage } from "./websocket-errors-DP4z3_On.js";
 
 //#region src/qix/app-session.ts
@@ -67,39 +67,44 @@ function createExternalSharedSession(externalApp, onWebSocketEvent, appSessionPr
 	};
 	externalApp.then((app) => {
 		app.session.on("opened", (event) => {
-			triggerEventListeners({
+			const wsEvent = {
 				eventType: "opened",
 				...appSessionProps,
 				...event
-			});
+			};
+			triggerEventListeners(wsEvent);
 		});
 		app.session.on("closed", (event) => {
-			triggerEventListeners({
+			const wsEvent = {
 				eventType: "closed",
 				...appSessionProps,
 				...event
-			});
+			};
+			triggerEventListeners(wsEvent);
 		});
 		app.session.on("suspended", (event) => {
-			triggerEventListeners({
+			const wsEvent = {
 				eventType: "suspended",
 				...appSessionProps,
 				...event
-			});
+			};
+			triggerEventListeners(wsEvent);
 		});
 		app.session.on("resuming", (event) => {
-			triggerEventListeners({
+			const wsEvent = {
 				eventType: "resuming",
 				...appSessionProps,
 				...event
-			});
+			};
+			triggerEventListeners(wsEvent);
 		});
 		app.session.on("resumed", (event) => {
-			triggerEventListeners({
+			const wsEvent = {
 				eventType: "resumed",
 				...appSessionProps,
 				...event
-			});
+			};
+			triggerEventListeners(wsEvent);
 		});
 	});
 	return sharedSession;
@@ -203,7 +208,7 @@ function listenForWindowsAuthenticationInformation(session) {
 * Opens the websocket and handles a few windows authentication details
 */
 async function createAndSetupEnigmaSession(props, canRetry, onWebSocketEvent) {
-	const { createEnigmaSessionEntrypoint } = await import("./qix-chunk-entrypoint-BJemywf-.js");
+	const { createEnigmaSessionEntrypoint } = await import("./qix-chunk-entrypoint-BTW2SAd9.js");
 	const isWin = await isWindows(props.hostConfig);
 	const session = await createEnigmaSessionEntrypoint(props);
 	setupSessionListeners(session, props, onWebSocketEvent, isWin);
@@ -470,7 +475,7 @@ function createSharedPhoenixSession(props, { onClose, onWebSocketEvent: onWebSoc
 			onWebSocketEventGlobal(event);
 			for (const client of clients) client.onWebSocketEvent(event);
 		};
-		const phoenixConnectionPromise = import("./qix-chunk-entrypoint-BJemywf-.js").then((module) => {
+		const phoenixConnectionPromise = import("./qix-chunk-entrypoint-BTW2SAd9.js").then((module) => {
 			return module.createPhoenixConnectionEntrypoint(props, {
 				onWebSocketEvent,
 				getInitialAppActions
@@ -529,7 +534,8 @@ const externalApps = {};
 * If a session already exists for the given props combination, it will be reused.
 */
 function getOrCreateSharedSession(props) {
-	const externalAppSession = externalApps[toGlobalAppSessionId(props)];
+	const appSessionId = toGlobalAppSessionId(props);
+	const externalAppSession = externalApps[appSessionId];
 	if (externalAppSession) return externalAppSession;
 	const key = toGlobalAppSessionId(props);
 	if (sharedSessions[key]) return sharedSessions[key];

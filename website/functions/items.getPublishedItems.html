@@ -51,13 +51,21 @@
 <div class="tsd-comment tsd-typography"><p>The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive).</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">next</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">next</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The cursor to the next page of resources. Provide either the next or prev cursor, but not both.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">prev</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">prev</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The cursor to the previous page of resources. Provide either the next or prev cursor, but not both.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">resourceType</span><span class="tsd-signature-symbol">?: </span><a href="../types/items.ItemResourceTypeEnum.html" class="tsd-signature-type tsd-kind-type-alias">ItemResourceTypeEnum</a></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">resourceType</span><span class="tsd-signature-symbol">?: </span><a href="../types/items.ItemResourceTypeEnum.html" class="tsd-signature-type tsd-kind-type-alias">ItemResourceTypeEnum</a></h5>
+<div class="tsd-comment tsd-typography"><p>The case-sensitive string used to search for an item by resourceType.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">sort</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;-name&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;+name&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;+createdAt&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;-createdAt&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;+updatedAt&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;-updatedAt&quot;</span></h5></li></ul></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">sort</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;-name&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;+name&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;+createdAt&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;-createdAt&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;+updatedAt&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;-updatedAt&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively.</p>
+</div></li></ul></li>
 <li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">options</span>: <a href="../types/invoke-fetch-types.ApiCallOptions.html" class="tsd-signature-type tsd-kind-type-alias">ApiCallOptions</a></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/items.GetPublishedItemsHttpResponse.html" class="tsd-signature-type tsd-kind-type-alias">GetPublishedItemsHttpResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography">

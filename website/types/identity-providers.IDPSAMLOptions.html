@@ -56,25 +56,39 @@
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="certificates"><code class="tsd-tag">Optional</code><span>certificates</span><a href="#certificates" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">certificates</span><span class="tsd-signature-symbol">?:</span> <a href="identity-providers.CertificateInfo.html" class="tsd-signature-type tsd-kind-type-alias">CertificateInfo</a><span class="tsd-signature-symbol">[]</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">certificates</span><span class="tsd-signature-symbol">?:</span> <a href="identity-providers.CertificateInfo.html" class="tsd-signature-type tsd-kind-type-alias">CertificateInfo</a><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-comment tsd-typography"><p>The certificates used for validating signed responses.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="claimsmapping"><code class="tsd-tag">Optional</code><span>claims<wbr/>Mapping</span><a href="#claimsmapping" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">claimsMapping</span><span class="tsd-signature-symbol">?:</span> <a href="identity-providers.ClaimsMappingSAML.html" class="tsd-signature-type tsd-kind-type-alias">ClaimsMappingSAML</a></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">claimsMapping</span><span class="tsd-signature-symbol">?:</span> <a href="identity-providers.ClaimsMappingSAML.html" class="tsd-signature-type tsd-kind-type-alias">ClaimsMappingSAML</a></div>
+<div class="tsd-comment tsd-typography"><p>Mappings from claim name to an array of SAML attribute names that point to locations in the claims from the IdP to retrieve the value from.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="entityid"><code class="tsd-tag">Optional</code><span>entity<wbr/>Id</span><a href="#entityid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">entityId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">entityId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>The entity URL for the SAML IdP.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="nameidformat"><code class="tsd-tag">Optional</code><span>name<wbr/>Id<wbr/>Format</span><a href="#nameidformat" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">nameIdFormat</span><span class="tsd-signature-symbol">?:</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;urn:oasis:names:tc:SAML:2.0:nameid-format:persistent&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified&quot;</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">nameIdFormat</span><span class="tsd-signature-symbol">?:</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;urn:oasis:names:tc:SAML:2.0:nameid-format:persistent&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified&quot;</span></div>
+<div class="tsd-comment tsd-typography"><p>The name identifier format that will be requested from the identity provider.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="signingkeys"><code class="tsd-tag">Optional</code><span>signing<wbr/>Keys</span><a href="#signingkeys" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">signingKeys</span><span class="tsd-signature-symbol">?:</span> <a href="identity-providers.SigningKey.html" class="tsd-signature-type tsd-kind-type-alias">SigningKey</a><span class="tsd-signature-symbol">[]</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">signingKeys</span><span class="tsd-signature-symbol">?:</span> <a href="identity-providers.SigningKey.html" class="tsd-signature-type tsd-kind-type-alias">SigningKey</a><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-comment tsd-typography"><p>Set of certificates used to sign SAMLRequest payloads. Not present in <code>pendingOptions</code>.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="signingkeyselectedrefid"><code class="tsd-tag">Optional</code><span>signing<wbr/>Key<wbr/>Selected<wbr/>Ref<wbr/>Id</span><a href="#signingkeyselectedrefid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">signingKeySelectedRefId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">signingKeySelectedRefId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>The reference ID of the chosen signing key pair.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="signonurl"><code class="tsd-tag">Optional</code><span>sign<wbr/>On<wbr/>Url</span><a href="#signonurl" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">signOnUrl</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div></section></section></details></div>
+<div class="tsd-signature"><span class="tsd-kind-property">signOnUrl</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>The sign on URL for the SAML IdP.</p>
+</div></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

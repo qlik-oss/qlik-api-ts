@@ -1,5 +1,5 @@
 import { t as __exportAll } from "../chunks/rolldown-runtime-w6R9maHv.js";
-import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-DvyLyo3f.js";
+import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-B8GqRz9s.js";
 
 //#region src/public/rest/analytics/odag-settings.ts
 var odag_settings_exports = /* @__PURE__ */ __exportAll({
