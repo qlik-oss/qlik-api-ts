@@ -6,14 +6,6 @@
     "type": "git",
     "url": "git+https://github.com/qlik-oss/qlik-api-ts.git"
   },
-  "files": [
-    "docs",
-    "docs-internal",
-    "lib",
-    "dist",
-    "README.md",
-    "README-PUBLIC.md"
-  ],
   "type": "module",
   "browser": {
     "fs": false
