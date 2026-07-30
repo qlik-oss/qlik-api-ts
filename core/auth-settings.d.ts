@@ -1,4 +1,5 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-o-bqAUAV.js";
+import "../chunks/invoke-fetch-DcXyLc5n.js";
 declare namespace auth_settings_d_exports {
   export { AuthSettingsAPI, AuthSettingsJSONPatch, AuthSettingsJSONPatchArray, AuthSettingsResource, Error, Errors, GetAuthSettingsHttpError, GetAuthSettingsHttpResponse, PatchAuthSettingsHttpError, PatchAuthSettingsHttpResponse, clearCache, authSettingsExport as default, getAuthSettings, patchAuthSettings };
 }
@@ -6,8 +7,11 @@ declare namespace auth_settings_d_exports {
  * A JSON Patch document for authentication settings as defined in http://tools.ietf.org/html/rfc6902.
  */
 type AuthSettingsJSONPatch = {
-  /** The operation to be performed. */op: "replace"; /** A JSON Pointer to the authentication settings field. Use `/dynamicClientRegistrationEnabled` only with a boolean `value`. Field `/dcrAllowedAuthenticationMethods` is only available when dynamic client registration is enabled. */
-  path: "/userSessionInactivityTimeoutMinutes" | "/maxUserSessionLifespanMinutes" | "/dynamicClientRegistrationEnabled" | "/dcrAllowedAuthenticationMethods"; /** Value to set for the targeted authentication settings field. Timeout fields accept only integer values, `/dynamicClientRegistrationEnabled` accepts only boolean values, and `/dcrAllowedAuthenticationMethods` accepts an array of strings. */
+  /** The operation to be performed. */
+  op: "replace";
+  /** A JSON Pointer to the authentication settings field. Use `/dynamicClientRegistrationEnabled` only with a boolean `value`. Field `/dcrAllowedAuthenticationMethods` is only available when dynamic client registration is enabled. */
+  path: "/userSessionInactivityTimeoutMinutes" | "/maxUserSessionLifespanMinutes" | "/dynamicClientRegistrationEnabled" | "/dcrAllowedAuthenticationMethods";
+  /** Value to set for the targeted authentication settings field. Timeout fields accept only integer values, `/dynamicClientRegistrationEnabled` accepts only boolean values, and `/dcrAllowedAuthenticationMethods` accepts an array of strings. */
   value: number | boolean | string | string[];
 };
 /**
@@ -43,25 +47,39 @@ type AuthSettingsJSONPatchArray = AuthSettingsJSONPatch[];
  * The authentication settings for a tenant, controlling user session duration and inactivity behavior.
  */
 type AuthSettingsResource = {
-  /** The allowed authentication methods for dynamic client registration. Only present when dynamic client registration is enabled. */dcrAllowedAuthenticationMethods?: ("none" | "client_secret")[]; /** Indicates whether dynamic client registration is enabled for this tenant. */
-  dynamicClientRegistrationEnabled?: boolean; /** The unique identifier for the authentication settings. */
-  readonly id?: string; /** `true` if the authentication settings are using tenant-wide defaults. No custom values have been saved for this tenant. */
-  readonly isDefault?: boolean; /** Maximum total lifespan for a user session, in minutes. Sessions are invalidated after this duration regardless of activity. */
-  maxUserSessionLifespanMinutes: number; /** The tenant unique identifier associated with the authentication settings. */
-  readonly tenantId: string; /** Maximum inactivity period for a user session, in minutes. Sessions that have been idle for longer than this value are invalidated. */
+  /** The allowed authentication methods for dynamic client registration. Only present when dynamic client registration is enabled. */
+  dcrAllowedAuthenticationMethods?: ("none" | "client_secret")[];
+  /** Indicates whether dynamic client registration is enabled for this tenant. */
+  dynamicClientRegistrationEnabled?: boolean;
+  /** The unique identifier for the authentication settings. */
+  readonly id?: string;
+  /** `true` if the authentication settings are using tenant-wide defaults. No custom values have been saved for this tenant. */
+  readonly isDefault?: boolean;
+  /** Maximum total lifespan for a user session, in minutes. Sessions are invalidated after this duration regardless of activity. */
+  maxUserSessionLifespanMinutes: number;
+  /** The tenant unique identifier associated with the authentication settings. */
+  readonly tenantId: string;
+  /** Maximum inactivity period for a user session, in minutes. Sessions that have been idle for longer than this value are invalidated. */
   userSessionInactivityTimeoutMinutes: number;
 };
 /**
  * An error object describing the error.
  */
 type Error = {
-  /** The error code. */code: string; /** A human-readable explanation specific to this occurrence of the problem. */
-  detail?: string; /** Additional properties relating to the error. */
-  meta?: unknown; /** References to the source of the error. */
+  /** The error code. */
+  code: string;
+  /** A human-readable explanation specific to this occurrence of the problem. */
+  detail?: string;
+  /** Additional properties relating to the error. */
+  meta?: unknown;
+  /** References to the source of the error. */
   source?: {
-    /** The URI query parameter that caused the error. */parameter?: string; /** A JSON Pointer to the property that caused the error. */
+    /** The URI query parameter that caused the error. */
+    parameter?: string;
+    /** A JSON Pointer to the property that caused the error. */
     pointer?: string;
-  }; /** Summary of the problem. */
+  };
+  /** Summary of the problem. */
   title: string;
 };
 /**
@@ -78,7 +96,9 @@ type Error = {
  * }
  */
 type Errors = {
-  /** An array of errors related to the operation. */errors?: Error[]; /** A unique identifier for tracing the error. */
+  /** An array of errors related to the operation. */
+  errors?: Error[];
+  /** A unique identifier for tracing the error. */
   traceId?: string;
 };
 /**

@@ -1,5 +1,5 @@
 import { i as isNode, n as createResolvablePromise$1 } from "./utils-6sNODUN0.js";
-import { E as toValidWebsocketLocationUrl, F as appendQueryToUrl, R as exposeInternalApiOnWindow, f as getWebSocketAuthParams, h as isWindows, p as handleAuthenticationError, z as generateRandomString } from "./interceptors-xwMkgAmO.js";
+import { E as toValidWebsocketLocationUrl, F as appendQueryToUrl, R as exposeInternalApiOnWindow, f as getWebSocketAuthParams, h as isWindows, p as handleAuthenticationError, z as generateRandomString } from "./interceptors-_UakH7Gk.js";
 import { t as getHumanReadableSocketClosedErrorMessage$1 } from "./websocket-errors-DP4z3_On.js";
 import isPlainObject from "lodash-es/isPlainObject.js";
 import merge from "lodash-es/merge.js";
@@ -10191,6 +10191,14 @@ var engine_api_default = {
 			UnApprove: {
 				In: [],
 				Out: []
+			},
+			GetSetAnalysis: {
+				In: [{
+					Name: "qStateName",
+					DefaultValue: "",
+					Optional: true
+				}],
+				Out: [{ Name: "qSetExpression" }]
 			}
 		},
 		GenericVariable: {
@@ -16241,7 +16249,6 @@ EventEmitter.prototype.emit = function(type) {
 		er = arguments[1];
 		if (er instanceof Error) throw er;
 		else throw Error("Uncaught, unspecified \"error\" event.");
-		return false;
 	}
 	handler = this._events[type];
 	if (util.isUndefined(handler)) return false;
@@ -16864,7 +16871,8 @@ function generateClassWithMixins(effectiveMixins, sourcePrototype, type, generic
 		if (typeof value === "function") {
 			Object.defineProperty(newPrototype, key, {
 				value: function wrappedForwarder(...args) {
-					return wrapInPromise(wrapWithMixins(value.apply(this.__original_rpc_object, args)));
+					const result = value.apply(this.__original_rpc_object, args);
+					return wrapInPromise(wrapWithMixins(result));
 				},
 				configurable: true,
 				writable: true

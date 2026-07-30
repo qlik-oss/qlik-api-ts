@@ -51,39 +51,73 @@
 <div class="tsd-comment tsd-typography"><p>Filter by condition id related to the executions.</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">conditionStatus</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;FAILED&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;FINISHED&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;ALL&quot;</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">conditionStatus</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;FAILED&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;FINISHED&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;ALL&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>Filter by whether the alerting task execution status is FINISHED or FAILED.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">daysOfMonth</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">daysOfMonth</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5>
+<div class="tsd-comment tsd-typography"><p>Specifies required days of the month that the execution was created in</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">daysOfWeek</span><span class="tsd-signature-symbol">?: </span>(<br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;MONDAY&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;TUESDAY&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;WEDNESDAY&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;THURSDAY&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;FRIDAY&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;SATURDAY&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;SUNDAY&quot;</span><br/>)<span class="tsd-signature-symbol">[]</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">daysOfWeek</span><span class="tsd-signature-symbol">?: </span>(<br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;MONDAY&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;TUESDAY&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;WEDNESDAY&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;THURSDAY&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;FRIDAY&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;SATURDAY&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;SUNDAY&quot;</span><br/>)<span class="tsd-signature-symbol">[]</span></h5>
+<div class="tsd-comment tsd-typography"><p>Specifies a filter for custom handled periods of time in which the executions were handled</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">fields</span><span class="tsd-signature-symbol">?: </span>(<br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluationId&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;triggerTime&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;conditionStatus&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;executionEvaluationStatus&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluation&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluation.endTime&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluation.resultData&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluation.resultData.count&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluation.resultData.headers&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluation.resultData.positive&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluation.resultData.negative&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluation.resultData.dimensions&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluation.resultData.measures&quot;</span><br/>)<span class="tsd-signature-symbol">[]</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">fields</span><span class="tsd-signature-symbol">?: </span>(<br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluationId&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;triggerTime&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;conditionStatus&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;executionEvaluationStatus&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluation&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluation.endTime&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluation.resultData&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluation.resultData.count&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluation.resultData.headers&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluation.resultData.positive&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluation.resultData.negative&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluation.resultData.dimensions&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;evaluation.resultData.measures&quot;</span><br/>)<span class="tsd-signature-symbol">[]</span></h5>
+<div class="tsd-comment tsd-typography"><p>Specifies specific properties to be populated</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">includeEvaluation</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">includeEvaluation</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+<div class="tsd-comment tsd-typography"><p>Specifies whether to include evaluation details</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">lastEachDay</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">lastEachDay</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+<div class="tsd-comment tsd-typography"><p>Specifies whether to only show the last execution in each day</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">limit</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">limit</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>Limit the returned result set</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">minimumGapDays</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">minimumGapDays</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>Specifies the number of days required between each entry. This should require a sort by triggertime</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">next</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">next</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The cursor to the next page of data. Only one of next or previous may be specified.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">offset</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">offset</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>Offset for pagination - how many elements to skip</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">prev</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">prev</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The cursor to the previous page of data. Only one of next or previous may be specified.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">searchResultsLimit</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">searchResultsLimit</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>Specifies a limit number for the search query, affects total count and is not related to pagination</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">since</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">since</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>Specifies a date that executions should have been created after. Date in RFC3339Nano format, such as 2020-01-01T00:00:00.000Z</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">sort</span><span class="tsd-signature-symbol">?: </span>(<span class="tsd-signature-type">&quot;triggertime&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;-triggertime&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;+triggertime&quot;</span>)<span class="tsd-signature-symbol">[]</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">sort</span><span class="tsd-signature-symbol">?: </span>(<span class="tsd-signature-type">&quot;triggertime&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;-triggertime&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;+triggertime&quot;</span>)<span class="tsd-signature-symbol">[]</span></h5>
+<div class="tsd-comment tsd-typography"><p>Sort the returned result set by the specified field</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">timezone</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">timezone</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>Specifies a timezone the other time-based filters in this query should consider. Expecting a momentjs format, such as America/Los_Angeles</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">triggered</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">triggered</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+<div class="tsd-comment tsd-typography"><p>Filter by whether the alerting task is triggered.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">until</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li></ul></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">until</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>Specifies a date that executions should have been created before. Date in RFC3339Nano format, such as 2020-01-01T00:00:00.000Z</p>
+</div></li></ul></li>
 <li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">options</span>: <a href="../types/invoke-fetch-types.ApiCallOptions.html" class="tsd-signature-type tsd-kind-type-alias">ApiCallOptions</a></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/data-alerts.GetDataAlertExecutionsHttpResponse.html" class="tsd-signature-type tsd-kind-type-alias">GetDataAlertExecutionsHttpResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography">

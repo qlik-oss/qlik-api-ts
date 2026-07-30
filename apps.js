@@ -1,4 +1,4 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DvyLyo3f.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B8GqRz9s.js";
 
 //#region src/public/rest/apps.ts
 /**
@@ -17,6 +17,8 @@ async function createApp(body, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Accepts two evaluation ids and returns a comparison denoting the differences between the two.
 *
 * @param baseid Id of the baseline evaluation
@@ -37,6 +39,8 @@ async function getAppEvaluationComparison(baseid, comparisonid, query, options) 
 	});
 }
 /**
+* @deprecated
+*
 * Accepts two evaluation ids and downloads a log, in XML format, denoting the differences between the two.
 * @example
 * getAppEvaluationComparisonXml(
@@ -60,6 +64,8 @@ async function getAppEvaluationComparisonXml(baseid, comparisonid, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Find an evaluation by a specific id.
 *
 * @param id Id of the desired evaluation.
@@ -76,6 +82,8 @@ async function getAppEvaluation(id, query, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Find and download an evaluation log by a specific evaluation id.
 * @example
 * getAppEvaluationXml(
@@ -811,6 +819,8 @@ async function moveAppToSpace(appId, body, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Find all evaluations for an app GUID.
 * Supports paging via next, prev which are sent in the response body
 *
@@ -828,6 +838,8 @@ async function getAppEvaluations(guid, query, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Queue an app evaluation by its app guid.
 * @example
 * queueAppEvaluation(

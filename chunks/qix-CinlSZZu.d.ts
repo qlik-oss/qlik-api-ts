@@ -1,6 +1,7 @@
-import { d as HostConfig } from "./auth-types-BAiSvIRn.js";
+import { d as HostConfig } from "./auth-types-o-bqAUAV.js";
+import "../auth.js";
 //#region src/qix/types/engine-schema.d.ts
-declare const QIX_SCHEMA_VERSION = "12.2841.0";
+declare const QIX_SCHEMA_VERSION = "12.2869.0";
 type AlfaNumString = {
   /**
    * Calculated value.
@@ -61,7 +62,7 @@ type AppEntry = {
  * Lists the app objects. Is the layout for _AppObjectListDef_.
  * <div class=note>An app object is a generic object created at app level.</div>
  */
-type AppObjectList<QData> = {
+type AppObjectList<QData = unknown> = {
   /**
    * Information about the list of dimensions.
    */
@@ -435,7 +436,7 @@ type BookmarkFieldVerifyWarning = {
 /**
  * Lists the bookmarks. Is the layout for _BookmarkListDef_.
  */
-type BookmarkList<QData> = {
+type BookmarkList<QData = unknown> = {
   /**
    * Information about the list of bookmarks.
    */
@@ -511,7 +512,7 @@ type CharRange = {
  * Lists the children of a generic object. Is the layout for _ChildListDef_.
  * <div class=note>ChildList is used by the _GetLayout Method_ to list the children of a generic object. </div>
  */
-type ChildList<QData> = {
+type ChildList<QData = unknown> = {
   /**
    * Information about the items in the app object.
    */
@@ -703,6 +704,10 @@ type DataTable = {
    * For example: Table or View.
    */
   qType?: string;
+  /**
+   * Logical name of the table. Used by nested Parquet tables.
+   */
+  qLogicalName?: string;
 };
 type DataTableEx = {
   /**
@@ -721,6 +726,10 @@ type DataTableEx = {
    * * table is &lt;table name&gt;
    */
   qFormatSpec?: string;
+  /**
+   * Logical name of the table. Used by nested Parquet tables.
+   */
+  qLogicalName?: string;
 };
 type Database = {
   /**
@@ -835,7 +844,7 @@ type DerivedFieldsInTableData = {
 /**
  * Lists the dimensions. Is the layout for _DimensionListDef_.
  */
-type DimensionList<QData> = {
+type DimensionList<QData = unknown> = {
   /**
    * Information about the list of dimensions.
    */
@@ -1996,7 +2005,7 @@ type GenericObjectEntry = {
 /**
  * Is the layout for _GenericObjectProperties_.
  */
-type GenericObjectLayout = {
+type GenericObjectLayout<QData = unknown> = {
   /**
    * Identifier and type of the generic object.
    */
@@ -2029,8 +2038,26 @@ type GenericObjectLayout = {
    * Default is current selections _$_ .
    */
   qStateName?: string;
+  qAppObjectList?: AppObjectList<QData>;
+  qBookmarkList?: BookmarkList<QData>;
+  qChildList?: ChildList<QData>;
+  qDimensionList?: DimensionList<QData>;
+  qEmbeddedSnapshot?: EmbeddedSnapshot;
+  qExtensionList?: ExtensionList;
+  qFieldList?: FieldList;
+  qHyperCube?: HyperCube;
+  qListObject?: ListObject;
+  qMeasureList?: MeasureList<QData>;
+  qMediaList?: QMediaList;
+  qNxLibraryDimension?: NxLibraryDimension;
+  qNxLibraryMeasure?: NxLibraryMeasure;
+  qSelectionObject?: SelectionObject;
+  qStaticContentUrl?: StaticContentUrl;
+  qTreeData?: TreeData;
+  qUndoInfo?: UndoInfo;
+  qVariableList?: VariableList<QData>;
 };
-type GenericObjectLayoutAdditionalProperties<QData> = {
+type GenericObjectLayoutAdditionalProperties<QData = unknown> = {
   qAppObjectList?: AppObjectList<QData>;
   qBookmarkList?: BookmarkList<QData>;
   qChildList?: ChildList<QData>;
@@ -2070,6 +2097,27 @@ type GenericObjectProperties = {
    * Default is current selections _$_ .
    */
   qStateName?: string;
+  qAppObjectListDef?: AppObjectListDef;
+  qBookmarkListDef?: BookmarkListDef;
+  qChildListDef?: ChildListDef;
+  qDimensionListDef?: DimensionListDef;
+  qEmbeddedSnapshotDef?: EmbeddedSnapshotDef;
+  qExtensionListDef?: ExtensionListDef;
+  qFieldListDef?: FieldListDef;
+  qHyperCubeDef?: HyperCubeDef;
+  qLayoutExclude?: LayoutExclude;
+  qListObjectDef?: ListObjectDef;
+  qMeasureListDef?: MeasureListDef;
+  qMediaListDef?: MediaListDef;
+  qNxLibraryDimensionDef?: NxLibraryDimensionDef;
+  qNxLibraryMeasureDef?: NxLibraryMeasureDef;
+  qSelectionObjectDef?: SelectionObjectDef;
+  qStaticContentUrlDef?: StaticContentUrlDef;
+  qStringExpression?: StringExpression;
+  qTreeDataDef?: TreeDataDef;
+  qUndoInfoDef?: UndoInfoDef;
+  qValueExpression?: ValueExpression;
+  qVariableListDef?: VariableListDef;
 };
 type GenericObjectPropertiesAdditionalProperties = {
   qAppObjectListDef?: AppObjectListDef;
@@ -2801,7 +2849,7 @@ type LogOnType = "LOG_ON_SERVICE_USER" | "LOG_ON_CURRENT_USER";
 /**
  * Lists the measures. Is the layout for _MeasureListDef_.
  */
-type MeasureList<QData> = {
+type MeasureList<QData = unknown> = {
   /**
    * Information about the list of measures.
    */
@@ -3317,7 +3365,7 @@ type NxCellPosition = {
   qy?: number;
 };
 type NxCellRows = NxCell[];
-type NxContainerEntry<QData> = {
+type NxContainerEntry<QData = unknown> = {
   /**
    * Information about the object.
    */
@@ -5610,7 +5658,7 @@ type NxValidationError = {
    */
   qExtendedMessage?: string;
 };
-type NxVariableListItem<QData> = {
+type NxVariableListItem<QData = unknown> = {
   /**
    * Name of the variable.
    */
@@ -7405,7 +7453,7 @@ type ValueExpression = {
 /**
  * Lists the variables in an app. Is the layout for _VariableListDef_.
  */
-type VariableList<QData> = {
+type VariableList<QData = unknown> = {
   /**
    * List of the variables.
    */
@@ -9701,6 +9749,16 @@ type NativeGenericBookmarkFunctions = {
    */
   getProperties: () => Promise<GenericBookmarkProperties>;
   /**
+   * Returns a set analysis expression from a bookmark. Fields on the fly and calculated dimensions will not be included in the generated expression; instead a `MISSING VALUES` comment will be included within the expression.
+   *
+   * Parameters:
+   *
+   * - `stateName`   -   Optional. The name of the state to get set analysis expression for. If left empty, the default state will be retrieved.
+   *
+   * Stability: *locked*
+   */
+  getSetAnalysis: (stateName?: string) => Promise<string>;
+  /**
    * Publishes a bookmark.
    * <div class=note>This operation is not applicable for Qlik Sense Desktop.</div>
    *
@@ -11995,9 +12053,11 @@ type SheetListDataCell = {
 };
 type SheetListItem = ListItem<SheetListData>;
 type SheetListData = {
-  /** from /qMetaDef/title */title: string;
+  /** from /qMetaDef/title */
+  title: string;
   labelExpression: string;
-  showCondition: any; /** from /qMetaDef/description */
+  showCondition: any;
+  /** from /qMetaDef/description */
   description: string;
   descriptionExpression: string;
   thumbnail: any;
@@ -12012,48 +12072,73 @@ type VariableListData = {
 };
 type MeasureListItem = ListItem<MeasureListData>;
 type MeasureListData = {
-  /** from  /qMetaDef/title */title: string; /** from  /qMetaDef/tags */
-  tags: string[]; /** from  /qMeasure/qLabelExpression */
+  /** from  /qMetaDef/title */
+  title: string;
+  /** from  /qMetaDef/tags */
+  tags: string[];
+  /** from  /qMeasure/qLabelExpression */
   labelExpression: string;
 };
 type MasterObjectListItem = ListItem<MasterObjectListData>;
 type MasterObjectListData = {
-  /** from /qMetaDef/title */name: any; /** from /labelExpression */
-  labelExpression: string; /** from /visualization */
-  visualization: any; /** from /qMetaDef/tags */
+  /** from /qMetaDef/title */
+  name: any;
+  /** from /labelExpression */
+  labelExpression: string;
+  /** from /visualization */
+  visualization: any;
+  /** from /qMetaDef/tags */
   tags: string[];
 };
 type DimensionListItem = ListItem<DimensionListData>;
 type DimensionListData = {
-  /** from /qMetaDef/title */title: string; /** from /qMetaDef/tags */
-  tags: string[]; /** from /qDim/qGrouping */
-  grouping: string; /** from /qDimInfos */
-  info: GenericDimensionInfo[]; /** from /qDim/qLabelExpression */
+  /** from /qMetaDef/title */
+  title: string;
+  /** from /qMetaDef/tags */
+  tags: string[];
+  /** from /qDim/qGrouping */
+  grouping: string;
+  /** from /qDimInfos */
+  info: GenericDimensionInfo[];
+  /** from /qDim/qLabelExpression */
   labelExpression: string;
 };
 type BookmarkListItem = ListItem<BookmarkListData>;
 type BookmarkListData = {
-  /** /qMetaDef/title */title: string; /** /qMetaDef/description */
-  description: string; /** /sheetId */
-  sheetId: string; /** /selectionFields */
-  selectionFields: any; /** /creationDate */
+  /** /qMetaDef/title */
+  title: string;
+  /** /qMetaDef/description */
+  description: string;
+  /** /sheetId */
+  sheetId: string;
+  /** /selectionFields */
+  selectionFields: any;
+  /** /creationDate */
   creationDate: any;
 };
 type ODAGAppLinkListItem = ListItem<ODAGAppLinkListData>;
 type ODAGAppLinkListData = {
-  /** /qMetaDef/odagLinkRef */odagLinkRef: any; /** /qMetaDef/timestamp */
+  /** /qMetaDef/odagLinkRef */
+  odagLinkRef: any;
+  /** /qMetaDef/timestamp */
   timestamp: any;
 };
 type DynamicAppViewListItem = ListItem<DynamicAppViewListData>;
 type DynamicAppViewListData = {
-  /** /qMetaDef/odagLinkRef */odagLinkRef: any; /** /qMetaDef/timestamp */
+  /** /qMetaDef/odagLinkRef */
+  odagLinkRef: any;
+  /** /qMetaDef/timestamp */
   timestamp: any;
 };
 type StoryListItem = ListItem<StoryListData>;
 type StoryListData = {
-  /** /qMetaDef/title */title: string; /** /qMetaDef/description */
-  description: string; /** /thumbnail */
-  thumbnail: string; /** /rank */
+  /** /qMetaDef/title */
+  title: string;
+  /** /qMetaDef/description */
+  description: string;
+  /** /thumbnail */
+  thumbnail: string;
+  /** /rank */
   rank: any;
 };
 type ExpandedFieldListItem = {
@@ -12091,7 +12176,8 @@ type RpcObject = {
   Validating: StateNotification;
   Closed: StateNotification;
   Closing: StateNotification;
-  Cancelled: StateNotification; /** @deprecated */
+  Cancelled: StateNotification;
+  /** @deprecated */
   state: number;
   layoutSubscribe<L extends GenericObjectLayout = AnyGenericObjectLayout>(callback: LayoutSubscriptionCallback): LayoutSubscription<L>;
 };
@@ -12194,8 +12280,11 @@ type Doc = RpcObject & NativeDocFunctions<Field, GenericBookmark, GenericDimensi
   global: Global;
 };
 type StandardFunctions = {
-  /** Alias for getAppProperties */getProperties(): Promise<NxAppProperties>; /** Alias for setAppProperties */
-  setProperties(props: NxAppProperties): Promise<void>; /** Alias for getAppLayout */
+  /** Alias for getAppProperties */
+  getProperties(): Promise<NxAppProperties>;
+  /** Alias for setAppProperties */
+  setProperties(props: NxAppProperties): Promise<void>;
+  /** Alias for getAppLayout */
   getLayout(): Promise<NxAppLayout>;
 };
 type ModalFunctions = {
@@ -12316,7 +12405,7 @@ type WebSocketEventType = keyof WebSocketEventPayloads;
  */
 type WebSocketEvent<ET extends WebSocketEventType = WebSocketEventType> = { [K in WebSocketEventType]: {
   eventType: K;
-} & WebSocketEventPayloads[K] & OpenAppSessionProps }[ET];
+} & WebSocketEventPayloads[K] & OpenAppSessionProps; }[ET];
 type CombinedWebSocketStateState = "open" | "suspended" | "resuming" | "closed";
 /**
  * @experimental
@@ -12328,13 +12417,21 @@ type CombinedWebSocketStateEvent = {
 //#endregion
 //#region src/qix/qix-types.d.ts
 type OpenAppSessionProps = {
-  /** App ID to open */appId: string; /** Set a value to open an individual session to the same app that is different from the default */
-  identity?: string; /** Hostconfig to connect to a URL and authenticate an app session */
-  hostConfig?: HostConfig; /** Set to true if app should be opened without loading the data blob */
-  withoutData?: boolean; /** Use a separate reload engine to perform a reload */
-  useReloadEngine?: boolean; /** Time-to-live in seconds. */
-  ttlSeconds?: number; /** Workload Type */
-  workloadType?: WorkloadType; /** Automatically resume a suspended websocket connection when user presence is detected  */
+  /** App ID to open */
+  appId: string;
+  /** Set a value to open an individual session to the same app that is different from the default */
+  identity?: string;
+  /** Hostconfig to connect to a URL and authenticate an app session */
+  hostConfig?: HostConfig;
+  /** Set to true if app should be opened without loading the data blob */
+  withoutData?: boolean;
+  /** Use a separate reload engine to perform a reload */
+  useReloadEngine?: boolean;
+  /** Time-to-live in seconds. */
+  ttlSeconds?: number;
+  /** Workload Type */
+  workloadType?: WorkloadType;
+  /** Automatically resume a suspended websocket connection when user presence is detected  */
   autoResume?: boolean;
 };
 type WorkloadType = "interact" | "report" | "reload" | "prepare" | "analyse" | "odag" | "dataflows" | "dynamicviews" | "appgeneration" | "evaluate" | "profile" | "di-qvd-gen" | "alert-preview" | "alert-evaluations" | "reporting-analytic" | "reporting-batch" | "automation" | "insight-advisor" | "automl-load" | "discovery";

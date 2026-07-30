@@ -1,7 +1,6 @@
 import automationConnectionsExport, { t as automation_connections_d_exports } from "./workflows/automation-connections.js";
 import automationConnectorsExport, { t as automation_connectors_d_exports } from "./workflows/automation-connectors.js";
 import automationsExport, { t as automations_d_exports } from "./workflows/automations.js";
-
 //#region src/public/rest/workflows.d.ts
 type WorkflowsAPI = {};
 /**

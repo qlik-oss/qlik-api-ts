@@ -54,13 +54,21 @@
 <div class="tsd-comment tsd-typography"><p>Connection ID</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>Connection name</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">ownerId</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">ownerId</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The user ID to transfer ownership to. If omitted, the connection's owner is not changed.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">spaceId</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">spaceId</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The space ID to move the connection to. If omitted, the connection's space is not changed. If set to an empty string, the connection is moved to the personal space of the user identified by <code>ownerId</code>. If <code>ownerId</code> is also omitted, the connection is moved to the original owner's personal space.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">spaceType</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;personal&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;shared&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;managed&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;data&quot;</span></h5></li></ul></div></section></section></details></div>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">spaceType</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;personal&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;shared&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;managed&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;data&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>The type of the target space. Required when <code>spaceId</code> is specified.</p>
+</div></li></ul></div></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

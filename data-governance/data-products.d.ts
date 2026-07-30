@@ -1,10 +1,14 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-o-bqAUAV.js";
+import "../chunks/invoke-fetch-DcXyLc5n.js";
 declare namespace data_products_d_exports {
   export { ActivateDataProductHttpError, ActivateDataProductHttpResponse, ActivateDataProductRequest, ArrayOfUniqueStrings, ChangelogOperation, ComputationResponse, ComputeDatasetsDataQualityDataProductHttpError, ComputeDatasetsDataQualityDataProductHttpResponse, CreateDataProductHttpError, CreateDataProductHttpResponse, CreateDataProductRequest, DataProductChangelog, DataProductChangelogResponse, DataProductResponse, DataProductsAPI, DatasetIdType, DatasetsComputationResponse, DeactivateDataProductHttpError, DeactivateDataProductHttpResponse, DeleteDataProductHttpError, DeleteDataProductHttpResponse, Error, ErrorResponse, ExecutionStatus, ExportDocumentationDataProductHttpError, ExportDocumentationDataProductHttpResponse, GenerateProviderUrlDataProductsHttpError, GenerateProviderUrlDataProductsHttpResponse, GenerateProviderUrlResponse, GetDataProductChangelogsHttpError, GetDataProductChangelogsHttpResponse, GetDataProductHttpError, GetDataProductHttpResponse, KeyContact, Link, Links, MoveDataProductHttpError, MoveDataProductHttpResponse, MoveDataProductRequest, PatchDataProductHttpError, PatchDataProductHttpResponse, PatchDataProductRequest, Quality, TrustScore, TrustScoreDimension, activateDataProduct, clearCache, computeDatasetsDataQualityDataProduct, createDataProduct, deactivateDataProduct, dataProductsExport as default, deleteDataProduct, exportDocumentationDataProduct, generateProviderUrlDataProducts, getDataProduct, getDataProductChangelogs, moveDataProduct, patchDataProduct };
 }
 type ActivateDataProductRequest = {
-  /** A description of the data product. */description?: string; /** Name of the data product to activate. */
-  name: string; /** Unique identifier of the space. */
+  /** A description of the data product. */
+  description?: string;
+  /** Name of the data product to activate. */
+  name: string;
+  /** Unique identifier of the space. */
   spaceId?: string;
   tags?: string[];
 };
@@ -18,28 +22,43 @@ type ChangelogOperation = {
  * Result of a data quality computation for a single dataset.
  */
 type ComputationResponse = {
-  /** Unique identifier for this individual data quality computation job. */computationId: string; /** The ID of the dataset */
-  datasetId: DatasetIdType; /** Error message if the computation failed; absent on success. */
-  error?: string; /** Current execution status of the computation (REQUESTED or FAILED). */
+  /** Unique identifier for this individual data quality computation job. */
+  computationId: string;
+  /** The ID of the dataset */
+  datasetId: DatasetIdType;
+  /** Error message if the computation failed; absent on success. */
+  error?: string;
+  /** Current execution status of the computation (REQUESTED or FAILED). */
   status: ExecutionStatus;
 };
 /**
  * Request payload for creating a data product.
  */
 type CreateDataProductRequest = {
-  /** List of dataset IDs for which API consumption is enabled. Must be a subset of datasetIds. */apiConsumableDatasetIds?: string[]; /** List of dataset IDs associated with the Data Product. Maximum of 100 items. */
-  datasetIds?: string[]; /** A description of the Data Product. */
-  description?: string; /** List of glossary IDs linked to the Data Product. Each entry must be a valid UUIDv4 (maximum 36 characters). Maximum of 100 items. */
-  glossaryIds?: string[]; /** List of key contacts for the data product. */
-  keyContacts?: KeyContact[]; /** Display name of the data product. */
-  name: string; /** A readme of the Data Product. */
-  readMe?: string; /** Unique identifier of the space. */
-  spaceId?: string; /** List of tags for the data product. */
+  /** List of dataset IDs for which API consumption is enabled. Must be a subset of datasetIds. */
+  apiConsumableDatasetIds?: string[];
+  /** List of dataset IDs associated with the Data Product. Maximum of 100 items. */
+  datasetIds?: string[];
+  /** A description of the Data Product. */
+  description?: string;
+  /** List of glossary IDs linked to the Data Product. Each entry must be a valid UUIDv4 (maximum 36 characters). Maximum of 100 items. */
+  glossaryIds?: string[];
+  /** List of key contacts for the data product. */
+  keyContacts?: KeyContact[];
+  /** Display name of the data product. */
+  name: string;
+  /** A readme of the Data Product. */
+  readMe?: string;
+  /** Unique identifier of the space. */
+  spaceId?: string;
+  /** List of tags for the data product. */
   tags?: string[];
 };
 type DataProductChangelog = {
-  changes?: ChangelogOperation[]; /** Timestamp when this changelog entry was created in ISO 8601 format. */
-  createdAt?: string; /** Identifier of the user who made these changes. */
+  changes?: ChangelogOperation[];
+  /** Timestamp when this changelog entry was created in ISO 8601 format. */
+  createdAt?: string;
+  /** Identifier of the user who made these changes. */
   createdBy?: string;
   id?: string;
 };
@@ -52,29 +71,41 @@ type DataProductChangelogResponse = {
   total?: number;
 };
 type DataProductResponse = {
-  /** Indicates whether the data product is currently activated for consumption. */activated?: boolean; /** Timestamp when the data product was most recently activated in ISO 8601 format. */
-  activatedAt?: string; /** List of target environments or platforms where the data product is activated. */
+  /** Indicates whether the data product is currently activated for consumption. */
+  activated?: boolean;
+  /** Timestamp when the data product was most recently activated in ISO 8601 format. */
+  activatedAt?: string;
+  /** List of target environments or platforms where the data product is activated. */
   activatedOn: string[];
-  apiConsumableDatasetIds: string[]; /** Timestamp when the data product was created in ISO 8601 format. */
-  createdAt: string; /** Identifier of the user who created the data product. */
+  apiConsumableDatasetIds: string[];
+  /** Timestamp when the data product was created in ISO 8601 format. */
+  createdAt: string;
+  /** Identifier of the user who created the data product. */
   createdBy: string;
   datasetIds: string[];
   description?: string;
   glossaryIds: string[];
   id: string;
-  keyContacts: KeyContact[]; /** Primary identifier used for main data product reference. */
+  keyContacts: KeyContact[];
+  /** Primary identifier used for main data product reference. */
   mainId?: string;
-  name: string; /** Identifier of the user who owns the data product and is responsible for governance. */
-  ownerId: string; /** Number of pending changes that are not yet activated. */
-  pendingChangesCount?: number; /** Qlik Resource Identifier (QRI) uniquely identifying the data product across the platform. */
+  name: string;
+  /** Identifier of the user who owns the data product and is responsible for governance. */
+  ownerId: string;
+  /** Number of pending changes that are not yet activated. */
+  pendingChangesCount?: number;
+  /** Qlik Resource Identifier (QRI) uniquely identifying the data product across the platform. */
   qri: string;
-  quality?: Quality; /** Documentation in Markdown format providing detailed information about the data product. */
+  quality?: Quality;
+  /** Documentation in Markdown format providing detailed information about the data product. */
   readMe?: string;
   spaceId?: string;
   tags: string[];
   tenantId: string;
-  trustScore?: TrustScore; /** Timestamp of the most recent update in ISO 8601 format. */
-  updatedAt: string; /** Identifier of the user who last updated the data product. */
+  trustScore?: TrustScore;
+  /** Timestamp of the most recent update in ISO 8601 format. */
+  updatedAt: string;
+  /** Identifier of the user who last updated the data product. */
   updatedBy: string;
 };
 /**
@@ -87,7 +118,9 @@ type DatasetIdType = string;
  * Response containing the batch computation identifier and per-dataset quality computation results.
  */
 type DatasetsComputationResponse = {
-  /** Unique identifier for the data quality batch computation job. */batchComputationId: string; /** List of computation results, one entry per dataset in the data product. */
+  /** Unique identifier for the data quality batch computation job. */
+  batchComputationId: string;
+  /** List of computation results, one entry per dataset in the data product. */
   datasetResponses: ComputationResponse[];
 };
 type Error = {
@@ -113,7 +146,9 @@ type GenerateProviderUrlResponse = {
  * Represents a designated contact person for a data product, optionally with their role.
  */
 type KeyContact = {
-  /** Role of the key contact in the Data Product. */role?: string; /** Unique identifier of the user. */
+  /** Role of the key contact in the Data Product. */
+  role?: string;
+  /** Unique identifier of the user. */
   userId: string;
 };
 type Link = {
@@ -127,7 +162,8 @@ type Links = {
   self?: Link;
 };
 type MoveDataProductRequest = {
-  /** Unique identifier of the space. */spaceId: string;
+  /** Unique identifier of the space. */
+  spaceId: string;
 };
 type PatchDataProductRequest = {
   op: "replace";
@@ -177,7 +213,8 @@ type CreateDataProductHttpError = {
  * @throws GenerateProviderUrlDataProductsHttpError
  */
 declare function generateProviderUrlDataProducts(query: {
-  /** Unique identifier of the dataset. */dataSetId: string;
+  /** Unique identifier of the dataset. */
+  dataSetId: string;
 }, options?: ApiCallOptions): Promise<GenerateProviderUrlDataProductsHttpResponse>;
 type GenerateProviderUrlDataProductsHttpResponse = {
   data: GenerateProviderUrlResponse;
@@ -352,7 +389,9 @@ type MoveDataProductHttpError = {
  * @throws GetDataProductChangelogsHttpError
  */
 declare function getDataProductChangelogs(dataProductId: string, query: {
-  /** Maximum number of items to return per page. */limit?: number; /** Page number. */
+  /** Maximum number of items to return per page. */
+  limit?: number;
+  /** Page number. */
   page?: number;
   /** Sort order for changelog entries. Use `+createdAt` for oldest first or `-createdAt` for newest first.
    * Prefix with `+` for ascending or `-` for descending order. Default: -createdAt. */

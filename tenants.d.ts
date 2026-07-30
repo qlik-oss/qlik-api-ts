@@ -1,17 +1,26 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
+import "./chunks/invoke-fetch-DcXyLc5n.js";
 //#region src/public/rest/tenants.d.ts
 /**
  * An error object describing the error.
  */
 type Error = {
-  /** The error code. */code: string; /** A human-readable explanation specific to this occurrence of the error. */
-  detail?: string; /** Additional properties relating to the error. */
-  meta?: unknown; /** References to the source of the error. */
+  /** The error code. */
+  code: string;
+  /** A human-readable explanation specific to this occurrence of the error. */
+  detail?: string;
+  /** Additional properties relating to the error. */
+  meta?: unknown;
+  /** References to the source of the error. */
   source?: {
-    /** The URI query parameter that caused the error. */parameter?: string; /** A JSON Pointer to the property that caused the error. */
+    /** The URI query parameter that caused the error. */
+    parameter?: string;
+    /** A JSON Pointer to the property that caused the error. */
     pointer?: string;
-  }; /** The HTTP status code. */
-  status: string; /** Summary of the problem. */
+  };
+  /** The HTTP status code. */
+  status: string;
+  /** Summary of the problem. */
   title: string;
 };
 /**
@@ -28,29 +37,44 @@ type Error = {
  * }
  */
 type Errors = {
-  /** An array of errors related to the operation. */errors?: Error[]; /** A unique identifier for tracing the error. */
+  /** An array of errors related to the operation. */
+  errors?: Error[];
+  /** A unique identifier for tracing the error. */
   traceId?: string;
 };
 type Tenant = {
   autoAssignCreateSharedSpacesRoleToProfessionals?: boolean;
   autoAssignDataServicesContributorRoleToProfessionals?: boolean;
-  autoAssignPrivateAnalyticsContentCreatorRoleToProfessionals?: boolean; /** The timestamp for when the tenant record was created (1970-01-01T00:00:00.001Z for static tenants). */
-  readonly created?: string; /** The user ID who created the tenant. */
-  createdByUser?: string; /** The datacenter where the tenant is located. */
-  datacenter?: string; /** @deprecated */
+  autoAssignPrivateAnalyticsContentCreatorRoleToProfessionals?: boolean;
+  /** The timestamp for when the tenant record was created (1970-01-01T00:00:00.001Z for static tenants). */
+  readonly created?: string;
+  /** The user ID who created the tenant. */
+  createdByUser?: string;
+  /** The datacenter where the tenant is located. */
+  datacenter?: string;
+  /** @deprecated */
   enableAnalyticCreation?: boolean;
-  enableAppOpeningFeedback?: boolean; /** List of case insensitive hostnames that are mapped to the tenant. The first record maps to the display name and the subsequent entries are aliases. */
-  hostnames?: string[]; /** The unique tenant identifier. */
-  readonly id: string; /** The timestamp for when the tenant record was last updated (1970-01-01T00:00:00.001Z for static tenants). */
+  enableAppOpeningFeedback?: boolean;
+  /** List of case insensitive hostnames that are mapped to the tenant. The first record maps to the display name and the subsequent entries are aliases. */
+  hostnames?: string[];
+  /** The unique tenant identifier. */
+  readonly id: string;
+  /** The timestamp for when the tenant record was last updated (1970-01-01T00:00:00.001Z for static tenants). */
   readonly lastUpdated?: string;
   readonly links?: {
-    /** A link to this tenant. */self: {
-      /** URL that defines the resource. */href: string;
+    /** A link to this tenant. */
+    self: {
+      /** URL that defines the resource. */
+      href: string;
     };
-  }; /** The display name of the tenant. */
-  name: string; /** The region where the tenant is located. */
-  readonly region?: string; /** The status of the tenant. */
-  status?: "active" | "disabled" | "deleted" | "user-access-disabled"; /** The timestamp for when the tenant status was last changed. */
+  };
+  /** The display name of the tenant. */
+  name: string;
+  /** The region where the tenant is located. */
+  readonly region?: string;
+  /** The status of the tenant. */
+  status?: "active" | "disabled" | "deleted" | "user-access-disabled";
+  /** The timestamp for when the tenant status was last changed. */
   readonly statusLastUpdatedAt?: string;
 };
 type TenantCreationRequest = {
@@ -64,32 +88,42 @@ type TenantCreationRequest = {
    * - `eu-west-1`: Ireland (eu)
    * - `eu-west-2`: United Kingdom (uk)
    * - `us-east-1`: United States of America (us) */
-  datacenter?: string; /** The signed license key of the license that will be associated with the created tenant. */
+  datacenter?: string;
+  /** The signed license key of the license that will be associated with the created tenant. */
   licenseKey?: string;
 };
 /**
  * A request to deactivate a tenant.
  */
 type TenantDeactivateRequest = {
-  /** Sets the number of days to purge the tenant after deactivation. Only available to OEMs. */purgeAfterDays?: number;
+  /** Sets the number of days to purge the tenant after deactivation. Only available to OEMs. */
+  purgeAfterDays?: number;
 };
 /**
  * The result of tenant deactivation.
  */
 type TenantDeactivateResponse = {
-  /** The estimated date time of when tenant will be purged. */estimatedPurgeDate?: string; /** The unique tenant identifier. */
-  readonly id?: string; /** The status of the tenant. */
+  /** The estimated date time of when tenant will be purged. */
+  estimatedPurgeDate?: string;
+  /** The unique tenant identifier. */
+  readonly id?: string;
+  /** The status of the tenant. */
   status?: "disabled";
 };
 type TenantMultipleMetaErrorsDetail = TenantSingleMetaErrorDetail[];
 type TenantPatchErrors = {
   errors?: {
-    /** The error code. */code: string;
-    meta?: TenantSingleMetaErrorDetail | TenantMultipleMetaErrorsDetail; /** References to the source of the error. */
+    /** The error code. */
+    code: string;
+    meta?: TenantSingleMetaErrorDetail | TenantMultipleMetaErrorsDetail;
+    /** References to the source of the error. */
     source?: {
-      /** The URI query parameter that caused the error. */parameter?: string; /** A JSON Pointer to the property that caused the error. */
+      /** The URI query parameter that caused the error. */
+      parameter?: string;
+      /** A JSON Pointer to the property that caused the error. */
       pointer?: string;
-    }; /** Summary of the problem. */
+    };
+    /** Summary of the problem. */
     title: string;
   }[];
 };
@@ -129,12 +163,17 @@ type TenantPatchErrors = {
  * ]
  */
 type TenantPatchSchema = {
-  /** The operation to be performed. */op: "replace"; /** A JSON Pointer value that references a location within the target document where the operation is performed. */
-  path: "/name" | "/hostnames/1" | "/autoAssignCreateSharedSpacesRoleToProfessionals" | "/autoAssignPrivateAnalyticsContentCreatorRoleToProfessionals" | "/autoAssignDataServicesContributorRoleToProfessionals" | "/enableAnalyticCreation" | "/enableAppOpeningFeedback"; /** The value to be used for this operation. */
+  /** The operation to be performed. */
+  op: "replace";
+  /** A JSON Pointer value that references a location within the target document where the operation is performed. */
+  path: "/name" | "/hostnames/1" | "/autoAssignCreateSharedSpacesRoleToProfessionals" | "/autoAssignPrivateAnalyticsContentCreatorRoleToProfessionals" | "/autoAssignDataServicesContributorRoleToProfessionals" | "/enableAnalyticCreation" | "/enableAppOpeningFeedback";
+  /** The value to be used for this operation. */
   value: string | boolean;
 }[];
 type TenantSingleMetaErrorDetail = {
-  /** The error code. */code?: string; /** The error summary. */
+  /** The error code. */
+  code?: string;
+  /** The error summary. */
   title?: string;
 };
 /**

@@ -1,67 +1,104 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-o-bqAUAV.js";
+import "../chunks/invoke-fetch-DcXyLc5n.js";
 declare namespace data_credentials_d_exports {
   export { ActionFilterOrphanRequest, ActionFilterOrphanResponse, Credential, CredentialCreate, DataCredentialsAPI, DeleteDataCredentialHttpError, DeleteDataCredentialHttpResponse, Error, Errors, FilterOrphanDataCredentialsHttpError, FilterOrphanDataCredentialsHttpResponse, GetDataCredentialHttpError, GetDataCredentialHttpResponse, Link, OrphanCredentialResItem, PatchDataCredentialHttpError, PatchDataCredentialHttpResponse, PatchRequest, ResponseErrors, UpdateDataCredentialHttpError, UpdateDataCredentialHttpResponse, clearCache, dataCredentialsExport as default, deleteDataCredential, filterOrphanDataCredentials, getDataCredential, patchDataCredential, updateDataCredential };
 }
 type ActionFilterOrphanRequest = {
-  /** Filter orphan credentials by data source ID. */datasourceID?: string; /** Filter orphan credentials by separation status. `0` returns only embedded credentials. `1` returns only separated credentials. */
-  qSeparated?: 0 | 1; /** Filter orphan credentials by credential type. */
+  /** Filter orphan credentials by data source ID. */
+  datasourceID?: string;
+  /** Filter orphan credentials by separation status. `0` returns only embedded credentials. `1` returns only separated credentials. */
+  qSeparated?: 0 | 1;
+  /** Filter orphan credentials by credential type. */
   qType?: string;
 };
 type ActionFilterOrphanResponse = {
-  /** Number of orphan credentials found */count: number;
+  /** Number of orphan credentials found */
+  count: number;
   data: OrphanCredentialResItem[];
 };
 type Credential = {
-  /** Datetime when the credential was created. */createdAt?: string; /** The identifier of the data source this credential is created for. */
+  /** Datetime when the credential was created. */
+  createdAt?: string;
+  /** The identifier of the data source this credential is created for. */
   datasourceID?: string;
-  links?: Link; /** Number of linked connections. */
-  qConnCount: number; /** The unique identifier of the credential. */
-  qID: string; /** The name of the credential. */
-  qName: string; /** Internal reference key for the credential. */
-  qReferenceKey?: string; /** The credential type. */
-  qType: string; /** Datetime when the credential was last updated. */
+  links?: Link;
+  /** Number of linked connections. */
+  qConnCount: number;
+  /** The unique identifier of the credential. */
+  qID: string;
+  /** The name of the credential. */
+  qName: string;
+  /** Internal reference key for the credential. */
+  qReferenceKey?: string;
+  /** The credential type. */
+  qType: string;
+  /** Datetime when the credential was last updated. */
   updated?: string;
 };
 /**
  * Request body for creating or updating a new data credential.
  */
 type CredentialCreate = {
-  /** The identifier of the data connection to associate with this credential. */connectionId?: string; /** The identifier of the data source this credential is created for. */
-  datasourceID?: string; /** The unique identifier of the credential. */
-  qID?: string; /** The name of the credential. */
-  qName: string; /** Password */
-  qPassword: string; /** The credential type, corresponding to the connector provider of the associated connection. */
-  qType: string; /** User name */
+  /** The identifier of the data connection to associate with this credential. */
+  connectionId?: string;
+  /** The identifier of the data source this credential is created for. */
+  datasourceID?: string;
+  /** The unique identifier of the credential. */
+  qID?: string;
+  /** The name of the credential. */
+  qName: string;
+  /** Password */
+  qPassword: string;
+  /** The credential type, corresponding to the connector provider of the associated connection. */
+  qType: string;
+  /** User name */
   qUsername: string;
 };
 type Error = {
-  /** A unique internal error code identifying the error type. */code?: string; /** Additional details about the error. */
-  detail?: string; /** The HTTP status code associated with this error. */
-  status?: number; /** A short, human-readable description of what went wrong. */
+  /** A unique internal error code identifying the error type. */
+  code?: string;
+  /** Additional details about the error. */
+  detail?: string;
+  /** The HTTP status code associated with this error. */
+  status?: number;
+  /** A short, human-readable description of what went wrong. */
   title?: string;
 };
 type Errors = Error[];
 type Link = {
-  /** Link to current query */self: {
-    /** URL pointing to the resource */href: string;
+  /** Link to current query */
+  self: {
+    /** URL pointing to the resource */
+    href: string;
   };
 };
 /**
  * An orphan credential not associated with any data connection.
  */
 type OrphanCredentialResItem = {
-  /** Datetime when the credential was created */createdAt?: string; /** ID datasource that the credential is created for */
-  datasourceID?: string; /** The unique identifier of the credential. */
-  qID: string; /** Name of the credential */
-  qName: string; /** The credential type, corresponding to the connector provider of the associated connection. */
-  qType: string; /** Tenant ID of the credential's owner */
-  tenant?: string; /** Datetime when the credential was last updated */
-  updated: string; /** User ID of the credential's owner */
+  /** Datetime when the credential was created */
+  createdAt?: string;
+  /** ID datasource that the credential is created for */
+  datasourceID?: string;
+  /** The unique identifier of the credential. */
+  qID: string;
+  /** Name of the credential */
+  qName: string;
+  /** The credential type, corresponding to the connector provider of the associated connection. */
+  qType: string;
+  /** Tenant ID of the credential's owner */
+  tenant?: string;
+  /** Datetime when the credential was last updated */
+  updated: string;
+  /** User ID of the credential's owner */
   user?: string;
 };
 type PatchRequest = {
-  /** The patch operation type. */op: "add" | "replace" | "remove"; /** JSON Pointer path to the field to patch. */
-  path: string; /** Value used for the patch. Required only for `add` or `replace` operations. The value type should match the type of the target field. */
+  /** The patch operation type. */
+  op: "add" | "replace" | "remove";
+  /** JSON Pointer path to the field to patch. */
+  path: string;
+  /** Value used for the patch. Required only for `add` or `replace` operations. The value type should match the type of the target field. */
   value?: string | boolean | number | unknown[];
 }[];
 type ResponseErrors = {
@@ -99,7 +136,8 @@ type FilterOrphanDataCredentialsHttpError = {
  * @throws DeleteDataCredentialHttpError
  */
 declare function deleteDataCredential(qID: string, query: {
-  /** When `true`, the value of the `credentialId` in the query is interpreted as the credential's name rather than its unique identifier. */byCredentialName?: boolean;
+  /** When `true`, the value of the `credentialId` in the query is interpreted as the credential's name rather than its unique identifier. */
+  byCredentialName?: boolean;
 }, options?: ApiCallOptions): Promise<DeleteDataCredentialHttpResponse>;
 type DeleteDataCredentialHttpResponse = {
   data: void;
@@ -126,7 +164,8 @@ type DeleteDataCredentialHttpError = {
  * @throws GetDataCredentialHttpError
  */
 declare function getDataCredential(qID: string, query: {
-  /** When `true`, the value of the `credentialId` in the query is interpreted as the credential's name rather than its unique identifier. */byCredentialName?: boolean;
+  /** When `true`, the value of the `credentialId` in the query is interpreted as the credential's name rather than its unique identifier. */
+  byCredentialName?: boolean;
 }, options?: ApiCallOptions): Promise<GetDataCredentialHttpResponse>;
 type GetDataCredentialHttpResponse = {
   data: Credential;
@@ -147,7 +186,8 @@ type GetDataCredentialHttpError = {
  * @throws PatchDataCredentialHttpError
  */
 declare function patchDataCredential(qID: string, query: {
-  /** When `true`, the value of the `credentialId` in the query is interpreted as the credential's name rather than its unique identifier. */byCredentialName?: boolean;
+  /** When `true`, the value of the `credentialId` in the query is interpreted as the credential's name rather than its unique identifier. */
+  byCredentialName?: boolean;
 }, body: PatchRequest, options?: ApiCallOptions): Promise<PatchDataCredentialHttpResponse>;
 type PatchDataCredentialHttpResponse = {
   data: void;
@@ -168,7 +208,8 @@ type PatchDataCredentialHttpError = {
  * @throws UpdateDataCredentialHttpError
  */
 declare function updateDataCredential(qID: string, query: {
-  /** When `true`, the value of the `credentialId` in the query is interpreted as the credential's name rather than its unique identifier. */byCredentialName?: boolean;
+  /** When `true`, the value of the `credentialId` in the query is interpreted as the credential's name rather than its unique identifier. */
+  byCredentialName?: boolean;
 }, body: CredentialCreate, options?: ApiCallOptions): Promise<UpdateDataCredentialHttpResponse>;
 type UpdateDataCredentialHttpResponse = {
   data: void;

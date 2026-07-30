@@ -60,19 +60,48 @@
 <h3 class="tsd-anchor-link" id="cdcstatus"><code class="tsd-tag">Optional</code><span>cdc<wbr/>Status</span><a href="#cdcstatus" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">cdcStatus</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">accumulatingChangesCount</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">applyingChangesCount</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">incomingChangesCount</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">latency</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">throughputInKilobytesPerSecond</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">totalProcessedCount</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
 <div class="tsd-comment tsd-typography"><p>Change Data Capture status information for tasks performing incremental updates, including latency and processing counts.</p>
-</div></section>
+</div>
+<div class="tsd-type-declaration">
+<h4>Type Declaration</h4>
+<ul class="tsd-parameters">
+<li class="tsd-parameter">
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">accumulatingChangesCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
+<li class="tsd-parameter">
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">applyingChangesCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
+<li class="tsd-parameter">
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">incomingChangesCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>Number of incoming changes. Only relevant for 'Iceberg Storage' and 'Streaming Transform' tasks.</p>
+</div></li>
+<li class="tsd-parameter">
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">latency</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>Duration in HH:MM:SS format (hours:minutes:seconds)</p>
+</div></li>
+<li class="tsd-parameter">
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">throughputInKilobytesPerSecond</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>Throughput in kilobytes per second</p>
+</div></li>
+<li class="tsd-parameter">
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">totalProcessedCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li></ul></div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="duration"><code class="tsd-tag">Optional</code><span>duration</span><a href="#duration" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">duration</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">duration</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>Duration in HH:MM:SS format (hours:minutes:seconds)</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="endtime"><code class="tsd-tag">Optional</code><span>end<wbr/>Time</span><a href="#endtime" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">endTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">endTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>Timestamp indicating when the task instance ended</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="errors"><code class="tsd-tag">Optional</code><span>errors</span><a href="#errors" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">errors</span><span class="tsd-signature-symbol">?:</span> <a href="di-projects.Error.html" class="tsd-signature-type tsd-kind-type-alias">Error</a><span class="tsd-signature-symbol">[]</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">errors</span><span class="tsd-signature-symbol">?:</span> <a href="di-projects.Error.html" class="tsd-signature-type tsd-kind-type-alias">Error</a><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-comment tsd-typography"><p>List of errors encountered during the last run</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="fullload"><code class="tsd-tag">Optional</code><span>full<wbr/>Load</span><a href="#fullload" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">fullLoad</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">completedCount</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">errorCount</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">loadingCount</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">queuedCount</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
+<div class="tsd-comment tsd-typography"><p>Statistics for the full load phase of the task run, tracking dataset processing progress.</p>
+</div>
 <div class="tsd-type-declaration">
 <h4>Type Declaration</h4>
 <ul class="tsd-parameters">
@@ -81,40 +110,66 @@
 <div class="tsd-comment tsd-typography"><p>Number of datasets that have completed full load in this task run</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">errorCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">errorCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>Number of datasets that have failed full load in this task run</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">loadingCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">loadingCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>Number of datasets that are currently being loaded in this task run</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">queuedCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li></ul></div></section>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">queuedCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>Number of datasets that are queued for full load in this task run</p>
+</div></li></ul></div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="general"><code class="tsd-tag">Optional</code><span>general</span><a href="#general" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">general</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">datasetCount</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">datasetsInErrorCount</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">dataTaskUpdatedTo</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">gatewayId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">gatewayName</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">gatewayTaskName</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">lakehouseClusterId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">lakehouseClusterName</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">liveViewsUpdatedTo</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
+<div class="tsd-comment tsd-typography"><p>Overall task execution statistics including dataset counts, data freshness timestamps, and infrastructure details.</p>
+</div>
 <div class="tsd-type-declaration">
 <h4>Type Declaration</h4>
 <ul class="tsd-parameters">
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">datasetCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">datasetCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>Total number of datasets produced by the task, including ones in error</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">datasetsInErrorCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">datasetsInErrorCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>Count of datasets that encountered errors</p>
+</div></li>
 <li class="tsd-parameter">
 <h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">dataTaskUpdatedTo</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The latest point in time the data reflects, based on updates from the source system.</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">gatewayId</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">gatewayId</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>For tasks that run on a gateway, this is the id of the gateway</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">gatewayName</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">gatewayName</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>For tasks that run on a gateway, this is the name of the gateway</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">gatewayTaskName</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">gatewayTaskName</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>For tasks that run on a gateway, this is the internal name of the task on the gateway</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">lakehouseClusterId</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">lakehouseClusterId</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>For lakehouse storage tasks, this is the id of the cluster where the task runs</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">lakehouseClusterName</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">lakehouseClusterName</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>For lakehouse storage tasks, this is the name of the cluster where the task runs</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">liveViewsUpdatedTo</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li></ul></div></section>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">liveViewsUpdatedTo</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The latest point in time the live views reflect, based on updates from the source system.</p>
+</div></li></ul></div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="lastbatchofchanges"><code class="tsd-tag">Optional</code><span>last<wbr/>Batch<wbr/>Of<wbr/>Changes</span><a href="#lastbatchofchanges" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">lastBatchOfChanges</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">relatesToRecordsFrom</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">relatesToRecordsTo</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">throughputInRecordsPerSecond</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">totalProcessedCount</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
+<div class="tsd-comment tsd-typography"><p>Statistics for the most recent batch of changes processed during the task run, including timing and throughput metrics.</p>
+</div>
 <div class="tsd-type-declaration">
 <h4>Type Declaration</h4>
 <ul class="tsd-parameters">
@@ -123,9 +178,13 @@
 <div class="tsd-comment tsd-typography"><p>This batch starts with operational source changes from this time.</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">relatesToRecordsTo</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">relatesToRecordsTo</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>This batch ends with operational source changes from this time.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">throughputInRecordsPerSecond</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">throughputInRecordsPerSecond</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>Throughput in records per second</p>
+</div></li>
 <li class="tsd-parameter">
 <h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">totalProcessedCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li></ul></div></section>
 <section class="tsd-panel tsd-member">
@@ -133,13 +192,17 @@
 <div class="tsd-signature"><span class="tsd-kind-property">message</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="starttime"><code class="tsd-tag">Optional</code><span>start<wbr/>Time</span><a href="#starttime" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">startTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">startTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>Timestamp indicating when the task instance started</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="state"><code class="tsd-tag">Optional</code><span>state</span><a href="#state" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">state</span><span class="tsd-signature-symbol">?:</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;STARTING&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;RUNNING&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;COMPLETED&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;FAILED&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;CANCELED&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;STOPPING&quot;</span></div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="streaming"><code class="tsd-tag">Optional</code><span>streaming</span><a href="#streaming" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">streaming</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">errorCount</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">latency</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">queuedCount</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">runningCount</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">totalProcessedCount</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
+<div class="tsd-comment tsd-typography"><p>Real-time streaming statistics for tasks that continuously process data streams.</p>
+</div>
 <div class="tsd-type-declaration">
 <h4>Type Declaration</h4>
 <ul class="tsd-parameters">
@@ -148,16 +211,26 @@
 <div class="tsd-comment tsd-typography"><p>Number of streaming datasets that have encountered errors</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">latency</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">latency</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>Duration in HH:MM:SS format (hours:minutes:seconds)</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">queuedCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">queuedCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>Number of streaming datasets that are queued</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">runningCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">runningCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>Number of streaming datasets that are currently running</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">totalProcessedCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li></ul></div></section>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">totalProcessedCount</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>Total number of records processed</p>
+</div></li></ul></div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="traceid"><code class="tsd-tag">Optional</code><span>trace<wbr/>Id</span><a href="#traceid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">traceId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div></section></section></details></div>
+<div class="tsd-signature"><span class="tsd-kind-property">traceId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>Trace identifier for the last run, useful for diagnostics and support</p>
+</div></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

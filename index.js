@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DvyLyo3f.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B8GqRz9s.js";
 import auth_default from "./auth.js";
-import { a as interceptors$1 } from "./chunks/interceptors-xwMkgAmO.js";
+import { a as interceptors$1 } from "./chunks/interceptors-_UakH7Gk.js";
 import qix$1 from "./qix.js";
 
 //#region src/runtime-api-generator/runtime-api-generator-common.ts
@@ -712,11 +712,16 @@ const createDataGovernanceDataProductsRuntimeAPI = apiDefToApiPublic("data-gover
 	}
 } } } });
 const createDataGovernanceDataQualitiesRuntimeAPI = apiDefToApiPublic("data-governance/data-qualities", { api: { "data-governance": { "data-qualities": {
+	"batch-computations": { "{batchComputationId}": ["getDataQualitiesBatchComputation:G:"] },
 	computations: {
 		"": ["createDataQualityComputation:PBJ:"],
 		"{computationId}": ["getDataQualityComputation:G:"]
 	},
-	"global-results": ["getDataQualityGlobalResults:GQ:"]
+	"field-qualities": { actions: { filter: ["filterDataQualitiesFieldQualities:PBJ:"] } },
+	"global-results": {
+		"": ["getDataQualityGlobalResults:GQ:"],
+		actions: { filter: ["filterDataQualitiesGlobalResults:PBJ:"] }
+	}
 } } } });
 const createDataGovernanceTrustScoresRuntimeAPI = apiDefToApiPublic("data-governance/trust-scores", { api: { "data-governance": { "trust-scores": { results: { "data-sets": { actions: { filter: ["filterDatasetsTrustScore:PBJ:"] } } } } } } });
 const createDataGovernanceRuntimeAPI = apiDefToApiPublic("data-governance", {}, {
@@ -1161,7 +1166,11 @@ const createRolesRuntimeAPI = apiDefToApiPublic("roles", { api: { v1: { roles: {
 	]
 } } } });
 const createSchedulingRuntimeAPI = apiDefToApiPublic("scheduling", {}, { tasks: apiDefToApiPublic("scheduling/tasks", { api: { scheduling: { tasks: {
-	"": ["getTasks:GQ:", "createTask:PQBJ:"],
+	"": [
+		"getTasks:GQ:",
+		"createTask:PQBJ:",
+		"createTaskWithoutQuery:PBJ:"
+	],
 	resources: { "{id}": { runs: ["getTaskResourceRuns:GQ:"] } },
 	"{id}": {
 		"": [
@@ -1389,7 +1398,13 @@ const createWorkflowsAutomationConnectionsRuntimeAPI = apiDefToApiPublic("workfl
 		}
 	}
 } } } });
-const createWorkflowsAutomationConnectorsRuntimeAPI = apiDefToApiPublic("workflows/automation-connectors", { api: { workflows: { "automation-connectors": ["getAutomationConnectors:GQ:"] } } });
+const createWorkflowsAutomationConnectorsRuntimeAPI = apiDefToApiPublic("workflows/automation-connectors", { api: { workflows: { "automation-connectors": {
+	"": ["getAutomationConnectors:GQ:"],
+	"{connectorId}": {
+		"": ["getAutomationConnector:G:"],
+		webhooks: { configuration: ["getAutomationConnectorWebhooksConfiguration:G:"] }
+	}
+} } } });
 const createWorkflowsRuntimeAPI = apiDefToApiPublic("workflows", {}, {
 	"automation-connections": createWorkflowsAutomationConnectionsRuntimeAPI,
 	automationConnections: createWorkflowsAutomationConnectionsRuntimeAPI,

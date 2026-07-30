@@ -1,26 +1,38 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
+import "./chunks/invoke-fetch-DcXyLc5n.js";
 //#region src/public/rest/automation-connectors.d.ts
 type AutomationConnectorsList = {
   data?: AutomationConnectorsListObject[];
   links?: Links;
 };
 type AutomationConnectorsListObject = {
-  /** Indicates if the connector is billable. */billable?: boolean; /** The description of the automation connector. */
-  description?: string | null; /** Indicates if the connector supports webhooks. */
+  /** Indicates if the connector is billable. */
+  billable?: boolean;
+  /** The description of the automation connector. */
+  description?: string | null;
+  /** Indicates if the connector supports webhooks. */
   hasWebhooks?: boolean;
-  readonly id?: string; /** The URL to the large logo of the connector. */
-  logoLarge?: string | null; /** The URL to the medium logo of the connector. */
-  logoMedium?: string | null; /** The URL to the small logo of the connector. */
-  logoSmall?: string | null; /** The name of an automation connector. */
+  readonly id?: string;
+  /** The URL to the large logo of the connector. */
+  logoLarge?: string | null;
+  /** The URL to the medium logo of the connector. */
+  logoMedium?: string | null;
+  /** The URL to the small logo of the connector. */
+  logoSmall?: string | null;
+  /** The name of an automation connector. */
   name?: string;
 };
 type Error = {
-  /** The unique code for the error */code: string; /** May be used to provide additional details */
-  detail?: string; /** A summary of what went wrong */
+  /** The unique code for the error */
+  code: string;
+  /** May be used to provide additional details */
+  detail?: string;
+  /** A summary of what went wrong */
   title: string;
 };
 type ErrorResponse = {
-  errors?: Error[]; /** A way to trace the source of the error. */
+  errors?: Error[];
+  /** A way to trace the source of the error. */
   traceId?: string;
 };
 type Links = {
@@ -28,7 +40,8 @@ type Links = {
   prev?: PaginationLink;
 };
 type PaginationLink = {
-  /** The URL to a resource request */href?: string | null;
+  /** The URL to a resource request */
+  href?: string | null;
 };
 /**
  * Retrieves a list of automation connectors.
@@ -37,9 +50,13 @@ type PaginationLink = {
  * @throws GetAutomationConnectorsHttpError
  */
 declare function getAutomationConnectors(query: {
-  /** Pagination cursor returned from a previous request. */cursor?: string; /** Filters the result based on the specified criteria: name. */
-  filter?: string; /** The number of automation connectors to retrieve. */
-  limit?: number; /** The field to sort by, with +- prefix indicating sort order. (`?sort=-name` => sort on the `name` field using descending order). */
+  /** Pagination cursor returned from a previous request. */
+  cursor?: string;
+  /** Filters the result based on the specified criteria: name. */
+  filter?: string;
+  /** The number of automation connectors to retrieve. */
+  limit?: number;
+  /** The field to sort by, with +- prefix indicating sort order. (`?sort=-name` => sort on the `name` field using descending order). */
   sort?: "id" | "-id" | "+id" | "name" | "+name" | "-name";
 }, options?: ApiCallOptions): Promise<GetAutomationConnectorsHttpResponse>;
 type GetAutomationConnectorsHttpResponse = {

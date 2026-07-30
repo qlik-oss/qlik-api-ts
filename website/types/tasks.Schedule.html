@@ -29,7 +29,35 @@
 <li><a href="../modules/tasks.html">tasks</a></li>
 <li><a href="" aria-current="page">Schedule</a></li></ul>
 <h1>Type Alias Schedule</h1></div>
-<div class="tsd-signature"><span class="tsd-kind-type-alias">Schedule</span><span class="tsd-signature-symbol">:</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">string</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-symbol">{</span><br/>        <span class="tsd-kind-property">cron</span><span class="tsd-signature-symbol">?:</span> <a href="tasks.Crondef.html" class="tsd-signature-type tsd-kind-type-alias">Crondef</a><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">endDateTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">interval</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">recurrence</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">startDateTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">timezone</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-signature-symbol">}</span> <span class="tsd-signature-symbol">&amp;</span> <span class="tsd-signature-type">unknown</span></div></div>
+<div class="tsd-signature"><span class="tsd-kind-type-alias">Schedule</span><span class="tsd-signature-symbol">:</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">string</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-symbol">{</span><br/>        <span class="tsd-kind-property">cron</span><span class="tsd-signature-symbol">?:</span> <a href="tasks.Crondef.html" class="tsd-signature-type tsd-kind-type-alias">Crondef</a><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">endDateTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">interval</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">recurrence</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">startDateTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">timezone</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-signature-symbol">}</span> <span class="tsd-signature-symbol">&amp;</span> <span class="tsd-signature-type">unknown</span></div>
+<div class="tsd-type-declaration">
+<h4>Type Declaration</h4>
+<ul>
+<li><span class="tsd-signature-type">string</span></li>
+<li><span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">cron</span><span class="tsd-signature-symbol">?:</span> <a href="tasks.Crondef.html" class="tsd-signature-type tsd-kind-type-alias">Crondef</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">endDateTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">interval</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">recurrence</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">startDateTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">timezone</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span> <span class="tsd-signature-symbol">&amp;</span> <span class="tsd-signature-type">unknown</span>
+<ul class="tsd-parameters">
+<li class="tsd-parameter">
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">cron</span><span class="tsd-signature-symbol">?: </span><a href="tasks.Crondef.html" class="tsd-signature-type tsd-kind-type-alias">Crondef</a></h5></li>
+<li class="tsd-parameter">
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">endDateTime</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>Specific date and time (ISO 8601 format) when the workflow instance should be terminated</p>
+</div></li>
+<li class="tsd-parameter">
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">interval</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>Time interval (must be repeating interval) described with ISO 8601 format. Declares when workflow instances will be automatically created.</p>
+</div></li>
+<li class="tsd-parameter">
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">recurrence</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The RRULE recurrence string for chronos job</p>
+</div></li>
+<li class="tsd-parameter">
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">startDateTime</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>Specific date and time (ISO 8601 format) when the workflow instance should be created</p>
+</div></li>
+<li class="tsd-parameter">
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">timezone</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>Timezone name used to evaluate the interval &amp; cron-expression. (default: UTC)</p>
+</div></li></ul></li></ul></div></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

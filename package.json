@@ -117,10 +117,10 @@
     "enigma.js": "^2.14.0",
     "extend": "3.0.2",
     "lodash-es": "^4.18.1",
-    "ws": "^8.21.0"
+    "ws": "^8.21.1"
   },
   "engines": {
     "node": ">=20.0.0"
   },
-  "packageManager": "pnpm@11.10.0"
+  "packageManager": "pnpm@11.17.0"
 }

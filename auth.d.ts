@@ -1,5 +1,4 @@
-import { _ as authTypesThatCanBeOmitted, a as Credentials, c as GetWebResourceAuthParamsProps, d as HostConfig, f as HostConfigCommon, g as WebSocketAuthParams, h as WebResourceAuthParams, i as AuthenticationErrorAction, l as GetWebSocketAuthParamsProps, m as RestCallAuthParams, n as AuthType, o as GetRemoteAuthDataProps, p as PfxAuthOptions, r as AuthTypeThatCanBeOmitted, s as GetRestCallAuthParamsProps, t as AuthModule, u as HandleAuthenticationErrorProps, v as hostConfigCommonProperties } from "./chunks/auth-types-BAiSvIRn.js";
-
+import { _ as authTypesThatCanBeOmitted, a as Credentials, c as GetWebResourceAuthParamsProps, d as HostConfig, f as HostConfigCommon, g as WebSocketAuthParams, h as WebResourceAuthParams, i as AuthenticationErrorAction, l as GetWebSocketAuthParamsProps, m as RestCallAuthParams, n as AuthType, o as GetRemoteAuthDataProps, p as PfxAuthOptions, r as AuthTypeThatCanBeOmitted, s as GetRestCallAuthParamsProps, t as AuthModule, u as HandleAuthenticationErrorProps, v as hostConfigCommonProperties } from "./chunks/auth-types-o-bqAUAV.js";
 //#region src/public/auth.d.ts
 /**
  * Registers an auth module that can handle authentication. An auth module is used by specifying its name as authType in the HostConfig passed in to api calls.
@@ -32,18 +31,14 @@ declare function unregisterHostConfig(name: string): void;
 /**
  * Returns an access token using the supplied host config. Typically used on the backend to supply the access token to the frontend
  */
-declare function getAccessToken({
-  hostConfig
-}: {
+declare function getAccessToken({ hostConfig }: {
   hostConfig?: HostConfig;
 }): Promise<string>;
 /**
  * Returns a record of query parameters that needs to be added to resources requests, e.g.
  * image tags, etc.
  */
-declare function getWebResourceAuthParams({
-  hostConfig
-}: {
+declare function getWebResourceAuthParams({ hostConfig }: {
   hostConfig?: HostConfig;
 }): Promise<WebResourceAuthParams>;
 /**

@@ -64,7 +64,9 @@ folder pathing included.</p>
 parameter is not specified, the user's personal space is implied.</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">excludeFiles</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">excludeFiles</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+<div class="tsd-comment tsd-typography"><p>If set to true, exclude files in the returned list (IE, only return folders).  If false, include files.</p>
+</div></li>
 <li class="tsd-parameter">
 <h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">excludeSubFolders</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
 <div class="tsd-comment tsd-typography"><p>If set to true, exclude folders and files that reside in sub-folders of the root being searched.  If false,
@@ -87,16 +89,22 @@ live at the root of the space are returned.  This property is mutually exclusive
 has access to (including the personal space).  If connectionId is specified, this parameter is ignored.</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">includeFolders</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">includeFolders</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+<div class="tsd-comment tsd-typography"><p>If set to true, include folders in the returned list.  If false, only return data files.</p>
+</div></li>
 <li class="tsd-parameter">
 <h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">includeFolderStats</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
 <div class="tsd-comment tsd-typography"><p>If set to true, include computed folder statistics for folders in the returned list.  If false, this information
 is not returned.</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">limit</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">limit</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>If present, the maximum number of data files to return.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></h5>
+<div class="tsd-comment tsd-typography"><p>Filter the list of files returned to the given file name.</p>
+</div></li>
 <li class="tsd-parameter">
 <h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">notOwnerId</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></h5>
 <div class="tsd-comment tsd-typography"><p>If present, fetch the data files whose owner is not the specified owner.  If a connectionId is specified in
@@ -112,7 +120,9 @@ returned list is constrained to the specified space.  If connectionId is not spe
 by the specified user are returned regardless of the personal space that a given file resides in.</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">page</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">page</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></h5>
+<div class="tsd-comment tsd-typography"><p>If present, the cursor that starts the page of data that is returned.</p>
+</div></li>
 <li class="tsd-parameter">
 <h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">sort</span><span class="tsd-signature-symbol">?: </span><a href="../types/data-files.GetDataFileInfosSortField.html" class="tsd-signature-type tsd-kind-type-alias">GetDataFileInfosSortField</a></h5>
 <div class="tsd-comment tsd-typography"><p>The name of the field used to sort the result.  By default, the sort order is ascending.  Putting a '+' prefix on

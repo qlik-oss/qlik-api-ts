@@ -70,7 +70,7 @@ const getProductInfo = async ({ hostConfig, noCache } = {}) => {
 		if (!(completeUrl in productInfoPromises)) {
 			const fetchOptions = {};
 			if (globalThis.QlikMain?.resourceNeedsCredentials(completeUrl)) fetchOptions.credentials = "include";
-			productInfoPromises[completeUrl] = fetch(completeUrl, fetchOptions).then(async (res) => {
+			const productInfoPromise = fetch(completeUrl, fetchOptions).then(async (res) => {
 				if (res.ok) return {
 					data: await res.json(),
 					status: res.status
@@ -80,6 +80,7 @@ const getProductInfo = async ({ hostConfig, noCache } = {}) => {
 					status: res.status
 				};
 			});
+			productInfoPromises[completeUrl] = productInfoPromise;
 		}
 		const response = await productInfoPromises[completeUrl];
 		if (response.status >= 400 || !response.data) delete productInfoPromises[completeUrl];
@@ -840,7 +841,9 @@ async function getAnonymousAccessToken(hostConfig) {
 	const { accessCode, clientId } = hostConfig;
 	if (!accessCode || !clientId) throw new InvalidHostConfigError("A host config with authType set to \"anonymous\" has to provide both an accessCode and clientId");
 	const tokens = await loadOrAcquireAccessTokenAnon(hostConfig, async () => {
-		return getAnonymousOauthAccessToken(toValidLocationUrl(hostConfig), accessCode, clientId, await getOrCreateTrackingCode(hostConfig));
+		const baseUrl = toValidLocationUrl(hostConfig);
+		const trackingCode = await getOrCreateTrackingCode(hostConfig);
+		return getAnonymousOauthAccessToken(baseUrl, accessCode, clientId, trackingCode);
 	});
 	if (!tokens) return "";
 	if (tokens.errors) throw new AuthorizationError(tokens.errors);

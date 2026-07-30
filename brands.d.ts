@@ -1,17 +1,23 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
+import "./chunks/invoke-fetch-DcXyLc5n.js";
 //#region src/public/rest/brands.d.ts
 /**
  * A brand is a collection of assets for applying custom branding. Only a single brand can be active in a tenant.
  */
 type Brand = {
-  readonly active?: boolean; /** The UTC timestamp when the brand was created. */
-  readonly createdAt?: string; /** ID of a user that created the brand. */
+  readonly active?: boolean;
+  /** The UTC timestamp when the brand was created. */
+  readonly createdAt?: string;
+  /** ID of a user that created the brand. */
   readonly createdBy?: string;
-  description: string; /** Collection of resources that make up the brand. */
+  description: string;
+  /** Collection of resources that make up the brand. */
   files: BrandFile[];
   readonly id: string;
-  name: string; /** The UTC timestamp when the brand was last updated. */
-  readonly updatedAt?: string; /** ID of a user that last updated the brand. */
+  name: string;
+  /** The UTC timestamp when the brand was last updated. */
+  readonly updatedAt?: string;
+  /** ID of a user that last updated the brand. */
   readonly updatedBy?: string;
 };
 /**
@@ -27,8 +33,11 @@ type BrandFile = {
  * A JSON Patch document as defined in https://datatracker.ietf.org/doc/html/rfc6902.
  */
 type BrandPatch = {
-  /** The operation to be performed. */op: "add" | "remove" | "replace"; /** The path for the given resource field to patch. */
-  path: "/name" | "/description"; /** The value to be used for this operation. */
+  /** The operation to be performed. */
+  op: "add" | "remove" | "replace";
+  /** The path for the given resource field to patch. */
+  path: "/name" | "/description";
+  /** The value to be used for this operation. */
   value?: string;
 };
 /**
@@ -83,7 +92,8 @@ type ErrorResponse500 = {
   traceId?: string;
 };
 type Link = {
-  /** URL of a resource request. */href: string;
+  /** URL of a resource request. */
+  href: string;
 };
 /**
  * Empty object inferring lack of active branding.
@@ -96,9 +106,13 @@ type NoActiveBrand = unknown;
  * @throws GetBrandsHttpError
  */
 declare function getBrands(query: {
-  /** Cursor to previous. */endingBefore?: string; /** Maximum number of brands to retrieve. */
-  limit?: number; /** Field to sort by, prefixed with -/+ to indicate the order. */
-  sort?: "id" | "+id" | "-id" | "createdAt" | "+createdAt" | "-createdAt" | "updatedAt" | "+updatedAt" | "-updatedAt"; /** Cursor to the next page. */
+  /** Cursor to previous. */
+  endingBefore?: string;
+  /** Maximum number of brands to retrieve. */
+  limit?: number;
+  /** Field to sort by, prefixed with -/+ to indicate the order. */
+  sort?: "id" | "+id" | "-id" | "createdAt" | "+createdAt" | "-createdAt" | "updatedAt" | "+updatedAt" | "-updatedAt";
+  /** Cursor to the next page. */
   startingAfter?: string;
 }, options?: ApiCallOptions): Promise<GetBrandsHttpResponse>;
 type GetBrandsHttpResponse = {
@@ -136,10 +150,15 @@ type GetBrands500HttpError = {
  * @throws CreateBrandHttpError
  */
 declare function createBrand(body: {
-  /** Description of the brand. */description?: string; /** The path and name of a properly formatted ICO file. Maximum size is 100 KB. */
-  favIcon?: BodyInit; /** The path and name of a JPG or PNG file that will be adjusted to fit in a 'box' measuring 109px in width and 62 px in height while maintaining aspect ratio. Maximum size of 300 KB, but smaller is recommended. */
-  logo?: BodyInit; /** Name of the brand. */
-  name: string; /** The path and name of a JSON file to define brand style settings. Maximum size is 100 KB. This property is not currently operational. */
+  /** Description of the brand. */
+  description?: string;
+  /** The path and name of a properly formatted ICO file. Maximum size is 100 KB. */
+  favIcon?: BodyInit;
+  /** The path and name of a JPG or PNG file that will be adjusted to fit in a 'box' measuring 109px in width and 62 px in height while maintaining aspect ratio. Maximum size of 300 KB, but smaller is recommended. */
+  logo?: BodyInit;
+  /** Name of the brand. */
+  name: string;
+  /** The path and name of a JSON file to define brand style settings. Maximum size is 100 KB. This property is not currently operational. */
   styles?: BodyInit;
 }, options?: ApiCallOptions): Promise<CreateBrandHttpResponse>;
 type CreateBrandHttpResponse = {
@@ -464,7 +483,8 @@ type GetBrandFile500HttpError = {
  * @throws CreateBrandFileHttpError
  */
 declare function createBrandFile(brandId: string, brandFileId: string, body: {
-  /** The path and name of a file to upload. */file?: BodyInit;
+  /** The path and name of a file to upload. */
+  file?: BodyInit;
 }, options?: ApiCallOptions): Promise<CreateBrandFileHttpResponse>;
 type CreateBrandFileHttpResponse = {
   data: BrandFile;
@@ -506,7 +526,8 @@ type CreateBrandFile500HttpError = {
  * @throws UpdateBrandFileHttpError
  */
 declare function updateBrandFile(brandId: string, brandFileId: string, body: {
-  /** A file to upload. */file?: BodyInit;
+  /** A file to upload. */
+  file?: BodyInit;
 }, options?: ApiCallOptions): Promise<UpdateBrandFileHttpResponse>;
 type UpdateBrandFileHttpResponse = {
   data: BrandFile;

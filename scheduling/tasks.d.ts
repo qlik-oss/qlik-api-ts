@@ -1,9 +1,11 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-o-bqAUAV.js";
+import "../chunks/invoke-fetch-DcXyLc5n.js";
 declare namespace tasks_d_exports {
-  export { Action, ActionExecTimeout, CorrelationDef, CreateTaskHttpError, CreateTaskHttpResponse, Crondef, DeleteTaskHttpError, DeleteTaskHttpResponse, End, ErrorResponse, EventTimeout, Eventdef, Events, Eventstate, Functionref, GetTaskGraphAncestorsHttpError, GetTaskGraphAncestorsHttpResponse, GetTaskGraphChildrenHttpError, GetTaskGraphChildrenHttpResponse, GetTaskGraphDescendantsHttpError, GetTaskGraphDescendantsHttpResponse, GetTaskGraphParentsHttpError, GetTaskGraphParentsHttpResponse, GetTaskHttpError, GetTaskHttpResponse, GetTaskLastRunHttpError, GetTaskLastRunHttpResponse, GetTaskResourceRunsHttpError, GetTaskResourceRunsHttpResponse, GetTaskRunLogHttpError, GetTaskRunLogHttpResponse, GetTaskRunsHttpError, GetTaskRunsHttpResponse, GetTaskSubgraphHttpError, GetTaskSubgraphHttpResponse, GetTasksHttpError, GetTasksHttpResponse, HttpResult, JSONPatch, Link, Onevents, OrchMeta, OrchRun, OrchRunBase, OrchRunList, PatchTask200HttpResponse, PatchTask204HttpResponse, PatchTaskHttpError, PatchTaskHttpResponse, PatchValue, Schedule, StartTaskHttpError, StartTaskHttpResponse, Startdef, StateExecTimeout, Task, TaskGraph, TaskGraphEdge, TaskGraphVertex, TaskList, TaskMetadata, TaskTopology, TasksAPI, TriggerMeta, UpdateTaskHttpError, UpdateTaskHttpResponse, clearCache, createTask, tasksExport as default, deleteTask, getTask, getTaskGraphAncestors, getTaskGraphChildren, getTaskGraphDescendants, getTaskGraphParents, getTaskLastRun, getTaskResourceRuns, getTaskRunLog, getTaskRuns, getTaskSubgraph, getTasks, patchTask, startTask, updateTask };
+  export { Action, ActionExecTimeout, CorrelationDef, CreateTaskHttpError, CreateTaskHttpResponse, CreateTaskWithoutQueryHttpError, CreateTaskWithoutQueryHttpResponse, Crondef, DeleteTaskHttpError, DeleteTaskHttpResponse, End, ErrorResponse, EventTimeout, Eventdef, Events, Eventstate, Functionref, GetTaskGraphAncestorsHttpError, GetTaskGraphAncestorsHttpResponse, GetTaskGraphChildrenHttpError, GetTaskGraphChildrenHttpResponse, GetTaskGraphDescendantsHttpError, GetTaskGraphDescendantsHttpResponse, GetTaskGraphParentsHttpError, GetTaskGraphParentsHttpResponse, GetTaskHttpError, GetTaskHttpResponse, GetTaskLastRunHttpError, GetTaskLastRunHttpResponse, GetTaskResourceRunsHttpError, GetTaskResourceRunsHttpResponse, GetTaskRunLogHttpError, GetTaskRunLogHttpResponse, GetTaskRunsHttpError, GetTaskRunsHttpResponse, GetTaskSubgraphHttpError, GetTaskSubgraphHttpResponse, GetTasksHttpError, GetTasksHttpResponse, HttpResult, JSONPatch, Link, Onevents, OrchMeta, OrchRun, OrchRunBase, OrchRunList, PatchTask200HttpResponse, PatchTask204HttpResponse, PatchTaskHttpError, PatchTaskHttpResponse, PatchValue, Schedule, StartTaskHttpError, StartTaskHttpResponse, Startdef, StateExecTimeout, Task, TaskGraph, TaskGraphEdge, TaskGraphVertex, TaskList, TaskMetadata, TaskTopology, TasksAPI, TriggerMeta, UpdateTaskHttpError, UpdateTaskHttpResponse, clearCache, createTask, createTaskWithoutQuery, tasksExport as default, deleteTask, getTask, getTaskGraphAncestors, getTaskGraphChildren, getTaskGraphDescendants, getTaskGraphParents, getTaskLastRun, getTaskResourceRuns, getTaskRunLog, getTaskRuns, getTaskSubgraph, getTasks, patchTask, startTask, updateTask };
 }
 type ErrorResponse = {
-  errors?: HttpResult[]; /** A trace identifier for correlating the error to a specific service request. */
+  errors?: HttpResult[];
+  /** A trace identifier for correlating the error to a specific service request. */
   traceId?: string;
 };
 /**
@@ -19,35 +21,55 @@ type HttpResult = {
   title?: string;
 };
 type JSONPatch = {
-  /** The patch operation to perform. */op: "add" | "remove" | "replace" | "move" | "copy"; /** A JSON Pointer (RFC 6901) identifying the field to patch. */
-  path: string; /** The value to use in a JSON Patch operation. */
+  /** The patch operation to perform. */
+  op: "add" | "remove" | "replace" | "move" | "copy";
+  /** A JSON Pointer (RFC 6901) identifying the field to patch. */
+  path: string;
+  /** The value to use in a JSON Patch operation. */
   value?: PatchValue;
 }[];
 type Link = {
-  /** The URL of the linked resource. */href: string;
+  /** The URL of the linked resource. */
+  href: string;
 };
 type OrchMeta = {
-  /** Additional attributes of the orchestration instance associated with this task in the scheduling service. */attrs?: Record<string, string>; /** The unique identifier of the orchestration instance associated with this task in the scheduling service. */
+  /** Additional attributes of the orchestration instance associated with this task in the scheduling service. */
+  attrs?: Record<string, string>;
+  /** The unique identifier of the orchestration instance associated with this task in the scheduling service. */
   id: string;
-  lastRun?: OrchRunBase; /** The type identifier of the orchestration system handling this task. */
+  lastRun?: OrchRunBase;
+  /** The type identifier of the orchestration system handling this task. */
   type: 0 | 1 | 2 | 3;
 };
 type OrchRun = OrchRunBase & {
-  /** The unique identifier of the action that was executed. */actionId: string; /** The raw log output from the task run. */
-  log?: string; /** The unique identifier of the resource the task operated on. */
-  resourceId: string; /** The unique identifier of the task. */
+  /** The unique identifier of the action that was executed. */
+  actionId: string;
+  /** The raw log output from the task run. */
+  log?: string;
+  /** The unique identifier of the resource the task operated on. */
+  resourceId: string;
+  /** The unique identifier of the task. */
   taskId: string;
-  taskMeta: TaskMetadata; /** The name of the task at the time it was run. */
+  taskMeta: TaskMetadata;
+  /** The name of the task at the time it was run. */
   taskName: string;
 };
 type OrchRunBase = {
-  /** The UTC timestamp when the task run ended. */readonly endedAt?: string; /** The user ID of the user on whose behalf the task was executed. */
-  executedAs?: string; /** The unique identifier of the task run. */
-  id: string; /** The UTC timestamp when the task run started. */
-  readonly startedAt?: string; /** The current status of the task run. */
-  status: "RUNNING" | "SUCCEEDED" | "FAILED"; /** The identity or event that triggered the task run. */
-  triggeredBy: string; /** The unique identifier of the worker that executed the job. For example, a reload run carries the reload ID from the engine, and an automation run carries the automation run ID. */
-  workerId: string; /** The type or name of the target system that executed the run. */
+  /** The UTC timestamp when the task run ended. */
+  readonly endedAt?: string;
+  /** The user ID of the user on whose behalf the task was executed. */
+  executedAs?: string;
+  /** The unique identifier of the task run. */
+  id: string;
+  /** The UTC timestamp when the task run started. */
+  readonly startedAt?: string;
+  /** The current status of the task run. */
+  status: "RUNNING" | "SUCCEEDED" | "FAILED";
+  /** The identity or event that triggered the task run. */
+  triggeredBy: string;
+  /** The unique identifier of the worker that executed the job. For example, a reload run carries the reload ID from the engine, and an automation run carries the automation run ID. */
+  workerId: string;
+  /** The type or name of the target system that executed the run. */
   workerType: string;
 };
 type OrchRunList = {
@@ -136,19 +158,32 @@ type PatchValue = string | number | number | boolean | unknown[] | unknown;
  * }
  */
 type Task = {
-  /** A list of terms describing the workflow's intended purpose, subject areas, or other important qualities. */annotations?: string[]; /** A human-readable description of the workflow's purpose. */
-  description?: string; /** Indicates whether the task is enabled. Disabled tasks will not trigger automatically. */
-  enabled?: boolean; /** CloudEvent definitions for the workflow. Defines the events that can be consumed or produced by the workflow. */
-  events?: Events; /** The unique identifier assigned to the task by the service. */
-  readonly id?: string; /** When `true`, workflow instances are not terminated when there are no active execution paths. Instances can be ended via a terminate end definition or a configured `workflowExecTimeout`. */
-  keepActive?: boolean; /** An optional expression used to generate a domain-specific workflow instance identifier. */
+  /** A list of terms describing the workflow's intended purpose, subject areas, or other important qualities. */
+  annotations?: string[];
+  /** A human-readable description of the workflow's purpose. */
+  description?: string;
+  /** Indicates whether the task is enabled. Disabled tasks will not trigger automatically. */
+  enabled?: boolean;
+  /** CloudEvent definitions for the workflow. Defines the events that can be consumed or produced by the workflow. */
+  events?: Events;
+  /** The unique identifier assigned to the task by the service. */
+  readonly id?: string;
+  /** When `true`, workflow instances are not terminated when there are no active execution paths. Instances can be ended via a terminate end definition or a configured `workflowExecTimeout`. */
+  keepActive?: boolean;
+  /** An optional expression used to generate a domain-specific workflow instance identifier. */
   key?: string;
-  metadata?: TaskMetadata; /** The name that identifies the workflow definition. Combined with `version`, the name forms a unique identifier for the task. */
-  name: string; /** The unique identifier of the resource this task operates on. The value supplied in a request body is ignored and is derived automatically from `states`. */
-  resourceId?: string; /** The Serverless Workflow specification version used by this task. */
-  specVersion: string; /** The start definition for a workflow, including optional schedule configuration. */
-  start?: Startdef; /** The list of state definitions that compose the workflow. */
-  states?: Eventstate[]; /** The semantic version of the workflow definition. */
+  metadata?: TaskMetadata;
+  /** The name that identifies the workflow definition. Combined with `version`, the name forms a unique identifier for the task. */
+  name: string;
+  /** The unique identifier of the resource this task operates on. The value supplied in a request body is ignored and is derived automatically from `states`. */
+  resourceId?: string;
+  /** The Serverless Workflow specification version used by this task. */
+  specVersion: string;
+  /** The start definition for a workflow, including optional schedule configuration. */
+  start?: Startdef;
+  /** The list of state definitions that compose the workflow. */
+  states?: Eventstate[];
+  /** The semantic version of the workflow definition. */
   version?: string;
 };
 /**
@@ -235,17 +270,25 @@ type TaskList = {
   };
 };
 type TriggerMeta = {
-  /** The unique identifier of the trigger associated with this task. */id: string; /** The type identifier of the trigger associated with this task. */
+  /** The unique identifier of the trigger associated with this task. */
+  id: string;
+  /** The type identifier of the trigger associated with this task. */
   type: 0 | 1 | 2 | 3 | 4;
 };
 type Action = {
-  /** An expression that must evaluate to `true` for this action to be performed. When `false`, the action is skipped. */condition?: string; /** A reference to a function to invoke, either as a name string or a structured object. */
-  functionRef?: Functionref; /** A unique name for this action within the workflow. */
-  name?: string; /** Workflow error references for which this action must not be retried. Used only when `autoRetries` is `true`. */
-  nonRetryableErrors?: string[]; /** A reference to a defined workflow retry policy. If absent, the default retry policy applies. */
-  retryRef?: string; /** Workflow error references for which this action must be retried. Used only when `autoRetries` is `false`. */
+  /** An expression that must evaluate to `true` for this action to be performed. When `false`, the action is skipped. */
+  condition?: string;
+  /** A reference to a function to invoke, either as a name string or a structured object. */
+  functionRef?: Functionref;
+  /** A unique name for this action within the workflow. */
+  name?: string;
+  /** Workflow error references for which this action must not be retried. Used only when `autoRetries` is `true`. */
+  nonRetryableErrors?: string[];
+  /** A reference to a defined workflow retry policy. If absent, the default retry policy applies. */
+  retryRef?: string;
+  /** Workflow error references for which this action must be retried. Used only when `autoRetries` is `false`. */
   retryableErrors?: string[];
-} & unknown;
+};
 /**
  * The maximum duration for executing a single action, expressed as an ISO 8601 duration string or an expression that evaluates to one.
  * @example
@@ -256,11 +299,15 @@ type ActionExecTimeout = string;
  * A correlation definition used to match a CloudEvent to a specific workflow instance.
  */
 type CorrelationDef = {
-  /** The name of the CloudEvent extension context attribute to match on. */contextAttributeName: "id" | "status" | "appId" | "spaceId" | "datasetId"; /** The expected value of the CloudEvent extension context attribute. */
+  /** The name of the CloudEvent extension context attribute to match on. */
+  contextAttributeName: "id" | "status" | "appId" | "spaceId" | "datasetId";
+  /** The expected value of the CloudEvent extension context attribute. */
   contextAttributeValue?: string;
 };
 type Crondef = string | {
-  /** A cron expression describing when the workflow instance should be created. */expression: string; /** The date and time (ISO 8601 format) after which this cron expression is no longer active. */
+  /** A cron expression describing when the workflow instance should be created. */
+  expression: string;
+  /** The date and time (ISO 8601 format) after which this cron expression is no longer active. */
   validUntil?: string;
 };
 /**
@@ -274,28 +321,43 @@ type End = boolean;
  */
 type EventTimeout = string;
 type Eventdef = {
-  /** Correlation definitions used to match incoming CloudEvents to this workflow instance. */correlation?: CorrelationDef[]; /** When `true`, only the event payload is accessible to consuming workflow states. When `false`, both the payload and context attributes are accessible. */
-  dataOnly?: boolean; /** A unique name identifying this event definition within the workflow. */
-  name?: string; /** The CloudEvents source attribute identifying the origin of the event. */
-  source?: "system-events.task" | "dataset.updated"; /** The CloudEvents type attribute identifying the kind of event. */
+  /** Correlation definitions used to match incoming CloudEvents to this workflow instance. */
+  correlation?: CorrelationDef[];
+  /** When `true`, only the event payload is accessible to consuming workflow states. When `false`, both the payload and context attributes are accessible. */
+  dataOnly?: boolean;
+  /** A unique name identifying this event definition within the workflow. */
+  name?: string;
+  /** The CloudEvents source attribute identifying the origin of the event. */
+  source?: "system-events.task" | "dataset.updated";
+  /** The CloudEvents type attribute identifying the kind of event. */
   type?: "com.qlik.v1.task.run.finished" | "com.qlik/active-analytics-orch";
 };
 /**
  * A workflow state that waits for one or more CloudEvents, then consumes them and invokes one or more actions sequentially or in parallel.
  */
 type Eventstate = {
-  /** The unique name of a workflow state responsible for compensating this state if it fails. */compensatedBy?: string; /** Marks this state as a terminal state in the workflow. */
-  end?: End; /** When `true`, consuming any one of the defined events causes its associated actions to execute. When `false`, all defined events must be consumed before actions are performed. */
-  exclusive?: boolean; /** The name of this state, unique within the workflow. */
-  name?: string; /** The events to consume and the optional actions to perform when they are received. */
-  onEvents?: Onevents[]; /** State-specific timeout durations. */
+  /** The unique name of a workflow state responsible for compensating this state if it fails. */
+  compensatedBy?: string;
+  /** Marks this state as a terminal state in the workflow. */
+  end?: End;
+  /** When `true`, consuming any one of the defined events causes its associated actions to execute. When `false`, all defined events must be consumed before actions are performed. */
+  exclusive?: boolean;
+  /** The name of this state, unique within the workflow. */
+  name?: string;
+  /** The events to consume and the optional actions to perform when they are received. */
+  onEvents?: Onevents[];
+  /** State-specific timeout durations. */
   timeouts?: {
-    /** The maximum duration for executing a single action, expressed as an ISO 8601 duration string or an expression that evaluates to one. */actionExecTimeout?: ActionExecTimeout; /** The maximum duration to wait for the defined events to be received, expressed as an ISO 8601 duration string or an expression that evaluates to one. */
-    eventTimeout?: EventTimeout; /** The maximum duration for executing this state, expressed as an ISO 8601 duration string or an expression that evaluates to one. */
+    /** The maximum duration for executing a single action, expressed as an ISO 8601 duration string or an expression that evaluates to one. */
+    actionExecTimeout?: ActionExecTimeout;
+    /** The maximum duration to wait for the defined events to be received, expressed as an ISO 8601 duration string or an expression that evaluates to one. */
+    eventTimeout?: EventTimeout;
+    /** The maximum duration for executing this state, expressed as an ISO 8601 duration string or an expression that evaluates to one. */
     stateExecTimeout?: StateExecTimeout;
-  }; /** The state type. Must be `EVENT` for event-driven states. */
+  };
+  /** The state type. Must be `EVENT` for event-driven states. */
   type?: "EVENT";
-} & unknown;
+};
 /**
  * A reference to a function to invoke, either as a name string or a structured object.
  * @example
@@ -308,24 +370,36 @@ type Eventstate = {
  * }
  */
 type Functionref = string | {
-  /** Arguments to pass to the function. */arguments?: unknown; /** Specifies whether the function is invoked synchronously or asynchronously. */
-  invoke?: "SYNC" | "ASYNC"; /** The name of the function to invoke. */
-  refName: "app.reload"; /** A GraphQL selection set string. Only applicable when the function type is `graphql`. */
+  /** Arguments to pass to the function. */
+  arguments?: unknown;
+  /** Specifies whether the function is invoked synchronously or asynchronously. */
+  invoke?: "SYNC" | "ASYNC";
+  /** The name of the function to invoke. */
+  refName: "app.reload";
+  /** A GraphQL selection set string. Only applicable when the function type is `graphql`. */
   selectionSet?: string;
 };
 type Onevents = {
-  /** Specifies whether actions are performed sequentially or in parallel. */actionMode?: "SEQUENTIAL" | "PARALLEL"; /** Actions to perform when the matched events are consumed. */
-  actions?: Action[]; /** References to one or more unique event names defined in the workflow events list. */
+  /** Specifies whether actions are performed sequentially or in parallel. */
+  actionMode?: "SEQUENTIAL" | "PARALLEL";
+  /** Actions to perform when the matched events are consumed. */
+  actions?: Action[];
+  /** References to one or more unique event names defined in the workflow events list. */
   eventRefs: string[];
 };
-type Schedule = string | ({
-  cron?: Crondef; /** The date and time (ISO 8601 format) when the workflow schedule ends. */
-  endDateTime?: string; /** A repeating time interval in ISO 8601 format that defines when workflow instances are automatically created. */
-  interval?: string; /** An RRULE recurrence rule string defining when the workflow recurs. */
-  recurrence?: string; /** The date and time (ISO 8601 format) when the workflow schedule begins. */
-  startDateTime?: string; /** The timezone name used to evaluate the interval and cron expression. Defaults to `UTC`. */
+type Schedule = string | {
+  cron?: Crondef;
+  /** The date and time (ISO 8601 format) when the workflow schedule ends. */
+  endDateTime?: string;
+  /** A repeating time interval in ISO 8601 format that defines when workflow instances are automatically created. */
+  interval?: string;
+  /** An RRULE recurrence rule string defining when the workflow recurs. */
+  recurrence?: string;
+  /** The date and time (ISO 8601 format) when the workflow schedule begins. */
+  startDateTime?: string;
+  /** The timezone name used to evaluate the interval and cron expression. Defaults to `UTC`. */
   timezone?: string;
-} & unknown);
+};
 /**
  * The start definition for a workflow, including optional schedule configuration.
  * @example
@@ -337,7 +411,8 @@ type Schedule = string | ({
  * }
  */
 type Startdef = {
-  schedule: Schedule; /** The name of the starting workflow state. */
+  schedule: Schedule;
+  /** The name of the starting workflow state. */
   stateName?: string;
 };
 /**
@@ -347,30 +422,48 @@ type Startdef = {
  */
 type StateExecTimeout = string;
 type TaskMetadata = {
-  /** The UTC timestamp when the task was created. */readonly createdAt?: string; /** The user ID of the user who created the task. */
-  createdBy?: string; /** The UTC timestamp when the task was deleted. */
-  readonly deletedAt?: string; /** The reason the task is currently disabled. */
-  disabledCode?: "MANUALLY" | "CONSECUTIVE-FAILURES" | "APP-SCRIPT-UPDATED" | "OWNER-DELETED" | "OWNER-DISABLED" | "APP-MOVED-SPACE" | "OWNER-MOVED"; /** The unique identifier of the legacy reload task this task was migrated from, if applicable. */
+  /** The UTC timestamp when the task was created. */
+  readonly createdAt?: string;
+  /** The user ID of the user who created the task. */
+  createdBy?: string;
+  /** The UTC timestamp when the task was deleted. */
+  readonly deletedAt?: string;
+  /** The reason the task is currently disabled. */
+  disabledCode?: "MANUALLY" | "CONSECUTIVE-FAILURES" | "APP-SCRIPT-UPDATED" | "OWNER-DELETED" | "OWNER-DISABLED" | "APP-MOVED-SPACE" | "OWNER-MOVED";
+  /** The unique identifier of the legacy reload task this task was migrated from, if applicable. */
   migratedFrom?: string;
-  orchestration?: OrchMeta; /** The user ID of the task owner. */
-  ownerId?: string; /** The name of the resource on which the task was created. */
-  resourceName?: string; /** The subtype of resource on which the task was created. */
-  resourceSubType?: string; /** The type of resource on which the task was created. */
-  resourceType?: string; /** The user ID of the owner whose script context is used when running the task. */
-  scriptOwnerId?: string; /** The unique identifier of the space the task operates in. */
-  spaceId?: string; /** The type of space the task operates in. */
-  spaceType?: "personal" | "shared" | "managed"; /** The unique identifier of the tenant the task operates in. */
-  tenantId?: string; /** Indicates the task's position in a dependency graph. */
+  orchestration?: OrchMeta;
+  /** The user ID of the task owner. */
+  ownerId?: string;
+  /** The name of the resource on which the task was created. */
+  resourceName?: string;
+  /** The subtype of resource on which the task was created. */
+  resourceSubType?: string;
+  /** The type of resource on which the task was created. */
+  resourceType?: string;
+  /** The user ID of the owner whose script context is used when running the task. */
+  scriptOwnerId?: string;
+  /** The unique identifier of the space the task operates in. */
+  spaceId?: string;
+  /** The type of space the task operates in. */
+  spaceType?: "personal" | "shared" | "managed";
+  /** The unique identifier of the tenant the task operates in. */
+  tenantId?: string;
+  /** Indicates the task's position in a dependency graph. */
   topology?: TaskTopology;
-  trigger?: TriggerMeta; /** The UTC timestamp when the task was last updated. */
-  updatedAt?: string; /** The product domain in which the resource is used. Defaults to `ANALYTICS` when not present. */
+  trigger?: TriggerMeta;
+  /** The UTC timestamp when the task was last updated. */
+  updatedAt?: string;
+  /** The product domain in which the resource is used. Defaults to `ANALYTICS` when not present. */
   usage?: "ANALYTICS" | "DATA_PREPARATION" | "DATAFLOW_PREP" | "SINGLE_TABLE_PREP";
 };
 /**
  * Indicates the task's position in a dependency graph.
  */
 type TaskTopology = {
-  /** When `true`, this task is triggered by one or more parent tasks. */isChild?: boolean; /** When `true`, this task has one or more downstream dependent tasks. */
+  /** When `true`, this task is triggered by one or more parent tasks. */
+  isChild?: boolean;
+  /** When `true`, this task has one or more downstream dependent tasks. */
   isParent?: boolean;
 };
 /**
@@ -380,9 +473,13 @@ type TaskTopology = {
  * @throws GetTasksHttpError
  */
 declare function getTasks(query: {
-  /** Advanced filter expression using RFC 7644 SCIM syntax. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for syntax details. All comparisons are case-insensitive. Supported fields: `name`, `enabled`, `resourceId`, `ownerId`, `spaceId`, `createdAt`, `updatedAt`, `updatedBy`, `lastStatus`, `lastTriggeredBy`, `lastStartedAt`, `lastEndedAt`, `lastExecutedAs`, and `triggerType`. */filter?: string; /** Maximum number of tasks to return per page. */
-  limit?: number; /** Cursor token for fetching the next page of results. */
-  page?: string; /** The unique identifier of the resource to filter tasks by. */
+  /** Advanced filter expression using RFC 7644 SCIM syntax. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for syntax details. All comparisons are case-insensitive. Supported fields: `name`, `enabled`, `resourceId`, `ownerId`, `spaceId`, `createdAt`, `updatedAt`, `updatedBy`, `lastStatus`, `lastTriggeredBy`, `lastStartedAt`, `lastEndedAt`, `lastExecutedAs`, and `triggerType`. */
+  filter?: string;
+  /** Maximum number of tasks to return per page. */
+  limit?: number;
+  /** Cursor token for fetching the next page of results. */
+  page?: string;
+  /** The unique identifier of the resource to filter tasks by. */
   resourceId?: string;
   /** Field and direction to sort results by. Prefix the field name with
    * `+` for ascending or `-` for descending order. Defaults to `-updatedAt`. */
@@ -407,15 +504,30 @@ type GetTasksHttpError = {
  * @param body an object with the body content
  * @throws CreateTaskHttpError
  */
-declare function createTask(query: {
-  /** When provided, specifies the unique identifier of a legacy reload-task to migrate from the previous scheduling system. */migrateFrom?: string;
-}, body: Task, options?: ApiCallOptions): Promise<CreateTaskHttpResponse>;
+declare function createTask(query: Record<string, unknown>, body: Task, options?: ApiCallOptions): Promise<CreateTaskHttpResponse>;
 type CreateTaskHttpResponse = {
   data: Task;
   headers: Headers;
   status: 201;
 };
 type CreateTaskHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: 400 | 401 | 403 | 404 | 500 | 503;
+};
+/**
+ * Creates a new task for the specified resource. The task is owned by the requesting user and is disabled by default until explicitly enabled. The `resourceId` is derived automatically from the task's state definitions and cannot be set directly in the request body.
+ *
+ * @param body an object with the body content
+ * @throws CreateTaskWithoutQueryHttpError
+ */
+declare function createTaskWithoutQuery(body: Task, options?: ApiCallOptions): Promise<CreateTaskWithoutQueryHttpResponse>;
+type CreateTaskWithoutQueryHttpResponse = {
+  data: Task;
+  headers: Headers;
+  status: 201;
+};
+type CreateTaskWithoutQueryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -428,8 +540,11 @@ type CreateTaskHttpError = {
  * @throws GetTaskResourceRunsHttpError
  */
 declare function getTaskResourceRuns(id: string, query: {
-  /** Maximum number of task runs to return per page. */limit?: number; /** Cursor token for fetching the next page of results. */
-  page?: string; /** Field and direction to sort results by. Prefix the field name with `+` for ascending or `-` for descending order. Defaults to `-startedAt`. */
+  /** Maximum number of task runs to return per page. */
+  limit?: number;
+  /** Cursor token for fetching the next page of results. */
+  page?: string;
+  /** Field and direction to sort results by. Prefix the field name with `+` for ascending or `-` for descending order. Defaults to `-startedAt`. */
   sort?: "+startedAt" | "-startedAt" | "+endedAt" | "-endedAt" | "+status" | "-status" | "+taskId" | "-taskId" | "+actionId" | "-actionId";
 }, options?: ApiCallOptions): Promise<GetTaskResourceRunsHttpResponse>;
 type GetTaskResourceRunsHttpResponse = {
@@ -528,7 +643,8 @@ type UpdateTaskHttpError = {
  * @throws StartTaskHttpError
  */
 declare function startTask(id: string, query: {
-  /** The origin of the trigger. Defaults to `manual`. For event-triggered tasks, this can be the name of the triggering task. */source?: string;
+  /** The origin of the trigger. Defaults to `manual`. For event-triggered tasks, this can be the name of the triggering task. */
+  source?: string;
 }, options?: ApiCallOptions): Promise<StartTaskHttpResponse>;
 type StartTaskHttpResponse = {
   data: {
@@ -550,7 +666,9 @@ type StartTaskHttpError = {
  * @throws GetTaskGraphAncestorsHttpError
  */
 declare function getTaskGraphAncestors(id: string, query: {
-  /** Maximum ancestor depth to traverse breadth-first. */level?: number; /** When `true`, includes the full task document for each accessible vertex in the response. */
+  /** Maximum ancestor depth to traverse breadth-first. */
+  level?: number;
+  /** When `true`, includes the full task document for each accessible vertex in the response. */
   withTask?: boolean;
 }, options?: ApiCallOptions): Promise<GetTaskGraphAncestorsHttpResponse>;
 type GetTaskGraphAncestorsHttpResponse = {
@@ -571,8 +689,11 @@ type GetTaskGraphAncestorsHttpError = {
  * @throws GetTaskGraphChildrenHttpError
  */
 declare function getTaskGraphChildren(id: string, query: {
-  /** Advanced filter expression using RFC 7644 SCIM syntax. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for syntax details. All comparisons are case-insensitive. Supported fields: `name`, `enabled`, `resourceId`, `ownerId`, `spaceId`, `createdAt`, `updatedAt`, `updatedBy`, `lastStatus`, `lastTriggeredBy`, `lastStartedAt`, `lastEndedAt`, `lastExecutedAs`, and `triggerType`. */filter?: string; /** Maximum number of tasks to return per page. */
-  limit?: number; /** Cursor token for fetching the next page of results. */
+  /** Advanced filter expression using RFC 7644 SCIM syntax. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for syntax details. All comparisons are case-insensitive. Supported fields: `name`, `enabled`, `resourceId`, `ownerId`, `spaceId`, `createdAt`, `updatedAt`, `updatedBy`, `lastStatus`, `lastTriggeredBy`, `lastStartedAt`, `lastEndedAt`, `lastExecutedAs`, and `triggerType`. */
+  filter?: string;
+  /** Maximum number of tasks to return per page. */
+  limit?: number;
+  /** Cursor token for fetching the next page of results. */
   page?: string;
   /** Field and direction to sort results by. Prefix the field name with
    * `+` for ascending or `-` for descending order. Defaults to `-updatedAt`. */
@@ -598,7 +719,9 @@ type GetTaskGraphChildrenHttpError = {
  * @throws GetTaskGraphDescendantsHttpError
  */
 declare function getTaskGraphDescendants(id: string, query: {
-  /** Maximum descendant depth to traverse breadth-first. */level?: number; /** When `true`, includes the full task document for each accessible vertex in the response. */
+  /** Maximum descendant depth to traverse breadth-first. */
+  level?: number;
+  /** When `true`, includes the full task document for each accessible vertex in the response. */
   withTask?: boolean;
 }, options?: ApiCallOptions): Promise<GetTaskGraphDescendantsHttpResponse>;
 type GetTaskGraphDescendantsHttpResponse = {
@@ -619,8 +742,11 @@ type GetTaskGraphDescendantsHttpError = {
  * @throws GetTaskGraphParentsHttpError
  */
 declare function getTaskGraphParents(id: string, query: {
-  /** Advanced filter expression using RFC 7644 SCIM syntax. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for syntax details. All comparisons are case-insensitive. Supported fields: `name`, `enabled`, `resourceId`, `ownerId`, `spaceId`, `createdAt`, `updatedAt`, `updatedBy`, `lastStatus`, `lastTriggeredBy`, `lastStartedAt`, `lastEndedAt`, `lastExecutedAs`, and `triggerType`. */filter?: string; /** Maximum number of tasks to return per page. */
-  limit?: number; /** Cursor token for fetching the next page of results. */
+  /** Advanced filter expression using RFC 7644 SCIM syntax. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for syntax details. All comparisons are case-insensitive. Supported fields: `name`, `enabled`, `resourceId`, `ownerId`, `spaceId`, `createdAt`, `updatedAt`, `updatedBy`, `lastStatus`, `lastTriggeredBy`, `lastStartedAt`, `lastEndedAt`, `lastExecutedAs`, and `triggerType`. */
+  filter?: string;
+  /** Maximum number of tasks to return per page. */
+  limit?: number;
+  /** Cursor token for fetching the next page of results. */
   page?: string;
   /** Field and direction to sort results by. Prefix the field name with
    * `+` for ascending or `-` for descending order. Defaults to `-updatedAt`. */
@@ -646,7 +772,9 @@ type GetTaskGraphParentsHttpError = {
  * @throws GetTaskSubgraphHttpError
  */
 declare function getTaskSubgraph(id: string, query: {
-  /** Maximum ancestor and descendant depth to traverse breadth-first. */level?: number; /** When `true`, includes the full task document for each accessible vertex in the response. */
+  /** Maximum ancestor and descendant depth to traverse breadth-first. */
+  level?: number;
+  /** When `true`, includes the full task document for each accessible vertex in the response. */
   withTask?: boolean;
 }, options?: ApiCallOptions): Promise<GetTaskSubgraphHttpResponse>;
 type GetTaskSubgraphHttpResponse = {
@@ -667,8 +795,11 @@ type GetTaskSubgraphHttpError = {
  * @throws GetTaskRunsHttpError
  */
 declare function getTaskRuns(id: string, query: {
-  /** Maximum number of task runs to return per page. */limit?: number; /** Cursor token for fetching the next page of results. */
-  page?: string; /** Field and direction to sort results by. Prefix the field name with `+` for ascending or `-` for descending order. Defaults to `-startedAt`. */
+  /** Maximum number of task runs to return per page. */
+  limit?: number;
+  /** Cursor token for fetching the next page of results. */
+  page?: string;
+  /** Field and direction to sort results by. Prefix the field name with `+` for ascending or `-` for descending order. Defaults to `-startedAt`. */
   sort?: "+startedAt" | "-startedAt" | "+endedAt" | "-endedAt" | "+status" | "-status" | "+taskId" | "-taskId" | "+actionId" | "-actionId";
 }, options?: ApiCallOptions): Promise<GetTaskRunsHttpResponse>;
 type GetTaskRunsHttpResponse = {
@@ -710,7 +841,8 @@ type GetTaskLastRunHttpError = {
 declare function getTaskRunLog(id: string, runId: string, options?: ApiCallOptions): Promise<GetTaskRunLogHttpResponse>;
 type GetTaskRunLogHttpResponse = {
   data: {
-    /** Log content in plain text format. */logContent?: string;
+    /** Log content in plain text format. */
+    logContent?: string;
   };
   headers: Headers;
   status: 200;
@@ -740,6 +872,13 @@ type TasksAPI = {
    * @throws CreateTaskHttpError
    */
   createTask: typeof createTask;
+  /**
+   * Creates a new task for the specified resource. The task is owned by the requesting user and is disabled by default until explicitly enabled. The `resourceId` is derived automatically from the task's state definitions and cannot be set directly in the request body.
+   *
+   * @param body an object with the body content
+   * @throws CreateTaskWithoutQueryHttpError
+   */
+  createTaskWithoutQuery: typeof createTaskWithoutQuery;
   /**
    * Retrieves a paginated list of task runs for a given resource, identified by `id`. Returns run history across all tasks associated with that resource, ordered by the most recent run by default.
    *
@@ -859,4 +998,4 @@ type TasksAPI = {
  */
 declare const tasksExport: TasksAPI;
 //#endregion
-export { Action, ActionExecTimeout, CorrelationDef, CreateTaskHttpError, CreateTaskHttpResponse, Crondef, DeleteTaskHttpError, DeleteTaskHttpResponse, End, ErrorResponse, EventTimeout, Eventdef, Events, Eventstate, Functionref, GetTaskGraphAncestorsHttpError, GetTaskGraphAncestorsHttpResponse, GetTaskGraphChildrenHttpError, GetTaskGraphChildrenHttpResponse, GetTaskGraphDescendantsHttpError, GetTaskGraphDescendantsHttpResponse, GetTaskGraphParentsHttpError, GetTaskGraphParentsHttpResponse, GetTaskHttpError, GetTaskHttpResponse, GetTaskLastRunHttpError, GetTaskLastRunHttpResponse, GetTaskResourceRunsHttpError, GetTaskResourceRunsHttpResponse, GetTaskRunLogHttpError, GetTaskRunLogHttpResponse, GetTaskRunsHttpError, GetTaskRunsHttpResponse, GetTaskSubgraphHttpError, GetTaskSubgraphHttpResponse, GetTasksHttpError, GetTasksHttpResponse, HttpResult, JSONPatch, Link, Onevents, OrchMeta, OrchRun, OrchRunBase, OrchRunList, PatchTask200HttpResponse, PatchTask204HttpResponse, PatchTaskHttpError, PatchTaskHttpResponse, PatchValue, Schedule, StartTaskHttpError, StartTaskHttpResponse, Startdef, StateExecTimeout, Task, TaskGraph, TaskGraphEdge, TaskGraphVertex, TaskList, TaskMetadata, TaskTopology, TasksAPI, TriggerMeta, UpdateTaskHttpError, UpdateTaskHttpResponse, clearCache, createTask, tasksExport as default, deleteTask, getTask, getTaskGraphAncestors, getTaskGraphChildren, getTaskGraphDescendants, getTaskGraphParents, getTaskLastRun, getTaskResourceRuns, getTaskRunLog, getTaskRuns, getTaskSubgraph, getTasks, patchTask, startTask, tasks_d_exports as t, updateTask };
+export { Action, ActionExecTimeout, CorrelationDef, CreateTaskHttpError, CreateTaskHttpResponse, CreateTaskWithoutQueryHttpError, CreateTaskWithoutQueryHttpResponse, Crondef, DeleteTaskHttpError, DeleteTaskHttpResponse, End, ErrorResponse, EventTimeout, Eventdef, Events, Eventstate, Functionref, GetTaskGraphAncestorsHttpError, GetTaskGraphAncestorsHttpResponse, GetTaskGraphChildrenHttpError, GetTaskGraphChildrenHttpResponse, GetTaskGraphDescendantsHttpError, GetTaskGraphDescendantsHttpResponse, GetTaskGraphParentsHttpError, GetTaskGraphParentsHttpResponse, GetTaskHttpError, GetTaskHttpResponse, GetTaskLastRunHttpError, GetTaskLastRunHttpResponse, GetTaskResourceRunsHttpError, GetTaskResourceRunsHttpResponse, GetTaskRunLogHttpError, GetTaskRunLogHttpResponse, GetTaskRunsHttpError, GetTaskRunsHttpResponse, GetTaskSubgraphHttpError, GetTaskSubgraphHttpResponse, GetTasksHttpError, GetTasksHttpResponse, HttpResult, JSONPatch, Link, Onevents, OrchMeta, OrchRun, OrchRunBase, OrchRunList, PatchTask200HttpResponse, PatchTask204HttpResponse, PatchTaskHttpError, PatchTaskHttpResponse, PatchValue, Schedule, StartTaskHttpError, StartTaskHttpResponse, Startdef, StateExecTimeout, Task, TaskGraph, TaskGraphEdge, TaskGraphVertex, TaskList, TaskMetadata, TaskTopology, TasksAPI, TriggerMeta, UpdateTaskHttpError, UpdateTaskHttpResponse, clearCache, createTask, createTaskWithoutQuery, tasksExport as default, deleteTask, getTask, getTaskGraphAncestors, getTaskGraphChildren, getTaskGraphDescendants, getTaskGraphParents, getTaskLastRun, getTaskResourceRuns, getTaskRunLog, getTaskRuns, getTaskSubgraph, getTasks, patchTask, startTask, tasks_d_exports as t, updateTask };

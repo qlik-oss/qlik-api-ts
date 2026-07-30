@@ -30,7 +30,7 @@
 <li><a href="../modules/workflows.automationConnectors.html">automationConnectors</a></li>
 <li><a href="" aria-current="page">AutomationConnectorsAPI</a></li></ul>
 <h1>Type Alias AutomationConnectorsAPI</h1></div>
-<div class="tsd-signature"><span class="tsd-signature-keyword">type</span> <span class="tsd-kind-type-alias">AutomationConnectorsAPI</span> <span class="tsd-signature-symbol">=</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#clearcache">clearCache</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../modules/workflows.automationConnectors.html" class="tsd-signature-type tsd-kind-namespace">automationConnectors</a><span class="tsd-signature-symbol">.</span><a href="../functions/workflows.automationConnectors.clearCache.html" class="tsd-signature-type tsd-kind-function">clearCache</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#getautomationconnectors">getAutomationConnectors</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../modules/workflows.automationConnectors.html" class="tsd-signature-type tsd-kind-namespace">automationConnectors</a><span class="tsd-signature-symbol">.</span><a href="../functions/workflows.automationConnectors.getAutomationConnectors.html" class="tsd-signature-type tsd-kind-function">getAutomationConnectors</a><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
+<div class="tsd-signature"><span class="tsd-signature-keyword">type</span> <span class="tsd-kind-type-alias">AutomationConnectorsAPI</span> <span class="tsd-signature-symbol">=</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#clearcache">clearCache</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../modules/workflows.automationConnectors.html" class="tsd-signature-type tsd-kind-namespace">automationConnectors</a><span class="tsd-signature-symbol">.</span><a href="../functions/workflows.automationConnectors.clearCache.html" class="tsd-signature-type tsd-kind-function">clearCache</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#getautomationconnector">getAutomationConnector</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../functions/workflows.automationConnectors.getAutomationConnector.html" class="tsd-signature-type tsd-kind-function">getAutomationConnector</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#getautomationconnectors">getAutomationConnectors</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../modules/workflows.automationConnectors.html" class="tsd-signature-type tsd-kind-namespace">automationConnectors</a><span class="tsd-signature-symbol">.</span><a href="../functions/workflows.automationConnectors.getAutomationConnectors.html" class="tsd-signature-type tsd-kind-function">getAutomationConnectors</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#getautomationconnectorwebhooksconfiguration">getAutomationConnectorWebhooksConfiguration</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../functions/workflows.automationConnectors.getAutomationConnectorWebhooksConfiguration.html" class="tsd-signature-type tsd-kind-function">getAutomationConnectorWebhooksConfiguration</a><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -39,7 +39,9 @@
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading tsd-anchor-link" id="properties">Properties<a href="#properties" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-index-list"><a href="#clearcache" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>clear<wbr/>Cache</span></a>
+<a href="#getautomationconnector" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>get<wbr/>Automation<wbr/>Connector</span></a>
 <a href="#getautomationconnectors" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>get<wbr/>Automation<wbr/>Connectors</span></a>
+<a href="#getautomationconnectorwebhooksconfiguration" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>get<wbr/>Automation<wbr/>Connector<wbr/>Webhooks<wbr/>Configuration</span></a>
 </div></section></div></details></section></section>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="properties-1">Properties<a href="#properties-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
@@ -50,6 +52,18 @@
 <div class="tsd-comment tsd-typography"><p>Clears the cache for automation-connectors api requests.</p>
 </div></section>
 <section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="getautomationconnector"><span>get<wbr/>Automation<wbr/>Connector</span><a href="#getautomationconnector" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">getAutomationConnector</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../functions/workflows.automationConnectors.getAutomationConnector.html" class="tsd-signature-type tsd-kind-function">getAutomationConnector</a></div>
+<div class="tsd-comment tsd-typography"><p>Retrieves the full details of an automation connector, including its connection parameters, blocks, and snippets.</p>
+</div>
+<div class="tsd-comment tsd-typography">
+<div class="tsd-tag-param">
+<h4 class="tsd-anchor-link" id="param-connectorid">Param: connectorId<a href="#param-connectorid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>The unique identifier of the automation connector.</p>
+</div>
+<div class="tsd-tag-throws">
+<h4 class="tsd-anchor-link" id="throws">Throws<a href="#throws" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>GetAutomationConnectorHttpError</p>
+</div></div></section>
+<section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="getautomationconnectors"><span>get<wbr/>Automation<wbr/>Connectors</span><a href="#getautomationconnectors" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">getAutomationConnectors</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../modules/workflows.automationConnectors.html" class="tsd-signature-type tsd-kind-namespace">automationConnectors</a><span class="tsd-signature-symbol">.</span><a href="../functions/workflows.automationConnectors.getAutomationConnectors.html" class="tsd-signature-type tsd-kind-function">getAutomationConnectors</a></div>
 <div class="tsd-comment tsd-typography"><p>Retrieves a list of automation connectors.</p>
@@ -59,7 +73,19 @@
 <h4 class="tsd-anchor-link" id="param-query">Param: query<a href="#param-query" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>an object with query parameters</p>
 </div>
 <div class="tsd-tag-throws">
-<h4 class="tsd-anchor-link" id="throws">Throws<a href="#throws" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>GetAutomationConnectorsHttpError</p>
+<h4 class="tsd-anchor-link" id="throws-1">Throws<a href="#throws-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>GetAutomationConnectorsHttpError</p>
+</div></div></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="getautomationconnectorwebhooksconfiguration"><span>get<wbr/>Automation<wbr/>Connector<wbr/>Webhooks<wbr/>Configuration</span><a href="#getautomationconnectorwebhooksconfiguration" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">getAutomationConnectorWebhooksConfiguration</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../functions/workflows.automationConnectors.getAutomationConnectorWebhooksConfiguration.html" class="tsd-signature-type tsd-kind-function">getAutomationConnectorWebhooksConfiguration</a></div>
+<div class="tsd-comment tsd-typography"><p>Retrieves the webhook configuration for an automation connector, including its events and event parameters.</p>
+</div>
+<div class="tsd-comment tsd-typography">
+<div class="tsd-tag-param">
+<h4 class="tsd-anchor-link" id="param-connectorid-1">Param: connectorId<a href="#param-connectorid-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>The unique identifier of the automation connector.</p>
+</div>
+<div class="tsd-tag-throws">
+<h4 class="tsd-anchor-link" id="throws-2">Throws<a href="#throws-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>GetAutomationConnectorWebhooksConfigurationHttpError</p>
 </div></div></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
@@ -77,7 +103,7 @@
 <h3>On This Page</h3></summary>
 <div class="tsd-accordion-details">
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Properties</summary>
-<div><a href="#clearcache"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>clear<wbr/>Cache</span></a><a href="#getautomationconnectors"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>get<wbr/>Automation<wbr/>Connectors</span></a></div></details></div></details></div>
+<div><a href="#clearcache"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>clear<wbr/>Cache</span></a><a href="#getautomationconnector"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>get<wbr/>Automation<wbr/>Connector</span></a><a href="#getautomationconnectors"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>get<wbr/>Automation<wbr/>Connectors</span></a><a href="#getautomationconnectorwebhooksconfiguration"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>get<wbr/>Automation<wbr/>Connector<wbr/>Webhooks<wbr/>Configuration</span></a></div></details></div></details></div>
 <div class="site-menu">
 <nav id="tsd-sidebar-links" class="tsd-navigation"><a href="https://qlik.dev/embed/" class="tsd-nav-link">Embed</a><a href="https://qlik.dev/extend/" class="tsd-nav-link">Extend</a><a href="https://qlik.dev/manage/" class="tsd-nav-link">Manage</a><a href="https://qlik.dev/apis/" class="tsd-nav-link">APIs</a><a href="https://qlik.dev/toolkits/" class="tsd-nav-link">Toolkits</a></nav>
 <nav class="tsd-navigation"><a href="../index.html">@qlik/api reference</a>

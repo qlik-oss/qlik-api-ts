@@ -73,29 +73,53 @@
 Repeat the parameter to supply multiple breakdowns; results match any of the provided breakdown pairs.</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">categories</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">categories</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+<div class="tsd-comment tsd-typography"><p>Filter by category IDs from the business glossary. Category filtering is not currently applied to the result set.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">comparisonPeriods</span><span class="tsd-signature-symbol">?: </span><a href="../types/analytics.discoveryAgent.adaptiveCards.AggregationFrequencyEnum.html" class="tsd-signature-type tsd-kind-type-alias">AggregationFrequencyEnum</a><span class="tsd-signature-symbol">[]</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">comparisonPeriods</span><span class="tsd-signature-symbol">?: </span><a href="../types/analytics.discoveryAgent.adaptiveCards.AggregationFrequencyEnum.html" class="tsd-signature-type tsd-kind-type-alias">AggregationFrequencyEnum</a><span class="tsd-signature-symbol">[]</span></h5>
+<div class="tsd-comment tsd-typography"><p>Filter by comparison period. Example values: <code>D</code>, <code>W</code>, <code>M</code>, <code>Q</code>, <code>Y</code>. When this parameter is present, all matching results are returned regardless of ranking.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">dimensions</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">dimensions</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+<div class="tsd-comment tsd-typography"><p>Filter by dimension(s). Matching is case-sensitive; leading and trailing whitespace will be trimmed. Repeat the parameter to supply multiple dimensions.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">limit</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">limit</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive).</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">measures</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">measures</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+<div class="tsd-comment tsd-typography"><p>Filter by measure(s). Matching is case-sensitive; leading and trailing whitespace will be trimmed. Repeat the parameter to supply multiple measures.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">metricIds</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">metricIds</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+<div class="tsd-comment tsd-typography"><p>Filter by metric ID. Repeat the parameter to supply multiple IDs. When omitted, returns cards for all metrics visible to the caller.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">next</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">next</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The numeric offset to the next page of resources. Provide either the next or prev parameter, but not both.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">prev</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">prev</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>The numeric offset to the previous page of resources. Provide either the next or prev parameter, but not both.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">sort</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;creationTime&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;+creationTime&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;-creationTime&quot;</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">sort</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;creationTime&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;+creationTime&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;-creationTime&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>The field to sort by, with +/- prefix indicating sort order</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">timeRangeEnd</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">timeRangeEnd</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>Exclusive upper bound for filtering by analysis result end time. Use ISO 8601 format.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">timeRangeStart</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">timeRangeStart</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>Inclusive lower bound for filtering by analysis result end time. Use ISO 8601 format.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;measures&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;dimensions&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;breakdowns&quot;</span></h5></li></ul></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;measures&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;dimensions&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;breakdowns&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>Filter by Adaptive Card category. When omitted, cards from all categories are returned.</p>
+</div></li></ul></li>
 <li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">options</span>: <a href="../types/invoke-fetch-types.ApiCallOptions.html" class="tsd-signature-type tsd-kind-type-alias">ApiCallOptions</a></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/analytics.discoveryAgent.adaptiveCards.GetAdaptiveCardsHttpResponse.html" class="tsd-signature-type tsd-kind-type-alias">GetAdaptiveCardsHttpResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography">

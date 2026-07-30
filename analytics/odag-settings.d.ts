@@ -1,4 +1,5 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-o-bqAUAV.js";
+import "../chunks/invoke-fetch-DcXyLc5n.js";
 declare namespace odag_settings_d_exports {
   export { CanUpdateSettings, ErrorDetailsV2, ErrorV2, GetOdagSettingsHttpError, GetOdagSettingsHttpResponse, GetOdagSettingsUpdatePermissionHttpError, GetOdagSettingsUpdatePermissionHttpResponse, MetaV2, OdagSettingsAPI, OdagSettingsV2, PutOdagSettingsHttpError, PutOdagSettingsHttpResponse, SettingsPutPayload, clearCache, odagSettingsExport as default, getOdagSettings, getOdagSettingsUpdatePermission, putOdagSettings };
 }
@@ -12,8 +13,11 @@ type CanUpdateSettings = {
  * A single error entry within an error response.
  */
 type ErrorDetailsV2 = {
-  /** A unique code used to identify the template form of the message in i18n tables (language independent). */code?: string; /** The message describing the error. */
-  detail?: string; /** Additional metadata associated with an error. */
+  /** A unique code used to identify the template form of the message in i18n tables (language independent). */
+  code?: string;
+  /** The message describing the error. */
+  detail?: string;
+  /** Additional metadata associated with an error. */
   meta?: MetaV2;
   title?: string;
 };
@@ -21,20 +25,24 @@ type ErrorDetailsV2 = {
  * A standard error response containing a list of one or more errors.
  */
 type ErrorV2 = {
-  errors?: ErrorDetailsV2[]; /** A unique ID of the trace which the error occurred in. Makes it possible to locate involved services and find log messages from the time of the error. */
+  errors?: ErrorDetailsV2[];
+  /** A unique ID of the trace which the error occurred in. Makes it possible to locate involved services and find log messages from the time of the error. */
   traceId?: string;
 };
 /**
  * Additional metadata associated with an error.
  */
 type MetaV2 = {
-  /** The HTTP status code for the error. Generally speaking, the following codes have these meanings: `200` - Success, `201` - Success (object created), `400` - Error with user input, `403` - Authorization error (user lacks permission), `404` - Object not found, `409` - Attempt to change an object using an obsolete last ModifiedDate. */statusCode?: number;
+  /** The HTTP status code for the error. Generally speaking, the following codes have these meanings: `200` - Success, `201` - Success (object created), `400` - Error with user input, `403` - Authorization error (user lacks permission), `404` - Object not found, `409` - Attempt to change an object using an obsolete last ModifiedDate. */
+  statusCode?: number;
 };
 /**
  * The state of the ODAG settings available for users assigned the `TenantAdmin` role to view and configure.
  */
 type OdagSettingsV2 = {
-  /** Whether the dynamic view feature is enabled. */dynamicViewEnabled?: boolean; /** Whether the ODAG feature is enabled. */
+  /** Whether the dynamic view feature is enabled. */
+  dynamicViewEnabled?: boolean;
+  /** Whether the ODAG feature is enabled. */
   odagEnabled?: boolean;
 };
 /**

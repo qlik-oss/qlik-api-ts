@@ -44,11 +44,17 @@
 <div class="tsd-comment tsd-typography"><p>Arguments to pass to the function.</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">invoke</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;SYNC&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;ASYNC&quot;</span></h5></li>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">invoke</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;SYNC&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;ASYNC&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>Specifies whether the function is invoked synchronously or asynchronously.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><span class="tsd-kind-property">refName</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;app.reload&quot;</span></h5></li>
+<h5><span class="tsd-kind-property">refName</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;app.reload&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the function to invoke.</p>
+</div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">selectionSet</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li></ul></li></ul></div>
+<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">selectionSet</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>A GraphQL selection set string. Only applicable when the function type is <code>graphql</code>.</p>
+</div></li></ul></li></ul></div>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-example">
 <h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="ts"><span class="hl-1">{</span><br/><span class="hl-1"> </span><span class="hl-3">*</span><span class="hl-1">   </span><span class="hl-0">arguments</span><span class="hl-1">: {</span><br/><span class="hl-1"> </span><span class="hl-3">*</span><span class="hl-1">     </span><span class="hl-2">&quot;appId&quot;</span><span class="hl-1">: </span><span class="hl-2">&quot;80c6f35f-c9d7-4488-bb5a-ad973b13ec00&quot;</span><span class="hl-1">,</span><br/><span class="hl-1"> </span><span class="hl-3">*</span><span class="hl-1">     </span><span class="hl-2">&quot;partial&quot;</span><span class="hl-1">: </span><span class="hl-4">false</span><br/><span class="hl-1"> </span><span class="hl-3">*</span><span class="hl-1">   },</span><br/><span class="hl-1"> </span><span class="hl-3">*</span><span class="hl-1">   </span><span class="hl-0">refName</span><span class="hl-1">: </span><span class="hl-2">&quot;app.reload&quot;</span><br/><span class="hl-1"> </span><span class="hl-3">*</span><span class="hl-1"> }</span>

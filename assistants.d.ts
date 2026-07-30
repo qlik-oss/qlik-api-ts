@@ -1,26 +1,45 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-BAiSvIRn.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
+import "./chunks/invoke-fetch-DcXyLc5n.js";
 //#region src/public/rest/assistants.d.ts
 type Assistant = {
-  /** Datetime when the assistant was created. */readonly createdAt: string; /** Unique identifier of the user who created the assistant. */
-  readonly createdBy: string; /** freeform JSON to allow custom customization options. */
-  customProperties: unknown; /** Default prompt type for the assistant. */
-  defaultPromptType?: "thread" | "oneshot"; /** The description of the assistant. */
-  description: string; /** Indicates if the assistant has an avatar. */
-  hasAvatar?: boolean; /** Unique identifier of the assistant. */
-  id: string; /** List of knowledgebases the assistant is using. */
-  knowledgeBases: string[]; /** The name of the assistant. */
-  name: string; /** List of starter IDs in the order they will be sorted. */
-  orderedStarterIds?: string[]; /** Unique identifier of the assistant owner. */
-  ownerId: string; /** Unique identifier of the space containing the assistant. */
+  /** Datetime when the assistant was created. */
+  readonly createdAt: string;
+  /** Unique identifier of the user who created the assistant. */
+  readonly createdBy: string;
+  /** freeform JSON to allow custom customization options. */
+  customProperties: unknown;
+  /** Default prompt type for the assistant. */
+  defaultPromptType?: "thread" | "oneshot";
+  /** The description of the assistant. */
+  description: string;
+  /** Indicates if the assistant has an avatar. */
+  hasAvatar?: boolean;
+  /** Unique identifier of the assistant. */
+  id: string;
+  /** List of knowledgebases the assistant is using. */
+  knowledgeBases: string[];
+  /** The name of the assistant. */
+  name: string;
+  /** List of starter IDs in the order they will be sorted. */
+  orderedStarterIds?: string[];
+  /** Unique identifier of the assistant owner. */
+  ownerId: string;
+  /** Unique identifier of the space containing the assistant. */
   spaceId: string;
   /** @deprecated
    * System prompt setting up conversation context. */
-  systemMessage?: string; /** The list of tags associated with the assistant. */
-  tags: string[]; /** Unique identifier of the assistant tenant. */
-  tenantId: string; /** The title of the assistant. */
-  title?: string; /** Datetime when the assistant was updated. */
-  readonly updatedAt: string; /** Unique identifier of the user who last updated the assistant. */
-  readonly updatedBy: string; /** Initial message in the chat conversation. */
+  systemMessage?: string;
+  /** The list of tags associated with the assistant. */
+  tags: string[];
+  /** Unique identifier of the assistant tenant. */
+  tenantId: string;
+  /** The title of the assistant. */
+  title?: string;
+  /** Datetime when the assistant was updated. */
+  readonly updatedAt: string;
+  /** Unique identifier of the user who last updated the assistant. */
+  readonly updatedBy: string;
+  /** Initial message in the chat conversation. */
   welcomeMessage: string;
 };
 /**
@@ -36,32 +55,50 @@ type ChunksRefs = {
   chunkIds: string[];
 };
 type Feedback = {
-  /** Optional comment for feedback. */comment: string; /** Unique feedback identifier. */
-  id: string; /** Reason for feedback. */
-  reason: string; /** Feedback review status. */
-  reviewStatus: string; /** Datetime when the feedback was reviewed. */
-  reviewedAt?: string; /** Unique feedback reviewer identifier. */
-  reviewerId: string; /** Integer representation of feedback given (-1 = negative, 1 = positive). */
+  /** Optional comment for feedback. */
+  comment: string;
+  /** Unique feedback identifier. */
+  id: string;
+  /** Reason for feedback. */
+  reason: string;
+  /** Feedback review status. */
+  reviewStatus: string;
+  /** Datetime when the feedback was reviewed. */
+  reviewedAt?: string;
+  /** Unique feedback reviewer identifier. */
+  reviewerId: string;
+  /** Integer representation of feedback given (-1 = negative, 1 = positive). */
   vote: number;
 };
 type Interaction = {
-  /** Datetime when the interaction was created. */readonly createdAt: string;
+  /** Datetime when the interaction was created. */
+  readonly createdAt: string;
   feedback?: Feedback;
-  id: string; /** Unique identifier of user which created the interaction. */
-  ownerId: string; /** Indicator the system marked request as suspicious. */
-  rejected?: boolean; /** Interaction request content. */
-  request: string; /** Interaction response content. */
-  response: string; /** List of sources used to generate AI messages (interactions). */
-  sources: MessageSource[]; /** ID of the thread to which the interaction belongs. */
-  threadId: string; /** Datetime when the interaction was updated. */
+  id: string;
+  /** Unique identifier of user which created the interaction. */
+  ownerId: string;
+  /** Indicator the system marked request as suspicious. */
+  rejected?: boolean;
+  /** Interaction request content. */
+  request: string;
+  /** Interaction response content. */
+  response: string;
+  /** List of sources used to generate AI messages (interactions). */
+  sources: MessageSource[];
+  /** ID of the thread to which the interaction belongs. */
+  threadId: string;
+  /** Datetime when the interaction was updated. */
   readonly updatedAt: string;
 };
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
  */
 type JSONPatch = {
-  /** The operation to be performed. */op: "replace" | "add"; /** A JSON Pointer. */
-  path: string; /** The value to be used for this operation. */
+  /** The operation to be performed. */
+  op: "replace" | "add";
+  /** A JSON Pointer. */
+  path: string;
+  /** The value to be used for this operation. */
   value: string | number | boolean;
 };
 /**
@@ -100,56 +137,91 @@ type JSONPatch = {
  */
 type JSONPatchArray = JSONPatch[];
 type Message = {
-  /** Message content. */content: string; /** Datetime when the interaction was created. */
+  /** Message content. */
+  content: string;
+  /** Datetime when the interaction was created. */
   readonly createdAt: string;
-  id: string; /** human or ai role. */
-  role: string; /** List of sources used to generate AI messages (interactions). */
+  id: string;
+  /** human or ai role. */
+  role: string;
+  /** List of sources used to generate AI messages (interactions). */
   sources: MessageSource[];
 };
 type MessageSource = {
-  /** List of Chunks used for "AI" generated messages. */chunks: MessageSourceChunk[]; /** Reference to DataSource used for "AI" generated messages. */
-  datasourceId: string; /** Reference to Document used for "AI" generated messages. */
-  documentId: string; /** Reference to KnowledgeBase used for "AI" generated messages. */
-  knowledgebaseId: string; /** Datetime when the knowledgebase was last indexed. */
-  lastIndexedAt?: string; /** Path to the document used. */
+  /** List of Chunks used for "AI" generated messages. */
+  chunks: MessageSourceChunk[];
+  /** Reference to DataSource used for "AI" generated messages. */
+  datasourceId: string;
+  /** Reference to Document used for "AI" generated messages. */
+  documentId: string;
+  /** Reference to KnowledgeBase used for "AI" generated messages. */
+  knowledgebaseId: string;
+  /** Datetime when the knowledgebase was last indexed. */
+  lastIndexedAt?: string;
+  /** Path to the document used. */
   source: string;
 };
 type MessageSourceChunk = {
-  /** Chunk unique identifier for "AI" generated message source. */chunkId: string; /** Chunk text for "AI" generated message source. */
+  /** Chunk unique identifier for "AI" generated message source. */
+  chunkId: string;
+  /** Chunk text for "AI" generated message source. */
   text?: string;
 };
 type Starter = {
-  /** Optional context collected from curated meant to be leveraged by LLM-based question recommendation system. */additionalContext: string; /** Datetime when the starter was created. */
-  readonly createdAt: string; /** List of followups. */
-  followups?: Followup[]; /** Unique identifier of the starter. */
-  id: string; /** Starter sample question. */
+  /** Optional context collected from curated meant to be leveraged by LLM-based question recommendation system. */
+  additionalContext: string;
+  /** Datetime when the starter was created. */
+  readonly createdAt: string;
+  /** List of followups. */
+  followups?: Followup[];
+  /** Unique identifier of the starter. */
+  id: string;
+  /** Starter sample question. */
   question: string;
-  recommendedAnswer: RecommendedAnswer; /** Datetime when the starter was updated. */
+  recommendedAnswer: RecommendedAnswer;
+  /** Datetime when the starter was updated. */
   readonly updatedAt: string;
 };
 type Thread = {
-  /** Datetime when the thread was created. */readonly createdAt: string; /** Datetime when the thread was deleted. */
-  readonly deletedAt?: string; /** If thread is marked as favorite. */
-  favorite: boolean; /** If feedback was provided for a thread interaction. */
-  hasFeedback: boolean; /** Unique identifier of the thread. */
-  id: string; /** The name of the thread. */
+  /** Datetime when the thread was created. */
+  readonly createdAt: string;
+  /** Datetime when the thread was deleted. */
+  readonly deletedAt?: string;
+  /** If thread is marked as favorite. */
+  favorite: boolean;
+  /** If feedback was provided for a thread interaction. */
+  hasFeedback: boolean;
+  /** Unique identifier of the thread. */
+  id: string;
+  /** The name of the thread. */
   name: string;
   ownerId: string;
-  summaryStats: FeedbackSummary; /** Datetime when the thread was updated. */
-  readonly updatedAt: string; /** If the thread should respond in the user's preferred language. */
+  summaryStats: FeedbackSummary;
+  /** Datetime when the thread was updated. */
+  readonly updatedAt: string;
+  /** If the thread should respond in the user's preferred language. */
   useUserPreferredLanguage: boolean;
 };
 type ThreadWithMessages = {
-  /** Datetime when the thread was created. */readonly createdAt: string; /** Datetime when the thread was deleted. */
-  readonly deletedAt?: string; /** If thread is marked as favorite. */
-  favorite: boolean; /** If feedback was provided for a thread interaction. */
-  hasFeedback: boolean; /** Unique identifier of the thread. */
+  /** Datetime when the thread was created. */
+  readonly createdAt: string;
+  /** Datetime when the thread was deleted. */
+  readonly deletedAt?: string;
+  /** If thread is marked as favorite. */
+  favorite: boolean;
+  /** If feedback was provided for a thread interaction. */
+  hasFeedback: boolean;
+  /** Unique identifier of the thread. */
   id: string;
-  messages: Message[]; /** The name of the thread. */
-  name: string; /** Unique identifier of the thread owner. */
+  messages: Message[];
+  /** The name of the thread. */
+  name: string;
+  /** Unique identifier of the thread owner. */
   ownerId: string;
-  summaryStats: FeedbackSummary; /** Datetime when the thread was updated. */
-  readonly updatedAt: string; /** If the thread should respond in the user's preferred language. */
+  summaryStats: FeedbackSummary;
+  /** Datetime when the thread was updated. */
+  readonly updatedAt: string;
+  /** If the thread should respond in the user's preferred language. */
   useUserPreferredLanguage: boolean;
 };
 type AssistantsResult = {
@@ -158,71 +230,111 @@ type AssistantsResult = {
   meta?: ResultMeta;
 };
 type Chunk = {
-  /** Metadata about the chunk */chunkMeta: KbChunkMeta; /** search method for the chunk, e.g. `semantic search`, `keyword search` or `semantic and keyword search` */
-  searchSource?: string; /** Similarity score from embedding match */
-  semanticScore?: number; /** Text content of the chunk */
-  text: string; /** Score from keyword search */
+  /** Metadata about the chunk */
+  chunkMeta: KbChunkMeta;
+  /** search method for the chunk, e.g. `semantic search`, `keyword search` or `semantic and keyword search` */
+  searchSource?: string;
+  /** Similarity score from embedding match */
+  semanticScore?: number;
+  /** Text content of the chunk */
+  text: string;
+  /** Score from keyword search */
   tfidfScore?: number;
 };
 type CreateAssistant = {
-  /** freeform JSON to allow custom customization options. */customProperties: unknown; /** Default prompt type for the assistant. */
-  defaultPromptType?: "thread" | "oneshot"; /** The description of the assistant. */
-  description: string; /** List of knowledgebases the assistant is using. */
-  knowledgeBases: string[]; /** The name of the assistant. */
-  name: string; /** List of starter IDs in the order they will be sorted. */
-  orderedStarterIds?: string[]; /** Unique identifier of the space to contain the assistant. */
+  /** freeform JSON to allow custom customization options. */
+  customProperties: unknown;
+  /** Default prompt type for the assistant. */
+  defaultPromptType?: "thread" | "oneshot";
+  /** The description of the assistant. */
+  description: string;
+  /** List of knowledgebases the assistant is using. */
+  knowledgeBases: string[];
+  /** The name of the assistant. */
+  name: string;
+  /** List of starter IDs in the order they will be sorted. */
+  orderedStarterIds?: string[];
+  /** Unique identifier of the space to contain the assistant. */
   spaceId: string;
   /** @deprecated
    * System prompt setting up conversation context. */
-  systemMessage?: string; /** The list of tags for the assistant. */
-  tags: string[]; /** The title of the assistant. */
-  title: string; /** Initial message in the chat conversation. */
+  systemMessage?: string;
+  /** The list of tags for the assistant. */
+  tags: string[];
+  /** The title of the assistant. */
+  title: string;
+  /** Initial message in the chat conversation. */
   welcomeMessage: string;
 };
 type CreateAssistantWithAvatar = {
-  /** user uploaded avatar, filetype must be png */avatar?: string; /** freeform JSON to allow custom customization options. */
-  customProperties: unknown; /** Default prompt type for the assistant. */
-  defaultPromptType?: "thread" | "oneshot"; /** The description of the assistant. */
-  description: string; /** List of knowledgebases the assistant is using. */
-  knowledgeBases: string[]; /** The name of the assistant. */
-  name: string; /** Unique identifier of the space to contain the assistant. */
+  /** user uploaded avatar, filetype must be png */
+  avatar?: string;
+  /** freeform JSON to allow custom customization options. */
+  customProperties: unknown;
+  /** Default prompt type for the assistant. */
+  defaultPromptType?: "thread" | "oneshot";
+  /** The description of the assistant. */
+  description: string;
+  /** List of knowledgebases the assistant is using. */
+  knowledgeBases: string[];
+  /** The name of the assistant. */
+  name: string;
+  /** Unique identifier of the space to contain the assistant. */
   spaceId: string;
   /** @deprecated
    * System prompt setting up conversation context. */
-  systemMessage?: string; /** The list of tags for the assistant. */
-  tags: string[]; /** The title of the assistant. */
-  title: string; /** Initial message in the chat conversation. */
+  systemMessage?: string;
+  /** The list of tags for the assistant. */
+  tags: string[];
+  /** The title of the assistant. */
+  title: string;
+  /** Initial message in the chat conversation. */
   welcomeMessage: string;
 };
 type CreateFeedback = {
-  /** Optional comment for feedback. */comment?: string; /** Reason for feedback. */
-  reason: string; /** Integer representation of feedback given (-1 = negative, 1 = positive). */
+  /** Optional comment for feedback. */
+  comment?: string;
+  /** Reason for feedback. */
+  reason: string;
+  /** Integer representation of feedback given (-1 = negative, 1 = positive). */
   vote: number;
 };
 type CreateInteraction = {
-  /** Indicator the system marked request as suspicious. */rejected?: boolean;
+  /** Indicator the system marked request as suspicious. */
+  rejected?: boolean;
   /** Rejection reason for a question:
    *   * 1 - PROMPT_INJECTION
    *   * 2 - OUT_OF_CONTEXT
    *   * 3 - TOO_COMPLEX */
-  rejectionReason?: RejectionReason; /** Interaction request content. */
-  request: string; /** Interaction response content. */
-  response: string; /** List of sources used to generate AI messages (interactions). */
+  rejectionReason?: RejectionReason;
+  /** Interaction request content. */
+  request: string;
+  /** Interaction response content. */
+  response: string;
+  /** List of sources used to generate AI messages (interactions). */
   sources: MessageSource[];
 };
 type CreateReview = {
-  /** Review status. */reviewStatus: string;
+  /** Review status. */
+  reviewStatus: string;
 };
 type CreateStarter = {
-  /** Optional context collected from curated meant to be leveraged by LLM-based question recommendation system. */additionalContext?: string; /** List of followups. */
-  followups?: Followup[]; /** Starter sample question. */
+  /** Optional context collected from curated meant to be leveraged by LLM-based question recommendation system. */
+  additionalContext?: string;
+  /** List of followups. */
+  followups?: Followup[];
+  /** Starter sample question. */
   question: string;
   recommendedAnswer?: RecommendedAnswer;
 };
 type CreateThread = {
-  /** Datetime when the thread was created. */readonly createdAt?: string; /** The name of the thread. */
-  name: string; /** Datetime when the thread was updated. */
-  readonly updatedAt?: string; /** Whether the thread should use the user's preferred language. */
+  /** Datetime when the thread was created. */
+  readonly createdAt?: string;
+  /** The name of the thread. */
+  name: string;
+  /** Datetime when the thread was updated. */
+  readonly updatedAt?: string;
+  /** Whether the thread should use the user's preferred language. */
   useUserPreferredLanguage?: boolean;
 };
 type ErrorResponse = {
@@ -264,20 +376,33 @@ type ErrorResponseCopy = {
  */
 type FeedbackPatchArray = JSONPatch[];
 type FeedbackSummary = {
-  /** Amount of dislikes for a thread or an assistant. */dislikes: number; /** Count of answers which users marked as "inaccurate". */
-  inaccurate?: number; /** Amount of interactions for a thread or an assistant. */
-  interactions: number; /** Count of answers which users marked as "irrelevant". */
-  irrelevant?: number; /** Amount of likes for a thread or an assistant. */
-  likes: number; /** Count of answers which users disliked and gave "other" as reason. */
-  other?: number; /** Count of answers which users marked as "repetitive". */
-  repetitive?: number; /** Amount of reviews for a thread or an assistant. */
-  reviews: number; /** Count of questions for which the assistant provided no answer. */
-  unanswered?: number; /** Count of answers which users marked as "unhelpful". */
+  /** Amount of dislikes for a thread or an assistant. */
+  dislikes: number;
+  /** Count of answers which users marked as "inaccurate". */
+  inaccurate?: number;
+  /** Amount of interactions for a thread or an assistant. */
+  interactions: number;
+  /** Count of answers which users marked as "irrelevant". */
+  irrelevant?: number;
+  /** Amount of likes for a thread or an assistant. */
+  likes: number;
+  /** Count of answers which users disliked and gave "other" as reason. */
+  other?: number;
+  /** Count of answers which users marked as "repetitive". */
+  repetitive?: number;
+  /** Amount of reviews for a thread or an assistant. */
+  reviews: number;
+  /** Count of questions for which the assistant provided no answer. */
+  unanswered?: number;
+  /** Count of answers which users marked as "unhelpful". */
   unhelpful?: number;
 };
 type Followup = {
-  /** Optional context collected from curated meant to be leveraged by LLM-based question recommendation system. */additionalContext: string; /** Unique identifier of the Followup. */
-  id: string; /** Starter sample question. */
+  /** Optional context collected from curated meant to be leveraged by LLM-based question recommendation system. */
+  additionalContext: string;
+  /** Unique identifier of the Followup. */
+  id: string;
+  /** Starter sample question. */
   question: string;
   recommendedAnswer: RecommendedAnswer;
 };
@@ -290,10 +415,15 @@ type InteractionsResult = {
  * Metadata about the chunk
  */
 type KbChunkMeta = {
-  /** chunkId */chunkId: string; /** datasourceId of chunk */
-  datasourceId: string; /** documentId of chunk */
-  documentId: string; /** knowledgeBaseId of chunk */
-  knowledgeBaseId: string; /** source of chunk */
+  /** chunkId */
+  chunkId: string;
+  /** datasourceId of chunk */
+  datasourceId: string;
+  /** documentId of chunk */
+  documentId: string;
+  /** knowledgeBaseId of chunk */
+  knowledgeBaseId: string;
+  /** source of chunk */
   source: string;
 };
 type PageLink = {
@@ -306,22 +436,32 @@ type PageLinks = {
 };
 type PromptInput = {
   input?: {
-    /** Returns text from chunks in sources output. Default value is false. */includeText?: boolean; /** Input prompt string for the Assistant to respond to. */
-    prompt?: string; /** Sets the prompt type to thread. */
+    /** Returns text from chunks in sources output. Default value is false. */
+    includeText?: boolean;
+    /** Input prompt string for the Assistant to respond to. */
+    prompt?: string;
+    /** Sets the prompt type to thread. */
     promptType?: "thread";
   };
 };
 type PromptOutput = {
-  /** Assistant's response to the prompt */output?: string; /** List of sources used to generate AI messages */
+  /** Assistant's response to the prompt */
+  output?: string;
+  /** List of sources used to generate AI messages */
   sources?: Source[];
 };
 type PromptOutputInvoke = {
-  /** Assistant's response to the prompt */output?: string; /** Question asked by the user for assistant to answer */
-  question?: string; /** List of sources used to generate AI messages */
+  /** Assistant's response to the prompt */
+  output?: string;
+  /** Question asked by the user for assistant to answer */
+  question?: string;
+  /** List of sources used to generate AI messages */
   sources?: Source[];
 };
 type RecommendedAnswer = {
-  /** Starter answer content. */content: string; /** Answer type of content. */
+  /** Starter answer content. */
+  content: string;
+  /** Answer type of content. */
   contentType: string;
 };
 /**
@@ -337,18 +477,27 @@ type ResultMeta = {
   countTotal?: number;
 };
 type SearchRequest = {
-  /** Query text or question to search. */prompt: string; /** Search mode to use.   Allowed values: `SIMPLE` and `FULL`.   Default: `SIMPLE`. */
-  searchMode?: "SIMPLE" | "FULL"; /** Number of chunks to return in results. */
+  /** Query text or question to search. */
+  prompt: string;
+  /** Search mode to use.   Allowed values: `SIMPLE` and `FULL`.   Default: `SIMPLE`. */
+  searchMode?: "SIMPLE" | "FULL";
+  /** Number of chunks to return in results. */
   topN?: number;
 };
 type SearchResponse = {
-  /** Retrieved document chunks */chunks: Chunk[];
+  /** Retrieved document chunks */
+  chunks: Chunk[];
 };
 type Source = {
-  /** List of Chunks used for "AI" generated messages */chunks?: unknown[]; /** reference to DataSource used for "AI" generated messages */
-  datasourceId?: string; /** reference to Document used for "AI" generated messages */
-  documentId?: string; /** reference to KnowledgeBase used for "AI" generated messages */
-  knowledgebaseId?: string; /** path to the document used */
+  /** List of Chunks used for "AI" generated messages */
+  chunks?: unknown[];
+  /** reference to DataSource used for "AI" generated messages */
+  datasourceId?: string;
+  /** reference to Document used for "AI" generated messages */
+  documentId?: string;
+  /** reference to KnowledgeBase used for "AI" generated messages */
+  knowledgebaseId?: string;
+  /** path to the document used */
   source?: string;
 };
 type SourcesPlaintext = {
@@ -385,11 +534,16 @@ type ThreadsResult = {
 declare function getAssistants(query: {
   /** @deprecated
    * Optional parameter to request total count for query. */
-  countTotal?: boolean; /** The number of assistants to get. */
-  limit?: number; /** Optional parameter to request the next page. */
-  next?: string; /** Optional parameter to request the previous page. */
-  prev?: string; /** Optional resource field name to sort on, case insensitive, e.g. `name`. Can be prefixed with `-` to set descending order; defaults to ascending. */
-  sort?: "NAME" | "-NAME" | "DESCRIPTION" | "-DESCRIPTION" | "CREATED" | "-CREATED" | "UPDATED" | "-UPDATED"; /** Optional parameter to filter assistants by space ID. */
+  countTotal?: boolean;
+  /** The number of assistants to get. */
+  limit?: number;
+  /** Optional parameter to request the next page. */
+  next?: string;
+  /** Optional parameter to request the previous page. */
+  prev?: string;
+  /** Optional resource field name to sort on, case insensitive, e.g. `name`. Can be prefixed with `-` to set descending order; defaults to ascending. */
+  sort?: "NAME" | "-NAME" | "DESCRIPTION" | "-DESCRIPTION" | "CREATED" | "-CREATED" | "UPDATED" | "-UPDATED";
+  /** Optional parameter to filter assistants by space ID. */
   spaceId?: string;
 }, options?: ApiCallOptions): Promise<GetAssistantsHttpResponse>;
 type GetAssistantsHttpResponse = {
@@ -482,9 +636,13 @@ type GetAssistantSourcesHttpError = {
  * @throws GetAssistantStartersHttpError
  */
 declare function getAssistantStarters(assistantId: string, query: {
-  /** The number of starters to get. */limit?: number; /** Optional parameter to request the next page. */
-  next?: string; /** Optional parameter to request the previous page. */
-  prev?: string; /** Optional resource field name to sort on, case insensitive, e.g. `name`. Can be prefixed with `-` to set descending order; defaults to ascending. */
+  /** The number of starters to get. */
+  limit?: number;
+  /** Optional parameter to request the next page. */
+  next?: string;
+  /** Optional parameter to request the previous page. */
+  prev?: string;
+  /** Optional resource field name to sort on, case insensitive, e.g. `name`. Can be prefixed with `-` to set descending order; defaults to ascending. */
   sort?: "QUESTION" | "-QUESTION" | "CREATED" | "-CREATED" | "UPDATED" | "-UPDATED";
 }, options?: ApiCallOptions): Promise<GetAssistantStartersHttpResponse>;
 type GetAssistantStartersHttpResponse = {
@@ -619,10 +777,15 @@ type UpdateAssistantStarterFollowupHttpError = {
  * @throws GetAssistantThreadsHttpError
  */
 declare function getAssistantThreads(assistantId: string, query: {
-  /** Optional parameter to filter threads. */filter?: string; /** The number of assistants to get. */
-  limit?: number; /** Optional parameter to request the next page. */
-  next?: string; /** Optional parameter to request the previous page. */
-  prev?: string; /** Optional resource field name to sort on, case insensitive, e.g. `name`. Can be prefixed with `-` to set descending order; defaults to ascending. */
+  /** Optional parameter to filter threads. */
+  filter?: string;
+  /** The number of assistants to get. */
+  limit?: number;
+  /** Optional parameter to request the next page. */
+  next?: string;
+  /** Optional parameter to request the previous page. */
+  prev?: string;
+  /** Optional resource field name to sort on, case insensitive, e.g. `name`. Can be prefixed with `-` to set descending order; defaults to ascending. */
   sort?: "NAME" | "-NAME" | "CREATED" | "-CREATED" | "UPDATED" | "-UPDATED";
 }, options?: ApiCallOptions): Promise<GetAssistantThreadsHttpResponse>;
 type GetAssistantThreadsHttpResponse = {
@@ -702,9 +865,13 @@ type StreamAssistantThreadHttpError = {
  * @throws GetAssistantThreadInteractionsHttpError
  */
 declare function getAssistantThreadInteractions(assistantId: string, threadId: string, query: {
-  /** The number of feedback to get. */limit?: number; /** Optional parameter to request the next page. */
-  next?: string; /** Optional parameter to request the previous page. */
-  prev?: string; /** Optional resource field name to sort on, case insensitive, e.g. `created`. Can be prefixed with `-` to set descending order; defaults to ascending. */
+  /** The number of feedback to get. */
+  limit?: number;
+  /** Optional parameter to request the next page. */
+  next?: string;
+  /** Optional parameter to request the previous page. */
+  prev?: string;
+  /** Optional resource field name to sort on, case insensitive, e.g. `created`. Can be prefixed with `-` to set descending order; defaults to ascending. */
   sort?: "CREATED" | "-CREATED" | "UPDATED" | "-UPDATED";
 }, options?: ApiCallOptions): Promise<GetAssistantThreadInteractionsHttpResponse>;
 type GetAssistantThreadInteractionsHttpResponse = {
