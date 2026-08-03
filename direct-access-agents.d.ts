@@ -131,6 +131,8 @@ type MetricsCollectorSettings = {
   dataRetentionCheckIntervalMinutes: number;
   /** Indicates whether the metrics collector is enabled. */
   enabled: boolean;
+  /** The maximum size of the local database in megabytes. */
+  localDataRetentionDatabaseSizeInMb?: number;
   /** The number of days to retain local data. */
   localDataRetentionDays: number;
   /** The file location for the local metrics database. If not specified, defaults to `C:\ProgramData\Qlik\Gateway\tmp`. */
@@ -212,6 +214,8 @@ type UpdateMetricsCollectorSettings = {
   dataRetentionCheckIntervalMinutes: number;
   /** Indicates whether the metrics collector is enabled. */
   enabled: boolean;
+  /** The maximum size of the local database in megabytes. Default is 500 MB. */
+  localDataRetentionDatabaseSizeInMb?: number;
   /** The number of days to retain local data. */
   localDataRetentionDays: number;
   /** The file location for the local metrics database. If not specified, defaults to `C:\ProgramData\Qlik\Gateway\tmp`. */
@@ -549,7 +553,7 @@ type SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpResponse = {
 type SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError = {
   data: ErrorResponse;
   headers: Headers;
-  status: 400 | 404;
+  status: 400 | 404 | 409;
 };
 /**
  * Clears the cache for direct-access-agents api requests.

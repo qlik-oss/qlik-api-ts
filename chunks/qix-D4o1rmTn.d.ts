@@ -1,7 +1,7 @@
 import { d as HostConfig } from "./auth-types-o-bqAUAV.js";
 import "../auth.js";
 //#region src/qix/types/engine-schema.d.ts
-declare const QIX_SCHEMA_VERSION = "12.2869.0";
+declare const QIX_SCHEMA_VERSION = "12.2870.0";
 type AlfaNumString = {
   /**
    * Calculated value.
@@ -62,7 +62,7 @@ type AppEntry = {
  * Lists the app objects. Is the layout for _AppObjectListDef_.
  * <div class=note>An app object is a generic object created at app level.</div>
  */
-type AppObjectList<QData = unknown> = {
+type AppObjectList<QData> = {
   /**
    * Information about the list of dimensions.
    */
@@ -436,7 +436,7 @@ type BookmarkFieldVerifyWarning = {
 /**
  * Lists the bookmarks. Is the layout for _BookmarkListDef_.
  */
-type BookmarkList<QData = unknown> = {
+type BookmarkList<QData> = {
   /**
    * Information about the list of bookmarks.
    */
@@ -512,7 +512,7 @@ type CharRange = {
  * Lists the children of a generic object. Is the layout for _ChildListDef_.
  * <div class=note>ChildList is used by the _GetLayout Method_ to list the children of a generic object. </div>
  */
-type ChildList<QData = unknown> = {
+type ChildList<QData> = {
   /**
    * Information about the items in the app object.
    */
@@ -844,7 +844,7 @@ type DerivedFieldsInTableData = {
 /**
  * Lists the dimensions. Is the layout for _DimensionListDef_.
  */
-type DimensionList<QData = unknown> = {
+type DimensionList<QData> = {
   /**
    * Information about the list of dimensions.
    */
@@ -2005,7 +2005,7 @@ type GenericObjectEntry = {
 /**
  * Is the layout for _GenericObjectProperties_.
  */
-type GenericObjectLayout<QData = unknown> = {
+type GenericObjectLayout = {
   /**
    * Identifier and type of the generic object.
    */
@@ -2038,26 +2038,8 @@ type GenericObjectLayout<QData = unknown> = {
    * Default is current selections _$_ .
    */
   qStateName?: string;
-  qAppObjectList?: AppObjectList<QData>;
-  qBookmarkList?: BookmarkList<QData>;
-  qChildList?: ChildList<QData>;
-  qDimensionList?: DimensionList<QData>;
-  qEmbeddedSnapshot?: EmbeddedSnapshot;
-  qExtensionList?: ExtensionList;
-  qFieldList?: FieldList;
-  qHyperCube?: HyperCube;
-  qListObject?: ListObject;
-  qMeasureList?: MeasureList<QData>;
-  qMediaList?: QMediaList;
-  qNxLibraryDimension?: NxLibraryDimension;
-  qNxLibraryMeasure?: NxLibraryMeasure;
-  qSelectionObject?: SelectionObject;
-  qStaticContentUrl?: StaticContentUrl;
-  qTreeData?: TreeData;
-  qUndoInfo?: UndoInfo;
-  qVariableList?: VariableList<QData>;
 };
-type GenericObjectLayoutAdditionalProperties<QData = unknown> = {
+type GenericObjectLayoutAdditionalProperties<QData> = {
   qAppObjectList?: AppObjectList<QData>;
   qBookmarkList?: BookmarkList<QData>;
   qChildList?: ChildList<QData>;
@@ -2097,27 +2079,6 @@ type GenericObjectProperties = {
    * Default is current selections _$_ .
    */
   qStateName?: string;
-  qAppObjectListDef?: AppObjectListDef;
-  qBookmarkListDef?: BookmarkListDef;
-  qChildListDef?: ChildListDef;
-  qDimensionListDef?: DimensionListDef;
-  qEmbeddedSnapshotDef?: EmbeddedSnapshotDef;
-  qExtensionListDef?: ExtensionListDef;
-  qFieldListDef?: FieldListDef;
-  qHyperCubeDef?: HyperCubeDef;
-  qLayoutExclude?: LayoutExclude;
-  qListObjectDef?: ListObjectDef;
-  qMeasureListDef?: MeasureListDef;
-  qMediaListDef?: MediaListDef;
-  qNxLibraryDimensionDef?: NxLibraryDimensionDef;
-  qNxLibraryMeasureDef?: NxLibraryMeasureDef;
-  qSelectionObjectDef?: SelectionObjectDef;
-  qStaticContentUrlDef?: StaticContentUrlDef;
-  qStringExpression?: StringExpression;
-  qTreeDataDef?: TreeDataDef;
-  qUndoInfoDef?: UndoInfoDef;
-  qValueExpression?: ValueExpression;
-  qVariableListDef?: VariableListDef;
 };
 type GenericObjectPropertiesAdditionalProperties = {
   qAppObjectListDef?: AppObjectListDef;
@@ -2849,7 +2810,7 @@ type LogOnType = "LOG_ON_SERVICE_USER" | "LOG_ON_CURRENT_USER";
 /**
  * Lists the measures. Is the layout for _MeasureListDef_.
  */
-type MeasureList<QData = unknown> = {
+type MeasureList<QData> = {
   /**
    * Information about the list of measures.
    */
@@ -3365,7 +3326,7 @@ type NxCellPosition = {
   qy?: number;
 };
 type NxCellRows = NxCell[];
-type NxContainerEntry<QData = unknown> = {
+type NxContainerEntry<QData> = {
   /**
    * Information about the object.
    */
@@ -5658,7 +5619,7 @@ type NxValidationError = {
    */
   qExtendedMessage?: string;
 };
-type NxVariableListItem<QData = unknown> = {
+type NxVariableListItem<QData> = {
   /**
    * Name of the variable.
    */
@@ -7453,7 +7414,7 @@ type ValueExpression = {
 /**
  * Lists the variables in an app. Is the layout for _VariableListDef_.
  */
-type VariableList<QData = unknown> = {
+type VariableList<QData> = {
   /**
    * List of the variables.
    */
