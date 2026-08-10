@@ -49,7 +49,7 @@ type BatchComputationStatusResponse = {
 /**
  * Error code indicating the reason for failure.
  */
-type ComputationErrorCode = "DQ-100" | "DQ-110" | "DQ-120" | "DQ-121" | "DQ-130" | "DQ-140" | "DQ-150" | "DQ-200" | "DQ-300" | "DQ-310" | "DQ-320" | "DQ-400" | "DQ-500" | "DQ-160";
+type ComputationErrorCode = "DQ-100" | "DQ-110" | "DQ-120" | "DQ-121" | "DQ-130" | "DQ-140" | "DQ-150" | "DQ-200" | "DQ-300" | "DQ-310" | "DQ-320" | "DQ-400" | "DQ-500" | "DQ-160" | "DQ-330";
 /**
  * Response returned when a data quality computation is successfully triggered.
  */

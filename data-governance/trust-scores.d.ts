@@ -34,6 +34,8 @@ type AxisResponse = {
 type DatasetFilterRequest = {
   /** List of dataset IDs to retrieve Trust Scores for. Maximum 100 IDs per request. */
   datasetIds: DatasetId[];
+  /** When true, refreshes the USAGE and TIMELINESS axes from source before returning the Trust Scores. */
+  recomputeUsage?: boolean;
 };
 /**
  * Unique identifier of the dataset.

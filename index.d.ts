@@ -1,7 +1,7 @@
 import { d as HostConfig } from "./chunks/auth-types-o-bqAUAV.js";
 import { InterceptorsAPI, createInterceptors } from "./interceptors.js";
 import { AuthAPI, getAccessToken, getWebResourceAuthParams, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig } from "./auth.js";
-import { t as QixAPI } from "./chunks/qix-CinlSZZu.js";
+import { t as QixAPI } from "./chunks/qix-D4o1rmTn.js";
 import { AppsAPI } from "./analytics/apps.js";
 import { ChangeStoresAPI } from "./analytics/change-stores.js";
 import { r as AdaptiveCardsAPI } from "./chunks/adaptive-cards-C4MRotI8.js";
