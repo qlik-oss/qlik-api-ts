@@ -1,10 +1,10 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/extensions.d.ts
 /**
  * Object containing meta data regarding the bundle the extension belongs to. If it does not belong to a bundle, this object is not defined.
  */
-type BundleMeta = {
+export type BundleMeta = {
   /** Description of the bundle. */
   description?: string;
   /** Unique identifier of the bundle. */
@@ -15,7 +15,7 @@ type BundleMeta = {
 /**
  * An error object.
  */
-type Error = {
+export type Error = {
   /** Object containing meta data regarding an error. It does not necessarily contain all the properties. */
   meta?: Meta;
   /** Optional JSON patch object pointing to an invalid property. */
@@ -30,7 +30,7 @@ type Error = {
 /**
  * The extension model.
  */
-type Extension = {
+export type Extension = {
   /** Author of the extension. */
   author?: string;
   /** Object containing meta data regarding the bundle the extension belongs to. If it does not belong to a bundle, this object is not defined. */
@@ -85,13 +85,13 @@ type Extension = {
   /** Version of the extension. */
   version?: string;
 };
-type Extensions = {
+export type Extensions = {
   data: Extension[];
 };
 /**
  * Object containing meta data regarding an error. It does not necessarily contain all the properties.
  */
-type Meta = {
+export type Meta = {
   /** A more detailed message explaining the error. */
   message?: string;
   /** Name of the resource related to the error. If there is a conflict, it is the name of the model attempting to be created. */
@@ -104,13 +104,13 @@ type Meta = {
  *
  * @throws GetExtensionsHttpError
  */
-declare function getExtensions(options?: ApiCallOptions): Promise<GetExtensionsHttpResponse>;
-type GetExtensionsHttpResponse = {
+export declare function getExtensions(options?: ApiCallOptions): Promise<GetExtensionsHttpResponse>;
+export type GetExtensionsHttpResponse = {
   data: Extensions;
   headers: Headers;
   status: 200;
 };
-type GetExtensionsHttpError = {
+export type GetExtensionsHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -121,18 +121,18 @@ type GetExtensionsHttpError = {
  * @param body an object with the body content
  * @throws UploadExtensionHttpError
  */
-declare function uploadExtension(body: {
+export declare function uploadExtension(body: {
   /** The extension model. */
   data?: Extension;
   /** Extension archive. */
   file?: BodyInit;
 }, options?: ApiCallOptions): Promise<UploadExtensionHttpResponse>;
-type UploadExtensionHttpResponse = {
+export type UploadExtensionHttpResponse = {
   data: Extension;
   headers: Headers;
   status: 201;
 };
-type UploadExtensionHttpError = {
+export type UploadExtensionHttpError = {
   data: Error;
   headers: Headers;
   status: number;
@@ -143,13 +143,13 @@ type UploadExtensionHttpError = {
  * @param id Extension identifier or its qextFilename.
  * @throws DeleteExtensionHttpError
  */
-declare function deleteExtension(id: string, options?: ApiCallOptions): Promise<DeleteExtensionHttpResponse>;
-type DeleteExtensionHttpResponse = {
+export declare function deleteExtension(id: string, options?: ApiCallOptions): Promise<DeleteExtensionHttpResponse>;
+export type DeleteExtensionHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteExtensionHttpError = {
+export type DeleteExtensionHttpError = {
   data: Error;
   headers: Headers;
   status: 403 | 404 | 410;
@@ -160,13 +160,13 @@ type DeleteExtensionHttpError = {
  * @param id Extension identifier or its qextFilename.
  * @throws GetExtensionHttpError
  */
-declare function getExtension(id: string, options?: ApiCallOptions): Promise<GetExtensionHttpResponse>;
-type GetExtensionHttpResponse = {
+export declare function getExtension(id: string, options?: ApiCallOptions): Promise<GetExtensionHttpResponse>;
+export type GetExtensionHttpResponse = {
   data: Extension;
   headers: Headers;
   status: 200;
 };
-type GetExtensionHttpError = {
+export type GetExtensionHttpError = {
   data: Error;
   headers: Headers;
   status: 403 | 404 | 410;
@@ -178,18 +178,18 @@ type GetExtensionHttpError = {
  * @param body an object with the body content
  * @throws PatchExtensionHttpError
  */
-declare function patchExtension(id: string, body: {
+export declare function patchExtension(id: string, body: {
   /** The extension model. */
   data?: Extension;
   /** Extension archive. */
   file?: BodyInit;
 }, options?: ApiCallOptions): Promise<PatchExtensionHttpResponse>;
-type PatchExtensionHttpResponse = {
+export type PatchExtensionHttpResponse = {
   data: Extension;
   headers: Headers;
   status: 200;
 };
-type PatchExtensionHttpError = {
+export type PatchExtensionHttpError = {
   data: Error;
   headers: Headers;
   status: number;
@@ -200,13 +200,13 @@ type PatchExtensionHttpError = {
  * @param id Extension identifier or its qextFilename.
  * @throws DownloadExtensionHttpError
  */
-declare function downloadExtension(id: string, options?: ApiCallOptions): Promise<DownloadExtensionHttpResponse>;
-type DownloadExtensionHttpResponse = {
+export declare function downloadExtension(id: string, options?: ApiCallOptions): Promise<DownloadExtensionHttpResponse>;
+export type DownloadExtensionHttpResponse = {
   data: DownloadableBlob;
   headers: Headers;
   status: 200;
 };
-type DownloadExtensionHttpError = {
+export type DownloadExtensionHttpError = {
   data: Error;
   headers: Headers;
   status: 403 | 404 | 410;
@@ -218,13 +218,13 @@ type DownloadExtensionHttpError = {
  * @param filepath Path to the file location within the specified extension archive. Folders separated with forward slashes.
  * @throws DownloadFileFromExtensionHttpError
  */
-declare function downloadFileFromExtension(id: string, filepath: string, options?: ApiCallOptions): Promise<DownloadFileFromExtensionHttpResponse>;
-type DownloadFileFromExtensionHttpResponse = {
+export declare function downloadFileFromExtension(id: string, filepath: string, options?: ApiCallOptions): Promise<DownloadFileFromExtensionHttpResponse>;
+export type DownloadFileFromExtensionHttpResponse = {
   data: void;
   headers: Headers;
   status: 200;
 };
-type DownloadFileFromExtensionHttpError = {
+export type DownloadFileFromExtensionHttpError = {
   data: Error;
   headers: Headers;
   status: 403 | 404 | 410;
@@ -232,8 +232,8 @@ type DownloadFileFromExtensionHttpError = {
 /**
  * Clears the cache for extensions api requests.
  */
-declare function clearCache(): void;
-type ExtensionsAPI = {
+export declare function clearCache(): void;
+export type ExtensionsAPI = {
   /**
    * Lists all imported extensions in the tenant.
    *
@@ -294,4 +294,4 @@ type ExtensionsAPI = {
  */
 declare const extensionsExport: ExtensionsAPI;
 //#endregion
-export { BundleMeta, DeleteExtensionHttpError, DeleteExtensionHttpResponse, DownloadExtensionHttpError, DownloadExtensionHttpResponse, DownloadFileFromExtensionHttpError, DownloadFileFromExtensionHttpResponse, Error, Extension, Extensions, ExtensionsAPI, GetExtensionHttpError, GetExtensionHttpResponse, GetExtensionsHttpError, GetExtensionsHttpResponse, Meta, PatchExtensionHttpError, PatchExtensionHttpResponse, UploadExtensionHttpError, UploadExtensionHttpResponse, clearCache, extensionsExport as default, deleteExtension, downloadExtension, downloadFileFromExtension, getExtension, getExtensions, patchExtension, uploadExtension };
+export { extensionsExport as default };

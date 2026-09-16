@@ -1,19 +1,19 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/sharing-tasks.d.ts
-type APISettingsUpload = {
+export type APISettingsUpload = {
   /** Whether API endpoints for sharing are enabled */
   "enable-sharing": boolean;
   /** Maximum number of recipients when creating a sharing task */
   readonly maxRecipients?: number;
 };
-type AlertingTaskGroupRecipientError = {
+export type AlertingTaskGroupRecipientError = {
   /** Timestamp for the creation of the error */
   added?: string;
   /** Identifier for type of error occurring on alerting task */
   value?: "GROUP_IS_DISABLED" | "MAX_ALERTS_LIMIT_REACHED" | "GROUP_WITH_NO_APP_ACCESS" | "GROUP_IS_DELETED";
 };
-type AlertingTaskRecipientError = {
+export type AlertingTaskRecipientError = {
   /** Timestamp for the creation of the error */
   added?: string;
   /** Identifier for type of error occurring on alerting task */
@@ -22,7 +22,7 @@ type AlertingTaskRecipientError = {
 /**
  * If the template type is not "chart", this can be null. Otherwise, the following properties are required: appId, sheetId, objectId, widthPx, heightPx, language. The following properties are optional: outZoom, outDpi
  */
-type ChartTemplate = {
+export type ChartTemplate = {
   /** ID of app */
   appId?: string;
   /** heightPx of chart */
@@ -49,29 +49,31 @@ type ChartTemplate = {
 /**
  * A bookmark is considered old if its modification date is older than the app creation date.
  */
-type CleanupStrategy = "noCleanup" | "removeOldBookmarks";
+export type CleanupStrategy = "noCleanup" | "removeOldBookmarks";
 /**
  * recipient object model that is directly persisted in the DB
  */
-type EmailAddressRecipientPersist = {
+export type EmailAddressRecipientPersist = {
   /** Whether this recipient can receive alerts. */
   enabled?: boolean;
   taskRecipientErrors?: TaskRecipientError[];
   /** Email of recipient (external user). */
   value?: string;
 };
-type EmailComposition = {
+export type EmailComposition = {
+  /** Body content of the email sent to recipients. */
   body?: string;
+  /** Subject line of the email sent to recipients. */
   subject?: string;
 };
 /**
  * Encrypted property in DB
  */
-type EncryptedProperty = {
+export type EncryptedProperty = {
   cipher?: string;
   value?: unknown;
 };
-type Error = {
+export type Error = {
   /** Error code specific to sharing service. */
   readonly code?: string;
   /** Error cause. */
@@ -80,7 +82,7 @@ type Error = {
   /** Error title. */
   readonly title?: string;
 };
-type ErrorMeta = {
+export type ErrorMeta = {
   /** HTTP error code. */
   readonly httpCode?: number;
 };
@@ -96,14 +98,14 @@ type ErrorMeta = {
  *   traceId: "7975401f3954aa47"
  * }
  */
-type Errors = {
+export type Errors = {
   errors?: Error[];
   traceId?: string;
 };
 /**
  * recipient object model that is directly persisted in the DB
  */
-type GroupIDRecipientPersist = {
+export type GroupIDRecipientPersist = {
   alertingTaskGroupRecipientErrors?: AlertingTaskGroupRecipientError[];
   /** Whether this recipient can receive alerts, set by external settings. */
   enabledBySystem?: boolean;
@@ -116,7 +118,7 @@ type GroupIDRecipientPersist = {
 /**
  * In case of multiple insight urls for multi-sheet sharing (or subsequent multi types) this defines those URLs and a mapping to the correct object.
  */
-type InsightURL = {
+export type InsightURL = {
   directURL?: string;
   fallbackURL?: string;
   insightID?: string;
@@ -128,17 +130,17 @@ type InsightURL = {
    * an identifier for the template that this insight link points to */
   templateID?: string;
 };
-type Links = {
+export type Links = {
   /** Object with Href to a particular element or set of elements */
   self?: Self;
 };
-type ListLinks = {
+export type ListLinks = {
   next?: Page;
   prev?: Page;
   /** Object with Href to a particular element or set of elements */
   self?: Self;
 };
-type MultiSheetTemplate = {
+export type MultiSheetTemplate = {
   /** ID of app */
   appId?: string;
   /** heightPx of chart, must be 0 or omitted for autofit. */
@@ -147,7 +149,9 @@ type MultiSheetTemplate = {
   isPrivate?: boolean;
   /** Sheet state from client as a string json value. Can include language, theme, viewState etc. */
   jsOpts?: unknown;
+  /** Map of Qlik Sense object id to rendering options applied when generating the report. */
   jsOptsById?: Record<string, unknown>;
+  /** Map of Qlik Sense object id to patches applied when generating the report. */
   patchesById?: Record<string, unknown[]>;
   /** Flag to configure the persistent bookmark to use variables */
   persistentBookmarkIncludeVariables?: boolean;
@@ -165,7 +169,7 @@ type MultiSheetTemplate = {
   /** widthPx of chart, must be 0 or omitted for autofit. */
   widthPx?: number;
 };
-type Page = {
+export type Page = {
   /** URL to particular set of elements */
   href?: string;
   /** Page unique token */
@@ -176,7 +180,7 @@ type Page = {
 /**
  * List of persisted recipients.
  */
-type RecipientsPersist = {
+export type RecipientsPersist = {
   DLGroups?: unknown[];
   DLUsers?: unknown[];
   emailAddresses?: EmailAddressRecipientPersist[];
@@ -185,13 +189,13 @@ type RecipientsPersist = {
   netRecipientCount?: number;
   userIds?: UserIDRecipientPersist[];
 };
-type RetentionPolicy = {
+export type RetentionPolicy = {
   /** Number indicating the size of the window which stores the history. For Chart monitoring, the size should be 10. */
   historySize?: number;
   /** Using RFC-5545 provide the time interval in which the previous generated can be overridden with the newly generated report. For Chart monitoring, interval should be FREQ=DAILY;INTERVAL=1 */
   overrideInterval?: string;
 };
-type ScheduleOptions = {
+export type ScheduleOptions = {
   /** The chronos job identifier. It is set once the related chronos job is created. */
   readonly chronosJobID?: string;
   /** EndDateTime is a local date time with respect to the above timezone parameter. If the timezone parameter is missing, then the timezone used is the one retrieved from user infos. Therefore ISO8601 time offsets are not allowed (e.g. "2026-01-02T16:04:05Z" or "2026-01-02T16:04:05+01"), if passed an error will be returned. EndDateTime is an optional parameter, when not set or when it's an empty string, the recurrence is intended to be never ending. */
@@ -207,24 +211,29 @@ type ScheduleOptions = {
   /** The timezone for time calculations in SCHEDULED triggers, optional. */
   timezone?: string | null;
 };
-type Selection = {
+export type Selection = {
+  /** Human-readable name of the field the selection applies to. */
   displayName?: string;
   displayValues?: string[];
+  /** Whether the selected values are numeric. */
   isNumeric: boolean;
+  /** Name of the field the selection applies to. */
   name: string;
+  /** Name of the selection state the values belong to. */
   stateName: string;
   values: string[];
 };
 /**
  * Object with Href to a particular element or set of elements
  */
-type Self = {
+export type Self = {
   href?: string;
 };
-type SharingActionsTriggerCreateRequest = {
+export type SharingActionsTriggerCreateRequest = {
+  /** Identifier of the sharing task to trigger. */
   sharingTaskID: string;
 };
-type SharingExecutionError = {
+export type SharingExecutionError = {
   /** Error code specific to sharing service. */
   readonly code?: string;
   /** Error cause. */
@@ -232,8 +241,8 @@ type SharingExecutionError = {
   /** Error title. */
   readonly title?: string;
 };
-type SharingExecutionErrors = SharingExecutionError[];
-type SharingExecutionFile = {
+export type SharingExecutionErrors = SharingExecutionError[];
+export type SharingExecutionFile = {
   fileAlias?: string;
   fileID?: string;
   tempContentsLocation?: string;
@@ -243,12 +252,12 @@ type SharingExecutionFile = {
   /** userId associated with the file */
   readonly userId?: string;
 };
-type SharingExecutionListResponse = StandardListResponseProps & {
+export type SharingExecutionListResponse = StandardListResponseProps & {
   /** Gets a list of sharing-executions. */
   executions?: SharingExecutionResponse[];
   links?: ListLinks;
 };
-type SharingExecutionPersist = {
+export type SharingExecutionPersist = {
   /** appId associated to sharing task execution */
   readonly appId?: string;
   /** @deprecated
@@ -302,11 +311,11 @@ type SharingExecutionPersist = {
   /** Workflow that the execution belongs to. Note that in a multi-recipient context we can have multiple executions (one per recipient) that share the same unique workflow. */
   readonly workflowID?: string;
 };
-type SharingExecutionResponse = SharingExecutionPersist & {
+export type SharingExecutionResponse = SharingExecutionPersist & {
   fileLocations?: string[];
   links?: Links;
 };
-type SharingSettings = {
+export type SharingSettings = {
   /** true if report-subscription feature is enabled for this tenant */
   "enable-report-subscription"?: boolean;
   /** Whether API endpoints for sharing are enabled */
@@ -324,7 +333,7 @@ type SharingSettings = {
   /** These persisted sharing settings are only available for this tenant. Extracted from request JWT. */
   readonly tenantId?: string;
 };
-type SharingSettingsPatchCompliant = {
+export type SharingSettingsPatchCompliant = {
   /** The operation to be performed. */
   op: "replace";
   /** The path for the given resource field to patch. */
@@ -358,7 +367,7 @@ type SharingSettingsPatchCompliant = {
  *   }
  * ]
  */
-type SharingSettingsPatchCompliantList = SharingSettingsPatchCompliant[];
+export type SharingSettingsPatchCompliantList = SharingSettingsPatchCompliant[];
 /**
  * @example
  * [
@@ -397,8 +406,8 @@ type SharingSettingsPatchCompliantList = SharingSettingsPatchCompliant[];
  *   }
  * ]
  */
-type SharingTaskPatchRequestCompliantList = SharingTaskRecurringPatchRequestCompliant[];
-type SharingTaskRecurringCreateRequest = {
+export type SharingTaskPatchRequestCompliantList = SharingTaskRecurringPatchRequestCompliant[];
+export type SharingTaskRecurringCreateRequest = {
   /** @deprecated
    * Name of the app associated (through the templates) with this sharing task */
   appName?: string;
@@ -438,6 +447,7 @@ type SharingTaskRecurringCreateRequest = {
   subType?: "pdf" | "pptx" | "xlsx" | "html" | "docx";
   /** used to assign sharing task to a collection bucket (tags) */
   tags?: string[];
+  /** Templates associated with the sharing task */
   templates: TemplateResult[];
   /** the transport type for the report */
   transportChannels?: ("email" | "sharepoint")[];
@@ -445,14 +455,14 @@ type SharingTaskRecurringCreateRequest = {
   /** the sharing task resource type. */
   type: "chart-monitoring" | "chart-sharing" | "sheet-sharing" | "template-sharing";
 };
-type SharingTaskRecurringListResponse = StandardListResponseProps & {
+export type SharingTaskRecurringListResponse = StandardListResponseProps & {
   links?: ListLinks;
   /** List of recipients. An internal recipient is represented by their user id. */
   recipients?: SharingTaskRecurringRecipients;
   /** Gets a list of recurring sharing tasks. */
   sharingTasks?: SharingTaskRecurringResponse[];
 };
-type SharingTaskRecurringPatchRequestCompliant = {
+export type SharingTaskRecurringPatchRequestCompliant = {
   /** The operation to be performed */
   op: "replace" | "remove";
   /** A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902 */
@@ -463,7 +473,7 @@ type SharingTaskRecurringPatchRequestCompliant = {
 /**
  * Type of object stored in the database. Required fields mean that property cannot be null
  */
-type SharingTaskRecurringPersist = {
+export type SharingTaskRecurringPersist = {
   /** ID of the app associated (through the templates) with this sharing task */
   appId?: string;
   /** Name of the app associated (through the templates) with this sharing task */
@@ -576,7 +586,7 @@ type SharingTaskRecurringPersist = {
 /**
  * the subject and body content for the email to send on report subscriptions
  */
-type SharingTaskRecurringPersistEncryptedEmailContent = {
+export type SharingTaskRecurringPersistEncryptedEmailContent = {
   /** Encrypted property in DB */
   body?: EncryptedProperty;
   /** Encrypted property in DB */
@@ -585,7 +595,7 @@ type SharingTaskRecurringPersistEncryptedEmailContent = {
 /**
  * List of recipients. An internal recipient is represented by their user id.
  */
-type SharingTaskRecurringRecipients = {
+export type SharingTaskRecurringRecipients = {
   DLGroups?: unknown[];
   DLUsers?: unknown[];
   emailAddresses?: string[];
@@ -594,7 +604,7 @@ type SharingTaskRecurringRecipients = {
 /**
  * Whatever is persisted in the db + links
  */
-type SharingTaskRecurringResponse = SharingTaskRecurringPersist & {
+export type SharingTaskRecurringResponse = SharingTaskRecurringPersist & {
   /** true if the sharing task is enabled */
   enabled?: boolean;
   /** URL to querying the files of the latest execution tied to this sharing task */
@@ -606,7 +616,7 @@ type SharingTaskRecurringResponse = SharingTaskRecurringPersist & {
 /**
  * @deprecated
  */
-type SheetTemplate = {
+export type SheetTemplate = {
   /** ID of app */
   appId?: string;
   /** heightPx of chart */
@@ -616,7 +626,9 @@ type SheetTemplate = {
   isPrivate?: boolean;
   /** Sheet state from client as a string json value. Can include language, theme, viewState etc. */
   jsOpts?: unknown;
+  /** Map of Qlik Sense object id to rendering options applied when generating the report. */
   jsOptsById?: Record<string, unknown>;
+  /** Map of Qlik Sense object id to patches applied when generating the report. */
   patchesById?: Record<string, unknown[]>;
   /** ID of sheet */
   sheetId?: string;
@@ -629,7 +641,7 @@ type SheetTemplate = {
 /**
  * properties that should be added to every list response
  */
-type StandardListResponseProps = {
+export type StandardListResponseProps = {
   /** count of entries on the currently shown page */
   currentPageCount: number;
   /** total count of entries in the collection as a whole */
@@ -638,14 +650,14 @@ type StandardListResponseProps = {
 /**
  * State of the selections and jsOpts
  */
-type State = {
+export type State = {
   /** Selected fields that led to discovery of monitored Insight Advisor chart */
   fields?: unknown[];
   /** Query that led to discovery of monitored Insight Advisor chart */
   queryItems?: unknown[];
   selections?: Selection[];
 };
-type StoryTemplate = {
+export type StoryTemplate = {
   /** ID of app */
   appId?: string;
   /** ID of story */
@@ -654,7 +666,7 @@ type StoryTemplate = {
 /**
  * User that this execution is targeting as a recipient
  */
-type TargetUser = {
+export type TargetUser = {
   /** @deprecated */
   filterName?: string;
   filterNames?: string[];
@@ -665,19 +677,19 @@ type TargetUser = {
   /** contains the value of user type e.g. abc@xyz.com, 213efewr3 */
   value?: string;
 };
-type TaskError = {
+export type TaskError = {
   /** Timestamp for the creation of the error */
   timestamp?: string;
   /** Identifier for type of error occurring on sharing task */
   value?: "OWNER_DISABLED" | "OWNER_ACCESS" | "OWNER_LICENSE" | "APP_DELETED" | "NO_RECIPIENTS" | "PARTIAL_ACCESS" | "ORPHAN" | "PARTIAL_SENT" | "FATAL_SENT_ERROR" | "SECTION_ACCESS_MODIFIED" | "INVALID_DISTRIBUTION_LIST" | "MAX_DL_RECIPIENTS_LIMIT_REACHED" | "TEMPLATE_NOT_FOUND" | "REPORTING_BOOKMARK_NOT_FOUND" | "DATA_CONNECTION_NOT_FOUND" | "INVALID_SHAREPOINT_DIRECTORY" | "GENERIC_FILE_UPLOAD_ERROR" | "DISABLED_DUE_TO_OWNERSHIP_CHANGE" | "REPORTING_CONSUMPTION_EXCEEDED" | "REPORTING_CAPABILITY_NOT_FOUND" | "EXECUTION_TIME_OUT" | "OWNER_INSUFFICIENT_PERMISSIONS" | "MAX_UNIQUE_REPORTS_LIMIT_REACHED" | "MISSING_DISTRIBUTION_LIST" | "SECTION_ACCESS_NOT_SUPPORTED" | "REPORTING_DAILY_QUOTA_EXCEEDED" | "EMAIL_DELIVERY_FAILURE";
 };
-type TaskGroupRecipientError = {
+export type TaskGroupRecipientError = {
   /** Timestamp for the creation of the error */
   timestamp?: string;
   /** Identifier for type of error occurring on sharing task specific for group recipient */
   value?: "GROUP_IS_DISABLED" | "MAX_ALERTS_LIMIT_REACHED" | "GROUP_WITH_NO_APP_ACCESS" | "GROUP_IS_DELETED" | "GROUP_NOT_FOUND_DL" | "GROUP_DISABLED_IN_DL";
 };
-type TaskRecipientError = {
+export type TaskRecipientError = {
   /** Timestamp for the creation of the error */
   timestamp?: string;
   /** Identifier for type of error occurring on sharing task specific for recipient */
@@ -686,7 +698,7 @@ type TaskRecipientError = {
 /**
  * Depending on the value of type, sharing service will internally validate a specific property regarding its data. Type "file" validates property "fileData", type "chart" validates property "chartData", type "story" validates property "storyData". Check description of each of the models for their required properties.
  */
-type TemplatePersist = {
+export type TemplatePersist = {
   /** If the template type is not "chart", this can be null. Otherwise, the following properties are required: appId, sheetId, objectId, widthPx, heightPx, language. The following properties are optional: outZoom, outDpi */
   chartData?: ChartTemplate;
   /** fileAlias provide an opaqueId for the client which can be used to filter and select the report generated */
@@ -700,14 +712,16 @@ type TemplatePersist = {
   /** @deprecated */
   sheetData?: SheetTemplate;
   storyData?: StoryTemplate;
+  /** The output sub-type produced for the template. */
   subType?: "image" | "snapshot" | "pdf" | "pptx" | "xlsx" | "qpxp" | "qhtml" | "docx";
   /** @deprecated
    * ID of unique template */
   readonly templateId?: string;
+  /** The type of template used to generate the report output. */
   type: "file" | "chart" | "story" | "sheet" | "multi-sheet" | "excel" | "pixel-perfect" | "html" | "powerpoint" | "word";
 };
-type TemplateResult = TemplatePersist & unknown;
-type Trigger = {
+export type TemplateResult = TemplatePersist & unknown;
+export type Trigger = {
   /** The chronosJobId which triggers the sharing task */
   readonly chronosJobID?: string;
   /** Toggle for executing sharing task on app reload. */
@@ -720,7 +734,7 @@ type Trigger = {
 /**
  * an internal recipient based on its user id.
  */
-type UserIDRecipient = {
+export type UserIDRecipient = {
   alertingTaskRecipientErrors?: AlertingTaskRecipientError[];
   /** Whether this recipient can receive alerts. */
   enabled?: boolean;
@@ -735,7 +749,7 @@ type UserIDRecipient = {
 /**
  * recipient object model that is directly persisted in the DB
  */
-type UserIDRecipientPersist = {
+export type UserIDRecipientPersist = {
   alertingTaskRecipientErrors?: AlertingTaskRecipientError[];
   /** Whether this recipient can receive alerts, set by external settings. */
   enabledBySystem?: boolean;
@@ -755,7 +769,7 @@ type UserIDRecipientPersist = {
  * @param query an object with query parameters
  * @throws GetSharingTasksHttpError
  */
-declare function getSharingTasks(query: {
+export declare function getSharingTasks(query: {
   /** the filter by sharing task resource app id. TenantAdmin users may omit this parameter to list all sharing-tasks in the tenant. */
   appid?: string;
   /** Indicates if task with the status DELETING should be excluded from the list */
@@ -785,14 +799,14 @@ declare function getSharingTasks(query: {
   /** the filter by sharing task resource type. If type is template-sharing only and user is not tenant admin, appid is also required. */
   type?: ("chart-monitoring" | "chart-sharing" | "sheet-sharing" | "template-sharing")[];
 }, options?: ApiCallOptions): Promise<GetSharingTasksHttpResponse>;
-type GetSharingTasksHttpResponse = {
+export type GetSharingTasksHttpResponse = {
   data: SharingTaskRecurringListResponse;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetSharingTasksHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetSharingTasksHttpResponse>;
 };
-type GetSharingTasksHttpError = {
+export type GetSharingTasksHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -803,13 +817,13 @@ type GetSharingTasksHttpError = {
  * @param body an object with the body content
  * @throws CreateSharingTaskHttpError
  */
-declare function createSharingTask(body: SharingTaskRecurringCreateRequest, options?: ApiCallOptions): Promise<CreateSharingTaskHttpResponse>;
-type CreateSharingTaskHttpResponse = {
+export declare function createSharingTask(body: SharingTaskRecurringCreateRequest, options?: ApiCallOptions): Promise<CreateSharingTaskHttpResponse>;
+export type CreateSharingTaskHttpResponse = {
   data: SharingTaskRecurringResponse;
   headers: Headers;
   status: 201;
 };
-type CreateSharingTaskHttpError = {
+export type CreateSharingTaskHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -820,13 +834,13 @@ type CreateSharingTaskHttpError = {
  * @param body an object with the body content
  * @throws ExecuteSharingTasksHttpError
  */
-declare function executeSharingTasks(body: SharingActionsTriggerCreateRequest, options?: ApiCallOptions): Promise<ExecuteSharingTasksHttpResponse>;
-type ExecuteSharingTasksHttpResponse = {
+export declare function executeSharingTasks(body: SharingActionsTriggerCreateRequest, options?: ApiCallOptions): Promise<ExecuteSharingTasksHttpResponse>;
+export type ExecuteSharingTasksHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type ExecuteSharingTasksHttpError = {
+export type ExecuteSharingTasksHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -836,13 +850,13 @@ type ExecuteSharingTasksHttpError = {
  *
  * @throws GetSharingTasksSettingsHttpError
  */
-declare function getSharingTasksSettings(options?: ApiCallOptions): Promise<GetSharingTasksSettingsHttpResponse>;
-type GetSharingTasksSettingsHttpResponse = {
+export declare function getSharingTasksSettings(options?: ApiCallOptions): Promise<GetSharingTasksSettingsHttpResponse>;
+export type GetSharingTasksSettingsHttpResponse = {
   data: SharingSettings;
   headers: Headers;
   status: 200;
 };
-type GetSharingTasksSettingsHttpError = {
+export type GetSharingTasksSettingsHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -853,13 +867,13 @@ type GetSharingTasksSettingsHttpError = {
  * @param body an object with the body content
  * @throws UpdateSharingTasksSettingsHttpError
  */
-declare function updateSharingTasksSettings(body: SharingSettingsPatchCompliantList, options?: ApiCallOptions): Promise<UpdateSharingTasksSettingsHttpResponse>;
-type UpdateSharingTasksSettingsHttpResponse = {
+export declare function updateSharingTasksSettings(body: SharingSettingsPatchCompliantList, options?: ApiCallOptions): Promise<UpdateSharingTasksSettingsHttpResponse>;
+export type UpdateSharingTasksSettingsHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type UpdateSharingTasksSettingsHttpError = {
+export type UpdateSharingTasksSettingsHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -870,13 +884,13 @@ type UpdateSharingTasksSettingsHttpError = {
  * @param body an object with the body content
  * @throws ConfigureSharingTasksSettingsHttpError
  */
-declare function configureSharingTasksSettings(body: APISettingsUpload, options?: ApiCallOptions): Promise<ConfigureSharingTasksSettingsHttpResponse>;
-type ConfigureSharingTasksSettingsHttpResponse = {
+export declare function configureSharingTasksSettings(body: APISettingsUpload, options?: ApiCallOptions): Promise<ConfigureSharingTasksSettingsHttpResponse>;
+export type ConfigureSharingTasksSettingsHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type ConfigureSharingTasksSettingsHttpError = {
+export type ConfigureSharingTasksSettingsHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -887,13 +901,13 @@ type ConfigureSharingTasksSettingsHttpError = {
  * @param taskId The sharing task identifier.
  * @throws DeleteSharingTaskHttpError
  */
-declare function deleteSharingTask(taskId: string, options?: ApiCallOptions): Promise<DeleteSharingTaskHttpResponse>;
-type DeleteSharingTaskHttpResponse = {
+export declare function deleteSharingTask(taskId: string, options?: ApiCallOptions): Promise<DeleteSharingTaskHttpResponse>;
+export type DeleteSharingTaskHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteSharingTaskHttpError = {
+export type DeleteSharingTaskHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -905,16 +919,16 @@ type DeleteSharingTaskHttpError = {
  * @param query an object with query parameters
  * @throws GetSharingTaskHttpError
  */
-declare function getSharingTask(taskId: string, query: {
+export declare function getSharingTask(taskId: string, query: {
   /** Determines whether to update the `lastViewed` property for the sharing task, which is used to determine whether the sharing task is still in use. If set to `true`, this will be updated to current time. */
   isViewChart?: boolean;
 }, options?: ApiCallOptions): Promise<GetSharingTaskHttpResponse>;
-type GetSharingTaskHttpResponse = {
+export type GetSharingTaskHttpResponse = {
   data: SharingTaskRecurringResponse;
   headers: Headers;
   status: 200;
 };
-type GetSharingTaskHttpError = {
+export type GetSharingTaskHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -926,13 +940,13 @@ type GetSharingTaskHttpError = {
  * @param body an object with the body content
  * @throws PatchSharingTaskHttpError
  */
-declare function patchSharingTask(taskId: string, body: SharingTaskPatchRequestCompliantList, options?: ApiCallOptions): Promise<PatchSharingTaskHttpResponse>;
-type PatchSharingTaskHttpResponse = {
+export declare function patchSharingTask(taskId: string, body: SharingTaskPatchRequestCompliantList, options?: ApiCallOptions): Promise<PatchSharingTaskHttpResponse>;
+export type PatchSharingTaskHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchSharingTaskHttpError = {
+export type PatchSharingTaskHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -943,13 +957,13 @@ type PatchSharingTaskHttpError = {
  * @param taskId The sharing task identifier.
  * @throws CancelSharingTaskHttpError
  */
-declare function cancelSharingTask(taskId: string, options?: ApiCallOptions): Promise<CancelSharingTaskHttpResponse>;
-type CancelSharingTaskHttpResponse = {
+export declare function cancelSharingTask(taskId: string, options?: ApiCallOptions): Promise<CancelSharingTaskHttpResponse>;
+export type CancelSharingTaskHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type CancelSharingTaskHttpError = {
+export type CancelSharingTaskHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -961,7 +975,7 @@ type CancelSharingTaskHttpError = {
  * @param query an object with query parameters
  * @throws GetSharingTaskExecutionsHttpError
  */
-declare function getSharingTaskExecutions(taskId: string, query: {
+export declare function getSharingTaskExecutions(taskId: string, query: {
   /** Limit the returned result set */
   limit?: number;
   /** The cursor to the next page of data. Only one of next or previous may be specified. */
@@ -975,14 +989,14 @@ declare function getSharingTaskExecutions(taskId: string, query: {
   /** Specifies a filter for a particular field and value of an execution */
   status?: "successful" | "failed";
 }, options?: ApiCallOptions): Promise<GetSharingTaskExecutionsHttpResponse>;
-type GetSharingTaskExecutionsHttpResponse = {
+export type GetSharingTaskExecutionsHttpResponse = {
   data: SharingExecutionListResponse;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetSharingTaskExecutionsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetSharingTaskExecutionsHttpResponse>;
 };
-type GetSharingTaskExecutionsHttpError = {
+export type GetSharingTaskExecutionsHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -995,16 +1009,16 @@ type GetSharingTaskExecutionsHttpError = {
  * @param query an object with query parameters
  * @throws GetSharingTaskExecutionHttpError
  */
-declare function getSharingTaskExecution(taskId: string, executionId: string, query: {
+export declare function getSharingTaskExecution(taskId: string, executionId: string, query: {
   /** Filter by status. If not present then no filtering is done on the status. This is only relevant when requesting latest execution. */
   status?: "successful" | "failed" | "cancelled";
 }, options?: ApiCallOptions): Promise<GetSharingTaskExecutionHttpResponse>;
-type GetSharingTaskExecutionHttpResponse = {
+export type GetSharingTaskExecutionHttpResponse = {
   data: SharingExecutionResponse;
   headers: Headers;
   status: 200;
 };
-type GetSharingTaskExecutionHttpError = {
+export type GetSharingTaskExecutionHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -1018,16 +1032,16 @@ type GetSharingTaskExecutionHttpError = {
  * @param query an object with query parameters
  * @throws GetSharingTaskExecutionFileHttpError
  */
-declare function getSharingTaskExecutionFile(taskId: string, executionId: string, fileAlias: string, query: {
+export declare function getSharingTaskExecutionFile(taskId: string, executionId: string, fileAlias: string, query: {
   /** Filter by status. If not present then no filtering is done on the status. This is only relevant when requesting latest execution. */
   status?: "successful" | "failed" | "cancelled";
 }, options?: ApiCallOptions): Promise<GetSharingTaskExecutionFileHttpResponse>;
-type GetSharingTaskExecutionFileHttpResponse = {
+export type GetSharingTaskExecutionFileHttpResponse = {
   data: DownloadableBlob;
   headers: Headers;
   status: 200;
 };
-type GetSharingTaskExecutionFileHttpError = {
+export type GetSharingTaskExecutionFileHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -1035,8 +1049,8 @@ type GetSharingTaskExecutionFileHttpError = {
 /**
  * Clears the cache for sharing-tasks api requests.
  */
-declare function clearCache(): void;
-type SharingTasksAPI = {
+export declare function clearCache(): void;
+export type SharingTasksAPI = {
   /**
    * Retrieves all sharing tasks accessible to the user. Users assigned the `TenantAdmin` or `AnalyticsAdmin` role can view all tasks.
    *
@@ -1145,4 +1159,4 @@ type SharingTasksAPI = {
  */
 declare const sharingTasksExport: SharingTasksAPI;
 //#endregion
-export { APISettingsUpload, AlertingTaskGroupRecipientError, AlertingTaskRecipientError, CancelSharingTaskHttpError, CancelSharingTaskHttpResponse, ChartTemplate, CleanupStrategy, ConfigureSharingTasksSettingsHttpError, ConfigureSharingTasksSettingsHttpResponse, CreateSharingTaskHttpError, CreateSharingTaskHttpResponse, DeleteSharingTaskHttpError, DeleteSharingTaskHttpResponse, EmailAddressRecipientPersist, EmailComposition, EncryptedProperty, Error, ErrorMeta, Errors, ExecuteSharingTasksHttpError, ExecuteSharingTasksHttpResponse, GetSharingTaskExecutionFileHttpError, GetSharingTaskExecutionFileHttpResponse, GetSharingTaskExecutionHttpError, GetSharingTaskExecutionHttpResponse, GetSharingTaskExecutionsHttpError, GetSharingTaskExecutionsHttpResponse, GetSharingTaskHttpError, GetSharingTaskHttpResponse, GetSharingTasksHttpError, GetSharingTasksHttpResponse, GetSharingTasksSettingsHttpError, GetSharingTasksSettingsHttpResponse, GroupIDRecipientPersist, InsightURL, Links, ListLinks, MultiSheetTemplate, Page, PatchSharingTaskHttpError, PatchSharingTaskHttpResponse, RecipientsPersist, RetentionPolicy, ScheduleOptions, Selection, Self, SharingActionsTriggerCreateRequest, SharingExecutionError, SharingExecutionErrors, SharingExecutionFile, SharingExecutionListResponse, SharingExecutionPersist, SharingExecutionResponse, SharingSettings, SharingSettingsPatchCompliant, SharingSettingsPatchCompliantList, SharingTaskPatchRequestCompliantList, SharingTaskRecurringCreateRequest, SharingTaskRecurringListResponse, SharingTaskRecurringPatchRequestCompliant, SharingTaskRecurringPersist, SharingTaskRecurringPersistEncryptedEmailContent, SharingTaskRecurringRecipients, SharingTaskRecurringResponse, SharingTasksAPI, SheetTemplate, StandardListResponseProps, State, StoryTemplate, TargetUser, TaskError, TaskGroupRecipientError, TaskRecipientError, TemplatePersist, TemplateResult, Trigger, UpdateSharingTasksSettingsHttpError, UpdateSharingTasksSettingsHttpResponse, UserIDRecipient, UserIDRecipientPersist, cancelSharingTask, clearCache, configureSharingTasksSettings, createSharingTask, sharingTasksExport as default, deleteSharingTask, executeSharingTasks, getSharingTask, getSharingTaskExecution, getSharingTaskExecutionFile, getSharingTaskExecutions, getSharingTasks, getSharingTasksSettings, patchSharingTask, updateSharingTasksSettings };
+export { sharingTasksExport as default };

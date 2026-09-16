@@ -1,10 +1,10 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/glossaries.d.ts
 /**
  * A JSON Patch document as defined in https://tools.ietf.org/html/rfc6902.
  */
-type JSONPatch = {
+export type JSONPatch = {
   /** The operation to be performed. */
   op: "replace";
   /** A JSON Pointer. */
@@ -28,8 +28,8 @@ type JSONPatch = {
  *   }
  * ]
  */
-type JSONPatchArray = JSONPatch[];
-type AtlanEntity = {
+export type JSONPatchArray = JSONPatch[];
+export type AtlanEntity = {
   attributes?: AtlanEntityAttributes;
   guid?: string;
   labels?: string[];
@@ -37,7 +37,7 @@ type AtlanEntity = {
   status?: string;
   typeName?: string;
 };
-type AtlanEntityAttributes = {
+export type AtlanEntityAttributes = {
   abbreviation?: string;
   displayText?: string;
   examples?: unknown;
@@ -52,17 +52,17 @@ type AtlanEntityAttributes = {
 /**
  * Atlan glossary format. For more information, see https://docs.atlan.com/
  */
-type AtlanGlossary = {
+export type AtlanGlossary = {
   entity?: AtlanEntity;
   referredEntities?: AtlanEntity[];
 };
-type AtlanRelationEntity = {
+export type AtlanRelationEntity = {
   displayText?: string;
   entityStatus?: string;
   guid?: string;
   typeName?: string;
 };
-type AtlanRelationshipAttributes = {
+export type AtlanRelationshipAttributes = {
   antonyms?: AtlanTermHeader;
   categories?: AtlanRelationEntity;
   classifies?: AtlanTermHeader;
@@ -72,11 +72,11 @@ type AtlanRelationshipAttributes = {
   synonyms?: AtlanTermHeader;
   terms?: AtlanRelationEntity;
 };
-type AtlanResourceLink = {
+export type AtlanResourceLink = {
   displayName?: string;
   url?: string;
 };
-type AtlanTermHeader = {
+export type AtlanTermHeader = {
   description?: string;
   displayText?: string;
   entityStatus?: string;
@@ -85,14 +85,14 @@ type AtlanTermHeader = {
   relationGuid?: string;
   steward?: string;
 };
-type AtlasCategory = {
+export type AtlasCategory = {
   categoryGuid?: string;
   description?: string;
   displayText?: string;
   parentCategoryGuid?: string;
   relationGuid?: string;
 };
-type AtlasGlossary = {
+export type AtlasGlossary = {
   categories?: AtlasCategory[];
   guid?: string;
   language?: string;
@@ -103,7 +103,7 @@ type AtlasGlossary = {
   terms?: AtlasTerm[];
   usage?: string;
 };
-type AtlasTerm = {
+export type AtlasTerm = {
   description?: string;
   displayText?: string;
   expression?: string;
@@ -113,13 +113,13 @@ type AtlasTerm = {
   steward?: string;
   termGuid?: string;
 };
-type CategoriesResult = {
+export type CategoriesResult = {
   data: Category[];
   /** URLs to a resource request */
   links?: PageLinks;
   meta?: ResultMeta;
 };
-type Category = {
+export type Category = {
   readonly createdAt: string;
   readonly createdBy: string;
   description: string;
@@ -135,7 +135,7 @@ type Category = {
   /** The uid of the user who last updated the category */
   readonly updatedBy: string;
 };
-type CreateCategory = {
+export type CreateCategory = {
   description?: string;
   /** The name of the category. May not be identical to another category belonging to the same parent. */
   name?: string;
@@ -143,7 +143,7 @@ type CreateCategory = {
   /** This list contains the UIDs of the stewards of the category. */
   stewards?: string[];
 };
-type CreateGlossary = {
+export type CreateGlossary = {
   /** Description of the glossary */
   description?: string;
   /** Name of the glossary */
@@ -157,7 +157,7 @@ type CreateGlossary = {
   tags?: string[];
   termTemplate?: TermTemplate;
 };
-type CreateTerm = {
+export type CreateTerm = {
   abbreviation?: string;
   /** Category Ids that the term belongs to. NOTE! In case of import the string refers to the index of the category in the import document. */
   categories?: string[];
@@ -172,7 +172,7 @@ type CreateTerm = {
   stewards?: string[];
   tags?: string[];
 };
-type ErrorResponse = {
+export type ErrorResponse = {
   errors?: ErrorResponseCode[];
   traceId?: string;
 };
@@ -198,11 +198,11 @@ type ErrorResponse = {
  * * BG-22 - Import cancelled
  * * BG-23 - Duplicate link related
  */
-type ErrorResponseBadRequest = {
+export type ErrorResponseBadRequest = {
   errors?: ErrorResponseCode[];
   traceId?: string;
 };
-type ErrorResponseCode = {
+export type ErrorResponseCode = {
   code?: string;
   detail?: string;
   title?: string;
@@ -212,7 +212,7 @@ type ErrorResponseCode = {
  * * BG-3 - Access denied, no read access
  * * BG-30 - Feature not enabled on tenant.
  */
-type ErrorResponseForbidden = {
+export type ErrorResponseForbidden = {
   errors?: ErrorResponseCode[];
   traceId?: string;
 };
@@ -222,11 +222,11 @@ type ErrorResponseForbidden = {
  * * BG-9 - Category not found
  * * BG-10 - Term not found
  */
-type ErrorResponseNotFound = {
+export type ErrorResponseNotFound = {
   errors?: ErrorResponseCode[];
   traceId?: string;
 };
-type ExportCategory = {
+export type ExportCategory = {
   description?: string;
   /** The id for resolving updates in future imports/updates.
    * Opposed to the id of terms, id on category are not resolved by backend. Any category referred in the category array in terms will have to be identical to the id property of the category. If not, the category reference will be discarded. */
@@ -236,7 +236,7 @@ type ExportCategory = {
   parentId?: string;
   stewardDetails?: StewardDetail[];
 };
-type ExportGlossary = {
+export type ExportGlossary = {
   categories?: ExportCategory[];
   readonly createdAt?: string;
   readonly createdBy?: string;
@@ -255,7 +255,7 @@ type ExportGlossary = {
   /** The uid of the user who last updated the glossary */
   readonly updatedBy?: string;
 };
-type ExportTerm = {
+export type ExportTerm = {
   abbreviation?: string;
   /** Categories that the term belongs to. Refers to the `id` property of the category object */
   categories?: string[];
@@ -270,13 +270,13 @@ type ExportTerm = {
   stewards?: StewardDetail[];
   tags?: string[];
 };
-type GlossariesResult = {
+export type GlossariesResult = {
   data?: Glossary[];
   /** URLs to a resource request */
   links?: PageLinks;
   meta?: ResultMeta;
 };
-type Glossary = {
+export type Glossary = {
   /** Datetime when the glossary was created */
   readonly createdAt: string;
   /** Unique identifier of the user who created the glossary */
@@ -302,7 +302,7 @@ type Glossary = {
   /** The unique identifier of the user who last updated the glossary */
   readonly updatedBy: string;
 };
-type ImportCategory = {
+export type ImportCategory = {
   description?: string;
   /** The id for resolving updates in future imports/updates.
    * Opposed to the id of terms, id on category are not resolved by backend. Any category referred in the category array in terms will have to be identical to the id property of the category. If not, the category reference will be discarded. */
@@ -313,12 +313,12 @@ type ImportCategory = {
   stewardDetails?: StewardDetail[];
   stewards?: string[];
 };
-type ImportOwner = {
+export type ImportOwner = {
   email?: string;
   name?: string;
   userId?: string;
 };
-type ImportTerm = {
+export type ImportTerm = {
   abbreviation?: string;
   /** Categories that the term belongs to. Refers to the `id` property of the category object */
   categories?: string[];
@@ -333,24 +333,24 @@ type ImportTerm = {
   stewards?: StewardDetail[];
   tags?: string[];
 };
-type LinksResult = {
+export type LinksResult = {
   data?: TermLinksTo[];
   /** URLs to a resource request */
   links?: PageLinks;
   meta?: ResultMeta;
 };
-type PageLink = {
+export type PageLink = {
   href?: string;
 };
 /**
  * URLs to a resource request
  */
-type PageLinks = {
+export type PageLinks = {
   next?: PageLink;
   prev?: PageLink;
   self?: PageLink;
 };
-type QlikGlossary = {
+export type QlikGlossary = {
   categories?: ImportCategory[];
   description?: string;
   name?: string;
@@ -362,15 +362,15 @@ type QlikGlossary = {
   termTemplate?: TermTemplate;
   terms?: ImportTerm[];
 };
-type ResultMeta = {
+export type ResultMeta = {
   countTotal?: number;
 };
-type StewardDetail = {
+export type StewardDetail = {
   email?: string;
   name?: string;
   userId?: string;
 };
-type Term = {
+export type Term = {
   abbreviation: string;
   categories?: string[];
   readonly createdAt: string;
@@ -404,7 +404,7 @@ type Term = {
  * all three subresource fields (`subResourceType`, `subResourceId`, and `subResourceName`) must be provided together.
  * If any one subresource field is specified, all three are required.
  */
-type TermCreateLinksTo = {
+export type TermCreateLinksTo = {
   /** The unique identifier of the resource (app or dataset) to link to the term. */
   resourceId: string;
   /** The type of resource being linked to the term. */
@@ -423,7 +423,7 @@ type TermCreateLinksTo = {
 /**
  * Describes links to other entities such as qlik charts, dataset columns etc.
  */
-type TermLinksTo = {
+export type TermLinksTo = {
   readonly createdAt?: string;
   createdBy?: string;
   id?: string;
@@ -445,7 +445,7 @@ type TermLinksTo = {
   title?: string;
   type?: "definition" | "related";
 };
-type TermRelatesTo = {
+export type TermRelatesTo = {
   /** The unique identifier of the related term. NOTE! In case of import the string refers to the index of the term in the import document. */
   termId: string;
   /** How the term related to the other object */
@@ -454,19 +454,19 @@ type TermRelatesTo = {
 /**
  * Terms status is used determine the status of a term
  */
-type TermStatus = {
+export type TermStatus = {
   type: "draft" | "verified" | "deprecated";
   /** Time when the state was changed */
   updatedAt: string;
   /** The unique identifier of the user who last changed the status of the term */
   updatedBy: string;
 };
-type TermTemplate = {
+export type TermTemplate = {
   /** Template text for new terms. This is a rich text field represented as a JSON string.
    * The field is typically generated by the UI but can be set programmatically using the rich text format. */
   relatedInformation?: string;
 };
-type TermsResult = {
+export type TermsResult = {
   data: Term[];
   /** URLs to a resource request */
   links?: PageLinks;
@@ -478,7 +478,7 @@ type TermsResult = {
  * @param query an object with query parameters
  * @throws GetGlossariesHttpError
  */
-declare function getGlossaries(query: {
+export declare function getGlossaries(query: {
   /** Optional parameter to request total count for query */
   countTotal?: boolean;
   /** The number of glossaries to get. */
@@ -490,14 +490,14 @@ declare function getGlossaries(query: {
   /** Optional resource field name to sort on, eg. name. Can be prefixed with +/- to determine order, defaults to (+) ascending. */
   sort?: "name" | "+name" | "-name" | "description" | "+description" | "-description";
 }, options?: ApiCallOptions): Promise<GetGlossariesHttpResponse>;
-type GetGlossariesHttpResponse = {
+export type GetGlossariesHttpResponse = {
   data: GlossariesResult;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetGlossariesHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetGlossariesHttpResponse>;
 };
-type GetGlossariesHttpError = {
+export type GetGlossariesHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403;
@@ -508,13 +508,13 @@ type GetGlossariesHttpError = {
  * @param body an object with the body content
  * @throws CreateGlossaryHttpError
  */
-declare function createGlossary(body: CreateGlossary, options?: ApiCallOptions): Promise<CreateGlossaryHttpResponse>;
-type CreateGlossaryHttpResponse = {
+export declare function createGlossary(body: CreateGlossary, options?: ApiCallOptions): Promise<CreateGlossaryHttpResponse>;
+export type CreateGlossaryHttpResponse = {
   data: Glossary;
   headers: Headers;
   status: 201;
 };
-type CreateGlossaryHttpError = {
+export type CreateGlossaryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403;
@@ -527,7 +527,7 @@ type CreateGlossaryHttpError = {
  * @param body an object with the body content
  * @throws ImportGlossaryHttpError
  */
-declare function importGlossary(query: {
+export declare function importGlossary(query: {
   /** Appending the current importer user as steward to categories/terms where no steward is defined/not match the identity service. */
   importerAsFallbackSteward?: boolean;
   /** Using email in the steward fields to lookup userIds in the identity service */
@@ -535,23 +535,23 @@ declare function importGlossary(query: {
   /** The spaceId (leave blank or omit for personal) */
   spaceId?: string;
 }, body: QlikGlossary, options?: ApiCallOptions): Promise<ImportGlossaryHttpResponse>;
-type ImportGlossaryHttpResponse = {
+export type ImportGlossaryHttpResponse = {
   data: Glossary;
   headers: Headers;
   status: 201;
 };
-type ImportGlossaryHttpError = ImportGlossary400HttpError | ImportGlossary403HttpError | ImportGlossary404HttpError;
-type ImportGlossary400HttpError = {
+export type ImportGlossaryHttpError = ImportGlossary400HttpError | ImportGlossary403HttpError | ImportGlossary404HttpError;
+export type ImportGlossary400HttpError = {
   data: ErrorResponseBadRequest;
   headers: Headers;
   status: 400;
 };
-type ImportGlossary403HttpError = {
+export type ImportGlossary403HttpError = {
   data: ErrorResponseForbidden;
   headers: Headers;
   status: 403;
 };
-type ImportGlossary404HttpError = {
+export type ImportGlossary404HttpError = {
   data: ErrorResponseNotFound;
   headers: Headers;
   status: 404;
@@ -562,13 +562,13 @@ type ImportGlossary404HttpError = {
  * @param id The id of the glossary to delete.
  * @throws DeleteGlossaryHttpError
  */
-declare function deleteGlossary(id: string, options?: ApiCallOptions): Promise<DeleteGlossaryHttpResponse>;
-type DeleteGlossaryHttpResponse = {
+export declare function deleteGlossary(id: string, options?: ApiCallOptions): Promise<DeleteGlossaryHttpResponse>;
+export type DeleteGlossaryHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteGlossaryHttpError = {
+export type DeleteGlossaryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -579,13 +579,13 @@ type DeleteGlossaryHttpError = {
  * @param id The id of the glossary to retrieve.
  * @throws GetGlossaryHttpError
  */
-declare function getGlossary(id: string, options?: ApiCallOptions): Promise<GetGlossaryHttpResponse>;
-type GetGlossaryHttpResponse = {
+export declare function getGlossary(id: string, options?: ApiCallOptions): Promise<GetGlossaryHttpResponse>;
+export type GetGlossaryHttpResponse = {
   data: Glossary;
   headers: Headers;
   status: 200;
 };
-type GetGlossaryHttpError = {
+export type GetGlossaryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -597,13 +597,13 @@ type GetGlossaryHttpError = {
  * @param body an object with the body content
  * @throws PatchGlossaryHttpError
  */
-declare function patchGlossary(id: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchGlossaryHttpResponse>;
-type PatchGlossaryHttpResponse = {
+export declare function patchGlossary(id: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchGlossaryHttpResponse>;
+export type PatchGlossaryHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchGlossaryHttpError = {
+export type PatchGlossaryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429;
@@ -615,13 +615,13 @@ type PatchGlossaryHttpError = {
  * @param body an object with the body content
  * @throws UpdateGlossaryHttpError
  */
-declare function updateGlossary(id: string, body: CreateGlossary, options?: ApiCallOptions): Promise<UpdateGlossaryHttpResponse>;
-type UpdateGlossaryHttpResponse = {
+export declare function updateGlossary(id: string, body: CreateGlossary, options?: ApiCallOptions): Promise<UpdateGlossaryHttpResponse>;
+export type UpdateGlossaryHttpResponse = {
   data: Glossary;
   headers: Headers;
   status: 200;
 };
-type UpdateGlossaryHttpError = {
+export type UpdateGlossaryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -632,13 +632,13 @@ type UpdateGlossaryHttpError = {
  * @param id The glossary id.
  * @throws ExportGlossaryHttpError
  */
-declare function exportGlossary(id: string, options?: ApiCallOptions): Promise<ExportGlossaryHttpResponse>;
-type ExportGlossaryHttpResponse = {
+export declare function exportGlossary(id: string, options?: ApiCallOptions): Promise<ExportGlossaryHttpResponse>;
+export type ExportGlossaryHttpResponse = {
   data: ExportGlossary;
   headers: Headers;
   status: 200;
 };
-type ExportGlossaryHttpError = {
+export type ExportGlossaryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -650,7 +650,7 @@ type ExportGlossaryHttpError = {
  * @param query an object with query parameters
  * @throws GetGlossaryCategoriesHttpError
  */
-declare function getGlossaryCategories(id: string, query: {
+export declare function getGlossaryCategories(id: string, query: {
   /** Optional parameter to request total count for query */
   countTotal?: boolean;
   /** The number of terms to get. */
@@ -662,14 +662,14 @@ declare function getGlossaryCategories(id: string, query: {
   /** Optional resource field name to sort on, eg. name. Can be prefixed with +/- to determine order, defaults to (+) ascending. */
   sort?: "description" | "+description" | "-description" | "name" | "+name" | "-name" | "update" | "+update" | "-update";
 }, options?: ApiCallOptions): Promise<GetGlossaryCategoriesHttpResponse>;
-type GetGlossaryCategoriesHttpResponse = {
+export type GetGlossaryCategoriesHttpResponse = {
   data: CategoriesResult;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetGlossaryCategoriesHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetGlossaryCategoriesHttpResponse>;
 };
-type GetGlossaryCategoriesHttpError = {
+export type GetGlossaryCategoriesHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -681,13 +681,13 @@ type GetGlossaryCategoriesHttpError = {
  * @param body an object with the body content
  * @throws CreateGlossaryCategoryHttpError
  */
-declare function createGlossaryCategory(id: string, body: CreateCategory, options?: ApiCallOptions): Promise<CreateGlossaryCategoryHttpResponse>;
-type CreateGlossaryCategoryHttpResponse = {
+export declare function createGlossaryCategory(id: string, body: CreateCategory, options?: ApiCallOptions): Promise<CreateGlossaryCategoryHttpResponse>;
+export type CreateGlossaryCategoryHttpResponse = {
   data: Category;
   headers: Headers;
   status: 201;
 };
-type CreateGlossaryCategoryHttpError = {
+export type CreateGlossaryCategoryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -699,13 +699,13 @@ type CreateGlossaryCategoryHttpError = {
  * @param categoryId The id for the category to delete. All subcategories are also deleted
  * @throws DeleteGlossaryCategoryHttpError
  */
-declare function deleteGlossaryCategory(id: string, categoryId: string, options?: ApiCallOptions): Promise<DeleteGlossaryCategoryHttpResponse>;
-type DeleteGlossaryCategoryHttpResponse = {
+export declare function deleteGlossaryCategory(id: string, categoryId: string, options?: ApiCallOptions): Promise<DeleteGlossaryCategoryHttpResponse>;
+export type DeleteGlossaryCategoryHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteGlossaryCategoryHttpError = {
+export type DeleteGlossaryCategoryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -717,13 +717,13 @@ type DeleteGlossaryCategoryHttpError = {
  * @param categoryId The category id.
  * @throws GetGlossaryCategoryHttpError
  */
-declare function getGlossaryCategory(id: string, categoryId: string, options?: ApiCallOptions): Promise<GetGlossaryCategoryHttpResponse>;
-type GetGlossaryCategoryHttpResponse = {
+export declare function getGlossaryCategory(id: string, categoryId: string, options?: ApiCallOptions): Promise<GetGlossaryCategoryHttpResponse>;
+export type GetGlossaryCategoryHttpResponse = {
   data: Category;
   headers: Headers;
   status: 200;
 };
-type GetGlossaryCategoryHttpError = {
+export type GetGlossaryCategoryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -736,13 +736,13 @@ type GetGlossaryCategoryHttpError = {
  * @param body an object with the body content
  * @throws PatchGlossaryCategoryHttpError
  */
-declare function patchGlossaryCategory(id: string, categoryId: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchGlossaryCategoryHttpResponse>;
-type PatchGlossaryCategoryHttpResponse = {
+export declare function patchGlossaryCategory(id: string, categoryId: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchGlossaryCategoryHttpResponse>;
+export type PatchGlossaryCategoryHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchGlossaryCategoryHttpError = {
+export type PatchGlossaryCategoryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429;
@@ -755,13 +755,13 @@ type PatchGlossaryCategoryHttpError = {
  * @param body an object with the body content
  * @throws UpdateGlossaryCategoryHttpError
  */
-declare function updateGlossaryCategory(id: string, categoryId: string, body: CreateCategory, options?: ApiCallOptions): Promise<UpdateGlossaryCategoryHttpResponse>;
-type UpdateGlossaryCategoryHttpResponse = {
+export declare function updateGlossaryCategory(id: string, categoryId: string, body: CreateCategory, options?: ApiCallOptions): Promise<UpdateGlossaryCategoryHttpResponse>;
+export type UpdateGlossaryCategoryHttpResponse = {
   data: Category;
   headers: Headers;
   status: 200;
 };
-type UpdateGlossaryCategoryHttpError = {
+export type UpdateGlossaryCategoryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -773,7 +773,7 @@ type UpdateGlossaryCategoryHttpError = {
  * @param query an object with query parameters
  * @throws GetGlossaryTermsHttpError
  */
-declare function getGlossaryTerms(id: string, query: {
+export declare function getGlossaryTerms(id: string, query: {
   /** Optional parameter to request total count for query */
   countTotal?: boolean;
   /** Optional SCIM filter to be used to filter terms
@@ -798,14 +798,14 @@ declare function getGlossaryTerms(id: string, query: {
   /** Optional resource field name to sort on, eg. name. Can be prefixed with +/- to determine order, defaults to (+) ascending. */
   sort?: "abbreviation" | "+abbreviation" | "-abbreviation" | "description" | "+description" | "-description" | "name" | "+name" | "-name" | "status" | "+status" | "-status" | "updated" | "+updated" | "-updated";
 }, options?: ApiCallOptions): Promise<GetGlossaryTermsHttpResponse>;
-type GetGlossaryTermsHttpResponse = {
+export type GetGlossaryTermsHttpResponse = {
   data: TermsResult;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetGlossaryTermsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetGlossaryTermsHttpResponse>;
 };
-type GetGlossaryTermsHttpError = {
+export type GetGlossaryTermsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -817,13 +817,13 @@ type GetGlossaryTermsHttpError = {
  * @param body an object with the body content
  * @throws CreateGlossaryTermHttpError
  */
-declare function createGlossaryTerm(id: string, body: CreateTerm, options?: ApiCallOptions): Promise<CreateGlossaryTermHttpResponse>;
-type CreateGlossaryTermHttpResponse = {
+export declare function createGlossaryTerm(id: string, body: CreateTerm, options?: ApiCallOptions): Promise<CreateGlossaryTermHttpResponse>;
+export type CreateGlossaryTermHttpResponse = {
   data: Term;
   headers: Headers;
   status: 201;
 };
-type CreateGlossaryTermHttpError = {
+export type CreateGlossaryTermHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -835,13 +835,13 @@ type CreateGlossaryTermHttpError = {
  * @param termId The term id.
  * @throws DeleteGlossaryTermHttpError
  */
-declare function deleteGlossaryTerm(id: string, termId: string, options?: ApiCallOptions): Promise<DeleteGlossaryTermHttpResponse>;
-type DeleteGlossaryTermHttpResponse = {
+export declare function deleteGlossaryTerm(id: string, termId: string, options?: ApiCallOptions): Promise<DeleteGlossaryTermHttpResponse>;
+export type DeleteGlossaryTermHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteGlossaryTermHttpError = {
+export type DeleteGlossaryTermHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -853,13 +853,13 @@ type DeleteGlossaryTermHttpError = {
  * @param termId The term id.
  * @throws GetGlossaryTermHttpError
  */
-declare function getGlossaryTerm(id: string, termId: string, options?: ApiCallOptions): Promise<GetGlossaryTermHttpResponse>;
-type GetGlossaryTermHttpResponse = {
+export declare function getGlossaryTerm(id: string, termId: string, options?: ApiCallOptions): Promise<GetGlossaryTermHttpResponse>;
+export type GetGlossaryTermHttpResponse = {
   data: Term;
   headers: Headers;
   status: 200;
 };
-type GetGlossaryTermHttpError = {
+export type GetGlossaryTermHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -872,13 +872,13 @@ type GetGlossaryTermHttpError = {
  * @param body an object with the body content
  * @throws PatchGlossaryTermHttpError
  */
-declare function patchGlossaryTerm(id: string, termId: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchGlossaryTermHttpResponse>;
-type PatchGlossaryTermHttpResponse = {
+export declare function patchGlossaryTerm(id: string, termId: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchGlossaryTermHttpResponse>;
+export type PatchGlossaryTermHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchGlossaryTermHttpError = {
+export type PatchGlossaryTermHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 412 | 429;
@@ -891,13 +891,13 @@ type PatchGlossaryTermHttpError = {
  * @param body an object with the body content
  * @throws UpdateGlossaryTermHttpError
  */
-declare function updateGlossaryTerm(id: string, termId: string, body: CreateTerm, options?: ApiCallOptions): Promise<UpdateGlossaryTermHttpResponse>;
-type UpdateGlossaryTermHttpResponse = {
+export declare function updateGlossaryTerm(id: string, termId: string, body: CreateTerm, options?: ApiCallOptions): Promise<UpdateGlossaryTermHttpResponse>;
+export type UpdateGlossaryTermHttpResponse = {
   data: Term;
   headers: Headers;
   status: 200;
 };
-type UpdateGlossaryTermHttpError = {
+export type UpdateGlossaryTermHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 412;
@@ -910,16 +910,16 @@ type UpdateGlossaryTermHttpError = {
  * @param query an object with query parameters
  * @throws ChangeGlossaryTermStatusHttpError
  */
-declare function changeGlossaryTermStatus(id: string, termId: string, query: {
+export declare function changeGlossaryTermStatus(id: string, termId: string, query: {
   /** The status to update to. */
   status: "draft" | "verified" | "deprecated";
 }, options?: ApiCallOptions): Promise<ChangeGlossaryTermStatusHttpResponse>;
-type ChangeGlossaryTermStatusHttpResponse = {
+export type ChangeGlossaryTermStatusHttpResponse = {
   data: Term;
   headers: Headers;
   status: 200;
 };
-type ChangeGlossaryTermStatusHttpError = {
+export type ChangeGlossaryTermStatusHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 412;
@@ -932,7 +932,7 @@ type ChangeGlossaryTermStatusHttpError = {
  * @param query an object with query parameters
  * @throws GetGlossaryTermLinksHttpError
  */
-declare function getGlossaryTermLinks(id: string, termId: string, query: {
+export declare function getGlossaryTermLinks(id: string, termId: string, query: {
   /** Optional parameter to request total count for query */
   countTotal?: boolean;
   /** Optional SCIM filter to be used to filter terms */
@@ -946,14 +946,14 @@ declare function getGlossaryTermLinks(id: string, termId: string, query: {
   /** Optional resource field name to sort on, eg. name. Can be prefixed with +/- to determine order, defaults to (+) ascending. */
   sort?: "type" | "+type" | "-type" | "subtype" | "+subtype" | "-subtype" | "created" | "+created" | "-created";
 }, options?: ApiCallOptions): Promise<GetGlossaryTermLinksHttpResponse>;
-type GetGlossaryTermLinksHttpResponse = {
+export type GetGlossaryTermLinksHttpResponse = {
   data: LinksResult;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetGlossaryTermLinksHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetGlossaryTermLinksHttpResponse>;
 };
-type GetGlossaryTermLinksHttpError = {
+export type GetGlossaryTermLinksHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -966,13 +966,13 @@ type GetGlossaryTermLinksHttpError = {
  * @param body an object with the body content
  * @throws CreateGlossaryTermLinkHttpError
  */
-declare function createGlossaryTermLink(id: string, termId: string, body: TermCreateLinksTo, options?: ApiCallOptions): Promise<CreateGlossaryTermLinkHttpResponse>;
-type CreateGlossaryTermLinkHttpResponse = {
+export declare function createGlossaryTermLink(id: string, termId: string, body: TermCreateLinksTo, options?: ApiCallOptions): Promise<CreateGlossaryTermLinkHttpResponse>;
+export type CreateGlossaryTermLinkHttpResponse = {
   data: TermLinksTo;
   headers: Headers;
   status: 201;
 };
-type CreateGlossaryTermLinkHttpError = {
+export type CreateGlossaryTermLinkHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 412;
@@ -985,7 +985,7 @@ type CreateGlossaryTermLinkHttpError = {
  * @param query an object with query parameters
  * @throws GetGlossaryTermRevisionsHttpError
  */
-declare function getGlossaryTermRevisions(id: string, termId: string, query: {
+export declare function getGlossaryTermRevisions(id: string, termId: string, query: {
   /** Optional parameter to request total count for query */
   countTotal?: boolean;
   /** The number of terms to get. */
@@ -997,14 +997,14 @@ declare function getGlossaryTermRevisions(id: string, termId: string, query: {
   /** Optional resource field name to sort on, eg. name. Can be prefixed with +/- to determine order, defaults to (+) ascending. */
   sort?: "update" | "+update" | "-update";
 }, options?: ApiCallOptions): Promise<GetGlossaryTermRevisionsHttpResponse>;
-type GetGlossaryTermRevisionsHttpResponse = {
+export type GetGlossaryTermRevisionsHttpResponse = {
   data: TermsResult;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetGlossaryTermRevisionsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetGlossaryTermRevisionsHttpResponse>;
 };
-type GetGlossaryTermRevisionsHttpError = {
+export type GetGlossaryTermRevisionsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -1012,8 +1012,8 @@ type GetGlossaryTermRevisionsHttpError = {
 /**
  * Clears the cache for glossaries api requests.
  */
-declare function clearCache(): void;
-type GlossariesAPI = {
+export declare function clearCache(): void;
+export type GlossariesAPI = {
   /**
    * Returns all glossaries.
    *
@@ -1220,4 +1220,4 @@ type GlossariesAPI = {
  */
 declare const glossariesExport: GlossariesAPI;
 //#endregion
-export { AtlanEntity, AtlanEntityAttributes, AtlanGlossary, AtlanRelationEntity, AtlanRelationshipAttributes, AtlanResourceLink, AtlanTermHeader, AtlasCategory, AtlasGlossary, AtlasTerm, CategoriesResult, Category, ChangeGlossaryTermStatusHttpError, ChangeGlossaryTermStatusHttpResponse, CreateCategory, CreateGlossary, CreateGlossaryCategoryHttpError, CreateGlossaryCategoryHttpResponse, CreateGlossaryHttpError, CreateGlossaryHttpResponse, CreateGlossaryTermHttpError, CreateGlossaryTermHttpResponse, CreateGlossaryTermLinkHttpError, CreateGlossaryTermLinkHttpResponse, CreateTerm, DeleteGlossaryCategoryHttpError, DeleteGlossaryCategoryHttpResponse, DeleteGlossaryHttpError, DeleteGlossaryHttpResponse, DeleteGlossaryTermHttpError, DeleteGlossaryTermHttpResponse, ErrorResponse, ErrorResponseBadRequest, ErrorResponseCode, ErrorResponseForbidden, ErrorResponseNotFound, ExportCategory, ExportGlossary, ExportGlossaryHttpError, ExportGlossaryHttpResponse, ExportTerm, GetGlossariesHttpError, GetGlossariesHttpResponse, GetGlossaryCategoriesHttpError, GetGlossaryCategoriesHttpResponse, GetGlossaryCategoryHttpError, GetGlossaryCategoryHttpResponse, GetGlossaryHttpError, GetGlossaryHttpResponse, GetGlossaryTermHttpError, GetGlossaryTermHttpResponse, GetGlossaryTermLinksHttpError, GetGlossaryTermLinksHttpResponse, GetGlossaryTermRevisionsHttpError, GetGlossaryTermRevisionsHttpResponse, GetGlossaryTermsHttpError, GetGlossaryTermsHttpResponse, GlossariesAPI, GlossariesResult, Glossary, ImportCategory, ImportGlossary400HttpError, ImportGlossary403HttpError, ImportGlossary404HttpError, ImportGlossaryHttpError, ImportGlossaryHttpResponse, ImportOwner, ImportTerm, JSONPatch, JSONPatchArray, LinksResult, PageLink, PageLinks, PatchGlossaryCategoryHttpError, PatchGlossaryCategoryHttpResponse, PatchGlossaryHttpError, PatchGlossaryHttpResponse, PatchGlossaryTermHttpError, PatchGlossaryTermHttpResponse, QlikGlossary, ResultMeta, StewardDetail, Term, TermCreateLinksTo, TermLinksTo, TermRelatesTo, TermStatus, TermTemplate, TermsResult, UpdateGlossaryCategoryHttpError, UpdateGlossaryCategoryHttpResponse, UpdateGlossaryHttpError, UpdateGlossaryHttpResponse, UpdateGlossaryTermHttpError, UpdateGlossaryTermHttpResponse, changeGlossaryTermStatus, clearCache, createGlossary, createGlossaryCategory, createGlossaryTerm, createGlossaryTermLink, glossariesExport as default, deleteGlossary, deleteGlossaryCategory, deleteGlossaryTerm, exportGlossary, getGlossaries, getGlossary, getGlossaryCategories, getGlossaryCategory, getGlossaryTerm, getGlossaryTermLinks, getGlossaryTermRevisions, getGlossaryTerms, importGlossary, patchGlossary, patchGlossaryCategory, patchGlossaryTerm, updateGlossary, updateGlossaryCategory, updateGlossaryTerm };
+export { glossariesExport as default };

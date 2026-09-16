@@ -1,7 +1,7 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/collections.d.ts
-type CollectionByIdPatch = {
+export type CollectionByIdPatch = {
   /** The operation to be performed. */
   op: "replace";
   /** Field of collection to be patched. */
@@ -12,12 +12,12 @@ type CollectionByIdPatch = {
    * - type: The type of the collection. Via this path the collection type can be toggled between "private" and "publicgoverned". */
   value: string;
 }[];
-type CollectionTypes = "private" | "public" | "publicgoverned";
-type CollectionsAddCollectionItemRequestBody = {
+export type CollectionTypes = "private" | "public" | "publicgoverned";
+export type CollectionsAddCollectionItemRequestBody = {
   /** The item's unique identifier. */
   id: string;
 };
-type CollectionsCreateCollectionRequestBody = {
+export type CollectionsCreateCollectionRequestBody = {
   description?: string;
   /** For `public` collections (tags), if name already exists in the tenant as a `public` collection, this call will fail with a `409` response. */
   name: string;
@@ -26,27 +26,27 @@ type CollectionsCreateCollectionRequestBody = {
 /**
  * ListCollectionItemsResponseBody result type
  */
-type CollectionsListCollectionItemsResponseBody = {
+export type CollectionsListCollectionItemsResponseBody = {
   data: ItemResultResponseBody[];
 };
 /**
  * ListCollectionsResponseBody result type
  */
-type CollectionsListCollectionsResponseBody = {
+export type CollectionsListCollectionsResponseBody = {
   data: CollectionResultResponseBody[];
   links: CollectionsLinksResponseBody;
 };
-type CollectionsUpdateCollectionRequestBody = {
+export type CollectionsUpdateCollectionRequestBody = {
   description?: string;
   name?: string;
 };
-type ErrorResponseBody = {
+export type ErrorResponseBody = {
   errors?: ServiceError[];
 };
-type Link = {
+export type Link = {
   href?: string;
 };
-type ServiceError = {
+export type ServiceError = {
   /** Code is a unique identifier for this error class. */
   code?: string;
   /** Detail is a human-readable explanation specific to this occurrence of the problem. */
@@ -55,21 +55,21 @@ type ServiceError = {
   /** Title is the name of this class of errors. */
   title?: string;
 };
-type CollectionLinksResponseBody = {
+export type CollectionLinksResponseBody = {
   items?: Link;
   self?: Link;
 };
 /**
  * Collection metadata and computed fields.
  */
-type CollectionMetaResponseBody = {
+export type CollectionMetaResponseBody = {
   /** Multiple items. */
   items?: ItemsResultResponseBody;
 };
 /**
  * A collection.
  */
-type CollectionResultResponseBody = {
+export type CollectionResultResponseBody = {
   /** The RFC3339 datetime when the collection was created. */
   createdAt: string;
   /** The ID of the user who created the collection. This property is only populated if the JWT contains a userId. */
@@ -93,13 +93,13 @@ type CollectionResultResponseBody = {
   /** The ID of the user who last updated the collection. This property is only populated if the JWT contains a userId. */
   updaterId?: string;
 };
-type CollectionsLinksResponseBody = {
+export type CollectionsLinksResponseBody = {
   item?: Link;
   next?: Link;
   prev?: Link;
   self?: Link;
 };
-type ItemLinksResponseBody = {
+export type ItemLinksResponseBody = {
   collections?: Link;
   open?: Link;
   qvPlugin?: Link;
@@ -109,7 +109,7 @@ type ItemLinksResponseBody = {
 /**
  * Item metadata and computed fields.
  */
-type ItemMetaResponseBody = {
+export type ItemMetaResponseBody = {
   /** The actions that the user can perform on the item. */
   actions: string[];
   /** An array of collections that the item is part of. */
@@ -122,11 +122,11 @@ type ItemMetaResponseBody = {
 /**
  * The case-sensitive string defining the item's type.
  */
-type ItemResourceTypeEnum = "app" | "qlikview" | "qvapp" | "genericlink" | "sharingservicetask" | "note" | "dataasset" | "dataset" | "automation" | "automl-experiment" | "automl-deployment" | "assistant" | "dataproduct" | "dataqualityrule" | "glossary" | "knowledgebase" | "script" | "semantictype" | "page";
+export type ItemResourceTypeEnum = "app" | "qlikview" | "qvapp" | "genericlink" | "sharingservicetask" | "note" | "dataasset" | "dataset" | "automation" | "automl-experiment" | "automl-deployment" | "assistant" | "dataproduct" | "dataqualityrule" | "glossary" | "knowledgebase" | "script" | "semantictype" | "page";
 /**
  * An item.
  */
-type ItemResultResponseBody = {
+export type ItemResultResponseBody = {
   /** The actions that the user can perform on the item. */
   actions: string[];
   /** The ID of the collections that the item has been added to. */
@@ -180,13 +180,13 @@ type ItemResultResponseBody = {
 /**
  * Holds basic information about a tag or collection.
  */
-type ItemTagResponseBody = {
+export type ItemTagResponseBody = {
   /** The ID of the tag/collection. */
   id: string;
   /** The name of the tag/collection. */
   name: string;
 };
-type ItemViewsResponseBody = {
+export type ItemViewsResponseBody = {
   /** Total number of views the resource got during the last 28 days. */
   total?: number;
   /** Trend in views over the last 4 weeks. The trend value is a float number representing a linear regression slope (the x-coefficient) calculated from the weekly unique users views in the preceding 4 weeks. */
@@ -197,7 +197,7 @@ type ItemViewsResponseBody = {
   usedBy?: number;
   week?: ItemViewsWeeksResponseBody[];
 };
-type ItemViewsWeeksResponseBody = {
+export type ItemViewsWeeksResponseBody = {
   /** The RFC3339 datetime representing the start of the referenced week. */
   start?: string;
   /** Total number of views the resource got during the referenced week. */
@@ -205,13 +205,13 @@ type ItemViewsWeeksResponseBody = {
   /** Number of unique users who viewed the resource during the referenced week. */
   unique?: number;
 };
-type ItemsLinksResponseBody = {
+export type ItemsLinksResponseBody = {
   collection?: Link;
   next?: Link;
   prev?: Link;
   self?: Link;
 };
-type ItemsResourceSizeResponseBody = {
+export type ItemsResourceSizeResponseBody = {
   /** Size of the app on disk in bytes. */
   appFile?: number;
   /** Size of the app in memory in bytes. */
@@ -220,11 +220,11 @@ type ItemsResourceSizeResponseBody = {
 /**
  * Multiple items.
  */
-type ItemsResultResponseBody = {
+export type ItemsResultResponseBody = {
   data: ItemResultResponseBody[];
   links: ItemsLinksResponseBody;
 };
-type Meta = {
+export type Meta = {
   /** Further explanation of the error */
   explain?: unknown;
   /** Is the error a server-side fault? */
@@ -240,7 +240,7 @@ type Meta = {
  * @param query an object with query parameters
  * @throws GetCollectionsHttpError
  */
-declare function getCollections(query: {
+export declare function getCollections(query: {
   /** The case-sensitive string used to search for a resource by creatorId. */
   creatorId?: string;
   /** The collection's unique identifier. */
@@ -268,14 +268,14 @@ declare function getCollections(query: {
   /** A comma-separated case-sensitive string used to filter by multiple types. */
   types?: CollectionTypes[];
 }, options?: ApiCallOptions): Promise<GetCollectionsHttpResponse>;
-type GetCollectionsHttpResponse = {
+export type GetCollectionsHttpResponse = {
   data: CollectionsListCollectionsResponseBody;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetCollectionsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetCollectionsHttpResponse>;
 };
-type GetCollectionsHttpError = {
+export type GetCollectionsHttpError = {
   data: ErrorResponseBody;
   headers: Headers;
   status: 400 | 401 | 500;
@@ -286,13 +286,13 @@ type GetCollectionsHttpError = {
  * @param body an object with the body content
  * @throws CreateCollectionHttpError
  */
-declare function createCollection(body: CollectionsCreateCollectionRequestBody, options?: ApiCallOptions): Promise<CreateCollectionHttpResponse>;
-type CreateCollectionHttpResponse = {
+export declare function createCollection(body: CollectionsCreateCollectionRequestBody, options?: ApiCallOptions): Promise<CreateCollectionHttpResponse>;
+export type CreateCollectionHttpResponse = {
   data: CollectionResultResponseBody;
   headers: Headers;
   status: 201;
 };
-type CreateCollectionHttpError = {
+export type CreateCollectionHttpError = {
   data: ErrorResponseBody;
   headers: Headers;
   status: 400 | 401 | 403 | 409 | 500;
@@ -302,13 +302,13 @@ type CreateCollectionHttpError = {
  *
  * @throws GetFavoritesCollectionHttpError
  */
-declare function getFavoritesCollection(options?: ApiCallOptions): Promise<GetFavoritesCollectionHttpResponse>;
-type GetFavoritesCollectionHttpResponse = {
+export declare function getFavoritesCollection(options?: ApiCallOptions): Promise<GetFavoritesCollectionHttpResponse>;
+export type GetFavoritesCollectionHttpResponse = {
   data: CollectionResultResponseBody;
   headers: Headers;
   status: 200;
 };
-type GetFavoritesCollectionHttpError = {
+export type GetFavoritesCollectionHttpError = {
   data: ErrorResponseBody;
   headers: Headers;
   status: 401 | 404 | 500;
@@ -319,13 +319,13 @@ type GetFavoritesCollectionHttpError = {
  * @param collectionId The collection's unique identifier.
  * @throws DeleteCollectionHttpError
  */
-declare function deleteCollection(collectionId: string, options?: ApiCallOptions): Promise<DeleteCollectionHttpResponse>;
-type DeleteCollectionHttpResponse = {
+export declare function deleteCollection(collectionId: string, options?: ApiCallOptions): Promise<DeleteCollectionHttpResponse>;
+export type DeleteCollectionHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteCollectionHttpError = {
+export type DeleteCollectionHttpError = {
   data: ErrorResponseBody;
   headers: Headers;
   status: 401 | 404 | 500;
@@ -336,13 +336,13 @@ type DeleteCollectionHttpError = {
  * @param collectionId The collection's unique identifier.
  * @throws GetCollectionHttpError
  */
-declare function getCollection(collectionId: string, options?: ApiCallOptions): Promise<GetCollectionHttpResponse>;
-type GetCollectionHttpResponse = {
+export declare function getCollection(collectionId: string, options?: ApiCallOptions): Promise<GetCollectionHttpResponse>;
+export type GetCollectionHttpResponse = {
   data: CollectionResultResponseBody;
   headers: Headers;
   status: 200;
 };
-type GetCollectionHttpError = {
+export type GetCollectionHttpError = {
   data: ErrorResponseBody;
   headers: Headers;
   status: 400 | 401 | 404 | 500;
@@ -354,13 +354,13 @@ type GetCollectionHttpError = {
  * @param body an object with the body content
  * @throws PatchCollectionHttpError
  */
-declare function patchCollection(collectionId: string, body: CollectionByIdPatch, options?: ApiCallOptions): Promise<PatchCollectionHttpResponse>;
-type PatchCollectionHttpResponse = {
+export declare function patchCollection(collectionId: string, body: CollectionByIdPatch, options?: ApiCallOptions): Promise<PatchCollectionHttpResponse>;
+export type PatchCollectionHttpResponse = {
   data: CollectionResultResponseBody;
   headers: Headers;
   status: 200;
 };
-type PatchCollectionHttpError = {
+export type PatchCollectionHttpError = {
   data: ErrorResponseBody;
   headers: Headers;
   status: 400 | 401 | 404 | 409 | 500;
@@ -372,13 +372,13 @@ type PatchCollectionHttpError = {
  * @param body an object with the body content
  * @throws UpdateCollectionHttpError
  */
-declare function updateCollection(collectionId: string, body: CollectionsUpdateCollectionRequestBody, options?: ApiCallOptions): Promise<UpdateCollectionHttpResponse>;
-type UpdateCollectionHttpResponse = {
+export declare function updateCollection(collectionId: string, body: CollectionsUpdateCollectionRequestBody, options?: ApiCallOptions): Promise<UpdateCollectionHttpResponse>;
+export type UpdateCollectionHttpResponse = {
   data: CollectionResultResponseBody;
   headers: Headers;
   status: 200;
 };
-type UpdateCollectionHttpError = {
+export type UpdateCollectionHttpError = {
   data: ErrorResponseBody;
   headers: Headers;
   status: 400 | 401 | 404 | 409 | 500;
@@ -390,7 +390,7 @@ type UpdateCollectionHttpError = {
  * @param query an object with query parameters
  * @throws GetCollectionItemsHttpError
  */
-declare function getCollectionItems(collectionId: string, query: {
+export declare function getCollectionItems(collectionId: string, query: {
   /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
   limit?: number;
   /** The case-insensitive string used to search for a resource by name. */
@@ -417,12 +417,12 @@ declare function getCollectionItems(collectionId: string, query: {
   /** The space's unique identifier (supports \'personal\' as spaceId). */
   spaceId?: string;
 }, options?: ApiCallOptions): Promise<GetCollectionItemsHttpResponse>;
-type GetCollectionItemsHttpResponse = {
+export type GetCollectionItemsHttpResponse = {
   data: CollectionsListCollectionItemsResponseBody;
   headers: Headers;
   status: 200;
 };
-type GetCollectionItemsHttpError = {
+export type GetCollectionItemsHttpError = {
   data: ErrorResponseBody;
   headers: Headers;
   status: 400 | 401 | 404 | 500;
@@ -434,13 +434,13 @@ type GetCollectionItemsHttpError = {
  * @param body an object with the body content
  * @throws AddCollectionItemHttpError
  */
-declare function addCollectionItem(collectionId: string, body: CollectionsAddCollectionItemRequestBody, options?: ApiCallOptions): Promise<AddCollectionItemHttpResponse>;
-type AddCollectionItemHttpResponse = {
+export declare function addCollectionItem(collectionId: string, body: CollectionsAddCollectionItemRequestBody, options?: ApiCallOptions): Promise<AddCollectionItemHttpResponse>;
+export type AddCollectionItemHttpResponse = {
   data: ItemResultResponseBody;
   headers: Headers;
   status: 201;
 };
-type AddCollectionItemHttpError = {
+export type AddCollectionItemHttpError = {
   data: ErrorResponseBody;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500;
@@ -452,13 +452,13 @@ type AddCollectionItemHttpError = {
  * @param itemId The item's unique identifier.
  * @throws DeleteCollectionItemHttpError
  */
-declare function deleteCollectionItem(collectionId: string, itemId: string, options?: ApiCallOptions): Promise<DeleteCollectionItemHttpResponse>;
-type DeleteCollectionItemHttpResponse = {
+export declare function deleteCollectionItem(collectionId: string, itemId: string, options?: ApiCallOptions): Promise<DeleteCollectionItemHttpResponse>;
+export type DeleteCollectionItemHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteCollectionItemHttpError = {
+export type DeleteCollectionItemHttpError = {
   data: ErrorResponseBody;
   headers: Headers;
   status: 400 | 401 | 404 | 500;
@@ -470,13 +470,13 @@ type DeleteCollectionItemHttpError = {
  * @param itemId The item's unique identifier.
  * @throws GetCollectionItemHttpError
  */
-declare function getCollectionItem(collectionId: string, itemId: string, options?: ApiCallOptions): Promise<GetCollectionItemHttpResponse>;
-type GetCollectionItemHttpResponse = {
+export declare function getCollectionItem(collectionId: string, itemId: string, options?: ApiCallOptions): Promise<GetCollectionItemHttpResponse>;
+export type GetCollectionItemHttpResponse = {
   data: ItemResultResponseBody;
   headers: Headers;
   status: 200;
 };
-type GetCollectionItemHttpError = {
+export type GetCollectionItemHttpError = {
   data: ErrorResponseBody;
   headers: Headers;
   status: 400 | 401 | 404 | 500;
@@ -484,8 +484,8 @@ type GetCollectionItemHttpError = {
 /**
  * Clears the cache for collections api requests.
  */
-declare function clearCache(): void;
-type CollectionsAPI = {
+export declare function clearCache(): void;
+export type CollectionsAPI = {
   /**
    * Retrieves the collections that the user has access to. This endpoint does not return the user's favorites collection, which can be retrieved with `/v1/collections/favorites`.
    *
@@ -578,4 +578,4 @@ type CollectionsAPI = {
  */
 declare const collectionsExport: CollectionsAPI;
 //#endregion
-export { AddCollectionItemHttpError, AddCollectionItemHttpResponse, CollectionByIdPatch, CollectionLinksResponseBody, CollectionMetaResponseBody, CollectionResultResponseBody, CollectionTypes, CollectionsAPI, CollectionsAddCollectionItemRequestBody, CollectionsCreateCollectionRequestBody, CollectionsLinksResponseBody, CollectionsListCollectionItemsResponseBody, CollectionsListCollectionsResponseBody, CollectionsUpdateCollectionRequestBody, CreateCollectionHttpError, CreateCollectionHttpResponse, DeleteCollectionHttpError, DeleteCollectionHttpResponse, DeleteCollectionItemHttpError, DeleteCollectionItemHttpResponse, ErrorResponseBody, GetCollectionHttpError, GetCollectionHttpResponse, GetCollectionItemHttpError, GetCollectionItemHttpResponse, GetCollectionItemsHttpError, GetCollectionItemsHttpResponse, GetCollectionsHttpError, GetCollectionsHttpResponse, GetFavoritesCollectionHttpError, GetFavoritesCollectionHttpResponse, ItemLinksResponseBody, ItemMetaResponseBody, ItemResourceTypeEnum, ItemResultResponseBody, ItemTagResponseBody, ItemViewsResponseBody, ItemViewsWeeksResponseBody, ItemsLinksResponseBody, ItemsResourceSizeResponseBody, ItemsResultResponseBody, Link, Meta, PatchCollectionHttpError, PatchCollectionHttpResponse, ServiceError, UpdateCollectionHttpError, UpdateCollectionHttpResponse, addCollectionItem, clearCache, createCollection, collectionsExport as default, deleteCollection, deleteCollectionItem, getCollection, getCollectionItem, getCollectionItems, getCollections, getFavoritesCollection, patchCollection, updateCollection };
+export { collectionsExport as default };

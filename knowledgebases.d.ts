@@ -1,10 +1,10 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/knowledgebases.d.ts
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
  */
-type JSONPatch = {
+export type JSONPatch = {
   /** The operation to be performed. */
   op: "REPLACE";
   /** A JSON Pointer. */
@@ -26,8 +26,8 @@ type JSONPatch = {
  *   }
  * ]
  */
-type JSONPatchArray = JSONPatch[];
-type Chunk = {
+export type JSONPatchArray = JSONPatch[];
+export type Chunk = {
   /** Metadata about the chunk */
   chunkMeta: KbChunkMeta;
   /** search method for the chunk, e.g. `semantic search`, `keyword search` or `semantic and keyword search` */
@@ -39,7 +39,7 @@ type Chunk = {
   /** Score from keyword search */
   tfidfScore?: number;
 };
-type Chunking = {
+export type Chunking = {
   /** Allows to keep or remove separators used */
   keepSeparator: boolean;
   /** Chunk overlap, should be less than size */
@@ -51,7 +51,7 @@ type Chunking = {
   /** Chunking strategy */
   type: string;
 };
-type ContentSummary = {
+export type ContentSummary = {
   effectivePages: number;
   fileCount: number;
   fileSize: number;
@@ -60,14 +60,14 @@ type ContentSummary = {
 /**
  * Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided.
  */
-type CreateDataSource = {
+export type CreateDataSource = {
   /** Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided. */
   fileConfig?: DataSourceFileConfig;
   /** Name of the datasource */
   name: string;
   type: "file" | "web" | "database";
 };
-type CreateKnowledgeBase = {
+export type CreateKnowledgeBase = {
   /** User opt in to advanced parsing and chunking pipeline. Default is false, which will run legacy parsing and chunking. */
   advancedIndexing?: boolean;
   /** Description of the knowledgebase */
@@ -84,7 +84,7 @@ type CreateKnowledgeBase = {
 /**
  * Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided.
  */
-type DataSource = {
+export type DataSource = {
   chunking?: Chunking;
   contentSummary: ContentSummary;
   /** Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided. */
@@ -103,7 +103,7 @@ type DataSource = {
 /**
  * Include or exclude pattern
  */
-type DataSourceCrawlPattern = {
+export type DataSourceCrawlPattern = {
   /** Regex patterna to filter links on */
   pattern: string;
   /** include or exclude */
@@ -112,7 +112,7 @@ type DataSourceCrawlPattern = {
 /**
  * Specification on where to fetch the files for. This is required when the type == 'file'. Only one of path and files can be set. Path takes precedence if both are provided.
  */
-type DataSourceFileConfig = {
+export type DataSourceFileConfig = {
   /** connection id to be used to retrieve the raw data */
   connectionId: string;
   /** Pattern matching links to crawl */
@@ -128,7 +128,7 @@ type DataSourceFileConfig = {
 /**
  * Scope for the file crawler.
  */
-type DataSourceFileCrawlScope = {
+export type DataSourceFileCrawlScope = {
   /** The number of levels of sub folders that should be considered */
   depth: number;
   /** list of file extensions to be considered */
@@ -145,11 +145,11 @@ type DataSourceFileCrawlScope = {
 /**
  * Response when a datasource sync is started, contains the sync Id
  */
-type DataSourceSync = {
+export type DataSourceSync = {
   /** Unique identifier of the sync */
   id: string;
 };
-type DataSourceSyncStatus = {
+export type DataSourceSyncStatus = {
   /** Datetime when the sync task was completed */
   readonly completedAt: string;
   /** sync Id */
@@ -162,7 +162,7 @@ type DataSourceSyncStatus = {
 /**
  * Summary of documents processed
  */
-type DocStats = {
+export type DocStats = {
   readonly added: number;
   readonly deleted: number;
   readonly deltaBytes: number;
@@ -173,14 +173,14 @@ type DocStats = {
   readonly totalBytesProcessed: number;
   readonly updated: number;
 };
-type DownloadFile = {
+export type DownloadFile = {
   /** file path to the file to downlaod. */
   path: string;
 };
 /**
  * Download information for the file.
  */
-type DownloadFileResponse = {
+export type DownloadFileResponse = {
   /** Size of downloaded file. */
   fileSize: number;
   /** Date for last time the file was modified. */
@@ -194,18 +194,18 @@ type DownloadFileResponse = {
   /** URL to download the file. */
   url: string;
 };
-type Duration = {
+export type Duration = {
   readonly chunk: number;
   readonly download: number;
   readonly embed: number;
   readonly parse: number;
   readonly store: number;
 };
-type ErrorResponse = {
+export type ErrorResponse = {
   errors?: ErrorResponseCode[];
   traceId?: string;
 };
-type ErrorResponseCode = {
+export type ErrorResponseCode = {
   /** Custom error codes
    * * AE-1 - Internal processing error
    * * AE-2 - Incorrect request
@@ -218,12 +218,12 @@ type ErrorResponseCode = {
   detail?: string;
   title?: string;
 };
-type ErrorResponseCodeCopy = {
+export type ErrorResponseCodeCopy = {
   code?: string;
   detail?: string;
   title?: string;
 };
-type ErrorResponseCopy = {
+export type ErrorResponseCopy = {
   errors?: ErrorResponseCodeCopy[];
   traceId?: string;
 };
@@ -232,11 +232,11 @@ type ErrorResponseCopy = {
  * @example
  * "parse_failed"
  */
-type IndexingErrorCode = "unknown" | "file_size_exceeded" | "download_failed" | "parse_failed" | "parse_timeout" | "chunk_failed" | "chunk_timeout" | "guardrail_blocked" | "unsupported_file" | "index_verification_failed" | "file_not_found" | "document_has_macros" | "scan_failed" | "pages_limit_exceeded" | "pages_enforcement_failed" | "governance_budget_exceeded";
+export type IndexingErrorCode = "unknown" | "file_size_exceeded" | "download_failed" | "parse_failed" | "parse_timeout" | "chunk_failed" | "chunk_timeout" | "guardrail_blocked" | "unsupported_file" | "index_verification_failed" | "file_not_found" | "document_has_macros" | "scan_failed" | "pages_limit_exceeded" | "pages_enforcement_failed" | "governance_budget_exceeded";
 /**
  * Metadata about the chunk
  */
-type KbChunkMeta = {
+export type KbChunkMeta = {
   /** chunkId */
   chunkId: string;
   /** datasourceId of chunk */
@@ -248,10 +248,10 @@ type KbChunkMeta = {
   /** source of chunk */
   source: string;
 };
-type KnowledgeBase = KnowledgeBaseLight & {
+export type KnowledgeBase = KnowledgeBaseLight & {
   datasources?: DataSource[];
 };
-type KnowledgeBaseLight = {
+export type KnowledgeBaseLight = {
   /** User opt in to advanced parsing and chunking pipeline. Default is false, which will run legacy parsing and chunking. */
   advancedIndexing?: boolean;
   contentSummary: ContentSummary;
@@ -282,29 +282,29 @@ type KnowledgeBaseLight = {
   /** The unique identifier of the user who last updated the knowledgebase */
   readonly updatedBy: string;
 };
-type KnowledgeBasesResult = {
+export type KnowledgeBasesResult = {
   data: KnowledgeBaseLight[];
   links?: PageLinks;
 };
-type PageLink = {
+export type PageLink = {
   href?: string;
 };
-type PageLinks = {
+export type PageLinks = {
   next?: PageLink;
   prev?: PageLink;
   self?: PageLink;
 };
-type ResultMeta = {
+export type ResultMeta = {
   countTotal?: number;
 };
-type Schedule = {
+export type Schedule = {
   calendars?: ScheduleCalendar[];
   intervals?: ScheduleInterval[];
 };
 /**
  * An event specification relative to the calendar, similar to a traditional cron specification.
  */
-type ScheduleCalendar = {
+export type ScheduleCalendar = {
   /** Description of the intention of this schedule */
   comment: string;
   /** DayOfMonth range to match (1-31). Default matches all days */
@@ -325,7 +325,7 @@ type ScheduleCalendar = {
 /**
  * For example, an `every` of 1 hour with `offset` of zero would match every hour, on the hour. The same `every` but an `offset` of 19 minutes would match every `xx:19:00`.
  */
-type ScheduleInterval = {
+export type ScheduleInterval = {
   /** The period to repeat the interval */
   every: string;
   /** A fixed offset added to the intervals period. Optional, defaults to 0 */
@@ -334,7 +334,7 @@ type ScheduleInterval = {
 /**
  * ScheduleRange represents a set of integer values, used to match fields of a calendar time in scheduleCalendar. If end < start, then end is interpreted as equal to start
  */
-type ScheduleRange = {
+export type ScheduleRange = {
   /** End of the range (inclusive). If end < start, then end is interpreted as equal to start. Optional, defaulted to Start */
   end?: number;
   /** Start of the range (inclusive) */
@@ -342,7 +342,7 @@ type ScheduleRange = {
   /** Step to be take between each value. Optional, defaulted to 1 */
   step?: number;
 };
-type ScheduleWithManifest = {
+export type ScheduleWithManifest = {
   calendars: ScheduleCalendar[];
   datasourceId?: string;
   intervals?: ScheduleInterval[];
@@ -351,7 +351,7 @@ type ScheduleWithManifest = {
   spaceId?: string;
   tenantId: string;
 };
-type SearchRequest = {
+export type SearchRequest = {
   /** Query text or question to search. */
   prompt: string;
   /** Search mode to use.   Allowed values: `SIMPLE` and `FULL`.   Default: `SIMPLE`. */
@@ -359,14 +359,14 @@ type SearchRequest = {
   /** Number of chunks to return in results. */
   topN?: number;
 };
-type SearchResponse = {
+export type SearchResponse = {
   /** Retrieved document chunks */
   chunks: Chunk[];
 };
 /**
  * Aggregated view of all failures of a single category within one sync.
  */
-type SyncErrorSummary = {
+export type SyncErrorSummary = {
   /** Stable, machine-readable error category shared across services and the UI. */
   code: IndexingErrorCode;
   /** Number of files that failed with this error code. */
@@ -376,7 +376,7 @@ type SyncErrorSummary = {
   /** Up to selectedErrorsCount example sources that failed with this code. */
   sources?: string[];
 };
-type SyncHistory = {
+export type SyncHistory = {
   /** Datetime when the sync task was completed */
   readonly completedAt?: string;
   /** Connection id that the datasource used */
@@ -398,7 +398,7 @@ type SyncHistory = {
   /** Datasource trigger type, was it manually or automatically synced */
   triggerType: string;
 };
-type SyncHistoryDetails = {
+export type SyncHistoryDetails = {
   /** acion performed */
   readonly action: "add" | "delete" | "update";
   /** chunk size */
@@ -429,7 +429,7 @@ type SyncHistoryDetails = {
   /** Datetime when the sync task was executed */
   readonly syncedAt: string;
 };
-type SyncHistoryResult = {
+export type SyncHistoryResult = {
   data: SyncHistory[];
   links?: PageLinks;
   meta?: ResultMeta;
@@ -440,7 +440,7 @@ type SyncHistoryResult = {
  * @param query an object with query parameters
  * @throws GetKnowledgebasesHttpError
  */
-declare function getKnowledgebases(query: {
+export declare function getKnowledgebases(query: {
   /** @deprecated
    * Optional parameter to request total count for query */
   countTotal?: boolean;
@@ -453,14 +453,14 @@ declare function getKnowledgebases(query: {
   /** Optional resource field name to sort on, case insensitive, eg. name. Can be prefixed with - to set descending order, defaults to ascending. */
   sort?: "NAME" | "-NAME" | "DESCRIPTION" | "-DESCRIPTION" | "CREATED" | "-CREATED" | "UPDATED" | "-UPDATED";
 }, options?: ApiCallOptions): Promise<GetKnowledgebasesHttpResponse>;
-type GetKnowledgebasesHttpResponse = {
+export type GetKnowledgebasesHttpResponse = {
   data: KnowledgeBasesResult;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetKnowledgebasesHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetKnowledgebasesHttpResponse>;
 };
-type GetKnowledgebasesHttpError = {
+export type GetKnowledgebasesHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403;
@@ -471,13 +471,13 @@ type GetKnowledgebasesHttpError = {
  * @param body an object with the body content
  * @throws CreateKnowledgebaseHttpError
  */
-declare function createKnowledgebase(body: CreateKnowledgeBase, options?: ApiCallOptions): Promise<CreateKnowledgebaseHttpResponse>;
-type CreateKnowledgebaseHttpResponse = {
+export declare function createKnowledgebase(body: CreateKnowledgeBase, options?: ApiCallOptions): Promise<CreateKnowledgebaseHttpResponse>;
+export type CreateKnowledgebaseHttpResponse = {
   data: KnowledgeBaseLight;
   headers: Headers;
   status: 201;
 };
-type CreateKnowledgebaseHttpError = {
+export type CreateKnowledgebaseHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403;
@@ -488,13 +488,13 @@ type CreateKnowledgebaseHttpError = {
  * @param id The id of the knowledgebase to delete.
  * @throws DeleteKnowledgebaseHttpError
  */
-declare function deleteKnowledgebase(id: string, options?: ApiCallOptions): Promise<DeleteKnowledgebaseHttpResponse>;
-type DeleteKnowledgebaseHttpResponse = {
+export declare function deleteKnowledgebase(id: string, options?: ApiCallOptions): Promise<DeleteKnowledgebaseHttpResponse>;
+export type DeleteKnowledgebaseHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteKnowledgebaseHttpError = {
+export type DeleteKnowledgebaseHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -505,13 +505,13 @@ type DeleteKnowledgebaseHttpError = {
  * @param id The id of the knowledgebase to retrieve.
  * @throws GetKnowledgebaseHttpError
  */
-declare function getKnowledgebase(id: string, options?: ApiCallOptions): Promise<GetKnowledgebaseHttpResponse>;
-type GetKnowledgebaseHttpResponse = {
+export declare function getKnowledgebase(id: string, options?: ApiCallOptions): Promise<GetKnowledgebaseHttpResponse>;
+export type GetKnowledgebaseHttpResponse = {
   data: KnowledgeBase;
   headers: Headers;
   status: 200;
 };
-type GetKnowledgebaseHttpError = {
+export type GetKnowledgebaseHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -523,13 +523,13 @@ type GetKnowledgebaseHttpError = {
  * @param body an object with the body content
  * @throws PatchKnowledgebaseHttpError
  */
-declare function patchKnowledgebase(id: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchKnowledgebaseHttpResponse>;
-type PatchKnowledgebaseHttpResponse = {
+export declare function patchKnowledgebase(id: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchKnowledgebaseHttpResponse>;
+export type PatchKnowledgebaseHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchKnowledgebaseHttpError = {
+export type PatchKnowledgebaseHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429;
@@ -541,13 +541,13 @@ type PatchKnowledgebaseHttpError = {
  * @param body an object with the body content
  * @throws SearchKnowledgebaseHttpError
  */
-declare function searchKnowledgebase(id: string, body: SearchRequest, options?: ApiCallOptions): Promise<SearchKnowledgebaseHttpResponse>;
-type SearchKnowledgebaseHttpResponse = {
+export declare function searchKnowledgebase(id: string, body: SearchRequest, options?: ApiCallOptions): Promise<SearchKnowledgebaseHttpResponse>;
+export type SearchKnowledgebaseHttpResponse = {
   data: SearchResponse;
   headers: Headers;
   status: 200;
 };
-type SearchKnowledgebaseHttpError = {
+export type SearchKnowledgebaseHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 405 | 500;
@@ -559,13 +559,13 @@ type SearchKnowledgebaseHttpError = {
  * @param body an object with the body content
  * @throws CreateKnowledgebaseDatasourceHttpError
  */
-declare function createKnowledgebaseDatasource(id: string, body: CreateDataSource, options?: ApiCallOptions): Promise<CreateKnowledgebaseDatasourceHttpResponse>;
-type CreateKnowledgebaseDatasourceHttpResponse = {
+export declare function createKnowledgebaseDatasource(id: string, body: CreateDataSource, options?: ApiCallOptions): Promise<CreateKnowledgebaseDatasourceHttpResponse>;
+export type CreateKnowledgebaseDatasourceHttpResponse = {
   data: DataSource;
   headers: Headers;
   status: 201;
 };
-type CreateKnowledgebaseDatasourceHttpError = {
+export type CreateKnowledgebaseDatasourceHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -577,13 +577,13 @@ type CreateKnowledgebaseDatasourceHttpError = {
  * @param datasourceId The id of the datasource to delete.
  * @throws DeleteKnowledgebaseDatasourceHttpError
  */
-declare function deleteKnowledgebaseDatasource(id: string, datasourceId: string, options?: ApiCallOptions): Promise<DeleteKnowledgebaseDatasourceHttpResponse>;
-type DeleteKnowledgebaseDatasourceHttpResponse = {
+export declare function deleteKnowledgebaseDatasource(id: string, datasourceId: string, options?: ApiCallOptions): Promise<DeleteKnowledgebaseDatasourceHttpResponse>;
+export type DeleteKnowledgebaseDatasourceHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteKnowledgebaseDatasourceHttpError = {
+export type DeleteKnowledgebaseDatasourceHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -596,13 +596,13 @@ type DeleteKnowledgebaseDatasourceHttpError = {
  * @param body an object with the body content
  * @throws UpdateKnowledgebaseDatasourceHttpError
  */
-declare function updateKnowledgebaseDatasource(id: string, datasourceId: string, body: DataSource, options?: ApiCallOptions): Promise<UpdateKnowledgebaseDatasourceHttpResponse>;
-type UpdateKnowledgebaseDatasourceHttpResponse = {
+export declare function updateKnowledgebaseDatasource(id: string, datasourceId: string, body: DataSource, options?: ApiCallOptions): Promise<UpdateKnowledgebaseDatasourceHttpResponse>;
+export type UpdateKnowledgebaseDatasourceHttpResponse = {
   data: DataSource;
   headers: Headers;
   status: 200;
 };
-type UpdateKnowledgebaseDatasourceHttpError = {
+export type UpdateKnowledgebaseDatasourceHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -614,13 +614,13 @@ type UpdateKnowledgebaseDatasourceHttpError = {
  * @param datasourceId The id of the datasource to cancel sync for.
  * @throws CancelKnowledgebaseDatasourceHttpError
  */
-declare function cancelKnowledgebaseDatasource(id: string, datasourceId: string, options?: ApiCallOptions): Promise<CancelKnowledgebaseDatasourceHttpResponse>;
-type CancelKnowledgebaseDatasourceHttpResponse = {
+export declare function cancelKnowledgebaseDatasource(id: string, datasourceId: string, options?: ApiCallOptions): Promise<CancelKnowledgebaseDatasourceHttpResponse>;
+export type CancelKnowledgebaseDatasourceHttpResponse = {
   data: DataSourceSync;
   headers: Headers;
   status: 200;
 };
-type CancelKnowledgebaseDatasourceHttpError = {
+export type CancelKnowledgebaseDatasourceHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -633,13 +633,13 @@ type CancelKnowledgebaseDatasourceHttpError = {
  * @param body an object with the body content
  * @throws DownloadKnowledgebaseDatasourceHttpError
  */
-declare function downloadKnowledgebaseDatasource(id: string, datasourceId: string, body: DownloadFile, options?: ApiCallOptions): Promise<DownloadKnowledgebaseDatasourceHttpResponse>;
-type DownloadKnowledgebaseDatasourceHttpResponse = {
+export declare function downloadKnowledgebaseDatasource(id: string, datasourceId: string, body: DownloadFile, options?: ApiCallOptions): Promise<DownloadKnowledgebaseDatasourceHttpResponse>;
+export type DownloadKnowledgebaseDatasourceHttpResponse = {
   data: DownloadFileResponse;
   headers: Headers;
   status: 200;
 };
-type DownloadKnowledgebaseDatasourceHttpError = {
+export type DownloadKnowledgebaseDatasourceHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -652,16 +652,16 @@ type DownloadKnowledgebaseDatasourceHttpError = {
  * @param query an object with query parameters
  * @throws SyncKnowledgebaseDatasourceHttpError
  */
-declare function syncKnowledgebaseDatasource(id: string, datasourceId: string, query: {
+export declare function syncKnowledgebaseDatasource(id: string, datasourceId: string, query: {
   /** Optional parameter to migrate indexed files to docdetails collection */
   migrate?: boolean;
 }, options?: ApiCallOptions): Promise<SyncKnowledgebaseDatasourceHttpResponse>;
-type SyncKnowledgebaseDatasourceHttpResponse = {
+export type SyncKnowledgebaseDatasourceHttpResponse = {
   data: DataSourceSync;
   headers: Headers;
   status: 202;
 };
-type SyncKnowledgebaseDatasourceHttpError = {
+export type SyncKnowledgebaseDatasourceHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -674,7 +674,7 @@ type SyncKnowledgebaseDatasourceHttpError = {
  * @param query an object with query parameters
  * @throws GetKnowledgebaseDatasourceHistoriesHttpError
  */
-declare function getKnowledgebaseDatasourceHistories(id: string, datasourceId: string, query: {
+export declare function getKnowledgebaseDatasourceHistories(id: string, datasourceId: string, query: {
   /** The number of knowledgebases to get. */
   limit?: number;
   /** Optional parameter to request the next page. */
@@ -684,14 +684,14 @@ declare function getKnowledgebaseDatasourceHistories(id: string, datasourceId: s
   /** Optional resource field name to sort on, case insensitive, eg. name. Can be prefixed with - to set descending order, defaults to ascending. */
   sort?: "COMPLETED" | "-COMPLETED";
 }, options?: ApiCallOptions): Promise<GetKnowledgebaseDatasourceHistoriesHttpResponse>;
-type GetKnowledgebaseDatasourceHistoriesHttpResponse = {
+export type GetKnowledgebaseDatasourceHistoriesHttpResponse = {
   data: SyncHistoryResult;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetKnowledgebaseDatasourceHistoriesHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetKnowledgebaseDatasourceHistoriesHttpResponse>;
 };
-type GetKnowledgebaseDatasourceHistoriesHttpError = {
+export type GetKnowledgebaseDatasourceHistoriesHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -706,13 +706,13 @@ type GetKnowledgebaseDatasourceHistoriesHttpError = {
  * @param syncId The sync identifier.
  * @throws GetKnowledgebaseDatasourceHistoryHttpError
  */
-declare function getKnowledgebaseDatasourceHistory(id: string, datasourceId: string, syncId: string, options?: ApiCallOptions): Promise<GetKnowledgebaseDatasourceHistoryHttpResponse>;
-type GetKnowledgebaseDatasourceHistoryHttpResponse = {
+export declare function getKnowledgebaseDatasourceHistory(id: string, datasourceId: string, syncId: string, options?: ApiCallOptions): Promise<GetKnowledgebaseDatasourceHistoryHttpResponse>;
+export type GetKnowledgebaseDatasourceHistoryHttpResponse = {
   data: SyncHistoryDetails;
   headers: Headers;
   status: 200;
 };
-type GetKnowledgebaseDatasourceHistoryHttpError = {
+export type GetKnowledgebaseDatasourceHistoryHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -724,13 +724,13 @@ type GetKnowledgebaseDatasourceHistoryHttpError = {
  * @param datasourceId The id of the datasource the schedule belongs to.
  * @throws DeleteKnowledgebaseDatasourceScheduleHttpError
  */
-declare function deleteKnowledgebaseDatasourceSchedule(id: string, datasourceId: string, options?: ApiCallOptions): Promise<DeleteKnowledgebaseDatasourceScheduleHttpResponse>;
-type DeleteKnowledgebaseDatasourceScheduleHttpResponse = {
+export declare function deleteKnowledgebaseDatasourceSchedule(id: string, datasourceId: string, options?: ApiCallOptions): Promise<DeleteKnowledgebaseDatasourceScheduleHttpResponse>;
+export type DeleteKnowledgebaseDatasourceScheduleHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteKnowledgebaseDatasourceScheduleHttpError = {
+export type DeleteKnowledgebaseDatasourceScheduleHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -742,13 +742,13 @@ type DeleteKnowledgebaseDatasourceScheduleHttpError = {
  * @param datasourceId The id of the datasource the schedule belongs to.
  * @throws GetKnowledgebaseDatasourceScheduleHttpError
  */
-declare function getKnowledgebaseDatasourceSchedule(id: string, datasourceId: string, options?: ApiCallOptions): Promise<GetKnowledgebaseDatasourceScheduleHttpResponse>;
-type GetKnowledgebaseDatasourceScheduleHttpResponse = {
+export declare function getKnowledgebaseDatasourceSchedule(id: string, datasourceId: string, options?: ApiCallOptions): Promise<GetKnowledgebaseDatasourceScheduleHttpResponse>;
+export type GetKnowledgebaseDatasourceScheduleHttpResponse = {
   data: ScheduleWithManifest;
   headers: Headers;
   status: 200;
 };
-type GetKnowledgebaseDatasourceScheduleHttpError = {
+export type GetKnowledgebaseDatasourceScheduleHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -761,13 +761,13 @@ type GetKnowledgebaseDatasourceScheduleHttpError = {
  * @param body an object with the body content
  * @throws CreateKnowledgebaseDatasourceScheduleHttpError
  */
-declare function createKnowledgebaseDatasourceSchedule(id: string, datasourceId: string, body: Schedule, options?: ApiCallOptions): Promise<CreateKnowledgebaseDatasourceScheduleHttpResponse>;
-type CreateKnowledgebaseDatasourceScheduleHttpResponse = {
+export declare function createKnowledgebaseDatasourceSchedule(id: string, datasourceId: string, body: Schedule, options?: ApiCallOptions): Promise<CreateKnowledgebaseDatasourceScheduleHttpResponse>;
+export type CreateKnowledgebaseDatasourceScheduleHttpResponse = {
   data: ScheduleWithManifest;
   headers: Headers;
   status: 200 | 201;
 };
-type CreateKnowledgebaseDatasourceScheduleHttpError = {
+export type CreateKnowledgebaseDatasourceScheduleHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -779,7 +779,7 @@ type CreateKnowledgebaseDatasourceScheduleHttpError = {
  * @param query an object with query parameters
  * @throws GetKnowledgebaseHistoriesHttpError
  */
-declare function getKnowledgebaseHistories(id: string, query: {
+export declare function getKnowledgebaseHistories(id: string, query: {
   /** The number of sync histories to get. */
   limit?: number;
   /** Optional parameter to request the next page. */
@@ -789,14 +789,14 @@ declare function getKnowledgebaseHistories(id: string, query: {
   /** Optional resource field name to sort on, case insensitive, eg. name. Can be prefixed with - to set descending order, defaults to ascending. */
   sort?: "COMPLETED" | "-COMPLETED";
 }, options?: ApiCallOptions): Promise<GetKnowledgebaseHistoriesHttpResponse>;
-type GetKnowledgebaseHistoriesHttpResponse = {
+export type GetKnowledgebaseHistoriesHttpResponse = {
   data: SyncHistoryResult;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetKnowledgebaseHistoriesHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetKnowledgebaseHistoriesHttpResponse>;
 };
-type GetKnowledgebaseHistoriesHttpError = {
+export type GetKnowledgebaseHistoriesHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -804,8 +804,8 @@ type GetKnowledgebaseHistoriesHttpError = {
 /**
  * Clears the cache for knowledgebases api requests.
  */
-declare function clearCache(): void;
-type KnowledgebasesAPI = {
+export declare function clearCache(): void;
+export type KnowledgebasesAPI = {
   /**
    * Returns a list of all knowledgebases the user has access to.
    *
@@ -964,4 +964,4 @@ type KnowledgebasesAPI = {
  */
 declare const knowledgebasesExport: KnowledgebasesAPI;
 //#endregion
-export { CancelKnowledgebaseDatasourceHttpError, CancelKnowledgebaseDatasourceHttpResponse, Chunk, Chunking, ContentSummary, CreateDataSource, CreateKnowledgeBase, CreateKnowledgebaseDatasourceHttpError, CreateKnowledgebaseDatasourceHttpResponse, CreateKnowledgebaseDatasourceScheduleHttpError, CreateKnowledgebaseDatasourceScheduleHttpResponse, CreateKnowledgebaseHttpError, CreateKnowledgebaseHttpResponse, DataSource, DataSourceCrawlPattern, DataSourceFileConfig, DataSourceFileCrawlScope, DataSourceSync, DataSourceSyncStatus, DeleteKnowledgebaseDatasourceHttpError, DeleteKnowledgebaseDatasourceHttpResponse, DeleteKnowledgebaseDatasourceScheduleHttpError, DeleteKnowledgebaseDatasourceScheduleHttpResponse, DeleteKnowledgebaseHttpError, DeleteKnowledgebaseHttpResponse, DocStats, DownloadFile, DownloadFileResponse, DownloadKnowledgebaseDatasourceHttpError, DownloadKnowledgebaseDatasourceHttpResponse, Duration, ErrorResponse, ErrorResponseCode, ErrorResponseCodeCopy, ErrorResponseCopy, GetKnowledgebaseDatasourceHistoriesHttpError, GetKnowledgebaseDatasourceHistoriesHttpResponse, GetKnowledgebaseDatasourceHistoryHttpError, GetKnowledgebaseDatasourceHistoryHttpResponse, GetKnowledgebaseDatasourceScheduleHttpError, GetKnowledgebaseDatasourceScheduleHttpResponse, GetKnowledgebaseHistoriesHttpError, GetKnowledgebaseHistoriesHttpResponse, GetKnowledgebaseHttpError, GetKnowledgebaseHttpResponse, GetKnowledgebasesHttpError, GetKnowledgebasesHttpResponse, IndexingErrorCode, JSONPatch, JSONPatchArray, KbChunkMeta, KnowledgeBase, KnowledgeBaseLight, KnowledgeBasesResult, KnowledgebasesAPI, PageLink, PageLinks, PatchKnowledgebaseHttpError, PatchKnowledgebaseHttpResponse, ResultMeta, Schedule, ScheduleCalendar, ScheduleInterval, ScheduleRange, ScheduleWithManifest, SearchKnowledgebaseHttpError, SearchKnowledgebaseHttpResponse, SearchRequest, SearchResponse, SyncErrorSummary, SyncHistory, SyncHistoryDetails, SyncHistoryResult, SyncKnowledgebaseDatasourceHttpError, SyncKnowledgebaseDatasourceHttpResponse, UpdateKnowledgebaseDatasourceHttpError, UpdateKnowledgebaseDatasourceHttpResponse, cancelKnowledgebaseDatasource, clearCache, createKnowledgebase, createKnowledgebaseDatasource, createKnowledgebaseDatasourceSchedule, knowledgebasesExport as default, deleteKnowledgebase, deleteKnowledgebaseDatasource, deleteKnowledgebaseDatasourceSchedule, downloadKnowledgebaseDatasource, getKnowledgebase, getKnowledgebaseDatasourceHistories, getKnowledgebaseDatasourceHistory, getKnowledgebaseDatasourceSchedule, getKnowledgebaseHistories, getKnowledgebases, patchKnowledgebase, searchKnowledgebase, syncKnowledgebaseDatasource, updateKnowledgebaseDatasource };
+export { knowledgebasesExport as default };

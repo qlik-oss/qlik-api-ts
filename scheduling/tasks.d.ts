@@ -1,9 +1,9 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-o-bqAUAV.js";
-import "../chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
+import "../chunks/invoke-fetch-DdmiOIkr.js";
 declare namespace tasks_d_exports {
   export { Action, ActionExecTimeout, CorrelationDef, CreateTaskHttpError, CreateTaskHttpResponse, CreateTaskWithoutQueryHttpError, CreateTaskWithoutQueryHttpResponse, Crondef, DeleteTaskHttpError, DeleteTaskHttpResponse, End, ErrorResponse, EventTimeout, Eventdef, Events, Eventstate, Functionref, GetTaskGraphAncestorsHttpError, GetTaskGraphAncestorsHttpResponse, GetTaskGraphChildrenHttpError, GetTaskGraphChildrenHttpResponse, GetTaskGraphDescendantsHttpError, GetTaskGraphDescendantsHttpResponse, GetTaskGraphParentsHttpError, GetTaskGraphParentsHttpResponse, GetTaskHttpError, GetTaskHttpResponse, GetTaskLastRunHttpError, GetTaskLastRunHttpResponse, GetTaskResourceRunsHttpError, GetTaskResourceRunsHttpResponse, GetTaskRunLogHttpError, GetTaskRunLogHttpResponse, GetTaskRunsHttpError, GetTaskRunsHttpResponse, GetTaskSubgraphHttpError, GetTaskSubgraphHttpResponse, GetTasksHttpError, GetTasksHttpResponse, HttpResult, JSONPatch, Link, Onevents, OrchMeta, OrchRun, OrchRunBase, OrchRunList, PatchTask200HttpResponse, PatchTask204HttpResponse, PatchTaskHttpError, PatchTaskHttpResponse, PatchValue, Schedule, StartTaskHttpError, StartTaskHttpResponse, Startdef, StateExecTimeout, Task, TaskGraph, TaskGraphEdge, TaskGraphVertex, TaskList, TaskMetadata, TaskTopology, TasksAPI, TriggerMeta, UpdateTaskHttpError, UpdateTaskHttpResponse, clearCache, createTask, createTaskWithoutQuery, tasksExport as default, deleteTask, getTask, getTaskGraphAncestors, getTaskGraphChildren, getTaskGraphDescendants, getTaskGraphParents, getTaskLastRun, getTaskResourceRuns, getTaskRunLog, getTaskRuns, getTaskSubgraph, getTasks, patchTask, startTask, updateTask };
 }
-type ErrorResponse = {
+export type ErrorResponse = {
   errors?: HttpResult[];
   /** A trace identifier for correlating the error to a specific service request. */
   traceId?: string;
@@ -11,8 +11,8 @@ type ErrorResponse = {
 /**
  * CloudEvent definitions for the workflow. Defines the events that can be consumed or produced by the workflow.
  */
-type Events = Eventdef[];
-type HttpResult = {
+export type Events = Eventdef[];
+export type HttpResult = {
   code?: number;
   context?: string;
   inner?: HttpResult;
@@ -20,7 +20,7 @@ type HttpResult = {
   timestamp?: string;
   title?: string;
 };
-type JSONPatch = {
+export type JSONPatch = {
   /** The patch operation to perform. */
   op: "add" | "remove" | "replace" | "move" | "copy";
   /** A JSON Pointer (RFC 6901) identifying the field to patch. */
@@ -28,11 +28,11 @@ type JSONPatch = {
   /** The value to use in a JSON Patch operation. */
   value?: PatchValue;
 }[];
-type Link = {
+export type Link = {
   /** The URL of the linked resource. */
   href: string;
 };
-type OrchMeta = {
+export type OrchMeta = {
   /** Additional attributes of the orchestration instance associated with this task in the scheduling service. */
   attrs?: Record<string, string>;
   /** The unique identifier of the orchestration instance associated with this task in the scheduling service. */
@@ -41,7 +41,7 @@ type OrchMeta = {
   /** The type identifier of the orchestration system handling this task. */
   type: 0 | 1 | 2 | 3;
 };
-type OrchRun = OrchRunBase & {
+export type OrchRun = OrchRunBase & {
   /** The unique identifier of the action that was executed. */
   actionId: string;
   /** The raw log output from the task run. */
@@ -54,7 +54,7 @@ type OrchRun = OrchRunBase & {
   /** The name of the task at the time it was run. */
   taskName: string;
 };
-type OrchRunBase = {
+export type OrchRunBase = {
   /** The UTC timestamp when the task run ended. */
   readonly endedAt?: string;
   /** The user ID of the user on whose behalf the task was executed. */
@@ -72,7 +72,7 @@ type OrchRunBase = {
   /** The type or name of the target system that executed the run. */
   workerType: string;
 };
-type OrchRunList = {
+export type OrchRunList = {
   data?: OrchRun[];
   links?: {
     next?: Link;
@@ -83,7 +83,7 @@ type OrchRunList = {
 /**
  * The value to use in a JSON Patch operation.
  */
-type PatchValue = string | number | number | boolean | unknown[] | unknown;
+export type PatchValue = string | number | number | boolean | unknown[] | unknown;
 /**
  * @example
  * {
@@ -157,7 +157,7 @@ type PatchValue = string | number | number | boolean | unknown[] | unknown;
  *   version: "1.0.0"
  * }
  */
-type Task = {
+export type Task = {
   /** A list of terms describing the workflow's intended purpose, subject areas, or other important qualities. */
   annotations?: string[];
   /** A human-readable description of the workflow's purpose. */
@@ -219,7 +219,7 @@ type Task = {
  *   ]
  * }
  */
-type TaskGraph = {
+export type TaskGraph = {
   edges?: TaskGraphEdge[];
   taskId?: string;
   vertices?: TaskGraphVertex[];
@@ -234,7 +234,7 @@ type TaskGraph = {
  *   target: "11111111-1111-1111-1111-111111111111"
  * }
  */
-type TaskGraphEdge = {
+export type TaskGraphEdge = {
   attrs?: unknown;
   source?: string;
   target?: string;
@@ -256,12 +256,12 @@ type TaskGraphEdge = {
  *   taskId: "11111111-1111-1111-1111-111111111111"
  * }
  */
-type TaskGraphVertex = {
+export type TaskGraphVertex = {
   attrs?: unknown;
   task?: Task;
   taskId?: string;
 };
-type TaskList = {
+export type TaskList = {
   data?: Task[];
   links?: {
     next?: Link;
@@ -269,13 +269,13 @@ type TaskList = {
     self?: Link;
   };
 };
-type TriggerMeta = {
+export type TriggerMeta = {
   /** The unique identifier of the trigger associated with this task. */
   id: string;
   /** The type identifier of the trigger associated with this task. */
   type: 0 | 1 | 2 | 3 | 4;
 };
-type Action = {
+export type Action = {
   /** An expression that must evaluate to `true` for this action to be performed. When `false`, the action is skipped. */
   condition?: string;
   /** A reference to a function to invoke, either as a name string or a structured object. */
@@ -294,17 +294,17 @@ type Action = {
  * @example
  * "3S"
  */
-type ActionExecTimeout = string;
+export type ActionExecTimeout = string;
 /**
  * A correlation definition used to match a CloudEvent to a specific workflow instance.
  */
-type CorrelationDef = {
+export type CorrelationDef = {
   /** The name of the CloudEvent extension context attribute to match on. */
   contextAttributeName: "id" | "status" | "appId" | "spaceId" | "datasetId";
   /** The expected value of the CloudEvent extension context attribute. */
   contextAttributeValue?: string;
 };
-type Crondef = string | {
+export type Crondef = string | {
   /** A cron expression describing when the workflow instance should be created. */
   expression: string;
   /** The date and time (ISO 8601 format) after which this cron expression is no longer active. */
@@ -313,14 +313,14 @@ type Crondef = string | {
 /**
  * Marks this state as a terminal state in the workflow.
  */
-type End = boolean;
+export type End = boolean;
 /**
  * The maximum duration to wait for the defined events to be received, expressed as an ISO 8601 duration string or an expression that evaluates to one.
  * @example
  * "3S"
  */
-type EventTimeout = string;
-type Eventdef = {
+export type EventTimeout = string;
+export type Eventdef = {
   /** Correlation definitions used to match incoming CloudEvents to this workflow instance. */
   correlation?: CorrelationDef[];
   /** When `true`, only the event payload is accessible to consuming workflow states. When `false`, both the payload and context attributes are accessible. */
@@ -335,7 +335,7 @@ type Eventdef = {
 /**
  * A workflow state that waits for one or more CloudEvents, then consumes them and invokes one or more actions sequentially or in parallel.
  */
-type Eventstate = {
+export type Eventstate = {
   /** The unique name of a workflow state responsible for compensating this state if it fails. */
   compensatedBy?: string;
   /** Marks this state as a terminal state in the workflow. */
@@ -369,7 +369,7 @@ type Eventstate = {
  *   refName: "app.reload"
  * }
  */
-type Functionref = string | {
+export type Functionref = string | {
   /** Arguments to pass to the function. */
   arguments?: unknown;
   /** Specifies whether the function is invoked synchronously or asynchronously. */
@@ -379,7 +379,7 @@ type Functionref = string | {
   /** A GraphQL selection set string. Only applicable when the function type is `graphql`. */
   selectionSet?: string;
 };
-type Onevents = {
+export type Onevents = {
   /** Specifies whether actions are performed sequentially or in parallel. */
   actionMode?: "SEQUENTIAL" | "PARALLEL";
   /** Actions to perform when the matched events are consumed. */
@@ -387,7 +387,7 @@ type Onevents = {
   /** References to one or more unique event names defined in the workflow events list. */
   eventRefs: string[];
 };
-type Schedule = string | {
+export type Schedule = string | {
   cron?: Crondef;
   /** The date and time (ISO 8601 format) when the workflow schedule ends. */
   endDateTime?: string;
@@ -410,7 +410,7 @@ type Schedule = string | {
  *   }
  * }
  */
-type Startdef = {
+export type Startdef = {
   schedule: Schedule;
   /** The name of the starting workflow state. */
   stateName?: string;
@@ -420,16 +420,16 @@ type Startdef = {
  * @example
  * "3S"
  */
-type StateExecTimeout = string;
-type TaskMetadata = {
+export type StateExecTimeout = string;
+export type TaskMetadata = {
   /** The UTC timestamp when the task was created. */
   readonly createdAt?: string;
   /** The user ID of the user who created the task. */
   createdBy?: string;
   /** The UTC timestamp when the task was deleted. */
   readonly deletedAt?: string;
-  /** The reason the task is currently disabled. */
-  disabledCode?: "MANUALLY" | "CONSECUTIVE-FAILURES" | "APP-SCRIPT-UPDATED" | "OWNER-DELETED" | "OWNER-DISABLED" | "APP-MOVED-SPACE" | "OWNER-MOVED";
+  /** The reason the task is currently disabled. `SCHEDULE-EXPIRED` is reserved for tasks migrated from a legacy reload-task whose schedule had already ended; it is stripped when supplied on create or update. */
+  disabledCode?: "MANUALLY" | "CONSECUTIVE-FAILURES" | "APP-SCRIPT-UPDATED" | "OWNER-DELETED" | "OWNER-DISABLED" | "APP-MOVED-SPACE" | "OWNER-MOVED" | "SCHEDULE-EXPIRED";
   /** The unique identifier of the legacy reload task this task was migrated from, if applicable. */
   migratedFrom?: string;
   orchestration?: OrchMeta;
@@ -460,7 +460,7 @@ type TaskMetadata = {
 /**
  * Indicates the task's position in a dependency graph.
  */
-type TaskTopology = {
+export type TaskTopology = {
   /** When `true`, this task is triggered by one or more parent tasks. */
   isChild?: boolean;
   /** When `true`, this task has one or more downstream dependent tasks. */
@@ -472,7 +472,7 @@ type TaskTopology = {
  * @param query an object with query parameters
  * @throws GetTasksHttpError
  */
-declare function getTasks(query: {
+export declare function getTasks(query: {
   /** Advanced filter expression using RFC 7644 SCIM syntax. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for syntax details. All comparisons are case-insensitive. Supported fields: `name`, `enabled`, `resourceId`, `ownerId`, `spaceId`, `createdAt`, `updatedAt`, `updatedBy`, `lastStatus`, `lastTriggeredBy`, `lastStartedAt`, `lastEndedAt`, `lastExecutedAs`, and `triggerType`. */
   filter?: string;
   /** Maximum number of tasks to return per page. */
@@ -485,14 +485,14 @@ declare function getTasks(query: {
    * `+` for ascending or `-` for descending order. Defaults to `-updatedAt`. */
   sort?: "+createdAt" | "-createdAt" | "+enabled" | "-enabled" | "+name" | "-name" | "+ownerId" | "-ownerId" | "+resourceId" | "-resourceId" | "+spaceId" | "-spaceId" | "+updatedAt" | "-updatedAt" | "+updatedBy" | "-updatedBy" | "+lastStatus" | "-lastStatus" | "+lastTriggeredBy" | "-lastTriggeredBy" | "+lastStartedAt" | "-lastStartedAt" | "+lastEndedAt" | "-lastEndedAt" | "+lastExecutedAs" | "-lastExecutedAs" | "+triggerType" | "-triggerType";
 }, options?: ApiCallOptions): Promise<GetTasksHttpResponse>;
-type GetTasksHttpResponse = {
+export type GetTasksHttpResponse = {
   data: TaskList;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetTasksHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetTasksHttpResponse>;
 };
-type GetTasksHttpError = {
+export type GetTasksHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -504,13 +504,13 @@ type GetTasksHttpError = {
  * @param body an object with the body content
  * @throws CreateTaskHttpError
  */
-declare function createTask(query: Record<string, unknown>, body: Task, options?: ApiCallOptions): Promise<CreateTaskHttpResponse>;
-type CreateTaskHttpResponse = {
+export declare function createTask(query: Record<string, unknown>, body: Task, options?: ApiCallOptions): Promise<CreateTaskHttpResponse>;
+export type CreateTaskHttpResponse = {
   data: Task;
   headers: Headers;
   status: 201;
 };
-type CreateTaskHttpError = {
+export type CreateTaskHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -521,13 +521,13 @@ type CreateTaskHttpError = {
  * @param body an object with the body content
  * @throws CreateTaskWithoutQueryHttpError
  */
-declare function createTaskWithoutQuery(body: Task, options?: ApiCallOptions): Promise<CreateTaskWithoutQueryHttpResponse>;
-type CreateTaskWithoutQueryHttpResponse = {
+export declare function createTaskWithoutQuery(body: Task, options?: ApiCallOptions): Promise<CreateTaskWithoutQueryHttpResponse>;
+export type CreateTaskWithoutQueryHttpResponse = {
   data: Task;
   headers: Headers;
   status: 201;
 };
-type CreateTaskWithoutQueryHttpError = {
+export type CreateTaskWithoutQueryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -539,7 +539,7 @@ type CreateTaskWithoutQueryHttpError = {
  * @param query an object with query parameters
  * @throws GetTaskResourceRunsHttpError
  */
-declare function getTaskResourceRuns(id: string, query: {
+export declare function getTaskResourceRuns(id: string, query: {
   /** Maximum number of task runs to return per page. */
   limit?: number;
   /** Cursor token for fetching the next page of results. */
@@ -547,14 +547,14 @@ declare function getTaskResourceRuns(id: string, query: {
   /** Field and direction to sort results by. Prefix the field name with `+` for ascending or `-` for descending order. Defaults to `-startedAt`. */
   sort?: "+startedAt" | "-startedAt" | "+endedAt" | "-endedAt" | "+status" | "-status" | "+taskId" | "-taskId" | "+actionId" | "-actionId";
 }, options?: ApiCallOptions): Promise<GetTaskResourceRunsHttpResponse>;
-type GetTaskResourceRunsHttpResponse = {
+export type GetTaskResourceRunsHttpResponse = {
   data: OrchRunList;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetTaskResourceRunsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetTaskResourceRunsHttpResponse>;
 };
-type GetTaskResourceRunsHttpError = {
+export type GetTaskResourceRunsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -565,13 +565,13 @@ type GetTaskResourceRunsHttpError = {
  * @param id The unique identifier of the task to delete.
  * @throws DeleteTaskHttpError
  */
-declare function deleteTask(id: string, options?: ApiCallOptions): Promise<DeleteTaskHttpResponse>;
-type DeleteTaskHttpResponse = {
+export declare function deleteTask(id: string, options?: ApiCallOptions): Promise<DeleteTaskHttpResponse>;
+export type DeleteTaskHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteTaskHttpError = {
+export type DeleteTaskHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -582,13 +582,13 @@ type DeleteTaskHttpError = {
  * @param id The unique identifier of the task to retrieve.
  * @throws GetTaskHttpError
  */
-declare function getTask(id: string, options?: ApiCallOptions): Promise<GetTaskHttpResponse>;
-type GetTaskHttpResponse = {
+export declare function getTask(id: string, options?: ApiCallOptions): Promise<GetTaskHttpResponse>;
+export type GetTaskHttpResponse = {
   data: Task;
   headers: Headers;
   status: 200;
 };
-type GetTaskHttpError = {
+export type GetTaskHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -600,19 +600,19 @@ type GetTaskHttpError = {
  * @param body an object with the body content
  * @throws PatchTaskHttpError
  */
-declare function patchTask(id: string, body: JSONPatch, options?: ApiCallOptions): Promise<PatchTaskHttpResponse>;
-type PatchTaskHttpResponse = PatchTask200HttpResponse | PatchTask204HttpResponse;
-type PatchTask200HttpResponse = {
+export declare function patchTask(id: string, body: JSONPatch, options?: ApiCallOptions): Promise<PatchTaskHttpResponse>;
+export type PatchTaskHttpResponse = PatchTask200HttpResponse | PatchTask204HttpResponse;
+export type PatchTask200HttpResponse = {
   data: Task;
   headers: Headers;
   status: 200;
 };
-type PatchTask204HttpResponse = {
+export type PatchTask204HttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchTaskHttpError = {
+export type PatchTaskHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -624,13 +624,13 @@ type PatchTaskHttpError = {
  * @param body an object with the body content
  * @throws UpdateTaskHttpError
  */
-declare function updateTask(id: string, body: Task, options?: ApiCallOptions): Promise<UpdateTaskHttpResponse>;
-type UpdateTaskHttpResponse = {
+export declare function updateTask(id: string, body: Task, options?: ApiCallOptions): Promise<UpdateTaskHttpResponse>;
+export type UpdateTaskHttpResponse = {
   data: Task;
   headers: Headers;
   status: 200;
 };
-type UpdateTaskHttpError = {
+export type UpdateTaskHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -642,18 +642,18 @@ type UpdateTaskHttpError = {
  * @param query an object with query parameters
  * @throws StartTaskHttpError
  */
-declare function startTask(id: string, query: {
+export declare function startTask(id: string, query: {
   /** The origin of the trigger. Defaults to `manual`. For event-triggered tasks, this can be the name of the triggering task. */
   source?: string;
 }, options?: ApiCallOptions): Promise<StartTaskHttpResponse>;
-type StartTaskHttpResponse = {
+export type StartTaskHttpResponse = {
   data: {
     message?: string;
   };
   headers: Headers;
   status: 200;
 };
-type StartTaskHttpError = {
+export type StartTaskHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -665,18 +665,18 @@ type StartTaskHttpError = {
  * @param query an object with query parameters
  * @throws GetTaskGraphAncestorsHttpError
  */
-declare function getTaskGraphAncestors(id: string, query: {
+export declare function getTaskGraphAncestors(id: string, query: {
   /** Maximum ancestor depth to traverse breadth-first. */
   level?: number;
   /** When `true`, includes the full task document for each accessible vertex in the response. */
   withTask?: boolean;
 }, options?: ApiCallOptions): Promise<GetTaskGraphAncestorsHttpResponse>;
-type GetTaskGraphAncestorsHttpResponse = {
+export type GetTaskGraphAncestorsHttpResponse = {
   data: TaskGraph;
   headers: Headers;
   status: 200;
 };
-type GetTaskGraphAncestorsHttpError = {
+export type GetTaskGraphAncestorsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -688,7 +688,7 @@ type GetTaskGraphAncestorsHttpError = {
  * @param query an object with query parameters
  * @throws GetTaskGraphChildrenHttpError
  */
-declare function getTaskGraphChildren(id: string, query: {
+export declare function getTaskGraphChildren(id: string, query: {
   /** Advanced filter expression using RFC 7644 SCIM syntax. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for syntax details. All comparisons are case-insensitive. Supported fields: `name`, `enabled`, `resourceId`, `ownerId`, `spaceId`, `createdAt`, `updatedAt`, `updatedBy`, `lastStatus`, `lastTriggeredBy`, `lastStartedAt`, `lastEndedAt`, `lastExecutedAs`, and `triggerType`. */
   filter?: string;
   /** Maximum number of tasks to return per page. */
@@ -699,14 +699,14 @@ declare function getTaskGraphChildren(id: string, query: {
    * `+` for ascending or `-` for descending order. Defaults to `-updatedAt`. */
   sort?: "+createdAt" | "-createdAt" | "+enabled" | "-enabled" | "+name" | "-name" | "+ownerId" | "-ownerId" | "+resourceId" | "-resourceId" | "+spaceId" | "-spaceId" | "+updatedAt" | "-updatedAt" | "+updatedBy" | "-updatedBy" | "+lastStatus" | "-lastStatus" | "+lastTriggeredBy" | "-lastTriggeredBy" | "+lastStartedAt" | "-lastStartedAt" | "+lastEndedAt" | "-lastEndedAt" | "+lastExecutedAs" | "-lastExecutedAs" | "+triggerType" | "-triggerType";
 }, options?: ApiCallOptions): Promise<GetTaskGraphChildrenHttpResponse>;
-type GetTaskGraphChildrenHttpResponse = {
+export type GetTaskGraphChildrenHttpResponse = {
   data: TaskList;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetTaskGraphChildrenHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetTaskGraphChildrenHttpResponse>;
 };
-type GetTaskGraphChildrenHttpError = {
+export type GetTaskGraphChildrenHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -718,18 +718,18 @@ type GetTaskGraphChildrenHttpError = {
  * @param query an object with query parameters
  * @throws GetTaskGraphDescendantsHttpError
  */
-declare function getTaskGraphDescendants(id: string, query: {
+export declare function getTaskGraphDescendants(id: string, query: {
   /** Maximum descendant depth to traverse breadth-first. */
   level?: number;
   /** When `true`, includes the full task document for each accessible vertex in the response. */
   withTask?: boolean;
 }, options?: ApiCallOptions): Promise<GetTaskGraphDescendantsHttpResponse>;
-type GetTaskGraphDescendantsHttpResponse = {
+export type GetTaskGraphDescendantsHttpResponse = {
   data: TaskGraph;
   headers: Headers;
   status: 200;
 };
-type GetTaskGraphDescendantsHttpError = {
+export type GetTaskGraphDescendantsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -741,7 +741,7 @@ type GetTaskGraphDescendantsHttpError = {
  * @param query an object with query parameters
  * @throws GetTaskGraphParentsHttpError
  */
-declare function getTaskGraphParents(id: string, query: {
+export declare function getTaskGraphParents(id: string, query: {
   /** Advanced filter expression using RFC 7644 SCIM syntax. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for syntax details. All comparisons are case-insensitive. Supported fields: `name`, `enabled`, `resourceId`, `ownerId`, `spaceId`, `createdAt`, `updatedAt`, `updatedBy`, `lastStatus`, `lastTriggeredBy`, `lastStartedAt`, `lastEndedAt`, `lastExecutedAs`, and `triggerType`. */
   filter?: string;
   /** Maximum number of tasks to return per page. */
@@ -752,14 +752,14 @@ declare function getTaskGraphParents(id: string, query: {
    * `+` for ascending or `-` for descending order. Defaults to `-updatedAt`. */
   sort?: "+createdAt" | "-createdAt" | "+enabled" | "-enabled" | "+name" | "-name" | "+ownerId" | "-ownerId" | "+resourceId" | "-resourceId" | "+spaceId" | "-spaceId" | "+updatedAt" | "-updatedAt" | "+updatedBy" | "-updatedBy" | "+lastStatus" | "-lastStatus" | "+lastTriggeredBy" | "-lastTriggeredBy" | "+lastStartedAt" | "-lastStartedAt" | "+lastEndedAt" | "-lastEndedAt" | "+lastExecutedAs" | "-lastExecutedAs" | "+triggerType" | "-triggerType";
 }, options?: ApiCallOptions): Promise<GetTaskGraphParentsHttpResponse>;
-type GetTaskGraphParentsHttpResponse = {
+export type GetTaskGraphParentsHttpResponse = {
   data: TaskList;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetTaskGraphParentsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetTaskGraphParentsHttpResponse>;
 };
-type GetTaskGraphParentsHttpError = {
+export type GetTaskGraphParentsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -771,18 +771,18 @@ type GetTaskGraphParentsHttpError = {
  * @param query an object with query parameters
  * @throws GetTaskSubgraphHttpError
  */
-declare function getTaskSubgraph(id: string, query: {
+export declare function getTaskSubgraph(id: string, query: {
   /** Maximum ancestor and descendant depth to traverse breadth-first. */
   level?: number;
   /** When `true`, includes the full task document for each accessible vertex in the response. */
   withTask?: boolean;
 }, options?: ApiCallOptions): Promise<GetTaskSubgraphHttpResponse>;
-type GetTaskSubgraphHttpResponse = {
+export type GetTaskSubgraphHttpResponse = {
   data: TaskGraph;
   headers: Headers;
   status: 200;
 };
-type GetTaskSubgraphHttpError = {
+export type GetTaskSubgraphHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -794,7 +794,7 @@ type GetTaskSubgraphHttpError = {
  * @param query an object with query parameters
  * @throws GetTaskRunsHttpError
  */
-declare function getTaskRuns(id: string, query: {
+export declare function getTaskRuns(id: string, query: {
   /** Maximum number of task runs to return per page. */
   limit?: number;
   /** Cursor token for fetching the next page of results. */
@@ -802,14 +802,14 @@ declare function getTaskRuns(id: string, query: {
   /** Field and direction to sort results by. Prefix the field name with `+` for ascending or `-` for descending order. Defaults to `-startedAt`. */
   sort?: "+startedAt" | "-startedAt" | "+endedAt" | "-endedAt" | "+status" | "-status" | "+taskId" | "-taskId" | "+actionId" | "-actionId";
 }, options?: ApiCallOptions): Promise<GetTaskRunsHttpResponse>;
-type GetTaskRunsHttpResponse = {
+export type GetTaskRunsHttpResponse = {
   data: OrchRunList;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetTaskRunsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetTaskRunsHttpResponse>;
 };
-type GetTaskRunsHttpError = {
+export type GetTaskRunsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -820,13 +820,13 @@ type GetTaskRunsHttpError = {
  * @param id The unique identifier of the task.
  * @throws GetTaskLastRunHttpError
  */
-declare function getTaskLastRun(id: string, options?: ApiCallOptions): Promise<GetTaskLastRunHttpResponse>;
-type GetTaskLastRunHttpResponse = {
+export declare function getTaskLastRun(id: string, options?: ApiCallOptions): Promise<GetTaskLastRunHttpResponse>;
+export type GetTaskLastRunHttpResponse = {
   data: OrchRun;
   headers: Headers;
   status: 200;
 };
-type GetTaskLastRunHttpError = {
+export type GetTaskLastRunHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -838,8 +838,8 @@ type GetTaskLastRunHttpError = {
  * @param runId The unique identifier of the task run.
  * @throws GetTaskRunLogHttpError
  */
-declare function getTaskRunLog(id: string, runId: string, options?: ApiCallOptions): Promise<GetTaskRunLogHttpResponse>;
-type GetTaskRunLogHttpResponse = {
+export declare function getTaskRunLog(id: string, runId: string, options?: ApiCallOptions): Promise<GetTaskRunLogHttpResponse>;
+export type GetTaskRunLogHttpResponse = {
   data: {
     /** Log content in plain text format. */
     logContent?: string;
@@ -847,7 +847,7 @@ type GetTaskRunLogHttpResponse = {
   headers: Headers;
   status: 200;
 };
-type GetTaskRunLogHttpError = {
+export type GetTaskRunLogHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -855,8 +855,8 @@ type GetTaskRunLogHttpError = {
 /**
  * Clears the cache for scheduling/tasks api requests.
  */
-declare function clearCache(): void;
-type TasksAPI = {
+export declare function clearCache(): void;
+export type TasksAPI = {
   /**
    * Retrieves a paginated list of tasks the requesting user has access to. Results include task metadata such as owner, resource, space, and last run status. Use the `filter` parameter to narrow results by field values, or `sort` to control the ordering.
    *
@@ -998,4 +998,4 @@ type TasksAPI = {
  */
 declare const tasksExport: TasksAPI;
 //#endregion
-export { Action, ActionExecTimeout, CorrelationDef, CreateTaskHttpError, CreateTaskHttpResponse, CreateTaskWithoutQueryHttpError, CreateTaskWithoutQueryHttpResponse, Crondef, DeleteTaskHttpError, DeleteTaskHttpResponse, End, ErrorResponse, EventTimeout, Eventdef, Events, Eventstate, Functionref, GetTaskGraphAncestorsHttpError, GetTaskGraphAncestorsHttpResponse, GetTaskGraphChildrenHttpError, GetTaskGraphChildrenHttpResponse, GetTaskGraphDescendantsHttpError, GetTaskGraphDescendantsHttpResponse, GetTaskGraphParentsHttpError, GetTaskGraphParentsHttpResponse, GetTaskHttpError, GetTaskHttpResponse, GetTaskLastRunHttpError, GetTaskLastRunHttpResponse, GetTaskResourceRunsHttpError, GetTaskResourceRunsHttpResponse, GetTaskRunLogHttpError, GetTaskRunLogHttpResponse, GetTaskRunsHttpError, GetTaskRunsHttpResponse, GetTaskSubgraphHttpError, GetTaskSubgraphHttpResponse, GetTasksHttpError, GetTasksHttpResponse, HttpResult, JSONPatch, Link, Onevents, OrchMeta, OrchRun, OrchRunBase, OrchRunList, PatchTask200HttpResponse, PatchTask204HttpResponse, PatchTaskHttpError, PatchTaskHttpResponse, PatchValue, Schedule, StartTaskHttpError, StartTaskHttpResponse, Startdef, StateExecTimeout, Task, TaskGraph, TaskGraphEdge, TaskGraphVertex, TaskList, TaskMetadata, TaskTopology, TasksAPI, TriggerMeta, UpdateTaskHttpError, UpdateTaskHttpResponse, clearCache, createTask, createTaskWithoutQuery, tasksExport as default, deleteTask, getTask, getTaskGraphAncestors, getTaskGraphChildren, getTaskGraphDescendants, getTaskGraphParents, getTaskLastRun, getTaskResourceRuns, getTaskRunLog, getTaskRuns, getTaskSubgraph, getTasks, patchTask, startTask, tasks_d_exports as t, updateTask };
+export { tasksExport as default, tasks_d_exports as t };

@@ -67,7 +67,7 @@
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="createdirectaccessagentbenchmark"><span>create<wbr/>Direct<wbr/>Access<wbr/>Agent<wbr/>Benchmark</span><a href="#createdirectaccessagentbenchmark" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">createDirectAccessAgentBenchmark</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../functions/direct-access-agents.createDirectAccessAgentBenchmark.html" class="tsd-signature-type tsd-kind-function">createDirectAccessAgentBenchmark</a></div>
-<div class="tsd-comment tsd-typography"><p>Starts a background benchmark task to measure the performance of a Direct Access agent. Use this endpoint to evaluate agent throughput and latency for capacity planning and performance optimization. Requestor must be assigned the <code>TenantAdmin</code> role and needs to be either a Gateway's space owner or a member in the Gateway's space with <code>Can Consume Data</code> role. Available in Direct Access Gateway V1.7.8+.</p>
+<div class="tsd-comment tsd-typography"><p>Starts a background benchmark task that measures the throughput and latency of a Direct Access agent. Use the returned <code>benchmarkId</code> to monitor progress and retrieve performance metrics for capacity planning or performance optimization. The requestor must have the <code>TenantAdmin</code> role and be either the gateway's space owner or a member of the gateway's space with the <code>Can Consume Data</code> role. Available in Direct Access Gateway V1.7.8+.</p>
 </div>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-param">
@@ -82,7 +82,7 @@
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="createdirectaccessagentbenchmarkcancel"><span>create<wbr/>Direct<wbr/>Access<wbr/>Agent<wbr/>Benchmark<wbr/>Cancel</span><a href="#createdirectaccessagentbenchmarkcancel" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">createDirectAccessAgentBenchmarkCancel</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../functions/direct-access-agents.createDirectAccessAgentBenchmarkCancel.html" class="tsd-signature-type tsd-kind-function">createDirectAccessAgentBenchmarkCancel</a></div>
-<div class="tsd-comment tsd-typography"><p>Requests a cancellation on a running benchmark by id for the specified agent. Requestor must be assigned the <code>TenantAdmin</code> role and needs to be either a Gateway's space owner or a member in the Gateway's space with <code>Can Consume Data</code> role. Available in Direct Access Gateway V1.7.8+.</p>
+<div class="tsd-comment tsd-typography"><p>Requests cancellation of a running benchmark for the specified agent. The request is asynchronous. Use the returned status URL to monitor when cancellation completes. The requestor must have the <code>TenantAdmin</code> role and be either the gateway's space owner or a member of the gateway's space with the <code>Can Consume Data</code> role. Available in Direct Access Gateway V1.7.8+.</p>
 </div>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-param">
@@ -97,7 +97,7 @@
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="getdirectaccessagentbenchmark"><span>get<wbr/>Direct<wbr/>Access<wbr/>Agent<wbr/>Benchmark</span><a href="#getdirectaccessagentbenchmark" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">getDirectAccessAgentBenchmark</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../functions/direct-access-agents.getDirectAccessAgentBenchmark.html" class="tsd-signature-type tsd-kind-function">getDirectAccessAgentBenchmark</a></div>
-<div class="tsd-comment tsd-typography"><p>Retrieves the current status and progress of a running or completed benchmark task. Use this endpoint to monitor benchmark execution and retrieve performance metrics once the task is completed. Requestor must be assigned the <code>TenantAdmin</code> role and needs to be either a Gateway's space owner or a member in the Gateway's space with <code>Can Consume Data</code> role. Available in Direct Access Gateway V1.7.8+.</p>
+<div class="tsd-comment tsd-typography"><p>Retrieves the current status, progress, and performance metrics for a benchmark task. Use this operation to monitor a running benchmark or inspect its completed results. The requestor must have the <code>TenantAdmin</code> role and be either the gateway's space owner or a member of the gateway's space with the <code>Can Consume Data</code> role. Available in Direct Access Gateway V1.7.8+.</p>
 </div>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-param">

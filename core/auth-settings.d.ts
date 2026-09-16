@@ -1,12 +1,12 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-o-bqAUAV.js";
-import "../chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
+import "../chunks/invoke-fetch-DdmiOIkr.js";
 declare namespace auth_settings_d_exports {
   export { AuthSettingsAPI, AuthSettingsJSONPatch, AuthSettingsJSONPatchArray, AuthSettingsResource, Error, Errors, GetAuthSettingsHttpError, GetAuthSettingsHttpResponse, PatchAuthSettingsHttpError, PatchAuthSettingsHttpResponse, clearCache, authSettingsExport as default, getAuthSettings, patchAuthSettings };
 }
 /**
  * A JSON Patch document for authentication settings as defined in http://tools.ietf.org/html/rfc6902.
  */
-type AuthSettingsJSONPatch = {
+export type AuthSettingsJSONPatch = {
   /** The operation to be performed. */
   op: "replace";
   /** A JSON Pointer to the authentication settings field. Use `/dynamicClientRegistrationEnabled` only with a boolean `value`. Field `/dcrAllowedAuthenticationMethods` is only available when dynamic client registration is enabled. */
@@ -42,11 +42,11 @@ type AuthSettingsJSONPatch = {
  *   }
  * ]
  */
-type AuthSettingsJSONPatchArray = AuthSettingsJSONPatch[];
+export type AuthSettingsJSONPatchArray = AuthSettingsJSONPatch[];
 /**
  * The authentication settings for a tenant, controlling user session duration and inactivity behavior.
  */
-type AuthSettingsResource = {
+export type AuthSettingsResource = {
   /** The allowed authentication methods for dynamic client registration. Only present when dynamic client registration is enabled. */
   dcrAllowedAuthenticationMethods?: ("none" | "client_secret")[];
   /** Indicates whether dynamic client registration is enabled for this tenant. */
@@ -65,7 +65,7 @@ type AuthSettingsResource = {
 /**
  * An error object describing the error.
  */
-type Error = {
+export type Error = {
   /** The error code. */
   code: string;
   /** A human-readable explanation specific to this occurrence of the problem. */
@@ -95,7 +95,7 @@ type Error = {
  *   traceId: "0000000000000000200ba0714061b982"
  * }
  */
-type Errors = {
+export type Errors = {
   /** An array of errors related to the operation. */
   errors?: Error[];
   /** A unique identifier for tracing the error. */
@@ -106,13 +106,13 @@ type Errors = {
  *
  * @throws GetAuthSettingsHttpError
  */
-declare function getAuthSettings(options?: ApiCallOptions): Promise<GetAuthSettingsHttpResponse>;
-type GetAuthSettingsHttpResponse = {
+export declare function getAuthSettings(options?: ApiCallOptions): Promise<GetAuthSettingsHttpResponse>;
+export type GetAuthSettingsHttpResponse = {
   data: AuthSettingsResource;
   headers: Headers;
   status: 200;
 };
-type GetAuthSettingsHttpError = {
+export type GetAuthSettingsHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 403 | 404 | 429 | 500;
@@ -123,13 +123,13 @@ type GetAuthSettingsHttpError = {
  * @param body an object with the body content
  * @throws PatchAuthSettingsHttpError
  */
-declare function patchAuthSettings(body: AuthSettingsJSONPatchArray, options?: ApiCallOptions): Promise<PatchAuthSettingsHttpResponse>;
-type PatchAuthSettingsHttpResponse = {
+export declare function patchAuthSettings(body: AuthSettingsJSONPatchArray, options?: ApiCallOptions): Promise<PatchAuthSettingsHttpResponse>;
+export type PatchAuthSettingsHttpResponse = {
   data: AuthSettingsResource;
   headers: Headers;
   status: 200;
 };
-type PatchAuthSettingsHttpError = {
+export type PatchAuthSettingsHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429 | 500;
@@ -137,8 +137,8 @@ type PatchAuthSettingsHttpError = {
 /**
  * Clears the cache for core/auth-settings api requests.
  */
-declare function clearCache(): void;
-type AuthSettingsAPI = {
+export declare function clearCache(): void;
+export type AuthSettingsAPI = {
   /**
    * Returns the authentication settings for the tenant, including the session inactivity timeout and maximum session lifespan. If no custom values have been saved, the response reflects tenant-wide defaults with `isDefault` set to `true`. The user must be assigned the `TenantAdmin` role.
    *
@@ -162,4 +162,4 @@ type AuthSettingsAPI = {
  */
 declare const authSettingsExport: AuthSettingsAPI;
 //#endregion
-export { AuthSettingsAPI, AuthSettingsJSONPatch, AuthSettingsJSONPatchArray, AuthSettingsResource, Error, Errors, GetAuthSettingsHttpError, GetAuthSettingsHttpResponse, PatchAuthSettingsHttpError, PatchAuthSettingsHttpResponse, clearCache, authSettingsExport as default, getAuthSettings, patchAuthSettings, auth_settings_d_exports as t };
+export { authSettingsExport as default, auth_settings_d_exports as t };

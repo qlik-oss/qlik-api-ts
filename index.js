@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B8GqRz9s.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-uJH1SWdc.js";
 import auth_default from "./auth.js";
-import { a as interceptors$1 } from "./chunks/interceptors-_UakH7Gk.js";
+import { o as interceptors$1 } from "./chunks/interceptors-DIpfevKZ.js";
 import qix$1 from "./qix.js";
 
 //#region src/runtime-api-generator/runtime-api-generator-common.ts
@@ -209,7 +209,11 @@ const createAnalyticsAppsRuntimeAPI = apiDefToApiPublic("analytics/apps", { api:
 		}
 	},
 	"{appId}": { actions: { restore: ["restoreApp:P:"] } },
-	"{guid}": { evaluations: ["getAppEvaluations:GQ:", "createAppEvaluation:P:"] }
+	"{guid}": { evaluations: [
+		"getAppEvaluations:GQ:",
+		"createAppEvaluationWithBody:PBJ:",
+		"createAppEvaluation:P:"
+	] }
 } } } });
 const createAnalyticsChangeStoresRuntimeAPI = apiDefToApiPublic("analytics/change-stores", { api: { analytics: { "change-stores": {
 	"": ["getChangeStores:GQ:"],
@@ -560,13 +564,19 @@ const createConnectivityDataSourcesRuntimeAPI = apiDefToApiPublic("connectivity/
 		settings: ["getDataSourceSettings:G:", "putDataSourceSettings:UBJ:"]
 	}
 } } } });
+const createConnectivityDirectAccessAgentsRuntimeAPI = apiDefToApiPublic("connectivity/direct-access-agents", { api: { connectivity: { "direct-access-agents": { "{agentId}": {
+	benchmarks: ["getDirectAccessAgentBenchmarks:GQ:", "createDirectAccessAgentBenchmark:PQ:"],
+	"load-performance-metrics": ["getDirectAccessAgentLoadPerformanceMetrics:GQ:"]
+} } } } });
 const createConnectivityRuntimeAPI = apiDefToApiPublic("connectivity", {}, {
 	"data-connections": createConnectivityDataConnectionsRuntimeAPI,
 	dataConnections: createConnectivityDataConnectionsRuntimeAPI,
 	"data-credentials": createConnectivityDataCredentialsRuntimeAPI,
 	dataCredentials: createConnectivityDataCredentialsRuntimeAPI,
 	"data-sources": createConnectivityDataSourcesRuntimeAPI,
-	dataSources: createConnectivityDataSourcesRuntimeAPI
+	dataSources: createConnectivityDataSourcesRuntimeAPI,
+	"direct-access-agents": createConnectivityDirectAccessAgentsRuntimeAPI,
+	directAccessAgents: createConnectivityDirectAccessAgentsRuntimeAPI
 });
 const createConsumptionRuntimeAPI = apiDefToApiPublic("consumption", { api: { v1: { consumption: { executions: ["getConsumptionExecutions:GQ:"] } } } });
 const createCoreAuthSettingsRuntimeAPI = apiDefToApiPublic("core/auth-settings", { api: { core: { "auth-settings": ["getAuthSettings:G:", "patchAuthSettings:ABJ:"] } } });
@@ -723,12 +733,18 @@ const createDataGovernanceDataQualitiesRuntimeAPI = apiDefToApiPublic("data-gove
 		actions: { filter: ["filterDataQualitiesGlobalResults:PBJ:"] }
 	}
 } } } });
+const createDataGovernanceSemanticTypesRuntimeAPI = apiDefToApiPublic("data-governance/semantic-types", { api: { "data-governance": { "semantic-types": { actions: {
+	export: ["exportSemanticTypes:PBJ:"],
+	import: ["importSemanticTypes:PBJ:"]
+} } } } });
 const createDataGovernanceTrustScoresRuntimeAPI = apiDefToApiPublic("data-governance/trust-scores", { api: { "data-governance": { "trust-scores": { results: { "data-sets": { actions: { filter: ["filterDatasetsTrustScore:PBJ:"] } } } } } } });
 const createDataGovernanceRuntimeAPI = apiDefToApiPublic("data-governance", {}, {
 	"data-products": createDataGovernanceDataProductsRuntimeAPI,
 	dataProducts: createDataGovernanceDataProductsRuntimeAPI,
 	"data-qualities": createDataGovernanceDataQualitiesRuntimeAPI,
 	dataQualities: createDataGovernanceDataQualitiesRuntimeAPI,
+	"semantic-types": createDataGovernanceSemanticTypesRuntimeAPI,
+	semanticTypes: createDataGovernanceSemanticTypesRuntimeAPI,
 	"trust-scores": createDataGovernanceTrustScoresRuntimeAPI,
 	trustScores: createDataGovernanceTrustScoresRuntimeAPI
 });
@@ -1165,7 +1181,7 @@ const createRolesRuntimeAPI = apiDefToApiPublic("roles", { api: { v1: { roles: {
 		"patchRole:ABJ:"
 	]
 } } } });
-const createSchedulingRuntimeAPI = apiDefToApiPublic("scheduling", {}, { tasks: apiDefToApiPublic("scheduling/tasks", { api: { scheduling: { tasks: {
+const createSchedulingTasksRuntimeAPI = apiDefToApiPublic("scheduling/tasks", { api: { scheduling: { tasks: {
 	"": [
 		"getTasks:GQ:",
 		"createTask:PQBJ:",
@@ -1193,7 +1209,8 @@ const createSchedulingRuntimeAPI = apiDefToApiPublic("scheduling", {}, { tasks: 
 			"{runId}": { log: ["getTaskRunLog:G:"] }
 		}
 	}
-} } } }) });
+} } } });
+const createSchedulingRuntimeAPI = apiDefToApiPublic("scheduling", {}, { tasks: createSchedulingTasksRuntimeAPI });
 const createSharingTasksRuntimeAPI = apiDefToApiPublic("sharing-tasks", { api: { v1: { "sharing-tasks": {
 	"": ["getSharingTasks:GQ:", "createSharingTask:PBJ:"],
 	actions: { execute: ["executeSharingTasks:PBJ:"] },
@@ -1405,43 +1422,44 @@ const createWorkflowsAutomationConnectorsRuntimeAPI = apiDefToApiPublic("workflo
 		webhooks: { configuration: ["getAutomationConnectorWebhooksConfiguration:G:"] }
 	}
 } } } });
+const createWorkflowsAutomationsRuntimeAPI = apiDefToApiPublic("workflows/automations", { api: { workflows: { automations: {
+	"": ["getAutomations:GQ:", "createAutomation:PBJ:"],
+	settings: ["getAutomationsSettings:G:", "updateAutomationsSettings:UBJ:"],
+	usage: ["getAutomationsUsageMetrics:GQ:"],
+	"{id}": {
+		"": [
+			"deleteAutomation:D:",
+			"getAutomation:G:",
+			"updateAutomation:UBJ:"
+		],
+		actions: {
+			"change-owner": ["changeOwnerAutomation:PBJ:"],
+			"change-space": ["changeSpaceAutomation:PBJ:"],
+			copy: ["copyAutomation:PBJ:"],
+			disable: ["disableAutomation:P:"],
+			enable: ["enableAutomation:P:"],
+			move: ["moveAutomation:PBJ:"]
+		},
+		runs: {
+			"": ["getAutomationRuns:GQ:", "createAutomationRun:PBJ:"],
+			"{runId}": {
+				"": ["getAutomationRun:G:"],
+				actions: {
+					export: ["exportAutomationRun:P:"],
+					retry: ["retryAutomationRun:P:"],
+					stop: ["stopAutomationRun:P:"]
+				},
+				debug: ["getAutomationRunDebug:G:"]
+			}
+		}
+	}
+} } } });
 const createWorkflowsRuntimeAPI = apiDefToApiPublic("workflows", {}, {
 	"automation-connections": createWorkflowsAutomationConnectionsRuntimeAPI,
 	automationConnections: createWorkflowsAutomationConnectionsRuntimeAPI,
 	"automation-connectors": createWorkflowsAutomationConnectorsRuntimeAPI,
 	automationConnectors: createWorkflowsAutomationConnectorsRuntimeAPI,
-	automations: apiDefToApiPublic("workflows/automations", { api: { workflows: { automations: {
-		"": ["getAutomations:GQ:", "createAutomation:PBJ:"],
-		settings: ["getAutomationsSettings:G:", "updateAutomationsSettings:UBJ:"],
-		usage: ["getAutomationsUsageMetrics:GQ:"],
-		"{id}": {
-			"": [
-				"deleteAutomation:D:",
-				"getAutomation:G:",
-				"updateAutomation:UBJ:"
-			],
-			actions: {
-				"change-owner": ["changeOwnerAutomation:PBJ:"],
-				"change-space": ["changeSpaceAutomation:PBJ:"],
-				copy: ["copyAutomation:PBJ:"],
-				disable: ["disableAutomation:P:"],
-				enable: ["enableAutomation:P:"],
-				move: ["moveAutomation:PBJ:"]
-			},
-			runs: {
-				"": ["getAutomationRuns:GQ:", "createAutomationRun:PBJ:"],
-				"{runId}": {
-					"": ["getAutomationRun:G:"],
-					actions: {
-						export: ["exportAutomationRun:P:"],
-						retry: ["retryAutomationRun:P:"],
-						stop: ["stopAutomationRun:P:"]
-					},
-					debug: ["getAutomationRunDebug:G:"]
-				}
-			}
-		}
-	} } } })
+	automations: createWorkflowsAutomationsRuntimeAPI
 });
 const auth = auth_default;
 const interceptors = interceptors_default;

@@ -38,6 +38,7 @@
     "./connectivity/data-connections": "./connectivity/data-connections.js",
     "./connectivity/data-credentials": "./connectivity/data-credentials.js",
     "./connectivity/data-sources": "./connectivity/data-sources.js",
+    "./connectivity/direct-access-agents": "./connectivity/direct-access-agents.js",
     "./consumption": "./consumption.js",
     "./core": "./core.js",
     "./core/auth-settings": "./core/auth-settings.js",
@@ -53,6 +54,7 @@
     "./data-governance": "./data-governance.js",
     "./data-governance/data-products": "./data-governance/data-products.js",
     "./data-governance/data-qualities": "./data-governance/data-qualities.js",
+    "./data-governance/semantic-types": "./data-governance/semantic-types.js",
     "./data-governance/trust-scores": "./data-governance/trust-scores.js",
     "./data-qualities": "./data-qualities.js",
     "./data-sets": "./data-sets.js",
@@ -109,10 +111,10 @@
     "enigma.js": "^2.14.0",
     "extend": "3.0.2",
     "lodash-es": "^4.18.1",
-    "ws": "^8.21.1"
+    "ws": "^8.21.3"
   },
   "engines": {
     "node": ">=20.0.0"
   },
-  "packageManager": "pnpm@11.17.0"
+  "packageManager": "pnpm@12.4.1"
 }

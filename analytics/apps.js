@@ -1,10 +1,11 @@
 import { t as __exportAll } from "../chunks/rolldown-runtime-w6R9maHv.js";
-import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-B8GqRz9s.js";
+import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-uJH1SWdc.js";
 
 //#region src/public/rest/analytics/apps.ts
 var apps_exports = /* @__PURE__ */ __exportAll({
 	clearCache: () => clearCache,
 	createAppEvaluation: () => createAppEvaluation,
+	createAppEvaluationWithBody: () => createAppEvaluationWithBody,
 	default: () => appsExport,
 	getAppEvaluation: () => getAppEvaluation,
 	getAppEvaluationComparison: () => getAppEvaluationComparison,
@@ -135,6 +136,26 @@ async function getAppEvaluations(guid, query, options) {
 * it for execution by the evaluation engine. The evaluation measures object response
 * times, CPU usage, document size, and data model metrics. Once queued, use the
 * returned `id` with the retrieval operations to poll for results.
+*
+* @param guid The unique identifier of the app to evaluate.
+* @param body an object with the body content
+* @throws CreateAppEvaluationWithBodyHttpError
+*/
+async function createAppEvaluationWithBody(guid, body, options) {
+	return invokeFetch("analytics/apps", {
+		method: "post",
+		pathTemplate: "/api/analytics/apps/{guid}/evaluations",
+		pathVariables: { guid },
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
+* Queues a performance and scalability evaluation for the specified app, scheduling
+* it for execution by the evaluation engine. The evaluation measures object response
+* times, CPU usage, document size, and data model metrics. Once queued, use the
+* returned `id` with the retrieval operations to poll for results.
 * @example
 * createAppEvaluation(
 *   "abcdefghijklmnopq"
@@ -167,9 +188,10 @@ const appsExport = {
 	getAppEvaluationXml,
 	restoreApp,
 	getAppEvaluations,
+	createAppEvaluationWithBody,
 	createAppEvaluation,
 	clearCache
 };
 
 //#endregion
-export { clearCache, createAppEvaluation, appsExport as default, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXml, getAppEvaluationXml, getAppEvaluations, restoreApp, apps_exports as t };
+export { clearCache, createAppEvaluation, createAppEvaluationWithBody, appsExport as default, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXml, getAppEvaluationXml, getAppEvaluations, restoreApp, apps_exports as t };

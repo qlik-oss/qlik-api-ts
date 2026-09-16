@@ -1,10 +1,10 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/reports.d.ts
 /**
  * Error in resource handling
  */
-type AppError = {
+export type AppError = {
   /** app id */
   appId?: string;
   /** The method that is failing. */
@@ -15,23 +15,23 @@ type AppError = {
 /**
  * Errors occurring when dealing with the app.
  */
-type AppErrors = AppError[];
+export type AppErrors = AppError[];
 /**
  * The callback to be performed once the report is done.
  */
-type CallBackAction = {
+export type CallBackAction = {
   /** Http callback. The provided uri will be called once the report is done. */
   httpRequest?: HttpRequest;
 };
-type ChainableSelection = {
+export type ChainableSelection = {
   persistentBookmark?: SensePersistentBookmark;
   selectionFilter?: SelectionFilter;
   selectionType: ChainableSelectionType;
   /** The temporary bookmark to apply. Patches and Variables are ignored if passed to the API, because they already are applied in the backend. */
   temporaryBookmarkV2?: SenseTemporaryBookmarkV2;
 };
-type ChainableSelectionType = "selectionFilter" | "persistentBookmark" | "temporaryBookmarkV2";
-type ComposableTemplate = {
+export type ChainableSelectionType = "selectionFilter" | "persistentBookmark" | "temporaryBookmarkV2";
+export type ComposableTemplate = {
   /** Used to export a single visualization as pdf, pptx or png. */
   senseImageTemplate?: SenseImageTemplate;
   /** Used to export a sheet as pdf or pptx. */
@@ -39,7 +39,7 @@ type ComposableTemplate = {
   /** Template type and version using semantic versioning. It must have the following name convention, dashed-separated-template-name-MAJOR.MINOR */
   type: "sense-image-1.0" | "sense-sheet-1.0";
 };
-type CycleOutput = {
+export type CycleOutput = {
   /** Output to be used to export an excel template. */
   excelOutput?: ExcelOutput;
   /** not needed at initial phase */
@@ -51,30 +51,30 @@ type CycleOutput = {
 /**
  * Definitions of common properties that are shared between templates, e.g. selectionsByState can be the same for all templates within a composition of templates.
  */
-type Definitions = {
+export type Definitions = {
   /** It maps an ID to a selectionsByState object. */
   selectionsByState?: Record<string, Record<string, QSelection[]>>;
 };
 /**
  * Properties of the document. In case of multiple composition, only properties specified in the composition output are taken and the ones specified in each output item are ignored.
  */
-type DocProperties = {
+export type DocProperties = {
   author?: string;
   subject?: string;
   title?: string;
 };
-type Error = {
+export type Error = {
   /** Errors occured during report generation. */
   errors?: ExportErrors;
 };
 /**
  * Output to be used to export an excel template.
  */
-type ExcelOutput = {
+export type ExcelOutput = {
   /** The output format of the report to be produced. */
   outFormat?: "xlsx";
 };
-type ExportDataOptions = {
+export type ExportDataOptions = {
   /** Show the Selections Applied to the Visualization in the artifact produced */
   showSelections?: boolean;
   /** Show Visualization Title, SubTitle, Footnote in the artifact produced */
@@ -85,7 +85,7 @@ type ExportDataOptions = {
 /**
  * Error occured during report generation.
  */
-type ExportError = {
+export type ExportError = {
   /** The unique code for the error
    *
    * - "REP-400000" Bad request. The server could not understand the request due to invalid syntax.
@@ -181,19 +181,19 @@ type ExportError = {
 /**
  * Errors occured during report generation.
  */
-type ExportErrors = ExportError[];
-type Float64 = number;
+export type ExportErrors = ExportError[];
+export type Float64 = number;
 /**
  * Http callback. The provided uri will be called once the report is done.
  */
-type HttpRequest = {
+export type HttpRequest = {
   /** URI of the request. */
   uri?: string;
 };
 /**
  * Output to be used to export a single visualization as image.
  */
-type ImageOutput = {
+export type ImageOutput = {
   /** Image resolution in DPI (default 96 DPI). */
   outDpi?: number;
   /** The image format of the report to be produced. */
@@ -201,7 +201,7 @@ type ImageOutput = {
   /** The scale factor to be applied in image scaling. A zoom greater than 5 will not be applied to the device pixel ratio which will remain fixed at 5. */
   outZoom?: number;
 };
-type LinkResponse = {
+export type LinkResponse = {
   href?: string | null;
 };
 /**
@@ -218,7 +218,7 @@ type LinkResponse = {
  *   }
  * }
  */
-type LinksResponse = {
+export type LinksResponse = {
   next: LinkResponse;
   prev: LinkResponse;
   self: LinkResponse;
@@ -226,7 +226,7 @@ type LinksResponse = {
 /**
  * Define the request metadata. It includes priority, deadline and future settings on execution policy of the request.
  */
-type Meta = {
+export type Meta = {
   /** The maximum interval, starting from the time the API request is received, within which a report must be produced, past this interval the report generation fails. The default value is 10 minutes, the maximum allowed value is 4 hours. The recommended value for standard apps and exports (image, data, sheet) is 10 minutes, for larger apps or reports using composition or file based templates (Excel, PixelPerfect, HTML...) it should be set to 1 hour. */
   exportDeadline?: string;
   /** Time to live of the final result artifacts in ISO8601 duration format. After that duration the request and underlying output files will not be guaranteed to be available. Default is 1 hour. */
@@ -235,7 +235,7 @@ type Meta = {
 /**
  * Define the export error metadata. Each property is filled if it is related to the export error type.
  */
-type MetaExportError = {
+export type MetaExportError = {
   /** Errors occurring when dealing with the app. */
   appErrors?: AppErrors;
   /** Errors occurring in selections. */
@@ -244,7 +244,7 @@ type MetaExportError = {
 /**
  * Patches to apply to sense charts. Patches are soft properties meaning that are not persistent and they live within a session.
  */
-type NxPatch = {
+export type NxPatch = {
   qOp: "add" | "remove" | "replace";
   /** Path to the property to add, remove or replace. */
   qPath: string;
@@ -271,7 +271,7 @@ type NxPatch = {
  *   type: "pdf"
  * }
  */
-type OutputItem = {
+export type OutputItem = {
   /** The callback to be performed once the report is done. */
   callBackAction?: CallBackAction;
   cycleOutput?: CycleOutput;
@@ -313,12 +313,12 @@ type OutputItem = {
    *    - xlsx requires xlsxOutput to be set */
   type: "image" | "pdf" | "xlsx" | "jsondata" | "pdfcomposition" | "excel" | "pptx" | "pptxcomposition" | "csv" | "cycle" | "html" | "powerpoint" | "word";
 };
-type OutputList = {
+export type OutputList = {
   /** a list of outputs containing all the report outputs */
   data: OutputListItem[];
   links: LinksResponse;
 };
-type OutputListItem = {
+export type OutputListItem = {
   cycleSelections?: QSelection[];
   /** Errors occured during report generation. */
   exportErrors?: ExportErrors;
@@ -335,7 +335,7 @@ type OutputListItem = {
 /**
  * Output to be used to export a composition of templates as pdf.
  */
-type PdfCompositionOutput = {
+export type PdfCompositionOutput = {
   /** The ordered list of PDF outputs, the number must match the composable templates. */
   pdfOutputs?: PdfOutput[];
   /** Properties of the document. In case of multiple composition, only properties specified in the composition output are taken and the ones specified in each output item are ignored. */
@@ -344,7 +344,7 @@ type PdfCompositionOutput = {
 /**
  * Output to be used to export a single visualization, a sheet, Sense Excel template as pdf. For Sense Excel template (sense-excel-template-1.0) no properties are needed, any property specified has no effect.
  */
-type PdfOutput = {
+export type PdfOutput = {
   /** Content alignment. */
   align?: {
     horizontal?: "left" | "center" | "right";
@@ -369,7 +369,7 @@ type PdfOutput = {
   /** Size of the pdf page. */
   size?: "A1" | "A2" | "A3" | "A4" | "A5" | "A6" | "Letter" | "Legal" | "Tabloid";
 };
-type PostReportsResponse = {
+export type PostReportsResponse = {
   /** A message indicating the status of the request. */
   message?: string;
   /** The absolute URL to get the outputs of the report request. */
@@ -380,14 +380,14 @@ type PostReportsResponse = {
 /**
  * Output to be used to export a composition of templates as pptx.
  */
-type PptxCompositionOutput = {
+export type PptxCompositionOutput = {
   /** Output to be used to export a single visualization or a sheet as PowerPoint presentation. */
   pptxOutput?: PptxOutput;
 };
 /**
  * Output to be used to export a single visualization or a sheet as PowerPoint presentation.
  */
-type PptxOutput = {
+export type PptxOutput = {
   /** This value is used for rendered images only, set to a default of 300 dpi. */
   imageRenderingDpi?: number;
   /** L for landscape, P for portrait and A for auto-detect. Auto-detect sets landscape, the default PowerPoint orientation. */
@@ -406,14 +406,14 @@ type PptxOutput = {
 /**
  * In order to apply a selection just one of text/number needs to be set, this must be associated with the correct isNumeric bool. In some scenarios both text and number may be set.
  */
-type QFieldValue = {
+export type QFieldValue = {
   /** IsNumeric tells whether the field value is text or number. Default value is equal to defaultIsNumeric property in QSelection. */
   isNumeric?: boolean;
   number?: Float64;
   /** String value of the field value. */
   text?: string;
 };
-type QSelection = {
+export type QSelection = {
   /** Default value that QFieldValue isNumeric property takes if missing. */
   defaultIsNumeric: boolean;
   /** The name of the field to be selected. */
@@ -421,7 +421,7 @@ type QSelection = {
   /** The values of the field to be selected. */
   values: QFieldValue[];
 };
-type Reason = {
+export type Reason = {
   /** Errors occured during report generation. */
   exportErrors?: ExportErrors;
   /** The output identifier which uniquely identifies an output (PDF, image etc.) within the same request. */
@@ -500,7 +500,7 @@ type Reason = {
  *   type: "composition-1.0"
  * }
  */
-type ReportRequest = {
+export type ReportRequest = {
   /** Composition of senseSheetTemplate and/or senseImageTemplate templates. */
   compositionTemplates?: ComposableTemplate[];
   /** Definitions of common properties that are shared between templates, e.g. selectionsByState can be the same for all templates within a composition of templates. */
@@ -573,7 +573,7 @@ type ReportRequest = {
  *   statusLocation: "/reports/01562a37-23e3-4b43-865d-84c26122276c/status"
  * }
  */
-type ReportStatus = {
+export type ReportStatus = {
   /** @deprecated
    * Present when status is failed. Deprecated. Use /reports/{id}/outputs instead. */
   reasons?: Reason[];
@@ -592,7 +592,7 @@ type ReportStatus = {
 /**
  * Result and info about the generated report.
  */
-type Result = {
+export type Result = {
   /** Errors occured during report generation. */
   exportErrors?: ExportErrors;
   /** Location to download the generated report. */
@@ -603,11 +603,11 @@ type Result = {
 /**
  * Array of ChainableSelection
  */
-type SelectionChain = ChainableSelection[];
+export type SelectionChain = ChainableSelection[];
 /**
  * Selection error related to a fieldName. The field name is missing or some of his selection values are missing or a state is missing
  */
-type SelectionError = {
+export type SelectionError = {
   /** Details about the field selection error. */
   detail?: string;
   errorType?: "fieldMissing" | "fieldValuesMissing" | "stateMissing" | "groupStateGroupMissing" | "groupStateGroupNotApplicable" | "groupStateFieldDefMissing";
@@ -623,16 +623,16 @@ type SelectionError = {
 /**
  * Errors occurring in selections.
  */
-type SelectionErrors = SelectionError[];
-type SelectionFilter = {
+export type SelectionErrors = SelectionError[];
+export type SelectionFilter = {
   /** A map for applying soft properties, aka patches, to specific visualization IDs within the sheet. */
   patchesById?: Record<string, NxPatch[]>;
   /** Map of selections to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and Maximum number of overall field values allowed is 150000. */
   selectionsByState?: Record<string, QSelection[]>;
   variables?: unknown[];
 };
-type SelectionStrategy = "failOnErrors" | "ignoreErrorsReturnDetails" | "ignoreErrorsNoDetails";
-type SenseDataTemplate = {
+export type SelectionStrategy = "failOnErrors" | "ignoreErrorsReturnDetails" | "ignoreErrorsNoDetails";
+export type SenseDataTemplate = {
   appId: string;
   exportOptions?: ExportDataOptions;
   /** Sense visualization id. Visualizations created "on the fly" are not supported. */
@@ -652,7 +652,7 @@ type SenseDataTemplate = {
 /**
  * Used to produce reports from a template file.
  */
-type SenseFileTemplate = {
+export type SenseFileTemplate = {
   /** The values of the field to be selected. */
   cycleFields?: string[];
   /** A JSON object that is passed as-is to the mashup page while rendering, this will be applied to all charts within the sheet. It includes properties of the whole sheet such as theme, gradient etc. Currently only the "theme" and "language" properties are supported. */
@@ -667,7 +667,7 @@ type SenseFileTemplate = {
 /**
  * Used to export a single visualization as pdf, pptx or png.
  */
-type SenseImageTemplate = {
+export type SenseImageTemplate = {
   appId: string;
   persistentBookmark?: SensePersistentBookmark;
   /** Choose the reloadTimestamp constraint to apply. An empty value leads to the default noCheck. */
@@ -684,15 +684,15 @@ type SenseImageTemplate = {
   temporaryBookmarkV2?: SenseTemporaryBookmarkV2;
   visualization: Visualization;
 };
-type SensePersistentBookmark = {
+export type SensePersistentBookmark = {
   /** Sense Persistence Bookmark id. */
   id: string;
 };
-type SenseSelectionType = "selectionsByState" | "temporaryBookmark" | "persistentBookmark" | "temporaryBookmarkV2";
+export type SenseSelectionType = "selectionsByState" | "temporaryBookmark" | "persistentBookmark" | "temporaryBookmarkV2";
 /**
  * Used to export a sheet as pdf or pptx.
  */
-type SenseSheetTemplate = {
+export type SenseSheetTemplate = {
   appId: string;
   persistentBookmark?: SensePersistentBookmark;
   /** Choose the reloadTimestamp constraint to apply. An empty value leads to the default noCheck. */
@@ -711,14 +711,14 @@ type SenseSheetTemplate = {
 /**
  * The temporary bookmark to apply. Patches and Variables are ignored if passed to the API, because they already are applied in the backend.
  */
-type SenseTemporaryBookmarkV2 = {
+export type SenseTemporaryBookmarkV2 = {
   /** Sense Temporary Bookmark id. */
   id: string;
 };
 /**
  * It refers to the Sense Sheet to be exported. Note that if widthPx and heightPx are not specified, default values will be applied depending on the actual size and layout properties of the Sense Sheet object.
  */
-type Sheet = {
+export type Sheet = {
   /** The height of the sheet in pixels. Default value is: - 1120 pixels for responsive sheet - 1680 pixels for extended sheet - same height set in sheet properties for custom sheet */
   heightPx?: number;
   /** The id of the sheet. */
@@ -735,12 +735,12 @@ type Sheet = {
 /**
  * The location of the report template. Currently it can be an absolute or relative URL to a persisted report template, or to a template file saved as temporary content, as in the following examples: - https://qlikcloud.com:443/api/v1/report-templates/223940f7-3170-46b7-91ea-e0c81230adf7 - https://qlikcloud.com:443/api/v1/temp-contents/653bb4acae966r0730da15fc
  */
-type TemplateLocation = {
+export type TemplateLocation = {
   format?: "url";
   /** The report template location path. */
   path: string;
 };
-type Visualization = {
+export type Visualization = {
   /** Height in pixels. */
   heightPx: number;
   /** The sense visualization id or json definition. */
@@ -759,20 +759,20 @@ type Visualization = {
  * @example
  * "noCheck"
  */
-type ReloadTimestampMatchType = "noCheck" | "requestTimeExact";
+export type ReloadTimestampMatchType = "noCheck" | "requestTimeExact";
 /**
  * Queue a new report request generation.
  *
  * @param body an object with the body content
  * @throws CreateReportHttpError
  */
-declare function createReport(body: ReportRequest, options?: ApiCallOptions): Promise<CreateReportHttpResponse>;
-type CreateReportHttpResponse = {
+export declare function createReport(body: ReportRequest, options?: ApiCallOptions): Promise<CreateReportHttpResponse>;
+export type CreateReportHttpResponse = {
   data: PostReportsResponse;
   headers: Headers;
   status: 202;
 };
-type CreateReportHttpError = {
+export type CreateReportHttpError = {
   data: Error;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 429 | 500;
@@ -785,7 +785,7 @@ type CreateReportHttpError = {
  * @param query an object with query parameters
  * @throws GetReportOutputsHttpError
  */
-declare function getReportOutputs(id: string, query: {
+export declare function getReportOutputs(id: string, query: {
   /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax. Cannot be combined with any of the fields marked as deprecated. All conditional statements within this query parameter are case insensitive.
    * The following fields support the `eq` (equals) operator: `outputId`
    * Example:
@@ -798,14 +798,14 @@ declare function getReportOutputs(id: string, query: {
   /** Sorting parameters */
   sort?: ("+outputId" | "-outputId" | "+sizeBytes" | "-sizeBytes")[];
 }, options?: ApiCallOptions): Promise<GetReportOutputsHttpResponse>;
-type GetReportOutputsHttpResponse = {
+export type GetReportOutputsHttpResponse = {
   data: OutputList;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetReportOutputsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetReportOutputsHttpResponse>;
 };
-type GetReportOutputsHttpError = {
+export type GetReportOutputsHttpError = {
   data: Error;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 429 | 500;
@@ -816,13 +816,13 @@ type GetReportOutputsHttpError = {
  * @param id Identifier of the request.
  * @throws GetReportStatusHttpError
  */
-declare function getReportStatus(id: string, options?: ApiCallOptions): Promise<GetReportStatusHttpResponse>;
-type GetReportStatusHttpResponse = {
+export declare function getReportStatus(id: string, options?: ApiCallOptions): Promise<GetReportStatusHttpResponse>;
+export type GetReportStatusHttpResponse = {
   data: ReportStatus;
   headers: Headers;
   status: 200;
 };
-type GetReportStatusHttpError = {
+export type GetReportStatusHttpError = {
   data: Error;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 429 | 500;
@@ -830,8 +830,8 @@ type GetReportStatusHttpError = {
 /**
  * Clears the cache for reports api requests.
  */
-declare function clearCache(): void;
-type ReportsAPI = {
+export declare function clearCache(): void;
+export type ReportsAPI = {
   /**
    * Queue a new report request generation.
    *
@@ -865,4 +865,4 @@ type ReportsAPI = {
  */
 declare const reportsExport: ReportsAPI;
 //#endregion
-export { AppError, AppErrors, CallBackAction, ChainableSelection, ChainableSelectionType, ComposableTemplate, CreateReportHttpError, CreateReportHttpResponse, CycleOutput, Definitions, DocProperties, Error, ExcelOutput, ExportDataOptions, ExportError, ExportErrors, Float64, GetReportOutputsHttpError, GetReportOutputsHttpResponse, GetReportStatusHttpError, GetReportStatusHttpResponse, HttpRequest, ImageOutput, LinkResponse, LinksResponse, Meta, MetaExportError, NxPatch, OutputItem, OutputList, OutputListItem, PdfCompositionOutput, PdfOutput, PostReportsResponse, PptxCompositionOutput, PptxOutput, QFieldValue, QSelection, Reason, ReloadTimestampMatchType, ReportRequest, ReportStatus, ReportsAPI, Result, SelectionChain, SelectionError, SelectionErrors, SelectionFilter, SelectionStrategy, SenseDataTemplate, SenseFileTemplate, SenseImageTemplate, SensePersistentBookmark, SenseSelectionType, SenseSheetTemplate, SenseTemporaryBookmarkV2, Sheet, TemplateLocation, Visualization, clearCache, createReport, reportsExport as default, getReportOutputs, getReportStatus };
+export { reportsExport as default };

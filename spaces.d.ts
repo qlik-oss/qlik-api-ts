@@ -1,11 +1,11 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/spaces.d.ts
 /**
  * The supported actions for user-created spaces.
  */
-type ActionName = "change_owner" | "create" | "read" | "update" | "delete" | "publish" | "link_environment" | "restrict";
-type Assignment = {
+export type ActionName = "change_owner" | "create" | "read" | "update" | "delete" | "publish" | "link_environment" | "restrict";
+export type Assignment = {
   /** The userId or groupId based on the type. */
   assigneeId: string;
   /** The date and time when the space was created. */
@@ -30,7 +30,7 @@ type Assignment = {
   /** The ID of the user who updated the assignment. */
   readonly updatedBy?: string;
 };
-type AssignmentCreate = {
+export type AssignmentCreate = {
   /** The userId or groupId based on the type. */
   assigneeId: string;
   /** The roles assigned to the assigneeId. For the full list of roles assignable in this space type, call `GET /spaces/{spaceId}` and inspect the `meta.assignableRoles` object. */
@@ -41,12 +41,12 @@ type AssignmentCreate = {
 /**
  * The type of assignment such as user or group
  */
-type AssignmentType = "user" | "group" | "bot";
-type AssignmentUpdate = {
+export type AssignmentType = "user" | "group" | "bot";
+export type AssignmentUpdate = {
   /** The roles assigned to the assigneeId. For the full list of roles assignable in this space type, call `GET /spaces/{spaceId}` and inspect the `meta.assignableRoles` object. */
   roles?: RoleType[];
 };
-type Assignments = {
+export type Assignments = {
   data?: Assignment[];
   readonly links?: {
     next?: Link;
@@ -61,7 +61,7 @@ type Assignments = {
 /**
  * An error object.
  */
-type Error = {
+export type Error = {
   /** The error code. */
   code: string;
   /** A human-readable explanation specific to the occurrence of this problem. */
@@ -79,7 +79,7 @@ type Error = {
   /** Summary of the problem. */
   title: string;
 };
-type Errors = {
+export type Errors = {
   /** @deprecated
    * The error code. */
   code?: string;
@@ -103,7 +103,7 @@ type Errors = {
   title?: string;
   traceId?: string;
 };
-type Link = {
+export type Link = {
   /** URL that defines the resource. */
   href: string;
 };
@@ -113,8 +113,8 @@ type Link = {
  * - Managed: consumer, contributor, dataconsumer, facilitator, publisher, basicconsumer
  * - Data: consumer, dataconsumer, datapreview, facilitator, operator, producer, publisher
  */
-type RoleType = "consumer" | "contributor" | "dataconsumer" | "datapreview" | "facilitator" | "operator" | "producer" | "publisher" | "basicconsumer" | "codeveloper";
-type Share = {
+export type RoleType = "consumer" | "contributor" | "dataconsumer" | "datapreview" | "facilitator" | "operator" | "producer" | "publisher" | "basicconsumer" | "codeveloper";
+export type Share = {
   /** The userId or groupId based on the type. */
   assigneeId: string;
   readonly createdAt?: string;
@@ -142,7 +142,7 @@ type Share = {
   /** The ID of the user who updated the share. */
   readonly updatedBy?: string;
 };
-type ShareCreate = {
+export type ShareCreate = {
   /** The userId or groupId based on the type. */
   assigneeId: string;
   /** The resource id for the shared item. */
@@ -153,7 +153,7 @@ type ShareCreate = {
   roles: ShareRoleType[];
   type: ShareType;
 };
-type SharePatch = {
+export type SharePatch = {
   /** The operation to be performed. */
   op: "replace";
   /** Field of Share to be patched (updated). */
@@ -168,9 +168,9 @@ type SharePatch = {
  * - Shared: consumer
  * - Managed: basicconsumer, consumer, contributor
  */
-type ShareRoleType = "consumer" | "contributor" | "basicconsumer";
-type ShareType = "user" | "group" | "link";
-type Shares = {
+export type ShareRoleType = "consumer" | "contributor" | "basicconsumer";
+export type ShareType = "user" | "group" | "link";
+export type Shares = {
   data?: Share[];
   readonly links?: {
     next?: Link;
@@ -185,7 +185,7 @@ type Shares = {
 /**
  * A space is a security context simplifying the management of access control by allowing users to control it on the containers instead of on the resources themselves.
  */
-type Space = {
+export type Space = {
   /** The date and time when the space was created. */
   readonly createdAt?: string;
   /** The ID of the user who created the space. */
@@ -218,7 +218,7 @@ type Space = {
   /** The date and time when the space was updated. */
   readonly updatedAt?: string;
 };
-type SpaceCreate = {
+export type SpaceCreate = {
   /** The description of the space. Personal spaces do not have a description. */
   description?: string;
   /** The name of the space. Personal spaces do not have a name. */
@@ -226,7 +226,7 @@ type SpaceCreate = {
   /** The type of space such as shared, managed, and so on. */
   type: "shared" | "managed" | "data";
 };
-type SpacePatch = {
+export type SpacePatch = {
   /** The operation to be performed. */
   op: "replace";
   /** Field of space to be patched (updated). */
@@ -240,14 +240,14 @@ type SpacePatch = {
 /**
  * The name of the type.
  */
-type SpaceType = "shared" | "managed" | "data";
+export type SpaceType = "shared" | "managed" | "data";
 /**
  * The distinct types of spaces (shared, managed, and so on).
  */
-type SpaceTypes = {
+export type SpaceTypes = {
   readonly data?: SpaceType[];
 };
-type SpaceUpdate = {
+export type SpaceUpdate = {
   /** The description of the space. Personal spaces do not have a description. */
   description?: string;
   /** The name of the space. */
@@ -255,7 +255,7 @@ type SpaceUpdate = {
   /** The user ID of the space owner. */
   ownerId?: string;
 };
-type Spaces = {
+export type Spaces = {
   data?: Space[];
   readonly links?: {
     next?: Link;
@@ -280,7 +280,7 @@ type Spaces = {
  * @param query an object with query parameters
  * @throws GetSpacesHttpError
  */
-declare function getSpaces(query: {
+export declare function getSpaces(query: {
   /** Action on space. Supports only "?action=publish". */
   action?: string;
   /** Environment name to filter by. For example, "?environment.name=Development". Use an empty value to return spaces with no environment. */
@@ -304,14 +304,14 @@ declare function getSpaces(query: {
   /** Type(s) of space to filter. For example, "?type=managed,shared". */
   type?: string;
 }, options?: ApiCallOptions): Promise<GetSpacesHttpResponse>;
-type GetSpacesHttpResponse = {
+export type GetSpacesHttpResponse = {
   data: Spaces;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetSpacesHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetSpacesHttpResponse>;
 };
-type GetSpacesHttpError = {
+export type GetSpacesHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 500;
@@ -322,13 +322,13 @@ type GetSpacesHttpError = {
  * @param body an object with the body content
  * @throws CreateSpaceHttpError
  */
-declare function createSpace(body: SpaceCreate, options?: ApiCallOptions): Promise<CreateSpaceHttpResponse>;
-type CreateSpaceHttpResponse = {
+export declare function createSpace(body: SpaceCreate, options?: ApiCallOptions): Promise<CreateSpaceHttpResponse>;
+export type CreateSpaceHttpResponse = {
   data: Space;
   headers: Headers;
   status: 201;
 };
-type CreateSpaceHttpError = {
+export type CreateSpaceHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 403 | 409 | 500;
@@ -338,13 +338,13 @@ type CreateSpaceHttpError = {
  *
  * @throws GetSpaceTypesHttpError
  */
-declare function getSpaceTypes(options?: ApiCallOptions): Promise<GetSpaceTypesHttpResponse>;
-type GetSpaceTypesHttpResponse = {
+export declare function getSpaceTypes(options?: ApiCallOptions): Promise<GetSpaceTypesHttpResponse>;
+export type GetSpaceTypesHttpResponse = {
   data: SpaceTypes;
   headers: Headers;
   status: 200;
 };
-type GetSpaceTypesHttpError = {
+export type GetSpaceTypesHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 500;
@@ -355,13 +355,13 @@ type GetSpaceTypesHttpError = {
  * @param spaceId The ID of the space to delete.
  * @throws DeleteSpaceHttpError
  */
-declare function deleteSpace(spaceId: string, options?: ApiCallOptions): Promise<DeleteSpaceHttpResponse>;
-type DeleteSpaceHttpResponse = {
+export declare function deleteSpace(spaceId: string, options?: ApiCallOptions): Promise<DeleteSpaceHttpResponse>;
+export type DeleteSpaceHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteSpaceHttpError = {
+export type DeleteSpaceHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 403 | 404 | 412 | 500;
@@ -372,13 +372,13 @@ type DeleteSpaceHttpError = {
  * @param spaceId The ID of the space to retrieve.
  * @throws GetSpaceHttpError
  */
-declare function getSpace(spaceId: string, options?: ApiCallOptions): Promise<GetSpaceHttpResponse>;
-type GetSpaceHttpResponse = {
+export declare function getSpace(spaceId: string, options?: ApiCallOptions): Promise<GetSpaceHttpResponse>;
+export type GetSpaceHttpResponse = {
   data: Space;
   headers: Headers;
   status: 200;
 };
-type GetSpaceHttpError = {
+export type GetSpaceHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 404 | 429 | 500;
@@ -390,13 +390,13 @@ type GetSpaceHttpError = {
  * @param body an object with the body content
  * @throws PatchSpaceHttpError
  */
-declare function patchSpace(spaceId: string, body: SpacePatch, options?: ApiCallOptions): Promise<PatchSpaceHttpResponse>;
-type PatchSpaceHttpResponse = {
+export declare function patchSpace(spaceId: string, body: SpacePatch, options?: ApiCallOptions): Promise<PatchSpaceHttpResponse>;
+export type PatchSpaceHttpResponse = {
   data: Space;
   headers: Headers;
   status: 200;
 };
-type PatchSpaceHttpError = {
+export type PatchSpaceHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 403 | 404 | 500;
@@ -408,13 +408,13 @@ type PatchSpaceHttpError = {
  * @param body an object with the body content
  * @throws UpdateSpaceHttpError
  */
-declare function updateSpace(spaceId: string, body: SpaceUpdate, options?: ApiCallOptions): Promise<UpdateSpaceHttpResponse>;
-type UpdateSpaceHttpResponse = {
+export declare function updateSpace(spaceId: string, body: SpaceUpdate, options?: ApiCallOptions): Promise<UpdateSpaceHttpResponse>;
+export type UpdateSpaceHttpResponse = {
   data: Space;
   headers: Headers;
   status: 200;
 };
-type UpdateSpaceHttpError = {
+export type UpdateSpaceHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 403 | 404 | 500;
@@ -426,7 +426,7 @@ type UpdateSpaceHttpError = {
  * @param query an object with query parameters
  * @throws GetSpaceAssignmentsHttpError
  */
-declare function getSpaceAssignments(spaceId: string, query: {
+export declare function getSpaceAssignments(spaceId: string, query: {
   /** Filters assignment for a specific assigneeid. */
   assigneeId?: string;
   /** Maximum number of assignments to return. */
@@ -438,14 +438,14 @@ declare function getSpaceAssignments(spaceId: string, query: {
   /** The type of assignment. Supported values are user or group. */
   type?: AssignmentType;
 }, options?: ApiCallOptions): Promise<GetSpaceAssignmentsHttpResponse>;
-type GetSpaceAssignmentsHttpResponse = {
+export type GetSpaceAssignmentsHttpResponse = {
   data: Assignments;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetSpaceAssignmentsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetSpaceAssignmentsHttpResponse>;
 };
-type GetSpaceAssignmentsHttpError = {
+export type GetSpaceAssignmentsHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 403 | 404 | 500;
@@ -457,13 +457,13 @@ type GetSpaceAssignmentsHttpError = {
  * @param body an object with the body content
  * @throws CreateSpaceAssignmentHttpError
  */
-declare function createSpaceAssignment(spaceId: string, body: AssignmentCreate, options?: ApiCallOptions): Promise<CreateSpaceAssignmentHttpResponse>;
-type CreateSpaceAssignmentHttpResponse = {
+export declare function createSpaceAssignment(spaceId: string, body: AssignmentCreate, options?: ApiCallOptions): Promise<CreateSpaceAssignmentHttpResponse>;
+export type CreateSpaceAssignmentHttpResponse = {
   data: Assignment;
   headers: Headers;
   status: 201;
 };
-type CreateSpaceAssignmentHttpError = {
+export type CreateSpaceAssignmentHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 403 | 404 | 409 | 500;
@@ -475,13 +475,13 @@ type CreateSpaceAssignmentHttpError = {
  * @param assignmentId The ID of the assignment to delete.
  * @throws DeleteSpaceAssignmentHttpError
  */
-declare function deleteSpaceAssignment(spaceId: string, assignmentId: string, options?: ApiCallOptions): Promise<DeleteSpaceAssignmentHttpResponse>;
-type DeleteSpaceAssignmentHttpResponse = {
+export declare function deleteSpaceAssignment(spaceId: string, assignmentId: string, options?: ApiCallOptions): Promise<DeleteSpaceAssignmentHttpResponse>;
+export type DeleteSpaceAssignmentHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteSpaceAssignmentHttpError = {
+export type DeleteSpaceAssignmentHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 403 | 404 | 500;
@@ -493,13 +493,13 @@ type DeleteSpaceAssignmentHttpError = {
  * @param assignmentId The ID of the assignment to retrieve.
  * @throws GetSpaceAssignmentHttpError
  */
-declare function getSpaceAssignment(spaceId: string, assignmentId: string, options?: ApiCallOptions): Promise<GetSpaceAssignmentHttpResponse>;
-type GetSpaceAssignmentHttpResponse = {
+export declare function getSpaceAssignment(spaceId: string, assignmentId: string, options?: ApiCallOptions): Promise<GetSpaceAssignmentHttpResponse>;
+export type GetSpaceAssignmentHttpResponse = {
   data: Assignment;
   headers: Headers;
   status: 200;
 };
-type GetSpaceAssignmentHttpError = {
+export type GetSpaceAssignmentHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 403 | 404 | 500;
@@ -512,13 +512,13 @@ type GetSpaceAssignmentHttpError = {
  * @param body an object with the body content
  * @throws UpdateSpaceAssignmentHttpError
  */
-declare function updateSpaceAssignment(spaceId: string, assignmentId: string, body: AssignmentUpdate, options?: ApiCallOptions): Promise<UpdateSpaceAssignmentHttpResponse>;
-type UpdateSpaceAssignmentHttpResponse = {
+export declare function updateSpaceAssignment(spaceId: string, assignmentId: string, body: AssignmentUpdate, options?: ApiCallOptions): Promise<UpdateSpaceAssignmentHttpResponse>;
+export type UpdateSpaceAssignmentHttpResponse = {
   data: Assignment;
   headers: Headers;
   status: 200;
 };
-type UpdateSpaceAssignmentHttpError = {
+export type UpdateSpaceAssignmentHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 403 | 404 | 500;
@@ -530,7 +530,7 @@ type UpdateSpaceAssignmentHttpError = {
  * @param query an object with query parameters
  * @throws GetSpaceSharesHttpError
  */
-declare function getSpaceShares(spaceId: string, query: {
+export declare function getSpaceShares(spaceId: string, query: {
   /** The ID of the group to which the resource is shared. */
   groupId?: string;
   /** Maximum number of shares to return. */
@@ -550,14 +550,14 @@ declare function getSpaceShares(spaceId: string, query: {
   /** The ID of the user to which the resource is shared. */
   userId?: string;
 }, options?: ApiCallOptions): Promise<GetSpaceSharesHttpResponse>;
-type GetSpaceSharesHttpResponse = {
+export type GetSpaceSharesHttpResponse = {
   data: Shares;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetSpaceSharesHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetSpaceSharesHttpResponse>;
 };
-type GetSpaceSharesHttpError = {
+export type GetSpaceSharesHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 403 | 404 | 500;
@@ -569,13 +569,13 @@ type GetSpaceSharesHttpError = {
  * @param body an object with the body content
  * @throws CreateSpaceShareHttpError
  */
-declare function createSpaceShare(spaceId: string, body: ShareCreate, options?: ApiCallOptions): Promise<CreateSpaceShareHttpResponse>;
-type CreateSpaceShareHttpResponse = {
+export declare function createSpaceShare(spaceId: string, body: ShareCreate, options?: ApiCallOptions): Promise<CreateSpaceShareHttpResponse>;
+export type CreateSpaceShareHttpResponse = {
   data: Share;
   headers: Headers;
   status: 201;
 };
-type CreateSpaceShareHttpError = {
+export type CreateSpaceShareHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 403 | 404 | 409 | 500;
@@ -587,13 +587,13 @@ type CreateSpaceShareHttpError = {
  * @param shareId The ID of the share to delete.
  * @throws DeleteSpaceShareHttpError
  */
-declare function deleteSpaceShare(spaceId: string, shareId: string, options?: ApiCallOptions): Promise<DeleteSpaceShareHttpResponse>;
-type DeleteSpaceShareHttpResponse = {
+export declare function deleteSpaceShare(spaceId: string, shareId: string, options?: ApiCallOptions): Promise<DeleteSpaceShareHttpResponse>;
+export type DeleteSpaceShareHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteSpaceShareHttpError = {
+export type DeleteSpaceShareHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 403 | 404 | 500;
@@ -605,13 +605,13 @@ type DeleteSpaceShareHttpError = {
  * @param shareId The ID of the share to retrieve.
  * @throws GetSpaceShareHttpError
  */
-declare function getSpaceShare(spaceId: string, shareId: string, options?: ApiCallOptions): Promise<GetSpaceShareHttpResponse>;
-type GetSpaceShareHttpResponse = {
+export declare function getSpaceShare(spaceId: string, shareId: string, options?: ApiCallOptions): Promise<GetSpaceShareHttpResponse>;
+export type GetSpaceShareHttpResponse = {
   data: Share;
   headers: Headers;
   status: 200;
 };
-type GetSpaceShareHttpError = {
+export type GetSpaceShareHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 403 | 404 | 500;
@@ -624,13 +624,13 @@ type GetSpaceShareHttpError = {
  * @param body an object with the body content
  * @throws PatchShareHttpError
  */
-declare function patchShare(spaceId: string, shareId: string, body: SharePatch, options?: ApiCallOptions): Promise<PatchShareHttpResponse>;
-type PatchShareHttpResponse = {
+export declare function patchShare(spaceId: string, shareId: string, body: SharePatch, options?: ApiCallOptions): Promise<PatchShareHttpResponse>;
+export type PatchShareHttpResponse = {
   data: Share;
   headers: Headers;
   status: 200;
 };
-type PatchShareHttpError = {
+export type PatchShareHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 403 | 404 | 500;
@@ -638,8 +638,8 @@ type PatchShareHttpError = {
 /**
  * Clears the cache for spaces api requests.
  */
-declare function clearCache(): void;
-type SpacesAPI = {
+export declare function clearCache(): void;
+export type SpacesAPI = {
   /**
    * Retrieves spaces that the current user has access to and match the query.
    *
@@ -782,4 +782,4 @@ type SpacesAPI = {
  */
 declare const spacesExport: SpacesAPI;
 //#endregion
-export { ActionName, Assignment, AssignmentCreate, AssignmentType, AssignmentUpdate, Assignments, CreateSpaceAssignmentHttpError, CreateSpaceAssignmentHttpResponse, CreateSpaceHttpError, CreateSpaceHttpResponse, CreateSpaceShareHttpError, CreateSpaceShareHttpResponse, DeleteSpaceAssignmentHttpError, DeleteSpaceAssignmentHttpResponse, DeleteSpaceHttpError, DeleteSpaceHttpResponse, DeleteSpaceShareHttpError, DeleteSpaceShareHttpResponse, Error, Errors, GetSpaceAssignmentHttpError, GetSpaceAssignmentHttpResponse, GetSpaceAssignmentsHttpError, GetSpaceAssignmentsHttpResponse, GetSpaceHttpError, GetSpaceHttpResponse, GetSpaceShareHttpError, GetSpaceShareHttpResponse, GetSpaceSharesHttpError, GetSpaceSharesHttpResponse, GetSpaceTypesHttpError, GetSpaceTypesHttpResponse, GetSpacesHttpError, GetSpacesHttpResponse, Link, PatchShareHttpError, PatchShareHttpResponse, PatchSpaceHttpError, PatchSpaceHttpResponse, RoleType, Share, ShareCreate, SharePatch, ShareRoleType, ShareType, Shares, Space, SpaceCreate, SpacePatch, SpaceType, SpaceTypes, SpaceUpdate, Spaces, SpacesAPI, UpdateSpaceAssignmentHttpError, UpdateSpaceAssignmentHttpResponse, UpdateSpaceHttpError, UpdateSpaceHttpResponse, clearCache, createSpace, createSpaceAssignment, createSpaceShare, spacesExport as default, deleteSpace, deleteSpaceAssignment, deleteSpaceShare, getSpace, getSpaceAssignment, getSpaceAssignments, getSpaceShare, getSpaceShares, getSpaceTypes, getSpaces, patchShare, patchSpace, updateSpace, updateSpaceAssignment };
+export { spacesExport as default };

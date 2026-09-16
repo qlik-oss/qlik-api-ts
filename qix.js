@@ -1,4 +1,4 @@
-import { r as getQixRuntimeModule } from "./chunks/public-runtime-modules-DBsjSc2D.js";
+import { r as getQixRuntimeModule } from "./chunks/public-runtime-modules-DDFe6TLg.js";
 
 //#region src/public/qix.ts
 function openAppSession(appSessionProps) {
@@ -18,6 +18,37 @@ function openAppSession(appSessionProps) {
 		*/
 		onWebSocketEvent(listener) {
 			const returnedFnPromise = appSessionPromise.then((appSession) => appSession.onWebSocketEvent(listener));
+			return () => {
+				returnedFnPromise.then((fn) => fn());
+			};
+		},
+		/**
+		* @experimental
+		* Add a progress-listener for an app open process. This is the process behind the `getDoc` promise.
+		*/
+		onOpenProgress(listener) {
+			const returnedFnPromise = appSessionPromise.then((appSession) => appSession.onOpenProgress(listener));
+			return () => {
+				returnedFnPromise.then((fn) => fn());
+			};
+		},
+		/**
+		* @experimental
+		* Add a progress-listener for an app reload process.
+		* A reload is triggered by calling `Doc.DoReload` or `Doc.DoReloadEx`.
+		*/
+		onReloadProgress(listener) {
+			const returnedFnPromise = appSessionPromise.then((appSession) => appSession.onReloadProgress(listener));
+			return () => {
+				returnedFnPromise.then((fn) => fn());
+			};
+		},
+		/**
+		* @experimental
+		* Add a progress-listener for an app save process (triggered by `DoSave` on a `Doc`).
+		*/
+		onSaveProgress(listener) {
+			const returnedFnPromise = appSessionPromise.then((appSession) => appSession.onSaveProgress(listener));
 			return () => {
 				returnedFnPromise.then((fn) => fn());
 			};

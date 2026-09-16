@@ -1,10 +1,10 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/oauth-tokens.d.ts
 /**
  * An error object.
  */
-type Error = {
+export type Error = {
   /** The error code. */
   code: string;
   /** The detailed error message. */
@@ -19,15 +19,15 @@ type Error = {
 /**
  * A representation of the errors encountered from the HTTP request.
  */
-type Errors = {
+export type Errors = {
   /** List of errors and their properties. */
   errors?: Error[];
 };
-type Link = {
+export type Link = {
   /** The URL for the link. */
   href: string;
 };
-type OauthToken = {
+export type OauthToken = {
   /** The description of the token. */
   description?: string;
   /** The type of the user device the authorization token is generated for (Tablet, Phone etc.). */
@@ -41,7 +41,7 @@ type OauthToken = {
   /** The ID of the owning user. */
   userId: string;
 };
-type OauthTokenPage = {
+export type OauthTokenPage = {
   data: OauthToken[];
   links: {
     next?: Link;
@@ -55,7 +55,7 @@ type OauthTokenPage = {
  * @param query an object with query parameters
  * @throws GetOauthTokensHttpError
  */
-declare function getOauthTokens(query: {
+export declare function getOauthTokens(query: {
   /** The maximum number of tokens to return. */
   limit?: number;
   /** The target page. */
@@ -65,14 +65,14 @@ declare function getOauthTokens(query: {
   /** The ID of the user to limit results to. */
   userId?: string;
 }, options?: ApiCallOptions): Promise<GetOauthTokensHttpResponse>;
-type GetOauthTokensHttpResponse = {
+export type GetOauthTokensHttpResponse = {
   data: OauthTokenPage;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetOauthTokensHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetOauthTokensHttpResponse>;
 };
-type GetOauthTokensHttpError = {
+export type GetOauthTokensHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401;
@@ -83,13 +83,13 @@ type GetOauthTokensHttpError = {
  * @param tokenId The ID of the token to revoke.
  * @throws DeleteOauthTokenHttpError
  */
-declare function deleteOauthToken(tokenId: string, options?: ApiCallOptions): Promise<DeleteOauthTokenHttpResponse>;
-type DeleteOauthTokenHttpResponse = {
+export declare function deleteOauthToken(tokenId: string, options?: ApiCallOptions): Promise<DeleteOauthTokenHttpResponse>;
+export type DeleteOauthTokenHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteOauthTokenHttpError = {
+export type DeleteOauthTokenHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -97,8 +97,8 @@ type DeleteOauthTokenHttpError = {
 /**
  * Clears the cache for oauth-tokens api requests.
  */
-declare function clearCache(): void;
-type OauthTokensAPI = {
+export declare function clearCache(): void;
+export type OauthTokensAPI = {
   /**
    * Retrieve list of OAuth tokens that the user has access to. Users assigned with a `TenantAdmin` role can list OAuth tokens generated for all users in the tenant.
    *
@@ -123,4 +123,4 @@ type OauthTokensAPI = {
  */
 declare const oauthTokensExport: OauthTokensAPI;
 //#endregion
-export { DeleteOauthTokenHttpError, DeleteOauthTokenHttpResponse, Error, Errors, GetOauthTokensHttpError, GetOauthTokensHttpResponse, Link, OauthToken, OauthTokenPage, OauthTokensAPI, clearCache, oauthTokensExport as default, deleteOauthToken, getOauthTokens };
+export { oauthTokensExport as default };

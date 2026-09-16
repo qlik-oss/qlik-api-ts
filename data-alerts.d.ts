@@ -1,19 +1,20 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/data-alerts.d.ts
-type AlertingActionsTriggerCreateRequest = {
+export type AlertingActionsTriggerCreateRequest = {
+  /** Identifier of the alerting task to trigger. */
   alertingTaskID: string;
 };
-type AlertingActionsTriggerCreateResponse = {
+export type AlertingActionsTriggerCreateResponse = {
   /** the workflow id created for the manual triggering of alert */
   workflowID?: string;
 };
-type AlertingConditionResponse = {
+export type AlertingConditionResponse = {
   /** Should reference ConditionResponse type in condition-manager api docs */
   conditionResponse?: unknown;
   hideSelections?: boolean;
 };
-type AlertingExecutionError = {
+export type AlertingExecutionError = {
   /** Error code specific to sharing service. */
   readonly code?: string;
   /** Error cause. */
@@ -21,13 +22,13 @@ type AlertingExecutionError = {
   /** Error title. */
   readonly title?: string;
 };
-type AlertingExecutionErrors = AlertingExecutionError[];
-type AlertingExecutionListResponse = StandardListResponseProps & {
+export type AlertingExecutionErrors = AlertingExecutionError[];
+export type AlertingExecutionListResponse = StandardListResponseProps & {
   /** Gets a list of alerting-executions. */
   executions?: AlertingExecutionResponse[];
   links?: ListLinks;
 };
-type AlertingExecutionPersist = {
+export type AlertingExecutionPersist = {
   accessMode?: "SOURCE_ACCESS" | "TARGET_ACCESS";
   /** ID for the alerting task that this execution references */
   alertId?: string;
@@ -57,15 +58,15 @@ type AlertingExecutionPersist = {
   /** ID for the workflow, coming from eventing service */
   workflowId?: string;
 };
-type AlertingExecutionResponse = AlertingExecutionPersist & {
+export type AlertingExecutionResponse = AlertingExecutionPersist & {
   evaluation?: Evaluation;
   links?: Links;
 };
-type AlertingExecutionResult = {
+export type AlertingExecutionResult = {
   alertTriggerStatus?: string;
   throttlerTokensLeft?: number;
 };
-type AlertingRecipientStats = {
+export type AlertingRecipientStats = {
   conditionStatus?: "OK" | "FAILED";
   /** Whether the recipient is enabled. */
   enabled: boolean;
@@ -81,7 +82,7 @@ type AlertingRecipientStats = {
   type?: "userid";
   value?: string;
 };
-type AlertingRecipientStatsError = {
+export type AlertingRecipientStatsError = {
   /** Error code specific to sharing service. */
   readonly code?: string;
   /** Error cause. */
@@ -89,11 +90,11 @@ type AlertingRecipientStatsError = {
   /** Error title. */
   readonly title?: string;
 };
-type AlertingRecipientStatsErrors = AlertingRecipientStatsError[];
-type AlertingRecipientStatsResponse = {
+export type AlertingRecipientStatsErrors = AlertingRecipientStatsError[];
+export type AlertingRecipientStatsResponse = {
   recipientStats?: AlertingRecipientStats[];
 };
-type AlertingSettings = {
+export type AlertingSettings = {
   /** This indicates that there is an ongoing operation to either disable or enable the data alerting feature. none means that no such operation is ongoing. enabling/disabling means that system is currently enabling/disabling the feature */
   readonly "data-alerting-feature-operation-status"?: "none" | "enabling" | "disabling";
   /** UTC timestamp of the most recent change of data-alerting-feature-operation-status. If there has not been any such change, this is the timestamp of the initial creation of the record. */
@@ -111,14 +112,14 @@ type AlertingSettings = {
   /** These persisted alerting settings are only available for this tenant. Extracted from request JWT. */
   readonly tenantId?: string;
 };
-type AlertingSettingsUpload = {
+export type AlertingSettingsUpload = {
   /** true if data-alerting feature is enabled. A status change could potentially result in a considerable amount of API operations to enable/disable triggers. Enabling this feature also requires that the license has this feature enabled. */
   "enable-data-alerting": boolean;
 };
 /**
  * a alerting task (a definition on an alert)
  */
-type AlertingTaskCreateRequest = {
+export type AlertingTaskCreateRequest = {
   /** appId associated to this alert definition */
   appId: string;
   /** bookmarkId associated to this alert definition */
@@ -141,7 +142,7 @@ type AlertingTaskCreateRequest = {
   /** Type of job that triggered the task */
   triggerType: "RELOAD" | "SCHEDULED";
 };
-type AlertingTaskError = {
+export type AlertingTaskError = {
   /** Timestamp for the creation of the error */
   added?: string;
   /** Identifier for type of error occurring on alerting task */
@@ -150,22 +151,22 @@ type AlertingTaskError = {
 /**
  * @deprecated
  */
-type AlertingTaskExecutionStats = StandardListResponseProps & {
+export type AlertingTaskExecutionStats = StandardListResponseProps & {
   executionsStats?: ExecutionStats[];
   links?: ListLinks;
 };
-type AlertingTaskGroupRecipientError = {
+export type AlertingTaskGroupRecipientError = {
   /** Timestamp for the creation of the error */
   added?: string;
   /** Identifier for type of error occurring on alerting task */
   value?: "GROUP_IS_DISABLED" | "MAX_ALERTS_LIMIT_REACHED" | "GROUP_WITH_NO_APP_ACCESS" | "GROUP_IS_DELETED";
 };
-type AlertingTaskListResponse = StandardListResponseProps & {
+export type AlertingTaskListResponse = StandardListResponseProps & {
   links?: ListLinks;
   /** Gets a list of alerting tasks. */
   tasks?: AlertingTaskResponse[];
 };
-type AlertingTaskPatchRequestCompliant = {
+export type AlertingTaskPatchRequestCompliant = {
   /** The operation to be performed */
   op: "replace";
   /** A JSON Patch document as defined in https://datatracker.ietf.org/doc/html/rfc6902 */
@@ -173,8 +174,8 @@ type AlertingTaskPatchRequestCompliant = {
   /** The value to be used for this operation. */
   value?: unknown;
 };
-type AlertingTaskPatchRequestCompliantList = AlertingTaskPatchRequestCompliant[];
-type AlertingTaskRecipientError = {
+export type AlertingTaskPatchRequestCompliantList = AlertingTaskPatchRequestCompliant[];
+export type AlertingTaskRecipientError = {
   /** Timestamp for the creation of the error */
   added?: string;
   /** Identifier for type of error occurring on alerting task */
@@ -220,8 +221,8 @@ type AlertingTaskRecipientError = {
  *   }
  * ]
  */
-type AlertingTaskRecipientPatch = AlertingTaskRecipientPatchInner[];
-type AlertingTaskRecipientPatchInner = {
+export type AlertingTaskRecipientPatch = AlertingTaskRecipientPatchInner[];
+export type AlertingTaskRecipientPatchInner = {
   /** The operation to be performed. */
   op: "remove" | "add" | "replace" | "enable" | "disable" | "subscribe" | "unsubscribe";
   /** Defines the path for the given resource field to patch. */
@@ -229,7 +230,7 @@ type AlertingTaskRecipientPatchInner = {
   /** The value to be used for this operation. */
   value: unknown;
 };
-type AlertingTaskResponse = {
+export type AlertingTaskResponse = {
   /** last time a trigger was detected, but not sure if executed */
   absoluteLastScan?: string;
   /** last time an execution had been created */
@@ -294,7 +295,7 @@ type AlertingTaskResponse = {
   /** Type of job that triggered the task */
   triggerType?: "RELOAD" | "SCHEDULED" | "MANUAL";
 };
-type AlertingTaskTriggerStats = {
+export type AlertingTaskTriggerStats = {
   /** The number of triggers out of the last 100 scans for the current condition. */
   last100Scans: number;
   /** The number of triggers out of the last 10 scans for the current condition. */
@@ -302,7 +303,7 @@ type AlertingTaskTriggerStats = {
   /** The number of scans for the current condition. */
   totalScans: number;
 };
-type AlertingTaskValidation = {
+export type AlertingTaskValidation = {
   /** Description of the error */
   description?: string;
   /** @deprecated
@@ -314,11 +315,11 @@ type AlertingTaskValidation = {
   type?: "RECIPIENT" | "CONDITION" | "RECIPIENT_GROUP";
   validationErrors?: ("NO_ACCESS" | "USER_IS_DISABLED" | "INVALID_CONDITION" | "MAX_ALERTS_LIMIT_REACHED" | "MAX_ALERT_RECIPIENTS_LIMIT_REACHED" | "GROUP_IS_DISABLED" | "GROUP_SIZE_EXCEEDED")[];
 };
-type AlertingTaskValidationResponse = {
+export type AlertingTaskValidationResponse = {
   status?: "FAILURE" | "SUCCESS";
   validations?: AlertingTaskValidation[];
 };
-type Error = {
+export type Error = {
   /** Error code specific to sharing service. */
   readonly code?: string;
   /** Error cause. */
@@ -327,7 +328,7 @@ type Error = {
   /** Error title. */
   readonly title?: string;
 };
-type ErrorMeta = {
+export type ErrorMeta = {
   /** HTTP error code. */
   readonly httpCode?: number;
 };
@@ -343,11 +344,11 @@ type ErrorMeta = {
  *   traceId: "7975401f3954aa47"
  * }
  */
-type Errors = {
+export type Errors = {
   errors?: Error[];
   traceId?: string;
 };
-type Evaluation = {
+export type Evaluation = {
   /** Representation of the event that caused the condition to be evaluated if one was included on when the evaluation was triggered */
   causalEvent?: unknown;
   /** The unique id of the associated condition */
@@ -373,12 +374,12 @@ type Evaluation = {
   /** The tenant id */
   readonly tenantId?: string;
 };
-type EvaluationGetResponse = {
+export type EvaluationGetResponse = {
   condition?: unknown;
   evaluation?: Evaluation;
   hideSelections?: boolean;
 };
-type ExecutionStats = {
+export type ExecutionStats = {
   endTime?: string;
   periodKey?: string;
   startTime?: string;
@@ -388,7 +389,7 @@ type ExecutionStats = {
 /**
  * an internal recipient based on its group id.
  */
-type GroupIDRecipient = {
+export type GroupIDRecipient = {
   alertingTaskGroupRecipientErrors?: AlertingTaskGroupRecipientError[];
   /** Whether this recipient can receive alerts. */
   enabled?: boolean;
@@ -396,17 +397,17 @@ type GroupIDRecipient = {
   /** Group ID of recipient. */
   value?: string;
 };
-type Links = {
+export type Links = {
   /** Object with Href to a particular element or set of elements */
   self?: Self;
 };
-type ListLinks = {
+export type ListLinks = {
   next?: Page;
   prev?: Page;
   /** Object with Href to a particular element or set of elements */
   self?: Self;
 };
-type Page = {
+export type Page = {
   /** URL to particular set of elements */
   href?: string;
   /** Page unique token */
@@ -417,8 +418,9 @@ type Page = {
 /**
  * List of recipients. An internal recipient is represented by either their user id or group id.
  */
-type Recipients = {
+export type Recipients = {
   DLGroups?: unknown[];
+  /** Identifier of the distribution list the recipients belong to. */
   DLListId?: string;
   DLUsers?: unknown[];
   groupIds?: GroupIDRecipient[];
@@ -427,13 +429,13 @@ type Recipients = {
 /**
  * Change in a recipient for an alerting task
  */
-type RecipientsChange = {
+export type RecipientsChange = {
   /** time of recipient state change */
   dateTime?: string;
   /** A custom custom JSON Patch document, as an array of objects with operation, recipient type and value. Original defined in https://datatracker.ietf.org/doc/html/rfc6902. */
   patchAction?: AlertingTaskRecipientPatch;
 };
-type ScheduleOptions = {
+export type ScheduleOptions = {
   /** The chronos job identifier. It is set once the related chronos job is created. */
   readonly chronosJobID?: string;
   /** EndDateTime is a local date time with respect to the above timezone parameter. If the timezone parameter is missing, then the timezone used is the one retrieved from user infos. Therefore ISO8601 time offsets are not allowed (e.g. "2026-01-02T16:04:05Z" or "2026-01-02T16:04:05+01"), if passed an error will be returned. EndDateTime is an optional parameter, when not set or when it's an empty string, the recurrence is intended to be never ending. */
@@ -452,25 +454,25 @@ type ScheduleOptions = {
 /**
  * Object with Href to a particular element or set of elements
  */
-type Self = {
+export type Self = {
   href?: string;
 };
 /**
  * properties that should be added to every list response
  */
-type StandardListResponseProps = {
+export type StandardListResponseProps = {
   /** count of entries on the currently shown page */
   currentPageCount: number;
   /** total count of entries in the collection as a whole */
   totalCount: number;
 };
-type TaskGroupRecipientError = {
+export type TaskGroupRecipientError = {
   /** Timestamp for the creation of the error */
   timestamp?: string;
   /** Identifier for type of error occurring on sharing task specific for group recipient */
   value?: "GROUP_IS_DISABLED" | "MAX_ALERTS_LIMIT_REACHED" | "GROUP_WITH_NO_APP_ACCESS" | "GROUP_IS_DELETED" | "GROUP_NOT_FOUND_DL" | "GROUP_DISABLED_IN_DL";
 };
-type TaskRecipientError = {
+export type TaskRecipientError = {
   /** Timestamp for the creation of the error */
   timestamp?: string;
   /** Identifier for type of error occurring on sharing task specific for recipient */
@@ -479,7 +481,7 @@ type TaskRecipientError = {
 /**
  * The rules and setup for throttling
  */
-type ThrottlingResource = {
+export type ThrottlingResource = {
   /** the maximum number of tokens that the bucket can contain */
   capacity?: number;
   /** the initial amount of tokens in the bucket upon creation. cannot exceed capacity. */
@@ -496,7 +498,7 @@ type ThrottlingResource = {
 /**
  * an internal recipient based on its user id.
  */
-type UserIDRecipient = {
+export type UserIDRecipient = {
   alertingTaskRecipientErrors?: AlertingTaskRecipientError[];
   /** Whether this recipient can receive alerts. */
   enabled?: boolean;
@@ -514,7 +516,7 @@ type UserIDRecipient = {
  * @param query an object with query parameters
  * @throws GetDataAlertsHttpError
  */
-declare function getDataAlerts(query: {
+export declare function getDataAlerts(query: {
   /** The app ID you would like to filter by */
   appID?: string;
   /** The conditionId you would like to filter by */
@@ -538,14 +540,14 @@ declare function getDataAlerts(query: {
   /** The status you would like to filter by */
   status?: ("INVALID_RECIPIENT" | "INVALID_OWNER" | "DISABLED" | "VALID")[];
 }, options?: ApiCallOptions): Promise<GetDataAlertsHttpResponse>;
-type GetDataAlertsHttpResponse = {
+export type GetDataAlertsHttpResponse = {
   data: AlertingTaskListResponse;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetDataAlertsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetDataAlertsHttpResponse>;
 };
-type GetDataAlertsHttpError = {
+export type GetDataAlertsHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -556,13 +558,13 @@ type GetDataAlertsHttpError = {
  * @param body an object with the body content
  * @throws CreateDataAlertHttpError
  */
-declare function createDataAlert(body: AlertingTaskCreateRequest, options?: ApiCallOptions): Promise<CreateDataAlertHttpResponse>;
-type CreateDataAlertHttpResponse = {
+export declare function createDataAlert(body: AlertingTaskCreateRequest, options?: ApiCallOptions): Promise<CreateDataAlertHttpResponse>;
+export type CreateDataAlertHttpResponse = {
   data: AlertingTaskResponse;
   headers: Headers;
   status: 202;
 };
-type CreateDataAlertHttpError = {
+export type CreateDataAlertHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -573,13 +575,13 @@ type CreateDataAlertHttpError = {
  * @param body an object with the body content
  * @throws TriggerDataAlertsHttpError
  */
-declare function triggerDataAlerts(body: AlertingActionsTriggerCreateRequest, options?: ApiCallOptions): Promise<TriggerDataAlertsHttpResponse>;
-type TriggerDataAlertsHttpResponse = {
+export declare function triggerDataAlerts(body: AlertingActionsTriggerCreateRequest, options?: ApiCallOptions): Promise<TriggerDataAlertsHttpResponse>;
+export type TriggerDataAlertsHttpResponse = {
   data: AlertingActionsTriggerCreateResponse;
   headers: Headers;
   status: 202;
 };
-type TriggerDataAlertsHttpError = {
+export type TriggerDataAlertsHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -590,13 +592,13 @@ type TriggerDataAlertsHttpError = {
  * @param body an object with the body content
  * @throws ValidateDataAlertsHttpError
  */
-declare function validateDataAlerts(body: AlertingTaskCreateRequest, options?: ApiCallOptions): Promise<ValidateDataAlertsHttpResponse>;
-type ValidateDataAlertsHttpResponse = {
+export declare function validateDataAlerts(body: AlertingTaskCreateRequest, options?: ApiCallOptions): Promise<ValidateDataAlertsHttpResponse>;
+export type ValidateDataAlertsHttpResponse = {
   data: AlertingTaskValidationResponse;
   headers: Headers;
   status: 200;
 };
-type ValidateDataAlertsHttpError = {
+export type ValidateDataAlertsHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -606,13 +608,13 @@ type ValidateDataAlertsHttpError = {
  *
  * @throws GetDataAlertsSettingsHttpError
  */
-declare function getDataAlertsSettings(options?: ApiCallOptions): Promise<GetDataAlertsSettingsHttpResponse>;
-type GetDataAlertsSettingsHttpResponse = {
+export declare function getDataAlertsSettings(options?: ApiCallOptions): Promise<GetDataAlertsSettingsHttpResponse>;
+export type GetDataAlertsSettingsHttpResponse = {
   data: AlertingSettings;
   headers: Headers;
   status: 200;
 };
-type GetDataAlertsSettingsHttpError = {
+export type GetDataAlertsSettingsHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -623,13 +625,13 @@ type GetDataAlertsSettingsHttpError = {
  * @param body an object with the body content
  * @throws SetDataAlertsSettingsHttpError
  */
-declare function setDataAlertsSettings(body: AlertingSettingsUpload, options?: ApiCallOptions): Promise<SetDataAlertsSettingsHttpResponse>;
-type SetDataAlertsSettingsHttpResponse = {
+export declare function setDataAlertsSettings(body: AlertingSettingsUpload, options?: ApiCallOptions): Promise<SetDataAlertsSettingsHttpResponse>;
+export type SetDataAlertsSettingsHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type SetDataAlertsSettingsHttpError = {
+export type SetDataAlertsSettingsHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -640,13 +642,13 @@ type SetDataAlertsSettingsHttpError = {
  * @param alertId The alerting task identifier.
  * @throws DeleteDataAlertHttpError
  */
-declare function deleteDataAlert(alertId: string, options?: ApiCallOptions): Promise<DeleteDataAlertHttpResponse>;
-type DeleteDataAlertHttpResponse = {
+export declare function deleteDataAlert(alertId: string, options?: ApiCallOptions): Promise<DeleteDataAlertHttpResponse>;
+export type DeleteDataAlertHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteDataAlertHttpError = {
+export type DeleteDataAlertHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -657,13 +659,13 @@ type DeleteDataAlertHttpError = {
  * @param alertId The alerting task identifier.
  * @throws GetDataAlertHttpError
  */
-declare function getDataAlert(alertId: string, options?: ApiCallOptions): Promise<GetDataAlertHttpResponse>;
-type GetDataAlertHttpResponse = {
+export declare function getDataAlert(alertId: string, options?: ApiCallOptions): Promise<GetDataAlertHttpResponse>;
+export type GetDataAlertHttpResponse = {
   data: AlertingTaskResponse;
   headers: Headers;
   status: 200;
 };
-type GetDataAlertHttpError = {
+export type GetDataAlertHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -675,13 +677,13 @@ type GetDataAlertHttpError = {
  * @param body an object with the body content
  * @throws PatchDataAlertHttpError
  */
-declare function patchDataAlert(alertId: string, body: AlertingTaskPatchRequestCompliantList, options?: ApiCallOptions): Promise<PatchDataAlertHttpResponse>;
-type PatchDataAlertHttpResponse = {
+export declare function patchDataAlert(alertId: string, body: AlertingTaskPatchRequestCompliantList, options?: ApiCallOptions): Promise<PatchDataAlertHttpResponse>;
+export type PatchDataAlertHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchDataAlertHttpError = {
+export type PatchDataAlertHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -692,13 +694,13 @@ type PatchDataAlertHttpError = {
  * @param alertId The alerting task identifier.
  * @throws GetDataAlertConditionHttpError
  */
-declare function getDataAlertCondition(alertId: string, options?: ApiCallOptions): Promise<GetDataAlertConditionHttpResponse>;
-type GetDataAlertConditionHttpResponse = {
+export declare function getDataAlertCondition(alertId: string, options?: ApiCallOptions): Promise<GetDataAlertConditionHttpResponse>;
+export type GetDataAlertConditionHttpResponse = {
   data: AlertingConditionResponse;
   headers: Headers;
   status: 200;
 };
-type GetDataAlertConditionHttpError = {
+export type GetDataAlertConditionHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -710,13 +712,13 @@ type GetDataAlertConditionHttpError = {
  * @param executionId The execution identifier.
  * @throws DeleteDataAlertExecutionHttpError
  */
-declare function deleteDataAlertExecution(alertId: string, executionId: string, options?: ApiCallOptions): Promise<DeleteDataAlertExecutionHttpResponse>;
-type DeleteDataAlertExecutionHttpResponse = {
+export declare function deleteDataAlertExecution(alertId: string, executionId: string, options?: ApiCallOptions): Promise<DeleteDataAlertExecutionHttpResponse>;
+export type DeleteDataAlertExecutionHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteDataAlertExecutionHttpError = {
+export type DeleteDataAlertExecutionHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -728,13 +730,13 @@ type DeleteDataAlertExecutionHttpError = {
  * @param executionId The execution identifier. If value is "latest", the latest execution will be returned
  * @throws GetDataAlertExecutionHttpError
  */
-declare function getDataAlertExecution(alertId: string, executionId: string, options?: ApiCallOptions): Promise<GetDataAlertExecutionHttpResponse>;
-type GetDataAlertExecutionHttpResponse = {
+export declare function getDataAlertExecution(alertId: string, executionId: string, options?: ApiCallOptions): Promise<GetDataAlertExecutionHttpResponse>;
+export type GetDataAlertExecutionHttpResponse = {
   data: AlertingExecutionResponse;
   headers: Headers;
   status: 200;
 };
-type GetDataAlertExecutionHttpError = {
+export type GetDataAlertExecutionHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -746,7 +748,7 @@ type GetDataAlertExecutionHttpError = {
  * @param query an object with query parameters
  * @throws GetDataAlertRecipientStatsHttpError
  */
-declare function getDataAlertRecipientStats(alertId: string, query: {
+export declare function getDataAlertRecipientStats(alertId: string, query: {
   /** The name of the groups you would like to filter by */
   groups?: string[];
   /** Sort the returned result set by the specified field */
@@ -756,12 +758,12 @@ declare function getDataAlertRecipientStats(alertId: string, query: {
   /** The recipients ID you would like to filter by */
   userID?: string;
 }, options?: ApiCallOptions): Promise<GetDataAlertRecipientStatsHttpResponse>;
-type GetDataAlertRecipientStatsHttpResponse = {
+export type GetDataAlertRecipientStatsHttpResponse = {
   data: AlertingRecipientStatsResponse;
   headers: Headers;
   status: 200;
 };
-type GetDataAlertRecipientStatsHttpError = {
+export type GetDataAlertRecipientStatsHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -773,7 +775,7 @@ type GetDataAlertRecipientStatsHttpError = {
  * @param query an object with query parameters
  * @throws GetDataAlertExecutionsHttpError
  */
-declare function getDataAlertExecutions(taskId: string, query: {
+export declare function getDataAlertExecutions(taskId: string, query: {
   /** Filter by condition id related to the executions. */
   conditionId?: string;
   /** Filter by whether the alerting task execution status is FINISHED or FAILED. */
@@ -811,14 +813,14 @@ declare function getDataAlertExecutions(taskId: string, query: {
   /** Specifies a date that executions should have been created before. Date in RFC3339Nano format, such as 2020-01-01T00:00:00.000Z */
   until?: string;
 }, options?: ApiCallOptions): Promise<GetDataAlertExecutionsHttpResponse>;
-type GetDataAlertExecutionsHttpResponse = {
+export type GetDataAlertExecutionsHttpResponse = {
   data: AlertingExecutionListResponse;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetDataAlertExecutionsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetDataAlertExecutionsHttpResponse>;
 };
-type GetDataAlertExecutionsHttpError = {
+export type GetDataAlertExecutionsHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -832,18 +834,18 @@ type GetDataAlertExecutionsHttpError = {
  * @param query an object with query parameters
  * @throws GetDataAlertExecutionsStatsHttpError
  */
-declare function getDataAlertExecutionsStats(taskId: string, query: {
+export declare function getDataAlertExecutionsStats(taskId: string, query: {
   /** The period by which the stats aggregation needs to be performed. */
   period: "month";
 }, options?: ApiCallOptions): Promise<GetDataAlertExecutionsStatsHttpResponse>;
-type GetDataAlertExecutionsStatsHttpResponse = {
+export type GetDataAlertExecutionsStatsHttpResponse = {
   data: AlertingTaskExecutionStats;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetDataAlertExecutionsStatsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetDataAlertExecutionsStatsHttpResponse>;
 };
-type GetDataAlertExecutionsStatsHttpError = {
+export type GetDataAlertExecutionsStatsHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -855,13 +857,13 @@ type GetDataAlertExecutionsStatsHttpError = {
  * @param executionId The execution identifier.
  * @throws GetDataAlertExecutionEvaluationsHttpError
  */
-declare function getDataAlertExecutionEvaluations(taskId: string, executionId: string, options?: ApiCallOptions): Promise<GetDataAlertExecutionEvaluationsHttpResponse>;
-type GetDataAlertExecutionEvaluationsHttpResponse = {
+export declare function getDataAlertExecutionEvaluations(taskId: string, executionId: string, options?: ApiCallOptions): Promise<GetDataAlertExecutionEvaluationsHttpResponse>;
+export type GetDataAlertExecutionEvaluationsHttpResponse = {
   data: EvaluationGetResponse;
   headers: Headers;
   status: 200;
 };
-type GetDataAlertExecutionEvaluationsHttpError = {
+export type GetDataAlertExecutionEvaluationsHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -869,8 +871,8 @@ type GetDataAlertExecutionEvaluationsHttpError = {
 /**
  * Clears the cache for data-alerts api requests.
  */
-declare function clearCache(): void;
-type DataAlertsAPI = {
+export declare function clearCache(): void;
+export type DataAlertsAPI = {
   /**
    * Retrieves all data alert tasks accessible to the user. Users assigned the `TenantAdmin` or `AnalyticsAdmin` role can view all tasks.
    *
@@ -1001,4 +1003,4 @@ type DataAlertsAPI = {
  */
 declare const dataAlertsExport: DataAlertsAPI;
 //#endregion
-export { AlertingActionsTriggerCreateRequest, AlertingActionsTriggerCreateResponse, AlertingConditionResponse, AlertingExecutionError, AlertingExecutionErrors, AlertingExecutionListResponse, AlertingExecutionPersist, AlertingExecutionResponse, AlertingExecutionResult, AlertingRecipientStats, AlertingRecipientStatsError, AlertingRecipientStatsErrors, AlertingRecipientStatsResponse, AlertingSettings, AlertingSettingsUpload, AlertingTaskCreateRequest, AlertingTaskError, AlertingTaskExecutionStats, AlertingTaskGroupRecipientError, AlertingTaskListResponse, AlertingTaskPatchRequestCompliant, AlertingTaskPatchRequestCompliantList, AlertingTaskRecipientError, AlertingTaskRecipientPatch, AlertingTaskRecipientPatchInner, AlertingTaskResponse, AlertingTaskTriggerStats, AlertingTaskValidation, AlertingTaskValidationResponse, CreateDataAlertHttpError, CreateDataAlertHttpResponse, DataAlertsAPI, DeleteDataAlertExecutionHttpError, DeleteDataAlertExecutionHttpResponse, DeleteDataAlertHttpError, DeleteDataAlertHttpResponse, Error, ErrorMeta, Errors, Evaluation, EvaluationGetResponse, ExecutionStats, GetDataAlertConditionHttpError, GetDataAlertConditionHttpResponse, GetDataAlertExecutionEvaluationsHttpError, GetDataAlertExecutionEvaluationsHttpResponse, GetDataAlertExecutionHttpError, GetDataAlertExecutionHttpResponse, GetDataAlertExecutionsHttpError, GetDataAlertExecutionsHttpResponse, GetDataAlertExecutionsStatsHttpError, GetDataAlertExecutionsStatsHttpResponse, GetDataAlertHttpError, GetDataAlertHttpResponse, GetDataAlertRecipientStatsHttpError, GetDataAlertRecipientStatsHttpResponse, GetDataAlertsHttpError, GetDataAlertsHttpResponse, GetDataAlertsSettingsHttpError, GetDataAlertsSettingsHttpResponse, GroupIDRecipient, Links, ListLinks, Page, PatchDataAlertHttpError, PatchDataAlertHttpResponse, Recipients, RecipientsChange, ScheduleOptions, Self, SetDataAlertsSettingsHttpError, SetDataAlertsSettingsHttpResponse, StandardListResponseProps, TaskGroupRecipientError, TaskRecipientError, ThrottlingResource, TriggerDataAlertsHttpError, TriggerDataAlertsHttpResponse, UserIDRecipient, ValidateDataAlertsHttpError, ValidateDataAlertsHttpResponse, clearCache, createDataAlert, dataAlertsExport as default, deleteDataAlert, deleteDataAlertExecution, getDataAlert, getDataAlertCondition, getDataAlertExecution, getDataAlertExecutionEvaluations, getDataAlertExecutions, getDataAlertExecutionsStats, getDataAlertRecipientStats, getDataAlerts, getDataAlertsSettings, patchDataAlert, setDataAlertsSettings, triggerDataAlerts, validateDataAlerts };
+export { dataAlertsExport as default };

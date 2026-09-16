@@ -1,10 +1,10 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/automl-predictions.d.ts
-type AppErrorResponse = {
+export type AppErrorResponse = {
   errors?: Error[];
 };
-type Error = {
+export type Error = {
   /** The argument */
   argument?: string;
   /** The unique code for the error */
@@ -41,15 +41,15 @@ type Error = {
  * @param query an object with query parameters
  * @throws GetAutomlPredictionCoordinateShapHttpError
  */
-declare function getAutomlPredictionCoordinateShap(predictionId: string, query: {
+export declare function getAutomlPredictionCoordinateShap(predictionId: string, query: {
   refId?: string;
 }, options?: ApiCallOptions): Promise<GetAutomlPredictionCoordinateShapHttpResponse>;
-type GetAutomlPredictionCoordinateShapHttpResponse = {
+export type GetAutomlPredictionCoordinateShapHttpResponse = {
   data: string;
   headers: Headers;
   status: 200;
 };
-type GetAutomlPredictionCoordinateShapHttpError = {
+export type GetAutomlPredictionCoordinateShapHttpError = {
   data: AppErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 503;
@@ -62,13 +62,13 @@ type GetAutomlPredictionCoordinateShapHttpError = {
  * @param predictionId The ID of the prediction configuration object that provides parameters to be applied when the prediction is produced.
  * @throws CreateAutomlPredictionJobHttpError
  */
-declare function createAutomlPredictionJob(predictionId: string, options?: ApiCallOptions): Promise<CreateAutomlPredictionJobHttpResponse>;
-type CreateAutomlPredictionJobHttpResponse = {
+export declare function createAutomlPredictionJob(predictionId: string, options?: ApiCallOptions): Promise<CreateAutomlPredictionJobHttpResponse>;
+export type CreateAutomlPredictionJobHttpResponse = {
   data: void;
   headers: Headers;
   status: 200;
 };
-type CreateAutomlPredictionJobHttpError = {
+export type CreateAutomlPredictionJobHttpError = {
   data: AppErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 503;
@@ -82,15 +82,15 @@ type CreateAutomlPredictionJobHttpError = {
  * @param query an object with query parameters
  * @throws GetAutomlPredictionNotPredictedReasonsHttpError
  */
-declare function getAutomlPredictionNotPredictedReasons(predictionId: string, query: {
+export declare function getAutomlPredictionNotPredictedReasons(predictionId: string, query: {
   refId?: string;
 }, options?: ApiCallOptions): Promise<GetAutomlPredictionNotPredictedReasonsHttpResponse>;
-type GetAutomlPredictionNotPredictedReasonsHttpResponse = {
+export type GetAutomlPredictionNotPredictedReasonsHttpResponse = {
   data: string;
   headers: Headers;
   status: 200;
 };
-type GetAutomlPredictionNotPredictedReasonsHttpError = {
+export type GetAutomlPredictionNotPredictedReasonsHttpError = {
   data: AppErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 503;
@@ -104,15 +104,15 @@ type GetAutomlPredictionNotPredictedReasonsHttpError = {
  * @param query an object with query parameters
  * @throws GetAutomlPredictionPredictionsHttpError
  */
-declare function getAutomlPredictionPredictions(predictionId: string, query: {
+export declare function getAutomlPredictionPredictions(predictionId: string, query: {
   refId?: string;
 }, options?: ApiCallOptions): Promise<GetAutomlPredictionPredictionsHttpResponse>;
-type GetAutomlPredictionPredictionsHttpResponse = {
+export type GetAutomlPredictionPredictionsHttpResponse = {
   data: void;
   headers: Headers;
   status: 200;
 };
-type GetAutomlPredictionPredictionsHttpError = {
+export type GetAutomlPredictionPredictionsHttpError = {
   data: AppErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 503;
@@ -126,15 +126,15 @@ type GetAutomlPredictionPredictionsHttpError = {
  * @param query an object with query parameters
  * @throws GetAutomlPredictionShapHttpError
  */
-declare function getAutomlPredictionShap(predictionId: string, query: {
+export declare function getAutomlPredictionShap(predictionId: string, query: {
   refId?: string;
 }, options?: ApiCallOptions): Promise<GetAutomlPredictionShapHttpResponse>;
-type GetAutomlPredictionShapHttpResponse = {
+export type GetAutomlPredictionShapHttpResponse = {
   data: void;
   headers: Headers;
   status: 200;
 };
-type GetAutomlPredictionShapHttpError = {
+export type GetAutomlPredictionShapHttpError = {
   data: AppErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 503;
@@ -148,15 +148,15 @@ type GetAutomlPredictionShapHttpError = {
  * @param query an object with query parameters
  * @throws GetAutomlPredictionSourceHttpError
  */
-declare function getAutomlPredictionSource(predictionId: string, query: {
+export declare function getAutomlPredictionSource(predictionId: string, query: {
   refId?: string;
 }, options?: ApiCallOptions): Promise<GetAutomlPredictionSourceHttpResponse>;
-type GetAutomlPredictionSourceHttpResponse = {
+export type GetAutomlPredictionSourceHttpResponse = {
   data: string;
   headers: Headers;
   status: 200;
 };
-type GetAutomlPredictionSourceHttpError = {
+export type GetAutomlPredictionSourceHttpError = {
   data: AppErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 503;
@@ -164,8 +164,8 @@ type GetAutomlPredictionSourceHttpError = {
 /**
  * Clears the cache for automl-predictions api requests.
  */
-declare function clearCache(): void;
-type AutomlPredictionsAPI = {
+export declare function clearCache(): void;
+export type AutomlPredictionsAPI = {
   /**
    * @deprecated
    *
@@ -235,4 +235,4 @@ type AutomlPredictionsAPI = {
  */
 declare const automlPredictionsExport: AutomlPredictionsAPI;
 //#endregion
-export { AppErrorResponse, AutomlPredictionsAPI, CreateAutomlPredictionJobHttpError, CreateAutomlPredictionJobHttpResponse, Error, GetAutomlPredictionCoordinateShapHttpError, GetAutomlPredictionCoordinateShapHttpResponse, GetAutomlPredictionNotPredictedReasonsHttpError, GetAutomlPredictionNotPredictedReasonsHttpResponse, GetAutomlPredictionPredictionsHttpError, GetAutomlPredictionPredictionsHttpResponse, GetAutomlPredictionShapHttpError, GetAutomlPredictionShapHttpResponse, GetAutomlPredictionSourceHttpError, GetAutomlPredictionSourceHttpResponse, clearCache, createAutomlPredictionJob, automlPredictionsExport as default, getAutomlPredictionCoordinateShap, getAutomlPredictionNotPredictedReasons, getAutomlPredictionPredictions, getAutomlPredictionShap, getAutomlPredictionSource };
+export { automlPredictionsExport as default };

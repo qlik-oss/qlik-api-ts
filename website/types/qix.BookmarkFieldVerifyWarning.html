@@ -29,7 +29,7 @@
 <li><a href="../modules/qix.html">qix</a></li>
 <li><a href="" aria-current="page">BookmarkFieldVerifyWarning</a></li></ul>
 <h1>Type Alias BookmarkFieldVerifyWarning</h1></div>
-<div class="tsd-signature"><span class="tsd-signature-keyword">type</span> <span class="tsd-kind-type-alias">BookmarkFieldVerifyWarning</span> <span class="tsd-signature-symbol">=</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#qfield">qField</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#qmissingvalues">qMissingValues</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#qstate">qState</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#qverifyresult">qVerifyResult</a><span class="tsd-signature-symbol">?:</span> <a href="qix.BookmarkFieldVerifyResultState.html" class="tsd-signature-type tsd-kind-type-alias">BookmarkFieldVerifyResultState</a><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
+<div class="tsd-signature"><span class="tsd-signature-keyword">type</span> <span class="tsd-kind-type-alias">BookmarkFieldVerifyWarning</span> <span class="tsd-signature-symbol">=</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#qfield">qField</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#qmissingduals">qMissingDuals</a><span class="tsd-signature-symbol">?:</span> <a href="qix.FieldValue.html" class="tsd-signature-type tsd-kind-type-alias">FieldValue</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#qmissingvalues">qMissingValues</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#qstate">qState</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#qtotalmissing">qTotalMissing</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#qverifyresult">qVerifyResult</a><span class="tsd-signature-symbol">?:</span> <a href="qix.BookmarkFieldVerifyResultState.html" class="tsd-signature-type tsd-kind-type-alias">BookmarkFieldVerifyResultState</a><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -38,8 +38,10 @@
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading tsd-anchor-link" id="properties">Properties<a href="#properties" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-index-list"><a href="#qfield" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>q<wbr/>Field?</span></a>
+<a href="#qmissingduals" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>q<wbr/>Missing<wbr/>Duals?</span></a>
 <a href="#qmissingvalues" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>q<wbr/>Missing<wbr/>Values?</span></a>
 <a href="#qstate" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>q<wbr/>State?</span></a>
+<a href="#qtotalmissing" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>q<wbr/>Total<wbr/>Missing?</span></a>
 <a href="#qverifyresult" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>q<wbr/>Verify<wbr/>Result?</span></a>
 </div></section></div></details></section></section>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -51,18 +53,33 @@
 <div class="tsd-comment tsd-typography"><p>Field Name *</p>
 </div></section>
 <section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="qmissingduals"><code class="tsd-tag">Optional</code><span>q<wbr/>Missing<wbr/>Duals</span><a href="#qmissingduals" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">qMissingDuals</span><span class="tsd-signature-symbol">?:</span> <a href="qix.FieldValue.html" class="tsd-signature-type tsd-kind-type-alias">FieldValue</a><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-comment tsd-typography"><p>Missing field values as duals, carrying both text and numeric parts. Number of values included is capped. Default cap is 20. *</p>
+<p>Stability: <em>experimental</em></p>
+</div></section>
+<section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="qmissingvalues"><code class="tsd-tag">Optional</code><span>q<wbr/>Missing<wbr/>Values</span><a href="#qmissingvalues" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">qMissingValues</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">qMissingValues</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-comment tsd-typography"><p>Strings representing missing field values. Will be replaced by MissingDuals. *</p>
+<p>@deprecated: This will be removed in a future version</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="qstate"><code class="tsd-tag">Optional</code><span>q<wbr/>State</span><a href="#qstate" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">qState</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
 <div class="tsd-comment tsd-typography"><p>Alternate State *</p>
 </div></section>
 <section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="qtotalmissing"><code class="tsd-tag">Optional</code><span>q<wbr/>Total<wbr/>Missing</span><a href="#qtotalmissing" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">qTotalMissing</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
+<div class="tsd-comment tsd-typography"><p>Total count of missing field values *</p>
+<p>Stability: <em>experimental</em></p>
+</div></section>
+<section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="qverifyresult"><code class="tsd-tag">Optional</code><span>q<wbr/>Verify<wbr/>Result</span><a href="#qverifyresult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">qVerifyResult</span><span class="tsd-signature-symbol">?:</span> <a href="qix.BookmarkFieldVerifyResultState.html" class="tsd-signature-type tsd-kind-type-alias">BookmarkFieldVerifyResultState</a></div>
 <div class="tsd-comment tsd-typography"><p>Field/values verfication result *
-Defines result of ApplyAndVerify.
+Result of ApplyAndVerify for one field, used only in BookmarkFieldVerifyWarning.
 One of:</p>
 <ul>
 <li>NOT_VERIFIED</li>
@@ -70,6 +87,7 @@ One of:</p>
 <li>FIELD_MISSING</li>
 <li>FIELD_VALUE_MISSING</li>
 <li>STATE_MISSING</li>
+<li>SEARCH_NO_MATCH</li>
 </ul>
 </div></section></section></details></div>
 <div class="col-sidebar">
@@ -88,7 +106,7 @@ One of:</p>
 <h3>On This Page</h3></summary>
 <div class="tsd-accordion-details">
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Properties</summary>
-<div><a href="#qfield"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>q<wbr/>Field</span></a><a href="#qmissingvalues"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>q<wbr/>Missing<wbr/>Values</span></a><a href="#qstate"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>q<wbr/>State</span></a><a href="#qverifyresult"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>q<wbr/>Verify<wbr/>Result</span></a></div></details></div></details></div>
+<div><a href="#qfield"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>q<wbr/>Field</span></a><a href="#qmissingduals"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>q<wbr/>Missing<wbr/>Duals</span></a><a href="#qmissingvalues"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>q<wbr/>Missing<wbr/>Values</span></a><a href="#qstate"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>q<wbr/>State</span></a><a href="#qtotalmissing"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>q<wbr/>Total<wbr/>Missing</span></a><a href="#qverifyresult"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>q<wbr/>Verify<wbr/>Result</span></a></div></details></div></details></div>
 <div class="site-menu">
 <nav id="tsd-sidebar-links" class="tsd-navigation"><a href="https://qlik.dev/embed/" class="tsd-nav-link">Embed</a><a href="https://qlik.dev/extend/" class="tsd-nav-link">Extend</a><a href="https://qlik.dev/manage/" class="tsd-nav-link">Manage</a><a href="https://qlik.dev/apis/" class="tsd-nav-link">APIs</a><a href="https://qlik.dev/toolkits/" class="tsd-nav-link">Toolkits</a></nav>
 <nav class="tsd-navigation"><a href="../index.html">@qlik/api reference</a>

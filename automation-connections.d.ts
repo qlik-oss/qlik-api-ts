@@ -1,21 +1,21 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/automation-connections.d.ts
-type AutomationConnectionChangeOwnerObject = {
+export type AutomationConnectionChangeOwnerObject = {
   /** The unique identifier of the new owner. */
   userId?: string;
 };
-type AutomationConnectionChangeSpaceObject = {
+export type AutomationConnectionChangeSpaceObject = {
   /** The unique identifier of the new space. */
   spaceId?: string;
 };
-type AutomationConnectionCheckObject = {
+export type AutomationConnectionCheckObject = {
   /** The connection status of the automation connection. When true, the automation connection is connected. */
   connected?: boolean;
   /** The connection status of the automation connection. When true, the automation connection is connected. */
   is_connected?: boolean;
 };
-type AutomationConnectionCreationObject = {
+export type AutomationConnectionCreationObject = {
   /** The unique identifier of the connector from which the automation connection is created. */
   connectorId: string;
   /** The name of the created automation connection. */
@@ -24,7 +24,7 @@ type AutomationConnectionCreationObject = {
   /** The unique identifier of the space in which the automation connection is created. */
   spaceId?: string;
 };
-type AutomationConnectionDetailObject = {
+export type AutomationConnectionDetailObject = {
   /** The unique identifier of the automation connector. */
   connectorId?: string;
   /** The timestamp when the automation connection was created. */
@@ -49,13 +49,13 @@ type AutomationConnectionDetailObject = {
   /** The timestamp when the automation connection was updated. */
   updatedAt?: string;
 };
-type AutomationConnectionParamCreateObject = {
+export type AutomationConnectionParamCreateObject = {
   /** The name of the automation connection parameter. */
   name?: string;
   /** The value of the automation connection parameter option. */
   value?: string;
 };
-type AutomationConnectionParamObject = {
+export type AutomationConnectionParamObject = {
   /** The documentation of the automation connection parameter. */
   documentation?: string;
   /** The example value of the automation connection parameter. */
@@ -76,28 +76,28 @@ type AutomationConnectionParamObject = {
   /** The value of the automation connection parameter. */
   value?: string;
 };
-type AutomationConnectionParamOptionObject = {
+export type AutomationConnectionParamOptionObject = {
   /** The unique identifier of the automation connection parameter option. */
   id?: string;
   /** The value of the automation connection parameter option. */
   value?: string;
 };
-type AutomationConnectionParamPutObject = {
+export type AutomationConnectionParamPutObject = {
   /** The unique identifier of the automation connection parameter option. */
   id?: string;
   /** The value of the automation connection parameter option. */
   value?: string;
 };
-type AutomationConnectionPutRequestObject = {
+export type AutomationConnectionPutRequestObject = {
   /** The new name of the automation connection to be renamed to. */
   name?: string;
   params?: AutomationConnectionParamPutObject[];
 };
-type AutomationConnectionsList = {
+export type AutomationConnectionsList = {
   data?: AutomationConnectionsListObject[];
   links?: Links;
 };
-type AutomationConnectionsListObject = {
+export type AutomationConnectionsListObject = {
   /** The unique identifier of the connector the automation connection is created from. */
   connectorId?: string;
   /** The timestamp when the automation connection is created. */
@@ -115,7 +115,7 @@ type AutomationConnectionsListObject = {
   /** The timestamp when the automation connection is updated. */
   updatedAt?: string;
 };
-type Error = {
+export type Error = {
   /** The unique code for the error */
   code: string;
   /** May be used to provide additional details */
@@ -123,16 +123,16 @@ type Error = {
   /** A summary of what went wrong */
   title: string;
 };
-type ErrorResponse = {
+export type ErrorResponse = {
   errors?: Error[];
   /** A way to trace the source of the error. */
   traceId?: string;
 };
-type Links = {
+export type Links = {
   next?: PaginationLink;
   prev?: PaginationLink;
 };
-type PaginationLink = {
+export type PaginationLink = {
   /** The URL to a resource request */
   href?: string | null;
 };
@@ -142,7 +142,7 @@ type PaginationLink = {
  * @param query an object with query parameters
  * @throws GetAutomationConnectionsHttpError
  */
-declare function getAutomationConnections(query: {
+export declare function getAutomationConnections(query: {
   /** Pagination cursor returned from a previous request. */
   cursor?: string;
   /** Filters the result based on the specified criteria: name, connectorId, ownerId, or spaceId. */
@@ -154,14 +154,14 @@ declare function getAutomationConnections(query: {
   /** The field to sort by, with +- prefix indicating sort order. (`?sort=-name` => sort on the `name` field using descending order). */
   sort?: "id" | "name" | "createdAt" | "updatedAt" | "+id" | "+name" | "+createdAt" | "+updatedAt" | "-id" | "-name" | "-createdAt" | "-updatedAt";
 }, options?: ApiCallOptions): Promise<GetAutomationConnectionsHttpResponse>;
-type GetAutomationConnectionsHttpResponse = {
+export type GetAutomationConnectionsHttpResponse = {
   data: AutomationConnectionsList;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetAutomationConnectionsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetAutomationConnectionsHttpResponse>;
 };
-type GetAutomationConnectionsHttpError = {
+export type GetAutomationConnectionsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 500 | 503;
@@ -172,13 +172,13 @@ type GetAutomationConnectionsHttpError = {
  * @param body an object with the body content
  * @throws CreateAutomationConnectionHttpError
  */
-declare function createAutomationConnection(body: AutomationConnectionCreationObject, options?: ApiCallOptions): Promise<CreateAutomationConnectionHttpResponse>;
-type CreateAutomationConnectionHttpResponse = {
+export declare function createAutomationConnection(body: AutomationConnectionCreationObject, options?: ApiCallOptions): Promise<CreateAutomationConnectionHttpResponse>;
+export type CreateAutomationConnectionHttpResponse = {
   data: AutomationConnectionDetailObject;
   headers: Headers;
   status: 201;
 };
-type CreateAutomationConnectionHttpError = {
+export type CreateAutomationConnectionHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 500 | 503;
@@ -190,16 +190,16 @@ type CreateAutomationConnectionHttpError = {
  * @param query an object with query parameters
  * @throws DeleteAutomationConnectionHttpError
  */
-declare function deleteAutomationConnection(id: string, query: {
+export declare function deleteAutomationConnection(id: string, query: {
   /** When true, the automation connection will be deleted regardless of its usage by any automations. */
   forced?: boolean;
 }, options?: ApiCallOptions): Promise<DeleteAutomationConnectionHttpResponse>;
-type DeleteAutomationConnectionHttpResponse = {
+export type DeleteAutomationConnectionHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteAutomationConnectionHttpError = {
+export type DeleteAutomationConnectionHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -210,13 +210,13 @@ type DeleteAutomationConnectionHttpError = {
  * @param id The unique identifier for the automation connection.
  * @throws GetAutomationConnectionHttpError
  */
-declare function getAutomationConnection(id: string, options?: ApiCallOptions): Promise<GetAutomationConnectionHttpResponse>;
-type GetAutomationConnectionHttpResponse = {
+export declare function getAutomationConnection(id: string, options?: ApiCallOptions): Promise<GetAutomationConnectionHttpResponse>;
+export type GetAutomationConnectionHttpResponse = {
   data: AutomationConnectionDetailObject;
   headers: Headers;
   status: 200;
 };
-type GetAutomationConnectionHttpError = {
+export type GetAutomationConnectionHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -228,13 +228,13 @@ type GetAutomationConnectionHttpError = {
  * @param body an object with the body content
  * @throws UpdateAutomationConnectionHttpError
  */
-declare function updateAutomationConnection(id: string, body: AutomationConnectionPutRequestObject, options?: ApiCallOptions): Promise<UpdateAutomationConnectionHttpResponse>;
-type UpdateAutomationConnectionHttpResponse = {
+export declare function updateAutomationConnection(id: string, body: AutomationConnectionPutRequestObject, options?: ApiCallOptions): Promise<UpdateAutomationConnectionHttpResponse>;
+export type UpdateAutomationConnectionHttpResponse = {
   data: AutomationConnectionDetailObject;
   headers: Headers;
   status: 200;
 };
-type UpdateAutomationConnectionHttpError = {
+export type UpdateAutomationConnectionHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -246,13 +246,13 @@ type UpdateAutomationConnectionHttpError = {
  * @param body an object with the body content
  * @throws ChangeOwnerAutomationConnectionHttpError
  */
-declare function changeOwnerAutomationConnection(id: string, body: AutomationConnectionChangeOwnerObject, options?: ApiCallOptions): Promise<ChangeOwnerAutomationConnectionHttpResponse>;
-type ChangeOwnerAutomationConnectionHttpResponse = {
+export declare function changeOwnerAutomationConnection(id: string, body: AutomationConnectionChangeOwnerObject, options?: ApiCallOptions): Promise<ChangeOwnerAutomationConnectionHttpResponse>;
+export type ChangeOwnerAutomationConnectionHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type ChangeOwnerAutomationConnectionHttpError = {
+export type ChangeOwnerAutomationConnectionHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -264,13 +264,13 @@ type ChangeOwnerAutomationConnectionHttpError = {
  * @param body an object with the body content
  * @throws ChangeSpaceAutomationConnectionHttpError
  */
-declare function changeSpaceAutomationConnection(id: string, body: AutomationConnectionChangeSpaceObject, options?: ApiCallOptions): Promise<ChangeSpaceAutomationConnectionHttpResponse>;
-type ChangeSpaceAutomationConnectionHttpResponse = {
+export declare function changeSpaceAutomationConnection(id: string, body: AutomationConnectionChangeSpaceObject, options?: ApiCallOptions): Promise<ChangeSpaceAutomationConnectionHttpResponse>;
+export type ChangeSpaceAutomationConnectionHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type ChangeSpaceAutomationConnectionHttpError = {
+export type ChangeSpaceAutomationConnectionHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -281,13 +281,13 @@ type ChangeSpaceAutomationConnectionHttpError = {
  * @param id The unique identifier for the automation connection.
  * @throws CheckAutomationConnectionHttpError
  */
-declare function checkAutomationConnection(id: string, options?: ApiCallOptions): Promise<CheckAutomationConnectionHttpResponse>;
-type CheckAutomationConnectionHttpResponse = {
+export declare function checkAutomationConnection(id: string, options?: ApiCallOptions): Promise<CheckAutomationConnectionHttpResponse>;
+export type CheckAutomationConnectionHttpResponse = {
   data: AutomationConnectionCheckObject;
   headers: Headers;
   status: 200;
 };
-type CheckAutomationConnectionHttpError = {
+export type CheckAutomationConnectionHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -295,8 +295,8 @@ type CheckAutomationConnectionHttpError = {
 /**
  * Clears the cache for automation-connections api requests.
  */
-declare function clearCache(): void;
-type AutomationConnectionsAPI = {
+export declare function clearCache(): void;
+export type AutomationConnectionsAPI = {
   /**
    * Retrieves a list of automation connections the requesting user has access to.
    *
@@ -367,4 +367,4 @@ type AutomationConnectionsAPI = {
  */
 declare const automationConnectionsExport: AutomationConnectionsAPI;
 //#endregion
-export { AutomationConnectionChangeOwnerObject, AutomationConnectionChangeSpaceObject, AutomationConnectionCheckObject, AutomationConnectionCreationObject, AutomationConnectionDetailObject, AutomationConnectionParamCreateObject, AutomationConnectionParamObject, AutomationConnectionParamOptionObject, AutomationConnectionParamPutObject, AutomationConnectionPutRequestObject, AutomationConnectionsAPI, AutomationConnectionsList, AutomationConnectionsListObject, ChangeOwnerAutomationConnectionHttpError, ChangeOwnerAutomationConnectionHttpResponse, ChangeSpaceAutomationConnectionHttpError, ChangeSpaceAutomationConnectionHttpResponse, CheckAutomationConnectionHttpError, CheckAutomationConnectionHttpResponse, CreateAutomationConnectionHttpError, CreateAutomationConnectionHttpResponse, DeleteAutomationConnectionHttpError, DeleteAutomationConnectionHttpResponse, Error, ErrorResponse, GetAutomationConnectionHttpError, GetAutomationConnectionHttpResponse, GetAutomationConnectionsHttpError, GetAutomationConnectionsHttpResponse, Links, PaginationLink, UpdateAutomationConnectionHttpError, UpdateAutomationConnectionHttpResponse, changeOwnerAutomationConnection, changeSpaceAutomationConnection, checkAutomationConnection, clearCache, createAutomationConnection, automationConnectionsExport as default, deleteAutomationConnection, getAutomationConnection, getAutomationConnections, updateAutomationConnection };
+export { automationConnectionsExport as default };

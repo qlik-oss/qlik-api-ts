@@ -1,7 +1,7 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/reload-tasks.d.ts
-type Error = {
+export type Error = {
   code: string;
   detail?: string;
   title: string;
@@ -18,7 +18,7 @@ type Error = {
  *   traceId: "7975401f3954aa47"
  * }
  */
-type Errors = {
+export type Errors = {
   errors?: Error[];
   traceId?: string;
 };
@@ -28,26 +28,26 @@ type Errors = {
  *   href: "http://example.com"
  * }
  */
-type Href = {
+export type Href = {
   href: string;
 };
-type PaginationLinks = SelfLink & {
+export type PaginationLinks = SelfLink & {
   next?: Href;
   prev?: Href;
 };
-type PostTaskBody = TaskBase & {
+export type PostTaskBody = TaskBase & {
   /** @deprecated
    * Type of task being created - only contains the "scheduled_reload" value. Type value is not used for creating a schedule reload. It has been deprecated since 2022-04-05. */
   type?: "scheduled_reload";
 };
-type PutTaskBody = TaskBase & {
+export type PutTaskBody = TaskBase & {
   /** Toggle for enabling and disabling the reload task */
   state?: "Enabled" | "Disabled" | "Completed";
 };
-type SelfLink = {
+export type SelfLink = {
   self: Href;
 };
-type Task = TaskBase & {
+export type Task = TaskBase & {
   /** The reason why the task was disabled. */
   disabledCode?: "MANUALLY" | "CONSECUTIVE-FAILURES" | "OWNER-DELETED" | "OWNER-DISABLED";
   /** @deprecated
@@ -74,7 +74,7 @@ type Task = TaskBase & {
   /** The ID of the user who owns the task. */
   userId: string;
 };
-type TaskBase = {
+export type TaskBase = {
   /** The ID of the app. */
   appId?: string;
   /** A flag that indicates whether a reload is triggered when data of the app is changed */
@@ -92,7 +92,7 @@ type TaskBase = {
   /** The time zone in which the time is specified. (Formatted as an IANA Time Zone Database name, e.g. Europe/Zurich.) This field specifies the time zone in which the event start/end are expanded. If missing the start/end fields must specify a UTC offset in RFC3339 format. */
   timeZone?: string;
 };
-type Tasks = {
+export type Tasks = {
   data: Task[];
   links: PaginationLinks;
 };
@@ -104,7 +104,7 @@ type Tasks = {
  * @param query an object with query parameters
  * @throws GetReloadTasksHttpError
  */
-declare function getReloadTasks(query: {
+export declare function getReloadTasks(query: {
   /** The case sensitive string used to search for a task by app ID. */
   appId?: string;
   /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
@@ -116,14 +116,14 @@ declare function getReloadTasks(query: {
   /** The cursor to the previous page of resources. Provide either the next or prev cursor, but not both. */
   prev?: string;
 }, options?: ApiCallOptions): Promise<GetReloadTasksHttpResponse>;
-type GetReloadTasksHttpResponse = {
+export type GetReloadTasksHttpResponse = {
   data: Tasks;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetReloadTasksHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetReloadTasksHttpResponse>;
 };
-type GetReloadTasksHttpError = {
+export type GetReloadTasksHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429 | 500 | 503;
@@ -136,13 +136,13 @@ type GetReloadTasksHttpError = {
  * @param body an object with the body content
  * @throws CreateReloadTaskHttpError
  */
-declare function createReloadTask(body: PostTaskBody, options?: ApiCallOptions): Promise<CreateReloadTaskHttpResponse>;
-type CreateReloadTaskHttpResponse = {
+export declare function createReloadTask(body: PostTaskBody, options?: ApiCallOptions): Promise<CreateReloadTaskHttpResponse>;
+export type CreateReloadTaskHttpResponse = {
   data: Task;
   headers: Headers;
   status: 201;
 };
-type CreateReloadTaskHttpError = {
+export type CreateReloadTaskHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -155,13 +155,13 @@ type CreateReloadTaskHttpError = {
  * @param taskId The unique identifier of the task.
  * @throws DeleteReloadTaskHttpError
  */
-declare function deleteReloadTask(taskId: string, options?: ApiCallOptions): Promise<DeleteReloadTaskHttpResponse>;
-type DeleteReloadTaskHttpResponse = {
+export declare function deleteReloadTask(taskId: string, options?: ApiCallOptions): Promise<DeleteReloadTaskHttpResponse>;
+export type DeleteReloadTaskHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteReloadTaskHttpError = {
+export type DeleteReloadTaskHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500;
@@ -174,13 +174,13 @@ type DeleteReloadTaskHttpError = {
  * @param taskId The unique identifier of the task.
  * @throws GetReloadTaskHttpError
  */
-declare function getReloadTask(taskId: string, options?: ApiCallOptions): Promise<GetReloadTaskHttpResponse>;
-type GetReloadTaskHttpResponse = {
+export declare function getReloadTask(taskId: string, options?: ApiCallOptions): Promise<GetReloadTaskHttpResponse>;
+export type GetReloadTaskHttpResponse = {
   data: Task;
   headers: Headers;
   status: 200;
 };
-type GetReloadTaskHttpError = {
+export type GetReloadTaskHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429 | 500 | 503;
@@ -194,13 +194,13 @@ type GetReloadTaskHttpError = {
  * @param body an object with the body content
  * @throws UpdateReloadTaskHttpError
  */
-declare function updateReloadTask(taskId: string, body: PutTaskBody, options?: ApiCallOptions): Promise<UpdateReloadTaskHttpResponse>;
-type UpdateReloadTaskHttpResponse = {
+export declare function updateReloadTask(taskId: string, body: PutTaskBody, options?: ApiCallOptions): Promise<UpdateReloadTaskHttpResponse>;
+export type UpdateReloadTaskHttpResponse = {
   data: Task;
   headers: Headers;
   status: 200;
 };
-type UpdateReloadTaskHttpError = {
+export type UpdateReloadTaskHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -208,8 +208,8 @@ type UpdateReloadTaskHttpError = {
 /**
  * Clears the cache for reload-tasks api requests.
  */
-declare function clearCache(): void;
-type ReloadTasksAPI = {
+export declare function clearCache(): void;
+export type ReloadTasksAPI = {
   /**
    * @deprecated
    *
@@ -266,4 +266,4 @@ type ReloadTasksAPI = {
  */
 declare const reloadTasksExport: ReloadTasksAPI;
 //#endregion
-export { CreateReloadTaskHttpError, CreateReloadTaskHttpResponse, DeleteReloadTaskHttpError, DeleteReloadTaskHttpResponse, Error, Errors, GetReloadTaskHttpError, GetReloadTaskHttpResponse, GetReloadTasksHttpError, GetReloadTasksHttpResponse, Href, PaginationLinks, PostTaskBody, PutTaskBody, ReloadTasksAPI, SelfLink, Task, TaskBase, Tasks, UpdateReloadTaskHttpError, UpdateReloadTaskHttpResponse, clearCache, createReloadTask, reloadTasksExport as default, deleteReloadTask, getReloadTask, getReloadTasks, updateReloadTask };
+export { reloadTasksExport as default };

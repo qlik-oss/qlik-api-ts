@@ -1,7 +1,7 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/data-credentials.d.ts
-type ActionFilterOrphanRequest = {
+export type ActionFilterOrphanRequest = {
   /** Filtering on datasource ID of credentials */
   datasourceID?: string;
   /** Filtering on separate status of credentials: * 0 - embedded credential * 1 - separated credential */
@@ -9,12 +9,12 @@ type ActionFilterOrphanRequest = {
   /** Filtering on type of credentials */
   qType?: string;
 };
-type ActionFilterOrphanResponse = {
+export type ActionFilterOrphanResponse = {
   /** Number of orphan credentials found */
   count: number;
   data: OrphanCredentialResItem[];
 };
-type Credential = {
+export type Credential = {
   /** Datetime when the credential was created */
   created?: string;
   /** ID datasource that the credential is created for */
@@ -36,7 +36,7 @@ type Credential = {
 /**
  * Credential
  */
-type CredentialCreate = {
+export type CredentialCreate = {
   /** ID of connection that will be associated with the credential */
   connectionId?: string;
   /** ID datasource that the credential is created for */
@@ -52,7 +52,7 @@ type CredentialCreate = {
   /** User name */
   qUsername: string;
 };
-type Error = {
+export type Error = {
   /** Unique internal error code */
   code?: string;
   /** More concrete details */
@@ -62,8 +62,8 @@ type Error = {
   /** A summary in english explaining what went wrong */
   title?: string;
 };
-type Errors = Error[];
-type Link = {
+export type Errors = Error[];
+export type Link = {
   /** Link to current query */
   self: {
     /** URL pointing to the resource */
@@ -73,7 +73,7 @@ type Link = {
 /**
  * Orphan credential
  */
-type OrphanCredentialResItem = {
+export type OrphanCredentialResItem = {
   /** Datetime when the credential was created */
   created: string;
   /** ID datasource that the credential is created for */
@@ -91,7 +91,7 @@ type OrphanCredentialResItem = {
   /** User ID of the credential's owner */
   user?: string;
 };
-type PatchRequest = {
+export type PatchRequest = {
   /** Operation type */
   op: "add" | "replace" | "remove";
   /** Path to the target field to be patched */
@@ -99,7 +99,7 @@ type PatchRequest = {
   /** Value used for the patch. Required only for `add` or `replace` operations. The value type should match the type of the target field. */
   value?: string | boolean | number | unknown[];
 }[];
-type ResponseErrors = {
+export type ResponseErrors = {
   errors?: Errors;
 };
 /**
@@ -108,13 +108,13 @@ type ResponseErrors = {
  * @param body an object with the body content
  * @throws FilterOrphanedDataCredentialsHttpError
  */
-declare function filterOrphanedDataCredentials(body: ActionFilterOrphanRequest, options?: ApiCallOptions): Promise<FilterOrphanedDataCredentialsHttpResponse>;
-type FilterOrphanedDataCredentialsHttpResponse = {
+export declare function filterOrphanedDataCredentials(body: ActionFilterOrphanRequest, options?: ApiCallOptions): Promise<FilterOrphanedDataCredentialsHttpResponse>;
+export type FilterOrphanedDataCredentialsHttpResponse = {
   data: ActionFilterOrphanResponse;
   headers: Headers;
   status: 200;
 };
-type FilterOrphanedDataCredentialsHttpError = {
+export type FilterOrphanedDataCredentialsHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 403;
@@ -133,16 +133,16 @@ type FilterOrphanedDataCredentialsHttpError = {
  * @param query an object with query parameters
  * @throws DeleteDataCredentialHttpError
  */
-declare function deleteDataCredential(qID: string, query: {
+export declare function deleteDataCredential(qID: string, query: {
   /** If set to true, credentialId in the query will be interpreted as credential's name */
   byCredentialName?: boolean;
 }, options?: ApiCallOptions): Promise<DeleteDataCredentialHttpResponse>;
-type DeleteDataCredentialHttpResponse = {
+export type DeleteDataCredentialHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteDataCredentialHttpError = {
+export type DeleteDataCredentialHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 404;
@@ -161,16 +161,16 @@ type DeleteDataCredentialHttpError = {
  * @param query an object with query parameters
  * @throws GetDataCredentialHttpError
  */
-declare function getDataCredential(qID: string, query: {
+export declare function getDataCredential(qID: string, query: {
   /** If set to true, credentialId in the query will be interpreted as credential's name */
   byCredentialName?: boolean;
 }, options?: ApiCallOptions): Promise<GetDataCredentialHttpResponse>;
-type GetDataCredentialHttpResponse = {
+export type GetDataCredentialHttpResponse = {
   data: Credential;
   headers: Headers;
   status: 200;
 };
-type GetDataCredentialHttpError = {
+export type GetDataCredentialHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 404;
@@ -183,16 +183,16 @@ type GetDataCredentialHttpError = {
  * @param body an object with the body content
  * @throws PatchDataCredentialHttpError
  */
-declare function patchDataCredential(qID: string, query: {
+export declare function patchDataCredential(qID: string, query: {
   /** If set to true, credentialId in the query will be interpreted as credential's name */
   byCredentialName?: boolean;
 }, body: PatchRequest, options?: ApiCallOptions): Promise<PatchDataCredentialHttpResponse>;
-type PatchDataCredentialHttpResponse = {
+export type PatchDataCredentialHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchDataCredentialHttpError = {
+export type PatchDataCredentialHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 404 | 409;
@@ -205,16 +205,16 @@ type PatchDataCredentialHttpError = {
  * @param body an object with the body content
  * @throws UpdateDataCredentialHttpError
  */
-declare function updateDataCredential(qID: string, query: {
+export declare function updateDataCredential(qID: string, query: {
   /** If set to true, credentialId in the query will be interpreted as credential's name */
   byCredentialName?: boolean;
 }, body: CredentialCreate, options?: ApiCallOptions): Promise<UpdateDataCredentialHttpResponse>;
-type UpdateDataCredentialHttpResponse = {
+export type UpdateDataCredentialHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type UpdateDataCredentialHttpError = {
+export type UpdateDataCredentialHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 404 | 409;
@@ -222,8 +222,8 @@ type UpdateDataCredentialHttpError = {
 /**
  * Clears the cache for data-credentials api requests.
  */
-declare function clearCache(): void;
-type DataCredentialsAPI = {
+export declare function clearCache(): void;
+export type DataCredentialsAPI = {
   /**
    * Gets list of orphan data credentials (i.e. credentials that are not associated to any data connection) filtering on properties defined in request body
    *
@@ -289,4 +289,4 @@ type DataCredentialsAPI = {
  */
 declare const dataCredentialsExport: DataCredentialsAPI;
 //#endregion
-export { ActionFilterOrphanRequest, ActionFilterOrphanResponse, Credential, CredentialCreate, DataCredentialsAPI, DeleteDataCredentialHttpError, DeleteDataCredentialHttpResponse, Error, Errors, FilterOrphanedDataCredentialsHttpError, FilterOrphanedDataCredentialsHttpResponse, GetDataCredentialHttpError, GetDataCredentialHttpResponse, Link, OrphanCredentialResItem, PatchDataCredentialHttpError, PatchDataCredentialHttpResponse, PatchRequest, ResponseErrors, UpdateDataCredentialHttpError, UpdateDataCredentialHttpResponse, clearCache, dataCredentialsExport as default, deleteDataCredential, filterOrphanedDataCredentials, getDataCredential, patchDataCredential, updateDataCredential };
+export { dataCredentialsExport as default };

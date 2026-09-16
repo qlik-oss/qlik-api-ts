@@ -1,10 +1,10 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/data-assets.d.ts
-type BatchIdDto = {
+export type BatchIdDto = {
   ids?: string[];
 };
-type DataAsset = {
+export type DataAsset = {
   appId?: string;
   appType: string;
   /** The value is automatically set by the application. User defined value is ignored. */
@@ -35,22 +35,24 @@ type DataAsset = {
   /** Only required when updating the resource. Must be null for new resources. */
   version?: number;
 };
-type DataStoreInfo = {
+export type DataStoreInfo = {
   id: string;
   readonly name?: string;
   readonly type?: string;
 };
-type Error = {
+export type Error = {
   code?: string;
   detail?: string;
+  /** Optional free-form metadata associated with the error. */
+  meta?: unknown;
   status?: string;
   title?: string;
 };
-type ErrorResponse = {
+export type ErrorResponse = {
   errors?: Error[];
   traceId?: string;
 };
-type JsonPatch = {
+export type JsonPatch = {
   /** A JSON Pointer path pointing to the location to move/copy from. */
   from?: string;
   /** The operation to be performed. */
@@ -66,13 +68,13 @@ type JsonPatch = {
  * @param body an object with the body content
  * @throws DeleteDataAssetsHttpError
  */
-declare function deleteDataAssets(body: BatchIdDto, options?: ApiCallOptions): Promise<DeleteDataAssetsHttpResponse>;
-type DeleteDataAssetsHttpResponse = {
+export declare function deleteDataAssets(body: BatchIdDto, options?: ApiCallOptions): Promise<DeleteDataAssetsHttpResponse>;
+export type DeleteDataAssetsHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteDataAssetsHttpError = {
+export type DeleteDataAssetsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -83,13 +85,13 @@ type DeleteDataAssetsHttpError = {
  * @param body an object with the body content
  * @throws CreateDataAssetHttpError
  */
-declare function createDataAsset(body: DataAsset, options?: ApiCallOptions): Promise<CreateDataAssetHttpResponse>;
-type CreateDataAssetHttpResponse = {
+export declare function createDataAsset(body: DataAsset, options?: ApiCallOptions): Promise<CreateDataAssetHttpResponse>;
+export type CreateDataAssetHttpResponse = {
   data: DataAsset;
   headers: Headers;
   status: 201;
 };
-type CreateDataAssetHttpError = {
+export type CreateDataAssetHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -101,16 +103,16 @@ type CreateDataAssetHttpError = {
  * @param query an object with query parameters
  * @throws GetDataAssetHttpError
  */
-declare function getDataAsset(dataAssetId: string, query: {
+export declare function getDataAsset(dataAssetId: string, query: {
   /** Comma-separated fields to return in the response. */
   projections?: string[];
 }, options?: ApiCallOptions): Promise<GetDataAssetHttpResponse>;
-type GetDataAssetHttpResponse = {
+export type GetDataAssetHttpResponse = {
   data: DataAsset;
   headers: Headers;
   status: 200;
 };
-type GetDataAssetHttpError = {
+export type GetDataAssetHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -122,13 +124,13 @@ type GetDataAssetHttpError = {
  * @param body an object with the body content
  * @throws PatchDataAssetHttpError
  */
-declare function patchDataAsset(dataAssetId: string, body: JsonPatch[], options?: ApiCallOptions): Promise<PatchDataAssetHttpResponse>;
-type PatchDataAssetHttpResponse = {
+export declare function patchDataAsset(dataAssetId: string, body: JsonPatch[], options?: ApiCallOptions): Promise<PatchDataAssetHttpResponse>;
+export type PatchDataAssetHttpResponse = {
   data: DataAsset;
   headers: Headers;
   status: 200 | 204;
 };
-type PatchDataAssetHttpError = {
+export type PatchDataAssetHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -140,13 +142,13 @@ type PatchDataAssetHttpError = {
  * @param body an object with the body content
  * @throws UpdateDataAssetHttpError
  */
-declare function updateDataAsset(dataAssetId: string, body: DataAsset, options?: ApiCallOptions): Promise<UpdateDataAssetHttpResponse>;
-type UpdateDataAssetHttpResponse = {
+export declare function updateDataAsset(dataAssetId: string, body: DataAsset, options?: ApiCallOptions): Promise<UpdateDataAssetHttpResponse>;
+export type UpdateDataAssetHttpResponse = {
   data: DataAsset;
   headers: Headers;
   status: 200;
 };
-type UpdateDataAssetHttpError = {
+export type UpdateDataAssetHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -154,8 +156,8 @@ type UpdateDataAssetHttpError = {
 /**
  * Clears the cache for data-assets api requests.
  */
-declare function clearCache(): void;
-type DataAssetsAPI = {
+export declare function clearCache(): void;
+export type DataAssetsAPI = {
   /**
    * Batch delete data assets by IDs.
    *
@@ -204,4 +206,4 @@ type DataAssetsAPI = {
  */
 declare const dataAssetsExport: DataAssetsAPI;
 //#endregion
-export { BatchIdDto, CreateDataAssetHttpError, CreateDataAssetHttpResponse, DataAsset, DataAssetsAPI, DataStoreInfo, DeleteDataAssetsHttpError, DeleteDataAssetsHttpResponse, Error, ErrorResponse, GetDataAssetHttpError, GetDataAssetHttpResponse, JsonPatch, PatchDataAssetHttpError, PatchDataAssetHttpResponse, UpdateDataAssetHttpError, UpdateDataAssetHttpResponse, clearCache, createDataAsset, dataAssetsExport as default, deleteDataAssets, getDataAsset, patchDataAsset, updateDataAsset };
+export { dataAssetsExport as default };

@@ -1,10 +1,10 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/web-notifications.d.ts
 /**
  * An error object.
  */
-type Error = {
+export type Error = {
   /** The error code. */
   code: string;
   /** A human-readable explanation specific to this occurrence of the problem. */
@@ -17,13 +17,13 @@ type Error = {
 /**
  * A representation of the errors encountered from the HTTP request.
  */
-type Errors = {
+export type Errors = {
   errors?: Error[];
 };
 /**
  * Notifications links
  */
-type Links = {
+export type Links = {
   next?: {
     href?: string;
   };
@@ -37,11 +37,11 @@ type Links = {
 /**
  * Notifications meta data
  */
-type Meta = {
+export type Meta = {
   /** The total number of unread notification. */
   unreadCount?: number;
 };
-type Notification = {
+export type Notification = {
   readonly action?: string;
   readonly body: string;
   readonly createdAt: string;
@@ -60,7 +60,7 @@ type Notification = {
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
  */
-type NotificationPatch = {
+export type NotificationPatch = {
   /** The operation to be performed. */
   op: "replace";
   /** The path for the given resource field to patch. */
@@ -78,8 +78,8 @@ type NotificationPatch = {
  *   }
  * ]
  */
-type NotificationPatchSchema = NotificationPatch[];
-type Notifications = {
+export type NotificationPatchSchema = NotificationPatch[];
+export type Notifications = {
   data?: Notification[];
   /** Notifications links */
   links?: Links;
@@ -98,7 +98,7 @@ type Notifications = {
  * @param query an object with query parameters
  * @throws GetNotificationsHttpError
  */
-declare function getNotifications(query: {
+export declare function getNotifications(query: {
   /** The number of notification entries to retrieved. */
   limit?: number;
   /** Page number */
@@ -110,14 +110,14 @@ declare function getNotifications(query: {
   /** The field to sort by, with +/- prefix indicating sort order */
   sort?: "+createdAt" | "-createdAt" | "+updatedAt" | "-updatedAt";
 }, options?: ApiCallOptions): Promise<GetNotificationsHttpResponse>;
-type GetNotificationsHttpResponse = {
+export type GetNotificationsHttpResponse = {
   data: Notifications;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetNotificationsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetNotificationsHttpResponse>;
 };
-type GetNotificationsHttpError = {
+export type GetNotificationsHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 500;
@@ -127,13 +127,13 @@ type GetNotificationsHttpError = {
  *
  * @throws DeleteNotificationsHttpError
  */
-declare function deleteNotifications(options?: ApiCallOptions): Promise<DeleteNotificationsHttpResponse>;
-type DeleteNotificationsHttpResponse = {
+export declare function deleteNotifications(options?: ApiCallOptions): Promise<DeleteNotificationsHttpResponse>;
+export type DeleteNotificationsHttpResponse = {
   data: Meta;
   headers: Headers;
   status: 204;
 };
-type DeleteNotificationsHttpError = {
+export type DeleteNotificationsHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 500;
@@ -144,13 +144,13 @@ type DeleteNotificationsHttpError = {
  * @param body an object with the body content
  * @throws PatchNotificationsHttpError
  */
-declare function patchNotifications(body: NotificationPatchSchema, options?: ApiCallOptions): Promise<PatchNotificationsHttpResponse>;
-type PatchNotificationsHttpResponse = {
+export declare function patchNotifications(body: NotificationPatchSchema, options?: ApiCallOptions): Promise<PatchNotificationsHttpResponse>;
+export type PatchNotificationsHttpResponse = {
   data: Meta;
   headers: Headers;
   status: 204;
 };
-type PatchNotificationsHttpError = {
+export type PatchNotificationsHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 500;
@@ -161,13 +161,13 @@ type PatchNotificationsHttpError = {
  * @param notificationId The id of the notification to delete.
  * @throws DeleteNotificationHttpError
  */
-declare function deleteNotification(notificationId: string, options?: ApiCallOptions): Promise<DeleteNotificationHttpResponse>;
-type DeleteNotificationHttpResponse = {
+export declare function deleteNotification(notificationId: string, options?: ApiCallOptions): Promise<DeleteNotificationHttpResponse>;
+export type DeleteNotificationHttpResponse = {
   data: Meta;
   headers: Headers;
   status: 204;
 };
-type DeleteNotificationHttpError = {
+export type DeleteNotificationHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 404 | 500;
@@ -178,13 +178,13 @@ type DeleteNotificationHttpError = {
  * @param notificationId The id of the notification to retrieve.
  * @throws GetNotificationHttpError
  */
-declare function getNotification(notificationId: string, options?: ApiCallOptions): Promise<GetNotificationHttpResponse>;
-type GetNotificationHttpResponse = {
+export declare function getNotification(notificationId: string, options?: ApiCallOptions): Promise<GetNotificationHttpResponse>;
+export type GetNotificationHttpResponse = {
   data: Notification;
   headers: Headers;
   status: 200;
 };
-type GetNotificationHttpError = {
+export type GetNotificationHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 404 | 500;
@@ -196,13 +196,13 @@ type GetNotificationHttpError = {
  * @param body an object with the body content
  * @throws PatchNotificationHttpError
  */
-declare function patchNotification(notificationId: string, body: NotificationPatchSchema, options?: ApiCallOptions): Promise<PatchNotificationHttpResponse>;
-type PatchNotificationHttpResponse = {
+export declare function patchNotification(notificationId: string, body: NotificationPatchSchema, options?: ApiCallOptions): Promise<PatchNotificationHttpResponse>;
+export type PatchNotificationHttpResponse = {
   data: Meta;
   headers: Headers;
   status: 204;
 };
-type PatchNotificationHttpError = {
+export type PatchNotificationHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 404 | 500;
@@ -210,8 +210,8 @@ type PatchNotificationHttpError = {
 /**
  * Clears the cache for web-notifications api requests.
  */
-declare function clearCache(): void;
-type WebNotificationsAPI = {
+export declare function clearCache(): void;
+export type WebNotificationsAPI = {
   /**
    * Retrieve notifications matching the query.
    * @example
@@ -270,4 +270,4 @@ type WebNotificationsAPI = {
  */
 declare const webNotificationsExport: WebNotificationsAPI;
 //#endregion
-export { DeleteNotificationHttpError, DeleteNotificationHttpResponse, DeleteNotificationsHttpError, DeleteNotificationsHttpResponse, Error, Errors, GetNotificationHttpError, GetNotificationHttpResponse, GetNotificationsHttpError, GetNotificationsHttpResponse, Links, Meta, Notification, NotificationPatch, NotificationPatchSchema, Notifications, PatchNotificationHttpError, PatchNotificationHttpResponse, PatchNotificationsHttpError, PatchNotificationsHttpResponse, WebNotificationsAPI, clearCache, webNotificationsExport as default, deleteNotification, deleteNotifications, getNotification, getNotifications, patchNotification, patchNotifications };
+export { webNotificationsExport as default };

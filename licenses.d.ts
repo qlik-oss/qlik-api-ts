@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/licenses.d.ts
 /**
  * @example
@@ -16,7 +16,7 @@ import "./chunks/invoke-fetch-DcXyLc5n.js";
  *   ]
  * }
  */
-type AssignmentsActionsAddRequest = {
+export type AssignmentsActionsAddRequest = {
   add: {
     /** @deprecated
      * User name */
@@ -49,7 +49,7 @@ type AssignmentsActionsAddRequest = {
  *   ]
  * }
  */
-type AssignmentsActionsAddResponse = {
+export type AssignmentsActionsAddResponse = {
   data: {
     /** Error code */
     code?: string;
@@ -74,7 +74,7 @@ type AssignmentsActionsAddResponse = {
  *   ]
  * }
  */
-type AssignmentsActionsDeleteRequest = {
+export type AssignmentsActionsDeleteRequest = {
   delete: {
     /** User subject */
     subject: string;
@@ -101,7 +101,7 @@ type AssignmentsActionsDeleteRequest = {
  *   ]
  * }
  */
-type AssignmentsActionsDeleteResponse = {
+export type AssignmentsActionsDeleteResponse = {
   data: {
     /** Error code */
     code?: string;
@@ -127,7 +127,7 @@ type AssignmentsActionsDeleteResponse = {
  *   ]
  * }
  */
-type AssignmentsActionsUpdateRequest = {
+export type AssignmentsActionsUpdateRequest = {
   update: {
     /** The current user subject, in case that should be patched. */
     sourceSubject?: string;
@@ -159,7 +159,7 @@ type AssignmentsActionsUpdateRequest = {
  *   ]
  * }
  */
-type AssignmentsActionsUpdateResponse = {
+export type AssignmentsActionsUpdateResponse = {
   data: {
     /** Error code */
     code?: string;
@@ -202,7 +202,7 @@ type AssignmentsActionsUpdateResponse = {
  *   }
  * }
  */
-type AssignmentsResponse = {
+export type AssignmentsResponse = {
   data: {
     /** Assignment created date. */
     created: string;
@@ -218,7 +218,7 @@ type AssignmentsResponse = {
     prev?: Href;
   };
 };
-type ConsumptionEventsResponse = {
+export type ConsumptionEventsResponse = {
   data: {
     /** Allotment ID */
     allotmentId?: string;
@@ -259,7 +259,7 @@ type ConsumptionEventsResponse = {
  *   message: "error message"
  * }
  */
-type ErrorResponse = {
+export type ErrorResponse = {
   /** @deprecated
    * Error type */
   error: string;
@@ -275,7 +275,7 @@ type ErrorResponse = {
    * Error message */
   message: string;
 };
-type Href = {
+export type Href = {
   /** link */
   href?: string;
 };
@@ -313,10 +313,11 @@ type Href = {
  *   secondaryNumber: "12345",
  *   status: "Ok",
  *   trial: false,
- *   valid: "2018-01-01/2018-12-31"
+ *   valid: "2018-01-01/2018-12-31",
+ *   version: "A1B2-C3D4-E5F6-G7H8-J9K0"
  * }
  */
-type LicenseOverview = {
+export type LicenseOverview = {
   allotments: {
     name: "professional" | "analyzer" | "analyzer_time";
     /** Overage value; -1 means unbounded overage. */
@@ -366,6 +367,8 @@ type LicenseOverview = {
   updated: string;
   /** Period that the license is currently set to be active. Represented as an ISO 8601 time interval with start and end. */
   valid: string;
+  /** The version of the license definition, used to track whether changes have propagated. Typically a content hash; its exact form depends on the origin. */
+  version: string;
 };
 /**
  * @example
@@ -379,7 +382,7 @@ type LicenseOverview = {
  *   valid: "2018-01-01/2018-12-31"
  * }
  */
-type LicenseStatus = {
+export type LicenseStatus = {
   /** Boolean indicating if the license is deactivated. */
   deactivated: boolean;
   /** Enum with extension status of license. access. */
@@ -404,7 +407,7 @@ type LicenseStatus = {
  *   autoAssignProfessional: false
  * }
  */
-type SettingsBody = {
+export type SettingsBody = {
   /** If analyzer users are available, they will be automatically assigned. Otherwise, analyzer capacity will be assigned, if available. */
   autoAssignAnalyzer?: boolean;
   /** If professional users are available, they will be automatically assigned. Otherwise, analyzer capacity will be assigned, if available. */
@@ -416,7 +419,7 @@ type SettingsBody = {
  * @param query an object with query parameters
  * @throws GetLicenseAssignmentsHttpError
  */
-declare function getLicenseAssignments(query: {
+export declare function getLicenseAssignments(query: {
   /** The filter for finding entries. */
   filter?: string;
   /** The preferred number of entries to return. */
@@ -428,14 +431,14 @@ declare function getLicenseAssignments(query: {
   /** The field to sort on; can be prefixed with +/- for ascending/descending sort order. */
   sort?: string;
 }, options?: ApiCallOptions): Promise<GetLicenseAssignmentsHttpResponse>;
-type GetLicenseAssignmentsHttpResponse = {
+export type GetLicenseAssignmentsHttpResponse = {
   data: AssignmentsResponse;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetLicenseAssignmentsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetLicenseAssignmentsHttpResponse>;
 };
-type GetLicenseAssignmentsHttpError = {
+export type GetLicenseAssignmentsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403;
@@ -446,13 +449,13 @@ type GetLicenseAssignmentsHttpError = {
  * @param body an object with the body content
  * @throws AddLicenseAssignmentsHttpError
  */
-declare function addLicenseAssignments(body: AssignmentsActionsAddRequest, options?: ApiCallOptions): Promise<AddLicenseAssignmentsHttpResponse>;
-type AddLicenseAssignmentsHttpResponse = {
+export declare function addLicenseAssignments(body: AssignmentsActionsAddRequest, options?: ApiCallOptions): Promise<AddLicenseAssignmentsHttpResponse>;
+export type AddLicenseAssignmentsHttpResponse = {
   data: AssignmentsActionsAddResponse;
   headers: Headers;
   status: 207;
 };
-type AddLicenseAssignmentsHttpError = {
+export type AddLicenseAssignmentsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403;
@@ -463,13 +466,13 @@ type AddLicenseAssignmentsHttpError = {
  * @param body an object with the body content
  * @throws DeleteLicenseAssignmentsHttpError
  */
-declare function deleteLicenseAssignments(body: AssignmentsActionsDeleteRequest, options?: ApiCallOptions): Promise<DeleteLicenseAssignmentsHttpResponse>;
-type DeleteLicenseAssignmentsHttpResponse = {
+export declare function deleteLicenseAssignments(body: AssignmentsActionsDeleteRequest, options?: ApiCallOptions): Promise<DeleteLicenseAssignmentsHttpResponse>;
+export type DeleteLicenseAssignmentsHttpResponse = {
   data: AssignmentsActionsDeleteResponse;
   headers: Headers;
   status: 207;
 };
-type DeleteLicenseAssignmentsHttpError = {
+export type DeleteLicenseAssignmentsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403;
@@ -480,13 +483,13 @@ type DeleteLicenseAssignmentsHttpError = {
  * @param body an object with the body content
  * @throws UpdateLicenseAssignmentsHttpError
  */
-declare function updateLicenseAssignments(body: AssignmentsActionsUpdateRequest, options?: ApiCallOptions): Promise<UpdateLicenseAssignmentsHttpResponse>;
-type UpdateLicenseAssignmentsHttpResponse = {
+export declare function updateLicenseAssignments(body: AssignmentsActionsUpdateRequest, options?: ApiCallOptions): Promise<UpdateLicenseAssignmentsHttpResponse>;
+export type UpdateLicenseAssignmentsHttpResponse = {
   data: AssignmentsActionsUpdateResponse;
   headers: Headers;
   status: 207;
 };
-type UpdateLicenseAssignmentsHttpError = {
+export type UpdateLicenseAssignmentsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403;
@@ -497,7 +500,7 @@ type UpdateLicenseAssignmentsHttpError = {
  * @param query an object with query parameters
  * @throws GetLicenseConsumptionHttpError
  */
-declare function getLicenseConsumption(query: {
+export declare function getLicenseConsumption(query: {
   /** The SCIM filter for the query. Filterable property is "endTime". */
   filter?: string;
   /** The preferred number of entries to return. */
@@ -507,14 +510,14 @@ declare function getLicenseConsumption(query: {
   /** The field to sort on; can be prefixed with +/- for ascending/descending sort order. */
   sort?: string;
 }, options?: ApiCallOptions): Promise<GetLicenseConsumptionHttpResponse>;
-type GetLicenseConsumptionHttpResponse = {
+export type GetLicenseConsumptionHttpResponse = {
   data: ConsumptionEventsResponse;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetLicenseConsumptionHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetLicenseConsumptionHttpResponse>;
 };
-type GetLicenseConsumptionHttpError = {
+export type GetLicenseConsumptionHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403;
@@ -524,13 +527,13 @@ type GetLicenseConsumptionHttpError = {
  *
  * @throws GetLicenseOverviewHttpError
  */
-declare function getLicenseOverview(options?: ApiCallOptions): Promise<GetLicenseOverviewHttpResponse>;
-type GetLicenseOverviewHttpResponse = {
+export declare function getLicenseOverview(options?: ApiCallOptions): Promise<GetLicenseOverviewHttpResponse>;
+export type GetLicenseOverviewHttpResponse = {
   data: LicenseOverview;
   headers: Headers;
   status: 200;
 };
-type GetLicenseOverviewHttpError = {
+export type GetLicenseOverviewHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 404;
@@ -540,13 +543,13 @@ type GetLicenseOverviewHttpError = {
  *
  * @throws GetLicenseSettingsHttpError
  */
-declare function getLicenseSettings(options?: ApiCallOptions): Promise<GetLicenseSettingsHttpResponse>;
-type GetLicenseSettingsHttpResponse = {
+export declare function getLicenseSettings(options?: ApiCallOptions): Promise<GetLicenseSettingsHttpResponse>;
+export type GetLicenseSettingsHttpResponse = {
   data: SettingsBody;
   headers: Headers;
   status: 200;
 };
-type GetLicenseSettingsHttpError = {
+export type GetLicenseSettingsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403;
@@ -557,13 +560,13 @@ type GetLicenseSettingsHttpError = {
  * @param body an object with the body content
  * @throws UpdateLicenseSettingsHttpError
  */
-declare function updateLicenseSettings(body: SettingsBody, options?: ApiCallOptions): Promise<UpdateLicenseSettingsHttpResponse>;
-type UpdateLicenseSettingsHttpResponse = {
+export declare function updateLicenseSettings(body: SettingsBody, options?: ApiCallOptions): Promise<UpdateLicenseSettingsHttpResponse>;
+export type UpdateLicenseSettingsHttpResponse = {
   data: SettingsBody;
   headers: Headers;
   status: 200;
 };
-type UpdateLicenseSettingsHttpError = {
+export type UpdateLicenseSettingsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403;
@@ -573,13 +576,13 @@ type UpdateLicenseSettingsHttpError = {
  *
  * @throws GetLicenseStatusHttpError
  */
-declare function getLicenseStatus(options?: ApiCallOptions): Promise<GetLicenseStatusHttpResponse>;
-type GetLicenseStatusHttpResponse = {
+export declare function getLicenseStatus(options?: ApiCallOptions): Promise<GetLicenseStatusHttpResponse>;
+export type GetLicenseStatusHttpResponse = {
   data: LicenseStatus;
   headers: Headers;
   status: 200;
 };
-type GetLicenseStatusHttpError = {
+export type GetLicenseStatusHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401;
@@ -587,8 +590,8 @@ type GetLicenseStatusHttpError = {
 /**
  * Clears the cache for licenses api requests.
  */
-declare function clearCache(): void;
-type LicensesAPI = {
+export declare function clearCache(): void;
+export type LicensesAPI = {
   /**
    * Retrieves assignments for the current tenant
    *
@@ -659,4 +662,4 @@ type LicensesAPI = {
  */
 declare const licensesExport: LicensesAPI;
 //#endregion
-export { AddLicenseAssignmentsHttpError, AddLicenseAssignmentsHttpResponse, AssignmentsActionsAddRequest, AssignmentsActionsAddResponse, AssignmentsActionsDeleteRequest, AssignmentsActionsDeleteResponse, AssignmentsActionsUpdateRequest, AssignmentsActionsUpdateResponse, AssignmentsResponse, ConsumptionEventsResponse, DeleteLicenseAssignmentsHttpError, DeleteLicenseAssignmentsHttpResponse, ErrorResponse, GetLicenseAssignmentsHttpError, GetLicenseAssignmentsHttpResponse, GetLicenseConsumptionHttpError, GetLicenseConsumptionHttpResponse, GetLicenseOverviewHttpError, GetLicenseOverviewHttpResponse, GetLicenseSettingsHttpError, GetLicenseSettingsHttpResponse, GetLicenseStatusHttpError, GetLicenseStatusHttpResponse, Href, LicenseOverview, LicenseStatus, LicensesAPI, SettingsBody, UpdateLicenseAssignmentsHttpError, UpdateLicenseAssignmentsHttpResponse, UpdateLicenseSettingsHttpError, UpdateLicenseSettingsHttpResponse, addLicenseAssignments, clearCache, licensesExport as default, deleteLicenseAssignments, getLicenseAssignments, getLicenseConsumption, getLicenseOverview, getLicenseSettings, getLicenseStatus, updateLicenseAssignments, updateLicenseSettings };
+export { licensesExport as default };

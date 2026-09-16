@@ -1,10 +1,10 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/tenants.d.ts
 /**
  * An error object describing the error.
  */
-type Error = {
+export type Error = {
   /** The error code. */
   code: string;
   /** A human-readable explanation specific to this occurrence of the error. */
@@ -36,13 +36,13 @@ type Error = {
  *   traceId: "000000000000000079cf1ebeae103de1"
  * }
  */
-type Errors = {
+export type Errors = {
   /** An array of errors related to the operation. */
   errors?: Error[];
   /** A unique identifier for tracing the error. */
   traceId?: string;
 };
-type Tenant = {
+export type Tenant = {
   autoAssignCreateSharedSpacesRoleToProfessionals?: boolean;
   autoAssignDataServicesContributorRoleToProfessionals?: boolean;
   autoAssignPrivateAnalyticsContentCreatorRoleToProfessionals?: boolean;
@@ -77,7 +77,7 @@ type Tenant = {
   /** The timestamp for when the tenant status was last changed. */
   readonly statusLastUpdatedAt?: string;
 };
-type TenantCreationRequest = {
+export type TenantCreationRequest = {
   /** The datacenter where the tenant is located.
    *
    * Supported locations for commercial licenses:
@@ -95,14 +95,14 @@ type TenantCreationRequest = {
 /**
  * A request to deactivate a tenant.
  */
-type TenantDeactivateRequest = {
+export type TenantDeactivateRequest = {
   /** Sets the number of days to purge the tenant after deactivation. Only available to OEMs. */
   purgeAfterDays?: number;
 };
 /**
  * The result of tenant deactivation.
  */
-type TenantDeactivateResponse = {
+export type TenantDeactivateResponse = {
   /** The estimated date time of when tenant will be purged. */
   estimatedPurgeDate?: string;
   /** The unique tenant identifier. */
@@ -110,8 +110,8 @@ type TenantDeactivateResponse = {
   /** The status of the tenant. */
   status?: "disabled";
 };
-type TenantMultipleMetaErrorsDetail = TenantSingleMetaErrorDetail[];
-type TenantPatchErrors = {
+export type TenantMultipleMetaErrorsDetail = TenantSingleMetaErrorDetail[];
+export type TenantPatchErrors = {
   errors?: {
     /** The error code. */
     code: string;
@@ -162,7 +162,7 @@ type TenantPatchErrors = {
  *   }
  * ]
  */
-type TenantPatchSchema = {
+export type TenantPatchSchema = {
   /** The operation to be performed. */
   op: "replace";
   /** A JSON Pointer value that references a location within the target document where the operation is performed. */
@@ -170,7 +170,7 @@ type TenantPatchSchema = {
   /** The value to be used for this operation. */
   value: string | boolean;
 }[];
-type TenantSingleMetaErrorDetail = {
+export type TenantSingleMetaErrorDetail = {
   /** The error code. */
   code?: string;
   /** The error summary. */
@@ -182,13 +182,13 @@ type TenantSingleMetaErrorDetail = {
  * @param body an object with the body content
  * @throws CreateTenantHttpError
  */
-declare function createTenant(body: TenantCreationRequest, options?: ApiCallOptions): Promise<CreateTenantHttpResponse>;
-type CreateTenantHttpResponse = {
+export declare function createTenant(body: TenantCreationRequest, options?: ApiCallOptions): Promise<CreateTenantHttpResponse>;
+export type CreateTenantHttpResponse = {
   data: Tenant;
   headers: Headers;
   status: 201;
 };
-type CreateTenantHttpError = {
+export type CreateTenantHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -198,13 +198,13 @@ type CreateTenantHttpError = {
  *
  * @throws GetMyTenantHttpError
  */
-declare function getMyTenant(options?: ApiCallOptions): Promise<GetMyTenantHttpResponse>;
-type GetMyTenantHttpResponse = {
+export declare function getMyTenant(options?: ApiCallOptions): Promise<GetMyTenantHttpResponse>;
+export type GetMyTenantHttpResponse = {
   data: Tenant;
   headers: Headers;
   status: 200;
 };
-type GetMyTenantHttpError = {
+export type GetMyTenantHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -215,13 +215,13 @@ type GetMyTenantHttpError = {
  * @param tenantId The ID of the tenant to retrieve
  * @throws GetTenantHttpError
  */
-declare function getTenant(tenantId: string, options?: ApiCallOptions): Promise<GetTenantHttpResponse>;
-type GetTenantHttpResponse = {
+export declare function getTenant(tenantId: string, options?: ApiCallOptions): Promise<GetTenantHttpResponse>;
+export type GetTenantHttpResponse = {
   data: Tenant;
   headers: Headers;
   status: 200;
 };
-type GetTenantHttpError = {
+export type GetTenantHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -233,34 +233,34 @@ type GetTenantHttpError = {
  * @param body an object with the body content
  * @throws PatchTenantHttpError
  */
-declare function patchTenant(tenantId: string, body: TenantPatchSchema, options?: ApiCallOptions): Promise<PatchTenantHttpResponse>;
-type PatchTenantHttpResponse = {
+export declare function patchTenant(tenantId: string, body: TenantPatchSchema, options?: ApiCallOptions): Promise<PatchTenantHttpResponse>;
+export type PatchTenantHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchTenantHttpError = PatchTenant400HttpError | PatchTenant403HttpError | PatchTenant404HttpError | PatchTenant429HttpError | PatchTenantdefaultHttpError;
-type PatchTenant400HttpError = {
+export type PatchTenantHttpError = PatchTenant400HttpError | PatchTenant403HttpError | PatchTenant404HttpError | PatchTenant429HttpError | PatchTenantdefaultHttpError;
+export type PatchTenant400HttpError = {
   data: TenantPatchErrors;
   headers: Headers;
   status: 400;
 };
-type PatchTenant403HttpError = {
+export type PatchTenant403HttpError = {
   data: Errors;
   headers: Headers;
   status: 403;
 };
-type PatchTenant404HttpError = {
+export type PatchTenant404HttpError = {
   data: Errors;
   headers: Headers;
   status: 404;
 };
-type PatchTenant429HttpError = {
+export type PatchTenant429HttpError = {
   data: Errors;
   headers: Headers;
   status: 429;
 };
-type PatchTenantdefaultHttpError = {
+export type PatchTenantdefaultHttpError = {
   data: Errors;
   headers: Headers;
   status: "default";
@@ -272,13 +272,13 @@ type PatchTenantdefaultHttpError = {
  * @param body an object with the body content
  * @throws DeactivateTenantHttpError
  */
-declare function deactivateTenant(tenantId: string, body: TenantDeactivateRequest, options?: ApiCallOptions): Promise<DeactivateTenantHttpResponse>;
-type DeactivateTenantHttpResponse = {
+export declare function deactivateTenant(tenantId: string, body: TenantDeactivateRequest, options?: ApiCallOptions): Promise<DeactivateTenantHttpResponse>;
+export type DeactivateTenantHttpResponse = {
   data: TenantDeactivateResponse;
   headers: Headers;
   status: 200;
 };
-type DeactivateTenantHttpError = {
+export type DeactivateTenantHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -290,13 +290,13 @@ type DeactivateTenantHttpError = {
  * @param body an object with the body content
  * @throws ReactivateTenantHttpError
  */
-declare function reactivateTenant(tenantId: string, body: unknown, options?: ApiCallOptions): Promise<ReactivateTenantHttpResponse>;
-type ReactivateTenantHttpResponse = {
+export declare function reactivateTenant(tenantId: string, body: unknown, options?: ApiCallOptions): Promise<ReactivateTenantHttpResponse>;
+export type ReactivateTenantHttpResponse = {
   data: unknown;
   headers: Headers;
   status: 200;
 };
-type ReactivateTenantHttpError = {
+export type ReactivateTenantHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -304,8 +304,8 @@ type ReactivateTenantHttpError = {
 /**
  * Clears the cache for tenants api requests.
  */
-declare function clearCache(): void;
-type TenantsAPI = {
+export declare function clearCache(): void;
+export type TenantsAPI = {
   /**
    * Creates a tenant in the requested region, linked to the provided license key. You must use a regional OAuth client generated via the [My Qlik portal](https://account.myqlik.qlik.com/account) to call this endpoint. Tenant creation, deactivation, and reactivation requests must be sent to the register endpoint in the relevant Qlik Cloud region, e.g. `https://register.us.qlikcloud.com/api/v1/tenants` if interacting with tenants in the `us` region.
    *
@@ -360,4 +360,4 @@ type TenantsAPI = {
  */
 declare const tenantsExport: TenantsAPI;
 //#endregion
-export { CreateTenantHttpError, CreateTenantHttpResponse, DeactivateTenantHttpError, DeactivateTenantHttpResponse, Error, Errors, GetMyTenantHttpError, GetMyTenantHttpResponse, GetTenantHttpError, GetTenantHttpResponse, PatchTenant400HttpError, PatchTenant403HttpError, PatchTenant404HttpError, PatchTenant429HttpError, PatchTenantHttpError, PatchTenantHttpResponse, PatchTenantdefaultHttpError, ReactivateTenantHttpError, ReactivateTenantHttpResponse, Tenant, TenantCreationRequest, TenantDeactivateRequest, TenantDeactivateResponse, TenantMultipleMetaErrorsDetail, TenantPatchErrors, TenantPatchSchema, TenantSingleMetaErrorDetail, TenantsAPI, clearCache, createTenant, deactivateTenant, tenantsExport as default, getMyTenant, getTenant, patchTenant, reactivateTenant };
+export { tenantsExport as default };

@@ -1,7 +1,7 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/roles.d.ts
-type CreateRole = {
+export type CreateRole = {
   /** Selection of scopes to assign to role */
   assignedScopes?: string[];
   /** Role description */
@@ -12,7 +12,7 @@ type CreateRole = {
 /**
  * An error object describing the error.
  */
-type Error = {
+export type Error = {
   /** The error code. */
   code: string;
   /** A human-readable explanation specific to this occurrence of the problem. */
@@ -42,7 +42,7 @@ type Error = {
  *   traceId: "0000000000000000200ba0714061b982"
  * }
  */
-type Errors = {
+export type Errors = {
   /** An array of errors related to the operation. */
   errors?: Error[];
   /** A unique identifier for tracing the error. */
@@ -51,7 +51,7 @@ type Errors = {
 /**
  * Contains pagination links
  */
-type Links = {
+export type Links = {
   /** Link to the next page of items */
   next?: {
     href: string;
@@ -65,7 +65,7 @@ type Links = {
     href: string;
   };
 };
-type ListRolesResult = {
+export type ListRolesResult = {
   /** An array of roles. */
   data: Role[];
   /** Contains pagination links */
@@ -76,7 +76,7 @@ type ListRolesResult = {
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
  */
-type PatchRole = {
+export type PatchRole = {
   op: "replace" | "add" | "remove-value";
   path: "/name" | "/description" | "/assignedScopes" | "/assignedScopes/-";
   value: string | string[];
@@ -114,8 +114,8 @@ type PatchRole = {
  *   }
  * ]
  */
-type PatchRoles = PatchRole[];
-type Role = {
+export type PatchRoles = PatchRole[];
+export type Role = {
   /** Selection of scopes added to this Role */
   assignedScopes?: string[];
   /** Indicate if role can be deleted */
@@ -163,7 +163,7 @@ type Role = {
  * @param query an object with query parameters
  * @throws GetRolesHttpError
  */
-declare function getRoles(query: {
+export declare function getRoles(query: {
   /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax. All conditional statements within this query parameter are case insensitive. */
   filter?: string;
   /** The number of roles to retrieve. */
@@ -177,14 +177,14 @@ declare function getRoles(query: {
   /** Determines wether to return a count of the total records matched in the query. Defaults to false. */
   totalResults?: boolean;
 }, options?: ApiCallOptions): Promise<GetRolesHttpResponse>;
-type GetRolesHttpResponse = {
+export type GetRolesHttpResponse = {
   data: ListRolesResult;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetRolesHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetRolesHttpResponse>;
 };
-type GetRolesHttpError = {
+export type GetRolesHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 429 | 500;
@@ -195,13 +195,13 @@ type GetRolesHttpError = {
  * @param body an object with the body content
  * @throws CreateRoleHttpError
  */
-declare function createRole(body: CreateRole, options?: ApiCallOptions): Promise<CreateRoleHttpResponse>;
-type CreateRoleHttpResponse = {
+export declare function createRole(body: CreateRole, options?: ApiCallOptions): Promise<CreateRoleHttpResponse>;
+export type CreateRoleHttpResponse = {
   data: Role;
   headers: Headers;
   status: 201;
 };
-type CreateRoleHttpError = {
+export type CreateRoleHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 403 | 429 | 500;
@@ -212,13 +212,13 @@ type CreateRoleHttpError = {
  * @param id The unique identifier for the role.
  * @throws DeleteRoleHttpError
  */
-declare function deleteRole(id: string, options?: ApiCallOptions): Promise<DeleteRoleHttpResponse>;
-type DeleteRoleHttpResponse = {
+export declare function deleteRole(id: string, options?: ApiCallOptions): Promise<DeleteRoleHttpResponse>;
+export type DeleteRoleHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteRoleHttpError = {
+export type DeleteRoleHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 403 | 429 | 500;
@@ -229,13 +229,13 @@ type DeleteRoleHttpError = {
  * @param id The unique identifier for the role.
  * @throws GetRoleHttpError
  */
-declare function getRole(id: string, options?: ApiCallOptions): Promise<GetRoleHttpResponse>;
-type GetRoleHttpResponse = {
+export declare function getRole(id: string, options?: ApiCallOptions): Promise<GetRoleHttpResponse>;
+export type GetRoleHttpResponse = {
   data: Role;
   headers: Headers;
   status: 200;
 };
-type GetRoleHttpError = {
+export type GetRoleHttpError = {
   data: Errors;
   headers: Headers;
   status: 404 | 429 | 500;
@@ -247,13 +247,13 @@ type GetRoleHttpError = {
  * @param body an object with the body content
  * @throws PatchRoleHttpError
  */
-declare function patchRole(id: string, body: PatchRoles, options?: ApiCallOptions): Promise<PatchRoleHttpResponse>;
-type PatchRoleHttpResponse = {
+export declare function patchRole(id: string, body: PatchRoles, options?: ApiCallOptions): Promise<PatchRoleHttpResponse>;
+export type PatchRoleHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchRoleHttpError = {
+export type PatchRoleHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429 | 500;
@@ -261,8 +261,8 @@ type PatchRoleHttpError = {
 /**
  * Clears the cache for roles api requests.
  */
-declare function clearCache(): void;
-type RolesAPI = {
+export declare function clearCache(): void;
+export type RolesAPI = {
   /**
    * Returns a list of roles using cursor-based pagination.
    *
@@ -309,4 +309,4 @@ type RolesAPI = {
  */
 declare const rolesExport: RolesAPI;
 //#endregion
-export { CreateRole, CreateRoleHttpError, CreateRoleHttpResponse, DeleteRoleHttpError, DeleteRoleHttpResponse, Error, Errors, GetRoleHttpError, GetRoleHttpResponse, GetRolesHttpError, GetRolesHttpResponse, Links, ListRolesResult, PatchRole, PatchRoleHttpError, PatchRoleHttpResponse, PatchRoles, Role, RolesAPI, clearCache, createRole, rolesExport as default, deleteRole, getRole, getRoles, patchRole };
+export { rolesExport as default };

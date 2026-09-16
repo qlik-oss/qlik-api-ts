@@ -1,18 +1,18 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-o-bqAUAV.js";
-import "../chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
+import "../chunks/invoke-fetch-DdmiOIkr.js";
 declare namespace odag_settings_d_exports {
   export { CanUpdateSettings, ErrorDetailsV2, ErrorV2, GetOdagSettingsHttpError, GetOdagSettingsHttpResponse, GetOdagSettingsUpdatePermissionHttpError, GetOdagSettingsUpdatePermissionHttpResponse, MetaV2, OdagSettingsAPI, OdagSettingsV2, PutOdagSettingsHttpError, PutOdagSettingsHttpResponse, SettingsPutPayload, clearCache, odagSettingsExport as default, getOdagSettings, getOdagSettingsUpdatePermission, putOdagSettings };
 }
 /**
  * An object used to inform the caller whether the current user has privilege to update ODAG settings.
  */
-type CanUpdateSettings = {
+export type CanUpdateSettings = {
   canUpdateSettings?: boolean;
 };
 /**
  * A single error entry within an error response.
  */
-type ErrorDetailsV2 = {
+export type ErrorDetailsV2 = {
   /** A unique code used to identify the template form of the message in i18n tables (language independent). */
   code?: string;
   /** The message describing the error. */
@@ -24,7 +24,7 @@ type ErrorDetailsV2 = {
 /**
  * A standard error response containing a list of one or more errors.
  */
-type ErrorV2 = {
+export type ErrorV2 = {
   errors?: ErrorDetailsV2[];
   /** A unique ID of the trace which the error occurred in. Makes it possible to locate involved services and find log messages from the time of the error. */
   traceId?: string;
@@ -32,14 +32,14 @@ type ErrorV2 = {
 /**
  * Additional metadata associated with an error.
  */
-type MetaV2 = {
+export type MetaV2 = {
   /** The HTTP status code for the error. Generally speaking, the following codes have these meanings: `200` - Success, `201` - Success (object created), `400` - Error with user input, `403` - Authorization error (user lacks permission), `404` - Object not found, `409` - Attempt to change an object using an obsolete last ModifiedDate. */
   statusCode?: number;
 };
 /**
  * The state of the ODAG settings available for users assigned the `TenantAdmin` role to view and configure.
  */
-type OdagSettingsV2 = {
+export type OdagSettingsV2 = {
   /** Whether the dynamic view feature is enabled. */
   dynamicViewEnabled?: boolean;
   /** Whether the ODAG feature is enabled. */
@@ -48,7 +48,7 @@ type OdagSettingsV2 = {
 /**
  * An object that defines the properties of ODAG settings to be modified.
  */
-type SettingsPutPayload = {
+export type SettingsPutPayload = {
   dynamicViewEnabled?: boolean;
   odagEnabled?: boolean;
 };
@@ -57,13 +57,13 @@ type SettingsPutPayload = {
  *
  * @throws GetOdagSettingsHttpError
  */
-declare function getOdagSettings(options?: ApiCallOptions): Promise<GetOdagSettingsHttpResponse>;
-type GetOdagSettingsHttpResponse = {
+export declare function getOdagSettings(options?: ApiCallOptions): Promise<GetOdagSettingsHttpResponse>;
+export type GetOdagSettingsHttpResponse = {
   data: OdagSettingsV2;
   headers: Headers;
   status: 200;
 };
-type GetOdagSettingsHttpError = {
+export type GetOdagSettingsHttpError = {
   data: ErrorV2;
   headers: Headers;
   status: 403 | 500;
@@ -74,13 +74,13 @@ type GetOdagSettingsHttpError = {
  * @param body an object with the body content
  * @throws PutOdagSettingsHttpError
  */
-declare function putOdagSettings(body: SettingsPutPayload, options?: ApiCallOptions): Promise<PutOdagSettingsHttpResponse>;
-type PutOdagSettingsHttpResponse = {
+export declare function putOdagSettings(body: SettingsPutPayload, options?: ApiCallOptions): Promise<PutOdagSettingsHttpResponse>;
+export type PutOdagSettingsHttpResponse = {
   data: OdagSettingsV2;
   headers: Headers;
   status: 200;
 };
-type PutOdagSettingsHttpError = {
+export type PutOdagSettingsHttpError = {
   data: ErrorV2;
   headers: Headers;
   status: 403 | 500;
@@ -90,13 +90,13 @@ type PutOdagSettingsHttpError = {
  *
  * @throws GetOdagSettingsUpdatePermissionHttpError
  */
-declare function getOdagSettingsUpdatePermission(options?: ApiCallOptions): Promise<GetOdagSettingsUpdatePermissionHttpResponse>;
-type GetOdagSettingsUpdatePermissionHttpResponse = {
+export declare function getOdagSettingsUpdatePermission(options?: ApiCallOptions): Promise<GetOdagSettingsUpdatePermissionHttpResponse>;
+export type GetOdagSettingsUpdatePermissionHttpResponse = {
   data: CanUpdateSettings;
   headers: Headers;
   status: 200;
 };
-type GetOdagSettingsUpdatePermissionHttpError = {
+export type GetOdagSettingsUpdatePermissionHttpError = {
   data: ErrorV2;
   headers: Headers;
   status: 403;
@@ -104,8 +104,8 @@ type GetOdagSettingsUpdatePermissionHttpError = {
 /**
  * Clears the cache for analytics/odag-settings api requests.
  */
-declare function clearCache(): void;
-type OdagSettingsAPI = {
+export declare function clearCache(): void;
+export type OdagSettingsAPI = {
   /**
    * Retrieves ODAG settings, including feature enablement status. Available only to administrators.
    *
@@ -135,4 +135,4 @@ type OdagSettingsAPI = {
  */
 declare const odagSettingsExport: OdagSettingsAPI;
 //#endregion
-export { CanUpdateSettings, ErrorDetailsV2, ErrorV2, GetOdagSettingsHttpError, GetOdagSettingsHttpResponse, GetOdagSettingsUpdatePermissionHttpError, GetOdagSettingsUpdatePermissionHttpResponse, MetaV2, OdagSettingsAPI, OdagSettingsV2, PutOdagSettingsHttpError, PutOdagSettingsHttpResponse, SettingsPutPayload, clearCache, odagSettingsExport as default, getOdagSettings, getOdagSettingsUpdatePermission, putOdagSettings, odag_settings_d_exports as t };
+export { odagSettingsExport as default, odag_settings_d_exports as t };

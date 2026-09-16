@@ -1,11 +1,11 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/automation-connectors.d.ts
-type AutomationConnectorsList = {
+export type AutomationConnectorsList = {
   data?: AutomationConnectorsListObject[];
   links?: Links;
 };
-type AutomationConnectorsListObject = {
+export type AutomationConnectorsListObject = {
   /** Indicates if the connector is billable. */
   billable?: boolean;
   /** The description of the automation connector. */
@@ -22,7 +22,7 @@ type AutomationConnectorsListObject = {
   /** The name of an automation connector. */
   name?: string;
 };
-type Error = {
+export type Error = {
   /** The unique code for the error */
   code: string;
   /** May be used to provide additional details */
@@ -30,16 +30,16 @@ type Error = {
   /** A summary of what went wrong */
   title: string;
 };
-type ErrorResponse = {
+export type ErrorResponse = {
   errors?: Error[];
   /** A way to trace the source of the error. */
   traceId?: string;
 };
-type Links = {
+export type Links = {
   next?: PaginationLink;
   prev?: PaginationLink;
 };
-type PaginationLink = {
+export type PaginationLink = {
   /** The URL to a resource request */
   href?: string | null;
 };
@@ -49,7 +49,7 @@ type PaginationLink = {
  * @param query an object with query parameters
  * @throws GetAutomationConnectorsHttpError
  */
-declare function getAutomationConnectors(query: {
+export declare function getAutomationConnectors(query: {
   /** Pagination cursor returned from a previous request. */
   cursor?: string;
   /** Filters the result based on the specified criteria: name. */
@@ -59,14 +59,14 @@ declare function getAutomationConnectors(query: {
   /** The field to sort by, with +- prefix indicating sort order. (`?sort=-name` => sort on the `name` field using descending order). */
   sort?: "id" | "-id" | "+id" | "name" | "+name" | "-name";
 }, options?: ApiCallOptions): Promise<GetAutomationConnectorsHttpResponse>;
-type GetAutomationConnectorsHttpResponse = {
+export type GetAutomationConnectorsHttpResponse = {
   data: AutomationConnectorsList;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetAutomationConnectorsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetAutomationConnectorsHttpResponse>;
 };
-type GetAutomationConnectorsHttpError = {
+export type GetAutomationConnectorsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 500 | 503;
@@ -74,8 +74,8 @@ type GetAutomationConnectorsHttpError = {
 /**
  * Clears the cache for automation-connectors api requests.
  */
-declare function clearCache(): void;
-type AutomationConnectorsAPI = {
+export declare function clearCache(): void;
+export type AutomationConnectorsAPI = {
   /**
    * Retrieves a list of automation connectors.
    *
@@ -93,4 +93,4 @@ type AutomationConnectorsAPI = {
  */
 declare const automationConnectorsExport: AutomationConnectorsAPI;
 //#endregion
-export { AutomationConnectorsAPI, AutomationConnectorsList, AutomationConnectorsListObject, Error, ErrorResponse, GetAutomationConnectorsHttpError, GetAutomationConnectorsHttpResponse, Links, PaginationLink, clearCache, automationConnectorsExport as default, getAutomationConnectors };
+export { automationConnectorsExport as default };

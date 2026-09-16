@@ -1,10 +1,10 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/themes.d.ts
 /**
  * An error object.
  */
-type Error = {
+export type Error = {
   /** Object containing meta data regarding an error. It does not necessarily contain all the properties. */
   meta?: Meta;
   /** Optional JSON patch object pointing to an invalid property. */
@@ -19,7 +19,7 @@ type Error = {
 /**
  * Object containing meta data regarding an error. It does not necessarily contain all the properties.
  */
-type Meta = {
+export type Meta = {
   /** A more detailed message explaining the error. */
   message?: string;
   /** Name of the resource related to the error. If there is a conflict, it is the name of the model attempting to be created. */
@@ -30,7 +30,7 @@ type Meta = {
 /**
  * The theme model.
  */
-type Theme = {
+export type Theme = {
   /** Author of the theme. */
   author?: string;
   readonly createdAt?: string;
@@ -71,7 +71,7 @@ type Theme = {
   /** Version of the theme. */
   version?: string;
 };
-type Themes = {
+export type Themes = {
   data: Theme[];
 };
 /**
@@ -79,13 +79,13 @@ type Themes = {
  *
  * @throws GetThemesHttpError
  */
-declare function getThemes(options?: ApiCallOptions): Promise<GetThemesHttpResponse>;
-type GetThemesHttpResponse = {
+export declare function getThemes(options?: ApiCallOptions): Promise<GetThemesHttpResponse>;
+export type GetThemesHttpResponse = {
   data: Themes;
   headers: Headers;
   status: 200;
 };
-type GetThemesHttpError = {
+export type GetThemesHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -96,18 +96,18 @@ type GetThemesHttpError = {
  * @param body an object with the body content
  * @throws UploadThemeHttpError
  */
-declare function uploadTheme(body: {
+export declare function uploadTheme(body: {
   /** The theme model. */
   data?: Theme;
   /** Theme archive. */
   file?: BodyInit;
 }, options?: ApiCallOptions): Promise<UploadThemeHttpResponse>;
-type UploadThemeHttpResponse = {
+export type UploadThemeHttpResponse = {
   data: Theme;
   headers: Headers;
   status: 201;
 };
-type UploadThemeHttpError = {
+export type UploadThemeHttpError = {
   data: Error;
   headers: Headers;
   status: number;
@@ -118,13 +118,13 @@ type UploadThemeHttpError = {
  * @param id Theme identifier or its qextFilename.
  * @throws DeleteThemeHttpError
  */
-declare function deleteTheme(id: string, options?: ApiCallOptions): Promise<DeleteThemeHttpResponse>;
-type DeleteThemeHttpResponse = {
+export declare function deleteTheme(id: string, options?: ApiCallOptions): Promise<DeleteThemeHttpResponse>;
+export type DeleteThemeHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteThemeHttpError = {
+export type DeleteThemeHttpError = {
   data: Error;
   headers: Headers;
   status: 403 | 404 | 410;
@@ -135,13 +135,13 @@ type DeleteThemeHttpError = {
  * @param id Theme identifier or its qextFilename
  * @throws GetThemeHttpError
  */
-declare function getTheme(id: string, options?: ApiCallOptions): Promise<GetThemeHttpResponse>;
-type GetThemeHttpResponse = {
+export declare function getTheme(id: string, options?: ApiCallOptions): Promise<GetThemeHttpResponse>;
+export type GetThemeHttpResponse = {
   data: Theme;
   headers: Headers;
   status: 200;
 };
-type GetThemeHttpError = {
+export type GetThemeHttpError = {
   data: Error;
   headers: Headers;
   status: 403 | 404 | 410;
@@ -153,18 +153,18 @@ type GetThemeHttpError = {
  * @param body an object with the body content
  * @throws PatchThemeHttpError
  */
-declare function patchTheme(id: string, body: {
+export declare function patchTheme(id: string, body: {
   /** The theme model. */
   data?: Theme;
   /** Theme archive. */
   file?: BodyInit;
 }, options?: ApiCallOptions): Promise<PatchThemeHttpResponse>;
-type PatchThemeHttpResponse = {
+export type PatchThemeHttpResponse = {
   data: Themes;
   headers: Headers;
   status: 200;
 };
-type PatchThemeHttpError = {
+export type PatchThemeHttpError = {
   data: Error;
   headers: Headers;
   status: number;
@@ -175,13 +175,13 @@ type PatchThemeHttpError = {
  * @param id Theme identifier or its qextFilename
  * @throws DownloadThemeHttpError
  */
-declare function downloadTheme(id: string, options?: ApiCallOptions): Promise<DownloadThemeHttpResponse>;
-type DownloadThemeHttpResponse = {
+export declare function downloadTheme(id: string, options?: ApiCallOptions): Promise<DownloadThemeHttpResponse>;
+export type DownloadThemeHttpResponse = {
   data: DownloadableBlob;
   headers: Headers;
   status: 200;
 };
-type DownloadThemeHttpError = {
+export type DownloadThemeHttpError = {
   data: Error;
   headers: Headers;
   status: 403 | 404 | 410;
@@ -193,13 +193,13 @@ type DownloadThemeHttpError = {
  * @param filepath Path to the file location within the specified theme archive. Folders separated with forward slashes.
  * @throws DownloadFileFromThemeHttpError
  */
-declare function downloadFileFromTheme(id: string, filepath: string, options?: ApiCallOptions): Promise<DownloadFileFromThemeHttpResponse>;
-type DownloadFileFromThemeHttpResponse = {
+export declare function downloadFileFromTheme(id: string, filepath: string, options?: ApiCallOptions): Promise<DownloadFileFromThemeHttpResponse>;
+export type DownloadFileFromThemeHttpResponse = {
   data: void;
   headers: Headers;
   status: 200;
 };
-type DownloadFileFromThemeHttpError = {
+export type DownloadFileFromThemeHttpError = {
   data: Error;
   headers: Headers;
   status: 403 | 404 | 410;
@@ -207,8 +207,8 @@ type DownloadFileFromThemeHttpError = {
 /**
  * Clears the cache for themes api requests.
  */
-declare function clearCache(): void;
-type ThemesAPI = {
+export declare function clearCache(): void;
+export type ThemesAPI = {
   /**
    * Lists all imported themes in the tenant.
    *
@@ -269,4 +269,4 @@ type ThemesAPI = {
  */
 declare const themesExport: ThemesAPI;
 //#endregion
-export { DeleteThemeHttpError, DeleteThemeHttpResponse, DownloadFileFromThemeHttpError, DownloadFileFromThemeHttpResponse, DownloadThemeHttpError, DownloadThemeHttpResponse, Error, GetThemeHttpError, GetThemeHttpResponse, GetThemesHttpError, GetThemesHttpResponse, Meta, PatchThemeHttpError, PatchThemeHttpResponse, Theme, Themes, ThemesAPI, UploadThemeHttpError, UploadThemeHttpResponse, clearCache, themesExport as default, deleteTheme, downloadFileFromTheme, downloadTheme, getTheme, getThemes, patchTheme, uploadTheme };
+export { themesExport as default };

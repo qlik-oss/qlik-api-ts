@@ -1,10 +1,10 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/csrf-token.d.ts
 /**
  * An error object.
  */
-type Error = {
+export type Error = {
   /** The error code. */
   code: string;
   /** The detailed error message */
@@ -19,7 +19,7 @@ type Error = {
 /**
  * A representation of the errors encountered from the HTTP request.
  */
-type Errors = {
+export type Errors = {
   errors?: Error[];
 };
 /**
@@ -27,13 +27,13 @@ type Errors = {
  *
  * @throws GetCsrfTokenHttpError
  */
-declare function getCsrfToken(options?: ApiCallOptions): Promise<GetCsrfTokenHttpResponse>;
-type GetCsrfTokenHttpResponse = {
+export declare function getCsrfToken(options?: ApiCallOptions): Promise<GetCsrfTokenHttpResponse>;
+export type GetCsrfTokenHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type GetCsrfTokenHttpError = {
+export type GetCsrfTokenHttpError = {
   data: Errors & unknown;
   headers: Headers;
   status: 400 | 404;
@@ -41,8 +41,8 @@ type GetCsrfTokenHttpError = {
 /**
  * Clears the cache for csrf-token api requests.
  */
-declare function clearCache(): void;
-type CsrfTokenAPI = {
+export declare function clearCache(): void;
+export type CsrfTokenAPI = {
   /**
    * Returns CSRF token via the qlik-csrf-token header.
    *
@@ -59,4 +59,4 @@ type CsrfTokenAPI = {
  */
 declare const csrfTokenExport: CsrfTokenAPI;
 //#endregion
-export { CsrfTokenAPI, Error, Errors, GetCsrfTokenHttpError, GetCsrfTokenHttpResponse, clearCache, csrfTokenExport as default, getCsrfToken };
+export { csrfTokenExport as default };

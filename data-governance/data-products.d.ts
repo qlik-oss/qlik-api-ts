@@ -1,9 +1,9 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-o-bqAUAV.js";
-import "../chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
+import "../chunks/invoke-fetch-DdmiOIkr.js";
 declare namespace data_products_d_exports {
   export { ActivateDataProductHttpError, ActivateDataProductHttpResponse, ActivateDataProductRequest, ArrayOfUniqueStrings, ChangelogOperation, ComputationResponse, ComputeDatasetsDataQualityDataProductHttpError, ComputeDatasetsDataQualityDataProductHttpResponse, CreateDataProductHttpError, CreateDataProductHttpResponse, CreateDataProductRequest, DataProductChangelog, DataProductChangelogResponse, DataProductResponse, DataProductsAPI, DatasetIdType, DatasetsComputationResponse, DeactivateDataProductHttpError, DeactivateDataProductHttpResponse, DeleteDataProductHttpError, DeleteDataProductHttpResponse, Error, ErrorResponse, ExecutionStatus, ExportDocumentationDataProductHttpError, ExportDocumentationDataProductHttpResponse, GenerateProviderUrlDataProductsHttpError, GenerateProviderUrlDataProductsHttpResponse, GenerateProviderUrlResponse, GetDataProductChangelogsHttpError, GetDataProductChangelogsHttpResponse, GetDataProductHttpError, GetDataProductHttpResponse, KeyContact, Link, Links, MoveDataProductHttpError, MoveDataProductHttpResponse, MoveDataProductRequest, PatchDataProductHttpError, PatchDataProductHttpResponse, PatchDataProductRequest, Quality, TrustScore, TrustScoreDimension, activateDataProduct, clearCache, computeDatasetsDataQualityDataProduct, createDataProduct, deactivateDataProduct, dataProductsExport as default, deleteDataProduct, exportDocumentationDataProduct, generateProviderUrlDataProducts, getDataProduct, getDataProductChangelogs, moveDataProduct, patchDataProduct };
 }
-type ActivateDataProductRequest = {
+export type ActivateDataProductRequest = {
   /** A description of the data product. */
   description?: string;
   /** Name of the data product to activate. */
@@ -12,8 +12,8 @@ type ActivateDataProductRequest = {
   spaceId?: string;
   tags?: string[];
 };
-type ArrayOfUniqueStrings = string[] | null;
-type ChangelogOperation = {
+export type ArrayOfUniqueStrings = string[] | null;
+export type ChangelogOperation = {
   operator?: "replace" | "add" | "remove";
   path?: "/name" | "/description" | "/spaceId" | "/datasetIds" | "/glossaryIds" | "/readMe" | "/keyContacts" | "/tags" | "/activatedOn" | "/apiConsumableDatasetIds" | "/semanticModel";
   value?: string | null | ArrayOfUniqueStrings | unknown[] | null | unknown | null;
@@ -21,7 +21,7 @@ type ChangelogOperation = {
 /**
  * Result of a data quality computation for a single dataset.
  */
-type ComputationResponse = {
+export type ComputationResponse = {
   /** Unique identifier for this individual data quality computation job. */
   computationId: string;
   /** The ID of the dataset */
@@ -34,7 +34,7 @@ type ComputationResponse = {
 /**
  * Request payload for creating a data product.
  */
-type CreateDataProductRequest = {
+export type CreateDataProductRequest = {
   /** List of dataset IDs for which API consumption is enabled. Must be a subset of datasetIds. */
   apiConsumableDatasetIds?: string[];
   /** List of dataset IDs associated with the Data Product. Maximum of 100 items. */
@@ -54,7 +54,7 @@ type CreateDataProductRequest = {
   /** List of tags for the data product. */
   tags?: string[];
 };
-type DataProductChangelog = {
+export type DataProductChangelog = {
   changes?: ChangelogOperation[];
   /** Timestamp when this changelog entry was created in ISO 8601 format. */
   createdAt?: string;
@@ -62,7 +62,7 @@ type DataProductChangelog = {
   createdBy?: string;
   id?: string;
 };
-type DataProductChangelogResponse = {
+export type DataProductChangelogResponse = {
   data?: DataProductChangelog[];
   limit?: number;
   links?: Links;
@@ -70,7 +70,7 @@ type DataProductChangelogResponse = {
   pages?: number;
   total?: number;
 };
-type DataProductResponse = {
+export type DataProductResponse = {
   /** Indicates whether the data product is currently activated for consumption. */
   activated?: boolean;
   /** Timestamp when the data product was most recently activated in ISO 8601 format. */
@@ -113,23 +113,23 @@ type DataProductResponse = {
  * @example
  * "669144f5aa2d642638ef1dd0"
  */
-type DatasetIdType = string;
+export type DatasetIdType = string;
 /**
  * Response containing the batch computation identifier and per-dataset quality computation results.
  */
-type DatasetsComputationResponse = {
+export type DatasetsComputationResponse = {
   /** Unique identifier for the data quality batch computation job. */
   batchComputationId: string;
   /** List of computation results, one entry per dataset in the data product. */
   datasetResponses: ComputationResponse[];
 };
-type Error = {
+export type Error = {
   code?: string;
   detail?: string;
   status?: string;
   title?: string;
 };
-type ErrorResponse = {
+export type ErrorResponse = {
   errors?: Error[];
   traceId?: string;
 };
@@ -138,49 +138,49 @@ type ErrorResponse = {
  * @example
  * "REQUESTED"
  */
-type ExecutionStatus = "REQUESTED" | "FAILED";
-type GenerateProviderUrlResponse = {
+export type ExecutionStatus = "REQUESTED" | "FAILED";
+export type GenerateProviderUrlResponse = {
   url: string;
 };
 /**
  * Represents a designated contact person for a data product, optionally with their role.
  */
-type KeyContact = {
+export type KeyContact = {
   /** Role of the key contact in the Data Product. */
   role?: string;
   /** Unique identifier of the user. */
   userId: string;
 };
-type Link = {
+export type Link = {
   href?: string;
 };
-type Links = {
+export type Links = {
   first?: Link;
   last?: Link;
   next?: Link;
   prev?: Link;
   self?: Link;
 };
-type MoveDataProductRequest = {
+export type MoveDataProductRequest = {
   /** Unique identifier of the space. */
   spaceId: string;
 };
-type PatchDataProductRequest = {
+export type PatchDataProductRequest = {
   op: "replace";
   path: "/name" | "/description" | "/datasetIds" | "/glossaryIds" | "/readMe" | "/keyContacts" | "/tags" | "/apiConsumableDatasetIds";
   value?: string | null | ArrayOfUniqueStrings | unknown[] | null;
 }[];
-type Quality = {
+export type Quality = {
   completeness: number;
   validity: number;
 };
-type TrustScore = {
+export type TrustScore = {
   applicableDatasets: number;
   dimensions?: TrustScoreDimension[];
   previousScore?: number;
   score: number;
 };
-type TrustScoreDimension = {
+export type TrustScoreDimension = {
   applicableDatasets: number;
   id: string;
   previousScore?: number;
@@ -194,13 +194,13 @@ type TrustScoreDimension = {
  * @param body an object with the body content
  * @throws CreateDataProductHttpError
  */
-declare function createDataProduct(body: CreateDataProductRequest, options?: ApiCallOptions): Promise<CreateDataProductHttpResponse>;
-type CreateDataProductHttpResponse = {
+export declare function createDataProduct(body: CreateDataProductRequest, options?: ApiCallOptions): Promise<CreateDataProductHttpResponse>;
+export type CreateDataProductHttpResponse = {
   data: DataProductResponse;
   headers: Headers;
   status: 201;
 };
-type CreateDataProductHttpError = {
+export type CreateDataProductHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 422 | 500 | 503;
@@ -212,16 +212,16 @@ type CreateDataProductHttpError = {
  * @param query an object with query parameters
  * @throws GenerateProviderUrlDataProductsHttpError
  */
-declare function generateProviderUrlDataProducts(query: {
+export declare function generateProviderUrlDataProducts(query: {
   /** Unique identifier of the dataset. */
   dataSetId: string;
 }, options?: ApiCallOptions): Promise<GenerateProviderUrlDataProductsHttpResponse>;
-type GenerateProviderUrlDataProductsHttpResponse = {
+export type GenerateProviderUrlDataProductsHttpResponse = {
   data: GenerateProviderUrlResponse;
   headers: Headers;
   status: 200;
 };
-type GenerateProviderUrlDataProductsHttpError = {
+export type GenerateProviderUrlDataProductsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -234,13 +234,13 @@ type GenerateProviderUrlDataProductsHttpError = {
  * @param dataProductId Unique identifier of the data product. Must be a valid GUID assigned when the data product was created.
  * @throws DeleteDataProductHttpError
  */
-declare function deleteDataProduct(dataProductId: string, options?: ApiCallOptions): Promise<DeleteDataProductHttpResponse>;
-type DeleteDataProductHttpResponse = {
+export declare function deleteDataProduct(dataProductId: string, options?: ApiCallOptions): Promise<DeleteDataProductHttpResponse>;
+export type DeleteDataProductHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteDataProductHttpError = {
+export type DeleteDataProductHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -252,13 +252,13 @@ type DeleteDataProductHttpError = {
  * @param dataProductId Unique identifier of the data product. Must be a valid GUID assigned when the data product was created.
  * @throws GetDataProductHttpError
  */
-declare function getDataProduct(dataProductId: string, options?: ApiCallOptions): Promise<GetDataProductHttpResponse>;
-type GetDataProductHttpResponse = {
+export declare function getDataProduct(dataProductId: string, options?: ApiCallOptions): Promise<GetDataProductHttpResponse>;
+export type GetDataProductHttpResponse = {
   data: DataProductResponse;
   headers: Headers;
   status: 200;
 };
-type GetDataProductHttpError = {
+export type GetDataProductHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -272,13 +272,13 @@ type GetDataProductHttpError = {
  * @param body an object with the body content
  * @throws PatchDataProductHttpError
  */
-declare function patchDataProduct(dataProductId: string, body: PatchDataProductRequest, options?: ApiCallOptions): Promise<PatchDataProductHttpResponse>;
-type PatchDataProductHttpResponse = {
+export declare function patchDataProduct(dataProductId: string, body: PatchDataProductRequest, options?: ApiCallOptions): Promise<PatchDataProductHttpResponse>;
+export type PatchDataProductHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchDataProductHttpError = {
+export type PatchDataProductHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -292,13 +292,13 @@ type PatchDataProductHttpError = {
  * @param body an object with the body content
  * @throws ActivateDataProductHttpError
  */
-declare function activateDataProduct(dataProductId: string, body: ActivateDataProductRequest, options?: ApiCallOptions): Promise<ActivateDataProductHttpResponse>;
-type ActivateDataProductHttpResponse = {
+export declare function activateDataProduct(dataProductId: string, body: ActivateDataProductRequest, options?: ApiCallOptions): Promise<ActivateDataProductHttpResponse>;
+export type ActivateDataProductHttpResponse = {
   data: DataProductResponse;
   headers: Headers;
   status: 201;
 };
-type ActivateDataProductHttpError = {
+export type ActivateDataProductHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -312,13 +312,13 @@ type ActivateDataProductHttpError = {
  * @param dataProductId Unique identifier of the data product. Must be a valid GUID assigned when the data product was created.
  * @throws ComputeDatasetsDataQualityDataProductHttpError
  */
-declare function computeDatasetsDataQualityDataProduct(dataProductId: string, options?: ApiCallOptions): Promise<ComputeDatasetsDataQualityDataProductHttpResponse>;
-type ComputeDatasetsDataQualityDataProductHttpResponse = {
+export declare function computeDatasetsDataQualityDataProduct(dataProductId: string, options?: ApiCallOptions): Promise<ComputeDatasetsDataQualityDataProductHttpResponse>;
+export type ComputeDatasetsDataQualityDataProductHttpResponse = {
   data: DatasetsComputationResponse;
   headers: Headers;
   status: 202;
 };
-type ComputeDatasetsDataQualityDataProductHttpError = {
+export type ComputeDatasetsDataQualityDataProductHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -329,13 +329,13 @@ type ComputeDatasetsDataQualityDataProductHttpError = {
  * @param dataProductId Unique identifier of the data product. Must be a valid GUID assigned when the data product was created.
  * @throws DeactivateDataProductHttpError
  */
-declare function deactivateDataProduct(dataProductId: string, options?: ApiCallOptions): Promise<DeactivateDataProductHttpResponse>;
-type DeactivateDataProductHttpResponse = {
+export declare function deactivateDataProduct(dataProductId: string, options?: ApiCallOptions): Promise<DeactivateDataProductHttpResponse>;
+export type DeactivateDataProductHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeactivateDataProductHttpError = {
+export type DeactivateDataProductHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -348,13 +348,13 @@ type DeactivateDataProductHttpError = {
  * @param dataProductId Unique identifier of the data product. Must be a valid GUID assigned when the data product was created.
  * @throws ExportDocumentationDataProductHttpError
  */
-declare function exportDocumentationDataProduct(dataProductId: string, options?: ApiCallOptions): Promise<ExportDocumentationDataProductHttpResponse>;
-type ExportDocumentationDataProductHttpResponse = {
+export declare function exportDocumentationDataProduct(dataProductId: string, options?: ApiCallOptions): Promise<ExportDocumentationDataProductHttpResponse>;
+export type ExportDocumentationDataProductHttpResponse = {
   data: void;
   headers: Headers;
   status: 200;
 };
-type ExportDocumentationDataProductHttpError = {
+export type ExportDocumentationDataProductHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 406 | 415 | 500 | 503;
@@ -368,13 +368,13 @@ type ExportDocumentationDataProductHttpError = {
  * @param body an object with the body content
  * @throws MoveDataProductHttpError
  */
-declare function moveDataProduct(dataProductId: string, body: MoveDataProductRequest, options?: ApiCallOptions): Promise<MoveDataProductHttpResponse>;
-type MoveDataProductHttpResponse = {
+export declare function moveDataProduct(dataProductId: string, body: MoveDataProductRequest, options?: ApiCallOptions): Promise<MoveDataProductHttpResponse>;
+export type MoveDataProductHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type MoveDataProductHttpError = {
+export type MoveDataProductHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -388,7 +388,7 @@ type MoveDataProductHttpError = {
  * @param query an object with query parameters
  * @throws GetDataProductChangelogsHttpError
  */
-declare function getDataProductChangelogs(dataProductId: string, query: {
+export declare function getDataProductChangelogs(dataProductId: string, query: {
   /** Maximum number of items to return per page. */
   limit?: number;
   /** Page number. */
@@ -397,14 +397,14 @@ declare function getDataProductChangelogs(dataProductId: string, query: {
    * Prefix with `+` for ascending or `-` for descending order. Default: -createdAt. */
   sort?: "+createdAt" | "-createdAt";
 }, options?: ApiCallOptions): Promise<GetDataProductChangelogsHttpResponse>;
-type GetDataProductChangelogsHttpResponse = {
+export type GetDataProductChangelogsHttpResponse = {
   data: DataProductChangelogResponse;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetDataProductChangelogsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetDataProductChangelogsHttpResponse>;
 };
-type GetDataProductChangelogsHttpError = {
+export type GetDataProductChangelogsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -412,8 +412,8 @@ type GetDataProductChangelogsHttpError = {
 /**
  * Clears the cache for data-governance/data-products api requests.
  */
-declare function clearCache(): void;
-type DataProductsAPI = {
+export declare function clearCache(): void;
+export type DataProductsAPI = {
   /**
    * Creates a new data product with specified metadata, datasets, and governance information.
    * Use this endpoint to package related datasets into a governed, discoverable asset.
@@ -524,4 +524,4 @@ type DataProductsAPI = {
  */
 declare const dataProductsExport: DataProductsAPI;
 //#endregion
-export { ActivateDataProductHttpError, ActivateDataProductHttpResponse, ActivateDataProductRequest, ArrayOfUniqueStrings, ChangelogOperation, ComputationResponse, ComputeDatasetsDataQualityDataProductHttpError, ComputeDatasetsDataQualityDataProductHttpResponse, CreateDataProductHttpError, CreateDataProductHttpResponse, CreateDataProductRequest, DataProductChangelog, DataProductChangelogResponse, DataProductResponse, DataProductsAPI, DatasetIdType, DatasetsComputationResponse, DeactivateDataProductHttpError, DeactivateDataProductHttpResponse, DeleteDataProductHttpError, DeleteDataProductHttpResponse, Error, ErrorResponse, ExecutionStatus, ExportDocumentationDataProductHttpError, ExportDocumentationDataProductHttpResponse, GenerateProviderUrlDataProductsHttpError, GenerateProviderUrlDataProductsHttpResponse, GenerateProviderUrlResponse, GetDataProductChangelogsHttpError, GetDataProductChangelogsHttpResponse, GetDataProductHttpError, GetDataProductHttpResponse, KeyContact, Link, Links, MoveDataProductHttpError, MoveDataProductHttpResponse, MoveDataProductRequest, PatchDataProductHttpError, PatchDataProductHttpResponse, PatchDataProductRequest, Quality, TrustScore, TrustScoreDimension, activateDataProduct, clearCache, computeDatasetsDataQualityDataProduct, createDataProduct, deactivateDataProduct, dataProductsExport as default, deleteDataProduct, exportDocumentationDataProduct, generateProviderUrlDataProducts, getDataProduct, getDataProductChangelogs, moveDataProduct, patchDataProduct, data_products_d_exports as t };
+export { dataProductsExport as default, data_products_d_exports as t };

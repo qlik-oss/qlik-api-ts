@@ -1,10 +1,10 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/data-stores.d.ts
-type BatchIdDto = {
+export type BatchIdDto = {
   ids?: string[];
 };
-type DataAsset = {
+export type DataAsset = {
   appId?: string;
   appType: string;
   /** The value is automatically set by the application. User defined value is ignored. */
@@ -35,12 +35,13 @@ type DataAsset = {
   /** Only required when updating the resource. Must be null for new resources. */
   version?: number;
 };
-type DataAssetInfo = {
+export type DataAssetInfo = {
   dataStoreInfo?: DataStoreInfo;
   id: string;
   readonly name?: string;
 };
-type DataField = {
+export type DataField = {
+  /** Alias of the field. Must be unique within the schema and must not match another field's name. Returns `400` if violated. */
   alias?: string;
   dataType: FieldDataType;
   description?: string;
@@ -58,7 +59,7 @@ type DataField = {
   /** An array of user-supplied tags */
   userTags?: UserTag[];
 };
-type DataSet = {
+export type DataSet = {
   /** Optional field to specify additional schemas for files where multiple tables or sheets are available. User must define primary schema in 'schema' attribute and rest of the sheets/ tables can be defined using this field. This field is not populated for the dataSets with single schema */
   additionalSchemas?: Schema[];
   /** Optional override of DataAsset appType. */
@@ -98,7 +99,7 @@ type DataSet = {
   /** Only required when updating the resource. Must be null for new resources. */
   version?: number;
 };
-type DataStore = {
+export type DataStore = {
   /** The value is automatically set by the application. User defined value is ignored. */
   readonly createdBy?: string;
   /** The value is automatically set by the application. User defined value is ignored. */
@@ -126,29 +127,31 @@ type DataStore = {
   /** Only required when updating the resource. Must be null for new resources. */
   version?: number;
 };
-type DataStoreInfo = {
+export type DataStoreInfo = {
   id: string;
   readonly name?: string;
   readonly type?: string;
 };
-type Error = {
+export type Error = {
   code?: string;
   detail?: string;
+  /** Optional free-form metadata associated with the error. */
+  meta?: unknown;
   status?: string;
   title?: string;
 };
-type ErrorResponse = {
+export type ErrorResponse = {
   errors?: Error[];
   traceId?: string;
 };
-type FieldDataType = {
+export type FieldDataType = {
   originalType?: string;
   /** The properties map key is string and the value is of type object. Please note, Datatype DECIMAL requires two mandatory properties to be defined; these properties must be named: precision and scale, each of these property accepts integer value.  All other datatypes does not require any manadatory properties to be defined. */
   properties?: Record<string, unknown>;
   /** Each datatype may vary in terms of required properties. Example: Datatype DECIMAL requires two mandatory properties to be defined - precision and scale, each one accepts integer value. All other datatypes does not have any required properties. */
   type: "DATE" | "TIME" | "DATETIME" | "TIMESTAMP" | "STRING" | "DOUBLE" | "DECIMAL" | "INTEGER" | "BOOLEAN" | "BINARY" | "CUSTOM";
 };
-type JsonPatch = {
+export type JsonPatch = {
   /** A JSON Pointer path pointing to the location to move/copy from. */
   from?: string;
   /** The operation to be performed. */
@@ -158,17 +161,17 @@ type JsonPatch = {
   /** The value to add, replace or test. */
   value?: unknown;
 };
-type Link = {
+export type Link = {
   href?: string;
 };
-type Links = {
+export type Links = {
   first?: Link;
   last?: Link;
   next?: Link;
   prev?: Link;
   self?: Link;
 };
-type Operational = {
+export type Operational = {
   contentUpdated?: boolean;
   endDate?: string;
   lastLoadTime?: string;
@@ -182,7 +185,7 @@ type Operational = {
   tableConnectionInfo?: TableConnectionInfo;
   tableOwner?: string;
 };
-type PageDataAsset = {
+export type PageDataAsset = {
   data?: DataAsset[];
   limit?: number;
   links?: Links;
@@ -190,7 +193,7 @@ type PageDataAsset = {
   pages?: number;
   total?: number;
 };
-type PageDataSet = {
+export type PageDataSet = {
   data?: DataSet[];
   limit?: number;
   links?: Links;
@@ -198,7 +201,7 @@ type PageDataSet = {
   pages?: number;
   total?: number;
 };
-type PageDataStore = {
+export type PageDataStore = {
   data?: DataStore[];
   limit?: number;
   links?: Links;
@@ -209,7 +212,7 @@ type PageDataStore = {
 /**
  * Optional field to specify additional schemas for files where multiple tables or sheets are available. User must define primary schema in 'schema' attribute and rest of the sheets/ tables can be defined using this field. This field is not populated for the dataSets with single schema
  */
-type Schema = {
+export type Schema = {
   /** Anomalies associated with this schema. Example: $warning-unknown-headers */
   anomalies?: string[];
   dataFields: DataField[];
@@ -219,7 +222,7 @@ type Schema = {
   overrideSchemaAnomalies?: boolean;
   schemaName?: string;
 };
-type TableConnectionInfo = {
+export type TableConnectionInfo = {
   additionalProperties?: Record<string, string>;
   selectionScript?: string;
   tableName?: string;
@@ -227,7 +230,7 @@ type TableConnectionInfo = {
 /**
  * An array of user-supplied tags
  */
-type UserTag = {
+export type UserTag = {
   /** The id of the tag in Collections */
   id?: string;
   name?: string;
@@ -238,13 +241,13 @@ type UserTag = {
  * @param body an object with the body content
  * @throws DeleteDataStoresHttpError
  */
-declare function deleteDataStores(body: BatchIdDto, options?: ApiCallOptions): Promise<DeleteDataStoresHttpResponse>;
-type DeleteDataStoresHttpResponse = {
+export declare function deleteDataStores(body: BatchIdDto, options?: ApiCallOptions): Promise<DeleteDataStoresHttpResponse>;
+export type DeleteDataStoresHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteDataStoresHttpError = {
+export type DeleteDataStoresHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -255,7 +258,7 @@ type DeleteDataStoresHttpError = {
  * @param query an object with query parameters
  * @throws GetDataStoresHttpError
  */
-declare function getDataStores(query: {
+export declare function getDataStores(query: {
   /** Page size limit. */
   limit?: number;
   page?: number;
@@ -264,14 +267,14 @@ declare function getDataStores(query: {
   /** Comma-separated fields and field start with '-' character sorts the result set in descending order. */
   sort?: string[];
 }, options?: ApiCallOptions): Promise<GetDataStoresHttpResponse>;
-type GetDataStoresHttpResponse = {
+export type GetDataStoresHttpResponse = {
   data: PageDataStore;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetDataStoresHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetDataStoresHttpResponse>;
 };
-type GetDataStoresHttpError = {
+export type GetDataStoresHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -282,13 +285,13 @@ type GetDataStoresHttpError = {
  * @param body an object with the body content
  * @throws CreateDataStoreHttpError
  */
-declare function createDataStore(body: DataStore, options?: ApiCallOptions): Promise<CreateDataStoreHttpResponse>;
-type CreateDataStoreHttpResponse = {
+export declare function createDataStore(body: DataStore, options?: ApiCallOptions): Promise<CreateDataStoreHttpResponse>;
+export type CreateDataStoreHttpResponse = {
   data: DataStore;
   headers: Headers;
   status: 201;
 };
-type CreateDataStoreHttpError = {
+export type CreateDataStoreHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -299,13 +302,13 @@ type CreateDataStoreHttpError = {
  * @param dataStoreIds Comma-separated data store IDs or * to include all data stores.
  * @throws DeleteDataStoreDataAssetsHttpError
  */
-declare function deleteDataStoreDataAssets(dataStoreIds: string, options?: ApiCallOptions): Promise<DeleteDataStoreDataAssetsHttpResponse>;
-type DeleteDataStoreDataAssetsHttpResponse = {
+export declare function deleteDataStoreDataAssets(dataStoreIds: string, options?: ApiCallOptions): Promise<DeleteDataStoreDataAssetsHttpResponse>;
+export type DeleteDataStoreDataAssetsHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteDataStoreDataAssetsHttpError = {
+export type DeleteDataStoreDataAssetsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -317,7 +320,7 @@ type DeleteDataStoreDataAssetsHttpError = {
  * @param query an object with query parameters
  * @throws GetDataStoreDataAssetsHttpError
  */
-declare function getDataStoreDataAssets(dataStoreIds: string, query: {
+export declare function getDataStoreDataAssets(dataStoreIds: string, query: {
   /** Page size limit. */
   limit?: number;
   page?: number;
@@ -326,14 +329,14 @@ declare function getDataStoreDataAssets(dataStoreIds: string, query: {
   /** Comma-separated fields and field start with '-' character sorts the result set in descending order. */
   sort?: string[];
 }, options?: ApiCallOptions): Promise<GetDataStoreDataAssetsHttpResponse>;
-type GetDataStoreDataAssetsHttpResponse = {
+export type GetDataStoreDataAssetsHttpResponse = {
   data: PageDataAsset;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetDataStoreDataAssetsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetDataStoreDataAssetsHttpResponse>;
 };
-type GetDataStoreDataAssetsHttpError = {
+export type GetDataStoreDataAssetsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -345,13 +348,13 @@ type GetDataStoreDataAssetsHttpError = {
  * @param dataAssetIds Comma-separated data asset IDs or * to include all data assets.
  * @throws DeleteDataStoreDataAssetDataSetsHttpError
  */
-declare function deleteDataStoreDataAssetDataSets(dataStoreIds: string, dataAssetIds: string, options?: ApiCallOptions): Promise<DeleteDataStoreDataAssetDataSetsHttpResponse>;
-type DeleteDataStoreDataAssetDataSetsHttpResponse = {
+export declare function deleteDataStoreDataAssetDataSets(dataStoreIds: string, dataAssetIds: string, options?: ApiCallOptions): Promise<DeleteDataStoreDataAssetDataSetsHttpResponse>;
+export type DeleteDataStoreDataAssetDataSetsHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteDataStoreDataAssetDataSetsHttpError = {
+export type DeleteDataStoreDataAssetDataSetsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -364,7 +367,7 @@ type DeleteDataStoreDataAssetDataSetsHttpError = {
  * @param query an object with query parameters
  * @throws GetDataStoreDataAssetDataSetsHttpError
  */
-declare function getDataStoreDataAssetDataSets(dataStoreIds: string, dataAssetIds: string, query: {
+export declare function getDataStoreDataAssetDataSets(dataStoreIds: string, dataAssetIds: string, query: {
   /** Page size limit. */
   limit?: number;
   page?: number;
@@ -373,14 +376,14 @@ declare function getDataStoreDataAssetDataSets(dataStoreIds: string, dataAssetId
   /** Comma-separated fields and field start with '-' character sorts the result set in descending order. */
   sort?: string[];
 }, options?: ApiCallOptions): Promise<GetDataStoreDataAssetDataSetsHttpResponse>;
-type GetDataStoreDataAssetDataSetsHttpResponse = {
+export type GetDataStoreDataAssetDataSetsHttpResponse = {
   data: PageDataSet;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetDataStoreDataAssetDataSetsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetDataStoreDataAssetDataSetsHttpResponse>;
 };
-type GetDataStoreDataAssetDataSetsHttpError = {
+export type GetDataStoreDataAssetDataSetsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -392,16 +395,16 @@ type GetDataStoreDataAssetDataSetsHttpError = {
  * @param query an object with query parameters
  * @throws GetDataStoreHttpError
  */
-declare function getDataStore(dataStoreId: string, query: {
+export declare function getDataStore(dataStoreId: string, query: {
   /** Comma-separated fields to return in the response. */
   projections?: string[];
 }, options?: ApiCallOptions): Promise<GetDataStoreHttpResponse>;
-type GetDataStoreHttpResponse = {
+export type GetDataStoreHttpResponse = {
   data: DataStore;
   headers: Headers;
   status: 200;
 };
-type GetDataStoreHttpError = {
+export type GetDataStoreHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -413,13 +416,13 @@ type GetDataStoreHttpError = {
  * @param body an object with the body content
  * @throws PatchDataStoreHttpError
  */
-declare function patchDataStore(dataStoreId: string, body: JsonPatch[], options?: ApiCallOptions): Promise<PatchDataStoreHttpResponse>;
-type PatchDataStoreHttpResponse = {
+export declare function patchDataStore(dataStoreId: string, body: JsonPatch[], options?: ApiCallOptions): Promise<PatchDataStoreHttpResponse>;
+export type PatchDataStoreHttpResponse = {
   data: DataStore;
   headers: Headers;
   status: 200 | 204;
 };
-type PatchDataStoreHttpError = {
+export type PatchDataStoreHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -431,13 +434,13 @@ type PatchDataStoreHttpError = {
  * @param body an object with the body content
  * @throws UpdateDataStoreHttpError
  */
-declare function updateDataStore(dataStoreId: string, body: DataStore, options?: ApiCallOptions): Promise<UpdateDataStoreHttpResponse>;
-type UpdateDataStoreHttpResponse = {
+export declare function updateDataStore(dataStoreId: string, body: DataStore, options?: ApiCallOptions): Promise<UpdateDataStoreHttpResponse>;
+export type UpdateDataStoreHttpResponse = {
   data: DataStore;
   headers: Headers;
   status: 200;
 };
-type UpdateDataStoreHttpError = {
+export type UpdateDataStoreHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -445,8 +448,8 @@ type UpdateDataStoreHttpError = {
 /**
  * Clears the cache for data-stores api requests.
  */
-declare function clearCache(): void;
-type DataStoresAPI = {
+export declare function clearCache(): void;
+export type DataStoresAPI = {
   /**
    * Delete data stores if it does not contain any data-assets.
    *
@@ -534,4 +537,4 @@ type DataStoresAPI = {
  */
 declare const dataStoresExport: DataStoresAPI;
 //#endregion
-export { BatchIdDto, CreateDataStoreHttpError, CreateDataStoreHttpResponse, DataAsset, DataAssetInfo, DataField, DataSet, DataStore, DataStoreInfo, DataStoresAPI, DeleteDataStoreDataAssetDataSetsHttpError, DeleteDataStoreDataAssetDataSetsHttpResponse, DeleteDataStoreDataAssetsHttpError, DeleteDataStoreDataAssetsHttpResponse, DeleteDataStoresHttpError, DeleteDataStoresHttpResponse, Error, ErrorResponse, FieldDataType, GetDataStoreDataAssetDataSetsHttpError, GetDataStoreDataAssetDataSetsHttpResponse, GetDataStoreDataAssetsHttpError, GetDataStoreDataAssetsHttpResponse, GetDataStoreHttpError, GetDataStoreHttpResponse, GetDataStoresHttpError, GetDataStoresHttpResponse, JsonPatch, Link, Links, Operational, PageDataAsset, PageDataSet, PageDataStore, PatchDataStoreHttpError, PatchDataStoreHttpResponse, Schema, TableConnectionInfo, UpdateDataStoreHttpError, UpdateDataStoreHttpResponse, UserTag, clearCache, createDataStore, dataStoresExport as default, deleteDataStoreDataAssetDataSets, deleteDataStoreDataAssets, deleteDataStores, getDataStore, getDataStoreDataAssetDataSets, getDataStoreDataAssets, getDataStores, patchDataStore, updateDataStore };
+export { dataStoresExport as default };

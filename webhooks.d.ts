@@ -1,7 +1,7 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/webhooks.d.ts
-type Delivery = {
+export type Delivery = {
   /** The name of the triggering event-type. */
   eventType: string;
   /** The delivery's unique identifier. */
@@ -33,7 +33,7 @@ type Delivery = {
   /** The unique webhook identifier that the delivery is for. */
   webhookId: string;
 };
-type DeliveryList = {
+export type DeliveryList = {
   data?: Delivery[];
   links?: {
     next?: Link;
@@ -41,7 +41,7 @@ type DeliveryList = {
     self?: Link;
   };
 };
-type Error = {
+export type Error = {
   /** The unique code for the error. */
   code: string;
   /** May be used to provide additional details. */
@@ -49,12 +49,14 @@ type Error = {
   /** A summary of what went wrong. */
   title: string;
 };
-type ErrorResponse = {
+export type ErrorResponse = {
   errors?: Error[];
   /** A way to trace the source of the error. */
   traceId?: string;
 };
-type EventType = {
+export type EventType = {
+  /** Category of the event type. */
+  category?: string;
   /** Description of the event type. */
   description?: string;
   /** Specifies which levels that are supported for this event type. */
@@ -64,14 +66,14 @@ type EventType = {
   /** Title of the event type. */
   title?: string;
 };
-type EventTypes = {
+export type EventTypes = {
   data?: EventType[];
 };
-type Link = {
+export type Link = {
   /** URL to a resource request. */
   href: string;
 };
-type WebhookBase = {
+export type WebhookBase = {
   /** If enabled the certificate chain of the configured URL will be checked for revocation before sending the webhook. */
   checkCertificateRevocation?: boolean;
   /** The UTC timestamp when the webhook was created. */
@@ -118,7 +120,7 @@ type WebhookBase = {
   /** Target URL for webhook HTTPS requests. */
   url: string;
 };
-type WebhookList = {
+export type WebhookList = {
   data?: WebhookResponse[];
   links?: {
     next?: Link;
@@ -129,7 +131,7 @@ type WebhookList = {
 /**
  * A JSON Patch document as defined in https://datatracker.ietf.org/doc/html/rfc6902
  */
-type WebhookPatch = {
+export type WebhookPatch = {
   /** The operation to be performed. */
   op: "add" | "remove" | "replace";
   /** The path for the given resource field to patch. */
@@ -137,15 +139,15 @@ type WebhookPatch = {
   /** The value to be used for this operation. */
   value?: boolean | number | unknown | string;
 };
-type WebhookPost = WebhookBase & {
+export type WebhookPost = WebhookBase & {
   /** Indicates from where the webhook was created and its purpose. */
   origin?: "api" | "automations" | "management-console";
 };
-type WebhookResponse = WebhookResponseBase & {
+export type WebhookResponse = WebhookResponseBase & {
   /** Indicates from where the webhook was created and its purpose. */
   readonly origin?: "api" | "automations" | "management-console";
 };
-type WebhookResponseBase = {
+export type WebhookResponseBase = {
   /** If enabled the certificate chain of the configured URL will be checked for revocation before sending the webhook. */
   checkCertificateRevocation?: boolean;
   /** The UTC timestamp when the webhook was created. */
@@ -183,9 +185,6 @@ type WebhookResponseBase = {
   name: string;
   /** The id of the user that owns the webhook, only applicable for user level webhooks. */
   ownerId?: string;
-  /** @deprecated
-   * String used as secret for calculating HMAC hash sent as header. */
-  secret?: string;
   /** Provides status of the string used as secret for calculating HMAC hash sent as header is already added or not. */
   secretKeyAdded?: boolean;
   /** The UTC timestamp when the webhook was last updated. */
@@ -201,7 +200,7 @@ type WebhookResponseBase = {
  * @param query an object with query parameters
  * @throws GetWebhooksHttpError
  */
-declare function getWebhooks(query: {
+export declare function getWebhooks(query: {
   /** Filter resources by user that created it. */
   createdByUserId?: string;
   /** Filter resources by enabled true/false. */
@@ -229,14 +228,14 @@ declare function getWebhooks(query: {
   /** Filter resources by URL (wildcard and case insensitive). */
   url?: string;
 }, options?: ApiCallOptions): Promise<GetWebhooksHttpResponse>;
-type GetWebhooksHttpResponse = {
+export type GetWebhooksHttpResponse = {
   data: WebhookList;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetWebhooksHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetWebhooksHttpResponse>;
 };
-type GetWebhooksHttpError = {
+export type GetWebhooksHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 500 | 503;
@@ -247,13 +246,13 @@ type GetWebhooksHttpError = {
  * @param body an object with the body content
  * @throws CreateWebhookHttpError
  */
-declare function createWebhook(body: WebhookPost, options?: ApiCallOptions): Promise<CreateWebhookHttpResponse>;
-type CreateWebhookHttpResponse = {
+export declare function createWebhook(body: WebhookPost, options?: ApiCallOptions): Promise<CreateWebhookHttpResponse>;
+export type CreateWebhookHttpResponse = {
   data: WebhookResponse;
   headers: Headers;
   status: 201;
 };
-type CreateWebhookHttpError = {
+export type CreateWebhookHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 500 | 503;
@@ -263,13 +262,13 @@ type CreateWebhookHttpError = {
  *
  * @throws GetWebhookEventTypesHttpError
  */
-declare function getWebhookEventTypes(options?: ApiCallOptions): Promise<GetWebhookEventTypesHttpResponse>;
-type GetWebhookEventTypesHttpResponse = {
+export declare function getWebhookEventTypes(options?: ApiCallOptions): Promise<GetWebhookEventTypesHttpResponse>;
+export type GetWebhookEventTypesHttpResponse = {
   data: EventTypes;
   headers: Headers;
   status: 200;
 };
-type GetWebhookEventTypesHttpError = {
+export type GetWebhookEventTypesHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 401 | 500 | 503;
@@ -280,13 +279,13 @@ type GetWebhookEventTypesHttpError = {
  * @param id The webhook's unique identifier.
  * @throws DeleteWebhookHttpError
  */
-declare function deleteWebhook(id: string, options?: ApiCallOptions): Promise<DeleteWebhookHttpResponse>;
-type DeleteWebhookHttpResponse = {
+export declare function deleteWebhook(id: string, options?: ApiCallOptions): Promise<DeleteWebhookHttpResponse>;
+export type DeleteWebhookHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteWebhookHttpError = {
+export type DeleteWebhookHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -297,13 +296,13 @@ type DeleteWebhookHttpError = {
  * @param id The webhook's unique identifier.
  * @throws GetWebhookHttpError
  */
-declare function getWebhook(id: string, options?: ApiCallOptions): Promise<GetWebhookHttpResponse>;
-type GetWebhookHttpResponse = {
+export declare function getWebhook(id: string, options?: ApiCallOptions): Promise<GetWebhookHttpResponse>;
+export type GetWebhookHttpResponse = {
   data: WebhookResponse;
   headers: Headers;
   status: 200;
 };
-type GetWebhookHttpError = {
+export type GetWebhookHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -315,13 +314,13 @@ type GetWebhookHttpError = {
  * @param body an object with the body content
  * @throws PatchWebhookHttpError
  */
-declare function patchWebhook(id: string, body: WebhookPatch[], options?: ApiCallOptions): Promise<PatchWebhookHttpResponse>;
-type PatchWebhookHttpResponse = {
+export declare function patchWebhook(id: string, body: WebhookPatch[], options?: ApiCallOptions): Promise<PatchWebhookHttpResponse>;
+export type PatchWebhookHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchWebhookHttpError = {
+export type PatchWebhookHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -333,13 +332,13 @@ type PatchWebhookHttpError = {
  * @param body an object with the body content
  * @throws UpdateWebhookHttpError
  */
-declare function updateWebhook(id: string, body: WebhookBase, options?: ApiCallOptions): Promise<UpdateWebhookHttpResponse>;
-type UpdateWebhookHttpResponse = {
+export declare function updateWebhook(id: string, body: WebhookBase, options?: ApiCallOptions): Promise<UpdateWebhookHttpResponse>;
+export type UpdateWebhookHttpResponse = {
   data: WebhookResponse;
   headers: Headers;
   status: 200;
 };
-type UpdateWebhookHttpError = {
+export type UpdateWebhookHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -351,7 +350,7 @@ type UpdateWebhookHttpError = {
  * @param query an object with query parameters
  * @throws GetWebhookDeliveriesHttpError
  */
-declare function getWebhookDeliveries(id: string, query: {
+export declare function getWebhookDeliveries(id: string, query: {
   /** Filter resources by event-type. */
   eventType?: string;
   /** Maximum number of deliveries to retrieve. */
@@ -365,14 +364,14 @@ declare function getWebhookDeliveries(id: string, query: {
   /** Filter resources by status (success or fail). */
   status?: "success" | "fail";
 }, options?: ApiCallOptions): Promise<GetWebhookDeliveriesHttpResponse>;
-type GetWebhookDeliveriesHttpResponse = {
+export type GetWebhookDeliveriesHttpResponse = {
   data: DeliveryList;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetWebhookDeliveriesHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetWebhookDeliveriesHttpResponse>;
 };
-type GetWebhookDeliveriesHttpError = {
+export type GetWebhookDeliveriesHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -384,13 +383,13 @@ type GetWebhookDeliveriesHttpError = {
  * @param deliveryId The delivery's unique identifier.
  * @throws GetWebhookDeliveryHttpError
  */
-declare function getWebhookDelivery(id: string, deliveryId: string, options?: ApiCallOptions): Promise<GetWebhookDeliveryHttpResponse>;
-type GetWebhookDeliveryHttpResponse = {
+export declare function getWebhookDelivery(id: string, deliveryId: string, options?: ApiCallOptions): Promise<GetWebhookDeliveryHttpResponse>;
+export type GetWebhookDeliveryHttpResponse = {
   data: Delivery;
   headers: Headers;
   status: 200;
 };
-type GetWebhookDeliveryHttpError = {
+export type GetWebhookDeliveryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -402,13 +401,13 @@ type GetWebhookDeliveryHttpError = {
  * @param deliveryId The delivery's unique identifier.
  * @throws ResendWebhookDeliveryHttpError
  */
-declare function resendWebhookDelivery(id: string, deliveryId: string, options?: ApiCallOptions): Promise<ResendWebhookDeliveryHttpResponse>;
-type ResendWebhookDeliveryHttpResponse = {
+export declare function resendWebhookDelivery(id: string, deliveryId: string, options?: ApiCallOptions): Promise<ResendWebhookDeliveryHttpResponse>;
+export type ResendWebhookDeliveryHttpResponse = {
   data: Delivery;
   headers: Headers;
   status: 201;
 };
-type ResendWebhookDeliveryHttpError = {
+export type ResendWebhookDeliveryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 401 | 404 | 500 | 503;
@@ -416,8 +415,8 @@ type ResendWebhookDeliveryHttpError = {
 /**
  * Clears the cache for webhooks api requests.
  */
-declare function clearCache(): void;
-type WebhooksAPI = {
+export declare function clearCache(): void;
+export type WebhooksAPI = {
   /**
    * Retrieves all webhooks entries for a tenant that the user has access to. Users assigned the `TenantAdmin` role can retrieve all webhooks. A user can have up to 150 webhooks at one time.
    *
@@ -502,4 +501,4 @@ type WebhooksAPI = {
  */
 declare const webhooksExport: WebhooksAPI;
 //#endregion
-export { CreateWebhookHttpError, CreateWebhookHttpResponse, DeleteWebhookHttpError, DeleteWebhookHttpResponse, Delivery, DeliveryList, Error, ErrorResponse, EventType, EventTypes, GetWebhookDeliveriesHttpError, GetWebhookDeliveriesHttpResponse, GetWebhookDeliveryHttpError, GetWebhookDeliveryHttpResponse, GetWebhookEventTypesHttpError, GetWebhookEventTypesHttpResponse, GetWebhookHttpError, GetWebhookHttpResponse, GetWebhooksHttpError, GetWebhooksHttpResponse, Link, PatchWebhookHttpError, PatchWebhookHttpResponse, ResendWebhookDeliveryHttpError, ResendWebhookDeliveryHttpResponse, UpdateWebhookHttpError, UpdateWebhookHttpResponse, WebhookBase, WebhookList, WebhookPatch, WebhookPost, WebhookResponse, WebhookResponseBase, WebhooksAPI, clearCache, createWebhook, webhooksExport as default, deleteWebhook, getWebhook, getWebhookDeliveries, getWebhookDelivery, getWebhookEventTypes, getWebhooks, patchWebhook, resendWebhookDelivery, updateWebhook };
+export { webhooksExport as default };

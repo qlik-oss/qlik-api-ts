@@ -1,9 +1,9 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-o-bqAUAV.js";
-import "../chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
+import "../chunks/invoke-fetch-DdmiOIkr.js";
 declare namespace change_stores_d_exports {
   export { CellKey, Change, ChangeStore, ChangeStoresAPI, EditableColumn, Error, ErrorResponse, GetChangeStoreChangesHttpError, GetChangeStoreChangesHttpResponse, GetChangeStoreChangesTabularViewsHttpError, GetChangeStoreChangesTabularViewsHttpResponse, GetChangeStoreEditableColumnsHttpError, GetChangeStoreEditableColumnsHttpResponse, GetChangeStoreHttpError, GetChangeStoreHttpResponse, GetChangeStoresHttpError, GetChangeStoresHttpResponse, GetChangesData, ListDefaultData, Pagination, PrimaryKey, ReferenceId, RowKey, TabularView, UsedBy, UsedByArray, clearCache, changeStoresExport as default, getChangeStore, getChangeStoreChanges, getChangeStoreChangesTabularViews, getChangeStoreEditableColumns, getChangeStores };
 }
-type CellKey = {
+export type CellKey = {
   /** The id of the column. */
   columnId: string;
   /** A map of row keys. */
@@ -15,7 +15,7 @@ type CellKey = {
  *   committed: true
  * }
  */
-type Change = {
+export type Change = {
   /** The value of the cell. */
   cellValue?: string;
   /** Whether the change has been committed. */
@@ -33,7 +33,7 @@ type Change = {
    * - User saves the change. */
   updatedAt?: string;
 };
-type ChangeStore = {
+export type ChangeStore = {
   /** The time when the change store was created. */
   createdAt?: string;
   /** The id of the user who created the change store. */
@@ -57,7 +57,7 @@ type ChangeStore = {
   /** List of chart/app references. */
   usedBy?: UsedByArray;
 };
-type EditableColumn = {
+export type EditableColumn = {
   /** Name of the editable column. */
   columnName?: string;
   /** Configuration values required for the editable-column type. */
@@ -111,7 +111,7 @@ type EditableColumn = {
 /**
  * An error object.
  */
-type Error = {
+export type Error = {
   /** The error code. */
   code: string;
   /** Extra information about the error. */
@@ -119,22 +119,22 @@ type Error = {
   /** Description of the error. */
   title: string;
 };
-type ErrorResponse = {
+export type ErrorResponse = {
   /** list of errors */
   errors?: Error[];
   traceId?: string;
 };
-type GetChangesData = {
+export type GetChangesData = {
   cellKey?: CellKey;
   changes?: Change[];
   /** The name of the column. */
   columnName?: string;
 };
-type ListDefaultData = {
+export type ListDefaultData = {
   currentPageCount?: number;
   totalCount?: number;
 };
-type Pagination = {
+export type Pagination = {
   links?: {
     next?: {
       href?: string;
@@ -155,13 +155,13 @@ type Pagination = {
  *   "region"
  * ]
  */
-type PrimaryKey = string[];
+export type PrimaryKey = string[];
 /**
  * The reference id used to identify related editable-columns or change stores.
  * @example
  * "6835b0135cf7147c01979e5d"
  */
-type ReferenceId = string;
+export type ReferenceId = string;
 /**
  * A map of row keys.
  * @example
@@ -169,7 +169,7 @@ type ReferenceId = string;
  *   "product": "table"
  * }
  */
-type RowKey = Record<string, string>;
+export type RowKey = Record<string, string>;
 /**
  * @example
  * {
@@ -184,7 +184,7 @@ type RowKey = Record<string, string>;
  *   ]
  * }
  */
-type TabularView = {
+export type TabularView = {
   data?: {
     /** The timestamp when the row was last updated. */
     updatedAt?: string;
@@ -192,7 +192,7 @@ type TabularView = {
     updatedBy?: string;
   }[];
 };
-type UsedBy = {
+export type UsedBy = {
   /** The id of the app. */
   appId: string;
   /** The id of the chart. */
@@ -201,7 +201,7 @@ type UsedBy = {
 /**
  * List of chart/app references.
  */
-type UsedByArray = UsedBy[];
+export type UsedByArray = UsedBy[];
 /**
  * Returns a list of change-stores, accessible to the user.
  * @example
@@ -217,7 +217,7 @@ type UsedByArray = UsedBy[];
  * @param query an object with query parameters
  * @throws GetChangeStoresHttpError
  */
-declare function getChangeStores(query: {
+export declare function getChangeStores(query: {
   /** A SCIM filter expression used to filter the result.
    * The filter parameter allows complex logical expressions using comparison operators and grouping.
    * - **Supported attributes:** `storeName`, `storeId`, `referenceId`, `usedBy.appId`, `primaryKey`, `isUsedByEmpty`
@@ -235,7 +235,7 @@ declare function getChangeStores(query: {
    * For shared spaces, use the actual space ID, e.g. "690b584c5a8011de9079828e". */
   spaceId: string;
 }, options?: ApiCallOptions): Promise<GetChangeStoresHttpResponse>;
-type GetChangeStoresHttpResponse = {
+export type GetChangeStoresHttpResponse = {
   data: ListDefaultData & Pagination & {
     data?: ChangeStore[];
   };
@@ -244,7 +244,7 @@ type GetChangeStoresHttpResponse = {
   prev?: (options?: ApiCallOptions) => Promise<GetChangeStoresHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetChangeStoresHttpResponse>;
 };
-type GetChangeStoresHttpError = {
+export type GetChangeStoresHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500;
@@ -259,15 +259,15 @@ type GetChangeStoresHttpError = {
  * @param storeId The id of the change store.
  * @throws GetChangeStoreHttpError
  */
-declare function getChangeStore(storeId: string, options?: ApiCallOptions): Promise<GetChangeStoreHttpResponse>;
-type GetChangeStoreHttpResponse = {
+export declare function getChangeStore(storeId: string, options?: ApiCallOptions): Promise<GetChangeStoreHttpResponse>;
+export type GetChangeStoreHttpResponse = {
   data: {
     data?: ChangeStore;
   };
   headers: Headers;
   status: 200;
 };
-type GetChangeStoreHttpError = {
+export type GetChangeStoreHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500;
@@ -288,7 +288,7 @@ type GetChangeStoreHttpError = {
  * @param query an object with query parameters
  * @throws GetChangeStoreChangesHttpError
  */
-declare function getChangeStoreChanges(storeId: string, query: {
+export declare function getChangeStoreChanges(storeId: string, query: {
   /** A SCIM filter expression used to filter the result.
    * The filter parameter allows complex logical expressions using comparison operators and grouping.
    * - **Supported attributes:** `committed`, `cellKey.columnId`, `columnId`, `createdBy`, `createdAt`, `updatedAt`
@@ -302,7 +302,7 @@ declare function getChangeStoreChanges(storeId: string, query: {
   /** Sort results by a field, with optional + (asc) or - (desc) prefix */
   sort?: string;
 }, options?: ApiCallOptions): Promise<GetChangeStoreChangesHttpResponse>;
-type GetChangeStoreChangesHttpResponse = {
+export type GetChangeStoreChangesHttpResponse = {
   data: ListDefaultData & Pagination & {
     data?: GetChangesData[];
   };
@@ -311,7 +311,7 @@ type GetChangeStoreChangesHttpResponse = {
   prev?: (options?: ApiCallOptions) => Promise<GetChangeStoreChangesHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetChangeStoreChangesHttpResponse>;
 };
-type GetChangeStoreChangesHttpError = {
+export type GetChangeStoreChangesHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500;
@@ -331,7 +331,7 @@ type GetChangeStoreChangesHttpError = {
  * @param query an object with query parameters
  * @throws GetChangeStoreChangesTabularViewsHttpError
  */
-declare function getChangeStoreChangesTabularViews(storeId: string, query: {
+export declare function getChangeStoreChangesTabularViews(storeId: string, query: {
   /** When set to true, the records returned by this endpoint will include the latest change (if available) for each editable column in the record. This parameter should be used in combination with a filter on updatedAt for use cases that require all editable columns to be included in each response. */
   expandRow?: boolean;
   /** A SCIM filter expression used to filter the result.
@@ -345,14 +345,14 @@ declare function getChangeStoreChangesTabularViews(storeId: string, query: {
   /** Used for cursor-based pagination. */
   page?: string;
 }, options?: ApiCallOptions): Promise<GetChangeStoreChangesTabularViewsHttpResponse>;
-type GetChangeStoreChangesTabularViewsHttpResponse = {
+export type GetChangeStoreChangesTabularViewsHttpResponse = {
   data: ListDefaultData & Pagination & TabularView;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetChangeStoreChangesTabularViewsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetChangeStoreChangesTabularViewsHttpResponse>;
 };
-type GetChangeStoreChangesTabularViewsHttpError = {
+export type GetChangeStoreChangesTabularViewsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500;
@@ -373,7 +373,7 @@ type GetChangeStoreChangesTabularViewsHttpError = {
  * @param query an object with query parameters
  * @throws GetChangeStoreEditableColumnsHttpError
  */
-declare function getChangeStoreEditableColumns(storeId: string, query: {
+export declare function getChangeStoreEditableColumns(storeId: string, query: {
   /** A SCIM filter expression used to filter the result.
    * The filter parameter allows complex logical expressions using comparison operators and grouping.
    * - **Supported attributes:** `referenceId`, `spaceId`, `createdBy`, `type`, `columnName`, `usedBy.appId`, `usedBy.chartId`
@@ -387,7 +387,7 @@ declare function getChangeStoreEditableColumns(storeId: string, query: {
   /** Sort results by a field, with optional + (asc) or - (desc) prefix */
   sort?: string;
 }, options?: ApiCallOptions): Promise<GetChangeStoreEditableColumnsHttpResponse>;
-type GetChangeStoreEditableColumnsHttpResponse = {
+export type GetChangeStoreEditableColumnsHttpResponse = {
   data: ListDefaultData & Pagination & {
     data?: EditableColumn[];
   };
@@ -396,7 +396,7 @@ type GetChangeStoreEditableColumnsHttpResponse = {
   prev?: (options?: ApiCallOptions) => Promise<GetChangeStoreEditableColumnsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetChangeStoreEditableColumnsHttpResponse>;
 };
-type GetChangeStoreEditableColumnsHttpError = {
+export type GetChangeStoreEditableColumnsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500;
@@ -404,8 +404,8 @@ type GetChangeStoreEditableColumnsHttpError = {
 /**
  * Clears the cache for analytics/change-stores api requests.
  */
-declare function clearCache(): void;
-type ChangeStoresAPI = {
+export declare function clearCache(): void;
+export type ChangeStoresAPI = {
   /**
    * Returns a list of change-stores, accessible to the user.
    * @example
@@ -493,4 +493,4 @@ type ChangeStoresAPI = {
  */
 declare const changeStoresExport: ChangeStoresAPI;
 //#endregion
-export { CellKey, Change, ChangeStore, ChangeStoresAPI, EditableColumn, Error, ErrorResponse, GetChangeStoreChangesHttpError, GetChangeStoreChangesHttpResponse, GetChangeStoreChangesTabularViewsHttpError, GetChangeStoreChangesTabularViewsHttpResponse, GetChangeStoreEditableColumnsHttpError, GetChangeStoreEditableColumnsHttpResponse, GetChangeStoreHttpError, GetChangeStoreHttpResponse, GetChangeStoresHttpError, GetChangeStoresHttpResponse, GetChangesData, ListDefaultData, Pagination, PrimaryKey, ReferenceId, RowKey, TabularView, UsedBy, UsedByArray, clearCache, changeStoresExport as default, getChangeStore, getChangeStoreChanges, getChangeStoreChangesTabularViews, getChangeStoreEditableColumns, getChangeStores, change_stores_d_exports as t };
+export { changeStoresExport as default, change_stores_d_exports as t };

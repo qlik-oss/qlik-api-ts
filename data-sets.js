@@ -1,4 +1,4 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B8GqRz9s.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-uJH1SWdc.js";
 
 //#region src/public/rest/data-sets.ts
 /**
@@ -17,7 +17,7 @@ async function deleteDataSets(body, options) {
 	});
 }
 /**
-* Save new data set
+* Creates and saves a new data set in the catalog.
 *
 * @param body an object with the body content
 * @throws CreateDataSetHttpError

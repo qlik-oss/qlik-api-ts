@@ -1,7 +1,7 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/identity-providers.d.ts
-type BaseIDP = {
+export type BaseIDP = {
   /** Indicates whether the IdP is available for use. */
   active?: boolean;
   clockToleranceSec?: number;
@@ -26,7 +26,7 @@ type BaseIDP = {
   /** The tenant identifiers associated with the given IdP. */
   tenantIds?: string[];
 };
-type CertificateInfo = {
+export type CertificateInfo = {
   /** The X.509 certificate for validating signed SAML responses. */
   certificate: string;
   /** Indicates whether the certificate is used for encryption. */
@@ -39,7 +39,7 @@ type CertificateInfo = {
 /**
  * Payload for creating an identity provider using JWT authentication.
  */
-type CreateJWTAuthPayload = {
+export type CreateJWTAuthPayload = {
   /** There can be clock skew between the IdP and Qlik's login server. In these cases, a tolerance can be set. */
   clockToleranceSec?: number;
   description?: string;
@@ -65,7 +65,7 @@ type CreateJWTAuthPayload = {
 /**
  * Payload for creating an OIDC-compatible identity provider.
  */
-type CreateOIDCPayload = {
+export type CreateOIDCPayload = {
   /** There can be clock skew between the IdP and Qlik's login server. In these cases, a tolerance can be set. */
   clockToleranceSec?: number;
   /** Tells the consumer of the IdP that new users should be created on login if they don't exist. */
@@ -129,7 +129,7 @@ type CreateOIDCPayload = {
 /**
  * Payload for creating a SAML compatible identity provider.
  */
-type CreateSAMLPayload = {
+export type CreateSAMLPayload = {
   /** There can be clock skew between the IdP and Qlik's login server. In these cases, a tolerance can be set. */
   clockToleranceSec?: number;
   /** Tells the consumer of the IdP that new users should be created on login if they don't exist. */
@@ -191,7 +191,7 @@ type CreateSAMLPayload = {
 /**
  * An error object.
  */
-type Error = {
+export type Error = {
   /** The error code. */
   code: string;
   /** A human-readable explanation specific to this occurrence of the problem. */
@@ -213,11 +213,11 @@ type Error = {
 /**
  * A representation of the errors encountered from the HTTP request.
  */
-type Errors = {
+export type Errors = {
   errors?: Error[];
 };
-type IDP = IDPOIDC | IDPSAML | IDPJWTAuth;
-type IDPArray = {
+export type IDP = IDPOIDC | IDPSAML | IDPJWTAuth;
+export type IDPArray = {
   /** An array of IdPs. */
   data?: IDP[];
   /** Contains pagination links. */
@@ -226,7 +226,7 @@ type IDPArray = {
 /**
  * An identity provider for JWT authentication.
  */
-type IDPJWTAuth = BaseIDP & {
+export type IDPJWTAuth = BaseIDP & {
   options?: {
     /** The expected JWT issuer */
     issuer?: string;
@@ -238,7 +238,7 @@ type IDPJWTAuth = BaseIDP & {
     }[];
   };
 };
-type IDPMeta = {
+export type IDPMeta = {
   /** A link to direct you to where you can upgrade your trial or manage your subscriptions. Only available if the default identity provider is used (no custom interactive identity providers are active). */
   upgradeSubscriptionLink?: string;
   /** A link to direct you to where you can manage your Qlik account. Only available if the default identity provider is used (no custom interactive identity providers are active). */
@@ -247,14 +247,14 @@ type IDPMeta = {
 /**
  * An OIDC-compliant identity provider.
  */
-type IDPOIDC = BaseIDP & {
+export type IDPOIDC = BaseIDP & {
   options?: IDPOIDCOptions;
   pendingOptions?: IDPOIDCOptions;
   pendingResult?: PendingResult;
   /** The state of pendingOptions. This represents the latest IdP test result. */
   pendingState?: "verified" | "pending" | "error";
 };
-type IDPOIDCOptions = {
+export type IDPOIDCOptions = {
   /** If true, the `offline_access` scope will not be requested from the IdP, where applicable. */
   blockOfflineAccessScope?: boolean;
   /** Mappings from claim name to an array of JSON pointers that point to locations in the claims from the IdP to retrieve the value from. */
@@ -278,27 +278,27 @@ type IDPOIDCOptions = {
   /** Scope that will be sent along with token requests to the IdP. */
   scope?: string;
 };
-type IDPPatchSchema = PatchOIDCPayload[] | PatchSAMLPayload[] | PatchJWTAuthPayload[];
-type IDPPostSchema = CreateOIDCPayload | CreateJWTAuthPayload | CreateSAMLPayload;
+export type IDPPatchSchema = PatchOIDCPayload[] | PatchSAMLPayload[] | PatchJWTAuthPayload[];
+export type IDPPostSchema = CreateOIDCPayload | CreateJWTAuthPayload | CreateSAMLPayload;
 /**
  * The protocol to be used for communicating with the identity provider. Valid values are `OIDC`, `SAML`, `jwtAuth`, and `qsefw-local-bearer-token`.
  */
-type IDPProtocol = "OIDC" | "SAML" | "jwtAuth" | "qsefw-local-bearer-token";
+export type IDPProtocol = "OIDC" | "SAML" | "jwtAuth" | "qsefw-local-bearer-token";
 /**
  * The identity provider to be used. If protocol is `OIDC`, the valid values are `auth0`, `okta`, `generic`, `salesforce`, `keycloak`, `adfs`, and `azureAD`. If protocol is `jwtAuth`, the valid value is `external`.
  */
-type IDPProvider = "auth0" | "okta" | "qlik" | "generic" | "salesforce" | "keycloak" | "adfs" | "external" | "azureAD";
+export type IDPProvider = "auth0" | "okta" | "qlik" | "generic" | "salesforce" | "keycloak" | "adfs" | "external" | "azureAD";
 /**
  * A SAML-compliant identity provider.
  */
-type IDPSAML = BaseIDP & {
+export type IDPSAML = BaseIDP & {
   options?: IDPSAMLOptions;
   pendingOptions?: IDPSAMLOptions;
   pendingResult?: PendingResult;
   /** The state of pendingOptions. This represents the latest IdP test result. */
   pendingState?: "verified" | "pending" | "error";
 };
-type IDPSAMLOptions = {
+export type IDPSAMLOptions = {
   /** Toggle to allow IdP initated login by the SAML IdP. */
   allowIdpInitiatedLogin?: boolean;
   /** The certificates used for validating signed responses. */
@@ -316,7 +316,7 @@ type IDPSAMLOptions = {
   /** Set of certificates used to sign SAMLRequest payloads. Not present in `pendingOptions`. */
   signingKeys?: SigningKey[];
 };
-type IDPsStatus = {
+export type IDPsStatus = {
   /** The number of active interactive IdPs. */
   active_interactive_idps_count?: number;
   /** A list of IdP metadata. */
@@ -332,7 +332,7 @@ type IDPsStatus = {
 /**
  * Contains pagination links.
  */
-type Links = {
+export type Links = {
   next?: {
     /** Link to the next page of items. */
     href?: string;
@@ -349,7 +349,7 @@ type Links = {
 /**
  * OpenID configuration
  */
-type OpenIDConfiguration = {
+export type OpenIDConfiguration = {
   /** OAuth 2.0 Authorization Endpoint */
   authorization_endpoint: string;
   /** URL at the OP to which an RP can perform a redirect to request that the End-User be logged out at the OP. */
@@ -368,7 +368,7 @@ type OpenIDConfiguration = {
 /**
  * A patch request for an identity provider using the `jwtAuth` protocol.
  */
-type PatchJWTAuthPayload = {
+export type PatchJWTAuthPayload = {
   /** The "operation" to be performed on a given IdP. */
   op: "replace";
   /** The "path" to the part of the IdP document. */
@@ -379,7 +379,7 @@ type PatchJWTAuthPayload = {
 /**
  * A patch request for an identity provider using the `OIDC` protocol.
  */
-type PatchOIDCPayload = {
+export type PatchOIDCPayload = {
   /** The "operation" to be performed on a given IdP. Currently supports a custom operation value called "promote-options" that allows the test configuration to be promoted to the current configuration used for login. */
   op: "replace" | "promote-options";
   /** The "path" to the part of the IdP document. */
@@ -390,7 +390,7 @@ type PatchOIDCPayload = {
 /**
  * A patch request for an identity provider using the `SAML` protocol. Supports a custom operation value called `promote-options` that allows the test configuration (`pendingOptions`) to be promoted to the live configuration (`options`) used for login.'
  */
-type PatchSAMLPayload = {
+export type PatchSAMLPayload = {
   /** The "operation" to be performed on a given IdP. */
   op: "replace" | "promote-options";
   /** The "path" to the part of the IdP document. */
@@ -398,7 +398,7 @@ type PatchSAMLPayload = {
   /** The "value" data type is dependent on the path value being used. */
   value?: unknown;
 };
-type PendingResult = {
+export type PendingResult = {
   /** A unique readable error message based on the error that has occurred. */
   error?: string;
   /** The claims retrieved from the external IdP. */
@@ -420,7 +420,7 @@ type PendingResult = {
   /** The status of the IdP configuration being tested. */
   status: "success" | "pending" | "error" | "claimsError" | "callbackError" | "tokenError" | "protocolError" | "networkError" | "configChangedDuringTestError";
 };
-type SigningKey = {
+export type SigningKey = {
   /** The certificate to be uploaded to the identity provider for verifying SAML requests. */
   certificate?: string;
   /** The reference ID for choosing this key pair. */
@@ -429,7 +429,7 @@ type SigningKey = {
 /**
  * Mappings from claim name to an array of JSON pointers that point to locations in the claims from the IdP to retrieve the value from.
  */
-type ClaimsMappingInteractive = {
+export type ClaimsMappingInteractive = {
   /** A list of JSON pointers used to map the user's client ID. */
   client_id?: string[];
   /** A list of JSON pointers used to map the user's email. */
@@ -452,7 +452,7 @@ type ClaimsMappingInteractive = {
 /**
  * Mappings from claim name to an array of JSON pointers that point to locations in the claims from the IdP to retrieve the value from.
  */
-type ClaimsMappingNonInteractive = {
+export type ClaimsMappingNonInteractive = {
   /** A list of JSON pointers used to map the user's client ID. */
   client_id?: string[];
   /** A list of JSON pointers used to map the user's subject. */
@@ -461,7 +461,7 @@ type ClaimsMappingNonInteractive = {
 /**
  * Mappings from claim name to an array of SAML attribute names that point to locations in the claims from the IdP to retrieve the value from.
  */
-type ClaimsMappingSAML = {
+export type ClaimsMappingSAML = {
   /** A list of SAML attributes used to map the user's email. */
   email: string[];
   /** A list of SAML attributes used to map the user's groups. */
@@ -476,7 +476,7 @@ type ClaimsMappingSAML = {
 /**
  * A decrypting key used to decrypt OIDC encrypted assertions
  */
-type DecryptingKey = {
+export type DecryptingKey = {
   /** The key's certificate in pem format */
   certificate?: string;
   /** The timestamp for when the decrypting key was created. */
@@ -500,7 +500,7 @@ type DecryptingKey = {
  * @param query an object with query parameters
  * @throws GetIdpsHttpError
  */
-declare function getIdps(query: {
+export declare function getIdps(query: {
   /** If provided, filters the results by the active field. */
   active?: boolean;
   /** The number of IdP entries to retrieve. */
@@ -510,14 +510,14 @@ declare function getIdps(query: {
   /** The previous page cursor. */
   prev?: string;
 }, options?: ApiCallOptions): Promise<GetIdpsHttpResponse>;
-type GetIdpsHttpResponse = {
+export type GetIdpsHttpResponse = {
   data: IDPArray;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetIdpsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetIdpsHttpResponse>;
 };
-type GetIdpsHttpError = {
+export type GetIdpsHttpError = {
   data: Errors;
   headers: Headers;
   status: 404;
@@ -528,13 +528,13 @@ type GetIdpsHttpError = {
  * @param body an object with the body content
  * @throws CreateIdpHttpError
  */
-declare function createIdp(body: IDPPostSchema, options?: ApiCallOptions): Promise<CreateIdpHttpResponse>;
-type CreateIdpHttpResponse = {
+export declare function createIdp(body: IDPPostSchema, options?: ApiCallOptions): Promise<CreateIdpHttpResponse>;
+export type CreateIdpHttpResponse = {
   data: IDP;
   headers: Headers;
   status: 201;
 };
-type CreateIdpHttpError = {
+export type CreateIdpHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 403;
@@ -544,13 +544,13 @@ type CreateIdpHttpError = {
  *
  * @throws GetIdpWellKnownMetaDataHttpError
  */
-declare function getIdpWellKnownMetaData(options?: ApiCallOptions): Promise<GetIdpWellKnownMetaDataHttpResponse>;
-type GetIdpWellKnownMetaDataHttpResponse = {
+export declare function getIdpWellKnownMetaData(options?: ApiCallOptions): Promise<GetIdpWellKnownMetaDataHttpResponse>;
+export type GetIdpWellKnownMetaDataHttpResponse = {
   data: unknown;
   headers: Headers;
   status: 200;
 };
-type GetIdpWellKnownMetaDataHttpError = {
+export type GetIdpWellKnownMetaDataHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -560,13 +560,13 @@ type GetIdpWellKnownMetaDataHttpError = {
  *
  * @throws GetMyIdpMetaHttpError
  */
-declare function getMyIdpMeta(options?: ApiCallOptions): Promise<GetMyIdpMetaHttpResponse>;
-type GetMyIdpMetaHttpResponse = {
+export declare function getMyIdpMeta(options?: ApiCallOptions): Promise<GetMyIdpMetaHttpResponse>;
+export type GetMyIdpMetaHttpResponse = {
   data: IDPMeta;
   headers: Headers;
   status: 200;
 };
-type GetMyIdpMetaHttpError = {
+export type GetMyIdpMetaHttpError = {
   data: Errors;
   headers: Headers;
   status: 403 | 404 | 500;
@@ -576,13 +576,13 @@ type GetMyIdpMetaHttpError = {
  *
  * @throws GetIdpStatusesHttpError
  */
-declare function getIdpStatuses(options?: ApiCallOptions): Promise<GetIdpStatusesHttpResponse>;
-type GetIdpStatusesHttpResponse = {
+export declare function getIdpStatuses(options?: ApiCallOptions): Promise<GetIdpStatusesHttpResponse>;
+export type GetIdpStatusesHttpResponse = {
   data: IDPsStatus;
   headers: Headers;
   status: 200;
 };
-type GetIdpStatusesHttpError = {
+export type GetIdpStatusesHttpError = {
   data: Errors;
   headers: Headers;
   status: 403 | 404 | 500;
@@ -593,13 +593,13 @@ type GetIdpStatusesHttpError = {
  * @param id The identity provider ID.
  * @throws DeleteIdpHttpError
  */
-declare function deleteIdp(id: string, options?: ApiCallOptions): Promise<DeleteIdpHttpResponse>;
-type DeleteIdpHttpResponse = {
+export declare function deleteIdp(id: string, options?: ApiCallOptions): Promise<DeleteIdpHttpResponse>;
+export type DeleteIdpHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteIdpHttpError = {
+export type DeleteIdpHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -610,13 +610,13 @@ type DeleteIdpHttpError = {
  * @param id The identity provider ID.
  * @throws GetIdpHttpError
  */
-declare function getIdp(id: string, options?: ApiCallOptions): Promise<GetIdpHttpResponse>;
-type GetIdpHttpResponse = {
+export declare function getIdp(id: string, options?: ApiCallOptions): Promise<GetIdpHttpResponse>;
+export type GetIdpHttpResponse = {
   data: IDP;
   headers: Headers;
   status: 200;
 };
-type GetIdpHttpError = {
+export type GetIdpHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 404;
@@ -628,13 +628,13 @@ type GetIdpHttpError = {
  * @param body an object with the body content
  * @throws PatchIdpHttpError
  */
-declare function patchIdp(id: string, body: IDPPatchSchema, options?: ApiCallOptions): Promise<PatchIdpHttpResponse>;
-type PatchIdpHttpResponse = {
+export declare function patchIdp(id: string, body: IDPPatchSchema, options?: ApiCallOptions): Promise<PatchIdpHttpResponse>;
+export type PatchIdpHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchIdpHttpError = {
+export type PatchIdpHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 412 | 500;
@@ -642,8 +642,8 @@ type PatchIdpHttpError = {
 /**
  * Clears the cache for identity-providers api requests.
  */
-declare function clearCache(): void;
-type IdentityProvidersAPI = {
+export declare function clearCache(): void;
+export type IdentityProvidersAPI = {
   /**
    * This endpoint retrieves any IdPs registered on the tenant.
    *
@@ -708,4 +708,4 @@ type IdentityProvidersAPI = {
  */
 declare const identityProvidersExport: IdentityProvidersAPI;
 //#endregion
-export { BaseIDP, CertificateInfo, ClaimsMappingInteractive, ClaimsMappingNonInteractive, ClaimsMappingSAML, CreateIdpHttpError, CreateIdpHttpResponse, CreateJWTAuthPayload, CreateOIDCPayload, CreateSAMLPayload, DecryptingKey, DeleteIdpHttpError, DeleteIdpHttpResponse, Error, Errors, GetIdpHttpError, GetIdpHttpResponse, GetIdpStatusesHttpError, GetIdpStatusesHttpResponse, GetIdpWellKnownMetaDataHttpError, GetIdpWellKnownMetaDataHttpResponse, GetIdpsHttpError, GetIdpsHttpResponse, GetMyIdpMetaHttpError, GetMyIdpMetaHttpResponse, IDP, IDPArray, IDPJWTAuth, IDPMeta, IDPOIDC, IDPOIDCOptions, IDPPatchSchema, IDPPostSchema, IDPProtocol, IDPProvider, IDPSAML, IDPSAMLOptions, IDPsStatus, IdentityProvidersAPI, Links, OpenIDConfiguration, PatchIdpHttpError, PatchIdpHttpResponse, PatchJWTAuthPayload, PatchOIDCPayload, PatchSAMLPayload, PendingResult, SigningKey, clearCache, createIdp, identityProvidersExport as default, deleteIdp, getIdp, getIdpStatuses, getIdpWellKnownMetaData, getIdps, getMyIdpMeta, patchIdp };
+export { identityProvidersExport as default };

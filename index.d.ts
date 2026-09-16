@@ -1,10 +1,10 @@
-import { d as HostConfig } from "./chunks/auth-types-o-bqAUAV.js";
+import { d as HostConfig } from "./chunks/auth-types-yKuw6LLB.js";
 import { InterceptorsAPI, createInterceptors } from "./interceptors.js";
 import { AuthAPI, getAccessToken, getWebResourceAuthParams, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig } from "./auth.js";
-import { t as QixAPI } from "./chunks/qix-D4o1rmTn.js";
+import { t as QixAPI } from "./chunks/qix-CnLwp1Tz.js";
 import { AppsAPI } from "./analytics/apps.js";
 import { ChangeStoresAPI } from "./analytics/change-stores.js";
-import { r as AdaptiveCardsAPI } from "./chunks/adaptive-cards-C4MRotI8.js";
+import { r as AdaptiveCardsAPI } from "./chunks/adaptive-cards-BnD5L1JE.js";
 import { DiscoveryAgentAPI } from "./analytics/discovery-agent.js";
 import { OdagAppsAPI } from "./analytics/odag-apps.js";
 import { OdagLinksAPI } from "./analytics/odag-links.js";
@@ -27,6 +27,7 @@ import { ConditionsAPI } from "./conditions.js";
 import { DataConnectionsAPI } from "./connectivity/data-connections.js";
 import { DataCredentialsAPI } from "./connectivity/data-credentials.js";
 import { DataSourcesAPI } from "./connectivity/data-sources.js";
+import { DirectAccessAgentsAPI } from "./connectivity/direct-access-agents.js";
 import { ConnectivityAPI } from "./connectivity.js";
 import { ConsumptionAPI } from "./consumption.js";
 import { AuthSettingsAPI } from "./core/auth-settings.js";
@@ -42,6 +43,7 @@ import { DataCredentialsAPI as DataCredentialsAPI$1 } from "./data-credentials.j
 import { DataFilesAPI as DataFilesAPI$1 } from "./data-files.js";
 import { DataProductsAPI } from "./data-governance/data-products.js";
 import { DataQualitiesAPI } from "./data-governance/data-qualities.js";
+import { SemanticTypesAPI } from "./data-governance/semantic-types.js";
 import { TrustScoresAPI } from "./data-governance/trust-scores.js";
 import { DataGovernanceAPI } from "./data-governance.js";
 import { DataQualitiesAPI as DataQualitiesAPI$1 } from "./data-qualities.js";
@@ -50,7 +52,7 @@ import { DataSourcesAPI as DataSourcesAPI$1 } from "./data-sources.js";
 import { DataStoresAPI } from "./data-stores.js";
 import { DcaasAPI } from "./dcaas.js";
 import { DiProjectsAPI } from "./di-projects.js";
-import { DirectAccessAgentsAPI } from "./direct-access-agents.js";
+import { DirectAccessAgentsAPI as DirectAccessAgentsAPI$1 } from "./direct-access-agents.js";
 import { EncryptionAPI } from "./encryption.js";
 import { ExtensionsAPI } from "./extensions.js";
 import { GlossariesAPI } from "./glossaries.js";
@@ -92,7 +94,7 @@ import { AutomationConnectorsAPI as AutomationConnectorsAPI$1 } from "./workflow
 import { AutomationsAPI as AutomationsAPI$1 } from "./workflows/automations.js";
 import { WorkflowsAPI } from "./workflows.js";
 //#region src/public/index.d.ts
-declare const auth: {
+export declare const auth: {
   registerAuthModule: typeof registerAuthModule;
   setDefaultHostConfig: typeof setDefaultHostConfig;
   registerHostConfig: typeof registerHostConfig;
@@ -100,13 +102,13 @@ declare const auth: {
   getAccessToken: typeof getAccessToken;
   getWebResourceAuthParams: typeof getWebResourceAuthParams;
 };
-declare const interceptors: InterceptorsAPI & {
+export declare const interceptors: InterceptorsAPI & {
   createInterceptors: typeof createInterceptors;
 };
-declare const qix: QixAPI & {
+export declare const qix: QixAPI & {
   withHostConfig: (hostConfig: HostConfig | undefined) => QixAPI;
 };
-declare const analytics: {
+export declare const analytics: {
   apps: AppsAPI;
   changeStores: ChangeStoresAPI;
   discoveryAgent: DiscoveryAgentAPI & {
@@ -117,92 +119,94 @@ declare const analytics: {
   odagRequests: OdagRequestsAPI;
   odagSettings: OdagSettingsAPI;
 };
-declare const apiKeys: ApiKeysAPI;
-declare const apps: AppsAPI$1;
-declare const assistants: AssistantsAPI;
-declare const audits: AuditsAPI;
-declare const automationConnections: AutomationConnectionsAPI;
-declare const automationConnectors: AutomationConnectorsAPI;
-declare const automations: AutomationsAPI;
-declare const automlDeployments: AutomlDeploymentsAPI;
-declare const automlPredictions: AutomlPredictionsAPI;
-declare const banners: BannersAPI;
-declare const brands: BrandsAPI;
-declare const collections: CollectionsAPI;
-declare const conditions: ConditionsAPI;
-declare const connectivity: {
+export declare const apiKeys: ApiKeysAPI;
+export declare const apps: AppsAPI$1;
+export declare const assistants: AssistantsAPI;
+export declare const audits: AuditsAPI;
+export declare const automationConnections: AutomationConnectionsAPI;
+export declare const automationConnectors: AutomationConnectorsAPI;
+export declare const automations: AutomationsAPI;
+export declare const automlDeployments: AutomlDeploymentsAPI;
+export declare const automlPredictions: AutomlPredictionsAPI;
+export declare const banners: BannersAPI;
+export declare const brands: BrandsAPI;
+export declare const collections: CollectionsAPI;
+export declare const conditions: ConditionsAPI;
+export declare const connectivity: {
   dataConnections: DataConnectionsAPI;
   dataCredentials: DataCredentialsAPI;
   dataSources: DataSourcesAPI;
+  directAccessAgents: DirectAccessAgentsAPI;
 };
-declare const consumption: ConsumptionAPI;
-declare const core: {
+export declare const consumption: ConsumptionAPI;
+export declare const core: {
   authSettings: AuthSettingsAPI;
   dataFiles: DataFilesAPI;
   ipPolicies: IpPoliciesAPI;
 };
-declare const cspOrigins: CspOriginsAPI;
-declare const csrfToken: CsrfTokenAPI;
-declare const dataAlerts: DataAlertsAPI;
-declare const dataAssets: DataAssetsAPI;
-declare const dataConnections: DataConnectionsAPI$1;
-declare const dataCredentials: DataCredentialsAPI$1;
-declare const dataFiles: DataFilesAPI$1;
-declare const dataGovernance: {
+export declare const cspOrigins: CspOriginsAPI;
+export declare const csrfToken: CsrfTokenAPI;
+export declare const dataAlerts: DataAlertsAPI;
+export declare const dataAssets: DataAssetsAPI;
+export declare const dataConnections: DataConnectionsAPI$1;
+export declare const dataCredentials: DataCredentialsAPI$1;
+export declare const dataFiles: DataFilesAPI$1;
+export declare const dataGovernance: {
   dataProducts: DataProductsAPI;
   dataQualities: DataQualitiesAPI;
+  semanticTypes: SemanticTypesAPI;
   trustScores: TrustScoresAPI;
 };
-declare const dataQualities: DataQualitiesAPI$1;
-declare const dataSets: DataSetsAPI;
-declare const dataSources: DataSourcesAPI$1;
-declare const dataStores: DataStoresAPI;
-declare const dcaas: DcaasAPI;
-declare const diProjects: DiProjectsAPI;
-declare const directAccessAgents: DirectAccessAgentsAPI;
-declare const encryption: EncryptionAPI;
-declare const extensions: ExtensionsAPI;
-declare const glossaries: GlossariesAPI;
-declare const groups: GroupsAPI;
-declare const identityProviders: IdentityProvidersAPI;
-declare const items: ItemsAPI;
-declare const knowledgebases: KnowledgebasesAPI;
-declare const licenses: LicensesAPI;
-declare const lineageGraphs: LineageGraphsAPI;
-declare const ml: MlAPI;
-declare const notes: NotesAPI;
-declare const notifications: NotificationsAPI;
-declare const oauthClients: OauthClientsAPI;
-declare const oauthTokens: OauthTokensAPI;
-declare const questions: QuestionsAPI;
-declare const quotas: QuotasAPI;
-declare const reloadTasks: ReloadTasksAPI;
-declare const reloads: ReloadsAPI;
-declare const reportTemplates: ReportTemplatesAPI;
-declare const reports: ReportsAPI;
-declare const roles: RolesAPI;
-declare const scheduling: {
+export declare const dataQualities: DataQualitiesAPI$1;
+export declare const dataSets: DataSetsAPI;
+export declare const dataSources: DataSourcesAPI$1;
+export declare const dataStores: DataStoresAPI;
+export declare const dcaas: DcaasAPI;
+export declare const diProjects: DiProjectsAPI;
+export declare const directAccessAgents: DirectAccessAgentsAPI$1;
+export declare const encryption: EncryptionAPI;
+export declare const extensions: ExtensionsAPI;
+export declare const glossaries: GlossariesAPI;
+export declare const groups: GroupsAPI;
+export declare const identityProviders: IdentityProvidersAPI;
+export declare const items: ItemsAPI;
+export declare const knowledgebases: KnowledgebasesAPI;
+export declare const licenses: LicensesAPI;
+export declare const lineageGraphs: LineageGraphsAPI;
+export declare const ml: MlAPI;
+export declare const notes: NotesAPI;
+export declare const notifications: NotificationsAPI;
+export declare const oauthClients: OauthClientsAPI;
+export declare const oauthTokens: OauthTokensAPI;
+export declare const questions: QuestionsAPI;
+export declare const quotas: QuotasAPI;
+export declare const reloadTasks: ReloadTasksAPI;
+export declare const reloads: ReloadsAPI;
+export declare const reportTemplates: ReportTemplatesAPI;
+export declare const reports: ReportsAPI;
+export declare const roles: RolesAPI;
+export declare const scheduling: {
   tasks: TasksAPI;
 };
-declare const sharingTasks: SharingTasksAPI;
-declare const spaces: SpacesAPI;
-declare const tasks: TasksAPI$1;
-declare const tempContents: TempContentsAPI;
-declare const tenantSettings: TenantSettingsAPI;
-declare const tenants: TenantsAPI;
-declare const themes: ThemesAPI;
-declare const transports: TransportsAPI;
-declare const uiConfig: UiConfigAPI;
-declare const users: UsersAPI;
-declare const webIntegrations: WebIntegrationsAPI;
-declare const webNotifications: WebNotificationsAPI;
-declare const webhooks: WebhooksAPI;
-declare const workflows: {
+export declare const sharingTasks: SharingTasksAPI;
+export declare const spaces: SpacesAPI;
+export declare const tasks: TasksAPI$1;
+export declare const tempContents: TempContentsAPI;
+export declare const tenantSettings: TenantSettingsAPI;
+export declare const tenants: TenantsAPI;
+export declare const themes: ThemesAPI;
+export declare const transports: TransportsAPI;
+export declare const uiConfig: UiConfigAPI;
+export declare const users: UsersAPI;
+export declare const webIntegrations: WebIntegrationsAPI;
+export declare const webNotifications: WebNotificationsAPI;
+export declare const webhooks: WebhooksAPI;
+export declare const workflows: {
   automationConnections: AutomationConnectionsAPI$1;
   automationConnectors: AutomationConnectorsAPI$1;
   automations: AutomationsAPI$1;
 };
-interface QlikAPI {
+export interface QlikAPI {
   /** Functions for the auth api */
   auth: AuthAPI;
   /** Functions for the interceptors api */
@@ -252,6 +256,7 @@ interface QlikAPI {
     dataConnections: DataConnectionsAPI;
     dataCredentials: DataCredentialsAPI;
     dataSources: DataSourcesAPI;
+    directAccessAgents: DirectAccessAgentsAPI;
   };
   /** Functions for the consumption api */
   consumption: ConsumptionAPI;
@@ -279,6 +284,7 @@ interface QlikAPI {
   dataGovernance: DataGovernanceAPI & {
     dataProducts: DataProductsAPI;
     dataQualities: DataQualitiesAPI;
+    semanticTypes: SemanticTypesAPI;
     trustScores: TrustScoresAPI;
   };
   /** Functions for the dataQualities api */
@@ -294,7 +300,7 @@ interface QlikAPI {
   /** Functions for the diProjects api */
   diProjects: DiProjectsAPI;
   /** Functions for the directAccessAgents api */
-  directAccessAgents: DirectAccessAgentsAPI;
+  directAccessAgents: DirectAccessAgentsAPI$1;
   /** Functions for the encryption api */
   encryption: EncryptionAPI;
   /** Functions for the extensions api */
@@ -374,10 +380,10 @@ interface QlikAPI {
     automations: AutomationsAPI$1;
   };
 }
-type CreateQlikApiProps = {
+export type CreateQlikApiProps = {
   hostConfig?: HostConfig;
 };
-declare const createQlikApi: (props?: CreateQlikApiProps) => QlikAPI;
+export declare const createQlikApi: (props?: CreateQlikApiProps) => QlikAPI;
 /** Javascript/Typescript bindings to Qlik's platform API's */
 declare const api: QlikAPI & {
   createQlikApi: (props?: {
@@ -385,4 +391,4 @@ declare const api: QlikAPI & {
   }) => QlikAPI;
 };
 //#endregion
-export { CreateQlikApiProps, QlikAPI, analytics, apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, connectivity, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataGovernance, dataQualities, dataSets, dataSources, dataStores, dcaas, api as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, scheduling, sharingTasks, spaces, tasks, tempContents, tenantSettings, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks, workflows };
+export { api as default };

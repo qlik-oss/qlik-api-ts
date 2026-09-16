@@ -1,27 +1,27 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/quotas.d.ts
 /**
  * A specific error.
  */
-type Error = {
+export type Error = {
   /** The error code. */
   code: string;
   /** Summary of the problem. */
   title: string;
 };
-type ErrorResponse = {
+export type ErrorResponse = {
   errors?: Error[];
 };
-type GetQuotaByIdResult = {
+export type GetQuotaByIdResult = {
   /** Quota item. */
   data: Quota[];
 };
-type GetQuotasResult = {
+export type GetQuotasResult = {
   /** Array of quota items. */
   data: Quota[];
 };
-type Quota = {
+export type Quota = {
   /** The attributes of the quota. */
   attributes: {
     /** The quota limit. If there is no quota limit, -1 is returned. */
@@ -44,16 +44,16 @@ type Quota = {
  * @param query an object with query parameters
  * @throws GetQuotasHttpError
  */
-declare function getQuotas(query: {
+export declare function getQuotas(query: {
   /** The Boolean flag indicating whether quota usage shall be part of the response. The default value is false (only limits returned). */
   reportUsage?: boolean;
 }, options?: ApiCallOptions): Promise<GetQuotasHttpResponse>;
-type GetQuotasHttpResponse = {
+export type GetQuotasHttpResponse = {
   data: GetQuotasResult;
   headers: Headers;
   status: 200;
 };
-type GetQuotasHttpError = {
+export type GetQuotasHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 401 | 500;
@@ -65,16 +65,16 @@ type GetQuotasHttpError = {
  * @param query an object with query parameters
  * @throws GetQuotaHttpError
  */
-declare function getQuota(id: string, query: {
+export declare function getQuota(id: string, query: {
   /** The Boolean flag indicating whether quota usage shall be part of the response. The default value is false (usage not included). */
   reportUsage?: boolean;
 }, options?: ApiCallOptions): Promise<GetQuotaHttpResponse>;
-type GetQuotaHttpResponse = {
+export type GetQuotaHttpResponse = {
   data: GetQuotaByIdResult;
   headers: Headers;
   status: 200;
 };
-type GetQuotaHttpError = {
+export type GetQuotaHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 401 | 404 | 500;
@@ -82,8 +82,8 @@ type GetQuotaHttpError = {
 /**
  * Clears the cache for quotas api requests.
  */
-declare function clearCache(): void;
-type QuotasAPI = {
+export declare function clearCache(): void;
+export type QuotasAPI = {
   /**
    * Returns all quota items for the tenant (provided in JWT).
    *
@@ -109,4 +109,4 @@ type QuotasAPI = {
  */
 declare const quotasExport: QuotasAPI;
 //#endregion
-export { Error, ErrorResponse, GetQuotaByIdResult, GetQuotaHttpError, GetQuotaHttpResponse, GetQuotasHttpError, GetQuotasHttpResponse, GetQuotasResult, Quota, QuotasAPI, clearCache, quotasExport as default, getQuota, getQuotas };
+export { quotasExport as default };
