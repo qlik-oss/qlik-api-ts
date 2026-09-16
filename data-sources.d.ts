@@ -1,7 +1,7 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/data-sources.d.ts
-type ApiSpecResponse = {
+export type ApiSpecResponse = {
   /** List of properties required for the given datasource */
   connectionProperties: unknown;
   /** Datasource provider */
@@ -12,7 +12,7 @@ type ApiSpecResponse = {
 /**
  * Datasource metadata
  */
-type ConnectorNodesInfo = {
+export type ConnectorNodesInfo = {
   /** List of datasource IDs provided by the provider */
   cachedDataSources?: string[];
   /** Contract type used to communicate with the connector (between 0 and 3) */
@@ -29,7 +29,7 @@ type ConnectorNodesInfo = {
 /**
  * Datasource metadata
  */
-type DataSourceNew = {
+export type DataSourceNew = {
   /** List of capabilities supported by the datasource */
   capabilities?: string[];
   /** Override value of dataload URL (could be null) */
@@ -56,18 +56,18 @@ type DataSourceNew = {
 /**
  * Defines configuration settings for a data source.
  */
-type DataSourceSettingsRequest = {
+export type DataSourceSettingsRequest = {
   /** Indicates whether the data source is disabled. */
   disabled: boolean;
 };
 /**
  * Represents the current settings of a data source.
  */
-type DataSourceSettingsResponse = {
+export type DataSourceSettingsResponse = {
   /** Indicates whether the data source is disabled. */
   disabled?: boolean;
 };
-type DataSourcesResponseNew = {
+export type DataSourcesResponseNew = {
   /** List of connector nodes (only present when query parameter 'detail' is set to true) */
   connectorNodes?: ConnectorNodesInfo[];
   /** List of datasources metadata object */
@@ -75,7 +75,7 @@ type DataSourcesResponseNew = {
   /** Time stamp of last updated */
   lastUpdated: string;
 };
-type PublicApiError = {
+export type PublicApiError = {
   /** A service specific error code string */
   code: string;
   /** Concrete detail about the error */
@@ -88,7 +88,7 @@ type PublicApiError = {
 /**
  * Qri definition template
  */
-type QriDefinition = {
+export type QriDefinition = {
   connectionPart: unknown & QriTemplate;
   itemPart?: unknown & {
     /** Prefix of the template */
@@ -104,19 +104,19 @@ type QriDefinition = {
 /**
  * Connection part of Qri template
  */
-type QriTemplate = {
+export type QriTemplate = {
   /** List of properties used in template */
   properties: string[];
   /** Qri template */
   template: string;
 };
-type ResponseErrors = {
+export type ResponseErrors = {
   errors?: PublicApiError[];
 };
 /**
  * UI related metadata (only present when 'includeui' is set to true in query)
  */
-type UiInfo = {
+export type UiInfo = {
   /** Connect URL */
   connectUrl?: string;
   /** Connector main URL */
@@ -149,7 +149,7 @@ type UiInfo = {
  * @param query an object with query parameters
  * @throws GetDataSourcesHttpError
  */
-declare function getDataSources(query: {
+export declare function getDataSources(query: {
   /** Filtering on datasourceID, when multiple dataSourceId are set in query, last dataSourceId will be used */
   dataSourceId?: string;
   /** Determines if provider detail is returned */
@@ -159,12 +159,12 @@ declare function getDataSources(query: {
   /** Determines if UI info is returned */
   includeui?: boolean;
 }, options?: ApiCallOptions): Promise<GetDataSourcesHttpResponse>;
-type GetDataSourcesHttpResponse = {
+export type GetDataSourcesHttpResponse = {
   data: DataSourcesResponseNew;
   headers: Headers;
   status: 200;
 };
-type GetDataSourcesHttpError = {
+export type GetDataSourcesHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 401 | 404 | 500;
@@ -179,13 +179,13 @@ type GetDataSourcesHttpError = {
  * @param dataSourceId Datasource ID
  * @throws GetDataSourceApiSpecsHttpError
  */
-declare function getDataSourceApiSpecs(dataSourceId: string, options?: ApiCallOptions): Promise<GetDataSourceApiSpecsHttpResponse>;
-type GetDataSourceApiSpecsHttpResponse = {
+export declare function getDataSourceApiSpecs(dataSourceId: string, options?: ApiCallOptions): Promise<GetDataSourceApiSpecsHttpResponse>;
+export type GetDataSourceApiSpecsHttpResponse = {
   data: ApiSpecResponse;
   headers: Headers;
   status: 200;
 };
-type GetDataSourceApiSpecsHttpError = {
+export type GetDataSourceApiSpecsHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 401 | 404 | 500 | 503;
@@ -204,11 +204,11 @@ type GetDataSourceApiSpecsHttpError = {
  * @param query an object with query parameters
  * @throws GetDataSourceGatewaysHttpError
  */
-declare function getDataSourceGateways(dataSourceId: string, query: {
+export declare function getDataSourceGateways(dataSourceId: string, query: {
   /** Force to get a refreshed list from backend. Cached list will be returned if not set or set to false. */
   forceRefresh?: boolean;
 }, options?: ApiCallOptions): Promise<GetDataSourceGatewaysHttpResponse>;
-type GetDataSourceGatewaysHttpResponse = {
+export type GetDataSourceGatewaysHttpResponse = {
   data: {
     /** List of gateway ID's for given datasource ID */
     gateways?: {
@@ -225,7 +225,7 @@ type GetDataSourceGatewaysHttpResponse = {
   headers: Headers;
   status: 200;
 };
-type GetDataSourceGatewaysHttpError = {
+export type GetDataSourceGatewaysHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 401 | 404 | 500;
@@ -240,13 +240,13 @@ type GetDataSourceGatewaysHttpError = {
  * @param dataSourceId Datasource ID
  * @throws GetDataSourceSettingsHttpError
  */
-declare function getDataSourceSettings(dataSourceId: string, options?: ApiCallOptions): Promise<GetDataSourceSettingsHttpResponse>;
-type GetDataSourceSettingsHttpResponse = {
+export declare function getDataSourceSettings(dataSourceId: string, options?: ApiCallOptions): Promise<GetDataSourceSettingsHttpResponse>;
+export type GetDataSourceSettingsHttpResponse = {
   data: DataSourceSettingsResponse;
   headers: Headers;
   status: 200;
 };
-type GetDataSourceSettingsHttpError = {
+export type GetDataSourceSettingsHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 401 | 404 | 500;
@@ -258,13 +258,13 @@ type GetDataSourceSettingsHttpError = {
  * @param body an object with the body content
  * @throws PutDataSourceSettingsHttpError
  */
-declare function putDataSourceSettings(dataSourceId: string, body: DataSourceSettingsRequest, options?: ApiCallOptions): Promise<PutDataSourceSettingsHttpResponse>;
-type PutDataSourceSettingsHttpResponse = {
+export declare function putDataSourceSettings(dataSourceId: string, body: DataSourceSettingsRequest, options?: ApiCallOptions): Promise<PutDataSourceSettingsHttpResponse>;
+export type PutDataSourceSettingsHttpResponse = {
   data: DataSourceSettingsResponse;
   headers: Headers;
   status: 200;
 };
-type PutDataSourceSettingsHttpError = {
+export type PutDataSourceSettingsHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 401 | 404 | 500;
@@ -272,8 +272,8 @@ type PutDataSourceSettingsHttpError = {
 /**
  * Clears the cache for data-sources api requests.
  */
-declare function clearCache(): void;
-type DataSourcesAPI = {
+export declare function clearCache(): void;
+export type DataSourcesAPI = {
   /**
    * Gets the list of data sources available on the node.
    * @example
@@ -345,4 +345,4 @@ type DataSourcesAPI = {
  */
 declare const dataSourcesExport: DataSourcesAPI;
 //#endregion
-export { ApiSpecResponse, ConnectorNodesInfo, DataSourceNew, DataSourceSettingsRequest, DataSourceSettingsResponse, DataSourcesAPI, DataSourcesResponseNew, GetDataSourceApiSpecsHttpError, GetDataSourceApiSpecsHttpResponse, GetDataSourceGatewaysHttpError, GetDataSourceGatewaysHttpResponse, GetDataSourceSettingsHttpError, GetDataSourceSettingsHttpResponse, GetDataSourcesHttpError, GetDataSourcesHttpResponse, PublicApiError, PutDataSourceSettingsHttpError, PutDataSourceSettingsHttpResponse, QriDefinition, QriTemplate, ResponseErrors, UiInfo, clearCache, dataSourcesExport as default, getDataSourceApiSpecs, getDataSourceGateways, getDataSourceSettings, getDataSources, putDataSourceSettings };
+export { dataSourcesExport as default };

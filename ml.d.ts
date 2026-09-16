@@ -1,10 +1,10 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/ml.d.ts
 /**
  * An error object
  */
-type APIError = {
+export type APIError = {
   /** Qlik error code (not HTTP response status code) */
   code: string;
   /** Description of the error */
@@ -30,7 +30,7 @@ type APIError = {
 /**
  * An AutoML alias
  */
-type Alias = {
+export type Alias = {
   /** Timestamp when this was created */
   createdAt: CreatedAt;
   /** ID of the owner/user that created this entity */
@@ -47,7 +47,7 @@ type Alias = {
   /** Timestamp when this was updated */
   updatedAt: UpdatedAt;
 };
-type AliasFindResponse = {
+export type AliasFindResponse = {
   data: {
     /** An AutoML alias */
     attributes: Alias;
@@ -60,7 +60,7 @@ type AliasFindResponse = {
   /** Meta for FIND operations */
   meta?: FindResponseMeta;
 };
-type AliasGetResponse = {
+export type AliasGetResponse = {
   data: {
     /** An AutoML alias */
     attributes: Alias;
@@ -72,11 +72,11 @@ type AliasGetResponse = {
 /**
  * ID of an alias
  */
-type AliasId = string;
+export type AliasId = string;
 /**
  * Input for creating a new alias
  */
-type AliasInput = {
+export type AliasInput = {
   data: {
     attributes: {
       models: ModelsInfo;
@@ -89,7 +89,7 @@ type AliasInput = {
 /**
  * The mode of an alias. Default mode means the model assigned to that alias will be used if alias is not specified
  */
-type AliasMode = "default" | "undefined";
+export type AliasMode = "default" | "undefined";
 /**
  * @example
  * [
@@ -103,11 +103,11 @@ type AliasMode = "default" | "undefined";
  *   }
  * ]
  */
-type AliasPatch = AliasPatchItem[];
+export type AliasPatch = AliasPatchItem[];
 /**
  * Alias values that can be patched.
  */
-type AliasPatchItem = {
+export type AliasPatchItem = {
   /** All patch requests use the replace operation */
   op: "replace";
   /** Path for the property you want to update */
@@ -115,7 +115,7 @@ type AliasPatchItem = {
   /** Use for fields that can be `any` type (string, number, etc.) */
   value: AnyType;
 };
-type AliasPostResponse = {
+export type AliasPostResponse = {
   data: {
     /** An AutoML alias */
     attributes: Alias;
@@ -127,11 +127,11 @@ type AliasPostResponse = {
 /**
  * Use for fields that can be `any` type (string, number, etc.)
  */
-type AnyType = unknown;
+export type AnyType = unknown;
 /**
  * A batch prediction job configuration
  */
-type BatchPrediction = {
+export type BatchPrediction = {
   /** ID of an alias */
   aliasId?: AliasId;
   /** Timestamp when this was created */
@@ -175,7 +175,7 @@ type BatchPrediction = {
 /**
  * Response for batch prediction predict action that indicates job and status
  */
-type BatchPredictionActionResponse = {
+export type BatchPredictionActionResponse = {
   data: {
     attributes: PredictionJobResponse;
     /** ID of this entity */
@@ -183,7 +183,7 @@ type BatchPredictionActionResponse = {
     type: "job";
   };
 };
-type BatchPredictionFindResponse = {
+export type BatchPredictionFindResponse = {
   data: {
     /** A batch prediction job configuration */
     attributes: BatchPrediction;
@@ -196,7 +196,7 @@ type BatchPredictionFindResponse = {
   /** Meta for FIND operations */
   meta?: FindResponseMeta;
 };
-type BatchPredictionGetResponse = {
+export type BatchPredictionGetResponse = {
   data: {
     /** A batch prediction job configuration */
     attributes: BatchPrediction;
@@ -208,7 +208,7 @@ type BatchPredictionGetResponse = {
 /**
  * Input values for creating a batch prediction configuration
  */
-type BatchPredictionInput = {
+export type BatchPredictionInput = {
   data?: {
     attributes?: {
       /** ID of an alias */
@@ -235,7 +235,7 @@ type BatchPredictionInput = {
     type?: "batch-prediction";
   };
 };
-type BatchPredictionPatch = {
+export type BatchPredictionPatch = {
   /** All patch requests use the replace operation */
   op: "replace";
   /** Path for the property you want to update */
@@ -243,7 +243,7 @@ type BatchPredictionPatch = {
   /** Use for fields that can be `any` type (string, number, etc.) */
   value: AnyType;
 }[];
-type BatchPredictionPostResponse = {
+export type BatchPredictionPostResponse = {
   data: {
     /** A batch prediction job configuration */
     attributes: BatchPrediction;
@@ -255,7 +255,7 @@ type BatchPredictionPostResponse = {
 /**
  * Batch prediction job schedule
  */
-type BatchPredictionSchedule = {
+export type BatchPredictionSchedule = {
   /** If true, only run prediction if dataset has changed to avoid
    * duplicates. If set to false, re-runs predictions on unchanged
    * datasets. */
@@ -279,7 +279,7 @@ type BatchPredictionSchedule = {
   /** Timezone used for the date-time fields */
   timezone?: string;
 };
-type BatchPredictionScheduleGetResponse = {
+export type BatchPredictionScheduleGetResponse = {
   data: {
     /** Batch prediction job schedule */
     attributes: BatchPredictionSchedule;
@@ -291,7 +291,7 @@ type BatchPredictionScheduleGetResponse = {
 /**
  * Input values for a batch prediction schedule
  */
-type BatchPredictionScheduleInput = {
+export type BatchPredictionScheduleInput = {
   data?: {
     /** Configuration to schedule a batch prediction */
     attributes?: BatchPredictionScheduleInputAttributes;
@@ -301,7 +301,7 @@ type BatchPredictionScheduleInput = {
 /**
  * Configuration to schedule a batch prediction
  */
-type BatchPredictionScheduleInputAttributes = {
+export type BatchPredictionScheduleInputAttributes = {
   /** If true, only run prediction if dataset has changed to avoid
    * duplicates. If set to false, re-runs predictions on unchanged
    * datasets. */
@@ -317,7 +317,7 @@ type BatchPredictionScheduleInputAttributes = {
   /** Timezone used for the date-time fields */
   timezone: string;
 };
-type BatchPredictionSchedulePatch = {
+export type BatchPredictionSchedulePatch = {
   /** All patch requests use the replace operation */
   op: "replace";
   /** Path for the property you want to update */
@@ -325,7 +325,7 @@ type BatchPredictionSchedulePatch = {
   /** Use for fields that can be `any` type (string, number, etc.) */
   value: AnyType;
 }[];
-type BatchPredictionSchedulePutResponse = {
+export type BatchPredictionSchedulePutResponse = {
   data: {
     /** Batch prediction job schedule */
     attributes: BatchPredictionSchedule;
@@ -337,7 +337,7 @@ type BatchPredictionSchedulePutResponse = {
 /**
  * Status of this batch prediction
  */
-type BatchPredictionStatus = "modified" | "ready" | "error" | "cancelled" | "pending";
+export type BatchPredictionStatus = "modified" | "ready" | "error" | "cancelled" | "pending";
 /**
  * Sets which files, file names, and spaces are used to write results of
  * batch predictions (output files) to the catalog.
@@ -345,7 +345,7 @@ type BatchPredictionStatus = "modified" | "ready" | "error" | "cancelled" | "pen
  * Note that for predictions based on time series models, `dstShapName`
  * and `dstCoordShapName` do not apply and will be ignored if set.
  */
-type BatchPredictionWriteback = {
+export type BatchPredictionWriteback = {
   dstCoordShapName?: string;
   dstName: string;
   dstNotPredictedName?: string;
@@ -357,7 +357,7 @@ type BatchPredictionWriteback = {
    * empty string ('') save them to your personal space. */
   spaceId: string;
 };
-type BinaryImbalanceSampling = {
+export type BinaryImbalanceSampling = {
   sampleClass?: string;
   sampleDirection?: "up" | "down";
   sampleRatio?: number;
@@ -365,7 +365,7 @@ type BinaryImbalanceSampling = {
 /**
  * A frequency bin in a field's frequency distribution.
  */
-type BinnedFrequency = {
+export type BinnedFrequency = {
   binEdge?: number;
   frequency?: number;
 };
@@ -373,38 +373,38 @@ type BinnedFrequency = {
  * Indicates if you want to change the featureType for this
  * feature within the experiment version
  */
-type ChangeType = "categorical" | "numeric" | "date" | "freetext";
-type ColumnTransform = {
+export type ChangeType = "categorical" | "numeric" | "date" | "freetext";
+export type ColumnTransform = {
   changeType: string;
   name: string;
 };
 /**
  * The ID of a correlated resource of corrType
  */
-type CorrId = string;
+export type CorrId = string;
 /**
  * Types names of correlated resources (batch 'prediction' and
  * experiment_version)
  */
-type CorrType = "batch-prediction" | "experiment-version";
+export type CorrType = "batch-prediction" | "experiment-version";
 /**
  * Timestamp when this was created
  */
-type CreatedAt = string;
+export type CreatedAt = string;
 /**
  * ID of the owner/user that created this entity.
  */
-type CreatedBy = string;
+export type CreatedBy = string;
 /**
  * The Qlik catalog dataset ID
  * @example
  * "672e55cfcadfb8a18281523e"
  */
-type DataSetId = string;
+export type DataSetId = string;
 /**
  * Full dataset profile from the Profile Service.
  */
-type DataSetProfile = {
+export type DataSetProfile = {
   /** Metadata about a dataset profile computation. */
   meta: ProfileMetadata;
   profiles?: TableProfile[];
@@ -415,27 +415,23 @@ type DataSetProfile = {
  * @example
  * "STRING"
  */
-type DataType = "DATE" | "TIME" | "DATETIME" | "TIMESTAMP" | "STRING" | "DOUBLE" | "DECIMAL" | "INTEGER" | "BOOLEAN" | "BINARY" | "CUSTOM" | "FLOAT" | "OBJECT";
+export type DataType = "DATE" | "TIME" | "DATETIME" | "TIMESTAMP" | "STRING" | "DOUBLE" | "DECIMAL" | "INTEGER" | "BOOLEAN" | "BINARY" | "CUSTOM" | "FLOAT" | "OBJECT";
 /**
  * Whether this is a new or other dataset
  */
-type DatasetOrigin = "new" | "changed" | "refreshed" | "same";
+export type DatasetOrigin = "new" | "changed" | "refreshed" | "same";
 /**
  * A optional date column name to index
  */
-type DateIndexes = string[];
-/**
- * Timestamp when this is deleted
- */
-type DeletedAt = string;
+export type DateIndexes = string[];
 /**
  * IDs of all models deployed to the deployment
  */
-type DeployedModelIds = string[];
+export type DeployedModelIds = string[];
 /**
  * Input values for adding deployed models to a deployment
  */
-type DeployedModelsInput = {
+export type DeployedModelsInput = {
   data: {
     attributes: {
       /** IDs of all models deployed to the deployment */
@@ -447,7 +443,7 @@ type DeployedModelsInput = {
 /**
  * A deployed model against which you can run predictions
  */
-type Deployment = {
+export type Deployment = {
   /** Timestamp when this was created */
   createdAt: CreatedAt;
   /** ID of the owner/user that created this entity. */
@@ -477,7 +473,7 @@ type Deployment = {
   /** Timestamp when this was updated */
   updatedAt: UpdatedAt;
 };
-type DeploymentFindResponse = {
+export type DeploymentFindResponse = {
   data: {
     /** A deployed model against which you can run predictions */
     attributes: Deployment;
@@ -490,7 +486,7 @@ type DeploymentFindResponse = {
   /** Meta for FIND operations */
   meta?: FindResponseMeta;
 };
-type DeploymentGetResponse = {
+export type DeploymentGetResponse = {
   data: {
     /** A deployed model against which you can run predictions */
     attributes: Deployment;
@@ -502,11 +498,11 @@ type DeploymentGetResponse = {
 /**
  * ID of a model deployment
  */
-type DeploymentId = string;
+export type DeploymentId = string;
 /**
  * Input for creating a new deployment
  */
-type DeploymentInput = {
+export type DeploymentInput = {
   data?: {
     attributes?: {
       /** Whether this deployment is deprecated */
@@ -525,7 +521,7 @@ type DeploymentInput = {
     type?: "deployment";
   };
 };
-type DeploymentPatch = {
+export type DeploymentPatch = {
   /** All patch requests use the replace operation */
   op: "replace";
   /** Path for the property you want to update */
@@ -533,7 +529,7 @@ type DeploymentPatch = {
   /** Use for fields that can be `any` type (string, number, etc.) */
   value: AnyType;
 }[];
-type DeploymentPostResponse = {
+export type DeploymentPostResponse = {
   data: {
     /** A deployed model against which you can run predictions */
     attributes: Deployment;
@@ -545,7 +541,7 @@ type DeploymentPostResponse = {
 /**
  * Feature dropped during preprocessing
  */
-type DroppedFeature = {
+export type DroppedFeature = {
   /** Name of dropped feature in the dataset */
   name?: string;
   /** Reason the feature was dropped */
@@ -554,33 +550,33 @@ type DroppedFeature = {
 /**
  * Description of this entity
  */
-type EntityDescription = string;
+export type EntityDescription = string;
 /**
  * ID of this entity
  */
-type EntityId = string;
+export type EntityId = string;
 /**
  * Name of this entity
  */
-type EntityName = string;
-type EnumSortAliases = "name" | "+name" | "-name";
-type EnumSortBatchPredictions = "createdAt" | "+createdAt" | "-createdAt" | "description" | "+description" | "-description" | "name" | "+name" | "-name" | "updatedAt" | "+updatedAt" | "-updatedAt";
-type EnumSortDeployments = "createdAt" | "+createdAt" | "-createdAt" | "name" | "+name" | "-name" | "updatedAt" | "+updatedAt" | "-updatedAt";
-type EnumSortExperimentVersions = "createdAt" | "+createdAt" | "-createdAt" | "description" | "+description" | "-description" | "experimentMode" | "+experimentMode" | "-experimentMode" | "experimentType" | "+experimentType" | "-experimentType" | "name" | "+name" | "-name" | "status" | "+status" | "-status" | "updatedAt" | "+updatedAt" | "-updatedAt" | "versionNumber" | "+versionNumber" | "-versionNumber";
-type EnumSortExperiments = "createdAt" | "+createdAt" | "-createdAt" | "description" | "+description" | "-description" | "name" | "+name" | "-name" | "updatedAt" | "+updatedAt" | "-updatedAt";
-type EnumSortModels = "createdAt" | "+createdAt" | "-createdAt" | "description" | "+description" | "-description" | "name" | "+name" | "-name" | "updatedAt" | "+updatedAt" | "-updatedAt";
+export type EntityName = string;
+export type EnumSortAliases = "name" | "+name" | "-name";
+export type EnumSortBatchPredictions = "createdAt" | "+createdAt" | "-createdAt" | "description" | "+description" | "-description" | "name" | "+name" | "-name" | "updatedAt" | "+updatedAt" | "-updatedAt";
+export type EnumSortDeployments = "createdAt" | "+createdAt" | "-createdAt" | "name" | "+name" | "-name" | "updatedAt" | "+updatedAt" | "-updatedAt";
+export type EnumSortExperimentVersions = "createdAt" | "+createdAt" | "-createdAt" | "description" | "+description" | "-description" | "experimentMode" | "+experimentMode" | "-experimentMode" | "experimentType" | "+experimentType" | "-experimentType" | "name" | "+name" | "-name" | "status" | "+status" | "-status" | "updatedAt" | "+updatedAt" | "-updatedAt" | "versionNumber" | "+versionNumber" | "-versionNumber";
+export type EnumSortExperiments = "createdAt" | "+createdAt" | "-createdAt" | "description" | "+description" | "-description" | "name" | "+name" | "-name" | "updatedAt" | "+updatedAt" | "-updatedAt";
+export type EnumSortModels = "createdAt" | "+createdAt" | "-createdAt" | "description" | "+description" | "-description" | "name" | "+name" | "-name" | "updatedAt" | "+updatedAt" | "-updatedAt";
 /**
  * JSON string of error object
  */
-type ErrorMessage = string;
+export type ErrorMessage = string;
 /**
  * JSON string with list of error objects
  */
-type Errors = APIError[];
+export type Errors = APIError[];
 /**
  * An AutoML experiment
  */
-type Experiment = {
+export type Experiment = {
   /** Timestamp when this was created */
   createdAt: CreatedAt;
   /** Description of this entity */
@@ -598,7 +594,7 @@ type Experiment = {
   /** Timestamp when this was updated */
   updatedAt: UpdatedAt;
 };
-type ExperimentFindResponse = {
+export type ExperimentFindResponse = {
   data: {
     /** An AutoML experiment */
     attributes: Experiment;
@@ -611,7 +607,7 @@ type ExperimentFindResponse = {
   /** Meta for FIND operations */
   meta?: FindResponseMeta;
 };
-type ExperimentGetResponse = {
+export type ExperimentGetResponse = {
   data: {
     /** An AutoML experiment */
     attributes: Experiment;
@@ -623,11 +619,11 @@ type ExperimentGetResponse = {
 /**
  * ID of the experiment
  */
-type ExperimentId = string;
+export type ExperimentId = string;
 /**
  * Input for creating this entity
  */
-type ExperimentInput = {
+export type ExperimentInput = {
   /** Data container for ExperimentInput */
   data?: {
     /** Experiment input attributes */
@@ -645,11 +641,11 @@ type ExperimentInput = {
 /**
  * The model training mode for the experiment version
  */
-type ExperimentMode = "intelligent" | "manual" | "manual_hpo";
+export type ExperimentMode = "intelligent" | "manual" | "manual_hpo";
 /**
  * Criteria to determine which pool of models to provide recommendations from
  */
-type ExperimentModelRecommendationFilter = {
+export type ExperimentModelRecommendationFilter = {
   /** The model algorithms to consider */
   algorithms?: ModelAlgorithm[];
   /** Whether to only consider models that are already deployed */
@@ -659,7 +655,7 @@ type ExperimentModelRecommendationFilter = {
   /** The versionNumbers of the experiment versions to consider models from */
   versionNumbers?: number[];
 };
-type ExperimentModelRecommendationPostResponse = {
+export type ExperimentModelRecommendationPostResponse = {
   data: {
     /** Model recommendations */
     attributes: {
@@ -687,11 +683,11 @@ type ExperimentModelRecommendationPostResponse = {
  *   }
  * ]
  */
-type ExperimentPatch = ExperimentPatchItem[];
+export type ExperimentPatch = ExperimentPatchItem[];
 /**
  * Experiment fields that can be patched. The following paths all require `value` to be a string: `/name`, `/spaceId`, and `/description`
  */
-type ExperimentPatchItem = {
+export type ExperimentPatchItem = {
   /** All patch requests use the replace operation */
   op: "replace";
   /** Path for the property you want to update */
@@ -699,7 +695,7 @@ type ExperimentPatchItem = {
   /** Use for fields that can be `any` type (string, number, etc.) */
   value: AnyType;
 };
-type ExperimentPostResponse = {
+export type ExperimentPostResponse = {
   data: {
     /** An AutoML experiment */
     attributes: Experiment;
@@ -711,12 +707,12 @@ type ExperimentPostResponse = {
 /**
  * Experiment type
  */
-type ExperimentType = "binary" | "multiclass" | "regression";
+export type ExperimentType = "binary" | "multiclass" | "regression";
 /**
  * An AutoML experiment version. This is a configuration for training
  * models within an experiment.
  */
-type ExperimentVersion = {
+export type ExperimentVersion = {
   /** List of algorithms selected for model training in this version */
   algorithms?: ModelAlgorithm[];
   /** Timestamp when this was created */
@@ -772,7 +768,7 @@ type ExperimentVersion = {
   /** 1-based sequential version number within the experiment */
   versionNumber?: number;
 };
-type ExperimentVersionFindResponse = {
+export type ExperimentVersionFindResponse = {
   data: {
     /** An AutoML experiment version. This is a configuration for training
      * models within an experiment. */
@@ -786,7 +782,7 @@ type ExperimentVersionFindResponse = {
   /** Meta for FIND operations */
   meta?: FindResponseMeta;
 };
-type ExperimentVersionGetResponse = {
+export type ExperimentVersionGetResponse = {
   data: {
     /** An AutoML experiment version. This is a configuration for training
      * models within an experiment. */
@@ -799,12 +795,12 @@ type ExperimentVersionGetResponse = {
 /**
  * ID of the experiment version
  */
-type ExperimentVersionId = string;
+export type ExperimentVersionId = string;
 /**
  * Input for creating a new experiment version. Defaults provided in the
  * ProfileInsights response.
  */
-type ExperimentVersionInput = {
+export type ExperimentVersionInput = {
   data: {
     attributes: {
       /** Algorithms used for model training in this version. See
@@ -843,7 +839,7 @@ type ExperimentVersionInput = {
     type: "experiment-version";
   };
 };
-type ExperimentVersionPatch = {
+export type ExperimentVersionPatch = {
   /** All patch requests use the replace operation */
   op: "replace";
   /** Path for the properties you can update. */
@@ -851,7 +847,7 @@ type ExperimentVersionPatch = {
   /** Use for fields that can be `any` type (string, number, etc.) */
   value: AnyType;
 }[];
-type ExperimentVersionPostResponse = {
+export type ExperimentVersionPostResponse = {
   data: {
     /** An AutoML experiment version. This is a configuration for training
      * models within an experiment. */
@@ -861,14 +857,14 @@ type ExperimentVersionPostResponse = {
     type: "experiment-version";
   };
 };
-type Failure = {
+export type Failure = {
   errors: APIError[];
   traceId?: string;
 };
 /**
  * A feature (column) from your dataset
  */
-type Feature = {
+export type Feature = {
   /** Indicates if you want to change the featureType for this
    * feature within the experiment version */
   changeType?: ChangeType;
@@ -891,7 +887,7 @@ type Feature = {
  * Metadata about the features in your dataset, generated when you create
  * ProfileInsights.
  */
-type FeatureInsights = {
+export type FeatureInsights = {
   /** Whether a feature cannot be the target field */
   cannotBeTarget: boolean;
   /** The default feature type based on the feature's data type.
@@ -924,18 +920,18 @@ type FeatureInsights = {
  * If you want a value to be interpreted differently (e.g. 0/1
  * as categorical/boolean instead of numeric), use `changeType`.
  */
-type FeatureType = "categorical" | "numeric" | "date" | "freetext";
+export type FeatureType = "categorical" | "numeric" | "date" | "freetext";
 /**
  * List of features from your dataset for creating Experiment
  * Versions. This appears in from ProfileInsights response (in the
  * defaultVersionConfig). You can adjust the default settings before
  * using it as input to create or update Experiment Versions.
  */
-type FeaturesList = Feature[];
+export type FeaturesList = Feature[];
 /**
  * Profile metadata for a single field/column.
  */
-type FieldProfile = {
+export type FieldProfile = {
   average?: number;
   averageStringLength?: number;
   /** Classification metadata for a field. */
@@ -976,11 +972,11 @@ type FieldProfile = {
  * @example
  * "qvd, parquet, csv"
  */
-type FileType = string;
+export type FileType = string;
 /**
  * Meta for FIND operations
  */
-type FindResponseMeta = {
+export type FindResponseMeta = {
   count: number;
 };
 /**
@@ -992,24 +988,24 @@ type FindResponseMeta = {
  * @example
  * "dataSetProfile"
  */
-type IncludeProfileInsightsField = "dataSetProfile";
+export type IncludeProfileInsightsField = "dataSetProfile";
 /**
  * A optional column name upon which to create an index. Must be unique for
  * every row. If not included, Qlik will create a unique index column.
  */
-type IndexColumn = string;
+export type IndexColumn = string;
 /**
  * Insights about a feature, such as why it's not included in a model
  */
-type Insights = "constant" | "high_cardinality" | "high_cardinality_integer" | "too_many_nulls" | "will_be_impact_encoded" | "will_be_one_hot_encoded" | "possible_free_text_encoded" | "valid_index" | "underrepresented_class" | "invalid_column_name" | "will_be_date_engineered";
+export type Insights = "constant" | "high_cardinality" | "high_cardinality_integer" | "too_many_nulls" | "will_be_impact_encoded" | "will_be_one_hot_encoded" | "possible_free_text_encoded" | "valid_index" | "underrepresented_class" | "invalid_column_name" | "will_be_date_engineered";
 /**
  * The type for this job
  */
-type JobType = "prediction";
+export type JobType = "prediction";
 /**
  * A model based on an algorithm within an experiment version.
  */
-type Model = {
+export type Model = {
   /** Model algorithm name abbreviation */
   algoAbbrv?: ModelAlgorithmAbbreviation;
   /** The algorithm used by this model */
@@ -1065,12 +1061,12 @@ type Model = {
  * it tells you which algorithms will be available if you choose it as your
  * target.
  */
-type ModelAlgorithm = "catboost_classifier" | "catboost_regression" | "elasticnet_regression" | "gaussian_nb" | "kneighbors_classifier" | "lasso_regression" | "lasso" | "lgbm_classifier" | "lgbm_regression" | "linear_regression" | "logistic_regression" | "random_forest_classifier" | "random_forest_regression" | "sgd_regression" | "xgb_classifier" | "xgb_regression";
+export type ModelAlgorithm = "catboost_classifier" | "catboost_regression" | "elasticnet_regression" | "gaussian_nb" | "kneighbors_classifier" | "lasso_regression" | "lasso" | "lgbm_classifier" | "lgbm_regression" | "linear_regression" | "logistic_regression" | "random_forest_classifier" | "random_forest_regression" | "sgd_regression" | "xgb_classifier" | "xgb_regression";
 /**
  * Model algorithm name abbreviation
  */
-type ModelAlgorithmAbbreviation = "CATBC" | "CATBR" | "ELNC" | "GNBC" | "LGBMC" | "LGBMR" | "LINR" | "LOGC" | "LSOC" | "RAFC" | "RAFR" | "SGDR" | "XGBC" | "XGBR";
-type ModelFindResponse = {
+export type ModelAlgorithmAbbreviation = "CATBC" | "CATBR" | "ELNC" | "GNBC" | "LGBMC" | "LGBMR" | "LINR" | "LOGC" | "LSOC" | "RAFC" | "RAFR" | "SGDR" | "XGBC" | "XGBR";
+export type ModelFindResponse = {
   data: {
     /** A model based on an algorithm within an experiment version. */
     attributes: Model;
@@ -1083,13 +1079,13 @@ type ModelFindResponse = {
   /** Meta for FIND operations */
   meta?: FindResponseMeta;
 };
-type ModelForRecommendations = Model & {
+export type ModelForRecommendations = Model & {
   metrics?: {
     /** This represents model prediction speed in rows/second */
     predictionSpeed: number | null;
   };
 };
-type ModelGetResponse = {
+export type ModelGetResponse = {
   data: {
     /** A model based on an algorithm within an experiment version. */
     attributes: Model;
@@ -1101,18 +1097,18 @@ type ModelGetResponse = {
 /**
  * ID of the model
  */
-type ModelId = string;
+export type ModelId = string;
 /**
  * Model information stored on an alias
  */
-type ModelInfo = {
+export type ModelInfo = {
   /** ID of this entity */
   id?: EntityId;
 };
 /**
  * Model metrics based on the type of model
  */
-type ModelMetrics = {
+export type ModelMetrics = {
   /** Binary metrics for categorical values with two options. Details:
    * https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/AutoML/scoring-binary-classification.htm */
   binary?: ModelMetricsBinary;
@@ -1129,7 +1125,7 @@ type ModelMetrics = {
  * Binary metrics for categorical values with two options. Details:
  * https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/AutoML/scoring-binary-classification.htm
  */
-type ModelMetricsBinary = {
+export type ModelMetricsBinary = {
   /** Average measure of how often the model made correct predictions
    * (training data) */
   accuracy?: number;
@@ -1203,7 +1199,7 @@ type ModelMetricsBinary = {
  * Multiclass metrics for categorical values with 3+ options. Details:
  * https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/AutoML/scoring-multiclass-classification.htm
  */
-type ModelMetricsMulticlass = {
+export type ModelMetricsMulticlass = {
   /** Average of how often the model made a correct prediction (training
    * data) */
   accuracy?: number;
@@ -1236,7 +1232,7 @@ type ModelMetricsMulticlass = {
  * Regression metrics for numeric values. Details:
  * https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/AutoML/scoring-regression.htm
  */
-type ModelMetricsRegression = {
+export type ModelMetricsRegression = {
   /** Mean absolute error (training data) */
   mae?: number;
   /** Mean absolute error (test data) */
@@ -1257,7 +1253,7 @@ type ModelMetricsRegression = {
 /**
  * Timeseries metrics experiments valid for timeseries forecasting.
  */
-type ModelMetricsTimeseries = {
+export type ModelMetricsTimeseries = {
   /** Mean absolute error (training data) */
   mae?: number;
   /** Mean absolute error (test data) */
@@ -1299,14 +1295,14 @@ type ModelMetricsTimeseries = {
  * Model state. These are the state of the model in relation to
  * deployments.
  */
-type ModelState = "pending" | "enabled" | "disabled" | "inactive";
+export type ModelState = "pending" | "enabled" | "disabled" | "inactive";
 /**
  * Model status. These are the status of the model in relation to
  * experiments (i.e. training status).
  */
-type ModelStatus = "pending" | "training_requested" | "training_done" | "ready" | "error";
-type ModelsInfo = ModelInfo[];
-type OutputFile = {
+export type ModelStatus = "pending" | "training_requested" | "training_done" | "ready" | "error";
+export type ModelsInfo = ModelInfo[];
+export type OutputFile = {
   fileName: string;
   /** Dataset file type */
   fileType: FileType;
@@ -1318,19 +1314,19 @@ type OutputFile = {
 /**
  * ID of owner/user for this entity
  */
-type OwnerId = string;
+export type OwnerId = string;
 /**
  * ID of the current job's parent
  */
-type ParentJobId = string;
+export type ParentJobId = string;
 /**
  * Pipeline metadata including transformations to apply to columns and
  * specific schema configuration data
  */
-type Pipeline = {
+export type Pipeline = {
   transforms?: Transform[];
 };
-type PredictionJobResponse = {
+export type PredictionJobResponse = {
   /** The ID of a correlated resource of corrType */
   corrId: CorrId;
   /** Types names of correlated resources (batch 'prediction' and
@@ -1341,15 +1337,15 @@ type PredictionJobResponse = {
   /** ID of the owner/user that created this entity */
   createdBy: string;
   /** Timestamp when this is deleted */
-  deletedAt: DeletedAt;
+  deletedAt: string | null;
   /** ID of a model deployment */
   deploymentId: DeploymentId;
   details: {
     isScheduled: boolean;
-    lineageSchemaUpdated: boolean;
+    lineageSchemaUpdated?: boolean;
     outputFiles: OutputFile[];
   };
-  experimentVersionNumber: string;
+  experimentVersionNumber?: string;
   /** ID of this entity */
   id: EntityId;
   /** The type for this job */
@@ -1358,12 +1354,12 @@ type PredictionJobResponse = {
   modelId: ModelId;
   name: string;
   /** ID of the current job's parent */
-  parentJobId: ParentJobId;
+  parentJobId?: ParentJobId;
   parentName: string;
-  rowsPredicted: number;
+  rowsPredicted?: number;
   /** Status of this job */
   status: "pending" | "completed" | "cancelled" | "error" | "deleted_resource";
-  success: boolean;
+  success: boolean | null;
   /** Tenant ID for this entity */
   tenantId: TenantId;
   trigger: string;
@@ -1373,7 +1369,7 @@ type PredictionJobResponse = {
 /**
  * Metadata about features/columns from dataset after preprocessing
  */
-type PreprocessedInsightColumn = {
+export type PreprocessedInsightColumn = {
   /** Preliminary list of column/feature insights available after
    * preprocessing but before feature insights are available */
   insights: ("is_free_text" | "cannot_be_processed_as_free_text" | "is_date_engineered" | "has_target_leakage" | "feature_type_change_invalid" | "feature_type_change_failed" | "feature_type_change_successful" | "data_bias_detected" | "representation_bias_detected")[];
@@ -1386,7 +1382,7 @@ type PreprocessedInsightColumn = {
 /**
  * Classification metadata for a field.
  */
-type ProfileClassification = {
+export type ProfileClassification = {
   obfuscation?: string;
   pii?: boolean;
   sensitive?: boolean;
@@ -1395,21 +1391,21 @@ type ProfileClassification = {
 /**
  * A classification tag with a confidence score.
  */
-type ProfileClassificationTag = {
+export type ProfileClassificationTag = {
   score?: number;
   tag?: string;
 };
 /**
  * A value and its frequency count.
  */
-type ProfileFrequency = {
+export type ProfileFrequency = {
   frequency?: number;
   value?: string;
 };
 /**
  * Insights (metadata) about an experiment dataset
  */
-type ProfileInsights = {
+export type ProfileInsights = {
   /** List of algorithms available for the selected experiment type */
   algorithms?: ModelAlgorithm[];
   /** Full dataset profile from the Profile Service. */
@@ -1456,7 +1452,7 @@ type ProfileInsights = {
   /** Tenant ID for this entity */
   tenantId: TenantId;
 };
-type ProfileInsightsGetResponse = {
+export type ProfileInsightsGetResponse = {
   data: {
     /** Insights (metadata) about an experiment dataset */
     attributes: ProfileInsights;
@@ -1469,7 +1465,7 @@ type ProfileInsightsGetResponse = {
  * Input to get dataset and feature metadata needed to create
  * experiment versions
  */
-type ProfileInsightsInput = {
+export type ProfileInsightsInput = {
   /** Data wrapper for request input */
   data?: {
     /** The request body for this resource */
@@ -1495,7 +1491,7 @@ type ProfileInsightsInput = {
 /**
  * Metadata about a dataset profile computation.
  */
-type ProfileMetadata = {
+export type ProfileMetadata = {
   computationEndTime?: string;
   computationStartTime?: string;
   connectionId?: string;
@@ -1507,18 +1503,18 @@ type ProfileMetadata = {
   resultType?: "NORMAL" | "BASIC" | "BASIC_TOO_LARGE";
   status: "FINISHED" | "PARTIAL" | "QUEUED" | "RUNNING" | "STALE" | "CANCELLED" | "FAILED" | "INCOMPLETE" | "DEFERRED";
 };
-type RealTimePredictionInputSchema = {
+export type RealTimePredictionInputSchema = {
   /** The name of a feature in the dataset */
   name?: string;
 };
-type RealTimePredictionSchema = {
+export type RealTimePredictionSchema = {
   /** The name of a feature in the dataset */
   name?: string;
 };
 /**
  * Input values for creating realtime predictions
  */
-type RealtimePrediction = {
+export type RealtimePrediction = {
   data?: {
     attributes?: {
       /** Rows of the dataset from which to produce predictions */
@@ -1532,7 +1528,7 @@ type RealtimePrediction = {
 /**
  * Input values for creating realtime predictions
  */
-type RealtimePredictionInput = {
+export type RealtimePredictionInput = {
   /** Rows of the dataset from which to produce predictions.
    * Date features must be in ISO 8601 format. */
   rows?: string[][];
@@ -1542,7 +1538,7 @@ type RealtimePredictionInput = {
 /**
  * Resource links included in paginated responses
  */
-type ResponseLinks = {
+export type ResponseLinks = {
   first: {
     /** Link to the first set of responses from `offset` 0 to count `limit`` */
     href?: string;
@@ -1568,11 +1564,11 @@ type ResponseLinks = {
 /**
  * Space ID for this entity (empty string for personal space)
  */
-type SpaceId = string;
+export type SpaceId = string;
 /**
  * Profile metadata for a single table/dataset.
  */
-type TableProfile = {
+export type TableProfile = {
   fieldProfiles: FieldProfile[];
   name: string;
   numberOfRows: number;
@@ -1581,13 +1577,13 @@ type TableProfile = {
 /**
  * A single record of sample values.
  */
-type TableRecord = {
+export type TableRecord = {
   values?: string[];
 };
 /**
  * Sample values from a table/dataset.
  */
-type TableSample = {
+export type TableSample = {
   fieldNames?: string[];
   name?: string;
   records?: TableRecord[];
@@ -1595,19 +1591,19 @@ type TableSample = {
 /**
  * Tenant ID for this entity
  */
-type TenantId = string;
+export type TenantId = string;
 /**
  * Optional training duration in seconds. If not provided, max value used.
  * If provided, min 900 (15m) and max 21600 (6h).
  */
-type TrainingDuration = number;
-type Transform = {
+export type TrainingDuration = number;
+export type Transform = {
   column?: ColumnTransform;
 };
 /**
  * Timestamp when this was updated
  */
-type UpdatedAt = string;
+export type UpdatedAt = string;
 /**
  * List deployments
  * @example
@@ -1622,7 +1618,7 @@ type UpdatedAt = string;
  * @param query an object with query parameters
  * @throws GetMlDeploymentsHttpError
  */
-declare function getMlDeployments(query: {
+export declare function getMlDeployments(query: {
   /** Deployment fields by which you can filter responses.<br><br>
    * - `spaceId` ID string (or empty string for personal space) - ID of space in which deployment(s) exist
    * - `modelId` UUID string - By model ID
@@ -1643,14 +1639,14 @@ declare function getMlDeployments(query: {
   /** Field(s) by which to sort response */
   sort?: EnumSortDeployments;
 }, options?: ApiCallOptions): Promise<GetMlDeploymentsHttpResponse>;
-type GetMlDeploymentsHttpResponse = {
+export type GetMlDeploymentsHttpResponse = {
   data: DeploymentFindResponse;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetMlDeploymentsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetMlDeploymentsHttpResponse>;
 };
-type GetMlDeploymentsHttpError = {
+export type GetMlDeploymentsHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -1661,13 +1657,13 @@ type GetMlDeploymentsHttpError = {
  * @param body an object with the body content
  * @throws CreateMlDeploymentHttpError
  */
-declare function createMlDeployment(body: DeploymentInput, options?: ApiCallOptions): Promise<CreateMlDeploymentHttpResponse>;
-type CreateMlDeploymentHttpResponse = {
+export declare function createMlDeployment(body: DeploymentInput, options?: ApiCallOptions): Promise<CreateMlDeploymentHttpResponse>;
+export type CreateMlDeploymentHttpResponse = {
   data: DeploymentPostResponse;
   headers: Headers;
   status: 201;
 };
-type CreateMlDeploymentHttpError = {
+export type CreateMlDeploymentHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -1678,13 +1674,13 @@ type CreateMlDeploymentHttpError = {
  * @param deploymentId ID of the deployment
  * @throws DeleteMlDeploymentHttpError
  */
-declare function deleteMlDeployment(deploymentId: string, options?: ApiCallOptions): Promise<DeleteMlDeploymentHttpResponse>;
-type DeleteMlDeploymentHttpResponse = {
+export declare function deleteMlDeployment(deploymentId: string, options?: ApiCallOptions): Promise<DeleteMlDeploymentHttpResponse>;
+export type DeleteMlDeploymentHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteMlDeploymentHttpError = {
+export type DeleteMlDeploymentHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -1695,13 +1691,13 @@ type DeleteMlDeploymentHttpError = {
  * @param deploymentId ID of the deployment
  * @throws GetMlDeploymentHttpError
  */
-declare function getMlDeployment(deploymentId: string, options?: ApiCallOptions): Promise<GetMlDeploymentHttpResponse>;
-type GetMlDeploymentHttpResponse = {
+export declare function getMlDeployment(deploymentId: string, options?: ApiCallOptions): Promise<GetMlDeploymentHttpResponse>;
+export type GetMlDeploymentHttpResponse = {
   data: DeploymentGetResponse;
   headers: Headers;
   status: 200;
 };
-type GetMlDeploymentHttpError = {
+export type GetMlDeploymentHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -1713,47 +1709,55 @@ type GetMlDeploymentHttpError = {
  * @param body an object with the body content
  * @throws PatchMlDeploymentHttpError
  */
-declare function patchMlDeployment(deploymentId: string, body: DeploymentPatch, options?: ApiCallOptions): Promise<PatchMlDeploymentHttpResponse>;
-type PatchMlDeploymentHttpResponse = {
+export declare function patchMlDeployment(deploymentId: string, body: DeploymentPatch, options?: ApiCallOptions): Promise<PatchMlDeploymentHttpResponse>;
+export type PatchMlDeploymentHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchMlDeploymentHttpError = {
+export type PatchMlDeploymentHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
 };
 /**
- * Activate the model for this deployment
+ * Activates the deployed model on this deployment's default alias. The
+ * response reports which model was targeted and whether its state
+ * actually changed via the `qlik-model-id` and `qlik-state-change`
+ * response headers. If the model was already active, the request still
+ * succeeds but `qlik-state-change` is `NO_CHANGE`.
  *
  * @param deploymentId ID of the deployment
  * @throws ActivateModelsMlDeploymentHttpError
  */
-declare function activateModelsMlDeployment(deploymentId: string, options?: ApiCallOptions): Promise<ActivateModelsMlDeploymentHttpResponse>;
-type ActivateModelsMlDeploymentHttpResponse = {
+export declare function activateModelsMlDeployment(deploymentId: string, options?: ApiCallOptions): Promise<ActivateModelsMlDeploymentHttpResponse>;
+export type ActivateModelsMlDeploymentHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type ActivateModelsMlDeploymentHttpError = {
+export type ActivateModelsMlDeploymentHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
 };
 /**
- * Deactivate the model for this deployment
+ * Deactivates the deployed model on this deployment's default alias.
+ * The response reports which model was targeted and whether its state
+ * actually changed via the `qlik-model-id` and `qlik-state-change`
+ * response headers. If the model was already inactive, the request
+ * still succeeds but `qlik-state-change` is `NO_CHANGE`.
  *
  * @param deploymentId ID of the deployment
  * @throws DeactivateModelsMlDeploymentHttpError
  */
-declare function deactivateModelsMlDeployment(deploymentId: string, options?: ApiCallOptions): Promise<DeactivateModelsMlDeploymentHttpResponse>;
-type DeactivateModelsMlDeploymentHttpResponse = {
+export declare function deactivateModelsMlDeployment(deploymentId: string, options?: ApiCallOptions): Promise<DeactivateModelsMlDeploymentHttpResponse>;
+export type DeactivateModelsMlDeploymentHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeactivateModelsMlDeploymentHttpError = {
+export type DeactivateModelsMlDeploymentHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -1765,7 +1769,7 @@ type DeactivateModelsMlDeploymentHttpError = {
  * @param query an object with query parameters
  * @throws GetMlDeploymentAliasesHttpError
  */
-declare function getMlDeploymentAliases(deploymentId: string, query: {
+export declare function getMlDeploymentAliases(deploymentId: string, query: {
   /** Alias fields by which you can filter responses
    * - `name` string - Aliases with exact name
    * - `modelId` UUID string - By model ID
@@ -1778,14 +1782,14 @@ declare function getMlDeploymentAliases(deploymentId: string, query: {
   /** Field(s) by which to sort response */
   sort?: EnumSortAliases;
 }, options?: ApiCallOptions): Promise<GetMlDeploymentAliasesHttpResponse>;
-type GetMlDeploymentAliasesHttpResponse = {
+export type GetMlDeploymentAliasesHttpResponse = {
   data: AliasFindResponse;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetMlDeploymentAliasesHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetMlDeploymentAliasesHttpResponse>;
 };
-type GetMlDeploymentAliasesHttpError = {
+export type GetMlDeploymentAliasesHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -1797,13 +1801,13 @@ type GetMlDeploymentAliasesHttpError = {
  * @param body an object with the body content
  * @throws CreateMlDeploymentAliaseHttpError
  */
-declare function createMlDeploymentAliase(deploymentId: string, body: AliasInput, options?: ApiCallOptions): Promise<CreateMlDeploymentAliaseHttpResponse>;
-type CreateMlDeploymentAliaseHttpResponse = {
+export declare function createMlDeploymentAliase(deploymentId: string, body: AliasInput, options?: ApiCallOptions): Promise<CreateMlDeploymentAliaseHttpResponse>;
+export type CreateMlDeploymentAliaseHttpResponse = {
   data: AliasPostResponse;
   headers: Headers;
   status: 201;
 };
-type CreateMlDeploymentAliaseHttpError = {
+export type CreateMlDeploymentAliaseHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -1815,13 +1819,13 @@ type CreateMlDeploymentAliaseHttpError = {
  * @param aliasId ID of the alias
  * @throws DeleteMlDeploymentAliaseHttpError
  */
-declare function deleteMlDeploymentAliase(deploymentId: string, aliasId: string, options?: ApiCallOptions): Promise<DeleteMlDeploymentAliaseHttpResponse>;
-type DeleteMlDeploymentAliaseHttpResponse = {
+export declare function deleteMlDeploymentAliase(deploymentId: string, aliasId: string, options?: ApiCallOptions): Promise<DeleteMlDeploymentAliaseHttpResponse>;
+export type DeleteMlDeploymentAliaseHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteMlDeploymentAliaseHttpError = {
+export type DeleteMlDeploymentAliaseHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -1833,13 +1837,13 @@ type DeleteMlDeploymentAliaseHttpError = {
  * @param aliasId ID of the alias
  * @throws GetMlDeploymentAliaseHttpError
  */
-declare function getMlDeploymentAliase(deploymentId: string, aliasId: string, options?: ApiCallOptions): Promise<GetMlDeploymentAliaseHttpResponse>;
-type GetMlDeploymentAliaseHttpResponse = {
+export declare function getMlDeploymentAliase(deploymentId: string, aliasId: string, options?: ApiCallOptions): Promise<GetMlDeploymentAliaseHttpResponse>;
+export type GetMlDeploymentAliaseHttpResponse = {
   data: AliasGetResponse;
   headers: Headers;
   status: 200;
 };
-type GetMlDeploymentAliaseHttpError = {
+export type GetMlDeploymentAliaseHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -1852,13 +1856,13 @@ type GetMlDeploymentAliaseHttpError = {
  * @param body an object with the body content
  * @throws PatchMlDeploymentAliaseHttpError
  */
-declare function patchMlDeploymentAliase(deploymentId: string, aliasId: string, body: AliasPatch, options?: ApiCallOptions): Promise<PatchMlDeploymentAliaseHttpResponse>;
-type PatchMlDeploymentAliaseHttpResponse = {
+export declare function patchMlDeploymentAliase(deploymentId: string, aliasId: string, body: AliasPatch, options?: ApiCallOptions): Promise<PatchMlDeploymentAliaseHttpResponse>;
+export type PatchMlDeploymentAliaseHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchMlDeploymentAliaseHttpError = {
+export type PatchMlDeploymentAliaseHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -1872,7 +1876,7 @@ type PatchMlDeploymentAliaseHttpError = {
  * @param body an object with the body content
  * @throws RunMlDeploymentAliaseRealtimePredictionsHttpError
  */
-declare function runMlDeploymentAliaseRealtimePredictions(deploymentId: string, aliasName: string, query: {
+export declare function runMlDeploymentAliaseRealtimePredictions(deploymentId: string, aliasName: string, query: {
   /** If true, reason why a prediction was not produced included response */
   includeNotPredictedReason?: boolean;
   /** If true, shap values included in response */
@@ -1885,12 +1889,12 @@ declare function runMlDeploymentAliaseRealtimePredictions(deploymentId: string, 
    * with source data. */
   index?: string;
 }, body: RealtimePredictionInput, options?: ApiCallOptions): Promise<RunMlDeploymentAliaseRealtimePredictionsHttpResponse>;
-type RunMlDeploymentAliaseRealtimePredictionsHttpResponse = {
+export type RunMlDeploymentAliaseRealtimePredictionsHttpResponse = {
   data: RealtimePrediction;
   headers: Headers;
   status: 200;
 };
-type RunMlDeploymentAliaseRealtimePredictionsHttpError = {
+export type RunMlDeploymentAliaseRealtimePredictionsHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -1902,7 +1906,7 @@ type RunMlDeploymentAliaseRealtimePredictionsHttpError = {
  * @param query an object with query parameters
  * @throws GetMlDeploymentBatchPredictionsHttpError
  */
-declare function getMlDeploymentBatchPredictions(deploymentId: string, query: {
+export declare function getMlDeploymentBatchPredictions(deploymentId: string, query: {
   /** Batch prediction fields by which you can filter responses.<br><br>
    * - `aliasId` UUID string - ID of an alias within the batch prediction
    * - `createdBy` ID string
@@ -1919,14 +1923,14 @@ declare function getMlDeploymentBatchPredictions(deploymentId: string, query: {
   /** Field(s) by which to sort response */
   sort?: EnumSortBatchPredictions;
 }, options?: ApiCallOptions): Promise<GetMlDeploymentBatchPredictionsHttpResponse>;
-type GetMlDeploymentBatchPredictionsHttpResponse = {
+export type GetMlDeploymentBatchPredictionsHttpResponse = {
   data: BatchPredictionFindResponse;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetMlDeploymentBatchPredictionsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetMlDeploymentBatchPredictionsHttpResponse>;
 };
-type GetMlDeploymentBatchPredictionsHttpError = {
+export type GetMlDeploymentBatchPredictionsHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -1938,13 +1942,13 @@ type GetMlDeploymentBatchPredictionsHttpError = {
  * @param body an object with the body content
  * @throws CreateMlDeploymentBatchPredictionHttpError
  */
-declare function createMlDeploymentBatchPrediction(deploymentId: string, body: BatchPredictionInput, options?: ApiCallOptions): Promise<CreateMlDeploymentBatchPredictionHttpResponse>;
-type CreateMlDeploymentBatchPredictionHttpResponse = {
+export declare function createMlDeploymentBatchPrediction(deploymentId: string, body: BatchPredictionInput, options?: ApiCallOptions): Promise<CreateMlDeploymentBatchPredictionHttpResponse>;
+export type CreateMlDeploymentBatchPredictionHttpResponse = {
   data: BatchPredictionPostResponse;
   headers: Headers;
   status: 201;
 };
-type CreateMlDeploymentBatchPredictionHttpError = {
+export type CreateMlDeploymentBatchPredictionHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -1956,13 +1960,13 @@ type CreateMlDeploymentBatchPredictionHttpError = {
  * @param batchPredictionId ID of the batch prediction
  * @throws DeleteMlDeploymentBatchPredictionHttpError
  */
-declare function deleteMlDeploymentBatchPrediction(deploymentId: string, batchPredictionId: string, options?: ApiCallOptions): Promise<DeleteMlDeploymentBatchPredictionHttpResponse>;
-type DeleteMlDeploymentBatchPredictionHttpResponse = {
+export declare function deleteMlDeploymentBatchPrediction(deploymentId: string, batchPredictionId: string, options?: ApiCallOptions): Promise<DeleteMlDeploymentBatchPredictionHttpResponse>;
+export type DeleteMlDeploymentBatchPredictionHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteMlDeploymentBatchPredictionHttpError = {
+export type DeleteMlDeploymentBatchPredictionHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -1974,13 +1978,13 @@ type DeleteMlDeploymentBatchPredictionHttpError = {
  * @param batchPredictionId ID of the batch prediction
  * @throws GetMlDeploymentBatchPredictionHttpError
  */
-declare function getMlDeploymentBatchPrediction(deploymentId: string, batchPredictionId: string, options?: ApiCallOptions): Promise<GetMlDeploymentBatchPredictionHttpResponse>;
-type GetMlDeploymentBatchPredictionHttpResponse = {
+export declare function getMlDeploymentBatchPrediction(deploymentId: string, batchPredictionId: string, options?: ApiCallOptions): Promise<GetMlDeploymentBatchPredictionHttpResponse>;
+export type GetMlDeploymentBatchPredictionHttpResponse = {
   data: BatchPredictionGetResponse;
   headers: Headers;
   status: 200;
 };
-type GetMlDeploymentBatchPredictionHttpError = {
+export type GetMlDeploymentBatchPredictionHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -1993,13 +1997,13 @@ type GetMlDeploymentBatchPredictionHttpError = {
  * @param body an object with the body content
  * @throws PatchMlDeploymentBatchPredictionHttpError
  */
-declare function patchMlDeploymentBatchPrediction(deploymentId: string, batchPredictionId: string, body: BatchPredictionPatch, options?: ApiCallOptions): Promise<PatchMlDeploymentBatchPredictionHttpResponse>;
-type PatchMlDeploymentBatchPredictionHttpResponse = {
+export declare function patchMlDeploymentBatchPrediction(deploymentId: string, batchPredictionId: string, body: BatchPredictionPatch, options?: ApiCallOptions): Promise<PatchMlDeploymentBatchPredictionHttpResponse>;
+export type PatchMlDeploymentBatchPredictionHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchMlDeploymentBatchPredictionHttpError = {
+export type PatchMlDeploymentBatchPredictionHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2011,13 +2015,13 @@ type PatchMlDeploymentBatchPredictionHttpError = {
  * @param batchPredictionId ID of the batch prediction
  * @throws PredictMlDeploymentBatchPredictionHttpError
  */
-declare function predictMlDeploymentBatchPrediction(deploymentId: string, batchPredictionId: string, options?: ApiCallOptions): Promise<PredictMlDeploymentBatchPredictionHttpResponse>;
-type PredictMlDeploymentBatchPredictionHttpResponse = {
+export declare function predictMlDeploymentBatchPrediction(deploymentId: string, batchPredictionId: string, options?: ApiCallOptions): Promise<PredictMlDeploymentBatchPredictionHttpResponse>;
+export type PredictMlDeploymentBatchPredictionHttpResponse = {
   data: BatchPredictionActionResponse;
   headers: Headers;
   status: 202;
 };
-type PredictMlDeploymentBatchPredictionHttpError = {
+export type PredictMlDeploymentBatchPredictionHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2029,13 +2033,13 @@ type PredictMlDeploymentBatchPredictionHttpError = {
  * @param batchPredictionId ID of the batch prediction
  * @throws DeleteMlDeploymentBatchPredictionScheduleHttpError
  */
-declare function deleteMlDeploymentBatchPredictionSchedule(deploymentId: string, batchPredictionId: string, options?: ApiCallOptions): Promise<DeleteMlDeploymentBatchPredictionScheduleHttpResponse>;
-type DeleteMlDeploymentBatchPredictionScheduleHttpResponse = {
+export declare function deleteMlDeploymentBatchPredictionSchedule(deploymentId: string, batchPredictionId: string, options?: ApiCallOptions): Promise<DeleteMlDeploymentBatchPredictionScheduleHttpResponse>;
+export type DeleteMlDeploymentBatchPredictionScheduleHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteMlDeploymentBatchPredictionScheduleHttpError = {
+export type DeleteMlDeploymentBatchPredictionScheduleHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2047,13 +2051,13 @@ type DeleteMlDeploymentBatchPredictionScheduleHttpError = {
  * @param batchPredictionId ID of the batch prediction
  * @throws GetMlDeploymentBatchPredictionScheduleHttpError
  */
-declare function getMlDeploymentBatchPredictionSchedule(deploymentId: string, batchPredictionId: string, options?: ApiCallOptions): Promise<GetMlDeploymentBatchPredictionScheduleHttpResponse>;
-type GetMlDeploymentBatchPredictionScheduleHttpResponse = {
+export declare function getMlDeploymentBatchPredictionSchedule(deploymentId: string, batchPredictionId: string, options?: ApiCallOptions): Promise<GetMlDeploymentBatchPredictionScheduleHttpResponse>;
+export type GetMlDeploymentBatchPredictionScheduleHttpResponse = {
   data: BatchPredictionScheduleGetResponse;
   headers: Headers;
   status: 200;
 };
-type GetMlDeploymentBatchPredictionScheduleHttpError = {
+export type GetMlDeploymentBatchPredictionScheduleHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2066,13 +2070,13 @@ type GetMlDeploymentBatchPredictionScheduleHttpError = {
  * @param body an object with the body content
  * @throws UpdateMlDeploymentBatchPredictionScheduleHttpError
  */
-declare function updateMlDeploymentBatchPredictionSchedule(deploymentId: string, batchPredictionId: string, body: BatchPredictionSchedulePatch, options?: ApiCallOptions): Promise<UpdateMlDeploymentBatchPredictionScheduleHttpResponse>;
-type UpdateMlDeploymentBatchPredictionScheduleHttpResponse = {
+export declare function updateMlDeploymentBatchPredictionSchedule(deploymentId: string, batchPredictionId: string, body: BatchPredictionSchedulePatch, options?: ApiCallOptions): Promise<UpdateMlDeploymentBatchPredictionScheduleHttpResponse>;
+export type UpdateMlDeploymentBatchPredictionScheduleHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type UpdateMlDeploymentBatchPredictionScheduleHttpError = {
+export type UpdateMlDeploymentBatchPredictionScheduleHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2085,13 +2089,13 @@ type UpdateMlDeploymentBatchPredictionScheduleHttpError = {
  * @param body an object with the body content
  * @throws SetMlDeploymentBatchPredictionScheduleHttpError
  */
-declare function setMlDeploymentBatchPredictionSchedule(deploymentId: string, batchPredictionId: string, body: BatchPredictionScheduleInput, options?: ApiCallOptions): Promise<SetMlDeploymentBatchPredictionScheduleHttpResponse>;
-type SetMlDeploymentBatchPredictionScheduleHttpResponse = {
+export declare function setMlDeploymentBatchPredictionSchedule(deploymentId: string, batchPredictionId: string, body: BatchPredictionScheduleInput, options?: ApiCallOptions): Promise<SetMlDeploymentBatchPredictionScheduleHttpResponse>;
+export type SetMlDeploymentBatchPredictionScheduleHttpResponse = {
   data: BatchPredictionSchedulePutResponse;
   headers: Headers;
   status: 201;
 };
-type SetMlDeploymentBatchPredictionScheduleHttpError = {
+export type SetMlDeploymentBatchPredictionScheduleHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2103,13 +2107,13 @@ type SetMlDeploymentBatchPredictionScheduleHttpError = {
  * @param body an object with the body content
  * @throws AddMlDeploymentModelsHttpError
  */
-declare function addMlDeploymentModels(deploymentId: string, body: DeployedModelsInput, options?: ApiCallOptions): Promise<AddMlDeploymentModelsHttpResponse>;
-type AddMlDeploymentModelsHttpResponse = {
+export declare function addMlDeploymentModels(deploymentId: string, body: DeployedModelsInput, options?: ApiCallOptions): Promise<AddMlDeploymentModelsHttpResponse>;
+export type AddMlDeploymentModelsHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type AddMlDeploymentModelsHttpError = {
+export type AddMlDeploymentModelsHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2121,13 +2125,13 @@ type AddMlDeploymentModelsHttpError = {
  * @param body an object with the body content
  * @throws RemoveMlDeploymentModelsHttpError
  */
-declare function removeMlDeploymentModels(deploymentId: string, body: DeployedModelsInput, options?: ApiCallOptions): Promise<RemoveMlDeploymentModelsHttpResponse>;
-type RemoveMlDeploymentModelsHttpResponse = {
+export declare function removeMlDeploymentModels(deploymentId: string, body: DeployedModelsInput, options?: ApiCallOptions): Promise<RemoveMlDeploymentModelsHttpResponse>;
+export type RemoveMlDeploymentModelsHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type RemoveMlDeploymentModelsHttpError = {
+export type RemoveMlDeploymentModelsHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2140,7 +2144,7 @@ type RemoveMlDeploymentModelsHttpError = {
  * @param body an object with the body content
  * @throws RunMlDeploymentRealtimePredictionsHttpError
  */
-declare function runMlDeploymentRealtimePredictions(deploymentId: string, query: {
+export declare function runMlDeploymentRealtimePredictions(deploymentId: string, query: {
   /** If true, reason why a prediction was not produced included response */
   includeNotPredictedReason?: boolean;
   /** If true, shapley values included in response */
@@ -2153,12 +2157,12 @@ declare function runMlDeploymentRealtimePredictions(deploymentId: string, query:
    * with source data. */
   index?: string;
 }, body: RealtimePredictionInput, options?: ApiCallOptions): Promise<RunMlDeploymentRealtimePredictionsHttpResponse>;
-type RunMlDeploymentRealtimePredictionsHttpResponse = {
+export type RunMlDeploymentRealtimePredictionsHttpResponse = {
   data: RealtimePrediction;
   headers: Headers;
   status: 200;
 };
-type RunMlDeploymentRealtimePredictionsHttpError = {
+export type RunMlDeploymentRealtimePredictionsHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2178,7 +2182,7 @@ type RunMlDeploymentRealtimePredictionsHttpError = {
  * @param query an object with query parameters
  * @throws GetMlExperimentsHttpError
  */
-declare function getMlExperiments(query: {
+export declare function getMlExperiments(query: {
   /** Experiment fields by which you can filter responses within this tenant
    * - `ownerId` ID string - ID of the owner/user that created the experiment
    * - `spaceId` ID string (or empty string for personal space) - ID of the space where the experiment is saved.
@@ -2193,14 +2197,14 @@ declare function getMlExperiments(query: {
   /** Field(s) by which to sort response */
   sort?: EnumSortExperiments;
 }, options?: ApiCallOptions): Promise<GetMlExperimentsHttpResponse>;
-type GetMlExperimentsHttpResponse = {
+export type GetMlExperimentsHttpResponse = {
   data: ExperimentFindResponse;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetMlExperimentsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetMlExperimentsHttpResponse>;
 };
-type GetMlExperimentsHttpError = {
+export type GetMlExperimentsHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2211,13 +2215,13 @@ type GetMlExperimentsHttpError = {
  * @param body an object with the body content
  * @throws CreateMlExperimentHttpError
  */
-declare function createMlExperiment(body: ExperimentInput, options?: ApiCallOptions): Promise<CreateMlExperimentHttpResponse>;
-type CreateMlExperimentHttpResponse = {
+export declare function createMlExperiment(body: ExperimentInput, options?: ApiCallOptions): Promise<CreateMlExperimentHttpResponse>;
+export type CreateMlExperimentHttpResponse = {
   data: ExperimentPostResponse;
   headers: Headers;
   status: 201;
 };
-type CreateMlExperimentHttpError = {
+export type CreateMlExperimentHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2228,13 +2232,13 @@ type CreateMlExperimentHttpError = {
  * @param experimentId ID of the experiment
  * @throws DeleteMlExperimentHttpError
  */
-declare function deleteMlExperiment(experimentId: string, options?: ApiCallOptions): Promise<DeleteMlExperimentHttpResponse>;
-type DeleteMlExperimentHttpResponse = {
+export declare function deleteMlExperiment(experimentId: string, options?: ApiCallOptions): Promise<DeleteMlExperimentHttpResponse>;
+export type DeleteMlExperimentHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteMlExperimentHttpError = {
+export type DeleteMlExperimentHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2245,13 +2249,13 @@ type DeleteMlExperimentHttpError = {
  * @param experimentId ID of the experiment
  * @throws GetMlExperimentHttpError
  */
-declare function getMlExperiment(experimentId: string, options?: ApiCallOptions): Promise<GetMlExperimentHttpResponse>;
-type GetMlExperimentHttpResponse = {
+export declare function getMlExperiment(experimentId: string, options?: ApiCallOptions): Promise<GetMlExperimentHttpResponse>;
+export type GetMlExperimentHttpResponse = {
   data: ExperimentGetResponse;
   headers: Headers;
   status: 200;
 };
-type GetMlExperimentHttpError = {
+export type GetMlExperimentHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2263,13 +2267,13 @@ type GetMlExperimentHttpError = {
  * @param body an object with the body content
  * @throws PatchMlExperimentHttpError
  */
-declare function patchMlExperiment(experimentId: string, body: ExperimentPatch, options?: ApiCallOptions): Promise<PatchMlExperimentHttpResponse>;
-type PatchMlExperimentHttpResponse = {
+export declare function patchMlExperiment(experimentId: string, body: ExperimentPatch, options?: ApiCallOptions): Promise<PatchMlExperimentHttpResponse>;
+export type PatchMlExperimentHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchMlExperimentHttpError = {
+export type PatchMlExperimentHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2281,13 +2285,13 @@ type PatchMlExperimentHttpError = {
  * @param body an object with the body content
  * @throws RecommendModelsMlExperimentHttpError
  */
-declare function recommendModelsMlExperiment(experimentId: string, body: ExperimentModelRecommendationFilter, options?: ApiCallOptions): Promise<RecommendModelsMlExperimentHttpResponse>;
-type RecommendModelsMlExperimentHttpResponse = {
+export declare function recommendModelsMlExperiment(experimentId: string, body: ExperimentModelRecommendationFilter, options?: ApiCallOptions): Promise<RecommendModelsMlExperimentHttpResponse>;
+export type RecommendModelsMlExperimentHttpResponse = {
   data: ExperimentModelRecommendationPostResponse;
   headers: Headers;
   status: 200;
 };
-type RecommendModelsMlExperimentHttpError = {
+export type RecommendModelsMlExperimentHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2299,7 +2303,7 @@ type RecommendModelsMlExperimentHttpError = {
  * @param query an object with query parameters
  * @throws GetMlExperimentModelsHttpError
  */
-declare function getMlExperimentModels(experimentId: string, query: {
+export declare function getMlExperimentModels(experimentId: string, query: {
   /** Model fields you can filter by:<br><br>
    *
    * - `experimentVersionId` UUID string - Find by experiment version ID
@@ -2332,14 +2336,14 @@ declare function getMlExperimentModels(experimentId: string, query: {
   /** Field(s) by which to sort response */
   sort?: EnumSortModels;
 }, options?: ApiCallOptions): Promise<GetMlExperimentModelsHttpResponse>;
-type GetMlExperimentModelsHttpResponse = {
+export type GetMlExperimentModelsHttpResponse = {
   data: ModelFindResponse;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetMlExperimentModelsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetMlExperimentModelsHttpResponse>;
 };
-type GetMlExperimentModelsHttpError = {
+export type GetMlExperimentModelsHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2351,13 +2355,13 @@ type GetMlExperimentModelsHttpError = {
  * @param modelId ID of the model
  * @throws GetMlExperimentModelHttpError
  */
-declare function getMlExperimentModel(experimentId: string, modelId: string, options?: ApiCallOptions): Promise<GetMlExperimentModelHttpResponse>;
-type GetMlExperimentModelHttpResponse = {
+export declare function getMlExperimentModel(experimentId: string, modelId: string, options?: ApiCallOptions): Promise<GetMlExperimentModelHttpResponse>;
+export type GetMlExperimentModelHttpResponse = {
   data: ModelGetResponse;
   headers: Headers;
   status: 200;
 };
-type GetMlExperimentModelHttpError = {
+export type GetMlExperimentModelHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2369,7 +2373,7 @@ type GetMlExperimentModelHttpError = {
  * @param query an object with query parameters
  * @throws GetMlExperimentVersionsHttpError
  */
-declare function getMlExperimentVersions(experimentId: string, query: {
+export declare function getMlExperimentVersions(experimentId: string, query: {
   /** Experiment version filter options
    * - `isRunning` boolean - Is the experiment version running (training models)?
    * - `isSettled` boolean - Is the experiment version settled?
@@ -2384,14 +2388,14 @@ declare function getMlExperimentVersions(experimentId: string, query: {
   /** Field(s) by which to sort response */
   sort?: EnumSortExperimentVersions;
 }, options?: ApiCallOptions): Promise<GetMlExperimentVersionsHttpResponse>;
-type GetMlExperimentVersionsHttpResponse = {
+export type GetMlExperimentVersionsHttpResponse = {
   data: ExperimentVersionFindResponse;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetMlExperimentVersionsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetMlExperimentVersionsHttpResponse>;
 };
-type GetMlExperimentVersionsHttpError = {
+export type GetMlExperimentVersionsHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2405,13 +2409,13 @@ type GetMlExperimentVersionsHttpError = {
  * @param body an object with the body content
  * @throws CreateMlExperimentVersionHttpError
  */
-declare function createMlExperimentVersion(experimentId: string, body: ExperimentVersionInput, options?: ApiCallOptions): Promise<CreateMlExperimentVersionHttpResponse>;
-type CreateMlExperimentVersionHttpResponse = {
+export declare function createMlExperimentVersion(experimentId: string, body: ExperimentVersionInput, options?: ApiCallOptions): Promise<CreateMlExperimentVersionHttpResponse>;
+export type CreateMlExperimentVersionHttpResponse = {
   data: ExperimentVersionPostResponse;
   headers: Headers;
   status: 201;
 };
-type CreateMlExperimentVersionHttpError = {
+export type CreateMlExperimentVersionHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2423,13 +2427,13 @@ type CreateMlExperimentVersionHttpError = {
  * @param experimentVersionId ID of the experiment version
  * @throws DeleteMlExperimentVersionHttpError
  */
-declare function deleteMlExperimentVersion(experimentId: string, experimentVersionId: string, options?: ApiCallOptions): Promise<DeleteMlExperimentVersionHttpResponse>;
-type DeleteMlExperimentVersionHttpResponse = {
+export declare function deleteMlExperimentVersion(experimentId: string, experimentVersionId: string, options?: ApiCallOptions): Promise<DeleteMlExperimentVersionHttpResponse>;
+export type DeleteMlExperimentVersionHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteMlExperimentVersionHttpError = {
+export type DeleteMlExperimentVersionHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2441,13 +2445,13 @@ type DeleteMlExperimentVersionHttpError = {
  * @param experimentVersionId ID of the experiment version
  * @throws GetMlExperimentVersionHttpError
  */
-declare function getMlExperimentVersion(experimentId: string, experimentVersionId: string, options?: ApiCallOptions): Promise<GetMlExperimentVersionHttpResponse>;
-type GetMlExperimentVersionHttpResponse = {
+export declare function getMlExperimentVersion(experimentId: string, experimentVersionId: string, options?: ApiCallOptions): Promise<GetMlExperimentVersionHttpResponse>;
+export type GetMlExperimentVersionHttpResponse = {
   data: ExperimentVersionGetResponse;
   headers: Headers;
   status: 200;
 };
-type GetMlExperimentVersionHttpError = {
+export type GetMlExperimentVersionHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2460,13 +2464,13 @@ type GetMlExperimentVersionHttpError = {
  * @param body an object with the body content
  * @throws PatchMlExperimentVersionHttpError
  */
-declare function patchMlExperimentVersion(experimentId: string, experimentVersionId: string, body: ExperimentVersionPatch, options?: ApiCallOptions): Promise<PatchMlExperimentVersionHttpResponse>;
-type PatchMlExperimentVersionHttpResponse = {
+export declare function patchMlExperimentVersion(experimentId: string, experimentVersionId: string, body: ExperimentVersionPatch, options?: ApiCallOptions): Promise<PatchMlExperimentVersionHttpResponse>;
+export type PatchMlExperimentVersionHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchMlExperimentVersionHttpError = {
+export type PatchMlExperimentVersionHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2478,13 +2482,13 @@ type PatchMlExperimentVersionHttpError = {
  * @param corrId The ID of a correlated resource of corrType
  * @throws CancelMlJobHttpError
  */
-declare function cancelMlJob(corrType: string, corrId: string, options?: ApiCallOptions): Promise<CancelMlJobHttpResponse>;
-type CancelMlJobHttpResponse = {
+export declare function cancelMlJob(corrType: string, corrId: string, options?: ApiCallOptions): Promise<CancelMlJobHttpResponse>;
+export type CancelMlJobHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type CancelMlJobHttpError = {
+export type CancelMlJobHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2498,13 +2502,13 @@ type CancelMlJobHttpError = {
  * @param body an object with the body content
  * @throws CreateMlProfileInsightHttpError
  */
-declare function createMlProfileInsight(body: ProfileInsightsInput, options?: ApiCallOptions): Promise<CreateMlProfileInsightHttpResponse>;
-type CreateMlProfileInsightHttpResponse = {
+export declare function createMlProfileInsight(body: ProfileInsightsInput, options?: ApiCallOptions): Promise<CreateMlProfileInsightHttpResponse>;
+export type CreateMlProfileInsightHttpResponse = {
   data: ProfileInsightsGetResponse;
   headers: Headers;
   status: 200 | 202;
 };
-type CreateMlProfileInsightHttpError = {
+export type CreateMlProfileInsightHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2518,7 +2522,7 @@ type CreateMlProfileInsightHttpError = {
  * @param query an object with query parameters
  * @throws GetMlProfileInsightWithQueryHttpError
  */
-declare function getMlProfileInsightWithQuery(dataSetId: string, query: {
+export declare function getMlProfileInsightWithQuery(dataSetId: string, query: {
   /** The optional experiment type for profile-insights GET requests after
    * this is known. */
   experimentType?: ExperimentType;
@@ -2531,12 +2535,12 @@ declare function getMlProfileInsightWithQuery(dataSetId: string, query: {
    * is known. */
   target?: string;
 }, options?: ApiCallOptions): Promise<GetMlProfileInsightWithQueryHttpResponse>;
-type GetMlProfileInsightWithQueryHttpResponse = {
+export type GetMlProfileInsightWithQueryHttpResponse = {
   data: ProfileInsightsGetResponse;
   headers: Headers;
   status: 200;
 };
-type GetMlProfileInsightWithQueryHttpError = {
+export type GetMlProfileInsightWithQueryHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2549,13 +2553,13 @@ type GetMlProfileInsightWithQueryHttpError = {
  * @param dataSetId The Qlik catalog dataset ID
  * @throws GetMlProfileInsightHttpError
  */
-declare function getMlProfileInsight(dataSetId: string, options?: ApiCallOptions): Promise<GetMlProfileInsightHttpResponse>;
-type GetMlProfileInsightHttpResponse = {
+export declare function getMlProfileInsight(dataSetId: string, options?: ApiCallOptions): Promise<GetMlProfileInsightHttpResponse>;
+export type GetMlProfileInsightHttpResponse = {
   data: ProfileInsightsGetResponse;
   headers: Headers;
   status: 200;
 };
-type GetMlProfileInsightHttpError = {
+export type GetMlProfileInsightHttpError = {
   data: Failure;
   headers: Headers;
   status: number;
@@ -2563,8 +2567,8 @@ type GetMlProfileInsightHttpError = {
 /**
  * Clears the cache for ml api requests.
  */
-declare function clearCache(): void;
-type MlAPI = {
+export declare function clearCache(): void;
+export type MlAPI = {
   /**
    * List deployments
    * @example
@@ -2610,14 +2614,22 @@ type MlAPI = {
    */
   patchMlDeployment: typeof patchMlDeployment;
   /**
-   * Activate the model for this deployment
+   * Activates the deployed model on this deployment's default alias. The
+   * response reports which model was targeted and whether its state
+   * actually changed via the `qlik-model-id` and `qlik-state-change`
+   * response headers. If the model was already active, the request still
+   * succeeds but `qlik-state-change` is `NO_CHANGE`.
    *
    * @param deploymentId ID of the deployment
    * @throws ActivateModelsMlDeploymentHttpError
    */
   activateModelsMlDeployment: typeof activateModelsMlDeployment;
   /**
-   * Deactivate the model for this deployment
+   * Deactivates the deployed model on this deployment's default alias.
+   * The response reports which model was targeted and whether its state
+   * actually changed via the `qlik-model-id` and `qlik-state-change`
+   * response headers. If the model was already inactive, the request
+   * still succeeds but `qlik-state-change` is `NO_CHANGE`.
    *
    * @param deploymentId ID of the deployment
    * @throws DeactivateModelsMlDeploymentHttpError
@@ -2941,4 +2953,4 @@ type MlAPI = {
  */
 declare const mlExport: MlAPI;
 //#endregion
-export { APIError, ActivateModelsMlDeploymentHttpError, ActivateModelsMlDeploymentHttpResponse, AddMlDeploymentModelsHttpError, AddMlDeploymentModelsHttpResponse, Alias, AliasFindResponse, AliasGetResponse, AliasId, AliasInput, AliasMode, AliasPatch, AliasPatchItem, AliasPostResponse, AnyType, BatchPrediction, BatchPredictionActionResponse, BatchPredictionFindResponse, BatchPredictionGetResponse, BatchPredictionInput, BatchPredictionPatch, BatchPredictionPostResponse, BatchPredictionSchedule, BatchPredictionScheduleGetResponse, BatchPredictionScheduleInput, BatchPredictionScheduleInputAttributes, BatchPredictionSchedulePatch, BatchPredictionSchedulePutResponse, BatchPredictionStatus, BatchPredictionWriteback, BinaryImbalanceSampling, BinnedFrequency, CancelMlJobHttpError, CancelMlJobHttpResponse, ChangeType, ColumnTransform, CorrId, CorrType, CreateMlDeploymentAliaseHttpError, CreateMlDeploymentAliaseHttpResponse, CreateMlDeploymentBatchPredictionHttpError, CreateMlDeploymentBatchPredictionHttpResponse, CreateMlDeploymentHttpError, CreateMlDeploymentHttpResponse, CreateMlExperimentHttpError, CreateMlExperimentHttpResponse, CreateMlExperimentVersionHttpError, CreateMlExperimentVersionHttpResponse, CreateMlProfileInsightHttpError, CreateMlProfileInsightHttpResponse, CreatedAt, CreatedBy, DataSetId, DataSetProfile, DataType, DatasetOrigin, DateIndexes, DeactivateModelsMlDeploymentHttpError, DeactivateModelsMlDeploymentHttpResponse, DeleteMlDeploymentAliaseHttpError, DeleteMlDeploymentAliaseHttpResponse, DeleteMlDeploymentBatchPredictionHttpError, DeleteMlDeploymentBatchPredictionHttpResponse, DeleteMlDeploymentBatchPredictionScheduleHttpError, DeleteMlDeploymentBatchPredictionScheduleHttpResponse, DeleteMlDeploymentHttpError, DeleteMlDeploymentHttpResponse, DeleteMlExperimentHttpError, DeleteMlExperimentHttpResponse, DeleteMlExperimentVersionHttpError, DeleteMlExperimentVersionHttpResponse, DeletedAt, DeployedModelIds, DeployedModelsInput, Deployment, DeploymentFindResponse, DeploymentGetResponse, DeploymentId, DeploymentInput, DeploymentPatch, DeploymentPostResponse, DroppedFeature, EntityDescription, EntityId, EntityName, EnumSortAliases, EnumSortBatchPredictions, EnumSortDeployments, EnumSortExperimentVersions, EnumSortExperiments, EnumSortModels, ErrorMessage, Errors, Experiment, ExperimentFindResponse, ExperimentGetResponse, ExperimentId, ExperimentInput, ExperimentMode, ExperimentModelRecommendationFilter, ExperimentModelRecommendationPostResponse, ExperimentPatch, ExperimentPatchItem, ExperimentPostResponse, ExperimentType, ExperimentVersion, ExperimentVersionFindResponse, ExperimentVersionGetResponse, ExperimentVersionId, ExperimentVersionInput, ExperimentVersionPatch, ExperimentVersionPostResponse, Failure, Feature, FeatureInsights, FeatureType, FeaturesList, FieldProfile, FileType, FindResponseMeta, GetMlDeploymentAliaseHttpError, GetMlDeploymentAliaseHttpResponse, GetMlDeploymentAliasesHttpError, GetMlDeploymentAliasesHttpResponse, GetMlDeploymentBatchPredictionHttpError, GetMlDeploymentBatchPredictionHttpResponse, GetMlDeploymentBatchPredictionScheduleHttpError, GetMlDeploymentBatchPredictionScheduleHttpResponse, GetMlDeploymentBatchPredictionsHttpError, GetMlDeploymentBatchPredictionsHttpResponse, GetMlDeploymentHttpError, GetMlDeploymentHttpResponse, GetMlDeploymentsHttpError, GetMlDeploymentsHttpResponse, GetMlExperimentHttpError, GetMlExperimentHttpResponse, GetMlExperimentModelHttpError, GetMlExperimentModelHttpResponse, GetMlExperimentModelsHttpError, GetMlExperimentModelsHttpResponse, GetMlExperimentVersionHttpError, GetMlExperimentVersionHttpResponse, GetMlExperimentVersionsHttpError, GetMlExperimentVersionsHttpResponse, GetMlExperimentsHttpError, GetMlExperimentsHttpResponse, GetMlProfileInsightHttpError, GetMlProfileInsightHttpResponse, GetMlProfileInsightWithQueryHttpError, GetMlProfileInsightWithQueryHttpResponse, IncludeProfileInsightsField, IndexColumn, Insights, JobType, MlAPI, Model, ModelAlgorithm, ModelAlgorithmAbbreviation, ModelFindResponse, ModelForRecommendations, ModelGetResponse, ModelId, ModelInfo, ModelMetrics, ModelMetricsBinary, ModelMetricsMulticlass, ModelMetricsRegression, ModelMetricsTimeseries, ModelState, ModelStatus, ModelsInfo, OutputFile, OwnerId, ParentJobId, PatchMlDeploymentAliaseHttpError, PatchMlDeploymentAliaseHttpResponse, PatchMlDeploymentBatchPredictionHttpError, PatchMlDeploymentBatchPredictionHttpResponse, PatchMlDeploymentHttpError, PatchMlDeploymentHttpResponse, PatchMlExperimentHttpError, PatchMlExperimentHttpResponse, PatchMlExperimentVersionHttpError, PatchMlExperimentVersionHttpResponse, Pipeline, PredictMlDeploymentBatchPredictionHttpError, PredictMlDeploymentBatchPredictionHttpResponse, PredictionJobResponse, PreprocessedInsightColumn, ProfileClassification, ProfileClassificationTag, ProfileFrequency, ProfileInsights, ProfileInsightsGetResponse, ProfileInsightsInput, ProfileMetadata, RealTimePredictionInputSchema, RealTimePredictionSchema, RealtimePrediction, RealtimePredictionInput, RecommendModelsMlExperimentHttpError, RecommendModelsMlExperimentHttpResponse, RemoveMlDeploymentModelsHttpError, RemoveMlDeploymentModelsHttpResponse, ResponseLinks, RunMlDeploymentAliaseRealtimePredictionsHttpError, RunMlDeploymentAliaseRealtimePredictionsHttpResponse, RunMlDeploymentRealtimePredictionsHttpError, RunMlDeploymentRealtimePredictionsHttpResponse, SetMlDeploymentBatchPredictionScheduleHttpError, SetMlDeploymentBatchPredictionScheduleHttpResponse, SpaceId, TableProfile, TableRecord, TableSample, TenantId, TrainingDuration, Transform, UpdateMlDeploymentBatchPredictionScheduleHttpError, UpdateMlDeploymentBatchPredictionScheduleHttpResponse, UpdatedAt, activateModelsMlDeployment, addMlDeploymentModels, cancelMlJob, clearCache, createMlDeployment, createMlDeploymentAliase, createMlDeploymentBatchPrediction, createMlExperiment, createMlExperimentVersion, createMlProfileInsight, deactivateModelsMlDeployment, mlExport as default, deleteMlDeployment, deleteMlDeploymentAliase, deleteMlDeploymentBatchPrediction, deleteMlDeploymentBatchPredictionSchedule, deleteMlExperiment, deleteMlExperimentVersion, getMlDeployment, getMlDeploymentAliase, getMlDeploymentAliases, getMlDeploymentBatchPrediction, getMlDeploymentBatchPredictionSchedule, getMlDeploymentBatchPredictions, getMlDeployments, getMlExperiment, getMlExperimentModel, getMlExperimentModels, getMlExperimentVersion, getMlExperimentVersions, getMlExperiments, getMlProfileInsight, getMlProfileInsightWithQuery, patchMlDeployment, patchMlDeploymentAliase, patchMlDeploymentBatchPrediction, patchMlExperiment, patchMlExperimentVersion, predictMlDeploymentBatchPrediction, recommendModelsMlExperiment, removeMlDeploymentModels, runMlDeploymentAliaseRealtimePredictions, runMlDeploymentRealtimePredictions, setMlDeploymentBatchPredictionSchedule, updateMlDeploymentBatchPredictionSchedule };
+export { mlExport as default };

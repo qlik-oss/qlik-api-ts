@@ -1,9 +1,9 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-o-bqAUAV.js";
-import "../chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
+import "../chunks/invoke-fetch-DdmiOIkr.js";
 declare namespace ip_policies_d_exports {
   export { CreateIPPolicy, CreateIpPolicyHttpError, CreateIpPolicyHttpResponse, DeleteIpPolicyHttpError, DeleteIpPolicyHttpResponse, Error, Errors, GetIpPoliciesHttpError, GetIpPoliciesHttpResponse, GetIpPolicyHttpError, GetIpPolicyHttpResponse, IPPolicyListItem, IPPolicyResource, IpPoliciesAPI, JSONPatch, JSONPatchArray, Link, Links, ListIPPoliciesResult, PatchIpPolicyHttpError, PatchIpPolicyHttpResponse, clearCache, createIpPolicy, ipPoliciesExport as default, deleteIpPolicy, getIpPolicies, getIpPolicy, patchIpPolicy };
 }
-type CreateIPPolicy = {
+export type CreateIPPolicy = {
   /** An array of allowed IP IPv4 addresses, either as plain IP addresses, or as CIDR ranges. */
   allowedIps: string[];
   /** Indicates whether the IP policy is enabled. */
@@ -14,7 +14,7 @@ type CreateIPPolicy = {
 /**
  * An error object describing the error.
  */
-type Error = {
+export type Error = {
   /** The error code. */
   code: string;
   /** A human-readable explanation specific to this occurrence of the problem. */
@@ -44,13 +44,13 @@ type Error = {
  *   traceId: "0000000000000000200ba0714061b982"
  * }
  */
-type Errors = {
+export type Errors = {
   /** An array of errors related to the operation. */
   errors?: Error[];
   /** A unique identifier for tracing the error. */
   traceId?: string;
 };
-type IPPolicyListItem = {
+export type IPPolicyListItem = {
   /** An array of allowed IP addresses. */
   allowedIps?: string[];
   /** The timestamp for when the resource was created. */
@@ -76,7 +76,7 @@ type IPPolicyListItem = {
   /** The user ID of the user who last updated the IP policy. */
   updatedBy?: string;
 };
-type IPPolicyResource = {
+export type IPPolicyResource = {
   /** An array of allowed public IPv4 addresses. */
   allowedIps: string[];
   /** The timestamp for when the IP policy was created. */
@@ -105,7 +105,7 @@ type IPPolicyResource = {
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
  */
-type JSONPatch = {
+export type JSONPatch = {
   /** The operation to be performed. */
   op: "replace";
   /** A JSON Pointer. */
@@ -137,17 +137,17 @@ type JSONPatch = {
  *   }
  * ]
  */
-type JSONPatchArray = JSONPatch[];
+export type JSONPatchArray = JSONPatch[];
 /**
  * A link
  */
-type Link = {
+export type Link = {
   href: string;
 };
 /**
  * Contains pagination links. self is a link to the current results page, next is a link to the next results page and prev is a link to the previous results page
  */
-type Links = {
+export type Links = {
   /** A link */
   next?: Link;
   /** A link */
@@ -155,7 +155,7 @@ type Links = {
   /** A link */
   self: Link;
 };
-type ListIPPoliciesResult = {
+export type ListIPPoliciesResult = {
   /** An array of IP policies. */
   data: IPPolicyListItem[];
   /** Contains pagination links. self is a link to the current results page, next is a link to the next results page and prev is a link to the previous results page */
@@ -169,7 +169,7 @@ type ListIPPoliciesResult = {
  * @param query an object with query parameters
  * @throws GetIpPoliciesHttpError
  */
-declare function getIpPolicies(query: {
+export declare function getIpPolicies(query: {
   /** A comma-separated list of fields to limit in the response. */
   fields?: string;
   /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax. All conditional statements within this query parameter are case insensitive.
@@ -191,14 +191,14 @@ declare function getIpPolicies(query: {
   /** Determines whether to return a count of the total records matched in the query. Defaults to false. */
   totalResults?: boolean;
 }, options?: ApiCallOptions): Promise<GetIpPoliciesHttpResponse>;
-type GetIpPoliciesHttpResponse = {
+export type GetIpPoliciesHttpResponse = {
   data: ListIPPoliciesResult;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetIpPoliciesHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetIpPoliciesHttpResponse>;
 };
-type GetIpPoliciesHttpError = {
+export type GetIpPoliciesHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 429 | 500;
@@ -209,13 +209,13 @@ type GetIpPoliciesHttpError = {
  * @param body an object with the body content
  * @throws CreateIpPolicyHttpError
  */
-declare function createIpPolicy(body: CreateIPPolicy, options?: ApiCallOptions): Promise<CreateIpPolicyHttpResponse>;
-type CreateIpPolicyHttpResponse = {
+export declare function createIpPolicy(body: CreateIPPolicy, options?: ApiCallOptions): Promise<CreateIpPolicyHttpResponse>;
+export type CreateIpPolicyHttpResponse = {
   data: IPPolicyResource;
   headers: Headers;
   status: 201;
 };
-type CreateIpPolicyHttpError = {
+export type CreateIpPolicyHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404 | 429 | 500;
@@ -226,13 +226,13 @@ type CreateIpPolicyHttpError = {
  * @param id The unique identifier for the IP policy.
  * @throws DeleteIpPolicyHttpError
  */
-declare function deleteIpPolicy(id: string, options?: ApiCallOptions): Promise<DeleteIpPolicyHttpResponse>;
-type DeleteIpPolicyHttpResponse = {
+export declare function deleteIpPolicy(id: string, options?: ApiCallOptions): Promise<DeleteIpPolicyHttpResponse>;
+export type DeleteIpPolicyHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteIpPolicyHttpError = {
+export type DeleteIpPolicyHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 403 | 404 | 429 | 500;
@@ -243,13 +243,13 @@ type DeleteIpPolicyHttpError = {
  * @param id The IP policy unique identifier
  * @throws GetIpPolicyHttpError
  */
-declare function getIpPolicy(id: string, options?: ApiCallOptions): Promise<GetIpPolicyHttpResponse>;
-type GetIpPolicyHttpResponse = {
+export declare function getIpPolicy(id: string, options?: ApiCallOptions): Promise<GetIpPolicyHttpResponse>;
+export type GetIpPolicyHttpResponse = {
   data: IPPolicyResource;
   headers: Headers;
   status: 200;
 };
-type GetIpPolicyHttpError = {
+export type GetIpPolicyHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 404 | 429 | 500;
@@ -261,13 +261,13 @@ type GetIpPolicyHttpError = {
  * @param body an object with the body content
  * @throws PatchIpPolicyHttpError
  */
-declare function patchIpPolicy(id: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchIpPolicyHttpResponse>;
-type PatchIpPolicyHttpResponse = {
+export declare function patchIpPolicy(id: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchIpPolicyHttpResponse>;
+export type PatchIpPolicyHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchIpPolicyHttpError = {
+export type PatchIpPolicyHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429 | 500;
@@ -275,8 +275,8 @@ type PatchIpPolicyHttpError = {
 /**
  * Clears the cache for core/ip-policies api requests.
  */
-declare function clearCache(): void;
-type IpPoliciesAPI = {
+export declare function clearCache(): void;
+export type IpPoliciesAPI = {
   /**
    * Returns a list of IP policies present in the tenant. The user must be assigned the `TenantAdmin` role.
    *
@@ -323,4 +323,4 @@ type IpPoliciesAPI = {
  */
 declare const ipPoliciesExport: IpPoliciesAPI;
 //#endregion
-export { CreateIPPolicy, CreateIpPolicyHttpError, CreateIpPolicyHttpResponse, DeleteIpPolicyHttpError, DeleteIpPolicyHttpResponse, Error, Errors, GetIpPoliciesHttpError, GetIpPoliciesHttpResponse, GetIpPolicyHttpError, GetIpPolicyHttpResponse, IPPolicyListItem, IPPolicyResource, IpPoliciesAPI, JSONPatch, JSONPatchArray, Link, Links, ListIPPoliciesResult, PatchIpPolicyHttpError, PatchIpPolicyHttpResponse, clearCache, createIpPolicy, ipPoliciesExport as default, deleteIpPolicy, getIpPolicies, getIpPolicy, patchIpPolicy, ip_policies_d_exports as t };
+export { ipPoliciesExport as default, ip_policies_d_exports as t };

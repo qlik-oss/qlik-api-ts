@@ -1,12 +1,12 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/direct-access-agents.d.ts
-type CancelBenchmarkResponse = {
+export type CancelBenchmarkResponse = {
   message?: string | null;
   statusUrl?: LinkResponseObject;
 };
-type ConfigurationLineBase = ConfigurationLineNumeric | ConfigurationLineString;
-type ConfigurationLineNumeric = {
+export type ConfigurationLineBase = ConfigurationLineNumeric | ConfigurationLineString;
+export type ConfigurationLineNumeric = {
   allowMultipleValues?: boolean;
   apiActions?: ("Read" | "Write")[] | null;
   applyWithoutRestart?: boolean;
@@ -19,10 +19,11 @@ type ConfigurationLineNumeric = {
   pendingValue?: string | null;
   permittedRangeEnd?: number;
   permittedRangeStart?: number;
+  skipValidation?: boolean;
   uiActions?: ("Read" | "Write")[] | null;
   value?: string | null;
 };
-type ConfigurationLineString = {
+export type ConfigurationLineString = {
   allowMultipleValues?: boolean;
   apiActions?: ("Read" | "Write")[] | null;
   applyWithoutRestart?: boolean;
@@ -34,49 +35,68 @@ type ConfigurationLineString = {
   pendingApplication?: boolean;
   pendingValue?: string | null;
   permittedValues?: string[] | null;
+  skipValidation?: boolean;
   uiActions?: ("Read" | "Write")[] | null;
   value?: string | null;
 };
-type ConfigurationResponse = {
+export type ConfigurationResponse = {
   connectorAgentSettings?: ConfigurationLineBase[] | null;
   connectors?: ConnectorSettings[] | null;
   dcaasSettings?: ConfigurationLineBase[] | null;
 };
-type ConnectorFlatFileConfigurationResponse = {
+export type ConnectorFlatFileConfigurationResponse = {
   errorMessage?: ErrorResponse;
   result?: string[] | null;
 };
-type ConnectorSettings = {
+export type ConnectorSettings = {
   connectorName?: string | null;
   settings?: ConfigurationLineBase[] | null;
 };
-type ErrorMessage = {
+export type ErrorMessage = {
   code?: string | null;
   detail?: string | null;
   title?: string | null;
 };
-type ErrorResponse = {
+export type ErrorResponse = {
   errors?: ErrorMessage[] | null;
   readonly hasErrors?: boolean;
   traceId?: string | null;
 };
-type FileConnectorAllowedPath = {
+export type FileConnectorAllowedPath = {
   /** The Path property in the File connector allowed paths file. */
   path: string;
-  /** The Spaces property in the Odbc custom type mappings file. */
+  /** The Spaces property in the File connector allowed paths file. */
   spaces?: string[] | null;
 };
-type FileConnectorAllowedPathsResponse = {
+export type FileConnectorAllowedPathsResponse = {
   errorMessage?: ErrorResponse;
   result?: FileConnectorAllowedPath[] | null;
 };
-type GetBenchmarkStatusResponse = {
+/**
+ * Represents the status and performance data for a benchmark task.
+ */
+export type GetBenchmarkStatusResponse = {
   /** The ISO 8601 formatted timestamp when the benchmark task completed or was cancelled */
   benchmarkEndTime?: string | null;
   /** The benchmark ID */
   benchmarkId?: string | null;
   /** The ISO 8601 formatted timestamp when the benchmark task started execution */
   benchmarkStartTime?: string | null;
+  /** Number of concurrent benchmarks/reloads observed when this benchmark was started */
+  concurrentReloads?: number;
+  /** The ISO 8601 formatted timestamp when data generation completed */
+  dataGenerationEndTime?: string | null;
+  /** The ISO 8601 formatted timestamp when data generation started */
+  dataGenerationStartTime?: string | null;
+  /** The benchmark description */
+  description?: string | null;
+  /** The ISO 8601 formatted timestamp when get reload slot completed */
+  getReloadSlotEndTime?: string | null;
+  /** The ISO 8601 formatted timestamp when get reload slot started */
+  getReloadSlotStartTime?: string | null;
+  /** The benchmark name */
+  name?: string | null;
+  /** Contains throughput, latency, transfer volume, and transmission timing for a benchmark. */
   results?: GetBenchmarkStatusResults;
   /** The benchmark status */
   status?: string | null;
@@ -85,7 +105,12 @@ type GetBenchmarkStatusResponse = {
   /** The total bytes requested to be transferred during the benchmark */
   totalBytesRequested?: number;
 };
-type GetBenchmarkStatusResults = {
+/**
+ * Contains throughput, latency, transfer volume, and transmission timing for a benchmark.
+ */
+export type GetBenchmarkStatusResults = {
+  /** The average latency in ms measured on the connector side during data transmission. Null if no connector benchmark data is available. */
+  connectorLatency?: number | null;
   /** The ISO 8601 formatted timestamp when data transmission completed */
   dataTransmissionEndTime?: string | null;
   /** The ISO 8601 formatted timestamp when data transmission start */
@@ -97,17 +122,17 @@ type GetBenchmarkStatusResults = {
   /** The total number of bytes successfully transferred during data transmission */
   totalBytesTransferred?: number;
 };
-type LinkResponseObject = {
+export type LinkResponseObject = {
   /** The URL to the related resource */
   href?: string | null;
 };
-type MetricsCollectorConnectorConfigurationApiResponse = {
+export type MetricsCollectorConnectorConfigurationApiResponse = {
   /** Indicates whether metrics collection is enabled for this connector. */
   metricsCollectionEnabled: boolean;
   /** Frequency in seconds at which metrics are collected from this connector. */
   scrapeIntervalSeconds: number;
 };
-type MetricsCollectorConnectorConfigurationsApiResponse = {
+export type MetricsCollectorConnectorConfigurationsApiResponse = {
   connectorAgent?: MetricsCollectorConnectorConfigurationApiResponse;
   fileConnector?: MetricsCollectorConnectorConfigurationApiResponse;
   odbcConnector?: MetricsCollectorConnectorConfigurationApiResponse;
@@ -117,13 +142,13 @@ type MetricsCollectorConnectorConfigurationsApiResponse = {
   sapSqlConnector?: MetricsCollectorConnectorConfigurationApiResponse;
   systemMetrics?: MetricsCollectorConnectorConfigurationApiResponse;
 };
-type MetricsCollectorIndividualConnectorConfigurationRequest = {
+export type MetricsCollectorIndividualConnectorConfigurationRequest = {
   /** Indicates whether metrics collection is enabled for this connector. */
   metricsCollectionEnabled: boolean;
   /** Frequency in seconds at which metrics are collected from this connector. */
   scrapeIntervalSeconds: number;
 };
-type MetricsCollectorSettings = {
+export type MetricsCollectorSettings = {
   /** The base interval in seconds for the metrics collection loop.
    * This defines how frequently the collector checks whether to scrape each connector, not the interval at which each connector is scraped. Must be equal to or less than the lowest individual connector scrape interval. */
   baseScrapeIntervalSeconds: number;
@@ -135,21 +160,21 @@ type MetricsCollectorSettings = {
   localDataRetentionDatabaseSizeInMb?: number;
   /** The number of days to retain local data. */
   localDataRetentionDays: number;
-  /** The file location for the local metrics database. If not specified, defaults to `C:\ProgramData\Qlik\Gateway\tmp`. */
+  /** The file location for the local metrics database. If not specified, defaults to `%ProgramData%\Qlik\Gateway\tmp`. */
   localDatabaseFileLocation?: string | null;
   /** The port number that the metrics collector API will run on.
    * This must match the port that the SYSTEM connector runs on to enable network metrics collection. */
   port: number;
 };
-type MetricsCollectorSettingsApiResponse = {
+export type MetricsCollectorSettingsApiResponse = {
   connectorConfigurations?: MetricsCollectorConnectorConfigurationsApiResponse;
   metricsCollectorSettings?: MetricsCollectorSettings;
 };
-type MetricsCollectorSettingsApiResponseConnectorConfigurationResponse = {
+export type MetricsCollectorSettingsApiResponseConnectorConfigurationResponse = {
   errorMessage?: ErrorResponse;
   result?: MetricsCollectorSettingsApiResponse;
 };
-type OdbcCustomDataType = {
+export type OdbcCustomDataType = {
   /** The IsBit property in the ODBC custom data type mapping file. */
   bit?: boolean;
   /** The Identifier property in the ODBC custom data type mapping file. */
@@ -161,42 +186,42 @@ type OdbcCustomDataType = {
   /** The Size property in the ODBC custom data type mapping file. */
   size?: number;
 };
-type OdbcCustomDataTypeResponse = {
+export type OdbcCustomDataTypeResponse = {
   errorMessage?: ErrorResponse;
   result?: OdbcCustomDataType[] | null;
 };
-type Operation = {
+export type Operation = {
   op: "add" | "replace" | "remove";
-  path: "AGENT_LOG_LEVEL" | "AGENT_HEALTH_FAIL_MINUTES_LIMIT" | "AGENT_LOG_OPTIONS" | "EXTEND_FIRST_REQUEST_TIMEOUT" | "RELOAD_CACHE_MEMORY_MB" | "DCAAS_LOG_LEVEL" | "ODBC_LOG_LEVEL" | "ODBC_MAX_PROCESS_COUNT" | "ODBC_PROCESS_ISOLATION_MODE" | "ODBC_RELOAD_SESSION_LIFE" | "SAPBW_LOG_LEVEL" | "SAPBW_MAX_PROCESS_COUNT" | "SAPBW_PROCESS_ISOLATION_MODE" | "SAPSQL_LOG_LEVEL" | "SAPSQL_MAX_PROCESS_COUNT" | "SAPSQL_PROCESS_ISOLATION_MODE" | "SAPPACKAGE_LOG_LEVEL" | "SAPPACKAGE_MAX_PROCESS_COUNT" | "SAPPACKAGE_PROCESS_ISOLATION_MODE" | "FILE_LOG_LEVEL" | "FILE_MAX_PROCESS_COUNT" | "FILE_PROCESS_ISOLATION_MODE" | "REST_LOG_LEVEL" | "REST_MAX_PROCESS_COUNT" | "REST_PROCESS_ISOLATION_MODE" | "ODBC_TABLES_LIMIT_FOR_GENERICODBC" | "OVERRIDE_CHUNKS_CACHE_DIR" | "CHUNK_RECOVERY_RESUME_THRESHOLD_MINUTES" | "REST_ALLOW_LOCALHOST_CONNECTION" | "OPTIONAL_CAPABILITIES" | "AGENT_LOG_MAX_FILE_SIZE_MB" | "AGENT_LOG_RETENTION_DAYS" | "METRICS_LOG_MAX_FILE_SIZE_MB" | "METRICS_LOG_RETENTION_DAYS" | "DCAAS_LOG_RETENTION_DAYS" | "ODBC_LOG_RETENTION_DAYS" | "SAPBW_LOG_RETENTION_DAYS" | "SAPSQL_LOG_RETENTION_DAYS" | "SAPPACKAGE_LOG_RETENTION_DAYS" | "REST_LOG_RETENTION_DAYS" | "FILE_LOG_RETENTION_DAYS";
+  path: "AGENT_LOG_LEVEL" | "AGENT_HEALTH_FAIL_MINUTES_LIMIT" | "AGENT_LOG_OPTIONS" | "EXTEND_FIRST_REQUEST_TIMEOUT" | "RELOAD_CACHE_MEMORY_MB" | "DCAAS_LOG_LEVEL" | "ODBC_LOG_LEVEL" | "ODBC_MAX_PROCESS_COUNT" | "ODBC_PROCESS_ISOLATION_MODE" | "ODBC_RELOAD_SESSION_LIFE" | "SAPBW_LOG_LEVEL" | "SAPBW_MAX_PROCESS_COUNT" | "SAPBW_PROCESS_ISOLATION_MODE" | "SAPSQL_LOG_LEVEL" | "SAPSQL_MAX_PROCESS_COUNT" | "SAPSQL_PROCESS_ISOLATION_MODE" | "SAPPACKAGE_LOG_LEVEL" | "SAPPACKAGE_MAX_PROCESS_COUNT" | "SAPPACKAGE_PROCESS_ISOLATION_MODE" | "FILE_LOG_LEVEL" | "FILE_MAX_PROCESS_COUNT" | "FILE_PROCESS_ISOLATION_MODE" | "REST_LOG_LEVEL" | "REST_MAX_PROCESS_COUNT" | "REST_PROCESS_ISOLATION_MODE" | "ODBC_TABLES_LIMIT_FOR_GENERICODBC" | "OVERRIDE_CHUNKS_CACHE_DIR" | "CHUNK_RECOVERY_RESUME_THRESHOLD_MINUTES" | "REST_ALLOW_LOCALHOST_CONNECTION" | "OPTIONAL_CAPABILITIES" | "AGENT_LOG_MAX_FILE_SIZE_MB" | "AGENT_LOG_RETENTION_DAYS" | "METRICS_LOG_MAX_FILE_SIZE_MB" | "METRICS_LOG_RETENTION_DAYS" | "DCAAS_LOG_RETENTION_DAYS" | "ODBC_LOG_RETENTION_DAYS" | "SAPBW_LOG_RETENTION_DAYS" | "SAPSQL_LOG_RETENTION_DAYS" | "SAPPACKAGE_LOG_RETENTION_DAYS" | "REST_LOG_RETENTION_DAYS" | "FILE_LOG_RETENTION_DAYS" | "BENCHMARK_LOAD_PERFORMANCE_METRICS_RECORDING_ENABLED" | "BENCHMARK_RETENTION_CLEANUP_ENABLED" | "BENCHMARK_RETENTION_DAYS" | "BENCHMARK_RETENTION_CHECK_INTERVAL_MINUTES" | "BENCHMARK_RETENTION_DB_SIZE_MB" | "BENCHMARK_RETENTION_CLEANUP_BATCH_SIZE";
   value: string;
 };
-type PatchOperationResponse = {
+export type PatchOperationResponse = {
   data?: PatchOperationValidationResult[] | null;
   errorMessage?: string | null;
   failedPatchError?: ErrorResponse;
   httpStatusCode?: number;
 };
-type PatchOperationValidationResult = {
+export type PatchOperationValidationResult = {
   operation?: Operation;
   valid?: boolean;
   validationResult?: string | null;
 };
-type RunBenchmarkResponse = {
+export type RunBenchmarkResponse = {
   benchmarkId?: string | null;
 };
 /**
  * The request to update a connector flat file
  */
-type UpdateConfigurationFlatFileRequest = {
+export type UpdateConfigurationFlatFileRequest = {
   contentsToSave?: string[] | null;
 };
 /**
  * The request to update file connector allowed paths configuration
  */
-type UpdateFileConnectorAllowedPathsRequest = {
+export type UpdateFileConnectorAllowedPathsRequest = {
   fileConnectorAllowedPaths?: FileConnectorAllowedPath[] | null;
 };
-type UpdateMetricsCollectorConnectorConfigurationsRequest = {
+export type UpdateMetricsCollectorConnectorConfigurationsRequest = {
   connectorAgent: MetricsCollectorIndividualConnectorConfigurationRequest;
   fileConnector: MetricsCollectorIndividualConnectorConfigurationRequest;
   odbcConnector: MetricsCollectorIndividualConnectorConfigurationRequest;
@@ -206,7 +231,7 @@ type UpdateMetricsCollectorConnectorConfigurationsRequest = {
   sapSqlConnector: MetricsCollectorIndividualConnectorConfigurationRequest;
   systemMetrics: MetricsCollectorIndividualConnectorConfigurationRequest;
 };
-type UpdateMetricsCollectorSettings = {
+export type UpdateMetricsCollectorSettings = {
   /** The base interval in seconds for the metrics collection loop.
    * This defines how frequently the collector checks whether to scrape each connector, not the interval at which each connector is scraped. Must be equal to or less than the lowest individual connector scrape interval. */
   baseScrapeIntervalSeconds: number;
@@ -224,11 +249,11 @@ type UpdateMetricsCollectorSettings = {
    * This must match the port that the SYSTEM connector runs on to enable network metrics collection. */
   port: number;
 };
-type UpdateMetricsCollectorSettingsRequest = {
+export type UpdateMetricsCollectorSettingsRequest = {
   connectorConfigurations: UpdateMetricsCollectorConnectorConfigurationsRequest;
   metricsCollectorSettings: UpdateMetricsCollectorSettings;
 };
-type UpdateOdbcCustomTypeMappingsRequest = {
+export type UpdateOdbcCustomTypeMappingsRequest = {
   odbcCustomDataTypes?: OdbcCustomDataType[] | null;
 };
 /**
@@ -238,72 +263,76 @@ type UpdateOdbcCustomTypeMappingsRequest = {
  * @param agentAction The type of action to perform. Permitted values are `restart` (will not restart the agent if a reload is in `RELOADING` status) and `force-restart` (will restart the agent even if a reload is in `RELOADING` status).
  * @throws RestartDirectAccessAgentHttpError
  */
-declare function restartDirectAccessAgent(agentId: string, agentAction: string, options?: ApiCallOptions): Promise<RestartDirectAccessAgentHttpResponse>;
-type RestartDirectAccessAgentHttpResponse = {
+export declare function restartDirectAccessAgent(agentId: string, agentAction: string, options?: ApiCallOptions): Promise<RestartDirectAccessAgentHttpResponse>;
+export type RestartDirectAccessAgentHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type RestartDirectAccessAgentHttpError = {
+export type RestartDirectAccessAgentHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 409 | 500;
 };
 /**
- * Starts a background benchmark task to measure the performance of a Direct Access agent. Use this endpoint to evaluate agent throughput and latency for capacity planning and performance optimization. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
+ * Starts a background benchmark task that measures the throughput and latency of a Direct Access agent. Use the returned `benchmarkId` to monitor progress and retrieve performance metrics for capacity planning or performance optimization. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
  *
  * @param agentId The agent ID
  * @param query an object with query parameters
  * @throws CreateDirectAccessAgentBenchmarkHttpError
  */
-declare function createDirectAccessAgentBenchmark(agentId: string, query: {
+export declare function createDirectAccessAgentBenchmark(agentId: string, query: {
+  /** The description for the benchmark task. */
+  description?: string;
   /** Forces the benchmark to start regardless of the state of the agent. Does not override QCS resource limits. Use with caution. */
   force?: boolean;
   /** The volume of data in GB to transfer during the throughput measurement part of the benchmark. */
   gigaBytesToTransfer?: number;
+  /** The name to assign to the benchmark task. */
+  name?: string;
 }, options?: ApiCallOptions): Promise<CreateDirectAccessAgentBenchmarkHttpResponse>;
-type CreateDirectAccessAgentBenchmarkHttpResponse = {
+export type CreateDirectAccessAgentBenchmarkHttpResponse = {
   data: RunBenchmarkResponse;
   headers: Headers;
   status: 201;
 };
-type CreateDirectAccessAgentBenchmarkHttpError = {
+export type CreateDirectAccessAgentBenchmarkHttpError = {
   data: ErrorResponse;
   headers: Headers;
-  status: 403 | 404 | 500 | 501 | 503;
+  status: 400 | 403 | 404 | 500 | 501 | 503;
 };
 /**
- * Retrieves the current status and progress of a running or completed benchmark task. Use this endpoint to monitor benchmark execution and retrieve performance metrics once the task is completed. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
+ * Retrieves the current status, progress, and performance metrics for a benchmark task. Use this operation to monitor a running benchmark or inspect its completed results. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
  *
  * @param agentId The agent ID
  * @param benchmarkId The benchmark ID
  * @throws GetDirectAccessAgentBenchmarkHttpError
  */
-declare function getDirectAccessAgentBenchmark(agentId: string, benchmarkId: string, options?: ApiCallOptions): Promise<GetDirectAccessAgentBenchmarkHttpResponse>;
-type GetDirectAccessAgentBenchmarkHttpResponse = {
+export declare function getDirectAccessAgentBenchmark(agentId: string, benchmarkId: string, options?: ApiCallOptions): Promise<GetDirectAccessAgentBenchmarkHttpResponse>;
+export type GetDirectAccessAgentBenchmarkHttpResponse = {
   data: GetBenchmarkStatusResponse;
   headers: Headers;
   status: 200;
 };
-type GetDirectAccessAgentBenchmarkHttpError = {
+export type GetDirectAccessAgentBenchmarkHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 403 | 404 | 500 | 503;
 };
 /**
- * Requests a cancellation on a running benchmark by id for the specified agent. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
+ * Requests cancellation of a running benchmark for the specified agent. The request is asynchronous. Use the returned status URL to monitor when cancellation completes. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
  *
  * @param agentId The agent ID
  * @param benchmarkId The benchmark ID
  * @throws CreateDirectAccessAgentBenchmarkCancelHttpError
  */
-declare function createDirectAccessAgentBenchmarkCancel(agentId: string, benchmarkId: string, options?: ApiCallOptions): Promise<CreateDirectAccessAgentBenchmarkCancelHttpResponse>;
-type CreateDirectAccessAgentBenchmarkCancelHttpResponse = {
+export declare function createDirectAccessAgentBenchmarkCancel(agentId: string, benchmarkId: string, options?: ApiCallOptions): Promise<CreateDirectAccessAgentBenchmarkCancelHttpResponse>;
+export type CreateDirectAccessAgentBenchmarkCancelHttpResponse = {
   data: CancelBenchmarkResponse;
   headers: Headers;
   status: 202;
 };
-type CreateDirectAccessAgentBenchmarkCancelHttpError = {
+export type CreateDirectAccessAgentBenchmarkCancelHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 403 | 404 | 500 | 503;
@@ -315,16 +344,16 @@ type CreateDirectAccessAgentBenchmarkCancelHttpError = {
  * @param query an object with query parameters
  * @throws GetDirectAccessAgentConfigurationHttpError
  */
-declare function getDirectAccessAgentConfiguration(agentId: string, query: {
+export declare function getDirectAccessAgentConfiguration(agentId: string, query: {
   /** Individual properties within the agent configuration */
   queryProperties?: string[];
 }, options?: ApiCallOptions): Promise<GetDirectAccessAgentConfigurationHttpResponse>;
-type GetDirectAccessAgentConfigurationHttpResponse = {
+export type GetDirectAccessAgentConfigurationHttpResponse = {
   data: ConfigurationResponse;
   headers: Headers;
   status: 200;
 };
-type GetDirectAccessAgentConfigurationHttpError = {
+export type GetDirectAccessAgentConfigurationHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 403 | 404;
@@ -336,19 +365,19 @@ type GetDirectAccessAgentConfigurationHttpError = {
  * @param body an object with the body content
  * @throws PatchDirectAccessAgentConfigurationHttpError
  */
-declare function patchDirectAccessAgentConfiguration(agentId: string, body: Operation[], options?: ApiCallOptions): Promise<PatchDirectAccessAgentConfigurationHttpResponse>;
-type PatchDirectAccessAgentConfigurationHttpResponse = PatchDirectAccessAgentConfiguration204HttpResponse | PatchDirectAccessAgentConfiguration207HttpResponse;
-type PatchDirectAccessAgentConfiguration204HttpResponse = {
+export declare function patchDirectAccessAgentConfiguration(agentId: string, body: Operation[], options?: ApiCallOptions): Promise<PatchDirectAccessAgentConfigurationHttpResponse>;
+export type PatchDirectAccessAgentConfigurationHttpResponse = PatchDirectAccessAgentConfiguration204HttpResponse | PatchDirectAccessAgentConfiguration207HttpResponse;
+export type PatchDirectAccessAgentConfiguration204HttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchDirectAccessAgentConfiguration207HttpResponse = {
+export type PatchDirectAccessAgentConfiguration207HttpResponse = {
   data: PatchOperationResponse;
   headers: Headers;
   status: 207;
 };
-type PatchDirectAccessAgentConfigurationHttpError = {
+export type PatchDirectAccessAgentConfigurationHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 415;
@@ -359,13 +388,13 @@ type PatchDirectAccessAgentConfigurationHttpError = {
  * @param agentId The agent ID
  * @throws GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError
  */
-declare function getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths(agentId: string, options?: ApiCallOptions): Promise<GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpResponse>;
-type GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpResponse = {
+export declare function getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths(agentId: string, options?: ApiCallOptions): Promise<GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpResponse>;
+export type GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpResponse = {
   data: FileConnectorAllowedPathsResponse;
   headers: Headers;
   status: 200;
 };
-type GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError = {
+export type GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 404;
@@ -377,13 +406,13 @@ type GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError = {
  * @param body an object with the body content
  * @throws PutDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError
  */
-declare function putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths(agentId: string, body: UpdateFileConnectorAllowedPathsRequest, options?: ApiCallOptions): Promise<PutDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpResponse>;
-type PutDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpResponse = {
+export declare function putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths(agentId: string, body: UpdateFileConnectorAllowedPathsRequest, options?: ApiCallOptions): Promise<PutDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpResponse>;
+export type PutDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PutDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError = {
+export type PutDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 404 | 409;
@@ -394,13 +423,13 @@ type PutDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError = {
  * @param agentId The agent ID.
  * @throws GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpError
  */
-declare function getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings(agentId: string, options?: ApiCallOptions): Promise<GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpResponse>;
-type GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpResponse = {
+export declare function getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings(agentId: string, options?: ApiCallOptions): Promise<GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpResponse>;
+export type GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpResponse = {
   data: OdbcCustomDataTypeResponse;
   headers: Headers;
   status: 200;
 };
-type GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpError = {
+export type GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 404;
@@ -412,13 +441,13 @@ type GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpE
  * @param body an object with the body content
  * @throws PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpError
  */
-declare function putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings(agentId: string, body: UpdateOdbcCustomTypeMappingsRequest, options?: ApiCallOptions): Promise<PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpResponse>;
-type PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpResponse = {
+export declare function putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings(agentId: string, body: UpdateOdbcCustomTypeMappingsRequest, options?: ApiCallOptions): Promise<PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpResponse>;
+export type PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpError = {
+export type PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 404 | 409;
@@ -431,13 +460,13 @@ type PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpE
  * @param query an object with query parameters
  * @throws GetDirectAccessAgentConnectorFilesHttpError
  */
-declare function getDirectAccessAgentConnectorFiles(agentId: string, connectorType: string, query: Record<string, unknown>, options?: ApiCallOptions): Promise<GetDirectAccessAgentConnectorFilesHttpResponse>;
-type GetDirectAccessAgentConnectorFilesHttpResponse = {
+export declare function getDirectAccessAgentConnectorFiles(agentId: string, connectorType: string, query: Record<string, unknown>, options?: ApiCallOptions): Promise<GetDirectAccessAgentConnectorFilesHttpResponse>;
+export type GetDirectAccessAgentConnectorFilesHttpResponse = {
   data: ConnectorFlatFileConfigurationResponse;
   headers: Headers;
   status: 200;
 };
-type GetDirectAccessAgentConnectorFilesHttpError = {
+export type GetDirectAccessAgentConnectorFilesHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 403 | 404;
@@ -449,13 +478,13 @@ type GetDirectAccessAgentConnectorFilesHttpError = {
  * @param connectorType The connector to retrieve the list of files for
  * @throws GetDirectAccessAgentConnectorFilesWithoutQueryHttpError
  */
-declare function getDirectAccessAgentConnectorFilesWithoutQuery(agentId: string, connectorType: string, options?: ApiCallOptions): Promise<GetDirectAccessAgentConnectorFilesWithoutQueryHttpResponse>;
-type GetDirectAccessAgentConnectorFilesWithoutQueryHttpResponse = {
+export declare function getDirectAccessAgentConnectorFilesWithoutQuery(agentId: string, connectorType: string, options?: ApiCallOptions): Promise<GetDirectAccessAgentConnectorFilesWithoutQueryHttpResponse>;
+export type GetDirectAccessAgentConnectorFilesWithoutQueryHttpResponse = {
   data: ConnectorFlatFileConfigurationResponse;
   headers: Headers;
   status: 200;
 };
-type GetDirectAccessAgentConnectorFilesWithoutQueryHttpError = {
+export type GetDirectAccessAgentConnectorFilesWithoutQueryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 403 | 404;
@@ -468,13 +497,13 @@ type GetDirectAccessAgentConnectorFilesWithoutQueryHttpError = {
  * @param fileType The type of file to retrieve
  * @throws GetDirectAccessAgentConnectorFileHttpError
  */
-declare function getDirectAccessAgentConnectorFile(agentId: string, connectorType: string, fileType: string, options?: ApiCallOptions): Promise<GetDirectAccessAgentConnectorFileHttpResponse>;
-type GetDirectAccessAgentConnectorFileHttpResponse = {
+export declare function getDirectAccessAgentConnectorFile(agentId: string, connectorType: string, fileType: string, options?: ApiCallOptions): Promise<GetDirectAccessAgentConnectorFileHttpResponse>;
+export type GetDirectAccessAgentConnectorFileHttpResponse = {
   data: ConnectorFlatFileConfigurationResponse;
   headers: Headers;
   status: 200;
 };
-type GetDirectAccessAgentConnectorFileHttpError = {
+export type GetDirectAccessAgentConnectorFileHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 403 | 404;
@@ -489,13 +518,13 @@ type GetDirectAccessAgentConnectorFileHttpError = {
  * @param body an object with the body content
  * @throws UpdateDirectAccessAgentConnectorFileHttpError
  */
-declare function updateDirectAccessAgentConnectorFile(agentId: string, connectorType: string, fileType: string, query: Record<string, unknown>, body: UpdateConfigurationFlatFileRequest, options?: ApiCallOptions): Promise<UpdateDirectAccessAgentConnectorFileHttpResponse>;
-type UpdateDirectAccessAgentConnectorFileHttpResponse = {
+export declare function updateDirectAccessAgentConnectorFile(agentId: string, connectorType: string, fileType: string, query: Record<string, unknown>, body: UpdateConfigurationFlatFileRequest, options?: ApiCallOptions): Promise<UpdateDirectAccessAgentConnectorFileHttpResponse>;
+export type UpdateDirectAccessAgentConnectorFileHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type UpdateDirectAccessAgentConnectorFileHttpError = {
+export type UpdateDirectAccessAgentConnectorFileHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 404 | 409;
@@ -509,13 +538,13 @@ type UpdateDirectAccessAgentConnectorFileHttpError = {
  * @param body an object with the body content
  * @throws UpdateDirectAccessAgentConnectorFileWithoutQueryHttpError
  */
-declare function updateDirectAccessAgentConnectorFileWithoutQuery(agentId: string, connectorType: string, fileType: string, body: UpdateConfigurationFlatFileRequest, options?: ApiCallOptions): Promise<UpdateDirectAccessAgentConnectorFileWithoutQueryHttpResponse>;
-type UpdateDirectAccessAgentConnectorFileWithoutQueryHttpResponse = {
+export declare function updateDirectAccessAgentConnectorFileWithoutQuery(agentId: string, connectorType: string, fileType: string, body: UpdateConfigurationFlatFileRequest, options?: ApiCallOptions): Promise<UpdateDirectAccessAgentConnectorFileWithoutQueryHttpResponse>;
+export type UpdateDirectAccessAgentConnectorFileWithoutQueryHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type UpdateDirectAccessAgentConnectorFileWithoutQueryHttpError = {
+export type UpdateDirectAccessAgentConnectorFileWithoutQueryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 404 | 409;
@@ -526,13 +555,13 @@ type UpdateDirectAccessAgentConnectorFileWithoutQueryHttpError = {
  * @param agentId The agent ID.
  * @throws GetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError
  */
-declare function getDirectAccessAgentToolsMetricsCollectorConfiguration(agentId: string, options?: ApiCallOptions): Promise<GetDirectAccessAgentToolsMetricsCollectorConfigurationHttpResponse>;
-type GetDirectAccessAgentToolsMetricsCollectorConfigurationHttpResponse = {
+export declare function getDirectAccessAgentToolsMetricsCollectorConfiguration(agentId: string, options?: ApiCallOptions): Promise<GetDirectAccessAgentToolsMetricsCollectorConfigurationHttpResponse>;
+export type GetDirectAccessAgentToolsMetricsCollectorConfigurationHttpResponse = {
   data: MetricsCollectorSettingsApiResponseConnectorConfigurationResponse;
   headers: Headers;
   status: 200;
 };
-type GetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError = {
+export type GetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 404;
@@ -544,13 +573,13 @@ type GetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError = {
  * @param body an object with the body content
  * @throws SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError
  */
-declare function setDirectAccessAgentToolsMetricsCollectorConfiguration(agentId: string, body: UpdateMetricsCollectorSettingsRequest, options?: ApiCallOptions): Promise<SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpResponse>;
-type SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpResponse = {
+export declare function setDirectAccessAgentToolsMetricsCollectorConfiguration(agentId: string, body: UpdateMetricsCollectorSettingsRequest, options?: ApiCallOptions): Promise<SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpResponse>;
+export type SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError = {
+export type SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 404 | 409;
@@ -558,8 +587,8 @@ type SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError = {
 /**
  * Clears the cache for direct-access-agents api requests.
  */
-declare function clearCache(): void;
-type DirectAccessAgentsAPI = {
+export declare function clearCache(): void;
+export type DirectAccessAgentsAPI = {
   /**
    * Restarts the specified agent. If a reload is in `RELOADING` status the `restart` action will be ignored. Use `force-restart` to restart the agent even if a reload is in `RELOADING` status. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
    *
@@ -569,7 +598,7 @@ type DirectAccessAgentsAPI = {
    */
   restartDirectAccessAgent: typeof restartDirectAccessAgent;
   /**
-   * Starts a background benchmark task to measure the performance of a Direct Access agent. Use this endpoint to evaluate agent throughput and latency for capacity planning and performance optimization. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
+   * Starts a background benchmark task that measures the throughput and latency of a Direct Access agent. Use the returned `benchmarkId` to monitor progress and retrieve performance metrics for capacity planning or performance optimization. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
    *
    * @param agentId The agent ID
    * @param query an object with query parameters
@@ -577,7 +606,7 @@ type DirectAccessAgentsAPI = {
    */
   createDirectAccessAgentBenchmark: typeof createDirectAccessAgentBenchmark;
   /**
-   * Retrieves the current status and progress of a running or completed benchmark task. Use this endpoint to monitor benchmark execution and retrieve performance metrics once the task is completed. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
+   * Retrieves the current status, progress, and performance metrics for a benchmark task. Use this operation to monitor a running benchmark or inspect its completed results. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
    *
    * @param agentId The agent ID
    * @param benchmarkId The benchmark ID
@@ -585,7 +614,7 @@ type DirectAccessAgentsAPI = {
    */
   getDirectAccessAgentBenchmark: typeof getDirectAccessAgentBenchmark;
   /**
-   * Requests a cancellation on a running benchmark by id for the specified agent. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
+   * Requests cancellation of a running benchmark for the specified agent. The request is asynchronous. Use the returned status URL to monitor when cancellation completes. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
    *
    * @param agentId The agent ID
    * @param benchmarkId The benchmark ID
@@ -710,4 +739,4 @@ type DirectAccessAgentsAPI = {
  */
 declare const directAccessAgentsExport: DirectAccessAgentsAPI;
 //#endregion
-export { CancelBenchmarkResponse, ConfigurationLineBase, ConfigurationLineNumeric, ConfigurationLineString, ConfigurationResponse, ConnectorFlatFileConfigurationResponse, ConnectorSettings, CreateDirectAccessAgentBenchmarkCancelHttpError, CreateDirectAccessAgentBenchmarkCancelHttpResponse, CreateDirectAccessAgentBenchmarkHttpError, CreateDirectAccessAgentBenchmarkHttpResponse, DirectAccessAgentsAPI, ErrorMessage, ErrorResponse, FileConnectorAllowedPath, FileConnectorAllowedPathsResponse, GetBenchmarkStatusResponse, GetBenchmarkStatusResults, GetDirectAccessAgentBenchmarkHttpError, GetDirectAccessAgentBenchmarkHttpResponse, GetDirectAccessAgentConfigurationHttpError, GetDirectAccessAgentConfigurationHttpResponse, GetDirectAccessAgentConnectorFileHttpError, GetDirectAccessAgentConnectorFileHttpResponse, GetDirectAccessAgentConnectorFilesHttpError, GetDirectAccessAgentConnectorFilesHttpResponse, GetDirectAccessAgentConnectorFilesWithoutQueryHttpError, GetDirectAccessAgentConnectorFilesWithoutQueryHttpResponse, GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError, GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpResponse, GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpError, GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpResponse, GetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError, GetDirectAccessAgentToolsMetricsCollectorConfigurationHttpResponse, LinkResponseObject, MetricsCollectorConnectorConfigurationApiResponse, MetricsCollectorConnectorConfigurationsApiResponse, MetricsCollectorIndividualConnectorConfigurationRequest, MetricsCollectorSettings, MetricsCollectorSettingsApiResponse, MetricsCollectorSettingsApiResponseConnectorConfigurationResponse, OdbcCustomDataType, OdbcCustomDataTypeResponse, Operation, PatchDirectAccessAgentConfiguration204HttpResponse, PatchDirectAccessAgentConfiguration207HttpResponse, PatchDirectAccessAgentConfigurationHttpError, PatchDirectAccessAgentConfigurationHttpResponse, PatchOperationResponse, PatchOperationValidationResult, PutDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError, PutDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpResponse, PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpError, PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpResponse, RestartDirectAccessAgentHttpError, RestartDirectAccessAgentHttpResponse, RunBenchmarkResponse, SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError, SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpResponse, UpdateConfigurationFlatFileRequest, UpdateDirectAccessAgentConnectorFileHttpError, UpdateDirectAccessAgentConnectorFileHttpResponse, UpdateDirectAccessAgentConnectorFileWithoutQueryHttpError, UpdateDirectAccessAgentConnectorFileWithoutQueryHttpResponse, UpdateFileConnectorAllowedPathsRequest, UpdateMetricsCollectorConnectorConfigurationsRequest, UpdateMetricsCollectorSettings, UpdateMetricsCollectorSettingsRequest, UpdateOdbcCustomTypeMappingsRequest, clearCache, createDirectAccessAgentBenchmark, createDirectAccessAgentBenchmarkCancel, directAccessAgentsExport as default, getDirectAccessAgentBenchmark, getDirectAccessAgentConfiguration, getDirectAccessAgentConnectorFile, getDirectAccessAgentConnectorFiles, getDirectAccessAgentConnectorFilesWithoutQuery, getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths, getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings, getDirectAccessAgentToolsMetricsCollectorConfiguration, patchDirectAccessAgentConfiguration, putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths, putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings, restartDirectAccessAgent, setDirectAccessAgentToolsMetricsCollectorConfiguration, updateDirectAccessAgentConnectorFile, updateDirectAccessAgentConnectorFileWithoutQuery };
+export { directAccessAgentsExport as default };

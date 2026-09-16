@@ -1,11 +1,11 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/csp-origins.d.ts
-type CSPEntry = {
+export type CSPEntry = {
   /** The CSP entry's unique identifier. */
   id?: string;
 } & CSPEntryContent;
-type CSPEntryContent = {
+export type CSPEntryContent = {
   /** Defines the valid sources for loading web workers and nested browsing contexts using elements such as frame and iFrame. */
   childSrc?: boolean;
   /** Restricts the URLs that can be loaded using script interfaces. */
@@ -43,7 +43,7 @@ type CSPEntryContent = {
   /** Specifies valid sources for Worker, SharedWorker, or ServiceWorker scripts. */
   workerSrc?: boolean;
 };
-type CSPEntryList = {
+export type CSPEntryList = {
   data?: CSPEntry[];
   links?: {
     next?: Link;
@@ -51,11 +51,11 @@ type CSPEntryList = {
     self?: Link;
   };
 };
-type CSPHeader = {
+export type CSPHeader = {
   /** The compiled CSP header. */
   "Content-Security-Policy"?: string;
 };
-type Error = {
+export type Error = {
   /** The unique code for the error. */
   code: string;
   /** May be used to provide additional details. */
@@ -63,10 +63,10 @@ type Error = {
   /** A summary of what went wrong. */
   title: string;
 };
-type ErrorResponse = {
+export type ErrorResponse = {
   errors?: Error[];
 };
-type Link = {
+export type Link = {
   /** URL to a resource request. */
   href: string;
 };
@@ -76,7 +76,7 @@ type Link = {
  * @param query an object with query parameters
  * @throws GetCSPEntriesHttpError
  */
-declare function getCSPEntries(query: {
+export declare function getCSPEntries(query: {
   /** Filter resources by directive 'childSrc', true/false. */
   childSrc?: boolean;
   /** Filter resources by directive 'connectSrc', true/false. */
@@ -116,14 +116,14 @@ declare function getCSPEntries(query: {
   /** Filter resources by directive 'workerSrc', true/false. */
   workerSrc?: boolean;
 }, options?: ApiCallOptions): Promise<GetCSPEntriesHttpResponse>;
-type GetCSPEntriesHttpResponse = {
+export type GetCSPEntriesHttpResponse = {
   data: CSPEntryList;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetCSPEntriesHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetCSPEntriesHttpResponse>;
 };
-type GetCSPEntriesHttpError = {
+export type GetCSPEntriesHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 500 | 503;
@@ -134,13 +134,13 @@ type GetCSPEntriesHttpError = {
  * @param body an object with the body content
  * @throws CreateCSPEntryHttpError
  */
-declare function createCSPEntry(body: CSPEntryContent, options?: ApiCallOptions): Promise<CreateCSPEntryHttpResponse>;
-type CreateCSPEntryHttpResponse = {
+export declare function createCSPEntry(body: CSPEntryContent, options?: ApiCallOptions): Promise<CreateCSPEntryHttpResponse>;
+export type CreateCSPEntryHttpResponse = {
   data: CSPEntry;
   headers: Headers;
   status: 201;
 };
-type CreateCSPEntryHttpError = {
+export type CreateCSPEntryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 500 | 503;
@@ -150,13 +150,13 @@ type CreateCSPEntryHttpError = {
  *
  * @throws GetCSPHeaderHttpError
  */
-declare function getCSPHeader(options?: ApiCallOptions): Promise<GetCSPHeaderHttpResponse>;
-type GetCSPHeaderHttpResponse = {
+export declare function getCSPHeader(options?: ApiCallOptions): Promise<GetCSPHeaderHttpResponse>;
+export type GetCSPHeaderHttpResponse = {
   data: CSPHeader;
   headers: Headers;
   status: 200;
 };
-type GetCSPHeaderHttpError = {
+export type GetCSPHeaderHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 401 | 406 | 500 | 503;
@@ -167,13 +167,13 @@ type GetCSPHeaderHttpError = {
  * @param id The CSP entry's unique identifier.
  * @throws DeleteCSPEntryHttpError
  */
-declare function deleteCSPEntry(id: string, options?: ApiCallOptions): Promise<DeleteCSPEntryHttpResponse>;
-type DeleteCSPEntryHttpResponse = {
+export declare function deleteCSPEntry(id: string, options?: ApiCallOptions): Promise<DeleteCSPEntryHttpResponse>;
+export type DeleteCSPEntryHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteCSPEntryHttpError = {
+export type DeleteCSPEntryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -184,13 +184,13 @@ type DeleteCSPEntryHttpError = {
  * @param id The CSP entry's unique identifier.
  * @throws GetCSPEntryHttpError
  */
-declare function getCSPEntry(id: string, options?: ApiCallOptions): Promise<GetCSPEntryHttpResponse>;
-type GetCSPEntryHttpResponse = {
+export declare function getCSPEntry(id: string, options?: ApiCallOptions): Promise<GetCSPEntryHttpResponse>;
+export type GetCSPEntryHttpResponse = {
   data: CSPEntry;
   headers: Headers;
   status: 200;
 };
-type GetCSPEntryHttpError = {
+export type GetCSPEntryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -202,13 +202,13 @@ type GetCSPEntryHttpError = {
  * @param body an object with the body content
  * @throws UpdateCSPEntryHttpError
  */
-declare function updateCSPEntry(id: string, body: CSPEntryContent, options?: ApiCallOptions): Promise<UpdateCSPEntryHttpResponse>;
-type UpdateCSPEntryHttpResponse = {
+export declare function updateCSPEntry(id: string, body: CSPEntryContent, options?: ApiCallOptions): Promise<UpdateCSPEntryHttpResponse>;
+export type UpdateCSPEntryHttpResponse = {
   data: CSPEntry;
   headers: Headers;
   status: 200;
 };
-type UpdateCSPEntryHttpError = {
+export type UpdateCSPEntryHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -216,8 +216,8 @@ type UpdateCSPEntryHttpError = {
 /**
  * Clears the cache for csp-origins api requests.
  */
-declare function clearCache(): void;
-type CspOriginsAPI = {
+export declare function clearCache(): void;
+export type CspOriginsAPI = {
   /**
    * Retrieves all content security policies for a tenant.
    *
@@ -270,4 +270,4 @@ type CspOriginsAPI = {
  */
 declare const cspOriginsExport: CspOriginsAPI;
 //#endregion
-export { CSPEntry, CSPEntryContent, CSPEntryList, CSPHeader, CreateCSPEntryHttpError, CreateCSPEntryHttpResponse, CspOriginsAPI, DeleteCSPEntryHttpError, DeleteCSPEntryHttpResponse, Error, ErrorResponse, GetCSPEntriesHttpError, GetCSPEntriesHttpResponse, GetCSPEntryHttpError, GetCSPEntryHttpResponse, GetCSPHeaderHttpError, GetCSPHeaderHttpResponse, Link, UpdateCSPEntryHttpError, UpdateCSPEntryHttpResponse, clearCache, createCSPEntry, cspOriginsExport as default, deleteCSPEntry, getCSPEntries, getCSPEntry, getCSPHeader, updateCSPEntry };
+export { cspOriginsExport as default };

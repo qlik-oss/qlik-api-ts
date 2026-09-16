@@ -1,7 +1,7 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/di-projects.d.ts
-type AsyncActionDetails = {
+export type AsyncActionDetails = {
   endTime?: string;
   error?: AsyncActionError;
   /** Name of the async operation */
@@ -22,7 +22,7 @@ type AsyncActionDetails = {
   /** Type of action being performed */
   type?: AsyncActionType;
 };
-type AsyncActionError = {
+export type AsyncActionError = {
   /** Error code */
   code?: string;
   /** Additional error details */
@@ -30,11 +30,11 @@ type AsyncActionError = {
   /** Error message */
   message?: string;
 };
-type AsyncActionRsp = {
+export type AsyncActionRsp = {
   /** Identifier for tracking the action */
   actionId: string;
 };
-type AsyncActionTaskProgress = {
+export type AsyncActionTaskProgress = {
   /** Number of tasks canceled */
   canceled?: number;
   /** Number of tasks completed successfully */
@@ -51,12 +51,12 @@ type AsyncActionTaskProgress = {
 /**
  * Type of action being performed
  */
-type AsyncActionType = "PROJECT_PREPARE" | "PROJECT_VALIDATE" | "TASK_PREPARE" | "TASK_VALIDATE" | "PROJECT_IMPORT";
+export type AsyncActionType = "PROJECT_PREPARE" | "PROJECT_VALIDATE" | "TASK_PREPARE" | "TASK_VALIDATE" | "PROJECT_IMPORT";
 /**
  * State of the action
  */
-type AsyncCallStatus = "PENDING" | "EXECUTING" | "COMPLETED" | "FAILED" | "CANCELED" | "SKIPPED";
-type CreateDiProjectReq = {
+export type AsyncCallStatus = "PENDING" | "EXECUTING" | "COMPLETED" | "FAILED" | "CANCELED" | "SKIPPED";
+export type CreateDiProjectReq = {
   /** The cloud staging connection string */
   cloudStagingConnection?: string;
   /** A description of the project */
@@ -75,7 +75,7 @@ type CreateDiProjectReq = {
 /**
  * Represents the execution state of a single dataset within a task run, including full load, CDC, and streaming progress.
  */
-type DataTaskDatasetState = {
+export type DataTaskDatasetState = {
   /** Change Data Capture state for the dataset, tracking incremental changes applied and any errors. */
   cdcStatus?: {
     /** Number of DDL statements executed during the last run */
@@ -156,7 +156,7 @@ type DataTaskDatasetState = {
 /**
  * Represents the execution state of a task instance, including progress metrics, errors, and operation-specific statistics.
  */
-type DataTaskInstanceState = {
+export type DataTaskInstanceState = {
   /** Change Data Capture status information for tasks performing incremental updates, including latency and processing counts. */
   cdcStatus?: {
     accumulatingChangesCount?: number;
@@ -237,7 +237,7 @@ type DataTaskInstanceState = {
   /** Trace identifier for the last run, useful for diagnostics and support */
   traceId?: string;
 };
-type DataTaskItemRsp = {
+export type DataTaskItemRsp = {
   description?: string;
   id?: string;
   name?: string;
@@ -248,7 +248,7 @@ type DataTaskItemRsp = {
 /**
  * Represents the current or historical execution state of a data task, including progress information, error details, and dataset-level statistics.
  */
-type DataTaskRuntimeState = {
+export type DataTaskRuntimeState = {
   /** Represents the execution state of a task instance, including progress metrics, errors, and operation-specific statistics. */
   lastRun?: DataTaskInstanceState;
   /** Name of the data task */
@@ -259,15 +259,15 @@ type DataTaskRuntimeState = {
   };
   type?: DataTaskType;
 };
-type DataTaskType = "LANDING" | "STORAGE" | "QVD_STORAGE" | "TRANSFORM" | "DATAMART" | "REGISTERED_DATA" | "REPLICATION" | "DISTRIBUTION" | "LAKE_LANDING" | "KNOWLEDGE_MART" | "FILE_BASED_KNOWLEDGE_MART" | "LAKEHOUSE_STORAGE" | "LAKEHOUSE_MIRROR" | "STREAMING_LAKE_LANDING" | "STREAMING_TRANSFORM" | "REPLICATE_LANDING";
+export type DataTaskType = "LANDING" | "STORAGE" | "QVD_STORAGE" | "TRANSFORM" | "DATAMART" | "REGISTERED_DATA" | "REPLICATION" | "DISTRIBUTION" | "LAKE_LANDING" | "KNOWLEDGE_MART" | "FILE_BASED_KNOWLEDGE_MART" | "LAKEHOUSE_STORAGE" | "LAKEHOUSE_MIRROR" | "STREAMING_LAKE_LANDING" | "STREAMING_TRANSFORM" | "REPLICATE_LANDING";
 /**
  * Defines the export format for the project files.
  * - 'LEGACY': Exports a ZIP of the previous JSON files. Deprecated and will be removed in a future release.
  * - 'MINIMAL': Exports a ZIP of the new YAML files, including only non-default attribute values.
  * - 'ALL': Exports a ZIP of the new YAML files, including all attributes.
  */
-type DiExportMode = "MINIMAL" | "ALL" | "LEGACY";
-type DiProjectItemRsp = {
+export type DiExportMode = "MINIMAL" | "ALL" | "LEGACY";
+export type DiProjectItemRsp = {
   description?: string;
   id?: string;
   name?: string;
@@ -278,14 +278,14 @@ type DiProjectItemRsp = {
   /** The type of the project */
   type?: "DATA_PIPELINE" | "DATA_MOVEMENT";
 };
-type DiProjectOperationSelectedTask = {
+export type DiProjectOperationSelectedTask = {
   /** Task identifier */
   taskId: string;
 };
 /**
  * Request parameters for searching task run history, including filter criteria and pagination options.
  */
-type DiSearchTaskRunHistoryReq = {
+export type DiSearchTaskRunHistoryReq = {
   /** Field filters to apply to the search. */
   filters?: TaskRunSearchFilter[];
   /** Cursor for paging. Pass the `runId` of the last item from the previous response to fetch the next page; omit on the first request. */
@@ -293,7 +293,7 @@ type DiSearchTaskRunHistoryReq = {
   /** Maximum number of runs to return. */
   limit?: number;
 };
-type DiSearchTaskRunHistoryRsp = {
+export type DiSearchTaskRunHistoryRsp = {
   /** Identifier of the last run in this page. Pass this value back as `lastId` in the next request to fetch the following page. */
   lastId?: string;
   /** True when more pages are available after this one; false when this is the last page. */
@@ -304,7 +304,7 @@ type DiSearchTaskRunHistoryRsp = {
 /**
  * Represents a single error condition with details about what went wrong.
  */
-type Error = {
+export type Error = {
   /** Machine-readable error code for programmatic handling. */
   code?: string;
   /** Detailed explanation of the error and suggested remediation steps. */
@@ -319,7 +319,7 @@ type Error = {
 /**
  * Identifies the location of the error in the request.
  */
-type ErrorSource = {
+export type ErrorSource = {
   /** Name of the query parameter or path parameter that caused the error. */
   parameter?: string;
   /** JSON Pointer (RFC 6901) to the field in the request body that caused the error. */
@@ -328,13 +328,13 @@ type ErrorSource = {
 /**
  * Standard error response wrapper containing one or more error details and a trace ID for diagnostics.
  */
-type Errors = {
+export type Errors = {
   /** Array of error objects describing what went wrong. */
   errors?: Error[];
   /** Unique identifier for this error response, useful for tracking and support inquiries. */
   traceId?: string;
 };
-type ExportDiProjectReq = {
+export type ExportDiProjectReq = {
   /** Include bindings in the exported zip file. If not specified, defaults to `false`. */
   includeBindings?: boolean;
   /** Defines the export format for the project files.
@@ -346,30 +346,30 @@ type ExportDiProjectReq = {
 /**
  * Statistics for file-based tasks.
  */
-type FileStatistics = {
+export type FileStatistics = {
   /** Number of files processed. */
   processedCount?: number;
   /** Volume of data processed (e.g. '10.91 MiB'). */
   volume?: string;
 };
-type GetDiExportProjectVariablesRsp = {
+export type GetDiExportProjectVariablesRsp = {
   nameToIdMap?: Record<string, string>;
   variables?: Record<string, string>;
 };
-type ImportDiProjectRsp = unknown;
-type ListDataTaskDatasetsRsp = {
+export type ImportDiProjectRsp = unknown;
+export type ListDataTaskDatasetsRsp = {
   datasets?: DataTaskDatasetState[];
 };
-type ListDataTasksRsp = {
+export type ListDataTasksRsp = {
   dataTasks?: DataTaskItemRsp[];
 };
-type ListDiProjectsRsp = {
+export type ListDiProjectsRsp = {
   projects?: DiProjectItemRsp[];
 };
 /**
  * Breakdown of operations for record-oriented tasks.
  */
-type OperationStatistics = {
+export type OperationStatistics = {
   /** Number of delete operations. */
   deleteCount?: number;
   /** Number of failed operations. */
@@ -384,21 +384,21 @@ type OperationStatistics = {
  * @example
  * "SNOWFLAKE"
  */
-type PlatformType = "SNOWFLAKE" | "BIGQUERY" | "SYNAPSE" | "DATABRICKS" | "REDSHIFT" | "MSSQL" | "FABRIC" | "QLIK_QVD" | "QLIK_QVD_CUSTOMER_MANAGED" | "QLIK_OPEN_LAKEHOUSE" | "NONE";
-type PrepareProjectReq = {
+export type PlatformType = "SNOWFLAKE" | "BIGQUERY" | "SYNAPSE" | "DATABRICKS" | "REDSHIFT" | "MSSQL" | "FABRIC" | "QLIK_QVD" | "QLIK_QVD_CUSTOMER_MANAGED" | "QLIK_OPEN_LAKEHOUSE" | "NONE";
+export type PrepareProjectReq = {
   allowRecreate?: boolean;
   /** Array of tasks to prepare. Leave empty to trigger project-level orchestration using built-in logic (same as in the user interface). */
   selectedTasks?: TaskSelectionList;
 };
-type PrepareTaskReq = {
+export type PrepareTaskReq = {
   /** Allow recreation of existing artifacts */
   allowRecreate: boolean;
 };
 /**
  * Request body to recreate task datasets.
  */
-type RecreateTaskDatasetsReq = unknown;
-type ReloadDiTaskReq = {
+export type RecreateTaskDatasetsReq = unknown;
+export type ReloadDiTaskReq = {
   /** Reload strategy (optional, applies to materialized SQL transformations and transformation flows tasks) */
   reloadStrategy?: "NONE" | "TRUNCATE" | "COMPARE_AND_APPLY";
   /** Datasets to reload (optional, if omitted or empty, all datasets will be reloaded). */
@@ -409,11 +409,11 @@ type ReloadDiTaskReq = {
 /**
  * Indicates whether the reload request was registered successfully.
  */
-type ReloadRequestResponse = {
+export type ReloadRequestResponse = {
   /** Always true when the server successfully registers the request. */
   success: boolean;
 };
-type StartTaskReq = {
+export type StartTaskReq = {
   /** Task run option for the task (optional, applies to Replication tasks only). */
   option?: "PROCESS_CHANGES_FROM_TIMESTAMP" | "PROCESS_CHANGES_FROM_POSITION" | "RECOVER_USING_LOCALLY_STORED_CHECKPOINT";
   /** The value indicating where to resume the process, either a timestamp or an offset depending on the run option (optional, applies to Replication tasks only). */
@@ -422,7 +422,7 @@ type StartTaskReq = {
 /**
  * Represents a single historical task run instance with execution status, timing, and error information.
  */
-type TaskRunItemRsp = {
+export type TaskRunItemRsp = {
   /** Total number of datasets processed in this run. */
   datasetsCount?: number;
   /** Number of datasets that encountered errors in this run. */
@@ -447,7 +447,7 @@ type TaskRunItemRsp = {
 /**
  * Specifies a single filter criterion to apply when searching task run history.
  */
-type TaskRunSearchFilter = {
+export type TaskRunSearchFilter = {
   /** The run-history field to filter on. */
   field: TaskRunSearchFilterField;
   /** Filter operator.
@@ -460,29 +460,29 @@ type TaskRunSearchFilter = {
 /**
  * The run-history field to filter on.
  */
-type TaskRunSearchFilterField = "ID" | "STATUS" | "SUB_STATUS" | "PERIOD";
+export type TaskRunSearchFilterField = "ID" | "STATUS" | "SUB_STATUS" | "PERIOD";
 /**
  * Filter operator.
  * - `IN` / `NOT_IN`: exact match against the values list (recommended for ID, STATUS, SUB_STATUS).
  * - `BETWEEN`: only valid with the `PERIOD` field. The `value` list must contain two ISO-8601 timestamps (start, end).
  */
-type TaskRunSearchFilterOperator = "IN" | "NOT_IN" | "BETWEEN";
+export type TaskRunSearchFilterOperator = "IN" | "NOT_IN" | "BETWEEN";
 /**
  * Execution status of a task run instance.
  */
-type TaskRunStatus = "STARTING" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELED" | "MISFIRED";
+export type TaskRunStatus = "STARTING" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELED" | "MISFIRED";
 /**
  * Array of tasks to prepare. Leave empty to trigger project-level orchestration using built-in logic (same as in the user interface).
  */
-type TaskSelectionList = DiProjectOperationSelectedTask[];
-type UpdateDiExportProjectVariablesReq = {
+export type TaskSelectionList = DiProjectOperationSelectedTask[];
+export type UpdateDiExportProjectVariablesReq = {
   variables?: Record<string, string>;
 };
-type UpdateDiExportProjectVariablesRsp = unknown;
+export type UpdateDiExportProjectVariablesRsp = unknown;
 /**
  * A single validation finding, including its severity, a human-readable description of the issue, and the location in the project definition where it was found.
  */
-type ValidateProjectDefinitionsReport = {
+export type ValidateProjectDefinitionsReport = {
   /** Severity of the validation finding. `WARNING` indicates a potential issue that does not block import; `ERROR` indicates a critical issue that must be resolved before importing. */
   level?: ValidateProjectDefinitionsReportLevel;
   /** Path to the field or file in the project definition where the issue was found. */
@@ -493,35 +493,35 @@ type ValidateProjectDefinitionsReport = {
 /**
  * Severity of the validation finding. `WARNING` indicates a potential issue that does not block import; `ERROR` indicates a critical issue that must be resolved before importing.
  */
-type ValidateProjectDefinitionsReportLevel = "WARNING" | "ERROR";
-type ValidateProjectDefinitionsRsp = {
+export type ValidateProjectDefinitionsReportLevel = "WARNING" | "ERROR";
+export type ValidateProjectDefinitionsRsp = {
   /** List of validation findings. An empty array indicates no issues were found. */
   reports?: ValidateProjectDefinitionsReport[];
 };
-type ValidateProjectReq = {
+export type ValidateProjectReq = {
   /** Array of tasks to prepare. Leave empty to trigger project-level orchestration using built-in logic (same as in the user interface). */
   selectedTasks?: TaskSelectionList;
 };
 /**
  * Request body for task validation
  */
-type ValidateTaskReq = unknown;
+export type ValidateTaskReq = unknown;
 /**
  * List data integration projects.
  *
  * @param query an object with query parameters
  * @throws GetDiProjectsHttpError
  */
-declare function getDiProjects(query: {
+export declare function getDiProjects(query: {
   /** Filter by space id */
   spaceId?: string;
 }, options?: ApiCallOptions): Promise<GetDiProjectsHttpResponse>;
-type GetDiProjectsHttpResponse = {
+export type GetDiProjectsHttpResponse = {
   data: ListDiProjectsRsp;
   headers: Headers;
   status: 200;
 };
-type GetDiProjectsHttpError = {
+export type GetDiProjectsHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -532,13 +532,13 @@ type GetDiProjectsHttpError = {
  * @param body an object with the body content
  * @throws CreateDiProjectHttpError
  */
-declare function createDiProject(body: CreateDiProjectReq, options?: ApiCallOptions): Promise<CreateDiProjectHttpResponse>;
-type CreateDiProjectHttpResponse = {
+export declare function createDiProject(body: CreateDiProjectReq, options?: ApiCallOptions): Promise<CreateDiProjectHttpResponse>;
+export type CreateDiProjectHttpResponse = {
   data: DiProjectItemRsp;
   headers: Headers;
   status: 201;
 };
-type CreateDiProjectHttpError = {
+export type CreateDiProjectHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 500;
@@ -550,16 +550,16 @@ type CreateDiProjectHttpError = {
  * @param query an object with query parameters
  * @throws GetDiProjectHttpError
  */
-declare function getDiProject(actionId: string, query: {
+export declare function getDiProject(actionId: string, query: {
   /** Specifies whether to include detailed status information in the response. Set to `true` to return detailed information. */
   detailed?: boolean;
 }, options?: ApiCallOptions): Promise<GetDiProjectHttpResponse>;
-type GetDiProjectHttpResponse = {
+export type GetDiProjectHttpResponse = {
   data: AsyncActionDetails;
   headers: Headers;
   status: 200;
 };
-type GetDiProjectHttpError = {
+export type GetDiProjectHttpError = {
   data: Errors;
   headers: Headers;
   status: 404;
@@ -570,15 +570,15 @@ type GetDiProjectHttpError = {
  * @param body an object with the body content
  * @throws ValidateProjectDefinitionsHttpError
  */
-declare function validateProjectDefinitions(body: {
+export declare function validateProjectDefinitions(body: {
   zip?: BodyInit;
 }, options?: ApiCallOptions): Promise<ValidateProjectDefinitionsHttpResponse>;
-type ValidateProjectDefinitionsHttpResponse = {
+export type ValidateProjectDefinitionsHttpResponse = {
   data: ValidateProjectDefinitionsRsp;
   headers: Headers;
   status: 200;
 };
-type ValidateProjectDefinitionsHttpError = {
+export type ValidateProjectDefinitionsHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404 | 500;
@@ -590,13 +590,13 @@ type ValidateProjectDefinitionsHttpError = {
  * @param body an object with the body content
  * @throws ExportDiProjectHttpError
  */
-declare function exportDiProject(projectId: string, body: ExportDiProjectReq, options?: ApiCallOptions): Promise<ExportDiProjectHttpResponse>;
-type ExportDiProjectHttpResponse = {
+export declare function exportDiProject(projectId: string, body: ExportDiProjectReq, options?: ApiCallOptions): Promise<ExportDiProjectHttpResponse>;
+export type ExportDiProjectHttpResponse = {
   data: DownloadableBlob;
   headers: Headers;
   status: 200;
 };
-type ExportDiProjectHttpError = {
+export type ExportDiProjectHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404 | 500;
@@ -610,15 +610,15 @@ type ExportDiProjectHttpError = {
  * @param body an object with the body content
  * @throws ImportDiProjectHttpError
  */
-declare function importDiProject(projectId: string, body: {
+export declare function importDiProject(projectId: string, body: {
   zip?: BodyInit;
 }, options?: ApiCallOptions): Promise<ImportDiProjectHttpResponse>;
-type ImportDiProjectHttpResponse = {
+export type ImportDiProjectHttpResponse = {
   data: ImportDiProjectRsp;
   headers: Headers;
   status: 200;
 };
-type ImportDiProjectHttpError = {
+export type ImportDiProjectHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404 | 409 | 500;
@@ -630,15 +630,15 @@ type ImportDiProjectHttpError = {
  * @param body an object with the body content
  * @throws ImportAsyncDiProjectHttpError
  */
-declare function importAsyncDiProject(projectId: string, body: {
+export declare function importAsyncDiProject(projectId: string, body: {
   zip?: BodyInit;
 }, options?: ApiCallOptions): Promise<ImportAsyncDiProjectHttpResponse>;
-type ImportAsyncDiProjectHttpResponse = {
+export type ImportAsyncDiProjectHttpResponse = {
   data: AsyncActionRsp;
   headers: Headers;
   status: 202;
 };
-type ImportAsyncDiProjectHttpError = {
+export type ImportAsyncDiProjectHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404 | 409 | 500;
@@ -650,13 +650,13 @@ type ImportAsyncDiProjectHttpError = {
  * @param body an object with the body content
  * @throws PrepareDiProjectHttpError
  */
-declare function prepareDiProject(projectId: string, body: PrepareProjectReq, options?: ApiCallOptions): Promise<PrepareDiProjectHttpResponse>;
-type PrepareDiProjectHttpResponse = {
+export declare function prepareDiProject(projectId: string, body: PrepareProjectReq, options?: ApiCallOptions): Promise<PrepareDiProjectHttpResponse>;
+export type PrepareDiProjectHttpResponse = {
   data: AsyncActionRsp;
   headers: Headers;
   status: 202;
 };
-type PrepareDiProjectHttpError = {
+export type PrepareDiProjectHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -668,13 +668,13 @@ type PrepareDiProjectHttpError = {
  * @param body an object with the body content
  * @throws ValidateDiProjectHttpError
  */
-declare function validateDiProject(projectId: string, body: ValidateProjectReq, options?: ApiCallOptions): Promise<ValidateDiProjectHttpResponse>;
-type ValidateDiProjectHttpResponse = {
+export declare function validateDiProject(projectId: string, body: ValidateProjectReq, options?: ApiCallOptions): Promise<ValidateDiProjectHttpResponse>;
+export type ValidateDiProjectHttpResponse = {
   data: AsyncActionRsp;
   headers: Headers;
   status: 202;
 };
-type ValidateDiProjectHttpError = {
+export type ValidateDiProjectHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -686,16 +686,16 @@ type ValidateDiProjectHttpError = {
  * @param query an object with query parameters
  * @throws GetDiProjectExportVariablesHttpError
  */
-declare function getDiProjectExportVariables(projectId: string, query: {
+export declare function getDiProjectExportVariables(projectId: string, query: {
   /** Recalculate the bindings if true, otherwise saved bindings are returned. */
   recalculate?: boolean;
 }, options?: ApiCallOptions): Promise<GetDiProjectExportVariablesHttpResponse>;
-type GetDiProjectExportVariablesHttpResponse = {
+export type GetDiProjectExportVariablesHttpResponse = {
   data: GetDiExportProjectVariablesRsp;
   headers: Headers;
   status: 200;
 };
-type GetDiProjectExportVariablesHttpError = {
+export type GetDiProjectExportVariablesHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -707,13 +707,13 @@ type GetDiProjectExportVariablesHttpError = {
  * @param body an object with the body content
  * @throws SetDiProjectExportVariablesHttpError
  */
-declare function setDiProjectExportVariables(projectId: string, body: UpdateDiExportProjectVariablesReq, options?: ApiCallOptions): Promise<SetDiProjectExportVariablesHttpResponse>;
-type SetDiProjectExportVariablesHttpResponse = {
+export declare function setDiProjectExportVariables(projectId: string, body: UpdateDiExportProjectVariablesReq, options?: ApiCallOptions): Promise<SetDiProjectExportVariablesHttpResponse>;
+export type SetDiProjectExportVariablesHttpResponse = {
   data: UpdateDiExportProjectVariablesRsp;
   headers: Headers;
   status: 200;
 };
-type SetDiProjectExportVariablesHttpError = {
+export type SetDiProjectExportVariablesHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404 | 500;
@@ -724,13 +724,13 @@ type SetDiProjectExportVariablesHttpError = {
  * @param projectId Identifier of the data project.
  * @throws GetDiProjectDiTasksHttpError
  */
-declare function getDiProjectDiTasks(projectId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTasksHttpResponse>;
-type GetDiProjectDiTasksHttpResponse = {
+export declare function getDiProjectDiTasks(projectId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTasksHttpResponse>;
+export type GetDiProjectDiTasksHttpResponse = {
   data: ListDataTasksRsp;
   headers: Headers;
   status: 200;
 };
-type GetDiProjectDiTasksHttpError = {
+export type GetDiProjectDiTasksHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -742,13 +742,13 @@ type GetDiProjectDiTasksHttpError = {
  * @param dataTaskId Identifier of the data task.
  * @throws GetDiProjectDiTaskHttpError
  */
-declare function getDiProjectDiTask(projectId: string, dataTaskId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTaskHttpResponse>;
-type GetDiProjectDiTaskHttpResponse = {
+export declare function getDiProjectDiTask(projectId: string, dataTaskId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTaskHttpResponse>;
+export type GetDiProjectDiTaskHttpResponse = {
   data: DataTaskItemRsp;
   headers: Headers;
   status: 200;
 };
-type GetDiProjectDiTaskHttpError = {
+export type GetDiProjectDiTaskHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -761,13 +761,13 @@ type GetDiProjectDiTaskHttpError = {
  * @param body an object with the body content
  * @throws PrepareDiProjectDiTaskHttpError
  */
-declare function prepareDiProjectDiTask(projectId: string, dataTaskId: string, body: PrepareTaskReq, options?: ApiCallOptions): Promise<PrepareDiProjectDiTaskHttpResponse>;
-type PrepareDiProjectDiTaskHttpResponse = {
+export declare function prepareDiProjectDiTask(projectId: string, dataTaskId: string, body: PrepareTaskReq, options?: ApiCallOptions): Promise<PrepareDiProjectDiTaskHttpResponse>;
+export type PrepareDiProjectDiTaskHttpResponse = {
   data: AsyncActionRsp;
   headers: Headers;
   status: 202;
 };
-type PrepareDiProjectDiTaskHttpError = {
+export type PrepareDiProjectDiTaskHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -780,13 +780,13 @@ type PrepareDiProjectDiTaskHttpError = {
  * @param body an object with the body content
  * @throws RecreateDatasetsDiProjectDiTaskHttpError
  */
-declare function recreateDatasetsDiProjectDiTask(projectId: string, dataTaskId: string, body: RecreateTaskDatasetsReq, options?: ApiCallOptions): Promise<RecreateDatasetsDiProjectDiTaskHttpResponse>;
-type RecreateDatasetsDiProjectDiTaskHttpResponse = {
+export declare function recreateDatasetsDiProjectDiTask(projectId: string, dataTaskId: string, body: RecreateTaskDatasetsReq, options?: ApiCallOptions): Promise<RecreateDatasetsDiProjectDiTaskHttpResponse>;
+export type RecreateDatasetsDiProjectDiTaskHttpResponse = {
   data: AsyncActionRsp;
   headers: Headers;
   status: 202;
 };
-type RecreateDatasetsDiProjectDiTaskHttpError = {
+export type RecreateDatasetsDiProjectDiTaskHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -799,13 +799,13 @@ type RecreateDatasetsDiProjectDiTaskHttpError = {
  * @param body an object with the body content
  * @throws RequestReloadDiProjectDiTaskHttpError
  */
-declare function requestReloadDiProjectDiTask(projectId: string, dataTaskId: string, body: ReloadDiTaskReq, options?: ApiCallOptions): Promise<RequestReloadDiProjectDiTaskHttpResponse>;
-type RequestReloadDiProjectDiTaskHttpResponse = {
+export declare function requestReloadDiProjectDiTask(projectId: string, dataTaskId: string, body: ReloadDiTaskReq, options?: ApiCallOptions): Promise<RequestReloadDiProjectDiTaskHttpResponse>;
+export type RequestReloadDiProjectDiTaskHttpResponse = {
   data: ReloadRequestResponse;
   headers: Headers;
   status: 200;
 };
-type RequestReloadDiProjectDiTaskHttpError = {
+export type RequestReloadDiProjectDiTaskHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -818,13 +818,13 @@ type RequestReloadDiProjectDiTaskHttpError = {
  * @param body an object with the body content
  * @throws ValidateDiProjectDiTaskHttpError
  */
-declare function validateDiProjectDiTask(projectId: string, dataTaskId: string, body: ValidateTaskReq, options?: ApiCallOptions): Promise<ValidateDiProjectDiTaskHttpResponse>;
-type ValidateDiProjectDiTaskHttpResponse = {
+export declare function validateDiProjectDiTask(projectId: string, dataTaskId: string, body: ValidateTaskReq, options?: ApiCallOptions): Promise<ValidateDiProjectDiTaskHttpResponse>;
+export type ValidateDiProjectDiTaskHttpResponse = {
   data: AsyncActionRsp;
   headers: Headers;
   status: 202;
 };
-type ValidateDiProjectDiTaskHttpError = {
+export type ValidateDiProjectDiTaskHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -837,13 +837,13 @@ type ValidateDiProjectDiTaskHttpError = {
  * @param body an object with the body content
  * @throws StartDiProjectDiTaskRuntimeWithBodyHttpError
  */
-declare function startDiProjectDiTaskRuntimeWithBody(projectId: string, dataTaskId: string, body: StartTaskReq, options?: ApiCallOptions): Promise<StartDiProjectDiTaskRuntimeWithBodyHttpResponse>;
-type StartDiProjectDiTaskRuntimeWithBodyHttpResponse = {
+export declare function startDiProjectDiTaskRuntimeWithBody(projectId: string, dataTaskId: string, body: StartTaskReq, options?: ApiCallOptions): Promise<StartDiProjectDiTaskRuntimeWithBodyHttpResponse>;
+export type StartDiProjectDiTaskRuntimeWithBodyHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type StartDiProjectDiTaskRuntimeWithBodyHttpError = {
+export type StartDiProjectDiTaskRuntimeWithBodyHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -855,13 +855,13 @@ type StartDiProjectDiTaskRuntimeWithBodyHttpError = {
  * @param dataTaskId Identifier of the data task.
  * @throws StartDiProjectDiTaskRuntimeHttpError
  */
-declare function startDiProjectDiTaskRuntime(projectId: string, dataTaskId: string, options?: ApiCallOptions): Promise<StartDiProjectDiTaskRuntimeHttpResponse>;
-type StartDiProjectDiTaskRuntimeHttpResponse = {
+export declare function startDiProjectDiTaskRuntime(projectId: string, dataTaskId: string, options?: ApiCallOptions): Promise<StartDiProjectDiTaskRuntimeHttpResponse>;
+export type StartDiProjectDiTaskRuntimeHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type StartDiProjectDiTaskRuntimeHttpError = {
+export type StartDiProjectDiTaskRuntimeHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -873,13 +873,13 @@ type StartDiProjectDiTaskRuntimeHttpError = {
  * @param dataTaskId Identifier of the data task.
  * @throws StopDiProjectDiTaskRuntimeHttpError
  */
-declare function stopDiProjectDiTaskRuntime(projectId: string, dataTaskId: string, options?: ApiCallOptions): Promise<StopDiProjectDiTaskRuntimeHttpResponse>;
-type StopDiProjectDiTaskRuntimeHttpResponse = {
+export declare function stopDiProjectDiTaskRuntime(projectId: string, dataTaskId: string, options?: ApiCallOptions): Promise<StopDiProjectDiTaskRuntimeHttpResponse>;
+export type StopDiProjectDiTaskRuntimeHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type StopDiProjectDiTaskRuntimeHttpError = {
+export type StopDiProjectDiTaskRuntimeHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -892,13 +892,13 @@ type StopDiProjectDiTaskRuntimeHttpError = {
  * @param body an object with the body content
  * @throws SearchDiProjectDiTaskRuntimeRunsHttpError
  */
-declare function searchDiProjectDiTaskRuntimeRuns(projectId: string, dataTaskId: string, body: DiSearchTaskRunHistoryReq, options?: ApiCallOptions): Promise<SearchDiProjectDiTaskRuntimeRunsHttpResponse>;
-type SearchDiProjectDiTaskRuntimeRunsHttpResponse = {
+export declare function searchDiProjectDiTaskRuntimeRuns(projectId: string, dataTaskId: string, body: DiSearchTaskRunHistoryReq, options?: ApiCallOptions): Promise<SearchDiProjectDiTaskRuntimeRunsHttpResponse>;
+export type SearchDiProjectDiTaskRuntimeRunsHttpResponse = {
   data: DiSearchTaskRunHistoryRsp;
   headers: Headers;
   status: 200;
 };
-type SearchDiProjectDiTaskRuntimeRunsHttpError = {
+export type SearchDiProjectDiTaskRuntimeRunsHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -911,13 +911,13 @@ type SearchDiProjectDiTaskRuntimeRunsHttpError = {
  * @param runId Identifier of the run instance.
  * @throws GetDiProjectDiTaskRuntimeRunStateHttpError
  */
-declare function getDiProjectDiTaskRuntimeRunState(projectId: string, dataTaskId: string, runId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTaskRuntimeRunStateHttpResponse>;
-type GetDiProjectDiTaskRuntimeRunStateHttpResponse = {
+export declare function getDiProjectDiTaskRuntimeRunState(projectId: string, dataTaskId: string, runId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTaskRuntimeRunStateHttpResponse>;
+export type GetDiProjectDiTaskRuntimeRunStateHttpResponse = {
   data: DataTaskRuntimeState;
   headers: Headers;
   status: 200;
 };
-type GetDiProjectDiTaskRuntimeRunStateHttpError = {
+export type GetDiProjectDiTaskRuntimeRunStateHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -930,13 +930,13 @@ type GetDiProjectDiTaskRuntimeRunStateHttpError = {
  * @param runId Identifier of the run instance.
  * @throws GetDiProjectDiTaskRuntimeRunStateDatasetsHttpError
  */
-declare function getDiProjectDiTaskRuntimeRunStateDatasets(projectId: string, dataTaskId: string, runId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTaskRuntimeRunStateDatasetsHttpResponse>;
-type GetDiProjectDiTaskRuntimeRunStateDatasetsHttpResponse = {
+export declare function getDiProjectDiTaskRuntimeRunStateDatasets(projectId: string, dataTaskId: string, runId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTaskRuntimeRunStateDatasetsHttpResponse>;
+export type GetDiProjectDiTaskRuntimeRunStateDatasetsHttpResponse = {
   data: ListDataTaskDatasetsRsp;
   headers: Headers;
   status: 200;
 };
-type GetDiProjectDiTaskRuntimeRunStateDatasetsHttpError = {
+export type GetDiProjectDiTaskRuntimeRunStateDatasetsHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404 | 410 | 413;
@@ -948,13 +948,13 @@ type GetDiProjectDiTaskRuntimeRunStateDatasetsHttpError = {
  * @param dataTaskId Identifier of the data task.
  * @throws GetDiProjectDiTaskRuntimeStateHttpError
  */
-declare function getDiProjectDiTaskRuntimeState(projectId: string, dataTaskId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTaskRuntimeStateHttpResponse>;
-type GetDiProjectDiTaskRuntimeStateHttpResponse = {
+export declare function getDiProjectDiTaskRuntimeState(projectId: string, dataTaskId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTaskRuntimeStateHttpResponse>;
+export type GetDiProjectDiTaskRuntimeStateHttpResponse = {
   data: DataTaskRuntimeState;
   headers: Headers;
   status: 200;
 };
-type GetDiProjectDiTaskRuntimeStateHttpError = {
+export type GetDiProjectDiTaskRuntimeStateHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -966,15 +966,15 @@ type GetDiProjectDiTaskRuntimeStateHttpError = {
  * @param dataTaskId Identifier of the data task.
  * @throws GetDiProjectDiTaskRuntimeStateDatasetsHttpError
  */
-declare function getDiProjectDiTaskRuntimeStateDatasets(projectId: string, dataTaskId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTaskRuntimeStateDatasetsHttpResponse>;
-type GetDiProjectDiTaskRuntimeStateDatasetsHttpResponse = {
+export declare function getDiProjectDiTaskRuntimeStateDatasets(projectId: string, dataTaskId: string, options?: ApiCallOptions): Promise<GetDiProjectDiTaskRuntimeStateDatasetsHttpResponse>;
+export type GetDiProjectDiTaskRuntimeStateDatasetsHttpResponse = {
   data: {
     datasets?: DataTaskDatasetState[];
   };
   headers: Headers;
   status: 200;
 };
-type GetDiProjectDiTaskRuntimeStateDatasetsHttpError = {
+export type GetDiProjectDiTaskRuntimeStateDatasetsHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404;
@@ -982,8 +982,8 @@ type GetDiProjectDiTaskRuntimeStateDatasetsHttpError = {
 /**
  * Clears the cache for di-projects api requests.
  */
-declare function clearCache(): void;
-type DiProjectsAPI = {
+export declare function clearCache(): void;
+export type DiProjectsAPI = {
   /**
    * List data integration projects.
    *
@@ -1200,4 +1200,4 @@ type DiProjectsAPI = {
  */
 declare const diProjectsExport: DiProjectsAPI;
 //#endregion
-export { AsyncActionDetails, AsyncActionError, AsyncActionRsp, AsyncActionTaskProgress, AsyncActionType, AsyncCallStatus, CreateDiProjectHttpError, CreateDiProjectHttpResponse, CreateDiProjectReq, DataTaskDatasetState, DataTaskInstanceState, DataTaskItemRsp, DataTaskRuntimeState, DataTaskType, DiExportMode, DiProjectItemRsp, DiProjectOperationSelectedTask, DiProjectsAPI, DiSearchTaskRunHistoryReq, DiSearchTaskRunHistoryRsp, Error, ErrorSource, Errors, ExportDiProjectHttpError, ExportDiProjectHttpResponse, ExportDiProjectReq, FileStatistics, GetDiExportProjectVariablesRsp, GetDiProjectDiTaskHttpError, GetDiProjectDiTaskHttpResponse, GetDiProjectDiTaskRuntimeRunStateDatasetsHttpError, GetDiProjectDiTaskRuntimeRunStateDatasetsHttpResponse, GetDiProjectDiTaskRuntimeRunStateHttpError, GetDiProjectDiTaskRuntimeRunStateHttpResponse, GetDiProjectDiTaskRuntimeStateDatasetsHttpError, GetDiProjectDiTaskRuntimeStateDatasetsHttpResponse, GetDiProjectDiTaskRuntimeStateHttpError, GetDiProjectDiTaskRuntimeStateHttpResponse, GetDiProjectDiTasksHttpError, GetDiProjectDiTasksHttpResponse, GetDiProjectExportVariablesHttpError, GetDiProjectExportVariablesHttpResponse, GetDiProjectHttpError, GetDiProjectHttpResponse, GetDiProjectsHttpError, GetDiProjectsHttpResponse, ImportAsyncDiProjectHttpError, ImportAsyncDiProjectHttpResponse, ImportDiProjectHttpError, ImportDiProjectHttpResponse, ImportDiProjectRsp, ListDataTaskDatasetsRsp, ListDataTasksRsp, ListDiProjectsRsp, OperationStatistics, PlatformType, PrepareDiProjectDiTaskHttpError, PrepareDiProjectDiTaskHttpResponse, PrepareDiProjectHttpError, PrepareDiProjectHttpResponse, PrepareProjectReq, PrepareTaskReq, RecreateDatasetsDiProjectDiTaskHttpError, RecreateDatasetsDiProjectDiTaskHttpResponse, RecreateTaskDatasetsReq, ReloadDiTaskReq, ReloadRequestResponse, RequestReloadDiProjectDiTaskHttpError, RequestReloadDiProjectDiTaskHttpResponse, SearchDiProjectDiTaskRuntimeRunsHttpError, SearchDiProjectDiTaskRuntimeRunsHttpResponse, SetDiProjectExportVariablesHttpError, SetDiProjectExportVariablesHttpResponse, StartDiProjectDiTaskRuntimeHttpError, StartDiProjectDiTaskRuntimeHttpResponse, StartDiProjectDiTaskRuntimeWithBodyHttpError, StartDiProjectDiTaskRuntimeWithBodyHttpResponse, StartTaskReq, StopDiProjectDiTaskRuntimeHttpError, StopDiProjectDiTaskRuntimeHttpResponse, TaskRunItemRsp, TaskRunSearchFilter, TaskRunSearchFilterField, TaskRunSearchFilterOperator, TaskRunStatus, TaskSelectionList, UpdateDiExportProjectVariablesReq, UpdateDiExportProjectVariablesRsp, ValidateDiProjectDiTaskHttpError, ValidateDiProjectDiTaskHttpResponse, ValidateDiProjectHttpError, ValidateDiProjectHttpResponse, ValidateProjectDefinitionsHttpError, ValidateProjectDefinitionsHttpResponse, ValidateProjectDefinitionsReport, ValidateProjectDefinitionsReportLevel, ValidateProjectDefinitionsRsp, ValidateProjectReq, ValidateTaskReq, clearCache, createDiProject, diProjectsExport as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeRunState, getDiProjectDiTaskRuntimeRunStateDatasets, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importAsyncDiProject, importDiProject, prepareDiProject, prepareDiProjectDiTask, recreateDatasetsDiProjectDiTask, requestReloadDiProjectDiTask, searchDiProjectDiTaskRuntimeRuns, setDiProjectExportVariables, startDiProjectDiTaskRuntime, startDiProjectDiTaskRuntimeWithBody, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask, validateProjectDefinitions };
+export { diProjectsExport as default };

@@ -1,28 +1,28 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/ui-config.d.ts
-type BulkCreatePinnedLinkItemPayload = CreatePinnedLinkConfigPayload & {
+export type BulkCreatePinnedLinkItemPayload = CreatePinnedLinkConfigPayload & {
   links: CreatePinnedLinkPayload[];
 };
-type CreatePinnedLinkConfigPayload = {
+export type CreatePinnedLinkConfigPayload = {
   /** Specifies the scope of the link. Only supports `tenant`. */
   scope: "tenant";
   /** Specifies the type of the link. Only supports `custom-link`. */
   type: "custom-link";
 };
-type CreatePinnedLinkPayload = {
+export type CreatePinnedLinkPayload = {
   /** The URL the user will be taken to when they click on the custom link. Must be https. */
   link: string;
   /** The title of the link, which will be shown in the navigation bar. Max length 50 characters. */
   name: string;
 };
-type Error = {
+export type Error = {
   /** Error code. */
   readonly code?: number;
   /** Error cause. */
   readonly message?: string;
 };
-type ErrorResponse403 = {
+export type ErrorResponse403 = {
   errors?: {
     code?: string;
     detail?: string;
@@ -30,13 +30,13 @@ type ErrorResponse403 = {
   }[];
   traceId?: string;
 };
-type JSONPatchPinnedLinkPayload = {
+export type JSONPatchPinnedLinkPayload = {
   op: "replace";
   path: "/name" | "/link";
   /** The value to be used for this operation. */
   value: string;
 }[];
-type PinnedLink = {
+export type PinnedLink = {
   /** Date string */
   createdAt: string;
   createdBy: string;
@@ -55,15 +55,15 @@ type PinnedLink = {
  *
  * @throws GetUiConfigPinnedLinksHttpError
  */
-declare function getUiConfigPinnedLinks(options?: ApiCallOptions): Promise<GetUiConfigPinnedLinksHttpResponse>;
-type GetUiConfigPinnedLinksHttpResponse = {
+export declare function getUiConfigPinnedLinks(options?: ApiCallOptions): Promise<GetUiConfigPinnedLinksHttpResponse>;
+export type GetUiConfigPinnedLinksHttpResponse = {
   data: {
     data?: PinnedLink[];
   };
   headers: Headers;
   status: 200;
 };
-type GetUiConfigPinnedLinksHttpError = {
+export type GetUiConfigPinnedLinksHttpError = {
   data: Error;
   headers: Headers;
   status: number;
@@ -74,19 +74,19 @@ type GetUiConfigPinnedLinksHttpError = {
  * @param body an object with the body content
  * @throws CreateUiConfigPinnedLinkHttpError
  */
-declare function createUiConfigPinnedLink(body: CreatePinnedLinkPayload & CreatePinnedLinkConfigPayload, options?: ApiCallOptions): Promise<CreateUiConfigPinnedLinkHttpResponse>;
-type CreateUiConfigPinnedLinkHttpResponse = {
+export declare function createUiConfigPinnedLink(body: CreatePinnedLinkPayload & CreatePinnedLinkConfigPayload, options?: ApiCallOptions): Promise<CreateUiConfigPinnedLinkHttpResponse>;
+export type CreateUiConfigPinnedLinkHttpResponse = {
   data: PinnedLink;
   headers: Headers;
   status: 201;
 };
-type CreateUiConfigPinnedLinkHttpError = CreateUiConfigPinnedLink403HttpError | CreateUiConfigPinnedLinkdefaultHttpError;
-type CreateUiConfigPinnedLink403HttpError = {
+export type CreateUiConfigPinnedLinkHttpError = CreateUiConfigPinnedLink403HttpError | CreateUiConfigPinnedLinkdefaultHttpError;
+export type CreateUiConfigPinnedLink403HttpError = {
   data: ErrorResponse403;
   headers: Headers;
   status: 403;
 };
-type CreateUiConfigPinnedLinkdefaultHttpError = {
+export type CreateUiConfigPinnedLinkdefaultHttpError = {
   data: Error;
   headers: Headers;
   status: "default";
@@ -97,21 +97,21 @@ type CreateUiConfigPinnedLinkdefaultHttpError = {
  * @param body an object with the body content
  * @throws CreateUiConfigPinnedLinksHttpError
  */
-declare function createUiConfigPinnedLinks(body: BulkCreatePinnedLinkItemPayload, options?: ApiCallOptions): Promise<CreateUiConfigPinnedLinksHttpResponse>;
-type CreateUiConfigPinnedLinksHttpResponse = {
+export declare function createUiConfigPinnedLinks(body: BulkCreatePinnedLinkItemPayload, options?: ApiCallOptions): Promise<CreateUiConfigPinnedLinksHttpResponse>;
+export type CreateUiConfigPinnedLinksHttpResponse = {
   data: {
     data?: PinnedLink[];
   };
   headers: Headers;
   status: 200;
 };
-type CreateUiConfigPinnedLinksHttpError = CreateUiConfigPinnedLinks403HttpError | CreateUiConfigPinnedLinksdefaultHttpError;
-type CreateUiConfigPinnedLinks403HttpError = {
+export type CreateUiConfigPinnedLinksHttpError = CreateUiConfigPinnedLinks403HttpError | CreateUiConfigPinnedLinksdefaultHttpError;
+export type CreateUiConfigPinnedLinks403HttpError = {
   data: ErrorResponse403;
   headers: Headers;
   status: 403;
 };
-type CreateUiConfigPinnedLinksdefaultHttpError = {
+export type CreateUiConfigPinnedLinksdefaultHttpError = {
   data: Error;
   headers: Headers;
   status: "default";
@@ -121,19 +121,19 @@ type CreateUiConfigPinnedLinksdefaultHttpError = {
  *
  * @throws DeleteAllUiConfigPinnedLinksHttpError
  */
-declare function deleteAllUiConfigPinnedLinks(options?: ApiCallOptions): Promise<DeleteAllUiConfigPinnedLinksHttpResponse>;
-type DeleteAllUiConfigPinnedLinksHttpResponse = {
+export declare function deleteAllUiConfigPinnedLinks(options?: ApiCallOptions): Promise<DeleteAllUiConfigPinnedLinksHttpResponse>;
+export type DeleteAllUiConfigPinnedLinksHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteAllUiConfigPinnedLinksHttpError = DeleteAllUiConfigPinnedLinks403HttpError | DeleteAllUiConfigPinnedLinksdefaultHttpError;
-type DeleteAllUiConfigPinnedLinks403HttpError = {
+export type DeleteAllUiConfigPinnedLinksHttpError = DeleteAllUiConfigPinnedLinks403HttpError | DeleteAllUiConfigPinnedLinksdefaultHttpError;
+export type DeleteAllUiConfigPinnedLinks403HttpError = {
   data: ErrorResponse403;
   headers: Headers;
   status: 403;
 };
-type DeleteAllUiConfigPinnedLinksdefaultHttpError = {
+export type DeleteAllUiConfigPinnedLinksdefaultHttpError = {
   data: Error;
   headers: Headers;
   status: "default";
@@ -144,19 +144,24 @@ type DeleteAllUiConfigPinnedLinksdefaultHttpError = {
  * @param id The pinned link identifier.
  * @throws DeleteUiConfigPinnedLinkHttpError
  */
-declare function deleteUiConfigPinnedLink(id: string, options?: ApiCallOptions): Promise<DeleteUiConfigPinnedLinkHttpResponse>;
-type DeleteUiConfigPinnedLinkHttpResponse = {
+export declare function deleteUiConfigPinnedLink(id: string, options?: ApiCallOptions): Promise<DeleteUiConfigPinnedLinkHttpResponse>;
+export type DeleteUiConfigPinnedLinkHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteUiConfigPinnedLinkHttpError = DeleteUiConfigPinnedLink403HttpError | DeleteUiConfigPinnedLinkdefaultHttpError;
-type DeleteUiConfigPinnedLink403HttpError = {
+export type DeleteUiConfigPinnedLinkHttpError = DeleteUiConfigPinnedLink403HttpError | DeleteUiConfigPinnedLink404HttpError | DeleteUiConfigPinnedLinkdefaultHttpError;
+export type DeleteUiConfigPinnedLink403HttpError = {
   data: ErrorResponse403;
   headers: Headers;
   status: 403;
 };
-type DeleteUiConfigPinnedLinkdefaultHttpError = {
+export type DeleteUiConfigPinnedLink404HttpError = {
+  data: Error;
+  headers: Headers;
+  status: 404;
+};
+export type DeleteUiConfigPinnedLinkdefaultHttpError = {
   data: Error;
   headers: Headers;
   status: "default";
@@ -167,19 +172,19 @@ type DeleteUiConfigPinnedLinkdefaultHttpError = {
  * @param id The pinned link identifier.
  * @throws GetUiConfigPinnedLinkHttpError
  */
-declare function getUiConfigPinnedLink(id: string, options?: ApiCallOptions): Promise<GetUiConfigPinnedLinkHttpResponse>;
-type GetUiConfigPinnedLinkHttpResponse = {
+export declare function getUiConfigPinnedLink(id: string, options?: ApiCallOptions): Promise<GetUiConfigPinnedLinkHttpResponse>;
+export type GetUiConfigPinnedLinkHttpResponse = {
   data: PinnedLink;
   headers: Headers;
   status: 200;
 };
-type GetUiConfigPinnedLinkHttpError = GetUiConfigPinnedLink403HttpError | GetUiConfigPinnedLinkdefaultHttpError;
-type GetUiConfigPinnedLink403HttpError = {
+export type GetUiConfigPinnedLinkHttpError = GetUiConfigPinnedLink403HttpError | GetUiConfigPinnedLinkdefaultHttpError;
+export type GetUiConfigPinnedLink403HttpError = {
   data: ErrorResponse403;
   headers: Headers;
   status: 403;
 };
-type GetUiConfigPinnedLinkdefaultHttpError = {
+export type GetUiConfigPinnedLinkdefaultHttpError = {
   data: Error;
   headers: Headers;
   status: "default";
@@ -191,19 +196,19 @@ type GetUiConfigPinnedLinkdefaultHttpError = {
  * @param body an object with the body content
  * @throws PatchUiConfigPinnedLinkHttpError
  */
-declare function patchUiConfigPinnedLink(id: string, body: JSONPatchPinnedLinkPayload, options?: ApiCallOptions): Promise<PatchUiConfigPinnedLinkHttpResponse>;
-type PatchUiConfigPinnedLinkHttpResponse = {
+export declare function patchUiConfigPinnedLink(id: string, body: JSONPatchPinnedLinkPayload, options?: ApiCallOptions): Promise<PatchUiConfigPinnedLinkHttpResponse>;
+export type PatchUiConfigPinnedLinkHttpResponse = {
   data: PinnedLink;
   headers: Headers;
   status: 200;
 };
-type PatchUiConfigPinnedLinkHttpError = PatchUiConfigPinnedLink403HttpError | PatchUiConfigPinnedLinkdefaultHttpError;
-type PatchUiConfigPinnedLink403HttpError = {
+export type PatchUiConfigPinnedLinkHttpError = PatchUiConfigPinnedLink403HttpError | PatchUiConfigPinnedLinkdefaultHttpError;
+export type PatchUiConfigPinnedLink403HttpError = {
   data: ErrorResponse403;
   headers: Headers;
   status: 403;
 };
-type PatchUiConfigPinnedLinkdefaultHttpError = {
+export type PatchUiConfigPinnedLinkdefaultHttpError = {
   data: Error;
   headers: Headers;
   status: "default";
@@ -211,8 +216,8 @@ type PatchUiConfigPinnedLinkdefaultHttpError = {
 /**
  * Clears the cache for ui-config api requests.
  */
-declare function clearCache(): void;
-type UiConfigAPI = {
+export declare function clearCache(): void;
+export type UiConfigAPI = {
   /**
    * Retrieves a list of all pinned links. All users can list pinned links. This endpoint does not support pagination as a tenant can have a maximum of 50 pinned links at one time.
    *
@@ -271,4 +276,4 @@ type UiConfigAPI = {
  */
 declare const uiConfigExport: UiConfigAPI;
 //#endregion
-export { BulkCreatePinnedLinkItemPayload, CreatePinnedLinkConfigPayload, CreatePinnedLinkPayload, CreateUiConfigPinnedLink403HttpError, CreateUiConfigPinnedLinkHttpError, CreateUiConfigPinnedLinkHttpResponse, CreateUiConfigPinnedLinkdefaultHttpError, CreateUiConfigPinnedLinks403HttpError, CreateUiConfigPinnedLinksHttpError, CreateUiConfigPinnedLinksHttpResponse, CreateUiConfigPinnedLinksdefaultHttpError, DeleteAllUiConfigPinnedLinks403HttpError, DeleteAllUiConfigPinnedLinksHttpError, DeleteAllUiConfigPinnedLinksHttpResponse, DeleteAllUiConfigPinnedLinksdefaultHttpError, DeleteUiConfigPinnedLink403HttpError, DeleteUiConfigPinnedLinkHttpError, DeleteUiConfigPinnedLinkHttpResponse, DeleteUiConfigPinnedLinkdefaultHttpError, Error, ErrorResponse403, GetUiConfigPinnedLink403HttpError, GetUiConfigPinnedLinkHttpError, GetUiConfigPinnedLinkHttpResponse, GetUiConfigPinnedLinkdefaultHttpError, GetUiConfigPinnedLinksHttpError, GetUiConfigPinnedLinksHttpResponse, JSONPatchPinnedLinkPayload, PatchUiConfigPinnedLink403HttpError, PatchUiConfigPinnedLinkHttpError, PatchUiConfigPinnedLinkHttpResponse, PatchUiConfigPinnedLinkdefaultHttpError, PinnedLink, UiConfigAPI, clearCache, createUiConfigPinnedLink, createUiConfigPinnedLinks, uiConfigExport as default, deleteAllUiConfigPinnedLinks, deleteUiConfigPinnedLink, getUiConfigPinnedLink, getUiConfigPinnedLinks, patchUiConfigPinnedLink };
+export { uiConfigExport as default };

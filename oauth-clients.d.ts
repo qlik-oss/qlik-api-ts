@@ -1,10 +1,10 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/oauth-clients.d.ts
 /**
  * Hints of any client application secrets
  */
-type ClientSecrets = {
+export type ClientSecrets = {
   /** The timestamp for when the client-secret record was created. */
   createdAt?: string;
   /** The identifier for the user that created the client-secret record. */
@@ -15,7 +15,7 @@ type ClientSecrets = {
 /**
  * Response schema for reading a connection config
  */
-type ConnectionConfigReadResponse = {
+export type ConnectionConfigReadResponse = {
   /** Consent method */
   readonly consentMethod: string;
   /** OAuth client has been deleted by owning tenant, only applies for published clients. */
@@ -23,7 +23,7 @@ type ConnectionConfigReadResponse = {
   /** Status */
   readonly status?: string;
 };
-type Error = {
+export type Error = {
   /** The unique code for the error */
   code: string;
   /** Additional details about the error */
@@ -31,13 +31,13 @@ type Error = {
   /** A summary of the error */
   title: string;
 };
-type ErrorResponse = {
+export type ErrorResponse = {
   errors?: Error[];
 };
 /**
  * JSON Web Key (JWK) for the public key used to verify the signature of a client assertion JWT
  */
-type JWK = {
+export type JWK = {
   /** Algorithm intended for use with the key */
   alg: "RS256" | "RS512" | "ES384";
   /** Curve for EC keys */
@@ -57,11 +57,11 @@ type JWK = {
   /** Y coordinate for EC keys */
   y?: string;
 };
-type Link = {
+export type Link = {
   /** URL that defines the resource */
   href: string;
 };
-type Links = {
+export type Links = {
   next?: Link;
   prev?: Link;
   self?: Link;
@@ -69,7 +69,7 @@ type Links = {
 /**
  * Schema for a OAuth client when listing as an admin user
  */
-type OAuthClientAdminListItem = {
+export type OAuthClientAdminListItem = {
   /** List of allowed authentication methods for the client */
   allowedAuthMethods?: ("client_secret" | "private_key_jwt")[];
   /** List of allowed origins for client */
@@ -80,6 +80,8 @@ type OAuthClientAdminListItem = {
   readonly clientSecrets?: ClientSecrets;
   /** Response schema for reading a connection config */
   connectionConfig?: ConnectionConfigReadResponse;
+  /** URI of the JSON Web Key Set (JWKS) for the client */
+  jwksUri?: string;
   /** List of public keys for JWT authentication */
   publicKeys?: JWK[];
   /** List of allowed redirect URIs for login */
@@ -88,7 +90,7 @@ type OAuthClientAdminListItem = {
 /**
  * Response schema for listing OAuth clients as an admin user
  */
-type OAuthClientAdminListResponse = {
+export type OAuthClientAdminListResponse = {
   data: OAuthClientAdminListItem[];
   links: Links;
   /** Total number of oauth clients, included only if `totalResults` query parameter is set to true. */
@@ -97,7 +99,7 @@ type OAuthClientAdminListResponse = {
 /**
  * Response schema for reading an OAuth client as an admin user
  */
-type OAuthClientAdminReadResponse = {
+export type OAuthClientAdminReadResponse = {
   /** List of allowed authentication methods for the client */
   allowedAuthMethods?: ("client_secret" | "private_key_jwt")[];
   /** List of allowed origins for client */
@@ -106,6 +108,8 @@ type OAuthClientAdminReadResponse = {
   readonly clientId: string;
   /** Hints of any client application secrets */
   readonly clientSecrets?: ClientSecrets;
+  /** URI of the JSON Web Key Set (JWKS) for the client */
+  jwksUri?: string;
   /** List of public keys for JWT authentication */
   publicKeys?: JWK[];
   /** List of allowed redirect URIs for login */
@@ -114,7 +118,7 @@ type OAuthClientAdminReadResponse = {
 /**
  * Base schema for OAuth client requests and responses
  */
-type OAuthClientBase = {
+export type OAuthClientBase = {
   /** List of allowed authentication methods for the client */
   allowedAuthMethods?: ("client_secret" | "private_key_jwt")[];
   /** Allowed grant types, only for use with appType: 'web' */
@@ -151,6 +155,8 @@ type OAuthClientBase = {
   description?: string;
   /** Is set if client disabled */
   readonly disableTag?: string;
+  /** URI of the JSON Web Key Set (JWKS) for the client */
+  jwksUri?: string;
   /** URI for logo of client */
   logoUri?: string;
   /** List of public keys for JWT authentication */
@@ -163,7 +169,7 @@ type OAuthClientBase = {
 /**
  * Request schema for OAuth client creation
  */
-type OAuthClientCreateRequest = {
+export type OAuthClientCreateRequest = {
   /** List of allowed authentication methods for the client */
   allowedAuthMethods?: ("client_secret" | "private_key_jwt")[];
   /** Allowed grant types, only for use with appType: 'web' */
@@ -185,6 +191,8 @@ type OAuthClientCreateRequest = {
   };
   /** Client description */
   description?: string;
+  /** URI of the JSON Web Key Set (JWKS) for the client */
+  jwksUri?: string;
   /** URI for logo of client */
   logoUri?: string;
   /** List of public keys for JWT authentication (required when using private_key_jwt) */
@@ -195,7 +203,7 @@ type OAuthClientCreateRequest = {
 /**
  * Response schema for OAuth client creation
  */
-type OAuthClientCreateResponse = {
+export type OAuthClientCreateResponse = {
   /** List of allowed authentication methods for the client */
   allowedAuthMethods?: ("client_secret" | "private_key_jwt")[];
   /** List of allowed redirect URIs for login */
@@ -212,35 +220,35 @@ type OAuthClientCreateResponse = {
 /**
  * Response schema for listing OAuth clients
  */
-type OAuthClientListResponse = {
+export type OAuthClientListResponse = {
   data: OAuthClientReadResponse[];
   links: Links;
 };
 /**
  * Response schema for PATCH /oauth-clients when a client secret is generated
  */
-type OAuthClientPatchResponse = {
+export type OAuthClientPatchResponse = {
   /** The generated client application secret */
   readonly clientSecret: string;
 };
 /**
  * Response schema for successfully publishing an OAuth client
  */
-type OAuthClientPublishResponse = {
+export type OAuthClientPublishResponse = {
   /** The timestamp which is set, if the client is published. */
   publishedAt: string;
 };
 /**
  * Response schema for reading an OAuth client
  */
-type OAuthClientReadResponse = {
+export type OAuthClientReadResponse = {
   /** Client application id */
   readonly clientId: string;
 } & OAuthClientBase;
 /**
  * Response schema for creating an OAuth client application secret
  */
-type OAuthClientSecretResponse = {
+export type OAuthClientSecretResponse = {
   /** Client application id */
   readonly clientId: string;
   /** Client application secret */
@@ -255,23 +263,20 @@ type OAuthClientSecretResponse = {
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902
  */
-type OAuthClientUpdate = {
+export type OAuthClientUpdate = {
   /** The operation to be performed */
   op: "add" | "remove" | "replace";
   /** The path for the given resource field to patch */
-  path: "/allowedOrigins" | "/clientName" | "/clientUri" | "/description" | "/logoUri" | "/redirectUris" | "/allowedScopes" | "/allowedGrantTypes" | "/publicKeys" | "/allowedAuthMethods";
+  path: "/allowedOrigins" | "/clientName" | "/clientUri" | "/description" | "/logoUri" | "/redirectUris" | "/allowedScopes" | "/allowedGrantTypes" | "/publicKeys" | "/allowedAuthMethods" | "/jwksUri";
   /** The value to be used for this operation. */
   value?: string | string[];
 };
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902
  */
-type OAuthConnectionConfigUpdate = {
-  /** The operation to be performed */
+export type OAuthConnectionConfigUpdate = {
   op: "replace";
-  /** The path for the given resource field to patch */
   path: "/consentMethod";
-  /** The value to be used for this operation. */
   value: "required" | "trusted";
 };
 /**
@@ -287,7 +292,7 @@ type OAuthConnectionConfigUpdate = {
  * @param query an object with query parameters
  * @throws GetOAuthClientsHttpError
  */
-declare function getOAuthClients(query: {
+export declare function getOAuthClients(query: {
   /** The filter query that should be used to filter the list of oauth clients.  The filter syntax is defined in RFC 7644. Valid attributes for filtering are `clientId`, `clientName`, `appType`, `tenantId`, and `createdByType`. */
   filter?: string;
   /** The number of OAuth client entries to retrieve. */
@@ -301,12 +306,12 @@ declare function getOAuthClients(query: {
   /** Boolean query parameter that determines if the total count of results should be included in the response. If true, the response includes the total number of results in the `totalResults` field. If false or not included in the query, `totalResults` will be excluded from the response. */
   totalResults?: boolean;
 }, options?: ApiCallOptions): Promise<GetOAuthClientsHttpResponse>;
-type GetOAuthClientsHttpResponse = {
+export type GetOAuthClientsHttpResponse = {
   data: OAuthClientAdminListResponse | OAuthClientListResponse;
   headers: Headers;
   status: 200;
 };
-type GetOAuthClientsHttpError = {
+export type GetOAuthClientsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 401 | 403 | 500 | 503;
@@ -317,13 +322,13 @@ type GetOAuthClientsHttpError = {
  * @param body an object with the body content
  * @throws CreateOAuthClientHttpError
  */
-declare function createOAuthClient(body: OAuthClientCreateRequest, options?: ApiCallOptions): Promise<CreateOAuthClientHttpResponse>;
-type CreateOAuthClientHttpResponse = {
+export declare function createOAuthClient(body: OAuthClientCreateRequest, options?: ApiCallOptions): Promise<CreateOAuthClientHttpResponse>;
+export type CreateOAuthClientHttpResponse = {
   data: OAuthClientCreateResponse;
   headers: Headers;
   status: 201;
 };
-type CreateOAuthClientHttpError = {
+export type CreateOAuthClientHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 500 | 503;
@@ -334,13 +339,13 @@ type CreateOAuthClientHttpError = {
  * @param id The unique identifier for the OAuth client
  * @throws DeleteOAuthClientHttpError
  */
-declare function deleteOAuthClient(id: string, options?: ApiCallOptions): Promise<DeleteOAuthClientHttpResponse>;
-type DeleteOAuthClientHttpResponse = {
+export declare function deleteOAuthClient(id: string, options?: ApiCallOptions): Promise<DeleteOAuthClientHttpResponse>;
+export type DeleteOAuthClientHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteOAuthClientHttpError = {
+export type DeleteOAuthClientHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -351,13 +356,13 @@ type DeleteOAuthClientHttpError = {
  * @param id The unique identifier for the OAuth client
  * @throws GetOAuthClientHttpError
  */
-declare function getOAuthClient(id: string, options?: ApiCallOptions): Promise<GetOAuthClientHttpResponse>;
-type GetOAuthClientHttpResponse = {
+export declare function getOAuthClient(id: string, options?: ApiCallOptions): Promise<GetOAuthClientHttpResponse>;
+export type GetOAuthClientHttpResponse = {
   data: OAuthClientAdminReadResponse | OAuthClientReadResponse;
   headers: Headers;
   status: 200;
 };
-type GetOAuthClientHttpError = {
+export type GetOAuthClientHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -369,19 +374,19 @@ type GetOAuthClientHttpError = {
  * @param body an object with the body content
  * @throws PatchOAuthClientHttpError
  */
-declare function patchOAuthClient(id: string, body: OAuthClientUpdate[], options?: ApiCallOptions): Promise<PatchOAuthClientHttpResponse>;
-type PatchOAuthClientHttpResponse = PatchOAuthClient202HttpResponse | PatchOAuthClient204HttpResponse;
-type PatchOAuthClient202HttpResponse = {
+export declare function patchOAuthClient(id: string, body: OAuthClientUpdate[], options?: ApiCallOptions): Promise<PatchOAuthClientHttpResponse>;
+export type PatchOAuthClientHttpResponse = PatchOAuthClient202HttpResponse | PatchOAuthClient204HttpResponse;
+export type PatchOAuthClient202HttpResponse = {
   data: OAuthClientPatchResponse;
   headers: Headers;
   status: 202;
 };
-type PatchOAuthClient204HttpResponse = {
+export type PatchOAuthClient204HttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchOAuthClientHttpError = {
+export type PatchOAuthClientHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -392,13 +397,13 @@ type PatchOAuthClientHttpError = {
  * @param id The unique identifier for the OAuth client
  * @throws PublishOAuthClientHttpError
  */
-declare function publishOAuthClient(id: string, options?: ApiCallOptions): Promise<PublishOAuthClientHttpResponse>;
-type PublishOAuthClientHttpResponse = {
+export declare function publishOAuthClient(id: string, options?: ApiCallOptions): Promise<PublishOAuthClientHttpResponse>;
+export type PublishOAuthClientHttpResponse = {
   data: OAuthClientPublishResponse;
   headers: Headers;
   status: 201;
 };
-type PublishOAuthClientHttpError = {
+export type PublishOAuthClientHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -409,13 +414,13 @@ type PublishOAuthClientHttpError = {
  * @param id The unique identifier for the OAuth client
  * @throws CreateOAuthClientSecretHttpError
  */
-declare function createOAuthClientSecret(id: string, options?: ApiCallOptions): Promise<CreateOAuthClientSecretHttpResponse>;
-type CreateOAuthClientSecretHttpResponse = {
+export declare function createOAuthClientSecret(id: string, options?: ApiCallOptions): Promise<CreateOAuthClientSecretHttpResponse>;
+export type CreateOAuthClientSecretHttpResponse = {
   data: OAuthClientSecretResponse;
   headers: Headers;
   status: 201;
 };
-type CreateOAuthClientSecretHttpError = {
+export type CreateOAuthClientSecretHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -427,13 +432,13 @@ type CreateOAuthClientSecretHttpError = {
  * @param hint The unique identifier for the OAuth secret
  * @throws DeleteOAuthClientSecretHttpError
  */
-declare function deleteOAuthClientSecret(id: string, hint: string, options?: ApiCallOptions): Promise<DeleteOAuthClientSecretHttpResponse>;
-type DeleteOAuthClientSecretHttpResponse = {
+export declare function deleteOAuthClientSecret(id: string, hint: string, options?: ApiCallOptions): Promise<DeleteOAuthClientSecretHttpResponse>;
+export type DeleteOAuthClientSecretHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteOAuthClientSecretHttpError = {
+export type DeleteOAuthClientSecretHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -444,13 +449,13 @@ type DeleteOAuthClientSecretHttpError = {
  * @param id The unique identifier for the OAuth client
  * @throws DeleteOAuthClientConnectionConfigHttpError
  */
-declare function deleteOAuthClientConnectionConfig(id: string, options?: ApiCallOptions): Promise<DeleteOAuthClientConnectionConfigHttpResponse>;
-type DeleteOAuthClientConnectionConfigHttpResponse = {
+export declare function deleteOAuthClientConnectionConfig(id: string, options?: ApiCallOptions): Promise<DeleteOAuthClientConnectionConfigHttpResponse>;
+export type DeleteOAuthClientConnectionConfigHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteOAuthClientConnectionConfigHttpError = {
+export type DeleteOAuthClientConnectionConfigHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -461,13 +466,13 @@ type DeleteOAuthClientConnectionConfigHttpError = {
  * @param id The unique identifier for an OAuth client
  * @throws GetOAuthClientConnectionConfigHttpError
  */
-declare function getOAuthClientConnectionConfig(id: string, options?: ApiCallOptions): Promise<GetOAuthClientConnectionConfigHttpResponse>;
-type GetOAuthClientConnectionConfigHttpResponse = {
+export declare function getOAuthClientConnectionConfig(id: string, options?: ApiCallOptions): Promise<GetOAuthClientConnectionConfigHttpResponse>;
+export type GetOAuthClientConnectionConfigHttpResponse = {
   data: ConnectionConfigReadResponse;
   headers: Headers;
   status: 200;
 };
-type GetOAuthClientConnectionConfigHttpError = {
+export type GetOAuthClientConnectionConfigHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -479,13 +484,13 @@ type GetOAuthClientConnectionConfigHttpError = {
  * @param body an object with the body content
  * @throws PatchOAuthClientConnectionConfigHttpError
  */
-declare function patchOAuthClientConnectionConfig(id: string, body: OAuthConnectionConfigUpdate[], options?: ApiCallOptions): Promise<PatchOAuthClientConnectionConfigHttpResponse>;
-type PatchOAuthClientConnectionConfigHttpResponse = {
+export declare function patchOAuthClientConnectionConfig(id: string, body: OAuthConnectionConfigUpdate[], options?: ApiCallOptions): Promise<PatchOAuthClientConnectionConfigHttpResponse>;
+export type PatchOAuthClientConnectionConfigHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchOAuthClientConnectionConfigHttpError = {
+export type PatchOAuthClientConnectionConfigHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -493,8 +498,8 @@ type PatchOAuthClientConnectionConfigHttpError = {
 /**
  * Clears the cache for oauth-clients api requests.
  */
-declare function clearCache(): void;
-type OauthClientsAPI = {
+export declare function clearCache(): void;
+export type OauthClientsAPI = {
   /**
    * Retrieve all OAuth clients.
    * @example
@@ -592,4 +597,4 @@ type OauthClientsAPI = {
  */
 declare const oauthClientsExport: OauthClientsAPI;
 //#endregion
-export { ClientSecrets, ConnectionConfigReadResponse, CreateOAuthClientHttpError, CreateOAuthClientHttpResponse, CreateOAuthClientSecretHttpError, CreateOAuthClientSecretHttpResponse, DeleteOAuthClientConnectionConfigHttpError, DeleteOAuthClientConnectionConfigHttpResponse, DeleteOAuthClientHttpError, DeleteOAuthClientHttpResponse, DeleteOAuthClientSecretHttpError, DeleteOAuthClientSecretHttpResponse, Error, ErrorResponse, GetOAuthClientConnectionConfigHttpError, GetOAuthClientConnectionConfigHttpResponse, GetOAuthClientHttpError, GetOAuthClientHttpResponse, GetOAuthClientsHttpError, GetOAuthClientsHttpResponse, JWK, Link, Links, OAuthClientAdminListItem, OAuthClientAdminListResponse, OAuthClientAdminReadResponse, OAuthClientBase, OAuthClientCreateRequest, OAuthClientCreateResponse, OAuthClientListResponse, OAuthClientPatchResponse, OAuthClientPublishResponse, OAuthClientReadResponse, OAuthClientSecretResponse, OAuthClientUpdate, OAuthConnectionConfigUpdate, OauthClientsAPI, PatchOAuthClient202HttpResponse, PatchOAuthClient204HttpResponse, PatchOAuthClientConnectionConfigHttpError, PatchOAuthClientConnectionConfigHttpResponse, PatchOAuthClientHttpError, PatchOAuthClientHttpResponse, PublishOAuthClientHttpError, PublishOAuthClientHttpResponse, clearCache, createOAuthClient, createOAuthClientSecret, oauthClientsExport as default, deleteOAuthClient, deleteOAuthClientConnectionConfig, deleteOAuthClientSecret, getOAuthClient, getOAuthClientConnectionConfig, getOAuthClients, patchOAuthClient, patchOAuthClientConnectionConfig, publishOAuthClient };
+export { oauthClientsExport as default };

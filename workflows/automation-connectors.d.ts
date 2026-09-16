@@ -1,9 +1,9 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-o-bqAUAV.js";
-import "../chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
+import "../chunks/invoke-fetch-DdmiOIkr.js";
 declare namespace automation_connectors_d_exports {
   export { AutomationConnectorBlock, AutomationConnectorDetail, AutomationConnectorParam, AutomationConnectorSnippet, AutomationConnectorSnippetInput, AutomationConnectorWebhookConfiguration, AutomationConnectorWebhookEvent, AutomationConnectorWebhookEventParam, AutomationConnectorsAPI, AutomationConnectorsList, AutomationConnectorsListObject, Error, ErrorResponse, GetAutomationConnectorHttpError, GetAutomationConnectorHttpResponse, GetAutomationConnectorWebhooksConfigurationHttpError, GetAutomationConnectorWebhooksConfigurationHttpResponse, GetAutomationConnectorsHttpError, GetAutomationConnectorsHttpResponse, Links, PaginationLink, clearCache, automationConnectorsExport as default, getAutomationConnector, getAutomationConnectorWebhooksConfiguration, getAutomationConnectors };
 }
-type AutomationConnectorBlock = {
+export type AutomationConnectorBlock = {
   /** The description of the block. */
   description?: string | null;
   /** An example of the output this block produces. */
@@ -19,7 +19,7 @@ type AutomationConnectorBlock = {
   /** The role of the block. */
   role?: string;
 };
-type AutomationConnectorDetail = {
+export type AutomationConnectorDetail = {
   /** Indicates if the connector is billable. */
   billable?: boolean;
   /** The available blocks (endpoints) for this connector. */
@@ -38,7 +38,7 @@ type AutomationConnectorDetail = {
   /** The available snippet templates for this connector. */
   snippets?: AutomationConnectorSnippet[];
 };
-type AutomationConnectorParam = {
+export type AutomationConnectorParam = {
   /** The description of the parameter. */
   description?: string | null;
   /** An example value for the parameter. */
@@ -56,7 +56,7 @@ type AutomationConnectorParam = {
   /** Indicates whether the parameter is a setting. */
   setting?: boolean;
 };
-type AutomationConnectorSnippet = {
+export type AutomationConnectorSnippet = {
   /** The description of the snippet. */
   description?: string | null;
   /** An example of the output this snippet produces. */
@@ -72,7 +72,7 @@ type AutomationConnectorSnippet = {
   /** The role of the snippet. */
   role?: string | null;
 };
-type AutomationConnectorSnippetInput = {
+export type AutomationConnectorSnippetInput = {
   /** The help text for this input. */
   description?: string | null;
   /** The field type of the input. */
@@ -86,7 +86,7 @@ type AutomationConnectorSnippetInput = {
   /** The available options for this input. */
   options?: unknown | unknown[] | null;
 };
-type AutomationConnectorWebhookConfiguration = {
+export type AutomationConnectorWebhookConfiguration = {
   /** Indicates whether the webhook is set up automatically. */
   automatic?: boolean;
   /** The available webhook events for this connector. */
@@ -94,7 +94,7 @@ type AutomationConnectorWebhookConfiguration = {
   /** The unique identifier of the webhook configuration. */
   id?: string;
 };
-type AutomationConnectorWebhookEvent = {
+export type AutomationConnectorWebhookEvent = {
   /** The description of the webhook event. */
   description?: string | null;
   /** An example of the payload this event produces. */
@@ -108,7 +108,7 @@ type AutomationConnectorWebhookEvent = {
   /** The role of the webhook event. */
   role?: string;
 };
-type AutomationConnectorWebhookEventParam = {
+export type AutomationConnectorWebhookEventParam = {
   /** The unique identifier of the webhook event parameter. */
   id?: string;
   /** The name of the parameter. */
@@ -120,11 +120,11 @@ type AutomationConnectorWebhookEventParam = {
   /** The type of the parameter. */
   type?: string;
 };
-type AutomationConnectorsList = {
+export type AutomationConnectorsList = {
   data?: AutomationConnectorsListObject[];
   links?: Links;
 };
-type AutomationConnectorsListObject = {
+export type AutomationConnectorsListObject = {
   /** Indicates if the connector is billable. */
   billable?: boolean;
   /** The description of the automation connector. */
@@ -141,7 +141,7 @@ type AutomationConnectorsListObject = {
   /** The name of an automation connector. */
   name?: string;
 };
-type Error = {
+export type Error = {
   /** The unique code for the error */
   code: string;
   /** May be used to provide additional details */
@@ -149,16 +149,16 @@ type Error = {
   /** A summary of what went wrong */
   title: string;
 };
-type ErrorResponse = {
+export type ErrorResponse = {
   errors?: Error[];
   /** A way to trace the source of the error. */
   traceId?: string;
 };
-type Links = {
+export type Links = {
   next?: PaginationLink;
   prev?: PaginationLink;
 };
-type PaginationLink = {
+export type PaginationLink = {
   /** The URL to a resource request */
   href?: string | null;
 };
@@ -168,7 +168,7 @@ type PaginationLink = {
  * @param query an object with query parameters
  * @throws GetAutomationConnectorsHttpError
  */
-declare function getAutomationConnectors(query: {
+export declare function getAutomationConnectors(query: {
   /** Pagination cursor returned from a previous request. */
   cursor?: string;
   /** Filters the result based on the specified criteria: name. */
@@ -178,14 +178,14 @@ declare function getAutomationConnectors(query: {
   /** The field to sort by, with +- prefix indicating sort order. (`?sort=-name` => sort on the `name` field using descending order). */
   sort?: "id" | "-id" | "+id" | "name" | "+name" | "-name";
 }, options?: ApiCallOptions): Promise<GetAutomationConnectorsHttpResponse>;
-type GetAutomationConnectorsHttpResponse = {
+export type GetAutomationConnectorsHttpResponse = {
   data: AutomationConnectorsList;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetAutomationConnectorsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetAutomationConnectorsHttpResponse>;
 };
-type GetAutomationConnectorsHttpError = {
+export type GetAutomationConnectorsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 500 | 503;
@@ -196,13 +196,13 @@ type GetAutomationConnectorsHttpError = {
  * @param connectorId The unique identifier of the automation connector.
  * @throws GetAutomationConnectorHttpError
  */
-declare function getAutomationConnector(connectorId: string, options?: ApiCallOptions): Promise<GetAutomationConnectorHttpResponse>;
-type GetAutomationConnectorHttpResponse = {
+export declare function getAutomationConnector(connectorId: string, options?: ApiCallOptions): Promise<GetAutomationConnectorHttpResponse>;
+export type GetAutomationConnectorHttpResponse = {
   data: AutomationConnectorDetail;
   headers: Headers;
   status: 200;
 };
-type GetAutomationConnectorHttpError = {
+export type GetAutomationConnectorHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -213,13 +213,13 @@ type GetAutomationConnectorHttpError = {
  * @param connectorId The unique identifier of the automation connector.
  * @throws GetAutomationConnectorWebhooksConfigurationHttpError
  */
-declare function getAutomationConnectorWebhooksConfiguration(connectorId: string, options?: ApiCallOptions): Promise<GetAutomationConnectorWebhooksConfigurationHttpResponse>;
-type GetAutomationConnectorWebhooksConfigurationHttpResponse = {
+export declare function getAutomationConnectorWebhooksConfiguration(connectorId: string, options?: ApiCallOptions): Promise<GetAutomationConnectorWebhooksConfigurationHttpResponse>;
+export type GetAutomationConnectorWebhooksConfigurationHttpResponse = {
   data: AutomationConnectorWebhookConfiguration;
   headers: Headers;
   status: 200;
 };
-type GetAutomationConnectorWebhooksConfigurationHttpError = {
+export type GetAutomationConnectorWebhooksConfigurationHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -227,8 +227,8 @@ type GetAutomationConnectorWebhooksConfigurationHttpError = {
 /**
  * Clears the cache for workflows/automation-connectors api requests.
  */
-declare function clearCache(): void;
-type AutomationConnectorsAPI = {
+export declare function clearCache(): void;
+export type AutomationConnectorsAPI = {
   /**
    * Retrieves a list of automation connectors.
    *
@@ -260,4 +260,4 @@ type AutomationConnectorsAPI = {
  */
 declare const automationConnectorsExport: AutomationConnectorsAPI;
 //#endregion
-export { AutomationConnectorBlock, AutomationConnectorDetail, AutomationConnectorParam, AutomationConnectorSnippet, AutomationConnectorSnippetInput, AutomationConnectorWebhookConfiguration, AutomationConnectorWebhookEvent, AutomationConnectorWebhookEventParam, AutomationConnectorsAPI, AutomationConnectorsList, AutomationConnectorsListObject, Error, ErrorResponse, GetAutomationConnectorHttpError, GetAutomationConnectorHttpResponse, GetAutomationConnectorWebhooksConfigurationHttpError, GetAutomationConnectorWebhooksConfigurationHttpResponse, GetAutomationConnectorsHttpError, GetAutomationConnectorsHttpResponse, Links, PaginationLink, clearCache, automationConnectorsExport as default, getAutomationConnector, getAutomationConnectorWebhooksConfiguration, getAutomationConnectors, automation_connectors_d_exports as t };
+export { automationConnectorsExport as default, automation_connectors_d_exports as t };

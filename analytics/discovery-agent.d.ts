@@ -1,8 +1,8 @@
-import { A as adaptiveCardsExport, j as adaptive_cards_d_exports } from "../chunks/adaptive-cards-C4MRotI8.js";
+import { A as adaptiveCardsExport, j as adaptive_cards_d_exports } from "../chunks/adaptive-cards-BnD5L1JE.js";
 declare namespace discovery_agent_d_exports {
   export { DiscoveryAgentAPI, adaptive_cards_d_exports as adaptiveCards, discoveryAgentExport as default };
 }
-type DiscoveryAgentAPI = {};
+export type DiscoveryAgentAPI = {};
 /**
  * Functions for the discovery-agent api
  */
@@ -10,4 +10,4 @@ declare const discoveryAgentExport: DiscoveryAgentAPI & {
   adaptiveCards: typeof adaptiveCardsExport;
 };
 //#endregion
-export { DiscoveryAgentAPI, adaptive_cards_d_exports as adaptiveCards, discoveryAgentExport as default, discovery_agent_d_exports as t };
+export { adaptive_cards_d_exports as adaptiveCards, discoveryAgentExport as default, discovery_agent_d_exports as t };

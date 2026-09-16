@@ -1,9 +1,9 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-o-bqAUAV.js";
-import "../chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
+import "../chunks/invoke-fetch-DdmiOIkr.js";
 declare namespace data_connections_d_exports {
   export { ActionDeleteRequest, ActionDuplicateRequest, ActionUpdateRequest, BulkResponse, ConnectionCreate, ConnectionCreateResponse, ConnectionGet, ConnectionUpdate, Connections, CreateDataConnectionHttpError, CreateDataConnectionHttpResponse, DataConnectionsAPI, DcaasConnectionCreate, DcaasConnectionCreateAuthResponse, DeleteDataConnectionHttpError, DeleteDataConnectionHttpResponse, DeleteDataConnectionsHttpError, DeleteDataConnectionsHttpResponse, DuplicateDataConnectionsHttpError, DuplicateDataConnectionsHttpResponse, Error, Errors, GetDataConnectionHttpError, GetDataConnectionHttpResponse, GetDataConnectionsHttpError, GetDataConnectionsHttpResponse, Link, Meta, PatchDataConnectionHttpError, PatchDataConnectionHttpResponse, PatchRequest, Privilege, ResponseErrors, TopLevelLink, UpdateDataConnectionHttpError, UpdateDataConnectionHttpResponse, UpdateDataConnectionsHttpError, UpdateDataConnectionsHttpResponse, clearCache, createDataConnection, dataConnectionsExport as default, deleteDataConnection, deleteDataConnections, duplicateDataConnections, getDataConnection, getDataConnections, patchDataConnection, updateDataConnection, updateDataConnections };
 }
-type ActionDeleteRequest = {
+export type ActionDeleteRequest = {
   connections: {
     /** ID of connection */
     id: string;
@@ -11,7 +11,7 @@ type ActionDeleteRequest = {
     name?: string;
   }[];
 };
-type ActionDuplicateRequest = {
+export type ActionDuplicateRequest = {
   /** ID of the source connection being duplicated */
   id: string;
   /** Optional name for the duplicated connection, must be unique in the target scope. If not specified, a name will be automatically generated */
@@ -23,7 +23,7 @@ type ActionDuplicateRequest = {
   /** Optional target space ID for the duplicated connection. If not specified, the duplicated connection will be in the same space as the source connection */
   spaceId?: string;
 };
-type ActionUpdateRequest = {
+export type ActionUpdateRequest = {
   connections: {
     /** Connection ID */
     id: string;
@@ -37,7 +37,7 @@ type ActionUpdateRequest = {
     spaceType?: "personal" | "shared" | "managed" | "data";
   }[];
 };
-type BulkResponse = {
+export type BulkResponse = {
   data?: {
     error?: Error;
     /** ID of the resource */
@@ -49,7 +49,7 @@ type BulkResponse = {
 /**
  * Schema used to create a connection with given connection string (`qConnectStatement`) along with other metadata
  */
-type ConnectionCreate = {
+export type ConnectionCreate = {
   /** ID of the datasource associated with this connection */
   datasourceID: string;
   /** App ID */
@@ -90,7 +90,7 @@ type ConnectionCreate = {
 /**
  * Represents a data connection returned after a successful create, update, or duplicate operation.
  */
-type ConnectionCreateResponse = {
+export type ConnectionCreateResponse = {
   /** The date and time when the connection was created, in ISO 8601 format. */
   createdAt?: string;
   links?: Link;
@@ -128,7 +128,7 @@ type ConnectionCreateResponse = {
 /**
  * Represents a data connection returned from a GET request.
  */
-type ConnectionGet = {
+export type ConnectionGet = {
   /** Connection properties parsed from the connection string. Only included in the response when `parseConnection` is `true`. */
   connectionProperties?: unknown;
   /** The date and time when the connection was created, in ISO 8601 format. */
@@ -171,7 +171,7 @@ type ConnectionGet = {
   /** User ID of the connection's creator */
   user?: string;
 };
-type ConnectionUpdate = {
+export type ConnectionUpdate = {
   /** ID of the datasource associated with this connection */
   datasourceID?: string;
   /** Indicates the data connector architecture. `0` for 64-bit, `1` for 32-bit. Default is `0`, if not specified. */
@@ -203,7 +203,7 @@ type ConnectionUpdate = {
   /** ID of the space to which the connection belongs */
   space?: string;
 };
-type Connections = {
+export type Connections = {
   data?: ConnectionGet[];
   errors?: Errors;
   links?: TopLevelLink;
@@ -212,7 +212,7 @@ type Connections = {
 /**
  * Schema used to create a connection using a list of connection properties for given datasource
  */
-type DcaasConnectionCreate = {
+export type DcaasConnectionCreate = {
   /** When `true`, only the authentication URL is returned and no connection is created, provided the data source supports OAuth. All other request properties are ignored. Has no effect if the data source does not support OAuth. */
   authUrlOnly?: boolean;
   /** Connection properties required to establish the connection for the specified data source. The expected properties are defined by the response of `GET /connectivity/data-sources/{datasourceId}/api-specs`. */
@@ -229,11 +229,11 @@ type DcaasConnectionCreate = {
 /**
  * Authentication URL returned when `authUrlOnly` is `true` in the request body. Only returned for data sources that support OAuth.
  */
-type DcaasConnectionCreateAuthResponse = {
+export type DcaasConnectionCreateAuthResponse = {
   /** Authentication URL used to generate authentication code for datasources supporting OAuth */
   authUrl: string;
 };
-type Error = {
+export type Error = {
   /** A unique internal error code identifying the error type. */
   code?: string;
   /** Additional details about the error. */
@@ -243,19 +243,19 @@ type Error = {
   /** A short, human-readable description of what went wrong. */
   title?: string;
 };
-type Errors = Error[];
-type Link = {
+export type Errors = Error[];
+export type Link = {
   /** Link to current query */
   self: {
     /** URL pointing to the resource */
     href: string;
   };
 };
-type Meta = {
+export type Meta = {
   /** Total count of resources being requested. */
   count?: number;
 };
-type PatchRequest = {
+export type PatchRequest = {
   /** The patch operation type. */
   op: "add" | "replace" | "remove";
   /** JSON Pointer path to the field to patch. */
@@ -268,11 +268,11 @@ type PatchRequest = {
  * @example
  * "list"
  */
-type Privilege = "list" | "update" | "delete" | "read" | "change_owner" | "change_space";
-type ResponseErrors = {
+export type Privilege = "list" | "update" | "delete" | "read" | "change_owner" | "change_space";
+export type ResponseErrors = {
   errors?: Errors;
 };
-type TopLevelLink = {
+export type TopLevelLink = {
   /** URL link to next page of requested resources (available to paged request only) */
   next?: {
     /** URL pointing to the next page of resources */
@@ -314,7 +314,7 @@ type TopLevelLink = {
  * @param query an object with query parameters
  * @throws GetDataConnectionsHttpError
  */
-declare function getDataConnections(query: {
+export declare function getDataConnections(query: {
   /** When `true`, sorting is applied case-insensitively. Only applies when `sort` is also specified. */
   caseinsensitive?: boolean;
   /** Provides an alternate name to be used for data[] element in GET response. */
@@ -348,14 +348,14 @@ declare function getDataConnections(query: {
   /** Filter by `userId`. Requires Admin role if specified `userId` doesn't match that is defined in JWT. */
   userId?: string;
 }, options?: ApiCallOptions): Promise<GetDataConnectionsHttpResponse>;
-type GetDataConnectionsHttpResponse = {
+export type GetDataConnectionsHttpResponse = {
   data: Connections;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetDataConnectionsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetDataConnectionsHttpResponse>;
 };
-type GetDataConnectionsHttpError = {
+export type GetDataConnectionsHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 500 | 502;
@@ -366,13 +366,13 @@ type GetDataConnectionsHttpError = {
  * @param body an object with the body content
  * @throws CreateDataConnectionHttpError
  */
-declare function createDataConnection(body: ConnectionCreate | DcaasConnectionCreate, options?: ApiCallOptions): Promise<CreateDataConnectionHttpResponse>;
-type CreateDataConnectionHttpResponse = {
+export declare function createDataConnection(body: ConnectionCreate | DcaasConnectionCreate, options?: ApiCallOptions): Promise<CreateDataConnectionHttpResponse>;
+export type CreateDataConnectionHttpResponse = {
   data: ConnectionCreateResponse | DcaasConnectionCreateAuthResponse;
   headers: Headers;
   status: 201;
 };
-type CreateDataConnectionHttpError = {
+export type CreateDataConnectionHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 403 | 404 | 409;
@@ -383,13 +383,13 @@ type CreateDataConnectionHttpError = {
  * @param body an object with the body content
  * @throws DeleteDataConnectionsHttpError
  */
-declare function deleteDataConnections(body: ActionDeleteRequest, options?: ApiCallOptions): Promise<DeleteDataConnectionsHttpResponse>;
-type DeleteDataConnectionsHttpResponse = {
+export declare function deleteDataConnections(body: ActionDeleteRequest, options?: ApiCallOptions): Promise<DeleteDataConnectionsHttpResponse>;
+export type DeleteDataConnectionsHttpResponse = {
   data: BulkResponse;
   headers: Headers;
   status: 207;
 };
-type DeleteDataConnectionsHttpError = {
+export type DeleteDataConnectionsHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 403;
@@ -400,13 +400,13 @@ type DeleteDataConnectionsHttpError = {
  * @param body an object with the body content
  * @throws DuplicateDataConnectionsHttpError
  */
-declare function duplicateDataConnections(body: ActionDuplicateRequest, options?: ApiCallOptions): Promise<DuplicateDataConnectionsHttpResponse>;
-type DuplicateDataConnectionsHttpResponse = {
+export declare function duplicateDataConnections(body: ActionDuplicateRequest, options?: ApiCallOptions): Promise<DuplicateDataConnectionsHttpResponse>;
+export type DuplicateDataConnectionsHttpResponse = {
   data: ConnectionCreateResponse;
   headers: Headers;
   status: 201;
 };
-type DuplicateDataConnectionsHttpError = {
+export type DuplicateDataConnectionsHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 403 | 404 | 409;
@@ -417,13 +417,13 @@ type DuplicateDataConnectionsHttpError = {
  * @param body an object with the body content
  * @throws UpdateDataConnectionsHttpError
  */
-declare function updateDataConnections(body: ActionUpdateRequest, options?: ApiCallOptions): Promise<UpdateDataConnectionsHttpResponse>;
-type UpdateDataConnectionsHttpResponse = {
+export declare function updateDataConnections(body: ActionUpdateRequest, options?: ApiCallOptions): Promise<UpdateDataConnectionsHttpResponse>;
+export type UpdateDataConnectionsHttpResponse = {
   data: BulkResponse;
   headers: Headers;
   status: 207;
 };
-type UpdateDataConnectionsHttpError = {
+export type UpdateDataConnectionsHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 403;
@@ -443,18 +443,18 @@ type UpdateDataConnectionsHttpError = {
  * @param query an object with query parameters
  * @throws DeleteDataConnectionHttpError
  */
-declare function deleteDataConnection(qID: string, query: {
+export declare function deleteDataConnection(qID: string, query: {
   /** Filter connections by space ID. */
   spaceId?: string;
   /** When set to `connectionname`, the value of the connection ID in the path is interpreted as the connection's name rather than its unique identifier. */
   type?: "connectionname";
 }, options?: ApiCallOptions): Promise<DeleteDataConnectionHttpResponse>;
-type DeleteDataConnectionHttpResponse = {
+export type DeleteDataConnectionHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteDataConnectionHttpError = {
+export type DeleteDataConnectionHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 403 | 404;
@@ -479,7 +479,7 @@ type DeleteDataConnectionHttpError = {
  * @param query an object with query parameters
  * @throws GetDataConnectionHttpError
  */
-declare function getDataConnection(qID: string, query: {
+export declare function getDataConnection(qID: string, query: {
   /** When `true`, the value of the `credentialId` in the query is interpreted as the credential's name rather than its unique identifier. */
   byCredentialName?: boolean;
   /** Filter by credential ID. */
@@ -495,12 +495,12 @@ declare function getDataConnection(qID: string, query: {
   /** When set to `connectionname`, the value of the connection ID in the path is interpreted as the connection's name rather than its unique identifier. */
   type?: "connectionname";
 }, options?: ApiCallOptions): Promise<GetDataConnectionHttpResponse>;
-type GetDataConnectionHttpResponse = {
+export type GetDataConnectionHttpResponse = {
   data: ConnectionGet;
   headers: Headers;
   status: 200;
 };
-type GetDataConnectionHttpError = {
+export type GetDataConnectionHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 403 | 404 | 500;
@@ -513,16 +513,16 @@ type GetDataConnectionHttpError = {
  * @param body an object with the body content
  * @throws PatchDataConnectionHttpError
  */
-declare function patchDataConnection(qID: string, query: {
+export declare function patchDataConnection(qID: string, query: {
   /** When set to `connectionname`, the value of the connection ID in the path is interpreted as the connection's name rather than its unique identifier. */
   type?: "connectionname";
 }, body: PatchRequest, options?: ApiCallOptions): Promise<PatchDataConnectionHttpResponse>;
-type PatchDataConnectionHttpResponse = {
+export type PatchDataConnectionHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchDataConnectionHttpError = {
+export type PatchDataConnectionHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 403 | 404 | 409;
@@ -535,18 +535,18 @@ type PatchDataConnectionHttpError = {
  * @param body an object with the body content
  * @throws UpdateDataConnectionHttpError
  */
-declare function updateDataConnection(qID: string, query: {
+export declare function updateDataConnection(qID: string, query: {
   /** Filter connections by space ID. */
   spaceId?: string;
   /** When set to `connectionname`, the value of the connection ID in the path is interpreted as the connection's name rather than its unique identifier. */
   type?: "connectionname";
 }, body: ConnectionUpdate, options?: ApiCallOptions): Promise<UpdateDataConnectionHttpResponse>;
-type UpdateDataConnectionHttpResponse = {
+export type UpdateDataConnectionHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type UpdateDataConnectionHttpError = {
+export type UpdateDataConnectionHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 403 | 404 | 409;
@@ -554,8 +554,8 @@ type UpdateDataConnectionHttpError = {
 /**
  * Clears the cache for connectivity/data-connections api requests.
  */
-declare function clearCache(): void;
-type DataConnectionsAPI = {
+export declare function clearCache(): void;
+export type DataConnectionsAPI = {
   /**
    * Use this operation to retrieve a list of data connections available to the caller. Results are filtered based on the caller's space access permissions. Use the `spaceId`, `personal`, or `filter` parameters to narrow results to a specific scope.
    * @example
@@ -675,4 +675,4 @@ type DataConnectionsAPI = {
  */
 declare const dataConnectionsExport: DataConnectionsAPI;
 //#endregion
-export { ActionDeleteRequest, ActionDuplicateRequest, ActionUpdateRequest, BulkResponse, ConnectionCreate, ConnectionCreateResponse, ConnectionGet, ConnectionUpdate, Connections, CreateDataConnectionHttpError, CreateDataConnectionHttpResponse, DataConnectionsAPI, DcaasConnectionCreate, DcaasConnectionCreateAuthResponse, DeleteDataConnectionHttpError, DeleteDataConnectionHttpResponse, DeleteDataConnectionsHttpError, DeleteDataConnectionsHttpResponse, DuplicateDataConnectionsHttpError, DuplicateDataConnectionsHttpResponse, Error, Errors, GetDataConnectionHttpError, GetDataConnectionHttpResponse, GetDataConnectionsHttpError, GetDataConnectionsHttpResponse, Link, Meta, PatchDataConnectionHttpError, PatchDataConnectionHttpResponse, PatchRequest, Privilege, ResponseErrors, TopLevelLink, UpdateDataConnectionHttpError, UpdateDataConnectionHttpResponse, UpdateDataConnectionsHttpError, UpdateDataConnectionsHttpResponse, clearCache, createDataConnection, dataConnectionsExport as default, deleteDataConnection, deleteDataConnections, duplicateDataConnections, getDataConnection, getDataConnections, patchDataConnection, data_connections_d_exports as t, updateDataConnection, updateDataConnections };
+export { dataConnectionsExport as default, data_connections_d_exports as t };

@@ -1,11 +1,11 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/notes.d.ts
 /**
  * The possible states for the status of notes configuration GET or POST operation
  */
-type ConfigReasonCode = "deployment" | "toggle" | "license";
-type Error = {
+export type ConfigReasonCode = "deployment" | "toggle" | "license";
+export type Error = {
   /** Error code specific to notes broker service. */
   readonly code?: string;
   /** Error cause. */
@@ -25,20 +25,20 @@ type Error = {
  *   traceId: "7326ce0d-1946-41d0-b890-609865cc42ea"
  * }
  */
-type Errors = {
+export type Errors = {
   errors?: Error[];
   /** An optional traceId */
   traceId?: string;
 };
-type NoteSettingsPutPayload = {
+export type NoteSettingsPutPayload = {
   /** pass 'true' to enable the note toggle for the tenant, 'false' to disable the toggle (other values are ignore). */
   toggledOn?: boolean;
 };
-type NoteSettingsPutResponse = {
+export type NoteSettingsPutResponse = {
   /** 'true' if the note feature is enabled for this tenant and user otherwise 'false'. */
   toggleOn?: boolean;
 };
-type NotesUserSettings = {
+export type NotesUserSettings = {
   /** 'true' if the note feature is enabled for this tenant and user otherwise 'false'. */
   available: boolean;
   /** The timestamp for the last time this users notes settings were fetched from downstream services. */
@@ -53,13 +53,13 @@ type NotesUserSettings = {
  *
  * @throws GetNotesSettingsHttpError
  */
-declare function getNotesSettings(options?: ApiCallOptions): Promise<GetNotesSettingsHttpResponse>;
-type GetNotesSettingsHttpResponse = {
+export declare function getNotesSettings(options?: ApiCallOptions): Promise<GetNotesSettingsHttpResponse>;
+export type GetNotesSettingsHttpResponse = {
   data: NotesUserSettings;
   headers: Headers;
   status: 200;
 };
-type GetNotesSettingsHttpError = {
+export type GetNotesSettingsHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -72,13 +72,13 @@ type GetNotesSettingsHttpError = {
  * @param body an object with the body content
  * @throws SetNotesSettingsHttpError
  */
-declare function setNotesSettings(body: NoteSettingsPutPayload, options?: ApiCallOptions): Promise<SetNotesSettingsHttpResponse>;
-type SetNotesSettingsHttpResponse = {
+export declare function setNotesSettings(body: NoteSettingsPutPayload, options?: ApiCallOptions): Promise<SetNotesSettingsHttpResponse>;
+export type SetNotesSettingsHttpResponse = {
   data: NoteSettingsPutResponse;
   headers: Headers;
   status: 200;
 };
-type SetNotesSettingsHttpError = {
+export type SetNotesSettingsHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -86,8 +86,8 @@ type SetNotesSettingsHttpError = {
 /**
  * Clears the cache for notes api requests.
  */
-declare function clearCache(): void;
-type NotesAPI = {
+export declare function clearCache(): void;
+export type NotesAPI = {
   /**
    * @deprecated
    *
@@ -115,4 +115,4 @@ type NotesAPI = {
  */
 declare const notesExport: NotesAPI;
 //#endregion
-export { ConfigReasonCode, Error, Errors, GetNotesSettingsHttpError, GetNotesSettingsHttpResponse, NoteSettingsPutPayload, NoteSettingsPutResponse, NotesAPI, NotesUserSettings, SetNotesSettingsHttpError, SetNotesSettingsHttpResponse, clearCache, notesExport as default, getNotesSettings, setNotesSettings };
+export { notesExport as default };

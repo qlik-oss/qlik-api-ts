@@ -1,10 +1,10 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/notifications.d.ts
 /**
  * An error object.
  */
-type Error = {
+export type Error = {
   /** The error code. */
   code: string;
   /** A human-readable explanation specific to this occurrence of the problem. */
@@ -15,7 +15,7 @@ type Error = {
 /**
  * Notification result item
  */
-type NotificationItem = {
+export type NotificationItem = {
   /** Indicates if the notification can be managed in the hub. If true, the object will also contain 'subscriptionInfo' object and a 'presentationInfo' object with a non-empty scopes array. */
   isManageableInHub?: boolean;
   /** Indicates if the notification can be subscribed to by users.  If true, the object will also contain 'subscriptionInfo' object */
@@ -45,7 +45,7 @@ type NotificationItem = {
 /**
  * Object containing array representing list of supported notifications
  */
-type NotificationsObject = {
+export type NotificationsObject = {
   /** list of notifications */
   notifications: NotificationItem[];
 };
@@ -55,7 +55,7 @@ type NotificationsObject = {
  * @param query an object with query parameters
  * @throws GetNotificationsHttpError
  */
-declare function getNotifications(query: {
+export declare function getNotifications(query: {
   /** If present, idenfies the language of the returned 'friendlyName' property. */
   locale?: string;
   /** If present, represents the 'manageableInHub' value to filter by. */
@@ -63,12 +63,12 @@ declare function getNotifications(query: {
   /** If present, represents the 'subscribable' value to filter by. */
   subscribable?: true | false;
 }, options?: ApiCallOptions): Promise<GetNotificationsHttpResponse>;
-type GetNotificationsHttpResponse = {
+export type GetNotificationsHttpResponse = {
   data: NotificationsObject;
   headers: Headers;
   status: 200;
 };
-type GetNotificationsHttpError = {
+export type GetNotificationsHttpError = {
   data: Error;
   headers: Headers;
   status: number;
@@ -76,8 +76,8 @@ type GetNotificationsHttpError = {
 /**
  * Clears the cache for notifications api requests.
  */
-declare function clearCache(): void;
-type NotificationsAPI = {
+export declare function clearCache(): void;
+export type NotificationsAPI = {
   /**
    * List all supported notifications
    *
@@ -95,4 +95,4 @@ type NotificationsAPI = {
  */
 declare const notificationsExport: NotificationsAPI;
 //#endregion
-export { Error, GetNotificationsHttpError, GetNotificationsHttpResponse, NotificationItem, NotificationsAPI, NotificationsObject, clearCache, notificationsExport as default, getNotifications };
+export { notificationsExport as default };

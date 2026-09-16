@@ -1,7 +1,7 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/dcaas.d.ts
-type ApiSpecResponse = {
+export type ApiSpecResponse = {
   /** List of properties required for the given datasource */
   connectionProperties: unknown;
   /** Datasource provider */
@@ -12,11 +12,11 @@ type ApiSpecResponse = {
 /**
  * Response returned when 'authUrlOnly' is set to true in the request body
  */
-type AuthUrlResponse = {
+export type AuthUrlResponse = {
   /** Authentication URL for OAuth datasource */
   authUrl: string;
 };
-type CreateConnectionReq = {
+export type CreateConnectionReq = {
   /** When set to true, only authentication URL will be returned if datasource supports OAuth (other properties set in the request will ignored). This property will be ignored if the request is not OAuth or datasource doesn't support OAuth */
   authUrlOnly?: boolean;
   /** Connection name */
@@ -30,7 +30,7 @@ type CreateConnectionReq = {
   /** string tags (32 or less) persisted with the connection object */
   tags?: string[];
 };
-type CreateConnectionRes = {
+export type CreateConnectionRes = {
   /** Connection ID */
   connectionId: string;
   /** Connection name */
@@ -50,7 +50,7 @@ type CreateConnectionRes = {
   /** User ID */
   userId: string;
 };
-type GetConnectionResponse = {
+export type GetConnectionResponse = {
   /** Connection ID */
   connectionId: string;
   /** Connection name */
@@ -74,7 +74,7 @@ type GetConnectionResponse = {
   /** User ID */
   userId: string;
 };
-type PublicApiError = {
+export type PublicApiError = {
   /** A service specific error code string */
   code: string;
   /** Concrete detail about the error */
@@ -84,7 +84,7 @@ type PublicApiError = {
   /** Summary of the error */
   title: string;
 };
-type ResponseErrors = {
+export type ResponseErrors = {
   errors?: PublicApiError[];
 };
 /**
@@ -95,13 +95,13 @@ type ResponseErrors = {
  * @param body an object with the body content
  * @throws DataConnectionsDcaasHttpError
  */
-declare function dataConnectionsDcaas(body: CreateConnectionReq, options?: ApiCallOptions): Promise<DataConnectionsDcaasHttpResponse>;
-type DataConnectionsDcaasHttpResponse = {
+export declare function dataConnectionsDcaas(body: CreateConnectionReq, options?: ApiCallOptions): Promise<DataConnectionsDcaasHttpResponse>;
+export type DataConnectionsDcaasHttpResponse = {
   data: CreateConnectionRes | AuthUrlResponse;
   headers: Headers;
   status: 201;
 };
-type DataConnectionsDcaasHttpError = {
+export type DataConnectionsDcaasHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 401 | 403 | 500 | 503;
@@ -114,16 +114,16 @@ type DataConnectionsDcaasHttpError = {
  * @param query an object with query parameters
  * @throws DataConnectionsDcaasApiSpecsHttpError
  */
-declare function dataConnectionsDcaasApiSpecs(query: {
+export declare function dataConnectionsDcaasApiSpecs(query: {
   /** Datasource ID */
   dataSourceId: string;
 }, options?: ApiCallOptions): Promise<DataConnectionsDcaasApiSpecsHttpResponse>;
-type DataConnectionsDcaasApiSpecsHttpResponse = {
+export type DataConnectionsDcaasApiSpecsHttpResponse = {
   data: ApiSpecResponse;
   headers: Headers;
   status: 200;
 };
-type DataConnectionsDcaasApiSpecsHttpError = {
+export type DataConnectionsDcaasApiSpecsHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 401 | 403 | 500 | 503;
@@ -136,13 +136,13 @@ type DataConnectionsDcaasApiSpecsHttpError = {
  * @param connectionId ID of the connection
  * @throws DataConnectionsDcaaHttpError
  */
-declare function dataConnectionsDcaa(connectionId: string, options?: ApiCallOptions): Promise<DataConnectionsDcaaHttpResponse>;
-type DataConnectionsDcaaHttpResponse = {
+export declare function dataConnectionsDcaa(connectionId: string, options?: ApiCallOptions): Promise<DataConnectionsDcaaHttpResponse>;
+export type DataConnectionsDcaaHttpResponse = {
   data: GetConnectionResponse;
   headers: Headers;
   status: 200;
 };
-type DataConnectionsDcaaHttpError = {
+export type DataConnectionsDcaaHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 401 | 403 | 404 | 500 | 503;
@@ -150,8 +150,8 @@ type DataConnectionsDcaaHttpError = {
 /**
  * Clears the cache for dcaas api requests.
  */
-declare function clearCache(): void;
-type DcaasAPI = {
+export declare function clearCache(): void;
+export type DcaasAPI = {
   /**
    * @deprecated
    *
@@ -189,4 +189,4 @@ type DcaasAPI = {
  */
 declare const dcaasExport: DcaasAPI;
 //#endregion
-export { ApiSpecResponse, AuthUrlResponse, CreateConnectionReq, CreateConnectionRes, DataConnectionsDcaaHttpError, DataConnectionsDcaaHttpResponse, DataConnectionsDcaasApiSpecsHttpError, DataConnectionsDcaasApiSpecsHttpResponse, DataConnectionsDcaasHttpError, DataConnectionsDcaasHttpResponse, DcaasAPI, GetConnectionResponse, PublicApiError, ResponseErrors, clearCache, dataConnectionsDcaa, dataConnectionsDcaas, dataConnectionsDcaasApiSpecs, dcaasExport as default };
+export { dcaasExport as default };

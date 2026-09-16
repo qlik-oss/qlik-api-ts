@@ -1,12 +1,12 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-o-bqAUAV.js";
-import "../chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
+import "../chunks/invoke-fetch-DdmiOIkr.js";
 declare namespace data_sources_d_exports {
   export { ApiSpecResponse, ConnectionInstance, ConnectorNodesInfo, DataSourceNew, DataSourceSettingsRequest, DataSourceSettingsResponse, DataSourcesAPI, DataSourcesResponseNew, DcaasApiError, EndpointInstanceRef, FilterDataSourceEndpointsHttpError, FilterDataSourceEndpointsHttpResponse, GenerateQriDataSourcesHttpError, GenerateQriDataSourcesHttpResponse, GetDataSourceApiSpecsHttpError, GetDataSourceApiSpecsHttpResponse, GetDataSourceEndpointsHttpError, GetDataSourceEndpointsHttpResponse, GetDataSourceGatewaysHttpError, GetDataSourceGatewaysHttpResponse, GetDataSourceSettingsHttpError, GetDataSourceSettingsHttpResponse, GetDataSourcesHttpError, GetDataSourcesHttpResponse, GetEndpointsResponse, PostEndpointRequestWithConnectionId, PostEndpointRequestWithConnectionName, PostEndpointRequestWithConnectionString, PostEndpointRequestWithDatasourceID, PostEndpointResponse, PublicApiError, PutDataSourceSettingsHttpError, PutDataSourceSettingsHttpResponse, QriConnectionType, QriDefinition, QriPropertyRef, QriRequest, QriRequestItem, QriRequestItemPropertyArray, QriRequestPathPropertyArray, QriResponseItem, QriTemplate, ResponseErrors, UiInfo, clearCache, dataSourcesExport as default, filterDataSourceEndpoints, generateQriDataSources, getDataSourceApiSpecs, getDataSourceEndpoints, getDataSourceGateways, getDataSourceSettings, getDataSources, putDataSourceSettings };
 }
 /**
  * Connection property schema and connector metadata for a datasource.
  */
-type ApiSpecResponse = {
+export type ApiSpecResponse = {
   /** Map of connection property keys and their value types required to establish a connection to this datasource. */
   connectionProperties: unknown;
   /** Connector provider executable name. */
@@ -17,7 +17,7 @@ type ApiSpecResponse = {
 /**
  * Resolved connection details including credentials and QRI reference for an active endpoint.
  */
-type ConnectionInstance = {
+export type ConnectionInstance = {
   /** Unique identifier of the connection. */
   connectionId?: string;
   /** Connection string. */
@@ -36,7 +36,7 @@ type ConnectionInstance = {
 /**
  * Connector node metadata including URL, contract type, and datasource cache status.
  */
-type ConnectorNodesInfo = {
+export type ConnectorNodesInfo = {
   /** List of datasource IDs currently cached from the connector provider. */
   cachedDataSources?: string[];
   /** Protocol contract type used to communicate with the connector node (between 0 and 3, inclusive). */
@@ -53,7 +53,7 @@ type ConnectorNodesInfo = {
 /**
  * Complete datasource metadata including connector information, capabilities, and optional UI details.
  */
-type DataSourceNew = {
+export type DataSourceNew = {
   /** List of capabilities supported by the datasource. */
   capabilities?: string[];
   /** Override URL for data loading. May be null if the default URL is used. */
@@ -80,21 +80,21 @@ type DataSourceNew = {
 /**
  * Request body for updating the configuration settings of a datasource.
  */
-type DataSourceSettingsRequest = {
+export type DataSourceSettingsRequest = {
   /** When `true`, disables the datasource. When `false`, enables it. */
   disabled: boolean;
 };
 /**
  * Current configuration settings for a datasource.
  */
-type DataSourceSettingsResponse = {
+export type DataSourceSettingsResponse = {
   /** When `true`, the datasource is disabled. When `false`, it is enabled. */
   disabled?: boolean;
 };
 /**
  * Response containing the list of available datasources and optional connector node details.
  */
-type DataSourcesResponseNew = {
+export type DataSourcesResponseNew = {
   /** List of connector nodes. Present only when `detail` is `true` in the request. */
   connectorNodes?: ConnectorNodesInfo[];
   /** List of available datasources with their metadata. */
@@ -105,7 +105,7 @@ type DataSourcesResponseNew = {
 /**
  * DCaaS-specific error information including error code, code name, and detailed message.
  */
-type DcaasApiError = {
+export type DcaasApiError = {
   /** DCaaS-specific numeric error code. */
   dcaasErrorCode?: number;
   /** Human-readable name corresponding to the DCaaS error code. */
@@ -113,7 +113,7 @@ type DcaasApiError = {
   /** Summary of the error condition. */
   errorMessage?: string;
 };
-type EndpointInstanceRef = {
+export type EndpointInstanceRef = {
   /** Unique identifier of the datasource associated with this endpoint. */
   dataSourceId: string;
   /** Unique identifier of the endpoint instance. */
@@ -126,11 +126,11 @@ type EndpointInstanceRef = {
 /**
  * Response containing the list of active datasource endpoint references on the connector node.
  */
-type GetEndpointsResponse = {
+export type GetEndpointsResponse = {
   /** Array of active endpoint instances with their connection details. */
   endpoints?: EndpointInstanceRef[];
 };
-type PostEndpointRequestWithConnectionId = {
+export type PostEndpointRequestWithConnectionId = {
   /** When `true`, verifies that user credentials are present for connections configured with separate credentials. The default is `false`. */
   checkCredentials?: boolean;
   /** The unique identifier of the connection to use for the endpoint. */
@@ -140,7 +140,7 @@ type PostEndpointRequestWithConnectionId = {
   /** Type of endpoint to provision. */
   type?: "rld" | "dq";
 };
-type PostEndpointRequestWithConnectionName = {
+export type PostEndpointRequestWithConnectionName = {
   /** When `true`, verifies that user credentials are present for connections configured with separate credentials. The default is `false`. */
   checkCredentials?: boolean;
   /** The name of the connection to use for the endpoint. The service resolves
@@ -157,7 +157,7 @@ type PostEndpointRequestWithConnectionName = {
   /** Type of endpoint to provision. */
   type?: "rld" | "dq";
 };
-type PostEndpointRequestWithConnectionString = {
+export type PostEndpointRequestWithConnectionString = {
   /** When `true`, verifies that user credentials are present for connections configured with separate credentials. The default is `false`. */
   checkCredentials?: boolean;
   /** Connection string in Qlik CONNECT format. */
@@ -167,7 +167,7 @@ type PostEndpointRequestWithConnectionString = {
   /** Type of endpoint to provision. */
   type?: "rld" | "dq";
 };
-type PostEndpointRequestWithDatasourceID = {
+export type PostEndpointRequestWithDatasourceID = {
   /** When `true`, verifies that user credentials are present for connections configured with separate credentials. The default is `false`. */
   checkCredentials?: boolean;
   /** The unique identifier of the datasource to use for the endpoint. */
@@ -180,7 +180,7 @@ type PostEndpointRequestWithDatasourceID = {
 /**
  * Response containing the provisioned endpoint reference and resolved connection instance.
  */
-type PostEndpointResponse = {
+export type PostEndpointResponse = {
   /** Resolved connection details including credentials and QRI reference for an active endpoint. */
   connection?: ConnectionInstance;
   endpoint?: EndpointInstanceRef;
@@ -188,7 +188,7 @@ type PostEndpointResponse = {
 /**
  * Standard error response object with code, title, and details.
  */
-type PublicApiError = {
+export type PublicApiError = {
   /** Unique DCaaS error code (for example, `DCAAS-2001`). */
   code: string;
   /** Detailed explanation of the error and possible remediation steps. */
@@ -204,11 +204,11 @@ type PublicApiError = {
  *   * `name` — connection name, optionally space-qualified (for example, `MySpace:MyConnection` or `:MyConnection`)
  *   * `properties` — connection string in Qlik CONNECT format
  */
-type QriConnectionType = "id" | "name" | "properties";
+export type QriConnectionType = "id" | "name" | "properties";
 /**
  * QRI definition template for a datasource, specifying connection, path, and item parts.
  */
-type QriDefinition = {
+export type QriDefinition = {
   connectionPart: unknown & QriTemplate;
   itemPart?: unknown & {
     /** Literal prefix prepended to the item segment. */
@@ -224,7 +224,7 @@ type QriDefinition = {
 /**
  * A single property value used to populate a QRI template placeholder.
  */
-type QriPropertyRef = {
+export type QriPropertyRef = {
   /** The name of the property as defined in the QRI definition template. When omitted, properties are treated as an ordered array. */
   name?: string;
   /** The value to substitute for this property in the QRI template. */
@@ -233,7 +233,7 @@ type QriPropertyRef = {
 /**
  * Batch request to generate QRI values for multiple connections.
  */
-type QriRequest = {
+export type QriRequest = {
   /** Array of QRI generation requests. Maximum 100 items per batch. */
   data?: QriRequestItem[];
   /** When `true`, returns raw QRI values. When `false`, returns hashed QRI values. */
@@ -242,7 +242,7 @@ type QriRequest = {
 /**
  * Single QRI generation request for a specific connection.
  */
-type QriRequestItem = {
+export type QriRequestItem = {
   /** The connection identifier — a UUID, name, or connection string — corresponding to the value of `connectionType`. */
   connection: string;
   /** Type of connection identifier used in QRI generation requests:
@@ -264,7 +264,7 @@ type QriRequestItem = {
 /**
  * Optional ordered list of property values used to populate the item segment of the QRI template.
  */
-type QriRequestItemPropertyArray = QriPropertyRef[];
+export type QriRequestItemPropertyArray = QriPropertyRef[];
 /**
  * Ordered list of property values used to populate the path segment of the QRI template.
  * @example
@@ -283,11 +283,11 @@ type QriRequestItemPropertyArray = QriPropertyRef[];
  *   }
  * ]
  */
-type QriRequestPathPropertyArray = QriPropertyRef[];
+export type QriRequestPathPropertyArray = QriPropertyRef[];
 /**
  * Result of a single QRI generation request, including status and the generated QRI value.
  */
-type QriResponseItem = {
+export type QriResponseItem = {
   connection: string;
   /** Type of connection identifier used in QRI generation requests:
    *   * `id` — connection UUID
@@ -310,7 +310,7 @@ type QriResponseItem = {
 /**
  * Template definition used to construct a QRI segment from connection property values.
  */
-type QriTemplate = {
+export type QriTemplate = {
   /** Ordered list of property names referenced by the template placeholders. */
   properties: string[];
   /** Template string with `{propertyName}` placeholders for connection property values. */
@@ -319,14 +319,14 @@ type QriTemplate = {
 /**
  * Error response containing one or more error details.
  */
-type ResponseErrors = {
+export type ResponseErrors = {
   /** Array of error objects describing what went wrong. */
   errors?: PublicApiError[];
 };
 /**
  * UI metadata for the datasource. Present only when `includeui` is `true` in the request.
  */
-type UiInfo = {
+export type UiInfo = {
   /** URL of the connector's connection dialog. */
   connectUrl?: string;
   /** URL of the connector's main iframe entry point. */
@@ -362,7 +362,7 @@ type UiInfo = {
  * @param query an object with query parameters
  * @throws GetDataSourcesHttpError
  */
-declare function getDataSources(query: {
+export declare function getDataSources(query: {
   /** Filters results to the specified datasource ID. When this parameter appears multiple times, only the last value is used. */
   dataSourceId?: string;
   /** When `true`, includes connector node details in the response. */
@@ -372,12 +372,12 @@ declare function getDataSources(query: {
   /** When `true`, includes UI metadata such as connect, credentials, and select dialog URLs in the response. */
   includeui?: boolean;
 }, options?: ApiCallOptions): Promise<GetDataSourcesHttpResponse>;
-type GetDataSourcesHttpResponse = {
+export type GetDataSourcesHttpResponse = {
   data: DataSourcesResponseNew;
   headers: Headers;
   status: 200;
 };
-type GetDataSourcesHttpError = {
+export type GetDataSourcesHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 401 | 404 | 500;
@@ -391,8 +391,8 @@ type GetDataSourcesHttpError = {
  * @param body an object with the body content
  * @throws GenerateQriDataSourcesHttpError
  */
-declare function generateQriDataSources(body: QriRequest, options?: ApiCallOptions): Promise<GenerateQriDataSourcesHttpResponse>;
-type GenerateQriDataSourcesHttpResponse = {
+export declare function generateQriDataSources(body: QriRequest, options?: ApiCallOptions): Promise<GenerateQriDataSourcesHttpResponse>;
+export type GenerateQriDataSourcesHttpResponse = {
   data: {
     /** Array of QRI generation results, one per requested connection. */
     data: QriResponseItem[];
@@ -400,7 +400,7 @@ type GenerateQriDataSourcesHttpResponse = {
   headers: Headers;
   status: 207;
 };
-type GenerateQriDataSourcesHttpError = {
+export type GenerateQriDataSourcesHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 401 | 500;
@@ -413,13 +413,13 @@ type GenerateQriDataSourcesHttpError = {
  *
  * @throws GetDataSourceEndpointsHttpError
  */
-declare function getDataSourceEndpoints(options?: ApiCallOptions): Promise<GetDataSourceEndpointsHttpResponse>;
-type GetDataSourceEndpointsHttpResponse = {
+export declare function getDataSourceEndpoints(options?: ApiCallOptions): Promise<GetDataSourceEndpointsHttpResponse>;
+export type GetDataSourceEndpointsHttpResponse = {
   data: GetEndpointsResponse;
   headers: Headers;
   status: 200;
 };
-type GetDataSourceEndpointsHttpError = {
+export type GetDataSourceEndpointsHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 401 | 500;
@@ -433,13 +433,13 @@ type GetDataSourceEndpointsHttpError = {
  * @param body an object with the body content
  * @throws FilterDataSourceEndpointsHttpError
  */
-declare function filterDataSourceEndpoints(body: PostEndpointRequestWithConnectionName | PostEndpointRequestWithConnectionId | PostEndpointRequestWithConnectionString | PostEndpointRequestWithDatasourceID, options?: ApiCallOptions): Promise<FilterDataSourceEndpointsHttpResponse>;
-type FilterDataSourceEndpointsHttpResponse = {
+export declare function filterDataSourceEndpoints(body: PostEndpointRequestWithConnectionName | PostEndpointRequestWithConnectionId | PostEndpointRequestWithConnectionString | PostEndpointRequestWithDatasourceID, options?: ApiCallOptions): Promise<FilterDataSourceEndpointsHttpResponse>;
+export type FilterDataSourceEndpointsHttpResponse = {
   data: PostEndpointResponse;
   headers: Headers;
   status: 201;
 };
-type FilterDataSourceEndpointsHttpError = {
+export type FilterDataSourceEndpointsHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 401 | 500;
@@ -458,13 +458,13 @@ type FilterDataSourceEndpointsHttpError = {
  * @param dataSourceId The unique identifier of the datasource to retrieve the connection schema for.
  * @throws GetDataSourceApiSpecsHttpError
  */
-declare function getDataSourceApiSpecs(dataSourceId: string, options?: ApiCallOptions): Promise<GetDataSourceApiSpecsHttpResponse>;
-type GetDataSourceApiSpecsHttpResponse = {
+export declare function getDataSourceApiSpecs(dataSourceId: string, options?: ApiCallOptions): Promise<GetDataSourceApiSpecsHttpResponse>;
+export type GetDataSourceApiSpecsHttpResponse = {
   data: ApiSpecResponse;
   headers: Headers;
   status: 200;
 };
-type GetDataSourceApiSpecsHttpError = {
+export type GetDataSourceApiSpecsHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 401 | 404 | 500 | 503;
@@ -486,11 +486,11 @@ type GetDataSourceApiSpecsHttpError = {
  * @param query an object with query parameters
  * @throws GetDataSourceGatewaysHttpError
  */
-declare function getDataSourceGateways(dataSourceId: string, query: {
+export declare function getDataSourceGateways(dataSourceId: string, query: {
   /** When `true`, bypasses the cache and retrieves the current gateway list from the backend. When `false` or omitted, a cached list is returned. */
   forceRefresh?: boolean;
 }, options?: ApiCallOptions): Promise<GetDataSourceGatewaysHttpResponse>;
-type GetDataSourceGatewaysHttpResponse = {
+export type GetDataSourceGatewaysHttpResponse = {
   data: {
     /** List of gateway IDs for the specified datasource. */
     gateways?: {
@@ -507,7 +507,7 @@ type GetDataSourceGatewaysHttpResponse = {
   headers: Headers;
   status: 200;
 };
-type GetDataSourceGatewaysHttpError = {
+export type GetDataSourceGatewaysHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 401 | 404 | 500;
@@ -524,13 +524,13 @@ type GetDataSourceGatewaysHttpError = {
  * @param dataSourceId The unique identifier of the datasource to retrieve settings for.
  * @throws GetDataSourceSettingsHttpError
  */
-declare function getDataSourceSettings(dataSourceId: string, options?: ApiCallOptions): Promise<GetDataSourceSettingsHttpResponse>;
-type GetDataSourceSettingsHttpResponse = {
+export declare function getDataSourceSettings(dataSourceId: string, options?: ApiCallOptions): Promise<GetDataSourceSettingsHttpResponse>;
+export type GetDataSourceSettingsHttpResponse = {
   data: DataSourceSettingsResponse;
   headers: Headers;
   status: 200;
 };
-type GetDataSourceSettingsHttpError = {
+export type GetDataSourceSettingsHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 401 | 404 | 500;
@@ -544,13 +544,13 @@ type GetDataSourceSettingsHttpError = {
  * @param body an object with the body content
  * @throws PutDataSourceSettingsHttpError
  */
-declare function putDataSourceSettings(dataSourceId: string, body: DataSourceSettingsRequest, options?: ApiCallOptions): Promise<PutDataSourceSettingsHttpResponse>;
-type PutDataSourceSettingsHttpResponse = {
+export declare function putDataSourceSettings(dataSourceId: string, body: DataSourceSettingsRequest, options?: ApiCallOptions): Promise<PutDataSourceSettingsHttpResponse>;
+export type PutDataSourceSettingsHttpResponse = {
   data: DataSourceSettingsResponse;
   headers: Headers;
   status: 200;
 };
-type PutDataSourceSettingsHttpError = {
+export type PutDataSourceSettingsHttpError = {
   data: ResponseErrors;
   headers: Headers;
   status: 400 | 401 | 404 | 409 | 500;
@@ -558,8 +558,8 @@ type PutDataSourceSettingsHttpError = {
 /**
  * Clears the cache for connectivity/data-sources api requests.
  */
-declare function clearCache(): void;
-type DataSourcesAPI = {
+export declare function clearCache(): void;
+export type DataSourcesAPI = {
   /**
    * Returns the list of datasources available on the connector node. Each entry
    * includes the connector provider, capabilities, and optional UI metadata. Filter
@@ -674,4 +674,4 @@ type DataSourcesAPI = {
  */
 declare const dataSourcesExport: DataSourcesAPI;
 //#endregion
-export { ApiSpecResponse, ConnectionInstance, ConnectorNodesInfo, DataSourceNew, DataSourceSettingsRequest, DataSourceSettingsResponse, DataSourcesAPI, DataSourcesResponseNew, DcaasApiError, EndpointInstanceRef, FilterDataSourceEndpointsHttpError, FilterDataSourceEndpointsHttpResponse, GenerateQriDataSourcesHttpError, GenerateQriDataSourcesHttpResponse, GetDataSourceApiSpecsHttpError, GetDataSourceApiSpecsHttpResponse, GetDataSourceEndpointsHttpError, GetDataSourceEndpointsHttpResponse, GetDataSourceGatewaysHttpError, GetDataSourceGatewaysHttpResponse, GetDataSourceSettingsHttpError, GetDataSourceSettingsHttpResponse, GetDataSourcesHttpError, GetDataSourcesHttpResponse, GetEndpointsResponse, PostEndpointRequestWithConnectionId, PostEndpointRequestWithConnectionName, PostEndpointRequestWithConnectionString, PostEndpointRequestWithDatasourceID, PostEndpointResponse, PublicApiError, PutDataSourceSettingsHttpError, PutDataSourceSettingsHttpResponse, QriConnectionType, QriDefinition, QriPropertyRef, QriRequest, QriRequestItem, QriRequestItemPropertyArray, QriRequestPathPropertyArray, QriResponseItem, QriTemplate, ResponseErrors, UiInfo, clearCache, dataSourcesExport as default, filterDataSourceEndpoints, generateQriDataSources, getDataSourceApiSpecs, getDataSourceEndpoints, getDataSourceGateways, getDataSourceSettings, getDataSources, putDataSourceSettings, data_sources_d_exports as t };
+export { dataSourcesExport as default, data_sources_d_exports as t };

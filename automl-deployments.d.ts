@@ -1,10 +1,10 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/automl-deployments.d.ts
-type AppErrorResponse = {
+export type AppErrorResponse = {
   errors?: Error[];
 };
-type Error = {
+export type Error = {
   /** The argument */
   argument?: string;
   /** The unique code for the error */
@@ -32,11 +32,11 @@ type Error = {
   /** A summary of what went wrong */
   title?: string;
 };
-type RealTimePredictionInputSchema = {
+export type RealTimePredictionInputSchema = {
   /** The name of a feature in the dataset. */
   name?: string;
 };
-type RealtimePredictionInput = {
+export type RealtimePredictionInput = {
   /** The rows of the dataset to produce predictions from. Date features must be in ISO 8601 format. */
   rows?: string[][];
   /** The schema of the input dataset. */
@@ -52,7 +52,7 @@ type RealtimePredictionInput = {
  * @param body an object with the body content
  * @throws CreateAutomlDeploymentRealtimePredictionHttpError
  */
-declare function createAutomlDeploymentRealtimePrediction(deploymentId: string, query: {
+export declare function createAutomlDeploymentRealtimePrediction(deploymentId: string, query: {
   /** If true, will include a column with the reason why a prediction was not produced. */
   includeNotPredictedReason?: boolean;
   /** If true, the shapley values will be included in the response. */
@@ -62,12 +62,12 @@ declare function createAutomlDeploymentRealtimePrediction(deploymentId: string, 
   /** The name of the feature in the source data to use as an index in the response data. The column will be included with its original name and values. This is intended to allow the caller to join results with source data. */
   index?: string;
 }, body: RealtimePredictionInput, options?: ApiCallOptions): Promise<CreateAutomlDeploymentRealtimePredictionHttpResponse>;
-type CreateAutomlDeploymentRealtimePredictionHttpResponse = {
+export type CreateAutomlDeploymentRealtimePredictionHttpResponse = {
   data: void;
   headers: Headers;
   status: 200;
 };
-type CreateAutomlDeploymentRealtimePredictionHttpError = {
+export type CreateAutomlDeploymentRealtimePredictionHttpError = {
   data: AppErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 503;
@@ -75,8 +75,8 @@ type CreateAutomlDeploymentRealtimePredictionHttpError = {
 /**
  * Clears the cache for automl-deployments api requests.
  */
-declare function clearCache(): void;
-type AutomlDeploymentsAPI = {
+export declare function clearCache(): void;
+export type AutomlDeploymentsAPI = {
   /**
    * @deprecated
    *
@@ -98,4 +98,4 @@ type AutomlDeploymentsAPI = {
  */
 declare const automlDeploymentsExport: AutomlDeploymentsAPI;
 //#endregion
-export { AppErrorResponse, AutomlDeploymentsAPI, CreateAutomlDeploymentRealtimePredictionHttpError, CreateAutomlDeploymentRealtimePredictionHttpResponse, Error, RealTimePredictionInputSchema, RealtimePredictionInput, clearCache, createAutomlDeploymentRealtimePrediction, automlDeploymentsExport as default };
+export { automlDeploymentsExport as default };

@@ -1,7 +1,7 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/api-keys.d.ts
-type ApiKey = {
+export type ApiKey = {
   /** When the API key was created. */
   readonly created?: string;
   /** The ID of the user who created the key. */
@@ -23,7 +23,7 @@ type ApiKey = {
   /** The tenant ID. */
   tenantId: string;
 };
-type ApiKeyBody = {
+export type ApiKeyBody = {
   /** Text that describes the API key. */
   description: string;
   /** The expiry of the API key, in ISO8601 duration format. For example, `P7D` sets expiry after 7 days. If not provided, defaults to the maximum API key or SCIM key expiry configured in the tenant. */
@@ -36,7 +36,7 @@ type ApiKeyBody = {
 /**
  * A JSON Patch document as defined in https://datatracker.ietf.org/doc/html/rfc6902.
  */
-type ApiKeyConfigPatch = {
+export type ApiKeyConfigPatch = {
   /** The operation to be performed. */
   op: "replace";
   /** The path for the given resource field to patch. */
@@ -47,7 +47,7 @@ type ApiKeyConfigPatch = {
 /**
  * A JSON Patch document as defined in https://datatracker.ietf.org/doc/html/rfc6902.
  */
-type ApiKeyPatch = {
+export type ApiKeyPatch = {
   /** The operation to be performed. */
   op: "replace";
   /** The path for the given resource field to patch. */
@@ -55,7 +55,7 @@ type ApiKeyPatch = {
   /** The value to be used for this operation. */
   value: string;
 };
-type ApiKeyWithToken = {
+export type ApiKeyWithToken = {
   /** When the API key was created. */
   readonly created?: string;
   /** The id of the user who created the key. */
@@ -79,7 +79,7 @@ type ApiKeyWithToken = {
   /** The generated signed JWT. */
   token: string;
 };
-type ApiKeysConfig = {
+export type ApiKeysConfig = {
   /** The maximum lifetime, in ISO8601 duration format, for which an API key can be issued for the specified tenant, e.g. `P7D` for 7 days. */
   max_api_key_expiry?: string;
   /** The maximum number of active API keys that any user can create for the specified tenant. */
@@ -97,7 +97,7 @@ type ApiKeysConfig = {
  *   }
  * ]
  */
-type ApiKeysConfigPatchSchema = ApiKeyConfigPatch[];
+export type ApiKeysConfigPatchSchema = ApiKeyConfigPatch[];
 /**
  * @example
  * [
@@ -108,11 +108,11 @@ type ApiKeysConfigPatchSchema = ApiKeyConfigPatch[];
  *   }
  * ]
  */
-type ApiKeysPatchSchema = ApiKeyPatch[];
+export type ApiKeysPatchSchema = ApiKeyPatch[];
 /**
  * An error object.
  */
-type Error = {
+export type Error = {
   /** The error code. */
   code: string;
   /** A human-readable explanation specific to this occurrence of the problem. */
@@ -131,19 +131,19 @@ type Error = {
   /** Summary of the problem. */
   title: string;
 };
-type Errors = {
+export type Errors = {
   /** List of errors and their properties. */
   errors?: Error[];
 };
-type Link = {
+export type Link = {
   /** The URL for the link. */
   href: string;
 };
-type RetryAfterHeader = {
+export type RetryAfterHeader = {
   /** The amount of seconds to wait before retrying the request. */
   "retry-after"?: number;
 };
-type ApiKeyPage = {
+export type ApiKeyPage = {
   /** Properties of API keys in a given tenant. */
   data: ApiKey[];
   /** Navigation links to page results. */
@@ -159,7 +159,7 @@ type ApiKeyPage = {
  * @param query an object with query parameters
  * @throws GetApiKeysHttpError
  */
-declare function getApiKeys(query: {
+export declare function getApiKeys(query: {
   /** The user ID that created the API key. */
   createdByUser?: string;
   /** Get resources with IDs that are lower than the target resource ID. Cannot be used in conjunction with startingAfter. */
@@ -175,14 +175,14 @@ declare function getApiKeys(query: {
   /** The ID of the subject. For SCIM the format is `SCIM\\{{IDP-ID}}`, where `{{IDP-ID}}` is the ID of the IDP in Qlik. For users, use their user ID, e.g. `64ef645a3b7009d55dee5a2b`. */
   sub?: string;
 }, options?: ApiCallOptions): Promise<GetApiKeysHttpResponse>;
-type GetApiKeysHttpResponse = {
+export type GetApiKeysHttpResponse = {
   data: ApiKeyPage;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetApiKeysHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetApiKeysHttpResponse>;
 };
-type GetApiKeysHttpError = {
+export type GetApiKeysHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 403 | 429;
@@ -194,13 +194,13 @@ type GetApiKeysHttpError = {
  * @param body an object with the body content
  * @throws CreateApiKeyHttpError
  */
-declare function createApiKey(body: ApiKeyBody, options?: ApiCallOptions): Promise<CreateApiKeyHttpResponse>;
-type CreateApiKeyHttpResponse = {
+export declare function createApiKey(body: ApiKeyBody, options?: ApiCallOptions): Promise<CreateApiKeyHttpResponse>;
+export type CreateApiKeyHttpResponse = {
   data: ApiKeyWithToken;
   headers: Headers;
   status: 201;
 };
-type CreateApiKeyHttpError = {
+export type CreateApiKeyHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -211,13 +211,13 @@ type CreateApiKeyHttpError = {
  * @param tenantId The tenant ID from which you wish to retrieve the API key configuration.
  * @throws GetApiKeysConfigHttpError
  */
-declare function getApiKeysConfig(tenantId: string, options?: ApiCallOptions): Promise<GetApiKeysConfigHttpResponse>;
-type GetApiKeysConfigHttpResponse = {
+export declare function getApiKeysConfig(tenantId: string, options?: ApiCallOptions): Promise<GetApiKeysConfigHttpResponse>;
+export type GetApiKeysConfigHttpResponse = {
   data: ApiKeysConfig;
   headers: Headers;
   status: 200;
 };
-type GetApiKeysConfigHttpError = {
+export type GetApiKeysConfigHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -229,13 +229,13 @@ type GetApiKeysConfigHttpError = {
  * @param body an object with the body content
  * @throws PatchApiKeysConfigHttpError
  */
-declare function patchApiKeysConfig(tenantId: string, body: ApiKeysConfigPatchSchema, options?: ApiCallOptions): Promise<PatchApiKeysConfigHttpResponse>;
-type PatchApiKeysConfigHttpResponse = {
+export declare function patchApiKeysConfig(tenantId: string, body: ApiKeysConfigPatchSchema, options?: ApiCallOptions): Promise<PatchApiKeysConfigHttpResponse>;
+export type PatchApiKeysConfigHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchApiKeysConfigHttpError = {
+export type PatchApiKeysConfigHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 403 | 404 | 429;
@@ -246,13 +246,13 @@ type PatchApiKeysConfigHttpError = {
  * @param id The ID of the API key to be retrieved.
  * @throws DeleteApiKeyHttpError
  */
-declare function deleteApiKey(id: string, options?: ApiCallOptions): Promise<DeleteApiKeyHttpResponse>;
-type DeleteApiKeyHttpResponse = {
+export declare function deleteApiKey(id: string, options?: ApiCallOptions): Promise<DeleteApiKeyHttpResponse>;
+export type DeleteApiKeyHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteApiKeyHttpError = {
+export type DeleteApiKeyHttpError = {
   data: Errors;
   headers: Headers;
   status: 403 | 404 | 429;
@@ -263,13 +263,13 @@ type DeleteApiKeyHttpError = {
  * @param id The ID of the API key to be retrieved.
  * @throws GetApiKeyHttpError
  */
-declare function getApiKey(id: string, options?: ApiCallOptions): Promise<GetApiKeyHttpResponse>;
-type GetApiKeyHttpResponse = {
+export declare function getApiKey(id: string, options?: ApiCallOptions): Promise<GetApiKeyHttpResponse>;
+export type GetApiKeyHttpResponse = {
   data: ApiKey;
   headers: Headers;
   status: 200;
 };
-type GetApiKeyHttpError = {
+export type GetApiKeyHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -281,13 +281,13 @@ type GetApiKeyHttpError = {
  * @param body an object with the body content
  * @throws PatchApiKeyHttpError
  */
-declare function patchApiKey(id: string, body: ApiKeysPatchSchema, options?: ApiCallOptions): Promise<PatchApiKeyHttpResponse>;
-type PatchApiKeyHttpResponse = {
+export declare function patchApiKey(id: string, body: ApiKeysPatchSchema, options?: ApiCallOptions): Promise<PatchApiKeyHttpResponse>;
+export type PatchApiKeyHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchApiKeyHttpError = {
+export type PatchApiKeyHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 403 | 404 | 429;
@@ -295,8 +295,8 @@ type PatchApiKeyHttpError = {
 /**
  * Clears the cache for api-keys api requests.
  */
-declare function clearCache(): void;
-type ApiKeysAPI = {
+export declare function clearCache(): void;
+export type ApiKeysAPI = {
   /**
    * Lists API keys for the tenant. To list API keys owned by other users, requesting user must be assigned the `TenantAdmin` role.
    *
@@ -359,4 +359,4 @@ type ApiKeysAPI = {
  */
 declare const apiKeysExport: ApiKeysAPI;
 //#endregion
-export { ApiKey, ApiKeyBody, ApiKeyConfigPatch, ApiKeyPage, ApiKeyPatch, ApiKeyWithToken, ApiKeysAPI, ApiKeysConfig, ApiKeysConfigPatchSchema, ApiKeysPatchSchema, CreateApiKeyHttpError, CreateApiKeyHttpResponse, DeleteApiKeyHttpError, DeleteApiKeyHttpResponse, Error, Errors, GetApiKeyHttpError, GetApiKeyHttpResponse, GetApiKeysConfigHttpError, GetApiKeysConfigHttpResponse, GetApiKeysHttpError, GetApiKeysHttpResponse, Link, PatchApiKeyHttpError, PatchApiKeyHttpResponse, PatchApiKeysConfigHttpError, PatchApiKeysConfigHttpResponse, RetryAfterHeader, clearCache, createApiKey, apiKeysExport as default, deleteApiKey, getApiKey, getApiKeys, getApiKeysConfig, patchApiKey, patchApiKeysConfig };
+export { apiKeysExport as default };

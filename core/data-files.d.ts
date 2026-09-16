@@ -1,29 +1,29 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-o-bqAUAV.js";
-import "../chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
+import "../chunks/invoke-fetch-DdmiOIkr.js";
 declare namespace data_files_d_exports {
   export { BatchChangeSpaceItem, BatchPostItem, ChangeDataFileOwnerRequest, ChangeDataFileSpaceRequest, ChangeOwnerDataFileHttpError, ChangeOwnerDataFileHttpResponse, ChangeSpaceDataFileHttpError, ChangeSpaceDataFileHttpResponse, ChangeSpaceDataFilesHttpError, ChangeSpaceDataFilesHttpResponse, ConnectionsResponse, DataFileBatchChangeSpaceRequestV2, DataFileBatchPostRequest, DataFileDeleteRecordResponseV2, DataFilePermission, DataFileUploadResponseV2, DataFilesAPI, DeleteDataFileHttpError, DeleteDataFileHttpResponse, ErrorCode, ErrorResponse, ErrorResponseItem, FilterConnectionsRequest, FilterDataFilesConnectionsHttpError, FilterDataFilesConnectionsHttpResponse, FolderStatsResponse, GetConnectionsResponse, GetConnectionsSortField, GetDataFileDeleteRecordsResponseV2, GetDataFileDeleteRecordsSortField, GetDataFileFolderStatsHttpError, GetDataFileFolderStatsHttpResponse, GetDataFileHttpError, GetDataFileHttpResponse, GetDataFilesConnectionsHttpError, GetDataFilesConnectionsHttpResponse, GetDataFilesDeletesHttpError, GetDataFilesDeletesHttpResponse, LinkResponse, LinksResponse, MultiStatusResponse, MultiStatusResponseItem, PostDataFileRequest, PostDataFilesHttpError, PostDataFilesHttpResponse, SpaceStatsResponse, changeOwnerDataFile, changeSpaceDataFile, changeSpaceDataFiles, clearCache, dataFilesExport as default, deleteDataFile, filterDataFilesConnections, getDataFile, getDataFileFolderStats, getDataFilesConnections, getDataFilesDeletes, postDataFiles };
 }
-type BatchChangeSpaceItem = {
+export type BatchChangeSpaceItem = {
   /** The ID of the data file whose space will be changed. */
   id: string;
   /** The ID of the new space.  Passing in a null will result in the data file being moved to the user's
    * personal space. */
   spaceId?: string | null;
 };
-type BatchPostItem = {
+export type BatchPostItem = {
   /** See PostDataFileRequest schema which defines request structure.
    *  See PostDataFileRequest model. */
   request: PostDataFileRequest;
 };
-type ChangeDataFileOwnerRequest = {
+export type ChangeDataFileOwnerRequest = {
   /** The ID of the new owner. */
   ownerId: string;
 };
-type ChangeDataFileSpaceRequest = {
+export type ChangeDataFileSpaceRequest = {
   /** The ID of the space.  If null, this data file will be moved to the user's personal space. */
   spaceId?: string | null;
 };
-type ConnectionsResponse = {
+export type ConnectionsResponse = {
   /** The connect statement that will be passed to the connector when invoked. */
   connectStatement: string;
   /** The unique identifier of the connection. */
@@ -40,18 +40,18 @@ type ConnectionsResponse = {
 /**
  * Specifies the list of data file change space operations in a single batch.
  */
-type DataFileBatchChangeSpaceRequestV2 = {
+export type DataFileBatchChangeSpaceRequestV2 = {
   /** The list of data files to delete. */
   changeSpace: BatchChangeSpaceItem[];
 };
 /**
  * Specifies a list of data file/folder POST operations in a single batch.
  */
-type DataFileBatchPostRequest = {
+export type DataFileBatchPostRequest = {
   /** The list of POST operations. */
   post: BatchPostItem[];
 };
-type DataFileDeleteRecordResponseV2 = {
+export type DataFileDeleteRecordResponseV2 = {
   /** The name of the file or folder, not including any folder path prefix. */
   baseName?: string | null;
   /** The user that deleted this data file or folder. */
@@ -81,8 +81,8 @@ type DataFileDeleteRecordResponseV2 = {
 /**
  * <p>Members:</p><ul></ul>
  */
-type DataFilePermission = "read" | "update" | "delete" | "list" | "change_owner" | "change_space";
-type DataFileUploadResponseV2 = {
+export type DataFilePermission = "read" | "update" | "delete" | "list" | "change_owner" | "change_space";
+export type DataFileUploadResponseV2 = {
   /** The CRUD actions that are allowed on the given data file. */
   actions: DataFilePermission[];
   /** If this file or folder is bound to the lifecycle of a specific app, this is the ID of this app. */
@@ -125,12 +125,12 @@ type DataFileUploadResponseV2 = {
  * @example
  * "HTTP-200"
  */
-type ErrorCode = "HTTP-200" | "HTTP-201" | "HTTP-204" | "HTTP-400" | "HTTP-403" | "HTTP-404" | "HTTP-409" | "HTTP-413" | "HTTP-423" | "HTTP-500" | "HTTP-501" | "HTTP-503" | "DF-001" | "DF-002" | "DF-003" | "DF-004" | "DF-005" | "DF-006" | "DF-007" | "DF-008" | "DF-009" | "DF-010" | "DF-011" | "DF-012" | "DF-013" | "DF-014" | "DF-015" | "DF-016" | "DF-017" | "DF-018" | "DF-019" | "DF-020" | "DF-021" | "DF-022" | "DF-023" | "DF-024" | "DF-025" | "DF-026";
-type ErrorResponse = {
+export type ErrorCode = "HTTP-200" | "HTTP-201" | "HTTP-204" | "HTTP-400" | "HTTP-403" | "HTTP-404" | "HTTP-409" | "HTTP-413" | "HTTP-423" | "HTTP-500" | "HTTP-501" | "HTTP-503" | "DF-001" | "DF-002" | "DF-003" | "DF-004" | "DF-005" | "DF-006" | "DF-007" | "DF-008" | "DF-009" | "DF-010" | "DF-011" | "DF-012" | "DF-013" | "DF-014" | "DF-015" | "DF-016" | "DF-017" | "DF-018" | "DF-019" | "DF-020" | "DF-021" | "DF-022" | "DF-023" | "DF-024" | "DF-025" | "DF-026";
+export type ErrorResponse = {
   /** List of errors and their properties. */
   errors: ErrorResponseItem[];
 };
-type ErrorResponseItem = {
+export type ErrorResponseItem = {
   /** Fine-grained error codes for data-files REST operations.  For operations which do not have a more fine-grained
    * error code, the error code is set to the HTTP status code.<p>Members:</p><ul><li><i>DF-001</i> - The page cursor passed as a parameter to the GET operation is invalid.</li><li><i>DF-002</i> - The sort specification passed as a parameter to the GET operation is invalid.</li><li><i>DF-003</i> - FolderPath and FolderId are mutually exclusive, they cannot both be passed as parameters.</li><li><i>DF-004</i> - The provided FolderPath must be in canonical form.</li><li><i>DF-005</i> - The specified parent folder cannot be found.</li><li><i>DF-006</i> - The specified owner cannot be found.</li><li><i>DF-007</i> - A connection corresponding to the specified space cannot be found.</li><li><i>DF-008</i> - THe specified ID must correspond to a folder, not a file.</li><li><i>DF-009</i> - The specified space cannot be found.</li><li><i>DF-010</i> - The specified file name contains an invalid file extension.</li><li><i>DF-011</i> - The specified file name is missing a file extension.</li><li><i>DF-012</i> - The specified temporary content file could not be found.</li><li><i>DF-013</i> - Access to the specified space is forbidden.</li><li><i>DF-014</i> - The specified connection cannot be found.</li><li><i>DF-015</i> - The provided filename must be in canonical form.</li><li><i>DF-016</i> - The datafile size quota for the given personal space has been exceeded.</li><li><i>DF-017</i> - The specified source file or folder could not be found.</li><li><i>DF-018</i> - The source and target of a datafile operation must either both be folders or both be files, but they are
    *             not.</li><li><i>DF-019</i> - The specified target folder is a child of the specified source folder, which is not allowed.</li><li><i>DF-020</i> - The specified folder does not exist in the specified space.</li><li><i>DF-021</i> - The specified source file or folder is already locked.</li><li><i>DF-022</i> - The automatic creation of a missing parent folder failed.</li><li><i>DF-023</i> - An attempt to lock a parent folder of a given data file item failed.</li><li><i>DF-024</i> - The attempt to copy a source file or folder to a target failed.</li><li><i>DF-025</i> - The specified target file or folder is already locked.</li><li><i>DF-026</i> - The request results in the creation of a folder hierarchy which is beyond the max allowed folder
@@ -141,7 +141,7 @@ type ErrorResponseItem = {
   /** Summary of the problem. */
   title?: string | null;
 };
-type FilterConnectionsRequest = {
+export type FilterConnectionsRequest = {
   /** If set to true, include computed space-level statistics for the spaces represented by the connections in the
    * returned list.  If false, this information is not returned. */
   includeSpaceStats?: boolean;
@@ -150,7 +150,7 @@ type FilterConnectionsRequest = {
   /** The list of space IDs that is used to filter the connection result set. */
   spaceIds: string[];
 };
-type FolderStatsResponse = {
+export type FolderStatsResponse = {
   /** The sum of the file sizes, in bytes, of all app-scoped data files that reside as direct and indirect children of
    * the given folder and it's sub-folder hierarchy. */
   aggregateAppScopedFileSize: number;
@@ -182,7 +182,7 @@ type FolderStatsResponse = {
    * direct and indirect children of the given folder and it's sub-folder hierarchy. */
   totalInternalFileCount: number;
 };
-type GetConnectionsResponse = {
+export type GetConnectionsResponse = {
   /** Properties of the connections to the tenant spaces. */
   data: ConnectionsResponse[];
   links: LinksResponse;
@@ -192,8 +192,8 @@ type GetConnectionsResponse = {
  * @example
  * "spaceId"
  */
-type GetConnectionsSortField = "spaceId" | "+spaceId" | "-spaceId";
-type GetDataFileDeleteRecordsResponseV2 = {
+export type GetConnectionsSortField = "spaceId" | "+spaceId" | "-spaceId";
+export type GetDataFileDeleteRecordsResponseV2 = {
   data: DataFileDeleteRecordResponseV2[];
   links: LinksResponse;
 };
@@ -202,21 +202,21 @@ type GetDataFileDeleteRecordsResponseV2 = {
  * @example
  * "deletedDate"
  */
-type GetDataFileDeleteRecordsSortField = "deletedDate" | "+deletedDate" | "-deletedDate";
-type LinkResponse = {
+export type GetDataFileDeleteRecordsSortField = "deletedDate" | "+deletedDate" | "-deletedDate";
+export type LinkResponse = {
   /** The URL for the link. */
   href?: string | null;
 };
-type LinksResponse = {
+export type LinksResponse = {
   next: LinkResponse;
   prev: LinkResponse;
   self: LinkResponse;
 };
-type MultiStatusResponse = {
+export type MultiStatusResponse = {
   /** List of individual results for the items in the specified batch. */
   data: MultiStatusResponseItem[];
 };
-type MultiStatusResponseItem = {
+export type MultiStatusResponseItem = {
   /** Fine-grained error codes for data-files REST operations.  For operations which do not have a more fine-grained
    * error code, the error code is set to the HTTP status code.<p>Members:</p><ul><li><i>DF-001</i> - The page cursor passed as a parameter to the GET operation is invalid.</li><li><i>DF-002</i> - The sort specification passed as a parameter to the GET operation is invalid.</li><li><i>DF-003</i> - FolderPath and FolderId are mutually exclusive, they cannot both be passed as parameters.</li><li><i>DF-004</i> - The provided FolderPath must be in canonical form.</li><li><i>DF-005</i> - The specified parent folder cannot be found.</li><li><i>DF-006</i> - The specified owner cannot be found.</li><li><i>DF-007</i> - A connection corresponding to the specified space cannot be found.</li><li><i>DF-008</i> - THe specified ID must correspond to a folder, not a file.</li><li><i>DF-009</i> - The specified space cannot be found.</li><li><i>DF-010</i> - The specified file name contains an invalid file extension.</li><li><i>DF-011</i> - The specified file name is missing a file extension.</li><li><i>DF-012</i> - The specified temporary content file could not be found.</li><li><i>DF-013</i> - Access to the specified space is forbidden.</li><li><i>DF-014</i> - The specified connection cannot be found.</li><li><i>DF-015</i> - The provided filename must be in canonical form.</li><li><i>DF-016</i> - The datafile size quota for the given personal space has been exceeded.</li><li><i>DF-017</i> - The specified source file or folder could not be found.</li><li><i>DF-018</i> - The source and target of a datafile operation must either both be folders or both be files, but they are
    *             not.</li><li><i>DF-019</i> - The specified target folder is a child of the specified source folder, which is not allowed.</li><li><i>DF-020</i> - The specified folder does not exist in the specified space.</li><li><i>DF-021</i> - The specified source file or folder is already locked.</li><li><i>DF-022</i> - The automatic creation of a missing parent folder failed.</li><li><i>DF-023</i> - An attempt to lock a parent folder of a given data file item failed.</li><li><i>DF-024</i> - The attempt to copy a source file or folder to a target failed.</li><li><i>DF-025</i> - The specified target file or folder is already locked.</li><li><i>DF-026</i> - The request results in the creation of a folder hierarchy which is beyond the max allowed folder
@@ -235,7 +235,7 @@ type MultiStatusResponseItem = {
  * See PostDataFileRequest schema which defines request structure.
  *  See PostDataFileRequest model.
  */
-type PostDataFileRequest = {
+export type PostDataFileRequest = {
   /** If this file should be bound to the lifecycle of a specific app, this is the ID of this app.  If this
    * request is creating a folder, the specification of an app ID is not allowed. */
   appId?: string | null;
@@ -268,7 +268,7 @@ type PostDataFileRequest = {
    * the one returned from the temp content upload request.  This option does not apply when POSTing a folder. */
   tempContentFileId?: string | null;
 };
-type SpaceStatsResponse = {
+export type SpaceStatsResponse = {
   /** The sum of the file sizes, in bytes, of all app-scoped data files that reside as direct and indirect children of
    * the given folder and it's sub-folder hierarchy. */
   aggregateAppScopedFileSize: number;
@@ -309,13 +309,13 @@ type SpaceStatsResponse = {
  * @param body an object with the body content
  * @throws ChangeSpaceDataFilesHttpError
  */
-declare function changeSpaceDataFiles(body: DataFileBatchChangeSpaceRequestV2, options?: ApiCallOptions): Promise<ChangeSpaceDataFilesHttpResponse>;
-type ChangeSpaceDataFilesHttpResponse = {
+export declare function changeSpaceDataFiles(body: DataFileBatchChangeSpaceRequestV2, options?: ApiCallOptions): Promise<ChangeSpaceDataFilesHttpResponse>;
+export type ChangeSpaceDataFilesHttpResponse = {
   data: MultiStatusResponse;
   headers: Headers;
   status: 207;
 };
-type ChangeSpaceDataFilesHttpError = {
+export type ChangeSpaceDataFilesHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400;
@@ -328,13 +328,13 @@ type ChangeSpaceDataFilesHttpError = {
  * @param body an object with the body content
  * @throws PostDataFilesHttpError
  */
-declare function postDataFiles(body: DataFileBatchPostRequest, options?: ApiCallOptions): Promise<PostDataFilesHttpResponse>;
-type PostDataFilesHttpResponse = {
+export declare function postDataFiles(body: DataFileBatchPostRequest, options?: ApiCallOptions): Promise<PostDataFilesHttpResponse>;
+export type PostDataFilesHttpResponse = {
   data: MultiStatusResponse;
   headers: Headers;
   status: 207;
 };
-type PostDataFilesHttpError = {
+export type PostDataFilesHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400;
@@ -358,7 +358,7 @@ type PostDataFilesHttpError = {
  * @param query an object with query parameters
  * @throws GetDataFilesConnectionsHttpError
  */
-declare function getDataFilesConnections(query: {
+export declare function getDataFilesConnections(query: {
   /** If present, get connections with connection strings that are scoped to the given app ID. */
   appId?: string | null;
   /** If set to true, include computed space-level statistics for the spaces represented by the connections in the
@@ -378,14 +378,14 @@ declare function getDataFilesConnections(query: {
   /** If present, only return the connection that accesses data files in the specified space. */
   spaceId?: string | null;
 }, options?: ApiCallOptions): Promise<GetDataFilesConnectionsHttpResponse>;
-type GetDataFilesConnectionsHttpResponse = {
+export type GetDataFilesConnectionsHttpResponse = {
   data: GetConnectionsResponse;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetDataFilesConnectionsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetDataFilesConnectionsHttpResponse>;
 };
-type GetDataFilesConnectionsHttpError = {
+export type GetDataFilesConnectionsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403;
@@ -397,15 +397,15 @@ type GetDataFilesConnectionsHttpError = {
  * @param body an object with the body content
  * @throws FilterDataFilesConnectionsHttpError
  */
-declare function filterDataFilesConnections(body: FilterConnectionsRequest, options?: ApiCallOptions): Promise<FilterDataFilesConnectionsHttpResponse>;
-type FilterDataFilesConnectionsHttpResponse = {
+export declare function filterDataFilesConnections(body: FilterConnectionsRequest, options?: ApiCallOptions): Promise<FilterDataFilesConnectionsHttpResponse>;
+export type FilterDataFilesConnectionsHttpResponse = {
   data: GetConnectionsResponse;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<FilterDataFilesConnectionsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<FilterDataFilesConnectionsHttpResponse>;
 };
-type FilterDataFilesConnectionsHttpError = {
+export type FilterDataFilesConnectionsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403;
@@ -430,7 +430,7 @@ type FilterDataFilesConnectionsHttpError = {
  * @param query an object with query parameters
  * @throws GetDataFilesDeletesHttpError
  */
-declare function getDataFilesDeletes(query: {
+export declare function getDataFilesDeletes(query: {
   /** If set to false, do not return data files with internal extensions else return all the data files. */
   allowInternalFiles?: boolean;
   /** If specified, the returned list will only include data files and folders that have been deleted prior to the
@@ -449,14 +449,14 @@ declare function getDataFilesDeletes(query: {
    * the sort field name explicitly indicates ascending sort order.  A '-' prefix indicates a descending sort order. */
   sort?: GetDataFileDeleteRecordsSortField;
 }, options?: ApiCallOptions): Promise<GetDataFilesDeletesHttpResponse>;
-type GetDataFilesDeletesHttpResponse = {
+export type GetDataFilesDeletesHttpResponse = {
   data: GetDataFileDeleteRecordsResponseV2;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetDataFilesDeletesHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetDataFilesDeletesHttpResponse>;
 };
-type GetDataFilesDeletesHttpError = {
+export type GetDataFilesDeletesHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403;
@@ -472,13 +472,13 @@ type GetDataFilesDeletesHttpError = {
  * @param id The unique identifier of the data file or folder to delete.
  * @throws DeleteDataFileHttpError
  */
-declare function deleteDataFile(id: string, options?: ApiCallOptions): Promise<DeleteDataFileHttpResponse>;
-type DeleteDataFileHttpResponse = {
+export declare function deleteDataFile(id: string, options?: ApiCallOptions): Promise<DeleteDataFileHttpResponse>;
+export type DeleteDataFileHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteDataFileHttpError = {
+export type DeleteDataFileHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -495,13 +495,13 @@ type DeleteDataFileHttpError = {
  * @param id The unique identifier of the data file or folder to retrieve.
  * @throws GetDataFileHttpError
  */
-declare function getDataFile(id: string, options?: ApiCallOptions): Promise<GetDataFileHttpResponse>;
-type GetDataFileHttpResponse = {
+export declare function getDataFile(id: string, options?: ApiCallOptions): Promise<GetDataFileHttpResponse>;
+export type GetDataFileHttpResponse = {
   data: DataFileUploadResponseV2;
   headers: Headers;
   status: 200;
 };
-type GetDataFileHttpError = {
+export type GetDataFileHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -518,13 +518,13 @@ type GetDataFileHttpError = {
  * @param body an object with the body content
  * @throws ChangeOwnerDataFileHttpError
  */
-declare function changeOwnerDataFile(id: string, body: ChangeDataFileOwnerRequest, options?: ApiCallOptions): Promise<ChangeOwnerDataFileHttpResponse>;
-type ChangeOwnerDataFileHttpResponse = {
+export declare function changeOwnerDataFile(id: string, body: ChangeDataFileOwnerRequest, options?: ApiCallOptions): Promise<ChangeOwnerDataFileHttpResponse>;
+export type ChangeOwnerDataFileHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type ChangeOwnerDataFileHttpError = {
+export type ChangeOwnerDataFileHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 409 | 423;
@@ -540,13 +540,13 @@ type ChangeOwnerDataFileHttpError = {
  * @param body an object with the body content
  * @throws ChangeSpaceDataFileHttpError
  */
-declare function changeSpaceDataFile(id: string, body: ChangeDataFileSpaceRequest, options?: ApiCallOptions): Promise<ChangeSpaceDataFileHttpResponse>;
-type ChangeSpaceDataFileHttpResponse = {
+export declare function changeSpaceDataFile(id: string, body: ChangeDataFileSpaceRequest, options?: ApiCallOptions): Promise<ChangeSpaceDataFileHttpResponse>;
+export type ChangeSpaceDataFileHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type ChangeSpaceDataFileHttpError = {
+export type ChangeSpaceDataFileHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 409 | 423;
@@ -563,13 +563,13 @@ type ChangeSpaceDataFileHttpError = {
  * @param id The unique identifier of the folder.
  * @throws GetDataFileFolderStatsHttpError
  */
-declare function getDataFileFolderStats(id: string, options?: ApiCallOptions): Promise<GetDataFileFolderStatsHttpResponse>;
-type GetDataFileFolderStatsHttpResponse = {
+export declare function getDataFileFolderStats(id: string, options?: ApiCallOptions): Promise<GetDataFileFolderStatsHttpResponse>;
+export type GetDataFileFolderStatsHttpResponse = {
   data: FolderStatsResponse;
   headers: Headers;
   status: 200;
 };
-type GetDataFileFolderStatsHttpError = {
+export type GetDataFileFolderStatsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -577,8 +577,8 @@ type GetDataFileFolderStatsHttpError = {
 /**
  * Clears the cache for core/data-files api requests.
  */
-declare function clearCache(): void;
-type DataFilesAPI = {
+export declare function clearCache(): void;
+export type DataFilesAPI = {
   /**
    * Use this operation to move multiple data files and folders to new spaces in a single
    * request. Set `spaceId` to `null` for any item to move it to the personal space of its
@@ -720,4 +720,4 @@ type DataFilesAPI = {
  */
 declare const dataFilesExport: DataFilesAPI;
 //#endregion
-export { BatchChangeSpaceItem, BatchPostItem, ChangeDataFileOwnerRequest, ChangeDataFileSpaceRequest, ChangeOwnerDataFileHttpError, ChangeOwnerDataFileHttpResponse, ChangeSpaceDataFileHttpError, ChangeSpaceDataFileHttpResponse, ChangeSpaceDataFilesHttpError, ChangeSpaceDataFilesHttpResponse, ConnectionsResponse, DataFileBatchChangeSpaceRequestV2, DataFileBatchPostRequest, DataFileDeleteRecordResponseV2, DataFilePermission, DataFileUploadResponseV2, DataFilesAPI, DeleteDataFileHttpError, DeleteDataFileHttpResponse, ErrorCode, ErrorResponse, ErrorResponseItem, FilterConnectionsRequest, FilterDataFilesConnectionsHttpError, FilterDataFilesConnectionsHttpResponse, FolderStatsResponse, GetConnectionsResponse, GetConnectionsSortField, GetDataFileDeleteRecordsResponseV2, GetDataFileDeleteRecordsSortField, GetDataFileFolderStatsHttpError, GetDataFileFolderStatsHttpResponse, GetDataFileHttpError, GetDataFileHttpResponse, GetDataFilesConnectionsHttpError, GetDataFilesConnectionsHttpResponse, GetDataFilesDeletesHttpError, GetDataFilesDeletesHttpResponse, LinkResponse, LinksResponse, MultiStatusResponse, MultiStatusResponseItem, PostDataFileRequest, PostDataFilesHttpError, PostDataFilesHttpResponse, SpaceStatsResponse, changeOwnerDataFile, changeSpaceDataFile, changeSpaceDataFiles, clearCache, dataFilesExport as default, deleteDataFile, filterDataFilesConnections, getDataFile, getDataFileFolderStats, getDataFilesConnections, getDataFilesDeletes, postDataFiles, data_files_d_exports as t };
+export { dataFilesExport as default, data_files_d_exports as t };

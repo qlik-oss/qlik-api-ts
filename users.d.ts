@@ -1,10 +1,10 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/users.d.ts
 /**
  * An array of group references.
  */
-type AssignedGroups = {
+export type AssignedGroups = {
   /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */
   assignedRoles?: AssignedRoles;
   /** The unique group identitier */
@@ -24,7 +24,7 @@ type AssignedGroups = {
  *   }
  * ]
  */
-type AssignedGroupsRefNames = {
+export type AssignedGroupsRefNames = {
   /** The name of the group */
   name: string;
   /** The type of provider for the group. */
@@ -33,7 +33,7 @@ type AssignedGroupsRefNames = {
 /**
  * An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles.
  */
-type AssignedRoles = {
+export type AssignedRoles = {
   /** The unique role identitier */
   id: string;
   /** The role level */
@@ -46,11 +46,11 @@ type AssignedRoles = {
 /**
  * An array of scopes assigned to a user
  */
-type AssignedScopes = string[];
+export type AssignedScopes = string[];
 /**
  * An error object describing the error.
  */
-type Error = {
+export type Error = {
   /** The error code. */
   code: string;
   /** A human-readable explanation specific to this occurrence of the problem. */
@@ -72,7 +72,7 @@ type Error = {
 /**
  * Error object.
  */
-type ErrorItem = {
+export type ErrorItem = {
   /** Error code */
   code: number;
   /** A human-readable explanation specific to this occurrence of the problem (if applicable) */
@@ -94,32 +94,32 @@ type ErrorItem = {
  *   traceId: "000000000000000079cf1ebeae103de1"
  * }
  */
-type Errors = {
+export type Errors = {
   /** An array of errors related to the operation. */
   errors?: Error[];
   /** A unique identifier for tracing the error. */
   traceId?: string;
 };
-type ErrorsResponse = {
+export type ErrorsResponse = {
   errors?: ErrorItem[];
 };
 /**
  * An advanced query filter to be used for complex user querying in the tenant.
  */
-type Filter = {
+export type Filter = {
   /** The advanced filtering to be applied the query. All conditional statements within this query parameter are case insensitive. */
   filter?: string;
 };
 /**
  * Data list - ResultItem or ErrorItem for each InviteeItem.
  */
-type InviteDataResponse = {
+export type InviteDataResponse = {
   data?: (ResultItem | InviteErrorItem)[];
 };
 /**
  * Error object.
  */
-type InviteErrorItem = ErrorItem & {
+export type InviteErrorItem = ErrorItem & {
   /** Error code - | HTTP Status code | 1001 - Active User | 1002 - Disabled User | 1003 - Default External Dependency Error | */
   code?: string;
   /** Invitee email */
@@ -127,7 +127,7 @@ type InviteErrorItem = ErrorItem & {
   /** Result status = "error" */
   status: "error";
 };
-type InviteItem = {
+export type InviteItem = {
   /** Email address for this invitee. Example - "foo@qlik.com". */
   email: string;
   /** Optional ISO 639-1 2 letter code for invite language. Defaults to 'en' when missing or not found. */
@@ -137,14 +137,14 @@ type InviteItem = {
   /** Flag - when true invite message is sent to inactive or invited users. Typically used to force email resend to users who are not yet active. */
   resend?: boolean;
 };
-type InviteRequestData = {
+export type InviteRequestData = {
   /** List of invitees who should receive an invite email. */
   invitees?: InviteItem[];
 };
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
  */
-type JSONPatch = {
+export type JSONPatch = {
   /** The operation to be performed. The fields `set` and `unset` are deprecated. */
   op: "replace" | "set" | "unset" | "add" | "renew" | "remove-value";
   /** A JSON Pointer. The field `roles` is deprecated. */
@@ -197,7 +197,7 @@ type JSONPatch = {
  *   }
  * ]
  */
-type JSONPatchArray = JSONPatch[];
+export type JSONPatchArray = JSONPatch[];
 /**
  * An array of entity reference identifiers (e.g. roles, groups).
  * @example
@@ -207,7 +207,7 @@ type JSONPatchArray = JSONPatch[];
  *   }
  * ]
  */
-type RefIDs = {
+export type RefIDs = {
   /** The unique identitier */
   id: string;
 }[];
@@ -220,14 +220,14 @@ type RefIDs = {
  *   }
  * ]
  */
-type RefNames = {
+export type RefNames = {
   /** The name of the entity */
   name: string;
 }[];
 /**
  * Invitee result item
  */
-type ResultItem = {
+export type ResultItem = {
   /** Email specified for this invitee */
   email: string;
   /** Result status = {"ok" (new user; email sent) | "exists" (existing user; no email sent)} */
@@ -240,7 +240,7 @@ type ResultItem = {
 /**
  * A user object.
  */
-type User = {
+export type User = {
   /** An array of group references. */
   assignedGroups?: AssignedGroups;
   /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */
@@ -287,7 +287,7 @@ type User = {
 /**
  * The result object for the user count.
  */
-type UserCount = {
+export type UserCount = {
   /** The total number of users in the tenant. */
   total: number;
 };
@@ -307,7 +307,7 @@ type UserCount = {
  *   tenantId: "q3VRZ4YMixRaLKEPhkZWM-XMIDN7cO8f"
  * }
  */
-type UserPostSchema = {
+export type UserPostSchema = {
   /** The roles to assign to the user. */
   assignedRoles?: RefIDs | RefNames;
   /** The email address for the user. This is a required field when inviting a user. */
@@ -323,7 +323,7 @@ type UserPostSchema = {
   /** The tenant that the user will belong too. */
   tenantId?: string;
 };
-type Users = {
+export type Users = {
   /** List of users. */
   data?: User[];
   /** Pagination links */
@@ -353,7 +353,7 @@ type Users = {
  * @param query an object with query parameters
  * @throws GetUsersHttpError
  */
-declare function getUsers(query: {
+export declare function getUsers(query: {
   /** A comma-delimited string of the requested fields per entity. If the 'links' value is omitted, then the entity HATEOAS link will also be omitted. */
   fields?: string;
   /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax. Cannot be combined with any of the fields marked as deprecated. All conditional statements within this query parameter are case insensitive.
@@ -397,14 +397,14 @@ declare function getUsers(query: {
   /** Whether to return a total match count in the result. Defaults to false. It will trigger an extra DB query to count, reducing the efficiency of the endpoint. */
   totalResults?: boolean;
 }, options?: ApiCallOptions): Promise<GetUsersHttpResponse>;
-type GetUsersHttpResponse = {
+export type GetUsersHttpResponse = {
   data: Users;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetUsersHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetUsersHttpResponse>;
 };
-type GetUsersHttpError = {
+export type GetUsersHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 429 | 500;
@@ -415,13 +415,13 @@ type GetUsersHttpError = {
  * @param body an object with the body content
  * @throws CreateUserHttpError
  */
-declare function createUser(body: UserPostSchema, options?: ApiCallOptions): Promise<CreateUserHttpResponse>;
-type CreateUserHttpResponse = {
+export declare function createUser(body: UserPostSchema, options?: ApiCallOptions): Promise<CreateUserHttpResponse>;
+export type CreateUserHttpResponse = {
   data: User;
   headers: Headers;
   status: 201;
 };
-type CreateUserHttpError = {
+export type CreateUserHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 403 | 409 | 413 | 429 | 500;
@@ -432,13 +432,13 @@ type CreateUserHttpError = {
  * @param query an object with query parameters
  * @throws CountUsersHttpError
  */
-declare function countUsers(query: Record<string, unknown>, options?: ApiCallOptions): Promise<CountUsersHttpResponse>;
-type CountUsersHttpResponse = {
+export declare function countUsers(query: Record<string, unknown>, options?: ApiCallOptions): Promise<CountUsersHttpResponse>;
+export type CountUsersHttpResponse = {
   data: UserCount;
   headers: Headers;
   status: 200;
 };
-type CountUsersHttpError = {
+export type CountUsersHttpError = {
   data: Errors;
   headers: Headers;
   status: 403 | 404 | 429;
@@ -448,13 +448,13 @@ type CountUsersHttpError = {
  *
  * @throws CountUsersWithoutQueryHttpError
  */
-declare function countUsersWithoutQuery(options?: ApiCallOptions): Promise<CountUsersWithoutQueryHttpResponse>;
-type CountUsersWithoutQueryHttpResponse = {
+export declare function countUsersWithoutQuery(options?: ApiCallOptions): Promise<CountUsersWithoutQueryHttpResponse>;
+export type CountUsersWithoutQueryHttpResponse = {
   data: UserCount;
   headers: Headers;
   status: 200;
 };
-type CountUsersWithoutQueryHttpError = {
+export type CountUsersWithoutQueryHttpError = {
   data: Errors;
   headers: Headers;
   status: 403 | 404 | 429;
@@ -466,7 +466,7 @@ type CountUsersWithoutQueryHttpError = {
  * @param body an object with the body content
  * @throws FilterUsersHttpError
  */
-declare function filterUsers(query: {
+export declare function filterUsers(query: {
   /** A comma-delimited string of the requested fields per entity. If the 'links' value is omitted, then the entity HATEOAS link will also be omitted. */
   fields?: string;
   /** The number of user entries to retrieve. */
@@ -478,14 +478,14 @@ declare function filterUsers(query: {
   /** The field to sort by, with +/- prefix indicating sort order */
   sort?: "name" | "+name" | "-name";
 }, body: Filter, options?: ApiCallOptions): Promise<FilterUsersHttpResponse>;
-type FilterUsersHttpResponse = {
+export type FilterUsersHttpResponse = {
   data: Users;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<FilterUsersHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<FilterUsersHttpResponse>;
 };
-type FilterUsersHttpError = {
+export type FilterUsersHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 403 | 429 | 500;
@@ -496,13 +496,13 @@ type FilterUsersHttpError = {
  * @param body an object with the body content
  * @throws InviteUsersHttpError
  */
-declare function inviteUsers(body: InviteRequestData, options?: ApiCallOptions): Promise<InviteUsersHttpResponse>;
-type InviteUsersHttpResponse = {
+export declare function inviteUsers(body: InviteRequestData, options?: ApiCallOptions): Promise<InviteUsersHttpResponse>;
+export type InviteUsersHttpResponse = {
   data: InviteDataResponse;
   headers: Headers;
   status: 207;
 };
-type InviteUsersHttpError = {
+export type InviteUsersHttpError = {
   data: ErrorsResponse;
   headers: Headers;
   status: number;
@@ -512,13 +512,13 @@ type InviteUsersHttpError = {
  *
  * @throws GetMyUserHttpError
  */
-declare function getMyUser(options?: ApiCallOptions): Promise<GetMyUserHttpResponse>;
-type GetMyUserHttpResponse = {
+export declare function getMyUser(options?: ApiCallOptions): Promise<GetMyUserHttpResponse>;
+export type GetMyUserHttpResponse = {
   data: User;
   headers: Headers;
   status: 200;
 };
-type GetMyUserHttpError = {
+export type GetMyUserHttpError = {
   data: Errors;
   headers: Headers;
   status: 429;
@@ -529,13 +529,13 @@ type GetMyUserHttpError = {
  * @param userId The ID of the user to delete.
  * @throws DeleteUserHttpError
  */
-declare function deleteUser(userId: string, options?: ApiCallOptions): Promise<DeleteUserHttpResponse>;
-type DeleteUserHttpResponse = {
+export declare function deleteUser(userId: string, options?: ApiCallOptions): Promise<DeleteUserHttpResponse>;
+export type DeleteUserHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteUserHttpError = {
+export type DeleteUserHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 403 | 404 | 429;
@@ -547,16 +547,16 @@ type DeleteUserHttpError = {
  * @param query an object with query parameters
  * @throws GetUserHttpError
  */
-declare function getUser(userId: string, query: {
+export declare function getUser(userId: string, query: {
   /** A comma-delimited string of the requested fields per entity. If the 'links' value is omitted, then the entity HATEOAS link will also be omitted. */
   fields?: string;
 }, options?: ApiCallOptions): Promise<GetUserHttpResponse>;
-type GetUserHttpResponse = {
+export type GetUserHttpResponse = {
   data: User & unknown;
   headers: Headers;
   status: 200;
 };
-type GetUserHttpError = {
+export type GetUserHttpError = {
   data: Errors;
   headers: Headers;
   status: 403 | 404 | 429 | 500;
@@ -568,19 +568,19 @@ type GetUserHttpError = {
  * @param body an object with the body content
  * @throws PatchUserHttpError
  */
-declare function patchUser(userId: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchUserHttpResponse>;
-type PatchUserHttpResponse = PatchUser204HttpResponse | PatchUser207HttpResponse;
-type PatchUser204HttpResponse = {
+export declare function patchUser(userId: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchUserHttpResponse>;
+export type PatchUserHttpResponse = PatchUser204HttpResponse | PatchUser207HttpResponse;
+export type PatchUser204HttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchUser207HttpResponse = {
+export type PatchUser207HttpResponse = {
   data: Errors;
   headers: Headers;
   status: 207;
 };
-type PatchUserHttpError = {
+export type PatchUserHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 403 | 404 | 429;
@@ -588,8 +588,8 @@ type PatchUserHttpError = {
 /**
  * Clears the cache for users api requests.
  */
-declare function clearCache(): void;
-type UsersAPI = {
+export declare function clearCache(): void;
+export type UsersAPI = {
   /**
    * Returns a list of users using cursor-based pagination.
    *
@@ -671,4 +671,4 @@ type UsersAPI = {
  */
 declare const usersExport: UsersAPI;
 //#endregion
-export { AssignedGroups, AssignedGroupsRefNames, AssignedRoles, AssignedScopes, CountUsersHttpError, CountUsersHttpResponse, CountUsersWithoutQueryHttpError, CountUsersWithoutQueryHttpResponse, CreateUserHttpError, CreateUserHttpResponse, DeleteUserHttpError, DeleteUserHttpResponse, Error, ErrorItem, Errors, ErrorsResponse, Filter, FilterUsersHttpError, FilterUsersHttpResponse, GetMyUserHttpError, GetMyUserHttpResponse, GetUserHttpError, GetUserHttpResponse, GetUsersHttpError, GetUsersHttpResponse, InviteDataResponse, InviteErrorItem, InviteItem, InviteRequestData, InviteUsersHttpError, InviteUsersHttpResponse, JSONPatch, JSONPatchArray, PatchUser204HttpResponse, PatchUser207HttpResponse, PatchUserHttpError, PatchUserHttpResponse, RefIDs, RefNames, ResultItem, User, UserCount, UserPostSchema, Users, UsersAPI, clearCache, countUsers, countUsersWithoutQuery, createUser, usersExport as default, deleteUser, filterUsers, getMyUser, getUser, getUsers, inviteUsers, patchUser };
+export { usersExport as default };

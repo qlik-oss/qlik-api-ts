@@ -1,12 +1,12 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/questions.d.ts
-type Analysis = "breakdown" | "changePoint" | "comparison" | "contribution" | "correlation" | "fact" | "mutualInfo" | "rank" | "spike" | "trend" | "values";
-type AnalysisGroup = "anomaly" | "brekadown" | "comparison" | "correl" | "fact" | "list" | "mutualInfo" | "rank";
+export type Analysis = "breakdown" | "changePoint" | "comparison" | "contribution" | "correlation" | "fact" | "mutualInfo" | "rank" | "spike" | "trend" | "values";
+export type AnalysisGroup = "anomaly" | "brekadown" | "comparison" | "correl" | "fact" | "list" | "mutualInfo" | "rank";
 /**
  * Metadata for app
  */
-type AppMetadata = {
+export type AppMetadata = {
   id?: string;
   last_reload_date?: string;
   limited_access?: boolean;
@@ -18,8 +18,8 @@ type AppMetadata = {
 /**
  * Chart type given to current recommendation
  */
-type ChartType = "barchart" | "combochart" | "distributionplot" | "kpi" | "linechart" | "map" | "scatterplot" | "table";
-type ConversationalResponsePart = {
+export type ChartType = "barchart" | "combochart" | "distributionplot" | "kpi" | "linechart" | "map" | "scatterplot" | "table";
+export type ConversationalResponsePart = {
   errorMessage?: string;
   followupSentence?: string;
   imageUrl?: string;
@@ -35,7 +35,7 @@ type ConversationalResponsePart = {
 /**
  * An error object.
  */
-type Error = {
+export type Error = {
   /** The error code. */
   code: string;
   /** A human-readable explanation specific to this occurrence of the problem. */
@@ -52,13 +52,13 @@ type Error = {
   /** Summary of the problem. */
   title: string;
 };
-type Errors = {
+export type Errors = {
   errors?: Error[];
 };
-type Href = {
+export type Href = {
   href?: string;
 };
-type Links = {
+export type Links = {
   next?: Href;
   prev?: Href;
   self?: Href;
@@ -66,7 +66,7 @@ type Links = {
 /**
  * Visualisation recommendation specs for the query
  */
-type NLMetricRecommendation = {
+export type NLMetricRecommendation = {
   analysis?: Analysis;
   analysisGroup?: AnalysisGroup;
   /** Chart type given to current recommendation */
@@ -77,7 +77,7 @@ type NLMetricRecommendation = {
   msrs?: string[];
   relevance?: number;
 };
-type NLMetricRecord = {
+export type NLMetricRecord = {
   /** Qlik sense app id that is being used to answer the question */
   appId: string;
   /** Qlik sense app name that is being used to answer the question */
@@ -122,7 +122,7 @@ type NLMetricRecord = {
   /** Version of the metric model */
   version: string;
 };
-type NLMetricsRequest = {
+export type NLMetricsRequest = {
   /** The advanced filtering to use for the query. Refer to [RFC 7644](https://www.rfc-editor.org/rfc/rfc7644#section-3.4.2.2) for the syntax.
    *
    * Filter on createdAt and updatedAt fields are encouraged and support `eq`, `ne`, `gt`, `ge`, `lt`, `le` comparison operators along with `and` and `or` logical operators.
@@ -155,7 +155,7 @@ type NLMetricsRequest = {
    * ``` */
   filter: string;
 };
-type NLMetricsResponse = {
+export type NLMetricsResponse = {
   data?: NLMetricRecord[];
   links?: Links;
   readonly meta?: {
@@ -166,7 +166,7 @@ type NLMetricsResponse = {
 /**
  * Provides info what was included in response for given query
  */
-type NLResponses = {
+export type NLResponses = {
   /** Chart was provided */
   hasChart?: boolean;
   /** Narrative was provided */
@@ -182,13 +182,13 @@ type NLResponses = {
   /** Suggestion questions was provided */
   hasSuggestions?: boolean;
 };
-type NarrativeResponse = {
+export type NarrativeResponse = {
   text?: string;
 };
-type NluInfo = {
+export type NluInfo = {
   elements?: NluInfoElements[];
 };
-type NluInfoElements = {
+export type NluInfoElements = {
   entity?: boolean;
   errorText?: string;
   filterFieldName?: string;
@@ -202,7 +202,7 @@ type NluInfoElements = {
 /**
  * Contains break down of the asked question in the form of tokens with their classification.
  */
-type PartialNluInfo = {
+export type PartialNluInfo = {
   /** Qlik sense application field selected for given token or phrase */
   fieldName?: string;
   /** Filter value found from query */
@@ -214,11 +214,11 @@ type PartialNluInfo = {
   /** Type of token from query */
   type?: "field" | "filter" | "master_dimension" | "master_measure" | "custom_analysis";
 };
-type QlikApp = {
+export type QlikApp = {
   id?: string;
   name?: string;
 };
-type QueryCreate = {
+export type QueryCreate = {
   app?: QlikApp;
   /** Flag that clears the entity context. */
   clearEntityContext?: boolean;
@@ -243,19 +243,19 @@ type QueryCreate = {
 /**
  * The attributes of sentences.
  */
-type QueryCreated = {
+export type QueryCreated = {
   apps?: QlikApp[];
   /** A list of conversational responses. */
   conversationalResponse?: QueryResponse[];
   nluInfo?: NluInfo;
 };
-type QueryNotCreated = {
+export type QueryNotCreated = {
   apps?: QlikApp[];
   conversationalResponse?: QueryResponse;
   errors?: Error[];
   nluInfo?: NluInfo;
 };
-type QueryResponse = {
+export type QueryResponse = {
   apps?: QlikApp[];
   /** For contextual responses, this string contains a list of entities that are used to produce the response. */
   contextInfo?: string;
@@ -267,7 +267,7 @@ type QueryResponse = {
 /**
  * Any feedback from the user about a given recommendation
  */
-type RecFeedback = {
+export type RecFeedback = {
   analysisType?: string;
   chartType?: string;
   comment?: string;
@@ -276,7 +276,7 @@ type RecFeedback = {
   recommendationDisliked: boolean;
   recommendationLiked: boolean;
 };
-type RenderVisualization = {
+export type RenderVisualization = {
   /** Data object should be used to render visualization */
   data?: unknown;
   language?: string;
@@ -287,19 +287,19 @@ type RenderVisualization = {
  * @param body an object with the body content
  * @throws AskQuestionsHttpError
  */
-declare function askQuestions(body: QueryCreate, options?: ApiCallOptions): Promise<AskQuestionsHttpResponse>;
-type AskQuestionsHttpResponse = AskQuestions200HttpResponse | AskQuestions201HttpResponse;
-type AskQuestions200HttpResponse = {
+export declare function askQuestions(body: QueryCreate, options?: ApiCallOptions): Promise<AskQuestionsHttpResponse>;
+export type AskQuestionsHttpResponse = AskQuestions200HttpResponse | AskQuestions201HttpResponse;
+export type AskQuestions200HttpResponse = {
   data: QueryNotCreated;
   headers: Headers;
   status: 200;
 };
-type AskQuestions201HttpResponse = {
+export type AskQuestions201HttpResponse = {
   data: QueryCreated;
   headers: Headers;
   status: 201;
 };
-type AskQuestionsHttpError = {
+export type AskQuestionsHttpError = {
   data: Errors;
   headers: Headers;
   status: number;
@@ -311,7 +311,7 @@ type AskQuestionsHttpError = {
  * @param body an object with the body content
  * @throws FilterQuestionsHttpError
  */
-declare function filterQuestions(query: {
+export declare function filterQuestions(query: {
   /** The preferred number of entries returned */
   limit?: number;
   /** A cursor pointing to the page of data to retrieve. */
@@ -319,14 +319,14 @@ declare function filterQuestions(query: {
   /** A single field from the data model on which to sort the response. The '+' or '-' operator may be used to specify ascending or desending order. */
   sort?: "createdAt" | "updatedAt" | "+createdAt" | "+updatedAt" | "-createdAt" | "-updatedAt";
 }, body: NLMetricsRequest, options?: ApiCallOptions): Promise<FilterQuestionsHttpResponse>;
-type FilterQuestionsHttpResponse = {
+export type FilterQuestionsHttpResponse = {
   data: NLMetricsResponse;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<FilterQuestionsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<FilterQuestionsHttpResponse>;
 };
-type FilterQuestionsHttpError = {
+export type FilterQuestionsHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 422 | 500;
@@ -334,8 +334,8 @@ type FilterQuestionsHttpError = {
 /**
  * Clears the cache for questions api requests.
  */
-declare function clearCache(): void;
-type QuestionsAPI = {
+export declare function clearCache(): void;
+export type QuestionsAPI = {
   /**
    * Returns the generated response for parsed chat queries, if no app was specified nor present in conversation context, suggests matching apps.
    *
@@ -361,4 +361,4 @@ type QuestionsAPI = {
  */
 declare const questionsExport: QuestionsAPI;
 //#endregion
-export { Analysis, AnalysisGroup, AppMetadata, AskQuestions200HttpResponse, AskQuestions201HttpResponse, AskQuestionsHttpError, AskQuestionsHttpResponse, ChartType, ConversationalResponsePart, Error, Errors, FilterQuestionsHttpError, FilterQuestionsHttpResponse, Href, Links, NLMetricRecommendation, NLMetricRecord, NLMetricsRequest, NLMetricsResponse, NLResponses, NarrativeResponse, NluInfo, NluInfoElements, PartialNluInfo, QlikApp, QueryCreate, QueryCreated, QueryNotCreated, QueryResponse, QuestionsAPI, RecFeedback, RenderVisualization, askQuestions, clearCache, questionsExport as default, filterQuestions };
+export { questionsExport as default };

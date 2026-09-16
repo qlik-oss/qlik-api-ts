@@ -1,4 +1,4 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B8GqRz9s.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-uJH1SWdc.js";
 
 //#region src/public/rest/ml.ts
 /**
@@ -84,7 +84,11 @@ async function patchMlDeployment(deploymentId, body, options) {
 	});
 }
 /**
-* Activate the model for this deployment
+* Activates the deployed model on this deployment's default alias. The
+* response reports which model was targeted and whether its state
+* actually changed via the `qlik-model-id` and `qlik-state-change`
+* response headers. If the model was already active, the request still
+* succeeds but `qlik-state-change` is `NO_CHANGE`.
 *
 * @param deploymentId ID of the deployment
 * @throws ActivateModelsMlDeploymentHttpError
@@ -98,7 +102,11 @@ async function activateModelsMlDeployment(deploymentId, options) {
 	});
 }
 /**
-* Deactivate the model for this deployment
+* Deactivates the deployed model on this deployment's default alias.
+* The response reports which model was targeted and whether its state
+* actually changed via the `qlik-model-id` and `qlik-state-change`
+* response headers. If the model was already inactive, the request
+* still succeeds but `qlik-state-change` is `NO_CHANGE`.
 *
 * @param deploymentId ID of the deployment
 * @throws DeactivateModelsMlDeploymentHttpError

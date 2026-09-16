@@ -1,20 +1,20 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/data-qualities.d.ts
 /**
  * Response returned when a data quality computation is successfully triggered.
  */
-type ComputationResponse = {
+export type ComputationResponse = {
   /** The unique identifier of the triggered computation. Use this value to poll for status. */
   computationId: string;
 };
-type ComputationStatusResponse = {
+export type ComputationStatusResponse = {
   status: ExecutionStatus;
 };
 /**
  * The ID of the connection
  */
-type ConnectionIdType = string;
+export type ConnectionIdType = string;
 /**
  * Request payload for triggering a data quality computation. The `connectionId` is optional for file-based datasets.
  * If none of the sampling parameters are provided, the following defaults apply:
@@ -27,7 +27,7 @@ type ConnectionIdType = string;
  *   datasetId: "669144f5aa2d642638ef1dd0"
  * }
  */
-type DataQualityComputationRequest = {
+export type DataQualityComputationRequest = {
   /** The ID of the connection */
   connectionId?: ConnectionIdType;
   /** The ID of the dataset */
@@ -36,28 +36,28 @@ type DataQualityComputationRequest = {
 /**
  * The ID of the dataset
  */
-type DatasetIdType = string;
-type DatasetQualityGlobalResultsResponse = {
+export type DatasetIdType = string;
+export type DatasetQualityGlobalResultsResponse = {
   /** The unique identifier of the dataset. */
   datasetId: string;
   qualities: QualitiesGlobalResultsResponse[];
 };
-type Error = {
+export type Error = {
   code?: string;
   detail?: string;
   title?: string;
 };
-type ErrorResponse = {
+export type ErrorResponse = {
   errors?: Error[];
   traceId?: string;
 };
-type ExecutionStatus = "PROFILE_REQUESTED" | "PROFILE_FAILED" | "REQUESTED" | "SUBMITTED" | "SUCCEEDED" | "FAILED";
-type QualitiesGlobalResultsResponse = {
+export type ExecutionStatus = "PROFILE_REQUESTED" | "PROFILE_FAILED" | "REQUESTED" | "SUBMITTED" | "SUCCEEDED" | "FAILED";
+export type QualitiesGlobalResultsResponse = {
   /** The unique identifier of the connection. */
   connectionId: string;
   quality: QualityGlobalResultsResponse;
 };
-type QualityGlobalResultsResponse = {
+export type QualityGlobalResultsResponse = {
   /** Number of empty sample cells. */
   empty: number;
   /** Number of invalid sample cells. */
@@ -69,7 +69,7 @@ type QualityGlobalResultsResponse = {
   /** Number of valid sample cells. */
   valid: number;
 };
-type SamplingConfiguration = {
+export type SamplingConfiguration = {
   /** Specifies where the data quality computation takes place. In `PUSHDOWN` mode, it runs within the Cloud Data Warehouse (e.g., Snowflake, Databricks), whereas in `PULLUP` mode, it runs in Qlik Cloud. */
   executionMode?: "PUSHDOWN" | "PULLUP";
   /** Specifies how the dataset is sampled. `ABSOLUTE` represents a fixed number of rows, while `RELATIVE` refers to a percentage of the total dataset rows. */
@@ -88,13 +88,13 @@ type SamplingConfiguration = {
  * @param body an object with the body content
  * @throws TriggerDataQualitiesComputationHttpError
  */
-declare function triggerDataQualitiesComputation(body: DataQualityComputationRequest, options?: ApiCallOptions): Promise<TriggerDataQualitiesComputationHttpResponse>;
-type TriggerDataQualitiesComputationHttpResponse = {
+export declare function triggerDataQualitiesComputation(body: DataQualityComputationRequest, options?: ApiCallOptions): Promise<TriggerDataQualitiesComputationHttpResponse>;
+export type TriggerDataQualitiesComputationHttpResponse = {
   data: ComputationResponse;
   headers: Headers;
   status: 202;
 };
-type TriggerDataQualitiesComputationHttpError = {
+export type TriggerDataQualitiesComputationHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 500 | 503;
@@ -113,13 +113,13 @@ type TriggerDataQualitiesComputationHttpError = {
  * @param computationId The unique identifier of the computation, as returned by `POST /data-governance/data-qualities/computations`.
  * @throws GetDataQualitiesComputationHttpError
  */
-declare function getDataQualitiesComputation(computationId: string, options?: ApiCallOptions): Promise<GetDataQualitiesComputationHttpResponse>;
-type GetDataQualitiesComputationHttpResponse = {
+export declare function getDataQualitiesComputation(computationId: string, options?: ApiCallOptions): Promise<GetDataQualitiesComputationHttpResponse>;
+export type GetDataQualitiesComputationHttpResponse = {
   data: ComputationStatusResponse;
   headers: Headers;
   status: 200;
 };
-type GetDataQualitiesComputationHttpError = {
+export type GetDataQualitiesComputationHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -133,18 +133,18 @@ type GetDataQualitiesComputationHttpError = {
  * @param query an object with query parameters
  * @throws GetDataQualitiesGlobalResultsHttpError
  */
-declare function getDataQualitiesGlobalResults(query: {
+export declare function getDataQualitiesGlobalResults(query: {
   /** The unique identifier of the connection. */
   connectionId?: ConnectionIdType;
   /** The unique identifier of the dataset. */
   datasetId: DatasetIdType;
 }, options?: ApiCallOptions): Promise<GetDataQualitiesGlobalResultsHttpResponse>;
-type GetDataQualitiesGlobalResultsHttpResponse = {
+export type GetDataQualitiesGlobalResultsHttpResponse = {
   data: DatasetQualityGlobalResultsResponse;
   headers: Headers;
   status: 200;
 };
-type GetDataQualitiesGlobalResultsHttpError = {
+export type GetDataQualitiesGlobalResultsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -152,8 +152,8 @@ type GetDataQualitiesGlobalResultsHttpError = {
 /**
  * Clears the cache for data-qualities api requests.
  */
-declare function clearCache(): void;
-type DataQualitiesAPI = {
+export declare function clearCache(): void;
+export type DataQualitiesAPI = {
   /**
    * @deprecated
    *
@@ -201,4 +201,4 @@ type DataQualitiesAPI = {
  */
 declare const dataQualitiesExport: DataQualitiesAPI;
 //#endregion
-export { ComputationResponse, ComputationStatusResponse, ConnectionIdType, DataQualitiesAPI, DataQualityComputationRequest, DatasetIdType, DatasetQualityGlobalResultsResponse, Error, ErrorResponse, ExecutionStatus, GetDataQualitiesComputationHttpError, GetDataQualitiesComputationHttpResponse, GetDataQualitiesGlobalResultsHttpError, GetDataQualitiesGlobalResultsHttpResponse, QualitiesGlobalResultsResponse, QualityGlobalResultsResponse, SamplingConfiguration, TriggerDataQualitiesComputationHttpError, TriggerDataQualitiesComputationHttpResponse, clearCache, dataQualitiesExport as default, getDataQualitiesComputation, getDataQualitiesGlobalResults, triggerDataQualitiesComputation };
+export { dataQualitiesExport as default };

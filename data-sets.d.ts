@@ -1,25 +1,26 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/data-sets.d.ts
-type BatchIdDto = {
+export type BatchIdDto = {
   ids?: string[];
 };
-type BinnedFrequency = {
+export type BinnedFrequency = {
   binEdge?: number;
   frequency?: number;
 };
-type Classification = {
+export type Classification = {
   obfuscation?: string;
   pii?: boolean;
   sensitive?: boolean;
   tags?: Tag[];
 };
-type DataAssetInfo = {
+export type DataAssetInfo = {
   dataStoreInfo?: DataStoreInfo;
   id: string;
   readonly name?: string;
 };
-type DataField = {
+export type DataField = {
+  /** Alias of the field. Must be unique within the schema and must not match another field's name. Returns `400` if violated. */
   alias?: string;
   dataType: FieldDataType;
   description?: string;
@@ -37,7 +38,7 @@ type DataField = {
   /** An array of user-supplied tags */
   userTags?: UserTag[];
 };
-type DataSet = {
+export type DataSet = {
   /** Optional field to specify additional schemas for files where multiple tables or sheets are available. User must define primary schema in 'schema' attribute and rest of the sheets/ tables can be defined using this field. This field is not populated for the dataSets with single schema */
   additionalSchemas?: Schema[];
   /** Optional override of DataAsset appType. */
@@ -77,34 +78,46 @@ type DataSet = {
   /** Only required when updating the resource. Must be null for new resources. */
   version?: number;
 };
-type DataSetProfile = {
+export type DataSetProfile = {
   meta?: ProfileMetadata;
   readonly profiles?: TableProfile[];
   readonly samples?: TableSample[];
 };
-type DataStoreInfo = {
+export type DataStoreInfo = {
   id: string;
   readonly name?: string;
   readonly type?: string;
 };
-type Error = {
+export type Error = {
+  code?: string;
+  detail?: string;
+  /** Optional free-form metadata associated with the error. */
+  meta?: unknown;
+  status?: string;
+  title?: string;
+};
+export type ErrorCopy = {
   code?: string;
   detail?: string;
   status?: string;
   title?: string;
 };
-type ErrorResponse = {
+export type ErrorResponse = {
   errors?: Error[];
   traceId?: string;
 };
-type FieldDataType = {
+export type ErrorResponseCopy = {
+  errors?: ErrorCopy[];
+  traceId?: string;
+};
+export type FieldDataType = {
   originalType?: string;
   /** The properties map key is string and the value is of type object. Please note, Datatype DECIMAL requires two mandatory properties to be defined; these properties must be named: precision and scale, each of these property accepts integer value.  All other datatypes does not require any manadatory properties to be defined. */
   properties?: Record<string, unknown>;
   /** Each datatype may vary in terms of required properties. Example: Datatype DECIMAL requires two mandatory properties to be defined - precision and scale, each one accepts integer value. All other datatypes does not have any required properties. */
   type: "DATE" | "TIME" | "DATETIME" | "TIMESTAMP" | "STRING" | "DOUBLE" | "DECIMAL" | "INTEGER" | "BOOLEAN" | "BINARY" | "CUSTOM";
 };
-type FieldProfile = {
+export type FieldProfile = {
   average?: number;
   averageStringLength?: number;
   classification?: Classification;
@@ -140,11 +153,11 @@ type FieldProfile = {
   textValueCount?: number;
   zeroValueCount?: number;
 };
-type Frequency = {
+export type Frequency = {
   frequency?: number;
   value?: string;
 };
-type JsonPatch = {
+export type JsonPatch = {
   /** A JSON Pointer path pointing to the location to move/copy from. */
   from?: string;
   /** The operation to be performed. */
@@ -154,17 +167,17 @@ type JsonPatch = {
   /** The value to add, replace or test. */
   value?: unknown;
 };
-type Link = {
+export type Link = {
   href?: string;
 };
-type Links = {
+export type Links = {
   first?: Link;
   last?: Link;
   next?: Link;
   prev?: Link;
   self?: Link;
 };
-type Operational = {
+export type Operational = {
   contentUpdated?: boolean;
   endDate?: string;
   lastLoadTime?: string;
@@ -178,7 +191,7 @@ type Operational = {
   tableConnectionInfo?: TableConnectionInfo;
   tableOwner?: string;
 };
-type PageDataSetProfile = {
+export type PageDataSetProfile = {
   data?: DataSetProfile[];
   limit?: number;
   links?: Links;
@@ -186,7 +199,7 @@ type PageDataSetProfile = {
   pages?: number;
   total?: number;
 };
-type ProfileMetadata = {
+export type ProfileMetadata = {
   computationEndTime?: string;
   computationStartTime?: string;
   connectionId?: string;
@@ -199,7 +212,7 @@ type ProfileMetadata = {
 /**
  * Optional field to specify additional schemas for files where multiple tables or sheets are available. User must define primary schema in 'schema' attribute and rest of the sheets/ tables can be defined using this field. This field is not populated for the dataSets with single schema
  */
-type Schema = {
+export type Schema = {
   /** Anomalies associated with this schema. Example: $warning-unknown-headers */
   anomalies?: string[];
   dataFields: DataField[];
@@ -209,33 +222,33 @@ type Schema = {
   overrideSchemaAnomalies?: boolean;
   schemaName?: string;
 };
-type TableConnectionInfo = {
+export type TableConnectionInfo = {
   additionalProperties?: Record<string, string>;
   selectionScript?: string;
   tableName?: string;
 };
-type TableProfile = {
+export type TableProfile = {
   readonly fieldProfiles?: FieldProfile[];
   readonly name?: string;
   readonly numberOfRows?: number;
   readonly sizeInBytes?: number;
 };
-type TableRecord = {
+export type TableRecord = {
   values?: string[];
 };
-type TableSample = {
+export type TableSample = {
   readonly fieldNames?: string[];
   readonly name?: string;
   readonly records?: TableRecord[];
 };
-type Tag = {
+export type Tag = {
   score?: number;
   tag?: string;
 };
 /**
  * An array of user-supplied tags
  */
-type UserTag = {
+export type UserTag = {
   /** The id of the tag in Collections */
   id?: string;
   name?: string;
@@ -246,30 +259,30 @@ type UserTag = {
  * @param body an object with the body content
  * @throws DeleteDataSetsHttpError
  */
-declare function deleteDataSets(body: BatchIdDto, options?: ApiCallOptions): Promise<DeleteDataSetsHttpResponse>;
-type DeleteDataSetsHttpResponse = {
+export declare function deleteDataSets(body: BatchIdDto, options?: ApiCallOptions): Promise<DeleteDataSetsHttpResponse>;
+export type DeleteDataSetsHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteDataSetsHttpError = {
+export type DeleteDataSetsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
 };
 /**
- * Save new data set
+ * Creates and saves a new data set in the catalog.
  *
  * @param body an object with the body content
  * @throws CreateDataSetHttpError
  */
-declare function createDataSet(body: DataSet, options?: ApiCallOptions): Promise<CreateDataSetHttpResponse>;
-type CreateDataSetHttpResponse = {
+export declare function createDataSet(body: DataSet, options?: ApiCallOptions): Promise<CreateDataSetHttpResponse>;
+export type CreateDataSetHttpResponse = {
   data: DataSet;
   headers: Headers;
   status: 201;
 };
-type CreateDataSetHttpError = {
+export type CreateDataSetHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -281,16 +294,16 @@ type CreateDataSetHttpError = {
  * @param query an object with query parameters
  * @throws GetDataSetHttpError
  */
-declare function getDataSet(dataSetId: string, query: {
+export declare function getDataSet(dataSetId: string, query: {
   /** Comma-separated fields to return in the response. */
   projections?: string[];
 }, options?: ApiCallOptions): Promise<GetDataSetHttpResponse>;
-type GetDataSetHttpResponse = {
+export type GetDataSetHttpResponse = {
   data: DataSet;
   headers: Headers;
   status: 200;
 };
-type GetDataSetHttpError = {
+export type GetDataSetHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -308,13 +321,13 @@ type GetDataSetHttpError = {
  * @param body an object with the body content
  * @throws PatchDataSetHttpError
  */
-declare function patchDataSet(dataSetId: string, body: JsonPatch[], options?: ApiCallOptions): Promise<PatchDataSetHttpResponse>;
-type PatchDataSetHttpResponse = {
+export declare function patchDataSet(dataSetId: string, body: JsonPatch[], options?: ApiCallOptions): Promise<PatchDataSetHttpResponse>;
+export type PatchDataSetHttpResponse = {
   data: DataSet;
   headers: Headers;
   status: 200 | 204;
 };
-type PatchDataSetHttpError = {
+export type PatchDataSetHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -332,13 +345,13 @@ type PatchDataSetHttpError = {
  * @param body an object with the body content
  * @throws UpdateDataSetHttpError
  */
-declare function updateDataSet(dataSetId: string, body: DataSet, options?: ApiCallOptions): Promise<UpdateDataSetHttpResponse>;
-type UpdateDataSetHttpResponse = {
+export declare function updateDataSet(dataSetId: string, body: DataSet, options?: ApiCallOptions): Promise<UpdateDataSetHttpResponse>;
+export type UpdateDataSetHttpResponse = {
   data: DataSet;
   headers: Headers;
   status: 200;
 };
-type UpdateDataSetHttpError = {
+export type UpdateDataSetHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
@@ -350,7 +363,7 @@ type UpdateDataSetHttpError = {
  * @param query an object with query parameters
  * @throws GetDataSetProfilesHttpError
  */
-declare function getDataSetProfiles(dataSetId: string, query: {
+export declare function getDataSetProfiles(dataSetId: string, query: {
   /** Comma-separated data connection IDs. */
   dataConnectionIds?: string[];
   /** Page size limit. */
@@ -360,23 +373,23 @@ declare function getDataSetProfiles(dataSetId: string, query: {
   projections?: string[];
   sort?: string[];
 }, options?: ApiCallOptions): Promise<GetDataSetProfilesHttpResponse>;
-type GetDataSetProfilesHttpResponse = {
+export type GetDataSetProfilesHttpResponse = {
   data: PageDataSetProfile;
   headers: Headers;
   status: 200 | 202;
   prev?: (options?: ApiCallOptions) => Promise<GetDataSetProfilesHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetDataSetProfilesHttpResponse>;
 };
-type GetDataSetProfilesHttpError = {
-  data: ErrorResponse;
+export type GetDataSetProfilesHttpError = {
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
 };
 /**
  * Clears the cache for data-sets api requests.
  */
-declare function clearCache(): void;
-type DataSetsAPI = {
+export declare function clearCache(): void;
+export type DataSetsAPI = {
   /**
    * Batch delete data sets.
    *
@@ -385,7 +398,7 @@ type DataSetsAPI = {
    */
   deleteDataSets: typeof deleteDataSets;
   /**
-   * Save new data set
+   * Creates and saves a new data set in the catalog.
    *
    * @param body an object with the body content
    * @throws CreateDataSetHttpError
@@ -445,4 +458,4 @@ type DataSetsAPI = {
  */
 declare const dataSetsExport: DataSetsAPI;
 //#endregion
-export { BatchIdDto, BinnedFrequency, Classification, CreateDataSetHttpError, CreateDataSetHttpResponse, DataAssetInfo, DataField, DataSet, DataSetProfile, DataSetsAPI, DataStoreInfo, DeleteDataSetsHttpError, DeleteDataSetsHttpResponse, Error, ErrorResponse, FieldDataType, FieldProfile, Frequency, GetDataSetHttpError, GetDataSetHttpResponse, GetDataSetProfilesHttpError, GetDataSetProfilesHttpResponse, JsonPatch, Link, Links, Operational, PageDataSetProfile, PatchDataSetHttpError, PatchDataSetHttpResponse, ProfileMetadata, Schema, TableConnectionInfo, TableProfile, TableRecord, TableSample, Tag, UpdateDataSetHttpError, UpdateDataSetHttpResponse, UserTag, clearCache, createDataSet, dataSetsExport as default, deleteDataSets, getDataSet, getDataSetProfiles, patchDataSet, updateDataSet };
+export { dataSetsExport as default };

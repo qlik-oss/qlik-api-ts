@@ -1,7 +1,7 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/assistants.d.ts
-type Assistant = {
+export type Assistant = {
   /** Datetime when the assistant was created. */
   readonly createdAt: string;
   /** Unique identifier of the user who created the assistant. */
@@ -51,10 +51,10 @@ type Assistant = {
  *   ]
  * }
  */
-type ChunksRefs = {
+export type ChunksRefs = {
   chunkIds: string[];
 };
-type Feedback = {
+export type Feedback = {
   /** Optional comment for feedback. */
   comment: string;
   /** Unique feedback identifier. */
@@ -70,7 +70,7 @@ type Feedback = {
   /** Integer representation of feedback given (-1 = negative, 1 = positive). */
   vote: number;
 };
-type Interaction = {
+export type Interaction = {
   /** Datetime when the interaction was created. */
   readonly createdAt: string;
   feedback?: Feedback;
@@ -93,7 +93,7 @@ type Interaction = {
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
  */
-type JSONPatch = {
+export type JSONPatch = {
   /** The operation to be performed. */
   op: "replace" | "add";
   /** A JSON Pointer. */
@@ -135,8 +135,8 @@ type JSONPatch = {
  *   }
  * ]
  */
-type JSONPatchArray = JSONPatch[];
-type Message = {
+export type JSONPatchArray = JSONPatch[];
+export type Message = {
   /** Message content. */
   content: string;
   /** Datetime when the interaction was created. */
@@ -147,7 +147,7 @@ type Message = {
   /** List of sources used to generate AI messages (interactions). */
   sources: MessageSource[];
 };
-type MessageSource = {
+export type MessageSource = {
   /** List of Chunks used for "AI" generated messages. */
   chunks: MessageSourceChunk[];
   /** Reference to DataSource used for "AI" generated messages. */
@@ -161,13 +161,13 @@ type MessageSource = {
   /** Path to the document used. */
   source: string;
 };
-type MessageSourceChunk = {
+export type MessageSourceChunk = {
   /** Chunk unique identifier for "AI" generated message source. */
   chunkId: string;
   /** Chunk text for "AI" generated message source. */
   text?: string;
 };
-type Starter = {
+export type Starter = {
   /** Optional context collected from curated meant to be leveraged by LLM-based question recommendation system. */
   additionalContext: string;
   /** Datetime when the starter was created. */
@@ -182,7 +182,7 @@ type Starter = {
   /** Datetime when the starter was updated. */
   readonly updatedAt: string;
 };
-type Thread = {
+export type Thread = {
   /** Datetime when the thread was created. */
   readonly createdAt: string;
   /** Datetime when the thread was deleted. */
@@ -202,7 +202,7 @@ type Thread = {
   /** If the thread should respond in the user's preferred language. */
   useUserPreferredLanguage: boolean;
 };
-type ThreadWithMessages = {
+export type ThreadWithMessages = {
   /** Datetime when the thread was created. */
   readonly createdAt: string;
   /** Datetime when the thread was deleted. */
@@ -224,12 +224,12 @@ type ThreadWithMessages = {
   /** If the thread should respond in the user's preferred language. */
   useUserPreferredLanguage: boolean;
 };
-type AssistantsResult = {
+export type AssistantsResult = {
   data: Assistant[];
   links?: PageLinks;
   meta?: ResultMeta;
 };
-type Chunk = {
+export type Chunk = {
   /** Metadata about the chunk */
   chunkMeta: KbChunkMeta;
   /** search method for the chunk, e.g. `semantic search`, `keyword search` or `semantic and keyword search` */
@@ -241,7 +241,7 @@ type Chunk = {
   /** Score from keyword search */
   tfidfScore?: number;
 };
-type CreateAssistant = {
+export type CreateAssistant = {
   /** freeform JSON to allow custom customization options. */
   customProperties: unknown;
   /** Default prompt type for the assistant. */
@@ -266,7 +266,7 @@ type CreateAssistant = {
   /** Initial message in the chat conversation. */
   welcomeMessage: string;
 };
-type CreateAssistantWithAvatar = {
+export type CreateAssistantWithAvatar = {
   /** user uploaded avatar, filetype must be png */
   avatar?: string;
   /** freeform JSON to allow custom customization options. */
@@ -291,7 +291,7 @@ type CreateAssistantWithAvatar = {
   /** Initial message in the chat conversation. */
   welcomeMessage: string;
 };
-type CreateFeedback = {
+export type CreateFeedback = {
   /** Optional comment for feedback. */
   comment?: string;
   /** Reason for feedback. */
@@ -299,7 +299,7 @@ type CreateFeedback = {
   /** Integer representation of feedback given (-1 = negative, 1 = positive). */
   vote: number;
 };
-type CreateInteraction = {
+export type CreateInteraction = {
   /** Indicator the system marked request as suspicious. */
   rejected?: boolean;
   /** Rejection reason for a question:
@@ -314,11 +314,11 @@ type CreateInteraction = {
   /** List of sources used to generate AI messages (interactions). */
   sources: MessageSource[];
 };
-type CreateReview = {
+export type CreateReview = {
   /** Review status. */
   reviewStatus: string;
 };
-type CreateStarter = {
+export type CreateStarter = {
   /** Optional context collected from curated meant to be leveraged by LLM-based question recommendation system. */
   additionalContext?: string;
   /** List of followups. */
@@ -327,7 +327,7 @@ type CreateStarter = {
   question: string;
   recommendedAnswer?: RecommendedAnswer;
 };
-type CreateThread = {
+export type CreateThread = {
   /** Datetime when the thread was created. */
   readonly createdAt?: string;
   /** The name of the thread. */
@@ -337,11 +337,11 @@ type CreateThread = {
   /** Whether the thread should use the user's preferred language. */
   useUserPreferredLanguage?: boolean;
 };
-type ErrorResponse = {
+export type ErrorResponse = {
   errors?: ErrorResponseCode[];
   traceId?: string;
 };
-type ErrorResponseCode = {
+export type ErrorResponseCode = {
   /** Custom error codes
    * * AE-1 - Internal processing error
    * * AE-2 - Incorrect request
@@ -354,12 +354,12 @@ type ErrorResponseCode = {
   detail?: string;
   title?: string;
 };
-type ErrorResponseCodeCopy = {
+export type ErrorResponseCodeCopy = {
   code?: string;
   detail?: string;
   title?: string;
 };
-type ErrorResponseCopy = {
+export type ErrorResponseCopy = {
   errors?: ErrorResponseCodeCopy[];
   traceId?: string;
 };
@@ -374,8 +374,8 @@ type ErrorResponseCopy = {
  *   }
  * ]
  */
-type FeedbackPatchArray = JSONPatch[];
-type FeedbackSummary = {
+export type FeedbackPatchArray = JSONPatch[];
+export type FeedbackSummary = {
   /** Amount of dislikes for a thread or an assistant. */
   dislikes: number;
   /** Count of answers which users marked as "inaccurate". */
@@ -397,7 +397,7 @@ type FeedbackSummary = {
   /** Count of answers which users marked as "unhelpful". */
   unhelpful?: number;
 };
-type Followup = {
+export type Followup = {
   /** Optional context collected from curated meant to be leveraged by LLM-based question recommendation system. */
   additionalContext: string;
   /** Unique identifier of the Followup. */
@@ -406,7 +406,7 @@ type Followup = {
   question: string;
   recommendedAnswer: RecommendedAnswer;
 };
-type InteractionsResult = {
+export type InteractionsResult = {
   data: Interaction[];
   links?: PageLinks;
   meta?: ResultMeta;
@@ -414,7 +414,7 @@ type InteractionsResult = {
 /**
  * Metadata about the chunk
  */
-type KbChunkMeta = {
+export type KbChunkMeta = {
   /** chunkId */
   chunkId: string;
   /** datasourceId of chunk */
@@ -426,15 +426,15 @@ type KbChunkMeta = {
   /** source of chunk */
   source: string;
 };
-type PageLink = {
+export type PageLink = {
   href?: string;
 };
-type PageLinks = {
+export type PageLinks = {
   next?: PageLink;
   prev?: PageLink;
   self?: PageLink;
 };
-type PromptInput = {
+export type PromptInput = {
   input?: {
     /** Returns text from chunks in sources output. Default value is false. */
     includeText?: boolean;
@@ -444,13 +444,13 @@ type PromptInput = {
     promptType?: "thread";
   };
 };
-type PromptOutput = {
+export type PromptOutput = {
   /** Assistant's response to the prompt */
   output?: string;
   /** List of sources used to generate AI messages */
   sources?: Source[];
 };
-type PromptOutputInvoke = {
+export type PromptOutputInvoke = {
   /** Assistant's response to the prompt */
   output?: string;
   /** Question asked by the user for assistant to answer */
@@ -458,7 +458,7 @@ type PromptOutputInvoke = {
   /** List of sources used to generate AI messages */
   sources?: Source[];
 };
-type RecommendedAnswer = {
+export type RecommendedAnswer = {
   /** Starter answer content. */
   content: string;
   /** Answer type of content. */
@@ -472,11 +472,11 @@ type RecommendedAnswer = {
  * @example
  * 1
  */
-type RejectionReason = 1 | 2 | 3;
-type ResultMeta = {
+export type RejectionReason = 1 | 2 | 3;
+export type ResultMeta = {
   countTotal?: number;
 };
-type SearchRequest = {
+export type SearchRequest = {
   /** Query text or question to search. */
   prompt: string;
   /** Search mode to use.   Allowed values: `SIMPLE` and `FULL`.   Default: `SIMPLE`. */
@@ -484,11 +484,11 @@ type SearchRequest = {
   /** Number of chunks to return in results. */
   topN?: number;
 };
-type SearchResponse = {
+export type SearchResponse = {
   /** Retrieved document chunks */
   chunks: Chunk[];
 };
-type Source = {
+export type Source = {
   /** List of Chunks used for "AI" generated messages */
   chunks?: unknown[];
   /** reference to DataSource used for "AI" generated messages */
@@ -500,10 +500,10 @@ type Source = {
   /** path to the document used */
   source?: string;
 };
-type SourcesPlaintext = {
+export type SourcesPlaintext = {
   textByChunkId?: unknown;
 };
-type StartersResult = {
+export type StartersResult = {
   data: Starter[];
   links?: PageLinks;
   meta?: ResultMeta;
@@ -519,8 +519,8 @@ type StartersResult = {
  *   }
  * ]
  */
-type ThreadPatchArray = JSONPatch[];
-type ThreadsResult = {
+export type ThreadPatchArray = JSONPatch[];
+export type ThreadsResult = {
   data: Thread[];
   links?: PageLinks;
   meta?: ResultMeta;
@@ -531,7 +531,7 @@ type ThreadsResult = {
  * @param query an object with query parameters
  * @throws GetAssistantsHttpError
  */
-declare function getAssistants(query: {
+export declare function getAssistants(query: {
   /** @deprecated
    * Optional parameter to request total count for query. */
   countTotal?: boolean;
@@ -546,14 +546,14 @@ declare function getAssistants(query: {
   /** Optional parameter to filter assistants by space ID. */
   spaceId?: string;
 }, options?: ApiCallOptions): Promise<GetAssistantsHttpResponse>;
-type GetAssistantsHttpResponse = {
+export type GetAssistantsHttpResponse = {
   data: AssistantsResult;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetAssistantsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetAssistantsHttpResponse>;
 };
-type GetAssistantsHttpError = {
+export type GetAssistantsHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403;
@@ -564,13 +564,13 @@ type GetAssistantsHttpError = {
  * @param body an object with the body content
  * @throws CreateAssistantHttpError
  */
-declare function createAssistant(body: CreateAssistant, options?: ApiCallOptions): Promise<CreateAssistantHttpResponse>;
-type CreateAssistantHttpResponse = {
+export declare function createAssistant(body: CreateAssistant, options?: ApiCallOptions): Promise<CreateAssistantHttpResponse>;
+export type CreateAssistantHttpResponse = {
   data: Assistant;
   headers: Headers;
   status: 201;
 };
-type CreateAssistantHttpError = {
+export type CreateAssistantHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403;
@@ -582,13 +582,13 @@ type CreateAssistantHttpError = {
  * @param body an object with the body content
  * @throws SearchAssistantHttpError
  */
-declare function searchAssistant(assistantId: string, body: SearchRequest, options?: ApiCallOptions): Promise<SearchAssistantHttpResponse>;
-type SearchAssistantHttpResponse = {
+export declare function searchAssistant(assistantId: string, body: SearchRequest, options?: ApiCallOptions): Promise<SearchAssistantHttpResponse>;
+export type SearchAssistantHttpResponse = {
   data: SearchResponse;
   headers: Headers;
   status: 200;
 };
-type SearchAssistantHttpError = {
+export type SearchAssistantHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 405 | 500;
@@ -599,13 +599,13 @@ type SearchAssistantHttpError = {
  * @param assistantId The ID of the assistant from which to retrieve feedback summary.
  * @throws GetAssistantFeedbackHttpError
  */
-declare function getAssistantFeedback(assistantId: string, options?: ApiCallOptions): Promise<GetAssistantFeedbackHttpResponse>;
-type GetAssistantFeedbackHttpResponse = {
+export declare function getAssistantFeedback(assistantId: string, options?: ApiCallOptions): Promise<GetAssistantFeedbackHttpResponse>;
+export type GetAssistantFeedbackHttpResponse = {
   data: FeedbackSummary;
   headers: Headers;
   status: 200;
 };
-type GetAssistantFeedbackHttpError = {
+export type GetAssistantFeedbackHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -617,13 +617,13 @@ type GetAssistantFeedbackHttpError = {
  * @param body an object with the body content
  * @throws GetAssistantSourcesHttpError
  */
-declare function getAssistantSources(assistantId: string, body: ChunksRefs, options?: ApiCallOptions): Promise<GetAssistantSourcesHttpResponse>;
-type GetAssistantSourcesHttpResponse = {
+export declare function getAssistantSources(assistantId: string, body: ChunksRefs, options?: ApiCallOptions): Promise<GetAssistantSourcesHttpResponse>;
+export type GetAssistantSourcesHttpResponse = {
   data: SourcesPlaintext;
   headers: Headers;
   status: 202;
 };
-type GetAssistantSourcesHttpError = {
+export type GetAssistantSourcesHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -635,7 +635,7 @@ type GetAssistantSourcesHttpError = {
  * @param query an object with query parameters
  * @throws GetAssistantStartersHttpError
  */
-declare function getAssistantStarters(assistantId: string, query: {
+export declare function getAssistantStarters(assistantId: string, query: {
   /** The number of starters to get. */
   limit?: number;
   /** Optional parameter to request the next page. */
@@ -645,14 +645,14 @@ declare function getAssistantStarters(assistantId: string, query: {
   /** Optional resource field name to sort on, case insensitive, e.g. `name`. Can be prefixed with `-` to set descending order; defaults to ascending. */
   sort?: "QUESTION" | "-QUESTION" | "CREATED" | "-CREATED" | "UPDATED" | "-UPDATED";
 }, options?: ApiCallOptions): Promise<GetAssistantStartersHttpResponse>;
-type GetAssistantStartersHttpResponse = {
+export type GetAssistantStartersHttpResponse = {
   data: StartersResult;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetAssistantStartersHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetAssistantStartersHttpResponse>;
 };
-type GetAssistantStartersHttpError = {
+export type GetAssistantStartersHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -664,13 +664,13 @@ type GetAssistantStartersHttpError = {
  * @param body an object with the body content
  * @throws CreateAssistantStarterHttpError
  */
-declare function createAssistantStarter(assistantId: string, body: CreateStarter, options?: ApiCallOptions): Promise<CreateAssistantStarterHttpResponse>;
-type CreateAssistantStarterHttpResponse = {
+export declare function createAssistantStarter(assistantId: string, body: CreateStarter, options?: ApiCallOptions): Promise<CreateAssistantStarterHttpResponse>;
+export type CreateAssistantStarterHttpResponse = {
   data: Starter;
   headers: Headers;
   status: 201;
 };
-type CreateAssistantStarterHttpError = {
+export type CreateAssistantStarterHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -682,13 +682,13 @@ type CreateAssistantStarterHttpError = {
  * @param starterId The ID of the starter to delete.
  * @throws DeleteAssistantStarterHttpError
  */
-declare function deleteAssistantStarter(assistantId: string, starterId: string, options?: ApiCallOptions): Promise<DeleteAssistantStarterHttpResponse>;
-type DeleteAssistantStarterHttpResponse = {
+export declare function deleteAssistantStarter(assistantId: string, starterId: string, options?: ApiCallOptions): Promise<DeleteAssistantStarterHttpResponse>;
+export type DeleteAssistantStarterHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteAssistantStarterHttpError = {
+export type DeleteAssistantStarterHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -700,13 +700,13 @@ type DeleteAssistantStarterHttpError = {
  * @param starterId The ID of the starter to retrieve.
  * @throws GetAssistantStarterHttpError
  */
-declare function getAssistantStarter(assistantId: string, starterId: string, options?: ApiCallOptions): Promise<GetAssistantStarterHttpResponse>;
-type GetAssistantStarterHttpResponse = {
+export declare function getAssistantStarter(assistantId: string, starterId: string, options?: ApiCallOptions): Promise<GetAssistantStarterHttpResponse>;
+export type GetAssistantStarterHttpResponse = {
   data: Starter;
   headers: Headers;
   status: 200;
 };
-type GetAssistantStarterHttpError = {
+export type GetAssistantStarterHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -719,13 +719,13 @@ type GetAssistantStarterHttpError = {
  * @param body an object with the body content
  * @throws UpdateAssistantStarterHttpError
  */
-declare function updateAssistantStarter(assistantId: string, starterId: string, body: Starter, options?: ApiCallOptions): Promise<UpdateAssistantStarterHttpResponse>;
-type UpdateAssistantStarterHttpResponse = {
+export declare function updateAssistantStarter(assistantId: string, starterId: string, body: Starter, options?: ApiCallOptions): Promise<UpdateAssistantStarterHttpResponse>;
+export type UpdateAssistantStarterHttpResponse = {
   data: Starter;
   headers: Headers;
   status: 200;
 };
-type UpdateAssistantStarterHttpError = {
+export type UpdateAssistantStarterHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -738,13 +738,13 @@ type UpdateAssistantStarterHttpError = {
  * @param followupId The ID of the Followup to delete.
  * @throws DeleteAssistantStarterFollowupHttpError
  */
-declare function deleteAssistantStarterFollowup(assistantId: string, starterId: string, followupId: string, options?: ApiCallOptions): Promise<DeleteAssistantStarterFollowupHttpResponse>;
-type DeleteAssistantStarterFollowupHttpResponse = {
+export declare function deleteAssistantStarterFollowup(assistantId: string, starterId: string, followupId: string, options?: ApiCallOptions): Promise<DeleteAssistantStarterFollowupHttpResponse>;
+export type DeleteAssistantStarterFollowupHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteAssistantStarterFollowupHttpError = {
+export type DeleteAssistantStarterFollowupHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -758,13 +758,13 @@ type DeleteAssistantStarterFollowupHttpError = {
  * @param body an object with the body content
  * @throws UpdateAssistantStarterFollowupHttpError
  */
-declare function updateAssistantStarterFollowup(assistantId: string, starterId: string, followupId: string, body: Followup, options?: ApiCallOptions): Promise<UpdateAssistantStarterFollowupHttpResponse>;
-type UpdateAssistantStarterFollowupHttpResponse = {
+export declare function updateAssistantStarterFollowup(assistantId: string, starterId: string, followupId: string, body: Followup, options?: ApiCallOptions): Promise<UpdateAssistantStarterFollowupHttpResponse>;
+export type UpdateAssistantStarterFollowupHttpResponse = {
   data: Starter;
   headers: Headers;
   status: 200;
 };
-type UpdateAssistantStarterFollowupHttpError = {
+export type UpdateAssistantStarterFollowupHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -776,7 +776,7 @@ type UpdateAssistantStarterFollowupHttpError = {
  * @param query an object with query parameters
  * @throws GetAssistantThreadsHttpError
  */
-declare function getAssistantThreads(assistantId: string, query: {
+export declare function getAssistantThreads(assistantId: string, query: {
   /** Optional parameter to filter threads. */
   filter?: string;
   /** The number of assistants to get. */
@@ -788,14 +788,14 @@ declare function getAssistantThreads(assistantId: string, query: {
   /** Optional resource field name to sort on, case insensitive, e.g. `name`. Can be prefixed with `-` to set descending order; defaults to ascending. */
   sort?: "NAME" | "-NAME" | "CREATED" | "-CREATED" | "UPDATED" | "-UPDATED";
 }, options?: ApiCallOptions): Promise<GetAssistantThreadsHttpResponse>;
-type GetAssistantThreadsHttpResponse = {
+export type GetAssistantThreadsHttpResponse = {
   data: ThreadsResult;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetAssistantThreadsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetAssistantThreadsHttpResponse>;
 };
-type GetAssistantThreadsHttpError = {
+export type GetAssistantThreadsHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -807,13 +807,13 @@ type GetAssistantThreadsHttpError = {
  * @param body an object with the body content
  * @throws CreateAssistantThreadHttpError
  */
-declare function createAssistantThread(assistantId: string, body: CreateThread, options?: ApiCallOptions): Promise<CreateAssistantThreadHttpResponse>;
-type CreateAssistantThreadHttpResponse = {
+export declare function createAssistantThread(assistantId: string, body: CreateThread, options?: ApiCallOptions): Promise<CreateAssistantThreadHttpResponse>;
+export type CreateAssistantThreadHttpResponse = {
   data: Thread;
   headers: Headers;
   status: 201;
 };
-type CreateAssistantThreadHttpError = {
+export type CreateAssistantThreadHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -826,13 +826,13 @@ type CreateAssistantThreadHttpError = {
  * @param body an object with the body content
  * @throws InvokeAssistantThreadHttpError
  */
-declare function invokeAssistantThread(assistantId: string, threadId: string, body: PromptInput, options?: ApiCallOptions): Promise<InvokeAssistantThreadHttpResponse>;
-type InvokeAssistantThreadHttpResponse = {
+export declare function invokeAssistantThread(assistantId: string, threadId: string, body: PromptInput, options?: ApiCallOptions): Promise<InvokeAssistantThreadHttpResponse>;
+export type InvokeAssistantThreadHttpResponse = {
   data: PromptOutputInvoke;
   headers: Headers;
   status: 200;
 };
-type InvokeAssistantThreadHttpError = {
+export type InvokeAssistantThreadHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 500;
@@ -845,13 +845,13 @@ type InvokeAssistantThreadHttpError = {
  * @param body an object with the body content
  * @throws StreamAssistantThreadHttpError
  */
-declare function streamAssistantThread(assistantId: string, threadId: string, body: PromptInput, options?: ApiCallOptions): Promise<StreamAssistantThreadHttpResponse>;
-type StreamAssistantThreadHttpResponse = {
+export declare function streamAssistantThread(assistantId: string, threadId: string, body: PromptInput, options?: ApiCallOptions): Promise<StreamAssistantThreadHttpResponse>;
+export type StreamAssistantThreadHttpResponse = {
   data: PromptOutput;
   headers: Headers;
   status: 200;
 };
-type StreamAssistantThreadHttpError = {
+export type StreamAssistantThreadHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 405 | 500;
@@ -864,7 +864,7 @@ type StreamAssistantThreadHttpError = {
  * @param query an object with query parameters
  * @throws GetAssistantThreadInteractionsHttpError
  */
-declare function getAssistantThreadInteractions(assistantId: string, threadId: string, query: {
+export declare function getAssistantThreadInteractions(assistantId: string, threadId: string, query: {
   /** The number of feedback to get. */
   limit?: number;
   /** Optional parameter to request the next page. */
@@ -874,14 +874,14 @@ declare function getAssistantThreadInteractions(assistantId: string, threadId: s
   /** Optional resource field name to sort on, case insensitive, e.g. `created`. Can be prefixed with `-` to set descending order; defaults to ascending. */
   sort?: "CREATED" | "-CREATED" | "UPDATED" | "-UPDATED";
 }, options?: ApiCallOptions): Promise<GetAssistantThreadInteractionsHttpResponse>;
-type GetAssistantThreadInteractionsHttpResponse = {
+export type GetAssistantThreadInteractionsHttpResponse = {
   data: InteractionsResult;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetAssistantThreadInteractionsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetAssistantThreadInteractionsHttpResponse>;
 };
-type GetAssistantThreadInteractionsHttpError = {
+export type GetAssistantThreadInteractionsHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -894,13 +894,13 @@ type GetAssistantThreadInteractionsHttpError = {
  * @param body an object with the body content
  * @throws CreateAssistantThreadInteractionHttpError
  */
-declare function createAssistantThreadInteraction(assistantId: string, threadId: string, body: CreateInteraction, options?: ApiCallOptions): Promise<CreateAssistantThreadInteractionHttpResponse>;
-type CreateAssistantThreadInteractionHttpResponse = {
+export declare function createAssistantThreadInteraction(assistantId: string, threadId: string, body: CreateInteraction, options?: ApiCallOptions): Promise<CreateAssistantThreadInteractionHttpResponse>;
+export type CreateAssistantThreadInteractionHttpResponse = {
   data: Interaction;
   headers: Headers;
   status: 201;
 };
-type CreateAssistantThreadInteractionHttpError = {
+export type CreateAssistantThreadInteractionHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -913,13 +913,13 @@ type CreateAssistantThreadInteractionHttpError = {
  * @param interactionId The ID of the interaction to delete.
  * @throws DeleteAssistantThreadInteractionHttpError
  */
-declare function deleteAssistantThreadInteraction(assistantId: string, threadId: string, interactionId: string, options?: ApiCallOptions): Promise<DeleteAssistantThreadInteractionHttpResponse>;
-type DeleteAssistantThreadInteractionHttpResponse = {
+export declare function deleteAssistantThreadInteraction(assistantId: string, threadId: string, interactionId: string, options?: ApiCallOptions): Promise<DeleteAssistantThreadInteractionHttpResponse>;
+export type DeleteAssistantThreadInteractionHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteAssistantThreadInteractionHttpError = {
+export type DeleteAssistantThreadInteractionHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -932,13 +932,13 @@ type DeleteAssistantThreadInteractionHttpError = {
  * @param interactionId The ID of the interaction to retrieve.
  * @throws GetAssistantThreadInteractionHttpError
  */
-declare function getAssistantThreadInteraction(assistantId: string, threadId: string, interactionId: string, options?: ApiCallOptions): Promise<GetAssistantThreadInteractionHttpResponse>;
-type GetAssistantThreadInteractionHttpResponse = {
+export declare function getAssistantThreadInteraction(assistantId: string, threadId: string, interactionId: string, options?: ApiCallOptions): Promise<GetAssistantThreadInteractionHttpResponse>;
+export type GetAssistantThreadInteractionHttpResponse = {
   data: Interaction;
   headers: Headers;
   status: 200;
 };
-type GetAssistantThreadInteractionHttpError = {
+export type GetAssistantThreadInteractionHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -952,13 +952,13 @@ type GetAssistantThreadInteractionHttpError = {
  * @param body an object with the body content
  * @throws CreateAssistantThreadInteractionFeedbackHttpError
  */
-declare function createAssistantThreadInteractionFeedback(assistantId: string, threadId: string, interactionId: string, body: CreateFeedback, options?: ApiCallOptions): Promise<CreateAssistantThreadInteractionFeedbackHttpResponse>;
-type CreateAssistantThreadInteractionFeedbackHttpResponse = {
+export declare function createAssistantThreadInteractionFeedback(assistantId: string, threadId: string, interactionId: string, body: CreateFeedback, options?: ApiCallOptions): Promise<CreateAssistantThreadInteractionFeedbackHttpResponse>;
+export type CreateAssistantThreadInteractionFeedbackHttpResponse = {
   data: Interaction;
   headers: Headers;
   status: 201;
 };
-type CreateAssistantThreadInteractionFeedbackHttpError = {
+export type CreateAssistantThreadInteractionFeedbackHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -973,13 +973,13 @@ type CreateAssistantThreadInteractionFeedbackHttpError = {
  * @param body an object with the body content
  * @throws PatchAssistantThreadInteractionFeedbackHttpError
  */
-declare function patchAssistantThreadInteractionFeedback(assistantId: string, threadId: string, interactionId: string, feedbackId: string, body: FeedbackPatchArray, options?: ApiCallOptions): Promise<PatchAssistantThreadInteractionFeedbackHttpResponse>;
-type PatchAssistantThreadInteractionFeedbackHttpResponse = {
+export declare function patchAssistantThreadInteractionFeedback(assistantId: string, threadId: string, interactionId: string, feedbackId: string, body: FeedbackPatchArray, options?: ApiCallOptions): Promise<PatchAssistantThreadInteractionFeedbackHttpResponse>;
+export type PatchAssistantThreadInteractionFeedbackHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchAssistantThreadInteractionFeedbackHttpError = {
+export type PatchAssistantThreadInteractionFeedbackHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -993,13 +993,13 @@ type PatchAssistantThreadInteractionFeedbackHttpError = {
  * @param body an object with the body content
  * @throws CreateAssistantThreadInteractionReviewHttpError
  */
-declare function createAssistantThreadInteractionReview(assistantId: string, threadId: string, interactionId: string, body: CreateReview, options?: ApiCallOptions): Promise<CreateAssistantThreadInteractionReviewHttpResponse>;
-type CreateAssistantThreadInteractionReviewHttpResponse = {
+export declare function createAssistantThreadInteractionReview(assistantId: string, threadId: string, interactionId: string, body: CreateReview, options?: ApiCallOptions): Promise<CreateAssistantThreadInteractionReviewHttpResponse>;
+export type CreateAssistantThreadInteractionReviewHttpResponse = {
   data: Interaction;
   headers: Headers;
   status: 201;
 };
-type CreateAssistantThreadInteractionReviewHttpError = {
+export type CreateAssistantThreadInteractionReviewHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -1011,13 +1011,13 @@ type CreateAssistantThreadInteractionReviewHttpError = {
  * @param threadid The ID of the thread to retrieve.
  * @throws DeleteAssistantThreadHttpError
  */
-declare function deleteAssistantThread(assistantid: string, threadid: string, options?: ApiCallOptions): Promise<DeleteAssistantThreadHttpResponse>;
-type DeleteAssistantThreadHttpResponse = {
+export declare function deleteAssistantThread(assistantid: string, threadid: string, options?: ApiCallOptions): Promise<DeleteAssistantThreadHttpResponse>;
+export type DeleteAssistantThreadHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteAssistantThreadHttpError = {
+export type DeleteAssistantThreadHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -1029,13 +1029,13 @@ type DeleteAssistantThreadHttpError = {
  * @param threadid The ID of the thread to retrieve.
  * @throws GetAssistantThreadHttpError
  */
-declare function getAssistantThread(assistantid: string, threadid: string, options?: ApiCallOptions): Promise<GetAssistantThreadHttpResponse>;
-type GetAssistantThreadHttpResponse = {
+export declare function getAssistantThread(assistantid: string, threadid: string, options?: ApiCallOptions): Promise<GetAssistantThreadHttpResponse>;
+export type GetAssistantThreadHttpResponse = {
   data: ThreadWithMessages;
   headers: Headers;
   status: 200;
 };
-type GetAssistantThreadHttpError = {
+export type GetAssistantThreadHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -1048,13 +1048,13 @@ type GetAssistantThreadHttpError = {
  * @param body an object with the body content
  * @throws PatchAssistantThreadHttpError
  */
-declare function patchAssistantThread(assistantid: string, threadid: string, body: ThreadPatchArray, options?: ApiCallOptions): Promise<PatchAssistantThreadHttpResponse>;
-type PatchAssistantThreadHttpResponse = {
+export declare function patchAssistantThread(assistantid: string, threadid: string, body: ThreadPatchArray, options?: ApiCallOptions): Promise<PatchAssistantThreadHttpResponse>;
+export type PatchAssistantThreadHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchAssistantThreadHttpError = {
+export type PatchAssistantThreadHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429;
@@ -1065,13 +1065,13 @@ type PatchAssistantThreadHttpError = {
  * @param id The ID of the assistant to delete.
  * @throws DeleteAssistantHttpError
  */
-declare function deleteAssistant(id: string, options?: ApiCallOptions): Promise<DeleteAssistantHttpResponse>;
-type DeleteAssistantHttpResponse = {
+export declare function deleteAssistant(id: string, options?: ApiCallOptions): Promise<DeleteAssistantHttpResponse>;
+export type DeleteAssistantHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteAssistantHttpError = {
+export type DeleteAssistantHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -1082,13 +1082,13 @@ type DeleteAssistantHttpError = {
  * @param id The ID of the assistant to retrieve.
  * @throws GetAssistantHttpError
  */
-declare function getAssistant(id: string, options?: ApiCallOptions): Promise<GetAssistantHttpResponse>;
-type GetAssistantHttpResponse = {
+export declare function getAssistant(id: string, options?: ApiCallOptions): Promise<GetAssistantHttpResponse>;
+export type GetAssistantHttpResponse = {
   data: Assistant;
   headers: Headers;
   status: 200;
 };
-type GetAssistantHttpError = {
+export type GetAssistantHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -1100,13 +1100,13 @@ type GetAssistantHttpError = {
  * @param body an object with the body content
  * @throws PatchAssistantHttpError
  */
-declare function patchAssistant(id: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchAssistantHttpResponse>;
-type PatchAssistantHttpResponse = {
+export declare function patchAssistant(id: string, body: JSONPatchArray, options?: ApiCallOptions): Promise<PatchAssistantHttpResponse>;
+export type PatchAssistantHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchAssistantHttpError = {
+export type PatchAssistantHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429;
@@ -1114,8 +1114,8 @@ type PatchAssistantHttpError = {
 /**
  * Clears the cache for assistants api requests.
  */
-declare function clearCache(): void;
-type AssistantsAPI = {
+export declare function clearCache(): void;
+export type AssistantsAPI = {
   /**
    * Retrieves the list of assistants. The result can be filtered, sorted, and paginated.
    *
@@ -1371,4 +1371,4 @@ type AssistantsAPI = {
  */
 declare const assistantsExport: AssistantsAPI;
 //#endregion
-export { Assistant, AssistantsAPI, AssistantsResult, Chunk, ChunksRefs, CreateAssistant, CreateAssistantHttpError, CreateAssistantHttpResponse, CreateAssistantStarterHttpError, CreateAssistantStarterHttpResponse, CreateAssistantThreadHttpError, CreateAssistantThreadHttpResponse, CreateAssistantThreadInteractionFeedbackHttpError, CreateAssistantThreadInteractionFeedbackHttpResponse, CreateAssistantThreadInteractionHttpError, CreateAssistantThreadInteractionHttpResponse, CreateAssistantThreadInteractionReviewHttpError, CreateAssistantThreadInteractionReviewHttpResponse, CreateAssistantWithAvatar, CreateFeedback, CreateInteraction, CreateReview, CreateStarter, CreateThread, DeleteAssistantHttpError, DeleteAssistantHttpResponse, DeleteAssistantStarterFollowupHttpError, DeleteAssistantStarterFollowupHttpResponse, DeleteAssistantStarterHttpError, DeleteAssistantStarterHttpResponse, DeleteAssistantThreadHttpError, DeleteAssistantThreadHttpResponse, DeleteAssistantThreadInteractionHttpError, DeleteAssistantThreadInteractionHttpResponse, ErrorResponse, ErrorResponseCode, ErrorResponseCodeCopy, ErrorResponseCopy, Feedback, FeedbackPatchArray, FeedbackSummary, Followup, GetAssistantFeedbackHttpError, GetAssistantFeedbackHttpResponse, GetAssistantHttpError, GetAssistantHttpResponse, GetAssistantSourcesHttpError, GetAssistantSourcesHttpResponse, GetAssistantStarterHttpError, GetAssistantStarterHttpResponse, GetAssistantStartersHttpError, GetAssistantStartersHttpResponse, GetAssistantThreadHttpError, GetAssistantThreadHttpResponse, GetAssistantThreadInteractionHttpError, GetAssistantThreadInteractionHttpResponse, GetAssistantThreadInteractionsHttpError, GetAssistantThreadInteractionsHttpResponse, GetAssistantThreadsHttpError, GetAssistantThreadsHttpResponse, GetAssistantsHttpError, GetAssistantsHttpResponse, Interaction, InteractionsResult, InvokeAssistantThreadHttpError, InvokeAssistantThreadHttpResponse, JSONPatch, JSONPatchArray, KbChunkMeta, Message, MessageSource, MessageSourceChunk, PageLink, PageLinks, PatchAssistantHttpError, PatchAssistantHttpResponse, PatchAssistantThreadHttpError, PatchAssistantThreadHttpResponse, PatchAssistantThreadInteractionFeedbackHttpError, PatchAssistantThreadInteractionFeedbackHttpResponse, PromptInput, PromptOutput, PromptOutputInvoke, RecommendedAnswer, RejectionReason, ResultMeta, SearchAssistantHttpError, SearchAssistantHttpResponse, SearchRequest, SearchResponse, Source, SourcesPlaintext, Starter, StartersResult, StreamAssistantThreadHttpError, StreamAssistantThreadHttpResponse, Thread, ThreadPatchArray, ThreadWithMessages, ThreadsResult, UpdateAssistantStarterFollowupHttpError, UpdateAssistantStarterFollowupHttpResponse, UpdateAssistantStarterHttpError, UpdateAssistantStarterHttpResponse, clearCache, createAssistant, createAssistantStarter, createAssistantThread, createAssistantThreadInteraction, createAssistantThreadInteractionFeedback, createAssistantThreadInteractionReview, assistantsExport as default, deleteAssistant, deleteAssistantStarter, deleteAssistantStarterFollowup, deleteAssistantThread, deleteAssistantThreadInteraction, getAssistant, getAssistantFeedback, getAssistantSources, getAssistantStarter, getAssistantStarters, getAssistantThread, getAssistantThreadInteraction, getAssistantThreadInteractions, getAssistantThreads, getAssistants, invokeAssistantThread, patchAssistant, patchAssistantThread, patchAssistantThreadInteractionFeedback, searchAssistant, streamAssistantThread, updateAssistantStarter, updateAssistantStarterFollowup };
+export { assistantsExport as default };

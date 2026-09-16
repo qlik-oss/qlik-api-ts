@@ -1,25 +1,25 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/items.d.ts
-type CollectionTypes = "private" | "public" | "publicgoverned";
-type ErrorResponseBody = {
+export type CollectionTypes = "private" | "public" | "publicgoverned";
+export type ErrorResponseBody = {
   errors?: ServiceError[];
 };
 /**
  * ListItemCollectionsResponseBody result type
  */
-type ItemsListItemCollectionsResponseBody = {
+export type ItemsListItemCollectionsResponseBody = {
   data: CollectionResultResponseBody[];
   links: CollectionsLinksResponseBody;
 };
 /**
  * ListItemsResponseBody result type
  */
-type ItemsListItemsResponseBody = {
+export type ItemsListItemsResponseBody = {
   data: ItemResultResponseBody[];
   links: ItemsLinksResponseBody;
 };
-type ItemsSettingsPatch = {
+export type ItemsSettingsPatch = {
   /** The operation to be performed. Only "replace" is supported. */
   op: "replace";
   /** Field of Settings to be patched (updated). */
@@ -27,11 +27,11 @@ type ItemsSettingsPatch = {
   /** The value to be used within the operations. */
   value: boolean;
 }[];
-type ItemsSettingsResponseBody = {
+export type ItemsSettingsResponseBody = {
   /** Decides if the usage metrics will be shown in the hub UI. */
   usageMetricsEnabled: boolean;
 };
-type ItemsUpdateItemRequestBody = {
+export type ItemsUpdateItemRequestBody = {
   description?: string;
   name?: string;
   resourceAttributes?: unknown;
@@ -51,10 +51,10 @@ type ItemsUpdateItemRequestBody = {
   /** The item thumbnail's unique identifier. This is optional for internal resources. */
   thumbnailId?: string;
 };
-type Link = {
+export type Link = {
   href?: string;
 };
-type ServiceError = {
+export type ServiceError = {
   /** Code is a unique identifier for this error class. */
   code?: string;
   /** Detail is a human-readable explanation specific to this occurrence of the problem. */
@@ -63,21 +63,21 @@ type ServiceError = {
   /** Title is the name of this class of errors. */
   title?: string;
 };
-type CollectionLinksResponseBody = {
+export type CollectionLinksResponseBody = {
   items?: Link;
   self?: Link;
 };
 /**
  * Collection metadata and computed fields.
  */
-type CollectionMetaResponseBody = {
+export type CollectionMetaResponseBody = {
   /** Multiple items. */
   items?: ItemsResultResponseBody;
 };
 /**
  * A collection.
  */
-type CollectionResultResponseBody = {
+export type CollectionResultResponseBody = {
   /** The RFC3339 datetime when the collection was created. */
   createdAt: string;
   /** The ID of the user who created the collection. This property is only populated if the JWT contains a userId. */
@@ -101,13 +101,13 @@ type CollectionResultResponseBody = {
   /** The ID of the user who last updated the collection. This property is only populated if the JWT contains a userId. */
   updaterId?: string;
 };
-type CollectionsLinksResponseBody = {
+export type CollectionsLinksResponseBody = {
   item?: Link;
   next?: Link;
   prev?: Link;
   self?: Link;
 };
-type ItemLinksResponseBody = {
+export type ItemLinksResponseBody = {
   collections?: Link;
   open?: Link;
   qvPlugin?: Link;
@@ -117,7 +117,7 @@ type ItemLinksResponseBody = {
 /**
  * Item metadata and computed fields.
  */
-type ItemMetaResponseBody = {
+export type ItemMetaResponseBody = {
   /** The actions that the user can perform on the item. */
   actions: string[];
   /** An array of collections that the item is part of. */
@@ -130,11 +130,11 @@ type ItemMetaResponseBody = {
 /**
  * The case-sensitive string defining the item's type.
  */
-type ItemResourceTypeEnum = "app" | "qlikview" | "qvapp" | "genericlink" | "sharingservicetask" | "note" | "dataasset" | "dataset" | "automation" | "automl-experiment" | "automl-deployment" | "assistant" | "dataproduct" | "dataqualityrule" | "glossary" | "knowledgebase" | "script" | "semantictype" | "page";
+export type ItemResourceTypeEnum = "app" | "qlikview" | "qvapp" | "genericlink" | "sharingservicetask" | "note" | "dataasset" | "dataset" | "automation" | "automl-experiment" | "automl-deployment" | "assistant" | "dataproduct" | "dataqualityrule" | "glossary" | "knowledgebase" | "script" | "semantictype" | "page";
 /**
  * An item.
  */
-type ItemResultResponseBody = {
+export type ItemResultResponseBody = {
   /** The actions that the user can perform on the item. */
   actions: string[];
   /** The ID of the collections that the item has been added to. */
@@ -188,13 +188,13 @@ type ItemResultResponseBody = {
 /**
  * Holds basic information about a tag or collection.
  */
-type ItemTagResponseBody = {
+export type ItemTagResponseBody = {
   /** The ID of the tag/collection. */
   id: string;
   /** The name of the tag/collection. */
   name: string;
 };
-type ItemViewsResponseBody = {
+export type ItemViewsResponseBody = {
   /** Total number of views the resource got during the last 28 days. */
   total?: number;
   /** Trend in views over the last 4 weeks. The trend value is a float number representing a linear regression slope (the x-coefficient) calculated from the weekly unique users views in the preceding 4 weeks. */
@@ -205,7 +205,7 @@ type ItemViewsResponseBody = {
   usedBy?: number;
   week?: ItemViewsWeeksResponseBody[];
 };
-type ItemViewsWeeksResponseBody = {
+export type ItemViewsWeeksResponseBody = {
   /** The RFC3339 datetime representing the start of the referenced week. */
   start?: string;
   /** Total number of views the resource got during the referenced week. */
@@ -213,13 +213,13 @@ type ItemViewsWeeksResponseBody = {
   /** Number of unique users who viewed the resource during the referenced week. */
   unique?: number;
 };
-type ItemsLinksResponseBody = {
+export type ItemsLinksResponseBody = {
   collection?: Link;
   next?: Link;
   prev?: Link;
   self?: Link;
 };
-type ItemsResourceSizeResponseBody = {
+export type ItemsResourceSizeResponseBody = {
   /** Size of the app on disk in bytes. */
   appFile?: number;
   /** Size of the app in memory in bytes. */
@@ -228,11 +228,11 @@ type ItemsResourceSizeResponseBody = {
 /**
  * Multiple items.
  */
-type ItemsResultResponseBody = {
+export type ItemsResultResponseBody = {
   data: ItemResultResponseBody[];
   links: ItemsLinksResponseBody;
 };
-type Meta = {
+export type Meta = {
   /** Further explanation of the error */
   explain?: unknown;
   /** Is the error a server-side fault? */
@@ -245,14 +245,14 @@ type Meta = {
 /**
  * The case-sensitive string defining the space type.
  */
-type SpaceTypeEnum = "shared" | "managed" | "personal" | "data";
+export type SpaceTypeEnum = "shared" | "managed" | "personal" | "data";
 /**
  * Lists items that the user has access to.
  *
  * @param query an object with query parameters
  * @throws GetItemsHttpError
  */
-declare function getItems(query: {
+export declare function getItems(query: {
   /** The collection's unique identifier. Used to filter for items with a specific tag (collection type `public`), or collection. */
   collectionId?: string;
   /** User's unique identifier. */
@@ -297,14 +297,14 @@ declare function getItems(query: {
   /** The case-sensitive string used to filter items on space type(s). For example '?spaceType=shared,personal'. */
   spaceType?: SpaceTypeEnum;
 }, options?: ApiCallOptions): Promise<GetItemsHttpResponse>;
-type GetItemsHttpResponse = {
+export type GetItemsHttpResponse = {
   data: ItemsListItemsResponseBody;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetItemsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetItemsHttpResponse>;
 };
-type GetItemsHttpError = {
+export type GetItemsHttpError = {
   data: ErrorResponseBody;
   headers: Headers;
   status: 400 | 401 | 404 | 500;
@@ -314,13 +314,13 @@ type GetItemsHttpError = {
  *
  * @throws GetItemsSettingsHttpError
  */
-declare function getItemsSettings(options?: ApiCallOptions): Promise<GetItemsSettingsHttpResponse>;
-type GetItemsSettingsHttpResponse = {
+export declare function getItemsSettings(options?: ApiCallOptions): Promise<GetItemsSettingsHttpResponse>;
+export type GetItemsSettingsHttpResponse = {
   data: ItemsSettingsResponseBody;
   headers: Headers;
   status: 200;
 };
-type GetItemsSettingsHttpError = {
+export type GetItemsSettingsHttpError = {
   data: ErrorResponseBody;
   headers: Headers;
   status: 400 | 401 | 500;
@@ -331,13 +331,13 @@ type GetItemsSettingsHttpError = {
  * @param body an object with the body content
  * @throws PatchItemsSettingsHttpError
  */
-declare function patchItemsSettings(body: ItemsSettingsPatch, options?: ApiCallOptions): Promise<PatchItemsSettingsHttpResponse>;
-type PatchItemsSettingsHttpResponse = {
+export declare function patchItemsSettings(body: ItemsSettingsPatch, options?: ApiCallOptions): Promise<PatchItemsSettingsHttpResponse>;
+export type PatchItemsSettingsHttpResponse = {
   data: ItemsSettingsResponseBody;
   headers: Headers;
   status: 200;
 };
-type PatchItemsSettingsHttpError = {
+export type PatchItemsSettingsHttpError = {
   data: ErrorResponseBody;
   headers: Headers;
   status: 400 | 401 | 403 | 500;
@@ -348,13 +348,13 @@ type PatchItemsSettingsHttpError = {
  * @param itemId The item's unique identifier.
  * @throws DeleteItemHttpError
  */
-declare function deleteItem(itemId: string, options?: ApiCallOptions): Promise<DeleteItemHttpResponse>;
-type DeleteItemHttpResponse = {
+export declare function deleteItem(itemId: string, options?: ApiCallOptions): Promise<DeleteItemHttpResponse>;
+export type DeleteItemHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteItemHttpError = {
+export type DeleteItemHttpError = {
   data: ErrorResponseBody;
   headers: Headers;
   status: 401 | 403 | 404 | 500;
@@ -365,13 +365,13 @@ type DeleteItemHttpError = {
  * @param itemId The item's unique identifier
  * @throws GetItemHttpError
  */
-declare function getItem(itemId: string, options?: ApiCallOptions): Promise<GetItemHttpResponse>;
-type GetItemHttpResponse = {
+export declare function getItem(itemId: string, options?: ApiCallOptions): Promise<GetItemHttpResponse>;
+export type GetItemHttpResponse = {
   data: ItemResultResponseBody;
   headers: Headers;
   status: 200;
 };
-type GetItemHttpError = {
+export type GetItemHttpError = {
   data: ErrorResponseBody;
   headers: Headers;
   status: 400 | 401 | 404 | 500;
@@ -383,13 +383,13 @@ type GetItemHttpError = {
  * @param body an object with the body content
  * @throws UpdateItemHttpError
  */
-declare function updateItem(itemId: string, body: ItemsUpdateItemRequestBody, options?: ApiCallOptions): Promise<UpdateItemHttpResponse>;
-type UpdateItemHttpResponse = {
+export declare function updateItem(itemId: string, body: ItemsUpdateItemRequestBody, options?: ApiCallOptions): Promise<UpdateItemHttpResponse>;
+export type UpdateItemHttpResponse = {
   data: ItemResultResponseBody;
   headers: Headers;
   status: 200;
 };
-type UpdateItemHttpError = {
+export type UpdateItemHttpError = {
   data: ErrorResponseBody;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500;
@@ -401,7 +401,7 @@ type UpdateItemHttpError = {
  * @param query an object with query parameters
  * @throws GetItemCollectionsHttpError
  */
-declare function getItemCollections(itemId: string, query: {
+export declare function getItemCollections(itemId: string, query: {
   /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
   limit?: number;
   /** The case-sensitive string used to search for a collection by name. */
@@ -417,14 +417,14 @@ declare function getItemCollections(itemId: string, query: {
   /** The case-sensitive string used to search for a collection by type. */
   type?: CollectionTypes;
 }, options?: ApiCallOptions): Promise<GetItemCollectionsHttpResponse>;
-type GetItemCollectionsHttpResponse = {
+export type GetItemCollectionsHttpResponse = {
   data: ItemsListItemCollectionsResponseBody;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetItemCollectionsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetItemCollectionsHttpResponse>;
 };
-type GetItemCollectionsHttpError = {
+export type GetItemCollectionsHttpError = {
   data: ErrorResponseBody;
   headers: Headers;
   status: 400 | 401 | 404 | 500;
@@ -436,7 +436,7 @@ type GetItemCollectionsHttpError = {
  * @param query an object with query parameters
  * @throws GetPublishedItemsHttpError
  */
-declare function getPublishedItems(itemId: string, query: {
+export declare function getPublishedItems(itemId: string, query: {
   /** The maximum number of resources to return for a request. The limit must be an integer between 1 and 100 (inclusive). */
   limit?: number;
   /** The cursor to the next page of resources. Provide either the next or prev cursor, but not both. */
@@ -448,14 +448,14 @@ declare function getPublishedItems(itemId: string, query: {
   /** The property of a resource to sort on (default sort is +createdAt). The supported properties are createdAt, updatedAt, and name. A property must be prefixed by + or   - to indicate ascending or descending sort order respectively. */
   sort?: "+createdAt" | "-createdAt" | "+name" | "-name" | "+updatedAt" | "-updatedAt";
 }, options?: ApiCallOptions): Promise<GetPublishedItemsHttpResponse>;
-type GetPublishedItemsHttpResponse = {
+export type GetPublishedItemsHttpResponse = {
   data: ItemsListItemCollectionsResponseBody;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetPublishedItemsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetPublishedItemsHttpResponse>;
 };
-type GetPublishedItemsHttpError = {
+export type GetPublishedItemsHttpError = {
   data: ErrorResponseBody;
   headers: Headers;
   status: 400 | 401 | 404 | 500;
@@ -463,8 +463,8 @@ type GetPublishedItemsHttpError = {
 /**
  * Clears the cache for items api requests.
  */
-declare function clearCache(): void;
-type ItemsAPI = {
+export declare function clearCache(): void;
+export type ItemsAPI = {
   /**
    * Lists items that the user has access to.
    *
@@ -533,4 +533,4 @@ type ItemsAPI = {
  */
 declare const itemsExport: ItemsAPI;
 //#endregion
-export { CollectionLinksResponseBody, CollectionMetaResponseBody, CollectionResultResponseBody, CollectionTypes, CollectionsLinksResponseBody, DeleteItemHttpError, DeleteItemHttpResponse, ErrorResponseBody, GetItemCollectionsHttpError, GetItemCollectionsHttpResponse, GetItemHttpError, GetItemHttpResponse, GetItemsHttpError, GetItemsHttpResponse, GetItemsSettingsHttpError, GetItemsSettingsHttpResponse, GetPublishedItemsHttpError, GetPublishedItemsHttpResponse, ItemLinksResponseBody, ItemMetaResponseBody, ItemResourceTypeEnum, ItemResultResponseBody, ItemTagResponseBody, ItemViewsResponseBody, ItemViewsWeeksResponseBody, ItemsAPI, ItemsLinksResponseBody, ItemsListItemCollectionsResponseBody, ItemsListItemsResponseBody, ItemsResourceSizeResponseBody, ItemsResultResponseBody, ItemsSettingsPatch, ItemsSettingsResponseBody, ItemsUpdateItemRequestBody, Link, Meta, PatchItemsSettingsHttpError, PatchItemsSettingsHttpResponse, ServiceError, SpaceTypeEnum, UpdateItemHttpError, UpdateItemHttpResponse, clearCache, itemsExport as default, deleteItem, getItem, getItemCollections, getItems, getItemsSettings, getPublishedItems, patchItemsSettings, updateItem };
+export { itemsExport as default };

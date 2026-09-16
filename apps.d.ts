@@ -1,8 +1,8 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/apps.d.ts
-type Analysis = "breakdown" | "changePoint" | "comparison" | "contribution" | "correlation" | "fact" | "mutualInfo" | "rank" | "spike" | "trend" | "values";
-type AnalysisComposition = {
+export type Analysis = "breakdown" | "changePoint" | "comparison" | "contribution" | "correlation" | "fact" | "mutualInfo" | "rank" | "spike" | "trend" | "values";
+export type AnalysisComposition = {
   description?: {
     long?: string;
     short?: string;
@@ -18,7 +18,7 @@ type AnalysisComposition = {
   /** Upper and lower bounds for items of specific classification types */
   temporals?: CompositionMinMax;
 };
-type AnalysisDescriptor = {
+export type AnalysisDescriptor = {
   compositions?: AnalysisComposition[];
   id?: string;
   /** Used for period-specific analyses to indicate the defined or available calendar period must be of type autoCalendar */
@@ -30,17 +30,17 @@ type AnalysisDescriptor = {
   /** If analysis can work with master items (default is true) */
   supportsMasterItems?: boolean;
 };
-type AnalysisDescriptorResponse = {
+export type AnalysisDescriptorResponse = {
   data?: AnalysisDescriptor[];
   links?: Links;
 };
-type AnalysisDetails = {
+export type AnalysisDetails = {
   analysis?: Analysis;
   analysisGroup?: AnalysisGroup;
   title?: string;
 };
-type AnalysisGroup = "anomaly" | "brekadown" | "comparison" | "correl" | "fact" | "list" | "mutualInfo" | "rank";
-type AnalysisModelItemField = {
+export type AnalysisGroup = "anomaly" | "brekadown" | "comparison" | "correl" | "fact" | "list" | "mutualInfo" | "rank";
+export type AnalysisModelItemField = {
   /** classification defines the default role that attribute can play in an analysis */
   classifications?: Classifications;
   /** whether the field is hidden in business logic */
@@ -49,7 +49,7 @@ type AnalysisModelItemField = {
   name?: string;
   simplifiedClassifications?: SimplifiedClassifications;
 };
-type AnalysisModelItemMasterItem = {
+export type AnalysisModelItemMasterItem = {
   caption?: string;
   /** classification defines the default role that attribute can play in an analysis */
   classifications?: Classifications;
@@ -59,11 +59,11 @@ type AnalysisModelItemMasterItem = {
   libId?: string;
   simplifiedClassifications?: SimplifiedClassifications;
 };
-type AnalysisModelResponse = {
+export type AnalysisModelResponse = {
   data?: AnalysisModelResponseDetail[];
   links?: Links;
 };
-type AnalysisModelResponseDetail = {
+export type AnalysisModelResponseDetail = {
   fields?: AnalysisModelItemField[];
   /** set only if previous property is true, to indicate if the business logic passes validation */
   isDefinedLogicalModelValid?: boolean;
@@ -113,15 +113,15 @@ type AnalysisModelResponseDetail = {
  * }
  * ```
  */
-type AnalysisRecommendRequest = RecommendNaturalLangQuery | RecommendItems;
-type AnalysisRecommendationResponse = {
+export type AnalysisRecommendRequest = RecommendNaturalLangQuery | RecommendItems;
+export type AnalysisRecommendationResponse = {
   data?: AnalysisRecommendationResponseDetail[];
 };
-type AnalysisRecommendationResponseDetail = {
+export type AnalysisRecommendationResponseDetail = {
   nluInfo?: PartialNluInfo[];
   recAnalyses: RecommendedAnalysis[];
 };
-type AppAttributes = {
+export type AppAttributes = {
   /** The description of the application */
   description?: string;
   /** Set custom locale instead of the system default */
@@ -132,7 +132,7 @@ type AppAttributes = {
   spaceId?: string;
   usage?: UsageEnum;
 };
-type AppContentList = {
+export type AppContentList = {
   /** Content list items. */
   data?: AppContentListItem[];
   /** Content library name. */
@@ -140,7 +140,7 @@ type AppContentList = {
   /** Content library relative listing path. Empty in case of root listed or representing actual subpath listed. */
   subpath?: string;
 };
-type AppContentListItem = {
+export type AppContentListItem = {
   /** Unique content identifier. */
   id?: string;
   /** Unique content link. */
@@ -150,8 +150,8 @@ type AppContentListItem = {
   /** Content type. */
   type?: string;
 };
-type AppObjectGenericType = "genericObject" | "genericBookmark" | "genericMeasure" | "genericDimension" | "genericVariable";
-type AppUpdateAttributes = {
+export type AppObjectGenericType = "genericObject" | "genericBookmark" | "genericMeasure" | "genericDimension" | "genericVariable";
+export type AppUpdateAttributes = {
   /** The description of the application. */
   description?: string;
   /** The name (title) of the application. */
@@ -160,22 +160,22 @@ type AppUpdateAttributes = {
 /**
  * Chart type given to current recommendation
  */
-type ChartType = "barchart" | "combochart" | "distributionplot" | "kpi" | "linechart" | "map" | "scatterplot" | "table";
+export type ChartType = "barchart" | "combochart" | "distributionplot" | "kpi" | "linechart" | "map" | "scatterplot" | "table";
 /**
  * classification defines the default role that attribute can play in an analysis
  */
-type Classifications = ("dimension" | "measure" | "temporal" | "city" | "address" | "boolean" | "country" | "date" | "email" | "geographical" | "geoPoint" | "geoPolygon" | "hour" | "latitude" | "monetary" | "ordinal" | "percentage" | "postalCode" | "quarter" | "stateProvince" | "timestamp" | "week" | "weekDay" | "year" | "yearDay")[];
+export type Classifications = ("dimension" | "measure" | "temporal" | "city" | "address" | "boolean" | "country" | "date" | "email" | "geographical" | "geoPoint" | "geoPolygon" | "hour" | "latitude" | "monetary" | "ordinal" | "percentage" | "postalCode" | "quarter" | "stateProvince" | "timestamp" | "week" | "weekDay" | "year" | "yearDay")[];
 /**
  * Upper and lower bounds for items of specific classification types
  */
-type CompositionMinMax = {
+export type CompositionMinMax = {
   max?: number;
   min?: number;
 };
-type CreateApp = {
+export type CreateApp = {
   attributes?: AppAttributes;
 };
-type DataModelMetadata = {
+export type DataModelMetadata = {
   /** List of field descriptions. */
   fields?: FieldMetadata[];
   /** If set to true, the app has section access configured. */
@@ -190,17 +190,17 @@ type DataModelMetadata = {
   tables_profiling_data?: TableProfilingData[];
   usage?: UsageEnum;
 };
-type EngineGBSize = "0" | "40" | "60" | "80" | "120" | "160" | "200";
+export type EngineGBSize = "0" | "40" | "60" | "80" | "120" | "160" | "200";
 /**
  * Engine size override for app placement on non reload engines.
  */
-type EngineSize = {
+export type EngineSize = {
   minEngineSize?: EngineGBSize;
 };
 /**
  * An error object.
  */
-type Error = {
+export type Error = {
   /** The error code. */
   code: string;
   /** A human-readable explanation specific to this occurrence of the problem. */
@@ -217,17 +217,17 @@ type Error = {
   /** Summary of the problem. */
   title: string;
 };
-type Errors = {
+export type Errors = {
   errors?: Error[];
 };
-type EvaluatorError = {
+export type EvaluatorError = {
   errors?: {
     code?: string;
     status?: number;
     title?: string;
   }[];
 };
-type FieldAttrType = "U" | "A" | "I" | "R" | "F" | "M" | "D" | "T" | "TS" | "IV";
+export type FieldAttrType = "U" | "A" | "I" | "R" | "F" | "M" | "D" | "T" | "TS" | "IV";
 /**
  * Sets the formatting of a field.
  * The properties of _qFieldAttributes_ and the formatting mechanism are described below.
@@ -267,7 +267,7 @@ type FieldAttrType = "U" | "A" | "I" | "R" | "F" | "M" | "D" | "T" | "TS" | "IV"
  * ### Type is ASCII
  * No formatting, _qFmt_ is ignored.
  */
-type FieldAttributes = {
+export type FieldAttributes = {
   /** Defines the decimal separator.
    * Example: **.** */
   Dec?: string;
@@ -288,7 +288,7 @@ type FieldAttributes = {
    * Default is 10. */
   nDec?: number;
 };
-type FieldInTableProfilingData = {
+export type FieldInTableProfilingData = {
   /** Average of all numerical values. NaN otherwise. */
   Average?: number;
   /** Average string length of textual values. 0 otherwise. */
@@ -389,7 +389,7 @@ type FieldInTableProfilingData = {
   /** Number of zero values for numerical values */
   ZeroValues?: number;
 };
-type FieldMetadata = {
+export type FieldMetadata = {
   /** If set to true, the field has one and only one selection (not 0 and not more than 1).
    * If this property is set to true, the field cannot be cleared anymore and no more selections can be performed in that field.
    * The default value is false. */
@@ -430,12 +430,12 @@ type FieldMetadata = {
   /** Total number of field values. */
   total_count?: number;
 };
-type FieldOverride = {
+export type FieldOverride = {
   classifications?: string[];
   defaultAggregation?: string;
 };
-type FileData = BodyInit;
-type Filter = {
+export type FileData = BodyInit;
+export type Filter = {
   readonly createdAt?: string;
   /** The filter description. */
   description?: string;
@@ -453,7 +453,7 @@ type Filter = {
 /**
  * Error occured during the Filter creation.
  */
-type FilterError = {
+export type FilterError = {
   /** The unique code for the error
    *
    * - "REP-400000" Bad request. The server could not understand the request due to invalid syntax.
@@ -488,10 +488,10 @@ type FilterError = {
 /**
  * Errors occured during the Filter creation.
  */
-type FilterErrors = {
+export type FilterErrors = {
   errors: FilterError[];
 };
-type FilterField = {
+export type FilterField = {
   /** Gets the resource description. */
   description?: string;
   name: string;
@@ -500,12 +500,12 @@ type FilterField = {
   /** The filter values. */
   values?: FilterFieldValue[];
 };
-type FilterFieldValue = {
+export type FilterFieldValue = {
   valueAsNumber?: Float64;
   valueAsText?: string;
   valueType?: "string" | "number" | "evaluate" | "search";
 };
-type FilterItemPatch = {
+export type FilterItemPatch = {
   /** The filter description. */
   description?: string;
   filterV1_0?: FilterV10;
@@ -515,12 +515,12 @@ type FilterItemPatch = {
   /** The user that owns the filter, if missing the same as the request user. */
   ownerId?: string;
 };
-type FilterList = {
+export type FilterList = {
   /** a list of filters containing all the filters properties (like name,description...) except the filter definition (like FilterV1_0) */
   data: FilterListItem[];
   links: LinksResponse;
 };
-type FilterListItem = {
+export type FilterListItem = {
   readonly createdAt?: string;
   /** The filter description. */
   readonly description?: string;
@@ -577,7 +577,7 @@ type FilterListItem = {
  *   name: "Filter sample"
  * }
  */
-type FilterRequest = {
+export type FilterRequest = {
   /** The App ID. */
   appId?: string;
   /** The filter description. */
@@ -590,7 +590,7 @@ type FilterRequest = {
   /** The user that owns the filter, if missing the same as the request user. */
   ownerId?: string;
 };
-type FilterType = "REP" | "SUB";
+export type FilterType = "REP" | "SUB";
 /**
  * @example
  * {
@@ -627,23 +627,23 @@ type FilterType = "REP" | "SUB";
  *   }
  * }
  */
-type FilterV10 = {
+export type FilterV10 = {
   /** Map of fields to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and maximum number of overall field values allowed is 150000. */
   fieldsByState?: Record<string, FilterField[]>;
   /** The filter variables. */
   variables?: FilterVariable[];
 };
-type FilterVariable = {
+export type FilterVariable = {
   evaluate?: boolean;
   name: string;
   value?: string;
 };
-type FiltersCount = {
+export type FiltersCount = {
   /** The total number of filters. */
   readonly total?: number;
 };
-type Float64 = number;
-type FrequencyDistributionData = {
+export type Float64 = number;
+export type FrequencyDistributionData = {
   /** Bins edges. */
   BinsEdges?: number[];
   /** Bins frequencies. */
@@ -651,20 +651,20 @@ type FrequencyDistributionData = {
   /** Number of bins. */
   NumberOfBins?: number;
 };
-type HardwareMeta = {
+export type HardwareMeta = {
   /** Number of logical cores available. */
   logical_cores?: number;
   /** RAM available. */
   total_memory?: number;
 };
-type Href = {
+export type Href = {
   href?: string;
 };
 /**
  * Contains dynamic JSON data specified by the client.
  */
-type JsonObject = unknown;
-type LastReloadMetadata = {
+export type JsonObject = unknown;
+export type LastReloadMetadata = {
   /** Number of CPU milliseconds it took to reload the app. */
   cpu_time_spent_ms?: number;
   /** Maximum number of bytes used during full reload of the app. */
@@ -675,7 +675,7 @@ type LastReloadMetadata = {
   /** Maximum number of bytes used during reload of the app. */
   peak_memory_bytes?: number;
 };
-type LineageInfoRest = {
+export type LineageInfoRest = {
   /** A string indicating the origin of the data:
    * * [filename]: the data comes from a local file.
    * * INLINE: the data is entered inline in the load script.
@@ -689,10 +689,10 @@ type LineageInfoRest = {
   /** The LOAD and SELECT script statements from the data load script. */
   statement?: string;
 };
-type LinkResponse = {
+export type LinkResponse = {
   href?: string | null;
 };
-type Links = {
+export type Links = {
   next?: Href;
   prev?: Href;
   self?: Href;
@@ -711,26 +711,26 @@ type Links = {
  *   }
  * }
  */
-type LinksResponse = {
+export type LinksResponse = {
   next: LinkResponse;
   prev: LinkResponse;
   self: LinkResponse;
 };
-type Log = {
+export type Log = {
   /** Provides a link to download the log file. */
   log?: string;
 };
-type NavigationLink = {
+export type NavigationLink = {
   href?: string;
 };
-type NavigationLinks = {
+export type NavigationLinks = {
   next?: NavigationLink;
   prev?: NavigationLink;
 };
 /**
  * Application attributes and user privileges.
  */
-type NxApp = {
+export type NxApp = {
   /** App attributes. This structure can also contain extra user-defined attributes. */
   attributes?: NxAttributes;
   /** Object create privileges. Hints to the client what type of objects the user is allowed to create. */
@@ -752,7 +752,7 @@ type NxApp = {
    * * change_space */
   privileges?: string[];
 };
-type NxAppCreatePrivileges = {
+export type NxAppCreatePrivileges = {
   /** Is set to true if the user has privileges to create the resource. */
   canCreate?: boolean;
   /** Type of resource. For example, sheet, story, bookmark, etc. */
@@ -761,7 +761,7 @@ type NxAppCreatePrivileges = {
 /**
  * Application object attributes and user privileges.
  */
-type NxAppObject = {
+export type NxAppObject = {
   /** App object attributes. This structure can also contain extra user-defined attributes. */
   attributes?: NxObjectAttributes;
   /** Application object privileges.
@@ -779,7 +779,7 @@ type NxAppObject = {
 /**
  * App attributes. This structure can also contain extra user-defined attributes.
  */
-type NxAttributes = {
+export type NxAttributes = {
   /** The date and time when the app was created. */
   createdDate?: string;
   /** Contains dynamic JSON data specified by the client. */
@@ -821,7 +821,7 @@ type NxAttributes = {
 /**
  * App object attributes. This structure can also contain extra user-defined attributes.
  */
-type NxObjectAttributes = {
+export type NxObjectAttributes = {
   /** True if the object is approved. */
   approved?: boolean;
   /** The date and time when the object was created. */
@@ -842,7 +842,7 @@ type NxObjectAttributes = {
   /** The date and time when the object was modified. */
   updatedAt?: string;
 };
-type NxPatch = {
+export type NxPatch = {
   Op?: NxPatchOperationType;
   /** Path to the property to add, remove or replace. */
   Path?: string;
@@ -852,11 +852,11 @@ type NxPatch = {
    * "false", "2", "\"New title\"" */
   Value?: string;
 };
-type NxPatchOperationType = "add" | "remove" | "replace";
+export type NxPatchOperationType = "add" | "remove" | "replace";
 /**
  * Contains break down of the asked question in the form of tokens with their classification.
  */
-type PartialNluInfo = {
+export type PartialNluInfo = {
   /** Qlik sense application field selected for given token or phrase */
   fieldName?: string;
   /** Filter value found from query */
@@ -868,8 +868,8 @@ type PartialNluInfo = {
   /** Type of token from query */
   type?: "field" | "filter" | "master_dimension" | "master_measure" | "custom_analysis";
 };
-type PatchFilter = PatchFilterItem[];
-type PatchFilterItem = {
+export type PatchFilter = PatchFilterItem[];
+export type PatchFilterItem = {
   /** operation (replace). */
   op: "replace";
   /** A JSON Pointer path (/). */
@@ -882,12 +882,12 @@ type PatchFilterItem = {
 /**
  * Override for app placement on non reload engines.
  */
-type Placement = {
+export type Placement = {
   /** The iso timestamp for when the override was configured. */
   createdAt?: string;
   minEngineSize?: EngineGBSize;
 };
-type PublishApp = {
+export type PublishApp = {
   attributes?: AppUpdateAttributes;
   data?: PublishData;
   /** The original is moved instead of copied. The current published state of all objects is kept. */
@@ -897,15 +897,15 @@ type PublishApp = {
   /** The managed space ID where the app will be published. */
   spaceId?: string;
 };
-type PublishData = "source" | "target";
+export type PublishData = "source" | "target";
 /**
  * structure for providing fields in recommendation request, user can retrieve the fields using insight-analyses/model endpoint
  */
-type RecommendFieldItem = {
+export type RecommendFieldItem = {
   name?: string;
   overrides?: FieldOverride;
 };
-type RecommendItems = {
+export type RecommendItems = {
   fields?: RecommendFieldItem[];
   libItems?: RecommendMasterItem[];
   targetAnalysis?: {
@@ -916,21 +916,21 @@ type RecommendItems = {
 /**
  * structure for providing master items in recommendation request, user can retrieve the libId of master item using insight-analyses/model endpoint
  */
-type RecommendMasterItem = {
+export type RecommendMasterItem = {
   libId?: string;
   overrides?: {
     format?: NumberFormat;
   };
 };
-type RecommendNaturalLangQuery = {
+export type RecommendNaturalLangQuery = {
   /** The NL query. */
   text: string;
 };
-type RecommendedAnalysis = RecommendedAnalysisCore & {
+export type RecommendedAnalysis = RecommendedAnalysisCore & {
   /** part analyses (only for macro analyses) */
   parts?: RecommendedAnalysisCore[];
 };
-type RecommendedAnalysisCore = {
+export type RecommendedAnalysisCore = {
   analysis?: AnalysisDetails;
   /** Chart type given to current recommendation */
   chartType?: ChartType;
@@ -939,7 +939,7 @@ type RecommendedAnalysisCore = {
   /** percentage of selected items in the analysis to the overall items passed to the endpoint */
   relevance?: number;
 };
-type ReloadIncludeFile = {
+export type ReloadIncludeFile = {
   /** The connection name. */
   connection?: string;
   /** File location within the connection. */
@@ -947,11 +947,11 @@ type ReloadIncludeFile = {
   /** File QRI resource identifier. */
   qri?: string;
 };
-type ReloadListMetadata = {
+export type ReloadListMetadata = {
   /** Array of ReloadMeta. */
   data?: ReloadMeta[];
 };
-type ReloadMeta = {
+export type ReloadMeta = {
   /** A Base64-encoded hash value of the new section access database. */
   accessDbHash?: string;
   /** A Base64-encoded hash value of the new app database. */
@@ -983,7 +983,7 @@ type ReloadMeta = {
   /** true if the reload was successful. */
   success?: boolean;
 };
-type ReloadStatements = {
+export type ReloadStatements = {
   /** The connection name. */
   connection?: string;
   /** Connection ID. */
@@ -1007,7 +1007,7 @@ type ReloadStatements = {
   /** Type of statement, e.g. Store/Load. */
   type?: string;
 };
-type RepublishApp = {
+export type RepublishApp = {
   attributes?: AppUpdateAttributes;
   /** Validate that source app is same as originally published. */
   checkOriginAppId?: boolean;
@@ -1015,10 +1015,10 @@ type RepublishApp = {
   /** The target ID to be republished. */
   targetId?: string;
 };
-type Script = {
+export type Script = {
   script?: string;
 };
-type ScriptIssue = {
+export type ScriptIssue = {
   /** UTF-8 byte column of the issue. */
   Column?: number;
   /** Additional information like workarounds or clarifications. */
@@ -1030,15 +1030,15 @@ type ScriptIssue = {
   /** The index of the tab for the issue. */
   Tab?: number;
 };
-type ScriptIssues = {
+export type ScriptIssues = {
   Errors?: ScriptIssue[];
   Warnings?: ScriptIssue[];
 };
-type ScriptLogList = {
+export type ScriptLogList = {
   /** Array of scriptLogMeta. */
   data?: ScriptLogMeta[];
 };
-type ScriptLogMeta = {
+export type ScriptLogMeta = {
   /** Duration of reload (ms). */
   duration?: number;
   /** Time when reload ended. */
@@ -1049,7 +1049,7 @@ type ScriptLogMeta = {
   /** True if the reload was successful. */
   success?: boolean;
 };
-type ScriptMeta = {
+export type ScriptMeta = {
   /** Script version last modification time. */
   modifiedTime?: string;
   /** User last modifying script version. */
@@ -1061,31 +1061,31 @@ type ScriptMeta = {
   /** Description of this script version */
   versionMessage?: string;
 };
-type ScriptMetaList = {
+export type ScriptMetaList = {
   links?: NavigationLinks;
   privileges?: string[];
   /** Script versions metadata. */
   scripts?: ScriptMeta[];
 };
-type ScriptVersion = {
+export type ScriptVersion = {
   /** Script text. */
   script?: string;
   /** Description of this script version */
   versionMessage?: string;
 };
-type SimplifiedClassifications = ("dimension" | "measure" | "temporal" | "geographical")[];
-type SymbolFrequency = {
+export type SimplifiedClassifications = ("dimension" | "measure" | "temporal" | "geographical")[];
+export type SymbolFrequency = {
   /** Frequency of the above symbol in the field */
   Frequency?: number;
   Symbol?: SymbolValue;
 };
-type SymbolValue = {
+export type SymbolValue = {
   /** Numeric value of the symbol. NaN otherwise. */
   Number?: number;
   /** String value of the symbol. This parameter is optional and present only if Symbol is a string. */
   Text?: string;
 };
-type TableMetadata = {
+export type TableMetadata = {
   /** Static RAM memory used in bytes. */
   byte_size?: number;
   /** Table comment. */
@@ -1108,45 +1108,45 @@ type TableMetadata = {
   /** Number of rows. */
   no_of_rows?: number;
 };
-type TableProfilingData = {
+export type TableProfilingData = {
   /** Field values profiling info */
   FieldProfiling?: FieldInTableProfilingData[];
   /** Number of rows in the table. */
   NoOfRows?: number;
 };
-type UpdateApp = {
+export type UpdateApp = {
   attributes?: AppUpdateAttributes;
 };
-type UpdateOwner = {
+export type UpdateOwner = {
   ownerId?: string;
 };
-type UpdateSpace = {
+export type UpdateSpace = {
   spaceId?: string;
 };
-type UsageEnum = "ANALYTICS" | "DATA_PREPARATION" | "DATAFLOW_PREP" | "SINGLE_TABLE_PREP" | "DIRECT_QUERY_MODE";
-type UserPrivileges = "can_create_app" | "can_import_app" | "can_create_session_app";
-type Classification = {
+export type UsageEnum = "ANALYTICS" | "DATA_PREPARATION" | "DATAFLOW_PREP" | "SINGLE_TABLE_PREP" | "DIRECT_QUERY_MODE";
+export type UserPrivileges = "can_create_app" | "can_import_app" | "can_create_session_app";
+export type Classification = {
   absoluteDiff?: number;
   diff?: number;
   trend?: string;
 };
-type Cmpbool = Classification & {
+export type Cmpbool = Classification & {
   baseline?: boolean;
   comparison?: boolean;
 };
-type Cmpfloat = Classification & {
+export type Cmpfloat = Classification & {
   baseline?: number;
   comparison?: number;
 };
-type CmpfloatWithTimeout = Cmpfloat & {
+export type CmpfloatWithTimeout = Cmpfloat & {
   baselineTimeoutStatusCode?: string;
   comparisonTimeoutStatusCode?: string;
 };
-type Cmpint = Classification & {
+export type Cmpint = Classification & {
   baseline?: number;
   comparison?: number;
 };
-type Comparison = {
+export type Comparison = {
   appOpenTimeSeconds?: Cmpfloat;
   dataModelSizeMib?: Cmpfloat;
   documentSizeMib?: Cmpfloat;
@@ -1167,7 +1167,7 @@ type Comparison = {
   topFieldsByBytes?: Sortedcomparisonfields;
   topTablesByBytes?: Sortedcomparisontables;
 };
-type Comparisonfields = (Objecttopspec & {
+export type Comparisonfields = (Objecttopspec & {
   byte_size?: Cmpint;
   cardinal?: Cmpint;
   dataSourceStatus?: "full" | "none" | "baselinemissing" | "comparisonmissing";
@@ -1175,31 +1175,31 @@ type Comparisonfields = (Objecttopspec & {
   name?: string;
   total_count?: Cmpint;
 })[];
-type ComparisonobjMemoryLimit = (Objectspec & {
+export type ComparisonobjMemoryLimit = (Objectspec & {
   baselineMemoryLimitStatusCode?: string;
   comparisonMemoryLimitStatusCode?: string;
   dataSourceStatus?: "full" | "none" | "baselinemissing" | "comparisonmissing";
 })[];
-type Comparisonobjresponsetime = (Objectspec & {
+export type Comparisonobjresponsetime = (Objectspec & {
   dataSourceStatus?: "full" | "none" | "baselinemissing" | "comparisonmissing";
   responseTimeSeconds1?: CmpfloatWithTimeout;
   responseTimeSeconds2?: CmpfloatWithTimeout;
 })[];
-type Comparisonoobjheavy = (Objectspec & {
+export type Comparisonoobjheavy = (Objectspec & {
   cpuQuotient1?: Cmpfloat;
   cpuQuotient2?: Cmpfloat;
   cpuSeconds1?: Cmpfloat;
   cpuSeconds2?: Cmpfloat;
   dataSourceStatus?: "full" | "none" | "baselinemissing" | "comparisonmissing";
 })[];
-type Comparisontables = (Objecttopspec & {
+export type Comparisontables = (Objecttopspec & {
   byte_size?: Cmpint;
   dataSourceStatus?: "full" | "none" | "baselinemissing" | "comparisonmissing";
   is_system?: Cmpbool;
   name?: string;
   no_of_rows?: Cmpint;
 })[];
-type Evaluation = {
+export type Evaluation = {
   appId?: string;
   appItemId?: string;
   appName?: string;
@@ -1225,7 +1225,7 @@ type Evaluation = {
   timestamp?: string;
   version?: number;
 };
-type Evaluations = {
+export type Evaluations = {
   data?: Evaluation[];
   links?: {
     next?: {
@@ -1236,7 +1236,7 @@ type Evaluations = {
     };
   };
 };
-type Event = {
+export type Event = {
   details?: string;
   errorCode?: string;
   objectId?: string;
@@ -1251,8 +1251,8 @@ type Event = {
  * @example
  * "/api/v1/evaluations/appId=a84c22cf-31e5-41fe-9e8f-544b85513484&prev=5f5201908b3fc5fc132dbd35"
  */
-type Href2 = string;
-type Metadata = {
+export type Href2 = string;
+export type Metadata = {
   amountofcardinalfieldvalues?: number;
   amountoffields?: number;
   amountoffieldvalues?: number;
@@ -1265,7 +1265,7 @@ type Metadata = {
   };
   staticbytesize?: number;
 };
-type NumberFormat = {
+export type NumberFormat = {
   qDec?: string;
   qFmt?: string;
   qThou?: string;
@@ -1273,23 +1273,23 @@ type NumberFormat = {
   qUseThou?: number;
   qnDec?: number;
 };
-type Objectmetrics = {
+export type Objectmetrics = {
   cpuQuotients?: number[];
   cpuSeconds?: number[];
   responseTimeSeconds?: number;
 };
-type Objectspec = {
+export type Objectspec = {
   id?: string;
   objectType?: string;
   sheetId?: string;
   title?: string;
 };
-type Objecttopspec = {
+export type Objecttopspec = {
   byte_size?: number;
   is_system?: boolean;
   name?: string;
 };
-type Result = {
+export type Result = {
   documentSizeMiB?: number;
   hasSectionAccess?: boolean;
   objMemoryLimit?: ResultobjMemoryLimit[];
@@ -1304,33 +1304,33 @@ type Result = {
   topFieldsByBytes?: Resultmetadatatopfields[];
   topTablesByBytes?: Resultmetadatatoptables[];
 };
-type Resultentry = Objectspec & {
+export type Resultentry = Objectspec & {
   passes?: Objectmetrics[];
 };
-type Resultmetadatatopfields = Objecttopspec & {
+export type Resultmetadatatopfields = Objecttopspec & {
   byte_size?: number;
   name?: string;
 };
-type Resultmetadatatoptables = Objecttopspec & {
+export type Resultmetadatatoptables = Objecttopspec & {
   byte_size?: number;
   name?: string;
 };
-type ResultobjMemoryLimit = Objectspec & {
+export type ResultobjMemoryLimit = Objectspec & {
   memoryLimitStatusCode?: string;
 };
-type Resultobjresponsetime = Objectspec & {
+export type Resultobjresponsetime = Objectspec & {
   responseTimeSeconds?: number;
   timeoutStatusCode?: string;
 };
-type Resultobjsheet = {
+export type Resultobjsheet = {
   objectCount?: number;
   sheet?: Resultobjresponsetime;
   sheetObjects?: Resultobjresponsetime[];
 };
-type Resultsingle = Objectspec & {
+export type Resultsingle = Objectspec & {
   cpuQuotient1?: number;
 };
-type Sortedcomparisonfields = {
+export type Sortedcomparisonfields = {
   absoluteDiffAsc?: Comparisonfields;
   absoluteDiffDesc?: Comparisonfields;
   dataSourceStatus?: "full" | "none" | "baselinemissing" | "comparisonmissing";
@@ -1338,7 +1338,7 @@ type Sortedcomparisonfields = {
   relativeDiffAsc?: Comparisonfields;
   relativeDiffDesc?: Comparisonfields;
 };
-type Sortedcomparisonobjresponsetime = {
+export type Sortedcomparisonobjresponsetime = {
   absoluteDiffAsc?: Comparisonobjresponsetime;
   absoluteDiffDesc?: Comparisonobjresponsetime;
   dataSourceStatus?: "full" | "none" | "baselinemissing" | "comparisonmissing";
@@ -1346,7 +1346,7 @@ type Sortedcomparisonobjresponsetime = {
   relativeDiffAsc?: Comparisonobjresponsetime;
   relativeDiffDesc?: Comparisonobjresponsetime;
 };
-type Sortedcomparisonoobjheavy = {
+export type Sortedcomparisonoobjheavy = {
   absoluteDiffAsc?: Comparisonoobjheavy;
   absoluteDiffDesc?: Comparisonoobjheavy;
   dataSourceStatus?: "full" | "none" | "baselinemissing" | "comparisonmissing";
@@ -1354,7 +1354,7 @@ type Sortedcomparisonoobjheavy = {
   relativeDiffAsc?: Comparisonoobjheavy;
   relativeDiffDesc?: Comparisonoobjheavy;
 };
-type Sortedcomparisontables = {
+export type Sortedcomparisontables = {
   absoluteDiffAsc?: Comparisontables;
   absoluteDiffDesc?: Comparisontables;
   dataSourceStatus?: "full" | "none" | "baselinemissing" | "comparisonmissing";
@@ -1368,13 +1368,13 @@ type Sortedcomparisontables = {
  * @param body an object with the body content
  * @throws CreateAppHttpError
  */
-declare function createApp(body: CreateApp, options?: ApiCallOptions): Promise<CreateAppHttpResponse>;
-type CreateAppHttpResponse = {
+export declare function createApp(body: CreateApp, options?: ApiCallOptions): Promise<CreateAppHttpResponse>;
+export type CreateAppHttpResponse = {
   data: NxApp;
   headers: Headers;
   status: 200;
 };
-type CreateAppHttpError = {
+export type CreateAppHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -1389,18 +1389,18 @@ type CreateAppHttpError = {
  * @param query an object with query parameters
  * @throws GetAppEvaluationComparisonHttpError
  */
-declare function getAppEvaluationComparison(baseid: string, comparisonid: string, query: {
+export declare function getAppEvaluationComparison(baseid: string, comparisonid: string, query: {
   /** Get the full list of comparisons including non-significant diffs */
   all?: boolean;
   /** Specify output format, currently supported are 'json' and 'xml' */
   format?: string;
 }, options?: ApiCallOptions): Promise<GetAppEvaluationComparisonHttpResponse>;
-type GetAppEvaluationComparisonHttpResponse = {
+export type GetAppEvaluationComparisonHttpResponse = {
   data: Comparison;
   headers: Headers;
   status: 200;
 };
-type GetAppEvaluationComparisonHttpError = {
+export type GetAppEvaluationComparisonHttpError = {
   data: EvaluatorError;
   headers: Headers;
   status: 404 | 500;
@@ -1419,13 +1419,13 @@ type GetAppEvaluationComparisonHttpError = {
  * @param comparisonid Id of the comparison evaluation
  * @throws GetAppEvaluationComparisonXmlHttpError
  */
-declare function getAppEvaluationComparisonXml(baseid: string, comparisonid: string, options?: ApiCallOptions): Promise<GetAppEvaluationComparisonXmlHttpResponse>;
-type GetAppEvaluationComparisonXmlHttpResponse = {
+export declare function getAppEvaluationComparisonXml(baseid: string, comparisonid: string, options?: ApiCallOptions): Promise<GetAppEvaluationComparisonXmlHttpResponse>;
+export type GetAppEvaluationComparisonXmlHttpResponse = {
   data: Comparison;
   headers: Headers;
   status: 200;
 };
-type GetAppEvaluationComparisonXmlHttpError = {
+export type GetAppEvaluationComparisonXmlHttpError = {
   data: EvaluatorError;
   headers: Headers;
   status: 404 | 500;
@@ -1439,18 +1439,18 @@ type GetAppEvaluationComparisonXmlHttpError = {
  * @param query an object with query parameters
  * @throws GetAppEvaluationHttpError
  */
-declare function getAppEvaluation(id: string, query: {
+export declare function getAppEvaluation(id: string, query: {
   /** Get the full data of the evaluation */
   all?: boolean;
   /** Specify output format, currently supported are 'json' and 'xml' */
   format?: string;
 }, options?: ApiCallOptions): Promise<GetAppEvaluationHttpResponse>;
-type GetAppEvaluationHttpResponse = {
+export type GetAppEvaluationHttpResponse = {
   data: Evaluation;
   headers: Headers;
   status: 200;
 };
-type GetAppEvaluationHttpError = {
+export type GetAppEvaluationHttpError = {
   data: EvaluatorError;
   headers: Headers;
   status: 404 | 500;
@@ -1467,13 +1467,13 @@ type GetAppEvaluationHttpError = {
  * @param id Id of the desired evaluation.
  * @throws GetAppEvaluationXmlHttpError
  */
-declare function getAppEvaluationXml(id: string, options?: ApiCallOptions): Promise<GetAppEvaluationXmlHttpResponse>;
-type GetAppEvaluationXmlHttpResponse = {
+export declare function getAppEvaluationXml(id: string, options?: ApiCallOptions): Promise<GetAppEvaluationXmlHttpResponse>;
+export type GetAppEvaluationXmlHttpResponse = {
   data: Evaluation;
   headers: Headers;
   status: 200;
 };
-type GetAppEvaluationXmlHttpError = {
+export type GetAppEvaluationXmlHttpError = {
   data: EvaluatorError;
   headers: Headers;
   status: 404 | 500;
@@ -1485,7 +1485,7 @@ type GetAppEvaluationXmlHttpError = {
  * @param body an object with the body content
  * @throws ImportAppHttpError
  */
-declare function importApp(query: {
+export declare function importApp(query: {
   /** If NoData is true, the data of the existing app will be kept as is, otherwise it will be replaced by the new incoming data. */
   NoData?: boolean;
   /** The app ID of the target app when source is qvw file. */
@@ -1505,12 +1505,12 @@ declare function importApp(query: {
   /** The space ID of the target app. */
   spaceId?: string;
 }, body: BodyInit, options?: ApiCallOptions): Promise<ImportAppHttpResponse>;
-type ImportAppHttpResponse = {
+export type ImportAppHttpResponse = {
   data: NxApp;
   headers: Headers;
   status: 200;
 };
-type ImportAppHttpError = {
+export type ImportAppHttpError = {
   data: void;
   headers: Headers;
   status: 404;
@@ -1520,13 +1520,13 @@ type ImportAppHttpError = {
  *
  * @throws GetAppsPrivilegesHttpError
  */
-declare function getAppsPrivileges(options?: ApiCallOptions): Promise<GetAppsPrivilegesHttpResponse>;
-type GetAppsPrivilegesHttpResponse = {
+export declare function getAppsPrivileges(options?: ApiCallOptions): Promise<GetAppsPrivilegesHttpResponse>;
+export type GetAppsPrivilegesHttpResponse = {
   data: UserPrivileges[];
   headers: Headers;
   status: 200;
 };
-type GetAppsPrivilegesHttpError = {
+export type GetAppsPrivilegesHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -1537,13 +1537,13 @@ type GetAppsPrivilegesHttpError = {
  * @param body an object with the body content
  * @throws ValidateScriptHttpError
  */
-declare function validateScript(body: Script, options?: ApiCallOptions): Promise<ValidateScriptHttpResponse>;
-type ValidateScriptHttpResponse = {
+export declare function validateScript(body: Script, options?: ApiCallOptions): Promise<ValidateScriptHttpResponse>;
+export type ValidateScriptHttpResponse = {
   data: ScriptIssues;
   headers: Headers;
   status: 200;
 };
-type ValidateScriptHttpError = {
+export type ValidateScriptHttpError = {
   data: void;
   headers: Headers;
   status: 403;
@@ -1554,13 +1554,13 @@ type ValidateScriptHttpError = {
  * @param appId Identifier of the app.
  * @throws DeleteAppHttpError
  */
-declare function deleteApp(appId: string, options?: ApiCallOptions): Promise<DeleteAppHttpResponse>;
-type DeleteAppHttpResponse = {
+export declare function deleteApp(appId: string, options?: ApiCallOptions): Promise<DeleteAppHttpResponse>;
+export type DeleteAppHttpResponse = {
   data: void;
   headers: Headers;
   status: 200;
 };
-type DeleteAppHttpError = {
+export type DeleteAppHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -1571,13 +1571,13 @@ type DeleteAppHttpError = {
  * @param appId Identifier of the app.
  * @throws GetAppInfoHttpError
  */
-declare function getAppInfo(appId: string, options?: ApiCallOptions): Promise<GetAppInfoHttpResponse>;
-type GetAppInfoHttpResponse = {
+export declare function getAppInfo(appId: string, options?: ApiCallOptions): Promise<GetAppInfoHttpResponse>;
+export type GetAppInfoHttpResponse = {
   data: NxApp;
   headers: Headers;
   status: 200;
 };
-type GetAppInfoHttpError = {
+export type GetAppInfoHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -1589,13 +1589,13 @@ type GetAppInfoHttpError = {
  * @param body an object with the body content
  * @throws UpdateAppInfoHttpError
  */
-declare function updateAppInfo(appId: string, body: UpdateApp, options?: ApiCallOptions): Promise<UpdateAppInfoHttpResponse>;
-type UpdateAppInfoHttpResponse = {
+export declare function updateAppInfo(appId: string, body: UpdateApp, options?: ApiCallOptions): Promise<UpdateAppInfoHttpResponse>;
+export type UpdateAppInfoHttpResponse = {
   data: NxApp;
   headers: Headers;
   status: 200;
 };
-type UpdateAppInfoHttpError = {
+export type UpdateAppInfoHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -1607,13 +1607,13 @@ type UpdateAppInfoHttpError = {
  * @param body an object with the body content
  * @throws CopyAppHttpError
  */
-declare function copyApp(appId: string, body: CreateApp, options?: ApiCallOptions): Promise<CopyAppHttpResponse>;
-type CopyAppHttpResponse = {
+export declare function copyApp(appId: string, body: CreateApp, options?: ApiCallOptions): Promise<CopyAppHttpResponse>;
+export type CopyAppHttpResponse = {
   data: NxApp;
   headers: Headers;
   status: 200;
 };
-type CopyAppHttpError = {
+export type CopyAppHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -1625,13 +1625,13 @@ type CopyAppHttpError = {
  * @param appId Identifier of the app.
  * @throws GetAppDataLineageHttpError
  */
-declare function getAppDataLineage(appId: string, options?: ApiCallOptions): Promise<GetAppDataLineageHttpResponse>;
-type GetAppDataLineageHttpResponse = {
+export declare function getAppDataLineage(appId: string, options?: ApiCallOptions): Promise<GetAppDataLineageHttpResponse>;
+export type GetAppDataLineageHttpResponse = {
   data: LineageInfoRest[];
   headers: Headers;
   status: 200;
 };
-type GetAppDataLineageHttpError = {
+export type GetAppDataLineageHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -1643,13 +1643,13 @@ type GetAppDataLineageHttpError = {
  * @param appId Identifier of the app.
  * @throws GetAppDataMetadataHttpError
  */
-declare function getAppDataMetadata(appId: string, options?: ApiCallOptions): Promise<GetAppDataMetadataHttpResponse>;
-type GetAppDataMetadataHttpResponse = {
+export declare function getAppDataMetadata(appId: string, options?: ApiCallOptions): Promise<GetAppDataMetadataHttpResponse>;
+export type GetAppDataMetadataHttpResponse = {
   data: DataModelMetadata;
   headers: Headers;
   status: 200;
 };
-type GetAppDataMetadataHttpError = {
+export type GetAppDataMetadataHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -1661,16 +1661,16 @@ type GetAppDataMetadataHttpError = {
  * @param query an object with query parameters
  * @throws ExportAppHttpError
  */
-declare function exportApp(appId: string, query: {
+export declare function exportApp(appId: string, query: {
   /** The flag indicating if only object contents should be exported. */
   NoData?: boolean;
 }, options?: ApiCallOptions): Promise<ExportAppHttpResponse>;
-type ExportAppHttpResponse = {
+export type ExportAppHttpResponse = {
   data: DownloadableBlob;
   headers: Headers;
   status: 200;
 };
-type ExportAppHttpError = {
+export type ExportAppHttpError = {
   data: void;
   headers: Headers;
   status: 400 | 401 | 403 | 404;
@@ -1681,15 +1681,15 @@ type ExportAppHttpError = {
  * @param appId Qlik Sense app identifier
  * @throws GetAppInsightAnalysesHttpError
  */
-declare function getAppInsightAnalyses(appId: string, options?: ApiCallOptions): Promise<GetAppInsightAnalysesHttpResponse>;
-type GetAppInsightAnalysesHttpResponse = {
+export declare function getAppInsightAnalyses(appId: string, options?: ApiCallOptions): Promise<GetAppInsightAnalysesHttpResponse>;
+export type GetAppInsightAnalysesHttpResponse = {
   data: AnalysisDescriptorResponse;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetAppInsightAnalysesHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetAppInsightAnalysesHttpResponse>;
 };
-type GetAppInsightAnalysesHttpError = {
+export type GetAppInsightAnalysesHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 404 | 422 | 500;
@@ -1701,13 +1701,13 @@ type GetAppInsightAnalysesHttpError = {
  * @param body an object with the body content
  * @throws GetAppInsightAnalysisRecommendationsHttpError
  */
-declare function getAppInsightAnalysisRecommendations(appId: string, body: AnalysisRecommendRequest, options?: ApiCallOptions): Promise<GetAppInsightAnalysisRecommendationsHttpResponse>;
-type GetAppInsightAnalysisRecommendationsHttpResponse = {
+export declare function getAppInsightAnalysisRecommendations(appId: string, body: AnalysisRecommendRequest, options?: ApiCallOptions): Promise<GetAppInsightAnalysisRecommendationsHttpResponse>;
+export type GetAppInsightAnalysisRecommendationsHttpResponse = {
   data: AnalysisRecommendationResponse;
   headers: Headers;
   status: 200;
 };
-type GetAppInsightAnalysisRecommendationsHttpError = {
+export type GetAppInsightAnalysisRecommendationsHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 404 | 409 | 422 | 500;
@@ -1718,15 +1718,15 @@ type GetAppInsightAnalysisRecommendationsHttpError = {
  * @param appId Qlik Sense app identifier
  * @throws GetAppInsightAnalysisModelHttpError
  */
-declare function getAppInsightAnalysisModel(appId: string, options?: ApiCallOptions): Promise<GetAppInsightAnalysisModelHttpResponse>;
-type GetAppInsightAnalysisModelHttpResponse = {
+export declare function getAppInsightAnalysisModel(appId: string, options?: ApiCallOptions): Promise<GetAppInsightAnalysisModelHttpResponse>;
+export type GetAppInsightAnalysisModelHttpResponse = {
   data: AnalysisModelResponse;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetAppInsightAnalysisModelHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetAppInsightAnalysisModelHttpResponse>;
 };
-type GetAppInsightAnalysisModelHttpError = {
+export type GetAppInsightAnalysisModelHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 404 | 409 | 422 | 500;
@@ -1739,13 +1739,13 @@ type GetAppInsightAnalysisModelHttpError = {
  * @param path Path to file content.
  * @throws DeleteAppMediaHttpError
  */
-declare function deleteAppMedia(appId: string, path: string, options?: ApiCallOptions): Promise<DeleteAppMediaHttpResponse>;
-type DeleteAppMediaHttpResponse = {
+export declare function deleteAppMedia(appId: string, path: string, options?: ApiCallOptions): Promise<DeleteAppMediaHttpResponse>;
+export type DeleteAppMediaHttpResponse = {
   data: void;
   headers: Headers;
   status: 200;
 };
-type DeleteAppMediaHttpError = {
+export type DeleteAppMediaHttpError = {
   data: void;
   headers: Headers;
   status: 403 | 404;
@@ -1758,13 +1758,13 @@ type DeleteAppMediaHttpError = {
  * @param path Path to file content.
  * @throws GetAppMediaHttpError
  */
-declare function getAppMedia(appId: string, path: string, options?: ApiCallOptions): Promise<GetAppMediaHttpResponse>;
-type GetAppMediaHttpResponse = {
+export declare function getAppMedia(appId: string, path: string, options?: ApiCallOptions): Promise<GetAppMediaHttpResponse>;
+export type GetAppMediaHttpResponse = {
   data: DownloadableBlob;
   headers: Headers;
   status: 200;
 };
-type GetAppMediaHttpError = {
+export type GetAppMediaHttpError = {
   data: void;
   headers: Headers;
   status: 403 | 404;
@@ -1778,13 +1778,13 @@ type GetAppMediaHttpError = {
  * @param body an object with the body content
  * @throws UploadAppMediaHttpError
  */
-declare function uploadAppMedia(appId: string, path: string, body: BodyInit, options?: ApiCallOptions): Promise<UploadAppMediaHttpResponse>;
-type UploadAppMediaHttpResponse = {
+export declare function uploadAppMedia(appId: string, path: string, body: BodyInit, options?: ApiCallOptions): Promise<UploadAppMediaHttpResponse>;
+export type UploadAppMediaHttpResponse = {
   data: void;
   headers: Headers;
   status: 200;
 };
-type UploadAppMediaHttpError = {
+export type UploadAppMediaHttpError = {
   data: void;
   headers: Headers;
   status: 403 | 404 | 409;
@@ -1798,19 +1798,19 @@ type UploadAppMediaHttpError = {
  * @param query an object with query parameters
  * @throws GetAppMediaListHttpError
  */
-declare function getAppMediaList(appId: string, path: string, query: {
+export declare function getAppMediaList(appId: string, path: string, query: {
   /** Optional. List output can include files and folders in different ways:
    * * Not recursive, default if show option is not supplied or incorrectly specified, results in output with files and empty directories for the path specified only.
    * * Recursive(r), use ?show=r or ?show=recursive, results in a recursive output with files, all empty folders are excluded.
    * * All(a), use ?show=a or ?show=all, results in a recursive output with files and empty directories. */
   show?: string;
 }, options?: ApiCallOptions): Promise<GetAppMediaListHttpResponse>;
-type GetAppMediaListHttpResponse = {
+export type GetAppMediaListHttpResponse = {
   data: AppContentList;
   headers: Headers;
   status: 200;
 };
-type GetAppMediaListHttpError = {
+export type GetAppMediaListHttpError = {
   data: void;
   headers: Headers;
   status: 403 | 404;
@@ -1823,13 +1823,13 @@ type GetAppMediaListHttpError = {
  * @param appId Unique application identifier.
  * @throws GetAppThumbnailHttpError
  */
-declare function getAppThumbnail(appId: string, options?: ApiCallOptions): Promise<GetAppThumbnailHttpResponse>;
-type GetAppThumbnailHttpResponse = {
+export declare function getAppThumbnail(appId: string, options?: ApiCallOptions): Promise<GetAppThumbnailHttpResponse>;
+export type GetAppThumbnailHttpResponse = {
   data: DownloadableBlob;
   headers: Headers;
   status: 200;
 };
-type GetAppThumbnailHttpError = {
+export type GetAppThumbnailHttpError = {
   data: void;
   headers: Headers;
   status: 403 | 404;
@@ -1843,13 +1843,13 @@ type GetAppThumbnailHttpError = {
  * @param body an object with the body content
  * @throws UpdateAppObjectOwnerHttpError
  */
-declare function updateAppObjectOwner(appId: string, objectId: string, body: UpdateOwner, options?: ApiCallOptions): Promise<UpdateAppObjectOwnerHttpResponse>;
-type UpdateAppObjectOwnerHttpResponse = {
+export declare function updateAppObjectOwner(appId: string, objectId: string, body: UpdateOwner, options?: ApiCallOptions): Promise<UpdateAppObjectOwnerHttpResponse>;
+export type UpdateAppObjectOwnerHttpResponse = {
   data: NxAppObject;
   headers: Headers;
   status: 200;
 };
-type UpdateAppObjectOwnerHttpError = {
+export type UpdateAppObjectOwnerHttpError = {
   data: void;
   headers: Headers;
   status: 400 | 404;
@@ -1861,13 +1861,13 @@ type UpdateAppObjectOwnerHttpError = {
  * @param body an object with the body content
  * @throws UpdateAppOwnerHttpError
  */
-declare function updateAppOwner(appId: string, body: UpdateOwner, options?: ApiCallOptions): Promise<UpdateAppOwnerHttpResponse>;
-type UpdateAppOwnerHttpResponse = {
+export declare function updateAppOwner(appId: string, body: UpdateOwner, options?: ApiCallOptions): Promise<UpdateAppOwnerHttpResponse>;
+export type UpdateAppOwnerHttpResponse = {
   data: NxApp;
   headers: Headers;
   status: 200;
 };
-type UpdateAppOwnerHttpError = {
+export type UpdateAppOwnerHttpError = {
   data: void;
   headers: Headers;
   status: 403 | 404;
@@ -1878,13 +1878,13 @@ type UpdateAppOwnerHttpError = {
  * @param appId Identifier of the app
  * @throws DeleteAppPlacementHttpError
  */
-declare function deleteAppPlacement(appId: string, options?: ApiCallOptions): Promise<DeleteAppPlacementHttpResponse>;
-type DeleteAppPlacementHttpResponse = {
+export declare function deleteAppPlacement(appId: string, options?: ApiCallOptions): Promise<DeleteAppPlacementHttpResponse>;
+export type DeleteAppPlacementHttpResponse = {
   data: void;
   headers: Headers;
   status: 200;
 };
-type DeleteAppPlacementHttpError = {
+export type DeleteAppPlacementHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -1895,13 +1895,13 @@ type DeleteAppPlacementHttpError = {
  * @param appId Identifier of the app
  * @throws GetAppPlacementHttpError
  */
-declare function getAppPlacement(appId: string, options?: ApiCallOptions): Promise<GetAppPlacementHttpResponse>;
-type GetAppPlacementHttpResponse = {
+export declare function getAppPlacement(appId: string, options?: ApiCallOptions): Promise<GetAppPlacementHttpResponse>;
+export type GetAppPlacementHttpResponse = {
   data: Placement;
   headers: Headers;
   status: 200;
 };
-type GetAppPlacementHttpError = {
+export type GetAppPlacementHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -1913,13 +1913,13 @@ type GetAppPlacementHttpError = {
  * @param body an object with the body content
  * @throws ReplaceAppPlacementHttpError
  */
-declare function replaceAppPlacement(appId: string, body: EngineSize, options?: ApiCallOptions): Promise<ReplaceAppPlacementHttpResponse>;
-type ReplaceAppPlacementHttpResponse = {
+export declare function replaceAppPlacement(appId: string, body: EngineSize, options?: ApiCallOptions): Promise<ReplaceAppPlacementHttpResponse>;
+export type ReplaceAppPlacementHttpResponse = {
   data: void;
   headers: Headers;
   status: 200;
 };
-type ReplaceAppPlacementHttpError = {
+export type ReplaceAppPlacementHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -1931,13 +1931,13 @@ type ReplaceAppPlacementHttpError = {
  * @param body an object with the body content
  * @throws PublishAppHttpError
  */
-declare function publishApp(appId: string, body: PublishApp, options?: ApiCallOptions): Promise<PublishAppHttpResponse>;
-type PublishAppHttpResponse = {
+export declare function publishApp(appId: string, body: PublishApp, options?: ApiCallOptions): Promise<PublishAppHttpResponse>;
+export type PublishAppHttpResponse = {
   data: NxApp;
   headers: Headers;
   status: 200;
 };
-type PublishAppHttpError = {
+export type PublishAppHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -1949,13 +1949,13 @@ type PublishAppHttpError = {
  * @param body an object with the body content
  * @throws RepublishAppHttpError
  */
-declare function republishApp(appId: string, body: RepublishApp, options?: ApiCallOptions): Promise<RepublishAppHttpResponse>;
-type RepublishAppHttpResponse = {
+export declare function republishApp(appId: string, body: RepublishApp, options?: ApiCallOptions): Promise<RepublishAppHttpResponse>;
+export type RepublishAppHttpResponse = {
   data: NxApp;
   headers: Headers;
   status: 200;
 };
-type RepublishAppHttpError = {
+export type RepublishAppHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -1967,13 +1967,13 @@ type RepublishAppHttpError = {
  * @param appId Identifier of the app.
  * @throws GetAppReloadLogsHttpError
  */
-declare function getAppReloadLogs(appId: string, options?: ApiCallOptions): Promise<GetAppReloadLogsHttpResponse>;
-type GetAppReloadLogsHttpResponse = {
+export declare function getAppReloadLogs(appId: string, options?: ApiCallOptions): Promise<GetAppReloadLogsHttpResponse>;
+export type GetAppReloadLogsHttpResponse = {
   data: ScriptLogList;
   headers: Headers;
   status: 200;
 };
-type GetAppReloadLogsHttpError = {
+export type GetAppReloadLogsHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -1986,13 +1986,13 @@ type GetAppReloadLogsHttpError = {
  * @param reloadId Identifier of the reload.
  * @throws GetAppReloadLogHttpError
  */
-declare function getAppReloadLog(appId: string, reloadId: string, options?: ApiCallOptions): Promise<GetAppReloadLogHttpResponse>;
-type GetAppReloadLogHttpResponse = {
-  data: DownloadableBlob;
+export declare function getAppReloadLog(appId: string, reloadId: string, options?: ApiCallOptions): Promise<GetAppReloadLogHttpResponse>;
+export type GetAppReloadLogHttpResponse = {
+  data: void;
   headers: Headers;
   status: 200;
 };
-type GetAppReloadLogHttpError = {
+export type GetAppReloadLogHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -2006,7 +2006,7 @@ type GetAppReloadLogHttpError = {
  * @param query an object with query parameters
  * @throws GetAppReloadMetadataHttpError
  */
-declare function getAppReloadMetadata(appId: string, reloadId: string, query: {
+export declare function getAppReloadMetadata(appId: string, reloadId: string, query: {
   /** Include metadata for reloads ran with SkipStore flag set to true. Default: false */
   includeSkipStoreReloads?: boolean;
   /** Maximum number of records to return from this request. Default: 100 */
@@ -2014,12 +2014,12 @@ declare function getAppReloadMetadata(appId: string, reloadId: string, query: {
   /** Identifier of the reload. Use empty reloadId to get all reloads. */
   reloadId?: string;
 }, options?: ApiCallOptions): Promise<GetAppReloadMetadataHttpResponse>;
-type GetAppReloadMetadataHttpResponse = {
+export type GetAppReloadMetadataHttpResponse = {
   data: ReloadListMetadata;
   headers: Headers;
   status: 200;
 };
-type GetAppReloadMetadataHttpError = {
+export type GetAppReloadMetadataHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -2031,7 +2031,7 @@ type GetAppReloadMetadataHttpError = {
  * @param query an object with query parameters
  * @throws GetAppReportFiltersHttpError
  */
-declare function getAppReportFilters(appId: string, query: {
+export declare function getAppReportFilters(appId: string, query: {
   /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax. Cannot be combined with any of the fields marked as deprecated. All conditional statements within this query parameter are case insensitive.
    * The following fields support the `co` (contains) operator: `name`, `description`
    * The following fields support the `eq` (equals) operator: `id`, `ownerId`
@@ -2049,14 +2049,14 @@ declare function getAppReportFilters(appId: string, query: {
   /** Sorting parameters. */
   sort?: ("+ownerId" | "-ownerId" | "-name" | "+name" | "+description" | "-description" | "+createdAt" | "-createdAt" | "+updatedAt" | "-updatedAt")[];
 }, options?: ApiCallOptions): Promise<GetAppReportFiltersHttpResponse>;
-type GetAppReportFiltersHttpResponse = {
+export type GetAppReportFiltersHttpResponse = {
   data: FilterList;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetAppReportFiltersHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetAppReportFiltersHttpResponse>;
 };
-type GetAppReportFiltersHttpError = {
+export type GetAppReportFiltersHttpError = {
   data: FilterErrors;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429 | 500;
@@ -2068,13 +2068,13 @@ type GetAppReportFiltersHttpError = {
  * @param body an object with the body content
  * @throws CreateAppReportFilterHttpError
  */
-declare function createAppReportFilter(appId: string, body: FilterRequest, options?: ApiCallOptions): Promise<CreateAppReportFilterHttpResponse>;
-type CreateAppReportFilterHttpResponse = {
+export declare function createAppReportFilter(appId: string, body: FilterRequest, options?: ApiCallOptions): Promise<CreateAppReportFilterHttpResponse>;
+export type CreateAppReportFilterHttpResponse = {
   data: Filter;
   headers: Headers;
   status: 201;
 };
-type CreateAppReportFilterHttpError = {
+export type CreateAppReportFilterHttpError = {
   data: FilterErrors;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 429 | 500;
@@ -2086,16 +2086,16 @@ type CreateAppReportFilterHttpError = {
  * @param query an object with query parameters
  * @throws CountAppReportFiltersHttpError
  */
-declare function countAppReportFilters(appId: string, query: {
+export declare function countAppReportFilters(appId: string, query: {
   /** The filter type (REP, SUB). REP stands for report bookmark, SUB for subscription bookmark. */
   filterTypes: ("REP" | "SUB")[];
 }, options?: ApiCallOptions): Promise<CountAppReportFiltersHttpResponse>;
-type CountAppReportFiltersHttpResponse = {
+export type CountAppReportFiltersHttpResponse = {
   data: FiltersCount;
   headers: Headers;
   status: 200;
 };
-type CountAppReportFiltersHttpError = {
+export type CountAppReportFiltersHttpError = {
   data: FilterErrors;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429 | 500;
@@ -2107,13 +2107,13 @@ type CountAppReportFiltersHttpError = {
  * @param id The filter id identifier (bookmarkId).
  * @throws DeleteAppReportFilterHttpError
  */
-declare function deleteAppReportFilter(appId: string, id: string, options?: ApiCallOptions): Promise<DeleteAppReportFilterHttpResponse>;
-type DeleteAppReportFilterHttpResponse = {
+export declare function deleteAppReportFilter(appId: string, id: string, options?: ApiCallOptions): Promise<DeleteAppReportFilterHttpResponse>;
+export type DeleteAppReportFilterHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteAppReportFilterHttpError = {
+export type DeleteAppReportFilterHttpError = {
   data: FilterErrors;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429 | 500;
@@ -2126,16 +2126,16 @@ type DeleteAppReportFilterHttpError = {
  * @param query an object with query parameters
  * @throws GetAppReportFilterWithQueryHttpError
  */
-declare function getAppReportFilterWithQuery(appId: string, id: string, query: {
+export declare function getAppReportFilterWithQuery(appId: string, id: string, query: {
   /** Load type expressing the kind of request, eg. interactive for report requests from the Web UI, batch for scheduled report generation. */
   loadType?: "interactive" | "batch";
 }, options?: ApiCallOptions): Promise<GetAppReportFilterWithQueryHttpResponse>;
-type GetAppReportFilterWithQueryHttpResponse = {
+export type GetAppReportFilterWithQueryHttpResponse = {
   data: Filter;
   headers: Headers;
   status: 200;
 };
-type GetAppReportFilterWithQueryHttpError = {
+export type GetAppReportFilterWithQueryHttpError = {
   data: FilterErrors;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429 | 500;
@@ -2147,13 +2147,13 @@ type GetAppReportFilterWithQueryHttpError = {
  * @param id The filter id identifier (bookmarkId).
  * @throws GetAppReportFilterHttpError
  */
-declare function getAppReportFilter(appId: string, id: string, options?: ApiCallOptions): Promise<GetAppReportFilterHttpResponse>;
-type GetAppReportFilterHttpResponse = {
+export declare function getAppReportFilter(appId: string, id: string, options?: ApiCallOptions): Promise<GetAppReportFilterHttpResponse>;
+export type GetAppReportFilterHttpResponse = {
   data: Filter;
   headers: Headers;
   status: 200;
 };
-type GetAppReportFilterHttpError = {
+export type GetAppReportFilterHttpError = {
   data: FilterErrors;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429 | 500;
@@ -2166,13 +2166,13 @@ type GetAppReportFilterHttpError = {
  * @param body an object with the body content
  * @throws PatchAppReportFilterHttpError
  */
-declare function patchAppReportFilter(appId: string, id: string, body: PatchFilter, options?: ApiCallOptions): Promise<PatchAppReportFilterHttpResponse>;
-type PatchAppReportFilterHttpResponse = {
+export declare function patchAppReportFilter(appId: string, id: string, body: PatchFilter, options?: ApiCallOptions): Promise<PatchAppReportFilterHttpResponse>;
+export type PatchAppReportFilterHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchAppReportFilterHttpError = {
+export type PatchAppReportFilterHttpError = {
   data: FilterErrors;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 429 | 500;
@@ -2185,7 +2185,7 @@ type PatchAppReportFilterHttpError = {
  * @param query an object with query parameters
  * @throws GetAppScriptHistoryHttpError
  */
-declare function getAppScriptHistory(appId: string, query: {
+export declare function getAppScriptHistory(appId: string, query: {
   /** A scim filter expression defining which script versions should be retrieved. Filterable fields are:
    * * ScriptId
    * * ModifiedTime
@@ -2196,14 +2196,14 @@ declare function getAppScriptHistory(appId: string, query: {
   /** Opaque definition of which page of the result set to return. Returned from a previous call using the same filter. Not yet supported. */
   page?: string;
 }, options?: ApiCallOptions): Promise<GetAppScriptHistoryHttpResponse>;
-type GetAppScriptHistoryHttpResponse = {
+export type GetAppScriptHistoryHttpResponse = {
   data: ScriptMetaList;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetAppScriptHistoryHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetAppScriptHistoryHttpResponse>;
 };
-type GetAppScriptHistoryHttpError = {
+export type GetAppScriptHistoryHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -2215,16 +2215,16 @@ type GetAppScriptHistoryHttpError = {
  * @param body an object with the body content
  * @throws UpdateAppScriptHttpError
  */
-declare function updateAppScript(appId: string, body: ScriptVersion, options?: ApiCallOptions): Promise<UpdateAppScriptHttpResponse>;
-type UpdateAppScriptHttpResponse = {
+export declare function updateAppScript(appId: string, body: ScriptVersion, options?: ApiCallOptions): Promise<UpdateAppScriptHttpResponse>;
+export type UpdateAppScriptHttpResponse = {
   data: void;
   headers: Headers;
   status: 200;
 };
-type UpdateAppScriptHttpError = {
-  data: unknown;
+export type UpdateAppScriptHttpError = {
+  data: void;
   headers: Headers;
-  status: number;
+  status: 403 | 404;
 };
 /**
  * Deletes a specific version of the script for an app.
@@ -2234,13 +2234,13 @@ type UpdateAppScriptHttpError = {
  * @param id Identifier of the script version
  * @throws DeleteAppScriptHttpError
  */
-declare function deleteAppScript(appId: string, id: string, options?: ApiCallOptions): Promise<DeleteAppScriptHttpResponse>;
-type DeleteAppScriptHttpResponse = {
+export declare function deleteAppScript(appId: string, id: string, options?: ApiCallOptions): Promise<DeleteAppScriptHttpResponse>;
+export type DeleteAppScriptHttpResponse = {
   data: void;
   headers: Headers;
   status: 200;
 };
-type DeleteAppScriptHttpError = {
+export type DeleteAppScriptHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -2253,13 +2253,13 @@ type DeleteAppScriptHttpError = {
  * @param id Identifier of the script version, or 'current' for retrieving the current version.
  * @throws GetAppScriptHttpError
  */
-declare function getAppScript(appId: string, id: string, options?: ApiCallOptions): Promise<GetAppScriptHttpResponse>;
-type GetAppScriptHttpResponse = {
+export declare function getAppScript(appId: string, id: string, options?: ApiCallOptions): Promise<GetAppScriptHttpResponse>;
+export type GetAppScriptHttpResponse = {
   data: ScriptVersion;
   headers: Headers;
   status: 200;
 };
-type GetAppScriptHttpError = {
+export type GetAppScriptHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -2272,13 +2272,13 @@ type GetAppScriptHttpError = {
  * @param body an object with the body content
  * @throws PatchAppScriptHttpError
  */
-declare function patchAppScript(appId: string, id: string, body: NxPatch[], options?: ApiCallOptions): Promise<PatchAppScriptHttpResponse>;
-type PatchAppScriptHttpResponse = {
+export declare function patchAppScript(appId: string, id: string, body: NxPatch[], options?: ApiCallOptions): Promise<PatchAppScriptHttpResponse>;
+export type PatchAppScriptHttpResponse = {
   data: void;
   headers: Headers;
   status: 200;
 };
-type PatchAppScriptHttpError = {
+export type PatchAppScriptHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -2289,13 +2289,13 @@ type PatchAppScriptHttpError = {
  * @param appId Identifier of the app.
  * @throws RemoveAppFromSpaceHttpError
  */
-declare function removeAppFromSpace(appId: string, options?: ApiCallOptions): Promise<RemoveAppFromSpaceHttpResponse>;
-type RemoveAppFromSpaceHttpResponse = {
+export declare function removeAppFromSpace(appId: string, options?: ApiCallOptions): Promise<RemoveAppFromSpaceHttpResponse>;
+export type RemoveAppFromSpaceHttpResponse = {
   data: NxApp;
   headers: Headers;
   status: 200;
 };
-type RemoveAppFromSpaceHttpError = {
+export type RemoveAppFromSpaceHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -2307,13 +2307,13 @@ type RemoveAppFromSpaceHttpError = {
  * @param body an object with the body content
  * @throws MoveAppToSpaceHttpError
  */
-declare function moveAppToSpace(appId: string, body: UpdateSpace, options?: ApiCallOptions): Promise<MoveAppToSpaceHttpResponse>;
-type MoveAppToSpaceHttpResponse = {
+export declare function moveAppToSpace(appId: string, body: UpdateSpace, options?: ApiCallOptions): Promise<MoveAppToSpaceHttpResponse>;
+export type MoveAppToSpaceHttpResponse = {
   data: NxApp;
   headers: Headers;
   status: 200;
 };
-type MoveAppToSpaceHttpError = {
+export type MoveAppToSpaceHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
@@ -2328,7 +2328,7 @@ type MoveAppToSpaceHttpError = {
  * @param query an object with query parameters
  * @throws GetAppEvaluationsHttpError
  */
-declare function getAppEvaluations(guid: string, query: {
+export declare function getAppEvaluations(guid: string, query: {
   /** Get the full data of the evaluation */
   all?: boolean;
   /** Add file transfer headers to response */
@@ -2344,14 +2344,14 @@ declare function getAppEvaluations(guid: string, query: {
   /** Property to sort list on */
   sort?: string;
 }, options?: ApiCallOptions): Promise<GetAppEvaluationsHttpResponse>;
-type GetAppEvaluationsHttpResponse = {
+export type GetAppEvaluationsHttpResponse = {
   data: Evaluations;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetAppEvaluationsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetAppEvaluationsHttpResponse>;
 };
-type GetAppEvaluationsHttpError = {
+export type GetAppEvaluationsHttpError = {
   data: EvaluatorError;
   headers: Headers;
   status: 400 | 404 | 500;
@@ -2368,13 +2368,13 @@ type GetAppEvaluationsHttpError = {
  * @param guid Guid of the app.
  * @throws QueueAppEvaluationHttpError
  */
-declare function queueAppEvaluation(guid: string, options?: ApiCallOptions): Promise<QueueAppEvaluationHttpResponse>;
-type QueueAppEvaluationHttpResponse = {
+export declare function queueAppEvaluation(guid: string, options?: ApiCallOptions): Promise<QueueAppEvaluationHttpResponse>;
+export type QueueAppEvaluationHttpResponse = {
   data: Evaluation;
   headers: Headers;
   status: 201;
 };
-type QueueAppEvaluationHttpError = {
+export type QueueAppEvaluationHttpError = {
   data: EvaluatorError;
   headers: Headers;
   status: 400 | 403 | 404 | 500;
@@ -2382,8 +2382,8 @@ type QueueAppEvaluationHttpError = {
 /**
  * Clears the cache for apps api requests.
  */
-declare function clearCache(): void;
-type AppsAPI = {
+export declare function clearCache(): void;
+export type AppsAPI = {
   /**
    * Creates a new app.
    *
@@ -2818,4 +2818,4 @@ type AppsAPI = {
  */
 declare const appsExport: AppsAPI;
 //#endregion
-export { Analysis, AnalysisComposition, AnalysisDescriptor, AnalysisDescriptorResponse, AnalysisDetails, AnalysisGroup, AnalysisModelItemField, AnalysisModelItemMasterItem, AnalysisModelResponse, AnalysisModelResponseDetail, AnalysisRecommendRequest, AnalysisRecommendationResponse, AnalysisRecommendationResponseDetail, AppAttributes, AppContentList, AppContentListItem, AppObjectGenericType, AppUpdateAttributes, AppsAPI, ChartType, Classification, Classifications, Cmpbool, Cmpfloat, CmpfloatWithTimeout, Cmpint, Comparison, Comparisonfields, ComparisonobjMemoryLimit, Comparisonobjresponsetime, Comparisonoobjheavy, Comparisontables, CompositionMinMax, CopyAppHttpError, CopyAppHttpResponse, CountAppReportFiltersHttpError, CountAppReportFiltersHttpResponse, CreateApp, CreateAppHttpError, CreateAppHttpResponse, CreateAppReportFilterHttpError, CreateAppReportFilterHttpResponse, DataModelMetadata, DeleteAppHttpError, DeleteAppHttpResponse, DeleteAppMediaHttpError, DeleteAppMediaHttpResponse, DeleteAppPlacementHttpError, DeleteAppPlacementHttpResponse, DeleteAppReportFilterHttpError, DeleteAppReportFilterHttpResponse, DeleteAppScriptHttpError, DeleteAppScriptHttpResponse, EngineGBSize, EngineSize, Error, Errors, Evaluation, Evaluations, EvaluatorError, Event, ExportAppHttpError, ExportAppHttpResponse, FieldAttrType, FieldAttributes, FieldInTableProfilingData, FieldMetadata, FieldOverride, FileData, Filter, FilterError, FilterErrors, FilterField, FilterFieldValue, FilterItemPatch, FilterList, FilterListItem, FilterRequest, FilterType, FilterV10, FilterVariable, FiltersCount, Float64, FrequencyDistributionData, GetAppDataLineageHttpError, GetAppDataLineageHttpResponse, GetAppDataMetadataHttpError, GetAppDataMetadataHttpResponse, GetAppEvaluationComparisonHttpError, GetAppEvaluationComparisonHttpResponse, GetAppEvaluationComparisonXmlHttpError, GetAppEvaluationComparisonXmlHttpResponse, GetAppEvaluationHttpError, GetAppEvaluationHttpResponse, GetAppEvaluationXmlHttpError, GetAppEvaluationXmlHttpResponse, GetAppEvaluationsHttpError, GetAppEvaluationsHttpResponse, GetAppInfoHttpError, GetAppInfoHttpResponse, GetAppInsightAnalysesHttpError, GetAppInsightAnalysesHttpResponse, GetAppInsightAnalysisModelHttpError, GetAppInsightAnalysisModelHttpResponse, GetAppInsightAnalysisRecommendationsHttpError, GetAppInsightAnalysisRecommendationsHttpResponse, GetAppMediaHttpError, GetAppMediaHttpResponse, GetAppMediaListHttpError, GetAppMediaListHttpResponse, GetAppPlacementHttpError, GetAppPlacementHttpResponse, GetAppReloadLogHttpError, GetAppReloadLogHttpResponse, GetAppReloadLogsHttpError, GetAppReloadLogsHttpResponse, GetAppReloadMetadataHttpError, GetAppReloadMetadataHttpResponse, GetAppReportFilterHttpError, GetAppReportFilterHttpResponse, GetAppReportFilterWithQueryHttpError, GetAppReportFilterWithQueryHttpResponse, GetAppReportFiltersHttpError, GetAppReportFiltersHttpResponse, GetAppScriptHistoryHttpError, GetAppScriptHistoryHttpResponse, GetAppScriptHttpError, GetAppScriptHttpResponse, GetAppThumbnailHttpError, GetAppThumbnailHttpResponse, GetAppsPrivilegesHttpError, GetAppsPrivilegesHttpResponse, HardwareMeta, Href, Href2, ImportAppHttpError, ImportAppHttpResponse, JsonObject, LastReloadMetadata, LineageInfoRest, LinkResponse, Links, LinksResponse, Log, Metadata, MoveAppToSpaceHttpError, MoveAppToSpaceHttpResponse, NavigationLink, NavigationLinks, NumberFormat, NxApp, NxAppCreatePrivileges, NxAppObject, NxAttributes, NxObjectAttributes, NxPatch, NxPatchOperationType, Objectmetrics, Objectspec, Objecttopspec, PartialNluInfo, PatchAppReportFilterHttpError, PatchAppReportFilterHttpResponse, PatchAppScriptHttpError, PatchAppScriptHttpResponse, PatchFilter, PatchFilterItem, Placement, PublishApp, PublishAppHttpError, PublishAppHttpResponse, PublishData, QueueAppEvaluationHttpError, QueueAppEvaluationHttpResponse, RecommendFieldItem, RecommendItems, RecommendMasterItem, RecommendNaturalLangQuery, RecommendedAnalysis, RecommendedAnalysisCore, ReloadIncludeFile, ReloadListMetadata, ReloadMeta, ReloadStatements, RemoveAppFromSpaceHttpError, RemoveAppFromSpaceHttpResponse, ReplaceAppPlacementHttpError, ReplaceAppPlacementHttpResponse, RepublishApp, RepublishAppHttpError, RepublishAppHttpResponse, Result, Resultentry, Resultmetadatatopfields, Resultmetadatatoptables, ResultobjMemoryLimit, Resultobjresponsetime, Resultobjsheet, Resultsingle, Script, ScriptIssue, ScriptIssues, ScriptLogList, ScriptLogMeta, ScriptMeta, ScriptMetaList, ScriptVersion, SimplifiedClassifications, Sortedcomparisonfields, Sortedcomparisonobjresponsetime, Sortedcomparisonoobjheavy, Sortedcomparisontables, SymbolFrequency, SymbolValue, TableMetadata, TableProfilingData, UpdateApp, UpdateAppInfoHttpError, UpdateAppInfoHttpResponse, UpdateAppObjectOwnerHttpError, UpdateAppObjectOwnerHttpResponse, UpdateAppOwnerHttpError, UpdateAppOwnerHttpResponse, UpdateAppScriptHttpError, UpdateAppScriptHttpResponse, UpdateOwner, UpdateSpace, UploadAppMediaHttpError, UploadAppMediaHttpResponse, UsageEnum, UserPrivileges, ValidateScriptHttpError, ValidateScriptHttpResponse, clearCache, copyApp, countAppReportFilters, createApp, createAppReportFilter, appsExport as default, deleteApp, deleteAppMedia, deleteAppPlacement, deleteAppReportFilter, deleteAppScript, exportApp, getAppDataLineage, getAppDataMetadata, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXml, getAppEvaluationXml, getAppEvaluations, getAppInfo, getAppInsightAnalyses, getAppInsightAnalysisModel, getAppInsightAnalysisRecommendations, getAppMedia, getAppMediaList, getAppPlacement, getAppReloadLog, getAppReloadLogs, getAppReloadMetadata, getAppReportFilter, getAppReportFilterWithQuery, getAppReportFilters, getAppScript, getAppScriptHistory, getAppThumbnail, getAppsPrivileges, importApp, moveAppToSpace, patchAppReportFilter, patchAppScript, publishApp, queueAppEvaluation, removeAppFromSpace, replaceAppPlacement, republishApp, updateAppInfo, updateAppObjectOwner, updateAppOwner, updateAppScript, uploadAppMedia, validateScript };
+export { appsExport as default };

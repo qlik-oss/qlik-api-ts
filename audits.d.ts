@@ -1,7 +1,7 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/audits.d.ts
-type ArchiveItem = {
+export type ArchiveItem = {
   /** The type that content is encoded in, always "application/json". */
   contentType?: string;
   /** Additional information about the event's details. The structure depends on the type and version of the event. */
@@ -23,7 +23,7 @@ type ArchiveItem = {
   /** The ID of the user who performed the action that triggered the event. */
   userId?: string;
 };
-type ErrorResponse = {
+export type ErrorResponse = {
   errors?: {
     code?: string;
     detail?: string;
@@ -34,7 +34,7 @@ type ErrorResponse = {
 /**
  * The availability of the properties depends on the event and the context it was triggered in.
  */
-type EventExtensions = {
+export type EventExtensions = {
   /** Specifies the entity performing the action on behalf of another party listed as triggering the action. */
   actor?: {
     /** Opaque value identifying impersonating entity. */
@@ -51,11 +51,11 @@ type EventExtensions = {
   /** Might be present if the action is of type "updated" and should contain information about the changes made to the resource. */
   updates?: unknown;
 };
-type GetArchiveResult = {
+export type GetArchiveResult = {
   /** List of archived events. The structure of the events depend on their type and version. */
   data?: ArchiveItem[];
 };
-type GetByIDResult = {
+export type GetByIDResult = {
   /** The type that content is encoded in, always "application/json". */
   contentType?: string;
   /** Additional information about the event's details. The structure depends on the type and version of the event. */
@@ -80,20 +80,20 @@ type GetByIDResult = {
   /** The ID of the user who performed the action that triggered the event. */
   userId?: string;
 };
-type GetLinks = {
+export type GetLinks = {
   self?: Href;
 };
-type GetObjectsResult = {
+export type GetObjectsResult = {
   /** List of requested resources. */
   data?: string[];
   links?: ListLinks;
 };
-type GetResult = {
+export type GetResult = {
   /** List of audit items. */
   data?: GetByIDResult[];
   links?: ListLinks;
 };
-type GetSettingsResult = {
+export type GetSettingsResult = {
   /** Server configuration options. */
   data?: {
     /** Is Long Term Storage archiving enabled?. */
@@ -102,12 +102,12 @@ type GetSettingsResult = {
     EventTTL?: number;
   };
 };
-type ListLinks = {
+export type ListLinks = {
   next?: Href;
   prev?: Href;
   self?: Href;
 };
-type Href = {
+export type Href = {
   href?: string;
 };
 /**
@@ -116,7 +116,7 @@ type Href = {
  * @param query an object with query parameters
  * @throws GetAuditsHttpError
  */
-declare function getAudits(query: {
+export declare function getAudits(query: {
   /** The start/end time interval formatted in ISO 8601 to search by eventTime. For example, "?eventTime=2021-07-14T18:41:15.00Z/2021-07-14T18:41:15.99Z". */
   eventTime?: string;
   /** The case-sensitive string used to search by eventType. Retrieve a list of possible eventTypes with `/v1/audits/types`. */
@@ -136,14 +136,14 @@ declare function getAudits(query: {
   /** The case-sensitive string used to search by userId. */
   userId?: string;
 }, options?: ApiCallOptions): Promise<GetAuditsHttpResponse>;
-type GetAuditsHttpResponse = {
+export type GetAuditsHttpResponse = {
   data: GetResult;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetAuditsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetAuditsHttpResponse>;
 };
-type GetAuditsHttpError = {
+export type GetAuditsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 500;
@@ -153,13 +153,13 @@ type GetAuditsHttpError = {
  *
  * @throws FetchConsumptionAppAuditsHttpError
  */
-declare function fetchConsumptionAppAudits(options?: ApiCallOptions): Promise<FetchConsumptionAppAuditsHttpResponse>;
-type FetchConsumptionAppAuditsHttpResponse = {
+export declare function fetchConsumptionAppAudits(options?: ApiCallOptions): Promise<FetchConsumptionAppAuditsHttpResponse>;
+export type FetchConsumptionAppAuditsHttpResponse = {
   data: DownloadableBlob;
   headers: Headers;
   status: 200;
 };
-type FetchConsumptionAppAuditsHttpError = {
+export type FetchConsumptionAppAuditsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500;
@@ -171,16 +171,16 @@ type FetchConsumptionAppAuditsHttpError = {
  * @param query an object with query parameters
  * @throws GetArchivedAuditsHttpError
  */
-declare function getArchivedAudits(query: {
+export declare function getArchivedAudits(query: {
   /** Date to be used as filter and criteria during extraction. */
   date: string;
 }, options?: ApiCallOptions): Promise<GetArchivedAuditsHttpResponse>;
-type GetArchivedAuditsHttpResponse = {
+export type GetArchivedAuditsHttpResponse = {
   data: GetArchiveResult;
   headers: Headers;
   status: 200;
 };
-type GetArchivedAuditsHttpError = {
+export type GetArchivedAuditsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 404 | 500;
@@ -190,13 +190,13 @@ type GetArchivedAuditsHttpError = {
  *
  * @throws GetAuditsSettingsHttpError
  */
-declare function getAuditsSettings(options?: ApiCallOptions): Promise<GetAuditsSettingsHttpResponse>;
-type GetAuditsSettingsHttpResponse = {
+export declare function getAuditsSettings(options?: ApiCallOptions): Promise<GetAuditsSettingsHttpResponse>;
+export type GetAuditsSettingsHttpResponse = {
   data: GetSettingsResult;
   headers: Headers;
   status: 200;
 };
-type GetAuditsSettingsHttpError = {
+export type GetAuditsSettingsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 401 | 500;
@@ -206,15 +206,15 @@ type GetAuditsSettingsHttpError = {
  *
  * @throws GetAuditSourcesHttpError
  */
-declare function getAuditSources(options?: ApiCallOptions): Promise<GetAuditSourcesHttpResponse>;
-type GetAuditSourcesHttpResponse = {
+export declare function getAuditSources(options?: ApiCallOptions): Promise<GetAuditSourcesHttpResponse>;
+export type GetAuditSourcesHttpResponse = {
   data: GetObjectsResult;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetAuditSourcesHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetAuditSourcesHttpResponse>;
 };
-type GetAuditSourcesHttpError = {
+export type GetAuditSourcesHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 401 | 500;
@@ -224,15 +224,15 @@ type GetAuditSourcesHttpError = {
  *
  * @throws GetAuditTypesHttpError
  */
-declare function getAuditTypes(options?: ApiCallOptions): Promise<GetAuditTypesHttpResponse>;
-type GetAuditTypesHttpResponse = {
+export declare function getAuditTypes(options?: ApiCallOptions): Promise<GetAuditTypesHttpResponse>;
+export type GetAuditTypesHttpResponse = {
   data: GetObjectsResult;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetAuditTypesHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetAuditTypesHttpResponse>;
 };
-type GetAuditTypesHttpError = {
+export type GetAuditTypesHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 401 | 500;
@@ -243,13 +243,13 @@ type GetAuditTypesHttpError = {
  * @param id The audit item's unique identifier.
  * @throws GetAuditHttpError
  */
-declare function getAudit(id: string, options?: ApiCallOptions): Promise<GetAuditHttpResponse>;
-type GetAuditHttpResponse = {
+export declare function getAudit(id: string, options?: ApiCallOptions): Promise<GetAuditHttpResponse>;
+export type GetAuditHttpResponse = {
   data: GetByIDResult;
   headers: Headers;
   status: 200;
 };
-type GetAuditHttpError = {
+export type GetAuditHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 404 | 500;
@@ -257,8 +257,8 @@ type GetAuditHttpError = {
 /**
  * Clears the cache for audits api requests.
  */
-declare function clearCache(): void;
-type AuditsAPI = {
+export declare function clearCache(): void;
+export type AuditsAPI = {
   /**
    * Retrieves list of events for subscribed services for your tenant. Stores events for 90 days, after which they can be accessed via `/v1/audits/archive`.
    *
@@ -315,4 +315,4 @@ type AuditsAPI = {
  */
 declare const auditsExport: AuditsAPI;
 //#endregion
-export { ArchiveItem, AuditsAPI, ErrorResponse, EventExtensions, FetchConsumptionAppAuditsHttpError, FetchConsumptionAppAuditsHttpResponse, GetArchiveResult, GetArchivedAuditsHttpError, GetArchivedAuditsHttpResponse, GetAuditHttpError, GetAuditHttpResponse, GetAuditSourcesHttpError, GetAuditSourcesHttpResponse, GetAuditTypesHttpError, GetAuditTypesHttpResponse, GetAuditsHttpError, GetAuditsHttpResponse, GetAuditsSettingsHttpError, GetAuditsSettingsHttpResponse, GetByIDResult, GetLinks, GetObjectsResult, GetResult, GetSettingsResult, Href, ListLinks, clearCache, auditsExport as default, fetchConsumptionAppAudits, getArchivedAudits, getAudit, getAuditSources, getAuditTypes, getAudits, getAuditsSettings };
+export { auditsExport as default };

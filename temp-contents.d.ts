@@ -1,10 +1,10 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/temp-contents.d.ts
 /**
  * An Error object.
  */
-type Error = {
+export type Error = {
   /** The API error code. */
   code: string;
   /** A human-readable problem description of the issue. */
@@ -24,12 +24,12 @@ type Error = {
 /**
  * An array of Error objects.
  */
-type Errors = {
+export type Errors = {
   errors?: Error[];
   /** A way to trace the source of the error. */
   traceId?: string;
 };
-type DetailResponse = {
+export type DetailResponse = {
   /** Datetime-stamp when the resource was created (in UTC). */
   CreatedAt?: string;
   /** Identifier for the subject / resource creator. */
@@ -54,19 +54,19 @@ type DetailResponse = {
  * @param body an object with the body content
  * @throws UploadTempFileHttpError
  */
-declare function uploadTempFile(query: {
+export declare function uploadTempFile(query: {
   /** The name of the file to upload. */
   filename?: string;
   /** The TTL parameter is used to define the time-to-live for the content resource in seconds.
    * It defaults to one hour (3600) if no input is provided. Max TTL is 259200 (3 days).' */
   ttl?: number;
 }, body: BodyInit, options?: ApiCallOptions): Promise<UploadTempFileHttpResponse>;
-type UploadTempFileHttpResponse = {
+export type UploadTempFileHttpResponse = {
   data: void;
   headers: Headers;
   status: 201;
 };
-type UploadTempFileHttpError = {
+export type UploadTempFileHttpError = {
   data: Errors;
   headers: Headers;
   status: 400;
@@ -78,27 +78,27 @@ type UploadTempFileHttpError = {
  * @param query an object with query parameters
  * @throws DownloadTempFileHttpError
  */
-declare function downloadTempFile(id: string, query: {
+export declare function downloadTempFile(id: string, query: {
   /** Set to "1" to download the file in inline mode. Useful for displaying a preview of the file in a browser. */
   inline?: string;
 }, options?: ApiCallOptions): Promise<DownloadTempFileHttpResponse>;
-type DownloadTempFileHttpResponse = DownloadTempFile200HttpResponse | DownloadTempFile204HttpResponse | DownloadTempFile206HttpResponse;
-type DownloadTempFile200HttpResponse = {
+export type DownloadTempFileHttpResponse = DownloadTempFile200HttpResponse | DownloadTempFile204HttpResponse | DownloadTempFile206HttpResponse;
+export type DownloadTempFile200HttpResponse = {
   data: unknown;
   headers: Headers;
   status: 200;
 };
-type DownloadTempFile204HttpResponse = {
+export type DownloadTempFile204HttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DownloadTempFile206HttpResponse = {
+export type DownloadTempFile206HttpResponse = {
   data: unknown;
   headers: Headers;
   status: 206;
 };
-type DownloadTempFileHttpError = {
+export type DownloadTempFileHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404 | 410 | 416;
@@ -109,19 +109,19 @@ type DownloadTempFileHttpError = {
  * @param id The temporary contents ID.
  * @throws GetTempFileDetailsHttpError
  */
-declare function getTempFileDetails(id: string, options?: ApiCallOptions): Promise<GetTempFileDetailsHttpResponse>;
-type GetTempFileDetailsHttpResponse = GetTempFileDetails200HttpResponse | GetTempFileDetails204HttpResponse;
-type GetTempFileDetails200HttpResponse = {
+export declare function getTempFileDetails(id: string, options?: ApiCallOptions): Promise<GetTempFileDetailsHttpResponse>;
+export type GetTempFileDetailsHttpResponse = GetTempFileDetails200HttpResponse | GetTempFileDetails204HttpResponse;
+export type GetTempFileDetails200HttpResponse = {
   data: DetailResponse;
   headers: Headers;
   status: 200;
 };
-type GetTempFileDetails204HttpResponse = {
+export type GetTempFileDetails204HttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type GetTempFileDetailsHttpError = {
+export type GetTempFileDetailsHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 404 | 410;
@@ -129,8 +129,8 @@ type GetTempFileDetailsHttpError = {
 /**
  * Clears the cache for temp-contents api requests.
  */
-declare function clearCache(): void;
-type TempContentsAPI = {
+export declare function clearCache(): void;
+export type TempContentsAPI = {
   /**
    * Upload a file as a temporary content resource. It returns a `201 Created` with a location header that contains the location of the created resource. If filename or TTL is not properly set, a `400 Bad request` is returned. For internal issues, a `500 Internal Server Error` is returned.
    *
@@ -164,4 +164,4 @@ type TempContentsAPI = {
  */
 declare const tempContentsExport: TempContentsAPI;
 //#endregion
-export { DetailResponse, DownloadTempFile200HttpResponse, DownloadTempFile204HttpResponse, DownloadTempFile206HttpResponse, DownloadTempFileHttpError, DownloadTempFileHttpResponse, Error, Errors, GetTempFileDetails200HttpResponse, GetTempFileDetails204HttpResponse, GetTempFileDetailsHttpError, GetTempFileDetailsHttpResponse, TempContentsAPI, UploadTempFileHttpError, UploadTempFileHttpResponse, clearCache, tempContentsExport as default, downloadTempFile, getTempFileDetails, uploadTempFile };
+export { tempContentsExport as default };

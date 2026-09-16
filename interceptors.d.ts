@@ -1,29 +1,29 @@
-import { E as InvokeFetchResponse, T as InvokeFetchProperties } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { E as InvokeFetchResponse, T as InvokeFetchProperties } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/interceptors/interceptors.d.ts
 /**
  * The RestInterceptor type is a function that can be used to intercept requests and responses
  */
-type RestInterceptor = <T extends InvokeFetchResponse>(request: InvokeFetchProperties, proceed: (props: InvokeFetchProperties) => Promise<T>, id?: string) => Promise<T>;
-declare function createInterceptors(): InterceptorsAPI;
-declare function addDefaultInterceptors(): void;
+export type RestInterceptor = <T extends InvokeFetchResponse>(request: InvokeFetchProperties, proceed: (props: InvokeFetchProperties) => Promise<T>, id?: string) => Promise<T>;
+export declare function createInterceptors(): InterceptorsAPI;
+export declare function addDefaultInterceptors(): void;
 /**
  * Adds an interceptor to the global interceptor stack
  * Returns the newly added interceptor
  * @param interceptor the interceptor to add
  * @returns the newly added interceptor
  */
-declare function addInterceptor(interceptor: RestInterceptor): RestInterceptor;
+export declare function addInterceptor(interceptor: RestInterceptor): RestInterceptor;
 /**
  * Removes an interceptor from the global interceptor stack
  * @param interceptor the interceptor remove
  */
-declare function removeInterceptor(interceptor: RestInterceptor): RestInterceptor | null;
+export declare function removeInterceptor(interceptor: RestInterceptor): RestInterceptor | null;
 /**
  * Gets all registered interceptors
  */
-declare function getInterceptors(): RestInterceptor[];
-interface InterceptorsAPI {
+export declare function getInterceptors(): RestInterceptor[];
+export interface InterceptorsAPI {
   /**
    * Adds an interceptor to the global interceptor stack
    * Returns the newly added interceptor
@@ -48,4 +48,4 @@ declare const interceptors: InterceptorsAPI & {
   createInterceptors: typeof createInterceptors;
 };
 //#endregion
-export { InterceptorsAPI, RestInterceptor, addDefaultInterceptors, addInterceptor, createInterceptors, interceptors as default, getInterceptors, removeInterceptor };
+export { interceptors as default };

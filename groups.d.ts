@@ -1,10 +1,10 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/groups.d.ts
 /**
  * An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles.
  */
-type AssignedRoles = {
+export type AssignedRoles = {
   /** The unique role identitier */
   id: string;
   /** The role level */
@@ -23,7 +23,7 @@ type AssignedRoles = {
  *   }
  * ]
  */
-type AssignedRolesRefIDs = {
+export type AssignedRolesRefIDs = {
   /** The unique role identitier */
   id: string;
 }[];
@@ -36,14 +36,14 @@ type AssignedRolesRefIDs = {
  *   }
  * ]
  */
-type AssignedRolesRefNames = {
+export type AssignedRolesRefNames = {
   /** The name of the role */
   name: string;
 }[];
 /**
  * An error object describing the error.
  */
-type Error = {
+export type Error = {
   /** The error code. */
   code: string;
   /** A human-readable explanation specific to this occurrence of the problem. */
@@ -76,7 +76,7 @@ type Error = {
  *   traceId: "00000000000000000137b213cf12a77b"
  * }
  */
-type Errors = {
+export type Errors = {
   /** An array of errors related to the operation. */
   errors?: Error[];
   /** A unique identifier for tracing the error. */
@@ -85,14 +85,14 @@ type Errors = {
 /**
  * An advanced query filter to be used for complex user querying in the tenant.
  */
-type Filter = {
+export type Filter = {
   /** The advanced filtering to be applied the query. All conditional statements within this query parameter are case insensitive. */
   filter?: string;
 };
 /**
  * represents a Group document
  */
-type Group = {
+export type Group = {
   /** An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles. */
   assignedRoles?: AssignedRoles;
   /** The timestamp for when the group record was created. */
@@ -126,7 +126,7 @@ type Group = {
 /**
  * A JSON Patch document.
  */
-type GroupPatch = {
+export type GroupPatch = {
   /** The operation to be performed. Currently "replace" is the only supported operation. */
   op: "replace";
   /** Attribute name of a field of the Groups entity. "Name" and "description" is only available for custom groups. */
@@ -151,7 +151,7 @@ type GroupPatch = {
  *   }
  * ]
  */
-type GroupPatchSchema = GroupPatch[];
+export type GroupPatchSchema = GroupPatch[];
 /**
  * @example
  * {
@@ -164,7 +164,7 @@ type GroupPatchSchema = GroupPatch[];
  *   status: "active"
  * }
  */
-type GroupPostSchema = {
+export type GroupPostSchema = {
   /** The roles to assign to the group (limit of 100 roles per group). */
   assignedRoles?: AssignedRolesRefIDs | AssignedRolesRefNames;
   /** The description of the group. */
@@ -179,7 +179,7 @@ type GroupPostSchema = {
 /**
  * represents a GroupSetting document
  */
-type GroupSettings = {
+export type GroupSettings = {
   /** Determines if groups should be created on login. */
   autoCreateGroups: boolean;
   /** Contains Links for current document */
@@ -214,7 +214,7 @@ type GroupSettings = {
 /**
  * A result object when listing groups.
  */
-type Groups = {
+export type Groups = {
   /** An array of groups. */
   data?: Group[];
   links?: {
@@ -237,7 +237,7 @@ type Groups = {
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
  */
-type SettingsPatch = {
+export type SettingsPatch = {
   /** The operation to be performed. */
   op: "replace";
   /** A JSON Pointer. */
@@ -269,14 +269,14 @@ type SettingsPatch = {
  *   }
  * ]
  */
-type SettingsPatchSchema = SettingsPatch[];
+export type SettingsPatchSchema = SettingsPatch[];
 /**
  * Returns a list of groups with cursor-based pagination.
  *
  * @param query an object with query parameters
  * @throws GetGroupsHttpError
  */
-declare function getGroups(query: {
+export declare function getGroups(query: {
   /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax. Cannot be combined with any of the fields marked as deprecated. All conditional statements within this query parameter are case insensitive. */
   filter?: string;
   /** The number of groups to retrieve. */
@@ -292,14 +292,14 @@ declare function getGroups(query: {
   /** Whether to return a total match count in the result. Defaults to false. */
   totalResults?: boolean;
 }, options?: ApiCallOptions): Promise<GetGroupsHttpResponse>;
-type GetGroupsHttpResponse = {
+export type GetGroupsHttpResponse = {
   data: Groups;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetGroupsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetGroupsHttpResponse>;
 };
-type GetGroupsHttpError = {
+export type GetGroupsHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 403 | 429 | 500;
@@ -310,13 +310,13 @@ type GetGroupsHttpError = {
  * @param body an object with the body content
  * @throws CreateGroupHttpError
  */
-declare function createGroup(body: GroupPostSchema, options?: ApiCallOptions): Promise<CreateGroupHttpResponse>;
-type CreateGroupHttpResponse = {
+export declare function createGroup(body: GroupPostSchema, options?: ApiCallOptions): Promise<CreateGroupHttpResponse>;
+export type CreateGroupHttpResponse = {
   data: Group;
   headers: Headers;
   status: 201;
 };
-type CreateGroupHttpError = {
+export type CreateGroupHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 403 | 409 | 413 | 429 | 500;
@@ -328,7 +328,7 @@ type CreateGroupHttpError = {
  * @param body an object with the body content
  * @throws FilterGroupsHttpError
  */
-declare function filterGroups(query: {
+export declare function filterGroups(query: {
   /** The number of user entries to retrieve. */
   limit?: number;
   /** Get users with IDs that are higher than the target user ID. Cannot be used in conjunction with prev. */
@@ -338,14 +338,14 @@ declare function filterGroups(query: {
   /** The field to sort by, with +/- prefix indicating sort order */
   sort?: "name" | "+name" | "-name";
 }, body: Filter, options?: ApiCallOptions): Promise<FilterGroupsHttpResponse>;
-type FilterGroupsHttpResponse = {
+export type FilterGroupsHttpResponse = {
   data: Groups;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<FilterGroupsHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<FilterGroupsHttpResponse>;
 };
-type FilterGroupsHttpError = {
+export type FilterGroupsHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 403 | 429 | 500;
@@ -355,13 +355,13 @@ type FilterGroupsHttpError = {
  *
  * @throws GetGroupsSettingsHttpError
  */
-declare function getGroupsSettings(options?: ApiCallOptions): Promise<GetGroupsSettingsHttpResponse>;
-type GetGroupsSettingsHttpResponse = {
+export declare function getGroupsSettings(options?: ApiCallOptions): Promise<GetGroupsSettingsHttpResponse>;
+export type GetGroupsSettingsHttpResponse = {
   data: GroupSettings;
   headers: Headers;
   status: 200;
 };
-type GetGroupsSettingsHttpError = {
+export type GetGroupsSettingsHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 403 | 429 | 500;
@@ -372,13 +372,13 @@ type GetGroupsSettingsHttpError = {
  * @param body an object with the body content
  * @throws PatchGroupsSettingsHttpError
  */
-declare function patchGroupsSettings(body: SettingsPatchSchema, options?: ApiCallOptions): Promise<PatchGroupsSettingsHttpResponse>;
-type PatchGroupsSettingsHttpResponse = {
+export declare function patchGroupsSettings(body: SettingsPatchSchema, options?: ApiCallOptions): Promise<PatchGroupsSettingsHttpResponse>;
+export type PatchGroupsSettingsHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchGroupsSettingsHttpError = {
+export type PatchGroupsSettingsHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 403 | 429 | 500;
@@ -389,13 +389,13 @@ type PatchGroupsSettingsHttpError = {
  * @param groupId The ID of the group to delete.
  * @throws DeleteGroupHttpError
  */
-declare function deleteGroup(groupId: string, options?: ApiCallOptions): Promise<DeleteGroupHttpResponse>;
-type DeleteGroupHttpResponse = {
+export declare function deleteGroup(groupId: string, options?: ApiCallOptions): Promise<DeleteGroupHttpResponse>;
+export type DeleteGroupHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteGroupHttpError = {
+export type DeleteGroupHttpError = {
   data: Errors;
   headers: Headers;
   status: 401 | 404 | 429;
@@ -406,13 +406,13 @@ type DeleteGroupHttpError = {
  * @param groupId The group's unique identifier
  * @throws GetGroupHttpError
  */
-declare function getGroup(groupId: string, options?: ApiCallOptions): Promise<GetGroupHttpResponse>;
-type GetGroupHttpResponse = {
+export declare function getGroup(groupId: string, options?: ApiCallOptions): Promise<GetGroupHttpResponse>;
+export type GetGroupHttpResponse = {
   data: Group;
   headers: Headers;
   status: 200;
 };
-type GetGroupHttpError = {
+export type GetGroupHttpError = {
   data: Errors;
   headers: Headers;
   status: 403 | 404 | 429 | 500;
@@ -424,13 +424,13 @@ type GetGroupHttpError = {
  * @param body an object with the body content
  * @throws PatchGroupHttpError
  */
-declare function patchGroup(groupId: string, body: GroupPatchSchema, options?: ApiCallOptions): Promise<PatchGroupHttpResponse>;
-type PatchGroupHttpResponse = {
+export declare function patchGroup(groupId: string, body: GroupPatchSchema, options?: ApiCallOptions): Promise<PatchGroupHttpResponse>;
+export type PatchGroupHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchGroupHttpError = {
+export type PatchGroupHttpError = {
   data: Errors;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429 | 500;
@@ -438,8 +438,8 @@ type PatchGroupHttpError = {
 /**
  * Clears the cache for groups api requests.
  */
-declare function clearCache(): void;
-type GroupsAPI = {
+export declare function clearCache(): void;
+export type GroupsAPI = {
   /**
    * Returns a list of groups with cursor-based pagination.
    *
@@ -507,4 +507,4 @@ type GroupsAPI = {
  */
 declare const groupsExport: GroupsAPI;
 //#endregion
-export { AssignedRoles, AssignedRolesRefIDs, AssignedRolesRefNames, CreateGroupHttpError, CreateGroupHttpResponse, DeleteGroupHttpError, DeleteGroupHttpResponse, Error, Errors, Filter, FilterGroupsHttpError, FilterGroupsHttpResponse, GetGroupHttpError, GetGroupHttpResponse, GetGroupsHttpError, GetGroupsHttpResponse, GetGroupsSettingsHttpError, GetGroupsSettingsHttpResponse, Group, GroupPatch, GroupPatchSchema, GroupPostSchema, GroupSettings, Groups, GroupsAPI, PatchGroupHttpError, PatchGroupHttpResponse, PatchGroupsSettingsHttpError, PatchGroupsSettingsHttpResponse, SettingsPatch, SettingsPatchSchema, clearCache, createGroup, groupsExport as default, deleteGroup, filterGroups, getGroup, getGroups, getGroupsSettings, patchGroup, patchGroupsSettings };
+export { groupsExport as default };

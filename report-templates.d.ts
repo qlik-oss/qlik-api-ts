@@ -1,7 +1,7 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-o-bqAUAV.js";
-import "./chunks/invoke-fetch-DcXyLc5n.js";
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/report-templates.d.ts
-type CreateTemplateRequest = {
+export type CreateTemplateRequest = {
   /** Template description */
   description?: string | null;
   /** Template name */
@@ -13,7 +13,7 @@ type CreateTemplateRequest = {
   /** The ID of a previously uploaded temporary content file */
   temporaryContentId: string;
 };
-type ErrorResponseItem = {
+export type ErrorResponseItem = {
   /** The error code. */
   code?: string | null;
   /** A human-readable explanation specific to this occurrence of the problem. */
@@ -23,32 +23,32 @@ type ErrorResponseItem = {
   /** Summary of the problem. */
   title?: string | null;
 };
-type ErrorResult = {
+export type ErrorResult = {
   /** List of errors and their properties. */
   errors?: ErrorResponseItem[] | null;
   readonly statusCode?: number | null;
 };
-type GetTemplatesResponse = {
+export type GetTemplatesResponse = {
   /** The current page data. */
   data?: ReportTemplateResponse[] | null;
   links?: PaginationLinks;
 };
-type Operation = {
+export type Operation = {
   from?: string | null;
   op?: string | null;
   path?: string | null;
   value?: unknown | null;
 };
-type PaginationLink = {
+export type PaginationLink = {
   /** The URL for the pagination link. */
   href?: string | null;
 };
-type PaginationLinks = {
+export type PaginationLinks = {
   next?: PaginationLink;
   prev?: PaginationLink;
   self?: PaginationLink;
 };
-type ReportTemplateResponse = {
+export type ReportTemplateResponse = {
   /** The date and time when the template was created. */
   createdAt?: string | null;
   /** The id of the user who created the template. */
@@ -74,7 +74,7 @@ type ReportTemplateResponse = {
   /** The id of the user who last updated the template. */
   updatedBy?: string | null;
 };
-type UpdateTemplateRequest = {
+export type UpdateTemplateRequest = {
   /** Template description */
   description?: string | null;
   /** Template name */
@@ -98,7 +98,7 @@ type UpdateTemplateRequest = {
  * @param query an object with query parameters
  * @throws GetReportTemplatesHttpError
  */
-declare function getReportTemplates(query: {
+export declare function getReportTemplates(query: {
   /** If present, restrict the number of returned items to this value. */
   limit?: number;
   /** Template name to search and filter for. Case-insensitive open search with wildcards both as prefix and suffix. */
@@ -112,14 +112,14 @@ declare function getReportTemplates(query: {
   /** Return the templates that are using the specified app as data source. */
   sourceAppId?: string;
 }, options?: ApiCallOptions): Promise<GetReportTemplatesHttpResponse>;
-type GetReportTemplatesHttpResponse = {
+export type GetReportTemplatesHttpResponse = {
   data: GetTemplatesResponse;
   headers: Headers;
   status: 200;
   prev?: (options?: ApiCallOptions) => Promise<GetReportTemplatesHttpResponse>;
   next?: (options?: ApiCallOptions) => Promise<GetReportTemplatesHttpResponse>;
 };
-type GetReportTemplatesHttpError = {
+export type GetReportTemplatesHttpError = {
   data: ErrorResult;
   headers: Headers;
   status: 400;
@@ -130,13 +130,13 @@ type GetReportTemplatesHttpError = {
  * @param body an object with the body content
  * @throws CreateReportTemplateHttpError
  */
-declare function createReportTemplate(body: CreateTemplateRequest, options?: ApiCallOptions): Promise<CreateReportTemplateHttpResponse>;
-type CreateReportTemplateHttpResponse = {
+export declare function createReportTemplate(body: CreateTemplateRequest, options?: ApiCallOptions): Promise<CreateReportTemplateHttpResponse>;
+export type CreateReportTemplateHttpResponse = {
   data: ReportTemplateResponse;
   headers: Headers;
   status: 201;
 };
-type CreateReportTemplateHttpError = {
+export type CreateReportTemplateHttpError = {
   data: ErrorResult;
   headers: Headers;
   status: 400 | 403 | 404 | 413;
@@ -147,13 +147,13 @@ type CreateReportTemplateHttpError = {
  * @param id The ID of the report template to delete.
  * @throws DeleteReportTemplateHttpError
  */
-declare function deleteReportTemplate(id: string, options?: ApiCallOptions): Promise<DeleteReportTemplateHttpResponse>;
-type DeleteReportTemplateHttpResponse = {
+export declare function deleteReportTemplate(id: string, options?: ApiCallOptions): Promise<DeleteReportTemplateHttpResponse>;
+export type DeleteReportTemplateHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type DeleteReportTemplateHttpError = {
+export type DeleteReportTemplateHttpError = {
   data: ErrorResult;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -164,13 +164,13 @@ type DeleteReportTemplateHttpError = {
  * @param id The ID of the report template.
  * @throws GetReportTemplateHttpError
  */
-declare function getReportTemplate(id: string, options?: ApiCallOptions): Promise<GetReportTemplateHttpResponse>;
-type GetReportTemplateHttpResponse = {
+export declare function getReportTemplate(id: string, options?: ApiCallOptions): Promise<GetReportTemplateHttpResponse>;
+export type GetReportTemplateHttpResponse = {
   data: ReportTemplateResponse;
   headers: Headers;
   status: 200;
 };
-type GetReportTemplateHttpError = {
+export type GetReportTemplateHttpError = {
   data: ErrorResult;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -182,13 +182,13 @@ type GetReportTemplateHttpError = {
  * @param body an object with the body content
  * @throws PatchReportTemplateHttpError
  */
-declare function patchReportTemplate(id: string, body: Operation[], options?: ApiCallOptions): Promise<PatchReportTemplateHttpResponse>;
-type PatchReportTemplateHttpResponse = {
+export declare function patchReportTemplate(id: string, body: Operation[], options?: ApiCallOptions): Promise<PatchReportTemplateHttpResponse>;
+export type PatchReportTemplateHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
-type PatchReportTemplateHttpError = {
+export type PatchReportTemplateHttpError = {
   data: ErrorResult;
   headers: Headers;
   status: 400 | 403 | 404 | 409 | 413;
@@ -200,13 +200,13 @@ type PatchReportTemplateHttpError = {
  * @param body an object with the body content
  * @throws UpdateReportTemplateHttpError
  */
-declare function updateReportTemplate(id: string, body: UpdateTemplateRequest, options?: ApiCallOptions): Promise<UpdateReportTemplateHttpResponse>;
-type UpdateReportTemplateHttpResponse = {
+export declare function updateReportTemplate(id: string, body: UpdateTemplateRequest, options?: ApiCallOptions): Promise<UpdateReportTemplateHttpResponse>;
+export type UpdateReportTemplateHttpResponse = {
   data: ReportTemplateResponse;
   headers: Headers;
   status: 201;
 };
-type UpdateReportTemplateHttpError = {
+export type UpdateReportTemplateHttpError = {
   data: ErrorResult;
   headers: Headers;
   status: 400 | 403 | 404 | 409 | 413;
@@ -217,13 +217,13 @@ type UpdateReportTemplateHttpError = {
  * @param id The ID of the report template.
  * @throws DownloadReportTemplateHttpError
  */
-declare function downloadReportTemplate(id: string, options?: ApiCallOptions): Promise<DownloadReportTemplateHttpResponse>;
-type DownloadReportTemplateHttpResponse = {
+export declare function downloadReportTemplate(id: string, options?: ApiCallOptions): Promise<DownloadReportTemplateHttpResponse>;
+export type DownloadReportTemplateHttpResponse = {
   data: DownloadableBlob;
   headers: Headers;
   status: 200;
 };
-type DownloadReportTemplateHttpError = {
+export type DownloadReportTemplateHttpError = {
   data: ErrorResult;
   headers: Headers;
   status: 400 | 403 | 404;
@@ -231,8 +231,8 @@ type DownloadReportTemplateHttpError = {
 /**
  * Clears the cache for report-templates api requests.
  */
-declare function clearCache(): void;
-type ReportTemplatesAPI = {
+export declare function clearCache(): void;
+export type ReportTemplatesAPI = {
   /**
    * Get descriptive info for the specified templates.
    * @example
@@ -302,4 +302,4 @@ type ReportTemplatesAPI = {
  */
 declare const reportTemplatesExport: ReportTemplatesAPI;
 //#endregion
-export { CreateReportTemplateHttpError, CreateReportTemplateHttpResponse, CreateTemplateRequest, DeleteReportTemplateHttpError, DeleteReportTemplateHttpResponse, DownloadReportTemplateHttpError, DownloadReportTemplateHttpResponse, ErrorResponseItem, ErrorResult, GetReportTemplateHttpError, GetReportTemplateHttpResponse, GetReportTemplatesHttpError, GetReportTemplatesHttpResponse, GetTemplatesResponse, Operation, PaginationLink, PaginationLinks, PatchReportTemplateHttpError, PatchReportTemplateHttpResponse, ReportTemplateResponse, ReportTemplatesAPI, UpdateReportTemplateHttpError, UpdateReportTemplateHttpResponse, UpdateTemplateRequest, clearCache, createReportTemplate, reportTemplatesExport as default, deleteReportTemplate, downloadReportTemplate, getReportTemplate, getReportTemplates, patchReportTemplate, updateReportTemplate };
+export { reportTemplatesExport as default };

@@ -34,7 +34,11 @@
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="deactivatemodelsmldeployment"><span class="tsd-kind-call-signature">deactivateModelsMlDeployment</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">deploymentId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">options</span><span class="tsd-signature-symbol">?:</span> <a href="../types/invoke-fetch-types.ApiCallOptions.html" class="tsd-signature-type tsd-kind-type-alias">ApiCallOptions</a><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/ml.DeactivateModelsMlDeploymentHttpResponse.html" class="tsd-signature-type tsd-kind-type-alias">DeactivateModelsMlDeploymentHttpResponse</a><span class="tsd-signature-symbol">&gt;</span><a href="#deactivatemodelsmldeployment" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Deactivate the model for this deployment</p>
+<div class="tsd-comment tsd-typography"><p>Deactivates the deployed model on this deployment's default alias.
+The response reports which model was targeted and whether its state
+actually changed via the <code>qlik-model-id</code> and <code>qlik-state-change</code>
+response headers. If the model was already inactive, the request
+still succeeds but <code>qlik-state-change</code> is <code>NO_CHANGE</code>.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
