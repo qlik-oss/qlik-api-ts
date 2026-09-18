@@ -15,7 +15,7 @@ export type ActivateDataProductRequest = {
 export type ArrayOfUniqueStrings = string[] | null;
 export type ChangelogOperation = {
   operator?: "replace" | "add" | "remove";
-  path?: "/name" | "/description" | "/spaceId" | "/datasetIds" | "/glossaryIds" | "/readMe" | "/keyContacts" | "/tags" | "/activatedOn" | "/apiConsumableDatasetIds" | "/semanticModel";
+  path?: "/name" | "/description" | "/spaceId" | "/datasetIds" | "/glossaryIds" | "/readMe" | "/keyContacts" | "/tags" | "/activatedOn" | "/apiConsumableDatasetIds" | "/semanticModel" | "/semanticModel/relationships" | "/semanticModel/measures" | "/semanticModel/dimensions";
   value?: string | null | ArrayOfUniqueStrings | unknown[] | null | unknown | null;
 };
 /**
@@ -61,6 +61,9 @@ export type DataProductChangelog = {
   /** Identifier of the user who made these changes. */
   createdBy?: string;
   id?: string;
+  /** Timestamp of the last event included in this aggregated changelog entry.
+   * Only set for aggregated events that span multiple source events. */
+  updatedAt?: string | null;
 };
 export type DataProductChangelogResponse = {
   data?: DataProductChangelog[];
