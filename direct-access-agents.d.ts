@@ -39,10 +39,12 @@ export type ConfigurationLineString = {
   uiActions?: ("Read" | "Write")[] | null;
   value?: string | null;
 };
-export type ConfigurationResponse = {
+export type ConfigurationResponseWithGatewayMetadata = {
   connectorAgentSettings?: ConfigurationLineBase[] | null;
   connectors?: ConnectorSettings[] | null;
   dcaasSettings?: ConfigurationLineBase[] | null;
+  environment?: string | null;
+  productVersion?: string | null;
 };
 export type ConnectorFlatFileConfigurationResponse = {
   errorMessage?: ErrorResponse;
@@ -349,7 +351,7 @@ export declare function getDirectAccessAgentConfiguration(agentId: string, query
   queryProperties?: string[];
 }, options?: ApiCallOptions): Promise<GetDirectAccessAgentConfigurationHttpResponse>;
 export type GetDirectAccessAgentConfigurationHttpResponse = {
-  data: ConfigurationResponse;
+  data: ConfigurationResponseWithGatewayMetadata;
   headers: Headers;
   status: 200;
 };
