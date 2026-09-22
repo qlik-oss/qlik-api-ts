@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
-import "../chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-DCwmQ7fk.js";
+import "../chunks/invoke-fetch-eUbA2JSu.js";
 declare namespace data_connections_d_exports {
   export { ActionDeleteRequest, ActionDuplicateRequest, ActionUpdateRequest, BulkResponse, ConnectionCreate, ConnectionCreateResponse, ConnectionGet, ConnectionUpdate, Connections, CreateDataConnectionHttpError, CreateDataConnectionHttpResponse, DataConnectionsAPI, DcaasConnectionCreate, DcaasConnectionCreateAuthResponse, DeleteDataConnectionHttpError, DeleteDataConnectionHttpResponse, DeleteDataConnectionsHttpError, DeleteDataConnectionsHttpResponse, DuplicateDataConnectionsHttpError, DuplicateDataConnectionsHttpResponse, Error, Errors, GetDataConnectionHttpError, GetDataConnectionHttpResponse, GetDataConnectionsHttpError, GetDataConnectionsHttpResponse, Link, Meta, PatchDataConnectionHttpError, PatchDataConnectionHttpResponse, PatchRequest, Privilege, ResponseErrors, TopLevelLink, UpdateDataConnectionHttpError, UpdateDataConnectionHttpResponse, UpdateDataConnectionsHttpError, UpdateDataConnectionsHttpResponse, clearCache, createDataConnection, dataConnectionsExport as default, deleteDataConnection, deleteDataConnections, duplicateDataConnections, getDataConnection, getDataConnections, patchDataConnection, updateDataConnection, updateDataConnections };
 }

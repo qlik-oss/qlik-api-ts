@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
-import "../chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-DCwmQ7fk.js";
+import "../chunks/invoke-fetch-eUbA2JSu.js";
 declare namespace ip_policies_d_exports {
   export { CreateIPPolicy, CreateIpPolicyHttpError, CreateIpPolicyHttpResponse, DeleteIpPolicyHttpError, DeleteIpPolicyHttpResponse, Error, Errors, GetIpPoliciesHttpError, GetIpPoliciesHttpResponse, GetIpPolicyHttpError, GetIpPolicyHttpResponse, IPPolicyListItem, IPPolicyResource, IpPoliciesAPI, JSONPatch, JSONPatchArray, Link, Links, ListIPPoliciesResult, PatchIpPolicyHttpError, PatchIpPolicyHttpResponse, clearCache, createIpPolicy, ipPoliciesExport as default, deleteIpPolicy, getIpPolicies, getIpPolicy, patchIpPolicy };
 }

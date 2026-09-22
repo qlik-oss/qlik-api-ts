@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
-import "../chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-DCwmQ7fk.js";
+import "../chunks/invoke-fetch-eUbA2JSu.js";
 declare namespace semantic_types_d_exports {
   export { ConflictResolution, DiffEntry, Error, ErrorResponse, ExportCompoundChild, ExportRequest, ExportSemanticType, ExportSemanticTypeCompound, ExportSemanticTypesHttpError, ExportSemanticTypesHttpResponse, ImportConfigDiff, ImportConflictResponse, ImportItemError, ImportReport, ImportRequest, ImportSemanticTypes200HttpResponse, ImportSemanticTypes201HttpResponse, ImportSemanticTypesHttpError, ImportSemanticTypesHttpResponse, ImportStatusDetail, ImportStatusItem, ImportSummary, ImportTypeDiff, ImportTypeStatus, SemanticTypeDictionary, SemanticTypeRegex, SemanticTypesAPI, SemanticTypesExportEnvelope, clearCache, semanticTypesExport as default, exportSemanticTypes, importSemanticTypes };
 }

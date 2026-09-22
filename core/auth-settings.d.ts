@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
-import "../chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-DCwmQ7fk.js";
+import "../chunks/invoke-fetch-eUbA2JSu.js";
 declare namespace auth_settings_d_exports {
   export { AuthSettingsAPI, AuthSettingsJSONPatch, AuthSettingsJSONPatchArray, AuthSettingsResource, Error, Errors, GetAuthSettingsHttpError, GetAuthSettingsHttpResponse, PatchAuthSettingsHttpError, PatchAuthSettingsHttpResponse, clearCache, authSettingsExport as default, getAuthSettings, patchAuthSettings };
 }

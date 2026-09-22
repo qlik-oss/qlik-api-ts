@@ -1,4 +1,4 @@
-import { A as adaptiveCardsExport, j as adaptive_cards_d_exports } from "../chunks/adaptive-cards-BnD5L1JE.js";
+import { A as adaptiveCardsExport, j as adaptive_cards_d_exports } from "../chunks/adaptive-cards-DRakXSKM.js";
 declare namespace discovery_agent_d_exports {
   export { DiscoveryAgentAPI, adaptive_cards_d_exports as adaptiveCards, discoveryAgentExport as default };
 }

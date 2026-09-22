@@ -64,6 +64,12 @@ type ApiCallOptions = {
    * and `onDownload`. Progress will be reported continuously.
    */
   progress?: ProgressOptions;
+  /**
+   * Set the user-agent with this value. This will also override any browser's UA.
+   * This option has no affect on Chromium browsers where the User-Agent header is
+   * immutable.
+   */
+  userAgent?: string;
 };
 type InvokeFetchProperties = {
   /** http method */
@@ -82,8 +88,11 @@ type InvokeFetchProperties = {
   query?: Record<string, unknown>;
   /** specify what content-type to send, if omitted "application/json" is assumed */
   contentType?: string;
-  /** override the default user-agent with this value. This will also override any browser's UA. */
-  userAgent?: string;
+  /**
+   * override the 'qlik-api-version', by default this is the latest version available
+   * when the library was built and is what corresponds with the generated types.
+   */
+  apiVersion?: string;
 };
 type DownloadableBlob = Blob & {
   /** download the blob in a using the specified filename */

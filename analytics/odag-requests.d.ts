@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
-import "../chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-DCwmQ7fk.js";
+import "../chunks/invoke-fetch-eUbA2JSu.js";
 declare namespace odag_requests_d_exports {
   export { AppIdV2, AppNameV2, AppStateCondensedV2, CreateOdagRequestReloadAppHttpError, CreateOdagRequestReloadAppHttpResponse, CreateOdagRequestRenameAppHttpError, CreateOdagRequestRenameAppHttpResponse, DataLoadStatus, DeleteOdagRequestAppHttpError, DeleteOdagRequestAppHttpResponse, ErrorDetailsV2, ErrorV2, FieldSelectionStateV2, FieldValueV2, GetOdagRequestHttpError, GetOdagRequestHttpResponse, GetOdagRequestSelectionsHttpError, GetOdagRequestSelectionsHttpResponse, LinkId, MetaV2, OdagRequestsAPI, ReloadAppPayloadV2, RenameAppPayloadV2, RequestAction, RequestIdV2, RequestKindV2, RequestLoadInfoV2, RequestObjectV2, RequestStateV2, SelectAppParamTypeV2, SelectStatusV2, SelectionStateV2, UpdateOdagRequestHttpError, UpdateOdagRequestHttpResponse, UserIdV2, UserStateCondensedV2, clearCache, createOdagRequestReloadApp, createOdagRequestRenameApp, odagRequestsExport as default, deleteOdagRequestApp, getOdagRequest, getOdagRequestSelections, updateOdagRequest };
 }
