@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
-import "./chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-DCwmQ7fk.js";
+import "./chunks/invoke-fetch-eUbA2JSu.js";
 //#region src/public/rest/reloads.d.ts
 export type Error = {
   /** The error code is in form of 'RELOADS-xxx'. ranges from 'RELOADS-001' to 'RELOADS-013'.  */

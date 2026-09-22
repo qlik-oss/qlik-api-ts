@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
-import "../chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-DCwmQ7fk.js";
+import "../chunks/invoke-fetch-eUbA2JSu.js";
 declare namespace odag_settings_d_exports {
   export { CanUpdateSettings, ErrorDetailsV2, ErrorV2, GetOdagSettingsHttpError, GetOdagSettingsHttpResponse, GetOdagSettingsUpdatePermissionHttpError, GetOdagSettingsUpdatePermissionHttpResponse, MetaV2, OdagSettingsAPI, OdagSettingsV2, PutOdagSettingsHttpError, PutOdagSettingsHttpResponse, SettingsPutPayload, clearCache, odagSettingsExport as default, getOdagSettings, getOdagSettingsUpdatePermission, putOdagSettings };
 }

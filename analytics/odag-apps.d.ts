@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
-import "../chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-DCwmQ7fk.js";
+import "../chunks/invoke-fetch-eUbA2JSu.js";
 declare namespace odag_apps_d_exports {
   export { AppIdV2, AppNameV2, AppStateCondensedV2, AppTypeV2, ErrorDetailsV2, ErrorV2, GetOdagAppsHttpError, GetOdagAppsHttpResponse, MetaV2, OdagAppsAPI, OdagAppsResponseBodyV2, clearCache, odagAppsExport as default, getOdagApps };
 }

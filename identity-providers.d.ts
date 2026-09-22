@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
-import "./chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-DCwmQ7fk.js";
+import "./chunks/invoke-fetch-eUbA2JSu.js";
 //#region src/public/rest/identity-providers.d.ts
 export type BaseIDP = {
   /** Indicates whether the IdP is available for use. */

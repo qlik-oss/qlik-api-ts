@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
-import "../chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-DCwmQ7fk.js";
+import "../chunks/invoke-fetch-eUbA2JSu.js";
 declare namespace direct_access_agents_d_exports {
   export { CreateDirectAccessAgentBenchmarkHttpError, CreateDirectAccessAgentBenchmarkHttpResponse, DirectAccessAgentsAPI, ErrorMessage, ErrorResponse, GetAllBenchmarkStatusResponse, GetBenchmarkStatusResponse, GetBenchmarkStatusResults, GetDirectAccessAgentBenchmarksHttpError, GetDirectAccessAgentBenchmarksHttpResponse, GetDirectAccessAgentLoadPerformanceMetricsHttpError, GetDirectAccessAgentLoadPerformanceMetricsHttpResponse, GetLoadPerformanceMetricsResponse, LinkResponseObject, LoadPerformanceMetric, PaginationLinks, RunBenchmarkResponse, clearCache, createDirectAccessAgentBenchmark, directAccessAgentsExport as default, getDirectAccessAgentBenchmarks, getDirectAccessAgentLoadPerformanceMetrics };
 }

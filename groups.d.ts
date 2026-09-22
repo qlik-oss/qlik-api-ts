@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
-import "./chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-DCwmQ7fk.js";
+import "./chunks/invoke-fetch-eUbA2JSu.js";
 //#region src/public/rest/groups.d.ts
 /**
  * An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles.

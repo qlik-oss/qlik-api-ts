@@ -1,5 +1,5 @@
 import { t as __exportAll } from "../chunks/rolldown-runtime-w6R9maHv.js";
-import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-uJH1SWdc.js";
+import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-BQlTFu41.js";
 
 //#region src/public/rest/data-governance/semantic-types.ts
 var semantic_types_exports = /* @__PURE__ */ __exportAll({

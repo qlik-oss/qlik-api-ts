@@ -1,5 +1,5 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
-import "./chunks/invoke-fetch-DdmiOIkr.js";
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-DCwmQ7fk.js";
+import "./chunks/invoke-fetch-eUbA2JSu.js";
 //#region src/public/rest/extensions.d.ts
 /**
  * Object containing meta data regarding the bundle the extension belongs to. If it does not belong to a bundle, this object is not defined.
