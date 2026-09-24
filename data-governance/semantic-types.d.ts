@@ -1,7 +1,7 @@
 import { x as ApiCallOptions } from "../chunks/auth-types-DCwmQ7fk.js";
 import "../chunks/invoke-fetch-eUbA2JSu.js";
 declare namespace semantic_types_d_exports {
-  export { ConflictResolution, DiffEntry, Error, ErrorResponse, ExportCompoundChild, ExportRequest, ExportSemanticType, ExportSemanticTypeCompound, ExportSemanticTypesHttpError, ExportSemanticTypesHttpResponse, ImportConfigDiff, ImportConflictResponse, ImportItemError, ImportReport, ImportRequest, ImportSemanticTypes200HttpResponse, ImportSemanticTypes201HttpResponse, ImportSemanticTypesHttpError, ImportSemanticTypesHttpResponse, ImportStatusDetail, ImportStatusItem, ImportSummary, ImportTypeDiff, ImportTypeStatus, SemanticTypeDictionary, SemanticTypeRegex, SemanticTypesAPI, SemanticTypesExportEnvelope, clearCache, semanticTypesExport as default, exportSemanticTypes, importSemanticTypes };
+  export { ConflictResolution, CreateSemanticTypeCompoundRequest, CreateSemanticTypeDictionaryRequest, CreateSemanticTypeHttpError, CreateSemanticTypeHttpResponse, CreateSemanticTypeRegexRequest, DatasetFieldsItem, DatasetFieldsPageResponse, DeleteSemanticTypeHttpError, DeleteSemanticTypeHttpResponse, DiffEntry, Error, ErrorResponse, ExportCompoundChild, ExportRequest, ExportSemanticType, ExportSemanticTypeCompound, ExportSemanticTypesHttpError, ExportSemanticTypesHttpResponse, GetSemanticTypeDatasetFieldsHttpError, GetSemanticTypeDatasetFieldsHttpResponse, GetSemanticTypeHttpError, GetSemanticTypeHttpResponse, GetSemanticTypesHttpError, GetSemanticTypesHttpResponse, ImportConfigDiff, ImportConflictResponse, ImportItemError, ImportReport, ImportRequest, ImportSemanticTypes200HttpResponse, ImportSemanticTypes201HttpResponse, ImportSemanticTypesHttpError, ImportSemanticTypesHttpResponse, ImportStatusDetail, ImportStatusItem, ImportSummary, ImportTypeDiff, ImportTypeStatus, Link, PaginationLinks, PatchSemanticTypeHttpError, PatchSemanticTypeHttpResponse, PatchSemanticTypeRequest, PatchSemanticTypeRequestValue, SemanticTypeCompound, SemanticTypeDictionary, SemanticTypeIds, SemanticTypeListResponse, SemanticTypeRegex, SemanticTypeResponse, SemanticTypesAPI, SemanticTypesExportEnvelope, clearCache, createSemanticType, semanticTypesExport as default, deleteSemanticType, exportSemanticTypes, getSemanticType, getSemanticTypeDatasetFields, getSemanticTypes, importSemanticTypes, patchSemanticType };
 }
 /**
  * Resolution decision for a single conflicting semantic type.
@@ -11,6 +11,65 @@ export type ConflictResolution = {
   label: string;
   /** `OVERWRITE`: replace the existing type with the version from the file. `SKIP`: keep the existing type unchanged, do not import. `KEEP_BOTH`: keep the existing type and create the version from the file with a deduplicated label. */
   strategy: "OVERWRITE" | "SKIP" | "KEEP_BOTH";
+};
+/**
+ * Request to create a compound semantic type composed of multiple child semantic types.
+ */
+export type CreateSemanticTypeCompoundRequest = {
+  /** When `true`, the semantic type can be used in data quality compute. */
+  activated?: boolean;
+  /** A coumpound of multiple kinds of semantic types */
+  config: SemanticTypeCompound;
+  description?: string;
+  /** label of semantic type */
+  label: string;
+  /** Category of the semantic type. `REGEX`, `DICTIONARY`, or `COMPOUND`. Determines which `config` schema applies. */
+  type: string;
+  /** When `true`, the semantic type is used for validation. */
+  useForValidation?: boolean;
+};
+/**
+ * Request to create a semantic type that matches words against a list of dictionary values.
+ */
+export type CreateSemanticTypeDictionaryRequest = {
+  /** When `true`, the semantic type can be used in data quality compute. */
+  activated?: boolean;
+  /** A semantic type for words matching a value in the list of values */
+  config: SemanticTypeDictionary;
+  description?: string;
+  /** label of semantic type */
+  label: string;
+  /** Category of the semantic type. `REGEX`, `DICTIONARY`, or `COMPOUND`. Determines which `config` schema applies. */
+  type: string;
+  /** When `true`, the semantic type is used for validation. */
+  useForValidation?: boolean;
+};
+/**
+ * Request to create a semantic type that matches words against a regex pattern.
+ */
+export type CreateSemanticTypeRegexRequest = {
+  /** When `true`, the semantic type can be used in data quality compute. */
+  activated?: boolean;
+  /** A semantic type for words matching a regex pattern */
+  config: SemanticTypeRegex;
+  description?: string;
+  /** label of semantic type */
+  label: string;
+  /** Category of the semantic type. `REGEX`, `DICTIONARY`, or `COMPOUND`. Determines which `config` schema applies. */
+  type: string;
+  /** When `true`, the semantic type is used for validation. */
+  useForValidation?: boolean;
+};
+export type DatasetFieldsItem = {
+  /** The unique identifier of the dataset. */
+  datasetId?: string;
+  /** The list of field names in the dataset associated with the semantic type. */
+  fieldNames?: string[];
+};
+export type DatasetFieldsPageResponse = {
+  data?: DatasetFieldsItem[];
+  /** JSON:API pagination links. */
+  links?: PaginationLinks;
 };
 /**
  * A single field difference between the file value and the existing type.
@@ -196,6 +255,42 @@ export type ImportTypeStatus = {
   type: "REGEX" | "DICTIONARY" | "COMPOUND";
 };
 /**
+ * A pagination link object.
+ */
+export type Link = {
+  /** The URL for the link. */
+  href?: string | null;
+} | null;
+/**
+ * JSON:API pagination links.
+ */
+export type PaginationLinks = {
+  /** A pagination link object. */
+  first?: Link;
+  /** A pagination link object. */
+  last?: Link;
+  /** A pagination link object. */
+  next?: Link;
+  /** A pagination link object. */
+  prev?: Link;
+};
+export type PatchSemanticTypeRequest = {
+  op: "replace";
+  path: "/label" | "/description" | "/useForValidation" | "/activated" | "/config/validationContent" | "/config/validationPattern" | "/config/validationCriteria" | "/config/values" | "/config/children";
+  /** The new value to apply at the given `path`. The accepted type depends on the target path: a string for `/label`, `/description`, `/config/validationContent`, `/config/validationPattern`, and `/config/validationCriteria`; a boolean for `/useForValidation` and `/activated`; an array for `/config/values` and `/config/children`. */
+  value?: PatchSemanticTypeRequestValue;
+}[];
+/**
+ * The new value to apply at the given `path`. The accepted type depends on the target path: a string for `/label`, `/description`, `/config/validationContent`, `/config/validationPattern`, and `/config/validationCriteria`; a boolean for `/useForValidation` and `/activated`; an array for `/config/values` and `/config/children`.
+ */
+export type PatchSemanticTypeRequestValue = string | boolean | unknown[] | null;
+/**
+ * A coumpound of multiple kinds of semantic types
+ */
+export type SemanticTypeCompound = {
+  children: string[];
+};
+/**
  * A semantic type for words matching a value in the list of values
  */
 export type SemanticTypeDictionary = {
@@ -204,6 +299,13 @@ export type SemanticTypeDictionary = {
    * IGNORE_CASE_AND_ACCENTS: case and accents are ignored */
   validationCriteria?: "EXACT_VALUE" | "IGNORE_CASE_AND_ACCENTS";
   values: string[];
+};
+/**
+ * List of semantic type ids.
+ */
+export type SemanticTypeIds = string[];
+export type SemanticTypeListResponse = {
+  data?: unknown;
 };
 /**
  * A semantic type for words matching a regex pattern
@@ -218,6 +320,39 @@ export type SemanticTypeRegex = {
   validationPattern: string;
 };
 /**
+ * @example
+ * {
+ *   activated: true,
+ *   config: {
+ *     validationContent: "ANY_CHARACTER",
+ *     validationPattern: "^[a-z]{3}@qlik\.com$"
+ *   },
+ *   createdAt: "2025-07-16T13:38:03Z",
+ *   createdBy: "685bc460dcdf02ef734cd2e6",
+ *   description: "qlik email is a trigram followed by @qlik",
+ *   label: "Qlik email",
+ *   type: "REGEX",
+ *   updatedAt: "2025-07-16T13:38:03Z",
+ *   updatedBy: "685bc460dcdf02ef734cd2e6",
+ *   useForValidation: true
+ * }
+ */
+export type SemanticTypeResponse = {
+  activated: boolean;
+  config: SemanticTypeRegex | SemanticTypeDictionary | SemanticTypeCompound;
+  createdAt: string;
+  createdBy: string;
+  description?: string;
+  id: string;
+  label: string;
+  /** Parent semantic type identifier. This field is omitted from the default response and is only returned when explicitly requested with `fields=parentId`. */
+  parentId?: string;
+  type: "REGEX" | "DICTIONARY" | "COMPOUND";
+  updatedAt: string;
+  updatedBy: string;
+  useForValidation: boolean;
+};
+/**
  * Self-describing export envelope for Qlik Cloud semantic types.
  */
 export type SemanticTypesExportEnvelope = {
@@ -228,6 +363,53 @@ export type SemanticTypesExportEnvelope = {
   semanticTypes: ExportSemanticType[];
   /** Schema version for forward compatibility. */
   version: string;
+};
+/**
+ * Retrieves all semantic types for a tenant. Supports conditional requests via the `If-None-Match` header.
+ * @example
+ * getSemanticTypes(
+ *   {
+ *     fields: "label,type"
+ *   }
+ * )
+ *
+ * @param query an object with query parameters
+ * @throws GetSemanticTypesHttpError
+ */
+export declare function getSemanticTypes(query: {
+  /** A comma-separated list of fields to include in the response. The `id` field is always returned regardless of this filter. */
+  fields?: string;
+  /** Used to get semantic types with given ids. */
+  ids?: SemanticTypeIds;
+  /** Used to get semantic types with given parent ids. */
+  parentIds?: SemanticTypeIds;
+}, options?: ApiCallOptions): Promise<GetSemanticTypesHttpResponse>;
+export type GetSemanticTypesHttpResponse = {
+  data: SemanticTypeListResponse;
+  headers: Headers;
+  status: 200;
+};
+export type GetSemanticTypesHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: 400 | 401 | 403 | 500 | 503;
+};
+/**
+ * Creates a new semantic type for the current tenant. A semantic type can be defined as a regular expression, a dictionary of values, or a compound of other semantic types, as specified by the `type` field in the request body.
+ *
+ * @param body an object with the body content
+ * @throws CreateSemanticTypeHttpError
+ */
+export declare function createSemanticType(body: CreateSemanticTypeRegexRequest | CreateSemanticTypeCompoundRequest | CreateSemanticTypeDictionaryRequest, options?: ApiCallOptions): Promise<CreateSemanticTypeHttpResponse>;
+export type CreateSemanticTypeHttpResponse = {
+  data: SemanticTypeResponse;
+  headers: Headers;
+  status: 201;
+};
+export type CreateSemanticTypeHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: 400 | 401 | 403 | 404 | 413 | 500 | 503;
 };
 /**
  * Exports semantic types from the current tenant as a downloadable JSON file. Supports optional filtering by type IDs, category, creator, or search term.  Without filters, all types (user-created and Qlik defaults) are exported.
@@ -292,10 +474,113 @@ export type ImportSemanticTypesHttpError = {
   status: 400 | 401 | 403 | 500 | 503;
 };
 /**
+ * Permanently deletes a semantic type identified by its ID. This operation cannot be undone. Any dataset fields previously associated with the semantic type will no longer be classified by it. A semantic type used as a child of a `COMPOUND` type cannot be deleted until it is removed from that `COMPOUND` type.
+ *
+ * @param semanticTypeId The unique identifier of the semantic type.
+ * @throws DeleteSemanticTypeHttpError
+ */
+export declare function deleteSemanticType(semanticTypeId: string, options?: ApiCallOptions): Promise<DeleteSemanticTypeHttpResponse>;
+export type DeleteSemanticTypeHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 204;
+};
+export type DeleteSemanticTypeHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: 400 | 401 | 403 | 404 | 500 | 503;
+};
+/**
+ * Returns the definition of a single semantic type identified by its ID, including its configuration (regex, dictionary, or compound rules).
+ *
+ * @param semanticTypeId The unique identifier of the semantic type.
+ * @param query an object with query parameters
+ * @throws GetSemanticTypeHttpError
+ */
+export declare function getSemanticType(semanticTypeId: string, query: {
+  /** A comma-separated list of fields to include in the response. The `id` field is always returned regardless of this filter. */
+  fields?: string;
+}, options?: ApiCallOptions): Promise<GetSemanticTypeHttpResponse>;
+export type GetSemanticTypeHttpResponse = {
+  data: SemanticTypeResponse;
+  headers: Headers;
+  status: 200;
+};
+export type GetSemanticTypeHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: 400 | 401 | 403 | 404 | 500 | 503;
+};
+/**
+ * Partially updates an existing semantic type identified by its ID. Only the fields included in the request payload are modified; omitted fields keep their current values.
+ *
+ * @param semanticTypeId The unique identifier of the semantic type.
+ * @param body an object with the body content
+ * @throws PatchSemanticTypeHttpError
+ */
+export declare function patchSemanticType(semanticTypeId: string, body: PatchSemanticTypeRequest, options?: ApiCallOptions): Promise<PatchSemanticTypeHttpResponse>;
+export type PatchSemanticTypeHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 204;
+};
+export type PatchSemanticTypeHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: 400 | 401 | 403 | 404 | 413 | 500 | 503;
+};
+/**
+ * Returns a paginated list of datasets and their field names that are associated with the specified semantic type. Data is pre-computed from the dataset relationship collection and populated lazily when data quality events are processed.
+ *
+ * @param semanticTypeId The unique identifier of the semantic type.
+ * @param query an object with query parameters
+ * @throws GetSemanticTypeDatasetFieldsHttpError
+ */
+export declare function getSemanticTypeDatasetFields(semanticTypeId: string, query: {
+  /** Number of items per page. */
+  limit?: number;
+  /** Page number for pagination (1-based). */
+  page?: number;
+  /** Optional resource field name to sort on. Can be prefixed with +/- to determine order, defaults to (+) ascending. In URLs, "+" should be percent-encoded as "%2B". */
+  sort?: "+datasetId" | "-datasetId";
+}, options?: ApiCallOptions): Promise<GetSemanticTypeDatasetFieldsHttpResponse>;
+export type GetSemanticTypeDatasetFieldsHttpResponse = {
+  data: DatasetFieldsPageResponse;
+  headers: Headers;
+  status: 200;
+  prev?: (options?: ApiCallOptions) => Promise<GetSemanticTypeDatasetFieldsHttpResponse>;
+  next?: (options?: ApiCallOptions) => Promise<GetSemanticTypeDatasetFieldsHttpResponse>;
+};
+export type GetSemanticTypeDatasetFieldsHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: 400 | 401 | 403 | 404 | 500 | 503;
+};
+/**
  * Clears the cache for data-governance/semantic-types api requests.
  */
 export declare function clearCache(): void;
 export type SemanticTypesAPI = {
+  /**
+   * Retrieves all semantic types for a tenant. Supports conditional requests via the `If-None-Match` header.
+   * @example
+   * getSemanticTypes(
+   *   {
+   *     fields: "label,type"
+   *   }
+   * )
+   *
+   * @param query an object with query parameters
+   * @throws GetSemanticTypesHttpError
+   */
+  getSemanticTypes: typeof getSemanticTypes;
+  /**
+   * Creates a new semantic type for the current tenant. A semantic type can be defined as a regular expression, a dictionary of values, or a compound of other semantic types, as specified by the `type` field in the request body.
+   *
+   * @param body an object with the body content
+   * @throws CreateSemanticTypeHttpError
+   */
+  createSemanticType: typeof createSemanticType;
   /**
    * Exports semantic types from the current tenant as a downloadable JSON file. Supports optional filtering by type IDs, category, creator, or search term.  Without filters, all types (user-created and Qlik defaults) are exported.
    *
@@ -332,6 +617,37 @@ export type SemanticTypesAPI = {
    * @throws ImportSemanticTypesHttpError
    */
   importSemanticTypes: typeof importSemanticTypes;
+  /**
+   * Permanently deletes a semantic type identified by its ID. This operation cannot be undone. Any dataset fields previously associated with the semantic type will no longer be classified by it. A semantic type used as a child of a `COMPOUND` type cannot be deleted until it is removed from that `COMPOUND` type.
+   *
+   * @param semanticTypeId The unique identifier of the semantic type.
+   * @throws DeleteSemanticTypeHttpError
+   */
+  deleteSemanticType: typeof deleteSemanticType;
+  /**
+   * Returns the definition of a single semantic type identified by its ID, including its configuration (regex, dictionary, or compound rules).
+   *
+   * @param semanticTypeId The unique identifier of the semantic type.
+   * @param query an object with query parameters
+   * @throws GetSemanticTypeHttpError
+   */
+  getSemanticType: typeof getSemanticType;
+  /**
+   * Partially updates an existing semantic type identified by its ID. Only the fields included in the request payload are modified; omitted fields keep their current values.
+   *
+   * @param semanticTypeId The unique identifier of the semantic type.
+   * @param body an object with the body content
+   * @throws PatchSemanticTypeHttpError
+   */
+  patchSemanticType: typeof patchSemanticType;
+  /**
+   * Returns a paginated list of datasets and their field names that are associated with the specified semantic type. Data is pre-computed from the dataset relationship collection and populated lazily when data quality events are processed.
+   *
+   * @param semanticTypeId The unique identifier of the semantic type.
+   * @param query an object with query parameters
+   * @throws GetSemanticTypeDatasetFieldsHttpError
+   */
+  getSemanticTypeDatasetFields: typeof getSemanticTypeDatasetFields;
   /**
    * Clears the cache for semantic-types api requests.
    */

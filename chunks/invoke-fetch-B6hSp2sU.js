@@ -1,6 +1,6 @@
 import { r as isBrowser } from "./utils-m8Ydgbd8.js";
-import { r as isValidApiVersion } from "./invoke-fetch-functions-CnlEGMVN.js";
-import { n as getInvokeFetchRuntimeModule } from "./public-runtime-modules-Ba2YHVh1.js";
+import { r as isValidApiVersion } from "./invoke-fetch-functions-C_Fj8sJ4.js";
+import { n as getInvokeFetchRuntimeModule } from "./public-runtime-modules-B9hK9VWc.js";
 
 //#region src/public/api-version.ts
 /**

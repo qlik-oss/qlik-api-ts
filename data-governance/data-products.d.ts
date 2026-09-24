@@ -1,7 +1,7 @@
 import { x as ApiCallOptions } from "../chunks/auth-types-DCwmQ7fk.js";
 import "../chunks/invoke-fetch-eUbA2JSu.js";
 declare namespace data_products_d_exports {
-  export { ActivateDataProductHttpError, ActivateDataProductHttpResponse, ActivateDataProductRequest, ArrayOfUniqueStrings, ChangelogOperation, ComputationResponse, ComputeDatasetsDataQualityDataProductHttpError, ComputeDatasetsDataQualityDataProductHttpResponse, CreateDataProductHttpError, CreateDataProductHttpResponse, CreateDataProductRequest, DataProductChangelog, DataProductChangelogResponse, DataProductResponse, DataProductsAPI, DatasetIdType, DatasetsComputationResponse, DeactivateDataProductHttpError, DeactivateDataProductHttpResponse, DeleteDataProductHttpError, DeleteDataProductHttpResponse, Error, ErrorResponse, ExecutionStatus, ExportDocumentationDataProductHttpError, ExportDocumentationDataProductHttpResponse, GenerateProviderUrlDataProductsHttpError, GenerateProviderUrlDataProductsHttpResponse, GenerateProviderUrlResponse, GetDataProductChangelogsHttpError, GetDataProductChangelogsHttpResponse, GetDataProductHttpError, GetDataProductHttpResponse, KeyContact, Link, Links, MoveDataProductHttpError, MoveDataProductHttpResponse, MoveDataProductRequest, PatchDataProductHttpError, PatchDataProductHttpResponse, PatchDataProductRequest, Quality, TrustScore, TrustScoreDimension, activateDataProduct, clearCache, computeDatasetsDataQualityDataProduct, createDataProduct, deactivateDataProduct, dataProductsExport as default, deleteDataProduct, exportDocumentationDataProduct, generateProviderUrlDataProducts, getDataProduct, getDataProductChangelogs, moveDataProduct, patchDataProduct };
+  export { ActivateDataProductHttpError, ActivateDataProductHttpResponse, ActivateDataProductRequest, ArrayOfUniqueStrings, ChangelogOperation, ComputationResponse, ComputeDatasetsDataQualityDataProductHttpError, ComputeDatasetsDataQualityDataProductHttpResponse, CreateDataProductHttpError, CreateDataProductHttpResponse, CreateDataProductRequest, DataProductChangelog, DataProductChangelogResponse, DataProductResponse, DataProductsAPI, DatasetIdType, DatasetsComputationResponse, DeactivateDataProductHttpError, DeactivateDataProductHttpResponse, DeleteDataProductHttpError, DeleteDataProductHttpResponse, Error, ErrorResponse, ExecutionStatus, ExportDocumentationDataProductHttpError, ExportDocumentationDataProductHttpResponse, GenerateProviderUrlDataProductsHttpError, GenerateProviderUrlDataProductsHttpResponse, GenerateProviderUrlResponse, GetDataProductChangelogsHttpError, GetDataProductChangelogsHttpResponse, GetDataProductHttpError, GetDataProductHttpResponse, KeyContact, Link, Links, MoveDataProductHttpError, MoveDataProductHttpResponse, MoveDataProductRequest, PatchDataProductHttpError, PatchDataProductHttpResponse, PatchDataProductRequest, Quality, TableRef, TrustScore, TrustScoreDimension, activateDataProduct, clearCache, computeDatasetsDataQualityDataProduct, createDataProduct, deactivateDataProduct, dataProductsExport as default, deleteDataProduct, exportDocumentationDataProduct, generateProviderUrlDataProducts, getDataProduct, getDataProductChangelogs, moveDataProduct, patchDataProduct };
 }
 export type ActivateDataProductRequest = {
   /** A description of the data product. */
@@ -129,6 +129,11 @@ export type DatasetsComputationResponse = {
 export type Error = {
   code?: string;
   detail?: string;
+  /** Optional. MAY be used to provide more arbitrary, structured data to the client, e.g. `cycle` for `CIRCULAR_REFERENCE` errors. */
+  meta?: {
+    /** Present only for `CIRCULAR_REFERENCE` errors. The tables forming the detected cycle, in order (first and last entries repeated to close the loop). */
+    cycle?: TableRef[];
+  };
   status?: string;
   title?: string;
 };
@@ -176,6 +181,10 @@ export type PatchDataProductRequest = {
 export type Quality = {
   completeness: number;
   validity: number;
+};
+export type TableRef = {
+  tableId: string;
+  tableName: string;
 };
 export type TrustScore = {
   applicableDatasets: number;

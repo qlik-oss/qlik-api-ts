@@ -2674,6 +2674,7 @@ async function performActualHttpFetch(method, completeUrl, unencodedBody, conten
 		method,
 		credentials,
 		mode: "cors",
+		cache: "no-store",
 		headers,
 		redirect: await isWindows(options?.hostConfig) ? "manual" : "follow",
 		keepalive: options?.keepalive,
