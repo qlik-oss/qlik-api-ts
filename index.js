@@ -1,5 +1,5 @@
-import { f as interceptors$1 } from "./chunks/invoke-fetch-functions-CnlEGMVN.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-BQlTFu41.js";
+import { f as interceptors$1 } from "./chunks/invoke-fetch-functions-C_Fj8sJ4.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B6hSp2sU.js";
 import auth_default from "./auth.js";
 import qix$1 from "./qix.js";
 
@@ -733,10 +733,21 @@ const createDataGovernanceDataQualitiesRuntimeAPI = apiDefToApiPublic("data-gove
 		actions: { filter: ["filterDataQualitiesGlobalResults:PBJ:"] }
 	}
 } } } });
-const createDataGovernanceSemanticTypesRuntimeAPI = apiDefToApiPublic("data-governance/semantic-types", { api: { "data-governance": { "semantic-types": { actions: {
-	export: ["exportSemanticTypes:PBJ:"],
-	import: ["importSemanticTypes:PBJ:"]
-} } } } });
+const createDataGovernanceSemanticTypesRuntimeAPI = apiDefToApiPublic("data-governance/semantic-types", { api: { "data-governance": { "semantic-types": {
+	"": ["getSemanticTypes:GQ:", "createSemanticType:PBJ:"],
+	actions: {
+		export: ["exportSemanticTypes:PBJ:"],
+		import: ["importSemanticTypes:PBJ:"]
+	},
+	"{semanticTypeId}": {
+		"": [
+			"deleteSemanticType:D:",
+			"getSemanticType:GQ:",
+			"patchSemanticType:ABJ:"
+		],
+		"dataset-fields": ["getSemanticTypeDatasetFields:GQ:"]
+	}
+} } } });
 const createDataGovernanceTrustScoresRuntimeAPI = apiDefToApiPublic("data-governance/trust-scores", { api: { "data-governance": { "trust-scores": { results: { "data-sets": { actions: { filter: ["filterDatasetsTrustScore:PBJ:"] } } } } } } });
 const createDataGovernanceRuntimeAPI = apiDefToApiPublic("data-governance", {}, {
 	"data-products": createDataGovernanceDataProductsRuntimeAPI,

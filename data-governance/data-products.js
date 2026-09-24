@@ -1,5 +1,5 @@
 import { t as __exportAll } from "../chunks/rolldown-runtime-w6R9maHv.js";
-import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-BQlTFu41.js";
+import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-B6hSp2sU.js";
 
 //#region src/public/rest/data-governance/data-products.ts
 var data_products_exports = /* @__PURE__ */ __exportAll({
