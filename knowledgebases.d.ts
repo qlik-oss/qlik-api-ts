@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DCwmQ7fk.js";
-import "./chunks/invoke-fetch-eUbA2JSu.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/knowledgebases.d.ts
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
@@ -234,6 +234,25 @@ export type ErrorResponseCopy = {
  */
 export type IndexingErrorCode = "unknown" | "file_size_exceeded" | "download_failed" | "parse_failed" | "parse_timeout" | "chunk_failed" | "chunk_timeout" | "guardrail_blocked" | "unsupported_file" | "index_verification_failed" | "file_not_found" | "document_has_macros" | "scan_failed" | "pages_limit_exceeded" | "pages_enforcement_failed" | "governance_budget_exceeded";
 /**
+ * Aggregate indexing progress for the knowledgebase across the current sync.
+ */
+export type IndexingProgress = {
+  /** Number of files that failed to index. */
+  filesFailed?: number;
+  /** Number of files processed so far. */
+  filesProcessed?: number;
+  /** Total number of files to index in the current sync. */
+  filesTotal?: number;
+  /** Aggregate indexing progress across the knowledgebase, 0-100. */
+  overallPercent?: number;
+  /** Aggregate indexing status for the knowledgebase. */
+  status?: "notStarted" | "inProgress" | "completed" | "completedWithError" | "cancelled";
+  /** Identifier of the sync currently driving this progress. */
+  syncId?: string;
+  /** When this progress snapshot was last updated. */
+  updatedAt?: string;
+};
+/**
  * Metadata about the chunk
  */
 export type KbChunkMeta = {
@@ -250,6 +269,8 @@ export type KbChunkMeta = {
 };
 export type KnowledgeBase = KnowledgeBaseLight & {
   datasources?: DataSource[];
+  /** Aggregate indexing progress for the knowledgebase across the current sync. */
+  indexingProgress?: IndexingProgress;
 };
 export type KnowledgeBaseLight = {
   /** User opt in to advanced parsing and chunking pipeline. Default is false, which will run legacy parsing and chunking. */
@@ -642,7 +663,7 @@ export type DownloadKnowledgebaseDatasourceHttpResponse = {
 export type DownloadKnowledgebaseDatasourceHttpError = {
   data: ErrorResponseCopy;
   headers: Headers;
-  status: 400 | 403 | 404;
+  status: 400 | 403 | 404 | 409;
 };
 /**
  * Starts syncing a specified datasource to a specified knowledgebase index.

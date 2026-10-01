@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DCwmQ7fk.js";
-import "./chunks/invoke-fetch-eUbA2JSu.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/tenant-settings.d.ts
 export type CustomizeNoAccess = {
   linkEnabled: boolean;
@@ -122,6 +122,8 @@ export type TenantSettingsDefinition = {
   customizeNoAccess?: CustomizeNoAccess;
   readonly id: string;
   preferredStartPage?: StartPageConfigHub | StartPageConfigCreationHub | StartPageConfigQdi | StartPageConfigConsole;
+  /** Whether the tenant has opted in to public preview features. */
+  publicPreviewOptIn?: boolean;
   /** Set the release cadence */
   releaseCadence?: ReleaseCadenceConfig;
   /** Tenant-wide preference for opting out of session replay. When set, this value overrides individual user preferences. EU regions default to true (opted out) if this is not explicitly configured. */

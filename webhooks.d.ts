@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DCwmQ7fk.js";
-import "./chunks/invoke-fetch-eUbA2JSu.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/webhooks.d.ts
 export type Delivery = {
   /** The name of the triggering event-type. */
@@ -55,6 +55,8 @@ export type ErrorResponse = {
   traceId?: string;
 };
 export type EventType = {
+  /** The set of fields that can be used to filter this specific event type for webhook delivery. Different event types may support different filter paths. */
+  allowedFilters?: FilterInfo[];
   /** Category of the event type. */
   category?: string;
   /** Description of the event type. */
@@ -68,6 +70,15 @@ export type EventType = {
 };
 export type EventTypes = {
   data?: EventType[];
+};
+/**
+ * Describes a single field that can be used as a filter.
+ */
+export type FilterInfo = {
+  /** Optional allowed values for this filter path. If omitted, the path is treated as free-form and clients are responsible for valid usage. */
+  allowedValues?: string[];
+  /** The field name or path that can be used as a filter. */
+  path: string;
 };
 export type Link = {
   /** URL to a resource request. */
