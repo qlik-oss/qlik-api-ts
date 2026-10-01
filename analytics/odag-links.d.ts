@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-DCwmQ7fk.js";
-import "../chunks/invoke-fetch-eUbA2JSu.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
+import "../chunks/invoke-fetch-DdmiOIkr.js";
 declare namespace odag_links_d_exports {
   export { AppIdV2, AppNameParameterV2, AppNameV2, AppStateCondensedV2, BindFormattingV2, BindingArrayV2, BindingV2, CanCreateLinks, CreateOdagLinkHttpError, CreateOdagLinkHttpResponse, CreateOdagLinkRequestHttpError, CreateOdagLinkRequestHttpResponse, DataLoadStatus, ErrorDetailsV2, ErrorV2, FieldSelectionStateV2, FieldValueV2, GetOdagLinkCreatePermissionHttpError, GetOdagLinkCreatePermissionHttpResponse, GetOdagLinkHttpError, GetOdagLinkHttpResponse, GetOdagLinkRequestsHttpError, GetOdagLinkRequestsHttpResponse, GetOdagLinksHttpError, GetOdagLinksHttpResponse, GetOdagLinksSelectionAppUsagesHttpError, GetOdagLinksSelectionAppUsagesHttpResponse, LinkAddPayloadV2, LinkId, LinkNameV2, LinkPropAppOpenMethodV2, LinkPropAppRetentionTimeV2, LinkPropDisableV2, LinkPropGenAppLimitV2, LinkPropGenAppNameV2, LinkPropLimitPolicyV2, LinkPropMenuLabelV2, LinkPropOverrideGenAppLimitV2, LinkPropRowEstRangeV2, LinkPropTargetSheetV2, LinkPropertiesV2, LinkPutPayloadV2, LinkRowEstExprV2, LinkStateFullV2, LinkStateRefV2, LinkStatusSettingV2, LinkStatusV2, LinkTypeV2, LinkUsageContextV2, MetaV2, NumericOnlyV2, OdagLinksAPI, RequestArrayV2, RequestIdV2, RequestKindV2, RequestLoadInfoV2, RequestObjectV2, RequestPostPayloadV2, RequestStateV2, SelAppLinkUsagePayload, SelectAppParamTypeV2, SelectStatusV2, SelectionStateDescrV2, SelectionStateV2, UpdateOdagLinkHttpError, UpdateOdagLinkHttpResponse, UserIdV2, UserStateCondensedV2, ValueCountRangeV2, clearCache, createOdagLink, createOdagLinkRequest, odagLinksExport as default, getOdagLink, getOdagLinkCreatePermission, getOdagLinkRequests, getOdagLinks, getOdagLinksSelectionAppUsages, updateOdagLink };
 }
@@ -547,6 +547,8 @@ export type GetOdagLinksHttpError = {
 export declare function createOdagLink(query: {
   /** Determines whether master charts of the template Analytics Application are included in the response. */
   includeCharts?: boolean;
+  /** When true, ODAG also creates a generic object on the selection Analytics Application referencing the new link (`qType: odagapplink`, or `dynamicappview` for dynamic-view links), so the link shows up in the app's list of links. Idempotent on retry; must not be combined with a client-side registration of the same link. */
+  registerOnSelectionApp?: boolean;
 }, body: LinkAddPayloadV2, options?: ApiCallOptions): Promise<CreateOdagLinkHttpResponse>;
 export type CreateOdagLinkHttpResponse = {
   data: LinkStateFullV2;
@@ -556,7 +558,7 @@ export type CreateOdagLinkHttpResponse = {
 export type CreateOdagLinkHttpError = {
   data: ErrorV2;
   headers: Headers;
-  status: 400 | 403 | 404;
+  status: 400 | 403 | 404 | 500;
 };
 /**
  * Checks whether the current user has permission to create new ODAG links. Optionally verify permissions for a specific template Analytics Application or selection Analytics Application context. Returns a boolean indicating create permission status.
