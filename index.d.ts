@@ -1,10 +1,12 @@
-import { d as HostConfig } from "./chunks/auth-types-DCwmQ7fk.js";
+import { d as HostConfig } from "./chunks/auth-types-yKuw6LLB.js";
 import { InterceptorsAPI, createInterceptors } from "./interceptors.js";
 import { AuthAPI, getAccessToken, getWebResourceAuthParams, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig } from "./auth.js";
-import { t as QixAPI } from "./chunks/qix-B3ASD60z.js";
+import { t as QixAPI } from "./chunks/qix-B7u-yT_2.js";
+import { SharingTasksAPI } from "./alerting/sharing-tasks.js";
+import { AlertingAPI } from "./alerting.js";
 import { AppsAPI } from "./analytics/apps.js";
 import { ChangeStoresAPI } from "./analytics/change-stores.js";
-import { r as AdaptiveCardsAPI } from "./chunks/adaptive-cards-DRakXSKM.js";
+import { r as AdaptiveCardsAPI } from "./chunks/adaptive-cards-BnD5L1JE.js";
 import { DiscoveryAgentAPI } from "./analytics/discovery-agent.js";
 import { OdagAppsAPI } from "./analytics/odag-apps.js";
 import { OdagLinksAPI } from "./analytics/odag-links.js";
@@ -76,7 +78,7 @@ import { ReportsAPI } from "./reports.js";
 import { RolesAPI } from "./roles.js";
 import { TasksAPI } from "./scheduling/tasks.js";
 import { SchedulingAPI } from "./scheduling.js";
-import { SharingTasksAPI } from "./sharing-tasks.js";
+import { SharingTasksAPI as SharingTasksAPI$1 } from "./sharing-tasks.js";
 import { SpacesAPI } from "./spaces.js";
 import { TasksAPI as TasksAPI$1 } from "./tasks.js";
 import { TempContentsAPI } from "./temp-contents.js";
@@ -107,6 +109,9 @@ export declare const interceptors: InterceptorsAPI & {
 };
 export declare const qix: QixAPI & {
   withHostConfig: (hostConfig: HostConfig | undefined) => QixAPI;
+};
+export declare const alerting: {
+  sharingTasks: SharingTasksAPI;
 };
 export declare const analytics: {
   apps: AppsAPI;
@@ -188,7 +193,7 @@ export declare const roles: RolesAPI;
 export declare const scheduling: {
   tasks: TasksAPI;
 };
-export declare const sharingTasks: SharingTasksAPI;
+export declare const sharingTasks: SharingTasksAPI$1;
 export declare const spaces: SpacesAPI;
 export declare const tasks: TasksAPI$1;
 export declare const tempContents: TempContentsAPI;
@@ -213,6 +218,10 @@ export interface QlikAPI {
   interceptors: InterceptorsAPI;
   /** Functions for the qix api */
   qix: QixAPI;
+  /** Functions for the alerting api */
+  alerting: AlertingAPI & {
+    sharingTasks: SharingTasksAPI;
+  };
   /** Functions for the analytics api */
   analytics: AnalyticsAPI & {
     apps: AppsAPI;
@@ -348,7 +357,7 @@ export interface QlikAPI {
     tasks: TasksAPI;
   };
   /** Functions for the sharingTasks api */
-  sharingTasks: SharingTasksAPI;
+  sharingTasks: SharingTasksAPI$1;
   /** Functions for the spaces api */
   spaces: SpacesAPI;
   /** Functions for the tasks api */

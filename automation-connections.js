@@ -1,7 +1,9 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B6hSp2sU.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B_EgafAC.js";
 
 //#region src/public/rest/automation-connections.ts
 /**
+* @deprecated
+*
 * Retrieves a list of automation connections the requesting user has access to.
 *
 * @param query an object with query parameters
@@ -16,6 +18,8 @@ async function getAutomationConnections(query, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Creates a new connection object from an automation connector.
 *
 * @param body an object with the body content
@@ -31,6 +35,8 @@ async function createAutomationConnection(body, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Deletes the specified automation connection.
 *
 * @param id The unique identifier for the automation connection.
@@ -47,6 +53,8 @@ async function deleteAutomationConnection(id, query, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Returns details about the specified automation connection.
 *
 * @param id The unique identifier for the automation connection.
@@ -61,6 +69,8 @@ async function getAutomationConnection(id, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Updates the specified properties of an automation connection.
 *
 * @param id The unique identifier for the automation connection.
@@ -78,6 +88,8 @@ async function updateAutomationConnection(id, body, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Changes the owner of an automation connection by specifying a new owner.
 *
 * @param id The unique identifier for the automation connection.
@@ -95,6 +107,8 @@ async function changeOwnerAutomationConnection(id, body, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Changes the space of an automation connection by specifying a new space.
 *
 * @param id The unique identifier for the automation connection.
@@ -112,6 +126,8 @@ async function changeSpaceAutomationConnection(id, body, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Tries to validate and checks the connection status of an automation connection.
 *
 * @param id The unique identifier for the automation connection.

@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DCwmQ7fk.js";
-import "./chunks/invoke-fetch-eUbA2JSu.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/automations.d.ts
 export type AutomationDetailRequestObject = {
   description?: string;
@@ -263,6 +263,8 @@ export type UsageObject = {
   value: number;
 };
 /**
+ * @deprecated
+ *
  * Retrieves a list of the automations that the requesting user has access to.
  *
  * @param query an object with query parameters
@@ -293,6 +295,8 @@ export type GetAutomationsHttpError = {
   status: 400 | 401 | 403 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Creates a new automation. The requesting user must be assigned the `AutomationCreator` role or have at least one of the following scopes: `automations`, `admin.automations`, `automations.private` or `automations.shared`.
  *
  * @param body an object with the body content
@@ -310,6 +314,8 @@ export type CreateAutomationHttpError = {
   status: 400 | 401 | 403 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Retrieves paginated usage metrics for automations. The requesting user must be assigned the `TenantAdmin` or `AnalyticsAdmin` role.
  *
  * @param query an object with query parameters
@@ -334,6 +340,8 @@ export type GetAutomationsUsageMetricsHttpError = {
   status: 400 | 401 | 403 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Deletes an automation. The requesting user must meet at least one of the following conditions:
  * - be the owner of the automation
  * - be assigned one of the following roles: `AnalyticsAdmin`, `TenantAdmin`
@@ -354,6 +362,8 @@ export type DeleteAutomationHttpError = {
   status: 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Retrieves the full definition of an automation. The requesting user must be the owner of the automation and either be assigned one of the roles: `AutomationsCreator`, `TenantAdmin` or have at least one of the following scopes (depending on whether the automation is in a private or shared space): `automations`, `automations.private` or `automations.shared`.
  *
  * @param id The unique identifier for the automation.
@@ -372,6 +382,8 @@ export type GetAutomationWithQueryHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Retrieves the full definition of an automation. The requesting user must be the owner of the automation and either be assigned one of the roles: `AutomationsCreator`, `TenantAdmin` or have at least one of the following scopes (depending on whether the automation is in a private or shared space): `automations`, `automations.private` or `automations.shared`.
  *
  * @param id The unique identifier for the automation.
@@ -389,6 +401,8 @@ export type GetAutomationHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Updates the full definition of an automation. The requesting user must be the owner of the automation and either be assigned the `AutomationCreator` role or have at least one of the following scopes: `automations`, `admin.automations`, `automations.private` or `automations.shared`.
  *
  * @param id The unique identifier for the automation.
@@ -407,6 +421,8 @@ export type UpdateAutomationHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Changes the owner of an automation to another user. This action removes the history and change logs of this automation. All linked connections used in the automation are detached and not moved to the new owner. The requesting user must be assigned `TenantAdmin` role or have at least one of the following scopes: `admin.automations`, `admin.automations:strict`.
  *
  * @param id The unique identifier for the automation.
@@ -428,6 +444,8 @@ export type ChangeOwnerAutomationHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Changes the space of an automation by specifying a new space.
  *
  * @param id The unique identifier for the automation.
@@ -449,6 +467,8 @@ export type ChangeSpaceAutomationHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Duplicates an existing automation.
  *
  * @param id The unique identifier for the automation.
@@ -473,6 +493,8 @@ export type CopyAutomationHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Disables an automation so that it cannot be run. To disable an automation, the requesting user must meet at least one of the following conditions:
  * - be the owner of the automation
  * - be assigned one of the following roles: `TenantAdmin`, `AnalyticsAdmin`
@@ -493,6 +515,8 @@ export type DisableAutomationHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Enables an automation so that it can be run. To enable an automation, the requesting user must meet at least one of the following conditions:
  * - be the owner of the automation
  * - be assigned one of the following roles: `AnalyticsAdmin`, `TenantAdmin`
@@ -513,6 +537,8 @@ export type EnableAutomationHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Changes the owner of an automation to another user. This action removes the history and change logs of this automation. All linked connections used in the automation are detached and not moved to the new owner. The requesting user must be assigned `TenantAdmin` role or have at least one of the following scopes: `admin.automations`, `admin.automations:strict`.
  *
  * @param id The unique identifier for the automation.
@@ -533,6 +559,8 @@ export type MoveAutomationHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Retrieves a list of runs for a specific automation. The requesting user must be the owner of the automation, or be assigned the one of roles: `TenantAdmin`, `AnalyticsAdmin`. Alternatively, the user must have at least one of the following scopes: `admin.automation-runs`, `automation-runs.private`, or `automation-runs.shared`.
  *
  * @param id The unique identifier for the automation.
@@ -562,6 +590,8 @@ export type GetAutomationRunsHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Creates a run for a specific automation. Depending on the space the automation belongs to, the requesting user must meet the following requirement:
  * - Private space: be the owner of the automation and have the `automations.private` scope
  * - Shared space: be editor or operator in shared space and have `automations.shared` scope.
@@ -582,6 +612,8 @@ export type QueueAutomationRunHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Retrieves a specific run for an automation. Depending on the space the automation belongs to, the requesting user must meet the following requirement:
  * - Private space: be the owner of the automation and have the `automations.private` scope
  * - Shared space: be editor or operator in shared space and have `automations.shared` scope.
@@ -603,6 +635,8 @@ export type GetAutomationRunWithQueryHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Retrieves a specific run for an automation. Depending on the space the automation belongs to, the requesting user must meet the following requirement:
  * - Private space: be the owner of the automation and have the `automations.private` scope
  * - Shared space: be editor or operator in shared space and have `automations.shared` scope.
@@ -623,6 +657,8 @@ export type GetAutomationRunHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Retrieves the URL for the debug log of a specific automation run. Depending on the space the automation belongs to, the requesting user must meet the following requirement:
  * - Private space: be the owner of the automation and have the `automations.private` scope
  * - Shared space: be editor or operator in shared space and have `automations.shared` scope.
@@ -645,6 +681,8 @@ export type GetAutomationRunDetailsHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Retries a specific run by creating a new run using the same inputs. Depending on the space the automation belongs to, the requesting user must meet the following requirement:
  * - Private space: be the owner of the automation and have the `automations.private` scope
  * - Shared space: be editor or operator in shared space and have `automations.shared` scope.
@@ -665,6 +703,8 @@ export type RetryAutomationRunHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Forcefully stops an automation run immediately. Depending on the space the automation belongs to, the requesting user must meet the following requirement:
  * - Private space: be the owner of the automation and have the `automations.private` scope
  * - Shared space: be editor or operator in shared space and have `automations.shared` scope.
@@ -690,6 +730,8 @@ export type StopAutomationRunHttpError = {
 export declare function clearCache(): void;
 export type AutomationsAPI = {
   /**
+   * @deprecated
+   *
    * Retrieves a list of the automations that the requesting user has access to.
    *
    * @param query an object with query parameters
@@ -697,6 +739,8 @@ export type AutomationsAPI = {
    */
   getAutomations: typeof getAutomations;
   /**
+   * @deprecated
+   *
    * Creates a new automation. The requesting user must be assigned the `AutomationCreator` role or have at least one of the following scopes: `automations`, `admin.automations`, `automations.private` or `automations.shared`.
    *
    * @param body an object with the body content
@@ -704,6 +748,8 @@ export type AutomationsAPI = {
    */
   createAutomation: typeof createAutomation;
   /**
+   * @deprecated
+   *
    * Retrieves paginated usage metrics for automations. The requesting user must be assigned the `TenantAdmin` or `AnalyticsAdmin` role.
    *
    * @param query an object with query parameters
@@ -711,6 +757,8 @@ export type AutomationsAPI = {
    */
   getAutomationsUsageMetrics: typeof getAutomationsUsageMetrics;
   /**
+   * @deprecated
+   *
    * Deletes an automation. The requesting user must meet at least one of the following conditions:
    * - be the owner of the automation
    * - be assigned one of the following roles: `AnalyticsAdmin`, `TenantAdmin`
@@ -721,6 +769,8 @@ export type AutomationsAPI = {
    */
   deleteAutomation: typeof deleteAutomation;
   /**
+   * @deprecated
+   *
    * Retrieves the full definition of an automation. The requesting user must be the owner of the automation and either be assigned one of the roles: `AutomationsCreator`, `TenantAdmin` or have at least one of the following scopes (depending on whether the automation is in a private or shared space): `automations`, `automations.private` or `automations.shared`.
    *
    * @param id The unique identifier for the automation.
@@ -729,6 +779,8 @@ export type AutomationsAPI = {
    */
   getAutomationWithQuery: typeof getAutomationWithQuery;
   /**
+   * @deprecated
+   *
    * Retrieves the full definition of an automation. The requesting user must be the owner of the automation and either be assigned one of the roles: `AutomationsCreator`, `TenantAdmin` or have at least one of the following scopes (depending on whether the automation is in a private or shared space): `automations`, `automations.private` or `automations.shared`.
    *
    * @param id The unique identifier for the automation.
@@ -736,6 +788,8 @@ export type AutomationsAPI = {
    */
   getAutomation: typeof getAutomation;
   /**
+   * @deprecated
+   *
    * Updates the full definition of an automation. The requesting user must be the owner of the automation and either be assigned the `AutomationCreator` role or have at least one of the following scopes: `automations`, `admin.automations`, `automations.private` or `automations.shared`.
    *
    * @param id The unique identifier for the automation.
@@ -744,6 +798,8 @@ export type AutomationsAPI = {
    */
   updateAutomation: typeof updateAutomation;
   /**
+   * @deprecated
+   *
    * Changes the owner of an automation to another user. This action removes the history and change logs of this automation. All linked connections used in the automation are detached and not moved to the new owner. The requesting user must be assigned `TenantAdmin` role or have at least one of the following scopes: `admin.automations`, `admin.automations:strict`.
    *
    * @param id The unique identifier for the automation.
@@ -752,6 +808,8 @@ export type AutomationsAPI = {
    */
   changeOwnerAutomation: typeof changeOwnerAutomation;
   /**
+   * @deprecated
+   *
    * Changes the space of an automation by specifying a new space.
    *
    * @param id The unique identifier for the automation.
@@ -760,6 +818,8 @@ export type AutomationsAPI = {
    */
   changeSpaceAutomation: typeof changeSpaceAutomation;
   /**
+   * @deprecated
+   *
    * Duplicates an existing automation.
    *
    * @param id The unique identifier for the automation.
@@ -768,6 +828,8 @@ export type AutomationsAPI = {
    */
   copyAutomation: typeof copyAutomation;
   /**
+   * @deprecated
+   *
    * Disables an automation so that it cannot be run. To disable an automation, the requesting user must meet at least one of the following conditions:
    * - be the owner of the automation
    * - be assigned one of the following roles: `TenantAdmin`, `AnalyticsAdmin`
@@ -778,6 +840,8 @@ export type AutomationsAPI = {
    */
   disableAutomation: typeof disableAutomation;
   /**
+   * @deprecated
+   *
    * Enables an automation so that it can be run. To enable an automation, the requesting user must meet at least one of the following conditions:
    * - be the owner of the automation
    * - be assigned one of the following roles: `AnalyticsAdmin`, `TenantAdmin`
@@ -788,6 +852,8 @@ export type AutomationsAPI = {
    */
   enableAutomation: typeof enableAutomation;
   /**
+   * @deprecated
+   *
    * Changes the owner of an automation to another user. This action removes the history and change logs of this automation. All linked connections used in the automation are detached and not moved to the new owner. The requesting user must be assigned `TenantAdmin` role or have at least one of the following scopes: `admin.automations`, `admin.automations:strict`.
    *
    * @param id The unique identifier for the automation.
@@ -796,6 +862,8 @@ export type AutomationsAPI = {
    */
   moveAutomation: typeof moveAutomation;
   /**
+   * @deprecated
+   *
    * Retrieves a list of runs for a specific automation. The requesting user must be the owner of the automation, or be assigned the one of roles: `TenantAdmin`, `AnalyticsAdmin`. Alternatively, the user must have at least one of the following scopes: `admin.automation-runs`, `automation-runs.private`, or `automation-runs.shared`.
    *
    * @param id The unique identifier for the automation.
@@ -804,6 +872,8 @@ export type AutomationsAPI = {
    */
   getAutomationRuns: typeof getAutomationRuns;
   /**
+   * @deprecated
+   *
    * Creates a run for a specific automation. Depending on the space the automation belongs to, the requesting user must meet the following requirement:
    * - Private space: be the owner of the automation and have the `automations.private` scope
    * - Shared space: be editor or operator in shared space and have `automations.shared` scope.
@@ -814,6 +884,8 @@ export type AutomationsAPI = {
    */
   queueAutomationRun: typeof queueAutomationRun;
   /**
+   * @deprecated
+   *
    * Retrieves a specific run for an automation. Depending on the space the automation belongs to, the requesting user must meet the following requirement:
    * - Private space: be the owner of the automation and have the `automations.private` scope
    * - Shared space: be editor or operator in shared space and have `automations.shared` scope.
@@ -825,6 +897,8 @@ export type AutomationsAPI = {
    */
   getAutomationRunWithQuery: typeof getAutomationRunWithQuery;
   /**
+   * @deprecated
+   *
    * Retrieves a specific run for an automation. Depending on the space the automation belongs to, the requesting user must meet the following requirement:
    * - Private space: be the owner of the automation and have the `automations.private` scope
    * - Shared space: be editor or operator in shared space and have `automations.shared` scope.
@@ -835,6 +909,8 @@ export type AutomationsAPI = {
    */
   getAutomationRun: typeof getAutomationRun;
   /**
+   * @deprecated
+   *
    * Retrieves the URL for the debug log of a specific automation run. Depending on the space the automation belongs to, the requesting user must meet the following requirement:
    * - Private space: be the owner of the automation and have the `automations.private` scope
    * - Shared space: be editor or operator in shared space and have `automations.shared` scope.
@@ -845,6 +921,8 @@ export type AutomationsAPI = {
    */
   getAutomationRunDetails: typeof getAutomationRunDetails;
   /**
+   * @deprecated
+   *
    * Retries a specific run by creating a new run using the same inputs. Depending on the space the automation belongs to, the requesting user must meet the following requirement:
    * - Private space: be the owner of the automation and have the `automations.private` scope
    * - Shared space: be editor or operator in shared space and have `automations.shared` scope.
@@ -855,6 +933,8 @@ export type AutomationsAPI = {
    */
   retryAutomationRun: typeof retryAutomationRun;
   /**
+   * @deprecated
+   *
    * Forcefully stops an automation run immediately. Depending on the space the automation belongs to, the requesting user must meet the following requirement:
    * - Private space: be the owner of the automation and have the `automations.private` scope
    * - Shared space: be editor or operator in shared space and have `automations.shared` scope.

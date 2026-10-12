@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DCwmQ7fk.js";
-import "./chunks/invoke-fetch-eUbA2JSu.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/automation-connectors.d.ts
 export type AutomationConnectorsList = {
   data?: AutomationConnectorsListObject[];
@@ -44,6 +44,8 @@ export type PaginationLink = {
   href?: string | null;
 };
 /**
+ * @deprecated
+ *
  * Retrieves a list of automation connectors.
  *
  * @param query an object with query parameters
@@ -77,6 +79,8 @@ export type GetAutomationConnectorsHttpError = {
 export declare function clearCache(): void;
 export type AutomationConnectorsAPI = {
   /**
+   * @deprecated
+   *
    * Retrieves a list of automation connectors.
    *
    * @param query an object with query parameters

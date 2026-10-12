@@ -36,7 +36,7 @@
 <li><span id="customproperties"><span class="tsd-kind-type-parameter">CustomProperties</span></span></li>
 <li><span id="customlayout"><span class="tsd-kind-type-parameter">CustomLayout</span></span></li>
 <li><span id="genericobjectrpcobject"><span class="tsd-kind-type-parameter">GenericObjectRpcObject</span></span></li></ul></section>
-<section class="tsd-panel tsd-hierarchy" data-refl="22861">
+<section class="tsd-panel tsd-hierarchy" data-refl="22892">
 <h4>Hierarchy (<a href="../hierarchy.html#qix.NativeGenericObjectFunctions">View Summary</a>)</h4>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><span class="tsd-hierarchy-target">NativeGenericObjectFunctions</span>
@@ -411,23 +411,23 @@ This API has limited functionality and will not support CSV export from all type
 <h3 id="default-limitations-in-number-of-rows-and-columns" class="tsd-anchor-link">Default limitations in number of rows and columns<a href="#default-limitations-in-number-of-rows-and-columns" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <p>The default maximum number of rows and columns in the Excel export file is:</p>
 <ul>
-<li>1048566 rows per sheet. For pivot tables: 1048566 column dimensions. 10 rows can be added after the export.</li>
-<li>16384 columns per sheet. If the number of columns exceeds the limit, the exported file is truncated and a warning message is sent.</li>
+<li>1,048,576 rows per sheet. For pivot tables: 1,048,576 column dimensions. 10 rows can be added after the export.</li>
+<li>16,384 columns per sheet. If the number of columns exceeds the limit, the exported file is truncated and a warning message is sent.</li>
 </ul>
 <h3 id="default-limitation-in-number-of-columns" class="tsd-anchor-link">Default limitation in number of columns<a href="#default-limitation-in-number-of-columns" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <p>The default maximum number of columns in the export file is:</p>
 <ul>
-<li>1000 to export to a CSV file</li>
+<li>1,000 for CSV file export.</li>
 </ul>
-<h3 id="default-limitations-in-number-of-cells" class="tsd-anchor-link">Default limitations in number of cells<a href="#default-limitations-in-number-of-cells" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<h3 id="default-limitation-in-number-of-cells" class="tsd-anchor-link">Default limitation in number of cells<a href="#default-limitation-in-number-of-cells" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <p>The default maximum number of cells in the export file is:</p>
 <ul>
-<li>5000000 to export to a CSV file</li>
+<li>5,000,000 for CSV file export.</li>
 </ul>
 <p>The exported file is truncated if the number of cells exceeds the limit. A warning message with code 1000 is sent.</p>
 <div class=note>There is an option to export only the possible values ( _qExportState_ is P). </div>
 <h3 id="default-limitation-in-size" class="tsd-anchor-link">Default limitation in size<a href="#default-limitation-in-size" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<p>If the exported file is larger than the maximum value, then an out-of-memory error with code 13000 is returned.</p>
+<p>If the exported file is larger than the maximum value, an Out of Memory (OOM) error with code 13000 is returned.</p>
 <div class=note>Exported files are temporary and are available only for a certain time span and only to the user who created them.</div>
 <p>Parameters:</p>
 <ul>
@@ -1343,7 +1343,7 @@ If this parameter is not set, the locked values in all dimensions are unlocked.<
 <ul>
 <li><a href="#default-limitations-in-number-of-rows-and-columns"><span>Default limitations in number of rows and columns</span></a></li>
 <li><a href="#default-limitation-in-number-of-columns"><span>Default limitation in number of columns</span></a></li>
-<li><a href="#default-limitations-in-number-of-cells"><span>Default limitations in number of cells</span></a></li>
+<li><a href="#default-limitation-in-number-of-cells"><span>Default limitation in number of cells</span></a></li>
 <li><a href="#default-limitation-in-size"><span>Default limitation in size</span></a></li></ul></li></ul></li></ul><a href="#getchild"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>get<wbr/>Child</span></a><a href="#getchildinfos"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>get<wbr/>Child<wbr/>Infos</span></a><a href="#geteffectiveproperties"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>get<wbr/>Effective<wbr/>Properties</span></a><a href="#getfullpropertytree"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>get<wbr/>Full<wbr/>Property<wbr/>Tree</span></a><a href="#gethypercubebinneddata"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>get<wbr/>Hyper<wbr/>Cube<wbr/>Binned<wbr/>Data</span></a>
 <ul>
 <li>

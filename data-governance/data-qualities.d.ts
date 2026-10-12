@@ -1,7 +1,7 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-DCwmQ7fk.js";
-import "../chunks/invoke-fetch-eUbA2JSu.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
+import "../chunks/invoke-fetch-DdmiOIkr.js";
 declare namespace data_qualities_d_exports {
-  export { AggregatedQualityMetrics, BatchComputationAggregatedStatus, BatchComputationDatasetStatusResponse, BatchComputationStatusResponse, ComputationErrorCode, ComputationResponse, ComputationStatusResponse, ComputedInformation, ComputedUserInformation, ConnectionIdType, CreateDataQualityComputationHttpError, CreateDataQualityComputationHttpResponse, DataQualitiesAPI, DataQualityByDatasetIdResponse, DataQualityComputationRequest, DatasetFieldQualityRequestItem, DatasetFieldQualityResult, DatasetIdType, DatasetListRequest, DatasetQualityGlobalResultsResponse, Error, ErrorResponse, ExecutionError, ExecutionStatus, FieldInformation, FieldQualitiesFilterRequest, FieldQualitiesFilterResponse, FieldQuality, FieldTypeEnum, FilterDataQualitiesFieldQualitiesHttpError, FilterDataQualitiesFieldQualitiesHttpResponse, FilterDataQualitiesGlobalResultsHttpError, FilterDataQualitiesGlobalResultsHttpResponse, GetDataQualitiesBatchComputationHttpError, GetDataQualitiesBatchComputationHttpResponse, GetDataQualityComputationHttpError, GetDataQualityComputationHttpResponse, GetDataQualityGlobalResultsHttpError, GetDataQualityGlobalResultsHttpResponse, PrecisionEnum, QualitiesAndErrorsResponse, QualitiesGlobalResultsResponse, Quality, QualityGlobalResultsResponse, SamplingConfiguration, SchemaRuleQuality, SchemaRulesQuality, SchemaTypeQuality, clearCache, createDataQualityComputation, dataQualitiesExport as default, filterDataQualitiesFieldQualities, filterDataQualitiesGlobalResults, getDataQualitiesBatchComputation, getDataQualityComputation, getDataQualityGlobalResults };
+  export { AggregatedQualityMetrics, AssignTypeListRequest, AssignTypeRequest, BatchComputationAggregatedStatus, BatchComputationDatasetStatusResponse, BatchComputationStatusResponse, ComputationErrorCode, ComputationResponse, ComputationStatusResponse, ComputedInformation, ComputedUserInformation, ConnectionIdType, CreateDataQualityComputationHttpError, CreateDataQualityComputationHttpResponse, DataQualitiesAPI, DataQualityByDatasetIdResponse, DataQualityComputationRequest, DatasetFieldQualityRequestItem, DatasetFieldQualityResult, DatasetIdType, DatasetListRequest, DatasetQualityGlobalResultsResponse, Error, ErrorResponse, ExecutionError, ExecutionStatus, FieldInformation, FieldQualitiesFilterRequest, FieldQualitiesFilterResponse, FieldQuality, FieldTypeEnum, FilterDataQualitiesFieldQualitiesHttpError, FilterDataQualitiesFieldQualitiesHttpResponse, FilterDataQualitiesGlobalResultsHttpError, FilterDataQualitiesGlobalResultsHttpResponse, GetDataQualitiesBatchComputationHttpError, GetDataQualitiesBatchComputationHttpResponse, GetDataQualityComputationHttpError, GetDataQualityComputationHttpResponse, GetDataQualityGlobalResultsHttpError, GetDataQualityGlobalResultsHttpResponse, PrecisionEnum, PutDataQualitiesFieldsStructuresHttpError, PutDataQualitiesFieldsStructuresHttpResponse, QualitiesAndErrorsResponse, QualitiesGlobalResultsResponse, Quality, QualityGlobalResultsResponse, SamplingConfiguration, SchemaRuleQuality, SchemaRulesQuality, SchemaTypeQuality, clearCache, createDataQualityComputation, dataQualitiesExport as default, filterDataQualitiesFieldQualities, filterDataQualitiesGlobalResults, getDataQualitiesBatchComputation, getDataQualityComputation, getDataQualityGlobalResults, putDataQualitiesFieldsStructures };
 }
 /**
  * Aggregated metrics for the field.
@@ -15,6 +15,18 @@ export type AggregatedQualityMetrics = {
   total: number;
   /** Number of valid entries. */
   valid: number;
+};
+export type AssignTypeListRequest = {
+  /** The ID of the dataset */
+  datasetId: DatasetIdType;
+  /** List of fields to update with their assigned types. */
+  fields: AssignTypeRequest[];
+};
+export type AssignTypeRequest = {
+  /** The name of the field. */
+  name: string;
+  /** Information about the type of the field. */
+  type: FieldInformation;
 };
 /**
  * Overall status aggregated across all datasets in the batch.
@@ -403,6 +415,25 @@ export type FilterDataQualitiesFieldQualitiesHttpError = {
   status: 400 | 401 | 403 | 500 | 503;
 };
 /**
+ * Assigns a standard or semantic type to one or more fields in a dataset. This is a partial update:
+ * only the fields included in the request are modified; any field not included in the request keeps
+ * its current assigned structure unchanged.
+ *
+ * @param body an object with the body content
+ * @throws PutDataQualitiesFieldsStructuresHttpError
+ */
+export declare function putDataQualitiesFieldsStructures(body: AssignTypeListRequest, options?: ApiCallOptions): Promise<PutDataQualitiesFieldsStructuresHttpResponse>;
+export type PutDataQualitiesFieldsStructuresHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 204;
+};
+export type PutDataQualitiesFieldsStructuresHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: 400 | 401 | 403 | 404 | 500 | 503;
+};
+/**
  * Retrieves the global quality results for a dataset, showing counts of valid, invalid, empty, and total
  * sample cells.
  *
@@ -486,6 +517,15 @@ export type DataQualitiesAPI = {
    * @throws FilterDataQualitiesFieldQualitiesHttpError
    */
   filterDataQualitiesFieldQualities: typeof filterDataQualitiesFieldQualities;
+  /**
+   * Assigns a standard or semantic type to one or more fields in a dataset. This is a partial update:
+   * only the fields included in the request are modified; any field not included in the request keeps
+   * its current assigned structure unchanged.
+   *
+   * @param body an object with the body content
+   * @throws PutDataQualitiesFieldsStructuresHttpError
+   */
+  putDataQualitiesFieldsStructures: typeof putDataQualitiesFieldsStructures;
   /**
    * Retrieves the global quality results for a dataset, showing counts of valid, invalid, empty, and total
    * sample cells.

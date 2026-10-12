@@ -30,7 +30,7 @@
 <li><a href="" aria-current="page">NxAppObject</a></li></ul>
 <h1>Type Alias NxAppObject</h1></div>
 <section class="tsd-panel tsd-comment">
-<div class="tsd-comment tsd-typography"><p>Application object attributes and user privileges.</p>
+<div class="tsd-comment tsd-typography"><p>Attributes and user privileges for an app object.</p>
 </div></section>
 <div class="tsd-signature"><span class="tsd-signature-keyword">type</span> <span class="tsd-kind-type-alias">NxAppObject</span> <span class="tsd-signature-symbol">=</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#attributes">attributes</a><span class="tsd-signature-symbol">?:</span> <a href="apps.NxObjectAttributes.html" class="tsd-signature-type tsd-kind-type-alias">NxObjectAttributes</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#privileges">privileges</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
 <section class="tsd-panel-group tsd-index-group">
@@ -49,14 +49,14 @@
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="attributes"><code class="tsd-tag">Optional</code><span>attributes</span><a href="#attributes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">attributes</span><span class="tsd-signature-symbol">?:</span> <a href="apps.NxObjectAttributes.html" class="tsd-signature-type tsd-kind-type-alias">NxObjectAttributes</a></div>
-<div class="tsd-comment tsd-typography"><p>App object attributes. This structure can also contain extra user-defined attributes.</p>
+<div class="tsd-comment tsd-typography"><p>App object attributes. This structure can include additional user-defined attributes.</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="privileges"><code class="tsd-tag">Optional</code><span>privileges</span><a href="#privileges" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">privileges</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
-<div class="tsd-comment tsd-typography"><p>Application object privileges.
-Hints to the client what actions the user is allowed to perform.
-Could be any of:</p>
+<div class="tsd-comment tsd-typography"><p>App object privileges.
+Hints to the client regarding actions the user can perform.
+Possible values:</p>
 <ul>
 <li>read</li>
 <li>create</li>

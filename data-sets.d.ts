@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DCwmQ7fk.js";
-import "./chunks/invoke-fetch-eUbA2JSu.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/data-sets.d.ts
 export type BatchIdDto = {
   ids?: string[];
@@ -25,6 +25,8 @@ export type DataField = {
   dataType: FieldDataType;
   description?: string;
   encrypted?: boolean;
+  /** A system-generated, stable identifier for this data field. This is not a classical id - there is no Catalog API to look up a DataField by this value, and it is not indexed. */
+  readonly id?: string;
   readonly index?: number;
   name: string;
   nullable?: boolean;

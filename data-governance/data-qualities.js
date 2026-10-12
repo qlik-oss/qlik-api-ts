@@ -1,5 +1,5 @@
 import { t as __exportAll } from "../chunks/rolldown-runtime-w6R9maHv.js";
-import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-B6hSp2sU.js";
+import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-B_EgafAC.js";
 
 //#region src/public/rest/data-governance/data-qualities.ts
 var data_qualities_exports = /* @__PURE__ */ __exportAll({
@@ -10,7 +10,8 @@ var data_qualities_exports = /* @__PURE__ */ __exportAll({
 	filterDataQualitiesGlobalResults: () => filterDataQualitiesGlobalResults,
 	getDataQualitiesBatchComputation: () => getDataQualitiesBatchComputation,
 	getDataQualityComputation: () => getDataQualityComputation,
-	getDataQualityGlobalResults: () => getDataQualityGlobalResults
+	getDataQualityGlobalResults: () => getDataQualityGlobalResults,
+	putDataQualitiesFieldsStructures: () => putDataQualitiesFieldsStructures
 });
 /**
 * Retrieves the status of a batch computation, including per-dataset statuses.
@@ -81,6 +82,23 @@ async function filterDataQualitiesFieldQualities(body, options) {
 	});
 }
 /**
+* Assigns a standard or semantic type to one or more fields in a dataset. This is a partial update:
+* only the fields included in the request are modified; any field not included in the request keeps
+* its current assigned structure unchanged.
+*
+* @param body an object with the body content
+* @throws PutDataQualitiesFieldsStructuresHttpError
+*/
+async function putDataQualitiesFieldsStructures(body, options) {
+	return invokeFetch("data-governance/data-qualities", {
+		method: "put",
+		pathTemplate: "/api/data-governance/data-qualities/fields-structures",
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
 * Retrieves the global quality results for a dataset, showing counts of valid, invalid, empty, and total
 * sample cells.
 *
@@ -125,10 +143,11 @@ const dataQualitiesExport = {
 	createDataQualityComputation,
 	getDataQualityComputation,
 	filterDataQualitiesFieldQualities,
+	putDataQualitiesFieldsStructures,
 	getDataQualityGlobalResults,
 	filterDataQualitiesGlobalResults,
 	clearCache
 };
 
 //#endregion
-export { clearCache, createDataQualityComputation, dataQualitiesExport as default, filterDataQualitiesFieldQualities, filterDataQualitiesGlobalResults, getDataQualitiesBatchComputation, getDataQualityComputation, getDataQualityGlobalResults, data_qualities_exports as t };
+export { clearCache, createDataQualityComputation, dataQualitiesExport as default, filterDataQualitiesFieldQualities, filterDataQualitiesGlobalResults, getDataQualitiesBatchComputation, getDataQualityComputation, getDataQualityGlobalResults, putDataQualitiesFieldsStructures, data_qualities_exports as t };

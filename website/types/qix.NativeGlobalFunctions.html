@@ -131,7 +131,7 @@
 <div class="tsd-comment tsd-typography"><p>Cancels an ongoing reload. The reload of the app is stopped. The indexation can be canceled and <em>true</em> is still the return value of the reload task.</p>
 <p>Parameters:</p>
 <ul>
-<li><code>reason</code>   -   Reason for why the reload was cancelled. This will be echoed back to the user in the script log.</li>
+<li><code>reason</code>   -   Reason for the cancellation of the reload. This information is echoed back to the user in the script log.</li>
 </ul>
 <p>Stability: <em>locked</em></p>
 </div></section>
@@ -262,7 +262,7 @@ The following applies:</p>
 The following applies:</p>
 <ul>
 <li>The objects in the source app are copied into the session app.</li>
-<li>There is no data in the session app, unless it is reloaded.</li>
+<li>The session app contains no data unless it is reloaded.</li>
 <li>The script of the session app can be edited and reloaded.</li>
 <li>The name of a session app cannot be chosen. The engine automatically assigns a unique identifier to the session app.</li>
 <li>A session app is not persisted and cannot be saved. Everything created during a session app is non-persisted; for example: objects, data connections.</li>
@@ -372,7 +372,7 @@ The list of all the objects in the app to be exported must be given. This list m
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="getappentry"><span>get<wbr/>App<wbr/>Entry</span><a href="#getappentry" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">getAppEntry</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">appID</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="qix.AppEntry.html" class="tsd-signature-type tsd-kind-type-alias">AppEntry</a><span class="tsd-signature-symbol">&gt;</span></div>
-<div class="tsd-comment tsd-typography"><p>Retrieves the meta data of an app.</p>
+<div class="tsd-comment tsd-typography"><p>Retrieves the metadata of an app.</p>
 <p>Parameters:</p>
 <ul>
 <li><code>appID</code>   -   Identifier of the app, as returned by the <em>CreateApp method</em>.
