@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DCwmQ7fk.js";
-import "./chunks/invoke-fetch-eUbA2JSu.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/automation-connections.d.ts
 export type AutomationConnectionChangeOwnerObject = {
   /** The unique identifier of the new owner. */
@@ -137,6 +137,8 @@ export type PaginationLink = {
   href?: string | null;
 };
 /**
+ * @deprecated
+ *
  * Retrieves a list of automation connections the requesting user has access to.
  *
  * @param query an object with query parameters
@@ -167,6 +169,8 @@ export type GetAutomationConnectionsHttpError = {
   status: 400 | 401 | 403 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Creates a new connection object from an automation connector.
  *
  * @param body an object with the body content
@@ -184,6 +188,8 @@ export type CreateAutomationConnectionHttpError = {
   status: 400 | 401 | 403 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Deletes the specified automation connection.
  *
  * @param id The unique identifier for the automation connection.
@@ -205,6 +211,8 @@ export type DeleteAutomationConnectionHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Returns details about the specified automation connection.
  *
  * @param id The unique identifier for the automation connection.
@@ -222,6 +230,8 @@ export type GetAutomationConnectionHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Updates the specified properties of an automation connection.
  *
  * @param id The unique identifier for the automation connection.
@@ -240,6 +250,8 @@ export type UpdateAutomationConnectionHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Changes the owner of an automation connection by specifying a new owner.
  *
  * @param id The unique identifier for the automation connection.
@@ -258,6 +270,8 @@ export type ChangeOwnerAutomationConnectionHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Changes the space of an automation connection by specifying a new space.
  *
  * @param id The unique identifier for the automation connection.
@@ -276,6 +290,8 @@ export type ChangeSpaceAutomationConnectionHttpError = {
   status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Tries to validate and checks the connection status of an automation connection.
  *
  * @param id The unique identifier for the automation connection.
@@ -298,6 +314,8 @@ export type CheckAutomationConnectionHttpError = {
 export declare function clearCache(): void;
 export type AutomationConnectionsAPI = {
   /**
+   * @deprecated
+   *
    * Retrieves a list of automation connections the requesting user has access to.
    *
    * @param query an object with query parameters
@@ -305,6 +323,8 @@ export type AutomationConnectionsAPI = {
    */
   getAutomationConnections: typeof getAutomationConnections;
   /**
+   * @deprecated
+   *
    * Creates a new connection object from an automation connector.
    *
    * @param body an object with the body content
@@ -312,6 +332,8 @@ export type AutomationConnectionsAPI = {
    */
   createAutomationConnection: typeof createAutomationConnection;
   /**
+   * @deprecated
+   *
    * Deletes the specified automation connection.
    *
    * @param id The unique identifier for the automation connection.
@@ -320,6 +342,8 @@ export type AutomationConnectionsAPI = {
    */
   deleteAutomationConnection: typeof deleteAutomationConnection;
   /**
+   * @deprecated
+   *
    * Returns details about the specified automation connection.
    *
    * @param id The unique identifier for the automation connection.
@@ -327,6 +351,8 @@ export type AutomationConnectionsAPI = {
    */
   getAutomationConnection: typeof getAutomationConnection;
   /**
+   * @deprecated
+   *
    * Updates the specified properties of an automation connection.
    *
    * @param id The unique identifier for the automation connection.
@@ -335,6 +361,8 @@ export type AutomationConnectionsAPI = {
    */
   updateAutomationConnection: typeof updateAutomationConnection;
   /**
+   * @deprecated
+   *
    * Changes the owner of an automation connection by specifying a new owner.
    *
    * @param id The unique identifier for the automation connection.
@@ -343,6 +371,8 @@ export type AutomationConnectionsAPI = {
    */
   changeOwnerAutomationConnection: typeof changeOwnerAutomationConnection;
   /**
+   * @deprecated
+   *
    * Changes the space of an automation connection by specifying a new space.
    *
    * @param id The unique identifier for the automation connection.
@@ -351,6 +381,8 @@ export type AutomationConnectionsAPI = {
    */
   changeSpaceAutomationConnection: typeof changeSpaceAutomationConnection;
   /**
+   * @deprecated
+   *
    * Tries to validate and checks the connection status of an automation connection.
    *
    * @param id The unique identifier for the automation connection.

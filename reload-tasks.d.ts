@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DCwmQ7fk.js";
-import "./chunks/invoke-fetch-eUbA2JSu.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/reload-tasks.d.ts
 export type Error = {
   code: string;
@@ -29,7 +29,8 @@ export type Errors = {
  * }
  */
 export type Href = {
-  href: string;
+  /** href link to the resource. */
+  readonly href: string;
 };
 export type PaginationLinks = SelfLink & {
   next?: Href;
@@ -40,39 +41,40 @@ export type PostTaskBody = TaskBase & {
    * Type of task being created - only contains the "scheduled_reload" value. Type value is not used for creating a schedule reload. It has been deprecated since 2022-04-05. */
   type?: "scheduled_reload";
 };
-export type PutTaskBody = TaskBase & {
-  /** Toggle for enabling and disabling the reload task */
-  state?: "Enabled" | "Disabled" | "Completed";
-};
+export type PutTaskBody = Task;
 export type SelfLink = {
   self: Href;
 };
 export type Task = TaskBase & {
+  /** The ID of the app. */
+  readonly appId: string;
   /** The reason why the task was disabled. */
-  disabledCode?: "MANUALLY" | "CONSECUTIVE-FAILURES" | "OWNER-DELETED" | "OWNER-DISABLED";
+  readonly disabledCode?: "MANUALLY" | "CONSECUTIVE-FAILURES" | "OWNER-DELETED" | "OWNER-DISABLED";
   /** @deprecated
    * The fortress ID of the application */
-  fortressId?: string;
+  readonly fortressId?: string;
   /** The ID of the task. */
-  id: string;
+  readonly id: string;
+  /** The ID of the scheduler job associated with the task. */
+  readonly jobId: string;
   /** The last time the task executed. */
-  lastExecutionTime?: string;
+  readonly lastExecutionTime?: string;
   links: SelfLink;
   /** @deprecated
    * The reason why the task was disabled. */
-  log?: string;
+  readonly log?: string;
   /** A flag indicating whether the task has been migrated to the new scheduling service. */
-  migrated?: boolean;
+  readonly migrated?: boolean;
   /** The next time the task will execute. */
-  nextExecutionTime?: string;
+  readonly nextExecutionTime?: string;
   /** The space ID of the application */
-  spaceId?: string;
+  readonly spaceId?: string;
   /** Toggle for enabling and disabling the reload task */
   state: "Enabled" | "Disabled" | "Completed";
   /** The ID of the tenant who owns the task. */
-  tenantId: string;
+  readonly tenantId: string;
   /** The ID of the user who owns the task. */
-  userId: string;
+  readonly userId: string;
 };
 export type TaskBase = {
   /** The ID of the app. */
@@ -145,7 +147,7 @@ export type CreateReloadTaskHttpResponse = {
 export type CreateReloadTaskHttpError = {
   data: Errors;
   headers: Headers;
-  status: 400 | 401 | 403 | 404 | 500 | 503;
+  status: 400 | 401 | 403 | 404 | 410 | 500 | 503;
 };
 /**
  * @deprecated
@@ -164,7 +166,7 @@ export type DeleteReloadTaskHttpResponse = {
 export type DeleteReloadTaskHttpError = {
   data: Errors;
   headers: Headers;
-  status: 400 | 401 | 403 | 404 | 500;
+  status: 400 | 401 | 403 | 404 | 410 | 500;
 };
 /**
  * @deprecated
@@ -203,7 +205,7 @@ export type UpdateReloadTaskHttpResponse = {
 export type UpdateReloadTaskHttpError = {
   data: Errors;
   headers: Headers;
-  status: 400 | 401 | 403 | 404 | 500 | 503;
+  status: 400 | 401 | 403 | 404 | 410 | 500 | 503;
 };
 /**
  * Clears the cache for reload-tasks api requests.

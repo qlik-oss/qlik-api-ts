@@ -1,6 +1,6 @@
-import { f as interceptors$1 } from "./chunks/invoke-fetch-functions-C_Fj8sJ4.js";
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B6hSp2sU.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B_EgafAC.js";
 import auth_default from "./auth.js";
+import { o as interceptors$1 } from "./chunks/interceptors-Bwyc6_WG.js";
 import qix$1 from "./qix.js";
 
 //#region src/runtime-api-generator/runtime-api-generator-common.ts
@@ -197,6 +197,14 @@ var interceptors_default = interceptors$1;
 
 //#endregion
 //#region src/public/index.ts
+const createAlertingSharingTasksRuntimeAPI = apiDefToApiPublic("alerting/sharing-tasks", { api: { alerting: { "sharing-tasks": { "{taskId}": { "task-executions": {
+	"": ["getSharingTaskTaskExecutions:GQ:"],
+	"{taskExecutionId}": ["getSharingTaskTaskExecution:G:"]
+} } } } } });
+const createAlertingRuntimeAPI = apiDefToApiPublic("alerting", {}, {
+	"sharing-tasks": createAlertingSharingTasksRuntimeAPI,
+	sharingTasks: createAlertingSharingTasksRuntimeAPI
+});
 const createAnalyticsAppsRuntimeAPI = apiDefToApiPublic("analytics/apps", { api: { analytics: { apps: {
 	evaluations: {
 		"{baselineId}": { compare: { "{comparisonId}": {
@@ -728,6 +736,7 @@ const createDataGovernanceDataQualitiesRuntimeAPI = apiDefToApiPublic("data-gove
 		"{computationId}": ["getDataQualityComputation:G:"]
 	},
 	"field-qualities": { actions: { filter: ["filterDataQualitiesFieldQualities:PBJ:"] } },
+	"fields-structures": ["putDataQualitiesFieldsStructures:UBJ:"],
 	"global-results": {
 		"": ["getDataQualityGlobalResults:GQ:"],
 		actions: { filter: ["filterDataQualitiesGlobalResults:PBJ:"] }
@@ -1475,6 +1484,7 @@ const createWorkflowsRuntimeAPI = apiDefToApiPublic("workflows", {}, {
 const auth = auth_default;
 const interceptors = interceptors_default;
 const qix = qix$1;
+const alerting = createAlertingRuntimeAPI(void 0, interceptors_default);
 const analytics = createAnalyticsRuntimeAPI(void 0, interceptors_default);
 const apiKeys = createApiKeysRuntimeAPI(void 0, interceptors_default);
 const apps = createAppsRuntimeAPI(void 0, interceptors_default);
@@ -1549,6 +1559,7 @@ const createQlikApi = (props) => {
 		auth: auth_default,
 		interceptors: scopedInterceptors,
 		qix: qix$1.withHostConfig(props?.hostConfig),
+		alerting: createAlertingRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		analytics: createAnalyticsRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		apiKeys: createApiKeysRuntimeAPI(props?.hostConfig, scopedInterceptors),
 		apps: createAppsRuntimeAPI(props?.hostConfig, scopedInterceptors),
@@ -1624,6 +1635,7 @@ const api = {
 	auth,
 	interceptors,
 	qix,
+	alerting,
 	analytics,
 	apiKeys,
 	apps,
@@ -1696,4 +1708,4 @@ const api = {
 };
 
 //#endregion
-export { analytics, apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, connectivity, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataGovernance, dataQualities, dataSets, dataSources, dataStores, dcaas, api as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, scheduling, sharingTasks, spaces, tasks, tempContents, tenantSettings, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks, workflows };
+export { alerting, analytics, apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, connectivity, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataGovernance, dataQualities, dataSets, dataSources, dataStores, dcaas, api as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, scheduling, sharingTasks, spaces, tasks, tempContents, tenantSettings, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks, workflows };

@@ -1,7 +1,7 @@
-import { d as HostConfig } from "./auth-types-DCwmQ7fk.js";
+import { d as HostConfig } from "./auth-types-yKuw6LLB.js";
 import "../auth.js";
 //#region src/qix/types/engine-schema.d.ts
-declare const QIX_SCHEMA_VERSION = "12.2931.0";
+declare const QIX_SCHEMA_VERSION = "12.2949.0";
 type AlfaNumString = {
   /**
    * Calculated value.
@@ -45,7 +45,7 @@ type AppEntry = {
    */
   qReadOnly?: boolean;
   /**
-   * Meta data.
+   * Metadata.
    */
   qMeta?: NxMeta;
   /**
@@ -94,7 +94,7 @@ type AppScript = {
    */
   qMeta?: NxMeta;
   /**
-   * True if user is temporarily locked from modifying the script. Meta contains the ID of the last modifier. Only applicable to QCS.
+   * When true, the user is temporarily locked from modifying the script. The Meta information contains the ID of the last modifier. Only applicable to Qlik Cloud.
    */
   qIsLocked?: boolean;
 };
@@ -105,7 +105,7 @@ type AppScriptMeta = {
    */
   qMeta?: NxMeta;
   /**
-   * True if user is temporarily locked from modifying the script. Meta contains the ID of the last modifier. Only applicable to QCS.
+   * When true, the user is temporarily locked from modifying the script. The Meta information contains the ID of the last modifier. Only applicable to Qlik Cloud.
    */
   qIsLocked?: boolean;
 };
@@ -922,12 +922,12 @@ type DoReloadExParams = {
    */
   qReloadId?: string;
   /**
-   * Set to true to skip Store statements.
+   * When true, Store statements are skipped.
    * The default value is false.
    */
   qSkipStore?: boolean;
   /**
-   * If greater than or equal 0, defines max number of rows loaded from a data source.
+   * If greater than or equal to 0, defines the maximum number of rows loaded from a data source.
    */
   qRowLimit?: number;
 };
@@ -2162,7 +2162,7 @@ type GenericVariableProperties = {
    */
   qInfo?: NxInfo;
   /**
-   * Meta data.
+   * Metadata.
    */
   qMetaDef?: NxMetaDef;
   /**
@@ -2500,11 +2500,11 @@ type HyperCubeDef = {
    */
   qDynamicScript?: string[];
   /**
-   * Set Expression valid for the whole cube. Used to limit computations to the set specified.
+   * Set expression valid for the whole cube, limiting computations to the specified set.
    */
   qContextSetExpression?: string;
   /**
-   * If set to true, suppress any measure grand totals, ignoring any AggrFunc.
+   * When true, suppresses any grand totals for measures, regardless of the AggrFunc setting.
    */
   qSuppressMeasureTotals?: boolean;
 };
@@ -2597,7 +2597,7 @@ type LayoutBookmarkData = {
  */
 type LayoutExclude = object;
 /**
- * Meta data about the selection in a field.
+ * Metadata about the selection in a field.
  */
 type LayoutFieldInfo = {
   /**
@@ -2968,7 +2968,7 @@ type NxAppLayout = {
    */
   qIsSessionApp?: boolean;
   /**
-   * If set to true, the persisted app cannot be used in a Binary load statement in Qlik load script.
+   * When true, the persisted app cannot be used in a Binary load statement in a Qlik load script.
    */
   qProhibitBinaryLoad?: boolean;
   /**
@@ -3042,7 +3042,7 @@ type NxAppProperties = {
    */
   qHasSectionAccess?: boolean;
   /**
-   * Indicates whether the app is used for Analytics or DataPreparation
+   * Indicates whether the app is used for analytics or data preparation.
    *
    * One of:
    * * ANALYTICS
@@ -3178,7 +3178,7 @@ type NxAttributeExpressionValues = {
 type NxAutoSortByStateDef = {
   /**
    * This parameter applies to list objects.
-   * If the total number of values in the list object is greater than the value set in _qDisplayNumberOfRows_ , the selected lines are promoted at the top of the list object.
+   * If the total number of values in the list object exceeds the value set in _qDisplayNumberOfRows_ , the selected lines are promoted to the top of the list object.
    * If _qDisplayNumberOfRows_ is set to a negative value or to 0, the sort by state is disabled.
    */
   qDisplayNumberOfRows?: number;
@@ -4204,10 +4204,10 @@ type NxInlineMeasureDef = {
    */
   qBrutalSum?: boolean;
   /**
-   * Flag indicating how the measure should be aggregated to create a grand total.
-   * "None" - No total calculation.
-   * "Expr" - Calculate total according to the measure expression.
-   * ""     - Empty string is default and has same effect as "Expr".
+   * Indicates how to aggregate the measure to create a grand total.
+   * "None" - No total calculation is performed.
+   * "Expr" - Total is calculated based on the measure expression.
+   * The default value is an empty string, which has the same effect as "Expr".
    * This parameter is optional.
    */
   qAggrFunc?: string;
@@ -4609,7 +4609,7 @@ type NxMeta = {
   qName?: string;
 };
 /**
- * Used to collect meta data.
+ * Used to collect metadata.
  *
  * ### Properties
  * Semantic type with an empty structure.
@@ -7384,7 +7384,7 @@ type TreeDataDef = {
    */
   qValueExprs?: NxMeasure[];
   /**
-   * Set Expression valid for the whole cube. Used to limit computations to the set specified.
+   * Set expression valid for the whole cube, limiting computations to the specified set.
    */
   qContextSetExpression?: string;
 };
@@ -7672,7 +7672,7 @@ type NativeDocFunctions<FieldRpcObject, GenericBookmarkRpcObject, GenericDimensi
    */
   clearAll: (lockedAlso?: boolean, stateName?: string) => Promise<void>;
   /**
-   * Clear the soft properties of all generic objects in the app
+   * Clears the soft properties of all generic objects in the app.
    *
    * Stability: *experimental*
    */
@@ -8877,13 +8877,13 @@ type NativeDocFunctions<FieldRpcObject, GenericBookmarkRpcObject, GenericDimensi
    */
   getScriptBreakpoints: () => Promise<EditorBreakpoint[]>;
   /**
-   * Gets script and script meta-data.
+   * Gets script and script metadata.
    *
    * Stability: *locked*
    */
   getScriptEx: () => Promise<AppScript>;
   /**
-   * Gets script meta-data.
+   * Gets script metadata.
    *
    * Stability: *experimental*
    */
@@ -9118,13 +9118,13 @@ type NativeDocFunctions<FieldRpcObject, GenericBookmarkRpcObject, GenericDimensi
    */
   removeVariable: (name: string) => Promise<boolean>;
   /**
-   * Replace a bookmark. Optional inparams to change the original bookmarks properties, original are kept if left out.
+   * Replaces a bookmark. Optional parameters to modify the original bookmark properties; if not specified, the original properties are retained.
    *
    * Parameters:
    *
    * - `id`                 -   Identifier of the bookmark.
-   * - `ignorePatches`      -   Set to true to exclude patches from the bookmark. Default is false.
-   * - `objectIdsToPatch`   -   Add softpatches for this objects if available. If empty all softpatches are added to the bookmark. Ignored if IgnorePatches is set to true.
+   * - `ignorePatches`      -   When true, excludes patches from the bookmark. The default value is false.
+   * - `objectIdsToPatch`   -   Adds softpatches for these objects if available. If empty, all softpatches are added to the bookmark. Ignored if IgnorePatches is set to true.
    *
    * Stability: *locked*
    */
@@ -10266,22 +10266,22 @@ type NativeGenericObjectFunctions<CustomProperties, CustomLayout, GenericObjectR
    *
    * ### Default limitations in number of rows and columns
    * The default maximum number of rows and columns in the Excel export file is:
-   * * 1048566 rows per sheet. For pivot tables: 1048566 column dimensions. 10 rows can be added after the export.
-   * * 16384 columns per sheet. If the number of columns exceeds the limit, the exported file is truncated and a warning message is sent.
+   * * 1,048,576 rows per sheet. For pivot tables: 1,048,576 column dimensions. 10 rows can be added after the export.
+   * * 16,384 columns per sheet. If the number of columns exceeds the limit, the exported file is truncated and a warning message is sent.
    *
    * ### Default limitation in number of columns
    * The default maximum number of columns in the export file is:
-   * * 1000 to export to a CSV file
+   * * 1,000 for CSV file export.
    *
-   * ### Default limitations in number of cells
+   * ### Default limitation in number of cells
    * The default maximum number of cells in the export file is:
-   * * 5000000 to export to a CSV file
+   * * 5,000,000 for CSV file export.
    *
    * The exported file is truncated if the number of cells exceeds the limit. A warning message with code 1000 is sent.
    * <div class=note>There is an option to export only the possible values ( _qExportState_ is P). </div>
    *
    * ### Default limitation in size
-   * If the exported file is larger than the maximum value, then an out-of-memory error with code 13000 is returned.
+   * If the exported file is larger than the maximum value, an Out of Memory (OOM) error with code 13000 is returned.
    *
    * <div class=note>Exported files are temporary and are available only for a certain time span and only to the user who created them.</div>
    *
@@ -11276,7 +11276,7 @@ type NativeGlobalFunctions<DocRpcObject> = {
    *
    * Parameters:
    *
-   * - `reason`   -   Reason for why the reload was cancelled. This will be echoed back to the user in the script log.
+   * - `reason`   -   Reason for the cancellation of the reload. This information is echoed back to the user in the script log.
    *
    * Stability: *locked*
    */
@@ -11406,7 +11406,7 @@ type NativeGlobalFunctions<DocRpcObject> = {
    * Creates a session app from a source app.
    * The following applies:
    * * The objects in the source app are copied into the session app.
-   * * There is no data in the session app, unless it is reloaded.
+   * * The session app contains no data unless it is reloaded.
    * * The script of the session app can be edited and reloaded.
    * * The name of a session app cannot be chosen. The engine automatically assigns a unique identifier to the session app.
    * * A session app is not persisted and cannot be saved. Everything created during a session app is non-persisted; for example: objects, data connections.
@@ -11523,7 +11523,7 @@ type NativeGlobalFunctions<DocRpcObject> = {
    */
   getActiveDoc: () => Promise<DocRpcObject>;
   /**
-   * Retrieves the meta data of an app.
+   * Retrieves the metadata of an app.
    *
    * Parameters:
    *

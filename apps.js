@@ -1,4 +1,4 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B6hSp2sU.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B_EgafAC.js";
 
 //#region src/public/rest/apps.ts
 /**
@@ -551,7 +551,7 @@ async function getAppReloadLog(appId, reloadId, options) {
 * Retrieves the app reload metadata list.
 * Reload metadata contains reload information, including reload id, duration, endtime and lineage load info. Data is available for the last 10 reloads of an application.
 *
-* @param appId Identifier of the app
+* @param appId Identifier of the app.
 * @param reloadId
 * @param query an object with query parameters
 * @throws GetAppReloadMetadataHttpError

@@ -1,7 +1,9 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B6hSp2sU.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B_EgafAC.js";
 
 //#region src/public/rest/automations.ts
 /**
+* @deprecated
+*
 * Retrieves a list of the automations that the requesting user has access to.
 *
 * @param query an object with query parameters
@@ -16,6 +18,8 @@ async function getAutomations(query, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Creates a new automation. The requesting user must be assigned the `AutomationCreator` role or have at least one of the following scopes: `automations`, `admin.automations`, `automations.private` or `automations.shared`.
 *
 * @param body an object with the body content
@@ -31,6 +35,8 @@ async function createAutomation(body, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Retrieves paginated usage metrics for automations. The requesting user must be assigned the `TenantAdmin` or `AnalyticsAdmin` role.
 *
 * @param query an object with query parameters
@@ -45,6 +51,8 @@ async function getAutomationsUsageMetrics(query, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Deletes an automation. The requesting user must meet at least one of the following conditions:
 * - be the owner of the automation
 * - be assigned one of the following roles: `AnalyticsAdmin`, `TenantAdmin`
@@ -62,6 +70,8 @@ async function deleteAutomation(id, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Retrieves the full definition of an automation. The requesting user must be the owner of the automation and either be assigned one of the roles: `AutomationsCreator`, `TenantAdmin` or have at least one of the following scopes (depending on whether the automation is in a private or shared space): `automations`, `automations.private` or `automations.shared`.
 *
 * @param id The unique identifier for the automation.
@@ -78,6 +88,8 @@ async function getAutomationWithQuery(id, query, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Retrieves the full definition of an automation. The requesting user must be the owner of the automation and either be assigned one of the roles: `AutomationsCreator`, `TenantAdmin` or have at least one of the following scopes (depending on whether the automation is in a private or shared space): `automations`, `automations.private` or `automations.shared`.
 *
 * @param id The unique identifier for the automation.
@@ -92,6 +104,8 @@ async function getAutomation(id, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Updates the full definition of an automation. The requesting user must be the owner of the automation and either be assigned the `AutomationCreator` role or have at least one of the following scopes: `automations`, `admin.automations`, `automations.private` or `automations.shared`.
 *
 * @param id The unique identifier for the automation.
@@ -109,6 +123,8 @@ async function updateAutomation(id, body, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Changes the owner of an automation to another user. This action removes the history and change logs of this automation. All linked connections used in the automation are detached and not moved to the new owner. The requesting user must be assigned `TenantAdmin` role or have at least one of the following scopes: `admin.automations`, `admin.automations:strict`.
 *
 * @param id The unique identifier for the automation.
@@ -126,6 +142,8 @@ async function changeOwnerAutomation(id, body, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Changes the space of an automation by specifying a new space.
 *
 * @param id The unique identifier for the automation.
@@ -143,6 +161,8 @@ async function changeSpaceAutomation(id, body, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Duplicates an existing automation.
 *
 * @param id The unique identifier for the automation.
@@ -160,6 +180,8 @@ async function copyAutomation(id, body, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Disables an automation so that it cannot be run. To disable an automation, the requesting user must meet at least one of the following conditions:
 * - be the owner of the automation
 * - be assigned one of the following roles: `TenantAdmin`, `AnalyticsAdmin`
@@ -177,6 +199,8 @@ async function disableAutomation(id, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Enables an automation so that it can be run. To enable an automation, the requesting user must meet at least one of the following conditions:
 * - be the owner of the automation
 * - be assigned one of the following roles: `AnalyticsAdmin`, `TenantAdmin`
@@ -194,6 +218,8 @@ async function enableAutomation(id, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Changes the owner of an automation to another user. This action removes the history and change logs of this automation. All linked connections used in the automation are detached and not moved to the new owner. The requesting user must be assigned `TenantAdmin` role or have at least one of the following scopes: `admin.automations`, `admin.automations:strict`.
 *
 * @param id The unique identifier for the automation.
@@ -211,6 +237,8 @@ async function moveAutomation(id, body, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Retrieves a list of runs for a specific automation. The requesting user must be the owner of the automation, or be assigned the one of roles: `TenantAdmin`, `AnalyticsAdmin`. Alternatively, the user must have at least one of the following scopes: `admin.automation-runs`, `automation-runs.private`, or `automation-runs.shared`.
 *
 * @param id The unique identifier for the automation.
@@ -227,6 +255,8 @@ async function getAutomationRuns(id, query, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Creates a run for a specific automation. Depending on the space the automation belongs to, the requesting user must meet the following requirement:
 * - Private space: be the owner of the automation and have the `automations.private` scope
 * - Shared space: be editor or operator in shared space and have `automations.shared` scope.
@@ -246,6 +276,8 @@ async function queueAutomationRun(id, body, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Retrieves a specific run for an automation. Depending on the space the automation belongs to, the requesting user must meet the following requirement:
 * - Private space: be the owner of the automation and have the `automations.private` scope
 * - Shared space: be editor or operator in shared space and have `automations.shared` scope.
@@ -268,6 +300,8 @@ async function getAutomationRunWithQuery(id, runId, query, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Retrieves a specific run for an automation. Depending on the space the automation belongs to, the requesting user must meet the following requirement:
 * - Private space: be the owner of the automation and have the `automations.private` scope
 * - Shared space: be editor or operator in shared space and have `automations.shared` scope.
@@ -288,6 +322,8 @@ async function getAutomationRun(id, runId, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Retrieves the URL for the debug log of a specific automation run. Depending on the space the automation belongs to, the requesting user must meet the following requirement:
 * - Private space: be the owner of the automation and have the `automations.private` scope
 * - Shared space: be editor or operator in shared space and have `automations.shared` scope.
@@ -308,6 +344,8 @@ async function getAutomationRunDetails(id, runId, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Retries a specific run by creating a new run using the same inputs. Depending on the space the automation belongs to, the requesting user must meet the following requirement:
 * - Private space: be the owner of the automation and have the `automations.private` scope
 * - Shared space: be editor or operator in shared space and have `automations.shared` scope.
@@ -328,6 +366,8 @@ async function retryAutomationRun(id, runId, options) {
 	});
 }
 /**
+* @deprecated
+*
 * Forcefully stops an automation run immediately. Depending on the space the automation belongs to, the requesting user must meet the following requirement:
 * - Private space: be the owner of the automation and have the `automations.private` scope
 * - Shared space: be editor or operator in shared space and have `automations.shared` scope.

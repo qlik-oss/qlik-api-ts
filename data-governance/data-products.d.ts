@@ -1,7 +1,7 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-DCwmQ7fk.js";
-import "../chunks/invoke-fetch-eUbA2JSu.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
+import "../chunks/invoke-fetch-DdmiOIkr.js";
 declare namespace data_products_d_exports {
-  export { ActivateDataProductHttpError, ActivateDataProductHttpResponse, ActivateDataProductRequest, ArrayOfUniqueStrings, ChangelogOperation, ComputationResponse, ComputeDatasetsDataQualityDataProductHttpError, ComputeDatasetsDataQualityDataProductHttpResponse, CreateDataProductHttpError, CreateDataProductHttpResponse, CreateDataProductRequest, DataProductChangelog, DataProductChangelogResponse, DataProductResponse, DataProductsAPI, DatasetIdType, DatasetsComputationResponse, DeactivateDataProductHttpError, DeactivateDataProductHttpResponse, DeleteDataProductHttpError, DeleteDataProductHttpResponse, Error, ErrorResponse, ExecutionStatus, ExportDocumentationDataProductHttpError, ExportDocumentationDataProductHttpResponse, GenerateProviderUrlDataProductsHttpError, GenerateProviderUrlDataProductsHttpResponse, GenerateProviderUrlResponse, GetDataProductChangelogsHttpError, GetDataProductChangelogsHttpResponse, GetDataProductHttpError, GetDataProductHttpResponse, KeyContact, Link, Links, MoveDataProductHttpError, MoveDataProductHttpResponse, MoveDataProductRequest, PatchDataProductHttpError, PatchDataProductHttpResponse, PatchDataProductRequest, Quality, TableRef, TrustScore, TrustScoreDimension, activateDataProduct, clearCache, computeDatasetsDataQualityDataProduct, createDataProduct, deactivateDataProduct, dataProductsExport as default, deleteDataProduct, exportDocumentationDataProduct, generateProviderUrlDataProducts, getDataProduct, getDataProductChangelogs, moveDataProduct, patchDataProduct };
+  export { ActivateDataProductHttpError, ActivateDataProductHttpResponse, ActivateDataProductRequest, ArrayOfUniqueStrings, ChangelogOperation, ChangelogTableUpdate, ComputationResponse, ComputeDatasetsDataQualityDataProductHttpError, ComputeDatasetsDataQualityDataProductHttpResponse, CreateDataProductHttpError, CreateDataProductHttpResponse, CreateDataProductRequest, DataProductChangelog, DataProductChangelogResponse, DataProductResponse, DataProductsAPI, DatasetIdType, DatasetsComputationResponse, DeactivateDataProductHttpError, DeactivateDataProductHttpResponse, DeleteDataProductHttpError, DeleteDataProductHttpResponse, Error, ErrorResponse, ExecutionStatus, ExportDocumentationDataProductHttpError, ExportDocumentationDataProductHttpResponse, GenerateProviderUrlDataProductsHttpError, GenerateProviderUrlDataProductsHttpResponse, GenerateProviderUrlResponse, GetDataProductChangelogsHttpError, GetDataProductChangelogsHttpResponse, GetDataProductHttpError, GetDataProductHttpResponse, KeyContact, Link, Links, MoveDataProductHttpError, MoveDataProductHttpResponse, MoveDataProductRequest, PatchDataProductHttpError, PatchDataProductHttpResponse, PatchDataProductRequest, Quality, TableRef, TrustScore, TrustScoreDimension, activateDataProduct, clearCache, computeDatasetsDataQualityDataProduct, createDataProduct, deactivateDataProduct, dataProductsExport as default, deleteDataProduct, exportDocumentationDataProduct, generateProviderUrlDataProducts, getDataProduct, getDataProductChangelogs, moveDataProduct, patchDataProduct };
 }
 export type ActivateDataProductRequest = {
   /** A description of the data product. */
@@ -14,9 +14,25 @@ export type ActivateDataProductRequest = {
 };
 export type ArrayOfUniqueStrings = string[] | null;
 export type ChangelogOperation = {
-  operator?: "replace" | "add" | "remove";
-  path?: "/name" | "/description" | "/spaceId" | "/datasetIds" | "/glossaryIds" | "/readMe" | "/keyContacts" | "/tags" | "/activatedOn" | "/apiConsumableDatasetIds" | "/semanticModel" | "/semanticModel/relationships" | "/semanticModel/measures" | "/semanticModel/dimensions";
-  value?: string | null | ArrayOfUniqueStrings | unknown[] | null | unknown | null;
+  /** `removedFromCatalog` is a removal applied by the system after a catalog event (dataset updated or
+   * deleted), as opposed to `remove`, which is a removal deliberately performed by a user.
+   * `update` is a partial modification of an existing entity applied by the system after a catalog event
+   * (dataset schema updated). It is currently only used with the `/semanticModel/tables` path, where the
+   * value describes the fields added to and removed from a table. */
+  operator?: "replace" | "add" | "remove" | "removedFromCatalog" | "update";
+  path?: "/name" | "/description" | "/spaceId" | "/datasetIds" | "/glossaryIds" | "/readMe" | "/keyContacts" | "/tags" | "/activatedOn" | "/apiConsumableDatasetIds" | "/semanticModel" | "/semanticModel/relationships" | "/semanticModel/measures" | "/semanticModel/dimensions" | "/semanticModel/tables";
+  value?: string | null | ArrayOfUniqueStrings | ChangelogTableUpdate | unknown[] | null | unknown | null;
+};
+/**
+ * Fields added to and removed from a semantic model table by a dataset schema change.
+ */
+export type ChangelogTableUpdate = {
+  /** Identifiers of the fields added to the table. Empty when no field was added. */
+  addedFieldIds?: string[];
+  /** Identifiers of the fields removed from the table. Empty when no field was removed. */
+  removedFieldIds?: string[];
+  /** Identifier of the updated table. */
+  tableId: string;
 };
 /**
  * Result of a data quality computation for a single dataset.

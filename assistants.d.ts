@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DCwmQ7fk.js";
-import "./chunks/invoke-fetch-eUbA2JSu.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/assistants.d.ts
 export type Assistant = {
   /** Datetime when the assistant was created. */
@@ -477,6 +477,8 @@ export type ResultMeta = {
   countTotal?: number;
 };
 export type SearchRequest = {
+  /** Optional document ID to restrict search results to chunks from a single document. */
+  documentId?: string;
   /** Query text or question to search. */
   prompt: string;
   /** Search mode to use.   Allowed values: `SIMPLE` and `FULL`.   Default: `SIMPLE`. */

@@ -29,46 +29,54 @@
 <li><a href="../modules/reload-tasks.html">reload-tasks</a></li>
 <li><a href="" aria-current="page">Task</a></li></ul>
 <h1>Type Alias Task</h1></div>
-<div class="tsd-signature"><span class="tsd-kind-type-alias">Task</span><span class="tsd-signature-symbol">:</span> <a href="reload-tasks.TaskBase.html" class="tsd-signature-type tsd-kind-type-alias">TaskBase</a> <span class="tsd-signature-symbol">&amp;</span> <span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">disabledCode</span><span class="tsd-signature-symbol">?:</span><br/>        <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;MANUALLY&quot;</span><br/>        <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;CONSECUTIVE-FAILURES&quot;</span><br/>        <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;OWNER-DELETED&quot;</span><br/>        <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;OWNER-DISABLED&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">fortressId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">lastExecutionTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">links</span><span class="tsd-signature-symbol">:</span> <a href="reload-tasks.SelfLink.html" class="tsd-signature-type tsd-kind-type-alias">SelfLink</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">log</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">migrated</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">nextExecutionTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">spaceId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">state</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;Enabled&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;Disabled&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;Completed&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">tenantId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">userId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
+<div class="tsd-signature"><span class="tsd-kind-type-alias">Task</span><span class="tsd-signature-symbol">:</span> <a href="reload-tasks.TaskBase.html" class="tsd-signature-type tsd-kind-type-alias">TaskBase</a> <span class="tsd-signature-symbol">&amp;</span> <span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">appId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">disabledCode</span><span class="tsd-signature-symbol">?:</span><br/>        <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;MANUALLY&quot;</span><br/>        <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;CONSECUTIVE-FAILURES&quot;</span><br/>        <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;OWNER-DELETED&quot;</span><br/>        <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;OWNER-DISABLED&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">fortressId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">jobId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">lastExecutionTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">links</span><span class="tsd-signature-symbol">:</span> <a href="reload-tasks.SelfLink.html" class="tsd-signature-type tsd-kind-type-alias">SelfLink</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">log</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">migrated</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">nextExecutionTime</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">spaceId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">state</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;Enabled&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;Disabled&quot;</span><br/>    <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;Completed&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">tenantId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">userId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
 <div class="tsd-type-declaration">
 <h4>Type Declaration</h4>
 <ul class="tsd-parameters">
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">disabledCode</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;MANUALLY&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;CONSECUTIVE-FAILURES&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;OWNER-DELETED&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;OWNER-DISABLED&quot;</span></h5>
+<h5><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">appId</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The ID of the app.</p>
+</div></li>
+<li class="tsd-parameter">
+<h5><code class="tsd-tag">Optional</code> <code class="tsd-tag">Readonly</code><span class="tsd-kind-property">disabledCode</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;MANUALLY&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;CONSECUTIVE-FAILURES&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;OWNER-DELETED&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;OWNER-DISABLED&quot;</span></h5>
 <div class="tsd-comment tsd-typography"><p>The reason why the task was disabled.</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">fortressId</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<h5><code class="tsd-tag">Optional</code> <code class="tsd-tag">Readonly</code><span class="tsd-kind-property">fortressId</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-deprecated">
 <h4 class="tsd-anchor-link" id="deprecated">Deprecated<a href="#deprecated" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>The fortress ID of the application</p>
 </div></div></li>
 <li class="tsd-parameter">
-<h5><span class="tsd-kind-property">id</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+<h5><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">id</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The ID of the task.</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">lastExecutionTime</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<h5><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">jobId</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The ID of the scheduler job associated with the task.</p>
+</div></li>
+<li class="tsd-parameter">
+<h5><code class="tsd-tag">Optional</code> <code class="tsd-tag">Readonly</code><span class="tsd-kind-property">lastExecutionTime</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The last time the task executed.</p>
 </div></li>
 <li class="tsd-parameter">
 <h5><span class="tsd-kind-property">links</span><span class="tsd-signature-symbol">: </span><a href="reload-tasks.SelfLink.html" class="tsd-signature-type tsd-kind-type-alias">SelfLink</a></h5></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">log</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<h5><code class="tsd-tag">Optional</code> <code class="tsd-tag">Readonly</code><span class="tsd-kind-property">log</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-deprecated">
 <h4 class="tsd-anchor-link" id="deprecated-1">Deprecated<a href="#deprecated-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>The reason why the task was disabled.</p>
 </div></div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">migrated</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+<h5><code class="tsd-tag">Optional</code> <code class="tsd-tag">Readonly</code><span class="tsd-kind-property">migrated</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
 <div class="tsd-comment tsd-typography"><p>A flag indicating whether the task has been migrated to the new scheduling service.</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">nextExecutionTime</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<h5><code class="tsd-tag">Optional</code> <code class="tsd-tag">Readonly</code><span class="tsd-kind-property">nextExecutionTime</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The next time the task will execute.</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">spaceId</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+<h5><code class="tsd-tag">Optional</code> <code class="tsd-tag">Readonly</code><span class="tsd-kind-property">spaceId</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The space ID of the application</p>
 </div></li>
 <li class="tsd-parameter">
@@ -76,11 +84,11 @@
 <div class="tsd-comment tsd-typography"><p>Toggle for enabling and disabling the reload task</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><span class="tsd-kind-property">tenantId</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+<h5><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">tenantId</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The ID of the tenant who owns the task.</p>
 </div></li>
 <li class="tsd-parameter">
-<h5><span class="tsd-kind-property">userId</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+<h5><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">userId</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>The ID of the user who owns the task.</p>
 </div></li></ul></div></div>
 <div class="col-sidebar">

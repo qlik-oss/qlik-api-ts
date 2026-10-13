@@ -1,7 +1,9 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B6hSp2sU.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B_EgafAC.js";
 
 //#region src/public/rest/automation-connectors.ts
 /**
+* @deprecated
+*
 * Retrieves a list of automation connectors.
 *
 * @param query an object with query parameters

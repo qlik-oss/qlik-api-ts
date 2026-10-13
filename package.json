@@ -12,6 +12,8 @@
   },
   "exports": {
     ".": "./index.js",
+    "./alerting": "./alerting.js",
+    "./alerting/sharing-tasks": "./alerting/sharing-tasks.js",
     "./analytics": "./analytics.js",
     "./analytics/apps": "./analytics/apps.js",
     "./analytics/change-stores": "./analytics/change-stores.js",
@@ -108,13 +110,13 @@
     "./qix": "./qix.js"
   },
   "dependencies": {
-    "enigma.js": "^2.14.0",
+    "enigma.js": "^2.15.0",
     "extend": "3.0.2",
     "lodash-es": "^4.18.1",
-    "ws": "^8.21.3"
+    "ws": "^8.22.0"
   },
   "engines": {
     "node": ">=20.0.0"
   },
-  "packageManager": "pnpm@12.5.1"
+  "packageManager": "pnpm@12.9.1"
 }

@@ -1,5 +1,5 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-DCwmQ7fk.js";
-import "./chunks/invoke-fetch-eUbA2JSu.js";
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/apps.d.ts
 export type Analysis = "breakdown" | "changePoint" | "comparison" | "contribution" | "correlation" | "fact" | "mutualInfo" | "rank" | "spike" | "trend" | "values";
 export type AnalysisComposition = {
@@ -731,7 +731,7 @@ export type NavigationLinks = {
  * Application attributes and user privileges.
  */
 export type NxApp = {
-  /** App attributes. This structure can also contain extra user-defined attributes. */
+  /** App attributes. This structure can include additional user-defined attributes. */
   attributes?: NxAttributes;
   /** Object create privileges. Hints to the client what type of objects the user is allowed to create. */
   create?: NxAppCreatePrivileges[];
@@ -759,14 +759,14 @@ export type NxAppCreatePrivileges = {
   resource?: string;
 };
 /**
- * Application object attributes and user privileges.
+ * Attributes and user privileges for an app object.
  */
 export type NxAppObject = {
-  /** App object attributes. This structure can also contain extra user-defined attributes. */
+  /** App object attributes. This structure can include additional user-defined attributes. */
   attributes?: NxObjectAttributes;
-  /** Application object privileges.
-   * Hints to the client what actions the user is allowed to perform.
-   * Could be any of:
+  /** App object privileges.
+   * Hints to the client regarding actions the user can perform.
+   * Possible values:
    * * read
    * * create
    * * update
@@ -777,7 +777,7 @@ export type NxAppObject = {
   privileges?: string[];
 };
 /**
- * App attributes. This structure can also contain extra user-defined attributes.
+ * App attributes. This structure can include additional user-defined attributes.
  */
 export type NxAttributes = {
   /** The date and time when the app was created. */
@@ -805,7 +805,7 @@ export type NxAttributes = {
   /** The Origin App ID for published apps. */
   originAppId?: string;
   /** @deprecated
-   * Deprecated. Use the Users API to fetch user metadata. */
+   * Deprecated: Use the Users API to fetch user metadata. */
   owner?: string;
   /** Identifier of the app owner. */
   ownerId?: string;
@@ -819,23 +819,23 @@ export type NxAttributes = {
   usage?: UsageEnum;
 };
 /**
- * App object attributes. This structure can also contain extra user-defined attributes.
+ * App object attributes. This structure can include additional user-defined attributes.
  */
 export type NxObjectAttributes = {
-  /** True if the object is approved. */
+  /** When true, the object is approved. */
   approved?: boolean;
   /** The date and time when the object was created. */
   createdAt?: string;
   /** Object description. */
   description?: string;
   genericType?: AppObjectGenericType;
-  /** The object Id. */
+  /** Identifier of the object. */
   id?: string;
   /** Object name. */
   name?: string;
   /** The type of the object. */
   objectType?: string;
-  /** The object owner's Id. */
+  /** Identifier of the object owner. */
   ownerId?: string;
   /** The date and time when the object was published, empty if unpublished. */
   publishedAt?: string;
@@ -890,9 +890,9 @@ export type Placement = {
 export type PublishApp = {
   attributes?: AppUpdateAttributes;
   data?: PublishData;
-  /** The original is moved instead of copied. The current published state of all objects is kept. */
+  /** When true, the original is moved instead of copied, keeping the current published state of all objects. The default value is false. */
   moveApp?: boolean;
-  /** If app is moved, originAppId needs to be provided. */
+  /** Required when moving the app, specifying the identifier of the original app. */
   originAppId?: string;
   /** The managed space ID where the app will be published. */
   spaceId?: string;
@@ -969,7 +969,7 @@ export type ReloadMeta = {
   loadFilesBytes?: number;
   /** Reload identifier. */
   reloadId?: string;
-  /** If greater than or equal 0, defines max number of rows loaded from a data source. */
+  /** If greater than or equal to 0, defines the maximum number of rows loaded from a data source. */
   rowLimit?: number;
   /** Set to true to skip Store statements.
    * The default value is false. */
@@ -1070,7 +1070,7 @@ export type ScriptMetaList = {
 export type ScriptVersion = {
   /** Script text. */
   script?: string;
-  /** Description of this script version */
+  /** Description of this script version. */
   versionMessage?: string;
 };
 export type SimplifiedClassifications = ("dimension" | "measure" | "temporal" | "geographical")[];
@@ -1494,7 +1494,7 @@ export declare function importApp(query: {
   fallbackName?: string;
   /** The file ID to be downloaded from Temporary Content Service (TCS) and used during import. */
   fileId?: string;
-  /** The import mode. In `new` mode (default), the source app will be imported as a new app.<div class=note>The `autoreplace` mode is an internal mode only and is not permitted for external use.</div>
+  /** The import mode. In `new` mode (default), the source app is imported as a new app.<div class=note>The `autoreplace` mode is intended for internal use only and is not permitted for external use.</div>
    *
    * One of:
    * * NEW
@@ -2001,15 +2001,15 @@ export type GetAppReloadLogHttpError = {
  * Retrieves the app reload metadata list.
  * Reload metadata contains reload information, including reload id, duration, endtime and lineage load info. Data is available for the last 10 reloads of an application.
  *
- * @param appId Identifier of the app
+ * @param appId Identifier of the app.
  * @param reloadId
  * @param query an object with query parameters
  * @throws GetAppReloadMetadataHttpError
  */
 export declare function getAppReloadMetadata(appId: string, reloadId: string, query: {
-  /** Include metadata for reloads ran with SkipStore flag set to true. Default: false */
+  /** Include metadata for reloads ran with SkipStore flag set to true. Default: false. */
   includeSkipStoreReloads?: boolean;
-  /** Maximum number of records to return from this request. Default: 100 */
+  /** Maximum number of records to return from this request. The default value is 100. */
   limit?: string;
   /** Identifier of the reload. Use empty reloadId to get all reloads. */
   reloadId?: string;
@@ -2661,7 +2661,7 @@ export type AppsAPI = {
    * Retrieves the app reload metadata list.
    * Reload metadata contains reload information, including reload id, duration, endtime and lineage load info. Data is available for the last 10 reloads of an application.
    *
-   * @param appId Identifier of the app
+   * @param appId Identifier of the app.
    * @param reloadId
    * @param query an object with query parameters
    * @throws GetAppReloadMetadataHttpError

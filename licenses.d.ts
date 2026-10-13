@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-DCwmQ7fk.js";
-import "./chunks/invoke-fetch-eUbA2JSu.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
+import "./chunks/invoke-fetch-DdmiOIkr.js";
 //#region src/public/rest/licenses.d.ts
 /**
  * @example
@@ -355,6 +355,8 @@ export type LicenseOverview = {
   }[];
   /** the parent number of the license. can be shared by multiple license numbers */
   parentLicenseNumber?: string;
+  /** Customer ID of the parent license's Stigg subscription. Falls back to this license's own customerId when there is no parent relationship, so a non-empty value does not by itself indicate a parent exists */
+  payingCustomerId?: string;
   /** The product the license is valid for. */
   product: string;
   /** The secondary number of a definition. */
@@ -367,6 +369,8 @@ export type LicenseOverview = {
   updated: string;
   /** Period that the license is currently set to be active. Represented as an ISO 8601 time interval with start and end. */
   valid: string;
+  /** An ISO 8601 timestamp interval representing the same validity period as "valid", but with second precision instead of day precision. */
+  validTime?: string;
   /** The version of the license definition, used to track whether changes have propagated. Typically a content hash; its exact form depends on the origin. */
   version: string;
 };
