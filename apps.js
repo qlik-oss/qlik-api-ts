@@ -1,4 +1,4 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-B_EgafAC.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CMDeEDft.js";
 
 //#region src/public/rest/apps.ts
 /**

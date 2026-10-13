@@ -259,6 +259,8 @@ export type UpdateOdbcCustomTypeMappingsRequest = {
   odbcCustomDataTypes?: OdbcCustomDataType[] | null;
 };
 /**
+ * @deprecated
+ *
  * Restarts the specified agent. If a reload is in `RELOADING` status the `restart` action will be ignored. Use `force-restart` to restart the agent even if a reload is in `RELOADING` status. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
  *
  * @param agentId The agent ID
@@ -277,6 +279,8 @@ export type RestartDirectAccessAgentHttpError = {
   status: 400 | 403 | 404 | 409 | 500;
 };
 /**
+ * @deprecated
+ *
  * Starts a background benchmark task that measures the throughput and latency of a Direct Access agent. Use the returned `benchmarkId` to monitor progress and retrieve performance metrics for capacity planning or performance optimization. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
  *
  * @param agentId The agent ID
@@ -304,6 +308,8 @@ export type CreateDirectAccessAgentBenchmarkHttpError = {
   status: 400 | 403 | 404 | 500 | 501 | 503;
 };
 /**
+ * @deprecated
+ *
  * Retrieves the current status, progress, and performance metrics for a benchmark task. Use this operation to monitor a running benchmark or inspect its completed results. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
  *
  * @param agentId The agent ID
@@ -322,6 +328,8 @@ export type GetDirectAccessAgentBenchmarkHttpError = {
   status: 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Requests cancellation of a running benchmark for the specified agent. The request is asynchronous. Use the returned status URL to monitor when cancellation completes. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
  *
  * @param agentId The agent ID
@@ -340,6 +348,8 @@ export type CreateDirectAccessAgentBenchmarkCancelHttpError = {
   status: 403 | 404 | 500 | 503;
 };
 /**
+ * @deprecated
+ *
  * Retrieves the connector agent configuration from the specified agent. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
  *
  * @param agentId The agent ID
@@ -361,6 +371,8 @@ export type GetDirectAccessAgentConfigurationHttpError = {
   status: 403 | 404;
 };
 /**
+ * @deprecated
+ *
  * Makes changes to the local agent configuration using JSON Patch. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
  *
  * @param agentId The agent ID
@@ -385,6 +397,8 @@ export type PatchDirectAccessAgentConfigurationHttpError = {
   status: 400 | 403 | 404 | 415;
 };
 /**
+ * @deprecated
+ *
  * Retrieves the allowed paths settings for the File Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.6+.
  *
  * @param agentId The agent ID
@@ -402,6 +416,8 @@ export type GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpErro
   status: 404;
 };
 /**
+ * @deprecated
+ *
  * Completely replaces the contents of the allowed paths configuration file for the File Connector. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.6+.
  *
  * @param agentId The agent id
@@ -420,6 +436,8 @@ export type PutDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpErro
   status: 400 | 404 | 409;
 };
 /**
+ * @deprecated
+ *
  * Retrieves the custom data type mapping settings for the Generic ODBC Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
  *
  * @param agentId The agent ID.
@@ -437,6 +455,8 @@ export type GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappin
   status: 404;
 };
 /**
+ * @deprecated
+ *
  * Completely replaces the contents of the custom data type mapping configuration file for the Generic ODBC connector. Partial updates are not supported. There are property naming differences between the API and the file contents. Use the API property format when making changes. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
  *
  * @param agentId The agent ID.
@@ -455,6 +475,8 @@ export type PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappin
   status: 400 | 404 | 409;
 };
 /**
+ * @deprecated
+ *
  * Retrieves the configuration files associated with the connector. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
  *
  * @param agentId The agent ID
@@ -474,6 +496,8 @@ export type GetDirectAccessAgentConnectorFilesHttpError = {
   status: 403 | 404;
 };
 /**
+ * @deprecated
+ *
  * Retrieves the configuration files associated with the connector. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
  *
  * @param agentId The agent ID
@@ -492,6 +516,8 @@ export type GetDirectAccessAgentConnectorFilesWithoutQueryHttpError = {
   status: 403 | 404;
 };
 /**
+ * @deprecated
+ *
  * Retrieves the configuration items in the flat file for the specified connector. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
  *
  * @param agentId The agent ID
@@ -511,6 +537,8 @@ export type GetDirectAccessAgentConnectorFileHttpError = {
   status: 403 | 404;
 };
 /**
+ * @deprecated
+ *
  * Completely replaces the contents of the connector's configuration file. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
  *
  * @param agentId The agent ID
@@ -532,6 +560,8 @@ export type UpdateDirectAccessAgentConnectorFileHttpError = {
   status: 400 | 404 | 409;
 };
 /**
+ * @deprecated
+ *
  * Completely replaces the contents of the connector's configuration file. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
  *
  * @param agentId The agent ID
@@ -552,6 +582,8 @@ export type UpdateDirectAccessAgentConnectorFileWithoutQueryHttpError = {
   status: 400 | 404 | 409;
 };
 /**
+ * @deprecated
+ *
  * Retrieves the settings for the metrics collector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.9+.
  *
  * @param agentId The agent ID.
@@ -569,6 +601,8 @@ export type GetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError = {
   status: 400 | 404;
 };
 /**
+ * @deprecated
+ *
  * Completely replaces the contents of the metrics collector settings configuration file. Partial updates are not supported.  Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.9+.
  *
  * @param agentId The agent ID.
@@ -592,6 +626,8 @@ export type SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError = {
 export declare function clearCache(): void;
 export type DirectAccessAgentsAPI = {
   /**
+   * @deprecated
+   *
    * Restarts the specified agent. If a reload is in `RELOADING` status the `restart` action will be ignored. Use `force-restart` to restart the agent even if a reload is in `RELOADING` status. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
    *
    * @param agentId The agent ID
@@ -600,6 +636,8 @@ export type DirectAccessAgentsAPI = {
    */
   restartDirectAccessAgent: typeof restartDirectAccessAgent;
   /**
+   * @deprecated
+   *
    * Starts a background benchmark task that measures the throughput and latency of a Direct Access agent. Use the returned `benchmarkId` to monitor progress and retrieve performance metrics for capacity planning or performance optimization. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
    *
    * @param agentId The agent ID
@@ -608,6 +646,8 @@ export type DirectAccessAgentsAPI = {
    */
   createDirectAccessAgentBenchmark: typeof createDirectAccessAgentBenchmark;
   /**
+   * @deprecated
+   *
    * Retrieves the current status, progress, and performance metrics for a benchmark task. Use this operation to monitor a running benchmark or inspect its completed results. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
    *
    * @param agentId The agent ID
@@ -616,6 +656,8 @@ export type DirectAccessAgentsAPI = {
    */
   getDirectAccessAgentBenchmark: typeof getDirectAccessAgentBenchmark;
   /**
+   * @deprecated
+   *
    * Requests cancellation of a running benchmark for the specified agent. The request is asynchronous. Use the returned status URL to monitor when cancellation completes. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
    *
    * @param agentId The agent ID
@@ -624,6 +666,8 @@ export type DirectAccessAgentsAPI = {
    */
   createDirectAccessAgentBenchmarkCancel: typeof createDirectAccessAgentBenchmarkCancel;
   /**
+   * @deprecated
+   *
    * Retrieves the connector agent configuration from the specified agent. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
    *
    * @param agentId The agent ID
@@ -632,6 +676,8 @@ export type DirectAccessAgentsAPI = {
    */
   getDirectAccessAgentConfiguration: typeof getDirectAccessAgentConfiguration;
   /**
+   * @deprecated
+   *
    * Makes changes to the local agent configuration using JSON Patch. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
    *
    * @param agentId The agent ID
@@ -640,6 +686,8 @@ export type DirectAccessAgentsAPI = {
    */
   patchDirectAccessAgentConfiguration: typeof patchDirectAccessAgentConfiguration;
   /**
+   * @deprecated
+   *
    * Retrieves the allowed paths settings for the File Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.6+.
    *
    * @param agentId The agent ID
@@ -647,6 +695,8 @@ export type DirectAccessAgentsAPI = {
    */
   getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths: typeof getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths;
   /**
+   * @deprecated
+   *
    * Completely replaces the contents of the allowed paths configuration file for the File Connector. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.6+.
    *
    * @param agentId The agent id
@@ -655,6 +705,8 @@ export type DirectAccessAgentsAPI = {
    */
   putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths: typeof putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths;
   /**
+   * @deprecated
+   *
    * Retrieves the custom data type mapping settings for the Generic ODBC Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
    *
    * @param agentId The agent ID.
@@ -662,6 +714,8 @@ export type DirectAccessAgentsAPI = {
    */
   getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings: typeof getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings;
   /**
+   * @deprecated
+   *
    * Completely replaces the contents of the custom data type mapping configuration file for the Generic ODBC connector. Partial updates are not supported. There are property naming differences between the API and the file contents. Use the API property format when making changes. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
    *
    * @param agentId The agent ID.
@@ -670,6 +724,8 @@ export type DirectAccessAgentsAPI = {
    */
   putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings: typeof putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings;
   /**
+   * @deprecated
+   *
    * Retrieves the configuration files associated with the connector. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
    *
    * @param agentId The agent ID
@@ -679,6 +735,8 @@ export type DirectAccessAgentsAPI = {
    */
   getDirectAccessAgentConnectorFiles: typeof getDirectAccessAgentConnectorFiles;
   /**
+   * @deprecated
+   *
    * Retrieves the configuration files associated with the connector. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
    *
    * @param agentId The agent ID
@@ -687,6 +745,8 @@ export type DirectAccessAgentsAPI = {
    */
   getDirectAccessAgentConnectorFilesWithoutQuery: typeof getDirectAccessAgentConnectorFilesWithoutQuery;
   /**
+   * @deprecated
+   *
    * Retrieves the configuration items in the flat file for the specified connector. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
    *
    * @param agentId The agent ID
@@ -696,6 +756,8 @@ export type DirectAccessAgentsAPI = {
    */
   getDirectAccessAgentConnectorFile: typeof getDirectAccessAgentConnectorFile;
   /**
+   * @deprecated
+   *
    * Completely replaces the contents of the connector's configuration file. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
    *
    * @param agentId The agent ID
@@ -707,6 +769,8 @@ export type DirectAccessAgentsAPI = {
    */
   updateDirectAccessAgentConnectorFile: typeof updateDirectAccessAgentConnectorFile;
   /**
+   * @deprecated
+   *
    * Completely replaces the contents of the connector's configuration file. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
    *
    * @param agentId The agent ID
@@ -717,6 +781,8 @@ export type DirectAccessAgentsAPI = {
    */
   updateDirectAccessAgentConnectorFileWithoutQuery: typeof updateDirectAccessAgentConnectorFileWithoutQuery;
   /**
+   * @deprecated
+   *
    * Retrieves the settings for the metrics collector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.9+.
    *
    * @param agentId The agent ID.
@@ -724,6 +790,8 @@ export type DirectAccessAgentsAPI = {
    */
   getDirectAccessAgentToolsMetricsCollectorConfiguration: typeof getDirectAccessAgentToolsMetricsCollectorConfiguration;
   /**
+   * @deprecated
+   *
    * Completely replaces the contents of the metrics collector settings configuration file. Partial updates are not supported.  Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.9+.
    *
    * @param agentId The agent ID.
