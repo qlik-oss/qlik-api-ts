@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
-import "./chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
+import "./chunks/invoke-fetch-CL7DhyRH.js";
 //#region src/public/rest/spaces.d.ts
 /**
  * The supported actions for user-created spaces.
@@ -331,7 +331,7 @@ export type CreateSpaceHttpResponse = {
 export type CreateSpaceHttpError = {
   data: Errors;
   headers: Headers;
-  status: 401 | 403 | 409 | 500;
+  status: 400 | 401 | 403 | 409 | 500;
 };
 /**
  * Gets a list of distinct space types available for use in the tenant.
@@ -350,7 +350,7 @@ export type GetSpaceTypesHttpError = {
   status: 401 | 500;
 };
 /**
- * Deletes a space. Ensure that you first delete all resources from the space to avoid orphaning content.
+ * Deletes a space. Ensure that you first delete all resources from the space to avoid orphaning content. When non-empty-space deletion protection is enabled for the tenant, deletion is rejected if Collections contains any items in the space.
  *
  * @param spaceId The ID of the space to delete.
  * @throws DeleteSpaceHttpError
@@ -364,7 +364,7 @@ export type DeleteSpaceHttpResponse = {
 export type DeleteSpaceHttpError = {
   data: Errors;
   headers: Headers;
-  status: 401 | 403 | 404 | 412 | 500;
+  status: 401 | 403 | 404 | 409 | 412 | 500;
 };
 /**
  * Retrieves a single space by ID.
@@ -417,7 +417,7 @@ export type UpdateSpaceHttpResponse = {
 export type UpdateSpaceHttpError = {
   data: Errors;
   headers: Headers;
-  status: 401 | 403 | 404 | 500;
+  status: 400 | 401 | 403 | 404 | 500;
 };
 /**
  * Retrieves the assignments of the space matching the query. Each assignment represents one user or group and their corresponding roles in the space. Assignments are not shown for the owner of a space, who receive all `assignableRoles` by default.
@@ -661,7 +661,7 @@ export type SpacesAPI = {
    */
   getSpaceTypes: typeof getSpaceTypes;
   /**
-   * Deletes a space. Ensure that you first delete all resources from the space to avoid orphaning content.
+   * Deletes a space. Ensure that you first delete all resources from the space to avoid orphaning content. When non-empty-space deletion protection is enabled for the tenant, deletion is rejected if Collections contains any items in the space.
    *
    * @param spaceId The ID of the space to delete.
    * @throws DeleteSpaceHttpError

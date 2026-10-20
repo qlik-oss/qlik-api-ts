@@ -1,5 +1,5 @@
 import { t as __exportAll } from "../chunks/rolldown-runtime-w6R9maHv.js";
-import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-CMDeEDft.js";
+import { n as invokeFetch, t as clearApiCache } from "../chunks/invoke-fetch-DI1iTaBB.js";
 
 //#region src/public/rest/connectivity/direct-access-agents.ts
 var direct_access_agents_exports = /* @__PURE__ */ __exportAll({
@@ -7,6 +7,7 @@ var direct_access_agents_exports = /* @__PURE__ */ __exportAll({
 	createDirectAccessAgentBenchmark: () => createDirectAccessAgentBenchmark,
 	default: () => directAccessAgentsExport,
 	getDirectAccessAgentBenchmarks: () => getDirectAccessAgentBenchmarks,
+	getDirectAccessAgentConfigurations: () => getDirectAccessAgentConfigurations,
 	getDirectAccessAgentLoadPerformanceMetrics: () => getDirectAccessAgentLoadPerformanceMetrics
 });
 /**
@@ -42,6 +43,22 @@ async function createDirectAccessAgentBenchmark(agentId, query, options) {
 	});
 }
 /**
+* Retrieves the connector agent configuration from the specified agent. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
+*
+* @param agentId The agent ID
+* @param query an object with query parameters
+* @throws GetDirectAccessAgentConfigurationsHttpError
+*/
+async function getDirectAccessAgentConfigurations(agentId, query, options) {
+	return invokeFetch("connectivity/direct-access-agents", {
+		method: "get",
+		pathTemplate: "/api/connectivity/direct-access-agents/{agentId}/configurations",
+		pathVariables: { agentId },
+		query,
+		options
+	});
+}
+/**
 * Retrieves performance metrics for loads processed by the gateway, either for all loads or a filtered subset. Use these metrics to evaluate reload throughput, connector latency, and concurrent reload activity. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Load performance recording is disabled by default and is controlled by the `BENCHMARK_LOAD_PERFORMANCE_METRICS_RECORDING_ENABLED` configuration property. Available in Direct Access Gateway V1.7.17+.
 *
 * @param agentId The agent ID
@@ -69,9 +86,10 @@ function clearCache() {
 const directAccessAgentsExport = {
 	getDirectAccessAgentBenchmarks,
 	createDirectAccessAgentBenchmark,
+	getDirectAccessAgentConfigurations,
 	getDirectAccessAgentLoadPerformanceMetrics,
 	clearCache
 };
 
 //#endregion
-export { clearCache, createDirectAccessAgentBenchmark, directAccessAgentsExport as default, getDirectAccessAgentBenchmarks, getDirectAccessAgentLoadPerformanceMetrics, direct_access_agents_exports as t };
+export { clearCache, createDirectAccessAgentBenchmark, directAccessAgentsExport as default, getDirectAccessAgentBenchmarks, getDirectAccessAgentConfigurations, getDirectAccessAgentLoadPerformanceMetrics, direct_access_agents_exports as t };

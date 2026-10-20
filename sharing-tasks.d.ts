@@ -1,5 +1,5 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
-import "./chunks/invoke-fetch-DdmiOIkr.js";
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
+import "./chunks/invoke-fetch-CL7DhyRH.js";
 //#region src/public/rest/sharing-tasks.d.ts
 export type APISettingsUpload = {
   /** Whether API endpoints for sharing are enabled */
@@ -560,7 +560,7 @@ export type SharingTaskRecurringPersist = {
   /** State of the selections and jsOpts */
   state?: State;
   /** the status of this recurring sharing task */
-  readonly statusCode?: "CHART_NOT_FOUND" | "APP_NOT_FOUND" | "STORY_NOT_FOUND" | "SHEET_NOT_FOUND" | "ENGINE_POD_NOT_AVAILABLE" | "APP_FORBIDDEN" | "CHART_TYPE_NOT_ALLOWED" | "FAILED" | "DELETING" | "IN_PROGRESS" | "VALID" | "MAX_FAILURES_REACHED" | "BOOKMARK_NOT_FOUND" | "CANCELLING" | "CANCELLED" | "REPORTING_CONSUMPTION_EXCEEDED" | "REPORTING_CAPABILITY_NOT_FOUND" | "REPORTING_DAILY_QUOTA_EXCEEDED";
+  readonly statusCode?: "CHART_NOT_FOUND" | "APP_NOT_FOUND" | "STORY_NOT_FOUND" | "SHEET_NOT_FOUND" | "ENGINE_POD_NOT_AVAILABLE" | "APP_FORBIDDEN" | "CHART_TYPE_NOT_ALLOWED" | "FAILED" | "DELETING" | "IN_PROGRESS" | "VALID" | "MAX_FAILURES_REACHED" | "BOOKMARK_NOT_FOUND" | "CANCELLING" | "CANCELLED" | "REPORTING_CONSUMPTION_EXCEEDED" | "REPORTING_CAPABILITY_NOT_FOUND" | "REPORTING_DAILY_QUOTA_EXCEEDED" | "WARNING";
   /** error message indicating the underlying failure */
   readonly statusLabel?: string;
   /** @deprecated

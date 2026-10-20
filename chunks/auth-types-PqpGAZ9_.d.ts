@@ -124,7 +124,7 @@ type ProductInfo = {
     version?: string;
     copyrightYearRange?: string;
     deploymentEnvironment?: string;
-    deploymentType?: "qliksenseserver" | "qliksensedesktop" | "QlikSenseMobile" | "qlikcloudservices" | "cloud-console";
+    deploymentType?: "qliksenseserver" | "qliksensedesktop" | "QlikSenseMobile" | "qlikanalyticsmobileoffline" | "qlikcloudservices" | "cloud-console";
     provider?: string;
   };
   externalUrls: {

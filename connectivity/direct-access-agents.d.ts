@@ -1,8 +1,53 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
-import "../chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-PqpGAZ9_.js";
+import "../chunks/invoke-fetch-CL7DhyRH.js";
 declare namespace direct_access_agents_d_exports {
-  export { CreateDirectAccessAgentBenchmarkHttpError, CreateDirectAccessAgentBenchmarkHttpResponse, DirectAccessAgentsAPI, ErrorMessage, ErrorResponse, GetAllBenchmarkStatusResponse, GetBenchmarkStatusResponse, GetBenchmarkStatusResults, GetDirectAccessAgentBenchmarksHttpError, GetDirectAccessAgentBenchmarksHttpResponse, GetDirectAccessAgentLoadPerformanceMetricsHttpError, GetDirectAccessAgentLoadPerformanceMetricsHttpResponse, GetLoadPerformanceMetricsResponse, LinkResponseObject, LoadPerformanceMetric, PaginationLinks, RunBenchmarkResponse, clearCache, createDirectAccessAgentBenchmark, directAccessAgentsExport as default, getDirectAccessAgentBenchmarks, getDirectAccessAgentLoadPerformanceMetrics };
+  export { ConfigurationLineBase, ConfigurationLineNumeric, ConfigurationLineString, ConfigurationResponseWithGatewayMetadata, ConnectorSettings, CreateDirectAccessAgentBenchmarkHttpError, CreateDirectAccessAgentBenchmarkHttpResponse, DirectAccessAgentsAPI, ErrorMessage, ErrorResponse, GetAllBenchmarkStatusResponse, GetBenchmarkStatusResponse, GetBenchmarkStatusResults, GetDirectAccessAgentBenchmarksHttpError, GetDirectAccessAgentBenchmarksHttpResponse, GetDirectAccessAgentConfigurationsHttpError, GetDirectAccessAgentConfigurationsHttpResponse, GetDirectAccessAgentLoadPerformanceMetricsHttpError, GetDirectAccessAgentLoadPerformanceMetricsHttpResponse, GetLoadPerformanceMetricsResponse, LinkResponseObject, LoadPerformanceMetric, PaginationLinks, RunBenchmarkResponse, clearCache, createDirectAccessAgentBenchmark, directAccessAgentsExport as default, getDirectAccessAgentBenchmarks, getDirectAccessAgentConfigurations, getDirectAccessAgentLoadPerformanceMetrics };
 }
+export type ConfigurationLineBase = ConfigurationLineNumeric | ConfigurationLineString;
+export type ConfigurationLineNumeric = {
+  allowMultipleValues?: boolean;
+  apiActions?: ("Read" | "Write")[] | null;
+  applyWithoutRestart?: boolean;
+  connector?: string | null;
+  defaultValue?: string | null;
+  description?: string | null;
+  displayName?: string | null;
+  name?: string | null;
+  pendingApplication?: boolean;
+  pendingValue?: string | null;
+  permittedRangeEnd?: number;
+  permittedRangeStart?: number;
+  skipValidation?: boolean;
+  uiActions?: ("Read" | "Write")[] | null;
+  value?: string | null;
+};
+export type ConfigurationLineString = {
+  allowMultipleValues?: boolean;
+  apiActions?: ("Read" | "Write")[] | null;
+  applyWithoutRestart?: boolean;
+  connector?: string | null;
+  defaultValue?: string | null;
+  description?: string | null;
+  displayName?: string | null;
+  name?: string | null;
+  pendingApplication?: boolean;
+  pendingValue?: string | null;
+  permittedValues?: string[] | null;
+  skipValidation?: boolean;
+  uiActions?: ("Read" | "Write")[] | null;
+  value?: string | null;
+};
+export type ConfigurationResponseWithGatewayMetadata = {
+  connectorAgentSettings?: ConfigurationLineBase[] | null;
+  connectors?: ConnectorSettings[] | null;
+  dcaasSettings?: ConfigurationLineBase[] | null;
+  environment?: string | null;
+  productVersion?: string | null;
+};
+export type ConnectorSettings = {
+  connectorName?: string | null;
+  settings?: ConfigurationLineBase[] | null;
+};
 export type ErrorMessage = {
   code?: string | null;
   detail?: string | null;
@@ -195,6 +240,27 @@ export type CreateDirectAccessAgentBenchmarkHttpError = {
   status: 400 | 403 | 404 | 429 | 500 | 501 | 503;
 };
 /**
+ * Retrieves the connector agent configuration from the specified agent. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
+ *
+ * @param agentId The agent ID
+ * @param query an object with query parameters
+ * @throws GetDirectAccessAgentConfigurationsHttpError
+ */
+export declare function getDirectAccessAgentConfigurations(agentId: string, query: {
+  /** Individual properties within the agent configuration */
+  queryProperties?: string[];
+}, options?: ApiCallOptions): Promise<GetDirectAccessAgentConfigurationsHttpResponse>;
+export type GetDirectAccessAgentConfigurationsHttpResponse = {
+  data: ConfigurationResponseWithGatewayMetadata;
+  headers: Headers;
+  status: 200;
+};
+export type GetDirectAccessAgentConfigurationsHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: 403 | 404;
+};
+/**
  * Retrieves performance metrics for loads processed by the gateway, either for all loads or a filtered subset. Use these metrics to evaluate reload throughput, connector latency, and concurrent reload activity. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Load performance recording is disabled by default and is controlled by the `BENCHMARK_LOAD_PERFORMANCE_METRICS_RECORDING_ENABLED` configuration property. Available in Direct Access Gateway V1.7.17+.
  *
  * @param agentId The agent ID
@@ -244,6 +310,14 @@ export type DirectAccessAgentsAPI = {
    * @throws CreateDirectAccessAgentBenchmarkHttpError
    */
   createDirectAccessAgentBenchmark: typeof createDirectAccessAgentBenchmark;
+  /**
+   * Retrieves the connector agent configuration from the specified agent. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
+   *
+   * @param agentId The agent ID
+   * @param query an object with query parameters
+   * @throws GetDirectAccessAgentConfigurationsHttpError
+   */
+  getDirectAccessAgentConfigurations: typeof getDirectAccessAgentConfigurations;
   /**
    * Retrieves performance metrics for loads processed by the gateway, either for all loads or a filtered subset. Use these metrics to evaluate reload throughput, connector latency, and concurrent reload activity. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Load performance recording is disabled by default and is controlled by the `BENCHMARK_LOAD_PERFORMANCE_METRICS_RECORDING_ENABLED` configuration property. Available in Direct Access Gateway V1.7.17+.
    *

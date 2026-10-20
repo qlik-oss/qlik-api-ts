@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
-import "./chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
+import "./chunks/invoke-fetch-CL7DhyRH.js";
 //#region src/public/rest/dcaas.d.ts
 export type ApiSpecResponse = {
   /** List of properties required for the given datasource */

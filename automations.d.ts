@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
-import "./chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
+import "./chunks/invoke-fetch-CL7DhyRH.js";
 //#region src/public/rest/automations.d.ts
 export type AutomationDetailRequestObject = {
   description?: string;
@@ -230,7 +230,8 @@ export type RunListObject = {
   readonly updatedAt?: string;
 };
 export type ScheduleRequestObject = {
-  /** Interval in seconds; must be a multiple of 60. Values are rounded to the nearest minute (≥30 seconds rounded up, otherwise down). */
+  /** @deprecated
+   * Interval in seconds; must be a multiple of 60. Values are rounded to the nearest minute (≥30 seconds rounded up, otherwise down). */
   interval?: number;
   /** The RRULE that defines when the automation runs. When provided, it takes precedence over interval. */
   recurrence?: string;
@@ -240,7 +241,8 @@ export type ScheduleRequestObject = {
 };
 export type ScheduleResponseObject = {
   readonly id?: string;
-  /** Interval in seconds. */
+  /** @deprecated
+   * Interval in seconds. */
   interval?: number;
   lastStartedAt?: string;
   nextRunAt?: string;

@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
-import "./chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
+import "./chunks/invoke-fetch-CL7DhyRH.js";
 //#region src/public/rest/knowledgebases.d.ts
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
@@ -206,6 +206,11 @@ export type ErrorResponse = {
   traceId?: string;
 };
 export type ErrorResponseCode = {
+  code?: string;
+  detail?: string;
+  title?: string;
+};
+export type ErrorResponseCodeCopy = {
   /** Custom error codes
    * * AE-1 - Internal processing error
    * * AE-2 - Incorrect request
@@ -214,11 +219,6 @@ export type ErrorResponseCode = {
    * * AE-5 - Resource is not found
    * * AE-6 - API usage rate limit is exceeded
    * * AE-7 - Method is not allowed */
-  code?: string;
-  detail?: string;
-  title?: string;
-};
-export type ErrorResponseCodeCopy = {
   code?: string;
   detail?: string;
   title?: string;
@@ -484,7 +484,7 @@ export type GetKnowledgebasesHttpResponse = {
   next?: (options?: ApiCallOptions) => Promise<GetKnowledgebasesHttpResponse>;
 };
 export type GetKnowledgebasesHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403;
 };
@@ -501,7 +501,7 @@ export type CreateKnowledgebaseHttpResponse = {
   status: 201;
 };
 export type CreateKnowledgebaseHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403;
 };
@@ -518,7 +518,7 @@ export type DeleteKnowledgebaseHttpResponse = {
   status: 204;
 };
 export type DeleteKnowledgebaseHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -535,7 +535,7 @@ export type GetKnowledgebaseHttpResponse = {
   status: 200;
 };
 export type GetKnowledgebaseHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -553,7 +553,7 @@ export type PatchKnowledgebaseHttpResponse = {
   status: 204;
 };
 export type PatchKnowledgebaseHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429;
 };
@@ -571,7 +571,7 @@ export type SearchKnowledgebaseHttpResponse = {
   status: 200;
 };
 export type SearchKnowledgebaseHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404 | 405 | 500;
 };
@@ -589,7 +589,7 @@ export type CreateKnowledgebaseDatasourceHttpResponse = {
   status: 201;
 };
 export type CreateKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -607,7 +607,7 @@ export type DeleteKnowledgebaseDatasourceHttpResponse = {
   status: 204;
 };
 export type DeleteKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -626,7 +626,7 @@ export type UpdateKnowledgebaseDatasourceHttpResponse = {
   status: 200;
 };
 export type UpdateKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -644,7 +644,7 @@ export type CancelKnowledgebaseDatasourceHttpResponse = {
   status: 200;
 };
 export type CancelKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -663,7 +663,7 @@ export type DownloadKnowledgebaseDatasourceHttpResponse = {
   status: 200;
 };
 export type DownloadKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 409;
 };
@@ -685,7 +685,7 @@ export type SyncKnowledgebaseDatasourceHttpResponse = {
   status: 202;
 };
 export type SyncKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -715,7 +715,7 @@ export type GetKnowledgebaseDatasourceHistoriesHttpResponse = {
   next?: (options?: ApiCallOptions) => Promise<GetKnowledgebaseDatasourceHistoriesHttpResponse>;
 };
 export type GetKnowledgebaseDatasourceHistoriesHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -736,7 +736,7 @@ export type GetKnowledgebaseDatasourceHistoryHttpResponse = {
   status: 200;
 };
 export type GetKnowledgebaseDatasourceHistoryHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -754,7 +754,7 @@ export type DeleteKnowledgebaseDatasourceScheduleHttpResponse = {
   status: 204;
 };
 export type DeleteKnowledgebaseDatasourceScheduleHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -772,7 +772,7 @@ export type GetKnowledgebaseDatasourceScheduleHttpResponse = {
   status: 200;
 };
 export type GetKnowledgebaseDatasourceScheduleHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -791,7 +791,7 @@ export type CreateKnowledgebaseDatasourceScheduleHttpResponse = {
   status: 200 | 201;
 };
 export type CreateKnowledgebaseDatasourceScheduleHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -820,7 +820,7 @@ export type GetKnowledgebaseHistoriesHttpResponse = {
   next?: (options?: ApiCallOptions) => Promise<GetKnowledgebaseHistoriesHttpResponse>;
 };
 export type GetKnowledgebaseHistoriesHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404;
 };
