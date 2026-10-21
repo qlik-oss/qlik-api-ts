@@ -56,7 +56,7 @@
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="meta"><code class="tsd-tag">Optional</code><span>meta</span><a href="#meta" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">meta</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-symbol">{</span> <span class="tsd-kind-property">cycle</span><span class="tsd-signature-symbol">?:</span> <a href="data-governance.dataProducts.TableRef.html" class="tsd-signature-type tsd-kind-type-alias">TableRef</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">dimensions</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">measures</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span> <span class="tsd-signature-symbol">}</span></div>
-<div class="tsd-comment tsd-typography"><p>Optional structured context. <code>cycle</code> is present for <code>CIRCULAR_REFERENCE</code> errors. <code>dimensions</code> and <code>measures</code> contain semantic-model element IDs that reference inaccessible glossary entries for DP-101.</p>
+<div class="tsd-comment tsd-typography"><p>Optional structured context. <code>cycle</code> is present for <code>CIRCULAR_REFERENCE</code> errors. <code>dimensions</code> and <code>measures</code> contain semantic-model element IDs: for DP-101 the elements referencing inaccessible glossary entries, for DP-103 the elements whose term-link snapshot could not be replayed, for DP-104 the elements whose submitted term-link snapshot was invalid.</p>
 </div>
 <div class="tsd-type-declaration">
 <h4>Type Declaration</h4>
@@ -67,11 +67,11 @@
 </div></li>
 <li class="tsd-parameter">
 <h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">dimensions</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
-<div class="tsd-comment tsd-typography"><p>Semantic-model dimension IDs linked to inaccessible glossary entries. Present only for DP-101.</p>
+<div class="tsd-comment tsd-typography"><p>Semantic-model dimension IDs. For DP-101, dimensions linked to inaccessible glossary entries. For DP-103, dimensions whose captured Business Glossary term-link snapshot could no longer be replayed. For DP-104, dimensions whose submitted term-link snapshot was invalid.</p>
 </div></li>
 <li class="tsd-parameter">
 <h5><code class="tsd-tag">Optional</code><span class="tsd-kind-property">measures</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
-<div class="tsd-comment tsd-typography"><p>Semantic-model measure IDs linked to inaccessible glossary entries. Present only for DP-101.</p>
+<div class="tsd-comment tsd-typography"><p>Semantic-model measure IDs. For DP-101, measures linked to inaccessible glossary entries. For DP-103, measures whose captured Business Glossary term-link snapshot could no longer be replayed. For DP-104, measures whose submitted term-link snapshot was invalid.</p>
 </div></li></ul></div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="status"><code class="tsd-tag">Optional</code><span>status</span><a href="#status" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>

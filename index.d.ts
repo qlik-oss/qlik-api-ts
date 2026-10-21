@@ -1,7 +1,7 @@
 import { d as HostConfig } from "./chunks/auth-types-PqpGAZ9_.js";
 import { InterceptorsAPI, createInterceptors } from "./interceptors.js";
 import { AuthAPI, getAccessToken, getWebResourceAuthParams, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig } from "./auth.js";
-import { t as QixAPI } from "./chunks/qix-CV0aJsAc.js";
+import { t as QixAPI } from "./chunks/qix-CtJ6lm-K.js";
 import { SharingTasksAPI } from "./alerting/sharing-tasks.js";
 import { AlertingAPI } from "./alerting.js";
 import { AppsAPI } from "./analytics/apps.js";
