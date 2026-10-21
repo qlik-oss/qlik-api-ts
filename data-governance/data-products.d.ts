@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
-import "../chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-PqpGAZ9_.js";
+import "../chunks/invoke-fetch-CL7DhyRH.js";
 declare namespace data_products_d_exports {
   export { ActivateDataProductHttpError, ActivateDataProductHttpResponse, ActivateDataProductRequest, ArrayOfUniqueStrings, ChangelogOperation, ChangelogTableUpdate, ComputationResponse, ComputeDatasetsDataQualityDataProductHttpError, ComputeDatasetsDataQualityDataProductHttpResponse, CreateDataProductHttpError, CreateDataProductHttpResponse, CreateDataProductRequest, DataProductChangelog, DataProductChangelogResponse, DataProductResponse, DataProductsAPI, DatasetIdType, DatasetsComputationResponse, DeactivateDataProductHttpError, DeactivateDataProductHttpResponse, DeleteDataProductHttpError, DeleteDataProductHttpResponse, Error, ErrorResponse, ExecutionStatus, ExportDocumentationDataProductHttpError, ExportDocumentationDataProductHttpResponse, GenerateProviderUrlDataProductsHttpError, GenerateProviderUrlDataProductsHttpResponse, GenerateProviderUrlResponse, GetDataProductChangelogsHttpError, GetDataProductChangelogsHttpResponse, GetDataProductHttpError, GetDataProductHttpResponse, KeyContact, Link, Links, MoveDataProductHttpError, MoveDataProductHttpResponse, MoveDataProductRequest, PatchDataProductHttpError, PatchDataProductHttpResponse, PatchDataProductRequest, Quality, TableRef, TrustScore, TrustScoreDimension, activateDataProduct, clearCache, computeDatasetsDataQualityDataProduct, createDataProduct, deactivateDataProduct, dataProductsExport as default, deleteDataProduct, exportDocumentationDataProduct, generateProviderUrlDataProducts, getDataProduct, getDataProductChangelogs, moveDataProduct, patchDataProduct };
 }
@@ -145,10 +145,14 @@ export type DatasetsComputationResponse = {
 export type Error = {
   code?: string;
   detail?: string;
-  /** Optional. MAY be used to provide more arbitrary, structured data to the client, e.g. `cycle` for `CIRCULAR_REFERENCE` errors. */
+  /** Optional structured context. `cycle` is present for `CIRCULAR_REFERENCE` errors. `dimensions` and `measures` contain semantic-model element IDs that reference inaccessible glossary entries for DP-101. */
   meta?: {
     /** Present only for `CIRCULAR_REFERENCE` errors. The tables forming the detected cycle, in order (first and last entries repeated to close the loop). */
     cycle?: TableRef[];
+    /** Semantic-model dimension IDs linked to inaccessible glossary entries. Present only for DP-101. */
+    dimensions?: string[];
+    /** Semantic-model measure IDs linked to inaccessible glossary entries. Present only for DP-101. */
+    measures?: string[];
   };
   status?: string;
   title?: string;
@@ -329,7 +333,7 @@ export type ActivateDataProductHttpResponse = {
 export type ActivateDataProductHttpError = {
   data: ErrorResponse;
   headers: Headers;
-  status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
+  status: 400 | 401 | 403 | 404 | 409 | 500 | 502 | 503;
 };
 /**
  * Triggers a full data quality computation for all datasets in the data product, running profile calculation followed by data quality

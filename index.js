@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CMDeEDft.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
 import auth_default from "./auth.js";
-import { o as interceptors$1 } from "./chunks/interceptors-Bwyc6_WG.js";
+import { o as interceptors$1 } from "./chunks/interceptors-CpMuqQzD.js";
 import qix$1 from "./qix.js";
 
 //#region src/runtime-api-generator/runtime-api-generator-common.ts
@@ -574,6 +574,7 @@ const createConnectivityDataSourcesRuntimeAPI = apiDefToApiPublic("connectivity/
 } } } });
 const createConnectivityDirectAccessAgentsRuntimeAPI = apiDefToApiPublic("connectivity/direct-access-agents", { api: { connectivity: { "direct-access-agents": { "{agentId}": {
 	benchmarks: ["getDirectAccessAgentBenchmarks:GQ:", "createDirectAccessAgentBenchmark:PQ:"],
+	configurations: ["getDirectAccessAgentConfigurations:GQ:"],
 	"load-performance-metrics": ["getDirectAccessAgentLoadPerformanceMetrics:GQ:"]
 } } } } });
 const createConnectivityRuntimeAPI = apiDefToApiPublic("connectivity", {}, {

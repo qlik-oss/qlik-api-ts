@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
-import "../chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-PqpGAZ9_.js";
+import "../chunks/invoke-fetch-CL7DhyRH.js";
 declare namespace tasks_d_exports {
   export { Action, ActionExecTimeout, CorrelationDef, CreateTaskHttpError, CreateTaskHttpResponse, CreateTaskWithoutQueryHttpError, CreateTaskWithoutQueryHttpResponse, Crondef, DeleteTaskHttpError, DeleteTaskHttpResponse, End, ErrorResponse, EventTimeout, Eventdef, Events, Eventstate, Functionref, GetTaskGraphAncestorsHttpError, GetTaskGraphAncestorsHttpResponse, GetTaskGraphChildrenHttpError, GetTaskGraphChildrenHttpResponse, GetTaskGraphDescendantsHttpError, GetTaskGraphDescendantsHttpResponse, GetTaskGraphParentsHttpError, GetTaskGraphParentsHttpResponse, GetTaskHttpError, GetTaskHttpResponse, GetTaskLastRunHttpError, GetTaskLastRunHttpResponse, GetTaskResourceRunsHttpError, GetTaskResourceRunsHttpResponse, GetTaskRunLogHttpError, GetTaskRunLogHttpResponse, GetTaskRunsHttpError, GetTaskRunsHttpResponse, GetTaskSubgraphHttpError, GetTaskSubgraphHttpResponse, GetTasksHttpError, GetTasksHttpResponse, HttpResult, JSONPatch, Link, Onevents, OrchMeta, OrchRun, OrchRunBase, OrchRunList, PatchTask200HttpResponse, PatchTask204HttpResponse, PatchTaskHttpError, PatchTaskHttpResponse, PatchValue, Schedule, StartTaskHttpError, StartTaskHttpResponse, Startdef, StateExecTimeout, Task, TaskGraph, TaskGraphEdge, TaskGraphVertex, TaskList, TaskMetadata, TaskTopology, TasksAPI, TriggerMeta, UpdateTaskHttpError, UpdateTaskHttpResponse, clearCache, createTask, createTaskWithoutQuery, tasksExport as default, deleteTask, getTask, getTaskGraphAncestors, getTaskGraphChildren, getTaskGraphDescendants, getTaskGraphParents, getTaskLastRun, getTaskResourceRuns, getTaskRunLog, getTaskRuns, getTaskSubgraph, getTasks, patchTask, startTask, updateTask };
 }
@@ -364,13 +364,20 @@ export type Eventstate = {
  * {
  *   arguments: {
  *     "appId": "80c6f35f-c9d7-4488-bb5a-ad973b13ec00",
- *     "partial": false
+ *     "partial": false,
+ *     "weight": 5
  *   },
  *   refName: "app.reload"
  * }
  */
 export type Functionref = string | {
-  /** Arguments to pass to the function. */
+  /** Arguments to pass to the function. The `app.reload` function accepts:
+   * - `appId` (string, required): The ID of the app to reload.
+   * - `partial` (boolean, default `false`): Whether to perform a partial reload.
+   * - `weight` (integer, `1` to `10`, default `1`): How quickly the reload is picked up
+   *   relative to other reloads already queued for your subscription. A weight of `10`
+   *   starts sooner than a weight of `1`. It does not affect the reload once running.
+   *   Apps in personal spaces always run with weight `1`. Values outside `1` to `10` are rejected. */
   arguments?: unknown;
   /** Specifies whether the function is invoked synchronously or asynchronously. */
   invoke?: "SYNC" | "ASYNC";

@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
-import "./chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
+import "./chunks/invoke-fetch-CL7DhyRH.js";
 //#region src/public/rest/licenses.d.ts
 /**
  * @example
@@ -355,7 +355,7 @@ export type LicenseOverview = {
   }[];
   /** the parent number of the license. can be shared by multiple license numbers */
   parentLicenseNumber?: string;
-  /** Customer ID of the parent license's Stigg subscription. Falls back to this license's own customerId when there is no parent relationship, so a non-empty value does not by itself indicate a parent exists */
+  /** Customer ID of the license's parent, when this license is part of a parent-child license relationship. Omitted when there is no parent */
   payingCustomerId?: string;
   /** The product the license is valid for. */
   product: string;

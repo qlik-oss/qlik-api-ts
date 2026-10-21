@@ -1,5 +1,5 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
-import "./chunks/invoke-fetch-DdmiOIkr.js";
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
+import "./chunks/invoke-fetch-CL7DhyRH.js";
 //#region src/public/rest/brands.d.ts
 /**
  * A brand is a collection of assets for applying custom branding. Only a single brand can be active in a tenant.
@@ -76,6 +76,14 @@ export type ErrorResponse403 = {
   traceId?: string;
 };
 export type ErrorResponse404 = {
+  errors?: {
+    code?: string;
+    detail?: string;
+    title?: string;
+  }[];
+  traceId?: string;
+};
+export type ErrorResponse424 = {
   errors?: {
     code?: string;
     detail?: string;
@@ -166,7 +174,7 @@ export type CreateBrandHttpResponse = {
   headers: Headers;
   status: 201;
 };
-export type CreateBrandHttpError = CreateBrand400HttpError | CreateBrand401HttpError | CreateBrand403HttpError | CreateBrand500HttpError;
+export type CreateBrandHttpError = CreateBrand400HttpError | CreateBrand401HttpError | CreateBrand403HttpError | CreateBrand424HttpError | CreateBrand500HttpError;
 export type CreateBrand400HttpError = {
   data: ErrorResponse400;
   headers: Headers;
@@ -181,6 +189,11 @@ export type CreateBrand403HttpError = {
   data: ErrorResponse403;
   headers: Headers;
   status: 403;
+};
+export type CreateBrand424HttpError = {
+  data: ErrorResponse424;
+  headers: Headers;
+  status: 424;
 };
 export type CreateBrand500HttpError = {
   data: ErrorResponse500;
@@ -215,7 +228,7 @@ export type DeleteBrandHttpResponse = {
   headers: Headers;
   status: 204;
 };
-export type DeleteBrandHttpError = DeleteBrand400HttpError | DeleteBrand401HttpError | DeleteBrand403HttpError | DeleteBrand404HttpError | DeleteBrand500HttpError;
+export type DeleteBrandHttpError = DeleteBrand400HttpError | DeleteBrand401HttpError | DeleteBrand403HttpError | DeleteBrand404HttpError | DeleteBrand424HttpError | DeleteBrand500HttpError;
 export type DeleteBrand400HttpError = {
   data: ErrorResponse400;
   headers: Headers;
@@ -235,6 +248,11 @@ export type DeleteBrand404HttpError = {
   data: ErrorResponse404;
   headers: Headers;
   status: 404;
+};
+export type DeleteBrand424HttpError = {
+  data: ErrorResponse424;
+  headers: Headers;
+  status: 424;
 };
 export type DeleteBrand500HttpError = {
   data: ErrorResponse500;
@@ -409,7 +427,7 @@ export type DeleteBrandFileHttpResponse = {
   headers: Headers;
   status: 204;
 };
-export type DeleteBrandFileHttpError = DeleteBrandFile400HttpError | DeleteBrandFile401HttpError | DeleteBrandFile403HttpError | DeleteBrandFile404HttpError | DeleteBrandFile500HttpError;
+export type DeleteBrandFileHttpError = DeleteBrandFile400HttpError | DeleteBrandFile401HttpError | DeleteBrandFile403HttpError | DeleteBrandFile404HttpError | DeleteBrandFile424HttpError | DeleteBrandFile500HttpError;
 export type DeleteBrandFile400HttpError = {
   data: ErrorResponse400;
   headers: Headers;
@@ -430,6 +448,11 @@ export type DeleteBrandFile404HttpError = {
   headers: Headers;
   status: 404;
 };
+export type DeleteBrandFile424HttpError = {
+  data: ErrorResponse424;
+  headers: Headers;
+  status: 424;
+};
 export type DeleteBrandFile500HttpError = {
   data: ErrorResponse500;
   headers: Headers;
@@ -448,7 +471,7 @@ export type GetBrandFileHttpResponse = {
   headers: Headers;
   status: 200;
 };
-export type GetBrandFileHttpError = GetBrandFile400HttpError | GetBrandFile401HttpError | GetBrandFile403HttpError | GetBrandFile404HttpError | GetBrandFile500HttpError;
+export type GetBrandFileHttpError = GetBrandFile400HttpError | GetBrandFile401HttpError | GetBrandFile403HttpError | GetBrandFile404HttpError | GetBrandFile424HttpError | GetBrandFile500HttpError;
 export type GetBrandFile400HttpError = {
   data: ErrorResponse400;
   headers: Headers;
@@ -468,6 +491,11 @@ export type GetBrandFile404HttpError = {
   data: ErrorResponse404;
   headers: Headers;
   status: 404;
+};
+export type GetBrandFile424HttpError = {
+  data: ErrorResponse424;
+  headers: Headers;
+  status: 424;
 };
 export type GetBrandFile500HttpError = {
   data: ErrorResponse500;
@@ -491,7 +519,7 @@ export type CreateBrandFileHttpResponse = {
   headers: Headers;
   status: 201;
 };
-export type CreateBrandFileHttpError = CreateBrandFile400HttpError | CreateBrandFile401HttpError | CreateBrandFile403HttpError | CreateBrandFile404HttpError | CreateBrandFile500HttpError;
+export type CreateBrandFileHttpError = CreateBrandFile400HttpError | CreateBrandFile401HttpError | CreateBrandFile403HttpError | CreateBrandFile404HttpError | CreateBrandFile424HttpError | CreateBrandFile500HttpError;
 export type CreateBrandFile400HttpError = {
   data: ErrorResponse400;
   headers: Headers;
@@ -511,6 +539,11 @@ export type CreateBrandFile404HttpError = {
   data: ErrorResponse404;
   headers: Headers;
   status: 404;
+};
+export type CreateBrandFile424HttpError = {
+  data: ErrorResponse424;
+  headers: Headers;
+  status: 424;
 };
 export type CreateBrandFile500HttpError = {
   data: ErrorResponse500;
@@ -534,7 +567,7 @@ export type UpdateBrandFileHttpResponse = {
   headers: Headers;
   status: 200;
 };
-export type UpdateBrandFileHttpError = UpdateBrandFile400HttpError | UpdateBrandFile401HttpError | UpdateBrandFile403HttpError | UpdateBrandFile404HttpError | UpdateBrandFile500HttpError;
+export type UpdateBrandFileHttpError = UpdateBrandFile400HttpError | UpdateBrandFile401HttpError | UpdateBrandFile403HttpError | UpdateBrandFile404HttpError | UpdateBrandFile424HttpError | UpdateBrandFile500HttpError;
 export type UpdateBrandFile400HttpError = {
   data: ErrorResponse400;
   headers: Headers;
@@ -554,6 +587,11 @@ export type UpdateBrandFile404HttpError = {
   data: ErrorResponse404;
   headers: Headers;
   status: 404;
+};
+export type UpdateBrandFile424HttpError = {
+  data: ErrorResponse424;
+  headers: Headers;
+  status: 424;
 };
 export type UpdateBrandFile500HttpError = {
   data: ErrorResponse500;

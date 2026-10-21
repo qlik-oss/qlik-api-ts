@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
-import "./chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
+import "./chunks/invoke-fetch-CL7DhyRH.js";
 //#region src/public/rest/ml.d.ts
 /**
  * An error object
@@ -462,8 +462,8 @@ export type Deployment = {
   errors?: Errors;
   /** ID of this entity */
   id: EntityId;
-  /** ID of the model */
-  modelId: ModelId;
+  /** ID of the model currently assigned to the default alias. */
+  modelId: string;
   /** Name of this entity */
   name: EntityName;
   /** ID of owner/user for this entity */
@@ -744,6 +744,8 @@ export type ExperimentVersion = {
   id: EntityId;
   /** Number of the last batch */
   lastBatchNum?: number;
+  /** Maximum allowed training duration in seconds, not elapsed training time. */
+  maxTrainingDuration?: TrainingDuration;
   /** Name of this entity */
   name?: EntityName;
   /** Pipeline metadata including transformations to apply to columns and
@@ -760,8 +762,7 @@ export type ExperimentVersion = {
   /** ID of the top model (based on training scores) in this experiment
    * version */
   topModelId?: string;
-  /** Optional training duration in seconds. If not provided, max value used.
-   * If provided, min 900 (15m) and max 21600 (6h). */
+  /** Maximum allowed training duration in seconds, not elapsed training time. */
   trainingDuration?: TrainingDuration;
   /** Timestamp when this was updated */
   updatedAt: UpdatedAt;
@@ -825,6 +826,12 @@ export type ExperimentVersionInput = {
        * defaultVersionConfig). You can adjust the default settings before
        * using it as input to create or update Experiment Versions. */
       featuresList: FeaturesList;
+      /** Maximum allowed training duration in seconds, not elapsed training time.
+       * maxTrainingDuration takes precedence over trainingDuration when both are provided.
+       * If neither field is provided, the maximum for the experiment type is used.
+       * Accepted ranges:
+       * - min 900 (15m), max 21600 (6h) */
+      maxTrainingDuration?: TrainingDurationInput;
       name: string;
       /** Pipeline metadata including transformations to apply to columns and
        * specific schema configuration data */
@@ -832,9 +839,12 @@ export type ExperimentVersionInput = {
       /** The target field in the dataset. Set in first experiment
        * version and can't be changed in subsequent versions. */
       target: string;
-      /** Optional training duration in seconds. If not provided, max value used.
-       * If provided, min 900 (15m) and max 21600 (6h). */
-      trainingDuration?: TrainingDuration;
+      /** Maximum allowed training duration in seconds, not elapsed training time.
+       * maxTrainingDuration takes precedence over trainingDuration when both are provided.
+       * If neither field is provided, the maximum for the experiment type is used.
+       * Accepted ranges:
+       * - min 900 (15m), max 21600 (6h) */
+      trainingDuration?: TrainingDurationInput;
     };
     type: "experiment-version";
   };
@@ -1115,6 +1125,8 @@ export type ModelMetrics = {
   /** Multiclass metrics for categorical values with 3+ options. Details:
    * https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/AutoML/scoring-multiclass-classification.htm */
   multiclass?: ModelMetricsMulticlass;
+  /** Model prediction speed in rows/second (from recommend-models endpoint) */
+  predictionSpeed?: number | null;
   /** Regression metrics for numeric values. Details:
    * https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/AutoML/scoring-regression.htm */
   regression?: ModelMetricsRegression;
@@ -1593,10 +1605,17 @@ export type TableSample = {
  */
 export type TenantId = string;
 /**
- * Optional training duration in seconds. If not provided, max value used.
- * If provided, min 900 (15m) and max 21600 (6h).
+ * Maximum allowed training duration in seconds, not elapsed training time.
  */
 export type TrainingDuration = number;
+/**
+ * Maximum allowed training duration in seconds, not elapsed training time.
+ * maxTrainingDuration takes precedence over trainingDuration when both are provided.
+ * If neither field is provided, the maximum for the experiment type is used.
+ * Accepted ranges:
+ * - min 900 (15m), max 21600 (6h)
+ */
+export type TrainingDurationInput = number;
 export type Transform = {
   column?: ColumnTransform;
 };

@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
-import "../chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-PqpGAZ9_.js";
+import "../chunks/invoke-fetch-CL7DhyRH.js";
 declare namespace automation_connectors_d_exports {
   export { AutomationConnectorBlock, AutomationConnectorDetail, AutomationConnectorParam, AutomationConnectorSnippet, AutomationConnectorSnippetInput, AutomationConnectorWebhookConfiguration, AutomationConnectorWebhookEvent, AutomationConnectorWebhookEventParam, AutomationConnectorsAPI, AutomationConnectorsList, AutomationConnectorsListObject, Error, ErrorResponse, GetAutomationConnectorHttpError, GetAutomationConnectorHttpResponse, GetAutomationConnectorWebhooksConfigurationHttpError, GetAutomationConnectorWebhooksConfigurationHttpResponse, GetAutomationConnectorsHttpError, GetAutomationConnectorsHttpResponse, Links, PaginationLink, clearCache, automationConnectorsExport as default, getAutomationConnector, getAutomationConnectorWebhooksConfiguration, getAutomationConnectors };
 }

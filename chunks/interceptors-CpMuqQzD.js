@@ -34,8 +34,14 @@ const getPlatform = async (options = {}) => {
 		meta: extractMeta(productInfo)
 	});
 	if (deploymentType === "qliksensemobile") return result({
+		isQSM: true,
 		isQSE: true,
 		isWindows: true,
+		meta: extractMeta(productInfo)
+	});
+	if (deploymentType === "qlikanalyticsmobileoffline") return result({
+		isQSM: true,
+		isQSMOffline: true,
 		meta: extractMeta(productInfo)
 	});
 	if (deploymentType === "cloud-console") return result({
@@ -128,6 +134,8 @@ const result = (data) => ({
 	isWindows: false,
 	isQSE: false,
 	isQSD: false,
+	isQSM: false,
+	isQSMOffline: false,
 	isUnknown: false,
 	...data
 });
@@ -1296,8 +1304,7 @@ async function performActualHttpFetch(method, completeUrl, unencodedBody, conten
 	const headers = {
 		...contentTypeHeader,
 		...authHeaders,
-		...options?.headers,
-		...getServiceOverrideHeaderFromLocalStorage()
+		...options?.headers
 	};
 	if (!headers["User-Agent"] && userAgent) headers["User-Agent"] = userAgent;
 	const request = {
@@ -1513,14 +1520,6 @@ async function interceptAuthenticationErrors(hostConfig, completeUrl, resultProm
 		}
 		throw error;
 	}
-}
-/** Set the X-Qlik-Overrides header according to what's written to localStorage
-*  by qmfe-devtool */
-function getServiceOverrideHeaderFromLocalStorage() {
-	if (!isBrowser()) return {};
-	const header = localStorage.getItem("qmfe-api-service-overrides-header");
-	if (!header) return {};
-	return { "X-Qlik-Overrides": header };
 }
 /** Convert a Blob to a DownloadableBlob */
 function toDownloadableBlob(blob, name) {

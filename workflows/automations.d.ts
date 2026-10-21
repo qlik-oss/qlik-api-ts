@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
-import "../chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-PqpGAZ9_.js";
+import "../chunks/invoke-fetch-CL7DhyRH.js";
 declare namespace automations_d_exports {
   export { AutomationDetailRequestObject, AutomationDetailResponseObject, AutomationDetailUpdateRequestObject, AutomationList, AutomationListObject, AutomationUsageObject, AutomationsAPI, ChangeOwnerAutomationHttpError, ChangeOwnerAutomationHttpResponse, ChangeSpaceAutomationHttpError, ChangeSpaceAutomationHttpResponse, CopyAutomationHttpError, CopyAutomationHttpResponse, CreateAutomationHttpError, CreateAutomationHttpResponse, CreateAutomationRunHttpError, CreateAutomationRunHttpResponse, DeleteAutomationHttpError, DeleteAutomationHttpResponse, DisableAutomationHttpError, DisableAutomationHttpResponse, EnableAutomationHttpError, EnableAutomationHttpResponse, Error, ErrorResponse, ExportAutomationRunHttpError, ExportAutomationRunHttpResponse, GetAutomationHttpError, GetAutomationHttpResponse, GetAutomationRunDebugHttpError, GetAutomationRunDebugHttpResponse, GetAutomationRunHttpError, GetAutomationRunHttpResponse, GetAutomationRunsHttpError, GetAutomationRunsHttpResponse, GetAutomationsHttpError, GetAutomationsHttpResponse, GetAutomationsSettingsHttpError, GetAutomationsSettingsHttpResponse, GetAutomationsUsageMetricsHttpError, GetAutomationsUsageMetricsHttpResponse, Links, MoveAutomationHttpError, MoveAutomationHttpResponse, PaginationLink, RetryAutomationRunHttpError, RetryAutomationRunHttpResponse, RunDetailRequestObject, RunDetailResponseObject, RunList, RunListObject, ScheduleRequestObject, ScheduleResponseObject, SettingsObject, StopAutomationRunHttpError, StopAutomationRunHttpResponse, UpdateAutomationHttpError, UpdateAutomationHttpResponse, UpdateAutomationsSettingsHttpError, UpdateAutomationsSettingsHttpResponse, UsageList, UsageObject, changeOwnerAutomation, changeSpaceAutomation, clearCache, copyAutomation, createAutomation, createAutomationRun, automationsExport as default, deleteAutomation, disableAutomation, enableAutomation, exportAutomationRun, getAutomation, getAutomationRun, getAutomationRunDebug, getAutomationRuns, getAutomations, getAutomationsSettings, getAutomationsUsageMetrics, moveAutomation, retryAutomationRun, stopAutomationRun, updateAutomation, updateAutomationsSettings };
 }
@@ -239,7 +239,8 @@ export type RunListObject = {
   readonly updatedAt?: string;
 };
 export type ScheduleRequestObject = {
-  /** Interval in seconds; must be a multiple of 60. Values are rounded to the nearest minute (≥30 seconds rounded up, otherwise down). */
+  /** @deprecated
+   * Interval in seconds; must be a multiple of 60. Values are rounded to the nearest minute (≥30 seconds rounded up, otherwise down). */
   interval?: number;
   /** The RRULE that defines when the automation runs. When provided, it takes precedence over interval. */
   recurrence?: string;
@@ -252,7 +253,8 @@ export type ScheduleRequestObject = {
 };
 export type ScheduleResponseObject = {
   readonly id?: string;
-  /** Interval in seconds. */
+  /** @deprecated
+   * Interval in seconds. */
   interval?: number;
   lastStartedAt?: string;
   /** The date and time for the next scheduled run. */

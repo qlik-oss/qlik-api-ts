@@ -1,4 +1,4 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-CMDeEDft.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
 
 //#region src/public/rest/spaces.ts
 /**
@@ -43,7 +43,7 @@ async function getSpaceTypes(options) {
 	});
 }
 /**
-* Deletes a space. Ensure that you first delete all resources from the space to avoid orphaning content.
+* Deletes a space. Ensure that you first delete all resources from the space to avoid orphaning content. When non-empty-space deletion protection is enabled for the tenant, deletion is rejected if Collections contains any items in the space.
 *
 * @param spaceId The ID of the space to delete.
 * @throws DeleteSpaceHttpError

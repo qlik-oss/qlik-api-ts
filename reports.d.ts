@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-yKuw6LLB.js";
-import "./chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
+import "./chunks/invoke-fetch-CL7DhyRH.js";
 //#region src/public/rest/reports.d.ts
 /**
  * Error in resource handling
@@ -126,6 +126,7 @@ export type ExportError = {
    * - "REP-403026" No entitlement to perform the operation. Export capability is off.
    * - "REP-403027" Object without Hypercube or unsupported object type.
    * - "REP-403048" Forbidden. User does not have permission to export the report (access control usePermission)
+   * - "REP-403065" Forbidden. User does not have permission to read or update the report status or outputs (access control)
    * - "REP-404000" Not found. The server can not find the requested resource.
    * - "REP-404001" App not found, the app does not exist or it has been deleted.
    * - "REP-404002" Chart not found, the chart does not exist or it has been deleted.

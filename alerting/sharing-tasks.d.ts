@@ -1,5 +1,5 @@
-import { x as ApiCallOptions } from "../chunks/auth-types-yKuw6LLB.js";
-import "../chunks/invoke-fetch-DdmiOIkr.js";
+import { x as ApiCallOptions } from "../chunks/auth-types-PqpGAZ9_.js";
+import "../chunks/invoke-fetch-CL7DhyRH.js";
 declare namespace sharing_tasks_d_exports {
   export { Error, ErrorMeta, Errors, GetSharingTaskTaskExecutionHttpError, GetSharingTaskTaskExecutionHttpResponse, GetSharingTaskTaskExecutionsHttpError, GetSharingTaskTaskExecutionsHttpResponse, ListLinks, Page, Self, SharingTaskExecution, SharingTaskExecutionError, SharingTasksAPI, StandardListResponseProps, TaskExecutionsGetResponse, TemplateMetadata, clearCache, sharingTasksExport as default, getSharingTaskTaskExecution, getSharingTaskTaskExecutions };
 }
