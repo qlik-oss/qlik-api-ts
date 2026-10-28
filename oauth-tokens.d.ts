@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/oauth-tokens.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * An error object.
  */
@@ -69,8 +68,8 @@ export type GetOauthTokensHttpResponse = {
   data: OauthTokenPage;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetOauthTokensHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetOauthTokensHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetOauthTokensHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetOauthTokensHttpResponse>;
 };
 export type GetOauthTokensHttpError = {
   data: Errors;
@@ -122,5 +121,4 @@ export type OauthTokensAPI = {
  * Functions for the oauth-tokens api
  */
 declare const oauthTokensExport: OauthTokensAPI;
-//#endregion
 export { oauthTokensExport as default };

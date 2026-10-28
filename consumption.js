@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/consumption.ts
+// src/public/rest/consumption.ts
 /**
 * Retrieves the list of executions on an specific tenant
 *
@@ -29,5 +29,4 @@ const consumptionExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, consumptionExport as default, getConsumptionExecutions };

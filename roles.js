@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/roles.ts
+// src/public/rest/roles.ts
 /**
 * Returns a list of roles using cursor-based pagination.
 *
@@ -93,5 +93,4 @@ const rolesExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createRole, rolesExport as default, deleteRole, getRole, getRoles, patchRole };

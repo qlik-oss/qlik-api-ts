@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/csp-origins.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type CSPEntry = {
   /** The CSP entry's unique identifier. */
   id?: string;
@@ -120,8 +119,8 @@ export type GetCSPEntriesHttpResponse = {
   data: CSPEntryList;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetCSPEntriesHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetCSPEntriesHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetCSPEntriesHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetCSPEntriesHttpResponse>;
 };
 export type GetCSPEntriesHttpError = {
   data: ErrorResponse;
@@ -269,5 +268,4 @@ export type CspOriginsAPI = {
  * Functions for the csp-origins api
  */
 declare const cspOriginsExport: CspOriginsAPI;
-//#endregion
 export { cspOriginsExport as default };

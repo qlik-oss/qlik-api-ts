@@ -1,6 +1,5 @@
-import { E as InvokeFetchResponse, T as InvokeFetchProperties } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/interceptors/interceptors.d.ts
+import { E as InvokeFetchResponse, T as InvokeFetchProperties } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * The RestInterceptor type is a function that can be used to intercept requests and responses
  */
@@ -47,5 +46,4 @@ export interface InterceptorsAPI {
 declare const interceptors: InterceptorsAPI & {
   createInterceptors: typeof createInterceptors;
 };
-//#endregion
 export { interceptors as default };

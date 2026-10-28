@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/brands.ts
+// src/public/rest/brands.ts
 /**
 * Lists all brand entries for a tenant.
 *
@@ -222,5 +222,4 @@ const brandsExport = {
 	clearCache
 };
 
-//#endregion
 export { activateBrand, clearCache, createBrand, createBrandFile, deactivateBrand, brandsExport as default, deleteBrand, deleteBrandFile, getActiveBrand, getBrand, getBrandFile, getBrands, patchBrand, updateBrandFile };

@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/collections.ts
+// src/public/rest/collections.ts
 /**
 * Retrieves the collections that the user has access to. This endpoint does not return the user's favorites collection, which can be retrieved with `/v1/collections/favorites`.
 *
@@ -197,5 +197,4 @@ const collectionsExport = {
 	clearCache
 };
 
-//#endregion
 export { addCollectionItem, clearCache, createCollection, collectionsExport as default, deleteCollection, deleteCollectionItem, getCollection, getCollectionItem, getCollectionItems, getCollections, getFavoritesCollection, patchCollection, updateCollection };

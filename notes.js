@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/notes.ts
+// src/public/rest/notes.ts
 /**
 * @deprecated
 *
@@ -47,5 +47,4 @@ const notesExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, notesExport as default, getNotesSettings, setNotesSettings };

@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/data-credentials.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type ActionFilterOrphanRequest = {
   /** Filtering on datasource ID of credentials */
   datasourceID?: string;
@@ -288,5 +287,4 @@ export type DataCredentialsAPI = {
  * Functions for the data-credentials api
  */
 declare const dataCredentialsExport: DataCredentialsAPI;
-//#endregion
 export { dataCredentialsExport as default };

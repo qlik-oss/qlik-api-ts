@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/identity-providers.ts
+// src/public/rest/identity-providers.ts
 /**
 * This endpoint retrieves any IdPs registered on the tenant.
 *
@@ -132,5 +132,4 @@ const identityProvidersExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createIdp, identityProvidersExport as default, deleteIdp, getIdp, getIdpStatuses, getIdpWellKnownMetaData, getIdps, getMyIdpMeta, patchIdp };

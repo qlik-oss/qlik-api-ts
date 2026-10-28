@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/oauth-clients.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * Hints of any client application secrets
  */
@@ -20,6 +19,8 @@ export type ConnectionConfigReadResponse = {
   readonly consentMethod: string;
   /** OAuth client has been deleted by owning tenant, only applies for published clients. */
   readonly deletedByOwner?: boolean;
+  /** Hash of the CIMD security fields captured when the connection was approved. */
+  readonly hashedCIMDSecurityFields?: string;
   /** Status */
   readonly status?: string;
 };
@@ -155,6 +156,8 @@ export type OAuthClientBase = {
   description?: string;
   /** Is set if client disabled */
   readonly disableTag?: string;
+  /** Hash of CIMD security fields used to identify changes requiring reapproval. */
+  readonly hashedCIMDSecurityFields?: string;
   /** URI of the JSON Web Key Set (JWKS) for the client */
   jwksUri?: string;
   /** URI for logo of client */
@@ -297,9 +300,9 @@ export declare function getOAuthClients(query: {
   filter?: string;
   /** The number of OAuth client entries to retrieve. */
   limit?: number;
-  /** The next page cursor */
+  /** The next page cursor. An invalid cursor returns `400 Bad Request`. */
   next?: string;
-  /** The previous page cursor */
+  /** The previous page cursor. An invalid cursor returns `400 Bad Request`. */
   prev?: string;
   /** The attribute to sort by, beginning with + for ascending and - for descending. Valid attributes for sorting are clientId, clientName, appType, tenantId, createdAt, updatedAt. */
   sort?: "+clientId" | "-clientId" | "+clientName" | "-clientName" | "+appType" | "-appType" | "+tenantId" | "-tenantId" | "+createdAt" | "-createdAt" | "+updatedAt" | "-updatedAt";
@@ -314,7 +317,7 @@ export type GetOAuthClientsHttpResponse = {
 export type GetOAuthClientsHttpError = {
   data: ErrorResponse;
   headers: Headers;
-  status: 401 | 403 | 500 | 503;
+  status: 400 | 401 | 403 | 500 | 503;
 };
 /**
  * Create a new OAuth client. Requires `TenantAdmin` role when created in-tenant. `appType` cannot be changed after creation. Consent method and published state can be changed after creation. For supported `appType`, use `PATCH /oauth-clients/{id}/connection-configs/me` to change consent method, and `POST /oauth-clients/{id}/actions/publish` to change the client to published after creation.
@@ -596,5 +599,4 @@ export type OauthClientsAPI = {
  * Functions for the oauth-clients api
  */
 declare const oauthClientsExport: OauthClientsAPI;
-//#endregion
 export { oauthClientsExport as default };

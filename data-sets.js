@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/data-sets.ts
+// src/public/rest/data-sets.ts
 /**
 * Batch delete data sets.
 *
@@ -128,5 +128,4 @@ const dataSetsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createDataSet, dataSetsExport as default, deleteDataSets, getDataSet, getDataSetProfiles, patchDataSet, updateDataSet };

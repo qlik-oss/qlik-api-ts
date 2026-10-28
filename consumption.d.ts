@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/consumption.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type Enforcement = {
   /** Resource action type to be blocked */
   actionToBlock?: string;
@@ -149,8 +148,8 @@ export type GetConsumptionExecutionsHttpResponse = {
   data: ExecutionsByTenantList;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetConsumptionExecutionsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetConsumptionExecutionsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetConsumptionExecutionsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetConsumptionExecutionsHttpResponse>;
 };
 export type GetConsumptionExecutionsHttpError = {
   data: ErrorResponse;
@@ -178,5 +177,4 @@ export type ConsumptionAPI = {
  * Functions for the consumption api
  */
 declare const consumptionExport: ConsumptionAPI;
-//#endregion
 export { consumptionExport as default };

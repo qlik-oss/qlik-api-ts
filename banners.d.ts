@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/banners.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type BannerResponse = {
   readonly createdAt: string;
   /** userId of the user who created the banner */
@@ -180,5 +179,4 @@ export type BannersAPI = {
  * Functions for the banners api
  */
 declare const bannersExport: BannersAPI;
-//#endregion
 export { bannersExport as default };

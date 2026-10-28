@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/automations.ts
+// src/public/rest/automations.ts
 /**
 * @deprecated
 *
@@ -420,5 +420,4 @@ const automationsExport = {
 	clearCache
 };
 
-//#endregion
 export { changeOwnerAutomation, changeSpaceAutomation, clearCache, copyAutomation, createAutomation, automationsExport as default, deleteAutomation, disableAutomation, enableAutomation, getAutomation, getAutomationRun, getAutomationRunDetails, getAutomationRunWithQuery, getAutomationRuns, getAutomationWithQuery, getAutomations, getAutomationsUsageMetrics, moveAutomation, queueAutomationRun, retryAutomationRun, stopAutomationRun, updateAutomation };

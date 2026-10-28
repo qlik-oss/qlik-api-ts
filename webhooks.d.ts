@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/webhooks.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type Delivery = {
   /** The name of the triggering event-type. */
   eventType: string;
@@ -243,8 +242,8 @@ export type GetWebhooksHttpResponse = {
   data: WebhookList;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetWebhooksHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetWebhooksHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetWebhooksHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetWebhooksHttpResponse>;
 };
 export type GetWebhooksHttpError = {
   data: ErrorResponse;
@@ -379,8 +378,8 @@ export type GetWebhookDeliveriesHttpResponse = {
   data: DeliveryList;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetWebhookDeliveriesHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetWebhookDeliveriesHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetWebhookDeliveriesHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetWebhookDeliveriesHttpResponse>;
 };
 export type GetWebhookDeliveriesHttpError = {
   data: ErrorResponse;
@@ -511,5 +510,4 @@ export type WebhooksAPI = {
  * Functions for the webhooks api
  */
 declare const webhooksExport: WebhooksAPI;
-//#endregion
 export { webhooksExport as default };

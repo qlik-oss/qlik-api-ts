@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/identity-providers.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type BaseIDP = {
   /** Indicates whether the IdP is available for use. */
   active?: boolean;
@@ -514,8 +513,8 @@ export type GetIdpsHttpResponse = {
   data: IDPArray;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetIdpsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetIdpsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetIdpsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetIdpsHttpResponse>;
 };
 export type GetIdpsHttpError = {
   data: Errors;
@@ -707,5 +706,4 @@ export type IdentityProvidersAPI = {
  * Functions for the identity-providers api
  */
 declare const identityProvidersExport: IdentityProvidersAPI;
-//#endregion
 export { identityProvidersExport as default };

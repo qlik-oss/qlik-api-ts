@@ -1,10 +1,9 @@
-import sharingTasksExport, { t as sharing_tasks_exports } from "./alerting/sharing-tasks.js";
+import { a as sharing_tasks_exports, i as sharingTasksExport } from "./chunks/sharing-tasks-DW4_i34Z.js";
 
-//#region src/public/rest/alerting.ts
+// src/public/rest/alerting.ts
 /**
 * Functions for the alerting api
 */
 const alertingExport = { sharingTasks: sharingTasksExport };
 
-//#endregion
 export { alertingExport as default, sharing_tasks_exports as sharingTasks };

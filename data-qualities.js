@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/data-qualities.ts
+// src/public/rest/data-qualities.ts
 /**
 * @deprecated
 *
@@ -76,5 +76,4 @@ const dataQualitiesExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, dataQualitiesExport as default, getDataQualitiesComputation, getDataQualitiesGlobalResults, triggerDataQualitiesComputation };

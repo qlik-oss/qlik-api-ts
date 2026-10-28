@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/csp-origins.ts
+// src/public/rest/csp-origins.ts
 /**
 * Retrieves all content security policies for a tenant.
 *
@@ -106,5 +106,4 @@ const cspOriginsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createCSPEntry, cspOriginsExport as default, deleteCSPEntry, getCSPEntries, getCSPEntry, getCSPHeader, updateCSPEntry };

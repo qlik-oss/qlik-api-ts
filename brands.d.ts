@@ -1,6 +1,5 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/brands.d.ts
+import { D as PageCallOptions, w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * A brand is a collection of assets for applying custom branding. Only a single brand can be active in a tenant.
  */
@@ -127,8 +126,8 @@ export type GetBrandsHttpResponse = {
   data: BrandsList;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetBrandsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetBrandsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetBrandsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetBrandsHttpResponse>;
 };
 export type GetBrandsHttpError = GetBrands400HttpError | GetBrands401HttpError | GetBrands403HttpError | GetBrands500HttpError;
 export type GetBrands400HttpError = {
@@ -704,5 +703,4 @@ export type BrandsAPI = {
  * Functions for the brands api
  */
 declare const brandsExport: BrandsAPI;
-//#endregion
 export { brandsExport as default };

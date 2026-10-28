@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/assistants.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type Assistant = {
   /** Datetime when the assistant was created. */
   readonly createdAt: string;
@@ -552,8 +551,8 @@ export type GetAssistantsHttpResponse = {
   data: AssistantsResult;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetAssistantsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetAssistantsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetAssistantsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetAssistantsHttpResponse>;
 };
 export type GetAssistantsHttpError = {
   data: ErrorResponse;
@@ -651,8 +650,8 @@ export type GetAssistantStartersHttpResponse = {
   data: StartersResult;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetAssistantStartersHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetAssistantStartersHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetAssistantStartersHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetAssistantStartersHttpResponse>;
 };
 export type GetAssistantStartersHttpError = {
   data: ErrorResponse;
@@ -794,8 +793,8 @@ export type GetAssistantThreadsHttpResponse = {
   data: ThreadsResult;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetAssistantThreadsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetAssistantThreadsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetAssistantThreadsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetAssistantThreadsHttpResponse>;
 };
 export type GetAssistantThreadsHttpError = {
   data: ErrorResponse;
@@ -880,8 +879,8 @@ export type GetAssistantThreadInteractionsHttpResponse = {
   data: InteractionsResult;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetAssistantThreadInteractionsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetAssistantThreadInteractionsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetAssistantThreadInteractionsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetAssistantThreadInteractionsHttpResponse>;
 };
 export type GetAssistantThreadInteractionsHttpError = {
   data: ErrorResponse;
@@ -1372,5 +1371,4 @@ export type AssistantsAPI = {
  * Functions for the assistants api
  */
 declare const assistantsExport: AssistantsAPI;
-//#endregion
 export { assistantsExport as default };

@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/users.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * An array of group references.
  */
@@ -401,8 +400,8 @@ export type GetUsersHttpResponse = {
   data: Users;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetUsersHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetUsersHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetUsersHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetUsersHttpResponse>;
 };
 export type GetUsersHttpError = {
   data: Errors;
@@ -482,8 +481,8 @@ export type FilterUsersHttpResponse = {
   data: Users;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<FilterUsersHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<FilterUsersHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<FilterUsersHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<FilterUsersHttpResponse>;
 };
 export type FilterUsersHttpError = {
   data: Errors;
@@ -670,5 +669,4 @@ export type UsersAPI = {
  * Functions for the users api
  */
 declare const usersExport: UsersAPI;
-//#endregion
 export { usersExport as default };

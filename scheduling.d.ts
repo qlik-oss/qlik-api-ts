@@ -1,5 +1,4 @@
-import tasksExport, { t as tasks_d_exports } from "./scheduling/tasks.js";
-//#region src/public/rest/scheduling.d.ts
+import { Mt as tasksExport, Nt as tasks_d_exports } from "./chunks/tasks-CyEpGTAG.js";
 export type SchedulingAPI = {};
 /**
  * Functions for the scheduling api
@@ -7,5 +6,4 @@ export type SchedulingAPI = {};
 declare const schedulingExport: SchedulingAPI & {
   tasks: typeof tasksExport;
 };
-//#endregion
 export { schedulingExport as default, tasks_d_exports as tasks };

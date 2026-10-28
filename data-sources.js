@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/data-sources.ts
+// src/public/rest/data-sources.ts
 /**
 * Gets the list of data sources available on the node.
 * @example
@@ -118,5 +118,4 @@ const dataSourcesExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, dataSourcesExport as default, getDataSourceApiSpecs, getDataSourceGateways, getDataSourceSettings, getDataSources, putDataSourceSettings };

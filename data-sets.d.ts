@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/data-sets.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type BatchIdDto = {
   ids?: string[];
 };
@@ -379,8 +378,8 @@ export type GetDataSetProfilesHttpResponse = {
   data: PageDataSetProfile;
   headers: Headers;
   status: 200 | 202;
-  prev?: (options?: ApiCallOptions) => Promise<GetDataSetProfilesHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetDataSetProfilesHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetDataSetProfilesHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetDataSetProfilesHttpResponse>;
 };
 export type GetDataSetProfilesHttpError = {
   data: ErrorResponseCopy;
@@ -459,5 +458,4 @@ export type DataSetsAPI = {
  * Functions for the data-sets api
  */
 declare const dataSetsExport: DataSetsAPI;
-//#endregion
 export { dataSetsExport as default };

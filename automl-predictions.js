@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/automl-predictions.ts
+// src/public/rest/automl-predictions.ts
 /**
 * @deprecated
 *
@@ -126,5 +126,4 @@ const automlPredictionsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createAutomlPredictionJob, automlPredictionsExport as default, getAutomlPredictionCoordinateShap, getAutomlPredictionNotPredictedReasons, getAutomlPredictionPredictions, getAutomlPredictionShap, getAutomlPredictionSource };

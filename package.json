@@ -54,6 +54,7 @@
     "./data-credentials": "./data-credentials.js",
     "./data-files": "./data-files.js",
     "./data-governance": "./data-governance.js",
+    "./data-governance/data-contracts": "./data-governance/data-contracts.js",
     "./data-governance/data-products": "./data-governance/data-products.js",
     "./data-governance/data-qualities": "./data-governance/data-qualities.js",
     "./data-governance/semantic-types": "./data-governance/semantic-types.js",
@@ -118,5 +119,5 @@
   "engines": {
     "node": ">=20.0.0"
   },
-  "packageManager": "pnpm@12.14.0"
+  "packageManager": "pnpm@12.15.0"
 }

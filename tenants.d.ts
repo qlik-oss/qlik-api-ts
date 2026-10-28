@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/tenants.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * An error object describing the error.
  */
@@ -359,5 +358,4 @@ export type TenantsAPI = {
  * Functions for the tenants api
  */
 declare const tenantsExport: TenantsAPI;
-//#endregion
 export { tenantsExport as default };

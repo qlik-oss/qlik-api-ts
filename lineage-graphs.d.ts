@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/lineage-graphs.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * The data integration data asset where the node belongs to
  */
@@ -700,5 +699,4 @@ export type LineageGraphsAPI = {
  * Functions for the lineage-graphs api
  */
 declare const lineageGraphsExport: LineageGraphsAPI;
-//#endregion
 export { lineageGraphsExport as default };

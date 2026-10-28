@@ -1,6 +1,5 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/audits.d.ts
+import { D as PageCallOptions, w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type ArchiveItem = {
   /** The type that content is encoded in, always "application/json". */
   contentType?: string;
@@ -140,8 +139,8 @@ export type GetAuditsHttpResponse = {
   data: GetResult;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetAuditsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetAuditsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetAuditsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetAuditsHttpResponse>;
 };
 export type GetAuditsHttpError = {
   data: ErrorResponse;
@@ -211,8 +210,8 @@ export type GetAuditSourcesHttpResponse = {
   data: GetObjectsResult;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetAuditSourcesHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetAuditSourcesHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetAuditSourcesHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetAuditSourcesHttpResponse>;
 };
 export type GetAuditSourcesHttpError = {
   data: ErrorResponse;
@@ -229,8 +228,8 @@ export type GetAuditTypesHttpResponse = {
   data: GetObjectsResult;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetAuditTypesHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetAuditTypesHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetAuditTypesHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetAuditTypesHttpResponse>;
 };
 export type GetAuditTypesHttpError = {
   data: ErrorResponse;
@@ -314,5 +313,4 @@ export type AuditsAPI = {
  * Functions for the audits api
  */
 declare const auditsExport: AuditsAPI;
-//#endregion
 export { auditsExport as default };

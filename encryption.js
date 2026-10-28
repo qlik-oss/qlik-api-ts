@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/encryption.ts
+// src/public/rest/encryption.ts
 /**
 * Returns a list of AWS key providers in the tenant. Use /actions/list to return all key providers.
 *
@@ -160,5 +160,4 @@ const encryptionExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createEncryptionKeyprovider, encryptionExport as default, deleteEncryptionKeyprovider, getEncryptionKeyprovider, getEncryptionKeyproviders, getEncryptionKeyprovidersMigrationDetails, listEncryptionKeyproviders, migrateEncryptionKeyprovider, patchEncryptionKeyprovider, resetEncryptionKeyproviders, testEncryptionKeyprovider };

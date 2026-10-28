@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/sharing-tasks.ts
+// src/public/rest/sharing-tasks.ts
 /**
 * Retrieves all sharing tasks accessible to the user. Users assigned the `TenantAdmin` or `AnalyticsAdmin` role can view all tasks.
 *
@@ -232,5 +232,4 @@ const sharingTasksExport = {
 	clearCache
 };
 
-//#endregion
 export { cancelSharingTask, clearCache, configureSharingTasksSettings, createSharingTask, sharingTasksExport as default, deleteSharingTask, executeSharingTasks, getSharingTask, getSharingTaskExecution, getSharingTaskExecutionFile, getSharingTaskExecutions, getSharingTasks, getSharingTasksSettings, patchSharingTask, updateSharingTasksSettings };

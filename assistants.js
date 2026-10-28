@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/assistants.ts
+// src/public/rest/assistants.ts
 /**
 * Retrieves the list of assistants. The result can be filtered, sorted, and paginated.
 *
@@ -582,5 +582,4 @@ const assistantsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createAssistant, createAssistantStarter, createAssistantThread, createAssistantThreadInteraction, createAssistantThreadInteractionFeedback, createAssistantThreadInteractionReview, assistantsExport as default, deleteAssistant, deleteAssistantStarter, deleteAssistantStarterFollowup, deleteAssistantThread, deleteAssistantThreadInteraction, getAssistant, getAssistantFeedback, getAssistantSources, getAssistantStarter, getAssistantStarters, getAssistantThread, getAssistantThreadInteraction, getAssistantThreadInteractions, getAssistantThreads, getAssistants, invokeAssistantThread, patchAssistant, patchAssistantThread, patchAssistantThreadInteractionFeedback, searchAssistant, streamAssistantThread, updateAssistantStarter, updateAssistantStarterFollowup };

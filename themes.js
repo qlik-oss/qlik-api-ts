@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/themes.ts
+// src/public/rest/themes.ts
 /**
 * Lists all imported themes in the tenant.
 *
@@ -125,5 +125,4 @@ const themesExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, themesExport as default, deleteTheme, downloadFileFromTheme, downloadTheme, getTheme, getThemes, patchTheme, uploadTheme };

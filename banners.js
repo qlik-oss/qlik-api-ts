@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/banners.ts
+// src/public/rest/banners.ts
 /**
 * Retrieves announcement banner configuration for the tenant, including content, scheduling, and link information for display at the top of the client interface.
 *
@@ -43,5 +43,4 @@ const bannersExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, bannersExport as default, getBanners, upsertBanners };

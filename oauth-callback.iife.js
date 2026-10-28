@@ -1,6 +1,6 @@
 (function() {
 
-//#region node_modules/.pnpm/@qlik+runtime-module-loader@1.5.3/node_modules/@qlik/runtime-module-loader/dist/index.js
+// node_modules/.pnpm/@qlik+runtime-module-loader@1.5.3/node_modules/@qlik/runtime-module-loader/dist/index.js
 	var __create = Object.create;
 	var __defProp = Object.defineProperty;
 	var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -1212,12 +1212,10 @@
 		return globalThis[getAccessToken];
 	}
 
-//#endregion
-//#region src/public/oauth-callback.ts
+// src/public/oauth-callback.ts
 	const props = resolveAllProps();
 	importRuntimeModule("oauth-callback@v1", props.hostConfig).catch((e) => {
 		throw e;
 	});
 
-//#endregion
 })();

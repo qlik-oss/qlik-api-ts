@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/oauth-clients.ts
+// src/public/rest/oauth-clients.ts
 /**
 * Retrieve all OAuth clients.
 * @example
@@ -197,5 +197,4 @@ const oauthClientsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createOAuthClient, createOAuthClientSecret, oauthClientsExport as default, deleteOAuthClient, deleteOAuthClientConnectionConfig, deleteOAuthClientSecret, getOAuthClient, getOAuthClientConnectionConfig, getOAuthClients, patchOAuthClient, patchOAuthClientConnectionConfig, publishOAuthClient };

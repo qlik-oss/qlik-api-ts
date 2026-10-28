@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/reload-tasks.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type Error = {
   code: string;
   detail?: string;
@@ -122,8 +121,8 @@ export type GetReloadTasksHttpResponse = {
   data: Tasks;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetReloadTasksHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetReloadTasksHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetReloadTasksHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetReloadTasksHttpResponse>;
 };
 export type GetReloadTasksHttpError = {
   data: Errors;
@@ -267,5 +266,4 @@ export type ReloadTasksAPI = {
  * Functions for the reload-tasks api
  */
 declare const reloadTasksExport: ReloadTasksAPI;
-//#endregion
 export { reloadTasksExport as default };

@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/automl-deployments.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type AppErrorResponse = {
   errors?: Error[];
 };
@@ -97,5 +96,4 @@ export type AutomlDeploymentsAPI = {
  * Functions for the automl-deployments api
  */
 declare const automlDeploymentsExport: AutomlDeploymentsAPI;
-//#endregion
 export { automlDeploymentsExport as default };

@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/questions.ts
+// src/public/rest/questions.ts
 /**
 * Returns the generated response for parsed chat queries, if no app was specified nor present in conversation context, suggests matching apps.
 *
@@ -48,5 +48,4 @@ const questionsExport = {
 	clearCache
 };
 
-//#endregion
 export { askQuestions, clearCache, questionsExport as default, filterQuestions };

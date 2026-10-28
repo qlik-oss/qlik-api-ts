@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/data-connections.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type ActionDeleteRequest = {
   connections: {
     /** ID of connection */
@@ -351,8 +350,8 @@ export type GetDataConnectionsHttpResponse = {
   data: Connections;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetDataConnectionsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetDataConnectionsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetDataConnectionsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetDataConnectionsHttpResponse>;
 };
 export type GetDataConnectionsHttpError = {
   data: ResponseErrors;
@@ -674,5 +673,4 @@ export type DataConnectionsAPI = {
  * Functions for the data-connections api
  */
 declare const dataConnectionsExport: DataConnectionsAPI;
-//#endregion
 export { dataConnectionsExport as default };

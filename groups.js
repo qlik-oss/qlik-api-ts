@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/groups.ts
+// src/public/rest/groups.ts
 /**
 * Returns a list of groups with cursor-based pagination.
 *
@@ -140,5 +140,4 @@ const groupsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createGroup, groupsExport as default, deleteGroup, filterGroups, getGroup, getGroups, getGroupsSettings, patchGroup, patchGroupsSettings };

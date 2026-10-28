@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/conditions.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type APISettings = {
   /** Whether API endpoints for condition manager are enabled */
   "enable-conditions": boolean;
@@ -658,5 +657,4 @@ export type ConditionsAPI = {
  * Functions for the conditions api
  */
 declare const conditionsExport: ConditionsAPI;
-//#endregion
 export { conditionsExport as default };

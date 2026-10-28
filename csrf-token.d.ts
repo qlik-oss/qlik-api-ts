@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/csrf-token.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * An error object.
  */
@@ -58,5 +57,4 @@ export type CsrfTokenAPI = {
  * Functions for the csrf-token api
  */
 declare const csrfTokenExport: CsrfTokenAPI;
-//#endregion
 export { csrfTokenExport as default };

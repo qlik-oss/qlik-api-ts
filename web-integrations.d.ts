@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/web-integrations.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * An error object describing the error.
  */
@@ -163,8 +162,8 @@ export type GetWebIntegrationsHttpResponse = {
   data: WebIntegrations;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetWebIntegrationsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetWebIntegrationsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetWebIntegrationsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetWebIntegrationsHttpResponse>;
 };
 export type GetWebIntegrationsHttpError = {
   data: Errors;
@@ -290,5 +289,4 @@ export type WebIntegrationsAPI = {
  * Functions for the web-integrations api
  */
 declare const webIntegrationsExport: WebIntegrationsAPI;
-//#endregion
 export { webIntegrationsExport as default };

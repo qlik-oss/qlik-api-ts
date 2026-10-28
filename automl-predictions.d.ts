@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/automl-predictions.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type AppErrorResponse = {
   errors?: Error[];
 };
@@ -234,5 +233,4 @@ export type AutomlPredictionsAPI = {
  * Functions for the automl-predictions api
  */
 declare const automlPredictionsExport: AutomlPredictionsAPI;
-//#endregion
 export { automlPredictionsExport as default };

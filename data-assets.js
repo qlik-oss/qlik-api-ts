@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/data-assets.ts
+// src/public/rest/data-assets.ts
 /**
 * Batch delete data assets by IDs.
 *
@@ -99,5 +99,4 @@ const dataAssetsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createDataAsset, dataAssetsExport as default, deleteDataAssets, getDataAsset, patchDataAsset, updateDataAsset };

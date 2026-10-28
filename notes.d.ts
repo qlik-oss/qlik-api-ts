@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/notes.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * The possible states for the status of notes configuration GET or POST operation
  */
@@ -114,5 +113,4 @@ export type NotesAPI = {
  * Functions for the notes api
  */
 declare const notesExport: NotesAPI;
-//#endregion
 export { notesExport as default };

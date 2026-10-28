@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/automations.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type AutomationDetailRequestObject = {
   description?: string;
   /** Maximum number of concurrent runs allowed for this automation. The maximum value is defined in automations settings. */
@@ -235,8 +234,10 @@ export type ScheduleRequestObject = {
   interval?: number;
   /** The RRULE that defines when the automation runs. When provided, it takes precedence over interval. */
   recurrence?: string;
-  startAt?: string;
-  stopAt?: string;
+  /** The date and time when the schedule becomes active. If null, any existing start date is removed and the schedule is active from now. If omitted, an existing start date that is still in the future is removed; one that is already in the past is kept. */
+  startAt?: string | null;
+  /** The date and time until the schedule is active. If omitted or null, any existing end date is removed. */
+  stopAt?: string | null;
   timezone?: string;
 };
 export type ScheduleResponseObject = {
@@ -288,8 +289,8 @@ export type GetAutomationsHttpResponse = {
   data: AutomationList;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetAutomationsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetAutomationsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetAutomationsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetAutomationsHttpResponse>;
 };
 export type GetAutomationsHttpError = {
   data: ErrorResponse;
@@ -583,8 +584,8 @@ export type GetAutomationRunsHttpResponse = {
   data: RunList;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetAutomationRunsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetAutomationRunsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetAutomationRunsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetAutomationRunsHttpResponse>;
 };
 export type GetAutomationRunsHttpError = {
   data: ErrorResponse;
@@ -955,5 +956,4 @@ export type AutomationsAPI = {
  * Functions for the automations api
  */
 declare const automationsExport: AutomationsAPI;
-//#endregion
 export { automationsExport as default };

@@ -1,8 +1,8 @@
-import automationConnectionsExport, { t as automation_connections_exports } from "./workflows/automation-connections.js";
-import automationConnectorsExport, { t as automation_connectors_exports } from "./workflows/automation-connectors.js";
-import automationsExport, { t as automations_exports } from "./workflows/automations.js";
+import { n as automation_connections_exports, t as automationConnectionsExport } from "./chunks/automation-connections-DtcR5ojK.js";
+import { n as automation_connectors_exports, t as automationConnectorsExport } from "./chunks/automation-connectors-Bnv5PrTB.js";
+import { n as automations_exports, t as automationsExport } from "./chunks/automations-D9_Iop4i.js";
 
-//#region src/public/rest/workflows.ts
+// src/public/rest/workflows.ts
 /**
 * Functions for the workflows api
 */
@@ -12,5 +12,4 @@ const workflowsExport = {
 	automations: automationsExport
 };
 
-//#endregion
 export { automation_connections_exports as automationConnections, automation_connectors_exports as automationConnectors, automations_exports as automations, workflowsExport as default };

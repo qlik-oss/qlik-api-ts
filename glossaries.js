@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/glossaries.ts
+// src/public/rest/glossaries.ts
 /**
 * Returns all glossaries.
 *
@@ -464,5 +464,4 @@ const glossariesExport = {
 	clearCache
 };
 
-//#endregion
 export { changeGlossaryTermStatus, clearCache, createGlossary, createGlossaryCategory, createGlossaryTerm, createGlossaryTermLink, glossariesExport as default, deleteGlossary, deleteGlossaryCategory, deleteGlossaryTerm, exportGlossary, getGlossaries, getGlossary, getGlossaryCategories, getGlossaryCategory, getGlossaryTerm, getGlossaryTermLinks, getGlossaryTermRevisions, getGlossaryTerms, importGlossary, patchGlossary, patchGlossaryCategory, patchGlossaryTerm, updateGlossary, updateGlossaryCategory, updateGlossaryTerm };

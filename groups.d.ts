@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/groups.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * An array of role references. Visibility dependant on access level. Must have access to roles to view other users' assigned roles.
  */
@@ -296,8 +295,8 @@ export type GetGroupsHttpResponse = {
   data: Groups;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetGroupsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetGroupsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetGroupsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetGroupsHttpResponse>;
 };
 export type GetGroupsHttpError = {
   data: Errors;
@@ -342,8 +341,8 @@ export type FilterGroupsHttpResponse = {
   data: Groups;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<FilterGroupsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<FilterGroupsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<FilterGroupsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<FilterGroupsHttpResponse>;
 };
 export type FilterGroupsHttpError = {
   data: Errors;
@@ -506,5 +505,4 @@ export type GroupsAPI = {
  * Functions for the groups api
  */
 declare const groupsExport: GroupsAPI;
-//#endregion
 export { groupsExport as default };

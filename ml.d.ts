@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/ml.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * An error object
  */
@@ -39,7 +38,7 @@ export type Alias = {
   deploymentId: DeploymentId;
   /** ID of this entity */
   id: EntityId;
-  /** The mode of an alias. Default mode means the model assigned to that alias will be used if alias is not specified */
+  /** The mode of an alias. Default mode means the model assigned to that alias will be used if alias is not specified. Null for a regular alias. */
   mode: AliasMode;
   models: ModelsInfo;
   /** Name of this entity */
@@ -87,7 +86,7 @@ export type AliasInput = {
   };
 };
 /**
- * The mode of an alias. Default mode means the model assigned to that alias will be used if alias is not specified
+ * The mode of an alias. Default mode means the model assigned to that alias will be used if alias is not specified. Null for a regular alias.
  */
 export type AliasMode = "default" | "undefined";
 /**
@@ -1662,8 +1661,8 @@ export type GetMlDeploymentsHttpResponse = {
   data: DeploymentFindResponse;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetMlDeploymentsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetMlDeploymentsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetMlDeploymentsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetMlDeploymentsHttpResponse>;
 };
 export type GetMlDeploymentsHttpError = {
   data: Failure;
@@ -1805,8 +1804,8 @@ export type GetMlDeploymentAliasesHttpResponse = {
   data: AliasFindResponse;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetMlDeploymentAliasesHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetMlDeploymentAliasesHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetMlDeploymentAliasesHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetMlDeploymentAliasesHttpResponse>;
 };
 export type GetMlDeploymentAliasesHttpError = {
   data: Failure;
@@ -1946,8 +1945,8 @@ export type GetMlDeploymentBatchPredictionsHttpResponse = {
   data: BatchPredictionFindResponse;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetMlDeploymentBatchPredictionsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetMlDeploymentBatchPredictionsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetMlDeploymentBatchPredictionsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetMlDeploymentBatchPredictionsHttpResponse>;
 };
 export type GetMlDeploymentBatchPredictionsHttpError = {
   data: Failure;
@@ -2220,8 +2219,8 @@ export type GetMlExperimentsHttpResponse = {
   data: ExperimentFindResponse;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetMlExperimentsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetMlExperimentsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetMlExperimentsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetMlExperimentsHttpResponse>;
 };
 export type GetMlExperimentsHttpError = {
   data: Failure;
@@ -2359,8 +2358,8 @@ export type GetMlExperimentModelsHttpResponse = {
   data: ModelFindResponse;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetMlExperimentModelsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetMlExperimentModelsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetMlExperimentModelsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetMlExperimentModelsHttpResponse>;
 };
 export type GetMlExperimentModelsHttpError = {
   data: Failure;
@@ -2411,8 +2410,8 @@ export type GetMlExperimentVersionsHttpResponse = {
   data: ExperimentVersionFindResponse;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetMlExperimentVersionsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetMlExperimentVersionsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetMlExperimentVersionsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetMlExperimentVersionsHttpResponse>;
 };
 export type GetMlExperimentVersionsHttpError = {
   data: Failure;
@@ -2971,5 +2970,4 @@ export type MlAPI = {
  * Functions for the ml api
  */
 declare const mlExport: MlAPI;
-//#endregion
 export { mlExport as default };

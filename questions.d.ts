@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/questions.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type Analysis = "breakdown" | "changePoint" | "comparison" | "contribution" | "correlation" | "fact" | "mutualInfo" | "rank" | "spike" | "trend" | "values";
 export type AnalysisGroup = "anomaly" | "brekadown" | "comparison" | "correl" | "fact" | "list" | "mutualInfo" | "rank";
 /**
@@ -323,8 +322,8 @@ export type FilterQuestionsHttpResponse = {
   data: NLMetricsResponse;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<FilterQuestionsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<FilterQuestionsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<FilterQuestionsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<FilterQuestionsHttpResponse>;
 };
 export type FilterQuestionsHttpError = {
   data: Errors;
@@ -360,5 +359,4 @@ export type QuestionsAPI = {
  * Functions for the questions api
  */
 declare const questionsExport: QuestionsAPI;
-//#endregion
 export { questionsExport as default };

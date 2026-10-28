@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/items.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type CollectionTypes = "private" | "public" | "publicgoverned";
 export type ErrorResponseBody = {
   errors?: ServiceError[];
@@ -301,8 +300,8 @@ export type GetItemsHttpResponse = {
   data: ItemsListItemsResponseBody;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetItemsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetItemsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetItemsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetItemsHttpResponse>;
 };
 export type GetItemsHttpError = {
   data: ErrorResponseBody;
@@ -421,8 +420,8 @@ export type GetItemCollectionsHttpResponse = {
   data: ItemsListItemCollectionsResponseBody;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetItemCollectionsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetItemCollectionsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetItemCollectionsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetItemCollectionsHttpResponse>;
 };
 export type GetItemCollectionsHttpError = {
   data: ErrorResponseBody;
@@ -452,8 +451,8 @@ export type GetPublishedItemsHttpResponse = {
   data: ItemsListItemCollectionsResponseBody;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetPublishedItemsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetPublishedItemsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetPublishedItemsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetPublishedItemsHttpResponse>;
 };
 export type GetPublishedItemsHttpError = {
   data: ErrorResponseBody;
@@ -532,5 +531,4 @@ export type ItemsAPI = {
  * Functions for the items api
  */
 declare const itemsExport: ItemsAPI;
-//#endregion
 export { itemsExport as default };

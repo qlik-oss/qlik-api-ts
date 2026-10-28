@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/tenant-settings.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type CustomizeNoAccess = {
   linkEnabled: boolean;
   linkLabel?: string;
@@ -342,5 +341,4 @@ export type TenantSettingsAPI = {
  * Functions for the tenant-settings api
  */
 declare const tenantSettingsExport: TenantSettingsAPI;
-//#endregion
 export { tenantSettingsExport as default };

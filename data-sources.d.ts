@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/data-sources.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type ApiSpecResponse = {
   /** List of properties required for the given datasource */
   connectionProperties: unknown;
@@ -32,16 +31,22 @@ export type ConnectorNodesInfo = {
 export type DataSourceNew = {
   /** List of capabilities supported by the datasource */
   capabilities?: string[];
-  /** Override value of dataload URL (could be null) */
+  /** Override URL for data loading. Empty if the default URL is used. */
   dataLoadUrlOverride?: string;
   /** Unique identifier of datasource */
   dataSourceId: string;
-  /** Datasource property name (could be null) */
+  /** Display name of the datasource. */
+  dataSourceName?: string;
+  /** Name of the property used to identify the datasource type in a connection string. Empty if not applicable. */
   dataSourcePropertyName?: string;
   /** Type of datasource */
   dataSourceType?: string;
   /** Indicates whether the datasource is disabled */
   disabled?: boolean;
+  /** Name of the feature flag that controls the availability of the datasource. Null if the datasource is not behind a feature flag. */
+  featureFlag?: string | null;
+  /** Base64 encoded flags (4 bytes) used by the client to control how the datasource is presented. Null if not defined by the connector. */
+  frontendFlags?: string | null;
   /** Datasource name */
   name: string;
   /** Connector provider */
@@ -50,6 +55,13 @@ export type DataSourceNew = {
   providerName: string;
   /** Qri definition template */
   qriDefinition?: QriDefinition;
+  /** Connector-defined settings of the datasource. Empty if there are none. */
+  settings?: {
+    /** Name of the setting. */
+    name: string;
+    /** Value of the setting. */
+    value: string;
+  }[];
   /** UI related metadata (only present when 'includeui' is set to true in query) */
   uiInfo?: UiInfo;
 };
@@ -74,6 +86,8 @@ export type DataSourcesResponseNew = {
   dataSources: DataSourceNew[];
   /** Time stamp of last updated */
   lastUpdated: string;
+  /** Same value as `lastUpdated`. Replaces `lastUpdated` when the `qlik-api-version` header is set. */
+  updatedAt?: string;
 };
 export type PublicApiError = {
   /** A service specific error code string */
@@ -344,5 +358,4 @@ export type DataSourcesAPI = {
  * Functions for the data-sources api
  */
 declare const dataSourcesExport: DataSourcesAPI;
-//#endregion
 export { dataSourcesExport as default };

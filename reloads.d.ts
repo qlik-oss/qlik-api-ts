@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/reloads.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type Error = {
   /** The error code is in form of 'RELOADS-xxx'. ranges from 'RELOADS-001' to 'RELOADS-013'.  */
   code: string;
@@ -174,8 +173,8 @@ export type GetReloadsHttpResponse = {
   data: Reloads;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetReloadsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetReloadsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetReloadsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetReloadsHttpResponse>;
 };
 export type GetReloadsHttpError = {
   data: Errors;
@@ -288,5 +287,4 @@ export type ReloadsAPI = {
  * Functions for the reloads api
  */
 declare const reloadsExport: ReloadsAPI;
-//#endregion
 export { reloadsExport as default };

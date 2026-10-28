@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/data-connections.ts
+// src/public/rest/data-connections.ts
 /**
 * Gets a list of connections
 * @example
@@ -208,5 +208,4 @@ const dataConnectionsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createDataConnection, dataConnectionsExport as default, deleteDataConnection, deleteDataConnections, duplicateDataAConnection, getDataConnection, getDataConnections, patchDataConnection, updateDataConnection, updateDataConnections };

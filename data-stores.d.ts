@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/data-stores.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type BatchIdDto = {
   ids?: string[];
 };
@@ -273,8 +272,8 @@ export type GetDataStoresHttpResponse = {
   data: PageDataStore;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetDataStoresHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetDataStoresHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetDataStoresHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetDataStoresHttpResponse>;
 };
 export type GetDataStoresHttpError = {
   data: ErrorResponse;
@@ -335,8 +334,8 @@ export type GetDataStoreDataAssetsHttpResponse = {
   data: PageDataAsset;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetDataStoreDataAssetsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetDataStoreDataAssetsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetDataStoreDataAssetsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetDataStoreDataAssetsHttpResponse>;
 };
 export type GetDataStoreDataAssetsHttpError = {
   data: ErrorResponse;
@@ -382,8 +381,8 @@ export type GetDataStoreDataAssetDataSetsHttpResponse = {
   data: PageDataSet;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetDataStoreDataAssetDataSetsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetDataStoreDataAssetDataSetsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetDataStoreDataAssetDataSetsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetDataStoreDataAssetDataSetsHttpResponse>;
 };
 export type GetDataStoreDataAssetDataSetsHttpError = {
   data: ErrorResponse;
@@ -538,5 +537,4 @@ export type DataStoresAPI = {
  * Functions for the data-stores api
  */
 declare const dataStoresExport: DataStoresAPI;
-//#endregion
 export { dataStoresExport as default };
