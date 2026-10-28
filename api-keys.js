@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/api-keys.ts
+// src/public/rest/api-keys.ts
 /**
 * Lists API keys for the tenant. To list API keys owned by other users, requesting user must be assigned the `TenantAdmin` role.
 *
@@ -127,5 +127,4 @@ const apiKeysExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createApiKey, apiKeysExport as default, deleteApiKey, getApiKey, getApiKeys, getApiKeysConfig, patchApiKey, patchApiKeysConfig };

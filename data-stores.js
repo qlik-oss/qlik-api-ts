@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/data-stores.ts
+// src/public/rest/data-stores.ts
 /**
 * Delete data stores if it does not contain any data-assets.
 *
@@ -186,5 +186,4 @@ const dataStoresExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createDataStore, dataStoresExport as default, deleteDataStoreDataAssetDataSets, deleteDataStoreDataAssets, deleteDataStores, getDataStore, getDataStoreDataAssetDataSets, getDataStoreDataAssets, getDataStores, patchDataStore, updateDataStore };

@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/collections.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type CollectionByIdPatch = {
   /** The operation to be performed. */
   op: "replace";
@@ -272,8 +271,8 @@ export type GetCollectionsHttpResponse = {
   data: CollectionsListCollectionsResponseBody;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetCollectionsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetCollectionsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetCollectionsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetCollectionsHttpResponse>;
 };
 export type GetCollectionsHttpError = {
   data: ErrorResponseBody;
@@ -577,5 +576,4 @@ export type CollectionsAPI = {
  * Functions for the collections api
  */
 declare const collectionsExport: CollectionsAPI;
-//#endregion
 export { collectionsExport as default };

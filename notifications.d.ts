@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/notifications.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * An error object.
  */
@@ -94,5 +93,4 @@ export type NotificationsAPI = {
  * Functions for the notifications api
  */
 declare const notificationsExport: NotificationsAPI;
-//#endregion
 export { notificationsExport as default };

@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/reports.ts
+// src/public/rest/reports.ts
 /**
 * Queue a new report request generation.
 *
@@ -63,5 +63,4 @@ const reportsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createReport, reportsExport as default, getReportOutputs, getReportStatus };

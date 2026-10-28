@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/knowledgebases.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902.
  */
@@ -480,8 +479,8 @@ export type GetKnowledgebasesHttpResponse = {
   data: KnowledgeBasesResult;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetKnowledgebasesHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetKnowledgebasesHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetKnowledgebasesHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetKnowledgebasesHttpResponse>;
 };
 export type GetKnowledgebasesHttpError = {
   data: ErrorResponse;
@@ -711,8 +710,8 @@ export type GetKnowledgebaseDatasourceHistoriesHttpResponse = {
   data: SyncHistoryResult;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetKnowledgebaseDatasourceHistoriesHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetKnowledgebaseDatasourceHistoriesHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetKnowledgebaseDatasourceHistoriesHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetKnowledgebaseDatasourceHistoriesHttpResponse>;
 };
 export type GetKnowledgebaseDatasourceHistoriesHttpError = {
   data: ErrorResponse;
@@ -816,8 +815,8 @@ export type GetKnowledgebaseHistoriesHttpResponse = {
   data: SyncHistoryResult;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetKnowledgebaseHistoriesHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetKnowledgebaseHistoriesHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetKnowledgebaseHistoriesHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetKnowledgebaseHistoriesHttpResponse>;
 };
 export type GetKnowledgebaseHistoriesHttpError = {
   data: ErrorResponse;
@@ -986,5 +985,4 @@ export type KnowledgebasesAPI = {
  * Functions for the knowledgebases api
  */
 declare const knowledgebasesExport: KnowledgebasesAPI;
-//#endregion
 export { knowledgebasesExport as default };

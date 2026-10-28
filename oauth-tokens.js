@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/oauth-tokens.ts
+// src/public/rest/oauth-tokens.ts
 /**
 * Retrieve list of OAuth tokens that the user has access to. Users assigned with a `TenantAdmin` role can list OAuth tokens generated for all users in the tenant.
 *
@@ -44,5 +44,4 @@ const oauthTokensExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, oauthTokensExport as default, deleteOauthToken, getOauthTokens };

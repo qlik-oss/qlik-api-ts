@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/extensions.ts
+// src/public/rest/extensions.ts
 /**
 * Lists all imported extensions in the tenant.
 *
@@ -125,5 +125,4 @@ const extensionsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, extensionsExport as default, deleteExtension, downloadExtension, downloadFileFromExtension, getExtension, getExtensions, patchExtension, uploadExtension };

@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/users.ts
+// src/public/rest/users.ts
 /**
 * Returns a list of users using cursor-based pagination.
 *
@@ -170,5 +170,4 @@ const usersExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, countUsers, countUsersWithoutQuery, createUser, usersExport as default, deleteUser, filterUsers, getMyUser, getUser, getUsers, inviteUsers, patchUser };

@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/tasks.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type ErrorResponse = {
   errors?: HttpResult[];
   /** A way to trace the source of the error. */
@@ -272,8 +271,8 @@ export type GetTasksHttpResponse = {
   data: TaskList;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetTasksHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetTasksHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetTasksHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetTasksHttpResponse>;
 };
 export type GetTasksHttpError = {
   data: ErrorResponse;
@@ -321,8 +320,8 @@ export type GetTasksResourceRunsHttpResponse = {
   data: OrchRunList;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetTasksResourceRunsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetTasksResourceRunsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetTasksResourceRunsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetTasksResourceRunsHttpResponse>;
 };
 export type GetTasksResourceRunsHttpError = {
   data: ErrorResponse;
@@ -424,8 +423,8 @@ export type GetTaskRunsHttpResponse = {
   data: OrchRunList;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetTaskRunsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetTaskRunsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetTaskRunsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetTaskRunsHttpResponse>;
 };
 export type GetTaskRunsHttpError = {
   data: ErrorResponse;
@@ -560,5 +559,4 @@ export type TasksAPI = {
  * Functions for the tasks api
  */
 declare const tasksExport: TasksAPI;
-//#endregion
 export { tasksExport as default };

@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/automation-connections.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type AutomationConnectionChangeOwnerObject = {
   /** The unique identifier of the new owner. */
   userId?: string;
@@ -160,8 +159,8 @@ export type GetAutomationConnectionsHttpResponse = {
   data: AutomationConnectionsList;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetAutomationConnectionsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetAutomationConnectionsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetAutomationConnectionsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetAutomationConnectionsHttpResponse>;
 };
 export type GetAutomationConnectionsHttpError = {
   data: ErrorResponse;
@@ -398,5 +397,4 @@ export type AutomationConnectionsAPI = {
  * Functions for the automation-connections api
  */
 declare const automationConnectionsExport: AutomationConnectionsAPI;
-//#endregion
 export { automationConnectionsExport as default };

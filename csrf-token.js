@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/csrf-token.ts
+// src/public/rest/csrf-token.ts
 /**
 * Returns CSRF token via the qlik-csrf-token header.
 *
@@ -27,5 +27,4 @@ const csrfTokenExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, csrfTokenExport as default, getCsrfToken };

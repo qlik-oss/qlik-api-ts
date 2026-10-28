@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/automation-connectors.ts
+// src/public/rest/automation-connectors.ts
 /**
 * @deprecated
 *
@@ -31,5 +31,4 @@ const automationConnectorsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, automationConnectorsExport as default, getAutomationConnectors };

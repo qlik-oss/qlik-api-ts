@@ -1,6 +1,6 @@
-import { t as getAuthRuntimeModule } from "./chunks/public-runtime-modules-Dlisfd6j.js";
+import { t as getAuthRuntimeModule } from "./chunks/public-runtime-modules-DoyZUsje.js";
 
-//#region src/public/auth.ts
+// src/public/auth.ts
 /**
 * Registers an auth module that can handle authentication. An auth module is used by specifying its name as authType in the HostConfig passed in to api calls.
 * @param name the name of the module
@@ -61,5 +61,4 @@ var auth_default = {
 	getWebResourceAuthParams
 };
 
-//#endregion
 export { auth_default as default, getAccessToken, getWebResourceAuthParams, logout, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig };

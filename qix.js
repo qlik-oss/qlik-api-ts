@@ -1,6 +1,6 @@
-import { r as getQixRuntimeModule } from "./chunks/public-runtime-modules-Dlisfd6j.js";
+import { r as getQixRuntimeModule } from "./chunks/public-runtime-modules-DoyZUsje.js";
 
-//#region src/public/qix.ts
+// src/public/qix.ts
 function openAppSession(appSessionProps) {
 	const appSessionPromise = getQixRuntimeModule(appSessionProps.hostConfig).then((impl) => impl.openAppSession(appSessionProps));
 	return {
@@ -87,5 +87,4 @@ const qix = {
 	withHostConfig
 };
 
-//#endregion
 export { qix as default, openAppSession, withHostConfig };

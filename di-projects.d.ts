@@ -1,6 +1,5 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/di-projects.d.ts
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type AsyncActionDetails = {
   endTime?: string;
   error?: AsyncActionError;
@@ -1199,5 +1198,4 @@ export type DiProjectsAPI = {
  * Functions for the di-projects api
  */
 declare const diProjectsExport: DiProjectsAPI;
-//#endregion
 export { diProjectsExport as default };

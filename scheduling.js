@@ -1,10 +1,9 @@
-import tasksExport, { t as tasks_exports } from "./scheduling/tasks.js";
+import { v as tasksExport, y as tasks_exports } from "./chunks/tasks-XgS-0d-B.js";
 
-//#region src/public/rest/scheduling.ts
+// src/public/rest/scheduling.ts
 /**
 * Functions for the scheduling api
 */
 const schedulingExport = { tasks: tasksExport };
 
-//#endregion
 export { schedulingExport as default, tasks_exports as tasks };

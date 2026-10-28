@@ -1,5 +1,4 @@
-import sharingTasksExport, { t as sharing_tasks_d_exports } from "./alerting/sharing-tasks.js";
-//#region src/public/rest/alerting.d.ts
+import { b as sharingTasksExport, x as sharing_tasks_d_exports } from "./chunks/sharing-tasks-DHTu5Apb.js";
 export type AlertingAPI = {};
 /**
  * Functions for the alerting api
@@ -7,5 +6,4 @@ export type AlertingAPI = {};
 declare const alertingExport: AlertingAPI & {
   sharingTasks: typeof sharingTasksExport;
 };
-//#endregion
 export { alertingExport as default, sharing_tasks_d_exports as sharingTasks };

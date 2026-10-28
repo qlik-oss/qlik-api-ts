@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/spaces.ts
+// src/public/rest/spaces.ts
 /**
 * Retrieves spaces that the current user has access to and match the query.
 *
@@ -314,5 +314,4 @@ const spacesExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createSpace, createSpaceAssignment, createSpaceShare, spacesExport as default, deleteSpace, deleteSpaceAssignment, deleteSpaceShare, getSpace, getSpaceAssignment, getSpaceAssignments, getSpaceShare, getSpaceShares, getSpaceTypes, getSpaces, patchShare, patchSpace, updateSpace, updateSpaceAssignment };

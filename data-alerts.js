@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/data-alerts.ts
+// src/public/rest/data-alerts.ts
 /**
 * Retrieves all data alert tasks accessible to the user. Users assigned the `TenantAdmin` or `AnalyticsAdmin` role can view all tasks.
 *
@@ -279,5 +279,4 @@ const dataAlertsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createDataAlert, dataAlertsExport as default, deleteDataAlert, deleteDataAlertExecution, getDataAlert, getDataAlertCondition, getDataAlertExecution, getDataAlertExecutionEvaluations, getDataAlertExecutions, getDataAlertExecutionsStats, getDataAlertRecipientStats, getDataAlerts, getDataAlertsSettings, patchDataAlert, setDataAlertsSettings, triggerDataAlerts, validateDataAlerts };

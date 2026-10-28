@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/licenses.ts
+// src/public/rest/licenses.ts
 /**
 * Retrieves assignments for the current tenant
 *
@@ -147,5 +147,4 @@ const licensesExport = {
 	clearCache
 };
 
-//#endregion
 export { addLicenseAssignments, clearCache, licensesExport as default, deleteLicenseAssignments, getLicenseAssignments, getLicenseConsumption, getLicenseOverview, getLicenseSettings, getLicenseStatus, updateLicenseAssignments, updateLicenseSettings };

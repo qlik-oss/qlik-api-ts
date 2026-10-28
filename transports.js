@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/transports.ts
+// src/public/rest/transports.ts
 /**
 * Deletes the email configuration for the tenant.
 *
@@ -116,5 +116,4 @@ const transportsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, transportsExport as default, deleteEmailConfig, getEmailConfig, patchEmailConfig, sendTestEmail, updateEmailConfig, validateEmailConfig, verifyEmailConfigConnection };

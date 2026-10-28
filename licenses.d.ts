@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/licenses.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * @example
  * {
@@ -439,8 +438,8 @@ export type GetLicenseAssignmentsHttpResponse = {
   data: AssignmentsResponse;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetLicenseAssignmentsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetLicenseAssignmentsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetLicenseAssignmentsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetLicenseAssignmentsHttpResponse>;
 };
 export type GetLicenseAssignmentsHttpError = {
   data: ErrorResponse;
@@ -518,8 +517,8 @@ export type GetLicenseConsumptionHttpResponse = {
   data: ConsumptionEventsResponse;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetLicenseConsumptionHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetLicenseConsumptionHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetLicenseConsumptionHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetLicenseConsumptionHttpResponse>;
 };
 export type GetLicenseConsumptionHttpError = {
   data: ErrorResponse;
@@ -665,5 +664,4 @@ export type LicensesAPI = {
  * Functions for the licenses api
  */
 declare const licensesExport: LicensesAPI;
-//#endregion
 export { licensesExport as default };

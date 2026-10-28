@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/temp-contents.ts
+// src/public/rest/temp-contents.ts
 /**
 * Upload a file as a temporary content resource. It returns a `201 Created` with a location header that contains the location of the created resource. If filename or TTL is not properly set, a `400 Bad request` is returned. For internal issues, a `500 Internal Server Error` is returned.
 *
@@ -64,5 +64,4 @@ const tempContentsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, tempContentsExport as default, downloadTempFile, getTempFileDetails, uploadTempFile };

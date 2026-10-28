@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/quotas.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * A specific error.
  */
@@ -108,5 +107,4 @@ export type QuotasAPI = {
  * Functions for the quotas api
  */
 declare const quotasExport: QuotasAPI;
-//#endregion
 export { quotasExport as default };

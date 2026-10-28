@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/glossaries.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * A JSON Patch document as defined in https://tools.ietf.org/html/rfc6902.
  */
@@ -494,8 +493,8 @@ export type GetGlossariesHttpResponse = {
   data: GlossariesResult;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetGlossariesHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetGlossariesHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetGlossariesHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetGlossariesHttpResponse>;
 };
 export type GetGlossariesHttpError = {
   data: ErrorResponse;
@@ -666,8 +665,8 @@ export type GetGlossaryCategoriesHttpResponse = {
   data: CategoriesResult;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetGlossaryCategoriesHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetGlossaryCategoriesHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetGlossaryCategoriesHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetGlossaryCategoriesHttpResponse>;
 };
 export type GetGlossaryCategoriesHttpError = {
   data: ErrorResponse;
@@ -802,8 +801,8 @@ export type GetGlossaryTermsHttpResponse = {
   data: TermsResult;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetGlossaryTermsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetGlossaryTermsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetGlossaryTermsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetGlossaryTermsHttpResponse>;
 };
 export type GetGlossaryTermsHttpError = {
   data: ErrorResponse;
@@ -950,8 +949,8 @@ export type GetGlossaryTermLinksHttpResponse = {
   data: LinksResult;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetGlossaryTermLinksHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetGlossaryTermLinksHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetGlossaryTermLinksHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetGlossaryTermLinksHttpResponse>;
 };
 export type GetGlossaryTermLinksHttpError = {
   data: ErrorResponse;
@@ -1001,8 +1000,8 @@ export type GetGlossaryTermRevisionsHttpResponse = {
   data: TermsResult;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetGlossaryTermRevisionsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetGlossaryTermRevisionsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetGlossaryTermRevisionsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetGlossaryTermRevisionsHttpResponse>;
 };
 export type GetGlossaryTermRevisionsHttpError = {
   data: ErrorResponse;
@@ -1219,5 +1218,4 @@ export type GlossariesAPI = {
  * Functions for the glossaries api
  */
 declare const glossariesExport: GlossariesAPI;
-//#endregion
 export { glossariesExport as default };

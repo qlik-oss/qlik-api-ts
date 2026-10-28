@@ -1,6 +1,5 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/report-templates.d.ts
+import { D as PageCallOptions, w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type CreateTemplateRequest = {
   /** Template description */
   description?: string | null;
@@ -116,8 +115,8 @@ export type GetReportTemplatesHttpResponse = {
   data: GetTemplatesResponse;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetReportTemplatesHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetReportTemplatesHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetReportTemplatesHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetReportTemplatesHttpResponse>;
 };
 export type GetReportTemplatesHttpError = {
   data: ErrorResult;
@@ -301,5 +300,4 @@ export type ReportTemplatesAPI = {
  * Functions for the report-templates api
  */
 declare const reportTemplatesExport: ReportTemplatesAPI;
-//#endregion
 export { reportTemplatesExport as default };

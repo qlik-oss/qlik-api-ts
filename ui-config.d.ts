@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/ui-config.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type BulkCreatePinnedLinkItemPayload = CreatePinnedLinkConfigPayload & {
   links: CreatePinnedLinkPayload[];
 };
@@ -275,5 +274,4 @@ export type UiConfigAPI = {
  * Functions for the ui-config api
  */
 declare const uiConfigExport: UiConfigAPI;
-//#endregion
 export { uiConfigExport as default };

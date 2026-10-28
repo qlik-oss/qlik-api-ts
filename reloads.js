@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/reloads.ts
+// src/public/rest/reloads.ts
 /**
 * Finds and returns the reloads that the user has access to.
 * @example
@@ -82,5 +82,4 @@ const reloadsExport = {
 	clearCache
 };
 
-//#endregion
 export { cancelReload, clearCache, reloadsExport as default, getReload, getReloads, queueReload };

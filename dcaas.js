@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/dcaas.ts
+// src/public/rest/dcaas.ts
 /**
 * @deprecated
 *
@@ -66,5 +66,4 @@ const dcaasExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, dataConnectionsDcaa, dataConnectionsDcaas, dataConnectionsDcaasApiSpecs, dcaasExport as default };

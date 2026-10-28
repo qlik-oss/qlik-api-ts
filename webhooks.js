@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/webhooks.ts
+// src/public/rest/webhooks.ts
 /**
 * Retrieves all webhooks entries for a tenant that the user has access to. Users assigned the `TenantAdmin` role can retrieve all webhooks. A user can have up to 150 webhooks at one time.
 *
@@ -179,5 +179,4 @@ const webhooksExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createWebhook, webhooksExport as default, deleteWebhook, getWebhook, getWebhookDeliveries, getWebhookDelivery, getWebhookEventTypes, getWebhooks, patchWebhook, resendWebhookDelivery, updateWebhook };

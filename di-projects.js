@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/di-projects.ts
+// src/public/rest/di-projects.ts
 /**
 * List data integration projects.
 *
@@ -489,5 +489,4 @@ const diProjectsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createDiProject, diProjectsExport as default, exportDiProject, getDiProject, getDiProjectDiTask, getDiProjectDiTaskRuntimeRunState, getDiProjectDiTaskRuntimeRunStateDatasets, getDiProjectDiTaskRuntimeState, getDiProjectDiTaskRuntimeStateDatasets, getDiProjectDiTasks, getDiProjectExportVariables, getDiProjects, importAsyncDiProject, importDiProject, prepareDiProject, prepareDiProjectDiTask, recreateDatasetsDiProjectDiTask, requestReloadDiProjectDiTask, searchDiProjectDiTaskRuntimeRuns, setDiProjectExportVariables, startDiProjectDiTaskRuntime, startDiProjectDiTaskRuntimeWithBody, stopDiProjectDiTaskRuntime, validateDiProject, validateDiProjectDiTask, validateProjectDefinitions };

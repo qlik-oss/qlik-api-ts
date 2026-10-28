@@ -1,9 +1,9 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 import auth_default from "./auth.js";
-import { o as interceptors$1 } from "./chunks/interceptors-CpMuqQzD.js";
+import { o as interceptors$1 } from "./chunks/interceptors-BHu_f1N_.js";
 import qix$1 from "./qix.js";
 
-//#region src/runtime-api-generator/runtime-api-generator-common.ts
+// src/runtime-api-generator/runtime-api-generator-common.ts
 const methodAbbreviations = {
 	G: "GET",
 	P: "POST",
@@ -161,8 +161,7 @@ function createClassicApiFn({ namespace, operationName, pathTemplate, method, ar
 	};
 }
 
-//#endregion
-//#region src/runtime-api-generator/runtime-api-generator-public.ts
+// src/runtime-api-generator/runtime-api-generator-public.ts
 const parsedMiniApis = {};
 /**
 * apiDefToApi generates a RuntimeApi for the namespace provided based on
@@ -191,12 +190,10 @@ function apiDefToApiPublic(namespace, def, subApis) {
 	};
 }
 
-//#endregion
-//#region src/public/interceptors.ts
+// src/public/interceptors.ts
 var interceptors_default = interceptors$1;
 
-//#endregion
-//#region src/public/index.ts
+// src/public/index.ts
 const createAlertingSharingTasksRuntimeAPI = apiDefToApiPublic("alerting/sharing-tasks", { api: { alerting: { "sharing-tasks": { "{taskId}": { "task-executions": {
 	"": ["getSharingTaskTaskExecutions:GQ:"],
 	"{taskExecutionId}": ["getSharingTaskTaskExecution:G:"]
@@ -286,16 +283,6 @@ const createApiKeysRuntimeAPI = apiDefToApiPublic("api-keys", { api: { v1: { "ap
 } } } });
 const createAppsRuntimeAPI = apiDefToApiPublic("apps", { api: { v1: { apps: {
 	"": ["createApp:PBJ:"],
-	evaluations: {
-		"{baseid}": { actions: { compare: { "{comparisonid}": {
-			"": ["getAppEvaluationComparison:GQ:"],
-			actions: { download: ["getAppEvaluationComparisonXml:G:"] }
-		} } } },
-		"{id}": {
-			"": ["getAppEvaluation:GQ:"],
-			actions: { download: ["getAppEvaluationXml:G:"] }
-		}
-	},
 	import: ["importApp:PQBO:"],
 	privileges: ["getAppsPrivileges:G:"],
 	validatescript: ["validateScript:PBJ:"],
@@ -359,8 +346,7 @@ const createAppsRuntimeAPI = apiDefToApiPublic("apps", { api: { v1: { apps: {
 			]
 		},
 		space: ["removeAppFromSpace:D:", "moveAppToSpace:UBJ:"]
-	},
-	"{guid}": { evaluations: ["getAppEvaluations:GQ:", "queueAppEvaluation:P:"] }
+	}
 } } } });
 const createAssistantsRuntimeAPI = apiDefToApiPublic("assistants", { api: { v1: { assistants: {
 	"": ["getAssistants:GQ:", "createAssistant:PBJ:"],
@@ -711,6 +697,13 @@ const createDataFilesRuntimeAPI = apiDefToApiPublic("data-files", { api: { v1: {
 		}
 	}
 } } } });
+const createDataGovernanceDataContractsRuntimeAPI = apiDefToApiPublic("data-governance/data-contracts", { api: { "data-governance": { "data-contracts": { datasets: {
+	actions: { create: ["createDataContractsDatasets:PBJ:"] },
+	"{datasetId}": {
+		"": ["deleteDataContractsDataset:D:"],
+		expectations: ["getDataContractsDatasetExpectations:G:", "patchDataContractsDatasetExpectations:ABJ:"]
+	}
+} } } } });
 const createDataGovernanceDataProductsRuntimeAPI = apiDefToApiPublic("data-governance/data-products", { api: { "data-governance": { "data-products": {
 	"": ["createDataProduct:PBJ:"],
 	actions: { "generate-provider-url": ["generateProviderUrlDataProducts:PQ:"] },
@@ -760,6 +753,8 @@ const createDataGovernanceSemanticTypesRuntimeAPI = apiDefToApiPublic("data-gove
 } } } });
 const createDataGovernanceTrustScoresRuntimeAPI = apiDefToApiPublic("data-governance/trust-scores", { api: { "data-governance": { "trust-scores": { results: { "data-sets": { actions: { filter: ["filterDatasetsTrustScore:PBJ:"] } } } } } } });
 const createDataGovernanceRuntimeAPI = apiDefToApiPublic("data-governance", {}, {
+	"data-contracts": createDataGovernanceDataContractsRuntimeAPI,
+	dataContracts: createDataGovernanceDataContractsRuntimeAPI,
 	"data-products": createDataGovernanceDataProductsRuntimeAPI,
 	dataProducts: createDataGovernanceDataProductsRuntimeAPI,
 	"data-qualities": createDataGovernanceDataQualitiesRuntimeAPI,
@@ -1708,5 +1703,4 @@ const api = {
 	createQlikApi
 };
 
-//#endregion
 export { alerting, analytics, apiKeys, apps, assistants, audits, auth, automationConnections, automationConnectors, automations, automlDeployments, automlPredictions, banners, brands, collections, conditions, connectivity, consumption, core, createQlikApi, cspOrigins, csrfToken, dataAlerts, dataAssets, dataConnections, dataCredentials, dataFiles, dataGovernance, dataQualities, dataSets, dataSources, dataStores, dcaas, api as default, diProjects, directAccessAgents, encryption, extensions, glossaries, groups, identityProviders, interceptors, items, knowledgebases, licenses, lineageGraphs, ml, notes, notifications, oauthClients, oauthTokens, qix, questions, quotas, reloadTasks, reloads, reportTemplates, reports, roles, scheduling, sharingTasks, spaces, tasks, tempContents, tenantSettings, tenants, themes, transports, uiConfig, users, webIntegrations, webNotifications, webhooks, workflows };

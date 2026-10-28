@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/lineage-graphs.ts
+// src/public/rest/lineage-graphs.ts
 /**
 * Returns next-level nodes inside a specified node on an impact analysis graph retrieved using a base node.
 *
@@ -169,5 +169,4 @@ const lineageGraphsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createLineageGraphNodeOverview, lineageGraphsExport as default, expandLineageGraphImpact, expandLineageGraphNode, getLineageGraphImpactOverview, getLineageGraphImpactSource, getLineageGraphNode, searchLineageGraphImpact, searchLineageGraphNode };

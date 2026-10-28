@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/web-notifications.ts
+// src/public/rest/web-notifications.ts
 /**
 * Retrieve notifications matching the query.
 * @example
@@ -112,5 +112,4 @@ const webNotificationsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, webNotificationsExport as default, deleteNotification, deleteNotifications, getNotification, getNotifications, patchNotification, patchNotifications };

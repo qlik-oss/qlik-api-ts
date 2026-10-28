@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/roles.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type CreateRole = {
   /** Selection of scopes to assign to role */
   assignedScopes?: string[];
@@ -181,8 +180,8 @@ export type GetRolesHttpResponse = {
   data: ListRolesResult;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetRolesHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetRolesHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetRolesHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetRolesHttpResponse>;
 };
 export type GetRolesHttpError = {
   data: Errors;
@@ -308,5 +307,4 @@ export type RolesAPI = {
  * Functions for the roles api
  */
 declare const rolesExport: RolesAPI;
-//#endregion
 export { rolesExport as default };

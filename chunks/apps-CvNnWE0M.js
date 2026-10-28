@@ -1,0 +1,196 @@
+import { t as __exportAll } from "./rolldown-runtime-CNh9ExCG.js";
+import { n as invokeFetch, t as clearApiCache } from "./invoke-fetch-DC35wLOr.js";
+
+// src/public/rest/analytics/apps.ts
+var apps_exports = /* @__PURE__ */ __exportAll({
+	clearCache: () => clearCache,
+	createAppEvaluation: () => createAppEvaluation,
+	createAppEvaluationWithBody: () => createAppEvaluationWithBody,
+	default: () => appsExport,
+	getAppEvaluation: () => getAppEvaluation,
+	getAppEvaluationComparison: () => getAppEvaluationComparison,
+	getAppEvaluationComparisonXml: () => getAppEvaluationComparisonXml,
+	getAppEvaluationXml: () => getAppEvaluationXml,
+	getAppEvaluations: () => getAppEvaluations,
+	restoreApp: () => restoreApp
+});
+/**
+* Compares exactly two app evaluations, a baseline and a comparison, returning a structured
+* diff of performance metrics between them. Use this operation to detect regressions
+* after app changes or engine upgrades. Both evaluations must belong to the same app.
+*
+* @param baselineId The unique identifier of the baseline app evaluation.
+* @param comparisonId The unique identifier of the comparison app evaluation.
+* @param query an object with query parameters
+* @throws GetAppEvaluationComparisonHttpError
+*/
+async function getAppEvaluationComparison(baselineId, comparisonId, query, options) {
+	return invokeFetch("analytics/apps", {
+		method: "get",
+		pathTemplate: "/api/analytics/apps/evaluations/{baselineId}/compare/{comparisonId}",
+		pathVariables: {
+			baselineId,
+			comparisonId
+		},
+		query,
+		options
+	});
+}
+/**
+* Downloads a comparison log for the two specified app evaluations (baseline and comparison),
+* defaulting to XML format. Use the `Accept` header to request JSON output instead.
+* Both evaluations must belong to the same app.
+* @example
+* getAppEvaluationComparisonXml(
+*   "abcdefghijklmnopq",
+*   "abcdefghijklmnopq"
+* )
+*
+* @param baselineId The unique identifier of the baseline app evaluation.
+* @param comparisonId The unique identifier of the comparison app evaluation.
+* @throws GetAppEvaluationComparisonXmlHttpError
+*/
+async function getAppEvaluationComparisonXml(baselineId, comparisonId, options) {
+	return invokeFetch("analytics/apps", {
+		method: "get",
+		pathTemplate: "/api/analytics/apps/evaluations/{baselineId}/compare/{comparisonId}/actions/download",
+		pathVariables: {
+			baselineId,
+			comparisonId
+		},
+		options
+	});
+}
+/**
+* Retrieves a single app evaluation by its unique identifier. Use the `all` parameter
+* to include full evaluation details in the response.
+*
+* @param id The unique identifier of the app evaluation to retrieve.
+* @param query an object with query parameters
+* @throws GetAppEvaluationHttpError
+*/
+async function getAppEvaluation(id, query, options) {
+	return invokeFetch("analytics/apps", {
+		method: "get",
+		pathTemplate: "/api/analytics/apps/evaluations/{id}",
+		pathVariables: { id },
+		query,
+		options
+	});
+}
+/**
+* Downloads the evaluation log for the specified app evaluation, defaulting to XML
+* format. Use the `Accept` header to request JSON output instead.
+* @example
+* getAppEvaluationXml(
+*   "abcdefghijklmnopq"
+* )
+*
+* @param id The unique identifier of the app evaluation to download.
+* @throws GetAppEvaluationXmlHttpError
+*/
+async function getAppEvaluationXml(id, options) {
+	return invokeFetch("analytics/apps", {
+		method: "get",
+		pathTemplate: "/api/analytics/apps/evaluations/{id}/actions/download",
+		pathVariables: { id },
+		options
+	});
+}
+/**
+* Restores a soft-deleted Qlik Cloud Analytics application to the same space with the same app ID, retaining the properties it had at the time of deletion.
+* This operation is available to the app owner and Tenant Admins. The app owner can restore the app only if the original space still exists and they still have delete permission in the space; otherwise, a 403 Forbidden error is returned.
+* Associated resources such as data alerts, subscriptions, collections, notes, and tags are deleted when the app is deleted and cannot be restored.
+*
+* @param appId Identifier of the app.
+* @throws RestoreAppHttpError
+*/
+async function restoreApp(appId, options) {
+	return invokeFetch("analytics/apps", {
+		method: "post",
+		pathTemplate: "/api/analytics/apps/{appId}/actions/restore",
+		pathVariables: { appId },
+		options
+	});
+}
+/**
+* Returns a paginated list of historical evaluations for the specified app. Use
+* the `next` and `prev` cursor values from the response links to navigate through
+* pages of results.
+*
+* @param guid The unique identifier of the app.
+* @param query an object with query parameters
+* @throws GetAppEvaluationsHttpError
+*/
+async function getAppEvaluations(guid, query, options) {
+	return invokeFetch("analytics/apps", {
+		method: "get",
+		pathTemplate: "/api/analytics/apps/{guid}/evaluations",
+		pathVariables: { guid },
+		query,
+		options
+	});
+}
+/**
+* Queues a performance and scalability evaluation for the specified app, scheduling
+* it for execution by the evaluation engine. The evaluation measures object response
+* times, CPU usage, document size, and data model metrics. Once queued, use the
+* returned `id` with the retrieval operations to poll for results.
+*
+* @param guid The unique identifier of the app to evaluate.
+* @param body an object with the body content
+* @throws CreateAppEvaluationWithBodyHttpError
+*/
+async function createAppEvaluationWithBody(guid, body, options) {
+	return invokeFetch("analytics/apps", {
+		method: "post",
+		pathTemplate: "/api/analytics/apps/{guid}/evaluations",
+		pathVariables: { guid },
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
+* Queues a performance and scalability evaluation for the specified app, scheduling
+* it for execution by the evaluation engine. The evaluation measures object response
+* times, CPU usage, document size, and data model metrics. Once queued, use the
+* returned `id` with the retrieval operations to poll for results.
+* @example
+* createAppEvaluation(
+*   "abcdefghijklmnopq"
+* )
+*
+* @param guid The unique identifier of the app to evaluate.
+* @throws CreateAppEvaluationHttpError
+*/
+async function createAppEvaluation(guid, options) {
+	return invokeFetch("analytics/apps", {
+		method: "post",
+		pathTemplate: "/api/analytics/apps/{guid}/evaluations",
+		pathVariables: { guid },
+		options
+	});
+}
+/**
+* Clears the cache for analytics/apps api requests.
+*/
+function clearCache() {
+	return clearApiCache("analytics/apps");
+}
+/**
+* Functions for the apps api
+*/
+const appsExport = {
+	getAppEvaluationComparison,
+	getAppEvaluationComparisonXml,
+	getAppEvaluation,
+	getAppEvaluationXml,
+	restoreApp,
+	getAppEvaluations,
+	createAppEvaluationWithBody,
+	createAppEvaluation,
+	clearCache
+};
+
+export { createAppEvaluationWithBody as a, getAppEvaluationComparisonXml as c, restoreApp as d, createAppEvaluation as i, getAppEvaluationXml as l, apps_exports as n, getAppEvaluation as o, clearCache as r, getAppEvaluationComparison as s, appsExport as t, getAppEvaluations as u };

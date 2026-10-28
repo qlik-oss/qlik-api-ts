@@ -1,6 +1,5 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/apps.d.ts
+import { D as PageCallOptions, w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type Analysis = "breakdown" | "changePoint" | "comparison" | "contribution" | "correlation" | "fact" | "mutualInfo" | "rank" | "spike" | "trend" | "values";
 export type AnalysisComposition = {
   description?: {
@@ -219,13 +218,6 @@ export type Error = {
 };
 export type Errors = {
   errors?: Error[];
-};
-export type EvaluatorError = {
-  errors?: {
-    code?: string;
-    status?: number;
-    title?: string;
-  }[];
 };
 export type FieldAttrType = "U" | "A" | "I" | "R" | "F" | "M" | "D" | "T" | "TS" | "IV";
 /**
@@ -1125,146 +1117,6 @@ export type UpdateSpace = {
 };
 export type UsageEnum = "ANALYTICS" | "DATA_PREPARATION" | "DATAFLOW_PREP" | "SINGLE_TABLE_PREP" | "DIRECT_QUERY_MODE";
 export type UserPrivileges = "can_create_app" | "can_import_app" | "can_create_session_app";
-export type Classification = {
-  absoluteDiff?: number;
-  diff?: number;
-  trend?: string;
-};
-export type Cmpbool = Classification & {
-  baseline?: boolean;
-  comparison?: boolean;
-};
-export type Cmpfloat = Classification & {
-  baseline?: number;
-  comparison?: number;
-};
-export type CmpfloatWithTimeout = Cmpfloat & {
-  baselineTimeoutStatusCode?: string;
-  comparisonTimeoutStatusCode?: string;
-};
-export type Cmpint = Classification & {
-  baseline?: number;
-  comparison?: number;
-};
-export type Comparison = {
-  appOpenTimeSeconds?: Cmpfloat;
-  dataModelSizeMib?: Cmpfloat;
-  documentSizeMib?: Cmpfloat;
-  fileSizeMib?: Cmpfloat;
-  hasSectionAccess?: Cmpbool;
-  maxMemoryMib?: Cmpfloat;
-  objHeavy?: Sortedcomparisonoobjheavy;
-  objMemoryLimit?: ComparisonobjMemoryLimit;
-  objNoCache?: Sortedcomparisonobjresponsetime;
-  objSingleThreaded?: Sortedcomparisonobjresponsetime;
-  objSlowCached?: Sortedcomparisonobjresponsetime;
-  objSlowUncached?: Sortedcomparisonobjresponsetime;
-  objectCount?: Cmpint;
-  rowCount?: Cmpint;
-  sheetCount?: Cmpint;
-  sheetsCached?: Sortedcomparisonobjresponsetime;
-  sheetsUncached?: Sortedcomparisonobjresponsetime;
-  topFieldsByBytes?: Sortedcomparisonfields;
-  topTablesByBytes?: Sortedcomparisontables;
-};
-export type Comparisonfields = (Objecttopspec & {
-  byte_size?: Cmpint;
-  cardinal?: Cmpint;
-  dataSourceStatus?: "full" | "none" | "baselinemissing" | "comparisonmissing";
-  is_system?: Cmpbool;
-  name?: string;
-  total_count?: Cmpint;
-})[];
-export type ComparisonobjMemoryLimit = (Objectspec & {
-  baselineMemoryLimitStatusCode?: string;
-  comparisonMemoryLimitStatusCode?: string;
-  dataSourceStatus?: "full" | "none" | "baselinemissing" | "comparisonmissing";
-})[];
-export type Comparisonobjresponsetime = (Objectspec & {
-  dataSourceStatus?: "full" | "none" | "baselinemissing" | "comparisonmissing";
-  responseTimeSeconds1?: CmpfloatWithTimeout;
-  responseTimeSeconds2?: CmpfloatWithTimeout;
-})[];
-export type Comparisonoobjheavy = (Objectspec & {
-  cpuQuotient1?: Cmpfloat;
-  cpuQuotient2?: Cmpfloat;
-  cpuSeconds1?: Cmpfloat;
-  cpuSeconds2?: Cmpfloat;
-  dataSourceStatus?: "full" | "none" | "baselinemissing" | "comparisonmissing";
-})[];
-export type Comparisontables = (Objecttopspec & {
-  byte_size?: Cmpint;
-  dataSourceStatus?: "full" | "none" | "baselinemissing" | "comparisonmissing";
-  is_system?: Cmpbool;
-  name?: string;
-  no_of_rows?: Cmpint;
-})[];
-export type Evaluation = {
-  appId?: string;
-  appItemId?: string;
-  appName?: string;
-  details?: {
-    concurrentReload?: boolean;
-    /** @deprecated */
-    dedicated?: boolean;
-    engineHasCache?: boolean;
-    errors?: string[];
-    objectMetrics?: Record<string, Resultentry>;
-    warnings?: string[];
-  };
-  ended?: string;
-  events?: Event[];
-  id?: string;
-  metadata?: Metadata;
-  result?: Result;
-  sheetId?: string;
-  sheetTitle?: string;
-  started?: string;
-  status?: string;
-  tenantId?: string;
-  timestamp?: string;
-  version?: number;
-};
-export type Evaluations = {
-  data?: Evaluation[];
-  links?: {
-    next?: {
-      href?: Href;
-    };
-    prev?: {
-      href?: Href;
-    };
-  };
-};
-export type Event = {
-  details?: string;
-  errorCode?: string;
-  objectId?: string;
-  objectTitle?: string;
-  objectType?: string;
-  objectVisualization?: string;
-  severity?: string;
-  sheetId?: string;
-  sheetTitle?: string;
-};
-/**
- * @example
- * "/api/v1/evaluations/appId=a84c22cf-31e5-41fe-9e8f-544b85513484&prev=5f5201908b3fc5fc132dbd35"
- */
-export type Href2 = string;
-export type Metadata = {
-  amountofcardinalfieldvalues?: number;
-  amountoffields?: number;
-  amountoffieldvalues?: number;
-  amountofrows?: number;
-  amountoftables?: number;
-  hassectionaccess?: boolean;
-  reloadmeta?: {
-    cpuspent?: number;
-    peakmemorybytes?: number;
-  };
-  staticbytesize?: number;
-};
 export type NumberFormat = {
   qDec?: string;
   qFmt?: string;
@@ -1272,95 +1124,6 @@ export type NumberFormat = {
   qType?: string;
   qUseThou?: number;
   qnDec?: number;
-};
-export type Objectmetrics = {
-  cpuQuotients?: number[];
-  cpuSeconds?: number[];
-  responseTimeSeconds?: number;
-};
-export type Objectspec = {
-  id?: string;
-  objectType?: string;
-  sheetId?: string;
-  title?: string;
-};
-export type Objecttopspec = {
-  byte_size?: number;
-  is_system?: boolean;
-  name?: string;
-};
-export type Result = {
-  documentSizeMiB?: number;
-  hasSectionAccess?: boolean;
-  objMemoryLimit?: ResultobjMemoryLimit[];
-  objNoCache?: Resultobjresponsetime[];
-  objSingleThreaded?: Resultsingle[];
-  objSlowCached?: Resultobjresponsetime[];
-  objSlowUncached?: Resultobjresponsetime[];
-  objectCount?: number;
-  rowCount?: number;
-  sheetCount?: number;
-  sheets?: Resultobjsheet[];
-  topFieldsByBytes?: Resultmetadatatopfields[];
-  topTablesByBytes?: Resultmetadatatoptables[];
-};
-export type Resultentry = Objectspec & {
-  passes?: Objectmetrics[];
-};
-export type Resultmetadatatopfields = Objecttopspec & {
-  byte_size?: number;
-  name?: string;
-};
-export type Resultmetadatatoptables = Objecttopspec & {
-  byte_size?: number;
-  name?: string;
-};
-export type ResultobjMemoryLimit = Objectspec & {
-  memoryLimitStatusCode?: string;
-};
-export type Resultobjresponsetime = Objectspec & {
-  responseTimeSeconds?: number;
-  timeoutStatusCode?: string;
-};
-export type Resultobjsheet = {
-  objectCount?: number;
-  sheet?: Resultobjresponsetime;
-  sheetObjects?: Resultobjresponsetime[];
-};
-export type Resultsingle = Objectspec & {
-  cpuQuotient1?: number;
-};
-export type Sortedcomparisonfields = {
-  absoluteDiffAsc?: Comparisonfields;
-  absoluteDiffDesc?: Comparisonfields;
-  dataSourceStatus?: "full" | "none" | "baselinemissing" | "comparisonmissing";
-  list?: Comparisonfields;
-  relativeDiffAsc?: Comparisonfields;
-  relativeDiffDesc?: Comparisonfields;
-};
-export type Sortedcomparisonobjresponsetime = {
-  absoluteDiffAsc?: Comparisonobjresponsetime;
-  absoluteDiffDesc?: Comparisonobjresponsetime;
-  dataSourceStatus?: "full" | "none" | "baselinemissing" | "comparisonmissing";
-  list?: Comparisonobjresponsetime;
-  relativeDiffAsc?: Comparisonobjresponsetime;
-  relativeDiffDesc?: Comparisonobjresponsetime;
-};
-export type Sortedcomparisonoobjheavy = {
-  absoluteDiffAsc?: Comparisonoobjheavy;
-  absoluteDiffDesc?: Comparisonoobjheavy;
-  dataSourceStatus?: "full" | "none" | "baselinemissing" | "comparisonmissing";
-  list?: Comparisonoobjheavy;
-  relativeDiffAsc?: Comparisonoobjheavy;
-  relativeDiffDesc?: Comparisonoobjheavy;
-};
-export type Sortedcomparisontables = {
-  absoluteDiffAsc?: Comparisontables;
-  absoluteDiffDesc?: Comparisontables;
-  dataSourceStatus?: "full" | "none" | "baselinemissing" | "comparisonmissing";
-  list?: Comparisontables;
-  relativeDiffAsc?: Comparisontables;
-  relativeDiffDesc?: Comparisontables;
 };
 /**
  * Creates a new app.
@@ -1378,105 +1141,6 @@ export type CreateAppHttpError = {
   data: unknown;
   headers: Headers;
   status: number;
-};
-/**
- * @deprecated
- *
- * Accepts two evaluation ids and returns a comparison denoting the differences between the two.
- *
- * @param baseid Id of the baseline evaluation
- * @param comparisonid Id of the comparison evaluation
- * @param query an object with query parameters
- * @throws GetAppEvaluationComparisonHttpError
- */
-export declare function getAppEvaluationComparison(baseid: string, comparisonid: string, query: {
-  /** Get the full list of comparisons including non-significant diffs */
-  all?: boolean;
-  /** Specify output format, currently supported are 'json' and 'xml' */
-  format?: string;
-}, options?: ApiCallOptions): Promise<GetAppEvaluationComparisonHttpResponse>;
-export type GetAppEvaluationComparisonHttpResponse = {
-  data: Comparison;
-  headers: Headers;
-  status: 200;
-};
-export type GetAppEvaluationComparisonHttpError = {
-  data: EvaluatorError;
-  headers: Headers;
-  status: 404 | 500;
-};
-/**
- * @deprecated
- *
- * Accepts two evaluation ids and downloads a log, in XML format, denoting the differences between the two.
- * @example
- * getAppEvaluationComparisonXml(
- *   "abcdefghijklmnopq",
- *   "abcdefghijklmnopq"
- * )
- *
- * @param baseid Id of the baseline evaluation
- * @param comparisonid Id of the comparison evaluation
- * @throws GetAppEvaluationComparisonXmlHttpError
- */
-export declare function getAppEvaluationComparisonXml(baseid: string, comparisonid: string, options?: ApiCallOptions): Promise<GetAppEvaluationComparisonXmlHttpResponse>;
-export type GetAppEvaluationComparisonXmlHttpResponse = {
-  data: Comparison;
-  headers: Headers;
-  status: 200;
-};
-export type GetAppEvaluationComparisonXmlHttpError = {
-  data: EvaluatorError;
-  headers: Headers;
-  status: 404 | 500;
-};
-/**
- * @deprecated
- *
- * Find an evaluation by a specific id.
- *
- * @param id Id of the desired evaluation.
- * @param query an object with query parameters
- * @throws GetAppEvaluationHttpError
- */
-export declare function getAppEvaluation(id: string, query: {
-  /** Get the full data of the evaluation */
-  all?: boolean;
-  /** Specify output format, currently supported are 'json' and 'xml' */
-  format?: string;
-}, options?: ApiCallOptions): Promise<GetAppEvaluationHttpResponse>;
-export type GetAppEvaluationHttpResponse = {
-  data: Evaluation;
-  headers: Headers;
-  status: 200;
-};
-export type GetAppEvaluationHttpError = {
-  data: EvaluatorError;
-  headers: Headers;
-  status: 404 | 500;
-};
-/**
- * @deprecated
- *
- * Find and download an evaluation log by a specific evaluation id.
- * @example
- * getAppEvaluationXml(
- *   "abcdefghijklmnopq"
- * )
- *
- * @param id Id of the desired evaluation.
- * @throws GetAppEvaluationXmlHttpError
- */
-export declare function getAppEvaluationXml(id: string, options?: ApiCallOptions): Promise<GetAppEvaluationXmlHttpResponse>;
-export type GetAppEvaluationXmlHttpResponse = {
-  data: Evaluation;
-  headers: Headers;
-  status: 200;
-};
-export type GetAppEvaluationXmlHttpError = {
-  data: EvaluatorError;
-  headers: Headers;
-  status: 404 | 500;
 };
 /**
  * Imports an app into the system.
@@ -1686,8 +1350,8 @@ export type GetAppInsightAnalysesHttpResponse = {
   data: AnalysisDescriptorResponse;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetAppInsightAnalysesHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetAppInsightAnalysesHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetAppInsightAnalysesHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetAppInsightAnalysesHttpResponse>;
 };
 export type GetAppInsightAnalysesHttpError = {
   data: Errors;
@@ -1723,8 +1387,8 @@ export type GetAppInsightAnalysisModelHttpResponse = {
   data: AnalysisModelResponse;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetAppInsightAnalysisModelHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetAppInsightAnalysisModelHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetAppInsightAnalysisModelHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetAppInsightAnalysisModelHttpResponse>;
 };
 export type GetAppInsightAnalysisModelHttpError = {
   data: Errors;
@@ -2053,8 +1717,8 @@ export type GetAppReportFiltersHttpResponse = {
   data: FilterList;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetAppReportFiltersHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetAppReportFiltersHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetAppReportFiltersHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetAppReportFiltersHttpResponse>;
 };
 export type GetAppReportFiltersHttpError = {
   data: FilterErrors;
@@ -2200,8 +1864,8 @@ export type GetAppScriptHistoryHttpResponse = {
   data: ScriptMetaList;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetAppScriptHistoryHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetAppScriptHistoryHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetAppScriptHistoryHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetAppScriptHistoryHttpResponse>;
 };
 export type GetAppScriptHistoryHttpError = {
   data: unknown;
@@ -2319,67 +1983,6 @@ export type MoveAppToSpaceHttpError = {
   status: number;
 };
 /**
- * @deprecated
- *
- * Find all evaluations for an app GUID.
- * Supports paging via next, prev which are sent in the response body
- *
- * @param guid The app guid.
- * @param query an object with query parameters
- * @throws GetAppEvaluationsHttpError
- */
-export declare function getAppEvaluations(guid: string, query: {
-  /** Get the full data of the evaluation */
-  all?: boolean;
-  /** Add file transfer headers to response */
-  fileMode?: boolean;
-  /** Specify output format, currently supported are 'json' and 'xml' */
-  format?: string;
-  /** Number of results to return per page. */
-  limit?: number;
-  /** The app evaluation id to get next page from */
-  next?: string;
-  /** The app evaluation id to get previous page from */
-  prev?: string;
-  /** Property to sort list on */
-  sort?: string;
-}, options?: ApiCallOptions): Promise<GetAppEvaluationsHttpResponse>;
-export type GetAppEvaluationsHttpResponse = {
-  data: Evaluations;
-  headers: Headers;
-  status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetAppEvaluationsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetAppEvaluationsHttpResponse>;
-};
-export type GetAppEvaluationsHttpError = {
-  data: EvaluatorError;
-  headers: Headers;
-  status: 400 | 404 | 500;
-};
-/**
- * @deprecated
- *
- * Queue an app evaluation by its app guid.
- * @example
- * queueAppEvaluation(
- *   "abcdefghijklmnopq"
- * )
- *
- * @param guid Guid of the app.
- * @throws QueueAppEvaluationHttpError
- */
-export declare function queueAppEvaluation(guid: string, options?: ApiCallOptions): Promise<QueueAppEvaluationHttpResponse>;
-export type QueueAppEvaluationHttpResponse = {
-  data: Evaluation;
-  headers: Headers;
-  status: 201;
-};
-export type QueueAppEvaluationHttpError = {
-  data: EvaluatorError;
-  headers: Headers;
-  status: 400 | 403 | 404 | 500;
-};
-/**
  * Clears the cache for apps api requests.
  */
 export declare function clearCache(): void;
@@ -2391,55 +1994,6 @@ export type AppsAPI = {
    * @throws CreateAppHttpError
    */
   createApp: typeof createApp;
-  /**
-   * @deprecated
-   *
-   * Accepts two evaluation ids and returns a comparison denoting the differences between the two.
-   *
-   * @param baseid Id of the baseline evaluation
-   * @param comparisonid Id of the comparison evaluation
-   * @param query an object with query parameters
-   * @throws GetAppEvaluationComparisonHttpError
-   */
-  getAppEvaluationComparison: typeof getAppEvaluationComparison;
-  /**
-   * @deprecated
-   *
-   * Accepts two evaluation ids and downloads a log, in XML format, denoting the differences between the two.
-   * @example
-   * getAppEvaluationComparisonXml(
-   *   "abcdefghijklmnopq",
-   *   "abcdefghijklmnopq"
-   * )
-   *
-   * @param baseid Id of the baseline evaluation
-   * @param comparisonid Id of the comparison evaluation
-   * @throws GetAppEvaluationComparisonXmlHttpError
-   */
-  getAppEvaluationComparisonXml: typeof getAppEvaluationComparisonXml;
-  /**
-   * @deprecated
-   *
-   * Find an evaluation by a specific id.
-   *
-   * @param id Id of the desired evaluation.
-   * @param query an object with query parameters
-   * @throws GetAppEvaluationHttpError
-   */
-  getAppEvaluation: typeof getAppEvaluation;
-  /**
-   * @deprecated
-   *
-   * Find and download an evaluation log by a specific evaluation id.
-   * @example
-   * getAppEvaluationXml(
-   *   "abcdefghijklmnopq"
-   * )
-   *
-   * @param id Id of the desired evaluation.
-   * @throws GetAppEvaluationXmlHttpError
-   */
-  getAppEvaluationXml: typeof getAppEvaluationXml;
   /**
    * Imports an app into the system.
    *
@@ -2785,30 +2339,6 @@ export type AppsAPI = {
    */
   moveAppToSpace: typeof moveAppToSpace;
   /**
-   * @deprecated
-   *
-   * Find all evaluations for an app GUID.
-   * Supports paging via next, prev which are sent in the response body
-   *
-   * @param guid The app guid.
-   * @param query an object with query parameters
-   * @throws GetAppEvaluationsHttpError
-   */
-  getAppEvaluations: typeof getAppEvaluations;
-  /**
-   * @deprecated
-   *
-   * Queue an app evaluation by its app guid.
-   * @example
-   * queueAppEvaluation(
-   *   "abcdefghijklmnopq"
-   * )
-   *
-   * @param guid Guid of the app.
-   * @throws QueueAppEvaluationHttpError
-   */
-  queueAppEvaluation: typeof queueAppEvaluation;
-  /**
    * Clears the cache for apps api requests.
    */
   clearCache: typeof clearCache;
@@ -2817,5 +2347,4 @@ export type AppsAPI = {
  * Functions for the apps api
  */
 declare const appsExport: AppsAPI;
-//#endregion
 export { appsExport as default };

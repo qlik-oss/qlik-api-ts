@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/data-files.ts
+// src/public/rest/data-files.ts
 /**
 * Get descriptive info for the specified data files.
 * @example
@@ -267,5 +267,4 @@ const dataFilesExport = {
 	clearCache
 };
 
-//#endregion
 export { changeDataFileOwner, clearCache, dataFilesExport as default, deleteDataFile, deleteDataFiles, getDataFile, getDataFileConnection, getDataFiles, getDataFilesConnections, getDataFilesQuotas, moveDataFile, moveDataFiles, reuploadDataFile, uploadDataFile };

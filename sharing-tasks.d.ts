@@ -1,6 +1,5 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/sharing-tasks.d.ts
+import { D as PageCallOptions, w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type APISettingsUpload = {
   /** Whether API endpoints for sharing are enabled */
   "enable-sharing": boolean;
@@ -803,8 +802,8 @@ export type GetSharingTasksHttpResponse = {
   data: SharingTaskRecurringListResponse;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetSharingTasksHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetSharingTasksHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetSharingTasksHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetSharingTasksHttpResponse>;
 };
 export type GetSharingTasksHttpError = {
   data: Errors;
@@ -993,8 +992,8 @@ export type GetSharingTaskExecutionsHttpResponse = {
   data: SharingExecutionListResponse;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetSharingTaskExecutionsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetSharingTaskExecutionsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetSharingTaskExecutionsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetSharingTaskExecutionsHttpResponse>;
 };
 export type GetSharingTaskExecutionsHttpError = {
   data: Errors;
@@ -1158,5 +1157,4 @@ export type SharingTasksAPI = {
  * Functions for the sharing-tasks api
  */
 declare const sharingTasksExport: SharingTasksAPI;
-//#endregion
 export { sharingTasksExport as default };

@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/dcaas.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type ApiSpecResponse = {
   /** List of properties required for the given datasource */
   connectionProperties: unknown;
@@ -188,5 +187,4 @@ export type DcaasAPI = {
  * Functions for the dcaas api
  */
 declare const dcaasExport: DcaasAPI;
-//#endregion
 export { dcaasExport as default };

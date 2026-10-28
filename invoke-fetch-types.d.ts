@@ -1,2 +1,2 @@
-import { C as CacheOptions, D as PartialProgressEvent, E as InvokeFetchResponse, O as ProgressOptions, S as CacheEntry, T as InvokeFetchProperties, k as _default, w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-export { ApiCallOptions, CacheEntry, CacheOptions, DownloadableBlob, InvokeFetchProperties, InvokeFetchResponse, PartialProgressEvent, ProgressOptions, _default as default };
+import { A as _default, C as CacheOptions, D as PageCallOptions, E as InvokeFetchResponse, O as PartialProgressEvent, S as CacheEntry, T as InvokeFetchProperties, k as ProgressOptions, w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+export { ApiCallOptions, CacheEntry, CacheOptions, DownloadableBlob, InvokeFetchProperties, InvokeFetchResponse, PageCallOptions, PartialProgressEvent, ProgressOptions, _default as default };

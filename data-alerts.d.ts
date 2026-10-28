@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/data-alerts.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type AlertingActionsTriggerCreateRequest = {
   /** Identifier of the alerting task to trigger. */
   alertingTaskID: string;
@@ -544,8 +543,8 @@ export type GetDataAlertsHttpResponse = {
   data: AlertingTaskListResponse;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetDataAlertsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetDataAlertsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetDataAlertsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetDataAlertsHttpResponse>;
 };
 export type GetDataAlertsHttpError = {
   data: Errors;
@@ -817,8 +816,8 @@ export type GetDataAlertExecutionsHttpResponse = {
   data: AlertingExecutionListResponse;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetDataAlertExecutionsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetDataAlertExecutionsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetDataAlertExecutionsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetDataAlertExecutionsHttpResponse>;
 };
 export type GetDataAlertExecutionsHttpError = {
   data: Errors;
@@ -842,8 +841,8 @@ export type GetDataAlertExecutionsStatsHttpResponse = {
   data: AlertingTaskExecutionStats;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetDataAlertExecutionsStatsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetDataAlertExecutionsStatsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetDataAlertExecutionsStatsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetDataAlertExecutionsStatsHttpResponse>;
 };
 export type GetDataAlertExecutionsStatsHttpError = {
   data: Errors;
@@ -1002,5 +1001,4 @@ export type DataAlertsAPI = {
  * Functions for the data-alerts api
  */
 declare const dataAlertsExport: DataAlertsAPI;
-//#endregion
 export { dataAlertsExport as default };

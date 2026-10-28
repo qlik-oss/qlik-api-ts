@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/automation-connectors.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type AutomationConnectorsList = {
   data?: AutomationConnectorsListObject[];
   links?: Links;
@@ -65,8 +64,8 @@ export type GetAutomationConnectorsHttpResponse = {
   data: AutomationConnectorsList;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetAutomationConnectorsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetAutomationConnectorsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetAutomationConnectorsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetAutomationConnectorsHttpResponse>;
 };
 export type GetAutomationConnectorsHttpError = {
   data: ErrorResponse;
@@ -96,5 +95,4 @@ export type AutomationConnectorsAPI = {
  * Functions for the automation-connectors api
  */
 declare const automationConnectorsExport: AutomationConnectorsAPI;
-//#endregion
 export { automationConnectorsExport as default };

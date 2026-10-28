@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/encryption.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * @example
  * {
@@ -367,5 +366,4 @@ export type EncryptionAPI = {
  * Functions for the encryption api
  */
 declare const encryptionExport: EncryptionAPI;
-//#endregion
 export { encryptionExport as default };

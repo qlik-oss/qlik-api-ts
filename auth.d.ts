@@ -1,5 +1,4 @@
-import { _ as authTypesThatCanBeOmitted, a as Credentials, c as GetWebResourceAuthParamsProps, d as HostConfig, f as HostConfigCommon, g as WebSocketAuthParams, h as WebResourceAuthParams, i as AuthenticationErrorAction, l as GetWebSocketAuthParamsProps, m as RestCallAuthParams, n as AuthType, o as GetRemoteAuthDataProps, p as PfxAuthOptions, r as AuthTypeThatCanBeOmitted, s as GetRestCallAuthParamsProps, t as AuthModule, u as HandleAuthenticationErrorProps, v as hostConfigCommonProperties } from "./chunks/auth-types-PqpGAZ9_.js";
-//#region src/public/auth.d.ts
+import { _ as authTypesThatCanBeOmitted, a as Credentials, c as GetWebResourceAuthParamsProps, d as HostConfig, f as HostConfigCommon, g as WebSocketAuthParams, h as WebResourceAuthParams, i as AuthenticationErrorAction, l as GetWebSocketAuthParamsProps, m as RestCallAuthParams, n as AuthType, o as GetRemoteAuthDataProps, p as PfxAuthOptions, r as AuthTypeThatCanBeOmitted, s as GetRestCallAuthParamsProps, t as AuthModule, u as HandleAuthenticationErrorProps, v as hostConfigCommonProperties } from "./chunks/auth-types-YxQFXW5F.js";
 /**
  * Registers an auth module that can handle authentication. An auth module is used by specifying its name as authType in the HostConfig passed in to api calls.
  * @param name the name of the module
@@ -85,5 +84,4 @@ declare const _default: {
   getAccessToken: typeof getAccessToken;
   getWebResourceAuthParams: typeof getWebResourceAuthParams;
 };
-//#endregion
 export { type AuthModule, type AuthType, type AuthTypeThatCanBeOmitted, type AuthenticationErrorAction, type Credentials, type GetRemoteAuthDataProps, type GetRestCallAuthParamsProps, type GetWebResourceAuthParamsProps, type GetWebSocketAuthParamsProps, type HandleAuthenticationErrorProps, type HostConfig, type HostConfigCommon, type PfxAuthOptions, type RestCallAuthParams, type WebResourceAuthParams, type WebSocketAuthParams, type authTypesThatCanBeOmitted, _default as default, type hostConfigCommonProperties };

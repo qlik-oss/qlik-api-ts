@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/report-templates.ts
+// src/public/rest/report-templates.ts
 /**
 * Get descriptive info for the specified templates.
 * @example
@@ -134,5 +134,4 @@ const reportTemplatesExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createReportTemplate, reportTemplatesExport as default, deleteReportTemplate, downloadReportTemplate, getReportTemplate, getReportTemplates, patchReportTemplate, updateReportTemplate };

@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/tasks.ts
+// src/public/rest/tasks.ts
 /**
 * Retrieves a list of the tasks that the requesting user has access to.
 *
@@ -180,5 +180,4 @@ const tasksExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createTask, tasksExport as default, deleteTask, getLastTaskRun, getTask, getTaskRunLog, getTaskRuns, getTasks, getTasksResourceRuns, startTask, updateTask };

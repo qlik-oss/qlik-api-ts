@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/web-notifications.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * An error object.
  */
@@ -114,8 +113,8 @@ export type GetNotificationsHttpResponse = {
   data: Notifications;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetNotificationsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetNotificationsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetNotificationsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetNotificationsHttpResponse>;
 };
 export type GetNotificationsHttpError = {
   data: Errors;
@@ -269,5 +268,4 @@ export type WebNotificationsAPI = {
  * Functions for the web-notifications api
  */
 declare const webNotificationsExport: WebNotificationsAPI;
-//#endregion
 export { webNotificationsExport as default };

@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/spaces.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * The supported actions for user-created spaces.
  */
@@ -308,8 +307,8 @@ export type GetSpacesHttpResponse = {
   data: Spaces;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetSpacesHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetSpacesHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetSpacesHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetSpacesHttpResponse>;
 };
 export type GetSpacesHttpError = {
   data: Errors;
@@ -442,8 +441,8 @@ export type GetSpaceAssignmentsHttpResponse = {
   data: Assignments;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetSpaceAssignmentsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetSpaceAssignmentsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetSpaceAssignmentsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetSpaceAssignmentsHttpResponse>;
 };
 export type GetSpaceAssignmentsHttpError = {
   data: Errors;
@@ -554,8 +553,8 @@ export type GetSpaceSharesHttpResponse = {
   data: Shares;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetSpaceSharesHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetSpaceSharesHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetSpaceSharesHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetSpaceSharesHttpResponse>;
 };
 export type GetSpaceSharesHttpError = {
   data: Errors;
@@ -781,5 +780,4 @@ export type SpacesAPI = {
  * Functions for the spaces api
  */
 declare const spacesExport: SpacesAPI;
-//#endregion
 export { spacesExport as default };

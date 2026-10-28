@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/notifications.ts
+// src/public/rest/notifications.ts
 /**
 * List all supported notifications
 *
@@ -29,5 +29,4 @@ const notificationsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, notificationsExport as default, getNotifications };

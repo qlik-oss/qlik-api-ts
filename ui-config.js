@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/ui-config.ts
+// src/public/rest/ui-config.ts
 /**
 * Retrieves a list of all pinned links. All users can list pinned links. This endpoint does not support pagination as a tenant can have a maximum of 50 pinned links at one time.
 *
@@ -120,5 +120,4 @@ const uiConfigExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createUiConfigPinnedLink, createUiConfigPinnedLinks, uiConfigExport as default, deleteAllUiConfigPinnedLinks, deleteUiConfigPinnedLink, getUiConfigPinnedLink, getUiConfigPinnedLinks, patchUiConfigPinnedLink };

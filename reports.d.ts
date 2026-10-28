@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/reports.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * Error in resource handling
  */
@@ -803,8 +802,8 @@ export type GetReportOutputsHttpResponse = {
   data: OutputList;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetReportOutputsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetReportOutputsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetReportOutputsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetReportOutputsHttpResponse>;
 };
 export type GetReportOutputsHttpError = {
   data: Error;
@@ -865,5 +864,4 @@ export type ReportsAPI = {
  * Functions for the reports api
  */
 declare const reportsExport: ReportsAPI;
-//#endregion
 export { reportsExport as default };

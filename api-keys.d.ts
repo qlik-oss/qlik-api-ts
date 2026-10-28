@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/api-keys.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type ApiKey = {
   /** When the API key was created. */
   readonly created?: string;
@@ -179,8 +178,8 @@ export type GetApiKeysHttpResponse = {
   data: ApiKeyPage;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetApiKeysHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetApiKeysHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetApiKeysHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetApiKeysHttpResponse>;
 };
 export type GetApiKeysHttpError = {
   data: Errors;
@@ -358,5 +357,4 @@ export type ApiKeysAPI = {
  * Functions for the api-keys api
  */
 declare const apiKeysExport: ApiKeysAPI;
-//#endregion
 export { apiKeysExport as default };

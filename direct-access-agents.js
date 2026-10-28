@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/direct-access-agents.ts
+// src/public/rest/direct-access-agents.ts
 /**
 * @deprecated
 *
@@ -367,5 +367,4 @@ const directAccessAgentsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createDirectAccessAgentBenchmark, createDirectAccessAgentBenchmarkCancel, directAccessAgentsExport as default, getDirectAccessAgentBenchmark, getDirectAccessAgentConfiguration, getDirectAccessAgentConnectorFile, getDirectAccessAgentConnectorFiles, getDirectAccessAgentConnectorFilesWithoutQuery, getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths, getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings, getDirectAccessAgentToolsMetricsCollectorConfiguration, patchDirectAccessAgentConfiguration, putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths, putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings, restartDirectAccessAgent, setDirectAccessAgentToolsMetricsCollectorConfiguration, updateDirectAccessAgentConnectorFile, updateDirectAccessAgentConnectorFileWithoutQuery };

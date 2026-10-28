@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/audits.ts
+// src/public/rest/audits.ts
 /**
 * Retrieves list of events for subscribed services for your tenant. Stores events for 90 days, after which they can be accessed via `/v1/audits/archive`.
 *
@@ -112,5 +112,4 @@ const auditsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, auditsExport as default, fetchConsumptionAppAudits, getArchivedAudits, getAudit, getAuditSources, getAuditTypes, getAudits, getAuditsSettings };

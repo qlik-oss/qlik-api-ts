@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/items.ts
+// src/public/rest/items.ts
 /**
 * Lists items that the user has access to.
 *
@@ -140,5 +140,4 @@ const itemsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, itemsExport as default, deleteItem, getItem, getItemCollections, getItems, getItemsSettings, getPublishedItems, patchItemsSettings, updateItem };

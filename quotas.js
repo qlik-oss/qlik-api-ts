@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/quotas.ts
+// src/public/rest/quotas.ts
 /**
 * Returns all quota items for the tenant (provided in JWT).
 *
@@ -46,5 +46,4 @@ const quotasExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, quotasExport as default, getQuota, getQuotas };

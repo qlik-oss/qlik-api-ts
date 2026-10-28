@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/reload-tasks.ts
+// src/public/rest/reload-tasks.ts
 /**
 * @deprecated
 *
@@ -103,5 +103,4 @@ const reloadTasksExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createReloadTask, reloadTasksExport as default, deleteReloadTask, getReloadTask, getReloadTasks, updateReloadTask };

@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/conditions.ts
+// src/public/rest/conditions.ts
 /**
 * Creates a new condition.
 *
@@ -194,5 +194,4 @@ const conditionsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createCondition, createConditionEvaluation, createConditionPreview, conditionsExport as default, deleteCondition, deleteConditionEvaluation, getCondition, getConditionEvaluation, getConditionPreview, getConditionsSettings, patchCondition, setConditionsSettings };

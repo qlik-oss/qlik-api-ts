@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/data-assets.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type BatchIdDto = {
   ids?: string[];
 };
@@ -205,5 +204,4 @@ export type DataAssetsAPI = {
  * Functions for the data-assets api
  */
 declare const dataAssetsExport: DataAssetsAPI;
-//#endregion
 export { dataAssetsExport as default };

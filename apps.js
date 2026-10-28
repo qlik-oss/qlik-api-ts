@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/apps.ts
+// src/public/rest/apps.ts
 /**
 * Creates a new app.
 *
@@ -13,91 +13,6 @@ async function createApp(body, options) {
 		pathTemplate: "/api/v1/apps",
 		body,
 		contentType: "application/json",
-		options
-	});
-}
-/**
-* @deprecated
-*
-* Accepts two evaluation ids and returns a comparison denoting the differences between the two.
-*
-* @param baseid Id of the baseline evaluation
-* @param comparisonid Id of the comparison evaluation
-* @param query an object with query parameters
-* @throws GetAppEvaluationComparisonHttpError
-*/
-async function getAppEvaluationComparison(baseid, comparisonid, query, options) {
-	return invokeFetch("apps", {
-		method: "get",
-		pathTemplate: "/api/v1/apps/evaluations/{baseid}/actions/compare/{comparisonid}",
-		pathVariables: {
-			baseid,
-			comparisonid
-		},
-		query,
-		options
-	});
-}
-/**
-* @deprecated
-*
-* Accepts two evaluation ids and downloads a log, in XML format, denoting the differences between the two.
-* @example
-* getAppEvaluationComparisonXml(
-*   "abcdefghijklmnopq",
-*   "abcdefghijklmnopq"
-* )
-*
-* @param baseid Id of the baseline evaluation
-* @param comparisonid Id of the comparison evaluation
-* @throws GetAppEvaluationComparisonXmlHttpError
-*/
-async function getAppEvaluationComparisonXml(baseid, comparisonid, options) {
-	return invokeFetch("apps", {
-		method: "get",
-		pathTemplate: "/api/v1/apps/evaluations/{baseid}/actions/compare/{comparisonid}/actions/download",
-		pathVariables: {
-			baseid,
-			comparisonid
-		},
-		options
-	});
-}
-/**
-* @deprecated
-*
-* Find an evaluation by a specific id.
-*
-* @param id Id of the desired evaluation.
-* @param query an object with query parameters
-* @throws GetAppEvaluationHttpError
-*/
-async function getAppEvaluation(id, query, options) {
-	return invokeFetch("apps", {
-		method: "get",
-		pathTemplate: "/api/v1/apps/evaluations/{id}",
-		pathVariables: { id },
-		query,
-		options
-	});
-}
-/**
-* @deprecated
-*
-* Find and download an evaluation log by a specific evaluation id.
-* @example
-* getAppEvaluationXml(
-*   "abcdefghijklmnopq"
-* )
-*
-* @param id Id of the desired evaluation.
-* @throws GetAppEvaluationXmlHttpError
-*/
-async function getAppEvaluationXml(id, options) {
-	return invokeFetch("apps", {
-		method: "get",
-		pathTemplate: "/api/v1/apps/evaluations/{id}/actions/download",
-		pathVariables: { id },
 		options
 	});
 }
@@ -819,45 +734,6 @@ async function moveAppToSpace(appId, body, options) {
 	});
 }
 /**
-* @deprecated
-*
-* Find all evaluations for an app GUID.
-* Supports paging via next, prev which are sent in the response body
-*
-* @param guid The app guid.
-* @param query an object with query parameters
-* @throws GetAppEvaluationsHttpError
-*/
-async function getAppEvaluations(guid, query, options) {
-	return invokeFetch("apps", {
-		method: "get",
-		pathTemplate: "/api/v1/apps/{guid}/evaluations",
-		pathVariables: { guid },
-		query,
-		options
-	});
-}
-/**
-* @deprecated
-*
-* Queue an app evaluation by its app guid.
-* @example
-* queueAppEvaluation(
-*   "abcdefghijklmnopq"
-* )
-*
-* @param guid Guid of the app.
-* @throws QueueAppEvaluationHttpError
-*/
-async function queueAppEvaluation(guid, options) {
-	return invokeFetch("apps", {
-		method: "post",
-		pathTemplate: "/api/v1/apps/{guid}/evaluations",
-		pathVariables: { guid },
-		options
-	});
-}
-/**
 * Clears the cache for apps api requests.
 */
 function clearCache() {
@@ -868,10 +744,6 @@ function clearCache() {
 */
 const appsExport = {
 	createApp,
-	getAppEvaluationComparison,
-	getAppEvaluationComparisonXml,
-	getAppEvaluation,
-	getAppEvaluationXml,
 	importApp,
 	getAppsPrivileges,
 	validateScript,
@@ -914,10 +786,7 @@ const appsExport = {
 	patchAppScript,
 	removeAppFromSpace,
 	moveAppToSpace,
-	getAppEvaluations,
-	queueAppEvaluation,
 	clearCache
 };
 
-//#endregion
-export { clearCache, copyApp, countAppReportFilters, createApp, createAppReportFilter, appsExport as default, deleteApp, deleteAppMedia, deleteAppPlacement, deleteAppReportFilter, deleteAppScript, exportApp, getAppDataLineage, getAppDataMetadata, getAppEvaluation, getAppEvaluationComparison, getAppEvaluationComparisonXml, getAppEvaluationXml, getAppEvaluations, getAppInfo, getAppInsightAnalyses, getAppInsightAnalysisModel, getAppInsightAnalysisRecommendations, getAppMedia, getAppMediaList, getAppPlacement, getAppReloadLog, getAppReloadLogs, getAppReloadMetadata, getAppReportFilter, getAppReportFilterWithQuery, getAppReportFilters, getAppScript, getAppScriptHistory, getAppThumbnail, getAppsPrivileges, importApp, moveAppToSpace, patchAppReportFilter, patchAppScript, publishApp, queueAppEvaluation, removeAppFromSpace, replaceAppPlacement, republishApp, updateAppInfo, updateAppObjectOwner, updateAppOwner, updateAppScript, uploadAppMedia, validateScript };
+export { clearCache, copyApp, countAppReportFilters, createApp, createAppReportFilter, appsExport as default, deleteApp, deleteAppMedia, deleteAppPlacement, deleteAppReportFilter, deleteAppScript, exportApp, getAppDataLineage, getAppDataMetadata, getAppInfo, getAppInsightAnalyses, getAppInsightAnalysisModel, getAppInsightAnalysisRecommendations, getAppMedia, getAppMediaList, getAppPlacement, getAppReloadLog, getAppReloadLogs, getAppReloadMetadata, getAppReportFilter, getAppReportFilterWithQuery, getAppReportFilters, getAppScript, getAppScriptHistory, getAppThumbnail, getAppsPrivileges, importApp, moveAppToSpace, patchAppReportFilter, patchAppScript, publishApp, removeAppFromSpace, replaceAppPlacement, republishApp, updateAppInfo, updateAppObjectOwner, updateAppOwner, updateAppScript, uploadAppMedia, validateScript };

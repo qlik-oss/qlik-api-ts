@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/data-credentials.ts
+// src/public/rest/data-credentials.ts
 /**
 * Gets list of orphan data credentials (i.e. credentials that are not associated to any data connection) filtering on properties defined in request body
 *
@@ -118,5 +118,4 @@ const dataCredentialsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, dataCredentialsExport as default, deleteDataCredential, filterOrphanedDataCredentials, getDataCredential, patchDataCredential, updateDataCredential };

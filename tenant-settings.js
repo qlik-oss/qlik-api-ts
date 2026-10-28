@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DI1iTaBB.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
 
-//#region src/public/rest/tenant-settings.ts
+// src/public/rest/tenant-settings.ts
 /**
 * Deletes the tenant settings associated with the tenant ID specified in JWT. This is access controlled by the permission admin.tenant-settings:delete.
 *
@@ -121,5 +121,4 @@ const tenantSettingsExport = {
 	clearCache
 };
 
-//#endregion
 export { clearCache, createTenantSettings, tenantSettingsExport as default, deleteTenantSettings, getStartPages, getTenantSettings, toggleCrossRegionDataProcessingTenantSettings, toggleCrossRegionInferenceTenantSettings, updateTenantSettings };

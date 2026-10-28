@@ -1,6 +1,5 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/themes.d.ts
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * An error object.
  */
@@ -268,5 +267,4 @@ export type ThemesAPI = {
  * Functions for the themes api
  */
 declare const themesExport: ThemesAPI;
-//#endregion
 export { themesExport as default };

@@ -1,6 +1,5 @@
-import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/extensions.d.ts
+import { w as DownloadableBlob, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * Object containing meta data regarding the bundle the extension belongs to. If it does not belong to a bundle, this object is not defined.
  */
@@ -293,5 +292,4 @@ export type ExtensionsAPI = {
  * Functions for the extensions api
  */
 declare const extensionsExport: ExtensionsAPI;
-//#endregion
 export { extensionsExport as default };

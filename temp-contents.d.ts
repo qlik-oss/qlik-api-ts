@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/temp-contents.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * An Error object.
  */
@@ -163,5 +162,4 @@ export type TempContentsAPI = {
  * Functions for the temp-contents api
  */
 declare const tempContentsExport: TempContentsAPI;
-//#endregion
 export { tempContentsExport as default };

@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/data-qualities.d.ts
+import { x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 /**
  * Response returned when a data quality computation is successfully triggered.
  */
@@ -200,5 +199,4 @@ export type DataQualitiesAPI = {
  * Functions for the data-qualities api
  */
 declare const dataQualitiesExport: DataQualitiesAPI;
-//#endregion
 export { dataQualitiesExport as default };

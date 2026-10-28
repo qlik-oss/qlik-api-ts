@@ -1,6 +1,5 @@
-import { x as ApiCallOptions } from "./chunks/auth-types-PqpGAZ9_.js";
-import "./chunks/invoke-fetch-CL7DhyRH.js";
-//#region src/public/rest/data-files.d.ts
+import { D as PageCallOptions, x as ApiCallOptions } from "./chunks/auth-types-YxQFXW5F.js";
+import "./chunks/invoke-fetch-BGcRWadc.js";
 export type BatchChangeSpaceItem = {
   /** The ID of the data file whose space will be changed. */
   id: string;
@@ -345,8 +344,8 @@ export type GetDataFilesHttpResponse = {
   data: GetDataFileInfosResponse;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetDataFilesHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetDataFilesHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetDataFilesHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetDataFilesHttpResponse>;
 };
 export type GetDataFilesHttpError = {
   data: ErrorResponse;
@@ -488,8 +487,8 @@ export type GetDataFilesConnectionsHttpResponse = {
   data: GetConnectionsResponse;
   headers: Headers;
   status: 200;
-  prev?: (options?: ApiCallOptions) => Promise<GetDataFilesConnectionsHttpResponse>;
-  next?: (options?: ApiCallOptions) => Promise<GetDataFilesConnectionsHttpResponse>;
+  prev?: (options?: PageCallOptions) => Promise<GetDataFilesConnectionsHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetDataFilesConnectionsHttpResponse>;
 };
 export type GetDataFilesConnectionsHttpError = {
   data: ErrorResponse;
@@ -856,5 +855,4 @@ export type DataFilesAPI = {
  * Functions for the data-files api
  */
 declare const dataFilesExport: DataFilesAPI;
-//#endregion
 export { dataFilesExport as default };
