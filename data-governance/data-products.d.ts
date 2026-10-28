@@ -145,13 +145,13 @@ export type DatasetsComputationResponse = {
 export type Error = {
   code?: string;
   detail?: string;
-  /** Optional structured context. `cycle` is present for `CIRCULAR_REFERENCE` errors. `dimensions` and `measures` contain semantic-model element IDs that reference inaccessible glossary entries for DP-101. */
+  /** Optional structured context. `cycle` is present for `CIRCULAR_REFERENCE` errors. `dimensions` and `measures` contain semantic-model element IDs: for DP-101 the elements referencing inaccessible glossary entries, for DP-103 the elements whose term-link snapshot could not be replayed, for DP-104 the elements whose submitted term-link snapshot was invalid. */
   meta?: {
     /** Present only for `CIRCULAR_REFERENCE` errors. The tables forming the detected cycle, in order (first and last entries repeated to close the loop). */
     cycle?: TableRef[];
-    /** Semantic-model dimension IDs linked to inaccessible glossary entries. Present only for DP-101. */
+    /** Semantic-model dimension IDs. For DP-101, dimensions linked to inaccessible glossary entries. For DP-103, dimensions whose captured Business Glossary term-link snapshot could no longer be replayed. For DP-104, dimensions whose submitted term-link snapshot was invalid. */
     dimensions?: string[];
-    /** Semantic-model measure IDs linked to inaccessible glossary entries. Present only for DP-101. */
+    /** Semantic-model measure IDs. For DP-101, measures linked to inaccessible glossary entries. For DP-103, measures whose captured Business Glossary term-link snapshot could no longer be replayed. For DP-104, measures whose submitted term-link snapshot was invalid. */
     measures?: string[];
   };
   status?: string;
