@@ -341,11 +341,6 @@ export type ErrorResponse = {
   traceId?: string;
 };
 export type ErrorResponseCode = {
-  code?: string;
-  detail?: string;
-  title?: string;
-};
-export type ErrorResponseCodeCopy = {
   /** Custom error codes
    * * AE-1 - Internal processing error
    * * AE-2 - Incorrect request
@@ -354,6 +349,11 @@ export type ErrorResponseCodeCopy = {
    * * AE-5 - Resource is not found
    * * AE-6 - API usage rate limit is exceeded
    * * AE-7 - Method is not allowed */
+  code?: string;
+  detail?: string;
+  title?: string;
+};
+export type ErrorResponseCodeCopy = {
   code?: string;
   detail?: string;
   title?: string;
@@ -411,6 +411,17 @@ export type InteractionsResult = {
   meta?: ResultMeta;
 };
 /**
+ * Structured image content of an image chunk. Only populated when the TLV_2536_MULTIMODAL_IMAGE feature flag is enabled for the tenant (and image chunks are returned at all); otherwise this property carries no `data` and the image, if any, is inlined into `text` as a `data:` URI. When `data` is present, `text` on the parent chunk holds the caption/context rather than the image bytes.
+ */
+export type KbChunkImage = {
+  /** Base64-encoded image bytes */
+  data?: string;
+  /** Whether the image is stored inline in the chunk */
+  inline?: boolean;
+  /** MIME type of the image, e.g. `image/jpeg` */
+  mimeType?: string;
+};
+/**
  * Metadata about the chunk
  */
 export type KbChunkMeta = {
@@ -420,10 +431,18 @@ export type KbChunkMeta = {
   datasourceId: string;
   /** documentId of chunk */
   documentId: string;
+  /** Structured image content of an image chunk. Only populated when the TLV_2536_MULTIMODAL_IMAGE feature flag is enabled for the tenant (and image chunks are returned at all); otherwise this property carries no `data` and the image, if any, is inlined into `text` as a `data:` URI. When `data` is present, `text` on the parent chunk holds the caption/context rather than the image bytes. */
+  image?: KbChunkImage;
+  /** Artifact ID of the image, present when the chunk is an image chunk */
+  imageArtifactId?: string;
+  /** Caption or surrounding text describing the image, present when the chunk is an image chunk */
+  imageContextText?: string;
   /** knowledgeBaseId of chunk */
   knowledgeBaseId: string;
   /** source of chunk */
   source: string;
+  /** Chunk type, e.g. `image`. Absent for plain text chunks */
+  type?: string;
 };
 export type PageLink = {
   href?: string;
@@ -555,7 +574,7 @@ export type GetAssistantsHttpResponse = {
   next?: (options?: PageCallOptions) => Promise<GetAssistantsHttpResponse>;
 };
 export type GetAssistantsHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403;
 };
@@ -572,7 +591,7 @@ export type CreateAssistantHttpResponse = {
   status: 201;
 };
 export type CreateAssistantHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403;
 };
@@ -590,7 +609,7 @@ export type SearchAssistantHttpResponse = {
   status: 200;
 };
 export type SearchAssistantHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 405 | 500;
 };
@@ -607,7 +626,7 @@ export type GetAssistantFeedbackHttpResponse = {
   status: 200;
 };
 export type GetAssistantFeedbackHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -625,7 +644,7 @@ export type GetAssistantSourcesHttpResponse = {
   status: 202;
 };
 export type GetAssistantSourcesHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -654,7 +673,7 @@ export type GetAssistantStartersHttpResponse = {
   next?: (options?: PageCallOptions) => Promise<GetAssistantStartersHttpResponse>;
 };
 export type GetAssistantStartersHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -672,7 +691,7 @@ export type CreateAssistantStarterHttpResponse = {
   status: 201;
 };
 export type CreateAssistantStarterHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -690,7 +709,7 @@ export type DeleteAssistantStarterHttpResponse = {
   status: 204;
 };
 export type DeleteAssistantStarterHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -708,7 +727,7 @@ export type GetAssistantStarterHttpResponse = {
   status: 200;
 };
 export type GetAssistantStarterHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -727,7 +746,7 @@ export type UpdateAssistantStarterHttpResponse = {
   status: 200;
 };
 export type UpdateAssistantStarterHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -746,7 +765,7 @@ export type DeleteAssistantStarterFollowupHttpResponse = {
   status: 204;
 };
 export type DeleteAssistantStarterFollowupHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -766,7 +785,7 @@ export type UpdateAssistantStarterFollowupHttpResponse = {
   status: 200;
 };
 export type UpdateAssistantStarterFollowupHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -797,7 +816,7 @@ export type GetAssistantThreadsHttpResponse = {
   next?: (options?: PageCallOptions) => Promise<GetAssistantThreadsHttpResponse>;
 };
 export type GetAssistantThreadsHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -815,7 +834,7 @@ export type CreateAssistantThreadHttpResponse = {
   status: 201;
 };
 export type CreateAssistantThreadHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -834,7 +853,7 @@ export type InvokeAssistantThreadHttpResponse = {
   status: 200;
 };
 export type InvokeAssistantThreadHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 500;
 };
@@ -853,7 +872,7 @@ export type StreamAssistantThreadHttpResponse = {
   status: 200;
 };
 export type StreamAssistantThreadHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 405 | 500;
 };
@@ -883,7 +902,7 @@ export type GetAssistantThreadInteractionsHttpResponse = {
   next?: (options?: PageCallOptions) => Promise<GetAssistantThreadInteractionsHttpResponse>;
 };
 export type GetAssistantThreadInteractionsHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -902,7 +921,7 @@ export type CreateAssistantThreadInteractionHttpResponse = {
   status: 201;
 };
 export type CreateAssistantThreadInteractionHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -921,7 +940,7 @@ export type DeleteAssistantThreadInteractionHttpResponse = {
   status: 204;
 };
 export type DeleteAssistantThreadInteractionHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -940,7 +959,7 @@ export type GetAssistantThreadInteractionHttpResponse = {
   status: 200;
 };
 export type GetAssistantThreadInteractionHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -960,7 +979,7 @@ export type CreateAssistantThreadInteractionFeedbackHttpResponse = {
   status: 201;
 };
 export type CreateAssistantThreadInteractionFeedbackHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -981,7 +1000,7 @@ export type PatchAssistantThreadInteractionFeedbackHttpResponse = {
   status: 204;
 };
 export type PatchAssistantThreadInteractionFeedbackHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -1001,7 +1020,7 @@ export type CreateAssistantThreadInteractionReviewHttpResponse = {
   status: 201;
 };
 export type CreateAssistantThreadInteractionReviewHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -1019,7 +1038,7 @@ export type DeleteAssistantThreadHttpResponse = {
   status: 204;
 };
 export type DeleteAssistantThreadHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -1037,7 +1056,7 @@ export type GetAssistantThreadHttpResponse = {
   status: 200;
 };
 export type GetAssistantThreadHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -1056,7 +1075,7 @@ export type PatchAssistantThreadHttpResponse = {
   status: 204;
 };
 export type PatchAssistantThreadHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429;
 };
@@ -1073,7 +1092,7 @@ export type DeleteAssistantHttpResponse = {
   status: 204;
 };
 export type DeleteAssistantHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -1090,7 +1109,7 @@ export type GetAssistantHttpResponse = {
   status: 200;
 };
 export type GetAssistantHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -1108,7 +1127,7 @@ export type PatchAssistantHttpResponse = {
   status: 204;
 };
 export type PatchAssistantHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429;
 };

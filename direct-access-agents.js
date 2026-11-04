@@ -1,13 +1,13 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-D5WdETph.js";
 
 // src/public/rest/direct-access-agents.ts
 /**
 * @deprecated
 *
-* Restarts the specified agent. If a reload is in `RELOADING` status the `restart` action will be ignored. Use `force-restart` to restart the agent even if a reload is in `RELOADING` status. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
+* Restarts the specified agent. The `restart` action is rejected with `409` while a reload is in `RELOADING` status. The `force-restart` action cancels the active reloads and restarts the agent. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
 *
-* @param agentId The agent ID
-* @param agentAction The type of action to perform. Permitted values are `restart` (will not restart the agent if a reload is in `RELOADING` status) and `force-restart` (will restart the agent even if a reload is in `RELOADING` status).
+* @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
+* @param agentAction The type of action to perform. Permitted values are `restart` (rejected with `409` while a reload is in `RELOADING` status) and `force-restart` (cancels the active reloads and restarts the agent).
 * @throws RestartDirectAccessAgentHttpError
 */
 async function restartDirectAccessAgent(agentId, agentAction, options) {
@@ -26,7 +26,7 @@ async function restartDirectAccessAgent(agentId, agentAction, options) {
 *
 * Starts a background benchmark task that measures the throughput and latency of a Direct Access agent. Use the returned `benchmarkId` to monitor progress and retrieve performance metrics for capacity planning or performance optimization. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
 *
-* @param agentId The agent ID
+* @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
 * @param query an object with query parameters
 * @throws CreateDirectAccessAgentBenchmarkHttpError
 */
@@ -44,7 +44,7 @@ async function createDirectAccessAgentBenchmark(agentId, query, options) {
 *
 * Retrieves the current status, progress, and performance metrics for a benchmark task. Use this operation to monitor a running benchmark or inspect its completed results. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
 *
-* @param agentId The agent ID
+* @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
 * @param benchmarkId The benchmark ID
 * @throws GetDirectAccessAgentBenchmarkHttpError
 */
@@ -64,7 +64,7 @@ async function getDirectAccessAgentBenchmark(agentId, benchmarkId, options) {
 *
 * Requests cancellation of a running benchmark for the specified agent. The request is asynchronous. Use the returned status URL to monitor when cancellation completes. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.8+.
 *
-* @param agentId The agent ID
+* @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
 * @param benchmarkId The benchmark ID
 * @throws CreateDirectAccessAgentBenchmarkCancelHttpError
 */
@@ -82,9 +82,9 @@ async function createDirectAccessAgentBenchmarkCancel(agentId, benchmarkId, opti
 /**
 * @deprecated
 *
-* Retrieves the connector agent configuration from the specified agent. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
+* Retrieves the connector agent configuration from the specified agent. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
 *
-* @param agentId The agent ID
+* @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
 * @param query an object with query parameters
 * @throws GetDirectAccessAgentConfigurationHttpError
 */
@@ -100,9 +100,9 @@ async function getDirectAccessAgentConfiguration(agentId, query, options) {
 /**
 * @deprecated
 *
-* Makes changes to the local agent configuration using JSON Patch. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
+* Makes changes to the local agent configuration using JSON Patch. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
 *
-* @param agentId The agent ID
+* @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
 * @param body an object with the body content
 * @throws PatchDirectAccessAgentConfigurationHttpError
 */
@@ -119,9 +119,9 @@ async function patchDirectAccessAgentConfiguration(agentId, body, options) {
 /**
 * @deprecated
 *
-* Retrieves the allowed paths settings for the File Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.6+.
+* Retrieves the allowed paths settings for the File Connector. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.6+.
 *
-* @param agentId The agent ID
+* @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
 * @throws GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError
 */
 async function getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths(agentId, options) {
@@ -135,9 +135,9 @@ async function getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths(agen
 /**
 * @deprecated
 *
-* Completely replaces the contents of the allowed paths configuration file for the File Connector. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.6+.
+* Completely replaces the contents of the allowed paths configuration file for the File Connector. Partial updates are not supported. Omitting `fileConnectorAllowedPaths` or sending `null` is treated as an empty list and clears the file. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.6+.
 *
-* @param agentId The agent id
+* @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
 * @param body an object with the body content
 * @throws PutDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError
 */
@@ -154,9 +154,9 @@ async function putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths(agen
 /**
 * @deprecated
 *
-* Retrieves the custom data type mapping settings for the Generic ODBC Connector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
+* Retrieves the custom data type mapping settings for the Generic ODBC Connector. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.5+.
 *
-* @param agentId The agent ID.
+* @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
 * @throws GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpError
 */
 async function getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings(agentId, options) {
@@ -170,9 +170,9 @@ async function getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMap
 /**
 * @deprecated
 *
-* Completely replaces the contents of the custom data type mapping configuration file for the Generic ODBC connector. Partial updates are not supported. There are property naming differences between the API and the file contents. Use the API property format when making changes. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.5+.
+* Completely replaces the contents of the custom data type mapping configuration file for the Generic ODBC connector. Partial updates are not supported. Omitting `odbcCustomDataTypes` or sending `null` is treated as an empty list and clears the file. There are property naming differences between the API and the file contents. Use the API property format when making changes. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.5+.
 *
-* @param agentId The agent ID.
+* @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
 * @param body an object with the body content
 * @throws PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpError
 */
@@ -189,9 +189,9 @@ async function putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMap
 /**
 * @deprecated
 *
-* Retrieves the configuration files associated with the connector. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
+* Lists the configuration files of the connector: `file-connector`: `plain-text-configuration`, `allowed-paths`, `custom-allowed-extensions`; `rest-connector`: `plain-text-configuration`; `odbc-connector`: `allowed-drivers`, `allowed-dsns`, `custom-data-type-mappings`. `plain-text-configuration` and `custom-allowed-extensions` are read and written as raw lines through `connectors/{connectorType}/files/{fileType}`; the other files have dedicated typed operations. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
 *
-* @param agentId The agent ID
+* @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
 * @param connectorType The connector to retrieve the list of files for
 * @param query an object with query parameters
 * @throws GetDirectAccessAgentConnectorFilesHttpError
@@ -211,9 +211,9 @@ async function getDirectAccessAgentConnectorFiles(agentId, connectorType, query,
 /**
 * @deprecated
 *
-* Retrieves the configuration files associated with the connector. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
+* Lists the configuration files of the connector: `file-connector`: `plain-text-configuration`, `allowed-paths`, `custom-allowed-extensions`; `rest-connector`: `plain-text-configuration`; `odbc-connector`: `allowed-drivers`, `allowed-dsns`, `custom-data-type-mappings`. `plain-text-configuration` and `custom-allowed-extensions` are read and written as raw lines through `connectors/{connectorType}/files/{fileType}`; the other files have dedicated typed operations. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
 *
-* @param agentId The agent ID
+* @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
 * @param connectorType The connector to retrieve the list of files for
 * @throws GetDirectAccessAgentConnectorFilesWithoutQueryHttpError
 */
@@ -231,11 +231,11 @@ async function getDirectAccessAgentConnectorFilesWithoutQuery(agentId, connector
 /**
 * @deprecated
 *
-* Retrieves the configuration items in the flat file for the specified connector. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
+* Retrieves the configuration items in the flat file for the specified connector, as raw lines. Raw-lines files per connector: `file-connector`: `plain-text-configuration`, `custom-allowed-extensions`; `rest-connector`: `plain-text-configuration`. The other files listed by `connectors/{connectorType}/files` (`custom-data-type-mappings`, `allowed-paths`, `allowed-dsns` and `allowed-drivers`) are typed and have dedicated operations. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
 *
-* @param agentId The agent ID
+* @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
 * @param connectorType The connector type to retrieve
-* @param fileType The type of file to retrieve
+* @param fileType The type of file to retrieve. Case-insensitive; the file names returned by `connectors/{connectorType}/files` (for example `plain-text-configuration`) are accepted as well. `custom-data-type-mappings`, `allowed-paths`, `allowed-dsns` and `allowed-drivers` are managed through their dedicated operations and are rejected here with `400`.
 * @throws GetDirectAccessAgentConnectorFileHttpError
 */
 async function getDirectAccessAgentConnectorFile(agentId, connectorType, fileType, options) {
@@ -253,11 +253,11 @@ async function getDirectAccessAgentConnectorFile(agentId, connectorType, fileTyp
 /**
 * @deprecated
 *
-* Completely replaces the contents of the connector's configuration file. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
+* Completely replaces the contents of the connector's configuration file with the given raw lines. Partial updates are not supported. Omitting `contentsToSave` or sending `null` is treated as an empty list and clears the file. Raw-lines files per connector: `file-connector`: `plain-text-configuration`, `custom-allowed-extensions`; `rest-connector`: `plain-text-configuration`. The other files listed by `connectors/{connectorType}/files` (`custom-data-type-mappings`, `allowed-paths`, `allowed-dsns` and `allowed-drivers`) are typed and have dedicated operations. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
 *
-* @param agentId The agent ID
+* @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
 * @param connectorType The connector type to update
-* @param fileType The file type to update
+* @param fileType The file type to update. Case-insensitive; the file names returned by `connectors/{connectorType}/files` (for example `plain-text-configuration`) are accepted as well. `custom-data-type-mappings`, `allowed-paths`, `allowed-dsns` and `allowed-drivers` are managed through their dedicated operations and are rejected here with `400`.
 * @param query an object with query parameters
 * @param body an object with the body content
 * @throws UpdateDirectAccessAgentConnectorFileHttpError
@@ -280,11 +280,11 @@ async function updateDirectAccessAgentConnectorFile(agentId, connectorType, file
 /**
 * @deprecated
 *
-* Completely replaces the contents of the connector's configuration file. Partial updates are not supported. Requestor must be assigned the `TenantAdmin` role and needs to be either a Gateway's space owner or a member in the Gateway's space with `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
+* Completely replaces the contents of the connector's configuration file with the given raw lines. Partial updates are not supported. Omitting `contentsToSave` or sending `null` is treated as an empty list and clears the file. Raw-lines files per connector: `file-connector`: `plain-text-configuration`, `custom-allowed-extensions`; `rest-connector`: `plain-text-configuration`. The other files listed by `connectors/{connectorType}/files` (`custom-data-type-mappings`, `allowed-paths`, `allowed-dsns` and `allowed-drivers`) are typed and have dedicated operations. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
 *
-* @param agentId The agent ID
+* @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
 * @param connectorType The connector type to update
-* @param fileType The file type to update
+* @param fileType The file type to update. Case-insensitive; the file names returned by `connectors/{connectorType}/files` (for example `plain-text-configuration`) are accepted as well. `custom-data-type-mappings`, `allowed-paths`, `allowed-dsns` and `allowed-drivers` are managed through their dedicated operations and are rejected here with `400`.
 * @param body an object with the body content
 * @throws UpdateDirectAccessAgentConnectorFileWithoutQueryHttpError
 */
@@ -305,9 +305,9 @@ async function updateDirectAccessAgentConnectorFileWithoutQuery(agentId, connect
 /**
 * @deprecated
 *
-* Retrieves the settings for the metrics collector. Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.9+.
+* Retrieves the settings for the metrics collector. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.9+.
 *
-* @param agentId The agent ID.
+* @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
 * @throws GetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError
 */
 async function getDirectAccessAgentToolsMetricsCollectorConfiguration(agentId, options) {
@@ -321,9 +321,9 @@ async function getDirectAccessAgentToolsMetricsCollectorConfiguration(agentId, o
 /**
 * @deprecated
 *
-* Completely replaces the contents of the metrics collector settings configuration file. Partial updates are not supported.  Requestor must be assigned the `TenantAdmin` role. Available in Direct Access Gateway V1.7.9+.
+* Completely replaces the contents of the metrics collector settings configuration file. Partial updates are not supported. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.9+.
 *
-* @param agentId The agent ID.
+* @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
 * @param body an object with the body content
 * @throws SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError
 */

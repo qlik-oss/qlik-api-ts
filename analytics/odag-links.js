@@ -1,3 +1,3 @@
-import { a as getOdagLinkCreatePermission, c as getOdagLinksSelectionAppUsages, d as updateOdagLink, i as getOdagLink, l as odagLinksExport, n as createOdagLink, o as getOdagLinkRequests, r as createOdagLinkRequest, s as getOdagLinks, t as clearCache } from "../chunks/odag-links-BBRG8_AA.js";
+import { a as getOdagLinkCreatePermission, c as getOdagLinksSelectionAppUsages, d as updateOdagLink, i as getOdagLink, l as odagLinksExport, n as createOdagLink, o as getOdagLinkRequests, r as createOdagLinkRequest, s as getOdagLinks, t as clearCache } from "../chunks/odag-links-XtUrv1KJ.js";
 
 export { clearCache, createOdagLink, createOdagLinkRequest, odagLinksExport as default, getOdagLink, getOdagLinkCreatePermission, getOdagLinkRequests, getOdagLinks, getOdagLinksSelectionAppUsages, updateOdagLink };

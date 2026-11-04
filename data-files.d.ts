@@ -312,8 +312,8 @@ export declare function getDataFiles(query: {
   /** If present, return only items which reside under the specified folder path.  If not present, items that
    * live at the root of the space are returned.  This property is mutually exclusive with 'folderId'. */
   folderPath?: string | null;
-  /** If set to true, and connectionId is not specified, return files and folders from all spaces the given user
-   * has access to (including the personal space).  If connectionId is specified, this parameter is ignored. */
+  /** If set to true, return files and folders from all spaces the given user has access to (including the
+   * personal space).  If includeAllSpaces is set to true, the connectionId parameter is ignored. */
   includeAllSpaces?: boolean;
   /** If set to true, include computed folder statistics for folders in the returned list.  If false, this information
    * is not returned. */

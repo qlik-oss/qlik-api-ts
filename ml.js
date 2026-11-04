@@ -1,4 +1,4 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-D5WdETph.js";
 
 // src/public/rest/ml.ts
 /**
@@ -84,7 +84,34 @@ async function patchMlDeployment(deploymentId, body, options) {
 	});
 }
 /**
-* Activates the deployed model on this deployment's default alias. The
+* Activates the deployed model on this deployment. By default this is the model on the
+* default alias; optionally pass `modelId`, `aliasId` or `aliasName` in the
+* request body to target another model (precedence in that order, only one
+* is used). The
+* response reports which model was targeted and whether its state
+* actually changed via the `qlik-model-id` and `qlik-state-change`
+* response headers. If the model was already active, the request still
+* succeeds but `qlik-state-change` is `NO_CHANGE`.
+*
+* @param deploymentId ID of the deployment
+* @param body an object with the body content
+* @throws ActivateModelsMlDeploymentWithBodyHttpError
+*/
+async function activateModelsMlDeploymentWithBody(deploymentId, body, options) {
+	return invokeFetch("ml", {
+		method: "post",
+		pathTemplate: "/api/v1/ml/deployments/{deploymentId}/actions/activate-models",
+		pathVariables: { deploymentId },
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
+* Activates the deployed model on this deployment. By default this is the model on the
+* default alias; optionally pass `modelId`, `aliasId` or `aliasName` in the
+* request body to target another model (precedence in that order, only one
+* is used). The
 * response reports which model was targeted and whether its state
 * actually changed via the `qlik-model-id` and `qlik-state-change`
 * response headers. If the model was already active, the request still
@@ -102,7 +129,34 @@ async function activateModelsMlDeployment(deploymentId, options) {
 	});
 }
 /**
-* Deactivates the deployed model on this deployment's default alias.
+* Deactivates the deployed model on this deployment. By default this is the model on the
+* default alias; optionally pass `modelId`, `aliasId` or `aliasName` in the
+* request body to target another model (precedence in that order, only one
+* is used).
+* The response reports which model was targeted and whether its state
+* actually changed via the `qlik-model-id` and `qlik-state-change`
+* response headers. If the model was already inactive, the request
+* still succeeds but `qlik-state-change` is `NO_CHANGE`.
+*
+* @param deploymentId ID of the deployment
+* @param body an object with the body content
+* @throws DeactivateModelsMlDeploymentWithBodyHttpError
+*/
+async function deactivateModelsMlDeploymentWithBody(deploymentId, body, options) {
+	return invokeFetch("ml", {
+		method: "post",
+		pathTemplate: "/api/v1/ml/deployments/{deploymentId}/actions/deactivate-models",
+		pathVariables: { deploymentId },
+		body,
+		contentType: "application/json",
+		options
+	});
+}
+/**
+* Deactivates the deployed model on this deployment. By default this is the model on the
+* default alias; optionally pass `modelId`, `aliasId` or `aliasName` in the
+* request body to target another model (precedence in that order, only one
+* is used).
 * The response reports which model was targeted and whether its state
 * actually changed via the `qlik-model-id` and `qlik-state-change`
 * response headers. If the model was already inactive, the request
@@ -782,7 +836,9 @@ const mlExport = {
 	deleteMlDeployment,
 	getMlDeployment,
 	patchMlDeployment,
+	activateModelsMlDeploymentWithBody,
 	activateModelsMlDeployment,
+	deactivateModelsMlDeploymentWithBody,
 	deactivateModelsMlDeployment,
 	getMlDeploymentAliases,
 	createMlDeploymentAliase,
@@ -823,4 +879,4 @@ const mlExport = {
 	clearCache
 };
 
-export { activateModelsMlDeployment, addMlDeploymentModels, cancelMlJob, clearCache, createMlDeployment, createMlDeploymentAliase, createMlDeploymentBatchPrediction, createMlExperiment, createMlExperimentVersion, createMlProfileInsight, deactivateModelsMlDeployment, mlExport as default, deleteMlDeployment, deleteMlDeploymentAliase, deleteMlDeploymentBatchPrediction, deleteMlDeploymentBatchPredictionSchedule, deleteMlExperiment, deleteMlExperimentVersion, getMlDeployment, getMlDeploymentAliase, getMlDeploymentAliases, getMlDeploymentBatchPrediction, getMlDeploymentBatchPredictionSchedule, getMlDeploymentBatchPredictions, getMlDeployments, getMlExperiment, getMlExperimentModel, getMlExperimentModels, getMlExperimentVersion, getMlExperimentVersions, getMlExperiments, getMlProfileInsight, getMlProfileInsightWithQuery, patchMlDeployment, patchMlDeploymentAliase, patchMlDeploymentBatchPrediction, patchMlExperiment, patchMlExperimentVersion, predictMlDeploymentBatchPrediction, recommendModelsMlExperiment, removeMlDeploymentModels, runMlDeploymentAliaseRealtimePredictions, runMlDeploymentRealtimePredictions, setMlDeploymentBatchPredictionSchedule, updateMlDeploymentBatchPredictionSchedule };
+export { activateModelsMlDeployment, activateModelsMlDeploymentWithBody, addMlDeploymentModels, cancelMlJob, clearCache, createMlDeployment, createMlDeploymentAliase, createMlDeploymentBatchPrediction, createMlExperiment, createMlExperimentVersion, createMlProfileInsight, deactivateModelsMlDeployment, deactivateModelsMlDeploymentWithBody, mlExport as default, deleteMlDeployment, deleteMlDeploymentAliase, deleteMlDeploymentBatchPrediction, deleteMlDeploymentBatchPredictionSchedule, deleteMlExperiment, deleteMlExperimentVersion, getMlDeployment, getMlDeploymentAliase, getMlDeploymentAliases, getMlDeploymentBatchPrediction, getMlDeploymentBatchPredictionSchedule, getMlDeploymentBatchPredictions, getMlDeployments, getMlExperiment, getMlExperimentModel, getMlExperimentModels, getMlExperimentVersion, getMlExperimentVersions, getMlExperiments, getMlProfileInsight, getMlProfileInsightWithQuery, patchMlDeployment, patchMlDeploymentAliase, patchMlDeploymentBatchPrediction, patchMlExperiment, patchMlExperimentVersion, predictMlDeploymentBatchPrediction, recommendModelsMlExperiment, removeMlDeploymentModels, runMlDeploymentAliaseRealtimePredictions, runMlDeploymentRealtimePredictions, setMlDeploymentBatchPredictionSchedule, updateMlDeploymentBatchPredictionSchedule };

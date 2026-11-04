@@ -38,7 +38,7 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li><span><span class="tsd-kind-parameter">agentId</span>: <span class="tsd-signature-type">string</span></span>
-<div class="tsd-comment tsd-typography"><p>The agent ID</p>
+<div class="tsd-comment tsd-typography"><p>The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.</p>
 </div></li>
 <li><span><span class="tsd-kind-parameter">query</span>: <span class="tsd-signature-symbol">{</span> <span class="tsd-kind-property">queryProperties</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span> <span class="tsd-signature-symbol">}</span></span>
 <div class="tsd-comment tsd-typography"><p>an object with query parameters</p>
@@ -52,7 +52,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/direct-access-agents.GetDirectAccessAgentConfigurationHttpResponse.html" class="tsd-signature-type tsd-kind-type-alias">GetDirectAccessAgentConfigurationHttpResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-deprecated">
-<h4 class="tsd-anchor-link" id="deprecated">Deprecated<a href="#deprecated" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Retrieves the connector agent configuration from the specified agent. Requestor must be assigned the <code>TenantAdmin</code> role and needs to be either a Gateway's space owner or a member in the Gateway's space with <code>Can Consume Data</code> role. Available in Direct Access Gateway V1.7.2+.</p>
+<h4 class="tsd-anchor-link" id="deprecated">Deprecated<a href="#deprecated" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Retrieves the connector agent configuration from the specified agent. The requestor must have the <code>TenantAdmin</code> role and be either the gateway's space owner or a member of the gateway's space with the <code>Can Consume Data</code> role. Available in Direct Access Gateway V1.7.2+.</p>
 </div>
 <div class="tsd-tag-throws">
 <h4 class="tsd-anchor-link" id="throws">Throws<a href="#throws" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>GetDirectAccessAgentConfigurationHttpError</p>

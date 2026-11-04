@@ -1,7 +1,7 @@
 import { H as data_connections_d_exports, V as dataConnectionsExport } from "./chunks/data-connections-DWWxLAoc.js";
 import { C as dataCredentialsExport, w as data_credentials_d_exports } from "./chunks/data-credentials--A7yzhpt.js";
 import { K as dataSourcesExport, q as data_sources_d_exports } from "./chunks/data-sources-BeEgW567.js";
-import { D as directAccessAgentsExport, O as direct_access_agents_d_exports } from "./chunks/direct-access-agents-CJsEsvZp.js";
+import { D as directAccessAgentsExport, O as direct_access_agents_d_exports } from "./chunks/direct-access-agents-Cfy-QiLK.js";
 export type ConnectivityAPI = {};
 /**
  * Functions for the connectivity api

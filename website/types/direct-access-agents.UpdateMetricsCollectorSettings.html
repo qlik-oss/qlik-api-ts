@@ -62,17 +62,17 @@ This defines how frequently the collector checks whether to scrape each connecto
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="enabled"><span>enabled</span><a href="#enabled" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">enabled</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-<div class="tsd-comment tsd-typography"><p>Indicates whether the metrics collector is enabled.</p>
+<div class="tsd-comment tsd-typography"><p>Indicates whether the metrics collector is enabled. Required; a request without it is rejected with <code>400</code>.</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="localdatabasefilelocation"><span>local<wbr/>Database<wbr/>File<wbr/>Location</span><a href="#localdatabasefilelocation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">localDatabaseFileLocation</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-<div class="tsd-comment tsd-typography"><p>The file location for the local metrics database. If not specified, defaults to <code>C:\ProgramData\Qlik\Gateway\tmp</code>.</p>
+<div class="tsd-comment tsd-typography"><p>The file location for the local metrics database. Required; an empty string keeps the default location: <code>%ProgramData%\Qlik\Gateway\tmp</code> on Windows, <code>/usr/share/Qlik/Gateway/tmp</code> in the containerized gateway.</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="localdataretentiondatabasesizeinmb"><code class="tsd-tag">Optional</code><span>local<wbr/>Data<wbr/>Retention<wbr/>Database<wbr/>Size<wbr/>In<wbr/>Mb</span><a href="#localdataretentiondatabasesizeinmb" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">localDataRetentionDatabaseSizeInMb</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
-<div class="tsd-comment tsd-typography"><p>The maximum size of the local database in megabytes. Default is 500 MB.</p>
+<div class="tsd-comment tsd-typography"><p>The maximum size of the local database in megabytes. Optional; 500 MB when omitted.</p>
 </div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="localdataretentiondays"><span>local<wbr/>Data<wbr/>Retention<wbr/>Days</span><a href="#localdataretentiondays" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>

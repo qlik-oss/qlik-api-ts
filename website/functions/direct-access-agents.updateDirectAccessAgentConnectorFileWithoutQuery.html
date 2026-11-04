@@ -38,13 +38,13 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li><span><span class="tsd-kind-parameter">agentId</span>: <span class="tsd-signature-type">string</span></span>
-<div class="tsd-comment tsd-typography"><p>The agent ID</p>
+<div class="tsd-comment tsd-typography"><p>The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.</p>
 </div></li>
 <li><span><span class="tsd-kind-parameter">connectorType</span>: <span class="tsd-signature-type">string</span></span>
 <div class="tsd-comment tsd-typography"><p>The connector type to update</p>
 </div></li>
 <li><span><span class="tsd-kind-parameter">fileType</span>: <span class="tsd-signature-type">string</span></span>
-<div class="tsd-comment tsd-typography"><p>The file type to update</p>
+<div class="tsd-comment tsd-typography"><p>The file type to update. Case-insensitive; the file names returned by <code>connectors/{connectorType}/files</code> (for example <code>plain-text-configuration</code>) are accepted as well. <code>custom-data-type-mappings</code>, <code>allowed-paths</code>, <code>allowed-dsns</code> and <code>allowed-drivers</code> are managed through their dedicated operations and are rejected here with <code>400</code>.</p>
 </div></li>
 <li><span><span class="tsd-kind-parameter">body</span>: <a href="../types/direct-access-agents.UpdateConfigurationFlatFileRequest.html" class="tsd-signature-type tsd-kind-type-alias">UpdateConfigurationFlatFileRequest</a></span>
 <div class="tsd-comment tsd-typography"><p>an object with the body content</p>
@@ -53,7 +53,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/direct-access-agents.UpdateDirectAccessAgentConnectorFileWithoutQueryHttpResponse.html" class="tsd-signature-type tsd-kind-type-alias">UpdateDirectAccessAgentConnectorFileWithoutQueryHttpResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-deprecated">
-<h4 class="tsd-anchor-link" id="deprecated">Deprecated<a href="#deprecated" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Completely replaces the contents of the connector's configuration file. Partial updates are not supported. Requestor must be assigned the <code>TenantAdmin</code> role and needs to be either a Gateway's space owner or a member in the Gateway's space with <code>Can Consume Data</code> role. Available in Direct Access Gateway V1.7.4+.</p>
+<h4 class="tsd-anchor-link" id="deprecated">Deprecated<a href="#deprecated" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Completely replaces the contents of the connector's configuration file with the given raw lines. Partial updates are not supported. Omitting <code>contentsToSave</code> or sending <code>null</code> is treated as an empty list and clears the file. Raw-lines files per connector: <code>file-connector</code>: <code>plain-text-configuration</code>, <code>custom-allowed-extensions</code>; <code>rest-connector</code>: <code>plain-text-configuration</code>. The other files listed by <code>connectors/{connectorType}/files</code> (<code>custom-data-type-mappings</code>, <code>allowed-paths</code>, <code>allowed-dsns</code> and <code>allowed-drivers</code>) are typed and have dedicated operations. The requestor must have the <code>TenantAdmin</code> role and be either the gateway's space owner or a member of the gateway's space with the <code>Can Consume Data</code> role. Available in Direct Access Gateway V1.7.4+.</p>
 </div>
 <div class="tsd-tag-throws">
 <h4 class="tsd-anchor-link" id="throws">Throws<a href="#throws" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>UpdateDirectAccessAgentConnectorFileWithoutQueryHttpError</p>

@@ -38,7 +38,7 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li><span><span class="tsd-kind-parameter">agentId</span>: <span class="tsd-signature-type">string</span></span>
-<div class="tsd-comment tsd-typography"><p>The agent ID.</p>
+<div class="tsd-comment tsd-typography"><p>The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.</p>
 </div></li>
 <li><span><span class="tsd-kind-parameter">body</span>: <a href="../types/direct-access-agents.UpdateOdbcCustomTypeMappingsRequest.html" class="tsd-signature-type tsd-kind-type-alias">UpdateOdbcCustomTypeMappingsRequest</a></span>
 <div class="tsd-comment tsd-typography"><p>an object with the body content</p>
@@ -47,7 +47,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><br/>    <a href="../types/direct-access-agents.PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpResponse.html" class="tsd-signature-type tsd-kind-type-alias">PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpResponse</a><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-deprecated">
-<h4 class="tsd-anchor-link" id="deprecated">Deprecated<a href="#deprecated" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Completely replaces the contents of the custom data type mapping configuration file for the Generic ODBC connector. Partial updates are not supported. There are property naming differences between the API and the file contents. Use the API property format when making changes. Requestor must be assigned the <code>TenantAdmin</code> role. Available in Direct Access Gateway V1.7.5+.</p>
+<h4 class="tsd-anchor-link" id="deprecated">Deprecated<a href="#deprecated" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Completely replaces the contents of the custom data type mapping configuration file for the Generic ODBC connector. Partial updates are not supported. Omitting <code>odbcCustomDataTypes</code> or sending <code>null</code> is treated as an empty list and clears the file. There are property naming differences between the API and the file contents. Use the API property format when making changes. The requestor must have the <code>TenantAdmin</code> role and be either the gateway's space owner or a member of the gateway's space with the <code>Can Consume Data</code> role. Available in Direct Access Gateway V1.7.5+.</p>
 </div>
 <div class="tsd-tag-throws">
 <h4 class="tsd-anchor-link" id="throws">Throws<a href="#throws" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpError</p>
