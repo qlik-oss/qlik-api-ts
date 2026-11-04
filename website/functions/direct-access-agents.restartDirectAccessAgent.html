@@ -38,16 +38,16 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li><span><span class="tsd-kind-parameter">agentId</span>: <span class="tsd-signature-type">string</span></span>
-<div class="tsd-comment tsd-typography"><p>The agent ID</p>
+<div class="tsd-comment tsd-typography"><p>The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.</p>
 </div></li>
 <li><span><span class="tsd-kind-parameter">agentAction</span>: <span class="tsd-signature-type">string</span></span>
-<div class="tsd-comment tsd-typography"><p>The type of action to perform. Permitted values are <code>restart</code> (will not restart the agent if a reload is in <code>RELOADING</code> status) and <code>force-restart</code> (will restart the agent even if a reload is in <code>RELOADING</code> status).</p>
+<div class="tsd-comment tsd-typography"><p>The type of action to perform. Permitted values are <code>restart</code> (rejected with <code>409</code> while a reload is in <code>RELOADING</code> status) and <code>force-restart</code> (cancels the active reloads and restarts the agent).</p>
 </div></li>
 <li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">options</span>: <a href="../types/invoke-fetch-types.ApiCallOptions.html" class="tsd-signature-type tsd-kind-type-alias">ApiCallOptions</a></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/direct-access-agents.RestartDirectAccessAgentHttpResponse.html" class="tsd-signature-type tsd-kind-type-alias">RestartDirectAccessAgentHttpResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-deprecated">
-<h4 class="tsd-anchor-link" id="deprecated">Deprecated<a href="#deprecated" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Restarts the specified agent. If a reload is in <code>RELOADING</code> status the <code>restart</code> action will be ignored. Use <code>force-restart</code> to restart the agent even if a reload is in <code>RELOADING</code> status. Requestor must be assigned the <code>TenantAdmin</code> role and needs to be either a Gateway's space owner or a member in the Gateway's space with <code>Can Consume Data</code> role. Available in Direct Access Gateway V1.7.2+.</p>
+<h4 class="tsd-anchor-link" id="deprecated">Deprecated<a href="#deprecated" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Restarts the specified agent. The <code>restart</code> action is rejected with <code>409</code> while a reload is in <code>RELOADING</code> status. The <code>force-restart</code> action cancels the active reloads and restarts the agent. The requestor must have the <code>TenantAdmin</code> role and be either the gateway's space owner or a member of the gateway's space with the <code>Can Consume Data</code> role. Available in Direct Access Gateway V1.7.2+.</p>
 </div>
 <div class="tsd-tag-throws">
 <h4 class="tsd-anchor-link" id="throws">Throws<a href="#throws" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>RestartDirectAccessAgentHttpError</p>

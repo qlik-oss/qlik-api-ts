@@ -27,6 +27,21 @@ export type APIError = {
   title: string;
 };
 /**
+ * Optional body that selects which model on the deployment to activate
+ * or deactivate. Only one identifier is used. If more than one is
+ * provided, the order of precedence is `modelId`, `aliasId`, `aliasName`.
+ * If none are provided, the model on the deployment's default alias is
+ * used. Unrecognized properties are ignored.
+ */
+export type ActivateDeactivateModelsRequest = {
+  /** ID of an alias on this deployment. Its model is used. */
+  aliasId?: string;
+  /** Name of an alias on this deployment. Its model is used. */
+  aliasName?: string;
+  /** ID of a model deployed on this deployment. */
+  modelId?: string;
+};
+/**
  * An AutoML alias
  */
 export type Alias = {
@@ -39,7 +54,7 @@ export type Alias = {
   /** ID of this entity */
   id: EntityId;
   /** The mode of an alias. Default mode means the model assigned to that alias will be used if alias is not specified. Null for a regular alias. */
-  mode: AliasMode;
+  mode?: AliasMode;
   models: ModelsInfo;
   /** Name of this entity */
   name: EntityName;
@@ -1124,7 +1139,7 @@ export type ModelMetrics = {
   /** Multiclass metrics for categorical values with 3+ options. Details:
    * https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/AutoML/scoring-multiclass-classification.htm */
   multiclass?: ModelMetricsMulticlass;
-  /** Model prediction speed in rows/second (from recommend-models endpoint) */
+  /** Model prediction speed in rows/second. Returned by recommend-models, and by the model list/get endpoints when includeSpeed=true. */
   predictionSpeed?: number | null;
   /** Regression metrics for numeric values. Details:
    * https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/AutoML/scoring-regression.htm */
@@ -1646,8 +1661,9 @@ export declare function getMlDeployments(query: {
    * - `experimentVersionId` UUID string - ID of experiment version in which model(s) exist
    * - `predictionId` UUID string - ID of prediction which exists on deployment
    * - `predictionEnabled` boolean - Are predictions enabled
-   * - `exactName` string - Deployments with exact name. Names may not be unique.
-   * - `nameContains` string - Deployments where name includes this. Names may not be unique
+   * - `exactName` string - Deployments with this exact, case-sensitive name. `eq` only (`exactName eq "x"`). Names may not be unique
+   * - `nameContains` string - Deployments where name includes this case-insensitive string. `co` only (`nameContains co "x"`)
+   * - If both `exactName` and `nameContains` are provided, only `exactName` is applied
    * - `experimentType` string - Deployments that have models of the experiment type */
   filter?: string;
   /** Number of results per page. Default is 32. */
@@ -1739,7 +1755,35 @@ export type PatchMlDeploymentHttpError = {
   status: number;
 };
 /**
- * Activates the deployed model on this deployment's default alias. The
+ * Activates the deployed model on this deployment. By default this is the model on the
+ * default alias; optionally pass `modelId`, `aliasId` or `aliasName` in the
+ * request body to target another model (precedence in that order, only one
+ * is used). The
+ * response reports which model was targeted and whether its state
+ * actually changed via the `qlik-model-id` and `qlik-state-change`
+ * response headers. If the model was already active, the request still
+ * succeeds but `qlik-state-change` is `NO_CHANGE`.
+ *
+ * @param deploymentId ID of the deployment
+ * @param body an object with the body content
+ * @throws ActivateModelsMlDeploymentWithBodyHttpError
+ */
+export declare function activateModelsMlDeploymentWithBody(deploymentId: string, body: ActivateDeactivateModelsRequest, options?: ApiCallOptions): Promise<ActivateModelsMlDeploymentWithBodyHttpResponse>;
+export type ActivateModelsMlDeploymentWithBodyHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 204;
+};
+export type ActivateModelsMlDeploymentWithBodyHttpError = {
+  data: Failure;
+  headers: Headers;
+  status: number;
+};
+/**
+ * Activates the deployed model on this deployment. By default this is the model on the
+ * default alias; optionally pass `modelId`, `aliasId` or `aliasName` in the
+ * request body to target another model (precedence in that order, only one
+ * is used). The
  * response reports which model was targeted and whether its state
  * actually changed via the `qlik-model-id` and `qlik-state-change`
  * response headers. If the model was already active, the request still
@@ -1760,7 +1804,35 @@ export type ActivateModelsMlDeploymentHttpError = {
   status: number;
 };
 /**
- * Deactivates the deployed model on this deployment's default alias.
+ * Deactivates the deployed model on this deployment. By default this is the model on the
+ * default alias; optionally pass `modelId`, `aliasId` or `aliasName` in the
+ * request body to target another model (precedence in that order, only one
+ * is used).
+ * The response reports which model was targeted and whether its state
+ * actually changed via the `qlik-model-id` and `qlik-state-change`
+ * response headers. If the model was already inactive, the request
+ * still succeeds but `qlik-state-change` is `NO_CHANGE`.
+ *
+ * @param deploymentId ID of the deployment
+ * @param body an object with the body content
+ * @throws DeactivateModelsMlDeploymentWithBodyHttpError
+ */
+export declare function deactivateModelsMlDeploymentWithBody(deploymentId: string, body: ActivateDeactivateModelsRequest, options?: ApiCallOptions): Promise<DeactivateModelsMlDeploymentWithBodyHttpResponse>;
+export type DeactivateModelsMlDeploymentWithBodyHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 204;
+};
+export type DeactivateModelsMlDeploymentWithBodyHttpError = {
+  data: Failure;
+  headers: Headers;
+  status: number;
+};
+/**
+ * Deactivates the deployed model on this deployment. By default this is the model on the
+ * default alias; optionally pass `modelId`, `aliasId` or `aliasName` in the
+ * request body to target another model (precedence in that order, only one
+ * is used).
  * The response reports which model was targeted and whether its state
  * actually changed via the `qlik-model-id` and `qlik-state-change`
  * response headers. If the model was already inactive, the request
@@ -2341,8 +2413,10 @@ export declare function getMlExperimentModels(experimentId: string, query: {
    * - `status` enum string - find by status<br><br>
    *   - Valid statuses: pending, training_requested, training_done, ready, error<br><br>
    * - `hasDeployment` boolean - Models that are part of a deployment
-   * - `nameContains` string - Models with name includes this case-insensitive string
-   * - `exactName` string - Models with exact name. Model names may not be unique
+   * - `exactName` string - Models with this exact, case-sensitive name. `eq` only (`exactName eq "x"`). Model names may not be unique
+   * - `nameContains` string - Models where name includes this case-insensitive string. `co` only (`nameContains co "x"`)
+   * - `name` string - With `eq`, same as `exactName` (case-sensitive). With `co`, same as `nameContains` (case-insensitive)
+   * - If both an exact name and a contains name filter are provided, only the exact name filter is applied
    * - `samplingRatio` number - Find models by sampling ratio
    * - `modelState` enum string - State by which to find models<br><br>
    *   - Valid states: `pending, enabled, disabled, inactive` */
@@ -2632,7 +2706,25 @@ export type MlAPI = {
    */
   patchMlDeployment: typeof patchMlDeployment;
   /**
-   * Activates the deployed model on this deployment's default alias. The
+   * Activates the deployed model on this deployment. By default this is the model on the
+   * default alias; optionally pass `modelId`, `aliasId` or `aliasName` in the
+   * request body to target another model (precedence in that order, only one
+   * is used). The
+   * response reports which model was targeted and whether its state
+   * actually changed via the `qlik-model-id` and `qlik-state-change`
+   * response headers. If the model was already active, the request still
+   * succeeds but `qlik-state-change` is `NO_CHANGE`.
+   *
+   * @param deploymentId ID of the deployment
+   * @param body an object with the body content
+   * @throws ActivateModelsMlDeploymentWithBodyHttpError
+   */
+  activateModelsMlDeploymentWithBody: typeof activateModelsMlDeploymentWithBody;
+  /**
+   * Activates the deployed model on this deployment. By default this is the model on the
+   * default alias; optionally pass `modelId`, `aliasId` or `aliasName` in the
+   * request body to target another model (precedence in that order, only one
+   * is used). The
    * response reports which model was targeted and whether its state
    * actually changed via the `qlik-model-id` and `qlik-state-change`
    * response headers. If the model was already active, the request still
@@ -2643,7 +2735,25 @@ export type MlAPI = {
    */
   activateModelsMlDeployment: typeof activateModelsMlDeployment;
   /**
-   * Deactivates the deployed model on this deployment's default alias.
+   * Deactivates the deployed model on this deployment. By default this is the model on the
+   * default alias; optionally pass `modelId`, `aliasId` or `aliasName` in the
+   * request body to target another model (precedence in that order, only one
+   * is used).
+   * The response reports which model was targeted and whether its state
+   * actually changed via the `qlik-model-id` and `qlik-state-change`
+   * response headers. If the model was already inactive, the request
+   * still succeeds but `qlik-state-change` is `NO_CHANGE`.
+   *
+   * @param deploymentId ID of the deployment
+   * @param body an object with the body content
+   * @throws DeactivateModelsMlDeploymentWithBodyHttpError
+   */
+  deactivateModelsMlDeploymentWithBody: typeof deactivateModelsMlDeploymentWithBody;
+  /**
+   * Deactivates the deployed model on this deployment. By default this is the model on the
+   * default alias; optionally pass `modelId`, `aliasId` or `aliasName` in the
+   * request body to target another model (precedence in that order, only one
+   * is used).
    * The response reports which model was targeted and whether its state
    * actually changed via the `qlik-model-id` and `qlik-state-change`
    * response headers. If the model was already inactive, the request

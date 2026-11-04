@@ -205,11 +205,6 @@ export type ErrorResponse = {
   traceId?: string;
 };
 export type ErrorResponseCode = {
-  code?: string;
-  detail?: string;
-  title?: string;
-};
-export type ErrorResponseCodeCopy = {
   /** Custom error codes
    * * AE-1 - Internal processing error
    * * AE-2 - Incorrect request
@@ -218,6 +213,11 @@ export type ErrorResponseCodeCopy = {
    * * AE-5 - Resource is not found
    * * AE-6 - API usage rate limit is exceeded
    * * AE-7 - Method is not allowed */
+  code?: string;
+  detail?: string;
+  title?: string;
+};
+export type ErrorResponseCodeCopy = {
   code?: string;
   detail?: string;
   title?: string;
@@ -252,6 +252,17 @@ export type IndexingProgress = {
   updatedAt?: string;
 };
 /**
+ * Structured image content of an image chunk. Only populated when the TLV_2536_MULTIMODAL_IMAGE feature flag is enabled for the tenant (and image chunks are returned at all); otherwise this property carries no `data` and the image, if any, is inlined into `text` as a `data:` URI. When `data` is present, `text` on the parent chunk holds the caption/context rather than the image bytes.
+ */
+export type KbChunkImage = {
+  /** Base64-encoded image bytes */
+  data?: string;
+  /** Whether the image is stored inline in the chunk */
+  inline?: boolean;
+  /** MIME type of the image, e.g. `image/jpeg` */
+  mimeType?: string;
+};
+/**
  * Metadata about the chunk
  */
 export type KbChunkMeta = {
@@ -261,10 +272,18 @@ export type KbChunkMeta = {
   datasourceId: string;
   /** documentId of chunk */
   documentId: string;
+  /** Structured image content of an image chunk. Only populated when the TLV_2536_MULTIMODAL_IMAGE feature flag is enabled for the tenant (and image chunks are returned at all); otherwise this property carries no `data` and the image, if any, is inlined into `text` as a `data:` URI. When `data` is present, `text` on the parent chunk holds the caption/context rather than the image bytes. */
+  image?: KbChunkImage;
+  /** Artifact ID of the image, present when the chunk is an image chunk */
+  imageArtifactId?: string;
+  /** Caption or surrounding text describing the image, present when the chunk is an image chunk */
+  imageContextText?: string;
   /** knowledgeBaseId of chunk */
   knowledgeBaseId: string;
   /** source of chunk */
   source: string;
+  /** Chunk type, e.g. `image`. Absent for plain text chunks */
+  type?: string;
 };
 export type KnowledgeBase = KnowledgeBaseLight & {
   datasources?: DataSource[];
@@ -483,7 +502,7 @@ export type GetKnowledgebasesHttpResponse = {
   next?: (options?: PageCallOptions) => Promise<GetKnowledgebasesHttpResponse>;
 };
 export type GetKnowledgebasesHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403;
 };
@@ -500,7 +519,7 @@ export type CreateKnowledgebaseHttpResponse = {
   status: 201;
 };
 export type CreateKnowledgebaseHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403;
 };
@@ -517,7 +536,7 @@ export type DeleteKnowledgebaseHttpResponse = {
   status: 204;
 };
 export type DeleteKnowledgebaseHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -534,7 +553,7 @@ export type GetKnowledgebaseHttpResponse = {
   status: 200;
 };
 export type GetKnowledgebaseHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -552,7 +571,7 @@ export type PatchKnowledgebaseHttpResponse = {
   status: 204;
 };
 export type PatchKnowledgebaseHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 429;
 };
@@ -570,7 +589,7 @@ export type SearchKnowledgebaseHttpResponse = {
   status: 200;
 };
 export type SearchKnowledgebaseHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 405 | 500;
 };
@@ -588,7 +607,7 @@ export type CreateKnowledgebaseDatasourceHttpResponse = {
   status: 201;
 };
 export type CreateKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -606,7 +625,7 @@ export type DeleteKnowledgebaseDatasourceHttpResponse = {
   status: 204;
 };
 export type DeleteKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -625,7 +644,7 @@ export type UpdateKnowledgebaseDatasourceHttpResponse = {
   status: 200;
 };
 export type UpdateKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -643,7 +662,7 @@ export type CancelKnowledgebaseDatasourceHttpResponse = {
   status: 200;
 };
 export type CancelKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -662,7 +681,7 @@ export type DownloadKnowledgebaseDatasourceHttpResponse = {
   status: 200;
 };
 export type DownloadKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404 | 409;
 };
@@ -684,7 +703,7 @@ export type SyncKnowledgebaseDatasourceHttpResponse = {
   status: 202;
 };
 export type SyncKnowledgebaseDatasourceHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -714,7 +733,7 @@ export type GetKnowledgebaseDatasourceHistoriesHttpResponse = {
   next?: (options?: PageCallOptions) => Promise<GetKnowledgebaseDatasourceHistoriesHttpResponse>;
 };
 export type GetKnowledgebaseDatasourceHistoriesHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -735,7 +754,7 @@ export type GetKnowledgebaseDatasourceHistoryHttpResponse = {
   status: 200;
 };
 export type GetKnowledgebaseDatasourceHistoryHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -753,7 +772,7 @@ export type DeleteKnowledgebaseDatasourceScheduleHttpResponse = {
   status: 204;
 };
 export type DeleteKnowledgebaseDatasourceScheduleHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -771,7 +790,7 @@ export type GetKnowledgebaseDatasourceScheduleHttpResponse = {
   status: 200;
 };
 export type GetKnowledgebaseDatasourceScheduleHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -790,7 +809,7 @@ export type CreateKnowledgebaseDatasourceScheduleHttpResponse = {
   status: 200 | 201;
 };
 export type CreateKnowledgebaseDatasourceScheduleHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };
@@ -819,7 +838,7 @@ export type GetKnowledgebaseHistoriesHttpResponse = {
   next?: (options?: PageCallOptions) => Promise<GetKnowledgebaseHistoriesHttpResponse>;
 };
 export type GetKnowledgebaseHistoriesHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 403 | 404;
 };

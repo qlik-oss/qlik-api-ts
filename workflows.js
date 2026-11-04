@@ -1,6 +1,6 @@
-import { n as automation_connections_exports, t as automationConnectionsExport } from "./chunks/automation-connections-DtcR5ojK.js";
-import { n as automation_connectors_exports, t as automationConnectorsExport } from "./chunks/automation-connectors-Bnv5PrTB.js";
-import { n as automations_exports, t as automationsExport } from "./chunks/automations-D9_Iop4i.js";
+import { n as automation_connections_exports, t as automationConnectionsExport } from "./chunks/automation-connections-C-khXham.js";
+import { n as automation_connectors_exports, t as automationConnectorsExport } from "./chunks/automation-connectors-CH-G12ZQ.js";
+import { n as automations_exports, t as automationsExport } from "./chunks/automations-D2d95D-P.js";
 
 // src/public/rest/workflows.ts
 /**

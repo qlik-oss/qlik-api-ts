@@ -1,18 +1,18 @@
 import { d as HostConfig } from "./chunks/auth-types-YxQFXW5F.js";
-import { InterceptorsAPI, createInterceptors } from "./interceptors.js";
 import { AuthAPI, getAccessToken, getWebResourceAuthParams, registerAuthModule, registerHostConfig, setDefaultHostConfig, unregisterHostConfig } from "./auth.js";
-import { t as QixAPI } from "./chunks/qix-CAVl4z1L.js";
-import { p as SharingTasksAPI } from "./chunks/sharing-tasks-DHTu5Apb.js";
+import { InterceptorsAPI, createInterceptors } from "./interceptors.js";
+import { t as QixAPI } from "./chunks/qix-WYLfo8Vu.js";
 import { AlertingAPI } from "./alerting.js";
+import { p as SharingTasksAPI } from "./chunks/sharing-tasks-DHTu5Apb.js";
+import { AnalyticsAPI } from "./analytics.js";
 import { t as AppsAPI } from "./chunks/apps-CycAc0q5.js";
 import { i as ChangeStoresAPI } from "./chunks/change-stores-CD8sUmQ9.js";
-import { r as AdaptiveCardsAPI } from "./chunks/adaptive-cards-D6KJ0xIV.js";
 import { t as DiscoveryAgentAPI } from "./chunks/discovery-agent-DE3LeWtD.js";
+import { r as AdaptiveCardsAPI } from "./chunks/adaptive-cards-D6KJ0xIV.js";
 import { u as OdagAppsAPI } from "./chunks/odag-apps-BaN7qqHY.js";
 import { Q as OdagLinksAPI } from "./chunks/odag-links-DnwUveM-.js";
 import { x as OdagRequestsAPI } from "./chunks/odag-requests-BCTW7C7w.js";
 import { l as OdagSettingsAPI } from "./chunks/odag-settings-CxGVRXPr.js";
-import { AnalyticsAPI } from "./analytics.js";
 import { ApiKeysAPI } from "./api-keys.js";
 import { AppsAPI as AppsAPI$1 } from "./apps.js";
 import { AssistantsAPI } from "./assistants.js";
@@ -26,16 +26,17 @@ import { BannersAPI } from "./banners.js";
 import { BrandsAPI } from "./brands.js";
 import { CollectionsAPI } from "./collections.js";
 import { ConditionsAPI } from "./conditions.js";
+import { ConnectivityAPI } from "./connectivity.js";
 import { f as DataConnectionsAPI } from "./chunks/data-connections-DWWxLAoc.js";
 import { a as DataCredentialsAPI } from "./chunks/data-credentials--A7yzhpt.js";
 import { s as DataSourcesAPI } from "./chunks/data-sources-BeEgW567.js";
-import { c as DirectAccessAgentsAPI } from "./chunks/direct-access-agents-CJsEsvZp.js";
-import { ConnectivityAPI } from "./connectivity.js";
+import { c as DirectAccessAgentsAPI } from "./chunks/direct-access-agents-Cfy-QiLK.js";
 import { ConsumptionAPI } from "./consumption.js";
+import { CoreAPI } from "./core.js";
 import { t as AuthSettingsAPI } from "./chunks/auth-settings-DqJoVch8.js";
 import { _ as DataFilesAPI } from "./chunks/data-files-CMmNghzj.js";
 import { m as IpPoliciesAPI } from "./chunks/ip-policies-BuG0Hx46.js";
-import { CoreAPI } from "./core.js";
+import { F as WebhooksAPI } from "./chunks/webhooks-wSHIETY8.js";
 import { CspOriginsAPI } from "./csp-origins.js";
 import { CsrfTokenAPI } from "./csrf-token.js";
 import { DataAlertsAPI } from "./data-alerts.js";
@@ -43,12 +44,12 @@ import { DataAssetsAPI } from "./data-assets.js";
 import { DataConnectionsAPI as DataConnectionsAPI$1 } from "./data-connections.js";
 import { DataCredentialsAPI as DataCredentialsAPI$1 } from "./data-credentials.js";
 import { DataFilesAPI as DataFilesAPI$1 } from "./data-files.js";
+import { DataGovernanceAPI } from "./data-governance.js";
 import { s as DataContractsAPI } from "./chunks/data-contracts-D986zSWQ.js";
 import { g as DataProductsAPI } from "./chunks/data-products-DiF8H3iy.js";
 import { h as DataQualitiesAPI } from "./chunks/data-qualities-D1qqkhIT.js";
 import { Q as SemanticTypesAPI } from "./chunks/semantic-types-DjV-N1Du.js";
 import { h as TrustScoresAPI } from "./chunks/trust-scores-C7g00YoH.js";
-import { DataGovernanceAPI } from "./data-governance.js";
 import { DataQualitiesAPI as DataQualitiesAPI$1 } from "./data-qualities.js";
 import { DataSetsAPI } from "./data-sets.js";
 import { DataSourcesAPI as DataSourcesAPI$1 } from "./data-sources.js";
@@ -77,8 +78,8 @@ import { ReloadsAPI } from "./reloads.js";
 import { ReportTemplatesAPI } from "./report-templates.js";
 import { ReportsAPI } from "./reports.js";
 import { RolesAPI } from "./roles.js";
-import { dt as TasksAPI } from "./chunks/tasks-CyEpGTAG.js";
 import { SchedulingAPI } from "./scheduling.js";
+import { bt as TasksAPI } from "./chunks/tasks-Cuojtp6T.js";
 import { SharingTasksAPI as SharingTasksAPI$1 } from "./sharing-tasks.js";
 import { SpacesAPI } from "./spaces.js";
 import { TasksAPI as TasksAPI$1 } from "./tasks.js";
@@ -91,11 +92,11 @@ import { UiConfigAPI } from "./ui-config.js";
 import { UsersAPI } from "./users.js";
 import { WebIntegrationsAPI } from "./web-integrations.js";
 import { WebNotificationsAPI } from "./web-notifications.js";
-import { WebhooksAPI } from "./webhooks.js";
+import { WebhooksAPI as WebhooksAPI$1 } from "./webhooks.js";
+import { WorkflowsAPI } from "./workflows.js";
 import { d as AutomationConnectionsAPI$1 } from "./chunks/automation-connections-CGVr1uHV.js";
 import { l as AutomationConnectorsAPI$1 } from "./chunks/automation-connectors-DbH9LzwR.js";
 import { s as AutomationsAPI$1 } from "./chunks/automations-B_95UpXs.js";
-import { WorkflowsAPI } from "./workflows.js";
 export declare const auth: {
   registerAuthModule: typeof registerAuthModule;
   setDefaultHostConfig: typeof setDefaultHostConfig;
@@ -148,6 +149,7 @@ export declare const core: {
   authSettings: AuthSettingsAPI;
   dataFiles: DataFilesAPI;
   ipPolicies: IpPoliciesAPI;
+  webhooks: WebhooksAPI;
 };
 export declare const cspOrigins: CspOriginsAPI;
 export declare const csrfToken: CsrfTokenAPI;
@@ -206,7 +208,7 @@ export declare const uiConfig: UiConfigAPI;
 export declare const users: UsersAPI;
 export declare const webIntegrations: WebIntegrationsAPI;
 export declare const webNotifications: WebNotificationsAPI;
-export declare const webhooks: WebhooksAPI;
+export declare const webhooks: WebhooksAPI$1;
 export declare const workflows: {
   automationConnections: AutomationConnectionsAPI$1;
   automationConnectors: AutomationConnectorsAPI$1;
@@ -275,6 +277,7 @@ export interface QlikAPI {
     authSettings: AuthSettingsAPI;
     dataFiles: DataFilesAPI;
     ipPolicies: IpPoliciesAPI;
+    webhooks: WebhooksAPI;
   };
   /** Functions for the cspOrigins api */
   cspOrigins: CspOriginsAPI;
@@ -383,7 +386,7 @@ export interface QlikAPI {
   /** Functions for the webNotifications api */
   webNotifications: WebNotificationsAPI;
   /** Functions for the webhooks api */
-  webhooks: WebhooksAPI;
+  webhooks: WebhooksAPI$1;
   /** Functions for the workflows api */
   workflows: WorkflowsAPI & {
     automationConnections: AutomationConnectionsAPI$1;

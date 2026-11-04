@@ -55,8 +55,9 @@
 <li><code>experimentVersionId</code> UUID string - ID of experiment version in which model(s) exist</li>
 <li><code>predictionId</code> UUID string - ID of prediction which exists on deployment</li>
 <li><code>predictionEnabled</code> boolean - Are predictions enabled</li>
-<li><code>exactName</code> string - Deployments with exact name. Names may not be unique.</li>
-<li><code>nameContains</code> string - Deployments where name includes this. Names may not be unique</li>
+<li><code>exactName</code> string - Deployments with this exact, case-sensitive name. <code>eq</code> only (<code>exactName eq &quot;x&quot;</code>). Names may not be unique</li>
+<li><code>nameContains</code> string - Deployments where name includes this case-insensitive string. <code>co</code> only (<code>nameContains co &quot;x&quot;</code>)</li>
+<li>If both <code>exactName</code> and <code>nameContains</code> are provided, only <code>exactName</code> is applied</li>
 <li><code>experimentType</code> string - Deployments that have models of the experiment type</li>
 </ul>
 </div></li>

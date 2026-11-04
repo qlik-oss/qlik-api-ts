@@ -46,6 +46,7 @@
     "./core/auth-settings": "./core/auth-settings.js",
     "./core/data-files": "./core/data-files.js",
     "./core/ip-policies": "./core/ip-policies.js",
+    "./core/webhooks": "./core/webhooks.js",
     "./csp-origins": "./csp-origins.js",
     "./csrf-token": "./csrf-token.js",
     "./data-alerts": "./data-alerts.js",
@@ -114,10 +115,10 @@
     "enigma.js": "^2.15.0",
     "extend": "3.0.2",
     "lodash-es": "^4.18.1",
-    "ws": "^8.22.0"
+    "ws": "^8.22.1"
   },
   "engines": {
     "node": ">=20.0.0"
   },
-  "packageManager": "pnpm@12.15.0"
+  "packageManager": "pnpm@12.16.1"
 }

@@ -120,6 +120,8 @@ export type OAuthClientAdminReadResponse = {
  * Base schema for OAuth client requests and responses
  */
 export type OAuthClientBase = {
+  /** Effective access token lifetime in seconds - the configured value, or the default when not configured. Only returned when token expiration is configurable. */
+  accessTokenExpirationDuration?: number;
   /** List of allowed authentication methods for the client */
   allowedAuthMethods?: ("client_secret" | "private_key_jwt")[];
   /** Allowed grant types, only for use with appType: 'web' */
@@ -166,6 +168,8 @@ export type OAuthClientBase = {
   publicKeys?: JWK[];
   /** The timestamp which is set, if the client is published. */
   publishedAt?: string;
+  /** Effective refresh token lifetime in seconds - the configured value, or the default when not configured. Not returned for `spa` and `native` clients. Only returned when token expiration is configurable. */
+  refreshTokenExpirationDuration?: number;
   /** The timestamp for when the oauth-clients record was updated. */
   updatedAt?: string;
 };
@@ -173,6 +177,8 @@ export type OAuthClientBase = {
  * Request schema for OAuth client creation
  */
 export type OAuthClientCreateRequest = {
+  /** Access token lifetime in seconds. Must be a positive integer within the configured minimum and maximum. Requires the configurable token expiration feature; rejected with `400 Bad Request` otherwise. Defaults to the service default when omitted. */
+  accessTokenExpirationDuration?: number;
   /** List of allowed authentication methods for the client */
   allowedAuthMethods?: ("client_secret" | "private_key_jwt")[];
   /** Allowed grant types, only for use with appType: 'web' */
@@ -202,6 +208,8 @@ export type OAuthClientCreateRequest = {
   publicKeys?: JWK[];
   /** List of allowed redirect URIs for login */
   redirectUris?: string[];
+  /** Refresh token lifetime in seconds. Must be a positive integer within the configured minimum and maximum and greater than the effective access token lifetime. Not supported for `spa` and `native` clients, nor for MyQlik clients. Requires the configurable token expiration feature; rejected with `400 Bad Request` otherwise. Defaults to the service default when omitted. */
+  refreshTokenExpirationDuration?: number;
 };
 /**
  * Response schema for OAuth client creation
@@ -270,9 +278,9 @@ export type OAuthClientUpdate = {
   /** The operation to be performed */
   op: "add" | "remove" | "replace";
   /** The path for the given resource field to patch */
-  path: "/allowedOrigins" | "/clientName" | "/clientUri" | "/description" | "/logoUri" | "/redirectUris" | "/allowedScopes" | "/allowedGrantTypes" | "/publicKeys" | "/allowedAuthMethods" | "/jwksUri";
-  /** The value to be used for this operation. */
-  value?: string | string[];
+  path: "/allowedOrigins" | "/clientName" | "/clientUri" | "/description" | "/logoUri" | "/redirectUris" | "/allowedScopes" | "/allowedGrantTypes" | "/publicKeys" | "/allowedAuthMethods" | "/jwksUri" | "/accessTokenExpirationDuration" | "/refreshTokenExpirationDuration";
+  /** The value to be used for this operation. Token expiration durations are integers in seconds, see the create request for the rules. */
+  value?: string | number | string[];
 };
 /**
  * A JSON Patch document as defined in http://tools.ietf.org/html/rfc6902

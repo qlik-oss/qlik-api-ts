@@ -29,6 +29,9 @@
 <li><a href="../modules/direct-access-agents.html">direct-access-agents</a></li>
 <li><a href="" aria-current="page">PatchOperationResponse</a></li></ul>
 <h1>Type Alias PatchOperationResponse</h1></div>
+<section class="tsd-panel tsd-comment">
+<div class="tsd-comment tsd-typography"><p>The result of a PATCH on the agent configuration.</p>
+</div></section>
 <div class="tsd-signature"><span class="tsd-signature-keyword">type</span> <span class="tsd-kind-type-alias">PatchOperationResponse</span> <span class="tsd-signature-symbol">=</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#data">data</a><span class="tsd-signature-symbol">?:</span> <a href="direct-access-agents.PatchOperationValidationResult.html" class="tsd-signature-type tsd-kind-type-alias">PatchOperationValidationResult</a><span class="tsd-signature-symbol">[]</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#errormessage">errorMessage</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#failedpatcherror">failedPatchError</a><span class="tsd-signature-symbol">?:</span> <a href="direct-access-agents.ErrorResponse.html" class="tsd-signature-type tsd-kind-type-alias">ErrorResponse</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#httpstatuscode">httpStatusCode</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
@@ -47,16 +50,24 @@
 <section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="data"><code class="tsd-tag">Optional</code><span>data</span><a href="#data" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">data</span><span class="tsd-signature-symbol">?:</span> <a href="direct-access-agents.PatchOperationValidationResult.html" class="tsd-signature-type tsd-kind-type-alias">PatchOperationValidationResult</a><span class="tsd-signature-symbol">[]</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">data</span><span class="tsd-signature-symbol">?:</span> <a href="direct-access-agents.PatchOperationValidationResult.html" class="tsd-signature-type tsd-kind-type-alias">PatchOperationValidationResult</a><span class="tsd-signature-symbol">[]</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></div>
+<div class="tsd-comment tsd-typography"><p>One entry per operation of the request, in request order.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="errormessage"><code class="tsd-tag">Optional</code><span>error<wbr/>Message</span><a href="#errormessage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">errorMessage</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">errorMessage</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></div>
+<div class="tsd-comment tsd-typography"><p>The error text from the agent when the patch could not be processed; <code>null</code> otherwise.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="failedpatcherror"><code class="tsd-tag">Optional</code><span>failed<wbr/>Patch<wbr/>Error</span><a href="#failedpatcherror" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">failedPatchError</span><span class="tsd-signature-symbol">?:</span> <a href="direct-access-agents.ErrorResponse.html" class="tsd-signature-type tsd-kind-type-alias">ErrorResponse</a></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">failedPatchError</span><span class="tsd-signature-symbol">?:</span> <a href="direct-access-agents.ErrorResponse.html" class="tsd-signature-type tsd-kind-type-alias">ErrorResponse</a></div>
+<div class="tsd-comment tsd-typography"><p>The error structure of this API.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="httpstatuscode"><code class="tsd-tag">Optional</code><span>http<wbr/>Status<wbr/>Code</span><a href="#httpstatuscode" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">httpStatusCode</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div></section></section></details></div>
+<div class="tsd-signature"><span class="tsd-kind-property">httpStatusCode</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
+<div class="tsd-comment tsd-typography"><p>The status the agent reported for the patch: <code>204</code> all operations applied, <code>207</code> some applied, <code>400</code> none applied.</p>
+</div></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

@@ -29,6 +29,9 @@
 <li><a href="../modules/direct-access-agents.html">direct-access-agents</a></li>
 <li><a href="" aria-current="page">PatchOperationValidationResult</a></li></ul>
 <h1>Type Alias PatchOperationValidationResult</h1></div>
+<section class="tsd-panel tsd-comment">
+<div class="tsd-comment tsd-typography"><p>The validation result of one patch operation.</p>
+</div></section>
 <div class="tsd-signature"><span class="tsd-signature-keyword">type</span> <span class="tsd-kind-type-alias">PatchOperationValidationResult</span> <span class="tsd-signature-symbol">=</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#operation">operation</a><span class="tsd-signature-symbol">?:</span> <a href="direct-access-agents.Operation.html" class="tsd-signature-type tsd-kind-type-alias">Operation</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#valid">valid</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#validationresult">validationResult</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
@@ -46,13 +49,19 @@
 <section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="operation"><code class="tsd-tag">Optional</code><span>operation</span><a href="#operation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">operation</span><span class="tsd-signature-symbol">?:</span> <a href="direct-access-agents.Operation.html" class="tsd-signature-type tsd-kind-type-alias">Operation</a></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">operation</span><span class="tsd-signature-symbol">?:</span> <a href="direct-access-agents.Operation.html" class="tsd-signature-type tsd-kind-type-alias">Operation</a></div>
+<div class="tsd-comment tsd-typography"><p>A JSON Patch operation on one configuration property.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="valid"><code class="tsd-tag">Optional</code><span>valid</span><a href="#valid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">valid</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div></section>
+<div class="tsd-signature"><span class="tsd-kind-property">valid</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
+<div class="tsd-comment tsd-typography"><p><code>true</code> when the operation passed validation and was applied.</p>
+</div></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="validationresult"><code class="tsd-tag">Optional</code><span>validation<wbr/>Result</span><a href="#validationresult" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">validationResult</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></div></section></section></details></div>
+<div class="tsd-signature"><span class="tsd-kind-property">validationResult</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></div>
+<div class="tsd-comment tsd-typography"><p>Why the operation was rejected; <code>null</code> when it is valid.</p>
+</div></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

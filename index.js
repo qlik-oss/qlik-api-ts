@@ -1,6 +1,6 @@
-import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-DC35wLOr.js";
+import { n as invokeFetch, t as clearApiCache } from "./chunks/invoke-fetch-D5WdETph.js";
 import auth_default from "./auth.js";
-import { o as interceptors$1 } from "./chunks/interceptors-BHu_f1N_.js";
+import { o as interceptors$1 } from "./chunks/interceptors-DKlbkGnu.js";
 import qix$1 from "./qix.js";
 
 // src/runtime-api-generator/runtime-api-generator-common.ts
@@ -602,13 +602,33 @@ const createCoreIpPoliciesRuntimeAPI = apiDefToApiPublic("core/ip-policies", { a
 		"patchIpPolicy:ABJ:"
 	]
 } } } });
+const createCoreWebhooksRuntimeAPI = apiDefToApiPublic("core/webhooks", { api: { core: { webhooks: {
+	"": ["getWebhooks:GQ:", "createWebhook:PBJ:"],
+	"event-types": ["getWebhookEventTypes:G:"],
+	"{id}": {
+		"": [
+			"deleteWebhook:D:",
+			"getWebhook:G:",
+			"patchWebhook:ABJ:",
+			"updateWebhook:UBJ:"
+		],
+		deliveries: {
+			"": ["getWebhookDeliveries:GQ:"],
+			"{deliveryId}": {
+				"": ["getWebhookDelivery:G:"],
+				actions: { resend: ["resendWebhookDelivery:P:"] }
+			}
+		}
+	}
+} } } });
 const createCoreRuntimeAPI = apiDefToApiPublic("core", {}, {
 	"auth-settings": createCoreAuthSettingsRuntimeAPI,
 	authSettings: createCoreAuthSettingsRuntimeAPI,
 	"data-files": createCoreDataFilesRuntimeAPI,
 	dataFiles: createCoreDataFilesRuntimeAPI,
 	"ip-policies": createCoreIpPoliciesRuntimeAPI,
-	ipPolicies: createCoreIpPoliciesRuntimeAPI
+	ipPolicies: createCoreIpPoliciesRuntimeAPI,
+	webhooks: createCoreWebhooksRuntimeAPI
 });
 const createCspOriginsRuntimeAPI = apiDefToApiPublic("csp-origins", { api: { v1: { "csp-origins": {
 	"": ["getCSPEntries:GQ:", "createCSPEntry:PBJ:"],
@@ -1056,8 +1076,8 @@ const createMlRuntimeAPI = apiDefToApiPublic("ml", { api: { v1: { ml: {
 				"patchMlDeployment:ABJ:"
 			],
 			actions: {
-				"activate-models": ["activateModelsMlDeployment:P:"],
-				"deactivate-models": ["deactivateModelsMlDeployment:P:"]
+				"activate-models": ["activateModelsMlDeploymentWithBody:PBJ:", "activateModelsMlDeployment:P:"],
+				"deactivate-models": ["deactivateModelsMlDeploymentWithBody:PBJ:", "deactivateModelsMlDeployment:P:"]
 			},
 			aliases: {
 				"": ["getMlDeploymentAliases:GQ:", "createMlDeploymentAliase:PBJ:"],
@@ -1203,7 +1223,14 @@ const createSchedulingTasksRuntimeAPI = apiDefToApiPublic("scheduling/tasks", { 
 		"createTask:PQBJ:",
 		"createTaskWithoutQuery:PBJ:"
 	],
-	resources: { "{id}": { runs: ["getTaskResourceRuns:GQ:"] } },
+	resources: { "{id}": {
+		actions: { reload: {
+			"on-dataset-updated": ["reloadTasksResourceOnDatasetUpdated_FIX_THIS_QUIRKY_NAME:PBJ:"],
+			"on-task-event": ["reloadTasksResourceOnTaskEvent_FIX_THIS_QUIRKY_NAME:PBJ:"],
+			"on-time-schedule": ["reloadTasksResourceOnTimeSchedule_FIX_THIS_QUIRKY_NAME:PBJ:"]
+		} },
+		runs: ["getTaskResourceRuns:GQ:"]
+	} },
 	"{id}": {
 		"": [
 			"deleteTask:D:",

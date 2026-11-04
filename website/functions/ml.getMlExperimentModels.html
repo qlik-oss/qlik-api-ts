@@ -86,10 +86,16 @@ xgb_regression<br><br></li>
 <p><code>hasDeployment</code> boolean - Models that are part of a deployment</p>
 </li>
 <li>
-<p><code>nameContains</code> string - Models with name includes this case-insensitive string</p>
+<p><code>exactName</code> string - Models with this exact, case-sensitive name. <code>eq</code> only (<code>exactName eq &quot;x&quot;</code>). Model names may not be unique</p>
 </li>
 <li>
-<p><code>exactName</code> string - Models with exact name. Model names may not be unique</p>
+<p><code>nameContains</code> string - Models where name includes this case-insensitive string. <code>co</code> only (<code>nameContains co &quot;x&quot;</code>)</p>
+</li>
+<li>
+<p><code>name</code> string - With <code>eq</code>, same as <code>exactName</code> (case-sensitive). With <code>co</code>, same as <code>nameContains</code> (case-insensitive)</p>
+</li>
+<li>
+<p>If both an exact name and a contains name filter are provided, only the exact name filter is applied</p>
 </li>
 <li>
 <p><code>samplingRatio</code> number - Find models by sampling ratio</p>
