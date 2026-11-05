@@ -1,0 +1,3193 @@
+/*
+ * ------------------------------------------------------------------------
+ * ## THIS FILE WAS GENERATED WITH QMFE-API-GENERATOR                    ##
+ * ##                                                                    ##
+ * ## AUTHOR: frontend-core-team                                         ##
+ * ------------------------------------------------------------------------
+ */
+
+import {
+  clearApiCache,
+  invokeFetch,
+  type ApiCallOptions,
+  type DownloadableBlob,
+  type PageCallOptions,
+} from "#public/invoke-fetch";
+
+/* -------------------------------------------------------------------------- */
+/*                                Public types                                */
+/* -------------------------------------------------------------------------- */
+
+export type Analysis =
+  | "breakdown"
+  | "changePoint"
+  | "comparison"
+  | "contribution"
+  | "correlation"
+  | "fact"
+  | "mutualInfo"
+  | "rank"
+  | "spike"
+  | "trend"
+  | "values";
+
+export type AnalysisComposition = {
+  description?: {
+    long?: string;
+    short?: string;
+  };
+  /** Upper and lower bounds for items of specific classification types */
+  dims?: CompositionMinMax;
+  /** Upper and lower bounds for items of specific classification types */
+  geos?: CompositionMinMax;
+  /** Upper and lower bounds for items of specific classification types */
+  items?: CompositionMinMax;
+  /** Upper and lower bounds for items of specific classification types */
+  msrs?: CompositionMinMax;
+  /** Upper and lower bounds for items of specific classification types */
+  temporals?: CompositionMinMax;
+};
+
+export type AnalysisDescriptor = {
+  compositions?: AnalysisComposition[];
+  id?: string;
+  /** Used for period-specific analyses to indicate the defined or available calendar period must be of type autoCalendar */
+  requiresAutoCalendarPeriod?: boolean;
+  /** Used for period-specific analyses to indicate the temporal dimension must be associated with one or more analysis periods */
+  requiresAvailableAnalysisPeriod?: boolean;
+  /** Used for period-specific analyses to indicate the measure must be associated with one or more analysis periods */
+  requiresDefinedAnalysisPeriod?: boolean;
+  /** If analysis can work with master items (default is true) */
+  supportsMasterItems?: boolean;
+};
+
+export type AnalysisDescriptorResponse = {
+  data?: AnalysisDescriptor[];
+  links?: Links;
+};
+
+export type AnalysisDetails = {
+  analysis?: Analysis;
+  analysisGroup?: AnalysisGroup;
+  title?: string;
+};
+
+export type AnalysisGroup = "anomaly" | "brekadown" | "comparison" | "correl" | "fact" | "list" | "mutualInfo" | "rank";
+
+export type AnalysisModelItemField = {
+  /** classification defines the default role that attribute can play in an analysis */
+  classifications?: Classifications;
+  /** whether the field is hidden in business logic */
+  isHidden?: boolean;
+  /** populated only for fields */
+  name?: string;
+  simplifiedClassifications?: SimplifiedClassifications;
+};
+
+export type AnalysisModelItemMasterItem = {
+  caption?: string;
+  /** classification defines the default role that attribute can play in an analysis */
+  classifications?: Classifications;
+  /** whether the master item is hidden in business logic */
+  isHidden?: boolean;
+  /** only available for master items */
+  libId?: string;
+  simplifiedClassifications?: SimplifiedClassifications;
+};
+
+export type AnalysisModelResponse = {
+  data?: AnalysisModelResponseDetail[];
+  links?: Links;
+};
+
+export type AnalysisModelResponseDetail = {
+  fields?: AnalysisModelItemField[];
+  /** set only if previous property is true, to indicate if the business logic passes validation */
+  isDefinedLogicalModelValid?: boolean;
+  /** if the analysis model is constructed based on a user-defined business-logic (as opposed to a default one) */
+  isLogicalModelEnabled?: boolean;
+  masterItems?: AnalysisModelItemMasterItem[];
+};
+
+/**
+ * Request payload can be of two types, using natural language query or consist of fields or master items and optional target analysis.
+ * In below examples, consider sales as a master item and product as field, so to get recommendations using sales and product,
+ * you can utilize below three approaches, also you can set language parameter in headers as part of accept-language.
+ * Examples:
+ * ```
+ * {
+ *   'text': 'show me sales by product'
+ * }
+ * ```
+ * ```
+ * {
+ *   'fields': [
+ *     {
+ *       'name': 'product'
+ *     }
+ *   ],
+ *   'libItems': [
+ *     {
+ *       libId: 'NwQfJ'
+ *     }
+ *   ]
+ * }
+ * ```
+ * ```
+ * {
+ *   'fields': [
+ *     {
+ *       'name': 'product'
+ *     }
+ *   ],
+ *   'libItems': [
+ *     {
+ *       'libId': 'NwQfJ'
+ *     }
+ *   ],
+ *   'targetAnalysis': {
+ *     'id': 'rank-rank'
+ *   }
+ * }
+ * ```
+ */
+export type AnalysisRecommendRequest = RecommendNaturalLangQuery | RecommendItems;
+
+export type AnalysisRecommendationResponse = {
+  data?: AnalysisRecommendationResponseDetail[];
+};
+
+export type AnalysisRecommendationResponseDetail = {
+  nluInfo?: PartialNluInfo[];
+  recAnalyses: RecommendedAnalysis[];
+};
+
+export type AppAttributes = {
+  /** The description of the application */
+  description?: string;
+  /** Set custom locale instead of the system default */
+  locale?: string;
+  /** The name (title) of the application */
+  name?: string;
+  /** The space ID of the application */
+  spaceId?: string;
+  usage?: UsageEnum;
+};
+
+export type AppContentList = {
+  /** Content list items. */
+  data?: AppContentListItem[];
+  /** Content library name. */
+  library?: string;
+  /** Content library relative listing path. Empty in case of root listed or representing actual subpath listed. */
+  subpath?: string;
+};
+
+export type AppContentListItem = {
+  /** Unique content identifier. */
+  id?: string;
+  /** Unique content link. */
+  link?: string;
+  /** Content name. */
+  name?: string;
+  /** Content type. */
+  type?: string;
+};
+
+export type AppObjectGenericType =
+  | "genericObject"
+  | "genericBookmark"
+  | "genericMeasure"
+  | "genericDimension"
+  | "genericVariable";
+
+export type AppUpdateAttributes = {
+  /** The description of the application. */
+  description?: string;
+  /** The name (title) of the application. */
+  name?: string;
+};
+
+/**
+ * Chart type given to current recommendation
+ */
+export type ChartType =
+  | "barchart"
+  | "combochart"
+  | "distributionplot"
+  | "kpi"
+  | "linechart"
+  | "map"
+  | "scatterplot"
+  | "table";
+
+/**
+ * classification defines the default role that attribute can play in an analysis
+ */
+export type Classifications = (
+  | "dimension"
+  | "measure"
+  | "temporal"
+  | "city"
+  | "address"
+  | "boolean"
+  | "country"
+  | "date"
+  | "email"
+  | "geographical"
+  | "geoPoint"
+  | "geoPolygon"
+  | "hour"
+  | "latitude"
+  | "monetary"
+  | "ordinal"
+  | "percentage"
+  | "postalCode"
+  | "quarter"
+  | "stateProvince"
+  | "timestamp"
+  | "week"
+  | "weekDay"
+  | "year"
+  | "yearDay"
+)[];
+
+/**
+ * Upper and lower bounds for items of specific classification types
+ */
+export type CompositionMinMax = {
+  max?: number;
+  min?: number;
+};
+
+export type CreateApp = {
+  attributes?: AppAttributes;
+};
+
+export type DataModelMetadata = {
+  /** List of field descriptions. */
+  fields?: FieldMetadata[];
+  /** If set to true, the app has section access configured. */
+  has_section_access?: boolean;
+  is_direct_query_mode?: boolean;
+  reload_meta?: LastReloadMetadata;
+  /** Static memory usage for the app. */
+  static_byte_size?: number;
+  /** List of table descriptions. */
+  tables?: TableMetadata[];
+  /** Profiling data of the tables in the app. */
+  tables_profiling_data?: TableProfilingData[];
+  usage?: UsageEnum;
+};
+
+export type EngineGBSize = "0" | "40" | "60" | "80" | "120" | "160" | "200";
+
+/**
+ * Engine size override for app placement on non reload engines.
+ */
+export type EngineSize = {
+  minEngineSize?: EngineGBSize;
+};
+
+/**
+ * An error object.
+ */
+export type Error = {
+  /** The error code. */
+  code: string;
+  /** A human-readable explanation specific to this occurrence of the problem. */
+  detail?: string;
+  /** Additional properties relating to the error. */
+  meta?: unknown;
+  /** References to the source of the error. */
+  source?: {
+    /** The URI query parameter that caused the error. */
+    parameter?: string;
+    /** A JSON Pointer to the property that caused the error. */
+    pointer?: string;
+  };
+  /** Summary of the problem. */
+  title: string;
+};
+
+export type Errors = {
+  errors?: Error[];
+};
+
+export type FieldAttrType = "U" | "A" | "I" | "R" | "F" | "M" | "D" | "T" | "TS" | "IV";
+
+/**
+ * Sets the formatting of a field.
+ * The properties of _qFieldAttributes_ and the formatting mechanism are described below.
+ *
+ * ### Formatting mechanism
+ * The formatting mechanism depends on the type set in _qType,_ as shown below:
+ * <div class=note>In case of inconsistencies between the type and the format pattern, the format pattern takes precedence over the type.</div>
+ *
+ * ### Type is DATE, TIME, TIMESTAMP or INTERVAL
+ * The following applies:
+ * * If a format pattern is defined in _qFmt_ , the formatting is as defined in _qFmt_ .
+ * * If _qFmt_ is empty, the formatting is defined by the number interpretation variables included at the top of the script ( _TimeFormat_ , _DateFormat_ , _TimeStampFormat_ ).
+ * * The properties _qDec_ , _qThou_ , _qnDec_ , _qUseThou_ are not used.
+ *
+ * ### Type is INTEGER
+ * The following applies:
+ * * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the formatting mechanism uses the number interpretation variables included at the top of the script ( _DecimalSep_ and _ThousandSep_ ).
+ * * If no format pattern is defined in _qFmt_ , no formatting is applied. The properties _qDec_ , _qThou_ , _qnDec_ , _qUseThou_ and the number interpretation variables defined in the script are not used .
+ *
+ * ### Type is REAL
+ * The following applies:
+ * * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the engine uses the number interpretation variables included at the top of the script ( _DecimalSep_ and _ThousandSep_ ).
+ * * If no format pattern is defined in _qFmt_ , and if the value is almost an integer value (for example, 14,000012), the value is formatted as an integer. The properties _qDec_ , _qThou_ , _qnDec_ , _qUseThou_ are not used.
+ * * If no format pattern is defined in _qFmt_ , and if _qnDec_ is defined and not 0, the property _qDec_ is used. If _qDec_ is not defined, the variable _DecimalSep_ defined at the top of the script is used.
+ * * If no format pattern is defined in _qFmt_ , and if _qnDec_ is 0, the number of decimals is 14 and the property _qDec_ is used. If _qDec_ is not defined, the variable _DecimalSep_ defined at the top of the script is used.
+ *
+ * ### Type is FIX
+ * The following applies:
+ * * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the engine uses the number interpretation variables included at the top of the script ( _DecimalSep_ and _ThousandSep_ ).
+ * * If no format pattern is defined in _qFmt_ , the properties _qDec_ and _qnDec_ are used. If _qDec_ is not defined, the variable _DecimalSep_ defined at the top of the script is used.
+ *
+ * ### Type is MONEY
+ * The following applies:
+ * * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the engine uses the number interpretation variables included at the top of any script ( _MoneyDecimalSep_ and _MoneyThousandSep_ ).
+ * * If no format pattern is defined in _qFmt_ , the engine uses the number interpretation variables included at the top of the script ( _MoneyDecimalSep_ and _MoneyThousandSep_ ).
+ *
+ * ### Type is ASCII
+ * No formatting, _qFmt_ is ignored.
+ */
+export type FieldAttributes = {
+  /** Defines the decimal separator.
+   * Example: **.** */
+  Dec?: string;
+  /** Defines the format pattern that applies to _qText_ .
+   * Is used in connection to the type of the field (parameter **qType** ).
+   * For more information, see _Formatting mechanism_.
+   * Example: _YYYY-MM-DD_ for a date. */
+  Fmt?: string;
+  /** Defines the thousand separator (if any).
+   * Is used if **qUseThou** is set to 1.
+   * Example: **,** */
+  Thou?: string;
+  Type?: FieldAttrType;
+  /** Defines whether or not a thousands separator must be used.
+   * Default is 0. */
+  UseThou?: number;
+  /** Number of decimals.
+   * Default is 10. */
+  nDec?: number;
+};
+
+export type FieldInTableProfilingData = {
+  /** Average of all numerical values. NaN otherwise. */
+  Average?: number;
+  /** Average string length of textual values. 0 otherwise. */
+  AvgStringLen?: number;
+  /** Data evenness aka Shannon's entropy normalized to [0,1] */
+  DataEvenness?: number;
+  /** Number of distinct numeric values */
+  DistinctNumericValues?: number;
+  /** Number of distinct text values */
+  DistinctTextValues?: number;
+  /** Number of distinct values */
+  DistinctValues?: number;
+  /** Number of empty strings */
+  EmptyStrings?: number;
+  /** List of tags related to the field. */
+  FieldTags?: string[];
+  /** For textual values the first sorted string. */
+  FirstSorted?: string;
+  /** The .01, .05, .1, .25, .5, .75, .9, .95, .99 fractiles. Array of NaN otherwise. */
+  Fractiles?: number[];
+  FrequencyDistribution?: FrequencyDistributionData;
+  /** Kurtosis of the numerical values. NaN otherwise. */
+  Kurtosis?: number;
+  /** For textual values the last sorted string. */
+  LastSorted?: string;
+  /** Maximum value of numerical values. NaN otherwise. */
+  Max?: number;
+  /** Maximum string length of textual values. 0 otherwise. */
+  MaxStringLen?: number;
+  /** Median of all numerical values. NaN otherwise. */
+  Median?: number;
+  /** Minimum value of numerical values. NaN otherwise. */
+  Min?: number;
+  /** Minimum string length of textual values. 0 otherwise. */
+  MinStringLen?: number;
+  /** Three most frequent values and their frequencies */
+  MostFrequent?: SymbolFrequency[];
+  /** Name of the field. */
+  Name?: string;
+  /** Number of negative values */
+  NegValues?: number;
+  /** Number of null values */
+  NullValues?: number;
+  /** Sets the formatting of a field.
+   * The properties of _qFieldAttributes_ and the formatting mechanism are described below.
+   *
+   * ### Formatting mechanism
+   * The formatting mechanism depends on the type set in _qType,_ as shown below:
+   * <div class=note>In case of inconsistencies between the type and the format pattern, the format pattern takes precedence over the type.</div>
+   *
+   * ### Type is DATE, TIME, TIMESTAMP or INTERVAL
+   * The following applies:
+   * * If a format pattern is defined in _qFmt_ , the formatting is as defined in _qFmt_ .
+   * * If _qFmt_ is empty, the formatting is defined by the number interpretation variables included at the top of the script ( _TimeFormat_ , _DateFormat_ , _TimeStampFormat_ ).
+   * * The properties _qDec_ , _qThou_ , _qnDec_ , _qUseThou_ are not used.
+   *
+   * ### Type is INTEGER
+   * The following applies:
+   * * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the formatting mechanism uses the number interpretation variables included at the top of the script ( _DecimalSep_ and _ThousandSep_ ).
+   * * If no format pattern is defined in _qFmt_ , no formatting is applied. The properties _qDec_ , _qThou_ , _qnDec_ , _qUseThou_ and the number interpretation variables defined in the script are not used .
+   *
+   * ### Type is REAL
+   * The following applies:
+   * * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the engine uses the number interpretation variables included at the top of the script ( _DecimalSep_ and _ThousandSep_ ).
+   * * If no format pattern is defined in _qFmt_ , and if the value is almost an integer value (for example, 14,000012), the value is formatted as an integer. The properties _qDec_ , _qThou_ , _qnDec_ , _qUseThou_ are not used.
+   * * If no format pattern is defined in _qFmt_ , and if _qnDec_ is defined and not 0, the property _qDec_ is used. If _qDec_ is not defined, the variable _DecimalSep_ defined at the top of the script is used.
+   * * If no format pattern is defined in _qFmt_ , and if _qnDec_ is 0, the number of decimals is 14 and the property _qDec_ is used. If _qDec_ is not defined, the variable _DecimalSep_ defined at the top of the script is used.
+   *
+   * ### Type is FIX
+   * The following applies:
+   * * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the engine uses the number interpretation variables included at the top of the script ( _DecimalSep_ and _ThousandSep_ ).
+   * * If no format pattern is defined in _qFmt_ , the properties _qDec_ and _qnDec_ are used. If _qDec_ is not defined, the variable _DecimalSep_ defined at the top of the script is used.
+   *
+   * ### Type is MONEY
+   * The following applies:
+   * * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the engine uses the number interpretation variables included at the top of any script ( _MoneyDecimalSep_ and _MoneyThousandSep_ ).
+   * * If no format pattern is defined in _qFmt_ , the engine uses the number interpretation variables included at the top of the script ( _MoneyDecimalSep_ and _MoneyThousandSep_ ).
+   *
+   * ### Type is ASCII
+   * No formatting, _qFmt_ is ignored. */
+  NumberFormat?: FieldAttributes;
+  /** Number of numeric values */
+  NumericValues?: number;
+  /** Number of positive values */
+  PosValues?: number;
+  /** Skewness of the numerical values. NaN otherwise. */
+  Skewness?: number;
+  /** Standard deviation of numerical values. NaN otherwise. */
+  Std?: number;
+  /** Sum of all numerical values. NaN otherwise. */
+  Sum?: number;
+  /** Squared sum of all numerical values. NaN otherwise. */
+  Sum2?: number;
+  /** Sum of all characters in strings in the field */
+  SumStringLen?: number;
+  /** Number of textual values */
+  TextValues?: number;
+  /** Number of zero values for numerical values */
+  ZeroValues?: number;
+};
+
+export type FieldMetadata = {
+  /** If set to true, the field has one and only one selection (not 0 and not more than 1).
+   * If this property is set to true, the field cannot be cleared anymore and no more selections can be performed in that field.
+   * The default value is false. */
+  always_one_selected?: boolean;
+  /** Static RAM memory used in bytes. */
+  byte_size?: number;
+  /** Number of distinct field values. */
+  cardinal?: number;
+  /** Field comment. */
+  comment?: string;
+  /** If set to true, only distinct field values are shown.
+   * The default value is false. */
+  distinct_only?: boolean;
+  /** Hash of the data in the field. If the data in a reload is the same, the hash will be consistent. */
+  hash?: string;
+  /** If set to true, the field is hidden.
+   * The default value is false. */
+  is_hidden?: boolean;
+  /** If set to true, the field is locked.
+   * The default value is false. */
+  is_locked?: boolean;
+  /** Is set to true if the value is a numeric.
+   * The default value is false. */
+  is_numeric?: boolean;
+  /** If set to true, the field is semantic.
+   * The default value is false. */
+  is_semantic?: boolean;
+  /** If set to true, the field is a system field.
+   * The default value is false. */
+  is_system?: boolean;
+  /** Name of the field. */
+  name?: string;
+  /** List of table names. */
+  src_tables?: string[];
+  /** Gives information on a field. For example, it can return the type of the field.
+   * Examples: key, text, ASCII. */
+  tags?: string[];
+  /** Total number of field values. */
+  total_count?: number;
+};
+
+export type FieldOverride = {
+  classifications?: string[];
+  defaultAggregation?: string;
+};
+
+export type FileData = BodyInit;
+
+export type Filter = {
+  readonly createdAt?: string;
+  /** The filter description. */
+  description?: string;
+  filterType?: FilterType;
+  filterV1_0?: FilterV10;
+  filterVersion?: "filter-1.0" | "filter-2.0";
+  /** The filter ID (bookmarkId). */
+  readonly id?: string;
+  /** The filter name. */
+  name?: string;
+  /** The user that owns the filter, if missing the same as the request user. */
+  ownerId?: string;
+  readonly updatedAt?: string;
+};
+
+/**
+ * Error occured during the Filter creation.
+ */
+export type FilterError = {
+  /** The unique code for the error
+   *
+   * - "REP-400000" Bad request. The server could not understand the request due to invalid syntax.
+   * - "REP-400008" Selections error.
+   * - "REP-400015" Bad request in enigma request. The patch value has invalid JSON format.
+   * - "REP-401000" Unauthorized. The client must authenticate itself to get the requested response.
+   * - "REP-401001" Unauthorized, bad JWT.
+   * - "REP-403000" Forbidden. The client does not have access rights to the content.
+   * - "REP-403001" App forbidden, the user does not have read permission on the app.
+   * - "REP-403002" Chart type not supported.
+   * - "REP-404000" Not found. The server can not find the requested resource.
+   * - "REP-409043" Filter name conflict. The filter name must be unique.
+   * - "REP-429000" Too many request. The user has sent too many requests in a given amount of time ("rate limiting").
+   * - "REP-429012" Exceeded max session tenant quota. A tenant has opened too many different sessions at the same time.
+   * - "REP-429016" Exceeded max session tenant quota per day.
+   * - "REP-500000" Fail to resolve resource.
+   * - "REP-503005" Engine unavailable, qix-sessions error no engines available.
+   * - "REP-503013" Session unavailable. The engine session used to create the report is unavailable.
+   * - "REP-504042" Context deadline exceeded applying selections of the Filter.
+   * - "REP-500031" Error creating bookmark.
+   * - "REP-404032" Bookmark not found after creating the bookmark.
+   * - "REP-500033" Error destroying bookmark.
+   * - "REP-404033" Bookmark not found destroying the bookmark.
+   * - "REP-409043" Dupliacate bookmark name.
+   * - "REP-429034" Filters quota exceeded.
+   * - "REP-400044" Missing or renamed field.
+   * - "REP-403049" Report filter access not allowed. */
+  code: string;
+  /** A summary in english explaining what went wrong. */
+  title: string;
+};
+
+/**
+ * Errors occured during the Filter creation.
+ */
+export type FilterErrors = {
+  errors: FilterError[];
+};
+
+export type FilterField = {
+  /** Gets the resource description. */
+  description?: string;
+  name: string;
+  overrideValues?: boolean;
+  selectExcluded?: boolean;
+  /** The filter values. */
+  values?: FilterFieldValue[];
+};
+
+export type FilterFieldValue = {
+  valueAsNumber?: Float64;
+  valueAsText?: string;
+  valueType?: "string" | "number" | "evaluate" | "search";
+};
+
+export type FilterItemPatch = {
+  /** The filter description. */
+  description?: string;
+  filterV1_0?: FilterV10;
+  filterVersion?: "filter-1.0" | "filter-2.0";
+  /** The filter name. */
+  name?: string;
+  /** The user that owns the filter, if missing the same as the request user. */
+  ownerId?: string;
+};
+
+export type FilterList = {
+  /** a list of filters containing all the filters properties (like name,description...) except the filter definition (like FilterV1_0) */
+  data: FilterListItem[];
+  links: LinksResponse;
+};
+
+export type FilterListItem = {
+  readonly createdAt?: string;
+  /** The filter description. */
+  readonly description?: string;
+  filterType?: FilterType;
+  filterV1_0?: FilterV10;
+  readonly filterVersion?: "filter-1.0" | "filter-2.0";
+  /** The filter ID (bookmarkId) */
+  readonly id?: string;
+  /** The filter name. */
+  readonly name?: string;
+  /** The user that owns the filter, if missing the same as the request user. */
+  readonly ownerId?: string;
+  readonly updatedAt?: string;
+};
+
+/**
+ * @example
+ * {
+ *   description: "this is a filter sample",
+ *   filterType: "REP",
+ *   filterV1_0: {
+ *     fieldsByState: {
+ *       "$": [
+ *         {
+ *           name: "Country",
+ *           overrideValues: false,
+ *           selectExcluded: false,
+ *           values: [
+ *             {
+ *               valueAsText: "1-Argentina",
+ *               valueType: "string"
+ *             },
+ *             {
+ *               valueAsText: "4-Brazil",
+ *               valueType: "string"
+ *             }
+ *           ]
+ *         },
+ *         {
+ *           name: "Order number",
+ *           overrideValues: false,
+ *           selectExcluded: false,
+ *           values: [
+ *             {
+ *               valueAsNumber: 61300,
+ *               valueAsText: "61300",
+ *               valueType: "number"
+ *             }
+ *           ]
+ *         }
+ *       ]
+ *     }
+ *   },
+ *   filterVersion: "filter-1.0",
+ *   name: "Filter sample"
+ * }
+ */
+export type FilterRequest = {
+  /** The App ID. */
+  appId?: string;
+  /** The filter description. */
+  description?: string;
+  filterType: FilterType;
+  filterV1_0?: FilterV10;
+  filterVersion: "filter-1.0" | "filter-2.0";
+  /** The filter name. */
+  name: string;
+  /** The user that owns the filter, if missing the same as the request user. */
+  ownerId?: string;
+};
+
+export type FilterType = "REP" | "SUB";
+
+/**
+ * @example
+ * {
+ *   fieldsByState: {
+ *     "$": [
+ *       {
+ *         name: "Country",
+ *         overrideValues: false,
+ *         selectExcluded: false,
+ *         values: [
+ *           {
+ *             valueAsText: "1-Argentina",
+ *             valueType: "string"
+ *           },
+ *           {
+ *             valueAsText: "4-Brazil",
+ *             valueType: "string"
+ *           }
+ *         ]
+ *       },
+ *       {
+ *         name: "Order number",
+ *         overrideValues: false,
+ *         selectExcluded: false,
+ *         values: [
+ *           {
+ *             valueAsNumber: 61300,
+ *             valueAsText: "61300",
+ *             valueType: "number"
+ *           }
+ *         ]
+ *       }
+ *     ]
+ *   }
+ * }
+ */
+export type FilterV10 = {
+  /** Map of fields to apply by state. Maximum number of states allowed is 125. Maximum number of fields allowed is 125 and maximum number of overall field values allowed is 150000. */
+  fieldsByState?: Record<string, FilterField[]>;
+  /** The filter variables. */
+  variables?: FilterVariable[];
+};
+
+export type FilterVariable = {
+  evaluate?: boolean;
+  name: string;
+  value?: string;
+};
+
+export type FiltersCount = {
+  /** The total number of filters. */
+  readonly total?: number;
+};
+
+export type Float64 = number;
+
+export type FrequencyDistributionData = {
+  /** Bins edges. */
+  BinsEdges?: number[];
+  /** Bins frequencies. */
+  Frequencies?: number[];
+  /** Number of bins. */
+  NumberOfBins?: number;
+};
+
+export type HardwareMeta = {
+  /** Number of logical cores available. */
+  logical_cores?: number;
+  /** RAM available. */
+  total_memory?: number;
+};
+
+export type Href = {
+  href?: string;
+};
+
+/**
+ * Contains dynamic JSON data specified by the client.
+ */
+export type JsonObject = unknown;
+
+export type LastReloadMetadata = {
+  /** Number of CPU milliseconds it took to reload the app. */
+  cpu_time_spent_ms?: number;
+  /** Maximum number of bytes used during full reload of the app. */
+  fullReloadPeakMemoryBytes?: number;
+  hardware?: HardwareMeta;
+  /** Maximum number of bytes used during partial reload of the app. */
+  partialReloadPeakMemoryBytes?: number;
+  /** Maximum number of bytes used during reload of the app. */
+  peak_memory_bytes?: number;
+};
+
+export type LineageInfoRest = {
+  /** A string indicating the origin of the data:
+   * * [filename]: the data comes from a local file.
+   * * INLINE: the data is entered inline in the load script.
+   * * RESIDENT: the data comes from a resident table. The table name is listed.
+   * * AUTOGENERATE: the data is generated from the load script (no external table of data source).
+   * * Provider: the data comes from a data connection. The connector source name is listed.
+   * * [webfile]: the data comes from a web-based file.
+   * * STORE: path to QVD or TXT file where data is stored.
+   * * EXTENSION: the data comes from a Server Side Extension (SSE). */
+  discriminator?: string;
+  /** The LOAD and SELECT script statements from the data load script. */
+  statement?: string;
+};
+
+export type LinkResponse = {
+  href?: string | null;
+};
+
+export type Links = {
+  next?: Href;
+  prev?: Href;
+  self?: Href;
+};
+
+/**
+ * @example
+ * {
+ *   next: {
+ *     href: "https://tenant.qlik-cloud.com:443/api/v1/apps/816e23e1-03d2-446b-8721-cdee6b5e59cf/report-filters?filter=&filterTypes=REP&filterTypes=REP&limit=20&page=0&sort=%2Bname"
+ *   },
+ *   prev: {
+ *     href: "https://tenant.qlik-cloud.com:443/api/v1/apps/816e23e1-03d2-446b-8721-cdee6b5e59cf/report-filters?filter=&filterTypes=REP&filterTypes=REP&limit=20&page=0&sort=%2Bname"
+ *   },
+ *   self: {
+ *     href: "https://tenant.qlik-cloud.com:443/api/v1/apps/816e23e1-03d2-446b-8721-cdee6b5e59cf/report-filters?filter=&filterTypes=REP&filterTypes=REP&limit=20&page=0&sort=%2Bname"
+ *   }
+ * }
+ */
+export type LinksResponse = {
+  next: LinkResponse;
+  prev: LinkResponse;
+  self: LinkResponse;
+};
+
+export type Log = {
+  /** Provides a link to download the log file. */
+  log?: string;
+};
+
+export type NavigationLink = {
+  href?: string;
+};
+
+export type NavigationLinks = {
+  next?: NavigationLink;
+  prev?: NavigationLink;
+};
+
+/**
+ * Application attributes and user privileges.
+ */
+export type NxApp = {
+  /** App attributes. This structure can include additional user-defined attributes. */
+  attributes?: NxAttributes;
+  /** Object create privileges. Hints to the client what type of objects the user is allowed to create. */
+  create?: NxAppCreatePrivileges[];
+  /** Application privileges.
+   * Hints to the client what actions the user is allowed to perform.
+   * Could be any of:
+   * * read
+   * * create
+   * * update
+   * * delete
+   * * reload
+   * * import
+   * * publish
+   * * duplicate
+   * * export
+   * * exportdata
+   * * change_owner
+   * * change_space */
+  privileges?: string[];
+};
+
+export type NxAppCreatePrivileges = {
+  /** Is set to true if the user has privileges to create the resource. */
+  canCreate?: boolean;
+  /** Type of resource. For example, sheet, story, bookmark, etc. */
+  resource?: string;
+};
+
+/**
+ * Attributes and user privileges for an app object.
+ */
+export type NxAppObject = {
+  /** App object attributes. This structure can include additional user-defined attributes. */
+  attributes?: NxObjectAttributes;
+  /** App object privileges.
+   * Hints to the client regarding actions the user can perform.
+   * Possible values:
+   * * read
+   * * create
+   * * update
+   * * delete
+   * * publish
+   * * exportdata
+   * * change_owner */
+  privileges?: string[];
+};
+
+/**
+ * App attributes. This structure can include additional user-defined attributes.
+ */
+export type NxAttributes = {
+  /** The date and time when the app was created. */
+  createdDate?: string;
+  /** Contains dynamic JSON data specified by the client. */
+  custom?: JsonObject;
+  /** App description. */
+  description?: string;
+  /** The dynamic color of the app. */
+  dynamicColor?: string;
+  /** If set to true, the app is encrypted. */
+  encrypted?: boolean;
+  /** If set to true, the app has section access configured, */
+  hasSectionAccess?: boolean;
+  /** The App ID. */
+  id?: string;
+  /** True if the app is a Direct Query app, false if not */
+  isDirectQueryMode?: boolean;
+  /** Date and time of the last reload of the app. */
+  lastReloadTime?: string;
+  /** The date and time when the app was modified. */
+  modifiedDate?: string;
+  /** App name. */
+  name?: string;
+  /** The Origin App ID for published apps. */
+  originAppId?: string;
+  /** @deprecated
+   * Deprecated: Use the Users API to fetch user metadata. */
+  owner?: string;
+  /** Identifier of the app owner. */
+  ownerId?: string;
+  /** The date and time when the app was published, empty if unpublished. Use to determine if an app is published in Qlik Cloud. */
+  publishTime?: string;
+  /** For Qlik Cloud, indicates whether the app has been distributed from client-managed, not whether it has been published. To determine
+   * if the app is published in Qlik Cloud, check for a non-empty value in the publishTime field. For client-managed, determines if the app is published. */
+  published?: boolean;
+  /** App thumbnail. */
+  thumbnail?: string;
+  usage?: UsageEnum;
+};
+
+/**
+ * App object attributes. This structure can include additional user-defined attributes.
+ */
+export type NxObjectAttributes = {
+  /** When true, the object is approved. */
+  approved?: boolean;
+  /** The date and time when the object was created. */
+  createdAt?: string;
+  /** Object description. */
+  description?: string;
+  genericType?: AppObjectGenericType;
+  /** Identifier of the object. */
+  id?: string;
+  /** Object name. */
+  name?: string;
+  /** The type of the object. */
+  objectType?: string;
+  /** Identifier of the object owner. */
+  ownerId?: string;
+  /** The date and time when the object was published, empty if unpublished. */
+  publishedAt?: string;
+  /** The date and time when the object was modified. */
+  updatedAt?: string;
+};
+
+export type NxPatch = {
+  Op?: NxPatchOperationType;
+  /** Path to the property to add, remove or replace. */
+  Path?: string;
+  /** This parameter is not used in a remove operation.
+   * Corresponds to the value of the property to add or to the new value of the property to update.
+   * Examples:
+   * "false", "2", "\"New title\"" */
+  Value?: string;
+};
+
+export type NxPatchOperationType = "add" | "remove" | "replace";
+
+/**
+ * Contains break down of the asked question in the form of tokens with their classification.
+ */
+export type PartialNluInfo = {
+  /** Qlik sense application field selected for given token or phrase */
+  fieldName?: string;
+  /** Filter value found from query */
+  fieldValue?: string;
+  /** Role of the token or phrase from query */
+  role?: "dimension" | "measure" | "date";
+  /** Matching token or phrase from query */
+  text?: string;
+  /** Type of token from query */
+  type?: "field" | "filter" | "master_dimension" | "master_measure" | "custom_analysis";
+};
+
+export type PatchFilter = PatchFilterItem[];
+
+export type PatchFilterItem = {
+  /** operation (replace). */
+  op: "replace";
+  /** A JSON Pointer path (/). */
+  path: "/filter";
+  /** The value to be used for this operation. The properties that cannot be patched include id, filterType, appId */
+  value: {
+    Filter?: FilterItemPatch;
+  };
+};
+
+/**
+ * Override for app placement on non reload engines.
+ */
+export type Placement = {
+  /** The iso timestamp for when the override was configured. */
+  createdAt?: string;
+  minEngineSize?: EngineGBSize;
+};
+
+export type PublishApp = {
+  attributes?: AppUpdateAttributes;
+  data?: PublishData;
+  /** When true, the original is moved instead of copied, keeping the current published state of all objects. The default value is false. */
+  moveApp?: boolean;
+  /** Required when moving the app, specifying the identifier of the original app. */
+  originAppId?: string;
+  /** The managed space ID where the app will be published. */
+  spaceId?: string;
+};
+
+export type PublishData = "source" | "target";
+
+/**
+ * structure for providing fields in recommendation request, user can retrieve the fields using insight-analyses/model endpoint
+ */
+export type RecommendFieldItem = {
+  name?: string;
+  overrides?: FieldOverride;
+};
+
+export type RecommendItems = {
+  fields?: RecommendFieldItem[];
+  libItems?: RecommendMasterItem[];
+  targetAnalysis?: {
+    /** id of the target analysis, returned by the GET insight-analyses endpoint */
+    id?: string;
+  };
+};
+
+/**
+ * structure for providing master items in recommendation request, user can retrieve the libId of master item using insight-analyses/model endpoint
+ */
+export type RecommendMasterItem = {
+  libId?: string;
+  overrides?: {
+    format?: NumberFormat;
+  };
+};
+
+export type RecommendNaturalLangQuery = {
+  /** The NL query. */
+  text: string;
+};
+
+export type RecommendedAnalysis = RecommendedAnalysisCore & {
+  /** part analyses (only for macro analyses) */
+  parts?: RecommendedAnalysisCore[];
+};
+
+export type RecommendedAnalysisCore = {
+  analysis?: AnalysisDetails;
+  /** Chart type given to current recommendation */
+  chartType?: ChartType;
+  /** (chart options + hypercube definition) */
+  options?: unknown;
+  /** percentage of selected items in the analysis to the overall items passed to the endpoint */
+  relevance?: number;
+};
+
+export type ReloadIncludeFile = {
+  /** The connection name. */
+  connection?: string;
+  /** File location within the connection. */
+  path?: string;
+  /** File QRI resource identifier. */
+  qri?: string;
+};
+
+export type ReloadListMetadata = {
+  /** Array of ReloadMeta. */
+  data?: ReloadMeta[];
+};
+
+export type ReloadMeta = {
+  /** A Base64-encoded hash value of the new section access database. */
+  accessDbHash?: string;
+  /** A Base64-encoded hash value of the new app database. */
+  appDbHash?: string;
+  /** Duration of reload (ms). */
+  duration?: number;
+  /** Time when reload ended. */
+  endTime?: string;
+  /** Files brought into the script via include/mustInclude macros. */
+  includeFiles?: ReloadIncludeFile[];
+  /** True if the reload is a partial reload. */
+  isPartialReload?: boolean;
+  loadDataFilesBytes?: number;
+  loadExternalBytes?: number;
+  loadFilesBytes?: number;
+  /** Reload identifier. */
+  reloadId?: string;
+  /** If greater than or equal to 0, defines the maximum number of rows loaded from a data source. */
+  rowLimit?: number;
+  /** Set to true to skip Store statements.
+   * The default value is false. */
+  skipStore?: boolean;
+  /** List of external loaded or stored statements. */
+  statements?: ReloadStatements[];
+  storeDataFilesBytes?: number;
+  storeFilesBytes?: number;
+  /** A Base64-encoded hash value of all fields stored via the store statements. */
+  storeHash?: string;
+  /** true if the reload was successful. */
+  success?: boolean;
+};
+
+export type ReloadStatements = {
+  /** The connection name. */
+  connection?: string;
+  /** Connection ID. */
+  connectionId?: string;
+  /** Data loaded from the network (bytes). */
+  dataSize?: number;
+  /** Duration of data generation (ms). */
+  duration?: number;
+  /** Label of the resource level node in lineage. */
+  label?: string;
+  /** Number of fields loaded. */
+  nbrOfFields?: number;
+  /** Number of rows loaded. */
+  nbrOfRows?: number;
+  /** Partial load operation. e.g. add/replace/update/merge. n/a when not in partial load mode. */
+  partialReloadOperation?: string;
+  /** Resource Identifier. */
+  qri?: string;
+  /** Name of the source table in lineage. */
+  tableName?: string;
+  /** Type of statement, e.g. Store/Load. */
+  type?: string;
+};
+
+export type RepublishApp = {
+  attributes?: AppUpdateAttributes;
+  /** Validate that source app is same as originally published. */
+  checkOriginAppId?: boolean;
+  data?: PublishData;
+  /** The target ID to be republished. */
+  targetId?: string;
+};
+
+export type Script = {
+  script?: string;
+};
+
+export type ScriptIssue = {
+  /** UTF-8 byte column of the issue. */
+  Column?: number;
+  /** Additional information like workarounds or clarifications. */
+  Info?: string;
+  /** Line in the tab of the issue. */
+  Line?: number;
+  /** Error or warning string. What is the problem. */
+  Msg?: string;
+  /** The index of the tab for the issue. */
+  Tab?: number;
+};
+
+export type ScriptIssues = {
+  Errors?: ScriptIssue[];
+  Warnings?: ScriptIssue[];
+};
+
+export type ScriptLogList = {
+  /** Array of scriptLogMeta. */
+  data?: ScriptLogMeta[];
+};
+
+export type ScriptLogMeta = {
+  /** Duration of reload (ms). */
+  duration?: number;
+  /** Time when reload ended. */
+  endTime?: string;
+  links?: Log;
+  /** Reload identifier. */
+  reloadId?: string;
+  /** True if the reload was successful. */
+  success?: boolean;
+};
+
+export type ScriptMeta = {
+  /** Script version last modification time. */
+  modifiedTime?: string;
+  /** User last modifying script version. */
+  modifierId?: string;
+  /** Script id. */
+  scriptId?: string;
+  /** Script size. */
+  size?: number;
+  /** Description of this script version */
+  versionMessage?: string;
+};
+
+export type ScriptMetaList = {
+  links?: NavigationLinks;
+  privileges?: string[];
+  /** Script versions metadata. */
+  scripts?: ScriptMeta[];
+};
+
+export type ScriptVersion = {
+  /** Script text. */
+  script?: string;
+  /** Description of this script version. */
+  versionMessage?: string;
+};
+
+export type SimplifiedClassifications = ("dimension" | "measure" | "temporal" | "geographical")[];
+
+export type SymbolFrequency = {
+  /** Frequency of the above symbol in the field */
+  Frequency?: number;
+  Symbol?: SymbolValue;
+};
+
+export type SymbolValue = {
+  /** Numeric value of the symbol. NaN otherwise. */
+  Number?: number;
+  /** String value of the symbol. This parameter is optional and present only if Symbol is a string. */
+  Text?: string;
+};
+
+export type TableMetadata = {
+  /** Static RAM memory used in bytes. */
+  byte_size?: number;
+  /** Table comment. */
+  comment?: string;
+  /** If set to true, the table is loose due to circular connection.
+   * The default value is false. */
+  is_loose?: boolean;
+  /** If set to true, the table is semantic.
+   * The default value is false. */
+  is_semantic?: boolean;
+  /** If set to true, the table is a system table.
+   * The default value is false. */
+  is_system?: boolean;
+  /** Name of the table. */
+  name?: string;
+  /** Number of fields. */
+  no_of_fields?: number;
+  /** Number of key fields. */
+  no_of_key_fields?: number;
+  /** Number of rows. */
+  no_of_rows?: number;
+};
+
+export type TableProfilingData = {
+  /** Field values profiling info */
+  FieldProfiling?: FieldInTableProfilingData[];
+  /** Number of rows in the table. */
+  NoOfRows?: number;
+};
+
+export type UpdateApp = {
+  attributes?: AppUpdateAttributes;
+};
+
+export type UpdateOwner = {
+  ownerId?: string;
+};
+
+export type UpdateSpace = {
+  spaceId?: string;
+};
+
+export type UsageEnum = "ANALYTICS" | "DATA_PREPARATION" | "DATAFLOW_PREP" | "SINGLE_TABLE_PREP" | "DIRECT_QUERY_MODE";
+
+export type UserPrivileges = "can_create_app" | "can_import_app" | "can_create_session_app";
+
+export type NumberFormat = {
+  qDec?: string;
+  qFmt?: string;
+  qThou?: string;
+  qType?: string;
+  qUseThou?: number;
+  qnDec?: number;
+};
+
+/* -------------------------------------------------------------------------- */
+/*                              Public functions                              */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Creates a new app.
+ *
+ * @param body an object with the body content
+ * @throws CreateAppHttpError
+ */
+export async function createApp(body: CreateApp, options?: ApiCallOptions): Promise<CreateAppHttpResponse> {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps",
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type CreateAppHttpResponse = {
+  data: NxApp;
+  headers: Headers;
+  status: 200;
+};
+
+export type CreateAppHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Imports an app into the system.
+ *
+ * @param query an object with query parameters
+ * @param body an object with the body content
+ * @throws ImportAppHttpError
+ */
+export async function importApp(
+  query: {
+    /** If NoData is true, the data of the existing app will be kept as is, otherwise it will be replaced by the new incoming data. */
+    NoData?: boolean;
+    /** The app ID of the target app when source is qvw file. */
+    appId?: string;
+    /** The name of the target app when source does not have a specified name, applicable if source is qvw file. */
+    fallbackName?: string;
+    /** The file ID to be downloaded from Temporary Content Service (TCS) and used during import. */
+    fileId?: string;
+    /** The import mode. In `new` mode (default), the source app is imported as a new app.<div class=note>The `autoreplace` mode is intended for internal use only and is not permitted for external use.</div>
+     *
+     * One of:
+     * * NEW
+     * * AUTOREPLACE */
+    mode?: string;
+    /** The name of the target app. */
+    name?: string;
+    /** The space ID of the target app. */
+    spaceId?: string;
+  },
+  body: BodyInit,
+  options?: ApiCallOptions,
+): Promise<ImportAppHttpResponse> {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps/import",
+    query,
+    body,
+    contentType: "application/octet-stream",
+    options,
+  });
+}
+
+export type ImportAppHttpResponse = {
+  data: NxApp;
+  headers: Headers;
+  status: 200;
+};
+
+export type ImportAppHttpError = {
+  data: void;
+  headers: Headers;
+  status: 404;
+};
+
+/**
+ * Gets the app privileges for the current user, such as create app and import app. Empty means that the current user has no app privileges.
+ *
+ * @throws GetAppsPrivilegesHttpError
+ */
+export async function getAppsPrivileges(options?: ApiCallOptions): Promise<GetAppsPrivilegesHttpResponse> {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/privileges",
+    options,
+  });
+}
+
+export type GetAppsPrivilegesHttpResponse = {
+  data: UserPrivileges[];
+  headers: Headers;
+  status: 200;
+};
+
+export type GetAppsPrivilegesHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Validates the script.
+ *
+ * @param body an object with the body content
+ * @throws ValidateScriptHttpError
+ */
+export async function validateScript(body: Script, options?: ApiCallOptions): Promise<ValidateScriptHttpResponse> {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps/validatescript",
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type ValidateScriptHttpResponse = {
+  data: ScriptIssues;
+  headers: Headers;
+  status: 200;
+};
+
+export type ValidateScriptHttpError = {
+  data: void;
+  headers: Headers;
+  status: 403;
+};
+
+/**
+ * Deletes a specific app.
+ *
+ * @param appId Identifier of the app.
+ * @throws DeleteAppHttpError
+ */
+export async function deleteApp(appId: string, options?: ApiCallOptions): Promise<DeleteAppHttpResponse> {
+  return invokeFetch("apps", {
+    method: "delete",
+    pathTemplate: "/api/v1/apps/{appId}",
+    pathVariables: { appId },
+    options,
+  });
+}
+
+export type DeleteAppHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 200;
+};
+
+export type DeleteAppHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Retrieves information for a specific app.
+ *
+ * @param appId Identifier of the app.
+ * @throws GetAppInfoHttpError
+ */
+export async function getAppInfo(appId: string, options?: ApiCallOptions): Promise<GetAppInfoHttpResponse> {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}",
+    pathVariables: { appId },
+    options,
+  });
+}
+
+export type GetAppInfoHttpResponse = {
+  data: NxApp;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetAppInfoHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Updates the information for a specific app.
+ *
+ * @param appId Identifier of the app.
+ * @param body an object with the body content
+ * @throws UpdateAppInfoHttpError
+ */
+export async function updateAppInfo(
+  appId: string,
+  body: UpdateApp,
+  options?: ApiCallOptions,
+): Promise<UpdateAppInfoHttpResponse> {
+  return invokeFetch("apps", {
+    method: "put",
+    pathTemplate: "/api/v1/apps/{appId}",
+    pathVariables: { appId },
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type UpdateAppInfoHttpResponse = {
+  data: NxApp;
+  headers: Headers;
+  status: 200;
+};
+
+export type UpdateAppInfoHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Copies a specific app.
+ *
+ * @param appId Identifier of the app.
+ * @param body an object with the body content
+ * @throws CopyAppHttpError
+ */
+export async function copyApp(appId: string, body: CreateApp, options?: ApiCallOptions): Promise<CopyAppHttpResponse> {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps/{appId}/copy",
+    pathVariables: { appId },
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type CopyAppHttpResponse = {
+  data: NxApp;
+  headers: Headers;
+  status: 200;
+};
+
+export type CopyAppHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Retrieves the lineage for an app.
+ * Returns a JSON-formatted array of strings describing the lineage of the app.
+ *
+ * @param appId Identifier of the app.
+ * @throws GetAppDataLineageHttpError
+ */
+export async function getAppDataLineage(
+  appId: string,
+  options?: ApiCallOptions,
+): Promise<GetAppDataLineageHttpResponse> {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/data/lineage",
+    pathVariables: { appId },
+    options,
+  });
+}
+
+export type GetAppDataLineageHttpResponse = {
+  data: LineageInfoRest[];
+  headers: Headers;
+  status: 200;
+};
+
+export type GetAppDataLineageHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Retrieves the data model and reload statistics metadata of an app.
+ * An empty metadata structure is returned if the metadata is not available in the app.
+ *
+ * @param appId Identifier of the app.
+ * @throws GetAppDataMetadataHttpError
+ */
+export async function getAppDataMetadata(
+  appId: string,
+  options?: ApiCallOptions,
+): Promise<GetAppDataMetadataHttpResponse> {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/data/metadata",
+    pathVariables: { appId },
+    options,
+  });
+}
+
+export type GetAppDataMetadataHttpResponse = {
+  data: DataModelMetadata;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetAppDataMetadataHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Exports a specific app.
+ *
+ * @param appId Identifier of the app.
+ * @param query an object with query parameters
+ * @throws ExportAppHttpError
+ */
+export async function exportApp(
+  appId: string,
+  query: {
+    /** The flag indicating if only object contents should be exported. */
+    NoData?: boolean;
+  },
+  options?: ApiCallOptions,
+): Promise<ExportAppHttpResponse> {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps/{appId}/export",
+    pathVariables: { appId },
+    query,
+    options,
+  });
+}
+
+export type ExportAppHttpResponse = {
+  data: DownloadableBlob;
+  headers: Headers;
+  status: 200;
+};
+
+export type ExportAppHttpError = {
+  data: void;
+  headers: Headers;
+  status: 400 | 401 | 403 | 404;
+};
+
+/**
+ * Returns information about supported analyses for the app's data model. Lists available analysis types, along with minimum and maximum number of dimensions, measures, and fields.
+ *
+ * @param appId Qlik Sense app identifier
+ * @throws GetAppInsightAnalysesHttpError
+ */
+export async function getAppInsightAnalyses(
+  appId: string,
+  options?: ApiCallOptions,
+): Promise<GetAppInsightAnalysesHttpResponse> {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/insight-analyses",
+    pathVariables: { appId },
+    options,
+  });
+}
+
+export type GetAppInsightAnalysesHttpResponse = {
+  data: AnalysisDescriptorResponse;
+  headers: Headers;
+  status: 200;
+  prev?: (options?: PageCallOptions) => Promise<GetAppInsightAnalysesHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetAppInsightAnalysesHttpResponse>;
+};
+
+export type GetAppInsightAnalysesHttpError = {
+  data: Errors;
+  headers: Headers;
+  status: 400 | 401 | 404 | 422 | 500;
+};
+
+/**
+ * Returns analysis recommendations in response to a natural language question, a set of fields and master items, or a set of fields and master items with an optional target analysis.
+ *
+ * @param appId Qlik Sense app identifier
+ * @param body an object with the body content
+ * @throws GetAppInsightAnalysisRecommendationsHttpError
+ */
+export async function getAppInsightAnalysisRecommendations(
+  appId: string,
+  body: AnalysisRecommendRequest,
+  options?: ApiCallOptions,
+): Promise<GetAppInsightAnalysisRecommendationsHttpResponse> {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps/{appId}/insight-analyses/actions/recommend",
+    pathVariables: { appId },
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type GetAppInsightAnalysisRecommendationsHttpResponse = {
+  data: AnalysisRecommendationResponse;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetAppInsightAnalysisRecommendationsHttpError = {
+  data: Errors;
+  headers: Headers;
+  status: 400 | 401 | 404 | 409 | 422 | 500;
+};
+
+/**
+ * Returns information about model used to make analysis recommendations. Lists all fields and master items in the logical model, along with an indication of the validity of the logical model if the default is not used.
+ *
+ * @param appId Qlik Sense app identifier
+ * @throws GetAppInsightAnalysisModelHttpError
+ */
+export async function getAppInsightAnalysisModel(
+  appId: string,
+  options?: ApiCallOptions,
+): Promise<GetAppInsightAnalysisModelHttpResponse> {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/insight-analyses/model",
+    pathVariables: { appId },
+    options,
+  });
+}
+
+export type GetAppInsightAnalysisModelHttpResponse = {
+  data: AnalysisModelResponse;
+  headers: Headers;
+  status: 200;
+  prev?: (options?: PageCallOptions) => Promise<GetAppInsightAnalysisModelHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetAppInsightAnalysisModelHttpResponse>;
+};
+
+export type GetAppInsightAnalysisModelHttpError = {
+  data: Errors;
+  headers: Headers;
+  status: 400 | 401 | 404 | 409 | 422 | 500;
+};
+
+/**
+ * Deletes a media content file or complete directory.
+ * Returns OK if the bytes containing the media file (or the complete content of a directory) were successfully deleted, or error in case of failure or lack of permission.
+ *
+ * @param appId Unique application identifier.
+ * @param path Path to file content.
+ * @throws DeleteAppMediaHttpError
+ */
+export async function deleteAppMedia(
+  appId: string,
+  path: string,
+  options?: ApiCallOptions,
+): Promise<DeleteAppMediaHttpResponse> {
+  return invokeFetch("apps", {
+    method: "delete",
+    pathTemplate: "/api/v1/apps/{appId}/media/files/{path}",
+    pathVariables: { appId, path },
+    options,
+  });
+}
+
+export type DeleteAppMediaHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 200;
+};
+
+export type DeleteAppMediaHttpError = {
+  data: void;
+  headers: Headers;
+  status: 403 | 404;
+};
+
+/**
+ * Gets media content from file.
+ * Returns a stream of bytes containing the media file content on success, or error if file is not found.
+ *
+ * @param appId Unique application identifier.
+ * @param path Path to file content.
+ * @throws GetAppMediaHttpError
+ */
+export async function getAppMedia(
+  appId: string,
+  path: string,
+  options?: ApiCallOptions,
+): Promise<GetAppMediaHttpResponse> {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/media/files/{path}",
+    pathVariables: { appId, path },
+    options,
+  });
+}
+
+export type GetAppMediaHttpResponse = {
+  data: DownloadableBlob;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetAppMediaHttpError = {
+  data: void;
+  headers: Headers;
+  status: 403 | 404;
+};
+
+/**
+ * Stores the media content file.
+ * Returns OK if the bytes containing the media file content were successfully stored, or error in case of failure, lack of permission or file already exists on the supplied path.
+ *
+ * @param appId Unique application identifier.
+ * @param path Path to file content.
+ * @param body an object with the body content
+ * @throws UploadAppMediaHttpError
+ */
+export async function uploadAppMedia(
+  appId: string,
+  path: string,
+  body: BodyInit,
+  options?: ApiCallOptions,
+): Promise<UploadAppMediaHttpResponse> {
+  return invokeFetch("apps", {
+    method: "put",
+    pathTemplate: "/api/v1/apps/{appId}/media/files/{path}",
+    pathVariables: { appId, path },
+    body,
+    contentType: "application/octet-stream",
+    options,
+  });
+}
+
+export type UploadAppMediaHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 200;
+};
+
+export type UploadAppMediaHttpError = {
+  data: void;
+  headers: Headers;
+  status: 403 | 404 | 409;
+};
+
+/**
+ * Lists media content.
+ * Returns a JSON formatted array of strings describing the available media content or error if the optional path supplied is not found.
+ *
+ * @param appId Unique application identifier.
+ * @param path The path to sub folder with static content relative to the root folder. Use empty path to access the root folder.
+ * @param query an object with query parameters
+ * @throws GetAppMediaListHttpError
+ */
+export async function getAppMediaList(
+  appId: string,
+  path: string,
+  query: {
+    /** Optional. List output can include files and folders in different ways:
+     * * Not recursive, default if show option is not supplied or incorrectly specified, results in output with files and empty directories for the path specified only.
+     * * Recursive(r), use ?show=r or ?show=recursive, results in a recursive output with files, all empty folders are excluded.
+     * * All(a), use ?show=a or ?show=all, results in a recursive output with files and empty directories. */
+    show?: string;
+  },
+  options?: ApiCallOptions,
+): Promise<GetAppMediaListHttpResponse> {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/media/list/{path}",
+    pathVariables: { appId, path },
+    query,
+    options,
+  });
+}
+
+export type GetAppMediaListHttpResponse = {
+  data: AppContentList;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetAppMediaListHttpError = {
+  data: void;
+  headers: Headers;
+  status: 403 | 404;
+};
+
+/**
+ * Gets media content from file currently used as application thumbnail.
+ * Returns a stream of bytes containing the media file content on success, or error if file is not found.
+ * The image selected as thumbnail is only updated when application is saved.
+ *
+ * @param appId Unique application identifier.
+ * @throws GetAppThumbnailHttpError
+ */
+export async function getAppThumbnail(appId: string, options?: ApiCallOptions): Promise<GetAppThumbnailHttpResponse> {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/media/thumbnail",
+    pathVariables: { appId },
+    options,
+  });
+}
+
+export type GetAppThumbnailHttpResponse = {
+  data: DownloadableBlob;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetAppThumbnailHttpError = {
+  data: void;
+  headers: Headers;
+  status: 403 | 404;
+};
+
+/**
+ * Sets owner on an app object.
+ * The user must be the owner of the object.
+ *
+ * @param appId Identifier of the app.
+ * @param objectId Identifier of the object.
+ * @param body an object with the body content
+ * @throws UpdateAppObjectOwnerHttpError
+ */
+export async function updateAppObjectOwner(
+  appId: string,
+  objectId: string,
+  body: UpdateOwner,
+  options?: ApiCallOptions,
+): Promise<UpdateAppObjectOwnerHttpResponse> {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps/{appId}/objects/{objectId}/actions/change-owner",
+    pathVariables: { appId, objectId },
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type UpdateAppObjectOwnerHttpResponse = {
+  data: NxAppObject;
+  headers: Headers;
+  status: 200;
+};
+
+export type UpdateAppObjectOwnerHttpError = {
+  data: void;
+  headers: Headers;
+  status: 400 | 404;
+};
+
+/**
+ * Changes owner of the app.
+ *
+ * @param appId Identifier of the app.
+ * @param body an object with the body content
+ * @throws UpdateAppOwnerHttpError
+ */
+export async function updateAppOwner(
+  appId: string,
+  body: UpdateOwner,
+  options?: ApiCallOptions,
+): Promise<UpdateAppOwnerHttpResponse> {
+  return invokeFetch("apps", {
+    method: "put",
+    pathTemplate: "/api/v1/apps/{appId}/owner",
+    pathVariables: { appId },
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type UpdateAppOwnerHttpResponse = {
+  data: NxApp;
+  headers: Headers;
+  status: 200;
+};
+
+export type UpdateAppOwnerHttpError = {
+  data: void;
+  headers: Headers;
+  status: 403 | 404;
+};
+
+/**
+ * Removes the app size override for an app.
+ *
+ * @param appId Identifier of the app
+ * @throws DeleteAppPlacementHttpError
+ */
+export async function deleteAppPlacement(
+  appId: string,
+  options?: ApiCallOptions,
+): Promise<DeleteAppPlacementHttpResponse> {
+  return invokeFetch("apps", {
+    method: "delete",
+    pathTemplate: "/api/v1/apps/{appId}/placement",
+    pathVariables: { appId },
+    options,
+  });
+}
+
+export type DeleteAppPlacementHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 200;
+};
+
+export type DeleteAppPlacementHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Retrieves the app size override for an app.
+ *
+ * @param appId Identifier of the app
+ * @throws GetAppPlacementHttpError
+ */
+export async function getAppPlacement(appId: string, options?: ApiCallOptions): Promise<GetAppPlacementHttpResponse> {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/placement",
+    pathVariables: { appId },
+    options,
+  });
+}
+
+export type GetAppPlacementHttpResponse = {
+  data: Placement;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetAppPlacementHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Sets the app size override for an app.
+ *
+ * @param appId Identifier of the app
+ * @param body an object with the body content
+ * @throws ReplaceAppPlacementHttpError
+ */
+export async function replaceAppPlacement(
+  appId: string,
+  body: EngineSize,
+  options?: ApiCallOptions,
+): Promise<ReplaceAppPlacementHttpResponse> {
+  return invokeFetch("apps", {
+    method: "put",
+    pathTemplate: "/api/v1/apps/{appId}/placement",
+    pathVariables: { appId },
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type ReplaceAppPlacementHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 200;
+};
+
+export type ReplaceAppPlacementHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Publishes a specific app to a managed space.
+ *
+ * @param appId Identifier of the app.
+ * @param body an object with the body content
+ * @throws PublishAppHttpError
+ */
+export async function publishApp(
+  appId: string,
+  body: PublishApp,
+  options?: ApiCallOptions,
+): Promise<PublishAppHttpResponse> {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps/{appId}/publish",
+    pathVariables: { appId },
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type PublishAppHttpResponse = {
+  data: NxApp;
+  headers: Headers;
+  status: 200;
+};
+
+export type PublishAppHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Republishes a published app to a managed space.
+ *
+ * @param appId Identifier of the app.
+ * @param body an object with the body content
+ * @throws RepublishAppHttpError
+ */
+export async function republishApp(
+  appId: string,
+  body: RepublishApp,
+  options?: ApiCallOptions,
+): Promise<RepublishAppHttpResponse> {
+  return invokeFetch("apps", {
+    method: "put",
+    pathTemplate: "/api/v1/apps/{appId}/publish",
+    pathVariables: { appId },
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type RepublishAppHttpResponse = {
+  data: NxApp;
+  headers: Headers;
+  status: 200;
+};
+
+export type RepublishAppHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Retrieves the metadata about all script logs stored for an app.
+ * Returns an array of ScriptLogMeta objects.
+ *
+ * @param appId Identifier of the app.
+ * @throws GetAppReloadLogsHttpError
+ */
+export async function getAppReloadLogs(appId: string, options?: ApiCallOptions): Promise<GetAppReloadLogsHttpResponse> {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/reloads/logs",
+    pathVariables: { appId },
+    options,
+  });
+}
+
+export type GetAppReloadLogsHttpResponse = {
+  data: ScriptLogList;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetAppReloadLogsHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Retrieves the log of a specific reload.
+ * Returns the log as "text/plain; charset=UTF-8".
+ *
+ * @param appId Identifier of the app.
+ * @param reloadId Identifier of the reload.
+ * @throws GetAppReloadLogHttpError
+ */
+export async function getAppReloadLog(
+  appId: string,
+  reloadId: string,
+  options?: ApiCallOptions,
+): Promise<GetAppReloadLogHttpResponse> {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/reloads/logs/{reloadId}",
+    pathVariables: { appId, reloadId },
+    options,
+  });
+}
+
+export type GetAppReloadLogHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetAppReloadLogHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Retrieves the app reload metadata list.
+ * Reload metadata contains reload information, including reload id, duration, endtime and lineage load info. Data is available for the last 10 reloads of an application.
+ *
+ * @param appId Identifier of the app.
+ * @param reloadId
+ * @param query an object with query parameters
+ * @throws GetAppReloadMetadataHttpError
+ */
+export async function getAppReloadMetadata(
+  appId: string,
+  reloadId: string,
+  query: {
+    /** Include metadata for reloads ran with SkipStore flag set to true. Default: false. */
+    includeSkipStoreReloads?: boolean;
+    /** Maximum number of records to return from this request. The default value is 100. */
+    limit?: string;
+    /** Identifier of the reload. Use empty reloadId to get all reloads. */
+    reloadId?: string;
+  },
+  options?: ApiCallOptions,
+): Promise<GetAppReloadMetadataHttpResponse> {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/reloads/metadata/{reloadId}",
+    pathVariables: { appId, reloadId },
+    query,
+    options,
+  });
+}
+
+export type GetAppReloadMetadataHttpResponse = {
+  data: ReloadListMetadata;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetAppReloadMetadataHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * List all filters that are present in the given app. Filters allow to reduce the app data visible in a report output. Each filter can contain definitions on one or multiple fields.
+ *
+ * @param appId Qlik Sense app identifier
+ * @param query an object with query parameters
+ * @throws GetAppReportFiltersHttpError
+ */
+export async function getAppReportFilters(
+  appId: string,
+  query: {
+    /** The advanced filtering to use for the query. Refer to [RFC 7644](https://datatracker.ietf.org/doc/rfc7644/) for the syntax. Cannot be combined with any of the fields marked as deprecated. All conditional statements within this query parameter are case insensitive.
+     * The following fields support the `co` (contains) operator: `name`, `description`
+     * The following fields support the `eq` (equals) operator: `id`, `ownerId`
+     * Example:
+     * (name co "query1" or description co "query2") and ownerId eq "123" */
+    filter?: string;
+    /** The filter type (REP, SUB). REP stands for report bookmark, SUB for subscription bookmark. */
+    filterTypes: ("REP" | "SUB")[];
+    /** Limit the returned result set */
+    limit?: number;
+    /** Load type expressing the kind of request, eg. interactive for report requests from the Web UI, batch for scheduled report generation. */
+    loadType?: "interactive" | "batch";
+    /** If present, the cursor that starts the page of data that is returned. */
+    page?: string | null;
+    /** Sorting parameters. */
+    sort?: (
+      | "+ownerId"
+      | "-ownerId"
+      | "-name"
+      | "+name"
+      | "+description"
+      | "-description"
+      | "+createdAt"
+      | "-createdAt"
+      | "+updatedAt"
+      | "-updatedAt"
+    )[];
+  },
+  options?: ApiCallOptions,
+): Promise<GetAppReportFiltersHttpResponse> {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/report-filters",
+    pathVariables: { appId },
+    query,
+    options,
+  });
+}
+
+export type GetAppReportFiltersHttpResponse = {
+  data: FilterList;
+  headers: Headers;
+  status: 200;
+  prev?: (options?: PageCallOptions) => Promise<GetAppReportFiltersHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetAppReportFiltersHttpResponse>;
+};
+
+export type GetAppReportFiltersHttpError = {
+  data: FilterErrors;
+  headers: Headers;
+  status: 400 | 401 | 403 | 404 | 429 | 500;
+};
+
+/**
+ * Creates a new report filter which is used to re-apply selections, variables, patches to an engine session.
+ *
+ * @param appId Qlik Sense app identifier
+ * @param body an object with the body content
+ * @throws CreateAppReportFilterHttpError
+ */
+export async function createAppReportFilter(
+  appId: string,
+  body: FilterRequest,
+  options?: ApiCallOptions,
+): Promise<CreateAppReportFilterHttpResponse> {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps/{appId}/report-filters",
+    pathVariables: { appId },
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type CreateAppReportFilterHttpResponse = {
+  data: Filter;
+  headers: Headers;
+  status: 201;
+};
+
+export type CreateAppReportFilterHttpError = {
+  data: FilterErrors;
+  headers: Headers;
+  status: 400 | 401 | 403 | 404 | 409 | 429 | 500;
+};
+
+/**
+ * Get the number of filters for the given app and filter types
+ *
+ * @param appId Qlik Sense app identifier
+ * @param query an object with query parameters
+ * @throws CountAppReportFiltersHttpError
+ */
+export async function countAppReportFilters(
+  appId: string,
+  query: {
+    /** The filter type (REP, SUB). REP stands for report bookmark, SUB for subscription bookmark. */
+    filterTypes: ("REP" | "SUB")[];
+  },
+  options?: ApiCallOptions,
+): Promise<CountAppReportFiltersHttpResponse> {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/report-filters/actions/count",
+    pathVariables: { appId },
+    query,
+    options,
+  });
+}
+
+export type CountAppReportFiltersHttpResponse = {
+  data: FiltersCount;
+  headers: Headers;
+  status: 200;
+};
+
+export type CountAppReportFiltersHttpError = {
+  data: FilterErrors;
+  headers: Headers;
+  status: 400 | 401 | 403 | 404 | 429 | 500;
+};
+
+/**
+ * Delete a filter
+ *
+ * @param appId Qlik Sense app identifier
+ * @param id The filter id identifier (bookmarkId).
+ * @throws DeleteAppReportFilterHttpError
+ */
+export async function deleteAppReportFilter(
+  appId: string,
+  id: string,
+  options?: ApiCallOptions,
+): Promise<DeleteAppReportFilterHttpResponse> {
+  return invokeFetch("apps", {
+    method: "delete",
+    pathTemplate: "/api/v1/apps/{appId}/report-filters/{id}",
+    pathVariables: { appId, id },
+    options,
+  });
+}
+
+export type DeleteAppReportFilterHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 204;
+};
+
+export type DeleteAppReportFilterHttpError = {
+  data: FilterErrors;
+  headers: Headers;
+  status: 400 | 401 | 403 | 404 | 429 | 500;
+};
+
+/**
+ * Get a filter
+ *
+ * @param appId Qlik Sense app identifier
+ * @param id The filter id identifier (bookmarkId).
+ * @param query an object with query parameters
+ * @throws GetAppReportFilterWithQueryHttpError
+ */
+export async function getAppReportFilterWithQuery(
+  appId: string,
+  id: string,
+  query: {
+    /** Load type expressing the kind of request, eg. interactive for report requests from the Web UI, batch for scheduled report generation. */
+    loadType?: "interactive" | "batch";
+  },
+  options?: ApiCallOptions,
+): Promise<GetAppReportFilterWithQueryHttpResponse> {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/report-filters/{id}",
+    pathVariables: { appId, id },
+    query,
+    options,
+  });
+}
+
+export type GetAppReportFilterWithQueryHttpResponse = {
+  data: Filter;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetAppReportFilterWithQueryHttpError = {
+  data: FilterErrors;
+  headers: Headers;
+  status: 400 | 401 | 403 | 404 | 429 | 500;
+};
+
+/**
+ * Get a filter
+ *
+ * @param appId Qlik Sense app identifier
+ * @param id The filter id identifier (bookmarkId).
+ * @throws GetAppReportFilterHttpError
+ */
+export async function getAppReportFilter(
+  appId: string,
+  id: string,
+  options?: ApiCallOptions,
+): Promise<GetAppReportFilterHttpResponse> {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/report-filters/{id}",
+    pathVariables: { appId, id },
+    options,
+  });
+}
+
+export type GetAppReportFilterHttpResponse = {
+  data: Filter;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetAppReportFilterHttpError = {
+  data: FilterErrors;
+  headers: Headers;
+  status: 400 | 401 | 403 | 404 | 429 | 500;
+};
+
+/**
+ * Update a filter
+ *
+ * @param appId Qlik Sense app identifier
+ * @param id The filter id identifier (bookmarkId).
+ * @param body an object with the body content
+ * @throws PatchAppReportFilterHttpError
+ */
+export async function patchAppReportFilter(
+  appId: string,
+  id: string,
+  body: PatchFilter,
+  options?: ApiCallOptions,
+): Promise<PatchAppReportFilterHttpResponse> {
+  return invokeFetch("apps", {
+    method: "patch",
+    pathTemplate: "/api/v1/apps/{appId}/report-filters/{id}",
+    pathVariables: { appId, id },
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type PatchAppReportFilterHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 204;
+};
+
+export type PatchAppReportFilterHttpError = {
+  data: FilterErrors;
+  headers: Headers;
+  status: 400 | 401 | 403 | 404 | 409 | 429 | 500;
+};
+
+/**
+ * Retrieves the script history for an app.
+ * Returns information about the saved versions of the script in a list sorted with latest first.
+ *
+ * @param appId Identifier of the app.
+ * @param query an object with query parameters
+ * @throws GetAppScriptHistoryHttpError
+ */
+export async function getAppScriptHistory(
+  appId: string,
+  query: {
+    /** A scim filter expression defining which script versions should be retrieved. Filterable fields are:
+     * * ScriptId
+     * * ModifiedTime
+     * * ModifierId */
+    filter?: string;
+    /** Maximum number of records to return from this request. */
+    limit?: string;
+    /** Opaque definition of which page of the result set to return. Returned from a previous call using the same filter. Not yet supported. */
+    page?: string;
+  },
+  options?: ApiCallOptions,
+): Promise<GetAppScriptHistoryHttpResponse> {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/scripts",
+    pathVariables: { appId },
+    query,
+    options,
+  });
+}
+
+export type GetAppScriptHistoryHttpResponse = {
+  data: ScriptMetaList;
+  headers: Headers;
+  status: 200;
+  prev?: (options?: PageCallOptions) => Promise<GetAppScriptHistoryHttpResponse>;
+  next?: (options?: PageCallOptions) => Promise<GetAppScriptHistoryHttpResponse>;
+};
+
+export type GetAppScriptHistoryHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Sets script for an app.
+ *
+ * @param appId Identifier of the app.
+ * @param body an object with the body content
+ * @throws UpdateAppScriptHttpError
+ */
+export async function updateAppScript(
+  appId: string,
+  body: ScriptVersion,
+  options?: ApiCallOptions,
+): Promise<UpdateAppScriptHttpResponse> {
+  return invokeFetch("apps", {
+    method: "post",
+    pathTemplate: "/api/v1/apps/{appId}/scripts",
+    pathVariables: { appId },
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type UpdateAppScriptHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 200;
+};
+
+export type UpdateAppScriptHttpError = {
+  data: void;
+  headers: Headers;
+  status: 403 | 404;
+};
+
+/**
+ * Deletes a specific version of the script for an app.
+ * Fails if the supplied id is the current version.
+ *
+ * @param appId Identifier of the app.
+ * @param id Identifier of the script version
+ * @throws DeleteAppScriptHttpError
+ */
+export async function deleteAppScript(
+  appId: string,
+  id: string,
+  options?: ApiCallOptions,
+): Promise<DeleteAppScriptHttpResponse> {
+  return invokeFetch("apps", {
+    method: "delete",
+    pathTemplate: "/api/v1/apps/{appId}/scripts/{id}",
+    pathVariables: { appId, id },
+    options,
+  });
+}
+
+export type DeleteAppScriptHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 200;
+};
+
+export type DeleteAppScriptHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Retrieves a version of the script for an app.
+ * Returns the script text.
+ *
+ * @param appId Identifier of the app.
+ * @param id Identifier of the script version, or 'current' for retrieving the current version.
+ * @throws GetAppScriptHttpError
+ */
+export async function getAppScript(
+  appId: string,
+  id: string,
+  options?: ApiCallOptions,
+): Promise<GetAppScriptHttpResponse> {
+  return invokeFetch("apps", {
+    method: "get",
+    pathTemplate: "/api/v1/apps/{appId}/scripts/{id}",
+    pathVariables: { appId, id },
+    options,
+  });
+}
+
+export type GetAppScriptHttpResponse = {
+  data: ScriptVersion;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetAppScriptHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Updates a specific version of the script for an app.
+ *
+ * @param appId Identifier of the app.
+ * @param id Identifier of the script version.
+ * @param body an object with the body content
+ * @throws PatchAppScriptHttpError
+ */
+export async function patchAppScript(
+  appId: string,
+  id: string,
+  body: NxPatch[],
+  options?: ApiCallOptions,
+): Promise<PatchAppScriptHttpResponse> {
+  return invokeFetch("apps", {
+    method: "patch",
+    pathTemplate: "/api/v1/apps/{appId}/scripts/{id}",
+    pathVariables: { appId, id },
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type PatchAppScriptHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 200;
+};
+
+export type PatchAppScriptHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Removes space from a specific app.
+ *
+ * @param appId Identifier of the app.
+ * @throws RemoveAppFromSpaceHttpError
+ */
+export async function removeAppFromSpace(
+  appId: string,
+  options?: ApiCallOptions,
+): Promise<RemoveAppFromSpaceHttpResponse> {
+  return invokeFetch("apps", {
+    method: "delete",
+    pathTemplate: "/api/v1/apps/{appId}/space",
+    pathVariables: { appId },
+    options,
+  });
+}
+
+export type RemoveAppFromSpaceHttpResponse = {
+  data: NxApp;
+  headers: Headers;
+  status: 200;
+};
+
+export type RemoveAppFromSpaceHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Sets space on a specific app.
+ *
+ * @param appId Identifier of the app.
+ * @param body an object with the body content
+ * @throws MoveAppToSpaceHttpError
+ */
+export async function moveAppToSpace(
+  appId: string,
+  body: UpdateSpace,
+  options?: ApiCallOptions,
+): Promise<MoveAppToSpaceHttpResponse> {
+  return invokeFetch("apps", {
+    method: "put",
+    pathTemplate: "/api/v1/apps/{appId}/space",
+    pathVariables: { appId },
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type MoveAppToSpaceHttpResponse = {
+  data: NxApp;
+  headers: Headers;
+  status: 200;
+};
+
+export type MoveAppToSpaceHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Clears the cache for apps api requests.
+ */
+export function clearCache() {
+  return clearApiCache("apps");
+}
+
+/* -------------------------------------------------------------------------- */
+/*                             Default export api                             */
+/* -------------------------------------------------------------------------- */
+
+export type AppsAPI = {
+  /**
+   * Creates a new app.
+   *
+   * @param body an object with the body content
+   * @throws CreateAppHttpError
+   */
+  createApp: typeof createApp;
+  /**
+   * Imports an app into the system.
+   *
+   * @param query an object with query parameters
+   * @param body an object with the body content
+   * @throws ImportAppHttpError
+   */
+  importApp: typeof importApp;
+  /**
+   * Gets the app privileges for the current user, such as create app and import app. Empty means that the current user has no app privileges.
+   *
+   * @throws GetAppsPrivilegesHttpError
+   */
+  getAppsPrivileges: typeof getAppsPrivileges;
+  /**
+   * Validates the script.
+   *
+   * @param body an object with the body content
+   * @throws ValidateScriptHttpError
+   */
+  validateScript: typeof validateScript;
+  /**
+   * Deletes a specific app.
+   *
+   * @param appId Identifier of the app.
+   * @throws DeleteAppHttpError
+   */
+  deleteApp: typeof deleteApp;
+  /**
+   * Retrieves information for a specific app.
+   *
+   * @param appId Identifier of the app.
+   * @throws GetAppInfoHttpError
+   */
+  getAppInfo: typeof getAppInfo;
+  /**
+   * Updates the information for a specific app.
+   *
+   * @param appId Identifier of the app.
+   * @param body an object with the body content
+   * @throws UpdateAppInfoHttpError
+   */
+  updateAppInfo: typeof updateAppInfo;
+  /**
+   * Copies a specific app.
+   *
+   * @param appId Identifier of the app.
+   * @param body an object with the body content
+   * @throws CopyAppHttpError
+   */
+  copyApp: typeof copyApp;
+  /**
+   * Retrieves the lineage for an app.
+   * Returns a JSON-formatted array of strings describing the lineage of the app.
+   *
+   * @param appId Identifier of the app.
+   * @throws GetAppDataLineageHttpError
+   */
+  getAppDataLineage: typeof getAppDataLineage;
+  /**
+   * Retrieves the data model and reload statistics metadata of an app.
+   * An empty metadata structure is returned if the metadata is not available in the app.
+   *
+   * @param appId Identifier of the app.
+   * @throws GetAppDataMetadataHttpError
+   */
+  getAppDataMetadata: typeof getAppDataMetadata;
+  /**
+   * Exports a specific app.
+   *
+   * @param appId Identifier of the app.
+   * @param query an object with query parameters
+   * @throws ExportAppHttpError
+   */
+  exportApp: typeof exportApp;
+  /**
+   * Returns information about supported analyses for the app's data model. Lists available analysis types, along with minimum and maximum number of dimensions, measures, and fields.
+   *
+   * @param appId Qlik Sense app identifier
+   * @throws GetAppInsightAnalysesHttpError
+   */
+  getAppInsightAnalyses: typeof getAppInsightAnalyses;
+  /**
+   * Returns analysis recommendations in response to a natural language question, a set of fields and master items, or a set of fields and master items with an optional target analysis.
+   *
+   * @param appId Qlik Sense app identifier
+   * @param body an object with the body content
+   * @throws GetAppInsightAnalysisRecommendationsHttpError
+   */
+  getAppInsightAnalysisRecommendations: typeof getAppInsightAnalysisRecommendations;
+  /**
+   * Returns information about model used to make analysis recommendations. Lists all fields and master items in the logical model, along with an indication of the validity of the logical model if the default is not used.
+   *
+   * @param appId Qlik Sense app identifier
+   * @throws GetAppInsightAnalysisModelHttpError
+   */
+  getAppInsightAnalysisModel: typeof getAppInsightAnalysisModel;
+  /**
+   * Deletes a media content file or complete directory.
+   * Returns OK if the bytes containing the media file (or the complete content of a directory) were successfully deleted, or error in case of failure or lack of permission.
+   *
+   * @param appId Unique application identifier.
+   * @param path Path to file content.
+   * @throws DeleteAppMediaHttpError
+   */
+  deleteAppMedia: typeof deleteAppMedia;
+  /**
+   * Gets media content from file.
+   * Returns a stream of bytes containing the media file content on success, or error if file is not found.
+   *
+   * @param appId Unique application identifier.
+   * @param path Path to file content.
+   * @throws GetAppMediaHttpError
+   */
+  getAppMedia: typeof getAppMedia;
+  /**
+   * Stores the media content file.
+   * Returns OK if the bytes containing the media file content were successfully stored, or error in case of failure, lack of permission or file already exists on the supplied path.
+   *
+   * @param appId Unique application identifier.
+   * @param path Path to file content.
+   * @param body an object with the body content
+   * @throws UploadAppMediaHttpError
+   */
+  uploadAppMedia: typeof uploadAppMedia;
+  /**
+   * Lists media content.
+   * Returns a JSON formatted array of strings describing the available media content or error if the optional path supplied is not found.
+   *
+   * @param appId Unique application identifier.
+   * @param path The path to sub folder with static content relative to the root folder. Use empty path to access the root folder.
+   * @param query an object with query parameters
+   * @throws GetAppMediaListHttpError
+   */
+  getAppMediaList: typeof getAppMediaList;
+  /**
+   * Gets media content from file currently used as application thumbnail.
+   * Returns a stream of bytes containing the media file content on success, or error if file is not found.
+   * The image selected as thumbnail is only updated when application is saved.
+   *
+   * @param appId Unique application identifier.
+   * @throws GetAppThumbnailHttpError
+   */
+  getAppThumbnail: typeof getAppThumbnail;
+  /**
+   * Sets owner on an app object.
+   * The user must be the owner of the object.
+   *
+   * @param appId Identifier of the app.
+   * @param objectId Identifier of the object.
+   * @param body an object with the body content
+   * @throws UpdateAppObjectOwnerHttpError
+   */
+  updateAppObjectOwner: typeof updateAppObjectOwner;
+  /**
+   * Changes owner of the app.
+   *
+   * @param appId Identifier of the app.
+   * @param body an object with the body content
+   * @throws UpdateAppOwnerHttpError
+   */
+  updateAppOwner: typeof updateAppOwner;
+  /**
+   * Removes the app size override for an app.
+   *
+   * @param appId Identifier of the app
+   * @throws DeleteAppPlacementHttpError
+   */
+  deleteAppPlacement: typeof deleteAppPlacement;
+  /**
+   * Retrieves the app size override for an app.
+   *
+   * @param appId Identifier of the app
+   * @throws GetAppPlacementHttpError
+   */
+  getAppPlacement: typeof getAppPlacement;
+  /**
+   * Sets the app size override for an app.
+   *
+   * @param appId Identifier of the app
+   * @param body an object with the body content
+   * @throws ReplaceAppPlacementHttpError
+   */
+  replaceAppPlacement: typeof replaceAppPlacement;
+  /**
+   * Publishes a specific app to a managed space.
+   *
+   * @param appId Identifier of the app.
+   * @param body an object with the body content
+   * @throws PublishAppHttpError
+   */
+  publishApp: typeof publishApp;
+  /**
+   * Republishes a published app to a managed space.
+   *
+   * @param appId Identifier of the app.
+   * @param body an object with the body content
+   * @throws RepublishAppHttpError
+   */
+  republishApp: typeof republishApp;
+  /**
+   * Retrieves the metadata about all script logs stored for an app.
+   * Returns an array of ScriptLogMeta objects.
+   *
+   * @param appId Identifier of the app.
+   * @throws GetAppReloadLogsHttpError
+   */
+  getAppReloadLogs: typeof getAppReloadLogs;
+  /**
+   * Retrieves the log of a specific reload.
+   * Returns the log as "text/plain; charset=UTF-8".
+   *
+   * @param appId Identifier of the app.
+   * @param reloadId Identifier of the reload.
+   * @throws GetAppReloadLogHttpError
+   */
+  getAppReloadLog: typeof getAppReloadLog;
+  /**
+   * Retrieves the app reload metadata list.
+   * Reload metadata contains reload information, including reload id, duration, endtime and lineage load info. Data is available for the last 10 reloads of an application.
+   *
+   * @param appId Identifier of the app.
+   * @param reloadId
+   * @param query an object with query parameters
+   * @throws GetAppReloadMetadataHttpError
+   */
+  getAppReloadMetadata: typeof getAppReloadMetadata;
+  /**
+   * List all filters that are present in the given app. Filters allow to reduce the app data visible in a report output. Each filter can contain definitions on one or multiple fields.
+   *
+   * @param appId Qlik Sense app identifier
+   * @param query an object with query parameters
+   * @throws GetAppReportFiltersHttpError
+   */
+  getAppReportFilters: typeof getAppReportFilters;
+  /**
+   * Creates a new report filter which is used to re-apply selections, variables, patches to an engine session.
+   *
+   * @param appId Qlik Sense app identifier
+   * @param body an object with the body content
+   * @throws CreateAppReportFilterHttpError
+   */
+  createAppReportFilter: typeof createAppReportFilter;
+  /**
+   * Get the number of filters for the given app and filter types
+   *
+   * @param appId Qlik Sense app identifier
+   * @param query an object with query parameters
+   * @throws CountAppReportFiltersHttpError
+   */
+  countAppReportFilters: typeof countAppReportFilters;
+  /**
+   * Delete a filter
+   *
+   * @param appId Qlik Sense app identifier
+   * @param id The filter id identifier (bookmarkId).
+   * @throws DeleteAppReportFilterHttpError
+   */
+  deleteAppReportFilter: typeof deleteAppReportFilter;
+  /**
+   * Get a filter
+   *
+   * @param appId Qlik Sense app identifier
+   * @param id The filter id identifier (bookmarkId).
+   * @param query an object with query parameters
+   * @throws GetAppReportFilterWithQueryHttpError
+   */
+  getAppReportFilterWithQuery: typeof getAppReportFilterWithQuery;
+  /**
+   * Get a filter
+   *
+   * @param appId Qlik Sense app identifier
+   * @param id The filter id identifier (bookmarkId).
+   * @throws GetAppReportFilterHttpError
+   */
+  getAppReportFilter: typeof getAppReportFilter;
+  /**
+   * Update a filter
+   *
+   * @param appId Qlik Sense app identifier
+   * @param id The filter id identifier (bookmarkId).
+   * @param body an object with the body content
+   * @throws PatchAppReportFilterHttpError
+   */
+  patchAppReportFilter: typeof patchAppReportFilter;
+  /**
+   * Retrieves the script history for an app.
+   * Returns information about the saved versions of the script in a list sorted with latest first.
+   *
+   * @param appId Identifier of the app.
+   * @param query an object with query parameters
+   * @throws GetAppScriptHistoryHttpError
+   */
+  getAppScriptHistory: typeof getAppScriptHistory;
+  /**
+   * Sets script for an app.
+   *
+   * @param appId Identifier of the app.
+   * @param body an object with the body content
+   * @throws UpdateAppScriptHttpError
+   */
+  updateAppScript: typeof updateAppScript;
+  /**
+   * Deletes a specific version of the script for an app.
+   * Fails if the supplied id is the current version.
+   *
+   * @param appId Identifier of the app.
+   * @param id Identifier of the script version
+   * @throws DeleteAppScriptHttpError
+   */
+  deleteAppScript: typeof deleteAppScript;
+  /**
+   * Retrieves a version of the script for an app.
+   * Returns the script text.
+   *
+   * @param appId Identifier of the app.
+   * @param id Identifier of the script version, or 'current' for retrieving the current version.
+   * @throws GetAppScriptHttpError
+   */
+  getAppScript: typeof getAppScript;
+  /**
+   * Updates a specific version of the script for an app.
+   *
+   * @param appId Identifier of the app.
+   * @param id Identifier of the script version.
+   * @param body an object with the body content
+   * @throws PatchAppScriptHttpError
+   */
+  patchAppScript: typeof patchAppScript;
+  /**
+   * Removes space from a specific app.
+   *
+   * @param appId Identifier of the app.
+   * @throws RemoveAppFromSpaceHttpError
+   */
+  removeAppFromSpace: typeof removeAppFromSpace;
+  /**
+   * Sets space on a specific app.
+   *
+   * @param appId Identifier of the app.
+   * @param body an object with the body content
+   * @throws MoveAppToSpaceHttpError
+   */
+  moveAppToSpace: typeof moveAppToSpace;
+  /**
+   * Clears the cache for apps api requests.
+   */
+  clearCache: typeof clearCache;
+};
+
+/**
+ * Functions for the apps api
+ */
+const appsExport: AppsAPI = {
+  createApp,
+  importApp,
+  getAppsPrivileges,
+  validateScript,
+  deleteApp,
+  getAppInfo,
+  updateAppInfo,
+  copyApp,
+  getAppDataLineage,
+  getAppDataMetadata,
+  exportApp,
+  getAppInsightAnalyses,
+  getAppInsightAnalysisRecommendations,
+  getAppInsightAnalysisModel,
+  deleteAppMedia,
+  getAppMedia,
+  uploadAppMedia,
+  getAppMediaList,
+  getAppThumbnail,
+  updateAppObjectOwner,
+  updateAppOwner,
+  deleteAppPlacement,
+  getAppPlacement,
+  replaceAppPlacement,
+  publishApp,
+  republishApp,
+  getAppReloadLogs,
+  getAppReloadLog,
+  getAppReloadMetadata,
+  getAppReportFilters,
+  createAppReportFilter,
+  countAppReportFilters,
+  deleteAppReportFilter,
+  getAppReportFilterWithQuery,
+  getAppReportFilter,
+  patchAppReportFilter,
+  getAppScriptHistory,
+  updateAppScript,
+  deleteAppScript,
+  getAppScript,
+  patchAppScript,
+  removeAppFromSpace,
+  moveAppToSpace,
+  clearCache,
+};
+export default appsExport;

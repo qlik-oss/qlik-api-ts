@@ -1,0 +1,167 @@
+/*
+ * ------------------------------------------------------------------------
+ * ## THIS FILE WAS GENERATED WITH QMFE-API-GENERATOR                    ##
+ * ##                                                                    ##
+ * ## AUTHOR: frontend-core-team                                         ##
+ * ------------------------------------------------------------------------
+ */
+
+import { clearApiCache, invokeFetch, type ApiCallOptions } from "#public/invoke-fetch";
+
+/* -------------------------------------------------------------------------- */
+/*                                Public types                                */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * A specific error.
+ */
+export type Error = {
+  /** The error code. */
+  code: string;
+  /** Summary of the problem. */
+  title: string;
+};
+
+export type ErrorResponse = {
+  errors?: Error[];
+};
+
+export type GetQuotaByIdResult = {
+  /** Quota item. */
+  data: Quota[];
+};
+
+export type GetQuotasResult = {
+  /** Array of quota items. */
+  data: Quota[];
+};
+
+export type Quota = {
+  /** The attributes of the quota. */
+  attributes: {
+    /** The quota limit. If there is no quota limit, -1 is returned. */
+    quota: number;
+    /** The unit of the quota limit. For memory quotas, the unit is always "bytes". For other discrete units, the item counted is used as unit, for example "spaces". */
+    unit: string;
+    /** The current quota usage, if applicable. This attribute is only present if it is requested using the reportUsage query parameter. */
+    usage?: number;
+    /** The warning thresholds at which "close to quota" warnings can be issued when exceeded. If omitted, no warning threshold shall be used. Currently, the array will contain only one threshold value. In the future, this may be extended. The threshold is a number between 0 and 1, relating to the quota limit. For example, a value of 0.9 means that a warning should be issued when exceeding 90% of the quota limit. */
+    warningThresholds?: number[];
+  };
+  /** The unique identifier of the quota item. For example, "app_mem_size", "app_upload_disk_size", or "shared_spaces". */
+  id: string;
+  /** The resource type of the quota item. Always equal to "quotas". */
+  type: string;
+};
+
+/* -------------------------------------------------------------------------- */
+/*                              Public functions                              */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Returns all quota items for the tenant (provided in JWT).
+ *
+ * @param query an object with query parameters
+ * @throws GetQuotasHttpError
+ */
+export async function getQuotas(
+  query: {
+    /** The Boolean flag indicating whether quota usage shall be part of the response. The default value is false (only limits returned). */
+    reportUsage?: boolean;
+  },
+  options?: ApiCallOptions,
+): Promise<GetQuotasHttpResponse> {
+  return invokeFetch("quotas", {
+    method: "get",
+    pathTemplate: "/api/v1/quotas",
+    query,
+    options,
+  });
+}
+
+export type GetQuotasHttpResponse = {
+  data: GetQuotasResult;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetQuotasHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: 401 | 500;
+};
+
+/**
+ * Returns a specific quota item for the tenant (provided in JWT).
+ *
+ * @param id The unique identifier of the quota item. For example, "app_mem_size", "app_upload_disk_size", or "shared_spaces".
+ * @param query an object with query parameters
+ * @throws GetQuotaHttpError
+ */
+export async function getQuota(
+  id: string,
+  query: {
+    /** The Boolean flag indicating whether quota usage shall be part of the response. The default value is false (usage not included). */
+    reportUsage?: boolean;
+  },
+  options?: ApiCallOptions,
+): Promise<GetQuotaHttpResponse> {
+  return invokeFetch("quotas", {
+    method: "get",
+    pathTemplate: "/api/v1/quotas/{id}",
+    pathVariables: { id },
+    query,
+    options,
+  });
+}
+
+export type GetQuotaHttpResponse = {
+  data: GetQuotaByIdResult;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetQuotaHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: 401 | 404 | 500;
+};
+
+/**
+ * Clears the cache for quotas api requests.
+ */
+export function clearCache() {
+  return clearApiCache("quotas");
+}
+
+/* -------------------------------------------------------------------------- */
+/*                             Default export api                             */
+/* -------------------------------------------------------------------------- */
+
+export type QuotasAPI = {
+  /**
+   * Returns all quota items for the tenant (provided in JWT).
+   *
+   * @param query an object with query parameters
+   * @throws GetQuotasHttpError
+   */
+  getQuotas: typeof getQuotas;
+  /**
+   * Returns a specific quota item for the tenant (provided in JWT).
+   *
+   * @param id The unique identifier of the quota item. For example, "app_mem_size", "app_upload_disk_size", or "shared_spaces".
+   * @param query an object with query parameters
+   * @throws GetQuotaHttpError
+   */
+  getQuota: typeof getQuota;
+  /**
+   * Clears the cache for quotas api requests.
+   */
+  clearCache: typeof clearCache;
+};
+
+/**
+ * Functions for the quotas api
+ */
+const quotasExport: QuotasAPI = { getQuotas, getQuota, clearCache };
+export default quotasExport;

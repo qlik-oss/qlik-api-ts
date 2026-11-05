@@ -1,3 +1,0 @@
-import { a as dataProductsExport, c as deleteDataProduct, d as getDataProduct, f as getDataProductChangelogs, i as createDataProduct, l as exportDocumentationDataProduct, m as patchDataProduct, n as clearCache, p as moveDataProduct, r as computeDatasetsDataQualityDataProduct, s as deactivateDataProduct, t as activateDataProduct, u as generateProviderUrlDataProducts } from "../chunks/data-products-DkVFisBp.js";
-
-export { activateDataProduct, clearCache, computeDatasetsDataQualityDataProduct, createDataProduct, deactivateDataProduct, dataProductsExport as default, deleteDataProduct, exportDocumentationDataProduct, generateProviderUrlDataProducts, getDataProduct, getDataProductChangelogs, moveDataProduct, patchDataProduct };

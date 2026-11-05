@@ -1,0 +1,416 @@
+/*
+ * ------------------------------------------------------------------------
+ * ## THIS FILE WAS GENERATED WITH QMFE-API-GENERATOR                    ##
+ * ##                                                                    ##
+ * ## AUTHOR: frontend-core-team                                         ##
+ * ------------------------------------------------------------------------
+ */
+
+import { clearApiCache, invokeFetch, type ApiCallOptions, type DownloadableBlob } from "#public/invoke-fetch";
+
+/* -------------------------------------------------------------------------- */
+/*                                Public types                                */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Object containing meta data regarding the bundle the extension belongs to. If it does not belong to a bundle, this object is not defined.
+ */
+export type BundleMeta = {
+  /** Description of the bundle. */
+  description?: string;
+  /** Unique identifier of the bundle. */
+  id?: string;
+  /** Name of the bundle. */
+  name?: string;
+};
+
+/**
+ * An error object.
+ */
+export type Error = {
+  /** Object containing meta data regarding an error. It does not necessarily contain all the properties. */
+  meta?: Meta;
+  /** Optional JSON patch object pointing to an invalid property. */
+  source?: unknown;
+  /** The HTTP status code. */
+  status?: number;
+  /** Title of the HTTP status code. */
+  title: string;
+  /** The active traceId. */
+  traceId?: string;
+};
+
+/**
+ * The extension model.
+ */
+export type Extension = {
+  /** Author of the extension. */
+  author?: string;
+  /** Object containing meta data regarding the bundle the extension belongs to. If it does not belong to a bundle, this object is not defined. */
+  bundle?: BundleMeta;
+  /** If the extension is part of an extension bundle. */
+  bundled?: boolean;
+  /** Checksum of the extension contents. */
+  checksum?: string;
+  readonly createdAt?: string;
+  /** Map of dependencies describing version of the component it requires. */
+  dependencies?: unknown;
+  /** A date noting when the extension was deprecated. */
+  deprecated?: string;
+  /** Description of the extension. */
+  description?: string;
+  /** The file that was uploaded with the extension. */
+  file?: unknown;
+  /** Home page of the extension. */
+  homepage?: string;
+  /** Icon to show in the client. */
+  icon?: string;
+  readonly id?: string;
+  /** Keywords for the extension. */
+  keywords?: string;
+  /** Under which license this extension is published. */
+  license?: string;
+  /** Relative path to the extension's entry file, defaults to `filename` from the qext file. */
+  loadpath?: string;
+  /** The migration state of the extension. It can be either "READY_TO_MOVE", "IN_PROGRESS" or "COMPLETED". */
+  readonly migrationState?: string;
+  /** The display name of this extension. */
+  name?: string;
+  /** Path to an image that enables users to preview the extension. */
+  preview?: string;
+  /** The name of the qext file that was uploaded with this extension. */
+  qextFilename?: string;
+  /** The version from the qext file that was uploaded with this extension. */
+  qextVersion?: string;
+  /** Link to the extension source code. */
+  repository?: string;
+  /** If the extension is a supernova extension or not. */
+  supernova?: boolean;
+  /** Supplier of the extension. */
+  supplier?: string;
+  /** List of tags. */
+  tags?: string[];
+  readonly tenantId?: string;
+  /** The type of this extension (visualization, etc.). */
+  type?: string;
+  readonly updateAt?: string;
+  readonly userId?: string;
+  /** Version of the extension. */
+  version?: string;
+};
+
+export type Extensions = {
+  data: Extension[];
+};
+
+/**
+ * Object containing meta data regarding an error. It does not necessarily contain all the properties.
+ */
+export type Meta = {
+  /** A more detailed message explaining the error. */
+  message?: string;
+  /** Name of the resource related to the error. If there is a conflict, it is the name of the model attempting to be created. */
+  resourceName?: string;
+  /** Full stack trace of the error that was raised. */
+  stack?: string;
+};
+
+/* -------------------------------------------------------------------------- */
+/*                              Public functions                              */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Lists all imported extensions in the tenant.
+ *
+ * @throws GetExtensionsHttpError
+ */
+export async function getExtensions(options?: ApiCallOptions): Promise<GetExtensionsHttpResponse> {
+  return invokeFetch("extensions", {
+    method: "get",
+    pathTemplate: "/api/v1/extensions",
+    options,
+  });
+}
+
+export type GetExtensionsHttpResponse = {
+  data: Extensions;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetExtensionsHttpError = {
+  data: unknown;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Creates a new extension. Accepts either provided file or data object. The name of the new extension must be different to any existing extensions.
+ *
+ * @param body an object with the body content
+ * @throws UploadExtensionHttpError
+ */
+export async function uploadExtension(
+  body: {
+    /** The extension model. */
+    data?: Extension;
+    /** Extension archive. */
+    file?: BodyInit;
+  },
+  options?: ApiCallOptions,
+): Promise<UploadExtensionHttpResponse> {
+  return invokeFetch("extensions", {
+    method: "post",
+    pathTemplate: "/api/v1/extensions",
+    body,
+    contentType: "multipart/form-data",
+    options,
+  });
+}
+
+export type UploadExtensionHttpResponse = {
+  data: Extension;
+  headers: Headers;
+  status: 201;
+};
+
+export type UploadExtensionHttpError = {
+  data: Error;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Deletes a specific extension matching either extension ID or extension name.
+ *
+ * @param id Extension identifier or its qextFilename.
+ * @throws DeleteExtensionHttpError
+ */
+export async function deleteExtension(id: string, options?: ApiCallOptions): Promise<DeleteExtensionHttpResponse> {
+  return invokeFetch("extensions", {
+    method: "delete",
+    pathTemplate: "/api/v1/extensions/{id}",
+    pathVariables: { id },
+    options,
+  });
+}
+
+export type DeleteExtensionHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 204;
+};
+
+export type DeleteExtensionHttpError = {
+  data: Error;
+  headers: Headers;
+  status: 403 | 404 | 410;
+};
+
+/**
+ * Returns a specific extension matching either extension ID or extension name.
+ *
+ * @param id Extension identifier or its qextFilename.
+ * @throws GetExtensionHttpError
+ */
+export async function getExtension(id: string, options?: ApiCallOptions): Promise<GetExtensionHttpResponse> {
+  return invokeFetch("extensions", {
+    method: "get",
+    pathTemplate: "/api/v1/extensions/{id}",
+    pathVariables: { id },
+    options,
+  });
+}
+
+export type GetExtensionHttpResponse = {
+  data: Extension;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetExtensionHttpError = {
+  data: Error;
+  headers: Headers;
+  status: 403 | 404 | 410;
+};
+
+/**
+ * Updates a specific extension matching either extension ID or extension name. Accepts either provided file or data object.
+ *
+ * @param id Extension identifier or its qextFilename.
+ * @param body an object with the body content
+ * @throws PatchExtensionHttpError
+ */
+export async function patchExtension(
+  id: string,
+  body: {
+    /** The extension model. */
+    data?: Extension;
+    /** Extension archive. */
+    file?: BodyInit;
+  },
+  options?: ApiCallOptions,
+): Promise<PatchExtensionHttpResponse> {
+  return invokeFetch("extensions", {
+    method: "patch",
+    pathTemplate: "/api/v1/extensions/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "multipart/form-data",
+    options,
+  });
+}
+
+export type PatchExtensionHttpResponse = {
+  data: Extension;
+  headers: Headers;
+  status: 200;
+};
+
+export type PatchExtensionHttpError = {
+  data: Error;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Downloads all files in the extension matching either extension ID or extension name as a `.zip` archive.
+ *
+ * @param id Extension identifier or its qextFilename.
+ * @throws DownloadExtensionHttpError
+ */
+export async function downloadExtension(id: string, options?: ApiCallOptions): Promise<DownloadExtensionHttpResponse> {
+  return invokeFetch("extensions", {
+    method: "get",
+    pathTemplate: "/api/v1/extensions/{id}/file",
+    pathVariables: { id },
+    options,
+  });
+}
+
+export type DownloadExtensionHttpResponse = {
+  data: DownloadableBlob;
+  headers: Headers;
+  status: 200;
+};
+
+export type DownloadExtensionHttpError = {
+  data: Error;
+  headers: Headers;
+  status: 403 | 404 | 410;
+};
+
+/**
+ * Downloads a specific file from the extension matching either extension ID or extension name, identified by the file path within the imported extension.
+ *
+ * @param id Extension identifier or its qextFilename.
+ * @param filepath Path to the file location within the specified extension archive. Folders separated with forward slashes.
+ * @throws DownloadFileFromExtensionHttpError
+ */
+export async function downloadFileFromExtension(
+  id: string,
+  filepath: string,
+  options?: ApiCallOptions,
+): Promise<DownloadFileFromExtensionHttpResponse> {
+  return invokeFetch("extensions", {
+    method: "get",
+    pathTemplate: "/api/v1/extensions/{id}/file/{filepath}",
+    pathVariables: { id, filepath },
+    options,
+  });
+}
+
+export type DownloadFileFromExtensionHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 200;
+};
+
+export type DownloadFileFromExtensionHttpError = {
+  data: Error;
+  headers: Headers;
+  status: 403 | 404 | 410;
+};
+
+/**
+ * Clears the cache for extensions api requests.
+ */
+export function clearCache() {
+  return clearApiCache("extensions");
+}
+
+/* -------------------------------------------------------------------------- */
+/*                             Default export api                             */
+/* -------------------------------------------------------------------------- */
+
+export type ExtensionsAPI = {
+  /**
+   * Lists all imported extensions in the tenant.
+   *
+   * @throws GetExtensionsHttpError
+   */
+  getExtensions: typeof getExtensions;
+  /**
+   * Creates a new extension. Accepts either provided file or data object. The name of the new extension must be different to any existing extensions.
+   *
+   * @param body an object with the body content
+   * @throws UploadExtensionHttpError
+   */
+  uploadExtension: typeof uploadExtension;
+  /**
+   * Deletes a specific extension matching either extension ID or extension name.
+   *
+   * @param id Extension identifier or its qextFilename.
+   * @throws DeleteExtensionHttpError
+   */
+  deleteExtension: typeof deleteExtension;
+  /**
+   * Returns a specific extension matching either extension ID or extension name.
+   *
+   * @param id Extension identifier or its qextFilename.
+   * @throws GetExtensionHttpError
+   */
+  getExtension: typeof getExtension;
+  /**
+   * Updates a specific extension matching either extension ID or extension name. Accepts either provided file or data object.
+   *
+   * @param id Extension identifier or its qextFilename.
+   * @param body an object with the body content
+   * @throws PatchExtensionHttpError
+   */
+  patchExtension: typeof patchExtension;
+  /**
+   * Downloads all files in the extension matching either extension ID or extension name as a `.zip` archive.
+   *
+   * @param id Extension identifier or its qextFilename.
+   * @throws DownloadExtensionHttpError
+   */
+  downloadExtension: typeof downloadExtension;
+  /**
+   * Downloads a specific file from the extension matching either extension ID or extension name, identified by the file path within the imported extension.
+   *
+   * @param id Extension identifier or its qextFilename.
+   * @param filepath Path to the file location within the specified extension archive. Folders separated with forward slashes.
+   * @throws DownloadFileFromExtensionHttpError
+   */
+  downloadFileFromExtension: typeof downloadFileFromExtension;
+  /**
+   * Clears the cache for extensions api requests.
+   */
+  clearCache: typeof clearCache;
+};
+
+/**
+ * Functions for the extensions api
+ */
+const extensionsExport: ExtensionsAPI = {
+  getExtensions,
+  uploadExtension,
+  deleteExtension,
+  getExtension,
+  patchExtension,
+  downloadExtension,
+  downloadFileFromExtension,
+  clearCache,
+};
+export default extensionsExport;

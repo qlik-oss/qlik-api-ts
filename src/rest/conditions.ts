@@ -1,0 +1,878 @@
+/*
+ * ------------------------------------------------------------------------
+ * ## THIS FILE WAS GENERATED WITH QMFE-API-GENERATOR                    ##
+ * ##                                                                    ##
+ * ## AUTHOR: frontend-core-team                                         ##
+ * ------------------------------------------------------------------------
+ */
+
+import { clearApiCache, invokeFetch, type ApiCallOptions } from "#public/invoke-fetch";
+
+/* -------------------------------------------------------------------------- */
+/*                                Public types                                */
+/* -------------------------------------------------------------------------- */
+
+export type APISettings = {
+  /** Whether API endpoints for condition manager are enabled */
+  "enable-conditions": boolean;
+  /** These persisted api settings are only available for this tenant. Extracted from request JWT. */
+  readonly tenantId?: string;
+};
+
+export type APISettingsUpload = {
+  /** Whether API endpoints for condition manager are enabled */
+  "enable-conditions": boolean;
+};
+
+export type CausalEvent = {
+  data?: CausalEventData;
+  /** the event id from eventing */
+  eventID?: string;
+  extensions?: CausalEventExtensions;
+  manualTrigger?: boolean;
+  /** the manual trigger id from eventing if present */
+  manualTriggerID?: string;
+};
+
+export type CausalEventData = {
+  /** the event id from eventing service. */
+  eventID?: string;
+  /** The time of the last reload */
+  lastReloadTime?: string;
+};
+
+export type CausalEventExtensions = {
+  sessionID?: string;
+  tenantID?: string;
+  userID?: string;
+};
+
+/**
+ * A condition made up of other conditions
+ */
+export type CompoundCondition = {
+  /** A base condition */
+  conditionBase?: ConditionBase;
+  /** Condition data */
+  data?: CompoundConditionData;
+};
+
+/**
+ * Condition data
+ */
+export type CompoundConditionData = {
+  /** Array of condition ids */
+  conditions?: string[];
+  /** Boolean expression made up of variable names defined from the conditions section */
+  expression?: string;
+  /** History properties */
+  history?: HistoryProperties;
+};
+
+/**
+ * only one of compoundCondition or dataCondition should be set
+ */
+export type Condition = {
+  /** A condition made up of other conditions */
+  compoundCondition?: CompoundCondition;
+  /** A condition based on data within an app */
+  dataCondition?: DataCondition;
+  /** UserID of the condition owner */
+  ownerId?: string;
+  /** The tenant id */
+  tenantId?: string;
+  /** Indicates the condition type */
+  type: "compound" | "data";
+};
+
+/**
+ * A base condition
+ */
+export type ConditionBase = {
+  /** The id of the app the condition is evaluated against */
+  appId?: string;
+  /** The bookmark corresponding to the selection state to apply to the app at evaluation time */
+  bookmarkId?: string;
+  /** When the resource was created */
+  readonly created?: string;
+  /** The id of the user which created the condition */
+  readonly createdById?: string;
+  /** Description of the condition */
+  description?: string;
+  /** The unique id for the resource */
+  readonly id?: string;
+  /** The time of the last reload, if the scan is triggered by a reload. If exists and value does not match app's last reload time, the evaluation will fail. */
+  readonly lastReloadTime?: string;
+  /** The id of the user the user which owns the condition */
+  readonly ownerId?: string;
+  /** The tenant id */
+  readonly tenantId?: string;
+  /** Indicates the condition type */
+  type?: "compound" | "data";
+  /** When the resource was last updated */
+  readonly updated?: string;
+};
+
+/**
+ * only one of compoundCondition or dataCondition should be set
+ */
+export type ConditionCreateRequest = {
+  /** A condition made up of other conditions */
+  compoundCondition?: CompoundCondition;
+  /** A condition based on data within an app */
+  dataCondition?: DataConditionCreateRequest;
+  /** Indicates the condition type */
+  type: "compound" | "data";
+};
+
+/**
+ * List of returned dimensions
+ */
+export type ConditionDimensions = ConditionDimensionsInner[];
+
+export type ConditionDimensionsInner = {
+  /** Field referred to the dimension where the selection is made. This may be used to generate deep links. */
+  field?: string;
+  /** Refers to a dimension stored in the library */
+  qLibraryId?: string;
+  /** Dimension title */
+  title?: string;
+};
+
+/**
+ * List of header labels
+ * @example
+ * [
+ *   "sumnum"
+ * ]
+ */
+export type ConditionHeaders = string[];
+
+/**
+ * List of returned measures
+ */
+export type ConditionMeasures = ConditionMeasuresInner[];
+
+export type ConditionMeasuresInner = {
+  /** Refers to a measure stored in the library */
+  qLibraryId?: string;
+  /** Format of the field */
+  qNumFormat?: unknown;
+  /** Measure title */
+  title?: string;
+};
+
+/**
+ * A JSON Patch document as defined in https://datatracker.ietf.org/doc/html/rfc6902.
+ * @example
+ * [
+ *   {
+ *     op: "replace",
+ *     path: "/compoundCondition/conditionBase/ownerId"
+ *   },
+ *   {
+ *     op: "replace",
+ *     path: "/dataCondition/conditionBase/description"
+ *   },
+ *   {
+ *     op: "remove",
+ *     path: "/compoundCondition/data/conditions/0"
+ *   },
+ *   {
+ *     op: "replace",
+ *     path: "/compoundCondition//data/expression"
+ *   },
+ *   {
+ *     op: "replace",
+ *     path: "/dataCondition/conditionData/measure"
+ *   }
+ * ]
+ */
+export type ConditionPatch = ConditionPatchInner[];
+
+export type ConditionPatchInner = {
+  /** The operation to be performed. */
+  op: "replace" | "remove" | "add";
+  /** The path for the given resource field to patch. */
+  path: string;
+  /** The value to be used for this operation. */
+  value?: unknown;
+};
+
+export type ConditionResponse = {
+  /** only one of compoundCondition or dataCondition should be set */
+  condition?: Condition;
+  errors?: Errors;
+};
+
+export type CreateEvaluationRequest = {
+  /** The id of the alerting task the condition and evaluation is part of */
+  alertId?: string;
+  causalEvent: CausalEvent;
+  /** Extra context information to carry through to the result if any */
+  contextId: string;
+};
+
+export type CreateEvaluationResponse = {
+  /** Extra context information to carry through to the result if any */
+  contextId?: string;
+  errors?: Errors;
+  /** Extra context information to carry through to the result if any */
+  evaluationId?: string;
+};
+
+/**
+ * A condition based on data within an app
+ */
+export type DataCondition = {
+  /** A base condition */
+  conditionBase?: ConditionBase;
+  /** List of parameters specific to data condition are available in DCE and will be passed as is to DCE as per the API docs of data-condition-evaluator */
+  conditionData?: unknown;
+  /** List of returned dimensions */
+  dimensions?: ConditionDimensions;
+  /** List of header labels */
+  headers?: ConditionHeaders;
+  /** History properties */
+  history?: HistoryProperties;
+  /** List of returned measures */
+  measures?: ConditionMeasures;
+  /** List of fields according to the bookmark definition */
+  selections?: Selections;
+};
+
+/**
+ * A condition based on data within an app
+ */
+export type DataConditionCreateRequest = {
+  /** A base condition */
+  conditionBase?: ConditionBase;
+  /** List of parameters specific to data condition are available in DCE and will be passed as is to DCE as per the API docs of data-condition-evaluator */
+  conditionData?: unknown;
+  /** List of returned dimensions */
+  dimensions?: ConditionDimensions;
+  /** List of header labels */
+  headers?: ConditionHeaders;
+  /** History properties */
+  history?: HistoryProperties;
+  /** List of returned measures */
+  measures?: ConditionMeasures;
+  /** List of fields according to the bookmark definition */
+  selections?: Selections;
+};
+
+export type Error = {
+  /** Error code specific to condition manager. */
+  readonly code?: string;
+  /** Error cause. */
+  readonly detail?: string;
+  meta?: unknown;
+  /** Error title. */
+  readonly title?: string;
+};
+
+/**
+ * @example
+ * {
+ *   errors: [
+ *     {
+ *       code: "HTTP-123",
+ *       title: "short error message"
+ *     }
+ *   ],
+ *   traceId: "7975401f3954aa47"
+ * }
+ */
+export type ErrorResponse = {
+  /** Array of errors */
+  errors?: SingleErrorResponse[];
+  /** trace id */
+  traceId?: string;
+};
+
+export type Errors = Error[];
+
+export type Evaluation = {
+  /** The id of the alerting task the condition and evaluation is part of */
+  alertId?: string;
+  /** internal identifier used when migrating keys */
+  byokMigrationId?: string;
+  /** Representation of the event that caused the condition to be evaluated if one was included on when the evaluation was triggered */
+  causalEvent?: unknown;
+  /** only one of compoundCondition or dataCondition should be set */
+  condition?: Condition;
+  /** The unique id of the associated condition */
+  readonly conditionId?: string;
+  /** Extra context information to carry through to the result if one was included on when the evaluation was triggered */
+  contextId?: string;
+  /** @deprecated
+   * The unique id for the resource given from Data Condition Evaluator. */
+  readonly dataConditionEvaluatorId?: string;
+  /** The time the evaluation ended */
+  readonly endTime?: string;
+  errors?: EvaluationErrors;
+  /** The unique id for the resource */
+  readonly id?: string;
+  /** userId of user being impersonated to evaluate the condition */
+  readonly ownerId?: string;
+  /** The time when the reload was completed in Engine */
+  readonly reloadEndTime?: string;
+  /** The number of times we have attempted to remove this evaluation data-file */
+  removalErrorCount?: number;
+  /** The final result of the evalution */
+  readonly result?: boolean;
+  /** Condition type specific result, one of dataResult or compoundResult */
+  resultData?: unknown;
+  /** number of retries sent to DCE */
+  readonly retries?: number;
+  /** what kind of retry policy this evaluation has */
+  retryPolicy?: "NONE" | "TOO_MANY_REQUESTS" | "GENERIC_ERROR";
+  /** The time the evaluation started */
+  readonly startTime?: string;
+  /** The status of the evaluation execution */
+  readonly status?: "RUNNING" | "FAILED" | "FINISHED" | "DELETING";
+  /** The tenant id */
+  readonly tenantId?: string;
+};
+
+export type EvaluationError = {
+  /** Error code specific to condition smanager. */
+  readonly code?: string;
+  meta?: EvaluationErrorMeta;
+  /** Error status. */
+  readonly status?: unknown;
+  /** Error title. */
+  readonly title?: string;
+};
+
+export type EvaluationErrorMeta = {
+  /** defines whether an error is recoverable or not */
+  fatal?: boolean;
+};
+
+export type EvaluationErrors = EvaluationError[];
+
+/**
+ * Get response returns the evaluation and condition associated
+ */
+export type GetEvaluationResponse = {
+  /** only one of compoundCondition or dataCondition should be set */
+  condition?: Condition;
+  evaluation?: Evaluation;
+};
+
+/**
+ * History properties
+ */
+export type HistoryProperties = {
+  /** Is history enabled */
+  enabled?: boolean;
+};
+
+export type PreviewEvaluation = {
+  /** The time the evaluation ended */
+  readonly endTime?: string;
+  /** userId of user being impersonated to evaluate the condition */
+  readonly ownerId?: string;
+  /** URL to download the condition results */
+  resultUrl?: string;
+  /** The time the evaluation started */
+  readonly startTime?: string;
+  /** The tenant id */
+  readonly tenantId?: string;
+};
+
+export type PreviewResponse = {
+  /** When the resource was created */
+  readonly previewId?: string;
+};
+
+export type PreviewStatusResponse = {
+  /** only one of compoundCondition or dataCondition should be set */
+  condition?: Condition;
+  errors?: Errors;
+  evaluation?: PreviewEvaluation;
+  /** When the resource was created */
+  readonly previewId?: string;
+  readonly status?: "ACCEPTED" | "FAILED" | "RUNNING" | "SUCCESSFUL";
+};
+
+/**
+ * List of fields according to the bookmark definition
+ */
+export type Selections = SelectionsInner[];
+
+export type SelectionsInner = {
+  /** The count */
+  count?: number;
+  /** Field name */
+  field?: string;
+  /** Array of selected */
+  selectedSummary?: string[];
+};
+
+export type SingleErrorResponse = {
+  /** Error code specific to condition manager. */
+  readonly code?: string;
+  /** Error cause. */
+  readonly detail?: string;
+  /** meta properties for an error. */
+  meta?: unknown;
+  /** Error title. */
+  readonly title?: string;
+};
+
+/* -------------------------------------------------------------------------- */
+/*                              Public functions                              */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Creates a new condition.
+ *
+ * @param body an object with the body content
+ * @throws CreateConditionHttpError
+ */
+export async function createCondition(
+  body: ConditionCreateRequest,
+  options?: ApiCallOptions,
+): Promise<CreateConditionHttpResponse> {
+  return invokeFetch("conditions", {
+    method: "post",
+    pathTemplate: "/api/v1/conditions",
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type CreateConditionHttpResponse = {
+  data: ConditionResponse;
+  headers: Headers;
+  status: 201;
+};
+
+export type CreateConditionHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Create condition preview request.
+ *
+ * @param body an object with the body content
+ * @throws CreateConditionPreviewHttpError
+ */
+export async function createConditionPreview(
+  body: ConditionCreateRequest,
+  options?: ApiCallOptions,
+): Promise<CreateConditionPreviewHttpResponse> {
+  return invokeFetch("conditions", {
+    method: "post",
+    pathTemplate: "/api/v1/conditions/previews",
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type CreateConditionPreviewHttpResponse = {
+  data: PreviewResponse;
+  headers: Headers;
+  status: 201;
+};
+
+export type CreateConditionPreviewHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Get condition preview response.
+ *
+ * @param id The id of the condition
+ * @throws GetConditionPreviewHttpError
+ */
+export async function getConditionPreview(
+  id: string,
+  options?: ApiCallOptions,
+): Promise<GetConditionPreviewHttpResponse> {
+  return invokeFetch("conditions", {
+    method: "get",
+    pathTemplate: "/api/v1/conditions/previews/{id}",
+    pathVariables: { id },
+    options,
+  });
+}
+
+export type GetConditionPreviewHttpResponse = {
+  data: PreviewStatusResponse;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetConditionPreviewHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Retrieves condition manager settings
+ *
+ * @throws GetConditionsSettingsHttpError
+ */
+export async function getConditionsSettings(options?: ApiCallOptions): Promise<GetConditionsSettingsHttpResponse> {
+  return invokeFetch("conditions", {
+    method: "get",
+    pathTemplate: "/api/v1/conditions/settings",
+    options,
+  });
+}
+
+export type GetConditionsSettingsHttpResponse = {
+  data: APISettings;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetConditionsSettingsHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Updates API configuration. Accessible only by tenant admins.
+ *
+ * @param body an object with the body content
+ * @throws SetConditionsSettingsHttpError
+ */
+export async function setConditionsSettings(
+  body: APISettingsUpload,
+  options?: ApiCallOptions,
+): Promise<SetConditionsSettingsHttpResponse> {
+  return invokeFetch("conditions", {
+    method: "put",
+    pathTemplate: "/api/v1/conditions/settings",
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type SetConditionsSettingsHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 204;
+};
+
+export type SetConditionsSettingsHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Delete the condition
+ *
+ * @param id The id of the condition
+ * @throws DeleteConditionHttpError
+ */
+export async function deleteCondition(id: string, options?: ApiCallOptions): Promise<DeleteConditionHttpResponse> {
+  return invokeFetch("conditions", {
+    method: "delete",
+    pathTemplate: "/api/v1/conditions/{id}",
+    pathVariables: { id },
+    options,
+  });
+}
+
+export type DeleteConditionHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 204;
+};
+
+export type DeleteConditionHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Retrieve a specific condition by id.
+ *
+ * @param id The id of the condition
+ * @throws GetConditionHttpError
+ */
+export async function getCondition(id: string, options?: ApiCallOptions): Promise<GetConditionHttpResponse> {
+  return invokeFetch("conditions", {
+    method: "get",
+    pathTemplate: "/api/v1/conditions/{id}",
+    pathVariables: { id },
+    options,
+  });
+}
+
+export type GetConditionHttpResponse = {
+  data: Condition;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetConditionHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Patch values in the condition
+ *
+ * @param id The id of the condition
+ * @param body an object with the body content
+ * @throws PatchConditionHttpError
+ */
+export async function patchCondition(
+  id: string,
+  body: ConditionPatch,
+  options?: ApiCallOptions,
+): Promise<PatchConditionHttpResponse> {
+  return invokeFetch("conditions", {
+    method: "patch",
+    pathTemplate: "/api/v1/conditions/{id}",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type PatchConditionHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 204;
+};
+
+export type PatchConditionHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Executes the condition
+ *
+ * @param id The id of the condition
+ * @param body an object with the body content
+ * @throws CreateConditionEvaluationHttpError
+ */
+export async function createConditionEvaluation(
+  id: string,
+  body: CreateEvaluationRequest,
+  options?: ApiCallOptions,
+): Promise<CreateConditionEvaluationHttpResponse> {
+  return invokeFetch("conditions", {
+    method: "post",
+    pathTemplate: "/api/v1/conditions/{id}/evaluations",
+    pathVariables: { id },
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type CreateConditionEvaluationHttpResponse = {
+  data: CreateEvaluationResponse;
+  headers: Headers;
+  status: 201;
+};
+
+export type CreateConditionEvaluationHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Delete an Evaluation
+ *
+ * @param id The id of the condition
+ * @param evaluationId The id of the evaluation
+ * @throws DeleteConditionEvaluationHttpError
+ */
+export async function deleteConditionEvaluation(
+  id: string,
+  evaluationId: string,
+  options?: ApiCallOptions,
+): Promise<DeleteConditionEvaluationHttpResponse> {
+  return invokeFetch("conditions", {
+    method: "delete",
+    pathTemplate: "/api/v1/conditions/{id}/evaluations/{evaluationId}",
+    pathVariables: { id, evaluationId },
+    options,
+  });
+}
+
+export type DeleteConditionEvaluationHttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 204;
+};
+
+export type DeleteConditionEvaluationHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Get an Evaluation
+ *
+ * @param id The id of the condition
+ * @param evaluationId The id of the evaluation
+ * @throws GetConditionEvaluationHttpError
+ */
+export async function getConditionEvaluation(
+  id: string,
+  evaluationId: string,
+  options?: ApiCallOptions,
+): Promise<GetConditionEvaluationHttpResponse> {
+  return invokeFetch("conditions", {
+    method: "get",
+    pathTemplate: "/api/v1/conditions/{id}/evaluations/{evaluationId}",
+    pathVariables: { id, evaluationId },
+    options,
+  });
+}
+
+export type GetConditionEvaluationHttpResponse = {
+  data: GetEvaluationResponse;
+  headers: Headers;
+  status: 200;
+};
+
+export type GetConditionEvaluationHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: number;
+};
+
+/**
+ * Clears the cache for conditions api requests.
+ */
+export function clearCache() {
+  return clearApiCache("conditions");
+}
+
+/* -------------------------------------------------------------------------- */
+/*                             Default export api                             */
+/* -------------------------------------------------------------------------- */
+
+export type ConditionsAPI = {
+  /**
+   * Creates a new condition.
+   *
+   * @param body an object with the body content
+   * @throws CreateConditionHttpError
+   */
+  createCondition: typeof createCondition;
+  /**
+   * Create condition preview request.
+   *
+   * @param body an object with the body content
+   * @throws CreateConditionPreviewHttpError
+   */
+  createConditionPreview: typeof createConditionPreview;
+  /**
+   * Get condition preview response.
+   *
+   * @param id The id of the condition
+   * @throws GetConditionPreviewHttpError
+   */
+  getConditionPreview: typeof getConditionPreview;
+  /**
+   * Retrieves condition manager settings
+   *
+   * @throws GetConditionsSettingsHttpError
+   */
+  getConditionsSettings: typeof getConditionsSettings;
+  /**
+   * Updates API configuration. Accessible only by tenant admins.
+   *
+   * @param body an object with the body content
+   * @throws SetConditionsSettingsHttpError
+   */
+  setConditionsSettings: typeof setConditionsSettings;
+  /**
+   * Delete the condition
+   *
+   * @param id The id of the condition
+   * @throws DeleteConditionHttpError
+   */
+  deleteCondition: typeof deleteCondition;
+  /**
+   * Retrieve a specific condition by id.
+   *
+   * @param id The id of the condition
+   * @throws GetConditionHttpError
+   */
+  getCondition: typeof getCondition;
+  /**
+   * Patch values in the condition
+   *
+   * @param id The id of the condition
+   * @param body an object with the body content
+   * @throws PatchConditionHttpError
+   */
+  patchCondition: typeof patchCondition;
+  /**
+   * Executes the condition
+   *
+   * @param id The id of the condition
+   * @param body an object with the body content
+   * @throws CreateConditionEvaluationHttpError
+   */
+  createConditionEvaluation: typeof createConditionEvaluation;
+  /**
+   * Delete an Evaluation
+   *
+   * @param id The id of the condition
+   * @param evaluationId The id of the evaluation
+   * @throws DeleteConditionEvaluationHttpError
+   */
+  deleteConditionEvaluation: typeof deleteConditionEvaluation;
+  /**
+   * Get an Evaluation
+   *
+   * @param id The id of the condition
+   * @param evaluationId The id of the evaluation
+   * @throws GetConditionEvaluationHttpError
+   */
+  getConditionEvaluation: typeof getConditionEvaluation;
+  /**
+   * Clears the cache for conditions api requests.
+   */
+  clearCache: typeof clearCache;
+};
+
+/**
+ * Functions for the conditions api
+ */
+const conditionsExport: ConditionsAPI = {
+  createCondition,
+  createConditionPreview,
+  getConditionPreview,
+  getConditionsSettings,
+  setConditionsSettings,
+  deleteCondition,
+  getCondition,
+  patchCondition,
+  createConditionEvaluation,
+  deleteConditionEvaluation,
+  getConditionEvaluation,
+  clearCache,
+};
+export default conditionsExport;
