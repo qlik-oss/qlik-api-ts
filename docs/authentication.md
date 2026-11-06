@@ -130,9 +130,19 @@ const authModule = {
 
 ### Oauth2
 
-Uses a `clientId` from an oauth client created by a Qlik tenant administrator. And optionally a `clientSecret`. A user will go through a login flow to get hold of an access token that is valid for 6 hours. This token will be used as query parameters for api requests. If a `clientSecret` is used a refresh token will also be received. This can be used to refresh the access token and is valid for 30 days. The user can select where these tokens should be stored (only in a browser). Either in local storage or session storage (default).
+Uses a `clientId` from an oauth client created by a Qlik tenant administrator. And optionally a `clientSecret`. A user will go through a login flow to get hold of an access token that is valid for 6 hours. This token will be used as query parameters for api requests. If a `clientSecret` is used a refresh token will also be received. This can be used to refresh the access token and is valid for 30 days.
+
+By default, tokens are cached only in memory. In a browser, `accessTokenStorage` can opt in to `"local"` or `"session"` storage, or provide a custom `SecretStorage` implementation. Both built-in storage options are readable by JavaScript running in the same origin; session storage limits persistence to the tab's session but does not protect tokens from XSS. Do not configure a client secret in browser code.
+
+Full-page login also uses session storage to carry the PKCE verifier, state and return URL across redirects, independently of `accessTokenStorage`. The `client-in-progress` entry identifies the storage namespace (client ID, scope and optional subject/user ID); it is not an access token, refresh token or client secret.
 
 ```ts
+type SecretStorage = {
+  store: (key: string, value: string) => Promise<void>;
+  get: (key: string) => Promise<string | undefined>;
+  delete: (key: string) => Promise<void>;
+};
+
 type Oauth2AuthConfig = {
   /* the auth type */
   authType?: "oauth2";
@@ -144,8 +154,8 @@ type Oauth2AuthConfig = {
   clientSecret?: string;
   /** The location where the client should be redirected after obtaining the access token */
   redirectUri?: string;
-  /** If set, store the access token in either local or session storage, otherwise not stored */
-  accessTokenStorage?: "session" | "local";
+  /** Opt in to local, session or custom token storage; if omitted, tokens are cached only in memory */
+  accessTokenStorage?: "session" | "local" | SecretStorage;
   /** A string with comma separated values of oauth2 scopes https://oauth.net/2/scope defaults to "user_default" */
   scope?: string;
 };

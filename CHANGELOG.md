@@ -1,5 +1,15 @@
 # @qlik/api
 
+## 2.23.0
+
+### Minor Changes
+
+- Update from the latest API specs
+
+### Patch Changes
+
+- Clarify non-secret OAuth storage namespaces; preserve token storage settings and existing keys.
+
 ## 2.22.0
 
 ### Minor Changes

@@ -7,7 +7,8 @@ import type { OAuthData } from "./oauth-utils";
 
 export const storagePrefix = "qlik-qmfe-api";
 
-export function getTopicFromOauthHostConfig(hostConfig: HostConfig<"oauth2">) {
+// Only identifiers belong in this namespace, never credentials. Keep its format stable across redirects and releases.
+export function createStorageNamespace(hostConfig: HostConfig<"oauth2">): string {
   let topic = hostConfig.clientId + (hostConfig.scope ? `_${hostConfig.scope}` : "_user_default");
 
   if (hostConfig.subject) {
@@ -132,7 +133,7 @@ async function loadOauthTokensFromStorage(
 }
 
 export async function loadCachedOauthTokens(hostConfig: HostConfig<"oauth2">) {
-  return cachedTokens[getTopicFromOauthHostConfig(hostConfig)];
+  return cachedTokens[createStorageNamespace(hostConfig)];
 }
 
 export async function loadOrAcquireAccessTokenOauth(
@@ -142,7 +143,7 @@ export async function loadOrAcquireAccessTokenOauth(
   if (!hostConfig.clientId) {
     throw new InvalidHostConfigError('A host config with authType set to "oauth2" has to also provide a clientId');
   }
-  const topic = getTopicFromOauthHostConfig(hostConfig);
+  const topic = createStorageNamespace(hostConfig);
   return loadOrAcquireAccessToken(topic, acquireTokens, hostConfig.noCache, hostConfig.accessTokenStorage);
 }
 
@@ -206,7 +207,7 @@ async function loadOrAcquireAccessToken(
 }
 
 export function clearStoredOauthTokens(hostConfig: HostConfig<"oauth2">) {
-  const topic = getTopicFromOauthHostConfig(hostConfig);
+  const topic = createStorageNamespace(hostConfig);
   delete cachedTokens[topic];
   if (isBrowser()) {
     deleteFromLocalStorage(topic, ["access-token", "refresh-token"]);

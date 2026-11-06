@@ -62,7 +62,7 @@ export type Reload = {
   engineTime?: string;
   /** The error code when the status is FAILED. */
   errorCode?: string;
-  /** The error message when the status is FAILED. */
+  /** The error message when the status is FAILED. Plain text without markup or control characters; a longer message is truncated and ends with "…". */
   errorMessage?: string;
   /** The ID of the reload. */
   id: string;
@@ -234,7 +234,7 @@ export type GetReloadsHttpResponse = {
 export type GetReloadsHttpError = {
   data: Errors;
   headers: Headers;
-  status: 400 | 401 | 403 | 500;
+  status: 400 | 401 | 403 | 500 | 503;
 };
 
 /**
@@ -262,7 +262,7 @@ export type QueueReloadHttpResponse = {
 export type QueueReloadHttpError = {
   data: Errors;
   headers: Headers;
-  status: 400 | 401 | 403 | 429 | 500;
+  status: 400 | 401 | 403 | 429 | 500 | 503;
 };
 
 /**
@@ -289,7 +289,7 @@ export type GetReloadHttpResponse = {
 export type GetReloadHttpError = {
   data: Errors;
   headers: Headers;
-  status: 400 | 401 | 403 | 404 | 500;
+  status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 
 /**
@@ -324,7 +324,7 @@ export type CancelReload204HttpResponse = {
 export type CancelReloadHttpError = {
   data: Errors;
   headers: Headers;
-  status: 400 | 401 | 403 | 404 | 409 | 500;
+  status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
 };
 
 /**

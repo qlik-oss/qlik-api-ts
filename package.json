@@ -1,6 +1,6 @@
 {
   "name": "@qlik/api",
-  "version": "2.22.0",
+  "version": "2.23.0",
   "description": "Exposes functions for interacting with Qlik apis",
   "license": "ISC",
   "repository": {

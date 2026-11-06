@@ -1,8 +1,17 @@
 import { afterEach, beforeEach, describe, it, vi } from "vitest";
 import type { HostConfig } from "#internal/auth/auth-types";
+import type { SecretStorage } from "#internal/global-types";
 import anonymousModule from "../anonymous";
 import oauthModule from "../oauth";
-import { clearAllCachedTokens } from "../oauth/storage-helpers";
+import { handleOAuthCallback } from "../oauth/callback";
+import { getOAuthAccessToken, startFullPageLoginFlow } from "../oauth/oauth-utils";
+import {
+  clearAllCachedTokens,
+  clearStoredOauthTokens,
+  createStorageNamespace,
+  loadCachedOauthTokens,
+  loadOrAcquireAccessTokenOauth,
+} from "../oauth/storage-helpers";
 
 vi.mock("#internal/utils/utils", async () => {
   // Import the actual module dynamically (if needed)
@@ -157,6 +166,158 @@ describe("oauth", () => {
       expect(fetchMock).toHaveBeenCalledTimes(2);
     });
   });
+  describe("OAuth storage", () => {
+    beforeEach(() => {
+      localStorage.clear();
+      sessionStorage.clear();
+    });
+
+    afterEach(() => {
+      localStorage.clear();
+      sessionStorage.clear();
+      vi.unstubAllGlobals();
+    });
+
+    const namespaceCases: [Partial<HostConfig<"oauth2">>, string][] = [
+      [{}, "123_user_default"],
+      [{ scope: "user_default" }, "123_user_default"],
+      [{ scope: "custom" }, "123_custom"],
+      [{ subject: "subject" }, "123_user_default_subject"],
+      [{ userId: "user-id" }, "123_user_default_user-id"],
+      [{ scope: "custom", subject: "subject", userId: "user-id" }, "123_custom_subject_user-id"],
+    ];
+
+    it.for(namespaceCases)("should preserve the storage namespace for %j", ([config, namespace], { expect }) => {
+      expect(
+        createStorageNamespace({
+          clientId: "123",
+          clientSecret: "not-part-of-the-namespace",
+          getAccessToken: async () => "not-part-of-the-namespace",
+          ...config,
+        }),
+      ).toBe(namespace);
+    });
+
+    it.for([undefined, "local", "session"] as const)(
+      "should preserve token caching, persistence and clearing with storage %s",
+      async (accessTokenStorage, { expect }) => {
+        const hostConfig: HostConfig<"oauth2"> = { clientId: "123", accessTokenStorage };
+        const tokens = { accessToken: "test-access-token", refreshToken: "test-refresh-token" };
+        const acquireTokens = vi.fn(async () => tokens);
+        const storage =
+          accessTokenStorage === "local" ? localStorage : accessTokenStorage === "session" ? sessionStorage : undefined;
+
+        expect(await loadOrAcquireAccessTokenOauth(hostConfig, acquireTokens)).toEqual(tokens);
+        expect(await loadCachedOauthTokens(hostConfig)).toEqual(tokens);
+        expect(await loadOrAcquireAccessTokenOauth(hostConfig, acquireTokens)).toEqual(tokens);
+        expect(acquireTokens).toHaveBeenCalledTimes(1);
+        expect(localStorage.length).toBe(accessTokenStorage === "local" ? 2 : 0);
+        expect(sessionStorage.length).toBe(accessTokenStorage === "session" ? 2 : 0);
+        if (storage) {
+          expect(storage.getItem("qlik-qmfe-api-123_user_default-access-token")).toBe(tokens.accessToken);
+          expect(storage.getItem("qlik-qmfe-api-123_user_default-refresh-token")).toBe(tokens.refreshToken);
+        }
+
+        clearAllCachedTokens();
+        expect(await loadOrAcquireAccessTokenOauth(hostConfig, acquireTokens)).toEqual(tokens);
+        expect(acquireTokens).toHaveBeenCalledTimes(storage ? 1 : 2);
+
+        clearStoredOauthTokens(hostConfig);
+        expect(await loadCachedOauthTokens(hostConfig)).toBeUndefined();
+        expect(localStorage.length).toBe(0);
+        expect(sessionStorage.length).toBe(0);
+      },
+    );
+
+    it("should preserve custom token storage keys", async ({ expect }) => {
+      const values = new Map<string, string>();
+      const storage: SecretStorage = {
+        store: vi.fn(async (key, value) => {
+          values.set(key, value);
+        }),
+        get: vi.fn(async (key) => values.get(key)),
+        delete: vi.fn(async (key) => {
+          values.delete(key);
+        }),
+      };
+      const hostConfig: HostConfig<"oauth2"> = { clientId: "123", accessTokenStorage: storage };
+      const tokens = { accessToken: "test-access-token", refreshToken: "test-refresh-token" };
+      const acquireTokens = vi.fn(async () => tokens);
+
+      expect(await loadOrAcquireAccessTokenOauth(hostConfig, acquireTokens)).toEqual(tokens);
+      expect(storage.store).toHaveBeenCalledWith("qlik-qmfe-api-123_user_default-access-token", tokens.accessToken);
+      expect(storage.store).toHaveBeenCalledWith("qlik-qmfe-api-123_user_default-refresh-token", tokens.refreshToken);
+      clearAllCachedTokens();
+      expect(await loadOrAcquireAccessTokenOauth(hostConfig, acquireTokens)).toEqual(tokens);
+      expect(acquireTokens).toHaveBeenCalledTimes(1);
+      clearStoredOauthTokens(hostConfig);
+      expect(values.size).toBe(0);
+    });
+
+    it.for([true, false])(
+      "should preserve redirect transaction handoff with matching state %s",
+      async (matchingState, { expect }) => {
+        const returnUrl = "https://app.example/app";
+        const redirectUri = "https://app.example/callback";
+        const replace = vi.fn();
+        vi.stubGlobal("location", { href: returnUrl, search: "", replace });
+        const hostConfig: HostConfig<"oauth2"> = {
+          host: "somewhere.com",
+          clientId: "123",
+          redirectUri,
+        };
+
+        await startFullPageLoginFlow(hostConfig);
+
+        const loginUrl = new URL(replace.mock.calls[0][0]);
+        const state = loginUrl.searchParams.get("state");
+        const verifier = sessionStorage.getItem("qlik-qmfe-api-123_user_default-verifier");
+        expect(loginUrl.origin).toBe("https://somewhere.com");
+        expect(loginUrl.searchParams.get("redirect_uri")).toBe(redirectUri);
+        expect(loginUrl.searchParams.get("code_challenge_method")).toBe("S256");
+        expect(verifier).toHaveLength(128);
+        expect(state).toHaveLength(43);
+        expect(sessionStorage.getItem("qlik-qmfe-api--client-in-progress")).toBe("123_user_default");
+        expect(sessionStorage.getItem("qlik-qmfe-api-123_user_default-state")).toBe(state);
+        expect(localStorage.length).toBe(0);
+
+        const callbackQuery = `?code=test-code&state=${matchingState ? state : "wrong-state"}`;
+        vi.stubGlobal("location", { href: `${redirectUri}${callbackQuery}`, search: callbackQuery, replace });
+        handleOAuthCallback();
+
+        expect(sessionStorage.getItem("qlik-qmfe-api--client-in-progress")).toBeNull();
+        expect(sessionStorage.getItem("qlik-qmfe-api-123_user_default-state")).toBeNull();
+        if (!matchingState) {
+          expect(sessionStorage.getItem("qlik-qmfe-api-123_user_default-code")).toBeNull();
+          expect(replace).toHaveBeenCalledTimes(1);
+          expect(fetchMock).not.toHaveBeenCalled();
+          return;
+        }
+
+        expect(replace).toHaveBeenLastCalledWith(returnUrl);
+        expect(sessionStorage.getItem("qlik-qmfe-api-123_user_default-code")).toBe("test-code");
+        vi.stubGlobal("location", { href: returnUrl, search: "", replace });
+        fetchMock.mockResponseOnce(JSON.stringify({ access_token: "test-access-token" }));
+
+        expect(await getOAuthAccessToken(hostConfig)).toBe("test-access-token");
+        const [url, options] = fetchMock.mock.calls[0];
+        expect(url).toBe("https://somewhere.com/oauth/token");
+        if (typeof options?.body !== "string") {
+          throw new Error("Expected a JSON string request body");
+        }
+        expect(JSON.parse(options.body)).toMatchObject({
+          grant_type: "authorization_code",
+          client_id: "123",
+          code: "test-code",
+          code_verifier: verifier,
+          redirect_uri: redirectUri,
+        });
+        expect(localStorage.length).toBe(0);
+        expect(sessionStorage.length).toBe(0);
+      },
+    );
+  });
+
   describe("Anonymous", () => {
     it("should fetch token with consistent tracking-code", async ({ expect }) => {
       let tokenCounter = 0;

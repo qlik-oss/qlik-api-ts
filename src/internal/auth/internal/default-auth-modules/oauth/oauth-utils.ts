@@ -7,7 +7,7 @@ import { isBrowser, isNode } from "#internal/utils/utils";
 import { requestRedirect } from "../../page-redirect-request-listeners";
 import {
   clearStoredOauthTokens,
-  getTopicFromOauthHostConfig,
+  createStorageNamespace,
   loadAndDeleteFromSessionStorage,
   loadCachedOauthTokens,
   loadOrAcquireAccessTokenOauth,
@@ -113,7 +113,7 @@ export async function startFullPageLoginFlow(hostConfig: HostConfig<"oauth2">): 
   const state = generateRandomString(43);
   const codeChallenge = await sha256(verifier);
   const redirectUri = hostConfig.redirectUri || globalThis.location.href;
-  const topic = getTopicFromOauthHostConfig(hostConfig);
+  const topic = createStorageNamespace(hostConfig);
 
   clearStoredOauthTokens(hostConfig);
 
@@ -351,7 +351,7 @@ async function getOAuthTokensForBrowser(hostConfig: HostConfig<"oauth2">): Promi
       return getOauthTokensWithInteractiveLogin(hostConfig);
     }
 
-    const topic = getTopicFromOauthHostConfig(hostConfig);
+    const topic = createStorageNamespace(hostConfig);
     const code = loadAndDeleteFromSessionStorage(topic, "code");
     const verifier = loadAndDeleteFromSessionStorage(topic, "verifier");
     if (code && verifier) {
