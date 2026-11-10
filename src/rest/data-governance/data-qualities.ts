@@ -348,6 +348,94 @@ export type QualityGlobalResultsResponse = {
   valid: number;
 };
 
+/**
+ * Summed quality counts across one or more field/rule-mapping entries.
+ */
+export type RuleQualityAggregateMetrics = {
+  /** Sum of the numbers of cells that failed the rule across the included field/rule-mapping entries. */
+  invalid: number;
+  /** Sum of the numbers of cells where the rule does not apply across the included field/rule-mapping entries. */
+  notApplicable: number;
+  /** Sum of the numbers of cells where the rule could not be executed across the included field/rule-mapping entries. */
+  notExecutable: number;
+  /** Sum of the total cell counts across the included field/rule-mapping entries. */
+  total: number;
+  /** Sum of the numbers of cells that passed the rule across the included field/rule-mapping entries. */
+  valid: number;
+};
+
+/**
+ * Request to retrieve rule-quality outcomes for a rule across an optional dataset selection.
+ */
+export type RuleQualityAggregationRequest = {
+  /** Optional selection of datasets. When non-empty, only these datasets are considered (filtered to those
+   * accessible to the caller); the maximum number of dataset IDs is 100. When absent or empty, the service
+   * determines all accessible datasets where the rule is instantiated. */
+  datasetIds?: DatasetIdType[];
+  /** The unique identifier of the rule to analyze, represented as a 24-character hexadecimal MongoDB ObjectId. */
+  ruleId: string;
+};
+
+/**
+ * Rule-quality outcomes for a rule, grouped per dataset, plus the aggregate across all included datasets.
+ * `ruleQualityAggregate` sums the quality counts of all field/rule-mapping entries for the requested rule
+ * across all included datasets, using the latest computation per dataset. It is independent of sorting
+ * and pagination and is not limited to the datasets in the current `ruleQualities` page.
+ */
+export type RuleQualityAggregationResponse = {
+  /** The unique identifier of the analyzed rule. */
+  ruleId: string;
+  /** Rule-quality outcomes, one entry per dataset in the current page. */
+  ruleQualities: RuleQualityDatasetEntry[];
+  /** Summed quality counts across one or more field/rule-mapping entries. */
+  ruleQualityAggregate: RuleQualityAggregateMetrics;
+};
+
+/**
+ * Rule-quality outcomes for a single dataset. `datasetAggregate` sums the quality counts of all
+ * field/rule-mapping entries for the requested rule within this dataset's latest computation.
+ */
+export type RuleQualityDatasetEntry = {
+  /** Summed quality counts across one or more field/rule-mapping entries. */
+  datasetAggregate: RuleQualityAggregateMetrics;
+  /** The ID of the dataset */
+  datasetId: DatasetIdType;
+  /** Rule-quality outcome for each field of this dataset where the rule is mapped. */
+  fields: RuleQualityFieldEntry[];
+};
+
+/**
+ * Rule-quality outcome for a single field/rule-mapping pair.
+ */
+export type RuleQualityFieldEntry = {
+  /** The name of the field the rule is mapped to. */
+  fieldName: string;
+  /** Detailed quality counts for a rule applied to a single field, plus computation metadata. */
+  quality: RuleQualityFieldMetrics;
+  /** The unique identifier of the rule mapping. */
+  ruleMappingId: string;
+};
+
+/**
+ * Detailed quality counts for a rule applied to a single field, plus computation metadata.
+ */
+export type RuleQualityFieldMetrics = {
+  /** List of error identifiers encountered during rule execution. */
+  errors?: string[];
+  /** Number of cells that failed the rule. */
+  invalid: number;
+  /** Number of cells where the rule does not apply. */
+  notApplicable: number;
+  /** Number of cells where the rule could not be executed. */
+  notExecutable: number;
+  /** Total number of cells evaluated by the rule. */
+  total: number;
+  /** Timestamp of the computation this outcome comes from. */
+  updatedAt: string;
+  /** Number of cells that passed the rule. */
+  valid: number;
+};
+
 export type SamplingConfiguration = {
   /** Specifies where the data quality computation takes place. In `PUSHDOWN` mode, it runs within the Cloud Data Warehouse (e.g., Snowflake, Databricks), whereas in `PULLUP` mode, it runs in Qlik Cloud. */
   executionMode?: "PUSHDOWN" | "PULLUP";
@@ -643,6 +731,61 @@ export type FilterDataQualitiesGlobalResultsHttpError = {
 };
 
 /**
+ * Retrieves the dataset-level rule-quality outcomes for a rule, plus the aggregate outcome across the included
+ * datasets. When `datasetIds` is provided (max 100), the result and aggregate are limited to those datasets
+ * that are accessible to the caller. When `datasetIds` is absent or empty, the service determines all
+ * accessible datasets where the rule is instantiated and returns the result and aggregate for that scope.
+ *
+ * For each dataset in the resolved scope, the service selects the most recent data quality computation
+ * across all connections. Only datasets whose latest computation contains a result for the requested rule
+ * are included in `ruleQualities` and contribute to `ruleQualityAggregate`. Datasets without a computed
+ * quality result, or whose latest computation has no result for the requested rule, are excluded; the
+ * service does not fall back to an older computation. This behavior also applies when `datasetIds` is
+ * absent or empty.
+ *
+ * The `ruleQualities` list is sorted by `datasetId` and paginated using the `page` and `limit` query
+ * parameters. Set `sortDescending` to `true` to sort in descending order (default is ascending).
+ * `ruleQualityAggregate` always covers the full resolved scope, independently of sorting and pagination.
+ *
+ * @param query an object with query parameters
+ * @param body an object with the body content
+ * @throws FilterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAMEHttpError
+ */
+export async function filterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAME(
+  query: {
+    /** Maximum number of datasets to return in the `ruleQualities` page. */
+    limit?: number;
+    /** Page number to retrieve (1-indexed). Defaults to 1. */
+    page?: number;
+    /** When true, sorts the `ruleQualities` list by `datasetId` in descending order. Defaults to false (ascending). */
+    sortDescending?: boolean;
+  },
+  body: RuleQualityAggregationRequest,
+  options?: ApiCallOptions,
+): Promise<FilterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAMEHttpResponse> {
+  return invokeFetch("data-governance/data-qualities", {
+    method: "post",
+    pathTemplate: "/api/data-governance/data-qualities/global-results/data-quality-rules/actions/filter",
+    query,
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type FilterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+  data: RuleQualityAggregationResponse;
+  headers: Headers;
+  status: 200;
+};
+
+export type FilterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAMEHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: 400 | 401 | 403 | 404 | 500 | 503;
+};
+
+/**
  * Clears the cache for data-governance/data-qualities api requests.
  */
 export function clearCache() {
@@ -718,6 +861,28 @@ export type DataQualitiesAPI = {
    */
   filterDataQualitiesGlobalResults: typeof filterDataQualitiesGlobalResults;
   /**
+   * Retrieves the dataset-level rule-quality outcomes for a rule, plus the aggregate outcome across the included
+   * datasets. When `datasetIds` is provided (max 100), the result and aggregate are limited to those datasets
+   * that are accessible to the caller. When `datasetIds` is absent or empty, the service determines all
+   * accessible datasets where the rule is instantiated and returns the result and aggregate for that scope.
+   *
+   * For each dataset in the resolved scope, the service selects the most recent data quality computation
+   * across all connections. Only datasets whose latest computation contains a result for the requested rule
+   * are included in `ruleQualities` and contribute to `ruleQualityAggregate`. Datasets without a computed
+   * quality result, or whose latest computation has no result for the requested rule, are excluded; the
+   * service does not fall back to an older computation. This behavior also applies when `datasetIds` is
+   * absent or empty.
+   *
+   * The `ruleQualities` list is sorted by `datasetId` and paginated using the `page` and `limit` query
+   * parameters. Set `sortDescending` to `true` to sort in descending order (default is ascending).
+   * `ruleQualityAggregate` always covers the full resolved scope, independently of sorting and pagination.
+   *
+   * @param query an object with query parameters
+   * @param body an object with the body content
+   * @throws FilterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAMEHttpError
+   */
+  filterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAME: typeof filterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAME;
+  /**
    * Clears the cache for data-qualities api requests.
    */
   clearCache: typeof clearCache;
@@ -734,6 +899,7 @@ const dataQualitiesExport: DataQualitiesAPI = {
   putDataQualitiesFieldsStructures,
   getDataQualityGlobalResults,
   filterDataQualitiesGlobalResults,
+  filterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAME,
   clearCache,
 };
 export default dataQualitiesExport;

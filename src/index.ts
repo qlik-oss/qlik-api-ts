@@ -573,9 +573,48 @@ const createConnectivityDirectAccessAgentsRuntimeAPI = apiDefToApiPublic<Connect
       connectivity: {
         "direct-access-agents": {
           "{agentId}": {
-            benchmarks: ["getDirectAccessAgentBenchmarks:GQ:", "createDirectAccessAgentBenchmark:PQ:"],
+            actions: { "{agentAction}": ["postDirectAccessAgent_FIX_THIS_QUIRKY_NAME:P:"] },
+            benchmarks: {
+              "": ["getDirectAccessAgentBenchmarks:GQ:", "createDirectAccessAgentBenchmark:PQ:"],
+              "{benchmarkId}": {
+                "": ["getDirectAccessAgentBenchmark:G:"],
+                cancel: ["createDirectAccessAgentBenchmarkCancel:P:"],
+              },
+            },
             configurations: ["getDirectAccessAgentConfigurations:GQ:"],
+            connectors: {
+              "file-connector": {
+                files: {
+                  "allowed-paths": [
+                    "getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAME:G:",
+                    "putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAME:UBJ:",
+                  ],
+                },
+              },
+              "odbc-connector": {
+                files: {
+                  "custom-data-type-mappings": [
+                    "getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAME:G:",
+                    "putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAME:UBJ:",
+                  ],
+                },
+              },
+              "{connectorType}": {
+                files: {
+                  "": ["getDirectAccessAgentConnectorFiles:G:"],
+                  "{fileType}": ["getDirectAccessAgentConnectorFile:G:", "updateDirectAccessAgentConnectorFile:UBJ:"],
+                },
+              },
+            },
             "load-performance-metrics": ["getDirectAccessAgentLoadPerformanceMetrics:GQ:"],
+            tools: {
+              "metrics-collector": {
+                configuration: [
+                  "getDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAME:G:",
+                  "putDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAME:UBJ:",
+                ],
+              },
+            },
           },
         },
       },
@@ -829,6 +868,9 @@ const createDataGovernanceDataQualitiesRuntimeAPI = apiDefToApiPublic<DataGovern
           "global-results": {
             "": ["getDataQualityGlobalResults:GQ:"],
             actions: { filter: ["filterDataQualitiesGlobalResults:PBJ:"] },
+            "data-quality-rules": {
+              actions: { filter: ["filterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAME:PQBJ:"] },
+            },
           },
         },
       },

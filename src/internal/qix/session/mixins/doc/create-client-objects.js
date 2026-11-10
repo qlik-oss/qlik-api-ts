@@ -49,7 +49,7 @@ const mixin = {
      * @param {String} [props.title] - The new sheet's title
      * @param {String} [props.description] - The new sheet's description
      * @param {String} [props.thumbnail] - URL to a thumbnail image
-     * @param {String} [props.rank] - Sorting rank
+     * @param {String|Number} [props.rank] - Sorting rank
      * @param {Number} [props.rows] - number of grid rows
      * @param {Number} [props.columns] - number of grid columns
      * @param {Number} [props.customRowBase] - number of rows for grid resolution
@@ -58,7 +58,7 @@ const mixin = {
      *
      * @returns {Promise<Object,Error>} A Promise that returns an api to the new sheet if resolved or an Error if rejected
      */
-    async createSheet(props) {
+    async createSheet(props = {}) {
       return this.createObject({
         qInfo: {
           // generating id on client side to support multiple undo create operations
@@ -76,7 +76,7 @@ const mixin = {
         columns: props.columns || 24,
         rows: props.rows || 12,
         cells: [],
-        customRowBase: props.rows || undefined,
+        customRowBase: props.customRowBase,
         gridResolution: props.gridResolution || undefined,
         layoutOptions: props.layoutOptions || undefined,
         qChildListDef: {
@@ -93,10 +93,10 @@ const mixin = {
      * @param {String} [props.title] - The new story's title
      * @param {String} [props.description] - The new story's description
      * @param {String} [props.thumbnail] - URL to a thumbnail image
-     * @param {String} [props.rank] - Sorting rank
+     * @param {String|Number} [props.rank] - Sorting rank
      * @returns {Promise<Object,Error>} A Promise that returns an api to the new story if resolved or an Error if rejected
      */
-    async createStory(props) {
+    async createStory(props = {}) {
       return this.createObject({
         qInfo: {
           // generating id on client side to support multiple undo create operations
@@ -106,7 +106,7 @@ const mixin = {
         },
         qMetaDef: {
           title: props.title || "",
-          description: "",
+          description: props.description || "",
         },
         rank: typeof props.rank !== "undefined" ? props.rank : -1,
         thumbnail: { qStaticContentUrlDef: props.thumbnail || null },
@@ -124,7 +124,7 @@ const mixin = {
      * @param {Object} [props] The properties to override
      * @param {String} [props.title] - The master object title
      * @param {String} [props.description] - The master object description
-     * @param {String} [props.tags] - The list of tags
+     * @param {String[]|String} [props.tags] - The list of tags. String values are passed through for compatibility.
      * @returns {Promise<Object,Error>} A Promise that returns an api to the new master object if resolved or an Error if rejected
      */
     createMasterObject(props) {
@@ -136,7 +136,7 @@ const mixin = {
         qMetaDef: {
           title: props.title || "",
           description: props.description || "",
-          tags: props.tags || "",
+          tags: props.tags || [],
         },
       });
     },

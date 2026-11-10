@@ -114,7 +114,43 @@ export type ModalFunctions = {
   isInModalSelection(): Promise<boolean>;
 };
 
+export type CreateStoryProps = {
+  /** Title of the new object. */
+  title?: string;
+  /** Description of the new object. */
+  description?: string;
+  /** URL to a thumbnail image. */
+  thumbnail?: string;
+  /** Sorting rank. */
+  rank?: string | number;
+};
+
+export type CreateSheetProps = CreateStoryProps & {
+  /** Number of grid rows. */
+  rows?: number;
+  /** Number of grid columns. */
+  columns?: number;
+  /** Number of rows for grid resolution. */
+  customRowBase?: number;
+  /** Grid resolution, such as small, medium, or large. */
+  gridResolution?: string;
+  /** Layout options for the sheet. */
+  layoutOptions?: object;
+};
+
+export type CreateMasterObjectProps = Pick<CreateStoryProps, "title" | "description"> & {
+  /** Tags to assign. Legacy string values are passed through unchanged. */
+  tags?: string[] | string;
+};
+
 export type ObjectHelperFunctions = {
+  /** Creates a Qlik Sense sheet. */
+  createSheet(props?: CreateSheetProps): Promise<GenericObject>;
+  /** Creates a Qlik Sense story. */
+  createStory(props?: CreateStoryProps): Promise<GenericObject>;
+  /** Creates a Qlik Sense master object. */
+  createMasterObject(props?: CreateMasterObjectProps | null): Promise<GenericObject>;
+
   getOrCreateSessionObject<GenericObjectCustomType extends GenericObject = GenericObject>(
     props: ListBoxProperties,
   ): Promise<GenericObjectCustomType>;

@@ -1,5 +1,17 @@
 # @qlik/api
 
+## 2.24.0
+
+### Minor Changes
+
+- Update from the latest API specs
+
+### Patch Changes
+
+- Update dependencies
+
+- Fix QIX sheet, story and master object creation helpers.
+
 ## 2.23.0
 
 ### Minor Changes

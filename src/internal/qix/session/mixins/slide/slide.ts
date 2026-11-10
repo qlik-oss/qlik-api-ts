@@ -30,18 +30,8 @@ export const mixin = {
         for (let i = 0; i < items.length; i++) {
           const item = items[i];
           if (item.qInfo.qId === obj.id) {
-            const prev = items[i];
             const next = items[i + 1];
-
-            if (next || prev) {
-              if (next && !prev) {
-                rank = next.qData.rank - 1;
-              } else if (!next && prev) {
-                rank = prev.qData.rank + 1;
-              } else {
-                rank = (prev.qData.rank + next.qData.rank) / 2;
-              }
-            }
+            rank = next ? (item.qData.rank + next.qData.rank) / 2 : item.qData.rank + 1;
           }
         }
         // create duplicate
