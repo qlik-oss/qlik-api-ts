@@ -963,8 +963,10 @@ export type ExperimentVersion = {
   /** ID of the top model (based on training scores) in this experiment
    * version */
   topModelId?: string;
-  /** Maximum allowed training duration in seconds, not elapsed training time. */
-  trainingDuration?: TrainingDuration;
+  /** @deprecated
+   * Maximum allowed training duration in seconds, not elapsed training time.
+   * Deprecated. Use maxTrainingDuration instead. */
+  trainingDuration?: number;
   /** Timestamp when this was updated */
   updatedAt: UpdatedAt;
   /** 1-based sequential version number within the experiment */
@@ -1032,7 +1034,7 @@ export type ExperimentVersionInput = {
        * using it as input to create or update Experiment Versions. */
       featuresList: FeaturesList;
       /** Maximum allowed training duration in seconds, not elapsed training time.
-       * maxTrainingDuration takes precedence over trainingDuration when both are provided.
+       * maxTrainingDuration takes precedence over the deprecated trainingDuration field.
        * If neither field is provided, the maximum for the experiment type is used.
        * Accepted ranges:
        * - min 900 (15m), max 21600 (6h) */
@@ -1044,12 +1046,11 @@ export type ExperimentVersionInput = {
       /** The target field in the dataset. Set in first experiment
        * version and can't be changed in subsequent versions. */
       target: string;
-      /** Maximum allowed training duration in seconds, not elapsed training time.
-       * maxTrainingDuration takes precedence over trainingDuration when both are provided.
-       * If neither field is provided, the maximum for the experiment type is used.
-       * Accepted ranges:
-       * - min 900 (15m), max 21600 (6h) */
-      trainingDuration?: TrainingDurationInput;
+      /** @deprecated
+       * Maximum allowed training duration in seconds, not elapsed training time.
+       * Deprecated. Use maxTrainingDuration instead.
+       * If both fields are provided, maxTrainingDuration takes precedence. */
+      trainingDuration?: number;
     };
     type: "experiment-version";
   };
@@ -1921,7 +1922,7 @@ export type TrainingDuration = number;
 
 /**
  * Maximum allowed training duration in seconds, not elapsed training time.
- * maxTrainingDuration takes precedence over trainingDuration when both are provided.
+ * maxTrainingDuration takes precedence over the deprecated trainingDuration field.
  * If neither field is provided, the maximum for the experiment type is used.
  * Accepted ranges:
  * - min 900 (15m), max 21600 (6h)

@@ -1,26 +1,31 @@
-let evenMarkers = true;
-const queue = [];
-let currentGroupId = null;
-let isUndoLimitReached = false;
+const states = new WeakMap();
 
-function awaitQueue(proceedCallback) {
-  const aheadInQueue = queue[queue.length - 1];
-  let promise;
-
-  if (aheadInQueue) {
-    promise = proceedCallback(aheadInQueue);
-  } else {
-    promise = proceedCallback(Promise.resolve());
+function getState(model) {
+  let state = states.get(model);
+  if (!state) {
+    state = {
+      queue: Promise.resolve(),
+      currentGroupId: null,
+      isUndoLimitReached: false,
+    };
+    states.set(model, state);
   }
+  return state;
+}
 
-  queue.push(promise);
+function awaitQueue(state, proceedCallback) {
+  const promise = state.queue.then(proceedCallback);
+  state.queue = promise.then(
+    () => undefined,
+    () => undefined,
+  );
   return promise;
 }
 
-function resetMarkersIfLimitReached(properties) {
-  if (isUndoLimitReached) {
+function resetMarkersIfLimitReached(state, properties) {
+  if (state.isUndoLimitReached) {
     properties.markers.length = 0;
-    isUndoLimitReached = false;
+    state.isUndoLimitReached = false;
   }
 }
 
@@ -30,6 +35,7 @@ export default {
   extend: {
     undo() {
       const model = this;
+      const state = getState(model);
 
       function proceed(waitForPromise) {
         return waitForPromise.then(() =>
@@ -37,56 +43,50 @@ export default {
             if (layout.qUndoInfo.qUndoCount > 0) {
               return model.app.undo().then(() =>
                 model.getLayout().then((layout) => {
-                  evenMarkers = layout.markers.length % 2 === 0;
-                  if (!evenMarkers) {
+                  if (layout.markers.length % 2 !== 0) {
                     return proceed(Promise.resolve());
                   }
-                  queue.splice(0, 1);
                   return undefined;
                 }),
               );
             }
-            evenMarkers = layout.markers.length % 2 === 0;
-            if (!evenMarkers) {
+            if (layout.markers.length % 2 !== 0) {
               // Undo count on the backend is 0, but we have uneven markers. This can happen when the limit of undo operations has been reached (QLIK-67418)
-              isUndoLimitReached = true;
+              state.isUndoLimitReached = true;
             }
 
-            queue.splice(0, 1);
             return undefined;
           }),
         );
       }
 
-      return awaitQueue(proceed);
+      return awaitQueue(state, () => proceed(Promise.resolve()));
     },
 
     redo() {
       const model = this;
+      const state = getState(model);
 
       function proceed(waitForPromise) {
         return waitForPromise.then(() =>
           model.getLayout().then((layout) => {
             if (layout.qUndoInfo.qRedoCount > 0) {
-              isUndoLimitReached = false;
+              state.isUndoLimitReached = false;
               return model.app.redo().then(() =>
-                model.getLayout().then(() => {
-                  evenMarkers = layout.markers.length % 2 === 0;
-                  if (!evenMarkers) {
+                model.getLayout().then((layout) => {
+                  if (layout.markers.length % 2 !== 0) {
                     return proceed(Promise.resolve());
                   }
-                  queue.splice(0, 1);
                   return undefined;
                 }),
               );
             }
-            queue.splice(0, 1);
             return undefined;
           }),
         );
       }
 
-      return awaitQueue(proceed);
+      return awaitQueue(state, () => proceed(Promise.resolve()));
     },
 
     reset() {
@@ -115,17 +115,18 @@ export default {
      */
     startGroup() {
       const model = this;
+      const state = getState(model);
 
       return model.getLayout().then((layout) =>
         model.getProperties().then((props) => {
-          evenMarkers = props.markers.length % 2 === 0;
-          if (evenMarkers || isUndoLimitReached) {
-            currentGroupId = Date.now();
-            resetMarkersIfLimitReached(props);
+          const evenMarkers = props.markers.length % 2 === 0;
+          if (evenMarkers || state.isUndoLimitReached) {
+            state.currentGroupId = Date.now();
+            resetMarkersIfLimitReached(state, props);
             props.markers.push(layout.qUndoInfo.qUndoCount + 1);
-            return model.setProperties(props).then(() => Promise.resolve(currentGroupId));
+            return model.setProperties(props).then(() => Promise.resolve(state.currentGroupId));
           }
-          return Promise.resolve(currentGroupId);
+          return Promise.resolve(state.currentGroupId);
         }),
       );
     },
@@ -141,12 +142,13 @@ export default {
       }
 
       const model = this;
+      const state = getState(model);
 
       return model.getLayout().then((layout) =>
         model.getProperties().then((props) => {
-          evenMarkers = props.markers.length % 2 === 0;
-          if (!evenMarkers && groupId === currentGroupId) {
-            currentGroupId = null;
+          const evenMarkers = props.markers.length % 2 === 0;
+          if (!evenMarkers && groupId === state.currentGroupId) {
+            state.currentGroupId = null;
             props.markers.push(layout.qUndoInfo.qUndoCount + 1);
             return model.setProperties(props);
           }

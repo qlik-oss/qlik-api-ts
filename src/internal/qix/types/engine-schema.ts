@@ -8,7 +8,7 @@
  */
 
 // Version of the schema used to generate the enigma.go QIX API
-export const QIX_SCHEMA_VERSION = "12.2988.0";
+export const QIX_SCHEMA_VERSION = "12.2997.0";
 
 export type AlfaNumString = {
   /**
@@ -565,15 +565,11 @@ export type BookmarkFieldVerifyWarning = {
 
   /**
    * Missing field values as duals, carrying both text and numeric parts. Number of values included is capped. Default cap is 20. *
-   *
-   * Stability: *experimental*
    */
   qMissingDuals?: FieldValue[];
 
   /**
    * Total count of missing field values *
-   *
-   * Stability: *experimental*
    */
   qTotalMissing?: number;
 };
@@ -1087,8 +1083,6 @@ export type DimensionListDef = {
 
 /**
  * The DimensionReference structure points to a GenericDimension.
- *
- * Stability: *experimental*
  */
 export type DimensionReference = {
   /**
@@ -2429,15 +2423,11 @@ export type GenericBookmarkProperties = {
 
   /**
    * If true all variables will be stored in the bookmark.
-   *
-   * Stability: *experimental*
    */
   qIncludeVariables?: boolean;
 
   /**
    * If true all selected values will be stored distinct, i.e. searchstrings will not be kept.
-   *
-   * Stability: *experimental*
    */
   qDistinctValues?: boolean;
 };
@@ -3175,15 +3165,11 @@ export type HyperCubeDef = {
 
   /**
    * Expansion state per dimension for pivot mode ( _qMode_ is P).
-   *
-   * Stability: *experimental*
    */
   qExpansionState?: ExpansionData[];
 
   /**
    * Hypercube Modifier Dynamic script string
-   *
-   * Stability: *experimental*
    */
   qDynamicScript?: string[];
 
@@ -4360,8 +4346,6 @@ export type NxCurrentSelectionItem = {
 
   /**
    * List of dimensions in the app that refer to the data model field of an NxCurrentSelectionItem.
-   *
-   * Stability: *experimental*
    */
   qDimensionReferences?: DimensionReference[];
 };
@@ -4801,8 +4785,6 @@ export type NxDimensionInfo = {
 
   /**
    * The expanded and stripped dimension name used internally in engine.
-   *
-   * Stability: *experimental*
    */
   qEffectiveDimensionName?: string;
 };
@@ -7102,8 +7084,6 @@ export type NxTreeDimensionInfo = {
 
   /**
    * The expanded and stripped dimension name used internally in engine.
-   *
-   * Stability: *experimental*
    */
   qEffectiveDimensionName?: string;
 };
@@ -9448,8 +9428,6 @@ export type TreeDataDef = {
 
   /**
    * Expansion state per dimension.
-   *
-   * Stability: *experimental*
    */
   qExpansionState?: ExpansionData[];
 
@@ -9623,7 +9601,7 @@ export type NativeDocFunctions<
    *
    * - `id`   -   Identifier of the bookmark.
    *
-   * Stability: *experimental*
+   * Stability: *locked*
    */
   applyAndVerifyBookmark: (id: string) => Promise<BookmarkApplyAndVerifyResult>;
 
@@ -9786,7 +9764,7 @@ export type NativeDocFunctions<
   /**
    * Clears the soft properties of all generic objects in the app.
    *
-   * Stability: *experimental*
+   * Stability: *locked*
    */
   clearAllSoftPatches: () => Promise<void>;
 
@@ -9896,7 +9874,7 @@ export type NativeDocFunctions<
    * - `prop`               -   Properties for the object.
    * - `objectIdsToPatch`   -   Add softpatches for this objects if available. If empty all softpatches are added to the bookmark.
    *
-   * Stability: *experimental*
+   * Stability: *locked*
    */
   createBookmarkEx: (prop: GenericBookmarkProperties, objectIdsToPatch?: string[]) => Promise<GenericBookmarkRpcObject>;
 
@@ -11098,7 +11076,7 @@ export type NativeDocFunctions<
    *
    * - `prop`   -   GenericObjectProperties with at least Info : { "qId": "&lt;identifier of the new generic object&gt;", "qType": "&lt;type of the new generic object&gt;" }
    *
-   * Stability: *experimental*
+   * Stability: *locked*
    */
   getOrCreateObject: <CustomProperties = DefaultGenericObjectProperties, CustomGenericObject = GenericObjectRpcObject>(
     prop: CustomProperties,
@@ -11940,7 +11918,7 @@ export type NativeGenericBookmarkFunctions = {
    *
    * <div class=note>The operation is successful if **qApplySuccess** is set to true. **qWarnings** lists state and field with unmatching values </div>
    *
-   * Stability: *experimental*
+   * Stability: *locked*
    */
   applyAndVerify: () => Promise<BookmarkApplyAndVerifyResult>;
 

@@ -379,12 +379,97 @@ export type OdbcCustomDataTypeResponse = {
 };
 
 /**
+ * A JSON Patch operation on one configuration property.
+ */
+export type Operation = {
+  /** The operation. `remove` resets the property to its default value, or removes it when it has none. */
+  op: "add" | "replace" | "remove";
+  /** The configuration property to change. */
+  path:
+    | "AGENT_LOG_LEVEL"
+    | "AGENT_HEALTH_FAIL_MINUTES_LIMIT"
+    | "AGENT_LOG_OPTIONS"
+    | "EXTEND_FIRST_REQUEST_TIMEOUT"
+    | "RELOAD_CACHE_MEMORY_MB"
+    | "DCAAS_LOG_LEVEL"
+    | "ODBC_LOG_LEVEL"
+    | "ODBC_MAX_PROCESS_COUNT"
+    | "ODBC_PROCESS_ISOLATION_MODE"
+    | "ODBC_RELOAD_SESSION_LIFE"
+    | "SAPBW_LOG_LEVEL"
+    | "SAPBW_MAX_PROCESS_COUNT"
+    | "SAPBW_PROCESS_ISOLATION_MODE"
+    | "SAPSQL_LOG_LEVEL"
+    | "SAPSQL_MAX_PROCESS_COUNT"
+    | "SAPSQL_PROCESS_ISOLATION_MODE"
+    | "SAPPACKAGE_LOG_LEVEL"
+    | "SAPPACKAGE_MAX_PROCESS_COUNT"
+    | "SAPPACKAGE_PROCESS_ISOLATION_MODE"
+    | "FILE_LOG_LEVEL"
+    | "FILE_MAX_PROCESS_COUNT"
+    | "FILE_PROCESS_ISOLATION_MODE"
+    | "REST_LOG_LEVEL"
+    | "REST_MAX_PROCESS_COUNT"
+    | "REST_PROCESS_ISOLATION_MODE"
+    | "ODBC_TABLES_LIMIT_FOR_GENERICODBC"
+    | "OVERRIDE_CHUNKS_CACHE_DIR"
+    | "CHUNK_RECOVERY_RESUME_THRESHOLD_MINUTES"
+    | "REST_ALLOW_LOCALHOST_CONNECTION"
+    | "OPTIONAL_CAPABILITIES"
+    | "AGENT_LOG_MAX_FILE_SIZE_MB"
+    | "AGENT_LOG_RETENTION_DAYS"
+    | "METRICS_LOG_MAX_FILE_SIZE_MB"
+    | "METRICS_LOG_RETENTION_DAYS"
+    | "DCAAS_LOG_RETENTION_DAYS"
+    | "ODBC_LOG_RETENTION_DAYS"
+    | "SAPBW_LOG_RETENTION_DAYS"
+    | "SAPSQL_LOG_RETENTION_DAYS"
+    | "SAPPACKAGE_LOG_RETENTION_DAYS"
+    | "REST_LOG_RETENTION_DAYS"
+    | "FILE_LOG_RETENTION_DAYS"
+    | "BENCHMARK_LOAD_PERFORMANCE_METRICS_RECORDING_ENABLED"
+    | "BENCHMARK_RETENTION_CLEANUP_ENABLED"
+    | "BENCHMARK_RETENTION_DAYS"
+    | "BENCHMARK_RETENTION_CHECK_INTERVAL_MINUTES"
+    | "BENCHMARK_RETENTION_DB_SIZE_MB"
+    | "BENCHMARK_RETENTION_CLEANUP_BATCH_SIZE";
+  /** The new value. Required for `add` and `replace`; ignored for `remove`. */
+  value?: string;
+};
+
+/**
  * Pagination links.
  */
 export type PaginationLinks = {
   next?: LinkResponseObject;
   prev?: LinkResponseObject;
   self?: LinkResponseObject;
+};
+
+/**
+ * The result of a PATCH on the agent configuration.
+ */
+export type PatchOperationResponse = {
+  /** One entry per operation of the request, in request order. */
+  data?: PatchOperationValidationResult[] | null;
+  /** The error text from the agent when the patch could not be processed; `null` otherwise. */
+  errorMessage?: string | null;
+  /** The error structure of this API. */
+  failedPatchError?: ErrorResponse;
+  /** The status the agent reported for the patch: `204` all operations applied, `207` some applied, `400` none applied. */
+  httpStatusCode?: number;
+};
+
+/**
+ * The validation result of one patch operation.
+ */
+export type PatchOperationValidationResult = {
+  /** A JSON Patch operation on one configuration property. */
+  operation?: Operation;
+  /** `true` when the operation passed validation and was applied. */
+  valid?: boolean;
+  /** Why the operation was rejected; `null` when it is valid. */
+  validationResult?: string | null;
 };
 
 /**
@@ -460,13 +545,13 @@ export type UpdateOdbcCustomTypeMappingsRequest = {
  *
  * @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
  * @param agentAction The type of action to perform. Permitted values are `restart` (rejected with `409` while a reload is in `RELOADING` status) and `force-restart` (cancels the active reloads and restarts the agent).
- * @throws PostDirectAccessAgent_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws RestartDirectAccessAgentHttpError
  */
-export async function postDirectAccessAgent_FIX_THIS_QUIRKY_NAME(
+export async function restartDirectAccessAgent(
   agentId: string,
   agentAction: string,
   options?: ApiCallOptions,
-): Promise<PostDirectAccessAgent_FIX_THIS_QUIRKY_NAMEHttpResponse> {
+): Promise<RestartDirectAccessAgentHttpResponse> {
   return invokeFetch("connectivity/direct-access-agents", {
     method: "post",
     pathTemplate: "/api/connectivity/direct-access-agents/{agentId}/actions/{agentAction}",
@@ -475,13 +560,13 @@ export async function postDirectAccessAgent_FIX_THIS_QUIRKY_NAME(
   });
 }
 
-export type PostDirectAccessAgent_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+export type RestartDirectAccessAgentHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
 
-export type PostDirectAccessAgent_FIX_THIS_QUIRKY_NAMEHttpError = {
+export type RestartDirectAccessAgentHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 405 | 409 | 500;
@@ -686,15 +771,59 @@ export type GetDirectAccessAgentConfigurationsHttpError = {
 };
 
 /**
+ * Makes changes to the local agent configuration using JSON Patch. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
+ *
+ * @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
+ * @param body an object with the body content
+ * @throws UpdateDirectAccessAgentConfigurationsHttpError
+ */
+export async function updateDirectAccessAgentConfigurations(
+  agentId: string,
+  body: Operation[],
+  options?: ApiCallOptions,
+): Promise<UpdateDirectAccessAgentConfigurationsHttpResponse> {
+  return invokeFetch("connectivity/direct-access-agents", {
+    method: "patch",
+    pathTemplate: "/api/connectivity/direct-access-agents/{agentId}/configurations",
+    pathVariables: { agentId },
+    body,
+    contentType: "application/json",
+    options,
+  });
+}
+
+export type UpdateDirectAccessAgentConfigurationsHttpResponse =
+  | UpdateDirectAccessAgentConfigurations204HttpResponse
+  | UpdateDirectAccessAgentConfigurations207HttpResponse;
+
+export type UpdateDirectAccessAgentConfigurations204HttpResponse = {
+  data: void;
+  headers: Headers;
+  status: 204;
+};
+
+export type UpdateDirectAccessAgentConfigurations207HttpResponse = {
+  data: PatchOperationResponse;
+  headers: Headers;
+  status: 207;
+};
+
+export type UpdateDirectAccessAgentConfigurationsHttpError = {
+  data: ErrorResponse;
+  headers: Headers;
+  status: 400 | 403 | 404 | 415 | 500;
+};
+
+/**
  * Retrieves the allowed paths settings for the File Connector. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.6+.
  *
  * @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
- * @throws GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError
  */
-export async function getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAME(
+export async function getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths(
   agentId: string,
   options?: ApiCallOptions,
-): Promise<GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAMEHttpResponse> {
+): Promise<GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpResponse> {
   return invokeFetch("connectivity/direct-access-agents", {
     method: "get",
     pathTemplate: "/api/connectivity/direct-access-agents/{agentId}/connectors/file-connector/files/allowed-paths",
@@ -703,13 +832,13 @@ export async function getDirectAccessAgentConnectorsFileConnectorFilesAllowedPat
   });
 }
 
-export type GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+export type GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpResponse = {
   data: FileConnectorAllowedPathsResponse;
   headers: Headers;
   status: 200;
 };
 
-export type GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAMEHttpError = {
+export type GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 500;
@@ -720,13 +849,13 @@ export type GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THI
  *
  * @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
  * @param body an object with the body content
- * @throws PutDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws SetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError
  */
-export async function putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAME(
+export async function setDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths(
   agentId: string,
   body: UpdateFileConnectorAllowedPathsRequest,
   options?: ApiCallOptions,
-): Promise<PutDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAMEHttpResponse> {
+): Promise<SetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpResponse> {
   return invokeFetch("connectivity/direct-access-agents", {
     method: "put",
     pathTemplate: "/api/connectivity/direct-access-agents/{agentId}/connectors/file-connector/files/allowed-paths",
@@ -737,13 +866,13 @@ export async function putDirectAccessAgentConnectorsFileConnectorFilesAllowedPat
   });
 }
 
-export type PutDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+export type SetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
 
-export type PutDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAMEHttpError = {
+export type SetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 409 | 500;
@@ -753,12 +882,12 @@ export type PutDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THI
  * Retrieves the custom data type mapping settings for the Generic ODBC Connector. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.5+.
  *
  * @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
- * @throws GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpError
  */
-export async function getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAME(
+export async function getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings(
   agentId: string,
   options?: ApiCallOptions,
-): Promise<GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAMEHttpResponse> {
+): Promise<GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpResponse> {
   return invokeFetch("connectivity/direct-access-agents", {
     method: "get",
     pathTemplate:
@@ -768,13 +897,13 @@ export async function getDirectAccessAgentConnectorsOdbcConnectorFilesCustomData
   });
 }
 
-export type GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+export type GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpResponse = {
   data: OdbcCustomDataTypeResponse;
   headers: Headers;
   status: 200;
 };
 
-export type GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAMEHttpError = {
+export type GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 500;
@@ -785,13 +914,13 @@ export type GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappin
  *
  * @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
  * @param body an object with the body content
- * @throws PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws SetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpError
  */
-export async function putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAME(
+export async function setDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings(
   agentId: string,
   body: UpdateOdbcCustomTypeMappingsRequest,
   options?: ApiCallOptions,
-): Promise<PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAMEHttpResponse> {
+): Promise<SetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpResponse> {
   return invokeFetch("connectivity/direct-access-agents", {
     method: "put",
     pathTemplate:
@@ -803,13 +932,13 @@ export async function putDirectAccessAgentConnectorsOdbcConnectorFilesCustomData
   });
 }
 
-export type PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+export type SetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
 
-export type PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAMEHttpError = {
+export type SetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 409 | 500;
@@ -979,12 +1108,12 @@ export type GetDirectAccessAgentLoadPerformanceMetricsHttpError = {
  * Retrieves the settings for the metrics collector. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.9+.
  *
  * @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
- * @throws GetDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws GetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError
  */
-export async function getDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAME(
+export async function getDirectAccessAgentToolsMetricsCollectorConfiguration(
   agentId: string,
   options?: ApiCallOptions,
-): Promise<GetDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAMEHttpResponse> {
+): Promise<GetDirectAccessAgentToolsMetricsCollectorConfigurationHttpResponse> {
   return invokeFetch("connectivity/direct-access-agents", {
     method: "get",
     pathTemplate: "/api/connectivity/direct-access-agents/{agentId}/tools/metrics-collector/configuration",
@@ -993,13 +1122,13 @@ export async function getDirectAccessAgentToolsMetricsCollectorConfiguration_FIX
   });
 }
 
-export type GetDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+export type GetDirectAccessAgentToolsMetricsCollectorConfigurationHttpResponse = {
   data: MetricsCollectorSettingsApiResponseConnectorConfigurationResponse;
   headers: Headers;
   status: 200;
 };
 
-export type GetDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAMEHttpError = {
+export type GetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 500;
@@ -1010,13 +1139,13 @@ export type GetDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIR
  *
  * @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
  * @param body an object with the body content
- * @throws PutDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError
  */
-export async function putDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAME(
+export async function setDirectAccessAgentToolsMetricsCollectorConfiguration(
   agentId: string,
   body: UpdateMetricsCollectorSettingsRequest,
   options?: ApiCallOptions,
-): Promise<PutDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAMEHttpResponse> {
+): Promise<SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpResponse> {
   return invokeFetch("connectivity/direct-access-agents", {
     method: "put",
     pathTemplate: "/api/connectivity/direct-access-agents/{agentId}/tools/metrics-collector/configuration",
@@ -1027,13 +1156,13 @@ export async function putDirectAccessAgentToolsMetricsCollectorConfiguration_FIX
   });
 }
 
-export type PutDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+export type SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpResponse = {
   data: void;
   headers: Headers;
   status: 204;
 };
 
-export type PutDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAMEHttpError = {
+export type SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 403 | 404 | 409 | 500;
@@ -1056,9 +1185,9 @@ export type DirectAccessAgentsAPI = {
    *
    * @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
    * @param agentAction The type of action to perform. Permitted values are `restart` (rejected with `409` while a reload is in `RELOADING` status) and `force-restart` (cancels the active reloads and restarts the agent).
-   * @throws PostDirectAccessAgent_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws RestartDirectAccessAgentHttpError
    */
-  postDirectAccessAgent_FIX_THIS_QUIRKY_NAME: typeof postDirectAccessAgent_FIX_THIS_QUIRKY_NAME;
+  restartDirectAccessAgent: typeof restartDirectAccessAgent;
   /**
    * Retrieves paginated statuses for benchmarks run by the specified Direct Access agent. Use the filters and sort order to find benchmark runs and review their progress or completed results. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.17+.
    *
@@ -1100,35 +1229,43 @@ export type DirectAccessAgentsAPI = {
    */
   getDirectAccessAgentConfigurations: typeof getDirectAccessAgentConfigurations;
   /**
+   * Makes changes to the local agent configuration using JSON Patch. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.2+.
+   *
+   * @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
+   * @param body an object with the body content
+   * @throws UpdateDirectAccessAgentConfigurationsHttpError
+   */
+  updateDirectAccessAgentConfigurations: typeof updateDirectAccessAgentConfigurations;
+  /**
    * Retrieves the allowed paths settings for the File Connector. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.6+.
    *
    * @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
-   * @throws GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError
    */
-  getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAME: typeof getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAME;
+  getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths: typeof getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths;
   /**
    * Completely replaces the contents of the allowed paths configuration file for the File Connector. Partial updates are not supported. Omitting `fileConnectorAllowedPaths` or sending `null` is treated as an empty list and clears the file. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.6+.
    *
    * @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
    * @param body an object with the body content
-   * @throws PutDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws SetDirectAccessAgentConnectorsFileConnectorFilesAllowedPathsHttpError
    */
-  putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAME: typeof putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAME;
+  setDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths: typeof setDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths;
   /**
    * Retrieves the custom data type mapping settings for the Generic ODBC Connector. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.5+.
    *
    * @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
-   * @throws GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpError
    */
-  getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAME: typeof getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAME;
+  getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings: typeof getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings;
   /**
    * Completely replaces the contents of the custom data type mapping configuration file for the Generic ODBC connector. Partial updates are not supported. Omitting `odbcCustomDataTypes` or sending `null` is treated as an empty list and clears the file. There are property naming differences between the API and the file contents. Use the API property format when making changes. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.5+.
    *
    * @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
    * @param body an object with the body content
-   * @throws PutDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws SetDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappingsHttpError
    */
-  putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAME: typeof putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAME;
+  setDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings: typeof setDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings;
   /**
    * Lists the configuration files of the connector: `file-connector`: `plain-text-configuration`, `allowed-paths`, `custom-allowed-extensions`; `rest-connector`: `plain-text-configuration`; `odbc-connector`: `allowed-drivers`, `allowed-dsns`, `custom-data-type-mappings`. `plain-text-configuration` and `custom-allowed-extensions` are read and written as raw lines through `connectors/{connectorType}/files/{fileType}`; the other files have dedicated typed operations. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.4+.
    *
@@ -1168,17 +1305,17 @@ export type DirectAccessAgentsAPI = {
    * Retrieves the settings for the metrics collector. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.9+.
    *
    * @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
-   * @throws GetDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws GetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError
    */
-  getDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAME: typeof getDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAME;
+  getDirectAccessAgentToolsMetricsCollectorConfiguration: typeof getDirectAccessAgentToolsMetricsCollectorConfiguration;
   /**
    * Completely replaces the contents of the metrics collector settings configuration file. Partial updates are not supported. The requestor must have the `TenantAdmin` role and be either the gateway's space owner or a member of the gateway's space with the `Can Consume Data` role. Available in Direct Access Gateway V1.7.9+.
    *
    * @param agentId The ID of the Direct Access gateway, as shown in the gateway's settings dialog in the Management Console.
    * @param body an object with the body content
-   * @throws PutDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws SetDirectAccessAgentToolsMetricsCollectorConfigurationHttpError
    */
-  putDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAME: typeof putDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAME;
+  setDirectAccessAgentToolsMetricsCollectorConfiguration: typeof setDirectAccessAgentToolsMetricsCollectorConfiguration;
   /**
    * Clears the cache for direct-access-agents api requests.
    */
@@ -1189,22 +1326,23 @@ export type DirectAccessAgentsAPI = {
  * Functions for the direct-access-agents api
  */
 const directAccessAgentsExport: DirectAccessAgentsAPI = {
-  postDirectAccessAgent_FIX_THIS_QUIRKY_NAME,
+  restartDirectAccessAgent,
   getDirectAccessAgentBenchmarks,
   createDirectAccessAgentBenchmark,
   getDirectAccessAgentBenchmark,
   createDirectAccessAgentBenchmarkCancel,
   getDirectAccessAgentConfigurations,
-  getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAME,
-  putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAME,
-  getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAME,
-  putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAME,
+  updateDirectAccessAgentConfigurations,
+  getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths,
+  setDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths,
+  getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings,
+  setDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings,
   getDirectAccessAgentConnectorFiles,
   getDirectAccessAgentConnectorFile,
   updateDirectAccessAgentConnectorFile,
   getDirectAccessAgentLoadPerformanceMetrics,
-  getDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAME,
-  putDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAME,
+  getDirectAccessAgentToolsMetricsCollectorConfiguration,
+  setDirectAccessAgentToolsMetricsCollectorConfiguration,
   clearCache,
 };
 export default directAccessAgentsExport;

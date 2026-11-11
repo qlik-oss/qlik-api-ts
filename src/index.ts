@@ -573,7 +573,7 @@ const createConnectivityDirectAccessAgentsRuntimeAPI = apiDefToApiPublic<Connect
       connectivity: {
         "direct-access-agents": {
           "{agentId}": {
-            actions: { "{agentAction}": ["postDirectAccessAgent_FIX_THIS_QUIRKY_NAME:P:"] },
+            actions: { "{agentAction}": ["restartDirectAccessAgent:P:"] },
             benchmarks: {
               "": ["getDirectAccessAgentBenchmarks:GQ:", "createDirectAccessAgentBenchmark:PQ:"],
               "{benchmarkId}": {
@@ -581,21 +581,21 @@ const createConnectivityDirectAccessAgentsRuntimeAPI = apiDefToApiPublic<Connect
                 cancel: ["createDirectAccessAgentBenchmarkCancel:P:"],
               },
             },
-            configurations: ["getDirectAccessAgentConfigurations:GQ:"],
+            configurations: ["getDirectAccessAgentConfigurations:GQ:", "updateDirectAccessAgentConfigurations:ABJ:"],
             connectors: {
               "file-connector": {
                 files: {
                   "allowed-paths": [
-                    "getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAME:G:",
-                    "putDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths_FIX_THIS_QUIRKY_NAME:UBJ:",
+                    "getDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths:G:",
+                    "setDirectAccessAgentConnectorsFileConnectorFilesAllowedPaths:UBJ:",
                   ],
                 },
               },
               "odbc-connector": {
                 files: {
                   "custom-data-type-mappings": [
-                    "getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAME:G:",
-                    "putDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings_FIX_THIS_QUIRKY_NAME:UBJ:",
+                    "getDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings:G:",
+                    "setDirectAccessAgentConnectorsOdbcConnectorFilesCustomDataTypeMappings:UBJ:",
                   ],
                 },
               },
@@ -610,8 +610,8 @@ const createConnectivityDirectAccessAgentsRuntimeAPI = apiDefToApiPublic<Connect
             tools: {
               "metrics-collector": {
                 configuration: [
-                  "getDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAME:G:",
-                  "putDirectAccessAgentToolsMetricsCollectorConfiguration_FIX_THIS_QUIRKY_NAME:UBJ:",
+                  "getDirectAccessAgentToolsMetricsCollectorConfiguration:G:",
+                  "setDirectAccessAgentToolsMetricsCollectorConfiguration:UBJ:",
                 ],
               },
             },
@@ -1454,9 +1454,9 @@ const createSchedulingTasksRuntimeAPI = apiDefToApiPublic<SchedulingTasksAPI>("s
           "{id}": {
             actions: {
               reload: {
-                "on-dataset-updated": ["reloadTasksResourceOnDatasetUpdated_FIX_THIS_QUIRKY_NAME:PBJ:"],
-                "on-task-event": ["reloadTasksResourceOnTaskEvent_FIX_THIS_QUIRKY_NAME:PBJ:"],
-                "on-time-schedule": ["reloadTasksResourceOnTimeSchedule_FIX_THIS_QUIRKY_NAME:PBJ:"],
+                "on-dataset-updated": ["reloadTasksResourceOnDatasetUpdated:PBJ:"],
+                "on-task-event": ["reloadTasksResourceOnTaskEvent:PBJ:"],
+                "on-time-schedule": ["reloadTasksResourceOnTimeSchedule:PBJ:"],
               },
             },
             runs: ["getTaskResourceRuns:GQ:"],

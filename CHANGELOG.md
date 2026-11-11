@@ -1,5 +1,17 @@
 # @qlik/api
 
+## 2.25.0
+
+### Minor Changes
+
+- Update from the latest API specs
+
+- Update from the latest API specs
+
+### Patch Changes
+
+- Fix grouped undo/redo behavior and isolate UndoInfo state between apps.
+
 ## 2.24.0
 
 ### Minor Changes

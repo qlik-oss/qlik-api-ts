@@ -776,13 +776,13 @@ export type CreateTaskWithoutQueryHttpError = {
  *
  * @param id The unique identifier of the app to reload.
  * @param body an object with the body content
- * @throws ReloadTasksResourceOnDatasetUpdated_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws ReloadTasksResourceOnDatasetUpdatedHttpError
  */
-export async function reloadTasksResourceOnDatasetUpdated_FIX_THIS_QUIRKY_NAME(
+export async function reloadTasksResourceOnDatasetUpdated(
   id: string,
   body: ReloadOnDatasetUpdatedRequest,
   options?: ApiCallOptions,
-): Promise<ReloadTasksResourceOnDatasetUpdated_FIX_THIS_QUIRKY_NAMEHttpResponse> {
+): Promise<ReloadTasksResourceOnDatasetUpdatedHttpResponse> {
   return invokeFetch("scheduling/tasks", {
     method: "post",
     pathTemplate: "/api/scheduling/tasks/resources/{id}/actions/reload/on-dataset-updated",
@@ -793,13 +793,13 @@ export async function reloadTasksResourceOnDatasetUpdated_FIX_THIS_QUIRKY_NAME(
   });
 }
 
-export type ReloadTasksResourceOnDatasetUpdated_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+export type ReloadTasksResourceOnDatasetUpdatedHttpResponse = {
   data: Task;
   headers: Headers;
   status: 201;
 };
 
-export type ReloadTasksResourceOnDatasetUpdated_FIX_THIS_QUIRKY_NAMEHttpError = {
+export type ReloadTasksResourceOnDatasetUpdatedHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 422 | 424 | 500 | 503;
@@ -832,13 +832,13 @@ export type ReloadTasksResourceOnDatasetUpdated_FIX_THIS_QUIRKY_NAMEHttpError = 
  *
  * @param id The unique identifier of the app to reload.
  * @param body an object with the body content
- * @throws ReloadTasksResourceOnTaskEvent_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws ReloadTasksResourceOnTaskEventHttpError
  */
-export async function reloadTasksResourceOnTaskEvent_FIX_THIS_QUIRKY_NAME(
+export async function reloadTasksResourceOnTaskEvent(
   id: string,
   body: ReloadOnTaskEventRequest,
   options?: ApiCallOptions,
-): Promise<ReloadTasksResourceOnTaskEvent_FIX_THIS_QUIRKY_NAMEHttpResponse> {
+): Promise<ReloadTasksResourceOnTaskEventHttpResponse> {
   return invokeFetch("scheduling/tasks", {
     method: "post",
     pathTemplate: "/api/scheduling/tasks/resources/{id}/actions/reload/on-task-event",
@@ -849,13 +849,13 @@ export async function reloadTasksResourceOnTaskEvent_FIX_THIS_QUIRKY_NAME(
   });
 }
 
-export type ReloadTasksResourceOnTaskEvent_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+export type ReloadTasksResourceOnTaskEventHttpResponse = {
   data: Task;
   headers: Headers;
   status: 201;
 };
 
-export type ReloadTasksResourceOnTaskEvent_FIX_THIS_QUIRKY_NAMEHttpError = {
+export type ReloadTasksResourceOnTaskEventHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 422 | 424 | 500 | 503;
@@ -887,13 +887,13 @@ export type ReloadTasksResourceOnTaskEvent_FIX_THIS_QUIRKY_NAMEHttpError = {
  *
  * @param id The unique identifier of the app to reload.
  * @param body an object with the body content
- * @throws ReloadTasksResourceOnTimeSchedule_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws ReloadTasksResourceOnTimeScheduleHttpError
  */
-export async function reloadTasksResourceOnTimeSchedule_FIX_THIS_QUIRKY_NAME(
+export async function reloadTasksResourceOnTimeSchedule(
   id: string,
   body: ReloadOnTimeScheduleRequest,
   options?: ApiCallOptions,
-): Promise<ReloadTasksResourceOnTimeSchedule_FIX_THIS_QUIRKY_NAMEHttpResponse> {
+): Promise<ReloadTasksResourceOnTimeScheduleHttpResponse> {
   return invokeFetch("scheduling/tasks", {
     method: "post",
     pathTemplate: "/api/scheduling/tasks/resources/{id}/actions/reload/on-time-schedule",
@@ -904,13 +904,13 @@ export async function reloadTasksResourceOnTimeSchedule_FIX_THIS_QUIRKY_NAME(
   });
 }
 
-export type ReloadTasksResourceOnTimeSchedule_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+export type ReloadTasksResourceOnTimeScheduleHttpResponse = {
   data: Task;
   headers: Headers;
   status: 201;
 };
 
-export type ReloadTasksResourceOnTimeSchedule_FIX_THIS_QUIRKY_NAMEHttpError = {
+export type ReloadTasksResourceOnTimeScheduleHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 422 | 424 | 500 | 503;
@@ -1568,9 +1568,9 @@ export type TasksAPI = {
    *
    * @param id The unique identifier of the app to reload.
    * @param body an object with the body content
-   * @throws ReloadTasksResourceOnDatasetUpdated_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws ReloadTasksResourceOnDatasetUpdatedHttpError
    */
-  reloadTasksResourceOnDatasetUpdated_FIX_THIS_QUIRKY_NAME: typeof reloadTasksResourceOnDatasetUpdated_FIX_THIS_QUIRKY_NAME;
+  reloadTasksResourceOnDatasetUpdated: typeof reloadTasksResourceOnDatasetUpdated;
   /**
    * Creates a reload task for the app that runs when another task finishes with
    * the given status.
@@ -1598,9 +1598,9 @@ export type TasksAPI = {
    *
    * @param id The unique identifier of the app to reload.
    * @param body an object with the body content
-   * @throws ReloadTasksResourceOnTaskEvent_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws ReloadTasksResourceOnTaskEventHttpError
    */
-  reloadTasksResourceOnTaskEvent_FIX_THIS_QUIRKY_NAME: typeof reloadTasksResourceOnTaskEvent_FIX_THIS_QUIRKY_NAME;
+  reloadTasksResourceOnTaskEvent: typeof reloadTasksResourceOnTaskEvent;
   /**
    * Creates a reload task for the app that runs on a recurring time schedule.
    * This is a convenience wrapper over `POST /scheduling/tasks`; the full task
@@ -1627,9 +1627,9 @@ export type TasksAPI = {
    *
    * @param id The unique identifier of the app to reload.
    * @param body an object with the body content
-   * @throws ReloadTasksResourceOnTimeSchedule_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws ReloadTasksResourceOnTimeScheduleHttpError
    */
-  reloadTasksResourceOnTimeSchedule_FIX_THIS_QUIRKY_NAME: typeof reloadTasksResourceOnTimeSchedule_FIX_THIS_QUIRKY_NAME;
+  reloadTasksResourceOnTimeSchedule: typeof reloadTasksResourceOnTimeSchedule;
   /**
    * Retrieves a paginated list of task runs for a given resource, identified by `id`. Returns run history across all tasks associated with that resource, ordered by the most recent run by default.
    *
@@ -1752,9 +1752,9 @@ const tasksExport: TasksAPI = {
   getTasks,
   createTask,
   createTaskWithoutQuery,
-  reloadTasksResourceOnDatasetUpdated_FIX_THIS_QUIRKY_NAME,
-  reloadTasksResourceOnTaskEvent_FIX_THIS_QUIRKY_NAME,
-  reloadTasksResourceOnTimeSchedule_FIX_THIS_QUIRKY_NAME,
+  reloadTasksResourceOnDatasetUpdated,
+  reloadTasksResourceOnTaskEvent,
+  reloadTasksResourceOnTimeSchedule,
   getTaskResourceRuns,
   deleteTask,
   getTask,

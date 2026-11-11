@@ -856,16 +856,61 @@ export type TaskRecipientError = {
 };
 
 /**
+ * One segment of a dynamicFileName schema. Segments are resolved and concatenated in array order to build the final report fileName.
+ */
+export type TemplateFileNameSegment = {
+  /** The type of segment. Can be:
+   *   - "text": a literal string, taken from "value".
+   *   - "cycle": cycle dimension value, if the template
+   *     has cycle fields configured.
+   *   - "recipientEmail": the recipient's email address.
+   *   - "recipientName": the recipient's display name. Same
+   *     restriction as recipientEmail.
+   *   - "recipientFilterName": the name of the recipient filter
+   *     applied to this report.
+   *   - "timestamp": a formatted timestamp, using the format string
+   *     in "value". */
+  type: TemplateFileNameSegmentType;
+  /** Segment-specific configuration. Only meaningful for type "text" (the literal string to emit) and type "timestamp" (the format string to use, from the same set of formats accepted by fileTimeStamp). Ignored for all other segment types. */
+  value?: string;
+};
+
+/**
+ * The type of segment. Can be:
+ *   - "text": a literal string, taken from "value".
+ *   - "cycle": cycle dimension value, if the template
+ *     has cycle fields configured.
+ *   - "recipientEmail": the recipient's email address.
+ *   - "recipientName": the recipient's display name. Same
+ *     restriction as recipientEmail.
+ *   - "recipientFilterName": the name of the recipient filter
+ *     applied to this report.
+ *   - "timestamp": a formatted timestamp, using the format string
+ *     in "value".
+ * @example
+ * "recipientEmail"
+ */
+export type TemplateFileNameSegmentType =
+  | "text"
+  | "cycle"
+  | "recipientEmail"
+  | "recipientName"
+  | "recipientFilterName"
+  | "timestamp";
+
+/**
  * Depending on the value of type, sharing service will internally validate a specific property regarding its data. Type "file" validates property "fileData", type "chart" validates property "chartData", type "story" validates property "storyData". Check description of each of the models for their required properties.
  */
 export type TemplatePersist = {
   /** If the template type is not "chart", this can be null. Otherwise, the following properties are required: appId, sheetId, objectId, widthPx, heightPx, language. The following properties are optional: outZoom, outDpi */
   chartData?: ChartTemplate;
+  /** Dynamic fileName schema, expressed as an ordered list of segments that are concatenated at delivery time to build the final report fileName. When set (non-empty), this takes precedence over fileName/fileTimeStamp for this template; those fields are ignored. */
+  dynamicFileName?: TemplateFileNameSegment[];
   /** fileAlias provide an opaqueId for the client which can be used to filter and select the report generated */
   fileAlias?: string;
-  /** fileName to be used when generating the report */
+  /** fileName to be used when generating the report. Applies to sheet-sharing, chart-sharing and template-sharing tasks. For template-sharing tasks, dynamicFileName should be used instead and takes precedence when set. */
   fileName?: string;
-  /** file name timestamp to be used when generating the report */
+  /** file name timestamp to be used when generating the report. Applies to sheet-sharing, chart-sharing and template-sharing tasks. For template-sharing tasks, dynamicFileName should be used instead and takes precedence when set. */
   fileTimeStamp?: "yyyy-MM-dd" | "yyyy-MM-dd_HH-mm" | "yyyyMMdd" | "yyyyMMdd_HH-mm";
   /** array of sheet data for multi-sheet type template */
   multiSheetData?: MultiSheetTemplate[];
