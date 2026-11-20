@@ -93,7 +93,7 @@ export type ConnectorNodesInfo = {
 export type DataSourceNew = {
   /** List of capabilities supported by the datasource. */
   capabilities?: string[];
-  /** Override URL for data loading. Empty if the default URL is used. */
+  /** Override URL for data loading, will be always empty. */
   dataLoadUrlOverride?: string;
   /** Unique identifier of the datasource. */
   dataSourceId: string;

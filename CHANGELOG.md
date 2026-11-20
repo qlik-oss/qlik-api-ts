@@ -1,5 +1,15 @@
 # @qlik/api
 
+## 2.26.0
+
+### Minor Changes
+
+- Update from the latest API specs
+
+### Patch Changes
+
+- Update dependencies
+
 ## 2.25.0
 
 ### Minor Changes

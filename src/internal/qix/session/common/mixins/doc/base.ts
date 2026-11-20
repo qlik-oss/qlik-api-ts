@@ -1,8 +1,8 @@
 import { mapToLayout } from "../utils/permissions";
 
-import type { Doc } from "../../../types/doc";
-import type { GenericListObject, GenericObject } from "../../../types/generic-object";
-import type { ListBoxProperties } from "../../../types/list-types";
+import type { Doc } from "../../../../types/doc";
+import type { GenericListObject, GenericObject } from "../../../../types/generic-object";
+import type { ListBoxProperties } from "../../../../types/list-types";
 
 export type BaseDoc = Doc & {
   _listCache: Record<string, Promise<GenericObject>>;

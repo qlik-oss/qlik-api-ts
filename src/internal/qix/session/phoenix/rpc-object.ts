@@ -1,6 +1,6 @@
 import type { Doc, Global } from "../../qix-types";
 import { EventEmitter } from "./event-emitter";
-import { logEvent } from "./logger";
+import { logEvent } from "../common/logger";
 import type { QixConnection } from "./qix-connection";
 import type { RemoteObject } from "./remote-object";
 import { getGeneratedMixinClass, getPrototypeJustBeforeBase, toMixinsCacheKey } from "./rpc-object-dynamic-mixins";

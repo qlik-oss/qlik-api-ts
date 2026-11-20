@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { HostConfig } from "#internal/auth/auth-types";
 import { createEnigmaSession } from "../enigma-session";
-import { createProgressMonitor } from "../progress-monitor";
+import { createProgressMonitor } from "../../common/progress-monitor";
 
 describe("enigma session", () => {
   it("should block WebSocket connection when noauth auth type is configured", async () => {

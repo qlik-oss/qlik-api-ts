@@ -710,7 +710,7 @@ export type CreateTaskHttpResponse = {
 export type CreateTaskHttpError = {
   data: ErrorResponse;
   headers: Headers;
-  status: 400 | 401 | 403 | 404 | 500 | 503;
+  status: 400 | 401 | 403 | 404 | 422 | 500 | 503;
 };
 
 /**
@@ -741,7 +741,7 @@ export type CreateTaskWithoutQueryHttpResponse = {
 export type CreateTaskWithoutQueryHttpError = {
   data: ErrorResponse;
   headers: Headers;
-  status: 400 | 401 | 403 | 404 | 500 | 503;
+  status: 400 | 401 | 403 | 404 | 422 | 500 | 503;
 };
 
 /**
@@ -1057,7 +1057,7 @@ export type PatchTask204HttpResponse = {
 export type PatchTaskHttpError = {
   data: ErrorResponse;
   headers: Headers;
-  status: 400 | 401 | 403 | 404 | 500 | 503;
+  status: 400 | 401 | 403 | 404 | 422 | 500 | 503;
 };
 
 /**
@@ -1087,7 +1087,7 @@ export type UpdateTaskHttpResponse = {
 export type UpdateTaskHttpError = {
   data: ErrorResponse;
   headers: Headers;
-  status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
+  status: 400 | 401 | 403 | 404 | 409 | 422 | 500 | 503;
 };
 
 /**

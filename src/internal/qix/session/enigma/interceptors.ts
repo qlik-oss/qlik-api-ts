@@ -1,6 +1,6 @@
-import type { ProgressMonitor } from "./progress-monitor";
-import schema from "./schema/engine-api";
-import enums from "./schema/engine-enums";
+import type { ProgressMonitor } from "../common/progress-monitor";
+import schema from "../common/schema/engine-api";
+import enums from "../common/schema/engine-enums";
 
 const RETURN_EMPTY_METHODS = ["GetProperties", "GetFullPropertyTree"];
 

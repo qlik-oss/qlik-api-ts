@@ -5,8 +5,8 @@ import { WebSocketError } from "#internal/web-socket/web-socket-errors";
 import { createWebSocket } from "#internal/web-socket/web-socket-functions";
 import type { OpenSessionProps } from "../../internal/session-types";
 import type { OpenAppSessionProps } from "../../qix-types";
-import { getHumanReadableSocketClosedErrorMessage } from "../websocket-errors";
-import { logEvent } from "./logger";
+import { getHumanReadableSocketClosedErrorMessage } from "../common/websocket-errors";
+import { logEvent } from "../common/logger";
 
 type WebSocketListeners = {
   onClose: (ev: { code: number; reason: string }) => void;

@@ -1,4 +1,4 @@
-import schema from "../schema/engine-api";
+import schema from "../common/schema/engine-api";
 import { QixError, type QixConnection, type QixRequest } from "./qix-connection";
 
 // filter if the method should retry on LOCERR_GENERIC_ABORTED

@@ -1,6 +1,6 @@
-import type { Doc } from "../../../types/doc";
-import type { GenericListObject } from "../../../types/generic-object";
-import type { SheetListItem } from "../../../types/list-types";
+import type { Doc } from "../../../../types/doc";
+import type { GenericListObject } from "../../../../types/generic-object";
+import type { SheetListItem } from "../../../../types/list-types";
 
 export const sheetListProps = {
   qInfo: {

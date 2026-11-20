@@ -1,14 +1,14 @@
 import type { OpenAppSessionProps } from "../qix-types";
-import { createEnigmaSession } from "./enigma-session";
-import { mixins } from "./mixins/index";
+import { createEnigmaSession } from "./enigma/enigma-session";
+import { mixins } from "./common/mixins/index";
 import {
   createPhoenixConnection,
   type PhoenixConnection,
   type PhoenixConnectionOwner,
 } from "./phoenix/phoenix-connection";
 import { createRpcObjectFactory, type RpcObjectFactory } from "./phoenix/rpc-object-factory";
-import type { ProgressMonitor } from "./progress-monitor";
-import schema from "./schema/engine-api";
+import type { ProgressMonitor } from "./common/progress-monitor";
+import schema from "./common/schema/engine-api";
 
 let objectFactory: RpcObjectFactory;
 

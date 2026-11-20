@@ -1,4 +1,4 @@
-import { type GenericObject } from "../../../../types/generic-object";
+import { type GenericObject } from "../../../../../types/generic-object";
 
 export const mixin = {
   types: ["CurrentSelection"],

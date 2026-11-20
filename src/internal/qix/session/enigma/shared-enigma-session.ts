@@ -2,15 +2,14 @@ import { handleAuthenticationError, isWindows } from "#internal/auth/auth-functi
 import type { HostConfig } from "#internal/auth/auth-types";
 import { InvokeFetchError } from "#internal/invoke-fetch/invoke-fetch-errors";
 import { invokeFetch } from "#internal/invoke-fetch/invoke-fetch-functions";
-import type { OpenSessionProps } from "../internal/session-types";
-import type { DocAction, OpenAppSessionProps, WebSocketEvent } from "../qix-types";
-import type { Client, SharedSession } from "../shared-sessions-manager";
-import type { Doc } from "../types/doc";
-import type { Global } from "../types/global";
-import type { WebSocketEventPayloads, WebSocketEventType } from "../types/websocket-events";
-import type { CreateSharedSessionProps } from "./shared-sessions-phoenix";
-import { getHumanReadableSocketClosedErrorMessage } from "./websocket-errors";
-import { createProgressMonitor, type ProgressMonitor } from "./progress-monitor";
+import type { OpenSessionProps } from "../../internal/session-types";
+import type { DocAction, OpenAppSessionProps, WebSocketEvent } from "../../qix-types";
+import type { Client, CreateSharedSessionProps, SharedSession } from "../../shared-sessions-manager";
+import type { Doc } from "../../types/doc";
+import type { Global } from "../../types/global";
+import type { WebSocketEventPayloads, WebSocketEventType } from "../../types/websocket-events";
+import { getHumanReadableSocketClosedErrorMessage } from "../common/websocket-errors";
+import { createProgressMonitor, type ProgressMonitor } from "../common/progress-monitor";
 
 export type Listener = (event: WebSocketEvent) => void;
 
@@ -59,7 +58,7 @@ async function createAndSetupEnigmaSession(
   session: EnigmaJS.Session;
   global: Global;
 }> {
-  const { createEnigmaSessionEntrypoint } = await import("./qix-chunk-entrypoint.js");
+  const { createEnigmaSessionEntrypoint } = await import("../qix-chunk-entrypoint.js");
   const isWin = await isWindows(props.hostConfig);
   const session = await createEnigmaSessionEntrypoint(props, progressMonitor);
   setupSessionListeners(session, props, onWebSocketEvent, isWin);

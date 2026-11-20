@@ -1,6 +1,6 @@
 import { handleAuthenticationError, isWindows } from "#internal/auth/auth-functions";
 import type { OpenAppSessionProps } from "../../qix-types";
-import { logEvent } from "./logger";
+import { logEvent } from "../common/logger";
 import { createResolvablePromise } from "./protocol-helpers";
 import type { Json, JsonObject } from "./protocol-types";
 import { createQixWebSocket } from "./websocket";

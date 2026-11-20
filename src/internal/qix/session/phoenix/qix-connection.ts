@@ -1,5 +1,5 @@
 import type { OpenAppSessionProps } from "../../qix-types";
-import schema from "../schema/engine-api";
+import schema from "../common/schema/engine-api";
 import { unwrapDeltas, type DeltaState } from "./delta-compression";
 import {
   createJsonRpcChannel,
@@ -7,7 +7,7 @@ import {
   type JsonRpcRequest,
   type JsonRpcResponse,
 } from "./json-rpc-channel";
-import { logJsonRpcChannelError, logRequest, logResponse } from "./logger";
+import { logJsonRpcChannelError, logRequest, logResponse } from "../common/logger";
 import { extractResult, getDeltaAndReturnEmptyProps } from "./protocol-helpers";
 import type { Json, JsonObject } from "./protocol-types";
 import { isQixObjectNotFoundError } from "./rpc-object-ref";

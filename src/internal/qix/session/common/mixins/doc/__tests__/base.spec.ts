@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import type { GenericObjectProperties } from "../../../../types/engine-schema";
+import type { GenericObjectProperties } from "../../../../../types/engine-schema";
 import base from "../base";
 
 describe("Lists mixin", () => {

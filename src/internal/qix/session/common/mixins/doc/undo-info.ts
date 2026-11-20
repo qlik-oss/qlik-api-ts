@@ -1,4 +1,4 @@
-import type { UndoInfoObject } from "../../../types/generic-object";
+import type { UndoInfoObject } from "../../../../types/generic-object";
 import type { BaseDoc } from "./base";
 
 const undoInfoProps = {

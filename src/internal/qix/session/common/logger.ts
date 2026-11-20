@@ -1,9 +1,16 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-argument */
-import type { JsonRpcRequest } from "./json-rpc-channel";
-import type { Json } from "./protocol-types";
-import type { QixRequest } from "./qix-connection";
-import type { RemoteObject } from "./remote-object";
+
+/** Logs websocket traffic and events. It only relies on the shape of JSON-RPC frames, so any session implementation can use it. */
+
+type LoggedRequest = { id: number };
+type LoggedParams = unknown[] | Record<string, unknown>;
+/** The parts of a phoenix remote object used to name it in the log */
+type LoggedObject = {
+  id?: string;
+  getHandle(): number;
+  respawnInfo?: { creatingRequest?: { params?: LoggedParams } };
+};
 
 const ongoingRequests = new Set<number>();
 const requestDepths = new Map<number, number>();
@@ -20,8 +27,8 @@ try {
 
 export function logRequest(
   handleOrObject: number | { getHandle(): number },
-  websocketRequest: JsonRpcRequest,
-  request: QixRequest,
+  websocketRequest: LoggedRequest,
+  request: { method: string; params: LoggedParams },
 ) {
   if (logEnabled) {
     const indent = startIndent(websocketRequest);
@@ -33,7 +40,7 @@ export function logRequest(
 
 export function logResponse(
   handleOrObject: number | { getHandle(): number },
-  websocketRequest: JsonRpcRequest,
+  websocketRequest: LoggedRequest,
   sendResponse: {
     result?: unknown;
     change?: Array<number>;
@@ -66,7 +73,7 @@ export function logResponse(
 
 export function logJsonRpcChannelError(
   handleOrObject: number | { getHandle(): number },
-  websocketRequest: JsonRpcRequest,
+  websocketRequest: LoggedRequest,
   error: unknown,
 ) {
   if (logEnabled) {
@@ -82,14 +89,14 @@ export function logEvent(message?: any, ...optionalParams: any[]) {
   }
 }
 
-function startIndent(websocketRequest: JsonRpcRequest) {
+function startIndent(websocketRequest: LoggedRequest) {
   ongoingRequests.add(websocketRequest.id);
   requestDepths.set(websocketRequest.id, ongoingRequests.size);
   const indent = baseIndent.repeat(startIntent + ongoingRequests.size);
   return indent;
 }
 
-function endIndent(websocketRequest: JsonRpcRequest) {
+function endIndent(websocketRequest: LoggedRequest) {
   const indent = baseIndent.repeat(startIntent + (requestDepths.get(websocketRequest.id) || 0));
   ongoingRequests.delete(websocketRequest.id);
   requestDepths.delete(websocketRequest.id);
@@ -104,9 +111,9 @@ function toLogName(handleOrObject: number | { getHandle(): number }): any {
   } else if (typeof handleOrObject === "undefined") {
     return "(undefined handle)";
   } else if (typeof handleOrObject === "object") {
-    const obj = handleOrObject as RemoteObject;
+    const obj = handleOrObject as LoggedObject;
     if (!obj.id) {
-      const params = obj.respawnInfo.creatingRequest?.params;
+      const params = obj.respawnInfo?.creatingRequest?.params;
       if (Array.isArray(params)) {
         return params?.filter((arg) => typeof arg === "string").join("/");
       }
@@ -117,7 +124,7 @@ function toLogName(handleOrObject: number | { getHandle(): number }): any {
   }
 }
 
-function formatParams(params: Array<Json> | Record<string, Json>): unknown[] {
+function formatParams(params: LoggedParams): unknown[] {
   if (Array.isArray(params)) {
     const result: unknown[] = ["("];
     for (let i = 0; i < params.length; i++) {

@@ -1,12 +1,6 @@
-import type { DocAction, OpenAppSessionProps, WebSocketEvent } from "../qix-types";
-import type { Client, SharedSession } from "../shared-sessions-manager";
-import { createProgressMonitor } from "./progress-monitor";
-
-export type CreateSharedSessionProps = {
-  onClose: () => void;
-  onWebSocketEvent: (event: WebSocketEvent) => void;
-  getInitialAppActions: () => DocAction[];
-};
+import type { OpenAppSessionProps, WebSocketEvent } from "../../qix-types";
+import type { Client, CreateSharedSessionProps, SharedSession } from "../../shared-sessions-manager";
+import { createProgressMonitor } from "../common/progress-monitor";
 
 export function createSharedPhoenixSession(
   props: OpenAppSessionProps,
@@ -22,7 +16,7 @@ export function createSharedPhoenixSession(
         client.onWebSocketEvent(event);
       }
     };
-    const phoenixConnectionPromise = import("./qix-chunk-entrypoint.js").then((module) => {
+    const phoenixConnectionPromise = import("../qix-chunk-entrypoint.js").then((module) => {
       return module.createPhoenixConnectionEntrypoint(props, {
         onWebSocketEvent,
         getInitialAppActions,

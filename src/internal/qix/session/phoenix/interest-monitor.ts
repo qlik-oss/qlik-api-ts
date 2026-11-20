@@ -1,4 +1,4 @@
-import { logEvent } from "./logger";
+import { logEvent } from "../common/logger";
 
 /**
  * Sets up listeners for user activity (mouse movement, document visibility, and window focus) and supplies an api that can be used to know

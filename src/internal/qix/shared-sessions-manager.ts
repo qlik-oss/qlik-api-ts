@@ -3,8 +3,8 @@ import { triggerGlobalWebSocketEventListeners } from "./global-events";
 import { toGlobalAppSessionId } from "./internal/global-app-session.id";
 import type { OpenSessionProps } from "./internal/session-types";
 import { type Doc, type DocAction, type OpenAppSessionProps, type WebSocketEvent } from "./qix-types";
-import { createSharedEnigmaSession } from "./session/shared-sessions";
-import { createSharedPhoenixSession } from "./session/shared-sessions-phoenix";
+import { createSharedEnigmaSession } from "./session/enigma/shared-enigma-session";
+import { createSharedPhoenixSession } from "./session/phoenix/shared-phoenix-session";
 import type { ProgressType, QixProgressEvent } from "./types/progress";
 
 const initialActions: Record<string, DocAction[]> = {};
@@ -17,6 +17,15 @@ export type Client = {
   onWebSocketEvent: (event: WebSocketEvent) => void;
   hasProgressListener: (progressType: ProgressType) => boolean;
   onProgress: (event: QixProgressEvent) => void;
+};
+
+/**
+ * The callbacks the shared sessions manager gives to the enigma and phoenix shared session implementations
+ */
+export type CreateSharedSessionProps = {
+  onClose: () => void;
+  onWebSocketEvent: (event: WebSocketEvent) => void;
+  getInitialAppActions: () => DocAction[];
 };
 
 /**

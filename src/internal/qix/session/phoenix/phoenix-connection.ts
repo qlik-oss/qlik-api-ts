@@ -1,9 +1,9 @@
 /* eslint-disable no-await-in-loop */
 import type { Doc, DocAction, Global, OpenAppSessionProps, ProgressData, WebSocketEvent } from "../../qix-types";
-import type { ProgressMonitor } from "../progress-monitor";
+import type { ProgressMonitor } from "../common/progress-monitor";
 import { createInterestMonitor } from "./interest-monitor";
 import type { JsonRpcCloseEvent } from "./json-rpc-channel";
-import { logEvent } from "./logger";
+import { logEvent } from "../common/logger";
 import { createPhoenixSessionState, type PhoenixSessionState } from "./phoenix-session-state";
 import type { Json, JsonObject, ObjectWithHandle } from "./protocol-types";
 import { createQixConnection, type QixConnection, type QixRequest } from "./qix-connection";

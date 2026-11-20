@@ -1,6 +1,6 @@
 // Close codes of engine (Socket/WebSocket.h) and of engine-proxy (websocket close codes).
 
-import type { OpenSessionProps } from "../internal/session-types";
+import type { OpenSessionProps } from "../../internal/session-types";
 
 // closeCodeEngineTerminating is a WebSocket close code to identify that the engine is in terminating state.
 export const closeCodeEngineTerminating = 4003;

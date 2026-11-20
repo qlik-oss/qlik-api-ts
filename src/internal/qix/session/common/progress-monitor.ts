@@ -1,6 +1,6 @@
-import type { ErrorData, ProgressData, ProgressMessage } from "../qix-types";
-import type { Client } from "../shared-sessions-manager";
-import type { ProgressType, QixProgressError, QixProgressEvent, QixProgressMessage } from "../types/progress";
+import type { ErrorData, ProgressData, ProgressMessage } from "../../qix-types";
+import type { Client } from "../../shared-sessions-manager";
+import type { ProgressType, QixProgressError, QixProgressEvent, QixProgressMessage } from "../../types/progress";
 
 /** Why monitoring of a request stopped, which controls the terminal event delivered to listeners. */
 export type StopMonitoringReason = "done" | "error" | "aborted";

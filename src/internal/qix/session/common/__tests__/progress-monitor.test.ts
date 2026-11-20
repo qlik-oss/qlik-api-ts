@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import type { ProgressData } from "../../qix-types";
-import type { Client } from "../../shared-sessions-manager";
-import type { ProgressType, QixProgressEvent } from "../../types/progress";
+import type { ProgressData } from "../../../qix-types";
+import type { Client } from "../../../shared-sessions-manager";
+import type { ProgressType, QixProgressEvent } from "../../../types/progress";
 import { createProgressMonitor, pollingInterval, type GetProgressFn } from "../progress-monitor";
 
 const inProgressData: ProgressData = {

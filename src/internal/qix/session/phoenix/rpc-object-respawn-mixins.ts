@@ -7,7 +7,7 @@ import type {
   GenericVariableProperties,
   NxInfo,
 } from "../../qix-types";
-import { logEvent } from "./logger";
+import { logEvent } from "../common/logger";
 import type { Json } from "./protocol-types";
 import type { QixConnection } from "./qix-connection";
 import type { PhoenixRpcObject } from "./rpc-object";

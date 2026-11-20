@@ -1,7 +1,7 @@
 import { getWebSocketAuthParams, toValidWebsocketLocationUrl } from "#internal/auth/auth-functions";
 import { exposeInternalApiOnWindow } from "#internal/utils/expose-internal-test-apis";
 import { isNode } from "#internal/utils/utils";
-import type { OpenAppSessionProps } from "../qix-types";
+import type { OpenAppSessionProps } from "../../qix-types";
 import {
   createRequestInterceptorForProgressMonitor,
   createResponseInterceptorForProgressMonitor,
@@ -10,9 +10,9 @@ import {
   somethingWithEmptyMethodsRequestInterceptor,
   somethingWithErrorPopupsResponnseInterceptor,
 } from "./interceptors";
-import { mixins } from "./mixins/index";
-import schema from "./schema/engine-api";
-import type { ProgressMonitor } from "./progress-monitor";
+import { mixins } from "../common/mixins/index";
+import schema from "../common/schema/engine-api";
+import type { ProgressMonitor } from "../common/progress-monitor";
 import { appendQueryToUrl } from "#internal/invoke-fetch/internal/invoke-fetch-helpers";
 
 type createSocketMethod = (socketUrl: string) => WebSocket;

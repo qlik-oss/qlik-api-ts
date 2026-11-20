@@ -1,6 +1,6 @@
 {
   "name": "@qlik/api",
-  "version": "2.25.0",
+  "version": "2.26.0",
   "description": "Exposes functions for interacting with Qlik apis",
   "license": "ISC",
   "repository": {
@@ -144,22 +144,22 @@
     "enigma.js": "^2.15.0",
     "extend": "^3.0.2",
     "lodash-es": "^4.18.1",
-    "ws": "^8.22.1"
+    "ws": "^8.23.0"
   },
   "devDependencies": {
     "@qlik/embed-runtime": "^1.6.10",
     "@qlik/oxfmt-config": "0.2.6",
     "@qlik/oxlint-config": "^0.8.7",
-    "@qlik/runtime-module-loader": "^1.5.3",
+    "@qlik/runtime-module-loader": "^1.5.4",
     "@qlik/tsconfig": "^1.1.0",
     "@types/extend": "^3.0.4",
     "@types/lodash-es": "^4.17.12",
     "@types/ws": "^8.18.2",
     "happy-dom": "^21.0.4",
     "http-server": "^14.1.1",
-    "oxfmt": "0.77.0",
-    "oxlint": "1.92.0",
-    "oxlint-tsgolint": "^7.0.2006",
+    "oxfmt": "0.79.0",
+    "oxlint": "1.94.0",
+    "oxlint-tsgolint": "^7.0.2007",
     "tsdown": "^0.23.7",
     "typescript": "^6.0.3",
     "vitest": "^5.1.0",
@@ -169,5 +169,5 @@
   "engines": {
     "node": ">=20.0.0"
   },
-  "packageManager": "pnpm@12.18.0"
+  "packageManager": "pnpm@12.21.0"
 }
