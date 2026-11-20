@@ -28,6 +28,7 @@ export function getTopicFromAnonHostConfig(hostConfig: HostConfig<"anonymous">):
  * A map from oauth client id to promise of an access token
  */
 const cachedTokens: Record<string, Promise<OAuthData | undefined>> = {};
+let tokenAcquisitionGeneration = 0;
 
 /**
  * Used for testing.
@@ -37,6 +38,11 @@ export function clearAllCachedTokens() {
     delete cachedTokens[key];
   }
 }
+
+export function invalidatePendingOauthTokenAcquisitions() {
+  tokenAcquisitionGeneration += 1;
+}
+
 exposeInternalApiOnWindow("clearAllAccessTokens", () => {
   // eslint-disable-next-line no-console
   console.log("Clearing tokens", cachedTokens);
@@ -170,6 +176,7 @@ async function loadOrAcquireAccessToken(
     return acquireTokens();
   }
 
+  const generation = tokenAcquisitionGeneration;
   cachedTokens[topic] =
     cachedTokens[topic] ||
     (async () => {
@@ -178,6 +185,10 @@ async function loadOrAcquireAccessToken(
         return tokens;
       }
       tokens = await acquireTokens();
+      // Logout may already have cleared storage; don't persist tokens issued after it started.
+      if (globalThis.loggingOut || generation !== tokenAcquisitionGeneration) {
+        return tokens;
+      }
 
       if (accessTokenStorage === "local" && tokens) {
         if (tokens.accessToken) {
@@ -216,6 +227,38 @@ export function clearStoredOauthTokens(hostConfig: HostConfig<"oauth2">) {
   if (isCustomSecretStorage(hostConfig.accessTokenStorage)) {
     void deleteFromCustomSecretStorage(hostConfig.accessTokenStorage, topic, ["access-token", "refresh-token"]);
   }
+}
+
+/**
+ * Clears the stored OAuth tokens of a host config and returns the tokens that were available
+ * in memory, browser storage and custom storage. Failures to read or delete custom storage are ignored.
+ */
+export async function takeStoredOauthTokens(hostConfig: HostConfig<"oauth2">): Promise<OAuthData[]> {
+  const topic = createStorageNamespace(hostConfig);
+  const cached = cachedTokens[topic];
+  // Only use tokens that are already resolved: a pending acquisition may never settle.
+  const sources: Promise<OAuthData | undefined>[] = [
+    cached ? Promise.race([cached, Promise.resolve(undefined)]) : Promise.resolve(undefined),
+  ];
+  if (isBrowser()) {
+    sources.push(loadOauthTokensFromStorage(topic, "local"), loadOauthTokensFromStorage(topic, "session"));
+  }
+  const customStorage = hostConfig.accessTokenStorage;
+  if (isCustomSecretStorage(customStorage)) {
+    sources.push(loadOauthTokensFromStorage(topic, customStorage));
+  }
+  const results = await Promise.allSettled(sources);
+
+  delete cachedTokens[topic];
+  if (isBrowser()) {
+    deleteFromLocalStorage(topic, ["access-token", "refresh-token"]);
+    deleteFromSessionStorage(topic, ["access-token", "refresh-token"]);
+  }
+  if (isCustomSecretStorage(customStorage)) {
+    await Promise.allSettled([deleteFromCustomSecretStorage(customStorage, topic, ["access-token", "refresh-token"])]);
+  }
+
+  return results.flatMap((result) => (result.status === "fulfilled" && result.value ? [result.value] : []));
 }
 
 export function clearStoredAnonymousTokens(hostConfig: HostConfig<"anonymous">) {

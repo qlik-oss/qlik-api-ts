@@ -682,7 +682,7 @@ export type GetKnowledgebaseHttpError = {
 };
 
 /**
- * Updates properties of a specific knowledgebase.
+ * Updates properties of a specific knowledgebase. The `/usePredefinedMetadata` property can only be changed while document metadata filtering is enabled for the tenant.
  *
  * @param id The knowledgebase id.
  * @param body an object with the body content
@@ -1224,7 +1224,7 @@ export type KnowledgebasesAPI = {
    */
   getKnowledgebase: typeof getKnowledgebase;
   /**
-   * Updates properties of a specific knowledgebase.
+   * Updates properties of a specific knowledgebase. The `/usePredefinedMetadata` property can only be changed while document metadata filtering is enabled for the tenant.
    *
    * @param id The knowledgebase id.
    * @param body an object with the body content

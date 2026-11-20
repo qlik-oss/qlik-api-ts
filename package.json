@@ -1,6 +1,6 @@
 {
   "name": "@qlik/api",
-  "version": "2.26.0",
+  "version": "2.27.0",
   "description": "Exposes functions for interacting with Qlik apis",
   "license": "ISC",
   "repository": {
@@ -147,7 +147,7 @@
     "ws": "^8.23.0"
   },
   "devDependencies": {
-    "@qlik/embed-runtime": "^1.6.10",
+    "@qlik/embed-runtime": "^1.6.11",
     "@qlik/oxfmt-config": "0.2.6",
     "@qlik/oxlint-config": "^0.8.7",
     "@qlik/runtime-module-loader": "^1.5.4",
@@ -162,7 +162,7 @@
     "oxlint-tsgolint": "^7.0.2007",
     "tsdown": "^0.23.7",
     "typescript": "^6.0.3",
-    "vitest": "^5.1.0",
+    "vitest": "^5.1.1",
     "vitest-fail-on-console": "^0.10.1",
     "vitest-fetch-mock": "^0.4.5"
   },

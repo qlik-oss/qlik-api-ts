@@ -717,6 +717,7 @@ export type SelectionFilter = {
 export type SelectionStrategy = "failOnErrors" | "ignoreErrorsReturnDetails" | "ignoreErrorsNoDetails";
 
 export type SenseDataTemplate = {
+  /** The app ID. Allowed characters are letters, digits, '.', '_' and '-' (1-128 characters); the values '.' and '..' are rejected. */
   appId: string;
   exportOptions?: ExportDataOptions;
   /** Sense visualization id. Visualizations created "on the fly" are not supported. */
@@ -754,6 +755,7 @@ export type SenseFileTemplate = {
  * Used to export a single visualization as pdf, pptx or png.
  */
 export type SenseImageTemplate = {
+  /** The app ID. Allowed characters are letters, digits, '.', '_' and '-' (1-128 characters); the values '.' and '..' are rejected. */
   appId: string;
   persistentBookmark?: SensePersistentBookmark;
   /** Choose the reloadTimestamp constraint to apply. An empty value leads to the default noCheck. */
@@ -786,6 +788,7 @@ export type SenseSelectionType =
  * Used to export a sheet as pdf or pptx.
  */
 export type SenseSheetTemplate = {
+  /** The app ID. Allowed characters are letters, digits, '.', '_' and '-' (1-128 characters); the values '.' and '..' are rejected. */
   appId: string;
   persistentBookmark?: SensePersistentBookmark;
   /** Choose the reloadTimestamp constraint to apply. An empty value leads to the default noCheck. */

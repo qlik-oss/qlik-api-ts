@@ -194,7 +194,7 @@ importers:
         version: 8.23.0
     devDependencies:
       '@qlik/embed-runtime':
-        specifier: ^1.6.10
+        specifier: ^1.6.11
         version: 1.6.11
       '@qlik/oxfmt-config':
         specifier: 0.2.6
@@ -239,7 +239,7 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
       vitest:
-        specifier: ^5.1.0
+        specifier: ^5.1.1
         version: 5.1.1(@types/node@26.6.6)(happy-dom@21.0.4)(vite@8.3.8(@types/node@26.6.6))
       vitest-fail-on-console:
         specifier: ^0.10.1

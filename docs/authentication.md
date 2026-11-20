@@ -136,6 +136,28 @@ By default, tokens are cached only in memory. In a browser, `accessTokenStorage`
 
 Full-page login also uses session storage to carry the PKCE verifier, state and return URL across redirects, independently of `accessTokenStorage`. The `client-in-progress` entry identifies the storage namespace (client ID, scope and optional subject/user ID); it is not an access token, refresh token or client secret.
 
+To log out in a browser, call `logout` with the host config, or omit it to use the default host config:
+
+```ts
+import { logout } from "@qlik/api/auth";
+
+await logout({ hostConfig });
+```
+
+For OAuth2, `logout` clears the tokens from memory, browser storage and configured custom storage, and revokes them on a best-effort basis. It does not navigate by default, so the application can decide what to show next. Revocation failures are ignored; a token whose revocation failed stays valid on the server until it expires. Tokens acquired before logout started are not stored, and subsequent token acquisitions can proceed normally. Because it does not end the Qlik tenant session, a later authorization may sign the user back in silently while that session is still active.
+
+To also end the Qlik tenant session, opt in to a full-page navigation:
+
+```ts
+await logout({ hostConfig, endTenantSession: true });
+```
+
+The tenant's `/logout` endpoint takes no return URL, so this may take the user away from the integrating application. The option only applies to OAuth2 configurations whose tokens are managed by the library. OAuth2 configurations using `getAccessToken`, as well as other auth types, continue to navigate to the application's own `/logout`.
+
+Custom authentication modules can implement the optional `logout` hook to clear their credentials. Errors from the hook are logged and logout continues.
+
+The tenant's identity provider controls whether its own session ends and where the browser goes after tenant logout. Configure its [post-logout redirect URI](https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/mc-idp-redirect.htm) if needed. Signing out may also affect other applications sharing that session; ending an application session or an identity-provider session is not guaranteed by token revocation alone. Pending requests are not aborted.
+
 ```ts
 type SecretStorage = {
   store: (key: string, value: string) => Promise<void>;

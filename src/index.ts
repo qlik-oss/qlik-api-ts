@@ -868,9 +868,7 @@ const createDataGovernanceDataQualitiesRuntimeAPI = apiDefToApiPublic<DataGovern
           "global-results": {
             "": ["getDataQualityGlobalResults:GQ:"],
             actions: { filter: ["filterDataQualitiesGlobalResults:PBJ:"] },
-            "data-quality-rules": {
-              actions: { filter: ["filterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAME:PQBJ:"] },
-            },
+            "data-quality-rules": { actions: { filter: ["filterDataQualitiesGlobalResultsDataQualityRules:PQBJ:"] } },
           },
         },
       },

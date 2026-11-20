@@ -1,4 +1,5 @@
 import { getPlatform } from "#internal/platform/platform-functions";
+import { isBrowser } from "#internal/utils/utils";
 import { AuthorizationError, InvalidHostConfigError, type AuthError } from "./auth-errors";
 import type {
   AuthModule,
@@ -9,6 +10,7 @@ import type {
   GetWebSocketAuthParamsProps,
   HandleAuthenticationErrorProps,
   HostConfig,
+  LogoutOptions,
   RestCallAuthParams,
   WebResourceAuthParams,
   WebSocketAuthParams,
@@ -39,11 +41,13 @@ import {
   type PageRedirectRequestedListener,
   type PageRedirectStartedListener,
 } from "./internal/page-redirect-request-listeners";
+import { invalidatePendingOauthTokenAcquisitions } from "./internal/default-auth-modules/oauth/storage-helpers";
 
 /**
  * Set initial loggingOut value to false to make sure it has a value before any auth module is loaded
  */
 globalThis.loggingOut = false;
+let activeLogouts = 0;
 
 /* -------------------------------------------------------------------------- */
 /*                            auth module functions                           */
@@ -327,14 +331,44 @@ export function normalizeHostConfig(hostConfig: HostConfig | undefined): HostCon
 }
 
 /**
- * Logs out the user and sets `global.loggingOut` to true.
+ * Clears credentials through the auth module's optional `logout` hook, ignoring failures.
+ * OAuth2 logout does not navigate by default; set `endTenantSession` to also visit the tenant's
+ * `/logout` endpoint. Other auth types and OAuth2 configurations using `getAccessToken` navigate
+ * to the application's `/logout`.
  * **NOTE**: Does not abort pending requests.
  */
-export const logout = (): void => {
+export async function logout({ hostConfig, endTenantSession = false }: LogoutOptions = {}): Promise<void> {
+  const resolved = resolveHostConfig(hostConfig);
   // TODO: Abort pending requests
+  activeLogouts += 1;
   globalThis.loggingOut = true;
-  globalThis.location.href = "/logout";
-};
+  invalidatePendingOauthTokenAcquisitions();
+  let target = "/logout";
+  let shouldNavigate = true;
+  try {
+    const authType = await determineAuthType(resolved);
+    if (authType === "oauth2" && !("getAccessToken" in resolved && resolved.getAccessToken)) {
+      shouldNavigate = endTenantSession;
+      if (shouldNavigate) {
+        target = `${toValidLocationUrl(resolved)}/logout`;
+      }
+    }
+    const authModule = await getAuthModule(resolved);
+    await authModule.logout?.({ hostConfig: resolved });
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.warn("Logout cleanup failed", err);
+  } finally {
+    const shouldRedirect = shouldNavigate && isBrowser();
+    activeLogouts -= 1;
+    if (activeLogouts === 0 && !shouldRedirect) {
+      globalThis.loggingOut = false;
+    }
+    if (shouldRedirect) {
+      globalThis.location.href = target;
+    }
+  }
+}
 
 /* -------------------------------------------------------------------------- */
 /*                                   private                                  */

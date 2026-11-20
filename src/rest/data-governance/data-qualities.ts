@@ -26,18 +26,28 @@ export type AggregatedQualityMetrics = {
   valid: number;
 };
 
+/**
+ * Request to assign types and/or `emptyValidity` to fields, and/or set the dataset-level default `emptyValidity`.
+ */
 export type AssignTypeListRequest = {
   /** The ID of the dataset */
   datasetId: DatasetIdType;
+  /** Policy applied to an empty (null/blank) cell when computing a field's combined quality. */
+  emptyValidity?: EmptyValidity;
   /** List of fields to update with their assigned types. */
   fields: AssignTypeRequest[];
 };
 
+/**
+ * At least one of `type` / `emptyValidity` must be set per item. Both may be set together.
+ */
 export type AssignTypeRequest = {
+  /** Policy applied to an empty (null/blank) cell when computing a field's combined quality. */
+  emptyValidity?: EmptyValidity;
   /** The name of the field. */
   name: string;
   /** Information about the type of the field. */
-  type: FieldInformation;
+  type?: FieldInformation;
 };
 
 /**
@@ -201,6 +211,13 @@ export type DatasetQualityGlobalResultsResponse = {
   datasetId: string;
   qualities: QualitiesGlobalResultsResponse[];
 };
+
+/**
+ * Policy applied to an empty (null/blank) cell when computing a field's combined quality.
+ * @example
+ * "EMPTY"
+ */
+export type EmptyValidity = "VALID" | "INVALID" | "EMPTY";
 
 /**
  * An individual error detail.
@@ -630,9 +647,10 @@ export type FilterDataQualitiesFieldQualitiesHttpError = {
 };
 
 /**
- * Assigns a standard or semantic type to one or more fields in a dataset. This is a partial update:
- * only the fields included in the request are modified; any field not included in the request keeps
- * its current assigned structure unchanged.
+ * Assigns a standard or semantic type, an `emptyValidity` policy, or both, to one or more fields in a
+ * dataset, and/or sets the dataset-level default `emptyValidity`. This is a partial update: only the
+ * fields and properties included in the request are modified; anything not included keeps its
+ * current value unchanged.
  *
  * @param body an object with the body content
  * @throws PutDataQualitiesFieldsStructuresHttpError
@@ -749,9 +767,9 @@ export type FilterDataQualitiesGlobalResultsHttpError = {
  *
  * @param query an object with query parameters
  * @param body an object with the body content
- * @throws FilterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAMEHttpError
+ * @throws FilterDataQualitiesGlobalResultsDataQualityRulesHttpError
  */
-export async function filterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAME(
+export async function filterDataQualitiesGlobalResultsDataQualityRules(
   query: {
     /** Maximum number of datasets to return in the `ruleQualities` page. */
     limit?: number;
@@ -762,7 +780,7 @@ export async function filterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_
   },
   body: RuleQualityAggregationRequest,
   options?: ApiCallOptions,
-): Promise<FilterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAMEHttpResponse> {
+): Promise<FilterDataQualitiesGlobalResultsDataQualityRulesHttpResponse> {
   return invokeFetch("data-governance/data-qualities", {
     method: "post",
     pathTemplate: "/api/data-governance/data-qualities/global-results/data-quality-rules/actions/filter",
@@ -773,13 +791,13 @@ export async function filterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_
   });
 }
 
-export type FilterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAMEHttpResponse = {
+export type FilterDataQualitiesGlobalResultsDataQualityRulesHttpResponse = {
   data: RuleQualityAggregationResponse;
   headers: Headers;
   status: 200;
 };
 
-export type FilterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAMEHttpError = {
+export type FilterDataQualitiesGlobalResultsDataQualityRulesHttpError = {
   data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 500 | 503;
@@ -836,9 +854,10 @@ export type DataQualitiesAPI = {
    */
   filterDataQualitiesFieldQualities: typeof filterDataQualitiesFieldQualities;
   /**
-   * Assigns a standard or semantic type to one or more fields in a dataset. This is a partial update:
-   * only the fields included in the request are modified; any field not included in the request keeps
-   * its current assigned structure unchanged.
+   * Assigns a standard or semantic type, an `emptyValidity` policy, or both, to one or more fields in a
+   * dataset, and/or sets the dataset-level default `emptyValidity`. This is a partial update: only the
+   * fields and properties included in the request are modified; anything not included keeps its
+   * current value unchanged.
    *
    * @param body an object with the body content
    * @throws PutDataQualitiesFieldsStructuresHttpError
@@ -879,9 +898,9 @@ export type DataQualitiesAPI = {
    *
    * @param query an object with query parameters
    * @param body an object with the body content
-   * @throws FilterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAMEHttpError
+   * @throws FilterDataQualitiesGlobalResultsDataQualityRulesHttpError
    */
-  filterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAME: typeof filterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAME;
+  filterDataQualitiesGlobalResultsDataQualityRules: typeof filterDataQualitiesGlobalResultsDataQualityRules;
   /**
    * Clears the cache for data-qualities api requests.
    */
@@ -899,7 +918,7 @@ const dataQualitiesExport: DataQualitiesAPI = {
   putDataQualitiesFieldsStructures,
   getDataQualityGlobalResults,
   filterDataQualitiesGlobalResults,
-  filterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAME,
+  filterDataQualitiesGlobalResultsDataQualityRules,
   clearCache,
 };
 export default dataQualitiesExport;

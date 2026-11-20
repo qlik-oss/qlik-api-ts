@@ -1,5 +1,23 @@
 # @qlik/api
 
+## 2.27.0
+
+### Minor Changes
+
+- Rename `filterDataQualitiesGlobalResultsDataQualityRules_FIX_THIS_QUIRKY_NAME` in `dataQualities` to `filterDataQualitiesGlobalResultsDataQualityRules`, and its `HttpResponse` and `HttpError` types to match.
+
+- Update from the latest API specs
+
+- Update from the latest API specs
+
+- OAuth2 `logout` now clears stored tokens and revokes them on a best-effort basis without navigating by default. Set `endTenantSession: true` to navigate to the tenant's `/logout` endpoint. Auth modules can implement an optional `logout` hook.
+
+- Update from the latest API specs
+
+### Patch Changes
+
+- Update dependencies
+
 ## 2.26.0
 
 ### Minor Changes

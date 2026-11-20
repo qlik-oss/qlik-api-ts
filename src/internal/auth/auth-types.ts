@@ -121,6 +121,9 @@ export type AuthModule<A extends AuthType = AuthType> = {
   /** Callback for when auth error happens */
   handleAuthenticationError: (props: HandleAuthenticationErrorProps<A>) => Promise<AuthenticationErrorAction>;
 
+  /** Clears and optionally revokes credentials when `logout` is called. Failures are ignored and logout proceeds. */
+  logout?: (props: { hostConfig: HostConfig<A> }) => Promise<void>;
+
   /** Runtime check for validating host config */
   validateHostConfig?: (hostConfig: Record<string, unknown>) => boolean;
 };
@@ -132,6 +135,17 @@ export type AuthType = keyof QlikAuthModules;
 export type HostConfig<A extends AuthType = AuthType> = {
   [K in keyof QlikAuthModules]: QlikAuthModuleConfigUnion<K> & HostConfigCommon;
 }[A];
+
+/** Options for logging out of an authentication session. */
+export type LogoutOptions = {
+  /** Host configuration to log out; defaults to the default host configuration. */
+  hostConfig?: HostConfig;
+  /**
+   * Also navigate to the Qlik tenant's logout endpoint for OAuth2 configurations managed by
+   * this library. This ends the tenant session and may sign the user out of other applications.
+   */
+  endTenantSession?: boolean;
+};
 
 /* -------------------------------------------------------------------------- */
 /*                                   private                                  */

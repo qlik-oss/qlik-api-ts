@@ -94,8 +94,11 @@ export interface AuthAPI {
   isWindows: typeof isWindows;
 
   /**
-   * Logs out the user and sets `global.loggingOut` to true.
-   * **NOTE**: Does not abort pending requests.
+   * Clears credentials through the auth module's optional logout hook. For OAuth2, set
+   * `endTenantSession` to navigate to the tenant's logout endpoint; otherwise logout stays on the
+   * current page. Other auth types and OAuth2 configurations using `getAccessToken` navigate to
+   * `/logout`.
+   * Does not abort pending requests.
    */
   logout: typeof logout;
 

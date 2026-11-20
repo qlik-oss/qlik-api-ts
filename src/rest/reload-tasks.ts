@@ -230,7 +230,7 @@ export type DeleteReloadTaskHttpResponse = {
 export type DeleteReloadTaskHttpError = {
   data: Errors;
   headers: Headers;
-  status: 400 | 401 | 403 | 404 | 410 | 500;
+  status: 400 | 401 | 403 | 404 | 500;
 };
 
 /**
@@ -295,7 +295,7 @@ export type UpdateReloadTaskHttpResponse = {
 export type UpdateReloadTaskHttpError = {
   data: Errors;
   headers: Headers;
-  status: 400 | 401 | 403 | 404 | 410 | 500 | 503;
+  status: 400 | 401 | 403 | 404 | 500 | 503;
 };
 
 /**

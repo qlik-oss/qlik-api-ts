@@ -555,7 +555,7 @@ export type TaskMetadata = {
   createdBy?: string;
   /** The UTC timestamp when the task was deleted. */
   readonly deletedAt?: string;
-  /** The reason the task is currently disabled. `SCHEDULE-EXPIRED` is reserved for tasks migrated from a legacy reload-task whose schedule had already ended; it is stripped when supplied on create or update. */
+  /** The reason the task is currently disabled. `SCHEDULE-EXPIRED` and `AAO-NOT-ELIGIBLE` are reserved for tasks migrated from a legacy reload-task: `SCHEDULE-EXPIRED` when its schedule had already ended, `AAO-NOT-ELIGIBLE` when none of the app's datasets can trigger a reload on update. They are stripped when supplied on create or update. */
   disabledCode?:
     | "MANUALLY"
     | "CONSECUTIVE-FAILURES"
@@ -564,7 +564,8 @@ export type TaskMetadata = {
     | "OWNER-DISABLED"
     | "APP-MOVED-SPACE"
     | "OWNER-MOVED"
-    | "SCHEDULE-EXPIRED";
+    | "SCHEDULE-EXPIRED"
+    | "AAO-NOT-ELIGIBLE";
   /** The unique identifier of the legacy reload task this task was migrated from, if applicable. */
   migratedFrom?: string;
   orchestration?: OrchMeta;

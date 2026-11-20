@@ -244,7 +244,7 @@ export type DataTaskInstanceState = {
   message?: string;
   /** Timestamp indicating when the task instance started */
   startTime?: string;
-  state?: "STARTING" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELED" | "STOPPING";
+  state?: "STARTING" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELED" | "STOPPING" | "DISCONNECTED";
   /** Real-time streaming statistics for tasks that continuously process data streams. */
   streaming?: {
     /** Number of streaming datasets that have encountered errors */

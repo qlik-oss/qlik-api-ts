@@ -8,7 +8,7 @@
  */
 
 // Version of the schema used to generate the enigma.go QIX API
-export const QIX_SCHEMA_VERSION = "12.3002.0";
+export const QIX_SCHEMA_VERSION = "12.3015.0";
 
 export type AlfaNumString = {
   /**

@@ -13,7 +13,12 @@ import type {
 import { isBrowser, isNode } from "#internal/utils/utils";
 import { requestRedirect } from "../page-redirect-request-listeners";
 import { handleOAuthCallback } from "./oauth/callback";
-import { getOAuthAccessToken, refreshAccessToken, startFullPageLoginFlow } from "./oauth/oauth-utils";
+import {
+  clearAndRevokeOAuthTokens,
+  getOAuthAccessToken,
+  refreshAccessToken,
+  startFullPageLoginFlow,
+} from "./oauth/oauth-utils";
 import { clearStoredOauthTokens } from "./oauth/storage-helpers";
 import { exchangeAccessTokenForTemporaryToken } from "./oauth/temporary-token";
 
@@ -148,4 +153,5 @@ export default {
   getWebSocketAuthParams,
   getWebResourceAuthParams,
   handleAuthenticationError,
+  logout: ({ hostConfig }) => clearAndRevokeOAuthTokens(hostConfig),
 } satisfies AuthModule<"oauth2">;

@@ -12,6 +12,7 @@ import {
   loadCachedOauthTokens,
   loadOrAcquireAccessTokenOauth,
   saveInSessionStorage,
+  takeStoredOauthTokens,
 } from "./storage-helpers";
 
 export type OAuthData = {
@@ -448,6 +449,42 @@ export async function getOAuthAccessToken(hostConfig: HostConfig<"oauth2">): Pro
     });
   }
   return lastOauthTokensCall;
+}
+
+const revocationTimeoutMs = 5000;
+
+/**
+ * Clears the stored OAuth tokens and then revokes them on a best-effort basis: failed or timed out
+ * revocations are ignored, leaving those tokens valid on the server until they expire.
+ */
+export async function clearAndRevokeOAuthTokens(hostConfig: HostConfig<"oauth2">): Promise<void> {
+  const tokenSets = await takeStoredOauthTokens(hostConfig);
+  const tokens = new Map<string, "access_token" | "refresh_token">();
+  for (const { accessToken, refreshToken } of tokenSets) {
+    if (refreshToken) {
+      tokens.set(refreshToken, "refresh_token");
+    }
+    if (accessToken && !tokens.has(accessToken)) {
+      tokens.set(accessToken, "access_token");
+    }
+  }
+  const revokeUrl = `${toValidLocationUrl(hostConfig)}/oauth/revoke`;
+  await Promise.allSettled(
+    [...tokens].map(([token, hint]) =>
+      fetch(revokeUrl, {
+        method: "POST",
+        credentials: "omit",
+        keepalive: true,
+        signal: AbortSignal.timeout(revocationTimeoutMs),
+        headers: { "content-type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          token,
+          token_type_hint: hint,
+          ...(hostConfig.clientId ? { client_id: hostConfig.clientId } : {}),
+        }),
+      }),
+    ),
+  );
 }
 
 export async function refreshAccessToken(hostConfig: HostConfig<"oauth2">): Promise<void> {

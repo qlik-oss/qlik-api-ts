@@ -321,7 +321,7 @@ describe("invokeFetch function", () => {
 
   it("should not cause a redirect on 401 if user has logged out", () =>
     new Promise<void>((resolve) => {
-      logout();
+      void logout();
       fetchMock.mockOnce("redirect me", { status: 401 });
       void invokeFetch<InvokeFetchResponse>(apiNamespace, {
         method: "get",

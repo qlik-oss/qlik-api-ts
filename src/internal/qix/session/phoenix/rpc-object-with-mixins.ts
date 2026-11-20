@@ -13,6 +13,7 @@ export class PhoenixRpcObjectWithMixinsImpl
   extends EventEmitterForwarder<"changed" | "closed" | "traffic:sent" | "traffic:received" | "traffic:*">
   implements PhoenixRpcObject
 {
+  // oxlint-disable-next-line @qmfe-api/naming-convention -- public property, renaming it would break callers
   __original_rpc_object: PhoenixRpcObject;
   #classicSessionWithMixins: RpcObjectSession | undefined;
   #mixins: Mixin[];

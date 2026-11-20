@@ -112,8 +112,6 @@ export type DataStoreInfo = {
 export type Error = {
   code?: string;
   detail?: string;
-  /** Optional free-form metadata associated with the error. */
-  meta?: unknown;
   status?: string;
   title?: string;
 };
@@ -121,6 +119,8 @@ export type Error = {
 export type ErrorCopy = {
   code?: string;
   detail?: string;
+  /** Optional free-form metadata associated with the error. */
+  meta?: unknown;
   status?: string;
   title?: string;
 };
@@ -343,7 +343,7 @@ export type DeleteDataSetsHttpResponse = {
 };
 
 export type DeleteDataSetsHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
 };
@@ -371,7 +371,7 @@ export type CreateDataSetHttpResponse = {
 };
 
 export type CreateDataSetHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
 };
@@ -407,7 +407,7 @@ export type GetDataSetHttpResponse = {
 };
 
 export type GetDataSetHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
 };
@@ -447,7 +447,7 @@ export type PatchDataSetHttpResponse = {
 };
 
 export type PatchDataSetHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
 };
@@ -487,7 +487,7 @@ export type UpdateDataSetHttpResponse = {
 };
 
 export type UpdateDataSetHttpError = {
-  data: ErrorResponse;
+  data: ErrorResponseCopy;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
 };
@@ -531,7 +531,7 @@ export type GetDataSetProfilesHttpResponse = {
 };
 
 export type GetDataSetProfilesHttpError = {
-  data: ErrorResponseCopy;
+  data: ErrorResponse;
   headers: Headers;
   status: 400 | 401 | 403 | 404 | 409 | 500 | 503;
 };

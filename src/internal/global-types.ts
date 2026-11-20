@@ -161,6 +161,7 @@ declare global {
    * Attaching cache to the window so it can be viewed from the devtool.
    * Do not use this for anything!
    */
+  // oxlint-disable-next-line @qmfe-api/naming-convention -- the double underscores make it stand out in the devtools
   var __API_CACHE__DO_NOT_USE_OR_YOU_WILL_BE_FIRED: Record<string, Record<string, CacheEntry> | undefined>;
 
   /**

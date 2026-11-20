@@ -82,6 +82,8 @@ export type Extension = {
   qextFilename?: string;
   /** The version from the qext file that was uploaded with this extension. */
   qextVersion?: string;
+  /** Application ID provided by Qlik, read from the qlikApplicationId property of the QEXT file. Used to attribute extension usage in telemetry. */
+  qlikApplicationId?: string;
   /** Link to the extension source code. */
   repository?: string;
   /** If the extension is a supernova extension or not. */

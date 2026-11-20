@@ -244,6 +244,8 @@ export type WebhookResponseBase = {
 /* -------------------------------------------------------------------------- */
 
 /**
+ * @deprecated
+ *
  * Retrieves all webhooks entries for a tenant that the user has access to. Users assigned the `TenantAdmin` role can retrieve all webhooks. A user can have up to 150 webhooks at one time.
  *
  * @param query an object with query parameters
@@ -315,6 +317,8 @@ export type GetWebhooksHttpError = {
 };
 
 /**
+ * @deprecated
+ *
  * Creates a new webhook. User must be assigned the `TenantAdmin` role to create `tenant` level webhooks.
  *
  * @param body an object with the body content
@@ -343,6 +347,8 @@ export type CreateWebhookHttpError = {
 };
 
 /**
+ * @deprecated
+ *
  * Lists event-types that are possible to subscribe to.
  *
  * @throws GetWebhookEventTypesHttpError
@@ -368,6 +374,8 @@ export type GetWebhookEventTypesHttpError = {
 };
 
 /**
+ * @deprecated
+ *
  * Deletes a specific webhook.
  *
  * @param id The webhook's unique identifier.
@@ -395,6 +403,8 @@ export type DeleteWebhookHttpError = {
 };
 
 /**
+ * @deprecated
+ *
  * Returns details for a specific webhook.
  *
  * @param id The webhook's unique identifier.
@@ -422,6 +432,8 @@ export type GetWebhookHttpError = {
 };
 
 /**
+ * @deprecated
+ *
  * Patches a webhook to update one or more properties.
  *
  * @param id The webhook's unique identifier.
@@ -456,6 +468,8 @@ export type PatchWebhookHttpError = {
 };
 
 /**
+ * @deprecated
+ *
  * Updates a webhook, any omitted fields will be cleared, returns updated webhook.
  *
  * @param id The webhook's unique identifier.
@@ -490,6 +504,8 @@ export type UpdateWebhookHttpError = {
 };
 
 /**
+ * @deprecated
+ *
  * Returns deliveries for a specific webhook. Delivery history is stored for 1 week.
  *
  * @param id The webhook's unique identifier.
@@ -538,6 +554,8 @@ export type GetWebhookDeliveriesHttpError = {
 };
 
 /**
+ * @deprecated
+ *
  * Returns details for a specific delivery.
  *
  * @param id The webhook's unique identifier.
@@ -570,6 +588,8 @@ export type GetWebhookDeliveryHttpError = {
 };
 
 /**
+ * @deprecated
+ *
  * Resends the delivery with the same payload.
  *
  * @param id The webhook's unique identifier.
@@ -614,6 +634,8 @@ export function clearCache() {
 
 export type WebhooksAPI = {
   /**
+   * @deprecated
+   *
    * Retrieves all webhooks entries for a tenant that the user has access to. Users assigned the `TenantAdmin` role can retrieve all webhooks. A user can have up to 150 webhooks at one time.
    *
    * @param query an object with query parameters
@@ -621,6 +643,8 @@ export type WebhooksAPI = {
    */
   getWebhooks: typeof getWebhooks;
   /**
+   * @deprecated
+   *
    * Creates a new webhook. User must be assigned the `TenantAdmin` role to create `tenant` level webhooks.
    *
    * @param body an object with the body content
@@ -628,12 +652,16 @@ export type WebhooksAPI = {
    */
   createWebhook: typeof createWebhook;
   /**
+   * @deprecated
+   *
    * Lists event-types that are possible to subscribe to.
    *
    * @throws GetWebhookEventTypesHttpError
    */
   getWebhookEventTypes: typeof getWebhookEventTypes;
   /**
+   * @deprecated
+   *
    * Deletes a specific webhook.
    *
    * @param id The webhook's unique identifier.
@@ -641,6 +669,8 @@ export type WebhooksAPI = {
    */
   deleteWebhook: typeof deleteWebhook;
   /**
+   * @deprecated
+   *
    * Returns details for a specific webhook.
    *
    * @param id The webhook's unique identifier.
@@ -648,6 +678,8 @@ export type WebhooksAPI = {
    */
   getWebhook: typeof getWebhook;
   /**
+   * @deprecated
+   *
    * Patches a webhook to update one or more properties.
    *
    * @param id The webhook's unique identifier.
@@ -656,6 +688,8 @@ export type WebhooksAPI = {
    */
   patchWebhook: typeof patchWebhook;
   /**
+   * @deprecated
+   *
    * Updates a webhook, any omitted fields will be cleared, returns updated webhook.
    *
    * @param id The webhook's unique identifier.
@@ -664,6 +698,8 @@ export type WebhooksAPI = {
    */
   updateWebhook: typeof updateWebhook;
   /**
+   * @deprecated
+   *
    * Returns deliveries for a specific webhook. Delivery history is stored for 1 week.
    *
    * @param id The webhook's unique identifier.
@@ -672,6 +708,8 @@ export type WebhooksAPI = {
    */
   getWebhookDeliveries: typeof getWebhookDeliveries;
   /**
+   * @deprecated
+   *
    * Returns details for a specific delivery.
    *
    * @param id The webhook's unique identifier.
@@ -680,6 +718,8 @@ export type WebhooksAPI = {
    */
   getWebhookDelivery: typeof getWebhookDelivery;
   /**
+   * @deprecated
+   *
    * Resends the delivery with the same payload.
    *
    * @param id The webhook's unique identifier.
