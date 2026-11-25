@@ -8,7 +8,7 @@
  */
 
 // Version of the schema used to generate the enigma.go QIX API
-export const QIX_SCHEMA_VERSION = "12.3015.0";
+export const QIX_SCHEMA_VERSION = "12.3021.0";
 
 export type AlfaNumString = {
   /**
@@ -12124,7 +12124,7 @@ export type NativeGenericDimensionFunctions = {
    * Get a cyclic dimension's active field.
    * <div class=tip>This operation is only possible for cyclic dimensions.</div>
    *
-   * Stability: *experimental*
+   * Stability: *locked*
    */
   getActiveField: () => Promise<number>;
 
@@ -12183,7 +12183,7 @@ export type NativeGenericDimensionFunctions = {
    *
    * - `ix`   -   Index of the new active field.
    *
-   * Stability: *experimental*
+   * Stability: *locked*
    */
   setActiveField: (ix: number) => Promise<void>;
 
@@ -12206,7 +12206,7 @@ export type NativeGenericDimensionFunctions = {
    *
    * - `step`   -   The number of steps made through the dimension. Positive values step forward and negative values step backward.
    *
-   * Stability: *experimental*
+   * Stability: *locked*
    */
   stepCycle: (step: number) => Promise<void>;
 
@@ -13519,7 +13519,7 @@ export type NativeGenericObjectFunctions<CustomProperties, CustomLayout, Generic
    * The default value is 0.
    * - `newIndex`   -   Index of the field to jump to.
    *
-   * Stability: *experimental*
+   * Stability: *locked*
    */
   setActiveField: (path: string, dimNo: number, newIndex: number) => Promise<void>;
 
@@ -13593,7 +13593,7 @@ export type NativeGenericObjectFunctions<CustomProperties, CustomLayout, Generic
    * - `nbrSteps`   -   Number of steps you want to cycle.
    * Positive values cycle forwards while negative values cycle backwards. A value of 0 leads to no action being taken.
    *
-   * Stability: *experimental*
+   * Stability: *locked*
    */
   stepCycle: (path: string, dimNo: number, nbrSteps: number) => Promise<void>;
 

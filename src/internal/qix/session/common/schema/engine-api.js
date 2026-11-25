@@ -15805,6 +15805,21 @@ export default {
         ],
       },
     },
+    AnalyticsRest: {
+      ReadScriptLog: {
+        In: [
+          {
+            Name: "qappId",
+            DefaultValue: "",
+          },
+          {
+            Name: "qreloadId",
+            DefaultValue: "",
+          },
+        ],
+        Out: [],
+      },
+    },
   },
   enums: {
     LocalizedMessageCode: {

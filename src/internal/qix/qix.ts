@@ -6,6 +6,8 @@
 import type { HostConfig } from "#internal/auth/auth-types";
 import {
   addInitialAppAction,
+  createAppHook,
+  createScopedAppHook,
   createSessionApp,
   onCombinedWebSocketStateChange,
   onWebSocketEvent,
@@ -26,6 +28,7 @@ export type * from "./qix-types";
 // Export these methods on QixAPI as named exports from qix-functions.ts
 export {
   addInitialAppAction,
+  createAppHook,
   createSessionApp,
   onCombinedWebSocketStateChange,
   onWebSocketEvent,
@@ -60,8 +63,14 @@ export interface QixAPI {
    */
   registerExternalAppSession: typeof registerExternalAppSession;
   /**
-   * Factory for getting a react hook that returns the `Doc` of an app based on the supplied app id
+   * Factory for getting a react hook that returns the `Doc` of an app based on the supplied app id.
+   * This is a factory, not a hook: call it once at module level, outside of any component.
    * @param react A react like object containing the native react hooks needed by the hook implementation
+   */
+  createAppHook: typeof createAppHook;
+  /**
+   * @deprecated Renamed to `createAppHook`. This is a factory, not a React hook, so the `use` prefix made
+   * the rules-of-hooks lint rules wrongly apply to it. Behaves identically to `createAppHook`.
    */
   useAppHook: typeof useAppHook;
   /**
@@ -108,6 +117,7 @@ const qix: QixAPI & { withHostConfig: (hostConfig: HostConfig | undefined) => Qi
   createSessionApp,
   openAppSession,
   registerExternalAppSession,
+  createAppHook,
   useAppHook,
   onWebSocketEvent,
   onCombinedWebSocketStateChange,
@@ -130,7 +140,8 @@ const qix: QixAPI & { withHostConfig: (hostConfig: HostConfig | undefined) => Qi
       ),
 
     registerExternalAppSession,
-    useAppHook,
+    createAppHook: (react) => createScopedAppHook(react, hostConfig),
+    useAppHook: (react) => createScopedAppHook(react, hostConfig),
     onWebSocketEvent,
     onCombinedWebSocketStateChange,
     resumeSuspendedSessions,

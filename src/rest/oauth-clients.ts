@@ -28,12 +28,16 @@ export type ClientSecrets = {
  * Response schema for reading a connection config
  */
 export type ConnectionConfigReadResponse = {
+  /** Overrides the OAuth client's access token lifetime in seconds for this connection. Only supported for CIMD clients. */
+  readonly accessTokenDuration?: number;
   /** Consent method */
   readonly consentMethod: string;
   /** OAuth client has been deleted by owning tenant, only applies for published clients. */
   readonly deletedByOwner?: boolean;
   /** Hash of the CIMD security fields captured when the connection was approved. */
   readonly hashedCIMDSecurityFields?: string;
+  /** Overrides the OAuth client's refresh token lifetime in seconds for this connection. Only supported for CIMD clients. */
+  readonly refreshTokenDuration?: number;
   /** Status */
   readonly status?: string;
 };
@@ -142,6 +146,8 @@ export type OAuthClientAdminReadResponse = {
  * Base schema for OAuth client requests and responses
  */
 export type OAuthClientBase = {
+  /** Effective access token lifetime in seconds - the configured value, or the default when not configured. */
+  accessTokenDuration?: number;
   /** List of allowed authentication methods for the client */
   allowedAuthMethods?: ("client_secret" | "private_key_jwt")[];
   /** Allowed grant types, only for use with appType: 'web' */
@@ -188,6 +194,8 @@ export type OAuthClientBase = {
   publicKeys?: JWK[];
   /** The timestamp which is set, if the client is published. */
   publishedAt?: string;
+  /** Effective refresh token lifetime in seconds - the configured value, or the default when not configured. */
+  refreshTokenDuration?: number;
   /** The timestamp for when the oauth-clients record was updated. */
   updatedAt?: string;
 };

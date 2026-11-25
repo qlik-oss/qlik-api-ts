@@ -13,6 +13,7 @@ import odagApps from "./analytics/odag-apps";
 import odagLinks from "./analytics/odag-links";
 import odagRequests from "./analytics/odag-requests";
 import odagSettings from "./analytics/odag-settings";
+import reloads from "./analytics/reloads";
 
 /* -------------------------------------------------------------------------- */
 /*                              Submodule exports                             */
@@ -25,6 +26,7 @@ export * as odagApps from "./analytics/odag-apps";
 export * as odagLinks from "./analytics/odag-links";
 export * as odagRequests from "./analytics/odag-requests";
 export * as odagSettings from "./analytics/odag-settings";
+export * as reloads from "./analytics/reloads";
 
 /* -------------------------------------------------------------------------- */
 /*                             Default export api                             */
@@ -44,5 +46,6 @@ const analyticsExport: AnalyticsAPI & {
   odagLinks: typeof odagLinks;
   odagRequests: typeof odagRequests;
   odagSettings: typeof odagSettings;
-} = { apps, changeStores, discoveryAgent, odagApps, odagLinks, odagRequests, odagSettings };
+  reloads: typeof reloads;
+} = { apps, changeStores, discoveryAgent, odagApps, odagLinks, odagRequests, odagSettings, reloads };
 export default analyticsExport;

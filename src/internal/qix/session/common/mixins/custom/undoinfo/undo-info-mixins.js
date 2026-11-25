@@ -51,7 +51,7 @@ export default {
               );
             }
             if (layout.markers.length % 2 !== 0) {
-              // Undo count on the backend is 0, but we have uneven markers. This can happen when the limit of undo operations has been reached (QLIK-67418)
+              // Undo count on the backend is 0, but we have uneven markers. This can happen when the limit of undo operations has been reached.
               state.isUndoLimitReached = true;
             }
 

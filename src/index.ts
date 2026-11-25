@@ -21,6 +21,7 @@ import type { OdagAppsAPI as AnalyticsOdagAppsAPI } from "./rest/analytics/odag-
 import type { OdagLinksAPI as AnalyticsOdagLinksAPI } from "./rest/analytics/odag-links";
 import type { OdagRequestsAPI as AnalyticsOdagRequestsAPI } from "./rest/analytics/odag-requests";
 import type { OdagSettingsAPI as AnalyticsOdagSettingsAPI } from "./rest/analytics/odag-settings";
+import type { ReloadsAPI as AnalyticsReloadsAPI } from "./rest/analytics/reloads";
 import type { ApiKeysAPI } from "./rest/api-keys";
 import type { AppsAPI } from "./rest/apps";
 import type { AssistantsAPI } from "./rest/assistants";
@@ -219,6 +220,16 @@ const createAnalyticsOdagSettingsRuntimeAPI = apiDefToApiPublic<AnalyticsOdagSet
     },
   },
 });
+const createAnalyticsReloadsRuntimeAPI = apiDefToApiPublic<AnalyticsReloadsAPI>("analytics/reloads", {
+  api: {
+    analytics: {
+      reloads: {
+        "": ["getReloads:GQ:", "createReload:PBJ:"],
+        "{reloadId}": { "": ["getReload:G:"], actions: { cancel: ["cancelReload:P:"] } },
+      },
+    },
+  },
+});
 const createAnalyticsRuntimeAPI = apiDefToApiPublic<
   AnalyticsAPI & {
     apps: AnalyticsAppsAPI;
@@ -228,6 +239,7 @@ const createAnalyticsRuntimeAPI = apiDefToApiPublic<
     odagLinks: AnalyticsOdagLinksAPI;
     odagRequests: AnalyticsOdagRequestsAPI;
     odagSettings: AnalyticsOdagSettingsAPI;
+    reloads: AnalyticsReloadsAPI;
   }
 >(
   "analytics",
@@ -246,6 +258,7 @@ const createAnalyticsRuntimeAPI = apiDefToApiPublic<
     odagRequests: createAnalyticsOdagRequestsRuntimeAPI,
     "odag-settings": createAnalyticsOdagSettingsRuntimeAPI,
     odagSettings: createAnalyticsOdagSettingsRuntimeAPI,
+    reloads: createAnalyticsReloadsRuntimeAPI,
   },
 );
 const createApiKeysRuntimeAPI = apiDefToApiPublic<ApiKeysAPI>("api-keys", {
@@ -1864,6 +1877,7 @@ export interface QlikAPI {
     odagLinks: AnalyticsOdagLinksAPI;
     odagRequests: AnalyticsOdagRequestsAPI;
     odagSettings: AnalyticsOdagSettingsAPI;
+    reloads: AnalyticsReloadsAPI;
   };
   /** Functions for the apiKeys api */
   apiKeys: ApiKeysAPI;

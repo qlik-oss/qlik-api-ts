@@ -90,15 +90,15 @@ export async function createInteractiveLoginUrl(
   state: string,
   verifier: string,
 ): Promise<string> {
-  const clientId = hostConfig.clientId || "";
+  const { clientId, scope } = hostConfig;
   const locationUrl = toValidLocationUrl(hostConfig);
   const codeChallenge = await sha256(verifier);
 
   const queryParams = {
     response_type: "code",
-    client_id: clientId,
+    client_id: clientId || "",
     redirect_uri: redirectUri,
-    scope: hostConfig.scope || "user_default",
+    ...(scope ? { scope } : {}),
     state,
     code_challenge: codeChallenge,
     code_challenge_method: "S256",
@@ -108,14 +108,13 @@ export async function createInteractiveLoginUrl(
 }
 
 export async function startFullPageLoginFlow(hostConfig: HostConfig<"oauth2">): Promise<void> {
-  const clientId = hostConfig.clientId || "";
-  const locationUrl = toValidLocationUrl(hostConfig);
   const verifier = generateRandomString(128);
   const state = generateRandomString(43);
-  const codeChallenge = await sha256(verifier);
   const redirectUri = hostConfig.redirectUri || globalThis.location.href;
   const topic = createStorageNamespace(hostConfig);
+  const url = await createInteractiveLoginUrl(hostConfig, redirectUri, state, verifier);
 
+  // No await from here on: a concurrent login must not overwrite the state and verifier before this redirect.
   clearStoredOauthTokens(hostConfig);
 
   saveInSessionStorage(topic, "state", state);
@@ -123,17 +122,6 @@ export async function startFullPageLoginFlow(hostConfig: HostConfig<"oauth2">): 
   saveInSessionStorage(topic, "href", globalThis.location.href);
   saveInSessionStorage("", "client-in-progress", topic);
 
-  const queryParams = {
-    response_type: "code",
-    client_id: clientId,
-    redirect_uri: redirectUri,
-    scope: hostConfig.scope || "user_default",
-    state,
-    code_challenge: codeChallenge,
-    code_challenge_method: "S256",
-  };
-
-  const url = `${locationUrl}/oauth/authorize?${toQueryString(queryParams)}`;
   globalThis.location.replace(url);
 }
 
@@ -152,7 +140,7 @@ async function exchangeCodeAndVerifierForAccessTokenData(
       redirect: "follow",
       body: JSON.stringify({
         grant_type: "authorization_code",
-        scope: hostConfig.scope || "user_default",
+        scope: hostConfig.scope, // undefined properties are dropped by JSON.stringify
         ...(code ? { code } : {}),
         redirect_uri: redirectUri || globalThis.location.href,
         ...(verifier ? { code_verifier: verifier } : {}),
@@ -181,14 +169,14 @@ async function exchangeCodeAndVerifierForAccessTokenData(
 function createBodyWithCredentialsEtc(
   clientId: string,
   clientSecret: string,
-  scope: string,
+  scope: string | undefined,
   subject: string | undefined,
   userId: string | undefined,
 ) {
   const commonProps = {
     client_id: clientId,
     client_secret: clientSecret,
-    scope,
+    ...(scope ? { scope } : {}),
   };
   if (subject) {
     return {
@@ -220,7 +208,7 @@ async function getOauthTokensWithCredentials(
   baseUrl: string,
   clientId: string,
   clientSecret: string,
-  scope: string = "user_default",
+  scope?: string,
   subject?: string,
   userId?: string,
 ): Promise<OAuthData | undefined> {

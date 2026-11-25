@@ -1,6 +1,6 @@
 {
   "name": "@qlik/api",
-  "version": "2.27.0",
+  "version": "2.28.0",
   "description": "Exposes functions for interacting with Qlik apis",
   "license": "ISC",
   "repository": {
@@ -29,6 +29,7 @@
     "./analytics/odag-links": "./npm/analytics/odag-links.js",
     "./analytics/odag-requests": "./npm/analytics/odag-requests.js",
     "./analytics/odag-settings": "./npm/analytics/odag-settings.js",
+    "./analytics/reloads": "./npm/analytics/reloads.js",
     "./api-keys": "./npm/api-keys.js",
     "./apps": "./npm/apps.js",
     "./assistants": "./npm/assistants.js",
@@ -159,7 +160,7 @@
     "http-server": "^14.1.1",
     "oxfmt": "0.79.0",
     "oxlint": "1.94.0",
-    "oxlint-tsgolint": "^7.0.2007",
+    "oxlint-tsgolint": "^7.0.2008",
     "tsdown": "^0.23.7",
     "typescript": "^6.0.3",
     "vitest": "^5.1.1",

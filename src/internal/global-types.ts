@@ -76,7 +76,7 @@ type Oauth2AuthConfig = {
   redirectUri?: string;
   /** If set, store the access token in either local or session storage, or using a custom secret storage implementation. Otherwise it is only stored in memory. */
   accessTokenStorage?: "session" | "local" | SecretStorage;
-  /** A string with comma separated values of oauth2 scopes https://oauth.net/2/scope defaults to "user_default" */
+  /** Space-separated list of oauth2 scopes (https://oauth.net/2/scope), e.g. `"users apps"`. If omitted, all scopes of the oauth client are granted. */
   scope?: string;
   /**
    * A custom function that can be used on the client side to fetch an oauth access token from a custom backend.

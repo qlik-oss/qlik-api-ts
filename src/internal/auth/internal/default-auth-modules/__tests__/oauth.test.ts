@@ -179,12 +179,13 @@ describe("oauth", () => {
     });
 
     const namespaceCases: [Partial<HostConfig<"oauth2">>, string][] = [
-      [{}, "123_user_default"],
-      [{ scope: "user_default" }, "123_user_default"],
-      [{ scope: "custom" }, "123_custom"],
-      [{ subject: "subject" }, "123_user_default_subject"],
-      [{ userId: "user-id" }, "123_user_default_user-id"],
-      [{ scope: "custom", subject: "subject", userId: "user-id" }, "123_custom_subject_user-id"],
+      [{}, "123"],
+      [{ scope: "user_default" }, "123_scope-user-5Fdefault"],
+      [{ scope: "users apps" }, "123_scope-users-20apps"],
+      [{ subject: "subject" }, "123_subject-subject"],
+      [{ userId: "user-id" }, "123_userid-user-2Did"],
+      [{ subject: "\u00E5\n" }, "123_subject--C3-A5-0A"],
+      [{ scope: "custom", subject: "subject", userId: "user-id" }, "123_scope-custom_subject-subject_userid-user-2Did"],
     ];
 
     it.for(namespaceCases)("should preserve the storage namespace for %j", ([config, namespace], { expect }) => {
@@ -196,6 +197,42 @@ describe("oauth", () => {
           ...config,
         }),
       ).toBe(namespace);
+    });
+
+    const ambiguousCases: { name: string; configs: [Partial<HostConfig<"oauth2">>, Partial<HostConfig<"oauth2">>] }[] =
+      [
+        { name: "no scope and the scope all_scopes", configs: [{}, { scope: "all_scopes" }] },
+        { name: "a part separator inside a value", configs: [{ scope: "a", subject: "b" }, { scope: "a_b" }] },
+        { name: "a subject and a user ID with the same value", configs: [{ subject: "x" }, { userId: "x" }] },
+        { name: "a label inside the client ID", configs: [{ clientId: "123_scope-a" }, { scope: "a" }] },
+        { name: "a label inside a value", configs: [{ scope: "a_subject-b" }, { scope: "a", subject: "b" }] },
+        { name: "an escape sequence written literally", configs: [{ scope: "a-5Fb" }, { scope: "a_b" }] },
+        { name: "bytes below 0x10 followed by a hex digit", configs: [{ subject: "\u00010" }, { subject: "\u0010" }] },
+      ];
+
+    it.for(ambiguousCases)("should keep the storage namespaces apart for $name", ({ configs }, { expect }) => {
+      const [namespace1, namespace2] = configs.map((config) => createStorageNamespace({ clientId: "123", ...config }));
+      expect(namespace1).not.toBe(namespace2);
+    });
+
+    it.for(ambiguousCases)("should keep the stored tokens apart for $name", async ({ configs }, { expect }) => {
+      const hostConfigs = configs.map((config): HostConfig<"oauth2"> => ({
+        clientId: "123",
+        accessTokenStorage: "local",
+        ...config,
+      }));
+      const tokensFor = (index: number) => ({ accessToken: `access-${index}`, refreshToken: `refresh-${index}` });
+      for (const [index, hostConfig] of hostConfigs.entries()) {
+        await loadOrAcquireAccessTokenOauth(hostConfig, async () => tokensFor(index));
+      }
+      expect(localStorage.length).toBe(4);
+
+      clearAllCachedTokens();
+      const acquireTokens = vi.fn(async () => undefined);
+      for (const [index, hostConfig] of hostConfigs.entries()) {
+        expect(await loadOrAcquireAccessTokenOauth(hostConfig, acquireTokens)).toEqual(tokensFor(index));
+      }
+      expect(acquireTokens).not.toHaveBeenCalled();
     });
 
     it.for([undefined, "local", "session"] as const)(
@@ -214,8 +251,8 @@ describe("oauth", () => {
         expect(localStorage.length).toBe(accessTokenStorage === "local" ? 2 : 0);
         expect(sessionStorage.length).toBe(accessTokenStorage === "session" ? 2 : 0);
         if (storage) {
-          expect(storage.getItem("qlik-qmfe-api-123_user_default-access-token")).toBe(tokens.accessToken);
-          expect(storage.getItem("qlik-qmfe-api-123_user_default-refresh-token")).toBe(tokens.refreshToken);
+          expect(storage.getItem("qlik-qmfe-api-123-access-token")).toBe(tokens.accessToken);
+          expect(storage.getItem("qlik-qmfe-api-123-refresh-token")).toBe(tokens.refreshToken);
         }
 
         clearAllCachedTokens();
@@ -245,8 +282,8 @@ describe("oauth", () => {
       const acquireTokens = vi.fn(async () => tokens);
 
       expect(await loadOrAcquireAccessTokenOauth(hostConfig, acquireTokens)).toEqual(tokens);
-      expect(storage.store).toHaveBeenCalledWith("qlik-qmfe-api-123_user_default-access-token", tokens.accessToken);
-      expect(storage.store).toHaveBeenCalledWith("qlik-qmfe-api-123_user_default-refresh-token", tokens.refreshToken);
+      expect(storage.store).toHaveBeenCalledWith("qlik-qmfe-api-123-access-token", tokens.accessToken);
+      expect(storage.store).toHaveBeenCalledWith("qlik-qmfe-api-123-refresh-token", tokens.refreshToken);
       clearAllCachedTokens();
       expect(await loadOrAcquireAccessTokenOauth(hostConfig, acquireTokens)).toEqual(tokens);
       expect(acquireTokens).toHaveBeenCalledTimes(1);
@@ -271,14 +308,14 @@ describe("oauth", () => {
 
         const loginUrl = new URL(replace.mock.calls[0][0]);
         const state = loginUrl.searchParams.get("state");
-        const verifier = sessionStorage.getItem("qlik-qmfe-api-123_user_default-verifier");
+        const verifier = sessionStorage.getItem("qlik-qmfe-api-123-verifier");
         expect(loginUrl.origin).toBe("https://somewhere.com");
         expect(loginUrl.searchParams.get("redirect_uri")).toBe(redirectUri);
         expect(loginUrl.searchParams.get("code_challenge_method")).toBe("S256");
         expect(verifier).toHaveLength(128);
         expect(state).toHaveLength(43);
-        expect(sessionStorage.getItem("qlik-qmfe-api--client-in-progress")).toBe("123_user_default");
-        expect(sessionStorage.getItem("qlik-qmfe-api-123_user_default-state")).toBe(state);
+        expect(sessionStorage.getItem("qlik-qmfe-api--client-in-progress")).toBe("123");
+        expect(sessionStorage.getItem("qlik-qmfe-api-123-state")).toBe(state);
         expect(localStorage.length).toBe(0);
 
         const callbackQuery = `?code=test-code&state=${matchingState ? state : "wrong-state"}`;
@@ -286,16 +323,16 @@ describe("oauth", () => {
         handleOAuthCallback();
 
         expect(sessionStorage.getItem("qlik-qmfe-api--client-in-progress")).toBeNull();
-        expect(sessionStorage.getItem("qlik-qmfe-api-123_user_default-state")).toBeNull();
+        expect(sessionStorage.getItem("qlik-qmfe-api-123-state")).toBeNull();
         if (!matchingState) {
-          expect(sessionStorage.getItem("qlik-qmfe-api-123_user_default-code")).toBeNull();
+          expect(sessionStorage.getItem("qlik-qmfe-api-123-code")).toBeNull();
           expect(replace).toHaveBeenCalledTimes(1);
           expect(fetchMock).not.toHaveBeenCalled();
           return;
         }
 
         expect(replace).toHaveBeenLastCalledWith(returnUrl);
-        expect(sessionStorage.getItem("qlik-qmfe-api-123_user_default-code")).toBe("test-code");
+        expect(sessionStorage.getItem("qlik-qmfe-api-123-code")).toBe("test-code");
         vi.stubGlobal("location", { href: returnUrl, search: "", replace });
         fetchMock.mockResponseOnce(JSON.stringify({ access_token: "test-access-token" }));
 
@@ -312,8 +349,55 @@ describe("oauth", () => {
           code_verifier: verifier,
           redirect_uri: redirectUri,
         });
+        expect(JSON.parse(options.body)).not.toHaveProperty("scope");
         expect(localStorage.length).toBe(0);
         expect(sessionStorage.length).toBe(0);
+      },
+    );
+
+    it.for([
+      [undefined, null],
+      ["users apps", "users apps"],
+    ] as const)("should request scope %s as %s in the login url", async ([scope, expectedScope], { expect }) => {
+      const replace = vi.fn();
+      vi.stubGlobal("location", { href: "https://app.example/app", search: "", replace });
+
+      await startFullPageLoginFlow({ host: "somewhere.com", clientId: "123", scope });
+
+      expect(new URL(replace.mock.calls[0][0]).searchParams.get("scope")).toBe(expectedScope);
+    });
+
+    it("should redirect each concurrent login with the state it stored", async ({ expect }) => {
+      const redirects: { urlState: string | null; storedState: string | null }[] = [];
+      const replace = vi.fn((url: string) => {
+        redirects.push({
+          urlState: new URL(url).searchParams.get("state"),
+          storedState: sessionStorage.getItem("qlik-qmfe-api-123-state"),
+        });
+      });
+      vi.stubGlobal("location", { href: "https://app.example/app", search: "", replace });
+      const hostConfig: HostConfig<"oauth2"> = { host: "somewhere.com", clientId: "123" };
+
+      await Promise.all([startFullPageLoginFlow(hostConfig), startFullPageLoginFlow(hostConfig)]);
+
+      expect(redirects).toHaveLength(2);
+      for (const { urlState, storedState } of redirects) {
+        expect(urlState).toBe(storedState);
+      }
+    });
+
+    it.for(["constructor", "toString", "hasOwnProperty", "__proto__"])(
+      "should acquire tokens for the client ID %s",
+      async (clientId, { expect }) => {
+        const hostConfig: HostConfig<"oauth2"> = {
+          host: "somewhere.com",
+          clientId,
+          getAccessToken: async () => "token",
+        };
+
+        expect(await loadCachedOauthTokens(hostConfig)).toBeUndefined();
+        const authParams = await oauthModule.getRestCallAuthParams({ hostConfig, method: "GET" });
+        expect(authParams.headers.Authorization).toBe("Bearer token");
       },
     );
   });

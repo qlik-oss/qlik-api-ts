@@ -126,7 +126,7 @@ export type NativeReactHooks = {
 };
 
 /**
- * React hook that returns the `Doc` of an app based on the supplied app id
+ * React hook, as returned by `createAppHook`, that returns the `Doc` of an app based on the supplied app id
  * @param appId The app id of the app (referred to as resourceId in the items api) or full
  * OpenAppSessionProps configuration
  * @returns The Doc object if loaded, or undefined while loading/on error

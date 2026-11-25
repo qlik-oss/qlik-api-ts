@@ -27,10 +27,12 @@ export type ArrayOfUniqueStrings = string[] | null;
 export type ChangelogOperation = {
   /** `removedFromCatalog` is a removal applied by the system after a catalog event (dataset updated or
    * deleted), as opposed to `remove`, which is a removal deliberately performed by a user.
-   * `update` is a partial modification of an existing entity applied by the system after a catalog event
-   * (dataset schema updated). It is currently only used with the `/semanticModel/tables` path, where the
-   * value describes the fields added to and removed from a table. */
-  operator?: "replace" | "add" | "remove" | "removedFromCatalog" | "update";
+   * `update` is a partial modification of an existing entity, applied when a user synchronizes the semantic
+   * model with the dataset schema changes detected in the catalog, and attributed to that user. It is
+   * currently only used with the `/semanticModel/tables` path, where the value describes the fields added
+   * to and removed from a table, and the new name of the table when it was renamed after its dataset.
+   * `unpublishedFromPipeline` is a removal applied by the system when "publish to catalog" is turned off. */
+  operator?: "replace" | "add" | "remove" | "removedFromCatalog" | "update" | "unpublishedFromPipeline";
   path?:
     | "/name"
     | "/description"
@@ -51,7 +53,8 @@ export type ChangelogOperation = {
 };
 
 /**
- * Fields added to and removed from a semantic model table by a dataset schema change.
+ * Fields added to and removed from a semantic model table, and its new name when it was renamed, by a dataset
+ * schema change.
  */
 export type ChangelogTableUpdate = {
   /** Identifiers of the fields added to the table. Empty when no field was added. */
@@ -60,6 +63,9 @@ export type ChangelogTableUpdate = {
   removedFieldIds?: string[];
   /** Identifier of the updated table. */
   tableId: string;
+  /** New name of the table, including any suffix added to keep it unique in the semantic model. Present only
+   * when the table was renamed after its dataset. */
+  updatedName?: string;
 };
 
 /**

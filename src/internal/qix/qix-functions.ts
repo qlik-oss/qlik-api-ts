@@ -1,3 +1,4 @@
+import type { HostConfig } from "#internal/auth/auth-types";
 import { getPlatform } from "../platform/platform-functions";
 import { createAppSession } from "./app-session";
 import type { AppSession, Doc, NativeReactHooks, OpenAppSessionProps, UseAppHook, WorkloadType } from "./qix-types";
@@ -50,15 +51,33 @@ export function openAppSession(appIdOrProps: string | OpenAppSessionProps): AppS
 }
 
 /**
- * Factory for getting a react hook that returns the `Doc` of an app based on the supplied app id
+ * Factory for getting a react hook that returns the `Doc` of an app based on the supplied app id.
+ *
+ * This is a factory, not a hook: call it once at module level, outside of any component, and use the
+ * hook it returns inside components. It is not tied to React's lifecycle.
  * @param react A react like object containing the native react hooks needed by the hook implementation
  */
-export function useAppHook(react: NativeReactHooks): UseAppHook {
+export function createAppHook(react: NativeReactHooks): UseAppHook {
+  return createScopedAppHook(react, undefined);
+}
+
+/**
+ * Like `createAppHook`, but sessions are opened with the supplied host config unless the props passed to the
+ * hook carry their own `hostConfig`. Used by `qix.withHostConfig`.
+ * @internal
+ */
+export function createScopedAppHook(react: NativeReactHooks, hostConfig: HostConfig | undefined): UseAppHook {
   return (appIdOrProps) => {
     const [app, setApp] = react.useState<Doc | undefined>(undefined);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     react.useEffect(() => {
-      const appSession = openAppSession(appIdOrProps);
+      const appSession = openAppSession(
+        hostConfig === undefined
+          ? appIdOrProps
+          : typeof appIdOrProps === "string"
+            ? { hostConfig, appId: appIdOrProps }
+            : { hostConfig, ...appIdOrProps },
+      );
       void appSession.getDoc().then((x) => {
         setApp(x);
       });
@@ -71,3 +90,9 @@ export function useAppHook(react: NativeReactHooks): UseAppHook {
     return app;
   };
 }
+
+/**
+ * @deprecated Renamed to `createAppHook`. This is a factory, not a React hook, so the `use` prefix made
+ * the rules-of-hooks lint rules wrongly apply to it. Behaves identically to `createAppHook`.
+ */
+export const useAppHook: typeof createAppHook = createAppHook;

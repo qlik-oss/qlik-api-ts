@@ -23,7 +23,7 @@ export function handleOAuthCallback(): void {
   if (urlParams.get("error")) {
     const element = document.createElement("pre");
     // Set the ng-non-bindable attribute before setting the innerText to prevent AngularJS from compiling it in /single.html.
-    // https://qlik-dev.atlassian.net/browse/QCB-35758
+    // Otherwise AngularJS evaluates {{ }} expressions that the error parameters of the callback URL carry.
     element.setAttribute("ng-non-bindable", "");
     element.innerText = escapeAngularJsExpressions(
       `<code>${JSON.stringify({

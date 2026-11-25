@@ -181,7 +181,7 @@ describe("logout", () => {
 
     await storeTokens();
 
-    expect(localStorage.getItem("qlik-qmfe-api-logout-client_user_default-access-token")).toBe("access-token");
+    expect(localStorage.getItem("qlik-qmfe-api-logout-2Dclient-access-token")).toBe("access-token");
   });
 
   it("navigates to the application logout for OAuth tokens supplied by getAccessToken", async () => {

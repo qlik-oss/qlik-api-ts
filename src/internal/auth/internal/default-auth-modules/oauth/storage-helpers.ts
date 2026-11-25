@@ -7,17 +7,32 @@ import type { OAuthData } from "./oauth-utils";
 
 export const storagePrefix = "qlik-qmfe-api";
 
-// Only identifiers belong in this namespace, never credentials. Keep its format stable across redirects and releases.
-export function createStorageNamespace(hostConfig: HostConfig<"oauth2">): string {
-  let topic = hostConfig.clientId + (hostConfig.scope ? `_${hostConfig.scope}` : "_user_default");
+/** Keeps letters and digits and writes every other UTF-8 byte as `-XX` in hex, so a value never contains `_`. */
+function encodeNamespacePart(value: string): string {
+  return Array.from(new TextEncoder().encode(value), (byte) =>
+    /[A-Za-z0-9]/.test(String.fromCharCode(byte))
+      ? String.fromCharCode(byte)
+      : `-${byte.toString(16).toUpperCase().padStart(2, "0")}`,
+  ).join("");
+}
 
-  if (hostConfig.subject) {
-    topic += `_${hostConfig.subject}`;
-  }
-  if (hostConfig.userId) {
-    topic += `_${hostConfig.userId}`;
-  }
-  return topic;
+/**
+ * Builds the namespace of the OAuth storage keys from the client ID and the optional scope, subject and user ID, for
+ * example `123_scope-users-20apps_subject-alice`. Each optional part is labelled and every value is encoded, so different
+ * host configs never share a namespace, whatever their values. No scope, meaning all scopes of the oauth client, is an
+ * absent segment. Keys only contain letters, digits, `_` and `-`, which any custom token storage can handle.
+ *
+ * Only identifiers belong in this namespace, never credentials. Do not change the format: that would change the storage
+ * keys and discard the tokens stored under them, and break logins that are in progress across a redirect.
+ */
+export function createStorageNamespace(hostConfig: HostConfig<"oauth2">): string {
+  const { clientId, scope, subject, userId } = hostConfig;
+  return [
+    encodeNamespacePart(clientId),
+    ...(scope ? [`scope-${encodeNamespacePart(scope)}`] : []),
+    ...(subject ? [`subject-${encodeNamespacePart(subject)}`] : []),
+    ...(userId ? [`userid-${encodeNamespacePart(userId)}`] : []),
+  ].join("_");
 }
 
 export function getTopicFromAnonHostConfig(hostConfig: HostConfig<"anonymous">): string {
@@ -25,9 +40,10 @@ export function getTopicFromAnonHostConfig(hostConfig: HostConfig<"anonymous">):
 }
 
 /**
- * A map from oauth client id to promise of an access token
+ * A map from oauth client id to promise of an access token. It has no prototype, so a namespace such as `constructor`
+ * finds no inherited property.
  */
-const cachedTokens: Record<string, Promise<OAuthData | undefined>> = {};
+const cachedTokens = Object.create(null) as Record<string, Promise<OAuthData | undefined>>;
 let tokenAcquisitionGeneration = 0;
 
 /**

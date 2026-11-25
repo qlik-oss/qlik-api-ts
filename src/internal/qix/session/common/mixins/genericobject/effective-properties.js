@@ -7,7 +7,7 @@ function updateQAttribute(properties) {
     columns.forEach((column) => {
       if (column.qAttributeExpressions) {
         column.qAttributeExpressions.forEach((attributeExpression) => {
-          attributeExpression.qAttribute = true; // To sync with EN-1319
+          attributeExpression.qAttribute = true;
         });
       }
     });
@@ -19,7 +19,8 @@ export const mixin = {
 
   override: {
     setProperties(_setProperties, properties) {
-      updateQAttribute(properties); // To fix QLIK-91744 and QLIK-91670 and for chart conversion
+      // Attribute expressions must be flagged as such, also for chart conversion.
+      updateQAttribute(properties);
       return _setProperties(properties);
     },
     getEffectiveProperties(_getEffectiveProperties) {

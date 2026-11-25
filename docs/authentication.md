@@ -132,6 +132,8 @@ const authModule = {
 
 Uses a `clientId` from an oauth client created by a Qlik tenant administrator. And optionally a `clientSecret`. A user will go through a login flow to get hold of an access token that is valid for 6 hours. This token will be used as query parameters for api requests. If a `clientSecret` is used a refresh token will also be received. This can be used to refresh the access token and is valid for 30 days.
 
+By default, no `scope` is requested and the access token gets all scopes configured on the oauth client. To request a narrower set, set `scope` to a space-separated list of scopes, for example `scope: "users apps"`.
+
 By default, tokens are cached only in memory. In a browser, `accessTokenStorage` can opt in to `"local"` or `"session"` storage, or provide a custom `SecretStorage` implementation. Both built-in storage options are readable by JavaScript running in the same origin; session storage limits persistence to the tab's session but does not protect tokens from XSS. Do not configure a client secret in browser code.
 
 Full-page login also uses session storage to carry the PKCE verifier, state and return URL across redirects, independently of `accessTokenStorage`. The `client-in-progress` entry identifies the storage namespace (client ID, scope and optional subject/user ID); it is not an access token, refresh token or client secret.
@@ -178,7 +180,7 @@ type Oauth2AuthConfig = {
   redirectUri?: string;
   /** Opt in to local, session or custom token storage; if omitted, tokens are cached only in memory */
   accessTokenStorage?: "session" | "local" | SecretStorage;
-  /** A string with comma separated values of oauth2 scopes https://oauth.net/2/scope defaults to "user_default" */
+  /** Space-separated list of oauth2 scopes (https://oauth.net/2/scope), e.g. `"users apps"`. If omitted, all scopes of the oauth client are granted. */
   scope?: string;
 };
 ```
